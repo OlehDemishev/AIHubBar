@@ -1,17 +1,16 @@
 # Status
 
 <!-- summary:start -->
-**Stage:** All 8 spec stages done incl. widgets (in review) + settings tabs and appearance
+**Stage:** All 8 spec stages done incl. widgets + settings tabs and appearance
 **Updated:** 2026-10-29
 
 **Now:**
-- PR `feat/widgets` (desktop widget «Лимиты Claude», small and medium) — waiting for review
+- nothing in progress
 
 **Next:**
 - Fix whatever Oleh finds in docs/CHECKLIST.md
 
 **Needs Oleh:**
-- review and merge PR `feat/widgets`
 - try the «Внешний вид» settings tab (theme, width, density not checked by eye)
 - optional, in _daily-report (not changed by ClaudePult): report.py/bot.py could read `~/Library/Application Support/ClaudePult/usage.json` (`five_hour`, `seven_day`, `updated`) for a /limits bot command or a limits line in the report
 - go through the «Oleh» rows of docs/CHECKLIST.md (buttons inside the panel, Settings, notifications, Telegram messages) — automation cannot click inside ClaudePult
