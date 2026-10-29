@@ -1,11 +1,11 @@
 # Status
 
 <!-- summary:start -->
-**Stage:** Stage 2 of 8 in review — project list from report.py (stage 1 skeleton done)
+**Stage:** Stage 2 of 8 done — project list from report.py (skeleton + projects)
 **Updated:** 2026-10-29
 
 **Now:**
-- PR `feat/projects` (stage 2: project list, STATUS details, open in Terminal/Finder/GitHub, periodic refresh, file log) — waiting for review
+- nothing in progress
 
 **Next:**
 - Stage 3 — Terminal launch: three Claude commands, prompts, AppleScript, Automation permission, worktree when the folder is busy
@@ -16,7 +16,7 @@
 - Stage 8 — Subscription limits (spec 2.8): limits in menu bar and panel, notifications, forecast, per-project token breakdown, background-mode guard, `usage.json`, widgets if simple
 
 **Needs Oleh:**
-- review and merge PR `feat/projects`; open the panel and check colours (dots, badges) — automation cannot see them
+- open the panel and check colours (dots, badges) and the Terminal / Finder / GitHub buttons — automation cannot see or click them
 - delete or archive the old repo `OlehDemishev/ClaudeBar` (its code is now in `OlehDemishev/ClaudePult`)
 - turn on «Запускать при входе в систему» in Settings if wanted — it is left off
 <!-- summary:end -->
