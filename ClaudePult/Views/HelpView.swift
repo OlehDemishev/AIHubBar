@@ -22,6 +22,13 @@ enum HelpContent {
             Item(name: "⌘,", detail: "Настройки."),
             Item(name: "⌘Q", detail: "Выйти из ClaudePult."),
         ]),
+        Section(title: "Лимиты подписки", systemImage: "gauge.with.dots.needle.33percent", items: [
+            Item(name: "У значка", detail: "% 5-часовой сессии (или сессии и недели, или кольцо — в Настройках): зелёный до 50 %, оранжевый до 80 %, красный выше."),
+            Item(name: "Блок «Лимиты»", detail: "Сессия с обратным отсчётом до сброса и прогнозом по темпу за 30 мин, неделя, недели по моделям, extra usage."),
+            Item(name: "Расход по проектам", detail: "Оценка по журналам Claude Code: доли проектов и самая затратная сессия за сессию, сегодня, неделю."),
+            Item(name: "Уведомления", detail: "Один раз на окно при 50/80/95 % (пороги — в Настройках) и когда лимит восстановился; по желанию ещё и в Telegram."),
+            Item(name: "Фон и лимит", detail: "Если сессия использована больше чем на 90 %, фоновая задача спрашивает: запустить сейчас или после сброса."),
+        ]),
         Section(title: "Сессии Claude Code", systemImage: "bubble.left.and.text.bubble.right", items: [
             Item(name: "Список", detail: "Все сессии на этом Маке — в Терминале, в приложении Claude, фоновые: проект, worktree, задача, длительность, состояние (работает, в фоне, ждёт ответа, готово, ошибка, завершена). Ждущие ответа подсвечены и приходят уведомлением."),
             Item(name: "Показать", detail: "Вывести вкладку Терминала с этой сессией; для сессий приложения Claude — открыть Claude, иначе — папку."),
@@ -55,6 +62,7 @@ enum HelpContent {
             Item(name: "--hooks status|install|uninstall", detail: "Hooks сессий."),
             Item(name: "--login-item status|on|off", detail: "Автозапуск при входе."),
             Item(name: "--background-settings", detail: "Правила доступа фоновых задач."),
+            Item(name: "--usage · --token-usage", detail: "Лимиты подписки; расход по проектам."),
         ]),
     ]
 

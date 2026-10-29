@@ -7,6 +7,7 @@ import Foundation
 /// - `ClaudePult --sessions`, `ClaudePult --show-session <id>`, `ClaudePult --background-settings`
 /// - `ClaudePult --command report|summary|cleanup-check|cleanup` (in this process)
 /// - `ClaudePult --app-command <command>|help|cleanup-output` (asks the running app)
+/// - `ClaudePult --usage`, `ClaudePult --usage-raw` (subscription limits; the token is never printed), `--token-usage`
 @MainActor
 enum CommandLineTool {
     /// Returns an exit code if the arguments contain a command, `nil` to start the app normally.
@@ -42,6 +43,43 @@ enum CommandLineTool {
                 let (result, _) = await CommandStore.execute(command, dailyReportDirectory: directory)
                 print("\(result.isError ? "error" : "ok"): \(result.text)")
                 return result.isError ? 1 : 0
+            }
+        }
+        if arguments.contains("--usage-raw") || arguments.contains("--usage") {
+            let raw = arguments.contains("--usage-raw")
+            return waitFor {
+                if raw {
+                    let data = try await UsageService.fetchData()
+                    let object = try JSONSerialization.jsonObject(with: data)
+                    let pretty = try JSONSerialization.data(withJSONObject: object, options: [.prettyPrinted, .sortedKeys])
+                    print(String(decoding: pretty, as: UTF8.self))
+                } else {
+                    let snapshot = try await UsageService.fetch()
+                    for window in snapshot.windows {
+                        let reset = window.resetsAt.map { " reset \($0.formatted(date: .abbreviated, time: .shortened))" } ?? ""
+                        print("\(window.key): \(Int(window.utilization.rounded()))%\(reset)")
+                    }
+                    if let extra = snapshot.extra { print("extra_usage: enabled=\(extra.isEnabled)") }
+                }
+                return 0
+            }
+        }
+        if arguments.contains("--token-usage") {
+            let settings = AppSettings()
+            let projectsDirectory = settings.projectsDirectory
+            return waitFor {
+                let started = Date.now
+                let records = await TokenScanner().scan(since: .now.addingTimeInterval(-7 * 86_400))
+                for (title, since) in [("5 h", Date.now.addingTimeInterval(-5 * 3600)), ("today", Calendar.current.startOfDay(for: .now)), ("7 days", Date.now.addingTimeInterval(-7 * 86_400))] {
+                    let breakdown = TokenBreakdown.make(records, since: since, projectsDirectory: projectsDirectory)
+                    print("== \(title): \(TokenBreakdown.tokensText(breakdown.totalTokens)) tokens")
+                    for row in breakdown.projects.prefix(8) {
+                        print("  \(row.name): \(Int((row.share * 100).rounded()))% · \(TokenBreakdown.tokensText(row.tokens))")
+                    }
+                    if let top = breakdown.topSession { print("  top session: \(top.project) \(top.sessionID.prefix(8)) \(Int((top.share * 100).rounded()))%") }
+                }
+                print("scanned \(records.count) messages in \(String(format: "%.1f", Date.now.timeIntervalSince(started))) s")
+                return 0
             }
         }
         if arguments.contains("--background-settings") {

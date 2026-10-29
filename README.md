@@ -4,7 +4,9 @@ Native macOS menu bar app (no Dock icon): a control panel for the projects in `~
 
 ## What it does
 
-Click ✦ in the menu bar. The icon gets a red dot when a project's health is red and the number of Claude sessions waiting for an answer next to it.
+Click ✦ in the menu bar. Next to it: the subscription usage (5-hour session %, or session and week %, or a ring — green < 50 %, orange 50–80 %, red > 80 %), a red dot when a project's health is red and ✋ with the number of Claude sessions waiting for an answer.
+
+**Лимиты** (top of the panel) — the 5-hour session with a countdown to the reset and a forecast from the last 30 minutes («хватит до ~16:40» / «до сброса хватит»), the week, per-model weeks, extra usage if enabled; «Расход по проектам» estimates each project's share and the heaviest session for the session / today / week from Claude Code's transcripts. Notifications once per window at 50/80/95 % (configurable) and when a limit is restored, optionally to Telegram. A background run while the session is above 90 % asks: start now or after the reset. Data from the same endpoint Claude Code uses (OAuth token read from the Keychain item «Claude Code-credentials», never stored); current values are written to `~/Library/Application Support/ClaudePult/usage.json` (`five_hour`, `seven_day`, `updated`) for report.py and the bot.
 
 **Сессии** (top of the panel, from Claude Code hooks) — every session on this Mac: Terminal, Claude desktop app, background runs. Project, worktree, task, duration, state (работает / в фоне / ждёт ответа / готово / ошибка / завершена). Waiting sessions are highlighted and notify once. «Показать» brings the session's Terminal tab forward (desktop-app sessions open Claude, others the folder); background runs have «Журнал» and «Остановить».
 
@@ -34,10 +36,11 @@ First steps after installing:
 1. «Настройки…» → «Сессии Claude Code» → «Установить hooks» (adds ClaudePult's hook to `~/.claude/settings.json`, backup saved next to it).
 2. Optionally «Запускать при входе в систему».
 3. The first «Терминал» launch makes macOS ask to let ClaudePult control Terminal — allow it; notifications — allow them.
+4. For the limits, macOS may ask whether `security` may read «Claude Code-credentials» — «Always Allow».
 
 ## Settings
 
-«Настройки…» (⌘,): start at login; projects folder (`~/Projects`); `_daily-report` folder; path to `claude` (empty = auto-detect in `/opt/homebrew/bin`, `/usr/local/bin`, `~/.local/bin`, `~/.claude/local`); launch mode (ask / Терминал / Фон); background time limit (90 min); background results in Telegram; session hooks (install / update / remove); app log.
+«Настройки…» (⌘,): menu bar usage display, limit thresholds and Telegram for limit alerts; start at login; projects folder (`~/Projects`); `_daily-report` folder; path to `claude` (empty = auto-detect in `/opt/homebrew/bin`, `/usr/local/bin`, `~/.local/bin`, `~/.claude/local`); launch mode (ask / Терминал / Фон); background time limit (90 min); background results in Telegram; session hooks (install / update / remove); app log.
 
 ## Background mode
 
@@ -66,6 +69,7 @@ The app binary runs headless commands instead of the UI: `~/Applications/ClaudeP
 | `--command report\|summary\|cleanup-check\|cleanup` | run a common command here and print its result |
 | `--app-command <command>\|help\|cleanup-output` | ask the running app to run a command or open a window |
 | `--hooks status\|install\|uninstall` | session hooks |
+| `--usage` · `--usage-raw` · `--token-usage` | subscription limits (raw response; the token is never printed) · per-project breakdown |
 | `--sessions` · `--show-session <id>` | list sessions · bring a session's Terminal tab forward |
 
 ## Development

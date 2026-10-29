@@ -1,7 +1,7 @@
 import Foundation
 
 /// The three Claude commands from docs/SPEC.md §2.4. Prompts are used verbatim.
-enum ClaudeCommand: Equatable, Sendable {
+enum ClaudeCommand: Codable, Equatable, Sendable {
     case nextStep
     case customTask(String)
     case finishSession

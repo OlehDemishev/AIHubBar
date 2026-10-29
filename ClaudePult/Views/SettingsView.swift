@@ -6,6 +6,8 @@ struct SettingsView: View {
     @Environment(AppSettings.self) private var settings
     @Environment(ProjectStore.self) private var store
     @Environment(HookController.self) private var hooks
+    @Environment(UsageStore.self) private var usage
+    @State private var thresholdsText = ""
 
     var body: some View {
         @Bindable var settings = settings
@@ -84,6 +86,30 @@ struct SettingsView: View {
             }
 
             Section {
+                Picker("В строке меню", selection: $settings.menuBarUsageMode) {
+                    ForEach(MenuBarUsageMode.allCases, id: \.self) { Text($0.title).tag($0) }
+                }
+                LabeledContent("Уведомлять на, %") {
+                    TextField("50, 80, 95", text: $thresholdsText)
+                        .textFieldStyle(.roundedBorder)
+                        .frame(width: 140)
+                        .onSubmit(applyThresholds)
+                }
+                Toggle("Уведомления о лимитах ещё и в Telegram", isOn: $settings.limitAlertsToTelegram)
+                if let error = usage.error {
+                    Text(error)
+                        .font(.callout)
+                        .foregroundStyle(.orange)
+                }
+            } header: {
+                Text("Лимиты подписки")
+            } footer: {
+                Text("Данные — с того же адреса, что использует Claude Code (токен читается из связки ключей «Claude Code-credentials» и нигде не сохраняется). Уведомление — один раз на окно сессии/недели при пересечении порога и когда лимит восстановился. Значения пишутся в ~/Library/Application Support/ClaudePult/usage.json.")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+
+            Section {
                 LabeledContent("Состояние") {
                     Text(hooks.status.title)
                         .foregroundStyle(hooks.status == .installed ? .green : hooks.status == .outdated ? .orange : .secondary)
@@ -123,7 +149,9 @@ struct SettingsView: View {
         .onAppear {
             loginItem.refresh()
             hooks.refresh()
+            thresholdsText = settings.limitThresholds.map(String.init).joined(separator: ", ")
         }
+        .onDisappear(perform: applyThresholds)
         .onReceive(NotificationCenter.default.publisher(for: NSApplication.didBecomeActiveNotification)) { _ in
             loginItem.refresh()
         }
@@ -132,6 +160,13 @@ struct SettingsView: View {
             hooks.refresh()
         }
         .onChange(of: settings.dailyReportDirectory) { Task { await store.refresh() } }
+    }
+
+    /// «50, 80, 95» → [50, 80, 95]; invalid input keeps the previous thresholds.
+    private func applyThresholds() {
+        let values = SettingsParsing.thresholds(thresholdsText)
+        if !values.isEmpty { settings.limitThresholds = values }
+        thresholdsText = settings.limitThresholds.map(String.init).joined(separator: ", ")
     }
 
     private static var version: String {
@@ -180,5 +215,12 @@ private struct FolderField: View {
         if panel.runModal() == .OK, let url = panel.url {
             path = url.path
         }
+    }
+}
+
+enum SettingsParsing {
+    /// Percentages between 1 and 100 from free text, sorted and de-duplicated.
+    static func thresholds(_ text: String) -> [Int] {
+        Array(Set(text.split(whereSeparator: { !$0.isNumber }).compactMap { Int($0) }.filter { (1...100).contains($0) })).sorted()
     }
 }

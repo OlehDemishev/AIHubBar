@@ -59,6 +59,20 @@ Panel snapshots: `defaults write com.demishev.claudepult DebugPanelSnapshot -boo
 | Очистка: выполнить | Live: skipped by cleanup.py (a build was running); **Oleh: run when idle** |
 | Disk free, orange below 20 GB, Russian units | Live (snapshot) |
 
+## Subscription limits (§2.8)
+
+| Scenario | Checked |
+|---|---|
+| Endpoint response decoded; code-named objects ignored | Auto (real response shape) + Live (`--usage`) |
+| % next to the icon, colours | Live (screenshot «17% · 58%», green/orange) |
+| «Лимиты» block: bars, reset countdown, weeks, per-model week | Live (snapshot) |
+| Forecast | Auto; **Oleh: appears after ~5 min of activity** |
+| Per-project breakdown (session / today / week), heaviest session | Auto + Live (snapshot, `--token-usage`) |
+| Threshold notifications, «Лимит восстановлен», Telegram option | Auto (logic); **Oleh: notification** |
+| Background guard > 90 %, «Запустить после сброса» | Logic in code, not reachable live (session at 17 %); **Oleh when it happens** |
+| `usage.json` | Live (written on start) |
+| Widgets | Not built — see DECISIONS |
+
 ## Settings and help (§2.6, §2.7)
 
 | Scenario | Checked |

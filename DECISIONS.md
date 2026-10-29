@@ -2,6 +2,30 @@
 
 Decisions made where the spec is silent or does not match reality. Newest at the top.
 
+## 2026-10-29 — Stage 8 (subscription limits)
+
+**Endpoint, checked live** (`--usage-raw`, 2026-10-29): `GET https://api.anthropic.com/api/oauth/usage` with `Authorization: Bearer <token>` and `anthropic-beta: oauth-2025-04-20` answers with `five_hour` and `seven_day` (`utilization` in %, `resets_at` ISO with microseconds), `seven_day_opus` / `seven_day_sonnet` / … (null on this account), a `limits` list (`kind`: `session`, `weekly_all`, `weekly_scoped` with `scope.model.display_name`, e.g. «Fable»), `extra_usage` (`is_enabled`, `used_credits`, `monthly_limit` in minor units, `currency`), `seven_day_breakdown`, `spend`, and many code-named objects. One of those (`iguana_necktie`, a dollar allowance) has `utilization: 100` and would look like a full limit, so only `five_hour`, `seven_day*` and `weekly_scoped` entries of `limits` are taken; a response without `five_hour` counts as unknown → «лимиты недоступны». Extra usage is shown only when enabled.
+
+**Token.** Read from the Keychain item «Claude Code-credentials» (`claudeAiOauth.accessToken`, `expiresAt` in ms) with Apple's `/usr/bin/security`, not `SecItemCopyMatching`: a Keychain «Always Allow» for `security` survives ClaudePult rebuilds, while an ad-hoc signed app would be asked again after each build. The token lives only for the request; it is never stored, logged or refreshed. Expired → «Войдите в Claude Code: claude → /login».
+
+**Refresh.** Every minute while a session is working/waiting or the session % grew in the last 10 min, otherwise every 5 min; never later than 5 s after the session reset. History of the last 3 h is kept in `usage-history.json`, so the forecast survives a restart.
+
+**Forecast**: growth of the session % over the last 30 min of the same window (≥ 5 min of data); at that pace → «хватит до ~HH:mm» if before the reset, else «до сброса хватит»; no growth → «до сброса хватит».
+
+**Notifications.** Thresholds (default 50/80/95, Settings) per window and reset time; only the highest newly crossed threshold notifies (starting at 85 % gives one alert). «Лимит восстановлен» when a window that was above 80 % drops by 30+ points or resets below 50 %. Notified keys persist in UserDefaults across restarts. Telegram for these alerts is off by default.
+
+**Menu bar.** Modes: only icon / session % / session and week % / ring. Coloured text cannot go through a template label, so the label is one drawn `NSImage` (sparkle in `labelColor`, red dot, coloured percentages or ring, ✋ + waiting count), cached per state.
+
+**Per-project breakdown.** `~/.claude/projects/**/*.jsonl` (~500 MB in a week here): files changed in the last 8 days are read incrementally (byte offset per file, only complete lines), lines are pre-filtered by bytes (`"usage"`, `"assistant"`) before JSON, and messages are de-duplicated by `message.id` — streaming writes the same message and usage on several lines. First pass ~2 s (was 15 s with String-based filtering), then only new lines, every 10 min. Projects by `cwd` under the projects folder (worktrees count for their project; anything else is «Другое»). Shares use a price-like weight (input ×1, output ×5, cache write ×1.25, cache read ×0.1); the token numbers shown exclude cache reads, which are hundreds of millions per day and would hide everything else. Labelled as an estimate.
+
+**Background guard.** A background command while the session is above 90 % shows «Запустить после сброса» (queued for `resets_at` + 2 min, persisted in `queue.json`, started by a 30-s timer, cancellable in the «Лимиты» block) and «Запустить сейчас».
+
+**usage.json** in Application Support: `five_hour` and `seven_day` (`utilization`, `resets_at`) and `updated`. report.py and bot.py are not changed (spec §5); what they would need is in Needs Oleh.
+
+**Widgets not built.** A WidgetKit extension needs an App Group shared with the app, and App Groups need a real signing team (provisioning); this project is signed ad-hoc with no team (stage 1). Left in Next with that reason.
+
+**Panel height.** With the limits block the panel grew; the project list now scrolls at a height derived from the screen (`visibleFrame − 700`, 180…420 pt), and the breakdown is collapsed by default.
+
 ## 2026-10-29 — Stage 7 (polish)
 
 **Help.** «Помощь» in the panel footer opens a window built from one `HelpContent` list (menu bar, sessions, projects, commands, command line). The `help.txt` block for the Telegram bot is a shorter hand-written summary in Telegram HTML, appended at the end as the spec asks («🖥 ClaudePult»); the file went from 1645 to 2429 characters (limit 4000), tags balanced, the rest untouched.

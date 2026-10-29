@@ -1,21 +1,31 @@
 # Status
 
 <!-- summary:start -->
-**Stage:** Stage 7 of 8 done — full panel, Claude in Terminal and background, sessions, commands, help; stage 8 next
+**Stage:** Stage 8 of 8 in review — subscription limits; all spec stages built
 **Updated:** 2026-10-29
 
 **Now:**
-- nothing in progress
+- PR `feat/usage-limits` (stage 8: limits in menu bar and panel, forecast, alerts, per-project breakdown, background guard, usage.json) — waiting for review
 
 **Next:**
-- Stage 8 — Subscription limits (spec 2.8): limits in menu bar and panel, notifications, forecast, per-project token breakdown, background-mode guard, `usage.json`, widgets if simple
+- Settings: split into tabs (general, projects, Claude, sessions, limits, commands) and add appearance settings — panel text size, density, which blocks to show (Oleh's request)
+- Widgets (WidgetKit: small ring, medium session + week) — need an App Group, i.e. a real signing team instead of ad-hoc signing (see DECISIONS)
+- Fix whatever Oleh finds in docs/CHECKLIST.md
 
 **Needs Oleh:**
+- review and merge PR `feat/usage-limits`
+- optional, in _daily-report (not changed by ClaudePult): report.py/bot.py could read `~/Library/Application Support/ClaudePult/usage.json` (`five_hour`, `seven_day`, `updated`) for a /limits bot command or a limits line in the report
 - go through the «Oleh» rows of docs/CHECKLIST.md (buttons inside the panel, Settings, notifications, Telegram messages) — automation cannot click inside ClaudePult
 - free disk space is ~12 GB (< 20 GB): «Очистка: выполнить» when no build is running
 - hooks are installed in ~/.claude/settings.json; backup of the original: ~/.claude/settings.json.claudepult-backup-20261029T192827
 - delete or archive the old repo `OlehDemishev/ClaudeBar`; turn on start at login if wanted
 <!-- summary:end -->
+
+## 2026-10-29 — Stage 8: subscription limits (branch `feat/usage-limits`)
+
+Done: limits from `api.anthropic.com/api/oauth/usage` (token from the Keychain via `security`, never stored or logged; response shape checked live, tolerant decoding that skips code-named objects); menu bar shows session / session + week % or a ring, coloured by level; «Лимиты» block with bars, reset countdown, per-model week, extra usage, forecast from the last 30 min; smart refresh (1 min while active, 5 min idle, right after reset); threshold notifications once per window + «Лимит восстановлен», optional Telegram; per-project token breakdown from `~/.claude/projects/**/*.jsonl` (incremental, de-duplicated, session / today / week, heaviest session, labelled as an estimate); background guard above 90 % with «Запустить после сброса» queue; `usage.json`; Settings for display, thresholds and Telegram; Help section; help.txt line; CLI `--usage`, `--usage-raw`, `--token-usage`; screen-aware panel height. Widgets not built (App Group needs a signing team).
+Checked: `scripts/build-and-install.sh --test` — 79 tests (123 cases) green incl. the real response shape, forecast, alerts, incremental scanner; no compiler warnings. Live: `--usage` → session 16 %, week 58 %, Fable week 0 %; app wrote usage.json on start; menu bar «17% · 58%» green/orange (screenshot); panel snapshot with the limits block and the expanded breakdown; `--token-usage` first scan 2.0 s (was 14.6 s before byte filtering). CI not set up; checks run locally.
+Left: forecast needs a few minutes of history; threshold notifications and the >90 % guard not reachable live (session at 17 %); widgets deferred.
 
 ## 2026-10-29 — Stage 7: polish (branch `feat/polish`)
 
