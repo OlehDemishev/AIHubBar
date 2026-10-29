@@ -1,14 +1,13 @@
 # Status
 
 <!-- summary:start -->
-**Stage:** Stage 1 of 8 done — skeleton (menu bar icon, animated panel, Settings with login item); project renamed to ClaudePult
+**Stage:** Stage 2 of 8 in review — project list from report.py (stage 1 skeleton done)
 **Updated:** 2026-10-29
 
 **Now:**
-- nothing in progress
+- PR `feat/projects` (stage 2: project list, STATUS details, open in Terminal/Finder/GitHub, periodic refresh, file log) — waiting for review
 
 **Next:**
-- Stage 2 — Projects: run `report.py --json`, models, project list with health/branch/STATUS, expand, open in Terminal/Finder/GitHub, periodic refresh, file logs in ~/Library/Logs/ClaudePult
 - Stage 3 — Terminal launch: three Claude commands, prompts, AppleScript, Automation permission, worktree when the folder is busy
 - Stage 4 — Sessions: hook script, install/remove hooks in ~/.claude/settings.json with backup, sessions panel, states, "waiting" notification, icon badge
 - Stage 5 — Background mode: `claude -p` with permissions from spec 2.4, logs, stop, time limit, notifications and Telegram
@@ -17,9 +16,16 @@
 - Stage 8 — Subscription limits (spec 2.8): limits in menu bar and panel, notifications, forecast, per-project token breakdown, background-mode guard, `usage.json`, widgets if simple
 
 **Needs Oleh:**
+- review and merge PR `feat/projects`; open the panel and check colours (dots, badges) — automation cannot see them
 - delete or archive the old repo `OlehDemishev/ClaudeBar` (its code is now in `OlehDemishev/ClaudePult`)
-- open the panel and Settings once and confirm they look right (automation cannot see the app's windows); turn on «Запускать при входе в систему» if wanted — it is left off
+- turn on «Запускать при входе в систему» in Settings if wanted — it is left off
 <!-- summary:end -->
+
+## 2026-10-29 — Stage 2: projects (branch `feat/projects`)
+
+Done: the panel lists projects from `report.py --json` (run via `/usr/bin/env python3` with Homebrew added to PATH): health dot, name, branch, uncommitted-files and open-PR badges (PR colour = worst CI), last activity. A row expands into the STATUS header (Stage / Now / Next / Needs Oleh, inline Markdown), attention items (Needs duplicates hidden), open PRs (open in browser) and Terminal / Finder / GitHub buttons. Refresh at launch, on panel open if older than 60 s, every 5 min without fetch, every 30 min with fetch, ⌘R / ↻; loading, error and empty states. Red dot on the menu bar icon when any project is red. Settings: projects folder and `_daily-report` folder. File log in ~/Library/Logs/ClaudePult. Debug panel snapshot (`DebugPanelSnapshot` default). Tests for report decoding (full, nulls, missing fields, unknown enums), attention dedupe, report arguments, relative time, remote → GitHub URL, PATH.
+Checked: `scripts/build-and-install.sh --test` — 12 tests (34 cases) green, no compiler warnings, Release installed and running. Live: report.py loads 6 projects in ~6 s (log); red dot on the menu bar icon seen on a screenshot; panel snapshots show the list and an expanded project (Cantero) with STATUS, attention, PR and buttons; tests no longer start report.py. CI not set up; checks run locally.
+Left: colours inside the panel and the Terminal/Finder/GitHub buttons not checked by a real click (the app's windows cannot be driven by automation); the 30-min fetch run not observed live. Claude commands come in stage 3.
 
 ## 2026-10-29 — Rename to ClaudePult (branch `chore/rename-to-claudepult`)
 
