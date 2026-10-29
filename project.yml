@@ -1,0 +1,69 @@
+name: ClaudeBar
+
+options:
+  bundleIdPrefix: com.demishev
+  deploymentTarget:
+    macOS: "14.0"
+  createIntermediateGroups: true
+  generateEmptyDirectories: true
+
+settings:
+  base:
+    SWIFT_VERSION: "6.0"
+    MARKETING_VERSION: "0.1.0"
+    CURRENT_PROJECT_VERSION: "1"
+    DEVELOPMENT_TEAM: ""
+    CODE_SIGN_STYLE: Manual
+    CODE_SIGN_IDENTITY: "-"
+    ENABLE_USER_SCRIPT_SANDBOXING: YES
+    SWIFT_STRICT_CONCURRENCY: complete
+
+targets:
+  ClaudeBar:
+    type: application
+    platform: macOS
+    sources:
+      - path: ClaudeBar
+    info:
+      path: ClaudeBar/Info.plist
+      properties:
+        CFBundleDisplayName: ClaudeBar
+        CFBundleName: ClaudeBar
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        LSUIElement: true
+        LSMinimumSystemVersion: $(MACOSX_DEPLOYMENT_TARGET)
+        LSApplicationCategoryType: public.app-category.developer-tools
+        NSHumanReadableCopyright: "© Oleh Demishev"
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.demishev.claudebar
+        PRODUCT_NAME: ClaudeBar
+        ENABLE_APP_SANDBOX: NO
+        ENABLE_HARDENED_RUNTIME: NO
+        GENERATE_INFOPLIST_FILE: NO
+        COMBINE_HIDPI_IMAGES: YES
+
+  ClaudeBarTests:
+    type: bundle.unit-test
+    platform: macOS
+    sources:
+      - path: ClaudeBarTests
+    dependencies:
+      - target: ClaudeBar
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.demishev.claudebar.tests
+        GENERATE_INFOPLIST_FILE: YES
+        TEST_HOST: $(BUILT_PRODUCTS_DIR)/ClaudeBar.app/Contents/MacOS/ClaudeBar
+        BUNDLE_LOADER: $(TEST_HOST)
+
+schemes:
+  ClaudeBar:
+    build:
+      targets:
+        ClaudeBar: all
+        ClaudeBarTests: [test]
+    test:
+      targets:
+        - ClaudeBarTests
