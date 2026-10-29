@@ -8,6 +8,7 @@ struct MenuPanelView: View {
     @Environment(ProjectStore.self) private var store
     @Environment(SessionStore.self) private var sessions
     @Environment(HookController.self) private var hooks
+    @Environment(RunStore.self) private var runs
 
     /// Drives the entrance animation; reset when the panel closes so it replays on every open.
     @State private var isShown = false
@@ -26,8 +27,9 @@ struct MenuPanelView: View {
 
             Divider()
 
-            if !sessions.items.isEmpty {
-                SessionsView()
+            let sessionRows = SessionRow.rows(sessions: sessions.items, runs: runs.runs)
+            if !sessionRows.isEmpty {
+                SessionsView(rows: sessionRows)
                     .revealed(isShown, step: 1, reduceMotion: reduceMotion)
                 Divider()
             } else if hooks.status == .notInstalled {

@@ -59,10 +59,26 @@ struct SettingsView: View {
                         .textFieldStyle(.roundedBorder)
                         .frame(width: 260)
                 }
+                Picker("Режим запуска", selection: $settings.defaultLaunchMode) {
+                    Text("Спрашивать").tag(LaunchMode?.none)
+                    ForEach(LaunchMode.allCases, id: \.self) { mode in
+                        Text(mode.title).tag(LaunchMode?.some(mode))
+                    }
+                }
+                Stepper(value: $settings.backgroundTimeLimitMinutes, in: 10...600, step: 10) {
+                    LabeledContent("Лимит фоновой задачи", value: "\(settings.backgroundTimeLimitMinutes) мин")
+                }
+                Toggle("Итог фоновой задачи в Telegram", isOn: $settings.telegramForBackground)
+                if settings.telegramForBackground,
+                   Telegram.credentials(dailyReportDirectory: settings.dailyReportDirectory) == nil {
+                    Text("В _daily-report/config.json нет telegram.bot_token / chat_id — будет только уведомление macOS.")
+                        .font(.callout)
+                        .foregroundStyle(.orange)
+                }
             } header: {
                 Text("Claude")
             } footer: {
-                Text("Пусто — искать в /opt/homebrew/bin, /usr/local/bin, ~/.local/bin, ~/.claude/local. Команды «Следующий шаг», «Своя задача», «Завершить» открывают новое окно Терминала; при первом запуске macOS спросит разрешение на управление Терминалом.")
+                Text("Путь к claude: пусто — искать в /opt/homebrew/bin, /usr/local/bin, ~/.local/bin, ~/.claude/local. «Терминал» открывает новое окно (при первом запуске macOS спросит разрешение на управление Терминалом). «Фон» запускает claude -p без окна: разрешены чтение и правка файлов проекта, проверки и сборки, git без push в main и без force, gh pr create/view/list; остальное отклоняется. Итог — уведомлением и в Telegram.")
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }

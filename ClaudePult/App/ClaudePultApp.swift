@@ -8,6 +8,7 @@ struct ClaudePultApp: App {
     @State private var launcher: LaunchController
     @State private var sessions: SessionStore
     @State private var hooks: HookController
+    @State private var runs: RunStore
 
     init() {
         if let code = CommandLineTool.run(CommandLine.arguments) {
@@ -18,7 +19,9 @@ struct ClaudePultApp: App {
         let store = ProjectStore(settings: settings)
         _settings = State(initialValue: settings)
         _store = State(initialValue: store)
-        _launcher = State(initialValue: LaunchController(settings: settings, store: store))
+        let runs = RunStore(settings: settings)
+        _runs = State(initialValue: runs)
+        _launcher = State(initialValue: LaunchController(settings: settings, store: store, runs: runs))
         let sessions = SessionStore()
         _sessions = State(initialValue: sessions)
         _hooks = State(initialValue: HookController(settings: settings))
@@ -27,6 +30,7 @@ struct ClaudePultApp: App {
         if ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] == nil {
             store.start()
             sessions.start()
+            runs.start()
         }
     }
 
@@ -37,10 +41,17 @@ struct ClaudePultApp: App {
                 .environment(launcher)
                 .environment(sessions)
                 .environment(hooks)
+                .environment(runs)
         } label: {
             MenuBarIcon(showsAlert: store.report?.hasRedProject ?? false, waitingCount: sessions.waitingCount)
         }
         .menuBarExtraStyle(.window)
+
+        Window("Журнал фоновой задачи", id: "run-log") {
+            RunLogView()
+                .environment(runs)
+        }
+        .defaultSize(width: 640, height: 520)
 
         Settings {
             SettingsView()

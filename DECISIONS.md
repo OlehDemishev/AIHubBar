@@ -2,6 +2,26 @@
 
 Decisions made where the spec is silent or does not match reality. Newest at the top.
 
+## 2026-10-29 — Stage 5 (background mode)
+
+**Flags** checked with `claude --help` (2.1.312) and code.claude.com docs (headless, permissions, permission modes): `-p <prompt> --session-id <uuid> --output-format stream-json --verbose --permission-mode dontAsk --permission-prompts none --settings '<json>'`. `dontAsk` + `--permission-prompts none` deny everything not allowed without a prompt and tell Claude nobody will approve; the CLI flag overrides any `defaultMode`. The run id is passed as `--session-id`, so the hook's session file and the run share the id and the panel joins them. User settings stay loaded (`--setting-sources` would also drop the session hooks); they have no `allow` rules on this Mac, and `deny` rules win over `allow` from any level anyway.
+
+**Rules** (`BackgroundPermissions`): allow list per spec §2.4 — read, `Edit(./**)` (writes only inside the working folder; `Write(...)` path rules never match, `Edit` covers them), checks/builds, safe git, `git push origin|-u origin <branch>`, `gh pr create/view/list/checks/status`; deny list — every push form that can reach main/master or HEAD (bare `git push`, `origin` without a branch, `*:main`, `HEAD`), force/delete/mirror/`+refspec` pushes, `reset --hard`, `clean`, branch deletion, `gh pr merge`, `gh api`, `sudo`, `rm`, secrets by path (`Read(**/.env*)`, keys, `~/.ssh`, `config.json`) and by command text (`Bash(*.env*)`, `env`, `printenv`) because read-only shell commands like `cat` run without approval in every mode; `blockReadsOutsideWorkingDirectories`. **Checked live** with a real `claude -p` in a throwaway repo with a local origin: branch, write, commit and `push -u origin feat/x` ran; `push origin main`, `push --force`, Read `.env`, `cat .env`, `rm`, writing `/tmp/…`, `gh pr merge`, `sudo`, `reset --hard` were denied; origin `main` untouched.
+
+**Limits of the rules.** Per the docs, Bash rules are pattern matching, not a sandbox: an allowed command that runs other code (`npm run`, `make`, `scripts/*`, `npx`) could do anything its script does. The spec explicitly allows project checks and builds, so this is accepted; a real boundary would need Claude Code's sandbox (not used: it changes how builds and network work and was not asked for).
+
+**Process.** Claude's stdout/stderr go straight to `runs/<id>.log` (not through a pipe), so a run survives ClaudePult quitting; metadata in `runs/<id>.json`. A run is "alive" while its PID exists with a start time within 30 s of the run start (guards PID reuse; a first version checked the executable name, which wrongly finished runs whose binary was not called `claude`). There is no run-time flag in the CLI, so the time limit (90 min default, Settings) is enforced by the app: SIGTERM (Claude runs SessionEnd hooks and kills its Bash children), SIGKILL 10 s later. «Остановить» does the same.
+
+**Result.** The last `{"type":"result"}` event: `is_error` decides ✅/❌; `result` gives the summary (first 1–3 non-empty lines, ≤ 300 chars) and the last `github.com/…/pull/N` link; `permission_denials` are appended as «Отклонено правилами фона: …». No result event (killed, crashed) → ❌ «без результата». Time limit and manual stop → ❌ with that reason.
+
+**Telegram.** Token and chat id are read from `_daily-report/config.json` on each send, never stored or logged; errors are logged without the request URL (it contains the token). HTML with user text escaped. Toggle in Settings (on by default); without credentials only the macOS notification is sent. Results of runs that finished more than an hour before ClaudePult noticed (app not running) are not announced.
+
+**Mode choice.** Each command asks «Терминал / Фон» inline with «Запомнить выбор» unless Settings has a default; the default can be reset to «Спрашивать» in Settings. The busy-folder → worktree rule applies to both modes.
+
+**«Журнал»** is a separate window rendering the stream-json log (assistant text, tool calls, result), refreshed every 2 s while the run is going; «Файл журнала» reveals the raw log.
+
+**Command line** `--claude … --background` starts a run from a script; the running app discovers it within 10 s, enforces the limit and reports the result. `--background-settings` prints the rule set.
+
 ## 2026-10-29 — Stage 4 (sessions)
 
 **Hook facts** checked against code.claude.com/docs/en/hooks on 2026-10-29 (not from memory): events `SessionStart` (source startup/resume/clear/compact/fork), `UserPromptSubmit` (`prompt`), `PermissionRequest` (fires when Claude asks), `Notification` (`notification_type`; `permission_prompt` only after ~6 s without typing, `idle_prompt` ~60 s after finishing), `Stop`, `StopFailure` (API error instead of Stop), `SessionEnd` (`reason`); common fields `session_id`, `transcript_path`, `cwd`, `hook_event_name`. Plain stdout on SessionStart/UserPromptSubmit is added to Claude's context; exit 2 blocks on several events. Commands run through `sh -c`; settings edits are picked up by running sessions; hooks from `~/.claude/settings.json` run in Terminal, desktop-app and `claude -p` sessions, in trusted folders.

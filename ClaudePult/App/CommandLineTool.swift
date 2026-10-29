@@ -2,9 +2,9 @@ import Foundation
 
 /// Headless commands for scripts and checks, run instead of the UI:
 /// - `ClaudePult --login-item [status|on|off]`
-/// - `ClaudePult --claude next|finish|task <project-path> [task text] [--claude-path <path>] [--print]`
+/// - `ClaudePult --claude next|finish|task <project-path> [task text] [--claude-path <path>] [--print] [--background]`
 /// - `ClaudePult --hooks [status|install|uninstall]`
-/// - `ClaudePult --sessions`, `ClaudePult --show-session <id>`
+/// - `ClaudePult --sessions`, `ClaudePult --show-session <id>`, `ClaudePult --background-settings`
 @MainActor
 enum CommandLineTool {
     /// Returns an exit code if the arguments contain a command, `nil` to start the app normally.
@@ -17,6 +17,10 @@ enum CommandLineTool {
         }
         if let index = arguments.firstIndex(of: "--hooks") {
             return hooks(arguments.dropFirst(index + 1).first ?? "status")
+        }
+        if arguments.contains("--background-settings") {
+            print(BackgroundPermissions.settingsJSON)
+            return 0
         }
         if arguments.contains("--sessions") {
             for item in SessionStore.loadItems(from: SessionFiles.sessionsDirectory, now: .now) {
@@ -84,14 +88,15 @@ enum CommandLineTool {
     private static func claude(_ arguments: [String]) -> Int32 {
         var args = arguments
         let printOnly = args.contains("--print")
-        args.removeAll { $0 == "--print" }
+        let background = args.contains("--background")
+        args.removeAll { $0 == "--print" || $0 == "--background" }
         var configuredPath = AppSettings().claudePath
         if let index = args.firstIndex(of: "--claude-path"), index + 1 < args.count {
             configuredPath = args[index + 1]
             args.removeSubrange(index...index + 1)
         }
 
-        let usage = "Usage: ClaudePult --claude next|finish|task <project-path> [task text] [--claude-path <path>] [--print]"
+        let usage = "Usage: ClaudePult --claude next|finish|task <project-path> [task text] [--claude-path <path>] [--print] [--background]"
         guard args.count >= 2 else { printError(usage); return 2 }
         let command: ClaudeCommand
         switch args[0] {
@@ -107,8 +112,16 @@ enum CommandLineTool {
             claudePath: ClaudeLocator.resolve(configured: configuredPath)
         )
         if printOnly {
-            print(ShellQuote.claudeCommandLine(folder: request.projectPath, claude: request.claudePath, prompt: command.prompt))
+            if background {
+                print(([request.claudePath] + BackgroundPermissions.arguments(prompt: command.prompt, sessionID: "<id>"))
+                    .map(ShellQuote.quote).joined(separator: " "))
+            } else {
+                print(ShellQuote.claudeCommandLine(folder: request.projectPath, claude: request.claudePath, prompt: command.prompt))
+            }
             return 0
+        }
+        if background {
+            return launchInBackground(request)
         }
         return waitFor {
             switch try await ClaudeLauncher.launch(request) {
@@ -119,6 +132,35 @@ enum CommandLineTool {
                 printError(question)
                 return 3
             }
+        }
+    }
+
+    /// Starts a background run; the running ClaudePult app picks it up and reports the result.
+    private static func launchInBackground(_ request: LaunchRequest) -> Int32 {
+        let folder = FolderBox()
+        let prepared = waitFor {
+            switch try await ClaudeLauncher.prepareFolder(request) {
+            case let .ready(path, worktree):
+                folder.value = (path, worktree)
+                return 0
+            case let .needsConfirmation(question):
+                printError(question)
+                return 3
+            }
+        }
+        guard prepared == 0, let (path, worktree) = folder.value else { return prepared }
+        do {
+            let settings = AppSettings()
+            let run = try RunStore(settings: settings).launch(
+                command: request.command, project: (request.projectPath as NSString).lastPathComponent,
+                projectPath: request.projectPath, folder: path, worktreeBranch: worktree?.branch,
+                claudePath: request.claudePath
+            )
+            print("background run \(run.id) in \(path), log \(run.logURL.path)")
+            return 0
+        } catch {
+            printError("error: \(error.localizedDescription)")
+            return 1
         }
     }
 
@@ -147,4 +189,8 @@ enum CommandLineTool {
 /// Written by the detached task before `signal()`, read after `wait()`.
 private final class ExitCode: @unchecked Sendable {
     var value: Int32 = 0
+}
+
+private final class FolderBox: @unchecked Sendable {
+    var value: (String, WorktreePlan?)?
 }
