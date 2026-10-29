@@ -1,18 +1,33 @@
 import AppKit
 import SwiftUI
 
-/// Menu bar icon: the sparkle symbol, with a red dot when any project's health is red.
+/// Menu bar icon: the sparkle symbol, a red dot when any project's health is red,
+/// and the number of sessions waiting for Oleh's answer.
 struct MenuBarIcon: View {
     let showsAlert: Bool
+    let waitingCount: Int
 
     var body: some View {
-        if showsAlert {
-            Image(nsImage: Self.alertImage)
-                .accessibilityLabel("ClaudePult: есть проекты с проблемами")
-        } else {
-            Image(systemName: "sparkle")
-                .accessibilityLabel("ClaudePult")
+        HStack(spacing: 3) {
+            if showsAlert {
+                Image(nsImage: Self.alertImage)
+            } else {
+                Image(systemName: "sparkle")
+            }
+            if waitingCount > 0 {
+                Text("\(waitingCount)")
+                    .monospacedDigit()
+            }
         }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(accessibilityText)
+    }
+
+    private var accessibilityText: String {
+        var parts = ["ClaudePult"]
+        if showsAlert { parts.append("есть проекты с проблемами") }
+        if waitingCount > 0 { parts.append("ждут ответа: \(waitingCount)") }
+        return parts.joined(separator: ", ")
     }
 
     /// Drawn on demand, so the symbol follows the menu bar's light/dark appearance

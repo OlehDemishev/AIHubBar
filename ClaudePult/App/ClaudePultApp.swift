@@ -6,6 +6,8 @@ struct ClaudePultApp: App {
     @State private var settings: AppSettings
     @State private var store: ProjectStore
     @State private var launcher: LaunchController
+    @State private var sessions: SessionStore
+    @State private var hooks: HookController
 
     init() {
         if let code = CommandLineTool.run(CommandLine.arguments) {
@@ -17,10 +19,14 @@ struct ClaudePultApp: App {
         _settings = State(initialValue: settings)
         _store = State(initialValue: store)
         _launcher = State(initialValue: LaunchController(settings: settings, store: store))
+        let sessions = SessionStore()
+        _sessions = State(initialValue: sessions)
+        _hooks = State(initialValue: HookController(settings: settings))
         AppLog.info("ClaudePult \(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "?") started")
         // Unit tests use the app as their host; keep it from running report.py in the background.
         if ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] == nil {
             store.start()
+            sessions.start()
         }
     }
 
@@ -29,8 +35,10 @@ struct ClaudePultApp: App {
             MenuPanelView()
                 .environment(store)
                 .environment(launcher)
+                .environment(sessions)
+                .environment(hooks)
         } label: {
-            MenuBarIcon(showsAlert: store.report?.hasRedProject ?? false)
+            MenuBarIcon(showsAlert: store.report?.hasRedProject ?? false, waitingCount: sessions.waitingCount)
         }
         .menuBarExtraStyle(.window)
 
@@ -39,6 +47,7 @@ struct ClaudePultApp: App {
                 .environment(loginItem)
                 .environment(settings)
                 .environment(store)
+                .environment(hooks)
         }
     }
 }

@@ -2,6 +2,28 @@
 
 Decisions made where the spec is silent or does not match reality. Newest at the top.
 
+## 2026-10-29 — Stage 4 (sessions)
+
+**Hook facts** checked against code.claude.com/docs/en/hooks on 2026-10-29 (not from memory): events `SessionStart` (source startup/resume/clear/compact/fork), `UserPromptSubmit` (`prompt`), `PermissionRequest` (fires when Claude asks), `Notification` (`notification_type`; `permission_prompt` only after ~6 s without typing, `idle_prompt` ~60 s after finishing), `Stop`, `StopFailure` (API error instead of Stop), `SessionEnd` (`reason`); common fields `session_id`, `transcript_path`, `cwd`, `hook_event_name`. Plain stdout on SessionStart/UserPromptSubmit is added to Claude's context; exit 2 blocks on several events. Commands run through `sh -c`; settings edits are picked up by running sessions; hooks from `~/.claude/settings.json` run in Terminal, desktop-app and `claude -p` sessions, in trusted folders.
+
+**Hook script** in Python 3 (`/usr/bin/python3`, ~20–40 ms start): JSON parsing and file locking without dependencies; `report.py` already relies on the same interpreter. It prints nothing, silences stderr and always exits 0. One file per session, written atomically under a shared `flock`. It finds the Claude process by walking up from its parent with `ps` (once per session) to record pid and tty, plus `TERM_PROGRAM` and `CLAUDE_CODE_ENTRYPOINT`. Session ids are validated before being used as file names.
+
+**States.** SessionStart → готово (a fresh session waits for input; `compact` keeps the current state), UserPromptSubmit → работает, PermissionRequest and Notification `permission_prompt` / `elicitation_*` / `agent_needs_input` → ждёт ответа, PostToolUse → работает (clears «ждёт ответа» after a permission was granted), Stop / StopFailure → готово, SessionEnd → завершена. `idle_prompt` is ignored: a finished session waiting for the next task is «готово», not «ждёт ответа» — otherwise every finished session would notify after a minute. PostToolUse runs on every tool call, so the hook writes then only when the state changes or once a minute. «Ошибка» is left for background runs (stage 5).
+
+**Visibility.** A session whose recorded Claude process is gone (checked with `proc_pidpath`, guarding against PID reuse) counts as ended even without SessionEnd (crash, killed terminal). Ended sessions stay visible 15 min; others without a live process disappear after 2 h without events (spec). Order: waiting, running, error, done, ended. Files older than 7 days are deleted.
+
+**Settings merge.** JSON is read with `JSONSerialization`; on a parse error nothing is written. ClaudePult's entries are recognised by `claudepult-hook` in the command, removed and re-added (idempotent); other hooks are untouched; a no-op install writes nothing and makes no backup. Each real change first copies the file to `settings.json.claudepult-backup-<local time>` and never overwrites an earlier backup (a first version did overwrite the backup of the original when installing twice within a second; the original was restored from a copy and the case is covered by a test). The file is written pretty-printed with sorted keys, so key order may change once.
+
+**«Показать».** Terminal.app sessions: AppleScript finds the tab whose `tty` matches and brings its window forward. Desktop-app sessions (`CLAUDE_CODE_ENTRYPOINT=claude-desktop`): open Claude. Otherwise the folder in Finder. The tty check comes first because the entrypoint variable can be inherited.
+
+**Child environment.** Processes started by ClaudePult no longer inherit `CLAUDE_CODE_*` / `CLAUDECODE`: when ClaudePult ran from inside a Claude session, a Terminal launched by it passed them on and the new `claude` treated itself as a child session (no transcript, desktop entrypoint).
+
+**Task text.** The panel shows the first prompt; prompts of ClaudePult's own commands are shown as «Следующий шаг», «Завершить сессию» or the bare task text without «Задача от Олега: … Работай по правилам …».
+
+**Not used:** `~/.claude/sessions/<pid>.json`, Claude Code's own registry of live sessions (pid, sessionId, cwd, status). It is undocumented; the spec asks for hooks.
+
+**Notifications** via `UNUserNotificationCenter`, once per waiting episode (session + event time), not replayed for waits older than 10 min after an app restart. Authorization is requested on the first waiting session.
+
 ## 2026-10-29 — Stage 3 (Claude in Terminal)
 
 **Claude CLI.** `claude [prompt]` (2.1.312, `/opt/homebrew/bin/claude`) starts an interactive session with the prompt as the first message — no extra flags needed. The binary is found in `/opt/homebrew/bin`, `/usr/local/bin`, `~/.local/bin`, `~/.claude/local` unless Settings give a path; the absolute path is typed into Terminal so the user's shell PATH does not matter.

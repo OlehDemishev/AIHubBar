@@ -5,6 +5,7 @@ struct SettingsView: View {
     @Environment(LoginItemController.self) private var loginItem
     @Environment(AppSettings.self) private var settings
     @Environment(ProjectStore.self) private var store
+    @Environment(HookController.self) private var hooks
 
     var body: some View {
         @Bindable var settings = settings
@@ -67,6 +68,31 @@ struct SettingsView: View {
             }
 
             Section {
+                LabeledContent("Состояние") {
+                    Text(hooks.status.title)
+                        .foregroundStyle(hooks.status == .installed ? .green : hooks.status == .outdated ? .orange : .secondary)
+                }
+                HStack {
+                    Button(hooks.status == .notInstalled ? "Установить hooks" : "Обновить hooks") { hooks.install() }
+                    if hooks.status != .notInstalled {
+                        Button("Снять hooks") { hooks.uninstall() }
+                    }
+                }
+                if let message = hooks.message {
+                    Text(message)
+                        .font(.callout)
+                        .foregroundStyle(hooks.isError ? .red : .secondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+            } header: {
+                Text("Сессии Claude Code")
+            } footer: {
+                Text("Hooks добавляются в ~/.claude/settings.json (остальные настройки не трогаются, перед изменением рядом сохраняется копия). Они записывают состояние каждой сессии Claude Code на этом Маке — в Терминале, в приложении Claude, фоновых — чтобы ClaudePult показывал их в панели.")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+
+            Section {
                 LabeledContent("Версия", value: Self.version)
                 LabeledContent("Журнал") {
                     Button("Показать в Finder") {
@@ -78,11 +104,17 @@ struct SettingsView: View {
         .formStyle(.grouped)
         .frame(width: 520)
         .fixedSize(horizontal: false, vertical: true)
-        .onAppear { loginItem.refresh() }
+        .onAppear {
+            loginItem.refresh()
+            hooks.refresh()
+        }
         .onReceive(NotificationCenter.default.publisher(for: NSApplication.didBecomeActiveNotification)) { _ in
             loginItem.refresh()
         }
-        .onChange(of: settings.projectsDirectory) { Task { await store.refresh() } }
+        .onChange(of: settings.projectsDirectory) {
+            Task { await store.refresh() }
+            hooks.refresh()
+        }
         .onChange(of: settings.dailyReportDirectory) { Task { await store.refresh() } }
     }
 

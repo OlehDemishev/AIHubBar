@@ -30,7 +30,9 @@ enum ProcessRunner {
     ]
 
     static func environment(base: [String: String] = ProcessInfo.processInfo.environment) -> [String: String] {
-        var env = base
+        // When ClaudePult runs from inside a Claude Code session (command-line mode, development), Claude's own
+        // variables would leak into Terminal and make a new `claude` think it is a child session.
+        var env = base.filter { !$0.key.hasPrefix("CLAUDE_CODE_") && $0.key != "CLAUDECODE" }
         let current = (env["PATH"] ?? "/usr/bin:/bin:/usr/sbin:/sbin").split(separator: ":").map(String.init)
         env["PATH"] = (extraPathDirectories.filter { !current.contains($0) } + current).joined(separator: ":")
         env["LANG"] = env["LANG"] ?? "en_US.UTF-8"
@@ -42,6 +44,8 @@ enum ProcessRunner {
         _ executable: String,
         _ arguments: [String],
         currentDirectory: URL? = nil,
+        input: Data? = nil,
+        environment overrides: [String: String] = [:],
         timeout: Duration
     ) async throws -> ProcessResult {
         let command = ([URL(fileURLWithPath: executable).lastPathComponent] + arguments.prefix(1)).joined(separator: " ")
@@ -52,18 +56,26 @@ enum ProcessRunner {
                 let process = Process()
                 process.executableURL = URL(fileURLWithPath: executable)
                 process.arguments = arguments
-                process.environment = environment()
+                process.environment = environment().merging(overrides) { $1 }
                 if let currentDirectory { process.currentDirectoryURL = currentDirectory }
                 let stdout = Pipe(), stderr = Pipe()
                 process.standardOutput = stdout
                 process.standardError = stderr
-                process.standardInput = FileHandle.nullDevice
+                let stdin = input.map { _ in Pipe() }
+                process.standardInput = stdin ?? FileHandle.nullDevice
 
                 do {
                     try process.run()
                 } catch {
                     continuation.resume(throwing: ProcessError.launchFailed(command, underlying: error.localizedDescription))
                     return
+                }
+
+                if let stdin, let input {
+                    DispatchQueue.global(qos: .utility).async {
+                        try? stdin.fileHandleForWriting.write(contentsOf: input)
+                        try? stdin.fileHandleForWriting.close()
+                    }
                 }
 
                 let timedOut = Flag()
