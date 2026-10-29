@@ -1,11 +1,11 @@
 # Status
 
 <!-- summary:start -->
-**Stage:** Stage 1 of 7 done — skeleton (menu bar icon, empty panel, Settings with login item)
+**Stage:** Stage 1 of 7 done — skeleton; panel entrance animations in review
 **Updated:** 2026-10-29
 
 **Now:**
-- nothing in progress
+- PR `feat/panel-animations`: staggered entrance animation and empty state in the panel — waiting for review
 
 **Next:**
 - Stage 2 — Projects: run `report.py --json`, models, project list with health/branch/STATUS, expand, open in Terminal/Finder/GitHub, periodic refresh, file logs in ~/Library/Logs/ClaudeBar
@@ -16,8 +16,15 @@
 - Stage 7 — Polish: Help window + help.txt, manual run of all scenarios, README update, app icon
 
 **Needs Oleh:**
+- review and merge PR `feat/panel-animations`
 - open the panel and Settings once and confirm they look right (automation cannot see the app's windows); turn on «Запускать при входе в систему» if wanted — it is left off
 <!-- summary:end -->
+
+## 2026-10-29 — Panel entrance animations (branch `feat/panel-animations`)
+
+Done: the panel's header, content and footer fade in and settle down from under the menu bar with a staggered spring (0.35 s, 50 ms step) on every open; the header sparkle bounces once; button hover highlight eases in. With Reduce Motion only the fade remains. The empty panel got a proper empty state («Пока пусто») instead of a single line.
+Checked: `scripts/build-and-install.sh --test` — tests green, Release build installed and running; opened the panel twice from the menu bar and the log shows `Panel shown` both times, so the animation replays on each open. CI not set up; checks run locally.
+Left: the animation itself not seen on a screenshot (the app's windows are hidden from computer-use screenshots) — needs Oleh's look.
 
 ## 2026-10-29 — Stage 1: skeleton (branch `main`)
 
