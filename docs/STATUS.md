@@ -1,19 +1,19 @@
 # Status
 
 <!-- summary:start -->
-**Stage:** Stage 4 of 8 done — projects, Claude in Terminal, sessions via hooks
+**Stage:** Stage 5 of 8 in review — background mode (stages 1–4 done)
 **Updated:** 2026-10-29
 
 **Now:**
-- nothing in progress
+- PR `feat/background` (stage 5: claude -p with permission rules, time limit, stop, log window, notification + Telegram, Terminal/Фон choice) — waiting for review
 
 **Next:**
-- Stage 5 — Background mode: `claude -p` with permissions from spec 2.4, logs, stop, time limit, notifications and Telegram
 - Stage 6 — Common commands and disk: report, summary, latest report, cleanup (check/run), disk indicator
 - Stage 7 — Polish: Help window + help.txt, manual run of all scenarios, README update, app icon
 - Stage 8 — Subscription limits (spec 2.8): limits in menu bar and panel, notifications, forecast, per-project token breakdown, background-mode guard, `usage.json`, widgets if simple
 
 **Needs Oleh:**
+- review and merge PR `feat/background`; check that the Telegram test message «✅ repo: Тест ClaudePult…» arrived
 - hooks are installed in ~/.claude/settings.json (with your OK); backup of the original: ~/.claude/settings.json.claudepult-backup-20261029T192827
 - check that the «Claude ждёт ответа» macOS notification arrives (allow notifications for ClaudePult if asked) — not visible to automation
 - try «Своя задача…» on a real project (if macOS asks for permission to control Terminal, allow it)
@@ -21,6 +21,12 @@
 - delete or archive the old repo `OlehDemishev/ClaudeBar` (its code is now in `OlehDemishev/ClaudePult`)
 - turn on «Запускать при входе в систему» in Settings if wanted — it is left off
 <!-- summary:end -->
+
+## 2026-10-29 — Stage 5: background mode (branch `feat/background`)
+
+Done: «Фон» mode — `claude -p` with `--session-id`, stream-json log in `runs/<id>.log`, `--permission-mode dontAsk --permission-prompts none` and allow/deny rules per spec §2.4 (`BackgroundPermissions`, `--background-settings`). Time limit (90 min default) and «Остановить» via SIGTERM → SIGKILL; result from the stream: ✅/❌, 1–3 line summary, PR link, denied tools. macOS notification and Telegram message (bot from `_daily-report/config.json`, toggle in Settings). Runs survive an app restart and are picked up again. «Сессии» block joins hook sessions with runs (state «в фоне», «ошибка», «Журнал», «Остановить»); «Журнал» window renders the log. Commands ask «Терминал / Фон» with «Запомнить выбор»; Settings: default mode, time limit, Telegram. CLI `--claude … --background`. Shared `Notifier`.
+Checked: `scripts/build-and-install.sh --test` — 55 tests (94 cases) green, no compiler warnings. Live: (1) real `claude -p` with the exact flags in a throwaway repo: 4 allowed actions ran, 9 forbidden ones were denied (push main, force push, Read/cat .env, rm, write outside, gh pr merge, sudo, reset --hard), origin main untouched; (2) fake claude with a 1-min limit → stopped by the limit (SIGTERM, then SIGKILL), state «лимит времени», notified; (3) fake success → summary and PR link parsed; (4) real background run through the app with Telegram on → «готово» in 18 s, joined with its hook session, Telegram API answered OK. Found and fixed: runs started from the command line were finished early (liveness checked the executable name). Test runs, sandbox and settings restored. CI not set up; checks run locally.
+Left: the panel and «Журнал» window not seen this time (computer-use clicks on the menu bar failed repeatedly); the Telegram message itself and the notification banner are not visible to automation.
 
 ## 2026-10-29 — Stage 4: sessions (branch `feat/sessions`)
 

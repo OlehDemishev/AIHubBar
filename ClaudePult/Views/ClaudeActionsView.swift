@@ -7,6 +7,7 @@ struct ClaudeActionsView: View {
     @Environment(LaunchController.self) private var launcher
     @State private var isEditingTask = false
     @State private var task = ""
+    @State private var rememberMode = false
     @FocusState private var taskFocused: Bool
 
     private var isWorking: Bool { launcher.working.contains(project.id) }
@@ -24,7 +25,7 @@ struct ClaudeActionsView: View {
 
             HStack(spacing: 6) {
                 ActionButton(title: "Следующий шаг", systemImage: "forward.fill", isProminent: true) {
-                    launcher.launch(.nextStep, in: project)
+                    launcher.request(.nextStep, in: project)
                 }
                 .help(project.status?.summary?.next.first.map { "Первый пункт Next: \($0)" } ?? "Первый пункт Next из STATUS.md")
                 ActionButton(title: "Своя задача…", systemImage: "text.cursor") {
@@ -32,7 +33,7 @@ struct ClaudeActionsView: View {
                     taskFocused = isEditingTask
                 }
                 ActionButton(title: "Завершить", systemImage: "checkmark.circle") {
-                    launcher.launch(.finishSession, in: project)
+                    launcher.request(.finishSession, in: project)
                 }
                 .help("Завершить сессию: проверки, коммит, push, PR и STATUS по разделу «Конец сессии»")
             }
@@ -43,12 +44,43 @@ struct ClaudeActionsView: View {
                     .transition(.opacity.combined(with: .offset(y: -4)))
             }
 
+            if let command = launcher.pendingModeChoice[project.id] {
+                modeChooser(command)
+                    .transition(.opacity.combined(with: .offset(y: -4)))
+            }
+
             if let message = launcher.messages[project.id] {
                 messageView(message)
                     .transition(.opacity)
             }
         }
         .animation(.snappy(duration: 0.2), value: launcher.messages[project.id])
+        .animation(.snappy(duration: 0.2), value: launcher.pendingModeChoice[project.id])
+    }
+
+    private func modeChooser(_ command: ClaudeCommand) -> some View {
+        VStack(alignment: .leading, spacing: 6) {
+            Text("Где запустить «\(command.title)»?")
+                .font(.caption.weight(.medium))
+            HStack(spacing: 6) {
+                ActionButton(title: LaunchMode.terminal.title, systemImage: "terminal", isProminent: true) {
+                    launcher.choose(.terminal, remember: rememberMode, in: project)
+                }
+                .help("Новое окно Терминала: видно, что делает Claude, можно отвечать на вопросы")
+                ActionButton(title: LaunchMode.background.title, systemImage: "moon.zzz", isProminent: true) {
+                    launcher.choose(.background, remember: rememberMode, in: project)
+                }
+                .help("claude -p без окна: только разрешённые действия, итог — уведомлением и в Telegram")
+                Spacer(minLength: 4)
+                Button("Отмена") { launcher.cancelModeChoice(in: project) }
+                    .controlSize(.small)
+            }
+            Toggle("Запомнить выбор", isOn: $rememberMode)
+                .toggleStyle(.checkbox)
+                .font(.caption)
+        }
+        .padding(8)
+        .background(RoundedRectangle(cornerRadius: 6).fill(Color.primary.opacity(0.05)))
     }
 
     private var taskEditor: some View {
@@ -63,8 +95,8 @@ struct ClaudeActionsView: View {
                     withAnimation(.snappy(duration: 0.2)) { isEditingTask = false }
                 }
                 .keyboardShortcut(.cancelAction)
-                Button("Запустить в Терминале") {
-                    launcher.launch(.customTask(task), in: project)
+                Button("Запустить") {
+                    launcher.request(.customTask(task), in: project)
                     task = ""
                     withAnimation(.snappy(duration: 0.2)) { isEditingTask = false }
                 }

@@ -1,7 +1,6 @@
 import AppKit
 import Darwin
 import Observation
-import UserNotifications
 
 /// Claude Code sessions from the hook's files in Application Support, kept current by watching the folder.
 @MainActor
@@ -24,7 +23,6 @@ final class SessionStore {
     private var reloadScheduled = false
     /// Sessions already announced for their current waiting episode (keyed by id + event time).
     private var notified: Set<String> = []
-    private var notificationsAuthorized = false
 
     init(directory: URL = SessionFiles.sessionsDirectory) {
         self.directory = directory
@@ -149,19 +147,11 @@ final class SessionStore {
     }
 
     private func post(_ session: Session) {
-        Task {
-            let center = UNUserNotificationCenter.current()
-            if !notificationsAuthorized {
-                notificationsAuthorized = (try? await center.requestAuthorization(options: [.alert, .sound])) ?? false
-            }
-            guard notificationsAuthorized else { return }
-            let content = UNMutableNotificationContent()
-            content.title = "Claude ждёт ответа — \(session.displayProject)"
-            content.body = session.message ?? session.task ?? "Нужно ваше решение."
-            content.sound = .default
-            let request = UNNotificationRequest(identifier: "waiting-\(session.id)", content: content, trigger: nil)
-            try? await center.add(request)
-        }
+        Notifier.post(
+            id: "waiting-\(session.id)",
+            title: "Claude ждёт ответа — \(session.displayProject)",
+            body: session.message ?? session.task ?? "Нужно ваше решение."
+        )
     }
 }
 

@@ -2,11 +2,13 @@
 
 Native macOS menu bar app (no Dock icon): a control panel for the projects in `~/Projects` and for Claude Code sessions. Full specification: [docs/SPEC.md](docs/SPEC.md). Progress: [docs/STATUS.md](docs/STATUS.md). Design decisions: [DECISIONS.md](DECISIONS.md).
 
-Current stage: **4 — sessions**. On top of the panel, the **Сессии** block lists every Claude Code session on this Mac (Terminal, Claude desktop app, background): project, worktree, task, duration and state — работает / ждёт ответа / готово / завершена. Waiting sessions are highlighted, raise a macOS notification once and are counted next to the menu bar icon; «Показать» brings the session's Terminal tab forward (desktop-app sessions open Claude, others the folder). Session data comes from Claude Code hooks that ClaudePult installs into `~/.claude/settings.json` (Settings → «Сессии Claude Code»).
+Current stage: **5 — background mode**. On top of the panel, the **Сессии** block lists every Claude Code session on this Mac (Terminal, Claude desktop app, background runs): project, worktree, task, duration and state — работает / в фоне / ждёт ответа / готово / ошибка / завершена. Waiting sessions are highlighted, raise a macOS notification once and are counted next to the menu bar icon; «Показать» brings the session's Terminal tab forward (desktop-app sessions open Claude, others the folder); background runs have «Журнал» and «Остановить». Session data comes from Claude Code hooks that ClaudePult installs into `~/.claude/settings.json` (Settings → «Сессии Claude Code»).
+
+Each Claude command asks where to run — **Терминал** or **Фон** — unless a default is set in Settings («Запомнить выбор»).
 
 Below the sessions, the projects from `~/Projects` with health, branch, uncommitted files, open PRs (coloured by CI) and last activity. A project expands into:
 
-- **Claude** commands — «Следующий шаг», «Своя задача…» (text field), «Завершить»: each opens a new Terminal window in the project folder and starts `claude` with the prompt from docs/SPEC.md §2.4 as the first message. If a Claude Code session already runs in the project folder, «Следующий шаг» and «Своя задача» start in a new worktree `.claude/worktrees/cb-<slug>` on branch `claude/<slug>` from `origin/main`; «Завершить» asks before starting a second session in the same folder.
+- **Claude** commands — «Следующий шаг», «Своя задача…» (text field), «Завершить» with the prompt from docs/SPEC.md §2.4: in **Терминал** mode a new Terminal window starts `claude` with the prompt as the first message; in **Фон** mode `claude -p` runs without a window (see below). If a Claude Code session already runs in the project folder, «Следующий шаг» and «Своя задача» start in a new worktree `.claude/worktrees/cb-<slug>` on branch `claude/<slug>` from `origin/main`; «Завершить» asks before starting a second session in the same folder.
 - «Терминал / Finder / GitHub» buttons;
 - the STATUS.md header (Stage / Now / Next / Needs Oleh), attention items and open PRs;
 - the project's worktrees with a delete button (only when clean and pushed or merged).
@@ -53,7 +55,16 @@ Layout:
 
 ## Settings
 
-«Настройки…» (⌘,): start at login, projects folder (default `~/Projects`), `_daily-report` folder (default `~/Projects/_daily-report`), path to `claude` (empty = auto-detect in `/opt/homebrew/bin`, `/usr/local/bin`, `~/.local/bin`, `~/.claude/local`), app log location.
+«Настройки…» (⌘,): start at login, projects folder (default `~/Projects`), `_daily-report` folder (default `~/Projects/_daily-report`), path to `claude` (empty = auto-detect in `/opt/homebrew/bin`, `/usr/local/bin`, `~/.local/bin`, `~/.claude/local`), launch mode (ask / Терминал / Фон), background time limit, Telegram for background results, session hooks, app log location.
+
+## Background mode
+
+`claude -p "<prompt>" --session-id <run id> --output-format stream-json --verbose --permission-mode dontAsk --permission-prompts none --settings '<rules>'` in the project folder (or a new worktree when the folder is busy). Everything not allowed is denied without asking:
+
+- allowed: reading files, editing/writing inside the working folder, project checks and builds (npm, pnpm, npx, yarn, bun, node, tsc, mvn, gradle, xcodebuild, xcodegen, xcrun, swift, expo, pytest, make, `scripts/*`), `git status/diff/log/show/branch/add/commit/mv/rm/checkout -b/switch/fetch`, `git push origin <branch>` / `-u origin <branch>`, `gh pr create/view/list/checks/status`;
+- denied: push to main/master or HEAD, bare `git push`, force/delete/mirror pushes, `git reset --hard`, `git clean`, deleting branches, `gh pr merge`, `gh api`, `sudo`, `rm`, reading `.env`, keys, `~/.ssh`, `_daily-report/config.json`, printing the environment.
+
+The full rule set: `ClaudePult --background-settings`. The run's stream goes to `~/Library/Application Support/ClaudePult/runs/<id>.log` (metadata in `<id>.json`); «Журнал» shows it readably. Time limit 90 min by default (Settings), then SIGTERM. On finish: a macOS notification and, if enabled and `_daily-report/config.json` has `telegram.bot_token` / `chat_id`, a Telegram message «✅/❌ <Проект>: <начало задачи> — <итог>» with the PR link. A run keeps going if ClaudePult quits; the app picks it up again on start. Runs older than 30 days are deleted.
 
 ## Session hooks
 
@@ -92,6 +103,8 @@ The app binary accepts headless commands (used by scripts and checks; the UI is 
 | `--claude finish <project>` | «Завершить сессию»; exits with 3 if the folder is busy |
 | `--claude … --print` | print the command line instead of launching |
 | `--claude … --claude-path <path>` | use another binary, e.g. `/bin/echo` for a dry run |
+| `--claude … --background` | start as a background run; the running app reports the result |
+| `--background-settings` | print the permission rules used for background runs |
 | `--hooks status` | print hook state (`installed`, `outdated`, `notInstalled`) |
 | `--hooks install` / `--hooks uninstall` | same as the Settings buttons (backup of settings.json first) |
 | `--sessions` | list visible sessions: id, state, project, worktree, tty, task |

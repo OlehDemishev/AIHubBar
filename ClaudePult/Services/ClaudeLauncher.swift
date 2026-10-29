@@ -29,35 +29,45 @@ struct LaunchRequest: Sendable {
     var allowBusyFolder = false
 }
 
-/// Starts Claude Code in a new Terminal window (docs/SPEC.md §2.4, Terminal mode).
+/// Picks the folder for a Claude command and starts it in a new Terminal window (docs/SPEC.md §2.4).
 enum ClaudeLauncher {
-    static func launch(_ request: LaunchRequest) async throws -> LaunchOutcome {
-        var folder = request.projectPath
-        var worktree: WorktreePlan?
+    enum Folder: Equatable, Sendable {
+        case ready(path: String, worktree: WorktreePlan?)
+        /// The folder is busy and the command cannot move to a worktree; ask before starting a second session there.
+        case needsConfirmation(String)
+    }
 
+    /// The project folder, or a new worktree when a Claude Code session already works in the project.
+    static func prepareFolder(_ request: LaunchRequest) async throws -> Folder {
         let busy = RunningSessions.isBusy(
             projectPath: request.projectPath,
             workingDirectories: await RunningSessions.workingDirectories()
         )
-        if busy {
-            if request.command.canUseWorktree {
-                let plan = try await GitService.createWorktree(
-                    projectPath: request.projectPath,
-                    nameSource: request.command.nameSource(nextItems: request.nextItems),
-                    baseRef: request.baseRef
-                )
-                folder = plan.path
-                worktree = plan
-            } else if !request.allowBusyFolder {
-                return .needsConfirmation("В этой папке уже работает сессия Claude. Запустить ещё одну там же?")
-            }
+        guard busy else { return .ready(path: request.projectPath, worktree: nil) }
+        if request.command.canUseWorktree {
+            let plan = try await GitService.createWorktree(
+                projectPath: request.projectPath,
+                nameSource: request.command.nameSource(nextItems: request.nextItems),
+                baseRef: request.baseRef
+            )
+            return .ready(path: plan.path, worktree: plan)
         }
+        return request.allowBusyFolder
+            ? .ready(path: request.projectPath, worktree: nil)
+            : .needsConfirmation("В этой папке уже работает сессия Claude. Запустить ещё одну там же?")
+    }
 
-        try await TerminalLauncher.run(
-            ShellQuote.claudeCommandLine(folder: folder, claude: request.claudePath, prompt: request.command.prompt)
-        )
-        AppLog.info("Launched «\(request.command.title)» in Terminal: \(folder)")
-        return .launched(folder: folder, worktree: worktree)
+    static func launch(_ request: LaunchRequest) async throws -> LaunchOutcome {
+        switch try await prepareFolder(request) {
+        case let .needsConfirmation(question):
+            return .needsConfirmation(question)
+        case let .ready(folder, worktree):
+            try await TerminalLauncher.run(
+                ShellQuote.claudeCommandLine(folder: folder, claude: request.claudePath, prompt: request.command.prompt)
+            )
+            AppLog.info("Launched «\(request.command.title)» in Terminal: \(folder)")
+            return .launched(folder: folder, worktree: worktree)
+        }
     }
 }
 
