@@ -2,6 +2,14 @@
 
 Decisions made where the spec is silent or does not match reality. Newest at the top.
 
+## 2026-10-29 — Widgets
+
+**Built after all, without an App Group.** Stage 8 assumed a WidgetKit extension needs an App Group and therefore a signing team. A widget extension must be sandboxed, but it can read ClaudePult's data through the sandbox entitlement `com.apple.security.temporary-exception.files.home-relative-path.read-only` = `/Library/Application Support/ClaudePult/`; with ad-hoc signing macOS registers and runs the extension (checked: `pluginkit` lists `com.demishev.claudepult.widget`, the widget gallery shows ClaudePult, and the widget's log shows it reading `usage.json` with the same values as the file). Inside the sandbox `NSHomeDirectory()` is the container, so the real home comes from `getpwuid`.
+
+**What it shows**: small — a ring with the session %, coloured like the app, and the reset countdown; medium — session and week bars with resets and «обновлено …». No data → «Нет данных — откройте ClaudePult». ClaudePult asks WidgetKit to reload after every usage update; the widget's own fallback is every 5 minutes.
+
+**Packaging**: XcodeGen target `ClaudePultWidget` (app-extension, embedded in `Contents/PlugIns`), its Info.plist and entitlements generated from `project.yml`.
+
 ## 2026-10-29 — Settings tabs and appearance (Oleh's request)
 
 **Tabs.** The single long Settings form became a `TabView` with Основные, Внешний вид, Claude, Сессии, Лимиты; the last opened tab is remembered.
@@ -32,7 +40,7 @@ Decisions made where the spec is silent or does not match reality. Newest at the
 
 **usage.json** in Application Support: `five_hour` and `seven_day` (`utilization`, `resets_at`) and `updated`. report.py and bot.py are not changed (spec §5); what they would need is in Needs Oleh.
 
-**Widgets not built.** A WidgetKit extension needs an App Group shared with the app, and App Groups need a real signing team (provisioning); this project is signed ad-hoc with no team (stage 1). Left in Next with that reason.
+**Widgets not built in this stage** — the App Group reasoning turned out wrong; see «Widgets» above, where they were built.
 
 **Panel height.** With the limits block the panel grew; the project list now scrolls at a height derived from the screen (`visibleFrame − 700`, 180…420 pt), and the breakdown is collapsed by default.
 

@@ -1,5 +1,6 @@
 import Foundation
 import Observation
+import WidgetKit
 
 /// Subscription limits: fetching on a smart schedule, forecast, threshold notifications, `usage.json` (spec §2.8).
 @MainActor
@@ -128,6 +129,7 @@ final class UsageStore {
         }
         snapshot = fresh
         UsageFile.write(fresh)
+        WidgetCenter.shared.reloadTimelines(ofKind: "ClaudePultUsage")
 
         if let session = fresh.session {
             history.append(UsagePoint(date: fresh.fetchedAt, session: session.utilization, sessionResetsAt: session.resetsAt))

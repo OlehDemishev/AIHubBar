@@ -71,7 +71,8 @@ Panel snapshots: `defaults write com.demishev.claudepult DebugPanelSnapshot -boo
 | Threshold notifications, «Лимит восстановлен», Telegram option | Auto (logic); **Oleh: notification** |
 | Background guard > 90 %, «Запустить после сброса» | Logic in code, not reachable live (session at 17 %); **Oleh when it happens** |
 | `usage.json` | Live (written on start) |
-| Widgets | Not built — see DECISIONS |
+| Widget registered and shown in the gallery | Live (`pluginkit`, chronod log) + Oleh (placed on the desktop, shows percentages) |
+| Widget reads usage.json from its sandbox, follows updates | Live (widget log: 29 % → 30 %, same as usage.json) |
 
 ## Settings and help (§2.6, §2.7)
 
