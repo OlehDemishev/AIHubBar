@@ -9,19 +9,27 @@ enum DebugSnapshot {
     static let defaultsKey = "DebugPanelSnapshot"
     static let fileURL = AppLog.directory.appending(path: "panel.png")
 
+    static func fileURL(_ name: String) -> URL { AppLog.directory.appending(path: "\(name).png") }
+
     static var isEnabled: Bool { UserDefaults.standard.bool(forKey: defaultsKey) }
     static var projectToExpand: String? {
         isEnabled ? UserDefaults.standard.string(forKey: "DebugPanelExpand") : nil
     }
 
     @MainActor
-    static func capture(_ window: NSWindow?) {
+    static func capture(_ window: NSWindow?, name: String = "panel") {
         // Render the layer tree: SwiftUI draws symbols, shapes and colours into layers,
         // which `cacheDisplay(in:to:)` leaves out.
-        guard let window, let contentView = window.contentView,
-              let view = [contentView, contentView.superview].compactMap({ $0 }).first(where: { $0.layer != nil }),
-              let layer = view.layer
-        else {
+        guard let window, let contentView = window.contentView else { return }
+        var candidates: [NSView] = [contentView]
+        var parent = contentView.superview
+        while let view = parent {
+            candidates.append(view)
+            parent = view.superview
+        }
+        // Debug-only: make the content view layer-backed if nothing in the chain is.
+        if candidates.allSatisfy({ $0.layer == nil }) { contentView.wantsLayer = true }
+        guard let view = candidates.first(where: { $0.layer != nil }), let layer = view.layer else {
             AppLog.error("Panel snapshot: no layer-backed window view")
             return
         }
@@ -47,8 +55,8 @@ enum DebugSnapshot {
               let png = NSBitmapImageRep(cgImage: image).representation(using: .png, properties: [:]) else { return }
         do {
             try FileManager.default.createDirectory(at: AppLog.directory, withIntermediateDirectories: true)
-            try png.write(to: fileURL)
-            AppLog.info("Panel snapshot saved, window frame \(NSStringFromRect(window.frame))")
+            try png.write(to: fileURL(name))
+            AppLog.info("Snapshot \(name).png saved, window frame \(NSStringFromRect(window.frame))")
         } catch {
             AppLog.error("Panel snapshot failed: \(error.localizedDescription)")
         }
@@ -67,5 +75,18 @@ struct WindowReader: NSViewRepresentable {
 
     func updateNSView(_ nsView: NSView, context: Context) {
         DispatchQueue.main.async { onWindow(nsView.window) }
+    }
+}
+
+extension View {
+    /// Debug-only: saves a PNG of the hosting window to ~/Library/Logs/ClaudePult/<name>.png once it is shown.
+    func debugSnapshot(_ name: String) -> some View {
+        background(WindowReader { window in
+            guard DebugSnapshot.isEnabled, let window else { return }
+            Task {
+                try? await Task.sleep(for: .seconds(1))
+                DebugSnapshot.capture(window, name: name)
+            }
+        })
     }
 }

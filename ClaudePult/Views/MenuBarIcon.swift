@@ -2,19 +2,20 @@ import AppKit
 import SwiftUI
 
 /// The menu bar label. It is the one view that lives as long as the app, so it also opens windows
-/// requested by background work (the cleanup check output) when the panel is closed.
+/// requested while the panel is closed (cleanup check output, `--app-command help`).
 struct MenuBarLabel: View {
     let showsAlert: Bool
     let waitingCount: Int
 
-    @Environment(CommandStore.self) private var commands
+    @Environment(AppRequests.self) private var requests
     @Environment(\.openWindow) private var openWindow
 
     var body: some View {
         MenuBarIcon(showsAlert: showsAlert, waitingCount: waitingCount)
-            .onChange(of: commands.cleanupWindowRequest) {
+            .onChange(of: requests.window) {
+                guard let id = requests.window?.id else { return }
                 NSApp.activate()
-                openWindow(id: "cleanup-output")
+                openWindow(id: id)
             }
     }
 }

@@ -35,6 +35,9 @@ targets:
         LSMinimumSystemVersion: $(MACOSX_DEPLOYMENT_TARGET)
         LSApplicationCategoryType: public.app-category.developer-tools
         NSHumanReadableCopyright: "© Oleh Demishev"
+        CFBundleIconName: AppIcon
+        CFBundleDevelopmentRegion: ru
+        CFBundleLocalizations: [ru]
         NSAppleEventsUsageDescription: "ClaudePult открывает окна Терминала и запускает в них Claude Code для ваших проектов."
     settings:
       base:
@@ -44,6 +47,7 @@ targets:
         ENABLE_HARDENED_RUNTIME: NO
         GENERATE_INFOPLIST_FILE: NO
         COMBINE_HIDPI_IMAGES: YES
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
 
   ClaudePultTests:
     type: bundle.unit-test

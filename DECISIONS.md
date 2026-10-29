@@ -2,6 +2,20 @@
 
 Decisions made where the spec is silent or does not match reality. Newest at the top.
 
+## 2026-10-29 — Stage 7 (polish)
+
+**Help.** «Помощь» in the panel footer opens a window built from one `HelpContent` list (menu bar, sessions, projects, commands, command line). The `help.txt` block for the Telegram bot is a shorter hand-written summary in Telegram HTML, appended at the end as the spec asks («🖥 ClaudePult»); the file went from 1645 to 2429 characters (limit 4000), tags balanced, the rest untouched.
+
+**App icon** is drawn by `scripts/make-app-icon.swift` (warm gradient squircle, white ✦ and a small «panel» card) into `Resources/Assets.xcassets`, so it can be regenerated; the menu bar keeps the plain SF Symbol.
+
+**Russian locale.** `CFBundleDevelopmentRegion = ru` (and `CFBundleLocalizations = [ru]`) so system formatters speak Russian («12,76 ГБ», dates), matching the Russian UI.
+
+**Requests from outside the panel.** Windows that must open while the panel is closed (the cleanup check output) and `--app-command` requests from scripts (a distributed notification `com.demishev.claudepult.app-command`) go through `AppRequests`; the menu bar label — the only view alive all the time — opens the windows. This also made the help and cleanup windows checkable without clicks.
+
+**«Очистка: проверить» skipped** («Идёт сборка — очистку пропускаю») now shows as not done, like the real cleanup.
+
+**Checks.** Menu bar clicks from computer-use failed while another app was frontmost; with Finder in front they work, and the debug snapshot (now also for the help and cleanup windows) shows the panel. Clicking inside ClaudePult's windows stays impossible for automation (the app cannot be granted), so the remaining button checks are listed for Oleh in docs/CHECKLIST.md.
+
 ## 2026-10-29 — Stage 6 (common commands and disk)
 
 **Report period.** «Отчёт сейчас» and «Быстрая сводка» pass `--since-hours 24` as the spec's command lines do. With an explicit period report.py does not move its own «since last report» marker (`state.json`), so the 10:00 report is not affected.

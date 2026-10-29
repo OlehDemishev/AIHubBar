@@ -5,7 +5,8 @@ import Foundation
 /// - `ClaudePult --claude next|finish|task <project-path> [task text] [--claude-path <path>] [--print] [--background]`
 /// - `ClaudePult --hooks [status|install|uninstall]`
 /// - `ClaudePult --sessions`, `ClaudePult --show-session <id>`, `ClaudePult --background-settings`
-/// - `ClaudePult --command report|summary|cleanup-check|cleanup`
+/// - `ClaudePult --command report|summary|cleanup-check|cleanup` (in this process)
+/// - `ClaudePult --app-command <command>|help|cleanup-output` (asks the running app)
 @MainActor
 enum CommandLineTool {
     /// Returns an exit code if the arguments contain a command, `nil` to start the app normally.
@@ -18,6 +19,17 @@ enum CommandLineTool {
         }
         if let index = arguments.firstIndex(of: "--hooks") {
             return hooks(arguments.dropFirst(index + 1).first ?? "status")
+        }
+        if let index = arguments.firstIndex(of: "--app-command"), index + 1 < arguments.count {
+            let name = arguments[index + 1]
+            let known = Array(AppRequests.windows.keys) + CommonCommand.allCases.map(\.cliName)
+            guard known.contains(name) else {
+                printError("Usage: ClaudePult --app-command " + known.sorted().joined(separator: "|"))
+                return 2
+            }
+            AppRequests.post(name)
+            print("sent \(name) to the running app")
+            return 0
         }
         if let index = arguments.firstIndex(of: "--command"), index + 1 < arguments.count {
             guard let command = CommonCommand.allCases.first(where: { $0.cliName == arguments[index + 1] }),
