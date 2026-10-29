@@ -17,7 +17,11 @@ struct MenuPanelView: View {
     @State private var listHeight: CGFloat = 0
     @State private var window: NSWindow?
 
-    private static let maxListHeight: CGFloat = 480
+    /// The project list scrolls; its height leaves room for the other blocks on the current screen.
+    private static var maxListHeight: CGFloat {
+        let visible = NSScreen.main?.visibleFrame.height ?? 1000
+        return min(420, max(180, visible - 700))
+    }
 
     private let log = Logger(subsystem: "com.demishev.claudepult", category: "panel")
 
@@ -25,6 +29,11 @@ struct MenuPanelView: View {
         VStack(alignment: .leading, spacing: 0) {
             header
                 .revealed(isShown, step: 0, reduceMotion: reduceMotion)
+
+            Divider()
+
+            LimitsView()
+                .revealed(isShown, step: 1, reduceMotion: reduceMotion)
 
             Divider()
 

@@ -123,6 +123,10 @@ struct ClaudeActionsView: View {
                 if launcher.pendingConfirmation[project.id] != nil {
                     Button("Запустить всё равно") { launcher.confirmPending(in: project) }
                 }
+                if launcher.pendingLimit[project.id] != nil {
+                    Button("Запустить после сброса") { launcher.launchAfterReset(in: project) }
+                    Button("Запустить сейчас") { launcher.launchDespiteLimit(in: project) }
+                }
                 if message.isError, message.text.contains("Автоматизация") {
                     Button("Открыть настройки") { LaunchController.openAutomationSettings() }
                 }

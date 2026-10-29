@@ -11,6 +11,7 @@ struct ClaudePultApp: App {
     @State private var runs: RunStore
     @State private var commands: CommandStore
     @State private var requests: AppRequests
+    @State private var usage: UsageStore
 
     init() {
         if let code = CommandLineTool.run(CommandLine.arguments) {
@@ -21,15 +22,18 @@ struct ClaudePultApp: App {
         let store = ProjectStore(settings: settings)
         _settings = State(initialValue: settings)
         _store = State(initialValue: store)
-        let runs = RunStore(settings: settings)
-        _runs = State(initialValue: runs)
-        _launcher = State(initialValue: LaunchController(settings: settings, store: store, runs: runs))
         let requests = AppRequests()
         let commands = CommandStore(settings: settings, store: store, requests: requests)
         _requests = State(initialValue: requests)
         _commands = State(initialValue: commands)
         let sessions = SessionStore()
         _sessions = State(initialValue: sessions)
+        let usage = UsageStore(settings: settings, sessions: sessions)
+        _usage = State(initialValue: usage)
+        let runs = RunStore(settings: settings)
+        _runs = State(initialValue: runs)
+        let launcher = LaunchController(settings: settings, store: store, runs: runs, usage: usage)
+        _launcher = State(initialValue: launcher)
         _hooks = State(initialValue: HookController(settings: settings))
         AppLog.info("ClaudePult \(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "?") started")
         // Unit tests use the app as their host; keep it from running report.py in the background.
@@ -38,6 +42,8 @@ struct ClaudePultApp: App {
             sessions.start()
             runs.start()
             requests.listen(commands: commands)
+            usage.start()
+            launcher.start()
         }
     }
 
@@ -50,9 +56,16 @@ struct ClaudePultApp: App {
                 .environment(hooks)
                 .environment(runs)
                 .environment(commands)
+                .environment(usage)
         } label: {
-            MenuBarLabel(showsAlert: store.report?.hasRedProject ?? false, waitingCount: sessions.waitingCount)
-                .environment(requests)
+            MenuBarLabel(state: MenuBarState(
+                showsAlert: store.report?.hasRedProject ?? false,
+                waitingCount: sessions.waitingCount,
+                mode: settings.menuBarUsageMode,
+                session: usage.snapshot?.session?.utilization,
+                week: usage.snapshot?.week?.utilization
+            ))
+            .environment(requests)
         }
         .menuBarExtraStyle(.window)
 
@@ -81,6 +94,7 @@ struct ClaudePultApp: App {
                 .environment(settings)
                 .environment(store)
                 .environment(hooks)
+                .environment(usage)
         }
     }
 }
