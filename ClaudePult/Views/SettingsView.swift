@@ -1,9 +1,14 @@
+import AppKit
 import SwiftUI
 
 struct SettingsView: View {
     @Environment(LoginItemController.self) private var loginItem
+    @Environment(AppSettings.self) private var settings
+    @Environment(ProjectStore.self) private var store
 
     var body: some View {
+        @Bindable var settings = settings
+
         Form {
             Section("Общие") {
                 Toggle("Запускать при входе в систему", isOn: Binding(
@@ -29,16 +34,42 @@ struct SettingsView: View {
             }
 
             Section {
+                FolderField(
+                    title: "Папка проектов",
+                    path: $settings.projectsDirectory,
+                    defaultPath: AppSettings.defaultProjectsDirectory
+                )
+                FolderField(
+                    title: "Папка _daily-report",
+                    path: $settings.dailyReportDirectory,
+                    defaultPath: AppSettings.defaultDailyReportDirectory
+                )
+            } header: {
+                Text("Пути")
+            } footer: {
+                Text("Данные о проектах берутся из report.py в папке _daily-report.")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+
+            Section {
                 LabeledContent("Версия", value: Self.version)
+                LabeledContent("Журнал") {
+                    Button("Показать в Finder") {
+                        NSWorkspace.shared.activateFileViewerSelecting([AppLog.fileURL])
+                    }
+                }
             }
         }
         .formStyle(.grouped)
-        .frame(width: 460)
+        .frame(width: 520)
         .fixedSize(horizontal: false, vertical: true)
         .onAppear { loginItem.refresh() }
         .onReceive(NotificationCenter.default.publisher(for: NSApplication.didBecomeActiveNotification)) { _ in
             loginItem.refresh()
         }
+        .onChange(of: settings.projectsDirectory) { Task { await store.refresh() } }
+        .onChange(of: settings.dailyReportDirectory) { Task { await store.refresh() } }
     }
 
     private static var version: String {
@@ -46,5 +77,46 @@ struct SettingsView: View {
         let short = info?["CFBundleShortVersionString"] as? String ?? "?"
         let build = info?["CFBundleVersion"] as? String ?? "?"
         return "\(short) (\(build))"
+    }
+}
+
+/// A folder path with «Выбрать…» (NSOpenPanel) and a reset to the default.
+private struct FolderField: View {
+    let title: String
+    @Binding var path: String
+    let defaultPath: String
+
+    var body: some View {
+        LabeledContent(title) {
+            HStack(spacing: 6) {
+                Text((path as NSString).abbreviatingWithTildeInPath)
+                    .lineLimit(1)
+                    .truncationMode(.middle)
+                    .foregroundStyle(FileManager.default.fileExists(atPath: path) ? .primary : Color.red)
+                    .help(path)
+                Button("Выбрать…", action: choose)
+                if path != defaultPath {
+                    Button {
+                        path = defaultPath
+                    } label: {
+                        Image(systemName: "arrow.uturn.backward")
+                    }
+                    .buttonStyle(.borderless)
+                    .help("По умолчанию: \((defaultPath as NSString).abbreviatingWithTildeInPath)")
+                }
+            }
+        }
+    }
+
+    private func choose() {
+        let panel = NSOpenPanel()
+        panel.canChooseDirectories = true
+        panel.canChooseFiles = false
+        panel.allowsMultipleSelection = false
+        panel.directoryURL = URL(fileURLWithPath: path)
+        NSApp.activate()
+        if panel.runModal() == .OK, let url = panel.url {
+            path = url.path
+        }
     }
 }

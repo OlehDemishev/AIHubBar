@@ -1,13 +1,19 @@
 import OSLog
 import SwiftUI
 
-/// Content of the menu bar panel. Sessions, projects and commands are added in later stages.
+/// Content of the menu bar panel. Sessions and commands are added in later stages.
 struct MenuPanelView: View {
     @Environment(\.openSettings) private var openSettings
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(ProjectStore.self) private var store
 
     /// Drives the entrance animation; reset when the panel closes so it replays on every open.
     @State private var isShown = false
+    @State private var expanded: Set<String> = []
+    @State private var listHeight: CGFloat = 0
+    @State private var window: NSWindow?
+
+    private static let maxListHeight: CGFloat = 560
 
     private let log = Logger(subsystem: "com.demishev.claudepult", category: "panel")
 
@@ -18,7 +24,7 @@ struct MenuPanelView: View {
 
             Divider()
 
-            emptyState
+            content
                 .revealed(isShown, step: 1, reduceMotion: reduceMotion)
 
             Divider()
@@ -36,12 +42,28 @@ struct MenuPanelView: View {
             .revealed(isShown, step: 2, reduceMotion: reduceMotion)
         }
         .frame(width: 420)
+        .background(WindowReader { window = $0 })
         .onAppear {
             log.debug("Panel shown")
             isShown = true
+            store.refreshIfStale()
+            snapshotIfEnabled()
         }
         .onDisappear {
             isShown = false
+        }
+        .onChange(of: expanded) { snapshotIfEnabled() }
+        .onChange(of: store.lastUpdated) { snapshotIfEnabled() }
+    }
+
+    private func snapshotIfEnabled() {
+        guard DebugSnapshot.isEnabled else { return }
+        if let name = DebugSnapshot.projectToExpand, let project = store.projects.first(where: { $0.name == name }) {
+            expanded.insert(project.id)
+        }
+        Task {
+            try? await Task.sleep(for: .seconds(1))
+            DebugSnapshot.capture(window)
         }
     }
 
@@ -54,22 +76,129 @@ struct MenuPanelView: View {
             Text("ClaudePult")
                 .font(.headline)
             Spacer()
+            if let lastUpdated = store.lastUpdated {
+                TimelineView(.periodic(from: .now, by: 30)) { context in
+                    Text("обновлено \(RelativeTime.ago(lastUpdated, now: context.date))")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+            }
+            Button {
+                Task { await store.refresh() }
+            } label: {
+                if store.isRefreshing {
+                    ProgressView().controlSize(.small)
+                } else {
+                    Image(systemName: "arrow.clockwise")
+                }
+            }
+            .buttonStyle(.borderless)
+            .frame(width: 18, height: 18)
+            .disabled(store.isRefreshing)
+            .help("Обновить")
+            .keyboardShortcut("r", modifiers: .command)
         }
         .padding(.horizontal, 14)
         .padding(.vertical, 10)
     }
 
-    private var emptyState: some View {
+    @ViewBuilder
+    private var content: some View {
+        if let error = store.lastError, store.report != nil {
+            Label(error, systemImage: "exclamationmark.triangle")
+                .font(.caption)
+                .foregroundStyle(.orange)
+                .padding(.horizontal, 14)
+                .padding(.top, 8)
+        }
+
+        if store.report == nil {
+            placeholder
+        } else if store.projects.isEmpty {
+            EmptyStateView(
+                systemImage: "tray",
+                title: "Проектов нет",
+                message: "В папке проектов не найдено git-репозиториев."
+            )
+        } else {
+            projectList
+        }
+    }
+
+    @ViewBuilder
+    private var placeholder: some View {
+        if let error = store.lastError {
+            VStack(spacing: 10) {
+                EmptyStateView(systemImage: "exclamationmark.triangle", title: "Не удалось загрузить проекты", message: error)
+                Button("Повторить") { Task { await store.refresh() } }
+                    .disabled(store.isRefreshing)
+            }
+            .padding(.bottom, 16)
+        } else {
+            VStack(spacing: 10) {
+                ProgressView()
+                Text("Загружаю проекты…")
+                    .font(.callout)
+                    .foregroundStyle(.secondary)
+            }
+            .padding(.vertical, 32)
+            .frame(maxWidth: .infinity)
+        }
+    }
+
+    private var projectList: some View {
+        ScrollView {
+            VStack(alignment: .leading, spacing: 2) {
+                ForEach(store.projects) { project in
+                    ProjectRowView(project: project, isExpanded: expandedBinding(project.id))
+                }
+            }
+            .padding(6)
+            .background(GeometryReader { proxy in
+                Color.clear.preference(key: ContentHeightKey.self, value: proxy.size.height)
+            })
+        }
+        .scrollBounceBehavior(.basedOnSize)
+        .frame(height: min(max(listHeight, 1), Self.maxListHeight))
+        .onPreferenceChange(ContentHeightKey.self) { [$listHeight] height in
+            $listHeight.wrappedValue = height
+        }
+    }
+
+    private func expandedBinding(_ id: String) -> Binding<Bool> {
+        Binding(
+            get: { expanded.contains(id) },
+            set: { isOn in
+                if isOn { expanded.insert(id) } else { expanded.remove(id) }
+            }
+        )
+    }
+}
+
+private struct ContentHeightKey: PreferenceKey {
+    static let defaultValue: CGFloat = 0
+    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
+        value = max(value, nextValue())
+    }
+}
+
+private struct EmptyStateView: View {
+    let systemImage: String
+    let title: String
+    let message: String
+
+    var body: some View {
         VStack(spacing: 8) {
-            Image(systemName: "tray")
+            Image(systemName: systemImage)
                 .font(.system(size: 28, weight: .light))
                 .foregroundStyle(.tertiary)
-            Text("Пока пусто")
+            Text(title)
                 .font(.headline)
-            Text("Здесь появятся сессии Claude Code и проекты из ~/Projects.")
+            Text(message)
                 .font(.callout)
                 .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)
+                .fixedSize(horizontal: false, vertical: true)
         }
         .padding(.vertical, 28)
         .padding(.horizontal, 24)
