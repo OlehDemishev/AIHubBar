@@ -1,6 +1,6 @@
 import ServiceManagement
 import Testing
-@testable import ClaudeBar
+@testable import ClaudePult
 
 struct LoginItemStateTests {
     @Test(arguments: [

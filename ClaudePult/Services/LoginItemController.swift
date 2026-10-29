@@ -29,12 +29,12 @@ enum LoginItemState: Equatable, Sendable {
         case .enabled, .disabled:
             nil
         case .requiresApproval:
-            "Нужно разрешить ClaudeBar в Системных настройках → Основные → Объекты входа."
+            "Нужно разрешить ClaudePult в Системных настройках → Основные → Объекты входа."
         }
     }
 }
 
-/// Registers ClaudeBar as a login item via `SMAppService.mainApp`.
+/// Registers ClaudePult as a login item via `SMAppService.mainApp`.
 @MainActor
 @Observable
 final class LoginItemController {
@@ -42,7 +42,7 @@ final class LoginItemController {
     private(set) var lastError: String?
 
     private let service = SMAppService.mainApp
-    private let log = Logger(subsystem: "com.demishev.claudebar", category: "login-item")
+    private let log = Logger(subsystem: "com.demishev.claudepult", category: "login-item")
 
     init() {
         state = LoginItemState(SMAppService.mainApp.status)

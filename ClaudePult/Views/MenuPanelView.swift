@@ -9,7 +9,7 @@ struct MenuPanelView: View {
     /// Drives the entrance animation; reset when the panel closes so it replays on every open.
     @State private var isShown = false
 
-    private let log = Logger(subsystem: "com.demishev.claudebar", category: "panel")
+    private let log = Logger(subsystem: "com.demishev.claudepult", category: "panel")
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -51,7 +51,7 @@ struct MenuPanelView: View {
                 .font(.title3)
                 .foregroundStyle(.orange)
                 .symbolEffect(.bounce, options: .nonRepeating, value: reduceMotion ? false : isShown)
-            Text("ClaudeBar")
+            Text("ClaudePult")
                 .font(.headline)
             Spacer()
         }

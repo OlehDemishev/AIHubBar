@@ -1,4 +1,4 @@
-# ClaudeBar
+# ClaudePult
 
 Native macOS menu bar app (no Dock icon): a control panel for the projects in `~/Projects` and for Claude Code sessions. Full specification: [docs/SPEC.md](docs/SPEC.md). Progress: [docs/STATUS.md](docs/STATUS.md). Design decisions: [DECISIONS.md](DECISIONS.md).
 
@@ -16,7 +16,7 @@ Current stage: **1 — skeleton**. The menu bar icon opens an empty panel with �
 scripts/build-and-install.sh
 ```
 
-Generates `ClaudeBar.xcodeproj` from `project.yml`, builds Release, installs to `~/Applications/ClaudeBar.app` (replacing the old copy) and relaunches the app. Options:
+Generates `ClaudePult.xcodeproj` from `project.yml`, builds Release, installs to `~/Applications/ClaudePult.app` (replacing the old copy) and relaunches the app. Options:
 
 - `--test` — run unit tests before building
 - `--no-launch` — install without launching
@@ -27,28 +27,28 @@ The app is signed ad-hoc; no Apple Developer account is needed.
 
 ```bash
 xcodegen generate
-xcodebuild test -project ClaudeBar.xcodeproj -scheme ClaudeBar -destination 'platform=macOS,arch=arm64'
+xcodebuild test -project ClaudePult.xcodeproj -scheme ClaudePult -destination 'platform=macOS,arch=arm64'
 ```
 
-`ClaudeBar.xcodeproj` and `ClaudeBar/Info.plist` are generated from `project.yml` and are not committed — edit `project.yml` instead.
+`ClaudePult.xcodeproj` and `ClaudePult/Info.plist` are generated from `project.yml` and are not committed — edit `project.yml` instead.
 
 Layout:
 
-- `ClaudeBar/App` — app entry point, command-line mode
-- `ClaudeBar/Views` — SwiftUI views (menu panel, settings)
-- `ClaudeBar/Services` — system integrations (login item)
-- `ClaudeBarTests` — Swift Testing unit tests
+- `ClaudePult/App` — app entry point, command-line mode
+- `ClaudePult/Views` — SwiftUI views (menu panel, settings)
+- `ClaudePult/Services` — system integrations (login item)
+- `ClaudePultTests` — Swift Testing unit tests
 
 ## Command line
 
 The app binary accepts headless commands (used by scripts and checks; the UI is not started):
 
 ```bash
-~/Applications/ClaudeBar.app/Contents/MacOS/ClaudeBar --login-item status
+~/Applications/ClaudePult.app/Contents/MacOS/ClaudePult --login-item status
 ```
 
 | Command | Effect |
 |---|---|
 | `--login-item status` | print login item state (`enabled`, `disabled`, `requiresApproval`) |
-| `--login-item on` | register ClaudeBar as a login item |
+| `--login-item on` | register ClaudePult as a login item |
 | `--login-item off` | unregister it |
