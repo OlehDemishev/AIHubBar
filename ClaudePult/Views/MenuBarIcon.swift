@@ -1,6 +1,24 @@
 import AppKit
 import SwiftUI
 
+/// The menu bar label. It is the one view that lives as long as the app, so it also opens windows
+/// requested by background work (the cleanup check output) when the panel is closed.
+struct MenuBarLabel: View {
+    let showsAlert: Bool
+    let waitingCount: Int
+
+    @Environment(CommandStore.self) private var commands
+    @Environment(\.openWindow) private var openWindow
+
+    var body: some View {
+        MenuBarIcon(showsAlert: showsAlert, waitingCount: waitingCount)
+            .onChange(of: commands.cleanupWindowRequest) {
+                NSApp.activate()
+                openWindow(id: "cleanup-output")
+            }
+    }
+}
+
 /// Menu bar icon: the sparkle symbol, a red dot when any project's health is red,
 /// and the number of sessions waiting for Oleh's answer.
 struct MenuBarIcon: View {
