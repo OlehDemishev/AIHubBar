@@ -1,11 +1,11 @@
 # Status
 
 <!-- summary:start -->
-**Stage:** Stage 5 of 8 in review — background mode (stages 1–4 done)
+**Stage:** Stage 5 of 8 done — projects, Claude in Terminal and background, sessions via hooks
 **Updated:** 2026-10-29
 
 **Now:**
-- PR `feat/background` (stage 5: claude -p with permission rules, time limit, stop, log window, notification + Telegram, Terminal/Фон choice) — waiting for review
+- nothing in progress
 
 **Next:**
 - Stage 6 — Common commands and disk: report, summary, latest report, cleanup (check/run), disk indicator
@@ -13,7 +13,7 @@
 - Stage 8 — Subscription limits (spec 2.8): limits in menu bar and panel, notifications, forecast, per-project token breakdown, background-mode guard, `usage.json`, widgets if simple
 
 **Needs Oleh:**
-- review and merge PR `feat/background`; check that the Telegram test message «✅ repo: Тест ClaudePult…» arrived
+- check that the Telegram test message «✅ repo: Тест ClaudePult…» arrived; try «Фон» on a real project
 - hooks are installed in ~/.claude/settings.json (with your OK); backup of the original: ~/.claude/settings.json.claudepult-backup-20261029T192827
 - check that the «Claude ждёт ответа» macOS notification arrives (allow notifications for ClaudePult if asked) — not visible to automation
 - try «Своя задача…» on a real project (if macOS asks for permission to control Terminal, allow it)
