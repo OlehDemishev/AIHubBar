@@ -1,11 +1,11 @@
 # Status
 
 <!-- summary:start -->
-**Stage:** Stage 3 of 8 in review — Claude commands in Terminal (stages 1–2 done)
+**Stage:** Stage 3 of 8 done — projects list and Claude commands in Terminal
 **Updated:** 2026-10-29
 
 **Now:**
-- PR `feat/terminal-launch` (stage 3: Claude commands in Terminal, worktree when the folder is busy, worktree removal) — waiting for review
+- nothing in progress
 
 **Next:**
 - Stage 4 — Sessions: hook script, install/remove hooks in ~/.claude/settings.json with backup, sessions panel, states, "waiting" notification, icon badge
@@ -15,7 +15,7 @@
 - Stage 8 — Subscription limits (spec 2.8): limits in menu bar and panel, notifications, forecast, per-project token breakdown, background-mode guard, `usage.json`, widgets if simple
 
 **Needs Oleh:**
-- review and merge PR `feat/terminal-launch`; try «Своя задача…» on a real project (if macOS asks for permission to control Terminal, allow it)
+- try «Своя задача…» on a real project (if macOS asks for permission to control Terminal, allow it)
 - open the panel and check colours (dots, badges) and the Terminal / Finder / GitHub buttons — automation cannot see or click them
 - delete or archive the old repo `OlehDemishev/ClaudeBar` (its code is now in `OlehDemishev/ClaudePult`)
 - turn on «Запускать при входе в систему» in Settings if wanted — it is left off
