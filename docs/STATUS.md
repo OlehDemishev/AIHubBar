@@ -1,18 +1,18 @@
 # Status
 
 <!-- summary:start -->
-**Stage:** Stage 6 of 8 in review — common commands and disk (stages 1–5 done)
+**Stage:** Stage 6 of 8 done — projects, Claude in Terminal and background, sessions, common commands
 **Updated:** 2026-10-29
 
 **Now:**
-- PR `feat/common-commands` (stage 6: report, summary, latest report, cleanup check/run, disk indicator) — waiting for review
+- nothing in progress
 
 **Next:**
 - Stage 7 — Polish: Help window + help.txt, manual run of all scenarios, README update, app icon
 - Stage 8 — Subscription limits (spec 2.8): limits in menu bar and panel, notifications, forecast, per-project token breakdown, background-mode guard, `usage.json`, widgets if simple
 
 **Needs Oleh:**
-- review and merge PR `feat/common-commands`; free disk space is 15.7 GB (< 20 GB) — run «Очистка: выполнить» when no build is running (my live run was skipped by cleanup.py because a build was running)
+- free disk space is 15.7 GB (< 20 GB) — run «Очистка: выполнить» when no build is running (my live run was skipped by cleanup.py because a build was running)
 - check that the Telegram test message «✅ repo: Тест ClaudePult…» arrived; try «Фон» on a real project
 - hooks are installed in ~/.claude/settings.json (with your OK); backup of the original: ~/.claude/settings.json.claudepult-backup-20261029T192827
 - check that the «Claude ждёт ответа» macOS notification arrives (allow notifications for ClaudePult if asked) — not visible to automation
