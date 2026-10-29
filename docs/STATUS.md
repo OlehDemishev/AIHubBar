@@ -1,17 +1,17 @@
 # Status
 
 <!-- summary:start -->
-**Stage:** All 8 spec stages done (widgets deferred) + settings tabs and appearance
+**Stage:** All 8 spec stages done incl. widgets (in review) + settings tabs and appearance
 **Updated:** 2026-10-29
 
 **Now:**
-- nothing in progress
+- PR `feat/widgets` (desktop widget «Лимиты Claude», small and medium) — waiting for review
 
 **Next:**
-- Widgets (WidgetKit: small ring, medium session + week) — need an App Group, i.e. a real signing team instead of ad-hoc signing (see DECISIONS)
 - Fix whatever Oleh finds in docs/CHECKLIST.md
 
 **Needs Oleh:**
+- review and merge PR `feat/widgets`
 - try the «Внешний вид» settings tab (theme, width, density not checked by eye)
 - optional, in _daily-report (not changed by ClaudePult): report.py/bot.py could read `~/Library/Application Support/ClaudePult/usage.json` (`five_hour`, `seven_day`, `updated`) for a /limits bot command or a limits line in the report
 - go through the «Oleh» rows of docs/CHECKLIST.md (buttons inside the panel, Settings, notifications, Telegram messages) — automation cannot click inside ClaudePult
@@ -19,6 +19,12 @@
 - hooks are installed in ~/.claude/settings.json; backup of the original: ~/.claude/settings.json.claudepult-backup-20261029T192827
 - delete or archive the old repo `OlehDemishev/ClaudeBar`; turn on start at login if wanted
 <!-- summary:end -->
+
+## 2026-10-29 — Widgets (branch `feat/widgets`)
+
+Done: WidgetKit extension `ClaudePultWidget` embedded in the app: «Лимиты Claude» small (session ring, reset countdown) and medium (session and week bars, resets, last update). Sandboxed with a read-only exception for `~/Library/Application Support/ClaudePult/`, reads `usage.json`; ClaudePult reloads the widget after every usage update. Works with ad-hoc signing — the stage 8 note that widgets need an App Group was wrong (corrected in DECISIONS). Help and README mention the widget. Also: the CLI background launch keeps its RunStore in a variable (Release-build warning gone).
+Checked: `scripts/build-and-install.sh --test` — 82 tests green; no compiler warnings. Live: `pluginkit` lists the extension; NotificationCenter publishes the ClaudePult container in the widget gallery; Oleh placed the widget and it shows the percentages; the widget log shows it reading usage.json (29 % → 30 %, same as the file). The widget target has no unit tests (its decoding mirrors `UsageFile`, which is tested). CI not set up; checks run locally.
+Left: nothing known.
 
 ## 2026-10-29 — Settings tabs and appearance (branch `feat/settings-appearance`)
 

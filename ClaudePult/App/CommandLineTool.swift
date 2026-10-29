@@ -214,8 +214,9 @@ enum CommandLineTool {
         }
         guard prepared == 0, let (path, worktree) = folder.value else { return prepared }
         do {
-            let settings = AppSettings()
-            let run = try RunStore(settings: settings).launch(
+            // This process exits right away; the running app picks the run up and reports its result.
+            let store = RunStore(settings: AppSettings())
+            let run = try store.launch(
                 command: request.command, project: (request.projectPath as NSString).lastPathComponent,
                 projectPath: request.projectPath, folder: path, worktreeBranch: worktree?.branch,
                 claudePath: request.claudePath

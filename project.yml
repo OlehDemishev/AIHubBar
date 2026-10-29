@@ -48,6 +48,39 @@ targets:
         GENERATE_INFOPLIST_FILE: NO
         COMBINE_HIDPI_IMAGES: YES
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+    dependencies:
+      - target: ClaudePultWidget
+
+  # Desktop / Notification Center widget: subscription limits from usage.json.
+  ClaudePultWidget:
+    type: app-extension
+    platform: macOS
+    sources:
+      - path: ClaudePultWidget
+    info:
+      path: ClaudePultWidget/Info.plist
+      properties:
+        CFBundleDisplayName: ClaudePult
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        CFBundleDevelopmentRegion: ru
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.widgetkit-extension
+    entitlements:
+      path: ClaudePultWidget/ClaudePultWidget.entitlements
+      properties:
+        com.apple.security.app-sandbox: true
+        # Widgets must be sandboxed; this read-only exception lets the widget read usage.json without an
+        # App Group (which needs a signing team; the project is signed ad-hoc).
+        com.apple.security.temporary-exception.files.home-relative-path.read-only:
+          - /Library/Application Support/ClaudePult/
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.demishev.claudepult.widget
+        PRODUCT_NAME: ClaudePultWidget
+        GENERATE_INFOPLIST_FILE: NO
+        ENABLE_HARDENED_RUNTIME: NO
+        SKIP_INSTALL: YES
 
   ClaudePultTests:
     type: bundle.unit-test

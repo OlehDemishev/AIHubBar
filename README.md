@@ -21,6 +21,8 @@ Data refreshes at launch, on panel open when older than 60 s, every 5 min (`--no
 
 **Команды** — through the `_daily-report` tools, with a spinner, a result line and a notification: «Отчёт сейчас» (AI report for 24 h to Telegram), «Быстрая сводка» (no AI), «Последний отчёт» (`reports/latest.html`), «Очистка: проверить» (`cleanup.py --dry-run`, output in a window), «Очистка: выполнить» (`cleanup.py --now`, after a confirmation). Free disk space next to them, orange below 20 GB.
 
+**Widget** «Лимиты Claude» (right-click the desktop → «Изменить виджеты…» → ClaudePult): small — session % ring with the reset countdown; medium — session and week bars. It reads `usage.json`, refreshed whenever ClaudePult updates the limits.
+
 ## Install
 
 Requirements: macOS 14+ (developed on macOS 27, Apple Silicon), Xcode with Swift 6 (developed with 27.1), `brew install xcodegen`.
