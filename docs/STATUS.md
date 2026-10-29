@@ -1,11 +1,11 @@
 # Status
 
 <!-- summary:start -->
-**Stage:** Stage 8 of 8 in review — subscription limits; all spec stages built
+**Stage:** All 8 spec stages done (widgets deferred); next: settings tabs and appearance
 **Updated:** 2026-10-29
 
 **Now:**
-- PR `feat/usage-limits` (stage 8: limits in menu bar and panel, forecast, alerts, per-project breakdown, background guard, usage.json) — waiting for review
+- nothing in progress
 
 **Next:**
 - Settings: split into tabs (general, projects, Claude, sessions, limits, commands) and add appearance settings — panel text size, density, which blocks to show (Oleh's request)
@@ -13,7 +13,6 @@
 - Fix whatever Oleh finds in docs/CHECKLIST.md
 
 **Needs Oleh:**
-- review and merge PR `feat/usage-limits`
 - optional, in _daily-report (not changed by ClaudePult): report.py/bot.py could read `~/Library/Application Support/ClaudePult/usage.json` (`five_hour`, `seven_day`, `updated`) for a /limits bot command or a limits line in the report
 - go through the «Oleh» rows of docs/CHECKLIST.md (buttons inside the panel, Settings, notifications, Telegram messages) — automation cannot click inside ClaudePult
 - free disk space is ~12 GB (< 20 GB): «Очистка: выполнить» when no build is running
