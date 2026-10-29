@@ -35,6 +35,7 @@ targets:
         LSMinimumSystemVersion: $(MACOSX_DEPLOYMENT_TARGET)
         LSApplicationCategoryType: public.app-category.developer-tools
         NSHumanReadableCopyright: "© Oleh Demishev"
+        NSAppleEventsUsageDescription: "ClaudePult открывает окна Терминала и запускает в них Claude Code для ваших проектов."
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.demishev.claudepult

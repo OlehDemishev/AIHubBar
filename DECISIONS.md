@@ -2,6 +2,32 @@
 
 Decisions made where the spec is silent or does not match reality. Newest at the top.
 
+## 2026-10-29 — Stage 3 (Claude in Terminal)
+
+**Claude CLI.** `claude [prompt]` (2.1.312, `/opt/homebrew/bin/claude`) starts an interactive session with the prompt as the first message — no extra flags needed. The binary is found in `/opt/homebrew/bin`, `/usr/local/bin`, `~/.local/bin`, `~/.claude/local` unless Settings give a path; the absolute path is typed into Terminal so the user's shell PATH does not matter.
+
+**Prompts** are the spec's texts verbatim, also in a worktree. There the branch `claude/<slug>` already exists fresh from `origin/main`; if Claude makes another branch per the prompt, nothing is lost.
+
+**Terminal via `osascript` with argv.** The command line is passed as an argument (`do script (item 1 of argv)`), not spliced into AppleScript source, so only shell quoting is needed. Shell quoting uses ANSI-C `$'…'` (zsh and bash): quotes, backslashes and newlines in Oleh's task survive and the typed line never contains a raw line break. Tested by round-tripping a nasty string through real `/bin/zsh` and `/bin/bash`. A fish login shell would not understand `$'…'` — not the case on this Mac. If Terminal is not running, the command goes into the window Terminal opens on launch instead of a second one. `osascript` runs async with a 180 s timeout (the first run waits for the permission prompt).
+
+**Automation permission.** `NSAppleEventsUsageDescription` explains the prompt. Error -1743/-1744 shows a message with a button to System Settings → Automation. After a rebuild (new ad-hoc signature) macOS did not ask again (checked).
+
+**Busy folder without hooks.** Hooks arrive in stage 4, so for now a folder is "busy" when a live Claude Code process (`claude` or `claude.exe`, from `ps`) has its working directory (`lsof -d cwd`) in the project or below it — except inside `.claude/worktrees/`. This also catches sessions started by hand and by the Claude desktop app. Stage 4 can combine it with hook data.
+
+**Worktree naming.** `.claude/worktrees/cb-<slug>` (spec) on branch `claude/<slug>` — the prefix Claude Code already uses in these projects; a type prefix (`feat/`, `fix/`) cannot be guessed from free text. The slug comes from the task text, or for «Следующий шаг» from the first Next item: transliterated to Latin, lowercase words joined by `-`, at most 32 characters; `-2`, `-3`… if the folder or branch exists. `git fetch <remote> <branch>` runs first; if offline, the local `origin/main` is used.
+
+**«Завершить сессию» never moves to a worktree** — it is about the work already in the folder. When the folder is busy it asks «Запустить всё равно».
+
+**Worktree removal.** The first click checks: no uncommitted changes, and HEAD is merged into the base branch or its upstream has no unpushed commits; the second click runs `git worktree remove` (no `--force`, so git refuses anything dirty anyway). The branch is kept. Detached worktrees can only be removed when merged.
+
+**Mode «Терминал / Фон».** Only Terminal exists until stage 5, so the commands launch directly; the mode question, its default in Settings and «Запомнить выбор» come with the background mode.
+
+**Layout.** In an expanded project the actions (Claude commands, Terminal / Finder / GitHub) come first and STATUS below — with a long STATUS the buttons were below the fold.
+
+**Command line** `--claude next|task|finish <project>` (with `--print` and `--claude-path`) runs the same launcher as the panel; used for checks with `/bin/echo` instead of `claude`, since the panel cannot be clicked by automation.
+
+**Log.** Unit tests no longer write to the app log (they run inside the app); command-line mode flushes the log before exiting.
+
 ## 2026-10-29 — Stage 2 (projects)
 
 **Running report.py.** `/usr/bin/env python3 report.py --json --projects-dir <folder> [--no-fetch]`, working directory `_daily-report`, like the script's own shebang. An app launched from Finder or at login gets only the system PATH, while report.py calls `git` and `gh` (Homebrew), so the child PATH is prefixed with `/opt/homebrew/bin`, `/opt/homebrew/sbin`, `/usr/local/bin`, `~/.local/bin`; `PYTHONIOENCODING=utf-8` for Cyrillic output. Timeouts: 90 s without fetch (a run takes ~6 s here), 300 s with fetch. `--projects-dir` is passed from Settings so the app does not depend on report.py's config.json default.

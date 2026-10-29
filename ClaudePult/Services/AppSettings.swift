@@ -15,6 +15,11 @@ final class AppSettings {
         didSet { defaults.set(dailyReportDirectory, forKey: Keys.dailyReportDirectory) }
     }
 
+    /// Path to the `claude` CLI; empty means auto-detect (see `ClaudeLocator`).
+    var claudePath: String {
+        didSet { defaults.set(claudePath, forKey: Keys.claudePath) }
+    }
+
     static let defaultProjectsDirectory = NSHomeDirectory() + "/Projects"
     static let defaultDailyReportDirectory = NSHomeDirectory() + "/Projects/_daily-report"
 
@@ -22,6 +27,7 @@ final class AppSettings {
         self.defaults = defaults
         projectsDirectory = defaults.string(forKey: Keys.projectsDirectory) ?? Self.defaultProjectsDirectory
         dailyReportDirectory = defaults.string(forKey: Keys.dailyReportDirectory) ?? Self.defaultDailyReportDirectory
+        claudePath = defaults.string(forKey: Keys.claudePath) ?? ""
     }
 
     var reportScript: String {
@@ -31,5 +37,6 @@ final class AppSettings {
     private enum Keys {
         static let projectsDirectory = "projectsDirectory"
         static let dailyReportDirectory = "dailyReportDirectory"
+        static let claudePath = "claudePath"
     }
 }

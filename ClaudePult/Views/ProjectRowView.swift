@@ -90,9 +90,28 @@ private struct ProjectDetailsView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
+            // Actions first: a long STATUS would otherwise push them below the fold.
+            ClaudeActionsView(project: project)
+
+            HStack(spacing: 6) {
+                ActionButton(title: "Терминал", systemImage: "terminal") {
+                    ProjectActions.openInTerminal(project.path)
+                }
+                ActionButton(title: "Finder", systemImage: "folder") {
+                    ProjectActions.openInFinder(project.path)
+                }
+                if let github = GitRemote.webURL(project.remote) {
+                    ActionButton(title: "GitHub", systemImage: "safari") {
+                        ProjectActions.open(github)
+                    }
+                }
+            }
+
+            Divider()
+
             if let summary = project.status?.summary {
                 if let stage = summary.stage, !stage.isEmpty {
-                    Text(stage)
+                    Text(Markdown.inline(stage))
                         .font(.callout)
                         .fixedSize(horizontal: false, vertical: true)
                 }
@@ -127,20 +146,9 @@ private struct ProjectDetailsView: View {
                 }
             }
 
-            HStack(spacing: 6) {
-                ActionButton(title: "Терминал", systemImage: "terminal") {
-                    ProjectActions.openInTerminal(project.path)
-                }
-                ActionButton(title: "Finder", systemImage: "folder") {
-                    ProjectActions.openInFinder(project.path)
-                }
-                if let github = GitRemote.webURL(project.remote) {
-                    ActionButton(title: "GitHub", systemImage: "safari") {
-                        ProjectActions.open(github)
-                    }
-                }
+            if !project.worktrees.isEmpty {
+                WorktreeListView(project: project)
             }
-            .padding(.top, 2)
         }
     }
 }
@@ -193,9 +201,10 @@ private struct PullRequestRow: View {
     }
 }
 
-private struct ActionButton: View {
+struct ActionButton: View {
     let title: String
     let systemImage: String
+    var isProminent = false
     let action: () -> Void
 
     var body: some View {
@@ -204,6 +213,7 @@ private struct ActionButton: View {
                 .font(.caption)
         }
         .buttonStyle(.bordered)
+        .tint(isProminent ? .orange : nil)
         .controlSize(.small)
     }
 }

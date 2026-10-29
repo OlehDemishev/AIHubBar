@@ -1,0 +1,163 @@
+import SwiftUI
+
+/// «Claude» block of an expanded project: the three commands, the custom-task field and the launch result.
+struct ClaudeActionsView: View {
+    let project: Project
+
+    @Environment(LaunchController.self) private var launcher
+    @State private var isEditingTask = false
+    @State private var task = ""
+    @FocusState private var taskFocused: Bool
+
+    private var isWorking: Bool { launcher.working.contains(project.id) }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            HStack(spacing: 6) {
+                Text("Claude")
+                    .font(.caption.weight(.semibold))
+                    .foregroundStyle(.secondary)
+                if isWorking {
+                    ProgressView().controlSize(.mini)
+                }
+            }
+
+            HStack(spacing: 6) {
+                ActionButton(title: "Следующий шаг", systemImage: "forward.fill", isProminent: true) {
+                    launcher.launch(.nextStep, in: project)
+                }
+                .help(project.status?.summary?.next.first.map { "Первый пункт Next: \($0)" } ?? "Первый пункт Next из STATUS.md")
+                ActionButton(title: "Своя задача…", systemImage: "text.cursor") {
+                    withAnimation(.snappy(duration: 0.2)) { isEditingTask.toggle() }
+                    taskFocused = isEditingTask
+                }
+                ActionButton(title: "Завершить", systemImage: "checkmark.circle") {
+                    launcher.launch(.finishSession, in: project)
+                }
+                .help("Завершить сессию: проверки, коммит, push, PR и STATUS по разделу «Конец сессии»")
+            }
+            .disabled(isWorking)
+
+            if isEditingTask {
+                taskEditor
+                    .transition(.opacity.combined(with: .offset(y: -4)))
+            }
+
+            if let message = launcher.messages[project.id] {
+                messageView(message)
+                    .transition(.opacity)
+            }
+        }
+        .animation(.snappy(duration: 0.2), value: launcher.messages[project.id])
+    }
+
+    private var taskEditor: some View {
+        VStack(alignment: .trailing, spacing: 6) {
+            TextField("Что сделать в \(project.name)?", text: $task, axis: .vertical)
+                .lineLimit(2...6)
+                .textFieldStyle(.roundedBorder)
+                .font(.callout)
+                .focused($taskFocused)
+            HStack(spacing: 6) {
+                Button("Отмена") {
+                    withAnimation(.snappy(duration: 0.2)) { isEditingTask = false }
+                }
+                .keyboardShortcut(.cancelAction)
+                Button("Запустить в Терминале") {
+                    launcher.launch(.customTask(task), in: project)
+                    task = ""
+                    withAnimation(.snappy(duration: 0.2)) { isEditingTask = false }
+                }
+                .keyboardShortcut(.return, modifiers: .command)
+                .buttonStyle(.borderedProminent)
+                .tint(.orange)
+                .disabled(task.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || isWorking)
+            }
+            .controlSize(.small)
+        }
+    }
+
+    private func messageView(_ message: LaunchController.Message) -> some View {
+        VStack(alignment: .leading, spacing: 4) {
+            Label {
+                Text(message.text).fixedSize(horizontal: false, vertical: true)
+            } icon: {
+                Image(systemName: message.isError ? "exclamationmark.triangle.fill" : "info.circle")
+                    .foregroundStyle(message.isError ? .red : .secondary)
+            }
+            .font(.caption)
+
+            HStack(spacing: 6) {
+                if launcher.pendingConfirmation[project.id] != nil {
+                    Button("Запустить всё равно") { launcher.confirmPending(in: project) }
+                }
+                if message.isError, message.text.contains("Автоматизация") {
+                    Button("Открыть настройки") { LaunchController.openAutomationSettings() }
+                }
+                Button("Скрыть") { launcher.dismissMessage(for: project) }
+            }
+            .controlSize(.mini)
+        }
+    }
+}
+
+/// Worktrees of a project with «Удалить worktree» (only when clean and pushed; checked on click).
+struct WorktreeListView: View {
+    let project: Project
+
+    @Environment(LaunchController.self) private var launcher
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            Text("Worktree")
+                .font(.caption.weight(.semibold))
+                .foregroundStyle(.secondary)
+            ForEach(project.worktrees, id: \.path) { worktree in
+                row(worktree)
+            }
+        }
+    }
+
+    private func row(_ worktree: Worktree) -> some View {
+        let state = launcher.worktreeStates[worktree.path]
+        return VStack(alignment: .leading, spacing: 2) {
+            HStack(spacing: 6) {
+                Image(systemName: "arrow.triangle.branch").foregroundStyle(.tertiary)
+                VStack(alignment: .leading, spacing: 0) {
+                    Text((worktree.path as NSString).lastPathComponent)
+                        .lineLimit(1)
+                        .truncationMode(.middle)
+                    Text([worktree.branch, (worktree.dirty ?? 0) > 0 ? "изменено файлов: \(worktree.dirty ?? 0)" : nil]
+                        .compactMap { $0 }.joined(separator: " · "))
+                        .foregroundStyle(.secondary)
+                        .lineLimit(1)
+                }
+                Spacer(minLength: 4)
+                switch state {
+                case .checking, .removing:
+                    ProgressView().controlSize(.mini)
+                case .confirm:
+                    Button("Отмена") { launcher.cancelWorktreeRemoval(worktree) }
+                    Button("Удалить?") { launcher.removeWorktree(worktree, of: project) }
+                        .tint(.red)
+                case nil, .blocked:
+                    Button {
+                        launcher.removeWorktree(worktree, of: project)
+                    } label: {
+                        Image(systemName: "trash")
+                    }
+                    .help("Удалить worktree (только если нет незакоммиченного и ветка запушена)")
+                }
+            }
+            if case let .blocked(reason) = state {
+                Text(reason)
+                    .foregroundStyle(.orange)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .padding(.leading, 20)
+            }
+        }
+        .font(.caption)
+        .controlSize(.mini)
+        .buttonStyle(.bordered)
+    }
+}

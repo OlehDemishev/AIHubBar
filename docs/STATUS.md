@@ -1,14 +1,13 @@
 # Status
 
 <!-- summary:start -->
-**Stage:** Stage 2 of 8 done — project list from report.py (skeleton + projects)
+**Stage:** Stage 3 of 8 in review — Claude commands in Terminal (stages 1–2 done)
 **Updated:** 2026-10-29
 
 **Now:**
-- nothing in progress
+- PR `feat/terminal-launch` (stage 3: Claude commands in Terminal, worktree when the folder is busy, worktree removal) — waiting for review
 
 **Next:**
-- Stage 3 — Terminal launch: three Claude commands, prompts, AppleScript, Automation permission, worktree when the folder is busy
 - Stage 4 — Sessions: hook script, install/remove hooks in ~/.claude/settings.json with backup, sessions panel, states, "waiting" notification, icon badge
 - Stage 5 — Background mode: `claude -p` with permissions from spec 2.4, logs, stop, time limit, notifications and Telegram
 - Stage 6 — Common commands and disk: report, summary, latest report, cleanup (check/run), disk indicator
@@ -16,10 +15,17 @@
 - Stage 8 — Subscription limits (spec 2.8): limits in menu bar and panel, notifications, forecast, per-project token breakdown, background-mode guard, `usage.json`, widgets if simple
 
 **Needs Oleh:**
+- review and merge PR `feat/terminal-launch`; try «Своя задача…» on a real project (if macOS asks for permission to control Terminal, allow it)
 - open the panel and check colours (dots, badges) and the Terminal / Finder / GitHub buttons — automation cannot see or click them
 - delete or archive the old repo `OlehDemishev/ClaudeBar` (its code is now in `OlehDemishev/ClaudePult`)
 - turn on «Запускать при входе в систему» in Settings if wanted — it is left off
 <!-- summary:end -->
+
+## 2026-10-29 — Stage 3: Claude in Terminal (branch `feat/terminal-launch`)
+
+Done: «Claude» block in an expanded project — «Следующий шаг», «Своя задача…» (inline text field, ⌘↩), «Завершить» — opens a new Terminal window and starts `claude` with the spec prompt (osascript with the command as argv, `$'…'` shell quoting, single window when Terminal was not running). Busy folder = live Claude Code process with cwd in the project (ps + lsof); then next/task go to a new worktree `.claude/worktrees/cb-<slug>` on `claude/<slug>` from origin/main (fetched first) and the UI says so; finish asks to confirm. Worktree list with removal (clean + pushed/merged check, `git worktree remove`). Automation permission text and error with a link to System Settings. Settings: path to claude (auto-detect). CLI `--claude next|task|finish`. Actions moved to the top of the expanded project. Tests no longer write to the app log; CLI flushes the log.
+Checked: `scripts/build-and-install.sh --test` — 27 tests (63 cases) green incl. zsh/bash round-trip of the quoting and real git worktree create/remove in temp repos; no compiler warnings. Live with `--claude-path /bin/echo`: a new Terminal window opened in a folder with a space and printed the task with both quote kinds and a newline intact; `--claude next` on ClaudePult (busy — this session) created worktree `cb-next-step` on `claude/next-step` and opened Terminal there; `--claude finish` on the busy folder asked to confirm (exit 3); after a rebuild no new permission prompt; with Terminal not running only one window opened. Panel snapshot shows the Claude block. Test worktree, branch and Terminal windows removed. CI not set up; checks run locally.
+Left: not clicked in the real panel (automation cannot click the app's windows); a real `claude` session not started on purpose. Mode «Терминал / Фон» comes with stage 5.
 
 ## 2026-10-29 — Stage 2: projects (branch `feat/projects`)
 
