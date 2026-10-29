@@ -20,7 +20,11 @@ enum DebugSnapshot {
     static func capture(_ window: NSWindow?, name: String = "panel") {
         // Render the layer tree: SwiftUI draws symbols, shapes and colours into layers,
         // which `cacheDisplay(in:to:)` leaves out.
-        guard let window, let contentView = window.contentView else { return }
+        guard let window = window ?? NSApp.keyWindow ?? NSApp.windows.first(where: { $0.isVisible && $0.level == .popUpMenu || $0.className.contains("MenuBarExtra") }),
+              let contentView = window.contentView else {
+            AppLog.error("Snapshot \(name): no window")
+            return
+        }
         var candidates: [NSView] = [contentView]
         var parent = contentView.superview
         while let view = parent {

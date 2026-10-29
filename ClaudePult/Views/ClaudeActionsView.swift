@@ -16,7 +16,7 @@ struct ClaudeActionsView: View {
         VStack(alignment: .leading, spacing: 6) {
             HStack(spacing: 6) {
                 Text("Claude")
-                    .font(.caption.weight(.semibold))
+                    .scaledFont(.caption, weight: .semibold)
                     .foregroundStyle(.secondary)
                 if isWorking {
                     ProgressView().controlSize(.mini)
@@ -61,7 +61,7 @@ struct ClaudeActionsView: View {
     private func modeChooser(_ command: ClaudeCommand) -> some View {
         VStack(alignment: .leading, spacing: 6) {
             Text("Где запустить «\(command.title)»?")
-                .font(.caption.weight(.medium))
+                .scaledFont(.caption, weight: .medium)
             HStack(spacing: 6) {
                 ActionButton(title: LaunchMode.terminal.title, systemImage: "terminal", isProminent: true) {
                     launcher.choose(.terminal, remember: rememberMode, in: project)
@@ -77,7 +77,7 @@ struct ClaudeActionsView: View {
             }
             Toggle("Запомнить выбор", isOn: $rememberMode)
                 .toggleStyle(.checkbox)
-                .font(.caption)
+                .scaledFont(.caption)
         }
         .padding(8)
         .background(RoundedRectangle(cornerRadius: 6).fill(Color.primary.opacity(0.05)))
@@ -88,7 +88,7 @@ struct ClaudeActionsView: View {
             TextField("Что сделать в \(project.name)?", text: $task, axis: .vertical)
                 .lineLimit(2...6)
                 .textFieldStyle(.roundedBorder)
-                .font(.callout)
+                .scaledFont(.callout)
                 .focused($taskFocused)
             HStack(spacing: 6) {
                 Button("Отмена") {
@@ -117,7 +117,7 @@ struct ClaudeActionsView: View {
                 Image(systemName: message.isError ? "exclamationmark.triangle.fill" : "info.circle")
                     .foregroundStyle(message.isError ? .red : .secondary)
             }
-            .font(.caption)
+            .scaledFont(.caption)
 
             HStack(spacing: 6) {
                 if launcher.pendingConfirmation[project.id] != nil {
@@ -146,7 +146,7 @@ struct WorktreeListView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
             Text("Worktree")
-                .font(.caption.weight(.semibold))
+                .scaledFont(.caption, weight: .semibold)
                 .foregroundStyle(.secondary)
             ForEach(project.worktrees, id: \.path) { worktree in
                 row(worktree)
@@ -192,7 +192,7 @@ struct WorktreeListView: View {
                     .padding(.leading, 20)
             }
         }
-        .font(.caption)
+        .scaledFont(.caption)
         .controlSize(.mini)
         .buttonStyle(.bordered)
     }

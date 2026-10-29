@@ -57,6 +57,7 @@ struct ClaudePultApp: App {
                 .environment(runs)
                 .environment(commands)
                 .environment(usage)
+                .environment(settings)
         } label: {
             MenuBarLabel(state: MenuBarState(
                 showsAlert: store.report?.hasRedProject ?? false,
@@ -72,18 +73,21 @@ struct ClaudePultApp: App {
         Window("Журнал фоновой задачи", id: "run-log") {
             RunLogView()
                 .environment(runs)
+                .preferredColorScheme(settings.panelTheme.colorScheme)
         }
         .defaultSize(width: 640, height: 520)
 
         Window("Очистка сборок", id: "cleanup-output") {
             CleanupOutputView()
                 .environment(commands)
+                .preferredColorScheme(settings.panelTheme.colorScheme)
                 .debugSnapshot("cleanup")
         }
         .defaultSize(width: 720, height: 480)
 
         Window("Помощь — ClaudePult", id: "help") {
             HelpView()
+                .preferredColorScheme(settings.panelTheme.colorScheme)
                 .debugSnapshot("help")
         }
         .defaultSize(width: 720, height: 640)

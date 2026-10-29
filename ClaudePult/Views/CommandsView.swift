@@ -13,7 +13,7 @@ struct CommandsView: View {
         VStack(alignment: .leading, spacing: 6) {
             HStack {
                 Text("Команды")
-                    .font(.caption.weight(.semibold))
+                    .scaledFont(.caption, weight: .semibold)
                     .foregroundStyle(.secondary)
                 Spacer()
                 disk
@@ -40,11 +40,11 @@ struct CommandsView: View {
                         Image(systemName: result.isError ? "exclamationmark.triangle.fill" : "checkmark.circle")
                             .foregroundStyle(result.isError ? .red : .green)
                     }
-                    .font(.caption)
+                    .scaledFont(.caption)
                     if command == commands.cleanupOutput?.command {
                         Button("Вывод очистки…", action: showCleanupOutput)
                             .buttonStyle(.link)
-                            .font(.caption)
+                            .scaledFont(.caption)
                             .padding(.leading, 20)
                     }
                 }
@@ -60,7 +60,7 @@ struct CommandsView: View {
         if let bytes = store.report?.diskFreeBytes {
             let low = bytes < CommandStore.lowDiskBytes
             Label("Свободно \(CommandStore.diskText(bytes))", systemImage: low ? "exclamationmark.triangle.fill" : "internaldrive")
-                .font(.caption.weight(low ? .semibold : .regular))
+                .scaledFont(.caption, weight: low ? .semibold : .regular)
                 .foregroundStyle(low ? .orange : .secondary)
                 .help(low ? "Меньше 20 ГБ — стоит запустить очистку" : "Свободное место на диске")
         }
@@ -86,7 +86,7 @@ struct CommandsView: View {
                     .lineLimit(1)
                 Spacer(minLength: 0)
             }
-            .font(.caption)
+            .scaledFont(.caption)
             .frame(maxWidth: .infinity, alignment: .leading)
         }
         .buttonStyle(.bordered)
@@ -99,7 +99,7 @@ struct CommandsView: View {
     private var cleanupConfirmation: some View {
         VStack(alignment: .leading, spacing: 6) {
             Text("Удалить сборки, кэши и сбросить симуляторы? Сначала можно посмотреть список: «Очистка: проверить».")
-                .font(.caption)
+                .scaledFont(.caption)
                 .fixedSize(horizontal: false, vertical: true)
             HStack(spacing: 6) {
                 Button("Отмена") { confirmCleanup = false }
@@ -131,7 +131,7 @@ struct CleanupOutputView: View {
             if let output = commands.cleanupOutput {
                 VStack(alignment: .leading, spacing: 0) {
                     HStack {
-                        Text(output.command.title).font(.headline)
+                        Text(output.command.title).scaledFont(.headline)
                         Spacer()
                         Text(output.date.formatted(date: .omitted, time: .shortened))
                             .foregroundStyle(.secondary)
@@ -140,7 +140,7 @@ struct CleanupOutputView: View {
                     Divider()
                     ScrollView {
                         Text(output.text)
-                            .font(.callout.monospaced())
+                            .scaledFont(.callout, design: .monospaced)
                             .textSelection(.enabled)
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding(12)

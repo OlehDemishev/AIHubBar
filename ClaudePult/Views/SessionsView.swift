@@ -58,11 +58,11 @@ struct SessionsView: View {
         VStack(alignment: .leading, spacing: 2) {
             HStack {
                 Text("Сессии")
-                    .font(.caption.weight(.semibold))
+                    .scaledFont(.caption, weight: .semibold)
                     .foregroundStyle(.secondary)
                 if waiting > 0 {
                     Text("ждут ответа: \(waiting)")
-                        .font(.caption.weight(.medium))
+                        .scaledFont(.caption, weight: .medium)
                         .foregroundStyle(.orange)
                 }
             }
@@ -99,14 +99,14 @@ private struct SessionRowView: View {
                         .lineLimit(1)
                     if let worktree = row.worktree {
                         Label(worktree, systemImage: "arrow.triangle.branch")
-                            .font(.caption)
+                            .scaledFont(.caption)
                             .foregroundStyle(.secondary)
                             .lineLimit(1)
                             .truncationMode(.middle)
                     }
                     Spacer(minLength: 6)
                     Text(row.run != nil && row.state == .running ? "в фоне" : row.state.title)
-                        .font(.caption.weight(.medium))
+                        .scaledFont(.caption, weight: .medium)
                         .foregroundStyle(row.state.color)
                         .fixedSize()
                 }
@@ -125,10 +125,10 @@ private struct SessionRowView: View {
                         .fixedSize()
                     }
                 }
-                .font(.caption)
+                .scaledFont(.caption)
                 if let message = row.message {
                     Text(message)
-                        .font(.caption)
+                        .scaledFont(.caption)
                         .foregroundStyle(row.state == .waiting ? .orange : row.state == .error ? .red : .secondary)
                         .lineLimit(2)
                 }
@@ -154,7 +154,7 @@ private struct SessionRowView: View {
             .opacity(isHovered || row.state == .waiting ? 1 : 0.6)
         }
         .padding(.horizontal, 10)
-        .padding(.vertical, 6)
+        .densityPadding(6)
         .background(
             RoundedRectangle(cornerRadius: 7)
                 .fill(row.state == .waiting ? Color.orange.opacity(0.14) : Color.primary.opacity(isHovered ? 0.06 : 0))

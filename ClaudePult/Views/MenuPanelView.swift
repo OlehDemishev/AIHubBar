@@ -1,7 +1,7 @@
 import OSLog
 import SwiftUI
 
-/// Content of the menu bar panel. Sessions and commands are added in later stages.
+/// Content of the menu bar panel: limits, sessions, projects, commands — each can be hidden in Settings.
 struct MenuPanelView: View {
     @Environment(\.openSettings) private var openSettings
     @Environment(\.openWindow) private var openWindow
@@ -10,6 +10,7 @@ struct MenuPanelView: View {
     @Environment(SessionStore.self) private var sessions
     @Environment(HookController.self) private var hooks
     @Environment(RunStore.self) private var runs
+    @Environment(AppSettings.self) private var settings
 
     /// Drives the entrance animation; reset when the panel closes so it replays on every open.
     @State private var isShown = false
@@ -25,38 +26,47 @@ struct MenuPanelView: View {
 
     private let log = Logger(subsystem: "com.demishev.claudepult", category: "panel")
 
+    /// Reduce Motion or animations switched off in Settings.
+    private var calm: Bool { reduceMotion || !settings.panelAnimations }
+
     var body: some View {
+        let scale = settings.panelTextSize.scale
         VStack(alignment: .leading, spacing: 0) {
             header
-                .revealed(isShown, step: 0, reduceMotion: reduceMotion)
+                .revealed(isShown, step: 0, reduceMotion: calm)
 
             Divider()
 
-            LimitsView()
-                .revealed(isShown, step: 1, reduceMotion: reduceMotion)
-
-            Divider()
-
-            let sessionRows = SessionRow.rows(sessions: sessions.items, runs: runs.runs)
-            if !sessionRows.isEmpty {
-                SessionsView(rows: sessionRows)
-                    .revealed(isShown, step: 1, reduceMotion: reduceMotion)
-                Divider()
-            } else if hooks.status == .notInstalled {
-                hooksHint
-                    .revealed(isShown, step: 1, reduceMotion: reduceMotion)
+            if settings.shows(.limits) {
+                LimitsView()
+                    .revealed(isShown, step: 1, reduceMotion: calm)
                 Divider()
             }
 
-            content
-                .revealed(isShown, step: 1, reduceMotion: reduceMotion)
+            if settings.shows(.sessions) {
+                let sessionRows = SessionRow.rows(sessions: sessions.items, runs: runs.runs)
+                if !sessionRows.isEmpty {
+                    SessionsView(rows: sessionRows)
+                        .revealed(isShown, step: 1, reduceMotion: calm)
+                    Divider()
+                } else if hooks.status == .notInstalled {
+                    hooksHint
+                        .revealed(isShown, step: 1, reduceMotion: calm)
+                    Divider()
+                }
+            }
 
-            Divider()
+            if settings.shows(.projects) {
+                content
+                    .revealed(isShown, step: 1, reduceMotion: calm)
+                Divider()
+            }
 
-            CommandsView()
-                .revealed(isShown, step: 2, reduceMotion: reduceMotion)
-
-            Divider()
+            if settings.shows(.commands) {
+                CommandsView()
+                    .revealed(isShown, step: 2, reduceMotion: calm)
+                Divider()
+            }
 
             VStack(spacing: 2) {
                 PanelButton(title: "Настройки…", shortcut: ",") {
@@ -72,9 +82,14 @@ struct MenuPanelView: View {
                 }
             }
             .padding(6)
-            .revealed(isShown, step: 3, reduceMotion: reduceMotion)
+            .revealed(isShown, step: 3, reduceMotion: calm)
         }
-        .frame(width: 420)
+        // Larger text needs a wider panel, otherwise most lines would truncate.
+        .frame(width: (settings.panelWidth.points * max(1, scale)).rounded())
+        .environment(\.panelTextScale, scale)
+        .environment(\.panelDensity, settings.panelDensity.spacing)
+        .environment(\.font, ScaledFont.font(.body, scale: scale))
+        .preferredColorScheme(settings.panelTheme.colorScheme)
         .background(WindowReader { window = $0 })
         .onAppear {
             log.debug("Panel shown")
@@ -105,16 +120,16 @@ struct MenuPanelView: View {
     private var header: some View {
         HStack(spacing: 8) {
             Image(systemName: "sparkle")
-                .font(.title3)
+                .scaledFont(.title3)
                 .foregroundStyle(.orange)
-                .symbolEffect(.bounce, options: .nonRepeating, value: reduceMotion ? false : isShown)
+                .symbolEffect(.bounce, options: .nonRepeating, value: calm ? false : isShown)
             Text("ClaudePult")
-                .font(.headline)
+                .scaledFont(.headline)
             Spacer()
             if let lastUpdated = store.lastUpdated {
                 TimelineView(.periodic(from: .now, by: 30)) { context in
                     Text("обновлено \(RelativeTime.ago(lastUpdated, now: context.date))")
-                        .font(.caption)
+                        .scaledFont(.caption)
                         .foregroundStyle(.secondary)
                 }
             }
@@ -142,7 +157,7 @@ struct MenuPanelView: View {
             Image(systemName: "bell.slash")
                 .foregroundStyle(.secondary)
             Text("Сессии Claude не отслеживаются: hooks не установлены.")
-                .font(.caption)
+                .scaledFont(.caption)
                 .foregroundStyle(.secondary)
             Spacer(minLength: 4)
             Button("Настройки…") {
@@ -159,7 +174,7 @@ struct MenuPanelView: View {
     private var content: some View {
         if let error = store.lastError, store.report != nil {
             Label(error, systemImage: "exclamationmark.triangle")
-                .font(.caption)
+                .scaledFont(.caption)
                 .foregroundStyle(.orange)
                 .padding(.horizontal, 14)
                 .padding(.top, 8)
@@ -191,7 +206,7 @@ struct MenuPanelView: View {
             VStack(spacing: 10) {
                 ProgressView()
                 Text("Загружаю проекты…")
-                    .font(.callout)
+                    .scaledFont(.callout)
                     .foregroundStyle(.secondary)
             }
             .padding(.vertical, 32)
@@ -243,12 +258,12 @@ private struct EmptyStateView: View {
     var body: some View {
         VStack(spacing: 8) {
             Image(systemName: systemImage)
-                .font(.system(size: 28, weight: .light))
+                .scaledFont(size: 28, weight: .light)
                 .foregroundStyle(.tertiary)
             Text(title)
-                .font(.headline)
+                .scaledFont(.headline)
             Text(message)
-                .font(.callout)
+                .scaledFont(.callout)
                 .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)
                 .fixedSize(horizontal: false, vertical: true)

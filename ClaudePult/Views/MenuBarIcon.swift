@@ -8,13 +8,14 @@ struct MenuBarLabel: View {
 
     @Environment(AppRequests.self) private var requests
     @Environment(\.openWindow) private var openWindow
+    @Environment(\.openSettings) private var openSettings
 
     var body: some View {
         MenuBarIcon(state: state)
             .onChange(of: requests.window) {
                 guard let id = requests.window?.id else { return }
                 NSApp.activate()
-                openWindow(id: id)
+                if id == "settings" { openSettings() } else { openWindow(id: id) }
             }
     }
 }

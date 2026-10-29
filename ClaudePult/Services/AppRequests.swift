@@ -13,7 +13,7 @@ final class AppRequests {
 
     nonisolated static let notificationName = Notification.Name("com.demishev.claudepult.app-command")
     /// `--app-command` names that open a window instead of running a command.
-    static let windows = ["help": "help", "cleanup-output": "cleanup-output"]
+    static let windows = ["help": "help", "cleanup-output": "cleanup-output", "settings": "settings"]
 
     private(set) var window: WindowRequest?
     private var observer: NSObjectProtocol?

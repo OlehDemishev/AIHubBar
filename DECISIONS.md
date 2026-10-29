@@ -2,6 +2,16 @@
 
 Decisions made where the spec is silent or does not match reality. Newest at the top.
 
+## 2026-10-29 — Settings tabs and appearance (Oleh's request)
+
+**Tabs.** The single long Settings form became a `TabView` with Основные, Внешний вид, Claude, Сессии, Лимиты; the last opened tab is remembered.
+
+**Text size.** macOS ignores `dynamicTypeSize` for SwiftUI text styles (checked: `.caption` and `.body` render the same at `.small` and `.xxxLarge`), so the panel uses its own scale: `scaledFont(_:)` maps each text style to its macOS point size (body 13, callout 12, caption 10, …) times the chosen factor (0.9 / 1 / 1.15 / 1.3), read from the `panelTextScale` environment value; the panel's default font is scaled the same way. All 55 font uses in the panel views were switched. The panel widens with the text (width × factor) so lines do not truncate; at «Очень крупный» it is 546 × 1003 pt here, still within the screen.
+
+**Other appearance settings**: panel width (380 / 420 / 500 pt), row density (vertical padding × 0.5 / 1 / 1.5 for project and session rows), theme (system / light / dark via `preferredColorScheme`, also for the help, log, cleanup and settings windows), opening animation on/off (combined with Reduce Motion), visible blocks (hidden blocks keep working: notifications still arrive), the menu bar usage display (moved here from the limits section), and «Сбросить внешний вид».
+
+**Settings windows checkable from scripts**: `--app-command settings` opens Settings in the running app; the debug snapshot covers it (the tab bar belongs to the window frame and is not in the picture).
+
 ## 2026-10-29 — Stage 8 (subscription limits)
 
 **Endpoint, checked live** (`--usage-raw`, 2026-10-29): `GET https://api.anthropic.com/api/oauth/usage` with `Authorization: Bearer <token>` and `anthropic-beta: oauth-2025-04-20` answers with `five_hour` and `seven_day` (`utilization` in %, `resets_at` ISO with microseconds), `seven_day_opus` / `seven_day_sonnet` / … (null on this account), a `limits` list (`kind`: `session`, `weekly_all`, `weekly_scoped` with `scope.model.display_name`, e.g. «Fable»), `extra_usage` (`is_enabled`, `used_credits`, `monthly_limit` in minor units, `currency`), `seven_day_breakdown`, `spend`, and many code-named objects. One of those (`iguana_necktie`, a dollar allowance) has `utilization: 100` and would look like a full limit, so only `five_hour`, `seven_day*` and `weekly_scoped` entries of `limits` are taken; a response without `five_hour` counts as unknown → «лимиты недоступны». Extra usage is shown only when enabled.
