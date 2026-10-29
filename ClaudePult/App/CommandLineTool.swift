@@ -1,7 +1,7 @@
 import Foundation
 
 /// Headless commands for scripts and checks, run instead of the UI:
-/// `ClaudeBar.app/Contents/MacOS/ClaudeBar --login-item [status|on|off]`.
+/// `ClaudePult.app/Contents/MacOS/ClaudePult --login-item [status|on|off]`.
 @MainActor
 enum CommandLineTool {
     /// Returns an exit code if the arguments contain a command, `nil` to start the app normally.
@@ -15,7 +15,7 @@ enum CommandLineTool {
         case "on": controller.setEnabled(true)
         case "off": controller.setEnabled(false)
         default:
-            FileHandle.standardError.write(Data("Usage: ClaudeBar --login-item [status|on|off]\n".utf8))
+            FileHandle.standardError.write(Data("Usage: ClaudePult --login-item [status|on|off]\n".utf8))
             return 2
         }
 

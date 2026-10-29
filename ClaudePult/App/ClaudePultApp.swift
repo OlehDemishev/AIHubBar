@@ -1,7 +1,7 @@
 import SwiftUI
 
 @main
-struct ClaudeBarApp: App {
+struct ClaudePultApp: App {
     @State private var loginItem = LoginItemController()
 
     init() {
@@ -11,7 +11,7 @@ struct ClaudeBarApp: App {
     }
 
     var body: some Scene {
-        MenuBarExtra("ClaudeBar", systemImage: "sparkle") {
+        MenuBarExtra("ClaudePult", systemImage: "sparkle") {
             MenuPanelView()
         }
         .menuBarExtraStyle(.window)

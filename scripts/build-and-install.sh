@@ -1,5 +1,5 @@
 #!/bin/bash
-# Build ClaudeBar (Release), install it into ~/Applications and (re)launch it.
+# Build ClaudePult (Release), install it into ~/Applications and (re)launch it.
 #
 # Usage: scripts/build-and-install.sh [--test] [--no-launch]
 #   --test       run unit tests before building
@@ -7,8 +7,8 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-APP_NAME="ClaudeBar"
-BUNDLE_ID="com.demishev.claudebar"
+APP_NAME="ClaudePult"
+BUNDLE_ID="com.demishev.claudepult"
 DERIVED="$ROOT/build/DerivedData"
 INSTALL_DIR="$HOME/Applications"
 DEST="$INSTALL_DIR/$APP_NAME.app"

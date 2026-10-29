@@ -1,4 +1,4 @@
-name: ClaudeBar
+name: ClaudePult
 
 options:
   bundleIdPrefix: com.demishev
@@ -19,16 +19,16 @@ settings:
     SWIFT_STRICT_CONCURRENCY: complete
 
 targets:
-  ClaudeBar:
+  ClaudePult:
     type: application
     platform: macOS
     sources:
-      - path: ClaudeBar
+      - path: ClaudePult
     info:
-      path: ClaudeBar/Info.plist
+      path: ClaudePult/Info.plist
       properties:
-        CFBundleDisplayName: ClaudeBar
-        CFBundleName: ClaudeBar
+        CFBundleDisplayName: ClaudePult
+        CFBundleName: ClaudePult
         CFBundleShortVersionString: $(MARKETING_VERSION)
         CFBundleVersion: $(CURRENT_PROJECT_VERSION)
         LSUIElement: true
@@ -37,33 +37,33 @@ targets:
         NSHumanReadableCopyright: "© Oleh Demishev"
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.demishev.claudebar
-        PRODUCT_NAME: ClaudeBar
+        PRODUCT_BUNDLE_IDENTIFIER: com.demishev.claudepult
+        PRODUCT_NAME: ClaudePult
         ENABLE_APP_SANDBOX: NO
         ENABLE_HARDENED_RUNTIME: NO
         GENERATE_INFOPLIST_FILE: NO
         COMBINE_HIDPI_IMAGES: YES
 
-  ClaudeBarTests:
+  ClaudePultTests:
     type: bundle.unit-test
     platform: macOS
     sources:
-      - path: ClaudeBarTests
+      - path: ClaudePultTests
     dependencies:
-      - target: ClaudeBar
+      - target: ClaudePult
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.demishev.claudebar.tests
+        PRODUCT_BUNDLE_IDENTIFIER: com.demishev.claudepult.tests
         GENERATE_INFOPLIST_FILE: YES
-        TEST_HOST: $(BUILT_PRODUCTS_DIR)/ClaudeBar.app/Contents/MacOS/ClaudeBar
+        TEST_HOST: $(BUILT_PRODUCTS_DIR)/ClaudePult.app/Contents/MacOS/ClaudePult
         BUNDLE_LOADER: $(TEST_HOST)
 
 schemes:
-  ClaudeBar:
+  ClaudePult:
     build:
       targets:
-        ClaudeBar: all
-        ClaudeBarTests: [test]
+        ClaudePult: all
+        ClaudePultTests: [test]
     test:
       targets:
-        - ClaudeBarTests
+        - ClaudePultTests
