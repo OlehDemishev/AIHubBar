@@ -1,11 +1,11 @@
 # Status
 
 <!-- summary:start -->
-**Stage:** Stage 1 of 8 done — skeleton; project renamed ClaudeBar → ClaudePult (in review)
+**Stage:** Stage 1 of 8 done — skeleton (menu bar icon, animated panel, Settings with login item); project renamed to ClaudePult
 **Updated:** 2026-10-29
 
 **Now:**
-- PR `chore/rename-to-claudepult`: rename app, bundle id, targets and docs to ClaudePult — waiting for review
+- nothing in progress
 
 **Next:**
 - Stage 2 — Projects: run `report.py --json`, models, project list with health/branch/STATUS, expand, open in Terminal/Finder/GitHub, periodic refresh, file logs in ~/Library/Logs/ClaudePult
@@ -17,7 +17,6 @@
 - Stage 8 — Subscription limits (spec 2.8): limits in menu bar and panel, notifications, forecast, per-project token breakdown, background-mode guard, `usage.json`, widgets if simple
 
 **Needs Oleh:**
-- review and merge PR `chore/rename-to-claudepult`
 - delete or archive the old repo `OlehDemishev/ClaudeBar` (its code is now in `OlehDemishev/ClaudePult`)
 - open the panel and Settings once and confirm they look right (automation cannot see the app's windows); turn on «Запускать при входе в систему» if wanted — it is left off
 <!-- summary:end -->
