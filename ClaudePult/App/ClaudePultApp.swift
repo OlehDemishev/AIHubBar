@@ -10,6 +10,7 @@ struct ClaudePultApp: App {
     @State private var hooks: HookController
     @State private var runs: RunStore
     @State private var commands: CommandStore
+    @State private var requests: AppRequests
 
     init() {
         if let code = CommandLineTool.run(CommandLine.arguments) {
@@ -23,7 +24,10 @@ struct ClaudePultApp: App {
         let runs = RunStore(settings: settings)
         _runs = State(initialValue: runs)
         _launcher = State(initialValue: LaunchController(settings: settings, store: store, runs: runs))
-        _commands = State(initialValue: CommandStore(settings: settings, store: store))
+        let requests = AppRequests()
+        let commands = CommandStore(settings: settings, store: store, requests: requests)
+        _requests = State(initialValue: requests)
+        _commands = State(initialValue: commands)
         let sessions = SessionStore()
         _sessions = State(initialValue: sessions)
         _hooks = State(initialValue: HookController(settings: settings))
@@ -33,6 +37,7 @@ struct ClaudePultApp: App {
             store.start()
             sessions.start()
             runs.start()
+            requests.listen(commands: commands)
         }
     }
 
@@ -47,7 +52,7 @@ struct ClaudePultApp: App {
                 .environment(commands)
         } label: {
             MenuBarLabel(showsAlert: store.report?.hasRedProject ?? false, waitingCount: sessions.waitingCount)
-                .environment(commands)
+                .environment(requests)
         }
         .menuBarExtraStyle(.window)
 
@@ -60,8 +65,15 @@ struct ClaudePultApp: App {
         Window("Очистка сборок", id: "cleanup-output") {
             CleanupOutputView()
                 .environment(commands)
+                .debugSnapshot("cleanup")
         }
         .defaultSize(width: 720, height: 480)
+
+        Window("Помощь — ClaudePult", id: "help") {
+            HelpView()
+                .debugSnapshot("help")
+        }
+        .defaultSize(width: 720, height: 640)
 
         Settings {
             SettingsView()

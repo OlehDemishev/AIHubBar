@@ -84,7 +84,7 @@ enum CommonCommand: String, CaseIterable, Identifiable, Sendable {
         switch self {
         case .reportNow, .quickSummary: return summary.hasPrefix("Telegram") && summary != "Telegram: отправлено"
         // cleanup.py skips everything while a build runs and says so in its first line.
-        case .cleanupRun: return summary.hasPrefix("Идёт сборка")
+        case .cleanupCheck, .cleanupRun: return summary.hasPrefix("Идёт сборка")
         default: return false
         }
     }
@@ -109,15 +109,15 @@ final class CommandStore {
     private(set) var results: [CommonCommand: Result] = [:]
     /// Full output of the last cleanup run or check, for the «Очистка» window.
     private(set) var cleanupOutput: (command: CommonCommand, text: String, date: Date)?
-    /// Bumped when a cleanup check finishes: the spec shows its output in a window.
-    private(set) var cleanupWindowRequest = 0
 
     private let settings: AppSettings
     private let store: ProjectStore
+    private let requests: AppRequests
 
-    init(settings: AppSettings, store: ProjectStore) {
+    init(settings: AppSettings, store: ProjectStore, requests: AppRequests) {
         self.settings = settings
         self.store = store
+        self.requests = requests
     }
 
     nonisolated static let lowDiskBytes: Int64 = 20_000_000_000
@@ -166,7 +166,8 @@ final class CommandStore {
         AppLog.info("Command «\(command.title)» finished\(result.isError ? " with error" : ""): \(result.text)")
         if let output, command == .cleanupCheck || command == .cleanupRun {
             cleanupOutput = (command, output, result.date)
-            if command == .cleanupCheck { cleanupWindowRequest += 1 }
+            // The spec shows the cleanup check output in a window.
+            if command == .cleanupCheck { requests.openWindow("cleanup-output") }
         }
         if command == .cleanupRun {
             Task { await store.refresh() }

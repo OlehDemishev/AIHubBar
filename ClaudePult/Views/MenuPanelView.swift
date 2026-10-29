@@ -4,6 +4,7 @@ import SwiftUI
 /// Content of the menu bar panel. Sessions and commands are added in later stages.
 struct MenuPanelView: View {
     @Environment(\.openSettings) private var openSettings
+    @Environment(\.openWindow) private var openWindow
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(ProjectStore.self) private var store
     @Environment(SessionStore.self) private var sessions
@@ -52,6 +53,10 @@ struct MenuPanelView: View {
                 PanelButton(title: "Настройки…", shortcut: ",") {
                     NSApp.activate()
                     openSettings()
+                }
+                PanelButton(title: "Помощь", shortcut: nil) {
+                    NSApp.activate()
+                    openWindow(id: "help")
                 }
                 PanelButton(title: "Выход", shortcut: "q") {
                     NSApp.terminate(nil)
@@ -264,7 +269,7 @@ private extension View {
 /// Full-width menu-like button with a ⌘-shortcut hint.
 private struct PanelButton: View {
     let title: String
-    let shortcut: Character
+    let shortcut: Character?
     let action: () -> Void
 
     @State private var isHovered = false
@@ -274,8 +279,10 @@ private struct PanelButton: View {
             HStack {
                 Text(title)
                 Spacer()
-                Text("⌘\(String(shortcut).uppercased())")
-                    .foregroundStyle(.secondary)
+                if let shortcut {
+                    Text("⌘\(String(shortcut).uppercased())")
+                        .foregroundStyle(.secondary)
+                }
             }
             .padding(.horizontal, 8)
             .padding(.vertical, 4)
@@ -286,7 +293,7 @@ private struct PanelButton: View {
             )
         }
         .buttonStyle(.plain)
-        .keyboardShortcut(KeyEquivalent(shortcut), modifiers: .command)
+        .keyboardShortcut(shortcut.map { KeyboardShortcut(KeyEquivalent($0), modifiers: .command) })
         .onHover { isHovered = $0 }
         .animation(.easeOut(duration: 0.12), value: isHovered)
     }

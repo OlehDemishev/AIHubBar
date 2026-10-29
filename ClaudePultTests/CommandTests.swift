@@ -30,6 +30,7 @@ struct CommonCommandTests {
         #expect(CommonCommand.quickSummary.isFailure(exitCode: 0, summary: "Telegram: HTTP Error 400: Bad Request"))
         #expect(CommonCommand.cleanupRun.isFailure(exitCode: 1, summary: "x"))
         #expect(!CommonCommand.cleanupCheck.isFailure(exitCode: 0, summary: "Можно освободить: 0 МБ"))
+        #expect(CommonCommand.cleanupCheck.isFailure(exitCode: 0, summary: "Идёт сборка — очистку пропускаю: /usr/bin/xcodebuild"))
         #expect(CommonCommand.cleanupRun.isFailure(exitCode: 0, summary: "Идёт сборка — очистку пропускаю: /usr/bin/xcodebuild"))
     }
 
@@ -69,6 +70,7 @@ struct CommonCommandTests {
 
     @Test func lowDiskThreshold() {
         #expect(11_058_995_200 < CommandStore.lowDiskBytes)
-        #expect(CommandStore.diskText(15_700_000_000).contains("15,7") || CommandStore.diskText(15_700_000_000).contains("15.7"))
+        let text = CommandStore.diskText(15_700_000_000)
+        #expect(text.contains("15,7") || text.contains("15.7"))
     }
 }
