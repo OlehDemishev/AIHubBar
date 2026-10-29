@@ -1,17 +1,16 @@
 # Status
 
 <!-- summary:start -->
-**Stage:** Stage 7 of 8 in review — polish: help, help.txt, icon, checklist (stages 1–6 done)
+**Stage:** Stage 7 of 8 done — full panel, Claude in Terminal and background, sessions, commands, help; stage 8 next
 **Updated:** 2026-10-29
 
 **Now:**
-- PR `feat/polish` (stage 7: Помощь window, help.txt block, app icon, Russian locale, scenario checklist) — waiting for review
+- nothing in progress
 
 **Next:**
 - Stage 8 — Subscription limits (spec 2.8): limits in menu bar and panel, notifications, forecast, per-project token breakdown, background-mode guard, `usage.json`, widgets if simple
 
 **Needs Oleh:**
-- review and merge PR `feat/polish`
 - go through the «Oleh» rows of docs/CHECKLIST.md (buttons inside the panel, Settings, notifications, Telegram messages) — automation cannot click inside ClaudePult
 - free disk space is ~12 GB (< 20 GB): «Очистка: выполнить» when no build is running
 - hooks are installed in ~/.claude/settings.json; backup of the original: ~/.claude/settings.json.claudepult-backup-20261029T192827
