@@ -6,6 +6,8 @@ struct MenuPanelView: View {
     @Environment(\.openSettings) private var openSettings
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(ProjectStore.self) private var store
+    @Environment(SessionStore.self) private var sessions
+    @Environment(HookController.self) private var hooks
 
     /// Drives the entrance animation; reset when the panel closes so it replays on every open.
     @State private var isShown = false
@@ -23,6 +25,16 @@ struct MenuPanelView: View {
                 .revealed(isShown, step: 0, reduceMotion: reduceMotion)
 
             Divider()
+
+            if !sessions.items.isEmpty {
+                SessionsView()
+                    .revealed(isShown, step: 1, reduceMotion: reduceMotion)
+                Divider()
+            } else if hooks.status == .notInstalled {
+                hooksHint
+                    .revealed(isShown, step: 1, reduceMotion: reduceMotion)
+                Divider()
+            }
 
             content
                 .revealed(isShown, step: 1, reduceMotion: reduceMotion)
@@ -47,6 +59,8 @@ struct MenuPanelView: View {
             log.debug("Panel shown")
             isShown = true
             store.refreshIfStale()
+            sessions.reload()
+            hooks.refresh()
             snapshotIfEnabled()
         }
         .onDisappear {
@@ -100,6 +114,24 @@ struct MenuPanelView: View {
         }
         .padding(.horizontal, 14)
         .padding(.vertical, 10)
+    }
+
+    private var hooksHint: some View {
+        HStack(spacing: 8) {
+            Image(systemName: "bell.slash")
+                .foregroundStyle(.secondary)
+            Text("Сессии Claude не отслеживаются: hooks не установлены.")
+                .font(.caption)
+                .foregroundStyle(.secondary)
+            Spacer(minLength: 4)
+            Button("Настройки…") {
+                NSApp.activate()
+                openSettings()
+            }
+            .controlSize(.small)
+        }
+        .padding(.horizontal, 14)
+        .padding(.vertical, 8)
     }
 
     @ViewBuilder

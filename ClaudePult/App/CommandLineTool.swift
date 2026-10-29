@@ -3,6 +3,8 @@ import Foundation
 /// Headless commands for scripts and checks, run instead of the UI:
 /// - `ClaudePult --login-item [status|on|off]`
 /// - `ClaudePult --claude next|finish|task <project-path> [task text] [--claude-path <path>] [--print]`
+/// - `ClaudePult --hooks [status|install|uninstall]`
+/// - `ClaudePult --sessions`, `ClaudePult --show-session <id>`
 @MainActor
 enum CommandLineTool {
     /// Returns an exit code if the arguments contain a command, `nil` to start the app normally.
@@ -13,7 +15,51 @@ enum CommandLineTool {
         if let index = arguments.firstIndex(of: "--claude") {
             return claude(Array(arguments.dropFirst(index + 1)))
         }
+        if let index = arguments.firstIndex(of: "--hooks") {
+            return hooks(arguments.dropFirst(index + 1).first ?? "status")
+        }
+        if arguments.contains("--sessions") {
+            for item in SessionStore.loadItems(from: SessionFiles.sessionsDirectory, now: .now) {
+                let s = item.session
+                print([s.id, item.state.rawValue, s.displayProject, s.worktreeName ?? "-", s.tty ?? "-", s.task ?? "-"].joined(separator: "\t"))
+            }
+            return 0
+        }
+        if let index = arguments.firstIndex(of: "--show-session"), index + 1 < arguments.count {
+            let id = arguments[index + 1]
+            guard let session = SessionStore.loadItems(from: SessionFiles.sessionsDirectory, now: .now)
+                .first(where: { $0.id == id })?.session, let tty = session.tty, session.isInTerminalApp else {
+                printError("no Terminal.app session with id \(id)")
+                return 1
+            }
+            return waitFor {
+                let found = await SessionActions.focusTerminalTab(tty: tty)
+                print(found ? "focused \(tty)" : "tab not found")
+                return found ? 0 : 1
+            }
+        }
         return nil
+    }
+
+    private static func hooks(_ action: String) -> Int32 {
+        let installer = HookInstaller.live(projectsDirectory: AppSettings().projectsDirectory)
+        do {
+            switch action {
+            case "status": break
+            case "install":
+                if let backup = try installer.install() { print("backup: \(backup.path)") }
+            case "uninstall":
+                if let backup = try installer.uninstall() { print("backup: \(backup.path)") }
+            default:
+                printError("Usage: ClaudePult --hooks [status|install|uninstall]")
+                return 2
+            }
+        } catch {
+            printError("error: \(error.localizedDescription)")
+            return 1
+        }
+        print("hooks: \(installer.status())")
+        return 0
     }
 
     private static func loginItem(_ action: String) -> Int32 {

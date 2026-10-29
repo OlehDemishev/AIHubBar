@@ -1,25 +1,32 @@
 # Status
 
 <!-- summary:start -->
-**Stage:** Stage 3 of 8 done — projects list and Claude commands in Terminal
+**Stage:** Stage 4 of 8 in review — Claude Code sessions via hooks (stages 1–3 done)
 **Updated:** 2026-10-29
 
 **Now:**
-- nothing in progress
+- PR `feat/sessions` (stage 4: hooks, sessions block, waiting badge and notification, «Показать») — waiting for review
 
 **Next:**
-- Stage 4 — Sessions: hook script, install/remove hooks in ~/.claude/settings.json with backup, sessions panel, states, "waiting" notification, icon badge
 - Stage 5 — Background mode: `claude -p` with permissions from spec 2.4, logs, stop, time limit, notifications and Telegram
 - Stage 6 — Common commands and disk: report, summary, latest report, cleanup (check/run), disk indicator
 - Stage 7 — Polish: Help window + help.txt, manual run of all scenarios, README update, app icon
 - Stage 8 — Subscription limits (spec 2.8): limits in menu bar and panel, notifications, forecast, per-project token breakdown, background-mode guard, `usage.json`, widgets if simple
 
 **Needs Oleh:**
+- review and merge PR `feat/sessions`. Hooks are already installed in ~/.claude/settings.json (with your OK); backup of the original: ~/.claude/settings.json.claudepult-backup-20261029T192827
+- check that the «Claude ждёт ответа» macOS notification arrives (allow notifications for ClaudePult if asked) — not visible to automation
 - try «Своя задача…» on a real project (if macOS asks for permission to control Terminal, allow it)
 - open the panel and check colours (dots, badges) and the Terminal / Finder / GitHub buttons — automation cannot see or click them
 - delete or archive the old repo `OlehDemishev/ClaudeBar` (its code is now in `OlehDemishev/ClaudePult`)
 - turn on «Запускать при входе в систему» in Settings if wanted — it is left off
 <!-- summary:end -->
+
+## 2026-10-29 — Stage 4: sessions (branch `feat/sessions`)
+
+Done: hook script (Python, `~/Library/Application Support/ClaudePult/hooks/claudepult-hook.py`) for SessionStart, UserPromptSubmit, PermissionRequest, Notification, PostToolUse, Stop, StopFailure, SessionEnd → `sessions/<session_id>.json` (state, cwd, project, prompts, pid, tty); event names and fields checked in the hooks docs. Install/update/remove in Settings and `--hooks`, merged into ~/.claude/settings.json with a backup, idempotent. «Сессии» block on top of the panel: project, worktree, task, duration, state, waiting highlighted with the reason, «Показать» (Terminal tab by tty / Claude app / Finder). Waiting count next to the menu bar icon, macOS notification once per wait. Dead process → ended; stale after 2 h; ended visible 15 min; files deleted after 7 days. Hint in the panel when hooks are missing. CLI `--sessions`, `--show-session`. Child processes no longer inherit `CLAUDE_CODE_*`.
+Checked: `scripts/build-and-install.sh --test` — 43 tests (82 cases) green incl. the real hook script fed with a full event sequence, garbage input (silent exit 0), settings merge/remove/backup on temp files and malformed settings left untouched; no compiler warnings. Live (hooks installed with Oleh's OK): this session's own events recorded (pid, desktop entrypoint); a real `claude` test session in a ClaudePult worktree recorded SessionStart → running → done with tty and Terminal; a PermissionRequest event fed to the installed hook → «ждёт ответа», badge «1» on the menu bar icon (screenshot) and the highlighted row in the panel snapshot; `--show-session` focused its Terminal tab; closing the window → SessionEnd → «завершена». Found and fixed: a second install within the same second overwrote the backup of the original settings (restored from a copy, now never overwritten); inherited `CLAUDE_CODE_*` variables. Test worktree removed. CI not set up; checks run locally.
+Left: «ждёт ответа» from a real permission prompt not seen live (this Mac auto-approves edits, so the test session never asked); the macOS notification itself not visible to automation; background sessions and the «ошибка» state come with stage 5.
 
 ## 2026-10-29 — Stage 3: Claude in Terminal (branch `feat/terminal-launch`)
 
