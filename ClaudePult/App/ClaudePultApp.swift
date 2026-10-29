@@ -9,6 +9,7 @@ struct ClaudePultApp: App {
     @State private var sessions: SessionStore
     @State private var hooks: HookController
     @State private var runs: RunStore
+    @State private var commands: CommandStore
 
     init() {
         if let code = CommandLineTool.run(CommandLine.arguments) {
@@ -22,6 +23,7 @@ struct ClaudePultApp: App {
         let runs = RunStore(settings: settings)
         _runs = State(initialValue: runs)
         _launcher = State(initialValue: LaunchController(settings: settings, store: store, runs: runs))
+        _commands = State(initialValue: CommandStore(settings: settings, store: store))
         let sessions = SessionStore()
         _sessions = State(initialValue: sessions)
         _hooks = State(initialValue: HookController(settings: settings))
@@ -42,8 +44,10 @@ struct ClaudePultApp: App {
                 .environment(sessions)
                 .environment(hooks)
                 .environment(runs)
+                .environment(commands)
         } label: {
-            MenuBarIcon(showsAlert: store.report?.hasRedProject ?? false, waitingCount: sessions.waitingCount)
+            MenuBarLabel(showsAlert: store.report?.hasRedProject ?? false, waitingCount: sessions.waitingCount)
+                .environment(commands)
         }
         .menuBarExtraStyle(.window)
 
@@ -52,6 +56,12 @@ struct ClaudePultApp: App {
                 .environment(runs)
         }
         .defaultSize(width: 640, height: 520)
+
+        Window("Очистка сборок", id: "cleanup-output") {
+            CleanupOutputView()
+                .environment(commands)
+        }
+        .defaultSize(width: 720, height: 480)
 
         Settings {
             SettingsView()

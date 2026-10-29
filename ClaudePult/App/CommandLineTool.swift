@@ -5,6 +5,7 @@ import Foundation
 /// - `ClaudePult --claude next|finish|task <project-path> [task text] [--claude-path <path>] [--print] [--background]`
 /// - `ClaudePult --hooks [status|install|uninstall]`
 /// - `ClaudePult --sessions`, `ClaudePult --show-session <id>`, `ClaudePult --background-settings`
+/// - `ClaudePult --command report|summary|cleanup-check|cleanup`
 @MainActor
 enum CommandLineTool {
     /// Returns an exit code if the arguments contain a command, `nil` to start the app normally.
@@ -17,6 +18,19 @@ enum CommandLineTool {
         }
         if let index = arguments.firstIndex(of: "--hooks") {
             return hooks(arguments.dropFirst(index + 1).first ?? "status")
+        }
+        if let index = arguments.firstIndex(of: "--command"), index + 1 < arguments.count {
+            guard let command = CommonCommand.allCases.first(where: { $0.cliName == arguments[index + 1] }),
+                  command.script != nil else {
+                printError("Usage: ClaudePult --command " + CommonCommand.allCases.filter { $0.script != nil }.map(\.cliName).joined(separator: "|"))
+                return 2
+            }
+            let directory = AppSettings().dailyReportDirectory
+            return waitFor {
+                let (result, _) = await CommandStore.execute(command, dailyReportDirectory: directory)
+                print("\(result.isError ? "error" : "ok"): \(result.text)")
+                return result.isError ? 1 : 0
+            }
         }
         if arguments.contains("--background-settings") {
             print(BackgroundPermissions.settingsJSON)

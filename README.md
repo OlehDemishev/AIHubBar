@@ -2,7 +2,7 @@
 
 Native macOS menu bar app (no Dock icon): a control panel for the projects in `~/Projects` and for Claude Code sessions. Full specification: [docs/SPEC.md](docs/SPEC.md). Progress: [docs/STATUS.md](docs/STATUS.md). Design decisions: [DECISIONS.md](DECISIONS.md).
 
-Current stage: **5 — background mode**. On top of the panel, the **Сессии** block lists every Claude Code session on this Mac (Terminal, Claude desktop app, background runs): project, worktree, task, duration and state — работает / в фоне / ждёт ответа / готово / ошибка / завершена. Waiting sessions are highlighted, raise a macOS notification once and are counted next to the menu bar icon; «Показать» brings the session's Terminal tab forward (desktop-app sessions open Claude, others the folder); background runs have «Журнал» and «Остановить». Session data comes from Claude Code hooks that ClaudePult installs into `~/.claude/settings.json` (Settings → «Сессии Claude Code»).
+Current stage: **6 — common commands and disk**. On top of the panel, the **Сессии** block lists every Claude Code session on this Mac (Terminal, Claude desktop app, background runs): project, worktree, task, duration and state — работает / в фоне / ждёт ответа / готово / ошибка / завершена. Waiting sessions are highlighted, raise a macOS notification once and are counted next to the menu bar icon; «Показать» brings the session's Terminal tab forward (desktop-app sessions open Claude, others the folder); background runs have «Журнал» and «Остановить». Session data comes from Claude Code hooks that ClaudePult installs into `~/.claude/settings.json` (Settings → «Сессии Claude Code»).
 
 Each Claude command asks where to run — **Терминал** or **Фон** — unless a default is set in Settings («Запомнить выбор»).
 
@@ -12,6 +12,8 @@ Below the sessions, the projects from `~/Projects` with health, branch, uncommit
 - «Терминал / Finder / GitHub» buttons;
 - the STATUS.md header (Stage / Now / Next / Needs Oleh), attention items and open PRs;
 - the project's worktrees with a delete button (only when clean and pushed or merged).
+
+Below the projects, **Команды** (spec §2.5) run the `_daily-report` tools without blocking the panel, with a spinner, a result line and a macOS notification: «Отчёт сейчас» (`report.py --since-hours 24 --no-open`, AI summary, Telegram), «Быстрая сводка» (`--no-ai --no-document --no-open --since-hours 24`), «Последний отчёт» (opens `reports/latest.html`), «Очистка: проверить» (`cleanup.py --dry-run`, output in a window) and «Очистка: выполнить» (`cleanup.py --now`, after a confirmation). The free disk space from the report is shown next to them, highlighted below 20 GB.
 
 The menu bar icon gets a red dot when any project's health is red and the number of sessions waiting for an answer. The first Claude launch makes macOS ask for permission to control Terminal (System Settings → Privacy & Security → Automation).
 
@@ -105,6 +107,7 @@ The app binary accepts headless commands (used by scripts and checks; the UI is 
 | `--claude … --claude-path <path>` | use another binary, e.g. `/bin/echo` for a dry run |
 | `--claude … --background` | start as a background run; the running app reports the result |
 | `--background-settings` | print the permission rules used for background runs |
+| `--command report\|summary\|cleanup-check\|cleanup` | run a common command and print its result line |
 | `--hooks status` | print hook state (`installed`, `outdated`, `notInstalled`) |
 | `--hooks install` / `--hooks uninstall` | same as the Settings buttons (backup of settings.json first) |
 | `--sessions` | list visible sessions: id, state, project, worktree, tty, task |

@@ -16,7 +16,7 @@ struct MenuPanelView: View {
     @State private var listHeight: CGFloat = 0
     @State private var window: NSWindow?
 
-    private static let maxListHeight: CGFloat = 560
+    private static let maxListHeight: CGFloat = 480
 
     private let log = Logger(subsystem: "com.demishev.claudepult", category: "panel")
 
@@ -43,6 +43,11 @@ struct MenuPanelView: View {
 
             Divider()
 
+            CommandsView()
+                .revealed(isShown, step: 2, reduceMotion: reduceMotion)
+
+            Divider()
+
             VStack(spacing: 2) {
                 PanelButton(title: "Настройки…", shortcut: ",") {
                     NSApp.activate()
@@ -53,7 +58,7 @@ struct MenuPanelView: View {
                 }
             }
             .padding(6)
-            .revealed(isShown, step: 2, reduceMotion: reduceMotion)
+            .revealed(isShown, step: 3, reduceMotion: reduceMotion)
         }
         .frame(width: 420)
         .background(WindowReader { window = $0 })

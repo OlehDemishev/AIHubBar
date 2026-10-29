@@ -2,6 +2,22 @@
 
 Decisions made where the spec is silent or does not match reality. Newest at the top.
 
+## 2026-10-29 — Stage 6 (common commands and disk)
+
+**Report period.** «Отчёт сейчас» and «Быстрая сводка» pass `--since-hours 24` as the spec's command lines do. With an explicit period report.py does not move its own «since last report» marker (`state.json`), so the 10:00 report is not affected.
+
+**Result line.** report.py prints `HH:MM:SS …` log lines and finishes with «Telegram: отправлено» or the Telegram error; that last line (time stripped) is the result, and anything else starting with «Telegram» counts as a failure because report.py exits 0 either way. cleanup.py puts its total first («Можно освободить: … · свободно на диске …»); a cleanup skipped because a build is running («Идёт сборка — очистку пропускаю») is shown as not done. Output passes through a filter that replaces `bot<digits>:<token>` so a token can never reach the panel, a notification or the app log.
+
+**Long operations** run through `ProcessRunner` (async, timeouts: report 10 min, summary 3 min, cleanup check 5 min, cleanup 15 min); the button shows a spinner and is disabled while running, the result stays in the panel and goes to a macOS notification. The same command cannot run twice at once.
+
+**«Очистка: выполнить»** asks for a confirmation inside the panel first (it deletes builds and resets simulators). After it, the project data is refreshed so the free-space figure updates.
+
+**«Очистка: проверить»** opens its output in a separate window when it finishes. The window is opened from the menu bar label, the only view that exists while the panel is closed.
+
+**Disk.** `disk_free_bytes` from report.py, shown with `ByteCountFormatter` (decimal GB, like Finder); below 20 GB it turns orange with a warning icon.
+
+**Command line** `--command report|summary|cleanup-check|cleanup` runs the same code as the buttons (used for the live checks).
+
 ## 2026-10-29 — Stage 5 (background mode)
 
 **Flags** checked with `claude --help` (2.1.312) and code.claude.com docs (headless, permissions, permission modes): `-p <prompt> --session-id <uuid> --output-format stream-json --verbose --permission-mode dontAsk --permission-prompts none --settings '<json>'`. `dontAsk` + `--permission-prompts none` deny everything not allowed without a prompt and tell Claude nobody will approve; the CLI flag overrides any `defaultMode`. The run id is passed as `--session-id`, so the hook's session file and the run share the id and the panel joins them. User settings stay loaded (`--setting-sources` would also drop the session hooks); they have no `allow` rules on this Mac, and `deny` rules win over `allow` from any level anyway.
