@@ -27,23 +27,23 @@ struct LimitsView: View {
                 }
                 if let extra = snapshot.extra, extra.isEnabled {
                     Label(extraText(extra), systemImage: "creditcard")
-                        .font(.caption)
+                        .scaledFont(.caption)
                         .foregroundStyle(.secondary)
                 }
                 if let error = usage.error {
                     Label("Не обновилось: \(error)", systemImage: "exclamationmark.triangle")
-                        .font(.caption)
+                        .scaledFont(.caption)
                         .foregroundStyle(.orange)
                 }
             } else if let error = usage.error {
                 Label("Лимиты недоступны. \(error)", systemImage: "exclamationmark.triangle")
-                    .font(.caption)
+                    .scaledFont(.caption)
                     .foregroundStyle(.orange)
                     .fixedSize(horizontal: false, vertical: true)
             } else {
                 HStack(spacing: 6) {
                     ProgressView().controlSize(.mini)
-                    Text("Загружаю лимиты…").font(.caption).foregroundStyle(.secondary)
+                    Text("Загружаю лимиты…").scaledFont(.caption).foregroundStyle(.secondary)
                 }
             }
 
@@ -60,13 +60,13 @@ struct LimitsView: View {
     private var header: some View {
         HStack(spacing: 6) {
             Text("Лимиты")
-                .font(.caption.weight(.semibold))
+                .scaledFont(.caption, weight: .semibold)
                 .foregroundStyle(.secondary)
             Spacer()
             if let fetched = usage.snapshot?.fetchedAt {
                 TimelineView(.periodic(from: .now, by: 30)) { context in
                     Text(RelativeTime.ago(fetched, now: context.date))
-                        .font(.caption2)
+                        .scaledFont(.caption2)
                         .foregroundStyle(.tertiary)
                 }
             }
@@ -76,7 +76,7 @@ struct LimitsView: View {
                 if usage.isRefreshing {
                     ProgressView().controlSize(.mini)
                 } else {
-                    Image(systemName: "arrow.clockwise").font(.caption)
+                    Image(systemName: "arrow.clockwise").scaledFont(.caption)
                 }
             }
             .buttonStyle(.borderless)
@@ -109,7 +109,7 @@ struct LimitsView: View {
                     Text("Расход по проектам")
                     Spacer()
                 }
-                .font(.caption)
+                .scaledFont(.caption)
                 .foregroundStyle(.secondary)
                 .contentShape(Rectangle())
             }
@@ -133,21 +133,21 @@ struct LimitsView: View {
                                 .monospacedDigit()
                                 .frame(width: 38, alignment: .trailing)
                         }
-                        .font(.caption)
+                        .scaledFont(.caption)
                     }
                     if let top = data.topSession {
                         Text("Самая затратная сессия: \(top.project) — \(Int((top.share * 100).rounded())) % (\(TokenBreakdown.tokensText(top.tokens)) токенов)")
-                            .font(.caption)
+                            .scaledFont(.caption)
                             .foregroundStyle(.secondary)
                             .fixedSize(horizontal: false, vertical: true)
                     }
                 } else {
                     Text(usage.breakdownUpdated == nil ? "Считаю по журналам Claude Code…" : "За этот период расхода нет")
-                        .font(.caption)
+                        .scaledFont(.caption)
                         .foregroundStyle(.secondary)
                 }
                 Text("Оценка по журналам Claude Code, а не точный расход лимита. Доли учитывают цену токенов (вывод ×5, чтение кэша ×0,1); токены — без чтения кэша.")
-                    .font(.caption2)
+                    .scaledFont(.caption2)
                     .foregroundStyle(.tertiary)
                     .fixedSize(horizontal: false, vertical: true)
             }
@@ -165,10 +165,10 @@ private struct WindowRow: View {
         VStack(alignment: .leading, spacing: 3) {
             HStack {
                 Text(window.title)
-                    .font(.caption.weight(compact ? .regular : .medium))
+                    .scaledFont(.caption, weight: compact ? .regular : .medium)
                 Spacer()
                 Text(UsageText.percent(window.utilization))
-                    .font(.caption.weight(.semibold))
+                    .scaledFont(.caption, weight: .semibold)
                     .monospacedDigit()
                     .foregroundStyle(window.levelColor)
             }
@@ -178,7 +178,7 @@ private struct WindowRow: View {
                 .controlSize(compact ? .mini : .small)
             if let text = detail ?? UsageText.resetText(window, now: now), !text.isEmpty {
                 Text(text)
-                    .font(.caption2)
+                    .scaledFont(.caption2)
                     .foregroundStyle(.secondary)
             }
         }
@@ -198,7 +198,7 @@ private struct QueuedRow: View {
             Button("Отменить") { launcher.cancelQueued(item.id) }
                 .controlSize(.mini)
         }
-        .font(.caption)
+        .scaledFont(.caption)
     }
 }
 

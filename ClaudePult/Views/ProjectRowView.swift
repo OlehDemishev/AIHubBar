@@ -35,7 +35,7 @@ struct ProjectRowView: View {
     private var summary: some View {
         HStack(alignment: .firstTextBaseline, spacing: 8) {
             Image(systemName: "chevron.right")
-                .font(.caption2.weight(.semibold))
+                .scaledFont(.caption2, weight: .semibold)
                 .foregroundStyle(.tertiary)
                 .rotationEffect(.degrees(isExpanded ? 90 : 0))
                 .frame(width: 8)
@@ -62,13 +62,13 @@ struct ProjectRowView: View {
                             .fixedSize()
                     }
                 }
-                .font(.caption)
+                .scaledFont(.caption)
                 .foregroundStyle(.secondary)
                 .padding(.leading, 14)
             }
         }
         .padding(.horizontal, 10)
-        .padding(.vertical, 6)
+        .densityPadding(6)
         .contentShape(Rectangle())
     }
 
@@ -112,7 +112,7 @@ private struct ProjectDetailsView: View {
             if let summary = project.status?.summary {
                 if let stage = summary.stage, !stage.isEmpty {
                     Text(Markdown.inline(stage))
-                        .font(.callout)
+                        .scaledFont(.callout)
                         .fixedSize(horizontal: false, vertical: true)
                 }
                 BulletSection(title: "Сейчас", items: summary.now)
@@ -120,7 +120,7 @@ private struct ProjectDetailsView: View {
                 BulletSection(title: "Нужно от Олега", items: summary.needs, tint: .orange)
             } else {
                 Text(project.status == nil ? "Нет docs/STATUS.md" : "В STATUS.md нет шапки")
-                    .font(.callout)
+                    .scaledFont(.callout)
                     .foregroundStyle(.secondary)
             }
 
@@ -133,7 +133,7 @@ private struct ProjectDetailsView: View {
                         } icon: {
                             Image(systemName: item.level.symbol).foregroundStyle(item.level.color)
                         }
-                        .font(.caption)
+                        .scaledFont(.caption)
                     }
                 }
             }
@@ -162,7 +162,7 @@ private struct BulletSection: View {
         if !items.isEmpty {
             VStack(alignment: .leading, spacing: 2) {
                 Text(title)
-                    .font(.caption.weight(.semibold))
+                    .scaledFont(.caption, weight: .semibold)
                     .foregroundStyle(tint)
                 ForEach(Array(items.enumerated()), id: \.offset) { _, item in
                     HStack(alignment: .firstTextBaseline, spacing: 5) {
@@ -170,7 +170,7 @@ private struct BulletSection: View {
                         Text(Markdown.inline(item))
                             .fixedSize(horizontal: false, vertical: true)
                     }
-                    .font(.caption)
+                    .scaledFont(.caption)
                 }
             }
         }
@@ -193,7 +193,7 @@ private struct PullRequestRow: View {
                     Text("черновик").foregroundStyle(.tertiary)
                 }
             }
-            .font(.caption)
+            .scaledFont(.caption)
         }
         .buttonStyle(.plain)
         .disabled(pr.url == nil)
@@ -210,7 +210,7 @@ struct ActionButton: View {
     var body: some View {
         Button(action: action) {
             Label(title, systemImage: systemImage)
-                .font(.caption)
+                .scaledFont(.caption)
         }
         .buttonStyle(.bordered)
         .tint(isProminent ? .orange : nil)
@@ -247,7 +247,7 @@ private struct Badge: View {
             Image(systemName: systemImage)
             Text(text).monospacedDigit()
         }
-        .font(.caption2.weight(.medium))
+        .scaledFont(.caption2, weight: .medium)
         .foregroundStyle(color)
         .padding(.horizontal, 5)
         .padding(.vertical, 1)

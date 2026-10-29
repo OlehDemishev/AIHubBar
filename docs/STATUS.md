@@ -1,24 +1,30 @@
 # Status
 
 <!-- summary:start -->
-**Stage:** All 8 spec stages done (widgets deferred); next: settings tabs and appearance
+**Stage:** All 8 spec stages done (widgets deferred); settings tabs and appearance in review
 **Updated:** 2026-10-29
 
 **Now:**
-- nothing in progress
+- PR `feat/settings-appearance` (settings tabs; text size, width, density, theme, visible blocks, animations) — waiting for review
 
 **Next:**
-- Settings: split into tabs (general, projects, Claude, sessions, limits, commands) and add appearance settings — panel text size, density, which blocks to show (Oleh's request)
 - Widgets (WidgetKit: small ring, medium session + week) — need an App Group, i.e. a real signing team instead of ad-hoc signing (see DECISIONS)
 - Fix whatever Oleh finds in docs/CHECKLIST.md
 
 **Needs Oleh:**
+- review and merge PR `feat/settings-appearance`; try the «Внешний вид» tab
 - optional, in _daily-report (not changed by ClaudePult): report.py/bot.py could read `~/Library/Application Support/ClaudePult/usage.json` (`five_hour`, `seven_day`, `updated`) for a /limits bot command or a limits line in the report
 - go through the «Oleh» rows of docs/CHECKLIST.md (buttons inside the panel, Settings, notifications, Telegram messages) — automation cannot click inside ClaudePult
 - free disk space is ~12 GB (< 20 GB): «Очистка: выполнить» when no build is running
 - hooks are installed in ~/.claude/settings.json; backup of the original: ~/.claude/settings.json.claudepult-backup-20261029T192827
 - delete or archive the old repo `OlehDemishev/ClaudeBar`; turn on start at login if wanted
 <!-- summary:end -->
+
+## 2026-10-29 — Settings tabs and appearance (branch `feat/settings-appearance`)
+
+Done: Settings split into tabs Основные / Внешний вид / Claude / Сессии / Лимиты. New «Внешний вид»: theme (also for ClaudePult's windows), panel text size (own scaling — macOS ignores dynamicTypeSize; panel widens with it), width, row density, opening animation, visible blocks, menu bar usage display, reset. All panel fonts go through `scaledFont`. `--app-command settings`; debug snapshot of the Settings window; snapshot falls back to the key window.
+Checked: `scripts/build-and-install.sh --test` — 82 tests (126 cases) green; no compiler warnings. Live: Settings opened via `--app-command settings`, appearance tab snapshot; panel with «Очень крупный» text (546 × 1003 pt) snapshot — fits the screen, forecast line visible; settings restored to normal afterwards. CI not set up; checks run locally.
+Left: tab bar not in snapshots (window frame); theme/width/density need Oleh's eye.
 
 ## 2026-10-29 — Stage 8: subscription limits (branch `feat/usage-limits`)
 

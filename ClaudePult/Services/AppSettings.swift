@@ -74,6 +74,49 @@ final class AppSettings {
 
     static let defaultLimitThresholds = [50, 80, 95]
 
+    // MARK: Appearance
+
+    var panelTextSize: PanelTextSize {
+        didSet { defaults.set(panelTextSize.rawValue, forKey: Keys.panelTextSize) }
+    }
+
+    var panelWidth: PanelWidth {
+        didSet { defaults.set(panelWidth.rawValue, forKey: Keys.panelWidth) }
+    }
+
+    var panelDensity: PanelDensity {
+        didSet { defaults.set(panelDensity.rawValue, forKey: Keys.panelDensity) }
+    }
+
+    var panelTheme: PanelTheme {
+        didSet { defaults.set(panelTheme.rawValue, forKey: Keys.panelTheme) }
+    }
+
+    var panelAnimations: Bool {
+        didSet { defaults.set(panelAnimations, forKey: Keys.panelAnimations) }
+    }
+
+    var hiddenBlocks: Set<PanelBlock> {
+        didSet { defaults.set(hiddenBlocks.map(\.rawValue).sorted(), forKey: Keys.hiddenBlocks) }
+    }
+
+    func shows(_ block: PanelBlock) -> Bool { !hiddenBlocks.contains(block) }
+
+    func setShows(_ block: PanelBlock, _ visible: Bool) {
+        if visible { hiddenBlocks.remove(block) } else { hiddenBlocks.insert(block) }
+    }
+
+    /// Back to the default look (Settings → «Внешний вид» → «Сбросить»).
+    func resetAppearance() {
+        panelTextSize = .normal
+        panelWidth = .normal
+        panelDensity = .normal
+        panelTheme = .system
+        panelAnimations = true
+        hiddenBlocks = []
+        menuBarUsageMode = .session
+    }
+
     static let defaultProjectsDirectory = NSHomeDirectory() + "/Projects"
     static let defaultDailyReportDirectory = NSHomeDirectory() + "/Projects/_daily-report"
 
@@ -90,6 +133,12 @@ final class AppSettings {
         let thresholds = (defaults.array(forKey: Keys.limitThresholds) as? [Int])?.filter { (1...100).contains($0) }
         limitThresholds = thresholds?.isEmpty == false ? thresholds! : Self.defaultLimitThresholds
         limitAlertsToTelegram = defaults.bool(forKey: Keys.limitAlertsToTelegram)
+        panelTextSize = defaults.string(forKey: Keys.panelTextSize).flatMap(PanelTextSize.init(rawValue:)) ?? .normal
+        panelWidth = defaults.string(forKey: Keys.panelWidth).flatMap(PanelWidth.init(rawValue:)) ?? .normal
+        panelDensity = defaults.string(forKey: Keys.panelDensity).flatMap(PanelDensity.init(rawValue:)) ?? .normal
+        panelTheme = defaults.string(forKey: Keys.panelTheme).flatMap(PanelTheme.init(rawValue:)) ?? .system
+        panelAnimations = defaults.object(forKey: Keys.panelAnimations) as? Bool ?? true
+        hiddenBlocks = Set((defaults.stringArray(forKey: Keys.hiddenBlocks) ?? []).compactMap(PanelBlock.init(rawValue:)))
     }
 
     var reportScript: String {
@@ -106,5 +155,11 @@ final class AppSettings {
         static let menuBarUsageMode = "menuBarUsageMode"
         static let limitThresholds = "limitThresholds"
         static let limitAlertsToTelegram = "limitAlertsToTelegram"
+        static let panelTextSize = "panelTextSize"
+        static let panelWidth = "panelWidth"
+        static let panelDensity = "panelDensity"
+        static let panelTheme = "panelTheme"
+        static let panelAnimations = "panelAnimations"
+        static let hiddenBlocks = "hiddenBlocks"
     }
 }

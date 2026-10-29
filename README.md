@@ -40,7 +40,13 @@ First steps after installing:
 
 ## Settings
 
-«Настройки…» (⌘,): menu bar usage display, limit thresholds and Telegram for limit alerts; start at login; projects folder (`~/Projects`); `_daily-report` folder; path to `claude` (empty = auto-detect in `/opt/homebrew/bin`, `/usr/local/bin`, `~/.local/bin`, `~/.claude/local`); launch mode (ask / Терминал / Фон); background time limit (90 min); background results in Telegram; session hooks (install / update / remove); app log.
+«Настройки…» (⌘,), one tab per area:
+
+- **Основные** — start at login, projects folder, `_daily-report` folder, version, app log.
+- **Внешний вид** — theme (system / light / dark, also for ClaudePult's windows), text size (small / normal / large / extra large; the panel widens with it), panel width, row density, opening animation, which blocks to show (Лимиты, Сессии, Проекты, Команды), what the menu bar shows next to the icon, «Сбросить внешний вид».
+- **Claude** — path to `claude` (empty = auto-detect), launch mode (ask / Терминал / Фон), background time limit, background results in Telegram.
+- **Сессии** — install / update / remove the session hooks.
+- **Лимиты** — notification thresholds, limit alerts to Telegram.
 
 ## Background mode
 
@@ -67,7 +73,7 @@ The app binary runs headless commands instead of the UI: `~/Applications/ClaudeP
 | `--claude … --print` · `--claude-path <path>` | print the command line · use another binary (e.g. `/bin/echo`) |
 | `--background-settings` | permission rules of background runs |
 | `--command report\|summary\|cleanup-check\|cleanup` | run a common command here and print its result |
-| `--app-command <command>\|help\|cleanup-output` | ask the running app to run a command or open a window |
+| `--app-command <command>\|help\|cleanup-output\|settings` | ask the running app to run a command or open a window |
 | `--hooks status\|install\|uninstall` | session hooks |
 | `--usage` · `--usage-raw` · `--token-usage` | subscription limits (raw response; the token is never printed) · per-project breakdown |
 | `--sessions` · `--show-session <id>` | list sessions · bring a session's Terminal tab forward |

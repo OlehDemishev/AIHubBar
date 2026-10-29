@@ -79,5 +79,8 @@ Panel snapshots: `defaults write com.demishev.claudepult DebugPanelSnapshot -boo
 |---|---|
 | Start at login on/off | Live (`--login-item`); **Oleh: toggle** |
 | Paths, claude path, launch mode, time limit, Telegram toggle, hooks buttons | **Oleh** |
+| Settings tabs; appearance tab content | Live (`--app-command settings`, snapshot) |
+| Text size «Очень крупный» in the panel | Live (snapshot: 546 × 1003 pt) |
+| Theme, width, density, blocks, animations switches | Auto (persistence); **Oleh: look** |
 | Помощь window | Live (`--app-command help`, snapshot) |
 | help.txt block «🖥 ClaudePult», ≤ 4000 characters | Live (2429 characters) |
