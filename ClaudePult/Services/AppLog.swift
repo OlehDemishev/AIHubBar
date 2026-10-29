@@ -9,6 +9,8 @@ enum AppLog {
     static let fileURL = directory.appending(path: "ClaudePult.log")
 
     private static let maxFileSize = 1_000_000
+    /// Unit tests run inside the app; keep their git sandboxes and launches out of the real log.
+    private static let writesFile = ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] == nil
     private static let queue = DispatchQueue(label: "com.demishev.claudepult.log")
     private static let logger = Logger(subsystem: "com.demishev.claudepult", category: "app")
 
@@ -22,7 +24,13 @@ enum AppLog {
         write("ERROR", message)
     }
 
+    /// Waits for pending writes; call before `exit()` in command-line mode.
+    static func flush() {
+        queue.sync {}
+    }
+
     private static func write(_ level: String, _ message: String) {
+        guard writesFile else { return }
         let line = "\(Date.now.ISO8601Format(.iso8601(timeZone: .current))) \(level) \(message)\n"
         queue.async {
             let fm = FileManager.default

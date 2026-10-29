@@ -2,7 +2,14 @@
 
 Native macOS menu bar app (no Dock icon): a control panel for the projects in `~/Projects` and for Claude Code sessions. Full specification: [docs/SPEC.md](docs/SPEC.md). Progress: [docs/STATUS.md](docs/STATUS.md). Design decisions: [DECISIONS.md](DECISIONS.md).
 
-Current stage: **2 — projects**. The panel lists the projects from `~/Projects` with health, branch, uncommitted files, open PRs (coloured by CI) and last activity; a project expands into its STATUS.md header (Stage / Now / Next / Needs Oleh), attention items, open PRs and «Терминал / Finder / GitHub» buttons. The menu bar icon gets a red dot when any project's health is red.
+Current stage: **3 — launching Claude in Terminal**. The panel lists the projects from `~/Projects` with health, branch, uncommitted files, open PRs (coloured by CI) and last activity. A project expands into:
+
+- **Claude** commands — «Следующий шаг», «Своя задача…» (text field), «Завершить»: each opens a new Terminal window in the project folder and starts `claude` with the prompt from docs/SPEC.md §2.4 as the first message. If a Claude Code session already runs in the project folder, «Следующий шаг» and «Своя задача» start in a new worktree `.claude/worktrees/cb-<slug>` on branch `claude/<slug>` from `origin/main`; «Завершить» asks before starting a second session in the same folder.
+- «Терминал / Finder / GitHub» buttons;
+- the STATUS.md header (Stage / Now / Next / Needs Oleh), attention items and open PRs;
+- the project's worktrees with a delete button (only when clean and pushed or merged).
+
+The menu bar icon gets a red dot when any project's health is red. The first Claude launch makes macOS ask for permission to control Terminal (System Settings → Privacy & Security → Automation).
 
 Project data comes from `~/Projects/_daily-report/report.py --json` (the git/STATUS logic lives there, not in Swift). Refresh: at launch, when the panel opens and the data is older than 60 s, every 5 min in the background (`--no-fetch`), every 30 min with `git fetch`, and with ⌘R / the ↻ button in the panel.
 
@@ -44,7 +51,7 @@ Layout:
 
 ## Settings
 
-«Настройки…» (⌘,): start at login, projects folder (default `~/Projects`), `_daily-report` folder (default `~/Projects/_daily-report`), app log location.
+«Настройки…» (⌘,): start at login, projects folder (default `~/Projects`), `_daily-report` folder (default `~/Projects/_daily-report`), path to `claude` (empty = auto-detect in `/opt/homebrew/bin`, `/usr/local/bin`, `~/.local/bin`, `~/.claude/local`), app log location.
 
 ## Logs
 
@@ -74,3 +81,8 @@ The app binary accepts headless commands (used by scripts and checks; the UI is 
 | `--login-item status` | print login item state (`enabled`, `disabled`, `requiresApproval`) |
 | `--login-item on` | register ClaudePult as a login item |
 | `--login-item off` | unregister it |
+| `--claude next <project>` | «Следующий шаг» in a new Terminal window (worktree if the folder is busy) |
+| `--claude task <project> <text>` | «Своя задача» with the given text |
+| `--claude finish <project>` | «Завершить сессию»; exits with 3 if the folder is busy |
+| `--claude … --print` | print the command line instead of launching |
+| `--claude … --claude-path <path>` | use another binary, e.g. `/bin/echo` for a dry run |

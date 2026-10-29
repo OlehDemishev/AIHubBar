@@ -53,6 +53,20 @@ struct SettingsView: View {
             }
 
             Section {
+                LabeledContent("Путь к claude") {
+                    TextField("", text: $settings.claudePath, prompt: Text(ClaudeLocator.detect().map { "авто: \($0)" } ?? "авто: не найден"))
+                        .textFieldStyle(.roundedBorder)
+                        .frame(width: 260)
+                }
+            } header: {
+                Text("Claude")
+            } footer: {
+                Text("Пусто — искать в /opt/homebrew/bin, /usr/local/bin, ~/.local/bin, ~/.claude/local. Команды «Следующий шаг», «Своя задача», «Завершить» открывают новое окно Терминала; при первом запуске macOS спросит разрешение на управление Терминалом.")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+
+            Section {
                 LabeledContent("Версия", value: Self.version)
                 LabeledContent("Журнал") {
                     Button("Показать в Finder") {
