@@ -5,7 +5,7 @@
 **Updated:** 2026-10-30
 
 **Now:**
-- SPEC-profiles stage 1, model: modules, profiles, migration, `.claudepult` v2 — branch `feat/profiles-model` (worktree `.claude/worktrees/profiles-stage1`), PR open; the spec itself is PR #67
+- SPEC-profiles stage 1, model: modules, profiles, migration, `.claudepult` v2 — branch `feat/profiles-model` (worktree `.claude/worktrees/profiles-stage1`), PR open; the spec is merged (PR #67)
 
 **Next:**
 - SPEC-profiles stage 2: panel and menu bar from profile modules, «Профили» and «Модули» tabs, «режим» → «профиль» in all 13 languages (moved here from stage 1: these strings get rewritten anyway)
@@ -45,6 +45,12 @@ Left: stage 2.
 Done: for sessions of the Claude desktop app «Показать» (panel and notification) used to only activate Claude, which looked like nothing happened when Claude was already in front. Now ClaudePult finds the app's own record (`~/Library/Application Support/Claude/claude-code-sessions/*/*/local_*.json`, `cliSessionId` or `previousCliSessionIds` = the hook's `session_id`, not archived) and opens `claude://code/continue?session=local_…`, the link the app itself offers; without a record it still just opens Claude. `--show-session <id>` handles desktop-app sessions too. Help text updated in all 12 languages; README, DECISIONS, CHECKLIST updated.
 Checked: `xcodebuild test` — 164 tests green (new `desktopSessionLink`); installed; live: `--show-session` switched the Claude window to another ClaudePult session and back (the app's `lastFocusedAt` moved to the opened session each time). The button inside the panel is not clickable by automation. CI not set up; checks run locally.
 Left: Terminal.app is the only terminal whose tab is found; iTerm, Warp and IDE terminals still open the folder.
+
+## 2026-10-30 — Spec: profiles made of modules (branch `docs/spec-profiles`)
+
+Done: `docs/SPEC-profiles.md`, variant C agreed with Oleh. Modules are installed once from a catalog (permissions and background work come with installing); a profile picks which installed modules to show, in what order and with which of its own settings; ClaudePult starts empty, a profile comes from the assistant or Settings. The spec lists the catalog (the existing blocks plus first-wave Ресурсы Mac, Не спать with «пока работает Claude», Быстрые команды, Быстрые переключатели; second wave and what not to build), the new assistant steps, the Settings tabs, the migration from modes (Oleh's setup unchanged, `.claudepult` v2) and six stages. Ideas taken from Vorssaint (GPL-3.0) — no code.
+Checked: docs only; no code changed.
+Left: Oleh to confirm the open questions in §10 before stage 1.
 
 ## 2026-10-30 — Renew the Claude Code sign-in automatically (branch `feat/renew-login`)
 
