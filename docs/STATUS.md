@@ -5,7 +5,7 @@
 **Updated:** 2026-10-30
 
 **Now:**
-- hover hints for icon-only controls and the menu bar item (branch `feat/hover-hints`, PR open, waits for Oleh's merge)
+- hover hints for icon-only controls and the menu bar item merged (PR #91)
 - second wave merged: «История буфера» and «Заметки» (PR #87), «Не спать» with the lid closed (PR #89)
 - release without an Apple Developer account merged (PR #85): Sparkle, self-signed signing, `scripts/release.sh`, MIT license; nothing published yet
 - Windows and Linux specs merged (PR #73); implementation waits for Oleh
