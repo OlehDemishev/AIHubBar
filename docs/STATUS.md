@@ -7,7 +7,7 @@
 **Now:**
 - merged: menu bar drag reordering (PR #93), translation review (PR #94), release build re-checked on main (PR #95)
 - panel redesigned as cards, variant A, merged (PR #98)
-- feature batch from Oleh's «все»: approve from notifications merged (PR #100); current action merged (PR #102); week forecast merged (PR #104); Telegram answers (PR open); then week forecast, Telegram, PR/CI alerts, hotkey and search, widget, night queue, context warning
+- feature batch from Oleh's «все»: approve from notifications merged (PR #100); current action merged (PR #102); week forecast merged (PR #104); Telegram answers merged (PR #106); then week forecast, Telegram, PR/CI alerts, hotkey and search, widget, night queue, context warning
 - hover hints for icon-only controls and the menu bar item merged (PR #91)
 - second wave merged: «История буфера» and «Заметки» (PR #87), «Не спать» with the lid closed (PR #89)
 - release without an Apple Developer account merged (PR #85): Sparkle, self-signed signing, `scripts/release.sh`, MIT license; nothing published yet
