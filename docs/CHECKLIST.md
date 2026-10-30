@@ -384,6 +384,13 @@ Panel snapshots: `defaults write com.demishev.claudepult DebugPanelSnapshot -boo
 | The menu bar item's `AXHelp` (its tooltip) reads «ClaudePult, сессия 10 %, неделя 81 %, есть проекты с проблемами»; ☕ in the panel says «держу: работает Claude» | Live |
 | Seeing the tooltips appear under the mouse | Oleh (synthetic mouse moves don't make macOS show tooltips) |
 
+## Menu bar elements reordered by dragging (2026-10-30)
+
+| Scenario | Checked |
+|---|---|
+| Dropped on an element to the right it lands after it, to the left before it; onto itself nothing changes; every element stays exactly once | Auto (`MenuBarTests.dragMovesOntoTarget`) |
+| Settings → «Строка меню»: chips of the switched-on elements under the preview; «Ждут» dragged onto «Значок» (real mouse events) moved to the front, preview and list followed | Live (Oleh's profile and menu bar restored afterwards) |
+
 ## Release without an Apple Developer account (2026-10-30)
 
 | Scenario | Checked |

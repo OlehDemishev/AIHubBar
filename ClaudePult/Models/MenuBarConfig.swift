@@ -85,6 +85,15 @@ struct MenuBarConfig: Codable, Equatable, Hashable, Sendable {
         if let index = elements.firstIndex(where: { $0.kind == kind }) { change(&elements[index]) }
     }
 
+    /// Drag and drop: `kind` takes `target`'s place — dropped on an element to its right it lands after it, to its
+    /// left before it, so any element reaches any position.
+    mutating func move(_ kind: MenuBarElement.Kind, onto target: MenuBarElement.Kind) {
+        guard kind != target,
+              let from = elements.firstIndex(where: { $0.kind == kind }),
+              let to = elements.firstIndex(where: { $0.kind == target }) else { return }
+        elements.insert(elements.remove(at: from), at: to)
+    }
+
     enum CodingKeys: String, CodingKey { case elements, separator, smallText, colored, preset }
 
     init(elements: [MenuBarElement], separator: Separator, smallText: Bool, colored: Bool, preset: Preset) {
@@ -149,6 +158,29 @@ struct MenuBarElement: Codable, Equatable, Hashable, Identifiable, Sendable {
         }
 
         var isGauge: Bool { [.session, .week, .modelWeek, .cpu, .memory].contains(self) }
+
+        /// For the order chips in Settings.
+        var shortTitle: String {
+            switch self {
+            case .icon: String(localized: "Значок")
+            case .projectsAlert: String(localized: "Проблемы")
+            case .session: String(localized: "Сессия")
+            case .week: String(localized: "Неделя")
+            case .modelWeek: String(localized: "Модель")
+            case .resetCountdown: String(localized: "Сброс")
+            case .forecast: String(localized: "Прогноз")
+            case .waiting: String(localized: "Ждут")
+            case .running: String(localized: "Работают")
+            case .background: String(localized: "Фон")
+            case .queued: String(localized: "Очередь")
+            case .deadline: String(localized: "Дата")
+            case .disk: String(localized: "Диск")
+            case .mode: String(localized: "Профиль")
+            case .cpu: String(localized: "Процессор")
+            case .memory: String(localized: "Память")
+            case .keepAwake: String(localized: "Не спать")
+            }
+        }
     }
 
     enum GaugeStyle: String, Codable, CaseIterable, Sendable {

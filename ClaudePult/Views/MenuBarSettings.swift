@@ -24,7 +24,7 @@ struct MenuBarSettings: View {
                     Footnote(text: String(localized: "«Минимум» — значок, проблемы и ожидающие ответа. «Лимиты» — ещё сессия и неделя. «Всё» — всё, что есть. Любая правка ниже делает набор «Своим»."))
                 }
 
-                Section("Элементы — в порядке слева направо") {
+                Section("Элементы — в порядке слева направо (или перетаскиванием вверху)") {
                     ForEach(Array(settings.menuBarConfig.elements.enumerated()), id: \.element.id) { index, element in
                         ElementRow(
                             element: element,
@@ -88,6 +88,7 @@ struct MenuBarSettings: View {
                 Spacer()
             }
             .padding(.vertical, 6)
+            orderChips
             if width > MenuBarRenderer.wideWidth {
                 Label("Строка широкая (\(Int(width)) pt): на MacBook с вырезом её может закрыть вырез или скрыть система.",
                       systemImage: "exclamationmark.triangle")
@@ -100,6 +101,19 @@ struct MenuBarSettings: View {
             }
         }
         .padding(14)
+    }
+
+    /// The switched-on elements in menu bar order; dragging one onto another moves it there.
+    private var orderChips: some View {
+        let shown = settings.menuBarConfig.elements.filter(\.enabled)
+        return VStack(alignment: .leading, spacing: 4) {
+            FlowChips(kinds: shown.map(\.kind)) { kind, target in
+                edit { $0.move(kind, onto: target) }
+            }
+            Text("Перетащите элемент на другой, чтобы поменять порядок; включить и выключить — в списке ниже.")
+                .font(.caption)
+                .foregroundStyle(.secondary)
+        }
     }
 
     /// Only what Settings can see; the real menu bar also counts sessions, runs and the queue.
@@ -149,6 +163,40 @@ struct MenuBarSettings: View {
             get: { settings.menuBarConfig[keyPath: path] },
             set: { var config = settings.menuBarConfig; config[keyPath: path] = $0; store(config) }
         )
+    }
+}
+
+/// The order chips: one capsule per switched-on element, each a drag source and a drop target.
+private struct FlowChips: View {
+    let kinds: [MenuBarElement.Kind]
+    let onMove: (MenuBarElement.Kind, MenuBarElement.Kind) -> Void
+    @State private var targeted: MenuBarElement.Kind?
+
+    var body: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 6) {
+                ForEach(kinds, id: \.self) { kind in
+                    Text(kind.shortTitle)
+                        .font(.caption)
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 3)
+                        .background(Capsule().fill(targeted == kind ? Color.accentColor.opacity(0.35) : Color.secondary.opacity(0.15)))
+                        .overlay(Capsule().strokeBorder(targeted == kind ? Color.accentColor : .clear))
+                        .help(kind.title)
+                        .draggable(kind.rawValue) {
+                            Text(kind.shortTitle).font(.caption).padding(4)
+                        }
+                        .dropDestination(for: String.self) { items, _ in
+                            guard let raw = items.first, let dragged = MenuBarElement.Kind(rawValue: raw) else { return false }
+                            onMove(dragged, kind)
+                            return true
+                        } isTargeted: { inside in
+                            if inside { targeted = kind } else if targeted == kind { targeted = nil }
+                        }
+                }
+            }
+            .padding(.vertical, 2)
+        }
     }
 }
 
