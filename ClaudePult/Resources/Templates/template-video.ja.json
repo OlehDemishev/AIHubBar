@@ -1,0 +1,87 @@
+{
+  "format": "claudepult-template",
+  "version": 1,
+  "order": 1,
+  "language": "ja",
+  "id": "video",
+  "title": "動画 (YouTube、Shorts、Reels)",
+  "description": "動画ごとに 1 フォルダー。アイデアから公開までの段階、語数と尺、フック、Shorts、説明文とタイムスタンプ、タイトル、ファクトチェック、翻訳。締め切りはカレンダーに。",
+  "folderHint": "各サブフォルダーが 1 本の動画になるフォルダー",
+  "mode": {
+    "name": "動画",
+    "icon": "video",
+    "template": "video",
+    "source": {
+      "folders": {
+        "_0": "~/Documents/Video"
+      }
+    },
+    "card": "projectMD",
+    "stages": [
+      "アイデア",
+      "リサーチ",
+      "台本",
+      "収録",
+      "編集",
+      "公開済み"
+    ],
+    "metrics": [
+      "words",
+      "duration",
+      "deadline",
+      "publishDate"
+    ],
+    "permissions": "filesOnly",
+    "calendar": "dates",
+    "launchMode": "background",
+    "showProjects": true,
+    "commonCommands": "none",
+    "showCommonCommands": false,
+    "commands": [
+      {
+        "id": "video-hooks",
+        "title": "フック",
+        "output": "フック.md",
+        "task": "動画の冒頭を 5 案出してください — 視聴者を引き留める最初の 5〜10 秒です。動画: {format}、この台本がベース。手法を変えてください: 意外な事実、視聴者への問いかけ、結果の約束、小さな物語、よくある思い込みへの反論。各案に、声に出す台本そのものと、何に訴えるかを 1 行で。最後に、どれを選ぶかとその理由を 1 文で。",
+        "input": "mainFile"
+      },
+      {
+        "id": "video-shorts",
+        "title": "Shorts 版",
+        "output": "台本-shorts.md",
+        "task": "台本を 60 秒以内の縦型動画にしてください — 約 140〜150 語。主旨と一番強い場面を残し、前置きと繰り返しを削ります。最初の一言ですぐ引きつけ、最後は本編を見たくなるかチャンネル登録したくなるように。話し言葉で: 短い文、堅い言い回しなし。最後に語数を書いてください。",
+        "input": "mainFile"
+      },
+      {
+        "id": "video-description",
+        "title": "説明文とタイムスタンプ",
+        "output": "説明文.md",
+        "task": "YouTube 公開用に一式を用意してください: 1) 2〜3 段落の説明文。最初の 2 行が最も重要 (「もっと見る」の前に見える)、釣りタイトル風は禁止; 2) 台本の区切りごとのタイムスタンプを 00:00 — 見出し の形式で (1 分 150 語で見積もり、最初は 00:00); 3) カンマ区切りのタグ 10〜15 個; 4) ハッシュタグ 3 個。台本と同じ言語で。",
+        "input": "mainFile"
+      },
+      {
+        "id": "video-titles",
+        "title": "タイトルとサムネイル",
+        "output": "タイトル.md",
+        "task": "動画のタイトルを 10 案 — 60 文字以内で正直に (動画の中身どおりの約束)、切り口を変えて: 得られること、好奇心、具体的な結果、数字、問いかけ。ベスト 3 に印を。次にサムネイル案を 3 つ: 画面に映るもの、大きな文字 (4 語以内)、感情。",
+        "input": "mainFile"
+      },
+      {
+        "id": "video-facts",
+        "title": "ファクトチェック",
+        "output": "事実確認.md",
+        "task": "台本中の検証できる主張をすべて挙げてください: 数字、日付、名前、引用、因果関係の主張。それぞれについて: 主張、どのくらい怪しいか (確実 / 要確認 / 疑わしい) とその理由、何をどこで確かめるか。台本は直さず、出典を作らないでください — 自信がなければそう書いてください。",
+        "input": "mainFile",
+        "service": "claude-code"
+      },
+      {
+        "id": "video-translate",
+        "title": "翻訳",
+        "output": "台本-{language}.md",
+        "task": "ナレーション用に台本を {language} に翻訳してください: トーン、ジョーク、話のリズムを保ち、慣用句や例はその視聴者に合わせ、逐語訳はしないこと。固有名詞と用語はわかる形で残してください。最後に、原文から大きく離れた箇所の一覧を。",
+        "input": "mainFile",
+        "asks": "言語"
+      }
+    ]
+  }
+}

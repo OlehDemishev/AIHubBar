@@ -1,0 +1,80 @@
+{
+  "format": "claudepult-template",
+  "version": 1,
+  "order": 3,
+  "language": "id",
+  "id": "research",
+  "title": "Riset dan belajar",
+  "description": "Satu folder per topik dengan sumber (PDF, tautan, catatan); ringkasan, kutipan, tabel ringkasan, celah, rencana; Claude boleh mencari di web.",
+  "folderHint": "Folder yang setiap subfoldernya adalah topik",
+  "mode": {
+    "name": "Riset",
+    "icon": "books.vertical",
+    "template": "research",
+    "source": {
+      "folders": {
+        "_0": "~/Documents/Riset"
+      }
+    },
+    "card": "projectMD",
+    "stages": [
+      "topik",
+      "kumpulkan sumber",
+      "catatan",
+      "kesimpulan",
+      "selesai"
+    ],
+    "metrics": [
+      "sources",
+      "words",
+      "deadline"
+    ],
+    "permissions": "filesAndWeb",
+    "calendar": "dates",
+    "launchMode": "background",
+    "showProjects": true,
+    "commonCommands": "none",
+    "showCommonCommands": false,
+    "commands": [
+      {
+        "id": "research-summary",
+        "title": "Ringkasan sumber",
+        "output": "ringkasan-<file>.md",
+        "task": "Ringkas sumber yang dipilih: isinya dalam 2–3 kalimat; tesis utama berupa daftar; angka dan definisi kunci; apa yang diperdebatkan atau belum terbukti; kaitannya dengan topik proyek. Hanya yang ada di sumber — tanpa tambahan dari pengetahuan umum (tandai konteks tambahan dengan «di luar sumber»).",
+        "input": "mainFile"
+      },
+      {
+        "id": "research-quotes",
+        "title": "Kutipan dengan rujukan",
+        "output": "kutipan.md",
+        "task": "Ambil dari sumber proyek kutipan yang paling berguna untuk topik — kata per kata, dengan berkas dan halaman/bagian jika ada. Kelompokkan per subtopik. Jangan menulis ulang apa pun dengan kata-kata sendiri di berkas ini.",
+        "input": "project",
+        "service": "claude-code"
+      },
+      {
+        "id": "research-table",
+        "title": "Tabel ringkasan",
+        "output": "ikhtisar.md",
+        "task": "Susun sumber proyek dalam tabel: sumber, tahun/penulis (jika ada), tesis utama, metode atau data, manfaat untuk topik, keterbatasan. Di bawah tabel: di mana sumber sepakat dan di mana bertentangan.",
+        "input": "project",
+        "service": "claude-code"
+      },
+      {
+        "id": "research-gaps",
+        "title": "Yang belum dipelajari",
+        "output": "celah.md",
+        "task": "Dari materi proyek, tentukan pertanyaan topik yang belum atau kurang tercakup. Untuk tiap celah: mengapa penting dan sumber atau data apa yang bisa menutupnya. Jangan mengarang sumber tertentu — jelaskan apa yang perlu dicari.",
+        "input": "project",
+        "service": "claude-code"
+      },
+      {
+        "id": "research-plan",
+        "title": "Rencana kerja",
+        "output": "rencana.md",
+        "task": "Susun rencana tulisan (artikel, presentasi, makalah) dari materi proyek: bagian-bagian, isi tiap bagian, sumber yang dipakai, perkiraan panjang. Tandai bagian yang materinya masih kurang.",
+        "input": "project",
+        "service": "claude-code"
+      }
+    ]
+  }
+}

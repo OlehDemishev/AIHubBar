@@ -1,0 +1,84 @@
+{
+  "format": "claudepult-template",
+  "version": 1,
+  "order": 2,
+  "language": "it",
+  "id": "texts",
+  "title": "Testi (articoli, blog, newsletter)",
+  "description": "Una cartella per testo; fasi dall'idea alla pubblicazione; parole e tempo di lettura; editing, correzione di bozze, altro tono, accorciare, SEO, suddivisione in post.",
+  "folderHint": "Una cartella in cui ogni sottocartella è un articolo o un numero",
+  "mode": {
+    "name": "Testi",
+    "icon": "doc.text",
+    "template": "texts",
+    "source": {
+      "folders": {
+        "_0": "~/Documents/Testi"
+      }
+    },
+    "card": "projectMD",
+    "stages": [
+      "idea",
+      "bozza",
+      "editing",
+      "pubblicato"
+    ],
+    "metrics": [
+      "words",
+      "readingTime",
+      "publishDate"
+    ],
+    "permissions": "filesOnly",
+    "calendar": "dates",
+    "launchMode": "background",
+    "showProjects": true,
+    "commonCommands": "none",
+    "showCommonCommands": false,
+    "commands": [
+      {
+        "id": "texts-edit",
+        "title": "Editing",
+        "output": "editing.md",
+        "task": "Fai l'editing del testo: togli riempitivi, burocratese, ripetizioni e luoghi comuni, semplifica le frasi lunghe, conserva il senso, i fatti e la voce dell'autore. Prima il testo rivisto per intero. Poi un elenco delle 5–10 modifiche più importanti come «prima → dopo → perché».",
+        "input": "mainFile"
+      },
+      {
+        "id": "texts-proof",
+        "title": "Correzione di bozze",
+        "output": "correzione.md",
+        "task": "Trova errori di ortografia, punteggiatura e grammatica, refusi e concordanze sbagliate. Non cambiare lo stile né le formulazioni. Dai il testo corretto e poi l'elenco delle correzioni.",
+        "input": "mainFile"
+      },
+      {
+        "id": "texts-tone",
+        "title": "Altro tono",
+        "output": "tono-{text}.md",
+        "task": "Riscrivi il testo con questo tono: {text} (per esempio: più amichevole, più severo, con umorismo, per esperti, per principianti). Stesso senso, stessi fatti, stessa struttura.",
+        "input": "mainFile",
+        "asks": "Tono"
+      },
+      {
+        "id": "texts-length",
+        "title": "Accorcia / allunga",
+        "output": "versione-{text}.md",
+        "task": "Fai una versione del testo di circa {text} parole. Se accorci, tieni l'essenziale e gli esempi più forti. Se allunghi, aggiungi spiegazioni ed esempi sul tema — niente riempitivi e nessun fatto nuovo senza la nota «da verificare».",
+        "input": "mainFile",
+        "asks": "Quante parole"
+      },
+      {
+        "id": "texts-seo",
+        "title": "SEO",
+        "output": "seo.md",
+        "task": "Proponi: un titolo per i motori di ricerca (massimo 60 caratteri), una meta description (massimo 155 caratteri), 5–8 frasi chiave a cui il testo risponde davvero e 3 idee di sottotitoli H2 mancanti. Non cambiare il testo.",
+        "input": "mainFile"
+      },
+      {
+        "id": "texts-posts",
+        "title": "Suddividi in post",
+        "output": "post.md",
+        "task": "Trasforma il testo in una serie di post per {platform}: 3–5 post, ognuno autonomo con una propria idea tratta dal testo, una prima riga che aggancia e un invito all'azione alla fine. Rispetta il formato della piattaforma (lunghezza, hashtag, emoji con moderazione). Numerali e indica l'ordine di pubblicazione.",
+        "input": "mainFile"
+      }
+    ]
+  }
+}

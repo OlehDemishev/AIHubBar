@@ -1,0 +1,37 @@
+{
+  "format": "claudepult-template",
+  "version": 1,
+  "order": 5,
+  "language": "de",
+  "id": "custom",
+  "title": "Eigener",
+  "description": "Eine leere Auswahl: «Eigene Aufgabe» und die Phasen «in Arbeit → fertig». Alles andere in Einstellungen → «Modi».",
+  "folderHint": "Ein Ordner, in dem jeder Unterordner ein Projekt ist",
+  "mode": {
+    "name": "Mein Modus",
+    "icon": "sparkle",
+    "template": "custom",
+    "source": {
+      "folders": {
+        "_0": "~/Documents/Projekte"
+      }
+    },
+    "card": "projectMD",
+    "stages": [
+      "in Arbeit",
+      "fertig"
+    ],
+    "metrics": [
+      "words",
+      "deadline",
+      "lastActivity"
+    ],
+    "permissions": "filesOnly",
+    "calendar": "dates",
+    "launchMode": "background",
+    "showProjects": true,
+    "commonCommands": "none",
+    "showCommonCommands": false,
+    "commands": []
+  }
+}

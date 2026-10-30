@@ -1,0 +1,80 @@
+{
+  "format": "claudepult-template",
+  "version": 1,
+  "order": 3,
+  "language": "ko",
+  "id": "research",
+  "title": "리서치와 학습",
+  "description": "주제마다 자료 폴더 하나 (PDF, 링크, 메모). 요약, 인용, 요약표, 빈 곳, 계획. Claude가 웹 검색도 할 수 있습니다.",
+  "folderHint": "하위 폴더마다 주제 하나가 되는 폴더",
+  "mode": {
+    "name": "리서치",
+    "icon": "books.vertical",
+    "template": "research",
+    "source": {
+      "folders": {
+        "_0": "~/Documents/Research"
+      }
+    },
+    "card": "projectMD",
+    "stages": [
+      "주제",
+      "자료 수집",
+      "메모",
+      "결론",
+      "완료"
+    ],
+    "metrics": [
+      "sources",
+      "words",
+      "deadline"
+    ],
+    "permissions": "filesAndWeb",
+    "calendar": "dates",
+    "launchMode": "background",
+    "showProjects": true,
+    "commonCommands": "none",
+    "showCommonCommands": false,
+    "commands": [
+      {
+        "id": "research-summary",
+        "title": "자료 요약",
+        "output": "요약-<file>.md",
+        "task": "고른 자료를 요약하세요: 무엇에 관한 것인지 2~3문장, 주요 주장 목록, 핵심 숫자와 정의, 논란이 있거나 입증되지 않은 점, 프로젝트 주제와의 관계. 자료에 있는 것만 쓰고 일반 상식은 더하지 마세요 (더한 맥락에는 «자료 밖» 표시).",
+        "input": "mainFile"
+      },
+      {
+        "id": "research-quotes",
+        "title": "출처가 있는 인용",
+        "output": "인용.md",
+        "task": "프로젝트 자료에서 주제에 가장 쓸모 있는 인용을 그대로 뽑으세요. 파일과 쪽/절이 있으면 함께. 하위 주제별로 묶고, 이 파일에서는 자기 말로 바꿔 쓰지 마세요.",
+        "input": "project",
+        "service": "claude-code"
+      },
+      {
+        "id": "research-table",
+        "title": "요약표",
+        "output": "개요.md",
+        "task": "프로젝트 자료를 표로 정리하세요: 자료, 연도/저자 (알면), 주요 주장, 방법이나 데이터, 주제에 대한 쓸모, 한계. 표 아래에 자료들이 일치하는 점과 서로 어긋나는 점을.",
+        "input": "project",
+        "service": "claude-code"
+      },
+      {
+        "id": "research-gaps",
+        "title": "아직 살피지 않은 것",
+        "output": "빈곳.md",
+        "task": "프로젝트 자료가 다루지 않거나 약하게 다루는 주제의 질문을 찾으세요. 각각에 대해 왜 중요한지, 어떤 자료나 데이터가 채울지. 구체적인 출처를 지어내지 말고 무엇을 찾을지 설명하세요.",
+        "input": "project",
+        "service": "claude-code"
+      },
+      {
+        "id": "research-plan",
+        "title": "작업 계획",
+        "output": "계획.md",
+        "task": "프로젝트 자료로 글 (기사, 발표, 보고서)의 계획을 세우세요: 구성, 각 부분의 내용, 기댈 자료, 대략의 분량. 아직 자료가 부족한 곳을 표시하세요.",
+        "input": "project",
+        "service": "claude-code"
+      }
+    ]
+  }
+}

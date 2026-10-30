@@ -1,0 +1,37 @@
+{
+  "format": "claudepult-template",
+  "version": 1,
+  "order": 5,
+  "language": "it",
+  "id": "custom",
+  "title": "Personale",
+  "description": "Una selezione vuota: «Attività personale» e le fasi «in corso → fatto». Tutto il resto in Impostazioni → «Modalità».",
+  "folderHint": "Una cartella in cui ogni sottocartella è un progetto",
+  "mode": {
+    "name": "La mia modalità",
+    "icon": "sparkle",
+    "template": "custom",
+    "source": {
+      "folders": {
+        "_0": "~/Documents/Progetti"
+      }
+    },
+    "card": "projectMD",
+    "stages": [
+      "in corso",
+      "fatto"
+    ],
+    "metrics": [
+      "words",
+      "deadline",
+      "lastActivity"
+    ],
+    "permissions": "filesOnly",
+    "calendar": "dates",
+    "launchMode": "background",
+    "showProjects": true,
+    "commonCommands": "none",
+    "showCommonCommands": false,
+    "commands": []
+  }
+}

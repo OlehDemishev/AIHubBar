@@ -1,0 +1,86 @@
+{
+  "format": "claudepult-template",
+  "version": 1,
+  "order": 4,
+  "language": "it",
+  "id": "social",
+  "title": "Social e marketing",
+  "description": "Un progetto = una campagna o una piattaforma; piano dei contenuti nel calendario; post per piattaforma, annunci, titoli A/B, risposte ai commenti, piano della settimana.",
+  "folderHint": "Una cartella in cui ogni sottocartella è una campagna; piano-contenuti.md può stare anche qui",
+  "mode": {
+    "name": "Social",
+    "icon": "megaphone",
+    "template": "social",
+    "source": {
+      "folders": {
+        "_0": "~/Documents/Social"
+      }
+    },
+    "card": "projectMD",
+    "stages": [
+      "idea",
+      "testo",
+      "grafica",
+      "programmato",
+      "pubblicato"
+    ],
+    "metrics": [
+      "words",
+      "publishDate"
+    ],
+    "permissions": "filesOnly",
+    "calendar": "contentPlan",
+    "launchMode": "background",
+    "showProjects": true,
+    "commonCommands": "none",
+    "showCommonCommands": false,
+    "commands": [
+      {
+        "id": "social-posts",
+        "title": "Post per piattaforma",
+        "output": "post-{platform}.md",
+        "task": "Dal materiale di partenza scrivi un post per ogni piattaforma: {platform}. Rispetta il loro formato: lunghezza, stile, hashtag, emoji, link, invito all'azione. Ogni post è autonomo, non una copia degli altri. Per le piattaforme visive, una breve idea di immagine o video.",
+        "input": "mainFile"
+      },
+      {
+        "id": "social-ads",
+        "title": "Varianti di annuncio",
+        "output": "annunci.md",
+        "task": "Proponi 5 testi di annuncio per {platform}: titolo, testo principale, invito all'azione. Approcci diversi: il problema del cliente, il beneficio, una recensione/prova, urgenza senza pressione, un confronto. Niente promesse che non si possono dimostrare. Segna quali coppie confrontare in un test A/B.",
+        "input": "mainFile"
+      },
+      {
+        "id": "social-ab",
+        "title": "Titoli A/B",
+        "output": "titoli-ab.md",
+        "task": "Proponi 8 coppie di titoli per un test A/B: in ogni coppia cambia esattamente una cosa (lunghezza, numero, domanda/affermazione, emozione, concretezza). Per ogni coppia, cosa si sta verificando.",
+        "input": "mainFile"
+      },
+      {
+        "id": "social-replies",
+        "title": "Risposte ai commenti",
+        "output": "risposte.md",
+        "task": "Dal materiale e dalle domande tipiche del pubblico prepara modelli di risposta a 10 commenti frequenti: domanda sul prezzo, dubbio, lamentela, ringraziamento, «come si fa», troll, richiesta di sconto ecc. Tono: {text}. Risposte brevi e umane, senza il solito «Grazie per il tuo commento!».",
+        "input": "mainFile",
+        "asks": "Tono"
+      },
+      {
+        "id": "social-week",
+        "title": "Piano dei contenuti della settimana",
+        "output": "piano-contenuti-settimana.md",
+        "task": "Prepara un piano dei contenuti per la settimana dal {text}: 1–2 post al giorno per {platform}. Alterna i formati (utile, coinvolgente, di vendita, dietro le quinte). Dai una tabella Markdown nel formato del piano — | Data | Ora | Piattaforma | Tema | Stato | File | — con lo stato «idea», così le righe si possono riportare in piano-contenuti.md.",
+        "input": "project",
+        "asks": "Data di inizio",
+        "service": "claude-code"
+      },
+      {
+        "id": "social-prepare",
+        "title": "Prepara i post del piano",
+        "output": "post-del-piano.md",
+        "task": "Per le voci del piano dei contenuti (piano-contenuti.md) dei prossimi 7 giorni con stato «idea», scrivi i testi dei post — ognuno sotto il proprio titolo con data e tema. Non modificare il piano.",
+        "input": "project",
+        "service": "claude-code"
+      }
+    ]
+  }
+}

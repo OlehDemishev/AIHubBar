@@ -1,0 +1,80 @@
+{
+  "format": "claudepult-template",
+  "version": 1,
+  "order": 3,
+  "language": "pl",
+  "id": "research",
+  "title": "Research i nauka",
+  "description": "Jeden folder na temat ze źródłami (PDF, linki, notatki); streszczenia, cytaty, tabela zbiorcza, luki, plan; Claude może szukać w sieci.",
+  "folderHint": "Folder, w którym każdy podfolder to temat",
+  "mode": {
+    "name": "Research",
+    "icon": "books.vertical",
+    "template": "research",
+    "source": {
+      "folders": {
+        "_0": "~/Documents/Research"
+      }
+    },
+    "card": "projectMD",
+    "stages": [
+      "temat",
+      "zbieranie źródeł",
+      "notatki",
+      "wnioski",
+      "gotowe"
+    ],
+    "metrics": [
+      "sources",
+      "words",
+      "deadline"
+    ],
+    "permissions": "filesAndWeb",
+    "calendar": "dates",
+    "launchMode": "background",
+    "showProjects": true,
+    "commonCommands": "none",
+    "showCommonCommands": false,
+    "commands": [
+      {
+        "id": "research-summary",
+        "title": "Streszczenie źródła",
+        "output": "streszczenie-<file>.md",
+        "task": "Streść wybrane źródło: o czym jest w 2–3 zdaniach; główne tezy w punktach; kluczowe liczby i definicje; co w nim jest dyskusyjne lub niedowiedzione; jak łączy się z tematem projektu. Tylko to, co jest w źródle — bez dodatków z wiedzy ogólnej (dodany kontekst oznacz «spoza źródła»).",
+        "input": "mainFile"
+      },
+      {
+        "id": "research-quotes",
+        "title": "Cytaty z odnośnikami",
+        "output": "cytaty.md",
+        "task": "Wypisz ze źródeł projektu najbardziej przydatne dla tematu cytaty — dosłownie, z plikiem i stroną/rozdziałem, jeśli są. Pogrupuj je według podtematów. W tym pliku niczego nie streszczaj własnymi słowami.",
+        "input": "project",
+        "service": "claude-code"
+      },
+      {
+        "id": "research-table",
+        "title": "Tabela zbiorcza",
+        "output": "zestawienie.md",
+        "task": "Zbierz źródła projektu w tabeli: źródło, rok/autor (jeśli znane), główna teza, metody lub dane, przydatność dla tematu, ograniczenia. Pod tabelą: w czym źródła się zgadzają, a w czym sobie przeczą.",
+        "input": "project",
+        "service": "claude-code"
+      },
+      {
+        "id": "research-gaps",
+        "title": "Czego jeszcze brakuje",
+        "output": "luki.md",
+        "task": "Na podstawie materiałów projektu ustal, których pytań tematu nie obejmują albo obejmują słabo. Dla każdej luki: dlaczego jest ważna i jakie źródło lub dane by ją zamknęły. Nie wymyślaj konkretnych źródeł — opisz, czego szukać.",
+        "input": "project",
+        "service": "claude-code"
+      },
+      {
+        "id": "research-plan",
+        "title": "Plan pracy",
+        "output": "plan.md",
+        "task": "Ułóż plan tekstu (artykułu, referatu, pracy) z materiałów projektu: rozdziały, co w każdym, na jakich źródłach się oprzeć, przybliżona objętość. Zaznacz miejsca, gdzie wciąż brakuje materiału.",
+        "input": "project",
+        "service": "claude-code"
+      }
+    ]
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "format": "claudepult-template",
+  "version": 1,
+  "order": 3,
+  "language": "ja",
+  "id": "research",
+  "title": "リサーチと学習",
+  "description": "テーマごとに 1 フォルダー (PDF、リンク、メモ)。要約、引用、一覧表、足りない点、計画。Claude はウェブ検索もできます。",
+  "folderHint": "各サブフォルダーが 1 つのテーマになるフォルダー",
+  "mode": {
+    "name": "リサーチ",
+    "icon": "books.vertical",
+    "template": "research",
+    "source": {
+      "folders": {
+        "_0": "~/Documents/Research"
+      }
+    },
+    "card": "projectMD",
+    "stages": [
+      "テーマ",
+      "資料集め",
+      "メモ",
+      "結論",
+      "完了"
+    ],
+    "metrics": [
+      "sources",
+      "words",
+      "deadline"
+    ],
+    "permissions": "filesAndWeb",
+    "calendar": "dates",
+    "launchMode": "background",
+    "showProjects": true,
+    "commonCommands": "none",
+    "showCommonCommands": false,
+    "commands": [
+      {
+        "id": "research-summary",
+        "title": "資料の要約",
+        "output": "要約-<file>.md",
+        "task": "選んだ資料を要約してください: 何についての資料か 2〜3 文で、主な主張を箇条書きで、重要な数字と定義、議論の余地や未証明の点、プロジェクトのテーマとの関係。資料にあることだけを書き、一般知識は加えないこと (補った文脈には「資料外」と付ける)。",
+        "input": "mainFile"
+      },
+      {
+        "id": "research-quotes",
+        "title": "出典付きの引用",
+        "output": "引用.md",
+        "task": "プロジェクトの資料から、テーマに役立つ引用を原文のまま抜き出してください。ファイル名とページ/節があれば添えて。サブテーマごとにまとめ、このファイルでは自分の言葉で言い換えないこと。",
+        "input": "project",
+        "service": "claude-code"
+      },
+      {
+        "id": "research-table",
+        "title": "一覧表",
+        "output": "概要.md",
+        "task": "プロジェクトの資料を表にまとめてください: 資料、年/著者 (わかれば)、主な主張、方法やデータ、テーマへの有用性、限界。表の下に、資料どうしが一致する点と矛盾する点を。",
+        "input": "project",
+        "service": "claude-code"
+      },
+      {
+        "id": "research-gaps",
+        "title": "まだ調べていないこと",
+        "output": "不足.md",
+        "task": "プロジェクトの資料が扱っていない、または手薄なテーマ上の問いを挙げてください。それぞれについて、なぜ重要か、どんな資料やデータで埋まるか。具体的な資料名は作らず、何を探すべきかを書いてください。",
+        "input": "project",
+        "service": "claude-code"
+      },
+      {
+        "id": "research-plan",
+        "title": "作業計画",
+        "output": "計画.md",
+        "task": "プロジェクトの資料から文章 (記事、発表、レポート) の構成案を作ってください: 章立て、各章の内容、頼る資料、おおよその分量。材料が足りない箇所に印を。",
+        "input": "project",
+        "service": "claude-code"
+      }
+    ]
+  }
+}

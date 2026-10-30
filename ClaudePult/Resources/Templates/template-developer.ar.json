@@ -1,0 +1,34 @@
+{
+  "format": "claudepult-template",
+  "version": 1,
+  "order": 0,
+  "language": "ar",
+  "id": "developer",
+  "title": "مطوّر (GitHub)",
+  "description": "مستودعات git: الفروع، التغييرات دون commit، PR وCI، STATUS.md؛ «الخطوة التالية» و«مهمة خاصة» و«إكمال» وفق قواعد المشروع (CLAUDE.md / AGENTS.md).",
+  "folderHint": "المجلد الذي توجد فيه مستودعاتك",
+  "mode": {
+    "name": "مطوّر (GitHub)",
+    "icon": "chevron.left.forwardslash.chevron.right",
+    "template": "developer",
+    "source": {
+      "gitBuiltin": {
+        "projects": "~/Projects"
+      }
+    },
+    "card": "statusMD",
+    "stages": [],
+    "metrics": [
+      "branch",
+      "dirty",
+      "pullRequests",
+      "lastActivity"
+    ],
+    "permissions": "code",
+    "calendar": "off",
+    "showProjects": true,
+    "commonCommands": "none",
+    "showCommonCommands": false,
+    "commands": []
+  }
+}

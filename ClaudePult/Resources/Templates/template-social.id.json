@@ -1,0 +1,86 @@
+{
+  "format": "claudepult-template",
+  "version": 1,
+  "order": 4,
+  "language": "id",
+  "id": "social",
+  "title": "Media sosial dan pemasaran",
+  "description": "Satu proyek = satu kampanye atau platform; rencana konten di kalender; postingan per platform, iklan, judul A/B, balasan komentar, rencana mingguan.",
+  "folderHint": "Folder yang setiap subfoldernya adalah kampanye; rencana-konten.md juga bisa di sini",
+  "mode": {
+    "name": "Media sosial",
+    "icon": "megaphone",
+    "template": "social",
+    "source": {
+      "folders": {
+        "_0": "~/Documents/Sosmed"
+      }
+    },
+    "card": "projectMD",
+    "stages": [
+      "ide",
+      "teks",
+      "desain",
+      "terjadwal",
+      "terbit"
+    ],
+    "metrics": [
+      "words",
+      "publishDate"
+    ],
+    "permissions": "filesOnly",
+    "calendar": "contentPlan",
+    "launchMode": "background",
+    "showProjects": true,
+    "commonCommands": "none",
+    "showCommonCommands": false,
+    "commands": [
+      {
+        "id": "social-posts",
+        "title": "Postingan per platform",
+        "output": "postingan-{platform}.md",
+        "task": "Dari materi sumber, tulis satu postingan untuk tiap platform: {platform}. Perhatikan formatnya: panjang, gaya, tagar, emoji, tautan, ajakan bertindak. Tiap postingan berdiri sendiri, bukan salinan. Untuk platform visual, ide singkat gambar atau video.",
+        "input": "mainFile"
+      },
+      {
+        "id": "social-ads",
+        "title": "Varian iklan",
+        "output": "iklan.md",
+        "task": "Usulkan 5 teks iklan untuk {platform}: judul, teks utama, ajakan bertindak. Pendekatan berbeda: masalah pelanggan, manfaat, ulasan/bukti, desakan tanpa tekanan, perbandingan. Tanpa klaim yang tak bisa dibuktikan. Tandai pasangan mana yang layak dibandingkan dalam uji A/B.",
+        "input": "mainFile"
+      },
+      {
+        "id": "social-ab",
+        "title": "Judul A/B",
+        "output": "judul-ab.md",
+        "task": "Usulkan 8 pasang judul untuk uji A/B: di tiap pasangan hanya satu hal yang berubah (panjang, angka, pertanyaan/pernyataan, emosi, kekonkretan). Untuk tiap pasangan: apa tepatnya yang diuji.",
+        "input": "mainFile"
+      },
+      {
+        "id": "social-replies",
+        "title": "Balasan komentar",
+        "output": "balasan.md",
+        "task": "Dari materi dan pertanyaan khas audiens, siapkan templat balasan untuk 10 komentar yang sering muncul: pertanyaan harga, keraguan, keluhan, terima kasih, «bagaimana caranya», troll, minta diskon, dan sebagainya. Nada: {text}. Balasan singkat dan manusiawi, tanpa «Terima kasih atas masukannya!» yang klise.",
+        "input": "mainFile",
+        "asks": "Nada"
+      },
+      {
+        "id": "social-week",
+        "title": "Rencana konten mingguan",
+        "output": "rencana-konten-minggu.md",
+        "task": "Susun rencana konten untuk minggu yang mulai {text}: 1–2 postingan per hari untuk {platform}. Selang-seling format (bermanfaat, mengajak interaksi, berjualan, di balik layar). Berikan tabel Markdown dalam format rencana konten — | Tanggal | Jam | Platform | Topik | Status | Berkas | — dengan status «ide», agar barisnya bisa dipindah ke rencana-konten.md.",
+        "input": "project",
+        "asks": "Tanggal mulai",
+        "service": "claude-code"
+      },
+      {
+        "id": "social-prepare",
+        "title": "Siapkan postingan dari rencana",
+        "output": "postingan-dari-rencana.md",
+        "task": "Untuk entri rencana konten (rencana-konten.md) 7 hari ke depan dengan status «ide», tulis teks postingannya — masing-masing di bawah judulnya sendiri dengan tanggal dan topik. Jangan ubah rencana kontennya.",
+        "input": "project",
+        "service": "claude-code"
+      }
+    ]
+  }
+}

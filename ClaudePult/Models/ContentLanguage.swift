@@ -5,7 +5,7 @@ import Foundation
 enum ContentLanguage: String, CaseIterable, Sendable {
     case ru, en, es
     case ptBR = "pt-BR"
-    case fr
+    case fr, de, ja, id, ko, it, ar, pl, uk
 
     static var current: ContentLanguage {
         Bundle.main.preferredLocalizations.first.flatMap { code in allCases.first { code.hasPrefix($0.rawValue) } } ?? .ru
@@ -18,6 +18,14 @@ enum ContentLanguage: String, CaseIterable, Sendable {
         case .es: .spanish
         case .ptBR: .portuguese
         case .fr: .french
+        case .de: .german
+        case .ja: .japanese
+        case .id: .indonesian
+        case .ko: .korean
+        case .it: .italian
+        case .ar: .arabic
+        case .pl: .polish
+        case .uk: .ukrainian
         }
     }
 }
@@ -168,6 +176,198 @@ struct ContentStrings: Sendable {
         customTask: "Tâche : {task}. Suis les règles du projet (CLAUDE.md / AGENTS.md s'ils existent) : une branche séparée de la branche principale, les vérifications du projet, commit, push, pull request.",
         finishSession: "Termine le travail en cours dans ce dossier : lance les vérifications du projet, répartis les modifications non commitées en commits par sujet (sur des branches séparées si elles relèvent de tâches différentes), fais un push et ouvre une pull request. Ne fais aucune nouvelle modification de code.",
         taskPrefix: "Tâche : ", rulesMarker: ". Suis les règles"
+    )
+
+    static let german = ContentStrings(
+        cardFile: "projekt.md", planFile: "inhaltsplan.md",
+        cardLabels: [.stage: "Phase", .deadline: "Frist", .publish: "Veröffentlichung", .format: "Format", .mainFile: "Hauptdatei", .platform: "Plattform"],
+        notesHeading: "## Notizen", planTitle: "# Inhaltsplan",
+        planColumns: [.date: "Datum", .time: "Uhrzeit", .platform: "Plattform", .topic: "Thema", .status: "Status", .file: "Datei"],
+        ideaStatus: "Idee", notSet: "nicht angegeben", notCounted: "nicht berechnet", projectWord: "projekt", resultWord: "ergebnis",
+        agentPrompt: """
+        Du arbeitest im Ordner des Projekts «{project}». Quelldatei: {file}. \
+        Lies beliebige Dateien dieses Ordners, ändere aber keine davon. Schreibe das Ergebnis in eine neue Datei {output} im selben Ordner. \
+        Wenn die Aufgabe unklar ist oder Daten fehlen, schreibe das an den Anfang der Ergebnisdatei — erfinde nichts.
+        
+        Aufgabe: {task}
+        """,
+        agentNoFile: "keine — arbeite mit den Dateien des Ordners",
+        apiHeader: "Projekt: «{project}». Format: {format}.",
+        apiFileIntro: "Unten steht der Text der Datei «{file}».",
+        apiTask: "Aufgabe: {task}",
+        apiRule: "Antworte nur mit dem Ergebnis in Markdown, ohne Einleitung und Erklärungen. Wenn Daten fehlen, sag das in der ersten Zeile — erfinde nichts.",
+        nextStep: "Lies die README und, falls vorhanden, docs/STATUS.md, CLAUDE.md oder AGENTS.md. Bestimme den nächsten sinnvollen Schritt: den ersten Punkt der Liste «Next / Als Nächstes», falls es sie gibt, sonst die offensichtlichste unerledigte Aufgabe. Erledige ihn in einem eigenen Branch vom Hauptbranch: die Änderungen, die Prüfungen des Projekts (Tests, Build, Linter — was vorhanden ist), ein Commit mit klarer Nachricht, Push und ein Pull Request. Wenn der Schritt die Entscheidung eines Menschen braucht oder unklar ist, ändere nichts und beschreibe die Frage kurz.",
+        customTask: "Aufgabe: {task}. Halte dich an die Regeln des Projekts (CLAUDE.md / AGENTS.md, falls vorhanden): ein eigener Branch vom Hauptbranch, die Prüfungen des Projekts, Commit, Push, Pull Request.",
+        finishSession: "Bringe die aktuelle Arbeit in diesem Ordner zu Ende: führe die Prüfungen des Projekts aus, teile nicht committete Änderungen nach Sinn in Commits auf (auf getrennte Branches, wenn sie zu verschiedenen Aufgaben gehören), pushe und öffne einen Pull Request. Nimm keine neuen Codeänderungen vor.",
+        taskPrefix: "Aufgabe: ", rulesMarker: ". Halte dich an die Regeln"
+    )
+
+    static let japanese = ContentStrings(
+        cardFile: "プロジェクト.md", planFile: "コンテンツ計画.md",
+        cardLabels: [.stage: "段階", .deadline: "締め切り", .publish: "公開", .format: "形式", .mainFile: "メインファイル", .platform: "プラットフォーム"],
+        notesHeading: "## メモ", planTitle: "# コンテンツ計画",
+        planColumns: [.date: "日付", .time: "時刻", .platform: "プラットフォーム", .topic: "テーマ", .status: "状態", .file: "ファイル"],
+        ideaStatus: "アイデア", notSet: "未指定", notCounted: "未計算", projectWord: "プロジェクト", resultWord: "結果",
+        agentPrompt: """
+        あなたはプロジェクト「{project}」のフォルダーで作業しています。元のファイル: {file}。\
+        このフォルダーのファイルはどれを読んでもかまいませんが、どれも変更しないでください。結果は同じフォルダーの新しいファイル {output} に書いてください。\
+        課題が不明確な場合やデータが足りない場合は、結果ファイルの冒頭にそう書いてください。推測で作らないでください。
+        
+        課題: {task}
+        """,
+        agentNoFile: "なし — フォルダー内のファイルで作業してください",
+        apiHeader: "プロジェクト: 「{project}」。形式: {format}。",
+        apiFileIntro: "以下はファイル「{file}」のテキストです。",
+        apiTask: "課題: {task}",
+        apiRule: "結果だけを Markdown で答えてください。前置きや説明は不要です。データが足りない場合は 1 行目にそう書き、推測で作らないでください。",
+        nextStep: "README と、あれば docs/STATUS.md、CLAUDE.md または AGENTS.md を読んでください。次にやるべき妥当な一歩を決めてください。「Next / 次」リストがあればその最初の項目、なければ最も明らかな未完了のタスクです。メインから分けたブランチで行ってください: 変更、プロジェクトのチェック(テスト、ビルド、リンター — あるもの)、分かりやすいメッセージのコミット、push、pull request。人の判断が必要な場合や不明確な場合は何も変更せず、質問を短く書いてください。",
+        customTask: "課題: {task}。プロジェクトのルール(あれば CLAUDE.md / AGENTS.md)に従ってください: メインから分けたブランチ、プロジェクトのチェック、コミット、push、pull request。",
+        finishSession: "このフォルダーの現在の作業を仕上げてください: プロジェクトのチェックを実行し、未コミットの変更を意味ごとにコミットに分け(別のタスクのものは別ブランチに)、push して pull request を作成してください。新しいコード変更はしないでください。",
+        taskPrefix: "課題: ", rulesMarker: "。プロジェクトのルール"
+    )
+
+    static let indonesian = ContentStrings(
+        cardFile: "proyek.md", planFile: "rencana-konten.md",
+        cardLabels: [.stage: "Tahap", .deadline: "Tenggat", .publish: "Publikasi", .format: "Format", .mainFile: "Berkas utama", .platform: "Platform"],
+        notesHeading: "## Catatan", planTitle: "# Rencana konten",
+        planColumns: [.date: "Tanggal", .time: "Jam", .platform: "Platform", .topic: "Topik", .status: "Status", .file: "Berkas"],
+        ideaStatus: "ide", notSet: "tidak disebutkan", notCounted: "belum dihitung", projectWord: "proyek", resultWord: "hasil",
+        agentPrompt: """
+        Kamu bekerja di folder proyek «{project}». Berkas sumber: {file}. \
+        Baca berkas apa pun di folder ini, tetapi jangan ubah satu pun. Tulis hasilnya ke berkas baru {output} di folder yang sama. \
+        Jika tugas tidak jelas atau data kurang, tulis hal itu di awal berkas hasil — jangan mengarang.
+        
+        Tugas: {task}
+        """,
+        agentNoFile: "tidak ada — kerjakan dengan berkas di folder",
+        apiHeader: "Proyek: «{project}». Format: {format}.",
+        apiFileIntro: "Berikut teks berkas «{file}».",
+        apiTask: "Tugas: {task}",
+        apiRule: "Jawab hanya dengan hasilnya dalam Markdown, tanpa pembuka dan penjelasan. Jika data kurang, katakan di baris pertama — jangan mengarang.",
+        nextStep: "Baca README dan, jika ada, docs/STATUS.md, CLAUDE.md, atau AGENTS.md. Tentukan langkah berikutnya yang masuk akal: butir pertama daftar «Next / Berikutnya» jika ada, jika tidak tugas belum selesai yang paling jelas. Kerjakan di branch terpisah dari branch utama: perubahan, pemeriksaan proyek (tes, build, linter — yang ada), commit dengan pesan yang jelas, push, dan pull request. Jika langkah itu butuh keputusan seseorang atau tidak jelas, jangan ubah apa pun dan jelaskan pertanyaannya secara singkat.",
+        customTask: "Tugas: {task}. Ikuti aturan proyek (CLAUDE.md / AGENTS.md jika ada): branch terpisah dari branch utama, pemeriksaan proyek, commit, push, pull request.",
+        finishSession: "Selesaikan pekerjaan yang sedang berjalan di folder ini: jalankan pemeriksaan proyek, bagi perubahan yang belum di-commit menjadi commit sesuai maknanya (ke branch terpisah jika milik tugas berbeda), push, dan buka pull request. Jangan membuat perubahan kode baru.",
+        taskPrefix: "Tugas: ", rulesMarker: ". Ikuti aturan proyek"
+    )
+
+    static let korean = ContentStrings(
+        cardFile: "프로젝트.md", planFile: "콘텐츠-계획.md",
+        cardLabels: [.stage: "단계", .deadline: "마감", .publish: "게시", .format: "형식", .mainFile: "주요 파일", .platform: "플랫폼"],
+        notesHeading: "## 메모", planTitle: "# 콘텐츠 계획",
+        planColumns: [.date: "날짜", .time: "시간", .platform: "플랫폼", .topic: "주제", .status: "상태", .file: "파일"],
+        ideaStatus: "아이디어", notSet: "지정 안 됨", notCounted: "계산 안 됨", projectWord: "프로젝트", resultWord: "결과",
+        agentPrompt: """
+        당신은 프로젝트 «{project}» 폴더에서 작업하고 있습니다. 원본 파일: {file}. \
+        이 폴더의 파일은 무엇이든 읽어도 되지만 아무것도 수정하지 마세요. 결과는 같은 폴더의 새 파일 {output}에 쓰세요. \
+        과제가 불분명하거나 데이터가 부족하면 결과 파일 맨 앞에 그렇게 적고, 지어내지 마세요.
+        
+        과제: {task}
+        """,
+        agentNoFile: "없음 — 폴더의 파일로 작업하세요",
+        apiHeader: "프로젝트: «{project}». 형식: {format}.",
+        apiFileIntro: "아래는 파일 «{file}»의 텍스트입니다.",
+        apiTask: "과제: {task}",
+        apiRule: "결과만 Markdown으로 답하세요. 서론이나 설명은 빼세요. 데이터가 부족하면 첫 줄에 그렇게 쓰고, 지어내지 마세요.",
+        nextStep: "README와, 있다면 docs/STATUS.md, CLAUDE.md 또는 AGENTS.md를 읽으세요. 다음으로 할 합리적인 단계를 정하세요: «Next / 다음» 목록이 있으면 그 첫 항목, 없으면 가장 분명한 미완료 작업입니다. 메인과 분리된 브랜치에서 하세요: 변경, 프로젝트 검사(테스트, 빌드, 린터 — 있는 것), 명확한 메시지의 커밋, push, pull request. 사람의 결정이 필요하거나 불분명하면 아무것도 바꾸지 말고 질문을 짧게 적으세요.",
+        customTask: "과제: {task}. 프로젝트 규칙(있다면 CLAUDE.md / AGENTS.md)을 따르세요: 메인과 분리된 브랜치, 프로젝트 검사, 커밋, push, pull request.",
+        finishSession: "이 폴더의 현재 작업을 마무리하세요: 프로젝트 검사를 실행하고, 커밋되지 않은 변경을 의미별로 커밋으로 나누고(다른 작업이면 별도 브랜치로), push하고 pull request를 여세요. 새 코드 변경은 하지 마세요.",
+        taskPrefix: "과제: ", rulesMarker: ". 프로젝트 규칙"
+    )
+
+    static let italian = ContentStrings(
+        cardFile: "progetto.md", planFile: "piano-contenuti.md",
+        cardLabels: [.stage: "Fase", .deadline: "Scadenza", .publish: "Pubblicazione", .format: "Formato", .mainFile: "File principale", .platform: "Piattaforma"],
+        notesHeading: "## Note", planTitle: "# Piano dei contenuti",
+        planColumns: [.date: "Data", .time: "Ora", .platform: "Piattaforma", .topic: "Tema", .status: "Stato", .file: "File"],
+        ideaStatus: "idea", notSet: "non indicato", notCounted: "non calcolato", projectWord: "progetto", resultWord: "risultato",
+        agentPrompt: """
+        Stai lavorando nella cartella del progetto «{project}». File di partenza: {file}. \
+        Leggi qualsiasi file di questa cartella, ma non modificarne nessuno. Scrivi il risultato in un nuovo file {output} nella stessa cartella. \
+        Se il compito non è chiaro o mancano dati, scrivilo all'inizio del file di risultato — non inventare.
+        
+        Compito: {task}
+        """,
+        agentNoFile: "nessuno — lavora con i file della cartella",
+        apiHeader: "Progetto: «{project}». Formato: {format}.",
+        apiFileIntro: "Di seguito il testo del file «{file}».",
+        apiTask: "Compito: {task}",
+        apiRule: "Rispondi solo con il risultato in Markdown, senza introduzioni né spiegazioni. Se mancano dati, dillo nella prima riga — non inventare.",
+        nextStep: "Leggi il README e, se esistono, docs/STATUS.md, CLAUDE.md o AGENTS.md. Individua il prossimo passo sensato: il primo punto dell'elenco «Next / Prossimo», se c'è, altrimenti il compito incompiuto più evidente. Fallo in un branch separato da quello principale: le modifiche, i controlli del progetto (test, build, linter — quello che c'è), un commit con un messaggio chiaro, push e una pull request. Se il passo richiede la decisione di una persona o non è chiaro, non modificare nulla e descrivi brevemente la domanda.",
+        customTask: "Compito: {task}. Segui le regole del progetto (CLAUDE.md / AGENTS.md se presenti): un branch separato da quello principale, i controlli del progetto, commit, push, pull request.",
+        finishSession: "Porta a termine il lavoro in corso in questa cartella: esegui i controlli del progetto, dividi le modifiche non committate in commit per argomento (su branch separati se riguardano compiti diversi), fai push e apri una pull request. Non fare nuove modifiche al codice.",
+        taskPrefix: "Compito: ", rulesMarker: ". Segui le regole"
+    )
+
+    static let arabic = ContentStrings(
+        cardFile: "مشروع.md", planFile: "خطة-المحتوى.md",
+        cardLabels: [.stage: "المرحلة", .deadline: "الموعد النهائي", .publish: "النشر", .format: "الصيغة", .mainFile: "الملف الرئيسي", .platform: "المنصة"],
+        notesHeading: "## ملاحظات", planTitle: "# خطة المحتوى",
+        planColumns: [.date: "التاريخ", .time: "الوقت", .platform: "المنصة", .topic: "الموضوع", .status: "الحالة", .file: "الملف"],
+        ideaStatus: "فكرة", notSet: "غير محدد", notCounted: "غير محسوب", projectWord: "مشروع", resultWord: "نتيجة",
+        agentPrompt: """
+        أنت تعمل في مجلد المشروع «{project}». الملف المصدر: {file}. \
+        اقرأ أي ملف في هذا المجلد، لكن لا تعدّل أيًّا منها. اكتب النتيجة في ملف جديد {output} في المجلد نفسه. \
+        إذا كانت المهمة غير واضحة أو كانت البيانات ناقصة، فاذكر ذلك في بداية ملف النتيجة — ولا تختلق شيئًا.
+        
+        المهمة: {task}
+        """,
+        agentNoFile: "لا يوجد — اعمل على ملفات المجلد",
+        apiHeader: "المشروع: «{project}». الصيغة: {format}.",
+        apiFileIntro: "فيما يلي نص الملف «{file}».",
+        apiTask: "المهمة: {task}",
+        apiRule: "أجب بالنتيجة فقط بصيغة Markdown، دون مقدمات أو شروح. إذا كانت البيانات ناقصة فاذكر ذلك في السطر الأول — ولا تختلق شيئًا.",
+        nextStep: "اقرأ ملف README، وكذلك docs/STATUS.md أو CLAUDE.md أو AGENTS.md إن وُجدت. حدّد الخطوة التالية المعقولة: البند الأول من قائمة «Next / التالي» إن وُجدت، وإلا فالمهمة غير المكتملة الأوضح. نفّذها في فرع منفصل عن الفرع الرئيسي: التغييرات، وفحوصات المشروع (الاختبارات، البناء، أداة الفحص — ما يتوفر منها)، و commit برسالة واضحة، و push، و pull request. إذا احتاجت الخطوة إلى قرار من شخص أو كانت غير واضحة، فلا تغيّر شيئًا وصِف السؤال باختصار.",
+        customTask: "المهمة: {task}. اتبع قواعد المشروع (CLAUDE.md / AGENTS.md إن وُجدت): فرع منفصل عن الفرع الرئيسي، وفحوصات المشروع، و commit، و push، و pull request.",
+        finishSession: "أكمل العمل الجاري في هذا المجلد: شغّل فحوصات المشروع، وقسّم التغييرات غير المحفوظة في commits حسب معناها (في فروع منفصلة إن كانت لمهام مختلفة)، ثم نفّذ push وافتح pull request. لا تُجرِ أي تغييرات جديدة على الشيفرة.",
+        taskPrefix: "المهمة: ", rulesMarker: ". اتبع قواعد المشروع"
+    )
+
+    static let polish = ContentStrings(
+        cardFile: "projekt.md", planFile: "plan-tresci.md",
+        cardLabels: [.stage: "Etap", .deadline: "Termin", .publish: "Publikacja", .format: "Format", .mainFile: "Plik główny", .platform: "Platforma"],
+        notesHeading: "## Notatki", planTitle: "# Plan treści",
+        planColumns: [.date: "Data", .time: "Godzina", .platform: "Platforma", .topic: "Temat", .status: "Status", .file: "Plik"],
+        ideaStatus: "pomysł", notSet: "nie podano", notCounted: "nie obliczono", projectWord: "projekt", resultWord: "wynik",
+        agentPrompt: """
+        Pracujesz w folderze projektu «{project}». Plik źródłowy: {file}. \
+        Czytaj dowolne pliki tego folderu, ale żadnego nie zmieniaj. Zapisz wynik w nowym pliku {output} w tym samym folderze. \
+        Jeśli zadanie jest niejasne lub brakuje danych, napisz o tym na początku pliku wynikowego — niczego nie wymyślaj.
+        
+        Zadanie: {task}
+        """,
+        agentNoFile: "brak — pracuj na plikach folderu",
+        apiHeader: "Projekt: «{project}». Format: {format}.",
+        apiFileIntro: "Poniżej tekst pliku «{file}».",
+        apiTask: "Zadanie: {task}",
+        apiRule: "Odpowiedz tylko wynikiem w Markdown, bez wstępów i wyjaśnień. Jeśli brakuje danych, napisz o tym w pierwszej linii — niczego nie wymyślaj.",
+        nextStep: "Przeczytaj README oraz, jeśli istnieją, docs/STATUS.md, CLAUDE.md lub AGENTS.md. Ustal następny rozsądny krok: pierwszy punkt listy «Next / Dalej», jeśli jest, a jeśli nie — najbardziej oczywiste niedokończone zadanie. Wykonaj go w osobnej gałęzi od głównej: zmiany, kontrole projektu (testy, build, linter — co jest), commit z jasnym opisem, push i pull request. Jeśli krok wymaga decyzji człowieka lub jest niejasny, niczego nie zmieniaj i krótko opisz pytanie.",
+        customTask: "Zadanie: {task}. Przestrzegaj zasad projektu (CLAUDE.md / AGENTS.md, jeśli istnieją): osobna gałąź od głównej, kontrole projektu, commit, push, pull request.",
+        finishSession: "Dokończ bieżącą pracę w tym folderze: uruchom kontrole projektu, podziel niezacommitowane zmiany na commity według sensu (na osobne gałęzie, jeśli dotyczą różnych zadań), zrób push i otwórz pull request. Nie wprowadzaj nowych zmian w kodzie.",
+        taskPrefix: "Zadanie: ", rulesMarker: ". Przestrzegaj zasad"
+    )
+
+    static let ukrainian = ContentStrings(
+        cardFile: "проєкт.md", planFile: "контент-план.md",
+        cardLabels: [.stage: "Етап", .deadline: "Дедлайн", .publish: "Публікація", .format: "Формат", .mainFile: "Головний файл", .platform: "Майданчик"],
+        notesHeading: "## Нотатки", planTitle: "# Контент-план",
+        planColumns: [.date: "Дата", .time: "Час", .platform: "Майданчик", .topic: "Тема", .status: "Статус", .file: "Файл"],
+        ideaStatus: "ідея", notSet: "не вказано", notCounted: "не пораховано", projectWord: "проєкт", resultWord: "результат",
+        agentPrompt: """
+        Ти працюєш у папці проєкту «{project}». Вихідний файл: {file}. \
+        Читай будь-які файли цієї папки, але нічого в них не змінюй. Результат запиши в новий файл {output} у цій самій папці. \
+        Якщо завдання незрозуміле або бракує даних — напиши про це на початку файлу результату, не вигадуй.
+        
+        Завдання: {task}
+        """,
+        agentNoFile: "немає — працюй з файлами папки",
+        apiHeader: "Проєкт: «{project}». Формат: {format}.",
+        apiFileIntro: "Нижче — текст файлу «{file}».",
+        apiTask: "Завдання: {task}",
+        apiRule: "Відповідай лише результатом у Markdown, без вступів і пояснень. Якщо бракує даних — скажи про це першим рядком, не вигадуй.",
+        nextStep: "Прочитай README і, якщо є, docs/STATUS.md, CLAUDE.md або AGENTS.md. Визнач наступний розумний крок: перший пункт списку «Next / Далі», якщо він є, інакше найочевидніше незавершене завдання. Зроби його в окремій гілці від основної: зміни, перевірки проєкту (тести, збірка, лінтер — що є), коміт зі зрозумілим повідомленням, push і pull request. Якщо крок потребує рішення людини або незрозумілий — нічого не змінюй, а коротко опиши питання.",
+        customTask: "Завдання: {task}. Працюй за правилами проєкту (CLAUDE.md / AGENTS.md, якщо вони є): окрема гілка від основної, перевірки проєкту, коміт, push, pull request.",
+        finishSession: "Доведи до кінця поточну роботу в цій папці: запусти перевірки проєкту, розклади незакомічені зміни за змістом на коміти (якщо вони стосуються різних завдань — по окремих гілках), зроби push і pull request. Нових змін коду не роби.",
+        taskPrefix: "Завдання: ", rulesMarker: ". Працюй за правилами"
     )
 
     /// `{name}` → value, for the templates above.

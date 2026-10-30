@@ -1,0 +1,37 @@
+{
+  "format": "claudepult-template",
+  "version": 1,
+  "order": 5,
+  "language": "pl",
+  "id": "custom",
+  "title": "Własny",
+  "description": "Pusty zestaw: «Własne zadanie» i etapy «w toku → gotowe». Resztę ustawisz w Ustawieniach → «Tryby».",
+  "folderHint": "Folder, w którym każdy podfolder to projekt",
+  "mode": {
+    "name": "Mój tryb",
+    "icon": "sparkle",
+    "template": "custom",
+    "source": {
+      "folders": {
+        "_0": "~/Documents/Projekty"
+      }
+    },
+    "card": "projectMD",
+    "stages": [
+      "w toku",
+      "gotowe"
+    ],
+    "metrics": [
+      "words",
+      "deadline",
+      "lastActivity"
+    ],
+    "permissions": "filesOnly",
+    "calendar": "dates",
+    "launchMode": "background",
+    "showProjects": true,
+    "commonCommands": "none",
+    "showCommonCommands": false,
+    "commands": []
+  }
+}

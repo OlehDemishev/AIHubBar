@@ -1,0 +1,80 @@
+{
+  "format": "claudepult-template",
+  "version": 1,
+  "order": 3,
+  "language": "de",
+  "id": "research",
+  "title": "Recherche und Studium",
+  "description": "Ein Ordner pro Thema mit Quellen (PDFs, Links, Notizen); Zusammenfassungen, Zitate, Übersichtstabelle, Lücken, Plan; Claude darf im Web suchen.",
+  "folderHint": "Ein Ordner, in dem jeder Unterordner ein Thema ist",
+  "mode": {
+    "name": "Recherche",
+    "icon": "books.vertical",
+    "template": "research",
+    "source": {
+      "folders": {
+        "_0": "~/Documents/Recherche"
+      }
+    },
+    "card": "projectMD",
+    "stages": [
+      "Thema",
+      "Quellen sammeln",
+      "Notizen",
+      "Schlüsse",
+      "fertig"
+    ],
+    "metrics": [
+      "sources",
+      "words",
+      "deadline"
+    ],
+    "permissions": "filesAndWeb",
+    "calendar": "dates",
+    "launchMode": "background",
+    "showProjects": true,
+    "commonCommands": "none",
+    "showCommonCommands": false,
+    "commands": [
+      {
+        "id": "research-summary",
+        "title": "Quelle zusammenfassen",
+        "output": "zusammenfassung-<file>.md",
+        "task": "Fasse die gewählte Quelle zusammen: worum es geht in 2–3 Sätzen; die Hauptthesen als Liste; wichtige Zahlen und Definitionen; was darin strittig oder unbewiesen ist; wie sie zum Thema des Projekts passt. Nur, was in der Quelle steht — ohne Ergänzungen aus Allgemeinwissen (markiere hinzugefügten Kontext mit «außerhalb der Quelle»).",
+        "input": "mainFile"
+      },
+      {
+        "id": "research-quotes",
+        "title": "Zitate mit Belegen",
+        "output": "zitate.md",
+        "task": "Suche aus den Quellen des Projekts die für das Thema nützlichsten Zitate heraus — wörtlich, mit Datei und Seite/Abschnitt, wenn vorhanden. Gruppiere sie nach Unterthemen. Gib in dieser Datei nichts mit eigenen Worten wieder.",
+        "input": "project",
+        "service": "claude-code"
+      },
+      {
+        "id": "research-table",
+        "title": "Übersichtstabelle",
+        "output": "uebersicht.md",
+        "task": "Fasse die Quellen des Projekts in einer Tabelle zusammen: Quelle, Jahr/Autor (falls bekannt), Hauptthese, Methoden oder Daten, Nutzen für das Thema, Grenzen. Unter der Tabelle: wo die Quellen übereinstimmen und wo sie sich widersprechen.",
+        "input": "project",
+        "service": "claude-code"
+      },
+      {
+        "id": "research-gaps",
+        "title": "Was noch fehlt",
+        "output": "luecken.md",
+        "task": "Stelle anhand der Projektmaterialien fest, welche Fragen des Themas sie nicht oder kaum abdecken. Für jede Lücke: warum sie wichtig ist und welche Quelle oder Daten sie schließen würden. Erfinde keine konkreten Quellen — beschreibe, wonach zu suchen ist.",
+        "input": "project",
+        "service": "claude-code"
+      },
+      {
+        "id": "research-plan",
+        "title": "Arbeitsplan",
+        "output": "plan.md",
+        "task": "Erstelle den Plan eines Textes (Artikel, Vortrag, Hausarbeit) aus den Projektmaterialien: Abschnitte, was in jeden gehört, auf welche Quellen man sich stützt, ungefährer Umfang. Markiere, wo noch Material fehlt.",
+        "input": "project",
+        "service": "claude-code"
+      }
+    ]
+  }
+}
