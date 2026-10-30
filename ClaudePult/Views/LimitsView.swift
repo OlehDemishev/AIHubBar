@@ -80,8 +80,8 @@ struct LimitsView: View {
                 }
             }
             .buttonStyle(.borderless)
-            .disabled(usage.isRefreshing)
-            .help("Обновить лимиты")
+            .disabled(usage.isRefreshing || (usage.pausedUntil.map { $0 > .now } ?? false))
+            .help(usage.pausedUntil.map { $0 > .now ? "Пауза до \($0.formatted(date: .omitted, time: .shortened)): сервер просит запрашивать реже" : "Обновить лимиты" } ?? "Обновить лимиты")
         }
     }
 

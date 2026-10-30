@@ -10,6 +10,9 @@ final class UsageStore {
     private(set) var error: String?
     private(set) var isRefreshing = false
     private(set) var history: [UsagePoint] = []
+    /// While set, no request is made: the server answered 429 (or kept failing).
+    private(set) var pausedUntil: Date?
+    private var rateLimitStrikes = 0
 
     var forecast: UsageForecast { UsageForecast.make(history: history, current: snapshot?.session) }
 
@@ -31,9 +34,9 @@ final class UsageStore {
     private let scanner = TokenScanner()
     private var isScanning = false
 
-    /// Refresh every minute while Claude is working or the session percentage grows, otherwise every 5 min;
-    /// right after a reset as well.
-    static let activeInterval: TimeInterval = 60
+    /// Refresh every 2 minutes while Claude is working or the session percentage grows, otherwise every 5 min;
+    /// right after a reset as well. The spec said 1 minute; the endpoint answered 429 at that pace.
+    static let activeInterval: TimeInterval = 120
     static let idleInterval: TimeInterval = 5 * 60
 
     private let settings: AppSettings
@@ -44,17 +47,31 @@ final class UsageStore {
 
     private static let notifiedKey = "usageNotified"
     private static var historyURL: URL { SessionFiles.supportDirectory.appending(path: "usage-history.json") }
+    private static var snapshotURL: URL { SessionFiles.supportDirectory.appending(path: "usage-snapshot.json") }
+
+    /// Pause after a 429: 5, 10, 20, 40, then 60 minutes, or longer if `Retry-After` says so. A shorter
+    /// `Retry-After` is not trusted — the server answered «Retry-After: 0» and went on refusing.
+    static func backoff(strike: Int, retryAfter: TimeInterval?) -> TimeInterval {
+        let exponential = 300 * pow(2, Double(max(strike, 1) - 1))
+        return min(max(exponential, retryAfter ?? 0), 3600)
+    }
 
     init(settings: AppSettings, sessions: SessionStore) {
         self.settings = settings
         self.sessions = sessions
         notified = Set(UserDefaults.standard.stringArray(forKey: Self.notifiedKey) ?? [])
         history = Self.loadHistory()
+        // The last values are shown right away after a restart, without a request.
+        snapshot = Self.loadSnapshot()
     }
 
     func start() {
         guard loop == nil else { return }
         loop = Task { [weak self] in
+            // A restart right after a fetch does not ask again (restarts were part of the 429s).
+            if let fetched = self?.snapshot?.fetchedAt, Date.now.timeIntervalSince(fetched) < Self.activeInterval {
+                try? await Task.sleep(for: .seconds(Self.activeInterval - Date.now.timeIntervalSince(fetched)))
+            }
             while !Task.isCancelled {
                 guard let self else { return }
                 await refresh()
@@ -68,12 +85,22 @@ final class UsageStore {
 
     func refresh() async {
         guard !isRefreshing else { return }
+        if let pausedUntil, pausedUntil > .now { return }
         isRefreshing = true
         defer { isRefreshing = false }
         do {
             let fresh = try await UsageService.fetch()
             apply(fresh)
             error = nil
+            pausedUntil = nil
+            rateLimitStrikes = 0
+        } catch let UsageError.rateLimited(retryAfter) {
+            rateLimitStrikes += 1
+            let pause = Self.backoff(strike: rateLimitStrikes, retryAfter: retryAfter)
+            let until = Date.now.addingTimeInterval(pause)
+            pausedUntil = until
+            error = "Сервер лимитов просит запрашивать реже — следующая попытка в \(until.formatted(date: .omitted, time: .shortened))"
+            AppLog.error("Usage: HTTP 429, pause \(Int(pause / 60)) min (strike \(rateLimitStrikes), Retry-After \(retryAfter.map { "\(Int($0)) s" } ?? "none"))")
         } catch {
             self.error = error.localizedDescription
             AppLog.error("Usage refresh failed: \(error.localizedDescription)")
@@ -115,6 +142,9 @@ final class UsageStore {
         let working = sessions.items.contains { $0.state == .running || $0.state == .waiting }
         let growing = lastGrowth.map { now.timeIntervalSince($0) < 10 * 60 } ?? false
         var delay = working || growing ? Self.activeInterval : Self.idleInterval
+        if let pausedUntil, pausedUntil > now {
+            return max(pausedUntil.timeIntervalSince(now) + 1, 15)
+        }
         // Fetch again shortly after the session window resets.
         if let resets = snapshot?.session?.resetsAt, resets > now {
             delay = min(delay, resets.timeIntervalSince(now) + 5)
@@ -129,6 +159,7 @@ final class UsageStore {
         }
         snapshot = fresh
         UsageFile.write(fresh)
+        saveSnapshot(fresh)
         WidgetCenter.shared.reloadTimelines(ofKind: "ClaudePultUsage")
 
         if let session = fresh.session {
@@ -175,6 +206,21 @@ final class UsageStore {
         guard let data = try? Data(contentsOf: historyURL),
               let points = try? decoder.decode([UsagePoint].self, from: data) else { return [] }
         return points.filter { Date.now.timeIntervalSince($0.date) < 3 * 3600 }
+    }
+
+    private static func loadSnapshot() -> UsageSnapshot? {
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601
+        guard let data = try? Data(contentsOf: snapshotURL),
+              let snapshot = try? decoder.decode(UsageSnapshot.self, from: data),
+              Date.now.timeIntervalSince(snapshot.fetchedAt) < 24 * 3600 else { return nil }
+        return snapshot
+    }
+
+    private func saveSnapshot(_ snapshot: UsageSnapshot) {
+        let encoder = JSONEncoder()
+        encoder.dateEncodingStrategy = .iso8601
+        try? encoder.encode(snapshot).write(to: Self.snapshotURL, options: .atomic)
     }
 
     private func saveHistory() {
