@@ -1,19 +1,22 @@
 # Status
 
 <!-- summary:start -->
-**Stage:** SPEC.md done; SPEC-modes stages 1–7 and 9 done; stage 8: onboarding and guide merged, signing and updates wait for Oleh
+**Stage:** SPEC-modes done except signing/updates; next: profiles made of modules (docs/SPEC-profiles.md, variant C)
 **Updated:** 2026-10-30
 
 **Now:**
-- «Показать» opening the desktop-app session itself merged (PR #68) and checked by Oleh; nothing in progress here
+- spec for profiles and modules — branch `docs/spec-profiles`, PR open
 
 **Next:**
+- SPEC-profiles §9 stage 1: module catalog, profiles, migration from modes, `.claudepult` v2 (looks the same)
+- then stages 2–6: panel from profile modules, empty start and new assistant, Ресурсы Mac, Не спать, Быстрые команды и переключатели
 - menu bar elements reordered by dragging (needs a different list than a grouped Form)
 - fix whatever Oleh finds in the translations (machine translation; native review for ja, ko, ar at least)
 - stage 8 rest: Developer ID signing and notarization, Sparkle updates — once Oleh decides on Developer ID, the name and where updates are hosted
 - Fix whatever Oleh finds in docs/CHECKLIST.md
 
 **Needs Oleh:**
+- confirm SPEC-profiles §10: «профиль» instead of «режим», menu bar per profile, «Не спать, пока работает Claude» on by default for developers, first-wave modules
 - after ~20:11 today: check that the limits keep updating by themselves (the sign-in renewal runs when the token expires)
 - read docs/GUIDE.md as a newcomer would
 - review the languages: Settings → Основные → «Язык интерфейса» → a language → «Перезапустить» (and back); Arabic should mirror right-to-left
@@ -37,6 +40,12 @@
 Done: for sessions of the Claude desktop app «Показать» (panel and notification) used to only activate Claude, which looked like nothing happened when Claude was already in front. Now ClaudePult finds the app's own record (`~/Library/Application Support/Claude/claude-code-sessions/*/*/local_*.json`, `cliSessionId` or `previousCliSessionIds` = the hook's `session_id`, not archived) and opens `claude://code/continue?session=local_…`, the link the app itself offers; without a record it still just opens Claude. `--show-session <id>` handles desktop-app sessions too. Help text updated in all 12 languages; README, DECISIONS, CHECKLIST updated.
 Checked: `xcodebuild test` — 164 tests green (new `desktopSessionLink`); installed; live: `--show-session` switched the Claude window to another ClaudePult session and back (the app's `lastFocusedAt` moved to the opened session each time). The button inside the panel is not clickable by automation. CI not set up; checks run locally.
 Left: Terminal.app is the only terminal whose tab is found; iTerm, Warp and IDE terminals still open the folder.
+
+## 2026-10-30 — Spec: profiles made of modules (branch `docs/spec-profiles`)
+
+Done: `docs/SPEC-profiles.md`, variant C agreed with Oleh. Modules are installed once from a catalog (permissions and background work come with installing); a profile picks which installed modules to show, in what order and with which of its own settings; ClaudePult starts empty, a profile comes from the assistant or Settings. The spec lists the catalog (the existing blocks plus first-wave Ресурсы Mac, Не спать with «пока работает Claude», Быстрые команды, Быстрые переключатели; second wave and what not to build), the new assistant steps, the Settings tabs, the migration from modes (Oleh's setup unchanged, `.claudepult` v2) and six stages. Ideas taken from Vorssaint (GPL-3.0) — no code.
+Checked: docs only; no code changed.
+Left: Oleh to confirm the open questions in §10 before stage 1.
 
 ## 2026-10-30 — Renew the Claude Code sign-in automatically (branch `feat/renew-login`)
 
