@@ -391,6 +391,15 @@ Panel snapshots: `defaults write com.demishev.claudepult DebugPanelSnapshot -boo
 | Dropped on an element to the right it lands after it, to the left before it; onto itself nothing changes; every element stays exactly once | Auto (`MenuBarTests.dragMovesOntoTarget`) |
 | Settings → «Строка меню»: chips of the switched-on elements under the preview; «Ждут» dragged onto «Значок» (real mouse events) moved to the front, preview and list followed | Live (Oleh's profile and menu bar restored afterwards) |
 
+## Translation review (2026-10-30)
+
+| Scenario | Checked |
+|---|---|
+| No Russian inside other languages' strings, no Russian-only letters in Ukrainian (built `.lproj` tables) | Auto (`TranslationTests.noRussianLeft`) |
+| Help and settings name the files ClaudePult writes in that language (`project.md`, `content-plan.md` …) | Auto (`TranslationTests.fileNamesMatchWhatIsWritten`) |
+| Quoted UI names («Модули», «Строка меню» …) match those elements' own translations | Script over the catalog (left: «Команды» meaning the macOS Shortcuts app, German «Eigene/Eigener» grammar) |
+| Reading the texts as a native speaker | Oleh / native speakers |
+
 ## Release without an Apple Developer account (2026-10-30)
 
 | Scenario | Checked |

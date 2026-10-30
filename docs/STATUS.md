@@ -5,7 +5,7 @@
 **Updated:** 2026-10-30
 
 **Now:**
-- menu bar elements reordered by dragging merged (this PR)
+- menu bar elements reordered by dragging merged (PR #93); translation review fixes (branch `fix/translation-review`)
 - hover hints for icon-only controls and the menu bar item merged (PR #91)
 - second wave merged: «История буфера» and «Заметки» (PR #87), «Не спать» with the lid closed (PR #89)
 - release without an Apple Developer account merged (PR #85): Sparkle, self-signed signing, `scripts/release.sh`, MIT license; nothing published yet
@@ -13,7 +13,7 @@
 
 **Next:**
 - standing rule (SPEC §3.1): every new icon-only control gets a hover hint; finish each UI stage with the accessibility walk
-- fix whatever Oleh finds in the translations (machine translation; native review for ja, ko, ar at least)
+- fix whatever Oleh finds in the translations (automated checks pass; a native read for ja, ko, ar is still worth it)
 - stage 8 rest: Developer ID signing and notarization, Sparkle updates — once Oleh decides on Developer ID, the name and where updates are hosted
 - Fix whatever Oleh finds in docs/CHECKLIST.md
 - Windows and Linux versions (docs/SPEC-windows.md, docs/SPEC-linux.md) — only when Oleh says; stage 0 (fact checks in VMs) first
@@ -48,6 +48,12 @@
 - hooks are installed in ~/.claude/settings.json; backup of the original: ~/.claude/settings.json.claudepult-backup-20261029T192827
 - delete or archive the old repo `OlehDemishev/ClaudeBar`; turn on start at login if wanted
 <!-- summary:end -->
+
+## 2026-10-30 — Translation review (branch `fix/translation-review`)
+
+Done: automated review of the 12 machine translations. Found and fixed: the English interface named Russian files (`проект.md`, `контент-план.md`, `результат-<время>.md`, «хуки (Claude).md», Russian card field names in the help) although English content uses `project.md`, `content-plan.md`, `result-<time>.md` and English field names — 12 strings; the lid-closed footer kept the Russian module name «Не спать» in all 11 other languages; Ukrainian called the help window «Довідка» where the window is «Допомога». New `TranslationTests` keep it so: no Cyrillic in non-Cyrillic languages, no Russian-only letters in Ukrainian, file names in texts equal to what ClaudePult writes per language.
+Checked: 205 tests green; scripts over the catalog: format specifiers, quoted UI names against their own translations, Cyrillic leaks, untranslated copies.
+Left: a native read (ja, ko, ar first) — the checks catch leaks and mismatches, not awkward wording.
 
 ## 2026-10-30 — Menu bar elements reordered by dragging (branch `feat/menubar-drag`)
 
