@@ -25,6 +25,7 @@ final class RunStore {
     }
 
     var running: [BackgroundRun] { runs.filter { $0.state == .running } }
+    var paused: [BackgroundRun] { runs.filter(\.isPaused) }
 
     func run(id: String) -> BackgroundRun? { runs.first { $0.id == id } }
 
@@ -103,12 +104,37 @@ final class RunStore {
         stopReasons[id] = reason
         AppLog.info("Background run \(id): stopping (\(reason.rawValue))")
         kill(pid, SIGTERM)
+        // A stopped process only gets the signal once it runs again.
+        if run.pausedAt != nil { kill(pid, SIGCONT) }
         // Claude runs SessionEnd hooks on SIGTERM; give it a moment, then make sure it is gone.
         Task {
             try? await Task.sleep(for: .seconds(10))
             if Self.isRunProcessAlive(pid, startedAt: run.startedAt) { kill(pid, SIGKILL) }
             if processes[id] == nil { finish(id: id) }
         }
+    }
+
+    /// The limit guard: stops the process where it is (SIGSTOP), so the work isn't lost to a hit limit.
+    func pause(_ id: String) {
+        guard var run = run(id: id), run.state == .running, run.pausedAt == nil, let pid = run.pid else { return }
+        kill(pid, SIGSTOP)
+        run.pausedAt = .now
+        update(run)
+        AppLog.info("Background run \(id): paused by the limit guard")
+    }
+
+    func resume(_ id: String) {
+        guard var run = run(id: id), let pausedAt = run.pausedAt, let pid = run.pid else { return }
+        kill(pid, SIGCONT)
+        run.pausedSeconds = (run.pausedSeconds ?? 0) + Date.now.timeIntervalSince(pausedAt)
+        run.pausedAt = nil
+        update(run)
+        AppLog.info("Background run \(id): resumed")
+    }
+
+    private func update(_ run: BackgroundRun) {
+        save(run)
+        if let index = runs.firstIndex(where: { $0.id == run.id }) { runs[index] = run }
     }
 
     private func checkRuns() {
@@ -118,7 +144,7 @@ final class RunStore {
         if !added.isEmpty { runs = (runs + added).sorted { $0.startedAt > $1.startedAt } }
 
         for run in runs where run.state == .running {
-            if Date.now >= run.deadline, stopReasons[run.id] == nil {
+            if !run.isPaused, Date.now >= run.deadline(), stopReasons[run.id] == nil {
                 stop(run.id, reason: .timedOut)
             } else if processes[run.id] == nil, !(run.pid.map { Self.isRunProcessAlive($0, startedAt: run.startedAt) } ?? false) {
                 // Started before an app restart: no termination handler, so detect the exit here.

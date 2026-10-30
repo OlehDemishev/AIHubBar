@@ -51,6 +51,10 @@ struct RunLogView: View {
                 .foregroundStyle(.secondary)
             }
             Spacer()
+            if run.isPaused {
+                Button("Продолжить сейчас") { runs.resume(run.id) }
+                    .help("На паузе до сброса лимита")
+            }
             if run.state == .running {
                 Button("Остановить") { runs.stop(run.id) }
             }

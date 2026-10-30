@@ -39,10 +39,18 @@ struct ClaudeActionsView: View {
                     launcher.request(.finishSession, in: project)
                 }
                 .help("Завершить сессию: проверки, коммит, push, PR и STATUS по разделу «Конец сессии»")
-                ActionButton(title: String(localized: "На ночь"), systemImage: "moon.zzz") {
-                    launcher.queueForNight(.nextStep, in: project)
+                Menu {
+                    Button("На ночь", systemImage: "moon.zzz") { launcher.queueForNight(.nextStep, in: project) }
+                    Button("После сброса лимита", systemImage: "arrow.clockwise.circle") { launcher.queueAfterReset(.nextStep, in: project) }
+                } label: {
+                    Label("Позже", systemImage: "clock")
+                        .scaledFont(.caption)
                 }
-                .help("Следующий шаг — в фоне ночью; утром сводка. Свою задачу на ночь — в «Своя задача…»")
+                .menuStyle(.button)
+                .buttonStyle(.bordered)
+                .controlSize(.small)
+                .fixedSize()
+                .help("Следующий шаг — в фоне позже: ночью (утром сводка) или когда сбросится лимит сессии. Свою задачу — в «Своя задача…»")
             }
             .disabled(isWorking)
 
@@ -135,6 +143,13 @@ struct ClaudeActionsView: View {
                     withAnimation(.snappy(duration: 0.2)) { isEditingTask = false }
                 }
                 .help("Запустить в фоне ночью; утром придёт сводка")
+                .disabled(task.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || isWorking)
+                Button("После сброса") {
+                    launcher.queueAfterReset(.customTask(task), in: project)
+                    task = ""
+                    withAnimation(.snappy(duration: 0.2)) { isEditingTask = false }
+                }
+                .help("Запустить в фоне, когда сбросится лимит сессии")
                 .disabled(task.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || isWorking)
                 Button("Запустить") {
                     launcher.request(.customTask(task), in: project)

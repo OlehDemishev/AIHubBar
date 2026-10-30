@@ -198,6 +198,11 @@ final class AppSettings {
         didSet { defaults.set(hiddenBlocks.map(\.rawValue).sorted(), forKey: Keys.hiddenBlocks) }
     }
 
+    /// «Стоп-кран»: at this session or week usage background runs pause until the reset; 0 is off.
+    var runGuardPercent: Int {
+        didSet { defaults.set(runGuardPercent, forKey: Keys.runGuardPercent) }
+    }
+
     /// Other AI services (SPEC-hub): each one is on by default once found; the person can switch one off.
     var hubDisabled: Set<String> {
         didSet { defaults.set(hubDisabled.sorted(), forKey: Keys.hubDisabled) }
@@ -294,6 +299,7 @@ final class AppSettings {
         let geminiLimit = defaults.integer(forKey: Keys.hubGeminiDailyLimit)
         hubGeminiDailyLimit = geminiLimit > 0 ? geminiLimit : 1000
         hubCursor = defaults.bool(forKey: Keys.hubCursor)
+        runGuardPercent = defaults.object(forKey: Keys.runGuardPercent) as? Int ?? 95
     }
 
     var reportScript: String {
@@ -341,5 +347,6 @@ final class AppSettings {
         static let hubGeminiQuota = "hubGeminiQuota"
         static let hubGeminiDailyLimit = "hubGeminiDailyLimit"
         static let hubCursor = "hubCursor"
+        static let runGuardPercent = "runGuardPercent"
     }
 }

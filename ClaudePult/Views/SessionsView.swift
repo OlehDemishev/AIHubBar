@@ -85,10 +85,12 @@ private struct SessionRowView: View {
 
     @Environment(RunStore.self) private var runs
     @Environment(SessionStore.self) private var sessions
+    @Environment(LaunchController.self) private var launcher
     @Environment(\.openWindow) private var openWindow
     @State private var isHovered = false
 
     private var inBackground: Bool { row.run != nil && row.state == .running }
+    private var paused: Bool { row.run?.isPaused == true }
     private var request: ApprovalRequest? { row.state == .waiting ? sessions.approvals[row.id] : nil }
     /// While Claude works, the last tool call says more than the task it was given.
     private var action: String? { row.state == .running ? row.session?.actionText : nil }
@@ -98,11 +100,11 @@ private struct SessionRowView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 2) {
             HStack(spacing: 6) {
-                Image(systemName: inBackground ? "moon.zzz.fill" : row.state.symbol)
-                    .foregroundStyle(row.state.color)
-                    .symbolEffect(.pulse, options: .repeating, isActive: row.state == .running)
+                Image(systemName: paused ? "pause.circle.fill" : inBackground ? "moon.zzz.fill" : row.state.symbol)
+                    .foregroundStyle(paused ? Color.orange : row.state.color)
+                    .symbolEffect(.pulse, options: .repeating, isActive: row.state == .running && !paused)
                     .frame(width: 14)
-                    .help(inBackground ? String(localized: "в фоне") : row.state.title)
+                    .help(paused ? String(localized: "на паузе до сброса лимита") : inBackground ? String(localized: "в фоне") : row.state.title)
                 Text(row.project)
                     .fontWeight(.medium)
                     .lineLimit(1)
@@ -213,6 +215,10 @@ private struct SessionRowView: View {
             if let run = row.run {
                 Button { showLog(run) } label: { Image(systemName: "doc.text") }
                 .help("Журнал")
+                if run.isPaused {
+                    Button { launcher.resumeNow(run.id) } label: { Image(systemName: "play.circle") }
+                        .help("На паузе до сброса лимита. Продолжить сейчас")
+                }
                 if run.state == .running {
                     Button { runs.stop(run.id) } label: { Image(systemName: "stop.circle") }
                         .foregroundStyle(.red)

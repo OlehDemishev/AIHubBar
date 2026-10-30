@@ -17,7 +17,7 @@ enum RunMessage {
         switch run.state {
         case .timedOut: String(localized: "остановлено по лимиту времени (\(run.timeLimitMinutes) мин)")
         case .stopped: String(localized: "остановлено вручную")
-        case .running: String(localized: "выполняется")
+        case .running: run.pausedAt == nil ? String(localized: "выполняется") : String(localized: "на паузе до сброса лимита")
         case .succeeded, .failed: run.summary ?? (run.state == .succeeded ? String(localized: "готово") : String(localized: "завершилось с ошибкой"))
         }
     }

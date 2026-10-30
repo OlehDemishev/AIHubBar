@@ -33,17 +33,20 @@ final class LaunchController {
         var launchAt: Date
         /// Queued «на ночь»: part of the batch that gets a morning summary.
         var night = false
+        /// Waits for the session limit to reset: if the limit is still full at `launchAt`, it waits for the next reset.
+        var afterReset = false
         var projectName: String { target.name }
 
-        init(id: String, command: ClaudeCommand, target: LaunchTarget, launchAt: Date, night: Bool = false) {
+        init(id: String, command: ClaudeCommand, target: LaunchTarget, launchAt: Date, night: Bool = false, afterReset: Bool = false) {
             self.id = id
             self.command = command
             self.target = target
             self.launchAt = launchAt
             self.night = night
+            self.afterReset = afterReset
         }
 
-        enum CodingKeys: String, CodingKey { case id, command, target, launchAt, night }
+        enum CodingKeys: String, CodingKey { case id, command, target, launchAt, night, afterReset }
 
         init(from decoder: Decoder) throws {
             let c = try decoder.container(keyedBy: CodingKeys.self)
@@ -52,6 +55,7 @@ final class LaunchController {
             target = try c.decode(LaunchTarget.self, forKey: .target)
             launchAt = try c.decode(Date.self, forKey: .launchAt)
             night = (try? c.decodeIfPresent(Bool.self, forKey: .night)) ?? false
+            afterReset = (try? c.decodeIfPresent(Bool.self, forKey: .afterReset)) ?? false
         }
     }
 
@@ -90,6 +94,7 @@ final class LaunchController {
         guard queueTimer == nil else { return }
         queueTimer = Task { [weak self] in
             while !Task.isCancelled {
+                self?.guardRuns()
                 self?.launchDueQueued()
                 try? await Task.sleep(for: .seconds(30))
             }
@@ -205,11 +210,62 @@ final class LaunchController {
     /// «Запустить после сброса»: queued for the reset time + 2 min (spec §2.8).
     func launchAfterReset(in project: Project) {
         guard let pending = pendingLimit.removeValue(forKey: project.id) else { return }
-        let launchAt = (pending.resetsAt ?? .now.addingTimeInterval(3600)).addingTimeInterval(120)
-        queued.append(QueuedLaunch(id: UUID().uuidString, command: pending.command, target: pending.target, launchAt: launchAt))
+        queueAfterReset(pending.command, target: pending.target, resetsAt: pending.resetsAt)
+    }
+
+    /// «После сброса лимита» from the commands: whatever the usage now, the run waits for the session reset.
+    func queueAfterReset(_ command: ClaudeCommand, in project: Project) {
+        messages[project.id] = nil
+        queueAfterReset(command, target: project.launchTarget, resetsAt: usage.snapshot?.session?.resetsAt)
+    }
+
+    private func queueAfterReset(_ command: ClaudeCommand, target: LaunchTarget, resetsAt: Date?) {
+        let launchAt = (resetsAt ?? .now.addingTimeInterval(3600)).addingTimeInterval(120)
+        queued.append(QueuedLaunch(id: UUID().uuidString, command: command, target: target, launchAt: launchAt, afterReset: true))
         saveQueue()
-        messages[project.id] = Message(text: String(localized: "«\(pending.command.title)» запустится в фоне в \(launchAt.formatted(date: .omitted, time: .shortened)), после сброса лимита."))
-        AppLog.info("Queued «\(pending.command.title)» for \(pending.target.name) at \(launchAt.ISO8601Format())")
+        messages[target.path] = Message(text: String(localized: "«\(command.title)» запустится в фоне в \(launchAt.formatted(date: .omitted, time: .shortened)), после сброса лимита."))
+        AppLog.info("Queued «\(command.title)» for \(target.name) after the reset, at \(launchAt.ISO8601Format())")
+    }
+
+    // MARK: - Limit guard
+
+    /// The window that holds background work right now (Settings → Модули → Лимиты), nil when nothing holds.
+    var guardHold: RunGuard.Hold? { RunGuard.hold(usage.snapshot, threshold: settings.runGuardPercent) }
+    /// Runs the person resumed by hand: the guard leaves them alone until they finish.
+    private var guardExempt: Set<String> = []
+
+    /// Pauses running background runs near the limit and resumes them after the reset; one notification each way.
+    private func guardRuns(now: Date = .now) {
+        if let hold = RunGuard.hold(usage.snapshot, threshold: settings.runGuardPercent, now: now) {
+            let paused = runs.running.filter { $0.pausedAt == nil && !guardExempt.contains($0.id) }
+            guard !paused.isEmpty else { return }
+            paused.forEach { runs.pause($0.id) }
+            let until = hold.resetsAt.map { String(localized: " Продолжу после сброса в \($0.formatted(date: .omitted, time: .shortened)).") } ?? ""
+            let title = String(localized: "Фоновые задачи на паузе: \(hold.title) \(UsageText.percent(hold.utilization))")
+            let body = paused.map { "\($0.project): \($0.commandTitle)" }.joined(separator: "\n") + until
+            Notifier.post(id: "run-guard", title: title, body: body)
+            sendToTelegram("⏸ <b>\(RunMessage.escape(title))</b>\n\(RunMessage.escape(body))")
+        } else {
+            let paused = runs.paused
+            guard !paused.isEmpty else { return }
+            paused.forEach { runs.resume($0.id) }
+            let title = String(localized: "Лимит сбросился: фоновые задачи продолжают работу")
+            let body = paused.map { "\($0.project): \($0.commandTitle)" }.joined(separator: "\n")
+            Notifier.post(id: "run-guard", title: title, body: body)
+            sendToTelegram("▶️ <b>\(RunMessage.escape(title))</b>\n\(RunMessage.escape(body))")
+        }
+    }
+
+    /// «Продолжить сейчас» on a paused run.
+    func resumeNow(_ id: String) {
+        guardExempt.insert(id)
+        runs.resume(id)
+    }
+
+    private func sendToTelegram(_ html: String) {
+        guard settings.telegramForBackground,
+              let credentials = Telegram.credentials(dailyReportDirectory: settings.dailyReportDirectory) else { return }
+        Task { _ = await Telegram.send(html: html, with: credentials) }
     }
 
     /// «На ночь»: the run waits for the night start hour (Settings → Claude Code).
@@ -247,6 +303,7 @@ final class LaunchController {
 
     private func launchDueQueued(now: Date = .now) {
         summarizeNight(now: now)
+        postponeHeld(now: now)
         let due = queued.filter { $0.launchAt <= now }
         guard !due.isEmpty else { return }
         if due.contains(where: \.night), UserDefaults.standard.double(forKey: "nightBatchStart") == 0 {
@@ -264,6 +321,27 @@ final class LaunchController {
         messages[project.id] = nil
         pendingConfirmation[project.id] = nil
         pendingLimit[project.id] = nil
+    }
+
+    /// Due runs that would only hit the limit wait for the next reset: everything while the guard holds, and
+    /// «после сброса» runs while the session is still above the launch warning.
+    private func postponeHeld(now: Date) {
+        let hold = RunGuard.hold(usage.snapshot, threshold: settings.runGuardPercent, now: now)
+        let session = usage.snapshot?.session
+        var changed = false
+        for index in queued.indices where queued[index].launchAt <= now {
+            if let hold {
+                queued[index].launchAt = hold.retryAt(now: now)
+            } else if queued[index].afterReset, let session, session.utilization > Self.backgroundLimitGuard,
+                      let reset = session.resetsAt, reset > now {
+                queued[index].launchAt = reset.addingTimeInterval(120)
+            } else {
+                continue
+            }
+            changed = true
+            AppLog.info("Queued «\(queued[index].command.title)» waits for the limit: now \(queued[index].launchAt.ISO8601Format())")
+        }
+        if changed { saveQueue() }
     }
 
     private static func loadQueue() -> [QueuedLaunch] {

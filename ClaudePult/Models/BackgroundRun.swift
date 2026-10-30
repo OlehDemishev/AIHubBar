@@ -26,12 +26,20 @@ struct BackgroundRun: Codable, Identifiable, Equatable, Sendable {
     var notified: Bool
     /// A command of a folder mode writes this file (absolute path); the notification opens it.
     var resultFile: String?
+    /// Paused by the limit guard (the process is stopped with SIGSTOP); paused time doesn't count toward the time limit.
+    var pausedAt: Date? = nil
+    var pausedSeconds: Double? = nil
+
+    var isPaused: Bool { state == .running && pausedAt != nil }
 
     static var runsDirectory: URL { SessionFiles.supportDirectory.appending(path: "runs", directoryHint: .isDirectory) }
     var logURL: URL { Self.runsDirectory.appending(path: "\(id).log") }
     var metadataURL: URL { Self.runsDirectory.appending(path: "\(id).json") }
 
-    var deadline: Date { startedAt.addingTimeInterval(TimeInterval(timeLimitMinutes * 60)) }
+    func deadline(now: Date = .now) -> Date {
+        let paused = (pausedSeconds ?? 0) + (pausedAt.map { now.timeIntervalSince($0) } ?? 0)
+        return startedAt.addingTimeInterval(TimeInterval(timeLimitMinutes * 60) + paused)
+    }
 }
 
 /// The parts of Claude's `--output-format stream-json` output ClaudePult uses (checked against a real run of 2.1.312).
