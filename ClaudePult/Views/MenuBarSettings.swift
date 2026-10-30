@@ -230,7 +230,7 @@ private struct ElementRow: View {
                 Text("Название").tag(true)
             }
             .pickerStyle(.segmented)
-        case .projectsAlert, .forecast, .waiting, .running, .background, .queued, .deadline:
+        case .projectsAlert, .forecast, .waiting, .running, .background, .queued, .deadline, .keepAwake:
             EmptyView()
         }
     }

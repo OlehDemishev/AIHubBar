@@ -63,7 +63,7 @@ struct ProfileModuleTests {
     }
 
     @Test func unknownModulesFromNewerFilesAreSkipped() throws {
-        let json = #"{"name": "X", "modules": [{"kind": "keepAwake"}, {"kind": "limits", "shown": false}, 7, {"kind": "limits"}, {"shown": true}]}"#
+        let json = #"{"name": "X", "modules": [{"kind": "teleporter"}, {"kind": "limits", "shown": false}, 7, {"kind": "limits"}, {"shown": true}]}"#
         let mode = try JSONDecoder().decode(Mode.self, from: Data(json.utf8))
         #expect(mode.modules == [ProfileModule(.limits, shown: false)])
     }

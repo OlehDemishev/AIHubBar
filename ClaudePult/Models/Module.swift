@@ -5,9 +5,9 @@ import Foundation
 /// from Settings → «Модули» and added to a profile by hand (SPEC-profiles §3).
 enum ModuleKind: String, Codable, CaseIterable, Sendable {
     case limits, sessions, upcoming, projects, reports
-    case resources
+    case resources, keepAwake
 
-    var isBuiltIn: Bool { self != .resources }
+    var isBuiltIn: Bool { ![.resources, .keepAwake].contains(self) }
 
     var title: String {
         switch self {
@@ -17,6 +17,7 @@ enum ModuleKind: String, Codable, CaseIterable, Sendable {
         case .projects: String(localized: "Проекты")
         case .reports: String(localized: "Отчёты _daily-report")
         case .resources: String(localized: "Ресурсы Mac")
+        case .keepAwake: String(localized: "Не спать")
         }
     }
 
@@ -29,6 +30,7 @@ enum ModuleKind: String, Codable, CaseIterable, Sendable {
         case .projects: String(localized: "Проекты профиля: git-репозитории или папки, карточки, команды. Настраиваются в профиле.")
         case .reports: String(localized: "Команды _daily-report: отчёт, быстрая сводка, очистка сборок.")
         case .resources: String(localized: "Процессор, память, диск, сеть, батарея и самые прожорливые приложения; уведомления о нагрузке, памяти, месте и заряде.")
+        case .keepAwake: String(localized: "Mac не засыпает, пока работает Claude, на время, при подключённом питании или мониторе, пока открыты выбранные приложения.")
         }
     }
 
@@ -40,6 +42,7 @@ enum ModuleKind: String, Codable, CaseIterable, Sendable {
         case .projects: "folder"
         case .reports: "doc.text.magnifyingglass"
         case .resources: "cpu"
+        case .keepAwake: "cup.and.saucer"
         }
     }
 }
@@ -73,7 +76,7 @@ extension Mode {
             case .upcoming: !hiddenBlocks.contains(.calendar)
             case .projects: showProjects
             case .reports: showCommonCommands
-            case .resources: true
+            case .resources, .keepAwake: true
             }
         }
 

@@ -9,6 +9,7 @@ struct MenuPanelView: View {
     @Environment(ProjectStore.self) private var store
     @Environment(UsageStore.self) private var usage
     @Environment(SystemMonitor.self) private var monitor
+    @Environment(KeepAwakeController.self) private var keepAwake
     @AppStorage("collapsedBlocks") private var collapsedRaw = ""
     @Environment(SessionStore.self) private var sessions
     @Environment(HookController.self) private var hooks
@@ -92,6 +93,7 @@ struct MenuPanelView: View {
             log.debug("Panel shown")
             isShown = true
             monitor.isPanelOpen = true
+            keepAwake.evaluate()
             store.refreshIfStale()
             folders.refreshIfStale()
             calendar.refreshIfStale()
@@ -253,6 +255,10 @@ struct MenuPanelView: View {
                 .revealed(isShown, step: 1, reduceMotion: calm)
                 Divider()
             }
+        case .keepAwake:
+            KeepAwakeView()
+                .revealed(isShown, step: 1, reduceMotion: calm)
+            Divider()
         case .resources:
             ResourcesView()
                 .revealed(isShown, step: 1, reduceMotion: calm)
