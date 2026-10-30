@@ -2,7 +2,7 @@
 
 <!-- summary:start -->
 **Stage:** All 8 spec stages done incl. widgets + settings tabs and appearance
-**Updated:** 2026-10-29
+**Updated:** 2026-10-30
 
 **Now:**
 - PR `docs/spec-content` — draft spec for a «texts» mode (writers, video scripts) — waiting for Oleh's answers to its open questions
