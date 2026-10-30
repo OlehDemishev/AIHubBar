@@ -96,9 +96,13 @@ enum HookScript {
         elif event == "PostToolUse":
             record["state"] = "running"
             record.pop("message", None)
+            record["last_tool"], record["last_target"] = action_of(data)
+            record["last_tool_at"] = now()
         elif event == "Stop":
             record["state"] = "done"
             record.pop("message", None)
+            for key in ("last_tool", "last_target", "last_tool_at"):
+                record.pop(key, None)
         elif event == "StopFailure":
             record["state"] = "done"
             record["message"] = "Ответ прерван ошибкой API"
@@ -106,6 +110,21 @@ enum HookScript {
             record["state"] = "ended"
             record["end_reason"] = data.get("reason")
         record["event"] = event
+
+
+    def action_of(data):
+        """What a tool call did, for «what Claude is doing now»: (tool, target)."""
+        tool = str(data.get("tool_name") or "")
+        tool_input = data.get("tool_input") or {}
+        target = ""
+        if isinstance(tool_input, dict):
+            for key in ("file_path", "notebook_path", "command", "pattern", "url", "query", "description", "prompt"):
+                value = tool_input.get(key)
+                if value:
+                    value = str(value)
+                    target = os.path.basename(value) if key.endswith("_path") else " ".join(value.split())[:80]
+                    break
+        return tool, target
 
 
     def approvals_alive(directory):
@@ -195,11 +214,13 @@ enum HookScript {
             before = (record.get("state"), record.get("message"))
             stamp = now()
 
-            # PostToolUse fires on every tool call: write only when something changes or once a minute.
+            # PostToolUse fires on every tool call: write when the action changes, else once a minute.
             if data.get("hook_event_name") == "PostToolUse" and record.get("state") == "running":
                 try:
                     last = datetime.datetime.fromisoformat(record.get("updated_at", ""))
-                    if (datetime.datetime.now(last.tzinfo) - last).total_seconds() < 60:
+                    age = (datetime.datetime.now(last.tzinfo) - last).total_seconds()
+                    same = action_of(data) == (record.get("last_tool"), record.get("last_target"))
+                    if same and age < 60:
                         return
                 except Exception:
                     pass

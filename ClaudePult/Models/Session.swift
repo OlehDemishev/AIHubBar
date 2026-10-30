@@ -34,9 +34,16 @@ struct Session: Decodable, Identifiable, Equatable, Sendable {
     var tty: String?
     var termProgram: String?
     var entrypoint: String?
+    /// The last tool call (PostToolUse): «what Claude is doing now».
+    var lastTool: String?
+    var lastTarget: String?
+    var lastToolAt: Date?
 
     enum CodingKeys: String, CodingKey {
         case cwd, project, state, event, message, tty, entrypoint
+        case lastTool = "last_tool"
+        case lastTarget = "last_target"
+        case lastToolAt = "last_tool_at"
         case id = "session_id"
         case projectPath = "project_path"
         case startedAt = "started_at"
@@ -66,6 +73,26 @@ struct Session: Decodable, Identifiable, Equatable, Sendable {
         tty = try? c.decodeIfPresent(String.self, forKey: .tty)
         termProgram = try? c.decodeIfPresent(String.self, forKey: .termProgram)
         entrypoint = try? c.decodeIfPresent(String.self, forKey: .entrypoint)
+        lastTool = try? c.decodeIfPresent(String.self, forKey: .lastTool)
+        lastTarget = try? c.decodeIfPresent(String.self, forKey: .lastTarget)
+        lastToolAt = c.isoDate(.lastToolAt)
+    }
+
+    /// «правит LimitsView.swift», «запускает npm test», «ищет TODO»: the last tool call in words.
+    var actionText: String? {
+        guard let tool = lastTool, !tool.isEmpty else { return nil }
+        let target = lastTarget ?? ""
+        let verb: String = switch tool {
+        case "Edit", "MultiEdit", "Write", "NotebookEdit": String(localized: "правит")
+        case "Read": String(localized: "читает")
+        case "Bash", "BashOutput": String(localized: "запускает")
+        case "Grep", "Glob", "ToolSearch": String(localized: "ищет")
+        case "WebFetch", "WebSearch": String(localized: "смотрит в сети")
+        case "Agent", "Task": String(localized: "работает с агентом")
+        case "TodoWrite": String(localized: "обновляет план")
+        default: tool.hasPrefix("mcp__") ? String(localized: "инструмент") + " " + (tool.split(separator: "_").last.map(String.init) ?? tool) : tool
+        }
+        return target.isEmpty ? verb : "\(verb) \(target)"
     }
 
     /// Project name, or the last folder of `cwd` for sessions outside the projects folder.
