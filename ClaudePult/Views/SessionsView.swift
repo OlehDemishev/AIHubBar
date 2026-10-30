@@ -88,6 +88,10 @@ private struct SessionRowView: View {
 
     private var inBackground: Bool { row.run != nil && row.state == .running }
     private var request: ApprovalRequest? { row.state == .waiting ? sessions.approvals[row.id] : nil }
+    /// While Claude works, the last tool call says more than the task it was given.
+    private var action: String? { row.state == .running ? row.session?.actionText : nil }
+    /// Running with no tool call for this long looks stuck.
+    static let quietAfter: TimeInterval = 10 * 60
 
     var body: some View {
         VStack(alignment: .leading, spacing: 2) {
@@ -109,20 +113,27 @@ private struct SessionRowView: View {
                         .truncationMode(.middle)
                         .help("Отдельная рабочая копия git (worktree)")
                 }
-                Text(row.task ?? String(localized: "без задачи"))
+                Text(action ?? row.task ?? String(localized: "без задачи"))
                     .scaledFont(.callout)
                     .lineLimit(1)
                     .truncationMode(.tail)
-                    .foregroundStyle(row.task == nil ? .tertiary : .secondary)
+                    .foregroundStyle(action == nil && row.task == nil ? .tertiary : .secondary)
                 Spacer(minLength: 4)
                 if isHovered || row.state == .waiting {
                     actions
                 } else if let startedAt = row.startedAt {
                     TimelineView(.periodic(from: .now, by: 30)) { context in
-                        Text(DurationText.short(from: startedAt, to: row.endedAt ?? context.date))
-                            .scaledFont(.callout)
-                            .monospacedDigit()
-                            .foregroundStyle(.tertiary)
+                        if let quiet = quietMinutes(now: context.date) {
+                            Text("тихо \(quiet) мин")
+                                .scaledFont(.callout)
+                                .foregroundStyle(.orange)
+                                .help("Claude давно ничего не делал: возможно, сессия зависла или ждёт чего-то вне ClaudePult")
+                        } else {
+                            Text(DurationText.short(from: startedAt, to: row.endedAt ?? context.date))
+                                .scaledFont(.callout)
+                                .monospacedDigit()
+                                .foregroundStyle(.tertiary)
+                        }
                     }
                     .fixedSize()
                 }
@@ -157,7 +168,15 @@ private struct SessionRowView: View {
         )
         .onHover { isHovered = $0 }
         .animation(.easeOut(duration: 0.12), value: isHovered)
-        .help([inBackground ? String(localized: "в фоне") : row.state.title, row.session?.cwd ?? row.run?.folder].compactMap { $0 }.joined(separator: " · "))
+        .help([inBackground ? String(localized: "в фоне") : row.state.title, action == nil ? nil : row.task, row.session?.cwd ?? row.run?.folder]
+            .compactMap { $0 }.joined(separator: " · "))
+    }
+
+    private func quietMinutes(now: Date) -> Int? {
+        guard row.state == .running, row.run == nil, let session = row.session else { return nil }
+        let last = session.lastToolAt ?? session.updatedAt
+        let quiet = now.timeIntervalSince(last)
+        return quiet > Self.quietAfter ? Int(quiet / 60) : nil
     }
 
     private var actions: some View {

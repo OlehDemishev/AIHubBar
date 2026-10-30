@@ -7,7 +7,7 @@
 **Now:**
 - merged: menu bar drag reordering (PR #93), translation review (PR #94), release build re-checked on main (PR #95)
 - panel redesigned as cards, variant A, merged (PR #98)
-- feature batch from Oleh's «все»: approve from notifications merged (PR #100), then current action, week forecast, Telegram, PR/CI alerts, hotkey and search, widget, night queue, context warning
+- feature batch from Oleh's «все»: approve from notifications merged (PR #100); current action (PR open); then week forecast, Telegram, PR/CI alerts, hotkey and search, widget, night queue, context warning
 - hover hints for icon-only controls and the menu bar item merged (PR #91)
 - second wave merged: «История буфера» and «Заметки» (PR #87), «Не спать» with the lid closed (PR #89)
 - release without an Apple Developer account merged (PR #85): Sparkle, self-signed signing, `scripts/release.sh`, MIT license; nothing published yet
@@ -52,6 +52,12 @@
 - hooks are installed in ~/.claude/settings.json; backup of the original: ~/.claude/settings.json.claudepult-backup-20261029T192827
 - delete or archive the old repo `OlehDemishev/ClaudeBar`; turn on start at login if wanted
 <!-- summary:end -->
+
+## 2026-10-30 — What Claude is doing now (branch `feat/current-action`)
+
+Done: the hook records the last tool call on PostToolUse (`last_tool`, `last_target` — a file's base name, a command's first 80 characters, a search pattern…, `last_tool_at`), writing when it changes and otherwise once a minute, clearing it on Stop. A working session's row shows it in words («правит …», «запускает …», «ищет …», «смотрит в сети», «работает с агентом», «обновляет план»); the task moves to the hover hint. No tool call for 10 minutes → an orange «тихо N мин» instead of the duration. 13 languages.
+Checked: 215 tests green (real hook runs); live: this session's row read «запускает scripts/build-…» during the build.
+Left: «тихо» seen only in tests.
 
 ## 2026-10-30 — Answer permission requests from notifications and the panel (branch `feat/approve-from-notification`)
 

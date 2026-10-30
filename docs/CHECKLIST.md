@@ -419,6 +419,14 @@ Panel snapshots: `defaults write com.demishev.claudepult DebugPanelSnapshot -boo
 | Live: Claude Code 2.1.314 (haiku, default mode, isolated settings) asked to run `touch`; the panel showed «Bash: touch …» with «Отклонить» / «Разрешить»; «Разрешить» pressed → «Allowed by PermissionRequest hook», file created | Live |
 | The buttons on the macOS banner itself; Oleh's own hooks after «Обновить hooks» | Oleh |
 
+## What Claude is doing now (2026-10-30)
+
+| Scenario | Checked |
+|---|---|
+| The real hook keeps the last tool call (file names as base names, commands cut to 80); Stop clears it; the words per tool | Auto (`CurrentActionTests`) |
+| This session's row in the panel read «запускает scripts/build-…» while the build ran (Oleh's own hooks, real window capture) | Live |
+| «тихо N мин» after 10 minutes without a tool call | Oleh (needs a stuck session) |
+
 ## Release without an Apple Developer account (2026-10-30)
 
 | Scenario | Checked |
