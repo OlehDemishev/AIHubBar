@@ -1,11 +1,11 @@
 # Status
 
 <!-- summary:start -->
-**Stage:** SPEC-modes done except signing/updates; SPEC-profiles done (stages 1–6)
+**Stage:** SPEC-modes done except signing/updates; SPEC-profiles done (stages 1–6, second wave: clipboard and notes)
 **Updated:** 2026-10-30
 
 **Now:**
-- «История буфера» and «Заметки» modules (branch `feat/clipboard-notes`, PR open, waits for Oleh's merge)
+- «История буфера» and «Заметки» modules merged (PR #87)
 - release without an Apple Developer account merged (PR #85): Sparkle, self-signed signing, `scripts/release.sh`, MIT license; nothing published yet
 - Windows and Linux specs merged (PR #73); implementation waits for Oleh
 
@@ -18,7 +18,7 @@
 - Windows and Linux versions (docs/SPEC-windows.md, docs/SPEC-linux.md) — only when Oleh says; stage 0 (fact checks in VMs) first
 
 **Needs Oleh:**
-- merge the clipboard and notes PR; try them: Settings → «Модули» → «Установить» (copy, pin, search; type a note)
+- try «История буфера» and «Заметки»: Settings → «Модули» → «Установить» (copy, pin, search; type a note)
 - check the Trash for a test note «Заметка.md» from an early test run and delete it
 - back up `~/Library/Application Support/ClaudePult-release/` (signing certificate and update key; without them updates break)
 - to share ClaudePult: make the repository public, then `scripts/release.sh 0.2.0 --publish` (docs/RELEASE.md)
