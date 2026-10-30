@@ -17,7 +17,6 @@
 
 **Needs Oleh:**
 - confirm SPEC-profiles §10: «профиль» instead of «режим», menu bar per profile, «Не спать, пока работает Claude» on by default for developers, first-wave modules
-- uncommitted changes in the working tree (CommandLineTool, SessionStore, SessionTests: «Показать» opens the exact Claude-app session) are not from this session — keep, commit or drop?
 - after ~20:11 today: check that the limits keep updating by themselves (the sign-in renewal runs when the token expires)
 - read docs/GUIDE.md as a newcomer would
 - review the languages: Settings → Основные → «Язык интерфейса» → a language → «Перезапустить» (and back); Arabic should mirror right-to-left
