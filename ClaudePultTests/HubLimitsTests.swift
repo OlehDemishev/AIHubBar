@@ -117,4 +117,29 @@ struct HubLimitsTests {
         #expect(!AppSettings(defaults: defaults).hubEnabled(.codex))
         #expect(settings.hubGeminiDailyLimit == 1000)
     }
+
+    @Test func forecastOnlyWhenItRunsOutBeforeTheReset() {
+        let start = Date(timeIntervalSince1970: 1_800_000_000)
+        let first = HubForecast.Reading(at: start, percent: 20)
+        let latest = HubForecast.Reading(at: start.addingTimeInterval(3600), percent: 40)
+        // 20 % an hour from 40 %: out in 3 hours.
+        #expect(HubForecast.runsOut(first: first, latest: latest, resetsAt: start.addingTimeInterval(10 * 3600)) == start.addingTimeInterval(4 * 3600))
+        #expect(HubForecast.runsOut(first: first, latest: latest, resetsAt: start.addingTimeInterval(2 * 3600)) == nil)
+        #expect(HubForecast.runsOut(first: first, latest: HubForecast.Reading(at: start.addingTimeInterval(600), percent: 30), resetsAt: nil) == nil)
+        #expect(HubForecast.runsOut(first: first, latest: HubForecast.Reading(at: start.addingTimeInterval(3600), percent: 20), resetsAt: nil) == nil)
+    }
+
+    @Test func menuBarShowsTheFullestOrTheChosenService() {
+        var config = MenuBarConfig.make(.minimum)
+        config.set(.otherAI) { $0.enabled = true }
+        var data = MenuBarData()
+        data.otherAI = ["codex": 42, "copilot": 70]
+        #expect(MenuBarComposer.groups(config, data).contains([.text("Copilot 70%", .level(70))]))
+        config.set(.otherAI) { $0.model = "codex" }
+        #expect(MenuBarComposer.groups(config, data).contains([.text("Codex 42%", .level(42))]))
+        // The chosen one has no limit now: nothing, not another service.
+        config.set(.otherAI) { $0.model = "gemini" }
+        #expect(!MenuBarComposer.groups(config, data).contains { $0.contains { if case .text = $0 { true } else { false } } })
+        #expect(MenuBarComposer.accessibilityText(config, data) == "AI Hub Bar")
+    }
 }

@@ -247,7 +247,13 @@ private struct ElementRow: View {
                     }
                 }
             }
-        case .session, .week, .modelWeek, .cpu, .memory:
+        case .session, .week, .modelWeek, .cpu, .memory, .otherAI:
+            if element.kind == .otherAI {
+                Picker("Сервис", selection: value(\.model)) {
+                    Text("Самый загруженный").tag(String?.none)
+                    ForEach(HubLimit.Source.allCases) { Text($0.title).tag(String?.some($0.rawValue)) }
+                }
+            }
             if element.kind == .modelWeek {
                 Picker("Модель", selection: value(\.model)) {
                     Text("Первая доступная").tag(String?.none)

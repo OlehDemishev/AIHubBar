@@ -84,6 +84,18 @@ struct WidgetUsage: Decodable, Equatable {
 struct UsageEntry: TimelineEntry {
     var date: Date
     var usage: WidgetUsage?
+    var otherAI: [WidgetOtherAI] = WidgetOtherAI.load()
+}
+
+/// `other-ai.json` written by AI Hub Bar: the fullest limit of each other AI service (SPEC-hub).
+struct WidgetOtherAI: Decodable, Equatable {
+    var name: String
+    var percent: Double
+
+    static func load() -> [WidgetOtherAI] {
+        let url = WidgetUsage.fileURL.deletingLastPathComponent().appending(path: "other-ai.json")
+        return (try? Data(contentsOf: url)).flatMap { try? JSONDecoder().decode([WidgetOtherAI].self, from: $0) } ?? []
+    }
 }
 
 struct UsageProvider: TimelineProvider {
@@ -160,6 +172,20 @@ struct MediumUsageView: View {
                 }
                 if let session = usage.session { row(String(localized: "Сессия (5 ч)"), session) }
                 if let week = usage.week { row(String(localized: "Неделя"), week) }
+                if !entry.otherAI.isEmpty {
+                    HStack(spacing: 8) {
+                        ForEach(Array(entry.otherAI.prefix(3).enumerated()), id: \.offset) { _, other in
+                            HStack(spacing: 3) {
+                                Text(other.name).foregroundStyle(.secondary)
+                                Text("\(Int(other.percent.rounded()))%")
+                                    .monospacedDigit()
+                                    .foregroundStyle(levelColor(other.percent))
+                            }
+                        }
+                    }
+                    .font(.caption2)
+                    .lineLimit(1)
+                }
             }
         } else {
             NoDataView()

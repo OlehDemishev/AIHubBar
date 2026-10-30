@@ -297,6 +297,11 @@ private struct HubWindowRow: View {
                 if let detail = window.detail {
                     Text(detail).scaledFont(.caption2).foregroundStyle(.secondary)
                 }
+                if let runsOut = window.runsOutAt {
+                    Text("кончится \(runsOut.formatted(.dateTime.weekday(.abbreviated).hour().minute())) при таком темпе")
+                        .scaledFont(.caption2)
+                        .foregroundStyle(.orange)
+                }
             }
         }
     }

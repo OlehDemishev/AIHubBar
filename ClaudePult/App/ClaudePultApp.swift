@@ -183,6 +183,7 @@ struct ClaudePultApp: App {
         data.cpu = monitor.snapshot?.cpu
         data.memory = monitor.snapshot?.memoryPercent
         data.keepingAwake = keepAwake.reason != nil
+        data.otherAI = hub.percents
         data.modeName = modes.current?.name
         data.modeIcon = modes.current?.icon
         return data
