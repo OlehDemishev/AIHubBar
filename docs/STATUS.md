@@ -5,14 +5,14 @@
 **Updated:** 2026-10-30
 
 **Now:**
-- SPEC-modes §9 stage 5 (calendar) in PR (branch `feat/calendar`); next: stage 6 (templates) — needs Oleh's review of docs/TEMPLATES.md
+- SPEC-modes §9 stage 5 (calendar) merged (PR #39); next: stage 6 (templates) — needs Oleh's review of docs/TEMPLATES.md
 
 **Next:**
 - SPEC-modes §9: 5 calendar, 6 templates, 7 setup assistant, 8 for everyone, 9 languages (§13: en, es, pt-BR, fr, de, ja, id, ko, it, ar with RTL, pl, uk)
 - Fix whatever Oleh finds in docs/CHECKLIST.md
 
 **Needs Oleh:**
-- merge the calendar PR; try it in a folder mode: «Календарь» → «+ контент-план», a `Дедлайн:` in a `проект.md`, then the panel «Ближайшее» and the «Календарь» window
+- try the calendar in a folder mode: «Календарь» → «+ контент-план», a `Дедлайн:` in a `проект.md`, then the panel «Ближайшее» and the «Календарь» window
 - try folder projects: duplicate a mode, set «Источник» → «папки» on a folder with a few subfolders, add stages (e.g. «идея, сценарий, монтаж, готово») and metrics
 - try Settings → «Строка меню» (presets, order, options, preview) and the ticking reset countdown
 - try Settings → Режимы (duplicate the mode → switcher appears in the panel) and a double-click on a .claudepult file
