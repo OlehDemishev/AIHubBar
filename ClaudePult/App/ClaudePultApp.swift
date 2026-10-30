@@ -14,6 +14,7 @@ struct ClaudePultApp: App {
     @State private var usage: UsageStore
     @State private var monitor: SystemMonitor
     @State private var keepAwake: KeepAwakeController
+    @State private var quickTools = QuickToolsController()
     @State private var notifications = NotificationPermission()
     @State private var modes: ModeStore
     @State private var services: AIServiceStore
@@ -155,6 +156,7 @@ struct ClaudePultApp: App {
                 .environment(usage)
                 .environment(monitor)
                 .environment(keepAwake)
+                .environment(quickTools)
                 .environment(settings)
                 .environment(notifications)
                 .environment(modes)
@@ -231,6 +233,7 @@ struct ClaudePultApp: App {
                 .environment(usage)
                 .environment(monitor)
                 .environment(keepAwake)
+                .environment(quickTools)
                 .environment(notifications)
                 .environment(modes)
                 .environment(services)

@@ -70,6 +70,7 @@ You can skip any step: **Skip** keeps the template's choice. Everything can be c
 - **Project cards:** a project folder can hold a small text card, `project.md` (named in your language), with lines like `Stage:`, `Deadline:` and `Main file:`. ClaudePult reads it and updates it when you change the stage. You can edit it by hand.
 - **Mac Resources** (optional module: Settings… → Modules → Install): processor, memory, graphics, disk, network, battery and the busiest apps, with alerts when the Mac is struggling. Processor and memory can also go into the menu bar.
 - **Keep Awake** (optional module): the Mac doesn't fall asleep while Claude is working, for a set time, on power, with a display connected or while chosen apps are open. Nothing changes in System Settings — once no rule applies, the Mac sleeps as usual.
+- **Quick Commands** and **Quick Toggles** (optional modules): your own buttons for scripts, Shortcuts, links and folders, and one-click dark mode, desktop icons, lock screen, display off, eject disks and empty Trash. The **Mac Utilities** template sets up a profile with just the Mac tools.
 - **Calendar:** a month or week view of deadlines, publications and content-plan rows. Drag an entry to another day and the date is rewritten in its file.
 - **Menu bar** (**Settings… → Menu Bar**): choose what sits next to ✦, such as limits as a number, ring or bar, the reset countdown, sessions waiting for you, or the next deadline.
 

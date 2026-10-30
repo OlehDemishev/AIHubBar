@@ -343,3 +343,13 @@ Panel snapshots: `defaults write com.demishev.claudepult DebugPanelSnapshot -boo
 | The «Разработчик» template ticks the module in the assistant, others don't | Auto |
 | With the module and this Claude session working: `pmset -g assertions` shows «ClaudePult keep awake» (PreventUserIdleSystemSleep) within seconds of launch, the panel says «держу: работает Claude»; after the profile was restored — no assertion | Live (module added to Oleh's profile for the check, profile files restored) |
 | Timers, «Отпустить», «Не гасить и экран», the power / display / apps rules on a laptop | Oleh |
+
+## Profiles stage 6: quick commands, toggles, «Утилиты Mac» (SPEC-profiles §9.6, 2026-10-30)
+
+| Scenario | Checked |
+|---|---|
+| What each kind of command runs (zsh script, Terminal, `shortcuts run`, a link or a `~` path), empty commands refused, the examples valid; the notification text is the last output line, cut to 140 | Auto (`QuickToolsTests`) |
+| Only «Очистить корзину» asks first | Auto |
+| «Утилиты Mac» exists in all 13 languages with no source and the four tools shown; «Свой» stays last; the assistant ticks its modules, hides limits and sessions and skips the project questions; adding it from Settings needs no folder and installs its modules | Auto (`UtilitiesTemplateTests`) |
+| The panel with both modules (real window capture): two command buttons, six toggles, desktop icons shown as on; «Мой IP в сети» clicked — the address appeared under the buttons, `exit 0` in the log | Live (modules added to Oleh's profile for the check, profile restored) |
+| Dark mode, desktop icons (restarts Finder), lock, display off, eject, empty Trash — they change the Mac, not run here | Oleh |

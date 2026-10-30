@@ -81,7 +81,7 @@ struct GitScannerTests {
 struct ModeTemplateTests {
     @Test func builtInTemplatesLoad() throws {
         let templates = ModeTemplate.loadAll(language: .ru)
-        #expect(templates.map(\.id) == ["developer", "video", "texts", "research", "social", "custom"])
+        #expect(templates.map(\.id) == ["developer", "video", "texts", "research", "social", "utilities", "custom"])
         let video = try #require(templates.first { $0.id == "video" })
         #expect(video.mode.stages.first == "идея")
         #expect(video.mode.commands.map(\.title).contains("Хуки"))

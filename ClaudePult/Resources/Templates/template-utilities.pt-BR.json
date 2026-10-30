@@ -1,0 +1,47 @@
+{
+  "format": "claudepult-template",
+  "version": 1,
+  "order": 5,
+  "id": "utilities",
+  "title": "Utilitários do Mac",
+  "description": "Sem projetos: recursos do Mac, «Não dormir», comandos e alternadores rápidos. Limites de IA e sessões podem ser ativados no «Painel» do perfil.",
+  "folderHint": "",
+  "mode": {
+    "name": "Utilitários do Mac",
+    "icon": "wrench.and.screwdriver",
+    "template": "utilities",
+    "permissions": "filesOnly",
+    "calendar": "off",
+    "showProjects": false,
+    "commonCommands": "none",
+    "showCommonCommands": false,
+    "commands": [],
+    "modules": [
+      {
+        "kind": "resources",
+        "shown": true
+      },
+      {
+        "kind": "keepAwake",
+        "shown": true
+      },
+      {
+        "kind": "quickCommands",
+        "shown": true
+      },
+      {
+        "kind": "toggles",
+        "shown": true
+      },
+      {
+        "kind": "limits",
+        "shown": false
+      },
+      {
+        "kind": "sessions",
+        "shown": false
+      }
+    ]
+  },
+  "language": "pt-BR"
+}

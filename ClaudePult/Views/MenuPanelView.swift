@@ -255,6 +255,14 @@ struct MenuPanelView: View {
                 .revealed(isShown, step: 1, reduceMotion: calm)
                 Divider()
             }
+        case .quickCommands:
+            QuickCommandsView()
+                .revealed(isShown, step: 1, reduceMotion: calm)
+            Divider()
+        case .toggles:
+            QuickTogglesView()
+                .revealed(isShown, step: 1, reduceMotion: calm)
+            Divider()
         case .keepAwake:
             KeepAwakeView()
                 .revealed(isShown, step: 1, reduceMotion: calm)

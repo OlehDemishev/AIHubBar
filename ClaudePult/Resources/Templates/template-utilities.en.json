@@ -1,0 +1,47 @@
+{
+  "format": "claudepult-template",
+  "version": 1,
+  "order": 5,
+  "id": "utilities",
+  "title": "Mac Utilities",
+  "description": "No projects: Mac resources, Keep Awake, quick commands and toggles. AI limits and sessions can be turned on in the profile’s «Panel».",
+  "folderHint": "",
+  "mode": {
+    "name": "Mac Utilities",
+    "icon": "wrench.and.screwdriver",
+    "template": "utilities",
+    "permissions": "filesOnly",
+    "calendar": "off",
+    "showProjects": false,
+    "commonCommands": "none",
+    "showCommonCommands": false,
+    "commands": [],
+    "modules": [
+      {
+        "kind": "resources",
+        "shown": true
+      },
+      {
+        "kind": "keepAwake",
+        "shown": true
+      },
+      {
+        "kind": "quickCommands",
+        "shown": true
+      },
+      {
+        "kind": "toggles",
+        "shown": true
+      },
+      {
+        "kind": "limits",
+        "shown": false
+      },
+      {
+        "kind": "sessions",
+        "shown": false
+      }
+    ]
+  },
+  "language": "en"
+}
