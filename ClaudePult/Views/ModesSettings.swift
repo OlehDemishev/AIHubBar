@@ -106,7 +106,12 @@ private struct ModeEditor: View {
             }
 
             Section("Проекты") {
-                LabeledContent("Источник", value: mode.source.title)
+                Picker("Источник", selection: Binding(
+                    get: { SourceKind(mode.source) },
+                    set: { mode.source = $0.source(keeping: mode.source) }
+                )) {
+                    ForEach(SourceKind.allCases, id: \.self) { Text($0.title).tag($0) }
+                }
                 switch mode.source {
                 case let .gitReport(projects, dailyReport):
                     TildeFolderField(title: "Папка проектов", path: projects) { mode.source = .gitReport(projects: $0, dailyReport: dailyReport) }
@@ -121,8 +126,39 @@ private struct ModeEditor: View {
                     EmptyView()
                 }
                 Toggle("Показывать проекты в панели", isOn: $mode.showProjects)
-                if !mode.source.isReport, mode.source != .none {
-                    Text("Проекты из этого источника появятся в следующих этапах.").font(.caption).foregroundStyle(.secondary)
+                if case .gitBuiltin = mode.source {
+                    Text("Встроенный сканер git появится вместе с шаблонами (этап 6).").font(.caption).foregroundStyle(.secondary)
+                }
+            }
+
+            if mode.source.isFolders {
+                Section {
+                    TextField("Этапы", text: Binding(
+                        get: { mode.stages.joined(separator: ", ") },
+                        // Empty items stay while typing («идея, »); `Mode.stageList` drops them.
+                        set: { mode.stages = $0.split(separator: ",", omittingEmptySubsequences: false).map { $0.trimmingCharacters(in: .whitespaces) } }
+                    ), prompt: Text("идея, черновик, готово"))
+                    ForEach(FolderMetric.allCases, id: \.self) { metric in
+                        Toggle(metric.title, isOn: Binding(
+                            get: { mode.metrics.contains(metric.rawValue) },
+                            set: { on in
+                                mode.metrics.removeAll { $0 == metric.rawValue }
+                                if on {
+                                    // Keep the order of FolderMetric.
+                                    let order = FolderMetric.allCases.map(\.rawValue)
+                                    mode.metrics.append(metric.rawValue)
+                                    mode.metrics.sort { (order.firstIndex(of: $0) ?? 99) < (order.firstIndex(of: $1) ?? 99) }
+                                }
+                            }
+                        ))
+                    }
+                    if mode.metrics.contains(FolderMetric.duration.rawValue) {
+                        Stepper("Темп речи: \(mode.wordsPerMinute) слов/мин", value: $mode.wordsPerMinute, in: 80...250, step: 10)
+                    }
+                } header: {
+                    Text("Карточка, этапы и метрики")
+                } footer: {
+                    Text("Карточка проекта — файл проект.md в папке проекта (этап, дедлайн, публикация, формат, главный файл, площадка); этап меняется прямо из панели. Слова считаются по главному файлу.").font(.caption).foregroundStyle(.secondary)
                 }
             }
 
@@ -256,5 +292,41 @@ enum SettingsFiles {
         NSApp.activate()
         guard panel.runModal() == .OK, let url = panel.url else { return }
         modes.prepareImport(from: url)
+    }
+}
+
+/// The project sources a mode can be switched between in Settings.
+private enum SourceKind: CaseIterable, Hashable {
+    case report, folders, inbox, none
+
+    init(_ source: ProjectSource) {
+        switch source {
+        case .gitReport, .gitBuiltin: self = .report
+        case .folders: self = .folders
+        case .inbox: self = .inbox
+        case .none: self = .none
+        }
+    }
+
+    var title: String {
+        switch self {
+        case .report: "git-репозитории через report.py"
+        case .folders: "папки (каждая подпапка — проект)"
+        case .inbox: "одна папка"
+        case .none: "без проектов"
+        }
+    }
+
+    /// The new source, keeping the folder the mode already had.
+    func source(keeping old: ProjectSource) -> ProjectSource {
+        let folder = old.folder ?? "~/Documents"
+        switch self {
+        case .report:
+            if case .gitReport = old { return old }
+            return .gitReport(projects: folder, dailyReport: folder + "/_daily-report")
+        case .folders: return .folders(folder)
+        case .inbox: return .inbox(folder)
+        case .none: return .none
+        }
     }
 }

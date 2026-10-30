@@ -15,6 +15,8 @@ struct Mode: Codable, Identifiable, Equatable, Sendable {
     var card: ProjectCard
     var stages: [String]
     var metrics: [String]
+    /// Speech pace for «Хронометраж».
+    var wordsPerMinute: Int
     /// nil = ask «Терминал / Фон» every time.
     var launchMode: LaunchMode?
     /// The service the mode's commands use by default (`AIService.id`); nil = Claude Code.
@@ -27,7 +29,7 @@ struct Mode: Codable, Identifiable, Equatable, Sendable {
 
     init(
         id: String = UUID().uuidString.lowercased(), name: String, icon: String = "sparkle", template: String = "custom",
-        source: ProjectSource = .none, card: ProjectCard = .none, stages: [String] = [], metrics: [String] = [],
+        source: ProjectSource = .none, card: ProjectCard = .none, stages: [String] = [], metrics: [String] = [], wordsPerMinute: Int = 150,
         launchMode: LaunchMode? = nil, service: String? = nil, permissions: PermissionProfile = .filesOnly, calendar: CalendarMode = .off,
         showProjects: Bool = true, commonCommands: CommonCommandsKind = .none, showCommonCommands: Bool = true
     ) {
@@ -39,6 +41,7 @@ struct Mode: Codable, Identifiable, Equatable, Sendable {
         self.card = card
         self.stages = stages
         self.metrics = metrics
+        self.wordsPerMinute = wordsPerMinute
         self.launchMode = launchMode
         self.service = service
         self.permissions = permissions
@@ -49,7 +52,7 @@ struct Mode: Codable, Identifiable, Equatable, Sendable {
     }
 
     enum CodingKeys: String, CodingKey {
-        case id, name, icon, template, source, card, stages, metrics, launchMode, service, permissions, calendar
+        case id, name, icon, template, source, card, stages, metrics, wordsPerMinute, launchMode, service, permissions, calendar
         case showProjects, commonCommands, showCommonCommands
     }
 
@@ -63,6 +66,7 @@ struct Mode: Codable, Identifiable, Equatable, Sendable {
         card = (try? c.decodeIfPresent(ProjectCard.self, forKey: .card)) ?? .none
         stages = (try? c.decodeIfPresent([String].self, forKey: .stages)) ?? []
         metrics = (try? c.decodeIfPresent([String].self, forKey: .metrics)) ?? []
+        wordsPerMinute = (try? c.decodeIfPresent(Int.self, forKey: .wordsPerMinute)) ?? 150
         launchMode = try? c.decodeIfPresent(LaunchMode.self, forKey: .launchMode)
         service = try? c.decodeIfPresent(String.self, forKey: .service)
         permissions = (try? c.decodeIfPresent(PermissionProfile.self, forKey: .permissions)) ?? .filesOnly
@@ -71,6 +75,9 @@ struct Mode: Codable, Identifiable, Equatable, Sendable {
         commonCommands = (try? c.decodeIfPresent(CommonCommandsKind.self, forKey: .commonCommands)) ?? .none
         showCommonCommands = (try? c.decodeIfPresent(Bool.self, forKey: .showCommonCommands)) ?? true
     }
+
+    /// Stages without the empty items a half-typed list may have.
+    var stageList: [String] { stages.filter { !$0.isEmpty } }
 
     /// The developer setup ClaudePult had before modes (report.py, `_daily-report`), as a mode.
     static func developerWithReport(
@@ -114,6 +121,16 @@ enum ProjectSource: Codable, Equatable, Sendable {
         case .none: "без проектов"
         }
     }
+
+    var isFolders: Bool {
+        switch self {
+        case .folders, .inbox: true
+        default: false
+        }
+    }
+
+    /// Sources the panel can list today.
+    var isShownInPanel: Bool { isReport || isFolders }
 
     /// The projects folder, `~`-form.
     var folder: String? {

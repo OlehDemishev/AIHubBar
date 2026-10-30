@@ -12,6 +12,7 @@ import UserNotifications
 /// - `ClaudePult --usage`, `ClaudePult --usage-raw` (subscription limits; the token is never printed), `--token-usage`
 /// - `ClaudePult --notifications-status`
 /// - `ClaudePult --modes`, `ClaudePult --export-settings <file.claudepult>` (import: open the file in Finder)
+/// - `ClaudePult --folder-projects <folder>` (folder projects as the panel would list them)
 /// - `ClaudePult --services [check]` (installed agents, stored API keys; `check` lists each provider's models)
 /// - `ClaudePult --menubar-preview <file.png> [minimum|limits|everything]` (the menu bar item with sample data)
 @MainActor
@@ -106,6 +107,15 @@ enum CommandLineTool {
                 printError("error: \(error.localizedDescription)")
                 return 1
             }
+        }
+        if let index = arguments.firstIndex(of: "--folder-projects"), index + 1 < arguments.count {
+            let projects = FolderScanner.scan(source: .folders(arguments[index + 1]))
+            for project in projects {
+                let metrics = FolderMetric.allCases.compactMap { metric in metric.text(for: project, wordsPerMinute: 150).map { "\(metric.rawValue)=\($0)" } }
+                print("\(project.name)  [\(project.card.stage ?? "—")]  main=\(project.mainFile ?? "—")  " + metrics.joined(separator: "  "))
+            }
+            if projects.isEmpty { print("no folder projects in \(arguments[index + 1])") }
+            return 0
         }
         if let index = arguments.firstIndex(of: "--services") {
             return servicesReport(check: arguments.dropFirst(index + 1).first == "check")

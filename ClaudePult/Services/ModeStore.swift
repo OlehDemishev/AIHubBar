@@ -132,8 +132,9 @@ final class ModeStore {
             break
         }
         settings.defaultLaunchMode = mode.launchMode
-        // Projects come only from report.py until the other sources arrive (SPEC-modes §9, stages 4 and 6).
-        settings.setShows(.projects, mode.showProjects && mode.source.isReport)
+        settings.activeSource = mode.source
+        // The built-in git scanner arrives with the templates (SPEC-modes §9, stage 6).
+        settings.setShows(.projects, mode.showProjects && mode.source.isShownInPanel)
         settings.setShows(.commands, mode.showCommonCommands && mode.commonCommands == .dailyReport)
         didApply?()
     }

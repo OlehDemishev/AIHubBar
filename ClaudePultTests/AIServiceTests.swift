@@ -82,5 +82,7 @@ struct AIServiceTests {
         let mode = try JSONDecoder().decode(Mode.self, from: Data(#"{"name":"V","service":"api:openai"}"#.utf8))
         #expect(mode.service == "api:openai")
         #expect(try JSONDecoder().decode(Mode.self, from: Data(#"{"name":"V"}"#.utf8)).service == nil)
+        #expect(try JSONDecoder().decode(Mode.self, from: Data(#"{"name":"V"}"#.utf8)).wordsPerMinute == 150)
+        #expect(Mode(name: "V", stages: ["идея", "", "готово"]).stageList == ["идея", "готово"])
     }
 }

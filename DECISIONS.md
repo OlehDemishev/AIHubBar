@@ -2,6 +2,18 @@
 
 Decisions made where the spec is silent or does not match reality. Newest at the top.
 
+## 2026-10-30 — Folder projects (SPEC-modes §9.4, part 1)
+
+**`проект.md` stays the person's file.** Fields are plain lines `Ключ: значение` (list markers and bold allowed; English synonyms `stage`, `deadline`, `publish`, `format`, `main file`, `platform` accepted for later languages). ClaudePult changes only the line it writes (`Этап:`), keeping everything else; a new card is created only where none exists. Empty fields in the template are not values.
+
+**Main file and words.** The main file is `Главный файл:` from the card, else the most recently changed text file (`.md`, `.txt`, `.rtf`, `.docx`, `.fountain`). Words come from macOS word boundaries, counting only tokens with letters or digits; link addresses in Markdown are left out. Duration uses the mode's pace (150 words/min by default, SPEC-modes §3), reading time 200 words/min, a page 250 words. Sources: PDFs anywhere plus any file in `источники` / `sources` / `материалы`.
+
+**Scanning.** Up to three levels deep and 2000 files per project, hidden files, `node_modules` and `build` skipped; folders starting with `_` are not projects (archive, templates). Off the main actor, on panel open if older than 60 s and every 5 minutes.
+
+**report.py only for report modes.** `AppSettings.activeSource` (set when a mode is applied, not stored) tells `ProjectStore` to skip `report.py` and `FolderProjectStore` to scan; this is also what makes ClaudePult usable without `_daily-report`. A mode's source can now be switched in Settings; the built-in git scanner stays for stage 6.
+
+**Stage colours** go from blue (first stage) to green (last), so progress is visible without reading.
+
 ## 2026-10-30 — AI services, connection part (SPEC-modes §9.3)
 
 **Checked against the docs (2026-10-30), not memory.** Model lists: Anthropic `GET /v1/models` (accepts `x-api-key` and Bearer; we send `x-api-key` + `anthropic-version: 2023-06-01`), Google `…/v1beta/openai/models` (OpenAI-compatible, Bearer), DeepSeek `https://api.deepseek.com/models`, Mistral `/v1/models` (docs show both `{data: […]}` and a bare array — both parsed). OpenAI's docs refused the fetch (403) and xAI's docs do not list `/models`; for all six an unauthenticated request was made: each answered «bad key» (401, or 400 for Google and xAI), not 404, so the paths exist. A bad key may come back as 400/403 — it counts as «Ключ не подошёл» when the message names the key.

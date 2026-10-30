@@ -13,6 +13,7 @@ struct MenuPanelView: View {
     @Environment(AppSettings.self) private var settings
     @Environment(NotificationPermission.self) private var notifications
     @Environment(ModeStore.self) private var modes
+    @Environment(FolderProjectStore.self) private var folders
 
     /// Drives the entrance animation; reset when the panel closes so it replays on every open.
     @State private var isShown = false
@@ -107,6 +108,7 @@ struct MenuPanelView: View {
             log.debug("Panel shown")
             isShown = true
             store.refreshIfStale()
+            folders.refreshIfStale()
             sessions.reload()
             hooks.refresh()
             notifications.refresh()
@@ -201,6 +203,15 @@ struct MenuPanelView: View {
 
     @ViewBuilder
     private var content: some View {
+        if folders.isActive {
+            scrolling { FolderProjectsView() }
+        } else {
+            gitContent
+        }
+    }
+
+    @ViewBuilder
+    private var gitContent: some View {
         if let error = store.lastError, store.report != nil {
             Label(error, systemImage: "exclamationmark.triangle")
                 .scaledFont(.caption)
@@ -244,13 +255,20 @@ struct MenuPanelView: View {
     }
 
     private var projectList: some View {
-        ScrollView {
+        scrolling {
             VStack(alignment: .leading, spacing: 2) {
                 ForEach(store.projects) { project in
                     ProjectRowView(project: project, isExpanded: expandedBinding(project.id))
                 }
             }
             .padding(6)
+        }
+    }
+
+    /// The project list scrolls once it is taller than `maxListHeight`.
+    private func scrolling<Content: View>(@ViewBuilder _ content: () -> Content) -> some View {
+        ScrollView {
+            content()
             .background(GeometryReader { proxy in
                 Color.clear.preference(key: ContentHeightKey.self, value: proxy.size.height)
             })
