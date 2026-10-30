@@ -5,21 +5,29 @@
 **Updated:** 2026-10-30
 
 **Now:**
-- nothing in progress (spec `docs/SPEC-modes.md` merged; stage 1 not started — waiting for Oleh's go)
+- PR `docs/spec-providers` — spec additions (AI services besides Claude, ClaudePult for everyone, settings export/import) and template texts for review — waiting for Oleh
 
 **Next:**
-- docs/SPEC-modes.md §9 stage 1: mode model (JSON), current setup as mode «Разработчик (GitHub)», switcher in the panel, «Режимы» settings tab — no behaviour change for Oleh
-- Then: §9 stage 2 menu bar builder, 3 folder projects + task templates, 4 calendar, 5 templates, 6 setup assistant
+- docs/SPEC-modes.md §9 stage 1: mode model (JSON) + settings export/import; Oleh's setup becomes his mode «Разработчик — Олег»; switcher in the panel; «Режимы» tab — no behaviour change for Oleh
+- Then §9: 2 menu bar builder, 3 AI services, 4 folder projects + commands, 5 calendar, 6 templates, 7 setup assistant, 8 for everyone
 - Fix whatever Oleh finds in docs/CHECKLIST.md
 
 **Needs Oleh:**
-- docs/SPEC-modes.md §10: for whom (only Oleh or others), prompt texts of the built-in templates before stage 5
+- read and edit docs/TEMPLATES.md (template texts) before stage 6
+- before stage 3: install Codex CLI and Gemini CLI and create API keys (OpenAI, Google, xAI, DeepSeek, Mistral) for live checks — Oleh offered to
+- before stage 8: Apple Developer Program (Developer ID, notarization) for distributing ClaudePult; decide on the name (SPEC-modes §10.4)
 - try the «Внешний вид» settings tab (theme, width, density not checked by eye)
 - optional, in _daily-report (not changed by ClaudePult): report.py/bot.py could read `~/Library/Application Support/ClaudePult/usage.json` (`five_hour`, `seven_day`, `updated`) for a /limits bot command or a limits line in the report
 - go through the «Oleh» rows of docs/CHECKLIST.md (buttons inside the panel, Settings, notifications, Telegram messages) — automation cannot click inside ClaudePult
 - hooks are installed in ~/.claude/settings.json; backup of the original: ~/.claude/settings.json.claudepult-backup-20261029T192827
 - delete or archive the old repo `OlehDemishev/ClaudeBar`; turn on start at login if wanted
 <!-- summary:end -->
+
+## 2026-10-30 — Spec: AI services, for everyone, settings export; template texts (branch `docs/spec-providers`)
+
+Done: `docs/SPEC-modes.md` extended after Oleh's decisions: ClaudePult is for everyone (Oleh's setup becomes his own saved mode «Разработчик — Олег»; the built-in developer template uses a built-in git scanner instead of report.py); other AI services besides Claude (§11: agents — Codex CLI, Gemini CLI, Copilot CLI, Cursor CLI, custom; API models — OpenAI, Google, xAI, DeepSeek, Mistral, Anthropic, OpenAI-compatible incl. local; keys only in the Keychain; «Сравнить» runs one command with 2–3 services; limits/spend per service); settings export/import as `*.claudepult` files without secrets (§12); stages re-ordered (§9). New `docs/TEMPLATES.md`: how ClaudePult wraps a task for an agent or an API model, and the command texts of all built-in templates for Oleh to review.
+Checked: docs only. Only Claude Code is installed on this Mac; other CLIs' flags and APIs are marked «verify against their docs» before stage 3.
+Left: Oleh's review of TEMPLATES.md; installing other CLIs and API keys before stage 3.
 
 ## 2026-10-30 — Spec: modes, templates, setup assistant (branch `docs/spec-content`)
 
