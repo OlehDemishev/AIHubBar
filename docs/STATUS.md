@@ -19,8 +19,6 @@
 **Needs Oleh:**
 - optionally rename the GitHub repository to match AI Hub Bar (then SUFeedURL in project.yml and REPO in release.sh follow)
 - try: the «Сессии и проекты» widget, «Не спать» in Control Center, ⌃⌥C search, Shortcuts actions, «На ночь» on a project
-- for answers from Telegram: create a bot in @BotFather (/newbot), paste its token in Settings → Claude Code → «Ответы из Telegram», press «Start» in the bot, then «Проверить» and turn it on
-- Settings → Claude Code → «Обновить hooks» once, so permission requests can be answered from notifications (timeout 5 → 300 s)
 - try the new panel: hover a session row, click a project, the profile menu with two profiles
 - hover over the menu bar item and the panel icons: tooltips should name what each one is
 - on a laptop: Settings → «Модули» → «Не спать» → «Разрешить…» (admin password once), then «И с закрытой крышкой»
@@ -51,6 +49,12 @@
 - hooks are installed in ~/.claude/settings.json; backup of the original: ~/.claude/settings.json.claudepult-backup-20261029T192827
 - delete or archive the old repo `OlehDemishev/ClaudeBar`; turn on start at login if wanted
 <!-- summary:end -->
+
+## 2026-10-30 — Answers from Telegram checked end to end
+
+Done: Oleh updated the hooks (PermissionRequest timeout 300 s) and made a second bot for answers; its token is in the Keychain, the switch is on, the chat is the `_daily-report` one.
+Checked: a test Claude (haiku, default mode, isolated settings) asked to `touch` a file; the bot sent the request with buttons, Oleh pressed «Разрешить» on the phone, the log says «Permission allowed from Telegram» and the file appeared.
+Left: —
 
 ## 2026-10-30 — Opening sessions from their rows (branch `fix/session-open`)
 
