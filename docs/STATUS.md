@@ -5,7 +5,7 @@
 **Updated:** 2026-10-30
 
 **Now:**
-- specs for Windows and Linux versions — branch `docs/spec-windows-linux`, PR open (spec only, no implementation)
+- Windows and Linux specs merged (PR #73); implementation waits for Oleh
 
 **Next:**
 - SPEC-profiles stage 2: panel and menu bar from profile modules, «Профили» and «Модули» tabs, «режим» → «профиль» in all 13 languages (moved here from stage 1: these strings get rewritten anyway)
