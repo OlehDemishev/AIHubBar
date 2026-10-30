@@ -91,6 +91,10 @@ private struct GeneralSettings: View {
                     Text("Ошибка: \(error)").font(.callout).foregroundStyle(.red)
                 }
                 LanguagePicker()
+                Picker("Открывать поиск с клавиатуры", selection: $settings.panelHotKey) {
+                    ForEach(PanelHotKey.allCases, id: \.self) { Text($0.title).tag($0) }
+                }
+                .onChange(of: settings.panelHotKey) { GlobalHotKey.register(settings.panelHotKey) }
             }
 
             Section {

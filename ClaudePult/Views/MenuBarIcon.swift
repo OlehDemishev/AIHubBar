@@ -65,9 +65,11 @@ struct MenuBarIcon: View {
 @MainActor
 enum StatusItemTooltip {
     static func set(_ text: String) {
-        for window in NSApp.windows where window.className.contains("StatusBarWindow") {
-            if let button = button(in: window.contentView) { button.toolTip = text }
-        }
+        statusButton()?.toolTip = text
+    }
+
+    static func statusButton() -> NSButton? {
+        NSApp.windows.lazy.filter { $0.className.contains("StatusBarWindow") }.compactMap { button(in: $0.contentView) }.first
     }
 
     private static func button(in view: NSView?) -> NSButton? {

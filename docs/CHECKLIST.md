@@ -452,6 +452,15 @@ Panel snapshots: `defaults write com.demishev.claudepult DebugPanelSnapshot -boo
 | Settings → «Модули» → «Проекты» has the two switches | Live (accessibility text) |
 | A real CI failure arriving as a notification | Oleh (next red CI) |
 
+## Search, hot key and Shortcuts actions (2026-10-30)
+
+| Scenario | Checked |
+|---|---|
+| Search order (sessions, projects, quick commands, commands), wrong-layout queries, no destructive cleanup in results; hot key presets distinct; the Shortcuts limits text from `usage.json` | Auto (`PanelAccessTests`) |
+| ⌃⌥C from another app opened «Поиск — ClaudePult» with the cursor in the field; «завис» and «ыгкм» found the Survikon session and project; Esc clears, Esc again closes | Live (synthetic keys) |
+| The three actions are in the app's App Intents metadata | Live (`Metadata.appintents`) |
+| Running the actions from the Shortcuts app and Siri; the search field in the panel itself | Oleh |
+
 ## Release without an Apple Developer account (2026-10-30)
 
 | Scenario | Checked |

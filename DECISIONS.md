@@ -2,6 +2,10 @@
 
 Decisions made where the spec is silent or does not match reality. Newest at the top.
 
+## 2026-10-30 — The hot key opens a search window, not the panel
+
+`MenuBarExtra` (window style) can't be opened from code: `performClick` on its `NSStatusBarButton`, sending the button's action and posting mouse-down/up events into its status bar window all did nothing (checked live). So the global hot key (a Carbon `RegisterEventHotKey`, no Accessibility permission) opens a separate small «Поиск — ClaudePult» window with the same search as the panel. A third-party workaround (private `NSStatusItem` access) wasn't worth the risk.
+
 ## 2026-10-30 — Week forecast from the journals
 
 The usage endpoint gives only the week's current percentage, and ClaudePult kept 3 hours of session history. Instead of waiting a week for its own history, the week's percentage is split over the days in the proportions of the weights in Claude Code's journals (`TokenRecord.weight`, already used for «Расход по проектам»), and the pace is the share of the last 24 hours. An estimate: the journals don't hold everything that counts (claude.ai chats), so the bars show where the week went, not exact percentages.
