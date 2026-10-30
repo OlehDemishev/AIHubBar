@@ -16,6 +16,7 @@ struct ClaudePultApp: App {
     @State private var usage: UsageStore
     @State private var hub: HubLimitsStore
     @State private var sessionChanges = SessionChangesStore()
+    @State private var claudeConfig: ClaudeConfigStore
     @State private var weeklySummary: WeeklySummarySender
     @State private var monitor: SystemMonitor
     @State private var keepAwake: KeepAwakeController
@@ -48,6 +49,7 @@ struct ClaudePultApp: App {
         let store = ProjectStore(settings: settings)
         _settings = State(initialValue: settings)
         _store = State(initialValue: store)
+        _claudeConfig = State(initialValue: ClaudeConfigStore(settings: settings, projects: store))
         let requests = AppRequests()
         let commands = CommandStore(settings: settings, store: store, requests: requests)
         _requests = State(initialValue: requests)
@@ -226,6 +228,7 @@ struct ClaudePultApp: App {
         Window("Поиск — AI Hub Bar", id: "search") {
             QuickSearchWindow()
                 .environment(settings)
+                .environment(launcher)
                 .environment(store)
                 .environment(folders)
                 .environment(sessions)
@@ -238,6 +241,13 @@ struct ClaudePultApp: App {
         .windowStyle(.hiddenTitleBar)
         .windowResizability(.contentSize)
         .defaultPosition(.center)
+
+        Window(String(localized: "Claude Code: инструкции и MCP"), id: "claude-config") {
+            ClaudeConfigWindow()
+                .environment(claudeConfig)
+                .preferredColorScheme(settings.panelTheme.colorScheme)
+        }
+        .defaultSize(width: 900, height: 620)
 
         Window("Журнал фоновой задачи", id: "run-log") {
             RunLogView()

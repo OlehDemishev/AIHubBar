@@ -125,3 +125,35 @@ struct WorktreePlan: Equatable, Sendable {
         }
     }
 }
+
+/// «Свои промпты»: a reusable task with {проект}, {ветка}, {файл} filled in when it's run from the search (⌃⌥C).
+struct SavedPrompt: Codable, Equatable, Identifiable, Sendable {
+    var id = UUID().uuidString
+    var title: String
+    var text: String
+
+    /// Russian and English names of the same placeholder.
+    static let placeholders: [(names: [String], key: String)] = [
+        (["{проект}", "{project}"], "project"), (["{ветка}", "{branch}"], "branch"), (["{файл}", "{file}"], "file"),
+    ]
+
+    var needsFile: Bool { Self.placeholders[2].names.contains { text.contains($0) } }
+
+    func filled(project: String, branch: String?, file: String?) -> String {
+        let values = ["project": project, "branch": branch ?? "", "file": file ?? ""]
+        var result = text
+        for (names, key) in Self.placeholders {
+            for name in names { result = result.replacingOccurrences(of: name, with: values[key] ?? "") }
+        }
+        return result
+    }
+
+    static var examples: [SavedPrompt] {
+        [
+            SavedPrompt(title: String(localized: "Ревью ветки"),
+                        text: String(localized: "Проверь изменения ветки {ветка} в {проект} относительно основной: ошибки, лишнее, чего не хватает в тестах. Ничего не меняй, только список.")),
+            SavedPrompt(title: String(localized: "Объясни файл"),
+                        text: String(localized: "Объясни, что делает {файл} и где он используется в {проект}. Коротко, по-русски.")),
+        ]
+    }
+}

@@ -136,6 +136,9 @@ struct MenuPanelView: View {
             if let command = settings.quickCommands.first(where: { $0.id == id }) { quickTools.run(command) }
         case let .command(command):
             commands.run(command)
+        case .prompt:
+            // Prompts are offered in the ⌃⌥C search window, where a project is picked next.
+            break
         }
     }
 
@@ -192,6 +195,11 @@ struct MenuPanelView: View {
         } label: { Image(systemName: "gearshape") }
         .help("Настройки… (⌘,)")
         .keyboardShortcut(",", modifiers: .command)
+        Button {
+            NSApp.activate()
+            openWindow(id: "claude-config")
+        } label: { Image(systemName: "doc.badge.gearshape") }
+        .help("Claude Code: все CLAUDE.md и MCP-серверы")
         Button {
             NSApp.activate()
             openWindow(id: "help")

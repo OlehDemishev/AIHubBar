@@ -5,7 +5,8 @@
 **Updated:** 2026-10-30
 
 **Now:**
-- nothing in progress; merged today: other AI services' limits (spec #126, hub #127)
+- eight features on four stacked branches (`feat/limit-queue` → `feat/hub-extras` → `feat/session-changes` → `feat/claude-code-tools`), PRs open
+- merged today: other AI services' limits (spec #126, hub #127)
 - renamed to AI Hub Bar (PR #115); session rows open on a click anywhere (PR #117); widgets translated into 13 languages (PR #119); sessions in Claude's own terminal open Claude (PR #121); module options per profile (PR #124)
 - merged today: feature batch — approve from notifications (#100), current action (#102), week forecast (#104), Telegram answers (#106), PR/CI alerts (#108), search, hot key, Shortcuts (#110), widget and Control Center toggle (#112), night queue (#113), context fullness (#114); panel as cards (#98); hover hints (#91); menu bar drag, translation review, release re-check (#93–#95)
 - release without an Apple Developer account ready (PR #85), nothing published; Windows and Linux specs wait for Oleh
@@ -19,6 +20,8 @@
 - other AI services, if wanted later: menu bar items and a widget line for them, «lasts until reset» forecast, their alerts to Telegram
 
 **Needs Oleh:**
+- merge the four stacked PRs in order; then try: «Позже» on a project, the paused-run switch (Settings → Модули → Лимиты), the file list from a session row, «Отправить сейчас» for the weekly summary, the Claude Code window (panel footer), a saved prompt in ⌃⌥C
+- MCP on/off was not pressed on your `obsidian` server during checks: try it once (it moves to a stash file and back; settings.json gets a backup)
 - to try the other AI services: Settings → «Модули» → «Лимиты» → «Другие AI» — OpenRouter key, OpenAI / Anthropic admin keys, installed and signed-in `codex`, Gemini CLI and Cursor consent toggles (Copilot already shows from `gh`)
 - optionally rename the GitHub repository to match AI Hub Bar (then SUFeedURL in project.yml and REPO in release.sh follow)
 - try: the «Сессии и проекты» widget, «Не спать» in Control Center, ⌃⌥C search, Shortcuts actions, «На ночь» on a project
@@ -52,6 +55,12 @@
 - hooks are installed in ~/.claude/settings.json; backup of the original: ~/.claude/settings.json.claudepult-backup-20261029T192827
 - delete or archive the old repo `OlehDemishev/ClaudeBar`; turn on start at login if wanted
 <!-- summary:end -->
+
+## 2026-10-30 — Eight features: queue after reset, run guard, other-AI extras, session changes, weekly summary, MCP, CLAUDE.md, prompts (branches `feat/limit-queue`, `feat/hub-extras`, `feat/session-changes`, `feat/claude-code-tools`)
+
+Done: (1) «Позже» → «После сброса лимита» queues the next step or a custom task for the session reset, waiting again if the limit is still full. (2) Run guard: at a set session or week usage (95 % by default) running background runs get SIGSTOP and resume after the reset (paused time doesn't count toward the time limit), queued ones wait; notification and Telegram both ways; «Продолжить сейчас» on a paused run. (8) Other AI: menu bar element (fullest or chosen service), a line in the medium limits widget (`other-ai.json`), «кончится … при таком темпе» forecast, threshold alerts also to Telegram. (3) Session rows show files and +/− lines changed since the session started (git, committed included), with a popover list of files. (4) Weekly summary to Telegram (Sunday 19:00 by default): week %, spend by project, three heaviest sessions, limit hits (now recorded), background runs; «Отправить сейчас». (5, 6) «Claude Code» window (panel footer icon, Settings → Claude Code): all CLAUDE.md / AGENTS.md / CLAUDE.local.md with search and editing; MCP servers from ~/.claude.json, ~/.claude/settings.json, project configs and .mcp.json, with an on/off switch (user/local via `claude mcp remove` / `add-json`, settings.json via a 0600 stash file plus backup, .mcp.json via `disabledMcpjsonServers` in the project's settings.local.json); env and headers are never shown. (7) Saved prompts (Settings → Claude Code) offered in the ⌃⌥C search; a project is picked next; {проект}/{project}, {ветка}/{branch}, {файл}/{file} (Finder selection) are filled in. 77 new strings in 12 languages; guide updated.
+Checked: `xcodebuild test` — 262 tests pass (new: guard and pause math, forecast, menu bar element, numstat parsing and a real git repo, weekly send time and text, MCP config parsing and project switch, instruction search, prompt placeholders). Installed and checked live: the Claude Code window lists this Mac's CLAUDE.md files and the `obsidian` MCP server; session rows show changes; «Позже» menu is in the project actions.
+Left: MCP switching, the run guard's SIGSTOP pause, after-reset launch, the weekly Telegram send and {файл} from Finder were not exercised live (they change your config, need a full limit or send a message); translations are in the last branch only, so merge the four together; long-lived sessions show everything changed since they started, which can be large.
 
 ## 2026-10-30 — Limits of other AI services (branch `feat/hub-limits`)
 
