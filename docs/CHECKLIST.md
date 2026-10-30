@@ -196,3 +196,13 @@ Panel snapshots: `defaults write com.demishev.claudepult DebugPanelSnapshot -boo
 | English output: git scanner attention items, calendar texts, assistant preview | Live (`-AppleLanguages '(en)'`) |
 | Plural «файл/файла/файлов» in Russian, «file/files» in English | Auto (Russian) + Live (English) |
 | Settings → Основные → «Язык интерфейса» + «Перезапустить» | **Oleh: switch to English and back** |
+
+## Languages: English content (SPEC-modes §9.9)
+
+| Scenario | Checked |
+|---|---|
+| Templates in English and Russian, same ids and commands, only known placeholders | Auto |
+| English placeholders and result names (`{project}`, `<time>`, `<file>`), English agent/API wrappers, English generic developer prompts; Oleh's prompts unchanged | Auto |
+| `project.md` / `content-plan.md` read like the Russian names; a card keeps its language when a value is written; new cards and plans in the interface language | Auto |
+| Session titles recognise English prompts | Auto |
+| Assistant preview of «Video» fully in English | Live (`--assistant-preview … -AppleLanguages '(en)'`) |

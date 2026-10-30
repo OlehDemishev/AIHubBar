@@ -73,7 +73,7 @@ final class FolderProjectStore {
     }
 
     func createCard(for project: FolderProject, firstStage: String?) {
-        let url = URL(fileURLWithPath: project.path).appending(path: ProjectCardFile.fileName)
+        let url = URL(fileURLWithPath: ProjectCardFile.path(in: project.path))
         guard !FileManager.default.fileExists(atPath: url.path) else { return }
         write(ProjectCardFile.template(name: project.name, stage: firstStage), to: url)
         Task { await refresh() }
@@ -107,7 +107,7 @@ final class FolderProjectStore {
     }
 
     private func update(_ project: FolderProject, _ change: (String) -> String) {
-        let url = URL(fileURLWithPath: project.path).appending(path: ProjectCardFile.fileName)
+        let url = URL(fileURLWithPath: ProjectCardFile.path(in: project.path))
         let current = (try? String(contentsOf: url, encoding: .utf8)) ?? ProjectCardFile.template(name: project.name, stage: nil)
         write(change(current), to: url)
         if let index = projects.firstIndex(where: { $0.id == project.id }) {

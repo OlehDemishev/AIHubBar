@@ -1,0 +1,87 @@
+{
+  "format": "claudepult-template",
+  "version": 1,
+  "order": 1,
+  "language": "en",
+  "id": "video",
+  "title": "Video (YouTube, Shorts, Reels)",
+  "description": "A folder per video; stages from idea to publication; words and duration; hooks, Shorts, description and timestamps, titles, fact check, translation; deadlines in the calendar.",
+  "folderHint": "A folder where every subfolder is a video",
+  "mode": {
+    "name": "Video",
+    "icon": "video",
+    "template": "video",
+    "source": {
+      "folders": {
+        "_0": "~/Documents/Video"
+      }
+    },
+    "card": "projectMD",
+    "stages": [
+      "idea",
+      "research",
+      "script",
+      "recording",
+      "editing",
+      "published"
+    ],
+    "metrics": [
+      "words",
+      "duration",
+      "deadline",
+      "publishDate"
+    ],
+    "permissions": "filesOnly",
+    "calendar": "dates",
+    "launchMode": "background",
+    "showProjects": true,
+    "commonCommands": "none",
+    "showCommonCommands": false,
+    "commands": [
+      {
+        "id": "video-hooks",
+        "title": "Hooks",
+        "output": "hooks.md",
+        "task": "Suggest 5 openings for the video — the first 5–10 seconds that keep a viewer watching. Video: {format}, based on this script. Use different devices: a surprising fact, a question to the viewer, a promised result, a mini-story, arguing with a common belief. For each one — the text itself (as it is said aloud) and one line on what it plays on. At the end — which one you would pick and why, in one sentence.",
+        "input": "mainFile"
+      },
+      {
+        "id": "video-shorts",
+        "title": "Shorts version",
+        "output": "shorts-script.md",
+        "task": "Turn the script into a vertical video of up to 60 seconds — about 140–150 words. Keep the main idea and the strongest moment, cut intros and repetition. The first line must hook at once, the last should make people want to watch the full video or subscribe. Write the way people speak: short sentences, no officialese. State the word count at the end.",
+        "input": "mainFile"
+      },
+      {
+        "id": "video-description",
+        "title": "Description and timestamps",
+        "output": "description.md",
+        "task": "Prepare everything for publishing on YouTube: 1) a description — 2–3 paragraphs, the first two lines matter most (they show before «more»), no clickbait; 2) timestamps for the meaningful parts of the script as 00:00 — Title (estimate time at 150 words per minute, the first mark is 00:00); 3) 10–15 comma-separated tags; 4) 3 hashtags. Same language as the script.",
+        "input": "mainFile"
+      },
+      {
+        "id": "video-titles",
+        "title": "Titles and thumbnails",
+        "output": "titles.md",
+        "task": "Suggest 10 titles for the video — up to 60 characters, honest (they promise what the video has), different in approach: benefit, curiosity, a concrete result, a number, a question. Mark the best 3. Then 3 thumbnail ideas: what is in the frame, large text on the thumbnail (up to 4 words), the emotion.",
+        "input": "mainFile"
+      },
+      {
+        "id": "video-facts",
+        "title": "Fact check",
+        "output": "facts.md",
+        "task": "Find every checkable claim in the script: numbers, dates, names, quotes, cause-and-effect statements. For each: the claim itself, how disputable it is (solid / check / doubtful) and why, what exactly to check and where. Do not fix anything in the script and do not invent sources — if unsure, say so.",
+        "input": "mainFile",
+        "service": "claude-code"
+      },
+      {
+        "id": "video-translate",
+        "title": "Translation",
+        "output": "script-{language}.md",
+        "task": "Translate the script into {language} for voice-over: keep the tone, jokes and rhythm of speech, adapt idioms and examples to that audience, do not translate word for word. Keep proper names and terms recognisable. At the end — a list of places where you had to depart noticeably from the original.",
+        "input": "mainFile",
+        "asks": "Language"
+      }
+    ]
+  }
+}

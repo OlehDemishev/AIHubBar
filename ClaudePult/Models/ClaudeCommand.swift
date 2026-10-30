@@ -22,7 +22,17 @@ enum ClaudeCommand: Codable, Equatable, Sendable {
 
     var prompt: String { prompt(.oleh) }
 
-    func prompt(_ style: PromptStyle) -> String {
+    func prompt(_ style: PromptStyle, language: ContentLanguage = .current) -> String {
+        if style == .generic, language == .en {
+            switch self {
+            case .nextStep:
+                return "Read the README and, if present, docs/STATUS.md, CLAUDE.md or AGENTS.md. Find the next sensible step: the first item of the «Next» list if there is one, otherwise the most obvious unfinished task. Do it on a separate branch from the main one: the changes, the project's checks (tests, build, linter — whatever exists), a commit with a clear message, push and a pull request. If the step needs a person's decision or is unclear, change nothing and briefly describe the question."
+            case let .customTask(task):
+                return "Task: \(task.trimmingCharacters(in: .whitespacesAndNewlines)). Follow the project's rules (CLAUDE.md / AGENTS.md if present): a separate branch from the main one, the project's checks, commit, push, pull request."
+            case .finishSession:
+                return "Finish the current work in this folder: run the project's checks, split uncommitted changes into commits by meaning (onto separate branches if they belong to different tasks), push and open a pull request. Make no new code changes."
+            }
+        }
         if style == .generic {
             switch self {
             case .nextStep:

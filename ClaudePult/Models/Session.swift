@@ -92,13 +92,17 @@ struct Session: Decodable, Identifiable, Equatable, Sendable {
         func normalized(_ text: String) -> String { text.split(whereSeparator: \.isWhitespace).joined(separator: " ") }
         let text = normalized(prompt)
         for command in [ClaudeCommand.nextStep, .finishSession] {
-            for style in [PromptStyle.oleh, .generic] where normalized(command.prompt(style)).hasPrefix(text.prefix(60)) {
-                return command.title
+            for style in [PromptStyle.oleh, .generic] {
+                for language in ContentLanguage.allCases where normalized(command.prompt(style, language: language)).hasPrefix(text.prefix(60)) {
+                    return command.title
+                }
             }
         }
-        guard let wrapper = ["Задача от Олега: ", "Задача: "].first(where: text.hasPrefix) else { return text }
+        guard let wrapper = ["Задача от Олега: ", "Задача: ", "Task: "].first(where: text.hasPrefix) else { return text }
         var task = String(text.dropFirst(wrapper.count))
-        if let rules = task.range(of: ". Работай по правилам") { task = String(task[..<rules.lowerBound]) }
+        for marker in [". Работай по правилам", ". Follow the project's rules"] {
+            if let rules = task.range(of: marker) { task = String(task[..<rules.lowerBound]) }
+        }
         return task
     }
 

@@ -198,9 +198,8 @@ private struct FolderProjectRow: View {
                         .help("Главный файл — по нему считаются слова и хронометраж")
                 }
                 if project.hasCardFile {
-                    Button(ProjectCardFile.fileName) {
-                        NSWorkspace.shared.open(URL(fileURLWithPath: project.path).appending(path: ProjectCardFile.fileName))
-                    }
+                    let card = ProjectCardFile.path(in: project.path)
+                    Button((card as NSString).lastPathComponent) { NSWorkspace.shared.open(URL(fileURLWithPath: card)) }
                 } else {
                     Button("Создать \(ProjectCardFile.fileName)") { store.createCard(for: project, firstStage: stages.first) }
                         .help("Карточка проекта: этап, дедлайн, дата публикации, формат, главный файл")

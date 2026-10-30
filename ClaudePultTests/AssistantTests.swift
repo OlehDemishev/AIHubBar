@@ -23,7 +23,7 @@ struct AssistantDraftTests {
     }
 
     @Test func templatesAndFolders() throws {
-        let templates = ModeTemplate.loadAll()
+        let templates = ModeTemplate.loadAll(language: .ru)
         var d = draft()
         d.setFolder(NSHomeDirectory() + "/Videos", analysis: .init(repositories: 0, folders: 3, files: 1))
         d.choose(templates.first { $0.id == "video" })

@@ -64,7 +64,14 @@ struct CalendarEntry: Identifiable, Hashable, Sendable {
 /// `контент-план.md` (SPEC-modes §6): a Markdown table `| Дата | Время | Площадка | Тема | Статус | Файл |`, editable
 /// by hand and by Claude. Columns are found by their header; other columns and all other text are kept.
 struct ContentPlan: Equatable, Sendable {
-    static let fileName = "контент-план.md"
+    /// Read under either name; a new plan gets the content language's one.
+    static let fileNames = ["контент-план.md", "content-plan.md"]
+    static var fileName: String { ContentLanguage.current == .en ? "content-plan.md" : "контент-план.md" }
+
+    static func path(in folder: String) -> String {
+        let existing = fileNames.map { folder + "/" + $0 }.first(where: FileManager.default.fileExists(atPath:))
+        return existing ?? folder + "/" + fileName
+    }
 
     enum Column: String, CaseIterable, Sendable {
         case date, time, platform, topic, status, file
@@ -160,18 +167,18 @@ struct ContentPlan: Equatable, Sendable {
     }
 
     /// Appends a row to the table, or creates the file's table when there is none.
-    static func appending(_ values: [Column: String], to text: String) -> String {
+    static func appending(_ values: [Column: String], to text: String, language: ContentLanguage = .current) -> String {
         let plan = parse(text)
         var lines = text.isEmpty ? [] : text.components(separatedBy: "\n")
         guard let last = plan.lastLine else {
             let header = Column.allCases
             var block = [
-                "| Дата | Время | Площадка | Тема | Статус | Файл |",
+                language == .en ? "| Date | Time | Platform | Topic | Status | File |" : "| Дата | Время | Площадка | Тема | Статус | Файл |",
                 "|---|---|---|---|---|---|",
                 "| " + header.map { values[$0] ?? "" }.joined(separator: " | ") + " |",
             ]
             if !lines.isEmpty, lines.last?.isEmpty == false { block.insert("", at: 0) }
-            if lines.isEmpty { block.insert(contentsOf: ["# Контент-план", ""], at: 0) }
+            if lines.isEmpty { block.insert(contentsOf: [language == .en ? "# Content plan" : "# Контент-план", ""], at: 0) }
             return (lines + block).joined(separator: "\n") + "\n"
         }
         var cells = Array(repeating: "", count: max(plan.columnCount, 1))
@@ -205,7 +212,7 @@ enum CalendarScanner {
                     date: date, hasTime: text.contains(":"), kind: kind, title: project.name,
                     detail: project.card.values[.platform] ?? project.card.stage,
                     modeID: mode.id, modeName: mode.name, modeIcon: mode.icon, openPath: project.path,
-                    source: .card(path: project.path + "/" + ProjectCardFile.fileName, key: key)
+                    source: .card(path: ProjectCardFile.path(in: project.path), key: key)
                 ))
             }
         }
@@ -214,7 +221,7 @@ enum CalendarScanner {
         var folders = [root]
         for path in projects.map(\.path) where !folders.contains(path) { folders.append(path) }
         for folder in folders {
-            let path = folder + "/" + ContentPlan.fileName
+            let path = ContentPlan.path(in: folder)
             guard let text = try? String(contentsOfFile: path, encoding: .utf8) else { continue }
             for row in ContentPlan.parse(text).rows {
                 guard let (date, hasTime) = row.date else { continue }

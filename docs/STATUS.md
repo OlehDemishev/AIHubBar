@@ -5,7 +5,7 @@
 **Updated:** 2026-10-30
 
 **Now:**
-- SPEC-modes §9 stage 9: English interface merged (PR #45); next: English templates and prompts, then the other languages (es, pt-BR, fr, de, ja, id, ko, it, ar with RTL, pl, uk)
+- SPEC-modes §9 stage 9: English content (templates, prompts, card and plan files) in PR (branch `feat/english-templates`); next: the other languages (es, pt-BR, fr, de, ja, id, ko, it, ar with RTL, pl, uk)
 
 **Next:**
 - SPEC-modes §9: 5 calendar, 6 templates, 7 setup assistant, 8 for everyone, 9 languages (§13: en, es, pt-BR, fr, de, ja, id, ko, it, ar with RTL, pl, uk)
@@ -27,6 +27,12 @@
 - hooks are installed in ~/.claude/settings.json; backup of the original: ~/.claude/settings.json.claudepult-backup-20261029T192827
 - delete or archive the old repo `OlehDemishev/ClaudeBar`; turn on start at login if wanted
 <!-- summary:end -->
+
+## 2026-10-30 — English templates, prompts and files (branch `feat/english-templates`)
+
+Done: English versions of all six templates (`template-*.en.json`), language-aware loading; English agent/API wrappers and generic developer prompts; English placeholders and result-name tokens alongside the Russian ones; `project.md` and `content-plan.md` read and created in English, cards keep their own language when written. Oleh's prompts unchanged.
+Checked: `xcodebuild test` — 151 tests green (templates in both languages with the same commands, placeholders, wrappers, prompts, card/plan language, both file names); no compiler warnings; catalog has no untranslated or stale keys. Live: the assistant preview of «Video» with `-AppleLanguages '(en)'` is fully English. CI not set up; checks run locally.
+Left: the other languages of §13.
 
 ## 2026-10-30 — English interface (branch `feat/localization`)
 

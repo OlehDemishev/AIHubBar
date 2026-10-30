@@ -32,5 +32,6 @@
     "commonCommands": "none",
     "showCommonCommands": false,
     "commands": []
-  }
+  },
+  "language": "ru"
 }
