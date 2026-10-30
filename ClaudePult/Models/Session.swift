@@ -98,9 +98,10 @@ struct Session: Decodable, Identifiable, Equatable, Sendable {
                 }
             }
         }
-        guard let wrapper = ["Задача от Олега: ", "Задача: ", "Task: "].first(where: text.hasPrefix) else { return text }
+        let wrappers = ["Задача от Олега: "] + ContentLanguage.allCases.map(\.strings.taskPrefix)
+        guard let wrapper = wrappers.first(where: text.hasPrefix) else { return text }
         var task = String(text.dropFirst(wrapper.count))
-        for marker in [". Работай по правилам", ". Follow the project's rules"] {
+        for marker in ContentLanguage.allCases.map(\.strings.rulesMarker) {
             if let rules = task.range(of: marker) { task = String(task[..<rules.lowerBound]) }
         }
         return task

@@ -65,8 +65,8 @@ struct CalendarEntry: Identifiable, Hashable, Sendable {
 /// by hand and by Claude. Columns are found by their header; other columns and all other text are kept.
 struct ContentPlan: Equatable, Sendable {
     /// Read under either name; a new plan gets the content language's one.
-    static let fileNames = ["контент-план.md", "content-plan.md"]
-    static var fileName: String { ContentLanguage.current == .en ? "content-plan.md" : "контент-план.md" }
+    static let fileNames = ContentLanguage.allCases.map(\.strings.planFile)
+    static var fileName: String { ContentLanguage.current.strings.planFile }
 
     static func path(in folder: String) -> String {
         let existing = fileNames.map { folder + "/" + $0 }.first(where: FileManager.default.fileExists(atPath:))
@@ -76,15 +76,9 @@ struct ContentPlan: Equatable, Sendable {
     enum Column: String, CaseIterable, Sendable {
         case date, time, platform, topic, status, file
 
+        /// Every language's header plus `title` for the topic.
         var headers: [String] {
-            switch self {
-            case .date: ["дата", "date"]
-            case .time: ["время", "time"]
-            case .platform: ["площадка", "platform"]
-            case .topic: ["тема", "topic", "title"]
-            case .status: ["статус", "status"]
-            case .file: ["файл", "file"]
-            }
+            ContentLanguage.allCases.compactMap { $0.strings.planColumns[self]?.lowercased() } + (self == .topic ? ["title"] : [])
         }
     }
 
@@ -172,13 +166,14 @@ struct ContentPlan: Equatable, Sendable {
         var lines = text.isEmpty ? [] : text.components(separatedBy: "\n")
         guard let last = plan.lastLine else {
             let header = Column.allCases
+            let names = header.map { language.strings.planColumns[$0] ?? $0.rawValue }
             var block = [
-                language == .en ? "| Date | Time | Platform | Topic | Status | File |" : "| Дата | Время | Площадка | Тема | Статус | Файл |",
+                "| " + names.joined(separator: " | ") + " |",
                 "|---|---|---|---|---|---|",
                 "| " + header.map { values[$0] ?? "" }.joined(separator: " | ") + " |",
             ]
             if !lines.isEmpty, lines.last?.isEmpty == false { block.insert("", at: 0) }
-            if lines.isEmpty { block.insert(contentsOf: [language == .en ? "# Content plan" : "# Контент-план", ""], at: 0) }
+            if lines.isEmpty { block.insert(contentsOf: [language.strings.planTitle, ""], at: 0) }
             return (lines + block).joined(separator: "\n") + "\n"
         }
         var cells = Array(repeating: "", count: max(plan.columnCount, 1))

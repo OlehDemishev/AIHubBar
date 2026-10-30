@@ -5,13 +5,14 @@
 **Updated:** 2026-10-30
 
 **Now:**
-- SPEC-modes §9 stage 9: English complete (PRs #45, #47); next: the other languages (es, pt-BR, fr, de, ja, id, ko, it, ar with RTL, pl, uk)
+- SPEC-modes §9 stage 9: English complete (PRs #45, #47); Spanish in PR (branch `feat/spanish`); next: pt-BR, fr, de, ja, id, ko, it, ar (RTL), pl, uk (es, pt-BR, fr, de, ja, id, ko, it, ar with RTL, pl, uk)
 
 **Next:**
 - SPEC-modes §9: 5 calendar, 6 templates, 7 setup assistant, 8 for everyone, 9 languages (§13: en, es, pt-BR, fr, de, ja, id, ko, it, ar with RTL, pl, uk)
 - Fix whatever Oleh finds in docs/CHECKLIST.md
 
 **Needs Oleh:**
+- merge the Spanish PR
 - try Settings → Основные → «Язык интерфейса» → English → «Перезапустить» (and back)
 - try Settings → Режимы → «+» → «Помощник…»
 - try the calendar in a folder mode: «Календарь» → «+ контент-план», a `Дедлайн:` in a `проект.md`, then the panel «Ближайшее» and the «Календарь» window
@@ -27,6 +28,12 @@
 - hooks are installed in ~/.claude/settings.json; backup of the original: ~/.claude/settings.json.claudepult-backup-20261029T192827
 - delete or archive the old repo `OlehDemishev/ClaudeBar`; turn on start at login if wanted
 <!-- summary:end -->
+
+## 2026-10-30 — Spanish, and one table per language (branch `feat/spanish`)
+
+Done: language texts for files and prompts moved into one table per language (`ContentStrings`); Spanish added: 707 interface strings, six templates (`template-*.es.json`), prompts and wrappers, `proyecto.md` / `plan-de-contenido.md`. Reading accepts every language's file and field names.
+Checked: `xcodebuild test` — 154 tests green incl. a completeness test run for every language; no compiler warnings; script check of the catalog (0 missing, 0 format mismatches). Live with `-AppleLanguages '(es)'`: git scanner items and the assistant preview of «Redes sociales» fully Spanish. CI not set up; checks run locally.
+Left: the remaining languages.
 
 ## 2026-10-30 — English templates, prompts and files (branch `feat/english-templates`)
 

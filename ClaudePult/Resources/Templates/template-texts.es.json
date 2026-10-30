@@ -1,0 +1,84 @@
+{
+  "format": "claudepult-template",
+  "version": 1,
+  "order": 2,
+  "language": "es",
+  "id": "texts",
+  "title": "Textos (artículos, blog, boletín)",
+  "description": "Una carpeta por texto; etapas desde la idea hasta la publicación; palabras y tiempo de lectura; edición, corrección, otro tono, acortar, SEO, dividir en publicaciones.",
+  "folderHint": "Una carpeta donde cada subcarpeta es un artículo o un número",
+  "mode": {
+    "name": "Textos",
+    "icon": "doc.text",
+    "template": "texts",
+    "source": {
+      "folders": {
+        "_0": "~/Documents/Textos"
+      }
+    },
+    "card": "projectMD",
+    "stages": [
+      "idea",
+      "borrador",
+      "edición",
+      "publicado"
+    ],
+    "metrics": [
+      "words",
+      "readingTime",
+      "publishDate"
+    ],
+    "permissions": "filesOnly",
+    "calendar": "dates",
+    "launchMode": "background",
+    "showProjects": true,
+    "commonCommands": "none",
+    "showCommonCommands": false,
+    "commands": [
+      {
+        "id": "texts-edit",
+        "title": "Edición",
+        "output": "edicion.md",
+        "task": "Edita el texto: quita relleno, lenguaje burocrático, repeticiones y clichés, simplifica las frases largas, conserva el sentido, los datos y la voz del autor. Primero el texto editado completo. Después, una lista de las 5–10 ediciones más importantes como «antes → después → por qué».",
+        "input": "mainFile"
+      },
+      {
+        "id": "texts-proof",
+        "title": "Corrección",
+        "output": "correccion.md",
+        "task": "Encuentra errores de ortografía, puntuación y gramática, erratas y faltas de concordancia. No cambies el estilo ni la redacción. Da el texto corregido y, después, la lista de correcciones.",
+        "input": "mainFile"
+      },
+      {
+        "id": "texts-tone",
+        "title": "Otro tono",
+        "output": "tono-{text}.md",
+        "task": "Reescribe el texto en este tono: {text} (por ejemplo: más cercano, más formal, con humor, para expertos, para principiantes). Mismo sentido, datos y estructura.",
+        "input": "mainFile",
+        "asks": "Tono"
+      },
+      {
+        "id": "texts-length",
+        "title": "Acortar / ampliar",
+        "output": "version-{text}.md",
+        "task": "Haz una versión del texto de unas {text} palabras. Si acortas, conserva lo esencial y los ejemplos más fuertes. Si amplías, añade explicaciones y ejemplos sobre el tema, no relleno, y ningún dato nuevo sin la marca «comprobar».",
+        "input": "mainFile",
+        "asks": "Cuántas palabras"
+      },
+      {
+        "id": "texts-seo",
+        "title": "SEO",
+        "output": "seo.md",
+        "task": "Propón: un título para buscadores (hasta 60 caracteres), una meta descripción (hasta 155 caracteres), 5–8 frases clave a las que el texto responde de verdad y 3 ideas de subtítulos H2 que faltan. No cambies el texto.",
+        "input": "mainFile"
+      },
+      {
+        "id": "texts-posts",
+        "title": "Dividir en publicaciones",
+        "output": "publicaciones.md",
+        "task": "Convierte el texto en una serie de publicaciones para {platform}: 3–5 publicaciones, cada una independiente, con su propia idea del texto, una primera línea que enganche y una llamada a la acción al final. Respeta el formato de la plataforma (extensión, hashtags, emojis con moderación). Numéralas e indica en qué orden publicarlas.",
+        "input": "mainFile"
+      }
+    ]
+  }
+}

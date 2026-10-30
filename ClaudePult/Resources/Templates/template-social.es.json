@@ -1,0 +1,86 @@
+{
+  "format": "claudepult-template",
+  "version": 1,
+  "order": 4,
+  "language": "es",
+  "id": "social",
+  "title": "Redes sociales y marketing",
+  "description": "Un proyecto = una campaña o una plataforma; plan de contenido en el calendario; publicaciones por plataforma, anuncios, titulares A/B, respuestas a comentarios, plan semanal.",
+  "folderHint": "Una carpeta donde cada subcarpeta es una campaña; plan-de-contenido.md también puede ir aquí",
+  "mode": {
+    "name": "Redes sociales",
+    "icon": "megaphone",
+    "template": "social",
+    "source": {
+      "folders": {
+        "_0": "~/Documents/Redes"
+      }
+    },
+    "card": "projectMD",
+    "stages": [
+      "idea",
+      "texto",
+      "diseño",
+      "programado",
+      "publicado"
+    ],
+    "metrics": [
+      "words",
+      "publishDate"
+    ],
+    "permissions": "filesOnly",
+    "calendar": "contentPlan",
+    "launchMode": "background",
+    "showProjects": true,
+    "commonCommands": "none",
+    "showCommonCommands": false,
+    "commands": [
+      {
+        "id": "social-posts",
+        "title": "Publicaciones por plataforma",
+        "output": "publicaciones-{platform}.md",
+        "task": "A partir del material de origen, escribe una publicación para cada plataforma: {platform}. Respeta su formato: extensión, estilo, hashtags, emojis, enlaces, llamada a la acción. Cada publicación es independiente, no una copia de las otras. Para plataformas visuales, una idea breve de imagen o vídeo.",
+        "input": "mainFile"
+      },
+      {
+        "id": "social-ads",
+        "title": "Variantes de anuncio",
+        "output": "anuncios.md",
+        "task": "Propón 5 textos de anuncio para {platform}: titular, texto principal, llamada a la acción. Enfoques distintos: el problema del cliente, el beneficio, una reseña o prueba, urgencia sin presión, una comparación. Sin afirmaciones que no se puedan respaldar. Marca qué pares conviene comparar en un test A/B.",
+        "input": "mainFile"
+      },
+      {
+        "id": "social-ab",
+        "title": "Titulares A/B",
+        "output": "titulares-ab.md",
+        "task": "Propón 8 pares de titulares para un test A/B: en cada par cambia exactamente una cosa (extensión, una cifra, pregunta/afirmación, emoción, concreción). Para cada par, qué se está probando exactamente.",
+        "input": "mainFile"
+      },
+      {
+        "id": "social-replies",
+        "title": "Respuestas a comentarios",
+        "output": "respuestas.md",
+        "task": "A partir del material y de las preguntas típicas del público, prepara plantillas de respuesta a 10 comentarios frecuentes: una pregunta sobre el precio, una duda, una queja, un agradecimiento, una pregunta de «cómo», troleo, una petición de descuento, etc. Tono: {text}. Respuestas breves y humanas, sin el típico «¡Gracias por tu comentario!».",
+        "input": "mainFile",
+        "asks": "Tono"
+      },
+      {
+        "id": "social-week",
+        "title": "Plan de contenido semanal",
+        "output": "plan-de-contenido-semana.md",
+        "task": "Elabora un plan de contenido para la semana que empieza el {text}: 1–2 publicaciones al día para {platform}. Alterna formatos (útil, participativo, de venta, entre bastidores). Da una tabla Markdown con el formato del plan de contenido — | Fecha | Hora | Plataforma | Tema | Estado | Archivo | — con el estado «idea», para que las filas puedan pasarse a plan-de-contenido.md.",
+        "input": "project",
+        "asks": "Fecha de inicio",
+        "service": "claude-code"
+      },
+      {
+        "id": "social-prepare",
+        "title": "Preparar publicaciones del plan",
+        "output": "publicaciones-del-plan.md",
+        "task": "Para las entradas del plan de contenido (plan-de-contenido.md) de los próximos 7 días con el estado «idea», escribe los textos de las publicaciones, cada una bajo su propio encabezado con la fecha y el tema. No cambies el plan de contenido.",
+        "input": "project",
+        "service": "claude-code"
+      }
+    ]
+  }
+}

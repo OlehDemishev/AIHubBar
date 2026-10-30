@@ -79,13 +79,13 @@ struct CommandContext: Equatable, Sendable {
 /// content language.
 enum CommandText {
     static func fill(_ template: String, _ context: CommandContext, language: ContentLanguage = .current) -> String {
-        let en = language == .en
+        let words = language.strings
         let values: [(keys: [String], value: String)] = [
             (["{проект}", "{project}"], context.projectName),
             (["{файл}", "{file}"], context.file ?? "—"),
-            (["{формат}", "{format}"], context.format ?? (en ? "not set" : "не указан")),
-            (["{площадка}", "{platform}"], context.platform ?? (en ? "not set" : "не указана")),
-            (["{хронометраж}", "{duration}"], context.duration ?? (en ? "not counted" : "не посчитан")),
+            (["{формат}", "{format}"], context.format ?? words.notSet),
+            (["{площадка}", "{platform}"], context.platform ?? words.notSet),
+            (["{хронометраж}", "{duration}"], context.duration ?? words.notCounted),
             (["{язык}", "{language}"], context.text ?? ""),
             (["{текст}", "{text}"], context.text ?? ""),
         ]
@@ -102,14 +102,14 @@ enum CommandText {
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "en_US_POSIX")
         formatter.dateFormat = "yyyy-MM-dd-HHmm"
-        let en = language == .en
-        let fileBase = context.file.map { (($0 as NSString).lastPathComponent as NSString).deletingPathExtension } ?? (en ? "project" : "проект")
+        let words = language.strings
+        let fileBase = context.file.map { (($0 as NSString).lastPathComponent as NSString).deletingPathExtension } ?? words.projectWord
         var name = fill(pattern, context, language: language)
         for key in ["<время>", "<time>"] { name = name.replacingOccurrences(of: key, with: formatter.string(from: context.now)) }
         for key in ["<файл>", "<file>"] { name = name.replacingOccurrences(of: key, with: fileBase) }
         name = name.components(separatedBy: CharacterSet(charactersIn: "/:\\\n\r\t")).joined(separator: "-")
             .trimmingCharacters(in: .whitespaces)
-        if name.isEmpty || name.hasPrefix(".") { name = (en ? "result" : "результат") + name }
+        if name.isEmpty || name.hasPrefix(".") { name = words.resultWord + name }
         if (name as NSString).pathExtension.isEmpty { name += ".md" }
         if let suffix {
             let ext = (name as NSString).pathExtension
@@ -130,45 +130,20 @@ enum CommandText {
 
     /// For an agent working in the folder (docs/TEMPLATES.md).
     static func agentPrompt(task: String, context: CommandContext, output: String, language: ContentLanguage = .current) -> String {
-        if language == .en {
-            return """
-            You are working in the folder of the project «\(context.projectName)». Source file: \(context.file ?? "none — work with the files of the folder"). \
-            Read any files of this folder but change none of them. Write the result to a new file \(output) in the same folder. \
-            If the task is unclear or data is missing, say so at the top of the result file — do not make things up.
-
-            Task: \(task)
-            """
-        }
-        return """
-        Ты работаешь в папке проекта «\(context.projectName)». Исходный файл: \(context.file ?? "нет — работай с файлами папки"). \
-        Читай любые файлы этой папки, но ничего в них не меняй. Результат запиши в новый файл \(output) в этой же папке. \
-        Если задача неясна или данных не хватает — напиши об этом в начале файла результата, не выдумывай.
-
-        Задача: \(task)
-        """
+        let words = language.strings
+        return ContentStrings.fill(words.agentPrompt, [
+            "project": context.projectName, "file": context.file ?? words.agentNoFile, "output": output, "task": task,
+        ])
     }
 
     /// For a model by API: ClaudePult sends the file text and writes the answer itself (docs/TEMPLATES.md).
     static func apiPrompt(task: String, context: CommandContext, fileText: String?, language: ContentLanguage = .current) -> String {
-        if language == .en {
-            var lines = ["Project: «\(context.projectName)». Format: \(context.format ?? "not set")."]
-            if let fileText, let file = context.file {
-                lines += ["Below is the text of the file «\(file)».", "---", fileText, "---"]
-            }
-            lines += [
-                "Task: \(task)",
-                "Reply with the result only, in Markdown, without introductions or explanations. If data is missing, say so in the first line — do not make things up.",
-            ]
-            return lines.joined(separator: "\n")
-        }
-        var lines = ["Проект: «\(context.projectName)». Формат: \(context.format ?? "не указан")."]
+        let words = language.strings
+        var lines = [ContentStrings.fill(words.apiHeader, ["project": context.projectName, "format": context.format ?? words.notSet])]
         if let fileText, let file = context.file {
-            lines += ["Ниже — текст файла «\(file)».", "---", fileText, "---"]
+            lines += [ContentStrings.fill(words.apiFileIntro, ["file": file]), "---", fileText, "---"]
         }
-        lines += [
-            "Задача: \(task)",
-            "Ответь только результатом в Markdown, без вступлений и пояснений. Если данных не хватает — скажи об этом первой строкой, не выдумывай.",
-        ]
+        lines += [ContentStrings.fill(words.apiTask, ["task": task]), words.apiRule]
         return lines.joined(separator: "\n")
     }
 }

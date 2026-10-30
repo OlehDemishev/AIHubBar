@@ -12,7 +12,7 @@ struct CommandTextTests {
 
     @Test func fillsPlaceholders() {
         #expect(CommandText.fill("{проект}: {файл}, {формат}, {площадка}, {хронометраж}, {язык}", context)
-            == "Кофе: текст/сценарий.md, YouTube 8–10 мин, не указана, 8:00, английский")
+            == "Кофе: текст/сценарий.md, YouTube 8–10 мин, не указан, 8:00, английский")
     }
 
     @Test func outputNames() {

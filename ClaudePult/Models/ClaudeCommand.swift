@@ -23,24 +23,13 @@ enum ClaudeCommand: Codable, Equatable, Sendable {
     var prompt: String { prompt(.oleh) }
 
     func prompt(_ style: PromptStyle, language: ContentLanguage = .current) -> String {
-        if style == .generic, language == .en {
-            switch self {
-            case .nextStep:
-                return "Read the README and, if present, docs/STATUS.md, CLAUDE.md or AGENTS.md. Find the next sensible step: the first item of the «Next» list if there is one, otherwise the most obvious unfinished task. Do it on a separate branch from the main one: the changes, the project's checks (tests, build, linter — whatever exists), a commit with a clear message, push and a pull request. If the step needs a person's decision or is unclear, change nothing and briefly describe the question."
-            case let .customTask(task):
-                return "Task: \(task.trimmingCharacters(in: .whitespacesAndNewlines)). Follow the project's rules (CLAUDE.md / AGENTS.md if present): a separate branch from the main one, the project's checks, commit, push, pull request."
-            case .finishSession:
-                return "Finish the current work in this folder: run the project's checks, split uncommitted changes into commits by meaning (onto separate branches if they belong to different tasks), push and open a pull request. Make no new code changes."
-            }
-        }
         if style == .generic {
+            let words = language.strings
             switch self {
-            case .nextStep:
-                return "Прочитай README и, если есть, docs/STATUS.md, CLAUDE.md или AGENTS.md. Определи следующий разумный шаг: первый пункт списка «Next / Дальше», если он есть, иначе самую очевидную незаконченную задачу. Сделай его в отдельной ветке от основной: изменения, проверки проекта (тесты, сборка, линтер — что есть), коммит с понятным сообщением, push и pull request. Если шаг требует решения человека или неясен — ничего не меняй, а коротко опиши вопрос."
+            case .nextStep: return words.nextStep
             case let .customTask(task):
-                return "Задача: \(task.trimmingCharacters(in: .whitespacesAndNewlines)). Работай по правилам проекта (CLAUDE.md / AGENTS.md, если они есть): отдельная ветка от основной, проверки проекта, коммит, push, pull request."
-            case .finishSession:
-                return "Доведи до конца текущую работу в этой папке: прогони проверки проекта, разложи незакоммиченные изменения по смыслу на коммиты (если они относятся к разным задачам — по отдельным веткам), сделай push и pull request. Новых изменений кода не делай."
+                return ContentStrings.fill(words.customTask, ["task": task.trimmingCharacters(in: .whitespacesAndNewlines)])
+            case .finishSession: return words.finishSession
             }
         }
         switch self {

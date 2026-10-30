@@ -1,0 +1,80 @@
+{
+  "format": "claudepult-template",
+  "version": 1,
+  "order": 3,
+  "language": "es",
+  "id": "research",
+  "title": "Investigación y estudio",
+  "description": "Una carpeta por tema con fuentes (PDF, enlaces, notas); resúmenes, citas, tabla resumen, lagunas, plan; Claude puede buscar en internet.",
+  "folderHint": "Una carpeta donde cada subcarpeta es un tema",
+  "mode": {
+    "name": "Investigación",
+    "icon": "books.vertical",
+    "template": "research",
+    "source": {
+      "folders": {
+        "_0": "~/Documents/Investigacion"
+      }
+    },
+    "card": "projectMD",
+    "stages": [
+      "tema",
+      "reunir fuentes",
+      "apuntes",
+      "conclusiones",
+      "hecho"
+    ],
+    "metrics": [
+      "sources",
+      "words",
+      "deadline"
+    ],
+    "permissions": "filesAndWeb",
+    "calendar": "dates",
+    "launchMode": "background",
+    "showProjects": true,
+    "commonCommands": "none",
+    "showCommonCommands": false,
+    "commands": [
+      {
+        "id": "research-summary",
+        "title": "Resumen de la fuente",
+        "output": "resumen-<file>.md",
+        "task": "Resume la fuente elegida: de qué trata en 2–3 frases; las tesis principales en una lista; cifras y definiciones clave; qué es discutible o no está demostrado; cómo se relaciona con el tema del proyecto. Solo lo que está en la fuente, sin añadidos de conocimiento general (marca cualquier contexto añadido como «fuera de la fuente»).",
+        "input": "mainFile"
+      },
+      {
+        "id": "research-quotes",
+        "title": "Citas con referencias",
+        "output": "citas.md",
+        "task": "Extrae de las fuentes del proyecto las citas más útiles para el tema, textuales, con el archivo y la página/sección si los hay. Agrúpalas por subtema. No parafrasees nada en este archivo.",
+        "input": "project",
+        "service": "claude-code"
+      },
+      {
+        "id": "research-table",
+        "title": "Tabla resumen",
+        "output": "panorama.md",
+        "task": "Reúne las fuentes del proyecto en una tabla: fuente, año/autor (si se conoce), tesis principal, métodos o datos, por qué es útil para el tema, limitaciones. Bajo la tabla: dónde coinciden las fuentes y dónde se contradicen.",
+        "input": "project",
+        "service": "claude-code"
+      },
+      {
+        "id": "research-gaps",
+        "title": "Lo que falta estudiar",
+        "output": "lagunas.md",
+        "task": "A partir de los materiales del proyecto, determina qué preguntas del tema no cubren o cubren mal. Para cada laguna: por qué importa y qué fuente o datos la cerrarían. No inventes fuentes concretas: describe qué buscar.",
+        "input": "project",
+        "service": "claude-code"
+      },
+      {
+        "id": "research-plan",
+        "title": "Plan de trabajo",
+        "output": "plan.md",
+        "task": "Elabora el plan de un texto (artículo, ponencia, trabajo) a partir de los materiales del proyecto: secciones, qué va en cada una, en qué fuentes apoyarse, extensión aproximada. Marca dónde aún falta material.",
+        "input": "project",
+        "service": "claude-code"
+      }
+    ]
+  }
+}

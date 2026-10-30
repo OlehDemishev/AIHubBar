@@ -1,0 +1,87 @@
+{
+  "format": "claudepult-template",
+  "version": 1,
+  "order": 1,
+  "language": "es",
+  "id": "video",
+  "title": "Vídeo (YouTube, Shorts, Reels)",
+  "description": "Una carpeta por vídeo; etapas desde la idea hasta la publicación; palabras y duración; ganchos, Shorts, descripción y marcas de tiempo, títulos, verificación de datos, traducción; fechas límite en el calendario.",
+  "folderHint": "Una carpeta donde cada subcarpeta es un vídeo",
+  "mode": {
+    "name": "Vídeo",
+    "icon": "video",
+    "template": "video",
+    "source": {
+      "folders": {
+        "_0": "~/Documents/Video"
+      }
+    },
+    "card": "projectMD",
+    "stages": [
+      "idea",
+      "investigación",
+      "guion",
+      "grabación",
+      "edición",
+      "publicado"
+    ],
+    "metrics": [
+      "words",
+      "duration",
+      "deadline",
+      "publishDate"
+    ],
+    "permissions": "filesOnly",
+    "calendar": "dates",
+    "launchMode": "background",
+    "showProjects": true,
+    "commonCommands": "none",
+    "showCommonCommands": false,
+    "commands": [
+      {
+        "id": "video-hooks",
+        "title": "Ganchos",
+        "output": "ganchos.md",
+        "task": "Propón 5 comienzos para el vídeo: los primeros 5–10 segundos que mantengan al espectador. Vídeo: {format}, a partir de este guion. Usa recursos distintos: un dato sorprendente, una pregunta al espectador, la promesa de un resultado, una mini historia, discutir una creencia común. Para cada uno: el texto en sí (tal como se dice en voz alta) y una línea sobre en qué se apoya. Al final, cuál elegirías y por qué, en una frase.",
+        "input": "mainFile"
+      },
+      {
+        "id": "video-shorts",
+        "title": "Versión para Shorts",
+        "output": "guion-shorts.md",
+        "task": "Convierte el guion en un vídeo vertical de hasta 60 segundos, unas 140–150 palabras. Conserva la idea principal y el momento más fuerte, quita introducciones y repeticiones. La primera frase debe enganchar al instante; la última, dejar ganas de ver el vídeo completo o suscribirse. Escribe como se habla: frases cortas, sin lenguaje burocrático. Indica el número de palabras al final.",
+        "input": "mainFile"
+      },
+      {
+        "id": "video-description",
+        "title": "Descripción y marcas de tiempo",
+        "output": "descripcion.md",
+        "task": "Prepara todo para publicar en YouTube: 1) una descripción de 2–3 párrafos, las dos primeras líneas son las más importantes (se ven antes de «más»), sin clickbait; 2) marcas de tiempo por las partes del guion en el formato 00:00 — Título (calcula el tiempo a 150 palabras por minuto, la primera marca es 00:00); 3) 10–15 etiquetas separadas por comas; 4) 3 hashtags. En el idioma del guion.",
+        "input": "mainFile"
+      },
+      {
+        "id": "video-titles",
+        "title": "Títulos y miniaturas",
+        "output": "titulos.md",
+        "task": "Propón 10 títulos para el vídeo, de hasta 60 caracteres, honestos (prometen lo que hay en el vídeo), con enfoques distintos: beneficio, curiosidad, un resultado concreto, una cifra, una pregunta. Marca los 3 mejores. Después, 3 ideas de miniatura: qué hay en el encuadre, el texto grande (hasta 4 palabras), la emoción.",
+        "input": "mainFile"
+      },
+      {
+        "id": "video-facts",
+        "title": "Verificación de datos",
+        "output": "datos.md",
+        "task": "Encuentra en el guion todas las afirmaciones verificables: cifras, fechas, nombres, citas, afirmaciones de causa y efecto. Para cada una: la afirmación, cuán discutible es (sólida / comprobar / dudosa) y por qué, qué comprobar exactamente y dónde. No corrijas nada del guion ni inventes fuentes; si no estás seguro, dilo.",
+        "input": "mainFile",
+        "service": "claude-code"
+      },
+      {
+        "id": "video-translate",
+        "title": "Traducción",
+        "output": "guion-{language}.md",
+        "task": "Traduce el guion al {language} para locución: conserva el tono, los chistes y el ritmo del habla, adapta modismos y ejemplos a ese público, no traduzcas palabra por palabra. Mantén reconocibles los nombres propios y los términos. Al final, una lista de los lugares donde tuviste que alejarte notablemente del original.",
+        "input": "mainFile",
+        "asks": "Idioma"
+      }
+    ]
+  }
+}
