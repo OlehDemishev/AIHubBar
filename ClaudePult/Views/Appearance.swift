@@ -1,3 +1,4 @@
+import AppKit
 import SwiftUI
 
 /// Text size of the panel. macOS ignores `dynamicTypeSize` for text styles (checked), so the panel scales its own
@@ -86,6 +87,16 @@ enum PanelTheme: String, CaseIterable, Sendable {
         case .dark: .dark
         }
     }
+
+    /// `preferredColorScheme` doesn't reach the `MenuBarExtra` window (the panel stayed light with «Тёмная»),
+    /// so the panel sets its window's appearance as well.
+    var appearance: NSAppearance? {
+        switch self {
+        case .system: nil
+        case .light: NSAppearance(named: .aqua)
+        case .dark: NSAppearance(named: .darkAqua)
+        }
+    }
 }
 
 /// Blocks of the panel that can be hidden.
@@ -149,6 +160,20 @@ struct BlockTitle: View {
         .buttonStyle(.plain)
         .help(collapsed ? String(localized: "Развернуть") : String(localized: "Свернуть"))
     }
+}
+
+/// The panel's blocks sit on rounded cards (design variant A, 2026-10-30) instead of between dividers.
+private struct PanelCard: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(RoundedRectangle(cornerRadius: 12, style: .continuous).fill(Color.primary.opacity(0.055)))
+            .padding(.horizontal, 8)
+    }
+}
+
+extension View {
+    func panelCard() -> some View { modifier(PanelCard()) }
 }
 
 extension EnvironmentValues {

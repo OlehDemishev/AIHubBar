@@ -197,10 +197,14 @@ enum UsageText {
         return String(localized: "через \(hours / 24) дн \(hours % 24) ч")
     }
 
-    static func resetText(_ window: UsageWindow, now: Date = .now) -> String? {
+    /// `short`: the weekday and time without the date, for the limit rings.
+    static func resetText(_ window: UsageWindow, now: Date = .now, short: Bool = false) -> String? {
         guard let resets = window.resetsAt else { return nil }
         if resets.timeIntervalSince(now) < 24 * 3600 { return String(localized: "сброс \(countdown(to: resets, now: now))") }
-        return String(localized: "сброс \(resets.formatted(.dateTime.weekday(.abbreviated).day().month(.abbreviated).hour().minute()))")
+        let format: Date.FormatStyle = short
+            ? .dateTime.weekday(.abbreviated).hour().minute()
+            : .dateTime.weekday(.abbreviated).day().month(.abbreviated).hour().minute()
+        return String(localized: "сброс \(resets.formatted(format))")
     }
 
     static func forecast(_ forecast: UsageForecast) -> String? {

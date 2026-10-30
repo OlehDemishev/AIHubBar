@@ -39,7 +39,7 @@ struct ClipboardView: View {
                 }
             }
         }
-        .padding(.horizontal, 14)
+        .padding(.horizontal, 10)
         .padding(.vertical, 8)
     }
 
@@ -123,7 +123,7 @@ struct NotesView: View {
                 }
             }
         }
-        .padding(.horizontal, 14)
+        .padding(.horizontal, 10)
         .padding(.vertical, 8)
         .onAppear { notes.reload() }
         .onDisappear { notes.flush() }

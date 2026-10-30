@@ -33,43 +33,32 @@ struct ProjectRowView: View {
     }
 
     private var summary: some View {
-        HStack(alignment: .firstTextBaseline, spacing: 8) {
-            Image(systemName: "chevron.right")
-                .scaledFont(.caption2, weight: .semibold)
-                .foregroundStyle(.tertiary)
-                .rotationEffect(.degrees(isExpanded ? 90 : 0))
-                .frame(width: 8)
-
-            VStack(alignment: .leading, spacing: 2) {
-                HStack(spacing: 6) {
-                    HealthDot(health: project.health)
-                    Text(project.name)
-                        .fontWeight(.medium)
-                        .lineLimit(1)
-                    Spacer(minLength: 6)
-                    badges
-                }
-                HStack(spacing: 6) {
-                    if let branch = project.branch {
-                        Label(branch, systemImage: "arrow.triangle.branch")
-                            .labelStyle(.titleAndIcon)
-                            .lineLimit(1)
-                            .truncationMode(.middle)
-                    }
-                    Spacer(minLength: 6)
-                    if let lastActivity = project.lastActivity {
-                        Text(RelativeTime.ago(lastActivity))
-                            .fixedSize()
-                    }
-                }
-                .scaledFont(.caption)
-                .foregroundStyle(.secondary)
-                .padding(.leading, 14)
+        HStack(spacing: 6) {
+            HealthDot(health: project.health)
+            Text(project.name)
+                .fontWeight(.medium)
+                .lineLimit(1)
+                .layoutPriority(1)
+            if let branch = project.branch, !["main", "master"].contains(branch) {
+                Label(branch, systemImage: "arrow.triangle.branch")
+                    .scaledFont(.callout)
+                    .foregroundStyle(.secondary)
+                    .lineLimit(1)
+                    .truncationMode(.middle)
+            }
+            Spacer(minLength: 4)
+            badges
+            if let lastActivity = project.lastActivity {
+                Text(RelativeTime.ago(lastActivity))
+                    .scaledFont(.callout)
+                    .foregroundStyle(.tertiary)
+                    .fixedSize()
             }
         }
-        .padding(.horizontal, 10)
-        .densityPadding(6)
+        .padding(.horizontal, 8)
+        .densityPadding(4)
         .contentShape(Rectangle())
+        .help(isExpanded ? String(localized: "Свернуть") : String(localized: "Подробнее и действия"))
     }
 
     @ViewBuilder

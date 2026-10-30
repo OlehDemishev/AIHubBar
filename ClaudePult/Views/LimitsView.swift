@@ -16,7 +16,7 @@ struct LimitsView: View {
             header
             if !collapsed { details }
         }
-        .padding(.horizontal, 14)
+        .padding(.horizontal, 10)
         .padding(.vertical, 8)
     }
 
@@ -25,11 +25,18 @@ struct LimitsView: View {
         if let snapshot = usage.snapshot {
             TimelineView(.periodic(from: .now, by: 30)) { context in
                 VStack(alignment: .leading, spacing: 8) {
-                    if let session = snapshot.session {
-                        WindowRow(window: session, detail: sessionDetail(session, now: context.date), now: context.date)
+                    HStack(alignment: .top, spacing: 8) {
+                        if let session = snapshot.session {
+                            LimitRing(window: session, caption: UsageText.resetText(session, now: context.date, short: true))
+                        }
+                        if let week = snapshot.week {
+                            LimitRing(window: week, caption: UsageText.resetText(week, now: context.date, short: true))
+                        }
                     }
-                    if let week = snapshot.week {
-                        WindowRow(window: week, detail: nil, now: context.date)
+                    if let forecast = UsageText.forecast(usage.forecast) {
+                        Text(forecast)
+                            .scaledFont(.caption)
+                            .foregroundStyle(runsOut ? .orange : .secondary)
                     }
                     ForEach(snapshot.shownOtherWindows, id: \.key) { window in
                         // A model week usually resets with the week: no need to say it twice.
@@ -79,6 +86,11 @@ struct LimitsView: View {
 
     private var isStale: Bool { usage.error != nil }
 
+    private var runsOut: Bool {
+        if case .runsOutAt = usage.forecast { return true }
+        return false
+    }
+
     /// The panel's own refresh (⌘R) updates the limits too; the age shows only while the figures are old.
     private var header: some View {
         HStack(spacing: 6) {
@@ -101,11 +113,6 @@ struct LimitsView: View {
                 }
             }
         }
-    }
-
-    private func sessionDetail(_ session: UsageWindow, now: Date) -> String? {
-        [UsageText.resetText(session, now: now), UsageText.forecast(usage.forecast)]
-            .compactMap { $0 }.joined(separator: " · ")
     }
 
     private func extraText(_ extra: ExtraUsage) -> String {
@@ -210,6 +217,44 @@ private struct WindowRow: View {
                     .foregroundStyle(.secondary)
             }
         }
+    }
+}
+
+/// Session or week: a ring in the level colour, the percentage, the window and when it resets.
+private struct LimitRing: View {
+    let window: UsageWindow
+    let caption: String?
+
+    var body: some View {
+        HStack(spacing: 8) {
+            ZStack {
+                Circle().stroke(Color.primary.opacity(0.12), lineWidth: 4)
+                Circle()
+                    .trim(from: 0, to: min(max(window.utilization, 0), 100) / 100)
+                    .stroke(window.levelColor, style: StrokeStyle(lineWidth: 4, lineCap: .round))
+                    .rotationEffect(.degrees(-90))
+            }
+            .frame(width: 34, height: 34)
+            VStack(alignment: .leading, spacing: 1) {
+                Text(UsageText.percent(window.utilization))
+                    .scaledFont(.title3, weight: .semibold)
+                    .monospacedDigit()
+                    .foregroundStyle(window.levelColor)
+                Text(window.title)
+                    .scaledFont(.caption)
+                    .lineLimit(1)
+                if let caption {
+                    Text(caption)
+                        .scaledFont(.caption2)
+                        .foregroundStyle(.secondary)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.8)
+                }
+            }
+            Spacer(minLength: 0)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .help([window.title, UsageText.percent(window.utilization), caption].compactMap { $0 }.joined(separator: " · "))
     }
 }
 

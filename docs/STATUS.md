@@ -6,7 +6,7 @@
 
 **Now:**
 - merged: menu bar drag reordering (PR #93), translation review (PR #94), release build re-checked on main (PR #95)
-- nothing in progress; the rest of Next waits for Oleh (translations read, CHECKLIST findings, Windows/Linux go-ahead, publishing)
+- panel redesign as cards, variant A (branch `feat/panel-cards`, PR open, waits for Oleh's merge)
 - hover hints for icon-only controls and the menu bar item merged (PR #91)
 - second wave merged: «История буфера» and «Заметки» (PR #87), «Не спать» with the lid closed (PR #89)
 - release without an Apple Developer account merged (PR #85): Sparkle, self-signed signing, `scripts/release.sh`, MIT license; nothing published yet
@@ -20,6 +20,7 @@
 - Windows and Linux versions (docs/SPEC-windows.md, docs/SPEC-linux.md) — only when Oleh says; stage 0 (fact checks in VMs) first
 
 **Needs Oleh:**
+- look at the new panel (cards) and merge the PR, or say what to change
 - hover over the menu bar item and the panel icons: tooltips should name what each one is
 - on a laptop: Settings → «Модули» → «Не спать» → «Разрешить…» (admin password once), then «И с закрытой крышкой»
 - on this Mac mini sleep is already off system-wide (`SleepDisabled 1`, set by Vorssaint's `/etc/sudoers.d/vorssaint-clamshell`): the Mac never sleeps while it stays so; `sudo pmset -a disablesleep 0` turns it back on if Vorssaint isn't needed
@@ -49,6 +50,12 @@
 - hooks are installed in ~/.claude/settings.json; backup of the original: ~/.claude/settings.json.claudepult-backup-20261029T192827
 - delete or archive the old repo `OlehDemishev/ClaudeBar`; turn on start at login if wanted
 <!-- summary:end -->
+
+## 2026-10-30 — Panel as cards, design variant A (branch `feat/panel-cards`)
+
+Done: Oleh found the panel incoherent; a review found no hierarchy (one long column, everything the same weight), five text sizes with the least important rows the largest, repeated «Показать» and state words, two-line rows that mostly repeat `main`, two differently laid out limit bars, unlabelled grey toggles and no surfaces. Three mock-ups shown; Oleh chose A. Now: every block is a card; header with the profile (menu when several), refresh, Settings, Help, Quit (shortcuts kept); limits as two rings with short resets («сброс Пн 10:00»); one-line sessions (actions on hover, always when waiting) and projects (branch only when not main/master); labelled toggle tiles that light up when on. Also fixed: the «Тёмная» panel theme never applied (`MenuBarExtra` ignores `preferredColorScheme`), now set on the window. 13 languages.
+Checked: 205 tests green; live window captures expanded, folded, light and dark; accessibility walk — no icon-only control without a hint; Oleh's theme and folded blocks restored.
+Left: hovering a session row, clicking a project, the profile menu with two profiles — for Oleh.
 
 ## 2026-10-30 — Release build re-checked on main (branch `chore/release-check`)
 
