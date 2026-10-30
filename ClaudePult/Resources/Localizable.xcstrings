@@ -1567,6 +1567,88 @@
         }
       }
     },
+    "%@: %lld %% недельного лимита": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: ‏%lld%% من الحد الأسبوعي"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: %lld%% des Wochenlimits"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: %lld%% of the weekly limit"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: %lld%% del límite semanal"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ : %lld%% de la limite hebdomadaire"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: %lld%% dari batas mingguan"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: %lld%% del limite settimanale"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: 週の上限の %lld%%"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: 주간 한도의 %lld%%"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: %lld%% limitu tygodniowego"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: %lld%% do limite semanal"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "new",
+            "value": "%1$@: %2$lld %% недельного лимита"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: %lld %% тижневого ліміту"
+          }
+        }
+      }
+    },
     "%@? Это нельзя отменить.": {
       "localizations": {
         "ar": {
@@ -31146,6 +31228,82 @@
         }
       }
     },
+    "Недельный лимит кончится раньше сброса": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "سينفد الحد الأسبوعي قبل إعادة ضبطه"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Das Wochenlimit ist vor dem Zurücksetzen aufgebraucht"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The weekly limit will run out before it resets"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El límite semanal se agotará antes del reinicio"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La limite hebdomadaire sera épuisée avant sa réinitialisation"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Batas mingguan akan habis sebelum direset"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il limite settimanale finirà prima dell’azzeramento"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "週の上限がリセット前に尽きます"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "주간 한도가 초기화 전에 소진됩니다"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limit tygodniowy skończy się przed resetem"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O limite semanal vai acabar antes do reinício"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Тижневий ліміт скінчиться раніше за скидання"
+          }
+        }
+      }
+    },
     "Неделя": {
       "localizations": {
         "ar": {
@@ -43385,6 +43543,88 @@
           "stringUnit": {
             "state": "translated",
             "value": "Попередній місяць"
+          }
+        }
+      }
+    },
+    "При темпе последних суток — %@, сброс %@.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بوتيرة آخر يوم — %@؛ إعادة الضبط %@."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beim Tempo des letzten Tages — %@; Zurücksetzen %@."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "At the last day's pace — %@; it resets %@."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Al ritmo del último día — %@; se reinicia %@."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Au rythme des dernières 24 h — %@ ; réinitialisation %@."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dengan laju sehari terakhir — %@; direset %@."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Al ritmo dell’ultimo giorno — %@; si azzera %@."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "直近 1 日のペースでは %@。リセットは %@。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "최근 하루 속도라면 %@. 초기화는 %@."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "W tempie ostatniej doby — %@; reset %@."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No ritmo do último dia — %@; reinicia %@."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "new",
+            "value": "При темпе последних суток — %1$@, сброс %2$@."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "За темпу останньої доби — %@, скидання %@."
           }
         }
       }
@@ -66904,6 +67144,82 @@
         }
       }
     },
+    "неделе до сброса хватит": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يكفي الأسبوع حتى إعادة الضبط"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "die Woche reicht bis zum Zurücksetzen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "the week lasts until it resets"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "la semana alcanza hasta el reinicio"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "la semaine tiendra jusqu’à la réinitialisation"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "minggu ini cukup sampai direset"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "la settimana basta fino all’azzeramento"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "週はリセットまで持ちます"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "주간 한도는 초기화까지 충분합니다"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "tygodnia wystarczy do resetu"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "a semana dura até o reinício"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "тижня вистачить до скидання"
+          }
+        }
+      }
+    },
     "неделя %lld %%": {
       "localizations": {
         "ar": {
@@ -66976,6 +67292,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "тиждень %lld %%"
+          }
+        }
+      }
+    },
+    "неделя кончится %@ при таком темпе": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بهذه الوتيرة ينفد الأسبوع %@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "die Woche ist %@ aufgebraucht bei diesem Tempo"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "the week runs out %@ at this pace"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "la semana se agota %@ a este ritmo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "la semaine s’épuise %@ à ce rythme"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "minggu ini habis %@ dengan laju ini"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "la settimana finisce %@ a questo ritmo"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "このペースだと週は %@ に尽きます"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이 속도면 주간 한도가 %@에 소진됩니다"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "w tym tempie tydzień skończy się %@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "a semana acaba %@ neste ritmo"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "тиждень скінчиться %@ за такого темпу"
           }
         }
       }

@@ -427,6 +427,14 @@ Panel snapshots: `defaults write com.demishev.claudepult DebugPanelSnapshot -boo
 | This session's row in the panel read «запускает scripts/build-…» while the build ran (Oleh's own hooks, real window capture) | Live |
 | «тихо N мин» after 10 minutes without a tool call | Oleh (needs a stuck session) |
 
+## Week forecast and days (2026-10-30)
+
+| Scenario | Checked |
+|---|---|
+| The week's percentage split over 8 calendar days of a Monday-10:00 window by journal weights, sums to the total; forecast from the last 24 h (runs out / lasts / unknown without journals) | Auto (`WeekUsageTests`) |
+| Live with Oleh's data: 84 % on Friday evening → «неделя кончится Сб 04:56 при таком темпе», bars for Mon–Mon with today highlighted | Live |
+| The once-per-week notification on the banner | Oleh |
+
 ## Release without an Apple Developer account (2026-10-30)
 
 | Scenario | Checked |

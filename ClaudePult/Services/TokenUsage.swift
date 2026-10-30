@@ -155,3 +155,49 @@ struct TokenBreakdown: Equatable, Sendable {
         }
     }
 }
+
+/// The week by day and its forecast. The plan only says the week's total percentage; the journals say how the
+/// week's use spread over the days (by `weight`), so the total is split in the same proportions. The pace is the
+/// last 24 hours' share, so a quiet morning after a busy night still counts the night.
+struct WeekUsage: Equatable, Sendable {
+    struct Day: Equatable, Sendable, Identifiable {
+        var date: Date
+        var percent: Double
+        var isToday: Bool
+        var id: Date { date }
+    }
+
+    enum Forecast: Equatable, Sendable {
+        case runsOutAt(Date)
+        case lastsUntilReset
+        case unknown
+    }
+
+    var days: [Day]
+    var forecast: Forecast
+
+    static func make(_ records: [TokenRecord], utilization: Double, resetsAt: Date, now: Date = .now,
+                     calendar: Calendar = .current) -> WeekUsage {
+        let start = resetsAt.addingTimeInterval(-7 * 86_400)
+        let week = records.filter { $0.date >= start && $0.date <= now }
+        let total = week.reduce(0) { $0 + $1.weight }
+
+        var days: [Day] = []
+        var day = calendar.startOfDay(for: start)
+        while day < resetsAt {
+            let next = calendar.date(byAdding: .day, value: 1, to: day) ?? resetsAt
+            let weight = week.filter { $0.date >= day && $0.date < next }.reduce(0) { $0 + $1.weight }
+            days.append(Day(date: day, percent: total > 0 ? utilization * weight / total : 0,
+                            isToday: calendar.isDate(day, inSameDayAs: now)))
+            day = next
+        }
+
+        let window = min(24 * 3600, now.timeIntervalSince(start))
+        guard total > 0, window >= 3600 else { return WeekUsage(days: days, forecast: .unknown) }
+        let recent = week.filter { now.timeIntervalSince($0.date) <= window }.reduce(0) { $0 + $1.weight }
+        let perSecond = utilization * recent / total / window
+        guard perSecond > 0 else { return WeekUsage(days: days, forecast: .lastsUntilReset) }
+        let runsOut = now.addingTimeInterval(max(0, 100 - utilization) / perSecond)
+        return WeekUsage(days: days, forecast: runsOut < resetsAt ? .runsOutAt(runsOut) : .lastsUntilReset)
+    }
+}
