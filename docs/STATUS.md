@@ -5,7 +5,8 @@
 **Updated:** 2026-10-30
 
 **Now:**
-- merged: menu bar drag reordering (PR #93), translation review (PR #94); release build re-checked on main (branch `chore/release-check`)
+- merged: menu bar drag reordering (PR #93), translation review (PR #94), release build re-checked on main (PR #95)
+- nothing in progress; the rest of Next waits for Oleh (translations read, CHECKLIST findings, Windows/Linux go-ahead, publishing)
 - hover hints for icon-only controls and the menu bar item merged (PR #91)
 - second wave merged: «История буфера» and «Заметки» (PR #87), «Не спать» with the lid closed (PR #89)
 - release without an Apple Developer account merged (PR #85): Sparkle, self-signed signing, `scripts/release.sh`, MIT license; nothing published yet
