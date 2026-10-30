@@ -5,7 +5,7 @@
 **Updated:** 2026-10-30
 
 **Now:**
-- SPEC-profiles stage 1 (model) merged (PR #71) with the spec (PR #67); nothing in progress
+- specs for Windows and Linux versions — branch `docs/spec-windows-linux`, PR open (spec only, no implementation)
 
 **Next:**
 - SPEC-profiles stage 2: panel and menu bar from profile modules, «Профили» and «Модули» tabs, «режим» → «профиль» in all 13 languages (moved here from stage 1: these strings get rewritten anyway)
@@ -14,8 +14,10 @@
 - fix whatever Oleh finds in the translations (machine translation; native review for ja, ko, ar at least)
 - stage 8 rest: Developer ID signing and notarization, Sparkle updates — once Oleh decides on Developer ID, the name and where updates are hosted
 - Fix whatever Oleh finds in docs/CHECKLIST.md
+- Windows and Linux versions (docs/SPEC-windows.md, docs/SPEC-linux.md) — only when Oleh says; stage 0 (fact checks in VMs) first
 
 **Needs Oleh:**
+- decide SPEC-windows §10 and SPEC-linux §10: Tauri 2 as one codebase for Windows and Linux, Windows code signing, first-wave Linux desktops
 - after ~20:11 today: check that the limits keep updating by themselves (the sign-in renewal runs when the token expires)
 - read docs/GUIDE.md as a newcomer would
 - review the languages: Settings → Основные → «Язык интерфейса» → a language → «Перезапустить» (and back); Arabic should mirror right-to-left
@@ -33,6 +35,12 @@
 - hooks are installed in ~/.claude/settings.json; backup of the original: ~/.claude/settings.json.claudepult-backup-20261029T192827
 - delete or archive the old repo `OlehDemishev/ClaudeBar`; turn on start at login if wanted
 <!-- summary:end -->
+
+## 2026-10-30 — Spec: Windows and Linux versions (branch `docs/spec-windows-linux`)
+
+Done: docs/SPEC-windows.md and docs/SPEC-linux.md — how ClaudePult maps to each system (tray instead of the menu bar, credentials file instead of the Keychain, hook as a small binary, terminals and «Показать», background runs, notifications, secrets, autostart, XDG / %LOCALAPPDATA% paths, modules from SPEC-profiles), what works worse than on Mac, distribution, stages 0–8 and open questions. Proposed: Tauri 2, one codebase for Windows and Linux; the Mac app stays Swift. README links the specs.
+Checked: docs only; Mac-specific code located by grep (osascript, security, SMAppService, NSWorkspace, SIGTERM) to make sure every such place has a counterpart in the specs. Items marked «проверить» are unverified facts for stage 0.
+Left: no implementation (Oleh: spec only for now); decisions in §10 of both specs.
 
 ## 2026-10-30 — Profiles stage 1: the model (branch `feat/profiles-model`)
 
