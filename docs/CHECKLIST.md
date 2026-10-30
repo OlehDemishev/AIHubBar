@@ -461,6 +461,14 @@ Panel snapshots: `defaults write com.demishev.claudepult DebugPanelSnapshot -boo
 | The three actions are in the app's App Intents metadata | Live (`Metadata.appintents`) |
 | Running the actions from the Shortcuts app and Siri; the search field in the panel itself | Oleh |
 
+## Widget «Сессии и проекты» and the Control Center toggle (2026-10-30)
+
+| Scenario | Checked |
+|---|---|
+| The status file has exactly the keys the widget decodes; Darwin notifications on/off reach the app's handler | Auto (`WidgetStatusTests`) |
+| Live: `widget-status.json` written (2 running, 4 red projects), the extension registered (`pluginkit`), a posted «off» request logged «Keep awake off from Control Center» | Live |
+| Adding the widget from the gallery; the control in Control Center switching «Не спать» (with the module installed) | Oleh |
+
 ## Release without an Apple Developer account (2026-10-30)
 
 | Scenario | Checked |
