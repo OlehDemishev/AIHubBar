@@ -1,15 +1,15 @@
 # Status
 
 <!-- summary:start -->
-**Stage:** SPEC-modes done except signing/updates; SPEC-profiles stages 1–3 done, stage 4 next
+**Stage:** SPEC-modes done except signing/updates; SPEC-profiles stages 1–3 done, stage 4 in PR
 **Updated:** 2026-10-30
 
 **Now:**
-- SPEC-profiles stage 3 merged (PR #77): empty start, the assistant's «Что будет в панели» step
+- SPEC-profiles stage 4: «Ресурсы Mac» and optional modules — branch `feat/resources-module` (worktree `.claude/worktrees/profiles-stage4`), PR #79
 - Windows and Linux specs merged (PR #73); implementation waits for Oleh
 
 **Next:**
-- SPEC-profiles stages 4–6: Ресурсы Mac (with installing and removing modules), Не спать, Быстрые команды и переключатели
+- SPEC-profiles stages 5–6: Не спать (with «пока работает Claude»), Быстрые команды и переключатели; then the «Утилиты Mac» template
 - menu bar elements reordered by dragging (needs a different list than a grouped Form)
 - fix whatever Oleh finds in the translations (machine translation; native review for ja, ko, ar at least)
 - stage 8 rest: Developer ID signing and notarization, Sparkle updates — once Oleh decides on Developer ID, the name and where updates are hosted
@@ -17,6 +17,7 @@
 - Windows and Linux versions (docs/SPEC-windows.md, docs/SPEC-linux.md) — only when Oleh says; stage 0 (fact checks in VMs) first
 
 **Needs Oleh:**
+- try «Ресурсы Mac»: Settings → «Модули» → «Установить», then the panel block; optionally «Процессор» / «Память» in Settings → «Строка меню»
 - try Settings → «Профили» → «Панель» (hide or move a block) and two profiles with different menu bars (Settings → «Строка меню» edits the current one)
 - decide SPEC-windows §10 and SPEC-linux §10: Tauri 2 as one codebase for Windows and Linux, Windows code signing, first-wave Linux desktops
 - after ~20:11 today: check that the limits keep updating by themselves (the sign-in renewal runs when the token expires)
@@ -36,6 +37,12 @@
 - hooks are installed in ~/.claude/settings.json; backup of the original: ~/.claude/settings.json.claudepult-backup-20261029T192827
 - delete or archive the old repo `OlehDemishev/ClaudeBar`; turn on start at login if wanted
 <!-- summary:end -->
+
+## 2026-10-30 — Profiles stage 4: «Ресурсы Mac», the first optional module (branch `feat/resources-module`)
+
+Done: SPEC-profiles §9.4. `SystemMonitor` reads processor (tick differences), memory as Activity Monitor counts it and memory pressure, disk free for important use, network rates (32-bit counters followed per interface), battery (IOKit power sources), graphics load when macOS reports it, and the five busiest processes (`ps`) — every 2 s while the panel is open, every 30 s otherwise, and only while the module is installed; no permissions. Panel block «Ресурсы Mac» (collapsible, shows CPU and RAM when folded, opens Activity Monitor). Alerts once per event: processor above 90 % for 5 minutes, critical memory, disk below the chosen GB, battery below 15 % on battery; settings in «Модули». Menu bar elements «Процессор» and «Память» (number with a chip symbol, ring or bar, «от N %»). Optional modules: «Установить» in «Модули» installs and adds to the current profile, «Снять» removes from every profile, a profile has «Добавить модуль» and «Убрать из профиля»; the assistant offers «Ресурсы Mac» too. CLI `--resources`.
+Checked: `xcodebuild test` — 179 tests green (new: alerts, `ps` parsing, a real reading, menu bar elements, optional modules in the store, the assistant); catalog synced, 37 new strings in all 12 languages with no «% + letter» traps. Live: `--resources` against `sysctl`, `df`, `pmset`; installed; the block shown in the panel with real figures (added to Oleh's profile for the check, the profile files restored after). CI not set up; checks run locally.
+Left: per-profile choice of shown figures (all are shown); temperatures and fans (not in the first wave).
 
 ## 2026-10-30 — Profiles stage 3: empty start and new assistant (branch `feat/empty-start`)
 

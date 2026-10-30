@@ -20,6 +20,7 @@ import UserNotifications
 /// - `ClaudePult --api-complete <provider> <prompt> [base-url]` (one request to a model by API, prints reply and tokens)
 /// - `ClaudePult --services [check]` (installed agents, stored API keys; `check` lists each provider's models)
 /// - `ClaudePult --menubar-preview <file.png> [minimum|limits|everything]` (the menu bar item with sample data)
+/// - `ClaudePult --resources` (one reading of «Ресурсы Mac»: processor, memory, disk, network, battery, graphics, top apps)
 /// - `ClaudePult --readiness [file.png]` (what this Mac still needs, as on the assistant's first screen; exit 1 if something is left)
 @MainActor
 enum CommandLineTool {
@@ -195,6 +196,22 @@ enum CommandLineTool {
         }
         if let index = arguments.firstIndex(of: "--menubar-preview"), index + 1 < arguments.count {
             return menuBarPreview(path: arguments[index + 1], preset: arguments.dropFirst(index + 2).first)
+        }
+        if arguments.contains("--resources") {
+            var sampler = SystemSampler()
+            _ = sampler.sample()
+            Thread.sleep(forTimeInterval: 1)
+            let s = sampler.sample()
+            print(String(format: "cpu: %.0f %%", s.cpu))
+            print("memory: \(ResourceText.memory(s.memoryUsed)) of \(ResourceText.memory(s.memoryTotal)) (\(Int(s.memoryPercent.rounded())) %), pressure \(s.pressure)")
+            print("disk: \(ResourceText.bytes(s.diskFree)) free of \(ResourceText.bytes(s.diskTotal))")
+            print("network: in \(ResourceText.speed(s.networkIn)), out \(ResourceText.speed(s.networkOut))")
+            print("battery: " + (s.battery.map { "\($0.percent) %, charging \($0.charging), on AC \($0.onAC), minutes left \($0.minutesLeft.map(String.init) ?? "-")" } ?? "none"))
+            print("gpu: " + (s.gpu.map { String(format: "%.0f %%", $0) } ?? "not reported"))
+            return waitFor {
+                for process in await SystemMonitor.topProcesses() { print(String(format: "top: %5.1f %%  %@", process.cpu, process.name)) }
+                return 0
+            }
         }
         if let index = arguments.firstIndex(of: "--readiness") {
             return readiness(png: arguments.dropFirst(index + 1).first { $0.hasSuffix(".png") })

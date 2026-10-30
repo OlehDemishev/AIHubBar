@@ -86,7 +86,7 @@ struct AssistantView: View {
         // The panel blocks and the menu bar chosen here belong to the new profile (SPEC-profiles §6).
         var profile = draft.mode
         profile.modules = nil
-        profile.modules = profile.normalizedModules(hiddenBlocks: draft.hiddenBlocks)
+        profile.modules = profile.normalizedModules(hiddenBlocks: draft.hiddenBlocks) + draft.extraModules.map { ProfileModule($0) }
         profile.menuBar = draft.menuBar
         settings.calendarReminderHours = draft.reminderHours
         if let folder = draft.mode.source.folder.map(PathText.expand), !FileManager.default.fileExists(atPath: folder) {

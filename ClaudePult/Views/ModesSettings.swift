@@ -273,6 +273,12 @@ private struct ModeEditor: View {
                         Label(module.kind.title, systemImage: module.kind.symbol)
                     }
                     Spacer()
+                    if !module.kind.isBuiltIn {
+                        Button { modes.removeModule(module.kind, from: mode.id); mode.modules?.removeAll { $0.kind == module.kind } } label: {
+                            Image(systemName: "minus.circle")
+                        }
+                        .help("Убрать из профиля")
+                    }
                     Button { edit { $0.swapAt(index, index - 1) } } label: { Image(systemName: "chevron.up") }
                         .disabled(index == 0)
                         .help("Выше")
@@ -281,6 +287,15 @@ private struct ModeEditor: View {
                         .help("Ниже")
                 }
                 .buttonStyle(.borderless)
+            }
+            let addable = modes.installedModules.filter { kind in !kind.isBuiltIn && !list.contains { $0.kind == kind } }
+            if !addable.isEmpty {
+                Menu("Добавить модуль") {
+                    ForEach(addable, id: \.self) { kind in
+                        Button { mode.modules = list + [ProfileModule(kind)] } label: { Label(kind.title, systemImage: kind.symbol) }
+                    }
+                }
+                .fixedSize()
             }
         } header: {
             Text("Панель")

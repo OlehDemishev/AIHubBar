@@ -1,9 +1,13 @@
 import Foundation
 
 /// A part of ClaudePult that is installed once and shown by profiles (docs/SPEC-profiles.md §1, §3).
-/// Stage 1 knows the modules that already exist; Ресурсы Mac, Не спать and the quick tools come with their stages.
+/// The first five are built in: a profile has them when its settings call for them. The rest are optional: installed
+/// from Settings → «Модули» and added to a profile by hand (SPEC-profiles §3).
 enum ModuleKind: String, Codable, CaseIterable, Sendable {
     case limits, sessions, upcoming, projects, reports
+    case resources
+
+    var isBuiltIn: Bool { self != .resources }
 
     var title: String {
         switch self {
@@ -12,6 +16,7 @@ enum ModuleKind: String, Codable, CaseIterable, Sendable {
         case .upcoming: String(localized: "Ближайшее")
         case .projects: String(localized: "Проекты")
         case .reports: String(localized: "Отчёты _daily-report")
+        case .resources: String(localized: "Ресурсы Mac")
         }
     }
 
@@ -23,6 +28,7 @@ enum ModuleKind: String, Codable, CaseIterable, Sendable {
         case .upcoming: String(localized: "Дедлайны, публикации и контент-план на 7 дней вперёд — из профилей с календарём.")
         case .projects: String(localized: "Проекты профиля: git-репозитории или папки, карточки, команды. Настраиваются в профиле.")
         case .reports: String(localized: "Команды _daily-report: отчёт, быстрая сводка, очистка сборок.")
+        case .resources: String(localized: "Процессор, память, диск, сеть, батарея и самые прожорливые приложения; уведомления о нагрузке, памяти, месте и заряде.")
         }
     }
 
@@ -33,6 +39,7 @@ enum ModuleKind: String, Codable, CaseIterable, Sendable {
         case .upcoming: "calendar"
         case .projects: "folder"
         case .reports: "doc.text.magnifyingglass"
+        case .resources: "cpu"
         }
     }
 }
@@ -66,10 +73,12 @@ extension Mode {
             case .upcoming: !hiddenBlocks.contains(.calendar)
             case .projects: showProjects
             case .reports: showCommonCommands
+            case .resources: true
             }
         }
 
-        var result = (modules ?? []).filter { possible.contains($0.kind) }
+        // Optional modules stay where the person put them; built-in ones follow the settings.
+        var result = (modules ?? []).filter { possible.contains($0.kind) || !$0.kind.isBuiltIn }
         for kind in possible where !result.contains(where: { $0.kind == kind }) {
             let before = possible.prefix { $0 != kind }
             let index = (result.lastIndex { before.contains($0.kind) }).map { $0 + 1 } ?? 0

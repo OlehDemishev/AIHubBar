@@ -274,9 +274,48 @@ final class ModeStore {
             currentID = ""
             if let next = enabledModes.first { select(next.id) }
         }
+        // Built-in modules work only for profiles; an optional one stays installed until removed in «Модули».
         let used = Set(modes.flatMap { $0.modules ?? [] }.map(\.kind))
-        installedModules = installedModules.filter(used.contains)
+        installedModules = modes.isEmpty ? [] : installedModules.filter { used.contains($0) || !$0.isBuiltIn }
         saveState()
+    }
+
+    // MARK: - Optional modules (SPEC-profiles §1)
+
+    /// Installs an optional module and adds it to the current profile, shown, at the bottom of its panel.
+    func install(_ kind: ModuleKind) {
+        guard !kind.isBuiltIn else { return }
+        if !installedModules.contains(kind) {
+            installedModules = ModuleKind.allCases.filter { installedModules.contains($0) || $0 == kind }
+            saveState()
+            AppLog.info("Module installed: \(kind.rawValue)")
+        }
+        if let current { addModule(kind, to: current.id) }
+    }
+
+    /// Removes an optional module from every profile and stops it; its settings stay for a later install.
+    func uninstall(_ kind: ModuleKind) {
+        guard !kind.isBuiltIn else { return }
+        for mode in modes where mode.modules?.contains(where: { $0.kind == kind }) == true {
+            var changed = mode
+            changed.modules?.removeAll { $0.kind == kind }
+            update(changed)
+        }
+        installedModules.removeAll { $0 == kind }
+        saveState()
+        AppLog.info("Module removed: \(kind.rawValue)")
+    }
+
+    func addModule(_ kind: ModuleKind, to profileID: String) {
+        guard var mode = modes.first(where: { $0.id == profileID }), !(mode.modules ?? []).contains(where: { $0.kind == kind }) else { return }
+        mode.modules = (mode.modules ?? []) + [ProfileModule(kind)]
+        update(mode)
+    }
+
+    func removeModule(_ kind: ModuleKind, from profileID: String) {
+        guard !kind.isBuiltIn, var mode = modes.first(where: { $0.id == profileID }) else { return }
+        mode.modules?.removeAll { $0.kind == kind }
+        update(mode)
     }
 
     private func uniqueName(_ base: String) -> String {

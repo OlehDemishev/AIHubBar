@@ -68,6 +68,7 @@ You can skip any step: **Skip** keeps the template's choice. Everything can be c
   - Other agents open in Terminal with the task on the clipboard.
 - **Compare:** runs one command with two or three services. The answers open side by side.
 - **Project cards:** a project folder can hold a small text card, `project.md` (named in your language), with lines like `Stage:`, `Deadline:` and `Main file:`. ClaudePult reads it and updates it when you change the stage. You can edit it by hand.
+- **Mac Resources** (optional module: Settings… → Modules → Install): processor, memory, graphics, disk, network, battery and the busiest apps, with alerts when the Mac is struggling. Processor and memory can also go into the menu bar.
 - **Calendar:** a month or week view of deadlines, publications and content-plan rows. Drag an entry to another day and the date is rewritten in its file.
 - **Menu bar** (**Settings… → Menu Bar**): choose what sits next to ✦, such as limits as a number, ring or bar, the reset countdown, sessions waiting for you, or the next deadline.
 

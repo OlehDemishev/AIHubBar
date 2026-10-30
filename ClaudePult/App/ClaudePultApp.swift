@@ -12,6 +12,7 @@ struct ClaudePultApp: App {
     @State private var commands: CommandStore
     @State private var requests: AppRequests
     @State private var usage: UsageStore
+    @State private var monitor: SystemMonitor
     @State private var notifications = NotificationPermission()
     @State private var modes: ModeStore
     @State private var services: AIServiceStore
@@ -46,6 +47,8 @@ struct ClaudePultApp: App {
         _sessions = State(initialValue: sessions)
         let usage = UsageStore(settings: settings, sessions: sessions)
         _usage = State(initialValue: usage)
+        let monitor = SystemMonitor(settings: settings)
+        _monitor = State(initialValue: monitor)
         let runs = RunStore(settings: settings)
         _runs = State(initialValue: runs)
         _engine = State(initialValue: CommandEngine(settings: settings, runs: runs))
@@ -54,6 +57,7 @@ struct ClaudePultApp: App {
         let hooks = HookController(settings: settings)
         _hooks = State(initialValue: hooks)
         usage.isActive = { [modes] in modes.installedModules.contains(.limits) }
+        monitor.isActive = { [modes] in modes.installedModules.contains(.resources) }
         modes.didApply = {
             Task { await store.refresh() }
             Task { await folders.refresh() }
@@ -73,6 +77,7 @@ struct ClaudePultApp: App {
             runs.start()
             requests.listen(commands: commands)
             usage.start()
+            monitor.start()
             Task { await services.scan() }
             folders.start()
             // A first start without `_daily-report`: the assistant sets up the first mode (SPEC-modes §5).
@@ -122,6 +127,8 @@ struct ClaudePultApp: App {
             data.diskFreeBytes = store.report?.diskFreeBytes ?? DiskSpace.freeBytes()
         }
         data.deadline = calendar.nearest().map { CalendarText.menuBar($0) }
+        data.cpu = monitor.snapshot?.cpu
+        data.memory = monitor.snapshot?.memoryPercent
         data.modeName = modes.current?.name
         data.modeIcon = modes.current?.icon
         return data
@@ -137,6 +144,7 @@ struct ClaudePultApp: App {
                 .environment(runs)
                 .environment(commands)
                 .environment(usage)
+                .environment(monitor)
                 .environment(settings)
                 .environment(notifications)
                 .environment(modes)
@@ -211,6 +219,7 @@ struct ClaudePultApp: App {
                 .environment(store)
                 .environment(hooks)
                 .environment(usage)
+                .environment(monitor)
                 .environment(notifications)
                 .environment(modes)
                 .environment(services)

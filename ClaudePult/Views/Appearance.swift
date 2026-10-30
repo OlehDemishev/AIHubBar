@@ -90,7 +90,7 @@ enum PanelTheme: String, CaseIterable, Sendable {
 
 /// Blocks of the panel that can be hidden.
 enum PanelBlock: String, CaseIterable, Identifiable, Sendable {
-    case limits, sessions, calendar, projects, commands
+    case limits, sessions, calendar, projects, commands, resources
 
     var id: String { rawValue }
 
@@ -101,6 +101,7 @@ enum PanelBlock: String, CaseIterable, Identifiable, Sendable {
         case .calendar: String(localized: "Ближайшее (календарь)")
         case .projects: String(localized: "Проекты")
         case .commands: String(localized: "Команды")
+        case .resources: String(localized: "Ресурсы Mac")
         }
     }
 }

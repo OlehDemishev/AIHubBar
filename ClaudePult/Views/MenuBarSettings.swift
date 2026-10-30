@@ -199,7 +199,7 @@ private struct ElementRow: View {
                     }
                 }
             }
-        case .session, .week, .modelWeek:
+        case .session, .week, .modelWeek, .cpu, .memory:
             if element.kind == .modelWeek {
                 Picker("Модель", selection: value(\.model)) {
                     Text("Первая доступная").tag(String?.none)

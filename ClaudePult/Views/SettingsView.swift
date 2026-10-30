@@ -276,14 +276,25 @@ private struct ModulesSettings: View {
                     HStack {
                         Label(kind.title, systemImage: kind.symbol)
                         Spacer()
-                        Text(modes.installedModules.contains(kind) ? String(localized: "встроенный") : String(localized: "не используется"))
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
+                        if kind.isBuiltIn {
+                            Text(modes.installedModules.contains(kind) ? String(localized: "встроенный") : String(localized: "не используется"))
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                        } else if modes.installedModules.contains(kind) {
+                            Button("Снять") { modes.uninstall(kind) }
+                                .controlSize(.small)
+                                .help("Убрать из всех профилей и остановить; настройки сохранятся")
+                        } else {
+                            Button("Установить") { modes.install(kind) }
+                                .controlSize(.small)
+                                .help("Установить и добавить в текущий профиль")
+                        }
                     }
                 }
                 switch kind {
                 case .limits: LimitSection()
                 case .upcoming: ReminderSection()
+                case .resources where modes.installedModules.contains(.resources): ResourceSection()
                 default: EmptyView()
                 }
             }
@@ -295,6 +306,25 @@ private struct ModulesSettings: View {
     private func profiles(showing kind: ModuleKind) -> String {
         let names = modes.modes.filter { $0.shows(kind) }.map(\.name)
         return names.isEmpty ? String(localized: "нет") : names.joined(separator: ", ")
+    }
+}
+
+private struct ResourceSection: View {
+    @Environment(AppSettings.self) private var settings
+
+    var body: some View {
+        @Bindable var settings = settings
+        Section {
+            Toggle("Уведомлять о нагрузке, памяти, месте и заряде", isOn: $settings.resourceAlerts)
+            Picker("Мало места — свободно меньше", selection: $settings.resourceDiskBelowGB) {
+                ForEach([5, 10, 20, 50, 100], id: \.self) { Text("\($0) ГБ").tag($0) }
+            }
+            .disabled(!settings.resourceAlerts)
+        } header: {
+            Text("Уведомления о ресурсах")
+        } footer: {
+            Footnote(text: String(localized: "Процессор выше 90 % дольше 5 минут, критическая нехватка памяти, мало места, заряд ниже 15 % без зарядки — по одному уведомлению, пока не наладится. В строку меню процессор и память добавляются во вкладке «Строка меню»."))
+        }
     }
 }
 
