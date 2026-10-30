@@ -301,7 +301,9 @@ private struct ModulesSettings: View {
                     }
                 }
                 switch kind {
-                case .limits: LimitSection()
+                case .limits:
+                    LimitSection()
+                    HubSection()
                 case .upcoming: ReminderSection()
                 case .projects: PullRequestAlertSection()
                 case .resources where modes.installedModules.contains(.resources): ResourceSection()

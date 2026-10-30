@@ -198,6 +198,35 @@ final class AppSettings {
         didSet { defaults.set(hiddenBlocks.map(\.rawValue).sorted(), forKey: Keys.hiddenBlocks) }
     }
 
+    /// Other AI services (SPEC-hub): each one is on by default once found; the person can switch one off.
+    var hubDisabled: Set<String> {
+        didSet { defaults.set(hubDisabled.sorted(), forKey: Keys.hubDisabled) }
+    }
+
+    /// Consent to use Gemini CLI's own sign-in for the exact quota (otherwise requests are counted from its logs).
+    var hubGeminiQuota: Bool {
+        didSet { defaults.set(hubGeminiQuota, forKey: Keys.hubGeminiQuota) }
+    }
+
+    /// Requests a day on the person's Gemini plan: 1000 Google account, 1500 AI Pro, 2000 Ultra, 250 free API key.
+    var hubGeminiDailyLimit: Int {
+        didSet { defaults.set(hubGeminiDailyLimit, forKey: Keys.hubGeminiDailyLimit) }
+    }
+
+    /// Consent to read Cursor's own sign-in token from its settings database.
+    var hubCursor: Bool {
+        didSet { defaults.set(hubCursor, forKey: Keys.hubCursor) }
+    }
+
+    func hubEnabled(_ source: HubLimit.Source) -> Bool {
+        guard !hubDisabled.contains(source.rawValue) else { return false }
+        return source != .cursor || hubCursor
+    }
+
+    func setHubEnabled(_ source: HubLimit.Source, _ on: Bool) {
+        if on { hubDisabled.remove(source.rawValue) } else { hubDisabled.insert(source.rawValue) }
+    }
+
     func shows(_ block: PanelBlock) -> Bool { !hiddenBlocks.contains(block) }
 
     func setShows(_ block: PanelBlock, _ visible: Bool) {
@@ -260,6 +289,11 @@ final class AppSettings {
         panelTheme = defaults.string(forKey: Keys.panelTheme).flatMap(PanelTheme.init(rawValue:)) ?? .system
         panelAnimations = defaults.object(forKey: Keys.panelAnimations) as? Bool ?? true
         hiddenBlocks = Set((defaults.stringArray(forKey: Keys.hiddenBlocks) ?? []).compactMap(PanelBlock.init(rawValue:)))
+        hubDisabled = Set(defaults.stringArray(forKey: Keys.hubDisabled) ?? [])
+        hubGeminiQuota = defaults.bool(forKey: Keys.hubGeminiQuota)
+        let geminiLimit = defaults.integer(forKey: Keys.hubGeminiDailyLimit)
+        hubGeminiDailyLimit = geminiLimit > 0 ? geminiLimit : 1000
+        hubCursor = defaults.bool(forKey: Keys.hubCursor)
     }
 
     var reportScript: String {
@@ -303,5 +337,9 @@ final class AppSettings {
         static let panelTheme = "panelTheme"
         static let panelAnimations = "panelAnimations"
         static let hiddenBlocks = "hiddenBlocks"
+        static let hubDisabled = "hubDisabled"
+        static let hubGeminiQuota = "hubGeminiQuota"
+        static let hubGeminiDailyLimit = "hubGeminiDailyLimit"
+        static let hubCursor = "hubCursor"
     }
 }
