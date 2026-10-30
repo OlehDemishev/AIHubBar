@@ -208,16 +208,6 @@ struct TokenUsageTests {
 }
 
 struct MenuBarStateTests {
-    @Test func plainOnlyWithoutExtras() {
-        #expect(MenuBarState(mode: .iconOnly, session: 40).isPlain)
-        #expect(MenuBarState(mode: .session, session: nil).isPlain)
-        #expect(!MenuBarState(mode: .session, session: 40).isPlain)
-        #expect(!MenuBarState(showsAlert: true).isPlain)
-        #expect(!MenuBarState(waitingCount: 2).isPlain)
-        #expect(MenuBarState(waitingCount: 1, mode: .sessionAndWeek, session: 13, week: 57).accessibilityText
-            == "ClaudePult, сессия 13 %, неделя 57 %, ждут ответа: 1")
-    }
-
     @Test func queuedLaunchRoundTrip() throws {
         let item = LaunchController.QueuedLaunch(
             id: "q", command: .customTask("Сделай"),

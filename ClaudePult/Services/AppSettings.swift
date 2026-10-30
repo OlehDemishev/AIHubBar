@@ -1,7 +1,7 @@
 import Foundation
 import Observation
 
-/// What the menu bar shows next to the icon (spec §2.8).
+/// The menu bar setting before the builder (spec §2.8); kept to migrate old settings and read old exports.
 enum MenuBarUsageMode: String, CaseIterable, Sendable {
     case iconOnly, session, sessionAndWeek, ring
 
@@ -59,8 +59,9 @@ final class AppSettings {
         didSet { defaults.set(backgroundTimeLimitMinutes, forKey: Keys.backgroundTimeLimitMinutes) }
     }
 
-    var menuBarUsageMode: MenuBarUsageMode {
-        didSet { defaults.set(menuBarUsageMode.rawValue, forKey: Keys.menuBarUsageMode) }
+    /// What the menu bar item shows (SPEC-modes §7).
+    var menuBarConfig: MenuBarConfig {
+        didSet { defaults.set(try? JSONEncoder().encode(menuBarConfig), forKey: Keys.menuBarConfig) }
     }
 
     /// Percentages that raise a notification once per limit window.
@@ -114,7 +115,6 @@ final class AppSettings {
         panelTheme = .system
         panelAnimations = true
         hiddenBlocks = []
-        menuBarUsageMode = .session
     }
 
     static let defaultProjectsDirectory = NSHomeDirectory() + "/Projects"
@@ -129,7 +129,8 @@ final class AppSettings {
         telegramForBackground = defaults.object(forKey: Keys.telegramForBackground) as? Bool ?? true
         let limit = defaults.integer(forKey: Keys.backgroundTimeLimitMinutes)
         backgroundTimeLimitMinutes = limit > 0 ? limit : 90
-        menuBarUsageMode = defaults.string(forKey: Keys.menuBarUsageMode).flatMap(MenuBarUsageMode.init(rawValue:)) ?? .session
+        menuBarConfig = defaults.data(forKey: Keys.menuBarConfig).flatMap { try? JSONDecoder().decode(MenuBarConfig.self, from: $0) }
+            ?? MenuBarConfig.migrated(from: defaults.string(forKey: Keys.menuBarUsageMode).flatMap(MenuBarUsageMode.init(rawValue:)) ?? .session)
         let thresholds = (defaults.array(forKey: Keys.limitThresholds) as? [Int])?.filter { (1...100).contains($0) }
         limitThresholds = thresholds?.isEmpty == false ? thresholds! : Self.defaultLimitThresholds
         limitAlertsToTelegram = defaults.bool(forKey: Keys.limitAlertsToTelegram)
@@ -153,6 +154,7 @@ final class AppSettings {
         static let telegramForBackground = "telegramForBackground"
         static let backgroundTimeLimitMinutes = "backgroundTimeLimitMinutes"
         static let menuBarUsageMode = "menuBarUsageMode"
+        static let menuBarConfig = "menuBarConfig"
         static let limitThresholds = "limitThresholds"
         static let limitAlertsToTelegram = "limitAlertsToTelegram"
         static let panelTextSize = "panelTextSize"

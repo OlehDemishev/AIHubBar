@@ -84,6 +84,8 @@ struct ModeStoreTests {
         settings.panelTextSize = .large
         settings.limitThresholds = [70, 90]
         settings.claudePath = NSHomeDirectory() + "/bin/claude"
+        settings.menuBarConfig = .make(.everything)
+        settings.menuBarConfig.set(.session) { $0.style = .bar }
         _ = store.duplicate(store.currentID)
         let data = try ModeStore.encode(store.exportBundle())
         #expect(!String(decoding: data, as: UTF8.self).contains(NSHomeDirectory()), "home folder is written as ~")
@@ -98,7 +100,22 @@ struct ModeStoreTests {
         #expect(otherSettings.panelTextSize == .large)
         #expect(otherSettings.limitThresholds == [70, 90])
         #expect(otherSettings.claudePath == NSHomeDirectory() + "/bin/claude")
+        #expect(otherSettings.menuBarConfig == settings.menuBarConfig)
+        let reloaded = AppSettings(defaults: try #require(UserDefaults(suiteName: otherDir.lastPathComponent)))
+        #expect(reloaded.menuBarConfig == settings.menuBarConfig, "stored as JSON in defaults")
         #expect(ModeStore(settings: otherSettings, directory: otherDir).modes.count == 2)
+    }
+
+    @Test func oldExportsWithoutBuilderConfigMigrate() throws {
+        let (settings, dir) = environment()
+        defer { try? FileManager.default.removeItem(at: dir) }
+        let store = ModeStore(settings: settings, directory: dir)
+        var bundle = store.exportBundle()
+        bundle.appearance?.menuBarConfig = nil
+        bundle.appearance?.menuBar = "ring"
+        store.importBundle(bundle, style: .replace)
+        #expect(settings.menuBarConfig == .migrated(from: .ring))
+        #expect(store.exportBundle().appearance?.menuBar == "ring")
     }
 
     @Test func addImportedModesWithFreshIdsAndNames() throws {

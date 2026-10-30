@@ -1,17 +1,18 @@
 # Status
 
 <!-- summary:start -->
-**Stage:** SPEC.md done; SPEC-modes stage 1 of 9 (mode model) done
+**Stage:** SPEC.md done; SPEC-modes stages 1–2 of 9 (modes, menu bar builder) done
 **Updated:** 2026-10-30
 
 **Now:**
-- SPEC-modes §9 stage 2 (menu bar builder) — starting
+- menu bar builder in PR (branch `feat/menubar-builder`), waiting for Oleh's merge
 
 **Next:**
-- SPEC-modes §9: 2 menu bar builder, 3 AI services, 4 folder projects + commands, 5 calendar, 6 templates, 7 setup assistant, 8 for everyone, 9 languages (§13: en, es, pt-BR, fr, de, ja, id, ko, it, ar with RTL, pl, uk)
+- SPEC-modes §9: 3 AI services, 4 folder projects + commands, 5 calendar, 6 templates, 7 setup assistant, 8 for everyone, 9 languages (§13: en, es, pt-BR, fr, de, ja, id, ko, it, ar with RTL, pl, uk)
 - Fix whatever Oleh finds in docs/CHECKLIST.md
 
 **Needs Oleh:**
+- merge the menu bar builder PR; try Settings → «Строка меню» (presets, order, options, preview)
 - try Settings → Режимы (duplicate the mode → switcher appears in the panel) and a double-click on a .claudepult file
 - read and edit docs/TEMPLATES.md (template texts) before stage 6
 - before stage 3: install Codex CLI and Gemini CLI and create API keys (OpenAI, Google, xAI, DeepSeek, Mistral) for live checks — Oleh offered to
@@ -22,6 +23,12 @@
 - hooks are installed in ~/.claude/settings.json; backup of the original: ~/.claude/settings.json.claudepult-backup-20261029T192827
 - delete or archive the old repo `OlehDemishev/ClaudeBar`; turn on start at login if wanted
 <!-- summary:end -->
+
+## 2026-10-30 — Menu bar builder (branch `feat/menubar-builder`)
+
+Done: SPEC-modes §7 / stage 2. The menu bar item is built from elements: icon (sparkle, other symbol, the mode's icon or none), red project dot, session / week / model week (number, ring or bar; always or from N %), reset countdown («2:14» / «2 ч 14 мин», ticks each minute), forecast, waiting / running sessions / background runs / queued launches (only > 0), free disk below N GB, current mode (icon or name); «Ближайший дедлайн» waits for the calendar. Presets «Минимум» / «Лимиты» / «Всё» / «Свой», separator, small text, colour by level or mono. New Settings tab «Строка меню» with live preview («Сейчас» / «Пример со всем») and a width warning; the old picker in «Внешний вид» is gone. The old setting migrates unchanged; exports carry the config (old files still import). CLI `--menubar-preview`. `docs/modes/oleh-developer.claudepult` re-exported with the builder config.
+Checked: `xcodebuild test` — 105 tests green incl. migration of all four old settings, presets, tolerant decoding, composer cases (Oleh's look, thresholds, mono, model week, counters, countdown, disk, mode, empty fallback, separator rule), export round-trip and old-export migration; no compiler warnings. Live: installed; `--menubar-preview` with the saved config draws «✦• 34% · 58% ✋1» as before, «Всё» draws every element in dark and light (~400 pt, triggers the warning). CI not set up; checks run locally.
+Left: the Settings tab and the ticking countdown need Oleh's eye (automation cannot click inside ClaudePult). Seen in passing: the Claude Code OAuth token in the Keychain expired at 02:22 and ClaudePult then says «Войдите в Claude Code» although Claude Code refreshes the token by itself on its next request — the message should say to wait / open Claude Code instead (small follow-up).
 
 ## 2026-10-30 — Usage endpoint backoff (branch `fix/usage-backoff`)
 
