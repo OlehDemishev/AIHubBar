@@ -11,6 +11,7 @@ struct MenuPanelView: View {
     @Environment(HookController.self) private var hooks
     @Environment(RunStore.self) private var runs
     @Environment(AppSettings.self) private var settings
+    @Environment(NotificationPermission.self) private var notifications
 
     /// Drives the entrance animation; reset when the panel closes so it replays on every open.
     @State private var isShown = false
@@ -36,6 +37,11 @@ struct MenuPanelView: View {
                 .revealed(isShown, step: 0, reduceMotion: calm)
 
             Divider()
+
+            if notifications.state == .denied {
+                notificationsHint
+                Divider()
+            }
 
             if settings.shows(.limits) {
                 LimitsView()
@@ -97,6 +103,7 @@ struct MenuPanelView: View {
             store.refreshIfStale()
             sessions.reload()
             hooks.refresh()
+            notifications.refresh()
             snapshotIfEnabled()
         }
         .onDisappear {
@@ -150,6 +157,22 @@ struct MenuPanelView: View {
         }
         .padding(.horizontal, 14)
         .padding(.vertical, 10)
+    }
+
+    /// Without permission, «ждёт ответа», background results and limit alerts are silently lost.
+    private var notificationsHint: some View {
+        HStack(spacing: 8) {
+            Image(systemName: "bell.slash.fill")
+                .foregroundStyle(.orange)
+            Text("Уведомления ClaudePult выключены в macOS — «ждёт ответа», итоги задач и лимиты не приходят.")
+                .scaledFont(.caption)
+                .fixedSize(horizontal: false, vertical: true)
+            Spacer(minLength: 4)
+            Button("Включить…") { NotificationPermission.openSystemSettings() }
+                .controlSize(.small)
+        }
+        .padding(.horizontal, 14)
+        .padding(.vertical, 8)
     }
 
     private var hooksHint: some View {

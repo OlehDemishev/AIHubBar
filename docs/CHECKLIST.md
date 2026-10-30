@@ -47,7 +47,9 @@ Panel snapshots: `defaults write com.demishev.claudepult DebugPanelSnapshot -boo
 | Waiting state, highlight, badge | Live (PermissionRequest event fed to the hook) |
 | A real permission prompt → «ждёт ответа» | **Oleh** (this Mac auto-approves edits) |
 | «Показать» → Terminal tab by tty | Live (`--show-session`); **Oleh: button** |
-| Waiting notification once | **Oleh** |
+| Waiting notification once | **Oleh** (notifications were off until 2026-10-30, see DECISIONS) |
+| Notification permission warning in the panel, Settings state + «Проверить» | Live (snapshot «выключены в macOS»; `--notifications-status` → authorized after Oleh enabled) |
+| Click on a notification leads to its target | Live (test notification → «Помощь», click logged); targets per kind — Auto |
 
 ## Common commands and disk (§2.5)
 

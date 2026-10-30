@@ -59,6 +59,7 @@ private struct Footnote: View {
 // MARK: - Основные
 
 private struct GeneralSettings: View {
+    @Environment(NotificationPermission.self) private var notifications
     @Environment(LoginItemController.self) private var loginItem
     @Environment(AppSettings.self) private var settings
     @Environment(ProjectStore.self) private var store
@@ -84,6 +85,24 @@ private struct GeneralSettings: View {
             }
 
             Section {
+                LabeledContent("Уведомления") {
+                    HStack(spacing: 8) {
+                        Text(notificationsText)
+                            .foregroundStyle(notifications.state == .allowed ? .green : .orange)
+                        if notifications.state == .notAsked {
+                            Button("Разрешить") { notifications.request() }
+                        } else if notifications.state == .allowed {
+                            Button("Проверить") { Notifier.postTest() }
+                        } else {
+                            Button("Открыть настройки") { NotificationPermission.openSystemSettings() }
+                        }
+                    }
+                }
+            } footer: {
+                Footnote(text: "Нужны для «Claude ждёт ответа», итогов фоновых задач, порогов лимитов и результатов команд. Клик по уведомлению ведёт к сессии, PR, журналу или отчёту.")
+            }
+
+            Section {
                 FolderField(title: "Папка проектов", path: $settings.projectsDirectory,
                             defaultPath: AppSettings.defaultProjectsDirectory)
                 FolderField(title: "Папка _daily-report", path: $settings.dailyReportDirectory,
@@ -103,15 +122,28 @@ private struct GeneralSettings: View {
                 }
             }
         }
-        .onAppear { loginItem.refresh() }
+        .onAppear {
+            loginItem.refresh()
+            notifications.refresh()
+        }
         .onReceive(NotificationCenter.default.publisher(for: NSApplication.didBecomeActiveNotification)) { _ in
             loginItem.refresh()
+            notifications.refresh()
         }
         .onChange(of: settings.projectsDirectory) {
             Task { await store.refresh() }
             hooks.refresh()
         }
         .onChange(of: settings.dailyReportDirectory) { Task { await store.refresh() } }
+    }
+
+    private var notificationsText: String {
+        switch notifications.state {
+        case .allowed: "включены"
+        case .denied: "выключены в macOS"
+        case .notAsked: "ещё не разрешены"
+        case .unknown: "—"
+        }
     }
 
     private static var version: String {

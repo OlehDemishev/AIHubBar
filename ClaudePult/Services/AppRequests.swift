@@ -14,6 +14,8 @@ final class AppRequests {
     nonisolated static let notificationName = Notification.Name("com.demishev.claudepult.app-command")
     /// `--app-command` names that open a window instead of running a command.
     static let windows = ["help": "help", "cleanup-output": "cleanup-output", "settings": "settings"]
+    /// Other `--app-command` names handled by the app itself.
+    static let actions = ["test-notification"]
 
     private(set) var window: WindowRequest?
     private var observer: NSObjectProtocol?
@@ -31,7 +33,9 @@ final class AppRequests {
             let name = note.object as? String ?? ""
             MainActor.assumeIsolated {
                 AppLog.info("App command «\(name)» received")
-                if let window = Self.windows[name] {
+                if name == "test-notification" {
+                    Notifier.postTest()
+                } else if let window = Self.windows[name] {
                     self?.openWindow(window)
                 } else if let command = CommonCommand.allCases.first(where: { $0.cliName == name }) {
                     commands?.run(command)

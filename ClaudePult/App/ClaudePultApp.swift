@@ -12,6 +12,7 @@ struct ClaudePultApp: App {
     @State private var commands: CommandStore
     @State private var requests: AppRequests
     @State private var usage: UsageStore
+    @State private var notifications = NotificationPermission()
 
     init() {
         if let code = CommandLineTool.run(CommandLine.arguments) {
@@ -44,6 +45,24 @@ struct ClaudePultApp: App {
             requests.listen(commands: commands)
             usage.start()
             launcher.start()
+            NotificationRouter.shared.install { resolution in
+                switch resolution {
+                case let .showSession(id):
+                    let items = SessionStore.loadItems(from: SessionFiles.sessionsDirectory, now: .now)
+                    if let session = items.first(where: { $0.id == id })?.session { SessionActions.show(session) }
+                case let .openURL(url):
+                    NSWorkspace.shared.open(url)
+                case let .openRunLog(id):
+                    runs.selectedLogRunID = id
+                    requests.openWindow("run-log")
+                case let .openFile(path):
+                    NSWorkspace.shared.open(URL(fileURLWithPath: path))
+                case let .openWindow(id):
+                    requests.openWindow(id)
+                case .nothing:
+                    break
+                }
+            }
         }
     }
 
@@ -58,6 +77,7 @@ struct ClaudePultApp: App {
                 .environment(commands)
                 .environment(usage)
                 .environment(settings)
+                .environment(notifications)
         } label: {
             MenuBarLabel(state: MenuBarState(
                 showsAlert: store.report?.hasRedProject ?? false,
@@ -99,6 +119,7 @@ struct ClaudePultApp: App {
                 .environment(store)
                 .environment(hooks)
                 .environment(usage)
+                .environment(notifications)
         }
     }
 }
