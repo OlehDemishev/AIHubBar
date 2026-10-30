@@ -98,6 +98,11 @@ final class AppSettings {
         didSet { defaults.set(resourceAlerts, forKey: Keys.resourceAlerts) }
     }
 
+    /// «Не спать» (SPEC-profiles §4.2).
+    var keepAwakeRules: KeepAwakeRules {
+        didSet { if let data = try? JSONEncoder().encode(keepAwakeRules) { defaults.set(data, forKey: Keys.keepAwakeRules) } }
+    }
+
     var resourceDiskBelowGB: Int {
         didSet { defaults.set(resourceDiskBelowGB, forKey: Keys.resourceDiskBelowGB) }
     }
@@ -174,6 +179,7 @@ final class AppSettings {
         limitAlertsToTelegram = defaults.bool(forKey: Keys.limitAlertsToTelegram)
         renewClaudeLogin = defaults.object(forKey: Keys.renewClaudeLogin) as? Bool ?? true
         resourceAlerts = defaults.object(forKey: Keys.resourceAlerts) as? Bool ?? true
+        keepAwakeRules = defaults.data(forKey: Keys.keepAwakeRules).flatMap { try? JSONDecoder().decode(KeepAwakeRules.self, from: $0) } ?? KeepAwakeRules()
         let diskBelow = defaults.integer(forKey: Keys.resourceDiskBelowGB)
         resourceDiskBelowGB = diskBelow > 0 ? diskBelow : 20
         panelTextSize = defaults.string(forKey: Keys.panelTextSize).flatMap(PanelTextSize.init(rawValue:)) ?? .normal
@@ -204,6 +210,7 @@ final class AppSettings {
         static let limitAlertsToTelegram = "limitAlertsToTelegram"
         static let renewClaudeLogin = "renewClaudeLogin"
         static let resourceAlerts = "resourceAlerts"
+        static let keepAwakeRules = "keepAwakeRules"
         static let resourceDiskBelowGB = "resourceDiskBelowGB"
         static let panelTextSize = "panelTextSize"
         static let panelWidth = "panelWidth"

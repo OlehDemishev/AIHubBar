@@ -295,6 +295,7 @@ private struct ModulesSettings: View {
                 case .limits: LimitSection()
                 case .upcoming: ReminderSection()
                 case .resources where modes.installedModules.contains(.resources): ResourceSection()
+                case .keepAwake where modes.installedModules.contains(.keepAwake): KeepAwakeSection()
                 default: EmptyView()
                 }
             }
@@ -325,6 +326,49 @@ private struct ResourceSection: View {
         } footer: {
             Footnote(text: String(localized: "Процессор выше 90 % дольше 5 минут, критическая нехватка памяти, мало места, заряд ниже 15 % без зарядки — по одному уведомлению, пока не наладится. В строку меню процессор и память добавляются во вкладке «Строка меню»."))
         }
+    }
+}
+
+private struct KeepAwakeSection: View {
+    @Environment(AppSettings.self) private var settings
+
+    var body: some View {
+        @Bindable var settings = settings
+        Section {
+            Toggle("Пока работает Claude (сессия или фоновая задача)", isOn: $settings.keepAwakeRules.whileClaudeWorks)
+            Toggle("Пока подключено питание", isOn: $settings.keepAwakeRules.whileOnPower)
+            Toggle("Пока подключён внешний монитор", isOn: $settings.keepAwakeRules.whileExternalDisplay)
+            LabeledContent("Пока открыты приложения") {
+                HStack {
+                    Text(settings.keepAwakeRules.whileApps.isEmpty ? String(localized: "нет") : settings.keepAwakeRules.whileApps.map(\.name).joined(separator: ", "))
+                        .foregroundStyle(.secondary)
+                        .lineLimit(1)
+                    Button("Выбрать…", action: chooseApps)
+                    if !settings.keepAwakeRules.whileApps.isEmpty {
+                        Button("Очистить") { settings.keepAwakeRules.whileApps = [] }
+                    }
+                }
+            }
+            Toggle("Не гасить и экран", isOn: $settings.keepAwakeRules.keepDisplayOn)
+        } header: {
+            Text("Правила «Не спать»")
+        } footer: {
+            Footnote(text: String(localized: "Любое сработавшее правило не даёт Mac уснуть; вручную — переключателем и таймерами в панели. Системные настройки не меняются: как только правил нет, Mac засыпает как обычно. На Маке без своего экрана любой монитор считается внешним."))
+        }
+    }
+
+    private func chooseApps() {
+        let panel = NSOpenPanel()
+        panel.allowedContentTypes = [.application]
+        panel.allowsMultipleSelection = true
+        panel.directoryURL = URL(fileURLWithPath: "/Applications")
+        NSApp.activate()
+        guard panel.runModal() == .OK else { return }
+        let picked = panel.urls.compactMap { url -> KeepAwakeRules.App? in
+            guard let bundle = Bundle(url: url), let id = bundle.bundleIdentifier else { return nil }
+            return KeepAwakeRules.App(bundleID: id, name: FileManager.default.displayName(atPath: url.path).replacingOccurrences(of: ".app", with: ""))
+        }
+        settings.keepAwakeRules.whileApps = Array(Set(settings.keepAwakeRules.whileApps + picked)).sorted { $0.name < $1.name }
     }
 }
 

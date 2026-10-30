@@ -123,6 +123,8 @@ struct MenuBarElement: Codable, Equatable, Hashable, Identifiable, Sendable {
         case waiting, running, background, queued, deadline, disk, mode
         /// From «Ресурсы Mac» (SPEC-profiles §4.1).
         case cpu, memory
+        /// ☕ while «Не спать» holds the Mac awake.
+        case keepAwake
 
         var title: String {
             switch self {
@@ -142,6 +144,7 @@ struct MenuBarElement: Codable, Equatable, Hashable, Identifiable, Sendable {
             case .mode: String(localized: "Текущий профиль")
             case .cpu: String(localized: "Процессор (модуль «Ресурсы Mac»)")
             case .memory: String(localized: "Память (модуль «Ресурсы Mac»)")
+            case .keepAwake: String(localized: "☕, когда Mac не засыпает (модуль «Не спать»)")
             }
         }
 
@@ -219,6 +222,7 @@ struct MenuBarData: Equatable, Hashable, Sendable {
     /// «Ресурсы Mac», when installed.
     var cpu: Double?
     var memory: Double?
+    var keepingAwake = false
     /// Countdowns are drawn for this minute.
     var now: Date = .now
 
@@ -227,7 +231,7 @@ struct MenuBarData: Equatable, Hashable, Sendable {
         modelWeeks: ["seven_day_fable": 12], sessionResetsAt: Date.now.addingTimeInterval(2 * 3600 + 14 * 60),
         forecastRunsOut: Date.now.addingTimeInterval(90 * 60), diskFreeBytes: 12_000_000_000,
         deadline: String(localized: "Ролик · 2 дн"), modeName: String(localized: "Видео"), modeIcon: "video",
-        cpu: 23, memory: 71
+        cpu: 23, memory: 71, keepingAwake: true
     )
 }
 
@@ -307,6 +311,8 @@ enum MenuBarComposer {
                 case .ring: groups.append([.symbol(symbol), .ring(value, level(value))])
                 case .bar: groups.append([.symbol(symbol), .bar(value, level(value))])
                 }
+            case .keepAwake:
+                if data.keepingAwake { groups.append([.symbol("cup.and.saucer.fill")]) }
             case .mode:
                 if element.showName, let name = data.modeName {
                     groups.append([.text(name, .secondary)])

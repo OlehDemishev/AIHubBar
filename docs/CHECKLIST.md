@@ -332,3 +332,14 @@ Panel snapshots: `defaults write com.demishev.claudepult DebugPanelSnapshot -boo
 | Install adds to the current profile; a profile can add, move and drop it; «Снять» removes it everywhere; built-in modules are not installed by hand | Auto (`OptionalModuleTests`) |
 | The block in the panel with real figures | Live (panel snapshot; the module was added to Oleh's profile for the check and the profile restored) |
 | Installing from Settings → «Модули», «Добавить модуль» in a profile, the menu bar elements, a real notification | Oleh |
+
+## Profiles stage 5: «Не спать» (SPEC-profiles §9.5, 2026-10-30)
+
+| Scenario | Checked |
+|---|---|
+| Rules in order: manual (until off or a timer that ends by itself), while Claude works, on power, external display, chosen apps; only «пока работает Claude» on by default; old settings decode | Auto (`KeepAwakeTests`) |
+| Without the module nothing is held, a manual hold included | Auto (`KeepAwakeControllerTests`) |
+| ☕ in the menu bar only while held | Auto |
+| The «Разработчик» template ticks the module in the assistant, others don't | Auto |
+| With the module and this Claude session working: `pmset -g assertions` shows «ClaudePult keep awake» (PreventUserIdleSystemSleep) within seconds of launch, the panel says «держу: работает Claude»; after the profile was restored — no assertion | Live (module added to Oleh's profile for the check, profile files restored) |
+| Timers, «Отпустить», «Не гасить и экран», the power / display / apps rules on a laptop | Oleh |

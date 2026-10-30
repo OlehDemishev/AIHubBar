@@ -13,6 +13,7 @@ struct ClaudePultApp: App {
     @State private var requests: AppRequests
     @State private var usage: UsageStore
     @State private var monitor: SystemMonitor
+    @State private var keepAwake: KeepAwakeController
     @State private var notifications = NotificationPermission()
     @State private var modes: ModeStore
     @State private var services: AIServiceStore
@@ -49,6 +50,8 @@ struct ClaudePultApp: App {
         _usage = State(initialValue: usage)
         let monitor = SystemMonitor(settings: settings)
         _monitor = State(initialValue: monitor)
+        let keepAwake = KeepAwakeController(settings: settings)
+        _keepAwake = State(initialValue: keepAwake)
         let runs = RunStore(settings: settings)
         _runs = State(initialValue: runs)
         _engine = State(initialValue: CommandEngine(settings: settings, runs: runs))
@@ -58,6 +61,10 @@ struct ClaudePultApp: App {
         _hooks = State(initialValue: hooks)
         usage.isActive = { [modes] in modes.installedModules.contains(.limits) }
         monitor.isActive = { [modes] in modes.installedModules.contains(.resources) }
+        keepAwake.isActive = { [modes] in modes.installedModules.contains(.keepAwake) }
+        keepAwake.claudeWorking = { [sessions, runs] in
+            !runs.running.isEmpty || sessions.items.contains { $0.state == .running }
+        }
         modes.didApply = {
             Task { await store.refresh() }
             Task { await folders.refresh() }
@@ -78,6 +85,7 @@ struct ClaudePultApp: App {
             requests.listen(commands: commands)
             usage.start()
             monitor.start()
+            keepAwake.start()
             Task { await services.scan() }
             folders.start()
             // A first start without `_daily-report`: the assistant sets up the first mode (SPEC-modes §5).
@@ -129,6 +137,7 @@ struct ClaudePultApp: App {
         data.deadline = calendar.nearest().map { CalendarText.menuBar($0) }
         data.cpu = monitor.snapshot?.cpu
         data.memory = monitor.snapshot?.memoryPercent
+        data.keepingAwake = keepAwake.reason != nil
         data.modeName = modes.current?.name
         data.modeIcon = modes.current?.icon
         return data
@@ -145,6 +154,7 @@ struct ClaudePultApp: App {
                 .environment(commands)
                 .environment(usage)
                 .environment(monitor)
+                .environment(keepAwake)
                 .environment(settings)
                 .environment(notifications)
                 .environment(modes)
@@ -220,6 +230,7 @@ struct ClaudePultApp: App {
                 .environment(hooks)
                 .environment(usage)
                 .environment(monitor)
+                .environment(keepAwake)
                 .environment(notifications)
                 .environment(modes)
                 .environment(services)
