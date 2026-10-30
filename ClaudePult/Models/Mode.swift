@@ -133,8 +133,15 @@ enum ProjectSource: Codable, Equatable, Sendable {
         }
     }
 
-    /// Sources the panel can list today.
-    var isShownInPanel: Bool { isReport || isFolders }
+    var isGit: Bool {
+        switch self {
+        case .gitReport, .gitBuiltin: true
+        default: false
+        }
+    }
+
+    /// Sources the panel can list.
+    var isShownInPanel: Bool { self != .none }
 
     /// The projects folder, `~`-form.
     var folder: String? {

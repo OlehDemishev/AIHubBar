@@ -51,6 +51,14 @@ struct ModesSettings: View {
             .listStyle(.sidebar)
 
             HStack(spacing: 4) {
+                Menu {
+                    ForEach(Self.templates) { template in
+                        Button(template.title) { add(template) }
+                    }
+                } label: { Image(systemName: "plus") }
+                .menuStyle(.borderlessButton)
+                .fixedSize()
+                .help("Добавить режим из шаблона")
                 Button { selection.map { _ = modes.duplicate($0) } } label: { Image(systemName: "plus.square.on.square") }
                     .help("Дублировать")
                 Button { selection.map { modes.move($0, by: -1) } } label: { Image(systemName: "arrow.up") }
@@ -74,6 +82,23 @@ struct ModesSettings: View {
             .buttonStyle(.borderless)
             .padding(8)
         }
+    }
+
+    private static let templates = ModeTemplate.loadAll()
+
+    /// Asks for the folder the template's projects are in (it may be created in the panel), then adds the mode.
+    private func add(_ template: ModeTemplate) {
+        let panel = NSOpenPanel()
+        panel.canChooseDirectories = true
+        panel.canChooseFiles = false
+        panel.canCreateDirectories = true
+        panel.prompt = "Выбрать"
+        panel.message = "«\(template.title)»: \(template.folderHint)"
+        let suggested = PathText.expand(template.mode.source.folder ?? "~/Documents")
+        panel.directoryURL = URL(fileURLWithPath: FileManager.default.fileExists(atPath: suggested) ? suggested : PathText.expand("~/Documents"))
+        NSApp.activate()
+        guard panel.runModal() == .OK, let url = panel.url else { return }
+        selection = modes.add(template, folder: url.path).id
     }
 
     private func exportMode(_ id: String) {
@@ -126,9 +151,6 @@ private struct ModeEditor: View {
                     EmptyView()
                 }
                 Toggle("Показывать проекты в панели", isOn: $mode.showProjects)
-                if case .gitBuiltin = mode.source {
-                    Text("Встроенный сканер git появится вместе с шаблонами (этап 6).").font(.caption).foregroundStyle(.secondary)
-                }
             }
 
             if mode.source.isFolders {
@@ -318,11 +340,12 @@ enum SettingsFiles {
 
 /// The project sources a mode can be switched between in Settings.
 private enum SourceKind: CaseIterable, Hashable {
-    case report, folders, inbox, none
+    case git, report, folders, inbox, none
 
     init(_ source: ProjectSource) {
         switch source {
-        case .gitReport, .gitBuiltin: self = .report
+        case .gitBuiltin: self = .git
+        case .gitReport: self = .report
         case .folders: self = .folders
         case .inbox: self = .inbox
         case .none: self = .none
@@ -331,7 +354,8 @@ private enum SourceKind: CaseIterable, Hashable {
 
     var title: String {
         switch self {
-        case .report: "git-репозитории через report.py"
+        case .git: "git-репозитории"
+        case .report: "git-репозитории через report.py (_daily-report)"
         case .folders: "папки (каждая подпапка — проект)"
         case .inbox: "одна папка"
         case .none: "без проектов"
@@ -342,6 +366,7 @@ private enum SourceKind: CaseIterable, Hashable {
     func source(keeping old: ProjectSource) -> ProjectSource {
         let folder = old.folder ?? "~/Documents"
         switch self {
+        case .git: return .gitBuiltin(projects: folder)
         case .report:
             if case .gitReport = old { return old }
             return .gitReport(projects: folder, dailyReport: folder + "/_daily-report")

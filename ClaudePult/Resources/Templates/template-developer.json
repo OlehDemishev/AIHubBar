@@ -1,0 +1,33 @@
+{
+  "format": "claudepult-template",
+  "version": 1,
+  "order": 0,
+  "id": "developer",
+  "title": "Разработчик (GitHub)",
+  "description": "Git-репозитории: ветки, незакоммиченное, PR и CI, STATUS.md; «Следующий шаг», «Своя задача», «Завершить» по правилам проекта (CLAUDE.md / AGENTS.md).",
+  "folderHint": "Папка, в которой лежат ваши репозитории",
+  "mode": {
+    "name": "Разработчик (GitHub)",
+    "icon": "chevron.left.forwardslash.chevron.right",
+    "template": "developer",
+    "source": {
+      "gitBuiltin": {
+        "projects": "~/Projects"
+      }
+    },
+    "card": "statusMD",
+    "stages": [],
+    "metrics": [
+      "branch",
+      "dirty",
+      "pullRequests",
+      "lastActivity"
+    ],
+    "permissions": "code",
+    "calendar": "off",
+    "showProjects": true,
+    "commonCommands": "none",
+    "showCommonCommands": false,
+    "commands": []
+  }
+}

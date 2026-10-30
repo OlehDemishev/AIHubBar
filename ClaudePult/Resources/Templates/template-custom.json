@@ -1,0 +1,36 @@
+{
+  "format": "claudepult-template",
+  "version": 1,
+  "order": 5,
+  "id": "custom",
+  "title": "Свой",
+  "description": "Пустой набор: «Своя задача» и этапы «в работе → готово». Остальное — в Настройках → «Режимы».",
+  "folderHint": "Папка, где каждая подпапка — проект",
+  "mode": {
+    "name": "Свой режим",
+    "icon": "sparkle",
+    "template": "custom",
+    "source": {
+      "folders": {
+        "_0": "~/Documents/Проекты"
+      }
+    },
+    "card": "projectMD",
+    "stages": [
+      "в работе",
+      "готово"
+    ],
+    "metrics": [
+      "words",
+      "deadline",
+      "lastActivity"
+    ],
+    "permissions": "filesOnly",
+    "calendar": "dates",
+    "launchMode": "background",
+    "showProjects": true,
+    "commonCommands": "none",
+    "showCommonCommands": false,
+    "commands": []
+  }
+}

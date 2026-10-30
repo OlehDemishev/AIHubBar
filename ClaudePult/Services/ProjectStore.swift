@@ -49,7 +49,19 @@ final class ProjectStore {
         isRefreshing = true
         defer { isRefreshing = false }
         if fetch { lastFetch = .now }
-        // Only report.py modes have git projects; folder projects live in `FolderProjectStore`.
+        // Folder projects live in `FolderProjectStore`.
+        if case .gitBuiltin = settings.activeSource {
+            let started = ContinuousClock.now
+            if let scanned = await GitScanner.report(projectsDirectory: settings.projectsDirectory, fetch: fetch) {
+                report = scanned
+                lastUpdated = .now
+                lastError = FileManager.default.fileExists(atPath: settings.projectsDirectory) ? nil : "Папки нет: \(settings.projectsDirectory)"
+                AppLog.info("Git scan\(fetch ? " (fetch)" : ""): \(scanned.projects.count) projects in \((ContinuousClock.now - started).formatted(.units(allowed: [.seconds], fractionalPart: .show(length: 1))))")
+            } else {
+                lastError = "Не удалось прочитать репозитории"
+            }
+            return
+        }
         guard settings.activeSource.isReport else {
             report = nil
             lastError = nil

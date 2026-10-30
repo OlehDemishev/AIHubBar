@@ -91,11 +91,12 @@ struct Session: Decodable, Identifiable, Equatable, Sendable {
         // The hook keeps 200 characters with whitespace collapsed; compare the same way.
         func normalized(_ text: String) -> String { text.split(whereSeparator: \.isWhitespace).joined(separator: " ") }
         let text = normalized(prompt)
-        for command in [ClaudeCommand.nextStep, .finishSession] where normalized(command.prompt).hasPrefix(text.prefix(60)) {
-            return command.title
+        for command in [ClaudeCommand.nextStep, .finishSession] {
+            for style in [PromptStyle.oleh, .generic] where normalized(command.prompt(style)).hasPrefix(text.prefix(60)) {
+                return command.title
+            }
         }
-        let wrapper = "Задача от Олега: "
-        guard text.hasPrefix(wrapper) else { return text }
+        guard let wrapper = ["Задача от Олега: ", "Задача: "].first(where: text.hasPrefix) else { return text }
         var task = String(text.dropFirst(wrapper.count))
         if let rules = task.range(of: ". Работай по правилам") { task = String(task[..<rules.lowerBound]) }
         return task
