@@ -5,14 +5,14 @@
 **Updated:** 2026-10-30
 
 **Now:**
-- menu bar builder in PR (branch `feat/menubar-builder`), waiting for Oleh's merge
+- menu bar builder merged (PR #31); next: small fix of the «Войдите в Claude Code» message on an expired token, then SPEC-modes §9 stage 3 (AI services)
 
 **Next:**
 - SPEC-modes §9: 3 AI services, 4 folder projects + commands, 5 calendar, 6 templates, 7 setup assistant, 8 for everyone, 9 languages (§13: en, es, pt-BR, fr, de, ja, id, ko, it, ar with RTL, pl, uk)
 - Fix whatever Oleh finds in docs/CHECKLIST.md
 
 **Needs Oleh:**
-- merge the menu bar builder PR; try Settings → «Строка меню» (presets, order, options, preview)
+- try Settings → «Строка меню» (presets, order, options, preview) and the ticking reset countdown
 - try Settings → Режимы (duplicate the mode → switcher appears in the panel) and a double-click on a .claudepult file
 - read and edit docs/TEMPLATES.md (template texts) before stage 6
 - before stage 3: install Codex CLI and Gemini CLI and create API keys (OpenAI, Google, xAI, DeepSeek, Mistral) for live checks — Oleh offered to
