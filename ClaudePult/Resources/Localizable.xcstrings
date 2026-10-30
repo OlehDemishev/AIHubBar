@@ -4219,7 +4219,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Placeholders: {проект} {файл} {формат} {площадка} {хронометраж} {текст} {язык} (project, file, format, platform, duration, text, language); in the file name also <время> (time) and <файл> (file). The result is always a new file in the project folder. “Custom task” is always there."
+            "value": "Placeholders: {project} {file} {format} {platform} {duration} {text} {language} (the Russian names work too); in the file name also <time> and <file>. The result is always a new file in the project folder. “Custom task” is always there."
           }
         }
       }

@@ -9,16 +9,21 @@ struct ModeTemplate: Decodable, Identifiable, Sendable {
     /// What the folder the person picks should hold.
     var folderHint: String
     var order: Int
+    /// `ru` (the original, docs/TEMPLATES.md) or a translation: `template-<id>.<language>.json`.
+    var language: String?
     var mode: Mode
 
-    static func loadAll(bundle: Bundle = .main) -> [ModeTemplate] {
+    /// One template per id, in the content language when there is a translation, else the Russian original.
+    static func loadAll(bundle: Bundle = .main, language: ContentLanguage = .current) -> [ModeTemplate] {
         let urls = (bundle.urls(forResourcesWithExtension: "json", subdirectory: nil) ?? [])
             + (bundle.urls(forResourcesWithExtension: "json", subdirectory: "Templates") ?? [])
-        var seen = Set<String>()
-        return urls.filter { $0.lastPathComponent.hasPrefix("template-") }
+        let all = urls.filter { $0.lastPathComponent.hasPrefix("template-") }
             .compactMap { (try? Data(contentsOf: $0)).flatMap { try? JSONDecoder().decode(ModeTemplate.self, from: $0) } }
-            .filter { seen.insert($0.id).inserted }
-            .sorted { $0.order < $1.order }
+        let byID = Dictionary(grouping: all, by: \.id)
+        return byID.values.compactMap { versions in
+            versions.first { $0.language == language.rawValue } ?? versions.first { ($0.language ?? "ru") == "ru" } ?? versions.first
+        }
+        .sorted { $0.order < $1.order }
     }
 
     /// The template's mode for this person: a fresh id and the folder they chose.

@@ -21,7 +21,15 @@ struct FolderProject: Identifiable, Equatable, Sendable {
 /// `проект.md`: lines `Ключ: значение` anywhere in the file (also `- **Этап:** …`). Only the known keys are read;
 /// everything else in the file is kept as is when a value is written back.
 struct ProjectCardFile: Equatable, Sendable {
-    static let fileName = "проект.md"
+    /// Read under either name; a new card gets the content language's one.
+    static let fileNames = ["проект.md", "project.md"]
+    static var fileName: String { ContentLanguage.current == .en ? "project.md" : "проект.md" }
+
+    /// The project's card: the existing one under any name, else where a new one goes.
+    static func path(in folder: String) -> String {
+        let existing = fileNames.map { folder + "/" + $0 }.first(where: FileManager.default.fileExists(atPath:))
+        return existing ?? folder + "/" + fileName
+    }
 
     enum Key: String, CaseIterable, Sendable {
         case stage, deadline, publish, format, mainFile, platform
@@ -31,10 +39,23 @@ struct ProjectCardFile: Equatable, Sendable {
             switch self {
             case .stage: ["Этап", "stage"]
             case .deadline: ["Дедлайн", "срок", "deadline"]
-            case .publish: ["Публикация", "дата публикации", "publish"]
+            case .publish: ["Публикация", "дата публикации", "publish", "publication"]
             case .format: ["Формат", "format"]
             case .mainFile: ["Главный файл", "main file"]
             case .platform: ["Площадка", "platform"]
+            }
+        }
+
+        /// The label written into a file in that language.
+        func label(_ language: ContentLanguage) -> String {
+            guard language == .en else { return labels[0] }
+            switch self {
+            case .stage: return "Stage"
+            case .deadline: return "Deadline"
+            case .publish: return "Publish"
+            case .format: return "Format"
+            case .mainFile: return "Main file"
+            case .platform: return "Platform"
             }
         }
     }
@@ -68,7 +89,12 @@ struct ProjectCardFile: Equatable, Sendable {
     /// Writes one value back: replaces the first line with that key, or adds a line after the title.
     static func setting(_ key: Key, to value: String, in text: String) -> String {
         var lines = text.components(separatedBy: "\n")
-        let newLine = "\(key.labels[0]): \(value)"
+        // A file keeps its language: English labels go into an English card, Russian ones otherwise.
+        let fields = lines.compactMap { line in field(line).flatMap { _ in line } }
+        let english = fields.isEmpty
+            ? ContentLanguage.current == .en
+            : fields.allSatisfy { ($0.components(separatedBy: ":").first ?? "").range(of: "[А-Яа-яЁё]", options: .regularExpression) == nil }
+        let newLine = "\(key.label(english ? .en : .ru)): \(value)"
         if let index = lines.firstIndex(where: { field($0)?.0 == key }) {
             // Keep a list marker the person used.
             let marker = ["- ", "* ", "+ "].first { lines[index].trimmingCharacters(in: .whitespaces).hasPrefix($0) } ?? ""
@@ -92,10 +118,11 @@ struct ProjectCardFile: Equatable, Sendable {
     }
 
     /// A new card: title, stage and the empty fields to fill in.
-    static func template(name: String, stage: String?) -> String {
+    static func template(name: String, stage: String?, language: ContentLanguage = .current) -> String {
         var lines = ["# \(name)", ""]
-        if let stage { lines.append("Этап: \(stage)") }
-        lines += ["Дедлайн: ", "Публикация: ", "Формат: ", "Главный файл: ", "Площадка: ", "", "## Заметки", ""]
+        if let stage { lines.append("\(Key.stage.label(language)): \(stage)") }
+        lines += [Key.deadline, .publish, .format, .mainFile, .platform].map { "\($0.label(language)): " }
+        lines += ["", language == .en ? "## Notes" : "## Заметки", ""]
         return lines.joined(separator: "\n")
     }
 
@@ -186,11 +213,11 @@ enum FolderScanner {
     }
 
     static func project(_ folder: URL) -> FolderProject {
-        let cardURL = folder.appending(path: ProjectCardFile.fileName)
+        let cardURL = URL(fileURLWithPath: ProjectCardFile.path(in: folder.path))
         let cardText = try? String(contentsOf: cardURL, encoding: .utf8)
         let card = cardText.map(ProjectCardFile.parse) ?? ProjectCardFile()
         let files = self.files(in: folder)
-        let texts = files.filter { textExtensions.contains($0.url.pathExtension.lowercased()) && $0.url.lastPathComponent != ProjectCardFile.fileName }
+        let texts = files.filter { textExtensions.contains($0.url.pathExtension.lowercased()) && !ProjectCardFile.fileNames.contains($0.url.lastPathComponent) }
         let main: URL? = card.values[.mainFile]
             .map { folder.appending(path: $0) }
             .flatMap { FileManager.default.fileExists(atPath: $0.path) ? $0 : nil }

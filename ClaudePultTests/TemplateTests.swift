@@ -80,7 +80,7 @@ struct GitScannerTests {
 @MainActor
 struct ModeTemplateTests {
     @Test func builtInTemplatesLoad() throws {
-        let templates = ModeTemplate.loadAll()
+        let templates = ModeTemplate.loadAll(language: .ru)
         #expect(templates.map(\.id) == ["developer", "video", "texts", "research", "social", "custom"])
         let video = try #require(templates.first { $0.id == "video" })
         #expect(video.mode.stages.first == "идея")
@@ -105,7 +105,7 @@ struct ModeTemplateTests {
         let dir = FileManager.default.temporaryDirectory.appending(path: name)
         defer { try? FileManager.default.removeItem(at: dir) }
         let store = ModeStore(settings: settings, directory: dir)
-        let template = try #require(ModeTemplate.loadAll().first { $0.id == "video" })
+        let template = try #require(ModeTemplate.loadAll(language: .ru).first { $0.id == "video" })
         let mode = store.add(template, folder: NSHomeDirectory() + "/Videos")
         #expect(store.currentID == mode.id)
         #expect(store.enabledIDs.contains(mode.id))
@@ -114,7 +114,7 @@ struct ModeTemplateTests {
         #expect(settings.promptStyle == .generic)
         #expect(store.add(template, folder: "/tmp").name == "Видео 2")
 
-        let developer = try #require(ModeTemplate.loadAll().first { $0.id == "developer" })
+        let developer = try #require(ModeTemplate.loadAll(language: .ru).first { $0.id == "developer" })
         store.add(developer, folder: NSHomeDirectory() + "/Code")
         #expect(settings.activeSource == .gitBuiltin(projects: "~/Code"))
         #expect(settings.shows(.projects))

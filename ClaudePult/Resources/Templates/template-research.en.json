@@ -1,0 +1,80 @@
+{
+  "format": "claudepult-template",
+  "version": 1,
+  "order": 3,
+  "language": "en",
+  "id": "research",
+  "title": "Research and study",
+  "description": "A folder per topic with sources (PDFs, links, notes); summaries, quotes, a summary table, gaps, a plan; Claude may search the web.",
+  "folderHint": "A folder where every subfolder is a topic",
+  "mode": {
+    "name": "Research",
+    "icon": "books.vertical",
+    "template": "research",
+    "source": {
+      "folders": {
+        "_0": "~/Documents/Research"
+      }
+    },
+    "card": "projectMD",
+    "stages": [
+      "topic",
+      "collecting sources",
+      "notes",
+      "conclusions",
+      "done"
+    ],
+    "metrics": [
+      "sources",
+      "words",
+      "deadline"
+    ],
+    "permissions": "filesAndWeb",
+    "calendar": "dates",
+    "launchMode": "background",
+    "showProjects": true,
+    "commonCommands": "none",
+    "showCommonCommands": false,
+    "commands": [
+      {
+        "id": "research-summary",
+        "title": "Source summary",
+        "output": "summary-<file>.md",
+        "task": "Summarise the chosen source: what it is about in 2–3 sentences; the main points as a list; key numbers and definitions; what in it is disputable or unproven; how it relates to the project's topic. Only what is in the source — no additions from general knowledge (mark any context you add as «outside the source»).",
+        "input": "mainFile"
+      },
+      {
+        "id": "research-quotes",
+        "title": "Quotes with references",
+        "output": "quotes.md",
+        "task": "Pick from the project's sources the quotes most useful for the topic — verbatim, with the file and page/section if available. Group them by subtopic. Do not paraphrase anything in this file.",
+        "input": "project",
+        "service": "claude-code"
+      },
+      {
+        "id": "research-table",
+        "title": "Summary table",
+        "output": "overview.md",
+        "task": "Put the project's sources into a table: source, year/author (if known), main point, methods or data, why it is useful for the topic, limitations. Under the table — where the sources agree and where they contradict each other.",
+        "input": "project",
+        "service": "claude-code"
+      },
+      {
+        "id": "research-gaps",
+        "title": "Not yet covered",
+        "output": "gaps.md",
+        "task": "From the project's materials, find the questions of the topic they do not cover or cover poorly. For each gap — why it matters and what source or data would close it. Do not invent specific sources — describe what to look for.",
+        "input": "project",
+        "service": "claude-code"
+      },
+      {
+        "id": "research-plan",
+        "title": "Work plan",
+        "output": "plan.md",
+        "task": "Draft a plan of a text (article, talk, term paper) from the project's materials: sections, what goes into each, which sources to rely on, an approximate length. Mark where material is still missing.",
+        "input": "project",
+        "service": "claude-code"
+      }
+    ]
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "format": "claudepult-template",
+  "version": 1,
+  "order": 0,
+  "language": "en",
+  "id": "developer",
+  "title": "Developer (GitHub)",
+  "description": "Git repositories: branches, uncommitted changes, PRs and CI, STATUS.md; «Next step», «Custom task», «Finish» following the project's rules (CLAUDE.md / AGENTS.md).",
+  "folderHint": "The folder your repositories are in",
+  "mode": {
+    "name": "Developer (GitHub)",
+    "icon": "chevron.left.forwardslash.chevron.right",
+    "template": "developer",
+    "source": {
+      "gitBuiltin": {
+        "projects": "~/Projects"
+      }
+    },
+    "card": "statusMD",
+    "stages": [],
+    "metrics": [
+      "branch",
+      "dirty",
+      "pullRequests",
+      "lastActivity"
+    ],
+    "permissions": "code",
+    "calendar": "off",
+    "showProjects": true,
+    "commonCommands": "none",
+    "showCommonCommands": false,
+    "commands": []
+  }
+}

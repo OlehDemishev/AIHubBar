@@ -110,10 +110,10 @@ final class CalendarStore {
     /// A new row in a mode's own `контент-план.md` (created if missing).
     func addPlanRow(mode: Mode, date: Date, time: String, platform: String, topic: String) {
         guard let root = mode.source.folder.map(PathText.expand) else { return }
-        let path = root + "/" + ContentPlan.fileName
+        let path = ContentPlan.path(in: root)
         let text = (try? String(contentsOfFile: path, encoding: .utf8)) ?? ""
         let values: [ContentPlan.Column: String] = [
-            .date: CalendarScanner.text(date, withTime: false), .time: time, .platform: platform, .topic: topic, .status: "идея",
+            .date: CalendarScanner.text(date, withTime: false), .time: time, .platform: platform, .topic: topic, .status: ContentLanguage.current == .en ? "idea" : "идея",
         ]
         guard write(ContentPlan.appending(values, to: text), to: path) else { return }
         Task { await refresh() }
@@ -121,7 +121,7 @@ final class CalendarStore {
 
     /// Sets a project's deadline or publication date in its card.
     func setProjectDate(projectPath: String, key: ProjectCardFile.Key, date: Date, withTime: Bool) {
-        let path = projectPath + "/" + ProjectCardFile.fileName
+        let path = ProjectCardFile.path(in: projectPath)
         let name = (projectPath as NSString).lastPathComponent
         let text = (try? String(contentsOfFile: path, encoding: .utf8)) ?? ProjectCardFile.template(name: name, stage: nil)
         guard write(ProjectCardFile.setting(key, to: CalendarScanner.text(date, withTime: withTime), in: text), to: path) else { return }

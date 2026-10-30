@@ -1,0 +1,84 @@
+{
+  "format": "claudepult-template",
+  "version": 1,
+  "order": 2,
+  "language": "en",
+  "id": "texts",
+  "title": "Writing (articles, blog, newsletter)",
+  "description": "A folder per piece; stages from idea to publication; words and reading time; editing, proofreading, another tone, shortening, SEO, splitting into posts.",
+  "folderHint": "A folder where every subfolder is an article or an issue",
+  "mode": {
+    "name": "Writing",
+    "icon": "doc.text",
+    "template": "texts",
+    "source": {
+      "folders": {
+        "_0": "~/Documents/Writing"
+      }
+    },
+    "card": "projectMD",
+    "stages": [
+      "idea",
+      "draft",
+      "editing",
+      "published"
+    ],
+    "metrics": [
+      "words",
+      "readingTime",
+      "publishDate"
+    ],
+    "permissions": "filesOnly",
+    "calendar": "dates",
+    "launchMode": "background",
+    "showProjects": true,
+    "commonCommands": "none",
+    "showCommonCommands": false,
+    "commands": [
+      {
+        "id": "texts-edit",
+        "title": "Edit",
+        "output": "edit.md",
+        "task": "Edit the text: remove filler, officialese, repetition and clichés, simplify long sentences, keep the meaning, the facts and the author's voice. First the whole edited text. Then a list of the 5–10 most important edits as «before → after → why».",
+        "input": "mainFile"
+      },
+      {
+        "id": "texts-proof",
+        "title": "Proofread",
+        "output": "proofread.md",
+        "task": "Find spelling, punctuation and grammar mistakes, typos and agreement errors. Do not change the style or wording. Give the corrected text and after it a list of the corrections.",
+        "input": "mainFile"
+      },
+      {
+        "id": "texts-tone",
+        "title": "Another tone",
+        "output": "tone-{text}.md",
+        "task": "Rewrite the text in this tone: {text} (for example: friendlier, stricter, with humour, for experts, for beginners). Same meaning, facts and structure.",
+        "input": "mainFile",
+        "asks": "Tone"
+      },
+      {
+        "id": "texts-length",
+        "title": "Shorten / expand",
+        "output": "version-{text}.md",
+        "task": "Make a version of the text of about {text} words. When shortening, keep the essentials and the strongest examples. When expanding, add explanations and examples on the topic, not filler, and no new facts without a «check» mark.",
+        "input": "mainFile",
+        "asks": "How many words"
+      },
+      {
+        "id": "texts-seo",
+        "title": "SEO",
+        "output": "seo.md",
+        "task": "Suggest: a search title (up to 60 characters), a meta description (up to 155 characters), 5–8 key phrases the text really answers, and 3 ideas for missing H2 subheadings. Do not change the text itself.",
+        "input": "mainFile"
+      },
+      {
+        "id": "texts-posts",
+        "title": "Split into posts",
+        "output": "posts.md",
+        "task": "Turn the text into a series of posts for {platform}: 3–5 posts, each standing on its own with its own idea from the text, a hooking first line and a call to action at the end. Respect the platform's format (length, hashtags, emoji — in moderation). Number them and say in which order to publish.",
+        "input": "mainFile"
+      }
+    ]
+  }
+}

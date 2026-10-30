@@ -2,6 +2,14 @@
 
 Decisions made where the spec is silent or does not match reality. Newest at the top.
 
+## 2026-10-30 — Languages: English content (SPEC-modes §9.9)
+
+**Content language = interface language** (`ContentLanguage.current`, Russian when the interface is not English). It decides what ClaudePult writes and sends: template texts, the wrappers around tasks for agents and APIs, the generic developer prompts, new cards and content plans, the «идея»/«idea» status of a new plan row. Oleh's own developer prompts (his mode) stay Russian and unchanged.
+
+**Templates:** a translation is `template-<id>.<language>.json` next to the Russian original; the loader takes the interface language's version, else the original. Translated templates keep the same ids and commands (checked by a test). Placeholders have English names (`{project}`, `{file}`, `{format}`, `{platform}`, `{duration}`, `{language}`, `{text}`, `<time>`, `<file>`); the Russian ones keep working, so modes created in one language still run in the other.
+
+**Files:** `проект.md` / `project.md` and `контент-план.md` / `content-plan.md` are both read (the first that exists wins); a new one gets the interface language's name. Field names were already read in both languages; when ClaudePult writes a value it uses the language the card is already written in (all labels Latin → English), so a Russian card stays Russian under an English interface and the other way round.
+
 ## 2026-10-30 — Languages: English interface (SPEC-modes §9.9)
 
 **Russian stays the source language** (`developmentLanguage: ru`, String Catalog with `sourceLanguage: ru`): the code keeps its Russian strings, translations live in `Localizable.xcstrings`. SwiftUI localizes literals in `Text`, `Button`, `Label`, `Toggle`, `Picker`, `Section`, `.help` … by itself; every other user-visible string (model titles, errors, notifications, Telegram texts, help items) is wrapped in `String(localized:)` — 539 places, done by a script with exclusions and then checked by building.

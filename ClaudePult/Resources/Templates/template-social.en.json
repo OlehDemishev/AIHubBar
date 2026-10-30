@@ -1,0 +1,86 @@
+{
+  "format": "claudepult-template",
+  "version": 1,
+  "order": 4,
+  "language": "en",
+  "id": "social",
+  "title": "Social media and marketing",
+  "description": "A project = a campaign or a platform; a content plan in the calendar; posts per platform, ads, A/B headlines, replies to comments, a plan for the week.",
+  "folderHint": "A folder where every subfolder is a campaign; content-plan.md can live here too",
+  "mode": {
+    "name": "Social media",
+    "icon": "megaphone",
+    "template": "social",
+    "source": {
+      "folders": {
+        "_0": "~/Documents/Social"
+      }
+    },
+    "card": "projectMD",
+    "stages": [
+      "idea",
+      "copy",
+      "design",
+      "scheduled",
+      "published"
+    ],
+    "metrics": [
+      "words",
+      "publishDate"
+    ],
+    "permissions": "filesOnly",
+    "calendar": "contentPlan",
+    "launchMode": "background",
+    "showProjects": true,
+    "commonCommands": "none",
+    "showCommonCommands": false,
+    "commands": [
+      {
+        "id": "social-posts",
+        "title": "Posts per platform",
+        "output": "posts-{platform}.md",
+        "task": "From the source material, write a post for each platform: {platform}. Respect their format: length, style, hashtags, emoji, links, call to action. Each post stands on its own, not a copy of the others. For visual platforms — a short idea for the picture or video.",
+        "input": "mainFile"
+      },
+      {
+        "id": "social-ads",
+        "title": "Ad variants",
+        "output": "ads.md",
+        "task": "Suggest 5 ad texts for {platform}: headline, main text, call to action. Different approaches: the customer's pain, the benefit, a review/proof, urgency without pressure, a comparison. No claims that cannot be backed up. Mark which pairs are worth comparing in an A/B test.",
+        "input": "mainFile"
+      },
+      {
+        "id": "social-ab",
+        "title": "A/B headlines",
+        "output": "headlines-ab.md",
+        "task": "Suggest 8 pairs of headlines for an A/B test: each pair changes exactly one thing (length, a number, question/statement, emotion, specificity). For each pair — what exactly is being tested.",
+        "input": "mainFile"
+      },
+      {
+        "id": "social-replies",
+        "title": "Replies to comments",
+        "output": "replies.md",
+        "task": "From the material and the audience's typical questions, prepare reply templates for 10 frequent comments: a price question, doubt, a complaint, thanks, a «how» question, trolling, a discount request and so on. Tone: {text}. Short, human replies, no template «Thank you for your feedback!».",
+        "input": "mainFile",
+        "asks": "Tone"
+      },
+      {
+        "id": "social-week",
+        "title": "Content plan for the week",
+        "output": "content-plan-week.md",
+        "task": "Draft a content plan for the week starting {text}: 1–2 posts a day for {platform}. Alternate formats (useful, engaging, selling, behind the scenes). Give a Markdown table in the content plan format — | Date | Time | Platform | Topic | Status | File | — with the status «idea», so the rows can be moved to content-plan.md.",
+        "input": "project",
+        "asks": "Start date",
+        "service": "claude-code"
+      },
+      {
+        "id": "social-prepare",
+        "title": "Prepare posts from the plan",
+        "output": "posts-from-plan.md",
+        "task": "For the content plan entries (content-plan.md) of the next 7 days with the status «idea», write the post texts — each under its own heading with the date and topic. Do not change the content plan itself.",
+        "input": "project",
+        "service": "claude-code"
+      }
+    ]
+  }
+}
