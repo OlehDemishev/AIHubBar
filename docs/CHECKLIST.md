@@ -206,3 +206,12 @@ Panel snapshots: `defaults write com.demishev.claudepult DebugPanelSnapshot -boo
 | `project.md` / `content-plan.md` read like the Russian names; a card keeps its language when a value is written; new cards and plans in the interface language | Auto |
 | Session titles recognise English prompts | Auto |
 | Assistant preview of «Video» fully in English | Live (`--assistant-preview … -AppleLanguages '(en)'`) |
+
+## Languages: Spanish (SPEC-modes §9.9)
+
+| Scenario | Checked |
+|---|---|
+| Every language in the table is complete: all card fields and plan columns, prompts with their placeholders, cards and plans round-trip, session titles | Auto (one test per language) |
+| Templates exist in every language with the same ids | Auto |
+| 707 interface strings in Spanish, format specifiers match (strings rephrased where «% d» would read as a specifier) | Script check |
+| Spanish output: git scanner, assistant preview of «Redes sociales» | Live (`-AppleLanguages '(es)'`) |

@@ -2,6 +2,12 @@
 
 Decisions made where the spec is silent or does not match reality. Newest at the top.
 
+## 2026-10-30 — Languages: one table per language; Spanish (SPEC-modes §9.9)
+
+**A language is data.** Everything ClaudePult writes or sends in a language lives in `ContentStrings` (one value per `ContentLanguage`): card and plan file names, card field names, plan column names, the «idea» status, the agent and API wrappers, the generic developer prompts, and how a custom task starts and ends (for session titles). Reading accepts every language's names, so files from any language keep working; writing a value keeps the card's own language (the language whose field names it already uses). A test runs over every language and checks it is complete, so the next languages only add a table entry, template files and catalog translations.
+
+**Spanish:** `proyecto.md` (Etapa, Fecha límite, Publicación, Formato, Archivo principal, Plataforma), `plan-de-contenido.md` (Fecha, Hora, Plataforma, Tema, Estado, Archivo), Spanish templates and prompts; placeholders stay the English ones (`{project}` …), the Russian ones keep working. Four Spanish strings were rephrased because «% de…» would read as the `% d` format specifier.
+
 ## 2026-10-30 — Languages: English content (SPEC-modes §9.9)
 
 **Content language = interface language** (`ContentLanguage.current`, Russian when the interface is not English). It decides what ClaudePult writes and sends: template texts, the wrappers around tasks for agents and APIs, the generic developer prompts, new cards and content plans, the «идея»/«idea» status of a new plan row. Oleh's own developer prompts (his mode) stay Russian and unchanged.

@@ -1,0 +1,37 @@
+{
+  "format": "claudepult-template",
+  "version": 1,
+  "order": 5,
+  "language": "es",
+  "id": "custom",
+  "title": "Propio",
+  "description": "Un conjunto vacío: «Tarea propia» y las etapas «en curso → hecho». Todo lo demás, en Ajustes → «Modos».",
+  "folderHint": "Una carpeta donde cada subcarpeta es un proyecto",
+  "mode": {
+    "name": "Mi modo",
+    "icon": "sparkle",
+    "template": "custom",
+    "source": {
+      "folders": {
+        "_0": "~/Documents/Proyectos"
+      }
+    },
+    "card": "projectMD",
+    "stages": [
+      "en curso",
+      "hecho"
+    ],
+    "metrics": [
+      "words",
+      "deadline",
+      "lastActivity"
+    ],
+    "permissions": "filesOnly",
+    "calendar": "dates",
+    "launchMode": "background",
+    "showProjects": true,
+    "commonCommands": "none",
+    "showCommonCommands": false,
+    "commands": []
+  }
+}

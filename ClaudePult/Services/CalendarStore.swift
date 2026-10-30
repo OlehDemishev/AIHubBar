@@ -113,7 +113,7 @@ final class CalendarStore {
         let path = ContentPlan.path(in: root)
         let text = (try? String(contentsOfFile: path, encoding: .utf8)) ?? ""
         let values: [ContentPlan.Column: String] = [
-            .date: CalendarScanner.text(date, withTime: false), .time: time, .platform: platform, .topic: topic, .status: ContentLanguage.current == .en ? "idea" : "идея",
+            .date: CalendarScanner.text(date, withTime: false), .time: time, .platform: platform, .topic: topic, .status: ContentLanguage.current.strings.ideaStatus,
         ]
         guard write(ContentPlan.appending(values, to: text), to: path) else { return }
         Task { await refresh() }

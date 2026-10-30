@@ -22,8 +22,8 @@ struct FolderProject: Identifiable, Equatable, Sendable {
 /// everything else in the file is kept as is when a value is written back.
 struct ProjectCardFile: Equatable, Sendable {
     /// Read under either name; a new card gets the content language's one.
-    static let fileNames = ["проект.md", "project.md"]
-    static var fileName: String { ContentLanguage.current == .en ? "project.md" : "проект.md" }
+    static let fileNames = ContentLanguage.allCases.map(\.strings.cardFile)
+    static var fileName: String { ContentLanguage.current.strings.cardFile }
 
     /// The project's card: the existing one under any name, else where a new one goes.
     static func path(in folder: String) -> String {
@@ -34,29 +34,19 @@ struct ProjectCardFile: Equatable, Sendable {
     enum Key: String, CaseIterable, Sendable {
         case stage, deadline, publish, format, mainFile, platform
 
-        /// The label written into new files, then accepted synonyms (lower-case).
+        /// Every language's label plus synonyms, all accepted when reading.
         var labels: [String] {
-            switch self {
-            case .stage: ["Этап", "stage"]
-            case .deadline: ["Дедлайн", "срок", "deadline"]
-            case .publish: ["Публикация", "дата публикации", "publish", "publication"]
-            case .format: ["Формат", "format"]
-            case .mainFile: ["Главный файл", "main file"]
-            case .platform: ["Площадка", "platform"]
+            let synonyms: [String] = switch self {
+            case .deadline: ["срок"]
+            case .publish: ["дата публикации", "publication"]
+            default: []
             }
+            return ContentLanguage.allCases.compactMap { $0.strings.cardLabels[self] } + synonyms
         }
 
         /// The label written into a file in that language.
         func label(_ language: ContentLanguage) -> String {
-            guard language == .en else { return labels[0] }
-            switch self {
-            case .stage: return "Stage"
-            case .deadline: return "Deadline"
-            case .publish: return "Publish"
-            case .format: return "Format"
-            case .mainFile: return "Main file"
-            case .platform: return "Platform"
-            }
+            language.strings.cardLabels[self] ?? rawValue
         }
     }
 
@@ -89,12 +79,8 @@ struct ProjectCardFile: Equatable, Sendable {
     /// Writes one value back: replaces the first line with that key, or adds a line after the title.
     static func setting(_ key: Key, to value: String, in text: String) -> String {
         var lines = text.components(separatedBy: "\n")
-        // A file keeps its language: English labels go into an English card, Russian ones otherwise.
-        let fields = lines.compactMap { line in field(line).flatMap { _ in line } }
-        let english = fields.isEmpty
-            ? ContentLanguage.current == .en
-            : fields.allSatisfy { ($0.components(separatedBy: ":").first ?? "").range(of: "[А-Яа-яЁё]", options: .regularExpression) == nil }
-        let newLine = "\(key.label(english ? .en : .ru)): \(value)"
+        // A file keeps its language: the language whose labels it already uses, else the content language.
+        let newLine = "\(key.label(language(of: lines))): \(value)"
         if let index = lines.firstIndex(where: { field($0)?.0 == key }) {
             // Keep a list marker the person used.
             let marker = ["- ", "* ", "+ "].first { lines[index].trimmingCharacters(in: .whitespaces).hasPrefix($0) } ?? ""
@@ -122,8 +108,24 @@ struct ProjectCardFile: Equatable, Sendable {
         var lines = ["# \(name)", ""]
         if let stage { lines.append("\(Key.stage.label(language)): \(stage)") }
         lines += [Key.deadline, .publish, .format, .mainFile, .platform].map { "\($0.label(language)): " }
-        lines += ["", language == .en ? "## Notes" : "## Заметки", ""]
+        lines += ["", language.strings.notesHeading, ""]
         return lines.joined(separator: "\n")
+    }
+
+    /// The language of the card's existing field names (the first language that has them all).
+    static func language(of lines: [String]) -> ContentLanguage {
+        let used = lines.compactMap { line -> String? in
+            guard field(line) != nil else { return nil }
+            var text = line.trimmingCharacters(in: .whitespaces)
+            for prefix in ["- ", "* ", "+ "] where text.hasPrefix(prefix) { text = String(text.dropFirst(2)) }
+            text = text.replacingOccurrences(of: "**", with: "").replacingOccurrences(of: "__", with: "")
+            return text.components(separatedBy: ":").first?.trimmingCharacters(in: .whitespaces).lowercased()
+        }
+        guard !used.isEmpty else { return .current }
+        return ContentLanguage.allCases.first { language in
+            let own = Set(language.strings.cardLabels.values.map { $0.lowercased() })
+            return used.allSatisfy(own.contains)
+        } ?? .current
     }
 
     /// `2026-11-05`, `2026-11-05 18:00`, `05.11.2026`, `05.11.2026 18:00`.

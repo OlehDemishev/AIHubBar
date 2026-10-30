@@ -40,7 +40,7 @@ targets:
         NSHumanReadableCopyright: "© Oleh Demishev"
         CFBundleIconName: AppIcon
         CFBundleDevelopmentRegion: ru
-        CFBundleLocalizations: [ru, en]
+        CFBundleLocalizations: [ru, en, es]
         NSAppleEventsUsageDescription: "ClaudePult открывает окна Терминала и запускает в них Claude Code для ваших проектов."
         # *.claudepult — exported settings and modes (SPEC-modes §12).
         UTExportedTypeDeclarations:
