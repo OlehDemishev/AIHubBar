@@ -1,19 +1,23 @@
 # Status
 
 <!-- summary:start -->
-**Stage:** SPEC.md done; SPEC-modes stages 1–7 and 9 done; stage 8: onboarding and guide merged, signing and updates wait for Oleh
+**Stage:** SPEC-modes done except signing/updates; next: profiles made of modules (docs/SPEC-profiles.md, variant C)
 **Updated:** 2026-10-30
 
 **Now:**
-- collapsible panel blocks (PR #64) and automatic Claude Code sign-in renewal (PR #65) merged; nothing in progress
+- spec for profiles and modules — branch `docs/spec-profiles`, PR open
 
 **Next:**
+- SPEC-profiles §9 stage 1: module catalog, profiles, migration from modes, `.claudepult` v2 (looks the same)
+- then stages 2–6: panel from profile modules, empty start and new assistant, Ресурсы Mac, Не спать, Быстрые команды и переключатели
 - menu bar elements reordered by dragging (needs a different list than a grouped Form)
 - fix whatever Oleh finds in the translations (machine translation; native review for ja, ko, ar at least)
 - stage 8 rest: Developer ID signing and notarization, Sparkle updates — once Oleh decides on Developer ID, the name and where updates are hosted
 - Fix whatever Oleh finds in docs/CHECKLIST.md
 
 **Needs Oleh:**
+- confirm SPEC-profiles §10: «профиль» instead of «режим», menu bar per profile, «Не спать, пока работает Claude» on by default for developers, first-wave modules
+- uncommitted changes in the working tree (CommandLineTool, SessionStore, SessionTests: «Показать» opens the exact Claude-app session) are not from this session — keep, commit or drop?
 - after ~20:11 today: check that the limits keep updating by themselves (the sign-in renewal runs when the token expires)
 - read docs/GUIDE.md as a newcomer would
 - review the languages: Settings → Основные → «Язык интерфейса» → a language → «Перезапустить» (and back); Arabic should mirror right-to-left
@@ -31,6 +35,12 @@
 - hooks are installed in ~/.claude/settings.json; backup of the original: ~/.claude/settings.json.claudepult-backup-20261029T192827
 - delete or archive the old repo `OlehDemishev/ClaudeBar`; turn on start at login if wanted
 <!-- summary:end -->
+
+## 2026-10-30 — Spec: profiles made of modules (branch `docs/spec-profiles`)
+
+Done: `docs/SPEC-profiles.md`, variant C agreed with Oleh. Modules are installed once from a catalog (permissions and background work come with installing); a profile picks which installed modules to show, in what order and with which of its own settings; ClaudePult starts empty, a profile comes from the assistant or Settings. The spec lists the catalog (the existing blocks plus first-wave Ресурсы Mac, Не спать with «пока работает Claude», Быстрые команды, Быстрые переключатели; second wave and what not to build), the new assistant steps, the Settings tabs, the migration from modes (Oleh's setup unchanged, `.claudepult` v2) and six stages. Ideas taken from Vorssaint (GPL-3.0) — no code.
+Checked: docs only; no code changed.
+Left: Oleh to confirm the open questions in §10 before stage 1.
 
 ## 2026-10-30 — Renew the Claude Code sign-in automatically (branch `feat/renew-login`)
 
