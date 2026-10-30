@@ -7,7 +7,7 @@
 **Now:**
 - merged: menu bar drag reordering (PR #93), translation review (PR #94), release build re-checked on main (PR #95)
 - panel redesigned as cards, variant A, merged (PR #98)
-- feature batch from Oleh's «все»: approve from notifications merged (PR #100); current action merged (PR #102); week forecast merged (PR #104); then week forecast, Telegram, PR/CI alerts, hotkey and search, widget, night queue, context warning
+- feature batch from Oleh's «все»: approve from notifications merged (PR #100); current action merged (PR #102); week forecast merged (PR #104); Telegram answers (PR open); then week forecast, Telegram, PR/CI alerts, hotkey and search, widget, night queue, context warning
 - hover hints for icon-only controls and the menu bar item merged (PR #91)
 - second wave merged: «История буфера» and «Заметки» (PR #87), «Не спать» with the lid closed (PR #89)
 - release without an Apple Developer account merged (PR #85): Sparkle, self-signed signing, `scripts/release.sh`, MIT license; nothing published yet
@@ -21,6 +21,7 @@
 - Windows and Linux versions (docs/SPEC-windows.md, docs/SPEC-linux.md) — only when Oleh says; stage 0 (fact checks in VMs) first
 
 **Needs Oleh:**
+- for answers from Telegram: create a bot in @BotFather (/newbot), paste its token in Settings → Claude Code → «Ответы из Telegram», press «Start» in the bot, then «Проверить» and turn it on
 - Settings → Claude Code → «Обновить hooks» once, so permission requests can be answered from notifications (timeout 5 → 300 s)
 - try the new panel: hover a session row, click a project, the profile menu with two profiles
 - hover over the menu bar item and the panel icons: tooltips should name what each one is
@@ -52,6 +53,12 @@
 - hooks are installed in ~/.claude/settings.json; backup of the original: ~/.claude/settings.json.claudepult-backup-20261029T192827
 - delete or archive the old repo `OlehDemishev/ClaudeBar`; turn on start at login if wanted
 <!-- summary:end -->
+
+## 2026-10-30 — Answer permission requests from Telegram (branch `feat/telegram-approvals`)
+
+Done: open permission requests (`ApprovalFiles`) are sent by a bot of ClaudePult's own as a message with «✅ Разрешить» / «❌ Отклонить»; ClaudePult long-polls that bot's `getUpdates` only while a message waits, accepts presses only from the configured chat (default: the `_daily-report` chat), writes the decision, answers the press and removes the buttons (also when the request was answered elsewhere). Settings → Claude Code → «Ответы из Telegram»: switch (off by default), token (Keychain, via the generalised `APIKeyStore`), chat id, «Проверить» (getMe + test message). A separate bot because the `_daily-report` bot already reads its updates — two readers would steal each other's, and bot.py is not ClaudePult's to change. 13 languages.
+Checked: 220 tests green; the Settings section seen live.
+Left: a real bot from Oleh to try it end to end.
 
 ## 2026-10-30 — Week forecast and daily bars (branch `feat/week-forecast`)
 

@@ -121,6 +121,15 @@ final class AppSettings {
         didSet { defaults.set(clipboardRemember, forKey: Keys.clipboardRemember) }
     }
 
+    /// Also from Telegram, through ClaudePult's own bot (`TelegramApprovals`); chat id empty = the `_daily-report` one.
+    var telegramApprovals: Bool {
+        didSet { defaults.set(telegramApprovals, forKey: Keys.telegramApprovals) }
+    }
+
+    var telegramApprovalsChatID: String {
+        didSet { defaults.set(telegramApprovalsChatID, forKey: Keys.telegramApprovalsChatID) }
+    }
+
     /// Answer Claude Code's permission requests from notifications and the panel (`ApprovalFiles`).
     var approvalsFromClaudePult: Bool {
         didSet { defaults.set(approvalsFromClaudePult, forKey: Keys.approvalsFromClaudePult) }
@@ -214,6 +223,8 @@ final class AppSettings {
         clipboardLimit = clipLimit > 0 ? clipLimit : 50
         clipboardRemember = defaults.bool(forKey: Keys.clipboardRemember)
         approvalsFromClaudePult = defaults.object(forKey: Keys.approvalsFromClaudePult) as? Bool ?? true
+        telegramApprovals = defaults.bool(forKey: Keys.telegramApprovals)
+        telegramApprovalsChatID = defaults.string(forKey: Keys.telegramApprovalsChatID) ?? ""
         clipboardExcludedApps = defaults.stringArray(forKey: Keys.clipboardExcludedApps) ?? ClipboardPolicy.defaultExcludedApps
         notesFolder = defaults.string(forKey: Keys.notesFolder) ?? "~/Documents/ClaudePult Notes"
         quickCommands = defaults.data(forKey: Keys.quickCommands).flatMap { try? JSONDecoder().decode([QuickCommand].self, from: $0) } ?? QuickCommand.examples
@@ -252,6 +263,8 @@ final class AppSettings {
         static let clipboardLimit = "clipboardLimit"
         static let clipboardRemember = "clipboardRemember"
         static let approvalsFromClaudePult = "approvalsFromClaudePult"
+        static let telegramApprovals = "telegramApprovals"
+        static let telegramApprovalsChatID = "telegramApprovalsChatID"
         static let clipboardExcludedApps = "clipboardExcludedApps"
         static let notesFolder = "notesFolder"
         static let quickCommands = "quickCommands"

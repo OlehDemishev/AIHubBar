@@ -7,6 +7,7 @@ struct ClaudePultApp: App {
     @State private var store: ProjectStore
     @State private var launcher: LaunchController
     @State private var sessions: SessionStore
+    @State private var telegramApprovals: TelegramApprovals
     @State private var hooks: HookController
     @State private var runs: RunStore
     @State private var commands: CommandStore
@@ -49,6 +50,7 @@ struct ClaudePultApp: App {
         _commands = State(initialValue: commands)
         let sessions = SessionStore()
         _sessions = State(initialValue: sessions)
+        _telegramApprovals = State(initialValue: TelegramApprovals(settings: settings, sessions: sessions))
         let usage = UsageStore(settings: settings, sessions: sessions)
         _usage = State(initialValue: usage)
         let monitor = SystemMonitor(settings: settings)
@@ -93,6 +95,7 @@ struct ClaudePultApp: App {
             store.start()
             Updates.start()
             sessions.start()
+            telegramApprovals.start()
             runs.start()
             requests.listen(commands: commands)
             usage.start()
@@ -257,6 +260,7 @@ struct ClaudePultApp: App {
                 .environment(services)
                 .environment(engine)
                 .environment(calendar)
+                .environment(telegramApprovals)
         }
     }
 }
