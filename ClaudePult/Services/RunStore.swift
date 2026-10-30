@@ -46,11 +46,23 @@ final class RunStore {
         command: ClaudeCommand, project: String, projectPath: String, folder: String,
         worktreeBranch: String?, claudePath: String
     ) throws -> BackgroundRun {
+        try launch(
+            title: command.title, prompt: command.prompt, project: project, projectPath: projectPath, folder: folder,
+            worktreeBranch: worktreeBranch, profile: .code, resultFile: nil, claudePath: claudePath
+        )
+    }
+
+    /// A command of a folder mode (SPEC-modes §3): its own permission profile and the file it should write.
+    func launch(
+        title: String, prompt: String, project: String, projectPath: String, folder: String, worktreeBranch: String?,
+        profile: PermissionProfile, resultFile: String?, claudePath: String
+    ) throws -> BackgroundRun {
         let id = UUID().uuidString.lowercased()
         var run = BackgroundRun(
             id: id, project: project, projectPath: projectPath, folder: folder, worktreeBranch: worktreeBranch,
-            commandTitle: command.title, task: Session.taskTitle(command.prompt), startedAt: .now,
-            timeLimitMinutes: settings.backgroundTimeLimitMinutes, pid: nil, state: .running, notified: false
+            commandTitle: title, task: Session.taskTitle(prompt), startedAt: .now,
+            timeLimitMinutes: settings.backgroundTimeLimitMinutes, pid: nil, state: .running, notified: false,
+            resultFile: resultFile
         )
 
         try FileManager.default.createDirectory(at: BackgroundRun.runsDirectory, withIntermediateDirectories: true)
@@ -59,7 +71,7 @@ final class RunStore {
 
         let process = Process()
         process.executableURL = URL(fileURLWithPath: claudePath)
-        process.arguments = BackgroundPermissions.arguments(prompt: command.prompt, sessionID: id)
+        process.arguments = BackgroundPermissions.arguments(prompt: prompt, sessionID: id, profile: profile)
         process.currentDirectoryURL = URL(fileURLWithPath: folder, isDirectory: true)
         process.environment = ProcessRunner.environment()
         process.standardInput = FileHandle.nullDevice
@@ -80,7 +92,7 @@ final class RunStore {
         processes[id] = process
         save(run)
         runs.insert(run, at: 0)
-        AppLog.info("Background run \(id) started: «\(command.title)» in \(folder), limit \(run.timeLimitMinutes) min")
+        AppLog.info("Background run \(id) started: «\(title)» in \(folder), profile \(profile.rawValue), limit \(run.timeLimitMinutes) min")
         return run
     }
 
@@ -136,6 +148,9 @@ final class RunStore {
             run.summary = [run.summary, "Отклонено правилами фона: \(list)"].compactMap { $0 }.joined(separator: "\n")
         }
         run.pullRequestURL = StreamJSON.pullRequestURL(in: outcome?.result)
+        if let file = run.resultFile, run.state == .succeeded, !FileManager.default.fileExists(atPath: file) {
+            run.summary = [run.summary, "Файл результата не появился: \((file as NSString).lastPathComponent)"].compactMap { $0 }.joined(separator: "\n")
+        }
         AppLog.info("Background run \(id) finished: \(run.state.rawValue)")
         announce(&run)
         save(run)
@@ -150,7 +165,8 @@ final class RunStore {
         guard Date.now.timeIntervalSince(lastWrite) < 3600 else { return }
         Notifier.post(
             id: "run-\(run.id)", title: RunMessage.notificationTitle(run), body: RunMessage.notificationBody(run),
-            target: .run(id: run.id, pullRequest: run.pullRequestURL)
+            target: run.resultFile.flatMap { FileManager.default.fileExists(atPath: $0) ? .file(path: $0) : nil }
+                ?? .run(id: run.id, pullRequest: run.pullRequestURL)
         )
         guard settings.telegramForBackground,
               let credentials = Telegram.credentials(dailyReportDirectory: settings.dailyReportDirectory) else { return }

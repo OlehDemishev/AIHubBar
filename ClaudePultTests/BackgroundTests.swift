@@ -96,7 +96,7 @@ struct BackgroundPermissionsTests {
     }
 
     @Test func settingsJSONIsValidAndDenyCoversSpec() throws {
-        let object = try JSONSerialization.jsonObject(with: Data(BackgroundPermissions.settingsJSON.utf8)) as? [String: Any]
+        let object = try JSONSerialization.jsonObject(with: Data(BackgroundPermissions.settingsJSON().utf8)) as? [String: Any]
         let permissions = try #require(object?["permissions"] as? [String: Any])
         let deny = try #require(permissions["deny"] as? [String])
         let allow = try #require(permissions["allow"] as? [String])

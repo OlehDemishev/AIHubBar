@@ -2,6 +2,18 @@
 
 Decisions made where the spec is silent or does not match reality. Newest at the top.
 
+## 2026-10-30 — Command engine (SPEC-modes §9.4, part 2)
+
+**Where a command runs.** Models by API: ClaudePult sends the main file's text with the API wrapper from docs/TEMPLATES.md and writes the answer itself. Claude Code: background `claude -p` with the mode's permission profile, or Terminal when the mode's «Где запускать» is Terminal («спрашивать» runs in the background for folder modes — with «только файлы» nothing outside the folder can change). Other agents: Terminal only, task on the clipboard («вставьте ⌘V») — the same honest limit as stage 3 until their permission modes are checked live.
+
+**«Только файлы» / «Файлы + поиск в интернете»** are Claude Code rules: allow `Read`, `Glob`, `Grep`, `Edit(./**)`, `TodoWrite` (+ `WebSearch`, `WebFetch`); deny `Bash`, `NotebookEdit` (+ web for files-only) and the secret-file reads of the code profile; `blockReadsOutsideWorkingDirectories`. Checked live with a real `claude -p` 2.1.312: the file was written, Bash and web were not even offered as tools, `~/.zshrc` was blocked; with web, a page was fetched into a file and Bash stayed unavailable. (The run also renewed the Keychain token, confirming the expired-token note.)
+
+**Result files** are named from the template, `<время>` = `yyyy-MM-dd-HHmm`, `<файл>` = the input file's base name, `/ : \` replaced, `.md` added; an existing name gets `-2`, `-3` … The background run checks the file exists after success and says so if not.
+
+**API.** Anthropic Messages (`x-api-key`, `anthropic-version: 2023-06-01`, `max_tokens` 16 000) and OpenAI-style chat completions for the others; every chat endpoint answered «bad key» to an invalid one (2026-10-30). Prices are not shipped — they change; the person enters dollars per million tokens per provider, and costs are shown only where a price exists. Spend is kept 400 days in `api-spend.json`; budget warnings once per month at 80 % and 100 %.
+
+**«Сравнить»** runs the same command with the chosen services in parallel; names get ` (Claude)`, ` (OpenAI)` … before the extension; the «Сравнение» window shows the files side by side, refreshing every 2 s. No verdicts.
+
 ## 2026-10-30 — Folder projects (SPEC-modes §9.4, part 1)
 
 **`проект.md` stays the person's file.** Fields are plain lines `Ключ: значение` (list markers and bold allowed; English synonyms `stage`, `deadline`, `publish`, `format`, `main file`, `platform` accepted for later languages). ClaudePult changes only the line it writes (`Этап:`), keeping everything else; a new card is created only where none exists. Empty fields in the template are not values.
