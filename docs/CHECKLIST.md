@@ -400,6 +400,15 @@ Panel snapshots: `defaults write com.demishev.claudepult DebugPanelSnapshot -boo
 | Quoted UI names («Модули», «Строка меню» …) match those elements' own translations | Script over the catalog (left: «Команды» meaning the macOS Shortcuts app, German «Eigene/Eigener» grammar) |
 | Reading the texts as a native speaker | Oleh / native speakers |
 
+## Panel as cards, design variant A (2026-10-30)
+
+| Scenario | Checked |
+|---|---|
+| Oleh's panel expanded and folded (real window captures): cards, header with profile and icons, two limit rings with resets, one-line sessions and projects, labelled toggle tiles, «Ресурсы Mac» card | Live |
+| Panel theme «Тёмная» makes the panel dark (it stayed light before) | Live (theme set for the capture, back to «Как в системе») |
+| Every icon-only control in the panel has a hover hint (accessibility walk) | Live |
+| Hover over a session row shows its actions; clicking a project row opens its details; the profile menu with two profiles | Oleh |
+
 ## Release without an Apple Developer account (2026-10-30)
 
 | Scenario | Checked |

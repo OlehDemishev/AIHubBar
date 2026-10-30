@@ -65,8 +65,8 @@ struct SessionsView: View {
                         .foregroundStyle(.orange)
                 }
             }
-            .padding(.horizontal, 10)
-            .padding(.top, 2)
+            .padding(.horizontal, 6)
+            .padding(.top, 4)
 
             if !PanelBlock.collapsed(in: collapsedRaw).contains(.sessions) {
                 ForEach(rows) { row in
@@ -74,7 +74,7 @@ struct SessionsView: View {
                 }
             }
         }
-        .padding(6)
+        .padding(4)
     }
 }
 
@@ -85,85 +85,86 @@ private struct SessionRowView: View {
     @Environment(\.openWindow) private var openWindow
     @State private var isHovered = false
 
+    private var inBackground: Bool { row.run != nil && row.state == .running }
+
     var body: some View {
-        HStack(alignment: .top, spacing: 8) {
-            Image(systemName: row.run != nil && row.state == .running ? "moon.zzz.fill" : row.state.symbol)
-                .foregroundStyle(row.state.color)
-                .symbolEffect(.pulse, options: .repeating, isActive: row.state == .running)
-                .frame(width: 14)
-                .padding(.top, 2)
-
-            VStack(alignment: .leading, spacing: 2) {
-                HStack(spacing: 6) {
-                    Text(row.project)
-                        .fontWeight(.medium)
+        VStack(alignment: .leading, spacing: 2) {
+            HStack(spacing: 6) {
+                Image(systemName: inBackground ? "moon.zzz.fill" : row.state.symbol)
+                    .foregroundStyle(row.state.color)
+                    .symbolEffect(.pulse, options: .repeating, isActive: row.state == .running)
+                    .frame(width: 14)
+                    .help(inBackground ? String(localized: "в фоне") : row.state.title)
+                Text(row.project)
+                    .fontWeight(.medium)
+                    .lineLimit(1)
+                    .layoutPriority(1)
+                if let worktree = row.worktree {
+                    Label(worktree, systemImage: "arrow.triangle.branch")
+                        .scaledFont(.callout)
+                        .foregroundStyle(.secondary)
                         .lineLimit(1)
-                    if let worktree = row.worktree {
-                        Label(worktree, systemImage: "arrow.triangle.branch")
-                            .scaledFont(.caption)
-                            .foregroundStyle(.secondary)
-                            .lineLimit(1)
-                            .truncationMode(.middle)
-                            .help("Отдельная рабочая копия git (worktree)")
-                    }
-                    Spacer(minLength: 6)
-                    Text(row.run != nil && row.state == .running ? String(localized: "в фоне") : row.state.title)
-                        .scaledFont(.caption, weight: .medium)
-                        .foregroundStyle(row.state.color)
-                        .fixedSize()
+                        .truncationMode(.middle)
+                        .help("Отдельная рабочая копия git (worktree)")
                 }
-                HStack(spacing: 6) {
-                    Text(row.task ?? String(localized: "без задачи"))
-                        .lineLimit(1)
-                        .truncationMode(.tail)
-                        .foregroundStyle(row.task == nil ? .tertiary : .secondary)
-                    Spacer(minLength: 6)
-                    if let startedAt = row.startedAt {
-                        TimelineView(.periodic(from: .now, by: 30)) { context in
-                            Text(DurationText.short(from: startedAt, to: row.endedAt ?? context.date))
-                                .monospacedDigit()
-                                .foregroundStyle(.secondary)
-                        }
-                        .fixedSize()
+                Text(row.task ?? String(localized: "без задачи"))
+                    .scaledFont(.callout)
+                    .lineLimit(1)
+                    .truncationMode(.tail)
+                    .foregroundStyle(row.task == nil ? .tertiary : .secondary)
+                Spacer(minLength: 4)
+                if isHovered || row.state == .waiting {
+                    actions
+                } else if let startedAt = row.startedAt {
+                    TimelineView(.periodic(from: .now, by: 30)) { context in
+                        Text(DurationText.short(from: startedAt, to: row.endedAt ?? context.date))
+                            .scaledFont(.callout)
+                            .monospacedDigit()
+                            .foregroundStyle(.tertiary)
                     }
-                }
-                .scaledFont(.caption)
-                if let message = row.message {
-                    Text(message)
-                        .scaledFont(.caption)
-                        .foregroundStyle(row.state == .waiting ? .orange : row.state == .error ? .red : .secondary)
-                        .lineLimit(2)
+                    .fixedSize()
                 }
             }
-
-            VStack(alignment: .trailing, spacing: 4) {
-                if let run = row.run {
-                    Button("Журнал") {
-                        runs.selectedLogRunID = run.id
-                        NSApp.activate()
-                        openWindow(id: "run-log")
-                    }
-                    if run.state == .running {
-                        Button("Остановить") { runs.stop(run.id) }
-                            .tint(.red)
-                    }
-                } else if let session = row.session {
-                    Button("Показать") { SessionActions.show(session) }
-                }
+            if let message = row.message, row.state == .waiting || row.state == .error {
+                Text(message)
+                    .scaledFont(.callout)
+                    .foregroundStyle(row.state == .waiting ? .orange : .red)
+                    .lineLimit(2)
+                    .padding(.leading, 20)
             }
-            .buttonStyle(.bordered)
-            .controlSize(.small)
-            .opacity(isHovered || row.state == .waiting ? 1 : 0.6)
         }
-        .padding(.horizontal, 10)
-        .densityPadding(6)
+        .padding(.horizontal, 8)
+        .densityPadding(4)
         .background(
             RoundedRectangle(cornerRadius: 7)
                 .fill(row.state == .waiting ? Color.orange.opacity(0.14) : Color.primary.opacity(isHovered ? 0.06 : 0))
         )
         .onHover { isHovered = $0 }
         .animation(.easeOut(duration: 0.12), value: isHovered)
-        .help(row.session?.cwd ?? row.run?.folder ?? "")
+        .help([inBackground ? String(localized: "в фоне") : row.state.title, row.session?.cwd ?? row.run?.folder].compactMap { $0 }.joined(separator: " · "))
+    }
+
+    private var actions: some View {
+        HStack(spacing: 8) {
+            if let run = row.run {
+                Button {
+                    runs.selectedLogRunID = run.id
+                    NSApp.activate()
+                    openWindow(id: "run-log")
+                } label: { Image(systemName: "doc.text") }
+                .help("Журнал")
+                if run.state == .running {
+                    Button { runs.stop(run.id) } label: { Image(systemName: "stop.circle") }
+                        .foregroundStyle(.red)
+                        .help("Остановить")
+                }
+            } else if let session = row.session {
+                Button { SessionActions.show(session) } label: { Image(systemName: "macwindow") }
+                    .help("Показать")
+            }
+        }
+        .buttonStyle(.borderless)
+        .scaledFont(.callout)
     }
 }
 

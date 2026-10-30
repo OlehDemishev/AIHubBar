@@ -51,7 +51,7 @@ struct KeepAwakeView: View {
                 .buttonStyle(.bordered)
             }
         }
-        .padding(.horizontal, 14)
+        .padding(.horizontal, 10)
         .padding(.vertical, 8)
     }
 }

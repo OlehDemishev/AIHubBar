@@ -43,44 +43,24 @@ struct MenuPanelView: View {
             header
                 .revealed(isShown, step: 0, reduceMotion: calm)
 
-            if modes.enabledModes.count > 1 {
-                ModeSwitcher()
-                    .revealed(isShown, step: 0, reduceMotion: calm)
-            }
-
-            Divider()
-
-            if notifications.state == .denied {
-                notificationsHint
-                Divider()
-            }
-
-            if modes.modes.isEmpty {
-                noProfile
-                    .revealed(isShown, step: 1, reduceMotion: calm)
-                Divider()
-            }
-
-            // The current profile's modules, in its order (SPEC-profiles §9.2).
-            ForEach(modes.panelModules, id: \.self) { kind in
-                module(kind)
-            }
-
-            VStack(spacing: 2) {
-                PanelButton(title: String(localized: "Настройки…"), shortcut: ",") {
-                    NSApp.activate()
-                    openSettings()
+            VStack(alignment: .leading, spacing: 8) {
+                if notifications.state == .denied {
+                    notificationsHint
+                        .panelCard()
                 }
-                PanelButton(title: String(localized: "Помощь"), shortcut: nil) {
-                    NSApp.activate()
-                    openWindow(id: "help")
+
+                if modes.modes.isEmpty {
+                    noProfile
+                        .panelCard()
+                        .revealed(isShown, step: 1, reduceMotion: calm)
                 }
-                PanelButton(title: String(localized: "Выход"), shortcut: "q") {
-                    NSApp.terminate(nil)
+
+                // The current profile's modules, in its order (SPEC-profiles §9.2), each on its card.
+                ForEach(modes.panelModules, id: \.self) { kind in
+                    module(kind)
                 }
             }
-            .padding(6)
-            .revealed(isShown, step: 3, reduceMotion: calm)
+            .padding(.bottom, 8)
         }
         // Larger text needs a wider panel, otherwise most lines would truncate.
         .frame(width: (settings.panelWidth.points * max(1, scale)).rounded())
@@ -88,7 +68,8 @@ struct MenuPanelView: View {
         .environment(\.panelDensity, settings.panelDensity.spacing)
         .environment(\.font, ScaledFont.font(.body, scale: scale))
         .preferredColorScheme(settings.panelTheme.colorScheme)
-        .background(WindowReader { window = $0 })
+        .background(WindowReader { window = $0; $0?.appearance = settings.panelTheme.appearance })
+        .onChange(of: settings.panelTheme) { window?.appearance = settings.panelTheme.appearance }
         .onAppear {
             log.debug("Panel shown")
             isShown = true
@@ -129,33 +110,84 @@ struct MenuPanelView: View {
                 .symbolEffect(.bounce, options: .nonRepeating, value: calm ? false : isShown)
             Text("ClaudePult")
                 .scaledFont(.headline)
-            Spacer()
-            if let lastUpdated = store.lastUpdated {
-                TimelineView(.periodic(from: .now, by: 30)) { context in
-                    Text("обновлено \(RelativeTime.ago(lastUpdated, now: context.date))")
-                        .scaledFont(.caption)
-                        .foregroundStyle(.secondary)
-                }
-            }
-            // One refresh for the whole panel: projects and limits (the limits keep their own schedule and pauses).
-            Button {
-                Task { await store.refresh() }
-                Task { await usage.refresh() }
-            } label: {
-                if store.isRefreshing {
-                    ProgressView().controlSize(.small)
-                } else {
-                    Image(systemName: "arrow.clockwise")
-                }
-            }
-            .buttonStyle(.borderless)
-            .frame(width: 18, height: 18)
-            .disabled(store.isRefreshing)
-            .help("Обновить")
-            .keyboardShortcut("r", modifiers: .command)
+            profileChip
+            Spacer(minLength: 4)
+            HStack(spacing: 8) { headerButtons }
+                .buttonStyle(.borderless)
+                .foregroundStyle(.secondary)
         }
         .padding(.horizontal, 14)
         .padding(.vertical, 10)
+    }
+
+    @ViewBuilder
+    private var headerButtons: some View {
+        // One refresh for the whole panel: projects and limits (the limits keep their own schedule and pauses).
+        Button {
+            Task { await store.refresh() }
+            Task { await usage.refresh() }
+        } label: {
+            if store.isRefreshing {
+                ProgressView().controlSize(.small)
+            } else {
+                Image(systemName: "arrow.clockwise")
+            }
+        }
+        .frame(width: 18, height: 18)
+        .disabled(store.isRefreshing)
+        .help(store.lastUpdated.map { String(localized: "Обновить · обновлено \(RelativeTime.ago($0))") } ?? String(localized: "Обновить"))
+        .keyboardShortcut("r", modifiers: .command)
+        // Settings, help and quit were three menu-like rows at the bottom; as icons they no longer outweigh the content.
+        Button {
+            NSApp.activate()
+            openSettings()
+        } label: { Image(systemName: "gearshape") }
+        .help("Настройки… (⌘,)")
+        .keyboardShortcut(",", modifiers: .command)
+        Button {
+            NSApp.activate()
+            openWindow(id: "help")
+        } label: { Image(systemName: "questionmark.circle") }
+        .help("Помощь")
+        Button { NSApp.terminate(nil) } label: { Image(systemName: "power") }
+            .help("Выйти из ClaudePult (⌘Q)")
+            .keyboardShortcut("q", modifiers: .command)
+    }
+
+    /// The current profile; with several enabled it is the switcher (it replaces the row of chips).
+    @ViewBuilder
+    private var profileChip: some View {
+        if let current = modes.current {
+            let label = Label(current.name, systemImage: current.icon)
+                .scaledFont(.caption)
+                .lineLimit(1)
+            if modes.enabledModes.count > 1 {
+                Menu {
+                    ForEach(modes.enabledModes) { mode in
+                        Button {
+                            withAnimation(.snappy(duration: 0.2)) { modes.select(mode.id) }
+                        } label: {
+                            Label(mode.name, systemImage: mode.id == modes.currentID ? "checkmark" : mode.icon)
+                        }
+                    }
+                } label: {
+                    label
+                }
+                .menuStyle(.borderlessButton)
+                .fixedSize()
+                .padding(.horizontal, 6)
+                .padding(.vertical, 2)
+                .background(Capsule().fill(Color.primary.opacity(0.07)))
+                .help("Сменить профиль")
+            } else {
+                label
+                    .foregroundStyle(.secondary)
+                    .padding(.horizontal, 8)
+                    .padding(.vertical, 2)
+                    .background(Capsule().fill(Color.primary.opacity(0.07)))
+                    .help("Текущий профиль")
+            }
+        }
     }
 
     /// Without permission, «ждёт ответа», background results and limit alerts are silently lost.
@@ -225,24 +257,24 @@ struct MenuPanelView: View {
         switch kind {
         case .limits:
             LimitsView()
+                .panelCard()
                 .revealed(isShown, step: 1, reduceMotion: calm)
-            Divider()
         case .sessions:
             let sessionRows = SessionRow.rows(sessions: sessions.items, runs: runs.runs)
             if !sessionRows.isEmpty {
                 SessionsView(rows: sessionRows)
+                    .panelCard()
                     .revealed(isShown, step: 1, reduceMotion: calm)
-                Divider()
             } else if hooks.status == .notInstalled {
                 hooksHint
+                    .panelCard()
                     .revealed(isShown, step: 1, reduceMotion: calm)
-                Divider()
             }
         case .upcoming:
             if calendar.isActive {
                 UpcomingView()
+                    .panelCard()
                     .revealed(isShown, step: 1, reduceMotion: calm)
-                Divider()
             }
         case .projects:
             if settings.shows(.projects) {
@@ -252,37 +284,38 @@ struct MenuPanelView: View {
                         content
                     }
                 }
+                .padding(.bottom, 6)
+                .panelCard()
                 .revealed(isShown, step: 1, reduceMotion: calm)
-                Divider()
             }
         case .clipboard:
             ClipboardView()
+                .panelCard()
                 .revealed(isShown, step: 1, reduceMotion: calm)
-            Divider()
         case .notes:
             NotesView()
+                .panelCard()
                 .revealed(isShown, step: 1, reduceMotion: calm)
-            Divider()
         case .quickCommands:
             QuickCommandsView()
+                .panelCard()
                 .revealed(isShown, step: 1, reduceMotion: calm)
-            Divider()
         case .toggles:
             QuickTogglesView()
+                .panelCard()
                 .revealed(isShown, step: 1, reduceMotion: calm)
-            Divider()
         case .keepAwake:
             KeepAwakeView()
+                .panelCard()
                 .revealed(isShown, step: 1, reduceMotion: calm)
-            Divider()
         case .resources:
             ResourcesView()
+                .panelCard()
                 .revealed(isShown, step: 1, reduceMotion: calm)
-            Divider()
         case .reports:
             CommandsView()
+                .panelCard()
                 .revealed(isShown, step: 2, reduceMotion: calm)
-            Divider()
         }
     }
 
@@ -303,7 +336,7 @@ struct MenuPanelView: View {
                     .foregroundStyle(.red)
             }
         }
-        .padding(.horizontal, 16)
+        .padding(.horizontal, 10)
         .padding(.top, 8)
     }
 
@@ -322,7 +355,7 @@ struct MenuPanelView: View {
             Label(error, systemImage: "exclamationmark.triangle")
                 .scaledFont(.caption)
                 .foregroundStyle(.orange)
-                .padding(.horizontal, 14)
+                .padding(.horizontal, 10)
                 .padding(.top, 8)
         }
 
@@ -367,7 +400,7 @@ struct MenuPanelView: View {
                     ProjectRowView(project: project, isExpanded: expandedBinding(project.id))
                 }
             }
-            .padding(6)
+            .padding(4)
         }
     }
 
@@ -440,68 +473,5 @@ private extension View {
                     : nil,
                 value: isShown
             )
-    }
-}
-
-/// Full-width menu-like button with a ⌘-shortcut hint.
-private struct PanelButton: View {
-    let title: String
-    let shortcut: Character?
-    let action: () -> Void
-
-    @State private var isHovered = false
-
-    var body: some View {
-        Button(action: action) {
-            HStack {
-                Text(title)
-                Spacer()
-                if let shortcut {
-                    Text("⌘\(String(shortcut).uppercased())")
-                        .foregroundStyle(.secondary)
-                }
-            }
-            .padding(.horizontal, 8)
-            .padding(.vertical, 4)
-            .contentShape(Rectangle())
-            .background(
-                RoundedRectangle(cornerRadius: 5)
-                    .fill(isHovered ? Color.primary.opacity(0.1) : .clear)
-            )
-        }
-        .buttonStyle(.plain)
-        .keyboardShortcut(shortcut.map { KeyboardShortcut(KeyEquivalent($0), modifiers: .command) })
-        .onHover { isHovered = $0 }
-        .animation(.easeOut(duration: 0.12), value: isHovered)
-    }
-}
-
-/// Switcher between enabled modes at the top of the panel (SPEC-modes §2). Limits and sessions stay shared.
-private struct ModeSwitcher: View {
-    @Environment(ModeStore.self) private var modes
-
-    var body: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 4) {
-                ForEach(modes.enabledModes) { mode in
-                    let selected = mode.id == modes.currentID
-                    Button {
-                        withAnimation(.snappy(duration: 0.2)) { modes.select(mode.id) }
-                    } label: {
-                        Label(mode.name, systemImage: mode.icon)
-                            .scaledFont(.caption, weight: selected ? .semibold : .regular)
-                            .lineLimit(1)
-                            .padding(.horizontal, 8)
-                            .padding(.vertical, 4)
-                            .background(Capsule().fill(selected ? Color.accentColor.opacity(0.2) : Color.primary.opacity(0.06)))
-                            .foregroundStyle(selected ? Color.accentColor : .primary)
-                    }
-                    .buttonStyle(.plain)
-                    .help(selected ? String(localized: "Текущий профиль") : String(localized: "Переключиться на «\(mode.name)»"))
-                }
-            }
-            .padding(.horizontal, 12)
-        }
-        .padding(.bottom, 8)
     }
 }

@@ -19,7 +19,7 @@ struct CommandsView: View {
             }
             if !PanelBlock.collapsed(in: collapsedRaw).contains(.commands) { commandList }
         }
-        .padding(.horizontal, 14)
+        .padding(.horizontal, 10)
         .padding(.vertical, 8)
         .animation(.snappy(duration: 0.2), value: confirmCleanup)
     }

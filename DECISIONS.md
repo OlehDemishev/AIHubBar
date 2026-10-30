@@ -2,6 +2,10 @@
 
 Decisions made where the spec is silent or does not match reality. Newest at the top.
 
+## 2026-10-30 — Panel as cards (design variant A)
+
+Oleh picked variant A of three mock-ups (cards / tabs / Raycast-like list). Blocks are cards (`panelCard()`), not rows between dividers; Settings, Help and Quit moved from three large rows at the bottom to header icons with the same shortcuts; the profile switcher row became a header menu; limits are rings; sessions and projects take one line (details on hover or click). Folding blocks stays. `preferredColorScheme` never reached the `MenuBarExtra` window, so «Тёмная» left the panel light — the panel now sets its window's `appearance`.
+
 ## 2026-10-30 — Hover hints for icon-only controls (SPEC §3.1)
 
 **Rule:** anything shown only as an icon gets `.help` with its name or a short explanation. **Menu bar item:** `MenuBarExtra` has no tooltip API, so `StatusItemTooltip` finds the `NSStatusBarButton` in the app's status bar window and sets its `toolTip` to `MenuBarComposer.accessibilityText` — the same words VoiceOver reads, now covering every element the item can draw (sessions, queued runs, reset countdown, forecast, nearest date, low disk, processor, memory, ☕, profile). If a macOS update changes that window, the tooltip silently disappears; nothing else depends on it.

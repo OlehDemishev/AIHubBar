@@ -38,7 +38,7 @@ struct ResourcesView: View {
                 }
             }
         }
-        .padding(.horizontal, 14)
+        .padding(.horizontal, 10)
         .padding(.vertical, 8)
     }
 

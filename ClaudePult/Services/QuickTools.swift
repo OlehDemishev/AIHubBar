@@ -64,6 +64,18 @@ struct QuickCommand: Codable, Equatable, Identifiable, Sendable {
 enum QuickToggle: String, Codable, CaseIterable, Sendable {
     case darkMode, desktopIcons, lockScreen, displaySleep, ejectDisks, emptyTrash
 
+    /// Under the tile in the panel; the full title is its hover hint.
+    var shortTitle: String {
+        switch self {
+        case .darkMode: String(localized: "Тема")
+        case .desktopIcons: String(localized: "Значки")
+        case .lockScreen: String(localized: "Замок")
+        case .displaySleep: String(localized: "Экран")
+        case .ejectDisks: String(localized: "Диски")
+        case .emptyTrash: String(localized: "Корзина")
+        }
+    }
+
     var title: String {
         switch self {
         case .darkMode: String(localized: "Тёмная тема")

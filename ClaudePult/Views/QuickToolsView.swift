@@ -61,7 +61,7 @@ struct QuickCommandsView: View {
                 }
             }
         }
-        .padding(.horizontal, 14)
+        .padding(.horizontal, 10)
         .padding(.vertical, 8)
     }
 }
@@ -79,24 +79,35 @@ struct QuickTogglesView: View {
             if !PanelBlock.collapsed(in: collapsedRaw).contains(.toggles) {
                 HStack(spacing: 6) {
                     ForEach(QuickToggle.allCases.filter(settings.quickToggles.contains), id: \.self) { toggle in
+                        let on = tools.isOn(toggle) == true
                         Button {
                             if toggle.needsConfirmation { confirming = toggle } else { tools.perform(toggle) }
                         } label: {
-                            Group {
-                                if tools.running.contains(toggle.rawValue) {
-                                    ProgressView().controlSize(.mini)
-                                } else {
-                                    Image(systemName: toggle.symbol)
+                            VStack(spacing: 3) {
+                                Group {
+                                    if tools.running.contains(toggle.rawValue) {
+                                        ProgressView().controlSize(.mini)
+                                    } else {
+                                        Image(systemName: toggle.symbol).scaledFont(size: 14)
+                                    }
                                 }
+                                .frame(height: 18)
+                                Text(toggle.shortTitle)
+                                    .scaledFont(.caption2)
+                                    .lineLimit(1)
+                                    .minimumScaleFactor(0.8)
                             }
-                            .frame(width: 22, height: 16)
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 6)
+                            .background(RoundedRectangle(cornerRadius: 9, style: .continuous)
+                                .fill(on ? Color.accentColor.opacity(0.22) : Color.primary.opacity(0.07)))
+                            .foregroundStyle(on ? Color.accentColor : .primary)
+                            .contentShape(Rectangle())
                         }
-                        .buttonStyle(.bordered)
-                        .tint(tools.isOn(toggle) == true ? .accentColor : nil)
+                        .buttonStyle(.plain)
                         .help(toggle.title + (tools.isOn(toggle).map { $0 ? String(localized: " — включено") : String(localized: " — выключено") } ?? ""))
                     }
                 }
-                .controlSize(.small)
                 if let toggle = confirming {
                     HStack(spacing: 6) {
                         Text("\(toggle.title)? Это нельзя отменить.").scaledFont(.caption)
@@ -121,7 +132,7 @@ struct QuickTogglesView: View {
                 }
             }
         }
-        .padding(.horizontal, 14)
+        .padding(.horizontal, 10)
         .padding(.vertical, 8)
         .onAppear { tools.refreshStates() }
     }
