@@ -1,11 +1,11 @@
 # Status
 
 <!-- summary:start -->
-**Stage:** SPEC-modes done except signing/updates; SPEC-profiles (variant C) stage 1 — the model — in PR
+**Stage:** SPEC-modes done except signing/updates; SPEC-profiles (variant C) stage 1 done, stage 2 next
 **Updated:** 2026-10-30
 
 **Now:**
-- SPEC-profiles stage 1, model: modules, profiles, migration, `.claudepult` v2 — branch `feat/profiles-model` (worktree `.claude/worktrees/profiles-stage1`), PR open; the spec is merged (PR #67)
+- SPEC-profiles stage 1 (model) merged (PR #71) with the spec (PR #67); nothing in progress
 
 **Next:**
 - SPEC-profiles stage 2: panel and menu bar from profile modules, «Профили» and «Модули» tabs, «режим» → «профиль» in all 13 languages (moved here from stage 1: these strings get rewritten anyway)
