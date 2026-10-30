@@ -94,6 +94,7 @@ targets:
         CFBundleShortVersionString: $(MARKETING_VERSION)
         CFBundleVersion: $(CURRENT_PROJECT_VERSION)
         CFBundleDevelopmentRegion: ru
+        CFBundleLocalizations: [ru, en, es, pt-BR, fr, de, ja, id, ko, it, ar, pl, uk]
         NSExtension:
           NSExtensionPointIdentifier: com.apple.widgetkit-extension
     entitlements:

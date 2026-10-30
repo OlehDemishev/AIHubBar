@@ -23,6 +23,17 @@ struct TranslationTests {
         #expect(text("Дедлайны и публикации из проект.md", language).contains(strings.cardFile))
     }
 
+    /// The widget extension has its own catalog: every language has it, with no Russian inside.
+    @Test(arguments: ContentLanguage.allCases.filter { $0 != .ru })
+    func widgetIsTranslated(_ language: ContentLanguage) throws {
+        let widget = try #require(Bundle(url: Bundle.main.bundleURL.appending(path: "Contents/PlugIns/ClaudePultWidget.appex")))
+        let path = try #require(widget.path(forResource: "Localizable", ofType: "strings", inDirectory: nil, forLocalization: language.rawValue))
+        let table = try #require(NSDictionary(contentsOfFile: path) as? [String: String])
+        #expect(table.count >= 20)
+        let pattern = language == .uk ? "[ыэъёЫЭЪЁ]" : "[А-Яа-яЁё]"
+        #expect(table.values.allSatisfy { $0.range(of: pattern, options: .regularExpression) == nil })
+    }
+
     /// No Russian left inside other languages (a module name pasted as is, say); Ukrainian has no ы, э, ъ, ё.
     @Test(arguments: ContentLanguage.allCases.filter { $0 != .ru })
     func noRussianLeft(_ language: ContentLanguage) {

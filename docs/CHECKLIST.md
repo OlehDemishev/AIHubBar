@@ -492,6 +492,13 @@ Panel snapshots: `defaults write com.demishev.claudepult DebugPanelSnapshot -boo
 | A click on a session row's text (not the icon) opens it: a fake session in the scratchpad folder opened that folder in Finder (the fallback when there is no Terminal tab or app session) | Live (fake session removed afterwards) |
 | A background run's row opens its log; the icons still work | Code review; Oleh |
 
+## Widgets in 13 languages (2026-10-30)
+
+| Scenario | Checked |
+|---|---|
+| The widget extension has its own string catalog: «Лимиты Claude», «Сессии и проекты», the reset texts and the «Не спать» control in 12 more languages, no Russian inside | Auto (`TranslationTests.widgetIsTranslated`, built tables) |
+| The widget gallery in English | Oleh (system language; the app's own language setting doesn't reach extensions) |
+
 ## Release without an Apple Developer account (2026-10-30)
 
 | Scenario | Checked |
