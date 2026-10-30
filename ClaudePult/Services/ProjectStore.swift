@@ -49,6 +49,12 @@ final class ProjectStore {
         isRefreshing = true
         defer { isRefreshing = false }
         if fetch { lastFetch = .now }
+        // Only report.py modes have git projects; folder projects live in `FolderProjectStore`.
+        guard settings.activeSource.isReport else {
+            report = nil
+            lastError = nil
+            return
+        }
 
         do {
             report = try await ReportService.load(

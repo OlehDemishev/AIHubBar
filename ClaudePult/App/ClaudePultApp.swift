@@ -15,6 +15,7 @@ struct ClaudePultApp: App {
     @State private var notifications = NotificationPermission()
     @State private var modes: ModeStore
     @State private var services: AIServiceStore
+    @State private var folders: FolderProjectStore
     @NSApplicationDelegateAdaptor private var appDelegate: AppDelegate
 
     init() {
@@ -28,6 +29,8 @@ struct ClaudePultApp: App {
         _modes = State(initialValue: modes)
         let services = AIServiceStore(settings: settings)
         _services = State(initialValue: services)
+        let folders = FolderProjectStore(settings: settings)
+        _folders = State(initialValue: folders)
         let store = ProjectStore(settings: settings)
         _settings = State(initialValue: settings)
         _store = State(initialValue: store)
@@ -47,6 +50,7 @@ struct ClaudePultApp: App {
         _hooks = State(initialValue: hooks)
         modes.didApply = {
             Task { await store.refresh() }
+            Task { await folders.refresh() }
             hooks.refresh()
         }
         AppDelegate.openFile = { url in
@@ -63,6 +67,7 @@ struct ClaudePultApp: App {
             requests.listen(commands: commands)
             usage.start()
             Task { await services.scan() }
+            folders.start()
             launcher.start()
             NotificationRouter.shared.install { resolution in
                 switch resolution {
@@ -119,6 +124,7 @@ struct ClaudePultApp: App {
                 .environment(notifications)
                 .environment(modes)
                 .environment(services)
+                .environment(folders)
         } label: {
             MenuBarLabel(state: MenuBarState(config: settings.menuBarConfig, data: menuBarData))
                 .environment(requests)

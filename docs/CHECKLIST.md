@@ -124,3 +124,17 @@ Panel snapshots: `defaults write com.demishev.claudepult DebugPanelSnapshot -boo
 | Settings → «Сервисы AI»: save a key, «Проверить», pick a model | **Oleh: with a real key** |
 | «Открыть в…» in a project opens Codex / Gemini in Terminal | **Oleh: after installing an agent** |
 | Mode «Сервис по умолчанию» picker | **Oleh: look** |
+
+## Folder projects (SPEC-modes §9.4, part 1)
+
+| Scenario | Checked |
+|---|---|
+| Subfolders become projects, newest first; `_…` and hidden folders skipped; «одна папка» | Auto |
+| `проект.md` read in any Markdown form (bullets, bold, synonyms), dates ISO and `dd.MM.yyyy` | Auto |
+| Stage written back keeping the rest of the file and the list marker; card created when missing | Auto |
+| Main file from the card, else the newest text file; words without link addresses; `.docx` counted | Auto + Live (`--folder-projects`: 1200-word `.docx` → 8:00) |
+| Metrics: words, duration at the mode's pace, reading time, pages, sources, deadline, publish date, last edit | Auto + Live |
+| «Новый проект» creates a folder with a card, refuses existing names and `/` | Auto |
+| report.py is not run for a folder mode; folder projects are not listed for a report mode | Auto (store) |
+| Panel: folder project rows, stage chips, overdue deadline in red, «Новый проект» | **Oleh: switch a mode to «папки» and look** |
+| Settings → Режимы: source picker, stages, metrics, speech pace | **Oleh: look** |

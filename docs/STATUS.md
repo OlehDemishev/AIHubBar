@@ -5,13 +5,14 @@
 **Updated:** 2026-10-30
 
 **Now:**
-- AI services connection (PR #34) and expired-token message (PR #33) merged; next: SPEC-modes §9 stage 4 (folder projects + command engine)
+- SPEC-modes §9 stage 4: folder projects in PR (branch `feat/folder-projects`); next in stage 4: command engine (agent / API → result file), «только файлы» background permissions, API spend, «Сравнить»
 
 **Next:**
 - SPEC-modes §9: 4 folder projects + command engine (incl. running with a chosen AI service, API spend, «Сравнить»), 5 calendar, 6 templates, 7 setup assistant, 8 for everyone, 9 languages (§13: en, es, pt-BR, fr, de, ja, id, ko, it, ar with RTL, pl, uk)
 - Fix whatever Oleh finds in docs/CHECKLIST.md
 
 **Needs Oleh:**
+- merge the folder projects PR; try it: duplicate a mode, set «Источник» → «папки» on a folder with a few subfolders, add stages (e.g. «идея, сценарий, монтаж, готово») and metrics
 - the limits come back after the next `claude` request in Terminal (the Keychain token expired 2026-10-30 02:22)
 - try Settings → «Строка меню» (presets, order, options, preview) and the ticking reset countdown
 - try Settings → Режимы (duplicate the mode → switcher appears in the panel) and a double-click on a .claudepult file
@@ -24,6 +25,12 @@
 - hooks are installed in ~/.claude/settings.json; backup of the original: ~/.claude/settings.json.claudepult-backup-20261029T192827
 - delete or archive the old repo `OlehDemishev/ClaudeBar`; turn on start at login if wanted
 <!-- summary:end -->
+
+## 2026-10-30 — Folder projects (branch `feat/folder-projects`)
+
+Done: SPEC-modes §3 / stage 4, part 1. Mode source «папки» (every subfolder is a project) and «одна папка»; card `проект.md` (stage, deadline, publish date, format, main file, platform — plain Markdown, written back line by line); stages per mode with switching from the panel; metrics per mode (words, duration with the mode's pace, reading time, pages, sources, deadline — red when overdue, publish date, last edit) counted on the main file incl. `.docx`/`.rtf`; «Новый проект» and «Создать проект.md» in the panel. Settings → Режимы: source picker, stages, metrics, pace. report.py runs only for report modes. CLI `--folder-projects <folder>`.
+Checked: `xcodebuild test` — 120 tests green incl. card parsing/writing, dates, metrics, scanner on a temp tree, store create/stage/source switch; no compiler warnings. Live: installed; `--folder-projects` on a sample folder: 1200-word `.docx` → «8:00», overdue deadline, publish date, sources, card stage; Oleh's report mode unchanged. CI not set up; checks run locally.
+Left: the folder panel was not seen (switching Oleh's mode only to look was not done); command engine, «только файлы», API spend and «Сравнить» are the next PR of stage 4.
 
 ## 2026-10-30 — AI services: connection (branch `feat/ai-services`)
 

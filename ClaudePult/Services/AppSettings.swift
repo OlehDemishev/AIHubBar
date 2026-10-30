@@ -64,6 +64,9 @@ final class AppSettings {
         didSet { defaults.set(try? JSONEncoder().encode(menuBarConfig), forKey: Keys.menuBarConfig) }
     }
 
+    /// Where the current mode's projects come from; set by `ModeStore` when a mode is applied, not stored.
+    var activeSource: ProjectSource = .none
+
     /// Chosen models and the compatible server's address (SPEC-modes §11); keys live in the Keychain.
     var aiServices: AIServicesConfig {
         didSet { defaults.set(try? JSONEncoder().encode(aiServices), forKey: Keys.aiServices) }
