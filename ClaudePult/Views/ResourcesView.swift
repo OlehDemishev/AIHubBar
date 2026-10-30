@@ -5,7 +5,13 @@ import SwiftUI
 /// apps using the most processor right now.
 struct ResourcesView: View {
     @Environment(SystemMonitor.self) private var monitor
+    @Environment(ModeStore.self) private var modes
     @AppStorage("collapsedBlocks") private var collapsedRaw = ""
+
+    /// The current profile's choice of metrics (all when it made none).
+    private func shows(_ metric: ResourceMetric) -> Bool {
+        ProfileModule.includes(metric.rawValue, in: modes.current?.module(.resources)?.metrics)
+    }
 
     private var collapsed: Bool { PanelBlock.collapsed(in: collapsedRaw).contains(.resources) }
 
@@ -45,21 +51,25 @@ struct ResourcesView: View {
     @ViewBuilder
     private func details(_ snapshot: SystemSnapshot) -> some View {
         Grid(alignment: .leading, horizontalSpacing: 8, verticalSpacing: 5) {
-            gauge(String(localized: "Процессор"), snapshot.cpu, detail: nil)
-            gauge(String(localized: "Память"), snapshot.memoryPercent,
-                  detail: "\(ResourceText.memory(snapshot.memoryUsed)) / \(ResourceText.memory(snapshot.memoryTotal))",
-                  warning: pressureText(snapshot.pressure))
-            if let gpu = snapshot.gpu { gauge(String(localized: "Графика"), gpu, detail: nil) }
+            if shows(.cpu) { gauge(String(localized: "Процессор"), snapshot.cpu, detail: nil) }
+            if shows(.memory) {
+                gauge(String(localized: "Память"), snapshot.memoryPercent,
+                      detail: "\(ResourceText.memory(snapshot.memoryUsed)) / \(ResourceText.memory(snapshot.memoryTotal))",
+                      warning: pressureText(snapshot.pressure))
+            }
+            if shows(.gpu), let gpu = snapshot.gpu { gauge(String(localized: "Графика"), gpu, detail: nil) }
             let diskUsed = snapshot.diskTotal > 0 ? Double(snapshot.diskTotal - snapshot.diskFree) / Double(snapshot.diskTotal) * 100 : 0
-            gauge(String(localized: "Диск"), diskUsed, detail: String(localized: "свободно \(ResourceText.bytes(snapshot.diskFree))"))
-            GridRow {
+            if shows(.disk) {
+                gauge(String(localized: "Диск"), diskUsed, detail: String(localized: "свободно \(ResourceText.bytes(snapshot.diskFree))"))
+            }
+            if shows(.network) { GridRow {
                 label(String(localized: "Сеть"))
                 Text(verbatim: "↓ \(ResourceText.speed(snapshot.networkIn))   ↑ \(ResourceText.speed(snapshot.networkOut))")
                     .gridCellColumns(2)
                     .monospacedDigit()
             }
-            .scaledFont(.caption)
-            if let battery = snapshot.battery {
+            .scaledFont(.caption) }
+            if shows(.battery), let battery = snapshot.battery {
                 GridRow {
                     label(String(localized: "Батарея"))
                     Text(batteryText(battery))
@@ -69,7 +79,7 @@ struct ResourcesView: View {
                 .scaledFont(.caption)
             }
         }
-        if !monitor.topProcesses.isEmpty {
+        if shows(.processes), !monitor.topProcesses.isEmpty {
             Text(monitor.topProcesses.prefix(3).map { "\($0.name) \(UsageText.percent($0.cpu))" }.joined(separator: " · "))
                 .scaledFont(.caption2)
                 .foregroundStyle(.secondary)

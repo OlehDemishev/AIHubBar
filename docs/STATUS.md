@@ -50,6 +50,12 @@
 - delete or archive the old repo `OlehDemishev/ClaudeBar`; turn on start at login if wanted
 <!-- summary:end -->
 
+## 2026-10-30 — Module options per profile (branch `feat/profile-module-options`)
+
+Done: `ProfileModule` carries optional per-profile choices — metrics for «Ресурсы Mac» (`ResourceMetric`), command ids for «Быстрые команды», toggles for «Быстрые переключатели», `showTimers` for «Не спать» — nil meaning everything, so older profiles and files are unchanged. The panel blocks follow the current profile; Settings → «Профили» → «Панель» has a checkmark menu next to each module («Показатели: все» / «2 из 7»). 13 languages.
+Checked: 237 tests green; live: CPU and memory only in the panel, «Показатели: 2 из 7» in Settings; profile restored.
+Left: —
+
 ## 2026-10-30 — Answers from Telegram checked end to end
 
 Done: Oleh updated the hooks (PermissionRequest timeout 300 s) and made a second bot for answers; its token is in the Keychain, the switch is on, the chat is the `_daily-report` one.

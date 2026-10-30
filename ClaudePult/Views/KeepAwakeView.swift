@@ -3,6 +3,7 @@ import SwiftUI
 /// «Не спать» in the panel (SPEC-profiles §4.2): what holds the Mac awake now, a switch and quick timers.
 struct KeepAwakeView: View {
     @Environment(KeepAwakeController.self) private var keepAwake
+    @Environment(ModeStore.self) private var modes
     @AppStorage("collapsedBlocks") private var collapsedRaw = ""
 
     private var collapsed: Bool { PanelBlock.collapsed(in: collapsedRaw).contains(.keepAwake) }
@@ -37,7 +38,7 @@ struct KeepAwakeView: View {
                         .scaledFont(.caption)
                         .foregroundStyle(.secondary)
                 }
-                HStack(spacing: 6) {
+                if modes.current?.module(.keepAwake)?.showTimers != false || manual { HStack(spacing: 6) {
                     ForEach([(15, String(localized: "15 мин")), (60, String(localized: "1 ч")), (120, String(localized: "2 ч"))], id: \.0) { minutes, title in
                         Button(title) { keepAwake.holdManually(for: TimeInterval(minutes * 60)) }
                             .help(String(localized: "Не давать Mac засыпать: \(title)"))
@@ -49,6 +50,7 @@ struct KeepAwakeView: View {
                 }
                 .controlSize(.small)
                 .buttonStyle(.bordered)
+                }
             }
         }
         .padding(.horizontal, 10)

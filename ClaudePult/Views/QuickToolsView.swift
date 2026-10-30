@@ -3,7 +3,14 @@ import SwiftUI
 /// «Быстрые команды» in the panel (SPEC-profiles §4.3): the library as buttons, two per row.
 struct QuickCommandsView: View {
     @Environment(AppSettings.self) private var settings
+    @Environment(ModeStore.self) private var modes
     @Environment(QuickToolsController.self) private var tools
+
+    /// The library, minus what the current profile left out.
+    private var commands: [QuickCommand] {
+        let chosen = modes.current?.module(.quickCommands)?.commands
+        return settings.quickCommands.filter { ProfileModule.includes($0.id, in: chosen) }
+    }
     @AppStorage("collapsedBlocks") private var collapsedRaw = ""
     @State private var confirming: String?
 
@@ -13,11 +20,11 @@ struct QuickCommandsView: View {
         VStack(alignment: .leading, spacing: 6) {
             BlockTitle(block: .quickCommands, title: "Быстрые команды")
             if !PanelBlock.collapsed(in: collapsedRaw).contains(.quickCommands) {
-                if settings.quickCommands.isEmpty {
+                if commands.isEmpty {
                     Text("Команд нет — добавьте в Настройках → «Модули».").scaledFont(.caption).foregroundStyle(.secondary)
                 }
                 LazyVGrid(columns: columns, alignment: .leading, spacing: 6) {
-                    ForEach(settings.quickCommands) { command in
+                    ForEach(commands) { command in
                         Button {
                             if command.confirm { confirming = command.id } else { tools.run(command) }
                         } label: {
@@ -69,6 +76,13 @@ struct QuickCommandsView: View {
 /// «Быстрые переключатели» in the panel (SPEC-profiles §4.4).
 struct QuickTogglesView: View {
     @Environment(AppSettings.self) private var settings
+    @Environment(ModeStore.self) private var modes
+
+    /// The profile's own choice, else the ones chosen in Settings → «Модули».
+    private var toggles: [QuickToggle] {
+        let chosen = modes.current?.module(.toggles)?.toggles
+        return QuickToggle.allCases.filter { toggle in chosen.map { $0.contains(toggle.rawValue) } ?? settings.quickToggles.contains(toggle) }
+    }
     @Environment(QuickToolsController.self) private var tools
     @AppStorage("collapsedBlocks") private var collapsedRaw = ""
     @State private var confirming: QuickToggle?
@@ -78,7 +92,7 @@ struct QuickTogglesView: View {
             BlockTitle(block: .toggles, title: "Быстрые переключатели")
             if !PanelBlock.collapsed(in: collapsedRaw).contains(.toggles) {
                 HStack(spacing: 6) {
-                    ForEach(QuickToggle.allCases.filter(settings.quickToggles.contains), id: \.self) { toggle in
+                    ForEach(toggles, id: \.self) { toggle in
                         let on = tools.isOn(toggle) == true
                         Button {
                             if toggle.needsConfirmation { confirming = toggle } else { tools.perform(toggle) }

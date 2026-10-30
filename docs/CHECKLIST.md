@@ -506,6 +506,14 @@ Panel snapshots: `defaults write com.demishev.claudepult DebugPanelSnapshot -boo
 | A click on the Survikon row's name opened that session in the Claude app (its `lastFocusedAt` changed at the click; the log shows the `claude://code/continue?session=local_…` link) | Live |
 | `claude` started in the Claude app's own terminal brings Claude forward instead of opening the folder in Finder | Code; Oleh |
 
+## Module options per profile (2026-10-30)
+
+| Scenario | Checked |
+|---|---|
+| Choosing items in a «nil = all» list and back to all; options saved and read back; files without them load as «all» | Auto (`ProfileModuleOptionsTests`) |
+| Oleh's profile with «Ресурсы Mac» limited to processor and memory: the panel showed only those two rows; Settings → Профили showed «Показатели: 2 из 7» | Live (profile restored afterwards) |
+| Commands, toggles and timers chosen through the menus | Oleh |
+
 ## Release without an Apple Developer account (2026-10-30)
 
 | Scenario | Checked |
