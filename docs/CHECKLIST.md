@@ -485,6 +485,13 @@ Panel snapshots: `defaults write com.demishev.claudepult DebugPanelSnapshot -boo
 | Live: the panel showed «контекст 85 %» for Survikon and «контекст 79 %» for this session | Live |
 | The 90 % notification | Oleh (a long session) |
 
+## Session rows open on a click anywhere (2026-10-30)
+
+| Scenario | Checked |
+|---|---|
+| A click on a session row's text (not the icon) opens it: a fake session in the scratchpad folder opened that folder in Finder (the fallback when there is no Terminal tab or app session) | Live (fake session removed afterwards) |
+| A background run's row opens its log; the icons still work | Code review; Oleh |
+
 ## Release without an Apple Developer account (2026-10-30)
 
 | Scenario | Checked |

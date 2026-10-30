@@ -175,10 +175,30 @@ private struct SessionRowView: View {
             RoundedRectangle(cornerRadius: 7)
                 .fill(row.state == .waiting ? Color.orange.opacity(0.14) : Color.primary.opacity(isHovered ? 0.06 : 0))
         )
+        // The whole row opens the session (or a background run's log), not only the icon on hover.
+        .contentShape(Rectangle())
+        .onTapGesture(perform: open)
         .onHover { isHovered = $0 }
         .animation(.easeOut(duration: 0.12), value: isHovered)
-        .help([inBackground ? String(localized: "в фоне") : row.state.title, action == nil ? nil : row.task, row.session?.cwd ?? row.run?.folder]
+        .help([inBackground ? String(localized: "в фоне") : row.state.title, action == nil ? nil : row.task, row.session?.cwd ?? row.run?.folder,
+               row.session != nil || row.run != nil ? String(localized: "Клик — открыть") : nil]
             .compactMap { $0 }.joined(separator: " · "))
+    }
+
+    /// A session comes to the front (its Terminal tab, the Claude app or the folder); a background run shows its log.
+    private func open() {
+        // A background run has no window of its own: its log, like the icon on hover.
+        if let run = row.run {
+            showLog(run)
+        } else if let session = row.session {
+            SessionActions.show(session)
+        }
+    }
+
+    private func showLog(_ run: BackgroundRun) {
+        runs.selectedLogRunID = run.id
+        NSApp.activate()
+        openWindow(id: "run-log")
     }
 
     private func quietMinutes(now: Date) -> Int? {
@@ -191,11 +211,7 @@ private struct SessionRowView: View {
     private var actions: some View {
         HStack(spacing: 8) {
             if let run = row.run {
-                Button {
-                    runs.selectedLogRunID = run.id
-                    NSApp.activate()
-                    openWindow(id: "run-log")
-                } label: { Image(systemName: "doc.text") }
+                Button { showLog(run) } label: { Image(systemName: "doc.text") }
                 .help("Журнал")
                 if run.state == .running {
                     Button { runs.stop(run.id) } label: { Image(systemName: "stop.circle") }
