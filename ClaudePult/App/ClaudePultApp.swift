@@ -14,6 +14,7 @@ struct ClaudePultApp: App {
     @State private var commands: CommandStore
     @State private var requests: AppRequests
     @State private var usage: UsageStore
+    @State private var hub: HubLimitsStore
     @State private var monitor: SystemMonitor
     @State private var keepAwake: KeepAwakeController
     @State private var quickTools: QuickToolsController
@@ -54,6 +55,8 @@ struct ClaudePultApp: App {
         _telegramApprovals = State(initialValue: TelegramApprovals(settings: settings, sessions: sessions))
         let usage = UsageStore(settings: settings, sessions: sessions)
         _usage = State(initialValue: usage)
+        let hub = HubLimitsStore(settings: settings)
+        _hub = State(initialValue: hub)
         let monitor = SystemMonitor(settings: settings)
         _monitor = State(initialValue: monitor)
         let keepAwake = KeepAwakeController(settings: settings)
@@ -70,6 +73,7 @@ struct ClaudePultApp: App {
         let hooks = HookController(settings: settings)
         _hooks = State(initialValue: hooks)
         usage.isActive = { [modes] in modes.installedModules.contains(.limits) }
+        hub.isActive = { [modes] in modes.installedModules.contains(.limits) }
         monitor.isActive = { [modes] in modes.installedModules.contains(.resources) }
         keepAwake.isActive = { [modes] in modes.installedModules.contains(.keepAwake) }
         clipboard.isActive = { [modes] in modes.installedModules.contains(.clipboard) }
@@ -120,6 +124,7 @@ struct ClaudePultApp: App {
             runs.start()
             requests.listen(commands: commands)
             usage.start()
+            hub.start()
             monitor.start()
             keepAwake.start()
             GlobalHotKey.register(settings.panelHotKey)
@@ -193,6 +198,7 @@ struct ClaudePultApp: App {
                 .environment(runs)
                 .environment(commands)
                 .environment(usage)
+                .environment(hub)
                 .environment(monitor)
                 .environment(keepAwake)
                 .environment(quickTools)
@@ -288,6 +294,7 @@ struct ClaudePultApp: App {
                 .environment(store)
                 .environment(hooks)
                 .environment(usage)
+                .environment(hub)
                 .environment(monitor)
                 .environment(keepAwake)
                 .environment(quickTools)

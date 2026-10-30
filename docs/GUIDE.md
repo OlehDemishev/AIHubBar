@@ -59,6 +59,7 @@ You can skip any step: **Skip** keeps the template's choice. Everything can be c
 
 - **Panel blocks:**
   - **Limits:** the 5-hour session and the week, with a reset countdown and a forecast.
+    Under Claude's rings, other AI services show up by themselves once they're found on the Mac or their key is saved: Codex, GitHub Copilot, Gemini CLI, OpenRouter, Cursor, and API spend of OpenAI and Anthropic. **Settings… → Modules → Limits → Other AI** lists what each one needs.
   - **Sessions:** every Claude Code session on this Mac. **Show** brings its Terminal tab forward.
   - **Projects:** expand a project to run its commands.
   - **Upcoming:** deadlines and publications for the next 7 days.
@@ -79,6 +80,7 @@ You can skip any step: **Skip** keeps the template's choice. Everything can be c
 
 - **Subscription token:** to show the limits, AI Hub Bar reads Claude Code's sign-in from the macOS Keychain on each refresh. It never stores or logs it.
 - **API keys:** kept only in the macOS Keychain. They never go into logs or exported settings.
+- **Other AI services:** Codex and Copilot are asked through their own tools (`codex`, `gh`). The Gemini CLI and Cursor sign-ins are read only after you turn on consent for each in Settings; without it Gemini is counted from its local logs and Cursor stays off.
 - **What gets sent:** your files go only to the AI service you run a command with. AI Hub Bar has no server of its own.
 - **Session hook:** it only writes small status files on this Mac and never changes what Claude does. **Settings… → Claude Code → Remove hooks** takes it out again.
 - **Background runs:** each runs under an explicit permission list. With **Project files only**, Claude can read and write inside the project folder, with no shell and no internet.

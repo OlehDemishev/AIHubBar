@@ -3,6 +3,7 @@ import SwiftUI
 /// «Лимиты» block at the top of the panel (spec §2.8): bars, resets, forecast, extra usage, per-project breakdown.
 struct LimitsView: View {
     @Environment(UsageStore.self) private var usage
+    @Environment(HubLimitsStore.self) private var hub
     @Environment(LaunchController.self) private var launcher
     @Environment(CommandEngine.self) private var engine
     @AppStorage("limitsBreakdownExpanded") private var showBreakdown = false
@@ -14,10 +15,26 @@ struct LimitsView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             header
-            if !collapsed { details }
+            if !collapsed {
+                details
+                hubRows
+            }
         }
         .padding(.horizontal, 10)
         .padding(.vertical, 8)
+    }
+
+    /// Other AI services (SPEC-hub), one compact row each, under Claude's own limits.
+    @ViewBuilder
+    private var hubRows: some View {
+        if !hub.limits.isEmpty {
+            Divider().padding(.vertical, 2)
+            VStack(alignment: .leading, spacing: 6) {
+                ForEach(hub.limits) { limit in
+                    HubRow(limit: limit)
+                }
+            }
+        }
     }
 
     @ViewBuilder
@@ -218,6 +235,68 @@ private struct WindowRow: View {
                 Text(detail)
                     .scaledFont(.caption2)
                     .foregroundStyle(.secondary)
+            }
+        }
+    }
+}
+
+/// One other service: its name, then each window as «title · reset … percent» with a thin bar, or its spend.
+private struct HubRow: View {
+    let limit: HubLimit
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 3) {
+            Text(limit.source.title)
+                .scaledFont(.caption, weight: .medium)
+            if let error = limit.error {
+                Label(error, systemImage: "exclamationmark.triangle")
+                    .scaledFont(.caption2)
+                    .foregroundStyle(.orange)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            ForEach(Array(limit.windows.enumerated()), id: \.offset) { _, window in
+                HubWindowRow(window: window)
+            }
+        }
+        .help([limit.source.title, limit.error].compactMap { $0 }.joined(separator: " · "))
+    }
+}
+
+private struct HubWindowRow: View {
+    let window: HubLimit.Window
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 2) {
+            HStack(alignment: .firstTextBaseline, spacing: 4) {
+                Text(window.title)
+                    .scaledFont(.caption2)
+                    .lineLimit(1)
+                if let reset = window.resetsAt {
+                    Text(verbatim: "· " + String(localized: "сброс \(reset.formatted(.relative(presentation: .named)))"))
+                        .scaledFont(.caption2)
+                        .foregroundStyle(.secondary)
+                        .lineLimit(1)
+                }
+                Spacer(minLength: 6)
+                if let percent = window.percent {
+                    Text(UsageText.percent(percent))
+                        .scaledFont(.caption, weight: .semibold)
+                        .monospacedDigit()
+                        .foregroundStyle(UsageWindow.color(for: percent))
+                } else if let detail = window.detail {
+                    Text(detail)
+                        .scaledFont(.caption, weight: .semibold)
+                        .monospacedDigit()
+                }
+            }
+            if let percent = window.percent {
+                ProgressView(value: min(max(percent, 0), 100), total: 100)
+                    .progressViewStyle(.linear)
+                    .tint(UsageWindow.color(for: percent))
+                    .controlSize(.mini)
+                if let detail = window.detail {
+                    Text(detail).scaledFont(.caption2).foregroundStyle(.secondary)
+                }
             }
         }
     }

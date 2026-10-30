@@ -5,7 +5,8 @@
 **Updated:** 2026-10-30
 
 **Now:**
-- nothing in progress; renamed to AI Hub Bar (PR #115); session rows open on a click anywhere (PR #117); widgets translated into 13 languages (PR #119); sessions in Claude's own terminal open Claude (PR #121); module options per profile (PR #124)
+- other AI services' limits (docs/SPEC-hub.md) built: PR on `feat/hub-limits`, stacked on the spec PR #126
+- renamed to AI Hub Bar (PR #115); session rows open on a click anywhere (PR #117); widgets translated into 13 languages (PR #119); sessions in Claude's own terminal open Claude (PR #121); module options per profile (PR #124)
 - merged today: feature batch — approve from notifications (#100), current action (#102), week forecast (#104), Telegram answers (#106), PR/CI alerts (#108), search, hot key, Shortcuts (#110), widget and Control Center toggle (#112), night queue (#113), context fullness (#114); panel as cards (#98); hover hints (#91); menu bar drag, translation review, release re-check (#93–#95)
 - release without an Apple Developer account ready (PR #85), nothing published; Windows and Linux specs wait for Oleh
 
@@ -15,9 +16,10 @@
 - stage 8: done without Developer ID (self-signed + Sparkle, PR #85; re-checked on main); notarization only if Oleh buys Developer ID; publishing is Oleh's step (Needs Oleh)
 - Fix whatever Oleh finds in docs/CHECKLIST.md
 - Windows and Linux versions (docs/SPEC-windows.md, docs/SPEC-linux.md) — only when Oleh says; stage 0 (fact checks in VMs) first
-- limits of other AI services (docs/SPEC-hub.md) — postponed: Oleh uses only Claude; for when AI Hub Bar is shared
+- other AI services, if wanted later: menu bar items and a widget line for them, «lasts until reset» forecast, their alerts to Telegram
 
 **Needs Oleh:**
+- merge PR #126 (spec), then the stacked hub PR; to try the other AI services: Settings → «Модули» → «Лимиты» → «Другие AI» — OpenRouter key, OpenAI / Anthropic admin keys, installed and signed-in `codex`, Gemini CLI and Cursor consent toggles (Copilot already shows from `gh`)
 - optionally rename the GitHub repository to match AI Hub Bar (then SUFeedURL in project.yml and REPO in release.sh follow)
 - try: the «Сессии и проекты» widget, «Не спать» in Control Center, ⌃⌥C search, Shortcuts actions, «На ночь» on a project
 - try the new panel: hover a session row, click a project, the profile menu with two profiles
@@ -50,6 +52,12 @@
 - hooks are installed in ~/.claude/settings.json; backup of the original: ~/.claude/settings.json.claudepult-backup-20261029T192827
 - delete or archive the old repo `OlehDemishev/ClaudeBar`; turn on start at login if wanted
 <!-- summary:end -->
+
+## 2026-10-30 — Limits of other AI services (branch `feat/hub-limits`)
+
+Done: `HubLimits.swift` — model, tolerant parsers and readers for Codex (`codex app-server` `account/rateLimits/read`, fallback to the newest `~/.codex/sessions` log), OpenRouter (`/api/v1/key`), Copilot (`gh api /copilot_internal/user`), Gemini CLI (Code Assist quota with consent, otherwise today's requests from `~/.gemini/tmp` against the plan's daily limit), OpenAI and Anthropic API spend this month (admin keys), Cursor (`GetCurrentPeriodUsage`, consent only). `HubLimitsStore` refreshes every 5 minutes while the limits module is installed, reads sources in parallel, alerts on the Claude thresholds once per window. A source turns on by itself when its tool is found or its key is saved; each can be switched off. Panel: a compact row per service under Claude's rings. Settings → Модули → Лимиты → «Другие AI»: status, requirement, key field (Keychain accounts `hub-openrouter`, `hub-openai-admin`, `hub-anthropic-admin`), Gemini consent and plan, Cursor consent, «Проверить сейчас». 48 new strings in 12 languages. Guide updated.
+Checked: `xcodebuild test` — 247 tests pass (10 new on sample answers, including Copilot's real free-plan shape); installed and checked live: the panel shows «GitHub Copilot — чат, дополнения, осталось 200 из 200, сброс послезавтра» from this Mac's `gh`.
+Left: Codex, Gemini, Cursor, OpenRouter, OpenAI and Anthropic costs not checked live (no tools or keys here); Anthropic cost amounts are assumed to be cents; no menu bar items, widget line, forecast or Telegram for these services yet.
 
 ## 2026-10-30 — Spec for other AI services' limits, postponed (branch `docs/spec-hub`)
 
