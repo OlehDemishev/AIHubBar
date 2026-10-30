@@ -82,13 +82,16 @@ struct AssistantView: View {
     }
 
     private func finish(_ draft: AssistantDraft) {
-        settings.menuBarConfig = draft.menuBar
-        settings.hiddenBlocks = draft.hiddenBlocks
+        // The panel blocks and the menu bar chosen here belong to the new profile (SPEC-profiles §6).
+        var profile = draft.mode
+        profile.modules = nil
+        profile.modules = profile.normalizedModules(hiddenBlocks: draft.hiddenBlocks)
+        profile.menuBar = draft.menuBar
         settings.calendarReminderHours = draft.reminderHours
         if let folder = draft.mode.source.folder.map(PathText.expand), !FileManager.default.fileExists(atPath: folder) {
             try? FileManager.default.createDirectory(atPath: folder, withIntermediateDirectories: true)
         }
-        modes.addFromAssistant(draft.mode)
+        modes.addFromAssistant(profile)
         dismissWindow(id: "assistant")
     }
 
@@ -116,7 +119,7 @@ struct AssistantView: View {
     /// The first screen on a new Mac: what ClaudePult is and what it still needs (SPEC-modes §9.8).
     private var welcomeStep: some View {
         VStack(alignment: .leading, spacing: 14) {
-            Text("ClaudePult живёт в строке меню (✦): проекты, лимиты подписки Claude, сессии и команды для AI — в одной панели. Сначала проверим, что всё готово, потом настроим первый режим.")
+            Text("ClaudePult живёт в строке меню (✦): проекты, лимиты подписки Claude, сессии и команды для AI — в одной панели. Сначала проверим, что всё готово, потом настроим первый профиль.")
                 .fixedSize(horizontal: false, vertical: true)
             ReadinessSection()
             Text("Всё это можно сделать и позже: в Настройках и в окне «Помощь».")
@@ -126,7 +129,7 @@ struct AssistantView: View {
 
     private func importStep(_ draft: Binding<AssistantDraft>) -> some View {
         VStack(alignment: .leading, spacing: 14) {
-            Text("Есть файл настроек ClaudePult (.claudepult) с другого Мака или от коллеги? Его можно перенести целиком — режимы, строку меню, внешний вид. Ключи API в файл не попадают.")
+            Text("Есть файл настроек ClaudePult (.claudepult) с другого Мака или от коллеги? Его можно перенести целиком — профили, строку меню, внешний вид. Ключи API в файл не попадают.")
                 .fixedSize(horizontal: false, vertical: true)
             ImportConfirmation()
             HStack {
@@ -148,7 +151,7 @@ struct AssistantView: View {
                     draft.wrappedValue.choose(template)
                 }
             }
-            choiceCard(title: String(localized: "С нуля"), detail: String(localized: "Пустой режим: всё выберете на следующих шагах."), icon: "square.dashed",
+            choiceCard(title: String(localized: "С нуля"), detail: String(localized: "Пустой профиль: всё выберете на следующих шагах."), icon: "square.dashed",
                        selected: draft.wrappedValue.templateID == nil) {
                 draft.wrappedValue.choose(nil)
             }
@@ -290,7 +293,7 @@ struct AssistantView: View {
 
     private func serviceStep(_ draft: Binding<AssistantDraft>) -> some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("Кто выполняет команды режима. Модель по API получает только текст файла; агент (Claude Code и др.) работает с файлами в папке проекта.")
+            Text("Кто выполняет команды профиля. Модель по API получает только текст файла; агент (Claude Code и др.) работает с файлами в папке проекта.")
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)
             Picker("Сервис", selection: draft.mode.service) {
@@ -380,10 +383,10 @@ struct AssistantView: View {
                 ForEach(MenuBarConfig.Preset.allCases.filter { $0 != .custom }, id: \.self) { Text($0.title).tag($0) }
             }
             .pickerStyle(.segmented)
-            Text("«Минимум» — значок и события, «Лимиты» — ещё проценты сессии и недели, «Всё» — всё, что есть. Отдельные элементы — в Настройках → «Строка меню». Набор общий для всех режимов.")
+            Text("«Минимум» — значок и события, «Лимиты» — ещё проценты сессии и недели, «Всё» — всё, что есть. Отдельные элементы — в Настройках → «Строка меню». Набор общий для всех профилей.")
                 .font(.caption).foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)
-            Toggle("Значок режима вместо ✦", isOn: Binding(
+            Toggle("Значок профиля вместо ✦", isOn: Binding(
                 get: { draft.wrappedValue.menuBar.element(.icon).symbol == "mode" },
                 set: { on in draft.wrappedValue.menuBar.set(.icon) { $0.symbol = on ? "mode" : "sparkle" } }
             ))
@@ -405,7 +408,7 @@ struct AssistantView: View {
                     .buttonStyle(.plain)
                 }
             }
-            Text("«Готово» добавит режим и сделает его текущим. Дальше всё правится в Настройках → «Режимы».")
+            Text("«Готово» добавит профиль и сделает его текущим. Дальше всё правится в Настройках → «Профили».")
                 .font(.caption).foregroundStyle(.secondary)
         }
     }
@@ -471,7 +474,7 @@ struct AssistantPreview: View {
         VStack(alignment: .leading, spacing: 10) {
             HStack(spacing: 6) {
                 Image(systemName: mode.icon)
-                Text(mode.name.isEmpty ? String(localized: "Новый режим") : mode.name).fontWeight(.semibold)
+                Text(mode.name.isEmpty ? String(localized: "Новый профиль") : mode.name).fontWeight(.semibold)
             }
             .font(.callout)
             if !draft.hiddenBlocks.contains(.limits) {

@@ -4,6 +4,7 @@ import SwiftUI
 struct MenuBarSettings: View {
     @Environment(AppSettings.self) private var settings
     @Environment(UsageStore.self) private var usage
+    @Environment(ModeStore.self) private var modes
     @State private var sample = false
 
     var body: some View {
@@ -45,7 +46,7 @@ struct MenuBarSettings: View {
                 } header: {
                     Text("Вид")
                 } footer: {
-                    Footnote(text: String(localized: "Разделитель ставится между числами; значки и счётчики отделяются небольшим отступом. Набор общий для всех режимов."))
+                    Footnote(text: String(localized: "Разделитель ставится между числами; значки и счётчики отделяются небольшим отступом. Набор общий для всех профилей."))
                 }
             }
             .formStyle(.grouped)
@@ -121,14 +122,20 @@ struct MenuBarSettings: View {
             config.elements = made.elements
         }
         config.preset = preset
-        settings.menuBarConfig = config
+        store(config)
     }
 
     private func edit(_ change: (inout MenuBarConfig) -> Void) {
         var config = settings.menuBarConfig
         change(&config)
         config.preset = .custom
+        store(config)
+    }
+
+    /// The menu bar belongs to the current profile (SPEC-profiles §6): every change goes to it as well.
+    private func store(_ config: MenuBarConfig) {
         settings.menuBarConfig = config
+        modes.setMenuBar(config)
     }
 
     private func move(_ config: inout MenuBarConfig, from index: Int, by offset: Int) {
@@ -140,7 +147,7 @@ struct MenuBarSettings: View {
     private func binding<Value>(_ path: WritableKeyPath<MenuBarConfig, Value>) -> Binding<Value> {
         Binding(
             get: { settings.menuBarConfig[keyPath: path] },
-            set: { settings.menuBarConfig[keyPath: path] = $0 }
+            set: { var config = settings.menuBarConfig; config[keyPath: path] = $0; store(config) }
         )
     }
 }
@@ -156,7 +163,7 @@ private struct ElementRow: View {
 
     private static let symbols: [(String, String)] = [
         ("sparkle", String(localized: "✦ Искра")), ("star", String(localized: "Звезда")), ("bolt", String(localized: "Молния")), ("brain", String(localized: "Мозг")), ("terminal", String(localized: "Терминал")),
-        ("mode", String(localized: "Значок режима")), ("none", String(localized: "Без значка")),
+        ("mode", String(localized: "Значок профиля")), ("none", String(localized: "Без значка")),
     ]
 
     var body: some View {

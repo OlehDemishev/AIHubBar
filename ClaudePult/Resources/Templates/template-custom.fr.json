@@ -5,10 +5,10 @@
   "language": "fr",
   "id": "custom",
   "title": "Personnalisé",
-  "description": "Un ensemble vide : «Tâche libre» et les étapes «en cours → terminé». Le reste, dans Réglages → «Modes».",
+  "description": "Un ensemble vide : «Tâche libre» et les étapes «en cours → terminé». Le reste, dans Réglages → «Profils».",
   "folderHint": "Un dossier où chaque sous-dossier est un projet",
   "mode": {
-    "name": "Mon mode",
+    "name": "Mon profil",
     "icon": "sparkle",
     "template": "custom",
     "source": {

@@ -43,7 +43,7 @@ struct AssistantDraftTests {
         #expect(d.mode.permissions == .filesOnly)
 
         d.choose(nil)
-        #expect(d.templateID == nil && d.mode.name == "Новый режим")
+        #expect(d.templateID == nil && d.mode.name == "Новый профиль")
         d.choose(templates.first { $0.id == "developer" })
         #expect(d.menuBar.preset == .limits)
     }

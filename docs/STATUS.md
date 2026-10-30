@@ -1,21 +1,21 @@
 # Status
 
 <!-- summary:start -->
-**Stage:** SPEC-modes done except signing/updates; SPEC-profiles (variant C) stage 1 done, stage 2 next
+**Stage:** SPEC-modes done except signing/updates; SPEC-profiles stage 1 done, stage 2 in PR
 **Updated:** 2026-10-30
 
 **Now:**
-- SPEC-profiles stage 1 (model) merged (PR #71) with the spec (PR #67); nothing in progress
 
 **Next:**
 - SPEC-profiles stage 2: panel and menu bar from profile modules, «Профили» and «Модули» tabs, «режим» → «профиль» in all 13 languages (moved here from stage 1: these strings get rewritten anyway)
-- stages 3–6: empty start and new assistant, Ресурсы Mac, Не спать, Быстрые команды и переключатели
+- SPEC-profiles stages 3–6: empty start and new assistant, Ресурсы Mac, Не спать, Быстрые команды и переключатели
 - menu bar elements reordered by dragging (needs a different list than a grouped Form)
 - fix whatever Oleh finds in the translations (machine translation; native review for ja, ko, ar at least)
 - stage 8 rest: Developer ID signing and notarization, Sparkle updates — once Oleh decides on Developer ID, the name and where updates are hosted
 - Fix whatever Oleh finds in docs/CHECKLIST.md
 
 **Needs Oleh:**
+- try Settings → «Профили» → «Панель» (hide or move a block) and two profiles with different menu bars (Settings → «Строка меню» edits the current one)
 - after ~20:11 today: check that the limits keep updating by themselves (the sign-in renewal runs when the token expires)
 - read docs/GUIDE.md as a newcomer would
 - review the languages: Settings → Основные → «Язык интерфейса» → a language → «Перезапустить» (and back); Arabic should mirror right-to-left
@@ -33,6 +33,12 @@
 - hooks are installed in ~/.claude/settings.json; backup of the original: ~/.claude/settings.json.claudepult-backup-20261029T192827
 - delete or archive the old repo `OlehDemishev/ClaudeBar`; turn on start at login if wanted
 <!-- summary:end -->
+
+## 2026-10-30 — Profiles stage 2: panel from modules, menu bar per profile, rename (branch `feat/profiles-panel`)
+
+Done: SPEC-profiles §9.2. The profile's modules now decide the panel: the panel draws the current profile's shown modules in its order. Which modules a profile has follows its settings (limits and sessions always, «Ближайшее» with the calendar, «Проекты» with a source, «Отчёты» with `_daily-report`); showing and order are the profile's own (Settings → «Профили» → «Панель», toggles and ↑↓). The old global «Блоки панели» in «Внешний вид» are gone; the old flags are still written for older versions. Each profile has its own menu bar (old profiles take the one they had); «Строка меню» edits the current profile's, switching profiles switches the bar. New tab «Модули»: the catalog with what each module does, which profiles show it, and its global settings — «Лимиты подписки» moved here from «Claude Code», calendar «Напоминания» from «Основные». The five existing modules are built in; installing and removing come with the first optional module (stage 4). «Режим» → «профиль» in the whole interface in all 13 languages (41 strings carried over with gender and particles fixed for de, it, ko, ar; 11 new strings), custom template names, README and GUIDE.
+Checked: `xcodebuild test` — 170 tests green (new: profile decides order and visibility, selecting a profile applies its panel and menu bar); catalog synced with nothing stale or untranslated, format specifiers match, no «mode» word left except «background mode». Live: installed from the worktree; Oleh's profile keeps limits, sessions, projects, reports and the panel draws them in that order; «Профили» and «Модули» tabs captured. CI not set up; checks run locally.
+Left: hiding and reordering by hand and two profiles with different menu bars — for Oleh to try.
 
 ## 2026-10-30 — Profiles stage 1: the model (branch `feat/profiles-model`)
 

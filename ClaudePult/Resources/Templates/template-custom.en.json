@@ -5,10 +5,10 @@
   "language": "en",
   "id": "custom",
   "title": "Custom",
-  "description": "An empty set: «Custom task» and the stages «in progress → done». Everything else — in Settings → «Modes».",
+  "description": "An empty set: «Custom task» and the stages «in progress → done». Everything else — in Settings → «Profiles».",
   "folderHint": "A folder where every subfolder is a project",
   "mode": {
-    "name": "My mode",
+    "name": "My profile",
     "icon": "sparkle",
     "template": "custom",
     "source": {

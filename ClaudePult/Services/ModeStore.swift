@@ -117,10 +117,10 @@ final class ModeStore {
             let saved = state.map(\.current).flatMap { enabledIDs.contains($0) ? $0 : nil }
             currentID = saved ?? enabledIDs.first ?? ""
         }
-        // Modes become profiles (SPEC-profiles §7): files without modules, or with stale ones, are rewritten.
-        for mode in modes where mode.modules != mode.syncedModules(hiddenBlocks: settings.hiddenBlocks) {
+        // Modes become profiles (SPEC-profiles §7): files without modules or a menu bar of their own are rewritten.
+        for mode in modes where synced(mode) != mode {
             save(mode)
-            AppLog.info("Profiles: modules of «\(mode.name)» updated")
+            AppLog.info("Profiles: «\(mode.name)» updated to modules and its own menu bar")
         }
         installModules(of: modes)
         if let current { apply(current) }
@@ -138,7 +138,7 @@ final class ModeStore {
     func addFromAssistant(_ draft: Mode) -> Mode {
         var mode = draft
         mode.id = UUID().uuidString.lowercased()
-        mode.name = uniqueName(mode.name.trimmingCharacters(in: .whitespaces).isEmpty ? String(localized: "Новый режим") : mode.name)
+        mode.name = uniqueName(mode.name.trimmingCharacters(in: .whitespaces).isEmpty ? String(localized: "Новый профиль") : mode.name)
         modes.append(mode)
         enabledIDs.append(mode.id)
         save(mode)
@@ -178,9 +178,25 @@ final class ModeStore {
         settings.activeSource = mode.source
         settings.promptStyle = mode.template == "developer-report" ? .oleh : .generic
         // The built-in git scanner arrives with the templates (SPEC-modes §9, stage 6).
-        settings.setShows(.projects, mode.showProjects && mode.source.isShownInPanel)
-        settings.setShows(.commands, mode.showCommonCommands && mode.commonCommands == .dailyReport)
+        // The profile's modules decide what the panel shows (SPEC-profiles §9.2); the blocks in `AppSettings` follow
+        // them for the code that still reads those.
+        settings.setShows(.limits, mode.shows(.limits))
+        settings.setShows(.sessions, mode.shows(.sessions))
+        settings.setShows(.calendar, mode.shows(.upcoming))
+        settings.setShows(.projects, mode.shows(.projects) && mode.source.isShownInPanel)
+        settings.setShows(.commands, mode.shows(.reports))
+        if let menuBar = mode.menuBar, menuBar != settings.menuBarConfig { settings.menuBarConfig = menuBar }
         didApply?()
+    }
+
+    /// The current profile's shown, installed modules in panel order.
+    var panelModules: [ModuleKind] { (current?.panelModules ?? []).filter(installedModules.contains) }
+
+    /// Settings → «Строка меню» edits the current profile's menu bar.
+    func setMenuBar(_ config: MenuBarConfig) {
+        guard var mode = current, mode.menuBar != config else { return }
+        mode.menuBar = config
+        update(mode)
     }
 
     func select(_ id: String) {
@@ -349,7 +365,7 @@ final class ModeStore {
             installedModules = (bundle.installed ?? []).compactMap(ModuleKind.init(rawValue:))
             saveAll()
             if let current { apply(current) }
-            lastMessage = String(localized: "Настройки импортированы: \(modes.count) режим(ов).")
+            lastMessage = String(localized: "Настройки импортированы: \(modes.count) профиль(ов).")
         case .replace, .add:
             for var mode in bundle.modes {
                 mode.id = UUID().uuidString.lowercased()
@@ -359,7 +375,7 @@ final class ModeStore {
                 save(mode)
             }
             saveState()
-            lastMessage = String(localized: "Добавлено режимов: \(bundle.modes.count).")
+            lastMessage = String(localized: "Добавлено профилей: \(bundle.modes.count).")
         }
         pendingImport = nil
         AppLog.info("Settings import (\(style == .replace ? "replace" : "add")): \(bundle.modes.count) mode(s)")
@@ -397,10 +413,15 @@ final class ModeStore {
 
     private func fileURL(_ id: String) -> URL { directory.appending(path: "\(id).json") }
 
-    /// The mode with its modules following its blocks (until stage 2 the blocks decide, SPEC-profiles §9).
+    /// The profile with its modules in order (SPEC-profiles §1) and a menu bar of its own. The old block flags are
+    /// written from the modules, so an older ClaudePult reading the file shows the same.
     private func synced(_ mode: Mode) -> Mode {
         var mode = mode
-        mode.modules = mode.syncedModules(hiddenBlocks: settings.hiddenBlocks)
+        let modules = mode.normalizedModules(hiddenBlocks: settings.hiddenBlocks)
+        mode.modules = modules
+        if let projects = modules.first(where: { $0.kind == .projects }) { mode.showProjects = projects.shown }
+        if let reports = modules.first(where: { $0.kind == .reports }) { mode.showCommonCommands = reports.shown }
+        if mode.menuBar == nil { mode.menuBar = settings.menuBarConfig }
         return mode
     }
 
