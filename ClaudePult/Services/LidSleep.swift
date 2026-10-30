@@ -87,11 +87,11 @@ enum LidSleep {
         defer { try? FileManager.default.removeItem(at: temp) }
         let check = "/etc/sudoers.d/.claudepult.check"
         let script = "/usr/bin/install -m 0440 -o root -g wheel '\(temp.path)' \(check) && /usr/sbin/visudo -cqf \(check) && /bin/mv -f \(check) \(sudoersFile) || { /bin/rm -f \(check); exit 1; }"
-        return await runAsAdmin(script, prompt: String(localized: "ClaudePult просит разрешение не давать Mac засыпать с закрытой крышкой."))
+        return await runAsAdmin(script, prompt: String(localized: "AI Hub Bar просит разрешение не давать Mac засыпать с закрытой крышкой."))
     }
 
     static func uninstall() async -> AdminResult {
-        await runAsAdmin("/bin/rm -f \(sudoersFile)", prompt: String(localized: "ClaudePult убирает своё разрешение для сна с закрытой крышкой."))
+        await runAsAdmin("/bin/rm -f \(sudoersFile)", prompt: String(localized: "AI Hub Bar убирает своё разрешение для сна с закрытой крышкой."))
     }
 
     private static func runAsAdmin(_ shell: String, prompt: String) async -> AdminResult {

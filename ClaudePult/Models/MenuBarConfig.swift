@@ -384,7 +384,7 @@ enum MenuBarComposer {
     }
 
     static func accessibilityText(_ config: MenuBarConfig, _ data: MenuBarData) -> String {
-        var parts = ["ClaudePult"]
+        var parts = ["AI Hub Bar"]
         let on = Set(config.elements.filter(\.enabled).map(\.kind))
         if on.contains(.session), let session = data.session { parts.append(String(localized: "сессия \(Int(session.rounded())) %")) }
         if on.contains(.week), let week = data.week { parts.append(String(localized: "неделя \(Int(week.rounded())) %")) }

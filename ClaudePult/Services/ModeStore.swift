@@ -426,7 +426,7 @@ final class ModeStore {
     /// A `*.claudepult` file opened from Finder or the command line.
     func prepareImport(from url: URL) {
         guard let data = try? Data(contentsOf: url), let bundle = Self.decodeBundle(data) else {
-            lastMessage = String(localized: "Не удалось прочитать «\(url.lastPathComponent)»: это не файл настроек ClaudePult.")
+            lastMessage = String(localized: "Не удалось прочитать «\(url.lastPathComponent)»: это не файл настроек AI Hub Bar.")
             return
         }
         pendingImport = (url, bundle)

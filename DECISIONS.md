@@ -2,6 +2,10 @@
 
 Decisions made where the spec is silent or does not match reality. Newest at the top.
 
+## 2026-10-30 — Renamed to AI Hub Bar
+
+Oleh's choice: «AI Hub Bar» (his root «AI Hub»; the app is no longer only about Claude). Renamed: everything a person sees — the app bundle (`AI Hub Bar.app`, executable `AIHubBar`), menu bar and panel, windows, notifications, Shortcuts actions, widget names, 13 languages, README / GUIDE / RELEASE, the release `.dmg` and appcast titles. Kept: bundle id `com.demishev.claudepult` (settings, Automation and notification permissions, login item), Swift module `ClaudePult`, Xcode project and scheme, `~/Library/Application Support/ClaudePult` and `~/Library/Logs/ClaudePult`, the Keychain service «ClaudePult API key», the «ClaudePult Release» signing certificate and its folder, the `*.claudepult` file type, the default notes folder «ClaudePult Notes» (existing notes stay where they are), widget and control kinds, the GitHub repository (renaming it is Oleh's call; GitHub redirects the old release URLs). `scripts/build-and-install.sh` moves an old `ClaudePult.app` to the Trash so two copies with one bundle id don't confuse macOS.
+
 ## 2026-10-30 — The hot key opens a search window, not the panel
 
 `MenuBarExtra` (window style) can't be opened from code: `performClick` on its `NSStatusBarButton`, sending the button's action and posting mouse-down/up events into its status bar window all did nothing (checked live). So the global hot key (a Carbon `RegisterEventHotKey`, no Accessibility permission) opens a separate small «Поиск — ClaudePult» window with the same search as the panel. A third-party workaround (private `NSStatusItem` access) wasn't worth the risk.

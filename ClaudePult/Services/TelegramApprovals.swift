@@ -113,7 +113,7 @@ final class TelegramApprovals {
             return
         }
         botName = "@" + username
-        let ok = await call(token, "sendMessage", ["chat_id": chatID, "text": String(localized: "ClaudePult: сюда будут приходить запросы разрешений Claude.")]) != nil
+        let ok = await call(token, "sendMessage", ["chat_id": chatID, "text": String(localized: "AI Hub Bar: сюда будут приходить запросы разрешений Claude.")]) != nil
         status = ok ? String(localized: "Работает: тестовое сообщение отправлено") : String(localized: "Бот не может написать в этот чат — откройте его в Telegram и нажмите «Start»")
     }
 

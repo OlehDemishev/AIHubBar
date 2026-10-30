@@ -120,7 +120,7 @@ struct AssistantView: View {
     /// The first screen on a new Mac: what ClaudePult is and what it still needs (SPEC-modes §9.8).
     private var welcomeStep: some View {
         VStack(alignment: .leading, spacing: 14) {
-            Text("ClaudePult живёт в строке меню (✦): проекты, лимиты подписки Claude, сессии и команды для AI — в одной панели. Сначала проверим, что всё готово, потом настроим первый профиль.")
+            Text("AI Hub Bar живёт в строке меню (✦): проекты, лимиты подписки Claude, сессии и команды для AI — в одной панели. Сначала проверим, что всё готово, потом настроим первый профиль.")
                 .fixedSize(horizontal: false, vertical: true)
             ReadinessSection()
             Text("Всё это можно сделать и позже: в Настройках и в окне «Помощь».")
@@ -130,7 +130,7 @@ struct AssistantView: View {
 
     private func importStep(_ draft: Binding<AssistantDraft>) -> some View {
         VStack(alignment: .leading, spacing: 14) {
-            Text("Есть файл настроек ClaudePult (.claudepult) с другого Мака или от коллеги? Его можно перенести целиком — профили, строку меню, внешний вид. Ключи API в файл не попадают.")
+            Text("Есть файл настроек AI Hub Bar (.claudepult) с другого Мака или от коллеги? Его можно перенести целиком — профили, строку меню, внешний вид. Ключи API в файл не попадают.")
                 .fixedSize(horizontal: false, vertical: true)
             ImportConfirmation()
             HStack {

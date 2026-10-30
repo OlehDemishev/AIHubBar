@@ -8,7 +8,7 @@ struct AssistantDraft: Equatable, Sendable {
 
         var title: String {
             switch self {
-            case .welcome: String(localized: "Добро пожаловать в ClaudePult")
+            case .welcome: String(localized: "Добро пожаловать в AI Hub Bar")
             case .importSettings: String(localized: "Перенести настройки?")
             case .template: String(localized: "Чем вы занимаетесь?")
             case .folder: String(localized: "Где лежат проекты?")

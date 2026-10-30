@@ -7,7 +7,7 @@ enum LaunchError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .automationDenied:
-            String(localized: "ClaudePult не может управлять Терминалом. Разрешите: Системные настройки → Конфиденциальность и безопасность → Автоматизация → ClaudePult → Терминал.")
+            String(localized: "AI Hub Bar не может управлять Терминалом. Разрешите: Системные настройки → Конфиденциальность и безопасность → Автоматизация → AI Hub Bar → Терминал.")
         case let .terminalFailed(detail):
             String(localized: "Не удалось открыть Терминал: \(detail)")
         }

@@ -39,7 +39,7 @@ enum CommandLineTool {
             let name = arguments[index + 1]
             let known = Array(AppRequests.windows.keys) + AppRequests.actions + CommonCommand.allCases.map(\.cliName)
             guard known.contains(name) else {
-                printError("Usage: ClaudePult --app-command " + known.sorted().joined(separator: "|"))
+                printError("Usage: AIHubBar --app-command " + known.sorted().joined(separator: "|"))
                 return 2
             }
             AppRequests.post(name)
@@ -49,7 +49,7 @@ enum CommandLineTool {
         if let index = arguments.firstIndex(of: "--command"), index + 1 < arguments.count {
             guard let command = CommonCommand.allCases.first(where: { $0.cliName == arguments[index + 1] }),
                   command.script != nil else {
-                printError("Usage: ClaudePult --command " + CommonCommand.allCases.filter { $0.script != nil }.map(\.cliName).joined(separator: "|"))
+                printError("Usage: AIHubBar --command " + CommonCommand.allCases.filter { $0.script != nil }.map(\.cliName).joined(separator: "|"))
                 return 2
             }
             let directory = AppSettings().dailyReportDirectory
@@ -176,7 +176,7 @@ enum CommandLineTool {
         }
         if let index = arguments.firstIndex(of: "--api-complete"), index + 2 < arguments.count {
             guard let provider = APIProvider(rawValue: arguments[index + 1]) else {
-                printError("Usage: ClaudePult --api-complete " + APIProvider.allCases.map(\.rawValue).joined(separator: "|") + " <prompt> [base-url]")
+                printError("Usage: AIHubBar --api-complete " + APIProvider.allCases.map(\.rawValue).joined(separator: "|") + " <prompt> [base-url]")
                 return 2
             }
             var config = AppSettings().aiServices
@@ -271,7 +271,7 @@ enum CommandLineTool {
             case "uninstall":
                 if let backup = try installer.uninstall() { print("backup: \(backup.path)") }
             default:
-                printError("Usage: ClaudePult --hooks [status|install|uninstall]")
+                printError("Usage: AIHubBar --hooks [status|install|uninstall]")
                 return 2
             }
         } catch {
@@ -289,7 +289,7 @@ enum CommandLineTool {
         case "on": controller.setEnabled(true)
         case "off": controller.setEnabled(false)
         default:
-            printError("Usage: ClaudePult --login-item [status|on|off]")
+            printError("Usage: AIHubBar --login-item [status|on|off]")
             return 2
         }
 
@@ -312,7 +312,7 @@ enum CommandLineTool {
             args.removeSubrange(index...index + 1)
         }
 
-        let usage = "Usage: ClaudePult --claude next|finish|task <project-path> [task text] [--claude-path <path>] [--print] [--background]"
+        let usage = "Usage: AIHubBar --claude next|finish|task <project-path> [task text] [--claude-path <path>] [--print] [--background]"
         guard args.count >= 2 else { printError(usage); return 2 }
         let command: ClaudeCommand
         switch args[0] {

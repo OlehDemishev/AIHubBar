@@ -164,7 +164,7 @@ final class NotificationPermission {
 enum Notifier {
     /// «Проверить» in Settings: a notification whose click opens the help window.
     static func postTest() {
-        post(id: "test", title: String(localized: "ClaudePult: уведомления работают"),
+        post(id: "test", title: String(localized: "AI Hub Bar: уведомления работают"),
              body: String(localized: "Кликните — откроется окно «Помощь»."), target: .window(id: "help"))
     }
 
@@ -182,7 +182,7 @@ enum Notifier {
                 status = await center.notificationSettings().authorizationStatus
             }
             guard status == .authorized || status == .provisional else {
-                AppLog.error("Notification «\(title)» not shown: notifications are not allowed for ClaudePult")
+                AppLog.error("Notification «\(title)» not shown: notifications are not allowed for AI Hub Bar")
                 return
             }
             let content = UNMutableNotificationContent()

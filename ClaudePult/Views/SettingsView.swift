@@ -118,7 +118,7 @@ private struct GeneralSettings: View {
             Section {
                 ImportConfirmation()
                 HStack {
-                    Button("Экспорт настроек…") { SettingsFiles.save(modes.exportBundle(), suggestedName: "ClaudePult") }
+                    Button("Экспорт настроек…") { SettingsFiles.save(modes.exportBundle(), suggestedName: "AI Hub Bar") }
                     Button("Импорт…") { SettingsFiles.chooseImport(into: modes) }
                 }
             } header: {
@@ -397,14 +397,14 @@ private struct KeepAwakeSection: View {
                 Text(lidError).foregroundStyle(.red).scaledFont(.caption)
             }
             if sleepOffNow && !keepAwake.lidHeld {
-                Text("Сейчас сон уже отключён другим приложением или командой pmset — ClaudePult его не трогает.")
+                Text("Сейчас сон уже отключён другим приложением или командой pmset — AI Hub Bar его не трогает.")
                     .foregroundStyle(.secondary)
                     .scaledFont(.caption)
             }
         } header: {
             Text("С закрытой крышкой")
         } footer: {
-            Footnote(text: String(localized: "Без монитора и питания закрытый Mac засыпает всегда, это может отменить только pmset от имени администратора. «Разрешить…» один раз спрашивает пароль и добавляет правило /etc/sudoers.d/claudepult: только команды pmset -a disablesleep 0 и 1. Пока держит правило «Не спать», сон выключен; потом и при выходе из ClaudePult — включается обратно. На батарее ниже 20 % — тоже включается. Закрытый Mac греется: не кладите его в сумку."))
+            Footnote(text: String(localized: "Без монитора и питания закрытый Mac засыпает всегда, это может отменить только pmset от имени администратора. «Разрешить…» один раз спрашивает пароль и добавляет правило /etc/sudoers.d/claudepult: только команды pmset -a disablesleep 0 и 1. Пока держит правило «Не спать», сон выключен; потом и при выходе из AI Hub Bar — включается обратно. На батарее ниже 20 % — тоже включается. Закрытый Mac греется: не кладите его в сумку."))
         }
         .task { sleepOffNow = await LidSleep.systemSleepDisabled() }
     }
@@ -727,7 +727,7 @@ private struct SessionSection: View {
         } header: {
             Text("Сессии Claude Code")
         } footer: {
-            Footnote(text: String(localized: "Hooks добавляются в ~/.claude/settings.json (остальные настройки не трогаются, перед изменением рядом сохраняется копия). Они записывают состояние каждой сессии Claude Code на этом Маке — в Терминале, в приложении Claude, фоновых — чтобы ClaudePult показывал их в панели."))
+            Footnote(text: String(localized: "Hooks добавляются в ~/.claude/settings.json (остальные настройки не трогаются, перед изменением рядом сохраняется копия). Они записывают состояние каждой сессии Claude Code на этом Маке — в Терминале, в приложении Claude, фоновых — чтобы AI Hub Bar показывал их в панели."))
         }
         .onAppear { hooks.refresh() }
     }
@@ -754,7 +754,7 @@ private struct LimitSection: View {
             Toggle("Уведомления о лимитах ещё и в Telegram", isOn: $settings.limitAlertsToTelegram)
             VStack(alignment: .leading, spacing: 2) {
                 Toggle("Продлевать вход Claude Code сам", isOn: $settings.renewClaudeLogin)
-                Text("Когда вход истёк (claude давно не запускался, а работа идёт в приложении Claude), ClaudePult отправляет через claude запрос из одного слова — самая маленькая модель, без инструментов, не чаще раза в час. Вход продлевается примерно на 8 часов.")
+                Text("Когда вход истёк (claude давно не запускался, а работа идёт в приложении Claude), AI Hub Bar отправляет через claude запрос из одного слова — самая маленькая модель, без инструментов, не чаще раза в час. Вход продлевается примерно на 8 часов.")
                     .font(.caption)
                     .foregroundStyle(.secondary)
                     .fixedSize(horizontal: false, vertical: true)

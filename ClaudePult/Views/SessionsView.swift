@@ -136,7 +136,7 @@ private struct SessionRowView: View {
                             Text("тихо \(quiet) мин")
                                 .scaledFont(.callout)
                                 .foregroundStyle(.orange)
-                                .help("Claude давно ничего не делал: возможно, сессия зависла или ждёт чего-то вне ClaudePult")
+                                .help("Claude давно ничего не делал: возможно, сессия зависла или ждёт чего-то вне AI Hub Bar")
                         } else {
                             Text(DurationText.short(from: startedAt, to: row.endedAt ?? context.date))
                                 .scaledFont(.callout)

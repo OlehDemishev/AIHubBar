@@ -21,7 +21,7 @@ enum HelpContent {
             Item(name: String(localized: "Что показывать"), detail: String(localized: "Настройки → «Строка меню»: набор («Минимум», «Лимиты», «Всё», «Свой»), элементы и их порядок (лимиты числом, кольцом или полоской, отсчёт до сброса, прогноз, работающие сессии, фоновые задачи, очередь, место на диске, профиль), разделитель, мелкий текст, цвет. Сверху — живой предпросмотр.")),
             Item(name: "⌘R", detail: String(localized: "Обновить проекты в открытой панели.")),
             Item(name: "⌘,", detail: String(localized: "Настройки.")),
-            Item(name: "⌘Q", detail: String(localized: "Выйти из ClaudePult.")),
+            Item(name: "⌘Q", detail: String(localized: "Выйти из AI Hub Bar.")),
             Item(name: String(localized: "Профили"), detail: String(localized: "Если включено больше одного профиля, вверху панели — переключатель. Профили настраиваются в Настройках → «Профили»; все настройки сохраняются в файл .claudepult (Основные → «Экспорт настроек…»), двойной клик по такому файлу — импорт.")),
         ]),
         Section(title: String(localized: "Лимиты подписки"), systemImage: "gauge.with.dots.needle.33percent", items: [
@@ -29,7 +29,7 @@ enum HelpContent {
             Item(name: String(localized: "Блок «Лимиты»"), detail: String(localized: "Сессия с обратным отсчётом до сброса и прогнозом по темпу за 30 мин, неделя, недели по моделям, extra usage.")),
             Item(name: String(localized: "Расход по проектам"), detail: String(localized: "Оценка по журналам Claude Code: доли проектов и самая затратная сессия за сессию, сегодня, неделю.")),
             Item(name: String(localized: "Уведомления"), detail: String(localized: "Один раз на окно при 50/80/95 % (пороги — в Настройках) и когда лимит восстановился; по желанию ещё и в Telegram.")),
-            Item(name: String(localized: "Виджет"), detail: String(localized: "«Лимиты Claude» для рабочего стола: правый клик по столу → «Изменить виджеты…» → ClaudePult. Маленький — кольцо сессии, средний — сессия и неделя.")),
+            Item(name: String(localized: "Виджет"), detail: String(localized: "«Лимиты Claude» для рабочего стола: правый клик по столу → «Изменить виджеты…» → AI Hub Bar. Маленький — кольцо сессии, средний — сессия и неделя.")),
             Item(name: String(localized: "Фон и лимит"), detail: String(localized: "Если сессия использована больше чем на 90 %, фоновая задача спрашивает: запустить сейчас или после сброса.")),
         ]),
         Section(title: String(localized: "Шаблоны"), systemImage: "square.stack.3d.up", items: [
@@ -51,7 +51,7 @@ enum HelpContent {
             Item(name: String(localized: "Напоминания"), detail: String(localized: "Настройки → «Основные» → «Календарь»: за сколько напоминать и дублировать ли в Telegram.")),
         ]),
         Section(title: String(localized: "Сервисы AI"), systemImage: "cpu", items: [
-            Item(name: String(localized: "Агенты"), detail: String(localized: "Codex CLI, Gemini CLI, Antigravity, Copilot CLI, Cursor CLI — ClaudePult находит установленные (Настройки → «Сервисы AI») и открывает их в Терминале в папке проекта: «Открыть в…» в блоке Claude у проекта. Вход у каждого свой.")),
+            Item(name: String(localized: "Агенты"), detail: String(localized: "Codex CLI, Gemini CLI, Antigravity, Copilot CLI, Cursor CLI — AI Hub Bar находит установленные (Настройки → «Сервисы AI») и открывает их в Терминале в папке проекта: «Открыть в…» в блоке Claude у проекта. Вход у каждого свой.")),
             Item(name: String(localized: "Модели по API"), detail: String(localized: "Anthropic, OpenAI, Google, xAI, DeepSeek, Mistral и любой сервер, совместимый с OpenAI (Ollama, LM Studio, OpenRouter). Ключ — только в связке ключей macOS; «Проверить» не тратит токены.")),
             Item(name: String(localized: "Сервис профиля"), detail: String(localized: "Настройки → «Профили» → «Сервис по умолчанию»: им будут выполняться команды-шаблоны профиля.")),
         ]),
@@ -92,7 +92,7 @@ enum HelpContent {
         ]),
     ]
 
-    static let binary = "~/Applications/ClaudePult.app/Contents/MacOS/ClaudePult"
+    static let binary = "~/Applications/AI\\ Hub\\ Bar.app/Contents/MacOS/AIHubBar"
 }
 
 struct HelpView: View {

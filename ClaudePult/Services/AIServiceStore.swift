@@ -42,7 +42,7 @@ enum APIKeyStore {
     static func save(_ key: String, account: String, label: String) async throws {
         let key = key.trimmingCharacters(in: .whitespacesAndNewlines)
         guard isValid(key) else { throw KeyError.invalid }
-        let command = "add-generic-password -U -s \"\(service)\" -a \(account) -l \"ClaudePult: \(label)\" -w \(key)\n"
+        let command = "add-generic-password -U -s \"\(service)\" -a \(account) -l \"AI Hub Bar: \(label)\" -w \(key)\n"
         let result = try await ProcessRunner.run("/usr/bin/security", ["-i"], input: Data(command.utf8), timeout: .seconds(60))
         guard result.exitCode == 0, !result.stderrText.contains("error") else { throw KeyError.failed(result.exitCode) }
         AppLog.info("Key saved for \(account)")

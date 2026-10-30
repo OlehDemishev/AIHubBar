@@ -206,7 +206,7 @@ enum APIProvider: String, CaseIterable, Codable, Sendable {
         guard let url = URL(string: trimmed + "/models"), url.scheme?.hasPrefix("http") == true else { return nil }
         var request = URLRequest(url: url, timeoutInterval: 20)
         request.setValue("application/json", forHTTPHeaderField: "Accept")
-        request.setValue("ClaudePult", forHTTPHeaderField: "User-Agent")
+        request.setValue("AIHubBar", forHTTPHeaderField: "User-Agent")
         if let key, !key.isEmpty {
             if self == .anthropic {
                 request.setValue(key, forHTTPHeaderField: "x-api-key")

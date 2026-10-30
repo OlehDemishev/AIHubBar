@@ -13,10 +13,10 @@ enum HookScript {
 
     static let source = #"""
     #!/usr/bin/python3
-    # ClaudePult hook, format 2. Installed by ClaudePult.app; records Claude Code session state in
+    # AI Hub Bar hook, format 2. Installed by AI Hub Bar; records Claude Code session state in
     # ~/Library/Application Support/ClaudePult/sessions/<session_id>.json for the menu bar app.
     # Always exits 0 and prints nothing, except on PermissionRequest when the person answered «Разрешить» or
-    # «Отклонить» in ClaudePult: then it prints that decision. Claude shows its own dialog meanwhile.
+    # «Отклонить» in AI Hub Bar: then it prints that decision. Claude shows its own dialog meanwhile.
     import datetime, fcntl, json, os, re, signal, subprocess, sys, time, uuid
 
     WAITING_NOTIFICATIONS = {"permission_prompt", "elicitation_dialog", "elicitation_url_dialog", "agent_needs_input"}
@@ -135,7 +135,7 @@ enum HookScript {
 
 
     def open_request(data, directory, session_id):
-        """Asks ClaudePult (only while it runs with the option on): returns the request id or None."""
+        """Asks AI Hub Bar (only while it runs with the option on): returns the request id or None."""
         if not approvals_alive(directory):
             return None
         tool_input = data.get("tool_input") or {}
@@ -156,7 +156,7 @@ enum HookScript {
 
 
     def wait_for_decision(directory, request_id, record_path):
-        """allow / deny from ClaudePult, or None: answered in Claude, ClaudePult gone, or too late."""
+        """allow / deny from AI Hub Bar, or None: answered in Claude, AI Hub Bar gone, or too late."""
         started = time.time()
         decision_path = os.path.join(directory, request_id + ".decision")
         try:
@@ -195,7 +195,7 @@ enum HookScript {
         os.makedirs(directory, exist_ok=True)
         path = os.path.join(directory, session_id + ".json")
 
-        # The request goes first, so ClaudePult sees it together with the «waiting» state.
+        # The request goes first, so AI Hub Bar sees it together with the «waiting» state.
         request_id = None
         approvals = os.path.join(os.path.dirname(directory), "approvals")
         if data.get("hook_event_name") == "PermissionRequest":
@@ -250,7 +250,7 @@ enum HookScript {
             if behavior == "allow":
                 decision = {"behavior": "allow"}
             elif behavior == "deny":
-                decision = {"behavior": "deny", "message": "Отклонено в ClaudePult"}
+                decision = {"behavior": "deny", "message": "Отклонено в AI Hub Bar"}
             else:
                 return
             sys.__stdout__.write(json.dumps({"hookSpecificOutput": {"hookEventName": "PermissionRequest", "decision": decision}}))

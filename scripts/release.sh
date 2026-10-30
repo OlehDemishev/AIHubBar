@@ -2,7 +2,7 @@
 # A release without an Apple Developer account (docs/RELEASE.md):
 #   scripts/release.sh <version> [--publish]
 # Builds Release, signs it with the self-signed «ClaudePult Release» certificate (always the same one, so macOS
-# keeps permissions and Sparkle accepts the update), makes ClaudePult-<version>.dmg, signs it for Sparkle and writes
+# keeps permissions and Sparkle accepts the update; the certificate keeps the app's old name), makes AIHubBar-<version>.dmg, signs it for Sparkle and writes
 # appcast.xml into build/release/<version>/. With --publish it creates the GitHub release v<version> with both files
 # (the repository must be public for people to download them).
 # Keys: $CLAUDEPULT_RELEASE_DIR (default ~/Library/Application Support/ClaudePult-release), made once by
@@ -31,7 +31,8 @@ BUILD_NUMBER="$(git rev-list --count HEAD)"
 OUT="$ROOT/build/release/$VERSION"
 DERIVED="$ROOT/build/release/DerivedData"
 REPO="OlehDemishev/ClaudePult"
-DMG="ClaudePult-$VERSION.dmg"
+DMG="AIHubBar-$VERSION.dmg"
+NAME="AI Hub Bar"
 rm -rf "$OUT" && mkdir -p "$OUT"
 
 echo "==> Building $VERSION ($BUILD_NUMBER)"
@@ -40,8 +41,8 @@ xcodebuild -project ClaudePult.xcodeproj -scheme ClaudePult -configuration Relea
   -destination 'generic/platform=macOS' -derivedDataPath "$DERIVED" \
   MARKETING_VERSION="$VERSION" CURRENT_PROJECT_VERSION="$BUILD_NUMBER" build >"$OUT/build.log" 2>&1 \
   || { tail -30 "$OUT/build.log" >&2; exit 1; }
-APP="$OUT/ClaudePult.app"
-ditto "$DERIVED/Build/Products/Release/ClaudePult.app" "$APP"
+APP="$OUT/$NAME.app"
+ditto "$DERIVED/Build/Products/Release/AIHubBar.app" "$APP"
 
 echo "==> Signing with «ClaudePult Release»"
 KC="$(mktemp -d)/release.keychain-db"
@@ -82,9 +83,9 @@ echo "    $AUTHORITY"
 
 echo "==> Making $DMG"
 STAGE="$(mktemp -d)"
-ditto "$APP" "$STAGE/ClaudePult.app"
+ditto "$APP" "$STAGE/$NAME.app"
 ln -s /Applications "$STAGE/Applications"
-hdiutil create -volname "ClaudePult $VERSION" -srcfolder "$STAGE" -ov -format UDZO "$OUT/$DMG" >/dev/null 2>&1
+hdiutil create -volname "$NAME $VERSION" -srcfolder "$STAGE" -ov -format UDZO "$OUT/$DMG" >/dev/null 2>&1
 rm -rf "$STAGE"
 
 echo "==> Signing the update for Sparkle"
@@ -95,10 +96,10 @@ cat > "$OUT/appcast.xml" <<XML
 <?xml version="1.0" encoding="utf-8"?>
 <rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle">
   <channel>
-    <title>ClaudePult</title>
+    <title>$NAME</title>
     <link>https://github.com/$REPO/releases</link>
     <item>
-      <title>ClaudePult $VERSION</title>
+      <title>$NAME $VERSION</title>
       <pubDate>$(LC_ALL=C date -u "+%a, %d %b %Y %H:%M:%S +0000")</pubDate>
       <sparkle:version>$BUILD_NUMBER</sparkle:version>
       <sparkle:shortVersionString>$VERSION</sparkle:shortVersionString>
@@ -116,8 +117,8 @@ ls -lh "$OUT/$DMG" "$OUT/appcast.xml" | awk '{print "    " $5 "  " $9}'
 
 if [[ "$PUBLISH" == "--publish" ]]; then
   echo "==> Publishing v$VERSION"
-  gh release create "v$VERSION" "$OUT/$DMG" "$OUT/appcast.xml" --repo "$REPO" --title "ClaudePult $VERSION" \
-    --notes "Download $DMG, open it and drag ClaudePult to Applications. First launch: see docs/RELEASE.md («Открыть всё равно»)."
+  gh release create "v$VERSION" "$OUT/$DMG" "$OUT/appcast.xml" --repo "$REPO" --title "$NAME $VERSION" \
+    --notes "Download $DMG, open it and drag AI Hub Bar to Applications. First launch: see docs/RELEASE.md («Открыть всё равно»)."
 else
   echo "Not published. To publish: scripts/release.sh $VERSION --publish (or gh release create v$VERSION with both files)."
 fi

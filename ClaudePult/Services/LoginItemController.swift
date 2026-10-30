@@ -29,7 +29,7 @@ enum LoginItemState: Equatable, Sendable {
         case .enabled, .disabled:
             nil
         case .requiresApproval:
-            String(localized: "Нужно разрешить ClaudePult в Системных настройках → Основные → Объекты входа.")
+            String(localized: "Нужно разрешить AI Hub Bar в Системных настройках → Основные → Объекты входа.")
         }
     }
 }

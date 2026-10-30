@@ -55,7 +55,7 @@ struct StatusWidgetView: View {
                     Spacer(minLength: 0)
                 }
             } else {
-                Text("Откройте ClaudePult").font(.caption).foregroundStyle(.secondary)
+                Text("Откройте AI Hub Bar").font(.caption).foregroundStyle(.secondary)
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
@@ -83,7 +83,7 @@ struct StatusWidget: Widget {
             StatusWidgetView(entry: entry)
         }
         .configurationDisplayName("Сессии и проекты")
-        .description("Кто из Claude ждёт ответа, сколько работает и какие проекты с проблемами — из ClaudePult.")
+        .description("Кто из Claude ждёт ответа, сколько работает и какие проекты с проблемами — из AI Hub Bar.")
         .supportedFamilies([.systemSmall, .systemMedium])
     }
 }
@@ -100,7 +100,7 @@ struct KeepAwakeControl: ControlWidget {
                 Label(on ? "Mac не засыпает" : "Mac засыпает как обычно", systemImage: on ? "cup.and.saucer.fill" : "cup.and.saucer")
             }
         }
-        .displayName("Не спать (ClaudePult)")
+        .displayName("Не спать (AI Hub Bar)")
         .description("Не давать Mac засыпать, пока не выключите.")
     }
 }

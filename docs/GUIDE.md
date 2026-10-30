@@ -1,8 +1,8 @@
-# ClaudePult — guide
+# AI Hub Bar — guide
 
-ClaudePult is a small Mac app that lives in the menu bar (✦). One click opens a panel with your projects, your Claude subscription limits, the Claude Code sessions running on this Mac and ready-made AI commands for each project. It does not replace Claude, Codex or any other AI tool. It keeps an eye on them and starts them for you.
+AI Hub Bar is a small Mac app that lives in the menu bar (✦). One click opens a panel with your projects, your Claude subscription limits, the Claude Code sessions running on this Mac and ready-made AI commands for each project. It does not replace Claude, Codex or any other AI tool. It keeps an eye on them and starts them for you.
 
-It works in **profiles**. Each profile is a set of modules — limits, sessions, projects with their commands, the calendar — in the order you choose, so ClaudePult fits different kinds of work:
+It works in **profiles**. Each profile is a set of modules — limits, sessions, projects with their commands, the calendar — in the order you choose, so AI Hub Bar fits different kinds of work:
 
 | Profile template | Projects are | Commands, for example |
 |---|---|---|
@@ -26,17 +26,17 @@ You can enable several profiles and switch between them at the top of the panel.
 ## Install
 
 1. Download `ClaudePult-<version>.dmg` from [Releases](https://github.com/OlehDemishev/ClaudePult/releases).
-2. Open it and drag ClaudePult to Applications.
-3. Open ClaudePult. macOS says it can't check the developer: ClaudePult isn't signed with an Apple Developer ID. Close the message.
-4. Go to System Settings → Privacy & Security, find «ClaudePult was blocked…» and press **Open Anyway**.
+2. Open it and drag AI Hub Bar to Applications.
+3. Open AI Hub Bar. macOS says it can't check the developer: AI Hub Bar isn't signed with an Apple Developer ID. Close the message.
+4. Go to System Settings → Privacy & Security, find «AI Hub Bar was blocked…» and press **Open Anyway**.
 
-You only do this once. ClaudePult then updates itself: **Settings… → General → Updates** checks daily or on demand.
+You only do this once. AI Hub Bar then updates itself: **Settings… → General → Updates** checks daily or on demand.
 
 To build from source instead, install Xcode and [XcodeGen](https://github.com/yonaskolb/XcodeGen) (`brew install xcodegen`), then run `scripts/build-and-install.sh` in the repository folder.
 
 ## First start
 
-ClaudePult starts empty: until you create a profile, the panel only offers **Assistant…** and **Import a file…**, and nothing runs in the background. It also opens the assistant by itself. The first screen, **Welcome to ClaudePult**, checks what this Mac still needs. Each row has a button when something is left to do:
+AI Hub Bar starts empty: until you create a profile, the panel only offers **Assistant…** and **Import a file…**, and nothing runs in the background. It also opens the assistant by itself. The first screen, **Welcome to AI Hub Bar**, checks what this Mac still needs. Each row has a button when something is left to do:
 
 | Row | Why it matters | Needed? |
 |---|---|---|
@@ -50,7 +50,7 @@ Next, the assistant asks a few more things:
 1. **Bring your settings over?** If you have a `.claudepult` file from another Mac or a colleague, import it and you are done. Otherwise choose **No, set up from scratch**.
 2. Pick a template or **From scratch**.
 3. **What the panel shows**: tick the modules this profile has — AI limits, agent sessions, projects, upcoming dates. Without projects the assistant skips the project questions.
-4. If the profile has projects, the folder where they live. ClaudePult looks inside and suggests a source: git repositories, or one folder per project.
+4. If the profile has projects, the folder where they live. AI Hub Bar looks inside and suggests a source: git repositories, or one folder per project.
 5. Set the stages, what each project row shows, the calendar, the AI service, the commands, where Claude runs and what it may do, the menu bar, and the profile's name and icon. The right side shows a live preview.
 
 You can skip any step: **Skip** keeps the template's choice. Everything can be changed later in **Settings… → Profiles**. To run the assistant again, go to **Settings… → Profiles → + → Assistant…**. The same readiness checks are at the top of the **Help** window.
@@ -68,7 +68,7 @@ You can skip any step: **Skip** keeps the template's choice. Everything can be c
   - Claude Code works in the background with the profile's permissions: **Project files only**, **Files + web search**, or full code access for developer projects.
   - Other agents open in Terminal with the task on the clipboard.
 - **Compare:** runs one command with two or three services. The answers open side by side.
-- **Project cards:** a project folder can hold a small text card, `project.md` (named in your language), with lines like `Stage:`, `Deadline:` and `Main file:`. ClaudePult reads it and updates it when you change the stage. You can edit it by hand.
+- **Project cards:** a project folder can hold a small text card, `project.md` (named in your language), with lines like `Stage:`, `Deadline:` and `Main file:`. AI Hub Bar reads it and updates it when you change the stage. You can edit it by hand.
 - **Mac Resources** (optional module: Settings… → Modules → Install): processor, memory, graphics, disk, network, battery and the busiest apps, with alerts when the Mac is struggling. Processor and memory can also go into the menu bar.
 - **Keep Awake** (optional module): the Mac doesn't fall asleep while Claude is working, for a set time, on power, with a display connected or while chosen apps are open. Nothing changes in System Settings — once no rule applies, the Mac sleeps as usual.
 - **Quick Commands** and **Quick Toggles** (optional modules): your own buttons for scripts, Shortcuts, links and folders, and one-click dark mode, desktop icons, lock screen, display off, eject disks and empty Trash. The **Mac Utilities** template sets up a profile with just the Mac tools.
@@ -77,30 +77,30 @@ You can skip any step: **Skip** keeps the template's choice. Everything can be c
 
 ## Privacy and safety
 
-- **Subscription token:** to show the limits, ClaudePult reads Claude Code's sign-in from the macOS Keychain on each refresh. It never stores or logs it.
+- **Subscription token:** to show the limits, AI Hub Bar reads Claude Code's sign-in from the macOS Keychain on each refresh. It never stores or logs it.
 - **API keys:** kept only in the macOS Keychain. They never go into logs or exported settings.
-- **What gets sent:** your files go only to the AI service you run a command with. ClaudePult has no server of its own.
+- **What gets sent:** your files go only to the AI service you run a command with. AI Hub Bar has no server of its own.
 - **Session hook:** it only writes small status files on this Mac and never changes what Claude does. **Settings… → Claude Code → Remove hooks** takes it out again.
 - **Background runs:** each runs under an explicit permission list. With **Project files only**, Claude can read and write inside the project folder, with no shell and no internet.
 
 ## Languages
 
-The interface and everything ClaudePult writes are available in 13 languages: Russian, English, Spanish, Portuguese (Brazil), French, German, Japanese, Indonesian, Korean, Italian, Arabic (right-to-left), Polish and Ukrainian. This includes templates, prompts, project cards and content plans.
+The interface and everything AI Hub Bar writes are available in 13 languages: Russian, English, Spanish, Portuguese (Brazil), French, German, Japanese, Indonesian, Korean, Italian, Arabic (right-to-left), Polish and Ukrainian. This includes templates, prompts, project cards and content plans.
 
-ClaudePult follows the system language. To pick another one, go to **Settings… → General → Interface language**, then press **Relaunch**.
+AI Hub Bar follows the system language. To pick another one, go to **Settings… → General → Interface language**, then press **Relaunch**.
 
 ## If something doesn't work
 
 | Symptom | Fix |
 |---|---|
 | No limits | When macOS asks whether `security` may read "Claude Code-credentials", choose **Always Allow**. |
-| No notifications | Allow them in System Settings → Notifications → ClaudePult. Then **Settings… → General → Check** sends a test one. |
+| No notifications | Allow them in System Settings → Notifications → AI Hub Bar. Then **Settings… → General → Check** sends a test one. |
 | Sessions list is empty | Install the hooks: Help window → Readiness, or **Settings… → Claude Code**. |
-| "Terminal" does nothing | macOS asks once whether ClaudePult may control Terminal. Allow it in System Settings → Privacy & Security → Automation. |
+| "Terminal" does nothing | macOS asks once whether AI Hub Bar may control Terminal. Allow it in System Settings → Privacy & Security → Automation. |
 
 ## Uninstall
 
 1. Choose **Settings… → Claude Code → Remove hooks**.
-2. Quit ClaudePult.
+2. Quit AI Hub Bar.
 3. Delete `~/Applications/ClaudePult.app`, `~/Library/Application Support/ClaudePult` and `~/Library/Logs/ClaudePult`.
 4. API keys are stored in Keychain Access under "ClaudePult API key". Delete those entries too if you want them gone.

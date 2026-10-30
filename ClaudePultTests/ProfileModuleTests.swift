@@ -162,7 +162,7 @@ struct ProfileModuleTests {
         #expect(store.installedModules.isEmpty, "modules no profile uses stop")
         let reloaded = ModeStore(settings: settings, directory: dir)
         #expect(reloaded.modes.isEmpty)
-        #expect(!reloaded.needsAssistant, "an emptied ClaudePult doesn't push the assistant on every start")
+        #expect(!reloaded.needsAssistant, "an emptied AI Hub Bar doesn't push the assistant on every start")
         #expect(!FileManager.default.fileExists(atPath: dir.appending(path: "\(only.id).json").path))
     }
 }

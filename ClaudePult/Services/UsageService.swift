@@ -15,7 +15,7 @@ enum UsageError: LocalizedError, Equatable {
         case .noCredentials: String(localized: "Войдите в Claude Code: claude → /login")
         // Claude Code renews the token itself the next time `claude` runs in a terminal; a new login is rarely needed.
         case .expired: String(localized: "Вход Claude Code устарел — обновится при следующем запуске claude в Терминале (если нет: claude → /login)")
-        case .keychainDenied: String(localized: "Нет доступа к связке ключей: разрешите ClaudePult читать «Claude Code-credentials»")
+        case .keychainDenied: String(localized: "Нет доступа к связке ключей: разрешите AI Hub Bar читать «Claude Code-credentials»")
         case let .http(code) where code == 401 || code == 403: String(localized: "Сессия Claude Code истекла (HTTP \(code)): claude → /login")
         case let .http(code): String(localized: "Лимиты недоступны (HTTP \(code))")
         case .rateLimited: String(localized: "Сервер лимитов просит запрашивать реже")
@@ -75,7 +75,7 @@ enum UsageService {
         request.setValue("Bearer \(credentials.accessToken)", forHTTPHeaderField: "Authorization")
         request.setValue("oauth-2025-04-20", forHTTPHeaderField: "anthropic-beta")
         request.setValue("application/json", forHTTPHeaderField: "Accept")
-        request.setValue("ClaudePult", forHTTPHeaderField: "User-Agent")
+        request.setValue("AIHubBar", forHTTPHeaderField: "User-Agent")
         do {
             let (data, response) = try await URLSession.shared.data(for: request)
             let status = (response as? HTTPURLResponse)?.statusCode ?? 0
