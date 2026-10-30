@@ -5,7 +5,7 @@
 **Updated:** 2026-10-30
 
 **Now:**
-- UI quick fixes from the review — branch `fix/ui-quick`, PR open
+- UI quick fixes merged (PR #58); next: the rest of the UI review
 
 **Next:**
 - the rest of the UI review: compact limits block, projects header and badges, separate «Очистка: выполнить», shorter panel; then Settings tabs (merge Claude / Сессии / Лимиты, mode list, menu bar order)
