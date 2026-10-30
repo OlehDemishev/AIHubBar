@@ -499,6 +499,13 @@ Panel snapshots: `defaults write com.demishev.claudepult DebugPanelSnapshot -boo
 | The widget extension has its own string catalog: «Лимиты Claude», «Сессии и проекты», the reset texts and the «Не спать» control in 12 more languages, no Russian inside | Auto (`TranslationTests.widgetIsTranslated`, built tables) |
 | The widget gallery in English | Oleh (system language; the app's own language setting doesn't reach extensions) |
 
+## Opening sessions from their rows (2026-10-30)
+
+| Scenario | Checked |
+|---|---|
+| A click on the Survikon row's name opened that session in the Claude app (its `lastFocusedAt` changed at the click; the log shows the `claude://code/continue?session=local_…` link) | Live |
+| `claude` started in the Claude app's own terminal brings Claude forward instead of opening the folder in Finder | Code; Oleh |
+
 ## Release without an Apple Developer account (2026-10-30)
 
 | Scenario | Checked |

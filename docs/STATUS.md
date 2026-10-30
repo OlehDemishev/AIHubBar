@@ -52,6 +52,12 @@
 - delete or archive the old repo `OlehDemishev/ClaudeBar`; turn on start at login if wanted
 <!-- summary:end -->
 
+## 2026-10-30 — Opening sessions from their rows (branch `fix/session-open`)
+
+Done: Oleh said clicking a session's name still didn't open it. Checked live: a click on the Survikon row's name does open that session in the Claude app (the app's own record shows the focus at the click). What didn't: a `claude` started in the Claude app's own terminal (entrypoint `cli`, terminal `claude-desktop`) opened its folder in Finder, which looks like nothing happened — it now brings Claude forward. The log now says which way a session was opened («Show session …»), so a row that still doesn't open can be traced.
+Checked: tests green; live click on Survikon.
+Left: if a row still doesn't open, the log line names the reason.
+
 ## 2026-10-30 — Widgets in 13 languages (branch `feat/widget-languages`)
 
 Done: the widget extension was Russian-only. It now has its own `Localizable.xcstrings` (23 strings; 7 reuse the app's translations) and `CFBundleLocalizations`; the reset texts and row titles became localizable. Widgets follow the system language — the app's «Язык интерфейса» override doesn't reach extensions.

@@ -216,17 +216,21 @@ final class SessionStore {
 @MainActor
 enum SessionActions {
     /// Terminal.app sessions: bring the tab with the session's tty forward. Desktop-app sessions: open that session
-    /// in Claude (just Claude if the app has no record of it). Otherwise (or if the tab is gone): the folder in Finder.
+    /// in Claude (just Claude if the app has no record of it); `claude` started in the Claude app's own terminal
+    /// lives in Claude too, so Claude comes forward rather than Finder. Otherwise (or if the tab is gone): the folder.
     static func show(_ session: Session) {
+        AppLog.info("Show session \(session.id) (\(session.entrypoint ?? "-"))")
         Task {
             if session.isInTerminalApp, let tty = session.tty, await focusTerminalTab(tty: tty) {
                 return
             }
-            if session.entrypoint == "claude-desktop",
+            if session.entrypoint == "claude-desktop" || session.termProgram == "claude-desktop",
                let claude = NSWorkspace.shared.urlForApplication(withBundleIdentifier: "com.anthropic.claudefordesktop") {
                 if let link = desktopLink(cliSessionID: session.id) {
+                    AppLog.info("Show session: Claude app link \(link.absoluteString)")
                     NSWorkspace.shared.open([link], withApplicationAt: claude, configuration: NSWorkspace.OpenConfiguration(), completionHandler: nil)
                 } else {
+                    AppLog.info("Show session: no Claude app record for \(session.id), opening Claude")
                     NSWorkspace.shared.openApplication(at: claude, configuration: NSWorkspace.OpenConfiguration(), completionHandler: nil)
                 }
                 return
