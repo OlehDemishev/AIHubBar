@@ -39,6 +39,10 @@ struct ClaudeActionsView: View {
                     launcher.request(.finishSession, in: project)
                 }
                 .help("Завершить сессию: проверки, коммит, push, PR и STATUS по разделу «Конец сессии»")
+                ActionButton(title: String(localized: "На ночь"), systemImage: "moon.zzz") {
+                    launcher.queueForNight(.nextStep, in: project)
+                }
+                .help("Следующий шаг — в фоне ночью; утром сводка. Свою задачу на ночь — в «Своя задача…»")
             }
             .disabled(isWorking)
 
@@ -125,6 +129,13 @@ struct ClaudeActionsView: View {
                     withAnimation(.snappy(duration: 0.2)) { isEditingTask = false }
                 }
                 .keyboardShortcut(.cancelAction)
+                Button("На ночь") {
+                    launcher.queueForNight(.customTask(task), in: project)
+                    task = ""
+                    withAnimation(.snappy(duration: 0.2)) { isEditingTask = false }
+                }
+                .help("Запустить в фоне ночью; утром придёт сводка")
+                .disabled(task.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || isWorking)
                 Button("Запустить") {
                     launcher.request(.customTask(task), in: project)
                     task = ""

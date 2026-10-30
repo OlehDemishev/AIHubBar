@@ -121,6 +121,11 @@ final class AppSettings {
         didSet { defaults.set(clipboardRemember, forKey: Keys.clipboardRemember) }
     }
 
+    /// When «На ночь» runs start (an hour, 0–23).
+    var nightStartHour: Int {
+        didSet { defaults.set(nightStartHour, forKey: Keys.nightStartHour) }
+    }
+
     var panelHotKey: PanelHotKey {
         didSet { defaults.set(panelHotKey.rawValue, forKey: Keys.panelHotKey) }
     }
@@ -238,6 +243,7 @@ final class AppSettings {
         approvalsFromClaudePult = defaults.object(forKey: Keys.approvalsFromClaudePult) as? Bool ?? true
         telegramApprovals = defaults.bool(forKey: Keys.telegramApprovals)
         pullRequestAlerts = defaults.object(forKey: Keys.pullRequestAlerts) as? Bool ?? true
+        nightStartHour = defaults.object(forKey: Keys.nightStartHour) as? Int ?? 1
         panelHotKey = defaults.string(forKey: Keys.panelHotKey).flatMap(PanelHotKey.init(rawValue:)) ?? .controlOptionC
         pullRequestAlertsToTelegram = defaults.bool(forKey: Keys.pullRequestAlertsToTelegram)
         telegramApprovalsChatID = defaults.string(forKey: Keys.telegramApprovalsChatID) ?? ""
@@ -282,6 +288,7 @@ final class AppSettings {
         static let telegramApprovals = "telegramApprovals"
         static let pullRequestAlerts = "pullRequestAlerts"
         static let panelHotKey = "panelHotKey"
+        static let nightStartHour = "nightStartHour"
         static let pullRequestAlertsToTelegram = "pullRequestAlertsToTelegram"
         static let telegramApprovalsChatID = "telegramApprovalsChatID"
         static let clipboardExcludedApps = "clipboardExcludedApps"

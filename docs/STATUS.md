@@ -7,7 +7,7 @@
 **Now:**
 - merged: menu bar drag reordering (PR #93), translation review (PR #94), release build re-checked on main (PR #95)
 - panel redesigned as cards, variant A, merged (PR #98)
-- feature batch from Oleh's «все»: approve from notifications merged (PR #100); current action merged (PR #102); week forecast merged (PR #104); Telegram answers merged (PR #106); PR/CI alerts merged (PR #108); search, hot key, Shortcuts merged (PR #110); widget and control (PR open); then week forecast, Telegram, PR/CI alerts, hotkey and search, widget, night queue, context warning
+- feature batch from Oleh's «все»: approve from notifications merged (PR #100); current action merged (PR #102); week forecast merged (PR #104); Telegram answers merged (PR #106); PR/CI alerts merged (PR #108); search, hot key, Shortcuts merged (PR #110); widget and control (PR open); night queue (PR open, on top of it); then week forecast, Telegram, PR/CI alerts, hotkey and search, widget, night queue, context warning
 - hover hints for icon-only controls and the menu bar item merged (PR #91)
 - second wave merged: «История буфера» and «Заметки» (PR #87), «Не спать» with the lid closed (PR #89)
 - release without an Apple Developer account merged (PR #85): Sparkle, self-signed signing, `scripts/release.sh`, MIT license; nothing published yet
@@ -53,6 +53,12 @@
 - hooks are installed in ~/.claude/settings.json; backup of the original: ~/.claude/settings.json.claudepult-backup-20261029T192827
 - delete or archive the old repo `OlehDemishev/ClaudeBar`; turn on start at login if wanted
 <!-- summary:end -->
+
+## 2026-10-30 — Night queue (branch `feat/night-queue`, on top of `feat/widget-controls`)
+
+Done: «На ночь» queues a background run (next step or a custom task) for the night start hour (`nightStartHour`, Settings → Claude Code, 01:00) through the existing queue (`queue.json`, now with a `night` flag that old files decode without). When night items start, the batch start is remembered; once no background run is left, one summary: notification «Ночью: N задач — ✅, ❌» with a line per run, Telegram if «Итог в Telegram». The «пока работает Claude» keep-awake rule already covers the runs. 13 languages.
+Checked: 232 tests green; the buttons seen live (not pressed).
+Left: a real night by Oleh.
 
 ## 2026-10-30 — Widget «Сессии и проекты» and a Control Center toggle (branch `feat/widget-controls`)
 
