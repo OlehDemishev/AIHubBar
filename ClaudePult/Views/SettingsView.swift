@@ -755,6 +755,17 @@ private struct LimitSection: View {
             }
             Toggle("Уведомления о лимитах ещё и в Telegram", isOn: $settings.limitAlertsToTelegram)
             VStack(alignment: .leading, spacing: 2) {
+                Picker("Ставить фоновые задачи на паузу", selection: $settings.runGuardPercent) {
+                    ForEach(RunGuard.thresholds, id: \.self) { value in
+                        Text(value == 0 ? String(localized: "никогда") : String(localized: "с \(value) %")).tag(value)
+                    }
+                }
+                Text("Когда сессия или неделя дошла до порога, фоновые задачи замирают там, где были, а запланированные ждут. После сброса лимита работа продолжается сама. Так задача не обрывается на полпути из-за лимита.")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            VStack(alignment: .leading, spacing: 2) {
                 Toggle("Продлевать вход Claude Code сам", isOn: $settings.renewClaudeLogin)
                 Text("Когда вход истёк (claude давно не запускался, а работа идёт в приложении Claude), AI Hub Bar отправляет через claude запрос из одного слова — самая маленькая модель, без инструментов, не чаще раза в час. Вход продлевается примерно на 8 часов.")
                     .font(.caption)
