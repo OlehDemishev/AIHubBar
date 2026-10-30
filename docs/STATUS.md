@@ -1,11 +1,11 @@
 # Status
 
 <!-- summary:start -->
-**Stage:** SPEC.md done; SPEC-modes stage 1 of 9 (mode model) in review
+**Stage:** SPEC.md done; SPEC-modes stage 1 of 9 (mode model) done
 **Updated:** 2026-10-30
 
 **Now:**
-- PR `feat/modes` (SPEC-modes stage 1: modes, switcher, «Режимы» tab, settings export/import) — waiting for review
+- fix: back off on HTTP 429 from the usage endpoint — in progress
 
 **Next:**
 - Fix: back off on HTTP 429 from the usage endpoint (seen 2026-10-30; polling has no backoff)
@@ -13,7 +13,7 @@
 - Fix whatever Oleh finds in docs/CHECKLIST.md
 
 **Needs Oleh:**
-- review and merge PR `feat/modes`; try Settings → Режимы (duplicate the mode → switcher appears in the panel)
+- try Settings → Режимы (duplicate the mode → switcher appears in the panel) and a double-click on a .claudepult file
 - read and edit docs/TEMPLATES.md (template texts) before stage 6
 - before stage 3: install Codex CLI and Gemini CLI and create API keys (OpenAI, Google, xAI, DeepSeek, Mistral) for live checks — Oleh offered to
 - before stage 8: Apple Developer Program (Developer ID, notarization) for distributing ClaudePult; decide on the name (SPEC-modes §10.4)
