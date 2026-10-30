@@ -5,11 +5,12 @@
 **Updated:** 2026-10-30
 
 **Now:**
+- «История буфера» and «Заметки» modules (branch `feat/clipboard-notes`, PR open, waits for Oleh's merge)
 - release without an Apple Developer account merged (PR #85): Sparkle, self-signed signing, `scripts/release.sh`, MIT license; nothing published yet
 - Windows and Linux specs merged (PR #73); implementation waits for Oleh
 
 **Next:**
-- SPEC-profiles second wave (clipboard history, notes, keep awake with the lid closed) — when Oleh decides
+- keep awake with the lid closed (second wave; needs a sudoers rule for `pmset disablesleep`, Oleh enters the admin password once)
 - menu bar elements reordered by dragging (needs a different list than a grouped Form)
 - fix whatever Oleh finds in the translations (machine translation; native review for ja, ko, ar at least)
 - stage 8 rest: Developer ID signing and notarization, Sparkle updates — once Oleh decides on Developer ID, the name and where updates are hosted
@@ -17,6 +18,8 @@
 - Windows and Linux versions (docs/SPEC-windows.md, docs/SPEC-linux.md) — only when Oleh says; stage 0 (fact checks in VMs) first
 
 **Needs Oleh:**
+- merge the clipboard and notes PR; try them: Settings → «Модули» → «Установить» (copy, pin, search; type a note)
+- check the Trash for a test note «Заметка.md» from an early test run and delete it
 - back up `~/Library/Application Support/ClaudePult-release/` (signing certificate and update key; without them updates break)
 - to share ClaudePult: make the repository public, then `scripts/release.sh 0.2.0 --publish` (docs/RELEASE.md)
 - try «Быстрые команды» and «Быстрые переключатели» (Settings → «Модули» → «Установить»), or the «Утилиты Mac» template; the toggles change the Mac, so they were not pressed during checks
@@ -41,6 +44,12 @@
 - hooks are installed in ~/.claude/settings.json; backup of the original: ~/.claude/settings.json.claudepult-backup-20261029T192827
 - delete or archive the old repo `OlehDemishev/ClaudeBar`; turn on start at login if wanted
 <!-- summary:end -->
+
+## 2026-10-30 — Clipboard history and notes modules (branch `feat/clipboard-notes`)
+
+Done: two optional modules from the SPEC-profiles second wave. «История буфера» watches the pasteboard only while installed (every 0.7 s): text and copied files, limit 20/50/100/200, search, pins, a click copies back; secrets are never recorded (nspasteboard.org concealed/transient/auto-generated markers, 1Password markers, and anything copied while a password manager or Keychain Access is in front; the app list is editable in «Модули»); memory only unless «Помнить после перезапуска» (`clipboard.json`, 0600). «Заметки»: Markdown files in `~/Documents/ClaudePult Notes` (changeable), tabs, autosave after 1 s and on closing the panel, delete to the Trash, open in the default editor. Both in the catalog, the assistant's «Что будет в панели» step, collapsible blocks, 13 languages.
+Checked: 196 tests green (`xcodebuild test`); String Catalog synced, all new strings in 12 translations; live: modules added to Oleh's profile with a temporary notes folder, the panel showed copies on top, a concealed copy was not recorded, the notes block made a first note; profile, setting and clipboard restored.
+Left: keep awake with the lid closed (separate PR, needs a sudoers rule and Oleh's admin password). One early test run moved a test «Заметка.md» to the real Trash (fixed: tests now delete in a temporary folder). Pin, search, copy-back, «Помнить после перезапуска» and typing notes were not clicked through by hand.
 
 ## 2026-10-30 — Release without an Apple Developer account (branch `feat/release-without-apple`)
 

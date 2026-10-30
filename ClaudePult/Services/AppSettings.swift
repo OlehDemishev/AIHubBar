@@ -112,6 +112,23 @@ final class AppSettings {
         didSet { defaults.set(quickToggles.map(\.rawValue), forKey: Keys.quickToggles) }
     }
 
+    /// «История буфера» and «Заметки» (SPEC-profiles §3, second wave).
+    var clipboardLimit: Int {
+        didSet { defaults.set(clipboardLimit, forKey: Keys.clipboardLimit) }
+    }
+
+    var clipboardRemember: Bool {
+        didSet { defaults.set(clipboardRemember, forKey: Keys.clipboardRemember) }
+    }
+
+    var clipboardExcludedApps: [String] {
+        didSet { defaults.set(clipboardExcludedApps, forKey: Keys.clipboardExcludedApps) }
+    }
+
+    var notesFolder: String {
+        didSet { defaults.set(notesFolder, forKey: Keys.notesFolder) }
+    }
+
     var resourceDiskBelowGB: Int {
         didSet { defaults.set(resourceDiskBelowGB, forKey: Keys.resourceDiskBelowGB) }
     }
@@ -188,6 +205,11 @@ final class AppSettings {
         limitAlertsToTelegram = defaults.bool(forKey: Keys.limitAlertsToTelegram)
         renewClaudeLogin = defaults.object(forKey: Keys.renewClaudeLogin) as? Bool ?? true
         resourceAlerts = defaults.object(forKey: Keys.resourceAlerts) as? Bool ?? true
+        let clipLimit = defaults.integer(forKey: Keys.clipboardLimit)
+        clipboardLimit = clipLimit > 0 ? clipLimit : 50
+        clipboardRemember = defaults.bool(forKey: Keys.clipboardRemember)
+        clipboardExcludedApps = defaults.stringArray(forKey: Keys.clipboardExcludedApps) ?? ClipboardPolicy.defaultExcludedApps
+        notesFolder = defaults.string(forKey: Keys.notesFolder) ?? "~/Documents/ClaudePult Notes"
         quickCommands = defaults.data(forKey: Keys.quickCommands).flatMap { try? JSONDecoder().decode([QuickCommand].self, from: $0) } ?? QuickCommand.examples
         quickToggles = defaults.stringArray(forKey: Keys.quickToggles)?.compactMap(QuickToggle.init(rawValue:)) ?? QuickToggle.allCases
         keepAwakeRules = defaults.data(forKey: Keys.keepAwakeRules).flatMap { try? JSONDecoder().decode(KeepAwakeRules.self, from: $0) } ?? KeepAwakeRules()
@@ -221,6 +243,10 @@ final class AppSettings {
         static let limitAlertsToTelegram = "limitAlertsToTelegram"
         static let renewClaudeLogin = "renewClaudeLogin"
         static let resourceAlerts = "resourceAlerts"
+        static let clipboardLimit = "clipboardLimit"
+        static let clipboardRemember = "clipboardRemember"
+        static let clipboardExcludedApps = "clipboardExcludedApps"
+        static let notesFolder = "notesFolder"
         static let quickCommands = "quickCommands"
         static let quickToggles = "quickToggles"
         static let keepAwakeRules = "keepAwakeRules"

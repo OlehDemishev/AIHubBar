@@ -355,6 +355,15 @@ Panel snapshots: `defaults write com.demishev.claudepult DebugPanelSnapshot -boo
 | Dark mode, desktop icons (restarts Finder), lock, display off, eject, empty Trash — they change the Mac, not run here | Oleh |
 
 
+## Second wave: «История буфера» and «Заметки» (SPEC-profiles §9.7, 2026-10-30)
+
+| Scenario | Checked |
+|---|---|
+| Concealed / transient copies and copies from excluded apps are not recorded; a repeat moves up and keeps its pin; pinned entries survive the limit and «Очистить»; blank copies ignored | Auto (`ClipboardNotesTests`) |
+| Note names from `.md` files only, hidden files skipped, free names «Заметка 2» …; writing, reading, creating and removing notes in a folder | Auto (`NotesStoreTests`, temporary folder) |
+| The panel with both modules (real window capture): copies from Terminal appear on top with «только что»; a copy marked `org.nspasteboard.ConcealedType` did not appear; the notes block made its folder and a first note | Live (modules added to Oleh's profile and a temporary notes folder for the check; profile, setting and clipboard restored) |
+| Pin, search, click to copy back, «Помнить после перезапуска», a copy from 1Password, typing a note and switching tabs | Oleh |
+
 ## Release without an Apple Developer account (2026-10-30)
 
 | Scenario | Checked |

@@ -255,6 +255,14 @@ struct MenuPanelView: View {
                 .revealed(isShown, step: 1, reduceMotion: calm)
                 Divider()
             }
+        case .clipboard:
+            ClipboardView()
+                .revealed(isShown, step: 1, reduceMotion: calm)
+            Divider()
+        case .notes:
+            NotesView()
+                .revealed(isShown, step: 1, reduceMotion: calm)
+            Divider()
         case .quickCommands:
             QuickCommandsView()
                 .revealed(isShown, step: 1, reduceMotion: calm)

@@ -299,6 +299,8 @@ private struct ModulesSettings: View {
                 case .keepAwake where modes.installedModules.contains(.keepAwake): KeepAwakeSection()
                 case .quickCommands where modes.installedModules.contains(.quickCommands): QuickCommandsSection()
                 case .toggles where modes.installedModules.contains(.toggles): QuickTogglesSection()
+                case .clipboard where modes.installedModules.contains(.clipboard): ClipboardSection()
+                case .notes where modes.installedModules.contains(.notes): NotesSection()
                 default: EmptyView()
                 }
             }
@@ -452,6 +454,82 @@ private struct QuickTogglesSection: View {
         } footer: {
             Footnote(text: String(localized: "Тёмная тема и корзина в первый раз попросят разрешение «Автоматизация» (System Events, Finder). Корзина очищается только после подтверждения."))
         }
+    }
+}
+
+private struct ClipboardSection: View {
+    @Environment(AppSettings.self) private var settings
+    @Environment(ClipboardHistory.self) private var history
+
+    var body: some View {
+        @Bindable var settings = settings
+        Section {
+            Picker("Хранить последних", selection: $settings.clipboardLimit) {
+                ForEach([20, 50, 100, 200], id: \.self) { Text(verbatim: "\($0)").tag($0) }
+            }
+            Toggle("Помнить после перезапуска", isOn: $settings.clipboardRemember)
+                .onChange(of: settings.clipboardRemember) { history.rememberChanged() }
+            LabeledContent("Не запоминать из приложений") {
+                HStack {
+                    Text(verbatim: "\(settings.clipboardExcludedApps.count)").foregroundStyle(.secondary)
+                    Button("Добавить…", action: addApps)
+                    Button("По умолчанию") { settings.clipboardExcludedApps = ClipboardPolicy.defaultExcludedApps }
+                }
+            }
+            Button("Очистить историю") { history.clear() }
+        } header: {
+            Text("История буфера")
+        } footer: {
+            Footnote(text: String(localized: "Не запоминается то, что менеджеры паролей помечают как скрытое, и всё, что скопировано, пока впереди менеджер паролей или «Связка ключей». Без «Помнить после перезапуска» история живёт только в памяти; с ним — в файле, доступном только вам."))
+        }
+    }
+
+    private func addApps() {
+        let panel = NSOpenPanel()
+        panel.allowedContentTypes = [.application]
+        panel.allowsMultipleSelection = true
+        panel.directoryURL = URL(fileURLWithPath: "/Applications")
+        NSApp.activate()
+        guard panel.runModal() == .OK else { return }
+        let ids = panel.urls.compactMap { Bundle(url: $0)?.bundleIdentifier }
+        settings.clipboardExcludedApps = Array(Set(settings.clipboardExcludedApps + ids)).sorted()
+    }
+}
+
+private struct NotesSection: View {
+    @Environment(AppSettings.self) private var settings
+    @Environment(NotesStore.self) private var notes
+
+    var body: some View {
+        Section {
+            LabeledContent("Папка") {
+                HStack {
+                    Text(settings.notesFolder).lineLimit(1).truncationMode(.middle).foregroundStyle(.secondary)
+                    Button("Выбрать…", action: chooseFolder)
+                    Button("Показать в Finder") {
+                        try? FileManager.default.createDirectory(at: notes.folder, withIntermediateDirectories: true)
+                        NSWorkspace.shared.open(notes.folder)
+                    }
+                }
+            }
+        } header: {
+            Text("Заметки")
+        } footer: {
+            Footnote(text: String(localized: "Каждая заметка — файл .md в этой папке; удалённые уходят в корзину. Папку можно положить в iCloud Drive, чтобы заметки были и на других Маках."))
+        }
+    }
+
+    private func chooseFolder() {
+        let panel = NSOpenPanel()
+        panel.canChooseDirectories = true
+        panel.canChooseFiles = false
+        panel.canCreateDirectories = true
+        panel.prompt = String(localized: "Выбрать")
+        NSApp.activate()
+        guard panel.runModal() == .OK, let url = panel.url else { return }
+        notes.flush()
+        settings.notesFolder = PathText.tilde(url.path)
+        notes.reload()
     }
 }
 

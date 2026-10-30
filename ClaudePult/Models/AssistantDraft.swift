@@ -107,7 +107,7 @@ struct AssistantDraft: Equatable, Sendable {
     var hasProjects: Bool { mode.source != .none }
 
     /// The modules the assistant offers; «Отчёты _daily-report» is Oleh's own and stays in Settings.
-    static let offeredModules: [ModuleKind] = [.limits, .sessions, .projects, .upcoming, .resources, .keepAwake, .quickCommands, .toggles]
+    static let offeredModules: [ModuleKind] = [.limits, .sessions, .projects, .upcoming, .resources, .keepAwake, .quickCommands, .toggles, .clipboard, .notes]
 
     func hasModule(_ kind: ModuleKind) -> Bool {
         switch kind {
@@ -116,7 +116,7 @@ struct AssistantDraft: Equatable, Sendable {
         case .projects: hasProjects
         case .upcoming: mode.calendar != .off && mode.source.isFolders
         case .reports: mode.commonCommands == .dailyReport
-        case .resources, .keepAwake, .quickCommands, .toggles: extraModules.contains(kind)
+        case .resources, .keepAwake, .quickCommands, .toggles, .clipboard, .notes: extraModules.contains(kind)
         }
     }
 
@@ -148,7 +148,7 @@ struct AssistantDraft: Equatable, Sendable {
             }
         case .reports:
             mode.commonCommands = on ? .dailyReport : .none
-        case .resources, .keepAwake, .quickCommands, .toggles:
+        case .resources, .keepAwake, .quickCommands, .toggles, .clipboard, .notes:
             extraModules.removeAll { $0 == kind }
             if on { extraModules.append(kind) }
         }

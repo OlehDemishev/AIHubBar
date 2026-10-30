@@ -90,7 +90,7 @@ enum PanelTheme: String, CaseIterable, Sendable {
 
 /// Blocks of the panel that can be hidden.
 enum PanelBlock: String, CaseIterable, Identifiable, Sendable {
-    case limits, sessions, calendar, projects, commands, resources, keepAwake, quickCommands, toggles
+    case limits, sessions, calendar, projects, commands, resources, keepAwake, quickCommands, toggles, clipboard, notes
 
     var id: String { rawValue }
 
@@ -105,6 +105,8 @@ enum PanelBlock: String, CaseIterable, Identifiable, Sendable {
         case .keepAwake: String(localized: "Не спать")
         case .quickCommands: String(localized: "Быстрые команды")
         case .toggles: String(localized: "Быстрые переключатели")
+        case .clipboard: String(localized: "История буфера")
+        case .notes: String(localized: "Заметки")
         }
     }
 }
