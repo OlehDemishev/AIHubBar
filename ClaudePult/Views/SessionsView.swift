@@ -53,13 +53,12 @@ struct SessionsView: View {
     let rows: [SessionRow]
 
     private var waiting: Int { rows.filter { $0.state == .waiting }.count }
+    @AppStorage("collapsedBlocks") private var collapsedRaw = ""
 
     var body: some View {
         VStack(alignment: .leading, spacing: 2) {
             HStack {
-                Text("Сессии")
-                    .scaledFont(.caption, weight: .semibold)
-                    .foregroundStyle(.secondary)
+                BlockTitle(block: .sessions, title: "Сессии")
                 if waiting > 0 {
                     Text("ждут ответа: \(waiting)")
                         .scaledFont(.caption, weight: .medium)
@@ -69,8 +68,10 @@ struct SessionsView: View {
             .padding(.horizontal, 10)
             .padding(.top, 2)
 
-            ForEach(rows) { row in
-                SessionRowView(row: row)
+            if !PanelBlock.collapsed(in: collapsedRaw).contains(.sessions) {
+                ForEach(rows) { row in
+                    SessionRowView(row: row)
+                }
             }
         }
         .padding(6)

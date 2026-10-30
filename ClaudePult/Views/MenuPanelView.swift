@@ -8,6 +8,7 @@ struct MenuPanelView: View {
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(ProjectStore.self) private var store
     @Environment(UsageStore.self) private var usage
+    @AppStorage("collapsedBlocks") private var collapsedRaw = ""
     @Environment(SessionStore.self) private var sessions
     @Environment(HookController.self) private var hooks
     @Environment(RunStore.self) private var runs
@@ -80,7 +81,9 @@ struct MenuPanelView: View {
             if settings.shows(.projects) {
                 VStack(alignment: .leading, spacing: 0) {
                     projectsHeader
-                    content
+                    if !PanelBlock.collapsed(in: collapsedRaw).contains(.projects) {
+                        content
+                    }
                 }
                 .revealed(isShown, step: 1, reduceMotion: calm)
                 Divider()
@@ -220,9 +223,7 @@ struct MenuPanelView: View {
         let count = folders.isActive ? folders.projects.count : store.projects.count
         let red = folders.isActive ? 0 : store.projects.filter { $0.health == .red }.count
         return HStack(spacing: 6) {
-            Text("Проекты")
-                .scaledFont(.caption, weight: .semibold)
-                .foregroundStyle(.secondary)
+            BlockTitle(block: .projects, title: "Проекты")
             if count > 0 {
                 Text(verbatim: "\(count)")
                     .scaledFont(.caption)

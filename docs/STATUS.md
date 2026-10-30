@@ -5,11 +5,11 @@
 **Updated:** 2026-10-30
 
 **Now:**
-- Settings tidy-up merged (PR #62); next: collapsible panel blocks
+- collapsible panel blocks — branch `feat/collapsible-blocks`, PR open; next: renew the Claude Code login automatically
 
 **Next:**
-- rest of the UI review: collapsible panel blocks; menu bar elements reordered by dragging
-- keep the Claude Code login fresh: test whether a tiny `claude -p` renews the token; or `claude setup-token` (needs Oleh)
+- menu bar elements reordered by dragging (needs a different list than a grouped Form)
+- renew the Claude Code login automatically: a tiny `claude -p` renews the token for ~8 h (checked live)
 - fix whatever Oleh finds in the translations (machine translation; native review for ja, ko, ar at least)
 - stage 8 rest: Developer ID signing and notarization, Sparkle updates — once Oleh decides on Developer ID, the name and where updates are hosted
 - Fix whatever Oleh finds in docs/CHECKLIST.md
@@ -31,6 +31,12 @@
 - hooks are installed in ~/.claude/settings.json; backup of the original: ~/.claude/settings.json.claudepult-backup-20261029T192827
 - delete or archive the old repo `OlehDemishev/ClaudeBar`; turn on start at login if wanted
 <!-- summary:end -->
+
+## 2026-10-30 — Collapsible panel blocks (branch `feat/collapsible-blocks`)
+
+Done: every panel block (Лимиты, Сессии, Ближайшее, Проекты, Команды) folds with a click on its title; the choice is kept between openings. Folded, a block still shows what matters: session and week %, «ждут ответа», the number of upcoming dates (red if one is overdue), the number of projects and the problems.
+Checked: `xcodebuild test` — 161 tests green (new `CollapsedBlocksTests`); catalog synced, 2 new strings in all 12 languages. Live: installed, panel snapshot with three blocks folded (the setting was put back afterwards). CI not set up; checks run locally.
+Left: menu bar elements still move with arrows.
 
 ## 2026-10-30 — Settings tidy-up from the UI review (branch `feat/settings-tidy`)
 
