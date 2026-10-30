@@ -5,7 +5,7 @@
 **Updated:** 2026-10-30
 
 **Now:**
-- PR `docs/spec-content` — spec `docs/SPEC-modes.md`: modes built from blocks, built-in templates, setup assistant, calendar, fully configurable menu bar — agreed with Oleh, waiting for merge
+- nothing in progress (spec `docs/SPEC-modes.md` merged; stage 1 not started — waiting for Oleh's go)
 
 **Next:**
 - docs/SPEC-modes.md §9 stage 1: mode model (JSON), current setup as mode «Разработчик (GitHub)», switcher in the panel, «Режимы» settings tab — no behaviour change for Oleh
