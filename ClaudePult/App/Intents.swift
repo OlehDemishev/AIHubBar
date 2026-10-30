@@ -13,7 +13,7 @@ enum IntentBridge {
 enum LimitsSummary {
     static func text(fromUsageFile data: Data?, now: Date = .now) -> String {
         guard let data, let object = try? JSONSerialization.jsonObject(with: data) as? [String: Any] else {
-            return String(localized: "Лимиты ещё не загружены — откройте панель ClaudePult")
+            return String(localized: "Лимиты ещё не загружены — откройте панель AI Hub Bar")
         }
         func part(_ key: String, _ title: String) -> String? {
             guard let window = object[key] as? [String: Any], let value = (window["utilization"] as? NSNumber)?.doubleValue else { return nil }
@@ -23,7 +23,7 @@ enum LimitsSummary {
                 .compactMap { $0 }.joined(separator: ", ")
         }
         let parts = [part("five_hour", String(localized: "Сессия")), part("seven_day", String(localized: "неделя"))].compactMap { $0 }
-        return parts.isEmpty ? String(localized: "Лимиты ещё не загружены — откройте панель ClaudePult") : parts.joined(separator: "; ")
+        return parts.isEmpty ? String(localized: "Лимиты ещё не загружены — откройте панель AI Hub Bar") : parts.joined(separator: "; ")
     }
 }
 
@@ -39,7 +39,7 @@ struct ShowLimitsIntent: AppIntent {
 }
 
 struct RunQuickCommandIntent: AppIntent {
-    static let title: LocalizedStringResource = "Быстрая команда ClaudePult"
+    static let title: LocalizedStringResource = "Быстрая команда AI Hub Bar"
     static let description = IntentDescription("Запускает кнопку из «Быстрых команд» по названию.")
 
     @Parameter(title: "Название")
@@ -59,7 +59,7 @@ struct RunQuickCommandIntent: AppIntent {
 }
 
 struct OpenSearchIntent: AppIntent {
-    static let title: LocalizedStringResource = "Поиск ClaudePult"
+    static let title: LocalizedStringResource = "Поиск AI Hub Bar"
     static let description = IntentDescription("Окно поиска по проектам, сессиям и командам.")
     static let openAppWhenRun = true
 

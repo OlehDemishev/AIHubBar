@@ -78,7 +78,7 @@ struct ApprovalTests {
         ApprovalFiles.decide(try await h.request().id, allow: false, in: h.approvals)
         let decision = try #require(((try JSONSerialization.jsonObject(with: try await result.stdout) as? [String: Any])?["hookSpecificOutput"] as? [String: Any])?["decision"] as? [String: Any])
         #expect(decision["behavior"] as? String == "deny")
-        #expect(decision["message"] as? String == "Отклонено в ClaudePult")
+        #expect(decision["message"] as? String == "Отклонено в AI Hub Bar")
     }
 
     @Test func withoutClaudePultNothingWaits() async throws {

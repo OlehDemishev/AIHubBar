@@ -218,7 +218,7 @@ final class QuickToolsController {
         }
         guard result.exitCode != 0 else { return nil }
         let message = String(decoding: result.stderr, as: UTF8.self).trimmingCharacters(in: .whitespacesAndNewlines)
-        return message.contains("-1743") ? String(localized: "Нет разрешения: Системные настройки → Конфиденциальность → Автоматизация → ClaudePult") : message
+        return message.contains("-1743") ? String(localized: "Нет разрешения: Системные настройки → Конфиденциальность → Автоматизация → AI Hub Bar") : message
     }
 
     private static func displaySleep() async -> String? {

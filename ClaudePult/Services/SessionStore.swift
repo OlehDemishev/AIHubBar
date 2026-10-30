@@ -81,7 +81,7 @@ final class SessionStore {
             approvals[request.sessionID] = nil
             UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: ["waiting-\(request.sessionID)"])
         }
-        AppLog.info("Permission \(allow ? "allowed" : "denied") from ClaudePult")
+        AppLog.info("Permission \(allow ? "allowed" : "denied") from AI Hub Bar")
     }
 
     private func keepApprovalsAlive() {

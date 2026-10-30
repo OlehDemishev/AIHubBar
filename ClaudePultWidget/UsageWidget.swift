@@ -189,7 +189,7 @@ struct NoDataView: View {
     var body: some View {
         VStack(spacing: 4) {
             Image(systemName: "sparkle").font(.title2)
-            Text("Нет данных — откройте ClaudePult").font(.caption).multilineTextAlignment(.center)
+            Text("Нет данных — откройте AI Hub Bar").font(.caption).multilineTextAlignment(.center)
         }
         .foregroundStyle(.secondary)
     }
@@ -216,7 +216,7 @@ struct UsageWidget: Widget {
             UsageWidgetView(entry: entry)
         }
         .configurationDisplayName("Лимиты Claude")
-        .description("Сессия и неделя подписки Claude — из ClaudePult.")
+        .description("Сессия и неделя подписки Claude — из AI Hub Bar.")
         .supportedFamilies([.systemSmall, .systemMedium])
     }
 }

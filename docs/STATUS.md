@@ -1,13 +1,13 @@
 # Status
 
 <!-- summary:start -->
-**Stage:** SPEC-modes and SPEC-profiles done (release tooling ready without Developer ID, not published yet)
+**Stage:** renamed to AI Hub Bar (formerly ClaudePult); SPEC-modes and SPEC-profiles done, release tooling ready, not published yet
 **Updated:** 2026-10-30
 
 **Now:**
 - merged: menu bar drag reordering (PR #93), translation review (PR #94), release build re-checked on main (PR #95)
 - panel redesigned as cards, variant A, merged (PR #98)
-- feature batch from Oleh's «все»: approve from notifications merged (PR #100); current action merged (PR #102); week forecast merged (PR #104); Telegram answers merged (PR #106); PR/CI alerts merged (PR #108); search, hot key, Shortcuts merged (PR #110); widget and control (PR open); night queue (PR open, on top of it); context warning (PR open, on top of that) week forecast, Telegram, PR/CI alerts, hotkey and search, widget, night queue, context warning
+- feature batch from Oleh's «все»: approve from notifications merged (PR #100); current action merged (PR #102); week forecast merged (PR #104); Telegram answers merged (PR #106); PR/CI alerts merged (PR #108); search, hot key, Shortcuts merged (PR #110); widget and control (PR open); night queue (PR open, on top of it); context warning (PR open, on top of that); rename to AI Hub Bar (PR open, on top of all) week forecast, Telegram, PR/CI alerts, hotkey and search, widget, night queue, context warning
 - hover hints for icon-only controls and the menu bar item merged (PR #91)
 - second wave merged: «История буфера» and «Заметки» (PR #87), «Не спать» with the lid closed (PR #89)
 - release without an Apple Developer account merged (PR #85): Sparkle, self-signed signing, `scripts/release.sh`, MIT license; nothing published yet
@@ -21,6 +21,7 @@
 - Windows and Linux versions (docs/SPEC-windows.md, docs/SPEC-linux.md) — only when Oleh says; stage 0 (fact checks in VMs) first
 
 **Needs Oleh:**
+- merge the stack in order: widget (#112) → night queue (#113) → context (#114) → rename; then optionally rename the GitHub repository (and SUFeedURL / REPO in release.sh with it)
 - for answers from Telegram: create a bot in @BotFather (/newbot), paste its token in Settings → Claude Code → «Ответы из Telegram», press «Start» in the bot, then «Проверить» and turn it on
 - Settings → Claude Code → «Обновить hooks» once, so permission requests can be answered from notifications (timeout 5 → 300 s)
 - try the new panel: hover a session row, click a project, the profile menu with two profiles
@@ -53,6 +54,12 @@
 - hooks are installed in ~/.claude/settings.json; backup of the original: ~/.claude/settings.json.claudepult-backup-20261029T192827
 - delete or archive the old repo `OlehDemishev/ClaudeBar`; turn on start at login if wanted
 <!-- summary:end -->
+
+## 2026-10-30 — Renamed to AI Hub Bar (branch `feat/rename-ai-hub-bar`, on top of `feat/context-warning`)
+
+Done: the app is «AI Hub Bar»: `AI Hub Bar.app` (executable `AIHubBar`), every visible string in code and the 13 translations (34 catalog keys moved with their translations), widget and Shortcuts names, the install and release scripts (`AIHubBar-<version>.dmg`), README / GUIDE / RELEASE. Internal names stay (DECISIONS): bundle id, module, data and log folders, Keychain service, signing certificate, notes folder, repository.
+Checked: 234 tests green; installed as `~/Applications/AI Hub Bar.app`, the old `ClaudePult.app` moved to the Trash, profile and installed modules carried over, login item still enabled, menu bar tooltip and panel header say «AI Hub Bar», no «ClaudePult» left in the panel's text.
+Left: repository rename (Oleh); hooks still «нужно обновить» from the approvals change.
 
 ## 2026-10-30 — Context fullness in session rows (branch `feat/context-warning`, on top of `feat/night-queue`)
 

@@ -156,7 +156,7 @@ struct MenuPanelView: View {
                 .scaledFont(.title3)
                 .foregroundStyle(.orange)
                 .symbolEffect(.bounce, options: .nonRepeating, value: calm ? false : isShown)
-            Text("ClaudePult")
+            Text("AI Hub Bar")
                 .scaledFont(.headline)
             profileChip
             Spacer(minLength: 4)
@@ -198,7 +198,7 @@ struct MenuPanelView: View {
         } label: { Image(systemName: "questionmark.circle") }
         .help("Помощь")
         Button { NSApp.terminate(nil) } label: { Image(systemName: "power") }
-            .help("Выйти из ClaudePult (⌘Q)")
+            .help("Выйти из AI Hub Bar (⌘Q)")
             .keyboardShortcut("q", modifiers: .command)
     }
 
@@ -243,7 +243,7 @@ struct MenuPanelView: View {
         HStack(spacing: 8) {
             Image(systemName: "bell.slash.fill")
                 .foregroundStyle(.orange)
-            Text("Уведомления ClaudePult выключены в macOS — «ждёт ответа», итоги задач и лимиты не приходят.")
+            Text("Уведомления AI Hub Bar выключены в macOS — «ждёт ответа», итоги задач и лимиты не приходят.")
                 .scaledFont(.caption)
                 .fixedSize(horizontal: false, vertical: true)
             Spacer(minLength: 4)

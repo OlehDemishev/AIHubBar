@@ -57,7 +57,7 @@ struct MenuBarComposerTests {
             [.labeled(symbol: "hand.raised.fill", text: "1", .label)],
         ])
         #expect(MenuBarComposer.accessibilityText(config, data)
-            == "ClaudePult, сессия 17 %, неделя 58 %, есть проекты с проблемами, ждут ответа: 1")
+            == "AI Hub Bar, сессия 17 %, неделя 58 %, есть проекты с проблемами, ждут ответа: 1")
     }
 
     @Test func tooltipNamesEverythingShown() {
@@ -74,7 +74,7 @@ struct MenuBarComposerTests {
         }
         // Switched-off elements stay out of it.
         config.elements = config.elements.map { var e = $0; e.enabled = e.kind == .session; return e }
-        #expect(MenuBarComposer.accessibilityText(config, data) == "ClaudePult, сессия 40 %")
+        #expect(MenuBarComposer.accessibilityText(config, data) == "AI Hub Bar, сессия 40 %")
     }
 
     @Test func dragMovesOntoTarget() {

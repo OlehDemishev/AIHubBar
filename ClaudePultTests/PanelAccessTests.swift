@@ -5,7 +5,7 @@ import Testing
 /// The panel from the keyboard: search, the hot key presets and the Shortcuts limits answer.
 struct PanelAccessTests {
     private let sessions = [PanelSearch.Item(id: "s1", name: "Survikon", detail: "Завис?"),
-                            PanelSearch.Item(id: "s2", name: "ClaudePult", detail: "Смерджи")]
+                            PanelSearch.Item(id: "s2", name: "AI Hub Bar", detail: "Смерджи")]
     private let projects = [PanelSearch.Item(id: "/p/Survikon", name: "Survikon", detail: "main"),
                             PanelSearch.Item(id: "/p/Ambo", name: "Ambo", detail: "feat/survey")]
 

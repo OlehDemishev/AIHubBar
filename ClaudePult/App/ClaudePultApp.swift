@@ -105,7 +105,7 @@ struct ClaudePultApp: App {
             UserDefaults.standard.set(SettingsView.Tab.modes.rawValue, forKey: "settingsTab")
             requests.openWindow("settings")
         }
-        AppLog.info("ClaudePult \(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "?") started")
+        AppLog.info("AI Hub Bar \(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "?") started")
         // Unit tests use the app as their host; keep it from running report.py in the background.
         if ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] == nil {
             store.start()
@@ -211,7 +211,7 @@ struct ClaudePultApp: App {
         }
         .menuBarExtraStyle(.window)
 
-        Window("Поиск — ClaudePult", id: "search") {
+        Window("Поиск — AI Hub Bar", id: "search") {
             QuickSearchWindow()
                 .environment(settings)
                 .environment(store)
@@ -234,7 +234,7 @@ struct ClaudePultApp: App {
         }
         .defaultSize(width: 640, height: 520)
 
-        Window("Помощник — ClaudePult", id: "assistant") {
+        Window("Помощник — AI Hub Bar", id: "assistant") {
             AssistantView()
                 .environment(modes)
                 .environment(settings)
@@ -270,7 +270,7 @@ struct ClaudePultApp: App {
         }
         .defaultSize(width: 720, height: 480)
 
-        Window("Помощь — ClaudePult", id: "help") {
+        Window("Помощь — AI Hub Bar", id: "help") {
             HelpView()
                 .environment(services)
                 .environment(hooks)

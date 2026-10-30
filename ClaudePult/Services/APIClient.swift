@@ -37,7 +37,7 @@ enum APIClient {
         var request = URLRequest(url: url, timeoutInterval: 300)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue("ClaudePult", forHTTPHeaderField: "User-Agent")
+        request.setValue("AIHubBar", forHTTPHeaderField: "User-Agent")
         if let key, !key.isEmpty {
             if anthropic {
                 request.setValue(key, forHTTPHeaderField: "x-api-key")

@@ -91,7 +91,7 @@ enum Readiness {
             return ReadinessItem(id: .hooks, title: title, detail: String(localized: "Hooks устарели — обновите их."), state: .todo, action: .updateHooks)
         case .notInstalled:
             return ReadinessItem(id: .hooks, title: title,
-                                 detail: String(localized: "Список сессий и «Claude ждёт ответа» работают через hooks: ClaudePult добавит свой в ~/.claude/settings.json, сохранив резервную копию."),
+                                 detail: String(localized: "Список сессий и «Claude ждёт ответа» работают через hooks: AI Hub Bar добавит свой в ~/.claude/settings.json, сохранив резервную копию."),
                                  state: .todo, action: .installHooks)
         }
     }
@@ -107,7 +107,7 @@ enum Readiness {
                                  state: .todo, action: .allowNotifications)
         case .denied:
             return ReadinessItem(id: .notifications, title: title,
-                                 detail: String(localized: "Выключены в Системных настройках → Уведомления → ClaudePult."),
+                                 detail: String(localized: "Выключены в Системных настройках → Уведомления → AI Hub Bar."),
                                  state: .todo, action: .openNotificationSettings)
         }
     }
@@ -116,12 +116,12 @@ enum Readiness {
         let title = String(localized: "Запуск при входе")
         switch input.loginItem {
         case .enabled:
-            return ReadinessItem(id: .loginItem, title: title, detail: String(localized: "ClaudePult запускается сам после входа в систему."), state: .done)
+            return ReadinessItem(id: .loginItem, title: title, detail: String(localized: "AI Hub Bar запускается сам после входа в систему."), state: .done)
         case .requiresApproval:
-            return ReadinessItem(id: .loginItem, title: title, detail: String(localized: "Нужно разрешить ClaudePult в Системных настройках → Основные → Объекты входа."),
+            return ReadinessItem(id: .loginItem, title: title, detail: String(localized: "Нужно разрешить AI Hub Bar в Системных настройках → Основные → Объекты входа."),
                                  state: .todo, action: .openLoginItems)
         case .disabled:
-            return ReadinessItem(id: .loginItem, title: title, detail: String(localized: "По желанию: чтобы ClaudePult был в строке меню сразу после входа."),
+            return ReadinessItem(id: .loginItem, title: title, detail: String(localized: "По желанию: чтобы AI Hub Bar был в строке меню сразу после входа."),
                                  state: .optional, action: .enableLoginItem)
         }
     }

@@ -4331,6 +4331,615 @@
         }
       }
     },
+    "AI Hub Bar": {},
+    "AI Hub Bar живёт в строке меню (✦): проекты, лимиты подписки Claude, сессии и команды для AI — в одной панели. Сначала проверим, что всё готово, потом настроим первый профиль.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يعيش AI Hub Bar في شريط القوائم (✦): المشاريع، وحدود اشتراك Claude، والجلسات، وأوامر الذكاء الاصطناعي في لوحة واحدة. لنتحقق أولًا من أن كل شيء جاهز، ثم نُعدّ ملف تعريفك الأول."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar wohnt in der Menüleiste (✦): Projekte, Claude-Abo-Limits, Sitzungen und KI-Befehle in einem Panel. Zuerst prüfen wir, ob alles bereit ist, dann richten wir Ihr erstes Profil ein."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar lives in the menu bar (✦): projects, Claude subscription limits, sessions and AI commands in one panel. First let's check that everything is ready, then set up your first profile."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar vive en la barra de menús (✦): proyectos, límites de la suscripción de Claude, sesiones y comandos de IA en un solo panel. Primero comprobamos que todo esté listo y luego configuramos tu primer perfil."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar vit dans la barre des menus (✦) : projets, limites de l’abonnement Claude, sessions et commandes d’IA dans un seul panneau. Vérifions d’abord que tout est prêt, puis configurons votre premier profil."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar ada di bilah menu (✦): proyek, batas langganan Claude, sesi, dan perintah AI dalam satu panel. Pertama kita periksa apakah semuanya siap, lalu atur profil pertama Anda."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar vive nella barra dei menu (✦): progetti, limiti dell’abbonamento Claude, sessioni e comandi AI in un unico pannello. Prima controlliamo che sia tutto pronto, poi configuriamo il tuo primo profilo."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar はメニューバー（✦）にあります。プロジェクト、Claude サブスクリプションの上限、セッション、AI コマンドをひとつのパネルにまとめます。まず準備ができているか確認し、そのあと最初のプロファイルを設定します。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar는 메뉴 막대(✦)에 있습니다. 프로젝트, Claude 구독 한도, 세션, AI 명령을 한 패널에서 다룹니다. 먼저 모든 준비가 되었는지 확인한 다음 첫 번째 프로필을 설정합니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar mieszka na pasku menu (✦): projekty, limity subskrypcji Claude, sesje i polecenia AI w jednym panelu. Najpierw sprawdzimy, czy wszystko jest gotowe, potem skonfigurujemy pierwszy profil."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O AI Hub Bar fica na barra de menus (✦): projetos, limites da assinatura do Claude, sessões e comandos de IA em um só painel. Primeiro vamos verificar se está tudo pronto e depois configurar seu primeiro perfil."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar живе в рядку меню (✦): проєкти, ліміти підписки Claude, сесії й команди для AI — в одній панелі. Спершу перевіримо, що все готово, потім налаштуємо перший профіль."
+          }
+        }
+      }
+    },
+    "AI Hub Bar запускается сам после входа в систему.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يبدأ AI Hub Bar تلقائيًا بعد تسجيل الدخول."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar startet nach der Anmeldung von selbst."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar starts by itself after you log in."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar se abre solo al iniciar sesión."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar se lance tout seul à l’ouverture de session."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar berjalan sendiri setelah Anda masuk."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar si avvia da solo dopo l’accesso."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ログイン後に AI Hub Bar が自動で起動します。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "로그인하면 AI Hub Bar가 자동으로 실행됩니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar uruchamia się sam po zalogowaniu."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O AI Hub Bar abre sozinho quando você inicia a sessão."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar запускається сам після входу в систему."
+          }
+        }
+      }
+    },
+    "AI Hub Bar не может управлять Терминалом. Разрешите: Системные настройки → Конфиденциальность и безопасность → Автоматизация → AI Hub Bar → Терминал.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لا يستطيع AI Hub Bar التحكم في الطرفية. اسمح بذلك: إعدادات النظام ← الخصوصية والأمن ← الأتمتة ← AI Hub Bar ← الطرفية."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar kann Terminal nicht steuern. Erlauben Sie es: Systemeinstellungen → Datenschutz & Sicherheit → Automation → AI Hub Bar → Terminal."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar cannot control Terminal. Allow it: System Settings → Privacy & Security → Automation → AI Hub Bar → Terminal."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar no puede controlar Terminal. Permítelo en Ajustes del Sistema → Privacidad y seguridad → Automatización → AI Hub Bar → Terminal."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar ne peut pas contrôler Terminal. Autorisez-le : Réglages Système → Confidentialité et sécurité → Automatisation → AI Hub Bar → Terminal."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar tidak bisa mengendalikan Terminal. Izinkan di Pengaturan Sistem → Privasi & Keamanan → Otomatisasi → AI Hub Bar → Terminal."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar non può controllare il Terminale. Consentilo: Impostazioni di Sistema → Privacy e sicurezza → Automazione → AI Hub Bar → Terminale."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar はターミナルを操作できません。許可してください: システム設定 → プライバシーとセキュリティ → オートメーション → AI Hub Bar → ターミナル。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar가 터미널을 제어할 수 없습니다. 허용하세요: 시스템 설정 → 개인정보 보호 및 보안 → 자동화 → AI Hub Bar → 터미널."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar nie może sterować Terminalem. Zezwól: Ustawienia systemowe → Prywatność i ochrona → Automatyzacja → AI Hub Bar → Terminal."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O AI Hub Bar não consegue controlar o Terminal. Permita em Ajustes do Sistema → Privacidade e Segurança → Automação → AI Hub Bar → Terminal."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar не може керувати Терміналом. Дозвольте: Системні параметри → Приватність і безпека → Автоматизація → AI Hub Bar → Термінал."
+          }
+        }
+      }
+    },
+    "AI Hub Bar просит разрешение не давать Mac засыпать с закрытой крышкой.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يطلب AI Hub Bar إذنًا لإبقاء Mac مستيقظًا والغطاء مغلق."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar bittet um die Erlaubnis, den Mac bei geschlossenem Deckel wach zu halten."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar asks for permission to keep the Mac awake with the lid closed."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar pide permiso para mantener el Mac despierto con la tapa cerrada."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar demande l’autorisation de garder le Mac éveillé capot fermé."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar meminta izin agar Mac tetap menyala saat penutup ditutup."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar chiede il permesso di tenere il Mac sveglio con il coperchio chiuso."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar は、蓋を閉じても Mac をスリープさせない許可を求めています。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar가 덮개를 닫아도 Mac이 잠자지 않도록 하는 권한을 요청합니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar prosi o pozwolenie na utrzymanie Maca w stanie czuwania przy zamkniętej pokrywie."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O AI Hub Bar pede permissão para manter o Mac acordado com a tampa fechada."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar просить дозвіл не давати Mac засинати із закритою кришкою."
+          }
+        }
+      }
+    },
+    "AI Hub Bar считает токены своих запросов по ответам сервисов; стоимость — по ценам, которые вы введёте (цены меняются, поэтому они не зашиты). Уведомление при 80 % и 100 % бюджета.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يحسب AI Hub Bar رموز طلباته من ردود الخدمات؛ والتكلفة بحسب الأسعار التي تُدخلها (الأسعار تتغير، لذا لا تأتي مضمَّنة). إشعار عند بلوغ 80 و100 بالمئة من الميزانية."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar zählt die Tokens seiner eigenen Anfragen anhand der Antworten der Dienste; die Kosten nutzen die Preise, die Sie eingeben (Preise ändern sich, daher sind keine eingebaut). Eine Mitteilung bei 80 und 100 Prozent des Budgets."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar counts the tokens of its own requests from the services' replies; costs use the prices you enter (prices change, so none are built in). A notification at 80 and 100 percent of the budget."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar cuenta los tokens de sus propias solicitudes según las respuestas de los servicios; el coste usa los precios que introduzcas (los precios cambian, por eso no vienen incluidos). Aviso al gastar el presupuesto al 80 % y al 100 %."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar compte les jetons de ses propres requêtes d'après les réponses des services ; le coût utilise les prix que vous saisissez (les prix changent, ils ne sont donc pas intégrés). Une notification quand le budget atteint 80 puis 100 pour cent."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar menghitung token dari permintaannya sendiri berdasarkan jawaban layanan; biaya memakai harga yang Anda masukkan (harga berubah, jadi tidak disertakan). Pemberitahuan saat anggaran terpakai 80 dan 100 persen."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar conta i token delle proprie richieste dalle risposte dei servizi; il costo usa i prezzi che inserisci (i prezzi cambiano, quindi non sono inclusi). Una notifica quando il budget arriva a 80 e a 100 per cento."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar は自分のリクエストのトークンをサービスの応答から数えます。費用はあなたが入力した価格で計算します (価格は変わるため組み込んでいません)。予算の 80 パーセントと 100 パーセントで通知します。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar는 서비스 응답을 바탕으로 자신의 요청 토큰을 셉니다. 비용은 입력한 가격으로 계산합니다 (가격이 바뀌므로 내장하지 않음). 예산의 80퍼센트와 100퍼센트에서 알림을 보냅니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar liczy tokeny swoich zapytań z odpowiedzi usług; koszt wylicza z cen, które wpiszesz (ceny się zmieniają, więc nie są wbudowane). Powiadomienie przy 80 i 100 procentach budżetu."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O AI Hub Bar conta os tokens das próprias solicitações pelas respostas dos serviços; o custo usa os preços que você informar (os preços mudam, por isso não vêm embutidos). Aviso ao gastar 80 e 100 por cento do orçamento."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar рахує токени своїх запитів за відповідями сервісів; вартість — за цінами, які ви введете (ціни змінюються, тому вони не вшиті). Сповіщення при 80 і 100 відсотках бюджету."
+          }
+        }
+      }
+    },
+    "AI Hub Bar убирает своё разрешение для сна с закрытой крышкой.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يزيل AI Hub Bar إذنه الخاص بالغطاء المغلق."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar entfernt seine Erlaubnis für den geschlossenen Deckel."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar is removing its permission for the closed lid."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar quita su permiso para la tapa cerrada."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar retire son autorisation pour le capot fermé."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar menghapus izinnya untuk penutup tertutup."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar rimuove il permesso per il coperchio chiuso."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar は、蓋を閉じたときの許可を取り消します。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar가 덮개를 닫았을 때의 권한을 제거합니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar usuwa swoje pozwolenie dla zamkniętej pokrywy."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O AI Hub Bar remove a permissão para a tampa fechada."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar прибирає свій дозвіл для закритої кришки."
+          }
+        }
+      }
+    },
+    "AI Hub Bar: сюда будут приходить запросы разрешений Claude.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar: ستصل طلبات إذن Claude إلى هنا."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar: Hier kommen Claudes Berechtigungsanfragen an."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar: Claude's permission requests will come here."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar: aquí llegarán las solicitudes de permiso de Claude."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar : les demandes d’autorisation de Claude arriveront ici."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar: permintaan izin Claude akan datang ke sini."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar: qui arriveranno le richieste di permesso di Claude."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar: Claude の許可リクエストはここに届きます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar: Claude의 권한 요청이 여기로 옵니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar: tu będą przychodzić prośby Claude o zgodę."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar: os pedidos de permissão do Claude chegarão aqui."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar: сюди надходитимуть запити дозволів Claude."
+          }
+        }
+      }
+    },
+    "AI Hub Bar: уведомления работают": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar: الإشعارات تعمل"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar: Mitteilungen funktionieren"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar: notifications work"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar: las notificaciones funcionan"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar : les notifications fonctionnent"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar: pemberitahuan berfungsi"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar: le notifiche funzionano"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar: 通知は機能しています"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar: 알림이 작동합니다"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar: powiadomienia działają"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar: as notificações funcionam"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar: сповіщення працюють"
+          }
+        }
+      }
+    },
     "API за месяц: %@": {
       "localizations": {
         "ar": {
@@ -4638,78 +5247,78 @@
         }
       }
     },
-    "Claude давно ничего не делал: возможно, сессия зависла или ждёт чего-то вне ClaudePult": {
+    "Claude давно ничего не делал: возможно, сессия зависла или ждёт чего-то вне AI Hub Bar": {
       "localizations": {
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "لم يفعل Claude شيئًا منذ مدة: ربما علقت الجلسة أو تنتظر شيئًا خارج ClaudePult"
+            "value": "لم يفعل Claude شيئًا منذ مدة: ربما علقت الجلسة أو تنتظر شيئًا خارج AI Hub Bar"
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Claude tut seit einer Weile nichts: Die Sitzung hängt vielleicht oder wartet auf etwas außerhalb von ClaudePult"
+            "value": "Claude tut seit einer Weile nichts: Die Sitzung hängt vielleicht oder wartet auf etwas außerhalb von AI Hub Bar"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Claude hasn't done anything for a while: the session may be stuck or waiting for something outside ClaudePult"
+            "value": "Claude hasn't done anything for a while: the session may be stuck or waiting for something outside AI Hub Bar"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Claude lleva rato sin hacer nada: la sesión puede estar colgada o esperando algo fuera de ClaudePult"
+            "value": "Claude lleva rato sin hacer nada: la sesión puede estar colgada o esperando algo fuera de AI Hub Bar"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Claude ne fait plus rien depuis un moment : la session est peut-être bloquée ou attend quelque chose hors de ClaudePult"
+            "value": "Claude ne fait plus rien depuis un moment : la session est peut-être bloquée ou attend quelque chose hors de AI Hub Bar"
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "Claude sudah lama tidak melakukan apa pun: sesi mungkin macet atau menunggu sesuatu di luar ClaudePult"
+            "value": "Claude sudah lama tidak melakukan apa pun: sesi mungkin macet atau menunggu sesuatu di luar AI Hub Bar"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Claude non fa nulla da un po': la sessione potrebbe essere bloccata o in attesa di qualcosa fuori da ClaudePult"
+            "value": "Claude non fa nulla da un po': la sessione potrebbe essere bloccata o in attesa di qualcosa fuori da AI Hub Bar"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "Claude がしばらく何もしていません。セッションが止まっているか、ClaudePult の外で何かを待っている可能性があります"
+            "value": "Claude がしばらく何もしていません。セッションが止まっているか、AI Hub Bar の外で何かを待っている可能性があります"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "Claude가 한동안 아무것도 하지 않았습니다. 세션이 멈췄거나 ClaudePult 밖의 무언가를 기다리는 중일 수 있습니다"
+            "value": "Claude가 한동안 아무것도 하지 않았습니다. 세션이 멈췄거나 AI Hub Bar 밖의 무언가를 기다리는 중일 수 있습니다"
           }
         },
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Claude od dawna nic nie robi: sesja mogła się zawiesić albo czeka na coś poza ClaudePult"
+            "value": "Claude od dawna nic nie robi: sesja mogła się zawiesić albo czeka na coś poza AI Hub Bar"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "O Claude não faz nada há algum tempo: a sessão pode estar travada ou esperando algo fora do ClaudePult"
+            "value": "O Claude não faz nada há algum tempo: a sessão pode estar travada ou esperando algo fora do AI Hub Bar"
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Claude давно нічого не робив: можливо, сесія зависла або чекає чогось поза ClaudePult"
+            "value": "Claude давно нічого не робив: можливо, сесія зависла або чекає чогось поза AI Hub Bar"
           }
         }
       }
@@ -5094,687 +5703,78 @@
         }
       }
     },
-    "ClaudePult": {},
-    "ClaudePult живёт в строке меню (✦): проекты, лимиты подписки Claude, сессии и команды для AI — в одной панели. Сначала проверим, что всё готово, потом настроим первый профиль.": {
+    "Codex CLI, Gemini CLI, Antigravity, Copilot CLI, Cursor CLI — AI Hub Bar находит установленные (Настройки → «Сервисы AI») и открывает их в Терминале в папке проекта: «Открыть в…» в блоке Claude у проекта. Вход у каждого свой.": {
       "localizations": {
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "يعيش ClaudePult في شريط القوائم (✦): المشاريع، وحدود اشتراك Claude، والجلسات، وأوامر الذكاء الاصطناعي في لوحة واحدة. لنتحقق أولًا من أن كل شيء جاهز، ثم نُعدّ ملف تعريفك الأول."
+            "value": "Codex CLI وGemini CLI وAntigravity وCopilot CLI وCursor CLI — يجد AI Hub Bar المثبَّت منها (الإعدادات ← «خدمات الذكاء الاصطناعي») ويفتحها في الطرفية داخل مجلد المشروع: «فتح في…» في كتلة Claude الخاصة بالمشروع. لكلٍّ منها تسجيل دخوله."
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "ClaudePult wohnt in der Menüleiste (✦): Projekte, Claude-Abo-Limits, Sitzungen und KI-Befehle in einem Panel. Zuerst prüfen wir, ob alles bereit ist, dann richten wir Ihr erstes Profil ein."
+            "value": "Codex CLI, Gemini CLI, Antigravity, Copilot CLI, Cursor CLI — AI Hub Bar findet die installierten (Einstellungen → „KI-Dienste“) und öffnet sie im Terminal im Projektordner: „Öffnen in…“ im Claude-Block eines Projekts. Jeder hat seine eigene Anmeldung."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "ClaudePult lives in the menu bar (✦): projects, Claude subscription limits, sessions and AI commands in one panel. First let's check that everything is ready, then set up your first profile."
+            "value": "Codex CLI, Gemini CLI, Antigravity, Copilot CLI, Cursor CLI — AI Hub Bar finds the installed ones (Settings → “AI Services”) and opens them in Terminal in the project folder: “Open in…” in a project's Claude block. Each has its own sign-in."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "ClaudePult vive en la barra de menús (✦): proyectos, límites de la suscripción de Claude, sesiones y comandos de IA en un solo panel. Primero comprobamos que todo esté listo y luego configuramos tu primer perfil."
+            "value": "Codex CLI, Gemini CLI, Antigravity, Copilot CLI, Cursor CLI — AI Hub Bar encuentra los instalados (Ajustes → «Servicios de IA») y los abre en Terminal en la carpeta del proyecto: «Abrir en…» en el bloque Claude del proyecto. Cada uno tiene su propio inicio de sesión."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "ClaudePult vit dans la barre des menus (✦) : projets, limites de l’abonnement Claude, sessions et commandes d’IA dans un seul panneau. Vérifions d’abord que tout est prêt, puis configurons votre premier profil."
+            "value": "Codex CLI, Gemini CLI, Antigravity, Copilot CLI, Cursor CLI — AI Hub Bar trouve ceux qui sont installés (Réglages → «Services d'IA») et les ouvre dans Terminal dans le dossier du projet : «Ouvrir dans…» dans le bloc Claude du projet. Chacun a sa propre connexion."
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "ClaudePult ada di bilah menu (✦): proyek, batas langganan Claude, sesi, dan perintah AI dalam satu panel. Pertama kita periksa apakah semuanya siap, lalu atur profil pertama Anda."
+            "value": "Codex CLI, Gemini CLI, Antigravity, Copilot CLI, Cursor CLI — AI Hub Bar menemukan yang terpasang (Pengaturan → «Layanan AI») dan membukanya di Terminal di folder proyek: «Buka di…» di blok Claude proyek. Masing-masing punya login sendiri."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "ClaudePult vive nella barra dei menu (✦): progetti, limiti dell’abbonamento Claude, sessioni e comandi AI in un unico pannello. Prima controlliamo che sia tutto pronto, poi configuriamo il tuo primo profilo."
+            "value": "Codex CLI, Gemini CLI, Antigravity, Copilot CLI, Cursor CLI — AI Hub Bar trova quelli installati (Impostazioni → «Servizi IA») e li apre nel Terminale nella cartella del progetto: «Apri in…» nel blocco Claude del progetto. Ognuno ha il proprio accesso."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "ClaudePult はメニューバー（✦）にあります。プロジェクト、Claude サブスクリプションの上限、セッション、AI コマンドをひとつのパネルにまとめます。まず準備ができているか確認し、そのあと最初のプロファイルを設定します。"
+            "value": "Codex CLI、Gemini CLI、Antigravity、Copilot CLI、Cursor CLI — AI Hub Bar はインストール済みのものを見つけ (設定 → 「AI サービス」)、プロジェクトフォルダーでターミナルに開きます: プロジェクトの Claude ブロックの「開く…」。ログインはそれぞれ別です。"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "ClaudePult는 메뉴 막대(✦)에 있습니다. 프로젝트, Claude 구독 한도, 세션, AI 명령을 한 패널에서 다룹니다. 먼저 모든 준비가 되었는지 확인한 다음 첫 번째 프로필을 설정합니다."
+            "value": "Codex CLI, Gemini CLI, Antigravity, Copilot CLI, Cursor CLI — AI Hub Bar가 설치된 것을 찾아 (설정 → «AI 서비스») 프로젝트 폴더의 터미널에서 엽니다: 프로젝트 Claude 블록의 «다음에서 열기…». 로그인은 각자 따로 합니다."
           }
         },
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "ClaudePult mieszka na pasku menu (✦): projekty, limity subskrypcji Claude, sesje i polecenia AI w jednym panelu. Najpierw sprawdzimy, czy wszystko jest gotowe, potem skonfigurujemy pierwszy profil."
+            "value": "Codex CLI, Gemini CLI, Antigravity, Copilot CLI, Cursor CLI — AI Hub Bar znajduje zainstalowane (Ustawienia → „Usługi AI”) i otwiera je w Terminalu w folderze projektu: „Otwórz w…” w bloku Claude projektu. Każdy loguje się osobno."
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "O ClaudePult fica na barra de menus (✦): projetos, limites da assinatura do Claude, sessões e comandos de IA em um só painel. Primeiro vamos verificar se está tudo pronto e depois configurar seu primeiro perfil."
+            "value": "Codex CLI, Gemini CLI, Antigravity, Copilot CLI, Cursor CLI — o AI Hub Bar encontra os instalados (Ajustes → «Serviços de IA») e os abre no Terminal na pasta do projeto: «Abrir em…» no bloco Claude do projeto. Cada um tem seu próprio login."
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "ClaudePult живе в рядку меню (✦): проєкти, ліміти підписки Claude, сесії й команди для AI — в одній панелі. Спершу перевіримо, що все готово, потім налаштуємо перший профіль."
-          }
-        }
-      }
-    },
-    "ClaudePult запускается сам после входа в систему.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "يبدأ ClaudePult تلقائيًا بعد تسجيل الدخول."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ClaudePult startet nach der Anmeldung von selbst."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ClaudePult starts by itself after you log in."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ClaudePult se abre solo al iniciar sesión."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ClaudePult se lance tout seul à l’ouverture de session."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ClaudePult berjalan sendiri setelah Anda masuk."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ClaudePult si avvia da solo dopo l’accesso."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ログイン後に ClaudePult が自動で起動します。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "로그인하면 ClaudePult가 자동으로 실행됩니다."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ClaudePult uruchamia się sam po zalogowaniu."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "O ClaudePult abre sozinho quando você inicia a sessão."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ClaudePult запускається сам після входу в систему."
-          }
-        }
-      }
-    },
-    "ClaudePult не может управлять Терминалом. Разрешите: Системные настройки → Конфиденциальность и безопасность → Автоматизация → ClaudePult → Терминал.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "لا يستطيع ClaudePult التحكم في الطرفية. اسمح بذلك: إعدادات النظام ← الخصوصية والأمن ← الأتمتة ← ClaudePult ← الطرفية."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ClaudePult kann Terminal nicht steuern. Erlauben Sie es: Systemeinstellungen → Datenschutz & Sicherheit → Automation → ClaudePult → Terminal."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ClaudePult cannot control Terminal. Allow it: System Settings → Privacy & Security → Automation → ClaudePult → Terminal."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ClaudePult no puede controlar Terminal. Permítelo en Ajustes del Sistema → Privacidad y seguridad → Automatización → ClaudePult → Terminal."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ClaudePult ne peut pas contrôler Terminal. Autorisez-le : Réglages Système → Confidentialité et sécurité → Automatisation → ClaudePult → Terminal."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ClaudePult tidak bisa mengendalikan Terminal. Izinkan di Pengaturan Sistem → Privasi & Keamanan → Otomatisasi → ClaudePult → Terminal."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ClaudePult non può controllare il Terminale. Consentilo: Impostazioni di Sistema → Privacy e sicurezza → Automazione → ClaudePult → Terminale."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ClaudePult はターミナルを操作できません。許可してください: システム設定 → プライバシーとセキュリティ → オートメーション → ClaudePult → ターミナル。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ClaudePult가 터미널을 제어할 수 없습니다. 허용하세요: 시스템 설정 → 개인정보 보호 및 보안 → 자동화 → ClaudePult → 터미널."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ClaudePult nie może sterować Terminalem. Zezwól: Ustawienia systemowe → Prywatność i ochrona → Automatyzacja → ClaudePult → Terminal."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "O ClaudePult não consegue controlar o Terminal. Permita em Ajustes do Sistema → Privacidade e Segurança → Automação → ClaudePult → Terminal."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ClaudePult не може керувати Терміналом. Дозвольте: Системні параметри → Приватність і безпека → Автоматизація → ClaudePult → Термінал."
-          }
-        }
-      }
-    },
-    "ClaudePult просит разрешение не давать Mac засыпать с закрытой крышкой.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "يطلب ClaudePult إذنًا لإبقاء Mac مستيقظًا والغطاء مغلق."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ClaudePult bittet um die Erlaubnis, den Mac bei geschlossenem Deckel wach zu halten."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ClaudePult asks for permission to keep the Mac awake with the lid closed."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ClaudePult pide permiso para mantener el Mac despierto con la tapa cerrada."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ClaudePult demande l’autorisation de garder le Mac éveillé capot fermé."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ClaudePult meminta izin agar Mac tetap menyala saat penutup ditutup."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ClaudePult chiede il permesso di tenere il Mac sveglio con il coperchio chiuso."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ClaudePult は、蓋を閉じても Mac をスリープさせない許可を求めています。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ClaudePult가 덮개를 닫아도 Mac이 잠자지 않도록 하는 권한을 요청합니다."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ClaudePult prosi o pozwolenie na utrzymanie Maca w stanie czuwania przy zamkniętej pokrywie."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "O ClaudePult pede permissão para manter o Mac acordado com a tampa fechada."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ClaudePult просить дозвіл не давати Mac засинати із закритою кришкою."
-          }
-        }
-      }
-    },
-    "ClaudePult считает токены своих запросов по ответам сервисов; стоимость — по ценам, которые вы введёте (цены меняются, поэтому они не зашиты). Уведомление при 80 % и 100 % бюджета.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "يحسب ClaudePult رموز طلباته من ردود الخدمات؛ والتكلفة بحسب الأسعار التي تُدخلها (الأسعار تتغير، لذا لا تأتي مضمَّنة). إشعار عند بلوغ 80 و100 بالمئة من الميزانية."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ClaudePult zählt die Tokens seiner eigenen Anfragen anhand der Antworten der Dienste; die Kosten nutzen die Preise, die Sie eingeben (Preise ändern sich, daher sind keine eingebaut). Eine Mitteilung bei 80 und 100 Prozent des Budgets."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ClaudePult counts the tokens of its own requests from the services' replies; costs use the prices you enter (prices change, so none are built in). A notification at 80 and 100 percent of the budget."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ClaudePult cuenta los tokens de sus propias solicitudes según las respuestas de los servicios; el coste usa los precios que introduzcas (los precios cambian, por eso no vienen incluidos). Aviso al gastar el presupuesto al 80 % y al 100 %."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ClaudePult compte les jetons de ses propres requêtes d'après les réponses des services ; le coût utilise les prix que vous saisissez (les prix changent, ils ne sont donc pas intégrés). Une notification quand le budget atteint 80 puis 100 pour cent."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ClaudePult menghitung token dari permintaannya sendiri berdasarkan jawaban layanan; biaya memakai harga yang Anda masukkan (harga berubah, jadi tidak disertakan). Pemberitahuan saat anggaran terpakai 80 dan 100 persen."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ClaudePult conta i token delle proprie richieste dalle risposte dei servizi; il costo usa i prezzi che inserisci (i prezzi cambiano, quindi non sono inclusi). Una notifica quando il budget arriva a 80 e a 100 per cento."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ClaudePult は自分のリクエストのトークンをサービスの応答から数えます。費用はあなたが入力した価格で計算します (価格は変わるため組み込んでいません)。予算の 80 パーセントと 100 パーセントで通知します。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ClaudePult는 서비스 응답을 바탕으로 자신의 요청 토큰을 셉니다. 비용은 입력한 가격으로 계산합니다 (가격이 바뀌므로 내장하지 않음). 예산의 80퍼센트와 100퍼센트에서 알림을 보냅니다."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ClaudePult liczy tokeny swoich zapytań z odpowiedzi usług; koszt wylicza z cen, które wpiszesz (ceny się zmieniają, więc nie są wbudowane). Powiadomienie przy 80 i 100 procentach budżetu."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "O ClaudePult conta os tokens das próprias solicitações pelas respostas dos serviços; o custo usa os preços que você informar (os preços mudam, por isso não vêm embutidos). Aviso ao gastar 80 e 100 por cento do orçamento."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ClaudePult рахує токени своїх запитів за відповідями сервісів; вартість — за цінами, які ви введете (ціни змінюються, тому вони не вшиті). Сповіщення при 80 і 100 відсотках бюджету."
-          }
-        }
-      }
-    },
-    "ClaudePult убирает своё разрешение для сна с закрытой крышкой.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "يزيل ClaudePult إذنه الخاص بالغطاء المغلق."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ClaudePult entfernt seine Erlaubnis für den geschlossenen Deckel."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ClaudePult is removing its permission for the closed lid."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ClaudePult quita su permiso para la tapa cerrada."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ClaudePult retire son autorisation pour le capot fermé."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ClaudePult menghapus izinnya untuk penutup tertutup."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ClaudePult rimuove il permesso per il coperchio chiuso."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ClaudePult は、蓋を閉じたときの許可を取り消します。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ClaudePult가 덮개를 닫았을 때의 권한을 제거합니다."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ClaudePult usuwa swoje pozwolenie dla zamkniętej pokrywy."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "O ClaudePult remove a permissão para a tampa fechada."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ClaudePult прибирає свій дозвіл для закритої кришки."
-          }
-        }
-      }
-    },
-    "ClaudePult: сюда будут приходить запросы разрешений Claude.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ClaudePult: ستصل طلبات إذن Claude إلى هنا."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ClaudePult: Hier kommen Claudes Berechtigungsanfragen an."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ClaudePult: Claude's permission requests will come here."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ClaudePult: aquí llegarán las solicitudes de permiso de Claude."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ClaudePult : les demandes d’autorisation de Claude arriveront ici."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ClaudePult: permintaan izin Claude akan datang ke sini."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ClaudePult: qui arriveranno le richieste di permesso di Claude."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ClaudePult: Claude の許可リクエストはここに届きます。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ClaudePult: Claude의 권한 요청이 여기로 옵니다."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ClaudePult: tu będą przychodzić prośby Claude o zgodę."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ClaudePult: os pedidos de permissão do Claude chegarão aqui."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ClaudePult: сюди надходитимуть запити дозволів Claude."
-          }
-        }
-      }
-    },
-    "ClaudePult: уведомления работают": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ClaudePult: الإشعارات تعمل"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ClaudePult: Mitteilungen funktionieren"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ClaudePult: notifications work"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ClaudePult: las notificaciones funcionan"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ClaudePult : les notifications fonctionnent"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ClaudePult: pemberitahuan berfungsi"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ClaudePult: le notifiche funzionano"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ClaudePult: 通知は機能しています"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ClaudePult: 알림이 작동합니다"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ClaudePult: powiadomienia działają"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ClaudePult: as notificações funcionam"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ClaudePult: сповіщення працюють"
-          }
-        }
-      }
-    },
-    "Codex CLI, Gemini CLI, Antigravity, Copilot CLI, Cursor CLI — ClaudePult находит установленные (Настройки → «Сервисы AI») и открывает их в Терминале в папке проекта: «Открыть в…» в блоке Claude у проекта. Вход у каждого свой.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex CLI وGemini CLI وAntigravity وCopilot CLI وCursor CLI — يجد ClaudePult المثبَّت منها (الإعدادات ← «خدمات الذكاء الاصطناعي») ويفتحها في الطرفية داخل مجلد المشروع: «فتح في…» في كتلة Claude الخاصة بالمشروع. لكلٍّ منها تسجيل دخوله."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex CLI, Gemini CLI, Antigravity, Copilot CLI, Cursor CLI — ClaudePult findet die installierten (Einstellungen → „KI-Dienste“) und öffnet sie im Terminal im Projektordner: „Öffnen in…“ im Claude-Block eines Projekts. Jeder hat seine eigene Anmeldung."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex CLI, Gemini CLI, Antigravity, Copilot CLI, Cursor CLI — ClaudePult finds the installed ones (Settings → “AI Services”) and opens them in Terminal in the project folder: “Open in…” in a project's Claude block. Each has its own sign-in."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex CLI, Gemini CLI, Antigravity, Copilot CLI, Cursor CLI — ClaudePult encuentra los instalados (Ajustes → «Servicios de IA») y los abre en Terminal en la carpeta del proyecto: «Abrir en…» en el bloque Claude del proyecto. Cada uno tiene su propio inicio de sesión."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex CLI, Gemini CLI, Antigravity, Copilot CLI, Cursor CLI — ClaudePult trouve ceux qui sont installés (Réglages → «Services d'IA») et les ouvre dans Terminal dans le dossier du projet : «Ouvrir dans…» dans le bloc Claude du projet. Chacun a sa propre connexion."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex CLI, Gemini CLI, Antigravity, Copilot CLI, Cursor CLI — ClaudePult menemukan yang terpasang (Pengaturan → «Layanan AI») dan membukanya di Terminal di folder proyek: «Buka di…» di blok Claude proyek. Masing-masing punya login sendiri."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex CLI, Gemini CLI, Antigravity, Copilot CLI, Cursor CLI — ClaudePult trova quelli installati (Impostazioni → «Servizi IA») e li apre nel Terminale nella cartella del progetto: «Apri in…» nel blocco Claude del progetto. Ognuno ha il proprio accesso."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex CLI、Gemini CLI、Antigravity、Copilot CLI、Cursor CLI — ClaudePult はインストール済みのものを見つけ (設定 → 「AI サービス」)、プロジェクトフォルダーでターミナルに開きます: プロジェクトの Claude ブロックの「開く…」。ログインはそれぞれ別です。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex CLI, Gemini CLI, Antigravity, Copilot CLI, Cursor CLI — ClaudePult가 설치된 것을 찾아 (설정 → «AI 서비스») 프로젝트 폴더의 터미널에서 엽니다: 프로젝트 Claude 블록의 «다음에서 열기…». 로그인은 각자 따로 합니다."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex CLI, Gemini CLI, Antigravity, Copilot CLI, Cursor CLI — ClaudePult znajduje zainstalowane (Ustawienia → „Usługi AI”) i otwiera je w Terminalu w folderze projektu: „Otwórz w…” w bloku Claude projektu. Każdy loguje się osobno."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex CLI, Gemini CLI, Antigravity, Copilot CLI, Cursor CLI — o ClaudePult encontra os instalados (Ajustes → «Serviços de IA») e os abre no Terminal na pasta do projeto: «Abrir em…» no bloco Claude do projeto. Cada um tem seu próprio login."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex CLI, Gemini CLI, Antigravity, Copilot CLI, Cursor CLI — ClaudePult знаходить встановлені (Налаштування → «Сервіси AI») і відкриває їх у Терміналі в папці проєкту: «Відкрити в…» у блоці Claude проєкту. Вхід у кожного свій."
+            "value": "Codex CLI, Gemini CLI, Antigravity, Copilot CLI, Cursor CLI — AI Hub Bar знаходить встановлені (Налаштування → «Сервіси AI») і відкриває їх у Терміналі в папці проєкту: «Відкрити в…» у блоці Claude проєкту. Вхід у кожного свій."
           }
         }
       }
@@ -5938,78 +5938,78 @@
       }
     },
     "Hooks": {},
-    "Hooks добавляются в ~/.claude/settings.json (остальные настройки не трогаются, перед изменением рядом сохраняется копия). Они записывают состояние каждой сессии Claude Code на этом Маке — в Терминале, в приложении Claude, фоновых — чтобы ClaudePult показывал их в панели.": {
+    "Hooks добавляются в ~/.claude/settings.json (остальные настройки не трогаются, перед изменением рядом сохраняется копия). Они записывают состояние каждой сессии Claude Code на этом Маке — в Терминале, в приложении Claude, фоновых — чтобы AI Hub Bar показывал их в панели.": {
       "localizations": {
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "تُضاف hooks إلى ~/.claude/settings.json (تبقى الإعدادات الأخرى كما هي، وتُحفظ نسخة بجانبه قبل التغيير). تسجّل حالة كل جلسة Claude Code على هذا الـ Mac — في الطرفية وفي تطبيق Claude وفي الخلفية — ليعرضها ClaudePult في اللوحة."
+            "value": "تُضاف hooks إلى ~/.claude/settings.json (تبقى الإعدادات الأخرى كما هي، وتُحفظ نسخة بجانبه قبل التغيير). تسجّل حالة كل جلسة Claude Code على هذا الـ Mac — في الطرفية وفي تطبيق Claude وفي الخلفية — ليعرضها AI Hub Bar في اللوحة."
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Hooks werden zu ~/.claude/settings.json hinzugefügt (andere Einstellungen bleiben unberührt; vorher wird daneben eine Kopie gespeichert). Sie zeichnen den Zustand jeder Claude-Code-Sitzung auf diesem Mac auf — im Terminal, in der Claude-App, im Hintergrund —, damit ClaudePult sie im Panel zeigt."
+            "value": "Hooks werden zu ~/.claude/settings.json hinzugefügt (andere Einstellungen bleiben unberührt; vorher wird daneben eine Kopie gespeichert). Sie zeichnen den Zustand jeder Claude-Code-Sitzung auf diesem Mac auf — im Terminal, in der Claude-App, im Hintergrund —, damit AI Hub Bar sie im Panel zeigt."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Hooks are added to ~/.claude/settings.json (other settings are left alone; a copy is saved next to it first). They record the state of every Claude Code session on this Mac — in Terminal, in the Claude app, in the background — so ClaudePult can show them in the panel."
+            "value": "Hooks are added to ~/.claude/settings.json (other settings are left alone; a copy is saved next to it first). They record the state of every Claude Code session on this Mac — in Terminal, in the Claude app, in the background — so AI Hub Bar can show them in the panel."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Los hooks se añaden a ~/.claude/settings.json (el resto de ajustes no se toca; antes se guarda una copia al lado). Registran el estado de cada sesión de Claude Code en este Mac — en Terminal, en la app Claude, en segundo plano — para que ClaudePult las muestre en el panel."
+            "value": "Los hooks se añaden a ~/.claude/settings.json (el resto de ajustes no se toca; antes se guarda una copia al lado). Registran el estado de cada sesión de Claude Code en este Mac — en Terminal, en la app Claude, en segundo plano — para que AI Hub Bar las muestre en el panel."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Les hooks sont ajoutés à ~/.claude/settings.json (les autres réglages restent intacts ; une copie est enregistrée à côté avant). Ils enregistrent l'état de chaque session Claude Code sur ce Mac — dans Terminal, dans l'app Claude, en arrière-plan — pour que ClaudePult les affiche dans le panneau."
+            "value": "Les hooks sont ajoutés à ~/.claude/settings.json (les autres réglages restent intacts ; une copie est enregistrée à côté avant). Ils enregistrent l'état de chaque session Claude Code sur ce Mac — dans Terminal, dans l'app Claude, en arrière-plan — pour que AI Hub Bar les affiche dans le panneau."
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "Hook ditambahkan ke ~/.claude/settings.json (pengaturan lain tidak disentuh; sebelumnya salinan disimpan di sebelahnya). Hook mencatat status setiap sesi Claude Code di Mac ini — di Terminal, di aplikasi Claude, di latar belakang — agar ClaudePult menampilkannya di panel."
+            "value": "Hook ditambahkan ke ~/.claude/settings.json (pengaturan lain tidak disentuh; sebelumnya salinan disimpan di sebelahnya). Hook mencatat status setiap sesi Claude Code di Mac ini — di Terminal, di aplikasi Claude, di latar belakang — agar AI Hub Bar menampilkannya di panel."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Gli hook vengono aggiunti a ~/.claude/settings.json (le altre impostazioni restano intatte; prima viene salvata una copia accanto). Registrano lo stato di ogni sessione di Claude Code su questo Mac — nel Terminale, nell'app Claude, in background — perché ClaudePult le mostri nel pannello."
+            "value": "Gli hook vengono aggiunti a ~/.claude/settings.json (le altre impostazioni restano intatte; prima viene salvata una copia accanto). Registrano lo stato di ogni sessione di Claude Code su questo Mac — nel Terminale, nell'app Claude, in background — perché AI Hub Bar le mostri nel pannello."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "hooks は ~/.claude/settings.json に追加されます (他の設定はそのまま。事前に隣へコピーを保存します)。この Mac のすべての Claude Code セッション — ターミナル、Claude アプリ、バックグラウンド — の状態を記録し、ClaudePult がパネルに表示できるようにします。"
+            "value": "hooks は ~/.claude/settings.json に追加されます (他の設定はそのまま。事前に隣へコピーを保存します)。この Mac のすべての Claude Code セッション — ターミナル、Claude アプリ、バックグラウンド — の状態を記録し、AI Hub Bar がパネルに表示できるようにします。"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "hooks는 ~/.claude/settings.json에 추가됩니다 (다른 설정은 그대로이며, 먼저 옆에 사본을 저장합니다). 이 Mac의 모든 Claude Code 세션 — 터미널, Claude 앱, 백그라운드 — 의 상태를 기록해 ClaudePult가 패널에 보여 줄 수 있게 합니다."
+            "value": "hooks는 ~/.claude/settings.json에 추가됩니다 (다른 설정은 그대로이며, 먼저 옆에 사본을 저장합니다). 이 Mac의 모든 Claude Code 세션 — 터미널, Claude 앱, 백그라운드 — 의 상태를 기록해 AI Hub Bar가 패널에 보여 줄 수 있게 합니다."
           }
         },
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Hooki są dopisywane do ~/.claude/settings.json (pozostałe ustawienia zostają nietknięte; wcześniej obok zapisywana jest kopia). Zapisują stan każdej sesji Claude Code na tym Macu — w Terminalu, w aplikacji Claude, w tle — żeby ClaudePult pokazywał je w panelu."
+            "value": "Hooki są dopisywane do ~/.claude/settings.json (pozostałe ustawienia zostają nietknięte; wcześniej obok zapisywana jest kopia). Zapisują stan każdej sesji Claude Code na tym Macu — w Terminalu, w aplikacji Claude, w tle — żeby AI Hub Bar pokazywał je w panelu."
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Os hooks são adicionados a ~/.claude/settings.json (os outros ajustes não são tocados; antes é salva uma cópia ao lado). Eles registram o estado de cada sessão do Claude Code neste Mac — no Terminal, no app Claude, em segundo plano — para que o ClaudePult as mostre no painel."
+            "value": "Os hooks são adicionados a ~/.claude/settings.json (os outros ajustes não são tocados; antes é salva uma cópia ao lado). Eles registram o estado de cada sessão do Claude Code neste Mac — no Terminal, no app Claude, em segundo plano — para que o AI Hub Bar as mostre no painel."
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Hooks додаються в ~/.claude/settings.json (інші налаштування не змінюються, перед зміною поруч зберігається копія). Вони записують стан кожної сесії Claude Code на цьому Маку — у Терміналі, у застосунку Claude, фонових — щоб ClaudePult показував їх у панелі."
+            "value": "Hooks додаються в ~/.claude/settings.json (інші налаштування не змінюються, перед зміною поруч зберігається копія). Вони записують стан кожної сесії Claude Code на цьому Маку — у Терміналі, у застосунку Claude, фонових — щоб AI Hub Bar показував їх у панелі."
           }
         }
       }
@@ -8790,78 +8790,78 @@
         }
       }
     },
-    "«Лимиты Claude» для рабочего стола: правый клик по столу → «Изменить виджеты…» → ClaudePult. Маленький — кольцо сессии, средний — сессия и неделя.": {
+    "«Лимиты Claude» для рабочего стола: правый клик по столу → «Изменить виджеты…» → AI Hub Bar. Маленький — кольцо сессии, средний — сессия и неделя.": {
       "localizations": {
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "«حدود Claude» لسطح المكتب: انقر بزر الفأرة الأيمن على سطح المكتب ← «تحرير الأدوات…» ← ClaudePult. الصغيرة — حلقة الجلسة، المتوسطة — الجلسة والأسبوع."
+            "value": "«حدود Claude» لسطح المكتب: انقر بزر الفأرة الأيمن على سطح المكتب ← «تحرير الأدوات…» ← AI Hub Bar. الصغيرة — حلقة الجلسة، المتوسطة — الجلسة والأسبوع."
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "„Claude-Limits“ für den Schreibtisch: Rechtsklick auf den Schreibtisch → „Widgets bearbeiten…“ → ClaudePult. Klein — der Sitzungsring, mittel — Sitzung und Woche."
+            "value": "„Claude-Limits“ für den Schreibtisch: Rechtsklick auf den Schreibtisch → „Widgets bearbeiten…“ → AI Hub Bar. Klein — der Sitzungsring, mittel — Sitzung und Woche."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "“Claude Limits” for the desktop: right-click the desktop → “Edit Widgets…” → ClaudePult. Small — the session ring, medium — session and week."
+            "value": "“Claude Limits” for the desktop: right-click the desktop → “Edit Widgets…” → AI Hub Bar. Small — the session ring, medium — session and week."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "«Límites de Claude» para el escritorio: clic derecho en el escritorio → «Editar widgets…» → ClaudePult. Pequeño — el anillo de la sesión, mediano — sesión y semana."
+            "value": "«Límites de Claude» para el escritorio: clic derecho en el escritorio → «Editar widgets…» → AI Hub Bar. Pequeño — el anillo de la sesión, mediano — sesión y semana."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "«Limites de Claude» pour le bureau : clic droit sur le bureau → «Modifier les widgets…» → ClaudePult. Petit — l'anneau de la session, moyen — session et semaine."
+            "value": "«Limites de Claude» pour le bureau : clic droit sur le bureau → «Modifier les widgets…» → AI Hub Bar. Petit — l'anneau de la session, moyen — session et semaine."
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "«Batas Claude» untuk desktop: klik kanan desktop → «Edit Widget…» → ClaudePult. Kecil — cincin sesi, sedang — sesi dan minggu."
+            "value": "«Batas Claude» untuk desktop: klik kanan desktop → «Edit Widget…» → AI Hub Bar. Kecil — cincin sesi, sedang — sesi dan minggu."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "«Limiti di Claude» per la scrivania: clic destro sulla scrivania → «Modifica widget…» → ClaudePult. Piccolo — l'anello della sessione, medio — sessione e settimana."
+            "value": "«Limiti di Claude» per la scrivania: clic destro sulla scrivania → «Modifica widget…» → AI Hub Bar. Piccolo — l'anello della sessione, medio — sessione e settimana."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "デスクトップ用の「Claude の制限」: デスクトップを右クリック → 「ウィジェットを編集…」 → ClaudePult。小 — セッションのリング、中 — セッションと週。"
+            "value": "デスクトップ用の「Claude の制限」: デスクトップを右クリック → 「ウィジェットを編集…」 → AI Hub Bar。小 — セッションのリング、中 — セッションと週。"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "데스크톱용 «Claude 한도»: 데스크톱을 오른쪽 클릭 → «위젯 편집…» → ClaudePult. 작은 크기 — 세션 링, 중간 크기 — 세션과 주간."
+            "value": "데스크톱용 «Claude 한도»: 데스크톱을 오른쪽 클릭 → «위젯 편집…» → AI Hub Bar. 작은 크기 — 세션 링, 중간 크기 — 세션과 주간."
           }
         },
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "„Limity Claude” na biurko: kliknij biurko prawym przyciskiem → „Edytuj widżety…” → ClaudePult. Mały — pierścień sesji, średni — sesja i tydzień."
+            "value": "„Limity Claude” na biurko: kliknij biurko prawym przyciskiem → „Edytuj widżety…” → AI Hub Bar. Mały — pierścień sesji, średni — sesja i tydzień."
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "«Limites do Claude» para a mesa: clique direito na mesa → «Editar Widgets…» → ClaudePult. Pequeno — o anel da sessão, médio — sessão e semana."
+            "value": "«Limites do Claude» para a mesa: clique direito na mesa → «Editar Widgets…» → AI Hub Bar. Pequeno — o anel da sessão, médio — sessão e semana."
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "«Ліміти Claude» для робочого столу: правий клік по столу → «Змінити віджети…» → ClaudePult. Малий — кільце сесії, середній — сесія і тиждень."
+            "value": "«Ліміти Claude» для робочого столу: правий клік по столу → «Змінити віджети…» → AI Hub Bar. Малий — кільце сесії, середній — сесія і тиждень."
           }
         }
       }
@@ -9930,78 +9930,78 @@
         }
       }
     },
-    "Без монитора и питания закрытый Mac засыпает всегда, это может отменить только pmset от имени администратора. «Разрешить…» один раз спрашивает пароль и добавляет правило /etc/sudoers.d/claudepult: только команды pmset -a disablesleep 0 и 1. Пока держит правило «Не спать», сон выключен; потом и при выходе из ClaudePult — включается обратно. На батарее ниже 20 % — тоже включается. Закрытый Mac греется: не кладите его в сумку.": {
+    "Без монитора и питания закрытый Mac засыпает всегда, это может отменить только pmset от имени администратора. «Разрешить…» один раз спрашивает пароль и добавляет правило /etc/sudoers.d/claudepult: только команды pmset -a disablesleep 0 и 1. Пока держит правило «Не спать», сон выключен; потом и при выходе из AI Hub Bar — включается обратно. На батарее ниже 20 % — тоже включается. Закрытый Mac греется: не кладите его в сумку.": {
       "localizations": {
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "دون شاشة وطاقة يدخل Mac المغلق في السكون دائمًا، ولا يغيّر ذلك إلا pmset بصلاحيات المسؤول. «السماح…» يطلب كلمة المرور مرة واحدة ويضيف القاعدة /etc/sudoers.d/claudepult: فقط الأمرين pmset -a disablesleep 0 و 1. ما دامت قاعدة «البقاء مستيقظًا» سارية يبقى السكون معطلًا، وبعدها وعند إنهاء ClaudePult يعود. ويعود أيضًا حين تنخفض البطارية عن 20%. يسخن Mac المغلق: لا تضعه في حقيبة."
+            "value": "دون شاشة وطاقة يدخل Mac المغلق في السكون دائمًا، ولا يغيّر ذلك إلا pmset بصلاحيات المسؤول. «السماح…» يطلب كلمة المرور مرة واحدة ويضيف القاعدة /etc/sudoers.d/claudepult: فقط الأمرين pmset -a disablesleep 0 و 1. ما دامت قاعدة «البقاء مستيقظًا» سارية يبقى السكون معطلًا، وبعدها وعند إنهاء AI Hub Bar يعود. ويعود أيضًا حين تنخفض البطارية عن 20%. يسخن Mac المغلق: لا تضعه في حقيبة."
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ohne Monitor und Strom schläft ein geschlossener Mac immer; nur pmset als Administrator kann das ändern. „Erlauben…“ fragt einmal nach dem Passwort und legt die Regel /etc/sudoers.d/claudepult an: nur die Befehle pmset -a disablesleep 0 und 1. Solange eine „Wach bleiben“-Regel greift, ist der Ruhezustand aus; danach und beim Beenden von ClaudePult wieder an. Ebenso bei Akku unter 20%. Ein geschlossener Mac wird warm: nicht in die Tasche stecken."
+            "value": "Ohne Monitor und Strom schläft ein geschlossener Mac immer; nur pmset als Administrator kann das ändern. „Erlauben…“ fragt einmal nach dem Passwort und legt die Regel /etc/sudoers.d/claudepult an: nur die Befehle pmset -a disablesleep 0 und 1. Solange eine „Wach bleiben“-Regel greift, ist der Ruhezustand aus; danach und beim Beenden von AI Hub Bar wieder an. Ebenso bei Akku unter 20%. Ein geschlossener Mac wird warm: nicht in die Tasche stecken."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Without a display and power, a closed Mac always sleeps; only pmset run as administrator can change that. «Allow…» asks for the password once and adds the rule /etc/sudoers.d/claudepult: only the commands pmset -a disablesleep 0 and 1. While a «Keep Awake» rule holds, sleep is off; afterwards, and when ClaudePult quits, it is turned back on. Also back on when the battery drops below 20%. A closed Mac gets warm: don’t put it in a bag."
+            "value": "Without a display and power, a closed Mac always sleeps; only pmset run as administrator can change that. «Allow…» asks for the password once and adds the rule /etc/sudoers.d/claudepult: only the commands pmset -a disablesleep 0 and 1. While a «Keep Awake» rule holds, sleep is off; afterwards, and when AI Hub Bar quits, it is turned back on. Also back on when the battery drops below 20%. A closed Mac gets warm: don’t put it in a bag."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sin pantalla ni corriente, un Mac cerrado siempre duerme; solo pmset como administrador puede cambiarlo. «Permitir…» pide la contraseña una vez y añade la regla /etc/sudoers.d/claudepult: solo los comandos pmset -a disablesleep 0 y 1. Mientras una regla de «No dormir» lo mantiene, el reposo está desactivado; después, y al salir de ClaudePult, se reactiva. También se reactiva con la batería por debajo del 20%. Un Mac cerrado se calienta: no lo metas en una bolsa."
+            "value": "Sin pantalla ni corriente, un Mac cerrado siempre duerme; solo pmset como administrador puede cambiarlo. «Permitir…» pide la contraseña una vez y añade la regla /etc/sudoers.d/claudepult: solo los comandos pmset -a disablesleep 0 y 1. Mientras una regla de «No dormir» lo mantiene, el reposo está desactivado; después, y al salir de AI Hub Bar, se reactiva. También se reactiva con la batería por debajo del 20%. Un Mac cerrado se calienta: no lo metas en una bolsa."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sans écran ni alimentation, un Mac fermé se met toujours en veille ; seul pmset en administrateur peut l’empêcher. « Autoriser… » demande le mot de passe une fois et ajoute la règle /etc/sudoers.d/claudepult : uniquement les commandes pmset -a disablesleep 0 et 1. Tant qu’une règle « Rester éveillé » tient, la veille est désactivée ; ensuite, et quand ClaudePult quitte, elle est rétablie. Elle l’est aussi quand la batterie passe sous 20%. Un Mac fermé chauffe : ne le mettez pas dans un sac."
+            "value": "Sans écran ni alimentation, un Mac fermé se met toujours en veille ; seul pmset en administrateur peut l’empêcher. « Autoriser… » demande le mot de passe une fois et ajoute la règle /etc/sudoers.d/claudepult : uniquement les commandes pmset -a disablesleep 0 et 1. Tant qu’une règle « Rester éveillé » tient, la veille est désactivée ; ensuite, et quand AI Hub Bar quitte, elle est rétablie. Elle l’est aussi quand la batterie passe sous 20%. Un Mac fermé chauffe : ne le mettez pas dans un sac."
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tanpa monitor dan daya, Mac yang ditutup selalu tidur; hanya pmset sebagai administrator yang bisa mengubahnya. «Izinkan…» meminta kata sandi sekali dan menambahkan aturan /etc/sudoers.d/claudepult: hanya perintah pmset -a disablesleep 0 dan 1. Selama aturan «Tetap terjaga» berlaku, tidur dimatikan; setelahnya dan saat ClaudePult ditutup, dinyalakan kembali. Juga saat baterai di bawah 20%. Mac yang ditutup menjadi hangat: jangan masukkan ke tas."
+            "value": "Tanpa monitor dan daya, Mac yang ditutup selalu tidur; hanya pmset sebagai administrator yang bisa mengubahnya. «Izinkan…» meminta kata sandi sekali dan menambahkan aturan /etc/sudoers.d/claudepult: hanya perintah pmset -a disablesleep 0 dan 1. Selama aturan «Tetap terjaga» berlaku, tidur dimatikan; setelahnya dan saat AI Hub Bar ditutup, dinyalakan kembali. Juga saat baterai di bawah 20%. Mac yang ditutup menjadi hangat: jangan masukkan ke tas."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Senza monitor e alimentazione un Mac chiuso va sempre in stop; solo pmset come amministratore può cambiarlo. «Consenti…» chiede la password una volta e aggiunge la regola /etc/sudoers.d/claudepult: solo i comandi pmset -a disablesleep 0 e 1. Finché una regola di «Resta sveglio» tiene, lo stop è disattivato; poi, e quando ClaudePult si chiude, torna attivo. Torna attivo anche con la batteria sotto il 20%. Un Mac chiuso si scalda: non metterlo in borsa."
+            "value": "Senza monitor e alimentazione un Mac chiuso va sempre in stop; solo pmset come amministratore può cambiarlo. «Consenti…» chiede la password una volta e aggiunge la regola /etc/sudoers.d/claudepult: solo i comandi pmset -a disablesleep 0 e 1. Finché una regola di «Resta sveglio» tiene, lo stop è disattivato; poi, e quando AI Hub Bar si chiude, torna attivo. Torna attivo anche con la batteria sotto il 20%. Un Mac chiuso si scalda: non metterlo in borsa."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "モニタと電源がないと、閉じた Mac は必ずスリープします。これを変えられるのは管理者として実行する pmset だけです。「許可…」はパスワードを一度だけ求め、/etc/sudoers.d/claudepult にルールを追加します（pmset -a disablesleep 0 と 1 のみ）。「スリープしない」のルールが有効な間はスリープしません。終わったときと ClaudePult を終了したときに元に戻します。バッテリーが 20% を下回ったときも戻します。閉じた Mac は熱くなるので、バッグに入れないでください。"
+            "value": "モニタと電源がないと、閉じた Mac は必ずスリープします。これを変えられるのは管理者として実行する pmset だけです。「許可…」はパスワードを一度だけ求め、/etc/sudoers.d/claudepult にルールを追加します（pmset -a disablesleep 0 と 1 のみ）。「スリープしない」のルールが有効な間はスリープしません。終わったときと AI Hub Bar を終了したときに元に戻します。バッテリーが 20% を下回ったときも戻します。閉じた Mac は熱くなるので、バッグに入れないでください。"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "모니터와 전원이 없으면 닫힌 Mac은 항상 잠자기에 들어가며, 관리자 권한의 pmset만 이를 바꿀 수 있습니다. «허용…»은 암호를 한 번 묻고 /etc/sudoers.d/claudepult 규칙을 추가합니다(pmset -a disablesleep 0과 1 명령만). «잠자기 방지» 규칙이 유지되는 동안 잠자기가 꺼지고, 끝나거나 ClaudePult를 종료하면 다시 켜집니다. 배터리가 20% 아래로 떨어져도 다시 켜집니다. 닫힌 Mac은 뜨거워지니 가방에 넣지 마세요."
+            "value": "모니터와 전원이 없으면 닫힌 Mac은 항상 잠자기에 들어가며, 관리자 권한의 pmset만 이를 바꿀 수 있습니다. «허용…»은 암호를 한 번 묻고 /etc/sudoers.d/claudepult 규칙을 추가합니다(pmset -a disablesleep 0과 1 명령만). «잠자기 방지» 규칙이 유지되는 동안 잠자기가 꺼지고, 끝나거나 AI Hub Bar를 종료하면 다시 켜집니다. 배터리가 20% 아래로 떨어져도 다시 켜집니다. 닫힌 Mac은 뜨거워지니 가방에 넣지 마세요."
           }
         },
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Bez monitora i zasilania zamknięty Mac zawsze usypia; zmienić to może tylko pmset jako administrator. «Zezwól…» raz pyta o hasło i dodaje regułę /etc/sudoers.d/claudepult: tylko polecenia pmset -a disablesleep 0 i 1. Dopóki trzyma reguła „Bez usypiania”, usypianie jest wyłączone; potem i przy zamknięciu ClaudePult wraca. Wraca też przy baterii poniżej 20%. Zamknięty Mac się nagrzewa: nie wkładaj go do torby."
+            "value": "Bez monitora i zasilania zamknięty Mac zawsze usypia; zmienić to może tylko pmset jako administrator. «Zezwól…» raz pyta o hasło i dodaje regułę /etc/sudoers.d/claudepult: tylko polecenia pmset -a disablesleep 0 i 1. Dopóki trzyma reguła „Bez usypiania”, usypianie jest wyłączone; potem i przy zamknięciu AI Hub Bar wraca. Wraca też przy baterii poniżej 20%. Zamknięty Mac się nagrzewa: nie wkładaj go do torby."
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sem monitor e energia, um Mac fechado sempre dorme; só o pmset como administrador muda isso. «Permitir…» pede a senha uma vez e adiciona a regra /etc/sudoers.d/claudepult: apenas os comandos pmset -a disablesleep 0 e 1. Enquanto uma regra de «Não dormir» segura, o repouso fica desligado; depois, e ao sair do ClaudePult, volta. Também volta com a bateria abaixo de 20%. Um Mac fechado esquenta: não o coloque numa bolsa."
+            "value": "Sem monitor e energia, um Mac fechado sempre dorme; só o pmset como administrador muda isso. «Permitir…» pede a senha uma vez e adiciona a regra /etc/sudoers.d/claudepult: apenas os comandos pmset -a disablesleep 0 e 1. Enquanto uma regra de «Não dormir» segura, o repouso fica desligado; depois, e ao sair do AI Hub Bar, volta. Também volta com a bateria abaixo de 20%. Um Mac fechado esquenta: não o coloque numa bolsa."
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Без монітора й живлення закритий Mac завжди засинає, змінити це може лише pmset від імені адміністратора. «Дозволити…» один раз питає пароль і додає правило /etc/sudoers.d/claudepult: лише команди pmset -a disablesleep 0 і 1. Поки тримає правило «Не спати», сон вимкнено; потім і при виході з ClaudePult — вмикається знову. На батареї нижче 20% — теж. Закритий Mac гріється: не кладіть його в сумку."
+            "value": "Без монітора й живлення закритий Mac завжди засинає, змінити це може лише pmset від імені адміністратора. «Дозволити…» один раз питає пароль і додає правило /etc/sudoers.d/claudepult: лише команди pmset -a disablesleep 0 і 1. Поки тримає правило «Не спати», сон вимкнено; потім і при виході з AI Hub Bar — вмикається знову. На батареї нижче 20% — теж. Закритий Mac гріється: не кладіть його в сумку."
           }
         }
       }
@@ -10690,78 +10690,78 @@
         }
       }
     },
-    "Быстрая команда ClaudePult": {
+    "Быстрая команда AI Hub Bar": {
       "localizations": {
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "أمر سريع من ClaudePult"
+            "value": "أمر سريع من AI Hub Bar"
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "ClaudePult-Schnellbefehl"
+            "value": "AI Hub Bar-Schnellbefehl"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "ClaudePult quick command"
+            "value": "AI Hub Bar quick command"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Comando rápido de ClaudePult"
+            "value": "Comando rápido de AI Hub Bar"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Commande rapide ClaudePult"
+            "value": "Commande rapide AI Hub Bar"
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "Perintah cepat ClaudePult"
+            "value": "Perintah cepat AI Hub Bar"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Comando rapido di ClaudePult"
+            "value": "Comando rapido di AI Hub Bar"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "ClaudePult クイックコマンド"
+            "value": "AI Hub Bar クイックコマンド"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "ClaudePult 빠른 명령"
+            "value": "AI Hub Bar 빠른 명령"
           }
         },
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Szybkie polecenie ClaudePult"
+            "value": "Szybkie polecenie AI Hub Bar"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Comando rápido do ClaudePult"
+            "value": "Comando rápido do AI Hub Bar"
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Швидка команда ClaudePult"
+            "value": "Швидка команда AI Hub Bar"
           }
         }
       }
@@ -13888,78 +13888,78 @@
         }
       }
     },
-    "Вход у каждого агента свой (его команда в подсказке), ClaudePult их токены не трогает. В фоне пока работает только Claude Code: остальные открываются в Терминале, пока их запрет действий не проверен вживую.": {
+    "Вход у каждого агента свой (его команда в подсказке), AI Hub Bar их токены не трогает. В фоне пока работает только Claude Code: остальные открываются в Терминале, пока их запрет действий не проверен вживую.": {
       "localizations": {
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "لكل وكيل تسجيل دخوله (أمره في التلميح)؛ لا يلمس ClaudePult رموزهم. حاليًا يعمل Claude Code وحده في الخلفية: وتُفتح الأخرى في الطرفية إلى أن يُتحقَّق فعليًا من وضع «بلا إجراءات» لديها."
+            "value": "لكل وكيل تسجيل دخوله (أمره في التلميح)؛ لا يلمس AI Hub Bar رموزهم. حاليًا يعمل Claude Code وحده في الخلفية: وتُفتح الأخرى في الطرفية إلى أن يُتحقَّق فعليًا من وضع «بلا إجراءات» لديها."
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Jeder Agent meldet sich selbst an (sein Befehl steht im Hinweis); ClaudePult rührt ihre Tokens nicht an. Im Hintergrund läuft vorerst nur Claude Code: die anderen öffnen sich im Terminal, bis ihr Modus ohne Aktionen live geprüft ist."
+            "value": "Jeder Agent meldet sich selbst an (sein Befehl steht im Hinweis); AI Hub Bar rührt ihre Tokens nicht an. Im Hintergrund läuft vorerst nur Claude Code: die anderen öffnen sich im Terminal, bis ihr Modus ohne Aktionen live geprüft ist."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Each agent signs in on its own (its command is in the hint); ClaudePult never touches their tokens. Only Claude Code runs in the background for now: the others open in Terminal until their no-actions mode is checked live."
+            "value": "Each agent signs in on its own (its command is in the hint); AI Hub Bar never touches their tokens. Only Claude Code runs in the background for now: the others open in Terminal until their no-actions mode is checked live."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Cada agente inicia sesión por su cuenta (su comando está en la ayuda); ClaudePult no toca sus tokens. De momento solo Claude Code trabaja en segundo plano: los demás se abren en Terminal hasta comprobar en vivo su modo sin acciones."
+            "value": "Cada agente inicia sesión por su cuenta (su comando está en la ayuda); AI Hub Bar no toca sus tokens. De momento solo Claude Code trabaja en segundo plano: los demás se abren en Terminal hasta comprobar en vivo su modo sin acciones."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chaque agent a sa propre connexion (sa commande est dans l'aide) ; ClaudePult ne touche pas à leurs jetons. Pour l'instant seul Claude Code tourne en arrière-plan : les autres s'ouvrent dans Terminal tant que leur mode sans action n'a pas été vérifié en conditions réelles."
+            "value": "Chaque agent a sa propre connexion (sa commande est dans l'aide) ; AI Hub Bar ne touche pas à leurs jetons. Pour l'instant seul Claude Code tourne en arrière-plan : les autres s'ouvrent dans Terminal tant que leur mode sans action n'a pas été vérifié en conditions réelles."
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "Setiap agen login sendiri (perintahnya ada di petunjuk); ClaudePult tidak menyentuh token mereka. Untuk sekarang hanya Claude Code yang berjalan di latar belakang: yang lain dibuka di Terminal sampai mode tanpa tindakannya diperiksa langsung."
+            "value": "Setiap agen login sendiri (perintahnya ada di petunjuk); AI Hub Bar tidak menyentuh token mereka. Untuk sekarang hanya Claude Code yang berjalan di latar belakang: yang lain dibuka di Terminal sampai mode tanpa tindakannya diperiksa langsung."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ogni agente fa il proprio accesso (il suo comando è nel suggerimento); ClaudePult non tocca i loro token. Per ora solo Claude Code lavora in background: gli altri si aprono nel Terminale finché la loro modalità senza azioni non è verificata dal vivo."
+            "value": "Ogni agente fa il proprio accesso (il suo comando è nel suggerimento); AI Hub Bar non tocca i loro token. Per ora solo Claude Code lavora in background: gli altri si aprono nel Terminale finché la loro modalità senza azioni non è verificata dal vivo."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "エージェントはそれぞれ自分でログインします (コマンドはヒントにあります)。ClaudePult はそのトークンに触れません。今のところバックグラウンドで動くのは Claude Code だけで、他は「操作なし」モードを実際に確認するまでターミナルで開きます。"
+            "value": "エージェントはそれぞれ自分でログインします (コマンドはヒントにあります)。AI Hub Bar はそのトークンに触れません。今のところバックグラウンドで動くのは Claude Code だけで、他は「操作なし」モードを実際に確認するまでターミナルで開きます。"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "에이전트는 각자 로그인합니다 (명령은 힌트에 있음). ClaudePult는 그 토큰을 건드리지 않습니다. 지금은 Claude Code만 백그라운드에서 돌고, 나머지는 «작업 없음» 모드를 실제로 확인할 때까지 터미널에서 열립니다."
+            "value": "에이전트는 각자 로그인합니다 (명령은 힌트에 있음). AI Hub Bar는 그 토큰을 건드리지 않습니다. 지금은 Claude Code만 백그라운드에서 돌고, 나머지는 «작업 없음» 모드를 실제로 확인할 때까지 터미널에서 열립니다."
           }
         },
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Każdy agent loguje się sam (jego polecenie jest w podpowiedzi); ClaudePult nie dotyka ich tokenów. Na razie w tle działa tylko Claude Code: pozostali otwierają się w Terminalu, dopóki ich tryb bez działań nie zostanie sprawdzony na żywo."
+            "value": "Każdy agent loguje się sam (jego polecenie jest w podpowiedzi); AI Hub Bar nie dotyka ich tokenów. Na razie w tle działa tylko Claude Code: pozostali otwierają się w Terminalu, dopóki ich tryb bez działań nie zostanie sprawdzony na żywo."
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Cada agente faz o próprio login (o comando está na dica); o ClaudePult não toca nos tokens deles. Por enquanto só o Claude Code roda em segundo plano: os outros abrem no Terminal até o modo sem ações deles ser verificado na prática."
+            "value": "Cada agente faz o próprio login (o comando está na dica); o AI Hub Bar não toca nos tokens deles. Por enquanto só o Claude Code roda em segundo plano: os outros abrem no Terminal até o modo sem ações deles ser verificado na prática."
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Вхід у кожного агента свій (його команда в підказці), ClaudePult їхніх токенів не торкається. У фоні поки працює лише Claude Code: інші відкриваються в Терміналі, доки їхню заборону дій не перевірено наживо."
+            "value": "Вхід у кожного агента свій (його команда в підказці), AI Hub Bar їхніх токенів не торкається. У фоні поки працює лише Claude Code: інші відкриваються в Терміналі, доки їхню заборону дій не перевірено наживо."
           }
         }
       }
@@ -14496,154 +14496,154 @@
         }
       }
     },
-    "Выйти из ClaudePult (⌘Q)": {
+    "Выйти из AI Hub Bar (⌘Q)": {
       "localizations": {
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "إنهاء ClaudePult (⌘Q)"
+            "value": "إنهاء AI Hub Bar (⌘Q)"
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "ClaudePult beenden (⌘Q)"
+            "value": "AI Hub Bar beenden (⌘Q)"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Quit ClaudePult (⌘Q)"
+            "value": "Quit AI Hub Bar (⌘Q)"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Salir de ClaudePult (⌘Q)"
+            "value": "Salir de AI Hub Bar (⌘Q)"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Quitter ClaudePult (⌘Q)"
+            "value": "Quitter AI Hub Bar (⌘Q)"
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "Keluar dari ClaudePult (⌘Q)"
+            "value": "Keluar dari AI Hub Bar (⌘Q)"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Esci da ClaudePult (⌘Q)"
+            "value": "Esci da AI Hub Bar (⌘Q)"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "ClaudePult を終了 (⌘Q)"
+            "value": "AI Hub Bar を終了 (⌘Q)"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "ClaudePult 종료 (⌘Q)"
+            "value": "AI Hub Bar 종료 (⌘Q)"
           }
         },
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Zakończ ClaudePult (⌘Q)"
+            "value": "Zakończ AI Hub Bar (⌘Q)"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sair do ClaudePult (⌘Q)"
+            "value": "Sair do AI Hub Bar (⌘Q)"
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Вийти з ClaudePult (⌘Q)"
+            "value": "Вийти з AI Hub Bar (⌘Q)"
           }
         }
       }
     },
-    "Выйти из ClaudePult.": {
+    "Выйти из AI Hub Bar.": {
       "localizations": {
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "إنهاء ClaudePult."
+            "value": "إنهاء AI Hub Bar."
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "ClaudePult beenden."
+            "value": "AI Hub Bar beenden."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Quit ClaudePult."
+            "value": "Quit AI Hub Bar."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Salir de ClaudePult."
+            "value": "Salir de AI Hub Bar."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Quitter ClaudePult."
+            "value": "Quitter AI Hub Bar."
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "Keluar dari ClaudePult."
+            "value": "Keluar dari AI Hub Bar."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Esci da ClaudePult."
+            "value": "Esci da AI Hub Bar."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "ClaudePult を終了。"
+            "value": "AI Hub Bar を終了。"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "ClaudePult 종료."
+            "value": "AI Hub Bar 종료."
           }
         },
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Zakończ ClaudePult."
+            "value": "Zakończ AI Hub Bar."
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sair do ClaudePult."
+            "value": "Sair do AI Hub Bar."
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Вийти з ClaudePult."
+            "value": "Вийти з AI Hub Bar."
           }
         }
       }
@@ -14800,78 +14800,78 @@
         }
       }
     },
-    "Выключены в Системных настройках → Уведомления → ClaudePult.": {
+    "Выключены в Системных настройках → Уведомления → AI Hub Bar.": {
       "localizations": {
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "معطّلة في إعدادات النظام ← الإشعارات ← ClaudePult."
+            "value": "معطّلة في إعدادات النظام ← الإشعارات ← AI Hub Bar."
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ausgeschaltet in Systemeinstellungen → Mitteilungen → ClaudePult."
+            "value": "Ausgeschaltet in Systemeinstellungen → Mitteilungen → AI Hub Bar."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Turned off in System Settings → Notifications → ClaudePult."
+            "value": "Turned off in System Settings → Notifications → AI Hub Bar."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Desactivadas en Ajustes del Sistema → Notificaciones → ClaudePult."
+            "value": "Desactivadas en Ajustes del Sistema → Notificaciones → AI Hub Bar."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Désactivées dans Réglages Système → Notifications → ClaudePult."
+            "value": "Désactivées dans Réglages Système → Notifications → AI Hub Bar."
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "Dimatikan di Pengaturan Sistem → Pemberitahuan → ClaudePult."
+            "value": "Dimatikan di Pengaturan Sistem → Pemberitahuan → AI Hub Bar."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Disattivate in Impostazioni di Sistema → Notifiche → ClaudePult."
+            "value": "Disattivate in Impostazioni di Sistema → Notifiche → AI Hub Bar."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "システム設定 → 通知 → ClaudePult でオフになっています。"
+            "value": "システム設定 → 通知 → AI Hub Bar でオフになっています。"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "시스템 설정 → 알림 → ClaudePult에서 꺼져 있습니다."
+            "value": "시스템 설정 → 알림 → AI Hub Bar에서 꺼져 있습니다."
           }
         },
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Wyłączone w Ustawieniach systemowych → Powiadomienia → ClaudePult."
+            "value": "Wyłączone w Ustawieniach systemowych → Powiadomienia → AI Hub Bar."
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Desativadas em Ajustes do Sistema → Notificações → ClaudePult."
+            "value": "Desativadas em Ajustes do Sistema → Notificações → AI Hub Bar."
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Вимкнено в Системних параметрах → Сповіщення → ClaudePult."
+            "value": "Вимкнено в Системних параметрах → Сповіщення → AI Hub Bar."
           }
         }
       }
@@ -18221,78 +18221,78 @@
         }
       }
     },
-    "Добро пожаловать в ClaudePult": {
+    "Добро пожаловать в AI Hub Bar": {
       "localizations": {
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "مرحبًا بك في ClaudePult"
+            "value": "مرحبًا بك في AI Hub Bar"
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Willkommen bei ClaudePult"
+            "value": "Willkommen bei AI Hub Bar"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Welcome to ClaudePult"
+            "value": "Welcome to AI Hub Bar"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Te damos la bienvenida a ClaudePult"
+            "value": "Te damos la bienvenida a AI Hub Bar"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Bienvenue dans ClaudePult"
+            "value": "Bienvenue dans AI Hub Bar"
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "Selamat datang di ClaudePult"
+            "value": "Selamat datang di AI Hub Bar"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Benvenuto in ClaudePult"
+            "value": "Benvenuto in AI Hub Bar"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "ClaudePult へようこそ"
+            "value": "AI Hub Bar へようこそ"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "ClaudePult에 오신 것을 환영합니다"
+            "value": "AI Hub Bar에 오신 것을 환영합니다"
           }
         },
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Witaj w ClaudePult"
+            "value": "Witaj w AI Hub Bar"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Boas-vindas ao ClaudePult"
+            "value": "Boas-vindas ao AI Hub Bar"
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ласкаво просимо до ClaudePult"
+            "value": "Ласкаво просимо до AI Hub Bar"
           }
         }
       }
@@ -18829,78 +18829,78 @@
         }
       }
     },
-    "Есть файл настроек ClaudePult (.claudepult) с другого Мака или от коллеги? Его можно перенести целиком — профили, строку меню, внешний вид. Ключи API в файл не попадают.": {
+    "Есть файл настроек AI Hub Bar (.claudepult) с другого Мака или от коллеги? Его можно перенести целиком — профили, строку меню, внешний вид. Ключи API в файл не попадают.": {
       "localizations": {
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "هل لديك ملف إعدادات ClaudePult (.claudepult) من Mac آخر أو من زميل؟ يمكن نقله كاملًا — ملفات التعريف وشريط القائمة والمظهر. لا تكون مفاتيح API فيه أبدًا."
+            "value": "هل لديك ملف إعدادات AI Hub Bar (.claudepult) من Mac آخر أو من زميل؟ يمكن نقله كاملًا — ملفات التعريف وشريط القائمة والمظهر. لا تكون مفاتيح API فيه أبدًا."
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sie haben eine ClaudePult-Einstellungsdatei (.claudepult) von einem anderen Mac oder einer Kollegin? Sie lässt sich komplett übernehmen — Profile, Menüleiste, Darstellung. API-Schlüssel stehen nie darin."
+            "value": "Sie haben eine AI Hub Bar-Einstellungsdatei (.claudepult) von einem anderen Mac oder einer Kollegin? Sie lässt sich komplett übernehmen — Profile, Menüleiste, Darstellung. API-Schlüssel stehen nie darin."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Have a ClaudePult settings file (.claudepult) from another Mac or a colleague? It can be brought over whole — profiles, menu bar, appearance. API keys are never in the file."
+            "value": "Have a AI Hub Bar settings file (.claudepult) from another Mac or a colleague? It can be brought over whole — profiles, menu bar, appearance. API keys are never in the file."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "¿Tienes un archivo de ajustes de ClaudePult (.claudepult) de otro Mac o de un colega? Se puede traer entero — perfiles, barra de menús, apariencia. Las claves de API nunca van en el archivo."
+            "value": "¿Tienes un archivo de ajustes de AI Hub Bar (.claudepult) de otro Mac o de un colega? Se puede traer entero — perfiles, barra de menús, apariencia. Las claves de API nunca van en el archivo."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Vous avez un fichier de réglages ClaudePult (.claudepult) d'un autre Mac ou d'un collègue ? Il peut être repris en entier — profils, barre des menus, apparence. Les clés d'API n'y figurent jamais."
+            "value": "Vous avez un fichier de réglages AI Hub Bar (.claudepult) d'un autre Mac ou d'un collègue ? Il peut être repris en entier — profils, barre des menus, apparence. Les clés d'API n'y figurent jamais."
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "Punya berkas pengaturan ClaudePult (.claudepult) dari Mac lain atau dari rekan? Berkas itu bisa dibawa utuh — profil, bar menu, tampilan. Kunci API tidak pernah ada di dalamnya."
+            "value": "Punya berkas pengaturan AI Hub Bar (.claudepult) dari Mac lain atau dari rekan? Berkas itu bisa dibawa utuh — profil, bar menu, tampilan. Kunci API tidak pernah ada di dalamnya."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Hai un file di impostazioni di ClaudePult (.claudepult) da un altro Mac o da un collega? Si può portare per intero — profili, barra dei menu, aspetto. Le chiavi API non ci sono mai."
+            "value": "Hai un file di impostazioni di AI Hub Bar (.claudepult) da un altro Mac o da un collega? Si può portare per intero — profili, barra dei menu, aspetto. Le chiavi API non ci sono mai."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "別の Mac や同僚からの ClaudePult の設定ファイル (.claudepult) がありますか? プロファイル、メニューバー、外観をまるごと取り込めます。API キーは決して含まれません。"
+            "value": "別の Mac や同僚からの AI Hub Bar の設定ファイル (.claudepult) がありますか? プロファイル、メニューバー、外観をまるごと取り込めます。API キーは決して含まれません。"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "다른 Mac이나 동료의 ClaudePult 설정 파일 (.claudepult)이 있나요? 프로필, 메뉴 막대, 모양을 통째로 가져올 수 있습니다. API 키는 절대 들어 있지 않습니다."
+            "value": "다른 Mac이나 동료의 AI Hub Bar 설정 파일 (.claudepult)이 있나요? 프로필, 메뉴 막대, 모양을 통째로 가져올 수 있습니다. API 키는 절대 들어 있지 않습니다."
           }
         },
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Masz plik ustawień ClaudePult (.claudepult) z innego Maca albo od kolegi? Można go przenieść w całości — profile, pasek menu, wygląd. Kluczy API nigdy w nim nie ma."
+            "value": "Masz plik ustawień AI Hub Bar (.claudepult) z innego Maca albo od kolegi? Można go przenieść w całości — profile, pasek menu, wygląd. Kluczy API nigdy w nim nie ma."
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tem um arquivo de ajustes do ClaudePult (.claudepult) de outro Mac ou de um colega? Dá para trazê-lo inteiro — perfis, barra de menus, aparência. As chaves de API nunca vão no arquivo."
+            "value": "Tem um arquivo de ajustes do AI Hub Bar (.claudepult) de outro Mac ou de um colega? Dá para trazê-lo inteiro — perfis, barra de menus, aparência. As chaves de API nunca vão no arquivo."
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Є файл налаштувань ClaudePult (.claudepult) з іншого Мака або від колеги? Його можна перенести цілком — профілі, рядок меню, вигляд. Ключі API у файл не потрапляють."
+            "value": "Є файл налаштувань AI Hub Bar (.claudepult) з іншого Мака або від колеги? Його можна перенести цілком — профілі, рядок меню, вигляд. Ключі API у файл не потрапляють."
           }
         }
       }
@@ -25061,78 +25061,78 @@
         }
       }
     },
-    "Когда вход истёк (claude давно не запускался, а работа идёт в приложении Claude), ClaudePult отправляет через claude запрос из одного слова — самая маленькая модель, без инструментов, не чаще раза в час. Вход продлевается примерно на 8 часов.": {
+    "Когда вход истёк (claude давно не запускался, а работа идёт в приложении Claude), AI Hub Bar отправляет через claude запрос из одного слова — самая маленькая модель, без инструментов, не чаще раза в час. Вход продлевается примерно на 8 часов.": {
       "localizations": {
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "عند انتهاء تسجيل الدخول (لم يُشغَّل claude منذ مدة والعمل يجري في تطبيق Claude)، يرسل ClaudePult عبر claude طلبًا من كلمة واحدة — أصغر نموذج، بلا أدوات، مرة واحدة في الساعة على الأكثر. يُمدَّد تسجيل الدخول نحو 8 ساعات."
+            "value": "عند انتهاء تسجيل الدخول (لم يُشغَّل claude منذ مدة والعمل يجري في تطبيق Claude)، يرسل AI Hub Bar عبر claude طلبًا من كلمة واحدة — أصغر نموذج، بلا أدوات، مرة واحدة في الساعة على الأكثر. يُمدَّد تسجيل الدخول نحو 8 ساعات."
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Wenn die Anmeldung abgelaufen ist (claude lief länger nicht, gearbeitet wird in der Claude-App), sendet ClaudePult über claude eine Ein-Wort-Anfrage — kleinstes Modell, ohne Werkzeuge, höchstens einmal pro Stunde. Die Anmeldung gilt dann etwa 8 Stunden."
+            "value": "Wenn die Anmeldung abgelaufen ist (claude lief länger nicht, gearbeitet wird in der Claude-App), sendet AI Hub Bar über claude eine Ein-Wort-Anfrage — kleinstes Modell, ohne Werkzeuge, höchstens einmal pro Stunde. Die Anmeldung gilt dann etwa 8 Stunden."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "When the sign-in has expired (claude hasn't run for a while and you work in the Claude app), ClaudePult sends a one-word request through claude — the smallest model, no tools, at most once an hour. The sign-in is renewed for about 8 hours."
+            "value": "When the sign-in has expired (claude hasn't run for a while and you work in the Claude app), AI Hub Bar sends a one-word request through claude — the smallest model, no tools, at most once an hour. The sign-in is renewed for about 8 hours."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Cuando el inicio de sesión caduca (claude lleva tiempo sin ejecutarse y trabajas en la app Claude), ClaudePult envía a través de claude una petición de una palabra: el modelo más pequeño, sin herramientas, como mucho una vez por hora. La sesión se renueva unas 8 horas."
+            "value": "Cuando el inicio de sesión caduca (claude lleva tiempo sin ejecutarse y trabajas en la app Claude), AI Hub Bar envía a través de claude una petición de una palabra: el modelo más pequeño, sin herramientas, como mucho una vez por hora. La sesión se renueva unas 8 horas."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Quand la connexion a expiré (claude n’a pas tourné depuis un moment et vous travaillez dans l’app Claude), ClaudePult envoie via claude une requête d’un mot — le plus petit modèle, sans outils, au plus une fois par heure. La connexion est renouvelée pour environ 8 heures."
+            "value": "Quand la connexion a expiré (claude n’a pas tourné depuis un moment et vous travaillez dans l’app Claude), AI Hub Bar envoie via claude une requête d’un mot — le plus petit modèle, sans outils, au plus une fois par heure. La connexion est renouvelée pour environ 8 heures."
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "Saat login kedaluwarsa (claude lama tidak dijalankan dan Anda bekerja di aplikasi Claude), ClaudePult mengirim permintaan satu kata lewat claude — model terkecil, tanpa alat, paling sering sekali per jam. Login diperpanjang sekitar 8 jam."
+            "value": "Saat login kedaluwarsa (claude lama tidak dijalankan dan Anda bekerja di aplikasi Claude), AI Hub Bar mengirim permintaan satu kata lewat claude — model terkecil, tanpa alat, paling sering sekali per jam. Login diperpanjang sekitar 8 jam."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Quando l’accesso è scaduto (claude non gira da un po’ e lavori nell’app Claude), ClaudePult invia tramite claude una richiesta di una parola — il modello più piccolo, senza strumenti, al massimo una volta l’ora. L’accesso viene rinnovato per circa 8 ore."
+            "value": "Quando l’accesso è scaduto (claude non gira da un po’ e lavori nell’app Claude), AI Hub Bar invia tramite claude una richiesta di una parola — il modello più piccolo, senza strumenti, al massimo una volta l’ora. L’accesso viene rinnovato per circa 8 ore."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "ログインが期限切れになると（しばらく claude を起動せず Claude アプリで作業している場合）、ClaudePult は claude 経由で一語のリクエストを送ります。最小のモデルでツールなし、1 時間に 1 回まで。ログインは約 8 時間延長されます。"
+            "value": "ログインが期限切れになると（しばらく claude を起動せず Claude アプリで作業している場合）、AI Hub Bar は claude 経由で一語のリクエストを送ります。最小のモデルでツールなし、1 時間に 1 回まで。ログインは約 8 時間延長されます。"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "로그인이 만료되면(claude를 한동안 실행하지 않고 Claude 앱에서 작업하는 경우) ClaudePult가 claude를 통해 한 단어 요청을 보냅니다. 가장 작은 모델, 도구 없음, 한 시간에 최대 한 번. 로그인은 약 8시간 연장됩니다."
+            "value": "로그인이 만료되면(claude를 한동안 실행하지 않고 Claude 앱에서 작업하는 경우) AI Hub Bar가 claude를 통해 한 단어 요청을 보냅니다. 가장 작은 모델, 도구 없음, 한 시간에 최대 한 번. 로그인은 약 8시간 연장됩니다."
           }
         },
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Gdy logowanie wygaśnie (claude dawno nie był uruchamiany, a praca idzie w aplikacji Claude), ClaudePult wysyła przez claude zapytanie z jednego słowa — najmniejszy model, bez narzędzi, nie częściej niż raz na godzinę. Logowanie przedłuża się na około 8 godzin."
+            "value": "Gdy logowanie wygaśnie (claude dawno nie był uruchamiany, a praca idzie w aplikacji Claude), AI Hub Bar wysyła przez claude zapytanie z jednego słowa — najmniejszy model, bez narzędzi, nie częściej niż raz na godzinę. Logowanie przedłuża się na około 8 godzin."
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Quando o login expira (o claude não roda há algum tempo e você trabalha no app Claude), o ClaudePult envia pelo claude um pedido de uma palavra — o menor modelo, sem ferramentas, no máximo uma vez por hora. O login é renovado por cerca de 8 horas."
+            "value": "Quando o login expira (o claude não roda há algum tempo e você trabalha no app Claude), o AI Hub Bar envia pelo claude um pedido de uma palavra — o menor modelo, sem ferramentas, no máximo uma vez por hora. O login é renovado por cerca de 8 horas."
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Коли вхід завершився (claude давно не запускався, а робота йде в застосунку Claude), ClaudePult надсилає через claude запит з одного слова — найменша модель, без інструментів, не частіше ніж раз на годину. Вхід подовжується приблизно на 8 годин."
+            "value": "Коли вхід завершився (claude давно не запускався, а робота йде в застосунку Claude), AI Hub Bar надсилає через claude запит з одного слова — найменша модель, без інструментів, не частіше ніж раз на годину. Вхід подовжується приблизно на 8 годин."
           }
         }
       }
@@ -26967,78 +26967,78 @@
         }
       }
     },
-    "Лимиты ещё не загружены — откройте панель ClaudePult": {
+    "Лимиты ещё не загружены — откройте панель AI Hub Bar": {
       "localizations": {
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "لم تُحمَّل الحدود بعد: افتح لوحة ClaudePult"
+            "value": "لم تُحمَّل الحدود بعد: افتح لوحة AI Hub Bar"
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Limits noch nicht geladen: Öffnen Sie das ClaudePult-Panel"
+            "value": "Limits noch nicht geladen: Öffnen Sie das AI Hub Bar-Panel"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Limits aren't loaded yet: open the ClaudePult panel"
+            "value": "Limits aren't loaded yet: open the AI Hub Bar panel"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Los límites aún no se cargaron: abre el panel de ClaudePult"
+            "value": "Los límites aún no se cargaron: abre el panel de AI Hub Bar"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Les limites ne sont pas encore chargées : ouvrez le panneau ClaudePult"
+            "value": "Les limites ne sont pas encore chargées : ouvrez le panneau AI Hub Bar"
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "Batas belum dimuat: buka panel ClaudePult"
+            "value": "Batas belum dimuat: buka panel AI Hub Bar"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Limiti non ancora caricati: apri il pannello di ClaudePult"
+            "value": "Limiti non ancora caricati: apri il pannello di AI Hub Bar"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "上限がまだ読み込まれていません。ClaudePult のパネルを開いてください"
+            "value": "上限がまだ読み込まれていません。AI Hub Bar のパネルを開いてください"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "한도를 아직 불러오지 않았습니다. ClaudePult 패널을 여세요"
+            "value": "한도를 아직 불러오지 않았습니다. AI Hub Bar 패널을 여세요"
           }
         },
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Limity jeszcze się nie wczytały: otwórz panel ClaudePult"
+            "value": "Limity jeszcze się nie wczytały: otwórz panel AI Hub Bar"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Os limites ainda não carregaram: abra o painel do ClaudePult"
+            "value": "Os limites ainda não carregaram: abra o painel do AI Hub Bar"
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ліміти ще не завантажено — відкрийте панель ClaudePult"
+            "value": "Ліміти ще не завантажено — відкрийте панель AI Hub Bar"
           }
         }
       }
@@ -32381,78 +32381,78 @@
         }
       }
     },
-    "Не удалось прочитать «%@»: это не файл настроек ClaudePult.": {
+    "Не удалось прочитать «%@»: это не файл настроек AI Hub Bar.": {
       "localizations": {
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "تعذّرت قراءة «%@»: ليس ملف إعدادات ClaudePult."
+            "value": "تعذّرت قراءة «%@»: ليس ملف إعدادات AI Hub Bar."
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "„%@“ konnte nicht gelesen werden: Das ist keine ClaudePult-Einstellungsdatei."
+            "value": "„%@“ konnte nicht gelesen werden: Das ist keine AI Hub Bar-Einstellungsdatei."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Could not read “%@”: it is not a ClaudePult settings file."
+            "value": "Could not read “%@”: it is not a AI Hub Bar settings file."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "No se pudo leer «%@»: no es un archivo de ajustes de ClaudePult."
+            "value": "No se pudo leer «%@»: no es un archivo de ajustes de AI Hub Bar."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Impossible de lire «%@» : ce n'est pas un fichier de réglages ClaudePult."
+            "value": "Impossible de lire «%@» : ce n'est pas un fichier de réglages AI Hub Bar."
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tidak dapat membaca «%@»: ini bukan berkas pengaturan ClaudePult."
+            "value": "Tidak dapat membaca «%@»: ini bukan berkas pengaturan AI Hub Bar."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Impossibile leggere «%@»: non è un file di impostazioni di ClaudePult."
+            "value": "Impossibile leggere «%@»: non è un file di impostazioni di AI Hub Bar."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "「%@」を読み込めませんでした: ClaudePult の設定ファイルではありません。"
+            "value": "「%@」を読み込めませんでした: AI Hub Bar の設定ファイルではありません。"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "«%@»을(를) 읽을 수 없습니다: ClaudePult 설정 파일이 아닙니다."
+            "value": "«%@»을(를) 읽을 수 없습니다: AI Hub Bar 설정 파일이 아닙니다."
           }
         },
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Nie udało się odczytać „%@”: to nie jest plik ustawień ClaudePult."
+            "value": "Nie udało się odczytać „%@”: to nie jest plik ustawień AI Hub Bar."
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Não foi possível ler «%@»: não é um arquivo de ajustes do ClaudePult."
+            "value": "Não foi possível ler «%@»: não é um arquivo de ajustes do AI Hub Bar."
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Не вдалося прочитати «%@»: це не файл налаштувань ClaudePult."
+            "value": "Не вдалося прочитати «%@»: це не файл налаштувань AI Hub Bar."
           }
         }
       }
@@ -33673,78 +33673,78 @@
         }
       }
     },
-    "Нет доступа к связке ключей: разрешите ClaudePult читать «Claude Code-credentials»": {
+    "Нет доступа к связке ключей: разрешите AI Hub Bar читать «Claude Code-credentials»": {
       "localizations": {
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "لا وصول إلى سلسلة المفاتيح: اسمح لـ ClaudePult بقراءة «Claude Code-credentials»"
+            "value": "لا وصول إلى سلسلة المفاتيح: اسمح لـ AI Hub Bar بقراءة «Claude Code-credentials»"
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Kein Zugriff auf den Schlüsselbund: Erlauben Sie ClaudePult, „Claude Code-credentials“ zu lesen"
+            "value": "Kein Zugriff auf den Schlüsselbund: Erlauben Sie AI Hub Bar, „Claude Code-credentials“ zu lesen"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "No Keychain access: allow ClaudePult to read “Claude Code-credentials”"
+            "value": "No Keychain access: allow AI Hub Bar to read “Claude Code-credentials”"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sin acceso al llavero: permite a ClaudePult leer «Claude Code-credentials»"
+            "value": "Sin acceso al llavero: permite a AI Hub Bar leer «Claude Code-credentials»"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Pas d'accès au trousseau : autorisez ClaudePult à lire «Claude Code-credentials»"
+            "value": "Pas d'accès au trousseau : autorisez AI Hub Bar à lire «Claude Code-credentials»"
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tidak ada akses ke Rantai Kunci: izinkan ClaudePult membaca «Claude Code-credentials»"
+            "value": "Tidak ada akses ke Rantai Kunci: izinkan AI Hub Bar membaca «Claude Code-credentials»"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Nessun accesso al portachiavi: consenti a ClaudePult di leggere «Claude Code-credentials»"
+            "value": "Nessun accesso al portachiavi: consenti a AI Hub Bar di leggere «Claude Code-credentials»"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "キーチェーンにアクセスできません: ClaudePult に「Claude Code-credentials」の読み取りを許可してください"
+            "value": "キーチェーンにアクセスできません: AI Hub Bar に「Claude Code-credentials」の読み取りを許可してください"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "키체인에 접근할 수 없습니다: ClaudePult가 «Claude Code-credentials»를 읽도록 허용하세요"
+            "value": "키체인에 접근할 수 없습니다: AI Hub Bar가 «Claude Code-credentials»를 읽도록 허용하세요"
           }
         },
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Brak dostępu do pęku kluczy: pozwól ClaudePult czytać „Claude Code-credentials”"
+            "value": "Brak dostępu do pęku kluczy: pozwól AI Hub Bar czytać „Claude Code-credentials”"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sem acesso às Chaves: permita que o ClaudePult leia «Claude Code-credentials»"
+            "value": "Sem acesso às Chaves: permita que o AI Hub Bar leia «Claude Code-credentials»"
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Немає доступу до зв'язки ключів: дозвольте ClaudePult читати «Claude Code-credentials»"
+            "value": "Немає доступу до зв'язки ключів: дозвольте AI Hub Bar читати «Claude Code-credentials»"
           }
         }
       }
@@ -33901,78 +33901,78 @@
         }
       }
     },
-    "Нет разрешения: Системные настройки → Конфиденциальность → Автоматизация → ClaudePult": {
+    "Нет разрешения: Системные настройки → Конфиденциальность → Автоматизация → AI Hub Bar": {
       "localizations": {
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "لا يوجد إذن: إعدادات النظام ← الخصوصية والأمن ← الأتمتة ← ClaudePult"
+            "value": "لا يوجد إذن: إعدادات النظام ← الخصوصية والأمن ← الأتمتة ← AI Hub Bar"
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Keine Berechtigung: Systemeinstellungen → Datenschutz & Sicherheit → Automation → ClaudePult"
+            "value": "Keine Berechtigung: Systemeinstellungen → Datenschutz & Sicherheit → Automation → AI Hub Bar"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "No permission: System Settings → Privacy & Security → Automation → ClaudePult"
+            "value": "No permission: System Settings → Privacy & Security → Automation → AI Hub Bar"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sin permiso: Ajustes del Sistema → Privacidad y seguridad → Automatización → ClaudePult"
+            "value": "Sin permiso: Ajustes del Sistema → Privacidad y seguridad → Automatización → AI Hub Bar"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Pas d’autorisation : Réglages Système → Confidentialité et sécurité → Automatisation → ClaudePult"
+            "value": "Pas d’autorisation : Réglages Système → Confidentialité et sécurité → Automatisation → AI Hub Bar"
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tidak ada izin: Pengaturan Sistem → Privasi & Keamanan → Otomatisasi → ClaudePult"
+            "value": "Tidak ada izin: Pengaturan Sistem → Privasi & Keamanan → Otomatisasi → AI Hub Bar"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Nessun permesso: Impostazioni di Sistema → Privacy e sicurezza → Automazione → ClaudePult"
+            "value": "Nessun permesso: Impostazioni di Sistema → Privacy e sicurezza → Automazione → AI Hub Bar"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "許可がありません: システム設定 → プライバシーとセキュリティ → オートメーション → ClaudePult"
+            "value": "許可がありません: システム設定 → プライバシーとセキュリティ → オートメーション → AI Hub Bar"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "권한 없음: 시스템 설정 → 개인정보 보호 및 보안 → 자동화 → ClaudePult"
+            "value": "권한 없음: 시스템 설정 → 개인정보 보호 및 보안 → 자동화 → AI Hub Bar"
           }
         },
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Brak uprawnienia: Ustawienia systemowe → Prywatność i ochrona → Automatyzacja → ClaudePult"
+            "value": "Brak uprawnienia: Ustawienia systemowe → Prywatność i ochrona → Automatyzacja → AI Hub Bar"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sem permissão: Ajustes do Sistema → Privacidade e Segurança → Automação → ClaudePult"
+            "value": "Sem permissão: Ajustes do Sistema → Privacidade e Segurança → Automação → AI Hub Bar"
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Немає дозволу: Системні параметри → Приватність і безпека → Автоматизація → ClaudePult"
+            "value": "Немає дозволу: Системні параметри → Приватність і безпека → Автоматизація → AI Hub Bar"
           }
         }
       }
@@ -35351,78 +35351,78 @@
         }
       }
     },
-    "Нужно разрешить ClaudePult в Системных настройках → Основные → Объекты входа.": {
+    "Нужно разрешить AI Hub Bar в Системных настройках → Основные → Объекты входа.": {
       "localizations": {
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "يجب السماح لـ ClaudePult في إعدادات النظام ← عام ← عناصر تسجيل الدخول."
+            "value": "يجب السماح لـ AI Hub Bar في إعدادات النظام ← عام ← عناصر تسجيل الدخول."
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "ClaudePult muss unter Systemeinstellungen → Allgemein → Anmeldeobjekte erlaubt werden."
+            "value": "AI Hub Bar muss unter Systemeinstellungen → Allgemein → Anmeldeobjekte erlaubt werden."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "ClaudePult has to be allowed in System Settings → General → Login Items."
+            "value": "AI Hub Bar has to be allowed in System Settings → General → Login Items."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Hay que permitir ClaudePult en Ajustes del Sistema → General → Ítems de inicio."
+            "value": "Hay que permitir AI Hub Bar en Ajustes del Sistema → General → Ítems de inicio."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Il faut autoriser ClaudePult dans Réglages Système → Général → Ouverture."
+            "value": "Il faut autoriser AI Hub Bar dans Réglages Système → Général → Ouverture."
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "ClaudePult perlu diizinkan di Pengaturan Sistem → Umum → Item Login."
+            "value": "AI Hub Bar perlu diizinkan di Pengaturan Sistem → Umum → Item Login."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Bisogna consentire ClaudePult in Impostazioni di Sistema → Generali → Elementi login."
+            "value": "Bisogna consentire AI Hub Bar in Impostazioni di Sistema → Generali → Elementi login."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "システム設定 → 一般 → ログイン項目で ClaudePult を許可する必要があります。"
+            "value": "システム設定 → 一般 → ログイン項目で AI Hub Bar を許可する必要があります。"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "시스템 설정 → 일반 → 로그인 항목에서 ClaudePult를 허용해야 합니다."
+            "value": "시스템 설정 → 일반 → 로그인 항목에서 AI Hub Bar를 허용해야 합니다."
           }
         },
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Trzeba zezwolić na ClaudePult w Ustawieniach systemowych → Ogólne → Rzeczy otwierane podczas logowania."
+            "value": "Trzeba zezwolić na AI Hub Bar w Ustawieniach systemowych → Ogólne → Rzeczy otwierane podczas logowania."
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "É preciso permitir o ClaudePult em Ajustes do Sistema → Geral → Itens de Início."
+            "value": "É preciso permitir o AI Hub Bar em Ajustes do Sistema → Geral → Itens de Início."
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Потрібно дозволити ClaudePult у Системних параметрах → Загальні → Об'єкти входу."
+            "value": "Потрібно дозволити AI Hub Bar у Системних параметрах → Загальні → Об'єкти входу."
           }
         }
       }
@@ -42654,78 +42654,78 @@
         }
       }
     },
-    "По желанию: чтобы ClaudePult был в строке меню сразу после входа.": {
+    "По желанию: чтобы AI Hub Bar был в строке меню сразу после входа.": {
       "localizations": {
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "اختياري: ليكون ClaudePult في شريط القوائم فور تسجيل الدخول."
+            "value": "اختياري: ليكون AI Hub Bar في شريط القوائم فور تسجيل الدخول."
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Optional: damit ClaudePult gleich nach der Anmeldung in der Menüleiste ist."
+            "value": "Optional: damit AI Hub Bar gleich nach der Anmeldung in der Menüleiste ist."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Optional: so ClaudePult is in the menu bar right after you log in."
+            "value": "Optional: so AI Hub Bar is in the menu bar right after you log in."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Opcional: para que ClaudePult esté en la barra de menús nada más iniciar sesión."
+            "value": "Opcional: para que AI Hub Bar esté en la barra de menús nada más iniciar sesión."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Facultatif : pour que ClaudePult soit dans la barre des menus dès la connexion."
+            "value": "Facultatif : pour que AI Hub Bar soit dans la barre des menus dès la connexion."
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "Opsional: agar ClaudePult ada di bilah menu begitu Anda masuk."
+            "value": "Opsional: agar AI Hub Bar ada di bilah menu begitu Anda masuk."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Facoltativo: per avere ClaudePult nella barra dei menu subito dopo l’accesso."
+            "value": "Facoltativo: per avere AI Hub Bar nella barra dei menu subito dopo l’accesso."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "任意：ログイン直後から ClaudePult をメニューバーに表示します。"
+            "value": "任意：ログイン直後から AI Hub Bar をメニューバーに表示します。"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "선택 사항: 로그인하자마자 ClaudePult가 메뉴 막대에 있도록 합니다."
+            "value": "선택 사항: 로그인하자마자 AI Hub Bar가 메뉴 막대에 있도록 합니다."
           }
         },
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Opcjonalnie: aby ClaudePult był na pasku menu zaraz po zalogowaniu."
+            "value": "Opcjonalnie: aby AI Hub Bar był na pasku menu zaraz po zalogowaniu."
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Opcional: para o ClaudePult estar na barra de menus logo após iniciar a sessão."
+            "value": "Opcional: para o AI Hub Bar estar na barra de menus logo após iniciar a sessão."
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "За бажанням: щоб ClaudePult був у рядку меню одразу після входу."
+            "value": "За бажанням: щоб AI Hub Bar був у рядку меню одразу після входу."
           }
         }
       }
@@ -43338,154 +43338,154 @@
         }
       }
     },
-    "Поиск ClaudePult": {
+    "Поиск AI Hub Bar": {
       "localizations": {
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "بحث ClaudePult"
+            "value": "بحث AI Hub Bar"
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "ClaudePult-Suche"
+            "value": "AI Hub Bar-Suche"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "ClaudePult search"
+            "value": "AI Hub Bar search"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Búsqueda de ClaudePult"
+            "value": "Búsqueda de AI Hub Bar"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Recherche ClaudePult"
+            "value": "Recherche AI Hub Bar"
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "Pencarian ClaudePult"
+            "value": "Pencarian AI Hub Bar"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ricerca ClaudePult"
+            "value": "Ricerca AI Hub Bar"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "ClaudePult 検索"
+            "value": "AI Hub Bar 検索"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "ClaudePult 검색"
+            "value": "AI Hub Bar 검색"
           }
         },
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Wyszukiwanie ClaudePult"
+            "value": "Wyszukiwanie AI Hub Bar"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Busca do ClaudePult"
+            "value": "Busca do AI Hub Bar"
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Пошук ClaudePult"
+            "value": "Пошук AI Hub Bar"
           }
         }
       }
     },
-    "Поиск — ClaudePult": {
+    "Поиск — AI Hub Bar": {
       "localizations": {
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "بحث — ClaudePult"
+            "value": "بحث — AI Hub Bar"
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Suche — ClaudePult"
+            "value": "Suche — AI Hub Bar"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Search — ClaudePult"
+            "value": "Search — AI Hub Bar"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Búsqueda — ClaudePult"
+            "value": "Búsqueda — AI Hub Bar"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Recherche — ClaudePult"
+            "value": "Recherche — AI Hub Bar"
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "Pencarian — ClaudePult"
+            "value": "Pencarian — AI Hub Bar"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ricerca — ClaudePult"
+            "value": "Ricerca — AI Hub Bar"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "検索 — ClaudePult"
+            "value": "検索 — AI Hub Bar"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "검색 — ClaudePult"
+            "value": "검색 — AI Hub Bar"
           }
         },
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Wyszukiwanie — ClaudePult"
+            "value": "Wyszukiwanie — AI Hub Bar"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Busca — ClaudePult"
+            "value": "Busca — AI Hub Bar"
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Пошук — ClaudePult"
+            "value": "Пошук — AI Hub Bar"
           }
         }
       }
@@ -44782,78 +44782,78 @@
         }
       }
     },
-    "Помощник — ClaudePult": {
+    "Помощник — AI Hub Bar": {
       "localizations": {
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "المساعد — ClaudePult"
+            "value": "المساعد — AI Hub Bar"
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Assistent — ClaudePult"
+            "value": "Assistent — AI Hub Bar"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Assistant — ClaudePult"
+            "value": "Assistant — AI Hub Bar"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Asistente — ClaudePult"
+            "value": "Asistente — AI Hub Bar"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Assistant — ClaudePult"
+            "value": "Assistant — AI Hub Bar"
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "Asisten — ClaudePult"
+            "value": "Asisten — AI Hub Bar"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Assistente — ClaudePult"
+            "value": "Assistente — AI Hub Bar"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "アシスタント — ClaudePult"
+            "value": "アシスタント — AI Hub Bar"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "도우미 — ClaudePult"
+            "value": "도우미 — AI Hub Bar"
           }
         },
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Asystent — ClaudePult"
+            "value": "Asystent — AI Hub Bar"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Assistente — ClaudePult"
+            "value": "Assistente — AI Hub Bar"
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Помічник — ClaudePult"
+            "value": "Помічник — AI Hub Bar"
           }
         }
       }
@@ -45010,78 +45010,78 @@
         }
       }
     },
-    "Помощь — ClaudePult": {
+    "Помощь — AI Hub Bar": {
       "localizations": {
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "المساعدة — ClaudePult"
+            "value": "المساعدة — AI Hub Bar"
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Hilfe — ClaudePult"
+            "value": "Hilfe — AI Hub Bar"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Help — ClaudePult"
+            "value": "Help — AI Hub Bar"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ayuda — ClaudePult"
+            "value": "Ayuda — AI Hub Bar"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Aide — ClaudePult"
+            "value": "Aide — AI Hub Bar"
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "Bantuan — ClaudePult"
+            "value": "Bantuan — AI Hub Bar"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Aiuto — ClaudePult"
+            "value": "Aiuto — AI Hub Bar"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "ヘルプ — ClaudePult"
+            "value": "ヘルプ — AI Hub Bar"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "도움말 — ClaudePult"
+            "value": "도움말 — AI Hub Bar"
           }
         },
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Pomoc — ClaudePult"
+            "value": "Pomoc — AI Hub Bar"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ajuda — ClaudePult"
+            "value": "Ajuda — AI Hub Bar"
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Допомога — ClaudePult"
+            "value": "Допомога — AI Hub Bar"
           }
         }
       }
@@ -52622,78 +52622,78 @@
         }
       }
     },
-    "Сейчас сон уже отключён другим приложением или командой pmset — ClaudePult его не трогает.": {
+    "Сейчас сон уже отключён другим приложением или командой pmset — AI Hub Bar его не трогает.": {
       "localizations": {
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "السكون معطّل بالفعل من تطبيق آخر أو بأمر pmset، ولا يغيّره ClaudePult."
+            "value": "السكون معطّل بالفعل من تطبيق آخر أو بأمر pmset، ولا يغيّره AI Hub Bar."
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Der Ruhezustand ist schon von einer anderen App oder einem pmset-Befehl abgeschaltet; ClaudePult lässt das so."
+            "value": "Der Ruhezustand ist schon von einer anderen App oder einem pmset-Befehl abgeschaltet; AI Hub Bar lässt das so."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sleep is already turned off by another app or a pmset command; ClaudePult leaves it alone."
+            "value": "Sleep is already turned off by another app or a pmset command; AI Hub Bar leaves it alone."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "El reposo ya lo desactivó otra app o un comando pmset; ClaudePult no lo toca."
+            "value": "El reposo ya lo desactivó otra app o un comando pmset; AI Hub Bar no lo toca."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "La veille est déjà désactivée par une autre app ou une commande pmset ; ClaudePult n’y touche pas."
+            "value": "La veille est déjà désactivée par une autre app ou une commande pmset ; AI Hub Bar n’y touche pas."
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tidur sudah dimatikan oleh aplikasi lain atau perintah pmset; ClaudePult tidak mengubahnya."
+            "value": "Tidur sudah dimatikan oleh aplikasi lain atau perintah pmset; AI Hub Bar tidak mengubahnya."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Lo stop è già disattivato da un’altra app o da un comando pmset; ClaudePult non lo tocca."
+            "value": "Lo stop è già disattivato da un’altra app o da un comando pmset; AI Hub Bar non lo tocca."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "スリープはすでに別のアプリか pmset コマンドで無効になっています。ClaudePult は変更しません。"
+            "value": "スリープはすでに別のアプリか pmset コマンドで無効になっています。AI Hub Bar は変更しません。"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "잠자기가 이미 다른 앱이나 pmset 명령으로 꺼져 있습니다. ClaudePult는 건드리지 않습니다."
+            "value": "잠자기가 이미 다른 앱이나 pmset 명령으로 꺼져 있습니다. AI Hub Bar는 건드리지 않습니다."
           }
         },
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Usypianie jest już wyłączone przez inną aplikację lub polecenie pmset; ClaudePult go nie rusza."
+            "value": "Usypianie jest już wyłączone przez inną aplikację lub polecenie pmset; AI Hub Bar go nie rusza."
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "O repouso já foi desligado por outro app ou um comando pmset; o ClaudePult não mexe nisso."
+            "value": "O repouso já foi desligado por outro app ou um comando pmset; o AI Hub Bar não mexe nisso."
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Сон уже вимкнено іншим застосунком або командою pmset — ClaudePult його не чіпає."
+            "value": "Сон уже вимкнено іншим застосунком або командою pmset — AI Hub Bar його не чіпає."
           }
         }
       }
@@ -56580,78 +56580,78 @@
         }
       }
     },
-    "Список сессий и «Claude ждёт ответа» работают через hooks: ClaudePult добавит свой в ~/.claude/settings.json, сохранив резервную копию.": {
+    "Список сессий и «Claude ждёт ответа» работают через hooks: AI Hub Bar добавит свой в ~/.claude/settings.json, сохранив резервную копию.": {
       "localizations": {
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "قائمة الجلسات و«Claude ينتظر الرد» تعملان عبر hooks: يضيف ClaudePult خاصته إلى ~/.claude/settings.json ويحتفظ بنسخة احتياطية."
+            "value": "قائمة الجلسات و«Claude ينتظر الرد» تعملان عبر hooks: يضيف AI Hub Bar خاصته إلى ~/.claude/settings.json ويحتفظ بنسخة احتياطية."
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sitzungsliste und „Claude wartet“ laufen über Hooks: ClaudePult fügt seinen in ~/.claude/settings.json ein und legt eine Sicherung an."
+            "value": "Sitzungsliste und „Claude wartet“ laufen über Hooks: AI Hub Bar fügt seinen in ~/.claude/settings.json ein und legt eine Sicherung an."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "The session list and “Claude is waiting” work through hooks: ClaudePult adds its own to ~/.claude/settings.json and keeps a backup."
+            "value": "The session list and “Claude is waiting” work through hooks: AI Hub Bar adds its own to ~/.claude/settings.json and keeps a backup."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "La lista de sesiones y «Claude espera respuesta» funcionan con hooks: ClaudePult añade el suyo a ~/.claude/settings.json y guarda una copia de seguridad."
+            "value": "La lista de sesiones y «Claude espera respuesta» funcionan con hooks: AI Hub Bar añade el suyo a ~/.claude/settings.json y guarda una copia de seguridad."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "La liste des sessions et « Claude attend une réponse » passent par des hooks : ClaudePult ajoute le sien à ~/.claude/settings.json et garde une sauvegarde."
+            "value": "La liste des sessions et « Claude attend une réponse » passent par des hooks : AI Hub Bar ajoute le sien à ~/.claude/settings.json et garde une sauvegarde."
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "Daftar sesi dan “Claude menunggu jawaban” bekerja lewat hooks: ClaudePult menambahkan miliknya ke ~/.claude/settings.json dan menyimpan cadangan."
+            "value": "Daftar sesi dan “Claude menunggu jawaban” bekerja lewat hooks: AI Hub Bar menambahkan miliknya ke ~/.claude/settings.json dan menyimpan cadangan."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "L’elenco delle sessioni e «Claude attende risposta» funzionano tramite hooks: ClaudePult aggiunge il suo a ~/.claude/settings.json e conserva un backup."
+            "value": "L’elenco delle sessioni e «Claude attende risposta» funzionano tramite hooks: AI Hub Bar aggiunge il suo a ~/.claude/settings.json e conserva un backup."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "セッション一覧と「Claude が返答待ち」は hooks で動作します。ClaudePult は ~/.claude/settings.json に自分の hook を追加し、バックアップを残します。"
+            "value": "セッション一覧と「Claude が返答待ち」は hooks で動作します。AI Hub Bar は ~/.claude/settings.json に自分の hook を追加し、バックアップを残します。"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "세션 목록과 ‘Claude가 답을 기다림’은 hooks로 작동합니다. ClaudePult가 ~/.claude/settings.json에 자신의 hook을 추가하고 백업을 남깁니다."
+            "value": "세션 목록과 ‘Claude가 답을 기다림’은 hooks로 작동합니다. AI Hub Bar가 ~/.claude/settings.json에 자신의 hook을 추가하고 백업을 남깁니다."
           }
         },
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Lista sesji i „Claude czeka na odpowiedź” działają przez hooks: ClaudePult doda swój do ~/.claude/settings.json i zachowa kopię zapasową."
+            "value": "Lista sesji i „Claude czeka na odpowiedź” działają przez hooks: AI Hub Bar doda swój do ~/.claude/settings.json i zachowa kopię zapasową."
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "A lista de sessões e “Claude aguardando resposta” funcionam com hooks: o ClaudePult adiciona o seu em ~/.claude/settings.json e guarda um backup."
+            "value": "A lista de sessões e “Claude aguardando resposta” funcionam com hooks: o AI Hub Bar adiciona o seu em ~/.claude/settings.json e guarda um backup."
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Список сесій і «Claude чекає відповіді» працюють через hooks: ClaudePult додасть свій у ~/.claude/settings.json, зберігши резервну копію."
+            "value": "Список сесій і «Claude чекає відповіді» працюють через hooks: AI Hub Bar додасть свій у ~/.claude/settings.json, зберігши резервну копію."
           }
         }
       }
@@ -60608,78 +60608,78 @@
         }
       }
     },
-    "Уведомления ClaudePult выключены в macOS — «ждёт ответа», итоги задач и лимиты не приходят.": {
+    "Уведомления AI Hub Bar выключены в macOS — «ждёт ответа», итоги задач и лимиты не приходят.": {
       "localizations": {
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "إشعارات ClaudePult متوقفة في macOS — لا تصل «بانتظار رد» ولا نتائج المهام ولا الحدود."
+            "value": "إشعارات AI Hub Bar متوقفة في macOS — لا تصل «بانتظار رد» ولا نتائج المهام ولا الحدود."
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "ClaudePult-Mitteilungen sind in macOS aus — „wartet“, Aufgabenergebnisse und Limits kommen nicht an."
+            "value": "AI Hub Bar-Mitteilungen sind in macOS aus — „wartet“, Aufgabenergebnisse und Limits kommen nicht an."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "ClaudePult notifications are off in macOS — “waiting”, task results and limits do not arrive."
+            "value": "AI Hub Bar notifications are off in macOS — “waiting”, task results and limits do not arrive."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Las notificaciones de ClaudePult están desactivadas en macOS — «espera respuesta», los resultados de tareas y los límites no llegan."
+            "value": "Las notificaciones de AI Hub Bar están desactivadas en macOS — «espera respuesta», los resultados de tareas y los límites no llegan."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Les notifications de ClaudePult sont désactivées dans macOS — «attend une réponse», les résultats des tâches et les limites n'arrivent pas."
+            "value": "Les notifications de AI Hub Bar sont désactivées dans macOS — «attend une réponse», les résultats des tâches et les limites n'arrivent pas."
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "Pemberitahuan ClaudePult dimatikan di macOS — «menunggu», hasil tugas, dan batas tidak sampai."
+            "value": "Pemberitahuan AI Hub Bar dimatikan di macOS — «menunggu», hasil tugas, dan batas tidak sampai."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Le notifiche di ClaudePult sono disattivate in macOS — «in attesa», i risultati delle attività e i limiti non arrivano."
+            "value": "Le notifiche di AI Hub Bar sono disattivate in macOS — «in attesa», i risultati delle attività e i limiti non arrivano."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "ClaudePult の通知が macOS でオフです — 「応答待ち」、タスクの結果、制限が届きません。"
+            "value": "AI Hub Bar の通知が macOS でオフです — 「応答待ち」、タスクの結果、制限が届きません。"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "macOS에서 ClaudePult 알림이 꺼져 있습니다 — «응답 대기», 작업 결과, 한도가 오지 않습니다."
+            "value": "macOS에서 AI Hub Bar 알림이 꺼져 있습니다 — «응답 대기», 작업 결과, 한도가 오지 않습니다."
           }
         },
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Powiadomienia ClaudePult są wyłączone w macOS — „czeka na odpowiedź”, wyniki zadań i limity nie dochodzą."
+            "value": "Powiadomienia AI Hub Bar są wyłączone w macOS — „czeka na odpowiedź”, wyniki zadań i limity nie dochodzą."
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "As notificações do ClaudePult estão desativadas no macOS — «aguardando resposta», os resultados das tarefas e os limites não chegam."
+            "value": "As notificações do AI Hub Bar estão desativadas no macOS — «aguardando resposta», os resultados das tarefas e os limites não chegam."
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Сповіщення ClaudePult вимкнено в macOS — «чекає на відповідь», підсумки завдань і ліміти не приходять."
+            "value": "Сповіщення AI Hub Bar вимкнено в macOS — «чекає на відповідь», підсумки завдань і ліміти не приходять."
           }
         }
       }

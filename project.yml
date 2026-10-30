@@ -36,8 +36,8 @@ targets:
     info:
       path: ClaudePult/Info.plist
       properties:
-        CFBundleDisplayName: ClaudePult
-        CFBundleName: ClaudePult
+        CFBundleDisplayName: AI Hub Bar
+        CFBundleName: AI Hub Bar
         CFBundleShortVersionString: $(MARKETING_VERSION)
         CFBundleVersion: $(CURRENT_PROJECT_VERSION)
         LSUIElement: true
@@ -47,7 +47,7 @@ targets:
         CFBundleIconName: AppIcon
         CFBundleDevelopmentRegion: ru
         CFBundleLocalizations: [ru, en, es, pt-BR, fr, de, ja, id, ko, it, ar, pl, uk]
-        NSAppleEventsUsageDescription: "ClaudePult открывает окна Терминала и запускает в них Claude Code для ваших проектов."
+        NSAppleEventsUsageDescription: "AI Hub Bar открывает окна Терминала и запускает в них Claude Code для ваших проектов."
         # Updates (scripts/release.sh): the latest release's appcast, signed with this public key.
         SUFeedURL: https://github.com/OlehDemishev/ClaudePult/releases/latest/download/appcast.xml
         SUPublicEDKey: 8ahufHSAtzNg3nCxBQh1jlSoWriuxFfxkLH0AD7dNmY=
@@ -56,19 +56,22 @@ targets:
         # *.claudepult — exported settings and modes (SPEC-modes §12).
         UTExportedTypeDeclarations:
           - UTTypeIdentifier: com.demishev.claudepult.settings
-            UTTypeDescription: Настройки ClaudePult
+            UTTypeDescription: Настройки AI Hub Bar
             UTTypeConformsTo: [public.json, public.data]
             UTTypeTagSpecification:
               public.filename-extension: [claudepult]
         CFBundleDocumentTypes:
-          - CFBundleTypeName: Настройки ClaudePult
+          - CFBundleTypeName: Настройки AI Hub Bar
             CFBundleTypeRole: Viewer
             LSHandlerRank: Owner
             LSItemContentTypes: [com.demishev.claudepult.settings]
     settings:
       base:
+        # Renamed to AI Hub Bar (2026-10-30): the bundle id, module name and data folders keep the old name, so
+        # settings, macOS permissions and Keychain items carry over.
         PRODUCT_BUNDLE_IDENTIFIER: com.demishev.claudepult
-        PRODUCT_NAME: ClaudePult
+        PRODUCT_NAME: AIHubBar
+        PRODUCT_MODULE_NAME: ClaudePult
         ENABLE_APP_SANDBOX: NO
         ENABLE_HARDENED_RUNTIME: NO
         GENERATE_INFOPLIST_FILE: NO
@@ -87,7 +90,7 @@ targets:
     info:
       path: ClaudePultWidget/Info.plist
       properties:
-        CFBundleDisplayName: ClaudePult
+        CFBundleDisplayName: AI Hub Bar
         CFBundleShortVersionString: $(MARKETING_VERSION)
         CFBundleVersion: $(CURRENT_PROJECT_VERSION)
         CFBundleDevelopmentRegion: ru
@@ -120,7 +123,7 @@ targets:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.demishev.claudepult.tests
         GENERATE_INFOPLIST_FILE: YES
-        TEST_HOST: $(BUILT_PRODUCTS_DIR)/ClaudePult.app/Contents/MacOS/ClaudePult
+        TEST_HOST: $(BUILT_PRODUCTS_DIR)/AIHubBar.app/Contents/MacOS/AIHubBar
         BUNDLE_LOADER: $(TEST_HOST)
 
 schemes:
