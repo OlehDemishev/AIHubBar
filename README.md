@@ -1,6 +1,6 @@
 # ClaudePult
 
-Native macOS menu bar app (no Dock icon): a control panel for the projects in `~/Projects` and for every Claude Code session on this Mac. **For people who just want to use it: [docs/GUIDE.md](docs/GUIDE.md)** — what it does, install, first start, privacy, troubleshooting. This README is the reference for Oleh and for development. Specification: [docs/SPEC.md](docs/SPEC.md). Progress: [docs/STATUS.md](docs/STATUS.md). Next: profiles made of modules — [docs/SPEC-profiles.md](docs/SPEC-profiles.md). Decisions: [DECISIONS.md](DECISIONS.md). What was checked how: [docs/CHECKLIST.md](docs/CHECKLIST.md). In the app: «Помощь».
+Native macOS menu bar app (no Dock icon): a control panel for the projects in `~/Projects` and for every Claude Code session on this Mac. **For people who just want to use it: [docs/GUIDE.md](docs/GUIDE.md)** — what it does, install, first start, privacy, troubleshooting. This README is the reference for Oleh and for development. Specification: [docs/SPEC.md](docs/SPEC.md). Progress: [docs/STATUS.md](docs/STATUS.md). Next: profiles made of modules — [docs/SPEC-profiles.md](docs/SPEC-profiles.md). Windows and Linux versions (spec only): [docs/SPEC-windows.md](docs/SPEC-windows.md), [docs/SPEC-linux.md](docs/SPEC-linux.md). Decisions: [DECISIONS.md](DECISIONS.md). What was checked how: [docs/CHECKLIST.md](docs/CHECKLIST.md). In the app: «Помощь».
 
 ## What it does
 
