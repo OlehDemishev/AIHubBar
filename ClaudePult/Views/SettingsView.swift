@@ -293,7 +293,10 @@ private struct SessionSettings: View {
                         .foregroundStyle(hooks.status == .installed ? .green : hooks.status == .outdated ? .orange : .secondary)
                 }
                 HStack {
-                    Button(hooks.status == .notInstalled ? String(localized: "Установить hooks") : String(localized: "Обновить hooks")) { hooks.install() }
+                    // «Обновить» only when something is out of date: installed hooks need nothing.
+                    if hooks.status != .installed {
+                        Button(hooks.status == .notInstalled ? String(localized: "Установить hooks") : String(localized: "Обновить hooks")) { hooks.install() }
+                    }
                     if hooks.status != .notInstalled {
                         Button("Снять hooks") { hooks.uninstall() }
                     }
@@ -326,7 +329,9 @@ private struct LimitSettings: View {
         SettingsPage {
             Section {
                 LabeledContent("Уведомлять на, %") {
-                    TextField("50, 80, 95", text: $thresholdsText)
+                    // No title: in a Form a titled field also shows its title as a label next to it.
+                    TextField("", text: $thresholdsText, prompt: Text(verbatim: "50, 80, 95"))
+                        .labelsHidden()
                         .textFieldStyle(.roundedBorder)
                         .frame(width: 140)
                         .onSubmit(applyThresholds)
@@ -338,7 +343,7 @@ private struct LimitSettings: View {
             } header: {
                 Text("Лимиты подписки")
             } footer: {
-                Footnote(text: String(localized: "Данные — с того же адреса, что использует Claude Code (токен читается из связки ключей «Claude Code-credentials» и нигде не сохраняется). Уведомление — один раз на окно сессии/недели при пересечении порога и когда лимит восстановился. Значения пишутся в ~/Library/Application Support/ClaudePult/usage.json. Что показывать в строке меню — во вкладке «Внешний вид»."))
+                Footnote(text: String(localized: "Данные — с того же адреса, что использует Claude Code (токен читается из связки ключей «Claude Code-credentials» и нигде не сохраняется). Уведомление — один раз на окно сессии/недели при пересечении порога и когда лимит восстановился. Значения пишутся в ~/Library/Application Support/ClaudePult/usage.json. Что показывать в строке меню — во вкладке «Строка меню»."))
             }
         }
         .onAppear { thresholdsText = settings.limitThresholds.map(String.init).joined(separator: ", ") }

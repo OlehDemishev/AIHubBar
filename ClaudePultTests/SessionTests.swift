@@ -60,6 +60,13 @@ struct HookInstallerTests {
         #expect(installer.status() == .installed)
         #expect(FileManager.default.isExecutableFile(atPath: installer.scriptURL.path))
 
+        // An older script (an app update) is replaced without touching settings.json.
+        try Data("old".utf8).write(to: installer.scriptURL)
+        #expect(installer.status() == .outdated)
+        #expect(try installer.updateScriptIfNeeded())
+        #expect(installer.status() == .installed)
+        #expect(try !installer.updateScriptIfNeeded(), "nothing to do when current")
+
         // A second install changes nothing: no rewrite, no new backup that could replace the original one.
         #expect(try installer.install() == nil)
         let backups = try FileManager.default.contentsOfDirectory(atPath: settingsURL.deletingLastPathComponent().path)
@@ -179,6 +186,31 @@ struct HookScriptTests {
 
         try await h.send(event("SessionEnd", ["reason": "prompt_input_exit"]))
         #expect(try h.session("abc-123").state == .ended)
+    }
+
+    /// The hook run under a process named `claude`, as Claude Code runs it.
+    private func sendUnderClaude(_ h: Harness, _ event: [String: Any]) async throws {
+        let claude = h.dir.appending(path: "claude")
+        // A link, not a copy: macOS kills a copied system binary; `ps` reports the link's name.
+        if !FileManager.default.fileExists(atPath: claude.path) { try FileManager.default.createSymbolicLink(atPath: claude.path, withDestinationPath: "/bin/sh") }
+        let input = try JSONSerialization.data(withJSONObject: event)
+        // «; true» keeps the shell alive as the hook's parent instead of exec-ing the script.
+        _ = try await ProcessRunner.run(
+            claude.path, ["-c", "'\(h.script.path)' --projects-dir /Users/me/Projects --sessions-dir '\(h.sessions.path)'; true"],
+            input: input, timeout: .seconds(10)
+        )
+    }
+
+    @Test func followsAResumedSessionToItsNewProcess() async throws {
+        let h = try Harness()
+        defer { try? FileManager.default.removeItem(at: h.dir) }
+        try await sendUnderClaude(h, event("SessionStart", ["source": "startup"]))
+        let first = try #require(try h.session("abc-123").claudePID)
+        try await sendUnderClaude(h, event("SessionStart", ["source": "resume"]))
+        let second = try #require(try h.session("abc-123").claudePID)
+        #expect(first != second, "a new process after a restart is recorded")
+        try await h.send(event("Stop"))
+        #expect(try h.session("abc-123").claudePID == second, "an event without a claude parent keeps the last one")
     }
 
     @Test func ignoresGarbageSilently() async throws {

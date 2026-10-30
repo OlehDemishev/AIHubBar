@@ -7,6 +7,7 @@ struct MenuPanelView: View {
     @Environment(\.openWindow) private var openWindow
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(ProjectStore.self) private var store
+    @Environment(UsageStore.self) private var usage
     @Environment(SessionStore.self) private var sessions
     @Environment(HookController.self) private var hooks
     @Environment(RunStore.self) private var runs
@@ -156,8 +157,10 @@ struct MenuPanelView: View {
                         .foregroundStyle(.secondary)
                 }
             }
+            // One refresh for the whole panel: projects and limits (the limits keep their own schedule and pauses).
             Button {
                 Task { await store.refresh() }
+                Task { await usage.refresh() }
             } label: {
                 if store.isRefreshing {
                     ProgressView().controlSize(.small)

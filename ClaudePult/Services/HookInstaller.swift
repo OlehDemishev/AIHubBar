@@ -65,6 +65,16 @@ struct HookInstaller {
         return status == .installed && !scriptIsCurrent ? .outdated : status
     }
 
+    /// While our entries are in settings.json, keeps the script this version of ClaudePult ships: an app update
+    /// then needs no «Обновить hooks». Only ClaudePult's own script file is written. Returns whether it was.
+    @discardableResult
+    func updateScriptIfNeeded() throws -> Bool {
+        guard !scriptIsCurrent, let settings = try? readSettings(),
+              Self.status(of: settings, expectedCommand: command) == .installed else { return false }
+        try HookScript.write(to: scriptURL)
+        return true
+    }
+
     private var scriptIsCurrent: Bool {
         (try? String(contentsOf: scriptURL, encoding: .utf8)) == HookScript.source
     }
