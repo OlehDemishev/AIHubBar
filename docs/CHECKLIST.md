@@ -289,3 +289,13 @@ Panel snapshots: `defaults write com.demishev.claudepult DebugPanelSnapshot -boo
 | The request leaves no session file, no hook record, no transcript (`--no-session-persistence`, `--setting-sources ""`, `--tools ""`) | Live |
 | At most one attempt an hour; arguments without `--bare` (which skips the keychain) | Auto (`LoginRenewalTests`) |
 | ClaudePult renews by itself the next time the token expires and the limits keep updating | Not yet seen: the token was renewed by hand during the check; due around 20:11 |
+
+## Profiles stage 1: model (SPEC-profiles §9.1, 2026-10-30)
+
+| Scenario | Checked |
+|---|---|
+| A mode's modules follow its blocks: limits, sessions, upcoming (calendar on), projects (a source), reports (`_daily-report`); hidden blocks stay hidden; a kind keeps its place | Auto (`ProfileModuleTests`) |
+| Mode files and state from before profiles are rewritten with modules and the installed list; the next start reads the same | Auto + live (Oleh's mode: limits, sessions, projects, reports) |
+| Modules a newer version knows are skipped, not an error | Auto |
+| `.claudepult` export is version 2 with modules and installed; version 1 files still import and get modules | Auto |
+| The panel looks the same | Live (installed, nothing reads modules yet) |

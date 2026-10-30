@@ -1,22 +1,21 @@
 # Status
 
 <!-- summary:start -->
-**Stage:** SPEC-modes done except signing/updates; next: profiles made of modules (docs/SPEC-profiles.md, variant C)
+**Stage:** SPEC-modes done except signing/updates; SPEC-profiles (variant C) stage 1 — the model — in PR
 **Updated:** 2026-10-30
 
 **Now:**
-- spec for profiles and modules — branch `docs/spec-profiles`, PR open
+- SPEC-profiles stage 1, model: modules, profiles, migration, `.claudepult` v2 — branch `feat/profiles-model` (worktree `.claude/worktrees/profiles-stage1`), PR open; the spec is merged (PR #67)
 
 **Next:**
-- SPEC-profiles §9 stage 1: module catalog, profiles, migration from modes, `.claudepult` v2 (looks the same)
-- then stages 2–6: panel from profile modules, empty start and new assistant, Ресурсы Mac, Не спать, Быстрые команды и переключатели
+- SPEC-profiles stage 2: panel and menu bar from profile modules, «Профили» and «Модули» tabs, «режим» → «профиль» in all 13 languages (moved here from stage 1: these strings get rewritten anyway)
+- stages 3–6: empty start and new assistant, Ресурсы Mac, Не спать, Быстрые команды и переключатели
 - menu bar elements reordered by dragging (needs a different list than a grouped Form)
 - fix whatever Oleh finds in the translations (machine translation; native review for ja, ko, ar at least)
 - stage 8 rest: Developer ID signing and notarization, Sparkle updates — once Oleh decides on Developer ID, the name and where updates are hosted
 - Fix whatever Oleh finds in docs/CHECKLIST.md
 
 **Needs Oleh:**
-- confirm SPEC-profiles §10: «профиль» instead of «режим», menu bar per profile, «Не спать, пока работает Claude» on by default for developers, first-wave modules
 - after ~20:11 today: check that the limits keep updating by themselves (the sign-in renewal runs when the token expires)
 - read docs/GUIDE.md as a newcomer would
 - review the languages: Settings → Основные → «Язык интерфейса» → a language → «Перезапустить» (and back); Arabic should mirror right-to-left
@@ -34,6 +33,12 @@
 - hooks are installed in ~/.claude/settings.json; backup of the original: ~/.claude/settings.json.claudepult-backup-20261029T192827
 - delete or archive the old repo `OlehDemishev/ClaudeBar`; turn on start at login if wanted
 <!-- summary:end -->
+
+## 2026-10-30 — Profiles stage 1: the model (branch `feat/profiles-model`)
+
+Done: SPEC-profiles §9.1. `ModuleKind` (limits, sessions, upcoming, projects, reports — the modules that exist today) and `ProfileModule`; a mode carries its `modules` in panel order. Until stage 2 the mode's blocks still decide what the panel shows, so the list is synced from them on every save (kinds keep their place, new ones go in panel order, unused ones drop). Installed modules live in `state.json`; everything a profile uses gets installed. On load, mode files from before profiles are rewritten with modules. `.claudepult` export is version 2 (modules, installed); version 1 files still import. Modules a newer version knows are skipped. `--modes` prints each profile's modules and the installed list. The rename «режим» → «профиль» moves to stage 2, where these strings get rewritten anyway (42 strings × 13 languages would otherwise be translated twice).
+Checked: `xcodebuild test` — 168 tests green (new `ProfileModuleTests`: modules from blocks, old files migrate and reload the same, unknown kinds skipped, v2 export and v1 import); catalog synced, 3 module names in all 12 languages. Live: Oleh's modes folder backed up to the session scratchpad, installed — his mode now has limits, sessions, projects, reports, `state.json` lists them installed, the panel is unchanged. Built in a worktree because another session works in the main checkout. CI not set up; checks run locally.
+Left: stage 2.
 
 ## 2026-10-30 — «Показать» opens the desktop-app session itself (branch `fix/show-desktop-session`)
 
