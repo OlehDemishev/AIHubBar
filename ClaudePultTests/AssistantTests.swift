@@ -9,15 +9,19 @@ struct AssistantDraftTests {
 
     @Test func stepsDependOnTheSource() throws {
         var d = draft(firstLaunch: true)
+        #expect(d.step == .welcome, "a new Mac starts with the welcome screen")
+        d.next()
         #expect(d.step == .importSettings)
         #expect(d.steps.count == AssistantDraft.Step.allCases.count)
         d.mode.source = .gitBuiltin(projects: "~/Code")
         #expect(!d.steps.contains(.stages) && !d.steps.contains(.commands) && !d.steps.contains(.calendar))
-        #expect(draft().steps.first == .template, "import only on the first launch")
+        #expect(draft().steps.first == .template, "welcome and import only on the first launch")
         d.next()
         #expect(d.step == .template)
         d.back()
-        #expect(d.step == .importSettings && d.isFirst)
+        #expect(d.step == .importSettings && !d.isFirst)
+        d.back()
+        #expect(d.step == .welcome && d.isFirst)
         d.step = .name
         #expect(d.isLast)
     }

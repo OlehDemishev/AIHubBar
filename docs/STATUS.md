@@ -1,18 +1,19 @@
 # Status
 
 <!-- summary:start -->
-**Stage:** SPEC.md done; SPEC-modes stages 1–7 and 9 (all 13 languages) done; stage 8 waits for Oleh
+**Stage:** SPEC.md done; SPEC-modes stages 1–7 and 9 done; stage 8: onboarding and guide in PR, signing and updates wait for Oleh
 **Updated:** 2026-10-30
 
 **Now:**
-- all 13 interface languages merged (PR #53); waiting for Oleh's language review
+- onboarding (welcome screen with readiness checks) and docs/GUIDE.md — branch `feat/onboarding`, PR open
 
 **Next:**
 - fix whatever Oleh finds in the translations (machine translation; native review for ja, ko, ar at least)
-- SPEC-modes §9 stage 8 (for everyone) once Oleh decides on Developer ID and the name
+- stage 8 rest: Developer ID signing and notarization, Sparkle updates — once Oleh decides on Developer ID, the name and where updates are hosted
 - Fix whatever Oleh finds in docs/CHECKLIST.md
 
 **Needs Oleh:**
+- review and merge the onboarding PR; read docs/GUIDE.md as a newcomer would
 - review the languages: Settings → Основные → «Язык интерфейса» → a language → «Перезапустить» (and back); Arabic should mirror right-to-left
 - try Settings → Режимы → «+» → «Помощник…»
 - try the calendar in a folder mode: «Календарь» → «+ контент-план», a `Дедлайн:` in a `проект.md`, then the panel «Ближайшее» and the «Календарь» window
@@ -28,6 +29,12 @@
 - hooks are installed in ~/.claude/settings.json; backup of the original: ~/.claude/settings.json.claudepult-backup-20261029T192827
 - delete or archive the old repo `OlehDemishev/ClaudeBar`; turn on start at login if wanted
 <!-- summary:end -->
+
+## 2026-10-30 — Onboarding and guide for people (branch `feat/onboarding`)
+
+Done: the assistant on a new Mac now starts with «Добро пожаловать в ClaudePult» — what the app is plus readiness checks with one button each: AI service (Claude Code, other agents, API keys; «Проверяю…» until the first scan), Claude Code session hooks, notifications, start at login (optional). The same list is at the top of «Помощь» and re-checks when ClaudePult comes back to the front. CLI `--readiness [file.png]`. `docs/GUIDE.md` — a page for people: what it does, modes, install, first start, everyday use, privacy, languages, troubleshooting, uninstall; README links to it. 22 new strings in all 12 languages.
+Checked: `xcodebuild test` — 159 tests green (new `ReadinessTests`, first-launch steps in `AssistantDraftTests`); catalog sync — nothing stale or untranslated beyond the usual 20 non-text keys; format specifiers match. Live: `--readiness` on this Mac (all done, exit 0), German and Arabic renders (Arabic mirrored); `scripts/build-and-install.sh --test` installed, Oleh's mode unchanged. CI not set up; checks run locally.
+Left: the welcome screen and its buttons not seen on a real first start (this Mac has modes already, and ImageRenderer can't draw the buttons); signing, notarization and Sparkle wait for Developer ID.
 
 ## 2026-10-30 — Remaining eight languages (branch `feat/all-languages`)
 

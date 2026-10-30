@@ -3414,6 +3414,82 @@
     },
     "2:14": {},
     "50, 80, 95": {},
+    "; ещё: ": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "؛ أيضًا: "
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "; außerdem: "
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "; also: "
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "; además: "
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "; aussi : "
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "; juga: "
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "; inoltre: "
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "、ほかに: "
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "; 그 외: "
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "; także: "
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "; também: "
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "; ще: "
+          }
+        }
+      }
+    },
     "API за месяц: %@": {
       "localizations": {
         "ar": {
@@ -3950,6 +4026,158 @@
       }
     },
     "ClaudePult": {},
+    "ClaudePult живёт в строке меню (✦): проекты, лимиты подписки Claude, сессии и команды для AI — в одной панели. Сначала проверим, что всё готово, потом настроим первый режим.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يعيش ClaudePult في شريط القوائم (✦): المشاريع، وحدود اشتراك Claude، والجلسات، وأوامر الذكاء الاصطناعي في لوحة واحدة. لنتحقق أولًا من أن كل شيء جاهز، ثم نُعدّ وضعك الأول."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ClaudePult wohnt in der Menüleiste (✦): Projekte, Claude-Abo-Limits, Sitzungen und KI-Befehle in einem Panel. Zuerst prüfen wir, ob alles bereit ist, dann richten wir Ihren ersten Modus ein."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ClaudePult lives in the menu bar (✦): projects, Claude subscription limits, sessions and AI commands in one panel. First let's check that everything is ready, then set up your first mode."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ClaudePult vive en la barra de menús (✦): proyectos, límites de la suscripción de Claude, sesiones y comandos de IA en un solo panel. Primero comprobamos que todo esté listo y luego configuramos tu primer modo."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ClaudePult vit dans la barre des menus (✦) : projets, limites de l’abonnement Claude, sessions et commandes d’IA dans un seul panneau. Vérifions d’abord que tout est prêt, puis configurons votre premier mode."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ClaudePult ada di bilah menu (✦): proyek, batas langganan Claude, sesi, dan perintah AI dalam satu panel. Pertama kita periksa apakah semuanya siap, lalu atur mode pertama Anda."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ClaudePult vive nella barra dei menu (✦): progetti, limiti dell’abbonamento Claude, sessioni e comandi AI in un unico pannello. Prima controlliamo che sia tutto pronto, poi configuriamo la tua prima modalità."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ClaudePult はメニューバー（✦）にあります。プロジェクト、Claude サブスクリプションの上限、セッション、AI コマンドをひとつのパネルにまとめます。まず準備ができているか確認し、そのあと最初のモードを設定します。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ClaudePult는 메뉴 막대(✦)에 있습니다. 프로젝트, Claude 구독 한도, 세션, AI 명령을 한 패널에서 다룹니다. 먼저 모든 준비가 되었는지 확인한 다음 첫 번째 모드를 설정합니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ClaudePult mieszka na pasku menu (✦): projekty, limity subskrypcji Claude, sesje i polecenia AI w jednym panelu. Najpierw sprawdzimy, czy wszystko jest gotowe, potem skonfigurujemy pierwszy tryb."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O ClaudePult fica na barra de menus (✦): projetos, limites da assinatura do Claude, sessões e comandos de IA em um só painel. Primeiro vamos verificar se está tudo pronto e depois configurar seu primeiro modo."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ClaudePult живе в рядку меню (✦): проєкти, ліміти підписки Claude, сесії й команди для AI — в одній панелі. Спершу перевіримо, що все готово, потім налаштуємо перший режим."
+          }
+        }
+      }
+    },
+    "ClaudePult запускается сам после входа в систему.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يبدأ ClaudePult تلقائيًا بعد تسجيل الدخول."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ClaudePult startet nach der Anmeldung von selbst."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ClaudePult starts by itself after you log in."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ClaudePult se abre solo al iniciar sesión."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ClaudePult se lance tout seul à l’ouverture de session."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ClaudePult berjalan sendiri setelah Anda masuk."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ClaudePult si avvia da solo dopo l’accesso."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ログイン後に ClaudePult が自動で起動します。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "로그인하면 ClaudePult가 자동으로 실행됩니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ClaudePult uruchamia się sam po zalogowaniu."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O ClaudePult abre sozinho quando você inicia a sessão."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ClaudePult запускається сам після входу в систему."
+          }
+        }
+      }
+    },
     "ClaudePult не может управлять Терминалом. Разрешите: Системные настройки → Конфиденциальность и безопасность → Автоматизация → ClaudePult → Терминал.": {
       "localizations": {
         "ar": {
@@ -4713,6 +4941,158 @@
           "stringUnit": {
             "state": "translated",
             "value": "Hooks встановлено"
+          }
+        }
+      }
+    },
+    "Hooks установлены: сессии видны в панели.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تم تثبيت hooks: تظهر الجلسات في اللوحة."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hooks installiert: Sitzungen erscheinen im Panel."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hooks installed: sessions show up in the panel."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hooks instalados: las sesiones aparecen en el panel."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hooks installés : les sessions apparaissent dans le panneau."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hooks terpasang: sesi tampil di panel."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hooks installati: le sessioni compaiono nel pannello."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hooks をインストール済み：セッションがパネルに表示されます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hooks 설치됨: 세션이 패널에 표시됩니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hooks zainstalowane: sesje widać w panelu."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hooks instalados: as sessões aparecem no painel."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hooks встановлено: сесії видно в панелі."
+          }
+        }
+      }
+    },
+    "Hooks устарели — обновите их.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "hooks قديمة — حدّثها."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hooks sind veraltet — bitte aktualisieren."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hooks are out of date — update them."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los hooks están desactualizados: actualízalos."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les hooks sont obsolètes — mettez-les à jour."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hooks sudah usang — perbarui."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gli hooks sono obsoleti: aggiornali."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hooks が古くなっています。更新してください。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hooks가 오래되었습니다. 업데이트하세요."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hooks są nieaktualne — zaktualizuj je."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Os hooks estão desatualizados — atualize-os."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hooks застаріли — оновіть їх."
           }
         }
       }
@@ -9386,6 +9766,82 @@
         }
       }
     },
+    "Включить": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تفعيل"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Einschalten"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Turn On"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activer"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aktifkan"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Attiva"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "オンにする"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "켜기"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Włącz"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ativar"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Увімкнути"
+          }
+        }
+      }
+    },
     "Включить…": {
       "localizations": {
         "ar": {
@@ -10298,6 +10754,82 @@
         }
       }
     },
+    "Всё это можно сделать и позже: в Настройках и в окне «Помощь».": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يمكنك فعل كل هذا لاحقًا أيضًا، في الإعدادات ونافذة «المساعدة»."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "All das geht auch später, in den Einstellungen und im Hilfe-Fenster."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You can also do all of this later, in Settings and in the Help window."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "También puedes hacerlo más tarde, en Ajustes y en la ventana Ayuda."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vous pourrez aussi le faire plus tard, dans les Réglages et la fenêtre Aide."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Semua ini juga bisa dilakukan nanti, di Pengaturan dan jendela Bantuan."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Puoi farlo anche più tardi, nelle Impostazioni e nella finestra Aiuto."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "これらはあとから「設定」や「ヘルプ」ウインドウでも行えます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이 모든 것은 나중에 설정과 도움말 창에서도 할 수 있습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wszystko to można zrobić też później: w Ustawieniach i w oknie Pomoc."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Você também pode fazer tudo isso depois, em Ajustes e na janela Ajuda."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Усе це можна зробити й пізніше: у Налаштуваннях і у вікні «Довідка»."
+          }
+        }
+      }
+    },
     "Вход Claude Code устарел — обновится при следующем запуске claude в Терминале (если нет: claude → /login)": {
       "localizations": {
         "ar": {
@@ -11130,6 +11662,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Вимкнено"
+          }
+        }
+      }
+    },
+    "Выключены в Системных настройках → Уведомления → ClaudePult.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "معطّلة في إعدادات النظام ← الإشعارات ← ClaudePult."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ausgeschaltet in Systemeinstellungen → Mitteilungen → ClaudePult."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Turned off in System Settings → Notifications → ClaudePult."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Desactivadas en Ajustes del Sistema → Notificaciones → ClaudePult."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Désactivées dans Réglages Système → Notifications → ClaudePult."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dimatikan di Pengaturan Sistem → Pemberitahuan → ClaudePult."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Disattivate in Impostazioni di Sistema → Notifiche → ClaudePult."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "システム設定 → 通知 → ClaudePult でオフになっています。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "시스템 설정 → 알림 → ClaudePult에서 꺼져 있습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wyłączone w Ustawieniach systemowych → Powiadomienia → ClaudePult."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Desativadas em Ajustes do Sistema → Notificações → ClaudePult."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Вимкнено в Системних параметрах → Сповіщення → ClaudePult."
           }
         }
       }
@@ -12042,6 +12650,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Головний файл — за ним рахуються слова та хронометраж"
+          }
+        }
+      }
+    },
+    "Готовность": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الجاهزية"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bereitschaft"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Readiness"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Preparación"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Préparation"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kesiapan"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Preparazione"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "準備状況"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "준비 상태"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gotowość"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Preparação"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Готовність"
           }
         }
       }
@@ -13866,6 +14550,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Додано режимів: %lld."
+          }
+        }
+      }
+    },
+    "Добро пожаловать в ClaudePult": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مرحبًا بك في ClaudePult"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Willkommen bei ClaudePult"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Welcome to ClaudePult"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Te damos la bienvenida a ClaudePult"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bienvenue dans ClaudePult"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Selamat datang di ClaudePult"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Benvenuto in ClaudePult"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ClaudePult へようこそ"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ClaudePult에 오신 것을 환영합니다"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Witaj w ClaudePult"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Boas-vindas ao ClaudePult"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ласкаво просимо до ClaudePult"
           }
         }
       }
@@ -15842,6 +16602,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Запуск курсу"
+          }
+        }
+      }
+    },
+    "Запуск при входе": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الفتح عند تسجيل الدخول"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beim Anmelden öffnen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open at Login"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abrir al iniciar sesión"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ouvrir à la connexion"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buka saat masuk"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apri al login"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ログイン時に開く"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "로그인 시 열기"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otwieraj przy logowaniu"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abrir ao iniciar sessão"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Запуск під час входу"
           }
         }
       }
@@ -20260,6 +21096,82 @@
         }
       }
     },
+    "Лимиты, ответы Claude, готовые команды и дедлайны приходят уведомлениями.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تصل الحدود وانتظار Claude للرد والأوامر المكتملة والمواعيد النهائية كإشعارات."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limits, wartende Claude-Sitzungen, fertige Befehle und Fristen kommen als Mitteilungen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limits, Claude waiting for you, finished commands and deadlines arrive as notifications."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los límites, Claude esperando respuesta, los comandos terminados y las fechas límite llegan como notificaciones."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limites, Claude en attente de réponse, commandes terminées et échéances arrivent en notifications."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Batas, Claude yang menunggu jawaban, perintah selesai, dan tenggat datang sebagai pemberitahuan."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limiti, Claude in attesa di risposta, comandi completati e scadenze arrivano come notifiche."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "上限、返答待ちの Claude、完了したコマンド、締め切りが通知で届きます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "한도, 답을 기다리는 Claude, 완료된 명령, 마감일이 알림으로 옵니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limity, Claude czekający na odpowiedź, gotowe polecenia i terminy przychodzą jako powiadomienia."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limites, Claude esperando resposta, comandos concluídos e prazos chegam como notificações."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ліміти, відповіді Claude, готові команди й дедлайни приходять сповіщеннями."
+          }
+        }
+      }
+    },
     "Мелкий": {
       "localizations": {
         "ar": {
@@ -21776,6 +22688,158 @@
           "stringUnit": {
             "state": "translated",
             "value": "Назва проєкту"
+          }
+        }
+      }
+    },
+    "Найден %@": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تم العثور على %@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gefunden: %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Found %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Encontrado: %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trouvé : %@"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ditemukan %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trovato %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ が見つかりました"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ 발견됨"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Znaleziono %@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Encontrado: %@"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Знайдено %@"
+          }
+        }
+      }
+    },
+    "Найдено: %@. Лимиты подписки и список сессий работают только с Claude Code.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تم العثور على: %@. حدود الاشتراك وقائمة الجلسات تعمل مع Claude Code فقط."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gefunden: %@. Abo-Limits und die Sitzungsliste funktionieren nur mit Claude Code."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Found: %@. Subscription limits and the session list work only with Claude Code."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Encontrado: %@. Los límites de la suscripción y la lista de sesiones solo funcionan con Claude Code."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trouvé : %@. Les limites de l’abonnement et la liste des sessions ne fonctionnent qu’avec Claude Code."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ditemukan: %@. Batas langganan dan daftar sesi hanya berfungsi dengan Claude Code."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trovato: %@. I limiti dell’abbonamento e l’elenco delle sessioni funzionano solo con Claude Code."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "見つかりました: %@。サブスクリプションの上限とセッション一覧は Claude Code でのみ動作します。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "발견됨: %@. 구독 한도와 세션 목록은 Claude Code에서만 작동합니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Znaleziono: %@. Limity subskrypcji i lista sesji działają tylko z Claude Code."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Encontrado: %@. Os limites da assinatura e a lista de sessões só funcionam com o Claude Code."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Знайдено: %@. Ліміти підписки й список сесій працюють лише з Claude Code."
           }
         }
       }
@@ -25142,6 +26206,82 @@
         }
       }
     },
+    "Ничего не найдено. Установите Claude Code (claude.com/claude-code) или вставьте ключ API в Настройках → «Сервисы AI».": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لم يُعثر على شيء. ثبّت Claude Code (claude.com/claude-code) أو الصق مفتاح API في الإعدادات ← «خدمات الذكاء الاصطناعي»."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nichts gefunden. Installieren Sie Claude Code (claude.com/claude-code) oder fügen Sie einen API-Schlüssel in Einstellungen → KI-Dienste ein."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nothing found. Install Claude Code (claude.com/claude-code) or paste an API key in Settings → AI Services."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se encontró nada. Instala Claude Code (claude.com/claude-code) o pega una clave de API en Ajustes → Servicios de IA."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rien trouvé. Installez Claude Code (claude.com/claude-code) ou collez une clé d’API dans Réglages → Services d'IA."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tidak ada yang ditemukan. Pasang Claude Code (claude.com/claude-code) atau tempel kunci API di Pengaturan → Layanan AI."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Non è stato trovato nulla. Installa Claude Code (claude.com/claude-code) o incolla una chiave API in Impostazioni → Servizi IA."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "見つかりません。Claude Code（claude.com/claude-code）をインストールするか、設定 →「AI サービス」に API キーを貼り付けてください。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "찾지 못했습니다. Claude Code(claude.com/claude-code)를 설치하거나 설정 → AI 서비스에 API 키를 붙여 넣으세요."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nic nie znaleziono. Zainstaluj Claude Code (claude.com/claude-code) albo wklej klucz API w Ustawieniach → Usługi AI."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nada encontrado. Instale o Claude Code (claude.com/claude-code) ou cole uma chave de API em Ajustes → Serviços de IA."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Нічого не знайдено. Установіть Claude Code (claude.com/claude-code) або вставте ключ API в Налаштуваннях → «Сервіси AI»."
+          }
+        }
+      }
+    },
     "Новая команда": {
       "localizations": {
         "ar": {
@@ -27652,6 +28792,158 @@
           "stringUnit": {
             "state": "translated",
             "value": "Відкрити «Об'єкти входу»"
+          }
+        }
+      }
+    },
+    "Открыть «Сервисы AI»": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "فتح «خدمات الذكاء الاصطناعي»"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "KI-Dienste öffnen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open AI Services"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abrir Servicios de IA"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ouvrir Services d'IA"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buka Layanan AI"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apri Servizi IA"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「AI サービス」を開く"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI 서비스 열기"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otwórz Usługi AI"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abrir Serviços de IA"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Відкрити «Сервіси AI»"
+          }
+        }
+      }
+    },
+    "Открыть Системные настройки": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "فتح إعدادات النظام"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Systemeinstellungen öffnen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open System Settings"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abrir Ajustes del Sistema"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ouvrir Réglages Système"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buka Pengaturan Sistem"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apri Impostazioni di Sistema"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "システム設定を開く"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "시스템 설정 열기"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otwórz Ustawienia systemowe"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abrir Ajustes do Sistema"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Відкрити Системні параметри"
           }
         }
       }
@@ -30924,6 +32216,82 @@
         }
       }
     },
+    "По желанию: чтобы ClaudePult был в строке меню сразу после входа.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اختياري: ليكون ClaudePult في شريط القوائم فور تسجيل الدخول."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Optional: damit ClaudePult gleich nach der Anmeldung in der Menüleiste ist."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Optional: so ClaudePult is in the menu bar right after you log in."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Opcional: para que ClaudePult esté en la barra de menús nada más iniciar sesión."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Facultatif : pour que ClaudePult soit dans la barre des menus dès la connexion."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Opsional: agar ClaudePult ada di bilah menu begitu Anda masuk."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Facoltativo: per avere ClaudePult nella barra dei menu subito dopo l’accesso."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "任意：ログイン直後から ClaudePult をメニューバーに表示します。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "선택 사항: 로그인하자마자 ClaudePult가 메뉴 막대에 있도록 합니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Opcjonalnie: aby ClaudePult był na pasku menu zaraz po zalogowaniu."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Opcional: para o ClaudePult estar na barra de menus logo após iniciar a sessão."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "За бажанням: щоб ClaudePult був у рядку меню одразу після входу."
+          }
+        }
+      }
+    },
     "Повторить": {
       "localizations": {
         "ar": {
@@ -32368,6 +33736,82 @@
         }
       }
     },
+    "Понадобятся, когда будет установлен Claude Code.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ستحتاج إليها عند تثبيت Claude Code."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nötig, sobald Claude Code installiert ist."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Needed once Claude Code is installed."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hará falta cuando Claude Code esté instalado."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nécessaire une fois Claude Code installé."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diperlukan setelah Claude Code terpasang."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Servirà quando Claude Code sarà installato."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude Code をインストールしたら必要になります。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude Code를 설치하면 필요합니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Potrzebne, gdy Claude Code będzie zainstalowany."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Necessário quando o Claude Code estiver instalado."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Знадобляться, коли буде встановлено Claude Code."
+          }
+        }
+      }
+    },
     "Порог %lld %%": {
       "localizations": {
         "ar": {
@@ -33352,6 +34796,158 @@
           "stringUnit": {
             "state": "translated",
             "value": "Перевірити"
+          }
+        }
+      }
+    },
+    "Проверить снова": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "التحقق مجددًا"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Erneut prüfen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Check Again"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Volver a comprobar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vérifier à nouveau"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Periksa lagi"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Controlla di nuovo"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "もう一度確認"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "다시 확인"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sprawdź ponownie"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verificar de novo"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Перевірити знову"
+          }
+        }
+      }
+    },
+    "Проверяю…": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "جارٍ التحقق…"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wird geprüft…"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Checking…"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comprobando…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vérification…"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Memeriksa…"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Controllo…"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "確認中…"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "확인 중…"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sprawdzam…"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verificando…"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Перевіряю…"
           }
         }
       }
@@ -35176,6 +36772,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Розробник (мій)"
+          }
+        }
+      }
+    },
+    "Разрешены.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مسموح بها."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Erlaubt."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Allowed."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Permitidas."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Autorisées."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diizinkan."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Consentite."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "許可されています。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "허용됨."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dozwolone."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Permitidas."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Дозволено."
           }
         }
       }
@@ -39672,6 +41344,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Список"
+          }
+        }
+      }
+    },
+    "Список сессий и «Claude ждёт ответа» работают через hooks: ClaudePult добавит свой в ~/.claude/settings.json, сохранив резервную копию.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "قائمة الجلسات و«Claude ينتظر الرد» تعملان عبر hooks: يضيف ClaudePult خاصته إلى ~/.claude/settings.json ويحتفظ بنسخة احتياطية."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sitzungsliste und „Claude wartet“ laufen über Hooks: ClaudePult fügt seinen in ~/.claude/settings.json ein und legt eine Sicherung an."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The session list and “Claude is waiting” work through hooks: ClaudePult adds its own to ~/.claude/settings.json and keeps a backup."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La lista de sesiones y «Claude espera respuesta» funcionan con hooks: ClaudePult añade el suyo a ~/.claude/settings.json y guarda una copia de seguridad."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La liste des sessions et « Claude attend une réponse » passent par des hooks : ClaudePult ajoute le sien à ~/.claude/settings.json et garde une sauvegarde."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Daftar sesi dan “Claude menunggu jawaban” bekerja lewat hooks: ClaudePult menambahkan miliknya ke ~/.claude/settings.json dan menyimpan cadangan."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L’elenco delle sessioni e «Claude attende risposta» funzionano tramite hooks: ClaudePult aggiunge il suo a ~/.claude/settings.json e conserva un backup."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "セッション一覧と「Claude が返答待ち」は hooks で動作します。ClaudePult は ~/.claude/settings.json に自分の hook を追加し、バックアップを残します。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "세션 목록과 ‘Claude가 답을 기다림’은 hooks로 작동합니다. ClaudePult가 ~/.claude/settings.json에 자신의 hook을 추가하고 백업을 남깁니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lista sesji i „Claude czeka na odpowiedź” działają przez hooks: ClaudePult doda swój do ~/.claude/settings.json i zachowa kopię zapasową."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A lista de sessões e “Claude aguardando resposta” funcionam com hooks: o ClaudePult adiciona o seu em ~/.claude/settings.json e guarda um backup."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Список сесій і «Claude чекає відповіді» працюють через hooks: ClaudePult додасть свій у ~/.claude/settings.json, зберігши резервну копію."
           }
         }
       }

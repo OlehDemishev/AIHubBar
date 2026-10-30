@@ -64,7 +64,7 @@ struct AssistantView: View {
             Button("Назад") { withAnimation(.snappy) { draft.wrappedValue.back() } }
                 .disabled(draft.wrappedValue.isFirst)
             Spacer()
-            if !draft.wrappedValue.isLast, draft.wrappedValue.step != .importSettings {
+            if !draft.wrappedValue.isLast, ![.welcome, .importSettings].contains(draft.wrappedValue.step) {
                 Button("Пропустить") { withAnimation(.snappy) { draft.wrappedValue.next() } }
                     .help("Оставить как в шаблоне")
             }
@@ -97,6 +97,7 @@ struct AssistantView: View {
     @ViewBuilder
     private func step(_ draft: Binding<AssistantDraft>) -> some View {
         switch draft.wrappedValue.step {
+        case .welcome: welcomeStep
         case .importSettings: importStep(draft)
         case .template: templateStep(draft)
         case .folder: folderStep(draft)
@@ -109,6 +110,17 @@ struct AssistantView: View {
         case .panel: panelStep(draft)
         case .menuBar: menuBarStep(draft)
         case .name: nameStep(draft)
+        }
+    }
+
+    /// The first screen on a new Mac: what ClaudePult is and what it still needs (SPEC-modes §9.8).
+    private var welcomeStep: some View {
+        VStack(alignment: .leading, spacing: 14) {
+            Text("ClaudePult живёт в строке меню (✦): проекты, лимиты подписки Claude, сессии и команды для AI — в одной панели. Сначала проверим, что всё готово, потом настроим первый режим.")
+                .fixedSize(horizontal: false, vertical: true)
+            ReadinessSection()
+            Text("Всё это можно сделать и позже: в Настройках и в окне «Помощь».")
+                .font(.caption).foregroundStyle(.secondary)
         }
     }
 

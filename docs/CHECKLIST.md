@@ -233,3 +233,14 @@ Panel snapshots: `defaults write com.demishev.claudepult DebugPanelSnapshot -boo
 | Assistant previews «Wideo» (pl), «Відео» (uk), «動画» (ja), «فيديو» (ar) fully translated; Arabic mirrors right-to-left | Live (`-AppleLanguages`) |
 | Git scanner plurals: Polish «1 plik / 21 plików», Ukrainian «21 файл / 54 файли» | Live (`--git-scan`) |
 | Reading by a native speaker (at least ja, ko, ar), the Arabic panel, menu bar and windows by eye | Oleh |
+
+## Onboarding (SPEC-modes §9.8)
+
+| Scenario | Checked |
+|---|---|
+| Readiness rows: service found / other service only / nothing / not yet scanned; hooks need Claude Code, outdated, missing; notifications allowed / not asked / denied; login item on / off (optional) / needs approval | Auto (`ReadinessTests`) |
+| First launch starts with «Добро пожаловать», then «Перенести настройки?»; later launches start at the template | Auto (`AssistantDraftTests`) |
+| `--readiness` on this Mac: all four rows done, exit 0; German and Arabic (mirrored) renders | Live |
+| 22 new strings in all 12 languages, format specifiers match | Script check |
+| A real first start on a clean account: the welcome screen, each button (install hooks, allow notifications, System Settings, login item, «Сервисы AI»), «Проверить снова» after coming back from System Settings | Oleh |
+| docs/GUIDE.md reads well for someone new | Oleh |

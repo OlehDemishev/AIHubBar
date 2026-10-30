@@ -99,6 +99,10 @@ struct HelpView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 18) {
+                VStack(alignment: .leading, spacing: 8) {
+                    Label("Готовность", systemImage: "checklist").font(.headline)
+                    ReadinessSection()
+                }
                 ForEach(HelpContent.sections) { section in
                     VStack(alignment: .leading, spacing: 8) {
                         Label(section.title, systemImage: section.systemImage)

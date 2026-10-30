@@ -4,10 +4,11 @@ import Foundation
 /// settings the assistant also asks about (menu bar, panel blocks, reminders). Nothing is saved until «Готово».
 struct AssistantDraft: Equatable, Sendable {
     enum Step: String, CaseIterable, Sendable {
-        case importSettings, template, folder, stages, metrics, calendar, service, commands, launch, panel, menuBar, name
+        case welcome, importSettings, template, folder, stages, metrics, calendar, service, commands, launch, panel, menuBar, name
 
         var title: String {
             switch self {
+            case .welcome: String(localized: "Добро пожаловать в ClaudePult")
             case .importSettings: String(localized: "Перенести настройки?")
             case .template: String(localized: "Чем вы занимаетесь?")
             case .folder: String(localized: "Где лежат проекты?")
@@ -74,7 +75,7 @@ struct AssistantDraft: Equatable, Sendable {
         self.menuBar = menuBar
         self.hiddenBlocks = hiddenBlocks
         self.reminderHours = reminderHours
-        step = firstLaunch ? .importSettings : .template
+        step = firstLaunch ? .welcome : .template
     }
 
     static let blank = Mode(
@@ -87,7 +88,7 @@ struct AssistantDraft: Equatable, Sendable {
     var steps: [Step] {
         Step.allCases.filter { step in
             switch step {
-            case .importSettings: firstLaunch
+            case .welcome, .importSettings: firstLaunch
             case .stages, .metrics, .calendar, .commands: mode.source.isFolders
             default: true
             }
