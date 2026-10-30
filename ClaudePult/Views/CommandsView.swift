@@ -6,53 +6,56 @@ struct CommandsView: View {
     @Environment(ProjectStore.self) private var store
     @Environment(\.openWindow) private var openWindow
     @State private var confirmCleanup = false
+    @AppStorage("collapsedBlocks") private var collapsedRaw = ""
 
     private let columns = [GridItem(.flexible(), spacing: 6), GridItem(.flexible(), spacing: 6)]
 
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
             HStack {
-                Text("Команды")
-                    .scaledFont(.caption, weight: .semibold)
-                    .foregroundStyle(.secondary)
+                BlockTitle(block: .commands, title: "Команды")
                 Spacer()
                 disk
             }
-
-            LazyVGrid(columns: columns, alignment: .leading, spacing: 6) {
-                ForEach(CommonCommand.allCases) { command in
-                    button(command)
-                }
-            }
-
-            if confirmCleanup {
-                cleanupConfirmation
-                    .transition(.opacity.combined(with: .offset(y: -4)))
-            }
-
-            ForEach(CommonCommand.allCases) { command in
-                if let result = commands.results[command] {
-                    Label {
-                        Text("\(command.title): \(result.text)")
-                            .lineLimit(2)
-                            .fixedSize(horizontal: false, vertical: true)
-                    } icon: {
-                        Image(systemName: result.isError ? "exclamationmark.triangle.fill" : "checkmark.circle")
-                            .foregroundStyle(result.isError ? .red : .green)
-                    }
-                    .scaledFont(.caption)
-                    if command == commands.cleanupOutput?.command {
-                        Button("Вывод очистки…", action: showCleanupOutput)
-                            .buttonStyle(.link)
-                            .scaledFont(.caption)
-                            .padding(.leading, 20)
-                    }
-                }
-            }
+            if !PanelBlock.collapsed(in: collapsedRaw).contains(.commands) { commandList }
         }
         .padding(.horizontal, 14)
         .padding(.vertical, 8)
         .animation(.snappy(duration: 0.2), value: confirmCleanup)
+    }
+
+    @ViewBuilder
+    private var commandList: some View {
+        LazyVGrid(columns: columns, alignment: .leading, spacing: 6) {
+            ForEach(CommonCommand.allCases) { command in
+                button(command)
+            }
+        }
+
+        if confirmCleanup {
+            cleanupConfirmation
+                .transition(.opacity.combined(with: .offset(y: -4)))
+        }
+
+        ForEach(CommonCommand.allCases) { command in
+            if let result = commands.results[command] {
+                Label {
+                    Text("\(command.title): \(result.text)")
+                        .lineLimit(2)
+                        .fixedSize(horizontal: false, vertical: true)
+                } icon: {
+                    Image(systemName: result.isError ? "exclamationmark.triangle.fill" : "checkmark.circle")
+                        .foregroundStyle(result.isError ? .red : .green)
+                }
+                .scaledFont(.caption)
+                if command == commands.cleanupOutput?.command {
+                    Button("Вывод очистки…", action: showCleanupOutput)
+                        .buttonStyle(.link)
+                        .scaledFont(.caption)
+                        .padding(.leading, 20)
+                }
+            }
+        }
     }
 
     @ViewBuilder

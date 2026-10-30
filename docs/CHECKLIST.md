@@ -273,3 +273,10 @@ Panel snapshots: `defaults write com.demishev.claudepult DebugPanelSnapshot -boo
 | Menu bar: the icon element's option is «Символ», not a second «Значок» | Code |
 | Assistant: no «Пропустить» on the template step; Help: «Всё готово · Подробнее» when nothing is left | Live (Help capture) |
 | Reordering menu bar elements by dragging | Not done: arrows stay (drag in a grouped Form is unreliable) |
+
+## Collapsible panel blocks (UI review, 2026-10-30)
+
+| Scenario | Checked |
+|---|---|
+| A click on a block's title folds it; the choice is kept (`collapsedBlocks`) | Auto (`CollapsedBlocksTests`) + live (panel snapshot) |
+| Folded «Лимиты» still show session and week %, «Сессии» keep «ждут ответа», «Ближайшее» shows the count (red if overdue), «Проекты» the count | Live (panel snapshot) |

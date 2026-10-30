@@ -5,14 +5,19 @@ import SwiftUI
 struct UpcomingView: View {
     @Environment(CalendarStore.self) private var calendar
     @Environment(\.openWindow) private var openWindow
+    @AppStorage("collapsedBlocks") private var collapsedRaw = ""
 
     var body: some View {
         let entries = calendar.upcoming()
+        let collapsed = PanelBlock.collapsed(in: collapsedRaw).contains(.calendar)
         VStack(alignment: .leading, spacing: 4) {
             HStack {
-                Text("Ближайшее")
-                    .scaledFont(.caption, weight: .semibold)
-                    .foregroundStyle(.secondary)
+                BlockTitle(block: .calendar, title: "Ближайшее")
+                if collapsed, !entries.isEmpty {
+                    Text(verbatim: "\(entries.count)")
+                        .scaledFont(.caption)
+                        .foregroundStyle(entries.contains { $0.isOverdue() } ? .red : .secondary)
+                }
                 Spacer()
                 Button("Календарь") {
                     NSApp.activate()
@@ -21,36 +26,38 @@ struct UpcomingView: View {
                 .buttonStyle(.link)
                 .scaledFont(.caption)
             }
-            if entries.isEmpty {
-                Text("На неделю дат нет.")
-                    .scaledFont(.caption)
-                    .foregroundStyle(.tertiary)
-            }
-            ForEach(entries.prefix(8)) { entry in
-                Button {
-                    NSWorkspace.shared.open(URL(fileURLWithPath: entry.openPath))
-                } label: {
-                    HStack(spacing: 6) {
-                        Image(systemName: entry.kind.symbol)
-                            .frame(width: 14)
-                            .foregroundStyle(entry.isOverdue() ? .red : .secondary)
-                        Text(entry.title).lineLimit(1)
-                        if let detail = entry.detail, !detail.isEmpty {
-                            Text(detail).foregroundStyle(.secondary).lineLimit(1)
-                        }
-                        Spacer(minLength: 4)
-                        Text(CalendarText.relative(entry.date, hasTime: entry.hasTime))
-                            .foregroundStyle(entry.isOverdue() ? .red : .secondary)
-                            .lineLimit(1)
-                    }
-                    .scaledFont(.caption)
-                    .contentShape(Rectangle())
+            if !collapsed {
+                if entries.isEmpty {
+                    Text("На неделю дат нет.")
+                        .scaledFont(.caption)
+                        .foregroundStyle(.tertiary)
                 }
-                .buttonStyle(.plain)
-                .help("\(entry.kind.title) · \(entry.modeName) — открыть")
-            }
-            if entries.count > 8 {
-                Text("и ещё \(entries.count - 8)…").scaledFont(.caption2).foregroundStyle(.tertiary)
+                ForEach(entries.prefix(8)) { entry in
+                    Button {
+                        NSWorkspace.shared.open(URL(fileURLWithPath: entry.openPath))
+                    } label: {
+                        HStack(spacing: 6) {
+                            Image(systemName: entry.kind.symbol)
+                                .frame(width: 14)
+                                .foregroundStyle(entry.isOverdue() ? .red : .secondary)
+                            Text(entry.title).lineLimit(1)
+                            if let detail = entry.detail, !detail.isEmpty {
+                                Text(detail).foregroundStyle(.secondary).lineLimit(1)
+                            }
+                            Spacer(minLength: 4)
+                            Text(CalendarText.relative(entry.date, hasTime: entry.hasTime))
+                                .foregroundStyle(entry.isOverdue() ? .red : .secondary)
+                                .lineLimit(1)
+                        }
+                        .scaledFont(.caption)
+                        .contentShape(Rectangle())
+                    }
+                    .buttonStyle(.plain)
+                    .help("\(entry.kind.title) · \(entry.modeName) — открыть")
+                }
+                if entries.count > 8 {
+                    Text("и ещё \(entries.count - 8)…").scaledFont(.caption2).foregroundStyle(.tertiary)
+                }
             }
         }
         .padding(.horizontal, 14)
