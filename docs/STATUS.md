@@ -5,23 +5,29 @@
 **Updated:** 2026-10-30
 
 **Now:**
-- PR `docs/spec-content` — draft spec for a «texts» mode (writers, video scripts) — waiting for Oleh's answers to its open questions
+- PR `docs/spec-content` — spec `docs/SPEC-modes.md`: modes built from blocks, built-in templates, setup assistant, calendar, fully configurable menu bar — agreed with Oleh, waiting for merge
 
 **Next:**
-- After Oleh answers docs/SPEC-content.md §7: stage 1 of the texts mode (pluggable project sources, work without _daily-report)
+- docs/SPEC-modes.md §9 stage 1: mode model (JSON), current setup as mode «Разработчик (GitHub)», switcher in the panel, «Режимы» settings tab — no behaviour change for Oleh
+- Then: §9 stage 2 menu bar builder, 3 folder projects + task templates, 4 calendar, 5 templates, 6 setup assistant
 - Fix whatever Oleh finds in docs/CHECKLIST.md
 
 **Needs Oleh:**
-- answer the open questions in docs/SPEC-content.md §7 (for whom, where texts live, file formats, web search for fact checks, default stages/templates, name of the mode)
+- docs/SPEC-modes.md §10: for whom (only Oleh or others), prompt texts of the built-in templates before stage 5
 - try the «Внешний вид» settings tab (theme, width, density not checked by eye)
 - optional, in _daily-report (not changed by ClaudePult): report.py/bot.py could read `~/Library/Application Support/ClaudePult/usage.json` (`five_hour`, `seven_day`, `updated`) for a /limits bot command or a limits line in the report
 - go through the «Oleh» rows of docs/CHECKLIST.md (buttons inside the panel, Settings, notifications, Telegram messages) — automation cannot click inside ClaudePult
-- free disk space is ~12 GB (< 20 GB): «Очистка: выполнить» when no build is running
 - hooks are installed in ~/.claude/settings.json; backup of the original: ~/.claude/settings.json.claudepult-backup-20261029T192827
 - delete or archive the old repo `OlehDemishev/ClaudeBar`; turn on start at login if wanted
 <!-- summary:end -->
 
-## 2026-10-30 — Spec draft: texts mode (branch `docs/spec-content`)
+## 2026-10-30 — Spec: modes, templates, setup assistant (branch `docs/spec-content`)
+
+Done: after discussing with Oleh the texts-mode draft became `docs/SPEC-modes.md`: ClaudePult works in modes assembled from blocks (project source, card, stages, metrics, Claude commands, where to run, background permissions, calendar, panel blocks, common commands, menu bar additions); built-in templates «Разработчик (GitHub)» (current behaviour), «Видео», «Тексты», «Ресёрч», «Соцсети», «Свой»; a setup assistant that builds a mode block by block with a live preview; a mode switcher in the panel; a publishing calendar in the first wave (project dates, Markdown content plan, «Ближайшее», calendar window, reminders); a fully configurable menu bar (elements, formats, conditions, order, presets). Stages in §9.
+Checked: docs only.
+Left: Oleh's merge; open questions in §10.
+
+## 2026-10-30 — Spec draft: texts mode, superseded (branch `docs/spec-content`)
 
 Done: `docs/SPEC-content.md` — draft spec for people who write texts with Claude (video scripts, posts): what of ClaudePult already helps them (limits, background runs, queue, notifications), what must change (optional `_daily-report`/git, pluggable project sources, a mode setting), first version (folder projects with `проект.md`, stages, deadlines, word count and running time, task templates with results saved next to the source, narrower background permissions without Bash, hidden draft versions), later ideas (quick prompt from any app, batch tasks, publishing calendar), open questions and stages.
 Checked: docs only; no code changed.
