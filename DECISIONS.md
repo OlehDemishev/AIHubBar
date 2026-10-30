@@ -2,6 +2,10 @@
 
 Decisions made where the spec is silent or does not match reality. Newest at the top.
 
+## 2026-10-30 — Usage endpoint: 429 backoff
+
+The usage endpoint started answering HTTP 429 (seen at the 1-minute pace plus app restarts and command-line checks). It sends `Retry-After: 0` while still refusing, so that header is only trusted when it asks for longer than our own pause. Now: after a 429 no request is made for 5, 10, 20, 40, then 60 minutes (or longer if `Retry-After` says so); the panel says «Сервер лимитов просит запрашивать реже — следующая попытка в HH:mm» and the refresh button waits too. The active interval is 2 minutes instead of the spec's 1 (idle stays 5). The last snapshot is kept in `usage-snapshot.json` (up to 24 h), so a restart shows the limits at once and does not fetch again if the last fetch is younger than the active interval.
+
 ## 2026-10-30 — Modes, stage 1 (SPEC-modes §9.1)
 
 **A mode is applied to `AppSettings`.** Each mode stores its own blocks (JSON in `Application Support/ClaudePult/modes/`); the active mode pushes the ones that already exist in the app — projects folder, `_daily-report` folder, launch mode, the projects and common-commands blocks — into `AppSettings`, which the rest of the app keeps reading. That keeps stage 1 free of behaviour changes; later stages read the mode directly where a block has no `AppSettings` counterpart (stages, templates, calendar).

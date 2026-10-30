@@ -5,6 +5,8 @@ enum UsageError: LocalizedError, Equatable {
     case expired
     case keychainDenied
     case http(Int)
+    /// HTTP 429: the server asks to slow down; `retryAfter` from its `Retry-After` header, if any.
+    case rateLimited(retryAfter: TimeInterval?)
     case network(Int)
     case badResponse
 
@@ -14,6 +16,7 @@ enum UsageError: LocalizedError, Equatable {
         case .keychainDenied: "Нет доступа к связке ключей: разрешите ClaudePult читать «Claude Code-credentials»"
         case let .http(code) where code == 401 || code == 403: "Сессия Claude Code истекла (HTTP \(code)): claude → /login"
         case let .http(code): "Лимиты недоступны (HTTP \(code))"
+        case .rateLimited: "Сервер лимитов просит запрашивать реже"
         case let .network(code): "Лимиты недоступны: нет связи (\(code))"
         case .badResponse: "Лимиты недоступны: ответ в неизвестном формате"
         }
@@ -74,6 +77,10 @@ enum UsageService {
         do {
             let (data, response) = try await URLSession.shared.data(for: request)
             let status = (response as? HTTPURLResponse)?.statusCode ?? 0
+            if status == 429 {
+                let header = (response as? HTTPURLResponse)?.value(forHTTPHeaderField: "Retry-After")
+                throw UsageError.rateLimited(retryAfter: Self.retryAfter(header))
+            }
             guard status == 200 else { throw UsageError.http(status) }
             return data
         } catch let error as UsageError {
@@ -81,6 +88,17 @@ enum UsageService {
         } catch let error as URLError {
             throw UsageError.network(error.code.rawValue)
         }
+    }
+
+    /// `Retry-After` is either seconds or an HTTP date (RFC 9110 §10.2.3).
+    static func retryAfter(_ header: String?, now: Date = .now) -> TimeInterval? {
+        guard let header = header?.trimmingCharacters(in: .whitespaces), !header.isEmpty else { return nil }
+        if let seconds = TimeInterval(header) { return max(0, seconds) }
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = TimeZone(identifier: "GMT")
+        formatter.dateFormat = "EEE, dd MMM yyyy HH:mm:ss zzz"
+        return formatter.date(from: header).map { max(0, $0.timeIntervalSince(now)) }
     }
 
     static func fetch() async throws -> UsageSnapshot {

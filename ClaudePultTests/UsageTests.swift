@@ -230,3 +230,31 @@ struct MenuBarStateTests {
         #expect(try decoder.decode(LaunchController.QueuedLaunch.self, from: encoder.encode(item)) == item)
     }
 }
+
+struct UsageBackoffTests {
+    @Test func retryAfterHeader() {
+        let now = Date(timeIntervalSince1970: 1_793_300_000)
+        #expect(UsageService.retryAfter("120", now: now) == 120)
+        #expect(UsageService.retryAfter(" 0 ", now: now) == 0)
+        #expect(UsageService.retryAfter(nil, now: now) == nil)
+        #expect(UsageService.retryAfter("soon", now: now) == nil)
+        let date = Date(timeIntervalSince1970: 1_793_300_000 + 300)
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = TimeZone(identifier: "GMT")
+        formatter.dateFormat = "EEE, dd MMM yyyy HH:mm:ss zzz"
+        #expect(UsageService.retryAfter(formatter.string(from: date), now: now) == 300)
+    }
+
+    @MainActor
+    @Test func backoffGrowsAndIsCapped() {
+        #expect(UsageStore.backoff(strike: 1, retryAfter: nil) == 300)
+        #expect(UsageStore.backoff(strike: 2, retryAfter: nil) == 600)
+        #expect(UsageStore.backoff(strike: 4, retryAfter: nil) == 2400)
+        #expect(UsageStore.backoff(strike: 9, retryAfter: nil) == 3600)
+        #expect(UsageStore.backoff(strike: 1, retryAfter: 0) == 300, "Retry-After: 0 is not trusted")
+        #expect(UsageStore.backoff(strike: 1, retryAfter: 900) == 900)
+        #expect(UsageStore.backoff(strike: 3, retryAfter: 600) == 1200)
+        #expect(UsageStore.backoff(strike: 1, retryAfter: 99_999) == 3600)
+    }
+}
