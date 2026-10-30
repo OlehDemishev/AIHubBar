@@ -1,10 +1,10 @@
 import AppKit
 import SwiftUI
 
-/// Settings window, one tab per area (Oleh's request): general, appearance, Claude, sessions, limits.
+/// Settings window, one tab per area: general, modes, appearance, Claude, sessions, limits.
 struct SettingsView: View {
     enum Tab: String, CaseIterable {
-        case general, appearance, claude, sessions, limits
+        case general, modes, appearance, claude, sessions, limits
     }
 
     @Environment(AppSettings.self) private var settings
@@ -15,6 +15,9 @@ struct SettingsView: View {
             GeneralSettings()
                 .tabItem { Label("Основные", systemImage: "gearshape") }
                 .tag(Tab.general)
+            ModesSettings()
+                .tabItem { Label("Режимы", systemImage: "square.stack.3d.up") }
+                .tag(Tab.modes)
             AppearanceSettings()
                 .tabItem { Label("Внешний вид", systemImage: "paintbrush") }
                 .tag(Tab.appearance)
@@ -59,6 +62,7 @@ private struct Footnote: View {
 // MARK: - Основные
 
 private struct GeneralSettings: View {
+    @Environment(ModeStore.self) private var modes
     @Environment(NotificationPermission.self) private var notifications
     @Environment(LoginItemController.self) private var loginItem
     @Environment(AppSettings.self) private var settings
@@ -103,14 +107,15 @@ private struct GeneralSettings: View {
             }
 
             Section {
-                FolderField(title: "Папка проектов", path: $settings.projectsDirectory,
-                            defaultPath: AppSettings.defaultProjectsDirectory)
-                FolderField(title: "Папка _daily-report", path: $settings.dailyReportDirectory,
-                            defaultPath: AppSettings.defaultDailyReportDirectory)
+                ImportConfirmation()
+                HStack {
+                    Button("Экспорт настроек…") { SettingsFiles.save(modes.exportBundle(), suggestedName: "ClaudePult") }
+                    Button("Импорт…") { SettingsFiles.chooseImport(into: modes) }
+                }
             } header: {
-                Text("Пути")
+                Text("Перенос и обмен")
             } footer: {
-                Footnote(text: "Данные о проектах берутся из report.py в папке _daily-report; там же отчёты, очистка и бот Telegram.")
+                Footnote(text: "Один файл .claudepult: все режимы, внешний вид, строка меню, пороги. Без ключей, токенов и журналов. Двойной клик по такому файлу открывает импорт. Папки проектов — на вкладке «Режимы».")
             }
 
             Section {
@@ -130,11 +135,6 @@ private struct GeneralSettings: View {
             loginItem.refresh()
             notifications.refresh()
         }
-        .onChange(of: settings.projectsDirectory) {
-            Task { await store.refresh() }
-            hooks.refresh()
-        }
-        .onChange(of: settings.dailyReportDirectory) { Task { await store.refresh() } }
     }
 
     private var notificationsText: String {
@@ -180,7 +180,7 @@ private struct AppearanceSettings: View {
             }
 
             Section {
-                ForEach(PanelBlock.allCases) { block in
+                ForEach([PanelBlock.limits, .sessions]) { block in
                     Toggle(block.title, isOn: Binding(
                         get: { settings.shows(block) },
                         set: { settings.setShows(block, $0) }
@@ -189,7 +189,7 @@ private struct AppearanceSettings: View {
             } header: {
                 Text("Блоки панели")
             } footer: {
-                Footnote(text: "Скрытый блок не пропадает из работы: сессии и лимиты отслеживаются, уведомления приходят.")
+                Footnote(text: "Скрытый блок не пропадает из работы: сессии и лимиты отслеживаются, уведомления приходят. Проекты и общие команды включаются у каждого режима на вкладке «Режимы».")
             }
 
             Section("Строка меню") {
@@ -237,12 +237,8 @@ private struct ClaudeSettings: View {
                         .textFieldStyle(.roundedBorder)
                         .frame(width: 280)
                 }
-                Picker("Режим запуска", selection: $settings.defaultLaunchMode) {
-                    Text("Спрашивать").tag(LaunchMode?.none)
-                    ForEach(LaunchMode.allCases, id: \.self) { Text($0.title).tag(LaunchMode?.some($0)) }
-                }
             } footer: {
-                Footnote(text: "Путь пустой — искать в /opt/homebrew/bin, /usr/local/bin, ~/.local/bin, ~/.claude/local. «Терминал» открывает новое окно (при первом запуске macOS спросит разрешение на управление Терминалом).")
+                Footnote(text: "Путь пустой — искать в /opt/homebrew/bin, /usr/local/bin, ~/.local/bin, ~/.claude/local. Где запускать команды (Терминал / Фон / спрашивать) — у каждого режима на вкладке «Режимы».")
             }
 
             Section {
@@ -339,47 +335,6 @@ private struct LimitSettings: View {
 }
 
 // MARK: - Helpers
-
-/// A folder path with «Выбрать…» (NSOpenPanel) and a reset to the default.
-private struct FolderField: View {
-    let title: String
-    @Binding var path: String
-    let defaultPath: String
-
-    var body: some View {
-        LabeledContent(title) {
-            HStack(spacing: 6) {
-                Text((path as NSString).abbreviatingWithTildeInPath)
-                    .lineLimit(1)
-                    .truncationMode(.middle)
-                    .foregroundStyle(FileManager.default.fileExists(atPath: path) ? .primary : Color.red)
-                    .help(path)
-                Button("Выбрать…", action: choose)
-                if path != defaultPath {
-                    Button {
-                        path = defaultPath
-                    } label: {
-                        Image(systemName: "arrow.uturn.backward")
-                    }
-                    .buttonStyle(.borderless)
-                    .help("По умолчанию: \((defaultPath as NSString).abbreviatingWithTildeInPath)")
-                }
-            }
-        }
-    }
-
-    private func choose() {
-        let panel = NSOpenPanel()
-        panel.canChooseDirectories = true
-        panel.canChooseFiles = false
-        panel.allowsMultipleSelection = false
-        panel.directoryURL = URL(fileURLWithPath: path)
-        NSApp.activate()
-        if panel.runModal() == .OK, let url = panel.url {
-            path = url.path
-        }
-    }
-}
 
 enum SettingsParsing {
     /// Percentages between 1 and 100 from free text, sorted and de-duplicated.

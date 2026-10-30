@@ -2,6 +2,18 @@
 
 Decisions made where the spec is silent or does not match reality. Newest at the top.
 
+## 2026-10-30 — Modes, stage 1 (SPEC-modes §9.1)
+
+**A mode is applied to `AppSettings`.** Each mode stores its own blocks (JSON in `Application Support/ClaudePult/modes/`); the active mode pushes the ones that already exist in the app — projects folder, `_daily-report` folder, launch mode, the projects and common-commands blocks — into `AppSettings`, which the rest of the app keeps reading. That keeps stage 1 free of behaviour changes; later stages read the mode directly where a block has no `AppSettings` counterpart (stages, templates, calendar).
+
+**Migration.** On the first start without modes, the current settings become one mode, source «git via report.py», common commands `_daily-report`, card STATUS.md. Its default name is the neutral «Разработчик (мой)» (the macOS account's full name does not reliably give a first name — here it is «Demishev Oleh»); Oleh's mode was renamed to «Разработчик — Олег».
+
+**Moved settings.** Projects folder and `_daily-report` folder left Settings → Основные, the launch mode left Settings → Claude, and the projects/commands toggles left «Внешний вид»: they are per mode now (Settings → «Режимы»). Limits and sessions stay global.
+
+**Files.** `*.claudepult` is JSON (`format`: `claudepult-settings` for everything, `claudepult-mode` for one mode, `version`), declared as a UTI (`com.demishev.claudepult.settings`, conforms to JSON) with ClaudePult as owner, so a double click opens the import. Home paths are written as `~/…`; nothing secret is in the file (keys and tokens live only in the Keychain). Decoding is tolerant: unknown blocks or values from newer versions fall back to defaults instead of failing. Import «Добавить режимы» gives modes fresh ids and unique names; «Заменить все настройки» replaces modes, general settings, appearance and the menu bar setting. Folders missing on this Mac are shown in red with «Выбрать…».
+
+**Panel switcher** appears only with two or more enabled modes; at least one mode always stays enabled and one always exists.
+
 ## 2026-10-30 — Clickable notifications and the notification permission
 
 **Found:** notifications had never been shown since stage 4. `requestAuthorization` returned `UNErrorDomain 1` («Notifications are not allowed for this application») — the first system prompt had been declined or dismissed, and macOS does not ask again. The app cached the refusal and stayed silent: no «ждёт ответа», no background results, no limit alerts. Ad-hoc signing is not the cause: after Oleh switched notifications on in System Settings, the same build reports `authorized` and banners arrive.

@@ -39,6 +39,18 @@ targets:
         CFBundleDevelopmentRegion: ru
         CFBundleLocalizations: [ru]
         NSAppleEventsUsageDescription: "ClaudePult открывает окна Терминала и запускает в них Claude Code для ваших проектов."
+        # *.claudepult — exported settings and modes (SPEC-modes §12).
+        UTExportedTypeDeclarations:
+          - UTTypeIdentifier: com.demishev.claudepult.settings
+            UTTypeDescription: Настройки ClaudePult
+            UTTypeConformsTo: [public.json, public.data]
+            UTTypeTagSpecification:
+              public.filename-extension: [claudepult]
+        CFBundleDocumentTypes:
+          - CFBundleTypeName: Настройки ClaudePult
+            CFBundleTypeRole: Viewer
+            LSHandlerRank: Owner
+            LSItemContentTypes: [com.demishev.claudepult.settings]
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.demishev.claudepult

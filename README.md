@@ -23,6 +23,8 @@ Data refreshes at launch, on panel open when older than 60 s, every 5 min (`--no
 
 **Widget** «Лимиты Claude» (right-click the desktop → «Изменить виджеты…» → ClaudePult): small — session % ring with the reset countdown; medium — session and week bars. It reads `usage.json`, refreshed whenever ClaudePult updates the limits.
 
+**Режимы** — ClaudePult works in modes assembled from blocks (docs/SPEC-modes.md). The current setup is the mode «Разработчик — Олег» (projects from `report.py`, `_daily-report` commands); more modes come with the next stages. With more than one mode enabled, a switcher appears at the top of the panel; Settings → «Режимы» lists them (enable, order, duplicate, export, import, delete) and edits a mode's folders, launch mode and blocks. Settings → Основные → «Экспорт настроек…» saves everything to a `*.claudepult` file (no keys or tokens; home paths as `~`); double-clicking such a file in Finder imports it («Заменить все настройки» or «Добавить режимы»). Oleh's settings: `docs/modes/oleh-developer.claudepult`.
+
 ## Install
 
 Requirements: macOS 14+ (developed on macOS 27, Apple Silicon), Xcode with Swift 6 (developed with 27.1), `brew install xcodegen`.
@@ -80,6 +82,7 @@ The app binary runs headless commands instead of the UI: `~/Applications/ClaudeP
 | `--command report\|summary\|cleanup-check\|cleanup` | run a common command here and print its result |
 | `--app-command <command>\|help\|cleanup-output\|settings` | ask the running app to run a command or open a window |
 | `--hooks status\|install\|uninstall` | session hooks |
+| `--modes` · `--export-settings <file>` | list modes (* = current) · export all settings (import: open the file) |
 | `--notifications-status` · `--app-command test-notification` | notification permission · send a test notification |
 | `--usage` · `--usage-raw` · `--token-usage` | subscription limits (raw response; the token is never printed) · per-project breakdown |
 | `--sessions` · `--show-session <id>` | list sessions · bring a session's Terminal tab forward |

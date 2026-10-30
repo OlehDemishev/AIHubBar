@@ -10,6 +10,7 @@ import UserNotifications
 /// - `ClaudePult --app-command <command>|help|cleanup-output` (asks the running app)
 /// - `ClaudePult --usage`, `ClaudePult --usage-raw` (subscription limits; the token is never printed), `--token-usage`
 /// - `ClaudePult --notifications-status`
+/// - `ClaudePult --modes`, `ClaudePult --export-settings <file.claudepult>` (import: open the file in Finder)
 @MainActor
 enum CommandLineTool {
     /// Returns an exit code if the arguments contain a command, `nil` to start the app normally.
@@ -82,6 +83,25 @@ enum CommandLineTool {
                 }
                 print("scanned \(records.count) messages in \(String(format: "%.1f", Date.now.timeIntervalSince(started))) s")
                 return 0
+            }
+        }
+        if arguments.contains("--modes") {
+            let modes = ModeStore(settings: AppSettings())
+            for mode in modes.modes {
+                let flags = (mode.id == modes.currentID ? "*" : " ") + (modes.enabledIDs.contains(mode.id) ? "on " : "off")
+                print("\(flags)  \(mode.name)  [\(mode.template)]  \(mode.source.title): \(mode.source.folder ?? "-")")
+            }
+            return 0
+        }
+        if let index = arguments.firstIndex(of: "--export-settings"), index + 1 < arguments.count {
+            let url = URL(fileURLWithPath: (arguments[index + 1] as NSString).expandingTildeInPath)
+            do {
+                try ModeStore.encode(ModeStore(settings: AppSettings()).exportBundle()).write(to: url, options: .atomic)
+                print("exported to \(url.path)")
+                return 0
+            } catch {
+                printError("error: \(error.localizedDescription)")
+                return 1
             }
         }
         if arguments.contains("--notifications-status") {
