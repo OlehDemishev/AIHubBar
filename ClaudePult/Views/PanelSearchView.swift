@@ -7,6 +7,7 @@ enum PanelSearch {
         case project(id: String, name: String, detail: String)
         case quickCommand(id: String, title: String)
         case command(CommonCommand)
+        case prompt(id: String, title: String)
 
         var id: String {
             switch self {
@@ -14,6 +15,7 @@ enum PanelSearch {
             case let .project(id, _, _): "p-" + id
             case let .quickCommand(id, _): "q-" + id
             case let .command(command): "c-" + command.rawValue
+            case let .prompt(id, _): "m-" + id
             }
         }
     }
@@ -26,7 +28,7 @@ enum PanelSearch {
 
     static let limit = 12
 
-    static func results(_ query: String, sessions: [Item], projects: [Item], quickCommands: [Item], commands: [CommonCommand]) -> [Result] {
+    static func results(_ query: String, sessions: [Item], projects: [Item], quickCommands: [Item], commands: [CommonCommand], prompts: [Item] = []) -> [Result] {
         let query = query.trimmingCharacters(in: .whitespaces)
         guard !query.isEmpty else { return [] }
         // Typed on the wrong keyboard layout («ыгкм» for «surv») counts too.
@@ -36,6 +38,7 @@ enum PanelSearch {
         }
         var results: [Result] = []
         results += sessions.filter(matches).map { .session(id: $0.id, project: $0.name, detail: $0.detail) }
+        results += prompts.filter(matches).map { .prompt(id: $0.id, title: $0.name) }
         results += projects.filter(matches).map { .project(id: $0.id, name: $0.name, detail: $0.detail) }
         results += quickCommands.filter(matches).map { .quickCommand(id: $0.id, title: $0.name) }
         // The destructive cleanup keeps its confirmation in the commands block.
@@ -61,6 +64,7 @@ enum PanelSearch {
 struct PanelSearchField: View {
     @Binding var query: String
     var focused: FocusState<Bool>.Binding
+    var placeholder: String?
     var onCancel: (() -> Void)?
     let onSubmit: () -> Void
 
@@ -68,7 +72,7 @@ struct PanelSearchField: View {
         HStack(spacing: 6) {
             Image(systemName: "magnifyingglass")
                 .foregroundStyle(.secondary)
-            TextField("Найти проект, сессию, команду…", text: $query)
+            TextField(placeholder ?? String(localized: "Найти проект, сессию, команду…"), text: $query)
                 .textFieldStyle(.plain)
                 .focused(focused)
                 .onSubmit(onSubmit)
@@ -136,6 +140,7 @@ struct PanelSearchResults: View {
         case .project: "folder"
         case .quickCommand: "bolt"
         case let .command(command): command.systemImage
+        case .prompt: "text.bubble"
         }
     }
 
@@ -145,6 +150,7 @@ struct PanelSearchResults: View {
         case let .project(_, name, _): name
         case let .quickCommand(_, title): title
         case let .command(command): command.title
+        case let .prompt(_, title): title
         }
     }
 
@@ -153,6 +159,7 @@ struct PanelSearchResults: View {
         case let .session(_, _, detail), let .project(_, _, detail): detail
         case .quickCommand: String(localized: "быстрая команда")
         case .command: String(localized: "команда")
+        case .prompt: String(localized: "свой промпт")
         }
     }
 
@@ -161,6 +168,7 @@ struct PanelSearchResults: View {
         case .session: String(localized: "Показать сессию")
         case .project: String(localized: "Раскрыть проект в панели")
         case .quickCommand, .command: String(localized: "Запустить")
+        case .prompt: String(localized: "Выбрать проект и запустить")
         }
     }
 }
@@ -177,8 +185,18 @@ struct QuickSearchWindow: View {
     @Environment(ModeStore.self) private var modes
     @Environment(QuickToolsController.self) private var quickTools
     @Environment(CommandStore.self) private var commands
+    @Environment(LaunchController.self) private var launcher
     @State private var query = ""
     @FocusState private var focused: Bool
+    /// A saved prompt was chosen: the list is now projects to run it in.
+    @State private var prompt: SavedPrompt?
+
+    private var promptProjects: [Project] {
+        let query = query.trimmingCharacters(in: .whitespaces)
+        guard !query.isEmpty else { return store.projects }
+        let queries = [query, PanelSearch.swappedLayout(query)]
+        return store.projects.filter { project in queries.contains { project.name.localizedStandardContains($0) } }
+    }
 
     private var results: [PanelSearch.Result] {
         let sessionItems = SessionRow.rows(sessions: sessions.items, runs: runs.runs).map {
@@ -190,24 +208,44 @@ struct QuickSearchWindow: View {
         let quick = modes.installedModules.contains(.quickCommands)
             ? settings.quickCommands.map { PanelSearch.Item(id: $0.id, name: $0.title, detail: "") } : []
         let common = modes.panelModules.contains(.reports) ? CommonCommand.allCases : []
-        return PanelSearch.results(query, sessions: sessionItems, projects: projectItems, quickCommands: quick, commands: common)
+        // Prompts run in a git project: not offered where the profile's projects are folders.
+        let prompts = folders.isActive ? [] : settings.savedPrompts.map { PanelSearch.Item(id: $0.id, name: $0.title, detail: $0.text) }
+        return PanelSearch.results(query, sessions: sessionItems, projects: projectItems, quickCommands: quick, commands: common, prompts: prompts)
     }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            PanelSearchField(query: $query, focused: $focused, onCancel: { dismiss() }) {
-                if let first = results.first { activate(first) }
-            }
-            if !query.isEmpty {
-                PanelSearchResults(results: results, activate: activate)
+            if let prompt {
+                PanelSearchField(query: $query, focused: $focused, placeholder: String(localized: "Проект для «\(prompt.title)»…"),
+                                 onCancel: { self.prompt = nil }) {
+                    if let first = promptProjects.first { run(prompt, in: first) }
+                }
+                PromptProjectList(projects: Array(promptProjects.prefix(PanelSearch.limit))) { run(prompt, in: $0) }
+            } else {
+                PanelSearchField(query: $query, focused: $focused, onCancel: { dismiss() }) {
+                    if let first = results.first { activate(first) }
+                }
+                if !query.isEmpty {
+                    PanelSearchResults(results: results, activate: activate)
+                }
             }
         }
         .padding(.vertical, 10)
         .frame(width: 460)
         .onAppear {
             query = ""
+            prompt = nil
             focused = true
         }
+    }
+
+    /// Fills the placeholders and starts Claude with the default launch mode (Terminal when it asks each time).
+    private func run(_ prompt: SavedPrompt, in project: Project) {
+        let file = prompt.needsFile ? FinderSelection.path() : nil
+        let text = prompt.filled(project: project.name, branch: project.branch, file: file)
+        launcher.launch(.customTask(text), in: project, mode: settings.defaultLaunchMode ?? .terminal)
+        AppLog.info("Saved prompt «\(prompt.title)» started in \(project.name)")
+        dismiss()
     }
 
     private func activate(_ result: PanelSearch.Result) {
@@ -220,7 +258,55 @@ struct QuickSearchWindow: View {
             if let command = settings.quickCommands.first(where: { $0.id == id }) { quickTools.run(command) }
         case let .command(command):
             commands.run(command)
+        case let .prompt(id, _):
+            // The next step picks the project; the window stays open.
+            prompt = settings.savedPrompts.first { $0.id == id }
+            query = ""
+            return
         }
         dismiss()
+    }
+}
+
+/// Step two of a saved prompt: which project it runs in (first one on ↵).
+private struct PromptProjectList: View {
+    let projects: [Project]
+    let choose: (Project) -> Void
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 2) {
+            if projects.isEmpty {
+                Text("Нет такого проекта").scaledFont(.callout).foregroundStyle(.secondary).padding(10)
+            }
+            ForEach(Array(projects.enumerated()), id: \.element.id) { index, project in
+                Button { choose(project) } label: {
+                    HStack(spacing: 8) {
+                        Image(systemName: "folder").foregroundStyle(.secondary).frame(width: 16)
+                        Text(project.name).fontWeight(.medium).lineLimit(1)
+                        Text(project.branch ?? "").scaledFont(.callout).foregroundStyle(.secondary).lineLimit(1)
+                        Spacer(minLength: 4)
+                        if index == 0 { Text(verbatim: "↵").foregroundStyle(.tertiary) }
+                    }
+                    .padding(.horizontal, 8)
+                    .padding(.vertical, 5)
+                    .background(RoundedRectangle(cornerRadius: 7).fill(index == 0 ? Color.accentColor.opacity(0.15) : .clear))
+                    .contentShape(Rectangle())
+                }
+                .buttonStyle(.plain)
+                .help("Запустить в \(project.name)")
+            }
+        }
+        .padding(4)
+    }
+}
+
+/// {файл}: the item selected in Finder (asks once for permission to control Finder).
+enum FinderSelection {
+    static func path() -> String? {
+        let source = "tell application \"Finder\" to if (count of (selection as list)) > 0 then return POSIX path of ((item 1 of (selection as list)) as alias)"
+        var error: NSDictionary?
+        let result = NSAppleScript(source: source)?.executeAndReturnError(&error).stringValue
+        if let error { AppLog.error("Finder selection: \(error)") }
+        return result
     }
 }

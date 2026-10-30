@@ -223,6 +223,7 @@ private struct TextSizePreview: View {
 /// Claude Code in one tab (it was three small ones): where it is, its sessions, the subscription limits, background runs.
 private struct ClaudeSettings: View {
     @Environment(AppSettings.self) private var settings
+    @Environment(\.openWindow) private var openWindow
 
     var body: some View {
         @Bindable var settings = settings
@@ -240,6 +241,19 @@ private struct ClaudeSettings: View {
 
             SessionSection()
             TelegramApprovalsSection()
+
+            SavedPromptsSection()
+
+            Section {
+                Button("Открыть инструкции и MCP-серверы…") {
+                    NSApp.activate()
+                    openWindow(id: "claude-config")
+                }
+            } header: {
+                Text("CLAUDE.md и MCP")
+            } footer: {
+                Footnote(text: String(localized: "Отдельное окно: все CLAUDE.md и AGENTS.md (общие и проектов) с поиском и правкой, и MCP-серверы Claude Code с выключателем. То же окно — значок в низу панели."))
+            }
 
             Section {
                 Stepper(value: $settings.backgroundTimeLimitMinutes, in: 10...600, step: 10) {
@@ -260,6 +274,41 @@ private struct ClaudeSettings: View {
             } footer: {
                 Footnote(text: String(localized: "«Фон» запускает claude -p без окна: разрешены чтение и правка файлов проекта, проверки и сборки, git без push в main и без force, gh pr create/view/list; остальное отклоняется. Итог — уведомлением и в Telegram."))
             }
+        }
+    }
+}
+
+/// Settings → Claude Code → «Свои промпты»: title and text; the search (⌃⌥C) offers them by title.
+private struct SavedPromptsSection: View {
+    @Environment(AppSettings.self) private var settings
+
+    var body: some View {
+        @Bindable var settings = settings
+        Section {
+            ForEach($settings.savedPrompts) { $prompt in
+                VStack(alignment: .leading, spacing: 4) {
+                    HStack {
+                        TextField("Название", text: $prompt.title)
+                            .textFieldStyle(.roundedBorder)
+                        Button(role: .destructive) {
+                            settings.savedPrompts.removeAll { $0.id == prompt.id }
+                        } label: { Image(systemName: "trash") }
+                        .buttonStyle(.borderless)
+                        .help("Удалить промпт")
+                    }
+                    TextField("Текст", text: $prompt.text, axis: .vertical)
+                        .lineLimit(2...6)
+                        .textFieldStyle(.roundedBorder)
+                }
+                .padding(.vertical, 2)
+            }
+            Button("Добавить промпт") {
+                settings.savedPrompts.append(SavedPrompt(title: String(localized: "Новый промпт"), text: ""))
+            }
+        } header: {
+            Text("Свои промпты")
+        } footer: {
+            Footnote(text: String(localized: "Наберите название в поиске (⌃⌥C), выберите проект — Claude запустится с этим текстом. Подстановки: {проект}, {ветка}, {файл} — файл, выделенный в Finder (macOS один раз спросит разрешение)."))
         }
     }
 }

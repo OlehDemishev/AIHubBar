@@ -61,6 +61,9 @@ You can skip any step: **Skip** keeps the template's choice. Everything can be c
   - **Limits:** the 5-hour session and the week, with a reset countdown and a forecast.
     Under Claude's rings, other AI services show up by themselves once they're found on the Mac or their key is saved: Codex, GitHub Copilot, Gemini CLI, OpenRouter, Cursor, and API spend of OpenAI and Anthropic. **Settings… → Modules → Limits → Other AI** lists what each one needs.
   - **Sessions:** every Claude Code session on this Mac. **Show** brings its Terminal tab forward.
+    A row also says what the session changed since it started (files, +/− lines, from git); click it for the file list.
+    Near the limit (95 % by default, **Settings… → Modules → Limits**) background runs pause and carry on after the reset.
+  - **Later:** in a project, **Later → After the limit resets** queues the next step for the session reset; **At night** queues it for the night.
   - **Projects:** expand a project to run its commands.
   - **Upcoming:** deadlines and publications for the next 7 days.
 - **Commands:**
@@ -75,6 +78,10 @@ You can skip any step: **Skip** keeps the template's choice. Everything can be c
 - **Quick Commands** and **Quick Toggles** (optional modules): your own buttons for scripts, Shortcuts, links and folders, and one-click dark mode, desktop icons, lock screen, display off, eject disks and empty Trash. The **Mac Utilities** template sets up a profile with just the Mac tools.
 - **Calendar:** a month or week view of deadlines, publications and content-plan rows. Drag an entry to another day and the date is rewritten in its file.
 - **Menu bar** (**Settings… → Menu Bar**): choose what sits next to ✦, such as limits as a number, ring or bar, the reset countdown, sessions waiting for you, or the next deadline.
+
+- **Claude Code window** (the document icon at the bottom of the panel): every CLAUDE.md and AGENTS.md with search and editing, and the MCP servers with an on/off switch.
+- **Saved prompts** (**Settings… → Claude Code**): type a prompt's title in the ⌃⌥C search, pick a project, and Claude starts with it. `{project}`, `{branch}` and `{file}` (the Finder selection) are filled in.
+- **Weekly summary:** on Sundays at 19:00 (adjustable) a Telegram message with the week's use by project, the heaviest sessions, limit hits and background runs.
 
 ## Privacy and safety
 

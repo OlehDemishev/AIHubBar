@@ -198,6 +198,11 @@ final class AppSettings {
         didSet { defaults.set(hiddenBlocks.map(\.rawValue).sorted(), forKey: Keys.hiddenBlocks) }
     }
 
+    /// «Свои промпты» for the search (⌃⌥C).
+    var savedPrompts: [SavedPrompt] {
+        didSet { if let data = try? JSONEncoder().encode(savedPrompts) { defaults.set(data, forKey: Keys.savedPrompts) } }
+    }
+
     /// «Неделя Claude» in Telegram: on/off, weekday (1 = Sunday … 7 = Saturday) and hour.
     var weeklySummary: Bool {
         didSet { defaults.set(weeklySummary, forKey: Keys.weeklySummary) }
@@ -314,6 +319,7 @@ final class AppSettings {
         hubCursor = defaults.bool(forKey: Keys.hubCursor)
         runGuardPercent = defaults.object(forKey: Keys.runGuardPercent) as? Int ?? 95
         weeklySummary = defaults.object(forKey: Keys.weeklySummary) as? Bool ?? true
+        savedPrompts = defaults.data(forKey: Keys.savedPrompts).flatMap { try? JSONDecoder().decode([SavedPrompt].self, from: $0) } ?? SavedPrompt.examples
         weeklySummaryWeekday = defaults.object(forKey: Keys.weeklySummaryWeekday) as? Int ?? 1
         weeklySummaryHour = defaults.object(forKey: Keys.weeklySummaryHour) as? Int ?? 19
     }
@@ -365,6 +371,7 @@ final class AppSettings {
         static let hubCursor = "hubCursor"
         static let runGuardPercent = "runGuardPercent"
         static let weeklySummary = "weeklySummary"
+        static let savedPrompts = "savedPrompts"
         static let weeklySummaryWeekday = "weeklySummaryWeekday"
         static let weeklySummaryHour = "weeklySummaryHour"
     }
