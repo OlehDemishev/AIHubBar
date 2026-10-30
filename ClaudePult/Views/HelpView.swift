@@ -57,7 +57,7 @@ enum HelpContent {
         ]),
         Section(title: String(localized: "Сессии Claude Code"), systemImage: "bubble.left.and.text.bubble.right", items: [
             Item(name: String(localized: "Список"), detail: String(localized: "Все сессии на этом Маке — в Терминале, в приложении Claude, фоновые: проект, worktree, задача, длительность, состояние (работает, в фоне, ждёт ответа, готово, ошибка, завершена). Ждущие ответа подсвечены и приходят уведомлением.")),
-            Item(name: String(localized: "Показать"), detail: String(localized: "Вывести вкладку Терминала с этой сессией; для сессий приложения Claude — открыть Claude, иначе — папку.")),
+            Item(name: String(localized: "Показать"), detail: String(localized: "Вывести вкладку Терминала с этой сессией; для сессий приложения Claude — открыть эту сессию в Claude, иначе — папку.")),
             Item(name: String(localized: "Журнал"), detail: String(localized: "Фоновая задача: что делает Claude, по шагам.")),
             Item(name: String(localized: "Остановить"), detail: String(localized: "Фоновая задача: остановить сейчас.")),
             Item(name: "Hooks", detail: String(localized: "Сессии видны, только если в Настройках установлены hooks (они дописываются в ~/.claude/settings.json, копия сохраняется рядом).")),

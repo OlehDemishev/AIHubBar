@@ -218,8 +218,17 @@ enum CommandLineTool {
         }
         if let index = arguments.firstIndex(of: "--show-session"), index + 1 < arguments.count {
             let id = arguments[index + 1]
-            guard let session = SessionStore.loadItems(from: SessionFiles.sessionsDirectory, now: .now)
-                .first(where: { $0.id == id })?.session, let tty = session.tty, session.isInTerminalApp else {
+            let session = SessionStore.loadItems(from: SessionFiles.sessionsDirectory, now: .now).first(where: { $0.id == id })?.session
+            if session?.entrypoint == "claude-desktop" {
+                guard let link = SessionActions.desktopLink(cliSessionID: id) else {
+                    printError("Claude app has no session for \(id)")
+                    return 1
+                }
+                NSWorkspace.shared.open(link)
+                print("opened \(link.absoluteString)")
+                return 0
+            }
+            guard let session, let tty = session.tty, session.isInTerminalApp else {
                 printError("no Terminal.app session with id \(id)")
                 return 1
             }

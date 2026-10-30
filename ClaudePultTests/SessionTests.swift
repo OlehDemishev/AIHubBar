@@ -288,6 +288,28 @@ struct SessionRulesTests {
         #expect(env["HOME"] == "/h")
     }
 
+    @Test func desktopSessionLink() throws {
+        let root = FileManager.default.temporaryDirectory.appending(path: UUID().uuidString)
+        let org = root.appending(path: "account/org")
+        try FileManager.default.createDirectory(at: org, withIntermediateDirectories: true)
+        defer { try? FileManager.default.removeItem(at: root) }
+        let records: [(String, [String: Any])] = [
+            ("local_a", ["sessionId": "local_a", "cliSessionId": "cli-1"]),
+            ("local_b", ["sessionId": "local_b", "cliSessionId": "cli-3", "previousCliSessionIds": ["cli-2"]]),
+            ("local_c", ["sessionId": "local_c", "cliSessionId": "cli-4", "isArchived": true]),
+        ]
+        for (name, json) in records {
+            try JSONSerialization.data(withJSONObject: json).write(to: org.appending(path: "\(name).json"))
+        }
+        try Data("{".utf8).write(to: org.appending(path: "local_broken.json"))
+
+        #expect(SessionActions.desktopLink(cliSessionID: "cli-1", in: root)?.absoluteString == "claude://code/continue?session=local_a")
+        #expect(SessionActions.desktopSessionID(cliSessionID: "cli-2", in: root) == "local_b")
+        #expect(SessionActions.desktopSessionID(cliSessionID: "cli-4", in: root) == nil)
+        #expect(SessionActions.desktopLink(cliSessionID: "missing", in: root) == nil)
+        #expect(SessionActions.desktopLink(cliSessionID: "cli-1", in: root.appending(path: "nope")) == nil)
+    }
+
     @Test func liveProcessCheck() {
         #expect(!SessionStore.isClaudeProcessAlive(getpid()))
         #expect(!SessionStore.isClaudeProcessAlive(999_999))

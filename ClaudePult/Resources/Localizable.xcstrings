@@ -11437,78 +11437,78 @@
         }
       }
     },
-    "Вывести вкладку Терминала с этой сессией; для сессий приложения Claude — открыть Claude, иначе — папку.": {
+    "Вывести вкладку Терминала с этой сессией; для сессий приложения Claude — открыть эту сессию в Claude, иначе — папку.": {
       "localizations": {
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "إظهار علامة تبويب الطرفية لهذه الجلسة؛ لجلسات تطبيق Claude يُفتح Claude، وإلا فالمجلد."
+            "value": "إظهار علامة تبويب الطرفية لهذه الجلسة؛ لجلسات تطبيق Claude تُفتح هذه الجلسة في Claude، وإلا فالمجلد."
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Den Terminal-Tab dieser Sitzung nach vorne holen; bei Sitzungen der Claude-App Claude öffnen, sonst den Ordner."
+            "value": "Den Terminal-Tab dieser Sitzung nach vorne holen; bei Sitzungen der Claude-App diese Sitzung in Claude öffnen, sonst den Ordner."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Bring this session's Terminal tab forward; for Claude app sessions open Claude, otherwise the folder."
+            "value": "Bring this session's Terminal tab forward; for Claude app sessions open this session in Claude, otherwise the folder."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Traer al frente la pestaña de Terminal de esta sesión; para sesiones de la app Claude, abrir Claude; si no, la carpeta."
+            "value": "Traer al frente la pestaña de Terminal de esta sesión; para sesiones de la app Claude, abrir esta sesión en Claude; si no, la carpeta."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Afficher l'onglet Terminal de cette session ; pour les sessions de l'app Claude, ouvrir Claude ; sinon, le dossier."
+            "value": "Afficher l'onglet Terminal de cette session ; pour les sessions de l'app Claude, ouvrir cette session dans Claude ; sinon, le dossier."
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "Bawa tab Terminal sesi ini ke depan; untuk sesi aplikasi Claude buka Claude, selain itu foldernya."
+            "value": "Bawa tab Terminal sesi ini ke depan; untuk sesi aplikasi Claude buka sesi ini di Claude, selain itu foldernya."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Porta in primo piano la scheda del Terminale di questa sessione; per le sessioni dell'app Claude apri Claude, altrimenti la cartella."
+            "value": "Porta in primo piano la scheda del Terminale di questa sessione; per le sessioni dell'app Claude apri questa sessione in Claude, altrimenti la cartella."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "このセッションのターミナルタブを前面に。Claude アプリのセッションなら Claude を、それ以外はフォルダーを開きます。"
+            "value": "このセッションのターミナルタブを前面に。Claude アプリのセッションなら Claude でこのセッションを、それ以外はフォルダーを開きます。"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "이 세션의 터미널 탭을 앞으로 가져옵니다. Claude 앱 세션이면 Claude를, 아니면 폴더를 엽니다."
+            "value": "이 세션의 터미널 탭을 앞으로 가져옵니다. Claude 앱 세션이면 Claude에서 이 세션을, 아니면 폴더를 엽니다."
           }
         },
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Wysuń na wierzch kartę Terminala tej sesji; dla sesji aplikacji Claude otwórz Claude, w innym razie folder."
+            "value": "Wysuń na wierzch kartę Terminala tej sesji; dla sesji aplikacji Claude otwórz tę sesję w Claude, w innym razie folder."
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Trazer para a frente a aba do Terminal desta sessão; para sessões do app Claude, abrir o Claude; senão, a pasta."
+            "value": "Trazer para a frente a aba do Terminal desta sessão; para sessões do app Claude, abrir esta sessão no Claude; senão, a pasta."
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Вивести вкладку Термінала з цією сесією; для сесій застосунку Claude — відкрити Claude, інакше — папку."
+            "value": "Вивести вкладку Термінала з цією сесією; для сесій застосунку Claude — відкрити цю сесію в Claude, інакше — папку."
           }
         }
       }
