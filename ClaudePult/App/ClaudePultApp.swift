@@ -8,6 +8,7 @@ struct ClaudePultApp: App {
     @State private var launcher: LaunchController
     @State private var sessions: SessionStore
     @State private var telegramApprovals: TelegramApprovals
+    @State private var widgetStatus: WidgetStatusWriter
     @State private var hooks: HookController
     @State private var runs: RunStore
     @State private var commands: CommandStore
@@ -74,6 +75,15 @@ struct ClaudePultApp: App {
         clipboard.isActive = { [modes] in modes.installedModules.contains(.clipboard) }
         notesStore.isActive = { [modes] in modes.installedModules.contains(.notes) }
         sessions.approvalsEnabled = { [settings] in settings.approvalsFromClaudePult }
+        _widgetStatus = State(initialValue: WidgetStatusWriter { [sessions, runs, store, keepAwake, modes] in
+            WidgetStatus(
+                waiting: sessions.items.filter { $0.state == .waiting }.map(\.session.displayProject),
+                running: sessions.items.filter { $0.state == .running }.count + runs.running.count,
+                problems: store.projects.filter { $0.health == .red }.map(\.name),
+                keepAwake: keepAwake.reason != nil,
+                keepAwakeInstalled: modes.installedModules.contains(.keepAwake)
+            )
+        })
         keepAwake.claudeWorking = { [sessions, runs] in
             !runs.running.isEmpty || sessions.items.contains { $0.state == .running }
         }
@@ -102,6 +112,11 @@ struct ClaudePultApp: App {
             Updates.start()
             sessions.start()
             telegramApprovals.start()
+            widgetStatus.start { [keepAwake, widgetStatus] on in
+                AppLog.info("Keep awake \(on ? "on" : "off") from Control Center")
+                if on { keepAwake.holdManually(for: nil) } else { keepAwake.stopManual() }
+                widgetStatus.update()
+            }
             runs.start()
             requests.listen(commands: commands)
             usage.start()

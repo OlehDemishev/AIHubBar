@@ -225,5 +225,9 @@ struct UsageWidget: Widget {
 struct ClaudePultWidgetBundle: WidgetBundle {
     var body: some Widget {
         UsageWidget()
+        StatusWidget()
+        if #available(macOS 26.0, *) {
+            KeepAwakeControl()
+        }
     }
 }

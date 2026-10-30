@@ -7,7 +7,7 @@
 **Now:**
 - merged: menu bar drag reordering (PR #93), translation review (PR #94), release build re-checked on main (PR #95)
 - panel redesigned as cards, variant A, merged (PR #98)
-- feature batch from Oleh's «все»: approve from notifications merged (PR #100); current action merged (PR #102); week forecast merged (PR #104); Telegram answers merged (PR #106); PR/CI alerts merged (PR #108); search, hot key, Shortcuts merged (PR #110); then week forecast, Telegram, PR/CI alerts, hotkey and search, widget, night queue, context warning
+- feature batch from Oleh's «все»: approve from notifications merged (PR #100); current action merged (PR #102); week forecast merged (PR #104); Telegram answers merged (PR #106); PR/CI alerts merged (PR #108); search, hot key, Shortcuts merged (PR #110); widget and control (PR open); then week forecast, Telegram, PR/CI alerts, hotkey and search, widget, night queue, context warning
 - hover hints for icon-only controls and the menu bar item merged (PR #91)
 - second wave merged: «История буфера» and «Заметки» (PR #87), «Не спать» with the lid closed (PR #89)
 - release without an Apple Developer account merged (PR #85): Sparkle, self-signed signing, `scripts/release.sh`, MIT license; nothing published yet
@@ -53,6 +53,12 @@
 - hooks are installed in ~/.claude/settings.json; backup of the original: ~/.claude/settings.json.claudepult-backup-20261029T192827
 - delete or archive the old repo `OlehDemishev/ClaudeBar`; turn on start at login if wanted
 <!-- summary:end -->
+
+## 2026-10-30 — Widget «Сессии и проекты» and a Control Center toggle (branch `feat/widget-controls`)
+
+Done: `WidgetStatusWriter` keeps `widget-status.json` (waiting projects, running count, red projects, keep-awake state) and reloads the widget and the control when it changes. New widget «Сессии и проекты» (small/medium). A macOS 26 `ControlWidgetToggle` «Не спать (ClaudePult)»: its `SetValueIntent` runs in the sandboxed extension and posts a Darwin notification that the app turns into the manual hold on/off.
+Checked: 230 tests green (incl. the Darwin round trip); live: the file, the registered extension, a request reaching the app.
+Left: widget gallery and Control Center by hand; widget texts stay Russian like the existing usage widget (the extension has no string catalog yet).
 
 ## 2026-10-30 — Search, hot key and Shortcuts actions (branch `feat/hotkey-search-shortcuts`)
 
