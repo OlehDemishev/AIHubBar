@@ -25973,6 +25973,82 @@
         }
       }
     },
+    "Контекст почти заполнен — %@": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "السياق ممتلئ تقريبًا — %@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kontext fast voll — %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Context almost full — %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Contexto casi lleno — %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Contexte presque plein — %@"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Konteks hampir penuh — %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Contesto quasi pieno — %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "コンテキストがほぼ満杯 — %@"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "컨텍스트가 거의 찼습니다 — %@"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kontekst prawie pełny — %@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Contexto quase cheio — %@"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Контекст майже заповнений — %@"
+          }
+        }
+      }
+    },
     "Контент-план": {
       "localizations": {
         "ar": {
@@ -29927,6 +30003,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Нагадувати"
+          }
+        }
+      }
+    },
+    "Насколько заполнен контекст сессии (по журналу Claude Code). Ближе к 100 %, Claude сжимает историю и часть деталей теряется.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مدى امتلاء سياق الجلسة (من سجل Claude Code). قرب 100%، يضغط Claude السجل وتضيع بعض التفاصيل."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wie voll der Kontext der Sitzung ist (laut Claude-Code-Protokoll). Nahe 100%, komprimiert Claude den Verlauf, Details gehen verloren."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "How full the session's context is (from the Claude Code journal). Near 100%, Claude compacts the history and some details are lost."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Qué tan lleno está el contexto de la sesión (según el registro de Claude Code). Cerca del 100%, Claude comprime el historial y se pierden detalles."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remplissage du contexte de la session (d’après le journal de Claude Code). Vers 100%, Claude compacte l’historique et des détails se perdent."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seberapa penuh konteks sesi (dari log Claude Code). Mendekati 100%, Claude memadatkan riwayat dan sebagian detail hilang."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quanto è pieno il contesto della sessione (dal registro di Claude Code). Vicino al 100%, Claude comprime la cronologia e si perdono dettagli."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "セッションのコンテキストの使用率（Claude Code のログから）。100%、近くなると Claude が履歴を圧縮し、一部の詳細が失われます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "세션 컨텍스트가 얼마나 찼는지(Claude Code 로그 기준). 100%, 가까워지면 Claude가 기록을 압축하고 일부 세부 정보가 사라집니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jak bardzo zapełniony jest kontekst sesji (wg dziennika Claude Code). Blisko 100%, Claude kompresuje historię i część szczegółów ginie."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quão cheio está o contexto da sessão (pelo registro do Claude Code). Perto de 100%, o Claude compacta o histórico e perde detalhes."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Наскільки заповнений контекст сесії (за журналом Claude Code). Близько 100 %, Claude стискає історію, і частина деталей губиться."
           }
         }
       }
@@ -69899,6 +70051,82 @@
         }
       }
     },
+    "контекст %lld %%": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "السياق %lld%%"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kontext %lld%%"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "context %lld%%"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "contexto %lld%%"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "contexte %lld%%"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "konteks %lld%%"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "contesto %lld%%"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "コンテキスト %lld%%"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "컨텍스트 %lld%%"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "kontekst %lld%%"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "contexto %lld%%"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "контекст %lld %%"
+          }
+        }
+      }
+    },
     "корень не объект JSON": {
       "localizations": {
         "ar": {
@@ -75918,6 +76146,82 @@
     },
     "—": {},
     "•": {},
+    "≈ %lld %%: скоро Claude сожмёт историю. Если задача большая — лучше начать новую сессию с кратким итогом.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "≈ %lld%%: سيضغط Claude السجل قريبًا. للمهام الكبيرة يُفضَّل بدء جلسة جديدة مع ملخص قصير."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "≈ %lld%%: Claude komprimiert bald den Verlauf. Bei großen Aufgaben lieber eine neue Sitzung mit kurzer Zusammenfassung beginnen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "≈ %lld%%: Claude will soon compact the history. For a big task, better start a new session with a short summary."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "≈ %lld%%: Claude pronto comprimirá el historial. Si la tarea es grande, mejor empieza una sesión nueva con un resumen breve."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "≈ %lld%% : Claude va bientôt compacter l’historique. Pour une grosse tâche, mieux vaut ouvrir une nouvelle session avec un court résumé."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "≈ %lld%%: Claude akan segera memadatkan riwayat. Untuk tugas besar, lebih baik mulai sesi baru dengan ringkasan singkat."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "≈ %lld%%: Claude comprimerà presto la cronologia. Per un compito grande, meglio iniziare una nuova sessione con un breve riepilogo."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "≈ %lld%%: まもなく Claude が履歴を圧縮します。大きなタスクなら、短い要約を付けて新しいセッションを始めるのがおすすめです。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "≈ %lld%%: Claude가 곧 기록을 압축합니다. 큰 작업이라면 짧은 요약과 함께 새 세션을 시작하는 편이 낫습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "≈ %lld%%: Claude wkrótce skompresuje historię. Przy dużym zadaniu lepiej zacząć nową sesję z krótkim podsumowaniem."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "≈ %lld%%: o Claude logo vai compactar o histórico. Se a tarefa for grande, é melhor começar uma nova sessão com um resumo."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "≈ %lld %%: незабаром Claude стисне історію. Якщо завдання велике — краще почати нову сесію з коротким підсумком."
+          }
+        }
+      }
+    },
     "⌃⌥Пробел": {
       "localizations": {
         "ar": {

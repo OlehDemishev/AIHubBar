@@ -477,6 +477,14 @@ Panel snapshots: `defaults write com.demishev.claudepult DebugPanelSnapshot -boo
 | An expanded project shows «На ночь» next to «Следующий шаг» with its hint; «Своя задача…» has «На ночь» | Live (accessibility) — not pressed: it would really run at 01:00 |
 | A real night: runs start at the hour, the Mac stays awake, the morning summary (notification and Telegram) | Oleh |
 
+## Context fullness (2026-10-30)
+
+| Scenario | Checked |
+|---|---|
+| The last main-thread usage line of a journal (subagent lines and user lines skipped); window 200k / 1M; a missing journal | Auto (`ContextUsageTests`) |
+| Live: the panel showed «контекст 85 %» for Survikon and «контекст 79 %» for this session | Live |
+| The 90 % notification | Oleh (a long session) |
+
 ## Release without an Apple Developer account (2026-10-30)
 
 | Scenario | Checked |

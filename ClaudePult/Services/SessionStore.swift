@@ -10,6 +10,8 @@ final class SessionStore {
     struct Item: Identifiable, Equatable {
         var session: Session
         var state: Session.State
+        /// How full the context is (0…1), for sessions that aren't over.
+        var context: Double?
         var id: String { session.id }
     }
 
@@ -28,6 +30,7 @@ final class SessionStore {
     private var reloadScheduled = false
     /// Sessions already announced for their current waiting episode (keyed by id + event time).
     private var notified: Set<String> = []
+    private var contextNotified: Set<String> = []
 
     init(directory: URL = SessionFiles.sessionsDirectory) {
         self.directory = directory
@@ -68,6 +71,7 @@ final class SessionStore {
         let open = requests.filter { id, _ in loaded.contains { $0.id == id && $0.state == .waiting } }
         if open != approvals { approvals = open }
         announceWaiting(loaded)
+        announceFullContext(loaded)
     }
 
     /// «Разрешить» / «Отклонить» from the panel or a notification.
@@ -98,7 +102,12 @@ final class SessionStore {
                 guard SessionRules.isVisible(session, isAlive: alive, now: now) else { return nil }
                 return (session, SessionRules.effectiveState(session, isAlive: alive))
             }
-        return SessionRules.sorted(entries).map { Item(session: $0.session, state: $0.state) }
+        return SessionRules.sorted(entries).map { entry in
+            let context = entry.state == .ended ? nil : entry.session.transcriptPath
+                .flatMap { ContextUsage.lastRecord(transcript: URL(fileURLWithPath: $0)) }
+                .map(ContextUsage.fraction)
+            return Item(session: entry.session, state: entry.state, context: context)
+        }
     }
 
     /// True when `pid` exists and is still a Claude Code executable (guards against PID reuse).
@@ -167,6 +176,19 @@ final class SessionStore {
             if Date.now.timeIntervalSince(item.session.updatedAt) < 600 {
                 post(item.session)
             }
+        }
+    }
+
+    /// Once per session: the context is nearly full, Claude will soon compact the conversation.
+    private func announceFullContext(_ items: [Item]) {
+        for item in items where (item.context ?? 0) >= ContextUsage.notifyAt && !contextNotified.contains(item.id) {
+            contextNotified.insert(item.id)
+            Notifier.post(
+                id: "context-\(item.id)",
+                title: String(localized: "Контекст почти заполнен — \(item.session.displayProject)"),
+                body: String(localized: "≈ \(Int(((item.context ?? 0) * 100).rounded())) %: скоро Claude сожмёт историю. Если задача большая — лучше начать новую сессию с кратким итогом."),
+                target: .session(id: item.id)
+            )
         }
     }
 

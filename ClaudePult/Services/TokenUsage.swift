@@ -201,3 +201,38 @@ struct WeekUsage: Equatable, Sendable {
         return WeekUsage(days: days, forecast: runsOut < resetsAt ? .runsOutAt(runsOut) : .lastsUntilReset)
     }
 }
+
+/// How full a session's context is: the last request's input (fresh + cache writes + cache reads) from its
+/// journal. Hooks don't say it. The window is 200 000 tokens, or 1 000 000 for 1M models — recognised by «[1m]»
+/// in the model or by a context already past 200 000.
+enum ContextUsage {
+    static let warnAt = 0.7
+    static let notifyAt = 0.9
+
+    static func tokens(_ record: TokenRecord) -> Int { record.input + record.cacheCreation + record.cacheRead }
+
+    static func window(tokens: Int, model: String?) -> Int {
+        (model?.contains("[1m]") == true || tokens > 200_000) ? 1_000_000 : 200_000
+    }
+
+    static func fraction(_ record: TokenRecord) -> Double {
+        let used = tokens(record)
+        return Double(used) / Double(window(tokens: used, model: record.model))
+    }
+
+    /// The last main-thread assistant message with usage, from the end of the journal (subagents are skipped).
+    static func lastRecord(transcript: URL, tail: Int = 512 * 1024) -> TokenRecord? {
+        guard let handle = try? FileHandle(forReadingFrom: transcript) else { return nil }
+        defer { try? handle.close() }
+        let size = (try? handle.seekToEnd()) ?? 0
+        try? handle.seek(toOffset: size > UInt64(tail) ? size - UInt64(tail) : 0)
+        guard let data = try? handle.readToEnd() else { return nil }
+        let sidechain = Data("\"isSidechain\":true".utf8)
+        for line in data.split(separator: UInt8(ascii: "\n")).reversed() {
+            let line = Data(line)
+            if line.range(of: sidechain) != nil { continue }
+            if let (_, record) = TokenLog.parse(data: line) { return record }
+        }
+        return nil
+    }
+}

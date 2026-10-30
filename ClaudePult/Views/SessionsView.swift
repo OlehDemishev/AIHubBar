@@ -9,6 +9,7 @@ struct SessionRow: Identifiable, Equatable {
     var startedAt: Date?
     var endedAt: Date?
     var state: Session.State
+    var context: Double?
     var message: String?
     var session: Session?
     var run: BackgroundRun?
@@ -25,6 +26,7 @@ struct SessionRow: Identifiable, Equatable {
                 endedAt: run?.finishedAt ?? (item.state == .ended ? s.updatedAt : nil),
                 // A run's own result (error, time limit) is more precise than the hook's «готово».
                 state: run.map { $0.state == .running ? item.state : $0.state.sessionState } ?? item.state,
+                context: item.context,
                 message: item.state == .waiting ? s.message : run?.summary,
                 session: s, run: run
             )
@@ -37,7 +39,7 @@ struct SessionRow: Identifiable, Equatable {
                 id: run.id, project: run.project,
                 worktree: run.worktreeBranch.map { _ in (run.folder as NSString).lastPathComponent },
                 task: run.task, startedAt: run.startedAt, endedAt: run.finishedAt,
-                state: run.state.sessionState, message: run.summary, session: nil, run: run
+                state: run.state.sessionState, context: nil, message: run.summary, session: nil, run: run
             ))
         }
         let order: [Session.State: Int] = [.waiting: 0, .running: 1, .error: 2, .done: 3, .unknown: 4, .ended: 5]
@@ -119,6 +121,13 @@ private struct SessionRowView: View {
                     .truncationMode(.tail)
                     .foregroundStyle(action == nil && row.task == nil ? .tertiary : .secondary)
                 Spacer(minLength: 4)
+                if let context = row.context, context >= ContextUsage.warnAt {
+                    Text("контекст \(Int((context * 100).rounded())) %")
+                        .scaledFont(.caption)
+                        .foregroundStyle(context >= ContextUsage.notifyAt ? .red : .orange)
+                        .fixedSize()
+                        .help("Насколько заполнен контекст сессии (по журналу Claude Code). Ближе к 100 %, Claude сжимает историю и часть деталей теряется.")
+                }
                 if isHovered || row.state == .waiting {
                     actions
                 } else if let startedAt = row.startedAt {
