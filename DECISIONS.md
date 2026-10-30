@@ -2,6 +2,16 @@
 
 Decisions made where the spec is silent or does not match reality. Newest at the top.
 
+## 2026-10-30 — AI services, connection part (SPEC-modes §9.3)
+
+**Checked against the docs (2026-10-30), not memory.** Model lists: Anthropic `GET /v1/models` (accepts `x-api-key` and Bearer; we send `x-api-key` + `anthropic-version: 2023-06-01`), Google `…/v1beta/openai/models` (OpenAI-compatible, Bearer), DeepSeek `https://api.deepseek.com/models`, Mistral `/v1/models` (docs show both `{data: […]}` and a bare array — both parsed). OpenAI's docs refused the fetch (403) and xAI's docs do not list `/models`; for all six an unauthenticated request was made: each answered «bad key» (401, or 400 for Google and xAI), not 404, so the paths exist. A bad key may come back as 400/403 — it counts as «Ключ не подошёл» when the message names the key.
+
+**Agents.** Codex CLI (`codex`, `codex exec`, `--sandbox read-only|workspace-write|danger-full-access`), Gemini CLI (`gemini -p`, `--approval-mode default|auto_edit|yolo|plan`), Copilot CLI (`copilot -p`, `--allow-tool` / `--deny-tool`) are confirmed by their docs. Since June 2026 the free Google sign-in and Google AI Pro/Ultra moved from Gemini CLI to **Antigravity CLI** (`agy`), so it is listed too; its flags were not checked. Cursor's CLI docs could not be read (404) — the binary name `cursor-agent` is from memory and only used to find the program. For now no agent but Claude Code runs in the background: they open in Terminal («Открыть в…») until their «no actions» modes are checked live on this Mac (SPEC-modes §11.1).
+
+**Keys.** Written and read with `/usr/bin/security` (like the Claude Code token): an ad-hoc-signed app would be asked for Keychain access after every rebuild. The key goes to `security -i` on stdin, never as an argument (arguments are visible in `ps`); keys are limited to `A–Z a–z 0–9 . _ - ~ + / = :` (8–512 chars), which covers real keys and needs no quoting. «Проверить» lists models — no tokens spent. The OpenAI-compatible server (default Ollama `http://localhost:11434/v1`) works without a key.
+
+**Moved to stage 4:** running a command with a chosen service (needs the command engine), API spend per day/month and the budget (needs those requests), sessions of other agents by process, «Сравнить». The mode's «Сервис по умолчанию» is stored now (`Mode.service`, nil = Claude Code), so templates can use it.
+
 ## 2026-10-30 — Menu bar builder (SPEC-modes §9.2)
 
 **Config.** `MenuBarConfig` (JSON in UserDefaults key `menuBarConfig`, and in exports as `appearance.menuBarConfig`) always lists every element kind once; its order is the menu bar order and each element is on or off with its own options. Unknown kinds from newer files are dropped, missing ones are added switched off. The old `menuBarUsageMode` is only read to migrate (icon only → «Минимум»; session, session + week, ring → «Лимиты» with the same gauges), and exports still write a `menuBar` value derived from the config so older ClaudePult versions can import the file.

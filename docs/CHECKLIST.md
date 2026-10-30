@@ -110,3 +110,17 @@ Panel snapshots: `defaults write com.demishev.claudepult DebugPanelSnapshot -boo
 | Export / import carries the builder; old files without it migrate from `menuBar` | Auto |
 | Settings → «Строка меню»: preset switch, toggles, order arrows, options, live preview | **Oleh: open the tab and try** |
 | Reset countdown ticks every minute in the real menu bar | **Oleh: turn on «До сброса сессии» and watch** |
+
+## AI services (SPEC-modes §9.3)
+
+| Scenario | Checked |
+|---|---|
+| Agents found with version, «не установлен» with an install command otherwise | Auto (detection) + Live (`--services`: Claude Code 2.1.312 found, others not installed on this Mac) |
+| Model-list endpoints of all six providers exist (answer «bad key», not «not found») | Live (requests with an invalid key, 2026-10-30) |
+| Request headers (Anthropic `x-api-key` + `anthropic-version`, others Bearer), parsing of model lists, check results | Auto |
+| Key saved to / read from / deleted in the Keychain through `security -i`, special characters intact | Live (a throw-away test item, deleted after) |
+| Key never in exports; chosen models and compatible server are | Auto |
+| OpenAI-compatible local server not running → «Сервер не отвечает» | Live (`--services check`) |
+| Settings → «Сервисы AI»: save a key, «Проверить», pick a model | **Oleh: with a real key** |
+| «Открыть в…» in a project opens Codex / Gemini in Terminal | **Oleh: after installing an agent** |
+| Mode «Сервис по умолчанию» picker | **Oleh: look** |

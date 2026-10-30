@@ -1,10 +1,10 @@
 import AppKit
 import SwiftUI
 
-/// Settings window, one tab per area: general, modes, appearance, menu bar, Claude, sessions, limits.
+/// Settings window, one tab per area: general, modes, appearance, menu bar, Claude, AI services, sessions, limits.
 struct SettingsView: View {
     enum Tab: String, CaseIterable {
-        case general, modes, appearance, menuBar, claude, sessions, limits
+        case general, modes, appearance, menuBar, claude, services, sessions, limits
     }
 
     @Environment(AppSettings.self) private var settings
@@ -27,6 +27,9 @@ struct SettingsView: View {
             ClaudeSettings()
                 .tabItem { Label("Claude", systemImage: "sparkle") }
                 .tag(Tab.claude)
+            ServicesSettings()
+                .tabItem { Label("Сервисы AI", systemImage: "cpu") }
+                .tag(Tab.services)
             SessionSettings()
                 .tabItem { Label("Сессии", systemImage: "bubble.left.and.text.bubble.right") }
                 .tag(Tab.sessions)

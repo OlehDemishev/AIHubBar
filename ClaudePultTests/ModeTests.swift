@@ -86,6 +86,8 @@ struct ModeStoreTests {
         settings.claudePath = NSHomeDirectory() + "/bin/claude"
         settings.menuBarConfig = .make(.everything)
         settings.menuBarConfig.set(.session) { $0.style = .bar }
+        settings.aiServices.models["openai"] = "gpt-x"
+        settings.aiServices.compatibleName = "Ollama"
         _ = store.duplicate(store.currentID)
         let data = try ModeStore.encode(store.exportBundle())
         #expect(!String(decoding: data, as: UTF8.self).contains(NSHomeDirectory()), "home folder is written as ~")
@@ -101,6 +103,7 @@ struct ModeStoreTests {
         #expect(otherSettings.limitThresholds == [70, 90])
         #expect(otherSettings.claudePath == NSHomeDirectory() + "/bin/claude")
         #expect(otherSettings.menuBarConfig == settings.menuBarConfig)
+        #expect(otherSettings.aiServices == settings.aiServices)
         let reloaded = AppSettings(defaults: try #require(UserDefaults(suiteName: otherDir.lastPathComponent)))
         #expect(reloaded.menuBarConfig == settings.menuBarConfig, "stored as JSON in defaults")
         #expect(ModeStore(settings: otherSettings, directory: otherDir).modes.count == 2)

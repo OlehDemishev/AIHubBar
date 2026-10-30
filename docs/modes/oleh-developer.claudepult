@@ -153,7 +153,7 @@
     },
     "showLimits" : true,
     "showSessions" : true,
-    "textSize" : "extraLarge",
+    "textSize" : "normal",
     "theme" : "dark",
     "width" : "normal"
   },
@@ -161,7 +161,7 @@
   "enabled" : [
     "aae3b197-6012-47c4-a715-506e9ba29903"
   ],
-  "exportedAt" : "2026-10-30T01:26:48Z",
+  "exportedAt" : "2026-10-30T01:44:43Z",
   "format" : "claudepult-settings",
   "general" : {
     "backgroundTimeLimitMinutes" : 90,
@@ -202,5 +202,12 @@
       "template" : "developer-report"
     }
   ],
+  "services" : {
+    "compatibleBaseURL" : "http://localhost:11434/v1",
+    "compatibleName" : "",
+    "models" : {
+
+    }
+  },
   "version" : 1
 }

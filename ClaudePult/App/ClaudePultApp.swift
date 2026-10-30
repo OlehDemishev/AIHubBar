@@ -14,6 +14,7 @@ struct ClaudePultApp: App {
     @State private var usage: UsageStore
     @State private var notifications = NotificationPermission()
     @State private var modes: ModeStore
+    @State private var services: AIServiceStore
     @NSApplicationDelegateAdaptor private var appDelegate: AppDelegate
 
     init() {
@@ -25,6 +26,8 @@ struct ClaudePultApp: App {
         // Applies the current mode to the settings before anything reads them.
         let modes = ModeStore(settings: settings)
         _modes = State(initialValue: modes)
+        let services = AIServiceStore(settings: settings)
+        _services = State(initialValue: services)
         let store = ProjectStore(settings: settings)
         _settings = State(initialValue: settings)
         _store = State(initialValue: store)
@@ -59,6 +62,7 @@ struct ClaudePultApp: App {
             runs.start()
             requests.listen(commands: commands)
             usage.start()
+            Task { await services.scan() }
             launcher.start()
             NotificationRouter.shared.install { resolution in
                 switch resolution {
@@ -114,6 +118,7 @@ struct ClaudePultApp: App {
                 .environment(settings)
                 .environment(notifications)
                 .environment(modes)
+                .environment(services)
         } label: {
             MenuBarLabel(state: MenuBarState(config: settings.menuBarConfig, data: menuBarData))
                 .environment(requests)
@@ -151,6 +156,7 @@ struct ClaudePultApp: App {
                 .environment(usage)
                 .environment(notifications)
                 .environment(modes)
+                .environment(services)
         }
     }
 }

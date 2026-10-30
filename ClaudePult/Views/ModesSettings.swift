@@ -85,6 +85,7 @@ struct ModesSettings: View {
 /// The right side of «Режимы»: blocks of one mode. Blocks of later stages are listed as coming.
 private struct ModeEditor: View {
     @Environment(ModeStore.self) private var modes
+    @Environment(AIServiceStore.self) private var services
     @State var mode: Mode
 
     private static let icons = [
@@ -125,11 +126,22 @@ private struct ModeEditor: View {
                 }
             }
 
-            Section("Claude") {
-                Picker("Где запускать", selection: $mode.launchMode) {
+            Section {
+                Picker("Сервис по умолчанию", selection: $mode.service) {
+                    Text(AIService.claudeCode.title).tag(String?.none)
+                    ForEach(services.available.filter { $0 != .claudeCode }, id: \.id) { Text($0.title).tag(String?.some($0.id)) }
+                    if let id = mode.service, !services.available.contains(where: { $0.id == id }) {
+                        Text((AIService(id: id)?.title ?? id) + " — не найден на этом Маке").tag(String?.some(id))
+                    }
+                }
+                Picker("Где запускать Claude", selection: $mode.launchMode) {
                     Text("Спрашивать").tag(LaunchMode?.none)
                     ForEach(LaunchMode.allCases, id: \.self) { Text($0.title).tag(LaunchMode?.some($0)) }
                 }
+            } header: {
+                Text("Сервис AI")
+            } footer: {
+                Text("Сервис команд-шаблонов режима (этап 4). Агенты и ключи — Настройки → «Сервисы AI».").font(.caption).foregroundStyle(.secondary)
             }
 
             Section("Общие команды") {
@@ -142,7 +154,7 @@ private struct ModeEditor: View {
             }
 
             Section {
-                ForEach(["Карточка и этапы проекта", "Метрики в строке проекта", "Команды-шаблоны и сервисы AI",
+                ForEach(["Карточка и этапы проекта", "Метрики в строке проекта", "Команды-шаблоны",
                          "Права в фоне", "Календарь", "Добавки к строке меню"], id: \.self) { title in
                     LabeledContent(title) { Text("скоро").foregroundStyle(.tertiary) }
                 }

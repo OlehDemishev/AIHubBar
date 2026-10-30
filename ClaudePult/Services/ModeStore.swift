@@ -33,6 +33,7 @@ struct SettingsBundle: Codable, Equatable, Sendable {
     var exportedAt: Date
     var general: General?
     var appearance: Appearance?
+    var services: AIServicesConfig?
     var modes: [Mode]
     var enabled: [String]?
     var current: String?
@@ -230,6 +231,7 @@ final class ModeStore {
                 showSessions: settings.shows(.sessions), menuBar: settings.menuBarConfig.legacyMode.rawValue,
                 menuBarConfig: settings.menuBarConfig
             ),
+            services: settings.aiServices,
             modes: modes, enabled: enabledIDs, current: currentID
         )
     }
@@ -278,6 +280,7 @@ final class ModeStore {
                 settings.menuBarConfig = look.menuBarConfig
                     ?? MenuBarConfig.migrated(from: MenuBarUsageMode(rawValue: look.menuBar) ?? .session)
             }
+            if let services = bundle.services { settings.aiServices = services }
             for mode in modes { try? FileManager.default.removeItem(at: fileURL(mode.id)) }
             modes = bundle.modes
             let ids = modes.map(\.id)

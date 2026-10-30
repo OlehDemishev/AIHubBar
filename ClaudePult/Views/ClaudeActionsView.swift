@@ -5,6 +5,7 @@ struct ClaudeActionsView: View {
     let project: Project
 
     @Environment(LaunchController.self) private var launcher
+    @Environment(AIServiceStore.self) private var services
     @State private var isEditingTask = false
     @State private var task = ""
     @State private var rememberMode = false
@@ -21,6 +22,8 @@ struct ClaudeActionsView: View {
                 if isWorking {
                     ProgressView().controlSize(.mini)
                 }
+                Spacer()
+                otherAgents
             }
 
             HStack(spacing: 6) {
@@ -56,6 +59,33 @@ struct ClaudeActionsView: View {
         }
         .animation(.snappy(duration: 0.2), value: launcher.messages[project.id])
         .animation(.snappy(duration: 0.2), value: launcher.pendingModeChoice[project.id])
+    }
+
+    /// Other installed agents open in Terminal in the project folder (SPEC-modes §11).
+    @ViewBuilder private var otherAgents: some View {
+        let installed = AgentKind.allCases.filter { $0 != .claudeCode && services.agents[$0] != nil }
+        if !installed.isEmpty {
+            Menu {
+                ForEach(installed, id: \.self) { kind in
+                    Button(kind.title) {
+                        guard let path = services.agents[kind]?.path else { return }
+                        Task {
+                            do {
+                                try await TerminalLauncher.run(kind.terminalCommandLine(folder: project.path, path: path))
+                                AppLog.info("Opened \(kind.binary) in Terminal: \(project.path)")
+                            } catch {
+                                AppLog.error("Opening \(kind.binary) failed: \(error.localizedDescription)")
+                            }
+                        }
+                    }
+                }
+            } label: {
+                Text("Открыть в…").scaledFont(.caption)
+            }
+            .menuStyle(.borderlessButton)
+            .fixedSize()
+            .help("Открыть другой агент в Терминале, в папке проекта")
+        }
     }
 
     private func modeChooser(_ command: ClaudeCommand) -> some View {
