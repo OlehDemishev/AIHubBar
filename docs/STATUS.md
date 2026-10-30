@@ -7,7 +7,7 @@
 **Now:**
 - merged: menu bar drag reordering (PR #93), translation review (PR #94), release build re-checked on main (PR #95)
 - panel redesigned as cards, variant A, merged (PR #98)
-- feature batch from Oleh's «все»: approve from notifications (PR open), then current action, week forecast, Telegram, PR/CI alerts, hotkey and search, widget, night queue, context warning
+- feature batch from Oleh's «все»: approve from notifications merged (PR #100), then current action, week forecast, Telegram, PR/CI alerts, hotkey and search, widget, night queue, context warning
 - hover hints for icon-only controls and the menu bar item merged (PR #91)
 - second wave merged: «История буфера» and «Заметки» (PR #87), «Не спать» with the lid closed (PR #89)
 - release without an Apple Developer account merged (PR #85): Sparkle, self-signed signing, `scripts/release.sh`, MIT license; nothing published yet
@@ -21,7 +21,7 @@
 - Windows and Linux versions (docs/SPEC-windows.md, docs/SPEC-linux.md) — only when Oleh says; stage 0 (fact checks in VMs) first
 
 **Needs Oleh:**
-- merge the approvals PR; then Settings → Claude Code → «Обновить hooks» once (PermissionRequest timeout 5 → 300 s)
+- Settings → Claude Code → «Обновить hooks» once, so permission requests can be answered from notifications (timeout 5 → 300 s)
 - try the new panel: hover a session row, click a project, the profile menu with two profiles
 - hover over the menu bar item and the panel icons: tooltips should name what each one is
 - on a laptop: Settings → «Модули» → «Не спать» → «Разрешить…» (admin password once), then «И с закрытой крышкой»
