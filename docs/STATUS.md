@@ -1,11 +1,11 @@
 # Status
 
 <!-- summary:start -->
-**Stage:** SPEC-modes done except signing/updates; SPEC-profiles stages 1–5 done, stage 6 (the last) in PR
+**Stage:** SPEC-modes done except signing/updates; SPEC-profiles done (stages 1–6)
 **Updated:** 2026-10-30
 
 **Now:**
-- SPEC-profiles stage 6: Быстрые команды, Быстрые переключатели, template «Утилиты Mac» — branch `feat/quick-tools` (worktree `.claude/worktrees/profiles-stage6`), PR open
+- SPEC-profiles stage 6 merged (PR #83): Быстрые команды, Быстрые переключатели, «Утилиты Mac» — SPEC-profiles done
 - Windows and Linux specs merged (PR #73); implementation waits for Oleh
 
 **Next:**
