@@ -3,17 +3,165 @@
     "animations" : true,
     "density" : "normal",
     "menuBar" : "sessionAndWeek",
+    "menuBarConfig" : {
+      "colored" : true,
+      "elements" : [
+        {
+          "diskBelowGB" : 20,
+          "enabled" : true,
+          "kind" : "icon",
+          "longFormat" : false,
+          "showAbove" : 0,
+          "showName" : false,
+          "style" : "number",
+          "symbol" : "sparkle"
+        },
+        {
+          "diskBelowGB" : 20,
+          "enabled" : true,
+          "kind" : "projectsAlert",
+          "longFormat" : false,
+          "showAbove" : 0,
+          "showName" : false,
+          "style" : "number",
+          "symbol" : "sparkle"
+        },
+        {
+          "diskBelowGB" : 20,
+          "enabled" : true,
+          "kind" : "session",
+          "longFormat" : false,
+          "showAbove" : 0,
+          "showName" : false,
+          "style" : "number",
+          "symbol" : "sparkle"
+        },
+        {
+          "diskBelowGB" : 20,
+          "enabled" : true,
+          "kind" : "week",
+          "longFormat" : false,
+          "showAbove" : 0,
+          "showName" : false,
+          "style" : "number",
+          "symbol" : "sparkle"
+        },
+        {
+          "diskBelowGB" : 20,
+          "enabled" : false,
+          "kind" : "modelWeek",
+          "longFormat" : false,
+          "showAbove" : 0,
+          "showName" : false,
+          "style" : "number",
+          "symbol" : "sparkle"
+        },
+        {
+          "diskBelowGB" : 20,
+          "enabled" : false,
+          "kind" : "resetCountdown",
+          "longFormat" : false,
+          "showAbove" : 0,
+          "showName" : false,
+          "style" : "number",
+          "symbol" : "sparkle"
+        },
+        {
+          "diskBelowGB" : 20,
+          "enabled" : false,
+          "kind" : "forecast",
+          "longFormat" : false,
+          "showAbove" : 0,
+          "showName" : false,
+          "style" : "number",
+          "symbol" : "sparkle"
+        },
+        {
+          "diskBelowGB" : 20,
+          "enabled" : true,
+          "kind" : "waiting",
+          "longFormat" : false,
+          "showAbove" : 0,
+          "showName" : false,
+          "style" : "number",
+          "symbol" : "sparkle"
+        },
+        {
+          "diskBelowGB" : 20,
+          "enabled" : false,
+          "kind" : "running",
+          "longFormat" : false,
+          "showAbove" : 0,
+          "showName" : false,
+          "style" : "number",
+          "symbol" : "sparkle"
+        },
+        {
+          "diskBelowGB" : 20,
+          "enabled" : false,
+          "kind" : "background",
+          "longFormat" : false,
+          "showAbove" : 0,
+          "showName" : false,
+          "style" : "number",
+          "symbol" : "sparkle"
+        },
+        {
+          "diskBelowGB" : 20,
+          "enabled" : false,
+          "kind" : "queued",
+          "longFormat" : false,
+          "showAbove" : 0,
+          "showName" : false,
+          "style" : "number",
+          "symbol" : "sparkle"
+        },
+        {
+          "diskBelowGB" : 20,
+          "enabled" : false,
+          "kind" : "deadline",
+          "longFormat" : false,
+          "showAbove" : 0,
+          "showName" : false,
+          "style" : "number",
+          "symbol" : "sparkle"
+        },
+        {
+          "diskBelowGB" : 20,
+          "enabled" : false,
+          "kind" : "disk",
+          "longFormat" : false,
+          "showAbove" : 0,
+          "showName" : false,
+          "style" : "number",
+          "symbol" : "sparkle"
+        },
+        {
+          "diskBelowGB" : 20,
+          "enabled" : false,
+          "kind" : "mode",
+          "longFormat" : false,
+          "showAbove" : 0,
+          "showName" : false,
+          "style" : "number",
+          "symbol" : "sparkle"
+        }
+      ],
+      "preset" : "limits",
+      "separator" : "dot",
+      "smallText" : false
+    },
     "showLimits" : true,
     "showSessions" : true,
     "textSize" : "extraLarge",
-    "theme" : "system",
+    "theme" : "dark",
     "width" : "normal"
   },
   "current" : "aae3b197-6012-47c4-a715-506e9ba29903",
   "enabled" : [
     "aae3b197-6012-47c4-a715-506e9ba29903"
   ],
-  "exportedAt" : "2026-10-30T00:47:59Z",
+  "exportedAt" : "2026-10-30T01:26:48Z",
   "format" : "claudepult-settings",
   "general" : {
     "backgroundTimeLimitMinutes" : 90,

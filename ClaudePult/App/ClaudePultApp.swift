@@ -81,6 +81,26 @@ struct ClaudePultApp: App {
         }
     }
 
+    private var menuBarData: MenuBarData {
+        var data = MenuBarData()
+        data.showsAlert = store.report?.hasRedProject ?? false
+        data.waiting = sessions.waitingCount
+        data.running = sessions.items.filter { $0.state == .running }.count
+        data.background = runs.running.count
+        data.queued = launcher.queued.count
+        data.session = usage.snapshot?.session?.utilization
+        data.week = usage.snapshot?.week?.utilization
+        data.modelWeeks = Dictionary((usage.snapshot?.otherWindows ?? []).map { ($0.key, $0.utilization) }) { first, _ in first }
+        data.sessionResetsAt = usage.snapshot?.session?.resetsAt
+        if case let .runsOutAt(date) = usage.forecast { data.forecastRunsOut = date }
+        if settings.menuBarConfig.element(.disk).enabled {
+            data.diskFreeBytes = store.report?.diskFreeBytes ?? DiskSpace.freeBytes()
+        }
+        data.modeName = modes.current?.name
+        data.modeIcon = modes.current?.icon
+        return data
+    }
+
     var body: some Scene {
         MenuBarExtra {
             MenuPanelView()
@@ -95,14 +115,8 @@ struct ClaudePultApp: App {
                 .environment(notifications)
                 .environment(modes)
         } label: {
-            MenuBarLabel(state: MenuBarState(
-                showsAlert: store.report?.hasRedProject ?? false,
-                waitingCount: sessions.waitingCount,
-                mode: settings.menuBarUsageMode,
-                session: usage.snapshot?.session?.utilization,
-                week: usage.snapshot?.week?.utilization
-            ))
-            .environment(requests)
+            MenuBarLabel(state: MenuBarState(config: settings.menuBarConfig, data: menuBarData))
+                .environment(requests)
         }
         .menuBarExtraStyle(.window)
 

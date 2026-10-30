@@ -1,3 +1,4 @@
+import AppKit
 import Foundation
 import UserNotifications
 
@@ -11,6 +12,7 @@ import UserNotifications
 /// - `ClaudePult --usage`, `ClaudePult --usage-raw` (subscription limits; the token is never printed), `--token-usage`
 /// - `ClaudePult --notifications-status`
 /// - `ClaudePult --modes`, `ClaudePult --export-settings <file.claudepult>` (import: open the file in Finder)
+/// - `ClaudePult --menubar-preview <file.png> [minimum|limits|everything]` (the menu bar item with sample data)
 @MainActor
 enum CommandLineTool {
     /// Returns an exit code if the arguments contain a command, `nil` to start the app normally.
@@ -103,6 +105,9 @@ enum CommandLineTool {
                 printError("error: \(error.localizedDescription)")
                 return 1
             }
+        }
+        if let index = arguments.firstIndex(of: "--menubar-preview"), index + 1 < arguments.count {
+            return menuBarPreview(path: arguments[index + 1], preset: arguments.dropFirst(index + 2).first)
         }
         if arguments.contains("--notifications-status") {
             return waitFor {
@@ -278,6 +283,40 @@ enum CommandLineTool {
 
     private nonisolated static func printError(_ message: String) {
         FileHandle.standardError.write(Data((message + "\n").utf8))
+    }
+
+    /// Draws the item as the menu bar would (dark and light) from the saved config, or from a preset.
+    private static func menuBarPreview(path: String, preset: String?) -> Int32 {
+        let config = preset.flatMap(MenuBarConfig.Preset.init(rawValue:)).map(MenuBarConfig.make) ?? AppSettings().menuBarConfig
+        let groups = MenuBarComposer.groups(config, .sample)
+        let item = MenuBarRenderer.image(groups, config: config)
+        let scale: CGFloat = 2, pad: CGFloat = 8
+        let size = NSSize(width: (item.size.width + pad * 2) * scale, height: (item.size.height + pad * 2) * scale * 2)
+        guard let rep = NSBitmapImageRep(bitmapDataPlanes: nil, pixelsWide: Int(size.width), pixelsHigh: Int(size.height),
+                                         bitsPerSample: 8, samplesPerPixel: 4, hasAlpha: true, isPlanar: false,
+                                         colorSpaceName: .deviceRGB, bytesPerRow: 0, bitsPerPixel: 0) else { return 1 }
+        NSGraphicsContext.saveGraphicsState()
+        NSGraphicsContext.current = NSGraphicsContext(bitmapImageRep: rep)
+        NSGraphicsContext.current?.cgContext.scaleBy(x: scale, y: scale)
+        let half = item.size.height + pad * 2
+        for (index, name) in [NSAppearance.Name.darkAqua, .aqua].enumerated() {
+            NSAppearance(named: name)?.performAsCurrentDrawingAppearance {
+                let band = NSRect(x: 0, y: CGFloat(index) * half, width: item.size.width + pad * 2, height: half)
+                (name == .darkAqua ? NSColor(white: 0.12, alpha: 1) : NSColor(white: 0.93, alpha: 1)).setFill()
+                band.fill()
+                item.draw(in: NSRect(x: pad, y: band.minY + pad, width: item.size.width, height: item.size.height))
+            }
+        }
+        NSGraphicsContext.restoreGraphicsState()
+        guard let png = rep.representation(using: .png, properties: [:]) else { return 1 }
+        do {
+            try png.write(to: URL(fileURLWithPath: path))
+            print("\(path): \(Int(item.size.width)) pt wide, \(groups.count) element(s)")
+            return 0
+        } catch {
+            printError(error.localizedDescription)
+            return 1
+        }
     }
 }
 

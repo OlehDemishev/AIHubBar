@@ -2,6 +2,22 @@
 
 Decisions made where the spec is silent or does not match reality. Newest at the top.
 
+## 2026-10-30 — Menu bar builder (SPEC-modes §9.2)
+
+**Config.** `MenuBarConfig` (JSON in UserDefaults key `menuBarConfig`, and in exports as `appearance.menuBarConfig`) always lists every element kind once; its order is the menu bar order and each element is on or off with its own options. Unknown kinds from newer files are dropped, missing ones are added switched off. The old `menuBarUsageMode` is only read to migrate (icon only → «Минимум»; session, session + week, ring → «Лимиты» with the same gauges), and exports still write a `menuBar` value derived from the config so older ClaudePult versions can import the file.
+
+**Composer and renderer.** `MenuBarComposer.groups(config, data)` is a pure function (tested) that turns the config and the current data into groups of segments; `MenuBarRenderer` draws them into one non-template image as before. A lone symbol is still shown as a template image, like a system item. If nothing is left to show (icon hidden, no events), the sparkle is drawn anyway — an empty item could not be clicked.
+
+**Separator.** The chosen separator («·», «|», space) goes only between two values (numbers, rings, bars); icons and counters are set apart by a 4 pt gap. With «·» this keeps Oleh's look «✦ 34% · 58% ✋1».
+
+**✋.** The waiting counter is now the SF Symbol `hand.raised.fill` in the menu bar colour instead of the ✋ emoji, matching the other counters (bolt — running sessions, moon — background runs, clock — queue).
+
+**Order** is changed with ↑ / ↓ buttons on each row (up = further left): a grouped `Form` on macOS does not support drag-to-reorder. **Width warning** above 180 pt: on a MacBook with a notch wider items can be hidden.
+
+**Not yet:** «Ближайший дедлайн» is listed but disabled until the calendar (stage 5); per-mode additions come with mode blocks (stage 4). Running sessions in the menu bar count Claude Code sessions in state «running» from the hooks.
+
+**Check without the screen.** `ClaudePult --menubar-preview <file.png> [preset]` draws the item with sample data on a dark and a light band, because the shell cannot capture the screen.
+
 ## 2026-10-30 — Usage endpoint: 429 backoff
 
 The usage endpoint started answering HTTP 429 (seen at the 1-minute pace plus app restarts and command-line checks). It sends `Retry-After: 0` while still refusing, so that header is only trusted when it asks for longer than our own pause. Now: after a 429 no request is made for 5, 10, 20, 40, then 60 minutes (or longer if `Retry-After` says so); the panel says «Сервер лимитов просит запрашивать реже — следующая попытка в HH:mm» and the refresh button waits too. The active interval is 2 minutes instead of the spec's 1 (idle stays 5). The last snapshot is kept in `usage-snapshot.json` (up to 24 h), so a restart shows the limits at once and does not fetch again if the last fetch is younger than the active interval.

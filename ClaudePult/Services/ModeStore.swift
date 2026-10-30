@@ -23,7 +23,9 @@ struct SettingsBundle: Codable, Equatable, Sendable {
         var animations: Bool
         var showLimits: Bool
         var showSessions: Bool
+        /// The pre-builder setting, still written so older versions can read the file.
         var menuBar: String
+        var menuBarConfig: MenuBarConfig?
     }
 
     var format: String
@@ -225,7 +227,8 @@ final class ModeStore {
                 textSize: settings.panelTextSize.rawValue, width: settings.panelWidth.rawValue,
                 density: settings.panelDensity.rawValue, theme: settings.panelTheme.rawValue,
                 animations: settings.panelAnimations, showLimits: settings.shows(.limits),
-                showSessions: settings.shows(.sessions), menuBar: settings.menuBarUsageMode.rawValue
+                showSessions: settings.shows(.sessions), menuBar: settings.menuBarConfig.legacyMode.rawValue,
+                menuBarConfig: settings.menuBarConfig
             ),
             modes: modes, enabled: enabledIDs, current: currentID
         )
@@ -272,7 +275,8 @@ final class ModeStore {
                 settings.panelAnimations = look.animations
                 settings.setShows(.limits, look.showLimits)
                 settings.setShows(.sessions, look.showSessions)
-                settings.menuBarUsageMode = MenuBarUsageMode(rawValue: look.menuBar) ?? .session
+                settings.menuBarConfig = look.menuBarConfig
+                    ?? MenuBarConfig.migrated(from: MenuBarUsageMode(rawValue: look.menuBar) ?? .session)
             }
             for mode in modes { try? FileManager.default.removeItem(at: fileURL(mode.id)) }
             modes = bundle.modes

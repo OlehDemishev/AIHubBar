@@ -9,9 +9,20 @@ struct MenuBarLabel: View {
     @Environment(AppRequests.self) private var requests
     @Environment(\.openWindow) private var openWindow
     @Environment(\.openSettings) private var openSettings
+    /// Ticks once a minute while the reset countdown is shown.
+    @State private var minute = Date.now
 
     var body: some View {
-        MenuBarIcon(state: state)
+        var shown = state
+        shown.data.now = minute
+        let ticks = state.config.element(.resetCountdown).enabled
+        return MenuBarIcon(state: shown)
+            .task(id: ticks) {
+                while ticks, !Task.isCancelled {
+                    minute = .now
+                    try? await Task.sleep(for: .seconds(60 - Double(Calendar.current.component(.second, from: .now))))
+                }
+            }
             .onChange(of: requests.window) {
                 guard let id = requests.window?.id else { return }
                 NSApp.activate()
@@ -20,124 +31,206 @@ struct MenuBarLabel: View {
     }
 }
 
-/// Everything the menu bar item shows.
+/// Everything the menu bar item shows: what to show (the builder config) and the data to show.
 struct MenuBarState: Hashable {
-    var showsAlert = false
-    var waitingCount = 0
-    var mode: MenuBarUsageMode = .iconOnly
-    var session: Double?
-    var week: Double?
-
-    /// Nothing besides the bare symbol to draw.
-    var isPlain: Bool {
-        !showsAlert && waitingCount == 0 && (mode == .iconOnly || session == nil)
-    }
-
-    var accessibilityText: String {
-        var parts = ["ClaudePult"]
-        if mode != .iconOnly, let session { parts.append("сессия \(Int(session.rounded())) %") }
-        if mode == .sessionAndWeek, let week { parts.append("неделя \(Int(week.rounded())) %") }
-        if showsAlert { parts.append("есть проекты с проблемами") }
-        if waitingCount > 0 { parts.append("ждут ответа: \(waitingCount)") }
-        return parts.joined(separator: ", ")
-    }
+    var config: MenuBarConfig
+    var data: MenuBarData
 }
 
-/// The sparkle, a red dot for red projects, usage (percent or ring, coloured green/orange/red) and the number of
-/// waiting sessions — drawn as one non-template image, because `MenuBarExtra` turns template labels monochrome.
+/// The menu bar item drawn from `MenuBarComposer` segments — one non-template image, because `MenuBarExtra`
+/// turns template labels monochrome. A lone symbol stays a template image, like a system item.
 struct MenuBarIcon: View {
     let state: MenuBarState
 
     var body: some View {
+        let groups = MenuBarComposer.groups(state.config, state.data)
         Group {
-            if state.isPlain {
-                Image(systemName: "sparkle")
+            if let symbol = MenuBarComposer.plainSymbol(groups) {
+                Image(systemName: symbol)
             } else {
-                Image(nsImage: MenuBarRenderer.image(for: state))
+                Image(nsImage: MenuBarRenderer.image(groups, config: state.config))
             }
         }
-        .accessibilityLabel(state.accessibilityText)
+        .accessibilityLabel(MenuBarComposer.accessibilityText(state.config, state.data))
     }
 }
 
 @MainActor
 enum MenuBarRenderer {
-    private static var cache: [MenuBarState: NSImage] = [:]
+    private struct Key: Hashable {
+        var groups: [[MenuBarSegment]]
+        var separator: MenuBarConfig.Separator
+        var smallText: Bool
+    }
 
-    static func image(for state: MenuBarState) -> NSImage {
-        if let cached = cache[state] { return cached }
-        let font = NSFont.monospacedDigitSystemFont(ofSize: 12, weight: .medium)
-        var parts: [(String, NSColor)] = []
-        if state.mode == .session || state.mode == .sessionAndWeek, let session = state.session {
-            parts.append(("\(Int(session.rounded()))%", color(session)))
-        }
-        if state.mode == .sessionAndWeek, let week = state.week {
-            parts.append((" · ", .labelColor))
-            parts.append(("\(Int(week.rounded()))%", color(week)))
-        }
-        if state.waitingCount > 0 {
-            // ✋ marks the waiting count so it is not read as part of the percentages.
-            parts.append(((parts.isEmpty ? "" : " ") + "✋\(state.waitingCount)", .labelColor))
-        }
-        let ring = state.mode == .ring ? state.session : nil
+    private static var cache: [Key: NSImage] = [:]
 
-        let iconWidth: CGFloat = 16
-        let ringWidth: CGFloat = ring == nil ? 0 : 16
-        let textWidths = parts.map { ($0.0 as NSString).size(withAttributes: [.font: font]).width }
-        let textWidth = textWidths.reduce(0, +)
-        let width = iconWidth + (ringWidth > 0 ? 3 + ringWidth : 0) + (textWidth > 0 ? 3 + textWidth : 0)
-        let height: CGFloat = 16
+    /// Wider than this and a MacBook with a notch may hide the item (SPEC-modes §7).
+    static let wideWidth: CGFloat = 180
 
-        let image = NSImage(size: NSSize(width: ceil(width), height: height), flipped: false) { rect in
-            let config = NSImage.SymbolConfiguration(pointSize: 13, weight: .regular)
-                .applying(NSImage.SymbolConfiguration(paletteColors: [.labelColor]))
-            if let symbol = NSImage(systemSymbolName: "sparkle", accessibilityDescription: nil)?.withSymbolConfiguration(config) {
-                let size = symbol.size
-                symbol.draw(in: NSRect(x: (iconWidth - size.width) / 2, y: (height - size.height) / 2, width: size.width, height: size.height))
-            }
-            if state.showsAlert {
-                NSColor.systemRed.setFill()
-                NSBezierPath(ovalIn: NSRect(x: iconWidth - 5, y: 0.5, width: 5.5, height: 5.5)).fill()
-            }
-            var x = iconWidth
-            if let ring {
-                x += 3
-                let box = NSRect(x: x + 1, y: 1, width: 14, height: 14).insetBy(dx: 1.25, dy: 1.25)
-                let track = NSBezierPath(ovalIn: box)
-                track.lineWidth = 2.5
-                NSColor.labelColor.withAlphaComponent(0.25).setStroke()
-                track.stroke()
-                let arc = NSBezierPath()
-                arc.appendArc(withCenter: NSPoint(x: box.midX, y: box.midY), radius: box.width / 2,
-                              startAngle: 90, endAngle: 90 - 360 * min(max(ring, 0), 100) / 100, clockwise: true)
-                arc.lineWidth = 2.5
-                arc.lineCapStyle = .round
-                color(ring).setStroke()
-                arc.stroke()
-                x += ringWidth
-            }
-            if textWidth > 0 {
-                x += 3
-                for (index, part) in parts.enumerated() {
-                    let attributes: [NSAttributedString.Key: Any] = [.font: font, .foregroundColor: part.1]
-                    let size = (part.0 as NSString).size(withAttributes: attributes)
-                    (part.0 as NSString).draw(at: NSPoint(x: x, y: (rect.height - size.height) / 2), withAttributes: attributes)
-                    x += textWidths[index]
-                }
-            }
+    static func image(_ groups: [[MenuBarSegment]], config: MenuBarConfig) -> NSImage {
+        let key = Key(groups: groups, separator: config.separator, smallText: config.smallText)
+        if let cached = cache[key] { return cached }
+        let layout = Layout(groups: groups, separator: config.separator, small: config.smallText)
+        let image = NSImage(size: NSSize(width: ceil(layout.width), height: Layout.height), flipped: false) { _ in
+            layout.draw()
             return true
         }
         image.isTemplate = false
         if cache.count > 200 { cache.removeAll() }
-        cache[state] = image
+        cache[key] = image
         return image
     }
 
-    static func color(_ percent: Double) -> NSColor {
+    static func width(_ config: MenuBarConfig, _ data: MenuBarData) -> CGFloat {
+        let groups = MenuBarComposer.groups(config, data)
+        if MenuBarComposer.plainSymbol(groups) != nil { return 16 }
+        return Layout(groups: groups, separator: config.separator, small: config.smallText).width
+    }
+
+    nonisolated static func color(_ percent: Double) -> NSColor {
         switch UsageLevel(percent) {
         case .low: .systemGreen
         case .medium: .systemOrange
         case .high: .systemRed
         }
+    }
+
+    nonisolated static func color(_ tint: MenuBarSegment.Tint) -> NSColor {
+        switch tint {
+        case .label: .labelColor
+        case .secondary: .secondaryLabelColor
+        case let .level(value): color(value)
+        case .warning: .systemOrange
+        }
+    }
+
+    /// Measures every piece once; `draw()` walks the same list.
+    private struct Layout {
+        static let height: CGFloat = 16
+        static let gap: CGFloat = 4
+
+        enum Piece {
+            case symbol(String, size: CGFloat, NSColor)
+            case dot(standalone: Bool)
+            case text(String, NSColor)
+            case ring(Double, NSColor)
+            case bar(Double, NSColor)
+            case space(CGFloat)
+        }
+
+        let font: NSFont
+        let symbolSize: CGFloat
+        var pieces: [(Piece, CGFloat)] = []
+
+        init(groups: [[MenuBarSegment]], separator: MenuBarConfig.Separator, small: Bool) {
+            font = NSFont.monospacedDigitSystemFont(ofSize: small ? 10 : 12, weight: .medium)
+            symbolSize = small ? 11 : 13
+            for (index, group) in groups.enumerated() {
+                if index > 0 {
+                    if MenuBarComposer.usesSeparator(between: groups[index - 1], and: group) {
+                        add(.text(separator.text, .labelColor))
+                    } else {
+                        add(.space(Self.gap))
+                    }
+                }
+                for (position, segment) in group.enumerated() {
+                    switch segment {
+                    case let .symbol(name): add(.symbol(name, size: symbolSize, .labelColor))
+                    case .dot: add(.dot(standalone: position == 0))
+                    case let .text(text, tint): add(.text(text, MenuBarRenderer.color(tint)))
+                    case let .labeled(symbol, text, tint):
+                        add(.symbol(symbol, size: symbolSize - 2, MenuBarRenderer.color(tint)))
+                        add(.space(2))
+                        add(.text(text, MenuBarRenderer.color(tint)))
+                    case let .ring(value, tint): add(.ring(value, MenuBarRenderer.color(tint)))
+                    case let .bar(value, tint): add(.bar(value, MenuBarRenderer.color(tint)))
+                    }
+                }
+            }
+        }
+
+        var width: CGFloat { max(pieces.reduce(0) { $0 + $1.1 }, 1) }
+
+        private mutating func add(_ piece: Piece) {
+            let width: CGFloat = switch piece {
+            // The main icon gets the usual menu bar room; counter symbols sit tight against their number.
+            case let .symbol(name, size, _): symbolImage(name, size: size, color: .labelColor).map { size < symbolSize ? $0.size.width : max($0.size.width, size + 3) } ?? 0
+            case let .dot(standalone): standalone ? 7 : 0
+            case let .text(text, _): (text as NSString).size(withAttributes: [.font: font]).width
+            case .ring: 14
+            case .bar: 22
+            case let .space(width): width
+            }
+            pieces.append((piece, width))
+        }
+
+        private func symbolImage(_ name: String, size: CGFloat, color: NSColor) -> NSImage? {
+            let config = NSImage.SymbolConfiguration(pointSize: size, weight: .regular)
+                .applying(NSImage.SymbolConfiguration(paletteColors: [color]))
+            return NSImage(systemSymbolName: name, accessibilityDescription: nil)?.withSymbolConfiguration(config)
+        }
+
+        func draw() {
+            let height = Self.height
+            var x: CGFloat = 0
+            for (piece, width) in pieces {
+                switch piece {
+                case let .symbol(name, size, color):
+                    if let symbol = symbolImage(name, size: size, color: color) {
+                        let s = symbol.size
+                        symbol.draw(in: NSRect(x: x + (width - s.width) / 2, y: (height - s.height) / 2, width: s.width, height: s.height))
+                    }
+                case let .dot(standalone):
+                    NSColor.systemRed.setFill()
+                    // On the icon: its top-right corner; alone: centred.
+                    let rect = standalone
+                        ? NSRect(x: x + 0.75, y: (height - 5.5) / 2, width: 5.5, height: 5.5)
+                        : NSRect(x: x - 5, y: 0.5, width: 5.5, height: 5.5)
+                    NSBezierPath(ovalIn: rect).fill()
+                case let .text(text, color):
+                    let attributes: [NSAttributedString.Key: Any] = [.font: font, .foregroundColor: color]
+                    let size = (text as NSString).size(withAttributes: attributes)
+                    (text as NSString).draw(at: NSPoint(x: x, y: (height - size.height) / 2), withAttributes: attributes)
+                case let .ring(value, color):
+                    let box = NSRect(x: x, y: 1, width: 14, height: 14).insetBy(dx: 1.25, dy: 1.25)
+                    let track = NSBezierPath(ovalIn: box)
+                    track.lineWidth = 2.5
+                    NSColor.labelColor.withAlphaComponent(0.25).setStroke()
+                    track.stroke()
+                    let arc = NSBezierPath()
+                    arc.appendArc(withCenter: NSPoint(x: box.midX, y: box.midY), radius: box.width / 2,
+                                  startAngle: 90, endAngle: 90 - 360 * min(max(value, 0), 100) / 100, clockwise: true)
+                    arc.lineWidth = 2.5
+                    arc.lineCapStyle = .round
+                    color.setStroke()
+                    arc.stroke()
+                case let .bar(value, color):
+                    let track = NSRect(x: x, y: (height - 5) / 2, width: width, height: 5)
+                    NSColor.labelColor.withAlphaComponent(0.25).setFill()
+                    NSBezierPath(roundedRect: track, xRadius: 2.5, yRadius: 2.5).fill()
+                    let filled = NSRect(x: x, y: track.minY, width: max(5, width * min(max(value, 0), 100) / 100), height: 5)
+                    color.setFill()
+                    NSBezierPath(roundedRect: filled, xRadius: 2.5, yRadius: 2.5).fill()
+                case .space:
+                    break
+                }
+                x += width
+            }
+        }
+    }
+}
+
+/// Free space on the system volume, for the menu bar when no report gives it. Read at most every 5 minutes.
+@MainActor
+enum DiskSpace {
+    private static var cached: (bytes: Int64?, at: Date)?
+
+    static func freeBytes(now: Date = .now) -> Int64? {
+        if let cached, now.timeIntervalSince(cached.at) < 300 { return cached.bytes }
+        let values = try? URL(fileURLWithPath: NSHomeDirectory()).resourceValues(forKeys: [.volumeAvailableCapacityForImportantUsageKey])
+        let bytes = values?.volumeAvailableCapacityForImportantUsage
+        cached = (bytes, now)
+        return bytes
     }
 }

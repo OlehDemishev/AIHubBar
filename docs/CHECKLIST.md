@@ -97,3 +97,16 @@ Panel snapshots: `defaults write com.demishev.claudepult DebugPanelSnapshot -boo
 | Switcher in the panel with 2+ modes, switching applies folders/launch mode | Auto; **Oleh: duplicate the mode in Settings → Режимы and look** |
 | Export all settings / one mode; no home path, no secrets | Auto + Live (`docs/modes/oleh-developer.claudepult`) |
 | Import «Заменить» / «Добавить», tolerant to newer files | Auto; **Oleh: double-click a .claudepult file** |
+
+## Menu bar builder (SPEC-modes §9.2)
+
+| Scenario | Checked |
+|---|---|
+| Old setting migrates unchanged (icon only / session / session + week / ring) | Auto; Live (`--menubar-preview`: «✦• 34% · 58% ✋1», as before) |
+| Presets, every element once, tolerant decoding of unknown elements | Auto |
+| Number / ring / bar, «от N %», mono, model week, counters only > 0, countdown, disk below N GB, mode icon or name | Auto; Live («Всё» drawn dark and light) |
+| Nothing to show → the sparkle stays, so the item can always be clicked | Auto |
+| Width warning above 180 pt | Live («Всё» with sample data is ~400 pt) |
+| Export / import carries the builder; old files without it migrate from `menuBar` | Auto |
+| Settings → «Строка меню»: preset switch, toggles, order arrows, options, live preview | **Oleh: open the tab and try** |
+| Reset countdown ticks every minute in the real menu bar | **Oleh: turn on «До сброса сессии» and watch** |

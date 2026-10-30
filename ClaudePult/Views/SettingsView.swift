@@ -1,10 +1,10 @@
 import AppKit
 import SwiftUI
 
-/// Settings window, one tab per area: general, modes, appearance, Claude, sessions, limits.
+/// Settings window, one tab per area: general, modes, appearance, menu bar, Claude, sessions, limits.
 struct SettingsView: View {
     enum Tab: String, CaseIterable {
-        case general, modes, appearance, claude, sessions, limits
+        case general, modes, appearance, menuBar, claude, sessions, limits
     }
 
     @Environment(AppSettings.self) private var settings
@@ -21,6 +21,9 @@ struct SettingsView: View {
             AppearanceSettings()
                 .tabItem { Label("Внешний вид", systemImage: "paintbrush") }
                 .tag(Tab.appearance)
+            MenuBarSettings()
+                .tabItem { Label("Строка меню", systemImage: "menubar.rectangle") }
+                .tag(Tab.menuBar)
             ClaudeSettings()
                 .tabItem { Label("Claude", systemImage: "sparkle") }
                 .tag(Tab.claude)
@@ -48,7 +51,7 @@ private struct SettingsPage<Content: View>: View {
     }
 }
 
-private struct Footnote: View {
+struct Footnote: View {
     let text: String
 
     var body: some View {
@@ -190,12 +193,6 @@ private struct AppearanceSettings: View {
                 Text("Блоки панели")
             } footer: {
                 Footnote(text: "Скрытый блок не пропадает из работы: сессии и лимиты отслеживаются, уведомления приходят. Проекты и общие команды включаются у каждого режима на вкладке «Режимы».")
-            }
-
-            Section("Строка меню") {
-                Picker("Рядом со значком", selection: $settings.menuBarUsageMode) {
-                    ForEach(MenuBarUsageMode.allCases, id: \.self) { Text($0.title).tag($0) }
-                }
             }
 
             Section {

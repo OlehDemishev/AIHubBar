@@ -4,7 +4,7 @@ Native macOS menu bar app (no Dock icon): a control panel for the projects in `~
 
 ## What it does
 
-Click ✦ in the menu bar. Next to it: the subscription usage (5-hour session %, or session and week %, or a ring — green < 50 %, orange 50–80 %, red > 80 %), a red dot when a project's health is red and ✋ with the number of Claude sessions waiting for an answer.
+Click ✦ in the menu bar. Next to it, by default: the subscription usage (5-hour session and week % — green < 50 %, orange 50–80 %, red > 80 %), a red dot when a project's health is red and ✋ with the number of Claude sessions waiting for an answer. What the menu bar shows is built in Settings → «Строка меню» (presets, elements and their order, gauge style, separator, text size, colour; live preview).
 
 **Лимиты** (top of the panel) — the 5-hour session with a countdown to the reset and a forecast from the last 30 minutes («хватит до ~16:40» / «до сброса хватит»), the week, per-model weeks, extra usage if enabled; «Расход по проектам» estimates each project's share and the heaviest session for the session / today / week from Claude Code's transcripts. Notifications once per window at 50/80/95 % (configurable) and when a limit is restored, optionally to Telegram. A background run while the session is above 90 % asks: start now or after the reset. Data from the same endpoint Claude Code uses (OAuth token read from the Keychain item «Claude Code-credentials», never stored); current values are written to `~/Library/Application Support/ClaudePult/usage.json` (`five_hour`, `seven_day`, `updated`) for report.py and the bot.
 
@@ -50,7 +50,8 @@ Notifications are clickable: «Claude ждёт ответа» → the session's 
 «Настройки…» (⌘,), one tab per area:
 
 - **Основные** — start at login, projects folder, `_daily-report` folder, version, app log.
-- **Внешний вид** — theme (system / light / dark, also for ClaudePult's windows), text size (small / normal / large / extra large; the panel widens with it), panel width, row density, opening animation, which blocks to show (Лимиты, Сессии, Проекты, Команды), what the menu bar shows next to the icon, «Сбросить внешний вид».
+- **Внешний вид** — theme (system / light / dark, also for ClaudePult's windows), text size (small / normal / large / extra large; the panel widens with it), panel width, row density, opening animation, which blocks to show (Лимиты, Сессии, Проекты, Команды), «Сбросить внешний вид».
+- **Строка меню** — the menu bar builder (SPEC-modes §7): presets «Минимум» / «Лимиты» / «Всё» / «Свой»; elements in order, each on/off with its options (icon symbol or the mode's icon; session / week / model week as number, ring or bar, shown always or from N %; reset countdown «2:14» or «2 ч 14 мин»; forecast; waiting, running sessions, background runs, queued launches — only when > 0; free disk below N GB; current mode as icon or name); separator, small text, colour by level or mono; live preview with «Сейчас» / «Пример со всем» and a warning when the item gets wider than 180 pt. CLI: `ClaudePult --menubar-preview <file.png> [minimum|limits|everything]` draws the item (dark and light) with sample data.
 - **Claude** — path to `claude` (empty = auto-detect), launch mode (ask / Терминал / Фон), background time limit, background results in Telegram.
 - **Сессии** — install / update / remove the session hooks.
 - **Лимиты** — notification thresholds, limit alerts to Telegram.
