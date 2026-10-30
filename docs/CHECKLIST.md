@@ -280,3 +280,12 @@ Panel snapshots: `defaults write com.demishev.claudepult DebugPanelSnapshot -boo
 |---|---|
 | A click on a block's title folds it; the choice is kept (`collapsedBlocks`) | Auto (`CollapsedBlocksTests`) + live (panel snapshot) |
 | Folded «Лимиты» still show session and week %, «Сессии» keep «ждут ответа», «Ближайшее» shows the count (red if overdue), «Проекты» the count | Live (panel snapshot) |
+
+## Claude Code sign-in renewal (2026-10-30)
+
+| Scenario | Checked |
+|---|---|
+| A one-word `claude -p` request renews the expired token (11:02 → 20:11) | Live (by hand, token never printed) |
+| The request leaves no session file, no hook record, no transcript (`--no-session-persistence`, `--setting-sources ""`, `--tools ""`) | Live |
+| At most one attempt an hour; arguments without `--bare` (which skips the keychain) | Auto (`LoginRenewalTests`) |
+| ClaudePult renews by itself the next time the token expires and the limits keep updating | Not yet seen: the token was renewed by hand during the check; due around 20:11 |

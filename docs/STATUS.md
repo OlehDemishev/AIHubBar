@@ -5,16 +5,16 @@
 **Updated:** 2026-10-30
 
 **Now:**
-- collapsible panel blocks — branch `feat/collapsible-blocks`, PR open; next: renew the Claude Code login automatically
+- automatic renewal of the Claude Code sign-in — branch `feat/renew-login`, PR open; collapsible panel blocks merged (PR #64)
 
 **Next:**
 - menu bar elements reordered by dragging (needs a different list than a grouped Form)
-- renew the Claude Code login automatically: a tiny `claude -p` renews the token for ~8 h (checked live)
 - fix whatever Oleh finds in the translations (machine translation; native review for ja, ko, ar at least)
 - stage 8 rest: Developer ID signing and notarization, Sparkle updates — once Oleh decides on Developer ID, the name and where updates are hosted
 - Fix whatever Oleh finds in docs/CHECKLIST.md
 
 **Needs Oleh:**
+- after ~20:11 today: check that the limits keep updating by themselves (the sign-in renewal runs when the token expires)
 - read docs/GUIDE.md as a newcomer would
 - review the languages: Settings → Основные → «Язык интерфейса» → a language → «Перезапустить» (and back); Arabic should mirror right-to-left
 - try Settings → Режимы → «+» → «Помощник…»
@@ -31,6 +31,12 @@
 - hooks are installed in ~/.claude/settings.json; backup of the original: ~/.claude/settings.json.claudepult-backup-20261029T192827
 - delete or archive the old repo `OlehDemishev/ClaudeBar`; turn on start at login if wanted
 <!-- summary:end -->
+
+## 2026-10-30 — Renew the Claude Code sign-in automatically (branch `feat/renew-login`)
+
+Done: the limits stopped updating because the Claude Code token in the Keychain expired at 11:02 — only `claude` renews it, and the work happens in the Claude app, whose own Claude Code doesn't. When the limits answer «вход устарел», ClaudePult now sends a one-word request through `claude` (Haiku, no tools, no MCP, no settings so no hooks, no session saved), at most once an hour, and asks for the limits again. Setting «Продлевать вход Claude Code сам» on the Claude Code tab, on by default. ClaudePult still never reads, stores or writes the token itself.
+Checked: by hand the request renewed the token 11:02 → 20:11 (token never printed) and left no session file, hook record or transcript (test leftovers removed); `xcodebuild test` — 162 tests green (new `LoginRenewalTests`); catalog synced, 2 strings in all 12 languages; installed, `--usage` reads the limits again (19 % / 73 %). CI not set up; checks run locally.
+Left: the automatic path itself runs only at the next expiry (~20:11).
 
 ## 2026-10-30 — Collapsible panel blocks (branch `feat/collapsible-blocks`)
 

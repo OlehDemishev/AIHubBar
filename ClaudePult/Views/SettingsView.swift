@@ -333,6 +333,13 @@ private struct LimitSection: View {
                     .onSubmit(applyThresholds)
             }
             Toggle("Уведомления о лимитах ещё и в Telegram", isOn: $settings.limitAlertsToTelegram)
+            VStack(alignment: .leading, spacing: 2) {
+                Toggle("Продлевать вход Claude Code сам", isOn: $settings.renewClaudeLogin)
+                Text("Когда вход истёк (claude давно не запускался, а работа идёт в приложении Claude), ClaudePult отправляет через claude запрос из одного слова — самая маленькая модель, без инструментов, не чаще раза в час. Вход продлевается примерно на 8 часов.")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
             if let error = usage.error {
                 Text(error).font(.callout).foregroundStyle(.orange)
             }

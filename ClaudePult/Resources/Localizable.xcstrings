@@ -19493,6 +19493,82 @@
         }
       }
     },
+    "Когда вход истёк (claude давно не запускался, а работа идёт в приложении Claude), ClaudePult отправляет через claude запрос из одного слова — самая маленькая модель, без инструментов, не чаще раза в час. Вход продлевается примерно на 8 часов.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "عند انتهاء تسجيل الدخول (لم يُشغَّل claude منذ مدة والعمل يجري في تطبيق Claude)، يرسل ClaudePult عبر claude طلبًا من كلمة واحدة — أصغر نموذج، بلا أدوات، مرة واحدة في الساعة على الأكثر. يُمدَّد تسجيل الدخول نحو 8 ساعات."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wenn die Anmeldung abgelaufen ist (claude lief länger nicht, gearbeitet wird in der Claude-App), sendet ClaudePult über claude eine Ein-Wort-Anfrage — kleinstes Modell, ohne Werkzeuge, höchstens einmal pro Stunde. Die Anmeldung gilt dann etwa 8 Stunden."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "When the sign-in has expired (claude hasn't run for a while and you work in the Claude app), ClaudePult sends a one-word request through claude — the smallest model, no tools, at most once an hour. The sign-in is renewed for about 8 hours."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cuando el inicio de sesión caduca (claude lleva tiempo sin ejecutarse y trabajas en la app Claude), ClaudePult envía a través de claude una petición de una palabra: el modelo más pequeño, sin herramientas, como mucho una vez por hora. La sesión se renueva unas 8 horas."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quand la connexion a expiré (claude n’a pas tourné depuis un moment et vous travaillez dans l’app Claude), ClaudePult envoie via claude une requête d’un mot — le plus petit modèle, sans outils, au plus une fois par heure. La connexion est renouvelée pour environ 8 heures."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Saat login kedaluwarsa (claude lama tidak dijalankan dan Anda bekerja di aplikasi Claude), ClaudePult mengirim permintaan satu kata lewat claude — model terkecil, tanpa alat, paling sering sekali per jam. Login diperpanjang sekitar 8 jam."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quando l’accesso è scaduto (claude non gira da un po’ e lavori nell’app Claude), ClaudePult invia tramite claude una richiesta di una parola — il modello più piccolo, senza strumenti, al massimo una volta l’ora. L’accesso viene rinnovato per circa 8 ore."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ログインが期限切れになると（しばらく claude を起動せず Claude アプリで作業している場合）、ClaudePult は claude 経由で一語のリクエストを送ります。最小のモデルでツールなし、1 時間に 1 回まで。ログインは約 8 時間延長されます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "로그인이 만료되면(claude를 한동안 실행하지 않고 Claude 앱에서 작업하는 경우) ClaudePult가 claude를 통해 한 단어 요청을 보냅니다. 가장 작은 모델, 도구 없음, 한 시간에 최대 한 번. 로그인은 약 8시간 연장됩니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gdy logowanie wygaśnie (claude dawno nie był uruchamiany, a praca idzie w aplikacji Claude), ClaudePult wysyła przez claude zapytanie z jednego słowa — najmniejszy model, bez narzędzi, nie częściej niż raz na godzinę. Logowanie przedłuża się na około 8 godzin."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quando o login expira (o claude não roda há algum tempo e você trabalha no app Claude), o ClaudePult envia pelo claude um pedido de uma palavra — o menor modelo, sem ferramentas, no máximo uma vez por hora. O login é renovado por cerca de 8 horas."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Коли вхід завершився (claude давно не запускався, а робота йде в застосунку Claude), ClaudePult надсилає через claude запит з одного слова — найменша модель, без інструментів, не частіше ніж раз на годину. Вхід подовжується приблизно на 8 годин."
+          }
+        }
+      }
+    },
     "Код выхода %d": {
       "localizations": {
         "ar": {
@@ -35099,6 +35175,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Прогноз (якщо не вистачить до скидання)"
+          }
+        }
+      }
+    },
+    "Продлевать вход Claude Code сам": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تجديد تسجيل الدخول إلى Claude Code تلقائيًا"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude-Code-Anmeldung automatisch verlängern"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Renew the Claude Code sign-in automatically"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Renovar automáticamente el inicio de sesión de Claude Code"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Renouveler automatiquement la connexion à Claude Code"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Perbarui login Claude Code secara otomatis"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rinnova automaticamente l’accesso a Claude Code"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude Code のログインを自動で更新"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude Code 로그인 자동 갱신"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Odnawiaj logowanie do Claude Code automatycznie"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Renovar automaticamente o login do Claude Code"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Подовжувати вхід Claude Code автоматично"
           }
         }
       }
