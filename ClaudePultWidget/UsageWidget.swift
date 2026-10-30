@@ -110,9 +110,9 @@ func levelColor(_ percent: Double) -> Color {
 func resetText(_ date: Date?, now: Date) -> String? {
     guard let date else { return nil }
     let minutes = Int(max(0, date.timeIntervalSince(now)) / 60)
-    if minutes < 60 { return "сброс через \(minutes) мин" }
-    if minutes < 24 * 60 { return "сброс через \(minutes / 60) ч \(minutes % 60) мин" }
-    return "сброс " + date.formatted(.dateTime.weekday(.abbreviated).hour().minute())
+    if minutes < 60 { return String(localized: "сброс через \(minutes) мин") }
+    if minutes < 24 * 60 { return String(localized: "сброс через \(minutes / 60) ч \(minutes % 60) мин") }
+    return String(localized: "сброс \(date.formatted(.dateTime.weekday(.abbreviated).hour().minute()))")
 }
 
 struct SmallUsageView: View {
@@ -158,8 +158,8 @@ struct MediumUsageView: View {
                         Text(updated, style: .relative).font(.caption2).foregroundStyle(.secondary)
                     }
                 }
-                if let session = usage.session { row("Сессия (5 ч)", session) }
-                if let week = usage.week { row("Неделя", week) }
+                if let session = usage.session { row(String(localized: "Сессия (5 ч)"), session) }
+                if let week = usage.week { row(String(localized: "Неделя"), week) }
             }
         } else {
             NoDataView()

@@ -52,6 +52,12 @@
 - delete or archive the old repo `OlehDemishev/ClaudeBar`; turn on start at login if wanted
 <!-- summary:end -->
 
+## 2026-10-30 — Widgets in 13 languages (branch `feat/widget-languages`)
+
+Done: the widget extension was Russian-only. It now has its own `Localizable.xcstrings` (23 strings; 7 reuse the app's translations) and `CFBundleLocalizations`; the reset texts and row titles became localizable. Widgets follow the system language — the app's «Язык интерфейса» override doesn't reach extensions.
+Checked: 234 + 12 tests green (a per-language check of the built widget tables).
+Left: —
+
 ## 2026-10-30 — Session rows open on a click anywhere (branch `fix/session-row-click`)
 
 Done: Oleh asked for the whole session row to open the session, not only the icon that appears on hover. The row now has a full-width hit area: a session comes to the front (its Terminal tab, the Claude app session or the folder), a background run opens its log; the hover icons and the approval buttons keep working. The hint says «Клик — открыть». 13 languages.
