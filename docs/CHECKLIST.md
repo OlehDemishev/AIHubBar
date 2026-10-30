@@ -353,3 +353,15 @@ Panel snapshots: `defaults write com.demishev.claudepult DebugPanelSnapshot -boo
 | «Утилиты Mac» exists in all 13 languages with no source and the four tools shown; «Свой» stays last; the assistant ticks its modules, hides limits and sessions and skips the project questions; adding it from Settings needs no folder and installs its modules | Auto (`UtilitiesTemplateTests`) |
 | The panel with both modules (real window capture): two command buttons, six toggles, desktop icons shown as on; «Мой IP в сети» clicked — the address appeared under the buttons, `exit 0` in the log | Live (modules added to Oleh's profile for the check, profile restored) |
 | Dark mode, desktop icons (restarts Finder), lock, display off, eject, empty Trash — they change the Mac, not run here | Oleh |
+
+
+## Release without an Apple Developer account (2026-10-30)
+
+| Scenario | Checked |
+|---|---|
+| History before going public: no tokens, keys or secret files in 182 commits; author e-mails in commit headers (left as they are, Oleh's call) | Script scan |
+| Keys made once as files, not in the login keychain: «ClaudePult Release» certificate (to 2036) and the Sparkle Ed25519 key | Live |
+| `scripts/release.sh 0.2.0`: Release build 0.2.0 (183), signed inside out, `codesign --verify --deep --strict` passes, the widget keeps its sandbox, no get-task-allow, designated requirement bound to the certificate, the binary loads Sparkle and runs, `.dmg` checksum valid, appcast with a verified Ed25519 signature; Gatekeeper rejects it (expected without Developer ID) | Live (not published) |
+| Tests with Sparkle in the host app | Auto (192 green) |
+| Publishing, downloading on another Mac, «Open Anyway», a real Sparkle update from one release to the next | Oleh — needs the repository public and two releases |
+

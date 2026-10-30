@@ -5,7 +5,7 @@
 **Updated:** 2026-10-30
 
 **Now:**
-- SPEC-profiles stage 6 merged (PR #83): Быстрые команды, Быстрые переключатели, «Утилиты Mac» — SPEC-profiles done
+- release without an Apple Developer account: Sparkle, self-signed signing, `scripts/release.sh`, MIT license — branch `feat/release-without-apple` (worktree `.claude/worktrees/release`), PR open
 - Windows and Linux specs merged (PR #73); implementation waits for Oleh
 
 **Next:**
@@ -17,6 +17,8 @@
 - Windows and Linux versions (docs/SPEC-windows.md, docs/SPEC-linux.md) — only when Oleh says; stage 0 (fact checks in VMs) first
 
 **Needs Oleh:**
+- back up `~/Library/Application Support/ClaudePult-release/` (signing certificate and update key; without them updates break)
+- to share ClaudePult: make the repository public, then `scripts/release.sh 0.2.0 --publish` (docs/RELEASE.md)
 - try «Быстрые команды» and «Быстрые переключатели» (Settings → «Модули» → «Установить»), or the «Утилиты Mac» template; the toggles change the Mac, so they were not pressed during checks
 - try «Не спать»: Settings → «Модули» → «Установить»; with Claude working the panel says «держу: работает Claude» (check with `pmset -g assertions`)
 - try «Ресурсы Mac»: Settings → «Модули» → «Установить», then the panel block; optionally «Процессор» / «Память» in Settings → «Строка меню»
@@ -32,13 +34,19 @@
 - try Settings → Профили (duplicate the profile → switcher appears in the panel) and a double-click on a .claudepult file
 - try Settings → Профили → «+» → a template; template texts can still be reviewed in docs/TEMPLATES.md
 - for live checks of AI services: install Codex CLI (`brew install --cask codex`) and Gemini CLI (`brew install gemini-cli`) or Antigravity CLI, put API keys in Settings → «Сервисы AI» and press «Проверить» (optional: Ollama for a free local model)
-- before stage 8: Apple Developer Program (Developer ID, notarization) for distributing ClaudePult; decide on the name (SPEC-modes §10.4)
+- optional later: Apple Developer Program (Developer ID, notarization) to drop «Open Anyway»; decide on the name before wide sharing (SPEC-modes §10.4)
 - try the «Внешний вид» settings tab (theme, width, density not checked by eye)
 - optional, in _daily-report (not changed by ClaudePult): report.py/bot.py could read `~/Library/Application Support/ClaudePult/usage.json` (`five_hour`, `seven_day`, `updated`) for a /limits bot command or a limits line in the report
 - go through the «Oleh» rows of docs/CHECKLIST.md (buttons inside the panel, Settings, notifications, Telegram messages) — automation cannot click inside ClaudePult
 - hooks are installed in ~/.claude/settings.json; backup of the original: ~/.claude/settings.json.claudepult-backup-20261029T192827
 - delete or archive the old repo `OlehDemishev/ClaudeBar`; turn on start at login if wanted
 <!-- summary:end -->
+
+## 2026-10-30 — Release without an Apple Developer account (branch `feat/release-without-apple`)
+
+Done: history checked before going public (no secrets; author e-mails stay — Oleh's call). MIT `LICENSE`. Sparkle 2.6.4 via SPM: feed `releases/latest/download/appcast.xml`, `SUPublicEDKey`, daily checks, «Обновления» in Settings → Основные («Проверять раз в день», «Проверить сейчас»). One-time keys as files in `~/Library/Application Support/ClaudePult-release/` (not the login keychain): a self-signed «ClaudePult Release» code signing certificate (`scripts/release-tools/make-signing-cert.sh`) and an Ed25519 update key (`scripts/release-tools/sparkle-key.swift`, CryptoKit). `scripts/release.sh <version> [--publish]`: Release build with the commit count as build number, signed inside out through a temporary keychain (Sparkle helpers, framework, widget, app; entitlements kept, get-task-allow dropped), `.dmg`, Ed25519 signature and appcast; `--publish` makes the GitHub release. `docs/RELEASE.md` explains setup, backups, a release and the first launch («Open Anyway»).
+Checked: a trial `scripts/release.sh 0.2.0` (not published) — 0.2.0 (183), deep strict verify, widget sandbox kept, no get-task-allow, designated requirement on the certificate, the release binary loads Sparkle and runs, `.dmg` valid, appcast signature verified; `xcodebuild test` — 192 tests green with Sparkle in the host; 3 new strings in all 12 languages. CI not set up; checks run locally.
+Left: nothing published (the repository is private); a real update between two releases is untested until there are two; Gatekeeper still asks once («Open Anyway») without a Developer ID.
 
 ## 2026-10-30 — Profiles stage 6: quick commands, toggles, «Утилиты Mac» (branch `feat/quick-tools`)
 

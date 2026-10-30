@@ -25,13 +25,14 @@ You can enable several profiles and switch between them at the top of the panel.
 
 ## Install
 
-For now ClaudePult is built from source. A signed download is coming. Install Xcode and [XcodeGen](https://github.com/yonaskolb/XcodeGen) (`brew install xcodegen`), then run this in the repository folder:
+1. Download `ClaudePult-<version>.dmg` from [Releases](https://github.com/OlehDemishev/ClaudePult/releases).
+2. Open it and drag ClaudePult to Applications.
+3. Open ClaudePult. macOS says it can't check the developer: ClaudePult isn't signed with an Apple Developer ID. Close the message.
+4. Go to System Settings → Privacy & Security, find «ClaudePult was blocked…» and press **Open Anyway**.
 
-```bash
-scripts/build-and-install.sh
-```
+You only do this once. ClaudePult then updates itself: **Settings… → General → Updates** checks daily or on demand.
 
-The script installs `~/Applications/ClaudePult.app` and starts it.
+To build from source instead, install Xcode and [XcodeGen](https://github.com/yonaskolb/XcodeGen) (`brew install xcodegen`), then run `scripts/build-and-install.sh` in the repository folder.
 
 ## First start
 

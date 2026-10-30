@@ -81,6 +81,7 @@ struct ClaudePultApp: App {
         // Unit tests use the app as their host; keep it from running report.py in the background.
         if ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] == nil {
             store.start()
+            Updates.start()
             sessions.start()
             runs.start()
             requests.listen(commands: commands)

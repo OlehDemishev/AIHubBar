@@ -125,6 +125,7 @@ private struct GeneralSettings: View {
 
             Section {
                 LabeledContent("Версия", value: Self.version)
+                UpdatesRow()
                 LabeledContent("Журнал") {
                     Button("Показать в Finder") {
                         NSWorkspace.shared.activateFileViewerSelecting([AppLog.fileURL])
@@ -614,6 +615,21 @@ enum Relaunch {
         configuration.createsNewApplicationInstance = true
         NSWorkspace.shared.openApplication(at: Bundle.main.bundleURL, configuration: configuration) { _, _ in
             DispatchQueue.main.async { NSApp.terminate(nil) }
+        }
+    }
+}
+
+/// «Проверить обновления» and the daily check (Sparkle, scripts/release.sh).
+private struct UpdatesRow: View {
+    @State private var automatic = Updates.checksAutomatically
+
+    var body: some View {
+        LabeledContent("Обновления") {
+            HStack {
+                Toggle("Проверять раз в день", isOn: $automatic)
+                    .onChange(of: automatic) { Updates.checksAutomatically = automatic }
+                Button("Проверить сейчас") { Updates.checkNow() }
+            }
         }
     }
 }
