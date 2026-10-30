@@ -5013,6 +5013,82 @@
         }
       }
     },
+    "ClaudePult просит разрешение не давать Mac засыпать с закрытой крышкой.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يطلب ClaudePult إذنًا لإبقاء Mac مستيقظًا والغطاء مغلق."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ClaudePult bittet um die Erlaubnis, den Mac bei geschlossenem Deckel wach zu halten."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ClaudePult asks for permission to keep the Mac awake with the lid closed."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ClaudePult pide permiso para mantener el Mac despierto con la tapa cerrada."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ClaudePult demande l’autorisation de garder le Mac éveillé capot fermé."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ClaudePult meminta izin agar Mac tetap menyala saat penutup ditutup."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ClaudePult chiede il permesso di tenere il Mac sveglio con il coperchio chiuso."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ClaudePult は、蓋を閉じても Mac をスリープさせない許可を求めています。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ClaudePult가 덮개를 닫아도 Mac이 잠자지 않도록 하는 권한을 요청합니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ClaudePult prosi o pozwolenie na utrzymanie Maca w stanie czuwania przy zamkniętej pokrywie."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O ClaudePult pede permissão para manter o Mac acordado com a tampa fechada."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ClaudePult просить дозвіл не давати Mac засинати із закритою кришкою."
+          }
+        }
+      }
+    },
     "ClaudePult считает токены своих запросов по ответам сервисов; стоимость — по ценам, которые вы введёте (цены меняются, поэтому они не зашиты). Уведомление при 80 % и 100 % бюджета.": {
       "localizations": {
         "ar": {
@@ -5085,6 +5161,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "ClaudePult рахує токени своїх запитів за відповідями сервісів; вартість — за цінами, які ви введете (ціни змінюються, тому вони не вшиті). Сповіщення при 80 і 100 відсотках бюджету."
+          }
+        }
+      }
+    },
+    "ClaudePult убирает своё разрешение для сна с закрытой крышкой.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يزيل ClaudePult إذنه الخاص بالغطاء المغلق."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ClaudePult entfernt seine Erlaubnis für den geschlossenen Deckel."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ClaudePult is removing its permission for the closed lid."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ClaudePult quita su permiso para la tapa cerrada."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ClaudePult retire son autorisation pour le capot fermé."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ClaudePult menghapus izinnya untuk penutup tertutup."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ClaudePult rimuove il permesso per il coperchio chiuso."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ClaudePult は、蓋を閉じたときの許可を取り消します。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ClaudePult가 덮개를 닫았을 때의 권한을 제거합니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ClaudePult usuwa swoje pozwolenie dla zamkniętej pokrywy."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O ClaudePult remove a permissão para a tampa fechada."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ClaudePult прибирає свій дозвіл для закритої кришки."
           }
         }
       }
@@ -8995,6 +9147,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Без значка"
+          }
+        }
+      }
+    },
+    "Без монитора и питания закрытый Mac засыпает всегда, это может отменить только pmset от имени администратора. «Разрешить…» один раз спрашивает пароль и добавляет правило /etc/sudoers.d/claudepult: только команды pmset -a disablesleep 0 и 1. Пока держит правило «Не спать», сон выключен; потом и при выходе из ClaudePult — включается обратно. На батарее ниже 20 % — тоже включается. Закрытый Mac греется: не кладите его в сумку.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "دون شاشة وطاقة يدخل Mac المغلق في السكون دائمًا، ولا يغيّر ذلك إلا pmset بصلاحيات المسؤول. «السماح…» يطلب كلمة المرور مرة واحدة ويضيف القاعدة /etc/sudoers.d/claudepult: فقط الأمرين pmset -a disablesleep 0 و 1. ما دامت قاعدة «Не спать» سارية يبقى السكون معطلًا، وبعدها وعند إنهاء ClaudePult يعود. ويعود أيضًا حين تنخفض البطارية عن 20%. يسخن Mac المغلق: لا تضعه في حقيبة."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ohne Monitor und Strom schläft ein geschlossener Mac immer; nur pmset als Administrator kann das ändern. „Erlauben…“ fragt einmal nach dem Passwort und legt die Regel /etc/sudoers.d/claudepult an: nur die Befehle pmset -a disablesleep 0 und 1. Solange eine «Не спать»-Regel greift, ist der Ruhezustand aus; danach und beim Beenden von ClaudePult wieder an. Ebenso bei Akku unter 20%. Ein geschlossener Mac wird warm: nicht in die Tasche stecken."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Without a display and power, a closed Mac always sleeps; only pmset run as administrator can change that. «Allow…» asks for the password once and adds the rule /etc/sudoers.d/claudepult: only the commands pmset -a disablesleep 0 and 1. While a «Не спать» rule holds, sleep is off; afterwards, and when ClaudePult quits, it is turned back on. Also back on when the battery drops below 20%. A closed Mac gets warm: don’t put it in a bag."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sin pantalla ni corriente, un Mac cerrado siempre duerme; solo pmset como administrador puede cambiarlo. «Permitir…» pide la contraseña una vez y añade la regla /etc/sudoers.d/claudepult: solo los comandos pmset -a disablesleep 0 y 1. Mientras una regla de «Не спать» lo mantiene, el reposo está desactivado; después, y al salir de ClaudePult, se reactiva. También se reactiva con la batería por debajo del 20%. Un Mac cerrado se calienta: no lo metas en una bolsa."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sans écran ni alimentation, un Mac fermé se met toujours en veille ; seul pmset en administrateur peut l’empêcher. « Autoriser… » demande le mot de passe une fois et ajoute la règle /etc/sudoers.d/claudepult : uniquement les commandes pmset -a disablesleep 0 et 1. Tant qu’une règle « Не спать » tient, la veille est désactivée ; ensuite, et quand ClaudePult quitte, elle est rétablie. Elle l’est aussi quand la batterie passe sous 20%. Un Mac fermé chauffe : ne le mettez pas dans un sac."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tanpa monitor dan daya, Mac yang ditutup selalu tidur; hanya pmset sebagai administrator yang bisa mengubahnya. «Izinkan…» meminta kata sandi sekali dan menambahkan aturan /etc/sudoers.d/claudepult: hanya perintah pmset -a disablesleep 0 dan 1. Selama aturan «Не спать» berlaku, tidur dimatikan; setelahnya dan saat ClaudePult ditutup, dinyalakan kembali. Juga saat baterai di bawah 20%. Mac yang ditutup menjadi hangat: jangan masukkan ke tas."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Senza monitor e alimentazione un Mac chiuso va sempre in stop; solo pmset come amministratore può cambiarlo. «Consenti…» chiede la password una volta e aggiunge la regola /etc/sudoers.d/claudepult: solo i comandi pmset -a disablesleep 0 e 1. Finché una regola di «Не спать» tiene, lo stop è disattivato; poi, e quando ClaudePult si chiude, torna attivo. Torna attivo anche con la batteria sotto il 20%. Un Mac chiuso si scalda: non metterlo in borsa."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "モニタと電源がないと、閉じた Mac は必ずスリープします。これを変えられるのは管理者として実行する pmset だけです。「許可…」はパスワードを一度だけ求め、/etc/sudoers.d/claudepult にルールを追加します（pmset -a disablesleep 0 と 1 のみ）。「Не спать」のルールが有効な間はスリープしません。終わったときと ClaudePult を終了したときに元に戻します。バッテリーが 20% を下回ったときも戻します。閉じた Mac は熱くなるので、バッグに入れないでください。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "모니터와 전원이 없으면 닫힌 Mac은 항상 잠자기에 들어가며, 관리자 권한의 pmset만 이를 바꿀 수 있습니다. «허용…»은 암호를 한 번 묻고 /etc/sudoers.d/claudepult 규칙을 추가합니다(pmset -a disablesleep 0과 1 명령만). «Не спать» 규칙이 유지되는 동안 잠자기가 꺼지고, 끝나거나 ClaudePult를 종료하면 다시 켜집니다. 배터리가 20% 아래로 떨어져도 다시 켜집니다. 닫힌 Mac은 뜨거워지니 가방에 넣지 마세요."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bez monitora i zasilania zamknięty Mac zawsze usypia; zmienić to może tylko pmset jako administrator. «Zezwól…» raz pyta o hasło i dodaje regułę /etc/sudoers.d/claudepult: tylko polecenia pmset -a disablesleep 0 i 1. Dopóki trzyma reguła «Не спать», usypianie jest wyłączone; potem i przy zamknięciu ClaudePult wraca. Wraca też przy baterii poniżej 20%. Zamknięty Mac się nagrzewa: nie wkładaj go do torby."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sem monitor e energia, um Mac fechado sempre dorme; só o pmset como administrador muda isso. «Permitir…» pede a senha uma vez e adiciona a regra /etc/sudoers.d/claudepult: apenas os comandos pmset -a disablesleep 0 e 1. Enquanto uma regra de «Не спать» segura, o repouso fica desligado; depois, e ao sair do ClaudePult, volta. Também volta com a bateria abaixo de 20%. Um Mac fechado esquenta: não o coloque numa bolsa."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Без монітора й живлення закритий Mac завжди засинає, змінити це може лише pmset від імені адміністратора. «Дозволити…» один раз питає пароль і додає правило /etc/sudoers.d/claudepult: лише команди pmset -a disablesleep 0 і 1. Поки тримає правило «Не спать», сон вимкнено; потім і при виході з ClaudePult — вмикається знову. На батареї нижче 20% — теж. Закритий Mac гріється: не кладіть його в сумку."
           }
         }
       }
@@ -20329,6 +20557,82 @@
         }
       }
     },
+    "И с закрытой крышкой": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "حتى والغطاء مغلق"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Auch bei geschlossenem Deckel"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Also with the lid closed"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "También con la tapa cerrada"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aussi capot fermé"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Juga saat penutup ditutup"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anche con il coperchio chiuso"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "蓋を閉じていても"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "덮개를 닫아도"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Także przy zamkniętej pokrywie"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Também com a tampa fechada"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "І з закритою кришкою"
+          }
+        }
+      }
+    },
     "Идёт сборка": {
       "localizations": {
         "ar": {
@@ -20781,6 +21085,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Імпорт…"
+          }
+        }
+      }
+    },
+    "Имя пользователя не подходит для правила sudo": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اسم المستخدم غير صالح لقاعدة sudo"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der Benutzername passt nicht in eine sudo-Regel"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The user name can't be used in a sudo rule"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El nombre de usuario no sirve para una regla de sudo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le nom d’utilisateur ne convient pas à une règle sudo"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nama pengguna tidak bisa dipakai di aturan sudo"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il nome utente non va bene per una regola sudo"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "このユーザー名は sudo のルールに使えません"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이 사용자 이름은 sudo 규칙에 쓸 수 없습니다"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nazwa użytkownika nie nadaje się do reguły sudo"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O nome de usuário não serve para uma regra do sudo"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ім’я користувача не підходить для правила sudo"
           }
         }
       }
@@ -28549,6 +28929,82 @@
         }
       }
     },
+    "Не получилось": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لم ينجح ذلك"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hat nicht geklappt"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "That didn't work"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No funcionó"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Échec"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tidak berhasil"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Non è riuscito"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "うまくいきませんでした"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "실패했습니다"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nie udało się"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Não deu certo"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Не вийшло"
+          }
+        }
+      }
+    },
     "Не спать": {
       "localizations": {
         "ar": {
@@ -28937,6 +29393,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Не вдалося запустити %@: %@"
+          }
+        }
+      }
+    },
+    "Не удалось запустить osascript": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تعذّر تشغيل osascript"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "osascript konnte nicht gestartet werden"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Couldn't run osascript"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se pudo ejecutar osascript"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impossible de lancer osascript"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tidak bisa menjalankan osascript"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impossibile eseguire osascript"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "osascript を実行できませんでした"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "osascript를 실행할 수 없습니다"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nie udało się uruchomić osascript"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Não foi possível executar o osascript"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Не вдалося запустити osascript"
           }
         }
       }
@@ -44375,6 +44907,82 @@
         }
       }
     },
+    "Разрешение администратора": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إذن المسؤول"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Administratorerlaubnis"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Administrator permission"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Permiso de administrador"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Autorisation administrateur"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Izin administrator"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Permesso amministratore"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "管理者の許可"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "관리자 권한"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uprawnienie administratora"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Permissão de administrador"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Дозвіл адміністратора"
+          }
+        }
+      }
+    },
     "Разрешены.": {
       "localizations": {
         "ar": {
@@ -44523,6 +45131,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Дозволити"
+          }
+        }
+      }
+    },
+    "Разрешить…": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "السماح…"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Erlauben…"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Allow…"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Permitir…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Autoriser…"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Izinkan…"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Consenti…"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "許可…"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "허용…"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zezwól…"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Permitir…"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Дозволити…"
           }
         }
       }
@@ -45131,6 +45815,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ролик про каву"
+          }
+        }
+      }
+    },
+    "С закрытой крышкой": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الغطاء مغلق"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deckel geschlossen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lid Closed"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tapa cerrada"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Capot fermé"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Penutup tertutup"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Coperchio chiuso"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "蓋を閉じたとき"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "덮개를 닫았을 때"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zamknięta pokrywa"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tampa fechada"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Закрита кришка"
           }
         }
       }
@@ -46657,6 +47417,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Зараз"
+          }
+        }
+      }
+    },
+    "Сейчас сон уже отключён другим приложением или командой pmset — ClaudePult его не трогает.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "السكون معطّل بالفعل من تطبيق آخر أو بأمر pmset، ولا يغيّره ClaudePult."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der Ruhezustand ist schon von einer anderen App oder einem pmset-Befehl abgeschaltet; ClaudePult lässt das so."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sleep is already turned off by another app or a pmset command; ClaudePult leaves it alone."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El reposo ya lo desactivó otra app o un comando pmset; ClaudePult no lo toca."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La veille est déjà désactivée par une autre app ou une commande pmset ; ClaudePult n’y touche pas."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tidur sudah dimatikan oleh aplikasi lain atau perintah pmset; ClaudePult tidak mengubahnya."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lo stop è già disattivato da un’altra app o da un comando pmset; ClaudePult non lo tocca."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "スリープはすでに別のアプリか pmset コマンドで無効になっています。ClaudePult は変更しません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "잠자기가 이미 다른 앱이나 pmset 명령으로 꺼져 있습니다. ClaudePult는 건드리지 않습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Usypianie jest już wyłączone przez inną aplikację lub polecenie pmset; ClaudePult go nie rusza."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O repouso já foi desligado por outro app ou um comando pmset; o ClaudePult não mexe nisso."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Сон уже вимкнено іншим застосунком або командою pmset — ClaudePult його не чіпає."
           }
         }
       }
@@ -53203,6 +54039,82 @@
         }
       }
     },
+    "У этого Mac нет крышки: правило нужно только ноутбукам.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لا غطاء لهذا الـ Mac: القاعدة للحواسيب المحمولة فقط."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dieser Mac hat keinen Deckel: Die Regel ist nur für Laptops."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This Mac has no lid: the rule is only for laptops."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Este Mac no tiene tapa: la regla es solo para portátiles."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ce Mac n’a pas de capot : la règle ne concerne que les portables."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mac ini tidak punya penutup: aturan ini hanya untuk laptop."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Questo Mac non ha coperchio: la regola è solo per i portatili."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "この Mac には蓋がありません。このルールはノートブック専用です。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이 Mac에는 덮개가 없습니다. 이 규칙은 노트북 전용입니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ten Mac nie ma pokrywy: reguła jest tylko dla laptopów."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Este Mac não tem tampa: a regra é só para notebooks."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "У цього Mac немає кришки: правило потрібне лише ноутбукам."
+          }
+        }
+      }
+    },
     "У этого профиля нет папки проектов": {
       "localizations": {
         "ar": {
@@ -53503,6 +54415,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Прибрати з профілю"
+          }
+        }
+      }
+    },
+    "Убрать…": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إزالة…"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Entfernen…"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remove…"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quitar…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Retirer…"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hapus…"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rimuovi…"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "取り消す…"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "제거…"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Usuń…"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remover…"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Прибрати…"
           }
         }
       }
@@ -60517,6 +61505,82 @@
         }
       }
     },
+    "есть": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ممنوح"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "erteilt"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "granted"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "concedido"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "accordée"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ada"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "concesso"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "あり"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "있음"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "jest"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "concedida"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "є"
+          }
+        }
+      }
+    },
     "есть проекты с проблемами": {
       "localizations": {
         "ar": {
@@ -61501,6 +62565,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "і ще %lld…"
+          }
+        }
+      }
+    },
+    "и с закрытой крышкой": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "حتى والغطاء مغلق"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "auch bei geschlossenem Deckel"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "also with the lid closed"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "también con la tapa cerrada"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "aussi capot fermé"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "juga saat penutup ditutup"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "anche con il coperchio chiuso"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "蓋を閉じていても"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "덮개를 닫아도"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "także przy zamkniętej pokrywie"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "também com a tampa fechada"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "і з закритою кришкою"
           }
         }
       }

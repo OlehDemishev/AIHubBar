@@ -5,12 +5,12 @@
 **Updated:** 2026-10-30
 
 **Now:**
+- «Не спать» with the lid closed (branch `feat/lid-closed-awake`, PR open, waits for Oleh's merge)
 - «История буфера» and «Заметки» modules merged (PR #87)
 - release without an Apple Developer account merged (PR #85): Sparkle, self-signed signing, `scripts/release.sh`, MIT license; nothing published yet
 - Windows and Linux specs merged (PR #73); implementation waits for Oleh
 
 **Next:**
-- keep awake with the lid closed (second wave; needs a sudoers rule for `pmset disablesleep`, Oleh enters the admin password once)
 - menu bar elements reordered by dragging (needs a different list than a grouped Form)
 - fix whatever Oleh finds in the translations (machine translation; native review for ja, ko, ar at least)
 - stage 8 rest: Developer ID signing and notarization, Sparkle updates — once Oleh decides on Developer ID, the name and where updates are hosted
@@ -18,6 +18,8 @@
 - Windows and Linux versions (docs/SPEC-windows.md, docs/SPEC-linux.md) — only when Oleh says; stage 0 (fact checks in VMs) first
 
 **Needs Oleh:**
+- merge the lid-closed PR; on a laptop: Settings → «Модули» → «Не спать» → «Разрешить…» (admin password once), then «И с закрытой крышкой»
+- on this Mac mini sleep is already off system-wide (`SleepDisabled 1`, set by Vorssaint's `/etc/sudoers.d/vorssaint-clamshell`): the Mac never sleeps while it stays so; `sudo pmset -a disablesleep 0` turns it back on if Vorssaint isn't needed
 - try «История буфера» and «Заметки»: Settings → «Модули» → «Установить» (copy, pin, search; type a note)
 - check the Trash for a test note «Заметка.md» from an early test run and delete it
 - back up `~/Library/Application Support/ClaudePult-release/` (signing certificate and update key; without them updates break)
@@ -44,6 +46,12 @@
 - hooks are installed in ~/.claude/settings.json; backup of the original: ~/.claude/settings.json.claudepult-backup-20261029T192827
 - delete or archive the old repo `OlehDemishev/ClaudeBar`; turn on start at login if wanted
 <!-- summary:end -->
+
+## 2026-10-30 — Keep awake with the lid closed (branch `feat/lid-closed-awake`)
+
+Done: last item of the SPEC-profiles second wave. «Не спать» gets «И с закрытой крышкой»: a power assertion doesn't survive a closed lid, so ClaudePult runs `sudo -n pmset -a disablesleep 1` while any rule holds and `0` when none does, on quit, when the module is removed and on battery below 20 %. «Разрешить…» asks for the administrator password in macOS's dialog (`osascript … with administrator privileges`) and installs `/etc/sudoers.d/claudepult` (checked by `visudo` under a dotted name sudo ignores, then moved in), allowing only those two commands; «Убрать…» turns sleep back on and removes it. ClaudePult undoes only what it did (remembered across launches, so a crash is fixed on the next start); sleep turned off by another app is left alone and the settings say so. Macs without a lid get the section disabled. Panel shows «и с закрытой крышкой» while it holds. 13 languages.
+Checked: 201 tests green; rule text `visudo -cf` OK; live on this Mac mini: the section says there is no lid and that sleep is already off by another app; no `pmset`/`sudo` run by ClaudePult (log, `pmset -g`); profile restored.
+Left: the real path (password, closed lid, battery floor, removing) needs a laptop — not run here (Mac mini, and the password is Oleh's). Found: Vorssaint keeps `SleepDisabled 1` on this Mac.
 
 ## 2026-10-30 — Clipboard history and notes modules (branch `feat/clipboard-notes`)
 
