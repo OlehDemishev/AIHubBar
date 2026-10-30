@@ -30,6 +30,12 @@
 - delete or archive the old repo `OlehDemishev/ClaudeBar`; turn on start at login if wanted
 <!-- summary:end -->
 
+## 2026-10-30 — Modes settings without the grey sidebar (branch `fix/modes-sidebar`)
+
+Done: the list of modes in Settings → Режимы used the sidebar style, whose grey material ran up under the Settings tabs; the list background is now hidden, so the whole tab has the window colour and the divider starts below the tabs.
+Checked: built and installed; the Settings window captured with `screencapture -l` — one colour, no grey strip. CI not set up; checks run locally.
+Left: nothing.
+
 ## 2026-10-30 — Onboarding and guide for people (branch `feat/onboarding`)
 
 Done: the assistant on a new Mac now starts with «Добро пожаловать в ClaudePult» — what the app is plus readiness checks with one button each: AI service (Claude Code, other agents, API keys; «Проверяю…» until the first scan), Claude Code session hooks, notifications, start at login (optional). The same list is at the top of «Помощь» and re-checks when ClaudePult comes back to the front. CLI `--readiness [file.png]`. `docs/GUIDE.md` — a page for people: what it does, modes, install, first start, everyday use, privacy, languages, troubleshooting, uninstall; README links to it. 22 new strings in all 12 languages.

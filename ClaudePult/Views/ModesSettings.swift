@@ -50,6 +50,8 @@ struct ModesSettings: View {
                 }
             }
             .listStyle(.sidebar)
+            // The sidebar material would run up under the Settings tabs; one window colour instead.
+            .scrollContentBackground(.hidden)
 
             HStack(spacing: 4) {
                 Menu {
