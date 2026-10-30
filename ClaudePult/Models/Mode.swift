@@ -17,6 +17,8 @@ struct Mode: Codable, Identifiable, Equatable, Sendable {
     var metrics: [String]
     /// nil = ask «Терминал / Фон» every time.
     var launchMode: LaunchMode?
+    /// The service the mode's commands use by default (`AIService.id`); nil = Claude Code.
+    var service: String?
     var permissions: PermissionProfile
     var calendar: CalendarMode
     var showProjects: Bool
@@ -26,7 +28,7 @@ struct Mode: Codable, Identifiable, Equatable, Sendable {
     init(
         id: String = UUID().uuidString.lowercased(), name: String, icon: String = "sparkle", template: String = "custom",
         source: ProjectSource = .none, card: ProjectCard = .none, stages: [String] = [], metrics: [String] = [],
-        launchMode: LaunchMode? = nil, permissions: PermissionProfile = .filesOnly, calendar: CalendarMode = .off,
+        launchMode: LaunchMode? = nil, service: String? = nil, permissions: PermissionProfile = .filesOnly, calendar: CalendarMode = .off,
         showProjects: Bool = true, commonCommands: CommonCommandsKind = .none, showCommonCommands: Bool = true
     ) {
         self.id = id
@@ -38,6 +40,7 @@ struct Mode: Codable, Identifiable, Equatable, Sendable {
         self.stages = stages
         self.metrics = metrics
         self.launchMode = launchMode
+        self.service = service
         self.permissions = permissions
         self.calendar = calendar
         self.showProjects = showProjects
@@ -46,7 +49,7 @@ struct Mode: Codable, Identifiable, Equatable, Sendable {
     }
 
     enum CodingKeys: String, CodingKey {
-        case id, name, icon, template, source, card, stages, metrics, launchMode, permissions, calendar
+        case id, name, icon, template, source, card, stages, metrics, launchMode, service, permissions, calendar
         case showProjects, commonCommands, showCommonCommands
     }
 
@@ -61,6 +64,7 @@ struct Mode: Codable, Identifiable, Equatable, Sendable {
         stages = (try? c.decodeIfPresent([String].self, forKey: .stages)) ?? []
         metrics = (try? c.decodeIfPresent([String].self, forKey: .metrics)) ?? []
         launchMode = try? c.decodeIfPresent(LaunchMode.self, forKey: .launchMode)
+        service = try? c.decodeIfPresent(String.self, forKey: .service)
         permissions = (try? c.decodeIfPresent(PermissionProfile.self, forKey: .permissions)) ?? .filesOnly
         calendar = (try? c.decodeIfPresent(CalendarMode.self, forKey: .calendar)) ?? .off
         showProjects = (try? c.decodeIfPresent(Bool.self, forKey: .showProjects)) ?? true

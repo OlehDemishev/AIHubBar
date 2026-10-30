@@ -5,6 +5,7 @@ struct ProcessResult: Sendable {
     var stdout: Data
     var stderr: Data
 
+    var stdoutText: String { String(decoding: stdout, as: UTF8.self) }
     var stderrText: String { String(decoding: stderr, as: UTF8.self) }
 }
 

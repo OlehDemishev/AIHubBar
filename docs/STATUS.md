@@ -1,14 +1,14 @@
 # Status
 
 <!-- summary:start -->
-**Stage:** SPEC.md done; SPEC-modes stages 1–2 of 9 (modes, menu bar builder) done
+**Stage:** SPEC.md done; SPEC-modes stages 1–2 done, stage 3 (AI services) connection part done
 **Updated:** 2026-10-30
 
 **Now:**
-- expired-token message fix in PR (branch `fix/token-expired-message`); then SPEC-modes §9 stage 3 (AI services)
+- AI services connection in PR (branch `feat/ai-services`); expired-token message fix in PR (branch `fix/token-expired-message`)
 
 **Next:**
-- SPEC-modes §9: 3 AI services, 4 folder projects + commands, 5 calendar, 6 templates, 7 setup assistant, 8 for everyone, 9 languages (§13: en, es, pt-BR, fr, de, ja, id, ko, it, ar with RTL, pl, uk)
+- SPEC-modes §9: 4 folder projects + command engine (incl. running with a chosen AI service, API spend, «Сравнить»), 5 calendar, 6 templates, 7 setup assistant, 8 for everyone, 9 languages (§13: en, es, pt-BR, fr, de, ja, id, ko, it, ar with RTL, pl, uk)
 - Fix whatever Oleh finds in docs/CHECKLIST.md
 
 **Needs Oleh:**
@@ -16,7 +16,7 @@
 - try Settings → «Строка меню» (presets, order, options, preview) and the ticking reset countdown
 - try Settings → Режимы (duplicate the mode → switcher appears in the panel) and a double-click on a .claudepult file
 - read and edit docs/TEMPLATES.md (template texts) before stage 6
-- before stage 3: install Codex CLI and Gemini CLI and create API keys (OpenAI, Google, xAI, DeepSeek, Mistral) for live checks — Oleh offered to
+- merge the AI services PR; for live checks: install Codex CLI (`brew install --cask codex`) and Gemini CLI (`brew install gemini-cli`) or Antigravity CLI, put API keys in Settings → «Сервисы AI» and press «Проверить» (optional: Ollama for a free local model)
 - before stage 8: Apple Developer Program (Developer ID, notarization) for distributing ClaudePult; decide on the name (SPEC-modes §10.4)
 - try the «Внешний вид» settings tab (theme, width, density not checked by eye)
 - optional, in _daily-report (not changed by ClaudePult): report.py/bot.py could read `~/Library/Application Support/ClaudePult/usage.json` (`five_hour`, `seven_day`, `updated`) for a /limits bot command or a limits line in the report
@@ -24,6 +24,12 @@
 - hooks are installed in ~/.claude/settings.json; backup of the original: ~/.claude/settings.json.claudepult-backup-20261029T192827
 - delete or archive the old repo `OlehDemishev/ClaudeBar`; turn on start at login if wanted
 <!-- summary:end -->
+
+## 2026-10-30 — AI services: connection (branch `feat/ai-services`)
+
+Done: SPEC-modes §11 / stage 3, connection part. Service layer (`AIService`: Claude Code, agents, API providers), agent detection with version (Codex CLI, Gemini CLI, Antigravity CLI, Copilot CLI, Cursor CLI), API keys in the Keychain via `security -i` (stdin, never logged or exported), «Проверить» = model list (no tokens), model choice, OpenAI-compatible server (Ollama default). New Settings tab «Сервисы AI»; «Сервис по умолчанию» per mode (`Mode.service`); «Открыть в…» in a project's Claude block for installed agents; export carries the services config (not keys). CLI `--services [check]`. Claude Code behaviour unchanged. Flags and endpoints checked against the docs; details and what could not be checked in DECISIONS.md.
+Checked: `scripts/build-and-install.sh --test` green incl. new AIService tests (ids, requests and headers, model-list parsing, check results, key validation, detection, tolerant config, export round-trip); no compiler warnings. Live: `--services check` (Claude Code 2.1.312 found, others not installed, no keys, local server not running → honest message); all six model-list endpoints answer «bad key» to an invalid key; a throw-away Keychain item round-tripped through `security -i` and was deleted. CI not set up; checks run locally.
+Left: running commands with other services, API spend and «Сравнить» come with the command engine (stage 4); Settings tab and «Открыть в…» need Oleh's eye with a real key / installed agent.
 
 ## 2026-10-30 — Expired Claude Code token message (branch `fix/token-expired-message`)
 

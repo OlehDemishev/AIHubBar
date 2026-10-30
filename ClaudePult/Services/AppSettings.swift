@@ -64,6 +64,11 @@ final class AppSettings {
         didSet { defaults.set(try? JSONEncoder().encode(menuBarConfig), forKey: Keys.menuBarConfig) }
     }
 
+    /// Chosen models and the compatible server's address (SPEC-modes §11); keys live in the Keychain.
+    var aiServices: AIServicesConfig {
+        didSet { defaults.set(try? JSONEncoder().encode(aiServices), forKey: Keys.aiServices) }
+    }
+
     /// Percentages that raise a notification once per limit window.
     var limitThresholds: [Int] {
         didSet { defaults.set(limitThresholds, forKey: Keys.limitThresholds) }
@@ -131,6 +136,8 @@ final class AppSettings {
         backgroundTimeLimitMinutes = limit > 0 ? limit : 90
         menuBarConfig = defaults.data(forKey: Keys.menuBarConfig).flatMap { try? JSONDecoder().decode(MenuBarConfig.self, from: $0) }
             ?? MenuBarConfig.migrated(from: defaults.string(forKey: Keys.menuBarUsageMode).flatMap(MenuBarUsageMode.init(rawValue:)) ?? .session)
+        aiServices = defaults.data(forKey: Keys.aiServices).flatMap { try? JSONDecoder().decode(AIServicesConfig.self, from: $0) }
+            ?? AIServicesConfig()
         let thresholds = (defaults.array(forKey: Keys.limitThresholds) as? [Int])?.filter { (1...100).contains($0) }
         limitThresholds = thresholds?.isEmpty == false ? thresholds! : Self.defaultLimitThresholds
         limitAlertsToTelegram = defaults.bool(forKey: Keys.limitAlertsToTelegram)
@@ -155,6 +162,7 @@ final class AppSettings {
         static let backgroundTimeLimitMinutes = "backgroundTimeLimitMinutes"
         static let menuBarUsageMode = "menuBarUsageMode"
         static let menuBarConfig = "menuBarConfig"
+        static let aiServices = "aiServices"
         static let limitThresholds = "limitThresholds"
         static let limitAlertsToTelegram = "limitAlertsToTelegram"
         static let panelTextSize = "panelTextSize"

@@ -12,6 +12,7 @@ import UserNotifications
 /// - `ClaudePult --usage`, `ClaudePult --usage-raw` (subscription limits; the token is never printed), `--token-usage`
 /// - `ClaudePult --notifications-status`
 /// - `ClaudePult --modes`, `ClaudePult --export-settings <file.claudepult>` (import: open the file in Finder)
+/// - `ClaudePult --services [check]` (installed agents, stored API keys; `check` lists each provider's models)
 /// - `ClaudePult --menubar-preview <file.png> [minimum|limits|everything]` (the menu bar item with sample data)
 @MainActor
 enum CommandLineTool {
@@ -105,6 +106,9 @@ enum CommandLineTool {
                 printError("error: \(error.localizedDescription)")
                 return 1
             }
+        }
+        if let index = arguments.firstIndex(of: "--services") {
+            return servicesReport(check: arguments.dropFirst(index + 1).first == "check")
         }
         if let index = arguments.firstIndex(of: "--menubar-preview"), index + 1 < arguments.count {
             return menuBarPreview(path: arguments[index + 1], preset: arguments.dropFirst(index + 2).first)
@@ -283,6 +287,27 @@ enum CommandLineTool {
 
     private nonisolated static func printError(_ message: String) {
         FileHandle.standardError.write(Data((message + "\n").utf8))
+    }
+
+    /// Keys are never printed — only whether one is stored and what the check says.
+    private static func servicesReport(check: Bool) -> Int32 {
+        let config = AppSettings().aiServices
+        return waitFor {
+            let agents = await AIServiceStore.findAgents()
+            for kind in AgentKind.allCases {
+                let info = agents[kind]
+                print("agent \(kind.binary): " + (info.map { $0.path + ($0.version.map { " — \($0)" } ?? "") } ?? "not installed"))
+            }
+            let keys = await AIServiceStore.storedKeys()
+            for provider in APIProvider.allCases {
+                var line = "api \(provider.rawValue): key " + (keys.contains(provider) ? "stored" : "none")
+                if check, keys.contains(provider) || !provider.keyRequired {
+                    line += ", check: " + (await AIServiceStore.check(provider, baseURL: config.baseURL(provider))).text
+                }
+                print(line)
+            }
+            return 0
+        }
     }
 
     /// Draws the item as the menu bar would (dark and light) from the saved config, or from a preset.
