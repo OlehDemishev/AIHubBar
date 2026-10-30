@@ -5,10 +5,10 @@
 **Updated:** 2026-10-30
 
 **Now:**
-- UI quick fixes merged (PR #58); next: the rest of the UI review
+- panel polish from the UI review — branch `feat/panel-polish`, PR open
 
 **Next:**
-- the rest of the UI review: compact limits block, projects header and badges, separate «Очистка: выполнить», shorter panel; then Settings tabs (merge Claude / Сессии / Лимиты, mode list, menu bar order)
+- the rest of the UI review: Settings tabs (merge Claude / Сессии / Лимиты into one, mode list without two kinds of checkmarks, menu bar order by dragging, installed agents first); assistant and Help (no «Пропустить» on the template step, collapse the ready checklist); panel height (collapsible blocks)
 - keep the Claude Code login fresh: test whether a tiny `claude -p` renews the token; or `claude setup-token` (needs Oleh)
 - fix whatever Oleh finds in the translations (machine translation; native review for ja, ko, ar at least)
 - stage 8 rest: Developer ID signing and notarization, Sparkle updates — once Oleh decides on Developer ID, the name and where updates are hosted
@@ -31,6 +31,12 @@
 - hooks are installed in ~/.claude/settings.json; backup of the original: ~/.claude/settings.json.claudepult-backup-20261029T192827
 - delete or archive the old repo `OlehDemishev/ClaudeBar`; turn on start at login if wanted
 <!-- summary:end -->
+
+## 2026-10-30 — Panel polish from the UI review (branch `feat/panel-polish`)
+
+Done: limits take less room — the week's reset sits on its title line, a model week at 0 % is hidden and repeats no reset that equals the week's. The projects get a header like the other blocks, with the count and «с проблемами: N». Project badges say «2 файла» and «1 PR» instead of a bare number. «Очистка: выполнить» was already red with a confirmation (the debug snapshot just doesn't draw tints), so it stays.
+Checked: `xcodebuild test` — 160 tests green; catalog synced, the new string in all 12 languages. Live: installed, the panel captured (snapshot) with the new limits, header and badges. CI not set up; checks run locally.
+Left: Settings tabs, assistant and Help items from the review; collapsible panel blocks.
 
 ## 2026-10-30 — UI quick fixes from the review (branch `fix/ui-quick`)
 

@@ -78,8 +78,11 @@ struct MenuPanelView: View {
             }
 
             if settings.shows(.projects) {
-                content
-                    .revealed(isShown, step: 1, reduceMotion: calm)
+                VStack(alignment: .leading, spacing: 0) {
+                    projectsHeader
+                    content
+                }
+                .revealed(isShown, step: 1, reduceMotion: calm)
                 Divider()
             }
 
@@ -210,6 +213,29 @@ struct MenuPanelView: View {
         }
         .padding(.horizontal, 14)
         .padding(.vertical, 8)
+    }
+
+    /// Like the other blocks, the projects get a title: how many, and how many need attention.
+    private var projectsHeader: some View {
+        let count = folders.isActive ? folders.projects.count : store.projects.count
+        let red = folders.isActive ? 0 : store.projects.filter { $0.health == .red }.count
+        return HStack(spacing: 6) {
+            Text("Проекты")
+                .scaledFont(.caption, weight: .semibold)
+                .foregroundStyle(.secondary)
+            if count > 0 {
+                Text(verbatim: "\(count)")
+                    .scaledFont(.caption)
+                    .foregroundStyle(.tertiary)
+            }
+            if red > 0 {
+                Text("с проблемами: \(red)")
+                    .scaledFont(.caption, weight: .medium)
+                    .foregroundStyle(.red)
+            }
+        }
+        .padding(.horizontal, 16)
+        .padding(.top, 8)
     }
 
     @ViewBuilder

@@ -21,8 +21,10 @@ struct LimitsView: View {
                         if let week = snapshot.week {
                             WindowRow(window: week, detail: nil, now: context.date)
                         }
-                        ForEach(snapshot.otherWindows, id: \.key) { window in
-                            WindowRow(window: window, detail: nil, now: context.date, compact: true)
+                        ForEach(snapshot.shownOtherWindows, id: \.key) { window in
+                            // A model week usually resets with the week: no need to say it twice.
+                            WindowRow(window: window, detail: nil, now: context.date, compact: true,
+                                      showsReset: window.resetsAt != snapshot.week?.resetsAt)
                         }
                     }
                 }
@@ -159,18 +161,28 @@ struct LimitsView: View {
     }
 }
 
+/// One limit: title, inline reset and percent on one line, then the bar; the session keeps a line of its own
+/// for the reset and the forecast.
 private struct WindowRow: View {
     let window: UsageWindow
     let detail: String?
     let now: Date
     var compact = false
+    var showsReset = true
 
     var body: some View {
         VStack(alignment: .leading, spacing: 3) {
-            HStack {
+            HStack(alignment: .firstTextBaseline, spacing: 4) {
                 Text(window.title)
                     .scaledFont(.caption, weight: compact ? .regular : .medium)
-                Spacer()
+                    .layoutPriority(1)
+                if detail == nil, showsReset, let reset = UsageText.resetText(window, now: now) {
+                    Text(verbatim: "· " + reset)
+                        .scaledFont(.caption2)
+                        .foregroundStyle(.secondary)
+                        .lineLimit(1)
+                }
+                Spacer(minLength: 6)
                 Text(UsageText.percent(window.utilization))
                     .scaledFont(.caption, weight: .semibold)
                     .monospacedDigit()
@@ -180,8 +192,8 @@ private struct WindowRow: View {
                 .progressViewStyle(.linear)
                 .tint(window.levelColor)
                 .controlSize(compact ? .mini : .small)
-            if let text = detail ?? UsageText.resetText(window, now: now), !text.isEmpty {
-                Text(text)
+            if let detail, !detail.isEmpty {
+                Text(detail)
                     .scaledFont(.caption2)
                     .foregroundStyle(.secondary)
             }

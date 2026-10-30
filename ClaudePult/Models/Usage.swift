@@ -41,6 +41,8 @@ struct UsageSnapshot: Codable, Equatable, Sendable {
     var session: UsageWindow? { windows.first { $0.key == "five_hour" } }
     var week: UsageWindow? { windows.first { $0.key == "seven_day" } }
     var otherWindows: [UsageWindow] { windows.filter { $0.key != "five_hour" && $0.key != "seven_day" } }
+    /// Per-model weeks worth a row in the panel: an unused one (0 %) only takes room.
+    var shownOtherWindows: [UsageWindow] { otherWindows.filter { $0.utilization >= 1 } }
 
     static func decode(_ data: Data, fetchedAt: Date) -> UsageSnapshot? {
         guard let object = (try? JSONSerialization.jsonObject(with: data)) as? [String: Any] else { return nil }

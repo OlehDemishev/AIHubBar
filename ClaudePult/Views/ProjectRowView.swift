@@ -75,11 +75,12 @@ struct ProjectRowView: View {
     @ViewBuilder
     private var badges: some View {
         if project.dirty > 0 {
-            Badge(systemImage: "pencil", text: "\(project.dirty)", color: .orange)
+            // Words, not a bare number: «22» next to a pencil says little at a glance.
+            Badge(systemImage: "pencil", text: "\(project.dirty) \(Plural.files(project.dirty))", color: .orange)
                 .help("Незакоммиченных файлов: \(project.dirty)")
         }
         if let prs = project.openPRs, !prs.isEmpty {
-            Badge(systemImage: "arrow.triangle.pull", text: "\(prs.count)", color: project.pullRequestsCI.color)
+            Badge(systemImage: "arrow.triangle.pull", text: "\(prs.count) PR", color: project.pullRequestsCI.color)
                 .help("Открытых PR: \(prs.count), CI: \(project.pullRequestsCI.title)")
         }
     }
