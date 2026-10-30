@@ -5,12 +5,14 @@
 **Updated:** 2026-10-29
 
 **Now:**
-- nothing in progress
+- PR `docs/spec-content` — draft spec for a «texts» mode (writers, video scripts) — waiting for Oleh's answers to its open questions
 
 **Next:**
+- After Oleh answers docs/SPEC-content.md §7: stage 1 of the texts mode (pluggable project sources, work without _daily-report)
 - Fix whatever Oleh finds in docs/CHECKLIST.md
 
 **Needs Oleh:**
+- answer the open questions in docs/SPEC-content.md §7 (for whom, where texts live, file formats, web search for fact checks, default stages/templates, name of the mode)
 - try the «Внешний вид» settings tab (theme, width, density not checked by eye)
 - optional, in _daily-report (not changed by ClaudePult): report.py/bot.py could read `~/Library/Application Support/ClaudePult/usage.json` (`five_hour`, `seven_day`, `updated`) for a /limits bot command or a limits line in the report
 - go through the «Oleh» rows of docs/CHECKLIST.md (buttons inside the panel, Settings, notifications, Telegram messages) — automation cannot click inside ClaudePult
@@ -18,6 +20,12 @@
 - hooks are installed in ~/.claude/settings.json; backup of the original: ~/.claude/settings.json.claudepult-backup-20261029T192827
 - delete or archive the old repo `OlehDemishev/ClaudeBar`; turn on start at login if wanted
 <!-- summary:end -->
+
+## 2026-10-30 — Spec draft: texts mode (branch `docs/spec-content`)
+
+Done: `docs/SPEC-content.md` — draft spec for people who write texts with Claude (video scripts, posts): what of ClaudePult already helps them (limits, background runs, queue, notifications), what must change (optional `_daily-report`/git, pluggable project sources, a mode setting), first version (folder projects with `проект.md`, stages, deadlines, word count and running time, task templates with results saved next to the source, narrower background permissions without Bash, hidden draft versions), later ideas (quick prompt from any app, batch tasks, publishing calendar), open questions and stages.
+Checked: docs only; no code changed.
+Left: Oleh's answers to §7 before any implementation.
 
 ## 2026-10-30 — Clickable notifications (branch `feat/notification-actions`)
 
