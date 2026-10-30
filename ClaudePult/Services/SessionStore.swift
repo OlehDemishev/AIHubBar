@@ -160,8 +160,8 @@ final class SessionStore {
 
 @MainActor
 enum SessionActions {
-    /// Terminal.app sessions: bring the tab with the session's tty forward. Desktop-app sessions: open Claude.
-    /// Otherwise (or if the tab is gone): open the folder in Finder.
+    /// Terminal.app sessions: bring the tab with the session's tty forward. Desktop-app sessions: open that session
+    /// in Claude (just Claude if the app has no record of it). Otherwise (or if the tab is gone): the folder in Finder.
     static func show(_ session: Session) {
         Task {
             if session.isInTerminalApp, let tty = session.tty, await focusTerminalTab(tty: tty) {
@@ -169,11 +169,50 @@ enum SessionActions {
             }
             if session.entrypoint == "claude-desktop",
                let claude = NSWorkspace.shared.urlForApplication(withBundleIdentifier: "com.anthropic.claudefordesktop") {
-                NSWorkspace.shared.openApplication(at: claude, configuration: NSWorkspace.OpenConfiguration(), completionHandler: nil)
+                if let link = desktopLink(cliSessionID: session.id) {
+                    NSWorkspace.shared.open([link], withApplicationAt: claude, configuration: NSWorkspace.OpenConfiguration(), completionHandler: nil)
+                } else {
+                    NSWorkspace.shared.openApplication(at: claude, configuration: NSWorkspace.OpenConfiguration(), completionHandler: nil)
+                }
                 return
             }
             ProjectActions.openInFinder(session.cwd)
         }
+    }
+
+    /// Where the Claude desktop app keeps its Code sessions: `<account>/<org>/local_<id>.json`, each with the CLI's `cliSessionId`.
+    nonisolated static let desktopSessionsDirectory = FileManager.default.homeDirectoryForCurrentUser
+        .appending(path: "Library/Application Support/Claude/claude-code-sessions")
+
+    /// `claude://code/continue?session=local_…` for the desktop session that runs this CLI session, if the app knows it.
+    nonisolated static func desktopLink(cliSessionID: String, in directory: URL = desktopSessionsDirectory) -> URL? {
+        guard let id = desktopSessionID(cliSessionID: cliSessionID, in: directory) else { return nil }
+        var link = URLComponents(string: "claude://code/continue")!
+        link.queryItems = [URLQueryItem(name: "session", value: id)]
+        return link.url
+    }
+
+    nonisolated static func desktopSessionID(cliSessionID: String, in directory: URL) -> String? {
+        struct Record: Decodable {
+            var sessionId: String
+            var cliSessionId: String?
+            var previousCliSessionIds: [String]?
+            var isArchived: Bool?
+        }
+        let fm = FileManager.default
+        let files = ((try? fm.contentsOfDirectory(at: directory, includingPropertiesForKeys: nil)) ?? [])
+            .flatMap { (try? fm.contentsOfDirectory(at: $0, includingPropertiesForKeys: nil)) ?? [] }
+            .flatMap { (try? fm.contentsOfDirectory(at: $0, includingPropertiesForKeys: nil)) ?? [] }
+            .filter { $0.lastPathComponent.hasPrefix("local_") && $0.pathExtension == "json" }
+        for file in files {
+            guard let data = try? Data(contentsOf: file),
+                  let record = try? JSONDecoder().decode(Record.self, from: data),
+                  record.isArchived != true,
+                  record.cliSessionId == cliSessionID || record.previousCliSessionIds?.contains(cliSessionID) == true
+            else { continue }
+            return record.sessionId
+        }
+        return nil
     }
 
     nonisolated static let focusScript = [
