@@ -2,6 +2,10 @@
 
 Decisions made where the spec is silent or does not match reality. Newest at the top.
 
+## 2026-10-30 — Week forecast from the journals
+
+The usage endpoint gives only the week's current percentage, and ClaudePult kept 3 hours of session history. Instead of waiting a week for its own history, the week's percentage is split over the days in the proportions of the weights in Claude Code's journals (`TokenRecord.weight`, already used for «Расход по проектам»), and the pace is the share of the last 24 hours. An estimate: the journals don't hold everything that counts (claude.ai chats), so the bars show where the week went, not exact percentages.
+
 ## 2026-10-30 — Answering permission requests from ClaudePult
 
 **Checked live first:** with a PermissionRequest hook that sleeps, Claude Code shows its own dialog within ~2 s and doesn't wait for the hook; an allow printed by the hook later is applied («Allowed by PermissionRequest hook»). So a waiting hook never blocks the person at the terminal. **Protocol:** files in `Application Support/ClaudePult/approvals/` — `alive` (ClaudePult touches it every 15 s while the option is on; the hook waits only if it is younger than 30 s), `<id>.request.json` (written before the session record, with the hook's pid), `<id>.decision` (`allow` / `deny`). The hook stops waiting when the session moves on (answered in Claude), when ClaudePult goes away, after 290 s, or on SIGTERM (Claude's timeout), and always removes its files. ClaudePult ignores requests whose hook process is gone. The hook prints only that decision; everything else stays silent as before. The script keeps itself current even while settings.json still has the old 5 s timeout.

@@ -38,6 +38,9 @@ struct LimitsView: View {
                             .scaledFont(.caption)
                             .foregroundStyle(runsOut ? .orange : .secondary)
                     }
+                    if let week = usage.weekUsage, !week.days.isEmpty {
+                        WeekStrip(week: week)
+                    }
                     ForEach(snapshot.shownOtherWindows, id: \.key) { window in
                         // A model week usually resets with the week: no need to say it twice.
                         WindowRow(window: window, detail: nil, now: context.date, compact: true,
@@ -217,6 +220,44 @@ private struct WindowRow: View {
                     .foregroundStyle(.secondary)
             }
         }
+    }
+}
+
+/// The week's forecast and its days as small bars (today highlighted); hover a bar for its share of the week.
+private struct WeekStrip: View {
+    let week: WeekUsage
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            switch week.forecast {
+            case let .runsOutAt(date):
+                Text("неделя кончится \(date.formatted(.dateTime.weekday(.abbreviated).hour().minute())) при таком темпе")
+                    .foregroundStyle(.orange)
+            case .lastsUntilReset:
+                Text("неделе до сброса хватит")
+                    .foregroundStyle(.secondary)
+            case .unknown:
+                EmptyView()
+            }
+            let top = max(week.days.map(\.percent).max() ?? 0, 1)
+            HStack(alignment: .bottom, spacing: 4) {
+                ForEach(week.days) { day in
+                    VStack(spacing: 2) {
+                        Spacer(minLength: 0)
+                        RoundedRectangle(cornerRadius: 2)
+                            .fill(day.isToday ? Color.accentColor : Color.primary.opacity(0.25))
+                            .frame(height: max(2, 24 * day.percent / top))
+                        Text(day.date.formatted(.dateTime.weekday(.narrow)))
+                            .scaledFont(.caption2)
+                            .foregroundStyle(day.isToday ? .primary : .secondary)
+                    }
+                    .frame(maxWidth: .infinity)
+                    .help(String(localized: "\(day.date.formatted(.dateTime.weekday(.wide).day().month())): \(Int(day.percent.rounded())) % недельного лимита"))
+                }
+            }
+            .frame(height: 40)
+        }
+        .scaledFont(.caption)
     }
 }
 

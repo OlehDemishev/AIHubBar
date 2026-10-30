@@ -7,7 +7,7 @@
 **Now:**
 - merged: menu bar drag reordering (PR #93), translation review (PR #94), release build re-checked on main (PR #95)
 - panel redesigned as cards, variant A, merged (PR #98)
-- feature batch from Oleh's «все»: approve from notifications merged (PR #100); current action merged (PR #102); then week forecast, Telegram, PR/CI alerts, hotkey and search, widget, night queue, context warning
+- feature batch from Oleh's «все»: approve from notifications merged (PR #100); current action merged (PR #102); week forecast (PR open); then week forecast, Telegram, PR/CI alerts, hotkey and search, widget, night queue, context warning
 - hover hints for icon-only controls and the menu bar item merged (PR #91)
 - second wave merged: «История буфера» and «Заметки» (PR #87), «Не спать» with the lid closed (PR #89)
 - release without an Apple Developer account merged (PR #85): Sparkle, self-signed signing, `scripts/release.sh`, MIT license; nothing published yet
@@ -52,6 +52,12 @@
 - hooks are installed in ~/.claude/settings.json; backup of the original: ~/.claude/settings.json.claudepult-backup-20261029T192827
 - delete or archive the old repo `OlehDemishev/ClaudeBar`; turn on start at login if wanted
 <!-- summary:end -->
+
+## 2026-10-30 — Week forecast and daily bars (branch `feat/week-forecast`)
+
+Done: `WeekUsage` splits the plan's week percentage over the calendar days of the week window by the journals' weights and forecasts from the last 24 hours. The limits card shows «неделя кончится … при таком темпе» / «неделе до сброса хватит» and a strip of day bars (today highlighted, hover for the share); recomputed when the limits or the journals update; one notification per week window when it runs out before the reset. 13 languages.
+Checked: 217 tests green; live: «неделя кончится Сб 04:56 при таком темпе» at 84 % on Friday evening, with the bars.
+Left: an estimate (claude.ai chats aren't in the journals); the notification banner by eye.
 
 ## 2026-10-30 — What Claude is doing now (branch `feat/current-action`)
 

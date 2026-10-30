@@ -34,6 +34,9 @@ final class UsageStore {
 
     private(set) var breakdowns: [Period: TokenBreakdown] = [:]
     private(set) var breakdownUpdated: Date?
+    /// The week by day and its forecast, from the journals (refreshed with the breakdowns).
+    private(set) var weekUsage: WeekUsage?
+    private var weekRecords: [TokenRecord] = []
     private let scanner = TokenScanner()
     private var isScanning = false
 
@@ -146,8 +149,36 @@ final class UsageStore {
             starts.mapValues { TokenBreakdown.make(records, since: $0, projectsDirectory: projectsDirectory) }
         }.value
         breakdowns = result
+        weekRecords = records
+        updateWeek()
         breakdownUpdated = .now
         AppLog.info("Token breakdown: \(records.count) messages in \((ContinuousClock.now - started).formatted(.units(allowed: [.seconds], fractionalPart: .show(length: 1))))")
+    }
+
+    /// The journals are read every 10 minutes, the limits every few: either one changing updates the week.
+    private func updateWeek() {
+        guard let week = snapshot?.week, let resets = week.resetsAt, !weekRecords.isEmpty else { return }
+        let usage = WeekUsage.make(weekRecords, utilization: week.utilization, resetsAt: resets)
+        if usage != weekUsage {
+            weekUsage = usage
+            AppLog.info("Week: \(usage.days.count) days, forecast \(usage.forecast)")
+        }
+        announceWeek(usage, resetsAt: resets)
+    }
+
+    /// Once per week window, when the pace says the week runs out before it resets.
+    private func announceWeek(_ usage: WeekUsage, resetsAt: Date) {
+        guard case let .runsOutAt(date) = usage.forecast else { return }
+        let key = "weekForecastNotified"
+        let stamp = resetsAt.timeIntervalSince1970
+        guard UserDefaults.standard.double(forKey: key) != stamp else { return }
+        UserDefaults.standard.set(stamp, forKey: key)
+        Notifier.post(
+            id: "week-forecast",
+            title: String(localized: "Недельный лимит кончится раньше сброса"),
+            body: String(localized: "При темпе последних суток — \(date.formatted(.dateTime.weekday(.wide).hour().minute())), сброс \(resetsAt.formatted(.dateTime.weekday(.wide).hour().minute()))."),
+            target: .none
+        )
     }
 
     /// Seconds until the next fetch.
@@ -166,6 +197,7 @@ final class UsageStore {
     }
 
     private func apply(_ fresh: UsageSnapshot) {
+        defer { updateWeek() }
         let previous = snapshot
         if let before = previous?.session?.utilization, let now = fresh.session?.utilization, now > before {
             lastGrowth = .now
