@@ -1,11 +1,11 @@
 # Status
 
 <!-- summary:start -->
-**Stage:** SPEC.md done; SPEC-modes stages 1–7 and 9 done; stage 8: onboarding and guide in PR, signing and updates wait for Oleh
+**Stage:** SPEC.md done; SPEC-modes stages 1–7 and 9 done; stage 8: onboarding and guide merged, signing and updates wait for Oleh
 **Updated:** 2026-10-30
 
 **Now:**
-- onboarding (welcome screen with readiness checks) and docs/GUIDE.md — branch `feat/onboarding`, PR open
+- onboarding (welcome screen with readiness checks) and docs/GUIDE.md merged (PR #55); nothing in progress
 
 **Next:**
 - fix whatever Oleh finds in the translations (machine translation; native review for ja, ko, ar at least)
@@ -13,7 +13,7 @@
 - Fix whatever Oleh finds in docs/CHECKLIST.md
 
 **Needs Oleh:**
-- review and merge the onboarding PR; read docs/GUIDE.md as a newcomer would
+- read docs/GUIDE.md as a newcomer would
 - review the languages: Settings → Основные → «Язык интерфейса» → a language → «Перезапустить» (and back); Arabic should mirror right-to-left
 - try Settings → Режимы → «+» → «Помощник…»
 - try the calendar in a folder mode: «Календарь» → «+ контент-план», a `Дедлайн:` in a `проект.md`, then the panel «Ближайшее» and the «Календарь» window
