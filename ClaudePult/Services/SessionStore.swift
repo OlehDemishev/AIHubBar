@@ -149,8 +149,8 @@ final class SessionStore {
     private func post(_ session: Session) {
         Notifier.post(
             id: "waiting-\(session.id)",
-            title: "Claude ждёт ответа — \(session.displayProject)",
-            body: session.message ?? session.task ?? "Нужно ваше решение.",
+            title: String(localized: "Claude ждёт ответа — \(session.displayProject)"),
+            body: session.message ?? session.task ?? String(localized: "Нужно ваше решение."),
             target: .session(id: session.id)
         )
     }

@@ -13,8 +13,8 @@ enum APIKeyStore {
 
         var errorDescription: String? {
             switch self {
-            case .invalid: "Ключ выглядит неправильно: только латиница, цифры и . _ - ~ + / = :, от 8 символов"
-            case let .failed(code): "Связка ключей не сохранила ключ (код \(code))"
+            case .invalid: String(localized: "Ключ выглядит неправильно: только латиница, цифры и . _ - ~ + / = :, от 8 символов")
+            case let .failed(code): String(localized: "Связка ключей не сохранила ключ (код \(code))")
             }
         }
     }
@@ -144,13 +144,13 @@ final class AIServiceStore {
     nonisolated static func check(_ provider: APIProvider, baseURL: String) async -> APICheck {
         let key = await APIKeyStore.read(provider)
         if provider.keyRequired, key == nil { return .noKey }
-        guard let request = provider.modelsRequest(baseURL: baseURL, key: key) else { return .failed("Неверный адрес сервера") }
+        guard let request = provider.modelsRequest(baseURL: baseURL, key: key) else { return .failed(String(localized: "Неверный адрес сервера")) }
         let result: APICheck
         do {
             let (data, response) = try await URLSession.shared.data(for: request)
             result = APICheck.from(status: (response as? HTTPURLResponse)?.statusCode ?? 0, body: data)
         } catch {
-            result = .failed(provider == .compatible ? "Сервер не отвечает — запущен ли он?" : "Нет связи")
+            result = .failed(provider == .compatible ? String(localized: "Сервер не отвечает — запущен ли он?") : String(localized: "Нет связи"))
         }
         AppLog.info("API check \(provider.rawValue): \(result.text)")
         return result

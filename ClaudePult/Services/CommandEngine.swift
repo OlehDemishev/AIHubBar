@@ -57,7 +57,7 @@ final class CommandEngine {
             guard case let .background(runID) = job.state, let run = runs.run(id: runID), run.state.isFinished else { return job }
             var finished = job
             finished.state = run.state == .succeeded && FileManager.default.fileExists(atPath: job.resultFile)
-                ? .done : .failed(run.summary ?? "Фоновая задача: \(run.state.rawValue)")
+                ? .done : .failed(run.summary ?? String(localized: "Фоновая задача: \(run.state.rawValue)"))
             return finished
         }
     }
@@ -113,7 +113,7 @@ final class CommandEngine {
                     record(SpendRecord(date: .now, provider: provider, model: config.model(provider) ?? "?",
                                        inputTokens: reply.inputTokens, outputTokens: reply.outputTokens))
                     update(id) { $0.state = .done }
-                    Notifier.post(id: "command-\(id)", title: "Готово: \(template.title)", body: "\(project.name) · \(name)",
+                    Notifier.post(id: "command-\(id)", title: String(localized: "Готово: \(template.title)"), body: "\(project.name) · \(name)",
                                   target: .file(path: resultPath))
                 } catch {
                     update(id) { $0.state = .failed(error.localizedDescription) }
@@ -148,9 +148,9 @@ final class CommandEngine {
                 NSPasteboard.general.clearContents()
                 NSPasteboard.general.setString(prompt, forType: .string)
                 openInTerminal(kind.terminalCommandLine(folder: project.path, path: path), job: &job)
-                job.state = .openedInTerminal("\(kind.title) открыт в Терминале — задача скопирована, вставьте ⌘V")
+                job.state = .openedInTerminal(String(localized: "\(kind.title) открыт в Терминале — задача скопирована, вставьте ⌘V"))
             } else {
-                job.state = .failed("\(kind.title) не установлен")
+                job.state = .failed(String(localized: "\(kind.title) не установлен"))
             }
             jobs.append(job)
         }
@@ -168,7 +168,7 @@ final class CommandEngine {
     }
 
     private func openInTerminal(_ commandLine: String, job: inout Job) {
-        job.state = .openedInTerminal("Открыто в Терминале")
+        job.state = .openedInTerminal(String(localized: "Открыто в Терминале"))
         let id = job.id
         Task {
             do {
@@ -207,8 +207,8 @@ final class CommandEngine {
             let key = "spendWarned-\(month)-\(level)"
             guard !UserDefaults.standard.bool(forKey: key) else { return }
             UserDefaults.standard.set(true, forKey: key)
-            Notifier.post(id: key, title: "Расход по API: \(level) % бюджета",
-                          body: String(format: "$%.2f из $%.2f в этом месяце", cost, budget), target: .window(id: "settings"))
+            Notifier.post(id: key, title: String(localized: "Расход по API: \(level) % бюджета"),
+                          body: String(format: String(localized: "$%.2f из $%.2f в этом месяце"), cost, budget), target: .window(id: "settings"))
             return
         }
     }

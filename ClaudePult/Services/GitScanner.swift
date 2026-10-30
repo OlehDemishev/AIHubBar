@@ -65,7 +65,7 @@ enum GitScanner {
         if let date = ISODate.parse(last) {
             info["last_activity"] = last
             let days = Int(Date.now.timeIntervalSince(date) / 86_400)
-            if days >= 7 { attend("low", "нет коммитов \(days) дн.") }
+            if days >= 7 { attend("low", String(localized: "нет коммитов \(days) дн.")) }
         }
 
         let changes = lines(await git(repo, ["status", "--porcelain=v1"]))
@@ -75,14 +75,15 @@ enum GitScanner {
             return !statusCandidates.contains(path) && path.trimmingCharacters(in: CharacterSet(charactersIn: "/")) != "docs"
         }
         if !work.isEmpty {
-            attend("high", "\(work.count) \(Plural.files(work.count)) не закоммичено (ветка \(info["branch"] ?? ""))")
+            let branchName = info["branch"] as? String ?? ""
+            attend("high", String(localized: "\(work.count) \(Plural.files(work.count)) не закоммичено (ветка \(branchName))"))
         } else if !changes.isEmpty {
-            attend("low", "изменения в STATUS.md не закоммичены")
+            attend("low", String(localized: "изменения в STATUS.md не закоммичены"))
         }
 
         let stashes = lines(await git(repo, ["stash", "list"])).count
         info["stashes"] = stashes
-        if stashes > 0 { attend("high", "\(stashes) stash — отложенная работа, легко забыть") }
+        if stashes > 0 { attend("high", String(localized: "\(stashes) stash — отложенная работа, легко забыть")) }
 
         for line in lines(await git(repo, ["for-each-ref", "refs/heads", "--format=%(refname:short)\t%(upstream:short)\t%(upstream:track)"])) {
             let parts = line.components(separatedBy: "\t")
@@ -92,14 +93,14 @@ enum GitScanner {
                 let same = "origin/" + parts[0]
                 if !(await git(repo, ["rev-parse", "--verify", "--quiet", same])).isEmpty {
                     let ahead = Int(await git(repo, ["rev-list", "--count", "\(same)..\(parts[0])"])) ?? 0
-                    if ahead > 0 { attend("mid", "ветка \(parts[0]): \(ahead) не запушено") }
+                    if ahead > 0 { attend("mid", String(localized: "ветка \(parts[0]): \(ahead) не запушено")) }
                     continue
                 }
                 let ahead = Int(await git(repo, ["rev-list", "--count", "\(base)..\(parts[0])"])) ?? 0
-                if ahead > 0 { attend("high", "ветка \(parts[0]): \(ahead) коммит(ов) только на этом Маке") }
+                if ahead > 0 { attend("high", String(localized: "ветка \(parts[0]): \(ahead) коммит(ов) только на этом Маке")) }
             } else if let range = parts[2].range(of: #"ahead (\d+)"#, options: .regularExpression),
                       let count = Int(parts[2][range].dropFirst("ahead ".count)) {
-                attend("mid", "ветка \(parts[0]): \(count) не запушено")
+                attend("mid", String(localized: "ветка \(parts[0]): \(count) не запушено"))
             }
         }
 
@@ -114,8 +115,8 @@ enum GitScanner {
 
         if let status = status(repo) {
             info["status"] = status.json
-            for item in status.needs { attend("mid", "нужно от вас: " + item) }
-            if !status.hasSummary { attend("low", "в STATUS.md нет шапки (Stage / Now / Next)") }
+            for item in status.needs { attend("mid", String(localized: "нужно от вас: ") + item) }
+            if !status.hasSummary { attend("low", String(localized: "в STATUS.md нет шапки (Stage / Now / Next)")) }
         }
 
         info["attention"] = attention
@@ -152,10 +153,10 @@ enum GitScanner {
                 continue
             }
             let dirty = lines(await git(URL(fileURLWithPath: path), ["status", "--porcelain=v1"])).count
-            if dirty > 0 { notes.append(["level": "high", "text": "worktree \((path as NSString).lastPathComponent): \(dirty) незакоммиченных файлов"]) }
+            if dirty > 0 { notes.append(["level": "high", "text": String(localized: "worktree \((path as NSString).lastPathComponent): \(dirty) незакоммиченных файлов")]) }
             result.append(["path": path, "branch": branch ?? "(detached)", "dirty": dirty])
         }
-        if prunable > 0 { notes.append(["level": "low", "text": "\(prunable) устаревших worktree — `git worktree prune`"]) }
+        if prunable > 0 { notes.append(["level": "low", "text": String(localized: "\(prunable) устаревших worktree — `git worktree prune`")]) }
         return (result, notes)
     }
 
@@ -173,9 +174,10 @@ enum GitScanner {
             pr["statusCheckRollup"] = nil
             let number = pr["number"] as? Int ?? 0
             if ci == "fail" {
-                notes.append(["level": "high", "text": "PR #\(number): CI упал"])
+                notes.append(["level": "high", "text": String(localized: "PR #\(number): CI упал")])
             } else if pr["isDraft"] as? Bool != true {
-                notes.append(["level": "mid", "text": "PR #\(number) ждёт merge: \(String((pr["title"] as? String ?? "").prefix(70)))"])
+                let title = String((pr["title"] as? String ?? "").prefix(70))
+                notes.append(["level": "mid", "text": String(localized: "PR #\(number) ждёт merge: \(title)")])
             }
             return pr
         }
@@ -269,14 +271,17 @@ enum StatusText {
 }
 
 enum Plural {
-    /// «1 файл», «2 файла», «5 файлов».
+    /// «1 файл», «2 файла», «5 файлов»; one rule for the other languages: «1 file», «2 files».
     static func files(_ n: Int) -> String {
+        guard Bundle.main.preferredLocalizations.first?.hasPrefix("ru") ?? true else {
+            return n == 1 ? String(localized: "файл") : String(localized: "файлов")
+        }
         let tens = n % 100, ones = n % 10
-        if (11...14).contains(tens) { return "файлов" }
+        if (11...14).contains(tens) { return String(localized: "файлов") }
         switch ones {
-        case 1: return "файл"
-        case 2...4: return "файла"
-        default: return "файлов"
+        case 1: return String(localized: "файл")
+        case 2...4: return String(localized: "файла")
+        default: return String(localized: "файлов")
         }
     }
 }

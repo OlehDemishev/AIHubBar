@@ -27,15 +27,15 @@ struct ClaudeActionsView: View {
             }
 
             HStack(spacing: 6) {
-                ActionButton(title: "Следующий шаг", systemImage: "forward.fill", isProminent: true) {
+                ActionButton(title: String(localized: "Следующий шаг"), systemImage: "forward.fill", isProminent: true) {
                     launcher.request(.nextStep, in: project)
                 }
-                .help(project.status?.summary?.next.first.map { "Первый пункт Next: \($0)" } ?? "Первый пункт Next из STATUS.md")
-                ActionButton(title: "Своя задача…", systemImage: "text.cursor") {
+                .help(project.status?.summary?.next.first.map { String(localized: "Первый пункт Next: \($0)") } ?? String(localized: "Первый пункт Next из STATUS.md"))
+                ActionButton(title: String(localized: "Своя задача…"), systemImage: "text.cursor") {
                     withAnimation(.snappy(duration: 0.2)) { isEditingTask.toggle() }
                     taskFocused = isEditingTask
                 }
-                ActionButton(title: "Завершить", systemImage: "checkmark.circle") {
+                ActionButton(title: String(localized: "Завершить"), systemImage: "checkmark.circle") {
                     launcher.request(.finishSession, in: project)
                 }
                 .help("Завершить сессию: проверки, коммит, push, PR и STATUS по разделу «Конец сессии»")
@@ -157,7 +157,7 @@ struct ClaudeActionsView: View {
                     Button("Запустить после сброса") { launcher.launchAfterReset(in: project) }
                     Button("Запустить сейчас") { launcher.launchDespiteLimit(in: project) }
                 }
-                if message.isError, message.text.contains("Автоматизация") {
+                if message.isError, message.text.contains(String(localized: "Автоматизация")) {
                     Button("Открыть настройки") { LaunchController.openAutomationSettings() }
                 }
                 Button("Скрыть") { launcher.dismissMessage(for: project) }
@@ -193,7 +193,7 @@ struct WorktreeListView: View {
                     Text((worktree.path as NSString).lastPathComponent)
                         .lineLimit(1)
                         .truncationMode(.middle)
-                    Text([worktree.branch, (worktree.dirty ?? 0) > 0 ? "изменено файлов: \(worktree.dirty ?? 0)" : nil]
+                    Text([worktree.branch, (worktree.dirty ?? 0) > 0 ? String(localized: "изменено файлов: \(worktree.dirty ?? 0)") : nil]
                         .compactMap { $0 }.joined(separator: " · "))
                         .foregroundStyle(.secondary)
                         .lineLimit(1)

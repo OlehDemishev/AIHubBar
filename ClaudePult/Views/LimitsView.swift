@@ -34,7 +34,7 @@ struct LimitsView: View {
                 // Models by API (SPEC-modes §11.2): shown once ClaudePult has spent something this month.
                 let month = engine.summary(since: engine.monthStart)
                 if month.tokens > 0 {
-                    Label("API за месяц: " + SpendText.line(month), systemImage: "cpu")
+                    Label("API за месяц: \(SpendText.line(month))", systemImage: "cpu")
                         .scaledFont(.caption)
                         .foregroundStyle(.secondary)
                 }
@@ -89,7 +89,7 @@ struct LimitsView: View {
             }
             .buttonStyle(.borderless)
             .disabled(usage.isRefreshing || (usage.pausedUntil.map { $0 > .now } ?? false))
-            .help(usage.pausedUntil.map { $0 > .now ? "Пауза до \($0.formatted(date: .omitted, time: .shortened)): сервер просит запрашивать реже" : "Обновить лимиты" } ?? "Обновить лимиты")
+            .help(usage.pausedUntil.map { $0 > .now ? String(localized: "Пауза до \($0.formatted(date: .omitted, time: .shortened)): сервер просит запрашивать реже") : String(localized: "Обновить лимиты") } ?? String(localized: "Обновить лимиты"))
         }
     }
 
@@ -99,10 +99,10 @@ struct LimitsView: View {
     }
 
     private func extraText(_ extra: ExtraUsage) -> String {
-        guard let used = extra.usedCredits else { return "Extra usage включён" }
+        guard let used = extra.usedCredits else { return String(localized: "Extra usage включён") }
         let usedText = UsageText.money(used, decimals: extra.decimalPlaces, currency: extra.currency)
         guard let limit = extra.monthlyLimit else { return "Extra usage: \(usedText)" }
-        return "Extra usage: \(usedText) из \(UsageText.money(limit, decimals: extra.decimalPlaces, currency: extra.currency)) в месяц"
+        return String(localized: "Extra usage: \(usedText) из \(UsageText.money(limit, decimals: extra.decimalPlaces, currency: extra.currency)) в месяц")
     }
 
     @ViewBuilder
@@ -150,7 +150,7 @@ struct LimitsView: View {
                             .fixedSize(horizontal: false, vertical: true)
                     }
                 } else {
-                    Text(usage.breakdownUpdated == nil ? "Считаю по журналам Claude Code…" : "За этот период расхода нет")
+                    Text(usage.breakdownUpdated == nil ? String(localized: "Считаю по журналам Claude Code…") : String(localized: "За этот период расхода нет"))
                         .scaledFont(.caption)
                         .foregroundStyle(.secondary)
                 }

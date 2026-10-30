@@ -62,7 +62,7 @@ struct Mode: Codable, Identifiable, Equatable, Sendable {
     init(from decoder: Decoder) throws {
         let c = try decoder.container(keyedBy: CodingKeys.self)
         id = (try? c.decodeIfPresent(String.self, forKey: .id)) ?? UUID().uuidString.lowercased()
-        name = (try? c.decodeIfPresent(String.self, forKey: .name)) ?? "Режим"
+        name = (try? c.decodeIfPresent(String.self, forKey: .name)) ?? String(localized: "Режим")
         icon = (try? c.decodeIfPresent(String.self, forKey: .icon)) ?? "sparkle"
         template = (try? c.decodeIfPresent(String.self, forKey: .template)) ?? "custom"
         source = (try? c.decodeIfPresent(ProjectSource.self, forKey: .source)) ?? .none
@@ -89,7 +89,7 @@ struct Mode: Codable, Identifiable, Equatable, Sendable {
         showProjects: Bool, showCommonCommands: Bool
     ) -> Mode {
         Mode(
-            name: "Разработчик (мой)",
+            name: String(localized: "Разработчик (мой)"),
             icon: "chevron.left.forwardslash.chevron.right",
             template: "developer-report",
             source: .gitReport(projects: PathText.tilde(projectsDirectory), dailyReport: PathText.tilde(dailyReportDirectory)),
@@ -118,11 +118,11 @@ enum ProjectSource: Codable, Equatable, Sendable {
 
     var title: String {
         switch self {
-        case .gitReport: "git-репозитории через report.py"
-        case .gitBuiltin: "git-репозитории"
-        case .folders: "папки"
-        case .inbox: "папка «входящие»"
-        case .none: "без проектов"
+        case .gitReport: String(localized: "git-репозитории через report.py")
+        case .gitBuiltin: String(localized: "git-репозитории")
+        case .folders: String(localized: "папки")
+        case .inbox: String(localized: "папка «входящие»")
+        case .none: String(localized: "без проектов")
         }
     }
 
@@ -167,9 +167,9 @@ enum PermissionProfile: String, Codable, CaseIterable, Sendable {
 
     var title: String {
         switch self {
-        case .code: "Код: git, сборки, PR"
-        case .filesOnly: "Только файлы проекта"
-        case .filesAndWeb: "Файлы + поиск в интернете"
+        case .code: String(localized: "Код: git, сборки, PR")
+        case .filesOnly: String(localized: "Только файлы проекта")
+        case .filesAndWeb: String(localized: "Файлы + поиск в интернете")
         }
     }
 }

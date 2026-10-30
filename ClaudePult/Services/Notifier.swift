@@ -84,9 +84,9 @@ enum NotificationAction {
     }
 
     static var categories: Set<UNNotificationCategory> {
-        let show = UNNotificationAction(identifier: show, title: "Показать", options: [.foreground])
-        let pr = UNNotificationAction(identifier: openPR, title: "Открыть PR", options: [.foreground])
-        let log = UNNotificationAction(identifier: log, title: "Журнал", options: [.foreground])
+        let show = UNNotificationAction(identifier: show, title: String(localized: "Показать"), options: [.foreground])
+        let pr = UNNotificationAction(identifier: openPR, title: String(localized: "Открыть PR"), options: [.foreground])
+        let log = UNNotificationAction(identifier: log, title: String(localized: "Журнал"), options: [.foreground])
         return [
             UNNotificationCategory(identifier: sessionCategory, actions: [show], intentIdentifiers: []),
             UNNotificationCategory(identifier: runCategory, actions: [log], intentIdentifiers: []),
@@ -140,8 +140,8 @@ final class NotificationPermission {
 enum Notifier {
     /// «Проверить» in Settings: a notification whose click opens the help window.
     static func postTest() {
-        post(id: "test", title: "ClaudePult: уведомления работают",
-             body: "Кликните — откроется окно «Помощь».", target: .window(id: "help"))
+        post(id: "test", title: String(localized: "ClaudePult: уведомления работают"),
+             body: String(localized: "Кликните — откроется окно «Помощь»."), target: .window(id: "help"))
     }
 
     static func post(id: String, title: String, body: String, target: NotificationTarget = .none) {

@@ -8,9 +8,9 @@ struct CalendarEntry: Identifiable, Hashable, Sendable {
 
         var title: String {
             switch self {
-            case .deadline: "Дедлайн"
-            case .publish: "Публикация"
-            case .plan: "Контент-план"
+            case .deadline: String(localized: "Дедлайн")
+            case .publish: String(localized: "Публикация")
+            case .plan: String(localized: "Контент-план")
             }
         }
 
@@ -220,7 +220,7 @@ enum CalendarScanner {
                 guard let (date, hasTime) = row.date else { continue }
                 let file = row.value(.file).map { folder + "/" + $0 }
                 result.append(CalendarEntry(
-                    date: date, hasTime: hasTime, kind: .plan, title: row.value(.topic) ?? "Без темы",
+                    date: date, hasTime: hasTime, kind: .plan, title: row.value(.topic) ?? String(localized: "Без темы"),
                     detail: [row.value(.platform), row.value(.status)].compactMap { $0 }.joined(separator: " · "),
                     modeID: mode.id, modeName: mode.name, modeIcon: mode.icon,
                     openPath: file.flatMap { FileManager.default.fileExists(atPath: $0) ? $0 : nil } ?? path,

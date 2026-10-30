@@ -23,11 +23,11 @@ enum CommonCommand: String, CaseIterable, Identifiable, Sendable {
 
     var title: String {
         switch self {
-        case .reportNow: "Отчёт сейчас"
-        case .quickSummary: "Быстрая сводка"
-        case .openLatestReport: "Последний отчёт"
-        case .cleanupCheck: "Очистка: проверить"
-        case .cleanupRun: "Очистка: выполнить"
+        case .reportNow: String(localized: "Отчёт сейчас")
+        case .quickSummary: String(localized: "Быстрая сводка")
+        case .openLatestReport: String(localized: "Последний отчёт")
+        case .cleanupCheck: String(localized: "Очистка: проверить")
+        case .cleanupRun: String(localized: "Очистка: выполнить")
         }
     }
 
@@ -43,11 +43,11 @@ enum CommonCommand: String, CaseIterable, Identifiable, Sendable {
 
     var help: String {
         switch self {
-        case .reportNow: "Полный отчёт с AI-резюме за \(Self.reportHours) ч в Telegram (1–3 мин)"
-        case .quickSummary: "Сводка без AI за \(Self.reportHours) ч в Telegram"
-        case .openLatestReport: "Открыть reports/latest.html"
-        case .cleanupCheck: "Показать, что удалит очистка сборок (cleanup.py --dry-run)"
-        case .cleanupRun: "Удалить сборки, кэши и сбросить симуляторы (cleanup.py --now)"
+        case .reportNow: String(localized: "Полный отчёт с AI-резюме за \(Self.reportHours) ч в Telegram (1–3 мин)")
+        case .quickSummary: String(localized: "Сводка без AI за \(Self.reportHours) ч в Telegram")
+        case .openLatestReport: String(localized: "Открыть reports/latest.html")
+        case .cleanupCheck: String(localized: "Показать, что удалит очистка сборок (cleanup.py --dry-run)")
+        case .cleanupRun: String(localized: "Удалить сборки, кэши и сбросить симуляторы (cleanup.py --now)")
         }
     }
 
@@ -82,9 +82,9 @@ enum CommonCommand: String, CaseIterable, Identifiable, Sendable {
     func isFailure(exitCode: Int32, summary: String) -> Bool {
         if exitCode != 0 { return true }
         switch self {
-        case .reportNow, .quickSummary: return summary.hasPrefix("Telegram") && summary != "Telegram: отправлено"
+        case .reportNow, .quickSummary: return summary.hasPrefix("Telegram") && summary != String(localized: "Telegram: отправлено")
         // cleanup.py skips everything while a build runs and says so in its first line.
-        case .cleanupCheck, .cleanupRun: return summary.hasPrefix("Идёт сборка")
+        case .cleanupCheck, .cleanupRun: return summary.hasPrefix(String(localized: "Идёт сборка"))
         default: return false
         }
     }
@@ -141,10 +141,10 @@ final class CommandStore {
 
     /// Runs a script command and returns the line to show plus the full (token-free) output.
     nonisolated static func execute(_ command: CommonCommand, dailyReportDirectory directory: String) async -> (Result, String?) {
-        guard let script = command.script else { return (Result(text: "Нечего запускать", isError: true, date: .now), nil) }
+        guard let script = command.script else { return (Result(text: String(localized: "Нечего запускать"), isError: true, date: .now), nil) }
         let path = (directory as NSString).appendingPathComponent(script.name)
         guard FileManager.default.fileExists(atPath: path) else {
-            return (Result(text: "Не найден \(script.name) в \(directory)", isError: true, date: .now), nil)
+            return (Result(text: String(localized: "Не найден \(script.name) в \(directory)"), isError: true, date: .now), nil)
         }
         do {
             let process = try await ProcessRunner.run(
@@ -154,7 +154,7 @@ final class CommandStore {
             let text = CommonCommand.redactingTokens(
                 String(decoding: process.stdout, as: UTF8.self) + String(decoding: process.stderr, as: UTF8.self)
             )
-            let line = command.summary(of: text) ?? (process.exitCode == 0 ? "Готово" : "Код выхода \(process.exitCode)")
+            let line = command.summary(of: text) ?? (process.exitCode == 0 ? String(localized: "Готово") : String(localized: "Код выхода \(process.exitCode)"))
             return (Result(text: line, isError: command.isFailure(exitCode: process.exitCode, summary: line), date: .now), text)
         } catch {
             return (Result(text: error.localizedDescription, isError: true, date: .now), nil)
@@ -196,7 +196,7 @@ final class CommandStore {
         if FileManager.default.fileExists(atPath: url.path) {
             NSWorkspace.shared.open(url)
         } else {
-            results[.openLatestReport] = Result(text: "Отчёта ещё нет: \(url.path)", isError: true, date: .now)
+            results[.openLatestReport] = Result(text: String(localized: "Отчёта ещё нет: \(url.path)"), isError: true, date: .now)
         }
     }
 

@@ -92,6 +92,7 @@ private struct GeneralSettings: View {
                 if let error = loginItem.lastError {
                     Text("Ошибка: \(error)").font(.callout).foregroundStyle(.red)
                 }
+                LanguagePicker()
             }
 
             Section {
@@ -109,7 +110,7 @@ private struct GeneralSettings: View {
                     }
                 }
             } footer: {
-                Footnote(text: "Нужны для «Claude ждёт ответа», итогов фоновых задач, порогов лимитов и результатов команд. Клик по уведомлению ведёт к сессии, PR, журналу или отчёту.")
+                Footnote(text: String(localized: "Нужны для «Claude ждёт ответа», итогов фоновых задач, порогов лимитов и результатов команд. Клик по уведомлению ведёт к сессии, PR, журналу или отчёту."))
             }
 
             Section {
@@ -121,7 +122,7 @@ private struct GeneralSettings: View {
             } header: {
                 Text("Перенос и обмен")
             } footer: {
-                Footnote(text: "Один файл .claudepult: все режимы, внешний вид, строка меню, пороги. Без ключей, токенов и журналов. Двойной клик по такому файлу открывает импорт. Папки проектов — на вкладке «Режимы».")
+                Footnote(text: String(localized: "Один файл .claudepult: все режимы, внешний вид, строка меню, пороги. Без ключей, токенов и журналов. Двойной клик по такому файлу открывает импорт. Папки проектов — на вкладке «Режимы»."))
             }
 
             Section {
@@ -139,7 +140,7 @@ private struct GeneralSettings: View {
             } header: {
                 Text("Календарь")
             } footer: {
-                Footnote(text: "Даты — из проект.md (дедлайн, публикация) и контент-план.md у режимов с календарём (вкладка «Режимы»).")
+                Footnote(text: String(localized: "Даты — из проект.md (дедлайн, публикация) и контент-план.md у режимов с календарём (вкладка «Режимы»)."))
             }
 
             Section {
@@ -163,9 +164,9 @@ private struct GeneralSettings: View {
 
     private var notificationsText: String {
         switch notifications.state {
-        case .allowed: "включены"
-        case .denied: "выключены в macOS"
-        case .notAsked: "ещё не разрешены"
+        case .allowed: String(localized: "включены")
+        case .denied: String(localized: "выключены в macOS")
+        case .notAsked: String(localized: "ещё не разрешены")
         case .unknown: "—"
         }
     }
@@ -213,7 +214,7 @@ private struct AppearanceSettings: View {
             } header: {
                 Text("Блоки панели")
             } footer: {
-                Footnote(text: "Скрытый блок не пропадает из работы: сессии и лимиты отслеживаются, уведомления приходят. Проекты и общие команды включаются у каждого режима на вкладке «Режимы».")
+                Footnote(text: String(localized: "Скрытый блок не пропадает из работы: сессии и лимиты отслеживаются, уведомления приходят. Проекты и общие команды включаются у каждого режима на вкладке «Режимы»."))
             }
 
             Section {
@@ -251,17 +252,17 @@ private struct ClaudeSettings: View {
             Section {
                 LabeledContent("Путь к claude") {
                     TextField("", text: $settings.claudePath,
-                              prompt: Text(ClaudeLocator.detect().map { "авто: \($0)" } ?? "авто: не найден"))
+                              prompt: Text(ClaudeLocator.detect().map { String(localized: "авто: \($0)") } ?? String(localized: "авто: не найден")))
                         .textFieldStyle(.roundedBorder)
                         .frame(width: 280)
                 }
             } footer: {
-                Footnote(text: "Путь пустой — искать в /opt/homebrew/bin, /usr/local/bin, ~/.local/bin, ~/.claude/local. Где запускать команды (Терминал / Фон / спрашивать) — у каждого режима на вкладке «Режимы».")
+                Footnote(text: String(localized: "Путь пустой — искать в /opt/homebrew/bin, /usr/local/bin, ~/.local/bin, ~/.claude/local. Где запускать команды (Терминал / Фон / спрашивать) — у каждого режима на вкладке «Режимы»."))
             }
 
             Section {
                 Stepper(value: $settings.backgroundTimeLimitMinutes, in: 10...600, step: 10) {
-                    LabeledContent("Лимит времени", value: "\(settings.backgroundTimeLimitMinutes) мин")
+                    LabeledContent("Лимит времени", value: String(localized: "\(settings.backgroundTimeLimitMinutes) мин"))
                 }
                 Toggle("Итог в Telegram", isOn: $settings.telegramForBackground)
                 if settings.telegramForBackground,
@@ -273,7 +274,7 @@ private struct ClaudeSettings: View {
             } header: {
                 Text("Фоновые задачи")
             } footer: {
-                Footnote(text: "«Фон» запускает claude -p без окна: разрешены чтение и правка файлов проекта, проверки и сборки, git без push в main и без force, gh pr create/view/list; остальное отклоняется. Итог — уведомлением и в Telegram.")
+                Footnote(text: String(localized: "«Фон» запускает claude -p без окна: разрешены чтение и правка файлов проекта, проверки и сборки, git без push в main и без force, gh pr create/view/list; остальное отклоняется. Итог — уведомлением и в Telegram."))
             }
         }
     }
@@ -292,7 +293,7 @@ private struct SessionSettings: View {
                         .foregroundStyle(hooks.status == .installed ? .green : hooks.status == .outdated ? .orange : .secondary)
                 }
                 HStack {
-                    Button(hooks.status == .notInstalled ? "Установить hooks" : "Обновить hooks") { hooks.install() }
+                    Button(hooks.status == .notInstalled ? String(localized: "Установить hooks") : String(localized: "Обновить hooks")) { hooks.install() }
                     if hooks.status != .notInstalled {
                         Button("Снять hooks") { hooks.uninstall() }
                     }
@@ -306,7 +307,7 @@ private struct SessionSettings: View {
             } header: {
                 Text("Сессии Claude Code")
             } footer: {
-                Footnote(text: "Hooks добавляются в ~/.claude/settings.json (остальные настройки не трогаются, перед изменением рядом сохраняется копия). Они записывают состояние каждой сессии Claude Code на этом Маке — в Терминале, в приложении Claude, фоновых — чтобы ClaudePult показывал их в панели.")
+                Footnote(text: String(localized: "Hooks добавляются в ~/.claude/settings.json (остальные настройки не трогаются, перед изменением рядом сохраняется копия). Они записывают состояние каждой сессии Claude Code на этом Маке — в Терминале, в приложении Claude, фоновых — чтобы ClaudePult показывал их в панели."))
             }
         }
         .onAppear { hooks.refresh() }
@@ -337,7 +338,7 @@ private struct LimitSettings: View {
             } header: {
                 Text("Лимиты подписки")
             } footer: {
-                Footnote(text: "Данные — с того же адреса, что использует Claude Code (токен читается из связки ключей «Claude Code-credentials» и нигде не сохраняется). Уведомление — один раз на окно сессии/недели при пересечении порога и когда лимит восстановился. Значения пишутся в ~/Library/Application Support/ClaudePult/usage.json. Что показывать в строке меню — во вкладке «Внешний вид».")
+                Footnote(text: String(localized: "Данные — с того же адреса, что использует Claude Code (токен читается из связки ключей «Claude Code-credentials» и нигде не сохраняется). Уведомление — один раз на окно сессии/недели при пересечении порога и когда лимит восстановился. Значения пишутся в ~/Library/Application Support/ClaudePult/usage.json. Что показывать в строке меню — во вкладке «Внешний вид»."))
             }
         }
         .onAppear { thresholdsText = settings.limitThresholds.map(String.init).joined(separator: ", ") }
@@ -358,5 +359,54 @@ enum SettingsParsing {
     /// Percentages between 1 and 100 from free text, sorted and de-duplicated.
     static func thresholds(_ text: String) -> [Int] {
         Array(Set(text.split(whereSeparator: { !$0.isNumber }).compactMap { Int($0) }.filter { (1...100).contains($0) })).sorted()
+    }
+}
+
+/// The interface language (SPEC-modes §13): the system's, or one of ClaudePult's translations. macOS reads the
+/// per-app `AppleLanguages` at launch, so a change needs a relaunch.
+private struct LanguagePicker: View {
+    @State private var choice = UserDefaults.standard.stringArray(forKey: "AppleLanguages")?.first.flatMap { language in
+        (Bundle.main.localizations + ["ru"]).first { language.hasPrefix($0) }
+    } ?? ""
+    @State private var changed = false
+
+    /// Translations plus the development language (Russian), which has no `.lproj` of its own.
+    private var languages: [String] {
+        Set(Bundle.main.localizations + [Bundle.main.developmentLocalization ?? "ru"]).filter { $0 != "Base" }.sorted()
+    }
+
+    var body: some View {
+        Picker("Язык интерфейса", selection: $choice) {
+            Text("Как в системе").tag("")
+            ForEach(languages, id: \.self) { code in
+                Text(Locale(identifier: code).localizedString(forIdentifier: code)?.capitalized ?? code).tag(code)
+            }
+        }
+        .onChange(of: choice) {
+            if choice.isEmpty {
+                UserDefaults.standard.removeObject(forKey: "AppleLanguages")
+            } else {
+                UserDefaults.standard.set([choice], forKey: "AppleLanguages")
+            }
+            changed = true
+        }
+        if changed {
+            HStack {
+                Text("Язык сменится после перезапуска.").font(.callout).foregroundStyle(.secondary)
+                Spacer()
+                Button("Перезапустить") { Relaunch.now() }
+            }
+        }
+    }
+}
+
+@MainActor
+enum Relaunch {
+    static func now() {
+        let configuration = NSWorkspace.OpenConfiguration()
+        configuration.createsNewApplicationInstance = true
+        NSWorkspace.shared.openApplication(at: Bundle.main.bundleURL, configuration: configuration) { _, _ in
+            DispatchQueue.main.async { NSApp.terminate(nil) }
+        }
     }
 }

@@ -6,6 +6,7 @@ options:
     macOS: "14.0"
   createIntermediateGroups: true
   generateEmptyDirectories: true
+  developmentLanguage: ru
 
 settings:
   base:
@@ -17,6 +18,8 @@ settings:
     CODE_SIGN_IDENTITY: "-"
     ENABLE_USER_SCRIPT_SANDBOXING: YES
     SWIFT_STRICT_CONCURRENCY: complete
+    SWIFT_EMIT_LOC_STRINGS: YES
+    LOCALIZATION_PREFERS_STRING_CATALOGS: YES
 
 targets:
   ClaudePult:
@@ -37,7 +40,7 @@ targets:
         NSHumanReadableCopyright: "© Oleh Demishev"
         CFBundleIconName: AppIcon
         CFBundleDevelopmentRegion: ru
-        CFBundleLocalizations: [ru]
+        CFBundleLocalizations: [ru, en]
         NSAppleEventsUsageDescription: "ClaudePult открывает окна Терминала и запускает в них Claude Code для ваших проектов."
         # *.claudepult — exported settings and modes (SPEC-modes §12).
         UTExportedTypeDeclarations:

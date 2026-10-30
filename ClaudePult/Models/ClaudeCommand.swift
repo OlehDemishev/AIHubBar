@@ -14,9 +14,9 @@ enum ClaudeCommand: Codable, Equatable, Sendable {
 
     var title: String {
         switch self {
-        case .nextStep: "Следующий шаг"
-        case .customTask: "Своя задача"
-        case .finishSession: "Завершить сессию"
+        case .nextStep: String(localized: "Следующий шаг")
+        case .customTask: String(localized: "Своя задача")
+        case .finishSession: String(localized: "Завершить сессию")
         }
     }
 

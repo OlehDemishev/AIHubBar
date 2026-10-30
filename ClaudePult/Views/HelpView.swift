@@ -16,79 +16,79 @@ enum HelpContent {
     }
 
     static let sections: [Section] = [
-        Section(title: "Строка меню", systemImage: "menubar.rectangle", items: [
-            Item(name: "✦", detail: "Клик — панель. Красная точка: у какого-то проекта состояние «красное». ✋ с числом: сколько сессий Claude ждут ответа."),
-            Item(name: "Что показывать", detail: "Настройки → «Строка меню»: набор («Минимум», «Лимиты», «Всё», «Свой»), элементы и их порядок (лимиты числом, кольцом или полоской, отсчёт до сброса, прогноз, работающие сессии, фоновые задачи, очередь, место на диске, режим), разделитель, мелкий текст, цвет. Сверху — живой предпросмотр."),
-            Item(name: "⌘R", detail: "Обновить проекты в открытой панели."),
-            Item(name: "⌘,", detail: "Настройки."),
-            Item(name: "⌘Q", detail: "Выйти из ClaudePult."),
-            Item(name: "Режимы", detail: "Если включено больше одного режима, вверху панели — переключатель. Режимы настраиваются в Настройках → «Режимы»; все настройки сохраняются в файл .claudepult (Основные → «Экспорт настроек…»), двойной клик по такому файлу — импорт."),
+        Section(title: String(localized: "Строка меню"), systemImage: "menubar.rectangle", items: [
+            Item(name: "✦", detail: String(localized: "Клик — панель. Красная точка: у какого-то проекта состояние «красное». ✋ с числом: сколько сессий Claude ждут ответа.")),
+            Item(name: String(localized: "Что показывать"), detail: String(localized: "Настройки → «Строка меню»: набор («Минимум», «Лимиты», «Всё», «Свой»), элементы и их порядок (лимиты числом, кольцом или полоской, отсчёт до сброса, прогноз, работающие сессии, фоновые задачи, очередь, место на диске, режим), разделитель, мелкий текст, цвет. Сверху — живой предпросмотр.")),
+            Item(name: "⌘R", detail: String(localized: "Обновить проекты в открытой панели.")),
+            Item(name: "⌘,", detail: String(localized: "Настройки.")),
+            Item(name: "⌘Q", detail: String(localized: "Выйти из ClaudePult.")),
+            Item(name: String(localized: "Режимы"), detail: String(localized: "Если включено больше одного режима, вверху панели — переключатель. Режимы настраиваются в Настройках → «Режимы»; все настройки сохраняются в файл .claudepult (Основные → «Экспорт настроек…»), двойной клик по такому файлу — импорт.")),
         ]),
-        Section(title: "Лимиты подписки", systemImage: "gauge.with.dots.needle.33percent", items: [
-            Item(name: "У значка", detail: "% 5-часовой сессии и недели — числом, кольцом или полоской (Настройки → «Строка меню»): зелёный до 50 %, оранжевый до 80 %, красный выше."),
-            Item(name: "Блок «Лимиты»", detail: "Сессия с обратным отсчётом до сброса и прогнозом по темпу за 30 мин, неделя, недели по моделям, extra usage."),
-            Item(name: "Расход по проектам", detail: "Оценка по журналам Claude Code: доли проектов и самая затратная сессия за сессию, сегодня, неделю."),
-            Item(name: "Уведомления", detail: "Один раз на окно при 50/80/95 % (пороги — в Настройках) и когда лимит восстановился; по желанию ещё и в Telegram."),
-            Item(name: "Виджет", detail: "«Лимиты Claude» для рабочего стола: правый клик по столу → «Изменить виджеты…» → ClaudePult. Маленький — кольцо сессии, средний — сессия и неделя."),
-            Item(name: "Фон и лимит", detail: "Если сессия использована больше чем на 90 %, фоновая задача спрашивает: запустить сейчас или после сброса."),
+        Section(title: String(localized: "Лимиты подписки"), systemImage: "gauge.with.dots.needle.33percent", items: [
+            Item(name: String(localized: "У значка"), detail: String(localized: "% 5-часовой сессии и недели — числом, кольцом или полоской (Настройки → «Строка меню»): зелёный до 50 %, оранжевый до 80 %, красный выше.")),
+            Item(name: String(localized: "Блок «Лимиты»"), detail: String(localized: "Сессия с обратным отсчётом до сброса и прогнозом по темпу за 30 мин, неделя, недели по моделям, extra usage.")),
+            Item(name: String(localized: "Расход по проектам"), detail: String(localized: "Оценка по журналам Claude Code: доли проектов и самая затратная сессия за сессию, сегодня, неделю.")),
+            Item(name: String(localized: "Уведомления"), detail: String(localized: "Один раз на окно при 50/80/95 % (пороги — в Настройках) и когда лимит восстановился; по желанию ещё и в Telegram.")),
+            Item(name: String(localized: "Виджет"), detail: String(localized: "«Лимиты Claude» для рабочего стола: правый клик по столу → «Изменить виджеты…» → ClaudePult. Маленький — кольцо сессии, средний — сессия и неделя.")),
+            Item(name: String(localized: "Фон и лимит"), detail: String(localized: "Если сессия использована больше чем на 90 %, фоновая задача спрашивает: запустить сейчас или после сброса.")),
         ]),
-        Section(title: "Шаблоны", systemImage: "square.stack.3d.up", items: [
-            Item(name: "Помощник", detail: "Настройки → «Режимы» → «+» → «Помощник…»: режим по шагам — шаблон, папка, этапы, метрики, календарь, сервис AI, команды, права, блоки панели, строка меню, название. Справа — как это будет выглядеть."),
-            Item(name: "Добавить режим", detail: "Настройки → «Режимы» → «+»: «Разработчик (GitHub)», «Видео», «Тексты», «Ресёрч», «Соцсети», «Свой». Выберите папку — режим готов, дальше всё правится в его настройках."),
-            Item(name: "Разработчик (GitHub)", detail: "Встроенный сканер git: ветки, незакоммиченное, stash, PR и CI (если есть gh), шапка STATUS.md. Промты Claude — по правилам самого проекта (CLAUDE.md / AGENTS.md)."),
+        Section(title: String(localized: "Шаблоны"), systemImage: "square.stack.3d.up", items: [
+            Item(name: String(localized: "Помощник"), detail: String(localized: "Настройки → «Режимы» → «+» → «Помощник…»: режим по шагам — шаблон, папка, этапы, метрики, календарь, сервис AI, команды, права, блоки панели, строка меню, название. Справа — как это будет выглядеть.")),
+            Item(name: String(localized: "Добавить режим"), detail: String(localized: "Настройки → «Режимы» → «+»: «Разработчик (GitHub)», «Видео», «Тексты», «Ресёрч», «Соцсети», «Свой». Выберите папку — режим готов, дальше всё правится в его настройках.")),
+            Item(name: String(localized: "Разработчик (GitHub)"), detail: String(localized: "Встроенный сканер git: ветки, незакоммиченное, stash, PR и CI (если есть gh), шапка STATUS.md. Промты Claude — по правилам самого проекта (CLAUDE.md / AGENTS.md).")),
         ]),
-        Section(title: "Проекты-папки", systemImage: "folder.badge.gearshape", items: [
-            Item(name: "Источник «папки»", detail: "Настройки → «Режимы» → «Источник»: каждая папка внутри папки проектов — проект (ролик, статья, тема)."),
-            Item(name: "проект.md", detail: "Карточка проекта — обычный текст: «Этап: сценарий», «Дедлайн: 2026-11-05», «Публикация: 2026-11-05 18:00», «Формат: …», «Главный файл: сценарий.md», «Площадка: YouTube». Можно править руками."),
-            Item(name: "Команды", detail: "В развёрнутом проекте: команды режима и «Своя задача». Результат — всегда новый файл в папке проекта. Модель по API получает текст главного файла; Claude работает в фоне с правами режима («только файлы» — без терминала и интернета); другие агенты открываются в Терминале, задача — в буфере обмена."),
-            Item(name: "Сравнить", detail: "Включите «Сравнить», выберите 2–3 сервиса и команду: результаты лягут рядом («хуки (Claude).md», «хуки (OpenAI).md») и откроются в окне «Сравнение»."),
-            Item(name: "Этапы и метрики", detail: "Этапы режима — через запятую; этап меняется кнопкой в развёрнутом проекте. Слова, хронометраж, время чтения и страницы считаются по главному файлу (.md, .txt, .rtf, .docx)."),
+        Section(title: String(localized: "Проекты-папки"), systemImage: "folder.badge.gearshape", items: [
+            Item(name: String(localized: "Источник «папки»"), detail: String(localized: "Настройки → «Режимы» → «Источник»: каждая папка внутри папки проектов — проект (ролик, статья, тема).")),
+            Item(name: String(localized: "проект.md"), detail: String(localized: "Карточка проекта — обычный текст: «Этап: сценарий», «Дедлайн: 2026-11-05», «Публикация: 2026-11-05 18:00», «Формат: …», «Главный файл: сценарий.md», «Площадка: YouTube». Можно править руками.")),
+            Item(name: String(localized: "Команды"), detail: String(localized: "В развёрнутом проекте: команды режима и «Своя задача». Результат — всегда новый файл в папке проекта. Модель по API получает текст главного файла; Claude работает в фоне с правами режима («только файлы» — без терминала и интернета); другие агенты открываются в Терминале, задача — в буфере обмена.")),
+            Item(name: String(localized: "Сравнить"), detail: String(localized: "Включите «Сравнить», выберите 2–3 сервиса и команду: результаты лягут рядом («хуки (Claude).md», «хуки (OpenAI).md») и откроются в окне «Сравнение».")),
+            Item(name: String(localized: "Этапы и метрики"), detail: String(localized: "Этапы режима — через запятую; этап меняется кнопкой в развёрнутом проекте. Слова, хронометраж, время чтения и страницы считаются по главному файлу (.md, .txt, .rtf, .docx).")),
         ]),
-        Section(title: "Календарь", systemImage: "calendar", items: [
-            Item(name: "Что в нём", detail: "Дедлайны и публикации из проект.md, записи контент-план.md — у режимов, где «Календарь» включён (Настройки → «Режимы»)."),
-            Item(name: "Ближайшее", detail: "Блок в панели: 7 дней вперёд, просроченное красным; клик открывает проект или файл."),
-            Item(name: "Окно «Календарь»", detail: "Месяц или неделя. Перетащите запись на другой день — дата перепишется в файле. Двойной клик по дню — новая запись."),
-            Item(name: "Напоминания", detail: "Настройки → «Основные» → «Календарь»: за сколько напоминать и дублировать ли в Telegram."),
+        Section(title: String(localized: "Календарь"), systemImage: "calendar", items: [
+            Item(name: String(localized: "Что в нём"), detail: String(localized: "Дедлайны и публикации из проект.md, записи контент-план.md — у режимов, где «Календарь» включён (Настройки → «Режимы»).")),
+            Item(name: String(localized: "Ближайшее"), detail: String(localized: "Блок в панели: 7 дней вперёд, просроченное красным; клик открывает проект или файл.")),
+            Item(name: String(localized: "Окно «Календарь»"), detail: String(localized: "Месяц или неделя. Перетащите запись на другой день — дата перепишется в файле. Двойной клик по дню — новая запись.")),
+            Item(name: String(localized: "Напоминания"), detail: String(localized: "Настройки → «Основные» → «Календарь»: за сколько напоминать и дублировать ли в Telegram.")),
         ]),
-        Section(title: "Сервисы AI", systemImage: "cpu", items: [
-            Item(name: "Агенты", detail: "Codex CLI, Gemini CLI, Antigravity, Copilot CLI, Cursor CLI — ClaudePult находит установленные (Настройки → «Сервисы AI») и открывает их в Терминале в папке проекта: «Открыть в…» в блоке Claude у проекта. Вход у каждого свой."),
-            Item(name: "Модели по API", detail: "Anthropic, OpenAI, Google, xAI, DeepSeek, Mistral и любой сервер, совместимый с OpenAI (Ollama, LM Studio, OpenRouter). Ключ — только в связке ключей macOS; «Проверить» не тратит токены."),
-            Item(name: "Сервис режима", detail: "Настройки → «Режимы» → «Сервис по умолчанию»: им будут выполняться команды-шаблоны режима."),
+        Section(title: String(localized: "Сервисы AI"), systemImage: "cpu", items: [
+            Item(name: String(localized: "Агенты"), detail: String(localized: "Codex CLI, Gemini CLI, Antigravity, Copilot CLI, Cursor CLI — ClaudePult находит установленные (Настройки → «Сервисы AI») и открывает их в Терминале в папке проекта: «Открыть в…» в блоке Claude у проекта. Вход у каждого свой.")),
+            Item(name: String(localized: "Модели по API"), detail: String(localized: "Anthropic, OpenAI, Google, xAI, DeepSeek, Mistral и любой сервер, совместимый с OpenAI (Ollama, LM Studio, OpenRouter). Ключ — только в связке ключей macOS; «Проверить» не тратит токены.")),
+            Item(name: String(localized: "Сервис режима"), detail: String(localized: "Настройки → «Режимы» → «Сервис по умолчанию»: им будут выполняться команды-шаблоны режима.")),
         ]),
-        Section(title: "Сессии Claude Code", systemImage: "bubble.left.and.text.bubble.right", items: [
-            Item(name: "Список", detail: "Все сессии на этом Маке — в Терминале, в приложении Claude, фоновые: проект, worktree, задача, длительность, состояние (работает, в фоне, ждёт ответа, готово, ошибка, завершена). Ждущие ответа подсвечены и приходят уведомлением."),
-            Item(name: "Показать", detail: "Вывести вкладку Терминала с этой сессией; для сессий приложения Claude — открыть Claude, иначе — папку."),
-            Item(name: "Журнал", detail: "Фоновая задача: что делает Claude, по шагам."),
-            Item(name: "Остановить", detail: "Фоновая задача: остановить сейчас."),
-            Item(name: "Hooks", detail: "Сессии видны, только если в Настройках установлены hooks (они дописываются в ~/.claude/settings.json, копия сохраняется рядом)."),
+        Section(title: String(localized: "Сессии Claude Code"), systemImage: "bubble.left.and.text.bubble.right", items: [
+            Item(name: String(localized: "Список"), detail: String(localized: "Все сессии на этом Маке — в Терминале, в приложении Claude, фоновые: проект, worktree, задача, длительность, состояние (работает, в фоне, ждёт ответа, готово, ошибка, завершена). Ждущие ответа подсвечены и приходят уведомлением.")),
+            Item(name: String(localized: "Показать"), detail: String(localized: "Вывести вкладку Терминала с этой сессией; для сессий приложения Claude — открыть Claude, иначе — папку.")),
+            Item(name: String(localized: "Журнал"), detail: String(localized: "Фоновая задача: что делает Claude, по шагам.")),
+            Item(name: String(localized: "Остановить"), detail: String(localized: "Фоновая задача: остановить сейчас.")),
+            Item(name: "Hooks", detail: String(localized: "Сессии видны, только если в Настройках установлены hooks (они дописываются в ~/.claude/settings.json, копия сохраняется рядом).")),
         ]),
-        Section(title: "Проекты", systemImage: "folder", items: [
-            Item(name: "Строка", detail: "Точка состояния, ветка, незакоммиченные файлы, открытые PR (цвет — CI), когда была активность."),
-            Item(name: "Раскрыть", detail: "Stage, Сейчас, Дальше, Нужно от Олега из docs/STATUS.md, предупреждения, PR, worktree."),
-            Item(name: "Следующий шаг", detail: "Claude берёт первый пункт Next и делает его по правилам ~/Projects/CLAUDE.md: ветка, проверки, PR, STATUS."),
-            Item(name: "Своя задача…", detail: "Claude выполняет ваш текст по тем же правилам."),
-            Item(name: "Завершить", detail: "Claude доводит текущую работу в папке: проверки, коммит, push, PR, STATUS — без нового кода."),
-            Item(name: "Терминал / Фон", detail: "Где запускать: окно Терминала (можно отвечать Claude) или claude -p без окна (только разрешённые действия, лимит времени, итог — уведомлением и в Telegram). «Запомнить выбор» или режим по умолчанию — в Настройках."),
-            Item(name: "Занятая папка", detail: "Если в проекте уже работает Claude, новая задача идёт в отдельный worktree .claude/worktrees/cb-… на свежей ветке от origin/main."),
-            Item(name: "Терминал · Finder · GitHub", detail: "Открыть папку проекта или репозиторий."),
-            Item(name: "Удалить worktree", detail: "Только если в нём нет незакоммиченного и ветка запушена или влита."),
+        Section(title: String(localized: "Проекты"), systemImage: "folder", items: [
+            Item(name: String(localized: "Строка"), detail: String(localized: "Точка состояния, ветка, незакоммиченные файлы, открытые PR (цвет — CI), когда была активность.")),
+            Item(name: String(localized: "Раскрыть"), detail: String(localized: "Stage, Сейчас, Дальше, Нужно от Олега из docs/STATUS.md, предупреждения, PR, worktree.")),
+            Item(name: String(localized: "Следующий шаг"), detail: String(localized: "Claude берёт первый пункт Next и делает его по правилам ~/Projects/CLAUDE.md: ветка, проверки, PR, STATUS.")),
+            Item(name: String(localized: "Своя задача…"), detail: String(localized: "Claude выполняет ваш текст по тем же правилам.")),
+            Item(name: String(localized: "Завершить"), detail: String(localized: "Claude доводит текущую работу в папке: проверки, коммит, push, PR, STATUS — без нового кода.")),
+            Item(name: String(localized: "Терминал / Фон"), detail: String(localized: "Где запускать: окно Терминала (можно отвечать Claude) или claude -p без окна (только разрешённые действия, лимит времени, итог — уведомлением и в Telegram). «Запомнить выбор» или режим по умолчанию — в Настройках.")),
+            Item(name: String(localized: "Занятая папка"), detail: String(localized: "Если в проекте уже работает Claude, новая задача идёт в отдельный worktree .claude/worktrees/cb-… на свежей ветке от origin/main.")),
+            Item(name: String(localized: "Терминал · Finder · GitHub"), detail: String(localized: "Открыть папку проекта или репозиторий.")),
+            Item(name: String(localized: "Удалить worktree"), detail: String(localized: "Только если в нём нет незакоммиченного и ветка запушена или влита.")),
         ]),
-        Section(title: "Команды", systemImage: "terminal", items: [
-            Item(name: "Отчёт сейчас", detail: "Отчёт с AI-резюме за 24 ч в Telegram (1–3 мин)."),
-            Item(name: "Быстрая сводка", detail: "Сводка без AI за 24 ч в Telegram."),
-            Item(name: "Последний отчёт", detail: "Открыть _daily-report/reports/latest.html."),
-            Item(name: "Очистка: проверить", detail: "Показать, что удалит очистка сборок, ничего не трогая."),
-            Item(name: "Очистка: выполнить", detail: "Удалить сборки и кэши, сбросить симуляторы (с подтверждением)."),
-            Item(name: "Диск", detail: "Свободное место; меньше 20 ГБ — оранжевым."),
+        Section(title: String(localized: "Команды"), systemImage: "terminal", items: [
+            Item(name: String(localized: "Отчёт сейчас"), detail: String(localized: "Отчёт с AI-резюме за 24 ч в Telegram (1–3 мин).")),
+            Item(name: String(localized: "Быстрая сводка"), detail: String(localized: "Сводка без AI за 24 ч в Telegram.")),
+            Item(name: String(localized: "Последний отчёт"), detail: String(localized: "Открыть _daily-report/reports/latest.html.")),
+            Item(name: String(localized: "Очистка: проверить"), detail: String(localized: "Показать, что удалит очистка сборок, ничего не трогая.")),
+            Item(name: String(localized: "Очистка: выполнить"), detail: String(localized: "Удалить сборки и кэши, сбросить симуляторы (с подтверждением).")),
+            Item(name: String(localized: "Диск"), detail: String(localized: "Свободное место; меньше 20 ГБ — оранжевым.")),
         ]),
-        Section(title: "Для скриптов", systemImage: "chevron.left.forwardslash.chevron.right", items: [
-            Item(name: "--claude next|task|finish <папка>", detail: "Запустить команду Claude (--background — в фоне, --print — только показать)."),
-            Item(name: "--command report|summary|cleanup-check|cleanup", detail: "Общая команда."),
-            Item(name: "--sessions · --show-session <id>", detail: "Список сессий; показать вкладку Терминала."),
-            Item(name: "--hooks status|install|uninstall", detail: "Hooks сессий."),
-            Item(name: "--login-item status|on|off", detail: "Автозапуск при входе."),
-            Item(name: "--background-settings", detail: "Правила доступа фоновых задач."),
-            Item(name: "--usage · --token-usage", detail: "Лимиты подписки; расход по проектам."),
+        Section(title: String(localized: "Для скриптов"), systemImage: "chevron.left.forwardslash.chevron.right", items: [
+            Item(name: String(localized: "--claude next|task|finish <папка>"), detail: String(localized: "Запустить команду Claude (--background — в фоне, --print — только показать).")),
+            Item(name: "--command report|summary|cleanup-check|cleanup", detail: String(localized: "Общая команда.")),
+            Item(name: "--sessions · --show-session <id>", detail: String(localized: "Список сессий; показать вкладку Терминала.")),
+            Item(name: "--hooks status|install|uninstall", detail: String(localized: "Hooks сессий.")),
+            Item(name: "--login-item status|on|off", detail: String(localized: "Автозапуск при входе.")),
+            Item(name: "--background-settings", detail: String(localized: "Правила доступа фоновых задач.")),
+            Item(name: "--usage · --token-usage", detail: String(localized: "Лимиты подписки; расход по проектам.")),
         ]),
     ]
 
@@ -108,7 +108,7 @@ struct HelpView: View {
                                 GridRow {
                                     Text(item.name)
                                         .fontWeight(.medium)
-                                        .font(section.title == "Для скриптов" ? .callout.monospaced() : .callout)
+                                        .font(section.title == String(localized: "Для скриптов") ? .callout.monospaced() : .callout)
                                         .frame(width: 200, alignment: .leading)
                                     Text(item.detail)
                                         .font(.callout)

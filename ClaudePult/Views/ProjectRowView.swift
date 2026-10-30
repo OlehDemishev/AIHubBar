@@ -94,7 +94,7 @@ private struct ProjectDetailsView: View {
             ClaudeActionsView(project: project)
 
             HStack(spacing: 6) {
-                ActionButton(title: "Терминал", systemImage: "terminal") {
+                ActionButton(title: String(localized: "Терминал"), systemImage: "terminal") {
                     ProjectActions.openInTerminal(project.path)
                 }
                 ActionButton(title: "Finder", systemImage: "folder") {
@@ -115,11 +115,11 @@ private struct ProjectDetailsView: View {
                         .scaledFont(.callout)
                         .fixedSize(horizontal: false, vertical: true)
                 }
-                BulletSection(title: "Сейчас", items: summary.now)
-                BulletSection(title: "Дальше", items: summary.next)
-                BulletSection(title: "Нужно от Олега", items: summary.needs, tint: .orange)
+                BulletSection(title: String(localized: "Сейчас"), items: summary.now)
+                BulletSection(title: String(localized: "Дальше"), items: summary.next)
+                BulletSection(title: String(localized: "Нужно от Олега"), items: summary.needs, tint: .orange)
             } else {
-                Text(project.status == nil ? "Нет docs/STATUS.md" : "В STATUS.md нет шапки")
+                Text(project.status == nil ? String(localized: "Нет docs/STATUS.md") : String(localized: "В STATUS.md нет шапки"))
                     .scaledFont(.callout)
                     .foregroundStyle(.secondary)
             }
@@ -267,10 +267,10 @@ extension Health {
 
     var title: String {
         switch self {
-        case .red: "Требует внимания"
-        case .yellow: "Есть что проверить"
-        case .green: "Всё в порядке"
-        case .unknown: "Состояние неизвестно"
+        case .red: String(localized: "Требует внимания")
+        case .yellow: String(localized: "Есть что проверить")
+        case .green: String(localized: "Всё в порядке")
+        case .unknown: String(localized: "Состояние неизвестно")
         }
     }
 }
@@ -287,11 +287,11 @@ extension CIState {
 
     var title: String {
         switch self {
-        case .ok: "пройдено"
-        case .fail: "упало"
-        case .pending: "идёт"
-        case .none: "нет проверок"
-        case .unknown: "неизвестно"
+        case .ok: String(localized: "пройдено")
+        case .fail: String(localized: "упало")
+        case .pending: String(localized: "идёт")
+        case .none: String(localized: "нет проверок")
+        case .unknown: String(localized: "неизвестно")
         }
     }
 }

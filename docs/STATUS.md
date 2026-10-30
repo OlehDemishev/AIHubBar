@@ -1,17 +1,18 @@
 # Status
 
 <!-- summary:start -->
-**Stage:** SPEC.md done; SPEC-modes stages 1–7 done (modes, menu bar, AI services, folder projects + commands, calendar, templates, assistant)
+**Stage:** SPEC.md done; SPEC-modes stages 1–7 done, stage 9 started (English interface); stage 8 waits for Oleh
 **Updated:** 2026-10-30
 
 **Now:**
-- SPEC-modes §9 stage 7 (setup assistant) merged (PR #43); next: stage 8 (for everyone) — needs the Apple Developer account and the name decision
+- SPEC-modes §9 stage 9, English interface, in PR (branch `feat/localization`); next: English templates and prompts, then the other languages (es, pt-BR, fr, de, ja, id, ko, it, ar with RTL, pl, uk)
 
 **Next:**
 - SPEC-modes §9: 5 calendar, 6 templates, 7 setup assistant, 8 for everyone, 9 languages (§13: en, es, pt-BR, fr, de, ja, id, ko, it, ar with RTL, pl, uk)
 - Fix whatever Oleh finds in docs/CHECKLIST.md
 
 **Needs Oleh:**
+- merge the English interface PR; try Settings → Основные → «Язык интерфейса» → English → «Перезапустить» (and back)
 - try Settings → Режимы → «+» → «Помощник…»
 - try the calendar in a folder mode: «Календарь» → «+ контент-план», a `Дедлайн:` in a `проект.md`, then the panel «Ближайшее» and the «Календарь» window
 - try folder projects: duplicate a mode, set «Источник» → «папки» on a folder with a few subfolders, add stages (e.g. «идея, сценарий, монтаж, готово») and metrics
@@ -26,6 +27,12 @@
 - hooks are installed in ~/.claude/settings.json; backup of the original: ~/.claude/settings.json.claudepult-backup-20261029T192827
 - delete or archive the old repo `OlehDemishev/ClaudeBar`; turn on start at login if wanted
 <!-- summary:end -->
+
+## 2026-10-30 — English interface (branch `feat/localization`)
+
+Done: SPEC-modes §13 / stage 9, first language. String Catalog with Russian as the source and all 707 interface strings translated to English; 539 non-SwiftUI strings wrapped in `String(localized:)` (file formats, prompts, hook script, logs and CLI deliberately left alone); English-aware «file/files»; Settings → Основные → «Язык интерфейса» with relaunch.
+Checked: `xcodebuild test` — 146 tests green (one expectation updated: localized numbers are grouped); no compiler warnings; a script confirms 0 untranslated keys, 0 format-specifier mismatches, 0 stale keys. Live with `-AppleLanguages '(en)'`: git scanner items, calendar texts and the assistant preview come out in English. CI not set up; checks run locally.
+Left: template JSON and prompts are still Russian (next step); the language picker was not clicked by eye.
 
 ## 2026-10-30 — Setup assistant (branch `feat/assistant`)
 

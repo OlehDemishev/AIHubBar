@@ -62,7 +62,7 @@ struct CommandsView: View {
             Label("Свободно \(CommandStore.diskText(bytes))", systemImage: low ? "exclamationmark.triangle.fill" : "internaldrive")
                 .scaledFont(.caption, weight: low ? .semibold : .regular)
                 .foregroundStyle(low ? .orange : .secondary)
-                .help(low ? "Меньше 20 ГБ — стоит запустить очистку" : "Свободное место на диске")
+                .help(low ? String(localized: "Меньше 20 ГБ — стоит запустить очистку") : String(localized: "Свободное место на диске"))
         }
     }
 

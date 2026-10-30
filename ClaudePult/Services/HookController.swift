@@ -23,18 +23,18 @@ final class HookController {
     }
 
     func install() {
-        perform("Hooks установлены") { try installer.install() }
+        perform(String(localized: "Hooks установлены")) { try installer.install() }
     }
 
     func uninstall() {
-        perform("Hooks сняты") { try installer.uninstall() }
+        perform(String(localized: "Hooks сняты")) { try installer.uninstall() }
     }
 
     private func perform(_ success: String, _ action: () throws -> URL?) {
         do {
             let backup = try action()
-            message = success + (backup.map { ". Резервная копия: ~/.claude/\($0.lastPathComponent)" } ?? ".")
-                + " Claude Code подхватывает изменения сам, в том числе в открытых сессиях."
+            message = success + (backup.map { String(localized: ". Резервная копия: ~/.claude/\($0.lastPathComponent)") } ?? ".")
+                + String(localized: " Claude Code подхватывает изменения сам, в том числе в открытых сессиях.")
             isError = false
         } catch {
             message = error.localizedDescription

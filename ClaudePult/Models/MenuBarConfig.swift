@@ -15,9 +15,9 @@ struct MenuBarConfig: Codable, Equatable, Hashable, Sendable {
 
         var title: String {
             switch self {
-            case .space: "Пробел"
-            case .dot: "Точка «·»"
-            case .bar: "Черта «|»"
+            case .space: String(localized: "Пробел")
+            case .dot: String(localized: "Точка «·»")
+            case .bar: String(localized: "Черта «|»")
             }
         }
     }
@@ -27,10 +27,10 @@ struct MenuBarConfig: Codable, Equatable, Hashable, Sendable {
 
         var title: String {
             switch self {
-            case .minimum: "Минимум"
-            case .limits: "Лимиты"
-            case .everything: "Всё"
-            case .custom: "Свой"
+            case .minimum: String(localized: "Минимум")
+            case .limits: String(localized: "Лимиты")
+            case .everything: String(localized: "Всё")
+            case .custom: String(localized: "Свой")
             }
         }
     }
@@ -124,20 +124,20 @@ struct MenuBarElement: Codable, Equatable, Hashable, Identifiable, Sendable {
 
         var title: String {
             switch self {
-            case .icon: "Значок"
-            case .projectsAlert: "Проблемы проектов (красная точка)"
-            case .session: "Сессия (5 ч)"
-            case .week: "Неделя"
-            case .modelWeek: "Неделя по модели"
-            case .resetCountdown: "До сброса сессии"
-            case .forecast: "Прогноз (если не хватит до сброса)"
-            case .waiting: "Ждут ответа"
-            case .running: "Работают сессии"
-            case .background: "Фоновые задачи"
-            case .queued: "Отложенные запуски"
-            case .deadline: "Ближайшая дата календаря"
-            case .disk: "Свободное место (если мало)"
-            case .mode: "Текущий режим"
+            case .icon: String(localized: "Значок")
+            case .projectsAlert: String(localized: "Проблемы проектов (красная точка)")
+            case .session: String(localized: "Сессия (5 ч)")
+            case .week: String(localized: "Неделя")
+            case .modelWeek: String(localized: "Неделя по модели")
+            case .resetCountdown: String(localized: "До сброса сессии")
+            case .forecast: String(localized: "Прогноз (если не хватит до сброса)")
+            case .waiting: String(localized: "Ждут ответа")
+            case .running: String(localized: "Работают сессии")
+            case .background: String(localized: "Фоновые задачи")
+            case .queued: String(localized: "Отложенные запуски")
+            case .deadline: String(localized: "Ближайшая дата календаря")
+            case .disk: String(localized: "Свободное место (если мало)")
+            case .mode: String(localized: "Текущий режим")
             }
         }
 
@@ -149,9 +149,9 @@ struct MenuBarElement: Codable, Equatable, Hashable, Identifiable, Sendable {
 
         var title: String {
             switch self {
-            case .number: "Число %"
-            case .ring: "Кольцо"
-            case .bar: "Полоска"
+            case .number: String(localized: "Число %")
+            case .ring: String(localized: "Кольцо")
+            case .bar: String(localized: "Полоска")
             }
         }
     }
@@ -219,7 +219,7 @@ struct MenuBarData: Equatable, Hashable, Sendable {
         showsAlert: true, waiting: 1, running: 2, background: 1, queued: 1, session: 34, week: 58,
         modelWeeks: ["seven_day_fable": 12], sessionResetsAt: Date.now.addingTimeInterval(2 * 3600 + 14 * 60),
         forecastRunsOut: Date.now.addingTimeInterval(90 * 60), diskFreeBytes: 12_000_000_000,
-        deadline: "Ролик · 2 дн", modeName: "Видео", modeIcon: "video"
+        deadline: String(localized: "Ролик · 2 дн"), modeName: String(localized: "Видео"), modeIcon: "video"
     )
 }
 
@@ -276,7 +276,7 @@ enum MenuBarComposer {
                 groups.append([.labeled(symbol: "arrow.clockwise", text: countdown(to: resets, now: data.now, long: element.longFormat), .secondary)])
             case .forecast:
                 guard let runsOut = data.forecastRunsOut else { continue }
-                groups.append([.text("до " + runsOut.formatted(date: .omitted, time: .shortened), .warning)])
+                groups.append([.text(String(localized: "до ") + runsOut.formatted(date: .omitted, time: .shortened), .warning)])
             case .waiting:
                 if data.waiting > 0 { groups.append([.labeled(symbol: "hand.raised.fill", text: "\(data.waiting)", .label)]) }
             case .running:
@@ -289,7 +289,7 @@ enum MenuBarComposer {
                 if let deadline = data.deadline { groups.append([.labeled(symbol: "calendar", text: deadline, .label)]) }
             case .disk:
                 guard let bytes = data.diskFreeBytes, bytes < Int64(element.diskBelowGB) * 1_000_000_000 else { continue }
-                groups.append([.labeled(symbol: "internaldrive", text: "\(bytes / 1_000_000_000) ГБ", .warning)])
+                groups.append([.labeled(symbol: "internaldrive", text: String(localized: "\(bytes / 1_000_000_000) ГБ"), .warning)])
             case .mode:
                 if element.showName, let name = data.modeName {
                     groups.append([.text(name, .secondary)])
@@ -306,7 +306,7 @@ enum MenuBarComposer {
     static func countdown(to date: Date, now: Date, long: Bool) -> String {
         let minutes = max(0, Int(date.timeIntervalSince(now) / 60))
         if long {
-            return minutes >= 60 ? "\(minutes / 60) ч \(minutes % 60) мин" : "\(minutes) мин"
+            return minutes >= 60 ? String(localized: "\(minutes / 60) ч \(minutes % 60) мин") : String(localized: "\(minutes) мин")
         }
         return String(format: "%d:%02d", minutes / 60, minutes % 60)
     }
@@ -331,11 +331,11 @@ enum MenuBarComposer {
     static func accessibilityText(_ config: MenuBarConfig, _ data: MenuBarData) -> String {
         var parts = ["ClaudePult"]
         let on = Set(config.elements.filter(\.enabled).map(\.kind))
-        if on.contains(.session), let session = data.session { parts.append("сессия \(Int(session.rounded())) %") }
-        if on.contains(.week), let week = data.week { parts.append("неделя \(Int(week.rounded())) %") }
-        if on.contains(.projectsAlert), data.showsAlert { parts.append("есть проекты с проблемами") }
-        if on.contains(.waiting), data.waiting > 0 { parts.append("ждут ответа: \(data.waiting)") }
-        if on.contains(.background), data.background > 0 { parts.append("фоновых задач: \(data.background)") }
+        if on.contains(.session), let session = data.session { parts.append(String(localized: "сессия \(Int(session.rounded())) %")) }
+        if on.contains(.week), let week = data.week { parts.append(String(localized: "неделя \(Int(week.rounded())) %")) }
+        if on.contains(.projectsAlert), data.showsAlert { parts.append(String(localized: "есть проекты с проблемами")) }
+        if on.contains(.waiting), data.waiting > 0 { parts.append(String(localized: "ждут ответа: \(data.waiting)")) }
+        if on.contains(.background), data.background > 0 { parts.append(String(localized: "фоновых задач: \(data.background)")) }
         return parts.joined(separator: ", ")
     }
 }

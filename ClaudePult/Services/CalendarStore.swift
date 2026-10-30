@@ -91,7 +91,7 @@ final class CalendarStore {
         case let .plan(path, line):
             guard let text = try? String(contentsOfFile: path, encoding: .utf8),
                   var changed = ContentPlan.setting(.date, of: line, to: CalendarScanner.text(date, withTime: false), in: text) else {
-                lastError = "Строка контент-плана сдвинулась — обновите календарь"
+                lastError = String(localized: "Строка контент-плана сдвинулась — обновите календарь")
                 return
             }
             if entry.hasTime, let withTime = ContentPlan.setting(.time, of: line, to: date.formatted(.dateTime.hour(.twoDigits(amPM: .omitted)).minute(.twoDigits)), in: changed) {
@@ -134,7 +134,7 @@ final class CalendarStore {
             lastError = nil
             return true
         } catch {
-            lastError = "Не удалось записать \((path as NSString).lastPathComponent): \(error.localizedDescription)"
+            lastError = String(localized: "Не удалось записать \((path as NSString).lastPathComponent): \(error.localizedDescription)")
             AppLog.error("Calendar write \(path) failed: \(error.localizedDescription)")
             return false
         }
@@ -192,10 +192,10 @@ enum CalendarText {
         let days = calendar.dateComponents([.day], from: calendar.startOfDay(for: now), to: calendar.startOfDay(for: date)).day ?? 0
         let time = hasTime ? " " + date.formatted(date: .omitted, time: .shortened) : ""
         switch days {
-        case ..<0: return "просрочено \(-days) дн"
-        case 0: return "сегодня" + time
-        case 1: return "завтра" + time
-        default: return "через \(days) дн" + time
+        case ..<0: return String(localized: "просрочено \(-days) дн")
+        case 0: return String(localized: "сегодня") + time
+        case 1: return String(localized: "завтра") + time
+        default: return String(localized: "через \(days) дн") + time
         }
     }
 
@@ -204,8 +204,8 @@ enum CalendarText {
         let calendar = Calendar.current
         let days = calendar.dateComponents([.day], from: calendar.startOfDay(for: now), to: calendar.startOfDay(for: entry.date)).day ?? 0
         let title = entry.title.count > 14 ? String(entry.title.prefix(13)) + "…" : entry.title
-        let when = days <= 0 ? (entry.hasTime ? entry.date.formatted(date: .omitted, time: .shortened) : "сегодня")
-            : days == 1 ? "завтра" : "\(days) дн"
+        let when = days <= 0 ? (entry.hasTime ? entry.date.formatted(date: .omitted, time: .shortened) : String(localized: "сегодня"))
+            : days == 1 ? String(localized: "завтра") : String(localized: "\(days) дн")
         return "\(title) · \(when)"
     }
 }

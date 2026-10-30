@@ -2,6 +2,16 @@
 
 Decisions made where the spec is silent or does not match reality. Newest at the top.
 
+## 2026-10-30 — Languages: English interface (SPEC-modes §9.9)
+
+**Russian stays the source language** (`developmentLanguage: ru`, String Catalog with `sourceLanguage: ru`): the code keeps its Russian strings, translations live in `Localizable.xcstrings`. SwiftUI localizes literals in `Text`, `Button`, `Label`, `Toggle`, `Picker`, `Section`, `.help` … by itself; every other user-visible string (model titles, errors, notifications, Telegram texts, help items) is wrapped in `String(localized:)` — 539 places, done by a script with exclusions and then checked by building.
+
+**Not translated, on purpose:** file formats (`проект.md` and `контент-план.md` field names and templates — English synonyms are already read), the prompts sent to AI services and their wrappers, the hook script, log lines and command-line output. Template JSON (mode names, stages, command texts) and these prompts get English versions in the next step; until then an English interface shows Russian template content.
+
+**Catalog upkeep:** keys come from the compiler's `.stringsdata` (`SWIFT_EMIT_LOC_STRINGS`) via `xcrun xcstringstool sync`; translations were checked by a script for missing keys and matching format specifiers. Localized interpolation formats numbers by the system region («1 500 сл.»).
+
+**Language choice:** Settings → Основные → «Язык интерфейса» writes the app's own `AppleLanguages` and relaunches; «Как в системе» removes it.
+
 ## 2026-10-30 — Setup assistant (SPEC-modes §9.7)
 
 **A draft, saved only at «Готово».** `AssistantDraft` holds the mode plus the global choices the assistant asks about (menu bar preset, hidden panel blocks, reminder offsets); «Готово» writes them, creates the folder if it does not exist yet and adds the mode as current. Steps that only make sense for folder projects (stages, metrics, calendar, commands) are skipped for git sources. «Пропустить» keeps the template's value.

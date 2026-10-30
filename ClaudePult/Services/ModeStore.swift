@@ -122,7 +122,7 @@ final class ModeStore {
     func addFromAssistant(_ draft: Mode) -> Mode {
         var mode = draft
         mode.id = UUID().uuidString.lowercased()
-        mode.name = uniqueName(mode.name.trimmingCharacters(in: .whitespaces).isEmpty ? "Новый режим" : mode.name)
+        mode.name = uniqueName(mode.name.trimmingCharacters(in: .whitespaces).isEmpty ? String(localized: "Новый режим") : mode.name)
         modes.append(mode)
         enabledIDs.append(mode.id)
         save(mode)
@@ -211,7 +211,7 @@ final class ModeStore {
         guard let original = modes.first(where: { $0.id == id }) else { return nil }
         var copy = original
         copy.id = UUID().uuidString.lowercased()
-        copy.name = uniqueName(original.name + " (копия)")
+        copy.name = uniqueName(original.name + String(localized: " (копия)"))
         modes.insert(copy, at: (modes.firstIndex { $0.id == id } ?? modes.count - 1) + 1)
         save(copy)
         saveState()
@@ -331,7 +331,7 @@ final class ModeStore {
             currentID = bundle.current.flatMap { enabledIDs.contains($0) ? $0 : nil } ?? enabledIDs[0]
             saveAll()
             if let current { apply(current) }
-            lastMessage = "Настройки импортированы: \(modes.count) режим(ов)."
+            lastMessage = String(localized: "Настройки импортированы: \(modes.count) режим(ов).")
         case .replace, .add:
             for var mode in bundle.modes {
                 mode.id = UUID().uuidString.lowercased()
@@ -341,7 +341,7 @@ final class ModeStore {
                 save(mode)
             }
             saveState()
-            lastMessage = "Добавлено режимов: \(bundle.modes.count)."
+            lastMessage = String(localized: "Добавлено режимов: \(bundle.modes.count).")
         }
         pendingImport = nil
         AppLog.info("Settings import (\(style == .replace ? "replace" : "add")): \(bundle.modes.count) mode(s)")
@@ -350,7 +350,7 @@ final class ModeStore {
     /// A `*.claudepult` file opened from Finder or the command line.
     func prepareImport(from url: URL) {
         guard let data = try? Data(contentsOf: url), let bundle = Self.decodeBundle(data) else {
-            lastMessage = "Не удалось прочитать «\(url.lastPathComponent)»: это не файл настроек ClaudePult."
+            lastMessage = String(localized: "Не удалось прочитать «\(url.lastPathComponent)»: это не файл настроек ClaudePult.")
             return
         }
         pendingImport = (url, bundle)

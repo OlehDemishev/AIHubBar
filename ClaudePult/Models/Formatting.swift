@@ -5,10 +5,10 @@ enum RelativeTime {
     static func ago(_ date: Date, now: Date = .now) -> String {
         let seconds = max(0, now.timeIntervalSince(date))
         switch seconds {
-        case ..<60: return "только что"
-        case ..<3600: return "\(Int(seconds / 60)) мин назад"
-        case ..<86_400: return "\(Int(seconds / 3600)) ч назад"
-        default: return "\(Int(seconds / 86_400)) дн назад"
+        case ..<60: return String(localized: "только что")
+        case ..<3600: return String(localized: "\(Int(seconds / 60)) мин назад")
+        case ..<86_400: return String(localized: "\(Int(seconds / 3600)) ч назад")
+        default: return String(localized: "\(Int(seconds / 86_400)) дн назад")
         }
     }
 }

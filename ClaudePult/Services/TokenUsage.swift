@@ -61,8 +61,8 @@ enum TokenLog {
     static func project(of cwd: String, projectsDirectory: String) -> String {
         let root = (projectsDirectory as NSString).standardizingPath
         let path = (cwd as NSString).standardizingPath
-        guard path.hasPrefix(root + "/") else { return "Другое" }
-        return String(path.dropFirst(root.count + 1).split(separator: "/").first ?? "Другое")
+        guard path.hasPrefix(root + "/") else { return String(localized: "Другое") }
+        return path.dropFirst(root.count + 1).split(separator: "/").first.map(String.init) ?? String(localized: "Другое")
     }
 }
 
@@ -149,8 +149,8 @@ struct TokenBreakdown: Equatable, Sendable {
     /// «12,3 млн», «850 тыс.».
     static func tokensText(_ tokens: Int) -> String {
         switch tokens {
-        case 1_000_000...: (Double(tokens) / 1_000_000).formatted(.number.precision(.fractionLength(1))) + " млн"
-        case 1_000...: "\(tokens / 1_000) тыс."
+        case 1_000_000...: (Double(tokens) / 1_000_000).formatted(.number.precision(.fractionLength(1))) + String(localized: " млн")
+        case 1_000...: String(localized: "\(tokens / 1_000) тыс.")
         default: "\(tokens)"
         }
     }

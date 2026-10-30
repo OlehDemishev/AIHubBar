@@ -17,13 +17,13 @@ enum APIClient {
 
         var errorDescription: String? {
             switch self {
-            case .noKey: "Нет ключа API — Настройки → «Сервисы AI»"
-            case .noModel: "Не выбрана модель — Настройки → «Сервисы AI» → «Проверить»"
-            case .badKey: "Ключ не подошёл"
-            case .badURL: "Неверный адрес сервера"
-            case let .http(code, message): "Ошибка HTTP \(code)" + (message.isEmpty ? "" : ": \(message)")
-            case .emptyReply: "Модель вернула пустой ответ"
-            case let .network(message): "Нет связи: \(message)"
+            case .noKey: String(localized: "Нет ключа API — Настройки → «Сервисы AI»")
+            case .noModel: String(localized: "Не выбрана модель — Настройки → «Сервисы AI» → «Проверить»")
+            case .badKey: String(localized: "Ключ не подошёл")
+            case .badURL: String(localized: "Неверный адрес сервера")
+            case let .http(code, message): String(localized: "Ошибка HTTP \(code)") + (message.isEmpty ? "" : ": \(message)")
+            case .emptyReply: String(localized: "Модель вернула пустой ответ")
+            case let .network(message): String(localized: "Нет связи: \(message)")
             }
         }
     }
