@@ -73,6 +73,8 @@ final class AIServiceStore {
     private(set) var checks: [APIProvider: APICheck] = [:]
     private(set) var checking: Set<APIProvider> = []
     private(set) var isScanning = false
+    /// At least one scan finished — until then «nothing found» would be premature.
+    private(set) var hasScanned = false
 
     private let settings: AppSettings
 
@@ -94,6 +96,7 @@ final class AIServiceStore {
         defer { isScanning = false }
         agents = await Self.findAgents()
         hasKey = await Self.storedKeys()
+        hasScanned = true
     }
 
     nonisolated static func findAgents() async -> [AgentKind: AgentInfo] {

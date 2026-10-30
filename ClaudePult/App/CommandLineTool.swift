@@ -20,6 +20,7 @@ import UserNotifications
 /// - `ClaudePult --api-complete <provider> <prompt> [base-url]` (one request to a model by API, prints reply and tokens)
 /// - `ClaudePult --services [check]` (installed agents, stored API keys; `check` lists each provider's models)
 /// - `ClaudePult --menubar-preview <file.png> [minimum|limits|everything]` (the menu bar item with sample data)
+/// - `ClaudePult --readiness [file.png]` (what this Mac still needs, as on the assistant's first screen; exit 1 if something is left)
 @MainActor
 enum CommandLineTool {
     /// Returns an exit code if the arguments contain a command, `nil` to start the app normally.
@@ -117,11 +118,8 @@ enum CommandLineTool {
             var draft = AssistantDraft(firstLaunch: false, menuBar: .make(.limits), hiddenBlocks: [], reminderHours: [24])
             let id = arguments.dropFirst(index + 2).first
             draft.choose(ModeTemplate.loadAll().first { $0.id == id })
-            // Windows take the direction from NSApp; the offscreen renderer has to be told (Arabic is right-to-left).
-            let direction: LayoutDirection = Locale.Language(identifier: ContentLanguage.current.rawValue).characterDirection == .rightToLeft
-                ? .rightToLeft : .leftToRight
             let renderer = ImageRenderer(content: AssistantPreview(draft: draft).frame(width: 430, height: 560).background(Color(white: 0.95))
-                .environment(\.layoutDirection, direction))
+                .environment(\.layoutDirection, layoutDirection))
             renderer.scale = 2
             guard let image = renderer.nsImage, let tiff = image.tiffRepresentation,
                   let png = NSBitmapImageRep(data: tiff)?.representation(using: .png, properties: [:]) else { return 1 }
@@ -194,6 +192,9 @@ enum CommandLineTool {
         }
         if let index = arguments.firstIndex(of: "--menubar-preview"), index + 1 < arguments.count {
             return menuBarPreview(path: arguments[index + 1], preset: arguments.dropFirst(index + 2).first)
+        }
+        if let index = arguments.firstIndex(of: "--readiness") {
+            return readiness(png: arguments.dropFirst(index + 1).first { $0.hasSuffix(".png") })
         }
         if arguments.contains("--notifications-status") {
             return waitFor {
@@ -393,6 +394,46 @@ enum CommandLineTool {
         }
     }
 
+    /// Windows take the direction from NSApp; the offscreen renderer has to be told (Arabic is right-to-left).
+    private static var layoutDirection: LayoutDirection {
+        Locale.Language(identifier: ContentLanguage.current.rawValue).characterDirection == .rightToLeft ? .rightToLeft : .leftToRight
+    }
+
+    /// The readiness rows for this Mac; with a path, also drawn as the assistant's first screen shows them.
+    private static func readiness(png path: String?) -> Int32 {
+        let hooks = HookInstaller.live(projectsDirectory: AppSettings().projectsDirectory).status()
+        let loginItem = LoginItemController().state
+        let box = ReadinessBox()
+        _ = waitFor {
+            let agents = await AIServiceStore.findAgents()
+            let keys = await AIServiceStore.storedKeys()
+            let status = await UNUserNotificationCenter.current().notificationSettings().authorizationStatus
+            box.input = Readiness.Input(
+                claudeVersion: agents[.claudeCode].map { $0.version ?? "" },
+                otherServices: AgentKind.allCases.filter { $0 != .claudeCode && agents[$0] != nil }.map(\.title)
+                    + APIProvider.allCases.filter { keys.contains($0) }.map(\.title),
+                hooks: hooks,
+                notifications: status == .authorized || status == .provisional ? .allowed : status == .denied ? .denied : .notAsked,
+                loginItem: loginItem
+            )
+            return 0
+        }
+        guard let input = box.input else { return 1 }
+        let items = Readiness.items(input)
+        for item in items {
+            print("\(item.state)\t\(item.title): \(item.detail)" + (item.action.map { " [\($0.title)]" } ?? ""))
+        }
+        if let path {
+            let renderer = ImageRenderer(content: ReadinessList(items: items) { _ in }.padding(20).frame(width: 470).background(Color(white: 0.95))
+                .environment(\.layoutDirection, layoutDirection))
+            renderer.scale = 2
+            guard let image = renderer.nsImage, let tiff = image.tiffRepresentation,
+                  let png = NSBitmapImageRep(data: tiff)?.representation(using: .png, properties: [:]),
+                  (try? png.write(to: URL(fileURLWithPath: path))) != nil else { return 1 }
+        }
+        return Readiness.isReady(items) ? 0 : 1
+    }
+
     /// Draws the item as the menu bar would (dark and light) from the saved config, or from a preset.
     private static func menuBarPreview(path: String, preset: String?) -> Int32 {
         let config = preset.flatMap(MenuBarConfig.Preset.init(rawValue:)).map(MenuBarConfig.make) ?? AppSettings().menuBarConfig
@@ -429,6 +470,10 @@ enum CommandLineTool {
 }
 
 /// Written by the detached task before `signal()`, read after `wait()`.
+private final class ReadinessBox: @unchecked Sendable {
+    var input: Readiness.Input?
+}
+
 private final class ExitCode: @unchecked Sendable {
     var value: Int32 = 0
 }

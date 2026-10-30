@@ -161,6 +161,9 @@ struct ClaudePultApp: App {
                 .environment(modes)
                 .environment(settings)
                 .environment(services)
+                .environment(hooks)
+                .environment(notifications)
+                .environment(loginItem)
                 .preferredColorScheme(settings.panelTheme.colorScheme)
         }
         .windowResizability(.contentSize)
@@ -191,6 +194,10 @@ struct ClaudePultApp: App {
 
         Window("Помощь — ClaudePult", id: "help") {
             HelpView()
+                .environment(services)
+                .environment(hooks)
+                .environment(notifications)
+                .environment(loginItem)
                 .preferredColorScheme(settings.panelTheme.colorScheme)
                 .debugSnapshot("help")
         }
