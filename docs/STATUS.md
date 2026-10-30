@@ -1,11 +1,11 @@
 # Status
 
 <!-- summary:start -->
-**Stage:** SPEC-modes done except signing/updates; SPEC-profiles stages 1–4 done, stage 5 in PR
+**Stage:** SPEC-modes done except signing/updates; SPEC-profiles stages 1–5 done, stage 6 next
 **Updated:** 2026-10-30
 
 **Now:**
-- SPEC-profiles stage 5: «Не спать» — branch `feat/keep-awake` (worktree `.claude/worktrees/profiles-stage5`), PR open
+- SPEC-profiles stage 5 merged (PR #81): «Не спать»
 - Windows and Linux specs merged (PR #73); implementation waits for Oleh
 
 **Next:**
