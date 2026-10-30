@@ -5,7 +5,7 @@
 **Updated:** 2026-10-30
 
 **Now:**
-- PR `docs/spec-providers` — spec additions (AI services besides Claude, ClaudePult for everyone, settings export/import) and template texts for review — waiting for Oleh
+- docs/SPEC-modes.md §9 stage 1 (mode model + settings export/import) — starting
 
 **Next:**
 - docs/SPEC-modes.md §9 stage 1: mode model (JSON) + settings export/import; Oleh's setup becomes his mode «Разработчик — Олег»; switcher in the panel; «Режимы» tab — no behaviour change for Oleh
