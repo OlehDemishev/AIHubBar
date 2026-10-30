@@ -37,6 +37,11 @@ struct SettingsBundle: Codable, Equatable, Sendable {
     var modes: [Mode]
     var enabled: [String]?
     var current: String?
+    /// Installed modules (version 2, SPEC-profiles §1); a version 1 file installs what its modes use.
+    var installed: [String]?
+
+    /// Version 2: modes are profiles with modules, plus the installed modules.
+    static let currentVersion = 2
 }
 
 /// Modes: storage, the active one, enabling and ordering, export and import.
@@ -48,6 +53,9 @@ final class ModeStore {
     private(set) var modes: [Mode] = []
     private(set) var enabledIDs: [String] = []
     private(set) var currentID: String = ""
+    /// Modules installed from the catalog (SPEC-profiles §1). Until the catalog has its own screen (stage 2) it is
+    /// what the profiles use.
+    private(set) var installedModules: [ModuleKind] = []
     /// A file opened from Finder, waiting for «Заменить» / «Добавить» in Settings → Режимы.
     private(set) var pendingImport: (url: URL, bundle: SettingsBundle)?
     private(set) var lastMessage: String?
@@ -62,6 +70,7 @@ final class ModeStore {
         var order: [String]
         var enabled: [String]
         var current: String
+        var installed: [String]?
     }
 
     static var defaultDirectory: URL { SessionFiles.supportDirectory.appending(path: "modes", directoryHint: .isDirectory) }
@@ -87,6 +96,7 @@ final class ModeStore {
             }
         }
         let state = (try? Data(contentsOf: directory.appending(path: "state.json"))).flatMap { try? decoder.decode(State.self, from: $0) }
+        installedModules = (state?.installed ?? []).compactMap(ModuleKind.init(rawValue:))
 
         if loaded.isEmpty {
             // First start with modes: the settings ClaudePult had so far become the first mode, unchanged — when
@@ -107,6 +117,12 @@ final class ModeStore {
             let saved = state.map(\.current).flatMap { enabledIDs.contains($0) ? $0 : nil }
             currentID = saved ?? enabledIDs.first ?? ""
         }
+        // Modes become profiles (SPEC-profiles §7): files without modules, or with stale ones, are rewritten.
+        for mode in modes where mode.modules != mode.syncedModules(hiddenBlocks: settings.hiddenBlocks) {
+            save(mode)
+            AppLog.info("Profiles: modules of «\(mode.name)» updated")
+        }
+        installModules(of: modes)
         if let current { apply(current) }
     }
 
@@ -258,7 +274,7 @@ final class ModeStore {
 
     func exportBundle() -> SettingsBundle {
         SettingsBundle(
-            format: SettingsBundle.settingsFormat, version: 1, exportedAt: .now,
+            format: SettingsBundle.settingsFormat, version: SettingsBundle.currentVersion, exportedAt: .now,
             general: .init(
                 claudePath: settings.claudePath.isEmpty ? nil : PathText.tilde(settings.claudePath),
                 backgroundTimeLimitMinutes: settings.backgroundTimeLimitMinutes,
@@ -274,13 +290,14 @@ final class ModeStore {
                 menuBarConfig: settings.menuBarConfig
             ),
             services: settings.aiServices,
-            modes: modes, enabled: enabledIDs, current: currentID
+            modes: modes.map(synced), enabled: enabledIDs, current: currentID,
+            installed: installedModules.map(\.rawValue)
         )
     }
 
     func exportMode(_ id: String) -> SettingsBundle? {
         guard let mode = modes.first(where: { $0.id == id }) else { return nil }
-        return SettingsBundle(format: SettingsBundle.modeFormat, version: 1, exportedAt: .now, modes: [mode])
+        return SettingsBundle(format: SettingsBundle.modeFormat, version: SettingsBundle.currentVersion, exportedAt: .now, modes: [synced(mode)])
     }
 
     static func encode(_ bundle: SettingsBundle) throws -> Data {
@@ -329,6 +346,7 @@ final class ModeStore {
             enabledIDs = (bundle.enabled ?? ids).filter(ids.contains)
             if enabledIDs.isEmpty { enabledIDs = Array(ids.prefix(1)) }
             currentID = bundle.current.flatMap { enabledIDs.contains($0) ? $0 : nil } ?? enabledIDs[0]
+            installedModules = (bundle.installed ?? []).compactMap(ModuleKind.init(rawValue:))
             saveAll()
             if let current { apply(current) }
             lastMessage = String(localized: "Настройки импортированы: \(modes.count) режим(ов).")
@@ -379,18 +397,38 @@ final class ModeStore {
 
     private func fileURL(_ id: String) -> URL { directory.appending(path: "\(id).json") }
 
+    /// The mode with its modules following its blocks (until stage 2 the blocks decide, SPEC-profiles §9).
+    private func synced(_ mode: Mode) -> Mode {
+        var mode = mode
+        mode.modules = mode.syncedModules(hiddenBlocks: settings.hiddenBlocks)
+        return mode
+    }
+
     private func save(_ mode: Mode) {
+        let mode = synced(mode)
+        if let index = modes.firstIndex(where: { $0.id == mode.id }), modes[index] != mode { modes[index] = mode }
         let encoder = JSONEncoder()
         encoder.outputFormatting = [.prettyPrinted, .sortedKeys, .withoutEscapingSlashes]
         try? FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
         try? encoder.encode(mode).write(to: fileURL(mode.id), options: .atomic)
+        installModules(of: [mode])
+    }
+
+    /// A profile can only show installed modules: whatever the given profiles use gets installed.
+    private func installModules(of modes: [Mode]) {
+        let used = modes.flatMap { $0.modules ?? [] }.map(\.kind)
+        let missing = ModuleKind.allCases.filter { used.contains($0) && !installedModules.contains($0) }
+        guard !missing.isEmpty else { return }
+        installedModules = ModuleKind.allCases.filter { installedModules.contains($0) || missing.contains($0) }
+        saveState()
+        AppLog.info("Modules installed: \(missing.map(\.rawValue).joined(separator: ", "))")
     }
 
     private func saveState() {
         let encoder = JSONEncoder()
         encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
         try? FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
-        let state = State(order: modes.map(\.id), enabled: enabledIDs, current: currentID)
+        let state = State(order: modes.map(\.id), enabled: enabledIDs, current: currentID, installed: installedModules.map(\.rawValue))
         try? encoder.encode(state).write(to: directory.appending(path: "state.json"), options: .atomic)
     }
 

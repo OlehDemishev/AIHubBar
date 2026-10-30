@@ -28,12 +28,15 @@ struct Mode: Codable, Identifiable, Equatable, Sendable {
     var showCommonCommands: Bool
     /// Commands of a folder mode; «Своя задача» is always there besides these.
     var commands: [CommandTemplate]
+    /// The profile's modules in panel order (SPEC-profiles §1); nil in files written before profiles.
+    var modules: [ProfileModule]?
 
     init(
         id: String = UUID().uuidString.lowercased(), name: String, icon: String = "sparkle", template: String = "custom",
         source: ProjectSource = .none, card: ProjectCard = .none, stages: [String] = [], metrics: [String] = [], wordsPerMinute: Int = 150,
         launchMode: LaunchMode? = nil, service: String? = nil, permissions: PermissionProfile = .filesOnly, calendar: CalendarMode = .off,
-        showProjects: Bool = true, commonCommands: CommonCommandsKind = .none, showCommonCommands: Bool = true, commands: [CommandTemplate] = []
+        showProjects: Bool = true, commonCommands: CommonCommandsKind = .none, showCommonCommands: Bool = true, commands: [CommandTemplate] = [],
+        modules: [ProfileModule]? = nil
     ) {
         self.id = id
         self.name = name
@@ -52,11 +55,12 @@ struct Mode: Codable, Identifiable, Equatable, Sendable {
         self.commonCommands = commonCommands
         self.showCommonCommands = showCommonCommands
         self.commands = commands
+        self.modules = modules
     }
 
     enum CodingKeys: String, CodingKey {
         case id, name, icon, template, source, card, stages, metrics, wordsPerMinute, launchMode, service, permissions, calendar
-        case showProjects, commonCommands, showCommonCommands, commands
+        case showProjects, commonCommands, showCommonCommands, commands, modules
     }
 
     init(from decoder: Decoder) throws {
@@ -78,6 +82,7 @@ struct Mode: Codable, Identifiable, Equatable, Sendable {
         commonCommands = (try? c.decodeIfPresent(CommonCommandsKind.self, forKey: .commonCommands)) ?? .none
         showCommonCommands = (try? c.decodeIfPresent(Bool.self, forKey: .showCommonCommands)) ?? true
         commands = (try? c.decodeIfPresent([CommandTemplate].self, forKey: .commands)) ?? []
+        modules = (try? c.decodeIfPresent(ModuleList.self, forKey: .modules))?.modules
     }
 
     /// Stages without the empty items a half-typed list may have.

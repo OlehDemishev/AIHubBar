@@ -100,7 +100,10 @@ enum CommandLineTool {
             for mode in modes.modes {
                 let flags = (mode.id == modes.currentID ? "*" : " ") + (modes.enabledIDs.contains(mode.id) ? "on " : "off")
                 print("\(flags)  \(mode.name)  [\(mode.template)]  \(mode.source.title): \(mode.source.folder ?? "-")")
+                let modules = (mode.modules ?? []).map { $0.kind.rawValue + ($0.shown ? "" : " (hidden)") }
+                print("       modules: \(modules.joined(separator: ", "))")
             }
+            print("installed: \(modes.installedModules.map(\.rawValue).joined(separator: ", "))")
             return 0
         }
         if let index = arguments.firstIndex(of: "--export-settings"), index + 1 < arguments.count {
