@@ -1,11 +1,11 @@
 # Status
 
 <!-- summary:start -->
-**Stage:** SPEC-modes done except signing/updates; SPEC-profiles stages 1–2 done, stage 3 in PR
+**Stage:** SPEC-modes done except signing/updates; SPEC-profiles stages 1–3 done, stage 4 next
 **Updated:** 2026-10-30
 
 **Now:**
-- SPEC-profiles stage 3: empty start and the assistant's «Что будет в панели» step — branch `feat/empty-start` (worktree `.claude/worktrees/profiles-stage3`), PR open
+- SPEC-profiles stage 3 merged (PR #77): empty start, the assistant's «Что будет в панели» step
 - Windows and Linux specs merged (PR #73); implementation waits for Oleh
 
 **Next:**
