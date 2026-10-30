@@ -12,7 +12,9 @@ enum UsageError: LocalizedError, Equatable {
 
     var errorDescription: String? {
         switch self {
-        case .noCredentials, .expired: "Войдите в Claude Code: claude → /login"
+        case .noCredentials: "Войдите в Claude Code: claude → /login"
+        // Claude Code renews the token itself the next time `claude` runs in a terminal; a new login is rarely needed.
+        case .expired: "Вход Claude Code устарел — обновится при следующем запуске claude в Терминале (если нет: claude → /login)"
         case .keychainDenied: "Нет доступа к связке ключей: разрешите ClaudePult читать «Claude Code-credentials»"
         case let .http(code) where code == 401 || code == 403: "Сессия Claude Code истекла (HTTP \(code)): claude → /login"
         case let .http(code): "Лимиты недоступны (HTTP \(code))"
