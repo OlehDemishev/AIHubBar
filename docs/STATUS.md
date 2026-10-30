@@ -15,6 +15,7 @@
 - stage 8: done without Developer ID (self-signed + Sparkle, PR #85; re-checked on main); notarization only if Oleh buys Developer ID; publishing is Oleh's step (Needs Oleh)
 - Fix whatever Oleh finds in docs/CHECKLIST.md
 - Windows and Linux versions (docs/SPEC-windows.md, docs/SPEC-linux.md) — only when Oleh says; stage 0 (fact checks in VMs) first
+- limits of other AI services (docs/SPEC-hub.md) — postponed: Oleh uses only Claude; for when AI Hub Bar is shared
 
 **Needs Oleh:**
 - optionally rename the GitHub repository to match AI Hub Bar (then SUFeedURL in project.yml and REPO in release.sh follow)
@@ -49,6 +50,12 @@
 - hooks are installed in ~/.claude/settings.json; backup of the original: ~/.claude/settings.json.claudepult-backup-20261029T192827
 - delete or archive the old repo `OlehDemishev/ClaudeBar`; turn on start at login if wanted
 <!-- summary:end -->
+
+## 2026-10-30 — Spec for other AI services' limits, postponed (branch `docs/spec-hub`)
+
+Done: researched what Codex, OpenRouter, Copilot, Gemini CLI, the OpenAI / Anthropic admin APIs and Cursor expose about limits and spend (local files, the tools themselves, endpoints, reliability) and wrote `docs/SPEC-hub.md`: one shared «Лимиты AI» module, two waves. Oleh uses only Claude, so nothing is built now.
+Checked: none of those tools or API keys are on this Mac, so formats are from third-party docs (listed in the spec) and must be rechecked before building.
+Left: building it, when the app is shared.
 
 ## 2026-10-30 — Module options per profile (branch `feat/profile-module-options`)
 
