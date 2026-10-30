@@ -321,3 +321,14 @@ Panel snapshots: `defaults write com.demishev.claudepult DebugPanelSnapshot -boo
 | Assistant «Что будет в панели»: without «Проекты» the project steps are skipped; switching projects back on restores source and calendar; «Ближайшее» only with folder projects | Auto (`modulesDecideTheSteps`) |
 | Limits are not fetched or scanned while no profile uses «Лимиты AI» | Code (`UsageStore.isActive`) |
 | The empty panel («Создайте первый профиль», «Помощник…», «Импортировать файл…») and the new assistant step on screen | Oleh — can't be shown here without removing Oleh's profiles |
+
+## Profiles stage 4: «Ресурсы Mac» and optional modules (SPEC-profiles §9.4, 2026-10-30)
+
+| Scenario | Checked |
+|---|---|
+| A real reading: processor, memory 16 ГБ, disk, network, graphics, no battery on this Mac, top processes | Live (`--resources`, compared with `sysctl`, `df`, `pmset`) + auto (`aRealReadingIsSane`) |
+| Alerts once per event: processor only after 5 minutes above 90 %, again only after it cleared; memory critical; disk below the limit with a margin to clear; battery below 15 % only on battery | Auto (`alertsOncePerEvent`) |
+| «Процессор» and «Память» in the menu bar: number with a chip symbol, ring or bar, «от N %»; nothing without the module | Auto (`menuBarShowsProcessorAndMemory`) |
+| Install adds to the current profile; a profile can add, move and drop it; «Снять» removes it everywhere; built-in modules are not installed by hand | Auto (`OptionalModuleTests`) |
+| The block in the panel with real figures | Live (panel snapshot; the module was added to Oleh's profile for the check and the profile restored) |
+| Installing from Settings → «Модули», «Добавить модуль» in a profile, the menu bar elements, a real notification | Oleh |
