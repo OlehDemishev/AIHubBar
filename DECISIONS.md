@@ -2,6 +2,18 @@
 
 Decisions made where the spec is silent or does not match reality. Newest at the top.
 
+## 2026-10-30 — Setup assistant (SPEC-modes §9.7)
+
+**A draft, saved only at «Готово».** `AssistantDraft` holds the mode plus the global choices the assistant asks about (menu bar preset, hidden panel blocks, reminder offsets); «Готово» writes them, creates the folder if it does not exist yet and adds the mode as current. Steps that only make sense for folder projects (stages, metrics, calendar, commands) are skipped for git sources. «Пропустить» keeps the template's value.
+
+**Folder analysis.** The chosen folder's subfolders are counted; if git repositories are at least half of them the source becomes the built-in git scanner (card STATUS.md, permissions «код»), otherwise folder projects (card проект.md, «только файлы»). The person can switch it on the same screen.
+
+**First start.** With `_daily-report/report.py` present (Oleh) the old settings still become his mode. Without it ClaudePult creates a starter placeholder (no projects) and opens the assistant, starting with «Перенести настройки?» (import of a `.claudepult` file); the assistant's mode replaces the placeholder.
+
+**Panel block order** stays fixed (limits, sessions, «Ближайшее», projects, commands) — the assistant only switches blocks on and off; SPEC §5 «и их порядок» is left for later.
+
+**Preview** draws the panel from the draft on sample data (names by template, stage chips, metrics as the real rows compute them, command chips) and the real menu bar renderer; `--assistant-preview` renders it to PNG for checks.
+
 ## 2026-10-30 — Templates and the built-in git scanner (SPEC-modes §9.6)
 
 **Templates are JSON in the app** (`Resources/Templates/template-*.json`: id, title, description, folder hint, order, and a whole `Mode`). Adding a mode copies the template's mode with a fresh id, a unique name and the folder the person picks; from then on it is their mode. Texts are those of docs/TEMPLATES.md as written (Oleh chose «как есть»); two «Соцсети» commands were adapted so that commands never change existing files (see the note in TEMPLATES.md), and commands that read the whole project default to Claude.

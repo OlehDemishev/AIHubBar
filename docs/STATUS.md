@@ -1,17 +1,18 @@
 # Status
 
 <!-- summary:start -->
-**Stage:** SPEC.md done; SPEC-modes stages 1–6 done (modes, menu bar, AI services, folder projects + commands, calendar, templates)
+**Stage:** SPEC.md done; SPEC-modes stages 1–7 done (modes, menu bar, AI services, folder projects + commands, calendar, templates, assistant)
 **Updated:** 2026-10-30
 
 **Now:**
-- SPEC-modes §9 stage 6 (templates + built-in git scanner) merged (PR #41); next: stage 7 (setup assistant)
+- SPEC-modes §9 stage 7 (setup assistant) in PR (branch `feat/assistant`); next: stage 8 (for everyone) — needs the Apple Developer account and the name decision
 
 **Next:**
 - SPEC-modes §9: 5 calendar, 6 templates, 7 setup assistant, 8 for everyone, 9 languages (§13: en, es, pt-BR, fr, de, ja, id, ko, it, ar with RTL, pl, uk)
 - Fix whatever Oleh finds in docs/CHECKLIST.md
 
 **Needs Oleh:**
+- merge the assistant PR; try Settings → Режимы → «+» → «Помощник…»
 - try the calendar in a folder mode: «Календарь» → «+ контент-план», a `Дедлайн:` in a `проект.md`, then the panel «Ближайшее» and the «Календарь» window
 - try folder projects: duplicate a mode, set «Источник» → «папки» on a folder with a few subfolders, add stages (e.g. «идея, сценарий, монтаж, готово») and metrics
 - try Settings → «Строка меню» (presets, order, options, preview) and the ticking reset countdown
@@ -25,6 +26,12 @@
 - hooks are installed in ~/.claude/settings.json; backup of the original: ~/.claude/settings.json.claudepult-backup-20261029T192827
 - delete or archive the old repo `OlehDemishev/ClaudeBar`; turn on start at login if wanted
 <!-- summary:end -->
+
+## 2026-10-30 — Setup assistant (branch `feat/assistant`)
+
+Done: SPEC-modes §5 / stage 7. Window «Помощник»: template or «С нуля», folder with analysis and suggested source, stages, metrics, calendar + reminders, AI service («Подключить…» opens the services tab), commands, launch place and background permissions, panel blocks, menu bar preset, name and icon; live preview of the panel and the menu bar on sample data. Opens from Settings → Режимы → «+» → «Помощник…», and by itself on a first start without `_daily-report` (step 0: import a `.claudepult` file); the finished mode replaces the starter placeholder. CLI `--assistant-preview`.
+Checked: `scripts/build-and-install.sh --test` — 146 tests green (steps, template/folder logic, folder analysis, starter → assistant mode); no compiler warnings. Live: previews for video, developer and social rendered and looked through (system progress bars do not render off-screen → drawn bars instead); Oleh's mode unchanged. CI not set up; checks run locally.
+Left: the assistant window's controls were not clicked through (automation cannot click in ClaudePult windows); panel block order is fixed.
 
 ## 2026-10-30 — Templates and the built-in git scanner (branch `feat/templates`)
 

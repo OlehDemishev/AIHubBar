@@ -74,6 +74,14 @@ struct ClaudePultApp: App {
             usage.start()
             Task { await services.scan() }
             folders.start()
+            // A first start without `_daily-report`: the assistant sets up the first mode (SPEC-modes §5).
+            // The menu bar label, which opens windows, has to be on screen first.
+            if modes.needsAssistant {
+                Task {
+                    try? await Task.sleep(for: .seconds(1.5))
+                    requests.openWindow("assistant")
+                }
+            }
             calendar.start()
             launcher.start()
             NotificationRouter.shared.install { resolution in
@@ -147,6 +155,15 @@ struct ClaudePultApp: App {
                 .preferredColorScheme(settings.panelTheme.colorScheme)
         }
         .defaultSize(width: 640, height: 520)
+
+        Window("Помощник — ClaudePult", id: "assistant") {
+            AssistantView()
+                .environment(modes)
+                .environment(settings)
+                .environment(services)
+                .preferredColorScheme(settings.panelTheme.colorScheme)
+        }
+        .windowResizability(.contentSize)
 
         Window("Календарь", id: "calendar") {
             CalendarWindow()

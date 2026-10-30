@@ -175,3 +175,14 @@ Panel snapshots: `defaults write com.demishev.claudepult DebugPanelSnapshot -boo
 | Generic prompts have no Oleh rules; session titles recognise both styles | Auto |
 | Oleh's mode still runs report.py with his prompts | Live (`--modes`, log) |
 | Settings → Режимы → «+» → template → folder dialog | **Oleh: try one template** |
+
+## Setup assistant (SPEC-modes §9.7)
+
+| Scenario | Checked |
+|---|---|
+| Steps: import only on a first launch; stages, metrics, calendar, commands only for folder projects; back / next / skip | Auto |
+| Template choice keeps a chosen folder; folder analysis suggests «git-репозитории» when repos dominate | Auto |
+| First start without `_daily-report`: starter mode, assistant opens; «Готово» replaces the starter with the new mode | Auto (store) |
+| Oleh's first start logic unchanged (report.py present → his mode) | Auto + Live |
+| Preview pane: menu bar, limits, «Ближайшее», sample projects with stages and metrics, commands | Live (`--assistant-preview` for video, developer, social) |
+| The assistant window itself (pickers, folder dialog, «Готово») | **Oleh: Settings → Режимы → «+» → «Помощник…»** |

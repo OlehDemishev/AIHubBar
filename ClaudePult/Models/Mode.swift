@@ -133,6 +133,11 @@ enum ProjectSource: Codable, Equatable, Sendable {
         }
     }
 
+    var isInbox: Bool {
+        if case .inbox = self { return true }
+        return false
+    }
+
     var isGit: Bool {
         switch self {
         case .gitReport, .gitBuiltin: true

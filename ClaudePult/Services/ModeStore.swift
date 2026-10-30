@@ -89,8 +89,11 @@ final class ModeStore {
         let state = (try? Data(contentsOf: directory.appending(path: "state.json"))).flatMap { try? decoder.decode(State.self, from: $0) }
 
         if loaded.isEmpty {
-            // First start with modes: the settings ClaudePult had so far become the first mode, unchanged.
-            let mode = Self.migrated(from: settings)
+            // First start with modes: the settings ClaudePult had so far become the first mode, unchanged — when
+            // there is a `_daily-report` to read. Otherwise a starter mode, and the assistant opens (SPEC-modes §5).
+            let hasReport = FileManager.default.fileExists(atPath: settings.reportScript)
+            let mode = hasReport ? Self.migrated(from: settings) : Self.starter
+            needsAssistant = !hasReport
             modes = [mode]
             enabledIDs = [mode.id]
             currentID = mode.id
@@ -105,6 +108,30 @@ final class ModeStore {
             currentID = saved ?? enabledIDs.first ?? ""
         }
         if let current { apply(current) }
+    }
+
+    /// Set on a first start without `_daily-report`: the app opens the assistant.
+    private(set) var needsAssistant = false
+
+    /// The placeholder a new person has until the assistant finishes.
+    static let starter = Mode(name: "ClaudePult", icon: "sparkle", template: "starter", source: .none, showProjects: false,
+                              commonCommands: .none, showCommonCommands: false)
+
+    /// The assistant's mode, enabled and made current; it replaces the starter placeholder.
+    @discardableResult
+    func addFromAssistant(_ draft: Mode) -> Mode {
+        var mode = draft
+        mode.id = UUID().uuidString.lowercased()
+        mode.name = uniqueName(mode.name.trimmingCharacters(in: .whitespaces).isEmpty ? "Новый режим" : mode.name)
+        modes.append(mode)
+        enabledIDs.append(mode.id)
+        save(mode)
+        saveState()
+        select(mode.id)
+        for starter in modes where starter.template == "starter" && starter.id != mode.id { delete(starter.id) }
+        needsAssistant = false
+        AppLog.info("Mode «\(mode.name)» added by the assistant")
+        return mode
     }
 
     /// The pre-modes settings as a mode. With `_daily-report` present it is the report.py developer setup.

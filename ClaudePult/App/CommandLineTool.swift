@@ -1,5 +1,6 @@
 import AppKit
 import Foundation
+import SwiftUI
 import UserNotifications
 
 /// Headless commands for scripts and checks, run instead of the UI:
@@ -12,6 +13,7 @@ import UserNotifications
 /// - `ClaudePult --usage`, `ClaudePult --usage-raw` (subscription limits; the token is never printed), `--token-usage`
 /// - `ClaudePult --notifications-status`
 /// - `ClaudePult --modes`, `ClaudePult --export-settings <file.claudepult>` (import: open the file in Finder)
+/// - `ClaudePult --assistant-preview <file.png> [template]` (the assistant's preview pane for a template, sample data)
 /// - `ClaudePult --git-scan <folder>` (the built-in git scanner: health, branch, changes, PRs, attention)
 /// - `ClaudePult --calendar [folder]` (calendar dates of the enabled modes, or of a folder read as «папки» + контент-план)
 /// - `ClaudePult --folder-projects <folder>` (folder projects as the panel would list them)
@@ -108,6 +110,23 @@ enum CommandLineTool {
                 return 0
             } catch {
                 printError("error: \(error.localizedDescription)")
+                return 1
+            }
+        }
+        if let index = arguments.firstIndex(of: "--assistant-preview"), index + 1 < arguments.count {
+            var draft = AssistantDraft(firstLaunch: false, menuBar: .make(.limits), hiddenBlocks: [], reminderHours: [24])
+            let id = arguments.dropFirst(index + 2).first
+            draft.choose(ModeTemplate.loadAll().first { $0.id == id })
+            let renderer = ImageRenderer(content: AssistantPreview(draft: draft).frame(width: 430, height: 560).background(Color(white: 0.95)))
+            renderer.scale = 2
+            guard let image = renderer.nsImage, let tiff = image.tiffRepresentation,
+                  let png = NSBitmapImageRep(data: tiff)?.representation(using: .png, properties: [:]) else { return 1 }
+            do {
+                try png.write(to: URL(fileURLWithPath: arguments[index + 1]))
+                print("\(arguments[index + 1]): \(draft.mode.name), \(draft.steps.count) steps")
+                return 0
+            } catch {
+                printError(error.localizedDescription)
                 return 1
             }
         }
