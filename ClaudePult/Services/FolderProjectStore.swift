@@ -84,7 +84,7 @@ final class FolderProjectStore {
 
         var errorDescription: String? {
             switch self {
-            case .noRoot: String(localized: "У этого режима нет папки проектов")
+            case .noRoot: String(localized: "У этого профиля нет папки проектов")
             case .badName: String(localized: "Название не подходит для папки")
             case .exists: String(localized: "Такая папка уже есть")
             }

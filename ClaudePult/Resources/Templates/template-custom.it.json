@@ -5,10 +5,10 @@
   "language": "it",
   "id": "custom",
   "title": "Personale",
-  "description": "Una selezione vuota: «Attività personale» e le fasi «in corso → fatto». Tutto il resto in Impostazioni → «Modalità».",
+  "description": "Una selezione vuota: «Attività personale» e le fasi «in corso → fatto». Tutto il resto in Impostazioni → «Profili».",
   "folderHint": "Una cartella in cui ogni sottocartella è un progetto",
   "mode": {
-    "name": "La mia modalità",
+    "name": "Il mio profilo",
     "icon": "sparkle",
     "template": "custom",
     "source": {

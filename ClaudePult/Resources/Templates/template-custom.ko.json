@@ -5,10 +5,10 @@
   "language": "ko",
   "id": "custom",
   "title": "사용자 지정",
-  "description": "빈 구성: «내 작업»과 단계 «진행 중 → 완료». 나머지는 설정 → «모드»에서.",
+  "description": "빈 구성: «내 작업»과 단계 «진행 중 → 완료». 나머지는 설정 → «프로필»에서.",
   "folderHint": "하위 폴더마다 프로젝트 하나가 되는 폴더",
   "mode": {
-    "name": "내 모드",
+    "name": "내 프로필",
     "icon": "sparkle",
     "template": "custom",
     "source": {

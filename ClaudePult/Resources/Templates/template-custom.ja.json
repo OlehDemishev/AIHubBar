@@ -5,10 +5,10 @@
   "language": "ja",
   "id": "custom",
   "title": "カスタム",
-  "description": "空の組み合わせ: 「自分のタスク」と段階「進行中 → 完了」。ほかは設定 → 「モード」で。",
+  "description": "空の組み合わせ: 「自分のタスク」と段階「進行中 → 完了」。ほかは設定 → 「プロファイル」で。",
   "folderHint": "各サブフォルダーが 1 つのプロジェクトになるフォルダー",
   "mode": {
-    "name": "マイモード",
+    "name": "マイプロファイル",
     "icon": "sparkle",
     "template": "custom",
     "source": {

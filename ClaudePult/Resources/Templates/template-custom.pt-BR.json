@@ -5,10 +5,10 @@
   "language": "pt-BR",
   "id": "custom",
   "title": "Personalizado",
-  "description": "Um conjunto vazio: «Tarefa própria» e as etapas «em andamento → pronto». O resto, em Ajustes → «Modos».",
+  "description": "Um conjunto vazio: «Tarefa própria» e as etapas «em andamento → pronto». O resto, em Ajustes → «Perfis».",
   "folderHint": "Uma pasta em que cada subpasta é um projeto",
   "mode": {
-    "name": "Meu modo",
+    "name": "Meu perfil",
     "icon": "sparkle",
     "template": "custom",
     "source": {

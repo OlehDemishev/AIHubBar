@@ -5,10 +5,10 @@
   "language": "pl",
   "id": "custom",
   "title": "Własny",
-  "description": "Pusty zestaw: «Własne zadanie» i etapy «w toku → gotowe». Resztę ustawisz w Ustawieniach → «Tryby».",
+  "description": "Pusty zestaw: «Własne zadanie» i etapy «w toku → gotowe». Resztę ustawisz w Ustawieniach → «Profile».",
   "folderHint": "Folder, w którym każdy podfolder to projekt",
   "mode": {
-    "name": "Mój tryb",
+    "name": "Mój profil",
     "icon": "sparkle",
     "template": "custom",
     "source": {

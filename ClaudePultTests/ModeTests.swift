@@ -86,6 +86,7 @@ struct ModeStoreTests {
         settings.claudePath = NSHomeDirectory() + "/bin/claude"
         settings.menuBarConfig = .make(.everything)
         settings.menuBarConfig.set(.session) { $0.style = .bar }
+        store.setMenuBar(settings.menuBarConfig) // as Settings → «Строка меню» does: the bar is the profile's
         settings.aiServices.models["openai"] = "gpt-x"
         settings.aiServices.compatibleName = "Ollama"
         _ = store.duplicate(store.currentID)
@@ -116,6 +117,7 @@ struct ModeStoreTests {
         var bundle = store.exportBundle()
         bundle.appearance?.menuBarConfig = nil
         bundle.appearance?.menuBar = "ring"
+        bundle.modes = bundle.modes.map { var mode = $0; mode.menuBar = nil; mode.modules = nil; return mode } // as before profiles
         store.importBundle(bundle, style: .replace)
         #expect(settings.menuBarConfig == .migrated(from: .ring))
         #expect(store.exportBundle().appearance?.menuBar == "ring")

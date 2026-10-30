@@ -2,9 +2,9 @@
 
 ClaudePult is a small Mac app that lives in the menu bar (✦). One click opens a panel with your projects, your Claude subscription limits, the Claude Code sessions running on this Mac and ready-made AI commands for each project. It does not replace Claude, Codex or any other AI tool. It keeps an eye on them and starts them for you.
 
-It works in **modes**. Each mode is a set of projects with its own commands, so ClaudePult fits different kinds of work:
+It works in **profiles**. Each profile is a set of modules — limits, sessions, projects with their commands, the calendar — in the order you choose, so ClaudePult fits different kinds of work:
 
-| Mode template | Projects are | Commands, for example |
+| Profile template | Projects are | Commands, for example |
 |---|---|---|
 | Developer (GitHub) | git repositories | Next step, Custom task, Finish — following each project's own CLAUDE.md / AGENTS.md |
 | Video (YouTube, Shorts, Reels) | one folder per video | hooks, a Shorts version, description with timestamps, titles, fact check, translation |
@@ -13,7 +13,7 @@ It works in **modes**. Each mode is a set of projects with its own commands, so 
 | Social media and marketing | a campaign or a platform | posts per platform, ad variants, A/B titles, replies, a week's content plan |
 | Custom | any folder | your own |
 
-You can enable several modes and switch between them at the top of the panel.
+You can enable several profiles and switch between them at the top of the panel. Each profile has its own panel (which blocks, in what order: **Settings… → Profiles → Panel**) and its own menu bar.
 
 ## What you need
 
@@ -50,7 +50,7 @@ Next, the assistant asks a few more things:
 2. Pick a template or **From scratch**, then the folder where your projects live. ClaudePult looks inside and suggests a source: git repositories, or one folder per project.
 3. Set the stages, what each project row shows, the calendar, the AI service, the commands, where Claude runs and what it may do, the panel blocks, the menu bar, and the mode's name and icon. The right side shows a live preview.
 
-You can skip any step: **Skip** keeps the template's choice. Everything can be changed later in **Settings… → Modes**. To run the assistant again, go to **Settings… → Modes → + → Assistant…**. The same readiness checks are at the top of the **Help** window.
+You can skip any step: **Skip** keeps the template's choice. Everything can be changed later in **Settings… → Profiles**. To run the assistant again, go to **Settings… → Profiles → + → Assistant…**. The same readiness checks are at the top of the **Help** window.
 
 ## Everyday use
 
@@ -62,7 +62,7 @@ You can skip any step: **Skip** keeps the template's choice. Everything can be c
 - **Commands:**
   - A command's result is always a **new file** in the project folder. Nothing is overwritten.
   - Models by API get the text of the project's main file.
-  - Claude Code works in the background with the mode's permissions: **Project files only**, **Files + web search**, or full code access for developer projects.
+  - Claude Code works in the background with the profile's permissions: **Project files only**, **Files + web search**, or full code access for developer projects.
   - Other agents open in Terminal with the task on the clipboard.
 - **Compare:** runs one command with two or three services. The answers open side by side.
 - **Project cards:** a project folder can hold a small text card, `project.md` (named in your language), with lines like `Stage:`, `Deadline:` and `Main file:`. ClaudePult reads it and updates it when you change the stage. You can edit it by hand.

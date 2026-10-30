@@ -24,7 +24,7 @@ struct CalendarWindow: View {
             toolbar
             Divider()
             if !store.isActive {
-                Text("Календарь включается у режима с проектами-папками: Настройки → «Режимы» → «Календарь».")
+                Text("Календарь включается у профиля с проектами-папками: Настройки → «Профили» → «Календарь».")
                     .foregroundStyle(.secondary)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
             } else {
@@ -49,7 +49,7 @@ struct CalendarWindow: View {
             Button { shift(1) } label: { Image(systemName: "chevron.right") }
             Text(title).font(.title3.weight(.semibold))
             Spacer()
-            Toggle("Только текущий режим", isOn: $currentOnly)
+            Toggle("Только текущий профиль", isOn: $currentOnly)
                 .toggleStyle(.checkbox)
             Picker("", selection: $scope) {
                 Text("Месяц").tag(Scope.month)
@@ -228,7 +228,7 @@ private struct NewEntrySheet: View {
     var body: some View {
         Form {
             Text(day.formatted(date: .complete, time: .omitted)).font(.headline)
-            Picker("Режим", selection: $modeID) {
+            Picker("Профиль", selection: $modeID) {
                 ForEach(calendarModes) { Text($0.name).tag($0.id) }
             }
             Picker("Что", selection: $kind) {

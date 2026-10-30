@@ -5,10 +5,10 @@
   "language": "de",
   "id": "custom",
   "title": "Eigener",
-  "description": "Eine leere Auswahl: «Eigene Aufgabe» und die Phasen «in Arbeit → fertig». Alles andere in Einstellungen → «Modi».",
+  "description": "Eine leere Auswahl: «Eigene Aufgabe» und die Phasen «in Arbeit → fertig». Alles andere in Einstellungen → «Profile».",
   "folderHint": "Ein Ordner, in dem jeder Unterordner ein Projekt ist",
   "mode": {
-    "name": "Mein Modus",
+    "name": "Mein Profil",
     "icon": "sparkle",
     "template": "custom",
     "source": {

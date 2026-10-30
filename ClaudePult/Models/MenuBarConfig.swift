@@ -137,7 +137,7 @@ struct MenuBarElement: Codable, Equatable, Hashable, Identifiable, Sendable {
             case .queued: String(localized: "Отложенные запуски")
             case .deadline: String(localized: "Ближайшая дата календаря")
             case .disk: String(localized: "Свободное место (если мало)")
-            case .mode: String(localized: "Текущий режим")
+            case .mode: String(localized: "Текущий профиль")
             }
         }
 

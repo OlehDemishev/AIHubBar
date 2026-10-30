@@ -5,10 +5,10 @@
   "language": "es",
   "id": "custom",
   "title": "Propio",
-  "description": "Un conjunto vacío: «Tarea propia» y las etapas «en curso → hecho». Todo lo demás, en Ajustes → «Modos».",
+  "description": "Un conjunto vacío: «Tarea propia» y las etapas «en curso → hecho». Todo lo demás, en Ajustes → «Perfiles».",
   "folderHint": "Una carpeta donde cada subcarpeta es un proyecto",
   "mode": {
-    "name": "Mi modo",
+    "name": "Mi perfil",
     "icon": "sparkle",
     "template": "custom",
     "source": {

@@ -299,3 +299,14 @@ Panel snapshots: `defaults write com.demishev.claudepult DebugPanelSnapshot -boo
 | Modules a newer version knows are skipped, not an error | Auto |
 | `.claudepult` export is version 2 with modules and installed; version 1 files still import and get modules | Auto |
 | The panel looks the same | Live (installed, nothing reads modules yet) |
+
+## Profiles stage 2: panel from modules, Profiles and Modules tabs (SPEC-profiles §9.2, 2026-10-30)
+
+| Scenario | Checked |
+|---|---|
+| The profile's modules decide the panel: order and visibility are the profile's own; a module that becomes possible (calendar on) is added shown; old global blocks no longer matter | Auto (`ProfileModuleTests`) |
+| Selecting a profile applies its panel and its menu bar; «Строка меню» changes only the current profile's | Auto |
+| Oleh's profile after the update: modules limits, sessions, projects, reports; panel in that order | Live (`--modes`, panel snapshot) |
+| Settings → «Профили» → «Панель» (toggles, ↑↓) and «Модули» (catalog, in which profiles, limits and reminder settings) | Live (window captures) |
+| «режим» → «профиль» everywhere in the interface, 13 languages (gender fixed in de, it; particles in ko; Arabic «ملف التعريف»), custom template names | Script check (no mode word left except «background mode») |
+| Reordering and hiding blocks by hand in «Профили» → «Панель», switching between two profiles with different menu bars | Oleh |

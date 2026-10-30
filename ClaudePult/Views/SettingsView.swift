@@ -5,7 +5,7 @@ import SwiftUI
 /// background runs), AI services.
 struct SettingsView: View {
     enum Tab: String, CaseIterable {
-        case general, modes, appearance, menuBar, claude, services
+        case general, modes, modules, appearance, menuBar, claude, services
     }
 
     @Environment(AppSettings.self) private var settings
@@ -17,8 +17,11 @@ struct SettingsView: View {
                 .tabItem { Label("Основные", systemImage: "gearshape") }
                 .tag(Tab.general)
             ModesSettings()
-                .tabItem { Label("Режимы", systemImage: "square.stack.3d.up") }
+                .tabItem { Label("Профили", systemImage: "square.stack.3d.up") }
                 .tag(Tab.modes)
+            ModulesSettings()
+                .tabItem { Label("Модули", systemImage: "puzzlepiece.extension") }
+                .tag(Tab.modules)
             AppearanceSettings()
                 .tabItem { Label("Внешний вид", systemImage: "paintbrush") }
                 .tag(Tab.appearance)
@@ -117,25 +120,7 @@ private struct GeneralSettings: View {
             } header: {
                 Text("Перенос и обмен")
             } footer: {
-                Footnote(text: String(localized: "Один файл .claudepult: все режимы, внешний вид, строка меню, пороги. Без ключей, токенов и журналов. Двойной клик по такому файлу открывает импорт. Папки проектов — на вкладке «Режимы»."))
-            }
-
-            Section {
-                Picker("Напоминать", selection: Binding(
-                    get: { settings.calendarReminderHours },
-                    set: { settings.calendarReminderHours = $0 }
-                )) {
-                    Text("не напоминать").tag([Int]())
-                    Text("за 2 часа").tag([2])
-                    Text("за сутки").tag([24])
-                    Text("за сутки и за 2 часа").tag([24, 2])
-                    Text("за 3 дня и за сутки").tag([72, 24])
-                }
-                Toggle("Дублировать напоминания в Telegram", isOn: $settings.calendarRemindersToTelegram)
-            } header: {
-                Text("Календарь")
-            } footer: {
-                Footnote(text: String(localized: "Даты — из проект.md (дедлайн, публикация) и контент-план.md у режимов с календарём (вкладка «Режимы»)."))
+                Footnote(text: String(localized: "Один файл .claudepult: все профили, внешний вид, строка меню, пороги. Без ключей, токенов и журналов. Двойной клик по такому файлу открывает импорт. Папки проектов — на вкладке «Профили»."))
             }
 
             Section {
@@ -200,16 +185,8 @@ private struct AppearanceSettings: View {
             }
 
             Section {
-                ForEach([PanelBlock.limits, .sessions, .calendar]) { block in
-                    Toggle(block.title, isOn: Binding(
-                        get: { settings.shows(block) },
-                        set: { settings.setShows(block, $0) }
-                    ))
-                }
-            } header: {
-                Text("Блоки панели")
             } footer: {
-                Footnote(text: String(localized: "Скрытый блок не пропадает из работы: сессии и лимиты отслеживаются, уведомления приходят. Проекты и общие команды включаются у каждого режима на вкладке «Режимы»."))
+                Footnote(text: String(localized: "Какие блоки показывать в панели и в каком порядке — у каждого профиля: вкладка «Профили» → «Панель»."))
             }
 
             Section {
@@ -253,11 +230,10 @@ private struct ClaudeSettings: View {
                         .frame(width: 280)
                 }
             } footer: {
-                Footnote(text: String(localized: "Путь пустой — искать в /opt/homebrew/bin, /usr/local/bin, ~/.local/bin, ~/.claude/local. Где запускать команды (Терминал / Фон / спрашивать) — у каждого режима на вкладке «Режимы»."))
+                Footnote(text: String(localized: "Путь пустой — искать в /opt/homebrew/bin, /usr/local/bin, ~/.local/bin, ~/.claude/local. Где запускать команды (Терминал / Фон / спрашивать) — у каждого профиля на вкладке «Профили»."))
             }
 
             SessionSection()
-            LimitSection()
 
             Section {
                 Stepper(value: $settings.backgroundTimeLimitMinutes, in: 10...600, step: 10) {
@@ -275,6 +251,74 @@ private struct ClaudeSettings: View {
             } footer: {
                 Footnote(text: String(localized: "«Фон» запускает claude -p без окна: разрешены чтение и правка файлов проекта, проверки и сборки, git без push в main и без force, gh pr create/view/list; остальное отклоняется. Итог — уведомлением и в Telegram."))
             }
+        }
+    }
+}
+
+// MARK: - Модули
+
+/// Settings → «Модули» (SPEC-profiles §6): the catalog — what each module does, which profiles show it, and its
+/// settings that don't depend on a profile. The five modules ClaudePult has today are built in; installing and
+/// removing arrive with the first optional module (Ресурсы Mac, SPEC-profiles §9.4).
+private struct ModulesSettings: View {
+    @Environment(ModeStore.self) private var modes
+
+    var body: some View {
+        Form {
+            ForEach(ModuleKind.allCases, id: \.self) { kind in
+                Section {
+                    Text(kind.summary)
+                        .font(.callout)
+                        .foregroundStyle(.secondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                    LabeledContent("В профилях", value: profiles(showing: kind))
+                } header: {
+                    HStack {
+                        Label(kind.title, systemImage: kind.symbol)
+                        Spacer()
+                        Text(modes.installedModules.contains(kind) ? String(localized: "встроенный") : String(localized: "не используется"))
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
+                }
+                switch kind {
+                case .limits: LimitSection()
+                case .upcoming: ReminderSection()
+                default: EmptyView()
+                }
+            }
+        }
+        .formStyle(.grouped)
+        .frame(height: 600)
+    }
+
+    private func profiles(showing kind: ModuleKind) -> String {
+        let names = modes.modes.filter { $0.shows(kind) }.map(\.name)
+        return names.isEmpty ? String(localized: "нет") : names.joined(separator: ", ")
+    }
+}
+
+private struct ReminderSection: View {
+    @Environment(AppSettings.self) private var settings
+
+    var body: some View {
+        @Bindable var settings = settings
+        Section {
+            Picker("Напоминать", selection: Binding(
+                get: { settings.calendarReminderHours },
+                set: { settings.calendarReminderHours = $0 }
+            )) {
+                Text("не напоминать").tag([Int]())
+                Text("за 2 часа").tag([2])
+                Text("за сутки").tag([24])
+                Text("за сутки и за 2 часа").tag([24, 2])
+                Text("за 3 дня и за сутки").tag([72, 24])
+            }
+            Toggle("Дублировать напоминания в Telegram", isOn: $settings.calendarRemindersToTelegram)
+        } header: {
+            Text("Напоминания")
+        } footer: {
+            Footnote(text: String(localized: "Даты — из проект.md (дедлайн, публикация) и контент-план.md у профилей с календарём (вкладка «Профили»)."))
         }
     }
 }

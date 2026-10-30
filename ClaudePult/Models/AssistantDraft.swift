@@ -79,7 +79,7 @@ struct AssistantDraft: Equatable, Sendable {
     }
 
     static let blank = Mode(
-        name: String(localized: "Новый режим"), icon: "sparkle", template: "custom", source: .folders(String(localized: "~/Documents/Проекты")), card: .projectMD,
+        name: String(localized: "Новый профиль"), icon: "sparkle", template: "custom", source: .folders(String(localized: "~/Documents/Проекты")), card: .projectMD,
         stages: [String(localized: "в работе"), String(localized: "готово")], metrics: ["words", "lastActivity"], launchMode: .background, permissions: .filesOnly,
         calendar: .dates, commonCommands: .none, showCommonCommands: false
     )

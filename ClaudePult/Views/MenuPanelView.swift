@@ -53,46 +53,9 @@ struct MenuPanelView: View {
                 Divider()
             }
 
-            if settings.shows(.limits) {
-                LimitsView()
-                    .revealed(isShown, step: 1, reduceMotion: calm)
-                Divider()
-            }
-
-            if settings.shows(.sessions) {
-                let sessionRows = SessionRow.rows(sessions: sessions.items, runs: runs.runs)
-                if !sessionRows.isEmpty {
-                    SessionsView(rows: sessionRows)
-                        .revealed(isShown, step: 1, reduceMotion: calm)
-                    Divider()
-                } else if hooks.status == .notInstalled {
-                    hooksHint
-                        .revealed(isShown, step: 1, reduceMotion: calm)
-                    Divider()
-                }
-            }
-
-            if settings.shows(.calendar), calendar.isActive {
-                UpcomingView()
-                    .revealed(isShown, step: 1, reduceMotion: calm)
-                Divider()
-            }
-
-            if settings.shows(.projects) {
-                VStack(alignment: .leading, spacing: 0) {
-                    projectsHeader
-                    if !PanelBlock.collapsed(in: collapsedRaw).contains(.projects) {
-                        content
-                    }
-                }
-                .revealed(isShown, step: 1, reduceMotion: calm)
-                Divider()
-            }
-
-            if settings.shows(.commands) {
-                CommandsView()
-                    .revealed(isShown, step: 2, reduceMotion: calm)
-                Divider()
+            // The current profile's modules, in its order (SPEC-profiles §9.2).
+            ForEach(modes.panelModules, id: \.self) { kind in
+                module(kind)
             }
 
             VStack(spacing: 2) {
@@ -216,6 +179,48 @@ struct MenuPanelView: View {
         }
         .padding(.horizontal, 14)
         .padding(.vertical, 8)
+    }
+
+    @ViewBuilder
+    private func module(_ kind: ModuleKind) -> some View {
+        switch kind {
+        case .limits:
+            LimitsView()
+                .revealed(isShown, step: 1, reduceMotion: calm)
+            Divider()
+        case .sessions:
+            let sessionRows = SessionRow.rows(sessions: sessions.items, runs: runs.runs)
+            if !sessionRows.isEmpty {
+                SessionsView(rows: sessionRows)
+                    .revealed(isShown, step: 1, reduceMotion: calm)
+                Divider()
+            } else if hooks.status == .notInstalled {
+                hooksHint
+                    .revealed(isShown, step: 1, reduceMotion: calm)
+                Divider()
+            }
+        case .upcoming:
+            if calendar.isActive {
+                UpcomingView()
+                    .revealed(isShown, step: 1, reduceMotion: calm)
+                Divider()
+            }
+        case .projects:
+            if settings.shows(.projects) {
+                VStack(alignment: .leading, spacing: 0) {
+                    projectsHeader
+                    if !PanelBlock.collapsed(in: collapsedRaw).contains(.projects) {
+                        content
+                    }
+                }
+                .revealed(isShown, step: 1, reduceMotion: calm)
+                Divider()
+            }
+        case .reports:
+            CommandsView()
+                .revealed(isShown, step: 2, reduceMotion: calm)
+            Divider()
+        }
     }
 
     /// Like the other blocks, the projects get a title: how many, and how many need attention.
@@ -429,7 +434,7 @@ private struct ModeSwitcher: View {
                             .foregroundStyle(selected ? Color.accentColor : .primary)
                     }
                     .buttonStyle(.plain)
-                    .help(selected ? String(localized: "Текущий режим") : String(localized: "Переключиться на «\(mode.name)»"))
+                    .help(selected ? String(localized: "Текущий профиль") : String(localized: "Переключиться на «\(mode.name)»"))
                 }
             }
             .padding(.horizontal, 12)

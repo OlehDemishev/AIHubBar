@@ -19,23 +19,23 @@ struct ProfileModuleTests {
     @Test func modulesFollowTheBlocks() {
         let oleh = Mode.developerWithReport(projectsDirectory: "~/Projects", dailyReportDirectory: "~/Projects/_daily-report",
                                             launchMode: nil, showProjects: true, showCommonCommands: false)
-        #expect(oleh.syncedModules(hiddenBlocks: []) == [
+        #expect(oleh.normalizedModules(hiddenBlocks: []) == [
             ProfileModule(.limits), ProfileModule(.sessions), ProfileModule(.projects), ProfileModule(.reports, shown: false),
         ])
 
         var video = Mode(name: "Видео", source: .folders("~/Videos"), calendar: .dates)
-        #expect(video.syncedModules(hiddenBlocks: [.sessions]).map(\.kind) == [.limits, .sessions, .upcoming, .projects])
-        #expect(video.syncedModules(hiddenBlocks: [.sessions])[1].shown == false, "hidden blocks stay hidden")
+        #expect(video.normalizedModules(hiddenBlocks: [.sessions]).map(\.kind) == [.limits, .sessions, .upcoming, .projects])
+        #expect(video.normalizedModules(hiddenBlocks: [.sessions])[1].shown == false, "hidden blocks stay hidden")
 
         // A kind keeps its place; a newly used one goes after the kinds that come before it in the panel.
         video.modules = [ProfileModule(.projects), ProfileModule(.limits), ProfileModule(.sessions)]
-        #expect(video.syncedModules(hiddenBlocks: []).map(\.kind) == [.projects, .limits, .sessions, .upcoming])
+        #expect(video.normalizedModules(hiddenBlocks: []).map(\.kind) == [.projects, .limits, .sessions, .upcoming])
         video.calendar = .off
-        video.modules = video.syncedModules(hiddenBlocks: [])
+        video.modules = video.normalizedModules(hiddenBlocks: [])
         #expect(video.modules?.map(\.kind) == [.projects, .limits, .sessions], "a block turned off drops its module")
 
         let empty = Mode(name: "Пусто")
-        #expect(empty.syncedModules(hiddenBlocks: []).map(\.kind) == [.limits, .sessions])
+        #expect(empty.normalizedModules(hiddenBlocks: []).map(\.kind) == [.limits, .sessions])
     }
 
     @Test func oldModeFilesBecomeProfiles() throws {
@@ -90,5 +90,53 @@ struct ProfileModuleTests {
         #expect(other.modes.map(\.name) == ["Тексты"])
         #expect(other.current?.modules?.map(\.kind) == [.limits, .sessions, .projects])
         #expect(other.installedModules == [.limits, .sessions, .projects])
+    }
+
+    @Test func theProfileDecidesOrderAndVisibility() {
+        var video = Mode(name: "Видео", source: .folders("~/Videos"),
+                         modules: [ProfileModule(.projects), ProfileModule(.limits, shown: false), ProfileModule(.sessions)])
+        #expect(video.normalizedModules(hiddenBlocks: [.limits, .sessions, .projects]) == video.modules,
+                "old global blocks no longer matter once a profile has modules")
+        video.calendar = .dates
+        let withCalendar = video.normalizedModules(hiddenBlocks: [.calendar])
+        #expect(withCalendar.map(\.kind) == [.projects, .limits, .sessions, .upcoming])
+        #expect(withCalendar.last?.shown == true, "a module that becomes possible is shown")
+        video.modules = withCalendar
+        #expect(video.panelModules == [.projects, .sessions, .upcoming])
+    }
+
+    @Test func selectingAProfileAppliesItsPanelAndMenuBar() throws {
+        let (settings, dir) = environment()
+        defer { try? FileManager.default.removeItem(at: dir) }
+        settings.menuBarConfig = .make(.limits)
+        let store = ModeStore(settings: settings, directory: dir)
+        let first = try #require(store.current)
+        #expect(first.menuBar == .make(.limits), "an old profile takes the menu bar it had")
+
+        var quiet = try #require(store.duplicate(first.id))
+        quiet.modules = [ProfileModule(.sessions), ProfileModule(.limits, shown: false)] + (quiet.modules ?? []).filter { ![.limits, .sessions].contains($0.kind) }
+        quiet.menuBar = .make(.minimum)
+        store.update(quiet)
+
+        store.select(quiet.id)
+        #expect(!settings.shows(.limits))
+        #expect(settings.shows(.sessions))
+        #expect(store.panelModules.first == .sessions)
+        #expect(settings.menuBarConfig == .make(.minimum))
+
+        // Settings → «Строка меню» changes the current profile only.
+        var custom = MenuBarConfig.make(.everything)
+        custom.preset = .custom
+        settings.menuBarConfig = custom
+        store.setMenuBar(custom)
+        store.select(first.id)
+        #expect(settings.menuBarConfig == .make(.limits))
+        #expect(settings.shows(.limits))
+        store.select(quiet.id)
+        #expect(settings.menuBarConfig == custom)
+
+        // Old readers see the same through the block flags.
+        let reloaded = ModeStore(settings: settings, directory: dir)
+        #expect(reloaded.modes.first { $0.id == quiet.id }?.modules == store.modes.first { $0.id == quiet.id }?.modules)
     }
 }

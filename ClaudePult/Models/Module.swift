@@ -15,6 +15,17 @@ enum ModuleKind: String, Codable, CaseIterable, Sendable {
         }
     }
 
+    /// What the module does, for Settings → «Модули».
+    var summary: String {
+        switch self {
+        case .limits: String(localized: "Сессия и неделя подписки Claude, прогноз, расход по проектам и по API.")
+        case .sessions: String(localized: "Сессии Claude Code на этом Маке и фоновые задачи. Нужны hooks — вкладка «Claude Code».")
+        case .upcoming: String(localized: "Дедлайны, публикации и контент-план на 7 дней вперёд — из профилей с календарём.")
+        case .projects: String(localized: "Проекты профиля: git-репозитории или папки, карточки, команды. Настраиваются в профиле.")
+        case .reports: String(localized: "Команды _daily-report: отчёт, быстрая сводка, очистка сборок.")
+        }
+    }
+
     var symbol: String {
         switch self {
         case .limits: "gauge.with.dots.needle.33percent"
@@ -38,26 +49,39 @@ struct ProfileModule: Codable, Equatable, Sendable {
 }
 
 extension Mode {
-    /// The modules this profile has, built from its blocks (SPEC-profiles §7). Until stage 2 the blocks decide
-    /// what the panel shows, so the list follows them: kinds keep the place they have, new ones are added in panel
-    /// order, kinds the blocks no longer use are dropped.
-    func syncedModules(hiddenBlocks: Set<PanelBlock>) -> [ProfileModule] {
-        var wanted: [ProfileModule] = [
-            ProfileModule(.limits, shown: !hiddenBlocks.contains(.limits)),
-            ProfileModule(.sessions, shown: !hiddenBlocks.contains(.sessions)),
-        ]
-        if calendar != .off { wanted.append(ProfileModule(.upcoming, shown: !hiddenBlocks.contains(.calendar))) }
-        if source != .none { wanted.append(ProfileModule(.projects, shown: showProjects)) }
-        if commonCommands == .dailyReport { wanted.append(ProfileModule(.reports, shown: showCommonCommands)) }
+    /// The modules this profile has (SPEC-profiles §1). Which ones it can have follows its settings: limits and
+    /// sessions always, «Ближайшее» with the calendar on, «Проекты» with a source, «Отчёты» with `_daily-report`.
+    /// Which of them the panel shows, and in what order, is the profile's own choice; a module that becomes possible
+    /// goes in its panel place, shown. Files from before profiles (no list) take visibility from the old blocks.
+    func normalizedModules(hiddenBlocks: Set<PanelBlock>) -> [ProfileModule] {
+        var possible: [ModuleKind] = [.limits, .sessions]
+        if calendar != .off { possible.append(.upcoming) }
+        if source != .none { possible.append(.projects) }
+        if commonCommands == .dailyReport { possible.append(.reports) }
 
-        var result = (modules ?? []).compactMap { existing in wanted.first { $0.kind == existing.kind } }
-        for module in wanted where !result.contains(where: { $0.kind == module.kind }) {
-            let before = wanted.prefix { $0.kind != module.kind }.map(\.kind)
+        func legacyShown(_ kind: ModuleKind) -> Bool {
+            switch kind {
+            case .limits: !hiddenBlocks.contains(.limits)
+            case .sessions: !hiddenBlocks.contains(.sessions)
+            case .upcoming: !hiddenBlocks.contains(.calendar)
+            case .projects: showProjects
+            case .reports: showCommonCommands
+            }
+        }
+
+        var result = (modules ?? []).filter { possible.contains($0.kind) }
+        for kind in possible where !result.contains(where: { $0.kind == kind }) {
+            let before = possible.prefix { $0 != kind }
             let index = (result.lastIndex { before.contains($0.kind) }).map { $0 + 1 } ?? 0
-            result.insert(module, at: index)
+            result.insert(ProfileModule(kind, shown: modules == nil ? legacyShown(kind) : true), at: index)
         }
         return result
     }
+
+    /// Shown modules in panel order.
+    var panelModules: [ModuleKind] { (modules ?? []).filter(\.shown).map(\.kind) }
+
+    func shows(_ kind: ModuleKind) -> Bool { modules?.contains { $0.kind == kind && $0.shown } ?? false }
 }
 
 /// Decodes a profile's modules, skipping kinds this version doesn't know (a file from a newer ClaudePult).

@@ -19,7 +19,7 @@ struct ModesSettings: View {
                     ModeEditor(mode: mode)
                         .id(mode.id)
                 } else {
-                    Text("Выберите режим").foregroundStyle(.secondary).frame(maxWidth: .infinity, maxHeight: .infinity)
+                    Text("Выберите профиль").foregroundStyle(.secondary).frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
             }
         }
@@ -72,7 +72,7 @@ struct ModesSettings: View {
                 } label: { Image(systemName: "plus") }
                 .menuStyle(.borderlessButton)
                 .fixedSize()
-                .help("Добавить режим из шаблона")
+                .help("Добавить профиль из шаблона")
                 Button { selection.map { _ = modes.duplicate($0) } } label: { Image(systemName: "plus.square.on.square") }
                     .help("Дублировать")
                 Button { selection.map { modes.move($0, by: -1) } } label: { Image(systemName: "arrow.up") }
@@ -81,7 +81,7 @@ struct ModesSettings: View {
                     .help("Ниже")
                 Spacer()
                 Menu {
-                    Button("Экспорт режима…") { selection.map(exportMode) }
+                    Button("Экспорт профиля…") { selection.map(exportMode) }
                     Button("Импорт…") { SettingsFiles.chooseImport(into: modes) }
                 } label: { Image(systemName: "square.and.arrow.up.on.square") }
                 .menuStyle(.borderlessButton)
@@ -91,7 +91,7 @@ struct ModesSettings: View {
                     if let id = selection { modes.delete(id); selection = modes.currentID }
                 } label: { Image(systemName: "trash") }
                 .disabled(modes.modes.count < 2)
-                .help("Удалить режим")
+                .help("Удалить профиль")
             }
             .buttonStyle(.borderless)
             .padding(8)
@@ -144,6 +144,8 @@ private struct ModeEditor: View {
                 }
             }
 
+            panelSection
+
             Section("Проекты") {
                 Picker("Источник", selection: Binding(
                     get: { SourceKind(mode.source) },
@@ -164,7 +166,6 @@ private struct ModeEditor: View {
                 case .none:
                     EmptyView()
                 }
-                Toggle("Показывать проекты в панели", isOn: $mode.showProjects)
             }
 
             if mode.source.isFolders {
@@ -222,7 +223,7 @@ private struct ModeEditor: View {
             } header: {
                 Text("Сервис AI")
             } footer: {
-                Text("Сервис команд-шаблонов режима (этап 4). Агенты и ключи — Настройки → «Сервисы AI».").font(.caption).foregroundStyle(.secondary)
+                Text("Сервис команд-шаблонов профиля (этап 4). Агенты и ключи — Настройки → «Сервисы AI».").font(.caption).foregroundStyle(.secondary)
             }
 
             if mode.source.isFolders {
@@ -245,13 +246,11 @@ private struct ModeEditor: View {
                     Text("_daily-report: отчёт, сводка, очистка").tag(CommonCommandsKind.dailyReport)
                     Text("Нет").tag(CommonCommandsKind.none)
                 }
-                Toggle("Показывать в панели", isOn: $mode.showCommonCommands)
-                    .disabled(mode.commonCommands == .none)
             }
 
             if !mode.source.isFolders {
                 Section {
-                    Text("Карточка проект.md, этапы, метрики, команды, права в фоне и календарь — у режимов с источником «папки».")
+                    Text("Карточка проект.md, этапы, метрики, команды, права в фоне и календарь — у профилей с источником «папки».")
                         .font(.caption)
                         .foregroundStyle(.secondary)
                 }
@@ -259,6 +258,41 @@ private struct ModeEditor: View {
         }
         .formStyle(.grouped)
         .onChange(of: mode) { modes.update(mode) }
+    }
+
+    /// The profile's modules top to bottom, as the panel shows them (SPEC-profiles §1).
+    private var panelSection: some View {
+        let list = mode.normalizedModules(hiddenBlocks: [])
+        return Section {
+            ForEach(Array(list.enumerated()), id: \.element.kind) { index, module in
+                HStack {
+                    Toggle(isOn: Binding(
+                        get: { module.shown },
+                        set: { shown in edit { $0[index].shown = shown } }
+                    )) {
+                        Label(module.kind.title, systemImage: module.kind.symbol)
+                    }
+                    Spacer()
+                    Button { edit { $0.swapAt(index, index - 1) } } label: { Image(systemName: "chevron.up") }
+                        .disabled(index == 0)
+                        .help("Выше")
+                    Button { edit { $0.swapAt(index, index + 1) } } label: { Image(systemName: "chevron.down") }
+                        .disabled(index == list.count - 1)
+                        .help("Ниже")
+                }
+                .buttonStyle(.borderless)
+            }
+        } header: {
+            Text("Панель")
+        } footer: {
+            Footnote(text: String(localized: "Блоки панели этого профиля сверху вниз. «Ближайшее», «Проекты» и «Отчёты» появляются, когда у профиля включён календарь, есть источник проектов или команды _daily-report."))
+        }
+    }
+
+    private func edit(_ change: (inout [ProfileModule]) -> Void) {
+        var list = mode.normalizedModules(hiddenBlocks: [])
+        change(&list)
+        mode.modules = list
     }
 }
 
@@ -302,7 +336,7 @@ struct ImportConfirmation: View {
                     if pending.bundle.format == SettingsBundle.settingsFormat {
                         Button("Заменить все настройки") { modes.importBundle(pending.bundle, style: .replace) }
                     }
-                    Button("Добавить режимы") { modes.importBundle(pending.bundle, style: .add) }
+                    Button("Добавить профили") { modes.importBundle(pending.bundle, style: .add) }
                         .buttonStyle(.borderedProminent)
                     Button("Отмена") { modes.cancelImport() }
                 }
@@ -317,7 +351,7 @@ struct ImportConfirmation: View {
 
     private func summary(_ bundle: SettingsBundle) -> String {
         let names = bundle.modes.map(\.name).joined(separator: ", ")
-        let what = bundle.format == SettingsBundle.settingsFormat ? String(localized: "Все настройки и режимы") : String(localized: "Режим")
+        let what = bundle.format == SettingsBundle.settingsFormat ? String(localized: "Все настройки и профили") : String(localized: "Профиль")
         let missing = bundle.modes.flatMap(ModeStore.missingFolders)
         return "\(what): \(names)." + (missing.isEmpty ? "" : String(localized: " Нет на этом Маке: \(missing.joined(separator: "), String(localized: ")) — после импорта выберите свои папки."))
     }
@@ -409,7 +443,7 @@ struct CommandEditor: View {
                 set: { command.asks = $0.trimmingCharacters(in: .whitespaces).isEmpty ? nil : $0 }
             ), prompt: Text("пусто — запускать сразу; «Язык», «Тон»…"))
             Picker("Сервис", selection: $command.service) {
-                Text("Сервис режима").tag(String?.none)
+                Text("Сервис профиля").tag(String?.none)
                 ForEach(services.available, id: \.id) { Text($0.title).tag(String?.some($0.id)) }
             }
             VStack(alignment: .leading, spacing: 4) {

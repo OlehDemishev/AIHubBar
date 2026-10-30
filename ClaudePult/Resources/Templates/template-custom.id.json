@@ -5,10 +5,10 @@
   "language": "id",
   "id": "custom",
   "title": "Kustom",
-  "description": "Set kosong: «Tugas sendiri» dan tahap «berjalan → selesai». Sisanya di Pengaturan → «Mode».",
+  "description": "Set kosong: «Tugas sendiri» dan tahap «berjalan → selesai». Sisanya di Pengaturan → «Profil».",
   "folderHint": "Folder yang setiap subfoldernya adalah proyek",
   "mode": {
-    "name": "Mode saya",
+    "name": "Profil saya",
     "icon": "sparkle",
     "template": "custom",
     "source": {

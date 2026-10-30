@@ -30,13 +30,15 @@ struct Mode: Codable, Identifiable, Equatable, Sendable {
     var commands: [CommandTemplate]
     /// The profile's modules in panel order (SPEC-profiles §1); nil in files written before profiles.
     var modules: [ProfileModule]?
+    /// The profile's own menu bar (SPEC-profiles §6); nil in files written before it, which take the current one.
+    var menuBar: MenuBarConfig?
 
     init(
         id: String = UUID().uuidString.lowercased(), name: String, icon: String = "sparkle", template: String = "custom",
         source: ProjectSource = .none, card: ProjectCard = .none, stages: [String] = [], metrics: [String] = [], wordsPerMinute: Int = 150,
         launchMode: LaunchMode? = nil, service: String? = nil, permissions: PermissionProfile = .filesOnly, calendar: CalendarMode = .off,
         showProjects: Bool = true, commonCommands: CommonCommandsKind = .none, showCommonCommands: Bool = true, commands: [CommandTemplate] = [],
-        modules: [ProfileModule]? = nil
+        modules: [ProfileModule]? = nil, menuBar: MenuBarConfig? = nil
     ) {
         self.id = id
         self.name = name
@@ -56,17 +58,18 @@ struct Mode: Codable, Identifiable, Equatable, Sendable {
         self.showCommonCommands = showCommonCommands
         self.commands = commands
         self.modules = modules
+        self.menuBar = menuBar
     }
 
     enum CodingKeys: String, CodingKey {
         case id, name, icon, template, source, card, stages, metrics, wordsPerMinute, launchMode, service, permissions, calendar
-        case showProjects, commonCommands, showCommonCommands, commands, modules
+        case showProjects, commonCommands, showCommonCommands, commands, modules, menuBar
     }
 
     init(from decoder: Decoder) throws {
         let c = try decoder.container(keyedBy: CodingKeys.self)
         id = (try? c.decodeIfPresent(String.self, forKey: .id)) ?? UUID().uuidString.lowercased()
-        name = (try? c.decodeIfPresent(String.self, forKey: .name)) ?? String(localized: "Режим")
+        name = (try? c.decodeIfPresent(String.self, forKey: .name)) ?? String(localized: "Профиль")
         icon = (try? c.decodeIfPresent(String.self, forKey: .icon)) ?? "sparkle"
         template = (try? c.decodeIfPresent(String.self, forKey: .template)) ?? "custom"
         source = (try? c.decodeIfPresent(ProjectSource.self, forKey: .source)) ?? .none
@@ -83,6 +86,7 @@ struct Mode: Codable, Identifiable, Equatable, Sendable {
         showCommonCommands = (try? c.decodeIfPresent(Bool.self, forKey: .showCommonCommands)) ?? true
         commands = (try? c.decodeIfPresent([CommandTemplate].self, forKey: .commands)) ?? []
         modules = (try? c.decodeIfPresent(ModuleList.self, forKey: .modules))?.modules
+        menuBar = try? c.decodeIfPresent(MenuBarConfig.self, forKey: .menuBar)
     }
 
     /// Stages without the empty items a half-typed list may have.
