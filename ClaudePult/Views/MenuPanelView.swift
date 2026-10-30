@@ -19,12 +19,16 @@ struct MenuPanelView: View {
     @Environment(ModeStore.self) private var modes
     @Environment(FolderProjectStore.self) private var folders
     @Environment(CalendarStore.self) private var calendar
+    @Environment(QuickToolsController.self) private var quickTools
+    @Environment(CommandStore.self) private var commands
 
     /// Drives the entrance animation; reset when the panel closes so it replays on every open.
     @State private var isShown = false
     @State private var expanded: Set<String> = []
     @State private var listHeight: CGFloat = 0
     @State private var window: NSWindow?
+    @State private var query = ""
+    @FocusState private var searchFocused: Bool
 
     /// The project list scrolls; its height leaves room for the other blocks on the current screen.
     private static var maxListHeight: CGFloat {
@@ -43,6 +47,17 @@ struct MenuPanelView: View {
             header
                 .revealed(isShown, step: 0, reduceMotion: calm)
 
+            PanelSearchField(query: $query, focused: $searchFocused) {
+                if let first = searchResults.first { activate(first) }
+            }
+            .padding(.bottom, 8)
+            .revealed(isShown, step: 0, reduceMotion: calm)
+
+            if !query.isEmpty {
+                PanelSearchResults(results: searchResults, activate: activate)
+                    .panelCard()
+                    .padding(.bottom, 8)
+            } else {
             VStack(alignment: .leading, spacing: 8) {
                 if notifications.state == .denied {
                     notificationsHint
@@ -61,6 +76,7 @@ struct MenuPanelView: View {
                 }
             }
             .padding(.bottom, 8)
+            }
         }
         // Larger text needs a wider panel, otherwise most lines would truncate.
         .frame(width: (settings.panelWidth.points * max(1, scale)).rounded())
@@ -85,10 +101,42 @@ struct MenuPanelView: View {
         }
         .onDisappear {
             isShown = false
+            query = ""
             monitor.isPanelOpen = false
         }
         .onChange(of: expanded) { snapshotIfEnabled() }
         .onChange(of: store.lastUpdated) { snapshotIfEnabled() }
+    }
+
+    // MARK: Search
+
+    private var searchResults: [PanelSearch.Result] {
+        let sessionItems = SessionRow.rows(sessions: sessions.items, runs: runs.runs).map {
+            PanelSearch.Item(id: $0.id, name: $0.project, detail: $0.task ?? "")
+        }
+        let projectItems = folders.isActive
+            ? folders.projects.map { PanelSearch.Item(id: $0.path, name: $0.name, detail: "") }
+            : store.projects.map { PanelSearch.Item(id: $0.id, name: $0.name, detail: $0.branch ?? "") }
+        let quick = modes.installedModules.contains(.quickCommands)
+            ? settings.quickCommands.map { PanelSearch.Item(id: $0.id, name: $0.title, detail: "") } : []
+        let common = modes.panelModules.contains(.reports) ? CommonCommand.allCases : []
+        return PanelSearch.results(query, sessions: sessionItems, projects: projectItems, quickCommands: quick, commands: common)
+    }
+
+    private func activate(_ result: PanelSearch.Result) {
+        query = ""
+        switch result {
+        case let .session(id, _, _):
+            if let session = sessions.items.first(where: { $0.id == id })?.session { SessionActions.show(session) }
+        case let .project(id, _, _):
+            expanded.insert(id)
+            collapsedRaw = PanelBlock.collapsed(in: collapsedRaw).contains(.projects)
+                ? PanelBlock.toggling(.projects, in: collapsedRaw) : collapsedRaw
+        case let .quickCommand(id, _):
+            if let command = settings.quickCommands.first(where: { $0.id == id }) { quickTools.run(command) }
+        case let .command(command):
+            commands.run(command)
+        }
     }
 
     private func snapshotIfEnabled() {

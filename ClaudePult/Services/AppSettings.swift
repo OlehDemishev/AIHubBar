@@ -121,6 +121,10 @@ final class AppSettings {
         didSet { defaults.set(clipboardRemember, forKey: Keys.clipboardRemember) }
     }
 
+    var panelHotKey: PanelHotKey {
+        didSet { defaults.set(panelHotKey.rawValue, forKey: Keys.panelHotKey) }
+    }
+
     /// Notify when a pull request's CI fails or recovers, or the PR closes (`PullRequestAlerts`).
     var pullRequestAlerts: Bool {
         didSet { defaults.set(pullRequestAlerts, forKey: Keys.pullRequestAlerts) }
@@ -234,6 +238,7 @@ final class AppSettings {
         approvalsFromClaudePult = defaults.object(forKey: Keys.approvalsFromClaudePult) as? Bool ?? true
         telegramApprovals = defaults.bool(forKey: Keys.telegramApprovals)
         pullRequestAlerts = defaults.object(forKey: Keys.pullRequestAlerts) as? Bool ?? true
+        panelHotKey = defaults.string(forKey: Keys.panelHotKey).flatMap(PanelHotKey.init(rawValue:)) ?? .controlOptionC
         pullRequestAlertsToTelegram = defaults.bool(forKey: Keys.pullRequestAlertsToTelegram)
         telegramApprovalsChatID = defaults.string(forKey: Keys.telegramApprovalsChatID) ?? ""
         clipboardExcludedApps = defaults.stringArray(forKey: Keys.clipboardExcludedApps) ?? ClipboardPolicy.defaultExcludedApps
@@ -276,6 +281,7 @@ final class AppSettings {
         static let approvalsFromClaudePult = "approvalsFromClaudePult"
         static let telegramApprovals = "telegramApprovals"
         static let pullRequestAlerts = "pullRequestAlerts"
+        static let panelHotKey = "panelHotKey"
         static let pullRequestAlertsToTelegram = "pullRequestAlertsToTelegram"
         static let telegramApprovalsChatID = "telegramApprovalsChatID"
         static let clipboardExcludedApps = "clipboardExcludedApps"

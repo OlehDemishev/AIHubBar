@@ -15,7 +15,7 @@ struct ClaudePultApp: App {
     @State private var usage: UsageStore
     @State private var monitor: SystemMonitor
     @State private var keepAwake: KeepAwakeController
-    @State private var quickTools = QuickToolsController()
+    @State private var quickTools: QuickToolsController
     @State private var clipboard: ClipboardHistory
     @State private var notesStore: NotesStore
     @State private var notifications = NotificationPermission()
@@ -84,6 +84,12 @@ struct ClaudePultApp: App {
             hooks.refresh()
         }
         AppDelegate.willTerminate = { keepAwake.releaseOnQuit() }
+        GlobalHotKey.action = { QuickSearch.show() }
+        QuickSearch.open = { [requests] in requests.openWindow("search") }
+        let quickTools = QuickToolsController()
+        _quickTools = State(initialValue: quickTools)
+        IntentBridge.settings = settings
+        IntentBridge.quickTools = quickTools
         AppDelegate.openFile = { url in
             modes.prepareImport(from: url)
             UserDefaults.standard.set(SettingsView.Tab.modes.rawValue, forKey: "settingsTab")
@@ -101,6 +107,7 @@ struct ClaudePultApp: App {
             usage.start()
             monitor.start()
             keepAwake.start()
+            GlobalHotKey.register(settings.panelHotKey)
             clipboard.start()
             Task { await services.scan() }
             folders.start()
@@ -188,6 +195,22 @@ struct ClaudePultApp: App {
                 .environment(requests)
         }
         .menuBarExtraStyle(.window)
+
+        Window("Поиск — ClaudePult", id: "search") {
+            QuickSearchWindow()
+                .environment(settings)
+                .environment(store)
+                .environment(folders)
+                .environment(sessions)
+                .environment(runs)
+                .environment(modes)
+                .environment(quickTools)
+                .environment(commands)
+                .preferredColorScheme(settings.panelTheme.colorScheme)
+        }
+        .windowStyle(.hiddenTitleBar)
+        .windowResizability(.contentSize)
+        .defaultPosition(.center)
 
         Window("Журнал фоновой задачи", id: "run-log") {
             RunLogView()
