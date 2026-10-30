@@ -5,15 +5,14 @@
 **Updated:** 2026-10-30
 
 **Now:**
-- SPEC-modes §9 stage 4 in two PRs: folder projects (branch `feat/folder-projects`) and the command engine on top of it (branch `feat/command-engine`)
+- SPEC-modes §9 stage 4 merged (PRs #36, #37); next: stage 5 (calendar)
 
 **Next:**
 - SPEC-modes §9: 5 calendar, 6 templates, 7 setup assistant, 8 for everyone, 9 languages (§13: en, es, pt-BR, fr, de, ja, id, ko, it, ar with RTL, pl, uk)
 - Fix whatever Oleh finds in docs/CHECKLIST.md
 
 **Needs Oleh:**
-- merge both stage 4 PRs (folder projects first); try it: duplicate a mode, set «Источник» → «папки» on a folder with a few subfolders, add stages (e.g. «идея, сценарий, монтаж, готово») and metrics
-- the limits come back after the next `claude` request in Terminal (the Keychain token expired 2026-10-30 02:22)
+- try folder projects: duplicate a mode, set «Источник» → «папки» on a folder with a few subfolders, add stages (e.g. «идея, сценарий, монтаж, готово») and metrics
 - try Settings → «Строка меню» (presets, order, options, preview) and the ticking reset countdown
 - try Settings → Режимы (duplicate the mode → switcher appears in the panel) and a double-click on a .claudepult file
 - read and edit docs/TEMPLATES.md (template texts) before stage 6
