@@ -31,6 +31,11 @@ struct KeepAwakeView: View {
                         .scaledFont(.caption)
                         .foregroundStyle(keepAwake.reason == nil ? .secondary : .primary)
                 }
+                if keepAwake.lidHeld {
+                    Label("и с закрытой крышкой", systemImage: "laptopcomputer")
+                        .scaledFont(.caption)
+                        .foregroundStyle(.secondary)
+                }
                 HStack(spacing: 6) {
                     ForEach([(15, String(localized: "15 мин")), (60, String(localized: "1 ч")), (120, String(localized: "2 ч"))], id: \.0) { minutes, title in
                         Button(title) { keepAwake.holdManually(for: TimeInterval(minutes * 60)) }

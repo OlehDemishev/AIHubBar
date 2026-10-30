@@ -80,6 +80,7 @@ struct ClaudePultApp: App {
             Task { await calendar.refresh() }
             hooks.refresh()
         }
+        AppDelegate.willTerminate = { keepAwake.releaseOnQuit() }
         AppDelegate.openFile = { url in
             modes.prepareImport(from: url)
             UserDefaults.standard.set(SettingsView.Tab.modes.rawValue, forKey: "settingsTab")
@@ -257,9 +258,14 @@ struct ClaudePultApp: App {
     }
 }
 
-/// Opens `*.claudepult` files double-clicked in Finder (SPEC-modes §12).
+/// Opens `*.claudepult` files double-clicked in Finder (SPEC-modes §12) and lets go of the lid hold on quit.
 final class AppDelegate: NSObject, NSApplicationDelegate {
     @MainActor static var openFile: ((URL) -> Void)?
+    @MainActor static var willTerminate: (() -> Void)?
+
+    func applicationWillTerminate(_ notification: Notification) {
+        MainActor.assumeIsolated { Self.willTerminate?() }
+    }
 
     func application(_ application: NSApplication, open urls: [URL]) {
         MainActor.assumeIsolated {

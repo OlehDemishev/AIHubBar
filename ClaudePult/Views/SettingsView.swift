@@ -336,6 +336,10 @@ private struct ResourceSection: View {
 
 private struct KeepAwakeSection: View {
     @Environment(AppSettings.self) private var settings
+    @Environment(KeepAwakeController.self) private var keepAwake
+    @State private var lidBusy = false
+    @State private var lidError: String?
+    @State private var sleepOffNow = false
 
     var body: some View {
         @Bindable var settings = settings
@@ -359,6 +363,54 @@ private struct KeepAwakeSection: View {
             Text("Правила «Не спать»")
         } footer: {
             Footnote(text: String(localized: "Любое сработавшее правило не даёт Mac уснуть; вручную — переключателем и таймерами в панели. Системные настройки не меняются: как только правил нет, Mac засыпает как обычно. На Маке без своего экрана любой монитор считается внешним."))
+        }
+        Section {
+            if !LidSleep.hasLid {
+                Text("У этого Mac нет крышки: правило нужно только ноутбукам.")
+                    .foregroundStyle(.secondary)
+            }
+            Toggle("И с закрытой крышкой", isOn: $settings.keepAwakeRules.lidClosed)
+                .disabled(!keepAwake.lidInstalled || !LidSleep.hasLid)
+            LabeledContent("Разрешение администратора") {
+                HStack {
+                    Text(keepAwake.lidInstalled ? String(localized: "есть") : String(localized: "нет"))
+                        .foregroundStyle(.secondary)
+                    if keepAwake.lidInstalled {
+                        Button("Убрать…") { change { await keepAwake.removeLidPermission() } }
+                    } else {
+                        Button("Разрешить…") { change { await keepAwake.installLidPermission() } }
+                            .disabled(!LidSleep.hasLid)
+                    }
+                }
+                .disabled(lidBusy)
+            }
+            if let lidError {
+                Text(lidError).foregroundStyle(.red).scaledFont(.caption)
+            }
+            if sleepOffNow && !keepAwake.lidHeld {
+                Text("Сейчас сон уже отключён другим приложением или командой pmset — ClaudePult его не трогает.")
+                    .foregroundStyle(.secondary)
+                    .scaledFont(.caption)
+            }
+        } header: {
+            Text("С закрытой крышкой")
+        } footer: {
+            Footnote(text: String(localized: "Без монитора и питания закрытый Mac засыпает всегда, это может отменить только pmset от имени администратора. «Разрешить…» один раз спрашивает пароль и добавляет правило /etc/sudoers.d/claudepult: только команды pmset -a disablesleep 0 и 1. Пока держит правило «Не спать», сон выключен; потом и при выходе из ClaudePult — включается обратно. На батарее ниже 20 % — тоже включается. Закрытый Mac греется: не кладите его в сумку."))
+        }
+        .task { sleepOffNow = await LidSleep.systemSleepDisabled() }
+    }
+
+    private func change(_ action: @escaping () async -> LidSleep.AdminResult) {
+        lidBusy = true
+        lidError = nil
+        Task {
+            switch await action() {
+            case .done, .cancelled: break
+            case let .failed(message): lidError = message.isEmpty ? String(localized: "Не получилось") : message
+            }
+            if !keepAwake.lidInstalled { settings.keepAwakeRules.lidClosed = false }
+            sleepOffNow = await LidSleep.systemSleepDisabled()
+            lidBusy = false
         }
     }
 

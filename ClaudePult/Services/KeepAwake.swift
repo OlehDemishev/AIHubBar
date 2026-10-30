@@ -18,8 +18,10 @@ struct KeepAwakeRules: Codable, Equatable, Sendable {
     var whileApps: [App] = []
     /// Keep the display on too, not only the system.
     var keepDisplayOn = false
+    /// Also with the lid closed (`LidSleep`; needs the administrator's permission once).
+    var lidClosed = false
 
-    enum CodingKeys: String, CodingKey { case whileClaudeWorks, whileOnPower, whileExternalDisplay, whileApps, keepDisplayOn }
+    enum CodingKeys: String, CodingKey { case whileClaudeWorks, whileOnPower, whileExternalDisplay, whileApps, keepDisplayOn, lidClosed }
 
     init() {}
 
@@ -30,6 +32,7 @@ struct KeepAwakeRules: Codable, Equatable, Sendable {
         whileExternalDisplay = (try? c.decodeIfPresent(Bool.self, forKey: .whileExternalDisplay)) ?? false
         whileApps = (try? c.decodeIfPresent([App].self, forKey: .whileApps)) ?? []
         keepDisplayOn = (try? c.decodeIfPresent(Bool.self, forKey: .keepDisplayOn)) ?? false
+        lidClosed = (try? c.decodeIfPresent(Bool.self, forKey: .lidClosed)) ?? false
     }
 
     /// What is around right now, as the rules see it.
@@ -70,6 +73,10 @@ final class KeepAwakeController {
     /// Set by the app: whether «Не спать» is installed, and whether Claude is working right now.
     var isActive: () -> Bool = { false }
     var claudeWorking: () -> Bool = { false }
+    /// Sleep is off with the lid closed while a rule holds (`LidSleep`).
+    private(set) var lidHeld = false
+    private(set) var lidInstalled = LidSleep.isInstalled
+    private var lidBusy = false
 
     private let settings: AppSettings
     private var systemAssertion: IOPMAssertionID?
@@ -108,6 +115,7 @@ final class KeepAwakeController {
         guard isActive() else {
             manualUntil = nil
             apply(nil)
+            updateLid(holding: false, onPower: true)
             return
         }
         if let manual = manualUntil, let until = manual, until <= .now { manualUntil = nil }
@@ -118,6 +126,63 @@ final class KeepAwakeController {
             runningApps: Set(NSWorkspace.shared.runningApplications.compactMap(\.bundleIdentifier))
         )
         apply(settings.keepAwakeRules.reason(manualUntil: manualUntil, situation: situation))
+        updateLid(holding: reason != nil, onPower: situation.onPower)
+    }
+
+    /// Runs `pmset` only while the lid hold is wanted or was set by ClaudePult; otherwise nothing to do.
+    private func updateLid(holding: Bool, onPower: Bool) {
+        lidInstalled = LidSleep.isInstalled
+        let want = LidSleep.wanted(holding: holding, lidRule: settings.keepAwakeRules.lidClosed, installed: lidInstalled,
+                                   onPower: onPower, battery: SystemSampler.battery()?.percent, hasLid: LidSleep.hasLid)
+        guard want || LidSleep.ours else {
+            lidHeld = false
+            return
+        }
+        guard !lidBusy else { return }
+        lidBusy = true
+        Task {
+            defer { lidBusy = false }
+            var disabled = await LidSleep.systemSleepDisabled()
+            switch LidSleep.step(want: want, sleepDisabled: disabled, ours: LidSleep.ours) {
+            case .disableSleep:
+                if await LidSleep.setSleepDisabled(true) {
+                    LidSleep.ours = true
+                    disabled = true
+                    AppLog.info("Keep awake: sleep off with the lid closed")
+                }
+            case .enableSleep:
+                if await LidSleep.setSleepDisabled(false) {
+                    LidSleep.ours = false
+                    disabled = false
+                    AppLog.info("Keep awake: sleep back on with the lid closed")
+                }
+            case .none:
+                // Someone else turned sleep back on: nothing of ours is left to undo.
+                if !disabled { LidSleep.ours = false }
+            }
+            lidHeld = want && disabled
+        }
+    }
+
+    func installLidPermission() async -> LidSleep.AdminResult {
+        let result = await LidSleep.install()
+        lidInstalled = LidSleep.isInstalled
+        evaluate()
+        return result
+    }
+
+    /// Sleep goes back on first (while the rule still allows it), then the rule is removed.
+    func removeLidPermission() async -> LidSleep.AdminResult {
+        if LidSleep.ours, await LidSleep.setSleepDisabled(false) { LidSleep.ours = false }
+        lidHeld = false
+        let result = await LidSleep.uninstall()
+        lidInstalled = LidSleep.isInstalled
+        return result
+    }
+
+    /// On quit: sleep back on if ClaudePult turned it off.
+    func releaseOnQuit() {
+        if LidSleep.ours { LidSleep.enableSleepNow() }
     }
 
     private func apply(_ newReason: KeepAwakeRules.Reason?) {

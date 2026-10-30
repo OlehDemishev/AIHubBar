@@ -364,6 +364,17 @@ Panel snapshots: `defaults write com.demishev.claudepult DebugPanelSnapshot -boo
 | The panel with both modules (real window capture): copies from Terminal appear on top with «только что»; a copy marked `org.nspasteboard.ConcealedType` did not appear; the notes block made its folder and a first note | Live (modules added to Oleh's profile and a temporary notes folder for the check; profile, setting and clipboard restored) |
 | Pin, search, click to copy back, «Помнить после перезапуска», a copy from 1Password, typing a note and switching tabs | Oleh |
 
+## Second wave: «Не спать» with the lid closed (SPEC-profiles §9.7, 2026-10-30)
+
+| Scenario | Checked |
+|---|---|
+| The sudoers rule allows only `pmset -a disablesleep 0` and `1`; unsafe user names refused; the rule text passes `visudo -c` | Auto (`LidSleepTests`) + `visudo -cf` |
+| Wanted only while a rule holds, the option is on, the permission is there and the Mac has a lid; on battery below 20 % let go | Auto |
+| Undoes only its own change: sleep turned off by another app is left alone; `SleepDisabled` read from `pmset -g` | Auto |
+| Old rules decode without the option | Auto |
+| Settings on this Mac mini (real window capture): «У этого Mac нет крышки», the switch and «Разрешить…» disabled, «Сейчас сон уже отключён другим приложением» (Vorssaint's `SleepDisabled 1`); ClaudePult ran no `pmset`/`sudo` (log, `pmset -g`) | Live (module installed temporarily, profile restored) |
+| «Разрешить…» with the password, the lid closed while Claude works, the battery floor, «Убрать…» | Oleh — needs a laptop and the admin password |
+
 ## Release without an Apple Developer account (2026-10-30)
 
 | Scenario | Checked |

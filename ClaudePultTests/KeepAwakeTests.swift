@@ -71,3 +71,49 @@ struct KeepAwakeControllerTests {
         #expect(controller.reason == nil && controller.manualUntil == nil, "not installed: nothing is held")
     }
 }
+
+struct LidSleepTests {
+    @Test func ruleAllowsOnlyPmsetDisablesleep() {
+        #expect(LidSleep.rule(user: "oleh") == "oleh ALL=(root) NOPASSWD: /usr/bin/pmset -a disablesleep 0, /usr/bin/pmset -a disablesleep 1\n")
+        #expect(LidSleep.rule(user: "") == nil)
+        #expect(LidSleep.rule(user: "a b") == nil)
+        #expect(LidSleep.rule(user: "x ALL=(ALL) ALL") == nil)
+        #expect(LidSleep.rule(user: "olé") == nil)
+    }
+
+    @Test func wantedOnlyWhileHoldingWithPermission() {
+        #expect(LidSleep.wanted(holding: true, lidRule: true, installed: true, onPower: false, battery: 80))
+        #expect(!LidSleep.wanted(holding: false, lidRule: true, installed: true, onPower: true, battery: 80))
+        #expect(!LidSleep.wanted(holding: true, lidRule: false, installed: true, onPower: true, battery: 80))
+        #expect(!LidSleep.wanted(holding: true, lidRule: true, installed: false, onPower: true, battery: 80))
+        // Low battery lets go, unless charging.
+        #expect(!LidSleep.wanted(holding: true, lidRule: true, installed: true, onPower: false, battery: 19))
+        #expect(LidSleep.wanted(holding: true, lidRule: true, installed: true, onPower: true, battery: 5))
+        #expect(LidSleep.wanted(holding: true, lidRule: true, installed: true, onPower: true, battery: nil))
+        // A Mac without a lid never needs it.
+        #expect(!LidSleep.wanted(holding: true, lidRule: true, installed: true, onPower: true, battery: nil, hasLid: false))
+    }
+
+    @Test func undoesOnlyItsOwnChange() {
+        #expect(LidSleep.step(want: true, sleepDisabled: false, ours: false) == .disableSleep)
+        #expect(LidSleep.step(want: true, sleepDisabled: true, ours: false) == .none)
+        #expect(LidSleep.step(want: false, sleepDisabled: true, ours: true) == .enableSleep)
+        // Turned off by another app (or by hand): left alone.
+        #expect(LidSleep.step(want: false, sleepDisabled: true, ours: false) == .none)
+        #expect(LidSleep.step(want: false, sleepDisabled: false, ours: true) == .none)
+    }
+
+    @Test func readsPmset() {
+        #expect(LidSleep.sleepDisabled(in: "System-wide power settings:\n SleepDisabled\t\t1\nCurrently in use:\n sleep 1"))
+        #expect(!LidSleep.sleepDisabled(in: "System-wide power settings:\n SleepDisabled\t\t0\n"))
+        #expect(!LidSleep.sleepDisabled(in: " sleep                1 (sleep prevented by powerd)"))
+    }
+
+    @Test func oldRulesHaveNoLid() throws {
+        let rules = try JSONDecoder().decode(KeepAwakeRules.self, from: Data(#"{"whileOnPower":true}"#.utf8))
+        #expect(!rules.lidClosed)
+        var lid = KeepAwakeRules()
+        lid.lidClosed = true
+        #expect(try JSONDecoder().decode(KeepAwakeRules.self, from: JSONEncoder().encode(lid)).lidClosed)
+    }
+}
