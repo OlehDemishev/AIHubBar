@@ -34,6 +34,7 @@ struct FolderProjectsView: View {
             ForEach(store.projects) { project in
                 FolderProjectRow(
                     project: project,
+                    mode: mode,
                     stages: mode?.stageList ?? [],
                     metrics: (mode?.metrics ?? []).compactMap(FolderMetric.init(rawValue:)),
                     wordsPerMinute: mode?.wordsPerMinute ?? 150,
@@ -96,6 +97,7 @@ struct FolderProjectsView: View {
 
 private struct FolderProjectRow: View {
     let project: FolderProject
+    let mode: Mode?
     let stages: [String]
     let metrics: [FolderMetric]
     let wordsPerMinute: Int
@@ -205,6 +207,9 @@ private struct FolderProjectRow: View {
             }
             .buttonStyle(.link)
             .scaledFont(.caption)
+            if let mode {
+                ProjectCommandsView(project: project, mode: mode)
+            }
         }
     }
 }

@@ -24,6 +24,8 @@ struct BackgroundRun: Codable, Identifiable, Equatable, Sendable {
     var summary: String?
     var pullRequestURL: String?
     var notified: Bool
+    /// A command of a folder mode writes this file (absolute path); the notification opens it.
+    var resultFile: String?
 
     static var runsDirectory: URL { SessionFiles.supportDirectory.appending(path: "runs", directoryHint: .isDirectory) }
     var logURL: URL { Self.runsDirectory.appending(path: "\(id).log") }

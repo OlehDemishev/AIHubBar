@@ -6,15 +6,27 @@ import Foundation
 /// compound command (`&&`, `|`, `;`, `$()`) must be allowed, and deny rules match any part.
 /// Bash rules are pattern matching, not a sandbox — see DECISIONS.md.
 enum BackgroundPermissions {
-    static func arguments(prompt: String, sessionID: String) -> [String] {
+    static func arguments(prompt: String, sessionID: String, profile: PermissionProfile = .code) -> [String] {
         [
             "-p", prompt,
             "--session-id", sessionID,
             "--output-format", "stream-json", "--verbose",
             "--permission-mode", "dontAsk",
             "--permission-prompts", "none",
-            "--settings", settingsJSON,
+            "--settings", settingsJSON(profile),
         ]
+    }
+
+    /// «Только файлы» (SPEC-modes §3): read, search and write inside the project folder; no shell, no network.
+    /// «Файлы + поиск в интернете» adds web search and page fetching.
+    static func rules(_ profile: PermissionProfile) -> (allow: [String], deny: [String]) {
+        let files = ["Read", "Glob", "Grep", "Edit(./**)", "TodoWrite"]
+        let secrets = deny.filter { $0.hasPrefix("Read(") }
+        switch profile {
+        case .code: return (allow, deny)
+        case .filesOnly: return (files, ["Bash", "WebFetch", "WebSearch", "NotebookEdit"] + secrets)
+        case .filesAndWeb: return (files + ["WebSearch", "WebFetch"], ["Bash", "NotebookEdit"] + secrets)
+        }
     }
 
     static let allow: [String] = {
@@ -66,15 +78,16 @@ enum BackgroundPermissions {
         "Bash(env)", "Bash(env *)", "Bash(printenv*)", "Bash(security *)",
     ]
 
-    static let settingsJSON: String = {
+    static func settingsJSON(_ profile: PermissionProfile = .code) -> String {
+        let rules = rules(profile)
         let settings: [String: Any] = [
             "permissions": [
-                "allow": allow,
-                "deny": deny,
+                "allow": rules.allow,
+                "deny": rules.deny,
                 "blockReadsOutsideWorkingDirectories": true,
             ],
         ]
         let data = (try? JSONSerialization.data(withJSONObject: settings, options: [.sortedKeys, .withoutEscapingSlashes])) ?? Data()
         return String(decoding: data, as: UTF8.self)
-    }()
+    }
 }

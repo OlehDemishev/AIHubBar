@@ -16,6 +16,7 @@ struct ClaudePultApp: App {
     @State private var modes: ModeStore
     @State private var services: AIServiceStore
     @State private var folders: FolderProjectStore
+    @State private var engine: CommandEngine
     @NSApplicationDelegateAdaptor private var appDelegate: AppDelegate
 
     init() {
@@ -44,6 +45,7 @@ struct ClaudePultApp: App {
         _usage = State(initialValue: usage)
         let runs = RunStore(settings: settings)
         _runs = State(initialValue: runs)
+        _engine = State(initialValue: CommandEngine(settings: settings, runs: runs))
         let launcher = LaunchController(settings: settings, store: store, runs: runs, usage: usage)
         _launcher = State(initialValue: launcher)
         let hooks = HookController(settings: settings)
@@ -125,6 +127,7 @@ struct ClaudePultApp: App {
                 .environment(modes)
                 .environment(services)
                 .environment(folders)
+                .environment(engine)
         } label: {
             MenuBarLabel(state: MenuBarState(config: settings.menuBarConfig, data: menuBarData))
                 .environment(requests)
@@ -137,6 +140,13 @@ struct ClaudePultApp: App {
                 .preferredColorScheme(settings.panelTheme.colorScheme)
         }
         .defaultSize(width: 640, height: 520)
+
+        Window("Сравнение", id: "compare") {
+            CompareView()
+                .environment(engine)
+                .preferredColorScheme(settings.panelTheme.colorScheme)
+        }
+        .defaultSize(width: 980, height: 640)
 
         Window("Очистка сборок", id: "cleanup-output") {
             CleanupOutputView()
@@ -163,6 +173,7 @@ struct ClaudePultApp: App {
                 .environment(notifications)
                 .environment(modes)
                 .environment(services)
+                .environment(engine)
         }
     }
 }

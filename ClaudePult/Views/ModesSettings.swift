@@ -170,6 +170,10 @@ private struct ModeEditor: View {
                         Text((AIService(id: id)?.title ?? id) + " — не найден на этом Маке").tag(String?.some(id))
                     }
                 }
+                Picker("Права Claude в фоне", selection: $mode.permissions) {
+                    ForEach(PermissionProfile.allCases, id: \.self) { Text($0.title).tag($0) }
+                }
+                .help("«Только файлы»: читать и писать внутри папки проекта, без терминала и интернета")
                 Picker("Где запускать Claude", selection: $mode.launchMode) {
                     Text("Спрашивать").tag(LaunchMode?.none)
                     ForEach(LaunchMode.allCases, id: \.self) { Text($0.title).tag(LaunchMode?.some($0)) }
@@ -178,6 +182,21 @@ private struct ModeEditor: View {
                 Text("Сервис AI")
             } footer: {
                 Text("Сервис команд-шаблонов режима (этап 4). Агенты и ключи — Настройки → «Сервисы AI».").font(.caption).foregroundStyle(.secondary)
+            }
+
+            if mode.source.isFolders {
+                Section {
+                    ForEach($mode.commands) { $command in
+                        CommandEditor(command: $command) { mode.commands.removeAll { $0.id == command.id } }
+                    }
+                    Button("Добавить команду") {
+                        mode.commands.append(CommandTemplate(title: "Новая команда", task: "", output: "результат-<время>.md"))
+                    }
+                } header: {
+                    Text("Команды проектов")
+                } footer: {
+                    Text("Подстановки: {проект} {файл} {формат} {площадка} {хронометраж} {текст} {язык}; в имени файла ещё <время> и <файл>. Результат — всегда новый файл в папке проекта. «Своя задача» есть всегда.").font(.caption).foregroundStyle(.secondary)
+                }
             }
 
             Section("Общие команды") {
@@ -327,6 +346,38 @@ private enum SourceKind: CaseIterable, Hashable {
         case .folders: return .folders(folder)
         case .inbox: return .inbox(folder)
         case .none: return .none
+        }
+    }
+}
+
+/// One command of a folder mode, folded into a line until opened.
+private struct CommandEditor: View {
+    @Binding var command: CommandTemplate
+    let onDelete: () -> Void
+    @Environment(AIServiceStore.self) private var services
+
+    var body: some View {
+        DisclosureGroup(command.title) {
+            TextField("Название", text: $command.title)
+            TextField("Файл результата", text: $command.output, prompt: Text("хуки.md"))
+            Picker("На чём", selection: $command.input) {
+                ForEach(CommandTemplate.Input.allCases, id: \.self) { Text($0.title).tag($0) }
+            }
+            TextField("Спросить перед запуском", text: Binding(
+                get: { command.asks ?? "" },
+                set: { command.asks = $0.trimmingCharacters(in: .whitespaces).isEmpty ? nil : $0 }
+            ), prompt: Text("пусто — запускать сразу; «Язык», «Тон»…"))
+            Picker("Сервис", selection: $command.service) {
+                Text("Сервис режима").tag(String?.none)
+                ForEach(services.available, id: \.id) { Text($0.title).tag(String?.some($0.id)) }
+            }
+            VStack(alignment: .leading, spacing: 4) {
+                Text("Задача").font(.caption).foregroundStyle(.secondary)
+                TextEditor(text: $command.task)
+                    .font(.body)
+                    .frame(minHeight: 70)
+            }
+            Button("Удалить команду", role: .destructive, action: onDelete)
         }
     }
 }

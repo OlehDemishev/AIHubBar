@@ -4,6 +4,8 @@ import SwiftUI
 /// Settings → «Сервисы AI» (SPEC-modes §11.3): installed agents, API keys with «Проверить», the model per service.
 struct ServicesSettings: View {
     @Environment(AIServiceStore.self) private var services
+    @Environment(CommandEngine.self) private var engine
+    @Environment(AppSettings.self) private var settings
 
     var body: some View {
         Form {
@@ -30,12 +32,64 @@ struct ServicesSettings: View {
             } header: {
                 Text("Модели по API — получают только текст")
             } footer: {
-                Footnote(text: "Ключ хранится только в связке ключей macOS (запись «ClaudePult API key»), не пишется в журнал и не попадает в экспорт. «Проверить» запрашивает список моделей — токены на это не тратятся. Модели по API заработают с командами-шаблонами (этап 4).")
+                Footnote(text: "Ключ хранится только в связке ключей macOS (запись «ClaudePult API key»), не пишется в журнал и не попадает в экспорт. «Проверить» запрашивает список моделей — токены на это не тратятся. Модели по API выполняют команды проектов-папок.")
             }
+
+            spendSection
         }
         .formStyle(.grouped)
         .frame(height: 600)
         .task { if services.agents.isEmpty { await services.scan() } }
+    }
+}
+
+extension ServicesSettings {
+    @ViewBuilder fileprivate var spendSection: some View {
+        @Bindable var settings = settings
+        let today = engine.summary(since: Calendar.current.startOfDay(for: .now))
+        let month = engine.summary(since: engine.monthStart)
+        Section {
+            LabeledContent("Сегодня", value: SpendText.line(today))
+            LabeledContent("В этом месяце", value: SpendText.line(month))
+            LabeledContent("Бюджет в месяц, $") {
+                TextField("", value: $settings.aiServices.monthlyBudget, format: .number, prompt: Text("нет"))
+                    .multilineTextAlignment(.trailing)
+                    .frame(width: 90)
+            }
+            ForEach(APIProvider.allCases.filter { services.hasKey.contains($0) || $0 == .compatible }, id: \.self) { provider in
+                LabeledContent("\(provider.title): $ за 1 млн токенов (вход / выход)") {
+                    HStack(spacing: 4) {
+                        TextField("", value: price(provider, \.input), format: .number, prompt: Text("—")).frame(width: 60)
+                        Text("/")
+                        TextField("", value: price(provider, \.output), format: .number, prompt: Text("—")).frame(width: 60)
+                    }
+                    .multilineTextAlignment(.trailing)
+                }
+            }
+        } header: {
+            Text("Расход по API")
+        } footer: {
+            Footnote(text: "ClaudePult считает токены своих запросов по ответам сервисов; стоимость — по ценам, которые вы введёте (цены меняются, поэтому они не зашиты). Уведомление при 80 % и 100 % бюджета.")
+        }
+    }
+
+    private func price(_ provider: APIProvider, _ path: WritableKeyPath<APIPrice, Double>) -> Binding<Double?> {
+        Binding(
+            get: { settings.aiServices.prices[provider.rawValue]?[keyPath: path] },
+            set: { value in
+                var price = settings.aiServices.prices[provider.rawValue] ?? APIPrice(input: 0, output: 0)
+                price[keyPath: path] = value ?? 0
+                settings.aiServices.prices[provider.rawValue] = price.input == 0 && price.output == 0 ? nil : price
+            }
+        )
+    }
+}
+
+enum SpendText {
+    static func line(_ summary: SpendSummary) -> String {
+        guard summary.tokens > 0 else { return "—" }
+        let tokens = TokenBreakdown.tokensText(summary.tokens) + " токенов"
+        return summary.cost.map { tokens + String(format: " · $%.2f", $0) } ?? tokens
     }
 }
 

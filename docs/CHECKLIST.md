@@ -138,3 +138,17 @@ Panel snapshots: `defaults write com.demishev.claudepult DebugPanelSnapshot -boo
 | report.py is not run for a folder mode; folder projects are not listed for a report mode | Auto (store) |
 | Panel: folder project rows, stage chips, overdue deadline in red, «Новый проект» | **Oleh: switch a mode to «папки» and look** |
 | Settings → Режимы: source picker, stages, metrics, speech pace | **Oleh: look** |
+
+## Command engine (SPEC-modes §9.4, part 2)
+
+| Scenario | Checked |
+|---|---|
+| Placeholders, result names (`<время>`, `<файл>`, comparison suffix, unsafe characters), never overwrite | Auto |
+| Agent / API wrappers as in docs/TEMPLATES.md | Auto |
+| «Только файлы»: writes a new file in the folder; shell, web and reading outside the folder refused | Live (real `claude -p` in a temp folder, 2026-10-30) |
+| «Файлы + поиск»: web page fetched and written to a file; shell refused | Live |
+| API request and reply: path, no key header without a key, model, text, tokens | Auto + Live (`--api-complete` against a local OpenAI-compatible stub) |
+| No key / no server → clear message | Live |
+| Spend: tokens per period, cost only for priced providers | Auto |
+| Commands in the panel, «Сравнить» window, spend section and budget notification | **Oleh: with a folder mode and a key** |
+| Claude background command → notification opens the result file | **Oleh** |

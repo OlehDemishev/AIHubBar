@@ -6,13 +6,14 @@ import UserNotifications
 /// - `ClaudePult --login-item [status|on|off]`
 /// - `ClaudePult --claude next|finish|task <project-path> [task text] [--claude-path <path>] [--print] [--background]`
 /// - `ClaudePult --hooks [status|install|uninstall]`
-/// - `ClaudePult --sessions`, `ClaudePult --show-session <id>`, `ClaudePult --background-settings`
+/// - `ClaudePult --sessions`, `ClaudePult --show-session <id>`, `ClaudePult --background-settings [code|filesOnly|filesAndWeb]`
 /// - `ClaudePult --command report|summary|cleanup-check|cleanup` (in this process)
 /// - `ClaudePult --app-command <command>|help|cleanup-output` (asks the running app)
 /// - `ClaudePult --usage`, `ClaudePult --usage-raw` (subscription limits; the token is never printed), `--token-usage`
 /// - `ClaudePult --notifications-status`
 /// - `ClaudePult --modes`, `ClaudePult --export-settings <file.claudepult>` (import: open the file in Finder)
 /// - `ClaudePult --folder-projects <folder>` (folder projects as the panel would list them)
+/// - `ClaudePult --api-complete <provider> <prompt> [base-url]` (one request to a model by API, prints reply and tokens)
 /// - `ClaudePult --services [check]` (installed agents, stored API keys; `check` lists each provider's models)
 /// - `ClaudePult --menubar-preview <file.png> [minimum|limits|everything]` (the menu bar item with sample data)
 @MainActor
@@ -117,6 +118,23 @@ enum CommandLineTool {
             if projects.isEmpty { print("no folder projects in \(arguments[index + 1])") }
             return 0
         }
+        if let index = arguments.firstIndex(of: "--api-complete"), index + 2 < arguments.count {
+            guard let provider = APIProvider(rawValue: arguments[index + 1]) else {
+                printError("Usage: ClaudePult --api-complete " + APIProvider.allCases.map(\.rawValue).joined(separator: "|") + " <prompt> [base-url]")
+                return 2
+            }
+            var config = AppSettings().aiServices
+            if index + 3 < arguments.count { config.compatibleBaseURL = arguments[index + 3] }
+            if provider == .compatible, config.model(.compatible) == nil { config.models["compatible"] = "test" }
+            let prompt = arguments[index + 2]
+            let request = config
+            return waitFor {
+                let reply = try await APIClient.complete(provider, config: request, prompt: prompt)
+                print(reply.text)
+                print("tokens: in \(reply.inputTokens), out \(reply.outputTokens)")
+                return 0
+            }
+        }
         if let index = arguments.firstIndex(of: "--services") {
             return servicesReport(check: arguments.dropFirst(index + 1).first == "check")
         }
@@ -131,8 +149,9 @@ enum CommandLineTool {
                 return settings.authorizationStatus == .authorized ? 0 : 1
             }
         }
-        if arguments.contains("--background-settings") {
-            print(BackgroundPermissions.settingsJSON)
+        if let index = arguments.firstIndex(of: "--background-settings") {
+            let profile = arguments.dropFirst(index + 1).first.flatMap(PermissionProfile.init(rawValue:)) ?? .code
+            print(BackgroundPermissions.settingsJSON(profile))
             return 0
         }
         if arguments.contains("--sessions") {

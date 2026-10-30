@@ -4,6 +4,7 @@ import SwiftUI
 struct LimitsView: View {
     @Environment(UsageStore.self) private var usage
     @Environment(LaunchController.self) private var launcher
+    @Environment(CommandEngine.self) private var engine
     @AppStorage("limitsBreakdownExpanded") private var showBreakdown = false
     @State private var period: UsageStore.Period = .session
 
@@ -27,6 +28,13 @@ struct LimitsView: View {
                 }
                 if let extra = snapshot.extra, extra.isEnabled {
                     Label(extraText(extra), systemImage: "creditcard")
+                        .scaledFont(.caption)
+                        .foregroundStyle(.secondary)
+                }
+                // Models by API (SPEC-modes §11.2): shown once ClaudePult has spent something this month.
+                let month = engine.summary(since: engine.monthStart)
+                if month.tokens > 0 {
+                    Label("API за месяц: " + SpendText.line(month), systemImage: "cpu")
                         .scaledFont(.caption)
                         .foregroundStyle(.secondary)
                 }

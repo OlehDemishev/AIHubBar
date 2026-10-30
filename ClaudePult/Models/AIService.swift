@@ -33,6 +33,31 @@ enum AIService: Hashable, Sendable {
         case let .api(provider): provider.title + " (API)"
         }
     }
+
+    /// For result names in a comparison: `хуки (Claude).md`, `хуки (OpenAI).md`.
+    func shortName(compatibleName: String = "") -> String {
+        switch self {
+        case let .agent(kind):
+            switch kind {
+            case .claudeCode: "Claude"
+            case .codex: "Codex"
+            case .gemini: "Gemini CLI"
+            case .antigravity: "Antigravity"
+            case .copilot: "Copilot"
+            case .cursor: "Cursor"
+            }
+        case let .api(provider):
+            switch provider {
+            case .anthropic: "Claude API"
+            case .openai: "OpenAI"
+            case .google: "Gemini"
+            case .xai: "Grok"
+            case .deepseek: "DeepSeek"
+            case .mistral: "Mistral"
+            case .compatible: compatibleName.isEmpty ? "Local" : compatibleName
+            }
+        }
+    }
 }
 
 // MARK: - Agents
@@ -236,6 +261,10 @@ struct AIServicesConfig: Codable, Equatable, Sendable {
     var compatibleBaseURL: String = APIProvider.compatible.defaultBaseURL
     /// A name for the compatible server, e.g. «Ollama» or «OpenRouter».
     var compatibleName: String = ""
+    /// provider raw value → dollars per million tokens, as entered by the person.
+    var prices: [String: APIPrice] = [:]
+    /// Dollars per month; a notification at 80 % and 100 %.
+    var monthlyBudget: Double?
 
     func model(_ provider: APIProvider) -> String? { models[provider.rawValue] }
 
@@ -245,12 +274,14 @@ struct AIServicesConfig: Codable, Equatable, Sendable {
 
     init() {}
 
-    enum CodingKeys: String, CodingKey { case models, compatibleBaseURL, compatibleName }
+    enum CodingKeys: String, CodingKey { case models, compatibleBaseURL, compatibleName, prices, monthlyBudget }
 
     init(from decoder: Decoder) throws {
         let c = try decoder.container(keyedBy: CodingKeys.self)
         models = (try? c.decodeIfPresent([String: String].self, forKey: .models)) ?? [:]
         compatibleBaseURL = (try? c.decodeIfPresent(String.self, forKey: .compatibleBaseURL)) ?? APIProvider.compatible.defaultBaseURL
         compatibleName = (try? c.decodeIfPresent(String.self, forKey: .compatibleName)) ?? ""
+        prices = (try? c.decodeIfPresent([String: APIPrice].self, forKey: .prices)) ?? [:]
+        monthlyBudget = try? c.decodeIfPresent(Double.self, forKey: .monthlyBudget)
     }
 }

@@ -26,12 +26,14 @@ struct Mode: Codable, Identifiable, Equatable, Sendable {
     var showProjects: Bool
     var commonCommands: CommonCommandsKind
     var showCommonCommands: Bool
+    /// Commands of a folder mode; «Своя задача» is always there besides these.
+    var commands: [CommandTemplate]
 
     init(
         id: String = UUID().uuidString.lowercased(), name: String, icon: String = "sparkle", template: String = "custom",
         source: ProjectSource = .none, card: ProjectCard = .none, stages: [String] = [], metrics: [String] = [], wordsPerMinute: Int = 150,
         launchMode: LaunchMode? = nil, service: String? = nil, permissions: PermissionProfile = .filesOnly, calendar: CalendarMode = .off,
-        showProjects: Bool = true, commonCommands: CommonCommandsKind = .none, showCommonCommands: Bool = true
+        showProjects: Bool = true, commonCommands: CommonCommandsKind = .none, showCommonCommands: Bool = true, commands: [CommandTemplate] = []
     ) {
         self.id = id
         self.name = name
@@ -49,11 +51,12 @@ struct Mode: Codable, Identifiable, Equatable, Sendable {
         self.showProjects = showProjects
         self.commonCommands = commonCommands
         self.showCommonCommands = showCommonCommands
+        self.commands = commands
     }
 
     enum CodingKeys: String, CodingKey {
         case id, name, icon, template, source, card, stages, metrics, wordsPerMinute, launchMode, service, permissions, calendar
-        case showProjects, commonCommands, showCommonCommands
+        case showProjects, commonCommands, showCommonCommands, commands
     }
 
     init(from decoder: Decoder) throws {
@@ -74,6 +77,7 @@ struct Mode: Codable, Identifiable, Equatable, Sendable {
         showProjects = (try? c.decodeIfPresent(Bool.self, forKey: .showProjects)) ?? true
         commonCommands = (try? c.decodeIfPresent(CommonCommandsKind.self, forKey: .commonCommands)) ?? .none
         showCommonCommands = (try? c.decodeIfPresent(Bool.self, forKey: .showCommonCommands)) ?? true
+        commands = (try? c.decodeIfPresent([CommandTemplate].self, forKey: .commands)) ?? []
     }
 
     /// Stages without the empty items a half-typed list may have.
@@ -146,8 +150,16 @@ enum ProjectCard: String, Codable, Sendable {
     case statusMD, projectMD, none
 }
 
-enum PermissionProfile: String, Codable, Sendable {
+enum PermissionProfile: String, Codable, CaseIterable, Sendable {
     case code, filesOnly, filesAndWeb
+
+    var title: String {
+        switch self {
+        case .code: "Код: git, сборки, PR"
+        case .filesOnly: "Только файлы проекта"
+        case .filesAndWeb: "Файлы + поиск в интернете"
+        }
+    }
 }
 
 enum CalendarMode: String, Codable, Sendable {

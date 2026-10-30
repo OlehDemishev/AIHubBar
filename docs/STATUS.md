@@ -1,18 +1,18 @@
 # Status
 
 <!-- summary:start -->
-**Stage:** SPEC.md done; SPEC-modes stages 1–2 done, stage 3 (AI services) connection part done
+**Stage:** SPEC.md done; SPEC-modes stages 1–4 done (modes, menu bar, AI services, folder projects + commands)
 **Updated:** 2026-10-30
 
 **Now:**
-- SPEC-modes §9 stage 4: folder projects in PR (branch `feat/folder-projects`); next in stage 4: command engine (agent / API → result file), «только файлы» background permissions, API spend, «Сравнить»
+- SPEC-modes §9 stage 4 in two PRs: folder projects (branch `feat/folder-projects`) and the command engine on top of it (branch `feat/command-engine`)
 
 **Next:**
-- SPEC-modes §9: 4 folder projects + command engine (incl. running with a chosen AI service, API spend, «Сравнить»), 5 calendar, 6 templates, 7 setup assistant, 8 for everyone, 9 languages (§13: en, es, pt-BR, fr, de, ja, id, ko, it, ar with RTL, pl, uk)
+- SPEC-modes §9: 5 calendar, 6 templates, 7 setup assistant, 8 for everyone, 9 languages (§13: en, es, pt-BR, fr, de, ja, id, ko, it, ar with RTL, pl, uk)
 - Fix whatever Oleh finds in docs/CHECKLIST.md
 
 **Needs Oleh:**
-- merge the folder projects PR; try it: duplicate a mode, set «Источник» → «папки» on a folder with a few subfolders, add stages (e.g. «идея, сценарий, монтаж, готово») and metrics
+- merge both stage 4 PRs (folder projects first); try it: duplicate a mode, set «Источник» → «папки» on a folder with a few subfolders, add stages (e.g. «идея, сценарий, монтаж, готово») and metrics
 - the limits come back after the next `claude` request in Terminal (the Keychain token expired 2026-10-30 02:22)
 - try Settings → «Строка меню» (presets, order, options, preview) and the ticking reset countdown
 - try Settings → Режимы (duplicate the mode → switcher appears in the panel) and a double-click on a .claudepult file
@@ -25,6 +25,12 @@
 - hooks are installed in ~/.claude/settings.json; backup of the original: ~/.claude/settings.json.claudepult-backup-20261029T192827
 - delete or archive the old repo `OlehDemishev/ClaudeBar`; turn on start at login if wanted
 <!-- summary:end -->
+
+## 2026-10-30 — Command engine (branch `feat/command-engine`)
+
+Done: SPEC-modes §3/§11 / stage 4, part 2. Command templates per folder mode (editor in Settings → Режимы) plus «Своя задача»; running with the chosen service — model by API (ClaudePult sends the main file, writes the answer to a new file), Claude Code in the background with the mode's permissions or in Terminal, other agents in Terminal with the task on the clipboard; results never overwrite (`-2`, `-3`). Permission profiles «Только файлы проекта» and «Файлы + поиск в интернете». «Сравнить» with 2–3 services and a side-by-side window. API spend (tokens per request, prices and monthly budget in «Сервисы AI», month line in the limits block, notifications at 80/100 %). CLI `--api-complete`, `--background-settings <profile>`.
+Checked: `xcodebuild test` — 130 tests green (placeholders, names, wrappers, API requests/replies, spend, profiles, old run files); no compiler warnings. Live: real `claude -p` with «только файлы» wrote the result file and was refused shell, web and `~/.zshrc`; with «файлы + поиск» fetched a page into a file, shell refused; `--api-complete` against a local OpenAI-compatible stub returned text and tokens; missing key / dead server give clear errors. CI not set up; checks run locally.
+Left: the panel commands, «Сравнить» window and spend section were not seen by eye; no real API key on this Mac yet. Stacked on `feat/folder-projects`.
 
 ## 2026-10-30 — Folder projects (branch `feat/folder-projects`)
 
