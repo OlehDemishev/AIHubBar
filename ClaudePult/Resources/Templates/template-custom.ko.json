@@ -1,7 +1,7 @@
 {
   "format": "claudepult-template",
   "version": 1,
-  "order": 5,
+  "order": 6,
   "language": "ko",
   "id": "custom",
   "title": "사용자 지정",

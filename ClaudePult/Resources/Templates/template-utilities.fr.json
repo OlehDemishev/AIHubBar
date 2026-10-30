@@ -1,0 +1,47 @@
+{
+  "format": "claudepult-template",
+  "version": 1,
+  "order": 5,
+  "id": "utilities",
+  "title": "Utilitaires Mac",
+  "description": "Sans projets : ressources du Mac, « Rester éveillé », commandes et bascules rapides. Les limites d’IA et les sessions s’activent dans le « Panneau » du profil.",
+  "folderHint": "",
+  "mode": {
+    "name": "Utilitaires Mac",
+    "icon": "wrench.and.screwdriver",
+    "template": "utilities",
+    "permissions": "filesOnly",
+    "calendar": "off",
+    "showProjects": false,
+    "commonCommands": "none",
+    "showCommonCommands": false,
+    "commands": [],
+    "modules": [
+      {
+        "kind": "resources",
+        "shown": true
+      },
+      {
+        "kind": "keepAwake",
+        "shown": true
+      },
+      {
+        "kind": "quickCommands",
+        "shown": true
+      },
+      {
+        "kind": "toggles",
+        "shown": true
+      },
+      {
+        "kind": "limits",
+        "shown": false
+      },
+      {
+        "kind": "sessions",
+        "shown": false
+      }
+    ]
+  },
+  "language": "fr"
+}

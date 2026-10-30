@@ -1,0 +1,47 @@
+{
+  "format": "claudepult-template",
+  "version": 1,
+  "order": 5,
+  "id": "utilities",
+  "title": "Mac 유틸리티",
+  "description": "프로젝트 없음: Mac 리소스, «잠자기 방지», 빠른 명령과 스위치. AI 한도와 세션은 프로필의 «패널»에서 켤 수 있습니다.",
+  "folderHint": "",
+  "mode": {
+    "name": "Mac 유틸리티",
+    "icon": "wrench.and.screwdriver",
+    "template": "utilities",
+    "permissions": "filesOnly",
+    "calendar": "off",
+    "showProjects": false,
+    "commonCommands": "none",
+    "showCommonCommands": false,
+    "commands": [],
+    "modules": [
+      {
+        "kind": "resources",
+        "shown": true
+      },
+      {
+        "kind": "keepAwake",
+        "shown": true
+      },
+      {
+        "kind": "quickCommands",
+        "shown": true
+      },
+      {
+        "kind": "toggles",
+        "shown": true
+      },
+      {
+        "kind": "limits",
+        "shown": false
+      },
+      {
+        "kind": "sessions",
+        "shown": false
+      }
+    ]
+  },
+  "language": "ko"
+}

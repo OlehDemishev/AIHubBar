@@ -103,6 +103,15 @@ final class AppSettings {
         didSet { if let data = try? JSONEncoder().encode(keepAwakeRules) { defaults.set(data, forKey: Keys.keepAwakeRules) } }
     }
 
+    /// «Быстрые команды» and «Быстрые переключатели» (SPEC-profiles §4.3–4.4).
+    var quickCommands: [QuickCommand] {
+        didSet { if let data = try? JSONEncoder().encode(quickCommands) { defaults.set(data, forKey: Keys.quickCommands) } }
+    }
+
+    var quickToggles: [QuickToggle] {
+        didSet { defaults.set(quickToggles.map(\.rawValue), forKey: Keys.quickToggles) }
+    }
+
     var resourceDiskBelowGB: Int {
         didSet { defaults.set(resourceDiskBelowGB, forKey: Keys.resourceDiskBelowGB) }
     }
@@ -179,6 +188,8 @@ final class AppSettings {
         limitAlertsToTelegram = defaults.bool(forKey: Keys.limitAlertsToTelegram)
         renewClaudeLogin = defaults.object(forKey: Keys.renewClaudeLogin) as? Bool ?? true
         resourceAlerts = defaults.object(forKey: Keys.resourceAlerts) as? Bool ?? true
+        quickCommands = defaults.data(forKey: Keys.quickCommands).flatMap { try? JSONDecoder().decode([QuickCommand].self, from: $0) } ?? QuickCommand.examples
+        quickToggles = defaults.stringArray(forKey: Keys.quickToggles)?.compactMap(QuickToggle.init(rawValue:)) ?? QuickToggle.allCases
         keepAwakeRules = defaults.data(forKey: Keys.keepAwakeRules).flatMap { try? JSONDecoder().decode(KeepAwakeRules.self, from: $0) } ?? KeepAwakeRules()
         let diskBelow = defaults.integer(forKey: Keys.resourceDiskBelowGB)
         resourceDiskBelowGB = diskBelow > 0 ? diskBelow : 20
@@ -210,6 +221,8 @@ final class AppSettings {
         static let limitAlertsToTelegram = "limitAlertsToTelegram"
         static let renewClaudeLogin = "renewClaudeLogin"
         static let resourceAlerts = "resourceAlerts"
+        static let quickCommands = "quickCommands"
+        static let quickToggles = "quickToggles"
         static let keepAwakeRules = "keepAwakeRules"
         static let resourceDiskBelowGB = "resourceDiskBelowGB"
         static let panelTextSize = "panelTextSize"

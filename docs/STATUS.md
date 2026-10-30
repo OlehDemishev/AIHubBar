@@ -1,15 +1,15 @@
 # Status
 
 <!-- summary:start -->
-**Stage:** SPEC-modes done except signing/updates; SPEC-profiles stages 1–5 done, stage 6 next
+**Stage:** SPEC-modes done except signing/updates; SPEC-profiles stages 1–5 done, stage 6 (the last) in PR
 **Updated:** 2026-10-30
 
 **Now:**
-- SPEC-profiles stage 5 merged (PR #81): «Не спать»
+- SPEC-profiles stage 6: Быстрые команды, Быстрые переключатели, template «Утилиты Mac» — branch `feat/quick-tools` (worktree `.claude/worktrees/profiles-stage6`), PR open
 - Windows and Linux specs merged (PR #73); implementation waits for Oleh
 
 **Next:**
-- SPEC-profiles stage 6: Быстрые команды и переключатели, then the «Утилиты Mac» template
+- SPEC-profiles second wave (clipboard history, notes, keep awake with the lid closed) — when Oleh decides
 - menu bar elements reordered by dragging (needs a different list than a grouped Form)
 - fix whatever Oleh finds in the translations (machine translation; native review for ja, ko, ar at least)
 - stage 8 rest: Developer ID signing and notarization, Sparkle updates — once Oleh decides on Developer ID, the name and where updates are hosted
@@ -17,6 +17,7 @@
 - Windows and Linux versions (docs/SPEC-windows.md, docs/SPEC-linux.md) — only when Oleh says; stage 0 (fact checks in VMs) first
 
 **Needs Oleh:**
+- try «Быстрые команды» and «Быстрые переключатели» (Settings → «Модули» → «Установить»), or the «Утилиты Mac» template; the toggles change the Mac, so they were not pressed during checks
 - try «Не спать»: Settings → «Модули» → «Установить»; with Claude working the panel says «держу: работает Claude» (check with `pmset -g assertions`)
 - try «Ресурсы Mac»: Settings → «Модули» → «Установить», then the panel block; optionally «Процессор» / «Память» in Settings → «Строка меню»
 - try Settings → «Профили» → «Панель» (hide or move a block) and two profiles with different menu bars (Settings → «Строка меню» edits the current one)
@@ -38,6 +39,12 @@
 - hooks are installed in ~/.claude/settings.json; backup of the original: ~/.claude/settings.json.claudepult-backup-20261029T192827
 - delete or archive the old repo `OlehDemishev/ClaudeBar`; turn on start at login if wanted
 <!-- summary:end -->
+
+## 2026-10-30 — Profiles stage 6: quick commands, toggles, «Утилиты Mac» (branch `feat/quick-tools`)
+
+Done: SPEC-profiles §9.6, the last stage. Optional module «Быстрые команды»: a library of buttons (script in the background through zsh in the home folder with the last output line as a notification and under the buttons, script in Terminal, a Shortcuts shortcut, open a link / file / folder / app; «Спрашивать перед запуском»), two harmless examples, an editor in «Модули». Optional module «Быстрые переключатели»: dark mode and desktop icons with their state, lock screen (the system's own lock, falling back to turning the display off), turn the display off, eject external disks, empty the Trash after a confirmation; which ones show is set in «Модули». New template «Утилиты Mac» in all 13 languages: no projects, Ресурсы / Не спать / Команды / Переключатели, limits and sessions hidden; added from Settings it needs no folder; in the assistant it ticks its modules and skips the project questions. «Свой» moved to the end.
+Checked: `xcodebuild test` — 192 tests green (new: command kinds, notification text, confirmation, library decoding, the template in 13 languages, the assistant and Settings paths; the template list test updated); catalog synced, 38 new strings in all 12 languages. Live: both modules added to Oleh's profile for the check — a real capture of the open panel (screencapture of the panel window) showed the buttons and all six toggles, and a click on «Мой IP в сети» put the result under the buttons (`exit 0`); profile files restored after. CI not set up; checks run locally.
+Left: the toggles were not pressed (they change the Mac); per-profile choice of shown commands (all are shown); the second wave of modules.
 
 ## 2026-10-30 — Profiles stage 5: «Не спать» (branch `feat/keep-awake`)
 

@@ -107,7 +107,7 @@ struct AssistantDraft: Equatable, Sendable {
     var hasProjects: Bool { mode.source != .none }
 
     /// The modules the assistant offers; «Отчёты _daily-report» is Oleh's own and stays in Settings.
-    static let offeredModules: [ModuleKind] = [.limits, .sessions, .projects, .upcoming, .resources, .keepAwake]
+    static let offeredModules: [ModuleKind] = [.limits, .sessions, .projects, .upcoming, .resources, .keepAwake, .quickCommands, .toggles]
 
     func hasModule(_ kind: ModuleKind) -> Bool {
         switch kind {
@@ -116,7 +116,7 @@ struct AssistantDraft: Equatable, Sendable {
         case .projects: hasProjects
         case .upcoming: mode.calendar != .off && mode.source.isFolders
         case .reports: mode.commonCommands == .dailyReport
-        case .resources, .keepAwake: extraModules.contains(kind)
+        case .resources, .keepAwake, .quickCommands, .toggles: extraModules.contains(kind)
         }
     }
 
@@ -148,7 +148,7 @@ struct AssistantDraft: Equatable, Sendable {
             }
         case .reports:
             mode.commonCommands = on ? .dailyReport : .none
-        case .resources, .keepAwake:
+        case .resources, .keepAwake, .quickCommands, .toggles:
             extraModules.removeAll { $0 == kind }
             if on { extraModules.append(kind) }
         }
@@ -176,8 +176,17 @@ struct AssistantDraft: Equatable, Sendable {
         mode.id = UUID().uuidString.lowercased()
         savedSource = nil
         savedCalendar = nil
-        // A developer's Mac shouldn't fall asleep in the middle of Claude's work (SPEC-profiles §4.2).
-        extraModules = template?.id == "developer" ? [.keepAwake] : []
+        // A template's own optional modules come ticked, its hidden built-in blocks unticked; a developer's Mac
+        // shouldn't fall asleep in the middle of Claude's work (SPEC-profiles §4.2).
+        let templateModules = template?.mode.modules ?? []
+        extraModules = templateModules.map(\.kind).filter { !$0.isBuiltIn }
+        if template?.id == "developer", !extraModules.contains(.keepAwake) { extraModules.append(.keepAwake) }
+        hiddenBlocks = []
+        for module in templateModules where !module.shown {
+            if module.kind == .limits { hiddenBlocks.insert(.limits) }
+            if module.kind == .sessions { hiddenBlocks.insert(.sessions) }
+        }
+        mode.modules = nil
         if let folder, analysis != nil { setFolder(folder, analysis: analysis) }
         if template?.id == "developer" { menuBar = .make(.limits) }
     }

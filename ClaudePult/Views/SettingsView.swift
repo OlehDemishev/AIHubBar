@@ -296,6 +296,8 @@ private struct ModulesSettings: View {
                 case .upcoming: ReminderSection()
                 case .resources where modes.installedModules.contains(.resources): ResourceSection()
                 case .keepAwake where modes.installedModules.contains(.keepAwake): KeepAwakeSection()
+                case .quickCommands where modes.installedModules.contains(.quickCommands): QuickCommandsSection()
+                case .toggles where modes.installedModules.contains(.toggles): QuickTogglesSection()
                 default: EmptyView()
                 }
             }
@@ -369,6 +371,86 @@ private struct KeepAwakeSection: View {
             return KeepAwakeRules.App(bundleID: id, name: FileManager.default.displayName(atPath: url.path).replacingOccurrences(of: ".app", with: ""))
         }
         settings.keepAwakeRules.whileApps = Array(Set(settings.keepAwakeRules.whileApps + picked)).sorted { $0.name < $1.name }
+    }
+}
+
+/// The «Быстрые команды» library: what each button runs (SPEC-profiles §4.3).
+private struct QuickCommandsSection: View {
+    @Environment(AppSettings.self) private var settings
+
+    private static let symbols = ["bolt", "terminal", "folder", "link", "doc", "arrow.down.circle", "network", "hammer", "play", "wand.and.stars", "camera", "music.note"]
+
+    var body: some View {
+        @Bindable var settings = settings
+        Section {
+            ForEach($settings.quickCommands) { $command in
+                VStack(alignment: .leading, spacing: 6) {
+                    HStack {
+                        Picker("", selection: $command.symbol) {
+                            ForEach(Self.symbols, id: \.self) { Image(systemName: $0).tag($0) }
+                        }
+                        .labelsHidden()
+                        .frame(width: 60)
+                        TextField("Название", text: $command.title)
+                        Button { move(command.id, by: -1) } label: { Image(systemName: "chevron.up") }
+                            .disabled(settings.quickCommands.first?.id == command.id)
+                        Button { move(command.id, by: 1) } label: { Image(systemName: "chevron.down") }
+                            .disabled(settings.quickCommands.last?.id == command.id)
+                        Button(role: .destructive) { settings.quickCommands.removeAll { $0.id == command.id } } label: { Image(systemName: "trash") }
+                    }
+                    .buttonStyle(.borderless)
+                    Picker("Что делает", selection: $command.kind) {
+                        ForEach(QuickCommand.Kind.allCases, id: \.self) { Text($0.title).tag($0) }
+                    }
+                    TextField(placeholder(command.kind), text: $command.value)
+                        .font(.callout.monospaced())
+                    Toggle("Спрашивать перед запуском", isOn: $command.confirm)
+                }
+                .padding(.vertical, 4)
+            }
+            Button("Добавить команду") {
+                settings.quickCommands.append(QuickCommand(title: String(localized: "Новая команда"), kind: .script, value: ""))
+            }
+        } header: {
+            Text("Команды")
+        } footer: {
+            Footnote(text: String(localized: "Скрипт в фоне запускается через zsh в домашней папке, итог приходит уведомлением; «в Терминале» — открывает новое окно. Ярлык — имя из приложения «Команды». Открыть — ссылка (https://…) или путь (~/…)."))
+        }
+    }
+
+    private func placeholder(_ kind: QuickCommand.Kind) -> String {
+        switch kind {
+        case .script, .terminal: String(localized: "команда, например: brew upgrade")
+        case .shortcut: String(localized: "имя ярлыка")
+        case .open: String(localized: "https://… или ~/папка")
+        }
+    }
+
+    private func move(_ id: String, by offset: Int) {
+        guard let index = settings.quickCommands.firstIndex(where: { $0.id == id }) else { return }
+        let target = min(max(index + offset, 0), settings.quickCommands.count - 1)
+        settings.quickCommands.swapAt(index, target)
+    }
+}
+
+private struct QuickTogglesSection: View {
+    @Environment(AppSettings.self) private var settings
+
+    var body: some View {
+        Section {
+            ForEach(QuickToggle.allCases, id: \.self) { toggle in
+                Toggle(isOn: Binding(
+                    get: { settings.quickToggles.contains(toggle) },
+                    set: { on in settings.quickToggles = QuickToggle.allCases.filter { $0 == toggle ? on : settings.quickToggles.contains($0) } }
+                )) {
+                    Label(toggle.title, systemImage: toggle.symbol)
+                }
+            }
+        } header: {
+            Text("Какие переключатели показывать")
+        } footer: {
+            Footnote(text: String(localized: "Тёмная тема и корзина в первый раз попросят разрешение «Автоматизация» (System Events, Finder). Корзина очищается только после подтверждения."))
+        }
     }
 }
 

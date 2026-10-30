@@ -102,6 +102,11 @@ struct ModesSettings: View {
 
     /// Asks for the folder the template's projects are in (it may be created in the panel), then adds the mode.
     private func add(_ template: ModeTemplate) {
+        // A profile without projects («Утилиты Mac») needs no folder.
+        if template.mode.source == .none {
+            selection = modes.add(template, folder: "").id
+            return
+        }
         let panel = NSOpenPanel()
         panel.canChooseDirectories = true
         panel.canChooseFiles = false
