@@ -90,7 +90,7 @@ enum PanelTheme: String, CaseIterable, Sendable {
 
 /// Blocks of the panel that can be hidden.
 enum PanelBlock: String, CaseIterable, Identifiable, Sendable {
-    case limits, sessions, projects, commands
+    case limits, sessions, calendar, projects, commands
 
     var id: String { rawValue }
 
@@ -98,6 +98,7 @@ enum PanelBlock: String, CaseIterable, Identifiable, Sendable {
         switch self {
         case .limits: "Лимиты"
         case .sessions: "Сессии"
+        case .calendar: "Ближайшее (календарь)"
         case .projects: "Проекты"
         case .commands: "Команды"
         }

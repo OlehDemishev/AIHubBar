@@ -152,3 +152,15 @@ Panel snapshots: `defaults write com.demishev.claudepult DebugPanelSnapshot -boo
 | Spend: tokens per period, cost only for priced providers | Auto |
 | Commands in the panel, «Сравнить» window, spend section and budget notification | **Oleh: with a folder mode and a key** |
 | Claude background command → notification opens the result file | **Oleh** |
+
+## Calendar (SPEC-modes §9.5)
+
+| Scenario | Checked |
+|---|---|
+| Dates from `проект.md` (deadline, publication with/without time) and `контент-план.md` rows (mode folder and project folders) | Auto + Live (`--calendar` on a sample folder) |
+| Content plan read by its header (Russian/English), `\|` in cells, other columns and text kept | Auto |
+| Moving a date writes it back (card line, plan cell; time kept); new plan row / project date | Auto (store on a temp tree) |
+| Reminders: once per offset, the closest offset only, never for past dates | Auto |
+| Overdue: date-only deadlines the next day, timed ones after the time | Auto + Live |
+| Menu bar «Ближайшая дата календаря» | Auto (text) |
+| Panel «Ближайшее», window «Календарь» (month/week, drag, double-click), reminder notifications | **Oleh: with a folder mode that has a calendar** |

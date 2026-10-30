@@ -1,17 +1,18 @@
 # Status
 
 <!-- summary:start -->
-**Stage:** SPEC.md done; SPEC-modes stages 1–4 done (modes, menu bar, AI services, folder projects + commands)
+**Stage:** SPEC.md done; SPEC-modes stages 1–5 done (modes, menu bar, AI services, folder projects + commands, calendar)
 **Updated:** 2026-10-30
 
 **Now:**
-- SPEC-modes §9 stage 4 merged (PRs #36, #37); next: stage 5 (calendar)
+- SPEC-modes §9 stage 5 (calendar) in PR (branch `feat/calendar`); next: stage 6 (templates) — needs Oleh's review of docs/TEMPLATES.md
 
 **Next:**
 - SPEC-modes §9: 5 calendar, 6 templates, 7 setup assistant, 8 for everyone, 9 languages (§13: en, es, pt-BR, fr, de, ja, id, ko, it, ar with RTL, pl, uk)
 - Fix whatever Oleh finds in docs/CHECKLIST.md
 
 **Needs Oleh:**
+- merge the calendar PR; try it in a folder mode: «Календарь» → «+ контент-план», a `Дедлайн:` in a `проект.md`, then the panel «Ближайшее» and the «Календарь» window
 - try folder projects: duplicate a mode, set «Источник» → «папки» on a folder with a few subfolders, add stages (e.g. «идея, сценарий, монтаж, готово») and metrics
 - try Settings → «Строка меню» (presets, order, options, preview) and the ticking reset countdown
 - try Settings → Режимы (duplicate the mode → switcher appears in the panel) and a double-click on a .claudepult file
@@ -24,6 +25,12 @@
 - hooks are installed in ~/.claude/settings.json; backup of the original: ~/.claude/settings.json.claudepult-backup-20261029T192827
 - delete or archive the old repo `OlehDemishev/ClaudeBar`; turn on start at login if wanted
 <!-- summary:end -->
+
+## 2026-10-30 — Calendar (branch `feat/calendar`)
+
+Done: SPEC-modes §6 / stage 5. Dates from `проект.md` (deadline, publication) and `контент-план.md` (mode folder and project folders) of all enabled folder modes with a calendar; panel block «Ближайшее» (7 days, overdue in red, click opens); window «Календарь» (month/week, all modes or current, colour per mode, drag to move — written back to the file, double-click to add a plan row or a project date); reminders (offsets in Settings → Основные, once each, optional Telegram); menu bar element «Ближайшая дата календаря» enabled; calendar picker per mode. CLI `--calendar [folder]`.
+Checked: `xcodebuild test` — 137 tests green (plan parsing/writing/appending, scanner on a temp tree, store moves and new rows, reminder selection, texts); no compiler warnings. Live: installed; `--calendar` on a sample folder lists an overdue deadline, a timed publication and plan rows with platforms and statuses; Oleh's report mode has no calendar and is unchanged. CI not set up; checks run locally.
+Left: the panel block, the calendar window (drag, double-click) and reminder notifications were not seen by eye; `.ics` / EventKit later.
 
 ## 2026-10-30 — Command engine (branch `feat/command-engine`)
 

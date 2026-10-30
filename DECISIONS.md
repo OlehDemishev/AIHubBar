@@ -2,6 +2,18 @@
 
 Decisions made where the spec is silent or does not match reality. Newest at the top.
 
+## 2026-10-30 — Calendar (SPEC-modes §9.5)
+
+**No calendar of ClaudePult's own.** Every date lives in the person's files: `Дедлайн:` / `Публикация:` in `проект.md`, rows of `контент-план.md`. The calendar is read from them (all enabled modes with a calendar, on panel open if older than 60 s and every 5 min) and moving a date writes the file back — only that line or that cell changes.
+
+**`контент-план.md`.** The first Markdown table with a «Дата»/«Date» column and a separator line is the plan; columns are matched by header (Дата, Время, Площадка, Тема, Статус, Файл, or English), others are kept. A new row gets the same number of cells as the header; a file without a table gets the standard one. Plans are read from the mode folder and from every project folder (a campaign's own plan). A row whose «Файл» exists opens that file.
+
+**Overdue.** A date-only deadline is overdue from the next day, a timed one after its time. «Ближайшее» shows 7 days ahead plus overdue deadlines (until moved) and yesterday's publications and plan rows.
+
+**Reminders** at the chosen offsets (default: a day before); for each entry only the closest offset that has come is announced, each once (keys in `calendar-reminded.json`), never after the date. Telegram is optional and off by default.
+
+**Week starts** follow the system calendar (Monday in Russian). Colours go by mode. `.ics` export and the system Calendar (EventKit) stay for later (SPEC-modes §9.10).
+
 ## 2026-10-30 — Command engine (SPEC-modes §9.4, part 2)
 
 **Where a command runs.** Models by API: ClaudePult sends the main file's text with the API wrapper from docs/TEMPLATES.md and writes the answer itself. Claude Code: background `claude -p` with the mode's permission profile, or Terminal when the mode's «Где запускать» is Terminal («спрашивать» runs in the background for folder modes — with «только файлы» nothing outside the folder can change). Other agents: Terminal only, task on the clipboard («вставьте ⌘V») — the same honest limit as stage 3 until their permission modes are checked live.

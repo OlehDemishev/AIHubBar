@@ -152,6 +152,11 @@ private struct ModeEditor: View {
                             }
                         ))
                     }
+                    Picker("Календарь", selection: $mode.calendar) {
+                        Text("Выключен").tag(CalendarMode.off)
+                        Text("Дедлайны и публикации").tag(CalendarMode.dates)
+                        Text("+ контент-план").tag(CalendarMode.contentPlan)
+                    }
                     if mode.metrics.contains(FolderMetric.duration.rawValue) {
                         Stepper("Темп речи: \(mode.wordsPerMinute) слов/мин", value: $mode.wordsPerMinute, in: 80...250, step: 10)
                     }
@@ -208,15 +213,12 @@ private struct ModeEditor: View {
                     .disabled(mode.commonCommands == .none)
             }
 
-            Section {
-                ForEach(["Карточка и этапы проекта", "Метрики в строке проекта", "Команды-шаблоны",
-                         "Права в фоне", "Календарь", "Добавки к строке меню"], id: \.self) { title in
-                    LabeledContent(title) { Text("скоро").foregroundStyle(.tertiary) }
+            if !mode.source.isFolders {
+                Section {
+                    Text("Карточка проект.md, этапы, метрики, команды, права в фоне и календарь — у режимов с источником «папки».")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
                 }
-            } header: {
-                Text("Ещё кубики")
-            } footer: {
-                Text("Появятся в следующих этапах (docs/SPEC-modes.md §9).").font(.caption).foregroundStyle(.secondary)
             }
         }
         .formStyle(.grouped)

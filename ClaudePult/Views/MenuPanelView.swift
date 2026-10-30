@@ -14,6 +14,7 @@ struct MenuPanelView: View {
     @Environment(NotificationPermission.self) private var notifications
     @Environment(ModeStore.self) private var modes
     @Environment(FolderProjectStore.self) private var folders
+    @Environment(CalendarStore.self) private var calendar
 
     /// Drives the entrance animation; reset when the panel closes so it replays on every open.
     @State private var isShown = false
@@ -69,6 +70,12 @@ struct MenuPanelView: View {
                 }
             }
 
+            if settings.shows(.calendar), calendar.isActive {
+                UpcomingView()
+                    .revealed(isShown, step: 1, reduceMotion: calm)
+                Divider()
+            }
+
             if settings.shows(.projects) {
                 content
                     .revealed(isShown, step: 1, reduceMotion: calm)
@@ -109,6 +116,7 @@ struct MenuPanelView: View {
             isShown = true
             store.refreshIfStale()
             folders.refreshIfStale()
+            calendar.refreshIfStale()
             sessions.reload()
             hooks.refresh()
             notifications.refresh()
