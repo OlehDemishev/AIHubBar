@@ -5,7 +5,7 @@
 **Updated:** 2026-10-30
 
 **Now:**
-- automatic renewal of the Claude Code sign-in — branch `feat/renew-login`, PR open; collapsible panel blocks merged (PR #64)
+- collapsible panel blocks (PR #64) and automatic Claude Code sign-in renewal (PR #65) merged; nothing in progress
 
 **Next:**
 - menu bar elements reordered by dragging (needs a different list than a grouped Form)
