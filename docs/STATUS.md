@@ -5,7 +5,7 @@
 **Updated:** 2026-10-30
 
 **Now:**
-- collapsible panel blocks (PR #64) and automatic Claude Code sign-in renewal (PR #65) merged; nothing in progress
+- «Показать» for Claude desktop-app sessions opens that session in Claude (branch `fix/show-desktop-session`, PR open)
 
 **Next:**
 - menu bar elements reordered by dragging (needs a different list than a grouped Form)
@@ -14,6 +14,7 @@
 - Fix whatever Oleh finds in docs/CHECKLIST.md
 
 **Needs Oleh:**
+- merge the «Показать» fix PR, then press «Показать» on a desktop-app session in the panel (and on a waiting-session notification): Claude should switch to that session
 - after ~20:11 today: check that the limits keep updating by themselves (the sign-in renewal runs when the token expires)
 - read docs/GUIDE.md as a newcomer would
 - review the languages: Settings → Основные → «Язык интерфейса» → a language → «Перезапустить» (and back); Arabic should mirror right-to-left
@@ -31,6 +32,12 @@
 - hooks are installed in ~/.claude/settings.json; backup of the original: ~/.claude/settings.json.claudepult-backup-20261029T192827
 - delete or archive the old repo `OlehDemishev/ClaudeBar`; turn on start at login if wanted
 <!-- summary:end -->
+
+## 2026-10-30 — «Показать» opens the desktop-app session itself (branch `fix/show-desktop-session`)
+
+Done: for sessions of the Claude desktop app «Показать» (panel and notification) used to only activate Claude, which looked like nothing happened when Claude was already in front. Now ClaudePult finds the app's own record (`~/Library/Application Support/Claude/claude-code-sessions/*/*/local_*.json`, `cliSessionId` or `previousCliSessionIds` = the hook's `session_id`, not archived) and opens `claude://code/continue?session=local_…`, the link the app itself offers; without a record it still just opens Claude. `--show-session <id>` handles desktop-app sessions too. Help text updated in all 12 languages; README, DECISIONS, CHECKLIST updated.
+Checked: `xcodebuild test` — 164 tests green (new `desktopSessionLink`); installed; live: `--show-session` switched the Claude window to another ClaudePult session and back (the app's `lastFocusedAt` moved to the opened session each time). The button inside the panel is not clickable by automation. CI not set up; checks run locally.
+Left: Terminal.app is the only terminal whose tab is found; iTerm, Warp and IDE terminals still open the folder.
 
 ## 2026-10-30 — Renew the Claude Code sign-in automatically (branch `feat/renew-login`)
 
