@@ -5,7 +5,7 @@
 **Updated:** 2026-10-30
 
 **Now:**
-- SPEC-modes §9 stage 6 (templates + built-in git scanner) in PR (branch `feat/templates`); next: stage 7 (setup assistant)
+- SPEC-modes §9 stage 6 (templates + built-in git scanner) merged (PR #41); next: stage 7 (setup assistant)
 
 **Next:**
 - SPEC-modes §9: 5 calendar, 6 templates, 7 setup assistant, 8 for everyone, 9 languages (§13: en, es, pt-BR, fr, de, ja, id, ko, it, ar with RTL, pl, uk)
@@ -16,7 +16,7 @@
 - try folder projects: duplicate a mode, set «Источник» → «папки» on a folder with a few subfolders, add stages (e.g. «идея, сценарий, монтаж, готово») and metrics
 - try Settings → «Строка меню» (presets, order, options, preview) and the ticking reset countdown
 - try Settings → Режимы (duplicate the mode → switcher appears in the panel) and a double-click on a .claudepult file
-- merge the templates PR; try Settings → Режимы → «+» → a template; template texts can still be reviewed in docs/TEMPLATES.md
+- try Settings → Режимы → «+» → a template; template texts can still be reviewed in docs/TEMPLATES.md
 - for live checks of AI services: install Codex CLI (`brew install --cask codex`) and Gemini CLI (`brew install gemini-cli`) or Antigravity CLI, put API keys in Settings → «Сервисы AI» and press «Проверить» (optional: Ollama for a free local model)
 - before stage 8: Apple Developer Program (Developer ID, notarization) for distributing ClaudePult; decide on the name (SPEC-modes §10.4)
 - try the «Внешний вид» settings tab (theme, width, density not checked by eye)
