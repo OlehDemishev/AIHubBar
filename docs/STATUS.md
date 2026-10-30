@@ -5,7 +5,7 @@
 **Updated:** 2026-10-30
 
 **Now:**
-- all 13 interface languages done (branch `feat/all-languages`); waiting for Oleh's language review
+- all 13 interface languages merged (PR #53); waiting for Oleh's language review
 
 **Next:**
 - fix whatever Oleh finds in the translations (machine translation; native review for ja, ko, ar at least)
