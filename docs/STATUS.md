@@ -5,14 +5,13 @@
 **Updated:** 2026-10-30
 
 **Now:**
-- PR `fix/usage-backoff` (pause after HTTP 429 from the usage endpoint, cached limits across restarts) — waiting for review
+- SPEC-modes §9 stage 2 (menu bar builder) — starting
 
 **Next:**
 - SPEC-modes §9: 2 menu bar builder, 3 AI services, 4 folder projects + commands, 5 calendar, 6 templates, 7 setup assistant, 8 for everyone, 9 languages (§13: en, es, pt-BR, fr, de, ja, id, ko, it, ar with RTL, pl, uk)
 - Fix whatever Oleh finds in docs/CHECKLIST.md
 
 **Needs Oleh:**
-- review and merge PR `fix/usage-backoff`
 - try Settings → Режимы (duplicate the mode → switcher appears in the panel) and a double-click on a .claudepult file
 - read and edit docs/TEMPLATES.md (template texts) before stage 6
 - before stage 3: install Codex CLI and Gemini CLI and create API keys (OpenAI, Google, xAI, DeepSeek, Mistral) for live checks — Oleh offered to
