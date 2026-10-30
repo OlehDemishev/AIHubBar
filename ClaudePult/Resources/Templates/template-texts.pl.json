@@ -1,0 +1,84 @@
+{
+  "format": "claudepult-template",
+  "version": 1,
+  "order": 2,
+  "language": "pl",
+  "id": "texts",
+  "title": "Teksty (artykuły, blog, newsletter)",
+  "description": "Jeden folder na tekst; etapy od pomysłu do publikacji; słowa i czas czytania; redakcja, korekta, inny ton, skracanie, SEO, podział na posty.",
+  "folderHint": "Folder, w którym każdy podfolder to artykuł lub wydanie",
+  "mode": {
+    "name": "Teksty",
+    "icon": "doc.text",
+    "template": "texts",
+    "source": {
+      "folders": {
+        "_0": "~/Documents/Teksty"
+      }
+    },
+    "card": "projectMD",
+    "stages": [
+      "pomysł",
+      "szkic",
+      "redakcja",
+      "opublikowane"
+    ],
+    "metrics": [
+      "words",
+      "readingTime",
+      "publishDate"
+    ],
+    "permissions": "filesOnly",
+    "calendar": "dates",
+    "launchMode": "background",
+    "showProjects": true,
+    "commonCommands": "none",
+    "showCommonCommands": false,
+    "commands": [
+      {
+        "id": "texts-edit",
+        "title": "Redakcja",
+        "output": "redakcja.md",
+        "task": "Zredaguj tekst: usuń watę, urzędowy styl, powtórzenia i frazesy, uprość długie zdania, zachowaj sens, fakty i głos autora. Najpierw cały poprawiony tekst. Potem lista 5–10 najważniejszych zmian w formacie «było → jest → dlaczego».",
+        "input": "mainFile"
+      },
+      {
+        "id": "texts-proof",
+        "title": "Korekta",
+        "output": "korekta.md",
+        "task": "Znajdź błędy ortograficzne, interpunkcyjne i gramatyczne, literówki i błędne związki. Nie zmieniaj stylu ani sformułowań. Podaj poprawiony tekst, a po nim listę poprawek.",
+        "input": "mainFile"
+      },
+      {
+        "id": "texts-tone",
+        "title": "Inny ton",
+        "output": "ton-{text}.md",
+        "task": "Przepisz tekst w tonie: {text} (na przykład: przyjaźniej, surowiej, z humorem, dla ekspertów, dla początkujących). Sens, fakty i struktura — te same.",
+        "input": "mainFile",
+        "asks": "Ton"
+      },
+      {
+        "id": "texts-length",
+        "title": "Skróć / rozbuduj",
+        "output": "wersja-{text}.md",
+        "task": "Zrób wersję tekstu liczącą około {text} słów. Przy skracaniu zostaw sedno i najmocniejsze przykłady. Przy rozbudowie dodaj wyjaśnienia i przykłady na temat — bez waty i bez nowych faktów bez dopisku «sprawdzić».",
+        "input": "mainFile",
+        "asks": "Ile słów"
+      },
+      {
+        "id": "texts-seo",
+        "title": "SEO",
+        "output": "seo.md",
+        "task": "Zaproponuj: tytuł do wyszukiwarki (do 60 znaków), meta description (do 155 znaków), 5–8 fraz kluczowych, na które tekst naprawdę odpowiada, i 3 pomysły na brakujące śródtytuły H2. Nie zmieniaj samego tekstu.",
+        "input": "mainFile"
+      },
+      {
+        "id": "texts-posts",
+        "title": "Podział na posty",
+        "output": "posty.md",
+        "task": "Zrób z tekstu serię postów na {platform}: 3–5 postów, każdy samodzielny, z własną myślą z tekstu, przyciągającą pierwszą linijką i wezwaniem na końcu. Uwzględnij format platformy (długość, hashtagi, emoji — z umiarem). Ponumeruj je i podaj kolejność publikacji.",
+        "input": "mainFile"
+      }
+    ]
+  }
+}

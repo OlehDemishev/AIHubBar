@@ -1,0 +1,87 @@
+{
+  "format": "claudepult-template",
+  "version": 1,
+  "order": 1,
+  "language": "pl",
+  "id": "video",
+  "title": "Wideo (YouTube, Shorts, Reels)",
+  "description": "Jeden folder na film; etapy od pomysłu do publikacji; słowa i czas trwania; hooki, Shorts, opis i znaczniki czasu, tytuły, sprawdzanie faktów, tłumaczenie; terminy w kalendarzu.",
+  "folderHint": "Folder, w którym każdy podfolder to film",
+  "mode": {
+    "name": "Wideo",
+    "icon": "video",
+    "template": "video",
+    "source": {
+      "folders": {
+        "_0": "~/Documents/Wideo"
+      }
+    },
+    "card": "projectMD",
+    "stages": [
+      "pomysł",
+      "research",
+      "scenariusz",
+      "nagranie",
+      "montaż",
+      "opublikowane"
+    ],
+    "metrics": [
+      "words",
+      "duration",
+      "deadline",
+      "publishDate"
+    ],
+    "permissions": "filesOnly",
+    "calendar": "dates",
+    "launchMode": "background",
+    "showProjects": true,
+    "commonCommands": "none",
+    "showCommonCommands": false,
+    "commands": [
+      {
+        "id": "video-hooks",
+        "title": "Hooki",
+        "output": "hooki.md",
+        "task": "Zaproponuj 5 początków filmu — pierwsze 5–10 sekund, które zatrzymają widza. Film: {format}, na podstawie tego scenariusza. Użyj różnych chwytów: zaskakujący fakt, pytanie do widza, obietnica wyniku, mini-historia, polemika z popularnym przekonaniem. Dla każdego: sam tekst (tak, jak się go mówi) i jedna linijka, na co gra. Na koniec jednym zdaniem: który byś wybrał i dlaczego.",
+        "input": "mainFile"
+      },
+      {
+        "id": "video-shorts",
+        "title": "Wersja Shorts",
+        "output": "scenariusz-shorts.md",
+        "task": "Zrób ze scenariusza pionowy film do 60 sekund — około 140–150 słów. Zachowaj główną myśl i najmocniejszy moment, wytnij wstępy i powtórzenia. Pierwsze zdanie ma od razu przyciągać, ostatnie — zachęcać do obejrzenia całego filmu albo subskrypcji. Pisz, jak się mówi: krótkie zdania, bez urzędowego stylu. Na końcu podaj liczbę słów.",
+        "input": "mainFile"
+      },
+      {
+        "id": "video-description",
+        "title": "Opis i znaczniki czasu",
+        "output": "opis.md",
+        "task": "Przygotuj wszystko do publikacji na YouTube: 1) opis z 2–3 akapitów, pierwsze dwie linijki są najważniejsze (widać je przed «więcej»), bez clickbaitu; 2) znaczniki czasu dla części scenariusza w formacie 00:00 — Tytuł (szacuj czas przy 150 słowach na minutę, pierwszy to 00:00); 3) 10–15 tagów oddzielonych przecinkami; 4) 3 hashtagi. W języku scenariusza.",
+        "input": "mainFile"
+      },
+      {
+        "id": "video-titles",
+        "title": "Tytuły i miniatury",
+        "output": "tytuly.md",
+        "task": "Zaproponuj 10 tytułów filmu — do 60 znaków, uczciwych (obiecują to, co jest w filmie), z różnym podejściem: korzyść, ciekawość, konkretny wynik, liczba, pytanie. Zaznacz 3 najlepsze. Potem 3 pomysły na miniaturę: co jest w kadrze, duży napis (do 4 słów), emocja.",
+        "input": "mainFile"
+      },
+      {
+        "id": "video-facts",
+        "title": "Sprawdzenie faktów",
+        "output": "fakty.md",
+        "task": "Znajdź w scenariuszu wszystkie sprawdzalne twierdzenia: liczby, daty, nazwiska, cytaty, twierdzenia przyczynowo-skutkowe. Dla każdego: twierdzenie, na ile jest wątpliwe (pewne / sprawdzić / wątpliwe) i dlaczego, co dokładnie i gdzie sprawdzić. Niczego nie poprawiaj w scenariuszu i nie wymyślaj źródeł — jeśli nie masz pewności, napisz to.",
+        "input": "mainFile",
+        "service": "claude-code"
+      },
+      {
+        "id": "video-translate",
+        "title": "Tłumaczenie",
+        "output": "scenariusz-{language}.md",
+        "task": "Przetłumacz scenariusz na {language} do nagrania lektorskiego: zachowaj ton, żarty i rytm mowy, dopasuj idiomy i przykłady do tej widowni, nie tłumacz słowo w słowo. Nazwy własne i terminy mają zostać rozpoznawalne. Na końcu lista miejsc, w których trzeba było wyraźnie odejść od oryginału.",
+        "input": "mainFile",
+        "asks": "Język"
+      }
+    ]
+  }
+}

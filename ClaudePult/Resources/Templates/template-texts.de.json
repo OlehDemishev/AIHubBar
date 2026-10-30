@@ -1,0 +1,84 @@
+{
+  "format": "claudepult-template",
+  "version": 1,
+  "order": 2,
+  "language": "de",
+  "id": "texts",
+  "title": "Texte (Artikel, Blog, Newsletter)",
+  "description": "Ein Ordner pro Text; Phasen von der Idee bis zur Veröffentlichung; Wörter und Lesezeit; Lektorat, Korrektorat, anderer Ton, Kürzen, SEO, Aufteilen in Posts.",
+  "folderHint": "Ein Ordner, in dem jeder Unterordner ein Artikel oder eine Ausgabe ist",
+  "mode": {
+    "name": "Texte",
+    "icon": "doc.text",
+    "template": "texts",
+    "source": {
+      "folders": {
+        "_0": "~/Documents/Texte"
+      }
+    },
+    "card": "projectMD",
+    "stages": [
+      "Idee",
+      "Entwurf",
+      "Lektorat",
+      "veröffentlicht"
+    ],
+    "metrics": [
+      "words",
+      "readingTime",
+      "publishDate"
+    ],
+    "permissions": "filesOnly",
+    "calendar": "dates",
+    "launchMode": "background",
+    "showProjects": true,
+    "commonCommands": "none",
+    "showCommonCommands": false,
+    "commands": [
+      {
+        "id": "texts-edit",
+        "title": "Lektorat",
+        "output": "lektorat.md",
+        "task": "Lektoriere den Text: streiche Füllwörter, Amtsdeutsch, Wiederholungen und Floskeln, vereinfache lange Sätze, erhalte Sinn, Fakten und die Stimme des Autors. Zuerst der ganze überarbeitete Text. Dann eine Liste der 5–10 wichtigsten Änderungen als «vorher → nachher → warum».",
+        "input": "mainFile"
+      },
+      {
+        "id": "texts-proof",
+        "title": "Korrektorat",
+        "output": "korrektorat.md",
+        "task": "Finde Rechtschreib-, Zeichensetzungs- und Grammatikfehler, Tippfehler und falsche Bezüge. Ändere weder Stil noch Formulierungen. Gib den korrigierten Text und danach die Liste der Korrekturen.",
+        "input": "mainFile"
+      },
+      {
+        "id": "texts-tone",
+        "title": "Anderer Ton",
+        "output": "ton-{text}.md",
+        "task": "Schreib den Text in diesem Ton neu: {text} (zum Beispiel: freundlicher, strenger, mit Humor, für Fachleute, für Einsteiger). Gleicher Sinn, gleiche Fakten, gleicher Aufbau.",
+        "input": "mainFile",
+        "asks": "Ton"
+      },
+      {
+        "id": "texts-length",
+        "title": "Kürzen / erweitern",
+        "output": "version-{text}.md",
+        "task": "Mach eine Fassung des Textes mit etwa {text} Wörtern. Beim Kürzen bleiben das Wesentliche und die stärksten Beispiele. Beim Erweitern kommen Erklärungen und Beispiele zum Thema dazu — kein Füllstoff und keine neuen Fakten ohne den Vermerk «prüfen».",
+        "input": "mainFile",
+        "asks": "Wie viele Wörter"
+      },
+      {
+        "id": "texts-seo",
+        "title": "SEO",
+        "output": "seo.md",
+        "task": "Schlage vor: einen Suchtitel (höchstens 60 Zeichen), eine Meta-Description (höchstens 155 Zeichen), 5–8 Suchbegriffe, auf die der Text wirklich antwortet, und 3 Ideen für fehlende H2-Zwischenüberschriften. Ändere den Text selbst nicht.",
+        "input": "mainFile"
+      },
+      {
+        "id": "texts-posts",
+        "title": "In Posts aufteilen",
+        "output": "posts.md",
+        "task": "Mach aus dem Text eine Serie von Posts für {platform}: 3–5 Posts, jeder für sich verständlich, mit einem eigenen Gedanken aus dem Text, einer packenden ersten Zeile und einem Aufruf am Ende. Beachte das Format der Plattform (Länge, Hashtags, Emojis — sparsam). Nummeriere sie und gib die Reihenfolge der Veröffentlichung an.",
+        "input": "mainFile"
+      }
+    ]
+  }
+}

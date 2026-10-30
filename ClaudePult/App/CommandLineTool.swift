@@ -117,7 +117,11 @@ enum CommandLineTool {
             var draft = AssistantDraft(firstLaunch: false, menuBar: .make(.limits), hiddenBlocks: [], reminderHours: [24])
             let id = arguments.dropFirst(index + 2).first
             draft.choose(ModeTemplate.loadAll().first { $0.id == id })
-            let renderer = ImageRenderer(content: AssistantPreview(draft: draft).frame(width: 430, height: 560).background(Color(white: 0.95)))
+            // Windows take the direction from NSApp; the offscreen renderer has to be told (Arabic is right-to-left).
+            let direction: LayoutDirection = Locale.Language(identifier: ContentLanguage.current.rawValue).characterDirection == .rightToLeft
+                ? .rightToLeft : .leftToRight
+            let renderer = ImageRenderer(content: AssistantPreview(draft: draft).frame(width: 430, height: 560).background(Color(white: 0.95))
+                .environment(\.layoutDirection, direction))
             renderer.scale = 2
             guard let image = renderer.nsImage, let tiff = image.tiffRepresentation,
                   let png = NSBitmapImageRep(data: tiff)?.representation(using: .png, properties: [:]) else { return 1 }

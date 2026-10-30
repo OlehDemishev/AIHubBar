@@ -1,0 +1,87 @@
+{
+  "format": "claudepult-template",
+  "version": 1,
+  "order": 1,
+  "language": "id",
+  "id": "video",
+  "title": "Video (YouTube, Shorts, Reels)",
+  "description": "Satu folder per video; tahap dari ide sampai terbit; jumlah kata dan durasi; hook, Shorts, deskripsi dan stempel waktu, judul, cek fakta, terjemahan; tenggat di kalender.",
+  "folderHint": "Folder yang setiap subfoldernya adalah video",
+  "mode": {
+    "name": "Video",
+    "icon": "video",
+    "template": "video",
+    "source": {
+      "folders": {
+        "_0": "~/Documents/Video"
+      }
+    },
+    "card": "projectMD",
+    "stages": [
+      "ide",
+      "riset",
+      "naskah",
+      "rekaman",
+      "penyuntingan",
+      "terbit"
+    ],
+    "metrics": [
+      "words",
+      "duration",
+      "deadline",
+      "publishDate"
+    ],
+    "permissions": "filesOnly",
+    "calendar": "dates",
+    "launchMode": "background",
+    "showProjects": true,
+    "commonCommands": "none",
+    "showCommonCommands": false,
+    "commands": [
+      {
+        "id": "video-hooks",
+        "title": "Hook",
+        "output": "hook.md",
+        "task": "Usulkan 5 pembuka video — 5–10 detik pertama yang membuat penonton bertahan. Video: {format}, berdasarkan naskah ini. Pakai teknik berbeda: fakta mengejutkan, pertanyaan ke penonton, janji hasil, cerita mini, membantah anggapan umum. Untuk masing-masing: teksnya (seperti diucapkan) dan satu baris tentang apa yang dimainkannya. Di akhir, satu kalimat: mana yang Anda pilih dan kenapa.",
+        "input": "mainFile"
+      },
+      {
+        "id": "video-shorts",
+        "title": "Versi Shorts",
+        "output": "naskah-shorts.md",
+        "task": "Ubah naskah menjadi video vertikal maksimal 60 detik — sekitar 140–150 kata. Pertahankan ide utama dan momen terkuat, buang pembukaan dan pengulangan. Kalimat pertama harus langsung menarik, kalimat terakhir membuat orang ingin menonton video lengkap atau berlangganan. Tulis seperti orang bicara: kalimat pendek, tanpa bahasa birokratis. Sebutkan jumlah kata di akhir.",
+        "input": "mainFile"
+      },
+      {
+        "id": "video-description",
+        "title": "Deskripsi dan stempel waktu",
+        "output": "deskripsi.md",
+        "task": "Siapkan semua untuk YouTube: 1) deskripsi 2–3 paragraf, dua baris pertama paling penting (terlihat sebelum «selengkapnya»), tanpa clickbait; 2) stempel waktu per bagian naskah dalam format 00:00 — Judul (perkirakan waktu dengan 150 kata per menit, yang pertama 00:00); 3) 10–15 tag dipisah koma; 4) 3 tagar. Dalam bahasa naskah.",
+        "input": "mainFile"
+      },
+      {
+        "id": "video-titles",
+        "title": "Judul dan thumbnail",
+        "output": "judul.md",
+        "task": "Usulkan 10 judul video — maksimal 60 karakter, jujur (menjanjikan isi video), dengan pendekatan berbeda: manfaat, rasa penasaran, hasil konkret, angka, pertanyaan. Tandai 3 terbaik. Lalu 3 ide thumbnail: apa yang ada di bingkai, teks besar (maksimal 4 kata), emosinya.",
+        "input": "mainFile"
+      },
+      {
+        "id": "video-facts",
+        "title": "Cek fakta",
+        "output": "fakta.md",
+        "task": "Temukan semua klaim yang bisa dicek di naskah: angka, tanggal, nama, kutipan, klaim sebab-akibat. Untuk masing-masing: klaimnya, seberapa diragukan (kuat / perlu dicek / meragukan) dan kenapa, apa yang dicek dan di mana. Jangan ubah naskah dan jangan mengarang sumber — jika tidak yakin, katakan.",
+        "input": "mainFile",
+        "service": "claude-code"
+      },
+      {
+        "id": "video-translate",
+        "title": "Terjemahan",
+        "output": "naskah-{language}.md",
+        "task": "Terjemahkan naskah ke {language} untuk sulih suara: pertahankan nada, lelucon, dan ritme bicara, sesuaikan ungkapan dan contoh dengan penonton itu, jangan kata per kata. Nama diri dan istilah tetap dikenali. Di akhir, daftar bagian yang terpaksa banyak menyimpang dari aslinya.",
+        "input": "mainFile",
+        "asks": "Bahasa"
+      }
+    ]
+  }
+}

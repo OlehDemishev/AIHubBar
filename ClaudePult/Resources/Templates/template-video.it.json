@@ -1,0 +1,87 @@
+{
+  "format": "claudepult-template",
+  "version": 1,
+  "order": 1,
+  "language": "it",
+  "id": "video",
+  "title": "Video (YouTube, Shorts, Reels)",
+  "description": "Una cartella per video; fasi dall'idea alla pubblicazione; parole e durata; hook, Shorts, descrizione e timestamp, titoli, verifica dei fatti, traduzione; scadenze nel calendario.",
+  "folderHint": "Una cartella in cui ogni sottocartella è un video",
+  "mode": {
+    "name": "Video",
+    "icon": "video",
+    "template": "video",
+    "source": {
+      "folders": {
+        "_0": "~/Documents/Video"
+      }
+    },
+    "card": "projectMD",
+    "stages": [
+      "idea",
+      "ricerca",
+      "copione",
+      "registrazione",
+      "montaggio",
+      "pubblicato"
+    ],
+    "metrics": [
+      "words",
+      "duration",
+      "deadline",
+      "publishDate"
+    ],
+    "permissions": "filesOnly",
+    "calendar": "dates",
+    "launchMode": "background",
+    "showProjects": true,
+    "commonCommands": "none",
+    "showCommonCommands": false,
+    "commands": [
+      {
+        "id": "video-hooks",
+        "title": "Hook",
+        "output": "hook.md",
+        "task": "Proponi 5 aperture per il video — i primi 5–10 secondi che trattengono lo spettatore. Video: {format}, basato su questo copione. Usa espedienti diversi: un fatto sorprendente, una domanda allo spettatore, la promessa di un risultato, una mini-storia, la smentita di un luogo comune. Per ognuna: il testo (come si dice ad alta voce) e una riga su cosa fa leva. Alla fine, in una frase, quale sceglieresti e perché.",
+        "input": "mainFile"
+      },
+      {
+        "id": "video-shorts",
+        "title": "Versione Shorts",
+        "output": "copione-shorts.md",
+        "task": "Ricava dal copione un video verticale di massimo 60 secondi — circa 140–150 parole. Tieni l'idea principale e il momento più forte, taglia introduzioni e ripetizioni. La prima frase deve agganciare subito, l'ultima far venire voglia di vedere il video completo o di iscriversi. Scrivi come si parla: frasi brevi, niente burocratese. Indica alla fine il numero di parole.",
+        "input": "mainFile"
+      },
+      {
+        "id": "video-description",
+        "title": "Descrizione e timestamp",
+        "output": "descrizione.md",
+        "task": "Prepara tutto per la pubblicazione su YouTube: 1) una descrizione di 2–3 paragrafi, le prime due righe sono le più importanti (si vedono prima di «altro»), senza clickbait; 2) timestamp per le parti del copione nel formato 00:00 — Titolo (stima il tempo a 150 parole al minuto, il primo è 00:00); 3) 10–15 tag separati da virgole; 4) 3 hashtag. Nella lingua del copione.",
+        "input": "mainFile"
+      },
+      {
+        "id": "video-titles",
+        "title": "Titoli e miniature",
+        "output": "titoli.md",
+        "task": "Proponi 10 titoli per il video — massimo 60 caratteri, onesti (promettono ciò che c'è nel video), con approcci diversi: beneficio, curiosità, risultato concreto, un numero, una domanda. Segna i 3 migliori. Poi 3 idee di miniatura: cosa c'è nell'inquadratura, il testo grande (massimo 4 parole), l'emozione.",
+        "input": "mainFile"
+      },
+      {
+        "id": "video-facts",
+        "title": "Verifica dei fatti",
+        "output": "fatti.md",
+        "task": "Trova nel copione tutte le affermazioni verificabili: numeri, date, nomi, citazioni, affermazioni di causa ed effetto. Per ognuna: l'affermazione, quanto è discutibile (solida / da verificare / dubbia) e perché, cosa verificare esattamente e dove. Non correggere nulla nel copione e non inventare fonti — se non sei sicuro, dillo.",
+        "input": "mainFile",
+        "service": "claude-code"
+      },
+      {
+        "id": "video-translate",
+        "title": "Traduzione",
+        "output": "copione-{language}.md",
+        "task": "Traduci il copione in {language} per lo speaker: mantieni il tono, le battute e il ritmo del parlato, adatta modi di dire ed esempi a quel pubblico, non tradurre parola per parola. Nomi propri e termini restano riconoscibili. Alla fine, un elenco dei punti in cui hai dovuto discostarti molto dall'originale.",
+        "input": "mainFile",
+        "asks": "Lingua"
+      }
+    ]
+  }
+}

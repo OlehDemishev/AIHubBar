@@ -1,0 +1,84 @@
+{
+  "format": "claudepult-template",
+  "version": 1,
+  "order": 2,
+  "language": "id",
+  "id": "texts",
+  "title": "Tulisan (artikel, blog, buletin)",
+  "description": "Satu folder per tulisan; tahap dari ide sampai terbit; jumlah kata dan waktu baca; penyuntingan, koreksi, nada lain, meringkas, SEO, memecah jadi postingan.",
+  "folderHint": "Folder yang setiap subfoldernya adalah artikel atau edisi",
+  "mode": {
+    "name": "Tulisan",
+    "icon": "doc.text",
+    "template": "texts",
+    "source": {
+      "folders": {
+        "_0": "~/Documents/Tulisan"
+      }
+    },
+    "card": "projectMD",
+    "stages": [
+      "ide",
+      "draf",
+      "penyuntingan",
+      "terbit"
+    ],
+    "metrics": [
+      "words",
+      "readingTime",
+      "publishDate"
+    ],
+    "permissions": "filesOnly",
+    "calendar": "dates",
+    "launchMode": "background",
+    "showProjects": true,
+    "commonCommands": "none",
+    "showCommonCommands": false,
+    "commands": [
+      {
+        "id": "texts-edit",
+        "title": "Penyuntingan",
+        "output": "suntingan.md",
+        "task": "Sunting teks: buang kata-kata tak perlu, bahasa birokratis, pengulangan, dan klise, sederhanakan kalimat panjang, pertahankan makna, fakta, dan suara penulis. Pertama teks hasil suntingan secara utuh. Lalu daftar 5–10 perubahan terpenting sebagai «sebelum → sesudah → alasan».",
+        "input": "mainFile"
+      },
+      {
+        "id": "texts-proof",
+        "title": "Koreksi",
+        "output": "koreksi.md",
+        "task": "Temukan kesalahan ejaan, tanda baca, tata bahasa, salah ketik, dan ketidaksesuaian. Jangan ubah gaya atau rumusan. Berikan teks yang sudah dikoreksi lalu daftar koreksinya.",
+        "input": "mainFile"
+      },
+      {
+        "id": "texts-tone",
+        "title": "Nada lain",
+        "output": "nada-{text}.md",
+        "task": "Tulis ulang teks dengan nada ini: {text} (misalnya: lebih ramah, lebih tegas, jenaka, untuk ahli, untuk pemula). Makna, fakta, dan struktur tetap sama.",
+        "input": "mainFile",
+        "asks": "Nada"
+      },
+      {
+        "id": "texts-length",
+        "title": "Ringkas / perpanjang",
+        "output": "versi-{text}.md",
+        "task": "Buat versi teks sekitar {text} kata. Saat meringkas, simpan inti dan contoh terkuat. Saat memperpanjang, tambahkan penjelasan dan contoh sesuai topik — bukan isian, dan tanpa fakta baru tanpa tanda «perlu dicek».",
+        "input": "mainFile",
+        "asks": "Berapa kata"
+      },
+      {
+        "id": "texts-seo",
+        "title": "SEO",
+        "output": "seo.md",
+        "task": "Usulkan: judul untuk mesin pencari (maksimal 60 karakter), meta description (maksimal 155 karakter), 5–8 frasa kunci yang benar-benar dijawab teks, dan 3 ide subjudul H2 yang belum ada. Jangan ubah teksnya.",
+        "input": "mainFile"
+      },
+      {
+        "id": "texts-posts",
+        "title": "Pecah jadi postingan",
+        "output": "postingan.md",
+        "task": "Ubah teks menjadi serangkaian postingan untuk {platform}: 3–5 postingan, masing-masing berdiri sendiri dengan gagasannya dari teks, baris pertama yang menarik, dan ajakan di akhir. Perhatikan format platform (panjang, tagar, emoji secukupnya). Beri nomor dan urutan terbit.",
+        "input": "mainFile"
+      }
+    ]
+  }
+}

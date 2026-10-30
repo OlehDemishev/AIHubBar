@@ -1,0 +1,86 @@
+{
+  "format": "claudepult-template",
+  "version": 1,
+  "order": 4,
+  "language": "pl",
+  "id": "social",
+  "title": "Media społecznościowe i marketing",
+  "description": "Projekt = kampania lub platforma; plan treści w kalendarzu; posty na platformy, reklamy, tytuły A/B, odpowiedzi na komentarze, plan na tydzień.",
+  "folderHint": "Folder, w którym każdy podfolder to kampania; plan-tresci.md może też być tutaj",
+  "mode": {
+    "name": "Media społecznościowe",
+    "icon": "megaphone",
+    "template": "social",
+    "source": {
+      "folders": {
+        "_0": "~/Documents/Social"
+      }
+    },
+    "card": "projectMD",
+    "stages": [
+      "pomysł",
+      "tekst",
+      "grafika",
+      "zaplanowane",
+      "opublikowane"
+    ],
+    "metrics": [
+      "words",
+      "publishDate"
+    ],
+    "permissions": "filesOnly",
+    "calendar": "contentPlan",
+    "launchMode": "background",
+    "showProjects": true,
+    "commonCommands": "none",
+    "showCommonCommands": false,
+    "commands": [
+      {
+        "id": "social-posts",
+        "title": "Posty na platformy",
+        "output": "posty-{platform}.md",
+        "task": "Z materiału źródłowego napisz post na każdą platformę: {platform}. Uwzględnij ich format: długość, styl, hashtagi, emoji, linki, wezwanie do działania. Każdy post jest samodzielny, nie kopią pozostałych. Dla platform wizualnych krótki pomysł na obraz lub wideo.",
+        "input": "mainFile"
+      },
+      {
+        "id": "social-ads",
+        "title": "Warianty reklam",
+        "output": "reklamy.md",
+        "task": "Zaproponuj 5 tekstów reklamowych na {platform}: nagłówek, tekst główny, wezwanie do działania. Różne podejścia: problem klienta, korzyść, opinia/dowód, pilność bez nacisku, porównanie. Bez obietnic, których nie da się potwierdzić. Zaznacz, które pary warto porównać w teście A/B.",
+        "input": "mainFile"
+      },
+      {
+        "id": "social-ab",
+        "title": "Tytuły A/B",
+        "output": "tytuly-ab.md",
+        "task": "Zaproponuj 8 par tytułów do testu A/B: w każdej parze zmienia się dokładnie jedna rzecz (długość, liczba, pytanie/stwierdzenie, emocja, konkret). Dla każdej pary: co dokładnie sprawdzamy.",
+        "input": "mainFile"
+      },
+      {
+        "id": "social-replies",
+        "title": "Odpowiedzi na komentarze",
+        "output": "odpowiedzi.md",
+        "task": "Na podstawie materiału i typowych pytań odbiorców przygotuj szablony odpowiedzi na 10 częstych komentarzy: pytanie o cenę, wątpliwość, skarga, podziękowanie, pytanie «jak», trolling, prośba o rabat itp. Ton: {text}. Krótkie, ludzkie odpowiedzi, bez szablonowego «Dziękujemy za opinię!».",
+        "input": "mainFile",
+        "asks": "Ton"
+      },
+      {
+        "id": "social-week",
+        "title": "Plan treści na tydzień",
+        "output": "plan-tresci-tydzien.md",
+        "task": "Ułóż plan treści na tydzień od {text}: 1–2 posty dziennie na {platform}. Przeplataj formaty (przydatne, angażujące, sprzedażowe, kulisy). Podaj tabelę Markdown w formacie planu treści — | Data | Godzina | Platforma | Temat | Status | Plik | — ze statusem «pomysł», żeby wiersze dało się przenieść do plan-tresci.md.",
+        "input": "project",
+        "asks": "Data początku",
+        "service": "claude-code"
+      },
+      {
+        "id": "social-prepare",
+        "title": "Przygotuj posty z planu",
+        "output": "posty-z-planu.md",
+        "task": "Dla wpisów planu treści (plan-tresci.md) z najbliższych 7 dni ze statusem «pomysł» napisz teksty postów — każdy pod własnym nagłówkiem z datą i tematem. Samego planu treści nie zmieniaj.",
+        "input": "project",
+        "service": "claude-code"
+      }
+    ]
+  }
+}

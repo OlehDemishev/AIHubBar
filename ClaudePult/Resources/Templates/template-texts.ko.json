@@ -1,0 +1,84 @@
+{
+  "format": "claudepult-template",
+  "version": 1,
+  "order": 2,
+  "language": "ko",
+  "id": "texts",
+  "title": "글쓰기 (기사, 블로그, 뉴스레터)",
+  "description": "글마다 폴더 하나. 아이디어부터 게시까지의 단계, 단어 수와 읽는 시간, 편집, 교정, 다른 어조, 줄이기, SEO, 게시물로 나누기.",
+  "folderHint": "하위 폴더마다 기사나 호 하나가 되는 폴더",
+  "mode": {
+    "name": "글쓰기",
+    "icon": "doc.text",
+    "template": "texts",
+    "source": {
+      "folders": {
+        "_0": "~/Documents/Writing"
+      }
+    },
+    "card": "projectMD",
+    "stages": [
+      "아이디어",
+      "초안",
+      "편집",
+      "게시됨"
+    ],
+    "metrics": [
+      "words",
+      "readingTime",
+      "publishDate"
+    ],
+    "permissions": "filesOnly",
+    "calendar": "dates",
+    "launchMode": "background",
+    "showProjects": true,
+    "commonCommands": "none",
+    "showCommonCommands": false,
+    "commands": [
+      {
+        "id": "texts-edit",
+        "title": "편집",
+        "output": "편집.md",
+        "task": "글을 편집하세요: 군더더기, 딱딱한 표현, 반복과 상투어를 빼고 긴 문장을 단순하게 하되, 의미와 사실과 글쓴이의 목소리는 지키세요. 먼저 편집한 전문. 그다음 가장 중요한 수정 5~10개를 «전 → 후 → 이유» 형식으로.",
+        "input": "mainFile"
+      },
+      {
+        "id": "texts-proof",
+        "title": "교정",
+        "output": "교정.md",
+        "task": "맞춤법, 문장 부호, 문법 오류와 오타, 호응 오류를 찾으세요. 문체와 표현은 바꾸지 마세요. 교정한 글과 그 뒤에 수정 목록을.",
+        "input": "mainFile"
+      },
+      {
+        "id": "texts-tone",
+        "title": "다른 어조",
+        "output": "어조-{text}.md",
+        "task": "글을 이 어조로 다시 쓰세요: {text} (예: 더 친근하게, 더 엄격하게, 유머 있게, 전문가용, 초보자용). 의미, 사실, 구조는 그대로.",
+        "input": "mainFile",
+        "asks": "어조"
+      },
+      {
+        "id": "texts-length",
+        "title": "줄이기 / 늘리기",
+        "output": "버전-{text}.md",
+        "task": "글을 약 {text}단어 분량으로 만드세요. 줄일 때는 핵심과 가장 강한 예를 남기세요. 늘릴 때는 주제에 맞는 설명과 예를 더하되 군더더기는 넣지 말고, 새 사실에는 «확인 필요» 표시를 붙이세요.",
+        "input": "mainFile",
+        "asks": "몇 단어"
+      },
+      {
+        "id": "texts-seo",
+        "title": "SEO",
+        "output": "seo.md",
+        "task": "제안하세요: 검색용 제목 (60자 이내), 메타 설명 (155자 이내), 글이 실제로 답하는 핵심 문구 5~8개, 빠진 H2 소제목 아이디어 3개. 본문은 바꾸지 마세요.",
+        "input": "mainFile"
+      },
+      {
+        "id": "texts-posts",
+        "title": "게시물로 나누기",
+        "output": "게시물.md",
+        "task": "글을 {platform}용 연속 게시물로 만드세요: 3~5개, 각각 혼자서도 읽히고, 글에서 나온 자기 생각과 눈길을 끄는 첫 줄, 끝의 행동 유도가 있어야 합니다. 플랫폼 형식 (길이, 해시태그, 이모지는 적당히)을 지키고 번호와 게시 순서를 적으세요.",
+        "input": "mainFile"
+      }
+    ]
+  }
+}

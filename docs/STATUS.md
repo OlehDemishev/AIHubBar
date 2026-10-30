@@ -1,18 +1,19 @@
 # Status
 
 <!-- summary:start -->
-**Stage:** SPEC.md done; SPEC-modes stages 1–7 done, stage 9 started (English interface); stage 8 waits for Oleh
+**Stage:** SPEC.md done; SPEC-modes stages 1–7 and 9 (all 13 languages) done; stage 8 waits for Oleh
 **Updated:** 2026-10-30
 
 **Now:**
-- SPEC-modes §9 stage 9: English complete (PRs #45, #47); Spanish merged (PR #49); Portuguese (Brazil) and French merged (PR #51); next: de, ja, id, ko, it, ar (RTL), pl, uk (es, pt-BR, fr, de, ja, id, ko, it, ar with RTL, pl, uk)
+- all 13 interface languages done (branch `feat/all-languages`); waiting for Oleh's language review
 
 **Next:**
-- SPEC-modes §9: 5 calendar, 6 templates, 7 setup assistant, 8 for everyone, 9 languages (§13: en, es, pt-BR, fr, de, ja, id, ko, it, ar with RTL, pl, uk)
+- fix whatever Oleh finds in the translations (machine translation; native review for ja, ko, ar at least)
+- SPEC-modes §9 stage 8 (for everyone) once Oleh decides on Developer ID and the name
 - Fix whatever Oleh finds in docs/CHECKLIST.md
 
 **Needs Oleh:**
-- try Settings → Основные → «Язык интерфейса» → English → «Перезапустить» (and back)
+- review the languages: Settings → Основные → «Язык интерфейса» → a language → «Перезапустить» (and back); Arabic should mirror right-to-left
 - try Settings → Режимы → «+» → «Помощник…»
 - try the calendar in a folder mode: «Календарь» → «+ контент-план», a `Дедлайн:` in a `проект.md`, then the panel «Ближайшее» and the «Календарь» window
 - try folder projects: duplicate a mode, set «Источник» → «папки» on a folder with a few subfolders, add stages (e.g. «идея, сценарий, монтаж, готово») and metrics
@@ -27,6 +28,12 @@
 - hooks are installed in ~/.claude/settings.json; backup of the original: ~/.claude/settings.json.claudepult-backup-20261029T192827
 - delete or archive the old repo `OlehDemishev/ClaudeBar`; turn on start at login if wanted
 <!-- summary:end -->
+
+## 2026-10-30 — Remaining eight languages (branch `feat/all-languages`)
+
+Done: German, Japanese, Indonesian, Korean, Italian, Arabic, Polish and Ukrainian added together — table entries in `ContentLanguage` (card and plan file names, fields, columns, wrappers, prompts; Ukrainian shares `контент-план.md` with Russian), six templates each (`template-*.<lang>.json`), 707 interface strings each, `CFBundleLocalizations` extended. File-count plurals for Ukrainian (as Russian) and Polish. The CLI assistant preview now renders right-to-left for Arabic, as the app's windows do.
+Checked: `xcodebuild test` — 155 tests green (per-language completeness, round-trips, templates and `.lproj` for all 13 languages); script check of every catalog (0 missing, 0 format mismatches, no risky «% d» sequences); `xcstringstool sync` — nothing stale. Live with `-AppleLanguages`: assistant previews in pl, uk, ja, ar (Arabic mirrored), git scanner plurals in pl/uk/ja; `scripts/build-and-install.sh --test` installed, Oleh's mode still active (`--modes`). CI not set up; checks run locally.
+Left: translations are machine-made — native review needed (ja, ko, ar at least); Arabic panel, menu bar and windows not checked by eye; numbers follow the system region, not the interface language.
 
 ## 2026-10-30 — Portuguese (Brazil) and French (branch `feat/portuguese-french`)
 

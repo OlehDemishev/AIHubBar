@@ -1,0 +1,84 @@
+{
+  "format": "claudepult-template",
+  "version": 1,
+  "order": 2,
+  "language": "ja",
+  "id": "texts",
+  "title": "文章 (記事、ブログ、ニュースレター)",
+  "description": "文章ごとに 1 フォルダー。アイデアから公開までの段階、語数と読む時間、編集、校正、別のトーン、短縮、SEO、投稿への分割。",
+  "folderHint": "各サブフォルダーが 1 本の記事や号になるフォルダー",
+  "mode": {
+    "name": "文章",
+    "icon": "doc.text",
+    "template": "texts",
+    "source": {
+      "folders": {
+        "_0": "~/Documents/Writing"
+      }
+    },
+    "card": "projectMD",
+    "stages": [
+      "アイデア",
+      "下書き",
+      "編集",
+      "公開済み"
+    ],
+    "metrics": [
+      "words",
+      "readingTime",
+      "publishDate"
+    ],
+    "permissions": "filesOnly",
+    "calendar": "dates",
+    "launchMode": "background",
+    "showProjects": true,
+    "commonCommands": "none",
+    "showCommonCommands": false,
+    "commands": [
+      {
+        "id": "texts-edit",
+        "title": "編集",
+        "output": "編集.md",
+        "task": "文章を編集してください: 冗長な表現、堅い言い回し、繰り返し、決まり文句を削り、長い文を簡潔にし、意味、事実、著者の声は保つこと。まず編集後の全文。次に、重要な修正 5〜10 件を「修正前 → 修正後 → 理由」の形で。",
+        "input": "mainFile"
+      },
+      {
+        "id": "texts-proof",
+        "title": "校正",
+        "output": "校正.md",
+        "task": "誤字脱字、句読点と文法の誤り、表記ゆれを見つけてください。文体と言い回しは変えないこと。修正後の文章と、その後に修正一覧を。",
+        "input": "mainFile"
+      },
+      {
+        "id": "texts-tone",
+        "title": "別のトーン",
+        "output": "トーン-{text}.md",
+        "task": "文章を次のトーンで書き直してください: {text} (例: より親しみやすく、より厳格に、ユーモアを交えて、専門家向け、初心者向け)。意味、事実、構成は同じに。",
+        "input": "mainFile",
+        "asks": "トーン"
+      },
+      {
+        "id": "texts-length",
+        "title": "短縮 / 拡張",
+        "output": "版-{text}.md",
+        "task": "文章をおよそ {text} 語の版にしてください。短くするなら要点と一番強い例を残すこと。長くするならテーマに沿った説明や例を加え、水増しはせず、新しい事実には「要確認」と付けること。",
+        "input": "mainFile",
+        "asks": "語数"
+      },
+      {
+        "id": "texts-seo",
+        "title": "SEO",
+        "output": "seo.md",
+        "task": "次を提案してください: 検索向けタイトル (60 文字以内)、メタディスクリプション (155 文字以内)、文章が実際に答えているキーフレーズ 5〜8 個、足りない H2 見出しの案 3 つ。本文は変えないこと。",
+        "input": "mainFile"
+      },
+      {
+        "id": "texts-posts",
+        "title": "投稿に分割",
+        "output": "投稿.md",
+        "task": "文章を {platform} 向けの連続投稿にしてください: 3〜5 本、それぞれ単独で読め、文章から 1 つの考えを持ち、引きのある 1 行目と最後の呼びかけ付き。プラットフォームの形式 (長さ、ハッシュタグ、絵文字は控えめ) を守り、番号と公開順を付けてください。",
+        "input": "mainFile"
+      }
+    ]
+  }
+}

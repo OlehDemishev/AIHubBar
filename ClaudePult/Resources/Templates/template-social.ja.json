@@ -1,0 +1,86 @@
+{
+  "format": "claudepult-template",
+  "version": 1,
+  "order": 4,
+  "language": "ja",
+  "id": "social",
+  "title": "SNS とマーケティング",
+  "description": "1 プロジェクト = 1 キャンペーンまたはプラットフォーム。カレンダーにコンテンツ計画。プラットフォーム別の投稿、広告、A/B 見出し、コメントへの返信、週の計画。",
+  "folderHint": "各サブフォルダーが 1 つのキャンペーンになるフォルダー。コンテンツ計画.md もここに置けます",
+  "mode": {
+    "name": "SNS",
+    "icon": "megaphone",
+    "template": "social",
+    "source": {
+      "folders": {
+        "_0": "~/Documents/Social"
+      }
+    },
+    "card": "projectMD",
+    "stages": [
+      "アイデア",
+      "文章",
+      "デザイン",
+      "予約済み",
+      "公開済み"
+    ],
+    "metrics": [
+      "words",
+      "publishDate"
+    ],
+    "permissions": "filesOnly",
+    "calendar": "contentPlan",
+    "launchMode": "background",
+    "showProjects": true,
+    "commonCommands": "none",
+    "showCommonCommands": false,
+    "commands": [
+      {
+        "id": "social-posts",
+        "title": "プラットフォーム別の投稿",
+        "output": "投稿-{platform}.md",
+        "task": "元の素材から、各プラットフォーム向けに投稿を 1 本ずつ書いてください: {platform}。長さ、文体、ハッシュタグ、絵文字、リンク、行動の呼びかけなど各形式を守り、互いのコピーにしないこと。ビジュアル系のプラットフォームには画像や動画の短い案も。",
+        "input": "mainFile"
+      },
+      {
+        "id": "social-ads",
+        "title": "広告案",
+        "output": "広告.md",
+        "task": "{platform} 向けの広告文を 5 案: 見出し、本文、行動の呼びかけ。切り口を変えて: 顧客の悩み、メリット、レビュー/根拠、押しつけない緊急性、比較。裏付けのない誇張はしないこと。A/B テストで比べるべき組に印を。",
+        "input": "mainFile"
+      },
+      {
+        "id": "social-ab",
+        "title": "A/B 見出し",
+        "output": "見出し-ab.md",
+        "task": "A/B テスト用の見出しを 8 組: 各組で変えるのは 1 点だけ (長さ、数字、疑問/断定、感情、具体性)。各組で何を試すかを書いてください。",
+        "input": "mainFile"
+      },
+      {
+        "id": "social-replies",
+        "title": "コメントへの返信",
+        "output": "返信.md",
+        "task": "素材と読者のよくある質問から、よくあるコメント 10 種への返信テンプレートを用意してください: 価格の質問、疑い、苦情、お礼、やり方の質問、荒らし、値引きの依頼など。トーン: {text}。短く人間らしく、型どおりの「ご意見ありがとうございます!」は避けること。",
+        "input": "mainFile",
+        "asks": "トーン"
+      },
+      {
+        "id": "social-week",
+        "title": "週のコンテンツ計画",
+        "output": "コンテンツ計画-週.md",
+        "task": "{text} から始まる週のコンテンツ計画を作ってください: {platform} 向けに 1 日 1〜2 本。形式を交互に (役立つ、参加型、販売、舞台裏)。コンテンツ計画の形式の Markdown 表 — | 日付 | 時刻 | プラットフォーム | テーマ | 状態 | ファイル | — で、状態は「アイデア」。行をコンテンツ計画.md に移せるようにしてください。",
+        "input": "project",
+        "asks": "開始日",
+        "service": "claude-code"
+      },
+      {
+        "id": "social-prepare",
+        "title": "計画どおりに投稿を準備",
+        "output": "計画の投稿.md",
+        "task": "コンテンツ計画 (コンテンツ計画.md) のうち、今後 7 日間で状態が「アイデア」の項目について投稿文を書いてください — それぞれ日付とテーマの見出しの下に。コンテンツ計画自体は変えないこと。",
+        "input": "project",
+        "service": "claude-code"
+      }
+    ]
+  }
+}

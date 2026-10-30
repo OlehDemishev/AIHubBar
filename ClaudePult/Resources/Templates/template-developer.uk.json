@@ -1,0 +1,34 @@
+{
+  "format": "claudepult-template",
+  "version": 1,
+  "order": 0,
+  "language": "uk",
+  "id": "developer",
+  "title": "Розробник (GitHub)",
+  "description": "Git-репозиторії: гілки, незакомічене, PR і CI, STATUS.md; «Наступний крок», «Своє завдання», «Завершити» за правилами проєкту (CLAUDE.md / AGENTS.md).",
+  "folderHint": "Папка, у якій лежать ваші репозиторії",
+  "mode": {
+    "name": "Розробник (GitHub)",
+    "icon": "chevron.left.forwardslash.chevron.right",
+    "template": "developer",
+    "source": {
+      "gitBuiltin": {
+        "projects": "~/Projects"
+      }
+    },
+    "card": "statusMD",
+    "stages": [],
+    "metrics": [
+      "branch",
+      "dirty",
+      "pullRequests",
+      "lastActivity"
+    ],
+    "permissions": "code",
+    "calendar": "off",
+    "showProjects": true,
+    "commonCommands": "none",
+    "showCommonCommands": false,
+    "commands": []
+  }
+}

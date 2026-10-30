@@ -122,7 +122,8 @@ struct ProjectCardFile: Equatable, Sendable {
             return text.components(separatedBy: ":").first?.trimmingCharacters(in: .whitespaces).lowercased()
         }
         guard !used.isEmpty else { return .current }
-        return ContentLanguage.allCases.first { language in
+        // Some names are shared (German and Polish «Format», Russian and Ukrainian «Дедлайн»): prefer the current language.
+        return ([ContentLanguage.current] + ContentLanguage.allCases).first { language in
             let own = Set(language.strings.cardLabels.values.map { $0.lowercased() })
             return used.allSatisfy(own.contains)
         } ?? .current

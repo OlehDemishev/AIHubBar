@@ -1,0 +1,86 @@
+{
+  "format": "claudepult-template",
+  "version": 1,
+  "order": 4,
+  "language": "de",
+  "id": "social",
+  "title": "Social Media und Marketing",
+  "description": "Ein Projekt = eine Kampagne oder Plattform; Inhaltsplan im Kalender; Posts pro Plattform, Anzeigen, A/B-Titel, Antworten auf Kommentare, Wochenplan.",
+  "folderHint": "Ein Ordner, in dem jeder Unterordner eine Kampagne ist; inhaltsplan.md kann auch hier liegen",
+  "mode": {
+    "name": "Social Media",
+    "icon": "megaphone",
+    "template": "social",
+    "source": {
+      "folders": {
+        "_0": "~/Documents/Social"
+      }
+    },
+    "card": "projectMD",
+    "stages": [
+      "Idee",
+      "Text",
+      "Design",
+      "geplant",
+      "veröffentlicht"
+    ],
+    "metrics": [
+      "words",
+      "publishDate"
+    ],
+    "permissions": "filesOnly",
+    "calendar": "contentPlan",
+    "launchMode": "background",
+    "showProjects": true,
+    "commonCommands": "none",
+    "showCommonCommands": false,
+    "commands": [
+      {
+        "id": "social-posts",
+        "title": "Posts pro Plattform",
+        "output": "posts-{platform}.md",
+        "task": "Schreib aus dem Ausgangsmaterial einen Post für jede Plattform: {platform}. Beachte ihr Format: Länge, Stil, Hashtags, Emojis, Links, Aufruf zum Handeln. Jeder Post steht für sich, keiner ist eine Kopie. Für visuelle Plattformen eine kurze Bild- oder Videoidee.",
+        "input": "mainFile"
+      },
+      {
+        "id": "social-ads",
+        "title": "Anzeigenvarianten",
+        "output": "anzeigen.md",
+        "task": "Schlage 5 Anzeigentexte für {platform} vor: Titel, Haupttext, Aufruf zum Handeln. Verschiedene Ansätze: Problem des Kunden, Nutzen, Bewertung/Beleg, Dringlichkeit ohne Druck, Vergleich. Keine Versprechen, die sich nicht belegen lassen. Markiere, welche Paare sich für einen A/B-Test eignen.",
+        "input": "mainFile"
+      },
+      {
+        "id": "social-ab",
+        "title": "A/B-Titel",
+        "output": "titel-ab.md",
+        "task": "Schlage 8 Titelpaare für einen A/B-Test vor: in jedem Paar ändert sich genau eine Sache (Länge, Zahl, Frage/Aussage, Emotion, Konkretheit). Für jedes Paar: was genau getestet wird.",
+        "input": "mainFile"
+      },
+      {
+        "id": "social-replies",
+        "title": "Antworten auf Kommentare",
+        "output": "antworten.md",
+        "task": "Bereite aus dem Material und den typischen Fragen des Publikums Antwortvorlagen für 10 häufige Kommentare vor: Frage nach dem Preis, Zweifel, Beschwerde, Dank, «Wie geht das?», Trolling, Bitte um Rabatt usw. Ton: {text}. Kurze, menschliche Antworten, ohne das übliche «Danke für Ihr Feedback!».",
+        "input": "mainFile",
+        "asks": "Ton"
+      },
+      {
+        "id": "social-week",
+        "title": "Inhaltsplan für die Woche",
+        "output": "inhaltsplan-woche.md",
+        "task": "Erstelle einen Inhaltsplan für die Woche ab {text}: 1–2 Posts pro Tag für {platform}. Wechsle die Formate (nützlich, aktivierend, verkaufend, hinter den Kulissen). Gib eine Markdown-Tabelle im Format des Inhaltsplans aus — | Datum | Uhrzeit | Plattform | Thema | Status | Datei | — mit dem Status «Idee», damit die Zeilen in inhaltsplan.md übernommen werden können.",
+        "input": "project",
+        "asks": "Startdatum",
+        "service": "claude-code"
+      },
+      {
+        "id": "social-prepare",
+        "title": "Posts nach Plan vorbereiten",
+        "output": "posts-nach-plan.md",
+        "task": "Schreib für die Einträge des Inhaltsplans (inhaltsplan.md) der nächsten 7 Tage mit dem Status «Idee» die Posttexte — jeden unter eigener Überschrift mit Datum und Thema. Ändere den Inhaltsplan selbst nicht.",
+        "input": "project",
+        "service": "claude-code"
+      }
+    ]
+  }
+}

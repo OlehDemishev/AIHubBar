@@ -1,0 +1,87 @@
+{
+  "format": "claudepult-template",
+  "version": 1,
+  "order": 1,
+  "language": "de",
+  "id": "video",
+  "title": "Video (YouTube, Shorts, Reels)",
+  "description": "Ein Ordner pro Video; Phasen von der Idee bis zur Veröffentlichung; Wörter und Dauer; Hooks, Shorts, Beschreibung und Zeitmarken, Titel, Faktencheck, Übersetzung; Fristen im Kalender.",
+  "folderHint": "Ein Ordner, in dem jeder Unterordner ein Video ist",
+  "mode": {
+    "name": "Video",
+    "icon": "video",
+    "template": "video",
+    "source": {
+      "folders": {
+        "_0": "~/Documents/Video"
+      }
+    },
+    "card": "projectMD",
+    "stages": [
+      "Idee",
+      "Recherche",
+      "Skript",
+      "Aufnahme",
+      "Schnitt",
+      "veröffentlicht"
+    ],
+    "metrics": [
+      "words",
+      "duration",
+      "deadline",
+      "publishDate"
+    ],
+    "permissions": "filesOnly",
+    "calendar": "dates",
+    "launchMode": "background",
+    "showProjects": true,
+    "commonCommands": "none",
+    "showCommonCommands": false,
+    "commands": [
+      {
+        "id": "video-hooks",
+        "title": "Hooks",
+        "output": "hooks.md",
+        "task": "Schlage 5 Einstiege für das Video vor — die ersten 5–10 Sekunden, die Zuschauer halten. Video: {format}, auf Basis dieses Skripts. Nutze verschiedene Mittel: eine überraschende Tatsache, eine Frage an die Zuschauer, das Versprechen eines Ergebnisses, eine Mini-Geschichte, Widerspruch gegen eine verbreitete Meinung. Für jeden: den Text selbst (wie er laut gesprochen wird) und eine Zeile, worauf er setzt. Am Ende in einem Satz, welchen du nehmen würdest und warum.",
+        "input": "mainFile"
+      },
+      {
+        "id": "video-shorts",
+        "title": "Shorts-Version",
+        "output": "skript-shorts.md",
+        "task": "Mach aus dem Skript ein Hochformat-Video von höchstens 60 Sekunden — etwa 140–150 Wörter. Behalte die Hauptidee und den stärksten Moment, streiche Einleitungen und Wiederholungen. Der erste Satz muss sofort packen, der letzte Lust auf das ganze Video oder ein Abo machen. Schreib, wie man spricht: kurze Sätze, kein Amtsdeutsch. Nenne am Ende die Wortzahl.",
+        "input": "mainFile"
+      },
+      {
+        "id": "video-description",
+        "title": "Beschreibung und Zeitmarken",
+        "output": "beschreibung.md",
+        "task": "Bereite alles für YouTube vor: 1) eine Beschreibung mit 2–3 Absätzen, die ersten zwei Zeilen sind die wichtigsten (sie stehen vor «mehr»), ohne Clickbait; 2) Zeitmarken für die Abschnitte des Skripts im Format 00:00 — Titel (schätze die Zeit mit 150 Wörtern pro Minute, die erste Marke ist 00:00); 3) 10–15 Tags, durch Kommas getrennt; 4) 3 Hashtags. In der Sprache des Skripts.",
+        "input": "mainFile"
+      },
+      {
+        "id": "video-titles",
+        "title": "Titel und Thumbnails",
+        "output": "titel.md",
+        "task": "Schlage 10 Titel für das Video vor — höchstens 60 Zeichen, ehrlich (sie versprechen, was das Video hat), mit verschiedenen Ansätzen: Nutzen, Neugier, konkretes Ergebnis, Zahl, Frage. Markiere die besten 3. Dann 3 Thumbnail-Ideen: was im Bild ist, großer Text (höchstens 4 Wörter), die Emotion.",
+        "input": "mainFile"
+      },
+      {
+        "id": "video-facts",
+        "title": "Faktencheck",
+        "output": "fakten.md",
+        "task": "Finde im Skript alle überprüfbaren Aussagen: Zahlen, Daten, Namen, Zitate, Ursache-Wirkung-Behauptungen. Für jede: die Aussage, wie strittig sie ist (sicher / prüfen / zweifelhaft) und warum, was genau wo zu prüfen ist. Korrigiere nichts im Skript und erfinde keine Quellen — wenn du unsicher bist, sag es.",
+        "input": "mainFile",
+        "service": "claude-code"
+      },
+      {
+        "id": "video-translate",
+        "title": "Übersetzung",
+        "output": "skript-{language}.md",
+        "task": "Übersetze das Skript für einen Sprecher ins {language}: behalte Ton, Witze und Sprechrhythmus, passe Redewendungen und Beispiele an dieses Publikum an, übersetze nicht Wort für Wort. Eigennamen und Begriffe bleiben erkennbar. Am Ende eine Liste der Stellen, an denen du deutlich vom Original abweichen musstest.",
+        "input": "mainFile",
+        "asks": "Sprache"
+      }
+    ]
+  }
+}

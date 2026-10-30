@@ -223,3 +223,13 @@ Panel snapshots: `defaults write com.demishev.claudepult DebugPanelSnapshot -boo
 | Language table complete, cards and plans round-trip, templates in both languages, interfaces shipped | Auto (per-language tests) |
 | 707 interface strings each, format specifiers match | Script check |
 | Assistant preview «Textos» (pt-BR) and «Vidéo» (fr), French git scanner items | Live (`-AppleLanguages`) |
+
+## Languages: German, Japanese, Indonesian, Korean, Italian, Arabic, Polish, Ukrainian (SPEC-modes §9.9)
+
+| Scenario | Checked |
+|---|---|
+| Language table complete for all thirteen languages, cards and plans round-trip, templates in every language, every `.lproj` ships | Auto (per-language tests) |
+| 707 interface strings in each new language, format specifiers match, no risky «% d»-like sequences | Script check |
+| Assistant previews «Wideo» (pl), «Відео» (uk), «動画» (ja), «فيديو» (ar) fully translated; Arabic mirrors right-to-left | Live (`-AppleLanguages`) |
+| Git scanner plurals: Polish «1 plik / 21 plików», Ukrainian «21 файл / 54 файли» | Live (`--git-scan`) |
+| Reading by a native speaker (at least ja, ko, ar), the Arabic panel, menu bar and windows by eye | Oleh |

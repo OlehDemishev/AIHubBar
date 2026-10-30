@@ -1,0 +1,37 @@
+{
+  "format": "claudepult-template",
+  "version": 1,
+  "order": 5,
+  "language": "ja",
+  "id": "custom",
+  "title": "カスタム",
+  "description": "空の組み合わせ: 「自分のタスク」と段階「進行中 → 完了」。ほかは設定 → 「モード」で。",
+  "folderHint": "各サブフォルダーが 1 つのプロジェクトになるフォルダー",
+  "mode": {
+    "name": "マイモード",
+    "icon": "sparkle",
+    "template": "custom",
+    "source": {
+      "folders": {
+        "_0": "~/Documents/Projects"
+      }
+    },
+    "card": "projectMD",
+    "stages": [
+      "進行中",
+      "完了"
+    ],
+    "metrics": [
+      "words",
+      "deadline",
+      "lastActivity"
+    ],
+    "permissions": "filesOnly",
+    "calendar": "dates",
+    "launchMode": "background",
+    "showProjects": true,
+    "commonCommands": "none",
+    "showCommonCommands": false,
+    "commands": []
+  }
+}

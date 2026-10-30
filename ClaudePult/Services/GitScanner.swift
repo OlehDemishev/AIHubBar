@@ -271,17 +271,20 @@ enum StatusText {
 }
 
 enum Plural {
-    /// «1 файл», «2 файла», «5 файлов»; one rule for the other languages: «1 file», «2 files».
+    /// «1 файл · 2 файла · 5 файлов» in Russian and Ukrainian, «1 plik · 2 pliki · 5 plików» in Polish,
+    /// singular and plural elsewhere (no plural at all in Japanese and Korean — their strings are the same).
     static func files(_ n: Int) -> String {
-        guard Bundle.main.preferredLocalizations.first?.hasPrefix("ru") ?? true else {
-            return n == 1 ? String(localized: "файл") : String(localized: "файлов")
-        }
+        let one = String(localized: "файл"), few = String(localized: "файла"), many = String(localized: "файлов")
         let tens = n % 100, ones = n % 10
-        if (11...14).contains(tens) { return String(localized: "файлов") }
-        switch ones {
-        case 1: return String(localized: "файл")
-        case 2...4: return String(localized: "файла")
-        default: return String(localized: "файлов")
+        switch ContentLanguage.current {
+        case .ru, .uk:
+            if (11...14).contains(tens) { return many }
+            return ones == 1 ? one : (2...4).contains(ones) ? few : many
+        case .pl:
+            if n == 1 { return one }
+            return (2...4).contains(ones) && !(12...14).contains(tens) ? few : many
+        default:
+            return n == 1 ? one : many
         }
     }
 }

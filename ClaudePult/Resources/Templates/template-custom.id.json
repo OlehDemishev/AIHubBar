@@ -1,0 +1,37 @@
+{
+  "format": "claudepult-template",
+  "version": 1,
+  "order": 5,
+  "language": "id",
+  "id": "custom",
+  "title": "Kustom",
+  "description": "Set kosong: «Tugas sendiri» dan tahap «berjalan → selesai». Sisanya di Pengaturan → «Mode».",
+  "folderHint": "Folder yang setiap subfoldernya adalah proyek",
+  "mode": {
+    "name": "Mode saya",
+    "icon": "sparkle",
+    "template": "custom",
+    "source": {
+      "folders": {
+        "_0": "~/Documents/Proyek"
+      }
+    },
+    "card": "projectMD",
+    "stages": [
+      "berjalan",
+      "selesai"
+    ],
+    "metrics": [
+      "words",
+      "deadline",
+      "lastActivity"
+    ],
+    "permissions": "filesOnly",
+    "calendar": "dates",
+    "launchMode": "background",
+    "showProjects": true,
+    "commonCommands": "none",
+    "showCommonCommands": false,
+    "commands": []
+  }
+}
