@@ -6,7 +6,7 @@
 
 **Now:**
 - SPEC-profiles stage 2: panel from profile modules, menu bar per profile, «Профили» and «Модули» tabs, «режим» → «профиль» in 13 languages — branch `feat/profiles-panel` (worktree `.claude/worktrees/profiles-stage2`), PR #74
-- specs for Windows and Linux merged (PR #73; spec only, no implementation)
+- Windows and Linux specs merged (PR #73); implementation waits for Oleh
 
 **Next:**
 - SPEC-profiles stages 3–6: empty start and new assistant, Ресурсы Mac, Не спать, Быстрые команды и переключатели
