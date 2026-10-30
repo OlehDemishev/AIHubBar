@@ -258,3 +258,21 @@ struct UsageErrorTextTests {
         #expect(UsageError.noCredentials.errorDescription == "Войдите в Claude Code: claude → /login")
     }
 }
+
+struct LoginRenewalTests {
+    @Test func atMostOnceAnHour() {
+        let now = Date(timeIntervalSince1970: 1_000_000)
+        #expect(LoginRenewal.shouldTry(lastAttempt: nil, now: now))
+        #expect(!LoginRenewal.shouldTry(lastAttempt: now.addingTimeInterval(-30 * 60), now: now))
+        #expect(LoginRenewal.shouldTry(lastAttempt: now.addingTimeInterval(-61 * 60), now: now))
+    }
+
+    @Test func requestDoesNothingButSignIn() {
+        let args = LoginRenewal.arguments
+        #expect(args.starts(with: ["-p", "OK"]))
+        #expect(args.contains("--no-session-persistence"), "no session left in the history")
+        #expect(zip(args, args.dropFirst()).contains { $0 == "--tools" && $1.isEmpty }, "no tools")
+        #expect(zip(args, args.dropFirst()).contains { $0 == "--setting-sources" && $1.isEmpty }, "no settings, so no hooks")
+        #expect(!args.contains("--bare"), "--bare skips the keychain, so it would not sign in")
+    }
+}

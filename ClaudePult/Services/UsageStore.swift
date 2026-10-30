@@ -13,6 +13,7 @@ final class UsageStore {
     /// While set, no request is made: the server answered 429 (or kept failing).
     private(set) var pausedUntil: Date?
     private var rateLimitStrikes = 0
+    private var lastRenewal: Date?
 
     var forecast: UsageForecast { UsageForecast.make(history: history, current: snapshot?.session) }
 
@@ -101,6 +102,15 @@ final class UsageStore {
             pausedUntil = until
             error = String(localized: "Сервер лимитов просит запрашивать реже — следующая попытка в \(until.formatted(date: .omitted, time: .shortened))")
             AppLog.error("Usage: HTTP 429, pause \(Int(pause / 60)) min (strike \(rateLimitStrikes), Retry-After \(retryAfter.map { "\(Int($0)) s" } ?? "none"))")
+        } catch UsageError.expired where settings.renewClaudeLogin && LoginRenewal.shouldTry(lastAttempt: lastRenewal, now: .now) {
+            // The sign-in expired (`claude` has not run lately): renew it through `claude` and ask once more.
+            lastRenewal = .now
+            error = UsageError.expired.localizedDescription
+            if await LoginRenewal.run(claudePath: ClaudeLocator.resolve(configured: settings.claudePath)),
+               let fresh = try? await UsageService.fetch() {
+                apply(fresh)
+                error = nil
+            }
         } catch {
             // The same failure repeats every few minutes; log it once.
             if self.error != error.localizedDescription { AppLog.error("Usage refresh failed: \(error.localizedDescription)") }

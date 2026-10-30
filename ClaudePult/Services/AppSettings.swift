@@ -93,6 +93,11 @@ final class AppSettings {
         didSet { defaults.set(limitAlertsToTelegram, forKey: Keys.limitAlertsToTelegram) }
     }
 
+    /// Renew an expired Claude Code sign-in with a one-word `claude` request (`LoginRenewal`).
+    var renewClaudeLogin: Bool {
+        didSet { defaults.set(renewClaudeLogin, forKey: Keys.renewClaudeLogin) }
+    }
+
     static let defaultLimitThresholds = [50, 80, 95]
 
     // MARK: Appearance
@@ -158,6 +163,7 @@ final class AppSettings {
         let thresholds = (defaults.array(forKey: Keys.limitThresholds) as? [Int])?.filter { (1...100).contains($0) }
         limitThresholds = thresholds?.isEmpty == false ? thresholds! : Self.defaultLimitThresholds
         limitAlertsToTelegram = defaults.bool(forKey: Keys.limitAlertsToTelegram)
+        renewClaudeLogin = defaults.object(forKey: Keys.renewClaudeLogin) as? Bool ?? true
         panelTextSize = defaults.string(forKey: Keys.panelTextSize).flatMap(PanelTextSize.init(rawValue:)) ?? .normal
         panelWidth = defaults.string(forKey: Keys.panelWidth).flatMap(PanelWidth.init(rawValue:)) ?? .normal
         panelDensity = defaults.string(forKey: Keys.panelDensity).flatMap(PanelDensity.init(rawValue:)) ?? .normal
@@ -184,6 +190,7 @@ final class AppSettings {
         static let calendarRemindersToTelegram = "calendarRemindersToTelegram"
         static let limitThresholds = "limitThresholds"
         static let limitAlertsToTelegram = "limitAlertsToTelegram"
+        static let renewClaudeLogin = "renewClaudeLogin"
         static let panelTextSize = "panelTextSize"
         static let panelWidth = "panelWidth"
         static let panelDensity = "panelDensity"
