@@ -27,6 +27,8 @@ Data refreshes at launch, on panel open when older than 60 s, every 5 min (`--no
 
 ## Install
 
+People get a `.dmg` from GitHub Releases, signed with the self-signed «ClaudePult Release» certificate and updated through Sparkle. Releasing it is covered in [docs/RELEASE.md](docs/RELEASE.md) (`scripts/release.sh <version> [--publish]`). The code is under the MIT license ([LICENSE](LICENSE)). From source:
+
 Requirements: macOS 14+ (developed on macOS 27, Apple Silicon), Xcode with Swift 6 (developed with 27.1), `brew install xcodegen`.
 
 ```bash
