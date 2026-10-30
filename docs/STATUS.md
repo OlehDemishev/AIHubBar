@@ -7,7 +7,7 @@
 **Now:**
 - merged: menu bar drag reordering (PR #93), translation review (PR #94), release build re-checked on main (PR #95)
 - panel redesigned as cards, variant A, merged (PR #98)
-- feature batch from Oleh's «все»: approve from notifications merged (PR #100); current action merged (PR #102); week forecast merged (PR #104); Telegram answers merged (PR #106); PR/CI alerts merged (PR #108); search, hot key, Shortcuts merged (PR #110); widget and control (PR open); night queue (PR open, on top of it); then week forecast, Telegram, PR/CI alerts, hotkey and search, widget, night queue, context warning
+- feature batch from Oleh's «все»: approve from notifications merged (PR #100); current action merged (PR #102); week forecast merged (PR #104); Telegram answers merged (PR #106); PR/CI alerts merged (PR #108); search, hot key, Shortcuts merged (PR #110); widget and control (PR open); night queue (PR open, on top of it); context warning (PR open, on top of that) week forecast, Telegram, PR/CI alerts, hotkey and search, widget, night queue, context warning
 - hover hints for icon-only controls and the menu bar item merged (PR #91)
 - second wave merged: «История буфера» and «Заметки» (PR #87), «Не спать» with the lid closed (PR #89)
 - release without an Apple Developer account merged (PR #85): Sparkle, self-signed signing, `scripts/release.sh`, MIT license; nothing published yet
@@ -53,6 +53,12 @@
 - hooks are installed in ~/.claude/settings.json; backup of the original: ~/.claude/settings.json.claudepult-backup-20261029T192827
 - delete or archive the old repo `OlehDemishev/ClaudeBar`; turn on start at login if wanted
 <!-- summary:end -->
+
+## 2026-10-30 — Context fullness in session rows (branch `feat/context-warning`, on top of `feat/night-queue`)
+
+Done: `ContextUsage` reads the tail of a session's journal for the last main-thread assistant usage (input + cache writes + cache reads) and divides by the window (200k; 1M for «[1m]» or once past 200k). Session rows show «контекст N %» from 70 % (red from 90 %); one notification per session at 90 %. Hooks give no context size, so no hook update is needed. 13 languages; a hint was rephrased so «100 %» isn't followed by a letter (it read as a format specifier).
+Checked: 234 tests green; live: 85 % and 79 % on two real sessions.
+Left: the 90 % notification by eye.
 
 ## 2026-10-30 — Night queue (branch `feat/night-queue`, on top of `feat/widget-controls`)
 
