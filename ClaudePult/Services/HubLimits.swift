@@ -1,5 +1,6 @@
 import Foundation
 import Observation
+import WidgetKit
 
 /// Limits and spend of AI services other than the Claude subscription (docs/SPEC-hub.md). Each source turns on by
 /// itself when its tool is on the Mac or its key is saved; the formats come from third-party docs, so every parser
@@ -32,6 +33,19 @@ struct HubLimit: Equatable, Identifiable, Sendable {
             }
         }
 
+        /// For the menu bar.
+        var shortTitle: String {
+            switch self {
+            case .codex: "Codex"
+            case .openRouter: "OpenRouter"
+            case .copilot: "Copilot"
+            case .gemini: "Gemini"
+            case .openAICosts: "OpenAI"
+            case .anthropicCosts: "Anthropic"
+            case .cursor: "Cursor"
+            }
+        }
+
         var keyPage: URL? {
             switch self {
             case .openRouter: URL(string: "https://openrouter.ai/settings/keys")
@@ -61,7 +75,12 @@ struct HubLimit: Equatable, Identifiable, Sendable {
         var percent: Double?
         var detail: String?
         var resetsAt: Date?
+        /// At the pace since this window was first seen, the limit runs out before the reset at this time.
+        var runsOutAt: Date? = nil
     }
+
+    /// The fullest limit, for the menu bar and the widget.
+    var fullest: Double? { windows.compactMap(\.percent).max() }
 
     var source: Source
     var windows: [Window]
@@ -220,6 +239,25 @@ enum HubParse {
     }
 }
 
+/// «Хватит до сброса»: the pace from the first reading of a window to the latest one.
+enum HubForecast {
+    struct Reading: Equatable, Sendable {
+        var at: Date
+        var percent: Double
+    }
+
+    /// When the limit runs out at this pace, if that comes before the reset; nil when it lasts, or there's too little
+    /// to tell (under 15 minutes or no growth).
+    static func runsOut(first: Reading, latest: Reading, resetsAt: Date?) -> Date? {
+        let elapsed = latest.at.timeIntervalSince(first.at)
+        let grown = latest.percent - first.percent
+        guard elapsed >= 15 * 60, grown > 0, latest.percent < 100 else { return nil }
+        let date = latest.at.addingTimeInterval((100 - latest.percent) / grown * elapsed)
+        guard let resetsAt else { return date }
+        return date < resetsAt ? date : nil
+    }
+}
+
 // MARK: - Reading each service
 
 enum HubFetch {
@@ -373,6 +411,15 @@ final class HubLimitsStore {
     private let settings: AppSettings
     private var loop: Task<Void, Never>?
     private var notified: Set<String> = []
+    /// The first reading of each window since its last reset, for the forecast.
+    private var firstReadings: [String: HubForecast.Reading] = [:]
+
+    /// Source raw value → its fullest limit, for the menu bar.
+    var percents: [String: Double] {
+        Dictionary(limits.compactMap { limit in limit.fullest.map { (limit.source.rawValue, $0) } }) { first, _ in first }
+    }
+
+    static let widgetURL = SessionFiles.supportDirectory.appending(path: "other-ai.json")
 
     init(settings: AppSettings) {
         self.settings = settings
@@ -413,8 +460,9 @@ final class HubLimitsStore {
             for await limit in group { all.append(limit) }
             return all
         }
-        limits = HubLimit.Source.allCases.compactMap { source in results.first { $0.source == source } }
+        limits = forecast(HubLimit.Source.allCases.compactMap { source in results.first { $0.source == source } })
         announce(results)
+        writeWidgetFile()
     }
 
     func saveKey(_ key: String, for source: HubLimit.Source) async throws {
@@ -496,6 +544,34 @@ final class HubLimitsStore {
         }
     }
 
+    private func forecast(_ limits: [HubLimit], now: Date = .now) -> [HubLimit] {
+        limits.map { limit in
+            var limit = limit
+            for index in limit.windows.indices {
+                let window = limit.windows[index]
+                guard let percent = window.percent else { continue }
+                let key = "\(limit.source.rawValue)|\(window.title)|\(window.resetsAt.map { Int($0.timeIntervalSince1970 / 600) } ?? 0)"
+                let latest = HubForecast.Reading(at: now, percent: percent)
+                // A drop means a reset the window's date didn't show: start over.
+                if let first = firstReadings[key], first.percent <= percent {
+                    limit.windows[index].runsOutAt = HubForecast.runsOut(first: first, latest: latest, resetsAt: window.resetsAt)
+                } else {
+                    firstReadings[key] = latest
+                }
+            }
+            return limit
+        }
+    }
+
+    /// `other-ai.json` for the «Лимиты» widget: the sandboxed widget only reads Application Support/ClaudePult.
+    private func writeWidgetFile() {
+        struct Entry: Encodable { var name: String; var percent: Double }
+        let entries = limits.compactMap { limit in limit.fullest.map { Entry(name: limit.source.shortTitle, percent: $0) } }
+        try? FileManager.default.createDirectory(at: Self.widgetURL.deletingLastPathComponent(), withIntermediateDirectories: true)
+        try? JSONEncoder().encode(entries).write(to: Self.widgetURL, options: .atomic)
+        WidgetCenter.shared.reloadTimelines(ofKind: "ClaudePultUsage")
+    }
+
     /// The same thresholds as the Claude limits, once per window and reset.
     private func announce(_ limits: [HubLimit]) {
         let thresholds = settings.limitThresholds.sorted()
@@ -505,9 +581,14 @@ final class HubLimitsStore {
                 let key = "\(limit.source.rawValue)|\(window.title)|\(window.resetsAt.map { Int($0.timeIntervalSince1970 / 600) } ?? 0)|\(threshold)"
                 guard !notified.contains(key) else { continue }
                 notified.insert(key)
-                Notifier.post(id: "hub-\(key)", title: String(localized: "\(limit.source.title): использовано \(Int(percent.rounded())) %"),
-                              body: [window.title, window.detail, window.resetsAt.map { String(localized: "сброс \($0.formatted(date: .abbreviated, time: .shortened))") }]
-                                .compactMap { $0 }.joined(separator: " · "))
+                let title = String(localized: "\(limit.source.title): использовано \(Int(percent.rounded())) %")
+                let body = [window.title, window.detail, window.resetsAt.map { String(localized: "сброс \($0.formatted(date: .abbreviated, time: .shortened))") }]
+                    .compactMap { $0 }.joined(separator: " · ")
+                Notifier.post(id: "hub-\(key)", title: title, body: body)
+                if settings.limitAlertsToTelegram, let credentials = Telegram.credentials(dailyReportDirectory: settings.dailyReportDirectory) {
+                    let html = "⚠️ <b>\(RunMessage.escape(title))</b>\n\(RunMessage.escape(body))"
+                    Task { _ = await Telegram.send(html: html, with: credentials) }
+                }
             }
         }
     }

@@ -134,6 +134,8 @@ struct MenuBarElement: Codable, Equatable, Hashable, Identifiable, Sendable {
         case cpu, memory
         /// ☕ while «Не спать» holds the Mac awake.
         case keepAwake
+        /// The fullest limit of the other AI services, or the chosen one (SPEC-hub).
+        case otherAI
 
         var title: String {
             switch self {
@@ -154,10 +156,11 @@ struct MenuBarElement: Codable, Equatable, Hashable, Identifiable, Sendable {
             case .cpu: String(localized: "Процессор (модуль «Ресурсы Mac»)")
             case .memory: String(localized: "Память (модуль «Ресурсы Mac»)")
             case .keepAwake: String(localized: "☕, когда Mac не засыпает (модуль «Не спать»)")
+            case .otherAI: String(localized: "Другие AI: Codex, Copilot, Gemini…")
             }
         }
 
-        var isGauge: Bool { [.session, .week, .modelWeek, .cpu, .memory].contains(self) }
+        var isGauge: Bool { [.session, .week, .modelWeek, .cpu, .memory, .otherAI].contains(self) }
 
         /// For the order chips in Settings.
         var shortTitle: String {
@@ -179,6 +182,7 @@ struct MenuBarElement: Codable, Equatable, Hashable, Identifiable, Sendable {
             case .cpu: String(localized: "Процессор")
             case .memory: String(localized: "Память")
             case .keepAwake: String(localized: "Не спать")
+            case .otherAI: String(localized: "Другие AI")
             }
         }
     }
@@ -200,7 +204,8 @@ struct MenuBarElement: Codable, Equatable, Hashable, Identifiable, Sendable {
     var style: GaugeStyle = .number
     /// Gauges: show only from this percentage (0 = always).
     var showAbove: Int = 0
-    /// Model week: the window key, e.g. `seven_day_fable`; nil = the first one available.
+    /// Model week: the window key, e.g. `seven_day_fable`; nil = the first one available. Other AI: the service
+    /// (`HubLimit.Source` raw value); nil = the fullest one.
     var model: String?
     /// Icon: an SF Symbol, `mode` for the current mode's icon.
     var symbol: String = "sparkle"
@@ -255,6 +260,8 @@ struct MenuBarData: Equatable, Hashable, Sendable {
     var cpu: Double?
     var memory: Double?
     var keepingAwake = false
+    /// Other AI services: source raw value → its fullest limit, in percent.
+    var otherAI: [String: Double] = [:]
     /// Countdowns are drawn for this minute.
     var now: Date = .now
 
@@ -263,7 +270,7 @@ struct MenuBarData: Equatable, Hashable, Sendable {
         modelWeeks: ["seven_day_fable": 12], sessionResetsAt: Date.now.addingTimeInterval(2 * 3600 + 14 * 60),
         forecastRunsOut: Date.now.addingTimeInterval(90 * 60), diskFreeBytes: 12_000_000_000,
         deadline: String(localized: "Ролик · 2 дн"), modeName: String(localized: "Видео"), modeIcon: "video",
-        cpu: 23, memory: 71, keepingAwake: true
+        cpu: 23, memory: 71, keepingAwake: true, otherAI: ["codex": 42]
     )
 }
 
@@ -345,6 +352,14 @@ enum MenuBarComposer {
                 }
             case .keepAwake:
                 if data.keepingAwake { groups.append([.symbol("cup.and.saucer.fill")]) }
+            case .otherAI:
+                guard let (source, value) = otherAI(element, data), value >= Double(element.showAbove) else { continue }
+                let name = HubLimit.Source(rawValue: source)?.shortTitle ?? source
+                switch element.style {
+                case .number: groups.append([.text("\(name) \(Int(value.rounded()))%", level(value))])
+                case .ring: groups.append([.text(name, .secondary), .ring(value, level(value))])
+                case .bar: groups.append([.text(name, .secondary), .bar(value, level(value))])
+                }
             case .mode:
                 if element.showName, let name = data.modeName {
                     groups.append([.text(name, .secondary)])
@@ -355,6 +370,13 @@ enum MenuBarComposer {
         }
         // An empty item could not be clicked at all.
         return groups.isEmpty ? [[.symbol("sparkle")]] : groups
+    }
+
+    /// The chosen service, or the fullest one when none is chosen (or the chosen one has no limit now).
+    static func otherAI(_ element: MenuBarElement, _ data: MenuBarData) -> (String, Double)? {
+        if let source = element.model, let value = data.otherAI[source] { return (source, value) }
+        guard element.model == nil else { return nil }
+        return data.otherAI.max { $0.value == $1.value ? $0.key > $1.key : $0.value < $1.value }.map { ($0.key, $0.value) }
     }
 
     /// «2:14» or «2 ч 14 мин».
@@ -408,6 +430,9 @@ enum MenuBarComposer {
         if on.contains(.cpu), let cpu = data.cpu { parts.append(String(localized: "процессор \(Int(cpu.rounded())) %")) }
         if on.contains(.memory), let memory = data.memory { parts.append(String(localized: "память \(Int(memory.rounded())) %")) }
         if on.contains(.keepAwake), data.keepingAwake { parts.append(String(localized: "Mac не засыпает")) }
+        if on.contains(.otherAI), let element = config.elements.first(where: { $0.kind == .otherAI }), let (source, value) = otherAI(element, data) {
+            parts.append("\(HubLimit.Source(rawValue: source)?.title ?? source) \(Int(value.rounded())) %")
+        }
         if on.contains(.mode), let name = data.modeName { parts.append(String(localized: "профиль «\(name)»")) }
         return parts.joined(separator: ", ")
     }
