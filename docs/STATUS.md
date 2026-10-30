@@ -5,10 +5,10 @@
 **Updated:** 2026-10-30
 
 **Now:**
-- automatic renewal of the Claude Code sign-in — branch `feat/renew-login`, PR open
+- automatic renewal of the Claude Code sign-in — branch `feat/renew-login`, PR open; collapsible panel blocks merged (PR #64)
 
 **Next:**
-- rest of the UI review: collapsible panel blocks; menu bar elements reordered by dragging
+- menu bar elements reordered by dragging (needs a different list than a grouped Form)
 - fix whatever Oleh finds in the translations (machine translation; native review for ja, ko, ar at least)
 - stage 8 rest: Developer ID signing and notarization, Sparkle updates — once Oleh decides on Developer ID, the name and where updates are hosted
 - Fix whatever Oleh finds in docs/CHECKLIST.md
@@ -37,6 +37,12 @@
 Done: the limits stopped updating because the Claude Code token in the Keychain expired at 11:02 — only `claude` renews it, and the work happens in the Claude app, whose own Claude Code doesn't. When the limits answer «вход устарел», ClaudePult now sends a one-word request through `claude` (Haiku, no tools, no MCP, no settings so no hooks, no session saved), at most once an hour, and asks for the limits again. Setting «Продлевать вход Claude Code сам» on the Claude Code tab, on by default. ClaudePult still never reads, stores or writes the token itself.
 Checked: by hand the request renewed the token 11:02 → 20:11 (token never printed) and left no session file, hook record or transcript (test leftovers removed); `xcodebuild test` — 162 tests green (new `LoginRenewalTests`); catalog synced, 2 strings in all 12 languages; installed, `--usage` reads the limits again (19 % / 73 %). CI not set up; checks run locally.
 Left: the automatic path itself runs only at the next expiry (~20:11).
+
+## 2026-10-30 — Collapsible panel blocks (branch `feat/collapsible-blocks`)
+
+Done: every panel block (Лимиты, Сессии, Ближайшее, Проекты, Команды) folds with a click on its title; the choice is kept between openings. Folded, a block still shows what matters: session and week %, «ждут ответа», the number of upcoming dates (red if one is overdue), the number of projects and the problems.
+Checked: `xcodebuild test` — 161 tests green (new `CollapsedBlocksTests`); catalog synced, 2 new strings in all 12 languages. Live: installed, panel snapshot with three blocks folded (the setting was put back afterwards). CI not set up; checks run locally.
+Left: menu bar elements still move with arrows.
 
 ## 2026-10-30 — Settings tidy-up from the UI review (branch `feat/settings-tidy`)
 

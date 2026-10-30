@@ -7,67 +7,74 @@ struct LimitsView: View {
     @Environment(CommandEngine.self) private var engine
     @AppStorage("limitsBreakdownExpanded") private var showBreakdown = false
     @State private var period: UsageStore.Period = .session
+    @AppStorage("collapsedBlocks") private var collapsedRaw = ""
+
+    private var collapsed: Bool { PanelBlock.collapsed(in: collapsedRaw).contains(.limits) }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             header
-
-            if let snapshot = usage.snapshot {
-                TimelineView(.periodic(from: .now, by: 30)) { context in
-                    VStack(alignment: .leading, spacing: 8) {
-                        if let session = snapshot.session {
-                            WindowRow(window: session, detail: sessionDetail(session, now: context.date), now: context.date)
-                        }
-                        if let week = snapshot.week {
-                            WindowRow(window: week, detail: nil, now: context.date)
-                        }
-                        ForEach(snapshot.shownOtherWindows, id: \.key) { window in
-                            // A model week usually resets with the week: no need to say it twice.
-                            WindowRow(window: window, detail: nil, now: context.date, compact: true,
-                                      showsReset: window.resetsAt != snapshot.week?.resetsAt)
-                        }
-                    }
-                }
-                // Figures that could not be refreshed are not passed off as current.
-                .opacity(isStale ? 0.45 : 1)
-                if let extra = snapshot.extra, extra.isEnabled {
-                    Label(extraText(extra), systemImage: "creditcard")
-                        .scaledFont(.caption)
-                        .foregroundStyle(.secondary)
-                }
-                // Models by API (SPEC-modes §11.2): shown once ClaudePult has spent something this month.
-                let month = engine.summary(since: engine.monthStart)
-                if month.tokens > 0 {
-                    Label("API за месяц: \(SpendText.line(month))", systemImage: "cpu")
-                        .scaledFont(.caption)
-                        .foregroundStyle(.secondary)
-                }
-                if let error = usage.error {
-                    Label("Не обновилось: \(error)", systemImage: "exclamationmark.triangle")
-                        .scaledFont(.caption)
-                        .foregroundStyle(.orange)
-                        .fixedSize(horizontal: false, vertical: true)
-                }
-            } else if let error = usage.error {
-                Label("Лимиты недоступны. \(error)", systemImage: "exclamationmark.triangle")
-                    .scaledFont(.caption)
-                    .foregroundStyle(.orange)
-                    .fixedSize(horizontal: false, vertical: true)
-            } else {
-                HStack(spacing: 6) {
-                    ProgressView().controlSize(.mini)
-                    Text("Загружаю лимиты…").scaledFont(.caption).foregroundStyle(.secondary)
-                }
-            }
-
-            ForEach(launcher.queued) { item in
-                QueuedRow(item: item)
-            }
-
-            breakdown
+            if !collapsed { details }
         }
         .padding(.horizontal, 14)
         .padding(.vertical, 8)
+    }
+
+    @ViewBuilder
+    private var details: some View {
+        if let snapshot = usage.snapshot {
+            TimelineView(.periodic(from: .now, by: 30)) { context in
+                VStack(alignment: .leading, spacing: 8) {
+                    if let session = snapshot.session {
+                        WindowRow(window: session, detail: sessionDetail(session, now: context.date), now: context.date)
+                    }
+                    if let week = snapshot.week {
+                        WindowRow(window: week, detail: nil, now: context.date)
+                    }
+                    ForEach(snapshot.shownOtherWindows, id: \.key) { window in
+                        // A model week usually resets with the week: no need to say it twice.
+                        WindowRow(window: window, detail: nil, now: context.date, compact: true,
+                                  showsReset: window.resetsAt != snapshot.week?.resetsAt)
+                    }
+                }
+            }
+            // Figures that could not be refreshed are not passed off as current.
+            .opacity(isStale ? 0.45 : 1)
+            if let extra = snapshot.extra, extra.isEnabled {
+                Label(extraText(extra), systemImage: "creditcard")
+                    .scaledFont(.caption)
+                    .foregroundStyle(.secondary)
+            }
+            // Models by API (SPEC-modes §11.2): shown once ClaudePult has spent something this month.
+            let month = engine.summary(since: engine.monthStart)
+            if month.tokens > 0 {
+                Label("API за месяц: \(SpendText.line(month))", systemImage: "cpu")
+                    .scaledFont(.caption)
+                    .foregroundStyle(.secondary)
+            }
+            if let error = usage.error {
+                Label("Не обновилось: \(error)", systemImage: "exclamationmark.triangle")
+                    .scaledFont(.caption)
+                    .foregroundStyle(.orange)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+        } else if let error = usage.error {
+            Label("Лимиты недоступны. \(error)", systemImage: "exclamationmark.triangle")
+                .scaledFont(.caption)
+                .foregroundStyle(.orange)
+                .fixedSize(horizontal: false, vertical: true)
+        } else {
+            HStack(spacing: 6) {
+                ProgressView().controlSize(.mini)
+                Text("Загружаю лимиты…").scaledFont(.caption).foregroundStyle(.secondary)
+            }
+        }
+
+        ForEach(launcher.queued) { item in
+            QueuedRow(item: item)
+        }
+
+        breakdown
     }
 
     private var isStale: Bool { usage.error != nil }
@@ -75,9 +82,14 @@ struct LimitsView: View {
     /// The panel's own refresh (⌘R) updates the limits too; the age shows only while the figures are old.
     private var header: some View {
         HStack(spacing: 6) {
-            Text("Лимиты")
-                .scaledFont(.caption, weight: .semibold)
-                .foregroundStyle(.secondary)
+            BlockTitle(block: .limits, title: "Лимиты")
+            // Folded, the block still says the two numbers that matter.
+            if collapsed, let snapshot = usage.snapshot {
+                Text(verbatim: [snapshot.session, snapshot.week].compactMap { $0.map { UsageText.percent($0.utilization) } }.joined(separator: " · "))
+                    .scaledFont(.caption, weight: .semibold)
+                    .monospacedDigit()
+                    .opacity(isStale ? 0.45 : 1)
+            }
             Spacer()
             if usage.isRefreshing {
                 ProgressView().controlSize(.mini)

@@ -105,6 +105,46 @@ enum PanelBlock: String, CaseIterable, Identifiable, Sendable {
     }
 }
 
+extension PanelBlock {
+    /// Folded blocks, kept in `collapsedBlocks` as «limits,projects».
+    static func collapsed(in raw: String) -> Set<PanelBlock> {
+        Set(raw.split(separator: ",").compactMap { PanelBlock(rawValue: String($0)) })
+    }
+
+    static func toggling(_ block: PanelBlock, in raw: String) -> String {
+        var set = collapsed(in: raw)
+        if set.contains(block) { set.remove(block) } else { set.insert(block) }
+        return allCases.filter(set.contains).map(\.rawValue).joined(separator: ",")
+    }
+}
+
+/// A panel block's title that folds the block — the panel gets tall on a laptop screen. A click toggles it,
+/// and the choice is kept between openings.
+struct BlockTitle: View {
+    let block: PanelBlock
+    let title: LocalizedStringKey
+    @AppStorage("collapsedBlocks") private var collapsedRaw = ""
+
+    var body: some View {
+        let collapsed = PanelBlock.collapsed(in: collapsedRaw).contains(block)
+        Button {
+            withAnimation(.snappy(duration: 0.2)) { collapsedRaw = PanelBlock.toggling(block, in: collapsedRaw) }
+        } label: {
+            HStack(spacing: 4) {
+                Image(systemName: "chevron.right")
+                    .scaledFont(.caption2, weight: .semibold)
+                    .rotationEffect(.degrees(collapsed ? 0 : 90))
+                Text(title)
+                    .scaledFont(.caption, weight: .semibold)
+            }
+            .foregroundStyle(.secondary)
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+        .help(collapsed ? String(localized: "Развернуть") : String(localized: "Свернуть"))
+    }
+}
+
 extension EnvironmentValues {
     @Entry var panelTextScale: CGFloat = 1
     @Entry var panelDensity: CGFloat = 1

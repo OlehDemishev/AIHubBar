@@ -59,3 +59,16 @@ struct AppearanceTests {
         #expect(PanelTheme.dark.colorScheme == .dark)
     }
 }
+
+struct CollapsedBlocksTests {
+    @Test func togglesAndKeepsOrder() {
+        var raw = ""
+        raw = PanelBlock.toggling(.projects, in: raw)
+        raw = PanelBlock.toggling(.limits, in: raw)
+        #expect(raw == "limits,projects", "stored in the panel's order")
+        #expect(PanelBlock.collapsed(in: raw) == [.limits, .projects])
+        raw = PanelBlock.toggling(.limits, in: raw)
+        #expect(PanelBlock.collapsed(in: raw) == [.projects])
+        #expect(PanelBlock.collapsed(in: "projects,unknown,,") == [.projects], "unknown names are ignored")
+    }
+}
