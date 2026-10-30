@@ -27,7 +27,7 @@
 ## 2026-10-30 — Usage endpoint backoff (branch `fix/usage-backoff`)
 
 Done: HTTP 429 from the usage endpoint now pauses requests for 5 → 10 → 20 → 40 → 60 min (longer if `Retry-After` asks; its «0» is not trusted); the panel shows when the next try is and the refresh button waits. Active polling every 2 min instead of 1. Last snapshot cached in `usage-snapshot.json`, shown right after a restart; a restart within the active interval does not fetch.
-Checked: `scripts/build-and-install.sh --test` — 94 tests (143 cases) green incl. Retry-After parsing and the backoff sequence; no compiler warnings. Live: the log showed the server answering 429 with `Retry-After: 0`; a fetch in between succeeded and was cached (session 3 %, week 64 %). CI not set up; checks run locally.
+Checked: `scripts/build-and-install.sh --test` — 94 tests (143 cases) green incl. Retry-After parsing and the backoff sequence; no compiler warnings. Live: the log showed the server answering 429 with `Retry-After: 0`; a fetch in between succeeded and was cached (session 3 %, week 64 %). With the fix installed: no 429 in the 7 minutes after, the next fetch succeeded (02:12) and refreshed the cache. CI not set up; checks run locally.
 Left: the endpoint's real limit is unknown (undocumented).
 
 ## 2026-10-30 — Modes, stage 1 (branch `feat/modes`)
