@@ -25,7 +25,9 @@ struct ReadinessTests {
         let other = item(.service, input(claude: nil, others: ["OpenAI"]))
         #expect(other.state == .done && other.detail.contains("OpenAI"), "another service is enough to start")
         #expect(item(.service, input(claude: "")).detail.contains("Claude Code."), "unknown version")
-        #expect(item(.service, input(claude: "2.1.312 (Claude Code)")).detail.contains("Claude Code 2.1.312."))
+        #expect(AgentKind.claudeCode.version(fromOutput: "2.1.312 (Claude Code)\n") == "2.1.312", "the product name is not repeated")
+        #expect(AgentKind.codex.version(fromOutput: "codex-cli 0.40.0") == "codex-cli 0.40.0")
+        #expect(AgentKind.claudeCode.version(fromOutput: "  \n") == nil)
         var scanning = input(claude: nil)
         scanning.servicesChecked = false
         #expect(item(.service, scanning).state == .optional && item(.service, scanning).action == nil, "no verdict before the first scan")

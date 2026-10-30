@@ -105,10 +105,8 @@ final class AIServiceStore {
             let path = kind == .claudeCode ? ClaudeLocator.detect() : kind.detect()
             guard let path else { continue }
             let result = try? await ProcessRunner.run(path, kind.versionArguments, timeout: .seconds(10))
-            let version = result.flatMap { $0.exitCode == 0 ? $0.stdoutText : nil }
-                .map { $0.split(separator: "\n").first.map(String.init) ?? "" }?
-                .trimmingCharacters(in: .whitespaces)
-            found[kind] = AgentInfo(path: path, version: version?.isEmpty == false ? version : nil)
+            let version = result.flatMap { $0.exitCode == 0 ? $0.stdoutText : nil }.flatMap(kind.version(fromOutput:))
+            found[kind] = AgentInfo(path: path, version: version)
         }
         return found
     }

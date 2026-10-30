@@ -26,6 +26,8 @@ struct LimitsView: View {
                         }
                     }
                 }
+                // Figures that could not be refreshed are not passed off as current.
+                .opacity(isStale ? 0.45 : 1)
                 if let extra = snapshot.extra, extra.isEnabled {
                     Label(extraText(extra), systemImage: "creditcard")
                         .scaledFont(.caption)
@@ -42,6 +44,7 @@ struct LimitsView: View {
                     Label("Не обновилось: \(error)", systemImage: "exclamationmark.triangle")
                         .scaledFont(.caption)
                         .foregroundStyle(.orange)
+                        .fixedSize(horizontal: false, vertical: true)
                 }
             } else if let error = usage.error {
                 Label("Лимиты недоступны. \(error)", systemImage: "exclamationmark.triangle")
@@ -65,31 +68,24 @@ struct LimitsView: View {
         .padding(.vertical, 8)
     }
 
+    private var isStale: Bool { usage.error != nil }
+
+    /// The panel's own refresh (⌘R) updates the limits too; the age shows only while the figures are old.
     private var header: some View {
         HStack(spacing: 6) {
             Text("Лимиты")
                 .scaledFont(.caption, weight: .semibold)
                 .foregroundStyle(.secondary)
             Spacer()
-            if let fetched = usage.snapshot?.fetchedAt {
+            if usage.isRefreshing {
+                ProgressView().controlSize(.mini)
+            } else if isStale, let fetched = usage.snapshot?.fetchedAt {
                 TimelineView(.periodic(from: .now, by: 30)) { context in
-                    Text(RelativeTime.ago(fetched, now: context.date))
+                    Text("данные \(RelativeTime.ago(fetched, now: context.date))")
                         .scaledFont(.caption2)
-                        .foregroundStyle(.tertiary)
+                        .foregroundStyle(.orange)
                 }
             }
-            Button {
-                Task { await usage.refresh() }
-            } label: {
-                if usage.isRefreshing {
-                    ProgressView().controlSize(.mini)
-                } else {
-                    Image(systemName: "arrow.clockwise").scaledFont(.caption)
-                }
-            }
-            .buttonStyle(.borderless)
-            .disabled(usage.isRefreshing || (usage.pausedUntil.map { $0 > .now } ?? false))
-            .help(usage.pausedUntil.map { $0 > .now ? String(localized: "Пауза до \($0.formatted(date: .omitted, time: .shortened)): сервер просит запрашивать реже") : String(localized: "Обновить лимиты") } ?? String(localized: "Обновить лимиты"))
         }
     }
 

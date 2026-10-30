@@ -62,9 +62,7 @@ enum Readiness {
     private static func service(_ input: Input) -> ReadinessItem {
         let title = String(localized: "Сервис AI")
         if let version = input.claudeVersion {
-            // `claude --version` prints «2.1.312 (Claude Code)».
-            let number = version.replacingOccurrences(of: "(Claude Code)", with: "").trimmingCharacters(in: .whitespaces)
-            let found = number.isEmpty ? "Claude Code" : "Claude Code \(number)"
+            let found = version.isEmpty ? "Claude Code" : "Claude Code \(version)"
             let others = input.otherServices.isEmpty ? "" : String(localized: "; ещё: ") + input.otherServices.joined(separator: ", ")
             return ReadinessItem(id: .service, title: title, detail: String(localized: "Найден \(found)") + others + ".", state: .done)
         }

@@ -19,6 +19,7 @@ final class HookController {
     private var installer: HookInstaller { .live(projectsDirectory: settings.projectsDirectory) }
 
     func refresh() {
+        if (try? installer.updateScriptIfNeeded()) == true { AppLog.info("Hook script updated to this version") }
         status = installer.status()
     }
 

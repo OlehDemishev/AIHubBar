@@ -5,9 +5,11 @@
 **Updated:** 2026-10-30
 
 **Now:**
-- onboarding (welcome screen with readiness checks) and docs/GUIDE.md merged (PR #55); nothing in progress
+- UI quick fixes from the review — branch `fix/ui-quick`, PR open
 
 **Next:**
+- the rest of the UI review: compact limits block, projects header and badges, separate «Очистка: выполнить», shorter panel; then Settings tabs (merge Claude / Сессии / Лимиты, mode list, menu bar order)
+- keep the Claude Code login fresh: test whether a tiny `claude -p` renews the token; or `claude setup-token` (needs Oleh)
 - fix whatever Oleh finds in the translations (machine translation; native review for ja, ko, ar at least)
 - stage 8 rest: Developer ID signing and notarization, Sparkle updates — once Oleh decides on Developer ID, the name and where updates are hosted
 - Fix whatever Oleh finds in docs/CHECKLIST.md
@@ -29,6 +31,12 @@
 - hooks are installed in ~/.claude/settings.json; backup of the original: ~/.claude/settings.json.claudepult-backup-20261029T192827
 - delete or archive the old repo `OlehDemishev/ClaudeBar`; turn on start at login if wanted
 <!-- summary:end -->
+
+## 2026-10-30 — UI quick fixes from the review (branch `fix/ui-quick`)
+
+Done: the session hook follows a resumed session to its new `claude` process (after the Claude app restarted overnight, a live session showed as «завершена»), and ClaudePult rewrites an outdated hook script itself while the hooks are installed. Panel: one refresh (⌘R) for projects and limits; limits that failed to refresh are dimmed with «данные … назад», and the warning wraps instead of being cut. Settings: the thresholds field no longer repeats its value as a label; the Limits footnote points to «Строка меню»; «Обновить hooks» only when needed; agent versions without the repeated product name.
+Checked: `xcodebuild test` — 160 tests green (new: hook under a process named `claude`, script self-update, version parsing); catalog synced (2 keys gone, 2 changed, all 12 languages). Live: installed; hook script updated by itself, this session's record moved to the live process and shows «работает»; Limits, Sessions, Services tabs and the panel captured. CI not set up; checks run locally.
+Left: the rest of the review (see Next).
 
 ## 2026-10-30 — Modes settings without the grey sidebar (branch `fix/modes-sidebar`)
 

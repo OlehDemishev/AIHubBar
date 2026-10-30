@@ -244,3 +244,13 @@ Panel snapshots: `defaults write com.demishev.claudepult DebugPanelSnapshot -boo
 | 22 new strings in all 12 languages, format specifiers match | Script check |
 | A real first start on a clean account: the welcome screen, each button (install hooks, allow notifications, System Settings, login item, «Сервисы AI»), «Проверить снова» after coming back from System Settings | Oleh |
 | docs/GUIDE.md reads well for someone new | Oleh |
+
+## UI quick fixes (after the UI review, 2026-10-30)
+
+| Scenario | Checked |
+|---|---|
+| A session resumed in a new process (Claude app restart, `claude --resume`) shows as running, not «завершена» | Auto (hook under a process named `claude`) + live (this session after the fix) |
+| An app update replaces an outdated hook script by itself while the hooks are installed | Auto + live (`--hooks status`: installed) |
+| Agent version without the repeated product name («2.1.312») | Auto + live (Сервисы AI) |
+| Limits tab: thresholds shown once, footnote points to «Строка меню»; Sessions tab: no «Обновить hooks» while installed | Live (window captures) |
+| Panel: one refresh (⌘R) for projects and limits; stale limits dimmed with «данные … назад»; the warning wraps instead of being cut | Live (panel snapshot) |

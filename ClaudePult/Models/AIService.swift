@@ -126,6 +126,13 @@ enum AgentKind: String, CaseIterable, Codable, Sendable {
 
     var versionArguments: [String] { ["--version"] }
 
+    /// The first line of `--version` without the product name the tool repeats («2.1.312 (Claude Code)» → «2.1.312»).
+    func version(fromOutput output: String) -> String? {
+        let line = output.split(separator: "\n").first.map(String.init) ?? ""
+        let version = line.replacingOccurrences(of: "(\(title))", with: "").trimmingCharacters(in: .whitespaces)
+        return version.isEmpty ? nil : version
+    }
+
     static func candidates(_ binary: String, home: String = NSHomeDirectory()) -> [String] {
         [
             "/opt/homebrew/bin/\(binary)",

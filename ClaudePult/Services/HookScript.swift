@@ -138,8 +138,11 @@ enum HookScript {
                 if data.get(key):
                     record[key] = data[key]
             record["project"], record["project_path"] = project_of(record.get("cwd"), arg("--projects-dir"))
-            if "claude_pid" not in record:
-                record["claude_pid"], record["tty"] = claude_process()
+            # A resumed session (the Claude app restarted, `claude --resume`) runs in a new process: follow it,
+            # or the panel would take the old, gone process for an ended session.
+            pid, tty = claude_process()
+            if "claude_pid" not in record or (pid and pid != record.get("claude_pid")):
+                record["claude_pid"], record["tty"] = pid, tty
                 record["term_program"] = os.environ.get("TERM_PROGRAM")
                 record["entrypoint"] = os.environ.get("CLAUDE_CODE_ENTRYPOINT")
             apply(record, data)
