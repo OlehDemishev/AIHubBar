@@ -13,6 +13,8 @@ enum NotificationTarget: Equatable, Sendable {
     case file(path: String)
     /// One of ClaudePult's windows (the cleanup output).
     case window(id: String)
+    /// A web page (a pull request).
+    case link(URL)
     /// A permission Claude asked for: «Разрешить» / «Отклонить» right on the banner.
     case approval(sessionID: String, requestID: String)
     case none
@@ -24,6 +26,7 @@ enum NotificationTarget: Equatable, Sendable {
         case let .file(path): ["target": "file", "path": path]
         case let .window(id): ["target": "window", "id": id]
         case let .approval(sessionID, requestID): ["target": "approval", "id": sessionID, "request": requestID]
+        case let .link(url): ["target": "link", "url": url.absoluteString]
         case .none: [:]
         }
     }
@@ -35,6 +38,7 @@ enum NotificationTarget: Equatable, Sendable {
         case "run" where !value("id").isEmpty: self = .run(id: value("id"), pullRequest: value("pr").isEmpty ? nil : value("pr"))
         case "file" where !value("path").isEmpty: self = .file(path: value("path"))
         case "window" where !value("id").isEmpty: self = .window(id: value("id"))
+        case "link" where URL(string: value("url"))?.scheme == "https": self = .link(URL(string: value("url"))!)
         case "approval" where !value("id").isEmpty && !value("request").isEmpty:
             self = .approval(sessionID: value("id"), requestID: value("request"))
         default: self = .none
@@ -47,7 +51,7 @@ enum NotificationTarget: Equatable, Sendable {
         case .session: NotificationAction.sessionCategory
         case .approval: NotificationAction.approvalCategory
         case let .run(_, pullRequest): pullRequest == nil ? NotificationAction.runCategory : NotificationAction.runWithPRCategory
-        case .file, .window, .none: nil
+        case .file, .window, .link, .none: nil
         }
     }
 }
@@ -88,6 +92,8 @@ enum NotificationAction {
             return .openFile(path: path)
         case let .window(id):
             return .openWindow(id: id)
+        case let .link(url):
+            return .openURL(url)
         case let .approval(sessionID, requestID):
             if action == allow { return .decide(requestID: requestID, allow: true) }
             if action == deny { return .decide(requestID: requestID, allow: false) }

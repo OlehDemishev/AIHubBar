@@ -6934,6 +6934,89 @@
         }
       }
     },
+    "PR закрыт или смерджен: %@ #%lld": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "أُغلق PR أو دُمج: %@ #%lld"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PR geschlossen oder gemergt: %@ #%lld"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PR closed or merged: %@ #%lld"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PR cerrado o fusionado: %@ #%lld"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PR fermée ou fusionnée : %@ #%lld"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PR ditutup atau digabung: %@ #%lld"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PR chiusa o unita: %@ #%lld"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PR がクローズまたはマージされました: %@ #%lld"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PR이 닫히거나 병합됨: %@ #%lld"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PR zamknięty lub scalony: %@ #%lld"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PR fechado ou mesclado: %@ #%lld"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "new",
+            "value": "PR закрыт или смерджен: %1$@ #%2$lld"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PR закрито або змерджено: %@ #%lld"
+          }
+        }
+      }
+    },
+    "Pull requests": {},
     "Shorts: лайфхак": {
       "localizations": {
         "ar": {
@@ -18128,6 +18211,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Дублювати"
+          }
+        }
+      }
+    },
+    "Дублировать в Telegram": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إرسال إلى Telegram أيضًا"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Auch an Telegram senden"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Also send to Telegram"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enviar también a Telegram"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Envoyer aussi dans Telegram"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kirim juga ke Telegram"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Invia anche a Telegram"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Telegram にも送る"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Telegram에도 보내기"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wysyłaj też do Telegramu"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enviar também ao Telegram"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Дублювати в Telegram"
           }
         }
       }
@@ -40963,6 +41122,82 @@
         }
       }
     },
+    "По данным списка проектов (gh): обновляется раз в 5 минут и при открытии панели. Клик по уведомлению открывает PR.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "من قائمة المشاريع (gh): تُحدَّث كل 5 دقائق وعند فتح اللوحة. النقر على الإشعار يفتح PR."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aus der Projektliste (gh): alle 5 Minuten und beim Öffnen des Panels aktualisiert. Ein Klick auf die Mitteilung öffnet den PR."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "From the project list (gh): updated every 5 minutes and when the panel opens. Clicking the notification opens the PR."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Según la lista de proyectos (gh): se actualiza cada 5 minutos y al abrir el panel. Al hacer clic en la notificación se abre el PR."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "D’après la liste des projets (gh) : mise à jour toutes les 5 minutes et à l’ouverture du panneau. Un clic sur la notification ouvre la PR."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dari daftar proyek (gh): diperbarui tiap 5 menit dan saat panel dibuka. Klik notifikasi membuka PR."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dall’elenco progetti (gh): aggiornato ogni 5 minuti e all’apertura del pannello. Un clic sulla notifica apre la PR."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "プロジェクト一覧（gh）から。5 分ごととパネルを開いたときに更新。通知をクリックすると PR を開きます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "프로젝트 목록(gh) 기준: 5분마다, 그리고 패널을 열 때 업데이트됩니다. 알림을 클릭하면 PR이 열립니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Z listy projektów (gh): odświeżane co 5 minut i przy otwarciu panelu. Kliknięcie powiadomienia otwiera PR."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pela lista de projetos (gh): atualiza a cada 5 minutos e ao abrir o painel. Clicar na notificação abre o PR."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "За списком проєктів (gh): оновлюється раз на 5 хвилин і при відкритті панелі. Клік по сповіщенню відкриває PR."
+          }
+        }
+      }
+    },
     "По желанию: чтобы ClaudePult был в строке меню сразу после входа.": {
       "localizations": {
         "ar": {
@@ -58841,6 +59076,82 @@
         }
       }
     },
+    "Уведомлять, когда CI упал или починился и когда PR закрыт": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "التنبيه عند فشل CI أو تعافيه وعند إغلاق PR"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Benachrichtigen, wenn CI fehlschlägt oder wieder läuft und wenn ein PR geschlossen wird"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notify when CI fails or recovers and when a PR closes"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Avisar cuando el CI falle o se arregle y cuando se cierre un PR"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prévenir quand la CI échoue ou repart et quand une PR se ferme"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beri tahu saat CI gagal atau pulih dan saat PR ditutup"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Avvisa quando la CI fallisce o torna verde e quando una PR si chiude"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CI の失敗・復旧と PR のクローズを通知"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CI가 실패하거나 복구될 때와 PR이 닫힐 때 알림"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Powiadamiaj, gdy CI padnie lub wróci i gdy PR zostanie zamknięty"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Avisar quando o CI falhar ou voltar e quando um PR fechar"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Сповіщати, коли CI впав чи полагодився і коли PR закрито"
+          }
+        }
+      }
+    },
     "Удалить": {
       "localizations": {
         "ar": {
@@ -73695,6 +74006,88 @@
         }
       }
     },
+    "✅ CI снова зелёный: %@ #%lld": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "✅ عاد CI أخضر: %@ #%lld"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "✅ CI wieder grün: %@ #%lld"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "✅ CI green again: %@ #%lld"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "✅ CI en verde otra vez: %@ #%lld"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "✅ CI de nouveau au vert : %@ #%lld"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "✅ CI hijau lagi: %@ #%lld"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "✅ CI di nuovo verde: %@ #%lld"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "✅ CI が再びグリーン: %@ #%lld"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "✅ CI 다시 녹색: %@ #%lld"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "✅ CI znów zielone: %@ #%lld"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "✅ CI verde de novo: %@ #%lld"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "new",
+            "value": "✅ CI снова зелёный: %1$@ #%2$lld"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "✅ CI знову зелений: %@ #%lld"
+          }
+        }
+      }
+    },
     "✦ Искра": {
       "localizations": {
         "ar": {
@@ -73767,6 +74160,88 @@
           "stringUnit": {
             "state": "translated",
             "value": "✦ Іскра"
+          }
+        }
+      }
+    },
+    "❌ CI упал: %@ #%lld": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "❌ فشل CI: %@ #%lld"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "❌ CI fehlgeschlagen: %@ #%lld"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "❌ CI failed: %@ #%lld"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "❌ Falló el CI: %@ #%lld"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "❌ CI en échec : %@ #%lld"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "❌ CI gagal: %@ #%lld"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "❌ CI fallita: %@ #%lld"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "❌ CI 失敗: %@ #%lld"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "❌ CI 실패: %@ #%lld"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "❌ CI padło: %@ #%lld"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "❌ CI falhou: %@ #%lld"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "new",
+            "value": "❌ CI упал: %1$@ #%2$lld"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "❌ CI впав: %@ #%lld"
           }
         }
       }

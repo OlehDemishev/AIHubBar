@@ -6,7 +6,9 @@ import Observation
 @MainActor
 @Observable
 final class ProjectStore {
-    private(set) var report: ProjectsReport?
+    private(set) var report: ProjectsReport? {
+        didSet { announcePullRequests(from: oldValue?.projects, to: report?.projects) }
+    }
     private(set) var lastUpdated: Date?
     private(set) var isRefreshing = false
     private(set) var lastError: String?
@@ -24,6 +26,26 @@ final class ProjectStore {
     }
 
     var projects: [Project] { report?.projects ?? [] }
+
+    /// CI went red or green, a PR closed: a notification (and Telegram if chosen) whose click opens the PR.
+    private func announcePullRequests(from old: [Project]?, to new: [Project]?) {
+        guard settings.pullRequestAlerts, let old, let new else { return }
+        let changes = PullRequestAlerts.changes(from: old, to: new)
+        for change in changes {
+            let url = PullRequestAlerts.url(change)
+            Notifier.post(id: "pr-\(PullRequestAlerts.title(change))", title: PullRequestAlerts.title(change),
+                          body: PullRequestAlerts.body(change), target: url.map { .link($0) } ?? .none)
+        }
+        guard !changes.isEmpty else { return }
+        AppLog.info("Pull request changes: \(changes.count)")
+        if settings.pullRequestAlertsToTelegram, let credentials = Telegram.credentials(dailyReportDirectory: settings.dailyReportDirectory) {
+            let html = changes.map { change in
+                let title = RunMessage.escape(PullRequestAlerts.title(change)) + " — " + RunMessage.escape(PullRequestAlerts.body(change))
+                return PullRequestAlerts.url(change).map { "\(title)\n<a href=\"\(RunMessage.escape($0.absoluteString))\">PR</a>" } ?? title
+            }.joined(separator: "\n\n")
+            Task { _ = await Telegram.send(html: html, with: credentials) }
+        }
+    }
 
     func start() {
         guard loop == nil else { return }

@@ -228,3 +228,55 @@ enum ISODate {
             ?? (try? Date(string, strategy: Date.ISO8601FormatStyle()))
     }
 }
+
+/// What changed in the open pull requests between two reports: CI went red or green again, a PR is no longer open.
+/// The first report after launch only sets the baseline.
+enum PullRequestAlerts {
+    enum Change: Equatable, Sendable {
+        case ciFailed(project: String, number: Int, title: String, url: URL?)
+        case ciFixed(project: String, number: Int, title: String, url: URL?)
+        case closed(project: String, number: Int, title: String, url: URL?)
+    }
+
+    static func changes(from old: [Project], to new: [Project]) -> [Change] {
+        var changes: [Change] = []
+        let before = Dictionary(old.map { ($0.name, $0) }) { first, _ in first }
+        for project in new {
+            // nil: the report had no PR data this time (no `gh`, offline) — not «all closed».
+            guard let previous = before[project.name], let was = previous.openPRs, let now = project.openPRs else { continue }
+            let current = Dictionary(now.map { ($0.number, $0) }) { first, _ in first }
+            for pr in was {
+                guard let updated = current[pr.number] else {
+                    changes.append(.closed(project: project.name, number: pr.number, title: pr.title, url: pr.url))
+                    continue
+                }
+                if updated.ci == .fail, pr.ci != .fail {
+                    changes.append(.ciFailed(project: project.name, number: pr.number, title: updated.title, url: updated.url))
+                } else if pr.ci == .fail, updated.ci == .ok {
+                    changes.append(.ciFixed(project: project.name, number: pr.number, title: updated.title, url: updated.url))
+                }
+            }
+        }
+        return changes
+    }
+
+    static func title(_ change: Change) -> String {
+        switch change {
+        case let .ciFailed(project, number, _, _): String(localized: "❌ CI упал: \(project) #\(number)")
+        case let .ciFixed(project, number, _, _): String(localized: "✅ CI снова зелёный: \(project) #\(number)")
+        case let .closed(project, number, _, _): String(localized: "PR закрыт или смерджен: \(project) #\(number)")
+        }
+    }
+
+    static func body(_ change: Change) -> String {
+        switch change {
+        case let .ciFailed(_, _, title, _), let .ciFixed(_, _, title, _), let .closed(_, _, title, _): title
+        }
+    }
+
+    static func url(_ change: Change) -> URL? {
+        switch change {
+        case let .ciFailed(_, _, _, url), let .ciFixed(_, _, _, url), let .closed(_, _, _, url): url
+        }
+    }
+}

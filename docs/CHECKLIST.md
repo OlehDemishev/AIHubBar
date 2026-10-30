@@ -443,6 +443,15 @@ Panel snapshots: `defaults write com.demishev.claudepult DebugPanelSnapshot -boo
 | Settings → Claude Code shows «Ответы из Telegram»: switch, token field (Keychain), chat id, «Проверить», the note about a separate bot | Live (real window capture) |
 | A real bot: test message, a request with buttons, «Разрешить» from the phone reaching Claude, buttons removed after an answer on the Mac | Oleh — needs a bot from @BotFather |
 
+## PR and CI alerts (2026-10-30)
+
+| Scenario | Checked |
+|---|---|
+| CI pending→fail, fail→ok and a PR gone between two reports; no repeat while still failing; null PR data or a project leaving the list says nothing | Auto (`PullRequestAlertTests`) |
+| The notification's click target is the PR (https only) | Auto |
+| Settings → «Модули» → «Проекты» has the two switches | Live (accessibility text) |
+| A real CI failure arriving as a notification | Oleh (next red CI) |
+
 ## Release without an Apple Developer account (2026-10-30)
 
 | Scenario | Checked |

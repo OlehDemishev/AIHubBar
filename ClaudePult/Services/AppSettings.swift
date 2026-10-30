@@ -121,6 +121,15 @@ final class AppSettings {
         didSet { defaults.set(clipboardRemember, forKey: Keys.clipboardRemember) }
     }
 
+    /// Notify when a pull request's CI fails or recovers, or the PR closes (`PullRequestAlerts`).
+    var pullRequestAlerts: Bool {
+        didSet { defaults.set(pullRequestAlerts, forKey: Keys.pullRequestAlerts) }
+    }
+
+    var pullRequestAlertsToTelegram: Bool {
+        didSet { defaults.set(pullRequestAlertsToTelegram, forKey: Keys.pullRequestAlertsToTelegram) }
+    }
+
     /// Also from Telegram, through ClaudePult's own bot (`TelegramApprovals`); chat id empty = the `_daily-report` one.
     var telegramApprovals: Bool {
         didSet { defaults.set(telegramApprovals, forKey: Keys.telegramApprovals) }
@@ -224,6 +233,8 @@ final class AppSettings {
         clipboardRemember = defaults.bool(forKey: Keys.clipboardRemember)
         approvalsFromClaudePult = defaults.object(forKey: Keys.approvalsFromClaudePult) as? Bool ?? true
         telegramApprovals = defaults.bool(forKey: Keys.telegramApprovals)
+        pullRequestAlerts = defaults.object(forKey: Keys.pullRequestAlerts) as? Bool ?? true
+        pullRequestAlertsToTelegram = defaults.bool(forKey: Keys.pullRequestAlertsToTelegram)
         telegramApprovalsChatID = defaults.string(forKey: Keys.telegramApprovalsChatID) ?? ""
         clipboardExcludedApps = defaults.stringArray(forKey: Keys.clipboardExcludedApps) ?? ClipboardPolicy.defaultExcludedApps
         notesFolder = defaults.string(forKey: Keys.notesFolder) ?? "~/Documents/ClaudePult Notes"
@@ -264,6 +275,8 @@ final class AppSettings {
         static let clipboardRemember = "clipboardRemember"
         static let approvalsFromClaudePult = "approvalsFromClaudePult"
         static let telegramApprovals = "telegramApprovals"
+        static let pullRequestAlerts = "pullRequestAlerts"
+        static let pullRequestAlertsToTelegram = "pullRequestAlertsToTelegram"
         static let telegramApprovalsChatID = "telegramApprovalsChatID"
         static let clipboardExcludedApps = "clipboardExcludedApps"
         static let notesFolder = "notesFolder"
