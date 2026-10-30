@@ -409,4 +409,5 @@ Panel snapshots: `defaults write com.demishev.claudepult DebugPanelSnapshot -boo
 | `scripts/release.sh 0.2.0`: Release build 0.2.0 (183), signed inside out, `codesign --verify --deep --strict` passes, the widget keeps its sandbox, no get-task-allow, designated requirement bound to the certificate, the binary loads Sparkle and runs, `.dmg` checksum valid, appcast with a verified Ed25519 signature; Gatekeeper rejects it (expected without Developer ID) | Live (not published) |
 | Tests with Sparkle in the host app | Auto (192 green) |
 | Publishing, downloading on another Mac, «Open Anyway», a real Sparkle update from one release to the next | Oleh — needs the repository public and two releases |
+| Re-check on main after the second wave, hints, drag and translation fixes: `scripts/release.sh 0.2.0` → build 202, deep strict verify OK, widget sandbox kept, no get-task-allow, requirement bound to the certificate, `.dmg` checksum valid, appcast length equals the `.dmg` and its Ed25519 signature verifies, the binary runs (`--modes`), no temporary keychain left; Gatekeeper rejects as expected | Live (2026-10-30, not published) |
 

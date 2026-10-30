@@ -5,7 +5,7 @@
 **Updated:** 2026-10-30
 
 **Now:**
-- menu bar elements reordered by dragging merged (PR #93); translation review fixes (branch `fix/translation-review`)
+- merged: menu bar drag reordering (PR #93), translation review (PR #94); release build re-checked on main (branch `chore/release-check`)
 - hover hints for icon-only controls and the menu bar item merged (PR #91)
 - second wave merged: «История буфера» and «Заметки» (PR #87), «Не спать» with the lid closed (PR #89)
 - release without an Apple Developer account merged (PR #85): Sparkle, self-signed signing, `scripts/release.sh`, MIT license; nothing published yet
@@ -14,7 +14,7 @@
 **Next:**
 - standing rule (SPEC §3.1): every new icon-only control gets a hover hint; finish each UI stage with the accessibility walk
 - fix whatever Oleh finds in the translations (automated checks pass; a native read for ja, ko, ar is still worth it)
-- stage 8 rest: Developer ID signing and notarization, Sparkle updates — once Oleh decides on Developer ID, the name and where updates are hosted
+- stage 8: done without Developer ID (self-signed + Sparkle, PR #85; re-checked on main); notarization only if Oleh buys Developer ID; publishing is Oleh's step (Needs Oleh)
 - Fix whatever Oleh finds in docs/CHECKLIST.md
 - Windows and Linux versions (docs/SPEC-windows.md, docs/SPEC-linux.md) — only when Oleh says; stage 0 (fact checks in VMs) first
 
@@ -48,6 +48,12 @@
 - hooks are installed in ~/.claude/settings.json; backup of the original: ~/.claude/settings.json.claudepult-backup-20261029T192827
 - delete or archive the old repo `OlehDemishev/ClaudeBar`; turn on start at login if wanted
 <!-- summary:end -->
+
+## 2026-10-30 — Release build re-checked on main (branch `chore/release-check`)
+
+Done: stage 8 is closed as far as it goes without Apple: `scripts/release.sh 0.2.0` on today's main (second wave, lid rule, hints, drag, translation fixes) builds and signs; SPEC-modes stage 8 and the STATUS plan now say so (notarization only with a Developer ID; publishing is Oleh's).
+Checked: build 0.2.0 (202); `codesign --verify --deep --strict` OK; widget keeps its sandbox; no get-task-allow; designated requirement bound to the «ClaudePult Release» certificate; `.dmg` checksum valid; appcast length = `.dmg` size, Ed25519 signature verifies; the release binary runs `--modes`; the temporary keychain is gone; Gatekeeper rejects (expected without Developer ID). Nothing published.
+Left: publishing (repository public, `scripts/release.sh 0.2.0 --publish`) — Oleh.
 
 ## 2026-10-30 — Translation review (branch `fix/translation-review`)
 
