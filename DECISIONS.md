@@ -2,6 +2,10 @@
 
 Decisions made where the spec is silent or does not match reality. Newest at the top.
 
+## 2026-10-30 — Hover hints for icon-only controls (SPEC §3.1)
+
+**Rule:** anything shown only as an icon gets `.help` with its name or a short explanation. **Menu bar item:** `MenuBarExtra` has no tooltip API, so `StatusItemTooltip` finds the `NSStatusBarButton` in the app's status bar window and sets its `toolTip` to `MenuBarComposer.accessibilityText` — the same words VoiceOver reads, now covering every element the item can draw (sessions, queued runs, reset countdown, forecast, nearest date, low disk, processor, memory, ☕, profile). If a macOS update changes that window, the tooltip silently disappears; nothing else depends on it.
+
 ## 2026-10-30 — Languages: one table per language; Spanish (SPEC-modes §9.9)
 
 **A language is data.** Everything ClaudePult writes or sends in a language lives in `ContentStrings` (one value per `ContentLanguage`): card and plan file names, card field names, plan column names, the «idea» status, the agent and API wrappers, the generic developer prompts, and how a custom task starts and ends (for session titles). Reading accepts every language's names, so files from any language keep working; writing a value keeps the card's own language (the language whose field names it already uses). A test runs over every language and checks it is complete, so the next languages only add a table entry, template files and catalog translations.

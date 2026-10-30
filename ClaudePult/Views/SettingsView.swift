@@ -446,12 +446,16 @@ private struct QuickCommandsSection: View {
                         }
                         .labelsHidden()
                         .frame(width: 60)
+                        .help("Значок кнопки")
                         TextField("Название", text: $command.title)
                         Button { move(command.id, by: -1) } label: { Image(systemName: "chevron.up") }
                             .disabled(settings.quickCommands.first?.id == command.id)
+                            .help("Выше")
                         Button { move(command.id, by: 1) } label: { Image(systemName: "chevron.down") }
                             .disabled(settings.quickCommands.last?.id == command.id)
+                            .help("Ниже")
                         Button(role: .destructive) { settings.quickCommands.removeAll { $0.id == command.id } } label: { Image(systemName: "trash") }
+                            .help("Удалить команду")
                     }
                     .buttonStyle(.borderless)
                     Picker("Что делает", selection: $command.kind) {

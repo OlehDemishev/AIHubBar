@@ -359,6 +359,24 @@ enum MenuBarComposer {
         if on.contains(.projectsAlert), data.showsAlert { parts.append(String(localized: "есть проекты с проблемами")) }
         if on.contains(.waiting), data.waiting > 0 { parts.append(String(localized: "ждут ответа: \(data.waiting)")) }
         if on.contains(.background), data.background > 0 { parts.append(String(localized: "фоновых задач: \(data.background)")) }
+        // Also the menu bar item's tooltip: every element it can draw gets its words.
+        if on.contains(.running), data.running > 0 { parts.append(String(localized: "работают сессии: \(data.running)")) }
+        if on.contains(.queued), data.queued > 0 { parts.append(String(localized: "отложенных запусков: \(data.queued)")) }
+        if on.contains(.resetCountdown), let resets = data.sessionResetsAt, resets > data.now {
+            parts.append(String(localized: "сброс сессии через \(countdown(to: resets, now: data.now, long: true))"))
+        }
+        if on.contains(.forecast), let runsOut = data.forecastRunsOut {
+            parts.append(String(localized: "лимит кончится в \(runsOut.formatted(date: .omitted, time: .shortened))"))
+        }
+        if on.contains(.deadline), let deadline = data.deadline { parts.append(String(localized: "ближайшее: \(deadline)")) }
+        if on.contains(.disk), let bytes = data.diskFreeBytes,
+           let element = config.elements.first(where: { $0.kind == .disk }), bytes < Int64(element.diskBelowGB) * 1_000_000_000 {
+            parts.append(String(localized: "свободно \(bytes / 1_000_000_000) ГБ"))
+        }
+        if on.contains(.cpu), let cpu = data.cpu { parts.append(String(localized: "процессор \(Int(cpu.rounded())) %")) }
+        if on.contains(.memory), let memory = data.memory { parts.append(String(localized: "память \(Int(memory.rounded())) %")) }
+        if on.contains(.keepAwake), data.keepingAwake { parts.append(String(localized: "Mac не засыпает")) }
+        if on.contains(.mode), let name = data.modeName { parts.append(String(localized: "профиль «\(name)»")) }
         return parts.joined(separator: ", ")
     }
 }

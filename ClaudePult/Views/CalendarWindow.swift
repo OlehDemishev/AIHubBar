@@ -45,8 +45,10 @@ struct CalendarWindow: View {
     private var toolbar: some View {
         HStack(spacing: 10) {
             Button { shift(-1) } label: { Image(systemName: "chevron.left") }
+                .help(scope == .month ? String(localized: "Предыдущий месяц") : String(localized: "Предыдущая неделя"))
             Button("Сегодня") { anchor = .now }
             Button { shift(1) } label: { Image(systemName: "chevron.right") }
+                .help(scope == .month ? String(localized: "Следующий месяц") : String(localized: "Следующая неделя"))
             Text(title).font(.title3.weight(.semibold))
             Spacer()
             Toggle("Только текущий профиль", isOn: $currentOnly)

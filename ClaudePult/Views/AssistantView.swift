@@ -246,6 +246,7 @@ struct AssistantView: View {
                     .textFieldStyle(.roundedBorder)
                     Button { draft.wrappedValue.mode.stages.remove(at: index) } label: { Image(systemName: "minus.circle") }
                         .buttonStyle(.borderless)
+                        .help("Убрать этап")
                 }
             }
             Button("Добавить этап") { draft.wrappedValue.mode.stages.append("") }
