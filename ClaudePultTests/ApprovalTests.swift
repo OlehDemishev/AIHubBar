@@ -55,8 +55,12 @@ struct ApprovalTests {
         async let result = h.send(permission)
         let request = try await h.request()
         #expect(request.tool == "Bash" && request.summary == "npm test" && request.project == "Ambo" && request.sessionID == "abc-123")
-        // The session shows as waiting together with the request.
-        #expect(try JSONDecoder().decode(Session.self, from: Data(contentsOf: h.sessions.appending(path: "abc-123.json"))).state == .waiting)
+        // The session shows as waiting right after the request (the request is written first).
+        let record = h.sessions.appending(path: "abc-123.json")
+        for _ in 0..<100 where !FileManager.default.fileExists(atPath: record.path) {
+            try await Task.sleep(for: .milliseconds(50))
+        }
+        #expect(try JSONDecoder().decode(Session.self, from: Data(contentsOf: record)).state == .waiting)
         ApprovalFiles.decide(request.id, allow: true, in: h.approvals)
 
         let output = try await result
