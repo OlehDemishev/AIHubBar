@@ -101,7 +101,7 @@ struct HelpView: View {
             VStack(alignment: .leading, spacing: 18) {
                 VStack(alignment: .leading, spacing: 8) {
                     Label("Готовность", systemImage: "checklist").font(.headline)
-                    ReadinessSection()
+                    ReadinessSection(collapsesWhenReady: true)
                 }
                 ForEach(HelpContent.sections) { section in
                     VStack(alignment: .leading, spacing: 8) {

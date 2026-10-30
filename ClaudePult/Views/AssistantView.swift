@@ -64,7 +64,7 @@ struct AssistantView: View {
             Button("Назад") { withAnimation(.snappy) { draft.wrappedValue.back() } }
                 .disabled(draft.wrappedValue.isFirst)
             Spacer()
-            if !draft.wrappedValue.isLast, ![.welcome, .importSettings].contains(draft.wrappedValue.step) {
+            if !draft.wrappedValue.isLast, ![.welcome, .importSettings, .template].contains(draft.wrappedValue.step) {
                 Button("Пропустить") { withAnimation(.snappy) { draft.wrappedValue.next() } }
                     .help("Оставить как в шаблоне")
             }

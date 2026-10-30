@@ -45,13 +45,26 @@ struct ReadinessSection: View {
     @Environment(NotificationPermission.self) private var notifications
     @Environment(LoginItemController.self) private var loginItem
     @Environment(\.openSettings) private var openSettings
+    /// In «Помощь» a Mac with nothing left to do gets one line instead of four rows.
+    var collapsesWhenReady = false
+    @State private var expanded = false
 
     var body: some View {
+        let items = Readiness.items(input)
         VStack(alignment: .leading, spacing: 8) {
-            ReadinessList(items: Readiness.items(input), perform: perform)
-            Button("Проверить снова", action: refresh)
-                .controlSize(.small)
-                .disabled(services.isScanning)
+            if collapsesWhenReady, Readiness.isReady(items), !expanded {
+                HStack(spacing: 8) {
+                    Image(systemName: "checkmark.circle.fill").foregroundStyle(.green)
+                    Text("Всё готово")
+                    Button("Подробнее") { expanded = true }
+                        .buttonStyle(.link)
+                }
+            } else {
+                ReadinessList(items: items, perform: perform)
+                Button("Проверить снова", action: refresh)
+                    .controlSize(.small)
+                    .disabled(services.isScanning)
+            }
         }
         .onAppear(perform: refresh)
         .onReceive(NotificationCenter.default.publisher(for: NSApplication.didBecomeActiveNotification)) { _ in refresh() }

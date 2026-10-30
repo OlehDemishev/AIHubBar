@@ -183,7 +183,7 @@ private struct ElementRow: View {
     @ViewBuilder private var options: some View {
         switch element.kind {
         case .icon:
-            Picker("Значок", selection: value(\.symbol)) {
+            Picker("Символ", selection: value(\.symbol)) {
                 ForEach(Self.symbols, id: \.0) { symbol, title in
                     if symbol == "mode" || symbol == "none" {
                         Text(title).tag(symbol)

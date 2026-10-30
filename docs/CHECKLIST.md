@@ -262,3 +262,14 @@ Panel snapshots: `defaults write com.demishev.claudepult DebugPanelSnapshot -boo
 | Week reset on the title line; a model week at 0 % is hidden; a model week's reset only when it differs from the week's | Auto (`shownOtherWindows`) + live (panel snapshot) |
 | «Проекты» header with the count and «с проблемами: N» | Live (panel snapshot) |
 | Badges read «2 файла», «1 PR» | Live (panel snapshot) |
+
+## Settings tidy-up (UI review, 2026-10-30)
+
+| Scenario | Checked |
+|---|---|
+| One «Claude Code» tab (path, session hooks, subscription limits, background runs) instead of «Claude», «Сессии», «Лимиты» | Live (window capture) |
+| Modes list: the checkbox is the only mark, the current mode says «текущий», full name in a tooltip | Live (window capture) |
+| Services: installed agents first, the rest under «Ещё агенты (N)» | Live (window capture) |
+| Menu bar: the icon element's option is «Символ», not a second «Значок» | Code |
+| Assistant: no «Пропустить» on the template step; Help: «Всё готово · Подробнее» when nothing is left | Live (Help capture) |
+| Reordering menu bar elements by dragging | Not done: arrows stay (drag in a grouped Form is unreliable) |
