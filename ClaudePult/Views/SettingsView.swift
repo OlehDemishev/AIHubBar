@@ -235,6 +235,7 @@ private struct ClaudeSettings: View {
             }
 
             SessionSection()
+            TelegramApprovalsSection()
 
             Section {
                 Stepper(value: $settings.backgroundTimeLimitMinutes, in: 10...600, step: 10) {
@@ -615,6 +616,56 @@ private struct ReminderSection: View {
 }
 
 // MARK: - Claude Code: sessions
+
+/// Permission requests answered from the phone, through a bot of ClaudePult's own.
+private struct TelegramApprovalsSection: View {
+    @Environment(AppSettings.self) private var settings
+    @Environment(TelegramApprovals.self) private var telegram
+    @State private var token = ""
+    @State private var busy = false
+
+    var body: some View {
+        @Bindable var settings = settings
+        Section {
+            Toggle("Присылать запросы разрешений в Telegram", isOn: $settings.telegramApprovals)
+            LabeledContent("Токен бота") {
+                HStack {
+                    if telegram.hasToken {
+                        Text(telegram.botName ?? String(localized: "сохранён в Связке ключей")).foregroundStyle(.secondary)
+                        Button("Удалить") { Task { await telegram.removeToken() } }
+                    } else {
+                        SecureField("", text: $token, prompt: Text(verbatim: "123456:ABC…"))
+                            .frame(width: 200)
+                        Button("Сохранить") {
+                            busy = true
+                            Task {
+                                await telegram.saveToken(token)
+                                token = ""
+                                busy = false
+                            }
+                        }
+                        .disabled(token.isEmpty || busy)
+                    }
+                }
+            }
+            TextField("ID чата", text: $settings.telegramApprovalsChatID, prompt: Text("как у _daily-report"))
+            HStack {
+                Button("Проверить") {
+                    busy = true
+                    Task { await telegram.check(); busy = false }
+                }
+                .disabled(!telegram.hasToken || busy)
+                if let status = telegram.status {
+                    Text(status).font(.caption).foregroundStyle(.secondary)
+                }
+            }
+        } header: {
+            Text("Ответы из Telegram")
+        } footer: {
+            Footnote(text: String(localized: "Нужен отдельный бот: бот _daily-report уже читает свои обновления, и второй читатель забирал бы у него сообщения. Создайте бота в @BotFather (/newbot), вставьте его токен, откройте бота в Telegram и нажмите «Start», затем «Проверить». Кнопки принимаются только из указанного чата."))
+        }
+    }
+}
 
 private struct SessionSection: View {
     @Environment(HookController.self) private var hooks

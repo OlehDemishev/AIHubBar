@@ -4942,6 +4942,82 @@
         }
       }
     },
+    "Claude просит разрешение": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يطلب Claude إذنًا"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude bittet um Erlaubnis"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude asks for permission"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude pide permiso"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude demande une autorisation"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude meminta izin"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude chiede un permesso"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude が許可を求めています"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude가 권한을 요청합니다"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude prosi o zgodę"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude pede permissão"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude просить дозвіл"
+          }
+        }
+      }
+    },
     "Claude просит разрешение — %@": {
       "localizations": {
         "ar": {
@@ -5471,6 +5547,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "ClaudePult прибирає свій дозвіл для закритої кришки."
+          }
+        }
+      }
+    },
+    "ClaudePult: сюда будут приходить запросы разрешений Claude.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ClaudePult: ستصل طلبات إذن Claude إلى هنا."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ClaudePult: Hier kommen Claudes Berechtigungsanfragen an."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ClaudePult: Claude's permission requests will come here."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ClaudePult: aquí llegarán las solicitudes de permiso de Claude."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ClaudePult : les demandes d’autorisation de Claude arriveront ici."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ClaudePult: permintaan izin Claude akan datang ke sini."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ClaudePult: qui arriveranno le richieste di permesso di Claude."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ClaudePult: Claude の許可リクエストはここに届きます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ClaudePult: Claude의 권한 요청이 여기로 옵니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ClaudePult: tu będą przychodzić prośby Claude o zgodę."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ClaudePult: os pedidos de permissão do Claude chegarão aqui."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ClaudePult: сюди надходитимуть запити дозволів Claude."
           }
         }
       }
@@ -6242,6 +6394,82 @@
         }
       }
     },
+    "ID чата": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "معرّف الدردشة"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chat-ID"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chat ID"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ID del chat"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ID du chat"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ID obrolan"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ID chat"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "チャット ID"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "채팅 ID"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ID czatu"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ID do chat"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ID чату"
+          }
+        }
+      }
+    },
     "Instagram": {},
     "Instagram: ноябрь": {
       "localizations": {
@@ -6854,6 +7082,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Stage, Now, Next, Needs з docs/STATUS.md, попередження, PR, worktree."
+          }
+        }
+      }
+    },
+    "Telegram не принял токен": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لم يقبل Telegram الرمز"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Telegram hat das Token nicht angenommen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Telegram didn't accept the token"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Telegram no aceptó el token"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Telegram n’a pas accepté le jeton"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Telegram tidak menerima token"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Telegram non ha accettato il token"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Telegram がトークンを受け付けませんでした"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Telegram이 토큰을 받지 않았습니다"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Telegram nie przyjął tokenu"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O Telegram não aceitou o token"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Telegram не прийняв токен"
           }
         }
       }
@@ -10141,6 +10445,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Понад 90 % — уже 5 хвилин. Хто навантажує — у панелі, блок «Ресурси Mac»."
+          }
+        }
+      }
+    },
+    "Бот не может написать в этот чат — откройте его в Telegram и нажмите «Start»": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لا يستطيع البوت الكتابة في هذه الدردشة: افتحه في Telegram واضغط «Start»"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der Bot kann nicht in diesen Chat schreiben: Öffnen Sie ihn in Telegram und tippen Sie auf „Start“"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The bot can't write to this chat: open it in Telegram and press «Start»"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El bot no puede escribir en este chat: ábrelo en Telegram y pulsa «Start»"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le bot ne peut pas écrire dans ce chat : ouvrez-le dans Telegram et appuyez sur « Start »"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bot tidak bisa menulis ke obrolan ini: buka di Telegram dan tekan «Start»"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il bot non può scrivere in questa chat: aprilo in Telegram e premi «Start»"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ボットはこのチャットに書き込めません。Telegram でボットを開き「Start」を押してください"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "봇이 이 채팅에 쓸 수 없습니다. Telegram에서 봇을 열고 «Start»를 누르세요"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bot nie może pisać na ten czat: otwórz go w Telegramie i naciśnij „Start”"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O bot não consegue escrever neste chat: abra-o no Telegram e toque em «Start»"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Бот не може написати в цей чат — відкрийте його в Telegram і натисніть «Start»"
           }
         }
       }
@@ -33356,6 +33736,82 @@
         }
       }
     },
+    "Нужен отдельный бот: бот _daily-report уже читает свои обновления, и второй читатель забирал бы у него сообщения. Создайте бота в @BotFather (/newbot), вставьте его токен, откройте бота в Telegram и нажмите «Start», затем «Проверить». Кнопки принимаются только из указанного чата.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يلزم بوت منفصل: بوت _daily-report يقرأ تحديثاته بالفعل، وقارئ ثانٍ سيأخذ رسائله. أنشئ بوتًا عبر @BotFather ‏(/newbot) والصق رمزه، وافتح البوت في Telegram واضغط «Start» ثم «تحقق». تُقبل الأزرار من الدردشة المحددة فقط."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ein eigener Bot ist nötig: Der _daily-report-Bot liest seine Updates schon, ein zweiter Leser würde ihm Nachrichten wegnehmen. Erstellen Sie einen Bot mit @BotFather (/newbot), fügen Sie sein Token ein, öffnen Sie den Bot in Telegram und tippen Sie „Start“, dann „Prüfen“. Tasten werden nur aus dem angegebenen Chat angenommen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A separate bot is needed: the _daily-report bot already reads its updates, and a second reader would take its messages. Create a bot with @BotFather (/newbot), paste its token, open the bot in Telegram and press «Start», then «Check». Buttons are accepted only from the chat set here."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hace falta un bot aparte: el bot de _daily-report ya lee sus actualizaciones y un segundo lector le quitaría mensajes. Crea un bot con @BotFather (/newbot), pega su token, abre el bot en Telegram y pulsa «Start», luego «Comprobar». Solo se aceptan botones del chat indicado."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il faut un bot à part : le bot de _daily-report lit déjà ses mises à jour, et un second lecteur lui prendrait ses messages. Créez un bot avec @BotFather (/newbot), collez son jeton, ouvrez le bot dans Telegram et appuyez sur « Start », puis « Vérifier ». Seuls les boutons du chat indiqué sont acceptés."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Perlu bot terpisah: bot _daily-report sudah membaca pembaruannya, dan pembaca kedua akan mengambil pesannya. Buat bot di @BotFather (/newbot), tempel tokennya, buka bot di Telegram dan tekan «Start», lalu «Periksa». Tombol hanya diterima dari obrolan yang ditentukan."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Serve un bot a parte: il bot di _daily-report legge già i suoi aggiornamenti e un secondo lettore gli porterebbe via i messaggi. Crea un bot con @BotFather (/newbot), incolla il token, apri il bot in Telegram e premi «Start», poi «Verifica». I pulsanti sono accettati solo dalla chat indicata."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "別のボットが必要です。_daily-report のボットはすでに自分の更新を読んでいて、2 つ目の読み手はそのメッセージを奪ってしまいます。@BotFather（/newbot）でボットを作り、トークンを貼り付け、Telegram でボットを開いて「Start」を押してから「確認」を押してください。ボタンは指定したチャットからのみ受け付けます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "별도의 봇이 필요합니다. _daily-report 봇이 이미 자기 업데이트를 읽고 있어서 두 번째로 읽으면 메시지를 빼앗게 됩니다. @BotFather(/newbot)에서 봇을 만들고 토큰을 붙여 넣은 뒤 Telegram에서 봇을 열어 «Start»를 누르고 «확인»을 누르세요. 버튼은 지정한 채팅에서만 받습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Potrzebny jest osobny bot: bot _daily-report już czyta swoje aktualizacje, a drugi czytelnik zabierałby mu wiadomości. Utwórz bota w @BotFather (/newbot), wklej jego token, otwórz bota w Telegramie i naciśnij „Start”, potem „Sprawdź”. Przyciski są przyjmowane tylko z podanego czatu."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "É preciso um bot separado: o bot do _daily-report já lê suas atualizações, e um segundo leitor tomaria as mensagens dele. Crie um bot no @BotFather (/newbot), cole o token, abra o bot no Telegram e toque em «Start», depois em «Verificar». Só são aceitos botões do chat indicado."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Потрібен окремий бот: бот _daily-report уже читає свої оновлення, і другий читач забирав би в нього повідомлення. Створіть бота в @BotFather (/newbot), вставте його токен, відкрийте бота в Telegram і натисніть «Start», потім «Перевірити». Кнопки приймаються лише з указаного чату."
+          }
+        }
+      }
+    },
     "Нужно ваше решение.": {
       "localizations": {
         "ar": {
@@ -35104,6 +35560,82 @@
         }
       }
     },
+    "Ответы из Telegram": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الردود من Telegram"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Antworten aus Telegram"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Answers from Telegram"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Respuestas desde Telegram"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Réponses depuis Telegram"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jawaban dari Telegram"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Risposte da Telegram"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Telegram から応答"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Telegram에서 응답"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Odpowiedzi z Telegramu"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Respostas pelo Telegram"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Відповіді з Telegram"
+          }
+        }
+      }
+    },
     "Отвечать на запросы разрешений из уведомлений и панели": {
       "localizations": {
         "ar": {
@@ -35252,6 +35784,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Окрема робоча копія git (worktree)"
+          }
+        }
+      }
+    },
+    "Отклонено": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مرفوض"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abgelehnt"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Denied"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rechazado"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Refusé"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ditolak"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rifiutato"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "拒否しました"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "거부됨"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Odrzucono"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recusado"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Відхилено"
           }
         }
       }
@@ -43781,6 +44389,82 @@
         }
       }
     },
+    "Присылать запросы разрешений в Telegram": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إرسال طلبات الإذن إلى Telegram"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Berechtigungsanfragen an Telegram senden"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Send permission requests to Telegram"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enviar solicitudes de permiso a Telegram"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Envoyer les demandes d’autorisation dans Telegram"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kirim permintaan izin ke Telegram"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Invia le richieste di permesso a Telegram"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "許可リクエストを Telegram に送る"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "권한 요청을 Telegram으로 보내기"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wysyłaj prośby o zgodę do Telegramu"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enviar pedidos de permissão ao Telegram"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Надсилати запити дозволів у Telegram"
+          }
+        }
+      }
+    },
     "Пробел": {
       "localizations": {
         "ar": {
@@ -46593,6 +47277,82 @@
         }
       }
     },
+    "Работает: тестовое сообщение отправлено": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يعمل: أُرسلت رسالة اختبار"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Funktioniert: Testnachricht gesendet"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Works: a test message was sent"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Funciona: se envió un mensaje de prueba"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ça marche : message de test envoyé"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Berfungsi: pesan uji terkirim"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Funziona: messaggio di prova inviato"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "動作中: テストメッセージを送信しました"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "작동함: 테스트 메시지를 보냈습니다"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Działa: wysłano wiadomość testową"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Funciona: mensagem de teste enviada"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Працює: тестове повідомлення надіслано"
+          }
+        }
+      }
+    },
     "Работают": {
       "localizations": {
         "ar": {
@@ -47273,6 +48033,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Дозвіл адміністратора"
+          }
+        }
+      }
+    },
+    "Разрешено": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مسموح"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Erlaubt"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Allowed"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Permitido"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Autorisé"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diizinkan"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Consentito"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "許可しました"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "허용됨"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zezwolono"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Permitido"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Дозволено"
           }
         }
       }
@@ -52761,6 +53597,82 @@
         }
       }
     },
+    "Сначала сохраните токен бота": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "احفظ رمز البوت أولًا"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Speichern Sie zuerst das Bot-Token"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Save the bot token first"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Guarda primero el token del bot"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enregistrez d’abord le jeton du bot"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Simpan token bot terlebih dahulu"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Salva prima il token del bot"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "先にボットのトークンを保存してください"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "먼저 봇 토큰을 저장하세요"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Najpierw zapisz token bota"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Salve primeiro o token do bot"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Спершу збережіть токен бота"
+          }
+        }
+      }
+    },
     "Снять": {
       "localizations": {
         "ar": {
@@ -55949,6 +56861,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Термінал · Finder · GitHub"
+          }
+        }
+      }
+    },
+    "Токен бота": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "رمز البوت"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bot-Token"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bot token"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Token del bot"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jeton du bot"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Token bot"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Token del bot"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ボットのトークン"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "봇 토큰"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Token bota"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Token do bot"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Токен бота"
           }
         }
       }
@@ -62952,6 +63940,82 @@
         }
       }
     },
+    "бот для ответов в Telegram": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بوت للردود في Telegram"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bot für Antworten in Telegram"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "bot for answers in Telegram"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "bot para respuestas en Telegram"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "bot pour les réponses dans Telegram"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "bot untuk jawaban di Telegram"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "bot per le risposte in Telegram"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Telegram 応答用ボット"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Telegram 응답용 봇"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "bot do odpowiedzi w Telegramie"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "bot para respostas no Telegram"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "бот для відповідей у Telegram"
+          }
+        }
+      }
+    },
     "в STATUS.md нет шапки (Stage / Now / Next)": {
       "localizations": {
         "ar": {
@@ -66380,6 +67444,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "шукає"
+          }
+        }
+      }
+    },
+    "как у _daily-report": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مثل _daily-report"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "wie bei _daily-report"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "same as _daily-report"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "como en _daily-report"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "comme _daily-report"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "sama seperti _daily-report"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "come in _daily-report"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "_daily-report と同じ"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "_daily-report와 같음"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "jak w _daily-report"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "igual ao _daily-report"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "як у _daily-report"
           }
         }
       }
@@ -70789,6 +71929,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "дивиться в мережі"
+          }
+        }
+      }
+    },
+    "сохранён в Связке ключей": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "محفوظ في سلسلة المفاتيح"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "im Schlüsselbund gesichert"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "saved in the Keychain"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "guardado en el llavero"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "enregistré dans le trousseau"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "tersimpan di Rantai Kunci"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "salvato nel Portachiavi"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "キーチェーンに保存済み"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "키체인에 저장됨"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "zapisany w pęku kluczy"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "salvo nas Chaves"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "збережено у Зв’язці ключів"
           }
         }
       }

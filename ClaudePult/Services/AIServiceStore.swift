@@ -27,35 +27,47 @@ enum APIKeyStore {
     }
 
     static func save(_ key: String, for provider: APIProvider) async throws {
-        let key = key.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard isValid(key) else { throw KeyError.invalid }
-        let command = "add-generic-password -U -s \"\(service)\" -a \(provider.rawValue) -l \"ClaudePult: \(provider.title)\" -w \(key)\n"
-        let result = try await ProcessRunner.run("/usr/bin/security", ["-i"], input: Data(command.utf8), timeout: .seconds(60))
-        guard result.exitCode == 0, !result.stderrText.contains("error") else { throw KeyError.failed(result.exitCode) }
-        AppLog.info("API key saved for \(provider.rawValue)")
+        try await save(key, account: provider.rawValue, label: provider.title)
     }
 
-    static func read(_ provider: APIProvider) async -> String? {
+    static func read(_ provider: APIProvider) async -> String? { await read(account: provider.rawValue) }
+
+    /// Whether a key is stored, without reading it (no Keychain prompt).
+    static func exists(_ provider: APIProvider) async -> Bool { await exists(account: provider.rawValue) }
+
+    static func delete(_ provider: APIProvider) async { await delete(account: provider.rawValue) }
+
+    // Any secret of ClaudePult's: the account names it (a provider, `telegram-approvals`).
+
+    static func save(_ key: String, account: String, label: String) async throws {
+        let key = key.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard isValid(key) else { throw KeyError.invalid }
+        let command = "add-generic-password -U -s \"\(service)\" -a \(account) -l \"ClaudePult: \(label)\" -w \(key)\n"
+        let result = try await ProcessRunner.run("/usr/bin/security", ["-i"], input: Data(command.utf8), timeout: .seconds(60))
+        guard result.exitCode == 0, !result.stderrText.contains("error") else { throw KeyError.failed(result.exitCode) }
+        AppLog.info("Key saved for \(account)")
+    }
+
+    static func read(account: String) async -> String? {
         guard let result = try? await ProcessRunner.run(
-            "/usr/bin/security", ["find-generic-password", "-s", service, "-a", provider.rawValue, "-w"], timeout: .seconds(120)
+            "/usr/bin/security", ["find-generic-password", "-s", service, "-a", account, "-w"], timeout: .seconds(120)
         ), result.exitCode == 0 else { return nil }
         let key = result.stdoutText.trimmingCharacters(in: .whitespacesAndNewlines)
         return key.isEmpty ? nil : key
     }
 
-    /// Whether a key is stored, without reading it (no Keychain prompt).
-    static func exists(_ provider: APIProvider) async -> Bool {
+    static func exists(account: String) async -> Bool {
         guard let result = try? await ProcessRunner.run(
-            "/usr/bin/security", ["find-generic-password", "-s", service, "-a", provider.rawValue], timeout: .seconds(20)
+            "/usr/bin/security", ["find-generic-password", "-s", service, "-a", account], timeout: .seconds(20)
         ) else { return false }
         return result.exitCode == 0
     }
 
-    static func delete(_ provider: APIProvider) async {
+    static func delete(account: String) async {
         _ = try? await ProcessRunner.run(
-            "/usr/bin/security", ["delete-generic-password", "-s", service, "-a", provider.rawValue], timeout: .seconds(20)
+            "/usr/bin/security", ["delete-generic-password", "-s", service, "-a", account], timeout: .seconds(20)
         )
-        AppLog.info("API key deleted for \(provider.rawValue)")
+        AppLog.info("Key deleted for \(account)")
     }
 }
 
