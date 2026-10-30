@@ -469,6 +469,14 @@ Panel snapshots: `defaults write com.demishev.claudepult DebugPanelSnapshot -boo
 | Live: `widget-status.json` written (2 running, 4 red projects), the extension registered (`pluginkit`), a posted «off» request logged «Keep awake off from Control Center» | Live |
 | Adding the widget from the gallery; the control in Control Center switching «Не спать» (with the module installed) | Oleh |
 
+## Night queue (2026-10-30)
+
+| Scenario | Checked |
+|---|---|
+| The next night start (later today or tomorrow); queue files saved before keep loading | Auto (`NightQueueTests`) |
+| An expanded project shows «На ночь» next to «Следующий шаг» with its hint; «Своя задача…» has «На ночь» | Live (accessibility) — not pressed: it would really run at 01:00 |
+| A real night: runs start at the hour, the Mac stays awake, the morning summary (notification and Telegram) | Oleh |
+
 ## Release without an Apple Developer account (2026-10-30)
 
 | Scenario | Checked |

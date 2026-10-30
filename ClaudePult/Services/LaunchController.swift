@@ -31,7 +31,28 @@ final class LaunchController {
         var command: ClaudeCommand
         var target: LaunchTarget
         var launchAt: Date
+        /// Queued «на ночь»: part of the batch that gets a morning summary.
+        var night = false
         var projectName: String { target.name }
+
+        init(id: String, command: ClaudeCommand, target: LaunchTarget, launchAt: Date, night: Bool = false) {
+            self.id = id
+            self.command = command
+            self.target = target
+            self.launchAt = launchAt
+            self.night = night
+        }
+
+        enum CodingKeys: String, CodingKey { case id, command, target, launchAt, night }
+
+        init(from decoder: Decoder) throws {
+            let c = try decoder.container(keyedBy: CodingKeys.self)
+            id = try c.decode(String.self, forKey: .id)
+            command = try c.decode(ClaudeCommand.self, forKey: .command)
+            target = try c.decode(LaunchTarget.self, forKey: .target)
+            launchAt = try c.decode(Date.self, forKey: .launchAt)
+            night = (try? c.decodeIfPresent(Bool.self, forKey: .night)) ?? false
+        }
     }
 
     /// Above this session usage a background run asks first.
@@ -191,14 +212,46 @@ final class LaunchController {
         AppLog.info("Queued «\(pending.command.title)» for \(pending.target.name) at \(launchAt.ISO8601Format())")
     }
 
+    /// «На ночь»: the run waits for the night start hour (Settings → Claude Code).
+    func queueForNight(_ command: ClaudeCommand, in project: Project) {
+        let launchAt = NightQueue.nextStart(hour: settings.nightStartHour)
+        queued.append(QueuedLaunch(id: UUID().uuidString, command: command, target: project.launchTarget, launchAt: launchAt, night: true))
+        saveQueue()
+        messages[project.id] = Message(text: String(localized: "«\(command.title)» запустится ночью в \(launchAt.formatted(date: .omitted, time: .shortened)). Утром придёт сводка."))
+        AppLog.info("Queued «\(command.title)» for \(project.name) for the night at \(launchAt.ISO8601Format())")
+    }
+
+    /// When the night's runs are all finished: one notification (and Telegram, like other background results).
+    private func summarizeNight(now: Date = .now) {
+        let key = "nightBatchStart"
+        let stamp = UserDefaults.standard.double(forKey: key)
+        guard stamp > 0, runs.running.isEmpty else { return }
+        let start = Date(timeIntervalSince1970: stamp)
+        guard now.timeIntervalSince(start) > 60 else { return }
+        UserDefaults.standard.removeObject(forKey: key)
+        let batch = runs.runs.filter { $0.startedAt >= start.addingTimeInterval(-5) && $0.state.isFinished }
+        guard !batch.isEmpty else { return }
+        let summary = NightQueue.summary(batch)
+        Notifier.post(id: "night-summary", title: summary.title, body: summary.body)
+        if settings.telegramForBackground, let credentials = Telegram.credentials(dailyReportDirectory: settings.dailyReportDirectory) {
+            let html = "🌙 <b>\(RunMessage.escape(summary.title))</b>\n" + batch.map { RunMessage.telegramHTML($0) }.joined(separator: "\n")
+            Task { _ = await Telegram.send(html: html, with: credentials) }
+        }
+        AppLog.info("Night summary: \(batch.count) runs")
+    }
+
     func cancelQueued(_ id: String) {
         queued.removeAll { $0.id == id }
         saveQueue()
     }
 
     private func launchDueQueued(now: Date = .now) {
+        summarizeNight(now: now)
         let due = queued.filter { $0.launchAt <= now }
         guard !due.isEmpty else { return }
+        if due.contains(where: \.night), UserDefaults.standard.double(forKey: "nightBatchStart") == 0 {
+            UserDefaults.standard.set(now.timeIntervalSince1970, forKey: "nightBatchStart")
+        }
         queued.removeAll { $0.launchAt <= now }
         saveQueue()
         for item in due {

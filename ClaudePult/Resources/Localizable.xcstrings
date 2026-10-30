@@ -8322,6 +8322,88 @@
         }
       }
     },
+    "«%@» запустится ночью в %@. Утром придёт сводка.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "سيبدأ «%@» الليلة في %@. يصل ملخص في الصباح."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "„%@“ startet heute Nacht um %@. Morgens kommt eine Zusammenfassung."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«%@» will start tonight at %@. A summary comes in the morning."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«%@» se iniciará esta noche a las %@. Por la mañana llegará un resumen."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "« %@ » démarrera cette nuit à %@. Un résumé arrivera le matin."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«%@» akan dimulai malam ini pukul %@. Ringkasan datang pagi hari."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«%@» partirà stanotte alle %@. Al mattino arriva un riepilogo."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「%@」は今夜 %@ に開始します。朝に概要が届きます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«%@»은(는) 오늘 밤 %@에 시작됩니다. 아침에 요약이 옵니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "„%@” wystartuje w nocy o %@. Rano przyjdzie podsumowanie."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«%@» começa esta noite às %@. De manhã chega um resumo."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "new",
+            "value": "«%1$@» запустится ночью в %2$@. Утром придёт сводка."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«%@» запуститься вночі о %@. Зранку прийде зведення."
+          }
+        }
+      }
+    },
     "«%@» запущен в новом окне Терминала.": {
       "localizations": {
         "ar": {
@@ -21407,6 +21489,82 @@
         }
       }
     },
+    "Запустить в фоне ночью; утром придёт сводка": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "التشغيل في الخلفية الليلة؛ يصل ملخص صباحًا"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Heute Nacht im Hintergrund ausführen; morgens kommt eine Zusammenfassung"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Run in the background tonight; a summary comes in the morning"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ejecutar en segundo plano esta noche; por la mañana llega un resumen"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lancer en arrière-plan cette nuit ; résumé le matin"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jalankan di latar belakang malam ini; ringkasan datang pagi hari"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esegui in background stanotte; al mattino arriva un riepilogo"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今夜バックグラウンドで実行し、朝に概要が届きます"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "오늘 밤 백그라운드에서 실행하고 아침에 요약을 받습니다"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uruchom w tle w nocy; rano przyjdzie podsumowanie"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Executar em segundo plano à noite; de manhã chega um resumo"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Запустити у фоні вночі; зранку прийде зведення"
+          }
+        }
+      }
+    },
     "Запустить всё равно": {
       "localizations": {
         "ar": {
@@ -28709,6 +28867,82 @@
         }
       }
     },
+    "На ночь": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الليلة"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Heute Nacht"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tonight"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esta noche"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cette nuit"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Malam ini"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stanotte"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今夜"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "오늘 밤"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Na noc"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "À noite"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "На ніч"
+          }
+        }
+      }
+    },
     "На чём": {
       "localizations": {
         "ar": {
@@ -34575,6 +34809,164 @@
           "stringUnit": {
             "state": "translated",
             "value": "Новий профіль"
+          }
+        }
+      }
+    },
+    "Ночные задачи начинаются в": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تبدأ المهام الليلية في"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nachtaufgaben starten um"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Night tasks start at"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Las tareas nocturnas empiezan a las"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les tâches de nuit démarrent à"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tugas malam dimulai pukul"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le attività notturne iniziano alle"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "夜間タスクの開始時刻"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "야간 작업 시작 시각"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nocne zadania startują o"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "As tarefas noturnas começam às"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Нічні завдання починаються о"
+          }
+        }
+      }
+    },
+    "Ночью: %lld задач — ✅ %lld, ❌ %lld": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "خلال الليل: %lld مهام — ✅ %lld، ❌ %lld"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Über Nacht: %lld Aufgaben — ✅ %lld, ❌ %lld"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Overnight: %lld tasks — ✅ %lld, ❌ %lld"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esta noche: %lld tareas — ✅ %lld, ❌ %lld"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cette nuit : %lld tâches — ✅ %lld, ❌ %lld"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Semalam: %lld tugas — ✅ %lld, ❌ %lld"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stanotte: %lld attività — ✅ %lld, ❌ %lld"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "夜間: %lld 件 — ✅ %lld、❌ %lld"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "밤사이: 작업 %lld개 — ✅ %lld, ❌ %lld"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "W nocy: %lld zadań — ✅ %lld, ❌ %lld"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Durante a noite: %lld tarefas — ✅ %lld, ❌ %lld"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Ночью: %1$lld задач — ✅ %2$lld, ❌ %3$lld"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Вночі: %lld завдань — ✅ %lld, ❌ %lld"
           }
         }
       }
@@ -54816,6 +55208,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Наступний крок"
+          }
+        }
+      }
+    },
+    "Следующий шаг — в фоне ночью; утром сводка. Свою задачу на ночь — в «Своя задача…»": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الخطوة التالية في الخلفية الليلة؛ ملخص صباحًا. مهمتك الخاصة لليلة: «مهمة خاصة…»"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nächster Schritt heute Nacht im Hintergrund, morgens eine Zusammenfassung. Eigene Aufgabe für die Nacht: „Eigene Aufgabe…“"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Next step in the background tonight; a summary in the morning. Your own task for tonight: «Custom task…»"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Siguiente paso en segundo plano esta noche; resumen por la mañana. Tu propia tarea para la noche: «Tarea propia…»"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Étape suivante en arrière-plan cette nuit ; résumé le matin. Votre propre tâche pour la nuit : « Tâche perso… »"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Langkah berikutnya di latar belakang malam ini; ringkasan pagi hari. Tugas sendiri untuk malam: «Tugas sendiri…»"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Passo successivo in background stanotte; riepilogo al mattino. Un tuo compito per la notte: «Compito personale…»"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "次のステップを今夜バックグラウンドで。朝に概要。夜に自分のタスクは「独自タスク…」から"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "다음 단계를 오늘 밤 백그라운드에서, 아침에 요약. 밤에 할 내 작업은 «직접 작업…»에서"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Następny krok w tle w nocy; rano podsumowanie. Własne zadanie na noc: „Własne zadanie…”"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Próximo passo em segundo plano à noite; resumo de manhã. Sua própria tarefa para a noite: «Tarefa própria…»"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Наступний крок — у фоні вночі; зранку зведення. Своє завдання на ніч — у «Своє завдання…»"
           }
         }
       }

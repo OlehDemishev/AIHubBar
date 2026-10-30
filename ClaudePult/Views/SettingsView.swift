@@ -246,6 +246,9 @@ private struct ClaudeSettings: View {
                     LabeledContent("Лимит времени", value: String(localized: "\(settings.backgroundTimeLimitMinutes) мин"))
                 }
                 Toggle("Итог в Telegram", isOn: $settings.telegramForBackground)
+                Picker("Ночные задачи начинаются в", selection: $settings.nightStartHour) {
+                    ForEach(NightQueue.hours, id: \.self) { Text(verbatim: String(format: "%02d:00", $0)).tag($0) }
+                }
                 if settings.telegramForBackground,
                    Telegram.credentials(dailyReportDirectory: settings.dailyReportDirectory) == nil {
                     Text("В _daily-report/config.json нет telegram.bot_token / chat_id — будет только уведомление macOS.")
