@@ -5,7 +5,7 @@
 **Updated:** 2026-10-30
 
 **Now:**
-- «Показать» opening the desktop-app session itself merged (PR #68); nothing in progress here
+- «Показать» opening the desktop-app session itself merged (PR #68) and checked by Oleh; nothing in progress here
 
 **Next:**
 - menu bar elements reordered by dragging (needs a different list than a grouped Form)
@@ -14,7 +14,6 @@
 - Fix whatever Oleh finds in docs/CHECKLIST.md
 
 **Needs Oleh:**
-- press «Показать» on a desktop-app session in the panel (and on a waiting-session notification): Claude should switch to that session
 - after ~20:11 today: check that the limits keep updating by themselves (the sign-in renewal runs when the token expires)
 - read docs/GUIDE.md as a newcomer would
 - review the languages: Settings → Основные → «Язык интерфейса» → a language → «Перезапустить» (and back); Arabic should mirror right-to-left
