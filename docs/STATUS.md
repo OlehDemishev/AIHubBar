@@ -5,14 +5,14 @@
 **Updated:** 2026-10-30
 
 **Now:**
-- SPEC-modes §9 stage 7 (setup assistant) in PR (branch `feat/assistant`); next: stage 8 (for everyone) — needs the Apple Developer account and the name decision
+- SPEC-modes §9 stage 7 (setup assistant) merged (PR #43); next: stage 8 (for everyone) — needs the Apple Developer account and the name decision
 
 **Next:**
 - SPEC-modes §9: 5 calendar, 6 templates, 7 setup assistant, 8 for everyone, 9 languages (§13: en, es, pt-BR, fr, de, ja, id, ko, it, ar with RTL, pl, uk)
 - Fix whatever Oleh finds in docs/CHECKLIST.md
 
 **Needs Oleh:**
-- merge the assistant PR; try Settings → Режимы → «+» → «Помощник…»
+- try Settings → Режимы → «+» → «Помощник…»
 - try the calendar in a folder mode: «Календарь» → «+ контент-план», a `Дедлайн:` in a `проект.md`, then the panel «Ближайшее» and the «Календарь» window
 - try folder projects: duplicate a mode, set «Источник» → «папки» on a folder with a few subfolders, add stages (e.g. «идея, сценарий, монтаж, готово») and metrics
 - try Settings → «Строка меню» (presets, order, options, preview) and the ticking reset countdown
