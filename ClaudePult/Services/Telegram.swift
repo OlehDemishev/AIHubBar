@@ -15,10 +15,10 @@ enum RunMessage {
 
     static func outcomeText(_ run: BackgroundRun) -> String {
         switch run.state {
-        case .timedOut: "остановлено по лимиту времени (\(run.timeLimitMinutes) мин)"
-        case .stopped: "остановлено вручную"
-        case .running: "выполняется"
-        case .succeeded, .failed: run.summary ?? (run.state == .succeeded ? "готово" : "завершилось с ошибкой")
+        case .timedOut: String(localized: "остановлено по лимиту времени (\(run.timeLimitMinutes) мин)")
+        case .stopped: String(localized: "остановлено вручную")
+        case .running: String(localized: "выполняется")
+        case .succeeded, .failed: run.summary ?? (run.state == .succeeded ? String(localized: "готово") : String(localized: "завершилось с ошибкой"))
         }
     }
 

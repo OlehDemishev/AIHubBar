@@ -119,42 +119,42 @@ enum FolderMetric: String, CaseIterable, Codable, Sendable {
 
     var title: String {
         switch self {
-        case .words: "Слова"
-        case .duration: "Хронометраж"
-        case .readingTime: "Время чтения"
-        case .pages: "Страницы"
-        case .sources: "Источники"
-        case .deadline: "Дедлайн"
-        case .publishDate: "Дата публикации"
-        case .lastActivity: "Последняя правка"
+        case .words: String(localized: "Слова")
+        case .duration: String(localized: "Хронометраж")
+        case .readingTime: String(localized: "Время чтения")
+        case .pages: String(localized: "Страницы")
+        case .sources: String(localized: "Источники")
+        case .deadline: String(localized: "Дедлайн")
+        case .publishDate: String(localized: "Дата публикации")
+        case .lastActivity: String(localized: "Последняя правка")
         }
     }
 
     /// The text for a row, nil when there is nothing to show.
     func text(for project: FolderProject, wordsPerMinute: Int, now: Date = .now) -> String? {
         switch self {
-        case .words: return project.words.map { "\($0) сл." }
+        case .words: return project.words.map { String(localized: "\($0) сл.") }
         case .duration:
             guard let words = project.words, words > 0 else { return nil }
             let seconds = Int((Double(words) / Double(max(wordsPerMinute, 1)) * 60).rounded())
             return String(format: "%d:%02d", seconds / 60, seconds % 60)
         case .readingTime:
             guard let words = project.words, words > 0 else { return nil }
-            return "\(max(1, Int((Double(words) / 200).rounded()))) мин чтения"
+            return String(localized: "\(max(1, Int((Double(words) / 200).rounded()))) мин чтения")
         case .pages:
             guard let words = project.words, words > 0 else { return nil }
-            return "\(max(1, Int((Double(words) / 250).rounded(.up)))) стр."
-        case .sources: return project.sources > 0 ? "\(project.sources) ист." : nil
-        case .deadline: return project.card.deadline.map { "до " + FolderMetric.shortDate($0, now: now) }
-        case .publishDate: return project.card.publish.map { "публ. " + FolderMetric.shortDate($0, now: now) }
+            return String(localized: "\(max(1, Int((Double(words) / 250).rounded(.up)))) стр.")
+        case .sources: return project.sources > 0 ? String(localized: "\(project.sources) ист.") : nil
+        case .deadline: return project.card.deadline.map { String(localized: "до ") + FolderMetric.shortDate($0, now: now) }
+        case .publishDate: return project.card.publish.map { String(localized: "публ. ") + FolderMetric.shortDate($0, now: now) }
         case .lastActivity: return project.lastActivity.map { RelativeTime.ago($0, now: now) }
         }
     }
 
     static func shortDate(_ date: Date, now: Date) -> String {
         let calendar = Calendar.current
-        if calendar.isDateInToday(date) { return "сегодня" }
-        if calendar.isDateInTomorrow(date) { return "завтра" }
+        if calendar.isDateInToday(date) { return String(localized: "сегодня") }
+        if calendar.isDateInTomorrow(date) { return String(localized: "завтра") }
         let sameYear = calendar.component(.year, from: date) == calendar.component(.year, from: now)
         let style = Date.FormatStyle.dateTime.day().month(.abbreviated)
         return date.formatted(sameYear ? style : style.year())

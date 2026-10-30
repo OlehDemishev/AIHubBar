@@ -22,7 +22,7 @@ struct ServicesSettings: View {
                         .disabled(services.isScanning)
                 }
             } footer: {
-                Footnote(text: "Вход у каждого агента свой (его команда в подсказке), ClaudePult их токены не трогает. В фоне пока работает только Claude Code: остальные открываются в Терминале, пока их запрет действий не проверен вживую.")
+                Footnote(text: String(localized: "Вход у каждого агента свой (его команда в подсказке), ClaudePult их токены не трогает. В фоне пока работает только Claude Code: остальные открываются в Терминале, пока их запрет действий не проверен вживую."))
             }
 
             Section {
@@ -32,7 +32,7 @@ struct ServicesSettings: View {
             } header: {
                 Text("Модели по API — получают только текст")
             } footer: {
-                Footnote(text: "Ключ хранится только в связке ключей macOS (запись «ClaudePult API key»), не пишется в журнал и не попадает в экспорт. «Проверить» запрашивает список моделей — токены на это не тратятся. Модели по API выполняют команды проектов-папок.")
+                Footnote(text: String(localized: "Ключ хранится только в связке ключей macOS (запись «ClaudePult API key»), не пишется в журнал и не попадает в экспорт. «Проверить» запрашивает список моделей — токены на это не тратятся. Модели по API выполняют команды проектов-папок."))
             }
 
             spendSection
@@ -69,7 +69,7 @@ extension ServicesSettings {
         } header: {
             Text("Расход по API")
         } footer: {
-            Footnote(text: "ClaudePult считает токены своих запросов по ответам сервисов; стоимость — по ценам, которые вы введёте (цены меняются, поэтому они не зашиты). Уведомление при 80 % и 100 % бюджета.")
+            Footnote(text: String(localized: "ClaudePult считает токены своих запросов по ответам сервисов; стоимость — по ценам, которые вы введёте (цены меняются, поэтому они не зашиты). Уведомление при 80 % и 100 % бюджета."))
         }
     }
 
@@ -88,7 +88,7 @@ extension ServicesSettings {
 enum SpendText {
     static func line(_ summary: SpendSummary) -> String {
         guard summary.tokens > 0 else { return "—" }
-        let tokens = TokenBreakdown.tokensText(summary.tokens) + " токенов"
+        let tokens = TokenBreakdown.tokensText(summary.tokens) + String(localized: " токенов")
         return summary.cost.map { tokens + String(format: " · $%.2f", $0) } ?? tokens
     }
 }
@@ -100,7 +100,7 @@ private struct AgentRow: View {
     var body: some View {
         LabeledContent {
             if let info {
-                Text(info.version ?? "установлен")
+                Text(info.version ?? String(localized: "установлен"))
                     .foregroundStyle(.secondary)
                     .help(info.path)
             } else {
@@ -117,7 +117,7 @@ private struct AgentRow: View {
         } label: {
             VStack(alignment: .leading, spacing: 2) {
                 Text(kind.title)
-                Text(info == nil ? kind.install : "Вход: \(kind.login)")
+                Text(info == nil ? kind.install : String(localized: "Вход: \(kind.login)"))
                     .font(.caption)
                     .foregroundStyle(.secondary)
                     .textSelection(.enabled)
@@ -170,7 +170,7 @@ private struct ProviderRow: View {
                         .disabled(services.checking.contains(provider))
                 }
                 if services.hasKey.contains(provider) {
-                    Button(editing ? "Отмена" : "Заменить ключ") { editing.toggle(); keyText = "" }
+                    Button(editing ? String(localized: "Отмена") : String(localized: "Заменить ключ")) { editing.toggle(); keyText = "" }
                     Button("Удалить ключ", role: .destructive) { Task { await services.deleteKey(provider) } }
                 }
                 if !provider.keyRequired, !services.hasKey.contains(provider) {

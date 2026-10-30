@@ -42,7 +42,8 @@ struct ProjectCardTests {
         let now = Date(timeIntervalSince1970: 1_793_300_000)
         var project = FolderProject(name: "A", path: "/A", card: ProjectCardFile(), hasCardFile: false, mainFile: "a.md",
                                     words: 1500, sources: 3, lastActivity: now.addingTimeInterval(-7200))
-        #expect(FolderMetric.words.text(for: project, wordsPerMinute: 150) == "1500 сл.")
+        // Localized interpolation groups digits the system's way: «1 500 сл.».
+        #expect(FolderMetric.words.text(for: project, wordsPerMinute: 150) == "\(1500.formatted()) сл.")
         #expect(FolderMetric.duration.text(for: project, wordsPerMinute: 150) == "10:00")
         #expect(FolderMetric.duration.text(for: project, wordsPerMinute: 130) == "11:32")
         #expect(FolderMetric.readingTime.text(for: project, wordsPerMinute: 150) == "8 мин чтения")

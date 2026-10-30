@@ -58,7 +58,8 @@ final class FolderProjectStore {
         projects = scanned
         scannedSource = source
         lastUpdated = .now
-        lastError = folderMissing(source) ? "Папки нет: \(source.folder ?? "")" : nil
+        let folder = source.folder ?? ""
+        lastError = folderMissing(source) ? String(localized: "Папки нет: \(folder)") : nil
         AppLog.info("Folder projects: \(scanned.count) in \((ContinuousClock.now - started).formatted(.units(allowed: [.seconds], fractionalPart: .show(length: 1))))")
     }
 
@@ -83,9 +84,9 @@ final class FolderProjectStore {
 
         var errorDescription: String? {
             switch self {
-            case .noRoot: "У этого режима нет папки проектов"
-            case .badName: "Название не подходит для папки"
-            case .exists: "Такая папка уже есть"
+            case .noRoot: String(localized: "У этого режима нет папки проектов")
+            case .badName: String(localized: "Название не подходит для папки")
+            case .exists: String(localized: "Такая папка уже есть")
             }
         }
     }
@@ -119,7 +120,7 @@ final class FolderProjectStore {
         do {
             try text.write(to: url, atomically: true, encoding: .utf8)
         } catch {
-            lastError = "Не удалось записать \(url.lastPathComponent): \(error.localizedDescription)"
+            lastError = String(localized: "Не удалось записать \(url.lastPathComponent): \(error.localizedDescription)")
             AppLog.error("Writing \(url.path) failed: \(error.localizedDescription)")
         }
     }

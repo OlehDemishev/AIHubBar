@@ -89,15 +89,15 @@ struct MenuPanelView: View {
             }
 
             VStack(spacing: 2) {
-                PanelButton(title: "Настройки…", shortcut: ",") {
+                PanelButton(title: String(localized: "Настройки…"), shortcut: ",") {
                     NSApp.activate()
                     openSettings()
                 }
-                PanelButton(title: "Помощь", shortcut: nil) {
+                PanelButton(title: String(localized: "Помощь"), shortcut: nil) {
                     NSApp.activate()
                     openWindow(id: "help")
                 }
-                PanelButton(title: "Выход", shortcut: "q") {
+                PanelButton(title: String(localized: "Выход"), shortcut: "q") {
                     NSApp.terminate(nil)
                 }
             }
@@ -233,8 +233,8 @@ struct MenuPanelView: View {
         } else if store.projects.isEmpty {
             EmptyStateView(
                 systemImage: "tray",
-                title: "Проектов нет",
-                message: "В папке проектов не найдено git-репозиториев."
+                title: String(localized: "Проектов нет"),
+                message: String(localized: "В папке проектов не найдено git-репозиториев.")
             )
         } else {
             projectList
@@ -245,7 +245,7 @@ struct MenuPanelView: View {
     private var placeholder: some View {
         if let error = store.lastError {
             VStack(spacing: 10) {
-                EmptyStateView(systemImage: "exclamationmark.triangle", title: "Не удалось загрузить проекты", message: error)
+                EmptyStateView(systemImage: "exclamationmark.triangle", title: String(localized: "Не удалось загрузить проекты"), message: error)
                 Button("Повторить") { Task { await store.refresh() } }
                     .disabled(store.isRefreshing)
             }
@@ -399,7 +399,7 @@ private struct ModeSwitcher: View {
                             .foregroundStyle(selected ? Color.accentColor : .primary)
                     }
                     .buttonStyle(.plain)
-                    .help(selected ? "Текущий режим" : "Переключиться на «\(mode.name)»")
+                    .help(selected ? String(localized: "Текущий режим") : String(localized: "Переключиться на «\(mode.name)»"))
                 }
             }
             .padding(.horizontal, 12)

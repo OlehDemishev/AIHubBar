@@ -11,8 +11,8 @@ struct CommandTemplate: Codable, Identifiable, Equatable, Hashable, Sendable {
 
         var title: String {
             switch self {
-            case .mainFile: "Главный файл"
-            case .project: "Весь проект"
+            case .mainFile: String(localized: "Главный файл")
+            case .project: String(localized: "Весь проект")
             }
         }
     }
@@ -45,7 +45,7 @@ struct CommandTemplate: Codable, Identifiable, Equatable, Hashable, Sendable {
     init(from decoder: Decoder) throws {
         let c = try decoder.container(keyedBy: CodingKeys.self)
         id = (try? c.decodeIfPresent(String.self, forKey: .id)) ?? UUID().uuidString.lowercased()
-        title = (try? c.decodeIfPresent(String.self, forKey: .title)) ?? "Команда"
+        title = (try? c.decodeIfPresent(String.self, forKey: .title)) ?? String(localized: "Команда")
         task = (try? c.decodeIfPresent(String.self, forKey: .task)) ?? ""
         output = (try? c.decodeIfPresent(String.self, forKey: .output)) ?? "результат-<время>.md"
         input = (try? c.decodeIfPresent(Input.self, forKey: .input)) ?? .mainFile
@@ -55,7 +55,8 @@ struct CommandTemplate: Codable, Identifiable, Equatable, Hashable, Sendable {
 
     /// Always available in a folder mode, not stored in the mode.
     static let customTask = CommandTemplate(
-        id: "custom-task", title: "Своя задача", task: "{текст}", output: "результат-<время>.md", asks: "Задача"
+        id: "custom-task", title: String(localized: "Своя задача"), task: "{текст}", output: "результат-<время>.md",
+        asks: String(localized: "Задача")
     )
 }
 

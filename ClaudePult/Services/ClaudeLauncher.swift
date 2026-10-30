@@ -7,9 +7,9 @@ enum LaunchError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .automationDenied:
-            "ClaudePult не может управлять Терминалом. Разрешите: Системные настройки → Конфиденциальность и безопасность → Автоматизация → ClaudePult → Терминал."
+            String(localized: "ClaudePult не может управлять Терминалом. Разрешите: Системные настройки → Конфиденциальность и безопасность → Автоматизация → ClaudePult → Терминал.")
         case let .terminalFailed(detail):
-            "Не удалось открыть Терминал: \(detail)"
+            String(localized: "Не удалось открыть Терминал: \(detail)")
         }
     }
 }
@@ -55,7 +55,7 @@ enum ClaudeLauncher {
         }
         return request.allowBusyFolder
             ? .ready(path: request.projectPath, worktree: nil)
-            : .needsConfirmation("В этой папке уже работает сессия Claude. Запустить ещё одну там же?")
+            : .needsConfirmation(String(localized: "В этой папке уже работает сессия Claude. Запустить ещё одну там же?"))
     }
 
     static func launch(_ request: LaunchRequest) async throws -> LaunchOutcome {

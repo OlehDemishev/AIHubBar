@@ -101,11 +101,11 @@ struct RunLogView: View {
 extension BackgroundRun.State {
     var title: String {
         switch self {
-        case .running: "выполняется"
-        case .succeeded: "готово"
-        case .failed: "ошибка"
-        case .stopped: "остановлено"
-        case .timedOut: "лимит времени"
+        case .running: String(localized: "выполняется")
+        case .succeeded: String(localized: "готово")
+        case .failed: String(localized: "ошибка")
+        case .stopped: String(localized: "остановлено")
+        case .timedOut: String(localized: "лимит времени")
         }
     }
 

@@ -136,7 +136,7 @@ struct AssistantView: View {
                     draft.wrappedValue.choose(template)
                 }
             }
-            choiceCard(title: "С нуля", detail: "Пустой режим: всё выберете на следующих шагах.", icon: "square.dashed",
+            choiceCard(title: String(localized: "С нуля"), detail: String(localized: "Пустой режим: всё выберете на следующих шагах."), icon: "square.dashed",
                        selected: draft.wrappedValue.templateID == nil) {
                 draft.wrappedValue.choose(nil)
             }
@@ -164,7 +164,7 @@ struct AssistantView: View {
     private func folderStep(_ draft: Binding<AssistantDraft>) -> some View {
         let folder = draft.wrappedValue.mode.source.folder ?? "~/Documents"
         return VStack(alignment: .leading, spacing: 12) {
-            Text(Self.templates.first { $0.id == draft.wrappedValue.templateID }?.folderHint ?? "Папка, где каждая подпапка — проект.")
+            Text(Self.templates.first { $0.id == draft.wrappedValue.templateID }?.folderHint ?? String(localized: "Папка, где каждая подпапка — проект."))
                 .foregroundStyle(.secondary)
             HStack {
                 Text(folder).lineLimit(1).truncationMode(.middle)
@@ -208,7 +208,7 @@ struct AssistantView: View {
         panel.canChooseDirectories = true
         panel.canChooseFiles = false
         panel.canCreateDirectories = true
-        panel.prompt = "Выбрать"
+        panel.prompt = String(localized: "Выбрать")
         let current = PathText.expand(draft.wrappedValue.mode.source.folder ?? "~/Documents")
         panel.directoryURL = URL(fileURLWithPath: FileManager.default.fileExists(atPath: current) ? current : PathText.expand("~/Documents"))
         NSApp.activate()
@@ -306,7 +306,7 @@ struct AssistantView: View {
                     CommandEditor(command: $command) { draft.wrappedValue.mode.commands.removeAll { $0.id == command.id } }
                 }
                 Button("Добавить команду") {
-                    draft.wrappedValue.mode.commands.append(CommandTemplate(title: "Новая команда", task: "", output: "результат-<время>.md"))
+                    draft.wrappedValue.mode.commands.append(CommandTemplate(title: String(localized: "Новая команда"), task: "", output: String(localized: "результат-<время>.md")))
                 }
             }
             .formStyle(.grouped)
@@ -333,9 +333,9 @@ struct AssistantView: View {
 
     private func permissionsText(_ profile: PermissionProfile) -> String {
         switch profile {
-        case .code: "Чтение и правка файлов, git (без push в main и удаления истории), проверки и сборки, pull request."
-        case .filesOnly: "Читать и писать только внутри папки проекта. Без терминала и интернета."
-        case .filesAndWeb: "Файлы проекта плюс поиск и чтение страниц в интернете. Без терминала."
+        case .code: String(localized: "Чтение и правка файлов, git (без push в main и удаления истории), проверки и сборки, pull request.")
+        case .filesOnly: String(localized: "Читать и писать только внутри папки проекта. Без терминала и интернета.")
+        case .filesAndWeb: String(localized: "Файлы проекта плюс поиск и чтение страниц в интернете. Без терминала.")
         }
     }
 
@@ -407,11 +407,11 @@ struct AssistantPreview: View {
 
     private var sampleProjects: [FolderProject] {
         let names: [String] = switch draft.templateID {
-        case "video": ["Ролик про кофе", "Обзор чайников", "Shorts: лайфхак"]
-        case "texts": ["Статья о сне", "Рассылка №12", "Пост про отпуск"]
-        case "research": ["Курсовая: климат", "Нейросети в медицине"]
-        case "social": ["Запуск курса", "Instagram: ноябрь"]
-        default: ["Проект один", "Проект два"]
+        case "video": [String(localized: "Ролик про кофе"), String(localized: "Обзор чайников"), String(localized: "Shorts: лайфхак")]
+        case "texts": [String(localized: "Статья о сне"), String(localized: "Рассылка №12"), String(localized: "Пост про отпуск")]
+        case "research": [String(localized: "Курсовая: климат"), String(localized: "Нейросети в медицине")]
+        case "social": [String(localized: "Запуск курса"), String(localized: "Instagram: ноябрь")]
+        default: [String(localized: "Проект один"), String(localized: "Проект два")]
         }
         let stages = mode.stageList
         return names.enumerated().map { index, name in
@@ -419,7 +419,7 @@ struct AssistantPreview: View {
             if !stages.isEmpty { card.values[.stage] = stages[min(index + 1, stages.count - 1)] }
             card.values[.deadline] = CalendarScanner.text(Date.now.addingTimeInterval(Double(index + 2) * 86_400), withTime: false)
             card.values[.publish] = CalendarScanner.text(Date.now.addingTimeInterval(Double(index + 5) * 86_400), withTime: false)
-            return FolderProject(name: name, path: "/\(name)", card: card, hasCardFile: true, mainFile: "текст.md",
+            return FolderProject(name: name, path: "/\(name)", card: card, hasCardFile: true, mainFile: String(localized: "текст.md"),
                                  words: [1340, 820, 150][index % 3], sources: [4, 0, 2][index % 3],
                                  lastActivity: Date.now.addingTimeInterval(-Double(index + 1) * 5400))
         }
@@ -459,13 +459,13 @@ struct AssistantPreview: View {
         VStack(alignment: .leading, spacing: 10) {
             HStack(spacing: 6) {
                 Image(systemName: mode.icon)
-                Text(mode.name.isEmpty ? "Новый режим" : mode.name).fontWeight(.semibold)
+                Text(mode.name.isEmpty ? String(localized: "Новый режим") : mode.name).fontWeight(.semibold)
             }
             .font(.callout)
             if !draft.hiddenBlocks.contains(.limits) {
                 VStack(alignment: .leading, spacing: 4) {
-                    sampleBar("Сессия", 0.34, .green)
-                    sampleBar("Неделя", 0.58, .orange)
+                    sampleBar(String(localized: "Сессия"), 0.34, .green)
+                    sampleBar(String(localized: "Неделя"), 0.58, .orange)
                 }
             }
             if mode.calendar != .off, mode.source.isFolders, !draft.hiddenBlocks.contains(.calendar) {
@@ -484,8 +484,8 @@ struct AssistantPreview: View {
             if mode.showProjects {
                 Divider()
                 if mode.source.isGit {
-                    gitRow("my-app", branch: "main", detail: "2 файла · PR #12 ✓", color: .yellow)
-                    gitRow("website", branch: "feat/blog", detail: "чисто · 3 ч назад", color: .green)
+                    gitRow("my-app", branch: "main", detail: String(localized: "2 файла · PR #12 ✓"), color: .yellow)
+                    gitRow("website", branch: "feat/blog", detail: String(localized: "чисто · 3 ч назад"), color: .green)
                 } else if mode.source.isFolders {
                     ForEach(sampleProjects) { project in
                         VStack(alignment: .leading, spacing: 2) {

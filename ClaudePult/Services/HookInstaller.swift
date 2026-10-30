@@ -6,7 +6,7 @@ enum HookInstallError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case let .unreadableSettings(detail):
-            "Не удалось прочитать ~/.claude/settings.json (\(detail)). Файл не изменён."
+            String(localized: "Не удалось прочитать ~/.claude/settings.json (\(detail)). Файл не изменён.")
         }
     }
 }
@@ -19,9 +19,9 @@ enum HookStatus: Equatable, Sendable {
 
     var title: String {
         switch self {
-        case .notInstalled: "не установлены"
-        case .installed: "установлены"
-        case .outdated: "нужно обновить"
+        case .notInstalled: String(localized: "не установлены")
+        case .installed: String(localized: "установлены")
+        case .outdated: String(localized: "нужно обновить")
         }
     }
 }
@@ -169,7 +169,7 @@ struct HookInstaller {
         if data.allSatisfy({ $0 == 0x20 || $0 == 0x0A || $0 == 0x0D || $0 == 0x09 }) { return [:] }
         do {
             guard let object = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
-                throw HookInstallError.unreadableSettings("корень не объект JSON")
+                throw HookInstallError.unreadableSettings(String(localized: "корень не объект JSON"))
             }
             return object
         } catch let error as HookInstallError {

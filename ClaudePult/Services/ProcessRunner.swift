@@ -15,8 +15,8 @@ enum ProcessError: LocalizedError {
 
     var errorDescription: String? {
         switch self {
-        case let .launchFailed(command, underlying): "Не удалось запустить \(command): \(underlying)"
-        case let .timedOut(command, seconds): "\(command) не ответил за \(seconds) с"
+        case let .launchFailed(command, underlying): String(localized: "Не удалось запустить \(command): \(underlying)")
+        case let .timedOut(command, seconds): String(localized: "\(command) не ответил за \(seconds) с")
         }
     }
 }

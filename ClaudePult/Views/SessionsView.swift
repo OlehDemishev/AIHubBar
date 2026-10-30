@@ -105,13 +105,13 @@ private struct SessionRowView: View {
                             .truncationMode(.middle)
                     }
                     Spacer(minLength: 6)
-                    Text(row.run != nil && row.state == .running ? "в фоне" : row.state.title)
+                    Text(row.run != nil && row.state == .running ? String(localized: "в фоне") : row.state.title)
                         .scaledFont(.caption, weight: .medium)
                         .foregroundStyle(row.state.color)
                         .fixedSize()
                 }
                 HStack(spacing: 6) {
-                    Text(row.task ?? "без задачи")
+                    Text(row.task ?? String(localized: "без задачи"))
                         .lineLimit(1)
                         .truncationMode(.tail)
                         .foregroundStyle(row.task == nil ? .tertiary : .secondary)
@@ -170,10 +170,10 @@ enum DurationText {
     static func short(from start: Date, to end: Date) -> String {
         let seconds = Int(max(0, end.timeIntervalSince(start)))
         switch seconds {
-        case ..<60: return "\(seconds) с"
-        case ..<3600: return "\(seconds / 60) мин"
-        case ..<86_400: return String(format: "%d ч %02d мин", seconds / 3600, seconds % 3600 / 60)
-        default: return "\(seconds / 86_400) дн"
+        case ..<60: return String(localized: "\(seconds) с")
+        case ..<3600: return String(localized: "\(seconds / 60) мин")
+        case ..<86_400: return String(format: String(localized: "%d ч %02d мин"), seconds / 3600, seconds % 3600 / 60)
+        default: return String(localized: "\(seconds / 86_400) дн")
         }
     }
 }
@@ -181,11 +181,11 @@ enum DurationText {
 extension Session.State {
     var title: String {
         switch self {
-        case .running: "работает"
-        case .waiting: "ждёт ответа"
-        case .done: "готово"
-        case .ended: "завершена"
-        case .error: "ошибка"
+        case .running: String(localized: "работает")
+        case .waiting: String(localized: "ждёт ответа")
+        case .done: String(localized: "готово")
+        case .ended: String(localized: "завершена")
+        case .error: String(localized: "ошибка")
         case .unknown: "—"
         }
     }

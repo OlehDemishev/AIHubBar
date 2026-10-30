@@ -114,8 +114,8 @@ final class LaunchController {
         if mode == .background, !skipLimitGuard, let session = usage.snapshot?.session,
            session.utilization > Self.backgroundLimitGuard {
             pendingLimit[id] = (command, target, session.resetsAt)
-            let reset = session.resetsAt.map { ", сброс в \($0.formatted(date: .omitted, time: .shortened))" } ?? ""
-            messages[id] = Message(text: "Сессия использована на \(UsageText.percent(session.utilization))\(reset). Фоновая задача может упереться в лимит.")
+            let reset = session.resetsAt.map { String(localized: ", сброс в \($0.formatted(date: .omitted, time: .shortened))") } ?? ""
+            messages[id] = Message(text: String(localized: "Сессия использована на \(UsageText.percent(session.utilization))\(reset). Фоновая задача может упереться в лимит."))
             return
         }
 
@@ -162,10 +162,10 @@ final class LaunchController {
 
     static func launchedText(_ command: ClaudeCommand, mode: LaunchMode, worktree: WorktreePlan?, limit: Int) -> String {
         var text = mode == .terminal
-            ? "«\(command.title)» запущен в новом окне Терминала."
-            : "«\(command.title)» запущен в фоне (лимит \(limit) мин). Итог придёт уведомлением."
+            ? String(localized: "«\(command.title)» запущен в новом окне Терминала.")
+            : String(localized: "«\(command.title)» запущен в фоне (лимит \(limit) мин). Итог придёт уведомлением.")
         if let worktree {
-            text = "В папке проекта уже работает Claude, поэтому запуск идёт в worktree cb-\(worktree.slug) (ветка \(worktree.branch)). " + text
+            text = String(localized: "В папке проекта уже работает Claude, поэтому запуск идёт в worktree cb-\(worktree.slug) (ветка \(worktree.branch)). ") + text
         }
         return text
     }
@@ -187,7 +187,7 @@ final class LaunchController {
         let launchAt = (pending.resetsAt ?? .now.addingTimeInterval(3600)).addingTimeInterval(120)
         queued.append(QueuedLaunch(id: UUID().uuidString, command: pending.command, target: pending.target, launchAt: launchAt))
         saveQueue()
-        messages[project.id] = Message(text: "«\(pending.command.title)» запустится в фоне в \(launchAt.formatted(date: .omitted, time: .shortened)), после сброса лимита.")
+        messages[project.id] = Message(text: String(localized: "«\(pending.command.title)» запустится в фоне в \(launchAt.formatted(date: .omitted, time: .shortened)), после сброса лимита."))
         AppLog.info("Queued «\(pending.command.title)» for \(pending.target.name) at \(launchAt.ISO8601Format())")
     }
 

@@ -7,10 +7,10 @@ enum MenuBarUsageMode: String, CaseIterable, Sendable {
 
     var title: String {
         switch self {
-        case .iconOnly: "Только значок"
-        case .session: "% сессии"
-        case .sessionAndWeek: "% сессии и недели"
-        case .ring: "Кольцо"
+        case .iconOnly: String(localized: "Только значок")
+        case .session: String(localized: "% сессии")
+        case .sessionAndWeek: String(localized: "% сессии и недели")
+        case .ring: String(localized: "Кольцо")
         }
     }
 }
@@ -21,8 +21,8 @@ enum LaunchMode: String, CaseIterable, Sendable {
 
     var title: String {
         switch self {
-        case .terminal: "Терминал"
-        case .background: "Фон"
+        case .terminal: String(localized: "Терминал")
+        case .background: String(localized: "Фон")
         }
     }
 }

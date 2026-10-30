@@ -100,7 +100,7 @@ struct ModesSettings: View {
         panel.canChooseDirectories = true
         panel.canChooseFiles = false
         panel.canCreateDirectories = true
-        panel.prompt = "Выбрать"
+        panel.prompt = String(localized: "Выбрать")
         panel.message = "«\(template.title)»: \(template.folderHint)"
         let suggested = PathText.expand(template.mode.source.folder ?? "~/Documents")
         panel.directoryURL = URL(fileURLWithPath: FileManager.default.fileExists(atPath: suggested) ? suggested : PathText.expand("~/Documents"))
@@ -147,14 +147,14 @@ private struct ModeEditor: View {
                 }
                 switch mode.source {
                 case let .gitReport(projects, dailyReport):
-                    TildeFolderField(title: "Папка проектов", path: projects) { mode.source = .gitReport(projects: $0, dailyReport: dailyReport) }
-                    TildeFolderField(title: "Папка _daily-report", path: dailyReport) { mode.source = .gitReport(projects: projects, dailyReport: $0) }
+                    TildeFolderField(title: String(localized: "Папка проектов"), path: projects) { mode.source = .gitReport(projects: $0, dailyReport: dailyReport) }
+                    TildeFolderField(title: String(localized: "Папка _daily-report"), path: dailyReport) { mode.source = .gitReport(projects: projects, dailyReport: $0) }
                 case let .gitBuiltin(path):
-                    TildeFolderField(title: "Папка проектов", path: path) { mode.source = .gitBuiltin(projects: $0) }
+                    TildeFolderField(title: String(localized: "Папка проектов"), path: path) { mode.source = .gitBuiltin(projects: $0) }
                 case let .folders(path):
-                    TildeFolderField(title: "Папка проектов", path: path) { mode.source = .folders($0) }
+                    TildeFolderField(title: String(localized: "Папка проектов"), path: path) { mode.source = .folders($0) }
                 case let .inbox(path):
-                    TildeFolderField(title: "Папка", path: path) { mode.source = .inbox($0) }
+                    TildeFolderField(title: String(localized: "Папка"), path: path) { mode.source = .inbox($0) }
                 case .none:
                     EmptyView()
                 }
@@ -202,7 +202,7 @@ private struct ModeEditor: View {
                     Text(AIService.claudeCode.title).tag(String?.none)
                     ForEach(services.available.filter { $0 != .claudeCode }, id: \.id) { Text($0.title).tag(String?.some($0.id)) }
                     if let id = mode.service, !services.available.contains(where: { $0.id == id }) {
-                        Text((AIService(id: id)?.title ?? id) + " — не найден на этом Маке").tag(String?.some(id))
+                        Text((AIService(id: id)?.title ?? id) + String(localized: " — не найден на этом Маке")).tag(String?.some(id))
                     }
                 }
                 Picker("Права Claude в фоне", selection: $mode.permissions) {
@@ -225,7 +225,7 @@ private struct ModeEditor: View {
                         CommandEditor(command: $command) { mode.commands.removeAll { $0.id == command.id } }
                     }
                     Button("Добавить команду") {
-                        mode.commands.append(CommandTemplate(title: "Новая команда", task: "", output: "результат-<время>.md"))
+                        mode.commands.append(CommandTemplate(title: String(localized: "Новая команда"), task: "", output: String(localized: "результат-<время>.md")))
                     }
                 } header: {
                     Text("Команды проектов")
@@ -269,7 +269,7 @@ private struct TildeFolderField: View {
                     .lineLimit(1)
                     .truncationMode(.middle)
                     .foregroundStyle(FileManager.default.fileExists(atPath: PathText.expand(path)) ? .primary : Color.red)
-                    .help(FileManager.default.fileExists(atPath: PathText.expand(path)) ? PathText.expand(path) : "Папки нет на этом Маке — выберите свою")
+                    .help(FileManager.default.fileExists(atPath: PathText.expand(path)) ? PathText.expand(path) : String(localized: "Папки нет на этом Маке — выберите свою"))
                 Button("Выбрать…") {
                     let panel = NSOpenPanel()
                     panel.canChooseDirectories = true
@@ -311,9 +311,9 @@ struct ImportConfirmation: View {
 
     private func summary(_ bundle: SettingsBundle) -> String {
         let names = bundle.modes.map(\.name).joined(separator: ", ")
-        let what = bundle.format == SettingsBundle.settingsFormat ? "Все настройки и режимы" : "Режим"
+        let what = bundle.format == SettingsBundle.settingsFormat ? String(localized: "Все настройки и режимы") : String(localized: "Режим")
         let missing = bundle.modes.flatMap(ModeStore.missingFolders)
-        return "\(what): \(names)." + (missing.isEmpty ? "" : " Нет на этом Маке: \(missing.joined(separator: ", ")) — после импорта выберите свои папки.")
+        return "\(what): \(names)." + (missing.isEmpty ? "" : String(localized: " Нет на этом Маке: \(missing.joined(separator: "), String(localized: ")) — после импорта выберите свои папки."))
     }
 }
 
@@ -362,11 +362,11 @@ private enum SourceKind: CaseIterable, Hashable {
 
     var title: String {
         switch self {
-        case .git: "git-репозитории"
-        case .report: "git-репозитории через report.py (_daily-report)"
-        case .folders: "папки (каждая подпапка — проект)"
-        case .inbox: "одна папка"
-        case .none: "без проектов"
+        case .git: String(localized: "git-репозитории")
+        case .report: String(localized: "git-репозитории через report.py (_daily-report)")
+        case .folders: String(localized: "папки (каждая подпапка — проект)")
+        case .inbox: String(localized: "одна папка")
+        case .none: String(localized: "без проектов")
         }
     }
 

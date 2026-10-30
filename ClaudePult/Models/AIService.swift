@@ -99,9 +99,9 @@ enum AgentKind: String, CaseIterable, Codable, Sendable {
         case .claudeCode: "npm install -g @anthropic-ai/claude-code"
         case .codex: "brew install --cask codex"
         case .gemini: "brew install gemini-cli"
-        case .antigravity: "см. README Gemini CLI (раздел про Antigravity)"
+        case .antigravity: String(localized: "см. README Gemini CLI (раздел про Antigravity)")
         case .copilot: "brew install --cask copilot-cli"
-        case .cursor: "см. cursor.com/cli"
+        case .cursor: String(localized: "см. cursor.com/cli")
         }
     }
 
@@ -119,7 +119,7 @@ enum AgentKind: String, CaseIterable, Codable, Sendable {
 
     var note: String? {
         switch self {
-        case .gemini: "Для Code Assist и платных ключей API. Бесплатный вход и Google AI Pro/Ultra с июня 2026 — в Antigravity CLI."
+        case .gemini: String(localized: "Для Code Assist и платных ключей API. Бесплатный вход и Google AI Pro/Ultra с июня 2026 — в Antigravity CLI.")
         default: nil
         }
     }
@@ -161,7 +161,7 @@ enum APIProvider: String, CaseIterable, Codable, Sendable {
         case .xai: "xAI Grok"
         case .deepseek: "DeepSeek"
         case .mistral: "Mistral"
-        case .compatible: "Совместимый с OpenAI"
+        case .compatible: String(localized: "Совместимый с OpenAI")
         }
     }
 
@@ -231,9 +231,9 @@ enum APICheck: Equatable, Sendable {
 
     var text: String {
         switch self {
-        case let .ok(models): models.isEmpty ? "Работает" : "Работает · моделей: \(models.count)"
-        case .badKey: "Ключ не подошёл"
-        case .noKey: "Нет ключа"
+        case let .ok(models): models.isEmpty ? String(localized: "Работает") : String(localized: "Работает · моделей: \(models.count)")
+        case .badKey: String(localized: "Ключ не подошёл")
+        case .noKey: String(localized: "Нет ключа")
         case let .failed(reason): reason
         }
     }
@@ -242,14 +242,14 @@ enum APICheck: Equatable, Sendable {
     static func from(status: Int, body: Data) -> APICheck {
         switch status {
         case 200..<300:
-            guard let models = APIProvider.parseModels(body) else { return .failed("Ответ в неизвестном формате") }
+            guard let models = APIProvider.parseModels(body) else { return .failed(String(localized: "Ответ в неизвестном формате")) }
             return .ok(models: models)
         case 401: return .badKey
         case 400, 403:
             let text = String(decoding: body.prefix(2000), as: UTF8.self).lowercased()
-            return text.contains("key") || text.contains("auth") ? .badKey : .failed("Ошибка HTTP \(status)")
-        case 429: return .failed("Слишком много запросов (HTTP 429)")
-        default: return .failed("Ошибка HTTP \(status)")
+            return text.contains("key") || text.contains("auth") ? .badKey : .failed(String(localized: "Ошибка HTTP \(status)"))
+        case 429: return .failed(String(localized: "Слишком много запросов (HTTP 429)"))
+        default: return .failed(String(localized: "Ошибка HTTP \(status)"))
         }
     }
 }

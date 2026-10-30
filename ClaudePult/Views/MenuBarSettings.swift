@@ -20,7 +20,7 @@ struct MenuBarSettings: View {
                     }
                     .pickerStyle(.segmented)
                 } footer: {
-                    Footnote(text: "«Минимум» — значок, проблемы и ожидающие ответа. «Лимиты» — ещё сессия и неделя. «Всё» — всё, что есть. Любая правка ниже делает набор «Своим».")
+                    Footnote(text: String(localized: "«Минимум» — значок, проблемы и ожидающие ответа. «Лимиты» — ещё сессия и неделя. «Всё» — всё, что есть. Любая правка ниже делает набор «Своим»."))
                 }
 
                 Section("Элементы — в порядке слева направо") {
@@ -45,7 +45,7 @@ struct MenuBarSettings: View {
                 } header: {
                     Text("Вид")
                 } footer: {
-                    Footnote(text: "Разделитель ставится между числами; значки и счётчики отделяются небольшим отступом. Набор общий для всех режимов.")
+                    Footnote(text: String(localized: "Разделитель ставится между числами; значки и счётчики отделяются небольшим отступом. Набор общий для всех режимов."))
                 }
             }
             .formStyle(.grouped)
@@ -93,7 +93,7 @@ struct MenuBarSettings: View {
                     .font(.caption)
                     .foregroundStyle(.orange)
             } else {
-                Text(sample ? "Так выглядит строка, когда есть что показать." : "Так строка выглядит сейчас. Пустые элементы (0, нет данных) не показываются.")
+                Text(sample ? String(localized: "Так выглядит строка, когда есть что показать.") : String(localized: "Так строка выглядит сейчас. Пустые элементы (0, нет данных) не показываются."))
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }
@@ -155,8 +155,8 @@ private struct ElementRow: View {
     let onMove: (Int) -> Void
 
     private static let symbols: [(String, String)] = [
-        ("sparkle", "✦ Искра"), ("star", "Звезда"), ("bolt", "Молния"), ("brain", "Мозг"), ("terminal", "Терминал"),
-        ("mode", "Значок режима"), ("none", "Без значка"),
+        ("sparkle", String(localized: "✦ Искра")), ("star", String(localized: "Звезда")), ("bolt", String(localized: "Молния")), ("brain", String(localized: "Мозг")), ("terminal", String(localized: "Терминал")),
+        ("mode", String(localized: "Значок режима")), ("none", String(localized: "Без значка")),
     ]
 
     var body: some View {

@@ -142,14 +142,14 @@ final class RunStore {
         }
         run.finishedAt = .now
         run.summary = StreamJSON.summary(outcome?.result) ?? (outcome == nil && run.state == .failed
-            ? "Claude завершился без результата — см. журнал" : nil)
+            ? String(localized: "Claude завершился без результата — см. журнал") : nil)
         if let denied = outcome?.deniedTools, !denied.isEmpty {
             let list = Array(Set(denied)).sorted().joined(separator: ", ")
-            run.summary = [run.summary, "Отклонено правилами фона: \(list)"].compactMap { $0 }.joined(separator: "\n")
+            run.summary = [run.summary, String(localized: "Отклонено правилами фона: \(list)")].compactMap { $0 }.joined(separator: "\n")
         }
         run.pullRequestURL = StreamJSON.pullRequestURL(in: outcome?.result)
         if let file = run.resultFile, run.state == .succeeded, !FileManager.default.fileExists(atPath: file) {
-            run.summary = [run.summary, "Файл результата не появился: \((file as NSString).lastPathComponent)"].compactMap { $0 }.joined(separator: "\n")
+            run.summary = [run.summary, String(localized: "Файл результата не появился: \((file as NSString).lastPathComponent)")].compactMap { $0 }.joined(separator: "\n")
         }
         AppLog.info("Background run \(id) finished: \(run.state.rawValue)")
         announce(&run)

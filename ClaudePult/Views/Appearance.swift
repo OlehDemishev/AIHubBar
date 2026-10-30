@@ -7,10 +7,10 @@ enum PanelTextSize: String, CaseIterable, Sendable {
 
     var title: String {
         switch self {
-        case .small: "Мелкий"
-        case .normal: "Обычный"
-        case .large: "Крупный"
-        case .extraLarge: "Очень крупный"
+        case .small: String(localized: "Мелкий")
+        case .normal: String(localized: "Обычный")
+        case .large: String(localized: "Крупный")
+        case .extraLarge: String(localized: "Очень крупный")
         }
     }
 
@@ -30,9 +30,9 @@ enum PanelWidth: String, CaseIterable, Sendable {
 
     var title: String {
         switch self {
-        case .narrow: "Узкая"
-        case .normal: "Обычная"
-        case .wide: "Широкая"
+        case .narrow: String(localized: "Узкая")
+        case .normal: String(localized: "Обычная")
+        case .wide: String(localized: "Широкая")
         }
     }
 
@@ -51,9 +51,9 @@ enum PanelDensity: String, CaseIterable, Sendable {
 
     var title: String {
         switch self {
-        case .compact: "Плотно"
-        case .normal: "Обычно"
-        case .spacious: "Просторно"
+        case .compact: String(localized: "Плотно")
+        case .normal: String(localized: "Обычно")
+        case .spacious: String(localized: "Просторно")
         }
     }
 
@@ -73,9 +73,9 @@ enum PanelTheme: String, CaseIterable, Sendable {
 
     var title: String {
         switch self {
-        case .system: "Как в системе"
-        case .light: "Светлая"
-        case .dark: "Тёмная"
+        case .system: String(localized: "Как в системе")
+        case .light: String(localized: "Светлая")
+        case .dark: String(localized: "Тёмная")
         }
     }
 
@@ -96,11 +96,11 @@ enum PanelBlock: String, CaseIterable, Identifiable, Sendable {
 
     var title: String {
         switch self {
-        case .limits: "Лимиты"
-        case .sessions: "Сессии"
-        case .calendar: "Ближайшее (календарь)"
-        case .projects: "Проекты"
-        case .commands: "Команды"
+        case .limits: String(localized: "Лимиты")
+        case .sessions: String(localized: "Сессии")
+        case .calendar: String(localized: "Ближайшее (календарь)")
+        case .projects: String(localized: "Проекты")
+        case .commands: String(localized: "Команды")
         }
     }
 }

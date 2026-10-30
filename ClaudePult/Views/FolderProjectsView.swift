@@ -23,7 +23,8 @@ struct FolderProjectsView: View {
                     .padding(.top, 4)
             }
             if store.projects.isEmpty, store.lastUpdated != nil {
-                Text(store.rootFolder == nil ? "Папка пуста." : "Проектов пока нет: каждая папка внутри «\(PathText.tilde(store.rootFolder ?? ""))» — проект.")
+                let root = PathText.tilde(store.rootFolder ?? "")
+                Text(store.rootFolder == nil ? String(localized: "Папка пуста.") : String(localized: "Проектов пока нет: каждая папка внутри «\(root)» — проект."))
                     .scaledFont(.caption)
                     .foregroundStyle(.secondary)
                     .padding(.horizontal, 8)
@@ -180,7 +181,7 @@ private struct FolderProjectRow: View {
                                 StageChip(stage: stage, index: index, count: stages.count, isSelected: project.card.stage == stage)
                             }
                             .buttonStyle(.plain)
-                            .help(project.card.stage == stage ? "Текущий этап" : "Перевести на этап «\(stage)» (пишется в проект.md)")
+                            .help(project.card.stage == stage ? String(localized: "Текущий этап") : String(localized: "Перевести на этап «\(stage)» (пишется в проект.md)"))
                         }
                     }
                 }

@@ -59,7 +59,7 @@ struct ProjectCommandsView: View {
                         .controlSize(.mini)
                     }
                 }
-                Text(compareIDs.count < 2 ? "Выберите 2–3 сервиса, затем команду." : "Теперь выберите команду.")
+                Text(compareIDs.count < 2 ? String(localized: "Выберите 2–3 сервиса, затем команду.") : String(localized: "Теперь выберите команду."))
                     .scaledFont(.caption2)
                     .foregroundStyle(.secondary)
             }
@@ -75,7 +75,7 @@ struct ProjectCommandsView: View {
 
             if let asking {
                 HStack(spacing: 6) {
-                    TextField(asking.asks ?? "Текст", text: $text)
+                    TextField(asking.asks ?? String(localized: "Текст"), text: $text)
                         .textFieldStyle(.roundedBorder)
                         .onSubmit { perform(asking) }
                     Button("Выполнить") { perform(asking) }
@@ -179,7 +179,7 @@ struct CompareView: View {
                                 }
                             }
                             ScrollView {
-                                Text((try? String(contentsOfFile: file.path, encoding: .utf8)) ?? "Ещё выполняется…")
+                                Text((try? String(contentsOfFile: file.path, encoding: .utf8)) ?? String(localized: "Ещё выполняется…"))
                                     .textSelection(.enabled)
                                     .frame(maxWidth: .infinity, alignment: .leading)
                             }

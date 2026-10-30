@@ -7,7 +7,7 @@ enum GitError: LocalizedError {
         switch self {
         case let .failed(command, stderr):
             let detail = stderr.trimmingCharacters(in: .whitespacesAndNewlines)
-            return detail.isEmpty ? "git \(command) завершился с ошибкой" : "git \(command): \(detail)"
+            return detail.isEmpty ? String(localized: "git \(command) завершился с ошибкой") : "git \(command): \(detail)"
         }
     }
 }
@@ -63,23 +63,23 @@ enum GitService {
 
     static func removalCheck(worktreePath: String, baseRef: String) async -> WorktreeRemoval {
         guard FileManager.default.fileExists(atPath: worktreePath) else {
-            return .blocked("Папки worktree нет — выполните `git worktree prune` в проекте.")
+            return .blocked(String(localized: "Папки worktree нет — выполните `git worktree prune` в проекте."))
         }
         do {
             let status = try await run(["status", "--porcelain"], in: worktreePath)
             if !status.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                return .blocked("В worktree есть незакоммиченные изменения.")
+                return .blocked(String(localized: "В worktree есть незакоммиченные изменения."))
             }
             // Merged into the base branch: nothing would be lost.
             if (try? await run(["merge-base", "--is-ancestor", "HEAD", baseRef], in: worktreePath)) != nil {
                 return .allowed
             }
             guard let ahead = try? await run(["rev-list", "--count", "@{upstream}..HEAD"], in: worktreePath) else {
-                return .blocked("Ветка worktree не запушена.")
+                return .blocked(String(localized: "Ветка worktree не запушена."))
             }
             return Int(ahead.trimmingCharacters(in: .whitespacesAndNewlines)) == 0
                 ? .allowed
-                : .blocked("В ветке worktree есть незапушенные коммиты.")
+                : .blocked(String(localized: "В ветке worktree есть незапушенные коммиты."))
         } catch {
             return .blocked(error.localizedDescription)
         }

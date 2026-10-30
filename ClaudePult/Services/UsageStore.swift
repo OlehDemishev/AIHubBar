@@ -22,9 +22,9 @@ final class UsageStore {
         var id: String { rawValue }
         var title: String {
             switch self {
-            case .session: "Сессия"
-            case .today: "Сегодня"
-            case .week: "Неделя"
+            case .session: String(localized: "Сессия")
+            case .today: String(localized: "Сегодня")
+            case .week: String(localized: "Неделя")
             }
         }
     }
@@ -99,7 +99,7 @@ final class UsageStore {
             let pause = Self.backoff(strike: rateLimitStrikes, retryAfter: retryAfter)
             let until = Date.now.addingTimeInterval(pause)
             pausedUntil = until
-            error = "Сервер лимитов просит запрашивать реже — следующая попытка в \(until.formatted(date: .omitted, time: .shortened))"
+            error = String(localized: "Сервер лимитов просит запрашивать реже — следующая попытка в \(until.formatted(date: .omitted, time: .shortened))")
             AppLog.error("Usage: HTTP 429, pause \(Int(pause / 60)) min (strike \(rateLimitStrikes), Retry-After \(retryAfter.map { "\(Int($0)) s" } ?? "none"))")
         } catch {
             // The same failure repeats every few minutes; log it once.
@@ -184,12 +184,12 @@ final class UsageStore {
         switch alert {
         case let .crossed(key, name, threshold, utilization, resetsAt):
             id = "limit-\(key)-\(threshold)"
-            title = "Лимит Claude: \(name.lowercased()) — \(UsageText.percent(utilization))"
-            body = "Порог \(threshold) %" + (resetsAt.map { ", сброс \(UsageText.countdown(to: $0))" } ?? "")
+            title = String(localized: "Лимит Claude: \(name.lowercased()) — \(UsageText.percent(utilization))")
+            body = String(localized: "Порог \(threshold) %") + (resetsAt.map { String(localized: ", сброс \(UsageText.countdown(to: $0))") } ?? "")
         case let .restored(key, name):
             id = "limit-\(key)-restored"
-            title = "Лимит Claude восстановлен"
-            body = "\(name) снова доступна"
+            title = String(localized: "Лимит Claude восстановлен")
+            body = String(localized: "\(name) снова доступна")
         }
         AppLog.info("Usage alert: \(title)")
         Notifier.post(id: id, title: title, body: body)

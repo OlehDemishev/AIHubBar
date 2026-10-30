@@ -1,0 +1,7264 @@
+{
+  "sourceLanguage": "ru",
+  "strings": {
+    "": {},
+    " (копия)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": " (copy)"
+          }
+        }
+      }
+    },
+    " Claude Code подхватывает изменения сам, в том числе в открытых сессиях.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": " Claude Code picks up the change by itself, including open sessions."
+          }
+        }
+      }
+    },
+    " Нет на этом Маке: %@ — после импорта выберите свои папки.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": " Not on this Mac: %@ — choose your own folders after the import."
+          }
+        }
+      }
+    },
+    " млн": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "M"
+          }
+        }
+      }
+    },
+    " токенов": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": " tokens"
+          }
+        }
+      }
+    },
+    " — не найден на этом Маке": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": " — not found on this Mac"
+          }
+        }
+      }
+    },
+    "#%lld": {},
+    "$%.2f из $%.2f в этом месяце": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "$%.2f of $%.2f this month"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "new",
+            "value": "$%1$.2f из $%2$.2f в этом месяце"
+          }
+        }
+      }
+    },
+    "% 5-часовой сессии и недели — числом, кольцом или полоской (Настройки → «Строка меню»): зелёный до 50 %, оранжевый до 80 %, красный выше.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "% of the 5-hour session and the week — as a number, ring or bar (Settings → “Menu Bar”): green below 50%, orange below 80%, red above."
+          }
+        }
+      }
+    },
+    "% сессии": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Session %"
+          }
+        }
+      }
+    },
+    "% сессии и недели": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Session and week %"
+          }
+        }
+      }
+    },
+    "%@ · %@": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "new",
+            "value": "%1$@ · %2$@"
+          }
+        }
+      }
+    },
+    "%@ · %@ — открыть": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ · %@ — open"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "new",
+            "value": "%1$@ · %2$@ — открыть"
+          }
+        }
+      }
+    },
+    "%@ не ответил за %lld с": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ did not answer within %lld s"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "new",
+            "value": "%1$@ не ответил за %2$lld с"
+          }
+        }
+      }
+    },
+    "%@ не установлен": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ is not installed"
+          }
+        }
+      }
+    },
+    "%@ открыт в Терминале — задача скопирована, вставьте ⌘V": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ opened in Terminal — the task is on the clipboard, paste with ⌘V"
+          }
+        }
+      }
+    },
+    "%@ снова доступна": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ is available again"
+          }
+        }
+      }
+    },
+    "%@: $ за 1 млн токенов (вход / выход)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: $ per 1M tokens (input / output)"
+          }
+        }
+      }
+    },
+    "%@: %@": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "new",
+            "value": "%1$@: %2$@"
+          }
+        }
+      }
+    },
+    "%@: %@ — запуск в %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: %@ — starts at %@"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "new",
+            "value": "%1$@: %2$@ — запуск в %3$@"
+          }
+        }
+      }
+    },
+    "%d ч %02d мин": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%d h %02d min"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "new",
+            "value": "%1$d ч %2$02d мин"
+          }
+        }
+      }
+    },
+    "%lld %%": {},
+    "%lld %@ не закоммичено (ветка %@)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld %@ not committed (branch %@)"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "new",
+            "value": "%1$lld %2$@ не закоммичено (ветка %3$@)"
+          }
+        }
+      }
+    },
+    "%lld stash — отложенная работа, легко забыть": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld stash — set-aside work, easy to forget"
+          }
+        }
+      }
+    },
+    "%lld ГБ": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld GB"
+          }
+        }
+      }
+    },
+    "%lld дн": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld d"
+          }
+        }
+      }
+    },
+    "%lld дн назад": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld d ago"
+          }
+        }
+      }
+    },
+    "%lld ист.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld src."
+          }
+        }
+      }
+    },
+    "%lld мин": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld min"
+          }
+        }
+      }
+    },
+    "%lld мин назад": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld min ago"
+          }
+        }
+      }
+    },
+    "%lld мин чтения": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld min read"
+          }
+        }
+      }
+    },
+    "%lld с": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld s"
+          }
+        }
+      }
+    },
+    "%lld сл.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld words"
+          }
+        }
+      }
+    },
+    "%lld стр.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld pp."
+          }
+        }
+      }
+    },
+    "%lld тыс.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lldK"
+          }
+        }
+      }
+    },
+    "%lld устаревших worktree — `git worktree prune`": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld stale worktrees — `git worktree prune`"
+          }
+        }
+      }
+    },
+    "%lld ч %lld мин": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld h %lld min"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "new",
+            "value": "%1$lld ч %2$lld мин"
+          }
+        }
+      }
+    },
+    "%lld ч назад": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld h ago"
+          }
+        }
+      }
+    },
+    "%lld%%": {},
+    "+ контент-план": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "+ content plan"
+          }
+        }
+      }
+    },
+    "+ контент-план (контент-план.md)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "+ content plan (контент-план.md)"
+          }
+        }
+      }
+    },
+    ", сброс %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": ", resets %@"
+          }
+        }
+      }
+    },
+    ", сброс в %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": ", resets at %@"
+          }
+        }
+      }
+    },
+    "--claude next|task|finish <папка>": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "--claude next|task|finish <folder>"
+          }
+        }
+      }
+    },
+    ". Резервная копия: ~/.claude/%@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": ". Backup: ~/.claude/%@"
+          }
+        }
+      }
+    },
+    "/": {},
+    "18:00 — можно пусто": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "18:00 — may be empty"
+          }
+        }
+      }
+    },
+    "2 файла · PR #12 ✓": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "2 files · PR #12 ✓"
+          }
+        }
+      }
+    },
+    "2 ч 14 мин": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "2 h 14 min"
+          }
+        }
+      }
+    },
+    "22 файла · 15 мин назад": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "22 files · 15 min ago"
+          }
+        }
+      }
+    },
+    "2:14": {},
+    "50, 80, 95": {},
+    "API за месяц: %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "API this month: %@"
+          }
+        }
+      }
+    },
+    "Anthropic, OpenAI, Google, xAI, DeepSeek, Mistral и любой сервер, совместимый с OpenAI (Ollama, LM Studio, OpenRouter). Ключ — только в связке ключей macOS; «Проверить» не тратит токены.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anthropic, OpenAI, Google, xAI, DeepSeek, Mistral and any OpenAI-compatible server (Ollama, LM Studio, OpenRouter). The key lives only in the macOS Keychain; “Check” spends no tokens."
+          }
+        }
+      }
+    },
+    "CI: %@": {},
+    "Cantero · claude/feature": {},
+    "Claude": {},
+    "Claude берёт первый пункт Next и делает его по правилам ~/Projects/CLAUDE.md: ветка, проверки, PR, STATUS.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude takes the first Next item and does it by the rules of ~/Projects/CLAUDE.md: branch, checks, PR, STATUS."
+          }
+        }
+      }
+    },
+    "Claude выполняет ваш текст по тем же правилам.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude carries out your text by the same rules."
+          }
+        }
+      }
+    },
+    "Claude доводит текущую работу в папке: проверки, коммит, push, PR, STATUS — без нового кода.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude finishes the current work in the folder: checks, commit, push, PR, STATUS — no new code."
+          }
+        }
+      }
+    },
+    "Claude ждёт ответа — %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude is waiting for an answer — %@"
+          }
+        }
+      }
+    },
+    "Claude завершился без результата — см. журнал": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude ended without a result — see the log"
+          }
+        }
+      }
+    },
+    "ClaudePult": {},
+    "ClaudePult не может управлять Терминалом. Разрешите: Системные настройки → Конфиденциальность и безопасность → Автоматизация → ClaudePult → Терминал.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ClaudePult cannot control Terminal. Allow it: System Settings → Privacy & Security → Automation → ClaudePult → Terminal."
+          }
+        }
+      }
+    },
+    "ClaudePult считает токены своих запросов по ответам сервисов; стоимость — по ценам, которые вы введёте (цены меняются, поэтому они не зашиты). Уведомление при 80 % и 100 % бюджета.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ClaudePult counts the tokens of its own requests from the services' replies; costs use the prices you enter (prices change, so none are built in). A notification at 80% and 100% of the budget."
+          }
+        }
+      }
+    },
+    "ClaudePult: уведомления работают": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ClaudePult: notifications work"
+          }
+        }
+      }
+    },
+    "Codex CLI, Gemini CLI, Antigravity, Copilot CLI, Cursor CLI — ClaudePult находит установленные (Настройки → «Сервисы AI») и открывает их в Терминале в папке проекта: «Открыть в…» в блоке Claude у проекта. Вход у каждого свой.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex CLI, Gemini CLI, Antigravity, Copilot CLI, Cursor CLI — ClaudePult finds the installed ones (Settings → “AI Services”) and opens them in Terminal in the project folder: “Open in…” in a project's Claude block. Each has its own sign-in."
+          }
+        }
+      }
+    },
+    "Extra usage включён": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Extra usage is on"
+          }
+        }
+      }
+    },
+    "Extra usage: %@ из %@ в месяц": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Extra usage: %@ of %@ per month"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Extra usage: %1$@ из %2$@ в месяц"
+          }
+        }
+      }
+    },
+    "Hooks": {},
+    "Hooks добавляются в ~/.claude/settings.json (остальные настройки не трогаются, перед изменением рядом сохраняется копия). Они записывают состояние каждой сессии Claude Code на этом Маке — в Терминале, в приложении Claude, фоновых — чтобы ClaudePult показывал их в панели.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hooks are added to ~/.claude/settings.json (other settings are left alone; a copy is saved next to it first). They record the state of every Claude Code session on this Mac — in Terminal, in the Claude app, in the background — so ClaudePult can show them in the panel."
+          }
+        }
+      }
+    },
+    "Hooks сессий.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Session hooks."
+          }
+        }
+      }
+    },
+    "Hooks сняты": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hooks removed"
+          }
+        }
+      }
+    },
+    "Hooks установлены": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hooks installed"
+          }
+        }
+      }
+    },
+    "Instagram": {},
+    "Instagram: ноябрь": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Instagram: November"
+          }
+        }
+      }
+    },
+    "Ollama, LM Studio, OpenRouter…": {},
+    "PR #%lld ждёт merge: %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PR #%lld waits for a merge: %@"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "new",
+            "value": "PR #%1$lld ждёт merge: %2$@"
+          }
+        }
+      }
+    },
+    "PR #%lld: CI упал": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PR #%lld: CI failed"
+          }
+        }
+      }
+    },
+    "Shorts: лайфхак": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Shorts: life hack"
+          }
+        }
+      }
+    },
+    "Stage, Сейчас, Дальше, Нужно от Олега из docs/STATUS.md, предупреждения, PR, worktree.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stage, Now, Next, Needs from docs/STATUS.md, warnings, PRs, worktrees."
+          }
+        }
+      }
+    },
+    "Telegram: отправлено": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Telegram: sent"
+          }
+        }
+      }
+    },
+    "Worktree": {},
+    "_daily-report: отчёт, сводка, очистка": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "_daily-report: report, summary, cleanup"
+          }
+        }
+      }
+    },
+    "claude -p без окна: только разрешённые действия, итог — уведомлением и в Telegram": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "claude -p without a window: allowed actions only, result as a notification and to Telegram"
+          }
+        }
+      }
+    },
+    "git %@ завершился с ошибкой": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "git %@ failed"
+          }
+        }
+      }
+    },
+    "git-репозиториев: %lld": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "git repositories: %lld"
+          }
+        }
+      }
+    },
+    "git-репозитории": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "git repositories"
+          }
+        }
+      }
+    },
+    "git-репозитории через report.py": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "git repositories via report.py"
+          }
+        }
+      }
+    },
+    "git-репозитории через report.py (_daily-report)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "git repositories via report.py (_daily-report)"
+          }
+        }
+      }
+    },
+    "report.py завершился с ошибкой (код %d). Подробности в журнале.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "report.py failed (code %d). Details in the log."
+          }
+        }
+      }
+    },
+    "worktree %@: %lld незакоммиченных файлов": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "worktree %@: %lld uncommitted file(s)"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "new",
+            "value": "worktree %1$@: %2$lld незакоммиченных файлов"
+          }
+        }
+      }
+    },
+    "~/Documents/Проекты": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "~/Documents/Projects"
+          }
+        }
+      }
+    },
+    "«%@» запустится в фоне в %@, после сброса лимита.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“%@” will start in the background at %@, after the limit resets."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "new",
+            "value": "«%1$@» запустится в фоне в %2$@, после сброса лимита."
+          }
+        }
+      }
+    },
+    "«%@» запущен в новом окне Терминала.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“%@” started in a new Terminal window."
+          }
+        }
+      }
+    },
+    "«%@» запущен в фоне (лимит %lld мин). Итог придёт уведомлением.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“%@” started in the background (limit %lld min). The result comes as a notification."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "new",
+            "value": "«%1$@» запущен в фоне (лимит %2$lld мин). Итог придёт уведомлением."
+          }
+        }
+      }
+    },
+    "«Готово» добавит режим и сделает его текущим. Дальше всё правится в Настройках → «Режимы».": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“Done” adds the mode and makes it current. Everything can be changed later in Settings → “Modes”."
+          }
+        }
+      }
+    },
+    "«Лимиты Claude» для рабочего стола: правый клик по столу → «Изменить виджеты…» → ClaudePult. Маленький — кольцо сессии, средний — сессия и неделя.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“Claude Limits” for the desktop: right-click the desktop → “Edit Widgets…” → ClaudePult. Small — the session ring, medium — session and week."
+          }
+        }
+      }
+    },
+    "«Минимум» — значок и события, «Лимиты» — ещё проценты сессии и недели, «Всё» — всё, что есть. Отдельные элементы — в Настройках → «Строка меню». Набор общий для всех режимов.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“Minimum” — the icon and events, “Limits” — plus session and week percentages, “Everything” — all there is. Single elements — in Settings → “Menu Bar”. The set is shared by all modes."
+          }
+        }
+      }
+    },
+    "«Минимум» — значок, проблемы и ожидающие ответа. «Лимиты» — ещё сессия и неделя. «Всё» — всё, что есть. Любая правка ниже делает набор «Своим».": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“Minimum” — the icon, problems and sessions waiting for an answer. “Limits” — plus session and week. “Everything” — all there is. Any change below makes the set “Custom”."
+          }
+        }
+      }
+    },
+    "«Только файлы»: читать и писать внутри папки проекта, без терминала и интернета": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“Files only”: read and write inside the project folder, no terminal and no internet"
+          }
+        }
+      }
+    },
+    "«Фон» запускает claude -p без окна: разрешены чтение и правка файлов проекта, проверки и сборки, git без push в main и без force, gh pr create/view/list; остальное отклоняется. Итог — уведомлением и в Telegram.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“Background” runs claude -p without a window: reading and editing project files, checks and builds, git without pushing to main and without force, gh pr create/view/list are allowed; everything else is refused. The result comes as a notification and to Telegram."
+          }
+        }
+      }
+    },
+    "Автозапуск при входе.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Start at login."
+          }
+        }
+      }
+    },
+    "Автоматизация": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Automation"
+          }
+        }
+      }
+    },
+    "Агенты": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Agents"
+          }
+        }
+      }
+    },
+    "Агенты ставятся отдельно; ключи API вставляются в Настройках → «Сервисы AI». Вернитесь сюда — список обновится.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Agents are installed separately; API keys go into Settings → “AI Services”. Come back here and the list refreshes."
+          }
+        }
+      }
+    },
+    "Агенты — работают с файлами в папке проекта": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Agents — work with the files in the project folder"
+          }
+        }
+      }
+    },
+    "Адрес": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Address"
+          }
+        }
+      }
+    },
+    "Анимации при открытии": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Animations on open"
+          }
+        }
+      }
+    },
+    "Без значка": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No icon"
+          }
+        }
+      }
+    },
+    "Без темы": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No topic"
+          }
+        }
+      }
+    },
+    "Ближайшая дата календаря": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Next calendar date"
+          }
+        }
+      }
+    },
+    "Ближайшее": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Upcoming"
+          }
+        }
+      }
+    },
+    "Ближайшее (календарь)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Upcoming (calendar)"
+          }
+        }
+      }
+    },
+    "Блок «Лимиты»": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“Limits” block"
+          }
+        }
+      }
+    },
+    "Блок в панели: 7 дней вперёд, просроченное красным; клик открывает проект или файл.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A panel block: 7 days ahead, overdue in red; a click opens the project or file."
+          }
+        }
+      }
+    },
+    "Блоки панели": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Panel blocks"
+          }
+        }
+      }
+    },
+    "Быстрая сводка": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quick summary"
+          }
+        }
+      }
+    },
+    "Бюджет в месяц, $": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Monthly budget, $"
+          }
+        }
+      }
+    },
+    "В STATUS.md нет шапки": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "STATUS.md has no summary"
+          }
+        }
+      }
+    },
+    "В _daily-report/config.json нет telegram.bot_token / chat_id — будет только уведомление macOS.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "_daily-report/config.json has no telegram.bot_token / chat_id — only a macOS notification will be sent."
+          }
+        }
+      }
+    },
+    "В worktree есть незакоммиченные изменения.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The worktree has uncommitted changes."
+          }
+        }
+      }
+    },
+    "В Терминале — видно, что он делает": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In Terminal — you see what it does"
+          }
+        }
+      }
+    },
+    "В ветке worktree есть незапушенные коммиты.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The worktree branch has unpushed commits."
+          }
+        }
+      }
+    },
+    "В папке нет текстового файла — команды получат только папку.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No text file in the folder — commands get only the folder."
+          }
+        }
+      }
+    },
+    "В папке проекта уже работает Claude, поэтому запуск идёт в worktree cb-%@ (ветка %@). ": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude already works in the project folder, so this run goes to worktree cb-%@ (branch %@). "
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "new",
+            "value": "В папке проекта уже работает Claude, поэтому запуск идёт в worktree cb-%1$@ (ветка %2$@). "
+          }
+        }
+      }
+    },
+    "В папке проектов не найдено git-репозиториев.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No git repositories found in the projects folder."
+          }
+        }
+      }
+    },
+    "В развёрнутом проекте: команды режима и «Своя задача». Результат — всегда новый файл в папке проекта. Модель по API получает текст главного файла; Claude работает в фоне с правами режима («только файлы» — без терминала и интернета); другие агенты открываются в Терминале, задача — в буфере обмена.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In an expanded project: the mode's commands and “Custom task”. The result is always a new file in the project folder. A model by API gets the main file's text; Claude works in the background with the mode's permissions (“files only” — no terminal, no internet); other agents open in Terminal with the task on the clipboard."
+          }
+        }
+      }
+    },
+    "В фоне — результат придёт уведомлением": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In the background — the result comes as a notification"
+          }
+        }
+      }
+    },
+    "В этой папке уже работает сессия Claude. Запустить ещё одну там же?": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A Claude session already works in this folder. Start another one there?"
+          }
+        }
+      }
+    },
+    "В этом месяце": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This month"
+          }
+        }
+      }
+    },
+    "Версия": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Version"
+          }
+        }
+      }
+    },
+    "Весь проект": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Whole project"
+          }
+        }
+      }
+    },
+    "Ветка worktree не запушена.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The worktree branch is not pushed."
+          }
+        }
+      }
+    },
+    "Вид": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Look"
+          }
+        }
+      }
+    },
+    "Видео": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Video"
+          }
+        }
+      }
+    },
+    "Виджет": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Widget"
+          }
+        }
+      }
+    },
+    "Включите «Сравнить», выберите 2–3 сервиса и команду: результаты лягут рядом («хуки (Claude).md», «хуки (OpenAI).md») и откроются в окне «Сравнение».": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Turn on “Compare”, pick 2–3 services and a command: the results land side by side (“хуки (Claude).md”, “хуки (OpenAI).md”) and open in the “Comparison” window."
+          }
+        }
+      }
+    },
+    "Включить…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Turn on…"
+          }
+        }
+      }
+    },
+    "Внешний вид": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Appearance"
+          }
+        }
+      }
+    },
+    "Внутри ": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Inside: "
+          }
+        }
+      }
+    },
+    "Внутри git-репозитории — предлагаю источник «git-репозитории».": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "There are git repositories inside — I suggest the “git repositories” source."
+          }
+        }
+      }
+    },
+    "Войдите в Claude Code: claude → /login": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sign in to Claude Code: claude → /login"
+          }
+        }
+      }
+    },
+    "Время": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Time"
+          }
+        }
+      }
+    },
+    "Время чтения": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reading time"
+          }
+        }
+      }
+    },
+    "Все настройки и режимы": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "All settings and modes"
+          }
+        }
+      }
+    },
+    "Все сессии на этом Маке — в Терминале, в приложении Claude, фоновые: проект, worktree, задача, длительность, состояние (работает, в фоне, ждёт ответа, готово, ошибка, завершена). Ждущие ответа подсвечены и приходят уведомлением.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Every session on this Mac — in Terminal, in the Claude app, in the background: project, worktree, task, duration, state (working, background, waiting, done, error, ended). Sessions waiting for an answer are highlighted and notified."
+          }
+        }
+      }
+    },
+    "Встроенный сканер git: ветки, незакоммиченное, stash, PR и CI (если есть gh), шапка STATUS.md. Промты Claude — по правилам самого проекта (CLAUDE.md / AGENTS.md).": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Built-in git scanner: branches, uncommitted changes, stashes, PRs and CI (if gh is installed), the STATUS.md summary. Claude's prompts follow the project's own rules (CLAUDE.md / AGENTS.md)."
+          }
+        }
+      }
+    },
+    "Всё": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Everything"
+          }
+        }
+      }
+    },
+    "Всё в порядке": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "All good"
+          }
+        }
+      }
+    },
+    "Вход Claude Code устарел — обновится при следующем запуске claude в Терминале (если нет: claude → /login)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The Claude Code sign-in is outdated — it renews on the next claude run in Terminal (if not: claude → /login)"
+          }
+        }
+      }
+    },
+    "Вход у каждого агента свой (его команда в подсказке), ClaudePult их токены не трогает. В фоне пока работает только Claude Code: остальные открываются в Терминале, пока их запрет действий не проверен вживую.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Each agent signs in on its own (its command is in the hint); ClaudePult never touches their tokens. Only Claude Code runs in the background for now: the others open in Terminal until their no-actions mode is checked live."
+          }
+        }
+      }
+    },
+    "Вход: %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sign-in: %@"
+          }
+        }
+      }
+    },
+    "Выберите 2–3 сервиса, затем команду.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pick 2–3 services, then a command."
+          }
+        }
+      }
+    },
+    "Выберите режим": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose a mode"
+          }
+        }
+      }
+    },
+    "Выбрать": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose"
+          }
+        }
+      }
+    },
+    "Выбрать…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose…"
+          }
+        }
+      }
+    },
+    "Вывести вкладку Терминала с этой сессией; для сессий приложения Claude — открыть Claude, иначе — папку.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bring this session's Terminal tab forward; for Claude app sessions open Claude, otherwise the folder."
+          }
+        }
+      }
+    },
+    "Вывод очистки…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cleanup output…"
+          }
+        }
+      }
+    },
+    "Выйти из ClaudePult.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quit ClaudePult."
+          }
+        }
+      }
+    },
+    "Выключен": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Off"
+          }
+        }
+      }
+    },
+    "Выполнить": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Run"
+          }
+        }
+      }
+    },
+    "Выполнить одну команду 2–3 сервисами и положить результаты рядом": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Run one command with 2–3 services and put the results side by side"
+          }
+        }
+      }
+    },
+    "Выход": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quit"
+          }
+        }
+      }
+    },
+    "Выше": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Up"
+          }
+        }
+      }
+    },
+    "Где взять ключ: %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Where to get a key: %@"
+          }
+        }
+      }
+    },
+    "Где запускать Claude": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Where Claude runs"
+          }
+        }
+      }
+    },
+    "Где запускать и что разрешить": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Where to run and what to allow"
+          }
+        }
+      }
+    },
+    "Где запускать: окно Терминала (можно отвечать Claude) или claude -p без окна (только разрешённые действия, лимит времени, итог — уведомлением и в Telegram). «Запомнить выбор» или режим по умолчанию — в Настройках.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Where to run: a Terminal window (you can answer Claude) or claude -p without a window (allowed actions only, a time limit, the result as a notification and to Telegram). “Remember” or a default in Settings."
+          }
+        }
+      }
+    },
+    "Где запустить «%@»?": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Where to run “%@”?"
+          }
+        }
+      }
+    },
+    "Где лежат проекты?": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Where are the projects?"
+          }
+        }
+      }
+    },
+    "Главный файл": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Main file"
+          }
+        }
+      }
+    },
+    "Главный файл — по нему считаются слова и хронометраж": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Main file — words and duration are counted on it"
+          }
+        }
+      }
+    },
+    "Готово": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Done"
+          }
+        }
+      }
+    },
+    "Готово: %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Done: %@"
+          }
+        }
+      }
+    },
+    "Далее": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Next"
+          }
+        }
+      }
+    },
+    "Дальше": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Next"
+          }
+        }
+      }
+    },
+    "Данные — с того же адреса, что использует Claude Code (токен читается из связки ключей «Claude Code-credentials» и нигде не сохраняется). Уведомление — один раз на окно сессии/недели при пересечении порога и когда лимит восстановился. Значения пишутся в ~/Library/Application Support/ClaudePult/usage.json. Что показывать в строке меню — во вкладке «Внешний вид».": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Data comes from the same address Claude Code uses (the token is read from the “Claude Code-credentials” Keychain item and stored nowhere). A notification once per session/week window when a threshold is crossed and when the limit is back. Values are written to ~/Library/Application Support/ClaudePult/usage.json. What the menu bar shows — on the “Menu Bar” tab."
+          }
+        }
+      }
+    },
+    "Дата публикации": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Publish date"
+          }
+        }
+      }
+    },
+    "Даты — из проект.md (дедлайн, публикация) и контент-план.md у режимов с календарём (вкладка «Режимы»).": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dates come from проект.md (deadline, publication) and контент-план.md of modes with a calendar (the “Modes” tab)."
+          }
+        }
+      }
+    },
+    "Двойной клик — новая дата": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Double-click — a new date"
+          }
+        }
+      }
+    },
+    "Дедлайн": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deadline"
+          }
+        }
+      }
+    },
+    "Дедлайн проекта": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Project deadline"
+          }
+        }
+      }
+    },
+    "Дедлайны и публикации": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deadlines and publications"
+          }
+        }
+      }
+    },
+    "Дедлайны и публикации из проект.md": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deadlines and publications from проект.md"
+          }
+        }
+      }
+    },
+    "Дедлайны и публикации из проект.md, записи контент-план.md — у режимов, где «Календарь» включён (Настройки → «Режимы»).": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deadlines and publications from проект.md, rows of контент-план.md — for modes with the calendar on (Settings → “Modes”)."
+          }
+        }
+      }
+    },
+    "Диск": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Disk"
+          }
+        }
+      }
+    },
+    "Для Code Assist и платных ключей API. Бесплатный вход и Google AI Pro/Ultra с июня 2026 — в Antigravity CLI.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "For Code Assist and paid API keys. Free sign-in and Google AI Pro/Ultra moved to Antigravity CLI in June 2026."
+          }
+        }
+      }
+    },
+    "Для скриптов": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "For scripts"
+          }
+        }
+      }
+    },
+    "До сброса сессии": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Until the session resets"
+          }
+        }
+      }
+    },
+    "Добавить": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add"
+          }
+        }
+      }
+    },
+    "Добавить команду": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add command"
+          }
+        }
+      }
+    },
+    "Добавить режим": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add mode"
+          }
+        }
+      }
+    },
+    "Добавить режим из шаблона": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add a mode from a template"
+          }
+        }
+      }
+    },
+    "Добавить режимы": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add modes"
+          }
+        }
+      }
+    },
+    "Добавить этап": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add stage"
+          }
+        }
+      }
+    },
+    "Добавлено режимов: %lld.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modes added: %lld."
+          }
+        }
+      }
+    },
+    "Другое": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Other"
+          }
+        }
+      }
+    },
+    "Дублировать": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Duplicate"
+          }
+        }
+      }
+    },
+    "Дублировать напоминания в Telegram": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Also send reminders to Telegram"
+          }
+        }
+      }
+    },
+    "Если в проекте уже работает Claude, новая задача идёт в отдельный worktree .claude/worktrees/cb-… на свежей ветке от origin/main.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "If Claude already works in the project, a new task goes to a separate worktree .claude/worktrees/cb-… on a fresh branch from origin/main."
+          }
+        }
+      }
+    },
+    "Если включено больше одного режима, вверху панели — переключатель. Режимы настраиваются в Настройках → «Режимы»; все настройки сохраняются в файл .claudepult (Основные → «Экспорт настроек…»), двойной клик по такому файлу — импорт.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "With more than one mode enabled, a switcher sits at the top of the panel. Modes are set up in Settings → “Modes”; all settings can be saved to a .claudepult file (General → “Export Settings…”); double-clicking such a file imports it."
+          }
+        }
+      }
+    },
+    "Если сессия использована больше чем на 90 %, фоновая задача спрашивает: запустить сейчас или после сброса.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "If more than 90% of the session is used, a background task asks: start now or after the reset."
+          }
+        }
+      }
+    },
+    "Есть файл настроек ClaudePult (.claudepult) с другого Мака или от коллеги? Его можно перенести целиком — режимы, строку меню, внешний вид. Ключи API в файл не попадают.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Have a ClaudePult settings file (.claudepult) from another Mac or a colleague? It can be brought over whole — modes, menu bar, appearance. API keys are never in the file."
+          }
+        }
+      }
+    },
+    "Есть что проверить": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Something to check"
+          }
+        }
+      }
+    },
+    "Ещё выполняется…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Still running…"
+          }
+        }
+      }
+    },
+    "Ждут ответа": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Waiting for an answer"
+          }
+        }
+      }
+    },
+    "Журнал": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Log"
+          }
+        }
+      }
+    },
+    "Журнал фоновой задачи": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Background Task Log"
+          }
+        }
+      }
+    },
+    "За этот период расхода нет": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nothing spent in this period"
+          }
+        }
+      }
+    },
+    "Завершить": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Finish"
+          }
+        }
+      }
+    },
+    "Завершить сессию": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Finish session"
+          }
+        }
+      }
+    },
+    "Завершить сессию: проверки, коммит, push, PR и STATUS по разделу «Конец сессии»": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Finish the session: checks, commit, push, PR and STATUS per “End of session”"
+          }
+        }
+      }
+    },
+    "Загружаю лимиты…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Loading limits…"
+          }
+        }
+      }
+    },
+    "Загружаю проекты…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Loading projects…"
+          }
+        }
+      }
+    },
+    "Задача": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Task"
+          }
+        }
+      }
+    },
+    "Закрыть помощника": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Close the assistant"
+          }
+        }
+      }
+    },
+    "Заменить все настройки": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Replace all settings"
+          }
+        }
+      }
+    },
+    "Заменить ключ": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Replace key"
+          }
+        }
+      }
+    },
+    "Занятая папка": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Folder in use"
+          }
+        }
+      }
+    },
+    "Запись контент-плана": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Content plan entry"
+          }
+        }
+      }
+    },
+    "Запомнить выбор": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remember"
+          }
+        }
+      }
+    },
+    "Запуск курса": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Course launch"
+          }
+        }
+      }
+    },
+    "Запускать при входе в систему": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Start at login"
+          }
+        }
+      }
+    },
+    "Запустить": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Start"
+          }
+        }
+      }
+    },
+    "Запустить всё равно": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Start anyway"
+          }
+        }
+      }
+    },
+    "Запустить команду Claude (--background — в фоне, --print — только показать).": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Run a Claude command (--background — in the background, --print — only show it)."
+          }
+        }
+      }
+    },
+    "Запустить после сброса": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Start after the reset"
+          }
+        }
+      }
+    },
+    "Запустить сейчас": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Start now"
+          }
+        }
+      }
+    },
+    "Звезда": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Star"
+          }
+        }
+      }
+    },
+    "Значок": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Icon"
+          }
+        }
+      }
+    },
+    "Значок режима": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mode icon"
+          }
+        }
+      }
+    },
+    "Значок режима вместо ✦": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mode icon instead of ✦"
+          }
+        }
+      }
+    },
+    "Идёт сборка": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Building"
+          }
+        }
+      }
+    },
+    "Импорт «%@»": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Import “%@”"
+          }
+        }
+      }
+    },
+    "Импортировать файл…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Import a file…"
+          }
+        }
+      }
+    },
+    "Импорт…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Import…"
+          }
+        }
+      }
+    },
+    "Источник": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Source"
+          }
+        }
+      }
+    },
+    "Источник «папки»": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“Folders” source"
+          }
+        }
+      }
+    },
+    "Источники": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sources"
+          }
+        }
+      }
+    },
+    "Итог в Telegram": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Result to Telegram"
+          }
+        }
+      }
+    },
+    "Как": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "How"
+          }
+        }
+      }
+    },
+    "Как в системе": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "As in the system"
+          }
+        }
+      }
+    },
+    "Каким сервисом выполнять": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Which service runs it"
+          }
+        }
+      }
+    },
+    "Календарь": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Calendar"
+          }
+        }
+      }
+    },
+    "Календарь включается у режима с проектами-папками: Настройки → «Режимы» → «Календарь».": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The calendar is turned on for a mode with folder projects: Settings → “Modes” → “Calendar”."
+          }
+        }
+      }
+    },
+    "Карточка проект.md, этапы, метрики, команды, права в фоне и календарь — у режимов с источником «папки».": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The проект.md card, stages, metrics, commands, background permissions and the calendar are for modes with the “folders” source."
+          }
+        }
+      }
+    },
+    "Карточка проекта — обычный текст: «Этап: сценарий», «Дедлайн: 2026-11-05», «Публикация: 2026-11-05 18:00», «Формат: …», «Главный файл: сценарий.md», «Площадка: YouTube». Можно править руками.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The project card is plain text: “Этап: script”, “Дедлайн: 2026-11-05”, “Публикация: 2026-11-05 18:00”, “Формат: …”, “Главный файл: script.md”, “Площадка: YouTube” (English keys stage, deadline, publish, format, main file, platform work too). Edit it by hand any time."
+          }
+        }
+      }
+    },
+    "Карточка проекта — файл проект.md в папке проекта (этап, дедлайн, публикация, формат, главный файл, площадка); этап меняется прямо из панели. Слова считаются по главному файлу.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The project card is the file проект.md in the project folder (stage, deadline, publication, format, main file, platform); the stage changes right from the panel. Words are counted on the main file."
+          }
+        }
+      }
+    },
+    "Карточка проекта: этап, дедлайн, дата публикации, формат, главный файл": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Project card: stage, deadline, publish date, format, main file"
+          }
+        }
+      }
+    },
+    "Карточка, этапы и метрики": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Card, stages and metrics"
+          }
+        }
+      }
+    },
+    "Клик — панель. Красная точка: у какого-то проекта состояние «красное». ✋ с числом: сколько сессий Claude ждут ответа.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Click — the panel. Red dot: some project is “red”. ✋ with a number: how many Claude sessions wait for an answer."
+          }
+        }
+      }
+    },
+    "Кликните — откроется окно «Помощь».": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Click — the “Help” window opens."
+          }
+        }
+      }
+    },
+    "Ключ (если нужен)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Key (if needed)"
+          }
+        }
+      }
+    },
+    "Ключ API": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "API key"
+          }
+        }
+      }
+    },
+    "Ключ выглядит неправильно: только латиница, цифры и . _ - ~ + / = :, от 8 символов": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The key looks wrong: Latin letters, digits and . _ - ~ + / = : only, at least 8 characters"
+          }
+        }
+      }
+    },
+    "Ключ не подошёл": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The key did not work"
+          }
+        }
+      }
+    },
+    "Ключ хранится только в связке ключей macOS (запись «ClaudePult API key»), не пишется в журнал и не попадает в экспорт. «Проверить» запрашивает список моделей — токены на это не тратятся. Модели по API выполняют команды проектов-папок.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The key is kept only in the macOS Keychain (item “ClaudePult API key”), never logged or exported. “Check” asks for the model list — no tokens are spent. Models by API run the commands of folder projects."
+          }
+        }
+      }
+    },
+    "Код выхода %d": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exit code %d"
+          }
+        }
+      }
+    },
+    "Код: git, сборки, PR": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Code: git, builds, PRs"
+          }
+        }
+      }
+    },
+    "Кольцо": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ring"
+          }
+        }
+      }
+    },
+    "Команда": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Command"
+          }
+        }
+      }
+    },
+    "Команды": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Commands"
+          }
+        }
+      }
+    },
+    "Команды для скриптов вызываются так: %@ --sessions": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Script commands are called like this: %@ --sessions"
+          }
+        }
+      }
+    },
+    "Команды появятся у каждого проекта. «Своя задача» есть всегда. Тексты можно поправить сейчас или позже в Настройках.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The commands appear on every project. “Custom task” is always there. Texts can be edited now or later in Settings."
+          }
+        }
+      }
+    },
+    "Команды проектов": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Project commands"
+          }
+        }
+      }
+    },
+    "Контент-план": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Content plan"
+          }
+        }
+      }
+    },
+    "Крупный": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Large"
+          }
+        }
+      }
+    },
+    "Кто выполняет команды режима. Модель по API получает только текст файла; агент (Claude Code и др.) работает с файлами в папке проекта.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Who runs the mode's commands. A model by API gets only the file's text; an agent (Claude Code and others) works with the files in the project folder."
+          }
+        }
+      }
+    },
+    "Курсовая: климат": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Term paper: climate"
+          }
+        }
+      }
+    },
+    "Левее": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Further left"
+          }
+        }
+      }
+    },
+    "Лимит Claude восстановлен": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude limit is back"
+          }
+        }
+      }
+    },
+    "Лимит Claude: %@ — %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude limit: %@ — %@"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Лимит Claude: %1$@ — %2$@"
+          }
+        }
+      }
+    },
+    "Лимит времени": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Time limit"
+          }
+        }
+      }
+    },
+    "Лимиты": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limits"
+          }
+        }
+      }
+    },
+    "Лимиты недоступны (HTTP %lld)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limits unavailable (HTTP %lld)"
+          }
+        }
+      }
+    },
+    "Лимиты недоступны. %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limits unavailable. %@"
+          }
+        }
+      }
+    },
+    "Лимиты недоступны: нет связи (%lld)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limits unavailable: no connection (%lld)"
+          }
+        }
+      }
+    },
+    "Лимиты недоступны: ответ в неизвестном формате": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limits unavailable: the reply has an unknown format"
+          }
+        }
+      }
+    },
+    "Лимиты подписки": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Subscription limits"
+          }
+        }
+      }
+    },
+    "Лимиты подписки; расход по проектам.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Subscription limits; usage by project."
+          }
+        }
+      }
+    },
+    "Мелкий": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Small"
+          }
+        }
+      }
+    },
+    "Мелкий текст": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Small text"
+          }
+        }
+      }
+    },
+    "Меньше 20 ГБ — стоит запустить очистку": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Less than 20 GB — worth running the cleanup"
+          }
+        }
+      }
+    },
+    "Месяц": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Month"
+          }
+        }
+      }
+    },
+    "Месяц или неделя. Перетащите запись на другой день — дата перепишется в файле. Двойной клик по дню — новая запись.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Month or week. Drag an entry to another day — the date is rewritten in its file. Double-click a day — a new entry."
+          }
+        }
+      }
+    },
+    "Минимум": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Minimum"
+          }
+        }
+      }
+    },
+    "Модели по API": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Models by API"
+          }
+        }
+      }
+    },
+    "Модели по API — получают только текст": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Models by API — get only text"
+          }
+        }
+      }
+    },
+    "Модель": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Model"
+          }
+        }
+      }
+    },
+    "Модель вернула пустой ответ": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The model returned an empty reply"
+          }
+        }
+      }
+    },
+    "Мозг": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Brain"
+          }
+        }
+      }
+    },
+    "Молния": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bolt"
+          }
+        }
+      }
+    },
+    "На неделю дат нет.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No dates this week."
+          }
+        }
+      }
+    },
+    "На чём": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Input"
+          }
+        }
+      }
+    },
+    "Набор": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Set"
+          }
+        }
+      }
+    },
+    "Назад": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Back"
+          }
+        }
+      }
+    },
+    "Название": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Name"
+          }
+        }
+      }
+    },
+    "Название и значок": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Name and icon"
+          }
+        }
+      }
+    },
+    "Название не подходит для папки": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This name cannot be a folder name"
+          }
+        }
+      }
+    },
+    "Название проекта": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Project name"
+          }
+        }
+      }
+    },
+    "Найти заново": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Find again"
+          }
+        }
+      }
+    },
+    "Напоминания": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reminders"
+          }
+        }
+      }
+    },
+    "Напоминать": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remind"
+          }
+        }
+      }
+    },
+    "Настройки импортированы: %lld режим(ов).": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Settings imported: %lld mode(s)."
+          }
+        }
+      }
+    },
+    "Настройки → «Основные» → «Календарь»: за сколько напоминать и дублировать ли в Telegram.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Settings → “General” → “Calendar”: how early to remind and whether to send to Telegram too."
+          }
+        }
+      }
+    },
+    "Настройки → «Режимы» → «+» → «Помощник…»: режим по шагам — шаблон, папка, этапы, метрики, календарь, сервис AI, команды, права, блоки панели, строка меню, название. Справа — как это будет выглядеть.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Settings → “Modes” → “+” → “Assistant…”: a mode step by step — template, folder, stages, metrics, calendar, AI service, commands, permissions, panel blocks, menu bar, name. On the right — how it will look."
+          }
+        }
+      }
+    },
+    "Настройки → «Режимы» → «+»: «Разработчик (GitHub)», «Видео», «Тексты», «Ресёрч», «Соцсети», «Свой». Выберите папку — режим готов, дальше всё правится в его настройках.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Settings → “Modes” → “+”: “Developer (GitHub)”, “Video”, “Writing”, “Research”, “Social media”, “Custom”. Pick a folder — the mode is ready; everything else is changed in its settings."
+          }
+        }
+      }
+    },
+    "Настройки → «Режимы» → «Источник»: каждая папка внутри папки проектов — проект (ролик, статья, тема).": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Settings → “Modes” → “Source”: every folder inside the projects folder is a project (a video, an article, a topic)."
+          }
+        }
+      }
+    },
+    "Настройки → «Режимы» → «Сервис по умолчанию»: им будут выполняться команды-шаблоны режима.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Settings → “Modes” → “Default service”: it runs the mode's command templates."
+          }
+        }
+      }
+    },
+    "Настройки → «Строка меню»: набор («Минимум», «Лимиты», «Всё», «Свой»), элементы и их порядок (лимиты числом, кольцом или полоской, отсчёт до сброса, прогноз, работающие сессии, фоновые задачи, очередь, место на диске, режим), разделитель, мелкий текст, цвет. Сверху — живой предпросмотр.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Settings → “Menu Bar”: the set (“Minimum”, “Limits”, “Everything”, “Custom”), the elements and their order (limits as a number, ring or bar, countdown to the reset, forecast, running sessions, background tasks, queue, disk space, mode), separator, small text, colour. A live preview on top."
+          }
+        }
+      }
+    },
+    "Настройки.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Settings."
+          }
+        }
+      }
+    },
+    "Настройки…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Settings…"
+          }
+        }
+      }
+    },
+    "Не выбрана модель — Настройки → «Сервисы AI» → «Проверить»": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No model chosen — Settings → “AI Services” → “Check”"
+          }
+        }
+      }
+    },
+    "Не найден %@ в %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ not found in %@"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Не найден %1$@ в %2$@"
+          }
+        }
+      }
+    },
+    "Не найден report.py: %@. Проверьте путь к _daily-report в настройках.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "report.py not found: %@. Check the _daily-report path in Settings."
+          }
+        }
+      }
+    },
+    "Не обновилось: %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Not updated: %@"
+          }
+        }
+      }
+    },
+    "Не удалось загрузить проекты": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Could not load projects"
+          }
+        }
+      }
+    },
+    "Не удалось записать %@: %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Could not write %@: %@"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Не удалось записать %1$@: %2$@"
+          }
+        }
+      }
+    },
+    "Не удалось запустить %@: %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Could not start %@: %@"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Не удалось запустить %1$@: %2$@"
+          }
+        }
+      }
+    },
+    "Не удалось открыть Терминал: %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Could not open Terminal: %@"
+          }
+        }
+      }
+    },
+    "Не удалось прочитать ~/.claude/settings.json (%@). Файл не изменён.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Could not read ~/.claude/settings.json (%@). The file is unchanged."
+          }
+        }
+      }
+    },
+    "Не удалось прочитать «%@»: это не файл настроек ClaudePult.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Could not read “%@”: it is not a ClaudePult settings file."
+          }
+        }
+      }
+    },
+    "Не удалось прочитать репозитории": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Could not read the repositories"
+          }
+        }
+      }
+    },
+    "Не удалось разобрать ответ report.py. Подробности в журнале.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Could not parse report.py's output. Details in the log."
+          }
+        }
+      }
+    },
+    "Неверный адрес сервера": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wrong server address"
+          }
+        }
+      }
+    },
+    "Неделя": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Week"
+          }
+        }
+      }
+    },
+    "Неделя · ": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Week · "
+          }
+        }
+      }
+    },
+    "Неделя · %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Week · %@"
+          }
+        }
+      }
+    },
+    "Неделя · Opus": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Week · Opus"
+          }
+        }
+      }
+    },
+    "Неделя · Sonnet": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Week · Sonnet"
+          }
+        }
+      }
+    },
+    "Неделя по модели": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Week by model"
+          }
+        }
+      }
+    },
+    "Незакоммиченных файлов: %lld": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uncommitted files: %lld"
+          }
+        }
+      }
+    },
+    "Нейросети в медицине": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Neural networks in medicine"
+          }
+        }
+      }
+    },
+    "Нет": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "None"
+          }
+        }
+      }
+    },
+    "Нет docs/STATUS.md": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No docs/STATUS.md"
+          }
+        }
+      }
+    },
+    "Нет выбранной фоновой задачи": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No background task selected"
+          }
+        }
+      }
+    },
+    "Нет доступа к связке ключей: разрешите ClaudePult читать «Claude Code-credentials»": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No Keychain access: allow ClaudePult to read “Claude Code-credentials”"
+          }
+        }
+      }
+    },
+    "Нет ключа": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No key"
+          }
+        }
+      }
+    },
+    "Нет ключа API — Настройки → «Сервисы AI»": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No API key — Settings → “AI Services”"
+          }
+        }
+      }
+    },
+    "Нет связи": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No connection"
+          }
+        }
+      }
+    },
+    "Нет связи: %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No connection: %@"
+          }
+        }
+      }
+    },
+    "Нет, настроить заново": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No, set up from scratch"
+          }
+        }
+      }
+    },
+    "Нечего запускать": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nothing to run"
+          }
+        }
+      }
+    },
+    "Ниже": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Down"
+          }
+        }
+      }
+    },
+    "Новая команда": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "New command"
+          }
+        }
+      }
+    },
+    "Новое окно Терминала: видно, что делает Claude, можно отвечать на вопросы": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A new Terminal window: you see what Claude does and can answer its questions"
+          }
+        }
+      }
+    },
+    "Новый проект": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "New project"
+          }
+        }
+      }
+    },
+    "Новый режим": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "New mode"
+          }
+        }
+      }
+    },
+    "Нужно ваше решение.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your decision is needed."
+          }
+        }
+      }
+    },
+    "Нужно от Олега": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Needs"
+          }
+        }
+      }
+    },
+    "Нужно разрешить ClaudePult в Системных настройках → Основные → Объекты входа.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ClaudePult has to be allowed in System Settings → General → Login Items."
+          }
+        }
+      }
+    },
+    "Нужны для «Claude ждёт ответа», итогов фоновых задач, порогов лимитов и результатов команд. Клик по уведомлению ведёт к сессии, PR, журналу или отчёту.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Needed for “Claude is waiting”, background task results, limit thresholds and command results. A click on a notification leads to the session, PR, log or report."
+          }
+        }
+      }
+    },
+    "Обзор чайников": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kettle review"
+          }
+        }
+      }
+    },
+    "Обновить": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Refresh"
+          }
+        }
+      }
+    },
+    "Обновить hooks": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Update hooks"
+          }
+        }
+      }
+    },
+    "Обновить лимиты": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Refresh limits"
+          }
+        }
+      }
+    },
+    "Обновить проекты в открытой панели.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Refresh projects in the open panel."
+          }
+        }
+      }
+    },
+    "Общая команда.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Common command."
+          }
+        }
+      }
+    },
+    "Общие команды": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Common commands"
+          }
+        }
+      }
+    },
+    "Обычная": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Normal"
+          }
+        }
+      }
+    },
+    "Обычно": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Normal"
+          }
+        }
+      }
+    },
+    "Обычный": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Normal"
+          }
+        }
+      }
+    },
+    "Один раз на окно при 50/80/95 % (пороги — в Настройках) и когда лимит восстановился; по желанию ещё и в Telegram.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Once per window at 50/80/95% (thresholds in Settings) and when the limit is back; optionally to Telegram too."
+          }
+        }
+      }
+    },
+    "Один файл .claudepult: все режимы, внешний вид, строка меню, пороги. Без ключей, токенов и журналов. Двойной клик по такому файлу открывает импорт. Папки проектов — на вкладке «Режимы».": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "One .claudepult file: all modes, appearance, menu bar, thresholds. No keys, tokens or logs. Double-clicking such a file opens the import. Project folders are on the “Modes” tab."
+          }
+        }
+      }
+    },
+    "Окно «Календарь»": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“Calendar” window"
+          }
+        }
+      }
+    },
+    "Основные": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "General"
+          }
+        }
+      }
+    },
+    "Оставить как в шаблоне": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keep as in the template"
+          }
+        }
+      }
+    },
+    "Остановить": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stop"
+          }
+        }
+      }
+    },
+    "Ответ в неизвестном формате": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The reply has an unknown format"
+          }
+        }
+      }
+    },
+    "Отклонено правилами фона: %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Refused by the background rules: %@"
+          }
+        }
+      }
+    },
+    "Открыто в Терминале": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Opened in Terminal"
+          }
+        }
+      }
+    },
+    "Открытых PR: %lld, CI: %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open PRs: %lld, CI: %@"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Открытых PR: %1$lld, CI: %2$@"
+          }
+        }
+      }
+    },
+    "Открыть": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open"
+          }
+        }
+      }
+    },
+    "Открыть PR": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open PR"
+          }
+        }
+      }
+    },
+    "Открыть _daily-report/reports/latest.html.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open _daily-report/reports/latest.html."
+          }
+        }
+      }
+    },
+    "Открыть reports/latest.html": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open reports/latest.html"
+          }
+        }
+      }
+    },
+    "Открыть «Объекты входа»": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open “Login Items”"
+          }
+        }
+      }
+    },
+    "Открыть в…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open in…"
+          }
+        }
+      }
+    },
+    "Открыть другой агент в Терминале, в папке проекта": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open another agent in Terminal, in the project folder"
+          }
+        }
+      }
+    },
+    "Открыть настройки": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open Settings"
+          }
+        }
+      }
+    },
+    "Открыть папку проекта или репозиторий.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open the project folder or the repository."
+          }
+        }
+      }
+    },
+    "Отложенные запуски": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Queued launches"
+          }
+        }
+      }
+    },
+    "Отмена": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancel"
+          }
+        }
+      }
+    },
+    "Отменить": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cancel"
+          }
+        }
+      }
+    },
+    "Отчёт с AI-резюме за 24 ч в Telegram (1–3 мин).": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Report with an AI summary of the last 24 h to Telegram (1–3 min)."
+          }
+        }
+      }
+    },
+    "Отчёт сейчас": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Report now"
+          }
+        }
+      }
+    },
+    "Отчёта ещё нет: %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No report yet: %@"
+          }
+        }
+      }
+    },
+    "Оценка по журналам Claude Code, а не точный расход лимита. Доли учитывают цену токенов (вывод ×5, чтение кэша ×0,1); токены — без чтения кэша.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "An estimate from Claude Code's logs, not the exact limit usage. Shares weigh token prices (output ×5, cache reads ×0.1); token counts exclude cache reads."
+          }
+        }
+      }
+    },
+    "Оценка по журналам Claude Code: доли проектов и самая затратная сессия за сессию, сегодня, неделю.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "An estimate from Claude Code's logs: project shares and the most expensive session for the session, today, the week."
+          }
+        }
+      }
+    },
+    "Очень крупный": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Extra large"
+          }
+        }
+      }
+    },
+    "Очистить": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clear"
+          }
+        }
+      }
+    },
+    "Очистка ещё не запускалась": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The cleanup has not run yet"
+          }
+        }
+      }
+    },
+    "Очистка сборок": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Build Cleanup"
+          }
+        }
+      }
+    },
+    "Очистка: выполнить": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cleanup: run"
+          }
+        }
+      }
+    },
+    "Очистка: проверить": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cleanup: check"
+          }
+        }
+      }
+    },
+    "Ошибка HTTP %lld": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "HTTP error %lld"
+          }
+        }
+      }
+    },
+    "Ошибка: %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Error: %@"
+          }
+        }
+      }
+    },
+    "Панель": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Panel"
+          }
+        }
+      }
+    },
+    "Папка": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Folder"
+          }
+        }
+      }
+    },
+    "Папка _daily-report": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "_daily-report folder"
+          }
+        }
+      }
+    },
+    "Папка проектов": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Projects folder"
+          }
+        }
+      }
+    },
+    "Папка пуста — проекты появятся, когда вы их создадите.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The folder is empty — projects appear once you create them."
+          }
+        }
+      }
+    },
+    "Папка пуста.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The folder is empty."
+          }
+        }
+      }
+    },
+    "Папка, где каждая подпапка — проект.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A folder where every subfolder is a project."
+          }
+        }
+      }
+    },
+    "Папки worktree нет — выполните `git worktree prune` в проекте.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The worktree folder is gone — run `git worktree prune` in the project."
+          }
+        }
+      }
+    },
+    "Папки нет на этом Маке — выберите свою": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The folder is not on this Mac — choose your own"
+          }
+        }
+      }
+    },
+    "Папки нет: %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No such folder: %@"
+          }
+        }
+      }
+    },
+    "Пауза до %@: сервер просит запрашивать реже": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Paused until %@: the server asks for fewer requests"
+          }
+        }
+      }
+    },
+    "Первая доступная": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "First available"
+          }
+        }
+      }
+    },
+    "Первый пункт Next из STATUS.md": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The first Next item of STATUS.md"
+          }
+        }
+      }
+    },
+    "Первый пункт Next: %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "First Next item: %@"
+          }
+        }
+      }
+    },
+    "Перевести на этап «%@» (пишется в проект.md)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Move to the “%@” stage (written to проект.md)"
+          }
+        }
+      }
+    },
+    "Перезапустить": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Relaunch"
+          }
+        }
+      }
+    },
+    "Переключиться на «%@»": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Switch to “%@”"
+          }
+        }
+      }
+    },
+    "Перенести настройки?": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bring your settings over?"
+          }
+        }
+      }
+    },
+    "Перенос и обмен": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Transfer and sharing"
+          }
+        }
+      }
+    },
+    "Перечитать файлы": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Re-read the files"
+          }
+        }
+      }
+    },
+    "Плотно": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Compact"
+          }
+        }
+      }
+    },
+    "Плотность строк": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Row density"
+          }
+        }
+      }
+    },
+    "Площадка": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Platform"
+          }
+        }
+      }
+    },
+    "Повторить": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Retry"
+          }
+        }
+      }
+    },
+    "Подключить другой сервис…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Connect another service…"
+          }
+        }
+      }
+    },
+    "Подстановки: {проект} {файл} {формат} {площадка} {хронометраж} {текст} {язык}; в имени файла ещё <время> и <файл>. Результат — всегда новый файл в папке проекта. «Своя задача» есть всегда.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Placeholders: {проект} {файл} {формат} {площадка} {хронометраж} {текст} {язык} (project, file, format, platform, duration, text, language); in the file name also <время> (time) and <файл> (file). The result is always a new file in the project folder. “Custom task” is always there."
+          }
+        }
+      }
+    },
+    "Показать": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Show"
+          }
+        }
+      }
+    },
+    "Показать в Finder": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Show in Finder"
+          }
+        }
+      }
+    },
+    "Показать, что удалит очистка сборок (cleanup.py --dry-run)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Show what the build cleanup would delete (cleanup.py --dry-run)"
+          }
+        }
+      }
+    },
+    "Показать, что удалит очистка сборок, ничего не трогая.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Show what the build cleanup would delete, touching nothing."
+          }
+        }
+      }
+    },
+    "Показывать": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Show"
+          }
+        }
+      }
+    },
+    "Показывать в панели": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Show in the panel"
+          }
+        }
+      }
+    },
+    "Показывать в переключателе панели": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Show in the panel switcher"
+          }
+        }
+      }
+    },
+    "Показывать проекты в панели": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Show projects in the panel"
+          }
+        }
+      }
+    },
+    "Показывать, когда свободно меньше": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Show when free space is below"
+          }
+        }
+      }
+    },
+    "Полный отчёт с AI-резюме за %lld ч в Telegram (1–3 мин)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Full report with an AI summary of the last %lld h to Telegram (1–3 min)"
+          }
+        }
+      }
+    },
+    "Полоска": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bar"
+          }
+        }
+      }
+    },
+    "Помощник": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Assistant"
+          }
+        }
+      }
+    },
+    "Помощник — ClaudePult": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Assistant — ClaudePult"
+          }
+        }
+      }
+    },
+    "Помощник…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Assistant…"
+          }
+        }
+      }
+    },
+    "Помощь": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Help"
+          }
+        }
+      }
+    },
+    "Помощь — ClaudePult": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Help — ClaudePult"
+          }
+        }
+      }
+    },
+    "Порог %lld %%": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Threshold %lld %%"
+          }
+        }
+      }
+    },
+    "Последний отчёт": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Latest report"
+          }
+        }
+      }
+    },
+    "Последняя правка": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Last edit"
+          }
+        }
+      }
+    },
+    "Пост про отпуск": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Holiday post"
+          }
+        }
+      }
+    },
+    "Права Claude в фоне": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude's background permissions"
+          }
+        }
+      }
+    },
+    "Правее": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Further right"
+          }
+        }
+      }
+    },
+    "Правила доступа фоновых задач.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Background task permission rules."
+          }
+        }
+      }
+    },
+    "Предпросмотр": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Preview"
+          }
+        }
+      }
+    },
+    "Пример": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Example"
+          }
+        }
+      }
+    },
+    "Пример со всем": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Everything example"
+          }
+        }
+      }
+    },
+    "Пробел": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Space"
+          }
+        }
+      }
+    },
+    "Проблемы проектов (красная точка)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Project problems (red dot)"
+          }
+        }
+      }
+    },
+    "Проверить": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Check"
+          }
+        }
+      }
+    },
+    "Прогноз (если не хватит до сброса)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Forecast (if it will not last until the reset)"
+          }
+        }
+      }
+    },
+    "Проект": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Project"
+          }
+        }
+      }
+    },
+    "Проект два": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Project two"
+          }
+        }
+      }
+    },
+    "Проект один": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Project one"
+          }
+        }
+      }
+    },
+    "Проектов нет": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No projects"
+          }
+        }
+      }
+    },
+    "Проектов пока нет: каждая папка внутри «%@» — проект.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No projects yet: every folder inside “%@” is a project."
+          }
+        }
+      }
+    },
+    "Проекты": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Projects"
+          }
+        }
+      }
+    },
+    "Проекты — это": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Projects are"
+          }
+        }
+      }
+    },
+    "Проекты-папки": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Folder projects"
+          }
+        }
+      }
+    },
+    "Пропустить": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skip"
+          }
+        }
+      }
+    },
+    "Просторно": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spacious"
+          }
+        }
+      }
+    },
+    "Публикация": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Publication"
+          }
+        }
+      }
+    },
+    "Публикация проекта": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Project publication"
+          }
+        }
+      }
+    },
+    "Пустой режим: всё выберете на следующих шагах.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "An empty mode: you choose everything in the next steps."
+          }
+        }
+      }
+    },
+    "Путь к claude": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Path to claude"
+          }
+        }
+      }
+    },
+    "Путь пустой — искать в /opt/homebrew/bin, /usr/local/bin, ~/.local/bin, ~/.claude/local. Где запускать команды (Терминал / Фон / спрашивать) — у каждого режима на вкладке «Режимы».": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Empty path — look in /opt/homebrew/bin, /usr/local/bin, ~/.local/bin, ~/.claude/local. Where commands run (Terminal / Background / ask) is set per mode on the “Modes” tab."
+          }
+        }
+      }
+    },
+    "Работает": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Works"
+          }
+        }
+      }
+    },
+    "Работает · моделей: %lld": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Works · models: %lld"
+          }
+        }
+      }
+    },
+    "Работают сессии": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Running sessions"
+          }
+        }
+      }
+    },
+    "Разделитель": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Separator"
+          }
+        }
+      }
+    },
+    "Разделитель ставится между числами; значки и счётчики отделяются небольшим отступом. Набор общий для всех режимов.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The separator goes between numbers; icons and counters get a small gap. The set is shared by all modes."
+          }
+        }
+      }
+    },
+    "Размер текста": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Text size"
+          }
+        }
+      }
+    },
+    "Разработчик (GitHub)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Developer (GitHub)"
+          }
+        }
+      }
+    },
+    "Разработчик (мой)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Developer (mine)"
+          }
+        }
+      }
+    },
+    "Разрешить": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Allow"
+          }
+        }
+      }
+    },
+    "Раскрыть": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Expand"
+          }
+        }
+      }
+    },
+    "Рассылка №12": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Newsletter #12"
+          }
+        }
+      }
+    },
+    "Расход по API": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "API spend"
+          }
+        }
+      }
+    },
+    "Расход по API: %lld %% бюджета": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "API spend: %lld %% of the budget"
+          }
+        }
+      }
+    },
+    "Расход по проектам": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Usage by project"
+          }
+        }
+      }
+    },
+    "Режим": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mode"
+          }
+        }
+      }
+    },
+    "Режимы": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modes"
+          }
+        }
+      }
+    },
+    "Ролик · 2 дн": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Video · 2 d"
+          }
+        }
+      }
+    },
+    "Ролик про кофе": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Coffee video"
+          }
+        }
+      }
+    },
+    "С нуля": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "From scratch"
+          }
+        }
+      }
+    },
+    "Самая затратная сессия: %@ — %lld %% (%@ токенов)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Most expensive session: %@ — %lld %% (%@ tokens)"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Самая затратная сессия: %1$@ — %2$lld %% (%3$@ токенов)"
+          }
+        }
+      }
+    },
+    "Сбросить внешний вид": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reset appearance"
+          }
+        }
+      }
+    },
+    "Светлая": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Light"
+          }
+        }
+      }
+    },
+    "Свободно %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ free"
+          }
+        }
+      }
+    },
+    "Свободное место (если мало)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Free space (when low)"
+          }
+        }
+      }
+    },
+    "Свободное место на диске": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Free disk space"
+          }
+        }
+      }
+    },
+    "Свободное место; меньше 20 ГБ — оранжевым.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Free space; below 20 GB in orange."
+          }
+        }
+      }
+    },
+    "Сводка без AI за %lld ч в Telegram": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Summary without AI for the last %lld h to Telegram"
+          }
+        }
+      }
+    },
+    "Сводка без AI за 24 ч в Telegram.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Summary without AI for the last 24 h to Telegram."
+          }
+        }
+      }
+    },
+    "Свой": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Custom"
+          }
+        }
+      }
+    },
+    "Своя задача": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Custom task"
+          }
+        }
+      }
+    },
+    "Своя задача…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Custom task…"
+          }
+        }
+      }
+    },
+    "Связка ключей не сохранила ключ (код %d)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The Keychain did not save the key (code %d)"
+          }
+        }
+      }
+    },
+    "Сделать текущим": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Make current"
+          }
+        }
+      }
+    },
+    "Сегодня": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Today"
+          }
+        }
+      }
+    },
+    "Сейчас": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Now"
+          }
+        }
+      }
+    },
+    "Сервер лимитов просит запрашивать реже": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The limits server asks for fewer requests"
+          }
+        }
+      }
+    },
+    "Сервер лимитов просит запрашивать реже — следующая попытка в %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The limits server asks for fewer requests — next try at %@"
+          }
+        }
+      }
+    },
+    "Сервер не отвечает — запущен ли он?": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The server does not answer — is it running?"
+          }
+        }
+      }
+    },
+    "Сервис": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Service"
+          }
+        }
+      }
+    },
+    "Сервис AI": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI service"
+          }
+        }
+      }
+    },
+    "Сервис команд-шаблонов режима (этап 4). Агенты и ключи — Настройки → «Сервисы AI».": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The service for the mode's command templates. Agents and keys — Settings → “AI Services”."
+          }
+        }
+      }
+    },
+    "Сервис по умолчанию": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Default service"
+          }
+        }
+      }
+    },
+    "Сервис режима": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mode's service"
+          }
+        }
+      }
+    },
+    "Сервисы AI": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Services"
+          }
+        }
+      }
+    },
+    "Сессии": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sessions"
+          }
+        }
+      }
+    },
+    "Сессии Claude Code": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude Code sessions"
+          }
+        }
+      }
+    },
+    "Сессии Claude не отслеживаются: hooks не установлены.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude sessions are not tracked: hooks are not installed."
+          }
+        }
+      }
+    },
+    "Сессии видны, только если в Настройках установлены hooks (они дописываются в ~/.claude/settings.json, копия сохраняется рядом).": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sessions are visible only with hooks installed in Settings (they are added to ~/.claude/settings.json; a copy is kept next to it)."
+          }
+        }
+      }
+    },
+    "Сессия": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Session"
+          }
+        }
+      }
+    },
+    "Сессия (5 ч)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Session (5 h)"
+          }
+        }
+      }
+    },
+    "Сессия Claude Code истекла (HTTP %lld): claude → /login": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The Claude Code session expired (HTTP %lld): claude → /login"
+          }
+        }
+      }
+    },
+    "Сессия использована на %@%@. Фоновая задача может упереться в лимит.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The session is %@ used%@. A background task may hit the limit."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Сессия использована на %1$@%2$@. Фоновая задача может упереться в лимит."
+          }
+        }
+      }
+    },
+    "Сессия с обратным отсчётом до сброса и прогнозом по темпу за 30 мин, неделя, недели по моделям, extra usage.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The session with a countdown to the reset and a forecast from the last 30 min, the week, weeks per model, extra usage."
+          }
+        }
+      }
+    },
+    "Скопировать: %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copy: %@"
+          }
+        }
+      }
+    },
+    "Скрытый блок не пропадает из работы: сессии и лимиты отслеживаются, уведомления приходят. Проекты и общие команды включаются у каждого режима на вкладке «Режимы».": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A hidden block keeps working: sessions and limits are tracked, notifications arrive. Projects and common commands are switched per mode on the “Modes” tab."
+          }
+        }
+      }
+    },
+    "Скрыть": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hide"
+          }
+        }
+      }
+    },
+    "Следующий шаг": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Next step"
+          }
+        }
+      }
+    },
+    "Слишком много запросов (HTTP 429)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Too many requests (HTTP 429)"
+          }
+        }
+      }
+    },
+    "Слова": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Words"
+          }
+        }
+      }
+    },
+    "Слова считаются по главному файлу проекта (.md, .txt, .rtf, .docx).": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Words are counted on the project's main file (.md, .txt, .rtf, .docx)."
+          }
+        }
+      }
+    },
+    "Снять hooks": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remove hooks"
+          }
+        }
+      }
+    },
+    "Совместимый с OpenAI": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "OpenAI-compatible"
+          }
+        }
+      }
+    },
+    "Создать": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Create"
+          }
+        }
+      }
+    },
+    "Создать %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Create %@"
+          }
+        }
+      }
+    },
+    "Состояние неизвестно": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "State unknown"
+          }
+        }
+      }
+    },
+    "Сохранить": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Save"
+          }
+        }
+      }
+    },
+    "Список": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "List"
+          }
+        }
+      }
+    },
+    "Список сессий; показать вкладку Терминала.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "List of sessions; show a Terminal tab."
+          }
+        }
+      }
+    },
+    "Спрашивать": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ask"
+          }
+        }
+      }
+    },
+    "Спрашивать каждый раз": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ask every time"
+          }
+        }
+      }
+    },
+    "Спросить перед запуском": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ask before running"
+          }
+        }
+      }
+    },
+    "Сравнение": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comparison"
+          }
+        }
+      }
+    },
+    "Сравнение: %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comparison: %@"
+          }
+        }
+      }
+    },
+    "Сравнений пока не было: в развёрнутом проекте включите «Сравнить», выберите сервисы и команду.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No comparisons yet: in an expanded project turn on “Compare”, pick services and a command."
+          }
+        }
+      }
+    },
+    "Сравнить": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Compare"
+          }
+        }
+      }
+    },
+    "Сразу из шаблона": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Straight from a template"
+          }
+        }
+      }
+    },
+    "Статья о сне": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Article on sleep"
+          }
+        }
+      }
+    },
+    "Страницы": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pages"
+          }
+        }
+      }
+    },
+    "Строка": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Row"
+          }
+        }
+      }
+    },
+    "Строка контент-плана сдвинулась — обновите календарь": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The content plan row has moved — refresh the calendar"
+          }
+        }
+      }
+    },
+    "Строка меню": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Menu Bar"
+          }
+        }
+      }
+    },
+    "Строка широкая (%lld pt): на MacBook с вырезом её может закрыть вырез или скрыть система.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The item is wide (%lld pt): on a MacBook with a notch it may be covered by the notch or hidden by the system."
+          }
+        }
+      }
+    },
+    "Считаю по журналам Claude Code…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Counting from Claude Code's logs…"
+          }
+        }
+      }
+    },
+    "Так выглядит строка, когда есть что показать.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This is the item when there is something to show."
+          }
+        }
+      }
+    },
+    "Так строка выглядит сейчас. Пустые элементы (0, нет данных) не показываются.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This is the item right now. Empty elements (0, no data) are not shown."
+          }
+        }
+      }
+    },
+    "Такая папка уже есть": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "That folder already exists"
+          }
+        }
+      }
+    },
+    "Такой папки пока нет — она будет создана при «Готово».": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This folder does not exist yet — it is created on “Done”."
+          }
+        }
+      }
+    },
+    "Текст": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Text"
+          }
+        }
+      }
+    },
+    "Текущий режим": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Current mode"
+          }
+        }
+      }
+    },
+    "Текущий этап": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Current stage"
+          }
+        }
+      }
+    },
+    "Тема": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Topic"
+          }
+        }
+      }
+    },
+    "Темп речи: %lld слов/мин": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Speech pace: %lld words/min"
+          }
+        }
+      }
+    },
+    "Теперь выберите команду.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Now pick a command."
+          }
+        }
+      }
+    },
+    "Терминал": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Terminal"
+          }
+        }
+      }
+    },
+    "Терминал / Фон": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Terminal / Background"
+          }
+        }
+      }
+    },
+    "Терминал · Finder · GitHub": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Terminal · Finder · GitHub"
+          }
+        }
+      }
+    },
+    "Только если в нём нет незакоммиченного и ветка запушена или влита.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Only if it has nothing uncommitted and its branch is pushed or merged."
+          }
+        }
+      }
+    },
+    "Только значок": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Icon only"
+          }
+        }
+      }
+    },
+    "Только текущий режим": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Current mode only"
+          }
+        }
+      }
+    },
+    "Только файлы проекта": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Project files only"
+          }
+        }
+      }
+    },
+    "Точка «·»": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dot “·”"
+          }
+        }
+      }
+    },
+    "Точка состояния, ветка, незакоммиченные файлы, открытые PR (цвет — CI), когда была активность.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Health dot, branch, uncommitted files, open PRs (colour — CI), last activity."
+          }
+        }
+      }
+    },
+    "Требует внимания": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Needs attention"
+          }
+        }
+      }
+    },
+    "Тёмная": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dark"
+          }
+        }
+      }
+    },
+    "У значка": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Next to the icon"
+          }
+        }
+      }
+    },
+    "У этого режима нет папки проектов": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This mode has no projects folder"
+          }
+        }
+      }
+    },
+    "Убрать готовые": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clear finished"
+          }
+        }
+      }
+    },
+    "Уведомления": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notifications"
+          }
+        }
+      }
+    },
+    "Уведомления ClaudePult выключены в macOS — «ждёт ответа», итоги задач и лимиты не приходят.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ClaudePult notifications are off in macOS — “waiting”, task results and limits do not arrive."
+          }
+        }
+      }
+    },
+    "Уведомления о лимитах ещё и в Telegram": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limit notifications to Telegram too"
+          }
+        }
+      }
+    },
+    "Уведомлять на, %": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notify at, %"
+          }
+        }
+      }
+    },
+    "Удалить worktree": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete worktree"
+          }
+        }
+      }
+    },
+    "Удалить worktree (только если нет незакоммиченного и ветка запушена)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete the worktree (only if nothing is uncommitted and the branch is pushed)"
+          }
+        }
+      }
+    },
+    "Удалить ключ": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete key"
+          }
+        }
+      }
+    },
+    "Удалить команду": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete command"
+          }
+        }
+      }
+    },
+    "Удалить режим": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete mode"
+          }
+        }
+      }
+    },
+    "Удалить сборки и кэши, сбросить симуляторы (с подтверждением).": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete builds and caches, reset simulators (with confirmation)."
+          }
+        }
+      }
+    },
+    "Удалить сборки, кэши и сбросить симуляторы (cleanup.py --now)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete builds and caches and reset simulators (cleanup.py --now)"
+          }
+        }
+      }
+    },
+    "Удалить сборки, кэши и сбросить симуляторы? Сначала можно посмотреть список: «Очистка: проверить».": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete builds and caches and reset simulators? You can see the list first: “Cleanup: check”."
+          }
+        }
+      }
+    },
+    "Удалить?": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete?"
+          }
+        }
+      }
+    },
+    "Узкая": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Narrow"
+          }
+        }
+      }
+    },
+    "Установить hooks": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Install hooks"
+          }
+        }
+      }
+    },
+    "Файл журнала": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Log file"
+          }
+        }
+      }
+    },
+    "Файл результата": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Result file"
+          }
+        }
+      }
+    },
+    "Файл результата не появился: %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The result file did not appear: %@"
+          }
+        }
+      }
+    },
+    "Файлы + поиск в интернете": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Files + web search"
+          }
+        }
+      }
+    },
+    "Файлы проекта плюс поиск и чтение страниц в интернете. Без терминала.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Project files plus searching and reading web pages. No terminal."
+          }
+        }
+      }
+    },
+    "Фон": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Background"
+          }
+        }
+      }
+    },
+    "Фон и лимит": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Background and limit"
+          }
+        }
+      }
+    },
+    "Фоновая задача: %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Background task: %@"
+          }
+        }
+      }
+    },
+    "Фоновая задача: остановить сейчас.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Background task: stop now."
+          }
+        }
+      }
+    },
+    "Фоновая задача: что делает Claude, по шагам.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Background task: what Claude does, step by step."
+          }
+        }
+      }
+    },
+    "Фоновые задачи": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Background tasks"
+          }
+        }
+      }
+    },
+    "Формат": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Format"
+          }
+        }
+      }
+    },
+    "Хронометраж": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Duration"
+          }
+        }
+      }
+    },
+    "Цвет по уровню (зелёный · оранжевый · красный)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Colour by level (green · orange · red)"
+          }
+        }
+      }
+    },
+    "Чем вы занимаетесь?": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "What do you do?"
+          }
+        }
+      }
+    },
+    "Черта «|»": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bar “|”"
+          }
+        }
+      }
+    },
+    "Число %": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Number %"
+          }
+        }
+      }
+    },
+    "Читать и писать только внутри папки проекта. Без терминала и интернета.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Read and write only inside the project folder. No terminal, no internet."
+          }
+        }
+      }
+    },
+    "Чтение и правка файлов, git (без push в main и удаления истории), проверки и сборки, pull request.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reading and editing files, git (no push to main, no history removal), checks and builds, pull requests."
+          }
+        }
+      }
+    },
+    "Что": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "What"
+          }
+        }
+      }
+    },
+    "Что в нём": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "What's in it"
+          }
+        }
+      }
+    },
+    "Что показывать": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "What to show"
+          }
+        }
+      }
+    },
+    "Что показывать в панели. Скрытое продолжает работать: лимиты и сессии отслеживаются, уведомления приходят.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "What the panel shows. Hidden blocks keep working: limits and sessions are tracked, notifications arrive."
+          }
+        }
+      }
+    },
+    "Что показывать в строке проекта": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "What a project row shows"
+          }
+        }
+      }
+    },
+    "Что разрешить в фоне": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "What to allow in the background"
+          }
+        }
+      }
+    },
+    "Что сделать в %@?": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "What to do in %@?"
+          }
+        }
+      }
+    },
+    "Шаблоны": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Templates"
+          }
+        }
+      }
+    },
+    "Шаг %lld из %lld": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Step %lld of %lld"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Шаг %1$lld из %2$lld"
+          }
+        }
+      }
+    },
+    "Ширина": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Width"
+          }
+        }
+      }
+    },
+    "Широкая": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wide"
+          }
+        }
+      }
+    },
+    "Экспорт и импорт": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Export and import"
+          }
+        }
+      }
+    },
+    "Экспорт настроек…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Export Settings…"
+          }
+        }
+      }
+    },
+    "Экспорт режима…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Export Mode…"
+          }
+        }
+      }
+    },
+    "Элементы — в порядке слева направо": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elements — in order from left to right"
+          }
+        }
+      }
+    },
+    "Этап": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stage"
+          }
+        }
+      }
+    },
+    "Этапы": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stages"
+          }
+        }
+      }
+    },
+    "Этапы и метрики": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stages and metrics"
+          }
+        }
+      }
+    },
+    "Этапы режима — через запятую; этап меняется кнопкой в развёрнутом проекте. Слова, хронометраж, время чтения и страницы считаются по главному файлу (.md, .txt, .rtf, .docx).": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The mode's stages, comma-separated; a stage changes with a button in an expanded project. Words, duration, reading time and pages are counted on the main file (.md, .txt, .rtf, .docx)."
+          }
+        }
+      }
+    },
+    "Этапы, через которые проходит каждый проект. Этап меняется прямо из панели и записывается в проект.md.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The stages every project goes through. A stage changes right from the panel and is written to проект.md."
+          }
+        }
+      }
+    },
+    "Язык интерфейса": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Interface language"
+          }
+        }
+      }
+    },
+    "Язык сменится после перезапуска.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The language changes after a relaunch."
+          }
+        }
+      }
+    },
+    "авто: %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "auto: %@"
+          }
+        }
+      }
+    },
+    "авто: не найден": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "auto: not found"
+          }
+        }
+      }
+    },
+    "без задачи": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "no task"
+          }
+        }
+      }
+    },
+    "без проектов": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "no projects"
+          }
+        }
+      }
+    },
+    "в STATUS.md нет шапки (Stage / Now / Next)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "STATUS.md has no summary (Stage / Now / Next)"
+          }
+        }
+      }
+    },
+    "в работе": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "in progress"
+          }
+        }
+      }
+    },
+    "в фоне": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "in the background"
+          }
+        }
+      }
+    },
+    "ветка %@: %lld коммит(ов) только на этом Маке": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "branch %@: %lld commit(s) only on this Mac"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "new",
+            "value": "ветка %1$@: %2$lld коммит(ов) только на этом Маке"
+          }
+        }
+      }
+    },
+    "ветка %@: %lld не запушено": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "branch %@: %lld not pushed"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "new",
+            "value": "ветка %1$@: %2$lld не запушено"
+          }
+        }
+      }
+    },
+    "включены": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "on"
+          }
+        }
+      }
+    },
+    "всегда": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "always"
+          }
+        }
+      }
+    },
+    "выключены в macOS": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "off in macOS"
+          }
+        }
+      }
+    },
+    "выполняется": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "running"
+          }
+        }
+      }
+    },
+    "выполняется…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "running…"
+          }
+        }
+      }
+    },
+    "готово": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "done"
+          }
+        }
+      }
+    },
+    "до ": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "until "
+          }
+        }
+      }
+    },
+    "до сброса хватит": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "will last until the reset"
+          }
+        }
+      }
+    },
+    "есть проекты с проблемами": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "some projects have problems"
+          }
+        }
+      }
+    },
+    "ещё %lld": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld more"
+          }
+        }
+      }
+    },
+    "ещё не разрешены": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "not allowed yet"
+          }
+        }
+      }
+    },
+    "ждут ответа: %lld": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "waiting: %lld"
+          }
+        }
+      }
+    },
+    "ждёт ответа": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "waiting"
+          }
+        }
+      }
+    },
+    "за 2 часа": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "2 hours before"
+          }
+        }
+      }
+    },
+    "за 3 дня и за сутки": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "3 days and a day before"
+          }
+        }
+      }
+    },
+    "за сутки": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "a day before"
+          }
+        }
+      }
+    },
+    "за сутки и за 2 часа": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "a day and 2 hours before"
+          }
+        }
+      }
+    },
+    "завершена": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ended"
+          }
+        }
+      }
+    },
+    "завершилось с ошибкой": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "failed"
+          }
+        }
+      }
+    },
+    "завтра": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "tomorrow"
+          }
+        }
+      }
+    },
+    "и ещё %lld…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "and %lld more…"
+          }
+        }
+      }
+    },
+    "идея, черновик, готово": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "idea, draft, done"
+          }
+        }
+      }
+    },
+    "идёт": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "running"
+          }
+        }
+      }
+    },
+    "изменения в STATUS.md не закоммичены": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "STATUS.md changes are not committed"
+          }
+        }
+      }
+    },
+    "изменено файлов: %lld": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "files changed: %lld"
+          }
+        }
+      }
+    },
+    "ключ сохранён": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "key saved"
+          }
+        }
+      }
+    },
+    "корень не объект JSON": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "the root is not a JSON object"
+          }
+        }
+      }
+    },
+    "лимит времени": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "time limit"
+          }
+        }
+      }
+    },
+    "меньше чем через минуту": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "in less than a minute"
+          }
+        }
+      }
+    },
+    "не напоминать": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "no reminders"
+          }
+        }
+      }
+    },
+    "не установлен": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "not installed"
+          }
+        }
+      }
+    },
+    "не установлены": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "not installed"
+          }
+        }
+      }
+    },
+    "неделя %lld %%": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "week %lld %%"
+          }
+        }
+      }
+    },
+    "неизвестно": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "unknown"
+          }
+        }
+      }
+    },
+    "нет": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "none"
+          }
+        }
+      }
+    },
+    "нет коммитов %lld дн.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "no commits for %lld d"
+          }
+        }
+      }
+    },
+    "нет проверок": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "no checks"
+          }
+        }
+      }
+    },
+    "нужно обновить": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "update needed"
+          }
+        }
+      }
+    },
+    "нужно от вас: ": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "needs you: "
+          }
+        }
+      }
+    },
+    "обновлено %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "updated %@"
+          }
+        }
+      }
+    },
+    "обычных папок: %lld": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "plain folders: %lld"
+          }
+        }
+      }
+    },
+    "одна папка": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "one folder"
+          }
+        }
+      }
+    },
+    "остановлено": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "stopped"
+          }
+        }
+      }
+    },
+    "остановлено вручную": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "stopped by hand"
+          }
+        }
+      }
+    },
+    "остановлено по лимиту времени (%lld мин)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "stopped by the time limit (%lld min)"
+          }
+        }
+      }
+    },
+    "от %lld %%": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "from %lld %%"
+          }
+        }
+      }
+    },
+    "ошибка": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "error"
+          }
+        }
+      }
+    },
+    "папка «входящие»": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“inbox” folder"
+          }
+        }
+      }
+    },
+    "папки": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "folders"
+          }
+        }
+      }
+    },
+    "папки (каждая подпапка — проект)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "folders (every subfolder is a project)"
+          }
+        }
+      }
+    },
+    "при текущем темпе хватит до ~%@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "at the current pace it lasts until ~%@"
+          }
+        }
+      }
+    },
+    "проект.md": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "проект.md"
+          }
+        }
+      }
+    },
+    "пройдено": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "passed"
+          }
+        }
+      }
+    },
+    "просрочено %lld дн": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld d overdue"
+          }
+        }
+      }
+    },
+    "публ. ": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "publ. "
+          }
+        }
+      }
+    },
+    "пусто — запускать сразу; «Язык», «Тон»…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "empty — run at once; “Language”, “Tone”…"
+          }
+        }
+      }
+    },
+    "работает": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "working"
+          }
+        }
+      }
+    },
+    "результат-<время>.md": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "результат-<время>.md"
+          }
+        }
+      }
+    },
+    "сброс %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "resets %@"
+          }
+        }
+      }
+    },
+    "сегодня": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "today"
+          }
+        }
+      }
+    },
+    "сессия %lld %%": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "session %lld %%"
+          }
+        }
+      }
+    },
+    "см. README Gemini CLI (раздел про Antigravity)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "see the Gemini CLI README (the Antigravity section)"
+          }
+        }
+      }
+    },
+    "см. cursor.com/cli": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "see cursor.com/cli"
+          }
+        }
+      }
+    },
+    "текст.md": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "text.md"
+          }
+        }
+      }
+    },
+    "только что": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "just now"
+          }
+        }
+      }
+    },
+    "упало": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "failed"
+          }
+        }
+      }
+    },
+    "установлен": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "installed"
+          }
+        }
+      }
+    },
+    "установлены": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "installed"
+          }
+        }
+      }
+    },
+    "файл": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "file"
+          }
+        }
+      }
+    },
+    "файла": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "files"
+          }
+        }
+      }
+    },
+    "файлов": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "files"
+          }
+        }
+      }
+    },
+    "файлов: %lld": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "files: %lld"
+          }
+        }
+      }
+    },
+    "фоновых задач: %lld": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "background tasks: %lld"
+          }
+        }
+      }
+    },
+    "хуки.md": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "hooks.md"
+          }
+        }
+      }
+    },
+    "через %lld дн": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "in %lld d"
+          }
+        }
+      }
+    },
+    "через %lld дн %lld ч": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "in %lld d %lld h"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "new",
+            "value": "через %1$lld дн %2$lld ч"
+          }
+        }
+      }
+    },
+    "через %lld мин": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "in %lld min"
+          }
+        }
+      }
+    },
+    "через %lld ч": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "in %lld h"
+          }
+        }
+      }
+    },
+    "через %lld ч %lld мин": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "in %lld h %lld min"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "new",
+            "value": "через %1$lld ч %2$lld мин"
+          }
+        }
+      }
+    },
+    "черновик": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "draft"
+          }
+        }
+      }
+    },
+    "чисто · 3 ч назад": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "clean · 3 h ago"
+          }
+        }
+      }
+    },
+    "—": {},
+    "•": {},
+    "⌘%@": {},
+    "✦ Искра": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "✦ Sparkle"
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}

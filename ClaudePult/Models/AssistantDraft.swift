@@ -8,18 +8,18 @@ struct AssistantDraft: Equatable, Sendable {
 
         var title: String {
             switch self {
-            case .importSettings: "Перенести настройки?"
-            case .template: "Чем вы занимаетесь?"
-            case .folder: "Где лежат проекты?"
-            case .stages: "Этапы"
-            case .metrics: "Что показывать в строке проекта"
-            case .calendar: "Календарь"
-            case .service: "Сервис AI"
-            case .commands: "Команды"
-            case .launch: "Где запускать и что разрешить"
-            case .panel: "Блоки панели"
-            case .menuBar: "Строка меню"
-            case .name: "Название и значок"
+            case .importSettings: String(localized: "Перенести настройки?")
+            case .template: String(localized: "Чем вы занимаетесь?")
+            case .folder: String(localized: "Где лежат проекты?")
+            case .stages: String(localized: "Этапы")
+            case .metrics: String(localized: "Что показывать в строке проекта")
+            case .calendar: String(localized: "Календарь")
+            case .service: String(localized: "Сервис AI")
+            case .commands: String(localized: "Команды")
+            case .launch: String(localized: "Где запускать и что разрешить")
+            case .panel: String(localized: "Блоки панели")
+            case .menuBar: String(localized: "Строка меню")
+            case .name: String(localized: "Название и значок")
             }
         }
     }
@@ -33,12 +33,12 @@ struct AssistantDraft: Equatable, Sendable {
         var suggestsGit: Bool { repositories > 0 && repositories * 2 >= folders }
 
         var text: String {
-            if folders == 0, files == 0 { return "Папка пуста — проекты появятся, когда вы их создадите." }
+            if folders == 0, files == 0 { return String(localized: "Папка пуста — проекты появятся, когда вы их создадите.") }
             var parts: [String] = []
-            if repositories > 0 { parts.append("git-репозиториев: \(repositories)") }
-            if folders - repositories > 0 { parts.append("обычных папок: \(folders - repositories)") }
-            if files > 0 { parts.append("файлов: \(files)") }
-            return "Внутри " + parts.joined(separator: ", ") + "."
+            if repositories > 0 { parts.append(String(localized: "git-репозиториев: \(repositories)")) }
+            if folders - repositories > 0 { parts.append(String(localized: "обычных папок: \(folders - repositories)")) }
+            if files > 0 { parts.append(String(localized: "файлов: \(files)")) }
+            return String(localized: "Внутри ") + parts.joined(separator: ", ") + "."
         }
 
         static func of(_ path: String) -> FolderAnalysis {
@@ -78,8 +78,8 @@ struct AssistantDraft: Equatable, Sendable {
     }
 
     static let blank = Mode(
-        name: "Новый режим", icon: "sparkle", template: "custom", source: .folders("~/Documents/Проекты"), card: .projectMD,
-        stages: ["в работе", "готово"], metrics: ["words", "lastActivity"], launchMode: .background, permissions: .filesOnly,
+        name: String(localized: "Новый режим"), icon: "sparkle", template: "custom", source: .folders(String(localized: "~/Documents/Проекты")), card: .projectMD,
+        stages: [String(localized: "в работе"), String(localized: "готово")], metrics: ["words", "lastActivity"], launchMode: .background, permissions: .filesOnly,
         calendar: .dates, commonCommands: .none, showCommonCommands: false
     )
 

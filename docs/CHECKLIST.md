@@ -186,3 +186,13 @@ Panel snapshots: `defaults write com.demishev.claudepult DebugPanelSnapshot -boo
 | Oleh's first start logic unchanged (report.py present → his mode) | Auto + Live |
 | Preview pane: menu bar, limits, «Ближайшее», sample projects with stages and metrics, commands | Live (`--assistant-preview` for video, developer, social) |
 | The assistant window itself (pickers, folder dialog, «Готово») | **Oleh: Settings → Режимы → «+» → «Помощник…»** |
+
+## Languages (SPEC-modes §9.9, English)
+
+| Scenario | Checked |
+|---|---|
+| Every Russian UI string is in the String Catalog with an English translation; format specifiers match | Auto (script check: 0 missing, 0 mismatched, 0 stale) |
+| File formats, prompts, the hook script, logs and the CLI stay as they were | Review of the wrapping rules; tests of card/plan parsing still green |
+| English output: git scanner attention items, calendar texts, assistant preview | Live (`-AppleLanguages '(en)'`) |
+| Plural «файл/файла/файлов» in Russian, «file/files» in English | Auto (Russian) + Live (English) |
+| Settings → Основные → «Язык интерфейса» + «Перезапустить» | **Oleh: switch to English and back** |

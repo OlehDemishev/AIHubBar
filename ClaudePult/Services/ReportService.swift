@@ -7,9 +7,9 @@ enum ReportError: LocalizedError {
 
     var errorDescription: String? {
         switch self {
-        case let .scriptMissing(path): "Не найден report.py: \(path). Проверьте путь к _daily-report в настройках."
-        case let .failed(code, _): "report.py завершился с ошибкой (код \(code)). Подробности в журнале."
-        case .badJSON: "Не удалось разобрать ответ report.py. Подробности в журнале."
+        case let .scriptMissing(path): String(localized: "Не найден report.py: \(path). Проверьте путь к _daily-report в настройках.")
+        case let .failed(code, _): String(localized: "report.py завершился с ошибкой (код \(code)). Подробности в журнале.")
+        case .badJSON: String(localized: "Не удалось разобрать ответ report.py. Подробности в журнале.")
         }
     }
 }

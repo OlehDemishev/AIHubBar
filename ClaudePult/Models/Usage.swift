@@ -9,12 +9,12 @@ struct UsageWindow: Codable, Equatable, Sendable {
 
     static func title(forKey key: String) -> String {
         switch key {
-        case "five_hour": "Сессия (5 ч)"
-        case "seven_day": "Неделя"
-        case "seven_day_opus": "Неделя · Opus"
-        case "seven_day_sonnet": "Неделя · Sonnet"
+        case "five_hour": String(localized: "Сессия (5 ч)")
+        case "seven_day": String(localized: "Неделя")
+        case "seven_day_opus": String(localized: "Неделя · Opus")
+        case "seven_day_sonnet": String(localized: "Неделя · Sonnet")
         default:
-            "Неделя · " + key.replacingOccurrences(of: "seven_day_", with: "")
+            String(localized: "Неделя · ") + key.replacingOccurrences(of: "seven_day_", with: "")
                 .split(separator: "_").map(\.capitalized).joined(separator: " ")
         }
     }
@@ -65,7 +65,7 @@ struct UsageSnapshot: Codable, Equatable, Sendable {
             guard let model, !model.isEmpty else { continue }
             let key = "seven_day_" + model.lowercased().replacingOccurrences(of: " ", with: "_")
             guard !windows.contains(where: { $0.key == key }) else { continue }
-            window(key, title: "Неделя · \(model)", limit)
+            window(key, title: String(localized: "Неделя · \(model)"), limit)
         }
 
         guard windows.contains(where: { $0.key == "five_hour" }) else { return nil }
@@ -188,23 +188,23 @@ enum UsageText {
     /// «через 2 ч 14 мин», «через 35 мин», «меньше минуты».
     static func countdown(to date: Date, now: Date = .now) -> String {
         let minutes = Int(max(0, date.timeIntervalSince(now)) / 60)
-        if minutes < 1 { return "меньше чем через минуту" }
-        if minutes < 60 { return "через \(minutes) мин" }
+        if minutes < 1 { return String(localized: "меньше чем через минуту") }
+        if minutes < 60 { return String(localized: "через \(minutes) мин") }
         let hours = minutes / 60, rest = minutes % 60
-        if hours < 24 { return rest == 0 ? "через \(hours) ч" : "через \(hours) ч \(rest) мин" }
-        return "через \(hours / 24) дн \(hours % 24) ч"
+        if hours < 24 { return rest == 0 ? String(localized: "через \(hours) ч") : String(localized: "через \(hours) ч \(rest) мин") }
+        return String(localized: "через \(hours / 24) дн \(hours % 24) ч")
     }
 
     static func resetText(_ window: UsageWindow, now: Date = .now) -> String? {
         guard let resets = window.resetsAt else { return nil }
-        if resets.timeIntervalSince(now) < 24 * 3600 { return "сброс \(countdown(to: resets, now: now))" }
-        return "сброс \(resets.formatted(.dateTime.weekday(.abbreviated).day().month(.abbreviated).hour().minute()))"
+        if resets.timeIntervalSince(now) < 24 * 3600 { return String(localized: "сброс \(countdown(to: resets, now: now))") }
+        return String(localized: "сброс \(resets.formatted(.dateTime.weekday(.abbreviated).day().month(.abbreviated).hour().minute()))")
     }
 
     static func forecast(_ forecast: UsageForecast) -> String? {
         switch forecast {
-        case let .runsOutAt(date): "при текущем темпе хватит до ~\(date.formatted(date: .omitted, time: .shortened))"
-        case .lastsUntilReset: "до сброса хватит"
+        case let .runsOutAt(date): String(localized: "при текущем темпе хватит до ~\(date.formatted(date: .omitted, time: .shortened))")
+        case .lastsUntilReset: String(localized: "до сброса хватит")
         case .unknown: nil
         }
     }
