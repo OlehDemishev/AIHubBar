@@ -2,6 +2,10 @@
 
 Decisions made where the spec is silent or does not match reality. Newest at the top.
 
+## 2026-10-30 — Answering permission requests from ClaudePult
+
+**Checked live first:** with a PermissionRequest hook that sleeps, Claude Code shows its own dialog within ~2 s and doesn't wait for the hook; an allow printed by the hook later is applied («Allowed by PermissionRequest hook»). So a waiting hook never blocks the person at the terminal. **Protocol:** files in `Application Support/ClaudePult/approvals/` — `alive` (ClaudePult touches it every 15 s while the option is on; the hook waits only if it is younger than 30 s), `<id>.request.json` (written before the session record, with the hook's pid), `<id>.decision` (`allow` / `deny`). The hook stops waiting when the session moves on (answered in Claude), when ClaudePult goes away, after 290 s, or on SIGTERM (Claude's timeout), and always removes its files. ClaudePult ignores requests whose hook process is gone. The hook prints only that decision; everything else stays silent as before. The script keeps itself current even while settings.json still has the old 5 s timeout.
+
 ## 2026-10-30 — Panel as cards (design variant A)
 
 Oleh picked variant A of three mock-ups (cards / tabs / Raycast-like list). Blocks are cards (`panelCard()`), not rows between dividers; Settings, Help and Quit moved from three large rows at the bottom to header icons with the same shortcuts; the profile switcher row became a header menu; limits are rings; sessions and projects take one line (details on hover or click). Folding blocks stays. `preferredColorScheme` never reached the `MenuBarExtra` window, so «Тёмная» left the panel light — the panel now sets its window's `appearance`.

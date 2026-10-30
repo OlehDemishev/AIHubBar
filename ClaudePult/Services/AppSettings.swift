@@ -121,6 +121,11 @@ final class AppSettings {
         didSet { defaults.set(clipboardRemember, forKey: Keys.clipboardRemember) }
     }
 
+    /// Answer Claude Code's permission requests from notifications and the panel (`ApprovalFiles`).
+    var approvalsFromClaudePult: Bool {
+        didSet { defaults.set(approvalsFromClaudePult, forKey: Keys.approvalsFromClaudePult) }
+    }
+
     var clipboardExcludedApps: [String] {
         didSet { defaults.set(clipboardExcludedApps, forKey: Keys.clipboardExcludedApps) }
     }
@@ -208,6 +213,7 @@ final class AppSettings {
         let clipLimit = defaults.integer(forKey: Keys.clipboardLimit)
         clipboardLimit = clipLimit > 0 ? clipLimit : 50
         clipboardRemember = defaults.bool(forKey: Keys.clipboardRemember)
+        approvalsFromClaudePult = defaults.object(forKey: Keys.approvalsFromClaudePult) as? Bool ?? true
         clipboardExcludedApps = defaults.stringArray(forKey: Keys.clipboardExcludedApps) ?? ClipboardPolicy.defaultExcludedApps
         notesFolder = defaults.string(forKey: Keys.notesFolder) ?? "~/Documents/ClaudePult Notes"
         quickCommands = defaults.data(forKey: Keys.quickCommands).flatMap { try? JSONDecoder().decode([QuickCommand].self, from: $0) } ?? QuickCommand.examples
@@ -245,6 +251,7 @@ final class AppSettings {
         static let resourceAlerts = "resourceAlerts"
         static let clipboardLimit = "clipboardLimit"
         static let clipboardRemember = "clipboardRemember"
+        static let approvalsFromClaudePult = "approvalsFromClaudePult"
         static let clipboardExcludedApps = "clipboardExcludedApps"
         static let notesFolder = "notesFolder"
         static let quickCommands = "quickCommands"

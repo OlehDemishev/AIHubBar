@@ -82,10 +82,12 @@ private struct SessionRowView: View {
     let row: SessionRow
 
     @Environment(RunStore.self) private var runs
+    @Environment(SessionStore.self) private var sessions
     @Environment(\.openWindow) private var openWindow
     @State private var isHovered = false
 
     private var inBackground: Bool { row.run != nil && row.state == .running }
+    private var request: ApprovalRequest? { row.state == .waiting ? sessions.approvals[row.id] : nil }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 2) {
@@ -125,7 +127,21 @@ private struct SessionRowView: View {
                     .fixedSize()
                 }
             }
-            if let message = row.message, row.state == .waiting || row.state == .error {
+            if let request {
+                HStack(spacing: 6) {
+                    Text(request.text)
+                        .scaledFont(.callout, design: .monospaced)
+                        .foregroundStyle(.orange)
+                        .lineLimit(2)
+                        .truncationMode(.middle)
+                    Spacer(minLength: 4)
+                    Button("Отклонить") { sessions.decide(requestID: request.id, allow: false) }
+                    Button("Разрешить") { sessions.decide(requestID: request.id, allow: true) }
+                        .buttonStyle(.borderedProminent)
+                }
+                .controlSize(.small)
+                .padding(.leading, 20)
+            } else if let message = row.message, row.state == .waiting || row.state == .error {
                 Text(message)
                     .scaledFont(.callout)
                     .foregroundStyle(row.state == .waiting ? .orange : .red)

@@ -1,6 +1,7 @@
 import AppKit
 import Darwin
 import Observation
+import UserNotifications
 
 /// Claude Code sessions from the hook's files in Application Support, kept current by watching the folder.
 @MainActor
@@ -13,6 +14,10 @@ final class SessionStore {
     }
 
     private(set) var items: [Item] = []
+    /// Open permission requests, by session id (`ApprovalFiles`).
+    private(set) var approvals: [String: ApprovalRequest] = [:]
+    /// Set by the app: whether permissions may be answered from ClaudePult («Отвечать из уведомлений»).
+    var approvalsEnabled: () -> Bool = { true }
 
     var waitingCount: Int { items.filter { $0.state == .waiting }.count }
     var activeItems: [Item] { items }
@@ -34,9 +39,11 @@ final class SessionStore {
         watchDirectory()
         reload()
         // Liveness and age-based hiding change without file events.
+        keepApprovalsAlive()
         ticker = Task { [weak self] in
             while !Task.isCancelled {
                 try? await Task.sleep(for: .seconds(15))
+                self?.keepApprovalsAlive()
                 self?.reload()
             }
         }
@@ -48,16 +55,33 @@ final class SessionStore {
     func reload() {
         let directory = directory
         Task {
-            let loaded = await Task.detached(priority: .utility) {
-                SessionStore.loadItems(from: directory, now: .now)
+            let (loaded, requests) = await Task.detached(priority: .utility) {
+                (SessionStore.loadItems(from: directory, now: .now), ApprovalFiles.bySession(ApprovalFiles.requests()))
             }.value
-            apply(loaded)
+            apply(loaded, requests: requests)
         }
     }
 
-    private func apply(_ loaded: [Item]) {
+    private func apply(_ loaded: [Item], requests: [String: ApprovalRequest]) {
         if loaded != items { items = loaded }
+        // A request only counts while its session still waits; answered in Claude, it is over.
+        let open = requests.filter { id, _ in loaded.contains { $0.id == id && $0.state == .waiting } }
+        if open != approvals { approvals = open }
         announceWaiting(loaded)
+    }
+
+    /// «Разрешить» / «Отклонить» from the panel or a notification.
+    func decide(requestID: String, allow: Bool) {
+        ApprovalFiles.decide(requestID, allow: allow)
+        if let request = approvals.values.first(where: { $0.id == requestID }) {
+            approvals[request.sessionID] = nil
+            UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: ["waiting-\(request.sessionID)"])
+        }
+        AppLog.info("Permission \(allow ? "allowed" : "denied") from ClaudePult")
+    }
+
+    private func keepApprovalsAlive() {
+        if approvalsEnabled() { ApprovalFiles.touchAlive() } else { ApprovalFiles.stopAlive() }
     }
 
     // MARK: - Loading (off the main actor)
@@ -147,6 +171,15 @@ final class SessionStore {
     }
 
     private func post(_ session: Session) {
+        if let request = approvals[session.id] {
+            Notifier.post(
+                id: "waiting-\(session.id)",
+                title: String(localized: "Claude просит разрешение — \(session.displayProject)"),
+                body: request.text,
+                target: .approval(sessionID: session.id, requestID: request.id)
+            )
+            return
+        }
         Notifier.post(
             id: "waiting-\(session.id)",
             title: String(localized: "Claude ждёт ответа — \(session.displayProject)"),
