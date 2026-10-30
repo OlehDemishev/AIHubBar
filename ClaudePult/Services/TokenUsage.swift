@@ -122,6 +122,8 @@ struct TokenBreakdown: Equatable, Sendable {
     var projects: [Row]
     var topSession: TopSession?
     var totalTokens: Int
+    /// The three heaviest sessions, for the weekly summary.
+    var topSessions: [TopSession] = []
 
     static func make(_ records: [TokenRecord], since: Date, projectsDirectory: String) -> TokenBreakdown {
         let period = records.filter { $0.date >= since }
@@ -140,10 +142,10 @@ struct TokenBreakdown: Equatable, Sendable {
         let rows = byProject
             .map { Row(name: $0.key, tokens: $0.value.tokens, share: $0.value.weight / totalWeight) }
             .sorted { $0.share > $1.share }
-        let top = bySession.max { $0.value.weight < $1.value.weight }.map {
+        let sessions = bySession.sorted { $0.value.weight > $1.value.weight }.prefix(3).map {
             TopSession(sessionID: $0.key, project: $0.value.project, tokens: $0.value.tokens, share: $0.value.weight / totalWeight)
         }
-        return TokenBreakdown(projects: rows, topSession: top, totalTokens: period.reduce(0) { $0 + $1.total })
+        return TokenBreakdown(projects: rows, topSession: sessions.first, totalTokens: period.reduce(0) { $0 + $1.total }, topSessions: Array(sessions))
     }
 
     /// «12,3 млн», «850 тыс.».

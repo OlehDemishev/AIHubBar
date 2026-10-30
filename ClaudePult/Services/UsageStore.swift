@@ -199,6 +199,9 @@ final class UsageStore {
     private func apply(_ fresh: UsageSnapshot) {
         defer { updateWeek() }
         let previous = snapshot
+        for (window, before, now) in [("five_hour", previous?.session, fresh.session), ("seven_day", previous?.week, fresh.week)] {
+            if let now, now.utilization >= 100, (before?.utilization ?? 0) < 100 { LimitHits.record(window, at: fresh.fetchedAt) }
+        }
         if let before = previous?.session?.utilization, let now = fresh.session?.utilization, now > before {
             lastGrowth = .now
         }
