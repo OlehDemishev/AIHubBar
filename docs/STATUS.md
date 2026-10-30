@@ -1,7 +1,7 @@
 # Status
 
 <!-- summary:start -->
-**Stage:** SPEC-modes done except signing/updates; SPEC-profiles done (stages 1–6 and the second wave)
+**Stage:** SPEC-modes and SPEC-profiles done (release tooling ready without Developer ID, not published yet)
 **Updated:** 2026-10-30
 
 **Now:**
