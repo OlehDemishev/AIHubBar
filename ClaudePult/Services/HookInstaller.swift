@@ -40,6 +40,11 @@ struct HookInstaller {
     static let marker = "claudepult-hook"
     static let timeoutSeconds = 5
 
+    /// PermissionRequest waits for an answer from ClaudePult (`ApprovalFiles.waitSeconds`); the rest are instant.
+    static func timeout(for event: String) -> Int {
+        event == "PermissionRequest" ? ApprovalFiles.waitSeconds + 10 : timeoutSeconds
+    }
+
     var settingsURL: URL
     var scriptURL: URL
     var projectsDirectory: String
@@ -70,7 +75,7 @@ struct HookInstaller {
     @discardableResult
     func updateScriptIfNeeded() throws -> Bool {
         guard !scriptIsCurrent, let settings = try? readSettings(),
-              Self.status(of: settings, expectedCommand: command) == .installed else { return false }
+              Self.status(of: settings, expectedCommand: command, checkTimeouts: false) == .installed else { return false }
         try HookScript.write(to: scriptURL)
         return true
     }
@@ -79,13 +84,14 @@ struct HookInstaller {
         (try? String(contentsOf: scriptURL, encoding: .utf8)) == HookScript.source
     }
 
-    static func status(of settings: [String: Any], expectedCommand: String) -> HookStatus {
+    /// `checkTimeouts: false` — only whether our command is there for every event (enough to keep the script current).
+    static func status(of settings: [String: Any], expectedCommand: String, checkTimeouts: Bool = true) -> HookStatus {
         let hooks = settings["hooks"] as? [String: Any] ?? [:]
         var found = 0, current = 0
         for event in events {
             let commands = ourCommands(in: hooks[event])
             if !commands.isEmpty { found += 1 }
-            if commands == [expectedCommand] { current += 1 }
+            if commands == [expectedCommand], !checkTimeouts || ourTimeouts(in: hooks[event]) == [timeout(for: event)] { current += 1 }
         }
         if found == 0 { return .notInstalled }
         return current == events.count ? .installed : .outdated
@@ -129,7 +135,7 @@ struct HookInstaller {
         for event in events {
             var groups = hooks[event] as? [Any] ?? []
             var group: [String: Any] = [
-                "hooks": [["type": "command", "command": command, "timeout": timeoutSeconds]],
+                "hooks": [["type": "command", "command": command, "timeout": timeout(for: event)]],
             ]
             if event == "PostToolUse" { group["matcher"] = "*" }
             groups.append(group)
@@ -168,6 +174,15 @@ struct HookInstaller {
             ((group as? [String: Any])?["hooks"] as? [Any] ?? []).compactMap { entry in
                 guard isOurs(entry) else { return nil }
                 return (entry as? [String: Any])?["command"] as? String
+            }
+        }
+    }
+
+    private static func ourTimeouts(in value: Any?) -> [Int] {
+        (value as? [Any] ?? []).flatMap { group -> [Int] in
+            ((group as? [String: Any])?["hooks"] as? [Any] ?? []).compactMap { entry in
+                guard isOurs(entry) else { return nil }
+                return (entry as? [String: Any])?["timeout"] as? Int
             }
         }
     }

@@ -29,7 +29,7 @@ struct NotificationTests {
         #expect(NotificationTarget.run(id: "r", pullRequest: nil).category == NotificationAction.runCategory)
         #expect(NotificationTarget.file(path: "/x").category == nil)
         let ids = Set(NotificationAction.categories.map(\.identifier))
-        #expect(ids == [NotificationAction.sessionCategory, NotificationAction.runCategory, NotificationAction.runWithPRCategory])
+        #expect(ids == [NotificationAction.sessionCategory, NotificationAction.runCategory, NotificationAction.runWithPRCategory, NotificationAction.approvalCategory])
     }
 
     @Test func clicksLeadToTheRightPlace() throws {

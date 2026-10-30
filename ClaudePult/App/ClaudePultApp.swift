@@ -71,6 +71,7 @@ struct ClaudePultApp: App {
         keepAwake.isActive = { [modes] in modes.installedModules.contains(.keepAwake) }
         clipboard.isActive = { [modes] in modes.installedModules.contains(.clipboard) }
         notesStore.isActive = { [modes] in modes.installedModules.contains(.notes) }
+        sessions.approvalsEnabled = { [settings] in settings.approvalsFromClaudePult }
         keepAwake.claudeWorking = { [sessions, runs] in
             !runs.running.isEmpty || sessions.items.contains { $0.state == .running }
         }
@@ -115,6 +116,8 @@ struct ClaudePultApp: App {
                 case let .showSession(id):
                     let items = SessionStore.loadItems(from: SessionFiles.sessionsDirectory, now: .now)
                     if let session = items.first(where: { $0.id == id })?.session { SessionActions.show(session) }
+                case let .decide(requestID, allow):
+                    sessions.decide(requestID: requestID, allow: allow)
                 case let .openURL(url):
                     NSWorkspace.shared.open(url)
                 case let .openRunLog(id):

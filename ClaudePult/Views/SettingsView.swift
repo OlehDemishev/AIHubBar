@@ -618,8 +618,10 @@ private struct ReminderSection: View {
 
 private struct SessionSection: View {
     @Environment(HookController.self) private var hooks
+    @Environment(AppSettings.self) private var settings
 
     var body: some View {
+        @Bindable var settings = settings
         Section {
             LabeledContent("Hooks") {
                 Text(hooks.status.title)
@@ -640,6 +642,11 @@ private struct SessionSection: View {
                     .foregroundStyle(hooks.isError ? .red : .secondary)
                     .fixedSize(horizontal: false, vertical: true)
             }
+            Toggle("Отвечать на запросы разрешений из уведомлений и панели", isOn: $settings.approvalsFromClaudePult)
+            Text("Когда Claude просит разрешение (команда, правка файла), в уведомлении и в строке сессии появляются «Разрешить» и «Отклонить». Диалог Claude при этом тоже на месте — работает тот ответ, что пришёл первым. В режиме auto Claude спрашивает редко. Если у hooks написано «нужно обновить», нажмите «Обновить hooks».")
+                .font(.caption)
+                .foregroundStyle(.secondary)
+                .fixedSize(horizontal: false, vertical: true)
         } header: {
             Text("Сессии Claude Code")
         } footer: {

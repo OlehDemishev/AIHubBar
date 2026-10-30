@@ -409,6 +409,16 @@ Panel snapshots: `defaults write com.demishev.claudepult DebugPanelSnapshot -boo
 | Every icon-only control in the panel has a hover hint (accessibility walk) | Live |
 | Hover over a session row shows its actions; clicking a project row opens its details; the profile menu with two profiles | Oleh |
 
+## Answering permission requests from ClaudePult (2026-10-30)
+
+| Scenario | Checked |
+|---|---|
+| The real hook script: allow and deny from ClaudePult reach Claude as decision JSON; without ClaudePult nothing waits; answered in Claude (PostToolUse) the wait ends; files cleaned | Auto (`ApprovalTests`, runs python3) |
+| Old requests and requests from a cancelled hook are ignored; bad ids can't escape the folder | Auto |
+| Notification buttons map to allow / deny / show; PermissionRequest gets a 300 s timeout, old 5 s installs are «нужно обновить» | Auto |
+| Live: Claude Code 2.1.314 (haiku, default mode, isolated settings) asked to run `touch`; the panel showed «Bash: touch …» with «Отклонить» / «Разрешить»; «Разрешить» pressed → «Allowed by PermissionRequest hook», file created | Live |
+| The buttons on the macOS banner itself; Oleh's own hooks after «Обновить hooks» | Oleh |
+
 ## Release without an Apple Developer account (2026-10-30)
 
 | Scenario | Checked |

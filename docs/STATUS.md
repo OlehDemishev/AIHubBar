@@ -7,6 +7,7 @@
 **Now:**
 - merged: menu bar drag reordering (PR #93), translation review (PR #94), release build re-checked on main (PR #95)
 - panel redesigned as cards, variant A, merged (PR #98)
+- feature batch from Oleh's «все»: approve from notifications (PR open), then current action, week forecast, Telegram, PR/CI alerts, hotkey and search, widget, night queue, context warning
 - hover hints for icon-only controls and the menu bar item merged (PR #91)
 - second wave merged: «История буфера» and «Заметки» (PR #87), «Не спать» with the lid closed (PR #89)
 - release without an Apple Developer account merged (PR #85): Sparkle, self-signed signing, `scripts/release.sh`, MIT license; nothing published yet
@@ -20,6 +21,7 @@
 - Windows and Linux versions (docs/SPEC-windows.md, docs/SPEC-linux.md) — only when Oleh says; stage 0 (fact checks in VMs) first
 
 **Needs Oleh:**
+- merge the approvals PR; then Settings → Claude Code → «Обновить hooks» once (PermissionRequest timeout 5 → 300 s)
 - try the new panel: hover a session row, click a project, the profile menu with two profiles
 - hover over the menu bar item and the panel icons: tooltips should name what each one is
 - on a laptop: Settings → «Модули» → «Не спать» → «Разрешить…» (admin password once), then «И с закрытой крышкой»
@@ -50,6 +52,12 @@
 - hooks are installed in ~/.claude/settings.json; backup of the original: ~/.claude/settings.json.claudepult-backup-20261029T192827
 - delete or archive the old repo `OlehDemishev/ClaudeBar`; turn on start at login if wanted
 <!-- summary:end -->
+
+## 2026-10-30 — Answer permission requests from notifications and the panel (branch `feat/approve-from-notification`)
+
+Done: when a Claude Code session asks for a permission, the macOS notification gets «Разрешить» / «Отклонить» (and «Показать»), and the waiting session row in the panel shows the command with the same two buttons. Hook format 2 writes a request file and waits up to 290 s for ClaudePult's answer, printing the PermissionRequest decision; Claude's own dialog stays on screen (checked live: it appears within ~2 s regardless of the hook), whichever answer comes first wins. Waits only while ClaudePult runs with the option on (Settings → Claude Code, default on). PermissionRequest timeout 5 → 300 s (status «нужно обновить» until «Обновить hooks»); the script itself updates without it. 13 languages.
+Checked: 212 tests green (incl. the real python hook: allow, deny, no ClaudePult, answered in Claude); live end to end with Claude Code 2.1.314 in an isolated settings file: panel button → «Allowed by PermissionRequest hook», file created.
+Left: banner buttons by hand; Oleh's own hooks need «Обновить hooks». Also during the check the Terminal `claude` auto-updated to 2.1.314 and broke (npm left the old version in a temp folder); reinstalled with Oleh's OK, the old 2.1.312 copy moved to the session scratchpad.
 
 ## 2026-10-30 — Panel as cards, design variant A (branch `feat/panel-cards`)
 

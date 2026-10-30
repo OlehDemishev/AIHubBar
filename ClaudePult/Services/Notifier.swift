@@ -13,6 +13,8 @@ enum NotificationTarget: Equatable, Sendable {
     case file(path: String)
     /// One of ClaudePult's windows (the cleanup output).
     case window(id: String)
+    /// A permission Claude asked for: «Разрешить» / «Отклонить» right on the banner.
+    case approval(sessionID: String, requestID: String)
     case none
 
     var userInfo: [String: String] {
@@ -21,6 +23,7 @@ enum NotificationTarget: Equatable, Sendable {
         case let .run(id, pullRequest): ["target": "run", "id": id, "pr": pullRequest ?? ""]
         case let .file(path): ["target": "file", "path": path]
         case let .window(id): ["target": "window", "id": id]
+        case let .approval(sessionID, requestID): ["target": "approval", "id": sessionID, "request": requestID]
         case .none: [:]
         }
     }
@@ -32,6 +35,8 @@ enum NotificationTarget: Equatable, Sendable {
         case "run" where !value("id").isEmpty: self = .run(id: value("id"), pullRequest: value("pr").isEmpty ? nil : value("pr"))
         case "file" where !value("path").isEmpty: self = .file(path: value("path"))
         case "window" where !value("id").isEmpty: self = .window(id: value("id"))
+        case "approval" where !value("id").isEmpty && !value("request").isEmpty:
+            self = .approval(sessionID: value("id"), requestID: value("request"))
         default: self = .none
         }
     }
@@ -40,6 +45,7 @@ enum NotificationTarget: Equatable, Sendable {
     var category: String? {
         switch self {
         case .session: NotificationAction.sessionCategory
+        case .approval: NotificationAction.approvalCategory
         case let .run(_, pullRequest): pullRequest == nil ? NotificationAction.runCategory : NotificationAction.runWithPRCategory
         case .file, .window, .none: nil
         }
@@ -51,6 +57,9 @@ enum NotificationAction {
     static let show = "show"
     static let openPR = "open-pr"
     static let log = "log"
+    static let allow = "allow"
+    static let deny = "deny"
+    static let approvalCategory = "approval"
 
     static let sessionCategory = "session"
     static let runCategory = "run"
@@ -58,6 +67,7 @@ enum NotificationAction {
 
     enum Resolution: Equatable {
         case showSession(id: String)
+        case decide(requestID: String, allow: Bool)
         case openURL(URL)
         case openRunLog(id: String)
         case openFile(path: String)
@@ -78,6 +88,10 @@ enum NotificationAction {
             return .openFile(path: path)
         case let .window(id):
             return .openWindow(id: id)
+        case let .approval(sessionID, requestID):
+            if action == allow { return .decide(requestID: requestID, allow: true) }
+            if action == deny { return .decide(requestID: requestID, allow: false) }
+            return .showSession(id: sessionID)
         case .none:
             return .nothing
         }
@@ -87,7 +101,11 @@ enum NotificationAction {
         let show = UNNotificationAction(identifier: show, title: String(localized: "Показать"), options: [.foreground])
         let pr = UNNotificationAction(identifier: openPR, title: String(localized: "Открыть PR"), options: [.foreground])
         let log = UNNotificationAction(identifier: log, title: String(localized: "Журнал"), options: [.foreground])
+        // No `.foreground`: the answer goes to Claude without bringing anything to the front.
+        let allow = UNNotificationAction(identifier: allow, title: String(localized: "Разрешить"), options: [])
+        let deny = UNNotificationAction(identifier: deny, title: String(localized: "Отклонить"), options: [.destructive])
         return [
+            UNNotificationCategory(identifier: approvalCategory, actions: [allow, deny, show], intentIdentifiers: []),
             UNNotificationCategory(identifier: sessionCategory, actions: [show], intentIdentifiers: []),
             UNNotificationCategory(identifier: runCategory, actions: [log], intentIdentifiers: []),
             UNNotificationCategory(identifier: runWithPRCategory, actions: [pr, log], intentIdentifiers: []),

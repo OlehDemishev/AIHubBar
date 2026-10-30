@@ -1,7 +1,8 @@
 import Foundation
 
-/// The Claude Code hook installed to Application Support. It must never affect Claude:
+/// The Claude Code hook installed to Application Support. It must never affect Claude on its own:
 /// no stdout (SessionStart/UserPromptSubmit stdout would enter Claude's context), no stderr, always exit 0.
+/// The one exception is an answer the person gave in ClaudePult to a PermissionRequest (see `ApprovalFiles`).
 /// Events and fields follow code.claude.com/docs/en/hooks (checked 2026-10-29, see DECISIONS.md).
 enum HookScript {
     static func write(to url: URL) throws {
@@ -12,14 +13,17 @@ enum HookScript {
 
     static let source = #"""
     #!/usr/bin/python3
-    # ClaudePult hook, format 1. Installed by ClaudePult.app; records Claude Code session state in
+    # ClaudePult hook, format 2. Installed by ClaudePult.app; records Claude Code session state in
     # ~/Library/Application Support/ClaudePult/sessions/<session_id>.json for the menu bar app.
-    # Prints nothing and always exits 0, so it can never change what Claude does.
-    import datetime, fcntl, json, os, re, subprocess, sys
+    # Always exits 0 and prints nothing, except on PermissionRequest when the person answered «Разрешить» or
+    # «Отклонить» in ClaudePult: then it prints that decision. Claude shows its own dialog meanwhile.
+    import datetime, fcntl, json, os, re, signal, subprocess, sys, time, uuid
 
     WAITING_NOTIFICATIONS = {"permission_prompt", "elicitation_dialog", "elicitation_url_dialog", "agent_needs_input"}
     CLAUDE_NAMES = {"claude", "claude.exe"}
     PROMPT_LIMIT = 200
+    APPROVAL_WAIT = 290
+    ALIVE_WITHIN = 30
 
 
     def arg(name, default=None):
@@ -104,6 +108,65 @@ enum HookScript {
         record["event"] = event
 
 
+    def approvals_alive(directory):
+        try:
+            return time.time() - os.path.getmtime(os.path.join(directory, "alive")) < ALIVE_WITHIN
+        except Exception:
+            return False
+
+
+    def open_request(data, directory, session_id):
+        """Asks ClaudePult (only while it runs with the option on): returns the request id or None."""
+        if not approvals_alive(directory):
+            return None
+        tool_input = data.get("tool_input") or {}
+        summary = ""
+        for key in ("command", "file_path", "url", "pattern", "description", "prompt"):
+            if isinstance(tool_input, dict) and tool_input.get(key):
+                summary = clip(str(tool_input[key]))
+                break
+        request_id = uuid.uuid4().hex
+        project, _ = project_of(data.get("cwd"), arg("--projects-dir"))
+        request = {"id": request_id, "session_id": session_id, "project": project or os.path.basename(data.get("cwd") or ""),
+                   "tool": str(data.get("tool_name") or ""), "summary": summary, "created": time.time(), "pid": os.getpid()}
+        tmp = os.path.join(directory, request_id + ".tmp")
+        with open(tmp, "w") as f:
+            json.dump(request, f, ensure_ascii=False)
+        os.replace(tmp, os.path.join(directory, request_id + ".request.json"))
+        return request_id
+
+
+    def wait_for_decision(directory, request_id, record_path):
+        """allow / deny from ClaudePult, or None: answered in Claude, ClaudePult gone, or too late."""
+        started = time.time()
+        decision_path = os.path.join(directory, request_id + ".decision")
+        try:
+            while time.time() - started < APPROVAL_WAIT:
+                try:
+                    with open(decision_path) as f:
+                        behavior = f.read().strip()
+                    if behavior in ("allow", "deny"):
+                        return behavior
+                except FileNotFoundError:
+                    pass
+                try:
+                    with open(record_path) as f:
+                        if json.load(f).get("event") not in ("PermissionRequest", "Notification"):
+                            return None
+                except Exception:
+                    pass
+                if not approvals_alive(directory):
+                    return None
+                time.sleep(0.5)
+            return None
+        finally:
+            for suffix in (".request.json", ".decision"):
+                try:
+                    os.remove(os.path.join(directory, request_id + suffix))
+                except Exception:
+                    pass
+
+
     def main():
         data = json.load(sys.stdin)
         session_id = str(data.get("session_id") or "")
@@ -112,6 +175,15 @@ enum HookScript {
         directory = arg("--sessions-dir") or os.path.expanduser("~/Library/Application Support/ClaudePult/sessions")
         os.makedirs(directory, exist_ok=True)
         path = os.path.join(directory, session_id + ".json")
+
+        # The request goes first, so ClaudePult sees it together with the «waiting» state.
+        request_id = None
+        approvals = os.path.join(os.path.dirname(directory), "approvals")
+        if data.get("hook_event_name") == "PermissionRequest":
+            try:
+                request_id = open_request(data, approvals, session_id)
+            except Exception:
+                request_id = None
 
         with open(os.path.join(directory, ".lock"), "w") as lock:
             fcntl.flock(lock, fcntl.LOCK_EX)
@@ -152,8 +224,21 @@ enum HookScript {
                 json.dump(record, f, ensure_ascii=False, indent=1)
             os.replace(tmp, path)
 
+        if request_id:
+            behavior = wait_for_decision(approvals, request_id, path)
+            if behavior == "allow":
+                decision = {"behavior": "allow"}
+            elif behavior == "deny":
+                decision = {"behavior": "deny", "message": "Отклонено в ClaudePult"}
+            else:
+                return
+            sys.__stdout__.write(json.dumps({"hookSpecificOutput": {"hookEventName": "PermissionRequest", "decision": decision}}))
+            sys.__stdout__.flush()
+
 
     if __name__ == "__main__":
+        # Claude cancels a hook at its timeout: leave through `finally`, so the request files go too.
+        signal.signal(signal.SIGTERM, lambda *_: sys.exit(0))
         try:
             sys.stderr = open(os.devnull, "w")
             main()

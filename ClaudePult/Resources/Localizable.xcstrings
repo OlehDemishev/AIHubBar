@@ -4784,6 +4784,82 @@
         }
       }
     },
+    "Claude просит разрешение — %@": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يطلب Claude إذنًا — %@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude bittet um Erlaubnis — %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude asks for permission — %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude pide permiso — %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude demande une autorisation — %@"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude meminta izin — %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude chiede un permesso — %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude が許可を求めています — %@"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude가 권한을 요청합니다 — %@"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude prosi o zgodę — %@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude pede permissão — %@"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude просить дозвіл — %@"
+          }
+        }
+      }
+    },
     "ClaudePult": {},
     "ClaudePult живёт в строке меню (✦): проекты, лимиты подписки Claude, сессии и команды для AI — в одной панели. Сначала проверим, что всё готово, потом настроим первый профиль.": {
       "localizations": {
@@ -23750,6 +23826,82 @@
         }
       }
     },
+    "Когда Claude просит разрешение (команда, правка файла), в уведомлении и в строке сессии появляются «Разрешить» и «Отклонить». Диалог Claude при этом тоже на месте — работает тот ответ, что пришёл первым. В режиме auto Claude спрашивает редко. Если у hooks написано «нужно обновить», нажмите «Обновить hooks».": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "عندما يطلب Claude إذنًا (أمر أو تعديل ملف) يظهر «السماح» و«رفض» في الإشعار وفي سطر الجلسة. ويبقى حوار Claude أيضًا — يُعتمد الرد الذي يصل أولًا. في وضع auto نادرًا ما يسأل Claude. إذا ظهر عند hooks «يلزم التحديث» فاضغط «تحديث hooks»."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wenn Claude um Erlaubnis bittet (ein Befehl, eine Dateiänderung), erscheinen „Erlauben“ und „Ablehnen“ in der Mitteilung und in der Sitzungszeile. Claudes eigener Dialog bleibt auch – es gilt die Antwort, die zuerst kommt. Im Auto-Modus fragt Claude selten. Steht bei den Hooks „Aktualisierung nötig“, klicken Sie „Hooks aktualisieren“."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "When Claude asks for permission (a command, a file edit), «Allow» and «Deny» appear in the notification and in the session row. Claude’s own dialog stays too — whichever answer comes first applies. In auto mode Claude rarely asks. If hooks say «update needed», press «Update hooks»."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cuando Claude pide permiso (un comando, editar un archivo), aparecen «Permitir» y «Rechazar» en la notificación y en la fila de la sesión. El diálogo de Claude también sigue ahí: vale la respuesta que llegue primero. En modo auto Claude pregunta poco. Si los hooks dicen «hay que actualizar», pulsa «Actualizar hooks»."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quand Claude demande une autorisation (une commande, une modification de fichier), « Autoriser » et « Refuser » apparaissent dans la notification et la ligne de la session. La boîte de dialogue de Claude reste aussi : la première réponse l’emporte. En mode auto, Claude demande rarement. Si les hooks indiquent « mise à jour nécessaire », cliquez « Mettre à jour les hooks »."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Saat Claude meminta izin (perintah, edit file), «Izinkan» dan «Tolak» muncul di notifikasi dan baris sesi. Dialog Claude sendiri tetap ada — jawaban yang datang lebih dulu yang berlaku. Dalam mode auto Claude jarang bertanya. Jika hook bertuliskan «perlu diperbarui», tekan «Perbarui hook»."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quando Claude chiede un permesso (un comando, una modifica a un file), «Consenti» e «Rifiuta» compaiono nella notifica e nella riga della sessione. Anche la finestra di Claude resta: vale la risposta che arriva prima. In modalità auto Claude chiede di rado. Se gli hook dicono «serve un aggiornamento», premi «Aggiorna hook»."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude が許可を求めると（コマンドやファイル編集）、通知とセッションの行に「許可」と「拒否」が表示されます。Claude 自身のダイアログも残り、先に届いた回答が適用されます。auto モードでは Claude はあまり尋ねません。hooks に「更新が必要」と出ていたら「hooks を更新」を押してください。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude가 권한을 요청하면(명령 실행, 파일 편집) 알림과 세션 행에 «허용»과 «거부»가 나타납니다. Claude 자체 대화 상자도 그대로 있으며, 먼저 온 응답이 적용됩니다. auto 모드에서는 Claude가 거의 묻지 않습니다. hooks에 «업데이트 필요»가 표시되면 «hooks 업데이트»를 누르세요."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gdy Claude prosi o zgodę (polecenie, edycja pliku), w powiadomieniu i wierszu sesji pojawiają się „Zezwól” i „Odrzuć”. Okno Claude też zostaje — liczy się odpowiedź, która przyjdzie pierwsza. W trybie auto Claude pyta rzadko. Jeśli przy hookach jest „wymaga aktualizacji”, kliknij „Zaktualizuj hooki”."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quando o Claude pede permissão (um comando, editar um arquivo), «Permitir» e «Recusar» aparecem na notificação e na linha da sessão. O diálogo do Claude continua lá — vale a resposta que chegar primeiro. No modo auto o Claude pergunta pouco. Se os hooks disserem «precisa atualizar», toque em «Atualizar hooks»."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Коли Claude просить дозвіл (команда, правка файлу), у сповіщенні й у рядку сесії з’являються «Дозволити» і «Відхилити». Діалог Claude теж лишається — діє та відповідь, що надійшла першою. У режимі auto Claude питає рідко. Якщо біля hooks написано «потрібно оновити», натисніть «Оновити hooks»."
+          }
+        }
+      }
+    },
     "Когда вход истёк (claude давно не запускался, а работа идёт в приложении Claude), ClaudePult отправляет через claude запрос из одного слова — самая маленькая модель, без инструментов, не чаще раза в час. Вход продлевается примерно на 8 часов.": {
       "localizations": {
         "ar": {
@@ -34718,6 +34870,82 @@
         }
       }
     },
+    "Отвечать на запросы разрешений из уведомлений и панели": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الرد على طلبات الإذن من الإشعارات واللوحة"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Berechtigungsanfragen in Mitteilungen und im Panel beantworten"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Answer permission requests from notifications and the panel"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Responder a las solicitudes de permiso desde notificaciones y el panel"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Répondre aux demandes d’autorisation depuis les notifications et le panneau"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jawab permintaan izin dari notifikasi dan panel"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rispondi alle richieste di permesso da notifiche e pannello"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "通知とパネルから許可リクエストに応答"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "알림과 패널에서 권한 요청에 응답"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Odpowiadaj na prośby o zgodę z powiadomień i panelu"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Responder a pedidos de permissão nas notificações e no painel"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Відповідати на запити дозволів зі сповіщень і панелі"
+          }
+        }
+      }
+    },
     "Отдельная рабочая копия git (worktree)": {
       "localizations": {
         "ar": {
@@ -34866,6 +35094,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Відхилено правилами фону: %@"
+          }
+        }
+      }
+    },
+    "Отклонить": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "رفض"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ablehnen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deny"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rechazar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Refuser"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tolak"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rifiuta"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "拒否"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "거부"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Odrzuć"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recusar"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Відхилити"
           }
         }
       }
