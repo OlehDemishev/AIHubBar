@@ -1,12 +1,11 @@
 # Status
 
 <!-- summary:start -->
-**Stage:** SPEC-modes done except signing/updates; SPEC-profiles done (stages 1–6, second wave: clipboard and notes)
+**Stage:** SPEC-modes done except signing/updates; SPEC-profiles done (stages 1–6 and the second wave)
 **Updated:** 2026-10-30
 
 **Now:**
-- «Не спать» with the lid closed (branch `feat/lid-closed-awake`, PR open, waits for Oleh's merge)
-- «История буфера» and «Заметки» modules merged (PR #87)
+- second wave merged: «История буфера» and «Заметки» (PR #87), «Не спать» with the lid closed (PR #89)
 - release without an Apple Developer account merged (PR #85): Sparkle, self-signed signing, `scripts/release.sh`, MIT license; nothing published yet
 - Windows and Linux specs merged (PR #73); implementation waits for Oleh
 
@@ -18,7 +17,7 @@
 - Windows and Linux versions (docs/SPEC-windows.md, docs/SPEC-linux.md) — only when Oleh says; stage 0 (fact checks in VMs) first
 
 **Needs Oleh:**
-- merge the lid-closed PR; on a laptop: Settings → «Модули» → «Не спать» → «Разрешить…» (admin password once), then «И с закрытой крышкой»
+- on a laptop: Settings → «Модули» → «Не спать» → «Разрешить…» (admin password once), then «И с закрытой крышкой»
 - on this Mac mini sleep is already off system-wide (`SleepDisabled 1`, set by Vorssaint's `/etc/sudoers.d/vorssaint-clamshell`): the Mac never sleeps while it stays so; `sudo pmset -a disablesleep 0` turns it back on if Vorssaint isn't needed
 - try «История буфера» and «Заметки»: Settings → «Модули» → «Установить» (copy, pin, search; type a note)
 - check the Trash for a test note «Заметка.md» from an early test run and delete it
