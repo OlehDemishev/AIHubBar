@@ -5,6 +5,7 @@
 **Updated:** 2026-10-30
 
 **Now:**
+- menu bar elements reordered by dragging merged (this PR)
 - hover hints for icon-only controls and the menu bar item merged (PR #91)
 - second wave merged: «История буфера» and «Заметки» (PR #87), «Не спать» with the lid closed (PR #89)
 - release without an Apple Developer account merged (PR #85): Sparkle, self-signed signing, `scripts/release.sh`, MIT license; nothing published yet
@@ -12,7 +13,6 @@
 
 **Next:**
 - standing rule (SPEC §3.1): every new icon-only control gets a hover hint; finish each UI stage with the accessibility walk
-- menu bar elements reordered by dragging (needs a different list than a grouped Form)
 - fix whatever Oleh finds in the translations (machine translation; native review for ja, ko, ar at least)
 - stage 8 rest: Developer ID signing and notarization, Sparkle updates — once Oleh decides on Developer ID, the name and where updates are hosted
 - Fix whatever Oleh finds in docs/CHECKLIST.md
@@ -48,6 +48,12 @@
 - hooks are installed in ~/.claude/settings.json; backup of the original: ~/.claude/settings.json.claudepult-backup-20261029T192827
 - delete or archive the old repo `OlehDemishev/ClaudeBar`; turn on start at login if wanted
 <!-- summary:end -->
+
+## 2026-10-30 — Menu bar elements reordered by dragging (branch `feat/menubar-drag`)
+
+Done: Settings → «Строка меню» shows the switched-on elements as chips under the preview, in menu bar order; dragging one onto another moves it there (rightwards after, leftwards before — `MenuBarConfig.move(_:onto:)`), each chip's hover hint is the element's full name. The grouped Form keeps its ˄ ˅ buttons. 13 languages.
+Checked: 203 tests green; live: «Ждут» dragged onto «Значок» with real mouse events moved to the front; Oleh's profile and menu bar settings restored.
+Left: —
 
 ## 2026-10-30 — Hover hints for icon-only controls (branch `feat/hover-hints`)
 

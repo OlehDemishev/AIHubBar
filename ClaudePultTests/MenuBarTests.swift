@@ -77,6 +77,24 @@ struct MenuBarComposerTests {
         #expect(MenuBarComposer.accessibilityText(config, data) == "ClaudePult, сессия 40 %")
     }
 
+    @Test func dragMovesOntoTarget() {
+        var config = MenuBarConfig.make(.limits)
+        func order() -> [MenuBarElement.Kind] { config.elements.map(\.kind) }
+        let start = order()
+        // Rightwards: lands after the target.
+        config.move(start[0], onto: start[2])
+        #expect(Array(order().prefix(3)) == [start[1], start[2], start[0]])
+        // Leftwards: lands before it.
+        config.move(start[0], onto: start[1])
+        #expect(Array(order().prefix(3)) == [start[0], start[1], start[2]])
+        // Onto itself or an unknown element: nothing changes.
+        config.move(start[0], onto: start[0])
+        #expect(order() == start)
+        // Every element stays exactly once.
+        config.move(start.last!, onto: start[0])
+        #expect(Set(order()) == Set(start) && order().count == start.count && order().first == start.last)
+    }
+
     @Test func plainSymbolOnlyWithoutExtras() {
         let config = MenuBarConfig.make(.limits)
         #expect(MenuBarComposer.plainSymbol(MenuBarComposer.groups(config, MenuBarData())) == "sparkle")
