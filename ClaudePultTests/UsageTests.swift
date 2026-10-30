@@ -248,3 +248,10 @@ struct UsageBackoffTests {
         #expect(UsageStore.backoff(strike: 1, retryAfter: 99_999) == 3600)
     }
 }
+
+struct UsageErrorTextTests {
+    @Test func expiredTokenIsNotALoginProblem() {
+        #expect(UsageError.expired.errorDescription?.contains("обновится при следующем запуске claude") == true)
+        #expect(UsageError.noCredentials.errorDescription == "Войдите в Claude Code: claude → /login")
+    }
+}

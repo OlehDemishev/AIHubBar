@@ -102,8 +102,9 @@ final class UsageStore {
             error = "Сервер лимитов просит запрашивать реже — следующая попытка в \(until.formatted(date: .omitted, time: .shortened))"
             AppLog.error("Usage: HTTP 429, pause \(Int(pause / 60)) min (strike \(rateLimitStrikes), Retry-After \(retryAfter.map { "\(Int($0)) s" } ?? "none"))")
         } catch {
+            // The same failure repeats every few minutes; log it once.
+            if self.error != error.localizedDescription { AppLog.error("Usage refresh failed: \(error.localizedDescription)") }
             self.error = error.localizedDescription
-            AppLog.error("Usage refresh failed: \(error.localizedDescription)")
         }
     }
 

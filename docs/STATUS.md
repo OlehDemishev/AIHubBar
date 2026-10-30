@@ -5,13 +5,14 @@
 **Updated:** 2026-10-30
 
 **Now:**
-- menu bar builder merged (PR #31); next: small fix of the «Войдите в Claude Code» message on an expired token, then SPEC-modes §9 stage 3 (AI services)
+- expired-token message fix in PR (branch `fix/token-expired-message`); then SPEC-modes §9 stage 3 (AI services)
 
 **Next:**
 - SPEC-modes §9: 3 AI services, 4 folder projects + commands, 5 calendar, 6 templates, 7 setup assistant, 8 for everyone, 9 languages (§13: en, es, pt-BR, fr, de, ja, id, ko, it, ar with RTL, pl, uk)
 - Fix whatever Oleh finds in docs/CHECKLIST.md
 
 **Needs Oleh:**
+- merge the expired-token message fix; the limits come back after the next `claude` request in Terminal
 - try Settings → «Строка меню» (presets, order, options, preview) and the ticking reset countdown
 - try Settings → Режимы (duplicate the mode → switcher appears in the panel) and a double-click on a .claudepult file
 - read and edit docs/TEMPLATES.md (template texts) before stage 6
@@ -23,6 +24,12 @@
 - hooks are installed in ~/.claude/settings.json; backup of the original: ~/.claude/settings.json.claudepult-backup-20261029T192827
 - delete or archive the old repo `OlehDemishev/ClaudeBar`; turn on start at login if wanted
 <!-- summary:end -->
+
+## 2026-10-30 — Expired Claude Code token message (branch `fix/token-expired-message`)
+
+Done: when the OAuth token in the Keychain has expired, the limits block now says «Вход Claude Code устарел — обновится при следующем запуске claude в Терминале (если нет: claude → /login)» instead of asking to log in; a missing token still asks to log in. A repeated usage error is logged once, not every 2 minutes.
+Checked: `scripts/build-and-install.sh --test` green incl. a test for both texts; installed, the log shows the new text. Found: the Keychain item «Claude Code-credentials» expired at 02:22 and is not renewed by Claude Code inside the desktop app (it has its own login) nor by `claude auth status`; only a real request from the terminal `claude` renews it (not run here, to keep Oleh's limits untouched). CI not set up; checks run locally.
+Left: ClaudePult itself never refreshes the token (by design, SPEC §2.8).
 
 ## 2026-10-30 — Menu bar builder (branch `feat/menubar-builder`)
 
