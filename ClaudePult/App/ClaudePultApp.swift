@@ -15,6 +15,8 @@ struct ClaudePultApp: App {
     @State private var requests: AppRequests
     @State private var usage: UsageStore
     @State private var hub: HubLimitsStore
+    @State private var sessionChanges = SessionChangesStore()
+    @State private var weeklySummary: WeeklySummarySender
     @State private var monitor: SystemMonitor
     @State private var keepAwake: KeepAwakeController
     @State private var quickTools: QuickToolsController
@@ -69,6 +71,7 @@ struct ClaudePultApp: App {
         _runs = State(initialValue: runs)
         _engine = State(initialValue: CommandEngine(settings: settings, runs: runs))
         let launcher = LaunchController(settings: settings, store: store, runs: runs, usage: usage)
+        _weeklySummary = State(initialValue: WeeklySummarySender(settings: settings, usage: usage, runs: runs))
         _launcher = State(initialValue: launcher)
         let hooks = HookController(settings: settings)
         _hooks = State(initialValue: hooks)
@@ -125,6 +128,7 @@ struct ClaudePultApp: App {
             requests.listen(commands: commands)
             usage.start()
             hub.start()
+            weeklySummary.start()
             monitor.start()
             keepAwake.start()
             GlobalHotKey.register(settings.panelHotKey)
@@ -200,6 +204,7 @@ struct ClaudePultApp: App {
                 .environment(commands)
                 .environment(usage)
                 .environment(hub)
+                .environment(sessionChanges)
                 .environment(monitor)
                 .environment(keepAwake)
                 .environment(quickTools)
@@ -296,6 +301,7 @@ struct ClaudePultApp: App {
                 .environment(hooks)
                 .environment(usage)
                 .environment(hub)
+                .environment(sessionChanges)
                 .environment(monitor)
                 .environment(keepAwake)
                 .environment(quickTools)
@@ -307,6 +313,7 @@ struct ClaudePultApp: App {
                 .environment(engine)
                 .environment(calendar)
                 .environment(telegramApprovals)
+                .environment(weeklySummary)
         }
     }
 }

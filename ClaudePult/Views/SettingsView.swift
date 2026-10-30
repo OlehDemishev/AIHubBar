@@ -740,7 +740,9 @@ private struct SessionSection: View {
 private struct LimitSection: View {
     @Environment(AppSettings.self) private var settings
     @Environment(UsageStore.self) private var usage
+    @Environment(WeeklySummarySender.self) private var weeklySummary
     @State private var thresholdsText = ""
+    @State private var summarySent: Bool?
 
     var body: some View {
         @Bindable var settings = settings
@@ -761,6 +763,37 @@ private struct LimitSection: View {
                     }
                 }
                 Text("Когда сессия или неделя дошла до порога, фоновые задачи замирают там, где были, а запланированные ждут. После сброса лимита работа продолжается сама. Так задача не обрывается на полпути из-за лимита.")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            VStack(alignment: .leading, spacing: 4) {
+                Toggle("Сводка за неделю в Telegram", isOn: $settings.weeklySummary)
+                if settings.weeklySummary {
+                    HStack {
+                        Picker("День", selection: $settings.weeklySummaryWeekday) {
+                            ForEach(1...7, id: \.self) { day in
+                                Text(Calendar.current.standaloneWeekdaySymbols[day - 1].capitalized).tag(day)
+                            }
+                        }
+                        Picker("Час", selection: $settings.weeklySummaryHour) {
+                            ForEach(6...23, id: \.self) { Text(String(format: "%02d:00", $0)).tag($0) }
+                        }
+                        .frame(width: 140)
+                    }
+                }
+                HStack {
+                    Button("Отправить сейчас") {
+                        Task { summarySent = await weeklySummary.send() }
+                    }
+                    .controlSize(.small)
+                    if let summarySent {
+                        Text(summarySent ? String(localized: "Отправлено") : String(localized: "Не отправилось: нет бота в _daily-report/config.json или нет связи"))
+                            .font(.caption)
+                            .foregroundStyle(summarySent ? Color.secondary : Color.orange)
+                    }
+                }
+                Text("Своим сообщением, через бота ежедневного отчёта: расход недели по проектам, самые тяжёлые сессии, сколько раз упирался в лимит, итоги фоновых задач.")
                     .font(.caption)
                     .foregroundStyle(.secondary)
                     .fixedSize(horizontal: false, vertical: true)

@@ -86,8 +86,15 @@ private struct SessionRowView: View {
     @Environment(RunStore.self) private var runs
     @Environment(SessionStore.self) private var sessions
     @Environment(LaunchController.self) private var launcher
+    @Environment(SessionChangesStore.self) private var changesStore
     @Environment(\.openWindow) private var openWindow
     @State private var isHovered = false
+    @State private var showsChanges = false
+
+    private var folder: String? { row.session?.cwd ?? row.run?.folder }
+    private var changes: SessionChanges? {
+        folder.flatMap { changesStore.changes(folder: $0, since: row.startedAt) }.flatMap { $0.isEmpty ? nil : $0 }
+    }
 
     private var inBackground: Bool { row.run != nil && row.state == .running }
     private var paused: Bool { row.run?.isPaused == true }
@@ -123,6 +130,20 @@ private struct SessionRowView: View {
                     .truncationMode(.tail)
                     .foregroundStyle(action == nil && row.task == nil ? .tertiary : .secondary)
                 Spacer(minLength: 4)
+                if let changes, let folder {
+                    Button { showsChanges.toggle() } label: {
+                        Text(changes.summary)
+                            .scaledFont(.caption)
+                            .monospacedDigit()
+                            .foregroundStyle(.secondary)
+                    }
+                    .buttonStyle(.borderless)
+                    .fixedSize()
+                    .help("Что изменила сессия с начала (git): файлы и строки, включая закоммиченное. Клик — список")
+                    .popover(isPresented: $showsChanges, arrowEdge: .bottom) {
+                        SessionChangesView(changes: changes, folder: folder)
+                    }
+                }
                 if let context = row.context, context >= ContextUsage.warnAt {
                     Text("контекст \(Int((context * 100).rounded())) %")
                         .scaledFont(.caption)
@@ -180,6 +201,10 @@ private struct SessionRowView: View {
         // The whole row opens the session (or a background run's log), not only the icon on hover.
         .contentShape(Rectangle())
         .onTapGesture(perform: open)
+        .task(id: row.session?.updatedAt ?? row.run?.finishedAt ?? row.startedAt) {
+            guard let folder, row.state != .ended else { return }
+            await changesStore.refresh(folder: folder, since: row.startedAt)
+        }
         .onHover { isHovered = $0 }
         .animation(.easeOut(duration: 0.12), value: isHovered)
         .help([inBackground ? String(localized: "в фоне") : row.state.title, action == nil ? nil : row.task, row.session?.cwd ?? row.run?.folder,
@@ -231,6 +256,66 @@ private struct SessionRowView: View {
         }
         .buttonStyle(.borderless)
         .scaledFont(.callout)
+    }
+}
+
+/// The files a session changed: click one to open it.
+private struct SessionChangesView: View {
+    let changes: SessionChanges
+    let folder: String
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            HStack {
+                Text("Изменения сессии").font(.headline)
+                Spacer()
+                Text(changes.summary).font(.caption).foregroundStyle(.secondary).monospacedDigit()
+            }
+            ScrollView {
+                VStack(alignment: .leading, spacing: 2) {
+                    ForEach(changes.files) { file in
+                        Button { open(file) } label: {
+                            HStack(spacing: 6) {
+                                Text(file.path)
+                                    .lineLimit(1)
+                                    .truncationMode(.head)
+                                Spacer(minLength: 8)
+                                if file.isNew {
+                                    Text("новый").foregroundStyle(.green)
+                                } else if let added = file.added, let removed = file.removed {
+                                    Text("+\(added)").foregroundStyle(.green)
+                                    Text("−\(removed)").foregroundStyle(.red)
+                                } else {
+                                    Text("двоичный").foregroundStyle(.secondary)
+                                }
+                            }
+                            .font(.callout.monospacedDigit())
+                            .contentShape(Rectangle())
+                        }
+                        .buttonStyle(.plain)
+                        .help("Открыть \(file.path)")
+                    }
+                }
+            }
+            .frame(maxHeight: 260)
+            HStack {
+                Button("Показать папку") { NSWorkspace.shared.open(URL(fileURLWithPath: folder)) }
+                Spacer()
+                Text(folder).font(.caption2).foregroundStyle(.tertiary).lineLimit(1).truncationMode(.head)
+            }
+            .controlSize(.small)
+        }
+        .padding(12)
+        .frame(width: 380)
+    }
+
+    private func open(_ file: SessionChanges.File) {
+        let url = URL(fileURLWithPath: folder).appending(path: file.path)
+        if FileManager.default.fileExists(atPath: url.path) {
+            NSWorkspace.shared.open(url)
+        } else {
+            NSWorkspace.shared.activateFileViewerSelecting([url.deletingLastPathComponent()])
+        }
     }
 }
 

@@ -198,6 +198,19 @@ final class AppSettings {
         didSet { defaults.set(hiddenBlocks.map(\.rawValue).sorted(), forKey: Keys.hiddenBlocks) }
     }
 
+    /// «Неделя Claude» in Telegram: on/off, weekday (1 = Sunday … 7 = Saturday) and hour.
+    var weeklySummary: Bool {
+        didSet { defaults.set(weeklySummary, forKey: Keys.weeklySummary) }
+    }
+
+    var weeklySummaryWeekday: Int {
+        didSet { defaults.set(weeklySummaryWeekday, forKey: Keys.weeklySummaryWeekday) }
+    }
+
+    var weeklySummaryHour: Int {
+        didSet { defaults.set(weeklySummaryHour, forKey: Keys.weeklySummaryHour) }
+    }
+
     /// «Стоп-кран»: at this session or week usage background runs pause until the reset; 0 is off.
     var runGuardPercent: Int {
         didSet { defaults.set(runGuardPercent, forKey: Keys.runGuardPercent) }
@@ -300,6 +313,9 @@ final class AppSettings {
         hubGeminiDailyLimit = geminiLimit > 0 ? geminiLimit : 1000
         hubCursor = defaults.bool(forKey: Keys.hubCursor)
         runGuardPercent = defaults.object(forKey: Keys.runGuardPercent) as? Int ?? 95
+        weeklySummary = defaults.object(forKey: Keys.weeklySummary) as? Bool ?? true
+        weeklySummaryWeekday = defaults.object(forKey: Keys.weeklySummaryWeekday) as? Int ?? 1
+        weeklySummaryHour = defaults.object(forKey: Keys.weeklySummaryHour) as? Int ?? 19
     }
 
     var reportScript: String {
@@ -348,5 +364,8 @@ final class AppSettings {
         static let hubGeminiDailyLimit = "hubGeminiDailyLimit"
         static let hubCursor = "hubCursor"
         static let runGuardPercent = "runGuardPercent"
+        static let weeklySummary = "weeklySummary"
+        static let weeklySummaryWeekday = "weeklySummaryWeekday"
+        static let weeklySummaryHour = "weeklySummaryHour"
     }
 }
