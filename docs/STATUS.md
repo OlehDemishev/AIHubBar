@@ -52,6 +52,12 @@
 - delete or archive the old repo `OlehDemishev/ClaudeBar`; turn on start at login if wanted
 <!-- summary:end -->
 
+## 2026-10-30 — Session rows open on a click anywhere (branch `fix/session-row-click`)
+
+Done: Oleh asked for the whole session row to open the session, not only the icon that appears on hover. The row now has a full-width hit area: a session comes to the front (its Terminal tab, the Claude app session or the folder), a background run opens its log; the hover icons and the approval buttons keep working. The hint says «Клик — открыть». 13 languages.
+Checked: 234 tests green; live: clicking a fake session's task text opened its folder.
+Left: —
+
 ## 2026-10-30 — Renamed to AI Hub Bar (branch `feat/rename-ai-hub-bar`, on top of `feat/context-warning`)
 
 Done: the app is «AI Hub Bar»: `AI Hub Bar.app` (executable `AIHubBar`), every visible string in code and the 13 translations (34 catalog keys moved with their translations), widget and Shortcuts names, the install and release scripts (`AIHubBar-<version>.dmg`), README / GUIDE / RELEASE. Internal names stay (DECISIONS): bundle id, module, data and log folders, Keychain service, signing certificate, notes folder, repository.
