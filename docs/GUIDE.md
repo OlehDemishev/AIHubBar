@@ -35,7 +35,7 @@ The script installs `~/Applications/ClaudePult.app` and starts it.
 
 ## First start
 
-ClaudePult opens the assistant by itself. The first screen, **Welcome to ClaudePult**, checks what this Mac still needs. Each row has a button when something is left to do:
+ClaudePult starts empty: until you create a profile, the panel only offers **Assistant…** and **Import a file…**, and nothing runs in the background. It also opens the assistant by itself. The first screen, **Welcome to ClaudePult**, checks what this Mac still needs. Each row has a button when something is left to do:
 
 | Row | Why it matters | Needed? |
 |---|---|---|
@@ -47,8 +47,10 @@ ClaudePult opens the assistant by itself. The first screen, **Welcome to ClaudeP
 Next, the assistant asks a few more things:
 
 1. **Bring your settings over?** If you have a `.claudepult` file from another Mac or a colleague, import it and you are done. Otherwise choose **No, set up from scratch**.
-2. Pick a template or **From scratch**, then the folder where your projects live. ClaudePult looks inside and suggests a source: git repositories, or one folder per project.
-3. Set the stages, what each project row shows, the calendar, the AI service, the commands, where Claude runs and what it may do, the panel blocks, the menu bar, and the mode's name and icon. The right side shows a live preview.
+2. Pick a template or **From scratch**.
+3. **What the panel shows**: tick the modules this profile has — AI limits, agent sessions, projects, upcoming dates. Without projects the assistant skips the project questions.
+4. If the profile has projects, the folder where they live. ClaudePult looks inside and suggests a source: git repositories, or one folder per project.
+5. Set the stages, what each project row shows, the calendar, the AI service, the commands, where Claude runs and what it may do, the menu bar, and the profile's name and icon. The right side shows a live preview.
 
 You can skip any step: **Skip** keeps the template's choice. Everything can be changed later in **Settings… → Profiles**. To run the assistant again, go to **Settings… → Profiles → + → Assistant…**. The same readiness checks are at the top of the **Help** window.
 

@@ -6567,6 +6567,82 @@
         }
       }
     },
+    "«Ближайшее» берёт даты из проектов-папок: включите «Проекты» с папками.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تأخذ «القريب» التواريخ من مشاريع المجلدات: فعّل «المشاريع» مع المجلدات."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "„Demnächst“ nimmt die Daten aus Ordner-Projekten: „Projekte“ mit Ordnern einschalten."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«Upcoming» takes its dates from folder projects: turn on «Projects» with folders."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«Próximo» toma las fechas de los proyectos-carpeta: activa «Proyectos» con carpetas."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«À venir» prend ses dates dans les projets-dossiers : activez «Projets» avec des dossiers."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«Mendatang» mengambil tanggal dari proyek folder: aktifkan «Proyek» dengan folder."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«In arrivo» prende le date dai progetti-cartella: attiva «Progetti» con le cartelle."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「今後の予定」 はフォルダのプロジェクトから日付を取ります: フォルダで 「プロジェクト」 をオンにしてください。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«다가오는 일정»은 폴더 프로젝트에서 날짜를 가져옵니다: 폴더로 «프로젝트»를 켜세요."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«Najbliższe» bierze daty z projektów-folderów: włącz «Projekty» z folderami."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«Próximos» pega as datas dos projetos-pasta: ative «Projetos» com pastas."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«Найближче» бере дати з проєктів-папок: увімкніть «Проєкти» з папками."
+          }
+        }
+      }
+    },
     "«Готово» добавит профиль и сделает его текущим. Дальше всё правится в Настройках → «Профили».": {
       "localizations": {
         "ar": {
@@ -8083,82 +8159,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Блок у панелі: 7 днів наперед, прострочене червоним; клік відкриває проєкт або файл."
-          }
-        }
-      }
-    },
-    "Блоки панели": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "كتل اللوحة"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Panel-Blöcke"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Panel blocks"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bloques del panel"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Blocs du panneau"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Blok panel"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Blocchi del pannello"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "パネルのブロック"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "패널 블록"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bloki panelu"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Blocos do painel"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Блоки панелі"
           }
         }
       }
@@ -36699,6 +36699,82 @@
         }
       }
     },
+    "Профиль — это то, что будет в панели: лимиты AI, сессии, проекты с командами, календарь. Помощник соберёт его за пару минут.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ملف التعريف هو ما ستعرضه اللوحة: حدود الذكاء الاصطناعي، والجلسات، والمشاريع مع أوامرها، والتقويم. يُعدّه المساعد في دقيقتين."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ein Profil ist das, was das Panel zeigt: KI-Limits, Sitzungen, Projekte mit Befehlen, der Kalender. Der Assistent stellt eins in ein paar Minuten zusammen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A profile is what the panel will show: AI limits, sessions, projects with commands, the calendar. The assistant puts one together in a couple of minutes."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un perfil es lo que mostrará el panel: límites de IA, sesiones, proyectos con comandos, el calendario. El asistente lo arma en un par de minutos."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un profil, c’est ce que le panneau affichera : limites d’IA, sessions, projets avec leurs commandes, calendrier. L’assistant en crée un en quelques minutes."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Profil adalah isi panel: batas AI, sesi, proyek dengan perintah, kalender. Asisten menyusunnya dalam beberapa menit."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un profilo è ciò che mostrerà il pannello: limiti IA, sessioni, progetti con i comandi, il calendario. L’assistente ne prepara uno in un paio di minuti."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "プロファイルはパネルに表示する内容です: AI の上限、セッション、コマンド付きのプロジェクト、カレンダー。アシスタントが数分で作ります。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "프로필은 패널에 보일 내용입니다: AI 한도, 세션, 명령이 있는 프로젝트, 캘린더. 도우미가 몇 분 만에 만들어 줍니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Profil to to, co pokaże panel: limity AI, sesje, projekty z poleceniami, kalendarz. Asystent złoży go w parę minut."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Um perfil é o que o painel vai mostrar: limites de IA, sessões, projetos com comandos, o calendário. O assistente monta um em poucos minutos."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Профіль — це те, що буде в панелі: ліміти AI, сесії, проєкти з командами, календар. Помічник складе його за пару хвилин."
+          }
+        }
+      }
+    },
     "Публикация": {
       "localizations": {
         "ar": {
@@ -42103,6 +42179,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Сумісний з OpenAI"
+          }
+        }
+      }
+    },
+    "Создайте первый профиль": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "أنشئ ملف التعريف الأول"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Erstes Profil anlegen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Create your first profile"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Crea tu primer perfil"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Créez votre premier profil"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buat profil pertama"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Crea il tuo primo profilo"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "最初のプロファイルを作成"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "첫 프로필 만들기"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Utwórz pierwszy profil"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Crie seu primeiro perfil"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Створіть перший профіль"
           }
         }
       }
@@ -48263,6 +48415,158 @@
         }
       }
     },
+    "Что будет в панели": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ما تعرضه اللوحة"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Was das Panel zeigt"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "What the panel shows"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Qué mostrará el panel"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ce que montre le panneau"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Isi panel"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cosa mostra il pannello"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "パネルに表示する内容"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "패널에 보일 내용"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Co pokaże panel"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O que o painel mostra"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Що буде в панелі"
+          }
+        }
+      }
+    },
+    "Что будет в панели этого профиля. Порядок и всё остальное можно поменять потом в Настройках → «Профили».": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ما ستعرضه لوحة ملف التعريف هذا. يمكن تغيير الترتيب وكل ما تبقى لاحقًا من الإعدادات ← «ملفات التعريف»."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Was das Panel dieses Profils zeigt. Reihenfolge und alles Weitere lassen sich später unter Einstellungen → „Profile“ ändern."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "What this profile's panel shows. The order and everything else can be changed later in Settings → «Profiles»."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lo que mostrará el panel de este perfil. El orden y lo demás se cambian luego en Ajustes → «Perfiles»."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ce que montrera le panneau de ce profil. L’ordre et le reste se changent ensuite dans Réglages → «Profils»."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Isi panel profil ini. Urutan dan lainnya bisa diubah nanti di Pengaturan → «Profil»."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cosa mostra il pannello di questo profilo. L’ordine e il resto si cambiano poi in Impostazioni → «Profili»."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "このプロファイルのパネルに表示する内容。順番などはあとで 設定 → 「プロファイル」 で変えられます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이 프로필의 패널에 보일 내용. 순서와 나머지는 나중에 설정 → «프로필»에서 바꿀 수 있습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Co pokaże panel tego profilu. Kolejność i resztę zmienisz później w Ustawienia → «Profile»."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O que o painel deste perfil mostra. A ordem e o resto podem ser mudados depois em Ajustes → «Perfis»."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Що буде в панелі цього профілю. Порядок і решту можна змінити потім у Налаштування → «Профілі»."
+          }
+        }
+      }
+    },
     "Что в нём": {
       "localizations": {
         "ar": {
@@ -48411,82 +48715,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Що показувати"
-          }
-        }
-      }
-    },
-    "Что показывать в панели. Скрытое продолжает работать: лимиты и сессии отслеживаются, уведомления приходят.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ما تعرضه اللوحة. ما يُخفى يبقى عاملًا: تُتتبَّع الحدود والجلسات وتصل الإشعارات."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Was das Panel zeigt. Ausgeblendetes arbeitet weiter: Limits und Sitzungen werden verfolgt, Mitteilungen kommen an."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "What the panel shows. Hidden blocks keep working: limits and sessions are tracked, notifications arrive."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Qué muestra el panel. Lo oculto sigue funcionando: los límites y las sesiones se siguen, las notificaciones llegan."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ce qu'affiche le panneau. Ce qui est masqué continue de fonctionner : les limites et les sessions sont suivies, les notifications arrivent."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Apa yang ditampilkan panel. Yang disembunyikan tetap bekerja: batas dan sesi dipantau, pemberitahuan tetap datang."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cosa mostra il pannello. Ciò che è nascosto continua a funzionare: limiti e sessioni sono seguiti, le notifiche arrivano."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "パネルに表示する内容。非表示のものも動き続けます: 制限とセッションは追跡され、通知も届きます。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "패널에 보일 내용. 숨긴 것도 계속 작동합니다: 한도와 세션을 추적하고 알림도 옵니다."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Co pokazuje panel. Ukryte dalej działa: limity i sesje są śledzone, powiadomienia przychodzą."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "O que o painel mostra. O que estiver oculto continua funcionando: limites e sessões são acompanhados, as notificações chegam."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Що показувати в панелі. Приховане продовжує працювати: ліміти й сесії відстежуються, сповіщення приходять."
           }
         }
       }

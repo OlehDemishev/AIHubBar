@@ -13,6 +13,8 @@ final class UsageStore {
     /// While set, no request is made: the server answered 429 (or kept failing).
     private(set) var pausedUntil: Date?
     private var rateLimitStrikes = 0
+    /// False while no profile has the «Лимиты AI» module (SPEC-profiles §2): then nothing is fetched or scanned.
+    var isActive: () -> Bool = { true }
     private var lastRenewal: Date?
 
     var forecast: UsageForecast { UsageForecast.make(history: history, current: snapshot?.session) }
@@ -85,7 +87,7 @@ final class UsageStore {
     }
 
     func refresh() async {
-        guard !isRefreshing else { return }
+        guard isActive(), !isRefreshing else { return }
         if let pausedUntil, pausedUntil > .now { return }
         isRefreshing = true
         defer { isRefreshing = false }
@@ -132,7 +134,7 @@ final class UsageStore {
 
     /// Re-reads new transcript lines (incrementally) and recomputes the three breakdowns.
     func refreshBreakdown() async {
-        guard !isScanning else { return }
+        guard isActive(), !isScanning else { return }
         isScanning = true
         defer { isScanning = false }
         let starts = Dictionary(uniqueKeysWithValues: Period.allCases.map { ($0, periodStart($0)) })

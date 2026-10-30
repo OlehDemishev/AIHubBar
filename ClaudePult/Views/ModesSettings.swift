@@ -90,7 +90,7 @@ struct ModesSettings: View {
                 Button(role: .destructive) {
                     if let id = selection { modes.delete(id); selection = modes.currentID }
                 } label: { Image(systemName: "trash") }
-                .disabled(modes.modes.count < 2)
+                .disabled(selection == nil || modes.modes.isEmpty)
                 .help("Удалить профиль")
             }
             .buttonStyle(.borderless)

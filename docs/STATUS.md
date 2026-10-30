@@ -1,15 +1,15 @@
 # Status
 
 <!-- summary:start -->
-**Stage:** SPEC-modes done except signing/updates; SPEC-profiles stages 1–2 done, stage 3 next
+**Stage:** SPEC-modes done except signing/updates; SPEC-profiles stages 1–2 done, stage 3 in PR
 **Updated:** 2026-10-30
 
 **Now:**
-- SPEC-profiles stage 2 merged (PR #74): panel from profile modules, menu bar per profile, «Профили» and «Модули» tabs, «режим» → «профиль»
+- SPEC-profiles stage 3: empty start and the assistant's «Что будет в панели» step — branch `feat/empty-start` (worktree `.claude/worktrees/profiles-stage3`), PR open
 - Windows and Linux specs merged (PR #73); implementation waits for Oleh
 
 **Next:**
-- SPEC-profiles stages 3–6: empty start and new assistant, Ресурсы Mac, Не спать, Быстрые команды и переключатели
+- SPEC-profiles stages 4–6: Ресурсы Mac (with installing and removing modules), Не спать, Быстрые команды и переключатели
 - menu bar elements reordered by dragging (needs a different list than a grouped Form)
 - fix whatever Oleh finds in the translations (machine translation; native review for ja, ko, ar at least)
 - stage 8 rest: Developer ID signing and notarization, Sparkle updates — once Oleh decides on Developer ID, the name and where updates are hosted
@@ -22,7 +22,7 @@
 - after ~20:11 today: check that the limits keep updating by themselves (the sign-in renewal runs when the token expires)
 - read docs/GUIDE.md as a newcomer would
 - review the languages: Settings → Основные → «Язык интерфейса» → a language → «Перезапустить» (and back); Arabic should mirror right-to-left
-- try Settings → Профили → «+» → «Помощник…»
+- try Settings → Профили → «+» → «Помощник…»: the new «Что будет в панели» step (untick «Проекты» and the project questions disappear)
 - try the calendar in a folder profile: «Календарь» → «+ контент-план», a `Дедлайн:` in a `проект.md`, then the panel «Ближайшее» and the «Календарь» window
 - try folder projects: duplicate a profile, set «Источник» → «папки» on a folder with a few subfolders, add stages (e.g. «идея, сценарий, монтаж, готово») and metrics
 - try Settings → «Строка меню» (presets, order, options, preview) and the ticking reset countdown
@@ -36,6 +36,12 @@
 - hooks are installed in ~/.claude/settings.json; backup of the original: ~/.claude/settings.json.claudepult-backup-20261029T192827
 - delete or archive the old repo `OlehDemishev/ClaudeBar`; turn on start at login if wanted
 <!-- summary:end -->
+
+## 2026-10-30 — Profiles stage 3: empty start and new assistant (branch `feat/empty-start`)
+
+Done: SPEC-profiles §9.3. Without `_daily-report` ClaudePult now starts with no profile and nothing installed (no placeholder profile): the panel says «Создайте первый профиль» with «Помощник…» and «Импортировать файл…» (the import opens Settings → «Профили» to confirm), the assistant opens by itself, and the limits are neither fetched nor scanned while no profile uses «Лимиты AI». The last profile can be deleted; ClaudePult is then empty again and its modules stop. With `_daily-report` the first profile is still made from the existing settings. The assistant's «Блоки панели» step became «Что будет в панели» right after the template: Лимиты AI, Сессии агентов, Проекты, Ближайшее as checkboxes with what each does; without «Проекты» the folder, stages, metrics, calendar, service, commands and launch steps are skipped; «Ближайшее» needs folder projects. A new profile starts with every block shown instead of copying the current profile's hidden blocks.
+Checked: `xcodebuild test` — 173 tests green (new: empty start, deleting the last profile, modules decide the steps; two old tests updated from the placeholder and «last mode stays»); catalog synced, 5 new strings in all 12 languages, 2 stale removed. Live: installed; Oleh's profile and modules unchanged. CI not set up; checks run locally.
+Left: the empty panel and the new step were not seen on screen — that needs a Mac without profiles. The «Утилиты Mac» template comes with its modules (stages 4–6).
 
 ## 2026-10-30 — Profiles stage 2: panel from modules, menu bar per profile, rename (branch `feat/profiles-panel`)
 

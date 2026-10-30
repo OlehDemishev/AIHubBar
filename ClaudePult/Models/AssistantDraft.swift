@@ -4,7 +4,7 @@ import Foundation
 /// settings the assistant also asks about (menu bar, panel blocks, reminders). Nothing is saved until «Готово».
 struct AssistantDraft: Equatable, Sendable {
     enum Step: String, CaseIterable, Sendable {
-        case welcome, importSettings, template, folder, stages, metrics, calendar, service, commands, launch, panel, menuBar, name
+        case welcome, importSettings, template, modules, folder, stages, metrics, calendar, service, commands, launch, menuBar, name
 
         var title: String {
             switch self {
@@ -18,7 +18,7 @@ struct AssistantDraft: Equatable, Sendable {
             case .service: String(localized: "Сервис AI")
             case .commands: String(localized: "Команды")
             case .launch: String(localized: "Где запускать и что разрешить")
-            case .panel: String(localized: "Блоки панели")
+            case .modules: String(localized: "Что будет в панели")
             case .menuBar: String(localized: "Строка меню")
             case .name: String(localized: "Название и значок")
             }
@@ -68,6 +68,9 @@ struct AssistantDraft: Equatable, Sendable {
     var reminderHours: [Int]
     var analysis: FolderAnalysis?
     var step: Step
+    /// What «Проекты» and «Ближайшее» had before they were switched off, to bring it back when switched on again.
+    private var savedSource: ProjectSource?
+    private var savedCalendar: CalendarMode?
 
     init(firstLaunch: Bool, menuBar: MenuBarConfig, hiddenBlocks: Set<PanelBlock>, reminderHours: [Int]) {
         self.firstLaunch = firstLaunch
@@ -84,14 +87,64 @@ struct AssistantDraft: Equatable, Sendable {
         calendar: .dates, commonCommands: .none, showCommonCommands: false
     )
 
-    /// The steps that apply: cards, stages, metrics, calendar and commands only for folder projects.
+    /// The steps that apply: the project steps only with «Проекты» (SPEC-profiles §5); cards, stages, metrics,
+    /// calendar and commands only for folder projects.
     var steps: [Step] {
         Step.allCases.filter { step in
             switch step {
             case .welcome, .importSettings: firstLaunch
+            case .folder, .service, .launch: hasProjects
             case .stages, .metrics, .calendar, .commands: mode.source.isFolders
             default: true
             }
+        }
+    }
+
+    // MARK: Modules (SPEC-profiles §5)
+
+    var hasProjects: Bool { mode.source != .none }
+
+    /// The modules the assistant offers; «Отчёты _daily-report» is Oleh's own and stays in Settings.
+    static let offeredModules: [ModuleKind] = [.limits, .sessions, .projects, .upcoming]
+
+    func hasModule(_ kind: ModuleKind) -> Bool {
+        switch kind {
+        case .limits: !hiddenBlocks.contains(.limits)
+        case .sessions: !hiddenBlocks.contains(.sessions)
+        case .projects: hasProjects
+        case .upcoming: mode.calendar != .off && mode.source.isFolders
+        case .reports: mode.commonCommands == .dailyReport
+        }
+    }
+
+    /// «Ближайшее» needs folder projects (their cards and content plans hold the dates).
+    func canChange(_ kind: ModuleKind) -> Bool {
+        kind != .upcoming || mode.source.isFolders
+    }
+
+    mutating func setModule(_ kind: ModuleKind, _ on: Bool) {
+        switch kind {
+        case .limits: if on { hiddenBlocks.remove(.limits) } else { hiddenBlocks.insert(.limits) }
+        case .sessions: if on { hiddenBlocks.remove(.sessions) } else { hiddenBlocks.insert(.sessions) }
+        case .projects:
+            if on {
+                mode.source = savedSource ?? Self.blank.source
+                if let savedCalendar { mode.calendar = savedCalendar }
+            } else if hasProjects {
+                savedSource = mode.source
+                savedCalendar = mode.calendar
+                mode.source = .none
+                mode.calendar = .off
+            }
+        case .upcoming:
+            if on {
+                mode.calendar = savedCalendar.flatMap { $0 == .off ? nil : $0 } ?? .dates
+            } else {
+                savedCalendar = mode.calendar
+                mode.calendar = .off
+            }
+        case .reports:
+            mode.commonCommands = on ? .dailyReport : .none
         }
     }
 
@@ -115,6 +168,8 @@ struct AssistantDraft: Equatable, Sendable {
         templateID = template?.id
         mode = template?.mode ?? Self.blank
         mode.id = UUID().uuidString.lowercased()
+        savedSource = nil
+        savedCalendar = nil
         if let folder, analysis != nil { setFolder(folder, analysis: analysis) }
         if template?.id == "developer" { menuBar = .make(.limits) }
     }

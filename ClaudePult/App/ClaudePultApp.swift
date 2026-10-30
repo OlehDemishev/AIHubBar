@@ -53,6 +53,7 @@ struct ClaudePultApp: App {
         _launcher = State(initialValue: launcher)
         let hooks = HookController(settings: settings)
         _hooks = State(initialValue: hooks)
+        usage.isActive = { [modes] in modes.installedModules.contains(.limits) }
         modes.didApply = {
             Task { await store.refresh() }
             Task { await folders.refresh() }
