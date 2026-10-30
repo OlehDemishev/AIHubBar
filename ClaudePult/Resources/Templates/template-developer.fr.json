@@ -1,0 +1,34 @@
+{
+  "format": "claudepult-template",
+  "version": 1,
+  "order": 0,
+  "language": "fr",
+  "id": "developer",
+  "title": "Développeur (GitHub)",
+  "description": "Dépôts git : branches, modifications non commitées, PR et CI, STATUS.md ; «Étape suivante», «Tâche libre», «Terminer» selon les règles du projet (CLAUDE.md / AGENTS.md).",
+  "folderHint": "Le dossier où se trouvent vos dépôts",
+  "mode": {
+    "name": "Développeur (GitHub)",
+    "icon": "chevron.left.forwardslash.chevron.right",
+    "template": "developer",
+    "source": {
+      "gitBuiltin": {
+        "projects": "~/Projects"
+      }
+    },
+    "card": "statusMD",
+    "stages": [],
+    "metrics": [
+      "branch",
+      "dirty",
+      "pullRequests",
+      "lastActivity"
+    ],
+    "permissions": "code",
+    "calendar": "off",
+    "showProjects": true,
+    "commonCommands": "none",
+    "showCommonCommands": false,
+    "commands": []
+  }
+}

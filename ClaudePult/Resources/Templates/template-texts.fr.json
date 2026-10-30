@@ -1,0 +1,84 @@
+{
+  "format": "claudepult-template",
+  "version": 1,
+  "order": 2,
+  "language": "fr",
+  "id": "texts",
+  "title": "Textes (articles, blog, newsletter)",
+  "description": "Un dossier par texte ; étapes de l'idée à la publication ; mots et temps de lecture ; révision, correction, autre ton, raccourcir, SEO, découpage en posts.",
+  "folderHint": "Un dossier où chaque sous-dossier est un article ou un numéro",
+  "mode": {
+    "name": "Textes",
+    "icon": "doc.text",
+    "template": "texts",
+    "source": {
+      "folders": {
+        "_0": "~/Documents/Textes"
+      }
+    },
+    "card": "projectMD",
+    "stages": [
+      "idée",
+      "brouillon",
+      "révision",
+      "publié"
+    ],
+    "metrics": [
+      "words",
+      "readingTime",
+      "publishDate"
+    ],
+    "permissions": "filesOnly",
+    "calendar": "dates",
+    "launchMode": "background",
+    "showProjects": true,
+    "commonCommands": "none",
+    "showCommonCommands": false,
+    "commands": [
+      {
+        "id": "texts-edit",
+        "title": "Révision",
+        "output": "revision.md",
+        "task": "Révise le texte : supprime le remplissage, le jargon, les répétitions et les clichés, simplifie les phrases longues, garde le sens, les faits et la voix de l'auteur. D'abord le texte révisé en entier. Puis une liste des 5–10 modifications les plus importantes sous la forme «avant → après → pourquoi».",
+        "input": "mainFile"
+      },
+      {
+        "id": "texts-proof",
+        "title": "Correction",
+        "output": "correction.md",
+        "task": "Trouve les fautes d'orthographe, de ponctuation et de grammaire, les coquilles et les erreurs d'accord. Ne change ni le style ni les formulations. Donne le texte corrigé puis la liste des corrections.",
+        "input": "mainFile"
+      },
+      {
+        "id": "texts-tone",
+        "title": "Autre ton",
+        "output": "ton-{text}.md",
+        "task": "Réécris le texte sur ce ton : {text} (par exemple : plus amical, plus strict, avec humour, pour des experts, pour des débutants). Même sens, mêmes faits, même structure.",
+        "input": "mainFile",
+        "asks": "Ton"
+      },
+      {
+        "id": "texts-length",
+        "title": "Raccourcir / développer",
+        "output": "version-{text}.md",
+        "task": "Fais une version du texte d'environ {text} mots. Pour raccourcir, garde l'essentiel et les exemples les plus forts. Pour développer, ajoute des explications et des exemples sur le sujet — pas de remplissage, et aucun fait nouveau sans la mention «à vérifier».",
+        "input": "mainFile",
+        "asks": "Combien de mots"
+      },
+      {
+        "id": "texts-seo",
+        "title": "SEO",
+        "output": "seo.md",
+        "task": "Propose : un titre pour les moteurs de recherche (60 caractères maximum), une meta description (155 caractères maximum), 5–8 expressions clés auxquelles le texte répond vraiment et 3 idées de sous-titres H2 manquants. Ne modifie pas le texte.",
+        "input": "mainFile"
+      },
+      {
+        "id": "texts-posts",
+        "title": "Découpage en posts",
+        "output": "posts.md",
+        "task": "Transforme le texte en une série de posts pour {platform} : 3–5 posts, chacun autonome avec sa propre idée tirée du texte, une première ligne accrocheuse et un appel à l'action à la fin. Respecte le format de la plateforme (longueur, hashtags, emojis avec modération). Numérote-les et indique dans quel ordre les publier.",
+        "input": "mainFile"
+      }
+    ]
+  }
+}

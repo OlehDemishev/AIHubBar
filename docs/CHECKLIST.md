@@ -215,3 +215,11 @@ Panel snapshots: `defaults write com.demishev.claudepult DebugPanelSnapshot -boo
 | Templates exist in every language with the same ids | Auto |
 | 707 interface strings in Spanish, format specifiers match (strings rephrased where «% d» would read as a specifier) | Script check |
 | Spanish output: git scanner, assistant preview of «Redes sociales» | Live (`-AppleLanguages '(es)'`) |
+
+## Languages: Portuguese (Brazil) and French (SPEC-modes §9.9)
+
+| Scenario | Checked |
+|---|---|
+| Language table complete, cards and plans round-trip, templates in both languages, interfaces shipped | Auto (per-language tests) |
+| 707 interface strings each, format specifiers match | Script check |
+| Assistant preview «Textos» (pt-BR) and «Vidéo» (fr), French git scanner items | Live (`-AppleLanguages`) |

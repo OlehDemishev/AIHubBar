@@ -1,0 +1,86 @@
+{
+  "format": "claudepult-template",
+  "version": 1,
+  "order": 4,
+  "language": "pt-BR",
+  "id": "social",
+  "title": "Redes sociais e marketing",
+  "description": "Um projeto = uma campanha ou plataforma; plano de conteúdo no calendário; posts por plataforma, anúncios, títulos A/B, respostas a comentários, plano da semana.",
+  "folderHint": "Uma pasta em que cada subpasta é uma campanha; plano-de-conteudo.md também pode ficar aqui",
+  "mode": {
+    "name": "Redes sociais",
+    "icon": "megaphone",
+    "template": "social",
+    "source": {
+      "folders": {
+        "_0": "~/Documents/Redes"
+      }
+    },
+    "card": "projectMD",
+    "stages": [
+      "ideia",
+      "texto",
+      "design",
+      "agendado",
+      "publicado"
+    ],
+    "metrics": [
+      "words",
+      "publishDate"
+    ],
+    "permissions": "filesOnly",
+    "calendar": "contentPlan",
+    "launchMode": "background",
+    "showProjects": true,
+    "commonCommands": "none",
+    "showCommonCommands": false,
+    "commands": [
+      {
+        "id": "social-posts",
+        "title": "Posts por plataforma",
+        "output": "posts-{platform}.md",
+        "task": "A partir do material de origem, escreva um post para cada plataforma: {platform}. Respeite o formato de cada uma: tamanho, estilo, hashtags, emojis, links, chamada para ação. Cada post é independente, não uma cópia dos outros. Para plataformas visuais, uma ideia curta de imagem ou vídeo.",
+        "input": "mainFile"
+      },
+      {
+        "id": "social-ads",
+        "title": "Variações de anúncio",
+        "output": "anuncios.md",
+        "task": "Sugira 5 textos de anúncio para {platform}: título, texto principal, chamada para ação. Abordagens diferentes: a dor do cliente, o benefício, um depoimento/prova, urgência sem pressão, uma comparação. Sem afirmações que não possam ser comprovadas. Marque quais pares vale comparar em um teste A/B.",
+        "input": "mainFile"
+      },
+      {
+        "id": "social-ab",
+        "title": "Títulos A/B",
+        "output": "titulos-ab.md",
+        "task": "Sugira 8 pares de títulos para um teste A/B: em cada par muda exatamente uma coisa (tamanho, um número, pergunta/afirmação, emoção, especificidade). Para cada par, o que exatamente está sendo testado.",
+        "input": "mainFile"
+      },
+      {
+        "id": "social-replies",
+        "title": "Respostas a comentários",
+        "output": "respostas.md",
+        "task": "A partir do material e das perguntas típicas do público, prepare modelos de resposta para 10 comentários frequentes: pergunta sobre preço, dúvida, reclamação, agradecimento, pergunta de «como», trollagem, pedido de desconto etc. Tom: {text}. Respostas curtas e humanas, sem o padrão «Obrigado pelo seu comentário!».",
+        "input": "mainFile",
+        "asks": "Tom"
+      },
+      {
+        "id": "social-week",
+        "title": "Plano de conteúdo da semana",
+        "output": "plano-de-conteudo-semana.md",
+        "task": "Monte um plano de conteúdo para a semana que começa em {text}: 1–2 posts por dia para {platform}. Alterne formatos (útil, engajador, de venda, bastidores). Entregue uma tabela Markdown no formato do plano de conteúdo — | Data | Hora | Plataforma | Tema | Status | Arquivo | — com o status «ideia», para que as linhas possam ir para plano-de-conteudo.md.",
+        "input": "project",
+        "asks": "Data de início",
+        "service": "claude-code"
+      },
+      {
+        "id": "social-prepare",
+        "title": "Preparar posts do plano",
+        "output": "posts-do-plano.md",
+        "task": "Para os itens do plano de conteúdo (plano-de-conteudo.md) dos próximos 7 dias com o status «ideia», escreva os textos dos posts — cada um sob seu próprio título com a data e o tema. Não altere o plano de conteúdo.",
+        "input": "project",
+        "service": "claude-code"
+      }
+    ]
+  }
+}

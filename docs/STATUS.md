@@ -5,13 +5,14 @@
 **Updated:** 2026-10-30
 
 **Now:**
-- SPEC-modes §9 stage 9: English complete (PRs #45, #47); Spanish merged (PR #49); next: pt-BR, fr, de, ja, id, ko, it, ar (RTL), pl, uk (es, pt-BR, fr, de, ja, id, ko, it, ar with RTL, pl, uk)
+- SPEC-modes §9 stage 9: English complete (PRs #45, #47); Spanish merged (PR #49); Portuguese (Brazil) and French in PR (branch `feat/portuguese-french`); next: de, ja, id, ko, it, ar (RTL), pl, uk (es, pt-BR, fr, de, ja, id, ko, it, ar with RTL, pl, uk)
 
 **Next:**
 - SPEC-modes §9: 5 calendar, 6 templates, 7 setup assistant, 8 for everyone, 9 languages (§13: en, es, pt-BR, fr, de, ja, id, ko, it, ar with RTL, pl, uk)
 - Fix whatever Oleh finds in docs/CHECKLIST.md
 
 **Needs Oleh:**
+- merge the Portuguese and French PR
 - try Settings → Основные → «Язык интерфейса» → English → «Перезапустить» (and back)
 - try Settings → Режимы → «+» → «Помощник…»
 - try the calendar in a folder mode: «Календарь» → «+ контент-план», a `Дедлайн:` in a `проект.md`, then the panel «Ближайшее» and the «Календарь» window
@@ -27,6 +28,12 @@
 - hooks are installed in ~/.claude/settings.json; backup of the original: ~/.claude/settings.json.claudepult-backup-20261029T192827
 - delete or archive the old repo `OlehDemishev/ClaudeBar`; turn on start at login if wanted
 <!-- summary:end -->
+
+## 2026-10-30 — Portuguese (Brazil) and French (branch `feat/portuguese-french`)
+
+Done: both languages added as data — table entries (`projeto.md` / `plano-de-conteudo.md`, `projet.md` / `plan-de-contenu.md`, field and column names, wrappers, prompts), six templates each (`template-*.pt-BR.json`, `template-*.fr.json`), 707 interface strings each.
+Checked: `xcodebuild test` — 155 tests green (per-language completeness and round-trips now cover five languages, every language's `.lproj` ships); no compiler warnings; script check of both catalogs (0 missing, 0 format mismatches). Live with `-AppleLanguages`: assistant previews «Textos» (pt-BR) and «Vidéo» (fr) fully translated; French git scanner items. CI not set up; checks run locally.
+Left: de, ja, id, ko, it, ar (RTL), pl, uk.
 
 ## 2026-10-30 — Spanish, and one table per language (branch `feat/spanish`)
 

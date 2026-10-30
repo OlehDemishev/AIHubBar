@@ -1,0 +1,87 @@
+{
+  "format": "claudepult-template",
+  "version": 1,
+  "order": 1,
+  "language": "fr",
+  "id": "video",
+  "title": "Vidéo (YouTube, Shorts, Reels)",
+  "description": "Un dossier par vidéo ; étapes de l'idée à la publication ; mots et durée ; accroches, Shorts, description et horodatages, titres, vérification des faits, traduction ; échéances dans le calendrier.",
+  "folderHint": "Un dossier où chaque sous-dossier est une vidéo",
+  "mode": {
+    "name": "Vidéo",
+    "icon": "video",
+    "template": "video",
+    "source": {
+      "folders": {
+        "_0": "~/Documents/Video"
+      }
+    },
+    "card": "projectMD",
+    "stages": [
+      "idée",
+      "recherche",
+      "script",
+      "tournage",
+      "montage",
+      "publié"
+    ],
+    "metrics": [
+      "words",
+      "duration",
+      "deadline",
+      "publishDate"
+    ],
+    "permissions": "filesOnly",
+    "calendar": "dates",
+    "launchMode": "background",
+    "showProjects": true,
+    "commonCommands": "none",
+    "showCommonCommands": false,
+    "commands": [
+      {
+        "id": "video-hooks",
+        "title": "Accroches",
+        "output": "accroches.md",
+        "task": "Propose 5 débuts de vidéo — les 5–10 premières secondes qui retiennent le spectateur. Vidéo : {format}, à partir de ce script. Utilise des procédés différents : un fait surprenant, une question au spectateur, la promesse d'un résultat, une mini-histoire, la contestation d'une idée reçue. Pour chacun : le texte lui-même (tel qu'il se dit à voix haute) et une ligne sur ce sur quoi il joue. À la fin, lequel tu choisirais et pourquoi, en une phrase.",
+        "input": "mainFile"
+      },
+      {
+        "id": "video-shorts",
+        "title": "Version Shorts",
+        "output": "script-shorts.md",
+        "task": "Transforme le script en vidéo verticale de 60 secondes maximum — environ 140–150 mots. Garde l'idée principale et le moment le plus fort, supprime les introductions et les répétitions. La première phrase doit accrocher tout de suite, la dernière donner envie de voir la vidéo complète ou de s'abonner. Écris comme on parle : phrases courtes, sans jargon administratif. Indique le nombre de mots à la fin.",
+        "input": "mainFile"
+      },
+      {
+        "id": "video-description",
+        "title": "Description et horodatages",
+        "output": "description.md",
+        "task": "Prépare tout pour la publication sur YouTube : 1) une description de 2–3 paragraphes, les deux premières lignes comptent le plus (elles s'affichent avant «plus»), sans putaclic ; 2) des horodatages des parties du script au format 00:00 — Titre (estime la durée à 150 mots par minute, la première marque est 00:00) ; 3) 10–15 tags séparés par des virgules ; 4) 3 hashtags. Dans la langue du script.",
+        "input": "mainFile"
+      },
+      {
+        "id": "video-titles",
+        "title": "Titres et miniatures",
+        "output": "titres.md",
+        "task": "Propose 10 titres pour la vidéo — 60 caractères maximum, honnêtes (ils promettent ce que contient la vidéo), avec des approches différentes : bénéfice, curiosité, résultat concret, chiffre, question. Marque les 3 meilleurs. Puis 3 idées de miniature : ce qu'il y a dans le cadre, le gros texte (4 mots maximum), l'émotion.",
+        "input": "mainFile"
+      },
+      {
+        "id": "video-facts",
+        "title": "Vérification des faits",
+        "output": "faits.md",
+        "task": "Trouve dans le script toutes les affirmations vérifiables : chiffres, dates, noms, citations, affirmations de cause à effet. Pour chacune : l'affirmation, son degré de fiabilité (solide / à vérifier / douteuse) et pourquoi, quoi vérifier exactement et où. Ne corrige rien dans le script et n'invente pas de sources — si tu n'es pas sûr, dis-le.",
+        "input": "mainFile",
+        "service": "claude-code"
+      },
+      {
+        "id": "video-translate",
+        "title": "Traduction",
+        "output": "script-{language}.md",
+        "task": "Traduis le script en {language} pour une voix off : garde le ton, les blagues et le rythme du discours, adapte les expressions et les exemples à ce public, ne traduis pas mot à mot. Garde les noms propres et les termes reconnaissables. À la fin, une liste des passages où il a fallu s'écarter nettement de l'original.",
+        "input": "mainFile",
+        "asks": "Langue"
+      }
+    ]
+  }
+}
