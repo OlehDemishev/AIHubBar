@@ -7,7 +7,7 @@
 **Now:**
 - merged: menu bar drag reordering (PR #93), translation review (PR #94), release build re-checked on main (PR #95)
 - panel redesigned as cards, variant A, merged (PR #98)
-- feature batch from Oleh's «все»: approve from notifications merged (PR #100); current action merged (PR #102); week forecast merged (PR #104); Telegram answers merged (PR #106); then week forecast, Telegram, PR/CI alerts, hotkey and search, widget, night queue, context warning
+- feature batch from Oleh's «все»: approve from notifications merged (PR #100); current action merged (PR #102); week forecast merged (PR #104); Telegram answers merged (PR #106); PR/CI alerts (PR open); then week forecast, Telegram, PR/CI alerts, hotkey and search, widget, night queue, context warning
 - hover hints for icon-only controls and the menu bar item merged (PR #91)
 - second wave merged: «История буфера» and «Заметки» (PR #87), «Не спать» with the lid closed (PR #89)
 - release without an Apple Developer account merged (PR #85): Sparkle, self-signed signing, `scripts/release.sh`, MIT license; nothing published yet
@@ -53,6 +53,12 @@
 - hooks are installed in ~/.claude/settings.json; backup of the original: ~/.claude/settings.json.claudepult-backup-20261029T192827
 - delete or archive the old repo `OlehDemishev/ClaudeBar`; turn on start at login if wanted
 <!-- summary:end -->
+
+## 2026-10-30 — PR and CI alerts (branch `feat/pr-ci-alerts`)
+
+Done: `PullRequestAlerts` compares the open PRs of two project reports: CI turned red, turned green again, PR no longer open (null PR data is not «closed»; the first report after launch is only a baseline). Each change is a notification whose click opens the PR (new https-only `NotificationTarget.link`), optionally also a Telegram message through the `_daily-report` bot (send-only). Settings → «Модули» → «Проекты»: on by default, Telegram off. 13 languages.
+Checked: 223 tests green; the settings section seen live.
+Left: a real red CI to see the banner.
 
 ## 2026-10-30 — Answer permission requests from Telegram (branch `feat/telegram-approvals`)
 

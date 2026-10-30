@@ -296,6 +296,7 @@ private struct ModulesSettings: View {
                 switch kind {
                 case .limits: LimitSection()
                 case .upcoming: ReminderSection()
+                case .projects: PullRequestAlertSection()
                 case .resources where modes.installedModules.contains(.resources): ResourceSection()
                 case .keepAwake where modes.installedModules.contains(.keepAwake): KeepAwakeSection()
                 case .quickCommands where modes.installedModules.contains(.quickCommands): QuickCommandsSection()
@@ -616,6 +617,24 @@ private struct ReminderSection: View {
 }
 
 // MARK: - Claude Code: sessions
+
+/// Notifications about open pull requests of the projects.
+private struct PullRequestAlertSection: View {
+    @Environment(AppSettings.self) private var settings
+
+    var body: some View {
+        @Bindable var settings = settings
+        Section {
+            Toggle("Уведомлять, когда CI упал или починился и когда PR закрыт", isOn: $settings.pullRequestAlerts)
+            Toggle("Дублировать в Telegram", isOn: $settings.pullRequestAlertsToTelegram)
+                .disabled(!settings.pullRequestAlerts)
+        } header: {
+            Text("Pull requests")
+        } footer: {
+            Footnote(text: String(localized: "По данным списка проектов (gh): обновляется раз в 5 минут и при открытии панели. Клик по уведомлению открывает PR."))
+        }
+    }
+}
 
 /// Permission requests answered from the phone, through a bot of ClaudePult's own.
 private struct TelegramApprovalsSection: View {
