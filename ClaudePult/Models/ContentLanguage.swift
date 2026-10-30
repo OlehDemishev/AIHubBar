@@ -4,6 +4,8 @@ import Foundation
 /// plans, template texts. It follows the interface language; Russian is the default.
 enum ContentLanguage: String, CaseIterable, Sendable {
     case ru, en, es
+    case ptBR = "pt-BR"
+    case fr
 
     static var current: ContentLanguage {
         Bundle.main.preferredLocalizations.first.flatMap { code in allCases.first { code.hasPrefix($0.rawValue) } } ?? .ru
@@ -14,6 +16,8 @@ enum ContentLanguage: String, CaseIterable, Sendable {
         case .ru: .russian
         case .en: .english
         case .es: .spanish
+        case .ptBR: .portuguese
+        case .fr: .french
         }
     }
 }
@@ -116,6 +120,54 @@ struct ContentStrings: Sendable {
         customTask: "Tarea: {task}. Sigue las reglas del proyecto (CLAUDE.md / AGENTS.md si existen): una rama aparte de la principal, las comprobaciones del proyecto, commit, push, pull request.",
         finishSession: "Termina el trabajo actual en esta carpeta: ejecuta las comprobaciones del proyecto, reparte los cambios sin commit en commits según su sentido (en ramas separadas si pertenecen a tareas distintas), haz push y abre un pull request. No hagas cambios de código nuevos.",
         taskPrefix: "Tarea: ", rulesMarker: ". Sigue las reglas"
+    )
+
+    static let portuguese = ContentStrings(
+        cardFile: "projeto.md", planFile: "plano-de-conteudo.md",
+        cardLabels: [.stage: "Etapa", .deadline: "Prazo", .publish: "Publicação", .format: "Formato", .mainFile: "Arquivo principal", .platform: "Plataforma"],
+        notesHeading: "## Notas", planTitle: "# Plano de conteúdo",
+        planColumns: [.date: "Data", .time: "Hora", .platform: "Plataforma", .topic: "Tema", .status: "Status", .file: "Arquivo"],
+        ideaStatus: "ideia", notSet: "não informado", notCounted: "não calculado", projectWord: "projeto", resultWord: "resultado",
+        agentPrompt: """
+        Você está trabalhando na pasta do projeto «{project}». Arquivo de origem: {file}. \
+        Leia qualquer arquivo desta pasta, mas não altere nenhum. Escreva o resultado em um novo arquivo {output} na mesma pasta. \
+        Se a tarefa não estiver clara ou faltarem dados, diga isso no início do arquivo de resultado — não invente nada.
+
+        Tarefa: {task}
+        """,
+        agentNoFile: "nenhum — trabalhe com os arquivos da pasta",
+        apiHeader: "Projeto: «{project}». Formato: {format}.",
+        apiFileIntro: "Abaixo está o texto do arquivo «{file}».",
+        apiTask: "Tarefa: {task}",
+        apiRule: "Responda apenas com o resultado em Markdown, sem introduções nem explicações. Se faltarem dados, diga isso na primeira linha — não invente nada.",
+        nextStep: "Leia o README e, se existirem, docs/STATUS.md, CLAUDE.md ou AGENTS.md. Defina o próximo passo sensato: o primeiro item da lista «Next / Próximo», se houver; caso contrário, a tarefa inacabada mais óbvia. Faça-o em um branch separado do principal: as mudanças, as verificações do projeto (testes, build, linter — o que existir), um commit com mensagem clara, push e um pull request. Se o passo exigir a decisão de uma pessoa ou não estiver claro, não altere nada e descreva a dúvida brevemente.",
+        customTask: "Tarefa: {task}. Siga as regras do projeto (CLAUDE.md / AGENTS.md, se existirem): um branch separado do principal, as verificações do projeto, commit, push, pull request.",
+        finishSession: "Conclua o trabalho atual nesta pasta: rode as verificações do projeto, divida as mudanças sem commit em commits por assunto (em branches separados se forem de tarefas diferentes), faça push e abra um pull request. Não faça novas mudanças de código.",
+        taskPrefix: "Tarefa: ", rulesMarker: ". Siga as regras"
+    )
+
+    static let french = ContentStrings(
+        cardFile: "projet.md", planFile: "plan-de-contenu.md",
+        cardLabels: [.stage: "Étape", .deadline: "Échéance", .publish: "Publication", .format: "Format", .mainFile: "Fichier principal", .platform: "Plateforme"],
+        notesHeading: "## Notes", planTitle: "# Plan de contenu",
+        planColumns: [.date: "Date", .time: "Heure", .platform: "Plateforme", .topic: "Sujet", .status: "Statut", .file: "Fichier"],
+        ideaStatus: "idée", notSet: "non précisé", notCounted: "non calculé", projectWord: "projet", resultWord: "résultat",
+        agentPrompt: """
+        Tu travailles dans le dossier du projet «{project}». Fichier source : {file}. \
+        Lis tous les fichiers de ce dossier, mais n'en modifie aucun. Écris le résultat dans un nouveau fichier {output} dans le même dossier. \
+        Si la tâche n'est pas claire ou s'il manque des données, dis-le au début du fichier de résultat — n'invente rien.
+
+        Tâche : {task}
+        """,
+        agentNoFile: "aucun — travaille avec les fichiers du dossier",
+        apiHeader: "Projet : «{project}». Format : {format}.",
+        apiFileIntro: "Voici le texte du fichier «{file}».",
+        apiTask: "Tâche : {task}",
+        apiRule: "Réponds uniquement par le résultat en Markdown, sans introduction ni explication. S'il manque des données, dis-le en première ligne — n'invente rien.",
+        nextStep: "Lis le README et, s'ils existent, docs/STATUS.md, CLAUDE.md ou AGENTS.md. Détermine la prochaine étape raisonnable : le premier point de la liste «Next / Ensuite» s'il existe, sinon la tâche inachevée la plus évidente. Fais-la dans une branche séparée de la branche principale : les modifications, les vérifications du projet (tests, build, linter — ce qui existe), un commit au message clair, un push et une pull request. Si l'étape demande la décision d'une personne ou n'est pas claire, ne modifie rien et décris brièvement la question.",
+        customTask: "Tâche : {task}. Suis les règles du projet (CLAUDE.md / AGENTS.md s'ils existent) : une branche séparée de la branche principale, les vérifications du projet, commit, push, pull request.",
+        finishSession: "Termine le travail en cours dans ce dossier : lance les vérifications du projet, répartis les modifications non commitées en commits par sujet (sur des branches séparées si elles relèvent de tâches différentes), fais un push et ouvre une pull request. Ne fais aucune nouvelle modification de code.",
+        taskPrefix: "Tâche : ", rulesMarker: ". Suis les règles"
     )
 
     /// `{name}` → value, for the templates above.

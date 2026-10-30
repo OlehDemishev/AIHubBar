@@ -1,0 +1,80 @@
+{
+  "format": "claudepult-template",
+  "version": 1,
+  "order": 3,
+  "language": "fr",
+  "id": "research",
+  "title": "Recherche et études",
+  "description": "Un dossier par sujet avec des sources (PDF, liens, notes) ; synthèses, citations, tableau récapitulatif, lacunes, plan ; Claude peut chercher sur internet.",
+  "folderHint": "Un dossier où chaque sous-dossier est un sujet",
+  "mode": {
+    "name": "Recherche",
+    "icon": "books.vertical",
+    "template": "research",
+    "source": {
+      "folders": {
+        "_0": "~/Documents/Recherche"
+      }
+    },
+    "card": "projectMD",
+    "stages": [
+      "sujet",
+      "collecte des sources",
+      "notes",
+      "conclusions",
+      "terminé"
+    ],
+    "metrics": [
+      "sources",
+      "words",
+      "deadline"
+    ],
+    "permissions": "filesAndWeb",
+    "calendar": "dates",
+    "launchMode": "background",
+    "showProjects": true,
+    "commonCommands": "none",
+    "showCommonCommands": false,
+    "commands": [
+      {
+        "id": "research-summary",
+        "title": "Synthèse d'une source",
+        "output": "synthese-<file>.md",
+        "task": "Fais la synthèse de la source choisie : de quoi elle parle en 2–3 phrases ; les thèses principales sous forme de liste ; les chiffres et définitions clés ; ce qui y est discutable ou non prouvé ; son lien avec le sujet du projet. Seulement ce qui est dans la source — sans ajout de culture générale (marque tout contexte ajouté «hors source»).",
+        "input": "mainFile"
+      },
+      {
+        "id": "research-quotes",
+        "title": "Citations avec références",
+        "output": "citations.md",
+        "task": "Relève dans les sources du projet les citations les plus utiles pour le sujet — mot pour mot, avec le fichier et la page/section si possible. Regroupe-les par sous-thème. Ne reformule rien dans ce fichier.",
+        "input": "project",
+        "service": "claude-code"
+      },
+      {
+        "id": "research-table",
+        "title": "Tableau récapitulatif",
+        "output": "apercu.md",
+        "task": "Rassemble les sources du projet dans un tableau : source, année/auteur (si connu), thèse principale, méthodes ou données, utilité pour le sujet, limites. Sous le tableau : où les sources concordent et où elles se contredisent.",
+        "input": "project",
+        "service": "claude-code"
+      },
+      {
+        "id": "research-gaps",
+        "title": "Ce qui reste à étudier",
+        "output": "lacunes.md",
+        "task": "À partir des documents du projet, repère les questions du sujet qu'ils ne couvrent pas ou mal. Pour chaque lacune : pourquoi elle compte et quelle source ou quelles données la combleraient. N'invente pas de sources précises — décris quoi chercher.",
+        "input": "project",
+        "service": "claude-code"
+      },
+      {
+        "id": "research-plan",
+        "title": "Plan de travail",
+        "output": "plan.md",
+        "task": "Établis le plan d'un texte (article, exposé, mémoire) à partir des documents du projet : parties, contenu de chacune, sources sur lesquelles s'appuyer, longueur approximative. Signale où il manque encore de la matière.",
+        "input": "project",
+        "service": "claude-code"
+      }
+    ]
+  }
+}

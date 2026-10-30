@@ -1,0 +1,87 @@
+{
+  "format": "claudepult-template",
+  "version": 1,
+  "order": 1,
+  "language": "pt-BR",
+  "id": "video",
+  "title": "Vídeo (YouTube, Shorts, Reels)",
+  "description": "Uma pasta por vídeo; etapas da ideia à publicação; palavras e duração; ganchos, Shorts, descrição e marcações de tempo, títulos, checagem de fatos, tradução; prazos no calendário.",
+  "folderHint": "Uma pasta em que cada subpasta é um vídeo",
+  "mode": {
+    "name": "Vídeo",
+    "icon": "video",
+    "template": "video",
+    "source": {
+      "folders": {
+        "_0": "~/Documents/Video"
+      }
+    },
+    "card": "projectMD",
+    "stages": [
+      "ideia",
+      "pesquisa",
+      "roteiro",
+      "gravação",
+      "edição",
+      "publicado"
+    ],
+    "metrics": [
+      "words",
+      "duration",
+      "deadline",
+      "publishDate"
+    ],
+    "permissions": "filesOnly",
+    "calendar": "dates",
+    "launchMode": "background",
+    "showProjects": true,
+    "commonCommands": "none",
+    "showCommonCommands": false,
+    "commands": [
+      {
+        "id": "video-hooks",
+        "title": "Ganchos",
+        "output": "ganchos.md",
+        "task": "Sugira 5 aberturas para o vídeo — os primeiros 5–10 segundos que prendem o espectador. Vídeo: {format}, com base neste roteiro. Use recursos diferentes: um fato surpreendente, uma pergunta ao espectador, a promessa de um resultado, uma mini-história, contestar uma crença comum. Para cada uma: o texto em si (como é dito em voz alta) e uma linha sobre no que ela se apoia. No final, qual você escolheria e por quê, em uma frase.",
+        "input": "mainFile"
+      },
+      {
+        "id": "video-shorts",
+        "title": "Versão para Shorts",
+        "output": "roteiro-shorts.md",
+        "task": "Transforme o roteiro em um vídeo vertical de até 60 segundos — cerca de 140–150 palavras. Mantenha a ideia principal e o momento mais forte, corte introduções e repetições. A primeira frase deve prender na hora; a última, dar vontade de ver o vídeo completo ou se inscrever. Escreva como se fala: frases curtas, sem linguagem burocrática. Informe o número de palavras no final.",
+        "input": "mainFile"
+      },
+      {
+        "id": "video-description",
+        "title": "Descrição e marcações de tempo",
+        "output": "descricao.md",
+        "task": "Prepare tudo para publicar no YouTube: 1) uma descrição de 2–3 parágrafos, as duas primeiras linhas são as mais importantes (aparecem antes de «mais»), sem clickbait; 2) marcações de tempo das partes do roteiro no formato 00:00 — Título (estime o tempo a 150 palavras por minuto, a primeira marca é 00:00); 3) 10–15 tags separadas por vírgula; 4) 3 hashtags. No idioma do roteiro.",
+        "input": "mainFile"
+      },
+      {
+        "id": "video-titles",
+        "title": "Títulos e miniaturas",
+        "output": "titulos.md",
+        "task": "Sugira 10 títulos para o vídeo — até 60 caracteres, honestos (prometem o que o vídeo tem), com abordagens diferentes: benefício, curiosidade, um resultado concreto, um número, uma pergunta. Marque os 3 melhores. Depois, 3 ideias de miniatura: o que aparece no quadro, o texto grande (até 4 palavras), a emoção.",
+        "input": "mainFile"
+      },
+      {
+        "id": "video-facts",
+        "title": "Checagem de fatos",
+        "output": "fatos.md",
+        "task": "Encontre no roteiro todas as afirmações verificáveis: números, datas, nomes, citações, afirmações de causa e efeito. Para cada uma: a afirmação, quão discutível ela é (sólida / verificar / duvidosa) e por quê, o que exatamente verificar e onde. Não corrija nada no roteiro nem invente fontes — se não tiver certeza, diga.",
+        "input": "mainFile",
+        "service": "claude-code"
+      },
+      {
+        "id": "video-translate",
+        "title": "Tradução",
+        "output": "roteiro-{language}.md",
+        "task": "Traduza o roteiro para {language} para narração: mantenha o tom, as piadas e o ritmo da fala, adapte expressões e exemplos a esse público, não traduza palavra por palavra. Mantenha reconhecíveis nomes próprios e termos. No final, uma lista dos trechos em que foi preciso se afastar bastante do original.",
+        "input": "mainFile",
+        "asks": "Idioma"
+      }
+    ]
+  }
+}

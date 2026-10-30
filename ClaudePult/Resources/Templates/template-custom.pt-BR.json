@@ -1,0 +1,37 @@
+{
+  "format": "claudepult-template",
+  "version": 1,
+  "order": 5,
+  "language": "pt-BR",
+  "id": "custom",
+  "title": "Personalizado",
+  "description": "Um conjunto vazio: «Tarefa própria» e as etapas «em andamento → pronto». O resto, em Ajustes → «Modos».",
+  "folderHint": "Uma pasta em que cada subpasta é um projeto",
+  "mode": {
+    "name": "Meu modo",
+    "icon": "sparkle",
+    "template": "custom",
+    "source": {
+      "folders": {
+        "_0": "~/Documents/Projetos"
+      }
+    },
+    "card": "projectMD",
+    "stages": [
+      "em andamento",
+      "pronto"
+    ],
+    "metrics": [
+      "words",
+      "deadline",
+      "lastActivity"
+    ],
+    "permissions": "filesOnly",
+    "calendar": "dates",
+    "launchMode": "background",
+    "showProjects": true,
+    "commonCommands": "none",
+    "showCommonCommands": false,
+    "commands": []
+  }
+}

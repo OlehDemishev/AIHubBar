@@ -1,0 +1,80 @@
+{
+  "format": "claudepult-template",
+  "version": 1,
+  "order": 3,
+  "language": "pt-BR",
+  "id": "research",
+  "title": "Pesquisa e estudo",
+  "description": "Uma pasta por tema com fontes (PDFs, links, notas); resumos, citações, tabela-resumo, lacunas, plano; o Claude pode pesquisar na internet.",
+  "folderHint": "Uma pasta em que cada subpasta é um tema",
+  "mode": {
+    "name": "Pesquisa",
+    "icon": "books.vertical",
+    "template": "research",
+    "source": {
+      "folders": {
+        "_0": "~/Documents/Pesquisa"
+      }
+    },
+    "card": "projectMD",
+    "stages": [
+      "tema",
+      "coleta de fontes",
+      "anotações",
+      "conclusões",
+      "pronto"
+    ],
+    "metrics": [
+      "sources",
+      "words",
+      "deadline"
+    ],
+    "permissions": "filesAndWeb",
+    "calendar": "dates",
+    "launchMode": "background",
+    "showProjects": true,
+    "commonCommands": "none",
+    "showCommonCommands": false,
+    "commands": [
+      {
+        "id": "research-summary",
+        "title": "Resumo da fonte",
+        "output": "resumo-<file>.md",
+        "task": "Resuma a fonte escolhida: do que ela trata em 2–3 frases; as teses principais em lista; números e definições-chave; o que nela é discutível ou não comprovado; como ela se relaciona com o tema do projeto. Só o que está na fonte — sem acréscimos de conhecimento geral (marque qualquer contexto acrescentado como «fora da fonte»).",
+        "input": "mainFile"
+      },
+      {
+        "id": "research-quotes",
+        "title": "Citações com referências",
+        "output": "citacoes.md",
+        "task": "Extraia das fontes do projeto as citações mais úteis para o tema — literais, com o arquivo e a página/seção se houver. Agrupe por subtema. Não parafraseie nada neste arquivo.",
+        "input": "project",
+        "service": "claude-code"
+      },
+      {
+        "id": "research-table",
+        "title": "Tabela-resumo",
+        "output": "panorama.md",
+        "task": "Reúna as fontes do projeto em uma tabela: fonte, ano/autor (se houver), tese principal, métodos ou dados, por que é útil para o tema, limitações. Abaixo da tabela: onde as fontes concordam e onde se contradizem.",
+        "input": "project",
+        "service": "claude-code"
+      },
+      {
+        "id": "research-gaps",
+        "title": "O que falta estudar",
+        "output": "lacunas.md",
+        "task": "A partir dos materiais do projeto, identifique as questões do tema que eles não cobrem ou cobrem mal. Para cada lacuna: por que importa e que fonte ou dados a fechariam. Não invente fontes concretas — descreva o que procurar.",
+        "input": "project",
+        "service": "claude-code"
+      },
+      {
+        "id": "research-plan",
+        "title": "Plano de trabalho",
+        "output": "plano.md",
+        "task": "Monte o plano de um texto (artigo, palestra, trabalho) a partir dos materiais do projeto: seções, o que vai em cada uma, em quais fontes se apoiar, tamanho aproximado. Marque onde ainda falta material.",
+        "input": "project",
+        "service": "claude-code"
+      }
+    ]
+  }
+}

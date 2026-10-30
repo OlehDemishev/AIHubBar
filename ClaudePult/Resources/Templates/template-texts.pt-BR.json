@@ -1,0 +1,84 @@
+{
+  "format": "claudepult-template",
+  "version": 1,
+  "order": 2,
+  "language": "pt-BR",
+  "id": "texts",
+  "title": "Textos (artigos, blog, newsletter)",
+  "description": "Uma pasta por texto; etapas da ideia à publicação; palavras e tempo de leitura; edição, revisão, outro tom, encurtar, SEO, dividir em posts.",
+  "folderHint": "Uma pasta em que cada subpasta é um artigo ou uma edição",
+  "mode": {
+    "name": "Textos",
+    "icon": "doc.text",
+    "template": "texts",
+    "source": {
+      "folders": {
+        "_0": "~/Documents/Textos"
+      }
+    },
+    "card": "projectMD",
+    "stages": [
+      "ideia",
+      "rascunho",
+      "edição",
+      "publicado"
+    ],
+    "metrics": [
+      "words",
+      "readingTime",
+      "publishDate"
+    ],
+    "permissions": "filesOnly",
+    "calendar": "dates",
+    "launchMode": "background",
+    "showProjects": true,
+    "commonCommands": "none",
+    "showCommonCommands": false,
+    "commands": [
+      {
+        "id": "texts-edit",
+        "title": "Edição",
+        "output": "edicao.md",
+        "task": "Edite o texto: tire enrolação, linguagem burocrática, repetições e clichês, simplifique frases longas, mantenha o sentido, os fatos e a voz do autor. Primeiro o texto editado completo. Depois, uma lista das 5–10 edições mais importantes no formato «antes → depois → por quê».",
+        "input": "mainFile"
+      },
+      {
+        "id": "texts-proof",
+        "title": "Revisão",
+        "output": "revisao.md",
+        "task": "Encontre erros de ortografia, pontuação e gramática, erros de digitação e de concordância. Não mude o estilo nem a redação. Entregue o texto corrigido e, depois dele, a lista de correções.",
+        "input": "mainFile"
+      },
+      {
+        "id": "texts-tone",
+        "title": "Outro tom",
+        "output": "tom-{text}.md",
+        "task": "Reescreva o texto neste tom: {text} (por exemplo: mais amigável, mais sério, com humor, para especialistas, para iniciantes). Mesmo sentido, fatos e estrutura.",
+        "input": "mainFile",
+        "asks": "Tom"
+      },
+      {
+        "id": "texts-length",
+        "title": "Encurtar / expandir",
+        "output": "versao-{text}.md",
+        "task": "Faça uma versão do texto com cerca de {text} palavras. Ao encurtar, mantenha o essencial e os exemplos mais fortes. Ao expandir, acrescente explicações e exemplos sobre o tema — não enrolação, e nenhum fato novo sem a marca «verificar».",
+        "input": "mainFile",
+        "asks": "Quantas palavras"
+      },
+      {
+        "id": "texts-seo",
+        "title": "SEO",
+        "output": "seo.md",
+        "task": "Sugira: um título para busca (até 60 caracteres), uma meta description (até 155 caracteres), 5–8 frases-chave que o texto realmente responde e 3 ideias de subtítulos H2 que faltam. Não mude o texto.",
+        "input": "mainFile"
+      },
+      {
+        "id": "texts-posts",
+        "title": "Dividir em posts",
+        "output": "posts.md",
+        "task": "Transforme o texto em uma série de posts para {platform}: 3–5 posts, cada um independente, com sua própria ideia do texto, uma primeira linha que prenda e uma chamada para ação no final. Respeite o formato da plataforma (tamanho, hashtags, emojis com moderação). Numere-os e diga em que ordem publicar.",
+        "input": "mainFile"
+      }
+    ]
+  }
+}

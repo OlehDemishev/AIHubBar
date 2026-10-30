@@ -49,4 +49,10 @@ struct LanguageTableTests {
         #expect(CommandText.outputName("", context, language: .es) == "resultado.md")
         #expect(Bundle.main.localizations.contains("es"))
     }
+
+    @Test func everyLanguageShipsItsInterface() {
+        for language in ContentLanguage.allCases where language != .ru {
+            #expect(Bundle.main.localizations.contains(language.rawValue), "\(language.rawValue).lproj")
+        }
+    }
 }

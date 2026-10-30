@@ -1,0 +1,37 @@
+{
+  "format": "claudepult-template",
+  "version": 1,
+  "order": 5,
+  "language": "fr",
+  "id": "custom",
+  "title": "Personnalisé",
+  "description": "Un ensemble vide : «Tâche libre» et les étapes «en cours → terminé». Le reste, dans Réglages → «Modes».",
+  "folderHint": "Un dossier où chaque sous-dossier est un projet",
+  "mode": {
+    "name": "Mon mode",
+    "icon": "sparkle",
+    "template": "custom",
+    "source": {
+      "folders": {
+        "_0": "~/Documents/Projets"
+      }
+    },
+    "card": "projectMD",
+    "stages": [
+      "en cours",
+      "terminé"
+    ],
+    "metrics": [
+      "words",
+      "deadline",
+      "lastActivity"
+    ],
+    "permissions": "filesOnly",
+    "calendar": "dates",
+    "launchMode": "background",
+    "showProjects": true,
+    "commonCommands": "none",
+    "showCommonCommands": false,
+    "commands": []
+  }
+}
