@@ -27,6 +27,7 @@ struct LaunchRequest: Sendable {
     var baseRef = "origin/main"
     var claudePath: String
     var allowBusyFolder = false
+    var style: PromptStyle = .oleh
 }
 
 /// Picks the folder for a Claude command and starts it in a new Terminal window (docs/SPEC.md §2.4).
@@ -63,7 +64,7 @@ enum ClaudeLauncher {
             return .needsConfirmation(question)
         case let .ready(folder, worktree):
             try await TerminalLauncher.run(
-                ShellQuote.claudeCommandLine(folder: folder, claude: request.claudePath, prompt: request.command.prompt)
+                ShellQuote.claudeCommandLine(folder: folder, claude: request.claudePath, prompt: request.command.prompt(request.style))
             )
             AppLog.info("Launched «\(request.command.title)» in Terminal: \(folder)")
             return .launched(folder: folder, worktree: worktree)

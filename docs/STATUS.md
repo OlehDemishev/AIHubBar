@@ -1,11 +1,11 @@
 # Status
 
 <!-- summary:start -->
-**Stage:** SPEC.md done; SPEC-modes stages 1–5 done (modes, menu bar, AI services, folder projects + commands, calendar)
+**Stage:** SPEC.md done; SPEC-modes stages 1–6 done (modes, menu bar, AI services, folder projects + commands, calendar, templates)
 **Updated:** 2026-10-30
 
 **Now:**
-- SPEC-modes §9 stage 5 (calendar) merged (PR #39); next: stage 6 (templates) — needs Oleh's review of docs/TEMPLATES.md
+- SPEC-modes §9 stage 6 (templates + built-in git scanner) in PR (branch `feat/templates`); next: stage 7 (setup assistant)
 
 **Next:**
 - SPEC-modes §9: 5 calendar, 6 templates, 7 setup assistant, 8 for everyone, 9 languages (§13: en, es, pt-BR, fr, de, ja, id, ko, it, ar with RTL, pl, uk)
@@ -16,7 +16,7 @@
 - try folder projects: duplicate a mode, set «Источник» → «папки» on a folder with a few subfolders, add stages (e.g. «идея, сценарий, монтаж, готово») and metrics
 - try Settings → «Строка меню» (presets, order, options, preview) and the ticking reset countdown
 - try Settings → Режимы (duplicate the mode → switcher appears in the panel) and a double-click on a .claudepult file
-- read and edit docs/TEMPLATES.md (template texts) before stage 6
+- merge the templates PR; try Settings → Режимы → «+» → a template; template texts can still be reviewed in docs/TEMPLATES.md
 - for live checks of AI services: install Codex CLI (`brew install --cask codex`) and Gemini CLI (`brew install gemini-cli`) or Antigravity CLI, put API keys in Settings → «Сервисы AI» and press «Проверить» (optional: Ollama for a free local model)
 - before stage 8: Apple Developer Program (Developer ID, notarization) for distributing ClaudePult; decide on the name (SPEC-modes §10.4)
 - try the «Внешний вид» settings tab (theme, width, density not checked by eye)
@@ -25,6 +25,12 @@
 - hooks are installed in ~/.claude/settings.json; backup of the original: ~/.claude/settings.json.claudepult-backup-20261029T192827
 - delete or archive the old repo `OlehDemishev/ClaudeBar`; turn on start at login if wanted
 <!-- summary:end -->
+
+## 2026-10-30 — Templates and the built-in git scanner (branch `feat/templates`)
+
+Done: SPEC-modes §4 / stage 6. Six templates as JSON in the app («Разработчик (GitHub)», «Видео», «Тексты», «Ресёрч», «Соцсети», «Свой») with the texts of docs/TEMPLATES.md; Settings → Режимы → «+» adds a mode from a template after choosing its folder. Built-in git scanner for the «git-репозитории» source (same JSON and health rules as report.py, PRs/CI via `gh`); generic developer prompts for every git mode except Oleh's; source picker gains «git-репозитории». CLI `--git-scan <folder>`.
+Checked: `xcodebuild test` — 142 tests green (scanner on a temp repo incl. the porcelain leading-space case, CI states, STATUS parsing, templates loading and adding, prompt styles); no compiler warnings. Live: `--git-scan ~/Projects` gives the same health and attention items as report.py for all six projects (two fixes found that way: porcelain trimming, same-name branches); Oleh's mode unchanged. CI not set up; checks run locally.
+Left: adding a mode from a template was not clicked through (folder dialog); template texts await Oleh's review.
 
 ## 2026-10-30 — Calendar (branch `feat/calendar`)
 

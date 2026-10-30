@@ -2,6 +2,14 @@
 
 Decisions made where the spec is silent or does not match reality. Newest at the top.
 
+## 2026-10-30 — Templates and the built-in git scanner (SPEC-modes §9.6)
+
+**Templates are JSON in the app** (`Resources/Templates/template-*.json`: id, title, description, folder hint, order, and a whole `Mode`). Adding a mode copies the template's mode with a fresh id, a unique name and the folder the person picks; from then on it is their mode. Texts are those of docs/TEMPLATES.md as written (Oleh chose «как есть»); two «Соцсети» commands were adapted so that commands never change existing files (see the note in TEMPLATES.md), and commands that read the whole project default to Claude.
+
+**Built-in git scanner** (`GitScanner`) gives the same JSON shape as `report.py --json`, so the panel code is shared. Same rules for attention and health: uncommitted work (STATUS.md-only changes low), stashes, branches only on this Mac / unpushed (a branch pushed under the same name without tracking counts only unpushed commits), worktrees with changes and stale ones, PRs with CI via `gh`, «Needs …» items from the STATUS.md summary (any name after «Needs»), stale repos (7 days). Not taken over: report.py's «commits but STATUS.md not updated» (tied to its daily window), merged PRs and commit lists (report text only). Repositories are scanned in parallel. Compared live with report.py on ~/Projects: identical health and items otherwise.
+
+**Prompt style.** Oleh's mode (`template == developer-report`) keeps the prompts of docs/SPEC.md §2.4 with `~/Projects/CLAUDE.md`; every other git mode uses the generic ones of docs/TEMPLATES.md §1 («работай по правилам проекта: CLAUDE.md / AGENTS.md, если они есть»). Session titles recognise both.
+
 ## 2026-10-30 — Calendar (SPEC-modes §9.5)
 
 **No calendar of ClaudePult's own.** Every date lives in the person's files: `Дедлайн:` / `Публикация:` in `проект.md`, rows of `контент-план.md`. The calendar is read from them (all enabled modes with a calendar, on panel open if older than 60 s and every 5 min) and moving a date writes the file back — only that line or that cell changes.

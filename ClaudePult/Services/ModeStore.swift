@@ -133,6 +133,7 @@ final class ModeStore {
         }
         settings.defaultLaunchMode = mode.launchMode
         settings.activeSource = mode.source
+        settings.promptStyle = mode.template == "developer-report" ? .oleh : .generic
         // The built-in git scanner arrives with the templates (SPEC-modes §9, stage 6).
         settings.setShows(.projects, mode.showProjects && mode.source.isShownInPanel)
         settings.setShows(.commands, mode.showCommonCommands && mode.commonCommands == .dailyReport)
@@ -188,6 +189,19 @@ final class ModeStore {
         save(copy)
         saveState()
         return copy
+    }
+
+    /// A new mode from a template, enabled and made current.
+    @discardableResult
+    func add(_ template: ModeTemplate, folder: String) -> Mode {
+        let mode = template.makeMode(folder: folder, name: uniqueName(template.mode.name))
+        modes.append(mode)
+        enabledIDs.append(mode.id)
+        save(mode)
+        saveState()
+        select(mode.id)
+        AppLog.info("Mode «\(mode.name)» added from template \(template.id)")
+        return mode
     }
 
     func delete(_ id: String) {

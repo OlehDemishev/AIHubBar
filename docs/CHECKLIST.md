@@ -164,3 +164,14 @@ Panel snapshots: `defaults write com.demishev.claudepult DebugPanelSnapshot -boo
 | Overdue: date-only deadlines the next day, timed ones after the time | Auto + Live |
 | Menu bar «Ближайшая дата календаря» | Auto (text) |
 | Panel «Ближайшее», window «Календарь» (month/week, drag, double-click), reminder notifications | **Oleh: with a folder mode that has a calendar** |
+
+## Templates and the built-in git scanner (SPEC-modes §9.6)
+
+| Scenario | Checked |
+|---|---|
+| Six templates load from the app's resources in order; commands non-empty, services valid | Auto |
+| A mode from a template: fresh id, unique name, chosen folder, enabled and current; developer → built-in scanner, generic prompts | Auto |
+| Built-in scanner: branch, uncommitted (STATUS.md-only changes are «low»), stashes, local-only / unpushed branches (incl. pushed under the same name without tracking), worktrees and stale ones, PRs + CI via `gh`, STATUS.md summary with any «Needs …», latest entry, health | Auto (temp repo) + Live (`--git-scan ~/Projects`: same health and items as report.py for all six projects, except report.py's «commits but STATUS.md not updated», which depends on its daily window) |
+| Generic prompts have no Oleh rules; session titles recognise both styles | Auto |
+| Oleh's mode still runs report.py with his prompts | Live (`--modes`, log) |
+| Settings → Режимы → «+» → template → folder dialog | **Oleh: try one template** |

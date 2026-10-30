@@ -67,6 +67,9 @@ final class AppSettings {
     /// Where the current mode's projects come from; set by `ModeStore` when a mode is applied, not stored.
     var activeSource: ProjectSource = .none
 
+    /// Whose rules the developer prompts follow; set with the mode, not stored.
+    var promptStyle: PromptStyle = .oleh
+
     /// Chosen models and the compatible server's address (SPEC-modes §11); keys live in the Keychain.
     var aiServices: AIServicesConfig {
         didSet { defaults.set(try? JSONEncoder().encode(aiServices), forKey: Keys.aiServices) }

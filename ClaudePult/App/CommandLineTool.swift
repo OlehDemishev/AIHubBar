@@ -12,6 +12,7 @@ import UserNotifications
 /// - `ClaudePult --usage`, `ClaudePult --usage-raw` (subscription limits; the token is never printed), `--token-usage`
 /// - `ClaudePult --notifications-status`
 /// - `ClaudePult --modes`, `ClaudePult --export-settings <file.claudepult>` (import: open the file in Finder)
+/// - `ClaudePult --git-scan <folder>` (the built-in git scanner: health, branch, changes, PRs, attention)
 /// - `ClaudePult --calendar [folder]` (calendar dates of the enabled modes, or of a folder read as «папки» + контент-план)
 /// - `ClaudePult --folder-projects <folder>` (folder projects as the panel would list them)
 /// - `ClaudePult --api-complete <provider> <prompt> [base-url]` (one request to a model by API, prints reply and tokens)
@@ -108,6 +109,18 @@ enum CommandLineTool {
             } catch {
                 printError("error: \(error.localizedDescription)")
                 return 1
+            }
+        }
+        if let index = arguments.firstIndex(of: "--git-scan"), index + 1 < arguments.count {
+            let folder = (arguments[index + 1] as NSString).expandingTildeInPath
+            return waitFor {
+                guard let report = await GitScanner.report(projectsDirectory: folder, fetch: false) else { return 1 }
+                for project in report.projects {
+                    let prs = project.openPRs.map { " PR \($0.count) ci=\(project.pullRequestsCI.rawValue)" } ?? ""
+                    print("\(project.health.rawValue)  \(project.name)  [\(project.branch ?? "-")] dirty=\(project.dirty)\(prs) stage=\(project.status?.summary?.stage ?? "-")")
+                    for item in project.attention { print("    \(item.level.rawValue): \(item.text)") }
+                }
+                return 0
             }
         }
         if let index = arguments.firstIndex(of: "--calendar") {

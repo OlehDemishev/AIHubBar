@@ -1,5 +1,11 @@
 import Foundation
 
+/// Whose rules the developer prompts follow: Oleh's `~/Projects/CLAUDE.md` (his own mode) or the project's own
+/// CLAUDE.md / AGENTS.md (the «Разработчик (GitHub)» template, docs/TEMPLATES.md §1).
+enum PromptStyle: String, Codable, Sendable {
+    case oleh, generic
+}
+
 /// The three Claude commands from docs/SPEC.md §2.4. Prompts are used verbatim.
 enum ClaudeCommand: Codable, Equatable, Sendable {
     case nextStep
@@ -14,14 +20,26 @@ enum ClaudeCommand: Codable, Equatable, Sendable {
         }
     }
 
-    var prompt: String {
+    var prompt: String { prompt(.oleh) }
+
+    func prompt(_ style: PromptStyle) -> String {
+        if style == .generic {
+            switch self {
+            case .nextStep:
+                return "Прочитай README и, если есть, docs/STATUS.md, CLAUDE.md или AGENTS.md. Определи следующий разумный шаг: первый пункт списка «Next / Дальше», если он есть, иначе самую очевидную незаконченную задачу. Сделай его в отдельной ветке от основной: изменения, проверки проекта (тесты, сборка, линтер — что есть), коммит с понятным сообщением, push и pull request. Если шаг требует решения человека или неясен — ничего не меняй, а коротко опиши вопрос."
+            case let .customTask(task):
+                return "Задача: \(task.trimmingCharacters(in: .whitespacesAndNewlines)). Работай по правилам проекта (CLAUDE.md / AGENTS.md, если они есть): отдельная ветка от основной, проверки проекта, коммит, push, pull request."
+            case .finishSession:
+                return "Доведи до конца текущую работу в этой папке: прогони проверки проекта, разложи незакоммиченные изменения по смыслу на коммиты (если они относятся к разным задачам — по отдельным веткам), сделай push и pull request. Новых изменений кода не делай."
+            }
+        }
         switch self {
         case .nextStep:
-            "Прочитай только шапку docs/STATUS.md и последнюю запись журнала. Возьми первый пункт из Next и выполни его по правилам ~/Projects/CLAUDE.md: отдельная ветка от origin/main, проверки проекта, коммит, push, PR, запись в STATUS.md и обновление шапки. Если пункт требует решения Олега или неясен — ничего не меняй, а запиши вопрос в Needs Oleh и закончи."
+            return "Прочитай только шапку docs/STATUS.md и последнюю запись журнала. Возьми первый пункт из Next и выполни его по правилам ~/Projects/CLAUDE.md: отдельная ветка от origin/main, проверки проекта, коммит, push, PR, запись в STATUS.md и обновление шапки. Если пункт требует решения Олега или неясен — ничего не меняй, а запиши вопрос в Needs Oleh и закончи."
         case let .customTask(task):
-            "Задача от Олега: \(task.trimmingCharacters(in: .whitespacesAndNewlines)). Работай по правилам ~/Projects/CLAUDE.md: отдельная ветка от origin/main, проверки, коммит, push, PR, запись в STATUS.md."
+            return "Задача от Олега: \(task.trimmingCharacters(in: .whitespacesAndNewlines)). Работай по правилам ~/Projects/CLAUDE.md: отдельная ветка от origin/main, проверки, коммит, push, PR, запись в STATUS.md."
         case .finishSession:
-            "Заверши текущую работу в этой папке по разделу \"Конец сессии\" из ~/Projects/CLAUDE.md: проверки, коммит, push, PR, запись в STATUS.md и шапка. Новых изменений кода не делай. Если незакоммиченные изменения относятся к разным задачам — разнеси их по отдельным веткам и PR."
+            return "Заверши текущую работу в этой папке по разделу \"Конец сессии\" из ~/Projects/CLAUDE.md: проверки, коммит, push, PR, запись в STATUS.md и шапка. Новых изменений кода не делай. Если незакоммиченные изменения относятся к разным задачам — разнеси их по отдельным веткам и PR."
         }
     }
 
