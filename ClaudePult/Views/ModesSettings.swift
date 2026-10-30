@@ -5,6 +5,7 @@ import UniformTypeIdentifiers
 /// Settings → «Режимы»: list of modes on the left, the selected mode's blocks on the right (SPEC-modes §2).
 struct ModesSettings: View {
     @Environment(ModeStore.self) private var modes
+    @Environment(\.openWindow) private var openWindow
     @State private var selection: String?
 
     var body: some View {
@@ -52,8 +53,15 @@ struct ModesSettings: View {
 
             HStack(spacing: 4) {
                 Menu {
-                    ForEach(Self.templates) { template in
-                        Button(template.title) { add(template) }
+                    Button("Помощник…") {
+                        NSApp.activate()
+                        openWindow(id: "assistant")
+                    }
+                    Divider()
+                    Section("Сразу из шаблона") {
+                        ForEach(Self.templates) { template in
+                            Button(template.title) { add(template) }
+                        }
                     }
                 } label: { Image(systemName: "plus") }
                 .menuStyle(.borderlessButton)
@@ -378,7 +386,7 @@ private enum SourceKind: CaseIterable, Hashable {
 }
 
 /// One command of a folder mode, folded into a line until opened.
-private struct CommandEditor: View {
+struct CommandEditor: View {
     @Binding var command: CommandTemplate
     let onDelete: () -> Void
     @Environment(AIServiceStore.self) private var services
