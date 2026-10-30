@@ -60,6 +60,23 @@ struct MenuBarComposerTests {
             == "ClaudePult, сессия 17 %, неделя 58 %, есть проекты с проблемами, ждут ответа: 1")
     }
 
+    @Test func tooltipNamesEverythingShown() {
+        var config = MenuBarConfig.make(.limits)
+        for kind in [MenuBarElement.Kind.running, .queued, .deadline, .cpu, .memory, .keepAwake, .mode] {
+            if let index = config.elements.firstIndex(where: { $0.kind == kind }) { config.elements[index].enabled = true }
+        }
+        var data = MenuBarData(running: 2, queued: 1, session: 40, deadline: "Ролик · 2 дн", modeName: "Видео", cpu: 23, memory: 71, keepingAwake: true)
+        data.week = nil
+        let text = MenuBarComposer.accessibilityText(config, data)
+        for part in ["сессия 40 %", "работают сессии: 2", "отложенных запусков: 1", "ближайшее: Ролик · 2 дн",
+                     "процессор 23 %", "память 71 %", "Mac не засыпает", "профиль «Видео»"] {
+            #expect(text.contains(part), "\(part) in \(text)")
+        }
+        // Switched-off elements stay out of it.
+        config.elements = config.elements.map { var e = $0; e.enabled = e.kind == .session; return e }
+        #expect(MenuBarComposer.accessibilityText(config, data) == "ClaudePult, сессия 40 %")
+    }
+
     @Test func plainSymbolOnlyWithoutExtras() {
         let config = MenuBarConfig.make(.limits)
         #expect(MenuBarComposer.plainSymbol(MenuBarComposer.groups(config, MenuBarData())) == "sparkle")

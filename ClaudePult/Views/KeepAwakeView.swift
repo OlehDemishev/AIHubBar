@@ -15,6 +15,7 @@ struct KeepAwakeView: View {
                 Image(systemName: keepAwake.reason == nil ? "cup.and.saucer" : "cup.and.saucer.fill")
                     .foregroundStyle(keepAwake.reason == nil ? Color.secondary : Color.orange)
                     .scaledFont(.caption)
+                    .help(KeepAwakeText.status(keepAwake.reason))
                 Spacer()
                 Toggle("", isOn: Binding(
                     get: { manual },
@@ -39,9 +40,11 @@ struct KeepAwakeView: View {
                 HStack(spacing: 6) {
                     ForEach([(15, String(localized: "15 мин")), (60, String(localized: "1 ч")), (120, String(localized: "2 ч"))], id: \.0) { minutes, title in
                         Button(title) { keepAwake.holdManually(for: TimeInterval(minutes * 60)) }
+                            .help(String(localized: "Не давать Mac засыпать: \(title)"))
                     }
                     if manual {
                         Button("Отпустить") { keepAwake.stopManual() }
+                            .help("Снять ручной запрет сна: дальше решают правила")
                     }
                 }
                 .controlSize(.small)

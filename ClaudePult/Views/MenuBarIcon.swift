@@ -52,6 +52,28 @@ struct MenuBarIcon: View {
             }
         }
         .accessibilityLabel(MenuBarComposer.accessibilityText(state.config, state.data))
+        .task(id: MenuBarComposer.accessibilityText(state.config, state.data)) {
+            // The status item exists a moment after launch.
+            try? await Task.sleep(for: .milliseconds(500))
+            StatusItemTooltip.set(MenuBarComposer.accessibilityText(state.config, state.data))
+        }
+    }
+}
+
+/// `MenuBarExtra` has no tooltip of its own: the item is an `NSStatusBarButton` in the app's status bar window, and
+/// hovering over it shows what the icons and numbers mean.
+@MainActor
+enum StatusItemTooltip {
+    static func set(_ text: String) {
+        for window in NSApp.windows where window.className.contains("StatusBarWindow") {
+            if let button = button(in: window.contentView) { button.toolTip = text }
+        }
+    }
+
+    private static func button(in view: NSView?) -> NSButton? {
+        guard let view else { return nil }
+        if let button = view as? NSButton { return button }
+        return view.subviews.lazy.compactMap { button(in: $0) }.first
     }
 }
 

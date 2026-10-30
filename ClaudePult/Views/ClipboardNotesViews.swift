@@ -48,6 +48,7 @@ struct ClipboardView: View {
             Image(systemName: item.kind == .files ? "doc" : (item.pinned ? "pin.fill" : "doc.on.clipboard"))
                 .foregroundStyle(item.pinned ? Color.orange : .secondary)
                 .frame(width: 14)
+                .help(item.pinned ? String(localized: "Закреплено") : item.kind == .files ? String(localized: "Скопированные файлы") : String(localized: "Скопированный текст"))
             Button {
                 history.copy(item)
                 copied = item.id

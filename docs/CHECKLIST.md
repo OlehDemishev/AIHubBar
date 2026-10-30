@@ -375,6 +375,15 @@ Panel snapshots: `defaults write com.demishev.claudepult DebugPanelSnapshot -boo
 | Settings on this Mac mini (real window capture): «У этого Mac нет крышки», the switch and «Разрешить…» disabled, «Сейчас сон уже отключён другим приложением» (Vorssaint's `SleepDisabled 1`); ClaudePult ran no `pmset`/`sudo` (log, `pmset -g`) | Live (module installed temporarily, profile restored) |
 | «Разрешить…» with the password, the lid closed while Claude works, the battery floor, «Убрать…» | Oleh — needs a laptop and the admin password |
 
+## Hover hints for icon-only controls (SPEC §3.1, 2026-10-30)
+
+| Scenario | Checked |
+|---|---|
+| Accessibility walk of the panel with every module shown and of all seven settings tabs: icon-only controls without a hint found (☕ and timers, quick-command editor arrows, trash and icon picker, clipboard row icon, worktree label, calendar arrows, assistant «remove stage», the menu bar item) and given one | Live (modules added to Oleh's profile for the walk, profile and folded blocks restored) |
+| The menu bar tooltip names every element that is on and has something to show, and nothing switched off | Auto (`MenuBarTests.tooltipNamesEverythingShown`) |
+| The menu bar item's `AXHelp` (its tooltip) reads «ClaudePult, сессия 10 %, неделя 81 %, есть проекты с проблемами»; ☕ in the panel says «держу: работает Claude» | Live |
+| Seeing the tooltips appear under the mouse | Oleh (synthetic mouse moves don't make macOS show tooltips) |
+
 ## Release without an Apple Developer account (2026-10-30)
 
 | Scenario | Checked |

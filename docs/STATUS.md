@@ -5,11 +5,13 @@
 **Updated:** 2026-10-30
 
 **Now:**
+- hover hints for icon-only controls and the menu bar item (branch `feat/hover-hints`, PR open, waits for Oleh's merge)
 - second wave merged: «История буфера» and «Заметки» (PR #87), «Не спать» with the lid closed (PR #89)
 - release without an Apple Developer account merged (PR #85): Sparkle, self-signed signing, `scripts/release.sh`, MIT license; nothing published yet
 - Windows and Linux specs merged (PR #73); implementation waits for Oleh
 
 **Next:**
+- standing rule (SPEC §3.1): every new icon-only control gets a hover hint; finish each UI stage with the accessibility walk
 - menu bar elements reordered by dragging (needs a different list than a grouped Form)
 - fix whatever Oleh finds in the translations (machine translation; native review for ja, ko, ar at least)
 - stage 8 rest: Developer ID signing and notarization, Sparkle updates — once Oleh decides on Developer ID, the name and where updates are hosted
@@ -17,6 +19,7 @@
 - Windows and Linux versions (docs/SPEC-windows.md, docs/SPEC-linux.md) — only when Oleh says; stage 0 (fact checks in VMs) first
 
 **Needs Oleh:**
+- hover over the menu bar item and the panel icons: tooltips should name what each one is
 - on a laptop: Settings → «Модули» → «Не спать» → «Разрешить…» (admin password once), then «И с закрытой крышкой»
 - on this Mac mini sleep is already off system-wide (`SleepDisabled 1`, set by Vorssaint's `/etc/sudoers.d/vorssaint-clamshell`): the Mac never sleeps while it stays so; `sudo pmset -a disablesleep 0` turns it back on if Vorssaint isn't needed
 - try «История буфера» and «Заметки»: Settings → «Модули» → «Установить» (copy, pin, search; type a note)
@@ -45,6 +48,12 @@
 - hooks are installed in ~/.claude/settings.json; backup of the original: ~/.claude/settings.json.claudepult-backup-20261029T192827
 - delete or archive the old repo `OlehDemishev/ClaudeBar`; turn on start at login if wanted
 <!-- summary:end -->
+
+## 2026-10-30 — Hover hints for icon-only controls (branch `feat/hover-hints`)
+
+Done: Oleh asked for a short hint, or at least the function's name, on everything shown only as an icon. Walked the panel (all modules shown) and all settings tabs through Accessibility, listing controls with neither a name nor a hint; added `.help` to ☕ and the timers in «Не спать», the quick-command editor (arrows, trash, icon picker), the clipboard row icon, the worktree label in sessions, the calendar's previous/next arrows and the assistant's «remove stage». The menu bar item now has a tooltip (`StatusItemTooltip` sets the status bar button's `toolTip`) with a summary of everything it draws; `MenuBarComposer.accessibilityText` covers all elements. Made a standing rule in SPEC §3.1. 13 languages.
+Checked: 202 tests green; live: the menu bar item's AXHelp is the summary, ☕ has its hint; profile and folded blocks restored.
+Left: seeing tooltips pop up under a real mouse (synthetic moves don't trigger them) — Oleh.
 
 ## 2026-10-30 — Keep awake with the lid closed (branch `feat/lid-closed-awake`)
 

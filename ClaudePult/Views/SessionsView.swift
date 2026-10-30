@@ -104,6 +104,7 @@ private struct SessionRowView: View {
                             .foregroundStyle(.secondary)
                             .lineLimit(1)
                             .truncationMode(.middle)
+                            .help("Отдельная рабочая копия git (worktree)")
                     }
                     Spacer(minLength: 6)
                     Text(row.run != nil && row.state == .running ? String(localized: "в фоне") : row.state.title)
