@@ -98,17 +98,21 @@ final class ModeStore {
         let state = (try? Data(contentsOf: directory.appending(path: "state.json"))).flatMap { try? decoder.decode(State.self, from: $0) }
         installedModules = (state?.installed ?? []).compactMap(ModuleKind.init(rawValue:))
 
-        if loaded.isEmpty {
-            // First start with modes: the settings ClaudePult had so far become the first mode, unchanged — when
-            // there is a `_daily-report` to read. Otherwise a starter mode, and the assistant opens (SPEC-modes §5).
-            let hasReport = FileManager.default.fileExists(atPath: settings.reportScript)
-            let mode = hasReport ? Self.migrated(from: settings) : Self.starter
-            needsAssistant = !hasReport
+        if loaded.isEmpty, state == nil, FileManager.default.fileExists(atPath: settings.reportScript) {
+            // The setup ClaudePult had before modes (report.py, `_daily-report`) becomes the first profile, unchanged.
+            let mode = Self.migrated(from: settings)
             modes = [mode]
             enabledIDs = [mode.id]
             currentID = mode.id
             saveAll()
-            AppLog.info("Modes: created «\(mode.name)» from the existing settings")
+            AppLog.info("Profiles: created «\(mode.name)» from the existing settings")
+        } else if loaded.isEmpty {
+            // An empty start (SPEC-profiles §2): no profile, nothing installed, the assistant opens.
+            modes = []
+            enabledIDs = []
+            currentID = ""
+            installedModules = []
+            needsAssistant = state == nil
         } else {
             let order = state?.order ?? []
             modes = loaded.sorted { (order.firstIndex(of: $0.id) ?? Int.max, $0.name) < (order.firstIndex(of: $1.id) ?? Int.max, $1.name) }
@@ -128,10 +132,6 @@ final class ModeStore {
 
     /// Set on a first start without `_daily-report`: the app opens the assistant.
     private(set) var needsAssistant = false
-
-    /// The placeholder a new person has until the assistant finishes.
-    static let starter = Mode(name: "ClaudePult", icon: "sparkle", template: "starter", source: .none, showProjects: false,
-                              commonCommands: .none, showCommonCommands: false)
 
     /// The assistant's mode, enabled and made current; it replaces the starter placeholder.
     @discardableResult
@@ -263,16 +263,19 @@ final class ModeStore {
         return mode
     }
 
+    /// The last profile can go too: ClaudePult is then empty again (SPEC-profiles §2) and modules no profile uses
+    /// stop working.
     func delete(_ id: String) {
-        guard modes.count > 1 else { return }
         modes.removeAll { $0.id == id }
         enabledIDs.removeAll { $0 == id }
         if enabledIDs.isEmpty, let first = modes.first { enabledIDs = [first.id] }
         try? FileManager.default.removeItem(at: fileURL(id))
-        if currentID == id, let next = enabledModes.first {
+        if currentID == id {
             currentID = ""
-            select(next.id)
+            if let next = enabledModes.first { select(next.id) }
         }
+        let used = Set(modes.flatMap { $0.modules ?? [] }.map(\.kind))
+        installedModules = installedModules.filter(used.contains)
         saveState()
     }
 

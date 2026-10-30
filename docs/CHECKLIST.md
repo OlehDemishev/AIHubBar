@@ -310,3 +310,14 @@ Panel snapshots: `defaults write com.demishev.claudepult DebugPanelSnapshot -boo
 | Settings → «Профили» → «Панель» (toggles, ↑↓) and «Модули» (catalog, in which profiles, limits and reminder settings) | Live (window captures) |
 | «режим» → «профиль» everywhere in the interface, 13 languages (gender fixed in de, it; particles in ko; Arabic «ملف التعريف»), custom template names | Script check (no mode word left except «background mode») |
 | Reordering and hiding blocks by hand in «Профили» → «Панель», switching between two profiles with different menu bars | Oleh |
+
+## Profiles stage 3: empty start and new assistant (SPEC-profiles §9.3, 2026-10-30)
+
+| Scenario | Checked |
+|---|---|
+| Without `_daily-report`: no profile, nothing installed, the assistant is due; still so on the next start | Auto (`emptyStartWithoutDailyReport`) |
+| The last profile can be deleted: ClaudePult is empty, nothing installed, no assistant pushed on later starts | Auto |
+| With `_daily-report` (Oleh): the first profile is made from the existing settings, as before | Auto + live (`--modes` after install) |
+| Assistant «Что будет в панели»: without «Проекты» the project steps are skipped; switching projects back on restores source and calendar; «Ближайшее» only with folder projects | Auto (`modulesDecideTheSteps`) |
+| Limits are not fetched or scanned while no profile uses «Лимиты AI» | Code (`UsageStore.isActive`) |
+| The empty panel («Создайте первый профиль», «Помощник…», «Импортировать файл…») and the new assistant step on screen | Oleh — can't be shown here without removing Oleh's profiles |

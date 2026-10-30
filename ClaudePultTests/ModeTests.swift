@@ -73,8 +73,8 @@ struct ModeStoreTests {
         #expect(store.modes.map(\.id) == [first.id])
         #expect(store.currentID == first.id)
         #expect(settings.projectsDirectory == NSHomeDirectory() + "/Projects")
-        store.delete(first.id) // the last mode cannot be deleted
-        #expect(store.modes.count == 1)
+        store.delete(first.id) // the last profile can go too: ClaudePult is empty again
+        #expect(store.modes.isEmpty && store.current == nil)
     }
 
     @Test func exportAndReplaceOnAnotherMac() throws {

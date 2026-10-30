@@ -53,6 +53,12 @@ struct MenuPanelView: View {
                 Divider()
             }
 
+            if modes.modes.isEmpty {
+                noProfile
+                    .revealed(isShown, step: 1, reduceMotion: calm)
+                Divider()
+            }
+
             // The current profile's modules, in its order (SPEC-profiles §9.2).
             ForEach(modes.panelModules, id: \.self) { kind in
                 module(kind)
@@ -179,6 +185,34 @@ struct MenuPanelView: View {
         }
         .padding(.horizontal, 14)
         .padding(.vertical, 8)
+    }
+
+    /// An empty start (SPEC-profiles §2): nothing is set up yet, so the panel only offers to.
+    private var noProfile: some View {
+        VStack(spacing: 10) {
+            EmptyStateView(
+                systemImage: "square.stack.3d.up",
+                title: String(localized: "Создайте первый профиль"),
+                message: String(localized: "Профиль — это то, что будет в панели: лимиты AI, сессии, проекты с командами, календарь. Помощник соберёт его за пару минут.")
+            )
+            HStack(spacing: 8) {
+                Button("Помощник…") {
+                    NSApp.activate()
+                    openWindow(id: "assistant")
+                }
+                .buttonStyle(.borderedProminent)
+                Button("Импортировать файл…") {
+                    SettingsFiles.chooseImport(into: modes)
+                    // «Заменить» / «Добавить» are asked in Settings → «Профили».
+                    guard modes.pendingImport != nil else { return }
+                    UserDefaults.standard.set(SettingsView.Tab.modes.rawValue, forKey: "settingsTab")
+                    openSettings()
+                }
+            }
+            .controlSize(.small)
+        }
+        .padding(.vertical, 16)
+        .frame(maxWidth: .infinity)
     }
 
     @ViewBuilder

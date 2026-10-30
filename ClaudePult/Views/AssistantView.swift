@@ -44,8 +44,9 @@ struct AssistantView: View {
         .frame(width: 900, height: 620)
         .onAppear {
             if draft == nil {
+                // A new profile starts with every block shown; the «Что будет в панели» step decides.
                 draft = AssistantDraft(firstLaunch: modes.needsAssistant, menuBar: settings.menuBarConfig,
-                                       hiddenBlocks: settings.hiddenBlocks, reminderHours: settings.calendarReminderHours)
+                                       hiddenBlocks: [], reminderHours: settings.calendarReminderHours)
             }
         }
     }
@@ -103,6 +104,7 @@ struct AssistantView: View {
         case .welcome: welcomeStep
         case .importSettings: importStep(draft)
         case .template: templateStep(draft)
+        case .modules: modulesStep(draft)
         case .folder: folderStep(draft)
         case .stages: stagesStep(draft)
         case .metrics: metricsStep(draft)
@@ -110,7 +112,6 @@ struct AssistantView: View {
         case .service: serviceStep(draft)
         case .commands: commandsStep(draft)
         case .launch: launchStep(draft)
-        case .panel: panelStep(draft)
         case .menuBar: menuBarStep(draft)
         case .name: nameStep(draft)
         }
@@ -354,18 +355,30 @@ struct AssistantView: View {
         }
     }
 
-    private func panelStep(_ draft: Binding<AssistantDraft>) -> some View {
+    /// Which modules the new profile has (SPEC-profiles §5). «Проекты» brings the project steps that follow.
+    private func modulesStep(_ draft: Binding<AssistantDraft>) -> some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text("Что показывать в панели. Скрытое продолжает работать: лимиты и сессии отслеживаются, уведомления приходят.")
+            Text("Что будет в панели этого профиля. Порядок и всё остальное можно поменять потом в Настройках → «Профили».")
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)
-            ForEach([PanelBlock.limits, .sessions, .calendar], id: \.self) { block in
-                Toggle(block.title, isOn: Binding(
-                    get: { !draft.wrappedValue.hiddenBlocks.contains(block) },
-                    set: { if $0 { draft.wrappedValue.hiddenBlocks.remove(block) } else { draft.wrappedValue.hiddenBlocks.insert(block) } }
-                ))
+            ForEach(AssistantDraft.offeredModules, id: \.self) { kind in
+                Toggle(isOn: Binding(
+                    get: { draft.wrappedValue.hasModule(kind) },
+                    set: { on in withAnimation(.snappy) { draft.wrappedValue.setModule(kind, on) } }
+                )) {
+                    VStack(alignment: .leading, spacing: 2) {
+                        Label(kind.title, systemImage: kind.symbol).fontWeight(.medium)
+                        Text(kind.summary).font(.caption).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
+                    }
+                }
+                .toggleStyle(.checkbox)
+                .disabled(!draft.wrappedValue.canChange(kind))
+                .padding(.vertical, 2)
             }
-            Toggle("Проекты", isOn: draft.mode.showProjects)
+            if !draft.wrappedValue.canChange(.upcoming) {
+                Text("«Ближайшее» берёт даты из проектов-папок: включите «Проекты» с папками.")
+                    .font(.caption).foregroundStyle(.secondary)
+            }
         }
     }
 

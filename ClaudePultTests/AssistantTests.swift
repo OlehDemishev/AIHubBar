@@ -26,6 +26,28 @@ struct AssistantDraftTests {
         #expect(d.isLast)
     }
 
+    @Test func modulesDecideTheSteps() {
+        var d = draft()
+        d.choose(nil)
+        #expect(d.hasModule(.projects) && d.hasModule(.upcoming) && d.hasModule(.limits))
+        #expect(d.steps.contains(.folder) && d.steps.contains(.commands) && d.steps.contains(.modules))
+
+        d.setModule(.projects, false)
+        #expect(!d.hasModule(.projects) && !d.hasModule(.upcoming))
+        #expect(d.steps == [.template, .modules, .menuBar, .name], "no project steps without projects")
+        #expect(!d.canChange(.upcoming))
+
+        d.setModule(.projects, true)
+        #expect(d.mode.source == AssistantDraft.blank.source && d.mode.calendar == .dates, "switched back on as it was")
+        d.setModule(.upcoming, false)
+        d.setModule(.sessions, false)
+        #expect(!d.steps.contains(.calendar) == false, "the calendar step stays for folder projects")
+        #expect(d.mode.calendar == .off && d.hiddenBlocks == [.sessions])
+        d.mode.modules = nil
+        #expect(d.mode.normalizedModules(hiddenBlocks: d.hiddenBlocks).map(\.kind) == [.limits, .sessions, .projects])
+        #expect(d.mode.normalizedModules(hiddenBlocks: d.hiddenBlocks)[1].shown == false)
+    }
+
     @Test func templatesAndFolders() throws {
         let templates = ModeTemplate.loadAll(language: .ru)
         var d = draft()
@@ -74,13 +96,13 @@ struct AssistantModeStoreTests {
         defer { try? FileManager.default.removeItem(at: dir) }
         let store = ModeStore(settings: settings, directory: dir)
         #expect(store.needsAssistant)
-        #expect(store.modes.map(\.template) == ["starter"])
-        #expect(!settings.shows(.projects))
+        #expect(store.modes.isEmpty, "an empty start: no placeholder profile (SPEC-profiles §2)")
 
         var mode = AssistantDraft.blank
         mode.name = "Видео"
         let added = store.addFromAssistant(mode)
-        #expect(store.modes.map(\.id) == [added.id], "the starter placeholder is replaced")
+        #expect(store.modes.map(\.id) == [added.id])
+        #expect(store.installedModules.contains(.limits), "the first profile installs its modules")
         #expect(store.currentID == added.id)
         #expect(!store.needsAssistant)
         #expect(ModeStore(settings: settings, directory: dir).modes.map(\.name) == ["Видео"])

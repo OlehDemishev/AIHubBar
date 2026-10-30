@@ -139,4 +139,30 @@ struct ProfileModuleTests {
         let reloaded = ModeStore(settings: settings, directory: dir)
         #expect(reloaded.modes.first { $0.id == quiet.id }?.modules == store.modes.first { $0.id == quiet.id }?.modules)
     }
+
+    @Test func emptyStartWithoutDailyReport() throws {
+        let (settings, dir) = environment()
+        defer { try? FileManager.default.removeItem(at: dir) }
+        settings.dailyReportDirectory = dir.appending(path: "no-daily-report").path
+        let store = ModeStore(settings: settings, directory: dir)
+        #expect(store.modes.isEmpty && store.current == nil)
+        #expect(store.installedModules.isEmpty, "nothing works until a profile exists")
+        #expect(store.needsAssistant)
+        #expect(store.panelModules.isEmpty)
+        #expect(ModeStore(settings: settings, directory: dir).needsAssistant, "still nothing set up on the next start")
+    }
+
+    @Test func deletingTheLastProfileEmptiesClaudePult() throws {
+        let (settings, dir) = environment()
+        defer { try? FileManager.default.removeItem(at: dir) }
+        let store = ModeStore(settings: settings, directory: dir)
+        let only = try #require(store.current)
+        store.delete(only.id)
+        #expect(store.modes.isEmpty && store.currentID.isEmpty)
+        #expect(store.installedModules.isEmpty, "modules no profile uses stop")
+        let reloaded = ModeStore(settings: settings, directory: dir)
+        #expect(reloaded.modes.isEmpty)
+        #expect(!reloaded.needsAssistant, "an emptied ClaudePult doesn't push the assistant on every start")
+        #expect(!FileManager.default.fileExists(atPath: dir.appending(path: "\(only.id).json").path))
+    }
 }
