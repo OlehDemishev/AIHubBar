@@ -25,6 +25,8 @@ Data refreshes at launch, on panel open when older than 60 s, every 5 min (`--no
 
 **Widget** «Лимиты Claude» (right-click the desktop → «Изменить виджеты…» → AI Hub Bar): small — session % ring with the reset countdown; medium — session and week bars. It reads `usage.json`, refreshed whenever AI Hub Bar updates the limits.
 
+**Module options per profile:** in Settings → «Профили» → «Панель» each profile chooses what it shows inside a module: «Ресурсы Mac» — which metrics («Показатели: 2 из 7»), «Быстрые команды» — which buttons of the shared library, «Быстрые переключатели» — which toggles, «Не спать» — whether the 15 min / 1 h / 2 h timers show. Nothing chosen means everything, as before; the choices travel in `.claudepult` files (format 2, new keys are optional).
+
 **Context fullness:** a session's row shows «контекст 85 %» from 70 % (orange, red from 90 %), and at 90 % one notification per session: Claude will soon compact the history. Taken from the last main-thread assistant message in the session's journal (input + cache writes + cache reads); the window is 200 000 tokens, or 1 000 000 for «[1m]» models or once the context is past 200 000. Hooks don't report it.
 
 **Night queue:** «На ночь» in a project's actions queues the next step (or, in «Своя задача…», your own task) as a background run at the night start hour (Settings → Claude Code → «Фоновые задачи», 01:00 by default). Queued runs show in the limits card with «Отменить». The Mac stays awake while they run (the «пока работает Claude» rule of «Не спать»), and when the night's runs are all done one summary arrives: «Ночью: 3 задач — ✅ 2, ❌ 1» with a line per run, also in Telegram when «Итог в Telegram» is on.

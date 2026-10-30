@@ -63,10 +63,46 @@ enum ModuleKind: String, Codable, CaseIterable, Sendable {
 struct ProfileModule: Codable, Equatable, Sendable {
     var kind: ModuleKind
     var shown: Bool
+    /// The profile's own choices inside a module (SPEC-profiles §3, «в профиле»); nil everywhere = show everything,
+    /// as before these existed. «Ресурсы Mac»: `ResourceMetric` raw values.
+    var metrics: [String]?
+    /// «Быстрые команды»: ids from the shared library.
+    var commands: [String]?
+    /// «Быстрые переключатели»: `QuickToggle` raw values; nil = the ones chosen in Settings → «Модули».
+    var toggles: [String]?
+    /// «Не спать»: the 15 min / 1 h / 2 h buttons.
+    var showTimers: Bool?
 
     init(_ kind: ModuleKind, shown: Bool = true) {
         self.kind = kind
         self.shown = shown
+    }
+
+    /// Switches one item on or off in a «nil = all» list; back to nil once everything is on again.
+    static func toggled(_ id: String, in current: [String]?, all: [String]) -> [String]? {
+        var chosen = current ?? all
+        if chosen.contains(id) { chosen.removeAll { $0 == id } } else { chosen.append(id) }
+        let ordered = all.filter(chosen.contains)
+        return ordered == all ? nil : ordered
+    }
+
+    static func includes(_ id: String, in list: [String]?) -> Bool { list?.contains(id) ?? true }
+}
+
+/// What «Ресурсы Mac» can show; a profile picks some of them.
+enum ResourceMetric: String, CaseIterable, Sendable {
+    case cpu, memory, gpu, disk, network, battery, processes
+
+    var title: String {
+        switch self {
+        case .cpu: String(localized: "Процессор")
+        case .memory: String(localized: "Память")
+        case .gpu: String(localized: "Графика")
+        case .disk: String(localized: "Диск")
+        case .network: String(localized: "Сеть")
+        case .battery: String(localized: "Батарея")
+        case .processes: String(localized: "Самые прожорливые")
+        }
     }
 }
 
@@ -105,6 +141,8 @@ extension Mode {
     /// Shown modules in panel order.
     var panelModules: [ModuleKind] { (modules ?? []).filter(\.shown).map(\.kind) }
 
+    func module(_ kind: ModuleKind) -> ProfileModule? { modules?.first { $0.kind == kind } }
+
     func shows(_ kind: ModuleKind) -> Bool { modules?.contains { $0.kind == kind && $0.shown } ?? false }
 }
 
@@ -113,7 +151,14 @@ struct ModuleList: Decodable {
     var modules: [ProfileModule]
 
     init(from decoder: Decoder) throws {
-        struct Raw: Decodable { var kind: String?; var shown: Bool? }
+        struct Raw: Decodable {
+            var kind: String?
+            var shown: Bool?
+            var metrics: [String]?
+            var commands: [String]?
+            var toggles: [String]?
+            var showTimers: Bool?
+        }
         /// Reads nothing, so it accepts any value and the container moves on.
         struct Skip: Decodable { init(from decoder: Decoder) throws {} }
         var container = try decoder.unkeyedContainer()
@@ -124,7 +169,12 @@ struct ModuleList: Decodable {
                 continue
             }
             if let kind = raw.kind.flatMap(ModuleKind.init(rawValue:)), !modules.contains(where: { $0.kind == kind }) {
-                modules.append(ProfileModule(kind, shown: raw.shown ?? true))
+                var module = ProfileModule(kind, shown: raw.shown ?? true)
+                module.metrics = raw.metrics
+                module.commands = raw.commands
+                module.toggles = raw.toggles
+                module.showTimers = raw.showTimers
+                modules.append(module)
             }
         }
         self.modules = modules

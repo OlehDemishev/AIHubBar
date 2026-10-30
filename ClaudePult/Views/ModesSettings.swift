@@ -130,6 +130,7 @@ struct ModesSettings: View {
 private struct ModeEditor: View {
     @Environment(ModeStore.self) private var modes
     @Environment(AIServiceStore.self) private var services
+    @Environment(AppSettings.self) private var settings
     @State var mode: Mode
 
     private static let icons = [
@@ -278,6 +279,7 @@ private struct ModeEditor: View {
                         Label(module.kind.title, systemImage: module.kind.symbol)
                     }
                     Spacer()
+                    options(module, at: index)
                     if !module.kind.isBuiltIn {
                         Button { modes.removeModule(module.kind, from: mode.id); mode.modules?.removeAll { $0.kind == module.kind } } label: {
                             Image(systemName: "minus.circle")
@@ -307,6 +309,57 @@ private struct ModeEditor: View {
         } footer: {
             Footnote(text: String(localized: "Блоки панели этого профиля сверху вниз. «Ближайшее», «Проекты» и «Отчёты» появляются, когда у профиля включён календарь, есть источник проектов или команды _daily-report."))
         }
+    }
+
+    /// What this profile shows inside a module (SPEC-profiles §3): a menu of checkmarks, «все» when nothing is chosen.
+    @ViewBuilder
+    private func options(_ module: ProfileModule, at index: Int) -> some View {
+        switch module.kind {
+        case .resources:
+            choiceMenu(String(localized: "Показатели"), chosen: module.metrics,
+                       items: ResourceMetric.allCases.map { ($0.rawValue, $0.title) }) { new in edit { $0[index].metrics = new } }
+        case .quickCommands:
+            choiceMenu(String(localized: "Команды"), chosen: module.commands,
+                       items: settings.quickCommands.map { ($0.id, $0.title) }) { new in edit { $0[index].commands = new } }
+        case .toggles:
+            // nil here means «as in Settings → Модули», so a choice made in the profile is always kept as a list.
+            let all = QuickToggle.allCases.map(\.rawValue)
+            choiceMenu(String(localized: "Переключатели"), chosen: module.toggles ?? settings.quickToggles.map(\.rawValue),
+                       items: QuickToggle.allCases.map { ($0.rawValue, $0.title) }) { new in edit { $0[index].toggles = new ?? all } }
+        case .keepAwake:
+            Toggle("Таймеры", isOn: Binding(
+                get: { module.showTimers != false },
+                set: { on in edit { $0[index].showTimers = on ? nil : false } }
+            ))
+            .toggleStyle(.checkbox)
+            .help("Кнопки «15 мин», «1 ч», «2 ч» в панели")
+        default:
+            EmptyView()
+        }
+    }
+
+    private func choiceMenu(_ title: String, chosen: [String]?, items: [(id: String, title: String)],
+                            set: @escaping ([String]?) -> Void) -> some View {
+        let all = items.map(\.id)
+        let count = chosen.map { list in all.filter(list.contains).count } ?? all.count
+        return Menu {
+            ForEach(items, id: \.id) { item in
+                Button {
+                    set(ProfileModule.toggled(item.id, in: chosen, all: all))
+                } label: {
+                    if ProfileModule.includes(item.id, in: chosen) {
+                        Label(item.title, systemImage: "checkmark")
+                    } else {
+                        Text(item.title)
+                    }
+                }
+            }
+        } label: {
+            Text(count == all.count ? String(localized: "\(title): все") : String(localized: "\(title): \(count) из \(all.count)"))
+        }
+        .menuStyle(.borderlessButton)
+        .fixedSize()
+        .help("Что этот профиль показывает в блоке")
     }
 
     private func edit(_ change: (inout [ProfileModule]) -> Void) {
