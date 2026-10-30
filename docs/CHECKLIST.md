@@ -254,3 +254,11 @@ Panel snapshots: `defaults write com.demishev.claudepult DebugPanelSnapshot -boo
 | Agent version without the repeated product name («2.1.312») | Auto + live (Сервисы AI) |
 | Limits tab: thresholds shown once, footnote points to «Строка меню»; Sessions tab: no «Обновить hooks» while installed | Live (window captures) |
 | Panel: one refresh (⌘R) for projects and limits; stale limits dimmed with «данные … назад»; the warning wraps instead of being cut | Live (panel snapshot) |
+
+## Panel polish (UI review, 2026-10-30)
+
+| Scenario | Checked |
+|---|---|
+| Week reset on the title line; a model week at 0 % is hidden; a model week's reset only when it differs from the week's | Auto (`shownOtherWindows`) + live (panel snapshot) |
+| «Проекты» header with the count and «с проблемами: N» | Live (panel snapshot) |
+| Badges read «2 файла», «1 PR» | Live (panel snapshot) |

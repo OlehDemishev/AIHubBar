@@ -32,6 +32,9 @@ struct UsageSnapshotTests {
         let resets = try #require(snapshot.session?.resetsAt)
         #expect(abs(resets.timeIntervalSince(try #require(ISODate.parse("2026-10-30T00:50:00Z")))) < 1)
         #expect(snapshot.otherWindows.map(\.title) == ["Неделя · Sonnet", "Неделя · Fable"])
+        var unused = snapshot
+        unused.windows = unused.windows.map { var w = $0; if w.key == "seven_day_fable" { w.utilization = 0 }; return w }
+        #expect(unused.shownOtherWindows.map(\.key) == ["seven_day_sonnet"], "a model week at 0 % takes no room in the panel")
         #expect(!snapshot.windows.contains { $0.key.contains("iguana") }, "code-named objects are not plan limits")
         #expect(snapshot.extra?.isEnabled == false)
         #expect(snapshot.extra?.monthlyLimit == 2000)
