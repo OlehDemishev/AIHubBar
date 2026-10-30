@@ -3276,7 +3276,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "+ content plan (контент-план.md)"
+            "value": "+ content plan (content-plan.md)"
           }
         },
         "es": {
@@ -9232,73 +9232,73 @@
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "دون شاشة وطاقة يدخل Mac المغلق في السكون دائمًا، ولا يغيّر ذلك إلا pmset بصلاحيات المسؤول. «السماح…» يطلب كلمة المرور مرة واحدة ويضيف القاعدة /etc/sudoers.d/claudepult: فقط الأمرين pmset -a disablesleep 0 و 1. ما دامت قاعدة «Не спать» سارية يبقى السكون معطلًا، وبعدها وعند إنهاء ClaudePult يعود. ويعود أيضًا حين تنخفض البطارية عن 20%. يسخن Mac المغلق: لا تضعه في حقيبة."
+            "value": "دون شاشة وطاقة يدخل Mac المغلق في السكون دائمًا، ولا يغيّر ذلك إلا pmset بصلاحيات المسؤول. «السماح…» يطلب كلمة المرور مرة واحدة ويضيف القاعدة /etc/sudoers.d/claudepult: فقط الأمرين pmset -a disablesleep 0 و 1. ما دامت قاعدة «البقاء مستيقظًا» سارية يبقى السكون معطلًا، وبعدها وعند إنهاء ClaudePult يعود. ويعود أيضًا حين تنخفض البطارية عن 20%. يسخن Mac المغلق: لا تضعه في حقيبة."
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ohne Monitor und Strom schläft ein geschlossener Mac immer; nur pmset als Administrator kann das ändern. „Erlauben…“ fragt einmal nach dem Passwort und legt die Regel /etc/sudoers.d/claudepult an: nur die Befehle pmset -a disablesleep 0 und 1. Solange eine «Не спать»-Regel greift, ist der Ruhezustand aus; danach und beim Beenden von ClaudePult wieder an. Ebenso bei Akku unter 20%. Ein geschlossener Mac wird warm: nicht in die Tasche stecken."
+            "value": "Ohne Monitor und Strom schläft ein geschlossener Mac immer; nur pmset als Administrator kann das ändern. „Erlauben…“ fragt einmal nach dem Passwort und legt die Regel /etc/sudoers.d/claudepult an: nur die Befehle pmset -a disablesleep 0 und 1. Solange eine „Wach bleiben“-Regel greift, ist der Ruhezustand aus; danach und beim Beenden von ClaudePult wieder an. Ebenso bei Akku unter 20%. Ein geschlossener Mac wird warm: nicht in die Tasche stecken."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Without a display and power, a closed Mac always sleeps; only pmset run as administrator can change that. «Allow…» asks for the password once and adds the rule /etc/sudoers.d/claudepult: only the commands pmset -a disablesleep 0 and 1. While a «Не спать» rule holds, sleep is off; afterwards, and when ClaudePult quits, it is turned back on. Also back on when the battery drops below 20%. A closed Mac gets warm: don’t put it in a bag."
+            "value": "Without a display and power, a closed Mac always sleeps; only pmset run as administrator can change that. «Allow…» asks for the password once and adds the rule /etc/sudoers.d/claudepult: only the commands pmset -a disablesleep 0 and 1. While a «Keep Awake» rule holds, sleep is off; afterwards, and when ClaudePult quits, it is turned back on. Also back on when the battery drops below 20%. A closed Mac gets warm: don’t put it in a bag."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sin pantalla ni corriente, un Mac cerrado siempre duerme; solo pmset como administrador puede cambiarlo. «Permitir…» pide la contraseña una vez y añade la regla /etc/sudoers.d/claudepult: solo los comandos pmset -a disablesleep 0 y 1. Mientras una regla de «Не спать» lo mantiene, el reposo está desactivado; después, y al salir de ClaudePult, se reactiva. También se reactiva con la batería por debajo del 20%. Un Mac cerrado se calienta: no lo metas en una bolsa."
+            "value": "Sin pantalla ni corriente, un Mac cerrado siempre duerme; solo pmset como administrador puede cambiarlo. «Permitir…» pide la contraseña una vez y añade la regla /etc/sudoers.d/claudepult: solo los comandos pmset -a disablesleep 0 y 1. Mientras una regla de «No dormir» lo mantiene, el reposo está desactivado; después, y al salir de ClaudePult, se reactiva. También se reactiva con la batería por debajo del 20%. Un Mac cerrado se calienta: no lo metas en una bolsa."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sans écran ni alimentation, un Mac fermé se met toujours en veille ; seul pmset en administrateur peut l’empêcher. « Autoriser… » demande le mot de passe une fois et ajoute la règle /etc/sudoers.d/claudepult : uniquement les commandes pmset -a disablesleep 0 et 1. Tant qu’une règle « Не спать » tient, la veille est désactivée ; ensuite, et quand ClaudePult quitte, elle est rétablie. Elle l’est aussi quand la batterie passe sous 20%. Un Mac fermé chauffe : ne le mettez pas dans un sac."
+            "value": "Sans écran ni alimentation, un Mac fermé se met toujours en veille ; seul pmset en administrateur peut l’empêcher. « Autoriser… » demande le mot de passe une fois et ajoute la règle /etc/sudoers.d/claudepult : uniquement les commandes pmset -a disablesleep 0 et 1. Tant qu’une règle « Rester éveillé » tient, la veille est désactivée ; ensuite, et quand ClaudePult quitte, elle est rétablie. Elle l’est aussi quand la batterie passe sous 20%. Un Mac fermé chauffe : ne le mettez pas dans un sac."
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tanpa monitor dan daya, Mac yang ditutup selalu tidur; hanya pmset sebagai administrator yang bisa mengubahnya. «Izinkan…» meminta kata sandi sekali dan menambahkan aturan /etc/sudoers.d/claudepult: hanya perintah pmset -a disablesleep 0 dan 1. Selama aturan «Не спать» berlaku, tidur dimatikan; setelahnya dan saat ClaudePult ditutup, dinyalakan kembali. Juga saat baterai di bawah 20%. Mac yang ditutup menjadi hangat: jangan masukkan ke tas."
+            "value": "Tanpa monitor dan daya, Mac yang ditutup selalu tidur; hanya pmset sebagai administrator yang bisa mengubahnya. «Izinkan…» meminta kata sandi sekali dan menambahkan aturan /etc/sudoers.d/claudepult: hanya perintah pmset -a disablesleep 0 dan 1. Selama aturan «Tetap terjaga» berlaku, tidur dimatikan; setelahnya dan saat ClaudePult ditutup, dinyalakan kembali. Juga saat baterai di bawah 20%. Mac yang ditutup menjadi hangat: jangan masukkan ke tas."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Senza monitor e alimentazione un Mac chiuso va sempre in stop; solo pmset come amministratore può cambiarlo. «Consenti…» chiede la password una volta e aggiunge la regola /etc/sudoers.d/claudepult: solo i comandi pmset -a disablesleep 0 e 1. Finché una regola di «Не спать» tiene, lo stop è disattivato; poi, e quando ClaudePult si chiude, torna attivo. Torna attivo anche con la batteria sotto il 20%. Un Mac chiuso si scalda: non metterlo in borsa."
+            "value": "Senza monitor e alimentazione un Mac chiuso va sempre in stop; solo pmset come amministratore può cambiarlo. «Consenti…» chiede la password una volta e aggiunge la regola /etc/sudoers.d/claudepult: solo i comandi pmset -a disablesleep 0 e 1. Finché una regola di «Resta sveglio» tiene, lo stop è disattivato; poi, e quando ClaudePult si chiude, torna attivo. Torna attivo anche con la batteria sotto il 20%. Un Mac chiuso si scalda: non metterlo in borsa."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "モニタと電源がないと、閉じた Mac は必ずスリープします。これを変えられるのは管理者として実行する pmset だけです。「許可…」はパスワードを一度だけ求め、/etc/sudoers.d/claudepult にルールを追加します（pmset -a disablesleep 0 と 1 のみ）。「Не спать」のルールが有効な間はスリープしません。終わったときと ClaudePult を終了したときに元に戻します。バッテリーが 20% を下回ったときも戻します。閉じた Mac は熱くなるので、バッグに入れないでください。"
+            "value": "モニタと電源がないと、閉じた Mac は必ずスリープします。これを変えられるのは管理者として実行する pmset だけです。「許可…」はパスワードを一度だけ求め、/etc/sudoers.d/claudepult にルールを追加します（pmset -a disablesleep 0 と 1 のみ）。「スリープしない」のルールが有効な間はスリープしません。終わったときと ClaudePult を終了したときに元に戻します。バッテリーが 20% を下回ったときも戻します。閉じた Mac は熱くなるので、バッグに入れないでください。"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "모니터와 전원이 없으면 닫힌 Mac은 항상 잠자기에 들어가며, 관리자 권한의 pmset만 이를 바꿀 수 있습니다. «허용…»은 암호를 한 번 묻고 /etc/sudoers.d/claudepult 규칙을 추가합니다(pmset -a disablesleep 0과 1 명령만). «Не спать» 규칙이 유지되는 동안 잠자기가 꺼지고, 끝나거나 ClaudePult를 종료하면 다시 켜집니다. 배터리가 20% 아래로 떨어져도 다시 켜집니다. 닫힌 Mac은 뜨거워지니 가방에 넣지 마세요."
+            "value": "모니터와 전원이 없으면 닫힌 Mac은 항상 잠자기에 들어가며, 관리자 권한의 pmset만 이를 바꿀 수 있습니다. «허용…»은 암호를 한 번 묻고 /etc/sudoers.d/claudepult 규칙을 추가합니다(pmset -a disablesleep 0과 1 명령만). «잠자기 방지» 규칙이 유지되는 동안 잠자기가 꺼지고, 끝나거나 ClaudePult를 종료하면 다시 켜집니다. 배터리가 20% 아래로 떨어져도 다시 켜집니다. 닫힌 Mac은 뜨거워지니 가방에 넣지 마세요."
           }
         },
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Bez monitora i zasilania zamknięty Mac zawsze usypia; zmienić to może tylko pmset jako administrator. «Zezwól…» raz pyta o hasło i dodaje regułę /etc/sudoers.d/claudepult: tylko polecenia pmset -a disablesleep 0 i 1. Dopóki trzyma reguła «Не спать», usypianie jest wyłączone; potem i przy zamknięciu ClaudePult wraca. Wraca też przy baterii poniżej 20%. Zamknięty Mac się nagrzewa: nie wkładaj go do torby."
+            "value": "Bez monitora i zasilania zamknięty Mac zawsze usypia; zmienić to może tylko pmset jako administrator. «Zezwól…» raz pyta o hasło i dodaje regułę /etc/sudoers.d/claudepult: tylko polecenia pmset -a disablesleep 0 i 1. Dopóki trzyma reguła „Bez usypiania”, usypianie jest wyłączone; potem i przy zamknięciu ClaudePult wraca. Wraca też przy baterii poniżej 20%. Zamknięty Mac się nagrzewa: nie wkładaj go do torby."
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sem monitor e energia, um Mac fechado sempre dorme; só o pmset como administrador muda isso. «Permitir…» pede a senha uma vez e adiciona a regra /etc/sudoers.d/claudepult: apenas os comandos pmset -a disablesleep 0 e 1. Enquanto uma regra de «Не спать» segura, o repouso fica desligado; depois, e ao sair do ClaudePult, volta. Também volta com a bateria abaixo de 20%. Um Mac fechado esquenta: não o coloque numa bolsa."
+            "value": "Sem monitor e energia, um Mac fechado sempre dorme; só o pmset como administrador muda isso. «Permitir…» pede a senha uma vez e adiciona a regra /etc/sudoers.d/claudepult: apenas os comandos pmset -a disablesleep 0 e 1. Enquanto uma regra de «Não dormir» segura, o repouso fica desligado; depois, e ao sair do ClaudePult, volta. Também volta com a bateria abaixo de 20%. Um Mac fechado esquenta: não o coloque numa bolsa."
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Без монітора й живлення закритий Mac завжди засинає, змінити це може лише pmset від імені адміністратора. «Дозволити…» один раз питає пароль і додає правило /etc/sudoers.d/claudepult: лише команди pmset -a disablesleep 0 і 1. Поки тримає правило «Не спать», сон вимкнено; потім і при виході з ClaudePult — вмикається знову. На батареї нижче 20% — теж. Закритий Mac гріється: не кладіть його в сумку."
+            "value": "Без монітора й живлення закритий Mac завжди засинає, змінити це може лише pmset від імені адміністратора. «Дозволити…» один раз питає пароль і додає правило /etc/sudoers.d/claudepult: лише команди pmset -a disablesleep 0 і 1. Поки тримає правило «Не спати», сон вимкнено; потім і при виході з ClaudePult — вмикається знову. На батареї нижче 20% — теж. Закритий Mac гріється: не кладіть його в сумку."
           }
         }
       }
@@ -11758,7 +11758,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Turn on “Compare”, pick 2–3 services and a command: the results land side by side (“хуки (Claude).md”, “хуки (OpenAI).md”) and open in the “Comparison” window."
+            "value": "Turn on “Compare”, pick 2–3 services and a command: the results land side by side (“hooks (Claude).md”, “hooks (OpenAI).md”) and open in the “Comparison” window."
           }
         },
         "es": {
@@ -12952,7 +12952,7 @@
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Усе це можна зробити й пізніше: у Налаштуваннях і у вікні «Довідка»."
+            "value": "Усе це можна зробити й пізніше: у Налаштуваннях і у вікні «Допомога»."
           }
         }
       }
@@ -15558,7 +15558,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Dates come from проект.md (deadline, publication) and контент-план.md of profiles with a calendar (the “Profiles” tab)."
+            "value": "Dates come from project.md (deadline, publication) and content-plan.md of profiles with a calendar (the “Profiles” tab)."
           }
         },
         "es": {
@@ -15938,7 +15938,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Deadlines and publications from проект.md"
+            "value": "Deadlines and publications from project.md"
           }
         },
         "es": {
@@ -16014,7 +16014,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Deadlines and publications from проект.md, rows of контент-план.md — for profiles with the calendar on (Settings → “Profiles”)."
+            "value": "Deadlines and publications from project.md, rows of content-plan.md — for profiles with the calendar on (Settings → “Profiles”)."
           }
         },
         "es": {
@@ -22550,7 +22550,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "The проект.md card, stages, metrics, commands, background permissions and the calendar are for profiles with the “folders” source."
+            "value": "The project.md card, stages, metrics, commands, background permissions and the calendar are for profiles with the “folders” source."
           }
         },
         "es": {
@@ -22626,7 +22626,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "The project card is plain text: “Этап: script”, “Дедлайн: 2026-11-05”, “Публикация: 2026-11-05 18:00”, “Формат: …”, “Главный файл: script.md”, “Площадка: YouTube” (English keys stage, deadline, publish, format, main file, platform work too). Edit it by hand any time."
+            "value": "The project card is plain text: “Stage: script”, “Deadline: 2026-11-05”, “Publish: 2026-11-05 18:00”, “Format: …”, “Main file: script.md”, “Platform: YouTube”. Edit it by hand any time."
           }
         },
         "es": {
@@ -22702,7 +22702,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "The project card is the file проект.md in the project folder (stage, deadline, publication, format, main file, platform); the stage changes right from the panel. Words are counted on the main file."
+            "value": "The project card is the file project.md in the project folder (stage, deadline, publication, format, main file, platform); the stage changes right from the panel. Words are counted on the main file."
           }
         },
         "es": {
@@ -38540,7 +38540,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Move to the “%@” stage (written to проект.md)"
+            "value": "Move to the “%@” stage (written to project.md)"
           }
         },
         "es": {
@@ -60903,7 +60903,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "The stages every project goes through. A stage changes right from the panel and is written to проект.md."
+            "value": "The stages every project goes through. A stage changes right from the panel and is written to project.md."
           }
         },
         "es": {
@@ -67223,7 +67223,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "проект.md"
+            "value": "project.md"
           }
         },
         "es": {
@@ -67907,7 +67907,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "результат-<время>.md"
+            "value": "result-<time>.md"
           }
         },
         "es": {
