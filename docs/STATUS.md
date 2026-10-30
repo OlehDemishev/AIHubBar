@@ -5,7 +5,7 @@
 **Updated:** 2026-10-30
 
 **Now:**
-- SPEC-modes §9 stage 9: English content (templates, prompts, card and plan files) in PR (branch `feat/english-templates`); next: the other languages (es, pt-BR, fr, de, ja, id, ko, it, ar with RTL, pl, uk)
+- SPEC-modes §9 stage 9: English complete (PRs #45, #47); next: the other languages (es, pt-BR, fr, de, ja, id, ko, it, ar with RTL, pl, uk)
 
 **Next:**
 - SPEC-modes §9: 5 calendar, 6 templates, 7 setup assistant, 8 for everyone, 9 languages (§13: en, es, pt-BR, fr, de, ja, id, ko, it, ar with RTL, pl, uk)
