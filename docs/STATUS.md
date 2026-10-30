@@ -5,7 +5,7 @@
 **Updated:** 2026-10-30
 
 **Now:**
-- Settings tidy-up from the UI review — branch `feat/settings-tidy`, PR open
+- Settings tidy-up merged (PR #62); next: collapsible panel blocks
 
 **Next:**
 - rest of the UI review: collapsible panel blocks; menu bar elements reordered by dragging
