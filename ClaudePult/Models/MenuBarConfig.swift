@@ -121,6 +121,8 @@ struct MenuBarElement: Codable, Equatable, Hashable, Identifiable, Sendable {
     enum Kind: String, Codable, CaseIterable, Sendable {
         case icon, projectsAlert, session, week, modelWeek, resetCountdown, forecast
         case waiting, running, background, queued, deadline, disk, mode
+        /// From «Ресурсы Mac» (SPEC-profiles §4.1).
+        case cpu, memory
 
         var title: String {
             switch self {
@@ -138,10 +140,12 @@ struct MenuBarElement: Codable, Equatable, Hashable, Identifiable, Sendable {
             case .deadline: String(localized: "Ближайшая дата календаря")
             case .disk: String(localized: "Свободное место (если мало)")
             case .mode: String(localized: "Текущий профиль")
+            case .cpu: String(localized: "Процессор (модуль «Ресурсы Mac»)")
+            case .memory: String(localized: "Память (модуль «Ресурсы Mac»)")
             }
         }
 
-        var isGauge: Bool { self == .session || self == .week || self == .modelWeek }
+        var isGauge: Bool { [.session, .week, .modelWeek, .cpu, .memory].contains(self) }
     }
 
     enum GaugeStyle: String, Codable, CaseIterable, Sendable {
@@ -212,6 +216,9 @@ struct MenuBarData: Equatable, Hashable, Sendable {
     var deadline: String?
     var modeName: String?
     var modeIcon: String?
+    /// «Ресурсы Mac», when installed.
+    var cpu: Double?
+    var memory: Double?
     /// Countdowns are drawn for this minute.
     var now: Date = .now
 
@@ -219,7 +226,8 @@ struct MenuBarData: Equatable, Hashable, Sendable {
         showsAlert: true, waiting: 1, running: 2, background: 1, queued: 1, session: 34, week: 58,
         modelWeeks: ["seven_day_fable": 12], sessionResetsAt: Date.now.addingTimeInterval(2 * 3600 + 14 * 60),
         forecastRunsOut: Date.now.addingTimeInterval(90 * 60), diskFreeBytes: 12_000_000_000,
-        deadline: String(localized: "Ролик · 2 дн"), modeName: String(localized: "Видео"), modeIcon: "video"
+        deadline: String(localized: "Ролик · 2 дн"), modeName: String(localized: "Видео"), modeIcon: "video",
+        cpu: 23, memory: 71
     )
 }
 
@@ -290,6 +298,15 @@ enum MenuBarComposer {
             case .disk:
                 guard let bytes = data.diskFreeBytes, bytes < Int64(element.diskBelowGB) * 1_000_000_000 else { continue }
                 groups.append([.labeled(symbol: "internaldrive", text: String(localized: "\(bytes / 1_000_000_000) ГБ"), .warning)])
+            case .cpu, .memory:
+                // A small chip symbol says which number it is: the gauges look like the limits otherwise.
+                guard let value = element.kind == .cpu ? data.cpu : data.memory, value >= Double(element.showAbove) else { continue }
+                let symbol = element.kind == .cpu ? "cpu" : "memorychip"
+                switch element.style {
+                case .number: groups.append([.labeled(symbol: symbol, text: "\(Int(value.rounded()))%", level(value))])
+                case .ring: groups.append([.symbol(symbol), .ring(value, level(value))])
+                case .bar: groups.append([.symbol(symbol), .bar(value, level(value))])
+                }
             case .mode:
                 if element.showName, let name = data.modeName {
                     groups.append([.text(name, .secondary)])

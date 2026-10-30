@@ -8,6 +8,7 @@ struct MenuPanelView: View {
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(ProjectStore.self) private var store
     @Environment(UsageStore.self) private var usage
+    @Environment(SystemMonitor.self) private var monitor
     @AppStorage("collapsedBlocks") private var collapsedRaw = ""
     @Environment(SessionStore.self) private var sessions
     @Environment(HookController.self) private var hooks
@@ -90,6 +91,7 @@ struct MenuPanelView: View {
         .onAppear {
             log.debug("Panel shown")
             isShown = true
+            monitor.isPanelOpen = true
             store.refreshIfStale()
             folders.refreshIfStale()
             calendar.refreshIfStale()
@@ -100,6 +102,7 @@ struct MenuPanelView: View {
         }
         .onDisappear {
             isShown = false
+            monitor.isPanelOpen = false
         }
         .onChange(of: expanded) { snapshotIfEnabled() }
         .onChange(of: store.lastUpdated) { snapshotIfEnabled() }
@@ -250,6 +253,10 @@ struct MenuPanelView: View {
                 .revealed(isShown, step: 1, reduceMotion: calm)
                 Divider()
             }
+        case .resources:
+            ResourcesView()
+                .revealed(isShown, step: 1, reduceMotion: calm)
+            Divider()
         case .reports:
             CommandsView()
                 .revealed(isShown, step: 2, reduceMotion: calm)

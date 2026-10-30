@@ -71,6 +71,8 @@ struct AssistantDraft: Equatable, Sendable {
     /// What «Проекты» and «Ближайшее» had before they were switched off, to bring it back when switched on again.
     private var savedSource: ProjectSource?
     private var savedCalendar: CalendarMode?
+    /// Optional modules ticked here; they are installed with the profile.
+    private(set) var extraModules: [ModuleKind] = []
 
     init(firstLaunch: Bool, menuBar: MenuBarConfig, hiddenBlocks: Set<PanelBlock>, reminderHours: [Int]) {
         self.firstLaunch = firstLaunch
@@ -105,7 +107,7 @@ struct AssistantDraft: Equatable, Sendable {
     var hasProjects: Bool { mode.source != .none }
 
     /// The modules the assistant offers; «Отчёты _daily-report» is Oleh's own and stays in Settings.
-    static let offeredModules: [ModuleKind] = [.limits, .sessions, .projects, .upcoming]
+    static let offeredModules: [ModuleKind] = [.limits, .sessions, .projects, .upcoming, .resources]
 
     func hasModule(_ kind: ModuleKind) -> Bool {
         switch kind {
@@ -114,6 +116,7 @@ struct AssistantDraft: Equatable, Sendable {
         case .projects: hasProjects
         case .upcoming: mode.calendar != .off && mode.source.isFolders
         case .reports: mode.commonCommands == .dailyReport
+        case .resources: extraModules.contains(kind)
         }
     }
 
@@ -145,6 +148,9 @@ struct AssistantDraft: Equatable, Sendable {
             }
         case .reports:
             mode.commonCommands = on ? .dailyReport : .none
+        case .resources:
+            extraModules.removeAll { $0 == kind }
+            if on { extraModules.append(kind) }
         }
     }
 

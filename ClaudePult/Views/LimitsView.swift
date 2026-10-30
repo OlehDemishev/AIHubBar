@@ -231,8 +231,11 @@ private struct QueuedRow: View {
 }
 
 extension UsageWindow {
-    var levelColor: Color {
-        switch UsageLevel(utilization) {
+    var levelColor: Color { Self.color(for: utilization) }
+
+    /// Green below 50 %, orange to 80 %, red above — limits and Mac resources alike.
+    static func color(for value: Double) -> Color {
+        switch UsageLevel(value) {
         case .low: .green
         case .medium: .orange
         case .high: .red

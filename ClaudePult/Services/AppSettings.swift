@@ -93,6 +93,15 @@ final class AppSettings {
         didSet { defaults.set(limitAlertsToTelegram, forKey: Keys.limitAlertsToTelegram) }
     }
 
+    /// «Ресурсы Mac» (SPEC-profiles §4.1): notify about sustained load, memory, disk space and battery.
+    var resourceAlerts: Bool {
+        didSet { defaults.set(resourceAlerts, forKey: Keys.resourceAlerts) }
+    }
+
+    var resourceDiskBelowGB: Int {
+        didSet { defaults.set(resourceDiskBelowGB, forKey: Keys.resourceDiskBelowGB) }
+    }
+
     /// Renew an expired Claude Code sign-in with a one-word `claude` request (`LoginRenewal`).
     var renewClaudeLogin: Bool {
         didSet { defaults.set(renewClaudeLogin, forKey: Keys.renewClaudeLogin) }
@@ -164,6 +173,9 @@ final class AppSettings {
         limitThresholds = thresholds?.isEmpty == false ? thresholds! : Self.defaultLimitThresholds
         limitAlertsToTelegram = defaults.bool(forKey: Keys.limitAlertsToTelegram)
         renewClaudeLogin = defaults.object(forKey: Keys.renewClaudeLogin) as? Bool ?? true
+        resourceAlerts = defaults.object(forKey: Keys.resourceAlerts) as? Bool ?? true
+        let diskBelow = defaults.integer(forKey: Keys.resourceDiskBelowGB)
+        resourceDiskBelowGB = diskBelow > 0 ? diskBelow : 20
         panelTextSize = defaults.string(forKey: Keys.panelTextSize).flatMap(PanelTextSize.init(rawValue:)) ?? .normal
         panelWidth = defaults.string(forKey: Keys.panelWidth).flatMap(PanelWidth.init(rawValue:)) ?? .normal
         panelDensity = defaults.string(forKey: Keys.panelDensity).flatMap(PanelDensity.init(rawValue:)) ?? .normal
@@ -191,6 +203,8 @@ final class AppSettings {
         static let limitThresholds = "limitThresholds"
         static let limitAlertsToTelegram = "limitAlertsToTelegram"
         static let renewClaudeLogin = "renewClaudeLogin"
+        static let resourceAlerts = "resourceAlerts"
+        static let resourceDiskBelowGB = "resourceDiskBelowGB"
         static let panelTextSize = "panelTextSize"
         static let panelWidth = "panelWidth"
         static let panelDensity = "panelDensity"
