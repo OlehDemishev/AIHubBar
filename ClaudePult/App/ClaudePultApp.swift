@@ -15,6 +15,8 @@ struct ClaudePultApp: App {
     @State private var monitor: SystemMonitor
     @State private var keepAwake: KeepAwakeController
     @State private var quickTools = QuickToolsController()
+    @State private var clipboard: ClipboardHistory
+    @State private var notesStore: NotesStore
     @State private var notifications = NotificationPermission()
     @State private var modes: ModeStore
     @State private var services: AIServiceStore
@@ -52,6 +54,10 @@ struct ClaudePultApp: App {
         let monitor = SystemMonitor(settings: settings)
         _monitor = State(initialValue: monitor)
         let keepAwake = KeepAwakeController(settings: settings)
+        let clipboard = ClipboardHistory(settings: settings)
+        _clipboard = State(initialValue: clipboard)
+        let notesStore = NotesStore(settings: settings)
+        _notesStore = State(initialValue: notesStore)
         _keepAwake = State(initialValue: keepAwake)
         let runs = RunStore(settings: settings)
         _runs = State(initialValue: runs)
@@ -63,6 +69,8 @@ struct ClaudePultApp: App {
         usage.isActive = { [modes] in modes.installedModules.contains(.limits) }
         monitor.isActive = { [modes] in modes.installedModules.contains(.resources) }
         keepAwake.isActive = { [modes] in modes.installedModules.contains(.keepAwake) }
+        clipboard.isActive = { [modes] in modes.installedModules.contains(.clipboard) }
+        notesStore.isActive = { [modes] in modes.installedModules.contains(.notes) }
         keepAwake.claudeWorking = { [sessions, runs] in
             !runs.running.isEmpty || sessions.items.contains { $0.state == .running }
         }
@@ -88,6 +96,7 @@ struct ClaudePultApp: App {
             usage.start()
             monitor.start()
             keepAwake.start()
+            clipboard.start()
             Task { await services.scan() }
             folders.start()
             // A first start without `_daily-report`: the assistant sets up the first mode (SPEC-modes §5).
@@ -158,6 +167,8 @@ struct ClaudePultApp: App {
                 .environment(monitor)
                 .environment(keepAwake)
                 .environment(quickTools)
+                .environment(clipboard)
+                .environment(notesStore)
                 .environment(settings)
                 .environment(notifications)
                 .environment(modes)
@@ -235,6 +246,8 @@ struct ClaudePultApp: App {
                 .environment(monitor)
                 .environment(keepAwake)
                 .environment(quickTools)
+                .environment(clipboard)
+                .environment(notesStore)
                 .environment(notifications)
                 .environment(modes)
                 .environment(services)

@@ -5,9 +5,9 @@ import Foundation
 /// from Settings → «Модули» and added to a profile by hand (SPEC-profiles §3).
 enum ModuleKind: String, Codable, CaseIterable, Sendable {
     case limits, sessions, upcoming, projects, reports
-    case resources, keepAwake, quickCommands, toggles
+    case resources, keepAwake, quickCommands, toggles, clipboard, notes
 
-    var isBuiltIn: Bool { ![.resources, .keepAwake, .quickCommands, .toggles].contains(self) }
+    var isBuiltIn: Bool { ![.resources, .keepAwake, .quickCommands, .toggles, .clipboard, .notes].contains(self) }
 
     var title: String {
         switch self {
@@ -20,6 +20,8 @@ enum ModuleKind: String, Codable, CaseIterable, Sendable {
         case .keepAwake: String(localized: "Не спать")
         case .quickCommands: String(localized: "Быстрые команды")
         case .toggles: String(localized: "Быстрые переключатели")
+        case .clipboard: String(localized: "История буфера")
+        case .notes: String(localized: "Заметки")
         }
     }
 
@@ -35,6 +37,8 @@ enum ModuleKind: String, Codable, CaseIterable, Sendable {
         case .keepAwake: String(localized: "Mac не засыпает, пока работает Claude, на время, при подключённом питании или мониторе, пока открыты выбранные приложения.")
         case .quickCommands: String(localized: "Свои кнопки: скрипт в фоне или в Терминале, ярлык из «Команд» macOS, ссылка, файл, папка или приложение.")
         case .toggles: String(localized: "Тёмная тема, значки на рабочем столе, блокировка и выключение экрана, извлечение дисков, корзина — в один клик.")
+        case .clipboard: String(localized: "Последние копирования: поиск, закрепление, снова в буфер одним кликом. Пароли из менеджеров паролей не запоминаются.")
+        case .notes: String(localized: "Заметки в Markdown прямо в панели: вкладки, обычные файлы .md в папке, которую откроет любой редактор.")
         }
     }
 
@@ -49,6 +53,8 @@ enum ModuleKind: String, Codable, CaseIterable, Sendable {
         case .keepAwake: "cup.and.saucer"
         case .quickCommands: "bolt.square"
         case .toggles: "switch.2"
+        case .clipboard: "doc.on.clipboard"
+        case .notes: "note.text"
         }
     }
 }
@@ -82,7 +88,7 @@ extension Mode {
             case .upcoming: !hiddenBlocks.contains(.calendar)
             case .projects: showProjects
             case .reports: showCommonCommands
-            case .resources, .keepAwake, .quickCommands, .toggles: true
+            case .resources, .keepAwake, .quickCommands, .toggles, .clipboard, .notes: true
             }
         }
 
