@@ -5,7 +5,7 @@
 **Updated:** 2026-10-30
 
 **Now:**
-- panel polish from the UI review — branch `feat/panel-polish`, PR open
+- panel polish merged (PR #60); next: Settings tabs from the UI review
 
 **Next:**
 - the rest of the UI review: Settings tabs (merge Claude / Сессии / Лимиты into one, mode list without two kinds of checkmarks, menu bar order by dragging, installed agents first); assistant and Help (no «Пропустить» on the template step, collapse the ready checklist); panel height (collapsible blocks)
