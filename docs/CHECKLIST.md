@@ -87,3 +87,13 @@ Panel snapshots: `defaults write com.demishev.claudepult DebugPanelSnapshot -boo
 | Theme, width, density, blocks, animations switches | Auto (persistence); **Oleh: look** |
 | Помощь window | Live (`--app-command help`, snapshot) |
 | help.txt block «🖥 ClaudePult», ≤ 4000 characters | Live (2429 characters) |
+
+## Modes (SPEC-modes §9.1)
+
+| Scenario | Checked |
+|---|---|
+| First start: current settings become «Разработчик — Олег», nothing changes | Auto + Live (`--modes`, settings unchanged) |
+| Duplicate, enable, order, delete, last mode protected | Auto |
+| Switcher in the panel with 2+ modes, switching applies folders/launch mode | Auto; **Oleh: duplicate the mode in Settings → Режимы and look** |
+| Export all settings / one mode; no home path, no secrets | Auto + Live (`docs/modes/oleh-developer.claudepult`) |
+| Import «Заменить» / «Добавить», tolerant to newer files | Auto; **Oleh: double-click a .claudepult file** |

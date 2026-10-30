@@ -13,6 +13,8 @@ struct ClaudePultApp: App {
     @State private var requests: AppRequests
     @State private var usage: UsageStore
     @State private var notifications = NotificationPermission()
+    @State private var modes: ModeStore
+    @NSApplicationDelegateAdaptor private var appDelegate: AppDelegate
 
     init() {
         if let code = CommandLineTool.run(CommandLine.arguments) {
@@ -20,6 +22,9 @@ struct ClaudePultApp: App {
             exit(code)
         }
         let settings = AppSettings()
+        // Applies the current mode to the settings before anything reads them.
+        let modes = ModeStore(settings: settings)
+        _modes = State(initialValue: modes)
         let store = ProjectStore(settings: settings)
         _settings = State(initialValue: settings)
         _store = State(initialValue: store)
@@ -35,7 +40,17 @@ struct ClaudePultApp: App {
         _runs = State(initialValue: runs)
         let launcher = LaunchController(settings: settings, store: store, runs: runs, usage: usage)
         _launcher = State(initialValue: launcher)
-        _hooks = State(initialValue: HookController(settings: settings))
+        let hooks = HookController(settings: settings)
+        _hooks = State(initialValue: hooks)
+        modes.didApply = {
+            Task { await store.refresh() }
+            hooks.refresh()
+        }
+        AppDelegate.openFile = { url in
+            modes.prepareImport(from: url)
+            UserDefaults.standard.set(SettingsView.Tab.modes.rawValue, forKey: "settingsTab")
+            requests.openWindow("settings")
+        }
         AppLog.info("ClaudePult \(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "?") started")
         // Unit tests use the app as their host; keep it from running report.py in the background.
         if ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] == nil {
@@ -78,6 +93,7 @@ struct ClaudePultApp: App {
                 .environment(usage)
                 .environment(settings)
                 .environment(notifications)
+                .environment(modes)
         } label: {
             MenuBarLabel(state: MenuBarState(
                 showsAlert: store.report?.hasRedProject ?? false,
@@ -120,6 +136,18 @@ struct ClaudePultApp: App {
                 .environment(hooks)
                 .environment(usage)
                 .environment(notifications)
+                .environment(modes)
+        }
+    }
+}
+
+/// Opens `*.claudepult` files double-clicked in Finder (SPEC-modes §12).
+final class AppDelegate: NSObject, NSApplicationDelegate {
+    @MainActor static var openFile: ((URL) -> Void)?
+
+    func application(_ application: NSApplication, open urls: [URL]) {
+        MainActor.assumeIsolated {
+            for url in urls where url.pathExtension == "claudepult" { Self.openFile?(url) }
         }
     }
 }

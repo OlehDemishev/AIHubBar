@@ -1,18 +1,19 @@
 # Status
 
 <!-- summary:start -->
-**Stage:** All 8 spec stages done incl. widgets + settings tabs and appearance
+**Stage:** SPEC.md done; SPEC-modes stage 1 of 9 (mode model) in review
 **Updated:** 2026-10-30
 
 **Now:**
-- docs/SPEC-modes.md §9 stage 1 (mode model + settings export/import) — starting
+- PR `feat/modes` (SPEC-modes stage 1: modes, switcher, «Режимы» tab, settings export/import) — waiting for review
 
 **Next:**
-- docs/SPEC-modes.md §9 stage 1: mode model (JSON) + settings export/import; Oleh's setup becomes his mode «Разработчик — Олег»; switcher in the panel; «Режимы» tab — no behaviour change for Oleh
-- Then §9: 2 menu bar builder, 3 AI services, 4 folder projects + commands, 5 calendar, 6 templates, 7 setup assistant, 8 for everyone
+- Fix: back off on HTTP 429 from the usage endpoint (seen 2026-10-30; polling has no backoff)
+- SPEC-modes §9: 2 menu bar builder, 3 AI services, 4 folder projects + commands, 5 calendar, 6 templates, 7 setup assistant, 8 for everyone, 9 languages (§13: en, es, pt-BR, fr, de, ja, id, ko, it, ar with RTL, pl, uk)
 - Fix whatever Oleh finds in docs/CHECKLIST.md
 
 **Needs Oleh:**
+- review and merge PR `feat/modes`; try Settings → Режимы (duplicate the mode → switcher appears in the panel)
 - read and edit docs/TEMPLATES.md (template texts) before stage 6
 - before stage 3: install Codex CLI and Gemini CLI and create API keys (OpenAI, Google, xAI, DeepSeek, Mistral) for live checks — Oleh offered to
 - before stage 8: Apple Developer Program (Developer ID, notarization) for distributing ClaudePult; decide on the name (SPEC-modes §10.4)
@@ -22,6 +23,12 @@
 - hooks are installed in ~/.claude/settings.json; backup of the original: ~/.claude/settings.json.claudepult-backup-20261029T192827
 - delete or archive the old repo `OlehDemishev/ClaudeBar`; turn on start at login if wanted
 <!-- summary:end -->
+
+## 2026-10-30 — Modes, stage 1 (branch `feat/modes`)
+
+Done: mode model (`Mode`, blocks per SPEC-modes §3, tolerant JSON) and `ModeStore` (storage in Application Support, order, enabled, current; duplicate, delete, move); first start turns the current settings into the mode «Разработчик — Олег» (renamed from the neutral default «Разработчик (мой)»); the active mode is applied to the existing settings, so nothing changes for Oleh. Settings → «Режимы» tab (list with enable/order/duplicate/export/import/delete, editor for folders, launch mode, projects and common-commands blocks, later blocks marked «скоро»); folders, `_daily-report` and launch mode moved there from other tabs. Mode switcher at the top of the panel (2+ enabled modes). Export of all settings or one mode to `*.claudepult` (no secrets, `~` paths), import with «Заменить все настройки» / «Добавить режимы», double-click in Finder (UTI + document type). CLI `--modes`, `--export-settings`. Oleh's settings exported to `docs/modes/oleh-developer.claudepult`. Languages from Oleh added to SPEC-modes as §13 and stage 9.
+Checked: `scripts/build-and-install.sh --test` — 92 tests (141 cases) green incl. migration, switching, export/replace on «another Mac», add-import, tolerant decoding; no compiler warnings. Live: after install `--modes` shows one mode, projects folder and launch mode unchanged; a temporary second mode was listed and removed again. The panel switcher could not be seen (menu bar clicks failed this time). CI not set up; checks run locally.
+Left: the usage endpoint answered HTTP 429 — polling needs a backoff (next fix); switcher and import need Oleh's eye.
 
 ## 2026-10-30 — Spec: AI services, for everyone, settings export; template texts (branch `docs/spec-providers`)
 

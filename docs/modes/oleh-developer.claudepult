@@ -1,0 +1,58 @@
+{
+  "appearance" : {
+    "animations" : true,
+    "density" : "normal",
+    "menuBar" : "sessionAndWeek",
+    "showLimits" : true,
+    "showSessions" : true,
+    "textSize" : "extraLarge",
+    "theme" : "system",
+    "width" : "normal"
+  },
+  "current" : "aae3b197-6012-47c4-a715-506e9ba29903",
+  "enabled" : [
+    "aae3b197-6012-47c4-a715-506e9ba29903"
+  ],
+  "exportedAt" : "2026-10-30T00:47:59Z",
+  "format" : "claudepult-settings",
+  "general" : {
+    "backgroundTimeLimitMinutes" : 90,
+    "limitAlertsToTelegram" : true,
+    "limitThresholds" : [
+      50,
+      80,
+      95
+    ],
+    "telegramForBackground" : true
+  },
+  "modes" : [
+    {
+      "calendar" : "off",
+      "card" : "statusMD",
+      "commonCommands" : "dailyReport",
+      "icon" : "chevron.left.forwardslash.chevron.right",
+      "id" : "aae3b197-6012-47c4-a715-506e9ba29903",
+      "metrics" : [
+        "branch",
+        "dirty",
+        "pullRequests",
+        "lastActivity"
+      ],
+      "name" : "Разработчик — Олег",
+      "permissions" : "code",
+      "showCommonCommands" : true,
+      "showProjects" : true,
+      "source" : {
+        "gitReport" : {
+          "dailyReport" : "~/Projects/_daily-report",
+          "projects" : "~/Projects"
+        }
+      },
+      "stages" : [
+
+      ],
+      "template" : "developer-report"
+    }
+  ],
+  "version" : 1
+}

@@ -12,6 +12,7 @@ struct MenuPanelView: View {
     @Environment(RunStore.self) private var runs
     @Environment(AppSettings.self) private var settings
     @Environment(NotificationPermission.self) private var notifications
+    @Environment(ModeStore.self) private var modes
 
     /// Drives the entrance animation; reset when the panel closes so it replays on every open.
     @State private var isShown = false
@@ -35,6 +36,11 @@ struct MenuPanelView: View {
         VStack(alignment: .leading, spacing: 0) {
             header
                 .revealed(isShown, step: 0, reduceMotion: calm)
+
+            if modes.enabledModes.count > 1 {
+                ModeSwitcher()
+                    .revealed(isShown, step: 0, reduceMotion: calm)
+            }
 
             Divider()
 
@@ -343,5 +349,35 @@ private struct PanelButton: View {
         .keyboardShortcut(shortcut.map { KeyboardShortcut(KeyEquivalent($0), modifiers: .command) })
         .onHover { isHovered = $0 }
         .animation(.easeOut(duration: 0.12), value: isHovered)
+    }
+}
+
+/// Switcher between enabled modes at the top of the panel (SPEC-modes §2). Limits and sessions stay shared.
+private struct ModeSwitcher: View {
+    @Environment(ModeStore.self) private var modes
+
+    var body: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 4) {
+                ForEach(modes.enabledModes) { mode in
+                    let selected = mode.id == modes.currentID
+                    Button {
+                        withAnimation(.snappy(duration: 0.2)) { modes.select(mode.id) }
+                    } label: {
+                        Label(mode.name, systemImage: mode.icon)
+                            .scaledFont(.caption, weight: selected ? .semibold : .regular)
+                            .lineLimit(1)
+                            .padding(.horizontal, 8)
+                            .padding(.vertical, 4)
+                            .background(Capsule().fill(selected ? Color.accentColor.opacity(0.2) : Color.primary.opacity(0.06)))
+                            .foregroundStyle(selected ? Color.accentColor : .primary)
+                    }
+                    .buttonStyle(.plain)
+                    .help(selected ? "Текущий режим" : "Переключиться на «\(mode.name)»")
+                }
+            }
+            .padding(.horizontal, 12)
+        }
+        .padding(.bottom, 8)
     }
 }
