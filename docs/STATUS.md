@@ -1,11 +1,11 @@
 # Status
 
 <!-- summary:start -->
-**Stage:** SPEC-modes done except signing/updates; SPEC-profiles stages 1–3 done, stage 4 in PR
+**Stage:** SPEC-modes done except signing/updates; SPEC-profiles stages 1–4 done, stage 5 next
 **Updated:** 2026-10-30
 
 **Now:**
-- SPEC-profiles stage 4: «Ресурсы Mac» and optional modules — branch `feat/resources-module` (worktree `.claude/worktrees/profiles-stage4`), PR #79
+- SPEC-profiles stage 4 merged (PR #79): «Ресурсы Mac», installing and removing optional modules
 - Windows and Linux specs merged (PR #73); implementation waits for Oleh
 
 **Next:**
