@@ -39,6 +39,9 @@ First steps after installing:
 2. Optionally «Запускать при входе в систему».
 3. The first «Терминал» launch makes macOS ask to let ClaudePult control Terminal — allow it; notifications — allow them.
 4. For the limits, macOS may ask whether `security` may read «Claude Code-credentials» — «Always Allow».
+5. Notifications must be allowed (System Settings → Notifications → ClaudePult); the panel warns while they are off, Settings → Основные → «Проверить» sends a test one.
+
+Notifications are clickable: «Claude ждёт ответа» → the session's Terminal tab; a finished background run → its PR («Открыть PR») or «Журнал»; a report → `latest.html`; cleanup → its output.
 
 ## Settings
 
@@ -77,6 +80,7 @@ The app binary runs headless commands instead of the UI: `~/Applications/ClaudeP
 | `--command report\|summary\|cleanup-check\|cleanup` | run a common command here and print its result |
 | `--app-command <command>\|help\|cleanup-output\|settings` | ask the running app to run a command or open a window |
 | `--hooks status\|install\|uninstall` | session hooks |
+| `--notifications-status` · `--app-command test-notification` | notification permission · send a test notification |
 | `--usage` · `--usage-raw` · `--token-usage` | subscription limits (raw response; the token is never printed) · per-project breakdown |
 | `--sessions` · `--show-session <id>` | list sessions · bring a session's Terminal tab forward |
 

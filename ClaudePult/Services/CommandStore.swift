@@ -172,7 +172,23 @@ final class CommandStore {
         if command == .cleanupRun {
             Task { await store.refresh() }
         }
-        Notifier.post(id: "command-\(command.rawValue)", title: "\(result.isError ? "❌" : "✅") \(command.title)", body: result.text)
+        Notifier.post(
+            id: "command-\(command.rawValue)", title: "\(result.isError ? "❌" : "✅") \(command.title)", body: result.text,
+            target: notificationTarget(for: command, failed: result.isError)
+        )
+    }
+
+    /// A click on the result opens the report that was just made, or the cleanup output.
+    private func notificationTarget(for command: CommonCommand, failed: Bool) -> NotificationTarget {
+        switch command {
+        case .reportNow, .quickSummary:
+            let report = URL(fileURLWithPath: settings.dailyReportDirectory).appending(path: "reports/latest.html").path
+            return failed ? .none : .file(path: report)
+        case .cleanupCheck, .cleanupRun:
+            return cleanupOutput == nil ? .none : .window(id: "cleanup-output")
+        case .openLatestReport:
+            return .none
+        }
     }
 
     private func openLatestReport(in directory: String) {

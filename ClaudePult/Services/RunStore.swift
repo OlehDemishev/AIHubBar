@@ -148,7 +148,10 @@ final class RunStore {
         // A run that finished long before ClaudePult noticed (the app was not running) is not announced.
         let lastWrite = (try? run.logURL.resourceValues(forKeys: [.contentModificationDateKey]))?.contentModificationDate ?? .now
         guard Date.now.timeIntervalSince(lastWrite) < 3600 else { return }
-        Notifier.post(id: "run-\(run.id)", title: RunMessage.notificationTitle(run), body: RunMessage.notificationBody(run))
+        Notifier.post(
+            id: "run-\(run.id)", title: RunMessage.notificationTitle(run), body: RunMessage.notificationBody(run),
+            target: .run(id: run.id, pullRequest: run.pullRequestURL)
+        )
         guard settings.telegramForBackground,
               let credentials = Telegram.credentials(dailyReportDirectory: settings.dailyReportDirectory) else { return }
         let html = RunMessage.telegramHTML(run)

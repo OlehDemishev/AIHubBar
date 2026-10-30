@@ -1,4 +1,5 @@
 import Foundation
+import UserNotifications
 
 /// Headless commands for scripts and checks, run instead of the UI:
 /// - `ClaudePult --login-item [status|on|off]`
@@ -8,6 +9,7 @@ import Foundation
 /// - `ClaudePult --command report|summary|cleanup-check|cleanup` (in this process)
 /// - `ClaudePult --app-command <command>|help|cleanup-output` (asks the running app)
 /// - `ClaudePult --usage`, `ClaudePult --usage-raw` (subscription limits; the token is never printed), `--token-usage`
+/// - `ClaudePult --notifications-status`
 @MainActor
 enum CommandLineTool {
     /// Returns an exit code if the arguments contain a command, `nil` to start the app normally.
@@ -23,7 +25,7 @@ enum CommandLineTool {
         }
         if let index = arguments.firstIndex(of: "--app-command"), index + 1 < arguments.count {
             let name = arguments[index + 1]
-            let known = Array(AppRequests.windows.keys) + CommonCommand.allCases.map(\.cliName)
+            let known = Array(AppRequests.windows.keys) + AppRequests.actions + CommonCommand.allCases.map(\.cliName)
             guard known.contains(name) else {
                 printError("Usage: ClaudePult --app-command " + known.sorted().joined(separator: "|"))
                 return 2
@@ -80,6 +82,14 @@ enum CommandLineTool {
                 }
                 print("scanned \(records.count) messages in \(String(format: "%.1f", Date.now.timeIntervalSince(started))) s")
                 return 0
+            }
+        }
+        if arguments.contains("--notifications-status") {
+            return waitFor {
+                let settings = await UNUserNotificationCenter.current().notificationSettings()
+                let names: [UNAuthorizationStatus: String] = [.notDetermined: "notDetermined", .denied: "denied", .authorized: "authorized", .provisional: "provisional"]
+                print("notifications: \(names[settings.authorizationStatus] ?? "unknown(\(settings.authorizationStatus.rawValue))"), alerts: \(settings.alertSetting == .enabled)")
+                return settings.authorizationStatus == .authorized ? 0 : 1
             }
         }
         if arguments.contains("--background-settings") {

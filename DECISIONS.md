@@ -2,6 +2,14 @@
 
 Decisions made where the spec is silent or does not match reality. Newest at the top.
 
+## 2026-10-30 — Clickable notifications and the notification permission
+
+**Found:** notifications had never been shown since stage 4. `requestAuthorization` returned `UNErrorDomain 1` («Notifications are not allowed for this application») — the first system prompt had been declined or dismissed, and macOS does not ask again. The app cached the refusal and stayed silent: no «ждёт ответа», no background results, no limit alerts. Ad-hoc signing is not the cause: after Oleh switched notifications on in System Settings, the same build reports `authorized` and banners arrive.
+
+**Now:** the permission is read before every notification (turning it on works without a restart); a refusal is logged; the panel shows «Уведомления ClaudePult выключены…» with «Включить…» (System Settings → Notifications → ClaudePult) while they are off; Settings → Основные shows the state with «Разрешить» / «Открыть настройки» / «Проверить» (test notification). CLI: `--notifications-status`, `--app-command test-notification`.
+
+**Clicks.** Each notification carries a target in `userInfo`: waiting session → «Показать» (its Terminal tab, Claude app or folder); background run → its PR if there is one, else «Журнал» (buttons «Открыть PR» / «Журнал»); report / summary → `latest.html`; cleanup → the cleanup output window; the test notification → Помощь. Banners also show while ClaudePult is active. Checked: the click on the test notification reached the app («Notification click: openWindow(id: "help")»).
+
 ## 2026-10-29 — Widgets
 
 **Built after all, without an App Group.** Stage 8 assumed a WidgetKit extension needs an App Group and therefore a signing team. A widget extension must be sandboxed, but it can read ClaudePult's data through the sandbox entitlement `com.apple.security.temporary-exception.files.home-relative-path.read-only` = `/Library/Application Support/ClaudePult/`; with ad-hoc signing macOS registers and runs the extension (checked: `pluginkit` lists `com.demishev.claudepult.widget`, the widget gallery shows ClaudePult, and the widget's log shows it reading `usage.json` with the same values as the file). Inside the sandbox `NSHomeDirectory()` is the container, so the real home comes from `getpwuid`.

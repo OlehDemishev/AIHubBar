@@ -150,7 +150,8 @@ final class SessionStore {
         Notifier.post(
             id: "waiting-\(session.id)",
             title: "Claude ждёт ответа — \(session.displayProject)",
-            body: session.message ?? session.task ?? "Нужно ваше решение."
+            body: session.message ?? session.task ?? "Нужно ваше решение.",
+            target: .session(id: session.id)
         )
     }
 }
