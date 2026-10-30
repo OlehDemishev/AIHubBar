@@ -5,7 +5,7 @@
 **Updated:** 2026-10-30
 
 **Now:**
-- nothing in progress; renamed to AI Hub Bar (PR #115); session rows open on a click anywhere (PR #117)
+- nothing in progress; renamed to AI Hub Bar (PR #115); session rows open on a click anywhere (PR #117); widgets translated into 13 languages (PR #119)
 - merged today: feature batch — approve from notifications (#100), current action (#102), week forecast (#104), Telegram answers (#106), PR/CI alerts (#108), search, hot key, Shortcuts (#110), widget and Control Center toggle (#112), night queue (#113), context fullness (#114); panel as cards (#98); hover hints (#91); menu bar drag, translation review, release re-check (#93–#95)
 - release without an Apple Developer account ready (PR #85), nothing published; Windows and Linux specs wait for Oleh
 
