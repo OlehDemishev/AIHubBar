@@ -5,10 +5,10 @@
 **Updated:** 2026-10-30
 
 **Now:**
-- panel polish merged (PR #60); next: Settings tabs from the UI review
+- Settings tidy-up from the UI review — branch `feat/settings-tidy`, PR open
 
 **Next:**
-- the rest of the UI review: Settings tabs (merge Claude / Сессии / Лимиты into one, mode list without two kinds of checkmarks, menu bar order by dragging, installed agents first); assistant and Help (no «Пропустить» on the template step, collapse the ready checklist); panel height (collapsible blocks)
+- rest of the UI review: collapsible panel blocks; menu bar elements reordered by dragging
 - keep the Claude Code login fresh: test whether a tiny `claude -p` renews the token; or `claude setup-token` (needs Oleh)
 - fix whatever Oleh finds in the translations (machine translation; native review for ja, ko, ar at least)
 - stage 8 rest: Developer ID signing and notarization, Sparkle updates — once Oleh decides on Developer ID, the name and where updates are hosted
@@ -31,6 +31,12 @@
 - hooks are installed in ~/.claude/settings.json; backup of the original: ~/.claude/settings.json.claudepult-backup-20261029T192827
 - delete or archive the old repo `OlehDemishev/ClaudeBar`; turn on start at login if wanted
 <!-- summary:end -->
+
+## 2026-10-30 — Settings tidy-up from the UI review (branch `feat/settings-tidy`)
+
+Done: one «Claude Code» tab (path, session hooks, subscription limits, background runs) replaces the three small tabs «Claude», «Сессии», «Лимиты» — six tabs instead of eight. Modes list: the checkbox (in the switcher) is the only mark, the current mode says «текущий», the full name is in a tooltip, the list is wider. AI services: installed agents first, the others under «Ещё агенты (N)». Menu bar: the icon element's option is «Символ». Assistant: no «Пропустить» on the template step. Help: when nothing is left to do, readiness is one line «Всё готово · Подробнее». README and GUIDE point to the new tab.
+Checked: `xcodebuild test` — 160 tests green; catalog synced, 5 new strings in all 12 languages. Live: installed; Claude Code, Modes and Services tabs and the Help window captured. CI not set up; checks run locally.
+Left: menu bar elements still move with arrows (dragging inside a grouped Form is unreliable); collapsible panel blocks.
 
 ## 2026-10-30 — Panel polish from the UI review (branch `feat/panel-polish`)
 

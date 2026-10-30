@@ -1,10 +1,11 @@
 import AppKit
 import SwiftUI
 
-/// Settings window, one tab per area: general, modes, appearance, menu bar, Claude, AI services, sessions, limits.
+/// Settings window, one tab per area: general, modes, appearance, menu bar, Claude Code (path, sessions, limits,
+/// background runs), AI services.
 struct SettingsView: View {
     enum Tab: String, CaseIterable {
-        case general, modes, appearance, menuBar, claude, services, sessions, limits
+        case general, modes, appearance, menuBar, claude, services
     }
 
     @Environment(AppSettings.self) private var settings
@@ -25,17 +26,11 @@ struct SettingsView: View {
                 .tabItem { Label("Строка меню", systemImage: "menubar.rectangle") }
                 .tag(Tab.menuBar)
             ClaudeSettings()
-                .tabItem { Label("Claude", systemImage: "sparkle") }
+                .tabItem { Label { Text(verbatim: "Claude Code") } icon: { Image(systemName: "sparkle") } }
                 .tag(Tab.claude)
             ServicesSettings()
                 .tabItem { Label("Сервисы AI", systemImage: "cpu") }
                 .tag(Tab.services)
-            SessionSettings()
-                .tabItem { Label("Сессии", systemImage: "bubble.left.and.text.bubble.right") }
-                .tag(Tab.sessions)
-            LimitSettings()
-                .tabItem { Label("Лимиты", systemImage: "gauge.with.dots.needle.33percent") }
-                .tag(Tab.limits)
         }
         .frame(width: 560)
         .preferredColorScheme(settings.panelTheme.colorScheme)
@@ -243,6 +238,7 @@ private struct TextSizePreview: View {
 
 // MARK: - Claude
 
+/// Claude Code in one tab (it was three small ones): where it is, its sessions, the subscription limits, background runs.
 private struct ClaudeSettings: View {
     @Environment(AppSettings.self) private var settings
 
@@ -259,6 +255,9 @@ private struct ClaudeSettings: View {
             } footer: {
                 Footnote(text: String(localized: "Путь пустой — искать в /opt/homebrew/bin, /usr/local/bin, ~/.local/bin, ~/.claude/local. Где запускать команды (Терминал / Фон / спрашивать) — у каждого режима на вкладке «Режимы»."))
             }
+
+            SessionSection()
+            LimitSection()
 
             Section {
                 Stepper(value: $settings.backgroundTimeLimitMinutes, in: 10...600, step: 10) {
@@ -280,71 +279,67 @@ private struct ClaudeSettings: View {
     }
 }
 
-// MARK: - Сессии
+// MARK: - Claude Code: sessions
 
-private struct SessionSettings: View {
+private struct SessionSection: View {
     @Environment(HookController.self) private var hooks
 
     var body: some View {
-        SettingsPage {
-            Section {
-                LabeledContent("Hooks") {
-                    Text(hooks.status.title)
-                        .foregroundStyle(hooks.status == .installed ? .green : hooks.status == .outdated ? .orange : .secondary)
-                }
-                HStack {
-                    // «Обновить» only when something is out of date: installed hooks need nothing.
-                    if hooks.status != .installed {
-                        Button(hooks.status == .notInstalled ? String(localized: "Установить hooks") : String(localized: "Обновить hooks")) { hooks.install() }
-                    }
-                    if hooks.status != .notInstalled {
-                        Button("Снять hooks") { hooks.uninstall() }
-                    }
-                }
-                if let message = hooks.message {
-                    Text(message)
-                        .font(.callout)
-                        .foregroundStyle(hooks.isError ? .red : .secondary)
-                        .fixedSize(horizontal: false, vertical: true)
-                }
-            } header: {
-                Text("Сессии Claude Code")
-            } footer: {
-                Footnote(text: String(localized: "Hooks добавляются в ~/.claude/settings.json (остальные настройки не трогаются, перед изменением рядом сохраняется копия). Они записывают состояние каждой сессии Claude Code на этом Маке — в Терминале, в приложении Claude, фоновых — чтобы ClaudePult показывал их в панели."))
+        Section {
+            LabeledContent("Hooks") {
+                Text(hooks.status.title)
+                    .foregroundStyle(hooks.status == .installed ? .green : hooks.status == .outdated ? .orange : .secondary)
             }
+            HStack {
+                // «Обновить» only when something is out of date: installed hooks need nothing.
+                if hooks.status != .installed {
+                    Button(hooks.status == .notInstalled ? String(localized: "Установить hooks") : String(localized: "Обновить hooks")) { hooks.install() }
+                }
+                if hooks.status != .notInstalled {
+                    Button("Снять hooks") { hooks.uninstall() }
+                }
+            }
+            if let message = hooks.message {
+                Text(message)
+                    .font(.callout)
+                    .foregroundStyle(hooks.isError ? .red : .secondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+        } header: {
+            Text("Сессии Claude Code")
+        } footer: {
+            Footnote(text: String(localized: "Hooks добавляются в ~/.claude/settings.json (остальные настройки не трогаются, перед изменением рядом сохраняется копия). Они записывают состояние каждой сессии Claude Code на этом Маке — в Терминале, в приложении Claude, фоновых — чтобы ClaudePult показывал их в панели."))
         }
         .onAppear { hooks.refresh() }
     }
 }
 
-// MARK: - Лимиты
+// MARK: - Claude Code: limits
 
-private struct LimitSettings: View {
+private struct LimitSection: View {
     @Environment(AppSettings.self) private var settings
     @Environment(UsageStore.self) private var usage
     @State private var thresholdsText = ""
 
     var body: some View {
         @Bindable var settings = settings
-        SettingsPage {
-            Section {
-                LabeledContent("Уведомлять на, %") {
-                    // No title: in a Form a titled field also shows its title as a label next to it.
-                    TextField("", text: $thresholdsText, prompt: Text(verbatim: "50, 80, 95"))
-                        .labelsHidden()
-                        .textFieldStyle(.roundedBorder)
-                        .frame(width: 140)
-                        .onSubmit(applyThresholds)
-                }
-                Toggle("Уведомления о лимитах ещё и в Telegram", isOn: $settings.limitAlertsToTelegram)
-                if let error = usage.error {
-                    Text(error).font(.callout).foregroundStyle(.orange)
-                }
-            } header: {
-                Text("Лимиты подписки")
-            } footer: {
-                Footnote(text: String(localized: "Данные — с того же адреса, что использует Claude Code (токен читается из связки ключей «Claude Code-credentials» и нигде не сохраняется). Уведомление — один раз на окно сессии/недели при пересечении порога и когда лимит восстановился. Значения пишутся в ~/Library/Application Support/ClaudePult/usage.json. Что показывать в строке меню — во вкладке «Строка меню»."))
+        Section {
+            LabeledContent("Уведомлять на, %") {
+                // No title: in a Form a titled field also shows its title as a label next to it.
+                TextField("", text: $thresholdsText, prompt: Text(verbatim: "50, 80, 95"))
+                    .labelsHidden()
+                    .textFieldStyle(.roundedBorder)
+                    .frame(width: 140)
+                    .onSubmit(applyThresholds)
             }
+            Toggle("Уведомления о лимитах ещё и в Telegram", isOn: $settings.limitAlertsToTelegram)
+            if let error = usage.error {
+                Text(error).font(.callout).foregroundStyle(.orange)
+            }
+        } header: {
+            Text("Лимиты подписки")
+        } footer: {
+            Footnote(text: String(localized: "Данные — с того же адреса, что использует Claude Code (токен читается из связки ключей «Claude Code-credentials» и нигде не сохраняется). Уведомление — один раз на окно сессии/недели при пересечении порога и когда лимит восстановился. Значения пишутся в ~/Library/Application Support/ClaudePult/usage.json. Что показывать в строке меню — во вкладке «Строка меню»."))
         }
         .onAppear { thresholdsText = settings.limitThresholds.map(String.init).joined(separator: ", ") }
         .onDisappear(perform: applyThresholds)

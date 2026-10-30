@@ -6,12 +6,24 @@ struct ServicesSettings: View {
     @Environment(AIServiceStore.self) private var services
     @Environment(CommandEngine.self) private var engine
     @Environment(AppSettings.self) private var settings
+    @State private var showMissing = false
+
+    private var installed: [AgentKind] { AgentKind.allCases.filter { services.agents[$0] != nil } }
+    private var missing: [AgentKind] { AgentKind.allCases.filter { services.agents[$0] == nil } }
 
     var body: some View {
         Form {
             Section {
-                ForEach(AgentKind.allCases, id: \.self) { kind in
+                // Installed agents first; the rest, with their install commands, folded away.
+                ForEach(installed, id: \.self) { kind in
                     AgentRow(kind: kind, info: services.agents[kind])
+                }
+                if !missing.isEmpty {
+                    DisclosureGroup("Ещё агенты (\(missing.count))", isExpanded: $showMissing) {
+                        ForEach(missing, id: \.self) { kind in
+                            AgentRow(kind: kind, info: nil)
+                        }
+                    }
                 }
             } header: {
                 HStack {

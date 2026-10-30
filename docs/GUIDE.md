@@ -74,7 +74,7 @@ You can skip any step: **Skip** keeps the template's choice. Everything can be c
 - **Subscription token:** to show the limits, ClaudePult reads Claude Code's sign-in from the macOS Keychain on each refresh. It never stores or logs it.
 - **API keys:** kept only in the macOS Keychain. They never go into logs or exported settings.
 - **What gets sent:** your files go only to the AI service you run a command with. ClaudePult has no server of its own.
-- **Session hook:** it only writes small status files on this Mac and never changes what Claude does. **Settings… → Sessions → Remove hooks** takes it out again.
+- **Session hook:** it only writes small status files on this Mac and never changes what Claude does. **Settings… → Claude Code → Remove hooks** takes it out again.
 - **Background runs:** each runs under an explicit permission list. With **Project files only**, Claude can read and write inside the project folder, with no shell and no internet.
 
 ## Languages
@@ -89,12 +89,12 @@ ClaudePult follows the system language. To pick another one, go to **Settings…
 |---|---|
 | No limits | When macOS asks whether `security` may read "Claude Code-credentials", choose **Always Allow**. |
 | No notifications | Allow them in System Settings → Notifications → ClaudePult. Then **Settings… → General → Check** sends a test one. |
-| Sessions list is empty | Install the hooks: Help window → Readiness, or **Settings… → Sessions**. |
+| Sessions list is empty | Install the hooks: Help window → Readiness, or **Settings… → Claude Code**. |
 | "Terminal" does nothing | macOS asks once whether ClaudePult may control Terminal. Allow it in System Settings → Privacy & Security → Automation. |
 
 ## Uninstall
 
-1. Choose **Settings… → Sessions → Remove hooks**.
+1. Choose **Settings… → Claude Code → Remove hooks**.
 2. Quit ClaudePult.
 3. Delete `~/Applications/ClaudePult.app`, `~/Library/Application Support/ClaudePult` and `~/Library/Logs/ClaudePult`.
 4. API keys are stored in Keychain Access under "ClaudePult API key". Delete those entries too if you want them gone.

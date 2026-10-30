@@ -13,7 +13,7 @@ struct ModesSettings: View {
             ImportConfirmation()
             HStack(alignment: .top, spacing: 0) {
                 list
-                    .frame(width: 210)
+                    .frame(width: 230)
                 Divider()
                 if let mode = modes.modes.first(where: { $0.id == (selection ?? modes.currentID) }) {
                     ModeEditor(mode: mode)
@@ -40,12 +40,16 @@ struct ModesSettings: View {
                         .toggleStyle(.checkbox)
                         .help("Показывать в переключателе панели")
                         Image(systemName: mode.icon).frame(width: 16)
-                        Text(mode.name).lineLimit(1)
-                        Spacer()
-                        if mode.id == modes.currentID {
-                            Image(systemName: "checkmark").foregroundStyle(.secondary).help("Текущий режим")
+                        // One kind of check mark (the checkbox: in the switcher); the current mode is said in words.
+                        VStack(alignment: .leading, spacing: 0) {
+                            Text(mode.name).lineLimit(1).truncationMode(.middle)
+                            if mode.id == modes.currentID {
+                                Text("текущий").font(.caption2).foregroundStyle(.secondary)
+                            }
                         }
+                        Spacer(minLength: 0)
                     }
+                    .help(mode.name)
                     .tag(mode.id)
                 }
             }
