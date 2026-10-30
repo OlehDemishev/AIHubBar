@@ -72,6 +72,15 @@ final class AppSettings {
         didSet { defaults.set(try? JSONEncoder().encode(aiServices), forKey: Keys.aiServices) }
     }
 
+    /// Calendar reminders this many hours before a date (SPEC-modes §6); empty = none.
+    var calendarReminderHours: [Int] {
+        didSet { defaults.set(calendarReminderHours, forKey: Keys.calendarReminderHours) }
+    }
+
+    var calendarRemindersToTelegram: Bool {
+        didSet { defaults.set(calendarRemindersToTelegram, forKey: Keys.calendarRemindersToTelegram) }
+    }
+
     /// Percentages that raise a notification once per limit window.
     var limitThresholds: [Int] {
         didSet { defaults.set(limitThresholds, forKey: Keys.limitThresholds) }
@@ -141,6 +150,8 @@ final class AppSettings {
             ?? MenuBarConfig.migrated(from: defaults.string(forKey: Keys.menuBarUsageMode).flatMap(MenuBarUsageMode.init(rawValue:)) ?? .session)
         aiServices = defaults.data(forKey: Keys.aiServices).flatMap { try? JSONDecoder().decode(AIServicesConfig.self, from: $0) }
             ?? AIServicesConfig()
+        calendarReminderHours = (defaults.array(forKey: Keys.calendarReminderHours) as? [Int]) ?? [24]
+        calendarRemindersToTelegram = defaults.bool(forKey: Keys.calendarRemindersToTelegram)
         let thresholds = (defaults.array(forKey: Keys.limitThresholds) as? [Int])?.filter { (1...100).contains($0) }
         limitThresholds = thresholds?.isEmpty == false ? thresholds! : Self.defaultLimitThresholds
         limitAlertsToTelegram = defaults.bool(forKey: Keys.limitAlertsToTelegram)
@@ -166,6 +177,8 @@ final class AppSettings {
         static let menuBarUsageMode = "menuBarUsageMode"
         static let menuBarConfig = "menuBarConfig"
         static let aiServices = "aiServices"
+        static let calendarReminderHours = "calendarReminderHours"
+        static let calendarRemindersToTelegram = "calendarRemindersToTelegram"
         static let limitThresholds = "limitThresholds"
         static let limitAlertsToTelegram = "limitAlertsToTelegram"
         static let panelTextSize = "panelTextSize"

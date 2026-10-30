@@ -162,7 +162,7 @@ enum PermissionProfile: String, Codable, CaseIterable, Sendable {
     }
 }
 
-enum CalendarMode: String, Codable, Sendable {
+enum CalendarMode: String, Codable, CaseIterable, Sendable {
     case off, dates, contentPlan
 }
 

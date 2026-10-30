@@ -125,6 +125,24 @@ private struct GeneralSettings: View {
             }
 
             Section {
+                Picker("Напоминать", selection: Binding(
+                    get: { settings.calendarReminderHours },
+                    set: { settings.calendarReminderHours = $0 }
+                )) {
+                    Text("не напоминать").tag([Int]())
+                    Text("за 2 часа").tag([2])
+                    Text("за сутки").tag([24])
+                    Text("за сутки и за 2 часа").tag([24, 2])
+                    Text("за 3 дня и за сутки").tag([72, 24])
+                }
+                Toggle("Дублировать напоминания в Telegram", isOn: $settings.calendarRemindersToTelegram)
+            } header: {
+                Text("Календарь")
+            } footer: {
+                Footnote(text: "Даты — из проект.md (дедлайн, публикация) и контент-план.md у режимов с календарём (вкладка «Режимы»).")
+            }
+
+            Section {
                 LabeledContent("Версия", value: Self.version)
                 LabeledContent("Журнал") {
                     Button("Показать в Finder") {
@@ -186,7 +204,7 @@ private struct AppearanceSettings: View {
             }
 
             Section {
-                ForEach([PanelBlock.limits, .sessions]) { block in
+                ForEach([PanelBlock.limits, .sessions, .calendar]) { block in
                     Toggle(block.title, isOn: Binding(
                         get: { settings.shows(block) },
                         set: { settings.setShows(block, $0) }

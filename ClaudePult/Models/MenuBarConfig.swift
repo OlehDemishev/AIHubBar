@@ -48,7 +48,7 @@ struct MenuBarConfig: Codable, Equatable, Hashable, Sendable {
         switch preset {
         case .minimum: on = [.icon, .projectsAlert, .waiting]
         case .limits, .custom: on = [.icon, .projectsAlert, .session, .week, .waiting]
-        case .everything: on = Set(MenuBarElement.Kind.allCases).subtracting([.deadline])
+        case .everything: on = Set(MenuBarElement.Kind.allCases)
         }
         return MenuBarConfig(
             elements: MenuBarElement.Kind.allCases.map { MenuBarElement(kind: $0, enabled: on.contains($0)) },
@@ -135,7 +135,7 @@ struct MenuBarElement: Codable, Equatable, Hashable, Identifiable, Sendable {
             case .running: "Работают сессии"
             case .background: "Фоновые задачи"
             case .queued: "Отложенные запуски"
-            case .deadline: "Ближайший дедлайн (с календарём)"
+            case .deadline: "Ближайшая дата календаря"
             case .disk: "Свободное место (если мало)"
             case .mode: "Текущий режим"
             }

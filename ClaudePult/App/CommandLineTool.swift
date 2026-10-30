@@ -12,6 +12,7 @@ import UserNotifications
 /// - `ClaudePult --usage`, `ClaudePult --usage-raw` (subscription limits; the token is never printed), `--token-usage`
 /// - `ClaudePult --notifications-status`
 /// - `ClaudePult --modes`, `ClaudePult --export-settings <file.claudepult>` (import: open the file in Finder)
+/// - `ClaudePult --calendar [folder]` (calendar dates of the enabled modes, or of a folder read as «папки» + контент-план)
 /// - `ClaudePult --folder-projects <folder>` (folder projects as the panel would list them)
 /// - `ClaudePult --api-complete <provider> <prompt> [base-url]` (one request to a model by API, prints reply and tokens)
 /// - `ClaudePult --services [check]` (installed agents, stored API keys; `check` lists each provider's models)
@@ -108,6 +109,23 @@ enum CommandLineTool {
                 printError("error: \(error.localizedDescription)")
                 return 1
             }
+        }
+        if let index = arguments.firstIndex(of: "--calendar") {
+            let infos: [CalendarScanner.ModeInfo]
+            if index + 1 < arguments.count {
+                infos = [.init(id: "cli", name: "папка", icon: "folder", source: .folders(arguments[index + 1]), calendar: .contentPlan)]
+            } else {
+                let modes = ModeStore(settings: AppSettings())
+                infos = modes.enabledModes.map { .init(id: $0.id, name: $0.name, icon: $0.icon, source: $0.source, calendar: $0.calendar) }
+            }
+            let entries = CalendarScanner.entries(for: infos).sorted { $0.date < $1.date }
+            for entry in entries {
+                let when = CalendarScanner.text(entry.date, withTime: entry.hasTime)
+                print("\(when)  \(entry.kind.rawValue)  \(entry.title)" + (entry.detail.map { "  (\($0))" } ?? "")
+                      + "  — \(CalendarText.relative(entry.date, hasTime: entry.hasTime))" + (entry.isOverdue() ? "  OVERDUE" : ""))
+            }
+            if entries.isEmpty { print("no calendar dates") }
+            return 0
         }
         if let index = arguments.firstIndex(of: "--folder-projects"), index + 1 < arguments.count {
             let projects = FolderScanner.scan(source: .folders(arguments[index + 1]))

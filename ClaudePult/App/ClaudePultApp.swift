@@ -17,6 +17,7 @@ struct ClaudePultApp: App {
     @State private var services: AIServiceStore
     @State private var folders: FolderProjectStore
     @State private var engine: CommandEngine
+    @State private var calendar: CalendarStore
     @NSApplicationDelegateAdaptor private var appDelegate: AppDelegate
 
     init() {
@@ -32,6 +33,8 @@ struct ClaudePultApp: App {
         _services = State(initialValue: services)
         let folders = FolderProjectStore(settings: settings)
         _folders = State(initialValue: folders)
+        let calendar = CalendarStore(settings: settings, modes: modes)
+        _calendar = State(initialValue: calendar)
         let store = ProjectStore(settings: settings)
         _settings = State(initialValue: settings)
         _store = State(initialValue: store)
@@ -53,6 +56,7 @@ struct ClaudePultApp: App {
         modes.didApply = {
             Task { await store.refresh() }
             Task { await folders.refresh() }
+            Task { await calendar.refresh() }
             hooks.refresh()
         }
         AppDelegate.openFile = { url in
@@ -70,6 +74,7 @@ struct ClaudePultApp: App {
             usage.start()
             Task { await services.scan() }
             folders.start()
+            calendar.start()
             launcher.start()
             NotificationRouter.shared.install { resolution in
                 switch resolution {
@@ -107,6 +112,7 @@ struct ClaudePultApp: App {
         if settings.menuBarConfig.element(.disk).enabled {
             data.diskFreeBytes = store.report?.diskFreeBytes ?? DiskSpace.freeBytes()
         }
+        data.deadline = calendar.nearest().map { CalendarText.menuBar($0) }
         data.modeName = modes.current?.name
         data.modeIcon = modes.current?.icon
         return data
@@ -128,6 +134,7 @@ struct ClaudePultApp: App {
                 .environment(services)
                 .environment(folders)
                 .environment(engine)
+                .environment(calendar)
         } label: {
             MenuBarLabel(state: MenuBarState(config: settings.menuBarConfig, data: menuBarData))
                 .environment(requests)
@@ -140,6 +147,15 @@ struct ClaudePultApp: App {
                 .preferredColorScheme(settings.panelTheme.colorScheme)
         }
         .defaultSize(width: 640, height: 520)
+
+        Window("Календарь", id: "calendar") {
+            CalendarWindow()
+                .environment(calendar)
+                .environment(modes)
+                .environment(folders)
+                .preferredColorScheme(settings.panelTheme.colorScheme)
+        }
+        .defaultSize(width: 900, height: 640)
 
         Window("Сравнение", id: "compare") {
             CompareView()
@@ -174,6 +190,7 @@ struct ClaudePultApp: App {
                 .environment(modes)
                 .environment(services)
                 .environment(engine)
+                .environment(calendar)
         }
     }
 }

@@ -163,7 +163,6 @@ private struct ElementRow: View {
         VStack(alignment: .leading, spacing: 6) {
             HStack {
                 Toggle(element.kind.title, isOn: value(\.enabled))
-                    .disabled(element.kind == .deadline)
                 Spacer()
                 Button { onMove(-1) } label: { Image(systemName: "chevron.up") }
                     .disabled(!canMoveUp)
@@ -173,9 +172,7 @@ private struct ElementRow: View {
                     .help("Правее")
             }
             .buttonStyle(.borderless)
-            if element.kind == .deadline {
-                Text("Появится с календарём.").font(.caption).foregroundStyle(.tertiary)
-            } else if element.enabled {
+            if element.enabled {
                 options
                     .padding(.leading, 20)
                     .controlSize(.small)

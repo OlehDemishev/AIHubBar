@@ -21,7 +21,7 @@ struct MenuBarConfigTests {
             let kinds = MenuBarConfig.make(preset).elements.map(\.kind)
             #expect(kinds == MenuBarElement.Kind.allCases)
         }
-        #expect(!MenuBarConfig.make(.everything).element(.deadline).enabled)
+        #expect(MenuBarConfig.make(.everything).element(.deadline).enabled)
         #expect(MenuBarConfig.make(.everything).element(.disk).enabled)
     }
 
