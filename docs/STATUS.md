@@ -5,7 +5,7 @@
 **Updated:** 2026-10-30
 
 **Now:**
-- release without an Apple Developer account: Sparkle, self-signed signing, `scripts/release.sh`, MIT license — branch `feat/release-without-apple` (worktree `.claude/worktrees/release`), PR open
+- release without an Apple Developer account merged (PR #85): Sparkle, self-signed signing, `scripts/release.sh`, MIT license; nothing published yet
 - Windows and Linux specs merged (PR #73); implementation waits for Oleh
 
 **Next:**
