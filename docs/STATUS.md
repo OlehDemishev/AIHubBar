@@ -1,11 +1,11 @@
 # Status
 
 <!-- summary:start -->
-**Stage:** SPEC-modes done except signing/updates; SPEC-profiles stage 1 done, stage 2 in PR
+**Stage:** SPEC-modes done except signing/updates; SPEC-profiles stages 1–2 done, stage 3 next
 **Updated:** 2026-10-30
 
 **Now:**
-- SPEC-profiles stage 2: panel from profile modules, menu bar per profile, «Профили» and «Модули» tabs, «режим» → «профиль» in 13 languages — branch `feat/profiles-panel` (worktree `.claude/worktrees/profiles-stage2`), PR #74
+- SPEC-profiles stage 2 merged (PR #74): panel from profile modules, menu bar per profile, «Профили» and «Модули» tabs, «режим» → «профиль»
 - Windows and Linux specs merged (PR #73); implementation waits for Oleh
 
 **Next:**
