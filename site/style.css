@@ -1,34 +1,56 @@
-/* AI Hub Bar landing page (GitHub Pages). Colours follow docs/overview/style.css. */
+/* AI Hub Bar landing page (GitHub Pages). Neutral base; the accent comes from one palette below. */
 :root {
-  --accent: #d9774b;
-  --accent-2: #f0a77c;
-  --accent-soft: #fbeee6;
-  --ink: #1f1a17;
-  --ink-2: #5b524c;
-  --ink-3: #8f8580;
-  --line: #ece5df;
-  --bg: #fffaf6;
+  --ink: #1d1d1f;
+  --ink-2: #515154;
+  --ink-3: #86868b;
+  --line: #e5e5ea;
+  --bg: #ffffff;
   --surface: #ffffff;
-  --card: #faf7f4;
-  --green: #3fa66b;
-  --orange: #e8952f;
-  --blue: #4a7fd6;
-  --ring-track: #efe7e1;
-  --wait: #fff4e8;
+  --card: #f5f5f7;
+  --green: #34c759;
+  --orange: #ff9f0a;
+  --blue: #0a84ff;
+  --ring-track: #e5e5ea;
+  --wait: #fff6e5;
+  --shadow: rgba(0,0,0,.12);
 }
 @media (prefers-color-scheme: dark) {
   :root {
-    --accent-soft: #3a2519;
-    --ink: #f4eee9;
-    --ink-2: #c4b8af;
-    --ink-3: #8f8580;
-    --line: #3a322d;
-    --bg: #171311;
-    --surface: #211c19;
-    --card: #1d1815;
-    --ring-track: #3a322d;
-    --wait: #3a2a18;
+    --ink: #f5f5f7;
+    --ink-2: #c7c7cc;
+    --ink-3: #8e8e93;
+    --line: #2c2c2e;
+    --bg: #0b0b0c;
+    --surface: #161618;
+    --card: #1c1c1e;
+    --ring-track: #3a3a3c;
+    --wait: #3a2c12;
+    --shadow: rgba(0,0,0,.5);
   }
+}
+
+/* Palettes: accent, second accent (icon gradient), soft tint, text on accent, two glows. */
+:root:not([data-palette]), [data-palette="mono"] {
+  --accent: #1d1d1f; --accent-2: #636366; --accent-soft: #f2f2f4; --on-accent: #fff; --link: #0066cc;
+  --glow-1: rgba(120,140,170,.20); --glow-2: rgba(160,160,175,.14);
+}
+[data-palette="blue"] {
+  --accent: #0071e3; --accent-2: #40a9ff; --accent-soft: #e8f2fd; --on-accent: #fff; --link: #0066cc;
+  --glow-1: rgba(0,113,227,.20); --glow-2: rgba(90,200,250,.16);
+}
+[data-palette="indigo"] {
+  --accent: #4f46e5; --accent-2: #8b5cf6; --accent-soft: #eef0ff; --on-accent: #fff; --link: #4f46e5;
+  --glow-1: rgba(99,102,241,.24); --glow-2: rgba(139,92,246,.16);
+}
+[data-palette="teal"] {
+  --accent: #0f766e; --accent-2: #14b8a6; --accent-soft: #e6f6f4; --on-accent: #fff; --link: #0f766e;
+  --glow-1: rgba(20,184,166,.22); --glow-2: rgba(16,185,129,.14);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-palette]), [data-palette="mono"] { --accent: #f5f5f7; --accent-2: #8e8e93; --accent-soft: #1f1f22; --on-accent: #111; --link: #4da3ff; --glow-1: rgba(120,140,170,.18); --glow-2: rgba(90,90,110,.14); }
+  [data-palette="blue"] { --accent: #0a84ff; --accent-soft: #0b2440; --link: #4da3ff; }
+  [data-palette="indigo"] { --accent: #6366f1; --accent-soft: #1e1b3a; --link: #a5b4fc; }
+  [data-palette="teal"] { --accent: #2dd4bf; --accent-soft: #0f2a27; --on-accent: #042f2e; --link: #5eead4; }
 }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
@@ -39,7 +61,7 @@ body {
   font: 16px/1.55 -apple-system, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
-a { color: var(--accent); text-decoration: none; }
+a { color: var(--link); text-decoration: none; }
 a:hover { text-decoration: underline; }
 code { font: 0.86em "SF Mono", Menlo, monospace; background: var(--card); border: 1px solid var(--line); border-radius: 4px; padding: 0 4px; }
 h1, h2, h3 { font-family: -apple-system, "SF Pro Display", "Helvetica Neue", Arial, sans-serif; margin: 0; letter-spacing: -0.02em; }
@@ -64,8 +86,8 @@ section.wrap { padding-top: 72px; }
   content: ""; position: absolute; z-index: -1; pointer-events: none;
   inset: -56px 0 -360px;
   background:
-    radial-gradient(560px 480px at 90% 0%, rgba(240,167,124,.50), transparent 70%),
-    radial-gradient(640px 520px at 0% 70%, rgba(217,119,75,.16), transparent 70%);
+    radial-gradient(560px 480px at 90% 0%, var(--glow-1), transparent 70%),
+    radial-gradient(640px 520px at 0% 70%, var(--glow-2), transparent 70%);
 }
 main { overflow-x: clip; }
 .hero-in { display: flex; align-items: center; gap: 56px; }
@@ -76,7 +98,7 @@ main { overflow-x: clip; }
 .cta { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 22px; }
 .cta.center { justify-content: center; }
 .btn-primary, .btn-ghost { display: inline-block; padding: 12px 22px; border-radius: 12px; font-weight: 650; font-size: 16px; transition: transform .15s ease, background .15s ease; }
-.btn-primary { background: var(--accent); color: #fff; }
+.btn-primary { background: var(--accent); color: var(--on-accent); }
 .btn-ghost { background: var(--surface); color: var(--ink); border: 1px solid var(--line); }
 .btn-primary:hover, .btn-ghost:hover { text-decoration: none; transform: translateY(-1px); }
 .btn-primary:active, .btn-ghost:active { transform: scale(.98); }
@@ -84,7 +106,7 @@ main { overflow-x: clip; }
 .chips span { font-size: 14px; padding: 4px 12px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); color: var(--ink-2); }
 
 /* panel mock-up */
-.shot { flex: 0 0 360px; font-size: 13px; filter: drop-shadow(0 24px 48px rgba(80,40,20,.18)); }
+.shot { flex: 0 0 360px; font-size: 13px; filter: drop-shadow(0 24px 48px var(--shadow)); }
 .menubar { height: 30px; border-radius: 10px 10px 0 0; background: var(--card); border: 1px solid var(--line); border-bottom: 0; display: flex; align-items: center; justify-content: flex-end; gap: 10px; padding: 0 10px; }
 .menubar .item { background: rgba(127,127,127,.12); padding: 2px 8px; border-radius: 6px; }
 .muted { color: var(--ink-3); }
@@ -116,7 +138,7 @@ main { overflow-x: clip; }
 .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
 .feature { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 24px; }
-.feature .ic { width: 40px; height: 40px; border-radius: 11px; background: linear-gradient(160deg, var(--accent-2), var(--accent)); color: #fff; display: grid; place-items: center; font-size: 20px; margin-bottom: 14px; }
+.feature .ic { width: 40px; height: 40px; border-radius: 11px; background: linear-gradient(160deg, var(--accent-2), var(--accent)); color: var(--on-accent); display: grid; place-items: center; font-size: 20px; margin-bottom: 14px; }
 ul { margin: 0; padding-left: 18px; }
 li { margin-bottom: 8px; color: var(--ink-2); }
 li::marker { color: var(--accent); }
@@ -131,7 +153,7 @@ li b { color: var(--ink); }
 .split { display: grid; grid-template-columns: 1fr 420px; gap: 40px; align-items: start; }
 .steps { counter-reset: s; list-style: none; padding: 0; margin: 0; }
 .steps li { counter-increment: s; position: relative; padding-left: 44px; margin-bottom: 18px; font-size: 17px; color: var(--ink); }
-.steps li::before { content: counter(s); position: absolute; left: 0; top: -1px; width: 30px; height: 30px; border-radius: 50%; background: var(--accent); color: #fff; font-weight: 700; font-size: 15px; display: grid; place-items: center; }
+.steps li::before { content: counter(s); position: absolute; left: 0; top: -1px; width: 30px; height: 30px; border-radius: 50%; background: var(--accent); color: var(--on-accent); font-weight: 700; font-size: 15px; display: grid; place-items: center; }
 .callout { border-left: 4px solid var(--accent); background: var(--accent-soft); padding: 16px 20px; border-radius: 0 14px 14px 0; color: var(--ink-2); }
 .callout p { margin: 0 0 10px; }
 .callout p:last-child { margin: 0; }
@@ -156,3 +178,8 @@ li b { color: var(--ink); }
   html { scroll-behavior: auto; }
   .btn-primary, .btn-ghost { transition: none; }
 }
+
+/* Temporary palette picker for choosing colours; remove once one is chosen. */
+.picker { position: fixed; right: 16px; bottom: 16px; z-index: 20; display: flex; gap: 6px; align-items: center; padding: 8px 10px; border-radius: 14px; background: var(--surface); border: 1px solid var(--line); box-shadow: 0 8px 24px var(--shadow); font-size: 13px; color: var(--ink-3); }
+.picker button { font: inherit; padding: 4px 10px; border-radius: 8px; border: 1px solid var(--line); background: var(--card); color: var(--ink); cursor: pointer; }
+.picker button[aria-pressed="true"] { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }

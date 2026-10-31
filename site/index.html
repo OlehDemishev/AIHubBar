@@ -184,5 +184,20 @@
   <span>An independent project, not affiliated with Anthropic, OpenAI, Google or GitHub.</span>
 </footer>
 
+<!-- Temporary palette picker: ?palette=mono|blue|indigo|teal. Remove once a palette is chosen. -->
+<div class="picker" role="group" aria-label="Palette">Palette:
+  <button data-p="mono">Mono</button><button data-p="blue">Blue</button><button data-p="indigo">Indigo</button><button data-p="teal">Teal</button>
+</div>
+<script>
+  const buttons = document.querySelectorAll('.picker button');
+  function setPalette(p) {
+    document.documentElement.dataset.palette = p;
+    buttons.forEach(b => b.setAttribute('aria-pressed', b.dataset.p === p));
+    history.replaceState(null, '', '?palette=' + p + location.hash);
+  }
+  buttons.forEach(b => b.addEventListener('click', () => setPalette(b.dataset.p)));
+  setPalette(new URLSearchParams(location.search).get('palette') || 'mono');
+</script>
+
 </body>
 </html>
