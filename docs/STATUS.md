@@ -1,12 +1,11 @@
 # Status
 
 <!-- summary:start -->
-**Stage:** AI Hub Bar 0.2.1 released (github.com/OlehDemishev/AIHubBar, wider CLI search + optional notch island); next: notch island stages 2–3 for 0.3.0
+**Stage:** AI Hub Bar 0.2.2 released (github.com/OlehDemishev/AIHubBar, clickable widgets + Codex from ChatGPT.app + notch island stage 2); next: notch island stage 3 for 0.3.0
 **Updated:** 2026-10-31
 
 **Now:**
-- Codex from the ChatGPT desktop app (branch `fix/codex-in-chatgpt-app`, PR open): AI Hub Bar finds the `codex` inside ChatGPT.app
-- clickable widgets: PR from `feat/interactive-widgets` (links, ↻ and ☕ buttons, «Лимиты» window), waits for Oleh's live click check
+- released 0.2.2 (v0.2.2, build 345): clickable widgets (#154), Codex from the ChatGPT desktop app (#155), notch island stage 2 (#153)
 - notch island stage 1 merged (#149): module, island over the notch, ears, hover card; target release 0.3.0
 - notch island stage 2 merged (#153): banners for events, permission requests with Allow / Deny in the island
 - wide CLI search merged: `claude` (#150), then codex, gemini, agy, copilot, cursor-agent (#151) — login shell, nvm/fnm/volta/pnpm, Claude desktop app's copy
@@ -28,9 +27,8 @@
 - Windows and Linux versions (docs/SPEC-windows.md, docs/SPEC-linux.md) — only when Oleh says; stage 0 (fact checks in VMs) first
 
 **Needs Oleh:**
-- merge the Codex-from-ChatGPT PR; then Settings → Модули → Лимиты → «Другие AI» should list Codex (free plan: one 30-day window)
-- widgets (build of `feat/interactive-widgets`, installed on the Mac mini): click the limits widget (opens «Лимиты»), ↻ in it, the sessions widget's rows and ☕; tell me what doesn't react
-- on the other Mac: install 0.2.1 (Releases, or «Обновления» in Settings if 0.2.0 is there) → Settings → Claude Code: the path field should show «авто: …» instead of «авто: не найден»; tell me the path it shows
+- update to 0.2.2 («Обновления» in Settings), then: Settings → Модули → Лимиты → «Другие AI» should list Codex; click the limits widget (opens «Лимиты»), ↻ in it, the sessions widget's rows and ☕ — tell me what doesn't react
+- on the other Mac: install 0.2.2 (Releases, or «Обновления» in Settings) → Settings → Claude Code: the path field should show «авто: …» instead of «авто: не найден»; tell me the path it shows
 - notch island: on the MacBook Air (with this branch's build or later) — Settings → Модули → «Остров у чёлки» → Установить; check the ears beside the real notch, hover opens the card, moving away closes it, menu bar clicks next to the notch still work
 - optional: put https://olehdemishev.github.io/AIHubBar/ into the repo's About → Website; repo settings suggested in chat (release immutability, «Always suggest updating», «Automatically delete head branches»)
 - read docs/AI-Hub-Bar-Overview-ru.pdf and -en.pdf (facts and wording); after merge upload docs/images/social-preview.png in GitHub → Settings → General → Social preview (no API for it); the PDFs can be added to the 0.2.0 release: `gh release upload v0.2.0 docs/AI-Hub-Bar-Overview-*.pdf`
@@ -40,6 +38,12 @@
 - decide SPEC-windows §10 and SPEC-linux §10 (Tauri 2 for both, Windows code signing, first Linux desktops) before that work starts
 - optional: Apple Developer ID (notarization, no «Open Anyway»); delete or archive the old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-10-31 — Release 0.2.2 (branch `chore/status-release-022`)
+
+Done: merged #154 (clickable widgets) and #155 (Codex from ChatGPT.app). For #155, main went into its branch with the STATUS.md / DECISIONS.md conflicts resolved, keeping both sides. Then `scripts/release.sh 0.2.2 --publish` from main `1f2ea28` (build 345), published as v0.2.2 «Latest» with the `.dmg`, the appcast and the overview PDFs. The release notes list #154, #155 and #153.
+Checked: `xcodebuild test` on merged main — 295 / 295 pass; deep strict verify passed, authority «ClaudePult Release», no get-task-allow; Info.plist has the `aihubbar` URL scheme; the release binary's `--services` finds `codex` in `/Applications/ChatGPT.app/…/codex-cli/bin/codex` (codex-cli 0.166.0-alpha.5.1); `releases/latest/download/appcast.xml` serves 0.2.2 / 345; the `.dmg` URL answers 200.
+Left: widgets not clicked on the desktop and the update not installed through Sparkle yet (Needs Oleh).
 
 ## 2026-10-31 — Codex from the ChatGPT desktop app (branch `fix/codex-in-chatgpt-app`)
 
