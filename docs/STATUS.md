@@ -19,6 +19,7 @@
 
 **Next:**
 - notch island for 0.3.0 (docs/SPEC-notch.md §9): stage 3 — pill on screens without a notch, full screen, hot keys, first-setup window; then a 0.3.0 build for Oleh's MacBook Air before publishing
+- later, not scheduled (Oleh, 2026-10-31): move Claude into the AI services section and show every service (Claude, Codex, Gemini, …) the same way — one per-service model for rings, forecast, week strip, credits, per-project tokens; full Codex metrics (rings, history, credits, plan, per-project tokens, context) were checked as feasible and deferred until then
 - standing rule (SPEC §3.1): every new icon-only control gets a hover hint; finish each UI stage with the accessibility walk
 - fix whatever Oleh finds in the translations (automated checks pass; a native read for ja, ko, ar is still worth it)
 - stage 8: done without Developer ID (self-signed + Sparkle, PR #85; re-checked on main); notarization only if Oleh buys Developer ID; publishing is Oleh's step (Needs Oleh)
@@ -43,6 +44,12 @@
 Done: URL scheme `aihubbar://` (project.yml), handled in `AppDelegate` (`WidgetLink`): `limits` opens a new «Лимиты — AI Hub Bar» window with the panel's limits block (the panel can't be opened from code), `session/<id>` shows that session like a notification click (an ended one → search), `search` opens the search. Limits widget: a click anywhere opens limits (`widgetURL`), ↻ (`RefreshLimitsIntent`) asks the app to fetch now without opening it. Sessions widget: small → the one waiting session or the search; medium → a link per row (waiting → first waiting session, each project name → its session, working / red projects → search); ☕ (`SetKeepAwakeIntent`, now macOS 14+, only with «Не спать» installed) switches the manual hold without opening the app. `widget-status.json` gains `waitingSessions` (id + project). Every window scene now has `.handlesExternalEvents(matching: [])` — SwiftUI opened the search window along with each link. 4 new strings in 12 languages, hover hints and accessibility labels on ↻ and ☕. DECISIONS and REFERENCE updated.
 Checked: `xcodebuild test` — 291 tests (new: link parsing, `waitingSessions` file shape, the refresh request over Darwin notifications). Installed with `build-and-install.sh` on the Mac mini: `open aihubbar://limits` opened only the «Лимиты» window (420 pt, real 38 % / 98 % and Copilot rows, screenshot), `aihubbar://search` the search, an unknown session id the search, this session's id opened it in Claude (log «Show session: Claude app link …»); the Darwin requests the buttons send refreshed `usage.json` (updated 18:41:07Z → 18:41:47Z) and switched the manual keep-awake hold on and off (restored). Widget bundle carries both intents in `Metadata.appintents`. CI not set up.
 Left: the widgets themselves not clicked on the desktop (WidgetKit UI can't be driven from here) — Needs Oleh; whether macOS shows `.help` tooltips inside desktop widgets is unknown (VoiceOver labels are set either way); with the app not running ↻ and ☕ do nothing.
+
+## 2026-10-31 — Plan: Claude as one of the AI services (branch `chore/status-unified-ai`)
+
+Done: recorded in Next that Claude moves into the AI section with the same view for every service. Codex can match Claude's metrics: `codex` returns 5 h and week windows, credits, the plan type, per-limit buckets and token counts, and its session logs add the project folder and context size. Chats on chatgpt.com expose no limits. The full Codex metrics wait for this change.
+Checked: Codex fields against the openai/codex source (`protocol.rs`, `app-server-protocol/v2/account.rs`, `backend-client`); no code changed, so no build.
+Left: the work itself, when Oleh says.
 
 ## 2026-10-31 — Notch island, stage 2: events and permission requests (branch `feat/notch-events`)
 
