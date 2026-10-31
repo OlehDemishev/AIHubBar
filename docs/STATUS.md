@@ -5,6 +5,7 @@
 **Updated:** 2026-10-31
 
 **Now:**
+- Codex from the ChatGPT desktop app (branch `fix/codex-in-chatgpt-app`, PR open): AI Hub Bar finds the `codex` inside ChatGPT.app
 - clickable widgets: PR from `feat/interactive-widgets` (links, ↻ and ☕ buttons, «Лимиты» window), waits for Oleh's live click check
 - notch island stage 1 merged (#149): module, island over the notch, ears, hover card; target release 0.3.0
 - notch island stage 2 merged (#153): banners for events, permission requests with Allow / Deny in the island
@@ -27,6 +28,7 @@
 - Windows and Linux versions (docs/SPEC-windows.md, docs/SPEC-linux.md) — only when Oleh says; stage 0 (fact checks in VMs) first
 
 **Needs Oleh:**
+- merge the Codex-from-ChatGPT PR; then Settings → Модули → Лимиты → «Другие AI» should list Codex (free plan: one 30-day window)
 - widgets (build of `feat/interactive-widgets`, installed on the Mac mini): click the limits widget (opens «Лимиты»), ↻ in it, the sessions widget's rows and ☕; tell me what doesn't react
 - on the other Mac: install 0.2.1 (Releases, or «Обновления» in Settings if 0.2.0 is there) → Settings → Claude Code: the path field should show «авто: …» instead of «авто: не найден»; tell me the path it shows
 - notch island: on the MacBook Air (with this branch's build or later) — Settings → Модули → «Остров у чёлки» → Установить; check the ears beside the real notch, hover opens the card, moving away closes it, menu bar clicks next to the notch still work
@@ -38,6 +40,12 @@
 - decide SPEC-windows §10 and SPEC-linux §10 (Tauri 2 for both, Windows code signing, first Linux desktops) before that work starts
 - optional: Apple Developer ID (notarization, no «Open Anyway»); delete or archive the old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-10-31 — Codex from the ChatGPT desktop app (branch `fix/codex-in-chatgpt-app`)
+
+Done: `AgentLocator.detect("codex")` falls back, last, to the `codex` the ChatGPT desktop app ships (`ChatGPT.app/Contents/Resources/codex-cli/bin/codex`): every copy Launch Services knows by bundle id (`com.openai.codex` — the real id of ChatGPT 26.1027 —, `com.openai.chat`), then `/Applications` and `~/Applications`. So with only ChatGPT.app installed, Codex shows under «Другие AI» with its limits, in Settings → Сервисы, «Открыть в…», commands and «Сравнить». Decision and the per-caller review in DECISIONS.md. No new strings.
+Checked: xcodegen + `xcodebuild test` — 294 tests pass (new: the app's copy only for `codex`, found wherever Launch Services has it with each place once, after the shell and version managers; the real free-plan `rateLimits` answer). Live: the bundled `codex app-server` (codex-cli 0.166.0-alpha.5.1) answers `account/rateLimits/read` with Oleh's ChatGPT sign-in; installed with `scripts/build-and-install.sh`, `AIHubBar --services` with a bare PATH prints `agent codex: /Applications/ChatGPT.app/…/codex — codex-cli 0.166.0-alpha.5.1`, and the running app wrote `other-ai.json` with `Codex 0%`. The Settings window itself was not looked at (computer use can't reach the menu bar app). CI not set up; checks run locally.
+Left: docs/REFERENCE.md names the test scheme «AI Hub Bar», the real one is `ClaudePult`.
 
 ## 2026-10-31 — Clickable desktop widgets (branch `feat/interactive-widgets`)
 

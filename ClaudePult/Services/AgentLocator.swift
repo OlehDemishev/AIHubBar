@@ -1,4 +1,4 @@
-import Foundation
+import AppKit
 import os
 
 /// Finds an AI agent's CLI (`claude`, `codex`, `gemini`, …). It may sit wherever an installer or a Node version
@@ -37,7 +37,25 @@ enum AgentLocator {
         }
     }
 
-    /// Fixed places, then what the user's shell finds, then version managers, then (for `claude`) the desktop app's copy.
+    /// Bundle ids of the ChatGPT desktop app: `com.openai.codex` is the app that ships the Codex CLI (checked on
+    /// 2026-10-31, ChatGPT 26.1027); `com.openai.chat` is its earlier id. Its installer has another id.
+    static let chatGPTBundleIDs = ["com.openai.codex", "com.openai.chat"]
+
+    /// The `codex` the ChatGPT desktop app keeps for itself (`Contents/Resources/codex-cli/bin/codex`): every copy
+    /// Launch Services knows, wherever it sits, then `/Applications` and `~/Applications`.
+    static func chatGPTDesktopCandidates(home: String = NSHomeDirectory(), apps: [String] = chatGPTApps()) -> [String] {
+        var seen: Set<String> = []
+        return (apps + ["/Applications/ChatGPT.app", "\(home)/Applications/ChatGPT.app"])
+            .filter { seen.insert(($0 as NSString).standardizingPath).inserted }
+            .map { "\(($0 as NSString).standardizingPath)/Contents/Resources/codex-cli/bin/codex" }
+    }
+
+    static func chatGPTApps() -> [String] {
+        chatGPTBundleIDs.flatMap { NSWorkspace.shared.urlsForApplications(withBundleIdentifier: $0).map(\.path) }
+    }
+
+    /// Fixed places, then what the user's shell finds, then version managers, then (for `claude` and `codex`) the
+    /// desktop app's copy.
     static func detect(
         _ binary: String, home: String = NSHomeDirectory(), shellPaths: [String: String] = shellPaths,
         isExecutable: (String) -> Bool = FileManager.default.isExecutableFile(atPath:)
@@ -45,6 +63,7 @@ enum AgentLocator {
         let ordered = candidates(binary, home: home) + [shellPaths[binary]].compactMap { $0 }
             + versionManagerCandidates(binary, home: home)
             + (binary == "claude" ? claudeDesktopCandidates(home: home) : [])
+            + (binary == "codex" ? chatGPTDesktopCandidates(home: home) : [])
         return ordered.first(where: isExecutable)
     }
 

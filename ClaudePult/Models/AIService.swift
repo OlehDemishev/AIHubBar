@@ -133,7 +133,7 @@ enum AgentKind: String, CaseIterable, Codable, Sendable {
         return version.isEmpty ? nil : version
     }
 
-    /// See `AgentLocator`: fixed places, the login shell, version managers.
+    /// See `AgentLocator`: fixed places, the login shell, version managers, the desktop apps' own copies.
     func detect(isExecutable: (String) -> Bool = FileManager.default.isExecutableFile(atPath:)) -> String? {
         AgentLocator.detect(binary, isExecutable: isExecutable)
     }

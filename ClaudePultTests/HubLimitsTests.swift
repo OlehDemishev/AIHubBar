@@ -18,6 +18,20 @@ struct HubLimitsTests {
         #expect(windows[1].title == HubParse.windowTitle(minutes: 10080))
     }
 
+    /// The ChatGPT desktop app's own `codex` on a free plan (2026-10-31): one 30-day window, no second one.
+    @Test func codexAppServerFreePlan() throws {
+        let answer = """
+        {"id":2,"result":{"ordinaryUsageAllowed":true,"rateLimits":{"limitId":"codex","limitName":null,\
+        "primary":{"usedPercent":0,"windowDurationMins":43200,"resetsAt":1796067080},"secondary":null,\
+        "credits":{"hasCredits":false,"unlimited":false,"balance":null},"planType":"free"}}}
+        """
+        let windows = try #require(HubParse.codexRPC(data(answer)))
+        #expect(windows.count == 1)
+        #expect(windows[0].percent == 0)
+        #expect(windows[0].title == HubParse.windowTitle(minutes: 43200))
+        #expect(windows[0].resetsAt == Date(timeIntervalSince1970: 1_796_067_080))
+    }
+
     @Test func codexSessionLineWithSecondsToReset() throws {
         let line = """
         {"timestamp":"2026-10-30T10:00:00.000Z","type":"event_msg","payload":{"type":"token_count","info":null,\

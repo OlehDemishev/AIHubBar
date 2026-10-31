@@ -51,6 +51,35 @@ struct AgentLocatorTests {
         #expect(detect("codex", home) == nil)
     }
 
+    @Test func chatGPTAppCopyIsOnlyForCodex() throws {
+        let copy = "Applications/ChatGPT.app/Contents/Resources/codex-cli/bin/codex"
+        let home = try home(with: [copy, "Applications/ChatGPT.app/Contents/Resources/codex-cli/bin/claude"])
+        #expect(detect("codex", home) == "\(home)/\(copy)")
+        #expect(detect("claude", home) == nil)
+    }
+
+    /// Launch Services may know the app anywhere; the usual folders follow, each place once.
+    @Test func chatGPTAppWhereverItSits() {
+        let candidates = AgentLocator.chatGPTDesktopCandidates(
+            home: "/Users/a", apps: ["/Volumes/Work/Apps/ChatGPT.app", "/Applications/ChatGPT.app/"])
+        #expect(candidates == [
+            "/Volumes/Work/Apps/ChatGPT.app/Contents/Resources/codex-cli/bin/codex",
+            "/Applications/ChatGPT.app/Contents/Resources/codex-cli/bin/codex",
+            "/Users/a/Applications/ChatGPT.app/Contents/Resources/codex-cli/bin/codex",
+        ])
+        #expect(AgentLocator.chatGPTDesktopCandidates(home: "/Users/a", apps: []).count == 2)
+    }
+
+    /// A `codex` the user installed comes before the app's own copy, which updates only with the app.
+    @Test func chatGPTAppCopyComesLast() throws {
+        let copy = "Applications/ChatGPT.app/Contents/Resources/codex-cli/bin/codex"
+        let home = try home(with: [copy, ".nvm/versions/node/v22.1.0/bin/codex", "shell/codex"])
+        #expect(detect("codex", home, shell: ["codex": "\(home)/shell/codex"]) == "\(home)/shell/codex")
+        #expect(detect("codex", home) == "\(home)/.nvm/versions/node/v22.1.0/bin/codex")
+        try FileManager.default.removeItem(atPath: "\(home)/.nvm")
+        #expect(detect("codex", home) == "\(home)/\(copy)")
+    }
+
     @Test func orderOfPlaces() throws {
         let desktop = "Library/Application Support/Claude/claude-code/2.1.309/x/claude.app/Contents/MacOS/claude"
         let home = try home(with: [desktop, ".nvm/versions/node/v20.0.0/bin/claude", "shell/claude", ".local/bin/claude"])
