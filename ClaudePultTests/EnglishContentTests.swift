@@ -42,7 +42,7 @@ struct EnglishContentTests {
     @Test func englishDeveloperPrompts() {
         let next = ClaudeCommand.nextStep.prompt(.generic, language: .en)
         #expect(next.hasPrefix("Read the README"))
-        #expect(ClaudeCommand.nextStep.prompt(.oleh, language: .en) == ClaudeCommand.nextStep.prompt, "Oleh's prompts stay")
+        #expect(ClaudeCommand.nextStep.prompt(.workspace, language: .en) == ClaudeCommand.nextStep.prompt, "Oleh's prompts stay")
         #expect(Session.taskTitle(next) == "Следующий шаг" || Session.taskTitle(next) == "Next step")
         #expect(Session.taskTitle(ClaudeCommand.customTask("Fix the build").prompt(.generic, language: .en)) == "Fix the build")
     }

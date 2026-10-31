@@ -126,11 +126,11 @@ struct PromptStyleTests {
         for command in [ClaudeCommand.nextStep, .customTask("Сделай X"), .finishSession] {
             #expect(!command.prompt(.generic).contains("~/Projects/CLAUDE.md"))
             #expect(!command.prompt(.generic).contains("Олег"))
-            #expect(command.prompt == command.prompt(.oleh))
+            #expect(command.prompt == command.prompt(.workspace))
         }
         #expect(ClaudeCommand.customTask("Сделай X").prompt(.generic).hasPrefix("Задача: Сделай X."))
         #expect(Session.taskTitle(ClaudeCommand.nextStep.prompt(.generic)) == "Следующий шаг")
         #expect(Session.taskTitle(ClaudeCommand.customTask("Сделай X").prompt(.generic)) == "Сделай X")
-        #expect(Session.taskTitle(ClaudeCommand.customTask("Сделай Y").prompt(.oleh)) == "Сделай Y")
+        #expect(Session.taskTitle(ClaudeCommand.customTask("Сделай Y").prompt(.workspace)) == "Сделай Y")
     }
 }

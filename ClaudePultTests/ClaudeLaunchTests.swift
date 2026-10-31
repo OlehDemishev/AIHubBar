@@ -5,10 +5,14 @@ import Testing
 struct ClaudeCommandTests {
     @Test func promptsMatchSpec() {
         #expect(ClaudeCommand.nextStep.prompt.hasPrefix("Прочитай только шапку docs/STATUS.md и последнюю запись журнала."))
-        #expect(ClaudeCommand.nextStep.prompt.hasSuffix("запиши вопрос в Needs Oleh и закончи."))
-        #expect(ClaudeCommand.customTask("  Добавь экспорт в CSV\n").prompt
-            == "Задача от Олега: Добавь экспорт в CSV. Работай по правилам ~/Projects/CLAUDE.md: отдельная ветка от origin/main, проверки, коммит, push, PR, запись в STATUS.md.")
-        #expect(ClaudeCommand.finishSession.prompt.contains("по разделу \"Конец сессии\" из ~/Projects/CLAUDE.md"))
+        #expect(ClaudeCommand.nextStep.prompt.hasSuffix("запиши вопрос в поле Needs шапки STATUS.md и закончи."))
+        #expect(ClaudeCommand.customTask("  Добавь экспорт в CSV\n").prompt(.workspace, rulesFile: "~/Code/CLAUDE.md")
+            == "Задача: Добавь экспорт в CSV. Работай по правилам ~/Code/CLAUDE.md: отдельная ветка от origin/main, проверки, коммит, push, PR, запись в STATUS.md.")
+        #expect(ClaudeCommand.finishSession.prompt(.workspace, rulesFile: "~/Code/CLAUDE.md").contains("по разделу \"Конец сессии\" из ~/Code/CLAUDE.md"))
+        // No one's name or home folder is written into the prompts.
+        for command in [ClaudeCommand.nextStep, .customTask("x"), .finishSession] {
+            #expect(!command.prompt.contains("Олег") && !command.prompt.contains("~/Projects"))
+        }
     }
 
     @Test func onlyFinishStaysInProjectFolder() {

@@ -64,7 +64,7 @@ enum HelpContent {
         ]),
         Section(title: String(localized: "Проекты"), systemImage: "folder", items: [
             Item(name: String(localized: "Строка"), detail: String(localized: "Точка состояния, ветка, незакоммиченные файлы, открытые PR (цвет — CI), когда была активность.")),
-            Item(name: String(localized: "Раскрыть"), detail: String(localized: "Stage, Сейчас, Дальше, Нужно от Олега из docs/STATUS.md, предупреждения, PR, worktree.")),
+            Item(name: String(localized: "Раскрыть"), detail: String(localized: "Stage, Сейчас, Дальше, Нужно от вас из docs/STATUS.md, предупреждения, PR, worktree.")),
             Item(name: String(localized: "Следующий шаг"), detail: String(localized: "Claude берёт первый пункт Next и делает его по правилам ~/Projects/CLAUDE.md: ветка, проверки, PR, STATUS.")),
             Item(name: String(localized: "Своя задача…"), detail: String(localized: "Claude выполняет ваш текст по тем же правилам.")),
             Item(name: String(localized: "Завершить"), detail: String(localized: "Claude доводит текущую работу в папке: проверки, коммит, push, PR, STATUS — без нового кода.")),

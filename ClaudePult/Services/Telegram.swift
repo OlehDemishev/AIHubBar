@@ -48,15 +48,32 @@ enum RunMessage {
     }
 }
 
-/// Sends messages with the bot from `_daily-report/config.json` (`telegram.bot_token`, `telegram.chat_id`).
-/// The token is only read, never stored or logged.
+/// Sends messages with the bot set in Settings → Основные → Telegram (token in the Keychain), or else the one from
+/// `_daily-report/config.json` (`telegram.bot_token`, `telegram.chat_id`). The token is never logged.
 enum Telegram {
-    struct Credentials: Sendable {
+    struct Credentials: Sendable, Equatable {
         var token: String
         var chatID: String
     }
 
+    static let keychainAccount = "telegram-bot"
+
+    /// The bot from Settings, read from the Keychain at launch and whenever it changes.
+    @MainActor static var ownBot: Credentials?
+
+    @MainActor
+    static func loadOwnBot(chatID: String) async {
+        let token = await APIKeyStore.read(account: keychainAccount) ?? ""
+        let chat = chatID.trimmingCharacters(in: .whitespaces)
+        ownBot = token.isEmpty || chat.isEmpty ? nil : Credentials(token: token, chatID: chat)
+    }
+
+    @MainActor
     static func credentials(dailyReportDirectory: String) -> Credentials? {
+        ownBot ?? fileCredentials(dailyReportDirectory: dailyReportDirectory)
+    }
+
+    static func fileCredentials(dailyReportDirectory: String) -> Credentials? {
         let url = URL(fileURLWithPath: dailyReportDirectory).appending(path: "config.json")
         guard let data = try? Data(contentsOf: url) else { return nil }
         return credentials(fromConfig: data)
@@ -70,6 +87,22 @@ enum Telegram {
         let chat: String? = (telegram["chat_id"] as? String) ?? (telegram["chat_id"] as? NSNumber)?.stringValue
         guard let chat, !chat.isEmpty else { return nil }
         return Credentials(token: token, chatID: chat)
+    }
+
+    /// «Определить»: the chat of the latest message sent to the bot (the person writes to it first).
+    static func latestChat(token: String) async -> String? {
+        guard let url = URL(string: "https://api.telegram.org/bot\(token)/getUpdates") else { return nil }
+        guard let (data, response) = try? await URLSession.shared.data(from: url),
+              (response as? HTTPURLResponse)?.statusCode == 200 else { return nil }
+        return latestChat(in: data)
+    }
+
+    static func latestChat(in data: Data) -> String? {
+        let updates = ((try? JSONSerialization.jsonObject(with: data)) as? [String: Any])?["result"] as? [[String: Any]] ?? []
+        return updates.reversed().lazy.compactMap { update -> String? in
+            let message = (update["message"] ?? update["my_chat_member"]) as? [String: Any]
+            return ((message?["chat"] as? [String: Any])?["id"] as? NSNumber)?.stringValue
+        }.first
     }
 
     /// Returns true on success. Errors are logged without the request URL (it contains the token).
