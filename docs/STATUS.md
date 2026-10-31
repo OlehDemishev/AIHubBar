@@ -5,7 +5,8 @@
 **Updated:** 2026-10-31
 
 **Now:**
-- nothing in progress; merged: overview PDF (en, ru) and a public README for GitHub (#139), no personal paths or names, Telegram set up in the app (#140)
+- spec for a notch island module written (`docs/SPEC-notch.md`, branch `docs/notch-island-spec`); no code yet
+- nothing else in progress; merged: overview PDF (en, ru) and a public README for GitHub (#139), no personal paths or names, Telegram set up in the app (#140)
 - released 0.2.0: repo renamed to `OlehDemishev/AIHubBar` and made public; repeat fixes merged (#136, #137)
 - merged today: notifications once per wait and a choice per kind (#134); queue after reset and run guard (#129), other-AI menu bar/widget/forecast (#130), session changes and weekly summary (#131), Claude Code window and saved prompts (#132); other AI services' limits (#126, #127)
 - renamed to AI Hub Bar (PR #115); session rows open on a click anywhere (PR #117); widgets translated into 13 languages (PR #119); sessions in Claude's own terminal open Claude (PR #121); module options per profile (PR #124)
@@ -13,6 +14,7 @@
 - release without an Apple Developer account ready (PR #85), nothing published; Windows and Linux specs wait for Oleh
 
 **Next:**
+- notch island (docs/SPEC-notch.md): stage 1 only after Oleh answers §10 (a notched MacBook to test on, name, defaults)
 - standing rule (SPEC §3.1): every new icon-only control gets a hover hint; finish each UI stage with the accessibility walk
 - fix whatever Oleh finds in the translations (automated checks pass; a native read for ja, ko, ar is still worth it)
 - stage 8: done without Developer ID (self-signed + Sparkle, PR #85; re-checked on main); notarization only if Oleh buys Developer ID; publishing is Oleh's step (Needs Oleh)
@@ -20,6 +22,7 @@
 - Windows and Linux versions (docs/SPEC-windows.md, docs/SPEC-linux.md) — only when Oleh says; stage 0 (fact checks in VMs) first
 
 **Needs Oleh:**
+- read docs/SPEC-notch.md and answer §10: is there a MacBook with a notch to test on, name «Остров у чёлки» or «Остров», «instead of notifications» off by default, pill on screens without a notch, hot keys for Allow / Deny
 - read docs/AI-Hub-Bar-Overview-ru.pdf and -en.pdf (facts and wording); after merge upload docs/images/social-preview.png in GitHub → Settings → General → Social preview (no API for it); the PDFs can be added to the 0.2.0 release: `gh release upload v0.2.0 docs/AI-Hub-Bar-Overview-*.pdf`
 - after the release: download 0.2.0 from Releases on another Mac (or user) and open it once with «Open Anyway»
 - go through the «Oleh» rows of docs/CHECKLIST.md; try the newer features: «Позже» on a project, the paused-run switch, the Claude Code window, saved prompts in ⌃⌥C, notification frequencies
@@ -27,6 +30,12 @@
 - decide SPEC-windows §10 and SPEC-linux §10 (Tauri 2 for both, Windows code signing, first Linux desktops) before that work starts
 - optional: Apple Developer ID (notarization, no «Open Anyway»); delete or archive the old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-10-31 — Notch island spec (branch `docs/notch-island-spec`)
+
+Done: `docs/SPEC-notch.md` — an optional module «Остров у чёлки»: a black island around the MacBook notch with two small side indicators at rest (session limit, sessions state), short event banners (permission requests with Allow / Deny, waiting, done, limits, context, PR/CI) and a hover card (limits, sessions with the current action, open requests). How it works without private APIs (`NSScreen.safeAreaInsets`, `auxiliaryTopLeftArea` / `auxiliaryTopRightArea`, a non-activating `NSPanel` above the menu bar), guard against accidental clicks on Allow, screens without a notch and full-screen apps, settings, accessibility, what not to do (no code from boring.notch, GPL-3.0), three stages and open questions.
+Checked: facts against the code (`ApprovalFiles`, `NotificationKind`, `Session.actionText`, `MenuBarIcon.wideWidth`, `ModuleKind`); boring.notch licence via the GitHub API. Docs only, no build needed. CI not set up.
+Left: no code; the answers in §10 come first, and live checks need a MacBook with a notch.
 
 ## 2026-10-31 — Overview PDF and GitHub presentation (branch `docs/overview-pdf-and-repo`)
 
