@@ -5,6 +5,7 @@
 **Updated:** 2026-10-30
 
 **Now:**
+- no personal paths or names in prompts and labels, Telegram set up inside the app: PR on `feat/user-paths`
 - released 0.2.0: repo renamed to `OlehDemishev/AIHubBar` and made public; repeat fixes merged (#136, #137)
 - merged today: notifications once per wait and a choice per kind (#134); queue after reset and run guard (#129), other-AI menu bar/widget/forecast (#130), session changes and weekly summary (#131), Claude Code window and saved prompts (#132); other AI services' limits (#126, #127)
 - renamed to AI Hub Bar (PR #115); session rows open on a click anywhere (PR #117); widgets translated into 13 languages (PR #119); sessions in Claude's own terminal open Claude (PR #121); module options per profile (PR #124)
@@ -25,6 +26,12 @@
 - decide SPEC-windows §10 and SPEC-linux §10 (Tauri 2 for both, Windows code signing, first Linux desktops) before that work starts
 - optional: Apple Developer ID (notarization, no «Open Anyway»); delete or archive the old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-10-31 — No personal paths or names; Telegram set up in the app (branch `feat/user-paths`)
+
+Done: the workspace prompts (formerly «Oleh's» style) no longer say «Задача от Олега» or `~/Projects/CLAUDE.md`: the rules file is `<projects folder of the profile>/CLAUDE.md`, a question goes to «the Needs field of the STATUS.md header». Panel and help say «Нужно от вас». The background rules deny `**/_daily-report/config.json` instead of Oleh's path. Settings → Основные → «Telegram»: bot token (Keychain), chat ID with «Определить» (from the bot's latest message) and «Проверить»; every Telegram message (run results, limits, weekly summary, calendar, run guard) uses this bot first and `_daily-report/config.json` only as a fallback; hints point there instead of `_daily-report`. Folders were already chosen per profile and in the first-run assistant.
+Checked: `xcodebuild test` — 268 tests (new: no name or `~/Projects` in prompts, chat from updates, own bot before the file); installed: the Telegram section and «Нужно от вас» are in place.
+Left: Oleh's setup keeps working through `_daily-report/config.json` (nothing to do); the approvals bot still needs its own token.
 
 ## 2026-10-31 — Release 0.2.0, public repo `OlehDemishev/AIHubBar` (branch `chore/go-public`)
 

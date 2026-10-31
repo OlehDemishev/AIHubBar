@@ -176,7 +176,7 @@ final class ModeStore {
         }
         settings.defaultLaunchMode = mode.launchMode
         settings.activeSource = mode.source
-        settings.promptStyle = mode.template == "developer-report" ? .oleh : .generic
+        settings.promptStyle = mode.template == "developer-report" ? .workspace : .generic
         // The built-in git scanner arrives with the templates (SPEC-modes §9, stage 6).
         // The profile's modules decide what the panel shows (SPEC-profiles §9.2); the blocks in `AppSettings` follow
         // them for the code that still reads those.

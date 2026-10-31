@@ -153,7 +153,8 @@ final class LaunchController {
             baseRef: target.baseRef,
             claudePath: ClaudeLocator.resolve(configured: settings.claudePath),
             allowBusyFolder: allowBusyFolder,
-            style: settings.promptStyle
+            style: settings.promptStyle,
+            rulesFile: PathText.tilde(settings.projectsDirectory + "/CLAUDE.md")
         )
         Task {
             defer { working.remove(id) }
@@ -166,12 +167,12 @@ final class LaunchController {
                     switch mode {
                     case .terminal:
                         try await TerminalLauncher.run(
-                            ShellQuote.claudeCommandLine(folder: folder, claude: request.claudePath, prompt: command.prompt(request.style))
+                            ShellQuote.claudeCommandLine(folder: folder, claude: request.claudePath, prompt: command.prompt(request.style, rulesFile: request.rulesFile))
                         )
                         AppLog.info("Launched «\(command.title)» in Terminal: \(folder)")
                     case .background:
                         _ = try runs.launch(
-                            title: command.title, prompt: command.prompt(request.style), project: target.name,
+                            title: command.title, prompt: command.prompt(request.style, rulesFile: request.rulesFile), project: target.name,
                             projectPath: target.path, folder: folder, worktreeBranch: worktree?.branch,
                             profile: .code, resultFile: nil, claudePath: request.claudePath
                         )

@@ -73,7 +73,7 @@ enum BackgroundPermissions {
         // Secrets: file tools and read-only shell commands (those run without approval in every mode).
         "Read(**/.env)", "Read(**/.env.*)", "Read(**/*.pem)", "Read(**/*.key)", "Read(**/*.p12)",
         "Read(~/.ssh/**)", "Read(~/.aws/**)", "Read(~/.config/gh/**)", "Read(~/.claude.json)",
-        "Read(~/Projects/_daily-report/config.json)",
+        "Read(**/_daily-report/config.json)",
         "Bash(*.env*)", "Bash(*.pem*)", "Bash(*id_rsa*)", "Bash(*id_ed25519*)", "Bash(*_daily-report/config.json*)",
         "Bash(env)", "Bash(env *)", "Bash(printenv*)", "Bash(security *)",
     ]

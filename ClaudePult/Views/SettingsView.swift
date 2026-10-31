@@ -115,6 +115,8 @@ private struct GeneralSettings: View {
                 Footnote(text: String(localized: "Нужны для «Claude ждёт ответа», итогов фоновых задач, порогов лимитов и результатов команд. Клик по уведомлению ведёт к сессии, PR, журналу или отчёту."))
             }
 
+            TelegramBotSection()
+
             Section {
                 ForEach(NotificationKind.allCases) { kind in
                     Picker(kind.title, selection: Binding(
@@ -280,7 +282,7 @@ private struct ClaudeSettings: View {
                 }
                 if settings.telegramForBackground,
                    Telegram.credentials(dailyReportDirectory: settings.dailyReportDirectory) == nil {
-                    Text("В _daily-report/config.json нет telegram.bot_token / chat_id — будет только уведомление macOS.")
+                    Text("Telegram не настроен (Настройки → Основные → Telegram) — будет только уведомление macOS.")
                         .font(.callout)
                         .foregroundStyle(.orange)
                 }
@@ -289,6 +291,111 @@ private struct ClaudeSettings: View {
             } footer: {
                 Footnote(text: String(localized: "«Фон» запускает claude -p без окна: разрешены чтение и правка файлов проекта, проверки и сборки, git без push в main и без force, gh pr create/view/list; остальное отклоняется. Итог — уведомлением и в Telegram."))
             }
+        }
+    }
+}
+
+/// Settings → Основные → Telegram: the bot results, limits and summaries go to. Without it, a `_daily-report/config.json`
+/// bot is used if there is one.
+private struct TelegramBotSection: View {
+    @Environment(AppSettings.self) private var settings
+    @State private var token = ""
+    @State private var hasToken = false
+    @State private var status: String?
+    @State private var busy = false
+
+    var body: some View {
+        @Bindable var settings = settings
+        Section {
+            if hasToken {
+                LabeledContent("Токен бота") {
+                    HStack {
+                        Text("сохранён в связке ключей").foregroundStyle(.secondary)
+                        Button("Удалить", role: .destructive) {
+                            Task {
+                                await APIKeyStore.delete(account: Telegram.keychainAccount)
+                                hasToken = false
+                                await Telegram.loadOwnBot(chatID: settings.telegramChatID)
+                            }
+                        }
+                    }
+                }
+            } else {
+                LabeledContent("Токен бота") {
+                    HStack {
+                        SecureField("", text: $token, prompt: Text(verbatim: "123456:ABC…"))
+                            .textFieldStyle(.roundedBorder)
+                            .frame(width: 220)
+                        Button("Сохранить", action: saveToken)
+                            .disabled(token.trimmingCharacters(in: .whitespaces).isEmpty)
+                    }
+                }
+            }
+            LabeledContent("ID чата") {
+                HStack {
+                    TextField("", text: $settings.telegramChatID)
+                        .textFieldStyle(.roundedBorder)
+                        .frame(width: 140)
+                        .onSubmit { Task { await Telegram.loadOwnBot(chatID: settings.telegramChatID) } }
+                    Button("Определить", action: detectChat)
+                        .disabled(!hasToken || busy)
+                        .help("Напишите боту любое сообщение, затем нажмите — ID чата подставится сам")
+                    Button("Проверить", action: test)
+                        .disabled(!hasToken || settings.telegramChatID.isEmpty || busy)
+                }
+            }
+            if let status {
+                Text(status).font(.caption).foregroundStyle(.secondary)
+            }
+        } header: {
+            Text("Telegram")
+        } footer: {
+            Footnote(text: String(localized: "Сюда приходят итоги фоновых задач, пороги лимитов, недельная сводка, напоминания календаря — где в модуле включён Telegram. Бот создаётся у @BotFather; токен хранится только в связке ключей. Пока здесь пусто, используется бот из _daily-report/config.json, если он есть."))
+        }
+        .task {
+            hasToken = await APIKeyStore.exists(account: Telegram.keychainAccount)
+        }
+        .onChange(of: settings.telegramChatID) { Task { await Telegram.loadOwnBot(chatID: settings.telegramChatID) } }
+    }
+
+    private func saveToken() {
+        let value = token.trimmingCharacters(in: .whitespacesAndNewlines)
+        Task {
+            do {
+                try await APIKeyStore.save(value, account: Telegram.keychainAccount, label: "Telegram bot")
+                token = ""
+                hasToken = true
+                await Telegram.loadOwnBot(chatID: settings.telegramChatID)
+                status = String(localized: "Токен сохранён. Напишите боту любое сообщение и нажмите «Определить».")
+            } catch {
+                status = error.localizedDescription
+            }
+        }
+    }
+
+    private func detectChat() {
+        busy = true
+        Task {
+            defer { busy = false }
+            guard let token = await APIKeyStore.read(account: Telegram.keychainAccount),
+                  let chat = await Telegram.latestChat(token: token) else {
+                status = String(localized: "Сообщений боту не нашлось: напишите ему что-нибудь и попробуйте снова.")
+                return
+            }
+            settings.telegramChatID = chat
+            await Telegram.loadOwnBot(chatID: chat)
+            status = String(localized: "Чат найден.")
+        }
+    }
+
+    private func test() {
+        busy = true
+        Task {
+            defer { busy = false }
+            await Telegram.loadOwnBot(chatID: settings.telegramChatID)
+            guard let bot = Telegram.ownBot else { return }
+            let ok = await Telegram.send(html: RunMessage.escape(String(localized: "AI Hub Bar: Telegram работает.")), with: bot)
+            status = ok ? String(localized: "Отправлено") : String(localized: "Не отправилось: проверьте токен и ID чата")
         }
     }
 }
@@ -740,7 +847,7 @@ private struct TelegramApprovalsSection: View {
                     }
                 }
             }
-            TextField("ID чата", text: $settings.telegramApprovalsChatID, prompt: Text("как у _daily-report"))
+            TextField("ID чата", text: $settings.telegramApprovalsChatID, prompt: Text("как в «Основные → Telegram»"))
             HStack {
                 Button("Проверить") {
                     busy = true
@@ -754,7 +861,7 @@ private struct TelegramApprovalsSection: View {
         } header: {
             Text("Ответы из Telegram")
         } footer: {
-            Footnote(text: String(localized: "Нужен отдельный бот: бот _daily-report уже читает свои обновления, и второй читатель забирал бы у него сообщения. Создайте бота в @BotFather (/newbot), вставьте его токен, откройте бота в Telegram и нажмите «Start», затем «Проверить». Кнопки принимаются только из указанного чата."))
+            Footnote(text: String(localized: "Нужен отдельный бот, не тот, что в «Основные → Telegram»: эти ответы бот получает через свои обновления, а у основного бота их может читать другая программа (например, бот _daily-report), и они забирали бы сообщения друг у друга. Создайте бота в @BotFather (/newbot), вставьте его токен, откройте бота в Telegram и нажмите «Start», затем «Проверить». Кнопки принимаются только из указанного чата."))
         }
     }
 }
@@ -852,7 +959,7 @@ private struct LimitSection: View {
                     }
                     .controlSize(.small)
                     if let summarySent {
-                        Text(summarySent ? String(localized: "Отправлено") : String(localized: "Не отправилось: нет бота в _daily-report/config.json или нет связи"))
+                        Text(summarySent ? String(localized: "Отправлено") : String(localized: "Не отправилось: Telegram не настроен (Основные → Telegram) или нет связи"))
                             .font(.caption)
                             .foregroundStyle(summarySent ? Color.secondary : Color.orange)
                     }

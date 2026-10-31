@@ -107,7 +107,7 @@ struct Session: Decodable, Identifiable, Equatable, Sendable {
     }
 
     /// The task: the first prompt of the session, else the latest one. Prompts sent by ClaudePult's own commands
-    /// are shown without their wrapper («Задача от Олега: …. Работай по правилам …»).
+    /// are shown without their wrapper («Задача: …. Работай по правилам …»).
     var task: String? {
         [firstPrompt, lastPrompt].compactMap { $0?.trimmingCharacters(in: .whitespacesAndNewlines) }
             .first { !$0.isEmpty }
@@ -119,12 +119,13 @@ struct Session: Decodable, Identifiable, Equatable, Sendable {
         func normalized(_ text: String) -> String { text.split(whereSeparator: \.isWhitespace).joined(separator: " ") }
         let text = normalized(prompt)
         for command in [ClaudeCommand.nextStep, .finishSession] {
-            for style in [PromptStyle.oleh, .generic] {
+            for style in [PromptStyle.workspace, .generic] {
                 for language in ContentLanguage.allCases where normalized(command.prompt(style, language: language)).hasPrefix(text.prefix(60)) {
                     return command.title
                 }
             }
         }
+        // Sessions started by older versions keep their old wrapper.
         let wrappers = ["Задача от Олега: "] + ContentLanguage.allCases.map(\.strings.taskPrefix)
         guard let wrapper = wrappers.first(where: text.hasPrefix) else { return text }
         var task = String(text.dropFirst(wrapper.count))

@@ -131,6 +131,7 @@ struct ClaudePultApp: App {
             requests.listen(commands: commands)
             usage.start()
             hub.start()
+            Task { await Telegram.loadOwnBot(chatID: settings.telegramChatID) }
             weeklySummary.start()
             monitor.start()
             keepAwake.start()
