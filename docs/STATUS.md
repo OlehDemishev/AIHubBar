@@ -5,6 +5,7 @@
 **Updated:** 2026-10-31
 
 **Now:**
+- nothing in progress; merged: English interface names in the public docs (#143)
 - nothing in progress; merged: overview PDF (en, ru) and a public README for GitHub (#139), no personal paths or names, Telegram set up in the app (#140)
 - released 0.2.0: repo renamed to `OlehDemishev/AIHubBar` and made public; repeat fixes merged (#136, #137)
 - merged today: notifications once per wait and a choice per kind (#134); queue after reset and run guard (#129), other-AI menu bar/widget/forecast (#130), session changes and weekly summary (#131), Claude Code window and saved prompts (#132); other AI services' limits (#126, #127)
@@ -27,6 +28,12 @@
 - decide SPEC-windows §10 and SPEC-linux §10 (Tauri 2 for both, Windows code signing, first Linux desktops) before that work starts
 - optional: Apple Developer ID (notarization, no «Open Anyway»); delete or archive the old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-10-31 — English interface names in the public docs (branch `docs/english-ui-names`)
+
+Done: Russian interface names in `docs/REFERENCE.md` and `docs/RELEASE.md` («Настройки…», «Основные», «Модули», «Не спать», notification texts …) replaced by the app's own English strings, looked up in `Localizable.xcstrings` (most automatically, the rest by hand from the code: card `project.md` and its fields, `content-plan.md` columns, `{project}`/`<time>` placeholders); « » quotes became “ ”. README links to the Russian PDF in English. The v0.2.0 release notes on GitHub are now English. Left on purpose: language names, the Cyrillic keyboard-layout example and the per-language file names. GUIDE and the English PDF had no Russian already.
+Checked: no Cyrillic left in README / GUIDE / RELEASE / REFERENCE apart from those examples; every lookup reviewed in the diff.
+Left: internal docs (SPEC*, DECISIONS, CHECKLIST, STATUS history, TEMPLATES) stay as they are — Russian specs and records of checks in the Russian interface.
 
 ## 2026-10-31 — Overview PDF and GitHub presentation (branch `docs/overview-pdf-and-repo`)
 
