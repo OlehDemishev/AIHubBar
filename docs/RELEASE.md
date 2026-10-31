@@ -31,7 +31,7 @@ The folder is never committed.
 
 ```bash
 scripts/release.sh 0.2.0            # build, sign, .dmg, appcast.xml into build/release/0.2.0/
-scripts/release.sh 0.2.0 --publish  # the same, then the GitHub release v0.2.0 with both files
+scripts/release.sh 0.2.0 --publish  # the same, then the GitHub release v0.2.0 with the .dmg, appcast.xml and the overview PDFs
 ```
 
 - **Before running:** the tree must be clean.
@@ -41,7 +41,7 @@ scripts/release.sh 0.2.0 --publish  # the same, then the GitHub release v0.2.0 w
 
 ## First launch for people
 
-1. Download `ClaudePult-<version>.dmg` from Releases, open it and drag AI Hub Bar to “Applications” (Applications).
+1. Download `AIHubBar-<version>.dmg` from Releases, open it and drag AI Hub Bar to Applications.
 2. Open AI Hub Bar. macOS says it can't check the app; close that message.
 3. Open System Settings → Privacy & Security, scroll to “AI Hub Bar was blocked…” and press “Open Anyway”. Confirm with your password.
 4. AI Hub Bar opens from then on. Later updates come through Sparkle (“Updates” in Settings → General) without these steps.
