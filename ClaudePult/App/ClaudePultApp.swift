@@ -152,7 +152,11 @@ struct ClaudePultApp: App {
                         .environment(runs))
                 }
             }
-            Task { await services.scan() }
+            // The shell lookup first: the scan reports which `claude` it found.
+            Task {
+                await ClaudeLocator.refreshShellPath()
+                await services.scan()
+            }
             folders.start()
             // A first start without `_daily-report`: the assistant sets up the first mode (SPEC-modes §5).
             // The menu bar label, which opens windows, has to be on screen first.

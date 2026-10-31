@@ -6,6 +6,7 @@
 
 **Now:**
 - notch island stage 1 merged (#149): module, island over the notch, ears, hover card; target release 0.3.0
+- wider `claude` auto-detection merged (#150): shell, nvm/fnm/volta and the desktop app's copy — another Mac showed «авто: не найден»
 - landing page live at https://olehdemishev.github.io/AIHubBar/ (#147), deployed by `.github/workflows/pages.yml` on pushes to `site/`
 - nothing else in progress; merged: RELEASE.md names the real `.dmg` (#144), English interface names in the public docs (#143); overview PDF (en, ru) and a public README for GitHub (#139), no personal paths or names, Telegram set up in the app (#140)
 - released 0.2.0: repo renamed to `OlehDemishev/AIHubBar` and made public; repeat fixes merged (#136, #137)
@@ -32,6 +33,12 @@
 - decide SPEC-windows §10 and SPEC-linux §10 (Tauri 2 for both, Windows code signing, first Linux desktops) before that work starts
 - optional: Apple Developer ID (notarization, no «Open Anyway»); delete or archive the old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-10-31 — Wider `claude` auto-detection (branch `fix/claude-autodetect`)
+
+Done: `ClaudeLocator` looked in four fixed folders only, so a Mac with `claude` under nvm/fnm/volta, or with only the Claude desktop app, showed «авто: не найден». Now it checks Homebrew, `~/.local/bin`, npm-global, bun, volta, asdf and mise shims, then `command -v claude` from the user's interactive login shell (asked once at app start, before the AI scan), then nvm and fnm (newest Node first), then the desktop app's own copy (`~/Library/Application Support/Claude/claude-code/<version>/<hash>/claude.app`, newest version, found again each time). REFERENCE.md lists the places.
+Checked: `xcodebuild test` — 281 tests pass after merging main with the notch island (new: nothing installed, newest nvm version, desktop app copy, the order of places, shell output with a greeting or an alias, the real shell lookup). On this Mac the login shell answers `/opt/homebrew/bin/claude` in 0.04 s; the desktop app copy runs (`2.1.309 (Claude Code)`). Not checked on the other Mac. CI not set up; checks run locally.
+Left: the desktop app copy may ask for `/login` on its first run in Terminal; the command-line mode (`--claude`) does not ask the shell (Terminal's own PATH covers it).
 
 ## 2026-10-31 — Notch island, stage 1 (branch `feat/notch-island`)
 
