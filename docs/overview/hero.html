@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>AI Hub Bar — hero</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  /* 1280×640: README header and the GitHub social preview. Rendered by scripts/make-overview-pdf.sh. */
+  html, body { width: 1280px; height: 640px; overflow: hidden; }
+  body { font-size: 15px; }
+  .hero-wrap {
+    width: 1280px; height: 640px; display: flex; align-items: center; gap: 56px; padding: 0 80px;
+    background:
+      radial-gradient(520px 520px at 88% 0%, rgba(240,167,124,.55), transparent 70%),
+      radial-gradient(600px 600px at 0% 100%, rgba(217,119,75,.20), transparent 70%),
+      #fffaf6;
+  }
+  .hero-text { flex: 1; }
+  .hero-text img { width: 108px; height: 108px; margin-bottom: 18px; }
+  .hero-text h1 { font-size: 76px; letter-spacing: -0.035em; line-height: 1; margin-bottom: 18px; }
+  .hero-text p { font-size: 27px; line-height: 1.3; color: var(--ink-2); letter-spacing: -0.01em; margin: 0 0 26px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 10px; }
+  .chips span { font-size: 17px; padding: 6px 14px; border-radius: 999px; background: #fff; border: 1px solid var(--line); color: var(--ink-2); }
+  .shot { zoom: 1.45; }
+</style>
+</head>
+<body>
+<div class="hero-wrap">
+  <div class="hero-text">
+    <img src="../../ClaudePult/Resources/Assets.xcassets/AppIcon.appiconset/icon_512x512.png" alt="">
+    <h1>AI Hub Bar</h1>
+    <p>Claude limits, every agent session and AI commands for your projects — one click away in the Mac menu bar.</p>
+    <div class="chips"><span>macOS 14+</span><span>Free · MIT</span><span>13 languages</span><span>No account</span></div>
+  </div>
+  <div class="shot">
+    <div class="menubar" style="width:82mm">
+      <span class="item">✦ <span>42%</span><span class="muted">·</span><span>18%</span></span>
+      <span class="item">✋ 1</span>
+      <span class="muted">Fri 14:05</span>
+    </div>
+    <div class="panel">
+      <div class="head"><span class="prof">⌘ Developer ▾</span><span class="icons">↻ ⚙ ? ⏻</span></div>
+      <div class="pcard">
+        <div class="t">Limits</div>
+        <div class="rings">
+          <div class="ring" style="background:conic-gradient(var(--green) 0 42%, #efe7e1 0)"><span>42%</span></div>
+          <div class="ringlabel"><b>Session</b><br>in 2 h 14 min</div>
+          <div class="ring" style="background:conic-gradient(var(--green) 0 18%, #efe7e1 0)"><span>18%</span></div>
+          <div class="ringlabel"><b>Week</b><br>resets Tue 9:00</div>
+        </div>
+        <div class="forecast">✓ Enough until the reset at this pace</div>
+      </div>
+      <div class="pcard" style="margin-bottom:0">
+        <div class="t">Sessions</div>
+        <div class="row wait"><span class="st" style="background:var(--orange)"></span><span><span class="name">shop-app</span><br><span class="sub">wants to run <code>npm test</code></span></span><span class="right"><span class="btn ok">Allow</span> <span class="btn">Deny</span></span></div>
+        <div class="row"><span class="st" style="background:var(--green)"></span><span><span class="name">blog</span><br><span class="sub">editing header.tsx · +42 −7</span></span><span class="right">12 min</span></div>
+        <div class="row"><span class="st" style="background:var(--blue)"></span><span><span class="name">api</span><br><span class="sub">background · writing tests</span></span><span class="right">31 min</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

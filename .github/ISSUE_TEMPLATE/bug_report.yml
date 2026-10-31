@@ -1,0 +1,46 @@
+name: Bug report
+description: Something in AI Hub Bar doesn't work as it should
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What you did, what you expected and what happened instead.
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: AI Hub Bar version
+      description: Settings → General shows it.
+      placeholder: "0.2.0 (183)"
+    validations:
+      required: true
+  - type: input
+    id: macos
+    attributes:
+      label: macOS version
+      placeholder: "macOS 15.1, Apple Silicon"
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Limits
+        - Sessions
+        - Projects and commands
+        - Calendar
+        - Mac tools (resources, keep awake, quick commands, toggles, clipboard, notes)
+        - Menu bar, widgets, search, Shortcuts
+        - Notifications or Telegram
+        - Install or updates
+        - Something else
+  - type: textarea
+    id: log
+    attributes:
+      label: Log
+      description: Optional. The app log is in ~/Library/Logs/ClaudePult. Remove anything private before pasting.
+      render: text

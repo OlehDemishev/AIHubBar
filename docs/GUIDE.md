@@ -25,7 +25,7 @@ You can enable several profiles and switch between them at the top of the panel.
 
 ## Install
 
-1. Download `ClaudePult-<version>.dmg` from [Releases](https://github.com/OlehDemishev/ClaudePult/releases).
+1. Download `AIHubBar-<version>.dmg` from [Releases](https://github.com/OlehDemishev/ClaudePult/releases).
 2. Open it and drag AI Hub Bar to Applications.
 3. Open AI Hub Bar. macOS says it can't check the developer: AI Hub Bar isn't signed with an Apple Developer ID. Close the message.
 4. Go to System Settings → Privacy & Security, find «AI Hub Bar was blocked…» and press **Open Anyway**.
@@ -111,5 +111,5 @@ AI Hub Bar follows the system language. To pick another one, go to **Settings…
 
 1. Choose **Settings… → Claude Code → Remove hooks**.
 2. Quit AI Hub Bar.
-3. Delete `~/Applications/ClaudePult.app`, `~/Library/Application Support/ClaudePult` and `~/Library/Logs/ClaudePult`.
+3. Delete AI Hub Bar from Applications, then `~/Library/Application Support/ClaudePult` and `~/Library/Logs/ClaudePult`.
 4. API keys are stored in Keychain Access under "ClaudePult API key". Delete those entries too if you want them gone.

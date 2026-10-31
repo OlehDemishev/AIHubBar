@@ -117,8 +117,11 @@ ls -lh "$OUT/$DMG" "$OUT/appcast.xml" | awk '{print "    " $5 "  " $9}'
 
 if [[ "$PUBLISH" == "--publish" ]]; then
   echo "==> Publishing v$VERSION"
-  gh release create "v$VERSION" "$OUT/$DMG" "$OUT/appcast.xml" --repo "$REPO" --title "$NAME $VERSION" \
-    --notes "Download $DMG, open it and drag AI Hub Bar to Applications. First launch: see docs/RELEASE.md («Открыть всё равно»)."
+  # The overview PDFs (scripts/make-overview-pdf.sh) go along when they exist.
+  EXTRA=()
+  for pdf in docs/AI-Hub-Bar-Overview-*.pdf; do [ -f "$pdf" ] && EXTRA+=("$pdf"); done
+  gh release create "v$VERSION" "$OUT/$DMG" "$OUT/appcast.xml" ${EXTRA[@]+"${EXTRA[@]}"} --repo "$REPO" --title "$NAME $VERSION" \
+    --notes "Download $DMG, open it and drag AI Hub Bar to Applications. The first launch asks once: System Settings → Privacy & Security → **Open Anyway** (see docs/GUIDE.md). What AI Hub Bar does: AI-Hub-Bar-Overview-en.pdf (русский: AI-Hub-Bar-Overview-ru.pdf)."
 else
   echo "Not published. To publish: scripts/release.sh $VERSION --publish (or gh release create v$VERSION with both files)."
 fi
