@@ -18,6 +18,7 @@
 
 **Next:**
 - notch island for 0.3.0 (docs/SPEC-notch.md §9): stage 3 — pill on screens without a notch, full screen, hot keys, first-setup window; then a 0.3.0 build for Oleh's MacBook Air before publishing
+- later, not scheduled (Oleh, 2026-10-31): move Claude into the AI services section and show every service (Claude, Codex, Gemini, …) the same way — one per-service model for rings, forecast, week strip, credits, per-project tokens; full Codex metrics (rings, history, credits, plan, per-project tokens, context) were checked as feasible and deferred until then
 - standing rule (SPEC §3.1): every new icon-only control gets a hover hint; finish each UI stage with the accessibility walk
 - fix whatever Oleh finds in the translations (automated checks pass; a native read for ja, ko, ar is still worth it)
 - stage 8: done without Developer ID (self-signed + Sparkle, PR #85; re-checked on main); notarization only if Oleh buys Developer ID; publishing is Oleh's step (Needs Oleh)
@@ -35,6 +36,12 @@
 - decide SPEC-windows §10 and SPEC-linux §10 (Tauri 2 for both, Windows code signing, first Linux desktops) before that work starts
 - optional: Apple Developer ID (notarization, no «Open Anyway»); delete or archive the old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-10-31 — Plan: Claude as one of the AI services (branch `chore/status-unified-ai`)
+
+Done: recorded in Next that Claude moves into the AI section with the same view for every service. Codex can match Claude's metrics: `codex` returns 5 h and week windows, credits, the plan type, per-limit buckets and token counts, and its session logs add the project folder and context size. Chats on chatgpt.com expose no limits. The full Codex metrics wait for this change.
+Checked: Codex fields against the openai/codex source (`protocol.rs`, `app-server-protocol/v2/account.rs`, `backend-client`); no code changed, so no build.
+Left: the work itself, when Oleh says.
 
 ## 2026-10-31 — Notch island, stage 2: events and permission requests (branch `feat/notch-events`)
 
