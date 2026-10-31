@@ -1,4 +1,4 @@
-/* AI Hub Bar landing page (GitHub Pages). Neutral base; the accent comes from one palette below. */
+/* AI Hub Bar landing page (GitHub Pages). Neutral Apple-like base with a mono accent. */
 :root {
   --ink: #1d1d1f;
   --ink-2: #515154;
@@ -29,28 +29,13 @@
   }
 }
 
-/* Palettes: accent, second accent (icon gradient), soft tint, text on accent, two glows. */
-:root:not([data-palette]), [data-palette="mono"] {
+/* Accent: mono — near-black on white, light on dark; the orange app icon stays the only colour. */
+:root {
   --accent: #1d1d1f; --accent-2: #636366; --accent-soft: #f2f2f4; --on-accent: #fff; --link: #0066cc;
   --glow-1: rgba(120,140,170,.20); --glow-2: rgba(160,160,175,.14);
 }
-[data-palette="blue"] {
-  --accent: #0071e3; --accent-2: #40a9ff; --accent-soft: #e8f2fd; --on-accent: #fff; --link: #0066cc;
-  --glow-1: rgba(0,113,227,.20); --glow-2: rgba(90,200,250,.16);
-}
-[data-palette="indigo"] {
-  --accent: #4f46e5; --accent-2: #8b5cf6; --accent-soft: #eef0ff; --on-accent: #fff; --link: #4f46e5;
-  --glow-1: rgba(99,102,241,.24); --glow-2: rgba(139,92,246,.16);
-}
-[data-palette="teal"] {
-  --accent: #0f766e; --accent-2: #14b8a6; --accent-soft: #e6f6f4; --on-accent: #fff; --link: #0f766e;
-  --glow-1: rgba(20,184,166,.22); --glow-2: rgba(16,185,129,.14);
-}
 @media (prefers-color-scheme: dark) {
-  :root:not([data-palette]), [data-palette="mono"] { --accent: #f5f5f7; --accent-2: #8e8e93; --accent-soft: #1f1f22; --on-accent: #111; --link: #4da3ff; --glow-1: rgba(120,140,170,.18); --glow-2: rgba(90,90,110,.14); }
-  [data-palette="blue"] { --accent: #0a84ff; --accent-soft: #0b2440; --link: #4da3ff; }
-  [data-palette="indigo"] { --accent: #6366f1; --accent-soft: #1e1b3a; --link: #a5b4fc; }
-  [data-palette="teal"] { --accent: #2dd4bf; --accent-soft: #0f2a27; --on-accent: #042f2e; --link: #5eead4; }
+  :root { --accent: #f5f5f7; --accent-2: #8e8e93; --accent-soft: #1f1f22; --on-accent: #111; --link: #4da3ff; --glow-1: rgba(120,140,170,.18); --glow-2: rgba(90,90,110,.14); }
 }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
@@ -179,7 +164,3 @@ li b { color: var(--ink); }
   .btn-primary, .btn-ghost { transition: none; }
 }
 
-/* Temporary palette picker for choosing colours; remove once one is chosen. */
-.picker { position: fixed; right: 16px; bottom: 16px; z-index: 20; display: flex; gap: 6px; align-items: center; padding: 8px 10px; border-radius: 14px; background: var(--surface); border: 1px solid var(--line); box-shadow: 0 8px 24px var(--shadow); font-size: 13px; color: var(--ink-3); }
-.picker button { font: inherit; padding: 4px 10px; border-radius: 8px; border: 1px solid var(--line); background: var(--card); color: var(--ink); cursor: pointer; }
-.picker button[aria-pressed="true"] { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }

@@ -22,7 +22,7 @@
 - Windows and Linux versions (docs/SPEC-windows.md, docs/SPEC-linux.md) — only when Oleh says; stage 0 (fact checks in VMs) first
 
 **Needs Oleh:**
-- landing page draft (`site/`, preview: `python3 -m http.server 8765 --directory site`): pick a palette (Mono, Blue, Indigo, Teal — switcher bottom right) and say whether to publish it on GitHub Pages
+- landing page (`site/`, Mono colours, preview: `python3 -m http.server 8765 --directory site`): say whether to publish it on GitHub Pages
 - read docs/SPEC-notch.md and answer §10: is there a MacBook with a notch to test on, name «Остров у чёлки» or «Остров», «instead of notifications» off by default, pill on screens without a notch, hot keys for Allow / Deny
 - read docs/AI-Hub-Bar-Overview-ru.pdf and -en.pdf (facts and wording); after merge upload docs/images/social-preview.png in GitHub → Settings → General → Social preview (no API for it); the PDFs can be added to the 0.2.0 release: `gh release upload v0.2.0 docs/AI-Hub-Bar-Overview-*.pdf`
 - after the release: download 0.2.0 from Releases on another Mac (or user) and open it once with «Open Anyway»
@@ -31,6 +31,12 @@
 - decide SPEC-windows §10 and SPEC-linux §10 (Tauri 2 for both, Windows code signing, first Linux desktops) before that work starts
 - optional: Apple Developer ID (notarization, no «Open Anyway»); delete or archive the old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-10-31 — Landing page: Mono colours (branch `feat/landing-site`)
+
+Done: Oleh picked Mono. The other palettes and the temporary switcher are gone; the accent is near-black on white and light grey on dark, links Apple blue, so the orange app icon is the only colour.
+Checked: browser pane, light and dark: no switcher left, buttons and steps follow the mono accent, `#install` link scrolls.
+Left: the GitHub Pages workflow and a PR, on Oleh's go.
 
 ## 2026-10-31 — Landing page: neutral colours and palette choice (branch `feat/landing-site`)
 
