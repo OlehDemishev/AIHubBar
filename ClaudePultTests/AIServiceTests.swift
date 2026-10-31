@@ -66,7 +66,7 @@ struct AIServiceTests {
 
     @Test func agentDetectionAndTerminalLine() {
         let home = "/Users/test"
-        #expect(AgentKind.candidates("codex", home: home).contains("/Users/test/.local/bin/codex"))
+        #expect(AgentLocator.candidates("codex", home: home).contains("/Users/test/.local/bin/codex"))
         #expect(AgentKind.codex.detect { $0 == "/usr/local/bin/codex" } == "/usr/local/bin/codex")
         #expect(AgentKind.gemini.detect { _ in false } == nil)
         #expect(AgentKind.codex.terminalCommandLine(folder: "/P/My App", path: "/opt/homebrew/bin/codex")

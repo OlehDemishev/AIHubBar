@@ -133,18 +133,9 @@ enum AgentKind: String, CaseIterable, Codable, Sendable {
         return version.isEmpty ? nil : version
     }
 
-    static func candidates(_ binary: String, home: String = NSHomeDirectory()) -> [String] {
-        [
-            "/opt/homebrew/bin/\(binary)",
-            "/usr/local/bin/\(binary)",
-            "\(home)/.local/bin/\(binary)",
-            "\(home)/.npm-global/bin/\(binary)",
-            "\(home)/.bun/bin/\(binary)",
-        ] + (binary == "claude" ? ["\(home)/.claude/local/claude"] : [])
-    }
-
+    /// See `AgentLocator`: fixed places, the login shell, version managers.
     func detect(isExecutable: (String) -> Bool = FileManager.default.isExecutableFile(atPath:)) -> String? {
-        Self.candidates(binary).first(where: isExecutable)
+        AgentLocator.detect(binary, isExecutable: isExecutable)
     }
 
     /// `cd <folder> && <agent>` — opens the agent in Terminal in the project folder.
