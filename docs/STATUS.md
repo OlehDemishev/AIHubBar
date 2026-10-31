@@ -1,11 +1,11 @@
 # Status
 
 <!-- summary:start -->
-**Stage:** renamed to AI Hub Bar (formerly ClaudePult); SPEC-modes and SPEC-profiles done, release tooling ready, not published yet
+**Stage:** AI Hub Bar 0.2.0 released publicly (github.com/OlehDemishev/AIHubBar); next: Windows and Linux versions
 **Updated:** 2026-10-30
 
 **Now:**
-- repeat fixes after live checks: PR on `fix/week-forecast-repeat`
+- released 0.2.0: repo renamed to `OlehDemishev/AIHubBar` and made public; repeat fixes merged (#136, #137)
 - merged today: notifications once per wait and a choice per kind (#134); queue after reset and run guard (#129), other-AI menu bar/widget/forecast (#130), session changes and weekly summary (#131), Claude Code window and saved prompts (#132); other AI services' limits (#126, #127)
 - renamed to AI Hub Bar (PR #115); session rows open on a click anywhere (PR #117); widgets translated into 13 languages (PR #119); sessions in Claude's own terminal open Claude (PR #121); module options per profile (PR #124)
 - merged today: feature batch — approve from notifications (#100), current action (#102), week forecast (#104), Telegram answers (#106), PR/CI alerts (#108), search, hot key, Shortcuts (#110), widget and Control Center toggle (#112), night queue (#113), context fullness (#114); panel as cards (#98); hover hints (#91); menu bar drag, translation review, release re-check (#93–#95)
@@ -25,6 +25,12 @@
 - decide SPEC-windows §10 and SPEC-linux §10 (Tauri 2 for both, Windows code signing, first Linux desktops) before that work starts
 - optional: Apple Developer ID (notarization, no «Open Anyway»); delete or archive the old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-10-31 — Release 0.2.0, public repo `OlehDemishev/AIHubBar` (branch `chore/go-public`)
+
+Done: STATUS header trimmed of Mac-specific personal notes; SUFeedURL, release script and docs point at `OlehDemishev/AIHubBar`; repo renamed (GitHub redirects the old URL) and made public on Oleh's go; `scripts/release.sh 0.2.0 --publish` from a clean main published v0.2.0 with `AIHubBar-0.2.0.dmg` and `appcast.xml`.
+Checked: secret scan of all 285 commits (keys, tokens, private keys, sensitive file names) found nothing; anonymous download of the appcast (200) and the DMG (200, 9.8 MB); the app inside is version 0.2.0, signed «ClaudePult Release», feed URL on AIHubBar.
+Left: git history still has the older notes and both author emails (rewriting history was not done); first launch on another Mac needs «Open Anyway» (no Developer ID).
 
 ## 2026-10-31 — Live checks; week-forecast notification repeating 164 times (branch `fix/week-forecast-repeat`)
 
