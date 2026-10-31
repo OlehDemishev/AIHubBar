@@ -6,6 +6,7 @@
 
 **Now:**
 - Codex from the ChatGPT desktop app (branch `fix/codex-in-chatgpt-app`, PR open): AI Hub Bar finds the `codex` inside ChatGPT.app
+- clickable widgets: PR from `feat/interactive-widgets` (links, ↻ and ☕ buttons, «Лимиты» window), waits for Oleh's live click check
 - notch island stage 1 merged (#149): module, island over the notch, ears, hover card; target release 0.3.0
 - notch island stage 2 merged (#153): banners for events, permission requests with Allow / Deny in the island
 - wide CLI search merged: `claude` (#150), then codex, gemini, agy, copilot, cursor-agent (#151) — login shell, nvm/fnm/volta/pnpm, Claude desktop app's copy
@@ -28,6 +29,7 @@
 
 **Needs Oleh:**
 - merge the Codex-from-ChatGPT PR; then Settings → Модули → Лимиты → «Другие AI» should list Codex (free plan: one 30-day window)
+- widgets (build of `feat/interactive-widgets`, installed on the Mac mini): click the limits widget (opens «Лимиты»), ↻ in it, the sessions widget's rows and ☕; tell me what doesn't react
 - on the other Mac: install 0.2.1 (Releases, or «Обновления» in Settings if 0.2.0 is there) → Settings → Claude Code: the path field should show «авто: …» instead of «авто: не найден»; tell me the path it shows
 - notch island: on the MacBook Air (with this branch's build or later) — Settings → Модули → «Остров у чёлки» → Установить; check the ears beside the real notch, hover opens the card, moving away closes it, menu bar clicks next to the notch still work
 - optional: put https://olehdemishev.github.io/AIHubBar/ into the repo's About → Website; repo settings suggested in chat (release immutability, «Always suggest updating», «Automatically delete head branches»)
@@ -44,6 +46,12 @@
 Done: `AgentLocator.detect("codex")` falls back, last, to the `codex` the ChatGPT desktop app ships (`ChatGPT.app/Contents/Resources/codex-cli/bin/codex`): every copy Launch Services knows by bundle id (`com.openai.codex` — the real id of ChatGPT 26.1027 —, `com.openai.chat`), then `/Applications` and `~/Applications`. So with only ChatGPT.app installed, Codex shows under «Другие AI» with its limits, in Settings → Сервисы, «Открыть в…», commands and «Сравнить». Decision and the per-caller review in DECISIONS.md. No new strings.
 Checked: xcodegen + `xcodebuild test` — 294 tests pass (new: the app's copy only for `codex`, found wherever Launch Services has it with each place once, after the shell and version managers; the real free-plan `rateLimits` answer). Live: the bundled `codex app-server` (codex-cli 0.166.0-alpha.5.1) answers `account/rateLimits/read` with Oleh's ChatGPT sign-in; installed with `scripts/build-and-install.sh`, `AIHubBar --services` with a bare PATH prints `agent codex: /Applications/ChatGPT.app/…/codex — codex-cli 0.166.0-alpha.5.1`, and the running app wrote `other-ai.json` with `Codex 0%`. The Settings window itself was not looked at (computer use can't reach the menu bar app). CI not set up; checks run locally.
 Left: docs/REFERENCE.md names the test scheme «AI Hub Bar», the real one is `ClaudePult`.
+
+## 2026-10-31 — Clickable desktop widgets (branch `feat/interactive-widgets`)
+
+Done: URL scheme `aihubbar://` (project.yml), handled in `AppDelegate` (`WidgetLink`): `limits` opens a new «Лимиты — AI Hub Bar» window with the panel's limits block (the panel can't be opened from code), `session/<id>` shows that session like a notification click (an ended one → search), `search` opens the search. Limits widget: a click anywhere opens limits (`widgetURL`), ↻ (`RefreshLimitsIntent`) asks the app to fetch now without opening it. Sessions widget: small → the one waiting session or the search; medium → a link per row (waiting → first waiting session, each project name → its session, working / red projects → search); ☕ (`SetKeepAwakeIntent`, now macOS 14+, only with «Не спать» installed) switches the manual hold without opening the app. `widget-status.json` gains `waitingSessions` (id + project). Every window scene now has `.handlesExternalEvents(matching: [])` — SwiftUI opened the search window along with each link. 4 new strings in 12 languages, hover hints and accessibility labels on ↻ and ☕. DECISIONS and REFERENCE updated.
+Checked: `xcodebuild test` — 291 tests (new: link parsing, `waitingSessions` file shape, the refresh request over Darwin notifications). Installed with `build-and-install.sh` on the Mac mini: `open aihubbar://limits` opened only the «Лимиты» window (420 pt, real 38 % / 98 % and Copilot rows, screenshot), `aihubbar://search` the search, an unknown session id the search, this session's id opened it in Claude (log «Show session: Claude app link …»); the Darwin requests the buttons send refreshed `usage.json` (updated 18:41:07Z → 18:41:47Z) and switched the manual keep-awake hold on and off (restored). Widget bundle carries both intents in `Metadata.appintents`. CI not set up.
+Left: the widgets themselves not clicked on the desktop (WidgetKit UI can't be driven from here) — Needs Oleh; whether macOS shows `.help` tooltips inside desktop widgets is unknown (VoiceOver labels are set either way); with the app not running ↻ and ☕ do nothing.
 
 ## 2026-10-31 — Plan: Claude as one of the AI services (branch `chore/status-unified-ai`)
 

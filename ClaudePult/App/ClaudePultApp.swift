@@ -102,6 +102,8 @@ struct ClaudePultApp: App {
         _widgetStatus = State(initialValue: WidgetStatusWriter { [sessions, runs, store, keepAwake, modes] in
             WidgetStatus(
                 waiting: sessions.items.filter { $0.state == .waiting }.map(\.session.displayProject),
+                waitingSessions: sessions.items.filter { $0.state == .waiting }
+                    .map { WidgetStatus.Session(id: $0.id, project: $0.session.displayProject) },
                 running: sessions.items.filter { $0.state == .running }.count + runs.running.count,
                 problems: store.projects.filter { $0.health == .red }.map(\.name),
                 keepAwake: keepAwake.reason != nil,
@@ -137,9 +139,13 @@ struct ClaudePultApp: App {
             sessions.start()
             telegramApprovals.start()
             widgetStatus.start { [keepAwake, widgetStatus] on in
-                AppLog.info("Keep awake \(on ? "on" : "off") from Control Center")
+                AppLog.info("Keep awake \(on ? "on" : "off") from the widget or Control Center")
                 if on { keepAwake.holdManually(for: nil) } else { keepAwake.stopManual() }
                 widgetStatus.update()
+            } onRefreshLimits: { [usage, hub] in
+                AppLog.info("Limits refresh from the widget")
+                Task { await usage.refresh() }
+                Task { await hub.refresh() }
             }
             runs.start()
             requests.listen(commands: commands)
@@ -201,6 +207,20 @@ struct ClaudePultApp: App {
             }
             NotificationRouter.shared.install(handle)
             notchIsland.perform = handle
+            AppDelegate.openLink = { url in
+                guard let resolution = WidgetLink.resolve(url) else {
+                    AppLog.error("Unknown link \(url.absoluteString)")
+                    return
+                }
+                AppLog.info("Widget link \(url.absoluteString)")
+                // A session that has ended since the widget drew it: the search lists what runs now.
+                if case let .showSession(id) = resolution,
+                   !SessionStore.loadItems(from: SessionFiles.sessionsDirectory, now: .now).contains(where: { $0.id == id }) {
+                    handle(.openWindow(id: "search"))
+                } else {
+                    handle(resolution)
+                }
+            }
         }
     }
 
@@ -259,6 +279,8 @@ struct ClaudePultApp: App {
         }
         .menuBarExtraStyle(.window)
 
+        // `.handlesExternalEvents(matching: [])` on every window: otherwise SwiftUI opens the first one (this search)
+        // for each `aihubbar://` link or `*.claudepult` file, which `AppDelegate` handles itself.
         Window("Поиск — AI Hub Bar", id: "search") {
             QuickSearchWindow()
                 .environment(settings)
@@ -272,6 +294,7 @@ struct ClaudePultApp: App {
                 .environment(commands)
                 .preferredColorScheme(settings.panelTheme.colorScheme)
         }
+        .handlesExternalEvents(matching: [])
         .windowStyle(.hiddenTitleBar)
         .windowResizability(.contentSize)
         .defaultPosition(.center)
@@ -281,13 +304,31 @@ struct ClaudePultApp: App {
                 .environment(claudeConfig)
                 .preferredColorScheme(settings.panelTheme.colorScheme)
         }
+        .handlesExternalEvents(matching: [])
         .defaultSize(width: 900, height: 620)
+
+        // A click on the limits widget: the panel's limits block on its own, since the panel can't be opened from code.
+        Window("Лимиты — AI Hub Bar", id: "limits") {
+            LimitsView()
+                .panelCard()
+                .padding(.vertical, 10)
+                .frame(width: 420)
+                .environment(usage)
+                .environment(hub)
+                .environment(launcher)
+                .environment(engine)
+                .preferredColorScheme(settings.panelTheme.colorScheme)
+        }
+        .handlesExternalEvents(matching: [])
+        .windowResizability(.contentSize)
+        .defaultPosition(.topTrailing)
 
         Window("Журнал фоновой задачи", id: "run-log") {
             RunLogView()
                 .environment(runs)
                 .preferredColorScheme(settings.panelTheme.colorScheme)
         }
+        .handlesExternalEvents(matching: [])
         .defaultSize(width: 640, height: 520)
 
         Window("Помощник — AI Hub Bar", id: "assistant") {
@@ -300,6 +341,7 @@ struct ClaudePultApp: App {
                 .environment(loginItem)
                 .preferredColorScheme(settings.panelTheme.colorScheme)
         }
+        .handlesExternalEvents(matching: [])
         .windowResizability(.contentSize)
 
         Window("Календарь", id: "calendar") {
@@ -309,6 +351,7 @@ struct ClaudePultApp: App {
                 .environment(folders)
                 .preferredColorScheme(settings.panelTheme.colorScheme)
         }
+        .handlesExternalEvents(matching: [])
         .defaultSize(width: 900, height: 640)
 
         Window("Сравнение", id: "compare") {
@@ -316,6 +359,7 @@ struct ClaudePultApp: App {
                 .environment(engine)
                 .preferredColorScheme(settings.panelTheme.colorScheme)
         }
+        .handlesExternalEvents(matching: [])
         .defaultSize(width: 980, height: 640)
 
         Window("Очистка сборок", id: "cleanup-output") {
@@ -324,6 +368,7 @@ struct ClaudePultApp: App {
                 .preferredColorScheme(settings.panelTheme.colorScheme)
                 .debugSnapshot("cleanup")
         }
+        .handlesExternalEvents(matching: [])
         .defaultSize(width: 720, height: 480)
 
         Window("Помощь — AI Hub Bar", id: "help") {
@@ -335,6 +380,7 @@ struct ClaudePultApp: App {
                 .preferredColorScheme(settings.panelTheme.colorScheme)
                 .debugSnapshot("help")
         }
+        .handlesExternalEvents(matching: [])
         .defaultSize(width: 720, height: 640)
 
         Settings {
@@ -362,9 +408,11 @@ struct ClaudePultApp: App {
     }
 }
 
-/// Opens `*.claudepult` files double-clicked in Finder (SPEC-modes §12) and lets go of the lid hold on quit.
+/// Opens `*.claudepult` files double-clicked in Finder (SPEC-modes §12) and the widgets' `aihubbar://` links, and lets
+/// go of the lid hold on quit.
 final class AppDelegate: NSObject, NSApplicationDelegate {
     @MainActor static var openFile: ((URL) -> Void)?
+    @MainActor static var openLink: ((URL) -> Void)?
     @MainActor static var willTerminate: (() -> Void)?
 
     func applicationWillTerminate(_ notification: Notification) {
@@ -373,7 +421,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     func application(_ application: NSApplication, open urls: [URL]) {
         MainActor.assumeIsolated {
-            for url in urls where url.pathExtension == "claudepult" { Self.openFile?(url) }
+            for url in urls {
+                if url.scheme?.lowercased() == WidgetLink.scheme {
+                    Self.openLink?(url)
+                } else if url.pathExtension == "claudepult" {
+                    Self.openFile?(url)
+                }
+            }
         }
     }
 }
