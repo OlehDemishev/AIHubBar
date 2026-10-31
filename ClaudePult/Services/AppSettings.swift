@@ -103,6 +103,11 @@ final class AppSettings {
         didSet { if let data = try? JSONEncoder().encode(keepAwakeRules) { defaults.set(data, forKey: Keys.keepAwakeRules) } }
     }
 
+    /// «Остров у чёлки» (SPEC-notch §6).
+    var notch: NotchSettings {
+        didSet { if let data = try? JSONEncoder().encode(notch) { defaults.set(data, forKey: Keys.notch) } }
+    }
+
     /// «Быстрые команды» and «Быстрые переключатели» (SPEC-profiles §4.3–4.4).
     var quickCommands: [QuickCommand] {
         didSet { if let data = try? JSONEncoder().encode(quickCommands) { defaults.set(data, forKey: Keys.quickCommands) } }
@@ -318,6 +323,7 @@ final class AppSettings {
         quickCommands = defaults.data(forKey: Keys.quickCommands).flatMap { try? JSONDecoder().decode([QuickCommand].self, from: $0) } ?? QuickCommand.examples
         quickToggles = defaults.stringArray(forKey: Keys.quickToggles)?.compactMap(QuickToggle.init(rawValue:)) ?? QuickToggle.allCases
         keepAwakeRules = defaults.data(forKey: Keys.keepAwakeRules).flatMap { try? JSONDecoder().decode(KeepAwakeRules.self, from: $0) } ?? KeepAwakeRules()
+        notch = defaults.data(forKey: Keys.notch).flatMap { try? JSONDecoder().decode(NotchSettings.self, from: $0) } ?? NotchSettings()
         let diskBelow = defaults.integer(forKey: Keys.resourceDiskBelowGB)
         resourceDiskBelowGB = diskBelow > 0 ? diskBelow : 20
         panelTextSize = defaults.string(forKey: Keys.panelTextSize).flatMap(PanelTextSize.init(rawValue:)) ?? .normal
@@ -374,6 +380,7 @@ final class AppSettings {
         static let quickCommands = "quickCommands"
         static let quickToggles = "quickToggles"
         static let keepAwakeRules = "keepAwakeRules"
+        static let notch = "notch"
         static let resourceDiskBelowGB = "resourceDiskBelowGB"
         static let panelTextSize = "panelTextSize"
         static let panelWidth = "panelWidth"

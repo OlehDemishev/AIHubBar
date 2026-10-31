@@ -451,7 +451,9 @@ private struct ModulesSettings: View {
                         .font(.callout)
                         .foregroundStyle(.secondary)
                         .fixedSize(horizontal: false, vertical: true)
-                    LabeledContent("В профилях", value: profiles(showing: kind))
+                    if kind.isPanelBlock {
+                        LabeledContent("В профилях", value: profiles(showing: kind))
+                    }
                 } header: {
                     HStack {
                         Label(kind.title, systemImage: kind.symbol)
@@ -467,7 +469,7 @@ private struct ModulesSettings: View {
                         } else {
                             Button("Установить") { modes.install(kind) }
                                 .controlSize(.small)
-                                .help("Установить и добавить в текущий профиль")
+                                .help(kind.isPanelBlock ? String(localized: "Установить и добавить в текущий профиль") : String(localized: "Установить"))
                         }
                     }
                 }
@@ -483,6 +485,7 @@ private struct ModulesSettings: View {
                 case .toggles where modes.installedModules.contains(.toggles): QuickTogglesSection()
                 case .clipboard where modes.installedModules.contains(.clipboard): ClipboardSection()
                 case .notes where modes.installedModules.contains(.notes): NotesSection()
+                case .notch where modes.installedModules.contains(.notch): NotchSection()
                 default: EmptyView()
                 }
             }
@@ -494,6 +497,30 @@ private struct ModulesSettings: View {
     private func profiles(showing kind: ModuleKind) -> String {
         let names = modes.modes.filter { $0.shows(kind) }.map(\.name)
         return names.isEmpty ? String(localized: "нет") : names.joined(separator: ", ")
+    }
+}
+
+/// «Остров у чёлки» (SPEC-notch §6): what the ears show and how the card opens.
+private struct NotchSection: View {
+    @Environment(AppSettings.self) private var settings
+
+    var body: some View {
+        @Bindable var settings = settings
+        Section {
+            Picker("Слева от чёлки", selection: $settings.notch.leftEar) {
+                ForEach(NotchEar.allCases, id: \.self) { Text($0.title).tag($0) }
+            }
+            Picker("Справа от чёлки", selection: $settings.notch.rightEar) {
+                ForEach(NotchEar.allCases, id: \.self) { Text($0.title).tag($0) }
+            }
+            Toggle("Открывать карточку при наведении", isOn: $settings.notch.openOnHover)
+        } header: {
+            Text("Остров у чёлки")
+        } footer: {
+            Footnote(text: NotchGeometry.macHasNotch
+                ? String(localized: "Без наведения карточка открывается кликом по чёлке. В покое остров пропускает клики к строке меню.")
+                : String(localized: "На этом Маке сейчас нет экрана с чёлкой: остров появится, когда она будет (например, на встроенном экране MacBook)."))
+        }
     }
 }
 

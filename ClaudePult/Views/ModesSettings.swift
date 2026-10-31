@@ -295,7 +295,7 @@ private struct ModeEditor: View {
                 }
                 .buttonStyle(.borderless)
             }
-            let addable = modes.installedModules.filter { kind in !kind.isBuiltIn && !list.contains { $0.kind == kind } }
+            let addable = modes.installedModules.filter { kind in !kind.isBuiltIn && kind.isPanelBlock && !list.contains { $0.kind == kind } }
             if !addable.isEmpty {
                 Menu("Добавить модуль") {
                     ForEach(addable, id: \.self) { kind in
