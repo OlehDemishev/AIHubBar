@@ -1,13 +1,13 @@
 # Status
 
 <!-- summary:start -->
-**Stage:** AI Hub Bar 0.2.0 released publicly (github.com/OlehDemishev/AIHubBar); next: Windows and Linux versions
+**Stage:** AI Hub Bar 0.2.1 released (github.com/OlehDemishev/AIHubBar, wider CLI search + optional notch island); next: notch island stages 2–3 for 0.3.0
 **Updated:** 2026-10-31
 
 **Now:**
 - notch island stage 1 merged (#149): module, island over the notch, ears, hover card; target release 0.3.0
-- notch island stage 2 (branch `feat/notch-events`): banners for events, permission requests with Allow / Deny in the island
-- wider `claude` auto-detection merged (#150): shell, nvm/fnm/volta and the desktop app's copy — another Mac showed «авто: не найден»
+- notch island stage 2 merged (#153): banners for events, permission requests with Allow / Deny in the island
+- wide CLI search merged: `claude` (#150), then codex, gemini, agy, copilot, cursor-agent (#151) — login shell, nvm/fnm/volta/pnpm, Claude desktop app's copy
 - landing page live at https://olehdemishev.github.io/AIHubBar/ (#147), deployed by `.github/workflows/pages.yml` on pushes to `site/`
 - nothing else in progress; merged: RELEASE.md names the real `.dmg` (#144), English interface names in the public docs (#143); overview PDF (en, ru) and a public README for GitHub (#139), no personal paths or names, Telegram set up in the app (#140)
 - released 0.2.0: repo renamed to `OlehDemishev/AIHubBar` and made public; repeat fixes merged (#136, #137)
@@ -25,6 +25,7 @@
 - Windows and Linux versions (docs/SPEC-windows.md, docs/SPEC-linux.md) — only when Oleh says; stage 0 (fact checks in VMs) first
 
 **Needs Oleh:**
+- on the other Mac: install 0.2.1 (Releases, or «Обновления» in Settings if 0.2.0 is there) → Settings → Claude Code: the path field should show «авто: …» instead of «авто: не найден»; tell me the path it shows
 - notch island: on the MacBook Air (with this branch's build or later) — Settings → Модули → «Остров у чёлки» → Установить; check the ears beside the real notch, hover opens the card, moving away closes it, menu bar clicks next to the notch still work
 - optional: put https://olehdemishev.github.io/AIHubBar/ into the repo's About → Website; repo settings suggested in chat (release immutability, «Always suggest updating», «Automatically delete head branches»)
 - read docs/AI-Hub-Bar-Overview-ru.pdf and -en.pdf (facts and wording); after merge upload docs/images/social-preview.png in GitHub → Settings → General → Social preview (no API for it); the PDFs can be added to the 0.2.0 release: `gh release upload v0.2.0 docs/AI-Hub-Bar-Overview-*.pdf`
@@ -40,6 +41,18 @@
 Done: banners in the island (SPEC-notch §3.2): every notification that gets through its frequency check also goes to the island (`Notifier.island`), one banner at a time by importance (request, waiting, done, background, limits, context, PR/CI, then calendar, resources, commands), 6 s for a wait and 4 s for the rest, counted from when it is shown and paused while the pointer is on it; a click leads where the notification would. New island-only banner «Готово: <project> · <time>» when a session goes from working to done. Permission requests follow the open request files: project · tool, the command in mono, «Разрешить» / «Отклонить» (alive only 0.6 s after appearing and after the pointer moved — `NotchClickGuard`), «Открыть»; they stay until answered anywhere and also show at the top of the open card. Settings → Модули → «Остров у чёлки»: which events, and «Запросы и ожидание — только в острове» (off by default; only while the island is on screen). The window takes clicks only over its black part. Clicks on a banner share the notification handler. 8 new strings in 12 languages.
 Checked: `xcodebuild test` — 289 tests (new: queue order, time starts when shown, pointer pause, requests stay until answered, same id replaces, dropping, kinds, the click guard, settings decode). Live on the Mac mini with `notchSimulate` and a test session + request file (marked TEST): the request banner appeared with the buttons off until the pointer moved; Oleh clicked «Разрешить» (decision file written, log «Permission allowed from the notch island») and «Открыть» (session shown); the request went when the session stopped waiting; «Готово: TEST-notch · 13 мин» appeared on done and stayed while the pointer was on it. Fixed from that: grey prominent buttons in a non-key window (own style), a grey «done» icon, answered requests flashing back. Test files, `notchSimulate` and the module removed afterwards; one test system notification «Claude просит разрешение — TEST-notch» was posted. CI not set up.
 Left: not seen on a real notch (the Air); «только в острове» not tried live; stage 3 — pill, full screen, hot keys, first-setup window.
+
+## 2026-10-31 — Release 0.2.1 (branch `chore/status-release-021`)
+
+Done: `scripts/release.sh 0.2.1` from main `c0f8f47` (build 331), published as v0.2.1 «Latest» with the `.dmg`, appcast and the overview PDFs; notes list the wider CLI search (#150, #151), the optional notch island (#149) and #140.
+Checked: deep strict verify passed, authority «ClaudePult Release», no get-task-allow; the release binary's `--claude next … --print` names `/opt/homebrew/bin/claude`; `releases/latest/download/appcast.xml` serves 0.2.1 / 331 (after a minute of caching); the `.dmg` URL answers 200.
+Left: not opened on another Mac yet (Needs Oleh).
+
+## 2026-10-31 — Wide search for every agent CLI (branch `feat/agent-autodetect`)
+
+Done: the search from #150 moved into `AgentLocator` (`Services/AgentLocator.swift`) and now serves every `AgentKind`: Homebrew, `~/.local/bin`, npm-global, pnpm (`~/Library/pnpm`), yarn, bun, volta, cargo, asdf and mise shims, then one `command -v claude codex gemini agy copilot cursor-agent` in the interactive login shell at app start (the exit code is ignored: it is 1 when any name is missing), then nvm and fnm, then for `claude` only the desktop app's copy. `ClaudeLocator` keeps `resolve(configured:)` and asks `AgentLocator`. No app-bundle paths for Codex or Antigravity: none could be confirmed, so none are guessed.
+Checked: `xcodebuild test` — 282 tests pass (locator tests moved to `AgentLocatorTests`, new: other agents in nvm/fnm/volta/pnpm, the desktop copy only for `claude`, several paths from one shell answer). By hand: the combined `command -v` in zsh prints `/opt/homebrew/bin/claude` and exits 1 here (no other agents installed on this Mac). CI not set up; checks run locally.
+Left: not seen with a real nvm/volta install of another agent; only the fake-home tests cover it.
 
 ## 2026-10-31 — Wider `claude` auto-detection (branch `fix/claude-autodetect`)
 

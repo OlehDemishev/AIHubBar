@@ -162,9 +162,9 @@ struct ClaudePultApp: App {
                         .environment(runs))
                 }
             }
-            // The shell lookup first: the scan reports which `claude` it found.
+            // The shell lookup first: the scan reports which agents it found.
             Task {
-                await ClaudeLocator.refreshShellPath()
+                await AgentLocator.refreshShellPaths()
                 await services.scan()
             }
             folders.start()
