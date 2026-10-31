@@ -3,7 +3,7 @@
 AI Hub Bar is shared as a `.dmg` on GitHub Releases. It updates itself through [Sparkle](https://sparkle-project.org). There is no Apple Developer ID, so the build is signed with a self-signed certificate.
 
 - **What works:** updates install themselves. Permissions given to AI Hub Bar (Terminal automation, notifications) survive updates, because every release carries the same signature.
-- **What it costs:** macOS cannot vouch for the app, so the first launch needs one extra step (see «First launch» below).
+- **What it costs:** macOS cannot vouch for the app, so the first launch needs one extra step (see “First launch” below).
 - **Developer ID later:** buying it means adding notarization to `scripts/release.sh`; everything else stays.
 
 ## One-time setup (done on Oleh's Mac 2026-10-30)
@@ -17,7 +17,7 @@ Both commands write to `~/Library/Application Support/ClaudePult-release/`. Neit
 
 | File | What it is |
 |---|---|
-| `codesign.p12` + `codesign.pass` | The «ClaudePult Release» code signing certificate and its password. During a release it goes into a temporary keychain that is deleted at the end. |
+| `codesign.p12` + `codesign.pass` | The “ClaudePult Release” code signing certificate and its password. During a release it goes into a temporary keychain that is deleted at the end. |
 | `codesign.crt` | The certificate alone, public. |
 | `sparkle-ed25519.key` | The private Ed25519 key that signs updates. Its public half is `SUPublicEDKey` in `project.yml`. |
 
@@ -41,10 +41,10 @@ scripts/release.sh 0.2.0 --publish  # the same, then the GitHub release v0.2.0 w
 
 ## First launch for people
 
-1. Download `ClaudePult-<version>.dmg` from Releases, open it and drag AI Hub Bar to «Программы» (Applications).
+1. Download `ClaudePult-<version>.dmg` from Releases, open it and drag AI Hub Bar to “Applications” (Applications).
 2. Open AI Hub Bar. macOS says it can't check the app; close that message.
-3. Open System Settings → Privacy & Security, scroll to «AI Hub Bar was blocked…» and press «Open Anyway». Confirm with your password.
-4. AI Hub Bar opens from then on. Later updates come through Sparkle («Обновления» in Settings → Основные) without these steps.
+3. Open System Settings → Privacy & Security, scroll to “AI Hub Bar was blocked…” and press “Open Anyway”. Confirm with your password.
+4. AI Hub Bar opens from then on. Later updates come through Sparkle (“Updates” in Settings → General) without these steps.
 
 ## Developer builds
 
