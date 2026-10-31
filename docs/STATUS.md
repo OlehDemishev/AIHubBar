@@ -5,7 +5,7 @@
 **Updated:** 2026-10-31
 
 **Now:**
-- branch `feat/landing-site`: landing page in `site/` and the Pages workflow, PR open
+- landing page live at https://olehdemishev.github.io/AIHubBar/ (#147), deployed by `.github/workflows/pages.yml` on pushes to `site/`
 - notch island spec merged (`docs/SPEC-notch.md`, #142) with Oleh's answers (#146); no code yet
 - nothing else in progress; merged: RELEASE.md names the real `.dmg` (#144), English interface names in the public docs (#143); overview PDF (en, ru) and a public README for GitHub (#139), no personal paths or names, Telegram set up in the app (#140)
 - released 0.2.0: repo renamed to `OlehDemishev/AIHubBar` and made public; repeat fixes merged (#136, #137)
@@ -23,7 +23,7 @@
 - Windows and Linux versions (docs/SPEC-windows.md, docs/SPEC-linux.md) — only when Oleh says; stage 0 (fact checks in VMs) first
 
 **Needs Oleh:**
-- turn on GitHub Pages once: Settings → Pages → Source: GitHub Actions, then Actions → Pages → Run workflow; the site is https://olehdemishev.github.io/AIHubBar/
+- optional: put https://olehdemishev.github.io/AIHubBar/ into the repo's About → Website; repo settings suggested in chat (release immutability, «Always suggest updating», «Automatically delete head branches»)
 - notch island: say when to start stage 1; optional — the «proposed» points left in docs/SPEC-notch.md §10
 - read docs/AI-Hub-Bar-Overview-ru.pdf and -en.pdf (facts and wording); after merge upload docs/images/social-preview.png in GitHub → Settings → General → Social preview (no API for it); the PDFs can be added to the 0.2.0 release: `gh release upload v0.2.0 docs/AI-Hub-Bar-Overview-*.pdf`
 - after the release: download 0.2.0 from Releases on another Mac (or user) and open it once with «Open Anyway»
@@ -32,6 +32,12 @@
 - decide SPEC-windows §10 and SPEC-linux §10 (Tauri 2 for both, Windows code signing, first Linux desktops) before that work starts
 - optional: Apple Developer ID (notarization, no «Open Anyway»); delete or archive the old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-10-31 — Landing page live (branch `chore/pages-after-merge`)
+
+Done: Oleh turned on Pages (Source: GitHub Actions); #147 merged and the first deploy published https://olehdemishev.github.io/AIHubBar/. Pages actions moved to their current majors (checkout v7, configure-pages v6, upload-pages-artifact v5, deploy-pages v5) to drop the Node 20 warning. README links the website.
+Checked: first deploy run green, the site answers 200 and looks like the local preview in the browser pane; workflow YAML parses. The new action versions run on the deploy after this merge.
+Left: About → Website is Oleh's click (optional).
 
 ## 2026-10-31 — Landing page on GitHub Pages (branch `feat/landing-site`)
 

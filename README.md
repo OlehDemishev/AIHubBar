@@ -12,6 +12,7 @@
 
 <p align="center">
   <a href="https://github.com/OlehDemishev/AIHubBar/releases/latest"><b>Download</b></a> ·
+  <a href="https://olehdemishev.github.io/AIHubBar/"><b>Website</b></a> ·
   <a href="docs/GUIDE.md"><b>Guide</b></a> ·
   <a href="docs/AI-Hub-Bar-Overview-en.pdf"><b>Overview (PDF)</b></a> ·
   <a href="docs/AI-Hub-Bar-Overview-ru.pdf">Overview in Russian (PDF)</a>
