@@ -5,7 +5,8 @@
 **Updated:** 2026-10-30
 
 **Now:**
-- nothing in progress; merged today: notifications once per wait and a choice per kind (#134); queue after reset and run guard (#129), other-AI menu bar/widget/forecast (#130), session changes and weekly summary (#131), Claude Code window and saved prompts (#132); other AI services' limits (#126, #127)
+- repeat fixes after live checks: PR on `fix/week-forecast-repeat`
+- merged today: notifications once per wait and a choice per kind (#134); queue after reset and run guard (#129), other-AI menu bar/widget/forecast (#130), session changes and weekly summary (#131), Claude Code window and saved prompts (#132); other AI services' limits (#126, #127)
 - renamed to AI Hub Bar (PR #115); session rows open on a click anywhere (PR #117); widgets translated into 13 languages (PR #119); sessions in Claude's own terminal open Claude (PR #121); module options per profile (PR #124)
 - merged today: feature batch — approve from notifications (#100), current action (#102), week forecast (#104), Telegram answers (#106), PR/CI alerts (#108), search, hot key, Shortcuts (#110), widget and Control Center toggle (#112), night queue (#113), context fullness (#114); panel as cards (#98); hover hints (#91); menu bar drag, translation review, release re-check (#93–#95)
 - release without an Apple Developer account ready (PR #85), nothing published; Windows and Linux specs wait for Oleh
@@ -16,7 +17,6 @@
 - stage 8: done without Developer ID (self-signed + Sparkle, PR #85; re-checked on main); notarization only if Oleh buys Developer ID; publishing is Oleh's step (Needs Oleh)
 - Fix whatever Oleh finds in docs/CHECKLIST.md
 - Windows and Linux versions (docs/SPEC-windows.md, docs/SPEC-linux.md) — only when Oleh says; stage 0 (fact checks in VMs) first
-- other AI services, if wanted later: menu bar items and a widget line for them, «lasts until reset» forecast, their alerts to Telegram
 
 **Needs Oleh:**
 - if a notification still comes too often: Settings → Основные → «Какие уведомления и как часто» if something still comes too often
@@ -55,6 +55,12 @@
 - hooks are installed in ~/.claude/settings.json; backup of the original: ~/.claude/settings.json.claudepult-backup-20261029T192827
 - delete or archive the old repo `OlehDemishev/ClaudeBar`; turn on start at login if wanted
 <!-- summary:end -->
+
+## 2026-10-31 — Live checks; week-forecast notification repeating 164 times (branch `fix/week-forecast-repeat`)
+
+Done: «Недельный лимит кончится раньше сброса» came every ~2 minutes (164 today): the API sends the same week reset with a different fraction of a second each fetch, and the «once per week» check compared exact times. Reset times are now compared rounded to 10 minutes everywhere (week forecast, threshold alerts, «limit restored», the panel). «Контекст почти заполнен» no longer repeats after a restart. In the ⌃⌥C search the project step of a saved prompt lost keyboard focus (typing and Esc went nowhere): fixed.
+Checked: `xcodebuild test` — 266 tests (new: jittery reset is the same window). Live: MCP switch off/on on `obsidian` — removed from settings.json, backup written, 0600 stash, back on: content identical to the original; «Позже → После сброса лимита» queued MeisterHub for 19:42 UTC, then cancelled (nothing ran); weekly summary «Отправить сейчас» sent (`Weekly summary sent: true`); saved prompt → project picker → typing filters, Esc steps back; session changes popover lists files. After the fix the week forecast updated with no notification.
+Left: the run guard's SIGSTOP pause was not triggered live (needs 95 %).
 
 ## 2026-10-31 — Notifications: once per wait, and a choice per kind (branch `fix/notification-settings`)
 

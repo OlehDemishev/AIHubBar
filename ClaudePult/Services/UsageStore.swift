@@ -170,11 +170,12 @@ final class UsageStore {
     private func announceWeek(_ usage: WeekUsage, resetsAt: Date) {
         guard case let .runsOutAt(date) = usage.forecast else { return }
         let key = "weekForecastNotified"
-        let stamp = resetsAt.timeIntervalSince1970
-        guard UserDefaults.standard.double(forKey: key) != stamp else { return }
-        UserDefaults.standard.set(stamp, forKey: key)
+        let stamp = UsageWindow.resetMinutes(resetsAt) ?? 0
+        // Once per week window (stored rounded: the exact time changes by a fraction of a second on every fetch).
+        guard UsageWindow.resetMinutes(Date(timeIntervalSince1970: UserDefaults.standard.double(forKey: key))) != stamp else { return }
+        UserDefaults.standard.set(resetsAt.timeIntervalSince1970, forKey: key)
         Notifier.post(
-            id: "week-forecast",
+            id: "week-forecast-\(stamp)",
             title: String(localized: "Недельный лимит кончится раньше сброса"),
             body: String(localized: "При темпе последних суток — \(date.formatted(.dateTime.weekday(.wide).hour().minute())), сброс \(resetsAt.formatted(.dateTime.weekday(.wide).hour().minute()))."),
             target: .none
