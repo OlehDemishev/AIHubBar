@@ -5660,6 +5660,82 @@
         }
       }
     },
+    "AI Hub Bar: Telegram работает.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar: يعمل Telegram."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar: Telegram funktioniert."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar: Telegram works."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar: Telegram funciona."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar : Telegram fonctionne."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar: Telegram berfungsi."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar: Telegram funziona."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar: Telegram は動作しています。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar: Telegram 작동 중."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar: Telegram działa."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar: o Telegram funciona."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar: Telegram працює."
+          }
+        }
+      }
+    },
     "AI Hub Bar: сюда будут приходить запросы разрешений Claude.": {
       "localizations": {
         "ar": {
@@ -8727,6 +8803,7 @@
       }
     },
     "Stage, Сейчас, Дальше, Нужно от Олега из docs/STATUS.md, предупреждения, PR, worktree.": {
+      "extractionState": "stale",
       "localizations": {
         "ar": {
           "stringUnit": {
@@ -8798,6 +8875,159 @@
           "stringUnit": {
             "state": "translated",
             "value": "Stage, Now, Next, Needs з docs/STATUS.md, попередження, PR, worktree."
+          }
+        }
+      }
+    },
+    "Stage, Сейчас, Дальше, Нужно от вас из docs/STATUS.md, предупреждения, PR, worktree.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stage وNow وNext وNeeds من docs/STATUS.md، والتحذيرات، وPR، وworktree."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stage, Now, Next, Needs aus docs/STATUS.md, Warnungen, PRs, Worktrees."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stage, Now, Next, Needs from docs/STATUS.md, warnings, PRs, worktrees."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stage, Now, Next, Needs de docs/STATUS.md, avisos, PR, worktrees."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stage, Now, Next, Needs de docs/STATUS.md, avertissements, PR, worktrees."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stage, Now, Next, Needs dari docs/STATUS.md, peringatan, PR, worktree."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stage, Now, Next, Needs da docs/STATUS.md, avvisi, PR, worktree."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "docs/STATUS.md の Stage、Now、Next、Needs、警告、PR、worktree。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "docs/STATUS.md의 Stage, Now, Next, Needs, 경고, PR, worktree."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stage, Now, Next, Needs z docs/STATUS.md, ostrzeżenia, PR, worktree."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stage, Now, Next, Needs de docs/STATUS.md, avisos, PRs, worktrees."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stage, Now, Next, Needs з docs/STATUS.md, попередження, PR, worktree."
+          }
+        }
+      }
+    },
+    "Telegram": {},
+    "Telegram не настроен (Настройки → Основные → Telegram) — будет только уведомление macOS.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Telegram غير مُعدّ (الإعدادات ← عامة ← Telegram): سيصل إشعار macOS فقط."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Telegram ist nicht eingerichtet (Einstellungen → Allgemein → Telegram): nur eine macOS-Mitteilung."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Telegram isn't set up (Settings → General → Telegram): only a macOS notification."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Telegram no está configurado (Ajustes → Generales → Telegram): solo habrá notificación de macOS."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Telegram n'est pas configuré (Réglages → Généraux → Telegram) : seule une notification macOS sera envoyée."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Telegram belum diatur (Pengaturan → Umum → Telegram): hanya notifikasi macOS."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Telegram non è configurato (Impostazioni → Generali → Telegram): solo notifica macOS."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Telegram が未設定です（設定 → 一般 → Telegram）。macOS の通知だけになります。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Telegram이 설정되지 않았습니다(설정 → 일반 → Telegram). macOS 알림만 갑니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Telegram nie jest skonfigurowany (Ustawienia → Ogólne → Telegram): tylko powiadomienie macOS."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O Telegram não está configurado (Ajustes → Gerais → Telegram): só haverá notificação do macOS."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Telegram не налаштовано (Налаштування → Основні → Telegram) — буде лише сповіщення macOS."
           }
         }
       }
@@ -12856,6 +13086,7 @@
       }
     },
     "В _daily-report/config.json нет telegram.bot_token / chat_id — будет только уведомление macOS.": {
+      "extractionState": "stale",
       "localizations": {
         "ar": {
           "stringUnit": {
@@ -34072,6 +34303,82 @@
         }
       }
     },
+    "Напишите боту любое сообщение, затем нажмите — ID чата подставится сам": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "أرسل أي رسالة إلى البوت ثم اضغط: سيُملأ معرّف الدردشة تلقائيًا"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schreiben Sie dem Bot eine Nachricht und klicken Sie: Die Chat-ID wird eingetragen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Send the bot any message, then press: the chat ID fills in by itself"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Envía cualquier mensaje al bot y pulsa: el ID del chat se rellena solo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Envoyez un message au bot puis cliquez : l'ID du chat se remplit seul"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kirim pesan apa saja ke bot, lalu tekan: ID obrolan terisi sendiri"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Invia un messaggio qualsiasi al bot, poi premi: l'ID della chat si compila da solo"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ボットに何かメッセージを送ってから押すと、チャット ID が自動で入ります"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "봇에 아무 메시지나 보낸 뒤 누르면 채팅 ID가 자동으로 채워집니다"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Napisz do bota dowolną wiadomość i kliknij — ID czatu wstawi się samo"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Envie qualquer mensagem ao bot e clique: o ID do chat é preenchido sozinho"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Напишіть боту будь-яке повідомлення, потім натисніть — ID чату підставиться сам"
+          }
+        }
+      }
+    },
     "Напоминания": {
       "localizations": {
         "ar": {
@@ -35826,7 +36133,84 @@
         }
       }
     },
+    "Не отправилось: Telegram не настроен (Основные → Telegram) или нет связи": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لم يُرسل: Telegram غير مُعدّ (عامة ← Telegram) أو لا يوجد اتصال"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nicht gesendet: Telegram nicht eingerichtet (Allgemein → Telegram) oder keine Verbindung"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Not sent: Telegram isn't set up (General → Telegram), or offline"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se envió: Telegram no está configurado (Generales → Telegram) o no hay conexión"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Non envoyé : Telegram n'est pas configuré (Généraux → Telegram) ou hors ligne"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tidak terkirim: Telegram belum diatur (Umum → Telegram) atau tidak ada koneksi"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Non inviato: Telegram non configurato (Generali → Telegram) o nessuna connessione"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "送信できません: Telegram が未設定（一般 → Telegram）か、オフラインです"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "전송 실패: Telegram 미설정(일반 → Telegram) 또는 연결 없음"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nie wysłano: Telegram nie jest skonfigurowany (Ogólne → Telegram) lub brak połączenia"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Não enviado: Telegram não configurado (Gerais → Telegram) ou sem conexão"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Не надіслано: Telegram не налаштовано (Основні → Telegram) або немає зв'язку"
+          }
+        }
+      }
+    },
     "Не отправилось: нет бота в _daily-report/config.json или нет связи": {
+      "extractionState": "stale",
       "localizations": {
         "ar": {
           "stringUnit": {
@@ -35898,6 +36282,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Не надіслано: немає бота в _daily-report/config.json або немає зв'язку"
+          }
+        }
+      }
+    },
+    "Не отправилось: проверьте токен и ID чата": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لم يُرسل: تحقق من الرمز ومعرّف الدردشة"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nicht gesendet: Token und Chat-ID prüfen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Not sent: check the token and chat ID"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se envió: revisa el token y el ID del chat"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Non envoyé : vérifiez le jeton et l'ID du chat"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tidak terkirim: periksa token dan ID obrolan"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Non inviato: controlla token e ID della chat"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "送信できません: トークンとチャット ID を確認してください"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "전송 실패: 토큰과 채팅 ID를 확인하세요"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nie wysłano: sprawdź token i ID czatu"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Não enviado: verifique o token e o ID do chat"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Не надіслано: перевірте токен і ID чату"
           }
         }
       }
@@ -39796,7 +40256,84 @@
         }
       }
     },
+    "Нужен отдельный бот, не тот, что в «Основные → Telegram»: эти ответы бот получает через свои обновления, а у основного бота их может читать другая программа (например, бот _daily-report), и они забирали бы сообщения друг у друга. Создайте бота в @BotFather (/newbot), вставьте его токен, откройте бота в Telegram и нажмите «Start», затем «Проверить». Кнопки принимаются только из указанного чата.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يلزم بوت منفصل، غير الموجود في «عامة ← Telegram»: تصل هذه الردود عبر تحديثات البوت، وقد يقرأ برنامج آخر (مثل بوت ‎_daily-report‎) تحديثات البوت الرئيسي، فيأخذان الرسائل من بعضهما. أنشئ بوتًا عبر ‎@BotFather‎ ‏(/newbot)، والصق رمزه، وافتح البوت في Telegram واضغط «Start» ثم «تحقق». لا تُقبل الأزرار إلا من الدردشة المحددة."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ein eigener Bot ist nötig, nicht der unter „Allgemein → Telegram“: Diese Antworten kommen über die Updates des Bots, und ein anderes Programm (etwa der _daily-report-Bot) liest womöglich die des Haupt-Bots – sie würden sich die Nachrichten wegnehmen. Erstellen Sie einen Bot mit @BotFather (/newbot), fügen Sie sein Token ein, öffnen Sie den Bot in Telegram und tippen Sie „Start“, dann „Prüfen“. Tasten werden nur aus dem angegebenen Chat angenommen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A separate bot is needed, not the one in “General → Telegram”: these answers come through the bot's updates, and another program (the _daily-report bot, say) may read the main bot's updates, so they would take each other's messages. Create a bot with @BotFather (/newbot), paste its token, open the bot in Telegram and press «Start», then «Check». Buttons are accepted only from the chat set here."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hace falta un bot aparte, no el de «Generales → Telegram»: estas respuestas llegan por las actualizaciones del bot, y otro programa (por ejemplo, el bot de _daily-report) puede leer las del bot principal, así que se quitarían los mensajes. Crea un bot con @BotFather (/newbot), pega su token, abre el bot en Telegram, pulsa «Start» y luego «Comprobar». Los botones solo se aceptan desde el chat indicado."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un bot distinct est nécessaire, pas celui de « Généraux → Telegram » : ces réponses arrivent par les mises à jour du bot, et un autre programme (le bot _daily-report, par exemple) peut lire celles du bot principal, ils se prendraient les messages. Créez un bot avec @BotFather (/newbot), collez son jeton, ouvrez le bot dans Telegram, appuyez sur « Start » puis « Vérifier ». Les boutons ne sont acceptés que depuis le chat indiqué."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Perlu bot terpisah, bukan yang di “Umum → Telegram”: jawaban ini datang lewat pembaruan bot, dan program lain (misalnya bot _daily-report) mungkin membaca pembaruan bot utama, sehingga keduanya saling merebut pesan. Buat bot di @BotFather (/newbot), tempel tokennya, buka bot di Telegram, tekan «Start», lalu «Periksa». Tombol hanya diterima dari obrolan yang ditetapkan."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Serve un bot a parte, non quello di «Generali → Telegram»: queste risposte arrivano dagli aggiornamenti del bot, e un altro programma (ad esempio il bot di _daily-report) potrebbe leggere quelli del bot principale, rubandosi i messaggi a vicenda. Crea un bot con @BotFather (/newbot), incolla il token, apri il bot in Telegram, premi «Start» e poi «Verifica». I pulsanti sono accettati solo dalla chat indicata."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「一般 → Telegram」とは別のボットが必要です。これらの返答はボットの更新で届きますが、メインのボットの更新は別のプログラム（たとえば _daily-report のボット）が読んでいることがあり、メッセージを奪い合ってしまいます。@BotFather（/newbot）でボットを作り、トークンを貼り付け、Telegram でボットを開いて「Start」を押してから「確認」を押してください。ボタンは指定したチャットからのみ受け付けます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“일반 → Telegram”과는 다른 봇이 필요합니다. 이 응답은 봇 업데이트로 들어오는데, 기본 봇의 업데이트는 다른 프로그램(예: _daily-report 봇)이 읽을 수 있어 서로 메시지를 가져가게 됩니다. @BotFather(/newbot)에서 봇을 만들고 토큰을 붙여넣은 뒤 Telegram에서 봇을 열어 «Start», 그다음 «확인»을 누르세요. 버튼은 지정한 채팅에서만 받습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Potrzebny jest osobny bot, nie ten z „Ogólne → Telegram”: te odpowiedzi przychodzą przez aktualizacje bota, a aktualizacje głównego bota może czytać inny program (np. bot _daily-report), więc zabierałyby sobie wiadomości. Utwórz bota w @BotFather (/newbot), wklej jego token, otwórz bota w Telegramie, naciśnij «Start», a potem «Sprawdź». Przyciski są przyjmowane tylko z podanego czatu."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "É preciso um bot separado, não o de “Gerais → Telegram”: essas respostas chegam pelas atualizações do bot, e outro programa (por exemplo, o bot do _daily-report) pode ler as do bot principal, e eles tomariam as mensagens um do outro. Crie um bot no @BotFather (/newbot), cole o token, abra o bot no Telegram, toque em «Start» e depois em «Verificar». Os botões só são aceitos do chat indicado."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Потрібен окремий бот, не той, що в «Основні → Telegram»: ці відповіді бот отримує через свої оновлення, а оновлення основного бота може читати інша програма (наприклад, бот _daily-report), і вони забирали б повідомлення одне в одного. Створіть бота в @BotFather (/newbot), вставте його токен, відкрийте бота в Telegram і натисніть «Start», потім «Перевірити». Кнопки приймаються лише з указаного чату."
+          }
+        }
+      }
+    },
     "Нужен отдельный бот: бот _daily-report уже читает свои обновления, и второй читатель забирал бы у него сообщения. Создайте бота в @BotFather (/newbot), вставьте его токен, откройте бота в Telegram и нажмите «Start», затем «Проверить». Кнопки принимаются только из указанного чата.": {
+      "extractionState": "stale",
       "localizations": {
         "ar": {
           "stringUnit": {
@@ -39949,6 +40486,7 @@
       }
     },
     "Нужно от Олега": {
+      "extractionState": "stale",
       "localizations": {
         "ar": {
           "stringUnit": {
@@ -40014,6 +40552,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pendências"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Потрібно від вас"
+          }
+        }
+      }
+    },
+    "Нужно от вас": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مطلوب منك"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Braucht Sie"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Needs you"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Necesita de ti"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "À faire par vous"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Perlu Anda"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Serve a te"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "あなたの対応が必要"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "나에게 필요한 것"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Czeka na Ciebie"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Precisa de você"
           }
         },
         "uk": {
@@ -41616,6 +42230,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Вікно пошуку проєктів, сесій і команд."
+          }
+        }
+      }
+    },
+    "Определить": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اكتشاف"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ermitteln"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Detect"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Detectar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Détecter"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deteksi"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rileva"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "検出"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "감지"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wykryj"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Detectar"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Визначити"
           }
         }
       }
@@ -63306,6 +63996,82 @@
         }
       }
     },
+    "Сообщений боту не нашлось: напишите ему что-нибудь и попробуйте снова.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لا توجد رسائل إلى البوت: اكتب له شيئًا وحاول مجددًا."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keine Nachrichten an den Bot: Schreiben Sie ihm etwas und versuchen Sie es erneut."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No messages to the bot yet: write it something and try again."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El bot no tiene mensajes: escríbele algo e inténtalo de nuevo."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucun message au bot : écrivez-lui quelque chose et réessayez."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Belum ada pesan ke bot: kirim sesuatu lalu coba lagi."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nessun messaggio al bot: scrivigli qualcosa e riprova."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ボットへのメッセージがありません。何か送ってからもう一度試してください。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "봇에 보낸 메시지가 없습니다. 뭔가 보낸 뒤 다시 시도하세요."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Brak wiadomości do bota: napisz coś i spróbuj ponownie."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O bot ainda não tem mensagens: escreva algo e tente de novo."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Повідомлень боту не знайшлося: напишіть йому щось і спробуйте знову."
+          }
+        }
+      }
+    },
     "Состояние неизвестно": {
       "localizations": {
         "ar": {
@@ -65054,6 +65820,82 @@
         }
       }
     },
+    "Сюда приходят итоги фоновых задач, пороги лимитов, недельная сводка, напоминания календаря — где в модуле включён Telegram. Бот создаётся у @BotFather; токен хранится только в связке ключей. Пока здесь пусто, используется бот из _daily-report/config.json, если он есть.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تصل هنا نتائج المهام الخلفية وحدود الاستخدام والملخص الأسبوعي وتذكيرات التقويم، حيث يكون Telegram مفعّلًا في الوحدة. يُنشأ البوت عبر ‎@BotFather‎، ويُحفظ الرمز في سلسلة المفاتيح فقط. ما دام هذا فارغًا، يُستخدم بوت ‎_daily-report/config.json‎ إن وُجد."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hierher kommen Ergebnisse von Hintergrundaufgaben, Limit-Schwellen, die Wochenübersicht und Kalendererinnerungen – wo im Modul Telegram an ist. Den Bot erstellt man bei @BotFather; das Token liegt nur im Schlüsselbund. Solange das leer ist, wird der Bot aus _daily-report/config.json genutzt, falls vorhanden."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Background run results, limit thresholds, the weekly summary and calendar reminders come here, wherever a module has Telegram on. Create the bot with @BotFather; the token is kept only in the keychain. While this is empty, the bot from _daily-report/config.json is used if there is one."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aquí llegan resultados de tareas en segundo plano, umbrales de límites, el resumen semanal y recordatorios del calendario, donde el módulo tenga Telegram activado. El bot se crea con @BotFather; el token se guarda solo en el llavero. Mientras esté vacío, se usa el bot de _daily-report/config.json si existe."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ici arrivent les résultats des tâches en arrière-plan, les seuils de limites, le résumé hebdomadaire et les rappels du calendrier, là où le module a Telegram activé. Le bot se crée avec @BotFather ; le jeton reste uniquement dans le trousseau. Tant que c'est vide, le bot de _daily-report/config.json est utilisé s'il existe."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hasil tugas latar belakang, ambang batas, ringkasan mingguan, dan pengingat kalender dikirim ke sini, di modul yang Telegram-nya aktif. Bot dibuat di @BotFather; token hanya disimpan di rantai kunci. Selama kosong, bot dari _daily-report/config.json dipakai jika ada."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Qui arrivano esiti delle attività in background, soglie dei limiti, riepilogo settimanale e promemoria del calendario, dove il modulo ha Telegram attivo. Il bot si crea con @BotFather; il token resta solo nel portachiavi. Finché è vuoto, si usa il bot di _daily-report/config.json se c'è."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "バックグラウンドのタスクの結果、上限のしきい値、週間サマリー、カレンダーのリマインダーが、Telegram をオンにしたモジュールからここに届きます。ボットは @BotFather で作成し、トークンはキーチェーンにのみ保存されます。空のあいだは、_daily-report/config.json のボットがあればそれを使います。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "백그라운드 작업 결과, 한도 기준, 주간 요약, 캘린더 알림이 Telegram을 켠 모듈에서 이곳으로 옵니다. 봇은 @BotFather에서 만들고, 토큰은 키체인에만 보관됩니다. 비어 있는 동안에는 _daily-report/config.json의 봇이 있으면 그것을 씁니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tu trafiają wyniki zadań w tle, progi limitów, podsumowanie tygodnia i przypomnienia z kalendarza — tam, gdzie moduł ma włączony Telegram. Bota tworzy się w @BotFather; token jest tylko w pęku kluczy. Dopóki tu pusto, używany jest bot z _daily-report/config.json, jeśli istnieje."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aqui chegam resultados de tarefas em segundo plano, limites, o resumo semanal e lembretes do calendário, onde o módulo tiver o Telegram ligado. O bot é criado no @BotFather; o token fica só nas Chaves. Enquanto estiver vazio, usa-se o bot de _daily-report/config.json, se houver."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Сюди приходять підсумки фонових завдань, пороги лімітів, підсумок тижня, нагадування календаря — де в модулі ввімкнено Telegram. Бот створюється в @BotFather; токен зберігається лише у в'язці ключів. Поки тут порожньо, використовується бот із _daily-report/config.json, якщо він є."
+          }
+        }
+      }
+    },
     "Таймеры": {
       "localizations": {
         "ar": {
@@ -66266,6 +67108,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Токен бота"
+          }
+        }
+      }
+    },
+    "Токен сохранён. Напишите боту любое сообщение и нажмите «Определить».": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تم حفظ الرمز. أرسل أي رسالة إلى البوت واضغط «اكتشاف»."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Token gespeichert. Schreiben Sie dem Bot eine Nachricht und klicken Sie „Ermitteln“."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Token saved. Send the bot any message and press «Detect»."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Token guardado. Envía cualquier mensaje al bot y pulsa «Detectar»."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jeton enregistré. Envoyez un message au bot et cliquez sur « Détecter »."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Token tersimpan. Kirim pesan apa saja ke bot dan tekan «Deteksi»."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Token salvato. Invia un messaggio al bot e premi «Rileva»."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "トークンを保存しました。ボットに何か送ってから「検出」を押してください。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "토큰을 저장했습니다. 봇에 아무 메시지나 보내고 «감지»를 누르세요."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Token zapisany. Napisz do bota dowolną wiadomość i kliknij «Wykryj»."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Token salvo. Envie qualquer mensagem ao bot e clique em «Detectar»."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Токен збережено. Напишіть боту будь-яке повідомлення й натисніть «Визначити»."
           }
         }
       }
@@ -71148,6 +72066,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Година"
+          }
+        }
+      }
+    },
+    "Чат найден.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تم العثور على الدردشة."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chat gefunden."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chat found."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chat encontrado."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chat trouvé."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Obrolan ditemukan."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chat trovata."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "チャットが見つかりました。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "채팅을 찾았습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Znaleziono czat."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chat encontrado."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Чат знайдено."
           }
         }
       }
@@ -78695,7 +79689,84 @@
         }
       }
     },
+    "как в «Основные → Telegram»": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "كما في «عامة ← Telegram»"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "wie in „Allgemein → Telegram“"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "as in “General → Telegram”"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "como en «Generales → Telegram»"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "comme dans « Généraux → Telegram »"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "seperti di “Umum → Telegram”"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "come in «Generali → Telegram»"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「一般 → Telegram」と同じ"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“일반 → Telegram”과 같음"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "jak w „Ogólne → Telegram”"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "como em “Gerais → Telegram”"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "як в «Основні → Telegram»"
+          }
+        }
+      }
+    },
     "как у _daily-report": {
+      "extractionState": "stale",
       "localizations": {
         "ar": {
           "stringUnit": {
@@ -85392,6 +86463,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "збережено у Зв’язці ключів"
+          }
+        }
+      }
+    },
+    "сохранён в связке ключей": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "محفوظ في سلسلة المفاتيح"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "im Schlüsselbund gespeichert"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "saved in the keychain"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "guardado en el llavero"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "enregistré dans le trousseau"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "tersimpan di rantai kunci"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "salvato nel portachiavi"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "キーチェーンに保存済み"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "키체인에 저장됨"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "zapisany w pęku kluczy"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "salvo nas Chaves"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "збережено у в'язці ключів"
           }
         }
       }

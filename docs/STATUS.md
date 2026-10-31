@@ -6,6 +6,7 @@
 
 **Now:**
 - public-facing docs (branch `docs/overview-pdf-and-repo`, PR #139): overview PDF in English and Russian, new README for GitHub (old one is docs/REFERENCE.md), repo description and topics set, issue templates
+- no personal paths or names in prompts and labels, Telegram set up inside the app: PR on `feat/user-paths`
 - released 0.2.0: repo renamed to `OlehDemishev/AIHubBar` and made public; repeat fixes merged (#136, #137)
 - merged today: notifications once per wait and a choice per kind (#134); queue after reset and run guard (#129), other-AI menu bar/widget/forecast (#130), session changes and weekly summary (#131), Claude Code window and saved prompts (#132); other AI services' limits (#126, #127)
 - renamed to AI Hub Bar (PR #115); session rows open on a click anywhere (PR #117); widgets translated into 13 languages (PR #119); sessions in Claude's own terminal open Claude (PR #121); module options per profile (PR #124)
@@ -33,6 +34,12 @@
 Done: 8-page overview for everyone, `docs/AI-Hub-Bar-Overview-en.pdf` and `-ru.pdf`, made from `docs/overview/overview.<lang>.html` + `style.css` by `scripts/make-overview-pdf.sh` (headless Chrome); the interface is drawn as HTML mockups with made-up projects, not screenshots of Oleh's Mac. The same script renders `docs/images/hero.png` (README header) and `social-preview.png` (1280×640). New user-facing README (features, install, privacy, build, docs); the old developer README moved to `docs/REFERENCE.md` with links fixed. GUIDE: `.dmg` name (`AIHubBar-<version>.dmg`) and the uninstall step fixed. `release.sh --publish` attaches the PDFs and has English release notes. `.github/ISSUE_TEMPLATE` (bug, feature). On GitHub: description, 17 topics, Projects tab off. All links use `OlehDemishev/AIHubBar` (merged with the release work on main).
 Checked: both PDFs rendered and every page looked at as an image (nothing cut off, 8 pages each); facts checked against README/GUIDE and code (universal binary, Notes as .md, Finish prompt); `bash -n` on both scripts; xcodegen + build with the new SUFeedURL. CI not set up.
 Left: social preview has to be uploaded by hand; the PDFs are not on the 0.2.0 release yet (the next `release.sh --publish` attaches them); PDFs need a new render when features change (`scripts/make-overview-pdf.sh`).
+
+## 2026-10-31 — No personal paths or names; Telegram set up in the app (branch `feat/user-paths`)
+
+Done: the workspace prompts (formerly «Oleh's» style) no longer say «Задача от Олега» or `~/Projects/CLAUDE.md`: the rules file is `<projects folder of the profile>/CLAUDE.md`, a question goes to «the Needs field of the STATUS.md header». Panel and help say «Нужно от вас». The background rules deny `**/_daily-report/config.json` instead of Oleh's path. Settings → Основные → «Telegram»: bot token (Keychain), chat ID with «Определить» (from the bot's latest message) and «Проверить»; every Telegram message (run results, limits, weekly summary, calendar, run guard) uses this bot first and `_daily-report/config.json` only as a fallback; hints point there instead of `_daily-report`. Folders were already chosen per profile and in the first-run assistant.
+Checked: `xcodebuild test` — 268 tests (new: no name or `~/Projects` in prompts, chat from updates, own bot before the file); installed: the Telegram section and «Нужно от вас» are in place.
+Left: Oleh's setup keeps working through `_daily-report/config.json` (nothing to do); the approvals bot still needs its own token.
 
 ## 2026-10-31 — Release 0.2.0, public repo `OlehDemishev/AIHubBar` (branch `chore/go-public`)
 

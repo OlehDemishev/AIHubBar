@@ -151,3 +151,25 @@ struct SessionRowTests {
         #expect(c.worktree == "cb-x")
     }
 }
+
+/// The app's own Telegram bot: the chat found from the bot's updates, and it wins over `_daily-report`.
+struct TelegramOwnBotTests {
+    @Test func latestChatFromUpdates() {
+        let updates = #"{"ok":true,"result":[{"update_id":1,"message":{"chat":{"id":111,"type":"private"},"text":"hi"}},{"update_id":2,"message":{"chat":{"id":-222,"type":"group"},"text":"yo"}}]}"#
+        #expect(Telegram.latestChat(in: Data(updates.utf8)) == "-222")
+        #expect(Telegram.latestChat(in: Data(#"{"ok":true,"result":[]}"#.utf8)) == nil)
+    }
+
+    @MainActor @Test func ownBotComesFirst() throws {
+        let folder = FileManager.default.temporaryDirectory.appending(path: "dr-\(UUID().uuidString)")
+        try FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
+        defer { try? FileManager.default.removeItem(at: folder) }
+        try Data(#"{"telegram":{"bot_token":"file:token","chat_id":"1"}}"#.utf8).write(to: folder.appending(path: "config.json"))
+        let saved = Telegram.ownBot
+        defer { Telegram.ownBot = saved }
+        Telegram.ownBot = nil
+        #expect(Telegram.credentials(dailyReportDirectory: folder.path)?.chatID == "1")
+        Telegram.ownBot = .init(token: "own:token", chatID: "2")
+        #expect(Telegram.credentials(dailyReportDirectory: folder.path)?.chatID == "2")
+    }
+}

@@ -68,7 +68,7 @@ final class AppSettings {
     var activeSource: ProjectSource = .none
 
     /// Whose rules the developer prompts follow; set with the mode, not stored.
-    var promptStyle: PromptStyle = .oleh
+    var promptStyle: PromptStyle = .workspace
 
     /// Chosen models and the compatible server's address (SPEC-modes §11); keys live in the Keychain.
     var aiServices: AIServicesConfig {
@@ -207,6 +207,11 @@ final class AppSettings {
         notificationFrequencies[kind.rawValue].flatMap(NotificationFrequency.init(rawValue:)) ?? kind.defaultFrequency
     }
 
+    /// The chat of the bot set in Settings → Основные → Telegram (the token is in the Keychain).
+    var telegramChatID: String {
+        didSet { defaults.set(telegramChatID, forKey: Keys.telegramChatID) }
+    }
+
     /// «Свои промпты» for the search (⌃⌥C).
     var savedPrompts: [SavedPrompt] {
         didSet { if let data = try? JSONEncoder().encode(savedPrompts) { defaults.set(data, forKey: Keys.savedPrompts) } }
@@ -328,6 +333,7 @@ final class AppSettings {
         hubCursor = defaults.bool(forKey: Keys.hubCursor)
         runGuardPercent = defaults.object(forKey: Keys.runGuardPercent) as? Int ?? 95
         weeklySummary = defaults.object(forKey: Keys.weeklySummary) as? Bool ?? true
+        telegramChatID = defaults.string(forKey: Keys.telegramChatID) ?? ""
         notificationFrequencies = defaults.dictionary(forKey: Keys.notificationFrequencies) as? [String: String] ?? [:]
         savedPrompts = defaults.data(forKey: Keys.savedPrompts).flatMap { try? JSONDecoder().decode([SavedPrompt].self, from: $0) } ?? SavedPrompt.examples
         weeklySummaryWeekday = defaults.object(forKey: Keys.weeklySummaryWeekday) as? Int ?? 1
@@ -383,6 +389,7 @@ final class AppSettings {
         static let weeklySummary = "weeklySummary"
         static let savedPrompts = "savedPrompts"
         static let notificationFrequencies = "notificationFrequencies"
+        static let telegramChatID = "telegramChatID"
         static let weeklySummaryWeekday = "weeklySummaryWeekday"
         static let weeklySummaryHour = "weeklySummaryHour"
     }

@@ -1,9 +1,10 @@
 import Foundation
 
-/// Whose rules the developer prompts follow: Oleh's `~/Projects/CLAUDE.md` (his own mode) or the project's own
-/// CLAUDE.md / AGENTS.md (the «Разработчик (GitHub)» template, docs/TEMPLATES.md §1).
+/// Whose rules the developer prompts follow: one shared CLAUDE.md in the projects folder, with a STATUS.md journal in
+/// every project (the report.py setup), or the project's own CLAUDE.md / AGENTS.md (the «Разработчик (GitHub)»
+/// template, docs/TEMPLATES.md §1).
 enum PromptStyle: String, Codable, Sendable {
-    case oleh, generic
+    case workspace = "oleh", generic
 }
 
 /// The three Claude commands from docs/SPEC.md §2.4. Prompts are used verbatim.
@@ -20,9 +21,10 @@ enum ClaudeCommand: Codable, Equatable, Sendable {
         }
     }
 
-    var prompt: String { prompt(.oleh) }
+    var prompt: String { prompt(.workspace) }
 
-    func prompt(_ style: PromptStyle, language: ContentLanguage = .current) -> String {
+    /// `rulesFile`: the shared rules of the workspace style, `<projects folder>/CLAUDE.md` with `~`.
+    func prompt(_ style: PromptStyle, language: ContentLanguage = .current, rulesFile: String? = nil) -> String {
         if style == .generic {
             let words = language.strings
             switch self {
@@ -32,13 +34,14 @@ enum ClaudeCommand: Codable, Equatable, Sendable {
             case .finishSession: return words.finishSession
             }
         }
+        let rules = rulesFile ?? "CLAUDE.md"
         switch self {
         case .nextStep:
-            return "Прочитай только шапку docs/STATUS.md и последнюю запись журнала. Возьми первый пункт из Next и выполни его по правилам ~/Projects/CLAUDE.md: отдельная ветка от origin/main, проверки проекта, коммит, push, PR, запись в STATUS.md и обновление шапки. Если пункт требует решения Олега или неясен — ничего не меняй, а запиши вопрос в Needs Oleh и закончи."
+            return "Прочитай только шапку docs/STATUS.md и последнюю запись журнала. Возьми первый пункт из Next и выполни его по правилам \(rules): отдельная ветка от origin/main, проверки проекта, коммит, push, PR, запись в STATUS.md и обновление шапки. Если пункт требует решения человека или неясен — ничего не меняй, а запиши вопрос в поле Needs шапки STATUS.md и закончи."
         case let .customTask(task):
-            return "Задача от Олега: \(task.trimmingCharacters(in: .whitespacesAndNewlines)). Работай по правилам ~/Projects/CLAUDE.md: отдельная ветка от origin/main, проверки, коммит, push, PR, запись в STATUS.md."
+            return "Задача: \(task.trimmingCharacters(in: .whitespacesAndNewlines)). Работай по правилам \(rules): отдельная ветка от origin/main, проверки, коммит, push, PR, запись в STATUS.md."
         case .finishSession:
-            return "Заверши текущую работу в этой папке по разделу \"Конец сессии\" из ~/Projects/CLAUDE.md: проверки, коммит, push, PR, запись в STATUS.md и шапка. Новых изменений кода не делай. Если незакоммиченные изменения относятся к разным задачам — разнеси их по отдельным веткам и PR."
+            return "Заверши текущую работу в этой папке по разделу \"Конец сессии\" из \(rules): проверки, коммит, push, PR, запись в STATUS.md и шапка. Новых изменений кода не делай. Если незакоммиченные изменения относятся к разным задачам — разнеси их по отдельным веткам и PR."
         }
     }
 

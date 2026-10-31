@@ -107,7 +107,7 @@ private struct ProjectDetailsView: View {
                 }
                 BulletSection(title: String(localized: "Сейчас"), items: summary.now)
                 BulletSection(title: String(localized: "Дальше"), items: summary.next)
-                BulletSection(title: String(localized: "Нужно от Олега"), items: summary.needs, tint: .orange)
+                BulletSection(title: String(localized: "Нужно от вас"), items: summary.needs, tint: .orange)
             } else {
                 Text(project.status == nil ? String(localized: "Нет docs/STATUS.md") : String(localized: "В STATUS.md нет шапки"))
                     .scaledFont(.callout)
