@@ -151,6 +151,7 @@ struct SmallUsageView: View {
                     Text(reset).font(.caption2).foregroundStyle(.secondary).lineLimit(1).minimumScaleFactor(0.8)
                 }
             }
+            .overlay(alignment: .topTrailing) { RefreshLimitsButton() }
         } else {
             NoDataView()
         }
@@ -169,6 +170,7 @@ struct MediumUsageView: View {
                     if let updated = usage.updated {
                         Text(updated, style: .relative).font(.caption2).foregroundStyle(.secondary)
                     }
+                    RefreshLimitsButton()
                 }
                 if let session = usage.session { row(String(localized: "Сессия (5 ч)"), session) }
                 if let week = usage.week { row(String(localized: "Неделя"), week) }
@@ -211,6 +213,20 @@ struct MediumUsageView: View {
     }
 }
 
+/// ↻ without opening the app (`RefreshLimitsIntent`).
+struct RefreshLimitsButton: View {
+    var body: some View {
+        Button(intent: RefreshLimitsIntent()) {
+            Image(systemName: "arrow.clockwise")
+                .font(.caption)
+                .foregroundStyle(.secondary)
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel(Text("Обновить лимиты"))
+        .help(String(localized: "Обновить лимиты"))
+    }
+}
+
 struct NoDataView: View {
     var body: some View {
         VStack(spacing: 4) {
@@ -233,6 +249,8 @@ struct UsageWidgetView: View {
             }
         }
         .containerBackground(.fill.tertiary, for: .widget)
+        // Everything in the limits widget opens the limits window; ↻ is its own button.
+        .widgetURL(WidgetLink.limits)
     }
 }
 

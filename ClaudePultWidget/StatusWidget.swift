@@ -5,7 +5,14 @@ import WidgetKit
 /// `widget-status.json` written by ClaudePult: who waits for an answer, how many sessions run, red projects,
 /// whether «Не спать» holds.
 struct WidgetStatusData: Decodable {
+    struct Session: Decodable {
+        var id: String
+        var project: String
+    }
+
     var waiting: [String]
+    /// Missing in files written by AI Hub Bar before 0.3.0.
+    var waitingSessions: [Session]?
     var running: Int
     var problems: [String]
     var keepAwake: Bool
@@ -17,7 +24,24 @@ struct WidgetStatusData: Decodable {
         (try? Data(contentsOf: fileURL)).flatMap { try? JSONDecoder().decode(WidgetStatusData.self, from: $0) }
     }
 
-    static let sample = WidgetStatusData(waiting: ["Survikon"], running: 2, problems: ["Ambo", "Cantero"], keepAwake: true, keepAwakeInstalled: true)
+    static let sample = WidgetStatusData(waiting: ["Survikon"], waitingSessions: [Session(id: "sample", project: "Survikon")], running: 2,
+                                         problems: ["Ambo", "Cantero"], keepAwake: true, keepAwakeInstalled: true)
+
+    /// A click on the small widget: the one waiting session, otherwise the search with every session and project.
+    var mainLink: URL {
+        if let sessions = waitingSessions, sessions.count == 1 { return WidgetLink.session(sessions[0].id) }
+        return WidgetLink.search
+    }
+}
+
+/// `aihubbar://` links the app opens (ClaudePult/Models/WidgetLink.swift reads them).
+enum WidgetLink {
+    static let limits = URL(string: "aihubbar://limits")!
+    static let search = URL(string: "aihubbar://search")!
+
+    static func session(_ id: String) -> URL {
+        URL(string: "aihubbar://session/" + (id.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? id)) ?? search
+    }
 }
 
 struct StatusEntry: TimelineEntry {
@@ -46,14 +70,26 @@ struct StatusWidgetView: View {
         Group {
             if let status = entry.status {
                 VStack(alignment: .leading, spacing: 6) {
-                    row(symbol: "hand.raised.fill", color: status.waiting.isEmpty ? .secondary : .orange,
-                        count: status.waiting.count, title: String(localized: "ждут ответа"), names: status.waiting)
-                    row(symbol: "bolt.fill", color: status.running > 0 ? .blue : .secondary,
-                        count: status.running, title: String(localized: "работают"), names: [])
-                    row(symbol: "exclamationmark.circle.fill", color: status.problems.isEmpty ? .secondary : .red,
-                        count: status.problems.count, title: String(localized: "проекты с проблемами"), names: status.problems)
+                    waitingRow(status)
+                    linked(WidgetLink.search) {
+                        row(symbol: "bolt.fill", color: status.running > 0 ? .blue : .secondary,
+                            count: status.running, title: String(localized: "работают"))
+                    }
+                    linked(WidgetLink.search) {
+                        VStack(alignment: .leading, spacing: 1) {
+                            row(symbol: "exclamationmark.circle.fill", color: status.problems.isEmpty ? .secondary : .red,
+                                count: status.problems.count, title: String(localized: "проекты с проблемами"))
+                            if family != .systemSmall, !status.problems.isEmpty {
+                                names(Text(status.problems.joined(separator: ", ")))
+                            }
+                        }
+                    }
                     Spacer(minLength: 0)
                 }
+                .overlay(alignment: .topTrailing) {
+                    if status.keepAwakeInstalled { KeepAwakeButton(isOn: status.keepAwake) }
+                }
+                .widgetURL(status.mainLink)
             } else {
                 Text("Откройте AI Hub Bar").font(.caption).foregroundStyle(.secondary)
             }
@@ -62,18 +98,70 @@ struct StatusWidgetView: View {
         .containerBackground(.fill.tertiary, for: .widget)
     }
 
-    private func row(symbol: String, color: Color, count: Int, title: String, names: [String]) -> some View {
+    /// The medium widget links each waiting project to its own session; the row itself opens the first one.
+    @ViewBuilder
+    private func waitingRow(_ status: WidgetStatusData) -> some View {
+        let sessions = status.waitingSessions ?? []
         VStack(alignment: .leading, spacing: 1) {
-            HStack(spacing: 6) {
-                Image(systemName: symbol).foregroundStyle(color)
-                Text(verbatim: "\(count)").font(.title3.weight(.semibold)).monospacedDigit()
-                Text(title).font(.caption).foregroundStyle(.secondary).lineLimit(1)
+            linked(sessions.first.map { WidgetLink.session($0.id) } ?? WidgetLink.search) {
+                row(symbol: "hand.raised.fill", color: status.waiting.isEmpty ? .secondary : .orange,
+                    count: status.waiting.count, title: String(localized: "ждут ответа"))
             }
-            if family != .systemSmall, !names.isEmpty {
-                Text(names.joined(separator: ", ")).font(.caption2).foregroundStyle(.secondary).lineLimit(1)
+            if family != .systemSmall, !status.waiting.isEmpty {
+                if sessions.isEmpty {
+                    names(Text(status.waiting.joined(separator: ", ")))
+                } else {
+                    HStack(spacing: 0) {
+                        ForEach(Array(sessions.enumerated()), id: \.offset) { index, session in
+                            Link(destination: WidgetLink.session(session.id)) {
+                                Text(verbatim: index == 0 ? session.project : ", " + session.project)
+                            }
+                        }
+                    }
+                    .font(.caption2).foregroundStyle(.secondary).lineLimit(1)
                     .padding(.leading, 22)
+                }
             }
         }
+    }
+
+    /// The small widget is one tap target (`widgetURL`); the medium one takes a link per row.
+    @ViewBuilder
+    private func linked(_ url: URL, @ViewBuilder _ content: () -> some View) -> some View {
+        if family == .systemSmall {
+            content()
+        } else {
+            Link(destination: url, label: content)
+        }
+    }
+
+    private func row(symbol: String, color: Color, count: Int, title: String) -> some View {
+        HStack(spacing: 6) {
+            Image(systemName: symbol).foregroundStyle(color)
+            Text(verbatim: "\(count)").font(.title3.weight(.semibold)).monospacedDigit()
+            Text(title).font(.caption).foregroundStyle(.secondary).lineLimit(1)
+        }
+    }
+
+    private func names(_ text: Text) -> some View {
+        text.font(.caption2).foregroundStyle(.secondary).lineLimit(1)
+            .padding(.leading, 22)
+    }
+}
+
+/// «Не спать» right in the widget: the same request the Control Center toggle sends, without opening the app.
+struct KeepAwakeButton: View {
+    let isOn: Bool
+
+    var body: some View {
+        Button(intent: SetKeepAwakeIntent(value: !isOn)) {
+            Image(systemName: isOn ? "cup.and.saucer.fill" : "cup.and.saucer")
+                .foregroundStyle(isOn ? Color.orange : Color.secondary)
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel(Text("Не спать"))
+        .accessibilityValue(isOn ? Text("Mac не засыпает") : Text("Mac засыпает как обычно"))
+        .help(isOn ? String(localized: "Mac не засыпает — нажмите, чтобы выключить") : String(localized: "Не давать Mac засыпать"))
     }
 }
 
@@ -113,17 +201,47 @@ struct KeepAwakeValue: ControlValueProvider {
 }
 
 /// Runs in the sandboxed extension: it can't touch the app's files, so it posts a Darwin notification
-/// (`com.demishev.claudepult.keepawake.on` / `.off`) that ClaudePult listens for.
-@available(macOS 26.0, *)
+/// (`com.demishev.claudepult.keepawake.on` / `.off`) that ClaudePult listens for. Also the status widget's ☕ button.
 struct SetKeepAwakeIntent: SetValueIntent {
     static let title: LocalizedStringResource = "Не спать"
 
     @Parameter(title: "Включено")
     var value: Bool
 
+    init() {}
+
+    init(value: Bool) {
+        self.value = value
+    }
+
     func perform() async throws -> some IntentResult {
         let name = value ? "com.demishev.claudepult.keepawake.on" : "com.demishev.claudepult.keepawake.off"
         CFNotificationCenterPostNotification(CFNotificationCenterGetDarwinNotifyCenter(), CFNotificationName(name as CFString), nil, nil, true)
+        // WidgetKit redraws when this returns: give the app a moment to write the new state, so ☕ doesn't flicker back.
+        await WidgetWait.until(seconds: 2) { WidgetStatusData.load()?.keepAwake == value }
         return .result()
+    }
+}
+
+/// The limits widget's ↻: asks the app to fetch the limits now (it keeps its own pauses after HTTP 429).
+struct RefreshLimitsIntent: AppIntent {
+    static let title: LocalizedStringResource = "Обновить лимиты"
+    static let isDiscoverable = false
+
+    func perform() async throws -> some IntentResult {
+        let before = WidgetUsage.load()?.updated
+        CFNotificationCenterPostNotification(CFNotificationCenterGetDarwinNotifyCenter(),
+                                             CFNotificationName("com.demishev.claudepult.limits.refresh" as CFString), nil, nil, true)
+        await WidgetWait.until(seconds: 4) { WidgetUsage.load()?.updated != before }
+        return .result()
+    }
+}
+
+enum WidgetWait {
+    /// Polls a file the app writes; the app reloads the widget itself if it takes longer.
+    static func until(seconds: Double, _ done: () -> Bool) async {
+        for _ in 0..<Int(seconds * 5) where !done() {
+            try? await Task.sleep(for: .milliseconds(200))
+        }
     }
 }
