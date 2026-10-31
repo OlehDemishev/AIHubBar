@@ -30,7 +30,10 @@ final class SessionStore {
     private var reloadScheduled = false
     /// Sessions already announced for their current waiting episode (keyed by id + event time).
     private var notified: Set<String> = []
-    private var contextNotified: Set<String> = []
+    /// Sessions already told about a nearly full context; kept across restarts (the last 200).
+    private var contextNotified = Set(UserDefaults.standard.stringArray(forKey: "contextNotified") ?? []) {
+        didSet { UserDefaults.standard.set(Array(contextNotified.suffix(200)), forKey: "contextNotified") }
+    }
 
     init(directory: URL = SessionFiles.sessionsDirectory) {
         self.directory = directory

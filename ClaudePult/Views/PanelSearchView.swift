@@ -237,6 +237,11 @@ struct QuickSearchWindow: View {
             prompt = nil
             focused = true
         }
+        // The project step brings a new field: give it the keyboard (typing and Esc go nowhere otherwise).
+        .onChange(of: prompt) {
+            focused = false
+            DispatchQueue.main.async { focused = true }
+        }
     }
 
     /// Fills the placeholders and starts Claude with the default launch mode (Terminal when it asks each time).
