@@ -6,7 +6,7 @@
 
 **Now:**
 - notch island stage 1 merged (#149): module, island over the notch, ears, hover card; target release 0.3.0
-- PR: the same wide search for the other agents — codex, gemini, agy, copilot, cursor-agent (branch `feat/agent-autodetect`); `claude` search merged (#150)
+- wide CLI search merged: `claude` (#150), then codex, gemini, agy, copilot, cursor-agent (#151) — login shell, nvm/fnm/volta/pnpm, Claude desktop app's copy
 - landing page live at https://olehdemishev.github.io/AIHubBar/ (#147), deployed by `.github/workflows/pages.yml` on pushes to `site/`
 - nothing else in progress; merged: RELEASE.md names the real `.dmg` (#144), English interface names in the public docs (#143); overview PDF (en, ru) and a public README for GitHub (#139), no personal paths or names, Telegram set up in the app (#140)
 - released 0.2.0: repo renamed to `OlehDemishev/AIHubBar` and made public; repeat fixes merged (#136, #137)
