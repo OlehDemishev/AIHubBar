@@ -5,7 +5,8 @@
 **Updated:** 2026-10-31
 
 **Now:**
-- notch island spec merged (`docs/SPEC-notch.md`, #142) and Oleh's answers recorded (branch `docs/notch-spec-answers`); no code yet
+- branch `feat/landing-site`: landing page in `site/` and the Pages workflow, PR open
+- notch island spec merged (`docs/SPEC-notch.md`, #142) with Oleh's answers (#146); no code yet
 - nothing else in progress; merged: RELEASE.md names the real `.dmg` (#144), English interface names in the public docs (#143); overview PDF (en, ru) and a public README for GitHub (#139), no personal paths or names, Telegram set up in the app (#140)
 - released 0.2.0: repo renamed to `OlehDemishev/AIHubBar` and made public; repeat fixes merged (#136, #137)
 - merged today: notifications once per wait and a choice per kind (#134); queue after reset and run guard (#129), other-AI menu bar/widget/forecast (#130), session changes and weekly summary (#131), Claude Code window and saved prompts (#132); other AI services' limits (#126, #127)
@@ -22,6 +23,7 @@
 - Windows and Linux versions (docs/SPEC-windows.md, docs/SPEC-linux.md) — only when Oleh says; stage 0 (fact checks in VMs) first
 
 **Needs Oleh:**
+- turn on GitHub Pages once: Settings → Pages → Source: GitHub Actions, then Actions → Pages → Run workflow; the site is https://olehdemishev.github.io/AIHubBar/
 - notch island: say when to start stage 1; optional — the «proposed» points left in docs/SPEC-notch.md §10
 - read docs/AI-Hub-Bar-Overview-ru.pdf and -en.pdf (facts and wording); after merge upload docs/images/social-preview.png in GitHub → Settings → General → Social preview (no API for it); the PDFs can be added to the 0.2.0 release: `gh release upload v0.2.0 docs/AI-Hub-Bar-Overview-*.pdf`
 - after the release: download 0.2.0 from Releases on another Mac (or user) and open it once with «Open Anyway»
@@ -30,6 +32,30 @@
 - decide SPEC-windows §10 and SPEC-linux §10 (Tauri 2 for both, Windows code signing, first Linux desktops) before that work starts
 - optional: Apple Developer ID (notarization, no «Open Anyway»); delete or archive the old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-10-31 — Landing page on GitHub Pages (branch `feat/landing-site`)
+
+Done: `.github/workflows/pages.yml` publishes `site/` with the official Pages actions on a push to main that touches `site/` (or by hand). `og:image` is an absolute URL so link previews work.
+Checked: workflow YAML parses; page re-checked in the browser pane. Pages is not turned on for the repo yet (API 404), so the first deploy waits for Oleh's switch.
+Left: Oleh turns on Pages (Source: GitHub Actions) and runs the workflow once; then the site address can go into the repo's About and the README.
+
+## 2026-10-31 — Landing page: Mono colours (branch `feat/landing-site`)
+
+Done: Oleh picked Mono. The other palettes and the temporary switcher are gone; the accent is near-black on white and light grey on dark, links Apple blue, so the orange app icon is the only colour.
+Checked: browser pane, light and dark: no switcher left, buttons and steps follow the mono accent, `#install` link scrolls.
+Left: the GitHub Pages workflow and a PR, on Oleh's go.
+
+## 2026-10-31 — Landing page: neutral colours and palette choice (branch `feat/landing-site`)
+
+Done: the draft no longer uses the overview's terracotta (too close to Claude's own colours). Neutral Apple-like base (white / near-black, system greys and status colours) and four accent palettes as tokens: Mono, Blue, Indigo, Teal, light and dark each. A temporary switcher (bottom right, `?palette=`) to choose; it goes once Oleh picks.
+Checked: in the browser pane, every palette in light mode, Mono and Blue in dark: buttons, links, glow, icons and step numbers follow the palette, text on buttons readable; `#section` links still scroll.
+Left: pick a palette, remove the switcher, then the Pages workflow.
+
+## 2026-10-31 — Landing page draft for GitHub Pages (branch `feat/landing-site`)
+
+Done: `site/index.html` + `style.css`: one page with the hero and a live HTML mock-up of the panel (same colours as `docs/overview`), features, templates, more, install steps, privacy, download buttons to `releases/latest`; icon, favicon and social preview copied in. Light and dark, works from 375 px up. `.claude/launch.json` serves it locally on port 8765.
+Checked: in the browser pane at desktop width and 375 px, dark and light: no horizontal scroll, sections and links render. Text taken from README only.
+Left: not published. To go live: a Pages workflow (`actions/deploy-pages` from `site/`) and Settings → Pages → Source: GitHub Actions; free for a public repo.
 
 ## 2026-10-31 — Notch island: Oleh's answers (branch `docs/notch-spec-answers`)
 
