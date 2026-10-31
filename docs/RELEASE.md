@@ -36,7 +36,7 @@ scripts/release.sh 0.2.0 --publish  # the same, then the GitHub release v0.2.0 w
 
 - **Before running:** the tree must be clean.
 - **Build number:** it is the number of commits, so every release counts up.
-- **How copies find updates:** they read `https://github.com/OlehDemishev/ClaudePult/releases/latest/download/appcast.xml`, which is the newest release's appcast. Nothing else has to be uploaded or committed.
+- **How copies find updates:** they read `https://github.com/OlehDemishev/AIHubBar/releases/latest/download/appcast.xml`, which is the newest release's appcast. Nothing else has to be uploaded or committed.
 - **Public repository needed:** people can only download the files once the repository is public.
 
 ## First launch for people
