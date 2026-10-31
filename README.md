@@ -14,7 +14,7 @@
   <a href="https://github.com/OlehDemishev/AIHubBar/releases/latest"><b>Download</b></a> ·
   <a href="docs/GUIDE.md"><b>Guide</b></a> ·
   <a href="docs/AI-Hub-Bar-Overview-en.pdf"><b>Overview (PDF)</b></a> ·
-  <a href="docs/AI-Hub-Bar-Overview-ru.pdf">Обзор на русском (PDF)</a>
+  <a href="docs/AI-Hub-Bar-Overview-ru.pdf">Overview in Russian (PDF)</a>
 </p>
 
 **AI Hub Bar** is a small, native Mac app that lives in the menu bar. One click on ✦ opens a panel with your Claude subscription limits, every Claude Code session running on the Mac, and ready-made AI commands for your projects. It doesn't replace Claude, Codex or any other AI tool — it keeps an eye on them and starts them for you.
@@ -86,7 +86,7 @@ Needs Xcode with Swift 6. The project is generated from `project.yml`; SwiftUI, 
 ## Documentation
 
 - [Guide](docs/GUIDE.md) — install, first start, everyday use, privacy, troubleshooting, uninstall
-- [Overview PDF](docs/AI-Hub-Bar-Overview-en.pdf) · [на русском](docs/AI-Hub-Bar-Overview-ru.pdf)
+- [Overview PDF](docs/AI-Hub-Bar-Overview-en.pdf) · [in Russian](docs/AI-Hub-Bar-Overview-ru.pdf)
 - [Reference](docs/REFERENCE.md) — every feature in detail, background mode rules, session hooks, command line
 - [Specification](docs/SPEC.md) · [Decisions](DECISIONS.md) · [Status](docs/STATUS.md)
 

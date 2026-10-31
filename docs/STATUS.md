@@ -5,8 +5,8 @@
 **Updated:** 2026-10-31
 
 **Now:**
-- spec for a notch island module written (`docs/SPEC-notch.md`, branch `docs/notch-island-spec`); no code yet
-- nothing else in progress; merged: overview PDF (en, ru) and a public README for GitHub (#139), no personal paths or names, Telegram set up in the app (#140)
+- notch island spec merged (`docs/SPEC-notch.md`, #142); no code yet, waits for Oleh's answers in §10
+- nothing else in progress; merged: English interface names in the public docs (#143); overview PDF (en, ru) and a public README for GitHub (#139), no personal paths or names, Telegram set up in the app (#140)
 - released 0.2.0: repo renamed to `OlehDemishev/AIHubBar` and made public; repeat fixes merged (#136, #137)
 - merged today: notifications once per wait and a choice per kind (#134); queue after reset and run guard (#129), other-AI menu bar/widget/forecast (#130), session changes and weekly summary (#131), Claude Code window and saved prompts (#132); other AI services' limits (#126, #127)
 - renamed to AI Hub Bar (PR #115); session rows open on a click anywhere (PR #117); widgets translated into 13 languages (PR #119); sessions in Claude's own terminal open Claude (PR #121); module options per profile (PR #124)
@@ -36,6 +36,12 @@
 Done: `docs/SPEC-notch.md` — an optional module «Остров у чёлки»: a black island around the MacBook notch with two small side indicators at rest (session limit, sessions state), short event banners (permission requests with Allow / Deny, waiting, done, limits, context, PR/CI) and a hover card (limits, sessions with the current action, open requests). How it works without private APIs (`NSScreen.safeAreaInsets`, `auxiliaryTopLeftArea` / `auxiliaryTopRightArea`, a non-activating `NSPanel` above the menu bar), guard against accidental clicks on Allow, screens without a notch and full-screen apps, settings, accessibility, what not to do (no code from boring.notch, GPL-3.0), three stages and open questions.
 Checked: facts against the code (`ApprovalFiles`, `NotificationKind`, `Session.actionText`, `MenuBarIcon.wideWidth`, `ModuleKind`); boring.notch licence via the GitHub API. Docs only, no build needed. CI not set up.
 Left: no code; the answers in §10 come first, and live checks need a MacBook with a notch.
+
+## 2026-10-31 — English interface names in the public docs (branch `docs/english-ui-names`)
+
+Done: Russian interface names in `docs/REFERENCE.md` and `docs/RELEASE.md` («Настройки…», «Основные», «Модули», «Не спать», notification texts …) replaced by the app's own English strings, looked up in `Localizable.xcstrings` (most automatically, the rest by hand from the code: card `project.md` and its fields, `content-plan.md` columns, `{project}`/`<time>` placeholders); « » quotes became “ ”. README links to the Russian PDF in English. The v0.2.0 release notes on GitHub are now English. Left on purpose: language names, the Cyrillic keyboard-layout example and the per-language file names. GUIDE and the English PDF had no Russian already.
+Checked: no Cyrillic left in README / GUIDE / RELEASE / REFERENCE apart from those examples; every lookup reviewed in the diff.
+Left: internal docs (SPEC*, DECISIONS, CHECKLIST, STATUS history, TEMPLATES) stay as they are — Russian specs and records of checks in the Russian interface.
 
 ## 2026-10-31 — Overview PDF and GitHub presentation (branch `docs/overview-pdf-and-repo`)
 
