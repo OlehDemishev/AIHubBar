@@ -5,8 +5,7 @@
 **Updated:** 2026-10-31
 
 **Now:**
-- branch `fix/release-doc-dmg-name`: RELEASE.md names the real `.dmg` and the files a release uploads
-- merged: English interface names in the public docs (#143); overview PDF (en, ru) and a public README for GitHub (#139), no personal paths or names, Telegram set up in the app (#140)
+- nothing in progress; merged: RELEASE.md names the real `.dmg` (#144), English interface names in the public docs (#143); overview PDF (en, ru) and a public README for GitHub (#139), no personal paths or names, Telegram set up in the app (#140)
 - released 0.2.0: repo renamed to `OlehDemishev/AIHubBar` and made public; repeat fixes merged (#136, #137)
 - merged today: notifications once per wait and a choice per kind (#134); queue after reset and run guard (#129), other-AI menu bar/widget/forecast (#130), session changes and weekly summary (#131), Claude Code window and saved prompts (#132); other AI services' limits (#126, #127)
 - renamed to AI Hub Bar (PR #115); session rows open on a click anywhere (PR #117); widgets translated into 13 languages (PR #119); sessions in Claude's own terminal open Claude (PR #121); module options per profile (PR #124)
