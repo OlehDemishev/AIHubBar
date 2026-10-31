@@ -6,7 +6,7 @@
 
 **Now:**
 - notch island stage 1 merged (#149): module, island over the notch, ears, hover card; target release 0.3.0
-- wider `claude` auto-detection merged (#150): shell, nvm/fnm/volta and the desktop app's copy — another Mac showed «авто: не найден»
+- wide CLI search merged: `claude` (#150), then codex, gemini, agy, copilot, cursor-agent (#151) — login shell, nvm/fnm/volta/pnpm, Claude desktop app's copy
 - landing page live at https://olehdemishev.github.io/AIHubBar/ (#147), deployed by `.github/workflows/pages.yml` on pushes to `site/`
 - nothing else in progress; merged: RELEASE.md names the real `.dmg` (#144), English interface names in the public docs (#143); overview PDF (en, ru) and a public README for GitHub (#139), no personal paths or names, Telegram set up in the app (#140)
 - released 0.2.0: repo renamed to `OlehDemishev/AIHubBar` and made public; repeat fixes merged (#136, #137)
@@ -33,6 +33,12 @@
 - decide SPEC-windows §10 and SPEC-linux §10 (Tauri 2 for both, Windows code signing, first Linux desktops) before that work starts
 - optional: Apple Developer ID (notarization, no «Open Anyway»); delete or archive the old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-10-31 — Wide search for every agent CLI (branch `feat/agent-autodetect`)
+
+Done: the search from #150 moved into `AgentLocator` (`Services/AgentLocator.swift`) and now serves every `AgentKind`: Homebrew, `~/.local/bin`, npm-global, pnpm (`~/Library/pnpm`), yarn, bun, volta, cargo, asdf and mise shims, then one `command -v claude codex gemini agy copilot cursor-agent` in the interactive login shell at app start (the exit code is ignored: it is 1 when any name is missing), then nvm and fnm, then for `claude` only the desktop app's copy. `ClaudeLocator` keeps `resolve(configured:)` and asks `AgentLocator`. No app-bundle paths for Codex or Antigravity: none could be confirmed, so none are guessed.
+Checked: `xcodebuild test` — 282 tests pass (locator tests moved to `AgentLocatorTests`, new: other agents in nvm/fnm/volta/pnpm, the desktop copy only for `claude`, several paths from one shell answer). By hand: the combined `command -v` in zsh prints `/opt/homebrew/bin/claude` and exits 1 here (no other agents installed on this Mac). CI not set up; checks run locally.
+Left: not seen with a real nvm/volta install of another agent; only the fake-home tests cover it.
 
 ## 2026-10-31 — Wider `claude` auto-detection (branch `fix/claude-autodetect`)
 

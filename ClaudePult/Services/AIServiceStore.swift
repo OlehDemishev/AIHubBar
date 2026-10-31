@@ -114,7 +114,7 @@ final class AIServiceStore {
     nonisolated static func findAgents() async -> [AgentKind: AgentInfo] {
         var found: [AgentKind: AgentInfo] = [:]
         for kind in AgentKind.allCases {
-            let path = kind == .claudeCode ? ClaudeLocator.detect() : kind.detect()
+            let path = kind.detect()
             guard let path else { continue }
             let result = try? await ProcessRunner.run(path, kind.versionArguments, timeout: .seconds(10))
             let version = result.flatMap { $0.exitCode == 0 ? $0.stdoutText : nil }.flatMap(kind.version(fromOutput:))
