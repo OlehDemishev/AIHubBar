@@ -22,7 +22,7 @@
 - Windows and Linux versions (docs/SPEC-windows.md, docs/SPEC-linux.md) — only when Oleh says; stage 0 (fact checks in VMs) first
 
 **Needs Oleh:**
-- landing page (`site/`, Mono colours, preview: `python3 -m http.server 8765 --directory site`): say whether to publish it on GitHub Pages
+- turn on GitHub Pages once: Settings → Pages → Source: GitHub Actions, then Actions → Pages → Run workflow; the site is https://olehdemishev.github.io/AIHubBar/
 - read docs/SPEC-notch.md and answer §10: is there a MacBook with a notch to test on, name «Остров у чёлки» or «Остров», «instead of notifications» off by default, pill on screens without a notch, hot keys for Allow / Deny
 - read docs/AI-Hub-Bar-Overview-ru.pdf and -en.pdf (facts and wording); after merge upload docs/images/social-preview.png in GitHub → Settings → General → Social preview (no API for it); the PDFs can be added to the 0.2.0 release: `gh release upload v0.2.0 docs/AI-Hub-Bar-Overview-*.pdf`
 - after the release: download 0.2.0 from Releases on another Mac (or user) and open it once with «Open Anyway»
@@ -31,6 +31,12 @@
 - decide SPEC-windows §10 and SPEC-linux §10 (Tauri 2 for both, Windows code signing, first Linux desktops) before that work starts
 - optional: Apple Developer ID (notarization, no «Open Anyway»); delete or archive the old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-10-31 — Landing page on GitHub Pages (branch `feat/landing-site`)
+
+Done: `.github/workflows/pages.yml` publishes `site/` with the official Pages actions on a push to main that touches `site/` (or by hand). `og:image` is an absolute URL so link previews work.
+Checked: workflow YAML parses; page re-checked in the browser pane. Pages is not turned on for the repo yet (API 404), so the first deploy waits for Oleh's switch.
+Left: Oleh turns on Pages (Source: GitHub Actions) and runs the workflow once; then the site address can go into the repo's About and the README.
 
 ## 2026-10-31 — Landing page: Mono colours (branch `feat/landing-site`)
 
