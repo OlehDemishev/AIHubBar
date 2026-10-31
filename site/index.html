@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Hub Bar — Claude limits and agent sessions in the Mac menu bar</title>
+<meta name="description" content="A free, open-source Mac menu bar app: Claude subscription limits, every Claude Code session, and ready-made AI commands for your projects.">
+<meta property="og:title" content="AI Hub Bar">
+<meta property="og:description" content="Claude limits, every agent session and AI commands for your projects — one click away in the Mac menu bar.">
+<meta property="og:image" content="https://olehdemishev.github.io/AIHubBar/social-preview.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="#top"><img src="icon.png" alt="" width="28" height="28">AI Hub Bar</a>
+    <nav>
+      <a href="#features">Features</a>
+      <a href="#install">Install</a>
+      <a href="#privacy">Privacy</a>
+      <a href="https://github.com/OlehDemishev/AIHubBar">GitHub</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+<section class="hero">
+  <div class="wrap hero-in">
+    <div class="hero-text">
+      <img class="hero-icon" src="icon.png" alt="AI Hub Bar icon" width="96" height="96">
+      <h1>AI Hub Bar</h1>
+      <p class="tagline">Claude limits, every agent session and AI commands for your projects — one click away in the Mac menu bar.</p>
+      <div class="cta">
+        <a class="btn-primary" href="https://github.com/OlehDemishev/AIHubBar/releases/latest">Download for Mac</a>
+        <a class="btn-ghost" href="https://github.com/OlehDemishev/AIHubBar">View on GitHub</a>
+      </div>
+      <div class="chips"><span>macOS 14+</span><span>Free · MIT</span><span>13 languages</span><span>No account</span></div>
+    </div>
+
+    <div class="shot" aria-hidden="true">
+      <div class="menubar">
+        <span class="item">✦ 42% <span class="muted">·</span> 18%</span>
+        <span class="item">✋ 1</span>
+        <span class="muted">Fri 14:05</span>
+      </div>
+      <div class="panel">
+        <div class="phead"><b>⌘ Developer ▾</b><span class="icons">↻ ⚙ ? ⏻</span></div>
+        <div class="pcard">
+          <div class="t">Limits</div>
+          <div class="rings">
+            <div class="ring" style="--p:42%"><span>42%</span></div>
+            <div class="ringlabel"><b>Session</b><br>in 2 h 14 min</div>
+            <div class="ring" style="--p:18%"><span>18%</span></div>
+            <div class="ringlabel"><b>Week</b><br>resets Tue 9:00</div>
+          </div>
+          <div class="forecast">✓ Enough until the reset at this pace</div>
+        </div>
+        <div class="pcard">
+          <div class="t">Sessions</div>
+          <div class="row wait"><i style="background:var(--orange)"></i><span><b>shop-app</b><br><small>wants to run <code>npm test</code></small></span><span class="right"><span class="b ok">Allow</span> <span class="b">Deny</span></span></div>
+          <div class="row"><i style="background:var(--green)"></i><span><b>blog</b><br><small>editing header.tsx · +42 −7</small></span><span class="right">12 min</span></div>
+          <div class="row"><i style="background:var(--blue)"></i><span><b>api</b><br><small>background · writing tests</small></span><span class="right">31 min</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="intro wrap">
+  <p>AI Hub Bar doesn't replace Claude, Codex or any other AI tool — it keeps an eye on them and starts them for you. Free, open source, no account and no server of its own.</p>
+</section>
+
+<section id="features" class="wrap">
+  <div class="kicker">Features</div>
+  <h2>Three things, one click on ✦</h2>
+  <div class="grid3">
+    <article class="feature">
+      <div class="ic">◔</div>
+      <h3>Limits — how much is left</h3>
+      <ul>
+        <li>Claude's 5-hour and weekly limits as rings, with a reset countdown, right in the menu bar.</li>
+        <li>A forecast from your pace: “enough until the reset” or “lasts until ~16:40”.</li>
+        <li>Usage by project, and notifications at the thresholds you choose.</li>
+        <li>Codex, GitHub Copilot, Gemini CLI, Cursor, OpenRouter and API spend appear by themselves.</li>
+      </ul>
+    </article>
+    <article class="feature">
+      <div class="ic">≡</div>
+      <h3>Every Claude Code session</h3>
+      <ul>
+        <li>Terminal, the Claude app, background runs: state, task, duration — and what Claude is doing right now.</li>
+        <li>Allow or Deny permission requests from the notification, the panel or Telegram.</li>
+        <li>Context fullness, files changed, and a heads-up when a session goes quiet.</li>
+        <li>Background runs under an explicit permission list, a night queue and a morning summary.</li>
+      </ul>
+    </article>
+    <article class="feature">
+      <div class="ic">⌘</div>
+      <h3>Projects and AI commands</h3>
+      <ul>
+        <li>Profiles built from modules, each with its own panel and menu bar.</li>
+        <li>A command's result is always a new file — nothing is overwritten.</li>
+        <li>Compare runs one command with two or three services side by side.</li>
+        <li>Claude Code, Codex CLI, Gemini CLI, Copilot CLI, Cursor CLI and models by API.</li>
+      </ul>
+    </article>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="kicker">Not only for developers</div>
+  <h2>Start from a template</h2>
+  <div class="templates">
+    <div><b>Developer</b><span>a git repository</span><em>Next step · Custom task · Finish (checks, commit, push, PR)</em></div>
+    <div><b>Video</b><span>a folder per video</span><em>Hooks · a Shorts version · description with timestamps</em></div>
+    <div><b>Writing</b><span>a folder per text</span><em>Edit · proofread · another tone · split into posts</em></div>
+    <div><b>Research</b><span>a folder per topic</span><em>Source summary · quotes with references · overview table</em></div>
+    <div><b>Social media</b><span>a campaign or platform</span><em>Posts per platform · ad variants · a week's plan</em></div>
+    <div><b>Custom</b><span>any folder</span><em>Your own, with <code>{project}</code>, <code>{file}</code>, <code>{language}</code></em></div>
+  </div>
+</section>
+
+<section class="wrap more">
+  <div class="kicker">And more</div>
+  <div class="grid2">
+    <ul>
+      <li><b>Calendar</b> of deadlines and content plans straight from your project files.</li>
+      <li><b>Mac tools</b> as optional modules: resources, Keep Awake, quick toggles, clipboard history, notes.</li>
+    </ul>
+    <ul>
+      <li><b>⌃⌥C search</b> from any app, widgets, a Control Center toggle and Shortcuts actions.</li>
+      <li><b>Telegram</b> alerts and a weekly summary.</li>
+    </ul>
+  </div>
+  <div class="langs">
+    <span>English</span><span>Русский</span><span>Українська</span><span>Español</span><span>Português (Brasil)</span><span>Français</span><span>Deutsch</span><span>Italiano</span><span>Polski</span><span>日本語</span><span>한국어</span><span>Bahasa Indonesia</span><span>العربية</span>
+  </div>
+</section>
+
+<section id="install" class="wrap">
+  <div class="kicker">Install</div>
+  <h2>Two minutes, once</h2>
+  <div class="split">
+    <ol class="steps">
+      <li>Download <code>AIHubBar-&lt;version&gt;.dmg</code> from <a href="https://github.com/OlehDemishev/AIHubBar/releases/latest">Releases</a>.</li>
+      <li>Open it and drag <b>AI Hub Bar</b> to Applications.</li>
+      <li>Open the app. macOS says it can't check the developer — close the message.</li>
+      <li>System Settings → Privacy &amp; Security → <b>Open Anyway</b>.</li>
+    </ol>
+    <div class="callout">
+      <p>The app isn't signed with an Apple Developer ID, so macOS asks once. After that it updates itself, and the first start opens an assistant that sets up your first profile.</p>
+      <p><b>Needs:</b> macOS 14 or later (Apple Silicon or Intel) and at least one AI service. Limits and the session list need Claude Code.</p>
+      <p><a href="https://github.com/OlehDemishev/AIHubBar/blob/main/docs/GUIDE.md">Read the guide →</a></p>
+    </div>
+  </div>
+</section>
+
+<section id="privacy" class="wrap">
+  <div class="kicker">Privacy</div>
+  <h2>Nothing in between</h2>
+  <div class="grid2 privacy">
+    <p><b>No server, no account, no analytics.</b> AI Hub Bar talks only to the AI services you use, and your files go only to the service you run a command with.</p>
+    <p><b>Keys stay in the Keychain.</b> Never in logs or exported settings. The session hook only writes small status files on your Mac and can be removed in Settings.</p>
+  </div>
+</section>
+
+<section class="wrap final">
+  <img src="icon.png" alt="" width="64" height="64">
+  <h2>Free and open source</h2>
+  <div class="cta center">
+    <a class="btn-primary" href="https://github.com/OlehDemishev/AIHubBar/releases/latest">Download for Mac</a>
+    <a class="btn-ghost" href="https://github.com/OlehDemishev/AIHubBar/blob/main/docs/AI-Hub-Bar-Overview-en.pdf">Overview (PDF)</a>
+  </div>
+</section>
+
+</main>
+
+<footer class="wrap foot">
+  <span>MIT license · <a href="https://github.com/OlehDemishev/AIHubBar">Source on GitHub</a></span>
+  <span>An independent project, not affiliated with Anthropic, OpenAI, Google or GitHub.</span>
+</footer>
+
+</body>
+</html>
