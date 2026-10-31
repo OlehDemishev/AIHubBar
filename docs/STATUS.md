@@ -1,7 +1,7 @@
 # Status
 
 <!-- summary:start -->
-**Stage:** AI Hub Bar 0.2.0 released publicly (github.com/OlehDemishev/AIHubBar); next: Windows and Linux versions
+**Stage:** AI Hub Bar 0.2.1 released (github.com/OlehDemishev/AIHubBar, wider CLI search + optional notch island); next: notch island stages 2–3 for 0.3.0
 **Updated:** 2026-10-31
 
 **Now:**
@@ -24,6 +24,7 @@
 - Windows and Linux versions (docs/SPEC-windows.md, docs/SPEC-linux.md) — only when Oleh says; stage 0 (fact checks in VMs) first
 
 **Needs Oleh:**
+- on the other Mac: install 0.2.1 (Releases, or «Обновления» in Settings if 0.2.0 is there) → Settings → Claude Code: the path field should show «авто: …» instead of «авто: не найден»; tell me the path it shows
 - notch island: on the MacBook Air (with this branch's build or later) — Settings → Модули → «Остров у чёлки» → Установить; check the ears beside the real notch, hover opens the card, moving away closes it, menu bar clicks next to the notch still work
 - optional: put https://olehdemishev.github.io/AIHubBar/ into the repo's About → Website; repo settings suggested in chat (release immutability, «Always suggest updating», «Automatically delete head branches»)
 - read docs/AI-Hub-Bar-Overview-ru.pdf and -en.pdf (facts and wording); after merge upload docs/images/social-preview.png in GitHub → Settings → General → Social preview (no API for it); the PDFs can be added to the 0.2.0 release: `gh release upload v0.2.0 docs/AI-Hub-Bar-Overview-*.pdf`
@@ -33,6 +34,12 @@
 - decide SPEC-windows §10 and SPEC-linux §10 (Tauri 2 for both, Windows code signing, first Linux desktops) before that work starts
 - optional: Apple Developer ID (notarization, no «Open Anyway»); delete or archive the old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-10-31 — Release 0.2.1 (branch `chore/status-release-021`)
+
+Done: `scripts/release.sh 0.2.1` from main `c0f8f47` (build 331), published as v0.2.1 «Latest» with the `.dmg`, appcast and the overview PDFs; notes list the wider CLI search (#150, #151), the optional notch island (#149) and #140.
+Checked: deep strict verify passed, authority «ClaudePult Release», no get-task-allow; the release binary's `--claude next … --print` names `/opt/homebrew/bin/claude`; `releases/latest/download/appcast.xml` serves 0.2.1 / 331 (after a minute of caching); the `.dmg` URL answers 200.
+Left: not opened on another Mac yet (Needs Oleh).
 
 ## 2026-10-31 — Wide search for every agent CLI (branch `feat/agent-autodetect`)
 
