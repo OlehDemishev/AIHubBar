@@ -116,6 +116,21 @@ private struct GeneralSettings: View {
             }
 
             Section {
+                ForEach(NotificationKind.allCases) { kind in
+                    Picker(kind.title, selection: Binding(
+                        get: { settings.frequency(kind) },
+                        set: { settings.notificationFrequencies[kind.rawValue] = $0.rawValue }
+                    )) {
+                        ForEach(NotificationFrequency.allCases) { Text($0.title).tag($0) }
+                    }
+                }
+            } header: {
+                Text("Какие уведомления и как часто")
+            } footer: {
+                Footnote(text: String(localized: "«Не чаще…» считается для одного и того же события: та же сессия, тот же порог, тот же PR. Разные события приходят как обычно. Telegram настраивается отдельно, у каждого модуля."))
+            }
+
+            Section {
                 ImportConfirmation()
                 HStack {
                     Button("Экспорт настроек…") { SettingsFiles.save(modes.exportBundle(), suggestedName: "AI Hub Bar") }

@@ -410,7 +410,10 @@ final class HubLimitsStore {
 
     private let settings: AppSettings
     private var loop: Task<Void, Never>?
-    private var notified: Set<String> = []
+    /// Kept across restarts, so a relaunch doesn't announce the same threshold again.
+    private var notified = Set(UserDefaults.standard.stringArray(forKey: "hubNotified") ?? []) {
+        didSet { UserDefaults.standard.set(Array(notified.suffix(200)), forKey: "hubNotified") }
+    }
     /// The first reading of each window since its last reset, for the forecast.
     private var firstReadings: [String: HubForecast.Reading] = [:]
 

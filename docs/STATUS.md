@@ -5,7 +5,8 @@
 **Updated:** 2026-10-30
 
 **Now:**
-- nothing in progress; merged today: queue after reset and run guard (#129), other-AI menu bar/widget/forecast (#130), session changes and weekly summary (#131), Claude Code window and saved prompts (#132); other AI services' limits (#126, #127)
+- notification settings and the repeat fix: PR on `fix/notification-settings`
+- merged today: queue after reset and run guard (#129), other-AI menu bar/widget/forecast (#130), session changes and weekly summary (#131), Claude Code window and saved prompts (#132); other AI services' limits (#126, #127)
 - renamed to AI Hub Bar (PR #115); session rows open on a click anywhere (PR #117); widgets translated into 13 languages (PR #119); sessions in Claude's own terminal open Claude (PR #121); module options per profile (PR #124)
 - merged today: feature batch — approve from notifications (#100), current action (#102), week forecast (#104), Telegram answers (#106), PR/CI alerts (#108), search, hot key, Shortcuts (#110), widget and Control Center toggle (#112), night queue (#113), context fullness (#114); panel as cards (#98); hover hints (#91); menu bar drag, translation review, release re-check (#93–#95)
 - release without an Apple Developer account ready (PR #85), nothing published; Windows and Linux specs wait for Oleh
@@ -19,6 +20,7 @@
 - other AI services, if wanted later: menu bar items and a widget line for them, «lasts until reset» forecast, their alerts to Telegram
 
 **Needs Oleh:**
+- merge the notification PR; then Settings → Основные → «Какие уведомления и как часто» if something still comes too often
 - try: «Позже» on a project, the paused-run switch (Settings → Модули → Лимиты), the file list from a session row, «Отправить сейчас» for the weekly summary, the Claude Code window (panel footer), a saved prompt in ⌃⌥C
 - MCP on/off was not pressed on your `obsidian` server during checks: try it once (it moves to a stash file and back; settings.json gets a backup)
 - to try the other AI services: Settings → «Модули» → «Лимиты» → «Другие AI» — OpenRouter key, OpenAI / Anthropic admin keys, installed and signed-in `codex`, Gemini CLI and Cursor consent toggles (Copilot already shows from `gh`)
@@ -54,6 +56,12 @@
 - hooks are installed in ~/.claude/settings.json; backup of the original: ~/.claude/settings.json.claudepult-backup-20261029T192827
 - delete or archive the old repo `OlehDemishev/ClaudeBar`; turn on start at login if wanted
 <!-- summary:end -->
+
+## 2026-10-31 — Notifications: once per wait, and a choice per kind (branch `fix/notification-settings`)
+
+Done: «Claude ждёт ответа / просит разрешение» repeated for one wait: every rewrite of the waiting session's file (PermissionRequest, then Claude's own «needs your permission» Notification, then idle reminders) made a new key from `updatedAt`. Now one notification per wait, per session. Settings → Основные → «Какие уведомления и как часто»: eight kinds (waiting, context, background, limits, PR/CI, calendar, resources, commands), each «каждый раз / не чаще раза в 15 мин / в час / в день / не присылать»; the limit counts per event (same id), kept across restarts. Mac resources default to once an hour (memory pressure flapping critical ↔ normal repeated it). Other-AI threshold alerts no longer repeat after a relaunch. Every notification shown or skipped is now logged.
+Checked: `xcodebuild test` — 265 tests pass (kinds from ids, throttle, persisted choices); installed, the new section is in Settings → Основные.
+Left: which notification was repeating on Oleh's Mac couldn't be read back (macOS keeps the history out of reach and the app didn't log posts before); the log now says, so a repeat can be pinned down if one still comes.
 
 ## 2026-10-30 — Eight features: queue after reset, run guard, other-AI extras, session changes, weekly summary, MCP, CLAUDE.md, prompts (branches `feat/limit-queue`, `feat/hub-extras`, `feat/session-changes`, `feat/claude-code-tools`)
 

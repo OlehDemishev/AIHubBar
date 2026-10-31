@@ -6575,6 +6575,82 @@
         }
       }
     },
+    "Claude ждёт ответа или разрешения": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude ينتظر ردًا أو إذنًا"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude wartet auf Antwort oder Freigabe"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude waits for an answer or permission"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude espera respuesta o permiso"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude attend une réponse ou une autorisation"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude menunggu jawaban atau izin"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude attende una risposta o un permesso"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude が返答か許可を待っている"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude가 답변이나 권한을 기다림"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude czeka na odpowiedź lub zgodę"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude aguarda resposta ou permissão"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude чекає відповіді або дозволу"
+          }
+        }
+      }
+    },
     "Claude ждёт ответа — %@": {
       "localizations": {
         "ar": {
@@ -8493,6 +8569,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "PR закрито або змерджено: %@ #%lld"
+          }
+        }
+      }
+    },
+    "PR и CI": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "طلبات الدمج وCI"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PRs und CI"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PRs and CI"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PR y CI"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PR et CI"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PR dan CI"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PR e CI"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PR と CI"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PR 및 CI"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PR i CI"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PRs e CI"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PR і CI"
           }
         }
       }
@@ -10495,6 +10647,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "«Мінімум» — значок, проблеми й ті, хто чекає на відповідь. «Ліміти» — ще сесія і тиждень. «Усе» — усе, що є. Будь-яка зміна нижче робить набір «Своїм»."
+          }
+        }
+      }
+    },
+    "«Не чаще…» считается для одного и того же события: та же сессия, тот же порог, тот же PR. Разные события приходят как обычно. Telegram настраивается отдельно, у каждого модуля.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«ليس أكثر من…» يُحسب لكل حدث: الجلسة نفسها، الحد نفسه، طلب الدمج نفسه. الأحداث المختلفة تصل كالمعتاد. يُضبط Telegram بشكل منفصل في كل وحدة."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "„Höchstens…“ gilt je Ereignis: dieselbe Sitzung, dieselbe Schwelle, derselbe PR. Andere Ereignisse kommen wie gewohnt. Telegram wird separat in jedem Modul eingestellt."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“At most…” counts per event: the same session, the same threshold, the same PR. Different events come as usual. Telegram is set separately, in each module."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«Como máximo…» cuenta por evento: la misma sesión, el mismo umbral, el mismo PR. Los eventos distintos llegan como siempre. Telegram se configura aparte, en cada módulo."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "« Au plus… » compte par événement : même session, même seuil, même PR. Les événements différents arrivent normalement. Telegram se règle à part, dans chaque module."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“Paling sering…” dihitung per kejadian: sesi yang sama, ambang yang sama, PR yang sama. Kejadian lain tetap datang seperti biasa. Telegram diatur terpisah di tiap modul."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«Al massimo…» vale per evento: la stessa sessione, la stessa soglia, la stessa PR. Gli eventi diversi arrivano come sempre. Telegram si imposta a parte, in ogni modulo."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「最大…」は同じ出来事ごとに数えます: 同じセッション、同じしきい値、同じ PR。別の出来事は通常どおり届きます。Telegram は各モジュールで別に設定します。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“최대 …”는 같은 사건마다 셉니다: 같은 세션, 같은 기준, 같은 PR. 다른 사건은 평소대로 옵니다. Telegram은 모듈마다 따로 설정합니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "„Nie częściej…” liczy się dla tego samego zdarzenia: ta sama sesja, ten sam próg, ten sam PR. Inne zdarzenia przychodzą normalnie. Telegram ustawia się osobno, w każdym module."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“No máximo…” conta por evento: a mesma sessão, o mesmo limite, o mesmo PR. Eventos diferentes chegam normalmente. O Telegram é configurado à parte, em cada módulo."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«Не частіше…» рахується для однієї й тієї самої події: та сама сесія, той самий поріг, той самий PR. Різні події приходять як звичайно. Telegram налаштовується окремо, у кожному модулі."
           }
         }
       }
@@ -26770,6 +26998,82 @@
         }
       }
     },
+    "Какие уведомления и как часто": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "أي الإشعارات وكم مرة"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Welche Mitteilungen und wie oft"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Which notifications, and how often"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Qué notificaciones y con qué frecuencia"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quelles notifications et à quelle fréquence"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notifikasi apa dan seberapa sering"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quali notifiche e con che frequenza"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "どの通知を、どのくらいの頻度で"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "어떤 알림을 얼마나 자주"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jakie powiadomienia i jak często"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quais notificações e com que frequência"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Які сповіщення і як часто"
+          }
+        }
+      }
+    },
     "Каким сервисом выполнять": {
       "localizations": {
         "ar": {
@@ -26994,6 +27298,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Календар вмикається в профілі з проєктами-папками: Налаштування → «Профілі» → «Календар»."
+          }
+        }
+      }
+    },
+    "Календарь: дедлайны и публикации": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "التقويم: المواعيد النهائية والنشر"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kalender: Fristen und Veröffentlichungen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Calendar: deadlines and publications"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Calendario: plazos y publicaciones"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Calendrier : échéances et publications"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kalender: tenggat dan publikasi"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Calendario: scadenze e pubblicazioni"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "カレンダー: 締め切りと公開"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "캘린더: 마감과 게시"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kalendarz: terminy i publikacje"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Calendário: prazos e publicações"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Календар: дедлайни й публікації"
           }
         }
       }
@@ -29278,6 +29658,82 @@
         }
       }
     },
+    "Команды: отчёты, проверки, быстрые команды": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الأوامر: التقارير والفحوص والأوامر السريعة"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Befehle: Berichte, Prüfungen, Schnellbefehle"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Commands: reports, checks, quick commands"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comandos: informes, comprobaciones, comandos rápidos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Commandes : rapports, vérifications, commandes rapides"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Perintah: laporan, pemeriksaan, perintah cepat"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comandi: report, controlli, comandi rapidi"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "コマンド: レポート、チェック、クイックコマンド"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "명령: 보고서, 점검, 빠른 명령"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Polecenia: raporty, sprawdzenia, szybkie polecenia"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comandos: relatórios, verificações, comandos rápidos"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Команди: звіти, перевірки, швидкі команди"
+          }
+        }
+      }
+    },
     "Контекст почти заполнен — %@": {
       "localizations": {
         "ar": {
@@ -29350,6 +29806,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Контекст майже заповнений — %@"
+          }
+        }
+      }
+    },
+    "Контекст сессии почти заполнен": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "سياق الجلسة يكاد يمتلئ"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sitzungskontext fast voll"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Session context nearly full"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Contexto de la sesión casi lleno"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Contexte de session presque plein"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Konteks sesi hampir penuh"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Contesto della sessione quasi pieno"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "セッションのコンテキストがほぼ満杯"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "세션 컨텍스트가 거의 참"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kontekst sesji prawie pełny"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Contexto da sessão quase cheio"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Контекст сесії майже заповнений"
           }
         }
       }
@@ -30952,6 +31484,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ліміти, відповіді Claude, готові команди й дедлайни приходять сповіщеннями."
+          }
+        }
+      }
+    },
+    "Лимиты: Claude, другие AI, бюджет API": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الحدود: Claude وذكاء اصطناعي آخر وميزانية API"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limits: Claude, andere KI, API-Budget"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limits: Claude, other AI, API budget"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Límites: Claude, otras IA, presupuesto de API"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limites : Claude, autres IA, budget API"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Batas: Claude, AI lain, anggaran API"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limiti: Claude, altre IA, budget API"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "上限: Claude、その他の AI、API 予算"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "한도: Claude, 다른 AI, API 예산"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limity: Claude, inne AI, budżet API"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limites: Claude, outras IAs, orçamento de API"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ліміти: Claude, інші AI, бюджет API"
           }
         }
       }
@@ -56453,6 +57061,82 @@
         }
       }
     },
+    "Ресурсы Mac: процессор, память, диск, батарея": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "موارد Mac: المعالج والذاكرة والقرص والبطارية"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mac-Ressourcen: Prozessor, Speicher, Festplatte, Akku"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mac resources: processor, memory, disk, battery"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recursos del Mac: procesador, memoria, disco, batería"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ressources du Mac : processeur, mémoire, disque, batterie"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sumber daya Mac: prosesor, memori, disk, baterai"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Risorse del Mac: processore, memoria, disco, batteria"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mac のリソース: プロセッサ、メモリ、ディスク、バッテリー"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mac 자원: 프로세서, 메모리, 디스크, 배터리"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zasoby Maca: procesor, pamięć, dysk, bateria"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recursos do Mac: processador, memória, disco, bateria"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ресурси Mac: процесор, пам'ять, диск, батарея"
+          }
+        }
+      }
+    },
     "Ролик · 2 дн": {
       "localizations": {
         "ar": {
@@ -70012,6 +70696,82 @@
         }
       }
     },
+    "Фоновые задачи: итог, пауза, ночная сводка": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المهام الخلفية: النتيجة والإيقاف المؤقت والملخص الليلي"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hintergrundaufgaben: Ergebnis, Pause, Nachtübersicht"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Background runs: result, pause, night summary"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tareas en segundo plano: resultado, pausa, resumen nocturno"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tâches en arrière-plan : résultat, pause, résumé de nuit"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tugas latar belakang: hasil, jeda, ringkasan malam"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Attività in background: esito, pausa, riepilogo notturno"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "バックグラウンドのタスク: 結果、一時停止、夜間サマリー"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "백그라운드 작업: 결과, 일시 정지, 야간 요약"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zadania w tle: wynik, pauza, podsumowanie nocy"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tarefas em segundo plano: resultado, pausa, resumo noturno"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Фонові завдання: підсумок, пауза, нічний підсумок"
+          }
+        }
+      }
+    },
     "Формат": {
       "localizations": {
         "ar": {
@@ -77859,6 +78619,82 @@
         }
       }
     },
+    "каждый раз": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "في كل مرة"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "jedes Mal"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "every time"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "cada vez"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "à chaque fois"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "setiap kali"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ogni volta"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "毎回"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "매번"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "za każdym razem"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "sempre"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "щоразу"
+          }
+        }
+      }
+    },
     "как у _daily-report": {
       "localizations": {
         "ar": {
@@ -79379,6 +80215,82 @@
         }
       }
     },
+    "не присылать": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لا ترسل"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "nicht senden"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "off"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "no enviar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ne pas envoyer"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "jangan kirim"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "non inviare"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "送らない"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "보내지 않음"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "nie wysyłaj"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "não enviar"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "не надсилати"
+          }
+        }
+      }
+    },
     "не удалось разобрать ответ — формат мог измениться": {
       "localizations": {
         "ar": {
@@ -79603,6 +80515,234 @@
           "stringUnit": {
             "state": "translated",
             "value": "не встановлено"
+          }
+        }
+      }
+    },
+    "не чаще раза в 15 мин": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مرة كل 15 دقيقة على الأكثر"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "höchstens alle 15 Min."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "at most every 15 min"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "como máximo cada 15 min"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "au plus toutes les 15 min"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "paling sering tiap 15 menit"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "al massimo ogni 15 min"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "最大 15 分に 1 回"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "최대 15분에 한 번"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "nie częściej niż co 15 min"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "no máximo a cada 15 min"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "не частіше ніж раз на 15 хв"
+          }
+        }
+      }
+    },
+    "не чаще раза в день": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مرة في اليوم على الأكثر"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "höchstens einmal am Tag"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "at most once a day"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "como máximo una vez al día"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "au plus une fois par jour"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "paling sering sekali sehari"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "al massimo una volta al giorno"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "最大 1 日に 1 回"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "최대 하루에 한 번"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "nie częściej niż raz dziennie"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "no máximo uma vez por dia"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "не частіше ніж раз на день"
+          }
+        }
+      }
+    },
+    "не чаще раза в час": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مرة في الساعة على الأكثر"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "höchstens einmal pro Stunde"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "at most once an hour"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "como máximo una vez por hora"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "au plus une fois par heure"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "paling sering sejam sekali"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "al massimo una volta all'ora"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "最大 1 時間に 1 回"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "최대 한 시간에 한 번"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "nie częściej niż raz na godzinę"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "no máximo uma vez por hora"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "не частіше ніж раз на годину"
           }
         }
       }

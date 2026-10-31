@@ -163,13 +163,15 @@ final class SessionStore {
 
     // MARK: - Notifications
 
+    /// Once per wait: a permission request comes as two hook events (PermissionRequest, then Claude's own
+    /// «needs your permission» notification) and an idle reminder rewrites the file again — none of that is a new wait.
     private func announceWaiting(_ items: [Item]) {
         let waiting = items.filter { $0.state == .waiting }
-        let keys = Set(waiting.map { "\($0.id)|\($0.session.updatedAt.timeIntervalSince1970)" })
-        // Forget episodes that are over, so the next wait of the same session notifies again.
+        let keys = Set(waiting.map(\.id))
+        // Forget waits that are over, so the next wait of the same session notifies again.
         notified.formIntersection(keys)
         for item in waiting {
-            let key = "\(item.id)|\(item.session.updatedAt.timeIntervalSince1970)"
+            let key = item.id
             guard !notified.contains(key) else { continue }
             notified.insert(key)
             // Do not replay old waits after an app restart.
