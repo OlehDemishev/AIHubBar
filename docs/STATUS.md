@@ -19,41 +19,11 @@
 - Windows and Linux versions (docs/SPEC-windows.md, docs/SPEC-linux.md) — only when Oleh says; stage 0 (fact checks in VMs) first
 
 **Needs Oleh:**
-- if a notification still comes too often: Settings → Основные → «Какие уведомления и как часто» if something still comes too often
-- try: «Позже» on a project, the paused-run switch (Settings → Модули → Лимиты), the file list from a session row, «Отправить сейчас» for the weekly summary, the Claude Code window (panel footer), a saved prompt in ⌃⌥C
-- MCP on/off was not pressed on your `obsidian` server during checks: try it once (it moves to a stash file and back; settings.json gets a backup)
-- to try the other AI services: Settings → «Модули» → «Лимиты» → «Другие AI» — OpenRouter key, OpenAI / Anthropic admin keys, installed and signed-in `codex`, Gemini CLI and Cursor consent toggles (Copilot already shows from `gh`)
-- optionally rename the GitHub repository to match AI Hub Bar (then SUFeedURL in project.yml and REPO in release.sh follow)
-- try: the «Сессии и проекты» widget, «Не спать» in Control Center, ⌃⌥C search, Shortcuts actions, «На ночь» on a project
-- try the new panel: hover a session row, click a project, the profile menu with two profiles
-- hover over the menu bar item and the panel icons: tooltips should name what each one is
-- on a laptop: Settings → «Модули» → «Не спать» → «Разрешить…» (admin password once), then «И с закрытой крышкой»
-- on this Mac mini sleep is already off system-wide (`SleepDisabled 1`, set by Vorssaint's `/etc/sudoers.d/vorssaint-clamshell`): the Mac never sleeps while it stays so; `sudo pmset -a disablesleep 0` turns it back on if Vorssaint isn't needed
-- try «История буфера» and «Заметки»: Settings → «Модули» → «Установить» (copy, pin, search; type a note)
-- check the Trash for a test note «Заметка.md» from an early test run and delete it
-- back up `~/Library/Application Support/ClaudePult-release/` (signing certificate and update key; without them updates break)
-- to share ClaudePult: make the repository public, then `scripts/release.sh 0.2.0 --publish` (docs/RELEASE.md)
-- try «Быстрые команды» and «Быстрые переключатели» (Settings → «Модули» → «Установить»), or the «Утилиты Mac» template; the toggles change the Mac, so they were not pressed during checks
-- try «Не спать»: Settings → «Модули» → «Установить»; with Claude working the panel says «держу: работает Claude» (check with `pmset -g assertions`)
-- try «Ресурсы Mac»: Settings → «Модули» → «Установить», then the panel block; optionally «Процессор» / «Память» in Settings → «Строка меню»
-- try Settings → «Профили» → «Панель» (hide or move a block) and two profiles with different menu bars (Settings → «Строка меню» edits the current one)
-- decide SPEC-windows §10 and SPEC-linux §10: Tauri 2 as one codebase for Windows and Linux, Windows code signing, first-wave Linux desktops
-- after ~20:11 today: check that the limits keep updating by themselves (the sign-in renewal runs when the token expires)
-- read docs/GUIDE.md as a newcomer would
-- review the languages: Settings → Основные → «Язык интерфейса» → a language → «Перезапустить» (and back); Arabic should mirror right-to-left
-- try Settings → Профили → «+» → «Помощник…»: the new «Что будет в панели» step (untick «Проекты» and the project questions disappear)
-- try the calendar in a folder profile: «Календарь» → «+ контент-план», a `Дедлайн:` in a `проект.md`, then the panel «Ближайшее» and the «Календарь» window
-- try folder projects: duplicate a profile, set «Источник» → «папки» on a folder with a few subfolders, add stages (e.g. «идея, сценарий, монтаж, готово») and metrics
-- try Settings → «Строка меню» (presets, order, options, preview) and the ticking reset countdown
-- try Settings → Профили (duplicate the profile → switcher appears in the panel) and a double-click on a .claudepult file
-- try Settings → Профили → «+» → a template; template texts can still be reviewed in docs/TEMPLATES.md
-- for live checks of AI services: install Codex CLI (`brew install --cask codex`) and Gemini CLI (`brew install gemini-cli`) or Antigravity CLI, put API keys in Settings → «Сервисы AI» and press «Проверить» (optional: Ollama for a free local model)
-- optional later: Apple Developer Program (Developer ID, notarization) to drop «Open Anyway»; decide on the name before wide sharing (SPEC-modes §10.4)
-- try the «Внешний вид» settings tab (theme, width, density not checked by eye)
-- optional, in _daily-report (not changed by ClaudePult): report.py/bot.py could read `~/Library/Application Support/ClaudePult/usage.json` (`five_hour`, `seven_day`, `updated`) for a /limits bot command or a limits line in the report
-- go through the «Oleh» rows of docs/CHECKLIST.md (buttons inside the panel, Settings, notifications, Telegram messages) — automation cannot click inside ClaudePult
-- hooks are installed in ~/.claude/settings.json; backup of the original: ~/.claude/settings.json.claudepult-backup-20261029T192827
-- delete or archive the old repo `OlehDemishev/ClaudeBar`; turn on start at login if wanted
+- after the release: download 0.2.0 from Releases on another Mac (or user) and open it once with «Open Anyway»
+- go through the «Oleh» rows of docs/CHECKLIST.md; try the newer features: «Позже» on a project, the paused-run switch, the Claude Code window, saved prompts in ⌃⌥C, notification frequencies
+- to try other AI services: Settings → Модули → Лимиты → «Другие AI» (keys, installed `codex` / Gemini CLI, consents)
+- decide SPEC-windows §10 and SPEC-linux §10 (Tauri 2 for both, Windows code signing, first Linux desktops) before that work starts
+- optional: Apple Developer ID (notarization, no «Open Anyway»); delete or archive the old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
 
 ## 2026-10-31 — Live checks; week-forecast notification repeating 164 times (branch `fix/week-forecast-repeat`)
@@ -209,8 +179,8 @@ Left: seeing tooltips pop up under a real mouse (synthetic moves don't trigger t
 ## 2026-10-30 — Keep awake with the lid closed (branch `feat/lid-closed-awake`)
 
 Done: last item of the SPEC-profiles second wave. «Не спать» gets «И с закрытой крышкой»: a power assertion doesn't survive a closed lid, so ClaudePult runs `sudo -n pmset -a disablesleep 1` while any rule holds and `0` when none does, on quit, when the module is removed and on battery below 20 %. «Разрешить…» asks for the administrator password in macOS's dialog (`osascript … with administrator privileges`) and installs `/etc/sudoers.d/claudepult` (checked by `visudo` under a dotted name sudo ignores, then moved in), allowing only those two commands; «Убрать…» turns sleep back on and removes it. ClaudePult undoes only what it did (remembered across launches, so a crash is fixed on the next start); sleep turned off by another app is left alone and the settings say so. Macs without a lid get the section disabled. Panel shows «и с закрытой крышкой» while it holds. 13 languages.
-Checked: 201 tests green; rule text `visudo -cf` OK; live on this Mac mini: the section says there is no lid and that sleep is already off by another app; no `pmset`/`sudo` run by ClaudePult (log, `pmset -g`); profile restored.
-Left: the real path (password, closed lid, battery floor, removing) needs a laptop — not run here (Mac mini, and the password is Oleh's). Found: Vorssaint keeps `SleepDisabled 1` on this Mac.
+Checked: 201 tests green; rule text `visudo -cf` OK; live on a desktop Mac: the section says there is no lid and that sleep is already off by another app; no `pmset`/`sudo` run by ClaudePult (log, `pmset -g`); profile restored.
+Left: the real path (password, closed lid, battery floor, removing) needs a laptop — not run here (a desktop Mac, and the password is Oleh's). Found: another app keeps sleep disabled on this Mac.
 
 ## 2026-10-30 — Clipboard history and notes modules (branch `feat/clipboard-notes`)
 

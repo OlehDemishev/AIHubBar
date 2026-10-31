@@ -25,7 +25,7 @@ You can enable several profiles and switch between them at the top of the panel.
 
 ## Install
 
-1. Download `ClaudePult-<version>.dmg` from [Releases](https://github.com/OlehDemishev/ClaudePult/releases).
+1. Download `AIHubBar-<version>.dmg` from [Releases](https://github.com/OlehDemishev/AIHubBar/releases).
 2. Open it and drag AI Hub Bar to Applications.
 3. Open AI Hub Bar. macOS says it can't check the developer: AI Hub Bar isn't signed with an Apple Developer ID. Close the message.
 4. Go to System Settings → Privacy & Security, find «AI Hub Bar was blocked…» and press **Open Anyway**.

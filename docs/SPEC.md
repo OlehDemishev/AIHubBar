@@ -157,7 +157,7 @@
 - Логи приложения — `~/Library/Logs/ClaudePult/`.
 - Тесты (XCTest/Swift Testing) для чистой логики: декодирование JSON отчёта, разбор событий hooks и состояния сессий, экранирование команд для AppleScript, выбор папки/worktree, формирование промтов и Telegram-сообщений.
 - Документация: `README.md` (что это, установка, команды), `DECISIONS.md` (решения, где ТЗ молчит), `docs/STATUS.md` по формату из `~/Projects/CLAUDE.md`.
-- Репозиторий: `OlehDemishev/ClaudePult` на GitHub (пока приватный).
+- Репозиторий: `OlehDemishev/AIHubBar` на GitHub (публичный с версии 0.2.0; до 2026-10-31 назывался `OlehDemishev/ClaudePult`).
 
 ### 3.1 Готовность к публичной раздаче (соблюдать с этого момента на всех этапах)
 
