@@ -5,7 +5,8 @@
 **Updated:** 2026-10-31
 
 **Now:**
-- notch island spec merged (`docs/SPEC-notch.md`, #142); no code yet, waits for Oleh's answers in §10
+- branch `feat/landing-site`: landing page in `site/` and the Pages workflow, PR open
+- notch island spec merged (`docs/SPEC-notch.md`, #142) with Oleh's answers (#146); no code yet
 - nothing else in progress; merged: RELEASE.md names the real `.dmg` (#144), English interface names in the public docs (#143); overview PDF (en, ru) and a public README for GitHub (#139), no personal paths or names, Telegram set up in the app (#140)
 - released 0.2.0: repo renamed to `OlehDemishev/AIHubBar` and made public; repeat fixes merged (#136, #137)
 - merged today: notifications once per wait and a choice per kind (#134); queue after reset and run guard (#129), other-AI menu bar/widget/forecast (#130), session changes and weekly summary (#131), Claude Code window and saved prompts (#132); other AI services' limits (#126, #127)
@@ -14,7 +15,7 @@
 - release without an Apple Developer account ready (PR #85), nothing published; Windows and Linux specs wait for Oleh
 
 **Next:**
-- notch island (docs/SPEC-notch.md): stage 1 only after Oleh answers §10 (a notched MacBook to test on, name, defaults)
+- notch island (docs/SPEC-notch.md §9): stage 1 — module, notch window, side indicators, hover card; notch checks on Oleh's MacBook Air M2, the rest on the Mac mini
 - standing rule (SPEC §3.1): every new icon-only control gets a hover hint; finish each UI stage with the accessibility walk
 - fix whatever Oleh finds in the translations (automated checks pass; a native read for ja, ko, ar is still worth it)
 - stage 8: done without Developer ID (self-signed + Sparkle, PR #85; re-checked on main); notarization only if Oleh buys Developer ID; publishing is Oleh's step (Needs Oleh)
@@ -23,7 +24,7 @@
 
 **Needs Oleh:**
 - turn on GitHub Pages once: Settings → Pages → Source: GitHub Actions, then Actions → Pages → Run workflow; the site is https://olehdemishev.github.io/AIHubBar/
-- read docs/SPEC-notch.md and answer §10: is there a MacBook with a notch to test on, name «Остров у чёлки» or «Остров», «instead of notifications» off by default, pill on screens without a notch, hot keys for Allow / Deny
+- notch island: say when to start stage 1; optional — the «proposed» points left in docs/SPEC-notch.md §10
 - read docs/AI-Hub-Bar-Overview-ru.pdf and -en.pdf (facts and wording); after merge upload docs/images/social-preview.png in GitHub → Settings → General → Social preview (no API for it); the PDFs can be added to the 0.2.0 release: `gh release upload v0.2.0 docs/AI-Hub-Bar-Overview-*.pdf`
 - after the release: download 0.2.0 from Releases on another Mac (or user) and open it once with «Open Anyway»
 - go through the «Oleh» rows of docs/CHECKLIST.md; try the newer features: «Позже» on a project, the paused-run switch, the Claude Code window, saved prompts in ⌃⌥C, notification frequencies
@@ -55,6 +56,12 @@ Left: pick a palette, remove the switcher, then the Pages workflow.
 Done: `site/index.html` + `style.css`: one page with the hero and a live HTML mock-up of the panel (same colours as `docs/overview`), features, templates, more, install steps, privacy, download buttons to `releases/latest`; icon, favicon and social preview copied in. Light and dark, works from 375 px up. `.claude/launch.json` serves it locally on port 8765.
 Checked: in the browser pane at desktop width and 375 px, dark and light: no horizontal scroll, sections and links render. Text taken from README only.
 Left: not published. To go live: a Pages workflow (`actions/deploy-pages` from `site/`) and Settings → Pages → Source: GitHub Actions; free for a public repo.
+
+## 2026-10-31 — Notch island: Oleh's answers (branch `docs/notch-spec-answers`)
+
+Done: `docs/SPEC-notch.md` updated with Oleh's answers: the name stays «Остров у чёлки»; live notch checks on his MacBook Air M2; island instead of notifications, the pill on screens without a notch and hot keys are asked of the user when the module is installed — new §6.1 «Первая настройка» (one window, three questions, preselected answers; a hidden island never swallows a notification). Hot keys ⌃⌥Y / ⌃⌥N act only on a request visible in the island (§4). Stage 3 includes them.
+Checked: this Mac (Mac16,10, LG UltraWide) has no notch — `NSScreen.safeAreaInsets.top = 0` from a small Swift script, so the pill can be checked here, the notch only on the Air. Docs only, no build needed. CI not set up.
+Left: no code; the «proposed» points in §10 are still open.
 
 ## 2026-10-31 — Notch island spec (branch `docs/notch-island-spec`)
 
