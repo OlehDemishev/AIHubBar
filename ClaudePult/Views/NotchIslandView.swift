@@ -15,31 +15,33 @@ struct NotchIslandView: View {
         if let geometry = island.geometry {
             let window = geometry.windowFrame
             let open = island.isOpen
+            let banner = island.banner
+            let wide = open || banner != nil
             let earsShown = hasEar(settings.notch.leftEar) || hasEar(settings.notch.rightEar)
             let restWidth = earsShown ? geometry.restFrame.width : geometry.notch.width
-            // At rest the island is centred on the notch; open, it fills the window.
+            // At rest the island is centred on the notch; open or with a banner, it fills the window.
             let restOffset = geometry.notch.midX - window.midX
+            let height = open ? island.cardHeight : banner != nil ? island.bannerHeight : 0
 
             ZStack(alignment: .top) {
-                NotchShape(bottomRadius: open ? 18 : 9)
+                NotchShape(bottomRadius: wide ? 18 : 9)
                     .fill(.black)
                     .overlay {
-                        if open, contrast == .increased {
+                        if wide, contrast == .increased {
                             NotchShape(bottomRadius: 18).stroke(.white.opacity(0.5), lineWidth: 1)
                         }
                     }
-                    .frame(width: open ? window.width : restWidth,
-                           height: open ? geometry.notch.height + island.cardHeight : geometry.notch.height)
-                    .offset(x: open ? 0 : restOffset)
+                    .frame(width: wide ? window.width : restWidth, height: geometry.notch.height + height)
+                    .offset(x: wide ? 0 : restOffset)
 
                 if open {
                     NotchCard()
-                        .padding(.top, geometry.notch.height)
-                        .frame(width: window.width)
-                        .fixedSize(horizontal: false, vertical: true)
-                        .background(GeometryReader { proxy in
-                            Color.clear.preference(key: CardHeightKey.self, value: proxy.size.height - geometry.notch.height)
-                        })
+                        .modifier(MeasuredUnderNotch(notchHeight: geometry.notch.height, width: window.width))
+                        .transition(.opacity)
+                } else if let banner {
+                    NotchBanner(event: banner)
+                        .id(banner.id)
+                        .modifier(MeasuredUnderNotch(notchHeight: geometry.notch.height, width: window.width))
                         .transition(.opacity)
                 } else if earsShown {
                     HStack(spacing: 0) {
@@ -57,9 +59,15 @@ struct NotchIslandView: View {
             .frame(width: window.width, height: window.height, alignment: .top)
             .environment(\.colorScheme, .dark)
             .animation(reduceMotion ? .easeInOut(duration: 0.15) : .spring(response: 0.35, dampingFraction: 0.78), value: open)
-            .animation(.easeInOut(duration: 0.2), value: island.cardHeight)
-            .onPreferenceChange(CardHeightKey.self) { height in
-                if height > 0, abs(height - island.cardHeight) > 0.5 { island.cardHeight = height }
+            .animation(reduceMotion ? .easeInOut(duration: 0.15) : .spring(response: 0.35, dampingFraction: 0.8), value: banner?.id)
+            .animation(.easeInOut(duration: 0.2), value: height)
+            .onPreferenceChange(ContentHeightKey.self) { measured in
+                guard measured > 0 else { return }
+                if open {
+                    if abs(measured - island.cardHeight) > 0.5 { island.cardHeight = measured }
+                } else if banner != nil, abs(measured - island.bannerHeight) > 0.5 {
+                    island.bannerHeight = measured
+                }
             }
         }
     }
@@ -75,9 +83,25 @@ struct NotchIslandView: View {
     }
 }
 
-private struct CardHeightKey: PreferenceKey {
+private struct ContentHeightKey: PreferenceKey {
     static let defaultValue: CGFloat = 0
     static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) { value = max(value, nextValue()) }
+}
+
+/// Content under the notch, as wide as the window, reporting how tall it is so the black shape can follow.
+private struct MeasuredUnderNotch: ViewModifier {
+    let notchHeight: CGFloat
+    let width: CGFloat
+
+    func body(content: Content) -> some View {
+        content
+            .padding(.top, notchHeight)
+            .frame(width: width)
+            .fixedSize(horizontal: false, vertical: true)
+            .background(GeometryReader { proxy in
+                Color.clear.preference(key: ContentHeightKey.self, value: proxy.size.height - notchHeight)
+            })
+    }
 }
 
 /// The notch's own outline: flat top that flares into the menu bar, rounded bottom corners.
@@ -178,6 +202,7 @@ private struct NotchEarView: View {
 
 /// The open card (SPEC-notch §3.3): both limits with the forecast, then up to four sessions and what each is doing.
 private struct NotchCard: View {
+    @Environment(NotchIsland.self) private var island
     @Environment(UsageStore.self) private var usage
     @Environment(SessionStore.self) private var sessions
     @Environment(RunStore.self) private var runs
@@ -186,6 +211,12 @@ private struct NotchCard: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
+            if !island.requests.isEmpty {
+                VStack(alignment: .leading, spacing: 8) {
+                    ForEach(island.requests) { request in NotchRequestView(event: request) }
+                }
+                Divider().overlay(.white.opacity(0.15))
+            }
             if usage.snapshot?.session != nil || usage.snapshot?.week != nil {
                 HStack(spacing: 14) {
                     if let session = usage.snapshot?.session { ring(session) }
@@ -253,6 +284,116 @@ private struct NotchCard: View {
             }
         }
         .accessibilityElement(children: .combine)
+    }
+}
+
+/// A banner (SPEC-notch §3.2): a request with its buttons, or one line for anything else; a click leads where the
+/// notification would.
+private struct NotchBanner: View {
+    let event: NotchEvent
+    @Environment(NotchIsland.self) private var island
+
+    var body: some View {
+        Group {
+            if event.kind == .request {
+                NotchRequestView(event: event)
+            } else {
+                Button { island.openTarget(of: event) } label: {
+                    HStack(spacing: 9) {
+                        Image(systemName: event.kind.symbol)
+                            .foregroundStyle(event.kind == .waiting ? Session.State.waiting.color
+                                : event.kind == .done ? Session.State.done.color : .white.opacity(0.8))
+                            .frame(width: 16)
+                        VStack(alignment: .leading, spacing: 1) {
+                            Text(event.title)
+                                .fontWeight(.medium)
+                                .lineLimit(1)
+                            if !event.body.isEmpty {
+                                Text(event.body)
+                                    .font(.caption)
+                                    .foregroundStyle(.secondary)
+                                    .lineLimit(1)
+                                    .truncationMode(.middle)
+                            }
+                        }
+                        Spacer(minLength: 0)
+                    }
+                    .font(.callout)
+                    .contentShape(Rectangle())
+                }
+                .buttonStyle(.plain)
+                .help([event.title, event.body].filter { !$0.isEmpty }.joined(separator: "\n"))
+            }
+        }
+        .foregroundStyle(.white)
+        .padding(.horizontal, 18)
+        .padding(.top, 8)
+        .padding(.bottom, 12)
+        .accessibilityElement(children: .contain)
+        .accessibilityLabel(event.kind.title)
+    }
+}
+
+/// A permission Claude asked for (SPEC-notch §4): project and tool, the command, and the answers. The answers wake
+/// up only after the guard allows (`NotchIsland.armed`).
+private struct NotchRequestView: View {
+    let event: NotchEvent
+    @Environment(NotchIsland.self) private var island
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            HStack(spacing: 7) {
+                Image(systemName: NotchEventKind.request.symbol)
+                    .foregroundStyle(Session.State.waiting.color)
+                Text(event.title)
+                    .fontWeight(.medium)
+                    .lineLimit(1)
+            }
+            .font(.callout)
+            if !event.body.isEmpty {
+                Text(event.body)
+                    .font(.system(.caption, design: .monospaced))
+                    .foregroundStyle(.white.opacity(0.85))
+                    .lineLimit(2)
+                    .truncationMode(.middle)
+                    .help(event.body)
+            }
+            HStack(spacing: 8) {
+                Group {
+                    Button("Разрешить") { island.answer(event, allow: true) }
+                        .buttonStyle(NotchButtonStyle(fill: .green))
+                    Button("Отклонить") { island.answer(event, allow: false) }
+                        .buttonStyle(NotchButtonStyle(fill: .white.opacity(0.18)))
+                }
+                .disabled(!island.armed)
+                Spacer()
+                Button("Открыть") { island.openTarget(of: event) }
+                    .buttonStyle(.borderless)
+                    .help("Перейти к сессии")
+            }
+            .controlSize(.small)
+        }
+        .accessibilityElement(children: .contain)
+        .onAppear {
+            AccessibilityNotification.Announcement(String(localized: "Claude просит разрешение: \(event.title)")).post()
+        }
+    }
+}
+
+/// The island's window never becomes key, and AppKit draws key-window button styles grey there; these keep their colour.
+private struct NotchButtonStyle: ButtonStyle {
+    let fill: Color
+    @Environment(\.isEnabled) private var isEnabled
+
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .font(.callout.weight(.medium))
+            .padding(.horizontal, 12)
+            .padding(.vertical, 4)
+            .background(fill.opacity(configuration.isPressed ? 0.7 : 1), in: Capsule())
+            .foregroundStyle(.white)
+            .opacity(isEnabled ? 1 : 0.4)
+            .contentShape(Capsule())
     }
 }
 

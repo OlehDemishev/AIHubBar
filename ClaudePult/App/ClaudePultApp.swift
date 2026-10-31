@@ -88,6 +88,16 @@ struct ClaudePultApp: App {
         clipboard.isActive = { [modes] in modes.installedModules.contains(.clipboard) }
         notesStore.isActive = { [modes] in modes.installedModules.contains(.notes) }
         notchIsland.isActive = { [modes] in modes.installedModules.contains(.notch) }
+        notchIsland.openRequests = { [sessions] in
+            sessions.approvals.values.sorted { $0.created < $1.created }.map { request in
+                let project = sessions.items.first { $0.id == request.sessionID }?.session.displayProject ?? request.project ?? "Claude"
+                return NotchEvent.request(request, project: project, now: Date(timeIntervalSince1970: request.created))
+            }
+        }
+        notchIsland.sessionItems = { [sessions] in sessions.items }
+        Notifier.island = { [notchIsland] id, kind, title, body, target in
+            notchIsland.notification(id: id, kind: kind, title: title, body: body, target: target)
+        }
         sessions.approvalsEnabled = { [settings] in settings.approvalsFromClaudePult }
         _widgetStatus = State(initialValue: WidgetStatusWriter { [sessions, runs, store, keepAwake, modes] in
             WidgetStatus(
@@ -168,7 +178,8 @@ struct ClaudePultApp: App {
             }
             calendar.start()
             launcher.start()
-            NotificationRouter.shared.install { resolution in
+            // A click on a notification and on the island's banner do the same.
+            let handle: (NotificationAction.Resolution) -> Void = { resolution in
                 switch resolution {
                 case let .showSession(id):
                     let items = SessionStore.loadItems(from: SessionFiles.sessionsDirectory, now: .now)
@@ -188,6 +199,8 @@ struct ClaudePultApp: App {
                     break
                 }
             }
+            NotificationRouter.shared.install(handle)
+            notchIsland.perform = handle
         }
     }
 

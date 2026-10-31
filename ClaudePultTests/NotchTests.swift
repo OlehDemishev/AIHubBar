@@ -85,5 +85,102 @@ struct NotchModuleTests {
         #expect(old.rightEar == .background && old.leftEar == .sessionLimit && old.openOnHover)
         let unknown = try JSONDecoder().decode(NotchSettings.self, from: Data(#"{"leftEar": "weather"}"#.utf8))
         #expect(unknown.leftEar == .sessionLimit, "an ear from a newer version falls back to the default")
+        #expect(old.events == NotchEventKind.defaultOn && !old.replaceNotifications, "stage 1 settings get the default events")
+        let events = try JSONDecoder().decode(NotchSettings.self, from: Data(#"{"events": ["request", "weather", "limits"]}"#.utf8))
+        #expect(events.events == [.request, .limits], "a kind from a newer version is skipped, not the whole list")
+    }
+}
+
+/// SPEC-notch stage 2: the banner queue and the guard on «Разрешить».
+struct NotchEventTests {
+    private let t0 = Date(timeIntervalSince1970: 1_000_000)
+
+    private func event(_ id: String, _ kind: NotchEventKind, at seconds: TimeInterval = 0) -> NotchEvent {
+        NotchEvent(id: id, kind: kind, title: id, body: "", target: .none, arrived: t0.addingTimeInterval(seconds))
+    }
+
+    @Test func mostImportantFirstThenOldest() {
+        var queue = NotchEventQueue()
+        queue.push(event("pr", .pullRequests))
+        queue.push(event("limit", .limits, at: 1))
+        queue.push(event("done-a", .done, at: 2))
+        queue.push(event("done-b", .done, at: 3))
+        #expect(queue.current?.id == "done-a")
+        queue.push(event("req", .request, at: 4))
+        #expect(queue.current?.id == "req", "a request goes ahead of everything")
+    }
+
+    @Test func timeStartsWhenShown() {
+        var queue = NotchEventQueue()
+        queue.push(event("done", .done))
+        queue.push(event("limit", .limits))
+        queue.tick(now: t0.addingTimeInterval(10), paused: false)
+        #expect(queue.current?.id == "done", "waiting in the queue does not use up its time")
+        #expect(queue.deadline == t0.addingTimeInterval(14))
+        queue.tick(now: t0.addingTimeInterval(13.9), paused: false)
+        #expect(queue.current?.id == "done")
+        queue.tick(now: t0.addingTimeInterval(14), paused: false)
+        #expect(queue.current?.id == "limit")
+        queue.tick(now: t0.addingTimeInterval(17.9), paused: false)
+        #expect(queue.current?.id == "limit", "its own time started only when it was shown")
+        queue.tick(now: t0.addingTimeInterval(18), paused: false)
+        #expect(queue.isEmpty)
+    }
+
+    @Test func pointerKeepsTheBanner() {
+        var queue = NotchEventQueue()
+        queue.push(event("waiting", .waiting))
+        queue.tick(now: t0, paused: false)
+        queue.tick(now: t0.addingTimeInterval(20), paused: true)
+        #expect(queue.current?.id == "waiting")
+        #expect(queue.deadline == t0.addingTimeInterval(26), "full time again after the pointer leaves")
+    }
+
+    @Test func requestsStayUntilAnswered() {
+        var queue = NotchEventQueue()
+        let request = event("request-1", .request)
+        queue.syncRequests([request])
+        queue.tick(now: t0.addingTimeInterval(3600), paused: false)
+        #expect(queue.current == request)
+        #expect(queue.deadline == nil)
+        queue.syncRequests([request])
+        #expect(queue.items.count == 1, "the same request is not queued twice")
+        queue.syncRequests([])
+        #expect(queue.isEmpty, "answered or cancelled")
+    }
+
+    @Test func sameIDReplaces() {
+        var queue = NotchEventQueue()
+        queue.push(event("limit", .limits))
+        var newer = event("limit", .limits, at: 5)
+        newer.title = "90 %"
+        queue.push(newer)
+        #expect(queue.items.count == 1 && queue.current?.title == "90 %")
+    }
+
+    @Test func oldestLeastImportantDroppedFirst() {
+        var queue = NotchEventQueue()
+        queue.push(event("req", .request))
+        for i in 0..<NotchEventQueue.limit { queue.push(event("cmd-\(i)", .commands, at: Double(i + 1))) }
+        #expect(queue.items.count == NotchEventQueue.limit)
+        #expect(queue.items.contains { $0.id == "req" })
+        #expect(!queue.items.contains { $0.id == "cmd-0" })
+    }
+
+    @Test func kindsFromNotifications() {
+        #expect(NotchEventKind(.waiting) == .waiting)
+        #expect(NotchEventKind(.pullRequests) == .pullRequests)
+        #expect(!NotchEventKind.defaultOn.contains(.resources))
+        #expect(NotchEventKind.request.duration == nil && NotchEventKind.waiting.duration == 6 && NotchEventKind.done.duration == 4)
+    }
+
+    @Test func guardWaitsForTimeAndMovement() {
+        var guardrail = NotchClickGuard(shownAt: t0, pointer: CGPoint(x: 100, y: 100))
+        #expect(!guardrail.isArmed(now: t0.addingTimeInterval(5)), "the pointer has not moved")
+        guardrail.pointer(at: CGPoint(x: 101, y: 101))
+        #expect(!guardrail.isArmed(now: t0.addingTimeInterval(5)), "a twitch is not a move")
+        guardrail.pointer(at: CGPoint(x: 110, y: 100))
+        #expect(!guardrail.isArmed(now: t0.addingTimeInterval(0.5)), "too soon")
+        #expect(guardrail.isArmed(now: t0.addingTimeInterval(0.6)))
     }
 }

@@ -6,6 +6,7 @@
 
 **Now:**
 - notch island stage 1 merged (#149): module, island over the notch, ears, hover card; target release 0.3.0
+- notch island stage 2 merged (#153): banners for events, permission requests with Allow / Deny in the island
 - wide CLI search merged: `claude` (#150), then codex, gemini, agy, copilot, cursor-agent (#151) — login shell, nvm/fnm/volta/pnpm, Claude desktop app's copy
 - landing page live at https://olehdemishev.github.io/AIHubBar/ (#147), deployed by `.github/workflows/pages.yml` on pushes to `site/`
 - nothing else in progress; merged: RELEASE.md names the real `.dmg` (#144), English interface names in the public docs (#143); overview PDF (en, ru) and a public README for GitHub (#139), no personal paths or names, Telegram set up in the app (#140)
@@ -16,7 +17,7 @@
 - release without an Apple Developer account ready (PR #85), nothing published; Windows and Linux specs wait for Oleh
 
 **Next:**
-- notch island for 0.3.0 (docs/SPEC-notch.md §9): stage 2 — events and permission requests in the island; stage 3 — pill, full screen, hot keys, first-setup window; then a 0.3.0 build for Oleh's MacBook Air before publishing
+- notch island for 0.3.0 (docs/SPEC-notch.md §9): stage 3 — pill on screens without a notch, full screen, hot keys, first-setup window; then a 0.3.0 build for Oleh's MacBook Air before publishing
 - standing rule (SPEC §3.1): every new icon-only control gets a hover hint; finish each UI stage with the accessibility walk
 - fix whatever Oleh finds in the translations (automated checks pass; a native read for ja, ko, ar is still worth it)
 - stage 8: done without Developer ID (self-signed + Sparkle, PR #85; re-checked on main); notarization only if Oleh buys Developer ID; publishing is Oleh's step (Needs Oleh)
@@ -34,6 +35,12 @@
 - decide SPEC-windows §10 and SPEC-linux §10 (Tauri 2 for both, Windows code signing, first Linux desktops) before that work starts
 - optional: Apple Developer ID (notarization, no «Open Anyway»); delete or archive the old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-10-31 — Notch island, stage 2: events and permission requests (branch `feat/notch-events`)
+
+Done: banners in the island (SPEC-notch §3.2): every notification that gets through its frequency check also goes to the island (`Notifier.island`), one banner at a time by importance (request, waiting, done, background, limits, context, PR/CI, then calendar, resources, commands), 6 s for a wait and 4 s for the rest, counted from when it is shown and paused while the pointer is on it; a click leads where the notification would. New island-only banner «Готово: <project> · <time>» when a session goes from working to done. Permission requests follow the open request files: project · tool, the command in mono, «Разрешить» / «Отклонить» (alive only 0.6 s after appearing and after the pointer moved — `NotchClickGuard`), «Открыть»; they stay until answered anywhere and also show at the top of the open card. Settings → Модули → «Остров у чёлки»: which events, and «Запросы и ожидание — только в острове» (off by default; only while the island is on screen). The window takes clicks only over its black part. Clicks on a banner share the notification handler. 8 new strings in 12 languages.
+Checked: `xcodebuild test` — 289 tests (new: queue order, time starts when shown, pointer pause, requests stay until answered, same id replaces, dropping, kinds, the click guard, settings decode). Live on the Mac mini with `notchSimulate` and a test session + request file (marked TEST): the request banner appeared with the buttons off until the pointer moved; Oleh clicked «Разрешить» (decision file written, log «Permission allowed from the notch island») and «Открыть» (session shown); the request went when the session stopped waiting; «Готово: TEST-notch · 13 мин» appeared on done and stayed while the pointer was on it. Fixed from that: grey prominent buttons in a non-key window (own style), a grey «done» icon, answered requests flashing back. Test files, `notchSimulate` and the module removed afterwards; one test system notification «Claude просит разрешение — TEST-notch» was posted. CI not set up.
+Left: not seen on a real notch (the Air); «только в острове» not tried live; stage 3 — pill, full screen, hot keys, first-setup window.
 
 ## 2026-10-31 — Release 0.2.1 (branch `chore/status-release-021`)
 
