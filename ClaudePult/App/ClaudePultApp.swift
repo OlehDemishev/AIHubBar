@@ -79,6 +79,7 @@ struct ClaudePultApp: App {
         _hooks = State(initialValue: hooks)
         usage.isActive = { [modes] in modes.installedModules.contains(.limits) }
         hub.isActive = { [modes] in modes.installedModules.contains(.limits) }
+        Notifier.frequency = { [settings] in settings.frequency($0) }
         monitor.isActive = { [modes] in modes.installedModules.contains(.resources) }
         keepAwake.isActive = { [modes] in modes.installedModules.contains(.keepAwake) }
         clipboard.isActive = { [modes] in modes.installedModules.contains(.clipboard) }

@@ -168,7 +168,19 @@ enum Notifier {
              body: String(localized: "Кликните — откроется окно «Помощь»."), target: .window(id: "help"))
     }
 
+    /// The person's choice per kind (Settings); set by the app at launch.
+    static var frequency: (NotificationKind) -> NotificationFrequency = { $0.defaultFrequency }
+
     static func post(id: String, title: String, body: String, target: NotificationTarget = .none) {
+        if let kind = NotificationKind(id: id) {
+            let throttle = NotificationThrottle()
+            guard throttle.allows(id: id, frequency: frequency(kind)) else {
+                AppLog.info("Notification «\(title)» skipped (\(kind.rawValue): \(frequency(kind).rawValue))")
+                return
+            }
+            throttle.record(id: id)
+        }
+        AppLog.info("Notification: \(title)")
         Task {
             let center = UNUserNotificationCenter.current()
             var status = await center.notificationSettings().authorizationStatus
@@ -226,5 +238,85 @@ final class NotificationRouter: NSObject, UNUserNotificationCenterDelegate, @unc
             AppLog.info("Notification click: \(resolution)")
             handler?(resolution)
         }
+    }
+}
+
+/// Kinds of notifications, for Settings → Основные → «Какие уведомления и как часто».
+enum NotificationKind: String, CaseIterable, Identifiable, Sendable {
+    case waiting, context, background, limits, pullRequests, calendar, resources, commands
+
+    var id: String { rawValue }
+
+    var title: String {
+        switch self {
+        case .waiting: String(localized: "Claude ждёт ответа или разрешения")
+        case .context: String(localized: "Контекст сессии почти заполнен")
+        case .background: String(localized: "Фоновые задачи: итог, пауза, ночная сводка")
+        case .limits: String(localized: "Лимиты: Claude, другие AI, бюджет API")
+        case .pullRequests: String(localized: "PR и CI")
+        case .calendar: String(localized: "Календарь: дедлайны и публикации")
+        case .resources: String(localized: "Ресурсы Mac: процессор, память, диск, батарея")
+        case .commands: String(localized: "Команды: отчёты, проверки, быстрые команды")
+        }
+    }
+
+    var defaultFrequency: NotificationFrequency { self == .resources ? .hourly : .always }
+
+    /// Every notification id starts with its kind's prefix (see the `Notifier.post` calls).
+    init?(id: String) {
+        let prefixes: [(String, NotificationKind)] = [
+            ("waiting-", .waiting), ("context-", .context), ("run-", .background), ("night-summary", .background),
+            ("limit-", .limits), ("week-forecast", .limits), ("hub-", .limits), ("spendWarned-", .limits),
+            ("pr-", .pullRequests), ("calendar-", .calendar), ("resources-", .resources),
+            ("command-", .commands), ("quick-", .commands),
+        ]
+        guard let kind = prefixes.first(where: { id.hasPrefix($0.0) })?.1 else { return nil }
+        self = kind
+    }
+}
+
+/// How often the same notification (same id: the same session, threshold, PR…) may come again.
+enum NotificationFrequency: String, CaseIterable, Identifiable, Sendable {
+    case always, quarterHour, hourly, daily, off
+
+    var id: String { rawValue }
+
+    var title: String {
+        switch self {
+        case .always: String(localized: "каждый раз")
+        case .quarterHour: String(localized: "не чаще раза в 15 мин")
+        case .hourly: String(localized: "не чаще раза в час")
+        case .daily: String(localized: "не чаще раза в день")
+        case .off: String(localized: "не присылать")
+        }
+    }
+
+    var interval: TimeInterval? {
+        switch self {
+        case .always: 0
+        case .quarterHour: 15 * 60
+        case .hourly: 3600
+        case .daily: 86_400
+        case .off: nil
+        }
+    }
+}
+
+/// When each notification id was last shown; kept two days so a restart doesn't repeat what was just said.
+struct NotificationThrottle {
+    static let key = "notificationLastShown"
+    var defaults: UserDefaults = .standard
+
+    func allows(id: String, frequency: NotificationFrequency, now: Date = .now) -> Bool {
+        guard let interval = frequency.interval else { return false }
+        guard interval > 0, let last = (defaults.dictionary(forKey: Self.key) as? [String: Double])?[id] else { return true }
+        return now.timeIntervalSince1970 - last >= interval
+    }
+
+    func record(id: String, now: Date = .now) {
+        var shown = (defaults.dictionary(forKey: Self.key) as? [String: Double] ?? [:])
+            .filter { now.timeIntervalSince1970 - $0.value < 2 * 86_400 }
+        shown[id] = now.timeIntervalSince1970
+        defaults.set(shown, forKey: Self.key)
     }
 }

@@ -198,6 +198,15 @@ final class AppSettings {
         didSet { defaults.set(hiddenBlocks.map(\.rawValue).sorted(), forKey: Keys.hiddenBlocks) }
     }
 
+    /// How often each kind of notification may repeat (kind → `NotificationFrequency`); missing kinds use their default.
+    var notificationFrequencies: [String: String] {
+        didSet { defaults.set(notificationFrequencies, forKey: Keys.notificationFrequencies) }
+    }
+
+    func frequency(_ kind: NotificationKind) -> NotificationFrequency {
+        notificationFrequencies[kind.rawValue].flatMap(NotificationFrequency.init(rawValue:)) ?? kind.defaultFrequency
+    }
+
     /// «Свои промпты» for the search (⌃⌥C).
     var savedPrompts: [SavedPrompt] {
         didSet { if let data = try? JSONEncoder().encode(savedPrompts) { defaults.set(data, forKey: Keys.savedPrompts) } }
@@ -319,6 +328,7 @@ final class AppSettings {
         hubCursor = defaults.bool(forKey: Keys.hubCursor)
         runGuardPercent = defaults.object(forKey: Keys.runGuardPercent) as? Int ?? 95
         weeklySummary = defaults.object(forKey: Keys.weeklySummary) as? Bool ?? true
+        notificationFrequencies = defaults.dictionary(forKey: Keys.notificationFrequencies) as? [String: String] ?? [:]
         savedPrompts = defaults.data(forKey: Keys.savedPrompts).flatMap { try? JSONDecoder().decode([SavedPrompt].self, from: $0) } ?? SavedPrompt.examples
         weeklySummaryWeekday = defaults.object(forKey: Keys.weeklySummaryWeekday) as? Int ?? 1
         weeklySummaryHour = defaults.object(forKey: Keys.weeklySummaryHour) as? Int ?? 19
@@ -372,6 +382,7 @@ final class AppSettings {
         static let runGuardPercent = "runGuardPercent"
         static let weeklySummary = "weeklySummary"
         static let savedPrompts = "savedPrompts"
+        static let notificationFrequencies = "notificationFrequencies"
         static let weeklySummaryWeekday = "weeklySummaryWeekday"
         static let weeklySummaryHour = "weeklySummaryHour"
     }
