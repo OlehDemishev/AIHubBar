@@ -22,6 +22,7 @@
 - Windows and Linux versions (docs/SPEC-windows.md, docs/SPEC-linux.md) — only when Oleh says; stage 0 (fact checks in VMs) first
 
 **Needs Oleh:**
+- look at the landing page draft (`site/`, preview: `python3 -m http.server 8765 --directory site`) and say whether to publish it on GitHub Pages
 - read docs/SPEC-notch.md and answer §10: is there a MacBook with a notch to test on, name «Остров у чёлки» or «Остров», «instead of notifications» off by default, pill on screens without a notch, hot keys for Allow / Deny
 - read docs/AI-Hub-Bar-Overview-ru.pdf and -en.pdf (facts and wording); after merge upload docs/images/social-preview.png in GitHub → Settings → General → Social preview (no API for it); the PDFs can be added to the 0.2.0 release: `gh release upload v0.2.0 docs/AI-Hub-Bar-Overview-*.pdf`
 - after the release: download 0.2.0 from Releases on another Mac (or user) and open it once with «Open Anyway»
@@ -30,6 +31,12 @@
 - decide SPEC-windows §10 and SPEC-linux §10 (Tauri 2 for both, Windows code signing, first Linux desktops) before that work starts
 - optional: Apple Developer ID (notarization, no «Open Anyway»); delete or archive the old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-10-31 — Landing page draft for GitHub Pages (branch `feat/landing-site`)
+
+Done: `site/index.html` + `style.css`: one page with the hero and a live HTML mock-up of the panel (same colours as `docs/overview`), features, templates, more, install steps, privacy, download buttons to `releases/latest`; icon, favicon and social preview copied in. Light and dark, works from 375 px up. `.claude/launch.json` serves it locally on port 8765.
+Checked: in the browser pane at desktop width and 375 px, dark and light: no horizontal scroll, sections and links render. Text taken from README only.
+Left: not published. To go live: a Pages workflow (`actions/deploy-pages` from `site/`) and Settings → Pages → Source: GitHub Actions; free for a public repo.
 
 ## 2026-10-31 — Notch island spec (branch `docs/notch-island-spec`)
 
