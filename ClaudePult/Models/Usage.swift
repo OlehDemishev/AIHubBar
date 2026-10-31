@@ -7,6 +7,14 @@ struct UsageWindow: Codable, Equatable, Sendable {
     var utilization: Double
     var resetsAt: Date?
 
+    /// The reset time in whole minutes, rounded to the nearest 10: the API sends the same reset with a different
+    /// fraction of a second on every fetch (09:00:00.048, 08:59:59.981…), so exact dates never compare equal.
+    static func resetMinutes(_ date: Date?) -> Int? {
+        date.map { Int(($0.timeIntervalSince1970 / 600).rounded()) * 10 }
+    }
+
+    static func sameReset(_ a: Date?, _ b: Date?) -> Bool { resetMinutes(a) == resetMinutes(b) }
+
     static func title(forKey key: String) -> String {
         switch key {
         case "five_hour": String(localized: "Сессия (5 ч)")
@@ -143,7 +151,7 @@ enum UsageAlerts {
     ) -> [Alert] {
         var alerts: [Alert] = []
         for window in current.windows where window.key == "five_hour" || window.key == "seven_day" {
-            let period = window.resetsAt.map { String(Int($0.timeIntervalSince1970 / 60)) } ?? "none"
+            let period = UsageWindow.resetMinutes(window.resetsAt).map(String.init) ?? "none"
             let crossed = thresholds.filter { Double($0) <= window.utilization }.sorted()
             let fresh = crossed.filter { !notified.contains("\(window.key)|\(period)|\($0)") }
             if let highest = fresh.last {
@@ -152,7 +160,7 @@ enum UsageAlerts {
             for threshold in crossed { notified.insert("\(window.key)|\(period)|\(threshold)") }
 
             if let before = previous?.windows.first(where: { $0.key == window.key }), before.utilization > 80,
-               window.utilization < before.utilization - 30 || (before.resetsAt != nil && window.resetsAt != before.resetsAt && window.utilization < 50) {
+               window.utilization < before.utilization - 30 || (before.resetsAt != nil && !UsageWindow.sameReset(window.resetsAt, before.resetsAt) && window.utilization < 50) {
                 alerts.append(.restored(windowKey: window.key, title: window.title))
             }
         }

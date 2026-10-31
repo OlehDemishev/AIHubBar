@@ -61,7 +61,7 @@ struct LimitsView: View {
                     ForEach(snapshot.shownOtherWindows, id: \.key) { window in
                         // A model week usually resets with the week: no need to say it twice.
                         WindowRow(window: window, detail: nil, now: context.date, compact: true,
-                                  showsReset: window.resetsAt != snapshot.week?.resetsAt)
+                                  showsReset: !UsageWindow.sameReset(window.resetsAt, snapshot.week?.resetsAt))
                     }
                 }
             }

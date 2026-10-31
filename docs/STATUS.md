@@ -1,12 +1,13 @@
 # Status
 
 <!-- summary:start -->
-**Stage:** renamed to AI Hub Bar (formerly ClaudePult); SPEC-modes and SPEC-profiles done, release tooling ready, not published yet
+**Stage:** AI Hub Bar 0.2.0 released publicly (github.com/OlehDemishev/AIHubBar); next: Windows and Linux versions
 **Updated:** 2026-10-31
 
 **Now:**
-- public-facing docs before the release (branch `docs/overview-pdf-and-repo`): overview PDF in English and Russian, new README for GitHub (old one is docs/REFERENCE.md), repo description and topics set, issue templates
-- nothing in progress; merged today: notifications once per wait and a choice per kind (#134); queue after reset and run guard (#129), other-AI menu bar/widget/forecast (#130), session changes and weekly summary (#131), Claude Code window and saved prompts (#132); other AI services' limits (#126, #127)
+- public-facing docs (branch `docs/overview-pdf-and-repo`, PR #139): overview PDF in English and Russian, new README for GitHub (old one is docs/REFERENCE.md), repo description and topics set, issue templates
+- released 0.2.0: repo renamed to `OlehDemishev/AIHubBar` and made public; repeat fixes merged (#136, #137)
+- merged today: notifications once per wait and a choice per kind (#134); queue after reset and run guard (#129), other-AI menu bar/widget/forecast (#130), session changes and weekly summary (#131), Claude Code window and saved prompts (#132); other AI services' limits (#126, #127)
 - renamed to AI Hub Bar (PR #115); session rows open on a click anywhere (PR #117); widgets translated into 13 languages (PR #119); sessions in Claude's own terminal open Claude (PR #121); module options per profile (PR #124)
 - merged today: feature batch — approve from notifications (#100), current action (#102), week forecast (#104), Telegram answers (#106), PR/CI alerts (#108), search, hot key, Shortcuts (#110), widget and Control Center toggle (#112), night queue (#113), context fullness (#114); panel as cards (#98); hover hints (#91); menu bar drag, translation review, release re-check (#93–#95)
 - release without an Apple Developer account ready (PR #85), nothing published; Windows and Linux specs wait for Oleh
@@ -17,51 +18,33 @@
 - stage 8: done without Developer ID (self-signed + Sparkle, PR #85; re-checked on main); notarization only if Oleh buys Developer ID; publishing is Oleh's step (Needs Oleh)
 - Fix whatever Oleh finds in docs/CHECKLIST.md
 - Windows and Linux versions (docs/SPEC-windows.md, docs/SPEC-linux.md) — only when Oleh says; stage 0 (fact checks in VMs) first
-- other AI services, if wanted later: menu bar items and a widget line for them, «lasts until reset» forecast, their alerts to Telegram
 
 **Needs Oleh:**
-- read docs/AI-Hub-Bar-Overview-ru.pdf and -en.pdf (facts and wording); after merge upload docs/images/social-preview.png in GitHub → Settings → General → Social preview (no API for it)
-- if a notification still comes too often: Settings → Основные → «Какие уведомления и как часто» if something still comes too often
-- try: «Позже» on a project, the paused-run switch (Settings → Модули → Лимиты), the file list from a session row, «Отправить сейчас» for the weekly summary, the Claude Code window (panel footer), a saved prompt in ⌃⌥C
-- MCP on/off was not pressed on your `obsidian` server during checks: try it once (it moves to a stash file and back; settings.json gets a backup)
-- to try the other AI services: Settings → «Модули» → «Лимиты» → «Другие AI» — OpenRouter key, OpenAI / Anthropic admin keys, installed and signed-in `codex`, Gemini CLI and Cursor consent toggles (Copilot already shows from `gh`)
-- try: the «Сессии и проекты» widget, «Не спать» in Control Center, ⌃⌥C search, Shortcuts actions, «На ночь» on a project
-- try the new panel: hover a session row, click a project, the profile menu with two profiles
-- hover over the menu bar item and the panel icons: tooltips should name what each one is
-- on a laptop: Settings → «Модули» → «Не спать» → «Разрешить…» (admin password once), then «И с закрытой крышкой»
-- on this Mac mini sleep is already off system-wide (`SleepDisabled 1`, set by Vorssaint's `/etc/sudoers.d/vorssaint-clamshell`): the Mac never sleeps while it stays so; `sudo pmset -a disablesleep 0` turns it back on if Vorssaint isn't needed
-- try «История буфера» and «Заметки»: Settings → «Модули» → «Установить» (copy, pin, search; type a note)
-- check the Trash for a test note «Заметка.md» from an early test run and delete it
-- back up `~/Library/Application Support/ClaudePult-release/` (signing certificate and update key; without them updates break)
-- to share ClaudePult: make the repository public, then `scripts/release.sh 0.2.0 --publish` (docs/RELEASE.md)
-- try «Быстрые команды» and «Быстрые переключатели» (Settings → «Модули» → «Установить»), or the «Утилиты Mac» template; the toggles change the Mac, so they were not pressed during checks
-- try «Не спать»: Settings → «Модули» → «Установить»; with Claude working the panel says «держу: работает Claude» (check with `pmset -g assertions`)
-- try «Ресурсы Mac»: Settings → «Модули» → «Установить», then the panel block; optionally «Процессор» / «Память» in Settings → «Строка меню»
-- try Settings → «Профили» → «Панель» (hide or move a block) and two profiles with different menu bars (Settings → «Строка меню» edits the current one)
-- decide SPEC-windows §10 and SPEC-linux §10: Tauri 2 as one codebase for Windows and Linux, Windows code signing, first-wave Linux desktops
-- after ~20:11 today: check that the limits keep updating by themselves (the sign-in renewal runs when the token expires)
-- read docs/GUIDE.md as a newcomer would
-- review the languages: Settings → Основные → «Язык интерфейса» → a language → «Перезапустить» (and back); Arabic should mirror right-to-left
-- try Settings → Профили → «+» → «Помощник…»: the new «Что будет в панели» step (untick «Проекты» and the project questions disappear)
-- try the calendar in a folder profile: «Календарь» → «+ контент-план», a `Дедлайн:` in a `проект.md`, then the panel «Ближайшее» and the «Календарь» window
-- try folder projects: duplicate a profile, set «Источник» → «папки» on a folder with a few subfolders, add stages (e.g. «идея, сценарий, монтаж, готово») and metrics
-- try Settings → «Строка меню» (presets, order, options, preview) and the ticking reset countdown
-- try Settings → Профили (duplicate the profile → switcher appears in the panel) and a double-click on a .claudepult file
-- try Settings → Профили → «+» → a template; template texts can still be reviewed in docs/TEMPLATES.md
-- for live checks of AI services: install Codex CLI (`brew install --cask codex`) and Gemini CLI (`brew install gemini-cli`) or Antigravity CLI, put API keys in Settings → «Сервисы AI» and press «Проверить» (optional: Ollama for a free local model)
-- optional later: Apple Developer Program (Developer ID, notarization) to drop «Open Anyway»; decide on the name before wide sharing (SPEC-modes §10.4)
-- try the «Внешний вид» settings tab (theme, width, density not checked by eye)
-- optional, in _daily-report (not changed by ClaudePult): report.py/bot.py could read `~/Library/Application Support/ClaudePult/usage.json` (`five_hour`, `seven_day`, `updated`) for a /limits bot command or a limits line in the report
-- go through the «Oleh» rows of docs/CHECKLIST.md (buttons inside the panel, Settings, notifications, Telegram messages) — automation cannot click inside ClaudePult
-- hooks are installed in ~/.claude/settings.json; backup of the original: ~/.claude/settings.json.claudepult-backup-20261029T192827
-- delete or archive the old repo `OlehDemishev/ClaudeBar`; turn on start at login if wanted
+- read docs/AI-Hub-Bar-Overview-ru.pdf and -en.pdf (facts and wording); after merge upload docs/images/social-preview.png in GitHub → Settings → General → Social preview (no API for it); the PDFs can be added to the 0.2.0 release: `gh release upload v0.2.0 docs/AI-Hub-Bar-Overview-*.pdf`
+- after the release: download 0.2.0 from Releases on another Mac (or user) and open it once with «Open Anyway»
+- go through the «Oleh» rows of docs/CHECKLIST.md; try the newer features: «Позже» on a project, the paused-run switch, the Claude Code window, saved prompts in ⌃⌥C, notification frequencies
+- to try other AI services: Settings → Модули → Лимиты → «Другие AI» (keys, installed `codex` / Gemini CLI, consents)
+- decide SPEC-windows §10 and SPEC-linux §10 (Tauri 2 for both, Windows code signing, first Linux desktops) before that work starts
+- optional: Apple Developer ID (notarization, no «Open Anyway»); delete or archive the old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
 
 ## 2026-10-31 — Overview PDF and GitHub presentation (branch `docs/overview-pdf-and-repo`)
 
-Done: 8-page overview for everyone, `docs/AI-Hub-Bar-Overview-en.pdf` and `-ru.pdf`, made from `docs/overview/overview.<lang>.html` + `style.css` by `scripts/make-overview-pdf.sh` (headless Chrome); the interface is drawn as HTML mockups with made-up projects, not screenshots of Oleh's Mac. The same script renders `docs/images/hero.png` (README header) and `social-preview.png` (1280×640). New user-facing README (features, install, privacy, build, docs); the old developer README moved to `docs/REFERENCE.md` with links fixed. GUIDE: `.dmg` name (`AIHubBar-<version>.dmg`) and the uninstall step fixed. `release.sh --publish` attaches the PDFs and has English release notes. `.github/ISSUE_TEMPLATE` (bug, feature). On GitHub: description, 17 topics, Projects tab off. The repository is already `OlehDemishev/AIHubBar`: `SUFeedURL` (project.yml), `REPO` (release.sh), README, GUIDE, RELEASE, the PDFs and the issue config now use it (old URLs redirect).
+Done: 8-page overview for everyone, `docs/AI-Hub-Bar-Overview-en.pdf` and `-ru.pdf`, made from `docs/overview/overview.<lang>.html` + `style.css` by `scripts/make-overview-pdf.sh` (headless Chrome); the interface is drawn as HTML mockups with made-up projects, not screenshots of Oleh's Mac. The same script renders `docs/images/hero.png` (README header) and `social-preview.png` (1280×640). New user-facing README (features, install, privacy, build, docs); the old developer README moved to `docs/REFERENCE.md` with links fixed. GUIDE: `.dmg` name (`AIHubBar-<version>.dmg`) and the uninstall step fixed. `release.sh --publish` attaches the PDFs and has English release notes. `.github/ISSUE_TEMPLATE` (bug, feature). On GitHub: description, 17 topics, Projects tab off. All links use `OlehDemishev/AIHubBar` (merged with the release work on main).
 Checked: both PDFs rendered and every page looked at as an image (nothing cut off, 8 pages each); facts checked against README/GUIDE and code (universal binary, Notes as .md, Finish prompt); `bash -n` on both scripts; xcodegen + build with the new SUFeedURL. CI not set up.
-Left: social preview has to be uploaded by hand; the release badge shows nothing while the repository is private; PDFs need a new render when features change (`scripts/make-overview-pdf.sh`).
+Left: social preview has to be uploaded by hand; the PDFs are not on the 0.2.0 release yet (the next `release.sh --publish` attaches them); PDFs need a new render when features change (`scripts/make-overview-pdf.sh`).
+
+## 2026-10-31 — Release 0.2.0, public repo `OlehDemishev/AIHubBar` (branch `chore/go-public`)
+
+Done: STATUS header trimmed of Mac-specific personal notes; SUFeedURL, release script and docs point at `OlehDemishev/AIHubBar`; repo renamed (GitHub redirects the old URL) and made public on Oleh's go; `scripts/release.sh 0.2.0 --publish` from a clean main published v0.2.0 with `AIHubBar-0.2.0.dmg` and `appcast.xml`.
+Checked: secret scan of all 285 commits (keys, tokens, private keys, sensitive file names) found nothing; anonymous download of the appcast (200) and the DMG (200, 9.8 MB); the app inside is version 0.2.0, signed «ClaudePult Release», feed URL on AIHubBar.
+Left: git history still has the older notes and both author emails (rewriting history was not done); first launch on another Mac needs «Open Anyway» (no Developer ID).
+
+## 2026-10-31 — Live checks; week-forecast notification repeating 164 times (branch `fix/week-forecast-repeat`)
+
+Done: «Недельный лимит кончится раньше сброса» came every ~2 minutes (164 today): the API sends the same week reset with a different fraction of a second each fetch, and the «once per week» check compared exact times. Reset times are now compared rounded to 10 minutes everywhere (week forecast, threshold alerts, «limit restored», the panel). «Контекст почти заполнен» no longer repeats after a restart. In the ⌃⌥C search the project step of a saved prompt lost keyboard focus (typing and Esc went nowhere): fixed.
+Checked: `xcodebuild test` — 266 tests (new: jittery reset is the same window). Live: MCP switch off/on on `obsidian` — removed from settings.json, backup written, 0600 stash, back on: content identical to the original; «Позже → После сброса лимита» queued MeisterHub for 19:42 UTC, then cancelled (nothing ran); weekly summary «Отправить сейчас» sent (`Weekly summary sent: true`); saved prompt → project picker → typing filters, Esc steps back; session changes popover lists files. After the fix the week forecast updated with no notification.
+Left: the run guard's SIGSTOP pause was not triggered live (needs 95 %).
 
 ## 2026-10-31 — Notifications: once per wait, and a choice per kind (branch `fix/notification-settings`)
 
@@ -210,8 +193,8 @@ Left: seeing tooltips pop up under a real mouse (synthetic moves don't trigger t
 ## 2026-10-30 — Keep awake with the lid closed (branch `feat/lid-closed-awake`)
 
 Done: last item of the SPEC-profiles second wave. «Не спать» gets «И с закрытой крышкой»: a power assertion doesn't survive a closed lid, so ClaudePult runs `sudo -n pmset -a disablesleep 1` while any rule holds and `0` when none does, on quit, when the module is removed and on battery below 20 %. «Разрешить…» asks for the administrator password in macOS's dialog (`osascript … with administrator privileges`) and installs `/etc/sudoers.d/claudepult` (checked by `visudo` under a dotted name sudo ignores, then moved in), allowing only those two commands; «Убрать…» turns sleep back on and removes it. ClaudePult undoes only what it did (remembered across launches, so a crash is fixed on the next start); sleep turned off by another app is left alone and the settings say so. Macs without a lid get the section disabled. Panel shows «и с закрытой крышкой» while it holds. 13 languages.
-Checked: 201 tests green; rule text `visudo -cf` OK; live on this Mac mini: the section says there is no lid and that sleep is already off by another app; no `pmset`/`sudo` run by ClaudePult (log, `pmset -g`); profile restored.
-Left: the real path (password, closed lid, battery floor, removing) needs a laptop — not run here (Mac mini, and the password is Oleh's). Found: Vorssaint keeps `SleepDisabled 1` on this Mac.
+Checked: 201 tests green; rule text `visudo -cf` OK; live on a desktop Mac: the section says there is no lid and that sleep is already off by another app; no `pmset`/`sudo` run by ClaudePult (log, `pmset -g`); profile restored.
+Left: the real path (password, closed lid, battery floor, removing) needs a laptop — not run here (a desktop Mac, and the password is Oleh's). Found: another app keeps sleep disabled on this Mac.
 
 ## 2026-10-30 — Clipboard history and notes modules (branch `feat/clipboard-notes`)
 

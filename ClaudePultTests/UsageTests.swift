@@ -132,6 +132,18 @@ struct UsageAlertsTests {
         #expect(higher.count == 1)
     }
 
+    /// The API sends the same reset with a different fraction of a second each time: still the same window.
+    @Test func jitteryResetIsTheSameWindow() {
+        var notified: Set<String> = []
+        let exact = Date(timeIntervalSince1970: 1_793_610_000)
+        _ = UsageAlerts.evaluate(previous: nil, current: snapshot(session: 85, resets: exact.addingTimeInterval(0.048)), thresholds: [80], notified: &notified)
+        let jitter = UsageAlerts.evaluate(previous: snapshot(session: 85, resets: exact.addingTimeInterval(0.048)),
+                                          current: snapshot(session: 86, resets: exact.addingTimeInterval(-0.02)), thresholds: [80], notified: &notified)
+        #expect(jitter.isEmpty)
+        #expect(UsageWindow.sameReset(exact.addingTimeInterval(0.048), exact.addingTimeInterval(-0.02)))
+        #expect(!UsageWindow.sameReset(exact, exact.addingTimeInterval(5 * 3600)))
+    }
+
     @Test func restoredAfterReset() {
         var notified: Set<String> = []
         _ = UsageAlerts.evaluate(previous: nil, current: snapshot(session: 92, resets: reset1), thresholds: [80], notified: &notified)
