@@ -171,6 +171,10 @@ enum Notifier {
     /// The person's choice per kind (Settings); set by the app at launch.
     static var frequency: (NotificationKind) -> NotificationFrequency = { $0.defaultFrequency }
 
+    /// «Остров у чёлки» sees every notification that gets through (SPEC-notch §3.2); true = the island showed it
+    /// instead, so no system notification (only when the person chose that, SPEC-notch §4).
+    static var island: ((_ id: String, _ kind: NotificationKind, _ title: String, _ body: String, _ target: NotificationTarget) -> Bool)?
+
     static func post(id: String, title: String, body: String, target: NotificationTarget = .none) {
         if let kind = NotificationKind(id: id) {
             let throttle = NotificationThrottle()
@@ -179,6 +183,10 @@ enum Notifier {
                 return
             }
             throttle.record(id: id)
+            if island?(id, kind, title, body, target) == true {
+                AppLog.info("Notification «\(title)» shown in the notch island only")
+                return
+            }
         }
         AppLog.info("Notification: \(title)")
         Task {

@@ -6651,6 +6651,82 @@
         }
       }
     },
+    "Claude ждёт ответа": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude بانتظار رد"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude wartet auf eine Antwort"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude is waiting for an answer"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude espera una respuesta"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude attend une réponse"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude menunggu jawaban"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude attende una risposta"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude が応答を待っています"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude가 응답을 기다리는 중"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude czeka na odpowiedź"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O Claude está aguardando uma resposta"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude чекає відповіді"
+          }
+        }
+      }
+    },
     "Claude ждёт ответа или разрешения": {
       "localizations": {
         "ar": {
@@ -7027,6 +7103,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Claude просить дозвіл — %@"
+          }
+        }
+      }
+    },
+    "Claude просит разрешение: %@": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يطلب Claude إذنًا: %@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude bittet um Erlaubnis: %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude asks for permission: %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude pide permiso: %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude demande une autorisation : %@"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude meminta izin: %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude chiede un permesso: %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude が許可を求めています：%@"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude가 권한을 요청합니다: %@"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude prosi o zgodę: %@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O Claude pede permissão: %@"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude просить дозвіл: %@"
           }
         }
       }
@@ -24185,6 +24337,158 @@
           "stringUnit": {
             "state": "translated",
             "value": "Запитів на день за тарифом"
+          }
+        }
+      }
+    },
+    "Запросы и ожидание — только в острове": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الطلبات والانتظار — في الجزيرة فقط"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anfragen und Warten – nur in der Insel"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Requests and waits — island only"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Solicitudes y esperas: solo en la isla"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Demandes et attentes : seulement dans l’île"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Permintaan dan tunggu — hanya di pulau"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Richieste e attese: solo nell’isola"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "許可と応答待ちはアイランドだけに表示"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "요청과 대기는 아일랜드에만 표시"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prośby i oczekiwanie — tylko na wyspie"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pedidos e esperas: só na ilha"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Запити й очікування — лише в острові"
+          }
+        }
+      }
+    },
+    "Запросы разрешений": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "طلبات الإذن"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Berechtigungsanfragen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Permission requests"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Solicitudes de permiso"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Demandes d’autorisation"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Permintaan izin"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Richieste di permesso"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "許可の要求"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "권한 요청"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prośby o zgodę"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pedidos de permissão"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Запити дозволів"
           }
         }
       }
@@ -48776,6 +49080,82 @@
         }
       }
     },
+    "Перейти к сессии": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الانتقال إلى الجلسة"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zur Sitzung"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Go to the session"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ir a la sesión"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aller à la session"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buka sesi"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vai alla sessione"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "セッションへ移動"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "세션으로 이동"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Przejdź do sesji"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ir para a sessão"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Перейти до сесії"
+          }
+        }
+      }
+    },
     "Переключатели": {
       "localizations": {
         "ar": {
@@ -62545,6 +62925,82 @@
         }
       }
     },
+    "Сессия закончила": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "انتهت الجلسة"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sitzung fertig"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Session finished"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sesión terminada"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Session terminée"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sesi selesai"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sessione terminata"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "セッションが完了"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "세션 완료"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sesja zakończona"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sessão concluída"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Сесія завершила"
+          }
+        }
+      }
+    },
     "Сессия и неделя подписки Claude, прогноз, расход по проектам и по API.": {
       "localizations": {
         "ar": {
@@ -64676,6 +65132,158 @@
           "stringUnit": {
             "state": "translated",
             "value": "Зняти ручну заборону сну: далі вирішують правила"
+          }
+        }
+      }
+    },
+    "Событие ненадолго раскрывает остров; запрос разрешения держится, пока на него не ответят. «Только в острове»: пока остров виден, уведомление о запросе или ожидании не приходит; если острова не видно (экран спит, Мак заблокирован, полноэкранное приложение), уведомление придёт как обычно. Telegram — без изменений.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يفتح الحدث الجزيرة لوقت قصير، ويبقى طلب الإذن حتى يُرد عليه. «في الجزيرة فقط»: ما دامت الجزيرة ظاهرة لا يصل إشعار عن طلب أو انتظار، وإن لم تكن ظاهرة (الشاشة في وضع السكون، أو الـ Mac مقفل، أو تطبيق بملء الشاشة) يصل الإشعار كالمعتاد. لا يتغير Telegram."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ein Ereignis öffnet die Insel kurz; eine Berechtigungsanfrage bleibt, bis sie beantwortet ist. „Nur in der Insel“: Solange die Insel sichtbar ist, kommt für Anfragen und Warten keine Mitteilung; ist sie nicht zu sehen (Bildschirm schläft, Mac gesperrt, Vollbild-App), kommt die Mitteilung wie gewohnt. Telegram bleibt unverändert."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "An event opens the island briefly; a permission request stays until it is answered. “Island only”: while the island is visible, no notification comes for a request or a wait; if the island can’t be seen (display asleep, Mac locked, a full-screen app), the notification comes as usual. Telegram is unchanged."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un evento abre la isla un momento; una solicitud de permiso se queda hasta que se responde. «Solo en la isla»: mientras la isla esté visible, no llega notificación de solicitudes ni esperas; si no se ve (pantalla en reposo, Mac bloqueado, app a pantalla completa), la notificación llega como siempre. Telegram no cambia."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un événement ouvre brièvement l’île ; une demande d’autorisation reste jusqu’à la réponse. « Seulement dans l’île » : tant que l’île est visible, aucune notification pour une demande ou une attente ; si elle n’est pas visible (écran en veille, Mac verrouillé, app en plein écran), la notification arrive comme d’habitude. Telegram ne change pas."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Peristiwa membuka pulau sebentar; permintaan izin tetap tampil sampai dijawab. “Hanya di pulau”: selama pulau terlihat, notifikasi untuk permintaan atau tunggu tidak dikirim; jika pulau tidak terlihat (layar tidur, Mac terkunci, app layar penuh), notifikasi datang seperti biasa. Telegram tidak berubah."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un evento apre l’isola per poco; una richiesta di permesso resta finché non riceve risposta. «Solo nell’isola»: finché l’isola è visibile, non arriva la notifica di richieste o attese; se non si vede (schermo in stop, Mac bloccato, app a schermo intero), la notifica arriva come al solito. Telegram non cambia."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "イベントがあるとアイランドが一時的に開きます。許可の要求は応答するまで表示されたままです。「アイランドだけ」：アイランドが見えている間は、要求や応答待ちの通知は届きません。見えないとき（ディスプレイのスリープ、Mac のロック、フルスクリーンのアプリ）は通常どおり通知されます。Telegram は変わりません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이벤트가 생기면 아일랜드가 잠시 열립니다. 권한 요청은 응답할 때까지 남아 있습니다. ‘아일랜드에만’: 아일랜드가 보이는 동안에는 요청이나 대기 알림이 오지 않으며, 보이지 않을 때(디스플레이 잠자기, Mac 잠김, 전체 화면 앱)는 평소처럼 알림이 옵니다. Telegram은 그대로입니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zdarzenie na chwilę rozwija wyspę; prośba o zgodę zostaje, dopóki nikt nie odpowie. „Tylko na wyspie”: dopóki wyspa jest widoczna, powiadomienie o prośbie lub oczekiwaniu nie przychodzi; jeśli jej nie widać (ekran uśpiony, Mac zablokowany, aplikacja na pełnym ekranie), powiadomienie przyjdzie jak zwykle. Telegram bez zmian."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Um evento abre a ilha por um instante; um pedido de permissão fica até ser respondido. “Só na ilha”: enquanto a ilha estiver visível, não chega notificação de pedidos ou esperas; se ela não estiver visível (tela em repouso, Mac bloqueado, app em tela cheia), a notificação chega normalmente. O Telegram não muda."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Подія ненадовго розкриває острів; запит дозволу тримається, доки на нього не відповідять. «Лише в острові»: поки острів видно, сповіщення про запит чи очікування не приходить; якщо острова не видно (екран спить, Мак заблоковано, повноекранна програма), сповіщення прийде як зазвичай. Telegram — без змін."
+          }
+        }
+      }
+    },
+    "События в острове": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الأحداث في الجزيرة"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ereignisse in der Insel"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Events in the island"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eventos en la isla"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Événements dans l’île"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Peristiwa di pulau"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eventi nell’isola"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アイランドに出すイベント"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "아일랜드에 표시할 이벤트"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zdarzenia na wyspie"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eventos na ilha"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Події в острові"
           }
         }
       }

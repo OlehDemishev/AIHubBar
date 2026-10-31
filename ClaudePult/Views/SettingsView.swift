@@ -521,6 +521,23 @@ private struct NotchSection: View {
                 ? String(localized: "Без наведения карточка открывается кликом по чёлке. В покое остров пропускает клики к строке меню.")
                 : String(localized: "На этом Маке сейчас нет экрана с чёлкой: остров появится, когда она будет (например, на встроенном экране MacBook)."))
         }
+        Section {
+            ForEach(NotchEventKind.allCases, id: \.self) { kind in
+                Toggle(isOn: Binding(
+                    get: { settings.notch.events.contains(kind) },
+                    set: { on in
+                        settings.notch.events = NotchEventKind.allCases.filter { $0 == kind ? on : settings.notch.events.contains($0) }
+                    }
+                )) {
+                    Label(kind.title, systemImage: kind.symbol)
+                }
+            }
+            Toggle("Запросы и ожидание — только в острове", isOn: $settings.notch.replaceNotifications)
+        } header: {
+            Text("События в острове")
+        } footer: {
+            Footnote(text: String(localized: "Событие ненадолго раскрывает остров; запрос разрешения держится, пока на него не ответят. «Только в острове»: пока остров виден, уведомление о запросе или ожидании не приходит; если острова не видно (экран спит, Мак заблокирован, полноэкранное приложение), уведомление придёт как обычно. Telegram — без изменений."))
+        }
     }
 }
 
