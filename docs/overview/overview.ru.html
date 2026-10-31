@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>AI Hub Bar — обзор</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="dense">
+
+<!-- 1 · Обложка -->
+<section class="page cover">
+  <div class="brand">
+    <img src="../../ClaudePult/Resources/Assets.xcassets/AppIcon.appiconset/icon_512x512.png" alt="">
+    <div>
+      <div class="kicker">Приложение для строки меню macOS</div>
+      <h1>AI Hub Bar</h1>
+    </div>
+  </div>
+  <p class="tagline">Ваши AI-инструменты, лимиты и проекты — в один клик из строки меню Mac.</p>
+
+  <div class="hero">
+    <div class="bullets">
+      <div><span class="dot">%</span><span><b>Лимиты Claude перед глазами</b> — сессия 5 часов и неделя, с прогнозом, когда закончатся.</span></div>
+      <div><span class="dot">✋</span><span><b>Ни один агент не ждёт зря</b> — все сессии Claude Code на Mac, «Разрешить» / «Отклонить» прямо из уведомления.</span></div>
+      <div><span class="dot">▶</span><span><b>AI-команды для ваших проектов</b> — готовые наборы для кода, видео, текстов, исследований и маркетинга.</span></div>
+      <div><span class="dot">◐</span><span><b>Под себя</b> — профили из модулей, у каждого своя панель и своя строка меню.</span></div>
+    </div>
+    <div>
+      <div class="menubar" style="width:82mm">
+        <span class="item">✦ <span>42%</span><span class="muted">·</span><span>18%</span></span>
+        <span class="item">✋ 1</span>
+        <span class="muted">Пт 14:05</span>
+      </div>
+      <div class="panel">
+        <div class="head"><span class="prof">⌘ Разработчик ▾</span><span class="icons">↻ ⚙ ? ⏻</span></div>
+        <div class="search">Поиск: сессии, проекты, команды…</div>
+        <div class="pcard">
+          <div class="t">Лимиты</div>
+          <div class="rings">
+            <div class="ring" style="background:conic-gradient(var(--green) 0 42%, #efe7e1 0)"><span>42%</span></div>
+            <div class="ringlabel"><b>Сессия</b><br>через 2 ч 14 мин</div>
+            <div class="ring" style="background:conic-gradient(var(--green) 0 18%, #efe7e1 0)"><span>18%</span></div>
+            <div class="ringlabel"><b>Неделя</b><br>сброс Вт 9:00</div>
+          </div>
+          <div class="forecast">✓ До сброса хватит при таком темпе</div>
+        </div>
+        <div class="pcard">
+          <div class="t">Сессии</div>
+          <div class="row wait"><span class="st" style="background:var(--orange)"></span><span><span class="name">shop-app</span><br><span class="sub">хочет запустить <code>npm test</code></span></span><span class="right"><span class="btn ok">Разрешить</span> <span class="btn">Нет</span></span></div>
+          <div class="row"><span class="st" style="background:var(--green)"></span><span><span class="name">blog</span><br><span class="sub">правит header.tsx · +42 −7</span></span><span class="right">12 мин</span></div>
+          <div class="row"><span class="st" style="background:var(--blue)"></span><span><span class="name">api</span><br><span class="sub">в фоне · пишет тесты</span></span><span class="right">31 мин</span></div>
+        </div>
+        <div class="pcard">
+          <div class="t">Проекты</div>
+          <div class="row"><span class="st" style="background:var(--green)"></span><span class="name">shop-app</span><span class="right">PR #12 ✓</span></div>
+          <div class="row"><span class="st" style="background:var(--red)"></span><span class="name">api</span><span class="right">CI упал</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="meta">
+    <div><b>macOS 14+</b>Apple Silicon и Intel</div>
+    <div><b>Бесплатно, открытый код</b>лицензия MIT</div>
+    <div><b>13 языков</b>включая арабский справа налево</div>
+    <div><b>Без сервера и аккаунта</b>всё остаётся на вашем Mac</div>
+  </div>
+</section>
+
+<!-- 2 · Коротко -->
+<section class="page">
+  <div class="kicker">Коротко</div>
+  <h2>Пульт для работы с AI</h2>
+  <p class="lead">AI Hub Bar не заменяет Claude, Codex и другие AI-инструменты. Он следит за ними, запускает их за вас и показывает состояние всего в одной небольшой панели под ✦ в строке меню. Без иконки в Dock — не мешает.</p>
+
+  <div class="grid3">
+    <div class="feature"><div class="ic">%</div><h3>Лимиты AI</h3><p>Лимиты Claude на 5 часов и неделю — кольцами, с отсчётом до сброса и прогнозом. Рядом сами появляются Codex, Copilot, Gemini CLI, Cursor, OpenRouter и расход по API.</p></div>
+    <div class="feature"><div class="ic">✋</div><h3>Сессии агентов</h3><p>Все сессии Claude Code на Mac — в Терминале, в приложении Claude, в фоне: что каждая делает прямо сейчас и насколько заполнен её контекст.</p></div>
+    <div class="feature"><div class="ic">▶</div><h3>Проекты и команды</h3><p>Ваши проекты и их состояние. Раскройте проект и запустите команду: следующий шаг, своя задача, хуки для ролика, вычитка, конспект источника…</p></div>
+    <div class="feature"><div class="ic">◐</div><h3>Профили</h3><p>Разработчик, Видео, Тексты, Исследования, Маркетинг или свой. Профиль выбирает модули, их порядок и свою строку меню.</p></div>
+    <div class="feature"><div class="ic">▦</div><h3>Календарь</h3><p>Дедлайны, публикации и контент-планы из папок проектов, с напоминаниями. Перетащили запись на другой день — файл обновился.</p></div>
+    <div class="feature"><div class="ic">⌘</div><h3>Инструменты Mac</h3><p>Модули по желанию: Ресурсы Mac, Не спать, Быстрые команды, Быстрые переключатели, История буфера и Заметки.</p></div>
+  </div>
+
+  <div class="section" style="margin-top:9mm">
+    <h3>Работает с теми AI, что у вас уже есть</h3>
+    <p style="color:var(--ink-2)">Агенты, найденные на Mac, и модели по API с вашим ключом:</p>
+    <div class="services">
+      <span>Claude Code</span><span>OpenAI Codex CLI</span><span>Gemini CLI</span><span>Antigravity CLI</span><span>GitHub Copilot CLI</span><span>Cursor CLI</span>
+      <span>Anthropic API</span><span>OpenAI API</span><span>Google Gemini</span><span>xAI Grok</span><span>DeepSeek</span><span>Mistral</span><span>Ollama</span><span>LM Studio</span><span>OpenRouter</span>
+    </div>
+  </div>
+
+  <div class="callout">Блок лимитов и список сессий сделаны для Claude Code с подпиской Claude. Всё остальное — проекты, команды, календарь, инструменты Mac — работает и с другими агентами, и с моделью по API.</div>
+
+  <div class="folio"><span>AI Hub Bar — обзор</span><span>2</span></div>
+</section>
+
+<!-- 3 · Лимиты -->
+<section class="page">
+  <div class="kicker">Лимиты</div>
+  <h2>Сколько осталось — и на сколько хватит</h2>
+  <p class="lead">Больше не нужно гадать, дотянет ли сессия до вечера. Лимиты видны прямо в строке меню и в первой карточке панели.</p>
+
+  <div class="split">
+    <div>
+      <div class="section">
+        <h3>Подписка Claude</h3>
+        <ul>
+          <li><b>Сессия 5 часов и неделя</b> — кольца с цветом по уровню: зелёный до 50 %, оранжевый до 80 %, красный выше.</li>
+          <li><b>Отсчёт до сброса</b> и <b>прогноз</b> по последним 30 минутам: «до сброса хватит» или «хватит до ~16:40».</li>
+          <li><b>Прогноз на неделю</b> со столбиком на каждый день: «неделя кончится Сб 04:56 при таком темпе».</li>
+          <li><b>Расход по проектам</b>: доля каждого проекта и самая тяжёлая сессия — за сессию, сегодня и неделю.</li>
+          <li>Недельные лимиты по моделям и дополнительный расход, если они есть в тарифе.</li>
+        </ul>
+      </div>
+      <div class="section">
+        <h3>Уведомления без навязчивости</h3>
+        <ul>
+          <li>Одно уведомление за окно на 50 / 80 / 95 % (настраивается) и когда лимит восстановился.</li>
+          <li>У самого лимита фоновые задачи встают на паузу и сами продолжают после сброса.</li>
+          <li><b>Позже → После сброса лимита</b> ставит следующий шаг проекта на момент обновления сессии.</li>
+          <li>Каждый вид уведомлений можно ограничить или выключить.</li>
+        </ul>
+      </div>
+      <div class="section">
+        <h3>Другие AI-сервисы</h3>
+        <p style="color:var(--ink-2)">Под кольцами Claude сами появляются другие сервисы, как только они найдены на Mac или сохранён ключ: лимиты Codex, премиум-запросы GitHub Copilot, квота Gemini CLI, Cursor, кредиты OpenRouter и расход OpenAI / Anthropic API. Команды по API считают токены; есть месячный бюджет с уведомлениями на 80 % и 100 %.</p>
+      </div>
+    </div>
+    <div>
+      <div class="menubar" style="width:84mm">
+        <span class="item">✦ <span style="color:var(--orange)">●</span> 67% <span class="muted">· 2:14</span></span>
+        <span class="muted">Пт 14:05</span>
+      </div>
+      <div class="panel" style="width:84mm">
+        <div class="pcard" style="margin-bottom:0">
+          <div class="t">Лимиты</div>
+          <div class="rings">
+            <div class="ring" style="background:conic-gradient(var(--orange) 0 67%, #efe7e1 0)"><span>67%</span></div>
+            <div class="ringlabel"><b>Сессия</b><br>через 2 ч 14 мин</div>
+            <div class="ring" style="background:conic-gradient(var(--green) 0 34%, #efe7e1 0)"><span>34%</span></div>
+            <div class="ringlabel"><b>Неделя</b><br>сброс Вт 9:00</div>
+          </div>
+          <div class="forecast" style="color:var(--orange)">Хватит до ~16:40 при таком темпе</div>
+          <div class="forecast">Неделе до сброса хватит</div>
+          <div class="days"><i style="height:40%"></i><i style="height:75%"></i><i style="height:55%"></i><i class="today" style="height:90%"></i><i style="height:8%"></i><i style="height:8%"></i><i style="height:8%"></i></div>
+          <div style="margin-top:3mm; border-top:1px solid #f3eeea; padding-top:2mm">
+            <div class="row"><span class="name">Codex</span><span class="right">5 ч 22% · неделя 9%</span></div>
+            <div class="row"><span class="name">Copilot</span><span class="right">осталось 212 / 300</span></div>
+            <div class="row"><span class="name">OpenRouter</span><span class="right">осталось $14.20</span></div>
+            <div class="row"><span class="name">API за месяц</span><span class="right">$3.80 из $20</span></div>
+          </div>
+          <div style="margin-top:2mm; border-top:1px solid #f3eeea; padding-top:2mm">
+            <div class="t" style="margin-bottom:1mm">Расход по проектам · сегодня</div>
+            <div class="row"><span class="name">shop-app</span><span class="right">48%</span></div>
+            <div class="row"><span class="name">blog</span><span class="right">31%</span></div>
+            <div class="row"><span class="name">api</span><span class="right">21%</span></div>
+          </div>
+        </div>
+      </div>
+      <p style="font-size:8pt;color:var(--ink-3);margin-top:3mm">В строке меню — то, что выберете вы: число, кольцо или полоска, отсчёт до сброса, ждущие сессии, ближайший дедлайн, процессор и память.</p>
+    </div>
+  </div>
+  <div class="folio"><span>AI Hub Bar — обзор</span><span>3</span></div>
+</section>
+
+<!-- 4 · Сессии -->
+<section class="page">
+  <div class="kicker">Сессии Claude Code</div>
+  <h2>Все агенты на Mac — в одном списке</h2>
+  <p class="lead">Claude в пяти терминалах, в приложении и в фоне — AI Hub Bar показывает всех и сразу говорит, когда кто-то ждёт вас.</p>
+
+  <div class="split">
+    <div>
+      <div class="section">
+        <h3>Видно, чем занята каждая сессия</h3>
+        <ul>
+          <li>Проект, worktree, задача, длительность и состояние: работает, в фоне, <b>ждёт ответа</b>, готово, ошибка.</li>
+          <li><b>Текущее действие</b> словами — «правит LimitsView.swift», «запускает npm test». Тихо 10 минут — строка становится оранжевой.</li>
+          <li><b>Что изменилось</b> с начала сессии: файлы и +/− строк из git; клик — список файлов.</li>
+          <li><b>Заполненность контекста</b> от 70 % и одно предупреждение на 90 %, пока Claude не сжал историю.</li>
+          <li><b>Показать</b> выводит нужную вкладку Терминала или окно приложения Claude.</li>
+        </ul>
+      </div>
+      <div class="section">
+        <h3>Ответ без переключения окон</h3>
+        <ul>
+          <li>Когда Claude просит разрешение, у уведомления и строки сессии появляются <b>«Разрешить»</b> / <b>«Отклонить»</b>.</li>
+          <li>Вы не у Mac? Тот же запрос придёт в <b>Telegram</b> с кнопками. Засчитывается первый ответ.</li>
+        </ul>
+      </div>
+      <div class="section">
+        <h3>Фоновые задачи, которым можно доверять</h3>
+        <ul>
+          <li>Если Claude уже работает в папке, новая задача получает свой git worktree.</li>
+          <li>Фон работает по явному списку разрешений: без push в main, без force push, без удаления, без чтения секретов.</li>
+          <li><b>На ночь</b> ставит следующий шаг в ночную очередь; утром — одна сводка, как всё прошло.</li>
+          <li>Журнал, «Остановить», лимит времени и сообщение в Telegram со ссылкой на PR по окончании.</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="panel" style="width:84mm;border-radius:4mm">
+        <div class="pcard" style="margin-bottom:0">
+          <div class="t">Сессии</div>
+          <div class="row wait"><span class="st" style="background:var(--orange)"></span><span><span class="name">shop-app</span> <span class="pill">ждёт</span><br><span class="sub">хочет запустить <code>npm test</code></span></span><span class="right"><span class="btn ok">Разрешить</span> <span class="btn">Нет</span></span></div>
+          <div class="row"><span class="st" style="background:var(--green)"></span><span><span class="name">blog</span><br><span class="sub">правит header.tsx · 6 файлов +42 −7</span></span><span class="right">12 мин</span></div>
+          <div class="row"><span class="st" style="background:var(--green)"></span><span><span class="name">api</span> <span class="sub">· worktree cb-auth</span><br><span class="sub" style="color:var(--orange)">контекст 85 %</span></span><span class="right">48 мин</span></div>
+          <div class="row"><span class="st" style="background:var(--blue)"></span><span><span class="name">docs</span> <span class="sub">· в фоне</span><br><span class="sub">запускает swift test</span></span><span class="right">Журнал</span></div>
+          <div class="row"><span class="st" style="background:var(--ink-3)"></span><span><span class="name">landing</span><br><span class="sub" style="color:var(--orange)">тихо 14 мин</span></span><span class="right">1 ч 05</span></div>
+          <div class="row"><span class="st" style="background:#b9b1ab"></span><span><span class="name">tools</span><br><span class="sub">готово · открыт PR #7</span></span><span class="right">✓</span></div>
+        </div>
+      </div>
+      <div class="panel" style="width:84mm;border-radius:4mm;margin-top:5mm;padding:3mm 3.5mm">
+        <div style="display:flex;gap:2.5mm;align-items:center">
+          <img src="../../ClaudePult/Resources/Assets.xcassets/AppIcon.appiconset/icon_128x128.png" style="width:8mm;height:8mm" alt="">
+          <div style="flex:1"><b style="font-size:8.5pt">Claude ждёт · shop-app</b><br><span class="sub" style="color:var(--ink-2)">Разрешить Bash: npm test?</span></div>
+        </div>
+        <div style="display:flex;gap:2mm;margin-top:2mm;justify-content:flex-end"><span class="btn">Отклонить</span><span class="btn ok">Разрешить</span></div>
+      </div>
+      <p style="font-size:8pt;color:var(--ink-3);margin-top:3mm">Сессии приходят от небольшого hook в настройках Claude Code. Он только пишет файлы состояния на Mac и никогда не меняет то, что делает Claude.</p>
+    </div>
+  </div>
+  <div class="folio"><span>AI Hub Bar — обзор</span><span>4</span></div>
+</section>
+
+<!-- 5 · Профили, проекты и команды -->
+<section class="page">
+  <div class="kicker">Профили, проекты и команды</div>
+  <h2>Не только для разработчиков</h2>
+  <p class="lead">Профиль — набор модулей под один вид работы. Начните с шаблона, ответьте помощнику на пару вопросов — и меняйте что угодно потом.</p>
+
+  <table>
+    <tr><th>Шаблон</th><th>Проект — это</th><th>Команды, например</th></tr>
+    <tr><td>Разработчик</td><td>git-репозиторий</td><td>Следующий шаг, Своя задача, Завершить — по CLAUDE.md / AGENTS.md проекта</td></tr>
+    <tr><td>Видео</td><td>папка на ролик</td><td>хуки, версия для Shorts, описание с таймкодами, заголовки, проверка фактов, перевод</td></tr>
+    <tr><td>Тексты</td><td>папка на текст</td><td>редактура, вычитка, другой тон, сократить, SEO, нарезать на посты</td></tr>
+    <tr><td>Исследования и учёба</td><td>папка на тему</td><td>конспект источника, цитаты со ссылками, сводная таблица, пробелы, план</td></tr>
+    <tr><td>Соцсети и маркетинг</td><td>кампания или площадка</td><td>посты под площадки, реклама, A/B-заголовки, контент-план на неделю</td></tr>
+    <tr><td>Утилиты Mac</td><td>—</td><td>только инструменты Mac</td></tr>
+    <tr><td>Свой</td><td>любая папка</td><td>свои команды с подстановками {проект}, {файл}, {язык}</td></tr>
+  </table>
+
+  <div class="grid2" style="margin-top:7mm">
+    <div class="feature">
+      <h3>Команды ничего не затирают</h3>
+      <ul>
+        <li>Результат — всегда <b>новый файл</b> в папке проекта.</li>
+        <li><b>Модели по API</b> получают главный файл проекта; ответ записывает AI Hub Bar.</li>
+        <li><b>Claude Code</b> работает с правами профиля: только файлы проекта, файлы + поиск в интернете или полный доступ к коду.</li>
+        <li><b>Другие агенты</b> открываются в Терминале, задача — в буфере обмена.</li>
+      </ul>
+    </div>
+    <div class="feature">
+      <h3>Сравнить и упорядочить</h3>
+      <ul>
+        <li><b>Сравнить</b> запускает одну команду в двух-трёх сервисах и показывает ответы рядом.</li>
+        <li><b>Этапы</b> (идея → сценарий → монтаж → готово) и метрики для каждого проекта.</li>
+        <li>Маленькая <b>карточка проекта</b> в каждой папке: Этап, Дедлайн, Главный файл — читается и правится руками.</li>
+        <li>Несколько профилей сразу, переключение вверху панели; профилем можно поделиться файлом <code>.claudepult</code>.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="feature" style="margin-top:6mm">
+    <h3>Для разработчиков</h3>
+    <div class="grid2" style="gap:4mm">
+      <ul>
+        <li>Состояние репозитория: ветка, незакоммиченное, PR с цветом CI.</li>
+        <li>Уведомление, когда CI у PR покраснел или позеленел.</li>
+        <li>Шапка STATUS.md (Stage / Now / Next) в раскрытом проекте.</li>
+      </ul>
+      <ul>
+        <li>Worktree проекта и безопасное удаление влитых.</li>
+        <li>Открыть в Терминале, Finder, GitHub или другом агенте.</li>
+        <li><b>Завершить</b>: проверки, коммит, push и PR руками Claude.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="folio"><span>AI Hub Bar — обзор</span><span>5</span></div>
+</section>
+
+<!-- 6 · Календарь и инструменты Mac -->
+<section class="page">
+  <div class="kicker">Календарь и инструменты Mac</div>
+  <h2>Сроки на виду, Mac под рукой</h2>
+  <p class="lead">Даты живут в файлах проектов, а не в очередном приложении. Плюс несколько мелких инструментов для Mac, которые иначе ставят по отдельности.</p>
+
+  <div class="split" style="grid-template-columns:1fr 86mm">
+    <div>
+      <h3>Календарь</h3>
+      <ul>
+        <li><b>Ближайшее</b> в панели: 7 дней по всем профилям, просроченное — красным.</li>
+        <li>Окно <b>месяц или неделя</b>, у каждого профиля свой цвет.</li>
+        <li><b>Перетащите</b> запись на другой день — дата перепишется в её файле. Двойной клик по дню — новый дедлайн или строка контент-плана.</li>
+        <li>Контент-план — обычная Markdown-таблица: дата, время, площадка, тема, статус, файл.</li>
+        <li><b>Напоминания</b> за 2 часа, за день или за 3 дня — по желанию и в Telegram.</li>
+      </ul>
+    </div>
+    <div>
+      <div class="cal">
+        <div class="h">Пн</div><div class="h">Вт</div><div class="h">Ср</div><div class="h">Чт</div><div class="h">Пт</div><div class="h">Сб</div><div class="h">Вс</div>
+        <div>3</div><div>4<b style="background:var(--accent)">Reels #12</b></div><div>5</div><div>6<b style="background:var(--blue)">Статья</b></div><div>7</div><div>8</div><div>9</div>
+        <div>10<b style="background:var(--red)">Дедлайн</b></div><div>11</div><div>12<b style="background:var(--accent)">Shorts</b></div><div>13</div><div>14<b style="background:var(--green)">v1.2</b></div><div>15</div><div>16</div>
+      </div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:9mm">Модули по желанию</h3>
+  <p style="color:var(--ink-2)">Ставятся в Настройки → Модули. Каждый профиль решает, показывать ли их и что внутри.</p>
+  <div class="grid3" style="margin-top:3mm">
+    <div class="feature"><div class="ic">▤</div><h3>Ресурсы Mac</h3><p>Процессор, память, графика, диск, сеть, батарея и самые прожорливые приложения — с уведомлениями, когда Mac тяжело. Процессор и память можно вынести в строку меню.</p></div>
+    <div class="feature"><div class="ic">◔</div><h3>Не спать</h3><p>Mac не засыпает, пока работает Claude, заданное время, от сети, с монитором или пока открыты нужные приложения. Есть и в Пункте управления. Системные настройки не трогаются.</p></div>
+    <div class="feature"><div class="ic">↯</div><h3>Быстрые команды</h3><p>Свои кнопки для скриптов, Быстрых команд, ссылок и папок — из панели или поиска ⌃⌥C.</p></div>
+    <div class="feature"><div class="ic">◑</div><h3>Быстрые переключатели</h3>
+      <div class="tiles" style="margin-top:1.5mm">
+        <div class="on"><em>◐</em>Тёмная</div><div><em>▭</em>Иконки</div><div><em>⏏</em>Диски</div><div><em>⌧</em>Замок</div>
+      </div>
+    </div>
+    <div class="feature"><div class="ic">⧉</div><h3>История буфера</h3><p>Всё, что вы копировали, с поиском и закреплением того, что нужно снова и снова.</p></div>
+    <div class="feature"><div class="ic">✎</div><h3>Заметки</h3><p>Быстрая заметка прямо в панели — сохраняется Markdown-файлом, который принадлежит вам.</p></div>
+  </div>
+  <div class="folio"><span>AI Hub Bar — обзор</span><span>6</span></div>
+</section>
+
+<!-- 7 · Везде + приватность -->
+<section class="page">
+  <div class="kicker">Везде на Mac</div>
+  <h2>Доступен отовсюду</h2>
+  <p class="lead">Панель — центр, но AI Hub Bar есть и в строке меню, и на рабочем столе, и в Пункте управления, и в Быстрых командах, и в Telegram.</p>
+
+  <div class="grid2">
+    <div class="feature"><h3>Строка меню — как вам удобно</h3><p>Готовые наборы или свой: лимиты числом, кольцом или полоской, отсчёт до сброса, ждущие сессии, ближайший дедлайн, процессор, память, свободный диск. Порядок — перетаскиванием, с живым предпросмотром. Наведите курсор — увидите сводку.</p></div>
+    <div class="feature"><h3>Поиск ⌃⌥C</h3><p>Из любого приложения: найдите сессию, проект, команду или сохранённый промт и нажмите ↵. Запрос в неправильной раскладке («ыгкм») тоже находится.</p></div>
+    <div class="feature"><h3>Виджеты и Пункт управления</h3><p>Виджеты «Лимиты Claude» и «Сессии и проекты» для рабочего стола и Центра уведомлений; переключатель «Не спать» на macOS 26+.</p></div>
+    <div class="feature"><h3>Быстрые команды и Siri</h3><p>Действия «Лимиты Claude», быстрая команда по имени и поиск — собирайте из них свои автоматизации.</p></div>
+    <div class="feature"><h3>Окно Claude Code</h3><p>Все CLAUDE.md и AGENTS.md с поиском и правкой, MCP-серверы с переключателем. Сохранённые промты подставляют {проект}, {ветка} и {файл}.</p></div>
+    <div class="feature"><h3>Telegram и итоги недели</h3><p>Завершённые задачи, лимиты, изменения PR и CI и запросы разрешений — в Telegram. По воскресеньям — итоги недели по проектам.</p></div>
+  </div>
+
+  <h2 style="font-size:17pt;margin-top:10mm">Приватность по умолчанию</h2>
+  <div class="grid2" style="margin-top:3mm">
+    <ul>
+      <li><b>Ни сервера, ни аккаунта, ни слежки.</b> AI Hub Bar общается только с AI-сервисами, которыми пользуетесь вы.</li>
+      <li><b>Ваши файлы</b> уходят только в тот сервис, которым вы запускаете команду.</li>
+      <li><b>API-ключи</b> хранятся в Связке ключей macOS — никогда в логах и экспорте настроек.</li>
+    </ul>
+    <ul>
+      <li><b>Вход Claude</b> читается из Связки ключей при каждом обновлении и нигде не сохраняется.</li>
+      <li>Входы Gemini и Cursor читаются, только если вы разрешили, — по отдельности.</li>
+      <li><b>Открытый код</b> под лицензией MIT — каждую строку можно прочитать на GitHub.</li>
+    </ul>
+  </div>
+  <div class="folio"><span>AI Hub Bar — обзор</span><span>7</span></div>
+</section>
+
+<!-- 8 · Начать -->
+<section class="page">
+  <div class="kicker">Начать</div>
+  <h2>Пять минут — и всё работает</h2>
+  <p class="lead">Нужен Mac с macOS 14 или новее и хотя бы один AI-сервис: Claude Code с подпиской, другой агент или ключ API.</p>
+
+  <div class="grid2">
+    <div>
+      <h3>Установка</h3>
+      <ol class="steps" style="margin-top:3mm">
+        <li>Скачайте <code>.dmg</code> со страницы <b>GitHub Releases</b>.</li>
+        <li>Откройте его и перетащите <b>AI Hub Bar</b> в «Программы».</li>
+        <li>Запустите. macOS скажет, что не может проверить разработчика, — закройте сообщение.</li>
+        <li>Системные настройки → Конфиденциальность и безопасность → <b>«Всё равно открыть»</b>. Только один раз: дальше приложение обновляется само.</li>
+      </ol>
+    </div>
+    <div>
+      <h3>Первый запуск</h3>
+      <ol class="steps" style="margin-top:3mm">
+        <li>Экран приветствия проверит, чего не хватает: AI-сервис, hook для сессий, уведомления, автозапуск.</li>
+        <li>Импортируйте файл <code>.claudepult</code> — или выберите шаблон.</li>
+        <li>Отметьте, что будет в панели, и укажите папку с проектами.</li>
+        <li>Любой шаг можно пропустить: всё меняется потом в Настройки → Профили.</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="section" style="margin-top:6mm">
+    <h3>Говорит на вашем языке</h3>
+    <p style="color:var(--ink-2)">Интерфейс и всё, что пишет AI Hub Bar, — шаблоны, промты, карточки проектов, контент-планы — на 13 языках. Язык берётся из системы или выбирается в Настройки → Основные.</p>
+    <div class="langs">
+      <span>Русский</span><span>English</span><span>Українська</span><span>Español</span><span>Português (Brasil)</span><span>Français</span><span>Deutsch</span><span>Italiano</span><span>Polski</span><span>日本語</span><span>한국어</span><span>Bahasa Indonesia</span><span>العربية</span>
+    </div>
+  </div>
+
+  <div class="grid3" style="margin-top:7mm">
+    <div class="feature"><h3>Обновления</h3><p>Приложение раз в день проверяет новые версии и ставит их в один клик. Настройки → Основные → Обновления.</p></div>
+    <div class="feature"><h3>Чистое удаление</h3><p>Снимите hook в Настройки → Claude Code, выйдите, удалите приложение и его папку с данными — все пути есть в руководстве.</p></div>
+    <div class="feature"><h3>Собрать самому</h3><p>Xcode и XcodeGen, затем <code>scripts/build-and-install.sh</code> в папке репозитория.</p></div>
+  </div>
+
+  <div class="callout" style="margin-top:7mm">
+    <div class="qr-end">
+      <img src="../../ClaudePult/Resources/Assets.xcassets/AppIcon.appiconset/icon_256x256.png" style="width:20mm;height:20mm" alt="">
+      <div>
+        <div class="big-link">github.com/OlehDemishev/AIHubBar</div>
+        <div>Скачать, руководство, исходный код и вопросы. Бесплатно и с открытым кодом под лицензией MIT.</div>
+      </div>
+    </div>
+  </div>
+  <div class="folio"><span>AI Hub Bar — обзор</span><span>8</span></div>
+</section>
+
+</body>
+</html>

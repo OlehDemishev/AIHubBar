@@ -2,10 +2,10 @@
 
 <!-- summary:start -->
 **Stage:** AI Hub Bar 0.2.0 released publicly (github.com/OlehDemishev/AIHubBar); next: Windows and Linux versions
-**Updated:** 2026-10-30
+**Updated:** 2026-10-31
 
 **Now:**
-- nothing in progress; merged: no personal paths or names, Telegram set up in the app (#140)
+- nothing in progress; merged: overview PDF (en, ru) and a public README for GitHub (#139), no personal paths or names, Telegram set up in the app (#140)
 - released 0.2.0: repo renamed to `OlehDemishev/AIHubBar` and made public; repeat fixes merged (#136, #137)
 - merged today: notifications once per wait and a choice per kind (#134); queue after reset and run guard (#129), other-AI menu bar/widget/forecast (#130), session changes and weekly summary (#131), Claude Code window and saved prompts (#132); other AI services' limits (#126, #127)
 - renamed to AI Hub Bar (PR #115); session rows open on a click anywhere (PR #117); widgets translated into 13 languages (PR #119); sessions in Claude's own terminal open Claude (PR #121); module options per profile (PR #124)
@@ -20,12 +20,19 @@
 - Windows and Linux versions (docs/SPEC-windows.md, docs/SPEC-linux.md) — only when Oleh says; stage 0 (fact checks in VMs) first
 
 **Needs Oleh:**
+- read docs/AI-Hub-Bar-Overview-ru.pdf and -en.pdf (facts and wording); after merge upload docs/images/social-preview.png in GitHub → Settings → General → Social preview (no API for it); the PDFs can be added to the 0.2.0 release: `gh release upload v0.2.0 docs/AI-Hub-Bar-Overview-*.pdf`
 - after the release: download 0.2.0 from Releases on another Mac (or user) and open it once with «Open Anyway»
 - go through the «Oleh» rows of docs/CHECKLIST.md; try the newer features: «Позже» on a project, the paused-run switch, the Claude Code window, saved prompts in ⌃⌥C, notification frequencies
 - to try other AI services: Settings → Модули → Лимиты → «Другие AI» (keys, installed `codex` / Gemini CLI, consents)
 - decide SPEC-windows §10 and SPEC-linux §10 (Tauri 2 for both, Windows code signing, first Linux desktops) before that work starts
 - optional: Apple Developer ID (notarization, no «Open Anyway»); delete or archive the old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-10-31 — Overview PDF and GitHub presentation (branch `docs/overview-pdf-and-repo`)
+
+Done: 8-page overview for everyone, `docs/AI-Hub-Bar-Overview-en.pdf` and `-ru.pdf`, made from `docs/overview/overview.<lang>.html` + `style.css` by `scripts/make-overview-pdf.sh` (headless Chrome); the interface is drawn as HTML mockups with made-up projects, not screenshots of Oleh's Mac. The same script renders `docs/images/hero.png` (README header) and `social-preview.png` (1280×640). New user-facing README (features, install, privacy, build, docs); the old developer README moved to `docs/REFERENCE.md` with links fixed. GUIDE: `.dmg` name (`AIHubBar-<version>.dmg`) and the uninstall step fixed. `release.sh --publish` attaches the PDFs and has English release notes. `.github/ISSUE_TEMPLATE` (bug, feature). On GitHub: description, 17 topics, Projects tab off. All links use `OlehDemishev/AIHubBar` (merged with the release work on main).
+Checked: both PDFs rendered and every page looked at as an image (nothing cut off, 8 pages each); facts checked against README/GUIDE and code (universal binary, Notes as .md, Finish prompt); `bash -n` on both scripts; xcodegen + build with the new SUFeedURL. CI not set up.
+Left: social preview has to be uploaded by hand; the PDFs are not on the 0.2.0 release yet (the next `release.sh --publish` attaches them); PDFs need a new render when features change (`scripts/make-overview-pdf.sh`).
 
 ## 2026-10-31 — No personal paths or names; Telegram set up in the app (branch `feat/user-paths`)
 

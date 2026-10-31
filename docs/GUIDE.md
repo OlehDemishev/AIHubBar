@@ -111,5 +111,5 @@ AI Hub Bar follows the system language. To pick another one, go to **Settings…
 
 1. Choose **Settings… → Claude Code → Remove hooks**.
 2. Quit AI Hub Bar.
-3. Delete `~/Applications/ClaudePult.app`, `~/Library/Application Support/ClaudePult` and `~/Library/Logs/ClaudePult`.
+3. Delete AI Hub Bar from Applications, then `~/Library/Application Support/ClaudePult` and `~/Library/Logs/ClaudePult`.
 4. API keys are stored in Keychain Access under "ClaudePult API key". Delete those entries too if you want them gone.

@@ -1,0 +1,16 @@
+name: Feature request
+description: An idea for AI Hub Bar
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What would you like to do
+      description: The task or the problem, in your own words.
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: How it could work
+      description: Optional. Where in the app it would live and what it would show.
