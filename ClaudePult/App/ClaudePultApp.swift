@@ -23,6 +23,7 @@ struct ClaudePultApp: App {
     @State private var quickTools: QuickToolsController
     @State private var clipboard: ClipboardHistory
     @State private var notesStore: NotesStore
+    @State private var notchIsland: NotchIsland
     @State private var notifications = NotificationPermission()
     @State private var modes: ModeStore
     @State private var services: AIServiceStore
@@ -69,6 +70,8 @@ struct ClaudePultApp: App {
         let notesStore = NotesStore(settings: settings)
         _notesStore = State(initialValue: notesStore)
         _keepAwake = State(initialValue: keepAwake)
+        let notchIsland = NotchIsland(settings: settings)
+        _notchIsland = State(initialValue: notchIsland)
         let runs = RunStore(settings: settings)
         _runs = State(initialValue: runs)
         _engine = State(initialValue: CommandEngine(settings: settings, runs: runs))
@@ -84,6 +87,7 @@ struct ClaudePultApp: App {
         keepAwake.isActive = { [modes] in modes.installedModules.contains(.keepAwake) }
         clipboard.isActive = { [modes] in modes.installedModules.contains(.clipboard) }
         notesStore.isActive = { [modes] in modes.installedModules.contains(.notes) }
+        notchIsland.isActive = { [modes] in modes.installedModules.contains(.notch) }
         sessions.approvalsEnabled = { [settings] in settings.approvalsFromClaudePult }
         _widgetStatus = State(initialValue: WidgetStatusWriter { [sessions, runs, store, keepAwake, modes] in
             WidgetStatus(
@@ -137,6 +141,17 @@ struct ClaudePultApp: App {
             keepAwake.start()
             GlobalHotKey.register(settings.panelHotKey)
             clipboard.start()
+            // Windows can only be made once the app has finished launching.
+            DispatchQueue.main.async {
+                notchIsland.start { [notchIsland, settings, usage, sessions, runs] in
+                    AnyView(NotchIslandView()
+                        .environment(notchIsland)
+                        .environment(settings)
+                        .environment(usage)
+                        .environment(sessions)
+                        .environment(runs))
+                }
+            }
             // The shell lookup first: the scan reports which `claude` it found.
             Task {
                 await ClaudeLocator.refreshShellPath()

@@ -282,7 +282,8 @@ final class ModeStore {
 
     // MARK: - Optional modules (SPEC-profiles §1)
 
-    /// Installs an optional module and adds it to the current profile, shown, at the bottom of its panel.
+    /// Installs an optional module and adds it to the current profile, shown, at the bottom of its panel (a module
+    /// that is not a panel block only gets installed).
     func install(_ kind: ModuleKind) {
         guard !kind.isBuiltIn else { return }
         if !installedModules.contains(kind) {
@@ -290,7 +291,7 @@ final class ModeStore {
             saveState()
             AppLog.info("Module installed: \(kind.rawValue)")
         }
-        if let current { addModule(kind, to: current.id) }
+        if kind.isPanelBlock, let current { addModule(kind, to: current.id) }
     }
 
     /// Removes an optional module from every profile and stops it; its settings stay for a later install.

@@ -86,13 +86,15 @@ struct AssistantView: View {
         // The panel blocks and the menu bar chosen here belong to the new profile (SPEC-profiles §6).
         var profile = draft.mode
         profile.modules = nil
-        profile.modules = profile.normalizedModules(hiddenBlocks: draft.hiddenBlocks) + draft.extraModules.map { ProfileModule($0) }
+        profile.modules = profile.normalizedModules(hiddenBlocks: draft.hiddenBlocks)
+            + draft.extraModules.filter(\.isPanelBlock).map { ProfileModule($0) }
         profile.menuBar = draft.menuBar
         settings.calendarReminderHours = draft.reminderHours
         if let folder = draft.mode.source.folder.map(PathText.expand), !FileManager.default.fileExists(atPath: folder) {
             try? FileManager.default.createDirectory(atPath: folder, withIntermediateDirectories: true)
         }
         modes.addFromAssistant(profile)
+        for kind in draft.extraModules where !kind.isPanelBlock { modes.install(kind) }
         dismissWindow(id: "assistant")
     }
 
@@ -149,12 +151,12 @@ struct AssistantView: View {
             ForEach(Self.templates) { template in
                 choiceCard(title: template.title, detail: template.description, icon: template.mode.icon,
                            selected: draft.wrappedValue.templateID == template.id) {
-                    draft.wrappedValue.choose(template)
+                    draft.wrappedValue.choose(template, hasNotch: NotchGeometry.macHasNotch)
                 }
             }
             choiceCard(title: String(localized: "С нуля"), detail: String(localized: "Пустой профиль: всё выберете на следующих шагах."), icon: "square.dashed",
                        selected: draft.wrappedValue.templateID == nil) {
-                draft.wrappedValue.choose(nil)
+                draft.wrappedValue.choose(nil, hasNotch: NotchGeometry.macHasNotch)
             }
         }
     }

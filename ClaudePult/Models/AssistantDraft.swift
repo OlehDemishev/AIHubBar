@@ -107,7 +107,11 @@ struct AssistantDraft: Equatable, Sendable {
     var hasProjects: Bool { mode.source != .none }
 
     /// The modules the assistant offers; «Отчёты _daily-report» is Oleh's own and stays in Settings.
-    static let offeredModules: [ModuleKind] = [.limits, .sessions, .projects, .upcoming, .resources, .keepAwake, .quickCommands, .toggles, .clipboard, .notes]
+    /// «Остров у чёлки» only on a Mac with a notch.
+    @MainActor static var offeredModules: [ModuleKind] {
+        [.limits, .sessions, .projects, .upcoming, .resources, .keepAwake, .quickCommands, .toggles, .clipboard, .notes]
+            + (NotchGeometry.macHasNotch ? [.notch] : [])
+    }
 
     func hasModule(_ kind: ModuleKind) -> Bool {
         switch kind {
@@ -116,7 +120,7 @@ struct AssistantDraft: Equatable, Sendable {
         case .projects: hasProjects
         case .upcoming: mode.calendar != .off && mode.source.isFolders
         case .reports: mode.commonCommands == .dailyReport
-        case .resources, .keepAwake, .quickCommands, .toggles, .clipboard, .notes: extraModules.contains(kind)
+        case .resources, .keepAwake, .quickCommands, .toggles, .clipboard, .notes, .notch: extraModules.contains(kind)
         }
     }
 
@@ -148,7 +152,7 @@ struct AssistantDraft: Equatable, Sendable {
             }
         case .reports:
             mode.commonCommands = on ? .dailyReport : .none
-        case .resources, .keepAwake, .quickCommands, .toggles, .clipboard, .notes:
+        case .resources, .keepAwake, .quickCommands, .toggles, .clipboard, .notes, .notch:
             extraModules.removeAll { $0 == kind }
             if on { extraModules.append(kind) }
         }
@@ -169,7 +173,8 @@ struct AssistantDraft: Equatable, Sendable {
     }
 
     /// A template replaces the mode but keeps a folder already chosen.
-    mutating func choose(_ template: ModeTemplate?) {
+    /// `hasNotch`: this Mac has a screen with a notch (`NotchGeometry.macHasNotch`).
+    mutating func choose(_ template: ModeTemplate?, hasNotch: Bool = false) {
         let folder = mode.source.folder
         templateID = template?.id
         mode = template?.mode ?? Self.blank
@@ -181,6 +186,8 @@ struct AssistantDraft: Equatable, Sendable {
         let templateModules = template?.mode.modules ?? []
         extraModules = templateModules.map(\.kind).filter { !$0.isBuiltIn }
         if template?.id == "developer", !extraModules.contains(.keepAwake) { extraModules.append(.keepAwake) }
+        // …and on a MacBook with a notch the island shows what Claude is doing (SPEC-notch §6).
+        if template?.id == "developer", hasNotch, !extraModules.contains(.notch) { extraModules.append(.notch) }
         hiddenBlocks = []
         for module in templateModules where !module.shown {
             if module.kind == .limits { hiddenBlocks.insert(.limits) }

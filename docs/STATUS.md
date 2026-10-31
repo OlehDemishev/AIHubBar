@@ -5,9 +5,9 @@
 **Updated:** 2026-10-31
 
 **Now:**
-- PR: wider `claude` auto-detection (branch `fix/claude-autodetect`) — another Mac showed «авто: не найден»
+- notch island stage 1 merged (#149): module, island over the notch, ears, hover card; target release 0.3.0
+- wider `claude` auto-detection merged (#150): shell, nvm/fnm/volta and the desktop app's copy — another Mac showed «авто: не найден»
 - landing page live at https://olehdemishev.github.io/AIHubBar/ (#147), deployed by `.github/workflows/pages.yml` on pushes to `site/`
-- notch island spec merged (`docs/SPEC-notch.md`, #142) with Oleh's answers (#146); no code yet
 - nothing else in progress; merged: RELEASE.md names the real `.dmg` (#144), English interface names in the public docs (#143); overview PDF (en, ru) and a public README for GitHub (#139), no personal paths or names, Telegram set up in the app (#140)
 - released 0.2.0: repo renamed to `OlehDemishev/AIHubBar` and made public; repeat fixes merged (#136, #137)
 - merged today: notifications once per wait and a choice per kind (#134); queue after reset and run guard (#129), other-AI menu bar/widget/forecast (#130), session changes and weekly summary (#131), Claude Code window and saved prompts (#132); other AI services' limits (#126, #127)
@@ -16,7 +16,7 @@
 - release without an Apple Developer account ready (PR #85), nothing published; Windows and Linux specs wait for Oleh
 
 **Next:**
-- notch island (docs/SPEC-notch.md §9): stage 1 — module, notch window, side indicators, hover card; notch checks on Oleh's MacBook Air M2, the rest on the Mac mini
+- notch island for 0.3.0 (docs/SPEC-notch.md §9): stage 2 — events and permission requests in the island; stage 3 — pill, full screen, hot keys, first-setup window; then a 0.3.0 build for Oleh's MacBook Air before publishing
 - standing rule (SPEC §3.1): every new icon-only control gets a hover hint; finish each UI stage with the accessibility walk
 - fix whatever Oleh finds in the translations (automated checks pass; a native read for ja, ko, ar is still worth it)
 - stage 8: done without Developer ID (self-signed + Sparkle, PR #85; re-checked on main); notarization only if Oleh buys Developer ID; publishing is Oleh's step (Needs Oleh)
@@ -24,8 +24,8 @@
 - Windows and Linux versions (docs/SPEC-windows.md, docs/SPEC-linux.md) — only when Oleh says; stage 0 (fact checks in VMs) first
 
 **Needs Oleh:**
+- notch island: on the MacBook Air (with this branch's build or later) — Settings → Модули → «Остров у чёлки» → Установить; check the ears beside the real notch, hover opens the card, moving away closes it, menu bar clicks next to the notch still work
 - optional: put https://olehdemishev.github.io/AIHubBar/ into the repo's About → Website; repo settings suggested in chat (release immutability, «Always suggest updating», «Automatically delete head branches»)
-- notch island: say when to start stage 1; optional — the «proposed» points left in docs/SPEC-notch.md §10
 - read docs/AI-Hub-Bar-Overview-ru.pdf and -en.pdf (facts and wording); after merge upload docs/images/social-preview.png in GitHub → Settings → General → Social preview (no API for it); the PDFs can be added to the 0.2.0 release: `gh release upload v0.2.0 docs/AI-Hub-Bar-Overview-*.pdf`
 - after the release: download 0.2.0 from Releases on another Mac (or user) and open it once with «Open Anyway»
 - go through the «Oleh» rows of docs/CHECKLIST.md; try the newer features: «Позже» on a project, the paused-run switch, the Claude Code window, saved prompts in ⌃⌥C, notification frequencies
@@ -37,8 +37,14 @@
 ## 2026-10-31 — Wider `claude` auto-detection (branch `fix/claude-autodetect`)
 
 Done: `ClaudeLocator` looked in four fixed folders only, so a Mac with `claude` under nvm/fnm/volta, or with only the Claude desktop app, showed «авто: не найден». Now it checks Homebrew, `~/.local/bin`, npm-global, bun, volta, asdf and mise shims, then `command -v claude` from the user's interactive login shell (asked once at app start, before the AI scan), then nvm and fnm (newest Node first), then the desktop app's own copy (`~/Library/Application Support/Claude/claude-code/<version>/<hash>/claude.app`, newest version, found again each time). REFERENCE.md lists the places.
-Checked: `xcodebuild test` — 274 tests pass (new: nothing installed, newest nvm version, desktop app copy, the order of places, shell output with a greeting or an alias, the real shell lookup). On this Mac the login shell answers `/opt/homebrew/bin/claude` in 0.04 s; the desktop app copy runs (`2.1.309 (Claude Code)`). Not checked on the other Mac. CI not set up; checks run locally.
+Checked: `xcodebuild test` — 281 tests pass after merging main with the notch island (new: nothing installed, newest nvm version, desktop app copy, the order of places, shell output with a greeting or an alias, the real shell lookup). On this Mac the login shell answers `/opt/homebrew/bin/claude` in 0.04 s; the desktop app copy runs (`2.1.309 (Claude Code)`). Not checked on the other Mac. CI not set up; checks run locally.
 Left: the desktop app copy may ask for `/login` on its first run in Terminal; the command-line mode (`--claude`) does not ask the shell (Terminal's own PATH covers it).
+
+## 2026-10-31 — Notch island, stage 1 (branch `feat/notch-island`)
+
+Done: optional module «Остров у чёлки» (`ModuleKind.notch`): finds the notch from `NSScreen.safeAreaInsets` and `auxiliaryTopLeftArea` / `auxiliaryTopRightArea` (`NotchGeometry`, re-read on screen changes), a borderless non-activating panel over it on every desktop; at rest two ears (left: session-limit ring, right: sessions dot with count — both selectable: session/week limit, sessions, background runs, nothing) and clicks pass through to the menu bar; hover 0.3 s or a click opens a black card: session and week rings, forecast, up to four sessions with what each is doing (click opens the session), «Ещё N — в панели ✦», «Поиск и запуск…»; leaving for 0.4 s, a click outside or Esc closes it. Reduce Motion and Increase Contrast respected, hints and VoiceOver labels on the ears. Settings → Модули: install/remove, ears, hover on/off; the assistant offers it on a Mac with a notch and the developer template ticks it. Not a panel block (DECISIONS). 16 new strings in all 12 languages. Hidden `notchSimulate` default for testing on a Mac without a notch. Release target 0.3.0 written into the spec.
+Checked: `xcodebuild test` — 275 tests (new: notch rectangle from screen areas, no notch, window centred and kept on screen, assistant only with a notch, install leaves the panel alone, settings decode). Installed with `build-and-install.sh` and checked live on the Mac mini with `notchSimulate`: ears shown at rest, hover opened the card with real limits (28 % / 96 %) and sessions, moving away closed it. Found and fixed a launch crash (`NSApp` read in `App.init`). Afterwards `notchSimulate` removed and the module uninstalled again (state file restored). CI not set up.
+Left: not seen on a real notch (needs the Air); clicks through the island at rest to the menu bar not tried by hand; the `axdump` accessibility walk not run; events, requests, pill, full screen, hot keys and the first-setup window are stages 2–3.
 
 ## 2026-10-31 — Landing page live (branch `chore/pages-after-merge`)
 
