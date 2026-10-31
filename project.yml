@@ -53,6 +53,10 @@ targets:
         SUPublicEDKey: 8ahufHSAtzNg3nCxBQh1jlSoWriuxFfxkLH0AD7dNmY=
         SUEnableAutomaticChecks: true
         SUScheduledCheckInterval: 86400
+        # aihubbar://limits, aihubbar://session/<id>, aihubbar://search — clicks on the desktop widgets (WidgetLink).
+        CFBundleURLTypes:
+          - CFBundleURLName: com.demishev.claudepult.widget-link
+            CFBundleURLSchemes: [aihubbar]
         # *.claudepult — exported settings and modes (SPEC-modes §12).
         UTExportedTypeDeclarations:
           - UTTypeIdentifier: com.demishev.claudepult.settings
