@@ -25,7 +25,6 @@
 - try: «Позже» on a project, the paused-run switch (Settings → Модули → Лимиты), the file list from a session row, «Отправить сейчас» for the weekly summary, the Claude Code window (panel footer), a saved prompt in ⌃⌥C
 - MCP on/off was not pressed on your `obsidian` server during checks: try it once (it moves to a stash file and back; settings.json gets a backup)
 - to try the other AI services: Settings → «Модули» → «Лимиты» → «Другие AI» — OpenRouter key, OpenAI / Anthropic admin keys, installed and signed-in `codex`, Gemini CLI and Cursor consent toggles (Copilot already shows from `gh`)
-- optionally rename the GitHub repository to match AI Hub Bar (then SUFeedURL in project.yml and REPO in release.sh follow)
 - try: the «Сессии и проекты» widget, «Не спать» in Control Center, ⌃⌥C search, Shortcuts actions, «На ночь» on a project
 - try the new panel: hover a session row, click a project, the profile menu with two profiles
 - hover over the menu bar item and the panel icons: tooltips should name what each one is
@@ -60,8 +59,8 @@
 
 ## 2026-10-31 — Overview PDF and GitHub presentation (branch `docs/overview-pdf-and-repo`)
 
-Done: 8-page overview for everyone, `docs/AI-Hub-Bar-Overview-en.pdf` and `-ru.pdf`, made from `docs/overview/overview.<lang>.html` + `style.css` by `scripts/make-overview-pdf.sh` (headless Chrome); the interface is drawn as HTML mockups with made-up projects, not screenshots of Oleh's Mac. The same script renders `docs/images/hero.png` (README header) and `social-preview.png` (1280×640). New user-facing README (features, install, privacy, build, docs); the old developer README moved to `docs/REFERENCE.md` with links fixed. GUIDE: `.dmg` name (`AIHubBar-<version>.dmg`) and the uninstall step fixed. `release.sh --publish` attaches the PDFs and has English release notes. `.github/ISSUE_TEMPLATE` (bug, feature). On GitHub: description, 17 topics, Projects tab off.
-Checked: both PDFs rendered and every page looked at as an image (nothing cut off, 8 pages each); facts checked against README/GUIDE and code (universal binary, Notes as .md, Finish prompt); `bash -n` on both scripts. No app code changed, so no xcodebuild run. CI not set up.
+Done: 8-page overview for everyone, `docs/AI-Hub-Bar-Overview-en.pdf` and `-ru.pdf`, made from `docs/overview/overview.<lang>.html` + `style.css` by `scripts/make-overview-pdf.sh` (headless Chrome); the interface is drawn as HTML mockups with made-up projects, not screenshots of Oleh's Mac. The same script renders `docs/images/hero.png` (README header) and `social-preview.png` (1280×640). New user-facing README (features, install, privacy, build, docs); the old developer README moved to `docs/REFERENCE.md` with links fixed. GUIDE: `.dmg` name (`AIHubBar-<version>.dmg`) and the uninstall step fixed. `release.sh --publish` attaches the PDFs and has English release notes. `.github/ISSUE_TEMPLATE` (bug, feature). On GitHub: description, 17 topics, Projects tab off. The repository is already `OlehDemishev/AIHubBar`: `SUFeedURL` (project.yml), `REPO` (release.sh), README, GUIDE, RELEASE, the PDFs and the issue config now use it (old URLs redirect).
+Checked: both PDFs rendered and every page looked at as an image (nothing cut off, 8 pages each); facts checked against README/GUIDE and code (universal binary, Notes as .md, Finish prompt); `bash -n` on both scripts; xcodegen + build with the new SUFeedURL. CI not set up.
 Left: social preview has to be uploaded by hand; the release badge shows nothing while the repository is private; PDFs need a new render when features change (`scripts/make-overview-pdf.sh`).
 
 ## 2026-10-31 — Notifications: once per wait, and a choice per kind (branch `fix/notification-settings`)

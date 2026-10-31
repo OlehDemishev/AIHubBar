@@ -30,7 +30,7 @@ fi
 BUILD_NUMBER="$(git rev-list --count HEAD)"
 OUT="$ROOT/build/release/$VERSION"
 DERIVED="$ROOT/build/release/DerivedData"
-REPO="OlehDemishev/ClaudePult"
+REPO="OlehDemishev/AIHubBar"
 DMG="AIHubBar-$VERSION.dmg"
 NAME="AI Hub Bar"
 rm -rf "$OUT" && mkdir -p "$OUT"

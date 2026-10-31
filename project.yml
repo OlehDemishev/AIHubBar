@@ -49,7 +49,7 @@ targets:
         CFBundleLocalizations: [ru, en, es, pt-BR, fr, de, ja, id, ko, it, ar, pl, uk]
         NSAppleEventsUsageDescription: "AI Hub Bar открывает окна Терминала и запускает в них Claude Code для ваших проектов."
         # Updates (scripts/release.sh): the latest release's appcast, signed with this public key.
-        SUFeedURL: https://github.com/OlehDemishev/ClaudePult/releases/latest/download/appcast.xml
+        SUFeedURL: https://github.com/OlehDemishev/AIHubBar/releases/latest/download/appcast.xml
         SUPublicEDKey: 8ahufHSAtzNg3nCxBQh1jlSoWriuxFfxkLH0AD7dNmY=
         SUEnableAutomaticChecks: true
         SUScheduledCheckInterval: 86400

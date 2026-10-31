@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/OlehDemishev/ClaudePult/releases/latest"><img src="https://img.shields.io/github/v/release/OlehDemishev/ClaudePult?label=download&color=d9774b" alt="Latest release"></a>
+  <a href="https://github.com/OlehDemishev/AIHubBar/releases/latest"><img src="https://img.shields.io/github/v/release/OlehDemishev/AIHubBar?label=download&color=d9774b" alt="Latest release"></a>
   <img src="https://img.shields.io/badge/macOS-14%2B-1f1a17?logo=apple" alt="macOS 14+">
   <img src="https://img.shields.io/badge/Swift-6-f05138?logo=swift&logoColor=white" alt="Swift 6">
   <img src="https://img.shields.io/badge/languages-13-5b524c" alt="13 languages">
@@ -11,7 +11,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/OlehDemishev/ClaudePult/releases/latest"><b>Download</b></a> ·
+  <a href="https://github.com/OlehDemishev/AIHubBar/releases/latest"><b>Download</b></a> ·
   <a href="docs/GUIDE.md"><b>Guide</b></a> ·
   <a href="docs/AI-Hub-Bar-Overview-en.pdf"><b>Overview (PDF)</b></a> ·
   <a href="docs/AI-Hub-Bar-Overview-ru.pdf">Обзор на русском (PDF)</a>
@@ -58,7 +58,7 @@ A command's result is always a **new file** — nothing is overwritten. **Compar
 
 ## Install
 
-1. Download `AIHubBar-<version>.dmg` from [Releases](https://github.com/OlehDemishev/ClaudePult/releases/latest).
+1. Download `AIHubBar-<version>.dmg` from [Releases](https://github.com/OlehDemishev/AIHubBar/releases/latest).
 2. Open it and drag **AI Hub Bar** to Applications.
 3. Open the app. macOS says it can't check the developer (the app isn't signed with an Apple Developer ID) — close the message.
 4. System Settings → Privacy & Security → **Open Anyway**.
@@ -90,7 +90,7 @@ Needs Xcode with Swift 6. The project is generated from `project.yml`; SwiftUI, 
 - [Reference](docs/REFERENCE.md) — every feature in detail, background mode rules, session hooks, command line
 - [Specification](docs/SPEC.md) · [Decisions](DECISIONS.md) · [Status](docs/STATUS.md)
 
-> AI Hub Bar was called **ClaudePult** until October 2026; the repository, the bundle id and the data folders keep the old name.
+> AI Hub Bar was called **ClaudePult** until October 2026; the bundle id, the Xcode project and the data folders keep the old name.
 
 ## License
 
