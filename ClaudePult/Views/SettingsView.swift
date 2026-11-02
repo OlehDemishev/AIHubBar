@@ -36,7 +36,7 @@ struct SettingsView: View {
                 .tabItem { Label("Сервисы AI", systemImage: "cpu") }
                 .tag(Tab.services)
         }
-        .frame(width: 560)
+        .frame(width: tab == .services ? ServicesSettings.width : 560)
         .preferredColorScheme(settings.panelTheme.colorScheme)
         .debugSnapshot("settings")
     }
