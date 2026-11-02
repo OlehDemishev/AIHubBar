@@ -5,8 +5,7 @@
 **Updated:** 2026-11-02
 
 **Now:**
-- branch `feat/notch-all-screens` (PR open): notch stage 3 part 3 — «все экраны» (an island on every screen) and «Остров» in Quick Toggles
-- merged 2026-11-02: notch stage 3 part 2 — full screen, ⌃⌥Y / ⌃⌥N, first-setup window (#179), feedback — idea / problem links to GitHub issue forms, crash report prompt (#177), Chinese models by API — Qwen, Kimi, GLM, MiniMax (#172), notch stage 3 part 1 — pill, screen choice, summary in menu bar / island / both (#173), Antigravity conversations in «Сессии» (#170), Copilot in full (#169), AI services stages 5–6 — Codex threads in «Сессии», stage 3 checked live (#168), stage 4 — thresholds per service, «Другие AI» notch ear, other services in the weekly summary (#167), stage 3 — Codex plan, credits, tokens per project, context (#166), stage 2 — one limits card for every service (#165), Settings redone like System Settings (#164), «Сервисы AI» as a list on the left (#162) in the window colour (#163), glass panel background (#158) and its fix for macOS 27 (#160), AI services spec + stage 1 — Claude Code inside «Сервисы AI», a tab per service (#159)
+- nothing in progress; merged 2026-11-02: notch stage 3 part 3 — «все экраны» (an island on every screen) and «Остров» in Quick Toggles (#181), notch stage 3 part 2 — full screen, ⌃⌥Y / ⌃⌥N, first-setup window (#179), feedback — idea / problem links to GitHub issue forms, crash report prompt (#177), Chinese models by API — Qwen, Kimi, GLM, MiniMax (#172), notch stage 3 part 1 — pill, screen choice, summary in menu bar / island / both (#173), Antigravity conversations in «Сессии» (#170), Copilot in full (#169), AI services stages 5–6 — Codex threads in «Сессии», stage 3 checked live (#168), stage 4 — thresholds per service, «Другие AI» notch ear, other services in the weekly summary (#167), stage 3 — Codex plan, credits, tokens per project, context (#166), stage 2 — one limits card for every service (#165), Settings redone like System Settings (#164), «Сервисы AI» as a list on the left (#162) in the window colour (#163), glass panel background (#158) and its fix for macOS 27 (#160), AI services spec + stage 1 — Claude Code inside «Сервисы AI», a tab per service (#159)
 - released 0.2.2 (v0.2.2, build 345): clickable widgets (#154), Codex from the ChatGPT desktop app (#155), notch island stage 2 (#153)
 - notch island stage 1 merged (#149): module, island over the notch, ears, hover card; target release 0.3.0
 - notch island stage 2 merged (#153): banners for events, permission requests with Allow / Deny in the island
@@ -20,7 +19,7 @@
 - release without an Apple Developer account ready (PR #85), nothing published; Windows and Linux specs wait for Oleh
 
 **Next:**
-- notch island for 0.3.0: stage 3 done with this PR (left: «Скрыть остров» in the ✦ menu, a live VoiceOver walk); next a 0.3.0 build for Oleh's MacBook Air before publishing
+- notch island for 0.3.0: stage 3 done (#181; left: «Скрыть остров» in the ✦ menu, a live VoiceOver walk); next a 0.3.0 build for Oleh's MacBook Air before publishing
 - after 0.3.0: notch island stage 4 — Claude session live activity (docs/SPEC-notch.md §3.4, agreed by Oleh 2026-11-02): plan progress ring and «3/7» in the sessions ear, steps in the card, summary in «Сессия закончила»
 - AI services (docs/SPEC-ai-services.md §5): all six stages done for Claude Code, Codex, Copilot CLI and Antigravity (Oleh, 2026-11-02: these three besides Claude are enough; Gemini CLI removed — its Google sign-in is gone; Cursor not used); left only a «waiting» signal if the agents get hooks
 - standing rule (SPEC §3.1): every new icon-only control gets a hover hint; finish each UI stage with the accessibility walk
@@ -30,7 +29,7 @@
 - Windows and Linux versions (docs/SPEC-windows.md, docs/SPEC-linux.md) — only when Oleh says; stage 0 (fact checks in VMs) first
 
 **Needs Oleh:**
-- merge the PR of `feat/notch-all-screens`; then on the MacBook Air with a monitor: Settings → Модули → «Остров у чёлки» → «Где показывать» → «все экраны» — the notch on the Air and the pill on the monitor, a banner on both, the card opens where you hover
+- on the MacBook Air with a monitor (build from main): Settings → Модули → «Остров у чёлки» → «Где показывать» → «все экраны» — the notch on the Air and the pill on the monitor, a banner on both, the card opens where you hover
 - answer the island's first-setup window (it is open now: requests, summary, pill, hot keys) and press «Готово»; on the MacBook Air later: full-screen app (only requests and waits, no ears) and, if you turn them on, ⌃⌥Y / ⌃⌥N on a request
 - feedback (installed build, merged #177): an alert «В прошлый раз AI Hub Bar закрылся с ошибкой» is on screen (a real crash of the notch branch build at 16:46) — press «Сообщить на GitHub…»: a filled bug form should open in the browser and the report in Finder; don't submit it unless you want the issue. Settings → Основные → «Обратная связь» has both buttons; optional: an e-mail address for people without GitHub
 - on the MacBook Air (build from main): Settings → Модули → «Остров у чёлки» → «Сводка» → «только в острове» — the menu bar should keep only the icon and the red dot while the ears show limits and sessions; «только в строке меню» — no ears
