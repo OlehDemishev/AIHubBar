@@ -285,7 +285,6 @@ private struct ModeEditor: View {
             Footnote(text: String(localized: "Блоки панели этого профиля сверху вниз. «Ближайшее», «Проекты» и «Отчёты» появляются, когда у профиля включён календарь, есть источник проектов или команды _daily-report."))
         }
     }
-
 }
 
 /// A `~`-path with «Выбрать…»; red when the folder does not exist on this Mac (e.g. after an import).

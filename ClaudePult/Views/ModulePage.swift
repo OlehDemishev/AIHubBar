@@ -122,7 +122,7 @@ struct ModulePlaces: View {
                 : ModuleSwitch.unavailableReason(kind)
         case .menuBar: String(localized: "Элементы модуля в строке меню; порядок и вид — «Строка меню»")
         case .island: String(localized: "Ушко у чёлки показывает модуль")
-        case .notifications: String(localized: "Уведомления macOS от модуля; как часто — «Основные»")
+        case .notifications: String(localized: "Уведомления macOS от модуля; как часто — ниже, в «Как часто уведомлять»")
         case .telegram: String(localized: "Дублировать в Telegram; бот — «Основные» → Telegram")
         }
     }
@@ -265,6 +265,9 @@ struct ModulePage: View {
                 }
             }
             sections
+            if !NotificationKind.of(kind).isEmpty {
+                NotificationFrequencySection(kinds: NotificationKind.of(kind))
+            }
             if kind.isPanelBlock, !modes.modes.isEmpty {
                 Section {
                     LabeledContent("В профилях", value: profiles)
@@ -316,6 +319,45 @@ struct ModulePage: View {
     private var profiles: String {
         let names = modes.modes.filter { $0.shows(kind) }.map(\.name)
         return names.isEmpty ? String(localized: "нет") : names.joined(separator: ", ")
+    }
+}
+
+/// How often each of a module's notifications may come (it was one list in «Основные»).
+private struct NotificationFrequencySection: View {
+    let kinds: [NotificationKind]
+
+    @Environment(AppSettings.self) private var settings
+
+    var body: some View {
+        Section {
+            ForEach(kinds) { kind in
+                Picker(kind.title, systemImage: kind.symbol, selection: Binding(
+                    get: { settings.frequency(kind) },
+                    set: { settings.notificationFrequencies[kind.rawValue] = $0.rawValue }
+                )) {
+                    ForEach(NotificationFrequency.allCases) { Text($0.title).tag($0) }
+                }
+            }
+        } header: {
+            Text("Как часто уведомлять")
+        } footer: {
+            Footnote(text: String(localized: "«Не чаще…» считается для одного и того же события: та же сессия, тот же порог, тот же PR. Разные события приходят как обычно. Telegram настраивается отдельно, у каждого модуля."))
+        }
+    }
+}
+
+extension NotificationKind {
+    var symbol: String {
+        switch self {
+        case .waiting: "hand.raised"
+        case .context: "gauge.with.needle"
+        case .background: "moon.zzz"
+        case .limits: "gauge.with.dots.needle.67percent"
+        case .pullRequests: "arrow.triangle.pull"
+        case .calendar: "calendar"
+        case .resources: "cpu"
+        case .commands: "terminal"
+        }
     }
 }
 

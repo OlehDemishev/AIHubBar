@@ -79,5 +79,9 @@ struct ModuleSwitchTests {
         #expect(NotificationKind.waiting.module == .sessions)
         #expect(NotificationKind.limits.module == .limits)
         #expect(NotificationKind.commands.module == nil)
+        // Every frequency is set on some module's page now that «Основные» has no list.
+        #expect(Set(ModuleKind.allCases.flatMap(NotificationKind.of)) == Set(NotificationKind.allCases))
+        #expect(NotificationKind.of(.reports) == [.commands])
+        #expect(SettingsPane.module(.limits).matches("Лимиты: Claude"))
     }
 }

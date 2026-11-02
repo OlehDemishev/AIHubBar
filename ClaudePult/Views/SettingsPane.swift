@@ -110,7 +110,7 @@ enum SettingsPane: Hashable, Sendable {
         case .panel:
             [String(localized: "Порядок"), String(localized: "Блоки")]
         case let .module(kind):
-            kind.keywords
+            kind.keywords + NotificationKind.of(kind).map(\.title)
         case .appearance:
             [String(localized: "Тема"), String(localized: "Фон панели"), String(localized: "Размер текста"),
              String(localized: "Ширина"), String(localized: "Плотность строк")]
