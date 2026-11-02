@@ -8,6 +8,46 @@ enum SessionFiles {
     static let hookScriptURL = supportDirectory.appending(path: "hooks/claudepult-hook.py")
 }
 
+/// One step of Claude Code's task list (`TodoWrite`, `TaskCreate` / `TaskUpdate`), as the hook keeps it.
+struct SessionTodo: Decodable, Equatable, Sendable {
+    enum Status: String, Decodable, Sendable {
+        case pending, inProgress = "in_progress", completed
+
+        init(from decoder: Decoder) throws {
+            self = Status(rawValue: try decoder.singleValueContainer().decode(String.self)) ?? .pending
+        }
+    }
+
+    var content: String
+    var status: Status
+    /// «Пишет тесты»: what Claude shows while the step is in progress.
+    var activeForm: String?
+
+    enum CodingKeys: String, CodingKey {
+        case content, status
+        case activeForm = "active_form"
+    }
+
+    init(content: String, status: Status, activeForm: String? = nil) {
+        self.content = content
+        self.status = status
+        self.activeForm = activeForm
+    }
+
+    init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        content = (try? c.decodeIfPresent(String.self, forKey: .content)) ?? ""
+        status = (try? c.decodeIfPresent(Status.self, forKey: .status)) ?? .pending
+        activeForm = try? c.decodeIfPresent(String.self, forKey: .activeForm)
+    }
+
+    /// The words for the step: while in progress its `activeForm`, else its title.
+    var text: String {
+        if status == .inProgress, let activeForm, !activeForm.isEmpty { return activeForm }
+        return content
+    }
+}
+
 /// One Claude Code session as written by the hook to `sessions/<session_id>.json` (format version 1).
 struct Session: Decodable, Identifiable, Equatable, Sendable {
     enum State: String, Decodable, Sendable {
@@ -38,12 +78,18 @@ struct Session: Decodable, Identifiable, Equatable, Sendable {
     var lastTool: String?
     var lastTarget: String?
     var lastToolAt: Date?
+    /// Claude's task list for the current request (SPEC-notch §3.4); empty when it made none.
+    var todos: [SessionTodo] = []
+    /// When the last request was sent (UserPromptSubmit).
+    var promptAt: Date?
 
     enum CodingKeys: String, CodingKey {
         case cwd, project, state, event, message, tty, entrypoint
         case lastTool = "last_tool"
         case lastTarget = "last_target"
         case lastToolAt = "last_tool_at"
+        case todos
+        case promptAt = "prompt_at"
         case id = "session_id"
         case projectPath = "project_path"
         case startedAt = "started_at"
@@ -76,7 +122,17 @@ struct Session: Decodable, Identifiable, Equatable, Sendable {
         lastTool = try? c.decodeIfPresent(String.self, forKey: .lastTool)
         lastTarget = try? c.decodeIfPresent(String.self, forKey: .lastTarget)
         lastToolAt = c.isoDate(.lastToolAt)
+        todos = (try? c.decodeIfPresent([SessionTodo].self, forKey: .todos)) ?? []
+        promptAt = c.isoDate(.promptAt)
     }
+
+    /// Steps done and all steps of the task list; nil without one.
+    var progress: (done: Int, total: Int)? {
+        todos.isEmpty ? nil : (todos.filter { $0.status == .completed }.count, todos.count)
+    }
+
+    /// The step in progress.
+    var currentTodo: SessionTodo? { todos.first { $0.status == .inProgress } }
 
     /// «правит LimitsView.swift», «запускает npm test», «ищет TODO»: the last tool call in words.
     var actionText: String? {
@@ -89,7 +145,7 @@ struct Session: Decodable, Identifiable, Equatable, Sendable {
         case "Grep", "Glob", "ToolSearch": String(localized: "ищет")
         case "WebFetch", "WebSearch": String(localized: "смотрит в сети")
         case "Agent", "Task": String(localized: "работает с агентом")
-        case "TodoWrite": String(localized: "обновляет план")
+        case "TodoWrite", "TaskCreate", "TaskUpdate": String(localized: "обновляет план")
         default: tool.hasPrefix("mcp__") ? String(localized: "инструмент") + " " + (tool.split(separator: "_").last.map(String.init) ?? tool) : tool
         }
         return target.isEmpty ? verb : "\(verb) \(target)"

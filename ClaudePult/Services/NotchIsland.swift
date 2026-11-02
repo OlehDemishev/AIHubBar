@@ -74,6 +74,9 @@ struct NotchSettings: Codable, Equatable, Sendable {
     var hotKeys = false
     /// The first-setup window (SPEC-notch §6.1) was answered or closed.
     var setupDone = false
+    /// «Ход работы Claude в ушке сессий» (SPEC-notch §3.4): the task list's progress in the ear, its steps in the
+    /// card, progress and files in «Готово».
+    var liveActivity = true
 
     init() {}
 
@@ -95,6 +98,7 @@ struct NotchSettings: Codable, Equatable, Sendable {
         hidden = (try? c.decodeIfPresent(Bool.self, forKey: .hidden)) ?? defaults.hidden
         hotKeys = (try? c.decodeIfPresent(Bool.self, forKey: .hotKeys)) ?? defaults.hotKeys
         setupDone = (try? c.decodeIfPresent(Bool.self, forKey: .setupDone)) ?? defaults.setupDone
+        liveActivity = (try? c.decodeIfPresent(Bool.self, forKey: .liveActivity)) ?? defaults.liveActivity
     }
 }
 
@@ -306,18 +310,30 @@ final class NotchIsland {
         return settings.notch.replaceNotifications && [.request, .waiting].contains(eventKind) && isVisible
     }
 
-    /// A session that went from working to done gets a short banner (no system notification has this).
+    /// A session that went from working to done gets a short banner (no system notification has this). With the
+    /// live activity on it says how far the task list got, how long the answer took and how many files changed.
     private func noticeFinished(_ items: [SessionStore.Item]) {
         let states = Dictionary(items.map { ($0.id, $0.state) }) { first, _ in first }
         defer { lastStates = states }
         guard let lastStates, settings.notch.events.contains(.done), !isFullScreen else { return }
         for item in items where item.state == .done && [.running, .waiting].contains(lastStates[item.id]) {
-            let duration = item.session.startedAt.map { DurationText.short(from: $0, to: item.session.updatedAt) }
-            queue.push(NotchEvent(
-                id: "done-\(item.id)", kind: .done,
-                title: String(localized: "Готово: \(item.session.displayProject)"),
-                body: duration ?? "", target: .session(id: item.id), arrived: .now
-            ))
+            let session = item.session
+            let event = { (body: String) in
+                NotchEvent(id: "done-\(item.id)", kind: .done, title: String(localized: "Готово: \(session.displayProject)"),
+                           body: body, target: .session(id: item.id), arrived: .now)
+            }
+            guard settings.notch.liveActivity else {
+                queue.push(event(session.startedAt.map { DurationText.short(from: $0, to: session.updatedAt) } ?? ""))
+                continue
+            }
+            let duration = (session.promptAt ?? session.startedAt).map { DurationText.short(from: $0, to: session.updatedAt) }
+            // The files come from git; the banner waits for them (a second at most, usually).
+            Task { @MainActor [weak self] in
+                let changes = session.cwd.isEmpty ? nil : await SessionChangesStore.read(folder: session.cwd, since: session.startedAt)
+                guard let self, !self.places.isEmpty else { return }
+                self.queue.push(event(NotchText.finishedBody(progress: session.progress, duration: duration, files: changes?.files.count)))
+                self.showNext()
+            }
         }
     }
 

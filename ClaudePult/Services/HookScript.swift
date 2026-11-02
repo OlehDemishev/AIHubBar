@@ -13,7 +13,7 @@ enum HookScript {
 
     static let source = #"""
     #!/usr/bin/python3
-    # AI Hub Bar hook, format 2. Installed by AI Hub Bar; records Claude Code session state in
+    # AI Hub Bar hook, format 3. Installed by AI Hub Bar; records Claude Code session state in
     # ~/Library/Application Support/ClaudePult/sessions/<session_id>.json for the menu bar app.
     # Always exits 0 and prints nothing, except on PermissionRequest when the person answered «Разрешить» or
     # «Отклонить» in AI Hub Bar: then it prints that decision. Claude shows its own dialog meanwhile.
@@ -24,6 +24,11 @@ enum HookScript {
     PROMPT_LIMIT = 200
     APPROVAL_WAIT = 290
     ALIVE_WITHIN = 30
+    # Claude Code's task list: TodoWrite sends the whole list, TaskCreate / TaskUpdate one task at a time.
+    TODO_TOOLS = {"TodoWrite", "TaskCreate", "TaskUpdate"}
+    TODO_STATUSES = {"pending", "in_progress", "completed"}
+    TODO_LIMIT = 20
+    TODO_TEXT = 120
 
 
     def arg(name, default=None):
@@ -72,6 +77,55 @@ enum HookScript {
         return None, None
 
 
+    def todo_item(content, status, active_form, task_id=None):
+        item = {"content": " ".join(str(content or "").split())[:TODO_TEXT],
+                "status": status if status in TODO_STATUSES else "pending"}
+        if active_form:
+            item["active_form"] = " ".join(str(active_form).split())[:TODO_TEXT]
+        if task_id is not None:
+            item["id"] = str(task_id)
+        return item
+
+
+    def apply_todos(record, data):
+        """The session's task list in `todos`: replaced by TodoWrite, kept task by task for TaskCreate / TaskUpdate."""
+        tool = data.get("tool_name")
+        tool_input = data.get("tool_input") or {}
+        if not isinstance(tool_input, dict):
+            return
+        todos = [t for t in record.get("todos") or [] if isinstance(t, dict)]
+        if tool == "TodoWrite":
+            items = tool_input.get("todos")
+            if not isinstance(items, list):
+                return
+            todos = [todo_item(t.get("content"), t.get("status"), t.get("activeForm")) for t in items if isinstance(t, dict)]
+        elif tool == "TaskCreate":
+            response = data.get("tool_response")
+            task = response.get("task") if isinstance(response, dict) else None
+            task_id = task.get("id") if isinstance(task, dict) else None
+            todos.append(todo_item(tool_input.get("subject"), "pending", tool_input.get("activeForm"),
+                                   task_id if task_id is not None else "new-%d" % len(todos)))
+        elif tool == "TaskUpdate":
+            task_id = str(tool_input.get("taskId") or "")
+            match = next((t for t in todos if t.get("id") == task_id), None)
+            if match is None:
+                return
+            status = tool_input.get("status")
+            if status == "deleted":
+                todos.remove(match)
+            else:
+                if status in TODO_STATUSES:
+                    match["status"] = status
+                if tool_input.get("subject"):
+                    match["content"] = " ".join(str(tool_input["subject"]).split())[:TODO_TEXT]
+                if tool_input.get("activeForm"):
+                    match["active_form"] = " ".join(str(tool_input["activeForm"]).split())[:TODO_TEXT]
+        if todos:
+            record["todos"] = todos[:TODO_LIMIT]
+        else:
+            record.pop("todos", None)
+
+
     def apply(record, data):
         event = data.get("hook_event_name", "")
         state = record.get("state")
@@ -79,9 +133,16 @@ enum HookScript {
             if data.get("source") != "compact" or not state:
                 record["state"] = "done"
                 record.pop("message", None)
+            if data.get("source") in ("startup", "clear"):
+                record.pop("todos", None)
         elif event == "UserPromptSubmit":
             record["state"] = "running"
             record.pop("message", None)
+            record["prompt_at"] = now()
+            # A new request after a finished list starts without it; an unfinished one carries on.
+            todos = record.get("todos") or []
+            if todos and all(isinstance(t, dict) and t.get("status") == "completed" for t in todos):
+                record.pop("todos", None)
             prompt = clip(data.get("prompt"))
             if prompt:
                 record["last_prompt"] = prompt
@@ -98,6 +159,8 @@ enum HookScript {
             record.pop("message", None)
             record["last_tool"], record["last_target"] = action_of(data)
             record["last_tool_at"] = now()
+            if data.get("tool_name") in TODO_TOOLS:
+                apply_todos(record, data)
         elif event == "Stop":
             record["state"] = "done"
             record.pop("message", None)
@@ -109,6 +172,7 @@ enum HookScript {
         elif event == "SessionEnd":
             record["state"] = "ended"
             record["end_reason"] = data.get("reason")
+            record.pop("todos", None)
         record["event"] = event
 
 
@@ -214,8 +278,10 @@ enum HookScript {
             before = (record.get("state"), record.get("message"))
             stamp = now()
 
-            # PostToolUse fires on every tool call: write when the action changes, else once a minute.
-            if data.get("hook_event_name") == "PostToolUse" and record.get("state") == "running":
+            # PostToolUse fires on every tool call: write when the action changes, else once a minute. The task
+            # list is always written: each call changes it.
+            if (data.get("hook_event_name") == "PostToolUse" and record.get("state") == "running"
+                    and data.get("tool_name") not in TODO_TOOLS):
                 try:
                     last = datetime.datetime.fromisoformat(record.get("updated_at", ""))
                     age = (datetime.datetime.now(last.tzinfo) - last).total_seconds()
