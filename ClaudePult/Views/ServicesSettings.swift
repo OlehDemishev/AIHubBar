@@ -73,6 +73,13 @@ enum ServiceTab: String, CaseIterable, Sendable {
 enum SettingsRoute {
     static let tabKey = "settingsTab"
     static let serviceKey = "servicesTab"
+    static let moduleKey = "settingsModule"
+
+    /// Settings → the module's own page (SPEC-settings §2).
+    static func open(module: ModuleKind, defaults: UserDefaults = .standard) {
+        defaults.set(SettingsView.Tab.module.rawValue, forKey: tabKey)
+        defaults.set(module.rawValue, forKey: moduleKey)
+    }
 
     /// Settings → «Сервисы AI» → `service`.
     static func open(service: ServiceTab, defaults: UserDefaults = .standard) {

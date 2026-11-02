@@ -135,7 +135,7 @@ struct ClaudePultApp: App {
         IntentBridge.settings = settings
         IntentBridge.quickTools = quickTools
         layoutSwitcher.openSettings = { [requests] in
-            UserDefaults.standard.set(SettingsView.Tab.modules.rawValue, forKey: "settingsTab")
+            SettingsRoute.open(module: .layout)
             requests.openWindow("settings")
         }
         AppDelegate.openFile = { url in

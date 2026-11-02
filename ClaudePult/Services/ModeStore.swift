@@ -202,6 +202,9 @@ final class ModeStore {
         installedModules.contains(kind) && !switchedOff.contains(kind) && (!kind.isBeta || settings.betaUpdates)
     }
 
+    /// «Раскладка» and other beta modules work only with beta builds.
+    var isBetaAllowed: Bool { settings.betaUpdates }
+
     /// The working modules, in catalog order.
     var activeModules: [ModuleKind] { ModuleKind.allCases.filter(isOn) }
 
