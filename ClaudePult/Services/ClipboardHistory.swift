@@ -87,9 +87,18 @@ final class ClipboardHistory {
         }
     }
 
+    /// «Раскладка» copies the selection to convert it and puts the clipboard back: not a copy of the person's.
+    private static var pausedUntil = Date.distantPast
+
+    static func pause(seconds: TimeInterval) { pausedUntil = .now.addingTimeInterval(seconds) }
+
     private func poll() {
         guard isActive() else {
             if !items.isEmpty || loaded { items = []; loaded = false }
+            return
+        }
+        if Date.now < Self.pausedUntil {
+            lastChange = NSPasteboard.general.changeCount
             return
         }
         if !loaded {

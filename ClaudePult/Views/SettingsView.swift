@@ -203,6 +203,7 @@ private struct GeneralSettings: View {
             Section {
                 LabeledContent("Версия", value: Self.version)
                 UpdatesRow()
+                BetaRow()
                 LabeledContent("Журнал") {
                     Button("Показать в Finder") {
                         NSWorkspace.shared.activateFileViewerSelecting([AppLog.fileURL])
@@ -521,10 +522,11 @@ private struct SavedPromptsSection: View {
 /// removing arrive with the first optional module (Ресурсы Mac, SPEC-profiles §9.4).
 private struct ModulesSettings: View {
     @Environment(ModeStore.self) private var modes
+    @Environment(AppSettings.self) private var settings
 
     var body: some View {
         Form {
-            ForEach(ModuleKind.allCases, id: \.self) { kind in
+            ForEach(ModuleKind.allCases.filter { !$0.isBeta || settings.betaUpdates || modes.installedModules.contains($0) }, id: \.self) { kind in
                 Section {
                     Text(kind.summary)
                         .font(.callout)
@@ -536,7 +538,14 @@ private struct ModulesSettings: View {
                 } header: {
                     HStack {
                         Label(kind.title, systemImage: kind.symbol)
+                        if kind.isBeta { BetaBadge() }
                         Spacer()
+                        // Installed, then «Бета-версии» switched off: stopped, and can still be removed.
+                        if kind.isBeta, !settings.betaUpdates {
+                            Text("только в бета-версии")
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                        }
                         if kind.isBuiltIn {
                             Text(modes.installedModules.contains(kind) ? String(localized: "встроенный") : String(localized: "не используется"))
                                 .font(.caption)
@@ -565,6 +574,7 @@ private struct ModulesSettings: View {
                 case .clipboard where modes.installedModules.contains(.clipboard): ClipboardSection()
                 case .notes where modes.installedModules.contains(.notes): NotesSection()
                 case .notch where modes.installedModules.contains(.notch): NotchSection()
+                case .layout where modes.installedModules.contains(.layout) && settings.betaUpdates: LayoutSection()
                 default: EmptyView()
                 }
             }
@@ -576,6 +586,69 @@ private struct ModulesSettings: View {
     private func profiles(showing kind: ModuleKind) -> String {
         let names = modes.modes.filter { $0.shows(kind) }.map(\.name)
         return names.isEmpty ? String(localized: "нет") : names.joined(separator: ", ")
+    }
+}
+
+/// «бета» next to a module still in beta testing.
+private struct BetaBadge: View {
+    var body: some View {
+        Text("бета")
+            .font(.caption2.weight(.semibold))
+            .textCase(.uppercase)
+            .padding(.horizontal, 5)
+            .padding(.vertical, 1)
+            .foregroundStyle(.orange)
+            .background(.orange.opacity(0.15), in: Capsule())
+    }
+}
+
+/// «Раскладка» (SPEC-layout §4): the permission, the layouts it switches between and the few switches it has.
+private struct LayoutSection: View {
+    @Environment(AppSettings.self) private var settings
+    @Environment(LayoutSwitcher.self) private var switcher
+
+    var body: some View {
+        @Bindable var settings = settings
+        Section {
+            if !switcher.trusted {
+                LabeledContent {
+                    Button("Открыть настройки") { switcher.requestAccess() }
+                } label: {
+                    Label("Нужен доступ к «Универсальному доступу»", systemImage: "exclamationmark.triangle")
+                        .foregroundStyle(.orange)
+                }
+            }
+            LabeledContent("Раскладки", value: switcher.layouts.isEmpty ? String(localized: "нет подходящих") : switcher.layouts.map(\.name).joined(separator: ", "))
+            Toggle("Исправлять раскладку сам", isOn: $settings.layout.auto)
+            Toggle("Не исправлять в терминалах", isOn: $settings.layout.skipTerminals)
+                .disabled(!settings.layout.auto)
+            Toggle("Двойной Shift — последнее слово", isOn: $settings.layout.doubleShift)
+            Toggle("⌥⇧ — выделенный текст", isOn: $settings.layout.optionShift)
+            Toggle("Язык в строке меню", isOn: $settings.layout.menuBarIcon)
+                .onChange(of: settings.layout.menuBarIcon) { switcher.sync() }
+        } header: {
+            Text("Раскладка")
+        } footer: {
+            Footnote(text: switcher.layouts.count < 2
+                ? String(localized: "Нужны хотя бы две раскладки из: русская, английская, украинская, немецкая, французская, испанская, португальская. Добавьте их в Системных настройках → Клавиатура → Источники ввода.")
+                : String(localized: "Слово проверяется системным словарём, когда вы ставите пробел, Enter или Tab. Двойной Shift сразу после исправления отменяет его и запоминает слово. Пароли и поля паролей не читаются, набранное никуда не записывается."))
+        }
+        Section {
+            if settings.layout.learned.isEmpty {
+                Text("Пока пусто")
+                    .foregroundStyle(.secondary)
+            }
+            ForEach(settings.layout.learned, id: \.self) { word in
+                LabeledContent(word) {
+                    Button("Убрать") { switcher.forgetLearned(word) }
+                        .controlSize(.small)
+                }
+            }
+        } header: {
+            Text("Не исправлять")
+        } footer: {
+            Footnote(text: String(localized: "Слова, исправление которых вы отменили двойным Shift или ⌘Z. Уберите слово, чтобы оно снова исправлялось."))
+        }
     }
 }
 
@@ -1233,5 +1306,19 @@ private struct UpdatesRow: View {
                 Button("Проверить сейчас") { Updates.checkNow() }
             }
         }
+    }
+}
+
+/// «Бета-версии»: beta builds before everyone else, and the modules still in beta testing.
+private struct BetaRow: View {
+    @Environment(AppSettings.self) private var settings
+
+    var body: some View {
+        @Bindable var settings = settings
+        Toggle(isOn: $settings.betaUpdates) {
+            Text("Бета-версии")
+            Text("Новые сборки раньше всех и функции на испытании: \(ModuleKind.allCases.filter(\.isBeta).map(\.title).joined(separator: ", ")). Может работать с ошибками; выключите — останетесь на этой версии до следующего обычного выпуска.")
+        }
+        .onChange(of: settings.betaUpdates) { Updates.beta = settings.betaUpdates }
     }
 }

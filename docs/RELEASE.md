@@ -39,6 +39,22 @@ scripts/release.sh 0.2.0 --publish  # the same, then the GitHub release v0.2.0 w
 - **How copies find updates:** they read `https://github.com/OlehDemishev/AIHubBar/releases/latest/download/appcast.xml`, which is the newest release's appcast. Nothing else has to be uploaded or committed.
 - **Public repository needed:** people can only download the files once the repository is public.
 
+## Beta builds
+
+Beta (canary) builds go to beta testers first: people who switched on Settings → General → **Beta builds** («Бета-версии»).
+
+```bash
+scripts/release.sh 0.4.0-beta.1 --publish   # a beta: GitHub pre-release v0.4.0-beta.1
+scripts/release.sh 0.4.0 --publish          # the release, later
+```
+
+- **Who gets a beta:** only copies with “Beta builds” on. A pre-release is never GitHub's “latest”, so the normal appcast (`releases/latest/download/appcast.xml`) doesn't change.
+- **The beta channel:** beta testers' copies read `https://github.com/OlehDemishev/AIHubBar/releases/download/beta/appcast.xml` instead (`Updates.betaFeedURL`). It is an asset of the release tagged `beta`, which holds no build. Every `--publish`, beta or not, replaces it with the newest release and the newest beta (`scripts/release-tools/beta-feed.py`). The first beta creates that release. Beta items carry `<sparkle:channel>beta</sparkle:channel>`; Sparkle takes them only in a beta tester's copy.
+- **After the release:** a release with a higher build number than the beta reaches beta testers too, so nobody stays on an old beta.
+- **Switched off:** Sparkle doesn't go back to an older version. The copy stays on the beta until the next release, which is newer.
+- **Features in beta testing:** a module with `ModuleKind.isBeta` is in the Modules catalog and works only with “Beta builds” on. Today: «Раскладка» (docs/SPEC-layout.md). To release it to everyone, drop it from `isBeta`.
+- **Version names:** `0.4.0-beta.1`, `-beta.2` …. The build number (commit count) decides what is newer, as for releases. `scripts/build-and-install.sh` skips beta tags when it names a local build.
+
 ## First launch for people
 
 1. Download `AIHubBar-<version>.dmg` from Releases, open it and drag AI Hub Bar to Applications.

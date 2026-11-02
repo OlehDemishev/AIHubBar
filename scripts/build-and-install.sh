@@ -46,7 +46,7 @@ fi
 # Numbered like scripts/release.sh (build = commit count), so Sparkle never takes a build from main for older than the
 # last release and «updates» it back to that release. Version: the newest release tag.
 BUILD_NUMBER="$(git rev-list --count HEAD)"
-VERSION="$(git tag -l 'v*' --sort=-v:refname | head -1)"
+VERSION="$(git tag -l 'v*' --sort=-v:refname | grep -v -- '-beta' | head -1)"
 VERSION="${VERSION#v}"
 VERSION="${VERSION:-0.1.0}"
 

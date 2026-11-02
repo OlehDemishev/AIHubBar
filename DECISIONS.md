@@ -2,6 +2,14 @@
 
 Decisions made where the spec is silent or does not match reality. Newest at the top.
 
+## 2026-11-02 — Beta builds and «Раскладка» in beta testing
+
+Oleh asked for canary (beta) builds and for automatic layout switching to go to beta testing first.
+
+- **One switch, two things.** Settings → General → «Бета-версии» both takes beta builds through Sparkle and turns on modules marked `ModuleKind.isBeta`. A second switch for «beta features» would only confuse.
+- **A feed of its own.** Beta testers read the appcast of a GitHub release tagged `beta`, rewritten by every `scripts/release.sh --publish`. Betas themselves are GitHub pre-releases, so the normal `latest` appcast and everyone outside beta stay as they are. The alternative — one appcast with Sparkle channels — would need a fixed place for that appcast too; `latest/download` can't hold betas.
+- **«Раскладка» from the description, with three readings.** The last two points of Oleh's list («Учёт контекста… и замену двойного дефиса…», «Дневника набранного текста, шаблонов…») are read as what the feature doesn't do (their grammar continues a dropped «нет»). «macOS 26 и новее» is not a limit here: the app and the APIs work from macOS 14. Words are checked with the system spell checker (no dictionaries of our own), so «без настройки» holds.
+
 ## 2026-11-02 — Windows and Linux: Tauri 2 in `desktop/`, chosen while Oleh was away
 
 Oleh said «переделку под Windows» and stepped away. SPEC-windows §10 was still open, so the agent took the spec's own proposals. All of them can be reversed before stage 2:
