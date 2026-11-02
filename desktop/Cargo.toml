@@ -3,7 +3,7 @@
 # app  — the tray app; cli — `claudepult`, the console program that talks to the running app.
 [workspace]
 resolver = "2"
-members = ["core", "app", "cli"]
+members = ["core", "app", "cli", "hook"]
 
 [workspace.package]
 version = "0.1.0"

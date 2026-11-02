@@ -18,6 +18,22 @@
         <input type="checkbox" id="autostart">
       </div>
     </section>
+    <h1>Hooks</h1>
+    <section class="card">
+      <div class="row">
+        <span data-t="Сессии Claude Code"></span>
+        <strong id="hooks-status"></strong>
+      </div>
+      <div class="row">
+        <span class="secondary" id="hooks-path"></span>
+        <span>
+          <button id="hooks-install"></button>
+          <button id="hooks-remove" data-t="Удалить"></button>
+        </span>
+      </div>
+      <p class="secondary" style="margin-top: 8px" data-t="Hooks добавляются в settings.json Claude Code (остальные настройки не трогаются, перед изменением рядом сохраняется копия). Они записывают состояние каждой сессии Claude Code на этом компьютере, чтобы AI Hub Bar показывал их в панели."></p>
+      <p class="error" id="hooks-error" hidden></p>
+    </section>
     <p class="secondary" id="version"></p>
   </main>
   <script type="module">
@@ -32,6 +48,24 @@
     select.value = ui.chosen ?? "";
     // The windows reload in the new language; the tray menu follows at once too.
     select.onchange = () => invoke("set_language", { code: select.value || null });
+
+    function showHooks(state) {
+      document.getElementById("hooks-status").textContent = state.title;
+      document.getElementById("hooks-path").textContent = state.settingsPath;
+      const install = document.getElementById("hooks-install");
+      install.textContent = state.status === "outdated" ? t("Обновить hooks") : t("Установить hooks");
+      install.hidden = state.status === "installed";
+      install.disabled = !state.mayInstall;
+      const remove = document.getElementById("hooks-remove");
+      remove.hidden = state.status === "notInstalled";
+      remove.disabled = !state.mayInstall;
+      const error = document.getElementById("hooks-error");
+      error.hidden = !state.error;
+      error.textContent = state.error ?? "";
+    }
+    showHooks(await invoke("hooks_state"));
+    document.getElementById("hooks-install").onclick = async () => showHooks(await invoke("install_hooks"));
+    document.getElementById("hooks-remove").onclick = async () => showHooks(await invoke("uninstall_hooks"));
 
     const autostart = document.getElementById("autostart");
     autostart.checked = await invoke("autostart_enabled");

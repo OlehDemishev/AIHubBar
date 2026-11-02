@@ -17,7 +17,17 @@ Tauri 2: a Rust core plus a small HTML interface. The plan and the stages are in
 - notifications at 50 / 80 / 95 %;
 - `usage.json`.
 
-Still to come in stage 2: Telegram, spend per project, custom thresholds. Sessions and projects are later stages.
+Still to come in stage 2: Telegram, spend per project, custom thresholds.
+
+**Stage 3 «Сессии»** is mostly done:
+- `claudepult-hook`, a port of the Mac hook that writes the same session files;
+- installing it into Claude Code's `settings.json` in exec form (Settings → Hooks);
+- the sessions list in the panel;
+- an orange dot on the tray icon while a session waits.
+
+Still to come in stage 3: «Show» (bringing the terminal forward), checking whether the process is alive, answering permission requests from the app.
+
+On a Mac this build never installs hooks into the real `~/.claude/settings.json`: the Mac app owns it. It does so only with another `CLAUDE_CONFIG_DIR`.
 
 ## Layout
 
@@ -26,6 +36,7 @@ Still to come in stage 2: Telegram, spend per project, custom thresholds. Sessio
 | `core/` | Shared logic with no interface: paths, `settings.json`, languages, the link to the running app, limits (`usage.rs`, `texts.rs`, `tray_icon.rs`). `cargo test -p claudepult-core` runs on any system |
 | `app/` | The tray app, `AIHubBar.exe` / `AIHubBar` (`tauri.conf.json`, icons, capabilities) |
 | `cli/` | `claudepult`, the console program: `AIHubBar.exe` is a window program and cannot print to a console |
+| `hook/` | `claudepult-hook`, the Claude Code hook (port of the Mac's Python hook); `cargo test -p claudepult-hook` runs it with real events |
 | `ui/` | The panel and settings pages, plain HTML/JS with no bundler; `ui/i18n/*.json` are generated |
 | `scripts/strings.py` | Writes `ui/i18n/` from the Mac app's String Catalog |
 
@@ -48,9 +59,10 @@ You need Rust (stable) and Node 22. On Linux you also need the Tauri libraries: 
 npm ci
 cargo test --workspace
 npx tauri dev                      # the app, with reload
-npx tauri build --bundles nsis     # Windows installer (current user, no admin)
-npx tauri build --bundles deb      # Linux package
-cargo build --release -p claudepult-cli
+cargo build --release -p claudepult-hook -p claudepult-cli
+./scripts/stage-binaries.sh        # puts both next to the app in the installer
+npx tauri build --bundles nsis --config app/tauri.bundle.conf.json   # Windows installer (current user, no admin)
+npx tauri build --bundles deb --config app/tauri.bundle.conf.json    # Linux package
 ```
 
 On a Mac this version runs for development only:

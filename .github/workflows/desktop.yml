@@ -87,8 +87,11 @@ jobs:
           cache: npm
           cache-dependency-path: desktop/package-lock.json
       - run: npm ci
-      - run: npx tauri build --bundles ${{ matrix.bundles }}
-      - run: cargo build --release --locked -p claudepult-cli
+      # claudepult-hook and claudepult go into the installer next to the app (externalBin).
+      - run: cargo build --release --locked -p claudepult-hook -p claudepult-cli
+      - run: ./scripts/stage-binaries.sh
+        shell: bash
+      - run: npx tauri build --bundles ${{ matrix.bundles }} --config app/tauri.bundle.conf.json
       - uses: actions/upload-artifact@v4
         with:
           name: ai-hub-bar-${{ runner.os }}
