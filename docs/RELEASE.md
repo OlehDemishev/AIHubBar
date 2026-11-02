@@ -64,4 +64,4 @@ scripts/release.sh 0.4.0 --publish          # the release, later
 
 ## Developer builds
 
-`scripts/build-and-install.sh` signs ad hoc and installs to `~/Applications`. A release installs to `/Applications`. Don't run both at once: they share the bundle id, so there would be two ✦ in the menu bar.
+`scripts/build-and-install.sh` installs to `~/Applications` and signs with the same «ClaudePult Release» certificate when this Mac has the keys (`scripts/release-tools/sign-app.sh`), otherwise ad hoc. With the certificate macOS keeps the app's permissions across builds; an ad-hoc signature changes with every build, and permissions such as Accessibility (needed by «Раскладка») stop working while the switch in System Settings still shows on. Coming from an ad-hoc build: `tccutil reset Accessibility com.demishev.claudepult` once, then allow again. A release installs to `/Applications`. Don't run both at once: they share the bundle id, so there would be two ✦ in the menu bar.

@@ -39,6 +39,8 @@ final class LayoutSwitcher {
     /// The key-up of a space or Return held back with its key-down, so the app doesn't get it alone.
     @ObservationIgnored private var heldKeyUp: UInt16?
     @ObservationIgnored private var converting = false
+    /// macOS's Accessibility prompt is shown once a launch, the first time the module runs without it.
+    @ObservationIgnored private var askedForAccess = false
 
     /// Marks the events «Раскладка» types itself, so the tap lets them through.
     private static let marker: Int64 = 0x4C41_594F
@@ -85,12 +87,22 @@ final class LayoutSwitcher {
 
     /// Installs or removes the tap and the menu bar item as the module, the permission and the settings change.
     func sync() {
-        let granted = AXIsProcessTrusted()
-        if granted != trusted { trusted = granted }
         let on = isActive()
         if on, layouts.isEmpty { reloadLayouts() }
-        if on, trusted { installTap() } else { removeTap() }
+        // The tap itself is the test: `AXIsProcessTrusted` can say no while the list in System Settings says yes.
+        if on { installTap() } else { removeTap() }
+        let granted = tap != nil
+        if granted != trusted {
+            trusted = granted
+            updateStatusItem()
+        }
         if on, settings.layout.menuBarIcon { showStatusItem() } else { hideStatusItem() }
+        if on, !trusted, !askedForAccess {
+            askedForAccess = true
+            AppLog.info("Layout: no key access (Accessibility \(AXIsProcessTrusted()), input monitoring \(CGPreflightListenEventAccess()), posting \(CGPreflightPostEventAccess())), asking macOS")
+            AXIsProcessTrustedWithOptions(["AXTrustedCheckOptionPrompt": true] as CFDictionary)
+            CGRequestListenEventAccess()
+        }
     }
 
     /// Asks macOS for Accessibility: the system prompt, and the list in System Settings to switch it on.
@@ -163,7 +175,7 @@ final class LayoutSwitcher {
                                               return swallow ? nil : Unmanaged.passUnretained(event)
                                           },
                                           userInfo: Unmanaged.passUnretained(self).toOpaque()) else {
-            AppLog.error("Layout: the key tap was not created")
+            // Without access this fails on every check; logged once (`sync`).
             return
         }
         let source = CFMachPortCreateRunLoopSource(nil, tap, 0)
@@ -422,6 +434,8 @@ final class LayoutSwitcher {
         guard let button = statusItem?.button else { return }
         let badge = current?.badge ?? KeyboardLayouts.currentLanguage().map(LayoutWords.badge) ?? "—"
         button.attributedTitle = NSAttributedString(string: badge, attributes: [.font: NSFont.systemFont(ofSize: 12, weight: .semibold)])
+        // Without Accessibility nothing is fixed: the language shows faded until access is given.
+        button.appearsDisabled = !trusted
         button.toolTip = String(localized: "Раскладка: \(KeyboardLayouts.currentName() ?? badge)")
         button.setAccessibilityLabel(String(localized: "Раскладка: \(KeyboardLayouts.currentName() ?? badge)"))
     }
