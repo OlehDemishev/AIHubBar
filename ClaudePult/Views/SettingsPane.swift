@@ -92,11 +92,17 @@ enum SettingsPane: Hashable, Sendable {
         case .general:
             [String(localized: "Запускать при входе в систему"), String(localized: "Уведомления"), "Telegram",
              String(localized: "Токен бота"), String(localized: "Версия"), String(localized: "Журнал"), String(localized: "Обновления"),
-             String(localized: "Обратная связь"), String(localized: "Сообщить о проблеме…"), String(localized: "Предложить идею…")]
+             String(localized: "Обратная связь"), String(localized: "Сообщить о проблеме…"), String(localized: "Предложить идею…"),
+             String(localized: "Бета-версии")]
         case .modes:
             [String(localized: "Проекты"), String(localized: "Общие команды")]
         case .modules:
-            ModuleKind.allCases.map(\.title)
+            // A beta module is found only once «Бета-версии» shows it in the catalog.
+            ModuleKind.allCases.filter { !$0.isBeta || AppSettings.betaUpdatesSaved }.map(\.title)
+                + (AppSettings.betaUpdatesSaved
+                    ? [String(localized: "Исправлять раскладку сам"), String(localized: "Двойной Shift — последнее слово"),
+                       String(localized: "⌥⇧ — выделенный текст"), String(localized: "Язык в строке меню")]
+                    : [])
         case .appearance:
             [String(localized: "Тема"), String(localized: "Фон панели"), String(localized: "Размер текста"),
              String(localized: "Ширина"), String(localized: "Плотность строк")]
