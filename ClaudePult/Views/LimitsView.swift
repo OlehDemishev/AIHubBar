@@ -186,9 +186,12 @@ private struct ServiceCard: View {
             // Figures that could not be refreshed are not passed off as current.
             .opacity(usage.isStale ? 0.45 : 1)
             ForEach(usage.notes, id: \.self) { note in
-                Label(note, systemImage: "creditcard")
+                Label(note.text, systemImage: note.symbol)
                     .scaledFont(.caption)
                     .foregroundStyle(.secondary)
+            }
+            if !usage.projects.isEmpty {
+                ProjectTokensList(projects: usage.projects)
             }
             if let error = usage.error {
                 Label(usage.rings.isEmpty && usage.bars.isEmpty ? error : String(localized: "Не обновилось: \(error)"),
@@ -210,6 +213,50 @@ private struct ServiceCard: View {
     private var forecastLine: String? {
         guard usage.service != .claude, case let .runsOutAt(date) = usage.forecast else { return UsageText.forecast(usage.forecast) }
         return String(localized: "кончится \(date.formatted(.dateTime.weekday(.abbreviated).hour().minute())) при таком темпе")
+    }
+}
+
+/// A service's tokens per project this week, folded by default (Codex: whole threads updated this week).
+private struct ProjectTokensList: View {
+    let projects: [ProjectTokens]
+    @State private var expanded = false
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            Button {
+                withAnimation(.snappy(duration: 0.2)) { expanded.toggle() }
+            } label: {
+                HStack(spacing: 4) {
+                    Image(systemName: "chevron.right")
+                        .rotationEffect(.degrees(expanded ? 90 : 0))
+                    Text("Проекты за неделю")
+                    Spacer()
+                }
+                .scaledFont(.caption)
+                .foregroundStyle(.secondary)
+                .contentShape(Rectangle())
+            }
+            .buttonStyle(.plain)
+            if expanded {
+                let total = max(projects.reduce(0) { $0 + $1.tokens }, 1)
+                ForEach(projects.prefix(6)) { project in
+                    HStack(spacing: 6) {
+                        Text(project.name).lineLimit(1)
+                        Spacer()
+                        Text(TokenBreakdown.tokensText(project.tokens)).foregroundStyle(.secondary)
+                        Text("\(Int((Double(project.tokens) / Double(total) * 100).rounded())) %")
+                            .monospacedDigit()
+                            .frame(width: 38, alignment: .trailing)
+                    }
+                    .scaledFont(.caption)
+                    .help(project.path)
+                }
+                Text("По записям Codex: токены бесед, обновлённых за неделю, — каждая беседа целиком.")
+                    .scaledFont(.caption2)
+                    .foregroundStyle(.tertiary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+        }
     }
 }
 

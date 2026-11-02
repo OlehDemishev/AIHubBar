@@ -22,7 +22,7 @@ struct ServiceUsageTests {
         #expect(usage.rings.map(\.percent) == [42, 18])
         #expect(usage.bars.map(\.id) == ["seven_day_opus"], "an unused model week takes no room")
         #expect(usage.bars.first?.showsReset == false, "resets with the week")
-        #expect(usage.notes.count == 1 && usage.notes[0].contains("Extra usage"))
+        #expect(usage.notes.count == 1 && usage.notes[0].text.contains("Extra usage"))
         #expect(!usage.isStale)
         #expect(ServiceUsage.claude(snapshot, forecast: .unknown, week: nil, error: "HTTP 500").isStale)
     }

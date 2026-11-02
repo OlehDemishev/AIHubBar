@@ -1,6 +1,6 @@
 # SPEC — AI services: Claude as one of them, the same view for every service
 
-Status: stages 1 and 2 done (#159, #162–#164, `feat/service-usage`), 2026-11-02; next: stage 3.
+Status: stages 1–3 done (#159, #162–#166), 2026-11-02; next: stage 4. Stage 3's tokens and context still need a look on a Mac with Codex threads.
 Asked by Oleh on 2026-10-31 and 2026-11-02: move Claude Code into «Сервисы AI», give every AI its own nested tab
 with all its settings, and bring the other services up to Claude Code's level — one model per service for rings,
 forecast, week strip, credits, per-project tokens and context.
@@ -96,8 +96,11 @@ service mark. Sessions: Codex threads next to Claude sessions once a source exis
    Claude Code.
 2. **Common model** (done): `ServiceUsage` / `LimitWindow` / `LimitHistory`; Claude and the hub sources produce it;
    `LimitsView` draws every service with the same card (rings, forecast, week strip for all). Tests on stored answers.
-3. **Codex in full**: credits and plan from `account/rateLimits/read`, history and forecast, tokens per project
-   from `state_5.sqlite` / session logs, context from `token_count`. Live check on a Mac with Codex sessions.
+3. **Codex in full** (done): plan and credits from `account/rateLimits/read` (`CodexThreads.accountNotes`), history
+   and forecast (stage 2), tokens per project this week from `state_<N>.sqlite` `threads` (whole threads, not archived),
+   the context of today's latest thread from its rollout's last `token_count` (tokens without reasoning over
+   `model_context_window`, as Codex counts it). Live: the plan on Oleh's Mac (free plan, no credits); tokens and context
+   only on stored samples — this Mac has no Codex threads yet (`AIHubBar --services limits` shows them once there are).
 4. **Per-service alerts, menu bar and widget**: thresholds per service, «which service» for menu bar elements,
    widget and notch; weekly summary across services.
 5. **Codex sessions**: threads in the sessions list; `notify` hook for «waiting for you» — only after a live check.

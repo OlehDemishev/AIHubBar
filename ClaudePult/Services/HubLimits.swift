@@ -85,6 +85,9 @@ struct HubLimit: Equatable, Identifiable, Sendable {
     var source: Source
     var windows: [Window]
     var error: String?
+    /// Plan, credits, context (Codex so far).
+    var notes: [ServiceNote] = []
+    var projects: [ProjectTokens] = []
     var id: Source { source }
 }
 
@@ -508,10 +511,19 @@ final class HubLimitsStore {
         }
         switch source {
         case .codex:
+            // Beyond the limits (SPEC-ai-services stage 3): plan and credits from the same answer, tokens per project
+            // and the context from Codex's own threads.
+            let extras = CodexThreads.extras()
+            var limit: HubLimit
             if let path = AgentKind.codex.detect(), let data = await HubFetch.codexRPC(path: path), let windows = HubParse.codexRPC(data) {
-                return done(windows)
+                limit = done(windows)
+                limit.notes = CodexThreads.accountNotes(data)
+            } else {
+                limit = done(HubFetch.codexSessions(), .missing)
             }
-            return done(HubFetch.codexSessions(), .missing)
+            limit.notes += extras.notes
+            limit.projects = extras.projects
+            return limit
         case .openRouter:
             guard let key = await APIKeyStore.read(account: "hub-openrouter") else { return done(nil, .missing) }
             return fromHTTP(await HubFetch.get(URL(string: "https://openrouter.ai/api/v1/key")!, headers: ["Authorization": "Bearer \(key)"]), HubParse.openRouter)
