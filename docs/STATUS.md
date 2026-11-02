@@ -5,19 +5,25 @@
 **Updated:** 2026-11-02
 
 **Now:**
-- nothing in progress; beta channel and «Раскладка» (beta) merged in #195 (`aecf785`), not tried live yet
-- Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/SPEC-windows.md §9, stage 2–3 leftovers)
+- nothing in progress; «Раскладка» works live on this Mac (build 438, TextEdit): auto-fix both ways and double-Shift undo
 
 **Next:**
-- Oleh tries «Раскладка» live (needs Accessibility), then the first beta: `scripts/release.sh 0.4.0-beta.1 --publish`
+- Oleh tries «Раскладка» in his own apps, then the first beta: `scripts/release.sh 0.4.0-beta.1 --publish`
 - Mac island: a live VoiceOver walk; why one test drag onto the island didn't land
+- Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/SPEC-windows.md §9, stage 2–3 leftovers)
 
 **Needs Oleh:**
-- «Раскладка»: build (`scripts/build-and-install.sh`), Settings → General → «Бета-версии» on, Modules → «Раскладка» → Установить, allow Accessibility; try «ghbdtn»+space, double Shift, ⌥⇧ on a selection, in Safari/Notes/Telegram/Chrome
+- «Раскладка» is on and has Accessibility on this Mac: try it in Telegram, Chrome, Safari, Notes; ⌥⇧ on a selection is not tried yet
 - say when to publish the first beta (it creates the `beta` release that beta testers' copies read; until then their update check finds nothing)
 - MacBook Air: update to 0.3.0 and check the island at the real notch (see the 0.3.0 entry)
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-02 — «Раскладка» works live: signed local builds, real access check (branch `fix/layout-access`)
+
+Done: Auto-fix did nothing for Oleh: the key tap never started. The app had no Accessibility access although System Settings showed AI Hub Bar on — the entry was made for an older ad-hoc build, and every ad-hoc build has a new signature. Now `scripts/build-and-install.sh` signs with the «ClaudePult Release» certificate (shared `scripts/release-tools/sign-app.sh`, also used by `release.sh`), so the permission survives builds. The switcher tries the tap itself as the access check (`AXIsProcessTrusted` said no while the list said yes), logs Accessibility / input monitoring / posting once, asks macOS, and fades the menu bar language until access is there. Oleh ran `tccutil reset Accessibility com.demishev.claudepult` and allowed again.
+Checked: live on this Mac, build 438, TextEdit with real key events: «ghbdtn»+space → «привет », the «hello» keys in the Russian layout → «hello », layout switched both ways (log: «fixed a word, en → ru», «ru → en»); double Shift right after a fix → «ghbdtn », layout back to English, word learned (then removed from the list again). `xcodebuild build` clean.
+Left: ⌥⇧ on a selection and other apps (Telegram, Chrome) not tried. TextEdit capitalises the first word itself («Привет»).
 
 ## 2026-11-02 — «Раскладка» always visible in Modules (branch `fix/beta-module-visible`)
 
