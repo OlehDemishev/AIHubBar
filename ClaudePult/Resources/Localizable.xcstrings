@@ -15904,6 +15904,82 @@
         }
       }
     },
+    "Включить ⌃⌥Y / ⌃⌥N": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تفعيل ⌃⌥Y / ⌃⌥N"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⌃⌥Y / ⌃⌥N einschalten"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Turn on ⌃⌥Y / ⌃⌥N"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activar ⌃⌥Y / ⌃⌥N"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activer ⌃⌥Y / ⌃⌥N"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aktifkan ⌃⌥Y / ⌃⌥N"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Attiva ⌃⌥Y / ⌃⌥N"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⌃⌥Y / ⌃⌥N をオン"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⌃⌥Y / ⌃⌥N 켜기"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Włącz ⌃⌥Y / ⌃⌥N"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ativar ⌃⌥Y / ⌃⌥N"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Увімкнути ⌃⌥Y / ⌃⌥N"
+          }
+        }
+      }
+    },
     "Включить…": {
       "localizations": {
         "ar": {
@@ -19321,6 +19397,158 @@
           "stringUnit": {
             "state": "translated",
             "value": "Головний файл — за ним рахуються слова та хронометраж"
+          }
+        }
+      }
+    },
+    "Горячие клавиши «Разрешить» / «Отклонить»": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اختصارات «سماح» / «رفض»"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tastenkürzel „Erlauben“ / „Ablehnen“"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“Allow” / “Deny” hot keys"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Atajos «Permitir» / «Rechazar»"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Raccourcis « Autoriser » / « Refuser »"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pintasan “Izinkan” / “Tolak”"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scorciatoie «Consenti» / «Rifiuta»"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「許可」/「拒否」のショートカット"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“허용” / “거부” 단축키"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skróty „Zezwól” / „Odrzuć”"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Atalhos “Permitir” / “Recusar”"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Гарячі клавіші «Дозволити» / «Відхилити»"
+          }
+        }
+      }
+    },
+    "Горячие клавиши ⌃⌥Y / ⌃⌥N для запросов": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الاختصاران ⌃⌥Y / ⌃⌥N للطلبات"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tastenkürzel ⌃⌥Y / ⌃⌥N für Anfragen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⌃⌥Y / ⌃⌥N hot keys for requests"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Atajos ⌃⌥Y / ⌃⌥N para solicitudes"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Raccourcis ⌃⌥Y / ⌃⌥N pour les demandes"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pintasan ⌃⌥Y / ⌃⌥N untuk permintaan"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scorciatoie ⌃⌥Y / ⌃⌥N per le richieste"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "リクエスト用ショートカット ⌃⌥Y / ⌃⌥N"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "요청용 단축키 ⌃⌥Y / ⌃⌥N"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skróty ⌃⌥Y / ⌃⌥N dla próśb"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Atalhos ⌃⌥Y / ⌃⌥N para solicitações"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Гарячі клавіші ⌃⌥Y / ⌃⌥N для запитів"
           }
         }
       }
@@ -22817,6 +23045,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Якщо ввімкнено більше одного профілю, угорі панелі — перемикач. Профілі налаштовуються в Налаштуваннях → «Профілі»; усі налаштування зберігаються у файл .claudepult (Загальні → «Експорт налаштувань…»), подвійний клік по такому файлу — імпорт."
+          }
+        }
+      }
+    },
+    "Если острова не видно (экран спит, Мак заблокирован), уведомление всё равно придёт.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إذا لم تكن الجزيرة ظاهرة (الشاشة نائمة أو الـMac مقفل)، فسيصل الإشعار على أي حال."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ist die Insel nicht zu sehen (Bildschirm im Ruhezustand, Mac gesperrt), kommt die Mitteilung trotzdem."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "If the island can’t be seen (the display is asleep, the Mac is locked), the notification still arrives."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Si la isla no se ve (pantalla en reposo, Mac bloqueado), la notificación llega igualmente."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Si l’île n’est pas visible (écran en veille, Mac verrouillé), la notification arrive quand même."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jika pulau tidak terlihat (layar tidur, Mac terkunci), notifikasi tetap datang."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se l’isola non è visibile (schermo in stop, Mac bloccato), la notifica arriva comunque."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アイランドが見えないとき（画面スリープ、Mac のロック中）は通知が届きます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "아일랜드가 보이지 않으면(화면 잠자기, Mac 잠김) 알림은 그대로 옵니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jeśli wyspy nie widać (ekran uśpiony, Mac zablokowany), powiadomienie i tak przyjdzie."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se a ilha não estiver visível (tela em repouso, Mac bloqueado), a notificação chega mesmo assim."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Якщо острова не видно (екран спить, Мак заблоковано), сповіщення все одно прийде."
           }
         }
       }
@@ -29585,6 +29889,82 @@
         }
       }
     },
+    "Клавишей легко разрешить, не прочитав команду.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "من السهل السماح بمفتاح دون قراءة الأمر."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mit einer Taste erlaubt man leicht, ohne den Befehl zu lesen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "With a key it’s easy to allow without reading the command."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Con una tecla es fácil permitir sin leer el comando."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Avec une touche, on autorise facilement sans lire la commande."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dengan tombol, mudah mengizinkan tanpa membaca perintahnya."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Con un tasto è facile consentire senza leggere il comando."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "キーだとコマンドを読まずに許可しやすくなります。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "키로는 명령을 읽지 않고 허용하기 쉽습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Klawiszem łatwo zezwolić, nie czytając polecenia."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Com uma tecla é fácil permitir sem ler o comando."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Клавішею легко дозволити, не прочитавши команду."
+          }
+        }
+      }
+    },
     "Клик — открыть": {
       "localizations": {
         "ar": {
@@ -30493,6 +30873,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Коли Claude просить дозвіл (команда, правка файлу), у сповіщенні й у рядку сесії з’являються «Дозволити» і «Відхилити». Діалог Claude теж лишається — діє та відповідь, що надійшла першою. У режимі auto Claude питає рідко. Якщо біля hooks написано «потрібно оновити», натисніть «Оновити hooks»."
+          }
+        }
+      }
+    },
+    "Когда Claude просит разрешение или ждёт ответа": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "عندما يطلب Claude إذنًا أو ينتظر الرد"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wenn Claude um Erlaubnis bittet oder auf Antwort wartet"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "When Claude asks for permission or waits for you"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cuando Claude pide permiso o espera respuesta"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quand Claude demande une autorisation ou attend une réponse"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Saat Claude meminta izin atau menunggu jawaban"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quando Claude chiede un permesso o attende una risposta"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude が許可を求めたり返答を待ったりしたとき"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude가 권한을 요청하거나 답을 기다릴 때"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gdy Claude prosi o zgodę lub czeka na odpowiedź"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quando o Claude pede permissão ou aguarda resposta"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Коли Claude просить дозвіл або чекає відповіді"
           }
         }
       }
@@ -35595,6 +36051,82 @@
         }
       }
     },
+    "На экранах без чёлки": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "على الشاشات دون نتوء"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Auf Bildschirmen ohne Notch"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "On screens without a notch"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En pantallas sin muesca"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sur les écrans sans encoche"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Di layar tanpa notch"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sugli schermi senza notch"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ノッチのない画面では"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "노치 없는 화면에서"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Na ekranach bez wycięcia"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Em telas sem notch"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "На екранах без чубчика"
+          }
+        }
+      }
+    },
     "На этом Маке сейчас нет экрана с чёлкой: остров появится, когда она будет (например, на встроенном экране MacBook).": {
       "localizations": {
         "ar": {
@@ -38261,6 +38793,82 @@
         }
       }
     },
+    "Не нужны": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "غير مطلوبة"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nicht nötig"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Not needed"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No hacen falta"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pas besoin"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tidak perlu"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Non servono"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "不要"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "필요 없음"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Niepotrzebne"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Não precisa"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Не потрібні"
+          }
+        }
+      }
+    },
     "Не обновилось: %@": {
       "localizations": {
         "ar": {
@@ -38638,6 +39246,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Не надіслано: перевірте токен і ID чату"
+          }
+        }
+      }
+    },
+    "Не показывать": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "عدم العرض"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nicht anzeigen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Don’t show"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No mostrar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ne pas afficher"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jangan tampilkan"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Non mostrare"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "表示しない"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "표시 안 함"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nie pokazuj"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Não mostrar"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Не показувати"
           }
         }
       }
@@ -45122,6 +45806,82 @@
         }
       }
     },
+    "Остров и уведомление": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الجزيرة والإشعار"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Insel und Mitteilung"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Island and notification"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Isla y notificación"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Île et notification"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pulau dan notifikasi"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Isola e notifica"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アイランドと通知"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "아일랜드와 알림"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wyspa i powiadomienie"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ilha e notificação"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Острів і сповіщення"
+          }
+        }
+      }
+    },
     "Остров у чёлки": {
       "localizations": {
         "ar": {
@@ -45194,6 +45954,158 @@
           "stringUnit": {
             "state": "translated",
             "value": "Острів біля виїмки"
+          }
+        }
+      }
+    },
+    "Остров у чёлки показывает лимиты, сессии и запросы Claude рядом с чёлкой. Четыре вопроса — всё потом меняется в Настройках → «Модули» → «Остров у чёлки».": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تعرض جزيرة النتوء حدود Claude وجلساته وطلباته بجانب النتوء. أربعة أسئلة — ويمكن تغيير كل شيء لاحقًا في الإعدادات ← «الوحدات» ← «جزيرة النتوء»."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Notch-Insel zeigt Limits, Sitzungen und Anfragen von Claude neben der Notch. Vier Fragen – alles lässt sich später unter Einstellungen → „Module“ → „Notch-Insel“ ändern."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The notch island shows Claude's limits, sessions and requests beside the notch. Four questions — everything can be changed later in Settings → “Modules” → “Notch island”."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La isla de la muesca muestra los límites, las sesiones y las solicitudes de Claude junto a la muesca. Cuatro preguntas; todo se puede cambiar después en Ajustes → «Módulos» → «Isla de la muesca»."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L’île de l’encoche affiche les limites, sessions et demandes de Claude à côté de l’encoche. Quatre questions — tout se modifie ensuite dans Réglages → « Modules » → « Île de l’encoche »."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pulau notch menampilkan batas, sesi, dan permintaan Claude di samping notch. Empat pertanyaan — semuanya bisa diubah nanti di Pengaturan → “Modul” → “Pulau notch”."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L’isola del notch mostra limiti, sessioni e richieste di Claude accanto al notch. Quattro domande: tutto si può cambiare poi in Impostazioni → «Moduli» → «Isola del notch»."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ノッチアイランドは Claude の上限、セッション、リクエストをノッチの横に表示します。質問は4つ。あとから設定 →「モジュール」→「ノッチアイランド」で変更できます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "노치 아일랜드는 Claude의 한도, 세션, 요청을 노치 옆에 보여 줍니다. 질문은 네 가지이며, 나중에 설정 → “모듈” → “노치 아일랜드”에서 모두 바꿀 수 있습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wyspa przy wycięciu pokazuje limity, sesje i prośby Claude obok wycięcia. Cztery pytania — wszystko można później zmienić w Ustawieniach → „Moduły” → „Wyspa przy wycięciu”."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A ilha do notch mostra limites, sessões e solicitações do Claude ao lado do notch. Quatro perguntas — tudo pode ser alterado depois em Ajustes → “Módulos” → “Ilha do notch”."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Острів біля чубчика показує ліміти, сесії й запити Claude поруч із чубчиком. Чотири запитання — усе потім змінюється в Налаштуваннях → «Модулі» → «Острів біля чубчика»."
+          }
+        }
+      }
+    },
+    "Остров у чёлки — AI Hub Bar": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "جزيرة النتوء — AI Hub Bar"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notch-Insel — AI Hub Bar"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notch island — AI Hub Bar"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Isla de la muesca — AI Hub Bar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Île de l’encoche — AI Hub Bar"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pulau notch — AI Hub Bar"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Isola del notch — AI Hub Bar"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ノッチアイランド — AI Hub Bar"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "노치 아일랜드 — AI Hub Bar"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wyspa przy wycięciu — AI Hub Bar"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ilha do notch — AI Hub Bar"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Острів біля чубчика — AI Hub Bar"
           }
         }
       }
@@ -53945,6 +54857,82 @@
         }
       }
     },
+    "Показывать пилюлю сверху по центру": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "عرض حبة في الأعلى بالوسط"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pille oben in der Mitte zeigen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Show a pill at the top centre"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mostrar una píldora arriba en el centro"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Afficher une pilule en haut au centre"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tampilkan pil di atas tengah"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mostra una pillola in alto al centro"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "上部中央にピルを表示"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "위쪽 가운데에 알약 표시"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pokazuj pigułkę u góry pośrodku"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mostrar uma pílula no topo, ao centro"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Показувати пігулку вгорі по центру"
+          }
+        }
+      }
+    },
     "Показывать, когда свободно меньше": {
       "localizations": {
         "ar": {
@@ -60331,6 +61319,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Дозволити"
+          }
+        }
+      }
+    },
+    "Разрешить или отклонить запрос, который сейчас в острове. Клавишей легко разрешить, не прочитав команду.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "السماح بالطلب المعروض في الجزيرة أو رفضه. من السهل السماح بمفتاح دون قراءة الأمر."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Anfrage auf der Insel erlauben oder ablehnen. Mit einer Taste erlaubt man leicht, ohne den Befehl zu lesen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Allow or deny the request now on the island. With a key it’s easy to allow without reading the command."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Permitir o rechazar la solicitud que está en la isla. Con una tecla es fácil permitir sin leer el comando."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Autoriser ou refuser la demande affichée sur l’île. Avec une touche, on autorise facilement sans lire la commande."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Izinkan atau tolak permintaan yang ada di pulau. Dengan tombol, mudah mengizinkan tanpa membaca perintahnya."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Consenti o rifiuta la richiesta ora sull’isola. Con un tasto è facile consentire senza leggere il comando."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アイランドに表示中のリクエストを許可または拒否します。キーだとコマンドを読まずに許可しやすくなります。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "아일랜드에 있는 요청을 허용하거나 거부합니다. 키로는 명령을 읽지 않고 허용하기 쉽습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zezwól lub odrzuć prośbę widoczną na wyspie. Klawiszem łatwo zezwolić, nie czytając polecenia."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Permitir ou recusar a solicitação que está na ilha. Com uma tecla é fácil permitir sem ler o comando."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Дозволити або відхилити запит, що зараз на острові. Клавішею легко дозволити, не прочитавши команду."
           }
         }
       }
@@ -71592,6 +72656,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Лише значок"
+          }
+        }
+      }
+    },
+    "Только остров": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الجزيرة فقط"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nur Insel"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Island only"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Solo la isla"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L’île seulement"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hanya pulau"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Solo isola"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アイランドのみ"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "아일랜드만"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tylko wyspa"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Só a ilha"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Лише острів"
           }
         }
       }

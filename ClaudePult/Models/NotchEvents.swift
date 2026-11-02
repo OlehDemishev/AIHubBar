@@ -120,6 +120,11 @@ struct NotchEventQueue: Equatable, Sendable {
         shownAt[id] = nil
     }
 
+    /// A full-screen app came forward: only these kinds stay (SPEC-notch §5).
+    mutating func keepOnly(_ kinds: Set<NotchEventKind>) {
+        for item in items where !kinds.contains(item.kind) { remove(item.id) }
+    }
+
     /// Marks the current banner as shown (its time starts now) and drops it once its time is up.
     /// `paused`: the pointer is on the banner, so it stays and gets its full time again afterwards.
     mutating func tick(now: Date, paused: Bool) {
@@ -169,5 +174,10 @@ struct NotchClickGuard: Equatable, Sendable {
 
     func isArmed(now: Date) -> Bool {
         moved && now.timeIntervalSince(shownAt) >= Self.delay
+    }
+
+    /// ⌃⌥Y / ⌃⌥N need no pointer, only the same moment to read the request (SPEC-notch §4).
+    func keysArmed(now: Date) -> Bool {
+        now.timeIntervalSince(shownAt) >= Self.delay
     }
 }

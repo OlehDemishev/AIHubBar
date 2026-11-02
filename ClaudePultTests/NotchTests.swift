@@ -232,3 +232,49 @@ struct NotchPlacementTests {
         #expect(noIcon.iconOnly.elements.contains { $0.kind == .icon && $0.enabled }, "something stays to click")
     }
 }
+
+/// SPEC-notch stage 3, part 2: full-screen apps, ⌃⌥Y / ⌃⌥N, the first-setup answers.
+struct NotchFullScreenAndKeysTests {
+    private let screen = CGRect(x: 0, y: 0, width: 2560, height: 1080)
+
+    @Test func fullScreenIsAnotherAppsWindowOverTheWholeScreen() {
+        let full = FullScreenDetector.Window(bounds: CGRect(x: 0, y: 0, width: 2560, height: 1080), layer: 0, pid: 42)
+        let zoomed = FullScreenDetector.Window(bounds: CGRect(x: 0, y: 30, width: 2560, height: 1050), layer: 0, pid: 42)
+        let menuBar = FullScreenDetector.Window(bounds: CGRect(x: 0, y: 0, width: 2560, height: 1080), layer: 25, pid: 42)
+        let own = FullScreenDetector.Window(bounds: CGRect(x: 0, y: 0, width: 2560, height: 1080), layer: 0, pid: 7)
+        #expect(FullScreenDetector.covers([full], screen: screen, mainHeight: 1080, ownPID: 7))
+        #expect(!FullScreenDetector.covers([zoomed, menuBar, own], screen: screen, mainHeight: 1080, ownPID: 7), "zoomed, not normal or our own")
+        // A second screen to the right, shorter than the main one: Quartz y counts down from the main display's top.
+        let side = CGRect(x: 2560, y: 0, width: 1920, height: 1080 - 0)
+        let sideFull = FullScreenDetector.Window(bounds: CGRect(x: 2560, y: 0, width: 1920, height: 1080), layer: 0, pid: 42)
+        #expect(FullScreenDetector.covers([sideFull], screen: side, mainHeight: 1080, ownPID: 7))
+    }
+
+    @Test func keysNeedOnlyTime() {
+        let shown = Date(timeIntervalSince1970: 1_000_000)
+        let guardian = NotchClickGuard(shownAt: shown, pointer: .zero)
+        #expect(!guardian.keysArmed(now: shown.addingTimeInterval(0.3)))
+        #expect(guardian.keysArmed(now: shown.addingTimeInterval(NotchClickGuard.delay)))
+        #expect(!guardian.isArmed(now: shown.addingTimeInterval(5)), "clicks still need the pointer to move")
+    }
+
+    @Test func fullScreenKeepsRequestsAndWaits() {
+        var queue = NotchEventQueue()
+        let at = Date(timeIntervalSince1970: 1_000_000)
+        for (id, kind) in [("r", NotchEventKind.request), ("w", .waiting), ("l", .limits), ("d", .done)] {
+            queue.push(NotchEvent(id: id, kind: kind, title: id, body: "", target: .none, arrived: at))
+        }
+        queue.keepOnly([.request, .waiting])
+        #expect(Set(queue.items.map(\.id)) == ["r", "w"])
+    }
+
+    @Test func setupAnswersDecode() throws {
+        let old = try JSONDecoder().decode(NotchSettings.self, from: Data(#"{"summary": "island"}"#.utf8))
+        #expect(!old.hotKeys && !old.setupDone, "set up before stage 3: the window asks once")
+        var answered = old
+        answered.hotKeys = true
+        answered.setupDone = true
+        let round = try JSONDecoder().decode(NotchSettings.self, from: JSONEncoder().encode(answered))
+        #expect(round.hotKeys && round.setupDone && round.summary == .island)
+    }
+}
