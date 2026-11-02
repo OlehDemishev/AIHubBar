@@ -137,13 +137,13 @@ private struct ThresholdsSection: View {
 
     var body: some View {
         Section {
-            Picker("Уведомлять о лимите", selection: Binding(get: { mode }, set: choose)) {
+            Picker("Уведомлять о лимите", systemImage: "bell", selection: Binding(get: { mode }, set: choose)) {
                 Text("как у всех: \(Self.list(settings.limitThresholds)) %").tag(Mode.common)
                 Text("на своих порогах").tag(Mode.own)
                 Text("не уведомлять").tag(Mode.off)
             }
             if mode == .own {
-                LabeledContent("Пороги, %") {
+                IconRow("Пороги, %", systemImage: "bell.badge") {
                     TextField("", text: $text, prompt: Text(verbatim: "80, 95"))
                         .labelsHidden()
                         .textFieldStyle(.roundedBorder)
@@ -253,9 +253,9 @@ private struct SpendSection: View {
         let today = engine.summary(since: Calendar.current.startOfDay(for: .now))
         let month = engine.summary(since: engine.monthStart)
         Section {
-            LabeledContent("Сегодня", value: SpendText.line(today))
-            LabeledContent("В этом месяце", value: SpendText.line(month))
-            LabeledContent("Бюджет в месяц, $") {
+            IconRow("Сегодня", systemImage: "sun.max", value: SpendText.line(today))
+            IconRow("В этом месяце", systemImage: "calendar", value: SpendText.line(month))
+            IconRow("Бюджет в месяц, $", systemImage: "dollarsign.circle") {
                 TextField("", value: $settings.aiServices.monthlyBudget, format: .number, prompt: Text("нет"))
                     .multilineTextAlignment(.trailing)
                     .frame(width: 90)

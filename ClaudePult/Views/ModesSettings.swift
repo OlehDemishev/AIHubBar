@@ -141,7 +141,7 @@ private struct ModeEditor: View {
         Form {
             Section {
                 TextField("Название", text: $mode.name)
-                Picker("Значок", selection: $mode.icon) {
+                Picker("Значок", systemImage: "star", selection: $mode.icon) {
                     ForEach(Self.icons, id: \.self) { Image(systemName: $0).tag($0) }
                 }
                 if mode.id != modes.currentID {
@@ -152,7 +152,7 @@ private struct ModeEditor: View {
             panelSection
 
             Section("Проекты") {
-                Picker("Источник", selection: Binding(
+                Picker("Источник", systemImage: "tray.full", selection: Binding(
                     get: { SourceKind(mode.source) },
                     set: { mode.source = $0.source(keeping: mode.source) }
                 )) {
@@ -194,7 +194,7 @@ private struct ModeEditor: View {
                             }
                         ))
                     }
-                    Picker("Календарь", selection: $mode.calendar) {
+                    Picker("Календарь", systemImage: "calendar", selection: $mode.calendar) {
                         Text("Выключен").tag(CalendarMode.off)
                         Text("Дедлайны и публикации").tag(CalendarMode.dates)
                         Text("+ контент-план").tag(CalendarMode.contentPlan)
@@ -210,18 +210,18 @@ private struct ModeEditor: View {
             }
 
             Section {
-                Picker("Сервис по умолчанию", selection: $mode.service) {
+                Picker("Сервис по умолчанию", systemImage: "sparkles", selection: $mode.service) {
                     Text(AIService.claudeCode.title).tag(String?.none)
                     ForEach(services.available.filter { $0 != .claudeCode }, id: \.id) { Text($0.title).tag(String?.some($0.id)) }
                     if let id = mode.service, !services.available.contains(where: { $0.id == id }) {
                         Text((AIService(id: id)?.title ?? id) + String(localized: " — не найден на этом Маке")).tag(String?.some(id))
                     }
                 }
-                Picker("Права Claude в фоне", selection: $mode.permissions) {
+                Picker("Права Claude в фоне", systemImage: "lock", selection: $mode.permissions) {
                     ForEach(PermissionProfile.allCases, id: \.self) { Text($0.title).tag($0) }
                 }
                 .help("«Только файлы»: читать и писать внутри папки проекта, без терминала и интернета")
-                Picker("Где запускать Claude", selection: $mode.launchMode) {
+                Picker("Где запускать Claude", systemImage: "play.rectangle", selection: $mode.launchMode) {
                     Text("Спрашивать").tag(LaunchMode?.none)
                     ForEach(LaunchMode.allCases, id: \.self) { Text($0.title).tag(LaunchMode?.some($0)) }
                 }
@@ -247,7 +247,7 @@ private struct ModeEditor: View {
             }
 
             Section("Общие команды") {
-                Picker("Команды", selection: $mode.commonCommands) {
+                Picker("Команды", systemImage: "terminal", selection: $mode.commonCommands) {
                     Text("_daily-report: отчёт, сводка, очистка").tag(CommonCommandsKind.dailyReport)
                     Text("Нет").tag(CommonCommandsKind.none)
                 }
@@ -265,55 +265,25 @@ private struct ModeEditor: View {
         .onChange(of: mode) { modes.update(mode) }
     }
 
-    /// The profile's modules top to bottom, as the panel shows them (SPEC-profiles §1).
+    /// The profile's blocks are edited in Settings → «Панель» (SPEC-settings §4); here only what it shows and a way there.
     private var panelSection: some View {
-        let list = mode.normalizedModules(hiddenBlocks: [])
+        let shown = mode.normalizedModules(hiddenBlocks: []).filter { $0.shown && modes.isOn($0.kind) }
         return Section {
-            ForEach(Array(list.enumerated()), id: \.element.kind) { index, module in
-                HStack {
-                    Toggle(isOn: Binding(
-                        get: { module.shown },
-                        set: { shown in edit { $0[index].shown = shown } }
-                    )) {
-                        Label(module.kind.title, systemImage: module.kind.symbol)
-                    }
-                    Spacer()
-                    ProfileModuleOptions(module: module) { new in edit { $0[index] = new } }
-                    if !module.kind.isBuiltIn {
-                        Button { modes.removeModule(module.kind, from: mode.id); mode.modules?.removeAll { $0.kind == module.kind } } label: {
-                            Image(systemName: "minus.circle")
-                        }
-                        .help("Убрать из профиля")
-                    }
-                    Button { edit { $0.swapAt(index, index - 1) } } label: { Image(systemName: "chevron.up") }
-                        .disabled(index == 0)
-                        .help("Выше")
-                    Button { edit { $0.swapAt(index, index + 1) } } label: { Image(systemName: "chevron.down") }
-                        .disabled(index == list.count - 1)
-                        .help("Ниже")
+            LabeledContent {
+                Button("Изменить в «Панели»…") {
+                    UserDefaults.standard.set(mode.id, forKey: PanelBuilder.profileKey)
+                    UserDefaults.standard.set(SettingsView.Tab.panel.rawValue, forKey: SettingsRoute.tabKey)
                 }
-                .buttonStyle(.borderless)
-            }
-            let addable = modes.activeModules.filter { kind in !kind.isBuiltIn && kind.isPanelBlock && !list.contains { $0.kind == kind } }
-            if !addable.isEmpty {
-                Menu("Добавить модуль") {
-                    ForEach(addable, id: \.self) { kind in
-                        Button { mode.modules = list + [ProfileModule(kind)] } label: { Label(kind.title, systemImage: kind.symbol) }
-                    }
-                }
-                .fixedSize()
+            } label: {
+                Label(shown.isEmpty ? String(localized: "Панель пуста") : shown.map(\.kind.title).joined(separator: " · "),
+                      systemImage: "rectangle.stack")
+                    .lineLimit(2)
             }
         } header: {
             Text("Панель")
         } footer: {
             Footnote(text: String(localized: "Блоки панели этого профиля сверху вниз. «Ближайшее», «Проекты» и «Отчёты» появляются, когда у профиля включён календарь, есть источник проектов или команды _daily-report."))
         }
-    }
-
-    private func edit(_ change: (inout [ProfileModule]) -> Void) {
-        var list = mode.normalizedModules(hiddenBlocks: [])
-        change(&list)
-        mode.modules = list
     }
 }
 
@@ -456,14 +426,14 @@ struct CommandEditor: View {
         DisclosureGroup(command.title) {
             TextField("Название", text: $command.title)
             TextField("Файл результата", text: $command.output, prompt: Text("хуки.md"))
-            Picker("На чём", selection: $command.input) {
+            Picker("На чём", systemImage: "doc", selection: $command.input) {
                 ForEach(CommandTemplate.Input.allCases, id: \.self) { Text($0.title).tag($0) }
             }
             TextField("Спросить перед запуском", text: Binding(
                 get: { command.asks ?? "" },
                 set: { command.asks = $0.trimmingCharacters(in: .whitespaces).isEmpty ? nil : $0 }
             ), prompt: Text("пусто — запускать сразу; «Язык», «Тон»…"))
-            Picker("Сервис", selection: $command.service) {
+            Picker("Сервис", systemImage: "sparkles", selection: $command.service) {
                 Text("Сервис профиля").tag(String?.none)
                 ForEach(services.available, id: \.id) { Text($0.title).tag(String?.some($0.id)) }
             }

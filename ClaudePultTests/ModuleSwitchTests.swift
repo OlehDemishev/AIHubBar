@@ -79,5 +79,45 @@ struct ModuleSwitchTests {
         #expect(NotificationKind.waiting.module == .sessions)
         #expect(NotificationKind.limits.module == .limits)
         #expect(NotificationKind.commands.module == nil)
+        // Every frequency is set on some module's page now that «Основные» has no list.
+        #expect(Set(ModuleKind.allCases.flatMap(NotificationKind.of)) == Set(NotificationKind.allCases))
+        #expect(NotificationKind.of(.reports) == [.commands])
+        #expect(SettingsPane.module(.limits).matches("Лимиты: Claude"))
+    }
+}
+
+/// SPEC-settings §2: long footnotes show their first sentence and «Подробнее».
+@MainActor
+struct FootnoteTests {
+    @Test func firstSentenceOfLongTextsOnly() {
+        #expect(Footnote.firstSentence("Коротко. Ещё.") == nil)
+        let long = "Любое сработавшее правило не даёт Mac уснуть. " + String(repeating: "Дальше подробности про правила и экран. ", count: 4)
+        #expect(Footnote.firstSentence(long) == "Любое сработавшее правило не даёт Mac уснуть.")
+        let japanese = "ルールが有効な間はMacがスリープしません。ここから先は詳しい説明です。" + String(repeating: "詳しい説明が続きます。", count: 12)
+        #expect(Footnote.firstSentence(japanese) == "ルールが有効な間はMacがスリープしません。")
+        #expect(Footnote.firstSentence(String(repeating: "без точки ", count: 30)) == nil)
+    }
+}
+
+/// SPEC-settings §3: a built-in module a profile doesn't call for has a button that brings it in.
+@MainActor
+struct ModuleEnableTests {
+    @Test func calendarButtonBringsInUpcoming() throws {
+        let name = "claudepult-enable-\(UUID().uuidString)"
+        let defaults = UserDefaults(suiteName: name)!
+        defaults.removePersistentDomain(forName: name)
+        let settings = AppSettings(defaults: defaults)
+        let dir = FileManager.default.temporaryDirectory.appending(path: name)
+        defer { try? FileManager.default.removeItem(at: dir) }
+        try FileManager.default.createDirectory(at: dir, withIntermediateDirectories: true)
+        try Data(#"{"id": "m1", "name": "Тексты", "source": {"folders": {"_0": "~/Texts"}}}"#.utf8).write(to: dir.appending(path: "m1.json"))
+        try Data(#"{"order": ["m1"], "enabled": ["m1"], "current": "m1"}"#.utf8).write(to: dir.appending(path: "state.json"))
+        let modes = ModeStore(settings: settings, directory: dir)
+        #expect(!modes.isOn(.upcoming))
+        let action = try #require(ModuleSwitch.enableAction(.upcoming, modes: modes))
+        action.run()
+        #expect(modes.isOn(.upcoming))
+        #expect(ModuleSwitch.enableAction(.upcoming, modes: modes) == nil)
+        #expect(ModuleSwitch.enableAction(.limits, modes: modes) == nil, "already there")
     }
 }

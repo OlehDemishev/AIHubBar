@@ -11,6 +11,8 @@ struct SettingsView: View {
     }
 
     static let size = CGSize(width: 940, height: 700)
+    /// The window can grow; below this the module tiles and the menu bar editor get cramped.
+    static let minSize = CGSize(width: 820, height: 560)
 
     @Environment(AppSettings.self) private var settings
     @Environment(AIServiceStore.self) private var services
@@ -19,6 +21,8 @@ struct SettingsView: View {
     @AppStorage(SettingsRoute.tabKey) private var tab: Tab = .general
     @AppStorage(SettingsRoute.serviceKey) private var service: ServiceTab = .claude
     @AppStorage(SettingsRoute.moduleKey) private var module: ModuleKind = .limits
+    /// «Сервисы AI» folded by default: six rows the sidebar rarely needs.
+    @AppStorage("settingsServicesExpanded") private var servicesExpanded = false
     @State private var query = ""
 
     init() {
@@ -45,7 +49,11 @@ struct SettingsView: View {
                     if group == .ai {
                         let found = SettingsPane.services.filter { $0.matches(query) }
                         if !found.isEmpty {
-                            Section("Сервисы AI") {
+                            Section("Сервисы AI", isExpanded: Binding(
+                                // Open while searching or while one of them is the page shown.
+                                get: { servicesExpanded || !query.isEmpty || pane.tab == .services },
+                                set: { servicesExpanded = $0 }
+                            )) {
                                 ForEach(found, id: \.self) { pane in
                                     PaneRow(pane: pane, isSetUp: isSetUp(pane))
                                 }
@@ -70,7 +78,12 @@ struct SettingsView: View {
             .navigationTitle(pane.title)
         }
         .modifier(NoWindowToolbar())
-        .frame(width: Self.size.width, height: Self.size.height)
+        // The Settings scene makes a fixed-size window; this one may grow (SPEC-settings §2).
+        .background(WindowReader { window in
+            if let window { ResizableSettingsWindow.keep(window, minSize: Self.minSize, size: Self.size) }
+        })
+        .frame(minWidth: Self.minSize.width, idealWidth: Self.size.width, maxWidth: .infinity,
+               minHeight: Self.minSize.height, idealHeight: Self.size.height, maxHeight: .infinity)
         .task { if services.agents.isEmpty { await services.scan() } }
         .preferredColorScheme(settings.panelTheme.colorScheme)
         .debugSnapshot("settings")
@@ -114,6 +127,27 @@ struct SettingsView: View {
     }
 }
 
+/// SwiftUI makes the Settings window fixed-size and takes `.resizable` away again after each layout pass; this puts
+/// it back every time it goes, so the window can grow (SPEC-settings §2).
+@MainActor
+enum ResizableSettingsWindow {
+    private static var observed: [ObjectIdentifier: NSKeyValueObservation] = [:]
+
+    static func keep(_ window: NSWindow, minSize: CGSize, size: CGSize) {
+        let id = ObjectIdentifier(window)
+        guard observed[id] == nil else { return }
+        observed[id] = window.observe(\.styleMask, options: [.new]) { window, _ in
+            guard !window.styleMask.contains(.resizable) else { return }
+            DispatchQueue.main.async { MainActor.assumeIsolated { window.styleMask.insert(.resizable) } }
+        }
+        DispatchQueue.main.async {
+            window.styleMask.insert(.resizable)
+            window.contentMinSize = minSize
+            if window.frame.width < size.width || window.frame.height < size.height { window.setContentSize(size) }
+        }
+    }
+}
+
 /// No title strip above the pages: the page header already names the page, as in System Settings. Only the title
 /// and the bar's background go — hiding the whole window toolbar takes the close / minimise buttons with it.
 private struct NoWindowToolbar: ViewModifier {
@@ -138,14 +172,65 @@ private struct SettingsPage<Content: View>: View {
     }
 }
 
-struct Footnote: View {
-    let text: String
+/// A settings row with an icon in front of its title, like the toggles and pickers that take `systemImage:`.
+struct IconRow<Content: View>: View {
+    let title: LocalizedStringKey
+    let symbol: String
+    let content: Content
+
+    init(_ title: LocalizedStringKey, systemImage: String, @ViewBuilder content: () -> Content) {
+        self.title = title
+        symbol = systemImage
+        self.content = content()
+    }
 
     var body: some View {
-        Text(text)
-            .font(.system(size: 11.5))
-            .foregroundStyle(.secondary)
-            .fixedSize(horizontal: false, vertical: true)
+        LabeledContent {
+            content
+        } label: {
+            Label(title, systemImage: symbol)
+        }
+    }
+}
+
+extension IconRow where Content == Text {
+    init(_ title: LocalizedStringKey, systemImage: String, value: String) {
+        self.init(title, systemImage: systemImage) { Text(value) }
+    }
+}
+
+/// The small text under a section. A long one shows its first sentence and «Подробнее» (SPEC-settings §2): the
+/// pages read as settings, not as manuals.
+struct Footnote: View {
+    let text: String
+    @State private var expanded = false
+
+    var body: some View {
+        let short = Self.firstSentence(text)
+        VStack(alignment: .leading, spacing: 2) {
+            Text(expanded || short == nil ? text : short ?? text)
+                .font(.system(size: 11.5))
+                .foregroundStyle(.secondary)
+                .fixedSize(horizontal: false, vertical: true)
+                .textSelection(.enabled)
+            if short != nil {
+                Button(expanded ? String(localized: "Свернуть") : String(localized: "Подробнее")) {
+                    withAnimation(.snappy(duration: 0.2)) { expanded.toggle() }
+                }
+                .buttonStyle(.link)
+                .font(.system(size: 11.5))
+            }
+        }
+    }
+
+    /// The first sentence when the text is long and has more after it; nil — show it whole.
+    nonisolated static func firstSentence(_ text: String) -> String? {
+        guard text.count > 140 else { return nil }
+        let ends = [". ", "。", "! ", "? "]
+        let found = ends.compactMap { text.range(of: $0) }.filter { text.distance(from: text.startIndex, to: $0.lowerBound) >= 12 }
+        guard let end = found.min(by: { $0.lowerBound < $1.lowerBound }) else { return nil }
+        let sentence = String(text[..<end.upperBound]).trimmingCharacters(in: .whitespaces)
+        return text.count - sentence.count > 30 ? sentence : nil
     }
 }
 
@@ -184,7 +269,7 @@ private struct GeneralSettings: View {
             }
 
             Section {
-                LabeledContent("Уведомления") {
+                IconRow("Уведомления", systemImage: "bell") {
                     HStack(spacing: 8) {
                         Text(notificationsText)
                             .foregroundStyle(notifications.state == .allowed ? .green : .orange)
@@ -204,21 +289,6 @@ private struct GeneralSettings: View {
             TelegramBotSection()
 
             Section {
-                ForEach(NotificationKind.allCases) { kind in
-                    Picker(kind.title, selection: Binding(
-                        get: { settings.frequency(kind) },
-                        set: { settings.notificationFrequencies[kind.rawValue] = $0.rawValue }
-                    )) {
-                        ForEach(NotificationFrequency.allCases) { Text($0.title).tag($0) }
-                    }
-                }
-            } header: {
-                Text("Какие уведомления и как часто")
-            } footer: {
-                Footnote(text: String(localized: "«Не чаще…» считается для одного и того же события: та же сессия, тот же порог, тот же PR. Разные события приходят как обычно. Telegram настраивается отдельно, у каждого модуля."))
-            }
-
-            Section {
                 ImportConfirmation()
                 HStack {
                     Button("Экспорт настроек…") { SettingsFiles.save(modes.exportBundle(), suggestedName: "AI Hub Bar") }
@@ -233,10 +303,10 @@ private struct GeneralSettings: View {
             FeedbackSection()
 
             Section {
-                LabeledContent("Версия", value: Self.version)
+                IconRow("Версия", systemImage: "info.circle", value: Self.version)
                 UpdatesRow()
                 BetaRow()
-                LabeledContent("Журнал") {
+                IconRow("Журнал", systemImage: "doc.text") {
                     Button("Показать в Finder") {
                         NSWorkspace.shared.activateFileViewerSelecting([AppLog.fileURL])
                     }
@@ -334,7 +404,7 @@ private struct TextSizePreview: View {
     let scale: CGFloat
 
     var body: some View {
-        LabeledContent("Пример") {
+        IconRow("Пример", systemImage: "textformat") {
             VStack(alignment: .trailing, spacing: 2) {
                 Text("Cantero · claude/feature")
                     .font(ScaledFont.font(.body, scale: scale, weight: .medium))
@@ -358,7 +428,7 @@ struct ClaudeSettings: View {
         @Bindable var settings = settings
         Group {
             Section {
-                LabeledContent("Путь к claude") {
+                IconRow("Путь к claude", systemImage: "folder") {
                     TextField("", text: $settings.claudePath,
                               prompt: Text(ClaudeLocator.detect().map { String(localized: "авто: \($0)") } ?? String(localized: "авто: не найден")))
                         .textFieldStyle(.roundedBorder)
@@ -382,24 +452,37 @@ struct ClaudeSettings: View {
             }
 
             Section {
-                Stepper(value: $settings.backgroundTimeLimitMinutes, in: 10...600, step: 10) {
-                    LabeledContent("Лимит времени", value: String(localized: "\(settings.backgroundTimeLimitMinutes) мин"))
-                }
-                Toggle("Итог в Telegram", systemImage: "paperplane", isOn: $settings.telegramForBackground)
-                Picker("Ночные задачи начинаются в", systemImage: "moon.stars", selection: $settings.nightStartHour) {
-                    ForEach(NightQueue.hours, id: \.self) { Text(verbatim: String(format: "%02d:00", $0)).tag($0) }
-                }
-                if settings.telegramForBackground,
-                   Telegram.credentials(dailyReportDirectory: settings.dailyReportDirectory) == nil {
-                    Text("Telegram не настроен (Настройки → Основные → Telegram) — будет только уведомление macOS.")
-                        .font(.callout)
-                        .foregroundStyle(.orange)
-                }
-            } header: {
-                Text("Фоновые задачи")
-            } footer: {
-                Footnote(text: String(localized: "«Фон» запускает claude -p без окна: разрешены чтение и правка файлов проекта, проверки и сборки, git без push в main и без force, gh pr create/view/list; остальное отклоняется. Итог — уведомлением и в Telegram."))
+                Button("Сессии, hooks и фоновые задачи — «Сессии агентов»…") { SettingsRoute.open(module: .sessions) }
+                    .buttonStyle(.link)
             }
+        }
+    }
+}
+
+/// «Сессии агентов» → «Фоновые задачи»: `claude -p` runs without a window, their time limit, night start and results.
+struct BackgroundRunsSection: View {
+    @Environment(AppSettings.self) private var settings
+
+    var body: some View {
+        @Bindable var settings = settings
+        Section {
+            Stepper(value: $settings.backgroundTimeLimitMinutes, in: 10...600, step: 10) {
+                IconRow("Лимит времени", systemImage: "timer", value: String(localized: "\(settings.backgroundTimeLimitMinutes) мин"))
+            }
+            Toggle("Итог в Telegram", systemImage: "paperplane", isOn: $settings.telegramForBackground)
+            Picker("Ночные задачи начинаются в", systemImage: "moon.stars", selection: $settings.nightStartHour) {
+                ForEach(NightQueue.hours, id: \.self) { Text(verbatim: String(format: "%02d:00", $0)).tag($0) }
+            }
+            if settings.telegramForBackground,
+               Telegram.credentials(dailyReportDirectory: settings.dailyReportDirectory) == nil {
+                Text("Telegram не настроен (Настройки → Основные → Telegram) — будет только уведомление macOS.")
+                    .font(.callout)
+                    .foregroundStyle(.orange)
+            }
+        } header: {
+            Text("Фоновые задачи")
+        } footer: {
+            Footnote(text: String(localized: "«Фон» запускает claude -p без окна: разрешены чтение и правка файлов проекта, проверки и сборки, git без push в main и без force, gh pr create/view/list; остальное отклоняется. Итог — уведомлением и в Telegram."))
         }
     }
 }
@@ -417,7 +500,7 @@ private struct TelegramBotSection: View {
         @Bindable var settings = settings
         Section {
             if hasToken {
-                LabeledContent("Токен бота") {
+                IconRow("Токен бота", systemImage: "key") {
                     HStack {
                         Text("сохранён в связке ключей").foregroundStyle(.secondary)
                         Button("Удалить", role: .destructive) {
@@ -430,7 +513,7 @@ private struct TelegramBotSection: View {
                     }
                 }
             } else {
-                LabeledContent("Токен бота") {
+                IconRow("Токен бота", systemImage: "key") {
                     HStack {
                         SecureField("", text: $token, prompt: Text(verbatim: "123456:ABC…"))
                             .textFieldStyle(.roundedBorder)
@@ -440,7 +523,7 @@ private struct TelegramBotSection: View {
                     }
                 }
             }
-            LabeledContent("ID чата") {
+            IconRow("ID чата", systemImage: "number") {
                 HStack {
                     TextField("", text: $settings.telegramChatID)
                         .textFieldStyle(.roundedBorder)
@@ -575,7 +658,7 @@ struct LayoutSection: View {
                         .foregroundStyle(.orange)
                 }
             }
-            LabeledContent("Раскладки", value: switcher.layouts.isEmpty ? String(localized: "нет подходящих") : switcher.layouts.map(\.name).joined(separator: ", "))
+            IconRow("Раскладки", systemImage: "keyboard", value: switcher.layouts.isEmpty ? String(localized: "нет подходящих") : switcher.layouts.map(\.name).joined(separator: ", "))
             Toggle("Исправлять раскладку сам", systemImage: "wand.and.stars", isOn: $settings.layout.auto)
             Toggle("Не исправлять в терминалах", systemImage: "terminal", isOn: $settings.layout.skipTerminals)
                 .disabled(!settings.layout.auto)
@@ -623,7 +706,7 @@ struct NotchSection: View {
             Picker("Где показывать", systemImage: "display", selection: $settings.notch.screen) {
                 ForEach(NotchScreen.allCases, id: \.self) { Text($0.title).tag($0) }
             }
-            Toggle("Пилюля на экранах без чёлки", isOn: Binding(
+            Toggle("Пилюля на экранах без чёлки", systemImage: "capsule", isOn: Binding(
                 get: { settings.notch.showsPill(macHasNotch: NotchGeometry.macHasNotch) },
                 set: { settings.notch.pill = $0 }
             ))
@@ -706,7 +789,7 @@ struct KeepAwakeSection: View {
             Toggle("Пока работает Claude (сессия или фоновая задача)", systemImage: "sparkles", isOn: $settings.keepAwakeRules.whileClaudeWorks)
             Toggle("Пока подключено питание", systemImage: "powerplug", isOn: $settings.keepAwakeRules.whileOnPower)
             Toggle("Пока подключён внешний монитор", systemImage: "display", isOn: $settings.keepAwakeRules.whileExternalDisplay)
-            LabeledContent("Пока открыты приложения") {
+            IconRow("Пока открыты приложения", systemImage: "app.badge") {
                 HStack {
                     Text(settings.keepAwakeRules.whileApps.isEmpty ? String(localized: "нет") : settings.keepAwakeRules.whileApps.map(\.name).joined(separator: ", "))
                         .foregroundStyle(.secondary)
@@ -730,7 +813,7 @@ struct KeepAwakeSection: View {
             }
             Toggle("И с закрытой крышкой", systemImage: "laptopcomputer", isOn: $settings.keepAwakeRules.lidClosed)
                 .disabled(!keepAwake.lidInstalled || !LidSleep.hasLid)
-            LabeledContent("Разрешение администратора") {
+            IconRow("Разрешение администратора", systemImage: "lock.shield") {
                 HStack {
                     Text(keepAwake.lidInstalled ? String(localized: "есть") : String(localized: "нет"))
                         .foregroundStyle(.secondary)
@@ -817,12 +900,12 @@ struct QuickCommandsSection: View {
                             .help("Удалить команду")
                     }
                     .buttonStyle(.borderless)
-                    Picker("Что делает", selection: $command.kind) {
+                    Picker("Что делает", systemImage: "bolt", selection: $command.kind) {
                         ForEach(QuickCommand.Kind.allCases, id: \.self) { Text($0.title).tag($0) }
                     }
                     TextField(placeholder(command.kind), text: $command.value)
                         .font(.callout.monospaced())
-                    Toggle("Спрашивать перед запуском", isOn: $command.confirm)
+                    Toggle("Спрашивать перед запуском", systemImage: "questionmark.circle", isOn: $command.confirm)
                 }
                 .padding(.vertical, 4)
             }
@@ -885,7 +968,7 @@ struct ClipboardSection: View {
             }
             Toggle("Помнить после перезапуска", systemImage: "arrow.clockwise", isOn: $settings.clipboardRemember)
                 .onChange(of: settings.clipboardRemember) { history.rememberChanged() }
-            LabeledContent("Не запоминать из приложений") {
+            IconRow("Не запоминать из приложений", systemImage: "hand.raised.slash") {
                 HStack {
                     Text(verbatim: "\(settings.clipboardExcludedApps.count)").foregroundStyle(.secondary)
                     Button("Добавить…", action: addApps)
@@ -918,7 +1001,7 @@ struct NotesSection: View {
 
     var body: some View {
         Section {
-            LabeledContent("Папка") {
+            IconRow("Папка", systemImage: "folder") {
                 HStack {
                     Text(settings.notesFolder).lineLimit(1).truncationMode(.middle).foregroundStyle(.secondary)
                     Button("Выбрать…", action: chooseFolder)
@@ -1005,7 +1088,7 @@ struct TelegramApprovalsSection: View {
         @Bindable var settings = settings
         Section {
             Toggle("Присылать запросы разрешений в Telegram", systemImage: "paperplane", isOn: $settings.telegramApprovals)
-            LabeledContent("Токен бота") {
+            IconRow("Токен бота", systemImage: "key") {
                 HStack {
                     if telegram.hasToken {
                         Text(telegram.botName ?? String(localized: "сохранён в Связке ключей")).foregroundStyle(.secondary)
@@ -1051,7 +1134,7 @@ struct SessionSection: View {
     var body: some View {
         @Bindable var settings = settings
         Section {
-            LabeledContent("Hooks") {
+            IconRow("Hooks", systemImage: "link") {
                 Text(hooks.status.title)
                     .foregroundStyle(hooks.status == .installed ? .green : hooks.status == .outdated ? .orange : .secondary)
             }
@@ -1096,7 +1179,7 @@ struct LimitSection: View {
     var body: some View {
         @Bindable var settings = settings
         Section {
-            LabeledContent("Уведомлять на, %") {
+            IconRow("Уведомлять на, %", systemImage: "bell.badge") {
                 // No title: in a Form a titled field also shows its title as a label next to it.
                 TextField("", text: $thresholdsText, prompt: Text(verbatim: "50, 80, 95"))
                     .labelsHidden()
@@ -1197,7 +1280,7 @@ private struct LanguagePicker: View {
     }
 
     var body: some View {
-        Picker("Язык интерфейса", selection: $choice) {
+        Picker("Язык интерфейса", systemImage: "globe", selection: $choice) {
             Text("Как в системе").tag("")
             ForEach(languages, id: \.self) { code in
                 Text(Locale(identifier: code).localizedString(forIdentifier: code)?.capitalized ?? code).tag(code)
@@ -1238,13 +1321,13 @@ private struct FeedbackSection: View {
 
     var body: some View {
         Section {
-            LabeledContent("Обратная связь") {
+            IconRow("Обратная связь", systemImage: "envelope") {
                 HStack {
                     Button("Предложить идею…") { Feedback.suggestIdea() }
                     Button("Сообщить о проблеме…") { Feedback.reportProblem() }
                 }
             }
-            Toggle("После сбоя предлагать отправить отчёт", isOn: $asksAfterCrash)
+            Toggle("После сбоя предлагать отправить отчёт", systemImage: "exclamationmark.bubble", isOn: $asksAfterCrash)
         } footer: {
             Footnote(text: String(localized: "Откроется форма на GitHub, версия и macOS в ней уже заполнены. Сама программа ничего не отправляет: перед отправкой видно всё, что уходит. Нужен аккаунт GitHub."))
         }
@@ -1256,9 +1339,9 @@ private struct UpdatesRow: View {
     @State private var automatic = Updates.checksAutomatically
 
     var body: some View {
-        LabeledContent("Обновления") {
+        IconRow("Обновления", systemImage: "arrow.down.circle") {
             HStack {
-                Toggle("Проверять раз в день", isOn: $automatic)
+                Toggle("Проверять раз в день", systemImage: "clock.arrow.circlepath", isOn: $automatic)
                     .onChange(of: automatic) { Updates.checksAutomatically = automatic }
                 Button("Проверить сейчас") { Updates.checkNow() }
             }

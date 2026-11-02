@@ -202,6 +202,9 @@ final class ModeStore {
         installedModules.contains(kind) && !switchedOff.contains(kind) && (!kind.isBeta || settings.betaUpdates)
     }
 
+    /// `_daily-report/report.py` is on this Mac: «Отчёты» can be switched on in a profile.
+    var hasDailyReport: Bool { FileManager.default.fileExists(atPath: settings.reportScript) }
+
     /// «Раскладка» and other beta modules work only with beta builds.
     var isBetaAllowed: Bool { settings.betaUpdates }
 

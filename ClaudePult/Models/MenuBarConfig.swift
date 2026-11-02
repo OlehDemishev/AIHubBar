@@ -184,6 +184,33 @@ struct MenuBarConfig: Codable, Equatable, Hashable, Sendable {
         dividers.removeAll { $0.id == id }
     }
 
+    /// A switched-on element or a divider, as the order chips show them.
+    enum Arranged: Equatable {
+        case element(MenuBarElement.Kind)
+        case divider(Divider)
+    }
+
+    /// Takes the order of the chips: switched-on elements fill their slots in that order (switched-off ones keep
+    /// theirs), each divider follows the element before it.
+    mutating func arrange(_ order: [Arranged]) {
+        var shown = order.compactMap { if case let .element(kind) = $0 { kind } else { nil } }.makeIterator()
+        elements = elements.map { element in
+            guard element.enabled, let kind = shown.next() else { return element }
+            return self.element(kind)
+        }
+        var after: MenuBarElement.Kind?
+        var placed: [Divider] = []
+        for item in order {
+            switch item {
+            case let .element(kind): after = kind
+            case var .divider(divider):
+                divider.after = after
+                placed.append(divider)
+            }
+        }
+        dividers = placed
+    }
+
     enum CodingKeys: String, CodingKey { case elements, separator, smallText, colored, preset, dividers, look }
 
     init(elements: [MenuBarElement], separator: Separator, smallText: Bool, colored: Bool, preset: Preset) {

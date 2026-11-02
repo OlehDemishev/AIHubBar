@@ -12,6 +12,31 @@ enum ModuleSwitch {
         return !kind.isBuiltIn || modes.installedModules.contains(kind)
     }
 
+    /// What brings a built-in module into the current profile: a calendar, the `_daily-report` commands, or (for
+    /// projects, which need a folder) the profile's page. Nil when there is no profile.
+    static func enableAction(_ kind: ModuleKind, modes: ModeStore) -> (title: String, run: () -> Void)? {
+        guard kind.isBuiltIn, !modes.installedModules.contains(kind), let mode = modes.current else { return nil }
+        switch kind {
+        case .upcoming:
+            return (String(localized: "Включить календарь в профиле «\(mode.name)»"), {
+                var changed = mode
+                changed.calendar = .dates
+                modes.update(changed)
+            })
+        case .reports where modes.hasDailyReport:
+            return (String(localized: "Включить команды _daily-report в профиле «\(mode.name)»"), {
+                var changed = mode
+                changed.commonCommands = .dailyReport
+                changed.showCommonCommands = true
+                modes.update(changed)
+            })
+        default:
+            return (String(localized: "Открыть профиль «\(mode.name)»…"), {
+                UserDefaults.standard.set(SettingsView.Tab.modes.rawValue, forKey: SettingsRoute.tabKey)
+            })
+        }
+    }
+
     /// Why a built-in module has no switch yet.
     static func unavailableReason(_ kind: ModuleKind) -> String {
         switch kind {
@@ -122,8 +147,11 @@ struct ModulePlaces: View {
                 : ModuleSwitch.unavailableReason(kind)
         case .menuBar: String(localized: "Элементы модуля в строке меню; порядок и вид — «Строка меню»")
         case .island: String(localized: "Ушко у чёлки показывает модуль")
-        case .notifications: String(localized: "Уведомления macOS от модуля; как часто — «Основные»")
-        case .telegram: String(localized: "Дублировать в Telegram; бот — «Основные» → Telegram")
+        case .notifications: String(localized: "Уведомления macOS от модуля; как часто — ниже, в «Как часто уведомлять»")
+        case .telegram:
+            kind == .sessions
+                ? String(localized: "Итоги фоновых задач в Telegram; ответы на запросы разрешений — ниже, «Ответы из Telegram»")
+                : String(localized: "Дублировать в Telegram; бот — «Основные» → Telegram")
         }
     }
 
@@ -255,6 +283,9 @@ struct ModulePage: View {
                     if kind.isBeta, !settings.betaUpdates {
                         Button("Включить бета-версии") { settings.betaUpdates = true }
                     }
+                    if let action = ModuleSwitch.enableAction(kind, modes: modes) {
+                        Button(action.title, action: action.run)
+                    }
                 }
             }
             if !ModulePlace.of(kind).isEmpty {
@@ -265,9 +296,12 @@ struct ModulePage: View {
                 }
             }
             sections
+            if !NotificationKind.of(kind).isEmpty {
+                NotificationFrequencySection(kinds: NotificationKind.of(kind))
+            }
             if kind.isPanelBlock, !modes.modes.isEmpty {
                 Section {
-                    LabeledContent("В профилях", value: profiles)
+                    IconRow("В профилях", systemImage: "square.stack.3d.up", value: profiles)
                 } footer: {
                     Footnote(text: String(localized: "Порядок блоков — «Панель»; что показывает модуль в каждом профиле — «Профили»."))
                 }
@@ -294,6 +328,7 @@ struct ModulePage: View {
             HubSection()
         case .sessions:
             SessionSection()
+            BackgroundRunsSection()
             TelegramApprovalsSection()
         case .upcoming: ReminderSection()
         case .projects: PullRequestAlertSection()
@@ -316,6 +351,45 @@ struct ModulePage: View {
     private var profiles: String {
         let names = modes.modes.filter { $0.shows(kind) }.map(\.name)
         return names.isEmpty ? String(localized: "нет") : names.joined(separator: ", ")
+    }
+}
+
+/// How often each of a module's notifications may come (it was one list in «Основные»).
+private struct NotificationFrequencySection: View {
+    let kinds: [NotificationKind]
+
+    @Environment(AppSettings.self) private var settings
+
+    var body: some View {
+        Section {
+            ForEach(kinds) { kind in
+                Picker(kind.title, systemImage: kind.symbol, selection: Binding(
+                    get: { settings.frequency(kind) },
+                    set: { settings.notificationFrequencies[kind.rawValue] = $0.rawValue }
+                )) {
+                    ForEach(NotificationFrequency.allCases) { Text($0.title).tag($0) }
+                }
+            }
+        } header: {
+            Text("Как часто уведомлять")
+        } footer: {
+            Footnote(text: String(localized: "«Не чаще…» считается для одного и того же события: та же сессия, тот же порог, тот же PR. Разные события приходят как обычно. Telegram настраивается отдельно, у каждого модуля."))
+        }
+    }
+}
+
+extension NotificationKind {
+    var symbol: String {
+        switch self {
+        case .waiting: "hand.raised"
+        case .context: "gauge.with.needle"
+        case .background: "moon.zzz"
+        case .limits: "gauge.with.dots.needle.67percent"
+        case .pullRequests: "arrow.triangle.pull"
+        case .calendar: "calendar"
+        case .resources: "cpu"
+        case .commands: "terminal"
+        }
     }
 }
 
@@ -434,11 +508,20 @@ private struct ModuleTile: View {
                 Text(kind.title).font(.system(size: 14, weight: .semibold))
                 if kind.isBeta { BetaBadge() }
             }
-            Text(ModuleSwitch.canSwitch(kind, modes: modes) || !kind.isBuiltIn ? kind.tagline : String(localized: "Нужен в профиле"))
-                .font(.system(size: 12))
-                .foregroundStyle(.secondary)
-                .lineLimit(2)
-                .fixedSize(horizontal: false, vertical: true)
+            if let action = ModuleSwitch.enableAction(kind, modes: modes) {
+                Button(action: action.run) {
+                    Label(kind == .projects ? String(localized: "Нужен источник проектов") : String(localized: "Включить в профиле"), systemImage: "plus.circle")
+                        .font(.system(size: 12))
+                }
+                .buttonStyle(.link)
+                .help(action.title)
+            } else {
+                Text(kind.tagline)
+                    .font(.system(size: 12))
+                    .foregroundStyle(.secondary)
+                    .lineLimit(2)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
         }
         .padding(12)
         .frame(maxWidth: .infinity, minHeight: 118, maxHeight: 118, alignment: .topLeading)
@@ -461,21 +544,41 @@ private struct ModuleTile: View {
 /// Settings → «Панель» (SPEC-settings §4): the current profile's modules top to bottom, dragged into order, with a
 /// sketch of the panel beside them.
 struct PanelBuilder: View {
+    /// Which profile «Панель» edits; «Профили» → profile → «Изменить в «Панели»» points it there.
+    static let profileKey = "settingsPanelProfile"
+
     @Environment(ModeStore.self) private var modes
+    @AppStorage(PanelBuilder.profileKey) private var profileID = ""
 
     @State private var targeted: ModuleKind?
 
+    /// The chosen profile, else the current one.
+    private var chosen: Mode? { modes.modes.first { $0.id == profileID } ?? modes.current }
+
     var body: some View {
-        if let mode = modes.current {
+        if let mode = chosen {
             ScrollView {
                 HStack(alignment: .top, spacing: 18) {
                     VStack(alignment: .leading, spacing: 10) {
-                        Text("Профиль «\(mode.name)»: перетащите блок на другой, чтобы поменять порядок")
+                        if modes.modes.count > 1 {
+                            Picker("Профиль", systemImage: "square.stack.3d.up", selection: Binding(get: { mode.id }, set: { profileID = $0 })) {
+                                ForEach(modes.modes, id: \.id) { profile in
+                                    Text(profile.id == modes.currentID ? String(localized: "\(profile.name) — текущий") : profile.name).tag(profile.id)
+                                }
+                            }
+                            .fixedSize()
+                        }
+                        Text("Перетащите блок на другой, чтобы поменять порядок, или нажмите ⌃ / ⌄")
                             .foregroundStyle(.secondary)
                         VStack(spacing: 0) {
                             ForEach(Array(visible(mode).enumerated()), id: \.element.kind) { index, module in
                                 if index > 0 { Divider().padding(.leading, 52) }
-                                PanelBuilderRow(module: module, mode: mode)
+                                PanelBuilderRow(module: module, mode: mode,
+                                                canMoveUp: index > 0, canMoveDown: index < visible(mode).count - 1) { offset in
+                                    let list = visible(mode)
+                                    guard list.indices.contains(index + offset) else { return }
+                                    move(mode, module.kind, onto: list[index + offset].kind)
+                                }
                                     .padding(.horizontal, 12)
                                     .background(targeted == module.kind ? Color.accentColor.opacity(0.15) : .clear)
                                     .draggable(module.kind.rawValue) {
@@ -493,10 +596,23 @@ struct PanelBuilder: View {
                         .background(RoundedRectangle(cornerRadius: 10).fill(Color(nsColor: .controlBackgroundColor)))
                         .clipShape(RoundedRectangle(cornerRadius: 10))
                         .overlay(RoundedRectangle(cornerRadius: 10).strokeBorder(Color.secondary.opacity(0.2), lineWidth: 0.5))
+                        let addable = modes.activeModules.filter { kind in
+                            kind.isPanelBlock && !kind.isBuiltIn && !mode.normalizedModules(hiddenBlocks: []).contains { $0.kind == kind }
+                        }
+                        if !addable.isEmpty {
+                            Menu {
+                                ForEach(addable, id: \.self) { kind in
+                                    Button { modes.addModule(kind, to: mode.id) } label: { Label(kind.title, systemImage: kind.symbol) }
+                                }
+                            } label: {
+                                Label("Добавить модуль", systemImage: "plus")
+                            }
+                            .fixedSize()
+                        }
                         Footnote(text: String(localized: "Здесь только включённые модули. Остальные — на странице «Модули»; что показывает модуль в каждом профиле — «Профили»."))
                     }
                     PanelSketch(modules: visible(mode).filter(\.shown).map(\.kind))
-                        .frame(width: 250)
+                        .frame(width: 236)
                 }
                 .padding(.horizontal, 24)
                 .padding(.vertical, 12)
@@ -526,6 +642,10 @@ struct PanelBuilder: View {
 private struct PanelBuilderRow: View {
     let module: ProfileModule
     let mode: Mode
+    let canMoveUp: Bool
+    let canMoveDown: Bool
+    /// -1 up, +1 down: the buttons, the context menu and VoiceOver, for whoever doesn't drag.
+    let onMove: (Int) -> Void
 
     @Environment(ModeStore.self) private var modes
 
@@ -536,18 +656,40 @@ private struct PanelBuilderRow: View {
             PaneIcon(pane: .module(module.kind), size: 26)
             Text(module.kind.title)
                 .font(.system(size: 14))
-            Spacer()
+                .lineLimit(1)
+                .layoutPriority(1)
+            Spacer(minLength: 4)
             ProfileModuleOptions(module: module) { new in
                 set { $0 = new }
             }
+            .fixedSize()
             Toggle(module.kind.title, isOn: Binding(get: { module.shown }, set: { shown in set { $0.shown = shown } }))
                 .toggleStyle(.switch)
                 .labelsHidden()
                 .controlSize(.small)
+            HStack(spacing: 2) {
+                Button { onMove(-1) } label: { Image(systemName: "chevron.up") }
+                    .disabled(!canMoveUp)
+                    .help("Выше")
+                Button { onMove(1) } label: { Image(systemName: "chevron.down") }
+                    .disabled(!canMoveDown)
+                    .help("Ниже")
+            }
+            .buttonStyle(.borderless)
         }
         .padding(.vertical, 8)
         .contentShape(Rectangle())
         .opacity(module.shown ? 1 : 0.55)
+        .contextMenu {
+            Button("Выше") { onMove(-1) }.disabled(!canMoveUp)
+            Button("Ниже") { onMove(1) }.disabled(!canMoveDown)
+            if !module.kind.isBuiltIn {
+                Divider()
+                Button("Убрать из профиля") { modes.removeModule(module.kind, from: mode.id) }
+            }
+        }
+        .accessibilityAction(named: Text("Выше")) { if canMoveUp { onMove(-1) } }
+        .accessibilityAction(named: Text("Ниже")) { if canMoveDown { onMove(1) } }
     }
 
     private func set(_ change: (inout ProfileModule) -> Void) {
@@ -560,22 +702,33 @@ private struct PanelBuilderRow: View {
     }
 }
 
-/// A sketch of the panel: one card per shown block, in order — what goes where, not live data.
+/// The panel in miniature: one card per shown block, in order, each with what it shows right now. Not the panel view
+/// itself — that one takes over its window (glass, background) and refreshes on open.
 private struct PanelSketch: View {
     let modules: [ModuleKind]
 
+    @Environment(UsageStore.self) private var usage
+    @Environment(SessionStore.self) private var sessions
+    @Environment(ProjectStore.self) private var store
+    @Environment(CalendarStore.self) private var calendar
+    @Environment(SystemMonitor.self) private var monitor
+    @Environment(KeepAwakeController.self) private var keepAwake
+    @Environment(ClipboardHistory.self) private var clipboard
+    @Environment(NotesStore.self) private var notes
+    @Environment(AppSettings.self) private var settings
+
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text("Схема панели").font(.system(size: 12, weight: .medium)).foregroundStyle(.secondary)
+            Text("Панель сейчас").font(.system(size: 12, weight: .medium)).foregroundStyle(.secondary)
             VStack(spacing: 6) {
                 ForEach(modules, id: \.self) { kind in
                     HStack(spacing: 8) {
                         Image(systemName: kind.symbol)
                             .foregroundStyle(kind.group.tint)
                             .frame(width: 18)
-                        VStack(alignment: .leading, spacing: 1) {
+                        VStack(alignment: .leading, spacing: 3) {
                             Text(kind.title).font(.system(size: 12, weight: .semibold))
-                            Text(kind.tagline).font(.system(size: 10.5)).foregroundStyle(.secondary).lineLimit(1)
+                            live(kind)
                         }
                         Spacer(minLength: 0)
                     }
@@ -593,6 +746,71 @@ private struct PanelSketch: View {
         }
         .accessibilityElement(children: .combine)
         .accessibilityLabel(String(localized: "Схема панели: ") + modules.map(\.title).joined(separator: ", "))
+    }
+
+    /// What the block shows now; its one line when there is nothing live to show.
+    @ViewBuilder private func live(_ kind: ModuleKind) -> some View {
+        switch kind {
+        case .limits:
+            if let session = usage.snapshot?.session?.utilization {
+                HStack(spacing: 6) {
+                    MiniBar(value: session)
+                    if let week = usage.snapshot?.week?.utilization { MiniBar(value: week) }
+                }
+            } else {
+                line(kind.tagline)
+            }
+        case .sessions:
+            let running = sessions.items.filter { $0.state == .running }.count
+            line(sessions.items.isEmpty ? String(localized: "Нет сессий")
+                 : String(localized: "Ждут: \(sessions.waitingCount) · работают: \(running)"))
+        case .projects:
+            let red = store.projects.filter { $0.health == .red }.count
+            line(store.projects.isEmpty ? kind.tagline : String(localized: "Проектов: \(store.projects.count) · с проблемами: \(red)"))
+        case .upcoming:
+            line(calendar.nearest().map { CalendarText.menuBar($0) } ?? String(localized: "Ничего на 7 дней"))
+        case .resources:
+            if let snapshot = monitor.snapshot {
+                line(String(localized: "Процессор \(Int(snapshot.cpu.rounded())) % · память \(Int(snapshot.memoryPercent.rounded())) %"))
+            } else {
+                line(kind.tagline)
+            }
+        case .keepAwake:
+            line(keepAwake.reason == nil ? String(localized: "Mac может уснуть") : String(localized: "Не даёт уснуть"))
+        case .clipboard:
+            line(String(localized: "Записей: \(clipboard.items.count)"))
+        case .notes:
+            line(String(localized: "Заметок: \(notes.names.count)"))
+        case .quickCommands:
+            line(String(localized: "Команд: \(settings.quickCommands.count)"))
+        case .toggles:
+            line(String(localized: "Переключателей: \(settings.quickToggles.count)"))
+        case .reports, .notch, .layout:
+            line(kind.tagline)
+        }
+    }
+
+    private func line(_ text: String) -> some View {
+        Text(text).font(.system(size: 10.5)).foregroundStyle(.secondary).lineLimit(1)
+    }
+}
+
+/// A limit as the panel draws it: a thin bar coloured by level and its percent.
+private struct MiniBar: View {
+    let value: Double
+
+    var body: some View {
+        HStack(spacing: 3) {
+            GeometryReader { geometry in
+                ZStack(alignment: .leading) {
+                    Capsule().fill(Color.secondary.opacity(0.25))
+                    Capsule().fill(Color(nsColor: MenuBarRenderer.color(value)))
+                        .frame(width: max(3, geometry.size.width * min(value, 100) / 100))
+                }
+            }
+            .frame(width: 44, height: 4)
+            Text("\(Int(value.rounded())) %").font(.system(size: 10.5, weight: .medium)).monospacedDigit()
+        }
     }
 }
 

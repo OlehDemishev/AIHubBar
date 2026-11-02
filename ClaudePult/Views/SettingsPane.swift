@@ -60,7 +60,7 @@ enum SettingsPane: Hashable, Sendable {
         case .appearance: String(localized: "Тема, фон и размер текста панели")
         case .menuBar: String(localized: "Что показывать рядом со значком")
         case let .module(kind): kind.summary
-        case .service(.claude): String(localized: "Путь, промпты, CLAUDE.md и фоновые задачи")
+        case .service(.claude): String(localized: "Путь, свои промпты, CLAUDE.md и MCP")
         case .service(.codex): String(localized: "Агент, лимиты и ключ OpenAI")
         case .service(.gemini): String(localized: "Gemini CLI, Antigravity и ключ Google")
         case .service(.copilot), .service(.cursor): String(localized: "Агент и лимиты")
@@ -110,7 +110,7 @@ enum SettingsPane: Hashable, Sendable {
         case .panel:
             [String(localized: "Порядок"), String(localized: "Блоки")]
         case let .module(kind):
-            kind.keywords
+            kind.keywords + NotificationKind.of(kind).map(\.title)
         case .appearance:
             [String(localized: "Тема"), String(localized: "Фон панели"), String(localized: "Размер текста"),
              String(localized: "Ширина"), String(localized: "Плотность строк")]
@@ -224,7 +224,7 @@ extension ModuleKind {
             [String(localized: "Уведомлять на, %"), String(localized: "Ставить фоновые задачи на паузу"),
              String(localized: "Сводка за неделю в Telegram"), String(localized: "Продлевать вход Claude Code сам"),
              String(localized: "Другие AI")]
-        case .sessions: ["Hooks", "Telegram", String(localized: "Ответы из Telegram")]
+        case .sessions: ["Hooks", "Telegram", String(localized: "Ответы из Telegram"), String(localized: "Фоновые задачи"), String(localized: "Ночные задачи начинаются в")]
         case .upcoming: [String(localized: "Напоминания"), String(localized: "Календарь")]
         case .projects: ["Pull requests", "CI"]
         case .layout:
