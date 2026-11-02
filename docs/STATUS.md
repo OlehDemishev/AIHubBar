@@ -1,62 +1,25 @@
 # Status
 
 <!-- summary:start -->
-**Stage:** AI Hub Bar 0.2.2 released; on main since: glass panel background, AI services stage 1 (Claude Code inside «Сервисы AI»); next: AI services stage 2, notch island stage 3 for 0.3.0
+**Stage:** Mac: 0.3.0 built (notch island stages 1–3), not published; on main also island stages 4–5. Windows/Linux (`desktop/`, Tauri 2): stages 1–3 main parts merged, CI green
 **Updated:** 2026-11-02
 
 **Now:**
-- Windows / Linux in `desktop/` (Tauri 2): stage 1 «Каркас» merged (#189, CI green on Windows and Linux); stage 2 «Лимиты» main part — PR #190; stage 3 «Сессии» main part — branch `feat/desktop-sessions` (PR on top of #190)
-- merged 2026-11-02 (#186): notch stage 5 — drop a file or folder on the island → the profile's AI commands for it
-- merged 2026-11-02 (#184): notch stage 4 — Claude's task list in the island (ring and «3/7» in the ear, steps in the card, «3/3 · 2 мин · файлов: 9» in «Готово»)
-- 0.3.0 built, not published: `build/release/0.3.0/AIHubBar-0.3.0.dmg` (build 400) + `appcast.xml`, for the MacBook Air first; publish it from `91d6c2b` (before stage 4): `git switch --detach 91d6c2b && scripts/release.sh 0.3.0 --publish`
-- nothing in progress; merged 2026-11-02: notch stage 3 part 3 — «все экраны» (an island on every screen) and «Остров» in Quick Toggles (#181), notch stage 3 part 2 — full screen, ⌃⌥Y / ⌃⌥N, first-setup window (#179), feedback — idea / problem links to GitHub issue forms, crash report prompt (#177), Chinese models by API — Qwen, Kimi, GLM, MiniMax (#172), notch stage 3 part 1 — pill, screen choice, summary in menu bar / island / both (#173), Antigravity conversations in «Сессии» (#170), Copilot in full (#169), AI services stages 5–6 — Codex threads in «Сессии», stage 3 checked live (#168), stage 4 — thresholds per service, «Другие AI» notch ear, other services in the weekly summary (#167), stage 3 — Codex plan, credits, tokens per project, context (#166), stage 2 — one limits card for every service (#165), Settings redone like System Settings (#164), «Сервисы AI» as a list on the left (#162) in the window colour (#163), glass panel background (#158) and its fix for macOS 27 (#160), AI services spec + stage 1 — Claude Code inside «Сервисы AI», a tab per service (#159)
-- released 0.2.2 (v0.2.2, build 345): clickable widgets (#154), Codex from the ChatGPT desktop app (#155), notch island stage 2 (#153)
-- notch island stage 1 merged (#149): module, island over the notch, ears, hover card; target release 0.3.0
-- notch island stage 2 merged (#153): banners for events, permission requests with Allow / Deny in the island
-- wide CLI search merged: `claude` (#150), then codex, gemini, agy, copilot, cursor-agent (#151) — login shell, nvm/fnm/volta/pnpm, Claude desktop app's copy
-- landing page live at https://olehdemishev.github.io/AIHubBar/ (#147), deployed by `.github/workflows/pages.yml` on pushes to `site/`
-- nothing else in progress; merged: RELEASE.md names the real `.dmg` (#144), English interface names in the public docs (#143); overview PDF (en, ru) and a public README for GitHub (#139), no personal paths or names, Telegram set up in the app (#140)
-- released 0.2.0: repo renamed to `OlehDemishev/AIHubBar` and made public; repeat fixes merged (#136, #137)
-- merged today: notifications once per wait and a choice per kind (#134); queue after reset and run guard (#129), other-AI menu bar/widget/forecast (#130), session changes and weekly summary (#131), Claude Code window and saved prompts (#132); other AI services' limits (#126, #127)
-- renamed to AI Hub Bar (PR #115); session rows open on a click anywhere (PR #117); widgets translated into 13 languages (PR #119); sessions in Claude's own terminal open Claude (PR #121); module options per profile (PR #124)
-- merged today: feature batch — approve from notifications (#100), current action (#102), week forecast (#104), Telegram answers (#106), PR/CI alerts (#108), search, hot key, Shortcuts (#110), widget and Control Center toggle (#112), night queue (#113), context fullness (#114); panel as cards (#98); hover hints (#91); menu bar drag, translation review, release re-check (#93–#95)
-- release without an Apple Developer account ready (PR #85), nothing published; Windows and Linux specs wait for Oleh
+- nothing in progress; merged 2026-11-02: Windows/Linux stage 1 «Каркас» (#189), stage 2 «Лимиты» (#190), stage 3 «Сессии» (#191); Mac: «Скрыть остров» in the panel header (#188), island stage 5 — file on the island (#186), stage 4 — Claude's task list (#184)
+- 0.3.0 built, not published: `build/release/0.3.0/AIHubBar-0.3.0.dmg` (build 400); publish from `91d6c2b` (before stages 4–5): `git switch --detach 91d6c2b && scripts/release.sh 0.3.0 --publish`
 
 **Next:**
-- notch island for 0.3.0: stage 3 done (#181; left: «Скрыть остров» in the ✦ menu, a live VoiceOver walk); 0.3.0 built — after Oleh's check on the MacBook Air: `scripts/release.sh 0.3.0 --publish` (rebuilds with the then-current build number)
-- notch stages 4 (live activity) and 5 (file on the island) done; left for the island: a live VoiceOver walk, why one test drag didn't land
-- AI services (docs/SPEC-ai-services.md §5): all six stages done for Claude Code, Codex, Copilot CLI and Antigravity (Oleh, 2026-11-02: these three besides Claude are enough; Gemini CLI removed — its Google sign-in is gone; Cursor not used); left only a «waiting» signal if the agents get hooks
-- standing rule (SPEC §3.1): every new icon-only control gets a hover hint; finish each UI stage with the accessibility walk
-- fix whatever Oleh finds in the translations (automated checks pass; a native read for ja, ko, ar is still worth it)
-- stage 8: done without Developer ID (self-signed + Sparkle, PR #85; re-checked on main); notarization only if Oleh buys Developer ID; publishing is Oleh's step (Needs Oleh)
-- Fix whatever Oleh finds in docs/CHECKLIST.md
-- Windows and Linux (Oleh said go, 2026-11-02): stage 1 «Каркас» and most of stage 2 «Лимиты» done in `desktop/`; next: the rest of stage 2 (Telegram, spend per project, custom thresholds), the rest of stage 3 (Show — the terminal window, process alive check, answering permission requests), then stage 4 «Проекты и Claude»; stage 0 leftovers need a real Windows (Ctrl+Break and SessionEnd, the Claude desktop app's session folder)
+- Windows/Linux: rest of stage 2 (Telegram, spend per project, own thresholds), rest of stage 3 («Показать», alive check, permission answers), then stage 4 «Проекты и Claude» (docs/SPEC-windows.md §9)
+- Mac island: a live VoiceOver walk; why one test drag onto the island didn't land
+- after Oleh's Air check: publish 0.3.0, then a next version with island stages 4–5
+- Windows code signing, notarization on Mac — only after Oleh decides (Needs Oleh)
 
 **Needs Oleh:**
-- stage 5 on the MacBook Air (build from main): drag a file from Finder onto the notch — «Отпустите — AI-команды для файла», then the card; «Своя задача» with a short task → a new file next to it; tell me if a drag ever doesn't catch
-- Claude Code CLI on the Mac mini is signed out («OAuth session expired»): run `claude` once and sign in, if agents here should use the CLI
-- stage 4 on a real session (build from main): ask Claude for something with a plan — the sessions ear shows a ring and «1/5», the card the steps, «Готово» the result; Settings → Модули → «Остров у чёлки» → «Ход работы Claude в ушке сессий» turns it off
-- 0.3.0: copy `build/release/0.3.0/AIHubBar-0.3.0.dmg` to the MacBook Air (AirDrop), install to Applications (first launch: «Open Anyway»), go through the island: ears and hover card at the real notch, a request with Allow / Deny, full screen, «все экраны» with a monitor; then say «публикуй» or what's wrong
-- on the MacBook Air with a monitor (build from main): Settings → Модули → «Остров у чёлки» → «Где показывать» → «все экраны» — the notch on the Air and the pill on the monitor, a banner on both, the card opens where you hover
-- answer the island's first-setup window (it is open now: requests, summary, pill, hot keys) and press «Готово»; on the MacBook Air later: full-screen app (only requests and waits, no ears) and, if you turn them on, ⌃⌥Y / ⌃⌥N on a request
-- feedback (installed build, merged #177): an alert «В прошлый раз AI Hub Bar закрылся с ошибкой» is on screen (a real crash of the notch branch build at 16:46) — press «Сообщить на GitHub…»: a filled bug form should open in the browser and the report in Finder; don't submit it unless you want the issue. Settings → Основные → «Обратная связь» has both buttons; optional: an e-mail address for people without GitHub
-- on the MacBook Air (build from main): Settings → Модули → «Остров у чёлки» → «Сводка» → «только в острове» — the menu bar should keep only the icon and the red dot while the ears show limits and sessions; «только в строке меню» — no ears
-- Chinese models (on main, in the next build): to try one, make a key (Qwen / Kimi / GLM / MiniMax — links next to each in «Сервисы AI» → «Другие»), paste it, «Проверить»; no key was available to the agent, so a real reply is unchecked
-- optional: test conversations «codex-check», «agents-check» can be archived in Codex / Copilot / Antigravity
-- optional: a Codex thread named «codex-check» (from the live check) is in your Codex history — archive it in Codex if it's in the way
-- new Settings (build from main, installed): one sidebar with search — every page opens, search finds pages by setting names (e.g. «Telegram»), the dots match what's set up; in «Сервисы AI» → Claude Code has all the old options (path, hooks, Telegram answers, saved prompts, CLAUDE.md и MCP, background runs); Codex shows the agent and its limits row; Modules → Лимиты → «Другие AI» shows the summary and «Открыть «Сервисы AI»»
-- glass panel (installed build has the fix): checked by the agent in the light theme; look at it in the dark theme and with «Уменьшить прозрачность» on (must fall back to the standard background), say if the glass should be clearer or denser
-- update to 0.2.2 («Обновления» in Settings), then: Settings → Модули → Лимиты → «Другие AI» should list Codex; click the limits widget (opens «Лимиты»), ↻ in it, the sessions widget's rows and ☕ — tell me what doesn't react
-- on the other Mac: install 0.2.2 (Releases, or «Обновления» in Settings) → Settings → Claude Code: the path field should show «авто: …» instead of «авто: не найден»; tell me the path it shows
-- notch island: on the MacBook Air (with this branch's build or later) — Settings → Модули → «Остров у чёлки» → Установить; check the ears beside the real notch, hover opens the card, moving away closes it, menu bar clicks next to the notch still work
-- optional: put https://olehdemishev.github.io/AIHubBar/ into the repo's About → Website; repo settings suggested in chat (release immutability, «Always suggest updating», «Automatically delete head branches»)
-- read docs/AI-Hub-Bar-Overview-ru.pdf and -en.pdf (facts and wording); after merge upload docs/images/social-preview.png in GitHub → Settings → General → Social preview (no API for it); the PDFs can be added to the 0.2.0 release: `gh release upload v0.2.0 docs/AI-Hub-Bar-Overview-*.pdf`
-- after the release: download 0.2.0 from Releases on another Mac (or user) and open it once with «Open Anyway»
-- go through the «Oleh» rows of docs/CHECKLIST.md; try the newer features: «Позже» on a project, the paused-run switch, the Claude Code window, saved prompts in ⌃⌥C, notification frequencies
-- to try other AI services: Settings → Модули → Лимиты → «Другие AI» (keys, installed `codex` / Gemini CLI, consents)
-- Windows: the agent took SPEC-windows §10's proposals while you were away (Tauri 2, `desktop/` in this repo, Windows 10 22H2 + 11, WSL later; DECISIONS.md 2026-11-02) — say if any should change; still yours: Windows code signing (Azure Trusted Signing or a certificate), SPEC-linux §10 (first desktops, Flatpak)
-- Windows: try the installer from the latest «Desktop» run on GitHub (Actions → Desktop → artifact ai-hub-bar-Windows): it installs for you only, without admin; the tray icon, the panel on a click, Settings → language and start at sign-in; SmartScreen will warn (no signature yet)
-- optional: Apple Developer ID (notarization, no «Open Anyway»); delete or archive the old repo `OlehDemishev/ClaudeBar`
+- MacBook Air: install `AIHubBar-0.3.0.dmg` and check the island at the real notch (ears, card, Allow / Deny, full screen, «все экраны» with a monitor); then say «публикуй». On a build from main also: a Claude plan in the sessions ear, a file dragged from Finder onto the notch
+- Windows: the agent took SPEC-windows §10's proposals (Tauri 2, `desktop/` here, Windows 10 22H2 + 11, WSL later; DECISIONS.md) — say if any should change; signing (Azure Trusted Signing or a certificate) is yours
+- Windows: try the installer — GitHub → Actions → «Desktop» → latest run on main → artifact `ai-hub-bar-Windows` (`AI Hub Bar_0.1.0_x64-setup.exe`, for you only, no admin; SmartScreen warns, no signature yet): tray ring and hint, panel with limits and sessions, Settings → Hooks → «Установить hooks», then a Claude session should appear
+- Mac mini: Claude Code CLI is signed out («OAuth session expired») — run `claude` once and sign in, if agents here should use it
+- older, still open: the crash report alert from 16:46 («Сообщить на GitHub…»), Chinese model keys, translations read for ja/ko/ar, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
 
 ## 2026-11-02 — Windows and Linux, stage 3 «Сессии», main part (branch `feat/desktop-sessions`)
