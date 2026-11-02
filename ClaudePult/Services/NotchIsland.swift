@@ -42,11 +42,14 @@ enum NotchScreen: String, Codable, CaseIterable, Sendable {
     case notch
     /// The main screen (the one with the menu bar in focus): its notch, or the pill.
     case main
+    /// Every screen: its notch, or the pill where the pill is on.
+    case all
 
     var title: String {
         switch self {
         case .notch: String(localized: "экран с чёлкой")
         case .main: String(localized: "главный экран")
+        case .all: String(localized: "все экраны")
         }
     }
 }
@@ -95,7 +98,15 @@ struct NotchSettings: Codable, Equatable, Sendable {
     }
 }
 
-/// The island around the notch (docs/SPEC-notch.md): a borderless panel above the menu bar that never takes focus.
+/// One screen's island: where it is and whether a full-screen app fills that screen (SPEC-notch §5).
+struct NotchPlace: Equatable, Sendable {
+    var geometry: NotchGeometry
+    /// No ears there, only requests and waits.
+    var isFullScreen = false
+}
+
+/// The island around the notch (docs/SPEC-notch.md): a borderless panel above the menu bar that never takes focus,
+/// one per screen with «на всех экранах» (the same events on each; the card opens on the one being hovered).
 /// At rest it lets every click through to the menu bar; hovering over the notch (or a click) opens the card, moving
 /// away closes it. Events come as banners, one at a time (§3.2); a permission request stays until it is answered
 /// (§4). Nothing runs on a timer: the window is moved only when screens change, a banner's end is one sleep, the
@@ -103,10 +114,10 @@ struct NotchSettings: Codable, Equatable, Sendable {
 @MainActor
 @Observable
 final class NotchIsland {
-    private(set) var isOpen = false
-    private(set) var geometry: NotchGeometry?
-    /// A full-screen app fills the island's screen: no ears, only requests and waits (SPEC-notch §5).
-    private(set) var isFullScreen = false
+    /// The screens the island is on; empty — nowhere.
+    private(set) var places: [NotchPlace] = []
+    /// The place whose card is open.
+    private(set) var openIndex: Int?
     private(set) var queue = NotchEventQueue()
     /// «Разрешить» / «Отклонить» are live (SPEC-notch §4).
     private(set) var armed = false
@@ -114,8 +125,18 @@ final class NotchIsland {
     var cardHeight: CGFloat = NotchGeometry.cardHeight
     var bannerHeight: CGFloat = 44
 
+    var isOpen: Bool { openIndex != nil }
+    /// A full-screen app fills every screen the island is on: only requests and waits come in (SPEC-notch §5).
+    var isFullScreen: Bool { !places.isEmpty && places.allSatisfy(\.isFullScreen) }
+
     /// The banner on screen: the most important event, while the card is closed.
     var banner: NotchEvent? { isOpen ? nil : queue.current }
+
+    /// The banner on one screen: over a full-screen app only a request or a wait.
+    func banner(on index: Int) -> NotchEvent? {
+        guard let banner, places.indices.contains(index) else { return nil }
+        return !places[index].isFullScreen || [.request, .waiting].contains(banner.kind) ? banner : nil
+    }
     /// Requests shown in the open card.
     var requests: [NotchEvent] { queue.items.filter { $0.kind == .request } }
 
@@ -144,8 +165,8 @@ final class NotchIsland {
     @ObservationIgnored private var spaceObservers: [NSObjectProtocol] = []
 
     @ObservationIgnored private let settings: AppSettings
-    @ObservationIgnored private var panel: NotchPanel?
-    @ObservationIgnored private var content: (() -> AnyView)?
+    @ObservationIgnored private var panels: [NotchPanel] = []
+    @ObservationIgnored private var content: ((Int) -> AnyView)?
     @ObservationIgnored private var monitors: [Any] = []
     @ObservationIgnored private var pending: Task<Void, Never>?
     @ObservationIgnored private var bannerTimer: Task<Void, Never>?
@@ -165,7 +186,8 @@ final class NotchIsland {
         self.settings = settings
     }
 
-    func start(content: @escaping () -> AnyView) {
+    /// `content` makes the view for the island on `places[index]`.
+    func start(content: @escaping (_ index: Int) -> AnyView) {
         self.content = content
         screenObserver = NotificationCenter.default.addObserver(
             forName: NSApplication.didChangeScreenParametersNotification, object: nil, queue: .main
@@ -192,7 +214,7 @@ final class NotchIsland {
             Task { @MainActor in self?.observe() }
         }
         update()
-        guard geometry != nil else { return }
+        guard !places.isEmpty else { return }
         answered.formIntersection(requests.map(\.id))
         queue.syncRequests(settings.notch.events.contains(.request) ? requests.filter { !answered.contains($0.id) } : [])
         noticeFinished(items)
@@ -200,40 +222,45 @@ final class NotchIsland {
     }
 
     func update() {
-        guard isActive(), !settings.notch.hidden, let geometry = NotchGeometry.current(for: settings.notch) else {
+        let geometries = isActive() && !settings.notch.hidden ? NotchGeometry.places(for: settings.notch) : []
+        guard !geometries.isEmpty else {
             tearDown()
             return
         }
-        if self.geometry != geometry {
-            AppLog.info("Notch island at \(NSStringFromRect(geometry.notch))")
-            self.geometry = geometry
+        let new = geometries.map { NotchPlace(geometry: $0, isFullScreen: FullScreenDetector.isFullScreen(screen: $0.screen)) }
+        if new.map(\.geometry) != places.map(\.geometry) {
+            AppLog.info("Notch island at \(geometries.map { NSStringFromRect($0.notch) }.joined(separator: ", "))")
         }
-        let fullScreen = FullScreenDetector.isFullScreen(screen: geometry.screen)
-        if fullScreen != isFullScreen {
-            isFullScreen = fullScreen
-            AppLog.info("Notch island: \(fullScreen ? "full-screen app, requests and waits only" : "back from full screen")")
-            if fullScreen { queue.keepOnly([.request, .waiting]) }
+        if new.map(\.isFullScreen) != places.map(\.isFullScreen), !places.isEmpty || new.contains(where: \.isFullScreen) {
+            let count = new.filter(\.isFullScreen).count
+            AppLog.info("Notch island: full-screen apps on \(count) of \(new.count) screens")
         }
+        let wasFullScreen = isFullScreen
+        if new != places { places = new }
+        if isFullScreen, !wasFullScreen { queue.keepOnly([.request, .waiting]) }
+        if let openIndex, !places.indices.contains(openIndex) { self.openIndex = nil }
         if !settings.notch.setupDone, !askedForSetup, let needsSetup {
             askedForSetup = true
             AppLog.info("Notch island: asking for the first setup")
             needsSetup()
         }
-        let panel = self.panel ?? makePanel()
-        panel.setFrame(geometry.windowFrame, display: true)
-        panel.ignoresMouseEvents = interactiveFrame?.contains(NSEvent.mouseLocation) != true
-        panel.orderFrontRegardless()
+        while panels.count < places.count { panels.append(makePanel(index: panels.count)) }
+        while panels.count > places.count { panels.removeLast().orderOut(nil) }
+        for (index, panel) in panels.enumerated() {
+            panel.setFrame(places[index].geometry.windowFrame, display: true)
+            panel.orderFrontRegardless()
+        }
+        updateMouse(at: NSEvent.mouseLocation)
         if monitors.isEmpty { watchPointer() }
     }
 
-    private func makePanel() -> NotchPanel {
+    private func makePanel(index: Int) -> NotchPanel {
         let panel = NotchPanel()
         if let content {
-            let host = NSHostingView(rootView: content())
+            let host = NSHostingView(rootView: content(index))
             host.sizingOptions = []
             panel.contentView = host
         }
-        self.panel = panel
         return panel
     }
 
@@ -242,30 +269,33 @@ final class NotchIsland {
         monitors = []
         pending?.cancel()
         bannerTimer?.cancel()
-        isOpen = false
+        openIndex = nil
         queue = NotchEventQueue()
         lastStates = nil
-        panel?.orderOut(nil)
-        panel = nil
-        if geometry != nil { AppLog.info("Notch island hidden") }
-        geometry = nil
+        for panel in panels { panel.orderOut(nil) }
+        panels = []
+        if !places.isEmpty { AppLog.info("Notch island hidden") }
+        places = []
     }
 
     /// The island is on screen: not on a full-screen desktop, the display awake, the Mac unlocked.
-    private var isVisible: Bool { panel?.occlusionState.contains(.visible) == true }
+    private var isVisible: Bool { panels.contains { $0.occlusionState.contains(.visible) } }
 
-    /// The ears show the summary: a real notch (the pill has no ears), no full-screen app, not «только в строке меню».
-    var showsSummary: Bool { geometry.map { !$0.isPill } == true && !isFullScreen && settings.notch.summary != .menuBar }
+    /// The ears on one screen show the summary: a real notch (the pill has no ears), no full-screen app there,
+    /// not «только в строке меню».
+    func showsSummary(on index: Int) -> Bool {
+        places.indices.contains(index) && !places[index].geometry.isPill && !places[index].isFullScreen && settings.notch.summary != .menuBar
+    }
 
-    /// «Только в острове»: the menu bar keeps only its icon while the ears show the summary.
-    var takesMenuBarSummary: Bool { showsSummary && settings.notch.summary == .island }
+    /// «Только в острове»: the menu bar keeps only its icon while some ears show the summary.
+    var takesMenuBarSummary: Bool { settings.notch.summary == .island && places.indices.contains { showsSummary(on: $0) } }
 
     // MARK: - Events (SPEC-notch §3.2)
 
     /// A notification that got through (`Notifier.island`). true = the island showed it and the person chose
     /// «только остров» for requests and waits, so no system notification.
     func notification(id: String, kind: NotificationKind, title: String, body: String, target: NotificationTarget) -> Bool {
-        guard geometry != nil else { return false }
+        guard !places.isEmpty else { return false }
         let eventKind: NotchEventKind = if case .approval = target { .request } else { NotchEventKind(kind) }
         guard settings.notch.events.contains(eventKind), !isFullScreen || [.request, .waiting].contains(eventKind) else { return false }
         // Requests come from the open request files, so they stay exactly as long as the request does.
@@ -301,7 +331,7 @@ final class NotchIsland {
         } else if banner == nil {
             shownBannerID = nil
         }
-        panel?.ignoresMouseEvents = interactiveFrame?.contains(NSEvent.mouseLocation) != true
+        updateMouse(at: NSEvent.mouseLocation)
         bannerTimer?.cancel()
         guard let deadline = queue.deadline else { return }
         bannerTimer = Task { @MainActor [weak self] in
@@ -372,29 +402,38 @@ final class NotchIsland {
         }) { monitors.append(local) }
     }
 
-    /// The black part of the window under the notch, in screen coordinates.
-    private func frame(height: CGFloat) -> CGRect? {
-        guard let geometry else { return nil }
+    /// The black part of one screen's window under the notch, in screen coordinates.
+    private func frame(on index: Int, height: CGFloat) -> CGRect? {
+        guard places.indices.contains(index) else { return nil }
+        let geometry = places[index].geometry
         let window = geometry.windowFrame
         let height = min(geometry.notch.height + height, window.height)
         return CGRect(x: window.minX, y: window.maxY - height, width: window.width, height: height)
     }
 
-    private var cardFrame: CGRect? { frame(height: cardHeight) }
-    private var bannerFrame: CGRect? { banner == nil ? nil : frame(height: bannerHeight) }
+    private func bannerFrame(on index: Int) -> CGRect? { banner(on: index) == nil ? nil : frame(on: index, height: bannerHeight) }
 
-    /// Where the window takes clicks; everywhere else they go through to what is underneath.
-    private var interactiveFrame: CGRect? { isOpen ? cardFrame : bannerFrame }
+    /// Where one screen's window takes clicks; everywhere else they go through to what is underneath.
+    private func interactiveFrame(on index: Int) -> CGRect? {
+        guard let openIndex else { return bannerFrame(on: index) }
+        return openIndex == index ? frame(on: index, height: cardHeight) : nil
+    }
+
+    private func updateMouse(at location: CGPoint) {
+        for (index, panel) in panels.enumerated() {
+            panel.ignoresMouseEvents = interactiveFrame(on: index)?.contains(location) != true
+        }
+    }
 
     private func pointer(_ type: NSEvent.EventType) {
-        guard let geometry else { return }
+        guard !places.isEmpty else { return }
         let location = NSEvent.mouseLocation
         clickGuard?.pointer(at: location)
         updateArmed()
-        panel?.ignoresMouseEvents = interactiveFrame?.contains(location) != true
+        updateMouse(at: location)
 
-        if isOpen {
-            let inside = cardFrame?.contains(location) ?? false
+        if let openIndex {
+            let inside = frame(on: openIndex, height: cardHeight)?.contains(location) ?? false
             if inside {
                 pending?.cancel()
             } else if type == .leftMouseDown {
@@ -402,20 +441,21 @@ final class NotchIsland {
             } else if !isPending {
                 schedule(after: Self.closeDelay) { [weak self] in self?.close() }
             }
-        } else if let bannerFrame {
+        } else if banner != nil {
             // A banner: the pointer on it keeps it; leaving gives it its full time again.
-            let onBanner = bannerFrame.contains(location)
+            let onBanner = places.indices.contains { bannerFrame(on: $0)?.contains(location) == true }
             if onBanner != pointerOnBanner {
                 pointerOnBanner = onBanner
                 showNext()
             }
-        } else if geometry.restFrame.contains(location) {
+        } else if let index = places.firstIndex(where: { $0.geometry.restFrame.contains(location) }) {
             if type == .leftMouseDown {
-                open()
+                open(on: index)
             } else if settings.notch.openOnHover, !isPending {
                 schedule(after: Self.openDelay) { [weak self] in
-                    guard let self, let geometry = self.geometry, geometry.restFrame.contains(NSEvent.mouseLocation) else { return }
-                    self.open()
+                    guard let self, self.places.indices.contains(index),
+                          self.places[index].geometry.restFrame.contains(NSEvent.mouseLocation) else { return }
+                    self.open(on: index)
                 }
             }
         } else {
@@ -435,19 +475,20 @@ final class NotchIsland {
         }
     }
 
-    func open() {
+    func open(on index: Int) {
         pending?.cancel()
-        guard !isOpen, geometry != nil else { return }
-        isOpen = true
+        guard !isOpen, places.indices.contains(index) else { return }
+        openIndex = index
         pointerOnBanner = false
         resetGuard()
-        panel?.ignoresMouseEvents = false
+        updateMouse(at: NSEvent.mouseLocation)
+        if panels.indices.contains(index) { panels[index].ignoresMouseEvents = false }
     }
 
     func close() {
         pending?.cancel()
         guard isOpen else { return }
-        isOpen = false
+        openIndex = nil
         shownBannerID = nil
         showNext()
     }

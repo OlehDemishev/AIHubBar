@@ -81,7 +81,8 @@ struct QuickTogglesView: View {
     /// The profile's own choice, else the ones chosen in Settings → «Модули».
     private var toggles: [QuickToggle] {
         let chosen = modes.current?.module(.toggles)?.toggles
-        return QuickToggle.allCases.filter { toggle in chosen.map { $0.contains(toggle.rawValue) } ?? settings.quickToggles.contains(toggle) }
+        return QuickToggle.available(installed: modes.installedModules)
+            .filter { toggle in chosen.map { $0.contains(toggle.rawValue) } ?? settings.quickToggles.contains(toggle) }
     }
     @Environment(QuickToolsController.self) private var tools
     @AppStorage("collapsedBlocks") private var collapsedRaw = ""

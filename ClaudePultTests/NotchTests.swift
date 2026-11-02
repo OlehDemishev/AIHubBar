@@ -196,20 +196,39 @@ struct NotchPlacementTests {
         safeAreaTop: 0, topLeftArea: nil, topRightArea: nil, isMain: true)
 
     @Test func notchScreenFirst() throws {
-        let geometry = try #require(NotchGeometry.choose([builtIn, monitor], on: .notch, pill: true))
+        let geometry = try #require(NotchGeometry.choose([builtIn, monitor], on: .notch, pill: true).first)
         #expect(!geometry.isPill && geometry.notch.width == 184)
-        let main = try #require(NotchGeometry.choose([builtIn, monitor], on: .main, pill: true))
+        let main = try #require(NotchGeometry.choose([builtIn, monitor], on: .main, pill: true).first)
         #expect(main.isPill && main.screen == monitor.frame, "the main screen has no notch: its pill")
-        #expect(NotchGeometry.choose([builtIn, monitor], on: .main, pill: false) == nil)
+        #expect(NotchGeometry.choose([builtIn, monitor], on: .main, pill: false).isEmpty)
+    }
+
+    @Test func everyScreen() {
+        let both = NotchGeometry.choose([builtIn, monitor], on: .all, pill: true)
+        #expect(both.count == 2)
+        #expect(!both[0].isPill && both[0].screen == builtIn.frame, "the notch on the built-in screen")
+        #expect(both[1].isPill && both[1].screen == monitor.frame, "the pill on the monitor")
+        let notchOnly = NotchGeometry.choose([builtIn, monitor], on: .all, pill: false)
+        #expect(notchOnly.count == 1 && !notchOnly[0].isPill, "no pill: only the screen with the notch")
+        #expect(NotchGeometry.choose([monitor], on: .all, pill: false).isEmpty)
+        #expect(NotchGeometry.choose([monitor, builtIn], on: .notch, pill: true).count == 1, "the other choices stay one island")
+    }
+
+    @Test func simulatedNotch() throws {
+        var screen = monitor
+        screen.simulateNotch()
+        let geometry = try #require(screen.notchGeometry)
+        #expect(geometry.notch.width == 184 && geometry.notch.midX == monitor.frame.midX)
+        #expect(geometry.notch.height == 32 && geometry.notch.maxY == monitor.frame.maxY)
     }
 
     @Test func pillUnderTheMenuBar() throws {
-        let pill = try #require(NotchGeometry.choose([monitor], on: .notch, pill: true))
+        let pill = try #require(NotchGeometry.choose([monitor], on: .notch, pill: true).first)
         #expect(pill.isPill && pill.notch.height == 0 && pill.notch.minY == 1050, "just under the 30 pt menu bar")
         #expect(pill.notch.midX == monitor.frame.midX)
         #expect(pill.windowFrame.maxY == 1050 && pill.windowFrame.height == NotchGeometry.cardHeight)
         #expect(pill.restFrame.height == 0, "nothing to hover at rest")
-        #expect(NotchGeometry.choose([monitor], on: .notch, pill: false) == nil)
+        #expect(NotchGeometry.choose([monitor], on: .notch, pill: false).isEmpty)
     }
 
     @Test func pillDefaultAndOldSettings() throws {

@@ -5,7 +5,8 @@
 **Updated:** 2026-11-02
 
 **Now:**
-- nothing in progress; merged 2026-11-02: notch stage 3 part 2 — full screen, ⌃⌥Y / ⌃⌥N, first-setup window (#179), feedback — idea / problem links to GitHub issue forms, crash report prompt (#177), Chinese models by API — Qwen, Kimi, GLM, MiniMax (#172), notch stage 3 part 1 — pill, screen choice, summary in menu bar / island / both (#173), Antigravity conversations in «Сессии» (#170), Copilot in full (#169), AI services stages 5–6 — Codex threads in «Сессии», stage 3 checked live (#168), stage 4 — thresholds per service, «Другие AI» notch ear, other services in the weekly summary (#167), stage 3 — Codex plan, credits, tokens per project, context (#166), stage 2 — one limits card for every service (#165), Settings redone like System Settings (#164), «Сервисы AI» as a list on the left (#162) in the window colour (#163), glass panel background (#158) and its fix for macOS 27 (#160), AI services spec + stage 1 — Claude Code inside «Сервисы AI», a tab per service (#159)
+- branch `feat/notch-all-screens` (PR open): notch stage 3 part 3 — «все экраны» (an island on every screen) and «Остров» in Quick Toggles
+- merged 2026-11-02: notch stage 3 part 2 — full screen, ⌃⌥Y / ⌃⌥N, first-setup window (#179), feedback — idea / problem links to GitHub issue forms, crash report prompt (#177), Chinese models by API — Qwen, Kimi, GLM, MiniMax (#172), notch stage 3 part 1 — pill, screen choice, summary in menu bar / island / both (#173), Antigravity conversations in «Сессии» (#170), Copilot in full (#169), AI services stages 5–6 — Codex threads in «Сессии», stage 3 checked live (#168), stage 4 — thresholds per service, «Другие AI» notch ear, other services in the weekly summary (#167), stage 3 — Codex plan, credits, tokens per project, context (#166), stage 2 — one limits card for every service (#165), Settings redone like System Settings (#164), «Сервисы AI» as a list on the left (#162) in the window colour (#163), glass panel background (#158) and its fix for macOS 27 (#160), AI services spec + stage 1 — Claude Code inside «Сервисы AI», a tab per service (#159)
 - released 0.2.2 (v0.2.2, build 345): clickable widgets (#154), Codex from the ChatGPT desktop app (#155), notch island stage 2 (#153)
 - notch island stage 1 merged (#149): module, island over the notch, ears, hover card; target release 0.3.0
 - notch island stage 2 merged (#153): banners for events, permission requests with Allow / Deny in the island
@@ -19,7 +20,7 @@
 - release without an Apple Developer account ready (PR #85), nothing published; Windows and Linux specs wait for Oleh
 
 **Next:**
-- notch island for 0.3.0: stage 3 done except «on all screens» and the Quick Toggles switch; next a 0.3.0 build for Oleh's MacBook Air before publishing
+- notch island for 0.3.0: stage 3 done with this PR (left: «Скрыть остров» in the ✦ menu, a live VoiceOver walk); next a 0.3.0 build for Oleh's MacBook Air before publishing
 - after 0.3.0: notch island stage 4 — Claude session live activity (docs/SPEC-notch.md §3.4, agreed by Oleh 2026-11-02): plan progress ring and «3/7» in the sessions ear, steps in the card, summary in «Сессия закончила»
 - AI services (docs/SPEC-ai-services.md §5): all six stages done for Claude Code, Codex, Copilot CLI and Antigravity (Oleh, 2026-11-02: these three besides Claude are enough; Gemini CLI removed — its Google sign-in is gone; Cursor not used); left only a «waiting» signal if the agents get hooks
 - standing rule (SPEC §3.1): every new icon-only control gets a hover hint; finish each UI stage with the accessibility walk
@@ -29,6 +30,7 @@
 - Windows and Linux versions (docs/SPEC-windows.md, docs/SPEC-linux.md) — only when Oleh says; stage 0 (fact checks in VMs) first
 
 **Needs Oleh:**
+- merge the PR of `feat/notch-all-screens`; then on the MacBook Air with a monitor: Settings → Модули → «Остров у чёлки» → «Где показывать» → «все экраны» — the notch on the Air and the pill on the monitor, a banner on both, the card opens where you hover
 - answer the island's first-setup window (it is open now: requests, summary, pill, hot keys) and press «Готово»; on the MacBook Air later: full-screen app (only requests and waits, no ears) and, if you turn them on, ⌃⌥Y / ⌃⌥N on a request
 - feedback (installed build, merged #177): an alert «В прошлый раз AI Hub Bar закрылся с ошибкой» is on screen (a real crash of the notch branch build at 16:46) — press «Сообщить на GitHub…»: a filled bug form should open in the browser and the report in Finder; don't submit it unless you want the issue. Settings → Основные → «Обратная связь» has both buttons; optional: an e-mail address for people without GitHub
 - on the MacBook Air (build from main): Settings → Модули → «Остров у чёлки» → «Сводка» → «только в острове» — the menu bar should keep only the icon and the red dot while the ears show limits and sessions; «только в строке меню» — no ears
@@ -48,6 +50,12 @@
 - decide SPEC-windows §10 and SPEC-linux §10 (Tauri 2 for both, Windows code signing, first Linux desktops) before that work starts
 - optional: Apple Developer ID (notarization, no «Open Anyway»); delete or archive the old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-02 — Notch island stage 3, part 3: all screens, island quick toggle (branch `feat/notch-all-screens`)
+
+Done: «Где показывать» got «все экраны» (`NotchScreen.all`): `NotchGeometry.choose` now returns one place per screen — the notch where there is one, the pill on the others when the pill is on; the other two choices still give one island. `NotchIsland` keeps `places` (geometry + full screen per screen) and one panel per place; the same banner goes to every screen, the card opens only on the screen hovered or clicked (`openIndex`), clicks pass through everywhere else; ears and full screen are per screen, and only when every screen has a full-screen app does the island drop everything but requests and waits. `NotchIslandView(index:)` draws one place. The simulated notch (`notchSimulate`) now goes through the same screen list, so it works with every choice. Quick Toggles got «Остров» (shows / hides the island, lit while it is shown), listed only while the island module is installed. 2 new strings in 13 languages; SPEC-notch §9 and REFERENCE updated.
+Checked: `xcodebuild test` — 343 / 343 pass (new: every screen with and without the pill, the simulated notch, the toggle listed only with the island, the toggle hides and shows it). Live on the Mac mini (one screen): Release build installed, the pill and a `test-island` banner captured; with `notchSimulate` the notch and its ears captured (184×32, as before), then the flag removed.
+Left: no second screen here, so «все экраны» with two screens is checked only by tests — needs the MacBook Air with a monitor; the toggle not tried in the panel (Quick Toggles is not installed in Oleh's profile, left as is); «Скрыть остров» in the ✦ menu and a live VoiceOver walk not done.
 
 ## 2026-11-02 — Notch island stage 3, part 2: full screen, ⌃⌥Y / ⌃⌥N, first-setup window (#179)
 

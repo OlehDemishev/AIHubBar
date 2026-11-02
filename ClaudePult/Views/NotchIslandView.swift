@@ -1,8 +1,11 @@
 import SwiftUI
 
 /// The island's content (docs/SPEC-notch.md §3): the ears beside the notch at rest, the card under it when open.
-/// Always black like the notch itself, with light text, in either appearance (SPEC-notch §7).
+/// Always black like the notch itself, with light text, in either appearance (SPEC-notch §7). One per screen:
+/// `index` is its place in `NotchIsland.places`.
 struct NotchIslandView: View {
+    let index: Int
+
     @Environment(NotchIsland.self) private var island
     @Environment(AppSettings.self) private var settings
     @Environment(UsageStore.self) private var usage
@@ -13,12 +16,13 @@ struct NotchIslandView: View {
     @Environment(\.colorSchemeContrast) private var contrast
 
     var body: some View {
-        if let geometry = island.geometry {
+        if island.places.indices.contains(index) {
+            let geometry = island.places[index].geometry
             let window = geometry.windowFrame
-            let open = island.isOpen
-            let banner = island.banner
+            let open = island.openIndex == index
+            let banner = island.banner(on: index)
             let wide = open || banner != nil
-            let earsShown = island.showsSummary && (hasEar(settings.notch.leftEar) || hasEar(settings.notch.rightEar))
+            let earsShown = island.showsSummary(on: index) && (hasEar(settings.notch.leftEar) || hasEar(settings.notch.rightEar))
             let restWidth = earsShown ? geometry.restFrame.width : geometry.notch.width
             // At rest the island is centred on the notch; open or with a banner, it fills the window.
             let restOffset = geometry.notch.midX - window.midX

@@ -819,10 +819,11 @@ private struct QuickCommandsSection: View {
 
 private struct QuickTogglesSection: View {
     @Environment(AppSettings.self) private var settings
+    @Environment(ModeStore.self) private var modes
 
     var body: some View {
         Section {
-            ForEach(QuickToggle.allCases, id: \.self) { toggle in
+            ForEach(QuickToggle.available(installed: modes.installedModules), id: \.self) { toggle in
                 Toggle(isOn: Binding(
                     get: { settings.quickToggles.contains(toggle) },
                     set: { on in settings.quickToggles = QuickToggle.allCases.filter { $0 == toggle ? on : settings.quickToggles.contains($0) } }
