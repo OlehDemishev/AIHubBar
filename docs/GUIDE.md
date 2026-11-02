@@ -89,6 +89,7 @@ You can skip any step: **Skip** keeps the template's choice. Everything can be c
 - **API keys:** kept only in the macOS Keychain. They never go into logs or exported settings.
 - **Other AI services:** Codex and Copilot are asked through their own tools (`codex`, `gh`). The Gemini CLI and Cursor sign-ins are read only after you turn on consent for each in **Settings… → AI Services** (the Gemini and Cursor tabs); without it Gemini is counted from its local logs and Cursor stays off.
 - **What gets sent:** your files go only to the AI service you run a command with. AI Hub Bar has no server of its own.
+- **Feedback and crash reports:** **Settings… → General → Feedback** (also at the bottom of the Help window) opens a GitHub issue form with the version and macOS filled in. After a crash AI Hub Bar offers to report it: the form gets the crash's short description and the last lines of the app log, and the full report (home folder removed) is shown in Finder to drag into the form. Nothing is sent by the app itself — you see the whole form on GitHub before you submit it. **Don't offer again** in that dialog, or the switch in Settings, turns the offer off.
 - **Session hook:** it only writes small status files on this Mac and never changes what Claude does. **Settings… → AI Services → Claude Code → Remove hooks** takes it out again.
 - **Background runs:** each runs under an explicit permission list. With **Project files only**, Claude can read and write inside the project folder, with no shell and no internet.
 
@@ -105,6 +106,7 @@ AI Hub Bar follows the system language. To pick another one, go to **Settings…
 | No limits | When macOS asks whether `security` may read "Claude Code-credentials", choose **Always Allow**. |
 | No notifications | Allow them in System Settings → Notifications → AI Hub Bar. Then **Settings… → General → Check** sends a test one. |
 | Sessions list is empty | Install the hooks: Help window → Readiness, or **Settings… → AI Services → Claude Code**. |
+| AI Hub Bar crashed or something else is wrong | **Settings… → General → Report a Problem…** opens the bug form on GitHub with the version and macOS filled in. |
 | "Terminal" does nothing | macOS asks once whether AI Hub Bar may control Terminal. Allow it in System Settings → Privacy & Security → Automation. |
 
 ## Uninstall

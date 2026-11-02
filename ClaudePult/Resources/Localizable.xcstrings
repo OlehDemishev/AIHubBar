@@ -13465,6 +13465,82 @@
         }
       }
     },
+    "Больше не предлагать": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "عدم الاقتراح مرة أخرى"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nicht mehr anbieten"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Don’t offer again"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No volver a ofrecer"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ne plus proposer"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jangan tawarkan lagi"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Non proporre più"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今後は表示しない"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "다시 제안하지 않음"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nie proponuj więcej"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Não oferecer novamente"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Більше не пропонувати"
+          }
+        }
+      }
+    },
     "Бот не может написать в этот чат — откройте его в Telegram и нажмите «Start»": {
       "localizations": {
         "ar": {
@@ -14760,6 +14836,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "У профілях"
+          }
+        }
+      }
+    },
+    "В прошлый раз AI Hub Bar закрылся с ошибкой": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "أُغلق AI Hub Bar بسبب خطأ في المرة السابقة"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar wurde beim letzten Mal unerwartet beendet"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar quit unexpectedly last time"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La última vez AI Hub Bar se cerró por un error"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La dernière fois, AI Hub Bar s’est fermé à cause d’une erreur"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Terakhir kali AI Hub Bar tertutup karena kesalahan"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L’ultima volta AI Hub Bar si è chiuso per un errore"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "前回、AI Hub Bar が予期せず終了しました"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "지난번에 AI Hub Bar가 예기치 않게 종료되었습니다"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ostatnio AI Hub Bar zamknął się z błędem"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Da última vez, o AI Hub Bar fechou por um erro"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Минулого разу AI Hub Bar закрився з помилкою"
           }
         }
       }
@@ -27229,6 +27381,82 @@
         }
       }
     },
+    "Идеи и ошибки — в задачи проекта на GitHub. Форма откроется с уже заполненными версией и macOS.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الأفكار والأخطاء تُرسل إلى مشكلات المشروع على GitHub. يُفتح النموذج وفيه الإصدار وmacOS معبّآن مسبقًا."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ideen und Fehler kommen in die Issues des Projekts auf GitHub. Das Formular öffnet sich mit bereits eingetragener Version und macOS."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ideas and bugs go to the project’s issues on GitHub. The form opens with the version and macOS already filled in."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Las ideas y los errores van a las incidencias del proyecto en GitHub. El formulario se abre con la versión y macOS ya rellenados."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les idées et les bugs vont dans les tickets du projet sur GitHub. Le formulaire s’ouvre avec la version et macOS déjà remplis."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ide dan bug masuk ke issue proyek di GitHub. Formulir terbuka dengan versi dan macOS yang sudah terisi."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Idee e bug vanno nelle issue del progetto su GitHub. Il modulo si apre con versione e macOS già compilati."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アイデアや不具合は GitHub のプロジェクトの Issue へ。フォームはバージョンと macOS が入力済みの状態で開きます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "아이디어와 버그는 GitHub의 프로젝트 이슈로 보내 주세요. 양식은 버전과 macOS가 미리 채워진 상태로 열립니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pomysły i błędy trafiają do zgłoszeń projektu na GitHubie. Formularz otworzy się z już wpisaną wersją i macOS."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ideias e erros vão para as issues do projeto no GitHub. O formulário abre com a versão e o macOS já preenchidos."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ідеї та помилки — у задачі проєкту на GitHub. Форма відкриється з уже заповненими версією та macOS."
+          }
+        }
+      }
+    },
     "Идёт сборка": {
       "localizations": {
         "ar": {
@@ -38718,6 +38946,82 @@
         }
       }
     },
+    "Не сейчас": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ليس الآن"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nicht jetzt"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Not Now"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ahora no"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pas maintenant"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nanti saja"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Non ora"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今はしない"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "나중에"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nie teraz"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Agora não"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Не зараз"
+          }
+        }
+      }
+    },
     "Не спать": {
       "localizations": {
         "ar": {
@@ -43678,6 +43982,82 @@
         }
       }
     },
+    "Обратная связь": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الملاحظات"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Feedback"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Feedback"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comentarios"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Retour d’information"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Masukan"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Feedback"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "フィードバック"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "피드백"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Opinie"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Feedback"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Зворотний зв’язок"
+          }
+        }
+      }
+    },
     "Общая команда.": {
       "localizations": {
         "ar": {
@@ -45878,6 +46258,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Відкріпити"
+          }
+        }
+      }
+    },
+    "Откроется форма на GitHub, версия и macOS в ней уже заполнены. Сама программа ничего не отправляет: перед отправкой видно всё, что уходит. Нужен аккаунт GitHub.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يُفتح نموذج على GitHub وفيه الإصدار وmacOS معبّآن مسبقًا. التطبيق نفسه لا يرسل شيئًا: ترى كل شيء قبل الإرسال. يلزم حساب GitHub."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Auf GitHub öffnet sich ein Formular, Version und macOS sind schon eingetragen. Die App selbst sendet nichts: Du siehst alles, bevor es abgeschickt wird. Ein GitHub-Konto ist nötig."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A form opens on GitHub with the version and macOS already filled in. The app itself sends nothing: you see everything before it goes. A GitHub account is needed."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se abre un formulario en GitHub con la versión y macOS ya rellenados. La app no envía nada por sí sola: ves todo antes de enviarlo. Se necesita una cuenta de GitHub."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un formulaire s’ouvre sur GitHub avec la version et macOS déjà remplis. L’app n’envoie rien d’elle-même : vous voyez tout avant l’envoi. Un compte GitHub est nécessaire."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Formulir terbuka di GitHub dengan versi dan macOS yang sudah terisi. Aplikasi sendiri tidak mengirim apa pun: Anda melihat semuanya sebelum dikirim. Diperlukan akun GitHub."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Si apre un modulo su GitHub con versione e macOS già compilati. L’app da sola non invia nulla: vedi tutto prima dell’invio. Serve un account GitHub."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "バージョンと macOS が入力済みのフォームが GitHub で開きます。アプリ自体は何も送信しません。送信前にすべての内容を確認できます。GitHub アカウントが必要です。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "버전과 macOS가 미리 채워진 양식이 GitHub에서 열립니다. 앱 자체는 아무것도 보내지 않으며, 보내기 전에 모든 내용을 확인할 수 있습니다. GitHub 계정이 필요합니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Na GitHubie otworzy się formularz z już wpisaną wersją i macOS. Sama aplikacja nic nie wysyła: przed wysłaniem widać wszystko, co zostanie wysłane. Potrzebne jest konto GitHub."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Um formulário abre no GitHub com a versão e o macOS já preenchidos. O app não envia nada sozinho: você vê tudo antes do envio. É preciso uma conta do GitHub."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Відкриється форма на GitHub, версія і macOS у ній уже заповнені. Сама програма нічого не надсилає: перед надсиланням видно все, що буде надіслано. Потрібен обліковий запис GitHub."
           }
         }
       }
@@ -54857,6 +55313,82 @@
         }
       }
     },
+    "После сбоя предлагать отправить отчёт": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اقتراح إرسال تقرير بعد التعطل"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nach einem Absturz anbieten, einen Bericht zu senden"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Offer to send a report after a crash"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ofrecer enviar un informe tras un fallo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Proposer d’envoyer un rapport après un plantage"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tawarkan pengiriman laporan setelah crash"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Proponi di inviare un rapporto dopo un arresto anomalo"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "クラッシュ後にレポートの送信を提案する"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "충돌 후 보고서 보내기 제안"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Proponuj wysłanie raportu po awarii"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Oferecer o envio de um relatório após uma falha"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Пропонувати надіслати звіт після збою"
+          }
+        }
+      }
+    },
     "После сброса": {
       "localizations": {
         "ar": {
@@ -55613,6 +56145,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Правила доступу фонових завдань."
+          }
+        }
+      }
+    },
+    "Предложить идею…": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اقتراح فكرة…"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Idee vorschlagen…"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suggest an Idea…"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sugerir una idea…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Proposer une idée…"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Usulkan ide…"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suggerisci un’idea…"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アイデアを提案…"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "아이디어 제안…"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zaproponuj pomysł…"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sugerir uma ideia…"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Запропонувати ідею…"
           }
         }
       }
@@ -61785,6 +62393,82 @@
         }
       }
     },
+    "Сбой %@. Можно сообщить о нём на GitHub: откроется форма с описанием сбоя, версией и macOS — перед отправкой видно всё, что уходит. Полный отчёт появится в Finder, его можно перетащить в форму.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تعطل في %@. يمكنك الإبلاغ عنه على GitHub: يُفتح نموذج فيه وصف التعطل والإصدار وmacOS — وترى كل شيء قبل الإرسال. يظهر التقرير الكامل في Finder، ويمكنك سحبه إلى النموذج."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Absturz am %@. Du kannst ihn auf GitHub melden: Ein Formular mit der Absturzbeschreibung, Version und macOS öffnet sich — du siehst alles, bevor es abgeschickt wird. Der vollständige Bericht erscheint im Finder; zieh ihn in das Formular."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Crash on %@. You can report it on GitHub: a form opens with the crash details, version and macOS — you see everything before it goes. The full report appears in Finder; drag it into the form."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fallo del %@. Puedes informar en GitHub: se abre un formulario con la descripción del fallo, la versión y macOS; ves todo antes de enviarlo. El informe completo aparece en el Finder; arrástralo al formulario."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plantage du %@. Vous pouvez le signaler sur GitHub : un formulaire s’ouvre avec la description du plantage, la version et macOS — vous voyez tout avant l’envoi. Le rapport complet apparaît dans le Finder ; faites-le glisser dans le formulaire."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Crash pada %@. Anda dapat melaporkannya di GitHub: formulir terbuka dengan deskripsi crash, versi, dan macOS — Anda melihat semuanya sebelum dikirim. Laporan lengkap muncul di Finder; seret ke formulir."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arresto anomalo del %@. Puoi segnalarlo su GitHub: si apre un modulo con la descrizione dell’arresto, la versione e macOS — vedi tutto prima dell’invio. Il rapporto completo compare nel Finder; trascinalo nel modulo."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ にクラッシュしました。GitHub で報告できます。クラッシュの内容、バージョン、macOS が入ったフォームが開き、送信前にすべて確認できます。完全なレポートは Finder に表示されるので、フォームにドラッグしてください。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@에 충돌이 발생했습니다. GitHub에서 신고할 수 있습니다. 충돌 설명, 버전, macOS가 들어간 양식이 열리며 보내기 전에 모든 내용을 확인할 수 있습니다. 전체 보고서는 Finder에 표시되니 양식으로 드래그하세요."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Awaria %@. Możesz ją zgłosić na GitHubie: otworzy się formularz z opisem awarii, wersją i macOS — przed wysłaniem widać wszystko, co zostanie wysłane. Pełny raport pojawi się w Finderze, można go przeciągnąć do formularza."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Falha em %@. Você pode relatar no GitHub: abre um formulário com a descrição da falha, a versão e o macOS — você vê tudo antes do envio. O relatório completo aparece no Finder; arraste-o para o formulário."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Збій %@. Можна повідомити про нього на GitHub: відкриється форма з описом збою, версією і macOS — перед надсиланням видно все, що буде надіслано. Повний звіт з’явиться у Finder, його можна перетягнути у форму."
+          }
+        }
+      }
+    },
     "Сброс": {
       "localizations": {
         "ar": {
@@ -67944,6 +68628,158 @@
           "stringUnit": {
             "state": "translated",
             "value": "Повідомлень боту не знайшлося: напишіть йому щось і спробуйте знову."
+          }
+        }
+      }
+    },
+    "Сообщить на GitHub…": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الإبلاغ على GitHub…"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Auf GitHub melden…"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Report on GitHub…"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Informar en GitHub…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Signaler sur GitHub…"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Laporkan di GitHub…"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Segnala su GitHub…"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GitHub で報告…"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GitHub에서 신고…"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zgłoś na GitHubie…"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Relatar no GitHub…"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Повідомити на GitHub…"
+          }
+        }
+      }
+    },
+    "Сообщить о проблеме…": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الإبلاغ عن مشكلة…"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Problem melden…"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Report a Problem…"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Informar de un problema…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Signaler un problème…"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Laporkan masalah…"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Segnala un problema…"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "問題を報告…"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "문제 신고…"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zgłoś problem…"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Relatar um problema…"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Повідомити про проблему…"
           }
         }
       }
