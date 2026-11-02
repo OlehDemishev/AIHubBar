@@ -73,7 +73,7 @@ You only do this once; after that the app updates itself (Settings → General �
 - No server, no account, no analytics. AI Hub Bar talks only to the AI services you use.
 - Your files go only to the service you run a command with.
 - API keys are kept in the macOS Keychain, never in logs or exported settings. Claude Code's sign-in is read from the Keychain on each refresh and never stored.
-- The session hook only writes small status files on your Mac and never changes what Claude does; Settings → Claude Code → Remove hooks takes it out.
+- The session hook only writes small status files on your Mac and never changes what Claude does; Settings → AI Services → Claude Code → Remove hooks takes it out.
 
 ## Build from source
 

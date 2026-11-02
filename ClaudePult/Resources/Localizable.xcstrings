@@ -15068,6 +15068,82 @@
         }
       }
     },
+    "Включить сервис, вставить ключ или дать согласие — в «Сервисы AI», на вкладке сервиса.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لتشغيل خدمة أو لصق مفتاح أو إعطاء الموافقة، افتح «خدمات الذكاء الاصطناعي» وتبويب الخدمة."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dienst einschalten, Schlüssel einfügen oder zustimmen: in „KI-Dienste“ auf dem Tab des Dienstes."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "To turn a service on, paste a key or give consent, open AI Services and the service’s tab."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Para activar un servicio, pegar una clave o dar tu consentimiento, abre Servicios de IA y la pestaña del servicio."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pour activer un service, coller une clé ou donner votre accord : Services d’IA, onglet du service."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Untuk menyalakan layanan, menempel kunci, atau memberi izin, buka Layanan AI di tab layanan itu."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Per attivare un servizio, incollare una chiave o dare il consenso, apri Servizi IA e la scheda del servizio."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "サービスのオン、キーの貼り付け、同意は「AI サービス」の各サービスのタブで行います。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "서비스 켜기, 키 붙여넣기, 동의는 ‘AI 서비스’의 해당 서비스 탭에서 합니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aby włączyć usługę, wkleić klucz lub wyrazić zgodę, otwórz Usługi AI i kartę usługi."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Para ativar um serviço, colar uma chave ou dar consentimento, abra Serviços de IA e a aba do serviço."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Увімкнути сервіс, вставити ключ чи дати згоду — у «Сервіси AI», на вкладці сервісу."
+          }
+        }
+      }
+    },
     "Включить…": {
       "localizations": {
         "ar": {
@@ -21221,6 +21297,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ласкаво просимо до AI Hub Bar"
+          }
+        }
+      }
+    },
+    "Другие": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "أخرى"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Andere"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Others"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otros"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Autres"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lainnya"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Altri"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "その他"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "기타"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Inne"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Outros"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Інші"
           }
         }
       }
@@ -31867,6 +32019,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ліміти ще не завантажено — відкрийте панель AI Hub Bar"
+          }
+        }
+      }
+    },
+    "Лимиты и расход": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الحدود والإنفاق"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limits und Ausgaben"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limits and spend"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Límites y gasto"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limites et dépenses"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Batas dan pengeluaran"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limiti e spesa"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "上限と使用額"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "한도와 사용액"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limity i wydatki"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limites e gastos"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ліміти й витрати"
           }
         }
       }
@@ -62393,78 +62621,78 @@
         }
       }
     },
-    "Сессии Claude Code на этом Маке и фоновые задачи. Нужны hooks — вкладка «Claude Code».": {
+    "Сессии Claude Code на этом Маке и фоновые задачи. Нужны hooks — «Сервисы AI» → Claude Code.": {
       "localizations": {
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "جلسات Claude Code على هذا الـMac والمهام الخلفية. تحتاج إلى hooks — علامة التبويب «Claude Code»."
+            "value": "جلسات Claude Code على هذا الـ Mac والمهام في الخلفية. تحتاج إلى hooks — «خدمات الذكاء الاصطناعي» ← Claude Code."
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Claude-Code-Sitzungen auf diesem Mac und Hintergrundaufgaben. Braucht Hooks — Tab „Claude Code“."
+            "value": "Claude-Code-Sitzungen auf diesem Mac und Hintergrundaufgaben. Benötigt Hooks — KI-Dienste → Claude Code."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Claude Code sessions on this Mac and background runs. Needs hooks — the “Claude Code” tab."
+            "value": "Claude Code sessions on this Mac and background runs. Needs hooks — AI Services → Claude Code."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sesiones de Claude Code en este Mac y tareas en segundo plano. Necesita hooks: pestaña «Claude Code»."
+            "value": "Sesiones de Claude Code en este Mac y tareas en segundo plano. Necesita hooks: Servicios de IA → Claude Code."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sessions Claude Code sur ce Mac et tâches en arrière-plan. Nécessite les hooks — onglet « Claude Code »."
+            "value": "Sessions Claude Code sur ce Mac et tâches en arrière-plan. Nécessite les hooks — Services d’IA → Claude Code."
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sesi Claude Code di Mac ini dan tugas latar belakang. Perlu hooks — tab «Claude Code»."
+            "value": "Sesi Claude Code di Mac ini dan tugas latar belakang. Perlu hooks — Layanan AI → Claude Code."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sessioni di Claude Code su questo Mac e attività in background. Servono gli hooks — scheda «Claude Code»."
+            "value": "Sessioni di Claude Code su questo Mac e attività in background. Servono gli hook — Servizi IA → Claude Code."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "この Mac の Claude Code セッションとバックグラウンドタスク。hooks が必要です —「Claude Code」タブ。"
+            "value": "この Mac の Claude Code セッションとバックグラウンドタスク。hooks が必要です —「AI サービス」→ Claude Code。"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "이 Mac의 Claude Code 세션과 백그라운드 작업. hooks가 필요합니다 — «Claude Code» 탭."
+            "value": "이 Mac의 Claude Code 세션과 백그라운드 작업. hooks 필요 — ‘AI 서비스’ → Claude Code."
           }
         },
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sesje Claude Code na tym Macu i zadania w tle. Potrzebne hooks — karta «Claude Code»."
+            "value": "Sesje Claude Code na tym Macu i zadania w tle. Wymaga hooków — Usługi AI → Claude Code."
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sessões do Claude Code neste Mac e tarefas em segundo plano. Precisa de hooks — aba «Claude Code»."
+            "value": "Sessões do Claude Code neste Mac e tarefas em segundo plano. Precisa de hooks — Serviços de IA → Claude Code."
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Сесії Claude Code на цьому Маку й фонові задачі. Потрібні hooks — вкладка «Claude Code»."
+            "value": "Сесії Claude Code на цьому Маку і фонові задачі. Потрібні hooks — «Сервіси AI» → Claude Code."
           }
         }
       }

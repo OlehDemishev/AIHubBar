@@ -97,7 +97,7 @@ struct ReadinessSection: View {
     private func perform(_ action: ReadinessItem.Action) {
         switch action {
         case .openServices:
-            UserDefaults.standard.set("services", forKey: "settingsTab")
+            SettingsRoute.open(service: .claude)
             NSApp.activate()
             openSettings()
         case .installHooks, .updateHooks: hooks.install()

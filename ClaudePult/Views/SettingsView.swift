@@ -1,15 +1,19 @@
 import AppKit
 import SwiftUI
 
-/// Settings window, one tab per area: general, modes, appearance, menu bar, Claude Code (path, sessions, limits,
-/// background runs), AI services.
+/// Settings window, one tab per area: general, modes, appearance, menu bar, AI services (Claude Code and the others,
+/// a nested tab each).
 struct SettingsView: View {
     enum Tab: String, CaseIterable {
-        case general, modes, modules, appearance, menuBar, claude, services
+        case general, modes, modules, appearance, menuBar, services
     }
 
     @Environment(AppSettings.self) private var settings
-    @AppStorage("settingsTab") private var tab: Tab = .general
+    @AppStorage(SettingsRoute.tabKey) private var tab: Tab = .general
+
+    init() {
+        SettingsRoute.migrate()
+    }
 
     var body: some View {
         TabView(selection: $tab) {
@@ -28,9 +32,6 @@ struct SettingsView: View {
             MenuBarSettings()
                 .tabItem { Label("Строка меню", systemImage: "menubar.rectangle") }
                 .tag(Tab.menuBar)
-            ClaudeSettings()
-                .tabItem { Label { Text(verbatim: "Claude Code") } icon: { Image(systemName: "sparkle") } }
-                .tag(Tab.claude)
             ServicesSettings()
                 .tabItem { Label("Сервисы AI", systemImage: "cpu") }
                 .tag(Tab.services)
@@ -238,13 +239,14 @@ private struct TextSizePreview: View {
 // MARK: - Claude
 
 /// Claude Code in one tab (it was three small ones): where it is, its sessions, the subscription limits, background runs.
-private struct ClaudeSettings: View {
+/// Settings → «Сервисы AI» → Claude Code: all of Claude Code's options, as sections of that tab's form.
+struct ClaudeSettings: View {
     @Environment(AppSettings.self) private var settings
     @Environment(\.openWindow) private var openWindow
 
     var body: some View {
         @Bindable var settings = settings
-        SettingsPage {
+        Group {
             Section {
                 LabeledContent("Путь к claude") {
                     TextField("", text: $settings.claudePath,
@@ -400,7 +402,7 @@ private struct TelegramBotSection: View {
     }
 }
 
-/// Settings → Claude Code → «Свои промпты»: title and text; the search (⌃⌥C) offers them by title.
+/// Settings → «Сервисы AI» → Claude Code → «Свои промпты»: title and text; the search (⌃⌥C) offers them by title.
 private struct SavedPromptsSection: View {
     @Environment(AppSettings.self) private var settings
 

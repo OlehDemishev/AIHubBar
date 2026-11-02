@@ -59,7 +59,7 @@ You can skip any step: **Skip** keeps the template's choice. Everything can be c
 
 - **Panel blocks:**
   - **Limits:** the 5-hour session and the week, with a reset countdown and a forecast.
-    Under Claude's rings, other AI services show up by themselves once they're found on the Mac or their key is saved: Codex, GitHub Copilot, Gemini CLI, OpenRouter, Cursor, and API spend of OpenAI and Anthropic. **Settings… → Modules → Limits → Other AI** lists what each one needs.
+    Under Claude's rings, other AI services show up by themselves once they're found on the Mac or their key is saved: Codex, GitHub Copilot, Gemini CLI, OpenRouter, Cursor, and API spend of OpenAI and Anthropic. **Settings… → AI Services** has a tab per service with what it needs, its keys and consents; **Modules → Limits → Other AI** shows a summary.
   - **Sessions:** every Claude Code session on this Mac. **Show** brings its Terminal tab forward.
     A row also says what the session changed since it started (files, +/− lines, from git); click it for the file list.
     Near the limit (95 % by default, **Settings… → Modules → Limits**) background runs pause and carry on after the reset.
@@ -80,16 +80,16 @@ You can skip any step: **Skip** keeps the template's choice. Everything can be c
 - **Menu bar** (**Settings… → Menu Bar**): choose what sits next to ✦, such as limits as a number, ring or bar, the reset countdown, sessions waiting for you, or the next deadline.
 
 - **Claude Code window** (the document icon at the bottom of the panel): every CLAUDE.md and AGENTS.md with search and editing, and the MCP servers with an on/off switch.
-- **Saved prompts** (**Settings… → Claude Code**): type a prompt's title in the ⌃⌥C search, pick a project, and Claude starts with it. `{project}`, `{branch}` and `{file}` (the Finder selection) are filled in.
+- **Saved prompts** (**Settings… → AI Services → Claude Code**): type a prompt's title in the ⌃⌥C search, pick a project, and Claude starts with it. `{project}`, `{branch}` and `{file}` (the Finder selection) are filled in.
 - **Weekly summary:** on Sundays at 19:00 (adjustable) a Telegram message with the week's use by project, the heaviest sessions, limit hits and background runs.
 
 ## Privacy and safety
 
 - **Subscription token:** to show the limits, AI Hub Bar reads Claude Code's sign-in from the macOS Keychain on each refresh. It never stores or logs it.
 - **API keys:** kept only in the macOS Keychain. They never go into logs or exported settings.
-- **Other AI services:** Codex and Copilot are asked through their own tools (`codex`, `gh`). The Gemini CLI and Cursor sign-ins are read only after you turn on consent for each in Settings; without it Gemini is counted from its local logs and Cursor stays off.
+- **Other AI services:** Codex and Copilot are asked through their own tools (`codex`, `gh`). The Gemini CLI and Cursor sign-ins are read only after you turn on consent for each in **Settings… → AI Services** (the Gemini and Cursor tabs); without it Gemini is counted from its local logs and Cursor stays off.
 - **What gets sent:** your files go only to the AI service you run a command with. AI Hub Bar has no server of its own.
-- **Session hook:** it only writes small status files on this Mac and never changes what Claude does. **Settings… → Claude Code → Remove hooks** takes it out again.
+- **Session hook:** it only writes small status files on this Mac and never changes what Claude does. **Settings… → AI Services → Claude Code → Remove hooks** takes it out again.
 - **Background runs:** each runs under an explicit permission list. With **Project files only**, Claude can read and write inside the project folder, with no shell and no internet.
 
 ## Languages
@@ -104,12 +104,12 @@ AI Hub Bar follows the system language. To pick another one, go to **Settings…
 |---|---|
 | No limits | When macOS asks whether `security` may read "Claude Code-credentials", choose **Always Allow**. |
 | No notifications | Allow them in System Settings → Notifications → AI Hub Bar. Then **Settings… → General → Check** sends a test one. |
-| Sessions list is empty | Install the hooks: Help window → Readiness, or **Settings… → Claude Code**. |
+| Sessions list is empty | Install the hooks: Help window → Readiness, or **Settings… → AI Services → Claude Code**. |
 | "Terminal" does nothing | macOS asks once whether AI Hub Bar may control Terminal. Allow it in System Settings → Privacy & Security → Automation. |
 
 ## Uninstall
 
-1. Choose **Settings… → Claude Code → Remove hooks**.
+1. Choose **Settings… → AI Services → Claude Code → Remove hooks**.
 2. Quit AI Hub Bar.
 3. Delete AI Hub Bar from Applications, then `~/Library/Application Support/ClaudePult` and `~/Library/Logs/ClaudePult`.
 4. API keys are stored in Keychain Access under "ClaudePult API key". Delete those entries too if you want them gone.
