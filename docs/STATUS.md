@@ -19,7 +19,7 @@
 - release without an Apple Developer account ready (PR #85), nothing published; Windows and Linux specs wait for Oleh
 
 **Next:**
-- notch island for 0.3.0: stage 3 done except «on all screens» and the Quick Toggles switch; next a 0.3.0 build for Oleh's MacBook Air before publishing; stage 4 (drop a file on the island) only if Oleh wants it
+- notch island for 0.3.0: stage 3 done except «on all screens» and the Quick Toggles switch; next a 0.3.0 build for Oleh's MacBook Air before publishing
 - after 0.3.0: notch island stage 4 — Claude session live activity (docs/SPEC-notch.md §3.4, agreed by Oleh 2026-11-02): plan progress ring and «3/7» in the sessions ear, steps in the card, summary in «Сессия закончила»
 - AI services (docs/SPEC-ai-services.md §5): all six stages done for Claude Code, Codex, Copilot CLI and Antigravity (Oleh, 2026-11-02: these three besides Claude are enough; Gemini CLI removed — its Google sign-in is gone; Cursor not used); left only a «waiting» signal if the agents get hooks
 - standing rule (SPEC §3.1): every new icon-only control gets a hover hint; finish each UI stage with the accessibility walk
