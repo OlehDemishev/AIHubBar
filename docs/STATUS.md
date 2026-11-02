@@ -5,7 +5,7 @@
 **Updated:** 2026-11-02
 
 **Now:**
-- nothing in progress; merged 2026-11-02: Antigravity conversations in «Сессии» (#170), Copilot in full (#169), AI services stages 5–6 — Codex threads in «Сессии», stage 3 checked live (#168), stage 4 — thresholds per service, «Другие AI» notch ear, other services in the weekly summary (#167), stage 3 — Codex plan, credits, tokens per project, context (#166), stage 2 — one limits card for every service (#165), Settings redone like System Settings (#164), «Сервисы AI» as a list on the left (#162) in the window colour (#163), glass panel background (#158) and its fix for macOS 27 (#160), AI services spec + stage 1 — Claude Code inside «Сервисы AI», a tab per service (#159)
+- in progress: notch island stage 3, part 2 (full screen, ⌃⌥Y / ⌃⌥N, first-setup window); merged 2026-11-02: notch stage 3 part 1 — pill, screen choice, summary in menu bar / island / both (#173), Antigravity conversations in «Сессии» (#170), Copilot in full (#169), AI services stages 5–6 — Codex threads in «Сессии», stage 3 checked live (#168), stage 4 — thresholds per service, «Другие AI» notch ear, other services in the weekly summary (#167), stage 3 — Codex plan, credits, tokens per project, context (#166), stage 2 — one limits card for every service (#165), Settings redone like System Settings (#164), «Сервисы AI» as a list on the left (#162) in the window colour (#163), glass panel background (#158) and its fix for macOS 27 (#160), AI services spec + stage 1 — Claude Code inside «Сервисы AI», a tab per service (#159)
 - released 0.2.2 (v0.2.2, build 345): clickable widgets (#154), Codex from the ChatGPT desktop app (#155), notch island stage 2 (#153)
 - notch island stage 1 merged (#149): module, island over the notch, ears, hover card; target release 0.3.0
 - notch island stage 2 merged (#153): banners for events, permission requests with Allow / Deny in the island
@@ -28,6 +28,7 @@
 - Windows and Linux versions (docs/SPEC-windows.md, docs/SPEC-linux.md) — only when Oleh says; stage 0 (fact checks in VMs) first
 
 **Needs Oleh:**
+- on the MacBook Air (build from main): Settings → Модули → «Остров у чёлки» → «Сводка» → «только в острове» — the menu bar should keep only the icon and the red dot while the ears show limits and sessions; «только в строке меню» — no ears
 - optional: test conversations «codex-check», «agents-check» can be archived in Codex / Copilot / Antigravity
 - optional: a Codex thread named «codex-check» (from the live check) is in your Codex history — archive it in Codex if it's in the way
 - new Settings (build from main, installed): one sidebar with search — every page opens, search finds pages by setting names (e.g. «Telegram»), the dots match what's set up; in «Сервисы AI» → Claude Code has all the old options (path, hooks, Telegram answers, saved prompts, CLAUDE.md и MCP, background runs); Codex shows the agent and its limits row; Modules → Лимиты → «Другие AI» shows the summary and «Открыть «Сервисы AI»»
@@ -43,6 +44,12 @@
 - decide SPEC-windows §10 and SPEC-linux §10 (Tauri 2 for both, Windows code signing, first Linux desktops) before that work starts
 - optional: Apple Developer ID (notarization, no «Open Anyway»); delete or archive the old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-02 — Notch island stage 3, part 1: pill, screen choice, summary where Oleh wants it (#173)
+
+Done: `NotchSettings` gets `summary` (Oleh's ask: «в строке меню и в острове» · «только в острове» · «только в строке меню»), `screen` (экран с чёлкой · главный экран), `pill` (nil = on only when the Mac has no notch screen) and `hidden`; old settings decode to the defaults. `NotchGeometry.choose` picks the chosen screen's notch, else the main screen's pill; the pill is a zero-height «notch» at the menu bar's bottom edge, so the window hangs under the menu bar, nothing shows or takes hover at rest, and `IslandShape` draws it rounded all round with a faint edge. With «только в острове» the menu bar uses `MenuBarConfig.iconOnly` (icon and the projects' red dot) while the ears are on screen; with «только в строке меню» the island has no ears. Settings → Модули → «Остров у чёлки»: a new first section (hide, summary, where, pill), the ears in «Ушки и карточка». `AIHubBar --app-command test-island` pushes a trial banner through the island. 13 new strings in 13 languages. The docs went in a follow-up PR: the script that wrote them failed on its encoding after the code was already merged.
+Checked: `xcodebuild test` — 328 / 328 pass (new `NotchPlacementTests`: notch screen first, main screen's pill, no pill when off, the pill under a 30 pt menu bar with nothing to hover, old settings and the pill default, `iconOnly` keeps something to click). Live on this Mac mini with an LG monitor (no notch): the log says `Notch island at {{1180, 1050}, {200, 0}}`, and `test-island` showed the black pill centred under the menu bar with «AI Hub Bar: остров работает» (screen captured).
+Left: «только в острове» and the screen choice on a Mac with a notch (Needs Oleh); part 2 — full screen, hot keys, first-setup window, all screens, VoiceOver / Reduce Motion walk.
 
 ## 2026-11-02 — Antigravity conversations in «Сессии»; Gemini CLI sign-in is gone (branch `feat/antigravity-sessions`)
 
