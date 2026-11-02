@@ -22,6 +22,12 @@
 - older, still open: the crash report alert from 16:46 («Сообщить на GitHub…»), Chinese model keys, translations read for ja/ko/ar, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
 
+## 2026-11-02 — local builds no longer «update» back to 0.2.2 (branch `fix/local-build-version`)
+
+Done: Oleh saw the old Settings again: the installed app was 0.2.2 (build 345) again. A build from `scripts/build-and-install.sh` was numbered 0.1.0 (1), so Sparkle offered the published 0.2.2 as an update and, when installed, replaced the build from main (20:51). The script now numbers builds like `release.sh` (build = commit count, version = newest tag), and the app from main is reinstalled.
+Checked: `scripts/build-and-install.sh` → «0.2.2 (422)» in the installed Info.plist, the app runs; 422 > 345, so Sparkle has nothing to offer.
+Left: a release from an older commit (0.3.0 from `91d6c2b`, build 400) is not offered to builds from main either — as it should be.
+
 ## 2026-11-02 — Windows and Linux, stage 3 «Сессии», main part (branch `feat/desktop-sessions`)
 
 Done:
