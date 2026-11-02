@@ -306,7 +306,7 @@ struct AssistantView: View {
             }
             .pickerStyle(.radioGroup)
             Button("Подключить другой сервис…") {
-                UserDefaults.standard.set("services", forKey: "settingsTab")
+                UserDefaults.standard.set(SettingsView.Tab.services.rawValue, forKey: SettingsRoute.tabKey)
                 NSApp.activate()
                 openSettings()
             }

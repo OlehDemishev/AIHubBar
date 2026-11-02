@@ -33,7 +33,7 @@ enum ModuleKind: String, Codable, CaseIterable, Sendable {
     var summary: String {
         switch self {
         case .limits: String(localized: "Сессия и неделя подписки Claude, прогноз, расход по проектам и по API.")
-        case .sessions: String(localized: "Сессии Claude Code на этом Маке и фоновые задачи. Нужны hooks — вкладка «Claude Code».")
+        case .sessions: String(localized: "Сессии Claude Code на этом Маке и фоновые задачи. Нужны hooks — «Сервисы AI» → Claude Code.")
         case .upcoming: String(localized: "Дедлайны, публикации и контент-план на 7 дней вперёд — из профилей с календарём.")
         case .projects: String(localized: "Проекты профиля: git-репозитории или папки, карточки, команды. Настраиваются в профиле.")
         case .reports: String(localized: "Команды _daily-report: отчёт, быстрая сводка, очистка сборок.")

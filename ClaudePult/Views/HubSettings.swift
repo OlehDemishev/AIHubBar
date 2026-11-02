@@ -1,30 +1,37 @@
 import SwiftUI
 
-/// Settings → Модули → Лимиты → «Другие AI» (SPEC-hub): what each service needs, its keys and consents.
+/// Settings → Модули → Лимиты → «Другие AI»: a summary; each service's switch, keys and consents are in its tab of
+/// «Сервисы AI» (SPEC-ai-services §4).
 struct HubSection: View {
-    @Environment(AppSettings.self) private var settings
     @Environment(HubLimitsStore.self) private var hub
 
     var body: some View {
-        @Bindable var settings = settings
         Section {
             ForEach(HubLimit.Source.allCases) { source in
-                HubSourceRow(source: source)
+                LabeledContent(source.title) {
+                    Text(hub.statusText(source))
+                        .foregroundStyle(hub.available.contains(source) ? Color.secondary : Color.orange)
+                }
             }
             HStack {
                 Button("Проверить сейчас") { Task { await hub.refresh() } }
                     .disabled(hub.isRefreshing)
                 if hub.isRefreshing { ProgressView().controlSize(.small) }
+                Spacer()
+                Button("Открыть «Сервисы AI»") {
+                    SettingsRoute.open(service: hub.available.first.map(ServiceTab.init(hub:)) ?? .codex)
+                }
             }
         } header: {
             Text("Другие AI")
         } footer: {
-            Footnote(text: String(localized: "Сервис появляется под кольцами Claude сам, когда найден на Маке или сохранён его ключ. Ключи хранятся только в связке ключей. Codex и Copilot спрашиваются через свои программы (codex, gh); вход Gemini CLI и Cursor читается только с вашего согласия. Обновляется раз в 5 минут, пороги уведомлений — те же, что у Claude. Форматы ответов не документированы производителями и могут поменяться."))
+            Footnote(text: String(localized: "Включить сервис, вставить ключ или дать согласие — в «Сервисы AI», на вкладке сервиса."))
         }
     }
 }
 
-private struct HubSourceRow: View {
+/// One limit source with its switch, status, key and consents (a service's tab in «Сервисы AI»).
+struct HubSourceRow: View {
     let source: HubLimit.Source
     @Environment(AppSettings.self) private var settings
     @Environment(HubLimitsStore.self) private var hub
@@ -40,7 +47,7 @@ private struct HubSourceRow: View {
                     set: { settings.setHubEnabled(source, $0) }
                 ))
                 Spacer()
-                Text(status)
+                Text(hub.statusText(source))
                     .font(.caption)
                     .foregroundStyle(hub.available.contains(source) ? Color.secondary : Color.orange)
             }
@@ -87,17 +94,6 @@ private struct HubSourceRow: View {
         .padding(.vertical, 2)
     }
 
-    private var status: String {
-        if let limit = hub.limits.first(where: { $0.source == source }) {
-            if let error = limit.error { return error }
-            return limit.windows.map { window in
-                window.percent.map { "\(window.title) \(UsageText.percent($0))" } ?? [window.title, window.detail].compactMap { $0 }.joined(separator: " ")
-            }.joined(separator: " · ")
-        }
-        if hub.available.contains(source) { return String(localized: "найден") }
-        return source.keychainAccount != nil ? String(localized: "нет ключа") : String(localized: "не найден")
-    }
-
     private func save() {
         let key = keyText
         Task {
@@ -109,5 +105,19 @@ private struct HubSourceRow: View {
                 self.error = error.localizedDescription
             }
         }
+    }
+}
+
+extension HubLimitsStore {
+    /// The source's windows, its error, or whether it was found.
+    func statusText(_ source: HubLimit.Source) -> String {
+        if let limit = limits.first(where: { $0.source == source }) {
+            if let error = limit.error { return error }
+            return limit.windows.map { window in
+                window.percent.map { "\(window.title) \(UsageText.percent($0))" } ?? [window.title, window.detail].compactMap { $0 }.joined(separator: " ")
+            }.joined(separator: " · ")
+        }
+        if available.contains(source) { return String(localized: "найден") }
+        return source.keychainAccount != nil ? String(localized: "нет ключа") : String(localized: "не найден")
     }
 }

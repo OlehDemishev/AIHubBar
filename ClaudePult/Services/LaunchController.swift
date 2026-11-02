@@ -269,7 +269,7 @@ final class LaunchController {
         Task { _ = await Telegram.send(html: html, with: credentials) }
     }
 
-    /// «На ночь»: the run waits for the night start hour (Settings → Claude Code).
+    /// «На ночь»: the run waits for the night start hour (Settings → «Сервисы AI» → Claude Code).
     func queueForNight(_ command: ClaudeCommand, in project: Project) {
         let launchAt = NightQueue.nextStart(hour: settings.nightStartHour)
         queued.append(QueuedLaunch(id: UUID().uuidString, command: command, target: project.launchTarget, launchAt: launchAt, night: true))
