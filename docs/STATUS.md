@@ -5,7 +5,7 @@
 **Updated:** 2026-11-02
 
 **Now:**
-- `feat/layout-switcher`: beta channel (Settings → General → «Бета-версии», `release.sh 0.4.0-beta.1`) and the «Раскладка» module in beta — PR open, not tried live yet
+- nothing in progress; beta channel and «Раскладка» (beta) merged in #195 (`aecf785`), not tried live yet
 
 **Next:**
 - Oleh tries «Раскладка» live (needs Accessibility), then the first beta: `scripts/release.sh 0.4.0-beta.1 --publish`
