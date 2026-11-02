@@ -5,7 +5,7 @@
 **Updated:** 2026-11-02
 
 **Now:**
-- in progress: Gemini CLI and Antigravity data after Oleh signs in; merged 2026-11-02: Copilot in full (#169), AI services stages 5–6 — Codex threads in «Сессии», stage 3 checked live (#168), stage 4 — thresholds per service, «Другие AI» notch ear, other services in the weekly summary (#167), stage 3 — Codex plan, credits, tokens per project, context (#166), stage 2 — one limits card for every service (#165), Settings redone like System Settings (#164), «Сервисы AI» as a list on the left (#162) in the window colour (#163), glass panel background (#158) and its fix for macOS 27 (#160), AI services spec + stage 1 — Claude Code inside «Сервисы AI», a tab per service (#159)
+- nothing in progress; merged 2026-11-02: Antigravity conversations in «Сессии» (#170), Copilot in full (#169), AI services stages 5–6 — Codex threads in «Сессии», stage 3 checked live (#168), stage 4 — thresholds per service, «Другие AI» notch ear, other services in the weekly summary (#167), stage 3 — Codex plan, credits, tokens per project, context (#166), stage 2 — one limits card for every service (#165), Settings redone like System Settings (#164), «Сервисы AI» as a list on the left (#162) in the window colour (#163), glass panel background (#158) and its fix for macOS 27 (#160), AI services spec + stage 1 — Claude Code inside «Сервисы AI», a tab per service (#159)
 - released 0.2.2 (v0.2.2, build 345): clickable widgets (#154), Codex from the ChatGPT desktop app (#155), notch island stage 2 (#153)
 - notch island stage 1 merged (#149): module, island over the notch, ears, hover card; target release 0.3.0
 - notch island stage 2 merged (#153): banners for events, permission requests with Allow / Deny in the island
@@ -28,7 +28,7 @@
 - Windows and Linux versions (docs/SPEC-windows.md, docs/SPEC-linux.md) — only when Oleh says; stage 0 (fact checks in VMs) first
 
 **Needs Oleh:**
-- sign in to Gemini CLI (`gemini` → «Sign in with Google») and Antigravity (`agy`, open the link, paste the code) — then I run one short task in each and read their files; Cursor CLI isn't installed yet (cursor.com/cli)
+- optional: `brew uninstall gemini-cli` — its Google sign-in no longer works (Google sends individuals to Antigravity); install Cursor CLI (cursor.com/cli) if you want it covered too; test conversations «codex-check», «agents-check» can be archived in Codex / Copilot / Antigravity
 - optional: a Codex thread named «codex-check» (from the live check) is in your Codex history — archive it in Codex if it's in the way
 - new Settings (build from main, installed): one sidebar with search — every page opens, search finds pages by setting names (e.g. «Telegram»), the dots match what's set up; in «Сервисы AI» → Claude Code has all the old options (path, hooks, Telegram answers, saved prompts, CLAUDE.md и MCP, background runs); Codex shows the agent and its limits row; Modules → Лимиты → «Другие AI» shows the summary and «Открыть «Сервисы AI»»
 - glass panel (installed build has the fix): checked by the agent in the light theme; look at it in the dark theme and with «Уменьшить прозрачность» on (must fall back to the standard background), say if the glass should be clearer or denser
@@ -43,6 +43,12 @@
 - decide SPEC-windows §10 and SPEC-linux §10 (Tauri 2 for both, Windows code signing, first Linux desktops) before that work starts
 - optional: Apple Developer ID (notarization, no «Open Anyway»); delete or archive the old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-02 — Antigravity conversations in «Сессии»; Gemini CLI sign-in is gone (branch `feat/antigravity-sessions`)
+
+Done: Oleh signed in to Antigravity CLI (agy 1.4.12); one short `agy -p` task then ran. Its records: `~/.gemini/antigravity-cli/conversation_summaries.db` (title, `workspace_uris`, `last_modified_time`, run `status`); no limits or token counts readable on disk (`agy models` lists models only; usage is in protobuf blobs). New `AntigravityConversations` (recent top-level conversations of the last 3 hours, «работает» while `…_RUNNING`), `AgentThread.isWorking`, resume `agy --conversation <id>`; `AIHubBar --services limits` now also prints every agent's recent conversations. Gemini CLI 0.66: its Google sign-in fails — «This client is no longer supported for Gemini Code Assist for individuals … migrate to Antigravity» — so there is nothing more to read from it. SPEC-ai-services and REFERENCE updated. No new strings.
+Checked: `xcodebuild test` — 324 / 324 pass (new `AntigravityConversationsTests`: time parsing with microseconds, text stamps, subagents and old conversations left out, running status, `--conversation` command). Live: `--services limits` → `thread agy agents-check …`, `thread copilot agents-check …, context 11 %`, `thread codex codex-check …, context 6 %`.
+Left: the panel row for Antigravity not captured (same row as Codex / Copilot, checked earlier); Cursor CLI not installed.
 
 ## 2026-11-02 — Copilot CLI in full; common agent rows (branch `feat/copilot-in-full`)
 

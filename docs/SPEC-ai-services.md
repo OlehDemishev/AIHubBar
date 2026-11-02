@@ -1,6 +1,6 @@
 # SPEC — AI services: Claude as one of them, the same view for every service
 
-Status: stages 1–6 done (#159, #162–#169), 2026-11-02; left: Gemini CLI and Antigravity data (waiting for Oleh's sign-in), a «waiting» signal for agents without hooks.
+Status: stages 1–6 done (#159, #162–#170), 2026-11-02; left: a «waiting» signal for agents without hooks, Cursor CLI (not installed here).
 Asked by Oleh on 2026-10-31 and 2026-11-02: move Claude Code into «Сервисы AI», give every AI its own nested tab
 with all its settings, and bring the other services up to Claude Code's level — one model per service for rings,
 forecast, week strip, credits, per-project tokens and context.
@@ -117,9 +117,13 @@ service mark. Sessions: Codex threads next to Claude sessions once a source exis
    The Copilot card shows AI credits this week, tokens per project and the context of today's latest session; its
    recent sessions join Codex's in «Сессии» (click → `copilot --resume=<id>`). Correction to §2: Copilot does have
    per-project and context data. **Gemini CLI 0.66** keeps chats per project in `~/.gemini/tmp/<short name>/` with
-   `~/.gemini/projects.json` mapping folder → name (not a hash); its data and **Antigravity**'s
-   (`~/.gemini/antigravity-cli/conversation_summaries.db`) wait for a signed-in run. Homebrew's `gemini-cli` is
-   deprecated (disabled 2026-12-18); its replacement `antigravity-cli` links `agy`. Cursor CLI: not installed here.
+   `~/.gemini/projects.json` mapping folder → name (not a hash) — but its Google sign-in now fails: «This client is no
+   longer supported for Gemini Code Assist for individuals … migrate to Antigravity» (2026-11-02), so it only works
+   with an API key or Vertex. **Antigravity CLI** (agy 1.4.12, signed in and checked live): no limits or token counts
+   readable on disk (`agy models` lists models only; usage sits in protobuf blobs); `conversation_summaries.db` gives
+   each conversation's title, folder (`workspace_uris`), time and run status, so its recent conversations join «Сессии»
+   with «работает» while running (click → `agy --conversation <id>`). Homebrew's `gemini-cli` is deprecated (disabled
+   2026-12-18); its replacement `antigravity-cli` links `agy`. Cursor CLI: not installed here.
 
 Rules for every stage: hover hint on each icon-only control, accessibility walk at the end of each UI stage
 (SPEC §3.1), all strings in 13 languages, nothing read without the consent the service already asks for.
