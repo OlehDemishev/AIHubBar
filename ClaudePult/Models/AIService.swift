@@ -54,6 +54,10 @@ enum AIService: Hashable, Sendable {
             case .xai: "Grok"
             case .deepseek: "DeepSeek"
             case .mistral: "Mistral"
+            case .qwen: "Qwen"
+            case .kimi: "Kimi"
+            case .glm: "GLM"
+            case .minimax: "MiniMax"
             case .compatible: compatibleName.isEmpty ? "Local" : compatibleName
             }
         }
@@ -148,9 +152,9 @@ enum AgentKind: String, CaseIterable, Codable, Sendable {
 // MARK: - API models
 
 /// Models behind an API key. Endpoints checked on 2026-10-30 against the docs and by an unauthenticated request
-/// (every one answers «bad key», not «not found»).
+/// (every one answers «bad key», not «not found»); the Chinese ones — Qwen, Kimi, GLM, MiniMax — on 2026-11-02.
 enum APIProvider: String, CaseIterable, Codable, Sendable {
-    case anthropic, openai, google, xai, deepseek, mistral, compatible
+    case anthropic, openai, google, xai, deepseek, mistral, qwen, kimi, glm, minimax, compatible
 
     var title: String {
         switch self {
@@ -160,6 +164,10 @@ enum APIProvider: String, CaseIterable, Codable, Sendable {
         case .xai: "xAI Grok"
         case .deepseek: "DeepSeek"
         case .mistral: "Mistral"
+        case .qwen: "Alibaba Qwen"
+        case .kimi: "Moonshot Kimi"
+        case .glm: "Z.ai GLM"
+        case .minimax: "MiniMax"
         case .compatible: String(localized: "Совместимый с OpenAI")
         }
     }
@@ -172,6 +180,11 @@ enum APIProvider: String, CaseIterable, Codable, Sendable {
         case .xai: "https://api.x.ai/v1"
         case .deepseek: "https://api.deepseek.com"
         case .mistral: "https://api.mistral.ai/v1"
+        // International (Singapore) endpoints; a key works only in the region it was made in.
+        case .qwen: "https://dashscope-intl.aliyuncs.com/compatible-mode/v1"
+        case .kimi: "https://api.moonshot.ai/v1"
+        case .glm: "https://api.z.ai/api/paas/v4"
+        case .minimax: "https://api.minimax.io/v1"
         case .compatible: "http://localhost:11434/v1"
         }
     }
@@ -185,8 +198,34 @@ enum APIProvider: String, CaseIterable, Codable, Sendable {
         case .xai: "https://console.x.ai"
         case .deepseek: "https://platform.deepseek.com/api_keys"
         case .mistral: "https://console.mistral.ai/api-keys"
+        case .qwen: "https://modelstudio.console.alibabacloud.com/model/settings/api-key"
+        case .kimi: "https://platform.kimi.ai/console/api-keys"
+        case .glm: "https://z.ai/manage-apikey/apikey-list"
+        case .minimax: "https://platform.minimax.io/user-center/basic-information/interface-key"
         case .compatible: nil
         }
+    }
+
+    /// The provider's current models from its docs (2026-11-02), best first: picked when «Проверить» lists them, and
+    /// the list itself where the provider has no `/models` (Z.ai) or answers it in an unknown format.
+    var knownModels: [String] {
+        switch self {
+        case .qwen: ["qwen3.8-max", "qwen3.7-plus", "qwen3.8-flash"]
+        case .kimi: ["kimi-k3.1-pro", "kimi-k3", "kimi-k3.1-pro-highspeed"]
+        case .glm: ["glm-5.3", "glm-5.3-flashx", "glm-5.3-flash"]
+        case .minimax: ["MiniMax-M3", "MiniMax-M3.1-Flash"]
+        case .anthropic, .openai, .google, .xai, .deepseek, .mistral, .compatible: []
+        }
+    }
+
+    /// «Проверить» for this provider. Z.ai has no `/models` but checks the key before the path (a bad key gets 401 on
+    /// any path), so its 404 means the key was accepted.
+    func check(status: Int, body: Data) -> APICheck {
+        let result = APICheck.from(status: status, body: body)
+        guard !knownModels.isEmpty else { return result }
+        if self == .glm, status == 404 { return .ok(models: knownModels) }
+        if (200..<300).contains(status), case .failed = result { return .ok(models: knownModels) }
+        return result
     }
 
     /// Local servers (Ollama, LM Studio) work without a key.

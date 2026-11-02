@@ -62,6 +62,22 @@ struct AIServiceTests {
     @Test func preferredModelSkipsNonChatModels() {
         #expect(AIServiceStore.preferredModel(["text-embedding-3", "tts-1", "gpt-x"]) == "gpt-x")
         #expect(AIServiceStore.preferredModel(["whisper-1"]) == nil)
+        #expect(AIServiceStore.preferredModel(["qvq-max", "qwen3.7-plus", "qwen3.8-max"], provider: .qwen) == "qwen3.8-max")
+        #expect(AIServiceStore.preferredModel(["kimi-old"], provider: .kimi) == "kimi-old", "no known model listed")
+    }
+
+    @Test func chineseProvidersCheck() {
+        #expect(APIProvider.glm.check(status: 404, body: Data()) == .ok(models: APIProvider.glm.knownModels), "Z.ai has no /models")
+        #expect(APIProvider.glm.check(status: 401, body: Data()) == .badKey)
+        #expect(APIProvider.minimax.check(status: 200, body: Data("<html>".utf8)) == .ok(models: APIProvider.minimax.knownModels))
+        #expect(APIProvider.qwen.check(status: 404, body: Data()) == .failed("Ошибка HTTP 404"), "Qwen has /models: 404 is a real error")
+        #expect(APIProvider.kimi.check(status: 200, body: Data(#"{"data":[{"id":"kimi-k3"}]}"#.utf8)) == .ok(models: ["kimi-k3"]))
+        #expect(APIProvider.deepseek.check(status: 404, body: Data()) == .failed("Ошибка HTTP 404"))
+        for provider in [APIProvider.qwen, .kimi, .glm, .minimax] {
+            #expect(ServiceTab(provider: provider) == .other)
+            #expect(provider.keyRequired && provider.keyPage != nil && !provider.knownModels.isEmpty)
+            #expect(AIService(id: AIService.api(provider).id) == .api(provider))
+        }
     }
 
     @Test func agentDetectionAndTerminalLine() {
