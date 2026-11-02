@@ -270,7 +270,7 @@ struct ModulePage: View {
             }
             if kind.isPanelBlock, !modes.modes.isEmpty {
                 Section {
-                    LabeledContent("В профилях", value: profiles)
+                    IconRow("В профилях", systemImage: "square.stack.3d.up", value: profiles)
                 } footer: {
                     Footnote(text: String(localized: "Порядок блоков — «Панель»; что показывает модуль в каждом профиле — «Профили»."))
                 }

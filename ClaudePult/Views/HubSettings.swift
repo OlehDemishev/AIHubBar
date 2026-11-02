@@ -74,9 +74,9 @@ struct HubSourceRow: View {
                 }
             }
             if source == .gemini {
-                Toggle("Точная квота через вход Gemini CLI", isOn: $settings.hubGeminiQuota)
+                Toggle("Точная квота через вход Gemini CLI", systemImage: "checkmark.seal", isOn: $settings.hubGeminiQuota)
                     .help("Иначе запросы считаются по журналам ~/.gemini за сегодня и делятся на дневной лимит тарифа")
-                Picker("Запросов в день по тарифу", selection: $settings.hubGeminiDailyLimit) {
+                Picker("Запросов в день по тарифу", systemImage: "number", selection: $settings.hubGeminiDailyLimit) {
                     Text("250 — бесплатный ключ API").tag(250)
                     Text("1 000 — аккаунт Google").tag(1000)
                     Text("1 500 — AI Pro").tag(1500)
@@ -84,7 +84,7 @@ struct HubSourceRow: View {
                 }
             }
             if source == .cursor {
-                Toggle("Разрешить читать вход Cursor", isOn: $settings.hubCursor)
+                Toggle("Разрешить читать вход Cursor", systemImage: "key", isOn: $settings.hubCursor)
                     .help("Токен берётся из базы настроек Cursor только для запроса расхода и нигде не сохраняется")
             }
             if let error {

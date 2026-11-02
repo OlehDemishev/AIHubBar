@@ -141,7 +141,7 @@ private struct ModeEditor: View {
         Form {
             Section {
                 TextField("Название", text: $mode.name)
-                Picker("Значок", selection: $mode.icon) {
+                Picker("Значок", systemImage: "star", selection: $mode.icon) {
                     ForEach(Self.icons, id: \.self) { Image(systemName: $0).tag($0) }
                 }
                 if mode.id != modes.currentID {
@@ -152,7 +152,7 @@ private struct ModeEditor: View {
             panelSection
 
             Section("Проекты") {
-                Picker("Источник", selection: Binding(
+                Picker("Источник", systemImage: "tray.full", selection: Binding(
                     get: { SourceKind(mode.source) },
                     set: { mode.source = $0.source(keeping: mode.source) }
                 )) {
@@ -194,7 +194,7 @@ private struct ModeEditor: View {
                             }
                         ))
                     }
-                    Picker("Календарь", selection: $mode.calendar) {
+                    Picker("Календарь", systemImage: "calendar", selection: $mode.calendar) {
                         Text("Выключен").tag(CalendarMode.off)
                         Text("Дедлайны и публикации").tag(CalendarMode.dates)
                         Text("+ контент-план").tag(CalendarMode.contentPlan)
@@ -210,18 +210,18 @@ private struct ModeEditor: View {
             }
 
             Section {
-                Picker("Сервис по умолчанию", selection: $mode.service) {
+                Picker("Сервис по умолчанию", systemImage: "sparkles", selection: $mode.service) {
                     Text(AIService.claudeCode.title).tag(String?.none)
                     ForEach(services.available.filter { $0 != .claudeCode }, id: \.id) { Text($0.title).tag(String?.some($0.id)) }
                     if let id = mode.service, !services.available.contains(where: { $0.id == id }) {
                         Text((AIService(id: id)?.title ?? id) + String(localized: " — не найден на этом Маке")).tag(String?.some(id))
                     }
                 }
-                Picker("Права Claude в фоне", selection: $mode.permissions) {
+                Picker("Права Claude в фоне", systemImage: "lock", selection: $mode.permissions) {
                     ForEach(PermissionProfile.allCases, id: \.self) { Text($0.title).tag($0) }
                 }
                 .help("«Только файлы»: читать и писать внутри папки проекта, без терминала и интернета")
-                Picker("Где запускать Claude", selection: $mode.launchMode) {
+                Picker("Где запускать Claude", systemImage: "play.rectangle", selection: $mode.launchMode) {
                     Text("Спрашивать").tag(LaunchMode?.none)
                     ForEach(LaunchMode.allCases, id: \.self) { Text($0.title).tag(LaunchMode?.some($0)) }
                 }
@@ -247,7 +247,7 @@ private struct ModeEditor: View {
             }
 
             Section("Общие команды") {
-                Picker("Команды", selection: $mode.commonCommands) {
+                Picker("Команды", systemImage: "terminal", selection: $mode.commonCommands) {
                     Text("_daily-report: отчёт, сводка, очистка").tag(CommonCommandsKind.dailyReport)
                     Text("Нет").tag(CommonCommandsKind.none)
                 }
@@ -426,14 +426,14 @@ struct CommandEditor: View {
         DisclosureGroup(command.title) {
             TextField("Название", text: $command.title)
             TextField("Файл результата", text: $command.output, prompt: Text("хуки.md"))
-            Picker("На чём", selection: $command.input) {
+            Picker("На чём", systemImage: "doc", selection: $command.input) {
                 ForEach(CommandTemplate.Input.allCases, id: \.self) { Text($0.title).tag($0) }
             }
             TextField("Спросить перед запуском", text: Binding(
                 get: { command.asks ?? "" },
                 set: { command.asks = $0.trimmingCharacters(in: .whitespaces).isEmpty ? nil : $0 }
             ), prompt: Text("пусто — запускать сразу; «Язык», «Тон»…"))
-            Picker("Сервис", selection: $command.service) {
+            Picker("Сервис", systemImage: "sparkles", selection: $command.service) {
                 Text("Сервис профиля").tag(String?.none)
                 ForEach(services.available, id: \.id) { Text($0.title).tag(String?.some($0.id)) }
             }

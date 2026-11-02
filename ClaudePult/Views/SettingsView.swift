@@ -138,14 +138,65 @@ private struct SettingsPage<Content: View>: View {
     }
 }
 
-struct Footnote: View {
-    let text: String
+/// A settings row with an icon in front of its title, like the toggles and pickers that take `systemImage:`.
+struct IconRow<Content: View>: View {
+    let title: LocalizedStringKey
+    let symbol: String
+    let content: Content
+
+    init(_ title: LocalizedStringKey, systemImage: String, @ViewBuilder content: () -> Content) {
+        self.title = title
+        symbol = systemImage
+        self.content = content()
+    }
 
     var body: some View {
-        Text(text)
-            .font(.system(size: 11.5))
-            .foregroundStyle(.secondary)
-            .fixedSize(horizontal: false, vertical: true)
+        LabeledContent {
+            content
+        } label: {
+            Label(title, systemImage: symbol)
+        }
+    }
+}
+
+extension IconRow where Content == Text {
+    init(_ title: LocalizedStringKey, systemImage: String, value: String) {
+        self.init(title, systemImage: systemImage) { Text(value) }
+    }
+}
+
+/// The small text under a section. A long one shows its first sentence and «Подробнее» (SPEC-settings §2): the
+/// pages read as settings, not as manuals.
+struct Footnote: View {
+    let text: String
+    @State private var expanded = false
+
+    var body: some View {
+        let short = Self.firstSentence(text)
+        VStack(alignment: .leading, spacing: 2) {
+            Text(expanded || short == nil ? text : short ?? text)
+                .font(.system(size: 11.5))
+                .foregroundStyle(.secondary)
+                .fixedSize(horizontal: false, vertical: true)
+                .textSelection(.enabled)
+            if short != nil {
+                Button(expanded ? String(localized: "Свернуть") : String(localized: "Подробнее")) {
+                    withAnimation(.snappy(duration: 0.2)) { expanded.toggle() }
+                }
+                .buttonStyle(.link)
+                .font(.system(size: 11.5))
+            }
+        }
+    }
+
+    /// The first sentence when the text is long and has more after it; nil — show it whole.
+    nonisolated static func firstSentence(_ text: String) -> String? {
+        guard text.count > 140 else { return nil }
+        let ends = [". ", "。", "! ", "? "]
+        let found = ends.compactMap { text.range(of: $0) }.filter { text.distance(from: text.startIndex, to: $0.lowerBound) >= 12 }
+        guard let end = found.min(by: { $0.lowerBound < $1.lowerBound }) else { return nil }
+        let sentence = String(text[..<end.upperBound]).trimmingCharacters(in: .whitespaces)
+        return text.count - sentence.count > 30 ? sentence : nil
     }
 }
 
@@ -184,7 +235,7 @@ private struct GeneralSettings: View {
             }
 
             Section {
-                LabeledContent("Уведомления") {
+                IconRow("Уведомления", systemImage: "bell") {
                     HStack(spacing: 8) {
                         Text(notificationsText)
                             .foregroundStyle(notifications.state == .allowed ? .green : .orange)
@@ -218,10 +269,10 @@ private struct GeneralSettings: View {
             FeedbackSection()
 
             Section {
-                LabeledContent("Версия", value: Self.version)
+                IconRow("Версия", systemImage: "info.circle", value: Self.version)
                 UpdatesRow()
                 BetaRow()
-                LabeledContent("Журнал") {
+                IconRow("Журнал", systemImage: "doc.text") {
                     Button("Показать в Finder") {
                         NSWorkspace.shared.activateFileViewerSelecting([AppLog.fileURL])
                     }
@@ -319,7 +370,7 @@ private struct TextSizePreview: View {
     let scale: CGFloat
 
     var body: some View {
-        LabeledContent("Пример") {
+        IconRow("Пример", systemImage: "textformat") {
             VStack(alignment: .trailing, spacing: 2) {
                 Text("Cantero · claude/feature")
                     .font(ScaledFont.font(.body, scale: scale, weight: .medium))
@@ -343,7 +394,7 @@ struct ClaudeSettings: View {
         @Bindable var settings = settings
         Group {
             Section {
-                LabeledContent("Путь к claude") {
+                IconRow("Путь к claude", systemImage: "folder") {
                     TextField("", text: $settings.claudePath,
                               prompt: Text(ClaudeLocator.detect().map { String(localized: "авто: \($0)") } ?? String(localized: "авто: не найден")))
                         .textFieldStyle(.roundedBorder)
@@ -368,7 +419,7 @@ struct ClaudeSettings: View {
 
             Section {
                 Stepper(value: $settings.backgroundTimeLimitMinutes, in: 10...600, step: 10) {
-                    LabeledContent("Лимит времени", value: String(localized: "\(settings.backgroundTimeLimitMinutes) мин"))
+                    IconRow("Лимит времени", systemImage: "timer", value: String(localized: "\(settings.backgroundTimeLimitMinutes) мин"))
                 }
                 Toggle("Итог в Telegram", systemImage: "paperplane", isOn: $settings.telegramForBackground)
                 Picker("Ночные задачи начинаются в", systemImage: "moon.stars", selection: $settings.nightStartHour) {
@@ -402,7 +453,7 @@ private struct TelegramBotSection: View {
         @Bindable var settings = settings
         Section {
             if hasToken {
-                LabeledContent("Токен бота") {
+                IconRow("Токен бота", systemImage: "key") {
                     HStack {
                         Text("сохранён в связке ключей").foregroundStyle(.secondary)
                         Button("Удалить", role: .destructive) {
@@ -415,7 +466,7 @@ private struct TelegramBotSection: View {
                     }
                 }
             } else {
-                LabeledContent("Токен бота") {
+                IconRow("Токен бота", systemImage: "key") {
                     HStack {
                         SecureField("", text: $token, prompt: Text(verbatim: "123456:ABC…"))
                             .textFieldStyle(.roundedBorder)
@@ -425,7 +476,7 @@ private struct TelegramBotSection: View {
                     }
                 }
             }
-            LabeledContent("ID чата") {
+            IconRow("ID чата", systemImage: "number") {
                 HStack {
                     TextField("", text: $settings.telegramChatID)
                         .textFieldStyle(.roundedBorder)
@@ -560,7 +611,7 @@ struct LayoutSection: View {
                         .foregroundStyle(.orange)
                 }
             }
-            LabeledContent("Раскладки", value: switcher.layouts.isEmpty ? String(localized: "нет подходящих") : switcher.layouts.map(\.name).joined(separator: ", "))
+            IconRow("Раскладки", systemImage: "keyboard", value: switcher.layouts.isEmpty ? String(localized: "нет подходящих") : switcher.layouts.map(\.name).joined(separator: ", "))
             Toggle("Исправлять раскладку сам", systemImage: "wand.and.stars", isOn: $settings.layout.auto)
             Toggle("Не исправлять в терминалах", systemImage: "terminal", isOn: $settings.layout.skipTerminals)
                 .disabled(!settings.layout.auto)
@@ -608,7 +659,7 @@ struct NotchSection: View {
             Picker("Где показывать", systemImage: "display", selection: $settings.notch.screen) {
                 ForEach(NotchScreen.allCases, id: \.self) { Text($0.title).tag($0) }
             }
-            Toggle("Пилюля на экранах без чёлки", isOn: Binding(
+            Toggle("Пилюля на экранах без чёлки", systemImage: "capsule", isOn: Binding(
                 get: { settings.notch.showsPill(macHasNotch: NotchGeometry.macHasNotch) },
                 set: { settings.notch.pill = $0 }
             ))
@@ -691,7 +742,7 @@ struct KeepAwakeSection: View {
             Toggle("Пока работает Claude (сессия или фоновая задача)", systemImage: "sparkles", isOn: $settings.keepAwakeRules.whileClaudeWorks)
             Toggle("Пока подключено питание", systemImage: "powerplug", isOn: $settings.keepAwakeRules.whileOnPower)
             Toggle("Пока подключён внешний монитор", systemImage: "display", isOn: $settings.keepAwakeRules.whileExternalDisplay)
-            LabeledContent("Пока открыты приложения") {
+            IconRow("Пока открыты приложения", systemImage: "app.badge") {
                 HStack {
                     Text(settings.keepAwakeRules.whileApps.isEmpty ? String(localized: "нет") : settings.keepAwakeRules.whileApps.map(\.name).joined(separator: ", "))
                         .foregroundStyle(.secondary)
@@ -715,7 +766,7 @@ struct KeepAwakeSection: View {
             }
             Toggle("И с закрытой крышкой", systemImage: "laptopcomputer", isOn: $settings.keepAwakeRules.lidClosed)
                 .disabled(!keepAwake.lidInstalled || !LidSleep.hasLid)
-            LabeledContent("Разрешение администратора") {
+            IconRow("Разрешение администратора", systemImage: "lock.shield") {
                 HStack {
                     Text(keepAwake.lidInstalled ? String(localized: "есть") : String(localized: "нет"))
                         .foregroundStyle(.secondary)
@@ -802,12 +853,12 @@ struct QuickCommandsSection: View {
                             .help("Удалить команду")
                     }
                     .buttonStyle(.borderless)
-                    Picker("Что делает", selection: $command.kind) {
+                    Picker("Что делает", systemImage: "bolt", selection: $command.kind) {
                         ForEach(QuickCommand.Kind.allCases, id: \.self) { Text($0.title).tag($0) }
                     }
                     TextField(placeholder(command.kind), text: $command.value)
                         .font(.callout.monospaced())
-                    Toggle("Спрашивать перед запуском", isOn: $command.confirm)
+                    Toggle("Спрашивать перед запуском", systemImage: "questionmark.circle", isOn: $command.confirm)
                 }
                 .padding(.vertical, 4)
             }
@@ -870,7 +921,7 @@ struct ClipboardSection: View {
             }
             Toggle("Помнить после перезапуска", systemImage: "arrow.clockwise", isOn: $settings.clipboardRemember)
                 .onChange(of: settings.clipboardRemember) { history.rememberChanged() }
-            LabeledContent("Не запоминать из приложений") {
+            IconRow("Не запоминать из приложений", systemImage: "hand.raised.slash") {
                 HStack {
                     Text(verbatim: "\(settings.clipboardExcludedApps.count)").foregroundStyle(.secondary)
                     Button("Добавить…", action: addApps)
@@ -903,7 +954,7 @@ struct NotesSection: View {
 
     var body: some View {
         Section {
-            LabeledContent("Папка") {
+            IconRow("Папка", systemImage: "folder") {
                 HStack {
                     Text(settings.notesFolder).lineLimit(1).truncationMode(.middle).foregroundStyle(.secondary)
                     Button("Выбрать…", action: chooseFolder)
@@ -990,7 +1041,7 @@ struct TelegramApprovalsSection: View {
         @Bindable var settings = settings
         Section {
             Toggle("Присылать запросы разрешений в Telegram", systemImage: "paperplane", isOn: $settings.telegramApprovals)
-            LabeledContent("Токен бота") {
+            IconRow("Токен бота", systemImage: "key") {
                 HStack {
                     if telegram.hasToken {
                         Text(telegram.botName ?? String(localized: "сохранён в Связке ключей")).foregroundStyle(.secondary)
@@ -1036,7 +1087,7 @@ struct SessionSection: View {
     var body: some View {
         @Bindable var settings = settings
         Section {
-            LabeledContent("Hooks") {
+            IconRow("Hooks", systemImage: "link") {
                 Text(hooks.status.title)
                     .foregroundStyle(hooks.status == .installed ? .green : hooks.status == .outdated ? .orange : .secondary)
             }
@@ -1081,7 +1132,7 @@ struct LimitSection: View {
     var body: some View {
         @Bindable var settings = settings
         Section {
-            LabeledContent("Уведомлять на, %") {
+            IconRow("Уведомлять на, %", systemImage: "bell.badge") {
                 // No title: in a Form a titled field also shows its title as a label next to it.
                 TextField("", text: $thresholdsText, prompt: Text(verbatim: "50, 80, 95"))
                     .labelsHidden()
@@ -1182,7 +1233,7 @@ private struct LanguagePicker: View {
     }
 
     var body: some View {
-        Picker("Язык интерфейса", selection: $choice) {
+        Picker("Язык интерфейса", systemImage: "globe", selection: $choice) {
             Text("Как в системе").tag("")
             ForEach(languages, id: \.self) { code in
                 Text(Locale(identifier: code).localizedString(forIdentifier: code)?.capitalized ?? code).tag(code)
@@ -1223,13 +1274,13 @@ private struct FeedbackSection: View {
 
     var body: some View {
         Section {
-            LabeledContent("Обратная связь") {
+            IconRow("Обратная связь", systemImage: "envelope") {
                 HStack {
                     Button("Предложить идею…") { Feedback.suggestIdea() }
                     Button("Сообщить о проблеме…") { Feedback.reportProblem() }
                 }
             }
-            Toggle("После сбоя предлагать отправить отчёт", isOn: $asksAfterCrash)
+            Toggle("После сбоя предлагать отправить отчёт", systemImage: "exclamationmark.bubble", isOn: $asksAfterCrash)
         } footer: {
             Footnote(text: String(localized: "Откроется форма на GitHub, версия и macOS в ней уже заполнены. Сама программа ничего не отправляет: перед отправкой видно всё, что уходит. Нужен аккаунт GitHub."))
         }
@@ -1241,9 +1292,9 @@ private struct UpdatesRow: View {
     @State private var automatic = Updates.checksAutomatically
 
     var body: some View {
-        LabeledContent("Обновления") {
+        IconRow("Обновления", systemImage: "arrow.down.circle") {
             HStack {
-                Toggle("Проверять раз в день", isOn: $automatic)
+                Toggle("Проверять раз в день", systemImage: "clock.arrow.circlepath", isOn: $automatic)
                     .onChange(of: automatic) { Updates.checksAutomatically = automatic }
                 Button("Проверить сейчас") { Updates.checkNow() }
             }

@@ -85,3 +85,16 @@ struct ModuleSwitchTests {
         #expect(SettingsPane.module(.limits).matches("Лимиты: Claude"))
     }
 }
+
+/// SPEC-settings §2: long footnotes show their first sentence and «Подробнее».
+@MainActor
+struct FootnoteTests {
+    @Test func firstSentenceOfLongTextsOnly() {
+        #expect(Footnote.firstSentence("Коротко. Ещё.") == nil)
+        let long = "Любое сработавшее правило не даёт Mac уснуть. " + String(repeating: "Дальше подробности про правила и экран. ", count: 4)
+        #expect(Footnote.firstSentence(long) == "Любое сработавшее правило не даёт Mac уснуть.")
+        let japanese = "ルールが有効な間はMacがスリープしません。ここから先は詳しい説明です。" + String(repeating: "詳しい説明が続きます。", count: 12)
+        #expect(Footnote.firstSentence(japanese) == "ルールが有効な間はMacがスリープしません。")
+        #expect(Footnote.firstSentence(String(repeating: "без точки ", count: 30)) == nil)
+    }
+}
