@@ -1,8 +1,7 @@
 import AppKit
 import SwiftUI
 
-/// A nested tab of Settings → «Сервисы AI» (SPEC-ai-services §4): one per AI, with everything that belongs to it —
-/// the agent, its limits, its API access and, for Claude Code, all of Claude Code's options.
+/// An AI under «Сервисы AI» in the Settings sidebar (SPEC-ai-services §4), with everything that belongs to it.
 enum ServiceTab: String, CaseIterable, Sendable {
     case claude, codex, gemini, copilot, cursor, other
 
@@ -24,7 +23,7 @@ enum ServiceTab: String, CaseIterable, Sendable {
         case .gemini: "diamond"
         case .copilot: "person.2"
         case .cursor: "cursorarrow.rays"
-        case .other: "ellipsis.circle"
+        case .other: "ellipsis"
         }
     }
 
@@ -87,75 +86,30 @@ enum SettingsRoute {
     }
 }
 
-/// Settings → «Сервисы AI» (SPEC-modes §11.3, SPEC-ai-services §4): a list of the AIs on the left, like System
-/// Settings — a segmented row ran out of width with six services and large text — and the chosen one's options.
-struct ServicesSettings: View {
-    /// Settings widens to this on «Сервисы AI» to fit the list.
-    static let width: CGFloat = 760
-
-    @Environment(AIServiceStore.self) private var services
-    @Environment(HubLimitsStore.self) private var hub
-    @AppStorage(SettingsRoute.serviceKey) private var tab: ServiceTab = .claude
-
-    var body: some View {
-        HStack(spacing: 0) {
-            List(ServiceTab.allCases, id: \.self, selection: Binding(get: { tab }, set: { if let new = $0 { tab = new } })) { service in
-                ServiceListRow(service: service, isSetUp: isSetUp(service))
-            }
-            .listStyle(.sidebar)
-            // The sidebar material would run up under the Settings tabs; one window colour instead.
-            .scrollContentBackground(.hidden)
-            .frame(width: 180)
-
-            Divider()
-
-            Form {
-                if tab == .claude {
-                    ClaudeSettings()
-                }
-                if !tab.agents.isEmpty, tab != .claude {
-                    AgentsSection(kinds: tab.agents)
-                }
-                if !tab.hubSources.isEmpty {
-                    LimitsSourcesSection(sources: tab.hubSources)
-                }
-                if !tab.providers.isEmpty {
-                    ProvidersSection(providers: tab.providers)
-                }
-                if tab == .other {
-                    SpendSection()
-                }
-            }
-            .formStyle(.grouped)
-        }
-        .frame(height: 600)
-        .task { if services.agents.isEmpty { await services.scan() } }
-    }
-
-    private func isSetUp(_ service: ServiceTab) -> Bool {
-        service.isSetUp(agents: Set(services.agents.keys), keys: services.hasKey, limits: hub.available.union(hub.savedKeys))
-    }
-}
-
-/// A service in the list: its icon, name and a dot — green when something of it works here.
-private struct ServiceListRow: View {
+/// Settings → «Сервисы AI» → one AI (SPEC-ai-services §4): everything that belongs to it — the agent, its limits,
+/// its API access and, for Claude Code, all of Claude Code's options.
+struct ServicePage: View {
     let service: ServiceTab
-    let isSetUp: Bool
 
     var body: some View {
-        let status = isSetUp ? String(localized: "найден или настроен") : String(localized: "не найден и не настроен")
-        HStack(spacing: 8) {
-            Image(systemName: service.icon)
-                .frame(width: 18)
-            Text(service.title)
-            Spacer(minLength: 4)
-            Circle()
-                .fill(isSetUp ? Color.green : Color.secondary.opacity(0.35))
-                .frame(width: 7, height: 7)
-                .help(status)
+        Form {
+            if service == .claude {
+                ClaudeSettings()
+            }
+            if !service.agents.isEmpty, service != .claude {
+                AgentsSection(kinds: service.agents)
+            }
+            if !service.hubSources.isEmpty {
+                LimitsSourcesSection(sources: service.hubSources)
+            }
+            if !service.providers.isEmpty {
+                ProvidersSection(providers: service.providers)
+            }
+            if service == .other {
+                SpendSection()
+            }
         }
-        .accessibilityElement(children: .combine)
-        .accessibilityValue(status)
+        .formStyle(.grouped)
     }
 }
 

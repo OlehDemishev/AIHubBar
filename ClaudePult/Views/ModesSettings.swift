@@ -13,7 +13,7 @@ struct ModesSettings: View {
             ImportConfirmation()
             HStack(alignment: .top, spacing: 0) {
                 list
-                    .frame(width: 230)
+                    .frame(width: 190)
                 Divider()
                 if let mode = modes.modes.first(where: { $0.id == (selection ?? modes.currentID) }) {
                     ModeEditor(mode: mode)
@@ -23,7 +23,6 @@ struct ModesSettings: View {
                 }
             }
         }
-        .frame(height: 520)
         .onAppear { selection = selection ?? modes.currentID }
     }
 

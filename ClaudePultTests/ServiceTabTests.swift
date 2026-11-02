@@ -53,3 +53,25 @@ struct ServiceTabTests {
         #expect(Set(ServiceTab.allCases.map(\.icon)).count == ServiceTab.allCases.count)
     }
 }
+
+struct SettingsPaneTests {
+    @Test func paneAndStoredTabRoundTrip() {
+        for pane in SettingsPane.areas + SettingsPane.services {
+            let service: ServiceTab = if case let .service(chosen) = pane { chosen } else { .claude }
+            #expect(SettingsPane(tab: pane.tab, service: service) == pane)
+        }
+        #expect(SettingsPane(tab: .services, service: .gemini) == .service(.gemini))
+        #expect(SettingsPane(tab: .appearance, service: .gemini) == .appearance, "the service matters only under «Сервисы AI»")
+    }
+
+    @Test func searchFindsByTitleAndSettingNames() {
+        let all = SettingsPane.areas + SettingsPane.services
+        #expect(all.allSatisfy { $0.matches("") && $0.matches("  ") })
+        let codex = all.filter { $0.matches("codex") }
+        #expect(codex.contains(.service(.codex)) && !codex.contains(.service(.claude)))
+        let telegram = all.filter { $0.matches("telegram") }
+        #expect(telegram.contains(.general) && telegram.contains(.service(.claude)))
+        #expect(all.filter { $0.matches("zzz-nothing") }.isEmpty)
+        #expect(Set(all.map(\.subtitle)).count == all.count - 1, "Copilot and Cursor share «Агент и лимиты»")
+    }
+}
