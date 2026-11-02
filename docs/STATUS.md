@@ -5,7 +5,7 @@
 **Updated:** 2026-11-03
 
 **Now:**
-- nothing in progress; new help merged (#206): window in the app and site/help.html in 13 languages
+- refactoring audit done: docs/SPEC-refactor.md (branch `docs/refactor-audit`, PR open); waiting for Oleh's decisions before stage 0
 
 **Next:**
 - Oleh tries «Раскладка» in his own apps; next beta with fixes: `scripts/release.sh 0.5.0-beta.1 --publish`
@@ -13,6 +13,7 @@
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/SPEC-windows.md §9, stage 2–3 leftovers)
 
 **Needs Oleh:**
+- read docs/SPEC-refactor.md and answer its §10 (Mac tests in CI, limit alerts without a profile, renames, STATUS archive, stage order)
 - look at the new help: panel → «?» and https://olehdemishev.github.io/AIHubBar/help.html
 - look at the new Settings and say what to change next
 - MacBook Air: update to 0.4.0 through Sparkle (Settings → General → Updates) and check the island at the real notch
@@ -20,6 +21,12 @@
 - the beta channel exists now (release `beta`, points to 0.4.0): say when the next beta goes out
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-03 — refactoring audit (branch `docs/refactor-audit`)
+
+Done: on Oleh's «Начни с аудита» — four read-only audits in parallel (modules, views and navigation, services and wiring, tests and tooling), key findings re-checked in the code, plan written to docs/SPEC-refactor.md: 9 bugs to fix first (exports lose switched-off modules; «module off» decided four ways; ModeEditor's stale copy; tests run the real app on real data and poke the installed copy; a permission answer or a note can be lost silently; the help window's double `.defaultSize` from #206; read-only CLI commands write; heavy work in `body`), the module registry, the legacy panel layer, navigation, big files, app composition, polling, AppSettings, CLI, tooling (Mac tests not in CI though the repo is public), docs, safe and unsafe ClaudePult names; 8 stages.
+Checked: claims spot-checked against the code (ModeStore export/import, ClaudePultApp init order, WidgetStatusTests, Approvals/NotesStore writes, help window scene, MenuPanelView projects check); no code changed.
+Left: Oleh's decisions (§10) before stage 0.
 
 ## 2026-11-03 — help: new window and a site page (branch `feat/help`)
 
