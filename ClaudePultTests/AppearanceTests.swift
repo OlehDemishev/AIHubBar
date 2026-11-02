@@ -67,61 +67,53 @@ struct AppearanceTests {
     }
 }
 
-/// `PanelGlass` on stand-in windows: the real `MenuBarExtra` window can't be opened from a test.
+/// `PanelGlass` on a stand-in of the `MenuBarExtra` window seen on macOS 27: the hosting view holds a full-size
+/// `CABackdropLayer` (the system background) next to the portal SwiftUI draws the content through.
 @MainActor
 struct PanelGlassTests {
-    private func window() -> NSWindow {
-        NSWindow(contentRect: NSRect(x: 0, y: 0, width: 300, height: 200), styleMask: .borderless, backing: .buffered, defer: true)
+    private func standIn() throws -> (NSWindow, holder: CALayer, backdrop: CALayer, card: CALayer) {
+        let backdropType = try #require(NSClassFromString("CABackdropLayer") as? CALayer.Type)
+        let window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 400, height: 600), styleMask: [.borderless], backing: .buffered, defer: true)
+        let hosting = NSView(frame: NSRect(x: 0, y: 0, width: 400, height: 600))
+        window.contentView = hosting
+        let graphics = NSView(frame: hosting.bounds)
+        graphics.wantsLayer = true
+        hosting.addSubview(graphics)
+        let holder = CALayer(), backdrop = backdropType.init(), card = backdropType.init()
+        holder.frame = hosting.bounds
+        backdrop.frame = hosting.bounds
+        backdrop.cornerRadius = 18
+        card.frame = NSRect(x: 8, y: 8, width: 384, height: 120)
+        holder.addSublayer(backdrop)
+        holder.addSublayer(CALayer())
+        holder.addSublayer(card)
+        graphics.layer?.addSublayer(holder)
+        return (window, holder, backdrop, card)
     }
 
-    @Test func hidesMaterialBehindContentAndRestores() throws {
-        let window = window()
-        let content = try #require(window.contentView)
-        let frame = try #require(content.superview)
-        let material = NSVisualEffectView(frame: frame.bounds)
-        material.wantsLayer = true
-        material.layer?.cornerRadius = 18
-        frame.addSubview(material, positioned: .below, relativeTo: content)
+    @Test func hidesSystemBackdropAndRestores() throws {
+        guard #available(macOS 26.0, *) else { return }
+        let (window, holder, backdrop, card) = try standIn()
+        defer { PanelGlass.restore() }
+        #expect(PanelGlass.apply(true, to: window))
+        #expect(backdrop.isHidden, "the system background")
+        #expect(!holder.isHidden, "the holder also carries the content's portal")
+        #expect(!card.isHidden, "a card's glass is not the window's")
+        let glass = try #require(window.contentView?.superview?.subviews.compactMap { $0 as? NSGlassEffectView }.first)
+        #expect(glass.style == .clear && glass.cornerRadius == 18)
+        #expect(PanelGlass.apply(true, to: window), "applied again on reopen")
+        #expect(window.contentView?.superview?.subviews.filter { $0 is NSGlassEffectView }.count == 1)
 
-        #expect(PanelGlass.apply(true, to: window) == 18)
-        #expect(material.isHidden)
-        #expect(!window.isOpaque)
-        #expect(window.backgroundColor == .clear)
-
-        material.isHidden = false
-        #expect(PanelGlass.apply(true, to: window) == 18, "applied again on reopen")
-        #expect(material.isHidden)
-
-        #expect(PanelGlass.apply(false, to: window) == nil)
-        #expect(!material.isHidden)
-        #expect(window.isOpaque)
-    }
-
-    @Test func materialAroundContentHidesOnlyItsOwnLayers() throws {
-        let window = window()
-        let material = NSVisualEffectView(frame: NSRect(x: 0, y: 0, width: 300, height: 200))
-        material.wantsLayer = true
-        let content = NSView(frame: material.bounds)
-        content.wantsLayer = true
-        material.addSubview(content)
-        window.contentView = material
-        let own = CALayer()
-        material.layer?.insertSublayer(own, at: 0)
-
-        #expect(PanelGlass.apply(true, to: window) == PanelGlass.defaultCornerRadius)
-        #expect(own.isHidden)
-        #expect(content.layer?.isHidden == false)
-        #expect(!material.isHidden)
-        PanelGlass.restore()
-        #expect(!own.isHidden)
+        #expect(!PanelGlass.apply(false, to: window))
+        #expect(!backdrop.isHidden)
+        #expect(window.contentView?.superview?.subviews.contains { $0 is NSGlassEffectView } == false)
     }
 
     @Test func unknownWindowKeepsItsBackground() {
-        let window = window()
-        let opaque = window.isOpaque
-        #expect(PanelGlass.apply(true, to: window) == nil)
-        #expect(window.isOpaque == opaque)
-        #expect(PanelGlass.apply(true, to: nil) == nil)
+        let window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 300, height: 300), styleMask: [.borderless], backing: .buffered, defer: true)
+        #expect(!PanelGlass.apply(true, to: window))
+        #expect(window.contentView?.superview?.subviews.contains { $0.className.contains("Glass") } != true)
+        #expect(!PanelGlass.apply(true, to: nil))
     }
 
     @Test func reduceTransparencyMeansStandard() {

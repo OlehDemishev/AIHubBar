@@ -217,7 +217,7 @@ extension View {
 extension EnvironmentValues {
     @Entry var panelTextScale: CGFloat = 1
     @Entry var panelDensity: CGFloat = 1
-    /// The panel draws glass (its window background is hidden) — cards turn into glass tiles.
+    /// The panel draws glass instead of the system background — cards turn into glass tiles.
     @Entry var panelGlass = false
 }
 

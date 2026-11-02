@@ -28,8 +28,8 @@ struct MenuPanelView: View {
     @State private var expanded: Set<String> = []
     @State private var listHeight: CGFloat = 0
     @State private var window: NSWindow?
-    /// Corner radius of the window while the panel draws its own glass; nil with the system background.
-    @State private var glassRadius: CGFloat?
+    /// The panel draws its own glass instead of the system background.
+    @State private var drawsGlass = false
     @State private var query = ""
     @FocusState private var searchFocused: Bool
 
@@ -92,18 +92,15 @@ struct MenuPanelView: View {
         .environment(\.panelTextScale, scale)
         .environment(\.panelDensity, settings.panelDensity.spacing)
         .environment(\.font, ScaledFont.font(.body, scale: scale))
-        .environment(\.panelGlass, glassRadius != nil)
-        .background {
-            if let glassRadius { PanelGlassBackground(cornerRadius: glassRadius) }
-        }
+        .environment(\.panelGlass, drawsGlass)
         .preferredColorScheme(settings.panelTheme.colorScheme)
         .background(WindowReader {
             window = $0
             $0?.appearance = settings.panelTheme.appearance
             updateGlass()
         })
-        .onChange(of: settings.panelTheme) { window?.appearance = settings.panelTheme.appearance }
         .onChange(of: wantsGlass) { updateGlass() }
+        .onChange(of: settings.panelTheme) { window?.appearance = settings.panelTheme.appearance }
         .onAppear {
             log.debug("Panel shown")
             isShown = true
@@ -127,8 +124,8 @@ struct MenuPanelView: View {
     }
 
     private func updateGlass() {
-        let radius = PanelGlass.apply(wantsGlass, to: window)
-        if radius != glassRadius { glassRadius = radius }
+        let glass = PanelGlass.apply(wantsGlass, to: window)
+        if glass != drawsGlass { drawsGlass = glass }
     }
 
     // MARK: Search
