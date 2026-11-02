@@ -19,6 +19,12 @@
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
 
+## 2026-11-02 — Settings search finds «Бета-версии» and «Раскладка» (branch `fix/settings-search-layout`)
+
+Done: The Settings sidebar search finds «Бета-версии» (General) and, with beta on, «Раскладка» and its switches (Modules). Build 432 installed on this Mac with `scripts/build-and-install.sh` — 0.3.0 from Releases had none of #195, which is why Oleh couldn't find the settings.
+Checked: `xcodebuild test` — 370 green (new: searchFindsBetaAndTheLayoutModule); the installed build has the new strings and keys.
+Left: «Раскладка» still not tried live (Accessibility is Oleh's).
+
 ## 2026-11-02 — Windows/Linux postponed (branch `chore/status-postpone-desktop`)
 
 Done: Oleh postponed the Windows and Linux builds. Taken out of Next and Needs Oleh; the code in `desktop/` and its CI stay as they are.

@@ -124,6 +124,9 @@ final class AppSettings {
         didSet { defaults.set(betaUpdates, forKey: Keys.betaUpdates) }
     }
 
+    /// `betaUpdates` where no settings object is at hand (the Settings sidebar search).
+    nonisolated static var betaUpdatesSaved: Bool { UserDefaults.standard.bool(forKey: Keys.betaUpdates) }
+
     /// «Раскладка» (SPEC-layout §4).
     var layout: LayoutSettings {
         didSet { if let data = try? JSONEncoder().encode(layout) { defaults.set(data, forKey: Keys.layout) } }

@@ -74,4 +74,17 @@ struct SettingsPaneTests {
         #expect(all.filter { $0.matches("zzz-nothing") }.isEmpty)
         #expect(Set(all.map(\.subtitle)).count == all.count - 1, "Copilot and Cursor share «Агент и лимиты»")
     }
+
+    /// «Бета-версии» is found in General; «Раскладка» only once beta builds show it in Modules.
+    @MainActor
+    @Test func searchFindsBetaAndTheLayoutModule() {
+        let saved = UserDefaults.standard.object(forKey: "betaUpdates")
+        defer { UserDefaults.standard.set(saved, forKey: "betaUpdates") }
+        #expect(SettingsPane.general.matches("бета"))
+        UserDefaults.standard.set(false, forKey: "betaUpdates")
+        #expect(!SettingsPane.modules.matches("Раскладка"))
+        UserDefaults.standard.set(true, forKey: "betaUpdates")
+        #expect(SettingsPane.modules.matches("Раскладка"))
+        #expect(SettingsPane.modules.matches("Shift"))
+    }
 }
