@@ -18,6 +18,18 @@ struct FolderProject: Identifiable, Equatable, Sendable {
     var id: String { path }
 }
 
+extension FolderProject {
+    /// A file or folder dropped on the notch island (SPEC-notch §9, stage 5) as a project for the command engine: the
+    /// folder (the file's own, or the dropped one) with the file as its main file, so the result lands next to it.
+    static func dropped(_ url: URL) -> FolderProject {
+        var isFolder: ObjCBool = false
+        let exists = FileManager.default.fileExists(atPath: url.path, isDirectory: &isFolder)
+        let folder = exists && isFolder.boolValue ? url : url.deletingLastPathComponent()
+        return FolderProject(name: folder.lastPathComponent, path: folder.path, card: ProjectCardFile(), hasCardFile: false,
+                             mainFile: folder == url ? nil : url.lastPathComponent, words: nil, sources: 0, lastActivity: nil)
+    }
+}
+
 /// `проект.md`: lines `Ключ: значение` anywhere in the file (also `- **Этап:** …`). Only the known keys are read;
 /// everything else in the file is kept as is when a value is written back.
 struct ProjectCardFile: Equatable, Sendable {

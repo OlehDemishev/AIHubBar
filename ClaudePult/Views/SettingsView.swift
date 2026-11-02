@@ -610,6 +610,8 @@ private struct NotchSection: View {
                 ForEach(NotchEar.allCases, id: \.self) { Text($0.title).tag($0) }
             }
             Toggle("Открывать карточку при наведении", isOn: $settings.notch.openOnHover)
+            Toggle("Файл на остров — AI-команды", isOn: $settings.notch.fileDrop)
+                .help("Перетащите файл или папку на чёлку: команды профиля и «Своя задача» для него, результат — новым файлом рядом.")
             Toggle("Ход работы Claude в ушке сессий", isOn: $settings.notch.liveActivity)
                 .help("Кольцо и «3/7» по списку задач Claude, шаги в карточке, итог в «Готово». Без списка — минуты с начала ответа.")
             Toggle("Горячие клавиши ⌃⌥Y / ⌃⌥N для запросов", isOn: $settings.notch.hotKeys)

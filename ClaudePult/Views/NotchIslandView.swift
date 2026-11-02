@@ -20,13 +20,14 @@ struct NotchIslandView: View {
             let geometry = island.places[index].geometry
             let window = geometry.windowFrame
             let open = island.openIndex == index
-            let banner = island.banner(on: index)
-            let wide = open || banner != nil
+            let dropping = island.dropTarget == index
+            let banner = dropping ? nil : island.banner(on: index)
+            let wide = open || banner != nil || dropping
             let earsShown = island.showsSummary(on: index) && (hasEar(settings.notch.leftEar) || hasEar(settings.notch.rightEar))
             let restWidth = earsShown ? geometry.restFrame.width : geometry.notch.width
             // At rest the island is centred on the notch; open or with a banner, it fills the window.
             let restOffset = geometry.notch.midX - window.midX
-            let height = open ? island.cardHeight : banner != nil ? island.bannerHeight : 0
+            let height = open ? island.cardHeight : dropping ? NotchIsland.dropHeight : banner != nil ? island.bannerHeight : 0
 
             ZStack(alignment: .top) {
                 // The pill hangs under the menu bar on its own: rounded all round, nothing at rest.
@@ -41,8 +42,17 @@ struct NotchIslandView: View {
                     .offset(x: wide ? 0 : restOffset)
 
                 if open {
-                    NotchCard()
-                        .modifier(MeasuredUnderNotch(notchHeight: geometry.notch.height, width: window.width))
+                    Group {
+                        if let dropped = island.dropped { NotchDropCard(url: dropped) } else { NotchCard() }
+                    }
+                    .modifier(MeasuredUnderNotch(notchHeight: geometry.notch.height, width: window.width))
+                    .transition(.opacity)
+                } else if dropping {
+                    Label("Отпустите — AI-команды для файла", systemImage: "sparkles")
+                        .font(.callout.weight(.medium))
+                        .foregroundStyle(.white)
+                        .frame(width: window.width, height: NotchIsland.dropHeight)
+                        .padding(.top, geometry.notch.height)
                         .transition(.opacity)
                 } else if let banner {
                     NotchBanner(event: banner)
@@ -67,6 +77,7 @@ struct NotchIslandView: View {
             .animation(reduceMotion ? .easeInOut(duration: 0.15) : .spring(response: 0.35, dampingFraction: 0.78), value: open)
             .animation(reduceMotion ? .easeInOut(duration: 0.15) : .spring(response: 0.35, dampingFraction: 0.8), value: banner?.id)
             .animation(.easeInOut(duration: 0.2), value: height)
+            .animation(reduceMotion ? .easeInOut(duration: 0.15) : .spring(response: 0.3, dampingFraction: 0.8), value: dropping)
             .onPreferenceChange(ContentHeightKey.self) { measured in
                 guard measured > 0 else { return }
                 if open {
@@ -557,6 +568,101 @@ private struct NotchSteps: View {
         case .inProgress: "circle.fill"
         case .pending: "circle"
         }
+    }
+}
+
+/// A file or folder dropped on the island (SPEC-notch §9, stage 5): the current profile's AI commands and «Своя
+/// задача» for it, run by the profile's service the way a folder project's commands are; the result is a new file
+/// next to it.
+private struct NotchDropCard: View {
+    let url: URL
+    @Environment(NotchIsland.self) private var island
+    @Environment(ModeStore.self) private var modes
+    @Environment(CommandEngine.self) private var engine
+    @Environment(AppSettings.self) private var settings
+    @State private var asking: CommandTemplate?
+    @State private var text = ""
+    @FocusState private var focused: Bool
+
+    private var mode: Mode { modes.current ?? Mode(name: String(localized: "Профиль")) }
+    private var project: FolderProject { .dropped(url) }
+
+    private func service(for command: CommandTemplate) -> AIService {
+        (command.service ?? mode.service).flatMap(AIService.init(id:)) ?? .claudeCode
+    }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            HStack(spacing: 10) {
+                Image(nsImage: NSWorkspace.shared.icon(forFile: url.path))
+                    .resizable()
+                    .frame(width: 30, height: 30)
+                    .accessibilityHidden(true)
+                VStack(alignment: .leading, spacing: 1) {
+                    Text(url.lastPathComponent)
+                        .font(.callout.weight(.semibold))
+                        .lineLimit(1)
+                        .truncationMode(.middle)
+                    Text(PathText.tilde(url.deletingLastPathComponent().path))
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                        .lineLimit(1)
+                        .truncationMode(.head)
+                }
+                Spacer(minLength: 0)
+                Button("Отмена") { island.close() }
+                    .buttonStyle(.borderless)
+                    .keyboardShortcut(.cancelAction)
+            }
+            Text("Команды профиля «\(mode.name)» · \(service(for: .customTask).shortName(compatibleName: settings.aiServices.compatibleName))")
+                .font(.caption)
+                .foregroundStyle(.secondary)
+                .lineLimit(1)
+            FlowRow(spacing: 6) {
+                ForEach(mode.commands + [.customTask]) { command in
+                    Button(command.title) { start(command) }
+                        .buttonStyle(NotchButtonStyle(fill: asking == command ? .accentColor : .white.opacity(0.16)))
+                        .help(command.task)
+                }
+            }
+            if let asking {
+                HStack(spacing: 6) {
+                    TextField(asking.asks ?? String(localized: "Текст"), text: $text)
+                        .textFieldStyle(.roundedBorder)
+                        .focused($focused)
+                        .onSubmit { perform(asking) }
+                    Button("Выполнить") { perform(asking) }
+                        .buttonStyle(NotchButtonStyle(fill: .accentColor))
+                        .disabled(text.trimmingCharacters(in: .whitespaces).isEmpty)
+                }
+            }
+            Text("Результат — новый файл рядом; существующие файлы не меняются.")
+                .font(.caption2)
+                .foregroundStyle(.secondary)
+        }
+        .foregroundStyle(.white)
+        .padding(.horizontal, 18)
+        .padding(.top, 10)
+        .padding(.bottom, 14)
+        .accessibilityElement(children: .contain)
+        .accessibilityLabel(String(localized: "AI-команды для \(url.lastPathComponent)"))
+    }
+
+    private func start(_ command: CommandTemplate) {
+        if command.asks != nil {
+            asking = command
+            text = ""
+            focused = true
+        } else {
+            perform(command)
+        }
+    }
+
+    private func perform(_ command: CommandTemplate) {
+        let input = command.asks == nil ? nil : text
+        if command.asks != nil, input?.trimmingCharacters(in: .whitespaces).isEmpty != false { return }
+        let result = engine.run(command, project: project, mode: mode, service: service(for: command), text: input)
+        island.started(command.title, file: "\(url.lastPathComponent) → \((result as NSString).lastPathComponent)")
     }
 }
 
