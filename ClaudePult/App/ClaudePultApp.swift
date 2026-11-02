@@ -76,7 +76,7 @@ struct ClaudePultApp: App {
         _runs = State(initialValue: runs)
         _engine = State(initialValue: CommandEngine(settings: settings, runs: runs))
         let launcher = LaunchController(settings: settings, store: store, runs: runs, usage: usage)
-        _weeklySummary = State(initialValue: WeeklySummarySender(settings: settings, usage: usage, runs: runs))
+        _weeklySummary = State(initialValue: WeeklySummarySender(settings: settings, usage: usage, runs: runs, hub: hub))
         _launcher = State(initialValue: launcher)
         let hooks = HookController(settings: settings)
         _hooks = State(initialValue: hooks)
@@ -165,7 +165,8 @@ struct ClaudePultApp: App {
                         .environment(settings)
                         .environment(usage)
                         .environment(sessions)
-                        .environment(runs))
+                        .environment(runs)
+                        .environment(hub))
                 }
             }
             // The shell lookup first: the scan reports which agents it found.

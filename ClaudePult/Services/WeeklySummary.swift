@@ -21,7 +21,7 @@ enum LimitHits {
 }
 
 /// «Неделя Claude» in Telegram (own message, not the daily report): the week's limit, spend by project, the heaviest
-/// sessions, limit hits and background runs.
+/// sessions, limit hits, background runs and a line per other AI service.
 enum WeeklySummary {
     struct Input: Sendable {
         var weekPercent: Double?
@@ -30,6 +30,8 @@ enum WeeklySummary {
         var sessionHits: Int
         var weekHits: Int
         var runs: [BackgroundRun]
+        /// The other AI services' limits, as the panel shows them (SPEC-ai-services stage 4).
+        var others: [ServiceUsage] = []
         var now: Date
     }
 
@@ -69,7 +71,33 @@ enum WeeklySummary {
             let done = input.runs.filter { $0.state == .succeeded }.count
             lines.append(RunMessage.escape(String(localized: "Фоновые задачи: \(input.runs.count) — ✅ \(done), ❌ \(input.runs.count - done)")))
         }
+        let others = input.others.compactMap(otherLine)
+        if !others.isEmpty {
+            lines.append("")
+            lines.append("<b>\(RunMessage.escape(String(localized: "Другие AI")))</b>")
+            lines += others.map { RunMessage.escape("• " + $0) }
+        }
         return lines.joined(separator: "\n")
+    }
+
+    /// «Codex — 5 ч 12 %, неделя 30 %; за неделю +18 %; проекты: Alpha 1,2 млн, Beta 300 тыс.»; nil with nothing to say.
+    static func otherLine(_ usage: ServiceUsage) -> String? {
+        var parts: [String] = []
+        let limits = (usage.rings + usage.bars).compactMap { window -> String? in
+            if let percent = window.percent { return "\(window.title) \(UsageText.percent(percent))" }
+            return window.detail.map { "\(window.title) \($0)" }
+        }
+        if !limits.isEmpty { parts.append(limits.joined(separator: ", ")) }
+        if let week = usage.week {
+            let grown = week.days.reduce(0) { $0 + $1.percent }
+            if grown >= 1 { parts.append(String(localized: "за неделю +\(UsageText.percent(grown))")) }
+        }
+        if !usage.projects.isEmpty {
+            let top = usage.projects.prefix(3).map { "\($0.name) \(TokenBreakdown.tokensText($0.tokens))" }.joined(separator: ", ")
+            parts.append(String(localized: "проекты: \(top)"))
+        }
+        if parts.isEmpty, let error = usage.error { parts.append(error) }
+        return parts.isEmpty ? nil : "\(usage.title) — " + parts.joined(separator: "; ")
     }
 
     /// This week's send time: the chosen weekday (1 = Sunday … 7 = Saturday, like `Calendar`) at the chosen hour.
@@ -88,13 +116,15 @@ final class WeeklySummarySender {
     private let settings: AppSettings
     private let usage: UsageStore
     private let runs: RunStore
+    private let hub: HubLimitsStore
     private var loop: Task<Void, Never>?
     private static let sentKey = "weeklySummarySent"
 
-    init(settings: AppSettings, usage: UsageStore, runs: RunStore) {
+    init(settings: AppSettings, usage: UsageStore, runs: RunStore, hub: HubLimitsStore) {
         self.settings = settings
         self.usage = usage
         self.runs = runs
+        self.hub = hub
     }
 
     func start() {
@@ -127,7 +157,7 @@ final class WeeklySummarySender {
             weekPercent: usage.snapshot?.week?.utilization, weekResetsAt: usage.snapshot?.week?.resetsAt,
             breakdown: usage.breakdowns[.week],
             sessionHits: hits.filter { $0.window == "five_hour" }.count, weekHits: hits.filter { $0.window == "seven_day" }.count,
-            runs: runs.runs.filter { $0.startedAt >= weekAgo && $0.state.isFinished }, now: now
+            runs: runs.runs.filter { $0.startedAt >= weekAgo && $0.state.isFinished }, others: hub.usages, now: now
         )
         let ok = await Telegram.send(html: WeeklySummary.html(input), with: credentials)
         AppLog.info("Weekly summary sent: \(ok)")

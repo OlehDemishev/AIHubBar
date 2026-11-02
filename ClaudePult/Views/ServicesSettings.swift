@@ -102,6 +102,7 @@ struct ServicePage: View {
             if !service.hubSources.isEmpty {
                 LimitsSourcesSection(sources: service.hubSources)
             }
+            ThresholdsSection(service: service)
             if !service.providers.isEmpty {
                 ProvidersSection(providers: service.providers)
             }
@@ -111,6 +112,64 @@ struct ServicePage: View {
         }
         .formStyle(.grouped)
     }
+}
+
+/// When this service's limits notify (SPEC-ai-services stage 4): at the common thresholds from «Модули → Лимиты»,
+/// at its own, or never.
+private struct ThresholdsSection: View {
+    let service: ServiceTab
+    @Environment(AppSettings.self) private var settings
+    @State private var text = ""
+
+    enum Mode: Hashable { case common, own, off }
+
+    private var mode: Mode {
+        guard let own = settings.serviceThresholds[service.rawValue] else { return .common }
+        return own.isEmpty ? .off : .own
+    }
+
+    var body: some View {
+        Section {
+            Picker("Уведомлять о лимите", selection: Binding(get: { mode }, set: choose)) {
+                Text("как у всех: \(Self.list(settings.limitThresholds)) %").tag(Mode.common)
+                Text("на своих порогах").tag(Mode.own)
+                Text("не уведомлять").tag(Mode.off)
+            }
+            if mode == .own {
+                LabeledContent("Пороги, %") {
+                    TextField("", text: $text, prompt: Text(verbatim: "80, 95"))
+                        .labelsHidden()
+                        .textFieldStyle(.roundedBorder)
+                        .frame(width: 140)
+                        .onSubmit(apply)
+                }
+            }
+        } header: {
+            Text("Уведомления о лимитах")
+        } footer: {
+            Footnote(text: String(localized: "Один раз на окно лимита, когда порог пройден. Общие пороги — в «Модули» → «Лимиты»."))
+        }
+        .onAppear { text = Self.list(settings.thresholds(for: service)) }
+        .onDisappear { if mode == .own { apply() } }
+    }
+
+    private func choose(_ new: Mode) {
+        switch new {
+        case .common: settings.serviceThresholds[service.rawValue] = nil
+        case .own: settings.serviceThresholds[service.rawValue] = settings.thresholds(for: service).isEmpty ? settings.limitThresholds : settings.thresholds(for: service)
+        case .off: settings.serviceThresholds[service.rawValue] = []
+        }
+        text = Self.list(settings.thresholds(for: service))
+    }
+
+    /// «80, 95» → [80, 95]; invalid input keeps the previous thresholds.
+    private func apply() {
+        let values = SettingsParsing.thresholds(text)
+        if !values.isEmpty { settings.serviceThresholds[service.rawValue] = values }
+        text = Self.list(settings.thresholds(for: service))
+    }
+
+    static func list(_ values: [Int]) -> String { values.map(String.init).joined(separator: ", ") }
 }
 
 /// The tab's agents: installed or not, with the install command and the sign-in.
@@ -155,7 +214,7 @@ private struct LimitsSourcesSection: View {
         } header: {
             Text("Лимиты и расход")
         } footer: {
-            Footnote(text: String(localized: "Сервис появляется под кольцами Claude сам, когда найден на Маке или сохранён его ключ. Ключи хранятся только в связке ключей. Codex и Copilot спрашиваются через свои программы (codex, gh); вход Gemini CLI и Cursor читается только с вашего согласия. Обновляется раз в 5 минут, пороги уведомлений — те же, что у Claude. Форматы ответов не документированы производителями и могут поменяться."))
+            Footnote(text: String(localized: "Сервис появляется под кольцами Claude сам, когда найден на Маке или сохранён его ключ. Ключи хранятся только в связке ключей. Codex и Copilot спрашиваются через свои программы (codex, gh); вход Gemini CLI и Cursor читается только с вашего согласия. Обновляется раз в 5 минут. Форматы ответов не документированы производителями и могут поменяться."))
         }
     }
 }

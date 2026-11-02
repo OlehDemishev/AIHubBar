@@ -89,6 +89,17 @@ final class AppSettings {
         didSet { defaults.set(limitThresholds, forKey: Keys.limitThresholds) }
     }
 
+    /// Per-service thresholds (SPEC-ai-services stage 4), by `ServiceTab` raw value: missing — the common
+    /// `limitThresholds`, empty — no limit notifications for that service.
+    var serviceThresholds: [String: [Int]] {
+        didSet { defaults.set(serviceThresholds, forKey: Keys.serviceThresholds) }
+    }
+
+    /// The thresholds a service's limits notify at.
+    func thresholds(for service: ServiceTab) -> [Int] {
+        serviceThresholds[service.rawValue] ?? limitThresholds
+    }
+
     var limitAlertsToTelegram: Bool {
         didSet { defaults.set(limitAlertsToTelegram, forKey: Keys.limitAlertsToTelegram) }
     }
@@ -310,6 +321,8 @@ final class AppSettings {
         calendarRemindersToTelegram = defaults.bool(forKey: Keys.calendarRemindersToTelegram)
         let thresholds = (defaults.array(forKey: Keys.limitThresholds) as? [Int])?.filter { (1...100).contains($0) }
         limitThresholds = thresholds?.isEmpty == false ? thresholds! : Self.defaultLimitThresholds
+        serviceThresholds = ((defaults.dictionary(forKey: Keys.serviceThresholds) as? [String: [Int]]) ?? [:])
+            .mapValues { $0.filter { (1...100).contains($0) }.sorted() }
         limitAlertsToTelegram = defaults.bool(forKey: Keys.limitAlertsToTelegram)
         renewClaudeLogin = defaults.object(forKey: Keys.renewClaudeLogin) as? Bool ?? true
         resourceAlerts = defaults.object(forKey: Keys.resourceAlerts) as? Bool ?? true
@@ -369,6 +382,7 @@ final class AppSettings {
         static let calendarReminderHours = "calendarReminderHours"
         static let calendarRemindersToTelegram = "calendarRemindersToTelegram"
         static let limitThresholds = "limitThresholds"
+        static let serviceThresholds = "serviceThresholds"
         static let limitAlertsToTelegram = "limitAlertsToTelegram"
         static let renewClaudeLogin = "renewClaudeLogin"
         static let resourceAlerts = "resourceAlerts"

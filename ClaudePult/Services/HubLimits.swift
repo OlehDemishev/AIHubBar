@@ -589,10 +589,10 @@ final class HubLimitsStore {
         WidgetCenter.shared.reloadTimelines(ofKind: "ClaudePultUsage")
     }
 
-    /// The same thresholds as the Claude limits, once per window and reset.
+    /// Each service's thresholds (its own or the common ones), once per window and reset.
     private func announce(_ limits: [HubLimit]) {
-        let thresholds = settings.limitThresholds.sorted()
         for limit in limits {
+            let thresholds = settings.thresholds(for: ServiceTab(hub: limit.source)).sorted()
             for window in limit.windows {
                 guard let percent = window.percent, let threshold = thresholds.last(where: { Double($0) <= percent }) else { continue }
                 let key = "\(limit.source.rawValue)|\(window.title)|\(window.resetsAt.map { Int($0.timeIntervalSince1970 / 600) } ?? 0)|\(threshold)"

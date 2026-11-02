@@ -8,6 +8,7 @@ struct NotchIslandView: View {
     @Environment(UsageStore.self) private var usage
     @Environment(SessionStore.self) private var sessions
     @Environment(RunStore.self) private var runs
+    @Environment(HubLimitsStore.self) private var hub
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(\.colorSchemeContrast) private var contrast
 
@@ -76,6 +77,7 @@ struct NotchIslandView: View {
         switch ear {
         case .sessionLimit: usage.snapshot?.session != nil
         case .weekLimit: usage.snapshot?.week != nil
+        case .otherAI: NotchText.fullestOther(hub.percents) != nil
         case .sessions: sessions.items.contains { $0.state == .waiting || $0.state == .running }
         case .background: !runs.running.isEmpty
         case .none: false
@@ -137,12 +139,14 @@ private struct NotchEarView: View {
     @Environment(UsageStore.self) private var usage
     @Environment(SessionStore.self) private var sessions
     @Environment(RunStore.self) private var runs
+    @Environment(HubLimitsStore.self) private var hub
 
     var body: some View {
         Group {
             switch ear {
-            case .sessionLimit: limit(usage.snapshot?.session)
-            case .weekLimit: limit(usage.snapshot?.week)
+            case .sessionLimit: limit(usage.snapshot?.session?.utilization)
+            case .weekLimit: limit(usage.snapshot?.week?.utilization)
+            case .otherAI: limit(NotchText.fullestOther(hub.percents)?.percent)
             case .sessions: sessionDot
             case .background:
                 if !runs.running.isEmpty { dot(.purple, count: runs.running.count) }
@@ -150,28 +154,33 @@ private struct NotchEarView: View {
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .help(NotchText.earSummary(ear, usage: usage.snapshot, sessions: sessions.items, background: runs.running.count))
+        .help(summary)
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel(NotchText.earSummary(ear, usage: usage.snapshot, sessions: sessions.items, background: runs.running.count))
+        .accessibilityLabel(summary)
+    }
+
+    private var summary: String {
+        NotchText.earSummary(ear, usage: usage.snapshot, sessions: sessions.items, background: runs.running.count, otherAI: hub.percents)
     }
 
     @ViewBuilder
-    private func limit(_ window: UsageWindow?) -> some View {
-        if let window {
+    private func limit(_ percent: Double?) -> some View {
+        if let percent {
+            let color = UsageWindow.color(for: percent)
             HStack(spacing: 3) {
                 ZStack {
                     Circle().stroke(.white.opacity(0.2), lineWidth: 2.5)
                     Circle()
-                        .trim(from: 0, to: min(max(window.utilization, 0), 100) / 100)
-                        .stroke(window.levelColor, style: StrokeStyle(lineWidth: 2.5, lineCap: .round))
+                        .trim(from: 0, to: min(max(percent, 0), 100) / 100)
+                        .stroke(color, style: StrokeStyle(lineWidth: 2.5, lineCap: .round))
                         .rotationEffect(.degrees(-90))
                 }
                 .frame(width: 13, height: 13)
                 // Near the limit the number matters more than the ring.
-                if window.utilization >= 80 {
-                    Text("\(Int(window.utilization.rounded()))")
+                if percent >= 80 {
+                    Text("\(Int(percent.rounded()))")
                         .font(.system(size: 10, weight: .semibold).monospacedDigit())
-                        .foregroundStyle(window.levelColor)
+                        .foregroundStyle(color)
                 }
             }
         }
@@ -425,11 +434,15 @@ private struct NotchSessionRow: View {
 
 /// Words for the ears' hints and VoiceOver.
 enum NotchText {
-    static func earSummary(_ ear: NotchEar, usage: UsageSnapshot?, sessions: [SessionStore.Item], background: Int) -> String {
+    static func earSummary(_ ear: NotchEar, usage: UsageSnapshot?, sessions: [SessionStore.Item], background: Int,
+                           otherAI: [String: Double] = [:]) -> String {
         switch ear {
         case .sessionLimit, .weekLimit:
             guard let window = ear == .sessionLimit ? usage?.session : usage?.week else { return ear.title }
             return "\(window.title): \(UsageText.percent(window.utilization))"
+        case .otherAI:
+            guard let fullest = fullestOther(otherAI) else { return ear.title }
+            return "\(fullest.name): \(UsageText.percent(fullest.percent))"
         case .sessions:
             let waiting = sessions.filter { $0.state == .waiting }.count
             let running = sessions.filter { $0.state == .running }.count
@@ -439,6 +452,12 @@ enum NotchText {
         case .none:
             return ""
         }
+    }
+
+    /// The other AI service closest to its limit (source raw value → percent, as `HubLimitsStore.percents`).
+    static func fullestOther(_ percents: [String: Double]) -> (name: String, percent: Double)? {
+        percents.max { $0.value == $1.value ? $0.key > $1.key : $0.value < $1.value }
+            .map { (HubLimit.Source(rawValue: $0.key)?.shortTitle ?? $0.key, $0.value) }
     }
 
     static func sessionHelp(_ item: SessionStore.Item) -> String {

@@ -217,7 +217,7 @@ final class UsageStore {
             saveHistory()
         }
 
-        let alerts = UsageAlerts.evaluate(previous: previous, current: fresh, thresholds: settings.limitThresholds, notified: &notified)
+        let alerts = UsageAlerts.evaluate(previous: previous, current: fresh, thresholds: settings.thresholds(for: .claude), notified: &notified)
         // Forget keys of windows that have reset long ago.
         notified = notified.filter { key in
             guard let minutes = key.split(separator: "|").dropFirst().first.flatMap({ Double($0) }) else { return true }

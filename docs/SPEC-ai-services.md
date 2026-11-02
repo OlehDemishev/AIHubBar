@@ -1,6 +1,6 @@
 # SPEC — AI services: Claude as one of them, the same view for every service
 
-Status: stages 1–3 done (#159, #162–#166), 2026-11-02; next: stage 4. Stage 3's tokens and context still need a look on a Mac with Codex threads.
+Status: stages 1–4 done (#159, #162–#167), 2026-11-02; next: stage 5 (after a live check). Stage 3's tokens and context still need a look on a Mac with Codex threads.
 Asked by Oleh on 2026-10-31 and 2026-11-02: move Claude Code into «Сервисы AI», give every AI its own nested tab
 with all its settings, and bring the other services up to Claude Code's level — one model per service for rings,
 forecast, week strip, credits, per-project tokens and context.
@@ -101,8 +101,10 @@ service mark. Sessions: Codex threads next to Claude sessions once a source exis
    the context of today's latest thread from its rollout's last `token_count` (tokens without reasoning over
    `model_context_window`, as Codex counts it). Live: the plan on Oleh's Mac (free plan, no credits); tokens and context
    only on stored samples — this Mac has no Codex threads yet (`AIHubBar --services limits` shows them once there are).
-4. **Per-service alerts, menu bar and widget**: thresholds per service, «which service» for menu bar elements,
-   widget and notch; weekly summary across services.
+4. **Per-service alerts, menu bar and widget** (done): thresholds per service (`serviceThresholds`, own / common /
+   none, on each service's page); «which service» was already there for the menu bar (the «Другие AI» element with a
+   chosen or the fullest service, #130) and the widget (up to three other services); the notch gets an «Другие AI»
+   ear; the weekly summary ends with a line per other service (limits, growth over the week, Codex projects).
 5. **Codex sessions**: threads in the sessions list; `notify` hook for «waiting for you» — only after a live check.
 6. Gemini / Copilot / Cursor: whatever §2 marks ⚙️ after their live checks.
 
