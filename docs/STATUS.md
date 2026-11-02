@@ -5,7 +5,7 @@
 **Updated:** 2026-11-02
 
 **Now:**
-- nothing in progress; merged 2026-11-02: glass panel background (#158), AI services spec + stage 1 — Claude Code inside «Сервисы AI», a tab per service (#159)
+- glass background fix (branch `fix/glass-panel`): «Стекло» now really changes the panel on macOS 27; merged 2026-11-02: glass panel background (#158), AI services spec + stage 1 — Claude Code inside «Сервисы AI», a tab per service (#159)
 - released 0.2.2 (v0.2.2, build 345): clickable widgets (#154), Codex from the ChatGPT desktop app (#155), notch island stage 2 (#153)
 - notch island stage 1 merged (#149): module, island over the notch, ears, hover card; target release 0.3.0
 - notch island stage 2 merged (#153): banners for events, permission requests with Allow / Deny in the island
@@ -29,7 +29,7 @@
 
 **Needs Oleh:**
 - AI services tabs (build from main): Settings → «Сервисы AI» — every sub-tab opens; Claude Code has all the old options (path, hooks, Telegram answers, saved prompts, CLAUDE.md и MCP, background runs); Codex shows the agent and its limits row; Modules → Лимиты → «Другие AI» shows the summary and «Открыть «Сервисы AI»»
-- glass panel (build from main): Settings → Внешний вид → Фон панели → «Стекло», open the panel in light and dark theme, over busy wallpaper, then with «Уменьшить прозрачность» on (must fall back to the standard background); check text is readable on the glass cards and the corners/shadow look right; send `grep 'Glass panel' ~/Library/Logs/ClaudePult/ClaudePult.log`
+- glass panel (installed build has the fix): checked by the agent in the light theme; look at it in the dark theme and with «Уменьшить прозрачность» on (must fall back to the standard background), say if the glass should be clearer or denser
 - update to 0.2.2 («Обновления» in Settings), then: Settings → Модули → Лимиты → «Другие AI» should list Codex; click the limits widget (opens «Лимиты»), ↻ in it, the sessions widget's rows and ☕ — tell me what doesn't react
 - on the other Mac: install 0.2.2 (Releases, or «Обновления» in Settings) → Settings → Claude Code: the path field should show «авто: …» instead of «авто: не найден»; tell me the path it shows
 - notch island: on the MacBook Air (with this branch's build or later) — Settings → Модули → «Остров у чёлки» → Установить; check the ears beside the real notch, hover opens the card, moving away closes it, menu bar clicks next to the notch still work
@@ -41,6 +41,12 @@
 - decide SPEC-windows §10 and SPEC-linux §10 (Tauri 2 for both, Windows code signing, first Linux desktops) before that work starts
 - optional: Apple Developer ID (notarization, no «Open Anyway»); delete or archive the old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-02 — Glass panel background really applies on macOS 27 (branch `fix/glass-panel`)
+
+Done: «Стекло» from #158 changed nothing — on macOS 27 the `MenuBarExtra` window has no `NSVisualEffectView`; its background is a full-size `CABackdropLayer` SwiftUI draws inside the hosting view (window dumped to the log with the panel open). `containerBackground(.clear, for: .window)` doesn't reach it (tried). Hiding the backdrop's holder layer blanked the panel, because the holder also carries the portal SwiftUI draws the content through. Now `PanelGlass` hides only the full-size `CABackdropLayer` and puts a clear `NSGlassEffectView` (corner radius taken from the backdrop, 16 pt) behind the hosting view; cards stay glass tiles; «Обычный» puts it back. Variants compared live: no glass view (too transparent, text behind is readable through the panel), clear glass (chosen — close to Control Center, which has no panel background, only blur and glass tiles).
+Checked: `xcodebuild test` — 301 / 301 pass (new `PanelGlassTests` on a stand-in of the real window: only the full-size backdrop hidden, holder and a card's backdrop untouched, one glass view on reopen, restore; unknown window untouched). Live on Oleh's Mac (light theme): opened the panel through the menu bar with full-screen control and captured it with `screencapture` — «Стекло» shows the blurred desktop and windows through the panel with glass cards, «Обычный» shows the system background and flat cards; log says `Glass panel: hid 1 system backdrop(s), clear glass with corner radius 16.0`.
+Left: dark theme and «Уменьшить прозрачность» not looked at live (Needs Oleh).
 
 ## 2026-11-02 — AI services: spec and stage 1, Claude Code inside «Сервисы AI» (branch `feat/ai-services-tabs`)
 

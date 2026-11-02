@@ -1,26 +1,19 @@
 import AppKit
 import SwiftUI
 
-/// «Стекло» background of the menu bar panel (macOS 26+): the system's menu material is denser than Control
-/// Center's, so the panel hides it and draws Liquid Glass itself (`PanelGlassBackground`). The `MenuBarExtra`
-/// window's views are private, so this only touches what it recognises — a full-size `NSVisualEffectView` or
-/// `NSGlassEffectView` behind the content — and leaves the window alone when it finds nothing.
+/// «Стекло» background of the menu bar panel (macOS 26+). The `MenuBarExtra` window's own background is a
+/// Liquid Glass backdrop SwiftUI draws inside the hosting view — a full-size `CABackdropLayer` (seen on macOS 27),
+/// denser than Control Center's; `containerBackground(for: .window)` doesn't reach it. With «Стекло» the panel
+/// hides only that backdrop layer (its holder also carries the portal SwiftUI draws the content through — hiding
+/// the holder blanks the panel) and puts a clear `NSGlassEffectView` behind the hosting view; the cards turn into
+/// glass tiles (`panelCard()`). When the backdrop isn't found, the window is left alone.
 @MainActor
 enum PanelGlass {
-    /// What was changed in the panel window, to put it back for «Обычный».
-    private struct Changes {
-        weak var window: NSWindow?
-        var hiddenViews: [Weak] = []
-        var hiddenLayers: [CALayer] = []
-        var wasOpaque = true
-        var background: NSColor?
-        var cornerRadius: CGFloat = PanelGlass.defaultCornerRadius
-    }
-
-    private struct Weak { weak var view: NSView? }
-
+    /// Corner radius of the system panel window (its backdrop's rounded shape on macOS 27).
     nonisolated static let defaultCornerRadius: CGFloat = 16
-    private static var changes: Changes?
+
+    private static var hiddenLayers: [CALayer] = []
+    private static weak var glassView: NSView?
     private static var lastLogged: String?
 
     /// Whether the panel can use glass on this Mac now: macOS 26+ and «Уменьшить прозрачность» off.
@@ -29,101 +22,81 @@ enum PanelGlass {
         return !reduceTransparency
     }
 
-    /// Switches the panel window to glass or back. Returns the window's corner radius when glass is on, nil when
-    /// the window keeps (or got back) its system background.
+    /// Switches the panel window to glass or back. Returns whether the panel now draws glass.
     @discardableResult
-    static func apply(_ glass: Bool, to window: NSWindow?) -> CGFloat? {
-        guard let window else { return nil }
-        if !glass {
+    static func apply(_ glass: Bool, to window: NSWindow?) -> Bool {
+        guard glass, #available(macOS 26.0, *), let hosting = window?.contentView, let frame = hosting.superview else {
             restore()
-            return nil
+            return false
         }
-        if let changes, changes.window === window {
-            // The system may bring its background back when the panel reopens.
-            for item in changes.hiddenViews { item.view?.isHidden = true }
-            for layer in changes.hiddenLayers { layer.isHidden = true }
-            return changes.cornerRadius
-        }
-        restore()
-        guard let content = window.contentView else { return nil }
-        var root: NSView = content
-        while let parent = root.superview { root = parent }
-
-        var found = Changes(window: window, wasOpaque: window.isOpaque, background: window.backgroundColor)
-        let bounds = window.frame.size
-        // Views inside the content belong to SwiftUI (including this panel's own glass), not to the window.
-        for view in backgrounds(in: root, size: bounds) where view === content || !view.isDescendant(of: content) {
-            if let radius = view.layer?.cornerRadius, radius > 0 { found.cornerRadius = radius }
-            if content.isDescendant(of: view) {
-                // The content sits inside the material view: hide only the material's own layers.
-                let own = Set((view.subviews.compactMap(\.layer)).map(ObjectIdentifier.init))
-                for layer in view.layer?.sublayers ?? [] where !own.contains(ObjectIdentifier(layer)) && !layer.isHidden {
-                    layer.isHidden = true
-                    found.hiddenLayers.append(layer)
-                }
-            } else if !view.isHidden {
-                view.isHidden = true
-                found.hiddenViews.append(Weak(view: view))
+        let backdrops = systemBackdrops(in: hosting)
+        guard !backdrops.isEmpty else {
+            if glassView?.superview == nil {
+                log("Glass panel: no system backdrop found in \(type(of: window!)), keeping the standard background")
             }
+            return glassView?.superview != nil
         }
-        guard !found.hiddenViews.isEmpty || !found.hiddenLayers.isEmpty else {
-            log("Glass panel: no system background found in \(type(of: window)), keeping the standard one")
-            return nil
+        for layer in backdrops where !layer.isHidden {
+            layer.isHidden = true
+            if !hiddenLayers.contains(where: { $0 === layer }) { hiddenLayers.append(layer) }
         }
-        window.isOpaque = false
-        window.backgroundColor = .clear
-        window.invalidateShadow()
-        changes = found
-        log("Glass panel: hid \(found.hiddenViews.count) view(s) and \(found.hiddenLayers.count) layer(s), corner radius \(found.cornerRadius)")
-        return found.cornerRadius
+        if glassView?.superview !== frame {
+            glassView?.removeFromSuperview()
+            let view = NSGlassEffectView(frame: hosting.frame)
+            view.style = .clear
+            view.cornerRadius = cornerRadius(of: backdrops) ?? defaultCornerRadius
+            view.autoresizingMask = [.width, .height]
+            frame.addSubview(view, positioned: .below, relativeTo: hosting)
+            glassView = view
+            log("Glass panel: hid \(backdrops.count) system backdrop(s), clear glass with corner radius \(view.cornerRadius)")
+        }
+        return true
     }
 
     /// Puts the system background back.
     static func restore() {
-        guard let changes else { return }
-        self.changes = nil
-        for item in changes.hiddenViews { item.view?.isHidden = false }
-        for layer in changes.hiddenLayers { layer.isHidden = false }
-        if let window = changes.window {
-            window.isOpaque = changes.wasOpaque
-            window.backgroundColor = changes.background
-            window.invalidateShadow()
-        }
+        for layer in hiddenLayers { layer.isHidden = false }
+        hiddenLayers = []
+        glassView?.removeFromSuperview()
+        glassView = nil
     }
 
-    /// Material views that cover (nearly) the whole window, outermost first.
-    private static func backgrounds(in view: NSView, size: CGSize) -> [NSView] {
-        var result: [NSView] = []
-        func walk(_ view: NSView) {
-            if isMaterial(view), view.frame.width >= size.width - 2, view.frame.height >= size.height - 2 {
-                result.append(view)
+    /// Backdrop layers as large as the hosting view: the window's background, not a card's glass.
+    private static func systemBackdrops(in hosting: NSView) -> [CALayer] {
+        let size = hosting.bounds.size
+        var result: [CALayer] = []
+        func walk(_ layer: CALayer) {
+            if String(describing: type(of: layer)) == "CABackdropLayer",
+               layer.frame.width >= size.width - 1, layer.frame.height >= size.height - 1 {
+                result.append(layer)
+                return
             }
+            // A view's layer lists its subviews' layers too; those are walked with their views.
+            layer.sublayers?.filter { !($0.delegate is NSView) }.forEach(walk)
+        }
+        func walk(_ view: NSView) {
+            guard view.frame.width >= size.width - 1 || view === hosting else { return }
+            if let layer = view.layer { walk(layer) }
             view.subviews.forEach(walk)
         }
-        walk(view)
+        walk(hosting)
         return result
     }
 
-    private static func isMaterial(_ view: NSView) -> Bool {
-        if view is NSVisualEffectView { return true }
-        if #available(macOS 26.0, *), view is NSGlassEffectView { return true }
-        return false
+    /// The rounded shape SwiftUI masks the backdrop with, if it has one.
+    private static func cornerRadius(of backdrops: [CALayer]) -> CGFloat? {
+        var radius: CGFloat?
+        func walk(_ layer: CALayer) {
+            if radius == nil, layer.cornerRadius > 0 { radius = layer.cornerRadius }
+            layer.sublayers?.forEach(walk)
+        }
+        backdrops.forEach(walk)
+        return radius
     }
 
     private static func log(_ message: String) {
         guard message != lastLogged else { return }
         lastLogged = message
         AppLog.info(message)
-    }
-}
-
-/// The panel's glass when its window background is hidden; nothing on older systems.
-struct PanelGlassBackground: View {
-    let cornerRadius: CGFloat
-
-    var body: some View {
-        if #available(macOS 26.0, *) {
-            Color.clear.glassEffect(.regular, in: RoundedRectangle(cornerRadius: cornerRadius, style: .continuous))
-        }
     }
 }
