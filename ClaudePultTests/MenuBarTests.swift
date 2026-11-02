@@ -240,6 +240,20 @@ struct MenuBarDividerTests {
         #expect(!plain.contains("dividers") && !plain.contains("look"))
     }
 
+    /// «Левее / правее» from the keyboard: the chips' order goes back into elements and dividers.
+    @Test func arrangeTakesTheChipsOrder() {
+        var config = config()
+        config.addDivider(.bar, after: .session)
+        let bar = config.dividers[0]
+        // Chips: icon, alert, session, |, week, waiting → move the divider left past the session and the week left too.
+        config.arrange([.element(.icon), .element(.projectsAlert), .divider(bar), .element(.week), .element(.session), .element(.waiting)])
+        #expect(config.elements.filter(\.enabled).map(\.kind) == [.icon, .projectsAlert, .week, .session, .waiting])
+        #expect(config.dividers.map(\.after) == [.projectsAlert])
+        #expect(config.elements.count == MenuBarElement.Kind.allCases.count, "switched-off elements stay")
+        config.arrange([.divider(bar), .element(.icon), .element(.projectsAlert), .element(.week), .element(.session), .element(.waiting)])
+        #expect(config.dividers.map(\.after) == [nil])
+    }
+
     @Test func capsulesAlwaysDraw() {
         var config = MenuBarConfig.make(.minimum)
         let strip = MenuBarComposer.strip(config, MenuBarData())

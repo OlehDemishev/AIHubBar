@@ -265,43 +265,19 @@ private struct ModeEditor: View {
         .onChange(of: mode) { modes.update(mode) }
     }
 
-    /// The profile's modules top to bottom, as the panel shows them (SPEC-profiles §1).
+    /// The profile's blocks are edited in Settings → «Панель» (SPEC-settings §4); here only what it shows and a way there.
     private var panelSection: some View {
-        let list = mode.normalizedModules(hiddenBlocks: [])
+        let shown = mode.normalizedModules(hiddenBlocks: []).filter { $0.shown && modes.isOn($0.kind) }
         return Section {
-            ForEach(Array(list.enumerated()), id: \.element.kind) { index, module in
-                HStack {
-                    Toggle(isOn: Binding(
-                        get: { module.shown },
-                        set: { shown in edit { $0[index].shown = shown } }
-                    )) {
-                        Label(module.kind.title, systemImage: module.kind.symbol)
-                    }
-                    Spacer()
-                    ProfileModuleOptions(module: module) { new in edit { $0[index] = new } }
-                    if !module.kind.isBuiltIn {
-                        Button { modes.removeModule(module.kind, from: mode.id); mode.modules?.removeAll { $0.kind == module.kind } } label: {
-                            Image(systemName: "minus.circle")
-                        }
-                        .help("Убрать из профиля")
-                    }
-                    Button { edit { $0.swapAt(index, index - 1) } } label: { Image(systemName: "chevron.up") }
-                        .disabled(index == 0)
-                        .help("Выше")
-                    Button { edit { $0.swapAt(index, index + 1) } } label: { Image(systemName: "chevron.down") }
-                        .disabled(index == list.count - 1)
-                        .help("Ниже")
+            LabeledContent {
+                Button("Изменить в «Панели»…") {
+                    UserDefaults.standard.set(mode.id, forKey: PanelBuilder.profileKey)
+                    UserDefaults.standard.set(SettingsView.Tab.panel.rawValue, forKey: SettingsRoute.tabKey)
                 }
-                .buttonStyle(.borderless)
-            }
-            let addable = modes.activeModules.filter { kind in !kind.isBuiltIn && kind.isPanelBlock && !list.contains { $0.kind == kind } }
-            if !addable.isEmpty {
-                Menu("Добавить модуль") {
-                    ForEach(addable, id: \.self) { kind in
-                        Button { mode.modules = list + [ProfileModule(kind)] } label: { Label(kind.title, systemImage: kind.symbol) }
-                    }
-                }
-                .fixedSize()
+            } label: {
+                Label(shown.isEmpty ? String(localized: "Панель пуста") : shown.map(\.kind.title).joined(separator: " · "),
+                      systemImage: "rectangle.stack")
+                    .lineLimit(2)
             }
         } header: {
             Text("Панель")
@@ -310,11 +286,6 @@ private struct ModeEditor: View {
         }
     }
 
-    private func edit(_ change: (inout [ProfileModule]) -> Void) {
-        var list = mode.normalizedModules(hiddenBlocks: [])
-        change(&list)
-        mode.modules = list
-    }
 }
 
 /// A `~`-path with «Выбрать…»; red when the folder does not exist on this Mac (e.g. after an import).

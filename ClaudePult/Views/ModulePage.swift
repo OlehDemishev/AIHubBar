@@ -461,21 +461,41 @@ private struct ModuleTile: View {
 /// Settings → «Панель» (SPEC-settings §4): the current profile's modules top to bottom, dragged into order, with a
 /// sketch of the panel beside them.
 struct PanelBuilder: View {
+    /// Which profile «Панель» edits; «Профили» → profile → «Изменить в «Панели»» points it there.
+    static let profileKey = "settingsPanelProfile"
+
     @Environment(ModeStore.self) private var modes
+    @AppStorage(PanelBuilder.profileKey) private var profileID = ""
 
     @State private var targeted: ModuleKind?
 
+    /// The chosen profile, else the current one.
+    private var chosen: Mode? { modes.modes.first { $0.id == profileID } ?? modes.current }
+
     var body: some View {
-        if let mode = modes.current {
+        if let mode = chosen {
             ScrollView {
                 HStack(alignment: .top, spacing: 18) {
                     VStack(alignment: .leading, spacing: 10) {
-                        Text("Профиль «\(mode.name)»: перетащите блок на другой, чтобы поменять порядок")
+                        if modes.modes.count > 1 {
+                            Picker("Профиль", systemImage: "square.stack.3d.up", selection: Binding(get: { mode.id }, set: { profileID = $0 })) {
+                                ForEach(modes.modes, id: \.id) { profile in
+                                    Text(profile.id == modes.currentID ? String(localized: "\(profile.name) — текущий") : profile.name).tag(profile.id)
+                                }
+                            }
+                            .fixedSize()
+                        }
+                        Text("Перетащите блок на другой, чтобы поменять порядок, или нажмите ⌃ / ⌄")
                             .foregroundStyle(.secondary)
                         VStack(spacing: 0) {
                             ForEach(Array(visible(mode).enumerated()), id: \.element.kind) { index, module in
                                 if index > 0 { Divider().padding(.leading, 52) }
-                                PanelBuilderRow(module: module, mode: mode)
+                                PanelBuilderRow(module: module, mode: mode,
+                                                canMoveUp: index > 0, canMoveDown: index < visible(mode).count - 1) { offset in
+                                    let list = visible(mode)
+                                    guard list.indices.contains(index + offset) else { return }
+                                    move(mode, module.kind, onto: list[index + offset].kind)
+                                }
                                     .padding(.horizontal, 12)
                                     .background(targeted == module.kind ? Color.accentColor.opacity(0.15) : .clear)
                                     .draggable(module.kind.rawValue) {
@@ -493,6 +513,19 @@ struct PanelBuilder: View {
                         .background(RoundedRectangle(cornerRadius: 10).fill(Color(nsColor: .controlBackgroundColor)))
                         .clipShape(RoundedRectangle(cornerRadius: 10))
                         .overlay(RoundedRectangle(cornerRadius: 10).strokeBorder(Color.secondary.opacity(0.2), lineWidth: 0.5))
+                        let addable = modes.activeModules.filter { kind in
+                            kind.isPanelBlock && !kind.isBuiltIn && !mode.normalizedModules(hiddenBlocks: []).contains { $0.kind == kind }
+                        }
+                        if !addable.isEmpty {
+                            Menu {
+                                ForEach(addable, id: \.self) { kind in
+                                    Button { modes.addModule(kind, to: mode.id) } label: { Label(kind.title, systemImage: kind.symbol) }
+                                }
+                            } label: {
+                                Label("Добавить модуль", systemImage: "plus")
+                            }
+                            .fixedSize()
+                        }
                         Footnote(text: String(localized: "Здесь только включённые модули. Остальные — на странице «Модули»; что показывает модуль в каждом профиле — «Профили»."))
                     }
                     PanelSketch(modules: visible(mode).filter(\.shown).map(\.kind))
@@ -526,6 +559,10 @@ struct PanelBuilder: View {
 private struct PanelBuilderRow: View {
     let module: ProfileModule
     let mode: Mode
+    let canMoveUp: Bool
+    let canMoveDown: Bool
+    /// -1 up, +1 down: the buttons, the context menu and VoiceOver, for whoever doesn't drag.
+    let onMove: (Int) -> Void
 
     @Environment(ModeStore.self) private var modes
 
@@ -544,10 +581,29 @@ private struct PanelBuilderRow: View {
                 .toggleStyle(.switch)
                 .labelsHidden()
                 .controlSize(.small)
+            HStack(spacing: 2) {
+                Button { onMove(-1) } label: { Image(systemName: "chevron.up") }
+                    .disabled(!canMoveUp)
+                    .help("Выше")
+                Button { onMove(1) } label: { Image(systemName: "chevron.down") }
+                    .disabled(!canMoveDown)
+                    .help("Ниже")
+            }
+            .buttonStyle(.borderless)
         }
         .padding(.vertical, 8)
         .contentShape(Rectangle())
         .opacity(module.shown ? 1 : 0.55)
+        .contextMenu {
+            Button("Выше") { onMove(-1) }.disabled(!canMoveUp)
+            Button("Ниже") { onMove(1) }.disabled(!canMoveDown)
+            if !module.kind.isBuiltIn {
+                Divider()
+                Button("Убрать из профиля") { modes.removeModule(module.kind, from: mode.id) }
+            }
+        }
+        .accessibilityAction(named: Text("Выше")) { if canMoveUp { onMove(-1) } }
+        .accessibilityAction(named: Text("Ниже")) { if canMoveDown { onMove(1) } }
     }
 
     private func set(_ change: (inout ProfileModule) -> Void) {

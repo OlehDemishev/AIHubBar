@@ -139,16 +139,55 @@ struct MenuBarSettings: View {
 
     private var order: some View {
         FlowLayout(spacing: 6) {
-            ForEach(tokens) { token in
+            ForEach(Array(tokens.enumerated()), id: \.element.id) { index, token in
                 OrderChip(token: token, isSelected: selection == token.selection) {
                     selection = selection == token.selection ? nil : token.selection
                 } onDrop: { payload in
                     drop(payload, onto: token)
                 }
+                .contextMenu {
+                    Button("Левее") { shift(at: index, by: -1) }.disabled(index == 0)
+                    Button("Правее") { shift(at: index, by: 1) }.disabled(index == tokens.count - 1)
+                    Divider()
+                    Button("Убрать") { remove(token) }
+                }
+                .accessibilityAction(named: Text("Левее")) { shift(at: index, by: -1) }
+                .accessibilityAction(named: Text("Правее")) { shift(at: index, by: 1) }
+                .accessibilityAction(named: Text("Убрать")) { remove(token) }
             }
         }
         .padding(.vertical, 4)
         .animation(.snappy(duration: 0.2), value: tokens)
+    }
+
+    /// Swaps a chip with its neighbour — for the keyboard, the context menu and VoiceOver.
+    private func shift(at index: Int, by offset: Int) {
+        var list = tokens
+        guard list.indices.contains(index), list.indices.contains(index + offset) else { return }
+        list.swapAt(index, index + offset)
+        edit { $0.arrange(list.map(\.arrangement)) }
+    }
+
+    private func remove(_ token: OrderToken) {
+        switch token {
+        case let .element(kind): edit { $0.set(kind) { $0.enabled = false } }
+        case let .divider(divider): edit { $0.removeDivider(divider.id) }
+        }
+        if selection == token.selection { selection = nil }
+    }
+
+    /// The selected chip's place among the chips.
+    private var selectedIndex: Int? { tokens.firstIndex { $0.selection == selection } }
+
+    @ViewBuilder private func moveButtons() -> some View {
+        if let index = selectedIndex {
+            Button { shift(at: index, by: -1) } label: { Image(systemName: "chevron.left") }
+                .disabled(index == 0)
+                .help("Левее")
+            Button { shift(at: index, by: 1) } label: { Image(systemName: "chevron.right") }
+                .disabled(index == tokens.count - 1)
+                .help("Правее")
+        }
     }
 
     /// An element dropped on an element takes its place; a divider dropped on an element goes right after it, on a
@@ -182,6 +221,7 @@ struct MenuBarSettings: View {
                 HStack {
                     Label(element.kind.title, systemImage: element.kind.symbol).font(.headline)
                     Spacer()
+                    moveButtons()
                     Button("Убрать") {
                         edit { $0.set(kind) { $0.enabled = false } }
                         selection = nil
@@ -210,6 +250,7 @@ struct MenuBarSettings: View {
                     }
                     .labelsHidden()
                     .fixedSize()
+                    moveButtons()
                     Button("Убрать") {
                         edit { $0.removeDivider(id) }
                         selection = nil
@@ -291,6 +332,13 @@ private enum OrderToken: Identifiable, Hashable {
         switch self {
         case let .element(kind): .element(kind)
         case let .divider(divider): .divider(divider.id)
+        }
+    }
+
+    var arrangement: MenuBarConfig.Arranged {
+        switch self {
+        case let .element(kind): .element(kind)
+        case let .divider(divider): .divider(divider)
         }
     }
 
