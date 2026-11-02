@@ -1,17 +1,17 @@
 {
   "labels" : {
     "beta" : "Beta",
-    "help" : "Справка",
-    "replay" : "Показать ещё раз",
+    "help" : "Hilfe",
+    "replay" : "Noch einmal zeigen",
     "scripts" : "Skriptbefehle werden so aufgerufen: ~/Applications/AI\\ Hub\\ Bar.app/Contents/MacOS/AIHubBar --sessions",
-    "search" : "Поиск по справке",
-    "start" : "Как начать"
+    "search" : "Hilfe durchsuchen",
+    "start" : "So beginnen Sie"
   },
   "language" : "de",
   "topics" : [
     {
       "beta" : false,
-      "group" : "Основы",
+      "group" : "Grundlagen",
       "id" : "start",
       "sections" : [
         {
@@ -34,21 +34,21 @@
             }
           ],
           "monospaced" : false,
-          "title" : "Что умеет"
+          "title" : "Was es kann"
         }
       ],
       "steps" : [
-        "Нажмите ✦ в строке меню — откроется панель.",
-        "Создайте профиль: Настройки → «Профили» → «+» → «Помощник…».",
-        "На странице «Модули» оставьте только нужное — остальное выключится вместе с фоновой работой.",
-        "В «Строке меню» соберите, что видно рядом со значком."
+        "Klicken Sie in der Menüleiste auf ✦ — das Panel öffnet sich.",
+        "Legen Sie ein Profil an: Einstellungen → „Profile“ → „+“ → „Assistent…“.",
+        "Behalten Sie auf der Seite „Module“ nur, was Sie brauchen — der Rest wird samt Hintergrundarbeit ausgeschaltet.",
+        "Stellen Sie unter „Menüleiste“ zusammen, was neben dem Symbol erscheint."
       ],
-      "summary" : "AI Hub Bar держит под рукой лимиты AI, сессии агентов и ваши проекты — в строке меню Mac, в один клик.",
-      "title" : "Начало"
+      "summary" : "AI Hub Bar hält KI-Limits, Agentensitzungen und Ihre Projekte griffbereit — in der Menüleiste des Mac, mit einem Klick.",
+      "title" : "Erste Schritte"
     },
     {
       "beta" : false,
-      "group" : "Основы",
+      "group" : "Grundlagen",
       "id" : "menuBar",
       "sections" : [
         {
@@ -62,80 +62,80 @@
               "name" : "Neben dem Symbol"
             },
             {
-              "detail" : "Пробел, широкий пробел, «·», «|», тонкая линия, «/», «›» и «Новая группа» — сколько угодно раз. Видны, только когда с обеих сторон есть что показать.",
-              "name" : "Разделители"
+              "detail" : "Leerzeichen, breites Leerzeichen, „·“, „|“, dünne Linie, „/“, „›“ und „Neue Gruppe“ — beliebig oft. Sie sind nur sichtbar, wenn auf beiden Seiten etwas angezeigt wird.",
+              "name" : "Trenner"
             },
             {
-              "detail" : "Элементы между «Новыми группами» рисуются на общей скруглённой подложке.",
+              "detail" : "Elemente zwischen „Neue Gruppe“ werden auf einem gemeinsamen abgerundeten Hintergrund dargestellt.",
               "name" : "Kapseln nach Gruppen"
             },
             {
-              "detail" : "Переключили профиль — сменилась и строка меню.",
-              "name" : "У каждого профиля своя"
+              "detail" : "Wechseln Sie das Profil, wechselt auch die Menüleiste.",
+              "name" : "Jedes Profil hat seine eigene"
             }
           ],
           "monospaced" : false,
-          "title" : "Что умеет"
+          "title" : "Was es kann"
         }
       ],
       "steps" : [
-        "Откройте Настройки → «Строка меню».",
-        "Кликните элемент в «Порядке» — появятся его настройки: число, кольцо или полоска, порог.",
-        "Перетащите разделитель на элемент — он встанет сразу после него. Без мыши — «Левее» и «Правее»."
+        "Öffnen Sie Einstellungen → „Menüleiste“.",
+        "Klicken Sie auf ein Element unter „Reihenfolge“ — dann erscheinen seine Einstellungen: Zahl, Ring oder Balken, Schwelle.",
+        "Ziehen Sie einen Trenner auf ein Element — er landet direkt dahinter. Ohne Maus — „Weiter links“ und „Weiter rechts“."
       ],
-      "summary" : "Значок и числа рядом с часами: лимиты, ждущие ответа сессии, проблемы проектов — всё, что вы туда поставите.",
+      "summary" : "Symbol und Zahlen neben der Uhr: Limits, wartende Sitzungen, Probleme in Projekten — alles, was Sie dort platzieren.",
       "title" : "Menüleiste"
     },
     {
       "beta" : false,
-      "group" : "Основы",
+      "group" : "Grundlagen",
       "id" : "panel",
       "sections" : [
         {
           "facts" : [
             {
-              "detail" : "Поле сверху панели ищет проекты, сессии, команды и свои промпты. Открыть с клавиатуры — сочетание в «Основных».",
+              "detail" : "Das Feld oben im Panel durchsucht Projekte, Sitzungen, Befehle und eigene Prompts. Per Tastatur öffnen — Tastenkürzel unter „Allgemein“.",
               "name" : "Suchen"
             },
             {
-              "detail" : "Клик по заголовку блока сворачивает его; панель это запоминает.",
-              "name" : "Свернуть блок"
+              "detail" : "Ein Klick auf den Titel eines Blocks klappt ihn zu; das Panel merkt sich das.",
+              "name" : "Block zuklappen"
             },
             {
-              "detail" : "Тема, стеклянный фон, размер текста, ширина и плотность — Настройки → «Внешний вид».",
+              "detail" : "Design, Glashintergrund, Textgröße, Breite und Dichte — Einstellungen → „Darstellung“.",
               "name" : "Darstellung"
             }
           ],
           "monospaced" : false,
-          "title" : "Что умеет"
+          "title" : "Was es kann"
         }
       ],
       "steps" : [
-        "Откройте Настройки → «Панель».",
-        "Перетащите блок на другой или нажмите ⌃ / ⌄.",
-        "Справа видно, как панель выглядит сейчас."
+        "Öffnen Sie Einstellungen → „Panel“.",
+        "Ziehen Sie einen Block auf einen anderen oder klicken Sie auf ⌃ / ⌄.",
+        "Rechts sehen Sie, wie das Panel gerade aussieht."
       ],
-      "summary" : "Панель открывается по клику на ✦: блоки модулей текущего профиля сверху вниз и поиск.",
+      "summary" : "Das Panel öffnet sich per Klick auf ✦: die Modulblöcke des aktuellen Profils von oben nach unten und die Suche.",
       "title" : "Panel"
     },
     {
       "beta" : false,
-      "group" : "Основы",
+      "group" : "Grundlagen",
       "id" : "modules",
       "sections" : [
         {
           "facts" : [
             {
-              "detail" : "Выключенный модуль не работает в фоне, не виден в панели и строке меню и не присылает уведомлений. Его настройки и место в профилях сохраняются.",
-              "name" : "Выключатель"
+              "detail" : "Ein ausgeschaltetes Modul läuft nicht im Hintergrund, erscheint weder im Panel noch in der Menüleiste und sendet keine Mitteilungen. Seine Einstellungen und sein Platz in den Profilen bleiben erhalten.",
+              "name" : "Schalter"
             },
             {
-              "detail" : "Чипы на странице модуля: панель, строка меню, остров, уведомления, Telegram.",
+              "detail" : "Chips auf der Modulseite: Panel, Menüleiste, Insel, Mitteilungen, Telegram.",
               "name" : "Wo anzeigen"
             }
           ],
           "monospaced" : false,
-          "title" : "Что умеет"
+          "title" : "Was es kann"
         },
         {
           "facts" : [
@@ -153,11 +153,11 @@
         }
       ],
       "steps" : [
-        "Настройки → «Модули»: включите набор («Только AI», «Утилиты Mac», «Всё») или отдельные плитки.",
-        "Клик по плитке — страница модуля: выключатель, «Где показывать» и все его настройки."
+        "Einstellungen → „Module“: Aktivieren Sie ein Set („Nur KI“, „Mac-Werkzeuge“, „Alles“) oder einzelne Kacheln.",
+        "Ein Klick auf eine Kachel öffnet die Modulseite: Schalter, „Wo anzeigen“ und alle Einstellungen."
       ],
-      "summary" : "Модуль — одна возможность AI Hub Bar. Профиль решает, какие модули видны в панели и в каком порядке.",
-      "title" : "Модули и профили"
+      "summary" : "Ein Modul ist eine Funktion von AI Hub Bar. Das Profil bestimmt, welche Module im Panel erscheinen und in welcher Reihenfolge.",
+      "title" : "Module und Profile"
     },
     {
       "beta" : false,
@@ -171,7 +171,7 @@
               "name" : "Block „Limits“"
             },
             {
-              "detail" : "Codex, Copilot, Gemini, Cursor и расход по API — такими же карточками, как Claude.",
+              "detail" : "Codex, Copilot, Gemini, Cursor und API-Verbrauch — als dieselben Karten wie Claude.",
               "name" : "Andere KI"
             },
             {
@@ -192,14 +192,14 @@
             }
           ],
           "monospaced" : false,
-          "title" : "Что умеет"
+          "title" : "Was es kann"
         }
       ],
       "steps" : [
-        "Пороги уведомлений — на странице «Лимиты AI».",
-        "Другие AI подключаются в «Сервисы AI»: вход в их CLI или ключ API."
+        "Schwellen für Mitteilungen — auf der Seite „KI-Limits“.",
+        "Andere KIs verbinden Sie unter „KI-Dienste“: per Anmeldung in ihrer CLI oder mit einem API-Schlüssel."
       ],
-      "summary" : "Сколько осталось от 5-часовой сессии и недели подписки Claude — и от лимитов других AI.",
+      "summary" : "Wie viel von der 5-Stunden-Sitzung und der Woche Ihres Claude-Abos übrig ist — und von den Limits anderer KIs.",
       "title" : "KI-Limits"
     },
     {
@@ -214,8 +214,8 @@
               "name" : "Liste"
             },
             {
-              "detail" : "«Разрешить» и «Отклонить» — в уведомлении, в строке сессии, в острове и, если включено, в Telegram. Работает ответ, который пришёл первым.",
-              "name" : "Разрешения"
+              "detail" : "„Erlauben“ und „Ablehnen“ — in der Mitteilung, in der Sitzungszeile, auf der Insel und, falls aktiviert, in Telegram. Es gilt die Antwort, die zuerst eintrifft.",
+              "name" : "Berechtigungen"
             },
             {
               "detail" : "Den Terminal-Tab dieser Sitzung nach vorne holen; bei Sitzungen der Claude-App diese Sitzung in Claude öffnen, sonst den Ordner.",
@@ -239,14 +239,14 @@
             }
           ],
           "monospaced" : false,
-          "title" : "Что умеет"
+          "title" : "Was es kann"
         }
       ],
       "steps" : [
-        "Установите hooks: страница «Сессии агентов» → Hooks.",
-        "Отвечайте на запросы разрешений прямо из уведомления или строки сессии."
+        "Installieren Sie die hooks: Seite „Agentensitzungen“ → Hooks.",
+        "Beantworten Sie Berechtigungsanfragen direkt in der Mitteilung oder in der Sitzungszeile."
       ],
-      "summary" : "Все сессии Claude Code на этом Маке: что делают, кто ждёт ответа, фоновые задачи и очередь.",
+      "summary" : "Alle Claude-Code-Sitzungen auf diesem Mac: was sie tun, welche auf eine Antwort warten, Hintergrundaufgaben und die Warteschlange.",
       "title" : "Agentensitzungen"
     },
     {
@@ -270,13 +270,13 @@
             }
           ],
           "monospaced" : false,
-          "title" : "Что умеет"
+          "title" : "Was es kann"
         }
       ],
       "steps" : [
-        "Настройки → «Сервисы AI»: зелёная точка — сервис найден или настроен."
+        "Einstellungen → „KI-Dienste“: Ein grüner Punkt bedeutet, dass der Dienst gefunden oder eingerichtet ist."
       ],
-      "summary" : "Агенты и модели, которые AI Hub Bar находит и запускает: Claude Code, Codex, Gemini, Copilot, Cursor и модели по API.",
+      "summary" : "Agenten und Modelle, die AI Hub Bar findet und startet: Claude Code, Codex, Gemini, Copilot, Cursor und Modelle per API.",
       "title" : "KI-Dienste"
     },
     {
@@ -312,7 +312,7 @@
             }
           ],
           "monospaced" : false,
-          "title" : "Git-репозитории"
+          "title" : "Git-Repositorys"
         },
         {
           "facts" : [
@@ -342,9 +342,9 @@
         }
       ],
       "steps" : [
-        "Настройки → «Профили» → профиль → «Источник»: папка с проектами."
+        "Einstellungen → „Profile“ → Profil → „Quelle“: der Ordner mit den Projekten."
       ],
-      "summary" : "Проекты профиля: git-репозитории или папки с работой — состояние, PR, этапы и команды для AI.",
+      "summary" : "Die Projekte des Profils: Git-Repositorys oder Arbeitsordner — Status, PRs, Phasen und KI-Befehle.",
       "title" : "Projekte"
     },
     {
@@ -367,19 +367,19 @@
               "name" : "Fenster „Kalender“"
             },
             {
-              "detail" : "На странице модуля «Ближайшее»: за сколько напоминать и дублировать ли в Telegram.",
+              "detail" : "Auf der Seite des Moduls „Demnächst“: wie lange vorher erinnert wird und ob auch an Telegram gesendet wird.",
               "name" : "Erinnerungen"
             }
           ],
           "monospaced" : false,
-          "title" : "Что умеет"
+          "title" : "Was es kann"
         }
       ],
       "steps" : [
-        "Включите календарь в профиле — или кнопкой «Включить в профиле» на плитке «Ближайшее»."
+        "Aktivieren Sie den Kalender im Profil — oder mit der Taste „Im Profil einschalten“ auf der Kachel „Demnächst“."
       ],
-      "summary" : "Дедлайны и публикации из карточек проектов и контент-плана — на неделю вперёд и в окне «Календарь».",
-      "title" : "Ближайшее и календарь"
+      "summary" : "Deadlines und Veröffentlichungen aus Projektkarten und dem Content-Plan — eine Woche im Voraus und im Fenster „Kalender“.",
+      "title" : "Demnächst und Kalender"
     },
     {
       "beta" : false,
@@ -410,7 +410,7 @@
             }
           ],
           "monospaced" : false,
-          "title" : "Что умеет"
+          "title" : "Was es kann"
         }
       ],
       "steps" : [
@@ -427,32 +427,32 @@
         {
           "facts" : [
             {
-              "detail" : "Слева и справа от чёлки — лимит и сессии; что именно, выбирается на странице модуля.",
-              "name" : "Ушки"
+              "detail" : "Links und rechts der Notch — Limit und Sitzungen; was genau, wählen Sie auf der Modulseite.",
+              "name" : "Ohren"
             },
             {
-              "detail" : "Наведите курсор на чёлку — откроется карточка с лимитами и тем, что делает Claude.",
-              "name" : "Карточка"
+              "detail" : "Bewegen Sie den Zeiger auf die Notch — es öffnet sich eine Karte mit Limits und dem, was Claude gerade tut.",
+              "name" : "Karte"
             },
             {
-              "detail" : "Запрос разрешения появляется в острове с «Разрешить» и «Отклонить»; ⌃⌥Y / ⌃⌥N — с клавиатуры, если включено.",
-              "name" : "Запросы"
+              "detail" : "Eine Berechtigungsanfrage erscheint auf der Insel mit „Erlauben“ und „Ablehnen“; ⌃⌥Y / ⌃⌥N per Tastatur, falls aktiviert.",
+              "name" : "Anfragen"
             },
             {
-              "detail" : "Перетащите файл на остров — откроются AI-команды профиля для него.",
-              "name" : "Файл на остров"
+              "detail" : "Ziehen Sie eine Datei auf die Insel — die KI-Befehle des Profils dafür öffnen sich.",
+              "name" : "Datei auf die Insel"
             },
             {
-              "detail" : "На экранах без чёлки — пилюля сверху по центру.",
-              "name" : "Без чёлки"
+              "detail" : "Auf Bildschirmen ohne Notch — eine Pille oben in der Mitte.",
+              "name" : "Ohne Notch"
             }
           ],
           "monospaced" : false,
-          "title" : "Что умеет"
+          "title" : "Was es kann"
         }
       ],
       "steps" : [
-        "Включите «Остров у чёлки» на странице «Модули»."
+        "Aktivieren Sie „Notch-Insel“ auf der Seite „Module“."
       ],
       "summary" : "Eine schwarze Insel um die Notch des MacBook: Limit und Sitzungen daneben, beim Darüberfahren eine Karte mit Limits und dem, was Claude gerade tut.",
       "title" : "Notch-Insel"
@@ -465,28 +465,28 @@
         {
           "facts" : [
             {
-              "detail" : "Слово в чужой раскладке исправляется после пробела, и раскладка переключается.",
-              "name" : "Само"
+              "detail" : "Ein Wort im falschen Layout wird nach dem Leerzeichen korrigiert, und das Layout wechselt.",
+              "name" : "Automatisch"
             },
             {
-              "detail" : "Переводит последнее слово или отменяет неверное исправление — и запоминает слово.",
-              "name" : "Двойной Shift"
+              "detail" : "Wandelt das letzte Wort um oder macht eine falsche Korrektur rückgängig — und merkt sich das Wort.",
+              "name" : "Zweimal Shift"
             },
             {
-              "detail" : "Переводит выделенный текст.",
+              "detail" : "Wandelt den markierten Text ins andere Layout um.",
               "name" : "⌥⇧"
             },
             {
-              "detail" : "Нужен «Универсальный доступ»: модуль сам попросит и покажет, где его включить.",
-              "name" : "Доступ"
+              "detail" : "Benötigt „Bedienungshilfen“: Das Modul fragt selbst danach und zeigt, wo Sie es einschalten.",
+              "name" : "Zugriff"
             }
           ],
           "monospaced" : false,
-          "title" : "Что умеет"
+          "title" : "Was es kann"
         }
       ],
       "steps" : [
-        "Включите «Бета-версии» в «Основных», затем «Раскладку» на странице «Модули»."
+        "Aktivieren Sie „Beta-Versionen“ unter „Allgemein“, dann „Tastaturlayout“ auf der Seite „Module“."
       ],
       "summary" : "Ein Wort im falschen Tastaturlayout wird von selbst im richtigen neu geschrieben, und das Layout wechselt. Zweimal Shift – das letzte Wort, ⌥⇧ – der markierte Text. Die Sprache steht in der Menüleiste.",
       "title" : "Tastaturlayout"
@@ -524,52 +524,52 @@
             }
           ],
           "monospaced" : false,
-          "title" : "Что умеет"
+          "title" : "Was es kann"
         }
       ],
       "steps" : [
 
       ],
-      "summary" : "Ресурсы Mac, «Не спать», быстрые переключатели, история буфера, заметки и свои команды — каждое включается отдельно.",
+      "summary" : "Mac-Ressourcen, „Wach bleiben“, Schnellschalter, Zwischenablage-Verlauf, Notizen und eigene Befehle — jedes wird einzeln eingeschaltet.",
       "title" : "Mac-Werkzeuge"
     },
     {
       "beta" : false,
-      "group" : "Ещё",
+      "group" : "Mehr",
       "id" : "alerts",
       "sections" : [
         {
           "facts" : [
             {
-              "detail" : "У каждого модуля на странице — «Как часто уведомлять»: каждый раз, не чаще раза в 15 мин, в час, в день или не присылать.",
-              "name" : "Как часто"
+              "detail" : "Jede Modulseite hat „Wie oft benachrichtigen“: jedes Mal, höchstens alle 15 Min., stündlich, täglich oder nie.",
+              "name" : "Wie oft"
             },
             {
-              "detail" : "Бот — в «Основные» → Telegram. Что дублировать — чипом «Telegram» на странице модуля.",
+              "detail" : "Der Bot — unter „Allgemein“ → Telegram. Was weitergeleitet wird, legen Sie mit dem Chip „Telegram“ auf der Modulseite fest.",
               "name" : "Telegram"
             },
             {
-              "detail" : "Запросы разрешений Claude можно принимать и отклонять кнопками в Telegram — отдельный бот, страница «Сессии агентов».",
+              "detail" : "Berechtigungsanfragen von Claude können Sie mit Tasten in Telegram annehmen oder ablehnen — ein eigener Bot, Seite „Agentensitzungen“.",
               "name" : "Antworten aus Telegram"
             },
             {
-              "detail" : "Ведёт к сессии, PR, журналу или отчёту.",
-              "name" : "Клик по уведомлению"
+              "detail" : "Führt zur Sitzung, zum PR, zum Protokoll oder zum Bericht.",
+              "name" : "Klick auf eine Mitteilung"
             }
           ],
           "monospaced" : false,
-          "title" : "Что умеет"
+          "title" : "Was es kann"
         }
       ],
       "steps" : [
 
       ],
-      "summary" : "Что приходит уведомлением macOS и в Telegram, и как часто.",
-      "title" : "Уведомления и Telegram"
+      "summary" : "Was als macOS-Mitteilung und in Telegram ankommt — und wie oft.",
+      "title" : "Mitteilungen und Telegram"
     },
     {
       "beta" : false,
-      "group" : "Ещё",
+      "group" : "Mehr",
       "id" : "commandLine",
       "sections" : [
         {
@@ -604,13 +604,13 @@
             }
           ],
           "monospaced" : true,
-          "title" : "Что умеет"
+          "title" : "Was es kann"
         }
       ],
       "steps" : [
 
       ],
-      "summary" : "AI Hub Bar отвечает и из Терминала — для скриптов и автоматизаций.",
+      "summary" : "AI Hub Bar antwortet auch im Terminal — für Skripte und Automationen.",
       "title" : "Für Skripte"
     }
   ]

@@ -1,17 +1,17 @@
 {
   "labels" : {
     "beta" : "beta",
-    "help" : "Справка",
-    "replay" : "Показать ещё раз",
+    "help" : "Bantuan",
+    "replay" : "Tampilkan lagi",
     "scripts" : "Perintah skrip dipanggil seperti ini: ~/Applications/AI\\ Hub\\ Bar.app/Contents/MacOS/AIHubBar --sessions",
-    "search" : "Поиск по справке",
-    "start" : "Как начать"
+    "search" : "Cari di bantuan",
+    "start" : "Cara memulai"
   },
   "language" : "id",
   "topics" : [
     {
       "beta" : false,
-      "group" : "Основы",
+      "group" : "Dasar-dasar",
       "id" : "start",
       "sections" : [
         {
@@ -34,21 +34,21 @@
             }
           ],
           "monospaced" : false,
-          "title" : "Что умеет"
+          "title" : "Yang bisa dilakukan"
         }
       ],
       "steps" : [
-        "Нажмите ✦ в строке меню — откроется панель.",
-        "Создайте профиль: Настройки → «Профили» → «+» → «Помощник…».",
-        "На странице «Модули» оставьте только нужное — остальное выключится вместе с фоновой работой.",
-        "В «Строке меню» соберите, что видно рядом со значком."
+        "Klik ✦ di bar menu — panel akan terbuka.",
+        "Buat profil: Pengaturan → «Profil» → «+» → «Asisten…».",
+        "Di halaman «Modul», sisakan yang diperlukan saja — sisanya mati bersama pekerjaan latar belakangnya.",
+        "Di «Bar Menu», pilih apa yang tampil di samping ikon."
       ],
-      "summary" : "AI Hub Bar держит под рукой лимиты AI, сессии агентов и ваши проекты — в строке меню Mac, в один клик.",
-      "title" : "Начало"
+      "summary" : "AI Hub Bar menjaga batas AI, sesi agen, dan proyek Anda tetap dekat — di bar menu Mac, cukup sekali klik.",
+      "title" : "Memulai"
     },
     {
       "beta" : false,
-      "group" : "Основы",
+      "group" : "Dasar-dasar",
       "id" : "menuBar",
       "sections" : [
         {
@@ -62,80 +62,80 @@
               "name" : "Di samping ikon"
             },
             {
-              "detail" : "Пробел, широкий пробел, «·», «|», тонкая линия, «/», «›» и «Новая группа» — сколько угодно раз. Видны, только когда с обеих сторон есть что показать.",
-              "name" : "Разделители"
+              "detail" : "Spasi, spasi lebar, «·», «|», garis tipis, «/», «›», dan «Grup baru» — sebanyak yang Anda mau. Hanya tampil jika di kedua sisinya ada yang ditampilkan.",
+              "name" : "Pemisah"
             },
             {
-              "detail" : "Элементы между «Новыми группами» рисуются на общей скруглённой подложке.",
+              "detail" : "Elemen di antara «Grup baru» digambar di atas latar bersama yang membulat.",
               "name" : "Kapsul per grup"
             },
             {
-              "detail" : "Переключили профиль — сменилась и строка меню.",
-              "name" : "У каждого профиля своя"
+              "detail" : "Ganti profil — bar menu ikut berganti.",
+              "name" : "Tiap profil punya sendiri"
             }
           ],
           "monospaced" : false,
-          "title" : "Что умеет"
+          "title" : "Yang bisa dilakukan"
         }
       ],
       "steps" : [
-        "Откройте Настройки → «Строка меню».",
-        "Кликните элемент в «Порядке» — появятся его настройки: число, кольцо или полоска, порог.",
-        "Перетащите разделитель на элемент — он встанет сразу после него. Без мыши — «Левее» и «Правее»."
+        "Buka Pengaturan → «Bar Menu».",
+        "Klik elemen di «Urutan» — pengaturannya akan muncul: angka, cincin atau bilah, ambang.",
+        "Seret pemisah ke elemen — pemisah akan berada tepat setelahnya. Tanpa mouse — «Lebih ke kiri» dan «Lebih ke kanan»."
       ],
-      "summary" : "Значок и числа рядом с часами: лимиты, ждущие ответа сессии, проблемы проектов — всё, что вы туда поставите.",
+      "summary" : "Ikon dan angka di samping jam: batas, sesi yang menunggu jawaban, masalah proyek — apa pun yang Anda taruh di sana.",
       "title" : "Bar Menu"
     },
     {
       "beta" : false,
-      "group" : "Основы",
+      "group" : "Dasar-dasar",
       "id" : "panel",
       "sections" : [
         {
           "facts" : [
             {
-              "detail" : "Поле сверху панели ищет проекты, сессии, команды и свои промпты. Открыть с клавиатуры — сочетание в «Основных».",
+              "detail" : "Kolom di atas panel mencari proyek, sesi, perintah, dan prompt Anda sendiri. Untuk membukanya dari keyboard — pintasan di «Umum».",
               "name" : "Cari"
             },
             {
-              "detail" : "Клик по заголовку блока сворачивает его; панель это запоминает.",
-              "name" : "Свернуть блок"
+              "detail" : "Klik judul blok untuk menciutkannya; panel mengingatnya.",
+              "name" : "Ciutkan blok"
             },
             {
-              "detail" : "Тема, стеклянный фон, размер текста, ширина и плотность — Настройки → «Внешний вид».",
+              "detail" : "Tema, latar kaca, ukuran teks, lebar, dan kerapatan — Pengaturan → «Tampilan».",
               "name" : "Tampilan"
             }
           ],
           "monospaced" : false,
-          "title" : "Что умеет"
+          "title" : "Yang bisa dilakukan"
         }
       ],
       "steps" : [
-        "Откройте Настройки → «Панель».",
-        "Перетащите блок на другой или нажмите ⌃ / ⌄.",
-        "Справа видно, как панель выглядит сейчас."
+        "Buka Pengaturan → «Panel».",
+        "Seret blok ke blok lain atau klik ⌃ / ⌄.",
+        "Di kanan terlihat tampilan panel saat ini."
       ],
-      "summary" : "Панель открывается по клику на ✦: блоки модулей текущего профиля сверху вниз и поиск.",
+      "summary" : "Panel terbuka dengan klik ✦: blok modul profil saat ini dari atas ke bawah, dan pencarian.",
       "title" : "Panel"
     },
     {
       "beta" : false,
-      "group" : "Основы",
+      "group" : "Dasar-dasar",
       "id" : "modules",
       "sections" : [
         {
           "facts" : [
             {
-              "detail" : "Выключенный модуль не работает в фоне, не виден в панели и строке меню и не присылает уведомлений. Его настройки и место в профилях сохраняются.",
-              "name" : "Выключатель"
+              "detail" : "Modul yang dimatikan tidak berjalan di latar belakang, tidak tampil di panel dan bar menu, dan tidak mengirim pemberitahuan. Pengaturan dan tempatnya di profil tetap tersimpan.",
+              "name" : "Sakelar"
             },
             {
-              "detail" : "Чипы на странице модуля: панель, строка меню, остров, уведомления, Telegram.",
+              "detail" : "Chip di halaman modul: panel, bar menu, pulau, pemberitahuan, Telegram.",
               "name" : "Tampilkan di"
             }
           ],
           "monospaced" : false,
-          "title" : "Что умеет"
+          "title" : "Yang bisa dilakukan"
         },
         {
           "facts" : [
@@ -153,11 +153,11 @@
         }
       ],
       "steps" : [
-        "Настройки → «Модули»: включите набор («Только AI», «Утилиты Mac», «Всё») или отдельные плитки.",
-        "Клик по плитке — страница модуля: выключатель, «Где показывать» и все его настройки."
+        "Pengaturan → «Modul»: nyalakan satu set («Hanya AI», «Utilitas Mac», «Semua») atau ubin satu per satu.",
+        "Klik ubin untuk membuka halaman modul: sakelar, «Tampilkan di», dan semua pengaturannya."
       ],
-      "summary" : "Модуль — одна возможность AI Hub Bar. Профиль решает, какие модули видны в панели и в каком порядке.",
-      "title" : "Модули и профили"
+      "summary" : "Modul adalah satu fitur AI Hub Bar. Profil menentukan modul mana yang tampil di panel dan urutannya.",
+      "title" : "Modul dan profil"
     },
     {
       "beta" : false,
@@ -171,7 +171,7 @@
               "name" : "Blok «Batas»"
             },
             {
-              "detail" : "Codex, Copilot, Gemini, Cursor и расход по API — такими же карточками, как Claude.",
+              "detail" : "Codex, Copilot, Gemini, Cursor, dan pemakaian API — dalam kartu yang sama seperti Claude.",
               "name" : "AI lain"
             },
             {
@@ -192,14 +192,14 @@
             }
           ],
           "monospaced" : false,
-          "title" : "Что умеет"
+          "title" : "Yang bisa dilakukan"
         }
       ],
       "steps" : [
-        "Пороги уведомлений — на странице «Лимиты AI».",
-        "Другие AI подключаются в «Сервисы AI»: вход в их CLI или ключ API."
+        "Ambang pemberitahuan — di halaman «Batas AI».",
+        "AI lain dihubungkan di «Layanan AI»: masuk ke CLI-nya atau dengan kunci API."
       ],
-      "summary" : "Сколько осталось от 5-часовой сессии и недели подписки Claude — и от лимитов других AI.",
+      "summary" : "Berapa sisa sesi 5 jam dan minggu langganan Claude — juga sisa batas AI lain.",
       "title" : "Batas AI"
     },
     {
@@ -214,8 +214,8 @@
               "name" : "Daftar"
             },
             {
-              "detail" : "«Разрешить» и «Отклонить» — в уведомлении, в строке сессии, в острове и, если включено, в Telegram. Работает ответ, который пришёл первым.",
-              "name" : "Разрешения"
+              "detail" : "«Izinkan» dan «Tolak» — di pemberitahuan, baris sesi, pulau, dan, jika aktif, di Telegram. Jawaban yang tiba lebih dulu yang berlaku.",
+              "name" : "Izin"
             },
             {
               "detail" : "Bawa tab Terminal sesi ini ke depan; untuk sesi aplikasi Claude buka sesi ini di Claude, selain itu foldernya.",
@@ -239,14 +239,14 @@
             }
           ],
           "monospaced" : false,
-          "title" : "Что умеет"
+          "title" : "Yang bisa dilakukan"
         }
       ],
       "steps" : [
-        "Установите hooks: страница «Сессии агентов» → Hooks.",
-        "Отвечайте на запросы разрешений прямо из уведомления или строки сессии."
+        "Pasang hooks: halaman «Sesi agen» → Hooks.",
+        "Jawab permintaan izin langsung dari pemberitahuan atau baris sesi."
       ],
-      "summary" : "Все сессии Claude Code на этом Маке: что делают, кто ждёт ответа, фоновые задачи и очередь.",
+      "summary" : "Semua sesi Claude Code di Mac ini: apa yang dikerjakan, mana yang menunggu jawaban, tugas latar belakang, dan antrean.",
       "title" : "Sesi agen"
     },
     {
@@ -270,13 +270,13 @@
             }
           ],
           "monospaced" : false,
-          "title" : "Что умеет"
+          "title" : "Yang bisa dilakukan"
         }
       ],
       "steps" : [
-        "Настройки → «Сервисы AI»: зелёная точка — сервис найден или настроен."
+        "Pengaturan → «Layanan AI»: titik hijau berarti layanan ditemukan atau sudah diatur."
       ],
-      "summary" : "Агенты и модели, которые AI Hub Bar находит и запускает: Claude Code, Codex, Gemini, Copilot, Cursor и модели по API.",
+      "summary" : "Agen dan model yang ditemukan dan dijalankan AI Hub Bar: Claude Code, Codex, Gemini, Copilot, Cursor, dan model lewat API.",
       "title" : "Layanan AI"
     },
     {
@@ -312,7 +312,7 @@
             }
           ],
           "monospaced" : false,
-          "title" : "Git-репозитории"
+          "title" : "Repositori Git"
         },
         {
           "facts" : [
@@ -342,9 +342,9 @@
         }
       ],
       "steps" : [
-        "Настройки → «Профили» → профиль → «Источник»: папка с проектами."
+        "Pengaturan → «Profil» → profil → «Sumber»: folder berisi proyek."
       ],
-      "summary" : "Проекты профиля: git-репозитории или папки с работой — состояние, PR, этапы и команды для AI.",
+      "summary" : "Proyek profil: repositori git atau folder kerja — status, PR, tahap, dan perintah AI.",
       "title" : "Proyek"
     },
     {
@@ -367,19 +367,19 @@
               "name" : "Jendela «Kalender»"
             },
             {
-              "detail" : "На странице модуля «Ближайшее»: за сколько напоминать и дублировать ли в Telegram.",
+              "detail" : "Di halaman modul «Mendatang»: berapa lama sebelumnya mengingatkan dan apakah juga dikirim ke Telegram.",
               "name" : "Pengingat"
             }
           ],
           "monospaced" : false,
-          "title" : "Что умеет"
+          "title" : "Yang bisa dilakukan"
         }
       ],
       "steps" : [
-        "Включите календарь в профиле — или кнопкой «Включить в профиле» на плитке «Ближайшее»."
+        "Nyalakan kalender di profil — atau lewat tombol «Aktifkan di profil» pada ubin «Mendatang»."
       ],
-      "summary" : "Дедлайны и публикации из карточек проектов и контент-плана — на неделю вперёд и в окне «Календарь».",
-      "title" : "Ближайшее и календарь"
+      "summary" : "Tenggat dan publikasi dari kartu proyek dan rencana konten — untuk seminggu ke depan dan di jendela «Kalender».",
+      "title" : "Mendatang dan kalender"
     },
     {
       "beta" : false,
@@ -410,7 +410,7 @@
             }
           ],
           "monospaced" : false,
-          "title" : "Что умеет"
+          "title" : "Yang bisa dilakukan"
         }
       ],
       "steps" : [
@@ -427,32 +427,32 @@
         {
           "facts" : [
             {
-              "detail" : "Слева и справа от чёлки — лимит и сессии; что именно, выбирается на странице модуля.",
-              "name" : "Ушки"
+              "detail" : "Di kiri dan kanan notch — batas dan sesi; isinya dipilih di halaman modul.",
+              "name" : "Telinga"
             },
             {
-              "detail" : "Наведите курсор на чёлку — откроется карточка с лимитами и тем, что делает Claude.",
-              "name" : "Карточка"
+              "detail" : "Arahkan kursor ke notch — kartu berisi batas dan apa yang dikerjakan Claude akan terbuka.",
+              "name" : "Kartu"
             },
             {
-              "detail" : "Запрос разрешения появляется в острове с «Разрешить» и «Отклонить»; ⌃⌥Y / ⌃⌥N — с клавиатуры, если включено.",
-              "name" : "Запросы"
+              "detail" : "Permintaan izin muncul di pulau dengan «Izinkan» dan «Tolak»; ⌃⌥Y / ⌃⌥N dari keyboard, jika aktif.",
+              "name" : "Permintaan"
             },
             {
-              "detail" : "Перетащите файл на остров — откроются AI-команды профиля для него.",
-              "name" : "Файл на остров"
+              "detail" : "Seret file ke pulau — perintah AI profil untuk file itu akan terbuka.",
+              "name" : "File ke pulau"
             },
             {
-              "detail" : "На экранах без чёлки — пилюля сверху по центру.",
-              "name" : "Без чёлки"
+              "detail" : "Di layar tanpa notch — pil di atas tengah.",
+              "name" : "Tanpa notch"
             }
           ],
           "monospaced" : false,
-          "title" : "Что умеет"
+          "title" : "Yang bisa dilakukan"
         }
       ],
       "steps" : [
-        "Включите «Остров у чёлки» на странице «Модули»."
+        "Nyalakan «Pulau notch» di halaman «Modul»."
       ],
       "summary" : "Pulau hitam di sekitar notch MacBook: batas dan sesi di sampingnya; arahkan kursor untuk kartu berisi batas dan apa yang sedang dikerjakan Claude.",
       "title" : "Pulau notch"
@@ -465,28 +465,28 @@
         {
           "facts" : [
             {
-              "detail" : "Слово в чужой раскладке исправляется после пробела, и раскладка переключается.",
-              "name" : "Само"
+              "detail" : "Kata yang diketik dengan tata letak yang salah diperbaiki setelah spasi, dan tata letaknya berganti.",
+              "name" : "Otomatis"
             },
             {
-              "detail" : "Переводит последнее слово или отменяет неверное исправление — и запоминает слово.",
-              "name" : "Двойной Shift"
+              "detail" : "Mengubah kata terakhir atau membatalkan koreksi yang salah — dan mengingat kata itu.",
+              "name" : "Shift dua kali"
             },
             {
-              "detail" : "Переводит выделенный текст.",
+              "detail" : "Mengubah teks yang dipilih ke tata letak lain.",
               "name" : "⌥⇧"
             },
             {
-              "detail" : "Нужен «Универсальный доступ»: модуль сам попросит и покажет, где его включить.",
-              "name" : "Доступ"
+              "detail" : "Perlu «Aksesibilitas»: modul akan memintanya sendiri dan menunjukkan tempat menyalakannya.",
+              "name" : "Akses"
             }
           ],
           "monospaced" : false,
-          "title" : "Что умеет"
+          "title" : "Yang bisa dilakukan"
         }
       ],
       "steps" : [
-        "Включите «Бета-версии» в «Основных», затем «Раскладку» на странице «Модули»."
+        "Nyalakan «Versi beta» di «Umum», lalu «Tata letak keyboard» di halaman «Modul»."
       ],
       "summary" : "Kata yang diketik dengan tata letak yang salah otomatis diketik ulang dengan yang benar, dan tata letaknya berganti. Shift dua kali — kata terakhir, ⌥⇧ — teks yang dipilih. Bahasa tampil di bar menu.",
       "title" : "Tata letak keyboard"
@@ -524,52 +524,52 @@
             }
           ],
           "monospaced" : false,
-          "title" : "Что умеет"
+          "title" : "Yang bisa dilakukan"
         }
       ],
       "steps" : [
 
       ],
-      "summary" : "Ресурсы Mac, «Не спать», быстрые переключатели, история буфера, заметки и свои команды — каждое включается отдельно.",
+      "summary" : "Sumber daya Mac, «Tetap terjaga», sakelar cepat, riwayat papan klip, catatan, dan perintah Anda sendiri — masing-masing dinyalakan terpisah.",
       "title" : "Utilitas Mac"
     },
     {
       "beta" : false,
-      "group" : "Ещё",
+      "group" : "Lainnya",
       "id" : "alerts",
       "sections" : [
         {
           "facts" : [
             {
-              "detail" : "У каждого модуля на странице — «Как часто уведомлять»: каждый раз, не чаще раза в 15 мин, в час, в день или не присылать.",
-              "name" : "Как часто"
+              "detail" : "Setiap halaman modul punya «Seberapa sering memberi tahu»: setiap kali, paling sering sekali per 15 menit, per jam, per hari, atau tidak sama sekali.",
+              "name" : "Seberapa sering"
             },
             {
-              "detail" : "Бот — в «Основные» → Telegram. Что дублировать — чипом «Telegram» на странице модуля.",
+              "detail" : "Bot ada di «Umum» → Telegram. Apa yang diteruskan diatur dengan chip «Telegram» di halaman modul.",
               "name" : "Telegram"
             },
             {
-              "detail" : "Запросы разрешений Claude можно принимать и отклонять кнопками в Telegram — отдельный бот, страница «Сессии агентов».",
+              "detail" : "Permintaan izin Claude bisa diterima atau ditolak dengan tombol di Telegram — bot terpisah, halaman «Sesi agen».",
               "name" : "Jawaban dari Telegram"
             },
             {
-              "detail" : "Ведёт к сессии, PR, журналу или отчёту.",
-              "name" : "Клик по уведомлению"
+              "detail" : "Membuka sesi, PR, log, atau laporan.",
+              "name" : "Klik pemberitahuan"
             }
           ],
           "monospaced" : false,
-          "title" : "Что умеет"
+          "title" : "Yang bisa dilakukan"
         }
       ],
       "steps" : [
 
       ],
-      "summary" : "Что приходит уведомлением macOS и в Telegram, и как часто.",
-      "title" : "Уведомления и Telegram"
+      "summary" : "Apa yang datang sebagai pemberitahuan macOS dan ke Telegram, serta seberapa sering.",
+      "title" : "Pemberitahuan dan Telegram"
     },
     {
       "beta" : false,
-      "group" : "Ещё",
+      "group" : "Lainnya",
       "id" : "commandLine",
       "sections" : [
         {
@@ -604,13 +604,13 @@
             }
           ],
           "monospaced" : true,
-          "title" : "Что умеет"
+          "title" : "Yang bisa dilakukan"
         }
       ],
       "steps" : [
 
       ],
-      "summary" : "AI Hub Bar отвечает и из Терминала — для скриптов и автоматизаций.",
+      "summary" : "AI Hub Bar juga menjawab dari Terminal — untuk skrip dan otomatisasi.",
       "title" : "Untuk skrip"
     }
   ]

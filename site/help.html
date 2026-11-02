@@ -43,7 +43,13 @@
 .fact span { color: var(--ink-2); font-size: 14.5px; }
 .fact.hit { border-color: var(--link); box-shadow: 0 0 0 1px var(--link); }
 .scripts { font: 13px "SF Mono", Menlo, monospace; color: var(--ink-3); margin-top: 14px; }
-@media (max-width: 860px) { .help { grid-template-columns: 1fr; } .toc { position: static; max-height: none; } }
+@media (max-width: 860px) {
+  .help { grid-template-columns: 1fr; gap: 12px; }
+  .toc { position: static; max-height: none; display: flex; flex-wrap: wrap; gap: 6px; }
+  .toc input { flex-basis: 100%; }
+  .toc h4 { display: none; }
+  .toc a { background: var(--card); padding: 4px 10px 4px 5px; border-radius: 999px; font-size: 13px; }
+}
 
 /* Scenes: drawn with CSS, the same story as the app's pictures; 6 s loops. */
 .sc { position: absolute; inset: 0; display: grid; place-items: center; }
