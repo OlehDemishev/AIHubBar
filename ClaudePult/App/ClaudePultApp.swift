@@ -84,15 +84,18 @@ struct ClaudePultApp: App {
         _launcher = State(initialValue: launcher)
         let hooks = HookController(settings: settings)
         _hooks = State(initialValue: hooks)
-        usage.isActive = { [modes] in modes.installedModules.contains(.limits) }
-        hub.isActive = { [modes] in modes.installedModules.contains(.limits) }
-        Notifier.frequency = { [settings] in settings.frequency($0) }
-        monitor.isActive = { [modes] in modes.installedModules.contains(.resources) }
-        keepAwake.isActive = { [modes] in modes.installedModules.contains(.keepAwake) }
-        clipboard.isActive = { [modes] in modes.installedModules.contains(.clipboard) }
-        notesStore.isActive = { [modes] in modes.installedModules.contains(.notes) }
-        notchIsland.isActive = { [modes] in modes.installedModules.contains(.notch) }
-        layoutSwitcher.isActive = { [modes, settings] in modes.installedModules.contains(.layout) && settings.betaUpdates }
+        usage.isActive = { [modes] in modes.isOn(.limits) }
+        hub.isActive = { [modes] in modes.isOn(.limits) }
+        Notifier.frequency = { [settings, modes] kind in
+            if let module = kind.module, modes.installedModules.contains(module), !modes.isOn(module) { return .off }
+            return settings.frequency(kind)
+        }
+        monitor.isActive = { [modes] in modes.isOn(.resources) }
+        keepAwake.isActive = { [modes] in modes.isOn(.keepAwake) }
+        clipboard.isActive = { [modes] in modes.isOn(.clipboard) }
+        notesStore.isActive = { [modes] in modes.isOn(.notes) }
+        notchIsland.isActive = { [modes] in modes.isOn(.notch) }
+        layoutSwitcher.isActive = { [modes, settings] in modes.isOn(.layout) }
         notchIsland.openRequests = { [sessions] in
             sessions.approvals.values.sorted { $0.created < $1.created }.map { request in
                 let project = sessions.items.first { $0.id == request.sessionID }?.session.displayProject ?? request.project ?? "Claude"
@@ -112,7 +115,7 @@ struct ClaudePultApp: App {
                 running: sessions.items.filter { $0.state == .running }.count + runs.running.count,
                 problems: store.projects.filter { $0.health == .red }.map(\.name),
                 keepAwake: keepAwake.reason != nil,
-                keepAwakeInstalled: modes.installedModules.contains(.keepAwake)
+                keepAwakeInstalled: modes.isOn(.keepAwake)
             )
         })
         keepAwake.claudeWorking = { [sessions, runs] in
@@ -132,7 +135,7 @@ struct ClaudePultApp: App {
         IntentBridge.settings = settings
         IntentBridge.quickTools = quickTools
         layoutSwitcher.openSettings = { [requests] in
-            UserDefaults.standard.set(SettingsView.Tab.modules.rawValue, forKey: "settingsTab")
+            SettingsRoute.open(module: .layout)
             requests.openWindow("settings")
         }
         AppDelegate.openFile = { url in
@@ -271,7 +274,7 @@ struct ClaudePultApp: App {
         data.otherAI = hub.percents
         data.modeName = modes.current?.name
         data.modeIcon = modes.current?.icon
-        return data
+        return data.without(modes.switchedOff)
     }
 
     var body: some Scene {

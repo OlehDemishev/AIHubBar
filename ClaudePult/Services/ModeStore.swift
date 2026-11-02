@@ -56,6 +56,9 @@ final class ModeStore {
     /// Modules installed from the catalog (SPEC-profiles §1). Until the catalog has its own screen (stage 2) it is
     /// what the profiles use.
     private(set) var installedModules: [ModuleKind] = []
+    /// Installed modules switched off with their main switch (SPEC-settings §1): they keep their place in the profiles
+    /// but do nothing — no background work, no panel block, no menu bar elements, no notifications.
+    private(set) var switchedOff: [ModuleKind] = []
     /// A file opened from Finder, waiting for «Заменить» / «Добавить» in Settings → Режимы.
     private(set) var pendingImport: (url: URL, bundle: SettingsBundle)?
     private(set) var lastMessage: String?
@@ -71,6 +74,7 @@ final class ModeStore {
         var enabled: [String]
         var current: String
         var installed: [String]?
+        var off: [String]?
     }
 
     static var defaultDirectory: URL { SessionFiles.supportDirectory.appending(path: "modes", directoryHint: .isDirectory) }
@@ -97,6 +101,7 @@ final class ModeStore {
         }
         let state = (try? Data(contentsOf: directory.appending(path: "state.json"))).flatMap { try? decoder.decode(State.self, from: $0) }
         installedModules = (state?.installed ?? []).compactMap(ModuleKind.init(rawValue:))
+        switchedOff = (state?.off ?? []).compactMap(ModuleKind.init(rawValue:))
 
         if loaded.isEmpty, state == nil, FileManager.default.fileExists(atPath: settings.reportScript) {
             // The setup ClaudePult had before modes (report.py, `_daily-report`) becomes the first profile, unchanged.
@@ -180,17 +185,43 @@ final class ModeStore {
         // The built-in git scanner arrives with the templates (SPEC-modes §9, stage 6).
         // The profile's modules decide what the panel shows (SPEC-profiles §9.2); the blocks in `AppSettings` follow
         // them for the code that still reads those.
-        settings.setShows(.limits, mode.shows(.limits))
-        settings.setShows(.sessions, mode.shows(.sessions))
-        settings.setShows(.calendar, mode.shows(.upcoming))
-        settings.setShows(.projects, mode.shows(.projects) && mode.source.isShownInPanel)
-        settings.setShows(.commands, mode.shows(.reports))
+        settings.setShows(.limits, mode.shows(.limits) && !switchedOff.contains(.limits))
+        settings.setShows(.sessions, mode.shows(.sessions) && !switchedOff.contains(.sessions))
+        settings.setShows(.calendar, mode.shows(.upcoming) && !switchedOff.contains(.upcoming))
+        settings.setShows(.projects, mode.shows(.projects) && mode.source.isShownInPanel && !switchedOff.contains(.projects))
+        settings.setShows(.commands, mode.shows(.reports) && !switchedOff.contains(.reports))
         if let menuBar = mode.menuBar, menuBar != settings.menuBarConfig { settings.menuBarConfig = menuBar }
         didApply?()
     }
 
-    /// The current profile's shown, installed modules in panel order.
-    var panelModules: [ModuleKind] { (current?.panelModules ?? []).filter(installedModules.contains) }
+    /// The current profile's shown, working modules in panel order.
+    var panelModules: [ModuleKind] { (current?.panelModules ?? []).filter(isOn) }
+
+    /// Installed and not switched off: the module works (SPEC-settings §1).
+    func isOn(_ kind: ModuleKind) -> Bool {
+        installedModules.contains(kind) && !switchedOff.contains(kind) && (!kind.isBeta || settings.betaUpdates)
+    }
+
+    /// «Раскладка» and other beta modules work only with beta builds.
+    var isBetaAllowed: Bool { settings.betaUpdates }
+
+    /// The working modules, in catalog order.
+    var activeModules: [ModuleKind] { ModuleKind.allCases.filter(isOn) }
+
+    /// The module's main switch (SPEC-settings §1). On installs an optional module that isn't installed yet; a built-in
+    /// one comes with the profile settings that call for it, so the switch only lets it work again. Off keeps the
+    /// module in the profiles, where it was.
+    func setOn(_ kind: ModuleKind, _ on: Bool) {
+        if on {
+            switchedOff.removeAll { $0 == kind }
+            if !kind.isBuiltIn, !installedModules.contains(kind) { install(kind) }
+        } else if !switchedOff.contains(kind) {
+            switchedOff = ModuleKind.allCases.filter { switchedOff.contains($0) || $0 == kind }
+        }
+        saveState()
+        AppLog.info("Module \(kind.rawValue) switched \(on ? "on" : "off")")
+        if let current { apply(current) }
+    }
 
     /// Settings → «Строка меню» edits the current profile's menu bar.
     func setMenuBar(_ config: MenuBarConfig) {
@@ -303,6 +334,7 @@ final class ModeStore {
             update(changed)
         }
         installedModules.removeAll { $0 == kind }
+        switchedOff.removeAll { $0 == kind }
         saveState()
         AppLog.info("Module removed: \(kind.rawValue)")
     }
@@ -492,7 +524,8 @@ final class ModeStore {
         let encoder = JSONEncoder()
         encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
         try? FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
-        let state = State(order: modes.map(\.id), enabled: enabledIDs, current: currentID, installed: installedModules.map(\.rawValue))
+        let state = State(order: modes.map(\.id), enabled: enabledIDs, current: currentID, installed: installedModules.map(\.rawValue),
+                          off: switchedOff.isEmpty ? nil : switchedOff.map(\.rawValue))
         try? encoder.encode(state).write(to: directory.appending(path: "state.json"), options: .atomic)
     }
 

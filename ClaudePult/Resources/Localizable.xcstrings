@@ -3974,6 +3974,16 @@
       }
     },
     "%lld%%": {},
+    "%lld/%lld": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "new",
+            "value": "%1$lld/%2$lld"
+          }
+        }
+      }
+    },
     "%lld: %@": {
       "localizations": {
         "ru": {
@@ -3984,6 +3994,7 @@
         }
       }
     },
+    "%lld′": {},
     "+ контент-план": {
       "localizations": {
         "ar": {
@@ -6651,6 +6662,82 @@
     },
     "Cantero · claude/feature": {},
     "Claude": {},
+    "Claude Code, фоновые задачи, очередь": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude Code, background tasks, queue"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude Code, Hintergrundaufgaben, Warteschlange"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude Code, tâches en arrière-plan, file d’attente"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude Code, tareas en segundo plano, cola"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude Code, attività in background, coda"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude Code, tarefas em segundo plano, fila"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude Code, zadania w tle, kolejka"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude Code, фонові завдання, черга"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude Code、バックグラウンドタスク、キュー"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude Code, 백그라운드 작업, 대기열"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude Code، المهام في الخلفية، قائمة الانتظار"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude Code, tugas latar belakang, antrean"
+          }
+        }
+      }
+    },
     "Claude Code: все CLAUDE.md и MCP-серверы": {
       "localizations": {
         "ar": {
@@ -8027,6 +8114,7 @@
     },
     "Hooks": {},
     "Hooks добавляются в settings.json Claude Code (остальные настройки не трогаются, перед изменением рядом сохраняется копия). Они записывают состояние каждой сессии Claude Code на этом компьютере, чтобы AI Hub Bar показывал их в панели.": {
+      "extractionState": "stale",
       "localizations": {
         "ar": {
           "stringUnit": {
@@ -9015,6 +9103,82 @@
         }
       }
     },
+    "Mac не засыпает по правилам": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keeps the Mac awake by rules"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mac bleibt nach Regeln wach"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le Mac reste éveillé selon des règles"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El Mac no se duerme según reglas"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il Mac resta sveglio secondo regole"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O Mac não dorme conforme regras"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mac nie zasypia według reguł"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mac не засинає за правилами"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ルールに従ってMacをスリープさせない"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "규칙에 따라 Mac이 잠들지 않음"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يبقى Mac مستيقظًا وفق قواعد"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mac tetap terjaga sesuai aturan"
+          }
+        }
+      }
+    },
     "Mac не засыпает, пока работает Claude, на время, при подключённом питании или мониторе, пока открыты выбранные приложения.": {
       "localizations": {
         "ar": {
@@ -9087,6 +9251,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Mac не засинає, поки працює Claude, на певний час, при підключеному живленні чи моніторі, поки відкриті вибрані застосунки."
+          }
+        }
+      }
+    },
+    "Markdown прямо в панели": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Markdown right in the panel"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Markdown direkt im Panel"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Markdown directement dans le panneau"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Markdown directamente en el panel"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Markdown direttamente nel pannello"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Markdown direto no painel"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Markdown prosto w panelu"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Markdown прямо в панелі"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "パネル内でMarkdown"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "패널에서 바로 Markdown"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Markdown مباشرة في اللوحة"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Markdown langsung di panel"
           }
         }
       }
@@ -9945,6 +10185,7 @@
       }
     },
     "Windows прячет новые значки под «^». Чтобы AI Hub Bar был всегда виден: Параметры → Персонализация → Панель задач → Другие значки на панели задач.": {
+      "extractionState": "stale",
       "localizations": {
         "ar": {
           "stringUnit": {
@@ -11718,6 +11959,7 @@
       }
     },
     "«Минимум» — значок, проблемы и ожидающие ответа. «Лимиты» — ещё сессия и неделя. «Всё» — всё, что есть. Любая правка ниже делает набор «Своим».": {
+      "extractionState": "stale",
       "localizations": {
         "ar": {
           "stringUnit": {
@@ -11789,6 +12031,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "«Мінімум» — значок, проблеми й ті, хто чекає на відповідь. «Ліміти» — ще сесія і тиждень. «Усе» — усе, що є. Будь-яка зміна нижче робить набір «Своїм»."
+          }
+        }
+      }
+    },
+    "«Минимум» — значок, проблемы и ожидающие ответа. «Лимиты» — ещё сессия и неделя. «Всё» — всё, что есть. Набор меняет элементы, разделители остаются. «Капсулы» рисуют группы между «Новыми группами» на общей подложке. Строка меню у каждого профиля своя.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“Minimum” — the icon, problems and those waiting for a reply. “Limits” — also session and week. “Everything” — all there is. A set changes the elements; dividers stay. “Capsules” draw the groups between “New group” dividers on a shared backing. Each profile has its own menu bar."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "„Minimum“ — Symbol, Probleme und wartende Antworten. „Limits“ — dazu Sitzung und Woche. „Alles“ — alles, was es gibt. Ein Set ändert die Elemente, Trenner bleiben. „Kapseln“ zeigen die Gruppen zwischen „Neue Gruppe“ auf gemeinsamem Hintergrund. Jedes Profil hat seine eigene Menüleiste."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "« Minimum » — l’icône, les problèmes et ce qui attend une réponse. « Limites » — en plus la session et la semaine. « Tout » — tout ce qui existe. Un ensemble change les éléments, les séparateurs restent. « Capsules » dessine les groupes entre les « Nouveau groupe » sur un fond commun. Chaque profil a sa propre barre des menus."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«Mínimo»: el icono, los problemas y lo que espera respuesta. «Límites»: además sesión y semana. «Todo»: todo lo que hay. Un conjunto cambia los elementos; los separadores se quedan. «Cápsulas» dibuja los grupos entre «Nuevo grupo» sobre un fondo común. Cada perfil tiene su propia barra de menús."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«Minimo» — icona, problemi e chi attende risposta. «Limiti» — anche sessione e settimana. «Tutto» — tutto quello che c’è. Un set cambia gli elementi, i separatori restano. «Capsule» disegna i gruppi tra «Nuovo gruppo» su uno sfondo comune. Ogni profilo ha la propria barra dei menu."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«Mínimo» — o ícone, os problemas e quem aguarda resposta. «Limites» — também sessão e semana. «Tudo» — tudo o que existe. Um conjunto muda os elementos; os separadores ficam. «Cápsulas» desenha os grupos entre «Novo grupo» sobre um fundo comum. Cada perfil tem sua própria barra de menus."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "„Minimum” — ikona, problemy i oczekujące na odpowiedź. „Limity” — także sesja i tydzień. „Wszystko” — wszystko, co jest. Zestaw zmienia elementy, separatory zostają. „Kapsuły” rysują grupy między „Nowa grupa” na wspólnym tle. Każdy profil ma własny pasek menu."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«Мінімум» — значок, проблеми та ті, що чекають відповіді. «Ліміти» — ще сесія і тиждень. «Усе» — усе, що є. Набір змінює елементи, розділювачі лишаються. «Капсули» малюють групи між «Новими групами» на спільній підкладці. Рядок меню в кожного профілю свій."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「最小」— アイコン、問題、返信待ち。「リミット」— さらにセッションと週。「すべて」— すべて。セットは要素を変え、区切りはそのまま残ります。「カプセル」は「新しいグループ」の間のグループを共通の背景に描きます。メニューバーはプロファイルごとです。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«최소» — 아이콘, 문제, 응답 대기. «한도» — 세션과 주간 추가. «전체» — 있는 모든 것. 세트는 요소를 바꾸고 구분자는 그대로 둡니다. «캡슐»은 «새 그룹» 사이의 그룹을 공통 배경 위에 그립니다. 메뉴 막대는 프로필마다 따로입니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«الحد الأدنى» — الأيقونة والمشكلات وما ينتظر الرد. «الحدود» — إضافة إلى الجلسة والأسبوع. «الكل» — كل ما هو متاح. المجموعة تغيّر العناصر وتبقى الفواصل. «الكبسولات» ترسم المجموعات بين «مجموعة جديدة» على خلفية مشتركة. لكل ملف تعريف شريط قائمة خاص به."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«Minimum» — ikon, masalah, dan yang menunggu balasan. «Batas» — juga sesi dan minggu. «Semua» — semua yang ada. Set mengubah elemen; pemisah tetap. «Kapsul» menggambar grup di antara «Grup baru» pada latar bersama. Setiap profil punya bar menu sendiri."
           }
         }
       }
@@ -13617,6 +13935,82 @@
         }
       }
     },
+    "Блок в панели текущего профиля «%@»": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Block in the panel of the current profile “%@”"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Block im Panel des aktuellen Profils „%@“"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bloc dans le panneau du profil actuel « %@ »"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bloque en el panel del perfil actual «%@»"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blocco nel pannello del profilo attuale «%@»"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bloco no painel do perfil atual «%@»"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blok w panelu bieżącego profilu „%@”"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Блок у панелі поточного профілю «%@»"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "現在のプロファイル「%@」のパネルのブロック"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "현재 프로필 «%@»의 패널 블록"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "كتلة في لوحة ملف التعريف الحالي «%@»"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blok di panel profil saat ini «%@»"
+          }
+        }
+      }
+    },
     "Блок в панели: 7 дней вперёд, просроченное красным; клик открывает проект или файл.": {
       "localizations": {
         "ar": {
@@ -13689,6 +14083,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Блок у панелі: 7 днів наперед, прострочене червоним; клік відкриває проєкт або файл."
+          }
+        }
+      }
+    },
+    "Блоки": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blocks"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blöcke"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blocs"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bloques"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blocchi"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blocos"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bloki"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Блоки"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ブロック"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "블록"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الكتل"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blok"
           }
         }
       }
@@ -15677,6 +16147,7 @@
       }
     },
     "Версия %@": {
+      "extractionState": "stale",
       "localizations": {
         "ar": {
           "stringUnit": {
@@ -16208,6 +16679,88 @@
         }
       }
     },
+    "Включено: %lld из %lld": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Включено: %1$lld из %2$lld"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "On: %lld of %lld"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aktiv: %lld von %lld"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activés : %lld sur %lld"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activados: %lld de %lld"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Attivi: %lld di %lld"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ativados: %lld de %lld"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Włączone: %lld z %lld"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Увімкнено: %lld з %lld"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "オン: %lld / %lld"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "켜짐: %lld / %lld"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مفعّل: %lld من %lld"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aktif: %lld dari %lld"
+          }
+        }
+      }
+    },
     "Включите «Сравнить», выберите 2–3 сервиса и команду: результаты лягут рядом («хуки (Claude).md», «хуки (OpenAI).md») и откроются в окне «Сравнение».": {
       "localizations": {
         "ar": {
@@ -16512,6 +17065,158 @@
         }
       }
     },
+    "Включить модули набора и выключить остальные": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Turn on the set’s modules and turn off the rest"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Module des Sets einschalten, die übrigen ausschalten"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activer les modules de l’ensemble et désactiver les autres"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activar los módulos del conjunto y desactivar el resto"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Attiva i moduli del set e disattiva gli altri"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ativar os módulos do conjunto e desativar os demais"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Włącz moduły zestawu i wyłącz pozostałe"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Увімкнути модулі набору й вимкнути решту"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "セットのモジュールをオンにし、残りをオフにする"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "세트의 모듈을 켜고 나머지를 끕니다"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تفعيل وحدات المجموعة وإيقاف الباقي"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aktifkan modul set dan matikan sisanya"
+          }
+        }
+      }
+    },
+    "Включить модуль": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Turn on the module"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modul einschalten"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activer le module"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activar el módulo"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Attiva il modulo"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ativar o módulo"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Włącz moduł"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Увімкнути модуль"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "モジュールをオンにする"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "모듈 켜기"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تفعيل الوحدة"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aktifkan modul"
+          }
+        }
+      }
+    },
     "Включить сервис, вставить ключ или дать согласие — в «Сервисы AI», на вкладке сервиса.": {
       "localizations": {
         "ar": {
@@ -16736,6 +17441,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Увімкнути…"
+          }
+        }
+      }
+    },
+    "Включён": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "On"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ein"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activé"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activado"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Attivo"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ativado"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Włączony"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Увімкнено"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "オン"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "켜짐"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مفعّل"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aktif"
           }
         }
       }
@@ -18641,6 +19422,7 @@
       }
     },
     "Выйти из AI Hub Bar": {
+      "extractionState": "stale",
       "localizations": {
         "ar": {
           "stringUnit": {
@@ -19244,6 +20026,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Вимкнути «%@»"
+          }
+        }
+      }
+    },
+    "Выключить модуль: перестанет работать, место в профилях сохранится": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Turn off the module: it stops working, its place in the profiles is kept"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modul ausschalten: Es arbeitet nicht mehr, sein Platz in den Profilen bleibt"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Désactiver le module : il s’arrête, sa place dans les profils est conservée"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Desactivar el módulo: deja de funcionar y conserva su lugar en los perfiles"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Disattiva il modulo: smette di funzionare, il suo posto nei profili resta"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Desativar o módulo: ele para de funcionar, o lugar nos perfis é mantido"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wyłącz moduł: przestanie działać, jego miejsce w profilach zostanie"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Вимкнути модуль: перестане працювати, місце в профілях збережеться"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "モジュールをオフにする: 動作を停止し、プロファイル内の位置は保持されます"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "모듈 끄기: 작동을 멈추고 프로필 안의 위치는 유지됩니다"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إيقاف الوحدة: تتوقف عن العمل ويُحفظ مكانها في ملفات التعريف"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Matikan modul: berhenti bekerja, tempatnya di profil tetap disimpan"
           }
         }
       }
@@ -21833,6 +22691,82 @@
         }
       }
     },
+    "Дедлайны и публикации на 7 дней": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deadlines and posts for 7 days"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fristen und Veröffentlichungen für 7 Tage"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Échéances et publications sur 7 jours"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plazos y publicaciones para 7 días"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scadenze e pubblicazioni per 7 giorni"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prazos e publicações para 7 dias"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Terminy i publikacje na 7 dni"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Дедлайни й публікації на 7 днів"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "7日間の締め切りと公開"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "7일간의 마감과 게시"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المواعيد النهائية والمنشورات لمدة 7 أيام"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tenggat dan publikasi 7 hari"
+          }
+        }
+      }
+    },
     "Дедлайны, публикации и контент-план на 7 дней вперёд — из профилей с календарём.": {
       "localizations": {
         "ar": {
@@ -23809,6 +24743,82 @@
         }
       }
     },
+    "Дублировать в Telegram; бот — «Основные» → Telegram": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Also send to Telegram; the bot is in “General” → Telegram"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Auch an Telegram senden; der Bot steht unter „Allgemein“ → Telegram"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Envoyer aussi sur Telegram ; le bot est dans « Général » → Telegram"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enviar también a Telegram; el bot está en «General» → Telegram"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Invia anche su Telegram; il bot è in «Generali» → Telegram"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enviar também ao Telegram; o bot fica em «Geral» → Telegram"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wysyłaj też do Telegrama; bot — „Ogólne” → Telegram"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Дублювати в Telegram; бот — «Загальні» → Telegram"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Telegramにも送る。ボットは「一般」→ Telegram"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Telegram에도 보내기. 봇은 «일반» → Telegram"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الإرسال إلى Telegram أيضًا؛ البوت في «عام» ← Telegram"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kirim juga ke Telegram; bot ada di «Umum» → Telegram"
+          }
+        }
+      }
+    },
     "Дублировать напоминания в Telegram": {
       "localizations": {
         "ar": {
@@ -24418,6 +25428,7 @@
       }
     },
     "Ещё агенты (%lld)": {
+      "extractionState": "stale",
       "localizations": {
         "ar": {
           "stringUnit": {
@@ -27989,6 +29000,82 @@
         }
       }
     },
+    "Здесь только включённые модули. Остальные — на странице «Модули»; что показывает модуль в каждом профиле — «Профили».": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Only modules that are on are here. The rest are on the “Modules” page; what a module shows in each profile is in “Profiles”."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hier stehen nur eingeschaltete Module. Die übrigen findest du unter „Module“; was ein Modul in jedem Profil zeigt, unter „Profile“."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seuls les modules activés figurent ici. Les autres sont sur la page « Modules » ; ce qu’un module affiche dans chaque profil se règle dans « Profils »."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aquí solo están los módulos activados. El resto, en la página «Módulos»; lo que muestra un módulo en cada perfil, en «Perfiles»."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Qui ci sono solo i moduli attivi. Gli altri sono nella pagina «Moduli»; cosa mostra un modulo in ogni profilo è in «Profili»."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aqui ficam só os módulos ativados. Os demais estão na página «Módulos»; o que um módulo mostra em cada perfil fica em «Perfis»."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tu są tylko włączone moduły. Pozostałe — na stronie „Moduły”; co moduł pokazuje w każdym profilu — „Profile”."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Тут лише увімкнені модулі. Решта — на сторінці «Модулі»; що показує модуль у кожному профілі — «Профілі»."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ここにはオンのモジュールだけが表示されます。その他は「モジュール」ページに、各プロファイルでの表示内容は「プロファイル」にあります。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "여기에는 켜진 모듈만 있습니다. 나머지는 «모듈» 페이지에, 프로필별 표시 내용은 «프로필»에 있습니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "هنا الوحدات المفعّلة فقط. الباقي في صفحة «الوحدات»؛ وما تعرضه الوحدة في كل ملف تعريف في «ملفات التعريف»."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hanya modul yang aktif ada di sini. Sisanya di halaman «Modul»; apa yang ditampilkan modul di tiap profil ada di «Profil»."
+          }
+        }
+      }
+    },
     "Значки": {
       "localizations": {
         "ar": {
@@ -29433,6 +30520,82 @@
         }
       }
     },
+    "Исправляет текст не в той раскладке": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fixes text typed in the wrong layout"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Korrigiert Text im falschen Layout"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Corrige le texte tapé dans la mauvaise disposition"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Corrige el texto escrito en la distribución equivocada"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Corregge il testo digitato nel layout sbagliato"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Corrige o texto digitado no layout errado"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Poprawia tekst wpisany w złym układzie"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Виправляє текст не в тій розкладці"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "間違った配列で入力した文字を直す"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "잘못된 레이아웃으로 입력한 글자를 고칩니다"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يصحّح النص المكتوب بتخطيط خاطئ"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Memperbaiki teks yang diketik di tata letak yang salah"
+          }
+        }
+      }
+    },
     "Исправлять раскладку сам": {
       "localizations": {
         "ar": {
@@ -30193,6 +31356,82 @@
         }
       }
     },
+    "Какие блоки показывать и в каком порядке": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Which blocks to show and in what order"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Welche Blöcke und in welcher Reihenfolge"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quels blocs afficher et dans quel ordre"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Qué bloques mostrar y en qué orden"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quali blocchi mostrare e in che ordine"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quais blocos mostrar e em que ordem"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Które bloki pokazywać i w jakiej kolejności"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Які блоки показувати і в якому порядку"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "表示するブロックとその順序"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "표시할 블록과 순서"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الكتل المعروضة وترتيبها"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blok yang ditampilkan dan urutannya"
+          }
+        }
+      }
+    },
     "Какие переключатели показывать": {
       "localizations": {
         "ar": {
@@ -30649,6 +31888,82 @@
         }
       }
     },
+    "Капсулы по группам": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Capsules by group"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kapseln nach Gruppen"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Capsules par groupe"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cápsulas por grupos"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Capsule per gruppi"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cápsulas por grupo"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kapsuły według grup"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Капсули за групами"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "グループごとのカプセル"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "그룹별 캡슐"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "كبسولات حسب المجموعات"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kapsul per grup"
+          }
+        }
+      }
+    },
     "Карточка проект.md, этапы, метрики, команды, права в фоне и календарь — у профилей с источником «папки».": {
       "localizations": {
         "ar": {
@@ -31101,6 +32416,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Клавішею легко дозволити, не прочитавши команду."
+          }
+        }
+      }
+    },
+    "Клик включает или убирает элемент; его можно и перетащить в нужное место в порядке. Элементов выключенных модулей здесь нет.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A click adds or removes an element; you can also drag it to its place in the order. Elements of modules that are off aren’t here."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ein Klick fügt ein Element hinzu oder entfernt es; du kannst es auch an seine Stelle in der Reihenfolge ziehen. Elemente ausgeschalteter Module fehlen hier."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un clic ajoute ou retire un élément ; vous pouvez aussi le faire glisser à sa place dans l’ordre. Les éléments des modules désactivés n’y figurent pas."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un clic añade o quita un elemento; también puedes arrastrarlo a su lugar en el orden. Aquí no están los elementos de módulos desactivados."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un clic aggiunge o toglie un elemento; puoi anche trascinarlo al suo posto nell’ordine. Gli elementi dei moduli disattivati non ci sono."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Um clique adiciona ou remove um elemento; você também pode arrastá-lo para o lugar certo na ordem. Elementos de módulos desativados não aparecem aqui."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kliknięcie dodaje lub usuwa element; można go też przeciągnąć na miejsce w kolejności. Elementów wyłączonych modułów tu nie ma."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Клік додає або прибирає елемент; його можна й перетягнути на потрібне місце в порядку. Елементів вимкнених модулів тут немає."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "クリックで要素を追加・削除します。並びの好きな位置へドラッグもできます。オフのモジュールの要素はここにありません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "클릭하면 요소를 추가하거나 뺍니다. 순서에서 원하는 위치로 끌어다 놓을 수도 있습니다. 꺼진 모듈의 요소는 여기에 없습니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "النقر يضيف العنصر أو يزيله؛ ويمكن أيضًا سحبه إلى مكانه في الترتيب. عناصر الوحدات المتوقفة ليست هنا."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Klik menambah atau menghapus elemen; Anda juga bisa menyeretnya ke posisinya dalam urutan. Elemen modul yang mati tidak ada di sini."
           }
         }
       }
@@ -32929,6 +34320,82 @@
         }
       }
     },
+    "Команды _daily-report: отчёт, быстрая сводка, очистка сборок. Папка _daily-report — у профиля.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "_daily-report commands: report, quick summary, build cleanup. The _daily-report folder is set in the profile."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "_daily-report-Befehle: Bericht, Kurzübersicht, Build-Bereinigung. Den _daily-report-Ordner legt das Profil fest."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Commandes _daily-report : rapport, résumé rapide, nettoyage des builds. Le dossier _daily-report se règle dans le profil."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comandos de _daily-report: informe, resumen rápido, limpieza de compilaciones. La carpeta _daily-report se define en el perfil."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comandi _daily-report: report, riepilogo rapido, pulizia delle build. La cartella _daily-report si imposta nel profilo."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comandos do _daily-report: relatório, resumo rápido, limpeza de builds. A pasta _daily-report fica no perfil."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Polecenia _daily-report: raport, szybkie podsumowanie, czyszczenie buildów. Folder _daily-report ustawia profil."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Команди _daily-report: звіт, швидке зведення, очищення збірок. Тека _daily-report — у профілі."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "_daily-report のコマンド: レポート、クイック概要、ビルドの掃除。_daily-report フォルダーはプロファイルで設定します。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "_daily-report 명령: 보고서, 빠른 요약, 빌드 정리. _daily-report 폴더는 프로필에서 지정합니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "أوامر _daily-report: التقرير، والملخص السريع، وتنظيف البُنى. مجلد _daily-report يُحدَّد في ملف التعريف."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Perintah _daily-report: laporan, ringkasan cepat, pembersihan build. Folder _daily-report diatur di profil."
+          }
+        }
+      }
+    },
     "Команды для скриптов вызываются так: %@ --sessions": {
       "localizations": {
         "ar": {
@@ -33689,6 +35156,82 @@
         }
       }
     },
+    "Косая «/»": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Slash “/”"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schrägstrich „/“"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Barre oblique «/»"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Barra «/»"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Barra «/»"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Barra «/»"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ukośnik „/”"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Скісна «/»"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "スラッシュ「/」"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "슬래시 «/»"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "شرطة مائلة «/»"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Garis miring «/»"
+          }
+        }
+      }
+    },
     "Кредиты: %@": {
       "localizations": {
         "ar": {
@@ -34070,6 +35613,7 @@
       }
     },
     "Левее": {
+      "extractionState": "stale",
       "localizations": {
         "ar": {
           "stringUnit": {
@@ -34375,6 +35919,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ліміт часу"
+          }
+        }
+      }
+    },
+    "Лимит и сессии у чёлки": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limit and sessions by the notch"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limit und Sitzungen an der Notch"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limite et sessions près de l’encoche"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Límite y sesiones junto al notch"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limite e sessioni accanto al notch"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limite e sessões junto ao notch"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limit i sesje przy notchu"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ліміт і сесії біля виїмки"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ノッチ横にリミットとセッション"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "노치 옆에 한도와 세션"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الحد والجلسات بجانب النتوء"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Batas dan sesi di samping notch"
           }
         }
       }
@@ -35899,6 +37519,82 @@
         }
       }
     },
+    "Между числами без своего разделителя": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Between numbers without a divider of their own"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zwischen Zahlen ohne eigenen Trenner"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Entre nombres sans séparateur propre"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Entre números sin separador propio"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tra numeri senza separatore proprio"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Entre números sem separador próprio"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Między liczbami bez własnego separatora"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Між числами без власного розділювача"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "独自の区切りがない数値の間"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "자체 구분자가 없는 숫자 사이"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بين الأرقام دون فاصل خاص بها"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Di antara angka tanpa pemisah sendiri"
+          }
+        }
+      }
+    },
     "Мелкий": {
       "localizations": {
         "ar": {
@@ -36735,6 +38431,82 @@
         }
       }
     },
+    "Модуль выключен: не работает в фоне, не виден в панели и строке меню, не присылает уведомлений. Настройки и место в профилях сохранены.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The module is off: it doesn’t run in the background, isn’t shown in the panel or menu bar, and sends no notifications. Its settings and place in the profiles are kept."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Das Modul ist aus: Es läuft nicht im Hintergrund, erscheint weder im Panel noch in der Menüleiste und sendet keine Mitteilungen. Einstellungen und Platz in den Profilen bleiben erhalten."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le module est désactivé : il ne tourne pas en arrière-plan, n’apparaît ni dans le panneau ni dans la barre des menus et n’envoie pas de notifications. Ses réglages et sa place dans les profils sont conservés."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El módulo está desactivado: no funciona en segundo plano, no aparece en el panel ni en la barra de menús y no envía notificaciones. Se conservan sus ajustes y su lugar en los perfiles."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il modulo è disattivato: non lavora in background, non compare nel pannello né nella barra dei menu e non invia notifiche. Impostazioni e posto nei profili restano."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O módulo está desativado: não roda em segundo plano, não aparece no painel nem na barra de menus e não envia notificações. As configurações e o lugar nos perfis são mantidos."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Moduł jest wyłączony: nie działa w tle, nie widać go w panelu ani na pasku menu, nie wysyła powiadomień. Ustawienia i miejsce w profilach zostają."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Модуль вимкнено: не працює у фоні, не видно в панелі й рядку меню, не надсилає сповіщень. Налаштування і місце в профілях збережено."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "モジュールはオフです: バックグラウンドで動作せず、パネルやメニューバーに表示されず、通知も送りません。設定とプロファイル内の位置は保持されます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "모듈이 꺼져 있습니다: 백그라운드에서 작동하지 않고 패널과 메뉴 막대에 보이지 않으며 알림도 보내지 않습니다. 설정과 프로필 안의 위치는 유지됩니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الوحدة متوقفة: لا تعمل في الخلفية ولا تظهر في اللوحة أو شريط القائمة ولا ترسل إشعارات. تُحفظ إعداداتها ومكانها في ملفات التعريف."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modul mati: tidak berjalan di latar belakang, tidak tampil di panel maupun bar menu, dan tidak mengirim notifikasi. Pengaturan dan tempatnya di profil tetap disimpan."
+          }
+        }
+      }
+    },
     "Мозг": {
       "localizations": {
         "ar": {
@@ -36964,6 +38736,7 @@
       }
     },
     "На испытании: работает только с «Бета-версиями» (Настройки → Основные). Включите их здесь — и модуль можно установить.": {
+      "extractionState": "stale",
       "localizations": {
         "ar": {
           "stringUnit": {
@@ -37035,6 +38808,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "На випробуванні: працює лише з «Бета-версіями» (Налаштування → Основні). Увімкніть їх тут — і модуль можна встановити."
+          }
+        }
+      }
+    },
+    "На испытании: работает только с «Бета-версиями».": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In testing: works only with “Beta Builds”."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In Erprobung: funktioniert nur mit „Beta-Versionen“."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En test : fonctionne uniquement avec « Versions bêta »."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En pruebas: solo funciona con «Versiones beta»."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In prova: funziona solo con «Versioni beta»."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Em teste: funciona apenas com «Versões beta»."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "W testach: działa tylko z „Wersjami beta”."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "На випробуванні: працює лише з «Бета-версіями»."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "テスト中: 「ベータ版」でのみ動作します。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "테스트 중: «베타 버전»에서만 작동합니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "قيد الاختبار: تعمل فقط مع «الإصدارات التجريبية»."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dalam uji coba: hanya berfungsi dengan «Versi beta»."
           }
         }
       }
@@ -43442,6 +45291,158 @@
         }
       }
     },
+    "Нет профиля": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No profile"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kein Profil"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucun profil"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sin perfil"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nessun profilo"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nenhum perfil"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Brak profilu"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Немає профілю"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "プロファイルがありません"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "프로필 없음"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لا يوجد ملف تعريف"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tidak ada profil"
+          }
+        }
+      }
+    },
+    "Нет профиля: панель показывает модули профиля": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No profile: the panel shows a profile’s modules"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kein Profil: Das Panel zeigt die Module eines Profils"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucun profil : le panneau affiche les modules d’un profil"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sin perfil: el panel muestra los módulos de un perfil"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nessun profilo: il pannello mostra i moduli di un profilo"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nenhum perfil: o painel mostra os módulos de um perfil"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Brak profilu: panel pokazuje moduły profilu"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Немає профілю: панель показує модулі профілю"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "プロファイルがありません: パネルにはプロファイルのモジュールが表示されます"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "프로필 없음: 패널은 프로필의 모듈을 보여 줍니다"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لا يوجد ملف تعريف: تعرض اللوحة وحدات ملف التعريف"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tidak ada profil: panel menampilkan modul profil"
+          }
+        }
+      }
+    },
     "Нет разрешения: Системные настройки → Конфиденциальность → Автоматизация → AI Hub Bar": {
       "localizations": {
         "ar": {
@@ -44354,6 +46355,82 @@
         }
       }
     },
+    "Новая группа": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "New group"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Neue Gruppe"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nouveau groupe"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nuevo grupo"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nuovo gruppo"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Novo grupo"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nowa grupa"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Нова група"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新しいグループ"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "새 그룹"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مجموعة جديدة"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Grup baru"
+          }
+        }
+      }
+    },
     "Новая заметка": {
       "localizations": {
         "ar": {
@@ -45040,6 +47117,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Вночі: %lld завдань — ✅ %lld, ❌ %lld"
+          }
+        }
+      }
+    },
+    "Нужен в профиле": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Needed in a profile"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Im Profil nötig"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Requis dans un profil"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Necesario en un perfil"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Serve in un profilo"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Necessário em um perfil"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wymagany w profilu"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Потрібен у профілі"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "プロファイルで必要"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "프로필에서 필요"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مطلوب في ملف تعريف"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diperlukan di profil"
           }
         }
       }
@@ -46486,6 +48639,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Спільна команда."
+          }
+        }
+      }
+    },
+    "Общее": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "General"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Allgemein"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Général"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "General"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Generale"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geral"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ogólne"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Загальне"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "一般"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "일반"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "عام"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Umum"
           }
         }
       }
@@ -50372,7 +52601,84 @@
         }
       }
     },
+    "Открыть настройки модуля": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open module settings"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Moduleinstellungen öffnen"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ouvrir les réglages du module"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abrir los ajustes del módulo"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apri le impostazioni del modulo"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abrir as configurações do módulo"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otwórz ustawienia modułu"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Відкрити налаштування модуля"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "モジュールの設定を開く"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "모듈 설정 열기"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "فتح إعدادات الوحدة"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buka pengaturan modul"
+          }
+        }
+      }
+    },
     "Открыть панель": {
+      "extractionState": "stale",
       "localizations": {
         "ar": {
           "stringUnit": {
@@ -51280,6 +53586,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Звіт зараз"
+          }
+        }
+      }
+    },
+    "Отчёт, сводка, очистка сборок": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Report, summary, build cleanup"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bericht, Übersicht, Build-Bereinigung"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rapport, résumé, nettoyage des builds"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Informe, resumen, limpieza de compilaciones"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Report, riepilogo, pulizia build"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Relatório, resumo, limpeza de builds"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Raport, podsumowanie, czyszczenie buildów"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Звіт, зведення, очищення збірок"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "レポート、概要、ビルドの掃除"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "보고서, 요약, 빌드 정리"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "التقرير، الملخص، تنظيف البُنى"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Laporan, ringkasan, pembersihan build"
           }
         }
       }
@@ -52880,6 +55262,158 @@
         }
       }
     },
+    "Панель показывает модули профиля. Создайте профиль на странице «Профили».": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The panel shows a profile’s modules. Create a profile on the “Profiles” page."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Das Panel zeigt die Module eines Profils. Lege unter „Profile“ ein Profil an."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le panneau affiche les modules d’un profil. Créez un profil sur la page « Profils »."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El panel muestra los módulos de un perfil. Crea un perfil en la página «Perfiles»."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il pannello mostra i moduli di un profilo. Crea un profilo nella pagina «Profili»."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O painel mostra os módulos de um perfil. Crie um perfil na página «Perfis»."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Panel pokazuje moduły profilu. Utwórz profil na stronie „Profile”."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Панель показує модулі профілю. Створіть профіль на сторінці «Профілі»."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "パネルにはプロファイルのモジュールが表示されます。「プロファイル」ページでプロファイルを作成してください。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "패널은 프로필의 모듈을 보여 줍니다. «프로필» 페이지에서 프로필을 만드세요."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تعرض اللوحة وحدات ملف التعريف. أنشئ ملف تعريف في صفحة «ملفات التعريف»."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Panel menampilkan modul profil. Buat profil di halaman «Profil»."
+          }
+        }
+      }
+    },
+    "Панель пуста": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The panel is empty"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Das Panel ist leer"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le panneau est vide"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El panel está vacío"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il pannello è vuoto"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O painel está vazio"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Panel jest pusty"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Панель порожня"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "パネルは空です"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "패널이 비어 있습니다"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اللوحة فارغة"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Panel kosong"
+          }
+        }
+      }
+    },
     "Папка": {
       "localizations": {
         "ar": {
@@ -54325,6 +56859,82 @@
         }
       }
     },
+    "Перетащите на элемент в порядке — встанет после него; клик — в конец": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Drag onto an element in the order to put it after that element; click to add it at the end"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Auf ein Element in der Reihenfolge ziehen – landet dahinter; Klick – ans Ende"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Glissez sur un élément de l’ordre pour le placer après ; clic pour l’ajouter à la fin"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arrástralo sobre un elemento del orden para ponerlo detrás; clic para añadirlo al final"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trascina su un elemento dell’ordine per metterlo dopo; clic per aggiungerlo in fondo"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arraste sobre um elemento da ordem para colocá-lo depois dele; clique para pôr no fim"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Przeciągnij na element w kolejności — stanie za nim; kliknięcie — na koniec"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Перетягніть на елемент у порядку — стане після нього; клік — у кінець"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "並びの要素へドラッグするとその後ろに入ります。クリックで末尾に追加"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "순서의 요소 위로 끌면 그 뒤에 들어갑니다. 클릭하면 끝에 추가"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اسحبه إلى عنصر في الترتيب ليأتي بعده؛ وانقر لإضافته في النهاية"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seret ke elemen dalam urutan agar ditempatkan setelahnya; klik untuk menambah di akhir"
+          }
+        }
+      }
+    },
     "Перетащите файл или папку на чёлку: команды профиля и «Своя задача» для него, результат — новым файлом рядом.": {
       "localizations": {
         "ar": {
@@ -54401,7 +57011,84 @@
         }
       }
     },
+    "Перетащите элемент на другой — встанет на его место. Разделитель, брошенный на элемент, встаёт сразу после него. Клик — настройки элемента.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Drag an element onto another to take its place. A divider dropped on an element goes right after it. Click an element for its settings."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ziehe ein Element auf ein anderes, um seinen Platz einzunehmen. Ein Trenner, der auf ein Element fällt, landet direkt dahinter. Klick – Einstellungen des Elements."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Glissez un élément sur un autre pour prendre sa place. Un séparateur déposé sur un élément se place juste après. Clic : réglages de l’élément."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arrastra un elemento sobre otro para ocupar su lugar. Un separador soltado sobre un elemento queda justo después. Clic: ajustes del elemento."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trascina un elemento su un altro per prenderne il posto. Un separatore rilasciato su un elemento va subito dopo. Clic: impostazioni dell’elemento."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arraste um elemento sobre outro para ocupar o lugar dele. Um separador solto sobre um elemento fica logo depois dele. Clique: configurações do elemento."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Przeciągnij element na inny — zajmie jego miejsce. Separator upuszczony na element stanie tuż za nim. Kliknięcie — ustawienia elementu."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Перетягніть елемент на інший — стане на його місце. Розділювач, кинутий на елемент, стає одразу після нього. Клік — налаштування елемента."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "要素を別の要素にドラッグするとその位置に入ります。要素にドロップした区切りはその直後に入ります。クリックで要素の設定。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "요소를 다른 요소 위로 끌면 그 자리에 들어갑니다. 요소 위에 놓은 구분자는 바로 뒤에 들어갑니다. 클릭하면 요소 설정."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اسحب عنصرًا إلى آخر ليأخذ مكانه. الفاصل الذي يُفلت على عنصر يوضع بعده مباشرة. انقر لإعدادات العنصر."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seret elemen ke elemen lain untuk mengambil tempatnya. Pemisah yang dijatuhkan pada elemen ditempatkan tepat setelahnya. Klik untuk pengaturan elemen."
+          }
+        }
+      }
+    },
     "Перетащите элемент на другой, чтобы поменять порядок; включить и выключить — в списке ниже.": {
+      "extractionState": "stale",
       "localizations": {
         "ar": {
           "stringUnit": {
@@ -54701,6 +57388,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "План: %@"
+          }
+        }
+      }
+    },
+    "Плоско": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Flat"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Flach"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "À plat"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plano"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Piatto"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plano"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Płasko"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Пласко"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "フラット"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "평면"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مسطّح"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Datar"
           }
         }
       }
@@ -58429,6 +61192,234 @@
         }
       }
     },
+    "Порядок": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Order"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reihenfolge"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ordre"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Orden"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ordine"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ordem"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kolejność"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Порядок"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "順序"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "순서"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الترتيب"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Urutan"
+          }
+        }
+      }
+    },
+    "Порядок блоков — «Панель»; что показывает модуль в каждом профиле — «Профили».": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Block order is in “Panel”; what a module shows in each profile is in “Profiles”."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reihenfolge der Blöcke unter „Panel“; was ein Modul in jedem Profil zeigt, unter „Profile“."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L’ordre des blocs se règle dans « Panneau » ; ce qu’un module affiche dans chaque profil, dans « Profils »."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El orden de los bloques, en «Panel»; lo que muestra un módulo en cada perfil, en «Perfiles»."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L’ordine dei blocchi è in «Pannello»; cosa mostra un modulo in ogni profilo è in «Profili»."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A ordem dos blocos fica em «Painel»; o que um módulo mostra em cada perfil, em «Perfis»."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kolejność bloków — „Panel”; co moduł pokazuje w każdym profilu — „Profile”."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Порядок блоків — «Панель»; що показує модуль у кожному профілі — «Профілі»."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ブロックの順序は「パネル」、各プロファイルでの表示内容は「プロファイル」で設定します。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "블록 순서는 «패널»에서, 프로필별 표시 내용은 «프로필»에서 정합니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ترتيب الكتل في «اللوحة»؛ وما تعرضه الوحدة في كل ملف تعريف في «ملفات التعريف»."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Urutan blok ada di «Panel»; apa yang ditampilkan modul di tiap profil ada di «Profil»."
+          }
+        }
+      }
+    },
+    "Порядок слева направо": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Order from left to right"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reihenfolge von links nach rechts"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ordre de gauche à droite"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Orden de izquierda a derecha"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ordine da sinistra a destra"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ordem da esquerda para a direita"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kolejność od lewej do prawej"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Порядок зліва направо"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "左から右への順序"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "왼쪽에서 오른쪽 순서"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الترتيب من اليسار إلى اليمين"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Urutan dari kiri ke kanan"
+          }
+        }
+      }
+    },
     "После сбоя предлагать отправить отчёт": {
       "localizations": {
         "ar": {
@@ -58729,6 +61720,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Останнє: %@"
+          }
+        }
+      }
+    },
+    "Последние копирования, поиск": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recent copies, search"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Letzte Kopien, Suche"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dernières copies, recherche"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Últimas copias, búsqueda"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ultime copie, ricerca"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Últimas cópias, busca"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ostatnie kopie, wyszukiwanie"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Останні копіювання, пошук"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "最近のコピー、検索"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "최근 복사, 검색"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "آخر النسخ، البحث"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Salinan terbaru, pencarian"
           }
         }
       }
@@ -59037,6 +62104,310 @@
         }
       }
     },
+    "Появится вместе с первым профилем.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Appears with the first profile."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Erscheint mit dem ersten Profil."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apparaît avec le premier profil."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aparecerá con el primer perfil."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comparirà con il primo profilo."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aparece com o primeiro perfil."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pojawi się z pierwszym profilem."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "З’явиться разом із першим профілем."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "最初のプロファイルとともに表示されます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "첫 프로필과 함께 나타납니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تظهر مع أول ملف تعريف."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Muncul bersama profil pertama."
+          }
+        }
+      }
+    },
+    "Появится, когда у профиля включён календарь — «Профили» → профиль.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Appears when a profile has the calendar on — “Profiles” → profile."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Erscheint, wenn ein Profil den Kalender eingeschaltet hat – „Profile“ → Profil."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apparaît quand un profil a le calendrier activé — « Profils » → profil."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aparecerá cuando un perfil tenga el calendario activado: «Perfiles» → perfil."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comparirà quando un profilo ha il calendario attivo — «Profili» → profilo."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aparece quando um perfil tem o calendário ativado — «Perfis» → perfil."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pojawi się, gdy profil ma włączony kalendarz — „Profile” → profil."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "З’явиться, коли в профілю увімкнено календар — «Профілі» → профіль."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "プロファイルでカレンダーがオンのときに表示されます —「プロファイル」→ プロファイル。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "프로필에서 캘린더가 켜지면 나타납니다 — «프로필» → 프로필."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تظهر عندما يكون التقويم مفعّلًا في ملف تعريف — «ملفات التعريف» ← ملف التعريف."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Muncul saat kalender aktif di profil — «Profil» → profil."
+          }
+        }
+      }
+    },
+    "Появится, когда у профиля есть источник проектов — «Профили» → профиль.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Appears when a profile has a project source — “Profiles” → profile."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Erscheint, wenn ein Profil eine Projektquelle hat – „Profile“ → Profil."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apparaît quand un profil a une source de projets — « Profils » → profil."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aparecerá cuando un perfil tenga una fuente de proyectos: «Perfiles» → perfil."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comparirà quando un profilo ha una fonte di progetti — «Profili» → profilo."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aparece quando um perfil tem uma fonte de projetos — «Perfis» → perfil."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pojawi się, gdy profil ma źródło projektów — „Profile” → profil."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "З’явиться, коли в профілю є джерело проєктів — «Профілі» → профіль."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "プロファイルにプロジェクトのソースがあるときに表示されます —「プロファイル」→ プロファイル。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "프로필에 프로젝트 소스가 있으면 나타납니다 — «프로필» → 프로필."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تظهر عندما يكون لملف التعريف مصدر مشاريع — «ملفات التعريف» ← ملف التعريف."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Muncul saat profil punya sumber proyek — «Profil» → profil."
+          }
+        }
+      }
+    },
+    "Появится, когда у профиля команды _daily-report — «Профили» → профиль.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Appears when a profile has the _daily-report commands — “Profiles” → profile."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Erscheint, wenn ein Profil die _daily-report-Befehle hat – „Profile“ → Profil."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apparaît quand un profil a les commandes _daily-report — « Profils » → profil."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aparecerá cuando un perfil tenga los comandos de _daily-report: «Perfiles» → perfil."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comparirà quando un profilo ha i comandi _daily-report — «Profili» → profilo."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aparece quando um perfil tem os comandos do _daily-report — «Perfis» → perfil."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pojawi się, gdy profil ma polecenia _daily-report — „Profile” → profil."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "З’явиться, коли в профілю команди _daily-report — «Профілі» → профіль."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "プロファイルに _daily-report のコマンドがあるときに表示されます —「プロファイル」→ プロファイル。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "프로필에 _daily-report 명령이 있으면 나타납니다 — «프로필» → 프로필."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تظهر عندما تكون لملف التعريف أوامر _daily-report — «ملفات التعريف» ← ملف التعريف."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Muncul saat profil punya perintah _daily-report — «Profil» → profil."
+          }
+        }
+      }
+    },
     "Права Claude в фоне": {
       "localizations": {
         "ar": {
@@ -59114,6 +62485,7 @@
       }
     },
     "Правее": {
+      "extractionState": "stale",
       "localizations": {
         "ar": {
           "stringUnit": {
@@ -62083,6 +65455,82 @@
         }
       }
     },
+    "Профиль «%@»: перетащите блок на другой, чтобы поменять порядок": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Profile “%@”: drag a block onto another to change the order"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Profil „%@“: Ziehe einen Block auf einen anderen, um die Reihenfolge zu ändern"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Profil « %@ » : glissez un bloc sur un autre pour changer l’ordre"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Perfil «%@»: arrastra un bloque sobre otro para cambiar el orden"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Profilo «%@»: trascina un blocco su un altro per cambiare l’ordine"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Perfil «%@»: arraste um bloco sobre outro para mudar a ordem"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Profil „%@”: przeciągnij blok na inny, aby zmienić kolejność"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Профіль «%@»: перетягніть блок на інший, щоб змінити порядок"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "プロファイル「%@」: ブロックを別のブロックにドラッグして順序を変更"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "프로필 «%@»: 블록을 다른 블록 위로 끌어 순서를 바꾸세요"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ملف التعريف «%@»: اسحب كتلة إلى أخرى لتغيير الترتيب"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Profil «%@»: seret blok ke blok lain untuk mengubah urutan"
+          }
+        }
+      }
+    },
     "Профиль — это то, что будет в панели: лимиты AI, сессии, проекты с командами, календарь. Помощник соберёт его за пару минут.": {
       "localizations": {
         "ar": {
@@ -62459,6 +65907,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Процесор завантажений"
+          }
+        }
+      }
+    },
+    "Процессор, память, диск, батарея": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CPU, memory, disk, battery"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CPU, Speicher, Festplatte, Batterie"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Processeur, mémoire, disque, batterie"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CPU, memoria, disco, batería"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CPU, memoria, disco, batteria"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CPU, memória, disco, bateria"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Procesor, pamięć, dysk, bateria"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Процесор, пам’ять, диск, батарея"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CPU、メモリ、ディスク、バッテリー"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CPU, 메모리, 디스크, 배터리"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المعالج، الذاكرة، القرص، البطارية"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CPU, memori, disk, baterai"
           }
         }
       }
@@ -62919,7 +66443,84 @@
         }
       }
     },
+    "Путь, промпты, CLAUDE.md и фоновые задачи": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Path, prompts, CLAUDE.md and background tasks"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pfad, Prompts, CLAUDE.md und Hintergrundaufgaben"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chemin, prompts, CLAUDE.md et tâches en arrière-plan"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ruta, prompts, CLAUDE.md y tareas en segundo plano"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Percorso, prompt, CLAUDE.md e attività in background"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Caminho, prompts, CLAUDE.md e tarefas em segundo plano"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ścieżka, prompty, CLAUDE.md i zadania w tle"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Шлях, промпти, CLAUDE.md і фонові завдання"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "パス、プロンプト、CLAUDE.md、バックグラウンドタスク"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "경로, 프롬프트, CLAUDE.md, 백그라운드 작업"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المسار، والموجّهات، وCLAUDE.md، والمهام في الخلفية"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jalur, prompt, CLAUDE.md, dan tugas latar belakang"
+          }
+        }
+      }
+    },
     "Путь, сессии и hooks, Telegram, фоновые задачи": {
+      "extractionState": "stale",
       "localizations": {
         "ar": {
           "stringUnit": {
@@ -62991,6 +66592,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Шлях, сесії та hooks, Telegram, фонові завдання"
+          }
+        }
+      }
+    },
+    "Работа": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Work"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arbeit"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Travail"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trabajo"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lavoro"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trabalho"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Praca"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Робота"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "仕事"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "작업"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "العمل"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kerja"
           }
         }
       }
@@ -63451,7 +67128,84 @@
         }
       }
     },
+    "Разделители — сколько угодно раз": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dividers — as many as you like"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trenner – beliebig oft"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Séparateurs — autant que vous voulez"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Separadores: tantos como quieras"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Separatori — quanti ne vuoi"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Separadores — quantos quiser"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Separatory — dowolnie wiele razy"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Розділювачі — скільки завгодно"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "区切り — いくつでも"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "구분자 — 원하는 만큼"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الفواصل — بأي عدد تريده"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pemisah — sebanyak yang Anda mau"
+          }
+        }
+      }
+    },
     "Разделитель": {
+      "extractionState": "stale",
       "localizations": {
         "ar": {
           "stringUnit": {
@@ -63528,6 +67282,7 @@
       }
     },
     "Разделитель ставится между числами; значки и счётчики отделяются небольшим отступом. Набор общий для всех профилей.": {
+      "extractionState": "stale",
       "localizations": {
         "ar": {
           "stringUnit": {
@@ -65195,6 +68950,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Результат — новий файл поруч; наявні файли не змінюються."
+          }
+        }
+      }
+    },
+    "Репозитории и папки, PR, команды": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Repositories and folders, PRs, commands"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Repositorys und Ordner, PRs, Befehle"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dépôts et dossiers, PR, commandes"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Repositorios y carpetas, PR, comandos"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Repository e cartelle, PR, comandi"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Repositórios e pastas, PRs, comandos"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Repozytoria i foldery, PR, polecenia"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Репозиторії й теки, PR, команди"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "リポジトリとフォルダー、PR、コマンド"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "저장소와 폴더, PR, 명령"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المستودعات والمجلدات، وطلبات الدمج، والأوامر"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Repositori dan folder, PR, perintah"
           }
         }
       }
@@ -67253,6 +71084,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Окремим повідомленням через бота щоденного звіту: витрати тижня за проєктами, найважчі сесії, скільки разів упирався в ліміт, підсумки фонових завдань."
+          }
+        }
+      }
+    },
+    "Своих настроек нет.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No settings of its own."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keine eigenen Einstellungen."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pas de réglages propres."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No tiene ajustes propios."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nessuna impostazione propria."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sem configurações próprias."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Brak własnych ustawień."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Власних налаштувань немає."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "独自の設定はありません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "자체 설정이 없습니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لا إعدادات خاصة به."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tidak ada pengaturan sendiri."
           }
         }
       }
@@ -69847,6 +73754,82 @@
         }
       }
     },
+    "Сессия, неделя, прогноз, другие AI": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Session, week, forecast, other AIs"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sitzung, Woche, Prognose, andere KIs"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Session, semaine, prévision, autres IA"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sesión, semana, previsión, otras IA"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sessione, settimana, previsione, altre IA"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sessão, semana, previsão, outras IAs"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sesja, tydzień, prognoza, inne AI"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Сесія, тиждень, прогноз, інші AI"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "セッション、週、予測、他のAI"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "세션, 주간, 예측, 다른 AI"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الجلسة، الأسبوع، التوقع، أدوات ذكاء اصطناعي أخرى"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sesi, minggu, perkiraan, AI lain"
+          }
+        }
+      }
+    },
     "Сеть": {
       "localizations": {
         "ar": {
@@ -70603,6 +74586,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Скрипт у фоні запускається через zsh у домашній папці, підсумок приходить сповіщенням; «у Терміналі» — відкриває нове вікно. Ярлик — назва із застосунку «Швидкі команди». Відкрити — посилання (https://…) або шлях (~/…)."
+          }
+        }
+      }
+    },
+    "Скрипты, ярлыки, ссылки, файлы": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scripts, shortcuts, links, files"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skripte, Kurzbefehle, Links, Dateien"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scripts, raccourcis, liens, fichiers"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scripts, atajos, enlaces, archivos"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Script, comandi rapidi, link, file"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scripts, atalhos, links, arquivos"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skrypty, skróty, linki, pliki"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Скрипти, швидкі команди, посилання, файли"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "スクリプト、ショートカット、リンク、ファイル"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "스크립트, 단축어, 링크, 파일"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "سكربتات، واختصارات، وروابط، وملفات"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skrip, pintasan, tautan, file"
           }
         }
       }
@@ -71901,6 +75960,7 @@
       }
     },
     "Снять": {
+      "extractionState": "stale",
       "localizations": {
         "ar": {
           "stringUnit": {
@@ -74332,6 +78392,82 @@
         }
       }
     },
+    "Стрелка «›»": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chevron “›”"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pfeil „›“"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chevron «›»"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Flecha «›»"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Freccia «›»"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seta «›»"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Strzałka „›”"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Стрілка «›»"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "矢印「›」"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "화살표 «›»"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "سهم «›»"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Panah «›»"
+          }
+        }
+      }
+    },
     "Строка": {
       "localizations": {
         "ar": {
@@ -74632,6 +78768,158 @@
           "stringUnit": {
             "state": "translated",
             "value": "Рядок широкий (%lld pt): на MacBook з вирізом його може закрити виріз або приховати система."
+          }
+        }
+      }
+    },
+    "Схема панели": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Panel sketch"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Panel-Skizze"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schéma du panneau"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esquema del panel"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schema del pannello"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esquema do painel"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schemat panelu"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Схема панелі"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "パネルの略図"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "패널 스케치"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مخطط اللوحة"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sketsa panel"
+          }
+        }
+      }
+    },
+    "Схема панели: ": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Panel sketch: "
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Panel-Skizze: "
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schéma du panneau : "
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esquema del panel: "
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schema del pannello: "
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esquema do painel: "
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schemat panelu: "
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Схема панелі: "
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "パネルの略図: "
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "패널 스케치: "
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مخطط اللوحة: "
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sketsa panel: "
           }
         }
       }
@@ -75017,6 +79305,7 @@
       }
     },
     "Так выглядит строка, когда есть что показать.": {
+      "extractionState": "stale",
       "localizations": {
         "ar": {
           "stringUnit": {
@@ -75092,7 +79381,84 @@
         }
       }
     },
+    "Так строка выглядит сейчас. Пустые элементы (0, нет данных) не показываются, их разделители тоже.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This is how the item looks now. Empty elements (0, no data) aren’t shown, and neither are their dividers."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "So sieht die Leiste jetzt aus. Leere Elemente (0, keine Daten) werden nicht gezeigt, ihre Trenner auch nicht."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Voici l’élément tel qu’il est maintenant. Les éléments vides (0, pas de données) ne s’affichent pas, leurs séparateurs non plus."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Así se ve ahora. Los elementos vacíos (0, sin datos) no se muestran, ni tampoco sus separadores."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Così appare ora. Gli elementi vuoti (0, nessun dato) non si mostrano, e nemmeno i loro separatori."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "É assim que o item está agora. Elementos vazios (0, sem dados) não aparecem, nem os separadores deles."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tak teraz wygląda pasek. Puste elementy (0, brak danych) nie są pokazywane, ich separatory też nie."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Так рядок виглядає зараз. Порожні елементи (0, немає даних) не показуються, їхні розділювачі теж."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "現在の表示です。空の要素(0、データなし)とその区切りは表示されません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "지금 이렇게 보입니다. 빈 요소(0, 데이터 없음)와 그 구분자는 표시되지 않습니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "هكذا يبدو الآن. العناصر الفارغة (0، لا بيانات) لا تظهر، ولا فواصلها."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beginilah tampilannya sekarang. Elemen kosong (0, tanpa data) tidak ditampilkan, begitu pula pemisahnya."
+          }
+        }
+      }
+    },
     "Так строка выглядит сейчас. Пустые элементы (0, нет данных) не показываются.": {
+      "extractionState": "stale",
       "localizations": {
         "ar": {
           "stringUnit": {
@@ -75696,6 +80062,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Тема, фон і розмір тексту панелі"
+          }
+        }
+      }
+    },
+    "Тема, экран, диски, корзина": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Theme, screen, disks, Trash"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Design, Bildschirm, Volumes, Papierkorb"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Thème, écran, disques, corbeille"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tema, pantalla, discos, papelera"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tema, schermo, dischi, cestino"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tema, tela, discos, lixeira"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Motyw, ekran, dyski, kosz"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Тема, екран, диски, кошик"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "テーマ、画面、ディスク、ゴミ箱"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "테마, 화면, 디스크, 휴지통"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "السمة، الشاشة، الأقراص، سلة المهملات"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tema, layar, disk, Tong Sampah"
           }
         }
       }
@@ -76308,6 +80750,82 @@
         }
       }
     },
+    "Только AI": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI only"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nur KI"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "IA uniquement"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Solo IA"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Solo IA"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Só IA"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tylko AI"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Лише AI"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AIのみ"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI만"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الذكاء الاصطناعي فقط"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hanya AI"
+          }
+        }
+      }
+    },
     "Только если в нём нет незакоммиченного и ветка запушена или влита.": {
       "localizations": {
         "ar": {
@@ -76536,6 +81054,82 @@
         }
       }
     },
+    "Только раскладка": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keyboard layout only"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nur Tastaturlayout"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Disposition du clavier uniquement"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Solo distribución del teclado"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Solo layout tastiera"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Só layout do teclado"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tylko układ klawiatury"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Лише розкладка"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "キーボード配列のみ"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "키보드 레이아웃만"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تخطيط لوحة المفاتيح فقط"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hanya tata letak keyboard"
+          }
+        }
+      }
+    },
     "Только текущий профиль": {
       "localizations": {
         "ar": {
@@ -76684,6 +81278,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Лише файли проєкту"
+          }
+        }
+      }
+    },
+    "Тонкая линия": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Thin line"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dünne Linie"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trait fin"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Línea fina"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Linea sottile"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Linha fina"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cienka linia"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Тонка лінія"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "細い線"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "얇은 선"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "خط رفيع"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Garis tipis"
           }
         }
       }
@@ -77677,6 +82347,7 @@
       }
     },
     "Убрать из всех профилей и остановить; настройки сохранятся": {
+      "extractionState": "stale",
       "localizations": {
         "ar": {
           "stringUnit": {
@@ -78128,6 +82799,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Сповіщення AI Hub Bar вимкнено в macOS — «чекає на відповідь», підсумки завдань і ліміти не приходять."
+          }
+        }
+      }
+    },
+    "Уведомления macOS от модуля; как часто — «Основные»": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS notifications from the module; how often is in “General”"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS-Mitteilungen des Moduls; wie oft – „Allgemein“"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notifications macOS du module ; la fréquence se règle dans « Général »"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notificaciones de macOS del módulo; la frecuencia, en «General»"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notifiche macOS del modulo; la frequenza è in «Generali»"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notificações do macOS do módulo; a frequência fica em «Geral»"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Powiadomienia macOS z modułu; jak często — „Ogólne”"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Сповіщення macOS від модуля; як часто — «Загальні»"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "モジュールからのmacOS通知。頻度は「一般」で設定"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "모듈의 macOS 알림. 빈도는 «일반»에서"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إشعارات macOS من الوحدة؛ وتكرارها في «عام»"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notifikasi macOS dari modul; seberapa sering ada di «Umum»"
           }
         }
       }
@@ -79735,6 +84482,7 @@
       }
     },
     "Установить": {
+      "extractionState": "stale",
       "localizations": {
         "ar": {
           "stringUnit": {
@@ -79887,6 +84635,7 @@
       }
     },
     "Установить и добавить в текущий профиль": {
+      "extractionState": "stale",
       "localizations": {
         "ar": {
           "stringUnit": {
@@ -79958,6 +84707,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Встановити й додати до поточного профілю"
+          }
+        }
+      }
+    },
+    "Утилиты Mac": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mac utilities"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mac-Werkzeuge"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Utilitaires Mac"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Utilidades del Mac"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Utility per Mac"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Utilitários do Mac"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Narzędzia Mac"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Утиліти Mac"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Macユーティリティ"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mac 유틸리티"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "أدوات Mac"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Utilitas Mac"
           }
         }
       }
@@ -80034,6 +84859,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Вушка й картка"
+          }
+        }
+      }
+    },
+    "Ушко у чёлки показывает модуль": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "An ear by the notch shows the module"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ein Ohr an der Notch zeigt das Modul"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une oreille près de l’encoche affiche le module"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Una oreja junto al notch muestra el módulo"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un’orecchia accanto al notch mostra il modulo"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uma orelha junto ao notch mostra o módulo"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ucho przy notchu pokazuje moduł"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Вушко біля виїмки показує модуль"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ノッチ横の耳にモジュールを表示"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "노치 옆 귀에 모듈을 표시"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "أذن بجانب النتوء تعرض الوحدة"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Telinga di samping notch menampilkan modul"
           }
         }
       }
@@ -82634,6 +87535,82 @@
         }
       }
     },
+    "Что включено — плитками и готовыми наборами": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "What’s on — as tiles and ready-made sets"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Was aktiv ist – als Kacheln und fertige Sets"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ce qui est activé — en tuiles et ensembles prêts"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Qué está activado: en mosaicos y conjuntos listos"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cosa è attivo — a riquadri e set pronti"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O que está ativado — em blocos e conjuntos prontos"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Co jest włączone — kafelki i gotowe zestawy"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Що увімкнено — плитками й готовими наборами"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "オンのもの — タイルと既製セット"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "켜진 항목 — 타일과 기본 세트"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ما هو مفعّل — بطاقات ومجموعات جاهزة"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apa yang aktif — ubin dan set siap pakai"
+          }
+        }
+      }
+    },
     "Что делает": {
       "localizations": {
         "ar": {
@@ -83167,6 +88144,7 @@
       }
     },
     "Что умеет панель и как это настроить": {
+      "extractionState": "stale",
       "localizations": {
         "ar": {
           "stringUnit": {
@@ -83704,6 +88682,82 @@
         }
       }
     },
+    "Широкий пробел": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wide space"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Breites Leerzeichen"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Espace large"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Espacio ancho"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spazio ampio"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Espaço largo"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Szeroka spacja"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Широкий пробіл"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "広いスペース"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "넓은 공백"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مسافة عريضة"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spasi lebar"
+          }
+        }
+      }
+    },
     "Экран": {
       "localizations": {
         "ar": {
@@ -84008,6 +89062,158 @@
         }
       }
     },
+    "Элементы": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elements"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elemente"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Éléments"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elementos"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elementi"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elementos"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elementy"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Елементи"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "要素"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "요소"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "العناصر"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elemen"
+          }
+        }
+      }
+    },
+    "Элементы модуля в строке меню; порядок и вид — «Строка меню»": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The module’s elements in the menu bar; order and look are in “Menu Bar”"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elemente des Moduls in der Menüleiste; Reihenfolge und Aussehen unter „Menüleiste“"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Éléments du module dans la barre des menus ; ordre et apparence dans « Barre des menus »"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elementos del módulo en la barra de menús; orden y aspecto, en «Barra de menús»"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elementi del modulo nella barra dei menu; ordine e aspetto in «Barra dei menu»"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elementos do módulo na barra de menus; ordem e aparência em «Barra de menus»"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elementy modułu na pasku menu; kolejność i wygląd — „Pasek menu”"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Елементи модуля в рядку меню; порядок і вигляд — «Рядок меню»"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "メニューバーのモジュール要素。順序と見た目は「メニューバー」で"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "메뉴 막대의 모듈 요소. 순서와 모양은 «메뉴 막대»에서"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "عناصر الوحدة في شريط القائمة؛ الترتيب والمظهر في «شريط القائمة»"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elemen modul di bar menu; urutan dan tampilan ada di «Bar Menu»"
+          }
+        }
+      }
+    },
     "Элементы — в порядке слева направо": {
       "extractionState": "stale",
       "localizations": {
@@ -84086,6 +89292,7 @@
       }
     },
     "Элементы — в порядке слева направо (или перетаскиванием вверху)": {
+      "extractionState": "stale",
       "localizations": {
         "ar": {
           "stringUnit": {
@@ -84542,6 +89749,7 @@
       }
     },
     "Это первая сборка AI Hub Bar для Windows и Linux: значок, панель и настройки. Лимиты, сессии и проекты появятся на следующих этапах.": {
+      "extractionState": "stale",
       "localizations": {
         "ar": {
           "stringUnit": {
@@ -86149,6 +91357,82 @@
         }
       }
     },
+    "включено": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "on"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "an"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "activé"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "activado"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "attivo"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ativado"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "włączone"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "увімкнено"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "オン"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "켜짐"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مفعّل"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "aktif"
+          }
+        }
+      }
+    },
     "включены": {
       "localizations": {
         "ar": {
@@ -86454,6 +91738,7 @@
       }
     },
     "встроенный": {
+      "extractionState": "stale",
       "localizations": {
         "ar": {
           "stringUnit": {
@@ -86525,6 +91810,158 @@
           "stringUnit": {
             "state": "translated",
             "value": "вбудований"
+          }
+        }
+      }
+    },
+    "выключен": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "off"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "aus"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "désactivé"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "desactivado"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "disattivato"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "desativado"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "wyłączony"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "вимкнено"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "オフ"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "꺼짐"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "متوقف"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "mati"
+          }
+        }
+      }
+    },
+    "выключено": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "off"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "aus"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "désactivé"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "desactivado"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "disattivato"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "desativado"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "wyłączone"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "вимкнено"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "オフ"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "꺼짐"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "متوقف"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "mati"
           }
         }
       }
@@ -91851,6 +97288,7 @@
       }
     },
     "не используется": {
+      "extractionState": "stale",
       "localizations": {
         "ar": {
           "stringUnit": {

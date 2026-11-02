@@ -55,30 +55,41 @@ struct ServiceTabTests {
 }
 
 struct SettingsPaneTests {
+    private var modulePanes: [SettingsPane] { ModuleKind.allCases.map(SettingsPane.module) }
+
     @Test func paneAndStoredTabRoundTrip() {
-        for pane in SettingsPane.areas + SettingsPane.services {
+        for pane in SettingsPane.areas + SettingsPane.services + modulePanes {
             let service: ServiceTab = if case let .service(chosen) = pane { chosen } else { .claude }
-            #expect(SettingsPane(tab: pane.tab, service: service) == pane)
+            let module: ModuleKind = if case let .module(chosen) = pane { chosen } else { .limits }
+            #expect(SettingsPane(tab: pane.tab, service: service, module: module) == pane)
         }
-        #expect(SettingsPane(tab: .services, service: .gemini) == .service(.gemini))
-        #expect(SettingsPane(tab: .appearance, service: .gemini) == .appearance, "the service matters only under «Сервисы AI»")
+        #expect(SettingsPane(tab: .services, service: .gemini, module: .notes) == .service(.gemini))
+        #expect(SettingsPane(tab: .module, service: .gemini, module: .notes) == .module(.notes))
+        #expect(SettingsPane(tab: .appearance, service: .gemini, module: .notes) == .appearance, "the service and module matter only on their pages")
     }
 
     @Test func searchFindsByTitleAndSettingNames() {
-        let all = SettingsPane.areas + SettingsPane.services
+        let all = SettingsPane.areas + SettingsPane.services + modulePanes
         #expect(all.allSatisfy { $0.matches("") && $0.matches("  ") })
         let codex = all.filter { $0.matches("codex") }
         #expect(codex.contains(.service(.codex)) && !codex.contains(.service(.claude)))
         let telegram = all.filter { $0.matches("telegram") }
-        #expect(telegram.contains(.general) && telegram.contains(.service(.claude)))
+        #expect(telegram.contains(.general) && telegram.contains(.module(.sessions)))
         #expect(all.filter { $0.matches("zzz-nothing") }.isEmpty)
-        #expect(Set(all.map(\.subtitle)).count == all.count - 1, "Copilot and Cursor share «Агент и лимиты»")
     }
 
-    /// «Бета-версии» is found in General, «Раскладка» and its switches in Modules (shown there even with beta off).
+    /// «Бета-версии» is found in General, «Раскладка»'s switches on its own page.
     @Test func searchFindsBetaAndTheLayoutModule() {
         #expect(SettingsPane.general.matches("бета"))
-        #expect(SettingsPane.modules.matches("Раскладка"))
-        #expect(SettingsPane.modules.matches("Shift"))
+        #expect(SettingsPane.module(.layout).matches("Раскладка"))
+        #expect(SettingsPane.module(.layout).matches("Shift"))
+    }
+
+    /// Every module sits in exactly one sidebar section.
+    @Test func everyModuleHasOneSection() {
+        let listed = ModuleGroup.allCases.flatMap(\.modules)
+        #expect(listed.count == ModuleKind.allCases.count)
+        #expect(Set(listed) == Set(ModuleKind.allCases))
+        #expect(listed.allSatisfy { kind in ModuleGroup.allCases.first { $0.modules.contains(kind) } == kind.group })
     }
 }

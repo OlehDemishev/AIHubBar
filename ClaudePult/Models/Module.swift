@@ -53,6 +53,34 @@ enum ModuleKind: String, Codable, CaseIterable, Sendable {
         }
     }
 
+    /// The Settings sidebar section the module sits in (SPEC-settings §2).
+    var group: ModuleGroup {
+        switch self {
+        case .limits, .sessions: .ai
+        case .upcoming, .projects, .reports, .quickCommands, .notes, .clipboard: .work
+        case .resources, .keepAwake, .toggles, .layout, .notch: .mac
+        }
+    }
+
+    /// One line for the module's tile in Settings → «Модули».
+    var tagline: String {
+        switch self {
+        case .limits: String(localized: "Сессия, неделя, прогноз, другие AI")
+        case .sessions: String(localized: "Claude Code, фоновые задачи, очередь")
+        case .upcoming: String(localized: "Дедлайны и публикации на 7 дней")
+        case .projects: String(localized: "Репозитории и папки, PR, команды")
+        case .reports: String(localized: "Отчёт, сводка, очистка сборок")
+        case .resources: String(localized: "Процессор, память, диск, батарея")
+        case .keepAwake: String(localized: "Mac не засыпает по правилам")
+        case .quickCommands: String(localized: "Скрипты, ярлыки, ссылки, файлы")
+        case .toggles: String(localized: "Тема, экран, диски, корзина")
+        case .clipboard: String(localized: "Последние копирования, поиск")
+        case .notes: String(localized: "Markdown прямо в панели")
+        case .notch: String(localized: "Лимит и сессии у чёлки")
+        case .layout: String(localized: "Исправляет текст не в той раскладке")
+        }
+    }
+
     var symbol: String {
         switch self {
         case .limits: "gauge.with.dots.needle.33percent"
@@ -68,6 +96,28 @@ enum ModuleKind: String, Codable, CaseIterable, Sendable {
         case .notes: "note.text"
         case .notch: "laptopcomputer"
         case .layout: "keyboard"
+        }
+    }
+}
+
+/// The sections of modules in the Settings sidebar and the «Модули» tiles (SPEC-settings §2).
+enum ModuleGroup: String, CaseIterable, Sendable {
+    case ai, work, mac
+
+    var title: String {
+        switch self {
+        case .ai: "AI"
+        case .work: String(localized: "Работа")
+        case .mac: "Mac"
+        }
+    }
+
+    /// Modules in sidebar order.
+    var modules: [ModuleKind] {
+        switch self {
+        case .ai: [.limits, .sessions]
+        case .work: [.upcoming, .projects, .reports, .quickCommands, .notes, .clipboard]
+        case .mac: [.resources, .keepAwake, .toggles, .layout, .notch]
         }
     }
 }

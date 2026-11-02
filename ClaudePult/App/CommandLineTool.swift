@@ -105,6 +105,7 @@ enum CommandLineTool {
                 print("       modules: \(modules.joined(separator: ", "))")
             }
             print("installed: \(modes.installedModules.map(\.rawValue).joined(separator: ", "))")
+            print("off: \(modes.switchedOff.map(\.rawValue).joined(separator: ", "))")
             return 0
         }
         if let index = arguments.firstIndex(of: "--export-settings"), index + 1 < arguments.count {
@@ -494,8 +495,7 @@ enum CommandLineTool {
     /// Draws the item as the menu bar would (dark and light) from the saved config, or from a preset.
     private static func menuBarPreview(path: String, preset: String?) -> Int32 {
         let config = preset.flatMap(MenuBarConfig.Preset.init(rawValue:)).map(MenuBarConfig.make) ?? AppSettings().menuBarConfig
-        let groups = MenuBarComposer.groups(config, .sample)
-        let item = MenuBarRenderer.image(groups, config: config)
+        let item = MenuBarRenderer.image(MenuBarComposer.strip(config, .sample), config: config)
         let scale: CGFloat = 2, pad: CGFloat = 8
         let size = NSSize(width: (item.size.width + pad * 2) * scale, height: (item.size.height + pad * 2) * scale * 2)
         guard let rep = NSBitmapImageRep(bitmapDataPlanes: nil, pixelsWide: Int(size.width), pixelsHigh: Int(size.height),
@@ -517,7 +517,7 @@ enum CommandLineTool {
         guard let png = rep.representation(using: .png, properties: [:]) else { return 1 }
         do {
             try png.write(to: URL(fileURLWithPath: path))
-            print("\(path): \(Int(item.size.width)) pt wide, \(groups.count) element(s)")
+            print("\(path): \(Int(item.size.width)) pt wide, \(MenuBarComposer.groups(config, .sample).count) element(s)")
             return 0
         } catch {
             printError(error.localizedDescription)

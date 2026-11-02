@@ -1,28 +1,31 @@
 import AppKit
 import SwiftUI
 
-/// Settings window like System Settings (design variant A, 2026-11-02): a sidebar with search, the app's areas and
-/// «Сервисы AI» with a page per AI; the chosen page on the right under its header. One window size for every page.
+/// Settings window like System Settings (SPEC-settings §2): a sidebar with search — the app's areas, the modules by
+/// section (AI, Работа, Mac) and «Сервисы AI» with a page per AI; the chosen page on the right under its header.
+/// One window size for every page.
 struct SettingsView: View {
-    /// What `settingsTab` stores; with `servicesTab` it names the open page (`SettingsPane`).
+    /// What `settingsTab` stores; with `servicesTab` / `settingsModule` it names the open page (`SettingsPane`).
     enum Tab: String, CaseIterable {
-        case general, modes, modules, appearance, menuBar, services
+        case general, modes, modules, panel, appearance, menuBar, services, module
     }
 
-    static let size = CGSize(width: 900, height: 660)
+    static let size = CGSize(width: 940, height: 700)
 
     @Environment(AppSettings.self) private var settings
     @Environment(AIServiceStore.self) private var services
     @Environment(HubLimitsStore.self) private var hub
+    @Environment(ModeStore.self) private var modes
     @AppStorage(SettingsRoute.tabKey) private var tab: Tab = .general
     @AppStorage(SettingsRoute.serviceKey) private var service: ServiceTab = .claude
+    @AppStorage(SettingsRoute.moduleKey) private var module: ModuleKind = .limits
     @State private var query = ""
 
     init() {
         SettingsRoute.migrate()
     }
 
-    private var pane: SettingsPane { SettingsPane(tab: tab, service: service) }
+    private var pane: SettingsPane { SettingsPane(tab: tab, service: service, module: module) }
 
     var body: some View {
         NavigationSplitView {
@@ -30,26 +33,39 @@ struct SettingsView: View {
                 ForEach(SettingsPane.areas.filter { $0.matches(query) }, id: \.self) { pane in
                     PaneRow(pane: pane)
                 }
-                let found = SettingsPane.services.filter { $0.matches(query) }
-                if !found.isEmpty {
-                    Section("Сервисы AI") {
-                        ForEach(found, id: \.self) { pane in
-                            PaneRow(pane: pane, isSetUp: isSetUp(pane))
+                ForEach(ModuleGroup.allCases, id: \.self) { group in
+                    let found = group.modules.filter(isListed).map(SettingsPane.module).filter { $0.matches(query) }
+                    if !found.isEmpty {
+                        Section(group.title) {
+                            ForEach(found, id: \.self) { pane in
+                                PaneRow(pane: pane, isOff: !isOn(pane))
+                            }
+                        }
+                    }
+                    if group == .ai {
+                        let found = SettingsPane.services.filter { $0.matches(query) }
+                        if !found.isEmpty {
+                            Section("Сервисы AI") {
+                                ForEach(found, id: \.self) { pane in
+                                    PaneRow(pane: pane, isSetUp: isSetUp(pane))
+                                }
+                            }
                         }
                     }
                 }
             }
             .searchable(text: $query, placement: .sidebar, prompt: Text("Поиск"))
-            .navigationSplitViewColumnWidth(220)
+            .navigationSplitViewColumnWidth(230)
             .toolbar(removing: .sidebarToggle)
         } detail: {
             VStack(alignment: .leading, spacing: 0) {
-                PaneHeader(pane: pane)
-                    .padding(.horizontal, 20)
-                    .padding(.top, 16)
-                    .padding(.bottom, 4)
+                PaneHeader(pane: pane, isOn: mainSwitch)
+                    .padding(.horizontal, 24)
+                    .padding(.top, 18)
+                    .padding(.bottom, 8)
                 page
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .font(.system(size: 13.5))
             }
             .navigationTitle(pane.title)
         }
@@ -64,16 +80,32 @@ struct SettingsView: View {
         switch pane {
         case .general: GeneralSettings()
         case .modes: ModesSettings()
-        case .modules: ModulesSettings()
+        case .modules: ModuleCatalog { select(.module($0)) }
+        case .panel: PanelBuilder()
         case .appearance: AppearanceSettings()
         case .menuBar: MenuBarSettings()
+        case let .module(kind): ModulePage(kind: kind).id(kind)
         case let .service(service): ServicePage(service: service).id(service)
         }
+    }
+
+    /// «Раскладка» is offered only with beta builds (SPEC-layout).
+    private func isListed(_ kind: ModuleKind) -> Bool { !kind.isBeta || settings.betaUpdates }
+
+    private func isOn(_ pane: SettingsPane) -> Bool {
+        guard case let .module(kind) = pane else { return true }
+        return modes.isOn(kind)
+    }
+
+    private var mainSwitch: Binding<Bool>? {
+        guard case let .module(kind) = pane, ModuleSwitch.canSwitch(kind, modes: modes) else { return nil }
+        return Binding(get: { modes.isOn(kind) }, set: { modes.setOn(kind, $0) })
     }
 
     private func select(_ new: SettingsPane) {
         tab = new.tab
         if case let .service(chosen) = new { service = chosen }
+        if case let .module(chosen) = new { module = chosen }
     }
 
     private func isSetUp(_ pane: SettingsPane) -> Bool? {
@@ -111,7 +143,7 @@ struct Footnote: View {
 
     var body: some View {
         Text(text)
-            .font(.caption)
+            .font(.system(size: 11.5))
             .foregroundStyle(.secondary)
             .fixedSize(horizontal: false, vertical: true)
     }
@@ -131,7 +163,7 @@ private struct GeneralSettings: View {
         @Bindable var settings = settings
         SettingsPage {
             Section {
-                Toggle("Запускать при входе в систему", isOn: Binding(
+                Toggle("Запускать при входе в систему", systemImage: "power", isOn: Binding(
                     get: { loginItem.state.isOn },
                     set: { loginItem.setEnabled($0) }
                 ))
@@ -145,7 +177,7 @@ private struct GeneralSettings: View {
                     Text("Ошибка: \(error)").font(.callout).foregroundStyle(.red)
                 }
                 LanguagePicker()
-                Picker("Открывать поиск с клавиатуры", selection: $settings.panelHotKey) {
+                Picker("Открывать поиск с клавиатуры", systemImage: "magnifyingglass", selection: $settings.panelHotKey) {
                     ForEach(PanelHotKey.allCases, id: \.self) { Text($0.title).tag($0) }
                 }
                 .onChange(of: settings.panelHotKey) { GlobalHotKey.register(settings.panelHotKey) }
@@ -248,26 +280,26 @@ private struct AppearanceSettings: View {
         @Bindable var settings = settings
         SettingsPage {
             Section("Панель") {
-                Picker("Тема", selection: $settings.panelTheme) {
+                Picker("Тема", systemImage: "circle.lefthalf.filled", selection: $settings.panelTheme) {
                     ForEach(PanelTheme.allCases, id: \.self) { Text($0.title).tag($0) }
                 }
-                Picker("Фон панели", selection: $settings.panelBackground) {
+                Picker("Фон панели", systemImage: "square.on.square", selection: $settings.panelBackground) {
                     ForEach(PanelBackground.allCases, id: \.self) { Text($0.title).tag($0) }
                 }
                 .disabled(!glassSupported)
                 if let backgroundNote {
                     Footnote(text: backgroundNote)
                 }
-                Picker("Размер текста", selection: $settings.panelTextSize) {
+                Picker("Размер текста", systemImage: "textformat.size", selection: $settings.panelTextSize) {
                     ForEach(PanelTextSize.allCases, id: \.self) { Text($0.title).tag($0) }
                 }
-                Picker("Ширина", selection: $settings.panelWidth) {
+                Picker("Ширина", systemImage: "arrow.left.and.right", selection: $settings.panelWidth) {
                     ForEach(PanelWidth.allCases, id: \.self) { Text($0.title).tag($0) }
                 }
-                Picker("Плотность строк", selection: $settings.panelDensity) {
+                Picker("Плотность строк", systemImage: "line.3.horizontal", selection: $settings.panelDensity) {
                     ForEach(PanelDensity.allCases, id: \.self) { Text($0.title).tag($0) }
                 }
-                Toggle("Анимации при открытии", isOn: $settings.panelAnimations)
+                Toggle("Анимации при открытии", systemImage: "sparkle", isOn: $settings.panelAnimations)
                 TextSizePreview(scale: settings.panelTextSize.scale)
             }
 
@@ -336,9 +368,6 @@ struct ClaudeSettings: View {
                 Footnote(text: String(localized: "Путь пустой — искать в /opt/homebrew/bin, /usr/local/bin, ~/.local/bin, ~/.claude/local. Где запускать команды (Терминал / Фон / спрашивать) — у каждого профиля на вкладке «Профили»."))
             }
 
-            SessionSection()
-            TelegramApprovalsSection()
-
             SavedPromptsSection()
 
             Section {
@@ -356,8 +385,8 @@ struct ClaudeSettings: View {
                 Stepper(value: $settings.backgroundTimeLimitMinutes, in: 10...600, step: 10) {
                     LabeledContent("Лимит времени", value: String(localized: "\(settings.backgroundTimeLimitMinutes) мин"))
                 }
-                Toggle("Итог в Telegram", isOn: $settings.telegramForBackground)
-                Picker("Ночные задачи начинаются в", selection: $settings.nightStartHour) {
+                Toggle("Итог в Telegram", systemImage: "paperplane", isOn: $settings.telegramForBackground)
+                Picker("Ночные задачи начинаются в", systemImage: "moon.stars", selection: $settings.nightStartHour) {
                     ForEach(NightQueue.hours, id: \.self) { Text(verbatim: String(format: "%02d:00", $0)).tag($0) }
                 }
                 if settings.telegramForBackground,
@@ -517,81 +546,8 @@ private struct SavedPromptsSection: View {
 
 // MARK: - Модули
 
-/// Settings → «Модули» (SPEC-profiles §6): the catalog — what each module does, which profiles show it, and its
-/// settings that don't depend on a profile. The five modules ClaudePult has today are built in; installing and
-/// removing arrive with the first optional module (Ресурсы Mac, SPEC-profiles §9.4).
-private struct ModulesSettings: View {
-    @Environment(ModeStore.self) private var modes
-    @Environment(AppSettings.self) private var settings
-
-    var body: some View {
-        Form {
-            ForEach(ModuleKind.allCases, id: \.self) { kind in
-                Section {
-                    Text(kind.summary)
-                        .font(.callout)
-                        .foregroundStyle(.secondary)
-                        .fixedSize(horizontal: false, vertical: true)
-                    if kind.isBeta, !settings.betaUpdates {
-                        Footnote(text: String(localized: "На испытании: работает только с «Бета-версиями» (Настройки → Основные). Включите их здесь — и модуль можно установить."))
-                    }
-                    if kind.isPanelBlock {
-                        LabeledContent("В профилях", value: profiles(showing: kind))
-                    }
-                } header: {
-                    HStack {
-                        Label(kind.title, systemImage: kind.symbol)
-                        if kind.isBeta { BetaBadge() }
-                        Spacer()
-                        if kind.isBeta, !settings.betaUpdates, !modes.installedModules.contains(kind) {
-                            // Seen in the catalog, so it can be found; installing needs beta builds first.
-                            Button("Включить бета-версии") { settings.betaUpdates = true }
-                                .controlSize(.small)
-                        } else if kind.isBuiltIn {
-                            Text(modes.installedModules.contains(kind) ? String(localized: "встроенный") : String(localized: "не используется"))
-                                .font(.caption)
-                                .foregroundStyle(.secondary)
-                        } else if modes.installedModules.contains(kind) {
-                            Button("Снять") { modes.uninstall(kind) }
-                                .controlSize(.small)
-                                .help("Убрать из всех профилей и остановить; настройки сохранятся")
-                        } else {
-                            Button("Установить") { modes.install(kind) }
-                                .controlSize(.small)
-                                .help(kind.isPanelBlock ? String(localized: "Установить и добавить в текущий профиль") : String(localized: "Установить"))
-                        }
-                    }
-                }
-                switch kind {
-                case .limits:
-                    LimitSection()
-                    HubSection()
-                case .upcoming: ReminderSection()
-                case .projects: PullRequestAlertSection()
-                case .resources where modes.installedModules.contains(.resources): ResourceSection()
-                case .keepAwake where modes.installedModules.contains(.keepAwake): KeepAwakeSection()
-                case .quickCommands where modes.installedModules.contains(.quickCommands): QuickCommandsSection()
-                case .toggles where modes.installedModules.contains(.toggles): QuickTogglesSection()
-                case .clipboard where modes.installedModules.contains(.clipboard): ClipboardSection()
-                case .notes where modes.installedModules.contains(.notes): NotesSection()
-                case .notch where modes.installedModules.contains(.notch): NotchSection()
-                case .layout where modes.installedModules.contains(.layout) && settings.betaUpdates: LayoutSection()
-                default: EmptyView()
-                }
-            }
-        }
-        .formStyle(.grouped)
-        .frame(height: 600)
-    }
-
-    private func profiles(showing kind: ModuleKind) -> String {
-        let names = modes.modes.filter { $0.shows(kind) }.map(\.name)
-        return names.isEmpty ? String(localized: "нет") : names.joined(separator: ", ")
-    }
-}
-
 /// «бета» next to a module still in beta testing.
-private struct BetaBadge: View {
+struct BetaBadge: View {
     var body: some View {
         Text("бета")
             .font(.caption2.weight(.semibold))
@@ -604,7 +560,7 @@ private struct BetaBadge: View {
 }
 
 /// «Раскладка» (SPEC-layout §4): the permission, the layouts it switches between and the few switches it has.
-private struct LayoutSection: View {
+struct LayoutSection: View {
     @Environment(AppSettings.self) private var settings
     @Environment(LayoutSwitcher.self) private var switcher
 
@@ -620,12 +576,12 @@ private struct LayoutSection: View {
                 }
             }
             LabeledContent("Раскладки", value: switcher.layouts.isEmpty ? String(localized: "нет подходящих") : switcher.layouts.map(\.name).joined(separator: ", "))
-            Toggle("Исправлять раскладку сам", isOn: $settings.layout.auto)
-            Toggle("Не исправлять в терминалах", isOn: $settings.layout.skipTerminals)
+            Toggle("Исправлять раскладку сам", systemImage: "wand.and.stars", isOn: $settings.layout.auto)
+            Toggle("Не исправлять в терминалах", systemImage: "terminal", isOn: $settings.layout.skipTerminals)
                 .disabled(!settings.layout.auto)
-            Toggle("Двойной Shift — последнее слово", isOn: $settings.layout.doubleShift)
-            Toggle("⌥⇧ — выделенный текст", isOn: $settings.layout.optionShift)
-            Toggle("Язык в строке меню", isOn: $settings.layout.menuBarIcon)
+            Toggle("Двойной Shift — последнее слово", systemImage: "shift", isOn: $settings.layout.doubleShift)
+            Toggle("⌥⇧ — выделенный текст", systemImage: "option", isOn: $settings.layout.optionShift)
+            Toggle("Язык в строке меню", systemImage: "menubar.rectangle", isOn: $settings.layout.menuBarIcon)
                 .onChange(of: settings.layout.menuBarIcon) { switcher.sync() }
         } header: {
             Text("Раскладка")
@@ -654,17 +610,17 @@ private struct LayoutSection: View {
 }
 
 /// «Остров у чёлки» (SPEC-notch §6): what the ears show and how the card opens.
-private struct NotchSection: View {
+struct NotchSection: View {
     @Environment(AppSettings.self) private var settings
 
     var body: some View {
         @Bindable var settings = settings
         Section {
-            Toggle("Скрыть остров", isOn: $settings.notch.hidden)
-            Picker("Сводка — лимиты и сессии", selection: $settings.notch.summary) {
+            Toggle("Скрыть остров", systemImage: "eye.slash", isOn: $settings.notch.hidden)
+            Picker("Сводка — лимиты и сессии", systemImage: "rectangle.split.2x1", selection: $settings.notch.summary) {
                 ForEach(NotchSummary.allCases, id: \.self) { Text($0.title).tag($0) }
             }
-            Picker("Где показывать", selection: $settings.notch.screen) {
+            Picker("Где показывать", systemImage: "display", selection: $settings.notch.screen) {
                 ForEach(NotchScreen.allCases, id: \.self) { Text($0.title).tag($0) }
             }
             Toggle("Пилюля на экранах без чёлки", isOn: Binding(
@@ -677,18 +633,18 @@ private struct NotchSection: View {
             Footnote(text: String(localized: "«Только в острове»: в строке меню остаются значок и красная точка проектов, лимиты и сессии — в ушках у чёлки. Пилюля — чёрный остров под строкой меню по центру, только для событий и запросов: у неё нет ушек, поэтому сводка тогда остаётся в строке меню. Скрытый остров ничего не показывает, уведомления приходят как обычно."))
         }
         Section {
-            Picker("Слева от чёлки", selection: $settings.notch.leftEar) {
+            Picker("Слева от чёлки", systemImage: "arrow.left.to.line", selection: $settings.notch.leftEar) {
                 ForEach(NotchEar.allCases, id: \.self) { Text($0.title).tag($0) }
             }
-            Picker("Справа от чёлки", selection: $settings.notch.rightEar) {
+            Picker("Справа от чёлки", systemImage: "arrow.right.to.line", selection: $settings.notch.rightEar) {
                 ForEach(NotchEar.allCases, id: \.self) { Text($0.title).tag($0) }
             }
-            Toggle("Открывать карточку при наведении", isOn: $settings.notch.openOnHover)
-            Toggle("Файл на остров — AI-команды", isOn: $settings.notch.fileDrop)
+            Toggle("Открывать карточку при наведении", systemImage: "cursorarrow.motionlines", isOn: $settings.notch.openOnHover)
+            Toggle("Файл на остров — AI-команды", systemImage: "doc.badge.arrow.up", isOn: $settings.notch.fileDrop)
                 .help("Перетащите файл или папку на чёлку: команды профиля и «Своя задача» для него, результат — новым файлом рядом.")
-            Toggle("Ход работы Claude в ушке сессий", isOn: $settings.notch.liveActivity)
+            Toggle("Ход работы Claude в ушке сессий", systemImage: "list.bullet.clipboard", isOn: $settings.notch.liveActivity)
                 .help("Кольцо и «3/7» по списку задач Claude, шаги в карточке, итог в «Готово». Без списка — минуты с начала ответа.")
-            Toggle("Горячие клавиши ⌃⌥Y / ⌃⌥N для запросов", isOn: $settings.notch.hotKeys)
+            Toggle("Горячие клавиши ⌃⌥Y / ⌃⌥N для запросов", systemImage: "keyboard", isOn: $settings.notch.hotKeys)
                 .onChange(of: settings.notch.hotKeys) { GlobalHotKey.registerIsland(settings.notch.hotKeys) }
                 .help("Разрешить или отклонить запрос, который сейчас в острове. Клавишей легко разрешить, не прочитав команду.")
         } header: {
@@ -709,7 +665,7 @@ private struct NotchSection: View {
                     Label(kind.title, systemImage: kind.symbol)
                 }
             }
-            Toggle("Запросы и ожидание — только в острове", isOn: $settings.notch.replaceNotifications)
+            Toggle("Запросы и ожидание — только в острове", systemImage: "bell.slash", isOn: $settings.notch.replaceNotifications)
         } header: {
             Text("События в острове")
         } footer: {
@@ -718,14 +674,14 @@ private struct NotchSection: View {
     }
 }
 
-private struct ResourceSection: View {
+struct ResourceSection: View {
     @Environment(AppSettings.self) private var settings
 
     var body: some View {
         @Bindable var settings = settings
         Section {
-            Toggle("Уведомлять о нагрузке, памяти, месте и заряде", isOn: $settings.resourceAlerts)
-            Picker("Мало места — свободно меньше", selection: $settings.resourceDiskBelowGB) {
+            Toggle("Уведомлять о нагрузке, памяти, месте и заряде", systemImage: "bell.badge", isOn: $settings.resourceAlerts)
+            Picker("Мало места — свободно меньше", systemImage: "internaldrive", selection: $settings.resourceDiskBelowGB) {
                 ForEach([5, 10, 20, 50, 100], id: \.self) { Text("\($0) ГБ").tag($0) }
             }
             .disabled(!settings.resourceAlerts)
@@ -737,7 +693,7 @@ private struct ResourceSection: View {
     }
 }
 
-private struct KeepAwakeSection: View {
+struct KeepAwakeSection: View {
     @Environment(AppSettings.self) private var settings
     @Environment(KeepAwakeController.self) private var keepAwake
     @State private var lidBusy = false
@@ -747,9 +703,9 @@ private struct KeepAwakeSection: View {
     var body: some View {
         @Bindable var settings = settings
         Section {
-            Toggle("Пока работает Claude (сессия или фоновая задача)", isOn: $settings.keepAwakeRules.whileClaudeWorks)
-            Toggle("Пока подключено питание", isOn: $settings.keepAwakeRules.whileOnPower)
-            Toggle("Пока подключён внешний монитор", isOn: $settings.keepAwakeRules.whileExternalDisplay)
+            Toggle("Пока работает Claude (сессия или фоновая задача)", systemImage: "sparkles", isOn: $settings.keepAwakeRules.whileClaudeWorks)
+            Toggle("Пока подключено питание", systemImage: "powerplug", isOn: $settings.keepAwakeRules.whileOnPower)
+            Toggle("Пока подключён внешний монитор", systemImage: "display", isOn: $settings.keepAwakeRules.whileExternalDisplay)
             LabeledContent("Пока открыты приложения") {
                 HStack {
                     Text(settings.keepAwakeRules.whileApps.isEmpty ? String(localized: "нет") : settings.keepAwakeRules.whileApps.map(\.name).joined(separator: ", "))
@@ -761,7 +717,7 @@ private struct KeepAwakeSection: View {
                     }
                 }
             }
-            Toggle("Не гасить и экран", isOn: $settings.keepAwakeRules.keepDisplayOn)
+            Toggle("Не гасить и экран", systemImage: "sun.max", isOn: $settings.keepAwakeRules.keepDisplayOn)
         } header: {
             Text("Правила «Не спать»")
         } footer: {
@@ -772,7 +728,7 @@ private struct KeepAwakeSection: View {
                 Text("У этого Mac нет крышки: правило нужно только ноутбукам.")
                     .foregroundStyle(.secondary)
             }
-            Toggle("И с закрытой крышкой", isOn: $settings.keepAwakeRules.lidClosed)
+            Toggle("И с закрытой крышкой", systemImage: "laptopcomputer", isOn: $settings.keepAwakeRules.lidClosed)
                 .disabled(!keepAwake.lidInstalled || !LidSleep.hasLid)
             LabeledContent("Разрешение администратора") {
                 HStack {
@@ -833,7 +789,7 @@ private struct KeepAwakeSection: View {
 }
 
 /// The «Быстрые команды» library: what each button runs (SPEC-profiles §4.3).
-private struct QuickCommandsSection: View {
+struct QuickCommandsSection: View {
     @Environment(AppSettings.self) private var settings
 
     private static let symbols = ["bolt", "terminal", "folder", "link", "doc", "arrow.down.circle", "network", "hammer", "play", "wand.and.stars", "camera", "music.note"]
@@ -895,13 +851,13 @@ private struct QuickCommandsSection: View {
     }
 }
 
-private struct QuickTogglesSection: View {
+struct QuickTogglesSection: View {
     @Environment(AppSettings.self) private var settings
     @Environment(ModeStore.self) private var modes
 
     var body: some View {
         Section {
-            ForEach(QuickToggle.available(installed: modes.installedModules), id: \.self) { toggle in
+            ForEach(QuickToggle.available(installed: modes.activeModules), id: \.self) { toggle in
                 Toggle(isOn: Binding(
                     get: { settings.quickToggles.contains(toggle) },
                     set: { on in settings.quickToggles = QuickToggle.allCases.filter { $0 == toggle ? on : settings.quickToggles.contains($0) } }
@@ -917,17 +873,17 @@ private struct QuickTogglesSection: View {
     }
 }
 
-private struct ClipboardSection: View {
+struct ClipboardSection: View {
     @Environment(AppSettings.self) private var settings
     @Environment(ClipboardHistory.self) private var history
 
     var body: some View {
         @Bindable var settings = settings
         Section {
-            Picker("Хранить последних", selection: $settings.clipboardLimit) {
+            Picker("Хранить последних", systemImage: "tray.full", selection: $settings.clipboardLimit) {
                 ForEach([20, 50, 100, 200], id: \.self) { Text(verbatim: "\($0)").tag($0) }
             }
-            Toggle("Помнить после перезапуска", isOn: $settings.clipboardRemember)
+            Toggle("Помнить после перезапуска", systemImage: "arrow.clockwise", isOn: $settings.clipboardRemember)
                 .onChange(of: settings.clipboardRemember) { history.rememberChanged() }
             LabeledContent("Не запоминать из приложений") {
                 HStack {
@@ -956,7 +912,7 @@ private struct ClipboardSection: View {
     }
 }
 
-private struct NotesSection: View {
+struct NotesSection: View {
     @Environment(AppSettings.self) private var settings
     @Environment(NotesStore.self) private var notes
 
@@ -993,13 +949,13 @@ private struct NotesSection: View {
     }
 }
 
-private struct ReminderSection: View {
+struct ReminderSection: View {
     @Environment(AppSettings.self) private var settings
 
     var body: some View {
         @Bindable var settings = settings
         Section {
-            Picker("Напоминать", selection: Binding(
+            Picker("Напоминать", systemImage: "alarm", selection: Binding(
                 get: { settings.calendarReminderHours },
                 set: { settings.calendarReminderHours = $0 }
             )) {
@@ -1009,7 +965,7 @@ private struct ReminderSection: View {
                 Text("за сутки и за 2 часа").tag([24, 2])
                 Text("за 3 дня и за сутки").tag([72, 24])
             }
-            Toggle("Дублировать напоминания в Telegram", isOn: $settings.calendarRemindersToTelegram)
+            Toggle("Дублировать напоминания в Telegram", systemImage: "paperplane", isOn: $settings.calendarRemindersToTelegram)
         } header: {
             Text("Напоминания")
         } footer: {
@@ -1021,14 +977,14 @@ private struct ReminderSection: View {
 // MARK: - Claude Code: sessions
 
 /// Notifications about open pull requests of the projects.
-private struct PullRequestAlertSection: View {
+struct PullRequestAlertSection: View {
     @Environment(AppSettings.self) private var settings
 
     var body: some View {
         @Bindable var settings = settings
         Section {
-            Toggle("Уведомлять, когда CI упал или починился и когда PR закрыт", isOn: $settings.pullRequestAlerts)
-            Toggle("Дублировать в Telegram", isOn: $settings.pullRequestAlertsToTelegram)
+            Toggle("Уведомлять, когда CI упал или починился и когда PR закрыт", systemImage: "arrow.triangle.pull", isOn: $settings.pullRequestAlerts)
+            Toggle("Дублировать в Telegram", systemImage: "paperplane", isOn: $settings.pullRequestAlertsToTelegram)
                 .disabled(!settings.pullRequestAlerts)
         } header: {
             Text("Pull requests")
@@ -1039,7 +995,7 @@ private struct PullRequestAlertSection: View {
 }
 
 /// Permission requests answered from the phone, through a bot of ClaudePult's own.
-private struct TelegramApprovalsSection: View {
+struct TelegramApprovalsSection: View {
     @Environment(AppSettings.self) private var settings
     @Environment(TelegramApprovals.self) private var telegram
     @State private var token = ""
@@ -1048,7 +1004,7 @@ private struct TelegramApprovalsSection: View {
     var body: some View {
         @Bindable var settings = settings
         Section {
-            Toggle("Присылать запросы разрешений в Telegram", isOn: $settings.telegramApprovals)
+            Toggle("Присылать запросы разрешений в Telegram", systemImage: "paperplane", isOn: $settings.telegramApprovals)
             LabeledContent("Токен бота") {
                 HStack {
                     if telegram.hasToken {
@@ -1088,7 +1044,7 @@ private struct TelegramApprovalsSection: View {
     }
 }
 
-private struct SessionSection: View {
+struct SessionSection: View {
     @Environment(HookController.self) private var hooks
     @Environment(AppSettings.self) private var settings
 
@@ -1114,7 +1070,7 @@ private struct SessionSection: View {
                     .foregroundStyle(hooks.isError ? .red : .secondary)
                     .fixedSize(horizontal: false, vertical: true)
             }
-            Toggle("Отвечать на запросы разрешений из уведомлений и панели", isOn: $settings.approvalsFromClaudePult)
+            Toggle("Отвечать на запросы разрешений из уведомлений и панели", systemImage: "hand.raised", isOn: $settings.approvalsFromClaudePult)
             Text("Когда Claude просит разрешение (команда, правка файла), в уведомлении и в строке сессии появляются «Разрешить» и «Отклонить». Диалог Claude при этом тоже на месте — работает тот ответ, что пришёл первым. В режиме auto Claude спрашивает редко. Если у hooks написано «нужно обновить», нажмите «Обновить hooks».")
                 .font(.caption)
                 .foregroundStyle(.secondary)
@@ -1130,7 +1086,7 @@ private struct SessionSection: View {
 
 // MARK: - Claude Code: limits
 
-private struct LimitSection: View {
+struct LimitSection: View {
     @Environment(AppSettings.self) private var settings
     @Environment(UsageStore.self) private var usage
     @Environment(WeeklySummarySender.self) private var weeklySummary
@@ -1148,9 +1104,9 @@ private struct LimitSection: View {
                     .frame(width: 140)
                     .onSubmit(applyThresholds)
             }
-            Toggle("Уведомления о лимитах ещё и в Telegram", isOn: $settings.limitAlertsToTelegram)
+            Toggle("Уведомления о лимитах ещё и в Telegram", systemImage: "paperplane", isOn: $settings.limitAlertsToTelegram)
             VStack(alignment: .leading, spacing: 2) {
-                Picker("Ставить фоновые задачи на паузу", selection: $settings.runGuardPercent) {
+                Picker("Ставить фоновые задачи на паузу", systemImage: "pause.circle", selection: $settings.runGuardPercent) {
                     ForEach(RunGuard.thresholds, id: \.self) { value in
                         Text(value == 0 ? String(localized: "никогда") : String(localized: "с \(value) %")).tag(value)
                     }
@@ -1161,7 +1117,7 @@ private struct LimitSection: View {
                     .fixedSize(horizontal: false, vertical: true)
             }
             VStack(alignment: .leading, spacing: 4) {
-                Toggle("Сводка за неделю в Telegram", isOn: $settings.weeklySummary)
+                Toggle("Сводка за неделю в Telegram", systemImage: "calendar.badge.clock", isOn: $settings.weeklySummary)
                 if settings.weeklySummary {
                     HStack {
                         Picker("День", selection: $settings.weeklySummaryWeekday) {
@@ -1192,7 +1148,7 @@ private struct LimitSection: View {
                     .fixedSize(horizontal: false, vertical: true)
             }
             VStack(alignment: .leading, spacing: 2) {
-                Toggle("Продлевать вход Claude Code сам", isOn: $settings.renewClaudeLogin)
+                Toggle("Продлевать вход Claude Code сам", systemImage: "key", isOn: $settings.renewClaudeLogin)
                 Text("Когда вход истёк (claude давно не запускался, а работа идёт в приложении Claude), AI Hub Bar отправляет через claude запрос из одного слова — самая маленькая модель, без инструментов, не чаще раза в час. Вход продлевается примерно на 8 часов.")
                     .font(.caption)
                     .foregroundStyle(.secondary)
