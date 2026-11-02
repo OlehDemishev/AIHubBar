@@ -53,8 +53,8 @@ struct SessionRow: Identifiable, Equatable {
 /// «Сессии» block at the top of the panel (docs/SPEC.md §2.3).
 struct SessionsView: View {
     let rows: [SessionRow]
-    /// Recent Codex threads (SPEC-ai-services stage 5), under Claude's sessions.
-    var codex: [CodexThreads.Recent] = []
+    /// Recent Codex and Copilot conversations (SPEC-ai-services stages 5–6), under Claude's sessions.
+    var others: [AgentThread] = []
 
     private var waiting: Int { rows.filter { $0.state == .waiting }.count }
     @AppStorage("collapsedBlocks") private var collapsedRaw = ""
@@ -76,8 +76,8 @@ struct SessionsView: View {
                 ForEach(rows) { row in
                     SessionRowView(row: row)
                 }
-                ForEach(codex) { thread in
-                    CodexThreadRow(thread: thread)
+                ForEach(others) { thread in
+                    AgentThreadRow(thread: thread)
                 }
             }
         }
@@ -85,22 +85,23 @@ struct SessionsView: View {
     }
 }
 
-/// A recent Codex thread: project, title, when it was last updated, its context. A click continues it in Terminal
-/// (`codex resume`). No state dot: without hooks Codex doesn't say whether it works or waits.
-private struct CodexThreadRow: View {
-    let thread: CodexThreads.Recent
+/// A recent conversation of another agent: project, title, when it was last updated, its context. A click continues
+/// it in Terminal (`codex resume`, `copilot --resume`). No state dot: without hooks the agent doesn't say whether it
+/// works or waits.
+private struct AgentThreadRow: View {
+    let thread: AgentThread
     @State private var isHovered = false
 
     var body: some View {
         HStack(spacing: 6) {
-            Image(systemName: "terminal")
+            Image(systemName: ServiceTab(agent: thread.agent).icon)
                 .foregroundStyle(.secondary)
                 .frame(width: 14)
             Text(thread.project)
                 .fontWeight(.medium)
                 .lineLimit(1)
                 .layoutPriority(1)
-            Text(thread.title.isEmpty ? "Codex" : thread.title)
+            Text(thread.title.isEmpty ? thread.agent.title : thread.title)
                 .scaledFont(.callout)
                 .lineLimit(1)
                 .truncationMode(.tail)
@@ -122,23 +123,24 @@ private struct CodexThreadRow: View {
         .contentShape(Rectangle())
         .onTapGesture(perform: open)
         .onHover { isHovered = $0 }
-        .help(String(localized: "Codex · \(thread.folder) — продолжить в Терминале"))
+        .help(String(localized: "\(thread.agent.title) · \(thread.folder) — продолжить в Терминале"))
         .accessibilityElement(children: .combine)
-        .accessibilityLabel(String(localized: "Codex, \(thread.project): \(thread.title)"))
+        .accessibilityLabel(String(localized: "\(thread.agent.title), \(thread.project): \(thread.title)"))
         .accessibilityAddTraits(.isButton)
     }
 
     private func open() {
         Task {
-            guard let path = await Task.detached(operation: { AgentKind.codex.detect() }).value else {
-                AppLog.error("Codex resume: codex not found")
+            let agent = thread.agent
+            guard let path = await Task.detached(operation: { agent.detect() }).value else {
+                AppLog.error("Resume: \(agent.binary) not found")
                 return
             }
             do {
-                try await TerminalLauncher.run(CodexThreads.resumeCommandLine(thread, codexPath: path))
-                AppLog.info("Resumed Codex thread in Terminal: \(thread.folder)")
+                try await TerminalLauncher.run(thread.resumeCommandLine(path: path))
+                AppLog.info("Resumed \(agent.binary) conversation in Terminal: \(thread.folder)")
             } catch {
-                AppLog.error("Codex resume failed: \(error.localizedDescription)")
+                AppLog.error("Resume \(agent.binary) failed: \(error.localizedDescription)")
             }
         }
     }

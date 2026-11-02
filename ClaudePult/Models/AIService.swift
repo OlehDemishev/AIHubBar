@@ -99,7 +99,8 @@ enum AgentKind: String, CaseIterable, Codable, Sendable {
         case .claudeCode: "npm install -g @anthropic-ai/claude-code"
         case .codex: "brew install --cask codex"
         case .gemini: "brew install gemini-cli"
-        case .antigravity: String(localized: "см. README Gemini CLI (раздел про Antigravity)")
+        // Homebrew's own replacement for the deprecated `gemini-cli` formula (checked 2026-11-02; links `agy`).
+        case .antigravity: "brew install --cask antigravity-cli"
         case .copilot: "brew install --cask copilot-cli"
         case .cursor: String(localized: "см. cursor.com/cli")
         }
@@ -119,7 +120,7 @@ enum AgentKind: String, CaseIterable, Codable, Sendable {
 
     var note: String? {
         switch self {
-        case .gemini: String(localized: "Для Code Assist и платных ключей API. Бесплатный вход и Google AI Pro/Ultra с июня 2026 — в Antigravity CLI.")
+        case .gemini: String(localized: "Для Code Assist и платных ключей API. Бесплатный вход и Google AI Pro/Ultra с июня 2026 — в Antigravity CLI. Homebrew отключает gemini-cli 18 декабря 2026.")
         default: nil
         }
     }

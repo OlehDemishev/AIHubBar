@@ -191,7 +191,7 @@ private struct ServiceCard: View {
                     .foregroundStyle(.secondary)
             }
             if !usage.projects.isEmpty {
-                ProjectTokensList(projects: usage.projects)
+                ProjectTokensList(projects: usage.projects, footnote: projectsFootnote)
             }
             if let error = usage.error {
                 Label(usage.rings.isEmpty && usage.bars.isEmpty ? error : String(localized: "Не обновилось: \(error)"),
@@ -209,6 +209,14 @@ private struct ServiceCard: View {
         return false
     }
 
+    /// Where a service's tokens per project come from and what they count.
+    private var projectsFootnote: String {
+        switch usage.service {
+        case .hub(.copilot): String(localized: "По записям Copilot CLI: токены запросов за неделю (ввод и вывод).")
+        default: String(localized: "По записям Codex: токены бесед, обновлённых за неделю, — каждая беседа целиком.")
+        }
+    }
+
     /// Claude's session forecast keeps its wording; other services' limits can run for days, so they say the day.
     private var forecastLine: String? {
         guard usage.service != .claude, case let .runsOutAt(date) = usage.forecast else { return UsageText.forecast(usage.forecast) }
@@ -216,9 +224,10 @@ private struct ServiceCard: View {
     }
 }
 
-/// A service's tokens per project this week, folded by default (Codex: whole threads updated this week).
+/// A service's tokens per project this week, folded by default.
 private struct ProjectTokensList: View {
     let projects: [ProjectTokens]
+    let footnote: String
     @State private var expanded = false
 
     var body: some View {
@@ -251,7 +260,7 @@ private struct ProjectTokensList: View {
                     .scaledFont(.caption)
                     .help(project.path)
                 }
-                Text("По записям Codex: токены бесед, обновлённых за неделю, — каждая беседа целиком.")
+                Text(footnote)
                     .scaledFont(.caption2)
                     .foregroundStyle(.tertiary)
                     .fixedSize(horizontal: false, vertical: true)
