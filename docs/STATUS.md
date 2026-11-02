@@ -5,7 +5,7 @@
 **Updated:** 2026-11-02
 
 **Now:**
-- nothing in progress; new Settings merged (#201): module switches and pages, tiles, panel builder, menu bar dividers
+- branch `feat/settings-polish`: second wave on the new Settings (12 items), PR open
 
 **Next:**
 - Oleh looks at the new Settings (Модули, Панель, Строка меню, a module page) and says what to change
@@ -14,12 +14,18 @@
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/SPEC-windows.md §9, stage 2–3 leftovers)
 
 **Needs Oleh:**
-- try the new Settings: drags in «Панель» and «Строка меню» are not tried by hand yet
+- review and merge the settings polish PR (`feat/settings-polish`)
 - «Раскладка» is on and has Accessibility on this Mac: try it in Telegram, Chrome, Safari, Notes; ⌥⇧ on a selection is not tried yet
 - say when to publish the first beta (it creates the `beta` release that beta testers' copies read; until then their update check finds nothing)
 - MacBook Air: update to 0.3.0 and check the island at the real notch (see the 0.3.0 entry)
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-02 — Settings, second wave: 12 items (branch `feat/settings-polish`)
+
+Done: reorder without a mouse (⌃/⌄ in «Панель»; «Левее / Правее / Убрать» on menu bar chips via inspector, context menu and VoiceOver); a profile's blocks edited only in «Панель» (profile picker, «Добавить модуль»; «Профили» shows a line and a link); notification frequency on each module's page, not in «Основные»; icons on every settings row (`IconRow`); long footnotes fold to their first sentence with «Подробнее»; built-in modules missing from the profile get «Включить в профиле» (calendar, `_daily-report`) or «Открыть профиль»; «Фоновые задачи» moved to «Сессии агентов», Telegram chip there explained; «Панель сейчас» shows live data of each block; «Сервисы AI» folded in the sidebar; the Settings window grows (SwiftUI drops `.resizable` after each layout, a KVO observer puts it back). 25 new strings translated; all ~97 new strings of both waves reviewed by a separate agent, 32 fixes (German «Sie», ja 制限, ko 배열, uk phrasing, «строка» = menu bar).
+Checked: `xcodebuild test` 385 green. Live on this Mac with posted mouse events: drag in «Панель» (block moved and back), ⌃ button, divider dragged onto a menu bar chip then removed with «Убрать», window resized to 1100 × 800 and stays; screenshots of «Панель» at both sizes.
+Left: none known. The panel preview is a live miniature, not the panel view itself (that one takes over its window).
 
 ## 2026-11-02 — Settings rebuilt around modules (branch `feat/settings-redesign`)
 

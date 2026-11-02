@@ -9156,7 +9156,7 @@
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "Macはスリープできます"
+            "value": "Macはスリープ可能"
           }
         },
         "ko": {
@@ -9168,7 +9168,7 @@
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "يمكن لـMac أن ينام"
+            "value": "قد يدخل Mac في وضع السكون"
           }
         },
         "id": {
@@ -9272,7 +9272,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Keeps the Mac awake by rules"
+            "value": "Keeps the Mac awake based on rules"
           }
         },
         "es": {
@@ -12192,7 +12192,7 @@
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "«الحد الأدنى» — الأيقونة والمشكلات وما ينتظر الرد. «الحدود» — إضافة إلى الجلسة والأسبوع. «الكل» — كل ما هو متاح. المجموعة تغيّر العناصر وتبقى الفواصل. «الكبسولات» ترسم المجموعات بين «مجموعة جديدة» على خلفية مشتركة. لكل ملف تعريف شريط قائمة خاص به."
+            "value": "«الحد الأدنى» — الأيقونة والمشكلات وما ينتظر الرد. «الحدود» — وأيضًا الجلسة والأسبوع. «الكل» — كل ما هو متاح. المجموعة تغيّر العناصر وتبقى الفواصل. «الكبسولات» ترسم المجموعات بين «مجموعة جديدة» على خلفية مشتركة. لكل ملف تعريف شريط قائمة خاص به."
           }
         },
         "de": {
@@ -12234,7 +12234,7 @@
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "「最小」— アイコン、問題、返信待ち。「リミット」— さらにセッションと週。「すべて」— すべて。セットは要素を変え、区切りはそのまま残ります。「カプセル」は「新しいグループ」の間のグループを共通の背景に描きます。メニューバーはプロファイルごとです。"
+            "value": "「最小」— アイコン、問題、返信待ち。「制限」— さらにセッションと週。「すべて」— すべて。セットは要素を変え、区切りはそのまま残ります。「カプセル」は「新しいグループ」の間のグループを共通の背景に描きます。メニューバーはプロファイルごとです。"
           }
         },
         "ko": {
@@ -12258,7 +12258,7 @@
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "«Мінімум» — значок, проблеми та ті, що чекають відповіді. «Ліміти» — ще сесія і тиждень. «Усе» — усе, що є. Набір змінює елементи, розділювачі лишаються. «Капсули» малюють групи між «Новими групами» на спільній підкладці. Рядок меню в кожного профілю свій."
+            "value": "«Мінімум» — значок, проблеми та ті, що чекають відповіді. «Ліміти» — ще сесія і тиждень. «Усе» — усе, що є. Набір змінює елементи, розділювачі лишаються. «Капсули» малюють групи між «Новими групами» на спільній підкладці. Кожен профіль має власний рядок меню."
           }
         }
       }
@@ -25182,7 +25182,7 @@
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Wysyłaj też do Telegrama; bot — „Ogólne” → Telegram"
+            "value": "Wysyłaj też do Telegramu; bot — „Ogólne” → Telegram"
           }
         },
         "pt-BR": {
@@ -26205,7 +26205,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Warten: %lld · laufen: %lld"
+            "value": "Wartend: %lld · aktiv: %lld"
           }
         },
         "fr": {
@@ -29625,7 +29625,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Hier stehen nur eingeschaltete Module. Die übrigen findest du unter „Module“; was ein Modul in jedem Profil zeigt, unter „Profile“."
+            "value": "Hier stehen nur eingeschaltete Module. Die übrigen finden Sie unter „Module“; was ein Modul in jedem Profil zeigt, unter „Profile“."
           }
         },
         "en": {
@@ -31221,7 +31221,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Korrigiert Text im falschen Layout"
+            "value": "Korrigiert Text, der im falschen Tastaturlayout getippt wurde"
           }
         },
         "en": {
@@ -31263,7 +31263,7 @@
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "잘못된 레이아웃으로 입력한 글자를 고칩니다"
+            "value": "잘못된 배열로 입력한 글자를 고칩니다"
           }
         },
         "pl": {
@@ -33274,7 +33274,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ein Klick fügt ein Element hinzu oder entfernt es; du kannst es auch an seine Stelle in der Reihenfolge ziehen. Elemente ausgeschalteter Module fehlen hier."
+            "value": "Ein Klick fügt ein Element hinzu oder entfernt es; Sie können es auch an seine Stelle in der Reihenfolge ziehen. Elemente ausgeschalteter Module fehlen hier."
           }
         },
         "en": {
@@ -36146,7 +36146,7 @@
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Скісна «/»"
+            "value": "Скісна риска «/»"
           }
         }
       }
@@ -36888,7 +36888,7 @@
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "ノッチ横にリミットとセッション"
+            "value": "ノッチ横に制限とセッション"
           }
         },
         "ko": {
@@ -42705,7 +42705,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Hält Mac wach"
+            "value": "Hält den Mac wach"
           }
         },
         "fr": {
@@ -47290,13 +47290,13 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Rien sur 7 jours"
+            "value": "Rien dans les 7 prochains jours"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Nada en 7 días"
+            "value": "Nada en los próximos 7 días"
           }
         },
         "it": {
@@ -56572,7 +56572,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Das Panel zeigt die Module eines Profils. Lege unter „Profile“ ein Profil an."
+            "value": "Das Panel zeigt die Module eines Profils. Legen Sie unter „Profile“ ein Profil an."
           }
         },
         "en": {
@@ -56724,7 +56724,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Panel jetzt"
+            "value": "Aktuelles Panel"
           }
         },
         "fr": {
@@ -58321,7 +58321,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ziehe einen Block auf einen anderen, um die Reihenfolge zu ändern, oder nutze ⌃ / ⌄"
+            "value": "Ziehen Sie einen Block auf einen anderen, um die Reihenfolge zu ändern, oder nutzen Sie ⌃ / ⌄"
           }
         },
         "fr": {
@@ -58549,7 +58549,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ziehe ein Element auf ein anderes, um seinen Platz einzunehmen. Ein Trenner, der auf ein Element fällt, landet direkt dahinter. Klick – Einstellungen des Elements."
+            "value": "Ziehen Sie ein Element auf ein anderes, um seinen Platz einzunehmen. Ein Trenner, der auf einem Element abgelegt wird, landet direkt dahinter. Klick – Einstellungen des Elements."
           }
         },
         "en": {
@@ -63778,7 +63778,7 @@
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "З’явиться, коли в профілю увімкнено календар — «Профілі» → профіль."
+            "value": "З’явиться, коли в профілі увімкнено календар — «Профілі» → профіль."
           }
         }
       }
@@ -63854,7 +63854,7 @@
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "З’явиться, коли в профілю є джерело проєктів — «Профілі» → профіль."
+            "value": "З’явиться, коли профіль має джерело проєктів — «Профілі» → профіль."
           }
         }
       }
@@ -63930,7 +63930,7 @@
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "З’явиться, коли в профілю команди _daily-report — «Профілі» → профіль."
+            "value": "З’явиться, коли в профілі увімкнено команди _daily-report — «Профілі» → профіль."
           }
         }
       }
@@ -67075,7 +67075,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Profil „%@“: Ziehe einen Block auf einen anderen, um die Reihenfolge zu ändern"
+            "value": "Profil „%@“: Ziehen Sie einen Block auf einen anderen, um die Reihenfolge zu ändern"
           }
         },
         "en": {
@@ -68955,7 +68955,7 @@
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Separatory — dowolnie wiele razy"
+            "value": "Separatory — dowolną liczbę razy"
           }
         },
         "pt-BR": {
@@ -81243,7 +81243,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "This is how the item looks now. Empty elements (0, no data) aren’t shown, and neither are their dividers."
+            "value": "This is how the menu bar looks now. Empty elements (0, no data) aren’t shown, and neither are their dividers."
           }
         },
         "es": {
@@ -81255,7 +81255,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Voici l’élément tel qu’il est maintenant. Les éléments vides (0, pas de données) ne s’affichent pas, leurs séparateurs non plus."
+            "value": "Voici la barre des menus telle qu’elle est maintenant. Les éléments vides (0, pas de données) ne s’affichent pas, leurs séparateurs non plus."
           }
         },
         "id": {
@@ -81291,7 +81291,7 @@
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "É assim que o item está agora. Elementos vazios (0, sem dados) não aparecem, nem os separadores deles."
+            "value": "É assim que a barra de menus está agora. Elementos vazios (0, sem dados) não aparecem, nem os separadores deles."
           }
         },
         "uk": {
@@ -82952,7 +82952,7 @@
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "키보드 레이아웃만"
+            "value": "키보드 배열만"
           }
         },
         "pl": {
@@ -86692,7 +86692,7 @@
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Narzędzia Mac"
+            "value": "Narzędzia dla Maca"
           }
         },
         "pt-BR": {
@@ -89510,7 +89510,7 @@
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "켜진 항목 — 타일과 기본 세트"
+            "value": "켜진 항목 — 타일과 미리 만든 세트"
           }
         },
         "pl": {
