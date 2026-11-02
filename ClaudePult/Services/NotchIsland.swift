@@ -67,6 +67,10 @@ struct NotchSettings: Codable, Equatable, Sendable {
     var pill: Bool?
     /// «Скрыть остров» (SPEC-notch §5): nothing on screen, notifications as usual.
     var hidden = false
+    /// ⌃⌥Y / ⌃⌥N answer the request in the island (SPEC-notch §4); off by default — easy to allow without reading.
+    var hotKeys = false
+    /// The first-setup window (SPEC-notch §6.1) was answered or closed.
+    var setupDone = false
 
     init() {}
 
@@ -86,6 +90,8 @@ struct NotchSettings: Codable, Equatable, Sendable {
         screen = (try? c.decodeIfPresent(NotchScreen.self, forKey: .screen)) ?? defaults.screen
         pill = (try? c.decodeIfPresent(Bool.self, forKey: .pill)) ?? nil
         hidden = (try? c.decodeIfPresent(Bool.self, forKey: .hidden)) ?? defaults.hidden
+        hotKeys = (try? c.decodeIfPresent(Bool.self, forKey: .hotKeys)) ?? defaults.hotKeys
+        setupDone = (try? c.decodeIfPresent(Bool.self, forKey: .setupDone)) ?? defaults.setupDone
     }
 }
 
@@ -99,6 +105,8 @@ struct NotchSettings: Codable, Equatable, Sendable {
 final class NotchIsland {
     private(set) var isOpen = false
     private(set) var geometry: NotchGeometry?
+    /// A full-screen app fills the island's screen: no ears, only requests and waits (SPEC-notch §5).
+    private(set) var isFullScreen = false
     private(set) var queue = NotchEventQueue()
     /// «Разрешить» / «Отклонить» are live (SPEC-notch §4).
     private(set) var armed = false
@@ -120,6 +128,20 @@ final class NotchIsland {
     @ObservationIgnored var sessionItems: () -> [SessionStore.Item] = { [] }
     /// What a click on a banner or a button does: the same as on a notification.
     @ObservationIgnored var perform: (NotificationAction.Resolution) -> Void = { _ in }
+    /// Opens the first-setup window (SPEC-notch §6.1); called once while it hasn't been answered. The app sets it
+    /// while it is still being made (no `NSApp`, no menu bar item to open windows from yet), so the first check runs
+    /// a few seconds later.
+    @ObservationIgnored var needsSetup: (() -> Void)? {
+        didSet {
+            guard needsSetup != nil else { return }
+            Task { @MainActor [weak self] in
+                try? await Task.sleep(for: .seconds(3))
+                self?.update()
+            }
+        }
+    }
+    @ObservationIgnored private var askedForSetup = false
+    @ObservationIgnored private var spaceObservers: [NSObjectProtocol] = []
 
     @ObservationIgnored private let settings: AppSettings
     @ObservationIgnored private var panel: NotchPanel?
@@ -150,6 +172,13 @@ final class NotchIsland {
         ) { [weak self] _ in
             MainActor.assumeIsolated { self?.update() }
         }
+        // A full-screen app starts or ends with a space change or another app coming forward.
+        let workspace = NSWorkspace.shared.notificationCenter
+        spaceObservers = [NSWorkspace.activeSpaceDidChangeNotification, NSWorkspace.didActivateApplicationNotification].map { name in
+            workspace.addObserver(forName: name, object: nil, queue: .main) { [weak self] _ in
+                MainActor.assumeIsolated { self?.update() }
+            }
+        }
         observe()
     }
 
@@ -178,6 +207,17 @@ final class NotchIsland {
         if self.geometry != geometry {
             AppLog.info("Notch island at \(NSStringFromRect(geometry.notch))")
             self.geometry = geometry
+        }
+        let fullScreen = FullScreenDetector.isFullScreen(screen: geometry.screen)
+        if fullScreen != isFullScreen {
+            isFullScreen = fullScreen
+            AppLog.info("Notch island: \(fullScreen ? "full-screen app, requests and waits only" : "back from full screen")")
+            if fullScreen { queue.keepOnly([.request, .waiting]) }
+        }
+        if !settings.notch.setupDone, !askedForSetup, let needsSetup {
+            askedForSetup = true
+            AppLog.info("Notch island: asking for the first setup")
+            needsSetup()
         }
         let panel = self.panel ?? makePanel()
         panel.setFrame(geometry.windowFrame, display: true)
@@ -214,8 +254,8 @@ final class NotchIsland {
     /// The island is on screen: not on a full-screen desktop, the display awake, the Mac unlocked.
     private var isVisible: Bool { panel?.occlusionState.contains(.visible) == true }
 
-    /// The ears show the summary: a real notch (the pill has no ears) and not «только в строке меню».
-    var showsSummary: Bool { geometry.map { !$0.isPill } == true && settings.notch.summary != .menuBar }
+    /// The ears show the summary: a real notch (the pill has no ears), no full-screen app, not «только в строке меню».
+    var showsSummary: Bool { geometry.map { !$0.isPill } == true && !isFullScreen && settings.notch.summary != .menuBar }
 
     /// «Только в острове»: the menu bar keeps only its icon while the ears show the summary.
     var takesMenuBarSummary: Bool { showsSummary && settings.notch.summary == .island }
@@ -227,7 +267,7 @@ final class NotchIsland {
     func notification(id: String, kind: NotificationKind, title: String, body: String, target: NotificationTarget) -> Bool {
         guard geometry != nil else { return false }
         let eventKind: NotchEventKind = if case .approval = target { .request } else { NotchEventKind(kind) }
-        guard settings.notch.events.contains(eventKind) else { return false }
+        guard settings.notch.events.contains(eventKind), !isFullScreen || [.request, .waiting].contains(eventKind) else { return false }
         // Requests come from the open request files, so they stay exactly as long as the request does.
         if eventKind != .request {
             queue.push(NotchEvent(id: id, kind: eventKind, title: title, body: body, target: target, arrived: .now))
@@ -240,7 +280,7 @@ final class NotchIsland {
     private func noticeFinished(_ items: [SessionStore.Item]) {
         let states = Dictionary(items.map { ($0.id, $0.state) }) { first, _ in first }
         defer { lastStates = states }
-        guard let lastStates, settings.notch.events.contains(.done) else { return }
+        guard let lastStates, settings.notch.events.contains(.done), !isFullScreen else { return }
         for item in items where item.state == .done && [.running, .waiting].contains(lastStates[item.id]) {
             let duration = item.session.startedAt.map { DurationText.short(from: $0, to: item.session.updatedAt) }
             queue.push(NotchEvent(
@@ -272,8 +312,21 @@ final class NotchIsland {
     }
 
     func answer(_ event: NotchEvent, allow: Bool) {
-        guard armed, case let .approval(_, requestID) = event.target else { return }
-        AppLog.info("Permission \(allow ? "allowed" : "denied") from the notch island")
+        guard armed else { return }
+        decide(event, allow: allow, how: "the notch island")
+    }
+
+    /// ⌃⌥Y / ⌃⌥N: the request on screen — the banner, or the first one in the open card — once it has been shown
+    /// long enough to read.
+    func answerByKey(allow: Bool) {
+        guard settings.notch.hotKeys, clickGuard?.keysArmed(now: .now) == true,
+              let event = isOpen ? requests.first : banner.flatMap({ $0.kind == .request ? $0 : nil }) else { return }
+        decide(event, allow: allow, how: allow ? "⌃⌥Y" : "⌃⌥N")
+    }
+
+    private func decide(_ event: NotchEvent, allow: Bool, how: String) {
+        guard case let .approval(_, requestID) = event.target else { return }
+        AppLog.info("Permission \(allow ? "allowed" : "denied") from \(how)")
         perform(.decide(requestID: requestID, allow: allow))
         answered.insert(event.id)
         queue.remove(event.id)
@@ -408,8 +461,8 @@ final class NotchPanel: NSPanel {
         backgroundColor = .clear
         hasShadow = false
         level = NSWindow.Level(rawValue: NSWindow.Level.mainMenu.rawValue + 3)
-        // Not over full-screen apps yet: there the island shows only requests (SPEC-notch §5, stage 3).
-        collectionBehavior = [.canJoinAllSpaces, .stationary, .ignoresCycle]
+        // Over full-screen apps too: there the island shows only requests and waits (SPEC-notch §5).
+        collectionBehavior = [.canJoinAllSpaces, .stationary, .ignoresCycle, .fullScreenAuxiliary]
         isMovable = false
         hidesOnDeactivate = false
         isReleasedWhenClosed = false
@@ -422,4 +475,35 @@ final class NotchPanel: NSPanel {
 
     /// AppKit keeps windows below the menu bar; this one belongs over it.
     override func constrainFrameRect(_ frameRect: NSRect, to screen: NSScreen?) -> NSRect { frameRect }
+}
+
+/// Whether a full-screen app fills a screen (SPEC-notch §5): a normal window of another app as large as the whole
+/// screen, menu bar included. Window bounds need no permission (only titles would).
+enum FullScreenDetector {
+    struct Window: Equatable, Sendable {
+        var bounds: CGRect
+        var layer: Int
+        var pid: Int32
+    }
+
+    /// `windows` in Quartz coordinates (origin top-left of the main display, y down); `screen` in AppKit's.
+    static func covers(_ windows: [Window], screen: CGRect, mainHeight: CGFloat, ownPID: Int32) -> Bool {
+        let target = CGRect(x: screen.minX, y: mainHeight - screen.maxY, width: screen.width, height: screen.height)
+        return windows.contains { window in
+            window.layer == 0 && window.pid != ownPID && abs(window.bounds.minX - target.minX) < 1 && abs(window.bounds.minY - target.minY) < 1
+                && abs(window.bounds.width - target.width) < 1 && abs(window.bounds.height - target.height) < 1
+        }
+    }
+
+    @MainActor static func isFullScreen(screen: CGRect) -> Bool {
+        guard let info = CGWindowListCopyWindowInfo([.optionOnScreenOnly, .excludeDesktopElements], kCGNullWindowID) as? [[String: Any]],
+              let mainHeight = NSScreen.screens.first?.frame.height else { return false }
+        let windows = info.compactMap { entry -> Window? in
+            guard let bounds = entry[kCGWindowBounds as String] as? [String: CGFloat],
+                  let layer = entry[kCGWindowLayer as String] as? Int, let pid = entry[kCGWindowOwnerPID as String] as? Int32 else { return nil }
+            return Window(bounds: CGRect(x: bounds["X"] ?? 0, y: bounds["Y"] ?? 0, width: bounds["Width"] ?? 0, height: bounds["Height"] ?? 0),
+                          layer: layer, pid: pid)
+        }
+        return covers(windows, screen: screen, mainHeight: mainHeight, ownPID: ProcessInfo.processInfo.processIdentifier)
+    }
 }

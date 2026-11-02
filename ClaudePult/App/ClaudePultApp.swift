@@ -156,6 +156,8 @@ struct ClaudePultApp: App {
             monitor.start()
             keepAwake.start()
             GlobalHotKey.register(settings.panelHotKey)
+            GlobalHotKey.registerIsland(settings.notch.hotKeys)
+            GlobalHotKey.islandAction = { [notchIsland] allow in notchIsland.answerByKey(allow: allow) }
             clipboard.start()
             // Windows can only be made once the app has finished launching.
             DispatchQueue.main.async {
@@ -213,6 +215,10 @@ struct ClaudePultApp: App {
             }
             NotificationRouter.shared.install(handle)
             notchIsland.perform = handle
+            notchIsland.needsSetup = { [requests] in
+                NSApp.activate()
+                requests.openWindow("notch-setup")
+            }
             AppDelegate.openLink = { url in
                 guard let resolution = WidgetLink.resolve(url) else {
                     AppLog.error("Unknown link \(url.absoluteString)")
@@ -377,6 +383,16 @@ struct ClaudePultApp: App {
         }
         .handlesExternalEvents(matching: [])
         .defaultSize(width: 720, height: 480)
+
+        Window("Остров у чёлки — AI Hub Bar", id: "notch-setup") {
+            NotchSetupView()
+                .environment(settings)
+                .preferredColorScheme(settings.panelTheme.colorScheme)
+                .debugSnapshot("notch-setup")
+        }
+        .handlesExternalEvents(matching: [])
+        .windowResizability(.contentSize)
+        .defaultPosition(.center)
 
         Window("Помощь — AI Hub Bar", id: "help") {
             HelpView()

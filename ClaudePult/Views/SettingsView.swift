@@ -610,6 +610,9 @@ private struct NotchSection: View {
                 ForEach(NotchEar.allCases, id: \.self) { Text($0.title).tag($0) }
             }
             Toggle("Открывать карточку при наведении", isOn: $settings.notch.openOnHover)
+            Toggle("Горячие клавиши ⌃⌥Y / ⌃⌥N для запросов", isOn: $settings.notch.hotKeys)
+                .onChange(of: settings.notch.hotKeys) { GlobalHotKey.registerIsland(settings.notch.hotKeys) }
+                .help("Разрешить или отклонить запрос, который сейчас в острове. Клавишей легко разрешить, не прочитав команду.")
         } header: {
             Text("Ушки и карточка")
         } footer: {

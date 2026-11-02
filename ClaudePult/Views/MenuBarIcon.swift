@@ -23,11 +23,17 @@ struct MenuBarLabel: View {
                     try? await Task.sleep(for: .seconds(60 - Double(Calendar.current.component(.second, from: .now))))
                 }
             }
-            .onChange(of: requests.window) {
-                guard let id = requests.window?.id else { return }
-                NSApp.activate()
-                if id == "settings" { openSettings() } else { openWindow(id: id) }
-            }
+            .onChange(of: requests.window) { openRequested() }
+            .onAppear(perform: openRequested)
+    }
+}
+
+extension MenuBarLabel {
+    /// Opens the requested window — also one asked for before this label appeared (the notch's first setup).
+    fileprivate func openRequested() {
+        guard let id = requests.takeWindow() else { return }
+        NSApp.activate()
+        if id == "settings" { openSettings() } else { openWindow(id: id) }
     }
 }
 
