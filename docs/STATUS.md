@@ -20,6 +20,7 @@
 
 **Next:**
 - notch island for 0.3.0 (docs/SPEC-notch.md §9): stage 3 — pill on screens without a notch, full screen, hot keys, first-setup window; then a 0.3.0 build for Oleh's MacBook Air before publishing
+- after 0.3.0: notch island stage 4 — Claude session live activity (docs/SPEC-notch.md §3.4, agreed by Oleh 2026-11-02): plan progress ring and «3/7» in the sessions ear, steps in the card, summary in «Сессия закончила»
 - AI services (docs/SPEC-ai-services.md §5): all six stages done for Claude Code, Codex, Copilot CLI and Antigravity (Oleh, 2026-11-02: these three besides Claude are enough; Gemini CLI removed — its Google sign-in is gone; Cursor not used); left only a «waiting» signal if the agents get hooks
 - standing rule (SPEC §3.1): every new icon-only control gets a hover hint; finish each UI stage with the accessibility walk
 - fix whatever Oleh finds in the translations (automated checks pass; a native read for ja, ko, ar is still worth it)
@@ -45,6 +46,12 @@
 - decide SPEC-windows §10 and SPEC-linux §10 (Tauri 2 for both, Windows code signing, first Linux desktops) before that work starts
 - optional: Apple Developer ID (notarization, no «Open Anyway»); delete or archive the old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-02 — Notch island: live activity stage in the spec (branch `docs/notch-live-activity`)
+
+Done: docs/SPEC-notch.md gets §3.4 «Живая активность сессии» and a new stage 4 in §9 (drag-and-drop moves to stage 5): while Claude works, the sessions ear shows a progress ring and «3/7» from its plan (`TodoWrite`, or `TaskCreate` / `TaskUpdate` in newer Claude Code, read by the existing `PostToolUse` hook), the card lists the steps, «Сессия закончила» adds progress, minutes and changed files. Oleh agreed to it as the stage after 0.3.0; a now-playing remote in the notch was discussed and dropped (other notch apps already do it, §8).
+Checked: docs only; the hook already receives every `PostToolUse` (matcher `*`, `HookInstaller`), so the data source exists; Task* field names are left to check against live hook data at the start of the stage.
+Left: the stage itself, after 0.3.0.
 
 ## 2026-11-02 — Notch island stage 3, part 1: pill, screen choice, summary where Oleh wants it (#173)
 
