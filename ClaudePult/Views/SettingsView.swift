@@ -185,6 +185,7 @@ private struct GeneralSettings: View {
 
 private struct AppearanceSettings: View {
     @Environment(AppSettings.self) private var settings
+    @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
 
     var body: some View {
         @Bindable var settings = settings
@@ -192,6 +193,13 @@ private struct AppearanceSettings: View {
             Section("Панель") {
                 Picker("Тема", selection: $settings.panelTheme) {
                     ForEach(PanelTheme.allCases, id: \.self) { Text($0.title).tag($0) }
+                }
+                Picker("Фон панели", selection: $settings.panelBackground) {
+                    ForEach(PanelBackground.allCases, id: \.self) { Text($0.title).tag($0) }
+                }
+                .disabled(!glassSupported)
+                if let backgroundNote {
+                    Footnote(text: backgroundNote)
                 }
                 Picker("Размер текста", selection: $settings.panelTextSize) {
                     ForEach(PanelTextSize.allCases, id: \.self) { Text($0.title).tag($0) }
@@ -215,6 +223,20 @@ private struct AppearanceSettings: View {
                 Button("Сбросить внешний вид") { settings.resetAppearance() }
             }
         }
+    }
+}
+
+private extension AppearanceSettings {
+    var glassSupported: Bool {
+        if #available(macOS 26.0, *) { true } else { false }
+    }
+
+    var backgroundNote: String? {
+        if !glassSupported { return String(localized: "Стекло — в macOS 26 и новее.") }
+        if settings.panelBackground == .glass, reduceTransparency {
+            return String(localized: "Включено «Уменьшить прозрачность» — панель остаётся с обычным фоном.")
+        }
+        return nil
     }
 }
 

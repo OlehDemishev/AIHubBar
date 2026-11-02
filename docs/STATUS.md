@@ -2,9 +2,10 @@
 
 <!-- summary:start -->
 **Stage:** AI Hub Bar 0.2.2 released (github.com/OlehDemishev/AIHubBar, clickable widgets + Codex from ChatGPT.app + notch island stage 2); next: notch island stage 3 for 0.3.0
-**Updated:** 2026-10-31
+**Updated:** 2026-11-02
 
 **Now:**
+- PR feat/glass-panel: Settings → Внешний вид → «Фон панели: Обычный / Стекло» (Liquid Glass panel and glass cards on macOS 26+)
 - released 0.2.2 (v0.2.2, build 345): clickable widgets (#154), Codex from the ChatGPT desktop app (#155), notch island stage 2 (#153)
 - notch island stage 1 merged (#149): module, island over the notch, ears, hover card; target release 0.3.0
 - notch island stage 2 merged (#153): banners for events, permission requests with Allow / Deny in the island
@@ -27,6 +28,7 @@
 - Windows and Linux versions (docs/SPEC-windows.md, docs/SPEC-linux.md) — only when Oleh says; stage 0 (fact checks in VMs) first
 
 **Needs Oleh:**
+- glass panel (after the build with feat/glass-panel): Settings → Внешний вид → Фон панели → «Стекло», open the panel in light and dark theme, over busy wallpaper, then with «Уменьшить прозрачность» on (must fall back to the standard background); check text is readable on the glass cards and the corners/shadow look right; send `grep 'Glass panel' ~/Library/Logs/ClaudePult/ClaudePult.log`
 - update to 0.2.2 («Обновления» in Settings), then: Settings → Модули → Лимиты → «Другие AI» should list Codex; click the limits widget (opens «Лимиты»), ↻ in it, the sessions widget's rows and ☕ — tell me what doesn't react
 - on the other Mac: install 0.2.2 (Releases, or «Обновления» in Settings) → Settings → Claude Code: the path field should show «авто: …» instead of «авто: не найден»; tell me the path it shows
 - notch island: on the MacBook Air (with this branch's build or later) — Settings → Модули → «Остров у чёлки» → Установить; check the ears beside the real notch, hover opens the card, moving away closes it, menu bar clicks next to the notch still work
@@ -38,6 +40,12 @@
 - decide SPEC-windows §10 and SPEC-linux §10 (Tauri 2 for both, Windows code signing, first Linux desktops) before that work starts
 - optional: Apple Developer ID (notarization, no «Open Anyway»); delete or archive the old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-02 — Glass panel background (branch `feat/glass-panel`)
+
+Done: Settings → Внешний вид → Панель → «Фон панели: Обычный / Стекло» (`PanelBackground` next to `PanelTheme`, `AppSettings.panelBackground`, key `panelBackground`, reset by «Сбросить внешний вид»; not part of profile looks yet). With «Стекло» on macOS 26+ `PanelGlass` (new `Views/PanelGlass.swift`) finds the window's full-size system material (`NSVisualEffectView` or `NSGlassEffectView`): one behind the content is hidden, one around the content gets only its own layers hidden; the window turns clear (`isOpaque = false`, `.clear`, shadow re-computed) and the panel draws `.glassEffect(.regular)` in the window's corner radius (read from the material's layer, 16 pt otherwise). Cards (`panelCard()`) become glass tiles inside one `GlassEffectContainer`. «Обычный» puts everything back. When nothing recognisable is found, the panel keeps the standard background and the log says `Glass panel: no system background found…`; every change is logged once (`Glass panel: hid …`). «Уменьшить прозрачность» → always standard (with a note under the picker). macOS 14–15: the option is disabled with «Стекло — в macOS 26 и новее» — chose this over a lighter material because the lighter material can't be checked here and would look different from the 26+ glass. New strings in 13 languages.
+Checked: `xcodebuild test` — 299 / 299 pass, incl. new `PanelGlassTests` (material behind content hidden and restored, material around content keeps its subviews, unknown window untouched, reduce transparency) and persistence of the setting; Release build has no warnings. The real window hierarchy was NOT seen: the screen was locked during this automated run, so the panel couldn't be opened (synthetic clicks and AXPress on the status item don't open `MenuBarExtra`, see `QuickSearch`); the temporary hierarchy dump was written, built and removed unused.
+Left: visual check by Oleh (Needs Oleh) — whether the glass shows, corners and shadow, readability; if the log says no system background was found, the hierarchy needs a look with the window open.
 
 ## 2026-10-31 — Release 0.2.2 (branch `chore/status-release-022`)
 
