@@ -1,25 +1,30 @@
 # Status
 
 <!-- summary:start -->
-**Stage:** Mac: 0.3.0 published; next — beta builds, first beta feature «Раскладка» (auto layout switch). Windows/Linux (`desktop/`, Tauri 2): postponed by Oleh 2026-11-02 after stages 1–3 main parts
-**Updated:** 2026-11-02
+**Stage:** Mac: 0.4.0 published (Settings around modules, menu bar dividers, beta builds with «Раскладка» in beta). Windows/Linux (`desktop/`, Tauri 2): postponed by Oleh 2026-11-02 after stages 1–3 main parts
+**Updated:** 2026-11-03
 
 **Now:**
-- nothing in progress; Settings second wave merged (#203)
+- nothing in progress; 0.4.0 is out (build 458)
 
 **Next:**
-- Oleh looks at the new Settings (Модули, Панель, Строка меню, a module page) and says what to change
-- Oleh tries «Раскладка» in his own apps, then the first beta: `scripts/release.sh 0.4.0-beta.1 --publish`
+- Oleh tries «Раскладка» in his own apps; next beta with fixes: `scripts/release.sh 0.5.0-beta.1 --publish`
 - Mac island: a live VoiceOver walk; why one test drag onto the island didn't land
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/SPEC-windows.md §9, stage 2–3 leftovers)
 
 **Needs Oleh:**
 - look at the new Settings and say what to change next
+- MacBook Air: update to 0.4.0 through Sparkle (Settings → General → Updates) and check the island at the real notch
 - «Раскладка» is on and has Accessibility on this Mac: try it in Telegram, Chrome, Safari, Notes; ⌥⇧ on a selection is not tried yet
-- say when to publish the first beta (it creates the `beta` release that beta testers' copies read; until then their update check finds nothing)
-- MacBook Air: update to 0.3.0 and check the island at the real notch (see the 0.3.0 entry)
+- the beta channel exists now (release `beta`, points to 0.4.0): say when the next beta goes out
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-03 — release 0.4.0 (branch `chore/status-release-0.4.0`)
+
+Done: on Oleh's «Давай релиз 0.4» published 0.4.0 from main `b4ccf4f` (build 458) with `scripts/release.sh 0.4.0 --publish`; release notes list what's new since 0.3.0 (Settings around modules, menu bar dividers and capsules, beta builds). «Раскладка» stays a beta feature (only with «Бета-версии» on).
+Checked: 385/385 Mac tests on main; the app signed «ClaudePult Release»; `releases/latest/download/appcast.xml` gives 0.4.0 (458), the DMG downloads (200, 12.7 MB); the release is the latest one, not a pre-release; the beta channel's appcast also points to 0.4.0.
+Left: the overview PDFs attached to the release are the 0.3.0 ones (they don't show the new Settings).
 
 ## 2026-11-02 — Settings, second wave: 12 items (branch `feat/settings-polish`)
 
