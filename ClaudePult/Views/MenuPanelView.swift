@@ -6,6 +6,7 @@ struct MenuPanelView: View {
     @Environment(\.openSettings) private var openSettings
     @Environment(\.openWindow) private var openWindow
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
     @Environment(ProjectStore.self) private var store
     @Environment(UsageStore.self) private var usage
     @Environment(SystemMonitor.self) private var monitor
@@ -27,6 +28,8 @@ struct MenuPanelView: View {
     @State private var expanded: Set<String> = []
     @State private var listHeight: CGFloat = 0
     @State private var window: NSWindow?
+    /// Corner radius of the window while the panel draws its own glass; nil with the system background.
+    @State private var glassRadius: CGFloat?
     @State private var query = ""
     @FocusState private var searchFocused: Bool
 
@@ -40,6 +43,11 @@ struct MenuPanelView: View {
 
     /// Reduce Motion or animations switched off in Settings.
     private var calm: Bool { reduceMotion || !settings.panelAnimations }
+
+    /// «Стекло» chosen, macOS 26+ and «Уменьшить прозрачность» off; otherwise the system background.
+    private var wantsGlass: Bool {
+        settings.panelBackground == .glass && PanelGlass.isAvailable(reduceTransparency: reduceTransparency)
+    }
 
     var body: some View {
         let scale = settings.panelTextSize.scale
@@ -78,14 +86,24 @@ struct MenuPanelView: View {
             .padding(.bottom, 8)
             }
         }
+        .panelGlassGroup()
         // Larger text needs a wider panel, otherwise most lines would truncate.
         .frame(width: (settings.panelWidth.points * max(1, scale)).rounded())
         .environment(\.panelTextScale, scale)
         .environment(\.panelDensity, settings.panelDensity.spacing)
         .environment(\.font, ScaledFont.font(.body, scale: scale))
+        .environment(\.panelGlass, glassRadius != nil)
+        .background {
+            if let glassRadius { PanelGlassBackground(cornerRadius: glassRadius) }
+        }
         .preferredColorScheme(settings.panelTheme.colorScheme)
-        .background(WindowReader { window = $0; $0?.appearance = settings.panelTheme.appearance })
+        .background(WindowReader {
+            window = $0
+            $0?.appearance = settings.panelTheme.appearance
+            updateGlass()
+        })
         .onChange(of: settings.panelTheme) { window?.appearance = settings.panelTheme.appearance }
+        .onChange(of: wantsGlass) { updateGlass() }
         .onAppear {
             log.debug("Panel shown")
             isShown = true
@@ -106,6 +124,11 @@ struct MenuPanelView: View {
         }
         .onChange(of: expanded) { snapshotIfEnabled() }
         .onChange(of: store.lastUpdated) { snapshotIfEnabled() }
+    }
+
+    private func updateGlass() {
+        let radius = PanelGlass.apply(wantsGlass, to: window)
+        if radius != glassRadius { glassRadius = radius }
     }
 
     // MARK: Search

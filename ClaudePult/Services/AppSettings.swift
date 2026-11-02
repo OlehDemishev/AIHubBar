@@ -195,6 +195,10 @@ final class AppSettings {
         didSet { defaults.set(panelTheme.rawValue, forKey: Keys.panelTheme) }
     }
 
+    var panelBackground: PanelBackground {
+        didSet { defaults.set(panelBackground.rawValue, forKey: Keys.panelBackground) }
+    }
+
     var panelAnimations: Bool {
         didSet { defaults.set(panelAnimations, forKey: Keys.panelAnimations) }
     }
@@ -281,6 +285,7 @@ final class AppSettings {
         panelWidth = .normal
         panelDensity = .normal
         panelTheme = .system
+        panelBackground = .standard
         panelAnimations = true
         hiddenBlocks = []
     }
@@ -330,6 +335,7 @@ final class AppSettings {
         panelWidth = defaults.string(forKey: Keys.panelWidth).flatMap(PanelWidth.init(rawValue:)) ?? .normal
         panelDensity = defaults.string(forKey: Keys.panelDensity).flatMap(PanelDensity.init(rawValue:)) ?? .normal
         panelTheme = defaults.string(forKey: Keys.panelTheme).flatMap(PanelTheme.init(rawValue:)) ?? .system
+        panelBackground = defaults.string(forKey: Keys.panelBackground).flatMap(PanelBackground.init(rawValue:)) ?? .standard
         panelAnimations = defaults.object(forKey: Keys.panelAnimations) as? Bool ?? true
         hiddenBlocks = Set((defaults.stringArray(forKey: Keys.hiddenBlocks) ?? []).compactMap(PanelBlock.init(rawValue:)))
         hubDisabled = Set(defaults.stringArray(forKey: Keys.hubDisabled) ?? [])
@@ -386,6 +392,7 @@ final class AppSettings {
         static let panelWidth = "panelWidth"
         static let panelDensity = "panelDensity"
         static let panelTheme = "panelTheme"
+        static let panelBackground = "panelBackground"
         static let panelAnimations = "panelAnimations"
         static let hiddenBlocks = "hiddenBlocks"
         static let hubDisabled = "hubDisabled"
