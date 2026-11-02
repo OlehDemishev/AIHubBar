@@ -66,3 +66,13 @@ select { font: inherit; padding: 4px 6px; border-radius: 6px; border: 1px solid 
 .row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 6px 0; }
 .row + .row { border-top: 1px solid var(--line); }
 .hint { border-left: 3px solid var(--accent); }
+
+/* Limits */
+h2 { font-size: 12px; font-weight: 600; color: var(--secondary); margin: 0 0 8px; text-transform: none; }
+.rings { display: flex; gap: 18px; flex-wrap: wrap; }
+.ring { display: flex; align-items: center; gap: 8px; }
+.ring .value { font-weight: 600; font-variant-numeric: tabular-nums; }
+.limits #others p { margin-top: 6px; }
+.limits #forecast, .limits .error { margin-top: 8px; }
+.error { color: #d70015; font-size: 12px; }
+@media (prefers-color-scheme: dark) { .error { color: #ff6961; } }

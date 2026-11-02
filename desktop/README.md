@@ -10,13 +10,20 @@ Tauri 2: a Rust core plus a small HTML interface. The plan and the stages are in
 - one running copy;
 - `claudepult --app-command panel|settings|quit`.
 
-Limits, sessions and projects come in the next stages.
+**Stage 2 «Лимиты»** is mostly done:
+- the session and week limits from Claude Code's token file;
+- the tray icon drawn as a ring, with the summary in its hint;
+- the forecast;
+- notifications at 50 / 80 / 95 %;
+- `usage.json`.
+
+Still to come in stage 2: Telegram, spend per project, custom thresholds. Sessions and projects are later stages.
 
 ## Layout
 
 | Folder | What |
 |---|---|
-| `core/` | Shared logic with no interface: paths, `settings.json`, languages, the link to the running app. `cargo test -p claudepult-core` runs on any system |
+| `core/` | Shared logic with no interface: paths, `settings.json`, languages, the link to the running app, limits (`usage.rs`, `texts.rs`, `tray_icon.rs`). `cargo test -p claudepult-core` runs on any system |
 | `app/` | The tray app, `AIHubBar.exe` / `AIHubBar` (`tauri.conf.json`, icons, capabilities) |
 | `cli/` | `claudepult`, the console program: `AIHubBar.exe` is a window program and cannot print to a console |
 | `ui/` | The panel and settings pages, plain HTML/JS with no bundler; `ui/i18n/*.json` are generated |

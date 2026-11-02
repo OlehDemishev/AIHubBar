@@ -6,6 +6,9 @@ pub mod i18n;
 pub mod ipc;
 pub mod paths;
 pub mod settings;
+pub mod texts;
+pub mod tray_icon;
+pub mod usage;
 
-/// The name people see. The program files keep the old name `ClaudePult`, as on the Mac.
+/// The name people see. The programs are `AIHubBar` and `claudepult`; data folders keep the old name `ClaudePult`, as on the Mac.
 pub const APP_NAME: &str = "AI Hub Bar";

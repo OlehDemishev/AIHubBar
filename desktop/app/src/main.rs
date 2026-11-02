@@ -1,8 +1,11 @@
-//! AI Hub Bar for Windows and Linux, stage 1 «Каркас» (docs/SPEC-windows.md §9): the tray icon, the panel at it,
-//! the settings window, 13 languages, one running copy, start at sign-in and `claudepult --app-command`.
+//! AI Hub Bar for Windows and Linux (docs/SPEC-windows.md §9): stage 1 «Каркас» — the tray icon, the panel at it,
+//! the settings window, 13 languages, one running copy, start at sign-in and `claudepult --app-command`;
+//! stage 2 «Лимиты» in `limits.rs`.
 
 // No console window behind the app in a release build on Windows.
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
+
+mod limits;
 
 use claudepult_core::i18n::{self, Strings};
 use claudepult_core::ipc::{self, Reply, Request};
@@ -14,6 +17,7 @@ use tauri::menu::{Menu, MenuItem, PredefinedMenuItem};
 use tauri::tray::{MouseButton, MouseButtonState, TrayIconBuilder, TrayIconEvent};
 use tauri::{AppHandle, Manager, RunEvent, WebviewUrl, WebviewWindowBuilder, WindowEvent};
 use tauri_plugin_autostart::{MacosLauncher, ManagerExt};
+use limits::Limits;
 use tauri_plugin_positioner::{Position, WindowExt};
 
 const TRAY_ID: &str = "main";
@@ -217,6 +221,7 @@ fn set_language(app: AppHandle, code: Option<String>) {
     for window in app.webview_windows().values() {
         let _ = window.eval("location.reload()");
     }
+    app.state::<Limits>().update_tray(&app);
 }
 
 #[tauri::command]
@@ -263,9 +268,12 @@ fn main() {
         .plugin(tauri_plugin_single_instance::init(|app, _args, _cwd| show_panel(app)))
         .plugin(tauri_plugin_autostart::init(MacosLauncher::LaunchAgent, None))
         .plugin(tauri_plugin_positioner::init())
+        .plugin(tauri_plugin_notification::init())
+        .manage(Limits::new())
         .manage(AppState { settings: Mutex::new(Settings::load(&paths::settings_file())) })
         .invoke_handler(tauri::generate_handler![
-            ui_texts, set_language, dismiss_tray_hint, autostart_enabled, set_autostart, open_settings, hide_panel, quit
+            ui_texts, set_language, dismiss_tray_hint, autostart_enabled, set_autostart, open_settings, hide_panel, quit,
+            limits::limits_view, limits::refresh_limits
         ])
         .setup(|app| {
             // Only the tray icon, no Dock icon, when trying it out on a Mac.
@@ -274,6 +282,7 @@ fn main() {
             let handle = app.handle().clone();
             build_panel(&handle)?;
             build_tray(&handle)?;
+            handle.state::<Limits>().start(handle.clone());
             let for_ipc = handle.clone();
             if let Err(error) = ipc::serve(move |request| match request {
                 Request::AppCommand(name) => {

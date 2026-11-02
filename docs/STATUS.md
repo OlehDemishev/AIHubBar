@@ -6,6 +6,7 @@
 
 **Now:**
 - branch `feat/desktop-skeleton` (PR): Windows / Linux stage 1 «Каркас» in `desktop/` (Tauri 2) with CI on GitHub's Windows and Linux machines
+- branch `feat/desktop-limits` (PR on top of it): Windows / Linux stage 2 «Лимиты», main part
 - merged 2026-11-02 (#186): notch stage 5 — drop a file or folder on the island → the profile's AI commands for it
 - merged 2026-11-02 (#184): notch stage 4 — Claude's task list in the island (ring and «3/7» in the ear, steps in the card, «3/3 · 2 мин · файлов: 9» in «Готово»)
 - 0.3.0 built, not published: `build/release/0.3.0/AIHubBar-0.3.0.dmg` (build 400) + `appcast.xml`, for the MacBook Air first; publish it from `91d6c2b` (before stage 4): `git switch --detach 91d6c2b && scripts/release.sh 0.3.0 --publish`
@@ -30,7 +31,7 @@
 - fix whatever Oleh finds in the translations (automated checks pass; a native read for ja, ko, ar is still worth it)
 - stage 8: done without Developer ID (self-signed + Sparkle, PR #85; re-checked on main); notarization only if Oleh buys Developer ID; publishing is Oleh's step (Needs Oleh)
 - Fix whatever Oleh finds in docs/CHECKLIST.md
-- Windows and Linux (Oleh said go, 2026-11-02): stage 1 «Каркас» done in `desktop/`; next stage 2 «Лимиты» (token from `%USERPROFILE%\.claude\.credentials.json`, the usage request, tray icon drawn with the session ring, notifications, `usage.json`); stage 0 leftovers need a real Windows (Ctrl+Break and SessionEnd, the Claude desktop app's session folder)
+- Windows and Linux (Oleh said go, 2026-11-02): stage 1 «Каркас» and most of stage 2 «Лимиты» done in `desktop/`; next: the rest of stage 2 (Telegram, spend per project, custom thresholds), then stage 3 «Сессии» (`claudepult-hook.exe`, hooks in exec form); stage 0 leftovers need a real Windows (Ctrl+Break and SessionEnd, the Claude desktop app's session folder)
 
 **Needs Oleh:**
 - stage 5 on the MacBook Air (build from main): drag a file from Finder onto the notch — «Отпустите — AI-команды для файла», then the card; «Своя задача» with a short task → a new file next to it; tell me if a drag ever doesn't catch
@@ -58,6 +59,33 @@
 - Windows: try the installer from the latest «Desktop» run on GitHub (Actions → Desktop → artifact ai-hub-bar-Windows): it installs for you only, without admin; the tray icon, the panel on a click, Settings → language and start at sign-in; SmartScreen will warn (no signature yet)
 - optional: Apple Developer ID (notarization, no «Open Anyway»); delete or archive the old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-02 — Windows and Linux, stage 2 «Лимиты», main part (branch `feat/desktop-limits`)
+
+Done:
+- **`core/usage.rs`** — the Mac's `Usage.swift` / `UsageService.swift` with the same rules:
+  - the token from `<claude dir>/.credentials.json`, read for each request, never kept;
+  - the request with the Mac's headers (ureq, rustls);
+  - the tolerant parsing: `five_hour`, `seven_day`, `seven_day_<model>`, per-model weeks from `limits`, extra usage;
+  - reset times compared to 10 minutes;
+  - levels, the 30-minute forecast;
+  - alerts once per window, with only the highest new threshold;
+  - pauses after 429 (5→60 min, a short `Retry-After` not trusted);
+  - polling every 2 min while the session grows, else 5;
+  - `usage.json` in the same format.
+- **`core/texts.rs`** — countdowns, resets, the tray hint, the forecast, errors and alert texts from the Mac catalog. All the keys already existed there.
+- **`core/tray_icon.rs`** — the session ring drawn in RGBA in the level's colour, with an optional dot.
+- **The app (`limits.rs`)** — a background thread, notifications at 50 / 80 / 95 % (tauri-plugin-notification), `usage.json` and `usage-notified.json` in the data folder, the tray icon and hint updated after each answer, the panel's «Лимиты» card (rings, other weeks, forecast, error) with ↻.
+
+Checked:
+- `cargo test --workspace` on the Mac — 22 core tests and the socket round trip;
+- `strings.py --check`;
+- the app run on the Mac with a temporary `CLAUDE_CONFIG_DIR` and a fake token: a real request to the limits server answered 401, and the panel showed «Сессия Claude Code истекла (HTTP 401): claude → /login» (captured);
+- the real token was not used.
+
+Left:
+- not seen with a real token: the rings and the drawn tray icon (on the Mac the token is in the Keychain, and the CLI here is signed out);
+- Telegram, spend per project, custom thresholds, history for the forecast after a restart.
 
 ## 2026-11-02 — Windows and Linux, stage 1 «Каркас» in `desktop/` (branch `feat/desktop-skeleton`)
 
