@@ -53,6 +53,8 @@ struct SessionRow: Identifiable, Equatable {
 /// «Сессии» block at the top of the panel (docs/SPEC.md §2.3).
 struct SessionsView: View {
     let rows: [SessionRow]
+    /// Recent Codex threads (SPEC-ai-services stage 5), under Claude's sessions.
+    var codex: [CodexThreads.Recent] = []
 
     private var waiting: Int { rows.filter { $0.state == .waiting }.count }
     @AppStorage("collapsedBlocks") private var collapsedRaw = ""
@@ -74,9 +76,71 @@ struct SessionsView: View {
                 ForEach(rows) { row in
                     SessionRowView(row: row)
                 }
+                ForEach(codex) { thread in
+                    CodexThreadRow(thread: thread)
+                }
             }
         }
         .padding(4)
+    }
+}
+
+/// A recent Codex thread: project, title, when it was last updated, its context. A click continues it in Terminal
+/// (`codex resume`). No state dot: without hooks Codex doesn't say whether it works or waits.
+private struct CodexThreadRow: View {
+    let thread: CodexThreads.Recent
+    @State private var isHovered = false
+
+    var body: some View {
+        HStack(spacing: 6) {
+            Image(systemName: "terminal")
+                .foregroundStyle(.secondary)
+                .frame(width: 14)
+            Text(thread.project)
+                .fontWeight(.medium)
+                .lineLimit(1)
+                .layoutPriority(1)
+            Text(thread.title.isEmpty ? "Codex" : thread.title)
+                .scaledFont(.callout)
+                .lineLimit(1)
+                .truncationMode(.tail)
+                .foregroundStyle(.secondary)
+            Spacer(minLength: 4)
+            if let context = thread.context, context >= ContextUsage.warnAt {
+                Text("контекст \(Int((context * 100).rounded())) %")
+                    .scaledFont(.caption)
+                    .foregroundStyle(context >= ContextUsage.notifyAt ? .red : .orange)
+            }
+            Text(RelativeTime.ago(thread.updatedAt))
+                .scaledFont(.caption)
+                .foregroundStyle(.secondary)
+        }
+        // The same frame as Claude's rows.
+        .padding(.horizontal, 8)
+        .densityPadding(4)
+        .background(RoundedRectangle(cornerRadius: 7).fill(Color.primary.opacity(isHovered ? 0.06 : 0)))
+        .contentShape(Rectangle())
+        .onTapGesture(perform: open)
+        .onHover { isHovered = $0 }
+        .help(String(localized: "Codex · \(thread.folder) — продолжить в Терминале"))
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(String(localized: "Codex, \(thread.project): \(thread.title)"))
+        .accessibilityAddTraits(.isButton)
+    }
+
+    private func open() {
+        Task {
+            guard let path = await Task.detached(operation: { AgentKind.codex.detect() }).value else {
+                AppLog.error("Codex resume: codex not found")
+                return
+            }
+            do {
+                try await TerminalLauncher.run(CodexThreads.resumeCommandLine(thread, codexPath: path))
+                AppLog.info("Resumed Codex thread in Terminal: \(thread.folder)")
+            } catch {
+                AppLog.error("Codex resume failed: \(error.localizedDescription)")
+            }
+        }
     }
 }
 

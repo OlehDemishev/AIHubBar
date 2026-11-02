@@ -65,6 +65,20 @@ struct CodexThreadsTests {
         #expect(extras.projects.map(\.tokens) == [70_000, 50_000])
         #expect(extras.notes.count == 1 && extras.notes[0].text.contains("Alpha") && extras.notes[0].text.contains("20"))
         #expect(CodexThreads.extras(home: home.appending(path: "nobody"), now: now).projects.isEmpty)
+
+        // Stage 5: threads of the last 3 hours for «Сессии».
+        let recent = CodexThreads.recent(home: home, now: now)
+        #expect(recent.map(\.project) == ["Alpha"], "archived and older threads are left out")
+        #expect(recent.first?.id == "t0" && recent.first?.folder == "/Users/me/Projects/Alpha")
+        #expect(recent.first.flatMap(\.context).map { abs($0 - 0.2) < 0.0001 } == true)
+        #expect(CodexThreads.recent(home: home, now: now, within: 30 * 60).isEmpty)
+    }
+
+    @Test func resumeCommand() {
+        let thread = CodexThreads.Recent(id: "019a-thread", project: "My App", folder: "/Users/me/My App", title: "", updatedAt: now)
+        let codex = "/Applications/ChatGPT.app/Contents/Resources/codex-cli/bin/codex"
+        #expect(CodexThreads.resumeCommandLine(thread, codexPath: codex)
+            == "cd \(ShellQuote.quote("/Users/me/My App")) && \(ShellQuote.quote(codex)) resume \(ShellQuote.quote("019a-thread"))")
     }
 
     private func makeDatabase(_ url: URL, rows: [(String, Int, Date, String, Int)]) throws {
