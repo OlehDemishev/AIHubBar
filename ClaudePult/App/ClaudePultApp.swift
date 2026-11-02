@@ -275,7 +275,8 @@ struct ClaudePultApp: App {
                 .environment(engine)
                 .environment(calendar)
         } label: {
-            MenuBarLabel(state: MenuBarState(config: settings.menuBarConfig, data: menuBarData))
+            MenuBarLabel(state: MenuBarState(config: notchIsland.takesMenuBarSummary ? settings.menuBarConfig.iconOnly : settings.menuBarConfig,
+                                             data: menuBarData))
                 .environment(requests)
         }
         .menuBarExtraStyle(.window)

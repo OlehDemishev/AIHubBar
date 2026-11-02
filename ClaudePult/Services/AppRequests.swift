@@ -15,7 +15,7 @@ final class AppRequests {
     /// `--app-command` names that open a window instead of running a command.
     static let windows = ["help": "help", "cleanup-output": "cleanup-output", "settings": "settings", "assistant": "assistant"]
     /// Other `--app-command` names handled by the app itself.
-    static let actions = ["test-notification"]
+    static let actions = ["test-notification", "test-island"]
 
     private(set) var window: WindowRequest?
     private var observer: NSObjectProtocol?
@@ -35,6 +35,8 @@ final class AppRequests {
                 AppLog.info("App command «\(name)» received")
                 if name == "test-notification" {
                     Notifier.postTest()
+                } else if name == "test-island" {
+                    Notifier.postIslandTest()
                 } else if let window = Self.windows[name] {
                     self?.openWindow(window)
                 } else if let command = CommonCommand.allCases.first(where: { $0.cliName == name }) {

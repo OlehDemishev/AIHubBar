@@ -2,6 +2,18 @@ import Foundation
 
 /// The menu bar item, assembled from elements (SPEC-modes §7). Stored as JSON in UserDefaults and in exports.
 struct MenuBarConfig: Codable, Equatable, Hashable, Sendable {
+    /// While the notch island's ears show the summary («только в острове»): the icon and the projects' red dot only.
+    var iconOnly: MenuBarConfig {
+        var config = self
+        for index in config.elements.indices where ![.icon, .projectsAlert].contains(config.elements[index].kind) {
+            config.elements[index].enabled = false
+        }
+        if !config.elements.contains(where: { $0.kind == .icon && $0.enabled }), let icon = config.elements.firstIndex(where: { $0.kind == .icon }) {
+            config.elements[icon].enabled = true
+        }
+        return config
+    }
+
     enum Separator: String, Codable, CaseIterable, Sendable {
         case space, dot, bar
 

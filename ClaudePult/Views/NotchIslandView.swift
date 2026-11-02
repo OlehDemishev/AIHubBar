@@ -18,18 +18,19 @@ struct NotchIslandView: View {
             let open = island.isOpen
             let banner = island.banner
             let wide = open || banner != nil
-            let earsShown = hasEar(settings.notch.leftEar) || hasEar(settings.notch.rightEar)
+            let earsShown = island.showsSummary && (hasEar(settings.notch.leftEar) || hasEar(settings.notch.rightEar))
             let restWidth = earsShown ? geometry.restFrame.width : geometry.notch.width
             // At rest the island is centred on the notch; open or with a banner, it fills the window.
             let restOffset = geometry.notch.midX - window.midX
             let height = open ? island.cardHeight : banner != nil ? island.bannerHeight : 0
 
             ZStack(alignment: .top) {
-                NotchShape(bottomRadius: wide ? 18 : 9)
+                // The pill hangs under the menu bar on its own: rounded all round, nothing at rest.
+                IslandShape(isPill: geometry.isPill, bottomRadius: wide ? 18 : 9)
                     .fill(.black)
                     .overlay {
-                        if wide, contrast == .increased {
-                            NotchShape(bottomRadius: 18).stroke(.white.opacity(0.5), lineWidth: 1)
+                        if wide, contrast == .increased || geometry.isPill {
+                            IslandShape(isPill: geometry.isPill, bottomRadius: 18).stroke(.white.opacity(geometry.isPill && contrast != .increased ? 0.15 : 0.5), lineWidth: 1)
                         }
                     }
                     .frame(width: wide ? window.width : restWidth, height: geometry.notch.height + height)
@@ -103,6 +104,23 @@ private struct MeasuredUnderNotch: ViewModifier {
             .background(GeometryReader { proxy in
                 Color.clear.preference(key: ContentHeightKey.self, value: proxy.size.height - notchHeight)
             })
+    }
+}
+
+/// The island's outline: the notch's, or a pill's on a screen without a notch.
+struct IslandShape: Shape {
+    var isPill: Bool
+    var bottomRadius: CGFloat
+
+    var animatableData: CGFloat {
+        get { bottomRadius }
+        set { bottomRadius = newValue }
+    }
+
+    func path(in rect: CGRect) -> Path {
+        isPill
+            ? RoundedRectangle(cornerRadius: min(bottomRadius, rect.height / 2), style: .continuous).path(in: rect)
+            : NotchShape(bottomRadius: bottomRadius).path(in: rect)
     }
 }
 
