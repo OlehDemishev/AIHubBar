@@ -77,6 +77,8 @@ struct NotchSettings: Codable, Equatable, Sendable {
     /// «Ход работы Claude в ушке сессий» (SPEC-notch §3.4): the task list's progress in the ear, its steps in the
     /// card, progress and files in «Готово».
     var liveActivity = true
+    /// A file or folder dragged onto the island opens the profile's AI commands for it (SPEC-notch §9, stage 5).
+    var fileDrop = true
 
     init() {}
 
@@ -99,6 +101,7 @@ struct NotchSettings: Codable, Equatable, Sendable {
         hotKeys = (try? c.decodeIfPresent(Bool.self, forKey: .hotKeys)) ?? defaults.hotKeys
         setupDone = (try? c.decodeIfPresent(Bool.self, forKey: .setupDone)) ?? defaults.setupDone
         liveActivity = (try? c.decodeIfPresent(Bool.self, forKey: .liveActivity)) ?? defaults.liveActivity
+        fileDrop = (try? c.decodeIfPresent(Bool.self, forKey: .fileDrop)) ?? defaults.fileDrop
     }
 }
 
@@ -122,6 +125,10 @@ final class NotchIsland {
     private(set) var places: [NotchPlace] = []
     /// The place whose card is open.
     private(set) var openIndex: Int?
+    /// A file is being dragged over this place's drop zone (SPEC-notch §9, stage 5).
+    private(set) var dropTarget: Int?
+    /// The file or folder dropped on the island; the open card offers the profile's AI commands for it.
+    private(set) var dropped: URL?
     private(set) var queue = NotchEventQueue()
     /// «Разрешить» / «Отклонить» are live (SPEC-notch §4).
     private(set) var armed = false
@@ -179,8 +186,13 @@ final class NotchIsland {
     @ObservationIgnored private var shownBannerID: String?
     @ObservationIgnored private var pointerOnBanner = false
     @ObservationIgnored private var lastStates: [String: Session.State]?
+    /// The drag pasteboard's count at the last mouse down: a new count while dragging means a real drag.
+    @ObservationIgnored private var dragCount = NSPasteboard(name: .drag).changeCount
     /// Requests answered here: their file stays until Claude's hook reads the answer, and must not come back meanwhile.
     @ObservationIgnored private var answered: Set<String> = []
+
+    /// How far under the notch a dragged file is caught.
+    static let dropHeight: CGFloat = 56
 
     /// How long the pointer rests on the notch before the card opens, and how long it may stray before it closes.
     static let openDelay: Duration = .milliseconds(300)
@@ -261,8 +273,9 @@ final class NotchIsland {
     private func makePanel(index: Int) -> NotchPanel {
         let panel = NotchPanel()
         if let content {
-            let host = NSHostingView(rootView: content(index))
+            let host = NotchHostingView(rootView: content(index))
             host.sizingOptions = []
+            host.onDrop = { [weak self] urls in self?.drop(urls, on: index) ?? false }
             panel.contentView = host
         }
         return panel
@@ -274,6 +287,8 @@ final class NotchIsland {
         pending?.cancel()
         bannerTimer?.cancel()
         openIndex = nil
+        dropTarget = nil
+        dropped = nil
         queue = NotchEventQueue()
         lastStates = nil
         for panel in panels { panel.orderOut(nil) }
@@ -401,10 +416,52 @@ final class NotchIsland {
         if now != armed { armed = now }
     }
 
+    // MARK: - A dropped file (SPEC-notch §9, stage 5)
+
+    /// Where a dragged file is caught: the notch and a strip under it, as wide as the card.
+    private func dropZone(on index: Int) -> CGRect? { frame(on: index, height: Self.dropHeight) }
+
+    /// While a mouse button is down, a file drag (a new drag pasteboard holding files) near the notch makes the
+    /// island a drop target. true = a file drag is going on, so the pointer means nothing else.
+    private func trackDrag(_ type: NSEvent.EventType, at location: CGPoint) -> Bool {
+        if type == .leftMouseDown { dragCount = NSPasteboard(name: .drag).changeCount }
+        let board = NSPasteboard(name: .drag)
+        let dragging = settings.notch.fileDrop && type == .leftMouseDragged && board.changeCount != dragCount
+            && board.canReadObject(forClasses: [NSURL.self], options: [.urlReadingFileURLsOnly: true])
+        let target = dragging ? places.indices.first { dropZone(on: $0)?.contains(location) == true } : nil
+        if target != dropTarget {
+            dropTarget = target
+            if target != nil { pending?.cancel() }
+        }
+        return dragging
+    }
+
+    /// A file or folder let go over the island: its card opens with the profile's AI commands.
+    func drop(_ urls: [URL], on index: Int) -> Bool {
+        guard settings.notch.fileDrop, let url = urls.first(where: \.isFileURL), places.indices.contains(index) else { return false }
+        AppLog.info("Notch island: «\(url.lastPathComponent)» dropped\(urls.count > 1 ? " (first of \(urls.count))" : "")")
+        dropTarget = nil
+        if openIndex != nil, openIndex != index { openIndex = nil }
+        dropped = url
+        if openIndex == nil { open(on: index) }
+        // Typing a task needs the keyboard; the panel takes it without bringing the app forward.
+        panels[index].makeKey()
+        return true
+    }
+
+    /// A command was started on the dropped file: the card closes and a banner says so.
+    func started(_ title: String, file: String) {
+        let event = NotchEvent(id: "started-\(UUID().uuidString)", kind: .commands, title: String(localized: "Запущено: \(title)"),
+                               body: file, target: .none, arrived: .now)
+        close()
+        queue.push(event)
+        showNext()
+    }
+
     // MARK: - Pointer
 
     private func watchPointer() {
-        let events: NSEvent.EventTypeMask = [.mouseMoved, .leftMouseDown, .leftMouseDragged]
+        let events: NSEvent.EventTypeMask = [.mouseMoved, .leftMouseDown, .leftMouseDragged, .leftMouseUp]
         // Global: the pointer over other apps and the menu bar (mouse events need no permission). Local: over the
         // island itself once it takes clicks.
         if let global = NSEvent.addGlobalMonitorForEvents(matching: events, handler: { [weak self] event in
@@ -431,6 +488,7 @@ final class NotchIsland {
 
     /// Where one screen's window takes clicks; everywhere else they go through to what is underneath.
     private func interactiveFrame(on index: Int) -> CGRect? {
+        if dropTarget == index { return dropZone(on: index) }
         guard let openIndex else { return bannerFrame(on: index) }
         return openIndex == index ? frame(on: index, height: cardHeight) : nil
     }
@@ -444,9 +502,11 @@ final class NotchIsland {
     private func pointer(_ type: NSEvent.EventType) {
         guard !places.isEmpty else { return }
         let location = NSEvent.mouseLocation
+        let dragging = trackDrag(type, at: location)
         clickGuard?.pointer(at: location)
         updateArmed()
         updateMouse(at: location)
+        guard !dragging, type != .leftMouseUp else { return }
 
         if let openIndex {
             let inside = frame(on: openIndex, height: cardHeight)?.contains(location) ?? false
@@ -454,7 +514,8 @@ final class NotchIsland {
                 pending?.cancel()
             } else if type == .leftMouseDown {
                 close()
-            } else if !isPending {
+            } else if !isPending, dropped == nil {
+                // A dropped file's commands stay until chosen, Esc or a click elsewhere.
                 schedule(after: Self.closeDelay) { [weak self] in self?.close() }
             }
         } else if banner != nil {
@@ -503,11 +564,34 @@ final class NotchIsland {
 
     func close() {
         pending?.cancel()
+        dropped = nil
         guard isOpen else { return }
         openIndex = nil
         shownBannerID = nil
         showNext()
     }
+}
+
+/// The island's content view, also the drop destination for a file dragged onto it. The window takes the drag only
+/// while `NotchIsland` has made it a drop target (it ignores the mouse otherwise).
+final class NotchHostingView: NSHostingView<AnyView> {
+    var onDrop: ([URL]) -> Bool = { _ in false }
+
+    required init(rootView: AnyView) {
+        super.init(rootView: rootView)
+        registerForDraggedTypes([.fileURL])
+    }
+
+    @available(*, unavailable)
+    required init?(coder: NSCoder) { fatalError("init(coder:) is not used") }
+
+    private func urls(_ sender: NSDraggingInfo) -> [URL] {
+        sender.draggingPasteboard.readObjects(forClasses: [NSURL.self], options: [.urlReadingFileURLsOnly: true]) as? [URL] ?? []
+    }
+
+    override func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation { urls(sender).isEmpty ? [] : .copy }
+    override func draggingUpdated(_ sender: NSDraggingInfo) -> NSDragOperation { urls(sender).isEmpty ? [] : .copy }
+    override func performDragOperation(_ sender: NSDraggingInfo) -> Bool { onDrop(urls(sender)) }
 }
 
 /// A panel that floats above the menu bar on every desktop, never activates the app and may sit over the notch.

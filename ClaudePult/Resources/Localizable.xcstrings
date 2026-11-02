@@ -6192,6 +6192,82 @@
         }
       }
     },
+    "AI-команды для %@": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "أوامر الذكاء الاصطناعي لـ %@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "KI-Befehle für %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI commands for %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comandos de IA para %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Commandes IA pour %@"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Perintah AI untuk %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comandi IA per %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ の AI コマンド"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@용 AI 명령"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Polecenia AI dla %@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comandos de IA para %@"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI-команди для %@"
+          }
+        }
+      }
+    },
     "AI-кредиты за неделю: %@": {
       "localizations": {
         "ar": {
@@ -32397,6 +32473,82 @@
         }
       }
     },
+    "Команды профиля «%@» · %@": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "أوامر الملف الشخصي «%1$@» · %2$@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Befehle des Profils „%1$@“ · %2$@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Commands of the “%1$@” profile · %2$@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comandos del perfil «%1$@» · %2$@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Commandes du profil « %1$@ » · %2$@"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Perintah profil “%1$@” · %2$@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comandi del profilo «%1$@» · %2$@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "プロファイル「%1$@」のコマンド · %2$@"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“%1$@” 프로필 명령 · %2$@"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Polecenia profilu „%1$@” · %2$@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comandos do perfil “%1$@” · %2$@"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Команди профілю «%1$@» · %2$@"
+          }
+        }
+      }
+    },
     "Команды: отчёты, проверки, быстрые команды": {
       "localizations": {
         "ar": {
@@ -49460,6 +49612,82 @@
         }
       }
     },
+    "Отпустите — AI-команды для файла": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "أفلِت الملف — أوامر الذكاء الاصطناعي له"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Loslassen – KI-Befehle für die Datei"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Drop it — AI commands for the file"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suéltalo: comandos de IA para el archivo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Relâchez — commandes IA pour le fichier"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lepaskan — perintah AI untuk berkas"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rilascia: comandi IA per il file"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ドロップ — ファイルの AI コマンド"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "놓으세요 — 파일용 AI 명령"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Upuść — polecenia AI dla pliku"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Solte — comandos de IA para o arquivo"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Відпустіть — AI-команди для файлу"
+          }
+        }
+      }
+    },
     "Отпустить": {
       "localizations": {
         "ar": {
@@ -52725,6 +52953,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Перенесення й обмін"
+          }
+        }
+      }
+    },
+    "Перетащите файл или папку на чёлку: команды профиля и «Своя задача» для него, результат — новым файлом рядом.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اسحب ملفًا أو مجلدًا إلى النتوء: أوامر الملف الشخصي و«مهمة خاصة» له، والنتيجة ملف جديد بجانبه."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ziehen Sie eine Datei oder einen Ordner auf die Notch: die Befehle des Profils und „Eigene Aufgabe“ dafür, das Ergebnis als neue Datei daneben."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Drag a file or folder onto the notch: the profile’s commands and “Custom task” for it, the result as a new file next to it."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arrastra un archivo o carpeta al notch: los comandos del perfil y «Tarea propia» para él; el resultado, un archivo nuevo al lado."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Faites glisser un fichier ou un dossier sur l’encoche : les commandes du profil et « Tâche libre » pour lui, le résultat en nouveau fichier à côté."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seret berkas atau folder ke notch: perintah profil dan “Tugas sendiri” untuknya, hasilnya berkas baru di sebelahnya."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trascina un file o una cartella sul notch: i comandi del profilo e «Attività personale» per esso, il risultato come nuovo file accanto."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ファイルやフォルダをノッチにドラッグ：プロファイルのコマンドと「自分のタスク」、結果は隣に新しいファイルとして。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "파일이나 폴더를 노치로 끌어 놓으면 프로필 명령과 “내 작업”을 쓸 수 있고, 결과는 옆에 새 파일로 저장됩니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Przeciągnij plik lub folder na notch: polecenia profilu i „Własne zadanie” dla niego, wynik jako nowy plik obok."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arraste um arquivo ou pasta para o notch: os comandos do perfil e “Tarefa própria” para ele, o resultado como arquivo novo ao lado."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Перетягніть файл або теку на виїмку: команди профілю й «Своє завдання» для нього, результат — новим файлом поруч."
           }
         }
       }
@@ -62991,6 +63295,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ревʼю гілки"
+          }
+        }
+      }
+    },
+    "Результат — новый файл рядом; существующие файлы не меняются.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "النتيجة ملف جديد بجانبه؛ لا تتغير الملفات الموجودة."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Das Ergebnis ist eine neue Datei daneben; vorhandene Dateien bleiben unverändert."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The result is a new file next to it; existing files are left as they are."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El resultado es un archivo nuevo al lado; los existentes no cambian."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le résultat est un nouveau fichier à côté ; les fichiers existants ne changent pas."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hasilnya berkas baru di sebelahnya; berkas yang ada tidak diubah."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il risultato è un nuovo file accanto; i file esistenti non cambiano."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "結果は隣に新しいファイルとして保存され、既存のファイルは変更されません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "결과는 옆에 새 파일로 저장되며 기존 파일은 바뀌지 않습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wynik to nowy plik obok; istniejące pliki się nie zmieniają."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O resultado é um arquivo novo ao lado; os arquivos existentes não mudam."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Результат — новий файл поруч; наявні файли не змінюються."
           }
         }
       }
@@ -77526,6 +77906,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Файл журналу"
+          }
+        }
+      }
+    },
+    "Файл на остров — AI-команды": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ملف على الجزيرة — أوامر الذكاء الاصطناعي"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Datei auf die Insel – KI-Befehle"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "File on the island — AI commands"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Archivo a la isla: comandos de IA"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fichier sur l’île — commandes IA"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Berkas ke pulau — perintah AI"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "File sull’isola: comandi IA"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アイランドにファイル — AI コマンド"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "아일랜드에 파일 — AI 명령"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plik na wyspę — polecenia AI"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arquivo na ilha — comandos de IA"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Файл на острів — AI-команди"
           }
         }
       }

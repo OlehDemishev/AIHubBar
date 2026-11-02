@@ -74,7 +74,8 @@ struct ClaudePultApp: App {
         _notchIsland = State(initialValue: notchIsland)
         let runs = RunStore(settings: settings)
         _runs = State(initialValue: runs)
-        _engine = State(initialValue: CommandEngine(settings: settings, runs: runs))
+        let engine = CommandEngine(settings: settings, runs: runs)
+        _engine = State(initialValue: engine)
         let launcher = LaunchController(settings: settings, store: store, runs: runs, usage: usage)
         _weeklySummary = State(initialValue: WeeklySummarySender(settings: settings, usage: usage, runs: runs, hub: hub))
         _launcher = State(initialValue: launcher)
@@ -161,14 +162,16 @@ struct ClaudePultApp: App {
             clipboard.start()
             // Windows can only be made once the app has finished launching.
             DispatchQueue.main.async {
-                notchIsland.start { [notchIsland, settings, usage, sessions, runs] index in
+                notchIsland.start { [notchIsland, settings, usage, sessions, runs, hub, modes, engine] index in
                     AnyView(NotchIslandView(index: index)
                         .environment(notchIsland)
                         .environment(settings)
                         .environment(usage)
                         .environment(sessions)
                         .environment(runs)
-                        .environment(hub))
+                        .environment(hub)
+                        .environment(modes)
+                        .environment(engine))
                 }
             }
             // The shell lookup first: the scan reports which agents it found.
