@@ -150,7 +150,7 @@ final class AIServiceStore {
         checks[provider] = result
         if case let .ok(models) = result, let first = models.first,
            settings.aiServices.model(provider).map({ !models.contains($0) }) ?? true {
-            settings.aiServices.models[provider.rawValue] = Self.preferredModel(models) ?? first
+            settings.aiServices.models[provider.rawValue] = Self.preferredModel(models, provider: provider) ?? first
         }
     }
 
@@ -161,7 +161,7 @@ final class AIServiceStore {
         let result: APICheck
         do {
             let (data, response) = try await URLSession.shared.data(for: request)
-            result = APICheck.from(status: (response as? HTTPURLResponse)?.statusCode ?? 0, body: data)
+            result = provider.check(status: (response as? HTTPURLResponse)?.statusCode ?? 0, body: data)
         } catch {
             result = .failed(provider == .compatible ? String(localized: "Сервер не отвечает — запущен ли он?") : String(localized: "Нет связи"))
         }
@@ -170,7 +170,8 @@ final class AIServiceStore {
     }
 
     /// A sensible default from a list: not an embedding / audio / image model.
-    nonisolated static func preferredModel(_ models: [String]) -> String? {
+    nonisolated static func preferredModel(_ models: [String], provider: APIProvider? = nil) -> String? {
+        if let known = provider?.knownModels.first(where: models.contains) { return known }
         let skip = ["embed", "tts", "whisper", "audio", "image", "dall-e", "moderation", "transcribe", "realtime", "search"]
         return models.first { model in !skip.contains { model.lowercased().contains($0) } }
     }
