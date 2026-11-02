@@ -5,7 +5,7 @@
 **Updated:** 2026-11-02
 
 **Now:**
-- nothing in progress; merged 2026-11-02: glass panel background (#158) and its fix for macOS 27 (#160), AI services spec + stage 1 — Claude Code inside «Сервисы AI», a tab per service (#159)
+- nothing in progress; merged 2026-11-02: «Сервисы AI» as a list on the left (#162), glass panel background (#158) and its fix for macOS 27 (#160), AI services spec + stage 1 — Claude Code inside «Сервисы AI», a tab per service (#159)
 - released 0.2.2 (v0.2.2, build 345): clickable widgets (#154), Codex from the ChatGPT desktop app (#155), notch island stage 2 (#153)
 - notch island stage 1 merged (#149): module, island over the notch, ears, hover card; target release 0.3.0
 - notch island stage 2 merged (#153): banners for events, permission requests with Allow / Deny in the island
@@ -28,7 +28,7 @@
 - Windows and Linux versions (docs/SPEC-windows.md, docs/SPEC-linux.md) — only when Oleh says; stage 0 (fact checks in VMs) first
 
 **Needs Oleh:**
-- AI services tabs (build from main): Settings → «Сервисы AI» — every sub-tab opens; Claude Code has all the old options (path, hooks, Telegram answers, saved prompts, CLAUDE.md и MCP, background runs); Codex shows the agent and its limits row; Modules → Лимиты → «Другие AI» shows the summary and «Открыть «Сервисы AI»»
+- AI services list (build from main, installed): Settings → «Сервисы AI» — every service in the left list opens, the dots match what's set up; Claude Code has all the old options (path, hooks, Telegram answers, saved prompts, CLAUDE.md и MCP, background runs); Codex shows the agent and its limits row; Modules → Лимиты → «Другие AI» shows the summary and «Открыть «Сервисы AI»»
 - glass panel (installed build has the fix): checked by the agent in the light theme; look at it in the dark theme and with «Уменьшить прозрачность» on (must fall back to the standard background), say if the glass should be clearer or denser
 - update to 0.2.2 («Обновления» in Settings), then: Settings → Модули → Лимиты → «Другие AI» should list Codex; click the limits widget (opens «Лимиты»), ↻ in it, the sessions widget's rows and ☕ — tell me what doesn't react
 - on the other Mac: install 0.2.2 (Releases, or «Обновления» in Settings) → Settings → Claude Code: the path field should show «авто: …» instead of «авто: не найден»; tell me the path it shows
@@ -41,6 +41,12 @@
 - decide SPEC-windows §10 and SPEC-linux §10 (Tauri 2 for both, Windows code signing, first Linux desktops) before that work starts
 - optional: Apple Developer ID (notarization, no «Open Anyway»); delete or archive the old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-02 — «Сервисы AI»: services as a list on the left (branch `feat/services-sidebar`)
+
+Done: the segmented row of six services didn't fit the 560 pt Settings window with Oleh's large text. «Сервисы AI» now has a list on the left, like System Settings: an icon, the name and a dot per service (green — an agent found, an API key saved or its limits available; grey — nothing; status also in the hover hint and for VoiceOver), the chosen service's options on the right. Settings widens to 760 pt on this tab only. New `ServiceTab.icon`, `ServiceTab.isSetUp(agents:keys:limits:)`; two new strings in 13 languages.
+Checked: `xcodebuild test` — 302 / 302 pass (new: status from each kind of part, another service's parts don't count, icons distinct). Live: opened Settings → «Сервисы AI» with `--app-command settings` and captured it — list, dots (Claude Code, Codex, Copilot green here) and the Codex options render; the rest of the window unchanged.
+Left: dark theme not looked at.
 
 ## 2026-11-02 — Glass panel background really applies on macOS 27 (branch `fix/glass-panel`)
 

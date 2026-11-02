@@ -17,6 +17,24 @@ enum ServiceTab: String, CaseIterable, Sendable {
         }
     }
 
+    var icon: String {
+        switch self {
+        case .claude: "sparkle"
+        case .codex: "terminal"
+        case .gemini: "diamond"
+        case .copilot: "person.2"
+        case .cursor: "cursorarrow.rays"
+        case .other: "ellipsis.circle"
+        }
+    }
+
+    /// Something of this service works here: an agent found, an API key saved or its limits available.
+    func isSetUp(agents: Set<AgentKind>, keys: Set<APIProvider>, limits: Set<HubLimit.Source>) -> Bool {
+        self.agents.contains(where: agents.contains)
+            || providers.contains(where: keys.contains)
+            || hubSources.contains(where: limits.contains)
+    }
+
     var agents: [AgentKind] { AgentKind.allCases.filter { ServiceTab(agent: $0) == self } }
     var providers: [APIProvider] { APIProvider.allCases.filter { ServiceTab(provider: $0) == self } }
     var hubSources: [HubLimit.Source] { HubLimit.Source.allCases.filter { ServiceTab(hub: $0) == self } }
@@ -69,20 +87,25 @@ enum SettingsRoute {
     }
 }
 
-/// Settings → «Сервисы AI» (SPEC-modes §11.3, SPEC-ai-services §4): a nested tab per AI.
+/// Settings → «Сервисы AI» (SPEC-modes §11.3, SPEC-ai-services §4): a list of the AIs on the left, like System
+/// Settings — a segmented row ran out of width with six services and large text — and the chosen one's options.
 struct ServicesSettings: View {
+    /// Settings widens to this on «Сервисы AI» to fit the list.
+    static let width: CGFloat = 760
+
     @Environment(AIServiceStore.self) private var services
+    @Environment(HubLimitsStore.self) private var hub
     @AppStorage(SettingsRoute.serviceKey) private var tab: ServiceTab = .claude
 
     var body: some View {
-        VStack(spacing: 0) {
-            Picker("Сервис", selection: $tab) {
-                ForEach(ServiceTab.allCases, id: \.self) { Text($0.title).tag($0) }
+        HStack(spacing: 0) {
+            List(ServiceTab.allCases, id: \.self, selection: Binding(get: { tab }, set: { if let new = $0 { tab = new } })) { service in
+                ServiceListRow(service: service, isSetUp: isSetUp(service))
             }
-            .pickerStyle(.segmented)
-            .labelsHidden()
-            .padding(.horizontal, 20)
-            .padding(.top, 12)
+            .listStyle(.sidebar)
+            .frame(width: 180)
+
+            Divider()
 
             Form {
                 if tab == .claude {
@@ -105,6 +128,32 @@ struct ServicesSettings: View {
         }
         .frame(height: 600)
         .task { if services.agents.isEmpty { await services.scan() } }
+    }
+
+    private func isSetUp(_ service: ServiceTab) -> Bool {
+        service.isSetUp(agents: Set(services.agents.keys), keys: services.hasKey, limits: hub.available.union(hub.savedKeys))
+    }
+}
+
+/// A service in the list: its icon, name and a dot — green when something of it works here.
+private struct ServiceListRow: View {
+    let service: ServiceTab
+    let isSetUp: Bool
+
+    var body: some View {
+        let status = isSetUp ? String(localized: "найден или настроен") : String(localized: "не найден и не настроен")
+        HStack(spacing: 8) {
+            Image(systemName: service.icon)
+                .frame(width: 18)
+            Text(service.title)
+            Spacer(minLength: 4)
+            Circle()
+                .fill(isSetUp ? Color.green : Color.secondary.opacity(0.35))
+                .frame(width: 7, height: 7)
+                .help(status)
+        }
+        .accessibilityElement(children: .combine)
+        .accessibilityValue(status)
     }
 }
 

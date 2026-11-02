@@ -42,4 +42,14 @@ struct ServiceTabTests {
         #expect(defaults.string(forKey: SettingsRoute.tabKey) == "services")
         #expect(defaults.string(forKey: SettingsRoute.serviceKey) == "copilot")
     }
+
+    @Test func setUpWhenAnythingOfTheServiceWorks() {
+        #expect(!ServiceTab.codex.isSetUp(agents: [], keys: [], limits: []))
+        #expect(ServiceTab.codex.isSetUp(agents: [.codex], keys: [], limits: []))
+        #expect(ServiceTab.codex.isSetUp(agents: [], keys: [.openai], limits: []))
+        #expect(ServiceTab.codex.isSetUp(agents: [], keys: [], limits: [.openAICosts]))
+        #expect(!ServiceTab.codex.isSetUp(agents: [.claudeCode], keys: [.anthropic], limits: [.gemini]), "another service's parts")
+        #expect(ServiceTab.other.isSetUp(agents: [], keys: [.mistral], limits: []))
+        #expect(Set(ServiceTab.allCases.map(\.icon)).count == ServiceTab.allCases.count)
+    }
 }
