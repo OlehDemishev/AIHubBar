@@ -103,6 +103,8 @@ struct ServicesSettings: View {
                 ServiceListRow(service: service, isSetUp: isSetUp(service))
             }
             .listStyle(.sidebar)
+            // The sidebar material would run up under the Settings tabs; one window colour instead.
+            .scrollContentBackground(.hidden)
             .frame(width: 180)
 
             Divider()
