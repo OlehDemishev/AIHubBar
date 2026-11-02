@@ -5,7 +5,7 @@
 **Updated:** 2026-11-03
 
 **Now:**
-- branch `feat/help`: new help window (topics, animated pictures, steps) and the same help on the site in 13 languages, PR open
+- nothing in progress; new help merged (#206): window in the app and site/help.html in 13 languages
 
 **Next:**
 - Oleh tries «Раскладка» in his own apps; next beta with fixes: `scripts/release.sh 0.5.0-beta.1 --publish`
@@ -13,7 +13,7 @@
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/SPEC-windows.md §9, stage 2–3 leftovers)
 
 **Needs Oleh:**
-- look at the new help (panel → «?», and site/help.html once the PR is merged and Pages deploys); merge the PR
+- look at the new help: panel → «?» and https://olehdemishev.github.io/AIHubBar/help.html
 - look at the new Settings and say what to change next
 - MacBook Air: update to 0.4.0 through Sparkle (Settings → General → Updates) and check the island at the real notch
 - «Раскладка» is on and has Accessibility on this Mac: try it in Telegram, Chrome, Safari, Notes; ⌥⇧ on a selection is not tried yet
