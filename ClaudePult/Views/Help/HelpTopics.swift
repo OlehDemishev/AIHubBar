@@ -312,3 +312,49 @@ struct HelpFact: Identifiable {
         self.symbol = symbol
     }
 }
+
+/// The help as data for the site (docs/SPEC-help.md §4), in the language this process runs in.
+struct HelpExport: Encodable {
+    struct Topic: Encodable {
+        var id, group, title, summary: String
+        var beta: Bool
+        var steps: [String]
+        var sections: [Section]
+    }
+
+    struct Section: Encodable {
+        var title: String
+        var monospaced: Bool
+        var facts: [Fact]
+    }
+
+    struct Fact: Encodable {
+        var name, detail: String
+    }
+
+    var language: String
+    var labels: [String: String]
+    var topics: [Topic]
+
+    static func make() -> HelpExport {
+        let topics = HelpTopic.groups.flatMap { group in
+            group.topics.map { topic in
+                Topic(id: topic.rawValue, group: group.title, title: topic.title, summary: topic.summary, beta: topic.isBeta,
+                      steps: topic.steps,
+                      sections: topic.sections.map { section in
+                          Section(title: section.title ?? String(localized: "Что умеет"), monospaced: section.monospaced,
+                                  facts: section.facts.map { Fact(name: $0.name, detail: $0.detail) })
+                      })
+            }
+        }
+        let labels = [
+            "help": String(localized: "Справка"),
+            "start": String(localized: "Как начать"),
+            "search": String(localized: "Поиск по справке"),
+            "replay": String(localized: "Показать ещё раз"),
+            "beta": String(localized: "бета"),
+            "scripts": String(localized: "Команды для скриптов вызываются так: \(HelpTopic.binary) --sessions"),
+        ]
+        return HelpExport(language: Bundle.main.preferredLocalizations.first ?? "ru", labels: labels, topics: topics)
+    }
+}

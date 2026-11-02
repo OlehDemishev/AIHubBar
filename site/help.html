@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Hub Bar — Help</title>
+<meta name="description" content="How AI Hub Bar works: the menu bar, the panel, modules and profiles, AI limits, agent sessions, projects, the notch island and more.">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="stylesheet" href="style.css">
+<style>
+/* Help page: topics from site/help/<language>.json (scripts/export-help.sh), the same as the app's help window. */
+.help { display: grid; grid-template-columns: 250px minmax(0, 1fr); gap: 40px; padding-top: 28px; padding-bottom: 80px; }
+.toc { position: sticky; top: 76px; align-self: start; max-height: calc(100vh - 96px); overflow: auto; }
+.toc input { width: 100%; font: inherit; font-size: 14px; padding: 8px 12px; border-radius: 10px; border: 1px solid var(--line); background: var(--card); color: var(--ink); margin-bottom: 14px; }
+.toc h4 { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); margin: 14px 0 6px; }
+.toc a { display: flex; align-items: center; gap: 9px; padding: 5px 8px; border-radius: 8px; color: var(--ink); font-size: 14px; }
+.toc a:hover { background: var(--card); text-decoration: none; }
+.toc a.on { background: var(--accent-soft); font-weight: 600; }
+.ico { width: 22px; height: 22px; border-radius: 6px; display: inline-grid; place-items: center; color: #fff; font-size: 12px; flex: none; }
+.t-basics { background: linear-gradient(#4aa3ff, #0a6cff); } .t-ai { background: linear-gradient(#c86bff, #8a2be2); }
+.t-work { background: linear-gradient(#3ed6c0, #10a39a); } .t-mac { background: linear-gradient(#ffb340, #ff8a00); } .t-more { background: linear-gradient(#a1a1a6, #6e6e73); }
+.lang { font: inherit; font-size: 13px; padding: 4px 8px; border-radius: 8px; border: 1px solid var(--line); background: var(--card); color: var(--ink); }
+.topic { padding-top: 26px; scroll-margin-top: 72px; }
+.topic + .topic { border-top: 1px solid var(--line); margin-top: 30px; }
+.thead { display: flex; gap: 16px; align-items: center; margin-bottom: 18px; }
+.thead .ico { width: 54px; height: 54px; border-radius: 14px; font-size: 26px; }
+.thead h2 { margin: 0; font-size: 30px; }
+.thead p { margin: 4px 0 0; color: var(--ink-2); }
+.beta { font-size: 11px; font-weight: 700; text-transform: uppercase; color: #b25f00; background: #ffe7c2; border-radius: 6px; padding: 2px 6px; vertical-align: middle; margin-left: 6px; }
+.stage { position: relative; height: 220px; border-radius: 20px; overflow: hidden; margin-bottom: 20px; background: linear-gradient(135deg, var(--tint-a), var(--tint-b)); border: 1px solid var(--line); }
+.stage .replay { position: absolute; right: 12px; bottom: 12px; border: 0; width: 32px; height: 32px; border-radius: 50%; background: color-mix(in srgb, var(--surface) 80%, transparent); color: var(--ink); cursor: pointer; font-size: 15px; }
+.steps-box { background: var(--card); border-radius: 16px; padding: 18px 20px; margin-bottom: 20px; }
+.steps-box h3 { font-size: 17px; margin-bottom: 12px; }
+.steps-box ol { list-style: none; margin: 0; padding: 0; counter-reset: s; }
+.steps-box li { counter-increment: s; display: flex; gap: 12px; margin: 10px 0; align-items: baseline; }
+.steps-box li::before { content: counter(s); flex: none; width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; color: #fff; font-weight: 700; font-size: 13px; background: var(--dot); position: relative; top: 4px; }
+.facts h3 { font-size: 17px; margin: 18px 0 12px; }
+.grid-f { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
+.grid-f.mono { grid-template-columns: 1fr; }
+.fact { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; }
+.fact b { display: block; margin-bottom: 4px; }
+.grid-f.mono .fact b { font: 600 13px "SF Mono", Menlo, monospace; }
+.fact span { color: var(--ink-2); font-size: 14.5px; }
+.fact.hit { border-color: var(--link); box-shadow: 0 0 0 1px var(--link); }
+.scripts { font: 13px "SF Mono", Menlo, monospace; color: var(--ink-3); margin-top: 14px; }
+@media (max-width: 860px) { .help { grid-template-columns: 1fr; } .toc { position: static; max-height: none; } }
+
+/* Scenes: drawn with CSS, the same story as the app's pictures; 6 s loops. */
+.sc { position: absolute; inset: 0; display: grid; place-items: center; }
+.bar { position: absolute; left: 0; right: 0; top: 0; height: 34px; display: flex; justify-content: flex-end; align-items: center; gap: 14px; padding: 0 18px; background: color-mix(in srgb, var(--surface) 75%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); font-weight: 600; font-size: 15px; }
+.g { color: var(--green); } .o { color: var(--orange); } .r { color: #ff453a; } .m { color: var(--ink-3); }
+.card { background: var(--surface); border-radius: 10px; padding: 8px 12px; box-shadow: 0 1px 3px var(--shadow); font-size: 13px; font-weight: 600; display: flex; gap: 8px; align-items: center; }
+.pane { background: color-mix(in srgb, var(--surface) 70%, transparent); backdrop-filter: blur(10px); border-radius: 14px; padding: 9px; display: grid; gap: 6px; box-shadow: 0 6px 20px var(--shadow); }
+.dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+@keyframes drop { 0%, 30% { opacity: 0; transform: translateY(-14px) scale(.9); } 42%, 92% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+@keyframes pulse { 0%, 100% { transform: scale(1); } 15% { transform: scale(1.25); } 30% { transform: scale(1); } }
+@keyframes fadein { 0%, 25% { opacity: 0; } 35%, 100% { opacity: 1; } }
+@keyframes fade2 { 0%, 55% { opacity: 0; } 65%, 100% { opacity: 1; } }
+@keyframes swapA { 0%, 30% { transform: translateY(0); } 45%, 80% { transform: translateY(42px); } 95%, 100% { transform: translateY(0); } }
+@keyframes swapB { 0%, 30% { transform: translateY(0); } 45%, 80% { transform: translateY(-42px); } 95%, 100% { transform: translateY(0); } }
+@property --p { syntax: "<percentage>"; inherits: false; initial-value: 0%; }
+@keyframes fill1 { 0% { --p: 0%; } 35%, 100% { --p: 62%; } }
+@keyframes fill2 { 0% { --p: 0%; } 35%, 100% { --p: 86%; } }
+.ring2 { width: 104px; height: 104px; border-radius: 50%; background: conic-gradient(var(--c) var(--p), var(--ring-track) 0); display: grid; place-items: center; animation: var(--a) 6s ease-out infinite; }
+.ring2::after { content: attr(data-v); width: 80px; height: 80px; border-radius: 50%; background: var(--surface); display: grid; place-items: center; font-weight: 700; font-size: 18px; }
+@keyframes slidein { 0%, 50% { opacity: 0; transform: translateX(40px); } 60%, 92% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+@keyframes waitbg { 0%, 20% { background: var(--surface); } 30%, 70% { background: var(--wait); } 80%, 100% { background: var(--surface); } }
+@keyframes ask { 0%, 35% { opacity: 0; max-height: 0; } 45%, 70% { opacity: 1; max-height: 40px; } 80%, 100% { opacity: 0; max-height: 0; } }
+@keyframes pop { 0% { transform: scale(0); } 60% { transform: scale(1.2); } 100% { transform: scale(1); } }
+@keyframes expand { 0%, 30% { max-height: 0; opacity: 0; } 45%, 85% { max-height: 40px; opacity: 1; } 100% { max-height: 0; opacity: 0; } }
+@keyframes move { 0%, 30% { transform: translateX(0); } 50%, 100% { transform: translateX(104px); } }
+@keyframes grow { 0% { width: 0; } 100% { width: var(--w); } }
+@keyframes fly { 0%, 60% { opacity: 0; transform: translate(-40px, 20px); } 75%, 100% { opacity: 1; transform: none; } }
+@keyframes notch { 0%, 12% { width: 150px; height: 30px; } 25%, 45% { width: 260px; height: 30px; } 58%, 92% { width: 340px; height: 130px; } 100% { width: 150px; height: 30px; } }
+@keyframes ears { 0%, 18% { opacity: 0; } 25%, 92% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes cardin { 0%, 55% { opacity: 0; } 62%, 92% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes type { 0% { width: 0; } 50%, 100% { width: 6ch; } }
+@keyframes out1 { 0%, 60% { opacity: 1; } 65%, 100% { opacity: 0; } }
+@keyframes in1 { 0%, 60% { opacity: 0; } 65%, 100% { opacity: 1; } }
+@keyframes cpu { 0%, 100% { width: 18%; } 30% { width: 72%; } 60% { width: 46%; } }
+@keyframes on { 0%, 15% { background: var(--card); color: var(--ink-3); } 20%, 90% { background: var(--orange); color: #fff; } 100% { background: var(--card); color: var(--ink-3); } }
+@keyframes typecmd { 0% { width: 0; } 40%, 100% { width: 19ch; } }
+@keyframes line { 0%, 45% { opacity: 0; } 50%, 95% { opacity: 1; } 100% { opacity: 0; } }
+.loop * { animation-duration: 6s; animation-iteration-count: infinite; }
+@media (prefers-reduced-motion: reduce) { .loop *, .ring2 { animation: none !important; } .ring2 { --p: 62%; } }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="index.html"><img src="icon.png" alt="" width="28" height="28">AI Hub Bar</a>
+    <nav>
+      <a href="index.html#features">Features</a>
+      <a href="index.html#install">Install</a>
+      <select class="lang" id="lang" aria-label="Language"></select>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap help">
+  <aside class="toc" id="toc"><input id="q" type="search" autocomplete="off"></aside>
+  <div id="topics"></div>
+</main>
+
+<footer class="wrap foot">
+  <span>MIT license · <a href="https://github.com/OlehDemishev/AIHubBar">Source on GitHub</a></span>
+  <span>An independent project, not affiliated with Anthropic, OpenAI, Google or GitHub.</span>
+</footer>
+
+<script>
+const LANGS = { ru: "Русский", en: "English", uk: "Українська", de: "Deutsch", fr: "Français", es: "Español", it: "Italiano",
+  "pt-BR": "Português (Brasil)", pl: "Polski", ja: "日本語", ko: "한국어", ar: "العربية", id: "Bahasa Indonesia" };
+const GROUP = { start: "basics", menuBar: "basics", panel: "basics", modules: "basics", limits: "ai", sessions: "ai", services: "ai",
+  projects: "work", calendar: "work", reports: "work", notch: "mac", layout: "mac", utilities: "mac", alerts: "more", commandLine: "more" };
+const GLYPH = { start: "✦", menuBar: "▭", panel: "☰", modules: "▦", limits: "◔", sessions: "✋", services: "⚙", projects: "▤",
+  calendar: "▦", reports: "≡", notch: "▬", layout: "⌨", utilities: "⚒", alerts: "◉", commandLine: "›_" };
+const TINT = { basics: ["#0a84ff33", "#0a84ff0a", "#0a84ff"], ai: ["#af52de33", "#af52de0a", "#af52de"], work: ["#30b0c733", "#30b0c70a", "#30b0c7"],
+  mac: ["#ff9f0a33", "#ff9f0a0a", "#ff9f0a"], more: ["#8e8e9333", "#8e8e930a", "#8e8e93"] };
+
+const SCENES = {
+  start: `<div class="bar"><span style="animation:pulse 6s infinite">✦</span><span class="m">12:04</span></div>
+    <div class="pane" style="position:absolute;top:44px;right:56px;width:230px;animation:drop 6s infinite">
+      <div class="card"><i class="dot" style="background:#af52de"></i>◔ <span style="margin-left:auto" class="g">34%</span></div>
+      <div class="card"><i class="dot" style="background:#af52de"></i>✋ <span style="margin-left:auto">1</span></div>
+      <div class="card"><i class="dot" style="background:#30b0c7"></i>▤ <span style="margin-left:auto">6</span></div></div>`,
+  menuBar: `<div class="bar" style="top:70px;height:46px;font-size:20px;gap:6px">
+      <span style="display:flex;gap:6px;align-items:center;padding:3px 8px;border-radius:8px;animation:fade2 6s infinite;background:var(--card)">✦<i class="dot" style="background:#ff453a"></i></span>
+      <span style="animation:fadein 6s infinite" class="m">│</span>
+      <span style="display:flex;gap:6px;padding:3px 8px;border-radius:8px;background:var(--card);animation:fade2 6s infinite"><b class="g">34%</b><span class="m">/</span><b class="o">58%</b></span>
+      <span>✋ 1</span><span class="m" style="font-size:15px;margin-left:10px">12:04</span></div>`,
+  panel: `<div class="pane" style="width:250px">
+      <div class="card" style="animation:swapA 6s infinite"><i class="dot" style="background:#af52de"></i>◔</div>
+      <div class="card" style="animation:swapB 6s infinite"><i class="dot" style="background:#af52de"></i>✋</div>
+      <div class="card"><i class="dot" style="background:#30b0c7"></i>▤</div>
+      <div class="card"><i class="dot" style="background:#ff9f0a"></i>⚒</div></div>`,
+  modules: `<div style="display:grid;grid-template-columns:repeat(3,92px);gap:10px">
+      ${["#af52de","#af52de","#30b0c7","#ff9f0a","#ff9f0a","#ff9f0a"].map((c,i)=>`<div class="card" style="height:56px;${i>1?'animation:fade2 6s infinite reverse':''}"><span class="ico" style="background:${c}">${["◔","✋","▤","⚒","☕","▬"][i]}</span></div>`).join("")}</div>`,
+  limits: `<div style="display:flex;gap:44px"><div class="ring2" data-v="62 %" style="--c:var(--orange);--a:fill1"></div><div class="ring2" data-v="86 %" style="--c:#ff453a;--a:fill2"></div></div>
+    <div class="card" style="position:absolute;top:16px;right:16px;animation:slidein 6s infinite">🔔 <b class="r">86 %</b></div>`,
+  sessions: `<div class="pane" style="width:320px">
+      <div class="card" style="flex-wrap:wrap;animation:waitbg 6s infinite"><span class="o">✋</span>Cantero<span class="m" style="margin-left:auto">12 min</span>
+        <span style="flex-basis:100%;display:flex;justify-content:flex-end;gap:6px;overflow:hidden;animation:ask 6s infinite"><span class="card" style="box-shadow:none;background:var(--card)">✕</span><span class="card" style="box-shadow:none;background:var(--blue);color:#fff">✓</span></span></div>
+      <div class="card"><span class="g">⚡</span>AIHubBar<span class="m" style="margin-left:auto">3 min</span></div>
+      <div class="card"><span class="m">✓</span>site</div></div>`,
+  services: `<div style="display:flex;gap:18px">${["#ff9f0a","#1d1d1f","#5e5ce6","#34c759","#a2845e","#8e8e93"].map((c,i)=>`<span class="ico" style="width:46px;height:46px;border-radius:12px;font-size:20px;position:relative;background:${c}">${["✦",">_","◆","☺","✧","…"][i]}<i class="dot" style="position:absolute;right:-3px;bottom:-3px;background:var(--green);border:2px solid var(--surface);animation:pop .5s ${0.4+i*0.5}s both"></i></span>`).join("")}</div>`,
+  projects: `<div class="pane" style="width:300px">${[["Cantero","var(--green)"],["AIHubBar","var(--orange)"],["site","var(--green)"],["_daily-report","#ff453a"]].map((p,i)=>`<div class="card" style="flex-wrap:wrap"><i class="dot" style="background:${p[1]}"></i>${p[0]}${i==1?`<span style="flex-basis:100%;display:flex;gap:6px;overflow:hidden;font-weight:400;animation:expand 6s infinite"><span class="m">⑂ feat/help</span><span class="g">✓ PR</span></span>`:""}</div>`).join("")}</div>`,
+  calendar: `<div style="display:flex;gap:6px;position:relative">${[0,1,2,3,4,5,6].map(()=>`<div class="card" style="width:46px;height:70px"></div>`).join("")}
+      <span class="card" style="position:absolute;left:112px;top:8px;background:#30b0c7;color:#fff;padding:3px 8px;animation:move 6s infinite alternate">▶</span></div>`,
+  reports: `<div style="display:flex;gap:30px;align-items:center"><div class="card" style="display:grid;gap:8px;width:230px;padding:16px">
+      ${[180,140,200,120].map((w,i)=>`<span style="--w:${w}px;height:7px;border-radius:4px;background:var(--line);animation:grow 1s ${i*0.5}s both"></span>`).join("")}</div>
+      <span style="font-size:34px;color:var(--blue);animation:fly 6s infinite">➤</span></div>`,
+  notch: `<div style="position:absolute;top:0;left:50%;transform:translateX(-50%);background:#000;border-radius:0 0 22px 22px;color:#fff;animation:notch 6s infinite;overflow:hidden">
+      <div style="display:flex;justify-content:space-between;padding:6px 18px;font-weight:700;font-size:13px;animation:ears 6s infinite"><span class="g">34%</span><span class="o">✋ 2</span></div>
+      <div style="padding:6px 22px;display:grid;gap:10px;animation:cardin 6s infinite">
+        <span style="height:6px;border-radius:3px;background:linear-gradient(90deg,var(--green) 34%,#ffffff2e 0)"></span>
+        <span style="height:6px;border-radius:3px;background:linear-gradient(90deg,var(--orange) 58%,#ffffff2e 0)"></span></div></div>`,
+  layout: `<div style="display:grid;gap:18px;justify-items:center"><div class="card" style="width:280px;height:56px;font:500 26px ui-rounded,-apple-system;position:relative">
+      <span style="overflow:hidden;white-space:nowrap;display:inline-block;width:0;animation:type 6s steps(6) infinite,out1 6s infinite">ghbdtn</span>
+      <span style="position:absolute;left:12px;color:var(--blue);animation:in1 6s infinite">привет</span></div>
+      <span style="position:relative;font:700 13px ui-rounded;border:1.5px solid;border-radius:5px;padding:2px 8px"><span class="m" style="animation:out1 6s infinite">EN</span><span class="o" style="position:absolute;left:8px;animation:in1 6s infinite">RU</span></span></div>`,
+  utilities: `<div style="display:grid;gap:22px;justify-items:center"><div style="display:flex;gap:12px">${["☾","🔒","☕","⧉"].map((s,i)=>`<span class="ico" style="width:52px;height:52px;border-radius:14px;font-size:22px;animation:on 6s ${i*0.9}s infinite both">${s}</span>`).join("")}</div>
+      <div style="display:flex;gap:10px;align-items:center"><span class="o">⚙</span><span style="width:190px;height:7px;border-radius:4px;background:var(--ring-track);overflow:hidden"><span style="display:block;height:100%;background:var(--orange);animation:cpu 6s infinite"></span></span></div></div>`,
+  alerts: `<div class="card" style="position:absolute;top:18px;right:18px;width:270px;animation:slidein 6s infinite"><span class="ico t-mac">✦</span><span>AI Hub Bar<br><span class="m" style="font-weight:400">✋ Cantero</span></span></div>
+    <div class="card" style="position:absolute;left:18px;bottom:18px;animation:fly 6s infinite"><span class="ico" style="background:var(--blue);border-radius:50%">➤</span>✋ Cantero</div>`,
+  commandLine: `<div style="width:340px;height:150px;border-radius:12px;background:#111;color:#eee;font:12px 'SF Mono',Menlo,monospace;padding:14px;display:grid;gap:5px;align-content:start">
+      <span style="display:flex;gap:6px"><i class="dot" style="background:#ff5f57"></i><i class="dot" style="background:#febc2e"></i><i class="dot" style="background:#28c840"></i></span>
+      <span class="g" style="overflow:hidden;white-space:nowrap;width:0;animation:typecmd 6s steps(19) infinite">$ AIHubBar --sessions</span>
+      ${["● Cantero    running   12 min","✋ AIHubBar  waiting    3 min","✓ site       done"].map((l,i)=>`<span style="animation:line 6s ${i*0.6}s infinite both">${l}</span>`).join("")}</div>`,
+};
+
+const $ = (s) => document.querySelector(s);
+let data = null;
+
+function pickLang() {
+  const asked = new URLSearchParams(location.search).get("lang");
+  if (asked && LANGS[asked]) return asked;
+  try { const saved = localStorage.getItem("helpLang"); if (saved && LANGS[saved]) return saved; } catch (e) {}
+  for (const l of navigator.languages || [navigator.language]) {
+    if (LANGS[l]) return l;
+    const base = l.split("-")[0];
+    if (base === "pt") return "pt-BR";
+    if (LANGS[base]) return base;
+  }
+  return "en";
+}
+
+function esc(s) { return s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c])); }
+
+function render(query = "") {
+  const q = query.trim().toLowerCase();
+  const hit = (t) => !q || [t.title, t.summary, ...t.steps, ...t.sections.flatMap((s) => s.facts.flatMap((f) => [f.name, f.detail]))].some((x) => x.toLowerCase().includes(q));
+  const toc = $("#toc"), list = $("#topics");
+  toc.querySelectorAll("h4, a").forEach((n) => n.remove());
+  list.innerHTML = "";
+  let group = null;
+  for (const t of data.topics.filter(hit)) {
+    const g = GROUP[t.id] || "more", tint = TINT[g];
+    if (t.group !== group) { group = t.group; toc.insertAdjacentHTML("beforeend", `<h4>${esc(group)}</h4>`); }
+    toc.insertAdjacentHTML("beforeend", `<a href="#${t.id}" data-id="${t.id}"><span class="ico t-${g}">${GLYPH[t.id] || "•"}</span>${esc(t.title)}${t.beta ? `<span class="beta">${esc(data.labels.beta)}</span>` : ""}</a>`);
+    const steps = t.steps.length ? `<div class="steps-box" style="--dot:${tint[2]}"><h3>${esc(data.labels.start)}</h3><ol>${t.steps.map((s) => `<li>${esc(s)}</li>`).join("")}</ol></div>` : "";
+    const facts = t.sections.map((s) => `<div class="facts"><h3>${esc(s.title)}</h3><div class="grid-f${s.monospaced ? " mono" : ""}">${s.facts.map((f) => {
+      const on = q && (f.name + " " + f.detail).toLowerCase().includes(q);
+      return `<div class="fact${on ? " hit" : ""}"><b>${esc(f.name)}</b><span>${esc(f.detail)}</span></div>`; }).join("")}</div></div>`).join("");
+    list.insertAdjacentHTML("beforeend", `<section class="topic" id="${t.id}">
+      <div class="thead"><span class="ico t-${g}">${GLYPH[t.id] || "•"}</span><div><h2>${esc(t.title)}${t.beta ? `<span class="beta">${esc(data.labels.beta)}</span>` : ""}</h2><p>${esc(t.summary)}</p></div></div>
+      <div class="stage" style="--tint-a:${tint[0]};--tint-b:${tint[1]}" aria-hidden="true"><div class="sc loop">${SCENES[t.id] || ""}</div><button class="replay" title="${esc(data.labels.replay)}">↻</button></div>
+      ${steps}${facts}${t.id === "commandLine" ? `<p class="scripts">${esc(data.labels.scripts)}</p>` : ""}</section>`);
+  }
+  list.querySelectorAll(".replay").forEach((b) => b.addEventListener("click", () => {
+    const sc = b.previousElementSibling, html = sc.innerHTML; sc.innerHTML = ""; requestAnimationFrame(() => (sc.innerHTML = html));
+  }));
+  spy();
+}
+
+function spy() {
+  const links = [...document.querySelectorAll("#toc a")];
+  const io = new IntersectionObserver((entries) => {
+    for (const e of entries) if (e.isIntersecting) links.forEach((a) => a.classList.toggle("on", a.dataset.id === e.target.id));
+  }, { rootMargin: "-80px 0px -70% 0px" });
+  document.querySelectorAll(".topic").forEach((s) => io.observe(s));
+}
+
+async function load(lang) {
+  const res = await fetch(`help/${lang}.json`);
+  data = await res.json();
+  document.documentElement.lang = lang;
+  document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+  document.title = `AI Hub Bar — ${data.labels.help}`;
+  $("#q").placeholder = data.labels.search;
+  render($("#q").value);
+  if (location.hash) document.querySelector(location.hash)?.scrollIntoView();
+}
+
+const select = $("#lang");
+for (const [code, name] of Object.entries(LANGS)) select.insertAdjacentHTML("beforeend", `<option value="${code}">${name}</option>`);
+const lang = pickLang();
+select.value = lang;
+select.addEventListener("change", () => { try { localStorage.setItem("helpLang", select.value); } catch (e) {} load(select.value); });
+$("#q").addEventListener("input", (e) => render(e.target.value));
+load(lang);
+</script>
+</body>
+</html>
