@@ -1,23 +1,30 @@
 # Status
 
 <!-- summary:start -->
-**Stage:** Mac: 0.3.0 published (notch island stages 1–5, Settings like System Settings, more AI services). Windows/Linux (`desktop/`, Tauri 2): stages 1–3 main parts merged, CI green, not tried live
+**Stage:** Mac: 0.3.0 published; next — beta builds, first beta feature «Раскладка» (auto layout switch). Windows/Linux (`desktop/`, Tauri 2): stages 1–3 main parts merged, CI green, not tried live
 **Updated:** 2026-11-02
 
 **Now:**
-- nothing in progress; 0.3.0 released from `c0fd510` (build 424): https://github.com/OlehDemishev/AIHubBar/releases/tag/v0.3.0
+- `feat/layout-switcher`: beta channel (Settings → General → «Бета-версии», `release.sh 0.4.0-beta.1`) and the «Раскладка» module in beta — PR open, not tried live yet
 
 **Next:**
-- Windows/Linux: rest of stage 2 (Telegram, spend per project, own thresholds), rest of stage 3 («Показать», alive check, permission answers), then stage 4 «Проекты и Claude» (docs/SPEC-windows.md §9)
+- Oleh tries «Раскладка» live (needs Accessibility), then the first beta: `scripts/release.sh 0.4.0-beta.1 --publish`
+- Windows/Linux: rest of stage 2 (Telegram, spend per project, own thresholds), rest of stage 3, then stage 4 (docs/SPEC-windows.md §9)
 - Mac island: a live VoiceOver walk; why one test drag onto the island didn't land
-- Windows code signing, notarization on Mac — only after Oleh decides (Needs Oleh)
 
 **Needs Oleh:**
-- MacBook Air: update to 0.3.0 (Sparkle offers it) and check the island at the real notch: ears, card, Allow / Deny, full screen, «все экраны», a Claude plan in the sessions ear, a file dragged from Finder onto the notch
-- Windows: say if any SPEC-windows §10 default should change (DECISIONS.md); signing is yours; try the installer — Actions → «Desktop» → latest run on main → `ai-hub-bar-Windows`
-- Mac mini: Claude Code CLI is signed out — run `claude` once and sign in, if agents here should use it
-- older, still open: the crash report alert from 16:46, Chinese model keys, translations read for ja/ko/ar, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
+- «Раскладка»: build (`scripts/build-and-install.sh`), Settings → General → «Бета-версии» on, Modules → «Раскладка» → Установить, allow Accessibility; try «ghbdtn»+space, double Shift, ⌥⇧ on a selection, in Safari/Notes/Telegram/Chrome
+- say when to publish the first beta (it creates the `beta` release that beta testers' copies read; until then their update check finds nothing)
+- MacBook Air: update to 0.3.0 and check the island at the real notch (see the 0.3.0 entry)
+- Windows: SPEC-windows §10 defaults, signing, the installer from Actions → «Desktop»
+- older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-02 — beta builds and «Раскладка», auto layout switch in beta (branch `feat/layout-switcher`)
+
+Done: Beta (canary) builds: Settings → General → «Бета-версии» points Sparkle at the beta channel's appcast (release tagged `beta`) and lets it take `<sparkle:channel>beta</sparkle:channel>` items; `scripts/release.sh X.Y.Z-beta.N --publish` makes a GitHub pre-release and every publish rewrites the beta appcast with the newest release + newest beta (`scripts/release-tools/beta-feed.py`); docs/RELEASE.md «Beta builds». `ModuleKind.isBeta`: such a module shows in the catalog with a «бета» badge and works only with beta on. New optional module «Раскладка» (docs/SPEC-layout.md), beta: a word typed in the wrong layout is retyped after space/Enter/Tab and the layout switches, checked by the system spell checker (ru, en, uk, de, fr, pt, es); double Shift converts the last word or takes a fix back and learns the word (⌘Z learns too); ⌥⇧ converts the selection via the clipboard and restores it; language badge in the menu bar blinks on a switch; skips terminals, password fields, digits, one-letter words. Translations for 12 languages. Decisions in DECISIONS.md.
+Checked: `xcodebuild test` — 369 tests green (14 new in LayoutSwitchTests, one on this Mac's real ABC/Russian layouts and dictionaries); Debug build without warnings in new code; `beta-feed.py` merged sample appcasts correctly, `bash -n scripts/release.sh`. CI has no Mac checks.
+Left: not tried live — the key tap needs Accessibility, which only Oleh can grant (Needs Oleh). No beta published, so the beta appcast URL is 404 until the first one. Typing goes through synthetic key events: apps that read key codes instead of text (some games, remote desktops) may get wrong letters.
 
 ## 2026-11-02 — release 0.3.0 (branch `chore/status-release-0.3.0`)
 

@@ -53,7 +53,8 @@ A command's result is always a **new file** — nothing is overwritten. **Compar
 
 ### And more
 - **Calendar** of deadlines, publications and content plans straight from your project files — drag an entry and the file is updated.
-- **Mac tools** as optional modules: Mac Resources, Keep Awake, Quick Commands, Quick Toggles, Clipboard History, Notes.
+- **Mac tools** as optional modules: Mac Resources, Keep Awake, Quick Commands, Quick Toggles, Clipboard History, Notes — and, for beta testers, Keyboard Layout: a word typed in the wrong layout fixes itself.
+- **Beta builds** (Settings → General): new versions and features in testing before everyone else.
 - **⌃⌥C search** from any app, **widgets**, a **Control Center** toggle, **Shortcuts** actions, **Telegram** alerts and a weekly summary.
 - **13 languages**: English, Русский, Українська, Español, Português (Brasil), Français, Deutsch, Italiano, Polski, 日本語, 한국어, Bahasa Indonesia, العربية.
 

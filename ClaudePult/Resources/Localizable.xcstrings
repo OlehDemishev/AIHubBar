@@ -13237,6 +13237,82 @@
         }
       }
     },
+    "Бета-версии": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الإصدارات التجريبية"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beta-Versionen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beta Builds"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Versiones beta"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Versions bêta"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Versi beta"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Versioni beta"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ベータ版"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "베타 버전"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wersje beta"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Versões beta"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Бета-версії"
+          }
+        }
+      }
+    },
     "Ближайшая дата календаря": {
       "localizations": {
         "ar": {
@@ -21069,6 +21145,158 @@
           "stringUnit": {
             "state": "translated",
             "value": "Дати — з проєкт.md (дедлайн, публікація) і контент-план.md у профілів з календарем (вкладка «Профілі»)."
+          }
+        }
+      }
+    },
+    "Дать доступ к клавиатуре…": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "السماح بالوصول إلى لوحة المفاتيح…"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zugriff auf die Tastatur erlauben …"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Allow Keyboard Access…"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Permitir acceso al teclado…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Autoriser l'accès au clavier…"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Izinkan akses keyboard…"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Consenti l'accesso alla tastiera…"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "キーボードへのアクセスを許可…"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "키보드 접근 허용…"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zezwól na dostęp do klawiatury…"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Permitir acesso ao teclado…"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Дати доступ до клавіатури…"
+          }
+        }
+      }
+    },
+    "Двойной Shift — последнее слово": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Shift مرتين — آخر كلمة"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zweimal Shift – letztes Wort"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Double Shift — Last Word"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Doble Shift: última palabra"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Double Maj : dernier mot"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Shift dua kali — kata terakhir"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Doppio Maiusc: ultima parola"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Shift を2回 — 直前の単語"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Shift 두 번 — 마지막 단어"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dwa razy Shift — ostatnie słowo"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Shift duas vezes: última palavra"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Подвійний Shift — останнє слово"
           }
         }
       }
@@ -29125,6 +29353,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Шукати в усіх файлах"
+          }
+        }
+      }
+    },
+    "Исправлять раскладку сам": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تصحيح التخطيط تلقائيًا"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Layout selbst korrigieren"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fix the Layout Automatically"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Corregir la distribución sola"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Corriger la disposition automatiquement"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Perbaiki tata letak otomatis"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Correggi il layout da solo"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "配列を自動で直す"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "배열 자동 수정"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Poprawiaj układ samodzielnie"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Corrigir o layout sozinho"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Виправляти розкладку самостійно"
           }
         }
       }
@@ -38407,6 +38711,82 @@
         }
       }
     },
+    "Настройки раскладки…": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إعدادات التخطيط…"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Layout-Einstellungen …"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Layout Settings…"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajustes de distribución…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Réglages de la disposition…"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pengaturan tata letak…"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impostazioni layout…"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "配列の設定…"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "배열 설정…"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ustawienia układu…"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajustes de layout…"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Налаштування розкладки…"
+          }
+        }
+      }
+    },
     "Настройки → «Основные» → «Календарь»: за сколько напоминать и дублировать ли в Telegram.": {
       "localizations": {
         "ar": {
@@ -39543,6 +39923,158 @@
           "stringUnit": {
             "state": "translated",
             "value": "Не запам’ятовувати із застосунків"
+          }
+        }
+      }
+    },
+    "Не исправлять": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "عدم التصحيح"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nicht korrigieren"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Don't Fix"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No corregir"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ne pas corriger"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jangan diperbaiki"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Non correggere"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "直さない単語"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "수정 안 함"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nie poprawiaj"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Não corrigir"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Не виправляти"
+          }
+        }
+      }
+    },
+    "Не исправлять в терминалах": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "عدم التصحيح في الطرفيات"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nicht in Terminals korrigieren"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Don't Fix in Terminals"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No corregir en terminales"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ne pas corriger dans les terminaux"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jangan perbaiki di terminal"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Non correggere nei terminali"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ターミナルでは直さない"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "터미널에서는 수정 안 함"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nie poprawiaj w terminalach"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Não corrigir em terminais"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Не виправляти в терміналах"
           }
         }
       }
@@ -43898,6 +44430,82 @@
         }
       }
     },
+    "Новые сборки раньше всех и функции на испытании: %@. Может работать с ошибками; выключите — останетесь на этой версии до следующего обычного выпуска.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إصدارات جديدة قبل الجميع وميزات قيد التجربة: %@. قد تحتوي على أخطاء؛ عند الإيقاف تبقى على هذا الإصدار حتى الإصدار العادي التالي."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Neue Versionen vor allen anderen und Funktionen im Test: %@. Kann Fehler haben; ausgeschaltet bleiben Sie bis zur nächsten regulären Version auf dieser."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "New builds before everyone else, and features in testing: %@. May have bugs; switched off, you stay on this version until the next regular release."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Versiones nuevas antes que nadie y funciones en prueba: %@. Puede tener errores; si lo desactivas, te quedas en esta versión hasta la próxima versión normal."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les nouvelles versions avant tout le monde et des fonctions à l'essai : %@. Peut contenir des bugs ; désactivé, vous restez sur cette version jusqu'à la prochaine version normale."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Versi baru lebih dulu dan fitur yang sedang diuji: %@. Bisa ada galat; jika dimatikan, Anda tetap di versi ini sampai rilis biasa berikutnya."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nuove versioni prima di tutti e funzioni in prova: %@. Può avere errori; disattivandolo resti su questa versione fino alla prossima versione normale."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新しいビルドをいち早く、テスト中の機能も: %@。不具合があるかもしれません。オフにすると次の通常リリースまでこのバージョンのままです。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "새 빌드를 누구보다 먼저, 테스트 중인 기능도: %@. 오류가 있을 수 있습니다. 끄면 다음 정식 릴리스까지 이 버전에 머뭅니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nowe wersje przed innymi i funkcje w testach: %@. Mogą mieć błędy; po wyłączeniu zostajesz przy tej wersji do następnego zwykłego wydania."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Novas versões antes de todos e recursos em teste: %@. Pode ter erros; ao desligar, você fica nesta versão até o próximo lançamento normal."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Нові збірки раніше за всіх і функції на випробуванні: %@. Може працювати з помилками; вимкніть — залишитеся на цій версії до наступного звичайного випуску."
+          }
+        }
+      }
+    },
     "Новый проект": {
       "localizations": {
         "ar": {
@@ -44280,6 +44888,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Вночі: %lld завдань — ✅ %lld, ❌ %lld"
+          }
+        }
+      }
+    },
+    "Нужен доступ к «Универсальному доступу»": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يلزم إذن «تسهيلات الاستخدام»"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zugriff auf „Bedienungshilfen“ nötig"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Accessibility access needed"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se necesita acceso a «Accesibilidad»"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Accès à « Accessibilité » nécessaire"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Perlu akses «Aksesibilitas»"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Serve l'accesso ad «Accessibilità»"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「アクセシビリティ」へのアクセスが必要です"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "‘손쉬운 사용’ 접근 권한이 필요합니다"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Potrzebny dostęp do „Dostępności”"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "É necessário acesso à «Acessibilidade»"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Потрібен доступ до «Універсального доступу»"
           }
         }
       }
@@ -44818,6 +45502,82 @@
         }
       }
     },
+    "Нужны две раскладки": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يلزم تخطيطان"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zwei Layouts nötig"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Two layouts needed"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se necesitan dos distribuciones"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deux dispositions nécessaires"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Perlu dua tata letak"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Servono due layout"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "配列が2つ必要です"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "배열이 두 개 필요합니다"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Potrzebne dwa układy"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "São necessários dois layouts"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Потрібні дві розкладки"
+          }
+        }
+      }
+    },
     "Нужны для «Claude ждёт ответа», итогов фоновых задач, порогов лимитов и результатов команд. Клик по уведомлению ведёт к сессии, PR, журналу или отчёту.": {
       "localizations": {
         "ar": {
@@ -44890,6 +45650,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Потрібні для «Claude чекає на відповідь», підсумків фонових завдань, порогів лімітів і результатів команд. Клік по сповіщенню веде до сесії, PR, журналу або звіту."
+          }
+        }
+      }
+    },
+    "Нужны хотя бы две раскладки из: русская, английская, украинская, немецкая, французская, испанская, португальская. Добавьте их в Системных настройках → Клавиатура → Источники ввода.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يلزم تخطيطان على الأقل من: الروسية، الإنجليزية، الأوكرانية، الألمانية، الفرنسية، الإسبانية، البرتغالية. أضفهما في إعدادات النظام ← لوحة المفاتيح ← مصادر الإدخال."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mindestens zwei Layouts aus: Russisch, Englisch, Ukrainisch, Deutsch, Französisch, Spanisch, Portugiesisch. Hinzufügen unter Systemeinstellungen → Tastatur → Eingabequellen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "At least two layouts are needed from: Russian, English, Ukrainian, German, French, Spanish, Portuguese. Add them in System Settings → Keyboard → Input Sources."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se necesitan al menos dos distribuciones de: ruso, inglés, ucraniano, alemán, francés, español, portugués. Añádelas en Ajustes del Sistema → Teclado → Fuentes de entrada."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il faut au moins deux dispositions parmi : russe, anglais, ukrainien, allemand, français, espagnol, portugais. Ajoutez-les dans Réglages Système → Clavier → Méthodes de saisie."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Perlu setidaknya dua tata letak dari: Rusia, Inggris, Ukraina, Jerman, Prancis, Spanyol, Portugis. Tambahkan di Pengaturan Sistem → Keyboard → Sumber Input."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Servono almeno due layout tra: russo, inglese, ucraino, tedesco, francese, spagnolo, portoghese. Aggiungili in Impostazioni di Sistema → Tastiera → Sorgenti di input."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ロシア語、英語、ウクライナ語、ドイツ語、フランス語、スペイン語、ポルトガル語の配列が2つ以上必要です。システム設定 → キーボード → 入力ソースで追加してください。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "러시아어, 영어, 우크라이나어, 독일어, 프랑스어, 스페인어, 포르투갈어 중 배열이 두 개 이상 필요합니다. 시스템 설정 → 키보드 → 입력 소스에서 추가하세요."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Potrzebne są co najmniej dwa układy spośród: rosyjski, angielski, ukraiński, niemiecki, francuski, hiszpański, portugalski. Dodaj je w Ustawieniach systemowych → Klawiatura → Źródła wprowadzania."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "São necessários pelo menos dois layouts entre: russo, inglês, ucraniano, alemão, francês, espanhol, português. Adicione-os em Ajustes do Sistema → Teclado → Fontes de Entrada."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Потрібні принаймні дві розкладки з: російська, англійська, українська, німецька, французька, іспанська, португальська. Додайте їх у Системних параметрах → Клавіатура → Джерела введення."
           }
         }
       }
@@ -55465,6 +56301,82 @@
         }
       }
     },
+    "Пока пусто": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "فارغ حاليًا"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Noch leer"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Empty for now"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vacío por ahora"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vide pour l'instant"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Masih kosong"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Per ora vuoto"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "まだありません"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "아직 없음"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Na razie pusto"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vazio por enquanto"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Поки порожньо"
+          }
+        }
+      }
+    },
     "Пока пусто: скопируйте что-нибудь. Пароли из менеджеров паролей не запоминаются.": {
       "localizations": {
         "ar": {
@@ -57589,6 +58501,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Після скидання ліміту"
+          }
+        }
+      }
+    },
+    "Последнее: %@": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الأخير: %@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zuletzt: %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Last: %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Último: %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dernier : %@"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Terakhir: %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ultimo: %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "直前: %@"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "마지막: %@"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ostatnio: %@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Último: %@"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Останнє: %@"
           }
         }
       }
@@ -63219,6 +64207,234 @@
           "stringUnit": {
             "state": "translated",
             "value": "Дозволити…"
+          }
+        }
+      }
+    },
+    "Раскладка": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تخطيط لوحة المفاتيح"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tastaturlayout"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keyboard Layout"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Distribución del teclado"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Disposition du clavier"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tata letak keyboard"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Layout tastiera"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "キーボード配列"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "키보드 배열"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Układ klawiatury"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Layout do teclado"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Розкладка"
+          }
+        }
+      }
+    },
+    "Раскладка: %@": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "التخطيط: %@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Layout: %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Layout: %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Distribución: %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Disposition : %@"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tata letak: %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Layout: %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "配列: %@"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "배열: %@"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Układ: %@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Layout: %@"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Розкладка: %@"
+          }
+        }
+      }
+    },
+    "Раскладки": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "التخطيطات"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Layouts"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Layouts"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Distribuciones"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dispositions"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tata letak"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Layout"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "配列"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "배열"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Układy"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Layouts"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Розкладки"
           }
         }
       }
@@ -70152,6 +71368,234 @@
         }
       }
     },
+    "Слова, исправление которых вы отменили двойным Shift или ⌘Z. Уберите слово, чтобы оно снова исправлялось.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "كلمات ألغيت تصحيحها بالضغط على Shift مرتين أو ⌘Z. أزل الكلمة لتُصحَّح مجددًا."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wörter, deren Korrektur Sie mit zweimal Shift oder ⌘Z zurückgenommen haben. Entfernen Sie ein Wort, damit es wieder korrigiert wird."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Words whose fix you took back with double Shift or ⌘Z. Remove a word to have it fixed again."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Palabras cuya corrección deshiciste con doble Shift o ⌘Z. Quita una palabra para que vuelva a corregirse."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mots dont vous avez annulé la correction avec double Maj ou ⌘Z. Retirez un mot pour qu'il soit de nouveau corrigé."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kata yang perbaikannya Anda batalkan dengan Shift dua kali atau ⌘Z. Hapus kata agar diperbaiki lagi."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Parole di cui hai annullato la correzione con doppio Maiusc o ⌘Z. Rimuovi una parola perché venga di nuovo corretta."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Shift を2回または ⌘Z で修正を取り消した単語です。削除すると再び修正されます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Shift 두 번이나 ⌘Z로 수정을 취소한 단어입니다. 단어를 제거하면 다시 수정됩니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Słowa, których poprawkę cofnąłeś dwa razy Shift lub ⌘Z. Usuń słowo, by znów było poprawiane."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Palavras cuja correção você desfez com Shift duas vezes ou ⌘Z. Remova uma palavra para que volte a ser corrigida."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Слова, виправлення яких ви скасували подвійним Shift або ⌘Z. Приберіть слово, щоб воно знову виправлялося."
+          }
+        }
+      }
+    },
+    "Слово проверяется системным словарём, когда вы ставите пробел, Enter или Tab. Двойной Shift сразу после исправления отменяет его и запоминает слово. Пароли и поля паролей не читаются, набранное никуда не записывается.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تُفحص الكلمة بقاموس النظام عند كتابة مسافة أو Enter أو Tab. الضغط على Shift مرتين بعد التصحيح مباشرة يلغيه ويحفظ الكلمة. لا تُقرأ كلمات المرور وحقولها، ولا يُسجَّل ما تكتبه في أي مكان."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Das Wort wird mit dem Systemwörterbuch geprüft, sobald Sie Leertaste, Enter oder Tab drücken. Zweimal Shift direkt nach einer Korrektur nimmt sie zurück und merkt sich das Wort. Passwörter und Passwortfelder werden nicht gelesen, Getipptes wird nirgends gespeichert."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A word is checked against the system dictionary when you type a space, Enter or Tab. Double Shift right after a fix takes it back and remembers the word. Passwords and password fields are never read, and nothing you type is stored anywhere."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La palabra se comprueba con el diccionario del sistema al escribir un espacio, Enter o Tab. Doble Shift justo después de una corrección la deshace y recuerda la palabra. No se leen contraseñas ni campos de contraseña, y nada de lo que escribes se guarda."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le mot est vérifié avec le dictionnaire du système quand vous tapez une espace, Entrée ou Tab. Double Maj juste après une correction l'annule et retient le mot. Les mots de passe et leurs champs ne sont jamais lus, et rien de ce que vous tapez n'est enregistré."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kata diperiksa dengan kamus sistem saat Anda mengetik spasi, Enter, atau Tab. Shift dua kali tepat setelah perbaikan membatalkannya dan mengingat kata itu. Kata sandi dan kolom kata sandi tidak dibaca, dan apa yang diketik tidak disimpan di mana pun."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La parola viene controllata con il dizionario di sistema quando digiti uno spazio, Invio o Tab. Doppio Maiusc subito dopo una correzione la annulla e ricorda la parola. Le password e i relativi campi non vengono letti, e nulla di ciò che scrivi viene salvato."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "スペース、Enter、Tab を押したときに単語をシステムの辞書で確認します。修正の直後に Shift を2回押すと元に戻し、その単語を記憶します。パスワードやパスワード欄は読み取らず、入力内容はどこにも保存しません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "스페이스, Enter, Tab을 누르면 시스템 사전으로 단어를 확인합니다. 수정 직후 Shift를 두 번 누르면 되돌리고 그 단어를 기억합니다. 암호와 암호 필드는 읽지 않으며, 입력한 내용은 어디에도 저장되지 않습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Słowo jest sprawdzane słownikiem systemowym, gdy wpiszesz spację, Enter lub Tab. Dwa razy Shift tuż po poprawce cofa ją i zapamiętuje słowo. Hasła i pola haseł nie są odczytywane, a nic, co piszesz, nie jest nigdzie zapisywane."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A palavra é verificada pelo dicionário do sistema quando você digita espaço, Enter ou Tab. Shift duas vezes logo após uma correção a desfaz e memoriza a palavra. Senhas e campos de senha não são lidos, e nada do que você digita é gravado."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Слово перевіряється системним словником, коли ви ставите пробіл, Enter або Tab. Подвійний Shift одразу після виправлення скасовує його та запам’ятовує слово. Паролі й поля паролів не читаються, набране нікуди не записується."
+          }
+        }
+      }
+    },
+    "Слово, набранное не в той раскладке («ghbdtn»), исправляется само («привет»), и раскладка переключается. Двойной Shift — последнее слово, ⌥⇧ — выделенный текст. Язык — в строке меню.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تُعاد كتابة الكلمة المكتوبة بالتخطيط الخطأ بالتخطيط الصحيح تلقائيًا، ويتبدّل التخطيط. Shift مرتين — آخر كلمة، ⌥⇧ — النص المحدد. اللغة في شريط القوائم."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ein Wort im falschen Tastaturlayout wird von selbst im richtigen neu geschrieben, und das Layout wechselt. Zweimal Shift – das letzte Wort, ⌥⇧ – der markierte Text. Die Sprache steht in der Menüleiste."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A word typed in the wrong keyboard layout is retyped in the right one by itself, and the layout switches. Double Shift converts the last word, ⌥⇧ the selected text. The language is in the menu bar."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Una palabra escrita con la distribución equivocada se reescribe sola con la correcta y la distribución cambia. Doble Shift: la última palabra; ⌥⇧: el texto seleccionado. El idioma, en la barra de menús."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un mot tapé dans la mauvaise disposition est retapé tout seul dans la bonne, et la disposition change. Double Maj : le dernier mot, ⌥⇧ : le texte sélectionné. La langue est dans la barre des menus."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kata yang diketik dengan tata letak yang salah otomatis diketik ulang dengan yang benar, dan tata letaknya berganti. Shift dua kali — kata terakhir, ⌥⇧ — teks yang dipilih. Bahasa tampil di bar menu."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Una parola scritta con il layout sbagliato viene riscritta da sola con quello giusto, e il layout cambia. Doppio Maiusc: l'ultima parola; ⌥⇧: il testo selezionato. La lingua è nella barra dei menu."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "違う配列で入力した単語を正しい配列で自動的に打ち直し、配列も切り替えます。Shift を2回で直前の単語、⌥⇧ で選択したテキストを変換。言語はメニューバーに表示。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "잘못된 배열로 입력한 단어를 올바른 배열로 자동으로 다시 입력하고 배열을 전환합니다. Shift 두 번 — 마지막 단어, ⌥⇧ — 선택한 텍스트. 언어는 메뉴 막대에 표시됩니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Słowo wpisane w złym układzie klawiatury samo wpisuje się ponownie we właściwym, a układ się przełącza. Dwa razy Shift — ostatnie słowo, ⌥⇧ — zaznaczony tekst. Język widać na pasku menu."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uma palavra digitada no layout errado é redigitada sozinha no certo, e o layout muda. Shift duas vezes: a última palavra; ⌥⇧: o texto selecionado. O idioma fica na barra de menus."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Слово, набране не в тій розкладці («ghbdsn»), виправляється само («привіт»), і розкладка перемикається. Подвійний Shift — останнє слово, ⌥⇧ — виділений текст. Мова — у рядку меню."
+          }
+        }
+      }
+    },
     "Сменить профиль": {
       "localizations": {
         "ar": {
@@ -75924,6 +77368,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "У цього профілю немає папки проєктів"
+          }
+        }
+      }
+    },
+    "Убрать": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إزالة"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Entfernen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remove"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quitar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Retirer"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hapus"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rimuovi"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "削除"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "제거"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Usuń"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remover"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Прибрати"
           }
         }
       }
@@ -82945,6 +84465,82 @@
         }
       }
     },
+    "Язык в строке меню": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اللغة في شريط القوائم"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sprache in der Menüleiste"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Language in the Menu Bar"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Idioma en la barra de menús"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Langue dans la barre des menus"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bahasa di bar menu"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lingua nella barra dei menu"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "メニューバーに言語を表示"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "메뉴 막대에 언어 표시"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Język na pasku menu"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Idioma na barra de menus"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Мова в рядку меню"
+          }
+        }
+      }
+    },
     "Язык интерфейса": {
       "localizations": {
         "ar": {
@@ -83625,6 +85221,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "без проєктів"
+          }
+        }
+      }
+    },
+    "бета": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تجريبي"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beta"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "beta"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "beta"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "bêta"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "beta"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "beta"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ベータ"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "베타"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "beta"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "beta"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "бета"
           }
         }
       }
@@ -91622,6 +93294,82 @@
         }
       }
     },
+    "нет подходящих": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لا يوجد ما يناسب"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "keine passenden"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "none suitable"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ninguna adecuada"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "aucune adaptée"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "tidak ada yang cocok"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "nessuno adatto"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "対応する配列なし"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "맞는 배열 없음"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "brak pasujących"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "nenhum adequado"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "немає відповідних"
+          }
+        }
+      }
+    },
     "нет проверок": {
       "localizations": {
         "ar": {
@@ -96043,6 +97791,82 @@
         }
       }
     },
+    "только в бета-версии": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "في الإصدارات التجريبية فقط"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "nur in Beta-Versionen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "beta builds only"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "solo en versiones beta"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "versions bêta uniquement"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "hanya di versi beta"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "solo nelle versioni beta"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ベータ版のみ"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "베타 버전 전용"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "tylko w wersjach beta"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "só em versões beta"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "лише в бета-версіях"
+          }
+        }
+      }
+    },
     "только в острове": {
       "localizations": {
         "ar": {
@@ -98182,6 +100006,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "⌃⌥Пробіл"
+          }
+        }
+      }
+    },
+    "⌥⇧ — выделенный текст": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⌥⇧ — النص المحدد"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⌥⇧ – markierter Text"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⌥⇧ — Selected Text"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⌥⇧: texto seleccionado"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⌥⇧ : texte sélectionné"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⌥⇧ — teks yang dipilih"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⌥⇧: testo selezionato"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⌥⇧ — 選択したテキスト"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⌥⇧ — 선택한 텍스트"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⌥⇧ — zaznaczony tekst"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⌥⇧: texto selecionado"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⌥⇧ — виділений текст"
           }
         }
       }

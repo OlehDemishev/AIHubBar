@@ -402,7 +402,7 @@ struct MenuPanelView: View {
             CommandsView()
                 .panelCard()
                 .revealed(isShown, step: 2, reduceMotion: calm)
-        case .notch:
+        case .notch, .layout:
             EmptyView()
         }
     }

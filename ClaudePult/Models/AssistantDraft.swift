@@ -106,7 +106,8 @@ struct AssistantDraft: Equatable, Sendable {
 
     var hasProjects: Bool { mode.source != .none }
 
-    /// The modules the assistant offers; «Отчёты _daily-report» is Oleh's own and stays in Settings.
+    /// The modules the assistant offers; «Отчёты _daily-report» is Oleh's own and stays in Settings, and so do the
+    /// modules in beta testing.
     /// «Остров у чёлки» only on a Mac with a notch.
     @MainActor static var offeredModules: [ModuleKind] {
         [.limits, .sessions, .projects, .upcoming, .resources, .keepAwake, .quickCommands, .toggles, .clipboard, .notes]
@@ -120,7 +121,7 @@ struct AssistantDraft: Equatable, Sendable {
         case .projects: hasProjects
         case .upcoming: mode.calendar != .off && mode.source.isFolders
         case .reports: mode.commonCommands == .dailyReport
-        case .resources, .keepAwake, .quickCommands, .toggles, .clipboard, .notes, .notch: extraModules.contains(kind)
+        case .resources, .keepAwake, .quickCommands, .toggles, .clipboard, .notes, .notch, .layout: extraModules.contains(kind)
         }
     }
 
@@ -152,7 +153,7 @@ struct AssistantDraft: Equatable, Sendable {
             }
         case .reports:
             mode.commonCommands = on ? .dailyReport : .none
-        case .resources, .keepAwake, .quickCommands, .toggles, .clipboard, .notes, .notch:
+        case .resources, .keepAwake, .quickCommands, .toggles, .clipboard, .notes, .notch, .layout:
             extraModules.removeAll { $0 == kind }
             if on { extraModules.append(kind) }
         }

@@ -119,6 +119,16 @@ final class AppSettings {
         didSet { if let data = try? JSONEncoder().encode(notch) { defaults.set(data, forKey: Keys.notch) } }
     }
 
+    /// Beta builds through Sparkle and the modules still in beta testing (docs/RELEASE.md «Beta builds»).
+    var betaUpdates: Bool {
+        didSet { defaults.set(betaUpdates, forKey: Keys.betaUpdates) }
+    }
+
+    /// «Раскладка» (SPEC-layout §4).
+    var layout: LayoutSettings {
+        didSet { if let data = try? JSONEncoder().encode(layout) { defaults.set(data, forKey: Keys.layout) } }
+    }
+
     /// «Быстрые команды» and «Быстрые переключатели» (SPEC-profiles §4.3–4.4).
     var quickCommands: [QuickCommand] {
         didSet { if let data = try? JSONEncoder().encode(quickCommands) { defaults.set(data, forKey: Keys.quickCommands) } }
@@ -342,6 +352,8 @@ final class AppSettings {
         quickToggles = defaults.stringArray(forKey: Keys.quickToggles)?.compactMap(QuickToggle.init(rawValue:)) ?? QuickToggle.allCases
         keepAwakeRules = defaults.data(forKey: Keys.keepAwakeRules).flatMap { try? JSONDecoder().decode(KeepAwakeRules.self, from: $0) } ?? KeepAwakeRules()
         notch = defaults.data(forKey: Keys.notch).flatMap { try? JSONDecoder().decode(NotchSettings.self, from: $0) } ?? NotchSettings()
+        betaUpdates = defaults.bool(forKey: Keys.betaUpdates)
+        layout = defaults.data(forKey: Keys.layout).flatMap { try? JSONDecoder().decode(LayoutSettings.self, from: $0) } ?? LayoutSettings()
         let diskBelow = defaults.integer(forKey: Keys.resourceDiskBelowGB)
         resourceDiskBelowGB = diskBelow > 0 ? diskBelow : 20
         panelTextSize = defaults.string(forKey: Keys.panelTextSize).flatMap(PanelTextSize.init(rawValue:)) ?? .normal
@@ -401,6 +413,8 @@ final class AppSettings {
         static let quickToggles = "quickToggles"
         static let keepAwakeRules = "keepAwakeRules"
         static let notch = "notch"
+        static let layout = "layout"
+        static let betaUpdates = "betaUpdates"
         static let resourceDiskBelowGB = "resourceDiskBelowGB"
         static let panelTextSize = "panelTextSize"
         static let panelWidth = "panelWidth"

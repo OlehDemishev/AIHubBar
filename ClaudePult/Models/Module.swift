@@ -5,12 +5,16 @@ import Foundation
 /// from Settings → «Модули» and added to a profile by hand (SPEC-profiles §3).
 enum ModuleKind: String, Codable, CaseIterable, Sendable {
     case limits, sessions, upcoming, projects, reports
-    case resources, keepAwake, quickCommands, toggles, clipboard, notes, notch
+    case resources, keepAwake, quickCommands, toggles, clipboard, notes, notch, layout
 
-    var isBuiltIn: Bool { ![.resources, .keepAwake, .quickCommands, .toggles, .clipboard, .notes, .notch].contains(self) }
+    var isBuiltIn: Bool { ![.resources, .keepAwake, .quickCommands, .toggles, .clipboard, .notes, .notch, .layout].contains(self) }
 
-    /// «Остров у чёлки» lives at the top of the screen, not in the panel: no profile shows it (SPEC-notch §6).
-    var isPanelBlock: Bool { self != .notch }
+    /// Still in beta testing: offered and working only with Settings → General → «Бета-версии» on (docs/RELEASE.md).
+    var isBeta: Bool { self == .layout }
+
+    /// «Остров у чёлки» lives at the top of the screen and «Раскладка» in the keyboard, not in the panel: no profile
+    /// shows them (SPEC-notch §6, SPEC-layout §4).
+    var isPanelBlock: Bool { ![.notch, .layout].contains(self) }
 
     var title: String {
         switch self {
@@ -26,6 +30,7 @@ enum ModuleKind: String, Codable, CaseIterable, Sendable {
         case .clipboard: String(localized: "История буфера")
         case .notes: String(localized: "Заметки")
         case .notch: String(localized: "Остров у чёлки")
+        case .layout: String(localized: "Раскладка")
         }
     }
 
@@ -44,6 +49,7 @@ enum ModuleKind: String, Codable, CaseIterable, Sendable {
         case .clipboard: String(localized: "Последние копирования: поиск, закрепление, снова в буфер одним кликом. Пароли из менеджеров паролей не запоминаются.")
         case .notes: String(localized: "Заметки в Markdown прямо в панели: вкладки, обычные файлы .md в папке, которую откроет любой редактор.")
         case .notch: String(localized: "Чёрный остров вокруг чёлки MacBook: лимит и сессии по бокам от неё, по наведению — карточка с лимитами и тем, что делает Claude.")
+        case .layout: String(localized: "Слово, набранное не в той раскладке («ghbdtn»), исправляется само («привет»), и раскладка переключается. Двойной Shift — последнее слово, ⌥⇧ — выделенный текст. Язык — в строке меню.")
         }
     }
 
@@ -61,6 +67,7 @@ enum ModuleKind: String, Codable, CaseIterable, Sendable {
         case .clipboard: "doc.on.clipboard"
         case .notes: "note.text"
         case .notch: "laptopcomputer"
+        case .layout: "keyboard"
         }
     }
 }
@@ -130,7 +137,7 @@ extension Mode {
             case .upcoming: !hiddenBlocks.contains(.calendar)
             case .projects: showProjects
             case .reports: showCommonCommands
-            case .resources, .keepAwake, .quickCommands, .toggles, .clipboard, .notes, .notch: true
+            case .resources, .keepAwake, .quickCommands, .toggles, .clipboard, .notes, .notch, .layout: true
             }
         }
 

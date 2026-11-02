@@ -24,6 +24,7 @@ struct ClaudePultApp: App {
     @State private var clipboard: ClipboardHistory
     @State private var notesStore: NotesStore
     @State private var notchIsland: NotchIsland
+    @State private var layoutSwitcher: LayoutSwitcher
     @State private var notifications = NotificationPermission()
     @State private var modes: ModeStore
     @State private var services: AIServiceStore
@@ -72,6 +73,8 @@ struct ClaudePultApp: App {
         _keepAwake = State(initialValue: keepAwake)
         let notchIsland = NotchIsland(settings: settings)
         _notchIsland = State(initialValue: notchIsland)
+        let layoutSwitcher = LayoutSwitcher(settings: settings)
+        _layoutSwitcher = State(initialValue: layoutSwitcher)
         let runs = RunStore(settings: settings)
         _runs = State(initialValue: runs)
         let engine = CommandEngine(settings: settings, runs: runs)
@@ -89,6 +92,7 @@ struct ClaudePultApp: App {
         clipboard.isActive = { [modes] in modes.installedModules.contains(.clipboard) }
         notesStore.isActive = { [modes] in modes.installedModules.contains(.notes) }
         notchIsland.isActive = { [modes] in modes.installedModules.contains(.notch) }
+        layoutSwitcher.isActive = { [modes, settings] in modes.installedModules.contains(.layout) && settings.betaUpdates }
         notchIsland.openRequests = { [sessions] in
             sessions.approvals.values.sorted { $0.created < $1.created }.map { request in
                 let project = sessions.items.first { $0.id == request.sessionID }?.session.displayProject ?? request.project ?? "Claude"
@@ -127,6 +131,10 @@ struct ClaudePultApp: App {
         _quickTools = State(initialValue: quickTools)
         IntentBridge.settings = settings
         IntentBridge.quickTools = quickTools
+        layoutSwitcher.openSettings = { [requests] in
+            UserDefaults.standard.set(SettingsView.Tab.modules.rawValue, forKey: "settingsTab")
+            requests.openWindow("settings")
+        }
         AppDelegate.openFile = { url in
             modes.prepareImport(from: url)
             UserDefaults.standard.set(SettingsView.Tab.modes.rawValue, forKey: "settingsTab")
@@ -136,6 +144,7 @@ struct ClaudePultApp: App {
         // Unit tests use the app as their host; keep it from running report.py in the background.
         if ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] == nil {
             store.start()
+            Updates.beta = settings.betaUpdates
             Updates.start()
             sessions.start()
             telegramApprovals.start()
@@ -160,6 +169,7 @@ struct ClaudePultApp: App {
             GlobalHotKey.registerIsland(settings.notch.hotKeys)
             GlobalHotKey.islandAction = { [notchIsland] allow in notchIsland.answerByKey(allow: allow) }
             clipboard.start()
+            layoutSwitcher.start()
             // Windows can only be made once the app has finished launching.
             DispatchQueue.main.async {
                 notchIsland.start { [notchIsland, settings, usage, sessions, runs, hub, modes, engine] index in
@@ -423,6 +433,7 @@ struct ClaudePultApp: App {
                 .environment(quickTools)
                 .environment(clipboard)
                 .environment(notesStore)
+                .environment(layoutSwitcher)
                 .environment(notifications)
                 .environment(modes)
                 .environment(services)
