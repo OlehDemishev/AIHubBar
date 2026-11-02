@@ -5,7 +5,7 @@
 **Updated:** 2026-11-02
 
 **Now:**
-- branch `feat/settings-polish`: second wave on the new Settings (12 items), PR open
+- nothing in progress; Settings second wave merged (#203)
 
 **Next:**
 - Oleh looks at the new Settings (Модули, Панель, Строка меню, a module page) and says what to change
@@ -14,7 +14,7 @@
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/SPEC-windows.md §9, stage 2–3 leftovers)
 
 **Needs Oleh:**
-- review and merge the settings polish PR (`feat/settings-polish`)
+- look at the new Settings and say what to change next
 - «Раскладка» is on and has Accessibility on this Mac: try it in Telegram, Chrome, Safari, Notes; ⌥⇧ on a selection is not tried yet
 - say when to publish the first beta (it creates the `beta` release that beta testers' copies read; until then their update check finds nothing)
 - MacBook Air: update to 0.3.0 and check the island at the real notch (see the 0.3.0 entry)
