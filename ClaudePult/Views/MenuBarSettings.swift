@@ -1,119 +1,114 @@
 import SwiftUI
 
-/// Settings → «Строка меню»: the menu bar builder (SPEC-modes §7) with a live preview on top.
+/// Settings → «Строка меню» (SPEC-settings §5): the live item on top, the order with dividers below it — drag to
+/// reorder, click for an element's options — then the elements by module and the dividers to drag in.
 struct MenuBarSettings: View {
     @Environment(AppSettings.self) private var settings
     @Environment(UsageStore.self) private var usage
     @Environment(ModeStore.self) private var modes
-    @State private var sample = false
+    @State private var sample = true
+    @State private var selection: Selection?
+
+    enum Selection: Hashable {
+        case element(MenuBarElement.Kind)
+        case divider(String)
+    }
 
     var body: some View {
-        VStack(spacing: 0) {
-            preview
-            Divider()
-            Form {
-                Section {
-                    Picker("Набор", selection: Binding(
-                        get: { settings.menuBarConfig.preset },
-                        set: { choose($0) }
-                    )) {
-                        ForEach(MenuBarConfig.Preset.allCases, id: \.self) { Text($0.title).tag($0) }
-                    }
-                    .pickerStyle(.segmented)
-                } footer: {
-                    Footnote(text: String(localized: "«Минимум» — значок, проблемы и ожидающие ответа. «Лимиты» — ещё сессия и неделя. «Всё» — всё, что есть. Любая правка ниже делает набор «Своим»."))
-                }
-
-                Section("Элементы — в порядке слева направо (или перетаскиванием вверху)") {
-                    ForEach(Array(settings.menuBarConfig.elements.enumerated()), id: \.element.id) { index, element in
-                        ElementRow(
-                            element: element,
-                            canMoveUp: index > 0,
-                            canMoveDown: index < settings.menuBarConfig.elements.count - 1,
-                            models: usage.snapshot?.otherWindows ?? [],
-                            onChange: { new in edit { $0.set(element.kind) { $0 = new } } },
-                            onMove: { offset in edit { move(&$0, from: index, by: offset) } }
-                        )
-                    }
-                }
-
-                Section {
-                    Picker("Разделитель", selection: binding(\.separator)) {
-                        ForEach(MenuBarConfig.Separator.allCases, id: \.self) { Text($0.title).tag($0) }
-                    }
-                    Toggle("Мелкий текст", isOn: binding(\.smallText))
-                    Toggle("Цвет по уровню (зелёный · оранжевый · красный)", isOn: binding(\.colored))
-                } header: {
-                    Text("Вид")
-                } footer: {
-                    Footnote(text: String(localized: "Разделитель ставится между числами; значки и счётчики отделяются небольшим отступом. Набор общий для всех профилей."))
-                }
+        Form {
+            Section {
+                preview
             }
-            .formStyle(.grouped)
+            Section {
+                order
+                inspector
+            } header: {
+                Text("Порядок слева направо")
+            } footer: {
+                Footnote(text: String(localized: "Перетащите элемент на другой — встанет на его место. Разделитель, брошенный на элемент, встаёт сразу после него. Клик — настройки элемента."))
+            }
+            Section {
+                DividerPalette { style in edit { $0.addDivider(style, after: lastShown) } }
+            } header: {
+                Text("Разделители — сколько угодно раз")
+            }
+            Section {
+                ElementPalette(config: settings.menuBarConfig, modules: modes.activeModules) { kind in
+                    edit { config in config.set(kind) { $0.enabled.toggle() } }
+                    if settings.menuBarConfig.element(kind).enabled { selection = .element(kind) }
+                }
+            } header: {
+                Text("Элементы")
+            } footer: {
+                Footnote(text: String(localized: "Клик включает или убирает элемент; его можно и перетащить в нужное место в порядке. Элементов выключенных модулей здесь нет."))
+            }
+            Section {
+                Picker("Набор", systemImage: "wand.and.stars", selection: Binding(
+                    get: { settings.menuBarConfig.preset },
+                    set: { choose($0) }
+                )) {
+                    ForEach(MenuBarConfig.Preset.allCases, id: \.self) { Text($0.title).tag($0) }
+                }
+                Picker("Вид", systemImage: "capsule", selection: binding(\.look)) {
+                    ForEach(MenuBarConfig.Look.allCases, id: \.self) { Text($0.title).tag($0) }
+                }
+                .pickerStyle(.segmented)
+                Picker("Между числами без своего разделителя", systemImage: "circle.fill", selection: binding(\.separator)) {
+                    ForEach(MenuBarConfig.Separator.allCases, id: \.self) { Text($0.title).tag($0) }
+                }
+                Toggle("Мелкий текст", systemImage: "textformat.size.smaller", isOn: binding(\.smallText))
+                Toggle("Цвет по уровню (зелёный · оранжевый · красный)", systemImage: "paintpalette", isOn: binding(\.colored))
+            } header: {
+                Text("Вид")
+            } footer: {
+                Footnote(text: String(localized: "«Минимум» — значок, проблемы и ожидающие ответа. «Лимиты» — ещё сессия и неделя. «Всё» — всё, что есть. Набор меняет элементы, разделители остаются. «Капсулы» рисуют группы между «Новыми группами» на общей подложке. Строка меню у каждого профиля своя."))
+            }
         }
-        .frame(height: 600)
+        .formStyle(.grouped)
     }
 
     // MARK: Preview
 
+    private var data: MenuBarData { (sample ? MenuBarData.sample : liveData).without(modes.switchedOff) }
+
     private var preview: some View {
-        let data = sample ? MenuBarData.sample : liveData
         let config = settings.menuBarConfig
-        let groups = MenuBarComposer.groups(config, data)
         let width = MenuBarRenderer.width(config, data)
-        return VStack(alignment: .leading, spacing: 8) {
+        return VStack(alignment: .leading, spacing: 10) {
             HStack {
-                Text("Предпросмотр").font(.headline)
+                Label("Предпросмотр", systemImage: "eye").font(.headline)
                 Spacer()
                 Picker("", selection: $sample) {
-                    Text("Сейчас").tag(false)
                     Text("Пример со всем").tag(true)
+                    Text("Сейчас").tag(false)
                 }
                 .pickerStyle(.segmented)
                 .labelsHidden()
                 .fixedSize()
             }
-            HStack {
+            HStack(spacing: 14) {
                 Spacer()
-                Group {
-                    if let symbol = MenuBarComposer.plainSymbol(groups) {
-                        Image(systemName: symbol)
-                    } else {
-                        Image(nsImage: MenuBarRenderer.image(groups, config: config))
-                    }
-                }
-                .padding(.horizontal, 10)
-                .frame(height: 24)
-                .background(.quaternary, in: RoundedRectangle(cornerRadius: 5))
-                Spacer()
+                MenuBarItemImage(config: config, data: data)
+                    .scaleEffect(1.4, anchor: .trailing)
+                    .frame(height: 30)
+                Text(Date.now.formatted(date: .omitted, time: .shortened))
+                    .font(.system(size: 13 * 1.2, weight: .medium))
             }
-            .padding(.vertical, 6)
-            orderChips
+            .padding(.horizontal, 18)
+            .frame(height: 44)
+            .background(RoundedRectangle(cornerRadius: 9).fill(.quaternary))
             if width > MenuBarRenderer.wideWidth {
                 Label("Строка широкая (\(Int(width)) pt): на MacBook с вырезом её может закрыть вырез или скрыть система.",
                       systemImage: "exclamationmark.triangle")
-                    .font(.caption)
+                    .font(.callout)
                     .foregroundStyle(.orange)
-            } else {
-                Text(sample ? String(localized: "Так выглядит строка, когда есть что показать.") : String(localized: "Так строка выглядит сейчас. Пустые элементы (0, нет данных) не показываются."))
-                    .font(.caption)
+            } else if !sample {
+                Text("Так строка выглядит сейчас. Пустые элементы (0, нет данных) не показываются, их разделители тоже.")
+                    .font(.callout)
                     .foregroundStyle(.secondary)
             }
         }
-        .padding(14)
-    }
-
-    /// The switched-on elements in menu bar order; dragging one onto another moves it there.
-    private var orderChips: some View {
-        let shown = settings.menuBarConfig.elements.filter(\.enabled)
-        return VStack(alignment: .leading, spacing: 4) {
-            FlowChips(kinds: shown.map(\.kind)) { kind, target in
-                edit { $0.move(kind, onto: target) }
-            }
-            Text("Перетащите элемент на другой, чтобы поменять порядок; включить и выключить — в списке ниже.")
-                .font(.caption)
-                .foregroundStyle(.secondary)
-        }
+        .padding(.vertical, 4)
     }
 
     /// Only what Settings can see; the real menu bar also counts sessions, runs and the queue.
@@ -127,6 +122,105 @@ struct MenuBarSettings: View {
         return data
     }
 
+    // MARK: Order
+
+    /// The switched-on elements and the dividers after each, in menu bar order.
+    private var tokens: [OrderToken] {
+        let config = settings.menuBarConfig
+        var result = config.dividers.filter { $0.after == nil }.map(OrderToken.divider)
+        for element in config.elements {
+            if element.enabled { result.append(.element(element.kind)) }
+            result += config.dividers.filter { $0.after == element.kind }.map(OrderToken.divider)
+        }
+        return result
+    }
+
+    private var lastShown: MenuBarElement.Kind? { settings.menuBarConfig.elements.last(where: \.enabled)?.kind }
+
+    private var order: some View {
+        FlowLayout(spacing: 6) {
+            ForEach(tokens) { token in
+                OrderChip(token: token, isSelected: selection == token.selection) {
+                    selection = selection == token.selection ? nil : token.selection
+                } onDrop: { payload in
+                    drop(payload, onto: token)
+                }
+            }
+        }
+        .padding(.vertical, 4)
+        .animation(.snappy(duration: 0.2), value: tokens)
+    }
+
+    /// An element dropped on an element takes its place; a divider dropped on an element goes right after it, on a
+    /// divider — next to it.
+    private func drop(_ payload: DragPayload, onto token: OrderToken) -> Bool {
+        let target: MenuBarElement.Kind? = switch token {
+        case let .element(kind): kind
+        case let .divider(divider): divider.after
+        }
+        switch payload {
+        case let .element(kind):
+            guard case let .element(onto) = token else { return false }
+            edit { config in
+                config.set(kind) { $0.enabled = true }
+                config.move(kind, onto: onto)
+            }
+            selection = .element(kind)
+        case let .newDivider(style):
+            edit { $0.addDivider(style, after: target) }
+        case let .placedDivider(id):
+            edit { $0.moveDivider(id, after: target) }
+        }
+        return true
+    }
+
+    @ViewBuilder private var inspector: some View {
+        switch selection {
+        case let .element(kind) where settings.menuBarConfig.element(kind).enabled:
+            let element = settings.menuBarConfig.element(kind)
+            VStack(alignment: .leading, spacing: 8) {
+                HStack {
+                    Label(element.kind.title, systemImage: element.kind.symbol).font(.headline)
+                    Spacer()
+                    Button("Убрать") {
+                        edit { $0.set(kind) { $0.enabled = false } }
+                        selection = nil
+                    }
+                }
+                ElementOptions(element: element, models: usage.snapshot?.otherWindows ?? []) { new in
+                    edit { $0.set(kind) { $0 = new } }
+                }
+            }
+        case let .divider(id):
+            if let divider = settings.menuBarConfig.dividers.first(where: { $0.id == id }) {
+                HStack {
+                    HStack(spacing: 8) {
+                        DividerGlyph(style: divider.style)
+                        Text(divider.style.title)
+                    }
+                    .font(.headline)
+                    Spacer()
+                    Picker("", selection: Binding(
+                        get: { divider.style },
+                        set: { style in edit { config in
+                            if let index = config.dividers.firstIndex(where: { $0.id == id }) { config.dividers[index].style = style }
+                        } }
+                    )) {
+                        ForEach(MenuBarConfig.Divider.Style.allCases, id: \.self) { Text($0.title).tag($0) }
+                    }
+                    .labelsHidden()
+                    .fixedSize()
+                    Button("Убрать") {
+                        edit { $0.removeDivider(id) }
+                        selection = nil
+                    }
+                }
+            }
+        default:
+            EmptyView()
+        }
+    }
+
     // MARK: Editing
 
     private func choose(_ preset: MenuBarConfig.Preset) {
@@ -136,78 +230,221 @@ struct MenuBarSettings: View {
             config.elements = made.elements
         }
         config.preset = preset
-        store(config)
+        MenuBarEdit.store(config, settings: settings, modes: modes)
     }
 
     private func edit(_ change: (inout MenuBarConfig) -> Void) {
         var config = settings.menuBarConfig
         change(&config)
         config.preset = .custom
-        store(config)
-    }
-
-    /// The menu bar belongs to the current profile (SPEC-profiles §6): every change goes to it as well.
-    private func store(_ config: MenuBarConfig) {
-        settings.menuBarConfig = config
-        modes.setMenuBar(config)
-    }
-
-    private func move(_ config: inout MenuBarConfig, from index: Int, by offset: Int) {
-        let target = index + offset
-        guard config.elements.indices.contains(target) else { return }
-        config.elements.swapAt(index, target)
+        MenuBarEdit.store(config, settings: settings, modes: modes)
     }
 
     private func binding<Value>(_ path: WritableKeyPath<MenuBarConfig, Value>) -> Binding<Value> {
         Binding(
             get: { settings.menuBarConfig[keyPath: path] },
-            set: { var config = settings.menuBarConfig; config[keyPath: path] = $0; store(config) }
+            set: { var config = settings.menuBarConfig; config[keyPath: path] = $0; MenuBarEdit.store(config, settings: settings, modes: modes) }
         )
     }
 }
 
-/// The order chips: one capsule per switched-on element, each a drag source and a drop target.
-private struct FlowChips: View {
-    let kinds: [MenuBarElement.Kind]
-    let onMove: (MenuBarElement.Kind, MenuBarElement.Kind) -> Void
-    @State private var targeted: MenuBarElement.Kind?
+// MARK: - Drag and drop
 
-    var body: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 6) {
-                ForEach(kinds, id: \.self) { kind in
-                    Text(kind.shortTitle)
-                        .font(.caption)
-                        .padding(.horizontal, 8)
-                        .padding(.vertical, 3)
-                        .background(Capsule().fill(targeted == kind ? Color.accentColor.opacity(0.35) : Color.secondary.opacity(0.15)))
-                        .overlay(Capsule().strokeBorder(targeted == kind ? Color.accentColor : .clear))
-                        .help(kind.title)
-                        .draggable(kind.rawValue) {
-                            Text(kind.shortTitle).font(.caption).padding(4)
-                        }
-                        .dropDestination(for: String.self) { items, _ in
-                            guard let raw = items.first, let dragged = MenuBarElement.Kind(rawValue: raw) else { return false }
-                            onMove(dragged, kind)
-                            return true
-                        } isTargeted: { inside in
-                            if inside { targeted = kind } else if targeted == kind { targeted = nil }
-                        }
-                }
-            }
-            .padding(.vertical, 2)
+/// What a chip carries while dragged, as text.
+enum DragPayload {
+    case element(MenuBarElement.Kind)
+    case newDivider(MenuBarConfig.Divider.Style)
+    case placedDivider(String)
+
+    var text: String {
+        switch self {
+        case let .element(kind): "element:" + kind.rawValue
+        case let .newDivider(style): "new-divider:" + style.rawValue
+        case let .placedDivider(id): "divider:" + id
+        }
+    }
+
+    init?(_ text: String) {
+        let parts = text.split(separator: ":", maxSplits: 1).map(String.init)
+        guard parts.count == 2 else { return nil }
+        switch parts[0] {
+        case "element": guard let kind = MenuBarElement.Kind(rawValue: parts[1]) else { return nil }; self = .element(kind)
+        case "new-divider": guard let style = MenuBarConfig.Divider.Style(rawValue: parts[1]) else { return nil }; self = .newDivider(style)
+        case "divider": self = .placedDivider(parts[1])
+        default: return nil
         }
     }
 }
 
-/// One element: on/off, its options when on, and «выше / ниже».
-private struct ElementRow: View {
+private enum OrderToken: Identifiable, Hashable {
+    case element(MenuBarElement.Kind)
+    case divider(MenuBarConfig.Divider)
+
+    var id: String {
+        switch self {
+        case let .element(kind): "element:" + kind.rawValue
+        case let .divider(divider): "divider:" + divider.id
+        }
+    }
+
+    var selection: MenuBarSettings.Selection {
+        switch self {
+        case let .element(kind): .element(kind)
+        case let .divider(divider): .divider(divider.id)
+        }
+    }
+
+    var payload: DragPayload {
+        switch self {
+        case let .element(kind): .element(kind)
+        case let .divider(divider): .placedDivider(divider.id)
+        }
+    }
+}
+
+/// One element or divider in the order: a drag source and a drop target.
+private struct OrderChip: View {
+    let token: OrderToken
+    let isSelected: Bool
+    let onTap: () -> Void
+    let onDrop: (DragPayload) -> Bool
+    @State private var targeted = false
+
+    var body: some View {
+        label
+            .padding(.horizontal, isDivider ? 7 : 10)
+            .padding(.vertical, 5)
+            .background(Capsule().fill(fill))
+            .overlay(Capsule().strokeBorder(targeted || isSelected ? Color.accentColor : Color.secondary.opacity(isDivider ? 0.35 : 0), style: StrokeStyle(lineWidth: 1, dash: isDivider && !targeted && !isSelected ? [3, 2] : [])))
+            .contentShape(Capsule())
+            .onTapGesture(perform: onTap)
+            .draggable(token.payload.text) { label.padding(6) }
+            .dropDestination(for: String.self) { items, _ in
+                guard let payload = items.first.flatMap(DragPayload.init) else { return false }
+                return onDrop(payload)
+            } isTargeted: { targeted = $0 }
+            .help(help)
+            .accessibilityAddTraits(.isButton)
+            .accessibilityAddTraits(isSelected ? .isSelected : [])
+    }
+
+    private var isDivider: Bool { if case .divider = token { true } else { false } }
+
+    private var fill: Color {
+        if targeted { return Color.accentColor.opacity(0.3) }
+        if isSelected { return Color.accentColor.opacity(0.18) }
+        return isDivider ? .clear : Color.secondary.opacity(0.14)
+    }
+
+    @ViewBuilder private var label: some View {
+        switch token {
+        case let .element(kind):
+            Label(kind.shortTitle, systemImage: kind.symbol)
+                .font(.system(size: 13))
+        case let .divider(divider):
+            DividerGlyph(style: divider.style)
+                .frame(minWidth: 14)
+        }
+    }
+
+    private var help: String {
+        switch token {
+        case let .element(kind): kind.title
+        case let .divider(divider): divider.style.title
+        }
+    }
+}
+
+/// The dividers to drag into the order (a click puts one at the end).
+private struct DividerPalette: View {
+    let add: (MenuBarConfig.Divider.Style) -> Void
+
+    var body: some View {
+        FlowLayout(spacing: 6) {
+            ForEach(MenuBarConfig.Divider.Style.allCases, id: \.self) { style in
+                Button { add(style) } label: {
+                    HStack(spacing: 7) {
+                        DividerGlyph(style: style)
+                        Text(style.title)
+                    }
+                        .font(.system(size: 13))
+                        .padding(.horizontal, 10)
+                        .padding(.vertical, 5)
+                        .background(Capsule().strokeBorder(Color.secondary.opacity(0.4), style: StrokeStyle(lineWidth: 1, dash: [3, 2])))
+                        .contentShape(Capsule())
+                }
+                .buttonStyle(.plain)
+                .draggable(DragPayload.newDivider(style).text) { Text(style.title).padding(6) }
+                .help(String(localized: "Перетащите на элемент в порядке — встанет после него; клик — в конец"))
+            }
+        }
+        .padding(.vertical, 4)
+    }
+}
+
+/// A divider as it looks in the menu bar, for the chips.
+private struct DividerGlyph: View {
+    let style: MenuBarConfig.Divider.Style
+
+    var body: some View {
+        Text(verbatim: style.glyph)
+            .font(.system(size: 14, weight: .semibold, design: .monospaced))
+            .foregroundStyle(.secondary)
+            .accessibilityHidden(true)
+    }
+}
+
+/// The elements by module; only working modules (SPEC-settings §5).
+private struct ElementPalette: View {
+    let config: MenuBarConfig
+    let modules: [ModuleKind]
+    let toggle: (MenuBarElement.Kind) -> Void
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            ForEach(groups, id: \.title) { group in
+                VStack(alignment: .leading, spacing: 6) {
+                    Label(group.title, systemImage: group.symbol)
+                        .font(.system(size: 12, weight: .medium))
+                        .foregroundStyle(.secondary)
+                    FlowLayout(spacing: 6) {
+                        ForEach(group.kinds, id: \.self) { kind in
+                            let on = config.element(kind).enabled
+                            Button { toggle(kind) } label: {
+                                Label(kind.shortTitle, systemImage: on ? "checkmark" : kind.symbol)
+                                    .font(.system(size: 13, weight: on ? .medium : .regular))
+                                    .padding(.horizontal, 10)
+                                    .padding(.vertical, 5)
+                                    .foregroundStyle(on ? Color.accentColor : .primary)
+                                    .background(Capsule().fill(on ? Color.accentColor.opacity(0.15) : Color.secondary.opacity(0.1)))
+                                    .contentShape(Capsule())
+                            }
+                            .buttonStyle(.plain)
+                            .draggable(DragPayload.element(kind).text) { Label(kind.shortTitle, systemImage: kind.symbol).padding(6) }
+                            .help(kind.title)
+                        }
+                    }
+                }
+            }
+        }
+        .padding(.vertical, 4)
+    }
+
+    private var groups: [(title: String, symbol: String, kinds: [MenuBarElement.Kind])] {
+        var result: [(String, String, [MenuBarElement.Kind])] = [(String(localized: "Общее"), "sparkle", [.icon, .mode, .disk])]
+        for module in ModuleKind.allCases where modules.contains(module) {
+            let kinds = MenuBarElement.Kind.allCases.filter { $0.module == module }
+            if !kinds.isEmpty { result.append((module.title, module.symbol, kinds)) }
+        }
+        return result
+    }
+}
+
+/// An element's own options: symbol, gauge look, threshold, format.
+private struct ElementOptions: View {
     let element: MenuBarElement
-    let canMoveUp: Bool
-    let canMoveDown: Bool
     let models: [UsageWindow]
     let onChange: (MenuBarElement) -> Void
-    let onMove: (Int) -> Void
 
     private static let symbols: [(String, String)] = [
         ("sparkle", String(localized: "✦ Искра")), ("star", String(localized: "Звезда")), ("bolt", String(localized: "Молния")), ("brain", String(localized: "Мозг")), ("terminal", String(localized: "Терминал")),
@@ -215,27 +452,6 @@ private struct ElementRow: View {
     ]
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 6) {
-            HStack {
-                Toggle(element.kind.title, isOn: value(\.enabled))
-                Spacer()
-                Button { onMove(-1) } label: { Image(systemName: "chevron.up") }
-                    .disabled(!canMoveUp)
-                    .help("Левее")
-                Button { onMove(1) } label: { Image(systemName: "chevron.down") }
-                    .disabled(!canMoveDown)
-                    .help("Правее")
-            }
-            .buttonStyle(.borderless)
-            if element.enabled {
-                options
-                    .padding(.leading, 20)
-                    .controlSize(.small)
-            }
-        }
-    }
-
-    @ViewBuilder private var options: some View {
         switch element.kind {
         case .icon:
             Picker("Символ", selection: value(\.symbol)) {
@@ -285,7 +501,7 @@ private struct ElementRow: View {
             }
             .pickerStyle(.segmented)
         case .projectsAlert, .forecast, .waiting, .running, .background, .queued, .deadline, .keepAwake:
-            EmptyView()
+            Text("Своих настроек нет.").foregroundStyle(.secondary)
         }
     }
 
@@ -298,5 +514,73 @@ private struct ElementRow: View {
                 onChange(new)
             }
         )
+    }
+}
+
+extension MenuBarElement.Kind {
+    /// For the chips in Settings.
+    var symbol: String {
+        switch self {
+        case .icon: "sparkle"
+        case .projectsAlert: "exclamationmark.circle"
+        case .session: "clock"
+        case .week: "calendar.day.timeline.left"
+        case .modelWeek: "cube"
+        case .resetCountdown: "arrow.clockwise"
+        case .forecast: "chart.line.uptrend.xyaxis"
+        case .waiting: "hand.raised"
+        case .running: "bolt"
+        case .background: "moon.zzz"
+        case .queued: "clock.badge"
+        case .deadline: "calendar"
+        case .disk: "internaldrive"
+        case .mode: "square.stack.3d.up"
+        case .cpu: "cpu"
+        case .memory: "memorychip"
+        case .keepAwake: "cup.and.saucer"
+        case .otherAI: "sparkles"
+        }
+    }
+}
+
+/// Lays chips out left to right and wraps them onto new lines.
+struct FlowLayout: Layout {
+    var spacing: CGFloat = 6
+
+    func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
+        let rows = arrange(proposal.width ?? .infinity, subviews)
+        let width = rows.map { $0.reduce(0) { $0 + $1.width } + spacing * CGFloat(max($0.count - 1, 0)) }.max() ?? 0
+        let height = rows.map { $0.map(\.height).max() ?? 0 }.reduce(0, +) + spacing * CGFloat(max(rows.count - 1, 0))
+        return CGSize(width: min(width, proposal.width ?? width), height: height)
+    }
+
+    func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
+        var index = 0
+        var y = bounds.minY
+        for row in arrange(bounds.width, subviews) {
+            var x = bounds.minX
+            let height = row.map(\.height).max() ?? 0
+            for size in row {
+                subviews[index].place(at: CGPoint(x: x, y: y + (height - size.height) / 2), proposal: ProposedViewSize(size))
+                x += size.width + spacing
+                index += 1
+            }
+            y += height + spacing
+        }
+    }
+
+    private func arrange(_ width: CGFloat, _ subviews: Subviews) -> [[CGSize]] {
+        var rows: [[CGSize]] = [[]]
+        var x: CGFloat = 0
+        for subview in subviews {
+            let size = subview.sizeThatFits(.unspecified)
+            if x > 0, x + size.width > width {
+                rows.append([])
+                x = 0
+            }
+            rows[rows.count - 1].append(size)
+            x += size.width + spacing
+        }
+        return rows
     }
 }

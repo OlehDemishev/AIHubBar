@@ -77,7 +77,7 @@ enum ModuleKind: String, Codable, CaseIterable, Sendable {
         case .clipboard: String(localized: "Последние копирования, поиск")
         case .notes: String(localized: "Markdown прямо в панели")
         case .notch: String(localized: "Лимит и сессии у чёлки")
-        case .layout: String(localized: "ghbdtn → привет, сам")
+        case .layout: String(localized: "Исправляет текст не в той раскладке")
         }
     }
 

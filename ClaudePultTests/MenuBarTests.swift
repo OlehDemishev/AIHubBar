@@ -174,3 +174,77 @@ struct MenuBarComposerTests {
         #expect(MenuBarComposer.countdown(to: now.addingTimeInterval(9 * 60), now: now, long: false) == "0:09")
     }
 }
+
+/// SPEC-settings §5: dividers placed by hand, any number, only between two drawn groups.
+struct MenuBarDividerTests {
+    private func config() -> MenuBarConfig {
+        var config = MenuBarConfig.migrated(from: .sessionAndWeek)
+        config.colored = false
+        return config
+    }
+
+    @Test func withoutDividersNothingChanges() {
+        let data = MenuBarData(showsAlert: true, waiting: 1, session: 17, week: 58)
+        #expect(MenuBarComposer.strip(config(), data) == [
+            .group([.symbol("sparkle"), .dot]), .gap,
+            .group([.text("17%", .label)]), .separator,
+            .group([.text("58%", .label)]), .gap,
+            .group([.labeled(symbol: "hand.raised.fill", text: "1", .label)]),
+        ])
+    }
+
+    @Test func dividersStandWhereTheyArePlaced() {
+        var config = config()
+        config.addDivider(.line, after: .projectsAlert)
+        config.addDivider(.space, after: .projectsAlert)
+        config.addDivider(.slash, after: .session)
+        let data = MenuBarData(showsAlert: false, waiting: 1, session: 17, week: 58)
+        #expect(MenuBarComposer.strip(config, data) == [
+            .group([.symbol("sparkle")]), .divider(.line), .divider(.space),
+            .group([.text("17%", .label)]), .divider(.slash),
+            .group([.text("58%", .label)]), .gap,
+            .group([.labeled(symbol: "hand.raised.fill", text: "1", .label)]),
+        ], "the alert has nothing to show, its dividers still go between the icon and the session")
+    }
+
+    @Test func noDividerHangsAtAnEdge() {
+        var config = config()
+        config.addDivider(.bar, after: nil)
+        config.addDivider(.group, after: .week)
+        let data = MenuBarData(session: 17, week: 58)
+        #expect(MenuBarComposer.strip(config, data) == [
+            .group([.symbol("sparkle")]), .gap, .group([.text("17%", .label)]), .separator, .group([.text("58%", .label)]),
+        ], "nobody waits: the group divider after the week has nothing on its right")
+    }
+
+    @Test func aDividerKeepsTheDotOffTheIcon() {
+        var config = config()
+        config.addDivider(.dot, after: .icon)
+        let data = MenuBarData(showsAlert: true)
+        #expect(MenuBarComposer.groups(config, data) == [[.symbol("sparkle")], [.dot]])
+    }
+
+    @Test func dividersMoveAndSurviveCoding() throws {
+        var config = config()
+        config.addDivider(.chevron, after: .icon)
+        let id = try #require(config.dividers.first?.id)
+        config.moveDivider(id, after: .week)
+        #expect(config.dividers.map(\.after) == [.week])
+        config.look = .capsules
+        let again = try JSONDecoder().decode(MenuBarConfig.self, from: JSONEncoder().encode(config))
+        #expect(again == config)
+        config.removeDivider(id)
+        #expect(config.dividers.isEmpty)
+        // A file from before dividers reads as plain, without them; and writes no new keys.
+        let plain = String(decoding: try JSONEncoder().encode(MenuBarConfig.make(.limits)), as: UTF8.self)
+        #expect(!plain.contains("dividers") && !plain.contains("look"))
+    }
+
+    @Test func capsulesAlwaysDraw() {
+        var config = MenuBarConfig.make(.minimum)
+        let strip = MenuBarComposer.strip(config, MenuBarData())
+        #expect(MenuBarComposer.plainSymbol(strip, look: .plain) == "sparkle")
+        config.look = .capsules
+        #expect(MenuBarComposer.plainSymbol(strip, look: config.look) == nil)
+    }
+}

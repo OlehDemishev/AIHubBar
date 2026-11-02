@@ -470,16 +470,9 @@ struct AssistantPreview: View {
         var data = MenuBarData.sample
         data.modeIcon = mode.icon
         data.modeName = mode.name
-        let groups = MenuBarComposer.groups(draft.menuBar, data)
         return HStack {
             Spacer()
-            Group {
-                if let symbol = MenuBarComposer.plainSymbol(groups) {
-                    Image(systemName: symbol)
-                } else {
-                    Image(nsImage: MenuBarRenderer.image(groups, config: draft.menuBar))
-                }
-            }
+            MenuBarItemImage(config: draft.menuBar, data: data)
             .padding(.horizontal, 10)
             .frame(height: 24)
             .background(RoundedRectangle(cornerRadius: 5).fill(.quaternary))

@@ -49,19 +49,28 @@ struct MenuBarIcon: View {
     let state: MenuBarState
 
     var body: some View {
-        let groups = MenuBarComposer.groups(state.config, state.data)
-        Group {
-            if let symbol = MenuBarComposer.plainSymbol(groups) {
-                Image(systemName: symbol)
-            } else {
-                Image(nsImage: MenuBarRenderer.image(groups, config: state.config))
-            }
-        }
+        MenuBarItemImage(config: state.config, data: state.data)
         .accessibilityLabel(MenuBarComposer.accessibilityText(state.config, state.data))
         .task(id: MenuBarComposer.accessibilityText(state.config, state.data)) {
             // The status item exists a moment after launch.
             try? await Task.sleep(for: .milliseconds(500))
             StatusItemTooltip.set(MenuBarComposer.accessibilityText(state.config, state.data))
+        }
+    }
+}
+
+/// The item as an image: a template symbol when it is a lone symbol, else the drawn strip. Also the previews in
+/// Settings and the assistant.
+struct MenuBarItemImage: View {
+    let config: MenuBarConfig
+    let data: MenuBarData
+
+    var body: some View {
+        let strip = MenuBarComposer.strip(config, data)
+        if let symbol = MenuBarComposer.plainSymbol(strip, look: config.look) {
+            Image(systemName: symbol)
+        } else {
+            Image(nsImage: MenuBarRenderer.image(strip, config: config))
         }
     }
 }
@@ -88,9 +97,10 @@ enum StatusItemTooltip {
 @MainActor
 enum MenuBarRenderer {
     private struct Key: Hashable {
-        var groups: [[MenuBarSegment]]
+        var strip: [MenuBarPiece]
         var separator: MenuBarConfig.Separator
         var smallText: Bool
+        var look: MenuBarConfig.Look
     }
 
     private static var cache: [Key: NSImage] = [:]
@@ -98,10 +108,10 @@ enum MenuBarRenderer {
     /// Wider than this and a MacBook with a notch may hide the item (SPEC-modes §7).
     static let wideWidth: CGFloat = 180
 
-    static func image(_ groups: [[MenuBarSegment]], config: MenuBarConfig) -> NSImage {
-        let key = Key(groups: groups, separator: config.separator, smallText: config.smallText)
+    static func image(_ strip: [MenuBarPiece], config: MenuBarConfig) -> NSImage {
+        let key = Key(strip: strip, separator: config.separator, smallText: config.smallText, look: config.look)
         if let cached = cache[key] { return cached }
-        let layout = Layout(groups: groups, separator: config.separator, small: config.smallText)
+        let layout = Layout(strip: strip, separator: config.separator, small: config.smallText, look: config.look)
         let image = NSImage(size: NSSize(width: ceil(layout.width), height: Layout.height), flipped: false) { _ in
             layout.draw()
             return true
@@ -113,9 +123,9 @@ enum MenuBarRenderer {
     }
 
     static func width(_ config: MenuBarConfig, _ data: MenuBarData) -> CGFloat {
-        let groups = MenuBarComposer.groups(config, data)
-        if MenuBarComposer.plainSymbol(groups) != nil { return 16 }
-        return Layout(groups: groups, separator: config.separator, small: config.smallText).width
+        let strip = MenuBarComposer.strip(config, data)
+        if MenuBarComposer.plainSymbol(strip, look: config.look) != nil { return 16 }
+        return Layout(strip: strip, separator: config.separator, small: config.smallText, look: config.look).width
     }
 
     nonisolated static func color(_ percent: Double) -> NSColor {
@@ -139,6 +149,8 @@ enum MenuBarRenderer {
     private struct Layout {
         static let height: CGFloat = 16
         static let gap: CGFloat = 4
+        /// Inside a capsule, from its edge to the first and last piece.
+        static let capsulePadding: CGFloat = 4
 
         enum Piece {
             case symbol(String, size: CGFloat, NSColor)
@@ -146,36 +158,71 @@ enum MenuBarRenderer {
             case text(String, NSColor)
             case ring(Double, NSColor)
             case bar(Double, NSColor)
+            case line
             case space(CGFloat)
         }
 
         let font: NSFont
         let symbolSize: CGFloat
         var pieces: [(Piece, CGFloat)] = []
+        /// Piece ranges drawn on a rounded backing («Капсулы по группам»).
+        var capsules: [Range<Int>] = []
 
-        init(groups: [[MenuBarSegment]], separator: MenuBarConfig.Separator, small: Bool) {
+        init(strip: [MenuBarPiece], separator: MenuBarConfig.Separator, small: Bool, look: MenuBarConfig.Look) {
             font = NSFont.monospacedDigitSystemFont(ofSize: small ? 10 : 12, weight: .medium)
             symbolSize = small ? 11 : 13
-            for (index, group) in groups.enumerated() {
-                if index > 0 {
-                    if MenuBarComposer.usesSeparator(between: groups[index - 1], and: group) {
-                        add(.text(separator.text, .labelColor))
-                    } else {
-                        add(.space(Self.gap))
+            var capsuleStart: Int?
+            func openCapsule() {
+                capsuleStart = pieces.count
+                add(.space(Self.capsulePadding))
+            }
+            func closeCapsule() {
+                guard let start = capsuleStart else { return }
+                add(.space(Self.capsulePadding))
+                capsules.append(start..<pieces.count)
+                capsuleStart = nil
+            }
+            if look == .capsules { openCapsule() }
+            for piece in strip {
+                switch piece {
+                case let .group(group): addGroup(group)
+                case .separator: add(.text(separator.text, .labelColor))
+                case .gap: add(.space(Self.gap))
+                case let .divider(style):
+                    switch style {
+                    case .space: add(.space(6))
+                    case .wideSpace: add(.space(14))
+                    case .dot: add(.text(" · ", .secondaryLabelColor))
+                    case .bar: add(.text(" | ", .secondaryLabelColor))
+                    case .slash: add(.text(" / ", .secondaryLabelColor))
+                    case .chevron: add(.text(" › ", .secondaryLabelColor))
+                    case .line: add(.line)
+                    case .group:
+                        if look == .capsules {
+                            closeCapsule()
+                            add(.space(Self.gap))
+                            openCapsule()
+                        } else {
+                            add(.space(10))
+                        }
                     }
                 }
-                for (position, segment) in group.enumerated() {
-                    switch segment {
-                    case let .symbol(name): add(.symbol(name, size: symbolSize, .labelColor))
-                    case .dot: add(.dot(standalone: position == 0))
-                    case let .text(text, tint): add(.text(text, MenuBarRenderer.color(tint)))
-                    case let .labeled(symbol, text, tint):
-                        add(.symbol(symbol, size: symbolSize - 2, MenuBarRenderer.color(tint)))
-                        add(.space(2))
-                        add(.text(text, MenuBarRenderer.color(tint)))
-                    case let .ring(value, tint): add(.ring(value, MenuBarRenderer.color(tint)))
-                    case let .bar(value, tint): add(.bar(value, MenuBarRenderer.color(tint)))
-                    }
+            }
+            if look == .capsules { closeCapsule() }
+        }
+
+        private mutating func addGroup(_ group: [MenuBarSegment]) {
+            for (position, segment) in group.enumerated() {
+                switch segment {
+                case let .symbol(name): add(.symbol(name, size: symbolSize, .labelColor))
+                case .dot: add(.dot(standalone: position == 0))
+                case let .text(text, tint): add(.text(text, MenuBarRenderer.color(tint)))
+                case let .labeled(symbol, text, tint):
+                    add(.symbol(symbol, size: symbolSize - 2, MenuBarRenderer.color(tint)))
+                    add(.space(2))
+                    add(.text(text, MenuBarRenderer.color(tint)))
+                case let .ring(value, tint): add(.ring(value, MenuBarRenderer.color(tint)))
+                case let .bar(value, tint): add(.bar(value, MenuBarRenderer.color(tint)))
                 }
             }
         }
@@ -190,6 +237,7 @@ enum MenuBarRenderer {
             case let .text(text, _): (text as NSString).size(withAttributes: [.font: font]).width
             case .ring: 14
             case .bar: 22
+            case .line: 9
             case let .space(width): width
             }
             pieces.append((piece, width))
@@ -203,8 +251,19 @@ enum MenuBarRenderer {
 
         func draw() {
             let height = Self.height
+            var starts: [CGFloat] = []
             var x: CGFloat = 0
-            for (piece, width) in pieces {
+            for (_, width) in pieces {
+                starts.append(x)
+                x += width
+            }
+            for capsule in capsules where !capsule.isEmpty {
+                let left = starts[capsule.lowerBound]
+                let right = starts[capsule.upperBound - 1] + pieces[capsule.upperBound - 1].1
+                NSColor.labelColor.withAlphaComponent(0.14).setFill()
+                NSBezierPath(roundedRect: NSRect(x: left, y: 0, width: right - left, height: height), xRadius: 4.5, yRadius: 4.5).fill()
+            }
+            for ((piece, width), x) in zip(pieces, starts) {
                 switch piece {
                 case let .symbol(name, size, color):
                     if let symbol = symbolImage(name, size: size, color: color) {
@@ -242,10 +301,12 @@ enum MenuBarRenderer {
                     let filled = NSRect(x: x, y: track.minY, width: max(5, width * min(max(value, 0), 100) / 100), height: 5)
                     color.setFill()
                     NSBezierPath(roundedRect: filled, xRadius: 2.5, yRadius: 2.5).fill()
+                case .line:
+                    NSColor.labelColor.withAlphaComponent(0.35).setFill()
+                    NSRect(x: x + width / 2 - 0.5, y: 2.5, width: 1, height: height - 5).fill()
                 case .space:
                     break
                 }
-                x += width
             }
         }
     }

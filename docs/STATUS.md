@@ -5,19 +5,27 @@
 **Updated:** 2026-11-02
 
 **Now:**
-- nothing in progress; «Раскладка» works live on this Mac (build 438, TextEdit): auto-fix both ways and double-Shift undo
+- branch `feat/settings-redesign`: Settings rebuilt around modules (docs/SPEC-settings.md), PR open
 
 **Next:**
+- Oleh looks at the new Settings (Модули, Панель, Строка меню, a module page) and says what to change
 - Oleh tries «Раскладка» in his own apps, then the first beta: `scripts/release.sh 0.4.0-beta.1 --publish`
 - Mac island: a live VoiceOver walk; why one test drag onto the island didn't land
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/SPEC-windows.md §9, stage 2–3 leftovers)
 
 **Needs Oleh:**
+- review and merge the Settings PR (`feat/settings-redesign`); drags in «Панель» and «Строка меню» are not tried by hand yet
 - «Раскладка» is on and has Accessibility on this Mac: try it in Telegram, Chrome, Safari, Notes; ⌥⇧ on a selection is not tried yet
 - say when to publish the first beta (it creates the `beta` release that beta testers' copies read; until then their update check finds nothing)
 - MacBook Air: update to 0.3.0 and check the island at the real notch (see the 0.3.0 entry)
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-02 — Settings rebuilt around modules (branch `feat/settings-redesign`)
+
+Done: Oleh chose variant A + tiles from B + builder from C (docs/SPEC-settings.md). Every module, built-in ones too, has a main switch (`state.json` → `off`): off stops its background work, panel block, menu bar data and notifications and keeps its place in the profiles, so «only AI» or «only the layout switch» works. Settings sidebar by section (AI, Сервисы AI, Работа, Mac) with a page per module: big header with the switch, «Где показывать» chips (panel, menu bar, island, notifications, Telegram — shortcuts to existing settings), its settings with icons, text 13.5 pt. «Модули» is tiles with sets (Только AI, Только раскладка, Утилиты Mac, Всё); «Панель» is the profile's blocks with drag, switches and a sketch. Menu bar: dividers placed by hand any number of times (space, wide space, ·, |, thin line, /, ›, new group; drawn only between two visible elements), «Капсулы по группам» look, new editor (live preview, order chips with drag, element palette by module, inspector). Hooks/approvals moved from Claude Code to «Сессии агентов». New strings translated into all 12 languages.
+Checked: `xcodebuild test` 382 tests green (new: ModuleSwitchTests, MenuBarDividerTests, sidebar sections). Installed build: screenshots of a module page, «Модули», «Панель», «Строка меню»; dividers and capsules drawn to PNG and looked at.
+Left: drag-and-drop in «Панель» and «Строка меню» not tried by hand (no mouse checks this time). The island chip shows only while «Остров у чёлки» is on.
 
 ## 2026-11-02 — «Раскладка» works live: signed local builds, real access check (branch `fix/layout-access`)
 
