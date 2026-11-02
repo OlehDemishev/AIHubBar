@@ -5,7 +5,7 @@
 **Updated:** 2026-11-02
 
 **Now:**
-- nothing in progress; merged 2026-11-02: «Сервисы AI» as a list on the left (#162) in the window colour (#163), glass panel background (#158) and its fix for macOS 27 (#160), AI services spec + stage 1 — Claude Code inside «Сервисы AI», a tab per service (#159)
+- nothing in progress; merged 2026-11-02: Settings redone like System Settings (#164), «Сервисы AI» as a list on the left (#162) in the window colour (#163), glass panel background (#158) and its fix for macOS 27 (#160), AI services spec + stage 1 — Claude Code inside «Сервисы AI», a tab per service (#159)
 - released 0.2.2 (v0.2.2, build 345): clickable widgets (#154), Codex from the ChatGPT desktop app (#155), notch island stage 2 (#153)
 - notch island stage 1 merged (#149): module, island over the notch, ears, hover card; target release 0.3.0
 - notch island stage 2 merged (#153): banners for events, permission requests with Allow / Deny in the island
@@ -28,7 +28,7 @@
 - Windows and Linux versions (docs/SPEC-windows.md, docs/SPEC-linux.md) — only when Oleh says; stage 0 (fact checks in VMs) first
 
 **Needs Oleh:**
-- AI services list (build from main, installed): Settings → «Сервисы AI» — every service in the left list opens, the dots match what's set up; Claude Code has all the old options (path, hooks, Telegram answers, saved prompts, CLAUDE.md и MCP, background runs); Codex shows the agent and its limits row; Modules → Лимиты → «Другие AI» shows the summary and «Открыть «Сервисы AI»»
+- new Settings (build from main, installed): one sidebar with search — every page opens, search finds pages by setting names (e.g. «Telegram»), the dots match what's set up; in «Сервисы AI» → Claude Code has all the old options (path, hooks, Telegram answers, saved prompts, CLAUDE.md и MCP, background runs); Codex shows the agent and its limits row; Modules → Лимиты → «Другие AI» shows the summary and «Открыть «Сервисы AI»»
 - glass panel (installed build has the fix): checked by the agent in the light theme; look at it in the dark theme and with «Уменьшить прозрачность» on (must fall back to the standard background), say if the glass should be clearer or denser
 - update to 0.2.2 («Обновления» in Settings), then: Settings → Модули → Лимиты → «Другие AI» should list Codex; click the limits widget (opens «Лимиты»), ↻ in it, the sessions widget's rows and ☕ — tell me what doesn't react
 - on the other Mac: install 0.2.2 (Releases, or «Обновления» in Settings) → Settings → Claude Code: the path field should show «авто: …» instead of «авто: не найден»; tell me the path it shows
@@ -41,6 +41,12 @@
 - decide SPEC-windows §10 and SPEC-linux §10 (Tauri 2 for both, Windows code signing, first Linux desktops) before that work starts
 - optional: Apple Developer ID (notarization, no «Open Anyway»); delete or archive the old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-02 — Settings like System Settings (branch `feat/settings-sidebar`)
+
+Done: design variant A, chosen by Oleh from three renders. The Settings window is one `NavigationSplitView`: a sidebar with search, the app's pages (Основные, Профили, Модули, Внешний вид, Строка меню) and a «Сервисы AI» group with a page per AI and its status dot; every page has a header — coloured icon tile, title, one-line summary — and the window has one size (900 × 660) instead of 560 / 760 by tab. New `SettingsPane` (`Views/SettingsPane.swift`: titles, summaries, icons, search keywords taken from setting names already shown on the page), `PaneIcon`, `PaneRow`, `PaneHeader`; «Сервисы AI» pages are `ServicePage` (the nested list from #162 is gone). `settingsTab` / `servicesTab` are kept, so links into Settings and the old-tab migration still work. The window's title strip is removed (`toolbar(removing: .title)`, hidden toolbar background) — hiding the whole toolbar also took the close / minimise buttons, tried and reverted. Profiles: fixed height dropped, its list narrowed to 190 pt. 10 new strings in 13 languages.
+Checked: `xcodebuild test` — 304 / 304 pass (new `SettingsPaneTests`: page ↔ stored tab round trip, search by title and setting names). Live: every page opened and captured with `screencapture -l` — Основные, Профили (rows fit after widening), Строка меню, Claude Code, Другие; window buttons present, no title strip, one colour per column.
+Left: dark theme not looked at; search tried only in tests.
 
 ## 2026-11-02 — «Сервисы AI» list without the grey sidebar (branch `fix/services-list-background`)
 

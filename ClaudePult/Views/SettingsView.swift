@@ -1,55 +1,108 @@
 import AppKit
 import SwiftUI
 
-/// Settings window, one tab per area: general, modes, appearance, menu bar, AI services (Claude Code and the others,
-/// a nested tab each).
+/// Settings window like System Settings (design variant A, 2026-11-02): a sidebar with search, the app's areas and
+/// «Сервисы AI» with a page per AI; the chosen page on the right under its header. One window size for every page.
 struct SettingsView: View {
+    /// What `settingsTab` stores; with `servicesTab` it names the open page (`SettingsPane`).
     enum Tab: String, CaseIterable {
         case general, modes, modules, appearance, menuBar, services
     }
 
+    static let size = CGSize(width: 900, height: 660)
+
     @Environment(AppSettings.self) private var settings
+    @Environment(AIServiceStore.self) private var services
+    @Environment(HubLimitsStore.self) private var hub
     @AppStorage(SettingsRoute.tabKey) private var tab: Tab = .general
+    @AppStorage(SettingsRoute.serviceKey) private var service: ServiceTab = .claude
+    @State private var query = ""
 
     init() {
         SettingsRoute.migrate()
     }
 
+    private var pane: SettingsPane { SettingsPane(tab: tab, service: service) }
+
     var body: some View {
-        TabView(selection: $tab) {
-            GeneralSettings()
-                .tabItem { Label("Основные", systemImage: "gearshape") }
-                .tag(Tab.general)
-            ModesSettings()
-                .tabItem { Label("Профили", systemImage: "square.stack.3d.up") }
-                .tag(Tab.modes)
-            ModulesSettings()
-                .tabItem { Label("Модули", systemImage: "puzzlepiece.extension") }
-                .tag(Tab.modules)
-            AppearanceSettings()
-                .tabItem { Label("Внешний вид", systemImage: "paintbrush") }
-                .tag(Tab.appearance)
-            MenuBarSettings()
-                .tabItem { Label("Строка меню", systemImage: "menubar.rectangle") }
-                .tag(Tab.menuBar)
-            ServicesSettings()
-                .tabItem { Label("Сервисы AI", systemImage: "cpu") }
-                .tag(Tab.services)
+        NavigationSplitView {
+            List(selection: Binding(get: { pane }, set: { if let new = $0 { select(new) } })) {
+                ForEach(SettingsPane.areas.filter { $0.matches(query) }, id: \.self) { pane in
+                    PaneRow(pane: pane)
+                }
+                let found = SettingsPane.services.filter { $0.matches(query) }
+                if !found.isEmpty {
+                    Section("Сервисы AI") {
+                        ForEach(found, id: \.self) { pane in
+                            PaneRow(pane: pane, isSetUp: isSetUp(pane))
+                        }
+                    }
+                }
+            }
+            .searchable(text: $query, placement: .sidebar, prompt: Text("Поиск"))
+            .navigationSplitViewColumnWidth(220)
+            .toolbar(removing: .sidebarToggle)
+        } detail: {
+            VStack(alignment: .leading, spacing: 0) {
+                PaneHeader(pane: pane)
+                    .padding(.horizontal, 20)
+                    .padding(.top, 16)
+                    .padding(.bottom, 4)
+                page
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+            }
+            .navigationTitle(pane.title)
         }
-        .frame(width: tab == .services ? ServicesSettings.width : 560)
+        .modifier(NoWindowToolbar())
+        .frame(width: Self.size.width, height: Self.size.height)
+        .task { if services.agents.isEmpty { await services.scan() } }
         .preferredColorScheme(settings.panelTheme.colorScheme)
         .debugSnapshot("settings")
     }
+
+    @ViewBuilder private var page: some View {
+        switch pane {
+        case .general: GeneralSettings()
+        case .modes: ModesSettings()
+        case .modules: ModulesSettings()
+        case .appearance: AppearanceSettings()
+        case .menuBar: MenuBarSettings()
+        case let .service(service): ServicePage(service: service).id(service)
+        }
+    }
+
+    private func select(_ new: SettingsPane) {
+        tab = new.tab
+        if case let .service(chosen) = new { service = chosen }
+    }
+
+    private func isSetUp(_ pane: SettingsPane) -> Bool? {
+        guard case let .service(service) = pane else { return nil }
+        return service.isSetUp(agents: Set(services.agents.keys), keys: services.hasKey, limits: hub.available.union(hub.savedKeys))
+    }
 }
 
-/// A tab's form: grouped, fixed width, as tall as its content.
+/// No title strip above the pages: the page header already names the page, as in System Settings. Only the title
+/// and the bar's background go — hiding the whole window toolbar takes the close / minimise buttons with it.
+private struct NoWindowToolbar: ViewModifier {
+    func body(content: Content) -> some View {
+        if #available(macOS 15.0, *) {
+            content
+                .toolbar(removing: .title)
+                .toolbarBackgroundVisibility(.hidden, for: .windowToolbar)
+        } else {
+            content
+        }
+    }
+}
+
+/// A page's form: grouped, filling the page and scrolling.
 private struct SettingsPage<Content: View>: View {
     @ViewBuilder let content: Content
 
     var body: some View {
         Form { content }
             .formStyle(.grouped)
-            .fixedSize(horizontal: false, vertical: true)
     }
 }
 
