@@ -410,7 +410,7 @@ struct ClaudePultApp: App {
         .windowResizability(.contentSize)
         .defaultPosition(.center)
 
-        Window("Помощь — AI Hub Bar", id: "help") {
+        Window("Справка — AI Hub Bar", id: "help") {
             HelpView()
                 .environment(services)
                 .environment(hooks)
@@ -419,6 +419,7 @@ struct ClaudePultApp: App {
                 .preferredColorScheme(settings.panelTheme.colorScheme)
                 .debugSnapshot("help")
         }
+        .defaultSize(width: 960, height: 720)
         .handlesExternalEvents(matching: [])
         .defaultSize(width: 720, height: 640)
 

@@ -5,7 +5,7 @@
 **Updated:** 2026-11-03
 
 **Now:**
-- nothing in progress; 0.4.0 is out (build 458)
+- branch `feat/help`: new help window (topics, animated pictures, steps) and the same help on the site in 13 languages, PR open
 
 **Next:**
 - Oleh tries «Раскладка» in his own apps; next beta with fixes: `scripts/release.sh 0.5.0-beta.1 --publish`
@@ -13,12 +13,19 @@
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/SPEC-windows.md §9, stage 2–3 leftovers)
 
 **Needs Oleh:**
+- look at the new help (panel → «?», and site/help.html once the PR is merged and Pages deploys); merge the PR
 - look at the new Settings and say what to change next
 - MacBook Air: update to 0.4.0 through Sparkle (Settings → General → Updates) and check the island at the real notch
 - «Раскладка» is on and has Accessibility on this Mac: try it in Telegram, Chrome, Safari, Notes; ⌥⇧ on a selection is not tried yet
 - the beta channel exists now (release `beta`, points to 0.4.0): say when the next beta goes out
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-03 — help: new window and a site page (branch `feat/help`)
+
+Done: Oleh asked for a modern help with animation and pictures, in the app and on the site (docs/SPEC-help.md). The help window is rebuilt: 15 topics in five sections with search (first match opens, matching cards highlighted), each page with a big icon, «Открыть в настройках», an animated picture drawn from the app's own pieces (the real menu bar renderer, module icons; Reduce Motion — still last frame, «Показать ещё раз»), «Как начать» steps and «Что умеет» cards; readiness on «Начало», feedback under the topics. Old help texts that are still true kept their wording and translations; 87 new strings translated into 12 languages by a separate agent with the catalog as glossary. `AIHubBar --help-export <file>` writes the help as JSON in the process language; `scripts/export-help.sh` writes `site/help/<language>.json` for all 13. `site/help.html` renders them with CSS-animated scenes (language picker, browser language by default, RTL for Arabic, reduced motion, compact contents on phones); «Help» link in the site's header.
+Checked: `xcodebuild test` 389 green (new HelpTests). Help window seen on this Mac (screenshots of 6 topics mid-animation). Site checked in the built-in browser via the `site` preview: ru, en, ar (RTL), phone width; no console errors; no Cyrillic in the 11 non-Slavic JSON files.
+Left: the site page goes live after merge (Pages workflow). Translations are machine-made and not reviewed by native speakers.
 
 ## 2026-11-03 — release 0.4.0 (branch `chore/status-release-0.4.0`)
 

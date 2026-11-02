@@ -1,0 +1,617 @@
+{
+  "labels" : {
+    "beta" : "Beta",
+    "help" : "Hilfe",
+    "replay" : "Noch einmal zeigen",
+    "scripts" : "Skriptbefehle werden so aufgerufen: ~/Applications/AI\\ Hub\\ Bar.app/Contents/MacOS/AIHubBar --sessions",
+    "search" : "Hilfe durchsuchen",
+    "start" : "So beginnen Sie"
+  },
+  "language" : "de",
+  "topics" : [
+    {
+      "beta" : false,
+      "group" : "Grundlagen",
+      "id" : "start",
+      "sections" : [
+        {
+          "facts" : [
+            {
+              "detail" : "Projekte im offenen Panel aktualisieren.",
+              "name" : "⌘R"
+            },
+            {
+              "detail" : "Einstellungen.",
+              "name" : "⌘,"
+            },
+            {
+              "detail" : "AI Hub Bar beenden.",
+              "name" : "⌘Q"
+            },
+            {
+              "detail" : "Sind mehrere Profile aktiv, steht oben im Panel ein Umschalter. Profile werden unter Einstellungen → „Profile“ eingerichtet; alle Einstellungen lassen sich in eine .claudepult-Datei speichern (Allgemein → „Einstellungen exportieren…“); ein Doppelklick auf eine solche Datei importiert sie.",
+              "name" : "Profile"
+            }
+          ],
+          "monospaced" : false,
+          "title" : "Was es kann"
+        }
+      ],
+      "steps" : [
+        "Klicken Sie in der Menüleiste auf ✦ — das Panel öffnet sich.",
+        "Legen Sie ein Profil an: Einstellungen → „Profile“ → „+“ → „Assistent…“.",
+        "Behalten Sie auf der Seite „Module“ nur, was Sie brauchen — der Rest wird samt Hintergrundarbeit ausgeschaltet.",
+        "Stellen Sie unter „Menüleiste“ zusammen, was neben dem Symbol erscheint."
+      ],
+      "summary" : "AI Hub Bar hält KI-Limits, Agentensitzungen und Ihre Projekte griffbereit — in der Menüleiste des Mac, mit einem Klick.",
+      "title" : "Erste Schritte"
+    },
+    {
+      "beta" : false,
+      "group" : "Grundlagen",
+      "id" : "menuBar",
+      "sections" : [
+        {
+          "facts" : [
+            {
+              "detail" : "Klick — das Panel. Roter Punkt: ein Projekt ist „rot“. ✋ mit Zahl: wie viele Claude-Sitzungen auf eine Antwort warten.",
+              "name" : "✦"
+            },
+            {
+              "detail" : "Anteil der 5-Stunden-Sitzung und der Woche — als Zahl, Ring oder Balken (Einstellungen → „Menüleiste“): grün unter 50 %, orange unter 80 %, rot darüber.",
+              "name" : "Neben dem Symbol"
+            },
+            {
+              "detail" : "Leerzeichen, breites Leerzeichen, „·“, „|“, dünne Linie, „/“, „›“ und „Neue Gruppe“ — beliebig oft. Sie sind nur sichtbar, wenn auf beiden Seiten etwas angezeigt wird.",
+              "name" : "Trenner"
+            },
+            {
+              "detail" : "Elemente zwischen „Neue Gruppe“ werden auf einem gemeinsamen abgerundeten Hintergrund dargestellt.",
+              "name" : "Kapseln nach Gruppen"
+            },
+            {
+              "detail" : "Wechseln Sie das Profil, wechselt auch die Menüleiste.",
+              "name" : "Jedes Profil hat seine eigene"
+            }
+          ],
+          "monospaced" : false,
+          "title" : "Was es kann"
+        }
+      ],
+      "steps" : [
+        "Öffnen Sie Einstellungen → „Menüleiste“.",
+        "Klicken Sie auf ein Element unter „Reihenfolge“ — dann erscheinen seine Einstellungen: Zahl, Ring oder Balken, Schwelle.",
+        "Ziehen Sie einen Trenner auf ein Element — er landet direkt dahinter. Ohne Maus — „Weiter links“ und „Weiter rechts“."
+      ],
+      "summary" : "Symbol und Zahlen neben der Uhr: Limits, wartende Sitzungen, Probleme in Projekten — alles, was Sie dort platzieren.",
+      "title" : "Menüleiste"
+    },
+    {
+      "beta" : false,
+      "group" : "Grundlagen",
+      "id" : "panel",
+      "sections" : [
+        {
+          "facts" : [
+            {
+              "detail" : "Das Feld oben im Panel durchsucht Projekte, Sitzungen, Befehle und eigene Prompts. Per Tastatur öffnen — Tastenkürzel unter „Allgemein“.",
+              "name" : "Suchen"
+            },
+            {
+              "detail" : "Ein Klick auf den Titel eines Blocks klappt ihn zu; das Panel merkt sich das.",
+              "name" : "Block zuklappen"
+            },
+            {
+              "detail" : "Design, Glashintergrund, Textgröße, Breite und Dichte — Einstellungen → „Darstellung“.",
+              "name" : "Darstellung"
+            }
+          ],
+          "monospaced" : false,
+          "title" : "Was es kann"
+        }
+      ],
+      "steps" : [
+        "Öffnen Sie Einstellungen → „Panel“.",
+        "Ziehen Sie einen Block auf einen anderen oder klicken Sie auf ⌃ / ⌄.",
+        "Rechts sehen Sie, wie das Panel gerade aussieht."
+      ],
+      "summary" : "Das Panel öffnet sich per Klick auf ✦: die Modulblöcke des aktuellen Profils von oben nach unten und die Suche.",
+      "title" : "Panel"
+    },
+    {
+      "beta" : false,
+      "group" : "Grundlagen",
+      "id" : "modules",
+      "sections" : [
+        {
+          "facts" : [
+            {
+              "detail" : "Ein ausgeschaltetes Modul läuft nicht im Hintergrund, erscheint weder im Panel noch in der Menüleiste und sendet keine Mitteilungen. Seine Einstellungen und sein Platz in den Profilen bleiben erhalten.",
+              "name" : "Schalter"
+            },
+            {
+              "detail" : "Chips auf der Modulseite: Panel, Menüleiste, Insel, Mitteilungen, Telegram.",
+              "name" : "Wo anzeigen"
+            }
+          ],
+          "monospaced" : false,
+          "title" : "Was es kann"
+        },
+        {
+          "facts" : [
+            {
+              "detail" : "Einstellungen → „Profile“ → „+“ → „Assistent…“: ein Profil Schritt für Schritt — Vorlage, Ordner, Phasen, Kennzahlen, Kalender, KI-Dienst, Befehle, Rechte, Panel-Blöcke, Menüleiste, Name. Rechts — wie es aussehen wird.",
+              "name" : "Assistent"
+            },
+            {
+              "detail" : "Einstellungen → „Profile“ → „+“: „Entwickler (GitHub)“, „Video“, „Texte“, „Recherche“, „Social Media“, „Eigener“. Ordner wählen — das Profil ist fertig; alles Weitere in seinen Einstellungen.",
+              "name" : "Profil hinzufügen"
+            }
+          ],
+          "monospaced" : false,
+          "title" : "Profile"
+        }
+      ],
+      "steps" : [
+        "Einstellungen → „Module“: Aktivieren Sie ein Set („Nur KI“, „Mac-Werkzeuge“, „Alles“) oder einzelne Kacheln.",
+        "Ein Klick auf eine Kachel öffnet die Modulseite: Schalter, „Wo anzeigen“ und alle Einstellungen."
+      ],
+      "summary" : "Ein Modul ist eine Funktion von AI Hub Bar. Das Profil bestimmt, welche Module im Panel erscheinen und in welcher Reihenfolge.",
+      "title" : "Module und Profile"
+    },
+    {
+      "beta" : false,
+      "group" : "AI",
+      "id" : "limits",
+      "sections" : [
+        {
+          "facts" : [
+            {
+              "detail" : "Die Sitzung mit Countdown bis zur Zurücksetzung und Prognose nach dem Tempo der letzten 30 min, die Woche, Wochen nach Modell, Extra usage.",
+              "name" : "Block „Limits“"
+            },
+            {
+              "detail" : "Codex, Copilot, Gemini, Cursor und API-Verbrauch — als dieselben Karten wie Claude.",
+              "name" : "Andere KI"
+            },
+            {
+              "detail" : "Eine Schätzung aus den Protokollen von Claude Code: Anteile der Projekte und die teuerste Sitzung für die Sitzung, heute, die Woche.",
+              "name" : "Verbrauch nach Projekt"
+            },
+            {
+              "detail" : "Einmal pro Fenster bei 50/80/95 Prozent (Schwellen in den Einstellungen) und wenn das Limit zurück ist; auf Wunsch auch an Telegram.",
+              "name" : "Mitteilungen"
+            },
+            {
+              "detail" : "„Claude-Limits“ für den Schreibtisch: Rechtsklick auf den Schreibtisch → „Widgets bearbeiten…“ → AI Hub Bar. Klein — der Sitzungsring, mittel — Sitzung und Woche.",
+              "name" : "Widget"
+            },
+            {
+              "detail" : "Ist die Sitzung zu mehr als 90 Prozent verbraucht, fragt eine Hintergrundaufgabe: jetzt starten oder nach der Zurücksetzung.",
+              "name" : "Hintergrund und Limit"
+            }
+          ],
+          "monospaced" : false,
+          "title" : "Was es kann"
+        }
+      ],
+      "steps" : [
+        "Schwellen für Mitteilungen — auf der Seite „KI-Limits“.",
+        "Andere KIs verbinden Sie unter „KI-Dienste“: per Anmeldung in ihrer CLI oder mit einem API-Schlüssel."
+      ],
+      "summary" : "Wie viel von der 5-Stunden-Sitzung und der Woche Ihres Claude-Abos übrig ist — und von den Limits anderer KIs.",
+      "title" : "KI-Limits"
+    },
+    {
+      "beta" : false,
+      "group" : "AI",
+      "id" : "sessions",
+      "sections" : [
+        {
+          "facts" : [
+            {
+              "detail" : "Alle Sitzungen auf diesem Mac — im Terminal, in der Claude-App, im Hintergrund: Projekt, Worktree, Aufgabe, Dauer, Zustand (arbeitet, Hintergrund, wartet, fertig, Fehler, beendet). Wartende Sitzungen werden hervorgehoben und gemeldet.",
+              "name" : "Liste"
+            },
+            {
+              "detail" : "„Erlauben“ und „Ablehnen“ — in der Mitteilung, in der Sitzungszeile, auf der Insel und, falls aktiviert, in Telegram. Es gilt die Antwort, die zuerst eintrifft.",
+              "name" : "Berechtigungen"
+            },
+            {
+              "detail" : "Den Terminal-Tab dieser Sitzung nach vorne holen; bei Sitzungen der Claude-App diese Sitzung in Claude öffnen, sonst den Ordner.",
+              "name" : "Zeigen"
+            },
+            {
+              "detail" : "Wo ausführen: ein Terminal-Fenster (Sie können Claude antworten) oder claude -p ohne Fenster (nur erlaubte Aktionen, Zeitlimit, Ergebnis als Mitteilung und an Telegram). „Merken“ oder eine Voreinstellung in den Einstellungen.",
+              "name" : "Terminal / Hintergrund"
+            },
+            {
+              "detail" : "Hintergrundaufgabe: was Claude tut, Schritt für Schritt.",
+              "name" : "Protokoll"
+            },
+            {
+              "detail" : "Hintergrundaufgabe: jetzt stoppen.",
+              "name" : "Stoppen"
+            },
+            {
+              "detail" : "Sitzungen sind nur sichtbar, wenn in den Einstellungen Hooks installiert sind (sie werden in ~/.claude/settings.json ergänzt; daneben bleibt eine Kopie).",
+              "name" : "Hooks"
+            }
+          ],
+          "monospaced" : false,
+          "title" : "Was es kann"
+        }
+      ],
+      "steps" : [
+        "Installieren Sie die hooks: Seite „Agentensitzungen“ → Hooks.",
+        "Beantworten Sie Berechtigungsanfragen direkt in der Mitteilung oder in der Sitzungszeile."
+      ],
+      "summary" : "Alle Claude-Code-Sitzungen auf diesem Mac: was sie tun, welche auf eine Antwort warten, Hintergrundaufgaben und die Warteschlange.",
+      "title" : "Agentensitzungen"
+    },
+    {
+      "beta" : false,
+      "group" : "AI",
+      "id" : "services",
+      "sections" : [
+        {
+          "facts" : [
+            {
+              "detail" : "Codex CLI, Gemini CLI, Antigravity, Copilot CLI, Cursor CLI — AI Hub Bar findet die installierten (Einstellungen → „KI-Dienste“) und öffnet sie im Terminal im Projektordner: „Öffnen in…“ im Claude-Block eines Projekts. Jeder hat seine eigene Anmeldung.",
+              "name" : "Agenten"
+            },
+            {
+              "detail" : "Anthropic, OpenAI, Google, xAI, DeepSeek, Mistral und jeder OpenAI-kompatible Server (Ollama, LM Studio, OpenRouter). Der Schlüssel liegt nur im macOS-Schlüsselbund; „Prüfen“ verbraucht keine Tokens.",
+              "name" : "Modelle per API"
+            },
+            {
+              "detail" : "Einstellungen → „Profile“ → „Standarddienst“: er führt die Befehle des Profils aus.",
+              "name" : "Dienst des Profils"
+            }
+          ],
+          "monospaced" : false,
+          "title" : "Was es kann"
+        }
+      ],
+      "steps" : [
+        "Einstellungen → „KI-Dienste“: Ein grüner Punkt bedeutet, dass der Dienst gefunden oder eingerichtet ist."
+      ],
+      "summary" : "Agenten und Modelle, die AI Hub Bar findet und startet: Claude Code, Codex, Gemini, Copilot, Cursor und Modelle per API.",
+      "title" : "KI-Dienste"
+    },
+    {
+      "beta" : false,
+      "group" : "Arbeit",
+      "id" : "projects",
+      "sections" : [
+        {
+          "facts" : [
+            {
+              "detail" : "Statuspunkt, Branch, nicht committete Dateien, offene PRs (Farbe — CI), letzte Aktivität.",
+              "name" : "Zeile"
+            },
+            {
+              "detail" : "Claude nimmt den ersten Next-Punkt und erledigt ihn nach den Regeln von ~/Projects/CLAUDE.md: Branch, Prüfungen, PR, STATUS.",
+              "name" : "Nächster Schritt"
+            },
+            {
+              "detail" : "Claude führt Ihren Text nach denselben Regeln aus.",
+              "name" : "Eigene Aufgabe…"
+            },
+            {
+              "detail" : "Claude bringt die laufende Arbeit im Ordner zu Ende: Prüfungen, Commit, Push, PR, STATUS — ohne neuen Code.",
+              "name" : "Abschließen"
+            },
+            {
+              "detail" : "Wenn Claude schon im Projekt arbeitet, geht eine neue Aufgabe in einen eigenen Worktree .claude/worktrees/cb-… auf einem neuen Branch von origin/main.",
+              "name" : "Ordner belegt"
+            },
+            {
+              "detail" : "Den Projektordner oder das Repository öffnen.",
+              "name" : "Terminal · Finder · GitHub"
+            }
+          ],
+          "monospaced" : false,
+          "title" : "Git-Repositorys"
+        },
+        {
+          "facts" : [
+            {
+              "detail" : "Einstellungen → „Profile“ → „Quelle“: jeder Ordner im Projektordner ist ein Projekt (ein Video, ein Artikel, ein Thema).",
+              "name" : "Quelle „Ordner“"
+            },
+            {
+              "detail" : "Die Projektkarte ist reiner Text: „Phase: Skript“, „Frist: 2026-11-05“, „Veröffentlichung: 2026-11-05 18:00“, „Format: …“, „Hauptdatei: skript.md“, „Plattform: YouTube“. Sie lässt sich jederzeit von Hand bearbeiten.",
+              "name" : "projekt.md"
+            },
+            {
+              "detail" : "In einem aufgeklappten Projekt: die Befehle des Profils und „Eigene Aufgabe“. Das Ergebnis ist immer eine neue Datei im Projektordner. Ein Modell per API bekommt den Text der Hauptdatei; Claude arbeitet im Hintergrund mit den Rechten des Profils („nur Dateien“ — kein Terminal, kein Internet); andere Agenten öffnen sich im Terminal, die Aufgabe liegt in der Zwischenablage.",
+              "name" : "Befehle"
+            },
+            {
+              "detail" : "Schalten Sie „Vergleichen“ ein, wählen Sie 2–3 Dienste und einen Befehl: Die Ergebnisse liegen nebeneinander („hooks (Claude).md“, „hooks (OpenAI).md“) und öffnen sich im Fenster „Vergleich“.",
+              "name" : "Vergleichen"
+            },
+            {
+              "detail" : "Die Phasen des Profils, durch Kommas getrennt; die Phase wechselt per Taste im aufgeklappten Projekt. Wörter, Dauer, Lesezeit und Seiten werden in der Hauptdatei gezählt (.md, .txt, .rtf, .docx).",
+              "name" : "Phasen und Kennzahlen"
+            }
+          ],
+          "monospaced" : false,
+          "title" : "Ordner-Projekte"
+        }
+      ],
+      "steps" : [
+        "Einstellungen → „Profile“ → Profil → „Quelle“: der Ordner mit den Projekten."
+      ],
+      "summary" : "Die Projekte des Profils: Git-Repositorys oder Arbeitsordner — Status, PRs, Phasen und KI-Befehle.",
+      "title" : "Projekte"
+    },
+    {
+      "beta" : false,
+      "group" : "Arbeit",
+      "id" : "calendar",
+      "sections" : [
+        {
+          "facts" : [
+            {
+              "detail" : "Fristen und Veröffentlichungen aus projekt.md, Zeilen aus inhaltsplan.md — für Profile mit eingeschaltetem Kalender (Einstellungen → „Profile“).",
+              "name" : "Inhalt"
+            },
+            {
+              "detail" : "Ein Panel-Block: 7 Tage voraus, Überfälliges in Rot; ein Klick öffnet das Projekt oder die Datei.",
+              "name" : "Demnächst"
+            },
+            {
+              "detail" : "Monat oder Woche. Ziehen Sie einen Eintrag auf einen anderen Tag — das Datum wird in seiner Datei umgeschrieben. Doppelklick auf einen Tag — ein neuer Eintrag.",
+              "name" : "Fenster „Kalender“"
+            },
+            {
+              "detail" : "Auf der Seite des Moduls „Demnächst“: wie lange vorher erinnert wird und ob auch an Telegram gesendet wird.",
+              "name" : "Erinnerungen"
+            }
+          ],
+          "monospaced" : false,
+          "title" : "Was es kann"
+        }
+      ],
+      "steps" : [
+        "Aktivieren Sie den Kalender im Profil — oder mit der Taste „Im Profil einschalten“ auf der Kachel „Demnächst“."
+      ],
+      "summary" : "Deadlines und Veröffentlichungen aus Projektkarten und dem Content-Plan — eine Woche im Voraus und im Fenster „Kalender“.",
+      "title" : "Demnächst und Kalender"
+    },
+    {
+      "beta" : false,
+      "group" : "Arbeit",
+      "id" : "reports",
+      "sections" : [
+        {
+          "facts" : [
+            {
+              "detail" : "Bericht mit KI-Zusammenfassung der letzten 24 h an Telegram (1–3 min).",
+              "name" : "Bericht jetzt"
+            },
+            {
+              "detail" : "Zusammenfassung ohne KI der letzten 24 h an Telegram.",
+              "name" : "Kurzübersicht"
+            },
+            {
+              "detail" : "_daily-report/reports/latest.html öffnen.",
+              "name" : "Letzter Bericht"
+            },
+            {
+              "detail" : "Zeigen, was die Build-Bereinigung löschen würde, ohne etwas anzufassen.",
+              "name" : "Bereinigung: prüfen"
+            },
+            {
+              "detail" : "Builds und Caches löschen, Simulatoren zurücksetzen (mit Bestätigung).",
+              "name" : "Bereinigung: ausführen"
+            }
+          ],
+          "monospaced" : false,
+          "title" : "Was es kann"
+        }
+      ],
+      "steps" : [
+
+      ],
+      "summary" : "_daily-report-Befehle: Bericht, Kurzübersicht, Build-Bereinigung.",
+      "title" : "_daily-report-Berichte"
+    },
+    {
+      "beta" : false,
+      "group" : "Mac",
+      "id" : "notch",
+      "sections" : [
+        {
+          "facts" : [
+            {
+              "detail" : "Links und rechts der Notch — Limit und Sitzungen; was genau, wählen Sie auf der Modulseite.",
+              "name" : "Ohren"
+            },
+            {
+              "detail" : "Bewegen Sie den Zeiger auf die Notch — es öffnet sich eine Karte mit Limits und dem, was Claude gerade tut.",
+              "name" : "Karte"
+            },
+            {
+              "detail" : "Eine Berechtigungsanfrage erscheint auf der Insel mit „Erlauben“ und „Ablehnen“; ⌃⌥Y / ⌃⌥N per Tastatur, falls aktiviert.",
+              "name" : "Anfragen"
+            },
+            {
+              "detail" : "Ziehen Sie eine Datei auf die Insel — die KI-Befehle des Profils dafür öffnen sich.",
+              "name" : "Datei auf die Insel"
+            },
+            {
+              "detail" : "Auf Bildschirmen ohne Notch — eine Pille oben in der Mitte.",
+              "name" : "Ohne Notch"
+            }
+          ],
+          "monospaced" : false,
+          "title" : "Was es kann"
+        }
+      ],
+      "steps" : [
+        "Aktivieren Sie „Notch-Insel“ auf der Seite „Module“."
+      ],
+      "summary" : "Eine schwarze Insel um die Notch des MacBook: Limit und Sitzungen daneben, beim Darüberfahren eine Karte mit Limits und dem, was Claude gerade tut.",
+      "title" : "Notch-Insel"
+    },
+    {
+      "beta" : true,
+      "group" : "Mac",
+      "id" : "layout",
+      "sections" : [
+        {
+          "facts" : [
+            {
+              "detail" : "Ein Wort im falschen Layout wird nach dem Leerzeichen korrigiert, und das Layout wechselt.",
+              "name" : "Automatisch"
+            },
+            {
+              "detail" : "Wandelt das letzte Wort um oder macht eine falsche Korrektur rückgängig — und merkt sich das Wort.",
+              "name" : "Zweimal Shift"
+            },
+            {
+              "detail" : "Wandelt den markierten Text ins andere Layout um.",
+              "name" : "⌥⇧"
+            },
+            {
+              "detail" : "Benötigt „Bedienungshilfen“: Das Modul fragt selbst danach und zeigt, wo Sie es einschalten.",
+              "name" : "Zugriff"
+            }
+          ],
+          "monospaced" : false,
+          "title" : "Was es kann"
+        }
+      ],
+      "steps" : [
+        "Aktivieren Sie „Beta-Versionen“ unter „Allgemein“, dann „Tastaturlayout“ auf der Seite „Module“."
+      ],
+      "summary" : "Ein Wort im falschen Tastaturlayout wird von selbst im richtigen neu geschrieben, und das Layout wechselt. Zweimal Shift – das letzte Wort, ⌥⇧ – der markierte Text. Die Sprache steht in der Menüleiste.",
+      "title" : "Tastaturlayout"
+    },
+    {
+      "beta" : false,
+      "group" : "Mac",
+      "id" : "utilities",
+      "sections" : [
+        {
+          "facts" : [
+            {
+              "detail" : "Prozessor, Speicher, Festplatte, Netzwerk, Akku und die hungrigsten Apps; Hinweise zu Last, Speicher, Platz und Akku.",
+              "name" : "Mac-Ressourcen"
+            },
+            {
+              "detail" : "Der Mac bleibt wach, solange Claude arbeitet, für eine Zeit, am Netz oder mit Monitor, oder solange gewählte Apps offen sind.",
+              "name" : "Wach bleiben"
+            },
+            {
+              "detail" : "Dunkelmodus, Schreibtischsymbole, Bildschirm sperren und ausschalten, Laufwerke auswerfen, Papierkorb — mit einem Klick.",
+              "name" : "Schnellschalter"
+            },
+            {
+              "detail" : "Letzte Kopien: suchen, anheften, mit einem Klick zurück in die Zwischenablage. Passwörter aus Passwortmanagern werden nicht gespeichert.",
+              "name" : "Zwischenablage-Verlauf"
+            },
+            {
+              "detail" : "Markdown-Notizen direkt im Panel: Tabs über normale .md-Dateien in einem Ordner, den jeder Editor öffnet.",
+              "name" : "Notizen"
+            },
+            {
+              "detail" : "Eigene Tasten: ein Skript im Hintergrund oder im Terminal, ein macOS-„Kurzbefehle“-Kurzbefehl, ein Link, eine Datei, ein Ordner oder eine App.",
+              "name" : "Schnellbefehle"
+            }
+          ],
+          "monospaced" : false,
+          "title" : "Was es kann"
+        }
+      ],
+      "steps" : [
+
+      ],
+      "summary" : "Mac-Ressourcen, „Wach bleiben“, Schnellschalter, Zwischenablage-Verlauf, Notizen und eigene Befehle — jedes wird einzeln eingeschaltet.",
+      "title" : "Mac-Werkzeuge"
+    },
+    {
+      "beta" : false,
+      "group" : "Mehr",
+      "id" : "alerts",
+      "sections" : [
+        {
+          "facts" : [
+            {
+              "detail" : "Jede Modulseite hat „Wie oft benachrichtigen“: jedes Mal, höchstens alle 15 Min., stündlich, täglich oder nie.",
+              "name" : "Wie oft"
+            },
+            {
+              "detail" : "Der Bot — unter „Allgemein“ → Telegram. Was weitergeleitet wird, legen Sie mit dem Chip „Telegram“ auf der Modulseite fest.",
+              "name" : "Telegram"
+            },
+            {
+              "detail" : "Berechtigungsanfragen von Claude können Sie mit Tasten in Telegram annehmen oder ablehnen — ein eigener Bot, Seite „Agentensitzungen“.",
+              "name" : "Antworten aus Telegram"
+            },
+            {
+              "detail" : "Führt zur Sitzung, zum PR, zum Protokoll oder zum Bericht.",
+              "name" : "Klick auf eine Mitteilung"
+            }
+          ],
+          "monospaced" : false,
+          "title" : "Was es kann"
+        }
+      ],
+      "steps" : [
+
+      ],
+      "summary" : "Was als macOS-Mitteilung und in Telegram ankommt — und wie oft.",
+      "title" : "Mitteilungen und Telegram"
+    },
+    {
+      "beta" : false,
+      "group" : "Mehr",
+      "id" : "commandLine",
+      "sections" : [
+        {
+          "facts" : [
+            {
+              "detail" : "Einen Claude-Befehl ausführen (--background — im Hintergrund, --print — nur anzeigen).",
+              "name" : "--claude next|task|finish <Ordner>"
+            },
+            {
+              "detail" : "Gemeinsamer Befehl.",
+              "name" : "--command report|summary|cleanup-check|cleanup"
+            },
+            {
+              "detail" : "Liste der Sitzungen; einen Terminal-Tab zeigen.",
+              "name" : "--sessions · --show-session <id>"
+            },
+            {
+              "detail" : "Sitzungs-Hooks.",
+              "name" : "--hooks status|install|uninstall"
+            },
+            {
+              "detail" : "Beim Anmelden starten.",
+              "name" : "--login-item status|on|off"
+            },
+            {
+              "detail" : "Zugriffsregeln der Hintergrundaufgaben.",
+              "name" : "--background-settings"
+            },
+            {
+              "detail" : "Abo-Limits; Verbrauch nach Projekt.",
+              "name" : "--usage · --token-usage"
+            }
+          ],
+          "monospaced" : true,
+          "title" : "Was es kann"
+        }
+      ],
+      "steps" : [
+
+      ],
+      "summary" : "AI Hub Bar antwortet auch im Terminal — für Skripte und Automationen.",
+      "title" : "Für Skripte"
+    }
+  ]
+}

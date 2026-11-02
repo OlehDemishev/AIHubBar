@@ -1,0 +1,617 @@
+{
+  "labels" : {
+    "beta" : "beta",
+    "help" : "Bantuan",
+    "replay" : "Tampilkan lagi",
+    "scripts" : "Perintah skrip dipanggil seperti ini: ~/Applications/AI\\ Hub\\ Bar.app/Contents/MacOS/AIHubBar --sessions",
+    "search" : "Cari di bantuan",
+    "start" : "Cara memulai"
+  },
+  "language" : "id",
+  "topics" : [
+    {
+      "beta" : false,
+      "group" : "Dasar-dasar",
+      "id" : "start",
+      "sections" : [
+        {
+          "facts" : [
+            {
+              "detail" : "Segarkan proyek saat panel terbuka.",
+              "name" : "⌘R"
+            },
+            {
+              "detail" : "Pengaturan.",
+              "name" : "⌘,"
+            },
+            {
+              "detail" : "Keluar dari AI Hub Bar.",
+              "name" : "⌘Q"
+            },
+            {
+              "detail" : "Jika lebih dari satu profil aktif, ada pengalih di atas panel. Profil diatur di Pengaturan → «Profil»; semua pengaturan bisa disimpan ke berkas .claudepult (Umum → «Ekspor Pengaturan…»); klik dua kali berkas itu untuk mengimpornya.",
+              "name" : "Profil"
+            }
+          ],
+          "monospaced" : false,
+          "title" : "Yang bisa dilakukan"
+        }
+      ],
+      "steps" : [
+        "Klik ✦ di bar menu — panel akan terbuka.",
+        "Buat profil: Pengaturan → «Profil» → «+» → «Asisten…».",
+        "Di halaman «Modul», sisakan yang diperlukan saja — sisanya mati bersama pekerjaan latar belakangnya.",
+        "Di «Bar Menu», pilih apa yang tampil di samping ikon."
+      ],
+      "summary" : "AI Hub Bar menjaga batas AI, sesi agen, dan proyek Anda tetap dekat — di bar menu Mac, cukup sekali klik.",
+      "title" : "Memulai"
+    },
+    {
+      "beta" : false,
+      "group" : "Dasar-dasar",
+      "id" : "menuBar",
+      "sections" : [
+        {
+          "facts" : [
+            {
+              "detail" : "Klik — panel. Titik merah: ada proyek yang «merah». ✋ dengan angka: berapa sesi Claude menunggu jawaban.",
+              "name" : "✦"
+            },
+            {
+              "detail" : "Pemakaian sesi 5 jam dan minggu — sebagai angka, cincin, atau bilah (Pengaturan → «Bar Menu»): hijau di bawah 50 %, oranye di bawah 80 %, merah di atasnya.",
+              "name" : "Di samping ikon"
+            },
+            {
+              "detail" : "Spasi, spasi lebar, «·», «|», garis tipis, «/», «›», dan «Grup baru» — sebanyak yang Anda mau. Hanya tampil jika di kedua sisinya ada yang ditampilkan.",
+              "name" : "Pemisah"
+            },
+            {
+              "detail" : "Elemen di antara «Grup baru» digambar di atas latar bersama yang membulat.",
+              "name" : "Kapsul per grup"
+            },
+            {
+              "detail" : "Ganti profil — bar menu ikut berganti.",
+              "name" : "Tiap profil punya sendiri"
+            }
+          ],
+          "monospaced" : false,
+          "title" : "Yang bisa dilakukan"
+        }
+      ],
+      "steps" : [
+        "Buka Pengaturan → «Bar Menu».",
+        "Klik elemen di «Urutan» — pengaturannya akan muncul: angka, cincin atau bilah, ambang.",
+        "Seret pemisah ke elemen — pemisah akan berada tepat setelahnya. Tanpa mouse — «Lebih ke kiri» dan «Lebih ke kanan»."
+      ],
+      "summary" : "Ikon dan angka di samping jam: batas, sesi yang menunggu jawaban, masalah proyek — apa pun yang Anda taruh di sana.",
+      "title" : "Bar Menu"
+    },
+    {
+      "beta" : false,
+      "group" : "Dasar-dasar",
+      "id" : "panel",
+      "sections" : [
+        {
+          "facts" : [
+            {
+              "detail" : "Kolom di atas panel mencari proyek, sesi, perintah, dan prompt Anda sendiri. Untuk membukanya dari keyboard — pintasan di «Umum».",
+              "name" : "Cari"
+            },
+            {
+              "detail" : "Klik judul blok untuk menciutkannya; panel mengingatnya.",
+              "name" : "Ciutkan blok"
+            },
+            {
+              "detail" : "Tema, latar kaca, ukuran teks, lebar, dan kerapatan — Pengaturan → «Tampilan».",
+              "name" : "Tampilan"
+            }
+          ],
+          "monospaced" : false,
+          "title" : "Yang bisa dilakukan"
+        }
+      ],
+      "steps" : [
+        "Buka Pengaturan → «Panel».",
+        "Seret blok ke blok lain atau klik ⌃ / ⌄.",
+        "Di kanan terlihat tampilan panel saat ini."
+      ],
+      "summary" : "Panel terbuka dengan klik ✦: blok modul profil saat ini dari atas ke bawah, dan pencarian.",
+      "title" : "Panel"
+    },
+    {
+      "beta" : false,
+      "group" : "Dasar-dasar",
+      "id" : "modules",
+      "sections" : [
+        {
+          "facts" : [
+            {
+              "detail" : "Modul yang dimatikan tidak berjalan di latar belakang, tidak tampil di panel dan bar menu, dan tidak mengirim pemberitahuan. Pengaturan dan tempatnya di profil tetap tersimpan.",
+              "name" : "Sakelar"
+            },
+            {
+              "detail" : "Chip di halaman modul: panel, bar menu, pulau, pemberitahuan, Telegram.",
+              "name" : "Tampilkan di"
+            }
+          ],
+          "monospaced" : false,
+          "title" : "Yang bisa dilakukan"
+        },
+        {
+          "facts" : [
+            {
+              "detail" : "Pengaturan → «Profil» → «+» → «Asisten…»: profil langkah demi langkah — templat, folder, tahap, metrik, kalender, layanan AI, perintah, izin, blok panel, bar menu, nama. Di kanan — tampilannya nanti.",
+              "name" : "Asisten"
+            },
+            {
+              "detail" : "Pengaturan → «Profil» → «+»: «Developer (GitHub)», «Video», «Tulisan», «Riset», «Media sosial», «Kustom». Pilih folder — profil siap; sisanya diubah di pengaturannya.",
+              "name" : "Tambah profil"
+            }
+          ],
+          "monospaced" : false,
+          "title" : "Profil"
+        }
+      ],
+      "steps" : [
+        "Pengaturan → «Modul»: nyalakan satu set («Hanya AI», «Utilitas Mac», «Semua») atau ubin satu per satu.",
+        "Klik ubin untuk membuka halaman modul: sakelar, «Tampilkan di», dan semua pengaturannya."
+      ],
+      "summary" : "Modul adalah satu fitur AI Hub Bar. Profil menentukan modul mana yang tampil di panel dan urutannya.",
+      "title" : "Modul dan profil"
+    },
+    {
+      "beta" : false,
+      "group" : "AI",
+      "id" : "limits",
+      "sections" : [
+        {
+          "facts" : [
+            {
+              "detail" : "Sesi dengan hitung mundur ke reset dan prakiraan berdasarkan laju 30 mnt terakhir, minggu, minggu per model, extra usage.",
+              "name" : "Blok «Batas»"
+            },
+            {
+              "detail" : "Codex, Copilot, Gemini, Cursor, dan pemakaian API — dalam kartu yang sama seperti Claude.",
+              "name" : "AI lain"
+            },
+            {
+              "detail" : "Perkiraan dari log Claude Code: porsi proyek dan sesi paling mahal untuk sesi, hari ini, minggu ini.",
+              "name" : "Pemakaian per proyek"
+            },
+            {
+              "detail" : "Sekali per jendela pada 50/80/95 persen (ambang di Pengaturan) dan saat batas kembali; bila mau, juga ke Telegram.",
+              "name" : "Pemberitahuan"
+            },
+            {
+              "detail" : "«Batas Claude» untuk desktop: klik kanan desktop → «Edit Widget…» → AI Hub Bar. Kecil — cincin sesi, sedang — sesi dan minggu.",
+              "name" : "Widget"
+            },
+            {
+              "detail" : "Jika sesi terpakai lebih dari 90 persen, tugas latar belakang bertanya: mulai sekarang atau setelah reset.",
+              "name" : "Latar belakang dan batas"
+            }
+          ],
+          "monospaced" : false,
+          "title" : "Yang bisa dilakukan"
+        }
+      ],
+      "steps" : [
+        "Ambang pemberitahuan — di halaman «Batas AI».",
+        "AI lain dihubungkan di «Layanan AI»: masuk ke CLI-nya atau dengan kunci API."
+      ],
+      "summary" : "Berapa sisa sesi 5 jam dan minggu langganan Claude — juga sisa batas AI lain.",
+      "title" : "Batas AI"
+    },
+    {
+      "beta" : false,
+      "group" : "AI",
+      "id" : "sessions",
+      "sections" : [
+        {
+          "facts" : [
+            {
+              "detail" : "Semua sesi di Mac ini — di Terminal, di aplikasi Claude, di latar belakang: proyek, worktree, tugas, durasi, status (bekerja, latar belakang, menunggu, selesai, galat, berakhir). Sesi yang menunggu jawaban disorot dan diberitahukan.",
+              "name" : "Daftar"
+            },
+            {
+              "detail" : "«Izinkan» dan «Tolak» — di pemberitahuan, baris sesi, pulau, dan, jika aktif, di Telegram. Jawaban yang tiba lebih dulu yang berlaku.",
+              "name" : "Izin"
+            },
+            {
+              "detail" : "Bawa tab Terminal sesi ini ke depan; untuk sesi aplikasi Claude buka sesi ini di Claude, selain itu foldernya.",
+              "name" : "Tampilkan"
+            },
+            {
+              "detail" : "Tempat menjalankan: jendela Terminal (Anda bisa menjawab Claude) atau claude -p tanpa jendela (hanya tindakan yang diizinkan, batas waktu, hasil lewat pemberitahuan dan Telegram). «Ingat» atau bawaan di Pengaturan.",
+              "name" : "Terminal / Latar belakang"
+            },
+            {
+              "detail" : "Tugas latar belakang: apa yang dilakukan Claude, langkah demi langkah.",
+              "name" : "Log"
+            },
+            {
+              "detail" : "Tugas latar belakang: hentikan sekarang.",
+              "name" : "Hentikan"
+            },
+            {
+              "detail" : "Sesi hanya terlihat jika hook terpasang di Pengaturan (ditambahkan ke ~/.claude/settings.json; salinannya disimpan di sebelahnya).",
+              "name" : "Hooks"
+            }
+          ],
+          "monospaced" : false,
+          "title" : "Yang bisa dilakukan"
+        }
+      ],
+      "steps" : [
+        "Pasang hooks: halaman «Sesi agen» → Hooks.",
+        "Jawab permintaan izin langsung dari pemberitahuan atau baris sesi."
+      ],
+      "summary" : "Semua sesi Claude Code di Mac ini: apa yang dikerjakan, mana yang menunggu jawaban, tugas latar belakang, dan antrean.",
+      "title" : "Sesi agen"
+    },
+    {
+      "beta" : false,
+      "group" : "AI",
+      "id" : "services",
+      "sections" : [
+        {
+          "facts" : [
+            {
+              "detail" : "Codex CLI, Gemini CLI, Antigravity, Copilot CLI, Cursor CLI — AI Hub Bar menemukan yang terpasang (Pengaturan → «Layanan AI») dan membukanya di Terminal di folder proyek: «Buka di…» di blok Claude proyek. Masing-masing punya login sendiri.",
+              "name" : "Agen"
+            },
+            {
+              "detail" : "Anthropic, OpenAI, Google, xAI, DeepSeek, Mistral, dan server apa pun yang kompatibel dengan OpenAI (Ollama, LM Studio, OpenRouter). Kunci hanya disimpan di Rantai Kunci macOS; «Periksa» tidak memakai token.",
+              "name" : "Model lewat API"
+            },
+            {
+              "detail" : "Pengaturan → «Profil» → «Layanan bawaan»: layanan ini menjalankan perintah profil.",
+              "name" : "Layanan profil"
+            }
+          ],
+          "monospaced" : false,
+          "title" : "Yang bisa dilakukan"
+        }
+      ],
+      "steps" : [
+        "Pengaturan → «Layanan AI»: titik hijau berarti layanan ditemukan atau sudah diatur."
+      ],
+      "summary" : "Agen dan model yang ditemukan dan dijalankan AI Hub Bar: Claude Code, Codex, Gemini, Copilot, Cursor, dan model lewat API.",
+      "title" : "Layanan AI"
+    },
+    {
+      "beta" : false,
+      "group" : "Kerja",
+      "id" : "projects",
+      "sections" : [
+        {
+          "facts" : [
+            {
+              "detail" : "Titik status, branch, berkas belum di-commit, PR terbuka (warna — CI), aktivitas terakhir.",
+              "name" : "Baris"
+            },
+            {
+              "detail" : "Claude mengambil butir pertama Next dan mengerjakannya sesuai aturan ~/Projects/CLAUDE.md: branch, pemeriksaan, PR, STATUS.",
+              "name" : "Langkah berikutnya"
+            },
+            {
+              "detail" : "Claude menjalankan teks Anda dengan aturan yang sama.",
+              "name" : "Tugas sendiri…"
+            },
+            {
+              "detail" : "Claude menyelesaikan pekerjaan yang sedang berjalan di folder: pemeriksaan, commit, push, PR, STATUS — tanpa kode baru.",
+              "name" : "Selesaikan"
+            },
+            {
+              "detail" : "Jika Claude sudah bekerja di proyek, tugas baru masuk ke worktree terpisah .claude/worktrees/cb-… di branch baru dari origin/main.",
+              "name" : "Folder sedang dipakai"
+            },
+            {
+              "detail" : "Buka folder proyek atau repositorinya.",
+              "name" : "Terminal · Finder · GitHub"
+            }
+          ],
+          "monospaced" : false,
+          "title" : "Repositori Git"
+        },
+        {
+          "facts" : [
+            {
+              "detail" : "Pengaturan → «Profil» → «Sumber»: setiap folder di dalam folder proyek adalah proyek (video, artikel, topik).",
+              "name" : "Sumber «folder»"
+            },
+            {
+              "detail" : "Kartu proyek berupa teks biasa: «Tahap: naskah», «Tenggat: 2026-11-05», «Publikasi: 2026-11-05 18:00», «Format: …», «Berkas utama: naskah.md», «Platform: YouTube». Bisa diedit manual kapan saja.",
+              "name" : "proyek.md"
+            },
+            {
+              "detail" : "Di proyek yang dibuka: perintah profil dan «Tugas sendiri». Hasilnya selalu berkas baru di folder proyek. Model lewat API menerima teks berkas utama; Claude bekerja di latar belakang dengan izin profil («hanya berkas» — tanpa terminal dan internet); agen lain dibuka di Terminal dengan tugas di papan klip.",
+              "name" : "Perintah"
+            },
+            {
+              "detail" : "Nyalakan «Bandingkan», pilih 2–3 layanan dan satu perintah: hasilnya diletakkan berdampingan («hooks (Claude).md», «hooks (OpenAI).md») dan dibuka di jendela «Perbandingan».",
+              "name" : "Bandingkan"
+            },
+            {
+              "detail" : "Tahap profil, dipisah koma; tahap diganti dengan tombol di proyek yang dibuka. Kata, durasi, waktu baca, dan halaman dihitung dari berkas utama (.md, .txt, .rtf, .docx).",
+              "name" : "Tahap dan metrik"
+            }
+          ],
+          "monospaced" : false,
+          "title" : "Proyek-folder"
+        }
+      ],
+      "steps" : [
+        "Pengaturan → «Profil» → profil → «Sumber»: folder berisi proyek."
+      ],
+      "summary" : "Proyek profil: repositori git atau folder kerja — status, PR, tahap, dan perintah AI.",
+      "title" : "Proyek"
+    },
+    {
+      "beta" : false,
+      "group" : "Kerja",
+      "id" : "calendar",
+      "sections" : [
+        {
+          "facts" : [
+            {
+              "detail" : "Tenggat dan publikasi dari proyek.md, baris rencana-konten.md — di profil yang kalendernya aktif (Pengaturan → «Profil»).",
+              "name" : "Isinya"
+            },
+            {
+              "detail" : "Blok panel: 7 hari ke depan, yang terlambat merah; klik membuka proyek atau berkas.",
+              "name" : "Mendatang"
+            },
+            {
+              "detail" : "Bulan atau minggu. Seret entri ke hari lain — tanggalnya ditulis ulang di berkasnya. Klik dua kali sebuah hari — entri baru.",
+              "name" : "Jendela «Kalender»"
+            },
+            {
+              "detail" : "Di halaman modul «Mendatang»: berapa lama sebelumnya mengingatkan dan apakah juga dikirim ke Telegram.",
+              "name" : "Pengingat"
+            }
+          ],
+          "monospaced" : false,
+          "title" : "Yang bisa dilakukan"
+        }
+      ],
+      "steps" : [
+        "Nyalakan kalender di profil — atau lewat tombol «Aktifkan di profil» pada ubin «Mendatang»."
+      ],
+      "summary" : "Tenggat dan publikasi dari kartu proyek dan rencana konten — untuk seminggu ke depan dan di jendela «Kalender».",
+      "title" : "Mendatang dan kalender"
+    },
+    {
+      "beta" : false,
+      "group" : "Kerja",
+      "id" : "reports",
+      "sections" : [
+        {
+          "facts" : [
+            {
+              "detail" : "Laporan dengan ringkasan AI 24 jam terakhir ke Telegram (1–3 mnt).",
+              "name" : "Laporan sekarang"
+            },
+            {
+              "detail" : "Ringkasan tanpa AI 24 jam terakhir ke Telegram.",
+              "name" : "Ringkasan cepat"
+            },
+            {
+              "detail" : "Buka _daily-report/reports/latest.html.",
+              "name" : "Laporan terbaru"
+            },
+            {
+              "detail" : "Tampilkan apa yang akan dihapus pembersihan build, tanpa menyentuh apa pun.",
+              "name" : "Pembersihan: periksa"
+            },
+            {
+              "detail" : "Hapus build dan cache, atur ulang simulator (dengan konfirmasi).",
+              "name" : "Pembersihan: jalankan"
+            }
+          ],
+          "monospaced" : false,
+          "title" : "Yang bisa dilakukan"
+        }
+      ],
+      "steps" : [
+
+      ],
+      "summary" : "Perintah _daily-report: laporan, ringkasan cepat, pembersihan build.",
+      "title" : "Laporan _daily-report"
+    },
+    {
+      "beta" : false,
+      "group" : "Mac",
+      "id" : "notch",
+      "sections" : [
+        {
+          "facts" : [
+            {
+              "detail" : "Di kiri dan kanan notch — batas dan sesi; isinya dipilih di halaman modul.",
+              "name" : "Telinga"
+            },
+            {
+              "detail" : "Arahkan kursor ke notch — kartu berisi batas dan apa yang dikerjakan Claude akan terbuka.",
+              "name" : "Kartu"
+            },
+            {
+              "detail" : "Permintaan izin muncul di pulau dengan «Izinkan» dan «Tolak»; ⌃⌥Y / ⌃⌥N dari keyboard, jika aktif.",
+              "name" : "Permintaan"
+            },
+            {
+              "detail" : "Seret file ke pulau — perintah AI profil untuk file itu akan terbuka.",
+              "name" : "File ke pulau"
+            },
+            {
+              "detail" : "Di layar tanpa notch — pil di atas tengah.",
+              "name" : "Tanpa notch"
+            }
+          ],
+          "monospaced" : false,
+          "title" : "Yang bisa dilakukan"
+        }
+      ],
+      "steps" : [
+        "Nyalakan «Pulau notch» di halaman «Modul»."
+      ],
+      "summary" : "Pulau hitam di sekitar notch MacBook: batas dan sesi di sampingnya; arahkan kursor untuk kartu berisi batas dan apa yang sedang dikerjakan Claude.",
+      "title" : "Pulau notch"
+    },
+    {
+      "beta" : true,
+      "group" : "Mac",
+      "id" : "layout",
+      "sections" : [
+        {
+          "facts" : [
+            {
+              "detail" : "Kata yang diketik dengan tata letak yang salah diperbaiki setelah spasi, dan tata letaknya berganti.",
+              "name" : "Otomatis"
+            },
+            {
+              "detail" : "Mengubah kata terakhir atau membatalkan koreksi yang salah — dan mengingat kata itu.",
+              "name" : "Shift dua kali"
+            },
+            {
+              "detail" : "Mengubah teks yang dipilih ke tata letak lain.",
+              "name" : "⌥⇧"
+            },
+            {
+              "detail" : "Perlu «Aksesibilitas»: modul akan memintanya sendiri dan menunjukkan tempat menyalakannya.",
+              "name" : "Akses"
+            }
+          ],
+          "monospaced" : false,
+          "title" : "Yang bisa dilakukan"
+        }
+      ],
+      "steps" : [
+        "Nyalakan «Versi beta» di «Umum», lalu «Tata letak keyboard» di halaman «Modul»."
+      ],
+      "summary" : "Kata yang diketik dengan tata letak yang salah otomatis diketik ulang dengan yang benar, dan tata letaknya berganti. Shift dua kali — kata terakhir, ⌥⇧ — teks yang dipilih. Bahasa tampil di bar menu.",
+      "title" : "Tata letak keyboard"
+    },
+    {
+      "beta" : false,
+      "group" : "Mac",
+      "id" : "utilities",
+      "sections" : [
+        {
+          "facts" : [
+            {
+              "detail" : "Prosesor, memori, disk, jaringan, baterai, dan aplikasi paling boros; peringatan beban, memori, ruang, dan daya.",
+              "name" : "Sumber daya Mac"
+            },
+            {
+              "detail" : "Mac tetap terjaga selama Claude bekerja, selama waktu tertentu, saat tersambung daya atau monitor, atau saat aplikasi pilihan terbuka.",
+              "name" : "Tetap terjaga"
+            },
+            {
+              "detail" : "Mode gelap, ikon desktop, mengunci dan mematikan layar, mengeluarkan disk, Tong Sampah — sekali klik.",
+              "name" : "Sakelar cepat"
+            },
+            {
+              "detail" : "Salinan terbaru: cari, sematkan, kembali ke papan klip sekali klik. Kata sandi dari pengelola kata sandi tidak dicatat.",
+              "name" : "Riwayat papan klip"
+            },
+            {
+              "detail" : "Catatan Markdown langsung di panel: tab untuk file .md biasa di folder yang bisa dibuka editor apa pun.",
+              "name" : "Catatan"
+            },
+            {
+              "detail" : "Tombol sendiri: skrip di latar belakang atau Terminal, pintasan «Pintasan» macOS, tautan, file, folder, atau aplikasi.",
+              "name" : "Perintah cepat"
+            }
+          ],
+          "monospaced" : false,
+          "title" : "Yang bisa dilakukan"
+        }
+      ],
+      "steps" : [
+
+      ],
+      "summary" : "Sumber daya Mac, «Tetap terjaga», sakelar cepat, riwayat papan klip, catatan, dan perintah Anda sendiri — masing-masing dinyalakan terpisah.",
+      "title" : "Utilitas Mac"
+    },
+    {
+      "beta" : false,
+      "group" : "Lainnya",
+      "id" : "alerts",
+      "sections" : [
+        {
+          "facts" : [
+            {
+              "detail" : "Setiap halaman modul punya «Seberapa sering memberi tahu»: setiap kali, paling sering sekali per 15 menit, per jam, per hari, atau tidak sama sekali.",
+              "name" : "Seberapa sering"
+            },
+            {
+              "detail" : "Bot ada di «Umum» → Telegram. Apa yang diteruskan diatur dengan chip «Telegram» di halaman modul.",
+              "name" : "Telegram"
+            },
+            {
+              "detail" : "Permintaan izin Claude bisa diterima atau ditolak dengan tombol di Telegram — bot terpisah, halaman «Sesi agen».",
+              "name" : "Jawaban dari Telegram"
+            },
+            {
+              "detail" : "Membuka sesi, PR, log, atau laporan.",
+              "name" : "Klik pemberitahuan"
+            }
+          ],
+          "monospaced" : false,
+          "title" : "Yang bisa dilakukan"
+        }
+      ],
+      "steps" : [
+
+      ],
+      "summary" : "Apa yang datang sebagai pemberitahuan macOS dan ke Telegram, serta seberapa sering.",
+      "title" : "Pemberitahuan dan Telegram"
+    },
+    {
+      "beta" : false,
+      "group" : "Lainnya",
+      "id" : "commandLine",
+      "sections" : [
+        {
+          "facts" : [
+            {
+              "detail" : "Jalankan perintah Claude (--background — di latar belakang, --print — hanya tampilkan).",
+              "name" : "--claude next|task|finish <folder>"
+            },
+            {
+              "detail" : "Perintah umum.",
+              "name" : "--command report|summary|cleanup-check|cleanup"
+            },
+            {
+              "detail" : "Daftar sesi; tampilkan tab Terminal.",
+              "name" : "--sessions · --show-session <id>"
+            },
+            {
+              "detail" : "Hook sesi.",
+              "name" : "--hooks status|install|uninstall"
+            },
+            {
+              "detail" : "Buka saat login.",
+              "name" : "--login-item status|on|off"
+            },
+            {
+              "detail" : "Aturan akses tugas latar belakang.",
+              "name" : "--background-settings"
+            },
+            {
+              "detail" : "Batas langganan; pemakaian per proyek.",
+              "name" : "--usage · --token-usage"
+            }
+          ],
+          "monospaced" : true,
+          "title" : "Yang bisa dilakukan"
+        }
+      ],
+      "steps" : [
+
+      ],
+      "summary" : "AI Hub Bar juga menjawab dari Terminal — untuk skrip dan otomatisasi.",
+      "title" : "Untuk skrip"
+    }
+  ]
+}

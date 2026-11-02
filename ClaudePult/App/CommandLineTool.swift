@@ -20,6 +20,8 @@ import UserNotifications
 /// - `ClaudePult --api-complete <provider> <prompt> [base-url]` (one request to a model by API, prints reply and tokens)
 /// - `ClaudePult --services [check]` (installed agents, stored API keys; `check` lists each provider's models)
 /// - `ClaudePult --menubar-preview <file.png> [minimum|limits|everything]` (the menu bar item with sample data)
+/// - `ClaudePult --help-export <file.json>` (the help topics in this process's language, for the site; add
+///   `-AppleLanguages "(en)"` for another one — scripts/export-help.sh)
 /// - `ClaudePult --resources` (one reading of «Ресурсы Mac»: processor, memory, disk, network, battery, graphics, top apps)
 /// - `ClaudePult --readiness [file.png]` (what this Mac still needs, as on the assistant's first screen; exit 1 if something is left)
 @MainActor
@@ -195,6 +197,9 @@ enum CommandLineTool {
         if let index = arguments.firstIndex(of: "--services") {
             if arguments.dropFirst(index + 1).first == "limits" { return limitsReport() }
             return servicesReport(check: arguments.dropFirst(index + 1).first == "check")
+        }
+        if let index = arguments.firstIndex(of: "--help-export"), index + 1 < arguments.count {
+            return helpExport(path: (arguments[index + 1] as NSString).expandingTildeInPath)
         }
         if let index = arguments.firstIndex(of: "--menubar-preview"), index + 1 < arguments.count {
             return menuBarPreview(path: arguments[index + 1], preset: arguments.dropFirst(index + 2).first)
@@ -490,6 +495,21 @@ enum CommandLineTool {
                   (try? png.write(to: URL(fileURLWithPath: path))) != nil else { return 1 }
         }
         return Readiness.isReady(items) ? 0 : 1
+    }
+
+    /// The help window's content as JSON (docs/SPEC-help.md §4): the site's help page renders the same topics.
+    private static func helpExport(path: String) -> Int32 {
+        let data = HelpExport.make()
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = [.prettyPrinted, .sortedKeys, .withoutEscapingSlashes]
+        do {
+            try encoder.encode(data).write(to: URL(fileURLWithPath: path), options: .atomic)
+            print("\(path): \(data.topics.count) topics, \(data.language)")
+            return 0
+        } catch {
+            printError(error.localizedDescription)
+            return 1
+        }
     }
 
     /// Draws the item as the menu bar would (dark and light) from the saved config, or from a preset.
