@@ -5,7 +5,7 @@
 **Updated:** 2026-11-02
 
 **Now:**
-- nothing in progress; merged 2026-11-02: Settings redone like System Settings (#164), «Сервисы AI» as a list on the left (#162) in the window colour (#163), glass panel background (#158) and its fix for macOS 27 (#160), AI services spec + stage 1 — Claude Code inside «Сервисы AI», a tab per service (#159)
+- nothing in progress; merged 2026-11-02: AI services stage 2 — one limits card for every service (#165), Settings redone like System Settings (#164), «Сервисы AI» as a list on the left (#162) in the window colour (#163), glass panel background (#158) and its fix for macOS 27 (#160), AI services spec + stage 1 — Claude Code inside «Сервисы AI», a tab per service (#159)
 - released 0.2.2 (v0.2.2, build 345): clickable widgets (#154), Codex from the ChatGPT desktop app (#155), notch island stage 2 (#153)
 - notch island stage 1 merged (#149): module, island over the notch, ears, hover card; target release 0.3.0
 - notch island stage 2 merged (#153): banners for events, permission requests with Allow / Deny in the island
@@ -20,7 +20,7 @@
 
 **Next:**
 - notch island for 0.3.0 (docs/SPEC-notch.md §9): stage 3 — pill on screens without a notch, full screen, hot keys, first-setup window; then a 0.3.0 build for Oleh's MacBook Air before publishing
-- AI services (docs/SPEC-ai-services.md §5), one PR each: stage 2 common `ServiceUsage` model + the same limits card for every service; stage 3 Codex in full (credits, plan, history, forecast, per-project tokens, context); stage 4 per-service alerts, menu bar, widget, notch; stage 5 Codex sessions; stage 6 Gemini / Copilot / Cursor after live checks
+- AI services (docs/SPEC-ai-services.md §5), one PR each: stage 3 Codex in full (credits, plan, history, forecast, per-project tokens, context); stage 4 per-service alerts, menu bar, widget, notch; stage 5 Codex sessions; stage 6 Gemini / Copilot / Cursor after live checks
 - standing rule (SPEC §3.1): every new icon-only control gets a hover hint; finish each UI stage with the accessibility walk
 - fix whatever Oleh finds in the translations (automated checks pass; a native read for ja, ko, ar is still worth it)
 - stage 8: done without Developer ID (self-signed + Sparkle, PR #85; re-checked on main); notarization only if Oleh buys Developer ID; publishing is Oleh's step (Needs Oleh)
@@ -41,6 +41,12 @@
 - decide SPEC-windows §10 and SPEC-linux §10 (Tauri 2 for both, Windows code signing, first Linux desktops) before that work starts
 - optional: Apple Developer ID (notarization, no «Open Anyway»); delete or archive the old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-02 — AI services stage 2: one model and one limits card for every service (branch `feat/service-usage`)
+
+Done: new `Models/ServiceUsage.swift` — `ServiceUsage` (rings: the first two windows with a percentage; bars: the rest and spend; forecast; week by day; notes; error; stale) and `LimitWindow`, built by `ServiceUsage.claude(snapshot…)` and `ServiceUsage.hub(limit, history:)`. `LimitHistory` keeps the other services' readings for 8 days in `limit-history.json` (replaces the in-memory first reading, so the forecast survives restarts) and gives them a forecast and a week by day (daily growth of the window that resets last). The panel's «Лимиты» draws Claude and every enabled service with the same `ServiceCard` — rings, forecast, week strip, bars, notes, error (the compact `HubRow`s are gone); service names show once there is more than Claude. Fixed on the way: Codex's 30-day free-plan window was titled «неделя» (now «30 дн»), and a reset more than a week away showed only the weekday (now with the date). No new strings. SPEC-ai-services updated (stage 1 and 2 done, §4 describes the sidebar).
+Checked: `xcodebuild test` — 311 / 311 pass (new `ServiceUsageTests`: Claude from a stored answer, Codex and spend as the same card, error-only service, history forecast and week, periods / dedupe / 8-day trim / save-load, short reset with a date beyond a week). Live (dark theme, glass): opened the panel with full-screen control and `screencapture` — Claude card unchanged; with Codex temporarily enabled it shows as a card with a ring «0 % · 30 дн · сброс Ср, 2 дек.»; Oleh's settings (all other services off) restored afterwards.
+Left: week strip and forecast for other services appear only after 12 h / 15 min of readings, not seen live; stage 3 next (Codex credits, plan, tokens per project, context).
 
 ## 2026-11-02 — Settings like System Settings (branch `feat/settings-sidebar`)
 

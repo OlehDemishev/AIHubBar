@@ -209,10 +209,23 @@ enum UsageText {
     static func resetText(_ window: UsageWindow, now: Date = .now, short: Bool = false) -> String? {
         guard let resets = window.resetsAt else { return nil }
         if resets.timeIntervalSince(now) < 24 * 3600 { return String(localized: "сброс \(countdown(to: resets, now: now))") }
-        let format: Date.FormatStyle = short
+        // The weekday alone is enough within a week; a month's reset needs the date.
+        let format: Date.FormatStyle = short && resets.timeIntervalSince(now) < 7 * 86_400
             ? .dateTime.weekday(.abbreviated).hour().minute()
             : .dateTime.weekday(.abbreviated).day().month(.abbreviated).hour().minute()
         return String(localized: "сброс \(resets.formatted(format))")
+    }
+
+    /// `resetText` for any service's window.
+    static func resetText(_ resetsAt: Date?, now: Date = .now, short: Bool = false) -> String? {
+        resetsAt.flatMap { resetText(UsageWindow(key: "", title: "", utilization: 0, resetsAt: $0), now: now, short: short) }
+    }
+
+    static func extra(_ extra: ExtraUsage) -> String {
+        guard let used = extra.usedCredits else { return String(localized: "Extra usage включён") }
+        let usedText = money(used, decimals: extra.decimalPlaces, currency: extra.currency)
+        guard let limit = extra.monthlyLimit else { return "Extra usage: \(usedText)" }
+        return String(localized: "Extra usage: \(usedText) из \(money(limit, decimals: extra.decimalPlaces, currency: extra.currency)) в месяц")
     }
 
     static func forecast(_ forecast: UsageForecast) -> String? {

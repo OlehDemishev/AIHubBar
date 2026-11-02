@@ -118,6 +118,7 @@ struct HubLimitsTests {
     @Test func windowTitles() {
         #expect(HubParse.windowTitle(minutes: 300) == String(localized: "\(5) ч"))
         #expect(HubParse.windowTitle(minutes: 10080) == String(localized: "неделя"))
+        #expect(HubParse.windowTitle(minutes: 43200) == String(localized: "\(30) дн"), "Codex free plan: not a week")
     }
 
     @MainActor @Test func switchedOffAndConsent() {

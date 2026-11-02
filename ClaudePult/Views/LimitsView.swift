@@ -24,66 +24,26 @@ struct LimitsView: View {
         .padding(.vertical, 8)
     }
 
-    /// Other AI services (SPEC-hub), one compact row each, under Claude's own limits.
+    /// Other AI services (SPEC-hub) under Claude, each drawn by the same card (SPEC-ai-services stage 2).
     @ViewBuilder
     private var hubRows: some View {
-        if !hub.limits.isEmpty {
+        ForEach(hub.usages) { service in
             Divider().padding(.vertical, 2)
-            VStack(alignment: .leading, spacing: 6) {
-                ForEach(hub.limits) { limit in
-                    HubRow(limit: limit)
-                }
-            }
+            ServiceCard(usage: service)
         }
     }
 
     @ViewBuilder
     private var details: some View {
         if let snapshot = usage.snapshot {
-            TimelineView(.periodic(from: .now, by: 30)) { context in
-                VStack(alignment: .leading, spacing: 8) {
-                    HStack(alignment: .top, spacing: 8) {
-                        if let session = snapshot.session {
-                            LimitRing(window: session, caption: UsageText.resetText(session, now: context.date, short: true))
-                        }
-                        if let week = snapshot.week {
-                            LimitRing(window: week, caption: UsageText.resetText(week, now: context.date, short: true))
-                        }
-                    }
-                    if let forecast = UsageText.forecast(usage.forecast) {
-                        Text(forecast)
-                            .scaledFont(.caption)
-                            .foregroundStyle(runsOut ? .orange : .secondary)
-                    }
-                    if let week = usage.weekUsage, !week.days.isEmpty {
-                        WeekStrip(week: week)
-                    }
-                    ForEach(snapshot.shownOtherWindows, id: \.key) { window in
-                        // A model week usually resets with the week: no need to say it twice.
-                        WindowRow(window: window, detail: nil, now: context.date, compact: true,
-                                  showsReset: !UsageWindow.sameReset(window.resetsAt, snapshot.week?.resetsAt))
-                    }
-                }
-            }
-            // Figures that could not be refreshed are not passed off as current.
-            .opacity(isStale ? 0.45 : 1)
-            if let extra = snapshot.extra, extra.isEnabled {
-                Label(extraText(extra), systemImage: "creditcard")
-                    .scaledFont(.caption)
-                    .foregroundStyle(.secondary)
-            }
+            ServiceCard(usage: .claude(snapshot, forecast: usage.forecast, week: usage.weekUsage, error: usage.error),
+                        showsTitle: !hub.limits.isEmpty)
             // Models by API (SPEC-modes §11.2): shown once ClaudePult has spent something this month.
             let month = engine.summary(since: engine.monthStart)
             if month.tokens > 0 {
                 Label("API за месяц: \(SpendText.line(month))", systemImage: "cpu")
                     .scaledFont(.caption)
                     .foregroundStyle(.secondary)
-            }
-            if let error = usage.error {
-                Label("Не обновилось: \(error)", systemImage: "exclamationmark.triangle")
-                    .scaledFont(.caption)
-                    .foregroundStyle(.orange)
-                    .fixedSize(horizontal: false, vertical: true)
             }
         } else if let error = usage.error {
             Label("Лимиты недоступны. \(error)", systemImage: "exclamationmark.triangle")
@@ -105,11 +65,6 @@ struct LimitsView: View {
     }
 
     private var isStale: Bool { usage.error != nil }
-
-    private var runsOut: Bool {
-        if case .runsOutAt = usage.forecast { return true }
-        return false
-    }
 
     /// The panel's own refresh (⌘R) updates the limits too; the age shows only while the figures are old.
     private var header: some View {
@@ -133,13 +88,6 @@ struct LimitsView: View {
                 }
             }
         }
-    }
-
-    private func extraText(_ extra: ExtraUsage) -> String {
-        guard let used = extra.usedCredits else { return String(localized: "Extra usage включён") }
-        let usedText = UsageText.money(used, decimals: extra.decimalPlaces, currency: extra.currency)
-        guard let limit = extra.monthlyLimit else { return "Extra usage: \(usedText)" }
-        return String(localized: "Extra usage: \(usedText) из \(UsageText.money(limit, decimals: extra.decimalPlaces, currency: extra.currency)) в месяц")
     }
 
     @ViewBuilder
@@ -200,79 +148,84 @@ struct LimitsView: View {
     }
 }
 
-/// One limit: title, inline reset and percent on one line, then the bar; the session keeps a line of its own
-/// for the reset and the forecast.
-private struct WindowRow: View {
-    let window: UsageWindow
-    let detail: String?
-    let now: Date
-    var compact = false
-    var showsReset = true
+/// One service's limits, the same for Claude and every other AI (SPEC-ai-services stage 2): up to two rings, the
+/// forecast, the week by day, the other limits as bars, then notes and the error.
+private struct ServiceCard: View {
+    let usage: ServiceUsage
+    var showsTitle = true
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 3) {
-            HStack(alignment: .firstTextBaseline, spacing: 4) {
-                Text(window.title)
-                    .scaledFont(.caption, weight: compact ? .regular : .medium)
-                    .layoutPriority(1)
-                if detail == nil, showsReset, let reset = UsageText.resetText(window, now: now) {
-                    Text(verbatim: "· " + reset)
-                        .scaledFont(.caption2)
-                        .foregroundStyle(.secondary)
-                        .lineLimit(1)
-                }
-                Spacer(minLength: 6)
-                Text(UsageText.percent(window.utilization))
+        VStack(alignment: .leading, spacing: 8) {
+            if showsTitle {
+                Text(usage.title)
                     .scaledFont(.caption, weight: .semibold)
-                    .monospacedDigit()
-                    .foregroundStyle(window.levelColor)
-            }
-            ProgressView(value: min(max(window.utilization, 0), 100), total: 100)
-                .progressViewStyle(.linear)
-                .tint(window.levelColor)
-                .controlSize(compact ? .mini : .small)
-            if let detail, !detail.isEmpty {
-                Text(detail)
-                    .scaledFont(.caption2)
                     .foregroundStyle(.secondary)
             }
-        }
-    }
-}
-
-/// One other service: its name, then each window as «title · reset … percent» with a thin bar, or its spend.
-private struct HubRow: View {
-    let limit: HubLimit
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: 3) {
-            Text(limit.source.title)
-                .scaledFont(.caption, weight: .medium)
-            if let error = limit.error {
-                Label(error, systemImage: "exclamationmark.triangle")
-                    .scaledFont(.caption2)
+            TimelineView(.periodic(from: .now, by: 30)) { context in
+                VStack(alignment: .leading, spacing: 8) {
+                    if !usage.rings.isEmpty {
+                        HStack(alignment: .top, spacing: 8) {
+                            ForEach(usage.rings) { window in
+                                LimitRing(window: window, caption: UsageText.resetText(window.resetsAt, now: context.date, short: true))
+                            }
+                        }
+                    }
+                    if let line = forecastLine {
+                        Text(line)
+                            .scaledFont(.caption)
+                            .foregroundStyle(runsOut ? .orange : .secondary)
+                    }
+                    if let week = usage.week, !week.days.isEmpty {
+                        WeekStrip(week: week)
+                    }
+                    ForEach(usage.bars) { window in
+                        WindowRow(window: window, now: context.date)
+                    }
+                }
+            }
+            // Figures that could not be refreshed are not passed off as current.
+            .opacity(usage.isStale ? 0.45 : 1)
+            ForEach(usage.notes, id: \.self) { note in
+                Label(note, systemImage: "creditcard")
+                    .scaledFont(.caption)
+                    .foregroundStyle(.secondary)
+            }
+            if let error = usage.error {
+                Label(usage.rings.isEmpty && usage.bars.isEmpty ? error : String(localized: "Не обновилось: \(error)"),
+                      systemImage: "exclamationmark.triangle")
+                    .scaledFont(.caption)
                     .foregroundStyle(.orange)
                     .fixedSize(horizontal: false, vertical: true)
             }
-            ForEach(Array(limit.windows.enumerated()), id: \.offset) { _, window in
-                HubWindowRow(window: window)
-            }
         }
-        .help([limit.source.title, limit.error].compactMap { $0 }.joined(separator: " · "))
+        .help([usage.title, usage.error].compactMap { $0 }.joined(separator: " · "))
+    }
+
+    private var runsOut: Bool {
+        if case .runsOutAt = usage.forecast { return true }
+        return false
+    }
+
+    /// Claude's session forecast keeps its wording; other services' limits can run for days, so they say the day.
+    private var forecastLine: String? {
+        guard usage.service != .claude, case let .runsOutAt(date) = usage.forecast else { return UsageText.forecast(usage.forecast) }
+        return String(localized: "кончится \(date.formatted(.dateTime.weekday(.abbreviated).hour().minute())) при таком темпе")
     }
 }
 
-private struct HubWindowRow: View {
-    let window: HubLimit.Window
+/// A limit that isn't a ring: title, inline reset and percent on one line, then a thin bar; spend shows its amount.
+private struct WindowRow: View {
+    let window: LimitWindow
+    let now: Date
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 2) {
+        VStack(alignment: .leading, spacing: 3) {
             HStack(alignment: .firstTextBaseline, spacing: 4) {
                 Text(window.title)
-                    .scaledFont(.caption2)
-                    .lineLimit(1)
-                if let reset = window.resetsAt {
-                    Text(verbatim: "· " + String(localized: "сброс \(reset.formatted(.relative(presentation: .named)))"))
+                    .scaledFont(.caption)
+                    .layoutPriority(1)
+                if window.showsReset, let reset = UsageText.resetText(window.resetsAt, now: now) {
+                    Text(verbatim: "· " + reset)
                         .scaledFont(.caption2)
                         .foregroundStyle(.secondary)
                         .lineLimit(1)
@@ -294,7 +247,7 @@ private struct HubWindowRow: View {
                     .progressViewStyle(.linear)
                     .tint(UsageWindow.color(for: percent))
                     .controlSize(.mini)
-                if let detail = window.detail {
+                if let detail = window.detail, !detail.isEmpty {
                     Text(detail).scaledFont(.caption2).foregroundStyle(.secondary)
                 }
                 if let runsOut = window.runsOutAt {
@@ -345,26 +298,30 @@ private struct WeekStrip: View {
     }
 }
 
-/// Session or week: a ring in the level colour, the percentage, the window and when it resets.
+/// A main limit (Claude's session or week, Codex's 5 h or week…): a ring in the level colour, the percentage, the
+/// window and when it resets.
 private struct LimitRing: View {
-    let window: UsageWindow
+    let window: LimitWindow
     let caption: String?
+
+    private var percent: Double { window.percent ?? 0 }
+    private var color: Color { UsageWindow.color(for: percent) }
 
     var body: some View {
         HStack(spacing: 8) {
             ZStack {
                 Circle().stroke(Color.primary.opacity(0.12), lineWidth: 4)
                 Circle()
-                    .trim(from: 0, to: min(max(window.utilization, 0), 100) / 100)
-                    .stroke(window.levelColor, style: StrokeStyle(lineWidth: 4, lineCap: .round))
+                    .trim(from: 0, to: min(max(percent, 0), 100) / 100)
+                    .stroke(color, style: StrokeStyle(lineWidth: 4, lineCap: .round))
                     .rotationEffect(.degrees(-90))
             }
             .frame(width: 34, height: 34)
             VStack(alignment: .leading, spacing: 1) {
-                Text(UsageText.percent(window.utilization))
+                Text(UsageText.percent(percent))
                     .scaledFont(.title3, weight: .semibold)
                     .monospacedDigit()
-                    .foregroundStyle(window.levelColor)
+                    .foregroundStyle(color)
                 Text(window.title)
                     .scaledFont(.caption)
                     .lineLimit(1)
@@ -379,7 +336,7 @@ private struct LimitRing: View {
             Spacer(minLength: 0)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .help([window.title, UsageText.percent(window.utilization), caption].compactMap { $0 }.joined(separator: " · "))
+        .help([window.title, UsageText.percent(percent), caption].compactMap { $0 }.joined(separator: " · "))
     }
 }
 

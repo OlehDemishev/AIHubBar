@@ -1,6 +1,6 @@
 # SPEC — AI services: Claude as one of them, the same view for every service
 
-Status: stage 1 in progress (branch `feat/ai-services-tabs`), 2026-11-02.
+Status: stages 1 and 2 done (#159, #162–#164, `feat/service-usage`), 2026-11-02; next: stage 3.
 Asked by Oleh on 2026-10-31 and 2026-11-02: move Claude Code into «Сервисы AI», give every AI its own nested tab
 with all its settings, and bring the other services up to Claude Code's level — one model per service for rings,
 forecast, week strip, credits, per-project tokens and context.
@@ -63,6 +63,13 @@ protocol ProjectTokenSource { func tokens(since: Date) -> [ProjectTokens] }   //
 protocol ContextSource { func context(for session: String) -> ContextFill? }
 ```
 
+Built in stage 2 (`Models/ServiceUsage.swift`): `ServiceUsage` (service, title, `rings` — the first two windows with a
+percentage, `bars` — the rest and spend, `forecast`, `week`, `notes`, `error`, `isStale`) and `LimitWindow`, made by
+`ServiceUsage.claude(snapshot…)` and `ServiceUsage.hub(limit, history:)`; `LimitHistory` keeps every other service's
+readings for 8 days in `limit-history.json` (the forecast survives restarts, and the week by day is the daily growth
+of the window that resets last). Claude keeps its own fetch, `usage.json` and journal-based week. The protocols above
+and per-service sections in `usage.json` wait for stage 3, when Codex has more than limits to give.
+
 - `UsageStore` keeps one `ServiceUsage` per enabled service, one `usage.json` with a section per service (Claude's
   current file is read as the `claude-code` section, so history carries over).
 - Alerts, thresholds, run guard, forecast and the week strip work on `LimitWindow` + `history`, the same for all.
@@ -70,8 +77,8 @@ protocol ContextSource { func context(for session: String) -> ContextFill? }
 
 ## 4. Settings and panel
 
-Settings → «Сервисы AI» with nested tabs (segmented control): **Claude Code · Codex · Gemini · Copilot · Cursor ·
-Другие**. Each tab: the agent (path, version, sign-in, install), its limits (on/off, status, keys, consents), its
+Settings sidebar (like System Settings, #164) → group «Сервисы AI»: **Claude Code · Codex · Gemini · Copilot · Cursor ·
+Другие**, a status dot each. Each page: the agent (path, version, sign-in, install), its limits (on/off, status, keys, consents), its
 API access (Anthropic in Claude Code, OpenAI in Codex, Google in Gemini), then service-only options (Claude Code:
 sessions and hooks, Telegram answers, saved prompts, CLAUDE.md and MCP, background runs). «Другие»: Antigravity,
 xAI / DeepSeek / Mistral / compatible API, OpenRouter, the API spend and budget. Modules → Лимиты keeps the
@@ -83,12 +90,12 @@ service mark. Sessions: Codex threads next to Claude sessions once a source exis
 
 ## 5. Stages (one PR each)
 
-1. **Settings structure** (this PR): «Claude Code» tab moves into «Сервисы AI» with nested tabs per service; all
+1. **Settings structure** (done): «Claude Code» tab moves into «Сервисы AI» with nested tabs per service; all
    Claude Code options in its tab; per-service «Другие AI» rows (limits, keys, consents) and API providers move to
    their service's tab; old `settingsTab == "claude"` and every link that opened Claude Code open «Сервисы AI» →
    Claude Code.
-2. **Common model**: `ServiceUsage` / `LimitWindow` / history; Claude and the hub sources produce it; `LimitsView`
-   draws every service with the same card (rings, forecast, week strip for all). Tests on stored answers.
+2. **Common model** (done): `ServiceUsage` / `LimitWindow` / `LimitHistory`; Claude and the hub sources produce it;
+   `LimitsView` draws every service with the same card (rings, forecast, week strip for all). Tests on stored answers.
 3. **Codex in full**: credits and plan from `account/rateLimits/read`, history and forecast, tokens per project
    from `state_5.sqlite` / session logs, context from `token_count`. Live check on a Mac with Codex sessions.
 4. **Per-service alerts, menu bar and widget**: thresholds per service, «which service» for menu bar elements,

@@ -115,7 +115,8 @@ enum HubParse {
     static func windowTitle(minutes: Double?) -> String {
         guard let minutes else { return String(localized: "лимит") }
         if minutes <= 24 * 60 { return String(localized: "\(Int((minutes / 60).rounded())) ч") }
-        return minutes >= 7 * 24 * 60 - 60 ? String(localized: "неделя") : String(localized: "\(Int((minutes / 1440).rounded())) дн")
+        // Only a seven-day window is «неделя»: Codex's free plan has a 30-day one (it was called a week).
+        return abs(minutes - 7 * 24 * 60) <= 60 ? String(localized: "неделя") : String(localized: "\(Int((minutes / 1440).rounded())) дн")
     }
 
     // Codex: `account/rateLimits/read` of `codex app-server`: rateLimits.primary / secondary — usedPercent, resetsAt,
@@ -414,8 +415,11 @@ final class HubLimitsStore {
     private var notified = Set(UserDefaults.standard.stringArray(forKey: "hubNotified") ?? []) {
         didSet { UserDefaults.standard.set(Array(notified.suffix(200)), forKey: "hubNotified") }
     }
-    /// The first reading of each window since its last reset, for the forecast.
-    private var firstReadings: [String: HubForecast.Reading] = [:]
+    /// Readings of every window over the last days, for the forecast and the week by day; kept across restarts.
+    private(set) var history = LimitHistory.load()
+
+    /// Each service's limits as the panel draws them, the same way as Claude's (SPEC-ai-services stage 2).
+    var usages: [ServiceUsage] { limits.map { ServiceUsage.hub($0, history: history) } }
 
     /// Source raw value → its fullest limit, for the menu bar.
     var percents: [String: Double] {
@@ -547,23 +551,21 @@ final class HubLimitsStore {
         }
     }
 
+    /// Records the readings and fills each window's «runs out at» from the pace since its last reset.
     private func forecast(_ limits: [HubLimit], now: Date = .now) -> [HubLimit] {
-        limits.map { limit in
+        let result = limits.map { limit in
             var limit = limit
             for index in limit.windows.indices {
                 let window = limit.windows[index]
                 guard let percent = window.percent else { continue }
-                let key = "\(limit.source.rawValue)|\(window.title)|\(window.resetsAt.map { Int($0.timeIntervalSince1970 / 600) } ?? 0)"
-                let latest = HubForecast.Reading(at: now, percent: percent)
-                // A drop means a reset the window's date didn't show: start over.
-                if let first = firstReadings[key], first.percent <= percent {
-                    limit.windows[index].runsOutAt = HubForecast.runsOut(first: first, latest: latest, resetsAt: window.resetsAt)
-                } else {
-                    firstReadings[key] = latest
-                }
+                let key = LimitHistory.key(limit.source, window.title)
+                history.record(key, percent: percent, resetsAt: window.resetsAt, at: now)
+                limit.windows[index].runsOutAt = history.runsOut(key, resetsAt: window.resetsAt, now: now)
             }
             return limit
         }
+        history.save()
+        return result
     }
 
     /// `other-ai.json` for the «Лимиты» widget: the sandboxed widget only reads Application Support/ClaudePult.
