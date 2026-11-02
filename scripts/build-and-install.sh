@@ -43,10 +43,18 @@ if [[ $RUN_TESTS -eq 1 ]]; then
     -quiet
 fi
 
-echo "==> Building Release"
+# Numbered like scripts/release.sh (build = commit count), so Sparkle never takes a build from main for older than the
+# last release and «updates» it back to that release. Version: the newest release tag.
+BUILD_NUMBER="$(git rev-list --count HEAD)"
+VERSION="$(git tag -l 'v*' --sort=-v:refname | head -1)"
+VERSION="${VERSION#v}"
+VERSION="${VERSION:-0.1.0}"
+
+echo "==> Building Release $VERSION ($BUILD_NUMBER)"
 xcodebuild build \
   -project "$APP_NAME.xcodeproj" -scheme "$APP_NAME" -configuration Release \
   -destination 'platform=macOS,arch=arm64' -derivedDataPath "$DERIVED" \
+  MARKETING_VERSION="$VERSION" CURRENT_PROJECT_VERSION="$BUILD_NUMBER" \
   -quiet
 
 BUILT="$DERIVED/Build/Products/Release/$EXECUTABLE.app"
