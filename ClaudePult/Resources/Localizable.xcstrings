@@ -16436,6 +16436,82 @@
         }
       }
     },
+    "Включить бета-версии": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تفعيل الإصدارات التجريبية"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beta-Versionen einschalten"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Turn On Beta Builds"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activar versiones beta"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activer les versions bêta"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aktifkan versi beta"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Attiva versioni beta"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ベータ版をオンにする"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "베타 버전 켜기"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Włącz wersje beta"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ativar versões beta"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Увімкнути бета-версії"
+          }
+        }
+      }
+    },
     "Включить сервис, вставить ключ или дать согласие — в «Сервисы AI», на вкладке сервиса.": {
       "localizations": {
         "ar": {
@@ -36883,6 +36959,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Блискавка"
+          }
+        }
+      }
+    },
+    "На испытании: работает только с «Бета-версиями» (Настройки → Основные). Включите их здесь — и модуль можно установить.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "قيد التجربة: يعمل فقط مع «الإصدارات التجريبية» (الإعدادات ← عام). فعّلها هنا ليمكن تثبيت الوحدة."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Im Test: funktioniert nur mit „Beta-Versionen“ (Einstellungen → Allgemein). Hier einschalten, dann lässt sich das Modul installieren."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In testing: works only with Beta Builds on (Settings → General). Turn them on here, and the module can be installed."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En prueba: solo funciona con «Versiones beta» (Ajustes → General). Actívalas aquí y podrás instalar el módulo."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "À l'essai : ne fonctionne qu'avec les « Versions bêta » (Réglages → Général). Activez-les ici pour pouvoir installer le module."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sedang diuji: hanya berfungsi dengan «Versi beta» (Pengaturan → Umum). Aktifkan di sini agar modul bisa dipasang."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In prova: funziona solo con «Versioni beta» (Impostazioni → Generali). Attivale qui e il modulo si potrà installare."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "テスト中: 「ベータ版」がオンのときだけ動作します（設定 → 一般）。ここでオンにするとモジュールをインストールできます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "테스트 중: ‘베타 버전’이 켜져 있을 때만 작동합니다(설정 → 일반). 여기서 켜면 모듈을 설치할 수 있습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "W testach: działa tylko z „Wersjami beta” (Ustawienia → Ogólne). Włącz je tutaj, a moduł będzie można zainstalować."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Em teste: funciona só com «Versões beta» (Ajustes → Geral). Ative-as aqui e o módulo poderá ser instalado."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "На випробуванні: працює лише з «Бета-версіями» (Налаштування → Основні). Увімкніть їх тут — і модуль можна встановити."
           }
         }
       }
@@ -97787,82 +97939,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "тихо %lld хв"
-          }
-        }
-      }
-    },
-    "только в бета-версии": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "في الإصدارات التجريبية فقط"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "nur in Beta-Versionen"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "beta builds only"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "solo en versiones beta"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "versions bêta uniquement"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "hanya di versi beta"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "solo nelle versioni beta"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ベータ版のみ"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "베타 버전 전용"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "tylko w wersjach beta"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "só em versões beta"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "лише в бета-версіях"
           }
         }
       }

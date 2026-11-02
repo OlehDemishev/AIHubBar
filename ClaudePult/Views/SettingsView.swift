@@ -526,12 +526,15 @@ private struct ModulesSettings: View {
 
     var body: some View {
         Form {
-            ForEach(ModuleKind.allCases.filter { !$0.isBeta || settings.betaUpdates || modes.installedModules.contains($0) }, id: \.self) { kind in
+            ForEach(ModuleKind.allCases, id: \.self) { kind in
                 Section {
                     Text(kind.summary)
                         .font(.callout)
                         .foregroundStyle(.secondary)
                         .fixedSize(horizontal: false, vertical: true)
+                    if kind.isBeta, !settings.betaUpdates {
+                        Footnote(text: String(localized: "На испытании: работает только с «Бета-версиями» (Настройки → Основные). Включите их здесь — и модуль можно установить."))
+                    }
                     if kind.isPanelBlock {
                         LabeledContent("В профилях", value: profiles(showing: kind))
                     }
@@ -540,13 +543,11 @@ private struct ModulesSettings: View {
                         Label(kind.title, systemImage: kind.symbol)
                         if kind.isBeta { BetaBadge() }
                         Spacer()
-                        // Installed, then «Бета-версии» switched off: stopped, and can still be removed.
-                        if kind.isBeta, !settings.betaUpdates {
-                            Text("только в бета-версии")
-                                .font(.caption)
-                                .foregroundStyle(.secondary)
-                        }
-                        if kind.isBuiltIn {
+                        if kind.isBeta, !settings.betaUpdates, !modes.installedModules.contains(kind) {
+                            // Seen in the catalog, so it can be found; installing needs beta builds first.
+                            Button("Включить бета-версии") { settings.betaUpdates = true }
+                                .controlSize(.small)
+                        } else if kind.isBuiltIn {
                             Text(modes.installedModules.contains(kind) ? String(localized: "встроенный") : String(localized: "не используется"))
                                 .font(.caption)
                                 .foregroundStyle(.secondary)
@@ -1319,6 +1320,5 @@ private struct BetaRow: View {
             Text("Бета-версии")
             Text("Новые сборки раньше всех и функции на испытании: \(ModuleKind.allCases.filter(\.isBeta).map(\.title).joined(separator: ", ")). Может работать с ошибками; выключите — останетесь на этой версии до следующего обычного выпуска.")
         }
-        .onChange(of: settings.betaUpdates) { Updates.beta = settings.betaUpdates }
     }
 }

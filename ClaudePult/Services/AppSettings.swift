@@ -121,11 +121,11 @@ final class AppSettings {
 
     /// Beta builds through Sparkle and the modules still in beta testing (docs/RELEASE.md «Beta builds»).
     var betaUpdates: Bool {
-        didSet { defaults.set(betaUpdates, forKey: Keys.betaUpdates) }
+        didSet {
+            defaults.set(betaUpdates, forKey: Keys.betaUpdates)
+            Updates.beta = betaUpdates
+        }
     }
-
-    /// `betaUpdates` where no settings object is at hand (the Settings sidebar search).
-    nonisolated static var betaUpdatesSaved: Bool { UserDefaults.standard.bool(forKey: Keys.betaUpdates) }
 
     /// «Раскладка» (SPEC-layout §4).
     var layout: LayoutSettings {
