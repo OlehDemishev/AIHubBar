@@ -1,24 +1,29 @@
 # Status
 
 <!-- summary:start -->
-**Stage:** Mac: 0.3.0 published; next — beta builds, first beta feature «Раскладка» (auto layout switch). Windows/Linux (`desktop/`, Tauri 2): stages 1–3 main parts merged, CI green, not tried live
+**Stage:** Mac: 0.3.0 published; next — beta builds, first beta feature «Раскладка» (auto layout switch). Windows/Linux (`desktop/`, Tauri 2): postponed by Oleh 2026-11-02 after stages 1–3 main parts
 **Updated:** 2026-11-02
 
 **Now:**
 - nothing in progress; beta channel and «Раскладка» (beta) merged in #195 (`aecf785`), not tried live yet
+- Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/SPEC-windows.md §9, stage 2–3 leftovers)
 
 **Next:**
 - Oleh tries «Раскладка» live (needs Accessibility), then the first beta: `scripts/release.sh 0.4.0-beta.1 --publish`
-- Windows/Linux: rest of stage 2 (Telegram, spend per project, own thresholds), rest of stage 3, then stage 4 (docs/SPEC-windows.md §9)
 - Mac island: a live VoiceOver walk; why one test drag onto the island didn't land
 
 **Needs Oleh:**
 - «Раскладка»: build (`scripts/build-and-install.sh`), Settings → General → «Бета-версии» on, Modules → «Раскладка» → Установить, allow Accessibility; try «ghbdtn»+space, double Shift, ⌥⇧ on a selection, in Safari/Notes/Telegram/Chrome
 - say when to publish the first beta (it creates the `beta` release that beta testers' copies read; until then their update check finds nothing)
 - MacBook Air: update to 0.3.0 and check the island at the real notch (see the 0.3.0 entry)
-- Windows: SPEC-windows §10 defaults, signing, the installer from Actions → «Desktop»
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-02 — Windows/Linux postponed (branch `chore/status-postpone-desktop`)
+
+Done: Oleh postponed the Windows and Linux builds. Taken out of Next and Needs Oleh; the code in `desktop/` and its CI stay as they are.
+Checked: STATUS only.
+Left: where it stopped — rest of stage 2 (Telegram, spend per project, own thresholds), rest of stage 3 («Показать», alive check, permission answers), then stage 4 (docs/SPEC-windows.md §9); SPEC-windows §10 defaults and signing still Oleh's.
 
 ## 2026-11-02 — beta builds and «Раскладка», auto layout switch in beta (branch `feat/layout-switcher`)
 
