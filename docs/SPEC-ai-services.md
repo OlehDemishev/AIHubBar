@@ -1,6 +1,6 @@
 # SPEC — AI services: Claude as one of them, the same view for every service
 
-Status: stages 1–4 done (#159, #162–#167), 2026-11-02; next: stage 5 (after a live check). Stage 3's tokens and context still need a look on a Mac with Codex threads.
+Status: stages 1–6 done (#159, #162–#168), 2026-11-02; left: Gemini tokens per project (needs a Mac with Gemini CLI), a Codex «waiting» signal (see stage 5).
 Asked by Oleh on 2026-10-31 and 2026-11-02: move Claude Code into «Сервисы AI», give every AI its own nested tab
 with all its settings, and bring the other services up to Claude Code's level — one model per service for rings,
 forecast, week strip, credits, per-project tokens and context.
@@ -99,14 +99,21 @@ service mark. Sessions: Codex threads next to Claude sessions once a source exis
 3. **Codex in full** (done): plan and credits from `account/rateLimits/read` (`CodexThreads.accountNotes`), history
    and forecast (stage 2), tokens per project this week from `state_<N>.sqlite` `threads` (whole threads, not archived),
    the context of today's latest thread from its rollout's last `token_count` (tokens without reasoning over
-   `model_context_window`, as Codex counts it). Live: the plan on Oleh's Mac (free plan, no credits); tokens and context
-   only on stored samples — this Mac has no Codex threads yet (`AIHubBar --services limits` shows them once there are).
+   `model_context_window`, as Codex counts it). Live (2026-11-02, one `codex exec` in a scratch folder with Oleh's OK):
+   plan «Free», project 16 132 tokens, context 6 % (16 132 of 258 400) — the real rollout matches the parser.
 4. **Per-service alerts, menu bar and widget** (done): thresholds per service (`serviceThresholds`, own / common /
    none, on each service's page); «which service» was already there for the menu bar (the «Другие AI» element with a
    chosen or the fullest service, #130) and the widget (up to three other services); the notch gets an «Другие AI»
    ear; the weekly summary ends with a line per other service (limits, growth over the week, Codex projects).
-5. **Codex sessions**: threads in the sessions list; `notify` hook for «waiting for you» — only after a live check.
-6. Gemini / Copilot / Cursor: whatever §2 marks ⚙️ after their live checks.
+5. **Codex sessions** (done): threads updated in the last 3 hours in «Сессии» under Claude's (project, title, when,
+   context from 70 %); a click runs `codex resume <id>` in Terminal in the thread's folder. No state dot: Codex has no
+   hooks here. The `notify` hook is **not** installed: Codex has one `notify` command and on Oleh's Mac it already
+   belongs to ChatGPT's computer use (`SkyComputerUseClient turn-ended`) — replacing it would break that, chaining it
+   means editing ChatGPT's config. Revisit if Codex gets real hooks.
+6. **Gemini / Copilot / Cursor** (done as far as can be checked): their ⚙️ history and forecast came with stage 2's
+   `LimitHistory` (forecast, week by day for every limit with a percentage). Left: Gemini tokens per project
+   (`~/.gemini/tmp/<project hash>/` chats) — no Gemini CLI on this Mac to check the format; Copilot and Cursor have no
+   per-project or context data (§2 ❌).
 
 Rules for every stage: hover hint on each icon-only control, accessibility walk at the end of each UI stage
 (SPEC §3.1), all strings in 13 languages, nothing read without the consent the service already asks for.

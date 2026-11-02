@@ -7,6 +7,8 @@ import SQLite3
 /// Read only; nothing is written.
 enum CodexThreads {
     struct Thread: Equatable, Sendable {
+        var id: String = ""
+        var title: String = ""
         var cwd: String
         var tokens: Int
         var updatedAt: Date
@@ -35,7 +37,7 @@ enum CodexThreads {
         }
         defer { sqlite3_close(db) }
         sqlite3_busy_timeout(db, 500)
-        let sql = "SELECT cwd, tokens_used, updated_at, rollout_path FROM threads WHERE archived = 0 AND updated_at >= ? ORDER BY updated_at DESC"
+        let sql = "SELECT cwd, tokens_used, updated_at, rollout_path, id, title FROM threads WHERE archived = 0 AND updated_at >= ? ORDER BY updated_at DESC"
         var statement: OpaquePointer?
         guard sqlite3_prepare_v2(db, sql, -1, &statement, nil) == SQLITE_OK else { return [] }
         defer { sqlite3_finalize(statement) }
@@ -49,6 +51,8 @@ enum CodexThreads {
                 updatedAt: Date(timeIntervalSince1970: TimeInterval(sqlite3_column_int64(statement, 2))),
                 rolloutPath: text(3)
             ))
+            result[result.count - 1].id = text(4)
+            result[result.count - 1].title = text(5)
         }
         return result
     }
@@ -107,6 +111,35 @@ enum CodexThreads {
             }
         }
         return notes
+    }
+
+    /// A Codex thread for the «Сессии» block (SPEC-ai-services stage 5): Codex has no hooks here, so there is no
+    /// «working» or «waiting» — only when the thread was last updated and how full its context is.
+    struct Recent: Equatable, Identifiable, Sendable {
+        var id: String
+        var project: String
+        var folder: String
+        var title: String
+        var updatedAt: Date
+        var context: Double?
+    }
+
+    /// Threads updated in the last `within` seconds (3 hours), newest first, at most `limit`.
+    static func recent(home: URL = FileManager.default.homeDirectoryForCurrentUser, now: Date = .now,
+                       within: TimeInterval = 3 * 3600, limit: Int = 5) -> [Recent] {
+        guard let database = database(home: home) else { return [] }
+        return threads(in: database, since: now.addingTimeInterval(-within)).prefix(limit).map { thread in
+            Recent(
+                id: thread.id, project: URL(fileURLWithPath: thread.cwd).lastPathComponent, folder: thread.cwd,
+                title: thread.title, updatedAt: thread.updatedAt,
+                context: thread.rolloutPath.isEmpty ? nil : context(rollout: URL(fileURLWithPath: thread.rolloutPath))
+            )
+        }
+    }
+
+    /// Terminal command that continues the thread in its folder.
+    static func resumeCommandLine(_ thread: Recent, codexPath: String) -> String {
+        "cd \(ShellQuote.quote(thread.folder)) && \(ShellQuote.quote(codexPath)) resume \(ShellQuote.quote(thread.id))"
     }
 
     /// What Codex adds beyond its limits: tokens per project this week and the context of a thread used today.
