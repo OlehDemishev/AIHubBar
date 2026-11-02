@@ -25,6 +25,15 @@
       <p class="secondary" id="forecast" hidden></p>
       <p class="error" id="limits-error" hidden></p>
     </section>
+    <section class="card sessions">
+      <h2 data-t="Сессии Claude Code"></h2>
+      <div id="session-rows"></div>
+      <p class="secondary" id="no-sessions" data-t="Сессий Claude Code сейчас нет" hidden></p>
+      <div id="no-hooks" hidden>
+        <p class="secondary" data-t="Сессии Claude не отслеживаются: hooks не установлены."></p>
+        <p style="margin-top: 6px"><button id="hooks-settings" data-t="Настройки…"></button></p>
+      </div>
+    </section>
     <p class="secondary" id="version"></p>
   </main>
   <script type="module">
@@ -81,6 +90,27 @@
     }
     await showLimits();
     window.__TAURI__.event.listen("limits-changed", showLimits);
+
+    // Sessions, as the Mac panel lists them: state, project, what it waits for or does, the task list's progress.
+    async function showSessions() {
+      const view = await invoke("sessions_view");
+      const rows = document.getElementById("session-rows");
+      rows.replaceChildren(...view.rows.map((row) => {
+        const item = document.createElement("div");
+        item.className = `session ${row.state}`;
+        item.innerHTML = `<span class="dot" aria-hidden="true"></span><span class="project"></span><span class="secondary detail"></span><span class="secondary progress"></span>`;
+        item.querySelector(".project").textContent = row.project;
+        item.querySelector(".detail").textContent = row.detail ?? row.stateTitle;
+        item.querySelector(".progress").textContent = row.progress ?? "";
+        item.title = `${row.project} · ${row.stateTitle}${row.detail ? " · " + row.detail : ""}`;
+        return item;
+      }));
+      document.getElementById("no-hooks").hidden = view.hooks === "installed";
+      document.getElementById("no-sessions").hidden = view.rows.length > 0 || view.hooks !== "installed";
+    }
+    document.getElementById("hooks-settings").onclick = () => invoke("open_settings");
+    await showSessions();
+    window.__TAURI__.event.listen("sessions-changed", showSessions);
   </script>
 </body>
 </html>

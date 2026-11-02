@@ -2,9 +2,11 @@
 //! the settings file, the interface languages and the link between `claudepult` and the running app.
 //! The Mac version (Swift) shares no code with this; only file formats and texts (docs/SPEC-windows.md §2, §6).
 
+pub mod hooks;
 pub mod i18n;
 pub mod ipc;
 pub mod paths;
+pub mod sessions;
 pub mod settings;
 pub mod texts;
 pub mod tray_icon;

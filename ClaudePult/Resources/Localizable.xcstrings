@@ -8026,6 +8026,82 @@
       }
     },
     "Hooks": {},
+    "Hooks добавляются в settings.json Claude Code (остальные настройки не трогаются, перед изменением рядом сохраняется копия). Они записывают состояние каждой сессии Claude Code на этом компьютере, чтобы AI Hub Bar показывал их в панели.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تُضاف hooks إلى settings.json الخاص بـ Claude Code (لا تُمس الإعدادات الأخرى، وتُحفظ نسخة بجانبه قبل أي تغيير). وهي تسجّل حالة كل جلسة Claude Code على هذا الكمبيوتر ليعرضها AI Hub Bar في اللوحة."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hooks werden in die settings.json von Claude Code eingetragen (andere Einstellungen bleiben unberührt, vorher wird daneben eine Kopie gespeichert). Sie halten den Zustand jeder Claude-Code-Sitzung auf diesem Computer fest, damit AI Hub Bar sie im Panel zeigt."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hooks are added to Claude Code’s settings.json (other settings are left alone, and a copy is saved next to it before any change). They record the state of every Claude Code session on this computer so AI Hub Bar can show it in the panel."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los hooks se añaden al settings.json de Claude Code (el resto de ajustes no se toca y antes de cambiarlo se guarda una copia al lado). Registran el estado de cada sesión de Claude Code en este ordenador para que AI Hub Bar la muestre en el panel."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les hooks sont ajoutés au settings.json de Claude Code (les autres réglages restent intacts, une copie est enregistrée à côté avant toute modification). Ils notent l’état de chaque session Claude Code sur cet ordinateur pour qu’AI Hub Bar l’affiche dans le panneau."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hooks ditambahkan ke settings.json Claude Code (pengaturan lain tidak disentuh, salinan disimpan di sebelahnya sebelum diubah). Hooks mencatat status setiap sesi Claude Code di komputer ini agar AI Hub Bar menampilkannya di panel."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gli hook vengono aggiunti al settings.json di Claude Code (le altre impostazioni restano intatte e prima di ogni modifica ne viene salvata una copia accanto). Registrano lo stato di ogni sessione di Claude Code su questo computer, così AI Hub Bar la mostra nel pannello."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "hooks は Claude Code の settings.json に追加されます（ほかの設定は変更せず、変更前に隣へコピーを保存します）。このコンピュータ上のすべての Claude Code セッションの状態を記録し、AI Hub Bar のパネルに表示します。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "hooks는 Claude Code의 settings.json에 추가됩니다(다른 설정은 건드리지 않으며 변경 전에 옆에 사본을 저장합니다). 이 컴퓨터의 모든 Claude Code 세션 상태를 기록해 AI Hub Bar 패널에 표시합니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hooki są dodawane do settings.json Claude Code (pozostałe ustawienia zostają bez zmian, przed zmianą obok zapisuje się kopia). Zapisują stan każdej sesji Claude Code na tym komputerze, żeby AI Hub Bar pokazywał ją w panelu."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Os hooks são adicionados ao settings.json do Claude Code (as outras configurações não são alteradas e uma cópia é salva ao lado antes de qualquer mudança). Eles registram o estado de cada sessão do Claude Code neste computador para o AI Hub Bar mostrá-la no painel."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hooks додаються в settings.json Claude Code (інші налаштування не змінюються, перед зміною поруч зберігається копія). Вони записують стан кожної сесії Claude Code на цьому комп’ютері, щоб AI Hub Bar показував її в панелі."
+          }
+        }
+      }
+    },
     "Hooks добавляются в ~/.claude/settings.json (остальные настройки не трогаются, перед изменением рядом сохраняется копия). Они записывают состояние каждой сессии Claude Code на этом Маке — в Терминале, в приложении Claude, фоновых — чтобы AI Hub Bar показывал их в панели.": {
       "localizations": {
         "ar": {

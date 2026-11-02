@@ -136,6 +136,8 @@ impl Limits {
 
     /// The ring of the session limit and the summary in the hint; the app's own icon until the first answer.
     pub fn update_tray(&self, app: &AppHandle) {
+        // An orange dot while a session waits for an answer (stage 3).
+        let attention = app.state::<crate::sessions::Sessions>().attention.load(std::sync::atomic::Ordering::Relaxed);
         let (session, tooltip) = {
             let state = self.state.lock().unwrap();
             let texts = strings(app);
@@ -147,7 +149,7 @@ impl Limits {
             let Some(tray) = app_for_tray.tray_by_id(crate::TRAY_ID) else { return };
             let _ = tray.set_tooltip(Some(tooltip));
             if let Some(percent) = session {
-                let pixels = tray_icon::ring(ICON_SIZE, percent, false);
+                let pixels = tray_icon::ring(ICON_SIZE, percent, attention);
                 let _ = tray.set_icon(Some(Image::new_owned(pixels, ICON_SIZE, ICON_SIZE)));
             }
         });

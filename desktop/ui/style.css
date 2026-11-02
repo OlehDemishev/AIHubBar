@@ -76,3 +76,16 @@ h2 { font-size: 12px; font-weight: 600; color: var(--secondary); margin: 0 0 8px
 .limits #forecast, .limits .error { margin-top: 8px; }
 .error { color: #d70015; font-size: 12px; }
 @media (prefers-color-scheme: dark) { .error { color: #ff6961; } }
+
+/* Sessions */
+.session { display: flex; align-items: center; gap: 6px; padding: 3px 0; min-width: 0; }
+.session .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--secondary); flex: none; }
+.session.waiting .dot { background: #ff9500; }
+.session.running .dot { background: #0a84ff; }
+.session.done .dot { background: #34c759; }
+.session .project { font-weight: 600; flex: none; }
+.session .detail { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; min-width: 0; }
+.session .progress { flex: none; font-variant-numeric: tabular-nums; }
+[hidden] { display: none !important; }
+button:disabled { opacity: 0.45; cursor: default; }
+button:disabled:hover { border-color: var(--line); }

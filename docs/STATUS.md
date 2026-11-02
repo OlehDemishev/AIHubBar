@@ -5,8 +5,7 @@
 **Updated:** 2026-11-02
 
 **Now:**
-- branch `feat/desktop-skeleton` (PR): Windows / Linux stage 1 «Каркас» in `desktop/` (Tauri 2) with CI on GitHub's Windows and Linux machines
-- branch `feat/desktop-limits` (PR on top of it): Windows / Linux stage 2 «Лимиты», main part
+- Windows / Linux in `desktop/` (Tauri 2): stage 1 «Каркас» merged (#189, CI green on Windows and Linux); stage 2 «Лимиты» main part — PR #190; stage 3 «Сессии» main part — branch `feat/desktop-sessions` (PR on top of #190)
 - merged 2026-11-02 (#186): notch stage 5 — drop a file or folder on the island → the profile's AI commands for it
 - merged 2026-11-02 (#184): notch stage 4 — Claude's task list in the island (ring and «3/7» in the ear, steps in the card, «3/3 · 2 мин · файлов: 9» in «Готово»)
 - 0.3.0 built, not published: `build/release/0.3.0/AIHubBar-0.3.0.dmg` (build 400) + `appcast.xml`, for the MacBook Air first; publish it from `91d6c2b` (before stage 4): `git switch --detach 91d6c2b && scripts/release.sh 0.3.0 --publish`
@@ -31,7 +30,7 @@
 - fix whatever Oleh finds in the translations (automated checks pass; a native read for ja, ko, ar is still worth it)
 - stage 8: done without Developer ID (self-signed + Sparkle, PR #85; re-checked on main); notarization only if Oleh buys Developer ID; publishing is Oleh's step (Needs Oleh)
 - Fix whatever Oleh finds in docs/CHECKLIST.md
-- Windows and Linux (Oleh said go, 2026-11-02): stage 1 «Каркас» and most of stage 2 «Лимиты» done in `desktop/`; next: the rest of stage 2 (Telegram, spend per project, custom thresholds), then stage 3 «Сессии» (`claudepult-hook.exe`, hooks in exec form); stage 0 leftovers need a real Windows (Ctrl+Break and SessionEnd, the Claude desktop app's session folder)
+- Windows and Linux (Oleh said go, 2026-11-02): stage 1 «Каркас» and most of stage 2 «Лимиты» done in `desktop/`; next: the rest of stage 2 (Telegram, spend per project, custom thresholds), the rest of stage 3 (Show — the terminal window, process alive check, answering permission requests), then stage 4 «Проекты и Claude»; stage 0 leftovers need a real Windows (Ctrl+Break and SessionEnd, the Claude desktop app's session folder)
 
 **Needs Oleh:**
 - stage 5 on the MacBook Air (build from main): drag a file from Finder onto the notch — «Отпустите — AI-команды для файла», then the card; «Своя задача» with a short task → a new file next to it; tell me if a drag ever doesn't catch
@@ -59,6 +58,36 @@
 - Windows: try the installer from the latest «Desktop» run on GitHub (Actions → Desktop → artifact ai-hub-bar-Windows): it installs for you only, without admin; the tray icon, the panel on a click, Settings → language and start at sign-in; SmartScreen will warn (no signature yet)
 - optional: Apple Developer ID (notarization, no «Open Anyway»); delete or archive the old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-02 — Windows and Linux, stage 3 «Сессии», main part (branch `feat/desktop-sessions`)
+
+Done:
+- **`claudepult-hook`** — a Rust port of the Mac's Python hook, format 3. It writes the same session file: state, current action, task list, `prompt_at`, the once-a-minute throttle with task-list calls always written. It adds `wt_session`. It finds the Claude process by walking the parents: a Toolhelp snapshot on Windows, `ps` on Linux. It never prints and always exits 0, even on a panic.
+- **`core/hooks.rs`** — the Mac's merge and removal in exec form (`command` + `args`, so no shell and no quoting), with a backup, an idempotent reinstall, other hooks kept, and a non-object file left alone.
+- **`core/sessions.rs`** — the Mac's rules: visible (stale after 2 h, ended kept 15 min), order, the action in words, task-list progress, files older than a week deleted.
+- **The app (`sessions.rs`)**:
+  - the folder read every 3 s;
+  - the panel's sessions card: state dot, project, what it waits for or does, «1/3»;
+  - an orange dot on the tray ring while one waits;
+  - Settings → Hooks: status, install/update/remove.
+- **On a Mac** the install is refused unless `CLAUDE_CONFIG_DIR` points elsewhere (both in the UI and in the command), so the dev build can't touch the Mac app's hooks.
+- **The installer** carries `claudepult-hook` and `claudepult` next to the app (`app/tauri.bundle.conf.json` + `scripts/stage-binaries.sh`; CI uses them).
+- **1 new text** with 12 translations.
+- **A fix found here:** `strings.py` now also takes texts from `core/` and only calls on a `Strings` value. Before, the limits texts would have stayed Russian on Windows. Carried back into #190.
+
+Checked:
+- `cargo test --workspace` on the Mac — 28 core, the socket round trip, 3 hook integration tests with the real binary;
+- a local bundle had `AIHubBar`, `claudepult`, `claudepult-hook` side by side (then removed);
+- the app run on the Mac: the built hook fed two sessions in the dev folder, and the panel showed «Ambo — Нужно разрешение: Bash» (orange) and «ClaudePult — правит sessions.rs, 1/3» (blue) (captured);
+- Settings showed Hooks «нужно обновить» (it sees the Mac app's own hook) with the buttons disabled;
+- the fake sessions were removed.
+
+Left:
+- «Show»;
+- the alive check (sessions go stale by time only);
+- answering permission requests;
+- the Claude desktop app's sessions;
+- the drawn dot and the hook seen only on the Mac; on Windows only CI.
 
 ## 2026-11-02 — Windows and Linux, stage 2 «Лимиты», main part (branch `feat/desktop-limits`)
 
