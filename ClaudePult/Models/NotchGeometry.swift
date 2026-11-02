@@ -76,48 +76,47 @@ extension NotchGeometry {
 
         /// The pill, under the menu bar (the visible frame's top; a screen without a menu bar has its own top).
         var pillGeometry: NotchGeometry { .pill(screen: frame, menuBarBottom: min(visibleFrame.maxY, frame.maxY)) }
+
+        /// A 184 pt notch in the middle of the top edge, at least as tall as the menu bar (`notchSimulate`).
+        mutating func simulateNotch() {
+            safeAreaTop = max(frame.maxY - visibleFrame.maxY, 32)
+            let y = frame.maxY - safeAreaTop
+            topLeftArea = CGRect(x: frame.minX, y: y, width: frame.width / 2 - 92, height: safeAreaTop)
+            topRightArea = CGRect(x: frame.midX + 92, y: y, width: frame.width / 2 - 92, height: safeAreaTop)
+        }
     }
 
-    /// Where the island goes (SPEC-notch §5): on the chosen screen its notch, else — when the pill is on — a pill
-    /// on the main screen. nil: nowhere.
-    static func choose(_ screens: [Screen], on choice: NotchScreen, pill: Bool) -> NotchGeometry? {
+    /// Where the islands go (SPEC-notch §5): on the chosen screen its notch, else — when the pill is on — a pill
+    /// on the main screen; «на всех экранах» — one on every screen, the pill where there is no notch. Empty: nowhere.
+    static func choose(_ screens: [Screen], on choice: NotchScreen, pill: Bool) -> [NotchGeometry] {
         let main = screens.first(where: \.isMain) ?? screens.first
         switch choice {
         case .notch:
-            if let notched = screens.lazy.compactMap(\.notchGeometry).first { return notched }
+            if let notched = screens.lazy.compactMap(\.notchGeometry).first { return [notched] }
         case .main:
-            if let notched = main?.notchGeometry { return notched }
+            if let notched = main?.notchGeometry { return [notched] }
+        case .all:
+            return screens.compactMap { $0.notchGeometry ?? (pill ? $0.pillGeometry : nil) }
         }
-        return pill ? main?.pillGeometry : nil
+        return pill ? main.map { [$0.pillGeometry] } ?? [] : []
     }
 
     @MainActor static var screens: [Screen] {
-        NSScreen.screens.map { screen in
-            Screen(frame: screen.frame, visibleFrame: screen.visibleFrame, safeAreaTop: screen.safeAreaInsets.top,
-                   topLeftArea: screen.auxiliaryTopLeftArea, topRightArea: screen.auxiliaryTopRightArea, isMain: screen == NSScreen.main)
+        let simulate = UserDefaults.standard.bool(forKey: simulateKey)
+        return NSScreen.screens.map { screen in
+            var result = Screen(frame: screen.frame, visibleFrame: screen.visibleFrame, safeAreaTop: screen.safeAreaInsets.top,
+                                topLeftArea: screen.auxiliaryTopLeftArea, topRightArea: screen.auxiliaryTopRightArea,
+                                isMain: screen == NSScreen.main)
+            if simulate, result.isMain, result.notchGeometry == nil { result.simulateNotch() }
+            return result
         }
     }
 
-    /// The first screen with a notch — on a MacBook, its built-in display.
-    @MainActor static func current(simulate: Bool = UserDefaults.standard.bool(forKey: simulateKey)) -> (NSScreen, NotchGeometry)? {
-        for screen in NSScreen.screens {
-            if let geometry = NotchGeometry(screen: screen.frame, safeAreaTop: screen.safeAreaInsets.top,
-                                            topLeftArea: screen.auxiliaryTopLeftArea, topRightArea: screen.auxiliaryTopRightArea) {
-                return (screen, geometry)
-            }
-        }
-        guard simulate, let screen = NSScreen.main else { return nil }
-        let height = max(NSStatusBar.system.thickness, 32)
-        let notch = CGRect(x: screen.frame.midX - 92, y: screen.frame.maxY - height, width: 184, height: height)
-        return (screen, NotchGeometry(notch: notch, screen: screen.frame))
+    /// The islands' places with these settings, simulated notch included.
+    @MainActor static func places(for settings: NotchSettings) -> [NotchGeometry] {
+        choose(screens, on: settings.screen, pill: settings.showsPill(macHasNotch: macHasNotch))
     }
 
-    /// The island's place with these settings, simulated notch included.
-    @MainActor static func current(for settings: NotchSettings) -> NotchGeometry? {
-        if UserDefaults.standard.bool(forKey: simulateKey), let simulated = current()?.1 { return simulated }
-        return choose(screens, on: settings.screen, pill: settings.showsPill(macHasNotch: macHasNotch))
-    }
-
-    /// Whether this Mac has a screen with a notch right now (the assistant offers the island only then).
-    @MainActor static var macHasNotch: Bool { current() != nil }
+    /// Whether this Mac has a screen with a notch right now, simulated included (the assistant offers the island only then).
+    @MainActor static var macHasNotch: Bool { screens.contains { $0.notchGeometry != nil } }
 }

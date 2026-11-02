@@ -24,6 +24,22 @@ struct QuickToolsTests {
         #expect(QuickToggle.allCases.filter(\.needsConfirmation) == [.emptyTrash])
     }
 
+    @Test func islandToggleOnlyWithTheIsland() {
+        #expect(!QuickToggle.available(installed: [.toggles]).contains(.notchIsland))
+        #expect(QuickToggle.available(installed: [.toggles, .notch]).contains(.notchIsland))
+        #expect(QuickToggle.available(installed: []).count == QuickToggle.allCases.count - 1)
+    }
+
+    @MainActor @Test func islandToggleHidesTheIsland() {
+        let settings = AppSettings(defaults: UserDefaults(suiteName: "quick-island-\(UUID().uuidString)")!)
+        let tools = QuickToolsController(settings: settings)
+        #expect(tools.isOn(.notchIsland) == true)
+        tools.perform(.notchIsland)
+        #expect(settings.notch.hidden && tools.isOn(.notchIsland) == false)
+        tools.perform(.notchIsland)
+        #expect(!settings.notch.hidden)
+    }
+
     @Test func storedLibraryDecodes() throws {
         let commands = [QuickCommand(title: "Сборка", symbol: "hammer", kind: .terminal, value: "make", confirm: true)]
         let decoded = try JSONDecoder().decode([QuickCommand].self, from: JSONEncoder().encode(commands))

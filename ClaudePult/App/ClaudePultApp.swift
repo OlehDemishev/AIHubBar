@@ -122,7 +122,7 @@ struct ClaudePultApp: App {
         AppDelegate.willTerminate = { keepAwake.releaseOnQuit() }
         GlobalHotKey.action = { QuickSearch.show() }
         QuickSearch.open = { [requests] in requests.openWindow("search") }
-        let quickTools = QuickToolsController()
+        let quickTools = QuickToolsController(settings: settings)
         _quickTools = State(initialValue: quickTools)
         IntentBridge.settings = settings
         IntentBridge.quickTools = quickTools
@@ -161,8 +161,8 @@ struct ClaudePultApp: App {
             clipboard.start()
             // Windows can only be made once the app has finished launching.
             DispatchQueue.main.async {
-                notchIsland.start { [notchIsland, settings, usage, sessions, runs] in
-                    AnyView(NotchIslandView()
+                notchIsland.start { [notchIsland, settings, usage, sessions, runs] index in
+                    AnyView(NotchIslandView(index: index)
                         .environment(notchIsland)
                         .environment(settings)
                         .environment(usage)

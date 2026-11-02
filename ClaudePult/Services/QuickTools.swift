@@ -63,6 +63,8 @@ struct QuickCommand: Codable, Equatable, Identifiable, Sendable {
 /// One of the «Быстрые переключатели» (SPEC-profiles §4.4). Each runs only when the person clicks it.
 enum QuickToggle: String, Codable, CaseIterable, Sendable {
     case darkMode, desktopIcons, lockScreen, displaySleep, ejectDisks, emptyTrash
+    /// «Скрыть остров» (SPEC-notch §5), for a screen recording or a demo; shown only while the island is installed.
+    case notchIsland
 
     /// Under the tile in the panel; the full title is its hover hint.
     var shortTitle: String {
@@ -73,6 +75,7 @@ enum QuickToggle: String, Codable, CaseIterable, Sendable {
         case .displaySleep: String(localized: "Экран")
         case .ejectDisks: String(localized: "Диски")
         case .emptyTrash: String(localized: "Корзина")
+        case .notchIsland: String(localized: "Остров")
         }
     }
 
@@ -84,6 +87,7 @@ enum QuickToggle: String, Codable, CaseIterable, Sendable {
         case .displaySleep: String(localized: "Погасить экран")
         case .ejectDisks: String(localized: "Извлечь диски")
         case .emptyTrash: String(localized: "Очистить корзину")
+        case .notchIsland: String(localized: "Остров у чёлки")
         }
     }
 
@@ -95,7 +99,13 @@ enum QuickToggle: String, Codable, CaseIterable, Sendable {
         case .displaySleep: "display"
         case .ejectDisks: "eject"
         case .emptyTrash: "trash"
+        case .notchIsland: "laptopcomputer"
         }
+    }
+
+    /// The toggles that make sense with these modules: the island's only while it is installed.
+    static func available(installed: [ModuleKind]) -> [QuickToggle] {
+        allCases.filter { $0 != .notchIsland || installed.contains(.notch) }
     }
 
     /// Can't be undone: asked first.
@@ -116,6 +126,12 @@ final class QuickToolsController {
     /// Toggle states that can be read: dark mode, desktop icons.
     private(set) var darkMode = false
     private(set) var desktopIconsShown = true
+    /// For the island toggle: «Скрыть остров» lives in the module's settings.
+    @ObservationIgnored private let settings: AppSettings?
+
+    init(settings: AppSettings? = nil) {
+        self.settings = settings
+    }
 
     func refreshStates() {
         darkMode = UserDefaults.standard.persistentDomain(forName: UserDefaults.globalDomain)?["AppleInterfaceStyle"] as? String == "Dark"
@@ -126,6 +142,7 @@ final class QuickToolsController {
         switch toggle {
         case .darkMode: darkMode
         case .desktopIcons: desktopIconsShown
+        case .notchIsland: settings.map { !$0.notch.hidden }
         default: nil
         }
     }
@@ -175,6 +192,10 @@ final class QuickToolsController {
     }
 
     func perform(_ toggle: QuickToggle) {
+        if toggle == .notchIsland {
+            settings?.notch.hidden.toggle()
+            return
+        }
         guard !running.contains(toggle.rawValue) else { return }
         running.insert(toggle.rawValue)
         Task {
@@ -202,6 +223,8 @@ final class QuickToolsController {
                 results[toggle.rawValue] = Result(text: ejected == 0 ? String(localized: "Нечего извлекать") : String(localized: "Извлечено дисков: \(ejected)"), isError: false)
             case .emptyTrash:
                 error = await Self.osascript("tell application \"Finder\" to empty trash")
+            case .notchIsland:
+                error = nil
             }
             if let error {
                 results[toggle.rawValue] = Result(text: error, isError: true)
