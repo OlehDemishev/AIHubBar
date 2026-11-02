@@ -49,7 +49,7 @@ Profiles built from modules, each with its own panel and menu bar. Start from a 
 | Social media | a campaign or platform | posts per platform, ad variants, a week's content plan |
 | Custom | any folder | your own, with `{project}`, `{file}`, `{language}` … |
 
-A command's result is always a **new file** — nothing is overwritten. **Compare** runs one command with two or three services side by side. Works with Claude Code, Codex CLI, Gemini CLI, Antigravity, Copilot CLI, Cursor CLI, and models by API (Anthropic, OpenAI, Google, xAI, DeepSeek, Mistral, Ollama, LM Studio, OpenRouter).
+A command's result is always a **new file** — nothing is overwritten. **Compare** runs one command with two or three services side by side. Works with Claude Code, Codex CLI, Gemini CLI, Antigravity, Copilot CLI, Cursor CLI, and models by API (Anthropic, OpenAI, Google, xAI, DeepSeek, Mistral, Qwen, Kimi, GLM, MiniMax, Ollama, LM Studio, OpenRouter).
 
 ### And more
 - **Calendar** of deadlines, publications and content plans straight from your project files — drag an entry and the file is updated.

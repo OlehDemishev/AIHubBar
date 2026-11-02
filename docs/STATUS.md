@@ -5,6 +5,7 @@
 **Updated:** 2026-11-02
 
 **Now:**
+- branch `feat/chinese-models`: Chinese models by API — Alibaba Qwen, Moonshot Kimi, Z.ai GLM, MiniMax in «Сервисы AI» → «Другие»; PR open
 - nothing in progress; merged 2026-11-02: Antigravity conversations in «Сессии» (#170), Copilot in full (#169), AI services stages 5–6 — Codex threads in «Сессии», stage 3 checked live (#168), stage 4 — thresholds per service, «Другие AI» notch ear, other services in the weekly summary (#167), stage 3 — Codex plan, credits, tokens per project, context (#166), stage 2 — one limits card for every service (#165), Settings redone like System Settings (#164), «Сервисы AI» as a list on the left (#162) in the window colour (#163), glass panel background (#158) and its fix for macOS 27 (#160), AI services spec + stage 1 — Claude Code inside «Сервисы AI», a tab per service (#159)
 - released 0.2.2 (v0.2.2, build 345): clickable widgets (#154), Codex from the ChatGPT desktop app (#155), notch island stage 2 (#153)
 - notch island stage 1 merged (#149): module, island over the notch, ears, hover card; target release 0.3.0
@@ -28,6 +29,7 @@
 - Windows and Linux versions (docs/SPEC-windows.md, docs/SPEC-linux.md) — only when Oleh says; stage 0 (fact checks in VMs) first
 
 **Needs Oleh:**
+- Chinese models (after merge): to try one, make a key (Qwen / Kimi / GLM / MiniMax — links next to each in «Сервисы AI» → «Другие»), paste it, «Проверить»; no key was available to the agent, so a real reply is unchecked
 - optional: test conversations «codex-check», «agents-check» can be archived in Codex / Copilot / Antigravity
 - optional: a Codex thread named «codex-check» (from the live check) is in your Codex history — archive it in Codex if it's in the way
 - new Settings (build from main, installed): one sidebar with search — every page opens, search finds pages by setting names (e.g. «Telegram»), the dots match what's set up; in «Сервисы AI» → Claude Code has all the old options (path, hooks, Telegram answers, saved prompts, CLAUDE.md и MCP, background runs); Codex shows the agent and its limits row; Modules → Лимиты → «Другие AI» shows the summary and «Открыть «Сервисы AI»»
@@ -43,6 +45,12 @@
 - decide SPEC-windows §10 and SPEC-linux §10 (Tauri 2 for both, Windows code signing, first Linux desktops) before that work starts
 - optional: Apple Developer ID (notarization, no «Open Anyway»); delete or archive the old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-02 — Chinese models by API (branch `feat/chinese-models`)
+
+Done: four new API providers in «Сервисы AI» → «Другие», beside DeepSeek: Alibaba Qwen, Moonshot Kimi, Z.ai GLM, MiniMax (international endpoints, key pages, OpenAI-compatible chat). `APIProvider.knownModels` lists each one's current models from its docs; «Проверить» picks the best of them from the list, and for Z.ai (no `/models`) a 404 after the key check returns that list. Doubao left out (docs unreadable, per-account endpoint ids). Why and how — DECISIONS.md. GUIDE / REFERENCE / README / SPEC-ai-services list the new providers.
+Checked: `xcodebuild test` — 325 / 325 pass (new `chineseProvidersCheck`, `preferredModel` with a provider). Unauthenticated probes of each endpoint: `/models` and `/chat/completions` answer 401 (bad key), a made-up path 404 at Alibaba / Moonshot / MiniMax. Debug build `--services check` lists `api qwen`, `kimi`, `glm`, `minimax`.
+Left: no real key, so no live reply from any of the four; Settings UI not looked at (rows come from the same `ProviderRow` as DeepSeek). Strings: provider names only, no new translations.
 
 ## 2026-11-02 — Antigravity conversations in «Сессии»; Gemini CLI sign-in is gone (branch `feat/antigravity-sessions`)
 

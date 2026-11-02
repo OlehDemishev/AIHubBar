@@ -41,7 +41,7 @@ Facts on Oleh's Mac (2026-11-02): `claude` 2.1.314 in `/opt/homebrew/bin`; `code
 | Antigravity (`agy`) | agent row | ❓ not documented | — | — | ❓ | ❓ | ❓ | ❌ |
 | GitHub Copilot CLI | agent row, `gh api /copilot_internal/user` premium requests | ✅ monthly quota | ⚙️ | ✅ entitlement / remaining | ❌ | ❌ | ❌ | ❌ |
 | Cursor CLI | agent row, usage with consent | ✅ requests / spend | ⚙️ | ✅ | ❌ | ❌ | ❌ | ❌ |
-| API providers (Anthropic, OpenAI, Google, xAI, DeepSeek, Mistral, compatible) | key, check, model, own spend | — (pay per token) | ✅ own requests (`CommandEngine`) | OpenAI / Anthropic admin cost APIs, OpenRouter credits | ✅ own requests per project | — | — | text only |
+| API providers (Anthropic, OpenAI, Google, xAI, DeepSeek, Mistral, Qwen, Kimi, GLM, MiniMax, compatible) | key, check, model, own spend | — (pay per token) | ✅ own requests (`CommandEngine`) | OpenAI / Anthropic admin cost APIs, OpenRouter credits | ✅ own requests per project | — | — | text only |
 
 ✅ works now · ⚙️ available, not built · ❓ unverified · ❌ not available. Every ⚙️ needs a live check on a Mac
 that uses the service before it ships (Codex here has no sessions yet).
@@ -81,7 +81,7 @@ Settings sidebar (like System Settings, #164) → group «Сервисы AI»: *
 Другие**, a status dot each. Each page: the agent (path, version, sign-in, install), its limits (on/off, status, keys, consents), its
 API access (Anthropic in Claude Code, OpenAI in Codex, Google in Gemini), then service-only options (Claude Code:
 sessions and hooks, Telegram answers, saved prompts, CLAUDE.md and MCP, background runs). «Другие»: Antigravity,
-xAI / DeepSeek / Mistral / compatible API, OpenRouter, the API spend and budget. Modules → Лимиты keeps the
+xAI / DeepSeek / Mistral / Qwen / Kimi / GLM / MiniMax / compatible API, OpenRouter, the API spend and budget. Modules → Лимиты keeps the
 module-wide options (alerts, run guard, weekly summary) and points to «Сервисы AI» for per-service ones.
 
 Panel → Лимиты: one card per service, all drawn by the same view (rings, forecast, week strip, credits); Claude

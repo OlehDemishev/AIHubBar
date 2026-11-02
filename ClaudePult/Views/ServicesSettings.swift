@@ -53,7 +53,7 @@ enum ServiceTab: String, CaseIterable, Sendable {
         case .anthropic: self = .claude
         case .openai: self = .codex
         case .google: self = .gemini
-        case .xai, .deepseek, .mistral, .compatible: self = .other
+        case .xai, .deepseek, .mistral, .qwen, .kimi, .glm, .minimax, .compatible: self = .other
         }
     }
 
