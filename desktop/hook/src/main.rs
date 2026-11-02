@@ -295,7 +295,8 @@ mod tests {
     fn projects_and_actions() {
         let (name, path) = project_of(Some("/home/me/Projects/Ambo/src"), Some("/home/me/Projects"));
         assert_eq!(name, json!("Ambo"));
-        assert_eq!(path, json!("/home/me/Projects/Ambo"));
+        // The system's own separator joins the folder, as Claude Code's own paths have it.
+        assert_eq!(path, json!(Path::new("/home/me/Projects").join("Ambo").to_string_lossy()));
         assert_eq!(project_of(Some("/tmp/x"), Some("/home/me/Projects")), (Value::Null, Value::Null));
         let edit = json!({"tool_name": "Edit", "tool_input": {"file_path": r"C:\Users\me\Projects\Ambo\LimitsView.swift"}});
         assert_eq!(action_of(&edit), ("Edit".into(), "LimitsView.swift".into()));

@@ -66,7 +66,8 @@ fn a_session_from_start_to_end() {
     ]);
     assert_eq!(record["state"], "running");
     assert_eq!(record["project"], "Ambo");
-    assert_eq!(record["project_path"], "/Users/me/Projects/Ambo");
+    let expected = std::path::Path::new("/Users/me/Projects").join("Ambo");
+    assert_eq!(record["project_path"], expected.to_string_lossy().as_ref(), "joined with the system's separator");
     assert_eq!(record["first_prompt"], "Почини тесты");
     assert_eq!(record["last_tool"], "Edit");
     assert_eq!(record["last_target"], "LimitsView.swift");
