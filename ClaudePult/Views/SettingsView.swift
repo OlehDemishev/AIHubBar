@@ -11,6 +11,8 @@ struct SettingsView: View {
     }
 
     static let size = CGSize(width: 940, height: 700)
+    /// The window can grow; below this the module tiles and the menu bar editor get cramped.
+    static let minSize = CGSize(width: 820, height: 560)
 
     @Environment(AppSettings.self) private var settings
     @Environment(AIServiceStore.self) private var services
@@ -19,6 +21,8 @@ struct SettingsView: View {
     @AppStorage(SettingsRoute.tabKey) private var tab: Tab = .general
     @AppStorage(SettingsRoute.serviceKey) private var service: ServiceTab = .claude
     @AppStorage(SettingsRoute.moduleKey) private var module: ModuleKind = .limits
+    /// «Сервисы AI» folded by default: six rows the sidebar rarely needs.
+    @AppStorage("settingsServicesExpanded") private var servicesExpanded = false
     @State private var query = ""
 
     init() {
@@ -45,7 +49,11 @@ struct SettingsView: View {
                     if group == .ai {
                         let found = SettingsPane.services.filter { $0.matches(query) }
                         if !found.isEmpty {
-                            Section("Сервисы AI") {
+                            Section("Сервисы AI", isExpanded: Binding(
+                                // Open while searching or while one of them is the page shown.
+                                get: { servicesExpanded || !query.isEmpty || pane.tab == .services },
+                                set: { servicesExpanded = $0 }
+                            )) {
                                 ForEach(found, id: \.self) { pane in
                                     PaneRow(pane: pane, isSetUp: isSetUp(pane))
                                 }
@@ -70,7 +78,12 @@ struct SettingsView: View {
             .navigationTitle(pane.title)
         }
         .modifier(NoWindowToolbar())
-        .frame(width: Self.size.width, height: Self.size.height)
+        // The Settings scene makes a fixed-size window; this one may grow (SPEC-settings §2).
+        .background(WindowReader { window in
+            if let window { ResizableSettingsWindow.keep(window, minSize: Self.minSize, size: Self.size) }
+        })
+        .frame(minWidth: Self.minSize.width, idealWidth: Self.size.width, maxWidth: .infinity,
+               minHeight: Self.minSize.height, idealHeight: Self.size.height, maxHeight: .infinity)
         .task { if services.agents.isEmpty { await services.scan() } }
         .preferredColorScheme(settings.panelTheme.colorScheme)
         .debugSnapshot("settings")
@@ -111,6 +124,27 @@ struct SettingsView: View {
     private func isSetUp(_ pane: SettingsPane) -> Bool? {
         guard case let .service(service) = pane else { return nil }
         return service.isSetUp(agents: Set(services.agents.keys), keys: services.hasKey, limits: hub.available.union(hub.savedKeys))
+    }
+}
+
+/// SwiftUI makes the Settings window fixed-size and takes `.resizable` away again after each layout pass; this puts
+/// it back every time it goes, so the window can grow (SPEC-settings §2).
+@MainActor
+enum ResizableSettingsWindow {
+    private static var observed: [ObjectIdentifier: NSKeyValueObservation] = [:]
+
+    static func keep(_ window: NSWindow, minSize: CGSize, size: CGSize) {
+        let id = ObjectIdentifier(window)
+        guard observed[id] == nil else { return }
+        observed[id] = window.observe(\.styleMask, options: [.new]) { window, _ in
+            guard !window.styleMask.contains(.resizable) else { return }
+            DispatchQueue.main.async { MainActor.assumeIsolated { window.styleMask.insert(.resizable) } }
+        }
+        DispatchQueue.main.async {
+            window.styleMask.insert(.resizable)
+            window.contentMinSize = minSize
+            if window.frame.width < size.width || window.frame.height < size.height { window.setContentSize(size) }
+        }
     }
 }
 

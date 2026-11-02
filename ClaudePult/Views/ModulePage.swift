@@ -612,7 +612,7 @@ struct PanelBuilder: View {
                         Footnote(text: String(localized: "Здесь только включённые модули. Остальные — на странице «Модули»; что показывает модуль в каждом профиле — «Профили»."))
                     }
                     PanelSketch(modules: visible(mode).filter(\.shown).map(\.kind))
-                        .frame(width: 250)
+                        .frame(width: 236)
                 }
                 .padding(.horizontal, 24)
                 .padding(.vertical, 12)
@@ -656,10 +656,13 @@ private struct PanelBuilderRow: View {
             PaneIcon(pane: .module(module.kind), size: 26)
             Text(module.kind.title)
                 .font(.system(size: 14))
-            Spacer()
+                .lineLimit(1)
+                .layoutPriority(1)
+            Spacer(minLength: 4)
             ProfileModuleOptions(module: module) { new in
                 set { $0 = new }
             }
+            .fixedSize()
             Toggle(module.kind.title, isOn: Binding(get: { module.shown }, set: { shown in set { $0.shown = shown } }))
                 .toggleStyle(.switch)
                 .labelsHidden()

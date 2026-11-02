@@ -446,6 +446,7 @@ struct ClaudePultApp: App {
                 .environment(telegramApprovals)
                 .environment(weeklySummary)
         }
+        .windowResizability(.contentMinSize)
     }
 }
 
