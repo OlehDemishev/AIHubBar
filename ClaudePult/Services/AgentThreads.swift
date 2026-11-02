@@ -12,19 +12,23 @@ struct AgentThread: Equatable, Identifiable, Sendable {
     var title: String
     var updatedAt: Date
     var context: Double?
+    /// The agent says it is running right now (Antigravity keeps a run status; Codex and Copilot don't).
+    var isWorking = false
 
     /// Terminal command that continues the conversation in its folder.
     func resumeCommandLine(path: String) -> String {
         let arguments = switch agent {
         case .copilot: ["--resume=\(id)"]
+        case .antigravity: ["--conversation", id]
         default: ["resume", id]
         }
         return "cd \(ShellQuote.quote(folder)) && " + ([path] + arguments).map(ShellQuote.quote).joined(separator: " ")
     }
 
-    /// Codex and Copilot threads, newest first.
+    /// Codex, Copilot and Antigravity conversations, newest first.
     static func recent(home: URL = FileManager.default.homeDirectoryForCurrentUser, now: Date = .now) -> [AgentThread] {
-        (CodexThreads.recent(home: home, now: now) + CopilotSessions.recent(home: home, now: now))
+        (CodexThreads.recent(home: home, now: now) + CopilotSessions.recent(home: home, now: now)
+            + AntigravityConversations.recent(home: home, now: now))
             .sorted { $0.updatedAt > $1.updatedAt }
     }
 }
@@ -163,5 +167,48 @@ enum CopilotSessions {
             notes.append(ServiceNote(text: String(localized: "Контекст последней беседы в «\(latest.project)»: \(Int((fill * 100).rounded())) %"), symbol: "gauge.medium"))
         }
         return (week.projects, notes)
+    }
+}
+
+/// Antigravity CLI's own records (checked on agy 1.4.12, 2026-11-02): `~/.gemini/antigravity-cli/conversation_summaries.db`,
+/// table `conversation_summaries` — `conversation_id`, `title`, `workspace_uris` (a JSON list of `file://` URLs),
+/// `last_modified_time` (`2026-11-02 15:14:09.924653+00:00`) and `status` (`CASCADE_RUN_STATUS_IDLE` / `…_RUNNING`). It
+/// keeps no limits or token counts that can be read without decoding its protobuf blobs.
+enum AntigravityConversations {
+    static func database(home: URL) -> URL { home.appending(path: ".gemini/antigravity-cli/conversation_summaries.db") }
+
+    /// UTC `yyyy-MM-dd HH:mm:ss`, which sorts as text against the stored times.
+    static func stamp(_ date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = TimeZone(identifier: "UTC")
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        return formatter.string(from: date)
+    }
+
+    /// `2026-11-02 15:14:09.924653+00:00` → a date (the fraction is cut to milliseconds).
+    static func date(_ text: String) -> Date? {
+        var value = text.replacingOccurrences(of: " ", with: "T")
+        if let dot = value.firstIndex(of: "."), let zone = value[dot...].firstIndex(where: { $0 == "+" || $0 == "-" || $0 == "Z" }) {
+            let fraction = value[value.index(after: dot)..<zone].prefix(3)
+            value = String(value[..<dot]) + "." + fraction + String(value[zone...])
+        }
+        return ISODate.parse(value)
+    }
+
+    static func recent(home: URL = FileManager.default.homeDirectoryForCurrentUser, now: Date = .now,
+                       within: TimeInterval = 3 * 3600, limit: Int = 5) -> [AgentThread] {
+        let rows = SQLiteReader.rows(database(home: home), """
+            SELECT conversation_id, title, workspace_uris, last_modified_time, status FROM conversation_summaries
+            WHERE last_modified_time >= ? AND parent_conversation_id = '' ORDER BY last_modified_time DESC LIMIT ?
+            """, [.text(stamp(now.addingTimeInterval(-within))), .int(Int64(limit))])
+        return rows.compactMap { row in
+            let id = row[0].text
+            let workspaces = (try? JSONSerialization.jsonObject(with: Data(row[2].text.utf8))) as? [String] ?? []
+            guard !id.isEmpty, let updated = date(row[3].text),
+                  let folder = workspaces.first.flatMap(URL.init(string:))?.path, !folder.isEmpty else { return nil }
+            return AgentThread(agent: .antigravity, id: id, project: URL(fileURLWithPath: folder).lastPathComponent, folder: folder,
+                               title: row[1].text, updatedAt: updated, context: nil, isWorking: row[4].text.contains("RUNNING"))
+        }
     }
 }

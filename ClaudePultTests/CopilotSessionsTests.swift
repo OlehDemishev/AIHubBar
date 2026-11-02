@@ -81,3 +81,40 @@ struct SQLiteReaderTests {
         #expect(SQLiteReader.rows(folder.appending(path: "missing.sqlite"), "SELECT 1").isEmpty)
     }
 }
+
+/// Antigravity CLI's conversation summaries (agy 1.4.12 schema).
+struct AntigravityConversationsTests {
+    private let now = Date(timeIntervalSince1970: 1_793_000_000)
+
+    @Test func timesAndCommand() throws {
+        let date = try #require(AntigravityConversations.date("2026-11-02 15:14:09.924653+00:00"))
+        #expect(abs(date.timeIntervalSince1970 - 1_793_632_449.924) < 0.01)
+        #expect(AntigravityConversations.date("2026-11-02 15:14:09+00:00") != nil)
+        #expect(AntigravityConversations.stamp(date) == "2026-11-02 15:14:09")
+        let thread = AgentThread(agent: .antigravity, id: "df2d", project: "App", folder: "/p/App", title: "", updatedAt: now)
+        #expect(thread.resumeCommandLine(path: "/opt/homebrew/bin/agy").hasSuffix("\(ShellQuote.quote("--conversation")) \(ShellQuote.quote("df2d"))"))
+    }
+
+    @Test func recentConversations() throws {
+        let home = FileManager.default.temporaryDirectory.appending(path: "agy-home-\(UUID().uuidString)")
+        defer { try? FileManager.default.removeItem(at: home) }
+        try FileManager.default.createDirectory(at: home.appending(path: ".gemini/antigravity-cli"), withIntermediateDirectories: true)
+        var db: OpaquePointer?
+        try #require(sqlite3_open(AntigravityConversations.database(home: home).path, &db) == SQLITE_OK)
+        defer { sqlite3_close(db) }
+        let recent = AntigravityConversations.stamp(now.addingTimeInterval(-600)) + ".924653+00:00"
+        let old = AntigravityConversations.stamp(now.addingTimeInterval(-5 * 3600)) + ".1+00:00"
+        let sql = """
+            CREATE TABLE conversation_summaries (conversation_id text, title text NOT NULL DEFAULT '', workspace_uris text NOT NULL,
+                last_modified_time datetime NOT NULL, status text NOT NULL DEFAULT '', parent_conversation_id text NOT NULL DEFAULT '');
+            INSERT INTO conversation_summaries VALUES ('c1', 'Fix the tests', '["file:///Users/me/My%20App"]', '\(recent)', 'CASCADE_RUN_STATUS_RUNNING', '');
+            INSERT INTO conversation_summaries VALUES ('c2', 'Subagent', '["file:///Users/me/My%20App"]', '\(recent)', 'CASCADE_RUN_STATUS_IDLE', 'c1');
+            INSERT INTO conversation_summaries VALUES ('c3', 'Old', '["file:///Users/me/Old"]', '\(old)', 'CASCADE_RUN_STATUS_IDLE', '');
+            """
+        try #require(sqlite3_exec(db, sql, nil, nil, nil) == SQLITE_OK)
+        let threads = AntigravityConversations.recent(home: home, now: now)
+        #expect(threads.map(\.id) == ["c1"], "subagents and older conversations left out")
+        #expect(threads.first?.folder == "/Users/me/My App" && threads.first?.project == "My App")
+        #expect(threads.first?.isWorking == true && threads.first?.agent == .antigravity)
+    }
+}

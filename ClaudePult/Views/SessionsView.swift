@@ -86,8 +86,8 @@ struct SessionsView: View {
 }
 
 /// A recent conversation of another agent: project, title, when it was last updated, its context. A click continues
-/// it in Terminal (`codex resume`, `copilot --resume`). No state dot: without hooks the agent doesn't say whether it
-/// works or waits.
+/// it in Terminal (`codex resume`, `copilot --resume`, `agy --conversation`). No state dot: without hooks the agents
+/// don't say whether they wait; Antigravity at least says it is running.
 private struct AgentThreadRow: View {
     let thread: AgentThread
     @State private var isHovered = false
@@ -107,6 +107,11 @@ private struct AgentThreadRow: View {
                 .truncationMode(.tail)
                 .foregroundStyle(.secondary)
             Spacer(minLength: 4)
+            if thread.isWorking {
+                Text("работает")
+                    .scaledFont(.caption)
+                    .foregroundStyle(Session.State.running.color)
+            }
             if let context = thread.context, context >= ContextUsage.warnAt {
                 Text("контекст \(Int((context * 100).rounded())) %")
                     .scaledFont(.caption)

@@ -425,7 +425,8 @@ enum CommandLineTool {
     }
 
     /// What the panel would show for each service found by its tool (Codex, Copilot, Gemini, Cursor): limits, notes
-    /// (plan, credits, context) and tokens per project — for live checks of SPEC-ai-services stage 3. Keys aren't read.
+    /// (plan, credits, context) and tokens per project, then the other agents' recent conversations — for live checks
+    /// of SPEC-ai-services stages 3–6. Keys aren't read.
     private static func limitsReport() -> Int32 {
         // Read here: `AppSettings` belongs to the main thread, which `waitFor` blocks.
         let settings = AppSettings()
@@ -440,6 +441,11 @@ enum CommandLineTool {
                 }
                 for note in limit.notes { print("  note \(note.text)") }
                 for project in limit.projects { print("  project \(project.name): \(project.tokens) tokens") }
+            }
+            // The other agents' recent conversations, as «Сессии» lists them.
+            for thread in AgentThread.recent() {
+                let context = thread.context.map { ", context \(Int(($0 * 100).rounded())) %" } ?? ""
+                print("thread \(thread.agent.binary) \(thread.project): \(thread.title)\(thread.isWorking ? ", running" : "")\(context)")
             }
             return 0
         }
