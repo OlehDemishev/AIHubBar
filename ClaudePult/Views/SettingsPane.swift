@@ -91,7 +91,8 @@ enum SettingsPane: Hashable, Sendable {
         switch self {
         case .general:
             [String(localized: "Запускать при входе в систему"), String(localized: "Уведомления"), "Telegram",
-             String(localized: "Токен бота"), String(localized: "Версия"), String(localized: "Журнал"), String(localized: "Обновления")]
+             String(localized: "Токен бота"), String(localized: "Версия"), String(localized: "Журнал"), String(localized: "Обновления"),
+             String(localized: "Обратная связь"), String(localized: "Сообщить о проблеме…"), String(localized: "Предложить идею…")]
         case .modes:
             [String(localized: "Проекты"), String(localized: "Общие команды")]
         case .modules:
