@@ -5888,6 +5888,82 @@
         }
       }
     },
+    "AI Hub Bar: остров работает": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar: الجزيرة تعمل"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar: Die Insel funktioniert"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar: the island works"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar: la isla funciona"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar : l’île fonctionne"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar: pulau berfungsi"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar: l’isola funziona"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar: アイランドは動作しています"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar: 아일랜드가 작동합니다"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar: wyspa działa"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar: a ilha funciona"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar: острів працює"
+          }
+        }
+      }
+    },
     "AI Hub Bar: сюда будут приходить запросы разрешений Claude.": {
       "localizations": {
         "ar": {
@@ -11485,6 +11561,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "«Не частіше…» рахується для однієї й тієї самої події: та сама сесія, той самий поріг, той самий PR. Різні події приходять як звичайно. Telegram налаштовується окремо, у кожному модулі."
+          }
+        }
+      }
+    },
+    "«Только в острове»: в строке меню остаются значок и красная точка проектов, лимиты и сессии — в ушках у чёлки. Пилюля — чёрный остров под строкой меню по центру, только для событий и запросов: у неё нет ушек, поэтому сводка тогда остаётся в строке меню. Скрытый остров ничего не показывает, уведомления приходят как обычно.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«في الجزيرة فقط»: يبقى في شريط القوائم الرمز والنقطة الحمراء للمشاريع، أما الحدود والجلسات ففي جانبي النتوء. الحبة جزيرة سوداء تحت شريط القوائم في الوسط، للأحداث والطلبات فقط: لا جانبين لها، لذلك يبقى الملخص في شريط القوائم. الجزيرة المخفية لا تعرض شيئًا، وتصل الإشعارات كالمعتاد."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "„Nur auf der Insel“: In der Menüleiste bleiben das Symbol und der rote Punkt der Projekte, Limits und Sitzungen stehen in den Ohren neben der Notch. Die Pille ist eine schwarze Insel mittig unter der Menüleiste, nur für Ereignisse und Anfragen: Sie hat keine Ohren, daher bleibt die Übersicht dann in der Menüleiste. Eine ausgeblendete Insel zeigt nichts, Mitteilungen kommen wie gewohnt."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“Only on the island”: the menu bar keeps the icon and the projects' red dot, limits and sessions sit in the ears beside the notch. The pill is a black island centred under the menu bar, only for events and requests: it has no ears, so the summary then stays in the menu bar. A hidden island shows nothing; notifications arrive as usual."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«Solo en la isla»: en la barra de menús quedan el icono y el punto rojo de proyectos; límites y sesiones van en las orejas junto a la muesca. La píldora es una isla negra centrada bajo la barra de menús, solo para eventos y solicitudes: no tiene orejas, así que el resumen sigue en la barra de menús. Una isla oculta no muestra nada; las notificaciones llegan como siempre."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "« Seulement sur l’île » : la barre des menus garde l’icône et le point rouge des projets, limites et sessions sont dans les oreilles près de l’encoche. La pilule est une île noire centrée sous la barre des menus, seulement pour les événements et les demandes : elle n’a pas d’oreilles, le résumé reste donc dans la barre des menus. Une île masquée n’affiche rien ; les notifications arrivent comme d’habitude."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“Hanya di pulau”: bar menu tetap menampilkan ikon dan titik merah proyek, batas dan sesi ada di telinga samping notch. Pil adalah pulau hitam di tengah di bawah bar menu, hanya untuk peristiwa dan permintaan: tanpa telinga, jadi ringkasan tetap di bar menu. Pulau yang disembunyikan tidak menampilkan apa pun; notifikasi datang seperti biasa."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«Solo sull’isola»: nella barra dei menu restano l’icona e il punto rosso dei progetti, limiti e sessioni stanno nelle orecchie accanto al notch. La pillola è un’isola nera centrata sotto la barra dei menu, solo per eventi e richieste: non ha orecchie, quindi il riepilogo resta nella barra dei menu. Un’isola nascosta non mostra nulla; le notifiche arrivano come sempre."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「アイランドのみ」: メニューバーにはアイコンとプロジェクトの赤い点が残り、上限とセッションはノッチ横に表示されます。ピルはメニューバーの下中央に出る黒いアイランドで、イベントとリクエスト専用です。横の表示がないため、概要はメニューバーに残ります。隠したアイランドは何も表示せず、通知は通常どおり届きます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“아일랜드에만”: 메뉴 막대에는 아이콘과 프로젝트의 빨간 점만 남고, 한도와 세션은 노치 양옆에 표시됩니다. 알약은 메뉴 막대 아래 가운데의 검은 아일랜드로, 이벤트와 요청에만 쓰입니다. 양옆 표시가 없어 요약은 메뉴 막대에 남습니다. 숨긴 아일랜드는 아무것도 표시하지 않으며 알림은 평소처럼 옵니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "„Tylko na wyspie”: na pasku menu zostają ikona i czerwona kropka projektów, limity i sesje są w uszach obok wycięcia. Pigułka to czarna wyspa pośrodku pod paskiem menu, tylko na zdarzenia i prośby: nie ma uszu, więc podsumowanie zostaje wtedy na pasku menu. Ukryta wyspa nic nie pokazuje, powiadomienia przychodzą jak zwykle."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“Só na ilha”: a barra de menus mantém o ícone e o ponto vermelho dos projetos; limites e sessões ficam nas laterais do notch. A pílula é uma ilha preta centralizada sob a barra de menus, só para eventos e solicitações: não tem laterais, então o resumo continua na barra de menus. Uma ilha oculta não mostra nada; as notificações chegam normalmente."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«Лише на острові»: у рядку меню лишаються значок і червона крапка проєктів, ліміти й сесії — у вушках біля чубчика. Пігулка — чорний острів під рядком меню по центру, лише для подій і запитів: у неї немає вушок, тож зведення тоді лишається в рядку меню. Схований острів нічого не показує, сповіщення приходять як зазвичай."
           }
         }
       }
@@ -18941,6 +19093,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Де лежать проєкти?"
+          }
+        }
+      }
+    },
+    "Где показывать": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مكان العرض"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wo anzeigen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Where to show"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dónde mostrar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Où afficher"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tampilkan di"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dove mostrare"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "表示場所"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "표시 위치"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gdzie pokazywać"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Onde mostrar"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Де показувати"
           }
         }
       }
@@ -50981,6 +51209,82 @@
         }
       }
     },
+    "Пилюля на экранах без чёлки": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "حبة على الشاشات دون نتوء"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pille auf Bildschirmen ohne Notch"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pill on screens without a notch"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Píldora en pantallas sin muesca"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pilule sur les écrans sans encoche"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pil di layar tanpa notch"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pillola sugli schermi senza notch"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ノッチのない画面ではピル"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "노치 없는 화면에 알약 표시"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pigułka na ekranach bez wycięcia"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pílula em telas sem notch"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Пігулка на екранах без чубчика"
+          }
+        }
+      }
+    },
     "План: %@": {
       "localizations": {
         "ar": {
@@ -62393,6 +62697,82 @@
         }
       }
     },
+    "Сводка — лимиты и сессии": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الملخص — الحدود والجلسات"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Übersicht – Limits und Sitzungen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Summary — limits and sessions"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Resumen: límites y sesiones"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Résumé — limites et sessions"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ringkasan — batas dan sesi"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Riepilogo — limiti e sessioni"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "概要 — 上限とセッション"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "요약 — 한도와 세션"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Podsumowanie — limity i sesje"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Resumo — limites e sessões"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Зведення — ліміти й сесії"
+          }
+        }
+      }
+    },
     "Свои кнопки: скрипт в фоне или в Терминале, ярлык из «Команд» macOS, ссылка, файл, папка или приложение.": {
       "localizations": {
         "ar": {
@@ -65891,6 +66271,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Сховати"
+          }
+        }
+      }
+    },
+    "Скрыть остров": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إخفاء الجزيرة"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Insel ausblenden"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hide the island"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ocultar la isla"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Masquer l’île"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sembunyikan pulau"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nascondi l’isola"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アイランドを隠す"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "아일랜드 숨기기"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ukryj wyspę"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ocultar a ilha"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Сховати острів"
           }
         }
       }
@@ -69616,6 +70072,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Таймери"
+          }
+        }
+      }
+    },
+    "Так выглядит событие в острове.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "هكذا يبدو الحدث في الجزيرة."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "So sieht ein Ereignis auf der Insel aus."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This is how an event looks on the island."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Así se ve un evento en la isla."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Voici à quoi ressemble un événement sur l’île."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beginilah tampilan peristiwa di pulau."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ecco come appare un evento sull’isola."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アイランドのイベントはこのように表示されます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "아일랜드의 이벤트는 이렇게 보입니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tak wygląda zdarzenie na wyspie."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "É assim que um evento aparece na ilha."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Так виглядає подія на острові."
           }
         }
       }
@@ -74410,6 +74942,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Встановити й додати до поточного профілю"
+          }
+        }
+      }
+    },
+    "Ушки и карточка": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الجانبان والبطاقة"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ohren und Karte"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ears and card"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Orejas y tarjeta"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Oreilles et carte"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Telinga dan kartu"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Orecchie e scheda"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "サイドとカード"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "양옆과 카드"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uszy i karta"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Laterais e cartão"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Вушка й картка"
           }
         }
       }
@@ -79829,6 +80437,82 @@
         }
       }
     },
+    "в строке меню и в острове": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "في شريط القوائم وفي الجزيرة"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "in der Menüleiste und auf der Insel"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "in the menu bar and on the island"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "en la barra de menús y en la isla"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dans la barre des menus et sur l’île"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "di bar menu dan di pulau"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "nella barra dei menu e sull’isola"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "メニューバーとアイランドに"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "메뉴 막대와 아일랜드에"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "na pasku menu i na wyspie"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "na barra de menus e na ilha"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "у рядку меню й на острові"
+          }
+        }
+      }
+    },
     "в фоне": {
       "localizations": {
         "ar": {
@@ -80597,6 +81281,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "виконується…"
+          }
+        }
+      }
+    },
+    "главный экран": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الشاشة الرئيسية"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hauptbildschirm"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "main screen"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "pantalla principal"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "écran principal"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "layar utama"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "schermo principale"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "メイン画面"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "기본 화면"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ekran główny"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "tela principal"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "головний екран"
           }
         }
       }
@@ -91559,6 +92319,158 @@
         }
       }
     },
+    "только в острове": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "في الجزيرة فقط"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "nur auf der Insel"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "only on the island"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "solo en la isla"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "seulement sur l’île"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "hanya di pulau"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "solo sull’isola"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アイランドのみ"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "아일랜드에만"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "tylko na wyspie"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "só na ilha"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "лише на острові"
+          }
+        }
+      }
+    },
+    "только в строке меню": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "في شريط القوائم فقط"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "nur in der Menüleiste"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "only in the menu bar"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "solo en la barra de menús"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "seulement dans la barre des menus"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "hanya di bar menu"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "solo nella barra dei menu"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "メニューバーのみ"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "메뉴 막대에만"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "tylko na pasku menu"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "só na barra de menus"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "лише в рядку меню"
+          }
+        }
+      }
+    },
     "только у вас в проекте": {
       "localizations": {
         "ar": {
@@ -93315,6 +94227,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "читає"
+          }
+        }
+      }
+    },
+    "экран с чёлкой": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الشاشة ذات النتوء"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bildschirm mit Notch"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "screen with the notch"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "pantalla con muesca"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "écran avec encoche"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "layar dengan notch"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "schermo con notch"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ノッチのある画面"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "노치가 있는 화면"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ekran z wycięciem"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "tela com notch"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "екран із чубчиком"
           }
         }
       }

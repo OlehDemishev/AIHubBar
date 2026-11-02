@@ -184,3 +184,51 @@ struct NotchEventTests {
         #expect(guardrail.isArmed(now: t0.addingTimeInterval(0.6)))
     }
 }
+
+/// SPEC-notch stage 3: which screen, the pill on screens without a notch, the summary in the menu bar or the island.
+struct NotchPlacementTests {
+    private let builtIn = NotchGeometry.Screen(
+        frame: CGRect(x: 0, y: 0, width: 1512, height: 982), visibleFrame: CGRect(x: 0, y: 0, width: 1512, height: 944),
+        safeAreaTop: 38, topLeftArea: CGRect(x: 0, y: 944, width: 664, height: 38), topRightArea: CGRect(x: 848, y: 944, width: 664, height: 38),
+        isMain: false)
+    private let monitor = NotchGeometry.Screen(
+        frame: CGRect(x: 1512, y: 0, width: 2560, height: 1080), visibleFrame: CGRect(x: 1572, y: 0, width: 2500, height: 1050),
+        safeAreaTop: 0, topLeftArea: nil, topRightArea: nil, isMain: true)
+
+    @Test func notchScreenFirst() throws {
+        let geometry = try #require(NotchGeometry.choose([builtIn, monitor], on: .notch, pill: true))
+        #expect(!geometry.isPill && geometry.notch.width == 184)
+        let main = try #require(NotchGeometry.choose([builtIn, monitor], on: .main, pill: true))
+        #expect(main.isPill && main.screen == monitor.frame, "the main screen has no notch: its pill")
+        #expect(NotchGeometry.choose([builtIn, monitor], on: .main, pill: false) == nil)
+    }
+
+    @Test func pillUnderTheMenuBar() throws {
+        let pill = try #require(NotchGeometry.choose([monitor], on: .notch, pill: true))
+        #expect(pill.isPill && pill.notch.height == 0 && pill.notch.minY == 1050, "just under the 30 pt menu bar")
+        #expect(pill.notch.midX == monitor.frame.midX)
+        #expect(pill.windowFrame.maxY == 1050 && pill.windowFrame.height == NotchGeometry.cardHeight)
+        #expect(pill.restFrame.height == 0, "nothing to hover at rest")
+        #expect(NotchGeometry.choose([monitor], on: .notch, pill: false) == nil)
+    }
+
+    @Test func pillDefaultAndOldSettings() throws {
+        let old = try JSONDecoder().decode(NotchSettings.self, from: Data(#"{"leftEar": "weekLimit"}"#.utf8))
+        #expect(old.summary == .both && old.screen == .notch && old.pill == nil && !old.hidden)
+        #expect(old.showsPill(macHasNotch: false) && !old.showsPill(macHasNotch: true), "by default only where no notch exists")
+        var chosen = old
+        chosen.pill = false
+        chosen.summary = .island
+        let round = try JSONDecoder().decode(NotchSettings.self, from: JSONEncoder().encode(chosen))
+        #expect(round.pill == false && round.summary == .island)
+        #expect(!round.showsPill(macHasNotch: false))
+    }
+
+    @Test func menuBarIconOnly() {
+        let config = MenuBarConfig.make(.everything).iconOnly
+        #expect(Set(config.elements.filter(\.enabled).map(\.kind)) == [.icon, .projectsAlert])
+        var noIcon = MenuBarConfig.make(.limits)
+        noIcon.set(.icon) { $0.enabled = false }
+        #expect(noIcon.iconOnly.elements.contains { $0.kind == .icon && $0.enabled }, "something stays to click")
+    }
+}

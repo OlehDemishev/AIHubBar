@@ -163,6 +163,12 @@ final class NotificationPermission {
 @MainActor
 enum Notifier {
     /// «Проверить» in Settings: a notification whose click opens the help window.
+    /// A banner in the notch island only (`AIHubBar --app-command test-island`), to check where it shows.
+    static func postIslandTest() {
+        _ = island?("island-test-\(Int(Date.now.timeIntervalSince1970))", .limits,
+                    String(localized: "AI Hub Bar: остров работает"), String(localized: "Так выглядит событие в острове."), .none)
+    }
+
     static func postTest() {
         post(id: "test", title: String(localized: "AI Hub Bar: уведомления работают"),
              body: String(localized: "Кликните — откроется окно «Помощь»."), target: .window(id: "help"))

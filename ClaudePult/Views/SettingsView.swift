@@ -584,6 +584,23 @@ private struct NotchSection: View {
     var body: some View {
         @Bindable var settings = settings
         Section {
+            Toggle("Скрыть остров", isOn: $settings.notch.hidden)
+            Picker("Сводка — лимиты и сессии", selection: $settings.notch.summary) {
+                ForEach(NotchSummary.allCases, id: \.self) { Text($0.title).tag($0) }
+            }
+            Picker("Где показывать", selection: $settings.notch.screen) {
+                ForEach(NotchScreen.allCases, id: \.self) { Text($0.title).tag($0) }
+            }
+            Toggle("Пилюля на экранах без чёлки", isOn: Binding(
+                get: { settings.notch.showsPill(macHasNotch: NotchGeometry.macHasNotch) },
+                set: { settings.notch.pill = $0 }
+            ))
+        } header: {
+            Text("Остров у чёлки")
+        } footer: {
+            Footnote(text: String(localized: "«Только в острове»: в строке меню остаются значок и красная точка проектов, лимиты и сессии — в ушках у чёлки. Пилюля — чёрный остров под строкой меню по центру, только для событий и запросов: у неё нет ушек, поэтому сводка тогда остаётся в строке меню. Скрытый остров ничего не показывает, уведомления приходят как обычно."))
+        }
+        Section {
             Picker("Слева от чёлки", selection: $settings.notch.leftEar) {
                 ForEach(NotchEar.allCases, id: \.self) { Text($0.title).tag($0) }
             }
@@ -592,7 +609,7 @@ private struct NotchSection: View {
             }
             Toggle("Открывать карточку при наведении", isOn: $settings.notch.openOnHover)
         } header: {
-            Text("Остров у чёлки")
+            Text("Ушки и карточка")
         } footer: {
             Footnote(text: NotchGeometry.macHasNotch
                 ? String(localized: "Без наведения карточка открывается кликом по чёлке. В покое остров пропускает клики к строке меню.")
