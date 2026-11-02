@@ -14,3 +14,8 @@ DerivedData/
 
 # Claude Code worktrees
 .claude/worktrees/
+
+# desktop/ (Windows and Linux, Tauri)
+desktop/target/
+desktop/node_modules/
+desktop/app/gen/

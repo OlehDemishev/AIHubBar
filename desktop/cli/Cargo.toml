@@ -1,0 +1,13 @@
+[package]
+name = "claudepult-cli"
+description = "claudepult: AI Hub Bar from the command line"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[[bin]]
+name = "claudepult"
+path = "src/main.rs"
+
+[dependencies]
+claudepult-core.workspace = true

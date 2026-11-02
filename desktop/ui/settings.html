@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>AI Hub Bar</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="settings">
+    <h1 data-t="Основные"></h1>
+    <section class="card">
+      <div class="row">
+        <label for="language" data-t="Язык интерфейса"></label>
+        <select id="language"></select>
+      </div>
+      <div class="row">
+        <label for="autostart" data-t="Запускать при входе в систему"></label>
+        <input type="checkbox" id="autostart">
+      </div>
+    </section>
+    <p class="secondary" id="version"></p>
+  </main>
+  <script type="module">
+    import { loadTexts, invoke, t } from "./app.js";
+    const ui = await loadTexts();
+    document.getElementById("version").textContent = t("Версия %@", ui.version);
+
+    const select = document.getElementById("language");
+    const system = new Option(t("Как в системе"), "");
+    select.add(system);
+    for (const language of ui.languages) select.add(new Option(language.name, language.code));
+    select.value = ui.chosen ?? "";
+    // The windows reload in the new language; the tray menu follows at once too.
+    select.onchange = () => invoke("set_language", { code: select.value || null });
+
+    const autostart = document.getElementById("autostart");
+    autostart.checked = await invoke("autostart_enabled");
+    autostart.onchange = async () => {
+      autostart.checked = await invoke("set_autostart", { enabled: autostart.checked });
+    };
+  </script>
+</body>
+</html>

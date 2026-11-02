@@ -5,6 +5,7 @@
 **Updated:** 2026-11-02
 
 **Now:**
+- branch `feat/desktop-skeleton` (PR): Windows / Linux stage 1 «Каркас» in `desktop/` (Tauri 2) with CI on GitHub's Windows and Linux machines
 - merged 2026-11-02 (#186): notch stage 5 — drop a file or folder on the island → the profile's AI commands for it
 - merged 2026-11-02 (#184): notch stage 4 — Claude's task list in the island (ring and «3/7» in the ear, steps in the card, «3/3 · 2 мин · файлов: 9» in «Готово»)
 - 0.3.0 built, not published: `build/release/0.3.0/AIHubBar-0.3.0.dmg` (build 400) + `appcast.xml`, for the MacBook Air first; publish it from `91d6c2b` (before stage 4): `git switch --detach 91d6c2b && scripts/release.sh 0.3.0 --publish`
@@ -29,7 +30,7 @@
 - fix whatever Oleh finds in the translations (automated checks pass; a native read for ja, ko, ar is still worth it)
 - stage 8: done without Developer ID (self-signed + Sparkle, PR #85; re-checked on main); notarization only if Oleh buys Developer ID; publishing is Oleh's step (Needs Oleh)
 - Fix whatever Oleh finds in docs/CHECKLIST.md
-- Windows and Linux versions (docs/SPEC-windows.md, docs/SPEC-linux.md) — only when Oleh says; stage 0 (fact checks in VMs) first
+- Windows and Linux (Oleh said go, 2026-11-02): stage 1 «Каркас» done in `desktop/`; next stage 2 «Лимиты» (token from `%USERPROFILE%\.claude\.credentials.json`, the usage request, tray icon drawn with the session ring, notifications, `usage.json`); stage 0 leftovers need a real Windows (Ctrl+Break and SessionEnd, the Claude desktop app's session folder)
 
 **Needs Oleh:**
 - stage 5 on the MacBook Air (build from main): drag a file from Finder onto the notch — «Отпустите — AI-команды для файла», then the card; «Своя задача» with a short task → a new file next to it; tell me if a drag ever doesn't catch
@@ -53,9 +54,16 @@
 - after the release: download 0.2.0 from Releases on another Mac (or user) and open it once with «Open Anyway»
 - go through the «Oleh» rows of docs/CHECKLIST.md; try the newer features: «Позже» on a project, the paused-run switch, the Claude Code window, saved prompts in ⌃⌥C, notification frequencies
 - to try other AI services: Settings → Модули → Лимиты → «Другие AI» (keys, installed `codex` / Gemini CLI, consents)
-- decide SPEC-windows §10 and SPEC-linux §10 (Tauri 2 for both, Windows code signing, first Linux desktops) before that work starts
+- Windows: the agent took SPEC-windows §10's proposals while you were away (Tauri 2, `desktop/` in this repo, Windows 10 22H2 + 11, WSL later; DECISIONS.md 2026-11-02) — say if any should change; still yours: Windows code signing (Azure Trusted Signing or a certificate), SPEC-linux §10 (first desktops, Flatpak)
+- Windows: try the installer from the latest «Desktop» run on GitHub (Actions → Desktop → artifact ai-hub-bar-Windows): it installs for you only, without admin; the tray icon, the panel on a click, Settings → language and start at sign-in; SmartScreen will warn (no signature yet)
 - optional: Apple Developer ID (notarization, no «Open Anyway»); delete or archive the old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-02 — Windows and Linux, stage 1 «Каркас» in `desktop/` (branch `feat/desktop-skeleton`)
+
+Done: Oleh said «переделку под Windows» and stepped away; SPEC-windows §10 was taken as proposed (Tauri 2, `desktop/` here, Windows 10 22H2 + 11, WSL later; signing stays his — DECISIONS.md). Stage 0 was checked against current documentation and source instead of a VM (a research pass over Claude Code docs 2.1.316, Windows Terminal source, Microsoft and Tauri docs): confirmed the token file, `~/.claude` paths, hooks (Git Bash or PowerShell, exec form), installers, `wt -w … focus-tab`, toasts, autostart; three corrections written into SPEC-windows (Ctrl+Break probably skips `SessionEnd`, `wt` sessions are outside our process tree, hooks in exec form); open: the desktop app's session folder and `claude://code/continue`. Stage 1: a Rust workspace — `core` (paths: `%LOCALAPPDATA%\ClaudePult`, `~/.local/share/claudepult`, on a Mac only `ClaudePult Desktop Dev`; tolerant `settings.json`; 13 languages with the system's preferred list, English fallback, `%@`/`%lld`/positional placeholders; the `claudepult` link — named pipe / abstract socket / `/tmp` socket, one-line protocol), the app `AIHubBar` (tray icon and menu, the panel at the icon or the tray corner, hide on blur, the settings window with language and start at sign-in, the «^» hint on Windows, one running copy, everything also through `claudepult --app-command panel|settings|quit`), the console `claudepult`. Texts from the Mac catalog by `desktop/scripts/strings.py` (5 new texts added to the catalog with 12 translations; `--check` fails on a missing key or translation). Icons from the Mac icon. `.github/workflows/desktop.yml`: texts check, `cargo test` on Windows and Ubuntu, NSIS installer and `.deb` as artifacts (free: the repository is public). Found and fixed on the way: `ClaudePult` and `claudepult` overwrite each other on case-insensitive disks (the app is now `AIHubBar`); a socket file left by a test blocked the link (now taken over).
+Checked: `cargo test --workspace` on the Mac — 10 pass (9 unit + a real socket round trip); `strings.py --check`; `npx tauri build --debug --no-bundle` on the Mac; the app run on the Mac: `claudepult --app-command settings / panel / nope / quit` — settings window and panel captured, unknown command → exit 2, quit ends the app. Mac app tests 355 / 355 (the catalog changed). Windows and Linux: see the PR's CI run.
+Left: nothing run live on Windows or Linux; the tray icon is the app icon (drawn icon is stage 2); the panel has no content yet; no code signing.
 
 ## 2026-11-02 — «Скрыть остров» in the panel header (branch `feat/notch-hide-in-panel`)
 

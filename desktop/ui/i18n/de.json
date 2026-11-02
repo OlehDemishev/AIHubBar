@@ -1,0 +1,13 @@
+{
+ "Windows прячет новые значки под «^». Чтобы AI Hub Bar был всегда виден: Параметры → Персонализация → Панель задач → Другие значки на панели задач.": "Windows versteckt neue Symbole unter „^“. Damit AI Hub Bar immer sichtbar ist: Einstellungen → Personalisierung → Taskleiste → Andere Infobereichsymbole.",
+ "Версия %@": "Version %@",
+ "Выйти из AI Hub Bar": "AI Hub Bar beenden",
+ "Готово": "Fertig",
+ "Запускать при входе в систему": "Beim Anmelden starten",
+ "Как в системе": "Wie im System",
+ "Настройки…": "Einstellungen…",
+ "Основные": "Allgemein",
+ "Открыть панель": "Panel öffnen",
+ "Это первая сборка AI Hub Bar для Windows и Linux: значок, панель и настройки. Лимиты, сессии и проекты появятся на следующих этапах.": "Dies ist der erste Build von AI Hub Bar für Windows und Linux: Symbol, Panel und Einstellungen. Limits, Sitzungen und Projekte folgen in den nächsten Schritten.",
+ "Язык интерфейса": "Sprache der Oberfläche"
+}
