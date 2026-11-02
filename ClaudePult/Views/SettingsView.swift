@@ -198,6 +198,8 @@ private struct GeneralSettings: View {
                 Footnote(text: String(localized: "Один файл .claudepult: все профили, внешний вид, строка меню, пороги. Без ключей, токенов и журналов. Двойной клик по такому файлу открывает импорт. Папки проектов — на вкладке «Профили»."))
             }
 
+            FeedbackSection()
+
             Section {
                 LabeledContent("Версия", value: Self.version)
                 UpdatesRow()
@@ -1191,6 +1193,25 @@ enum Relaunch {
         configuration.createsNewApplicationInstance = true
         NSWorkspace.shared.openApplication(at: Bundle.main.bundleURL, configuration: configuration) { _, _ in
             DispatchQueue.main.async { NSApp.terminate(nil) }
+        }
+    }
+}
+
+/// Ideas and problems go to the repository's issue forms (Feedback); after a crash the app offers to report it.
+private struct FeedbackSection: View {
+    @AppStorage(CrashReports.askKey) private var asksAfterCrash = true
+
+    var body: some View {
+        Section {
+            LabeledContent("Обратная связь") {
+                HStack {
+                    Button("Предложить идею…") { Feedback.suggestIdea() }
+                    Button("Сообщить о проблеме…") { Feedback.reportProblem() }
+                }
+            }
+            Toggle("После сбоя предлагать отправить отчёт", isOn: $asksAfterCrash)
+        } footer: {
+            Footnote(text: String(localized: "Откроется форма на GitHub, версия и macOS в ней уже заполнены. Сама программа ничего не отправляет: перед отправкой видно всё, что уходит. Нужен аккаунт GitHub."))
         }
     }
 }

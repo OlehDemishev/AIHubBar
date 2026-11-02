@@ -127,6 +127,16 @@ struct HelpView: View {
                     .font(.caption.monospaced())
                     .foregroundStyle(.secondary)
                     .textSelection(.enabled)
+                VStack(alignment: .leading, spacing: 8) {
+                    Label("Обратная связь", systemImage: "bubble.left.and.text.bubble.right").font(.headline)
+                    Text("Идеи и ошибки — в задачи проекта на GitHub. Форма откроется с уже заполненными версией и macOS.")
+                        .font(.callout)
+                        .foregroundStyle(.secondary)
+                    HStack {
+                        Button("Предложить идею…") { Feedback.suggestIdea() }
+                        Button("Сообщить о проблеме…") { Feedback.reportProblem() }
+                    }
+                }
             }
             .padding(20)
             .frame(maxWidth: .infinity, alignment: .leading)

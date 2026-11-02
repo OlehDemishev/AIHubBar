@@ -5,7 +5,7 @@
 **Updated:** 2026-11-02
 
 **Now:**
-- nothing in progress; merged 2026-11-02: notch stage 3 part 2 — full screen, ⌃⌥Y / ⌃⌥N, first-setup window (#175), Chinese models by API — Qwen, Kimi, GLM, MiniMax (#172), notch stage 3 part 1 — pill, screen choice, summary in menu bar / island / both (#173), Antigravity conversations in «Сессии» (#170), Copilot in full (#169), AI services stages 5–6 — Codex threads in «Сессии», stage 3 checked live (#168), stage 4 — thresholds per service, «Другие AI» notch ear, other services in the weekly summary (#167), stage 3 — Codex plan, credits, tokens per project, context (#166), stage 2 — one limits card for every service (#165), Settings redone like System Settings (#164), «Сервисы AI» as a list on the left (#162) in the window colour (#163), glass panel background (#158) and its fix for macOS 27 (#160), AI services spec + stage 1 — Claude Code inside «Сервисы AI», a tab per service (#159)
+- nothing in progress; merged 2026-11-02: notch stage 3 part 2 — full screen, ⌃⌥Y / ⌃⌥N, first-setup window (#179), feedback — idea / problem links to GitHub issue forms, crash report prompt (#177), Chinese models by API — Qwen, Kimi, GLM, MiniMax (#172), notch stage 3 part 1 — pill, screen choice, summary in menu bar / island / both (#173), Antigravity conversations in «Сессии» (#170), Copilot in full (#169), AI services stages 5–6 — Codex threads in «Сессии», stage 3 checked live (#168), stage 4 — thresholds per service, «Другие AI» notch ear, other services in the weekly summary (#167), stage 3 — Codex plan, credits, tokens per project, context (#166), stage 2 — one limits card for every service (#165), Settings redone like System Settings (#164), «Сервисы AI» as a list on the left (#162) in the window colour (#163), glass panel background (#158) and its fix for macOS 27 (#160), AI services spec + stage 1 — Claude Code inside «Сервисы AI», a tab per service (#159)
 - released 0.2.2 (v0.2.2, build 345): clickable widgets (#154), Codex from the ChatGPT desktop app (#155), notch island stage 2 (#153)
 - notch island stage 1 merged (#149): module, island over the notch, ears, hover card; target release 0.3.0
 - notch island stage 2 merged (#153): banners for events, permission requests with Allow / Deny in the island
@@ -20,6 +20,7 @@
 
 **Next:**
 - notch island for 0.3.0: stage 3 done except «on all screens» and the Quick Toggles switch; next a 0.3.0 build for Oleh's MacBook Air before publishing; stage 4 (drop a file on the island) only if Oleh wants it
+- after 0.3.0: notch island stage 4 — Claude session live activity (docs/SPEC-notch.md §3.4, agreed by Oleh 2026-11-02): plan progress ring and «3/7» in the sessions ear, steps in the card, summary in «Сессия закончила»
 - AI services (docs/SPEC-ai-services.md §5): all six stages done for Claude Code, Codex, Copilot CLI and Antigravity (Oleh, 2026-11-02: these three besides Claude are enough; Gemini CLI removed — its Google sign-in is gone; Cursor not used); left only a «waiting» signal if the agents get hooks
 - standing rule (SPEC §3.1): every new icon-only control gets a hover hint; finish each UI stage with the accessibility walk
 - fix whatever Oleh finds in the translations (automated checks pass; a native read for ja, ko, ar is still worth it)
@@ -29,8 +30,9 @@
 
 **Needs Oleh:**
 - answer the island's first-setup window (it is open now: requests, summary, pill, hot keys) and press «Готово»; on the MacBook Air later: full-screen app (only requests and waits, no ears) and, if you turn them on, ⌃⌥Y / ⌃⌥N on a request
+- feedback (installed build, merged #177): an alert «В прошлый раз AI Hub Bar закрылся с ошибкой» is on screen (a real crash of the notch branch build at 16:46) — press «Сообщить на GitHub…»: a filled bug form should open in the browser and the report in Finder; don't submit it unless you want the issue. Settings → Основные → «Обратная связь» has both buttons; optional: an e-mail address for people without GitHub
 - on the MacBook Air (build from main): Settings → Модули → «Остров у чёлки» → «Сводка» → «только в острове» — the menu bar should keep only the icon and the red dot while the ears show limits and sessions; «только в строке меню» — no ears
-- Chinese models (after merge): to try one, make a key (Qwen / Kimi / GLM / MiniMax — links next to each in «Сервисы AI» → «Другие»), paste it, «Проверить»; no key was available to the agent, so a real reply is unchecked
+- Chinese models (on main, in the next build): to try one, make a key (Qwen / Kimi / GLM / MiniMax — links next to each in «Сервисы AI» → «Другие»), paste it, «Проверить»; no key was available to the agent, so a real reply is unchecked
 - optional: test conversations «codex-check», «agents-check» can be archived in Codex / Copilot / Antigravity
 - optional: a Codex thread named «codex-check» (from the live check) is in your Codex history — archive it in Codex if it's in the way
 - new Settings (build from main, installed): one sidebar with search — every page opens, search finds pages by setting names (e.g. «Telegram»), the dots match what's set up; in «Сервисы AI» → Claude Code has all the old options (path, hooks, Telegram answers, saved prompts, CLAUDE.md и MCP, background runs); Codex shows the agent and its limits row; Modules → Лимиты → «Другие AI» shows the summary and «Открыть «Сервисы AI»»
@@ -47,11 +49,23 @@
 - optional: Apple Developer ID (notarization, no «Open Anyway»); delete or archive the old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
 
-## 2026-11-02 — Notch island stage 3, part 2: full screen, ⌃⌥Y / ⌃⌥N, first-setup window (branch `feat/notch-stage3-part2`)
+## 2026-11-02 — Notch island stage 3, part 2: full screen, ⌃⌥Y / ⌃⌥N, first-setup window (#179)
 
 Done: the island's panel joins full-screen spaces (`.fullScreenAuxiliary`); `FullScreenDetector` sees another app's normal window over the whole screen (window bounds from `CGWindowList`, no permission), checked on space and app changes — then no ears, and only requests and waits (`NotchEventQueue.keepOnly`, no «done» banners). `GlobalHotKey` now tells its keys apart (`EventHotKeyID` from the event) and registers ⌃⌥Y / ⌃⌥N while «Горячие клавиши ⌃⌥Y / ⌃⌥N для запросов» is on; `NotchIsland.answerByKey` answers the request on the banner or first in the card once it has been shown 0.6 s (`NotchClickGuard.keysArmed`, no pointer movement needed). `NotchSetupView` — the first-setup window (§6.1) with four questions: requests (island and notification / island only), the summary's place (Oleh's ask), the pill, the hot keys; `NotchSettings.setupDone` keeps it from coming back, closing it unanswered keeps the defaults. It opens by itself a few seconds after launch while unanswered: the first try crashed (the hook was set while the app was still being made, before `NSApp`), the second never showed (the request came before the menu bar label could open it) — now `AppRequests.takeWindow` lets the label open a request made before it appeared. `--app-command notch-setup` opens it too. 15 new strings in 13 languages; SPEC-notch §9 and REFERENCE updated.
 Checked: `xcodebuild test` — 333 / 333 pass (new `NotchFullScreenAndKeysTests`: a full-screen window vs a zoomed one, the menu bar layer and our own, on a second screen; keys need only time; full screen keeps requests and waits; setup answers decode). Live: with the setup flag reset, the window opened by itself after launch (`Notch island: asking for the first setup`), 480 pt wide, captured; left open for Oleh to answer.
 Left: full screen and the hot keys not tried live (no notch here; the pill would show them); «on all screens» and the Quick Toggles switch not done.
+
+## 2026-11-02 — Feedback and crash reports (branch `feat/feedback`)
+
+Done: Settings → General → «Обратная связь» and the bottom of the Help window: «Предложить идею…» / «Сообщить о проблеме…» open the repository's issue forms with `version` and `macos` filled through the link. 3 s after launch the app reads its own `AIHubBar-*.ips` / `ClaudePult-*.ips` in `~/Library/Logs/DiagnosticReports` written since the last check (first check: one day back; unit-test crashes skipped) and asks «Сообщить на GitHub…»: bug form with title `Crash: <exception> in <app frame>`, 8 top frames of the crashed thread, report's version, last 25 log lines (home → `~`, account → `USER`, cut so the link stays under 7 500 characters); a redacted `.txt` copy of the full report is shown in Finder to drag in. «Больше не предлагать» / a switch in Settings. No server, the app sends nothing itself. 11 new strings in 12 languages; GUIDE (privacy, troubleshooting) and REFERENCE updated. Code: `ClaudePult/Services/Feedback.swift`.
+Checked: `xcodebuild test` — 335 tests pass (6 new: parsing, skipping other apps' and test-host reports, folder scan, link fields, log cut, redaction); built and installed — on launch the app found the real crash of 16:46 (notch branch build, nil unwrap in `NotchIsland.update()` from `needsSetup.didSet` in `ClaudePultApp.init()`) and showed the alert; the 15:43 test-host crash was skipped.
+Left: the «Сообщить на GitHub…» click (browser form, Finder) not pressed by the agent — Oleh's check; release builds' dSYMs are not kept, so app frames of stripped builds may show only offsets; automatic sending (Sentry or a Cloudflare Worker → Telegram) is a possible later step.
+
+## 2026-11-02 — Notch island: live activity stage in the spec (branch `docs/notch-live-activity`)
+
+Done: docs/SPEC-notch.md gets §3.4 «Живая активность сессии» and a new stage 4 in §9 (drag-and-drop moves to stage 5): while Claude works, the sessions ear shows a progress ring and «3/7» from its plan (`TodoWrite`, or `TaskCreate` / `TaskUpdate` in newer Claude Code, read by the existing `PostToolUse` hook), the card lists the steps, «Сессия закончила» adds progress, minutes and changed files. Oleh agreed to it as the stage after 0.3.0; a now-playing remote in the notch was discussed and dropped (other notch apps already do it, §8).
+Checked: docs only; the hook already receives every `PostToolUse` (matcher `*`, `HookInstaller`), so the data source exists; Task* field names are left to check against live hook data at the start of the stage.
+Left: the stage itself, after 0.3.0.
 
 ## 2026-11-02 — Notch island stage 3, part 1: pill, screen choice, summary where Oleh wants it (#173)
 

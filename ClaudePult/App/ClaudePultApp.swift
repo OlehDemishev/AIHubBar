@@ -187,6 +187,11 @@ struct ClaudePultApp: App {
             }
             calendar.start()
             launcher.start()
+            // After the menu bar item is up, so the alert is not the first thing of a login.
+            Task {
+                try? await Task.sleep(for: .seconds(3))
+                CrashReports.checkAtLaunch()
+            }
             // A click on a notification and on the island's banner do the same.
             let handle: (NotificationAction.Resolution) -> Void = { resolution in
                 switch resolution {
