@@ -4,12 +4,13 @@ import SwiftUI
 
 /// What one «ear» beside the notch shows (SPEC-notch §3.1).
 enum NotchEar: String, Codable, CaseIterable, Sendable {
-    case sessionLimit, weekLimit, sessions, background, none
+    case sessionLimit, weekLimit, otherAI, sessions, background, none
 
     var title: String {
         switch self {
         case .sessionLimit: String(localized: "Лимит сессии")
         case .weekLimit: String(localized: "Лимит недели")
+        case .otherAI: String(localized: "Другие AI")
         case .sessions: String(localized: "Сессии Claude Code")
         case .background: String(localized: "Фоновые задачи")
         case .none: String(localized: "Ничего")

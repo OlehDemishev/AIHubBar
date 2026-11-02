@@ -5,7 +5,7 @@
 **Updated:** 2026-11-02
 
 **Now:**
-- nothing in progress; merged 2026-11-02: AI services stage 3 — Codex plan, credits, tokens per project, context (#166), stage 2 — one limits card for every service (#165), Settings redone like System Settings (#164), «Сервисы AI» as a list on the left (#162) in the window colour (#163), glass panel background (#158) and its fix for macOS 27 (#160), AI services spec + stage 1 — Claude Code inside «Сервисы AI», a tab per service (#159)
+- nothing in progress; merged 2026-11-02: AI services stage 4 — thresholds per service, «Другие AI» notch ear, other services in the weekly summary (#167), stage 3 — Codex plan, credits, tokens per project, context (#166), stage 2 — one limits card for every service (#165), Settings redone like System Settings (#164), «Сервисы AI» as a list on the left (#162) in the window colour (#163), glass panel background (#158) and its fix for macOS 27 (#160), AI services spec + stage 1 — Claude Code inside «Сервисы AI», a tab per service (#159)
 - released 0.2.2 (v0.2.2, build 345): clickable widgets (#154), Codex from the ChatGPT desktop app (#155), notch island stage 2 (#153)
 - notch island stage 1 merged (#149): module, island over the notch, ears, hover card; target release 0.3.0
 - notch island stage 2 merged (#153): banners for events, permission requests with Allow / Deny in the island
@@ -20,7 +20,7 @@
 
 **Next:**
 - notch island for 0.3.0 (docs/SPEC-notch.md §9): stage 3 — pill on screens without a notch, full screen, hot keys, first-setup window; then a 0.3.0 build for Oleh's MacBook Air before publishing
-- AI services (docs/SPEC-ai-services.md §5), one PR each: stage 4 per-service alerts, menu bar, widget, notch; stage 5 Codex sessions; stage 6 Gemini / Copilot / Cursor after live checks
+- AI services (docs/SPEC-ai-services.md §5), one PR each: stage 5 Codex sessions; stage 6 Gemini / Copilot / Cursor after live checks
 - standing rule (SPEC §3.1): every new icon-only control gets a hover hint; finish each UI stage with the accessibility walk
 - fix whatever Oleh finds in the translations (automated checks pass; a native read for ja, ko, ar is still worth it)
 - stage 8: done without Developer ID (self-signed + Sparkle, PR #85; re-checked on main); notarization only if Oleh buys Developer ID; publishing is Oleh's step (Needs Oleh)
@@ -42,6 +42,12 @@
 - decide SPEC-windows §10 and SPEC-linux §10 (Tauri 2 for both, Windows code signing, first Linux desktops) before that work starts
 - optional: Apple Developer ID (notarization, no «Open Anyway»); delete or archive the old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-02 — AI services stage 4: per-service alerts, notch, weekly summary (branch `feat/per-service-alerts`)
+
+Done: thresholds per service — `AppSettings.serviceThresholds` (by `ServiceTab`; missing = the common `limitThresholds`, empty = no notifications) and `thresholds(for:)`, used by Claude's alerts and by every other service's; each service page in Settings has «Уведомления о лимитах» (как у всех / на своих порогах / не уведомлять). The notch island has a new ear «Другие AI»: the other service closest to its limit as a ring, its name and percent in the hint (`NotchText.fullestOther`). The weekly Telegram summary ends with «Другие AI», a line per service (limits, growth over the week from `LimitHistory`, top Codex projects; a service with nothing to say is left out). The menu bar («Другие AI» element with a chosen service) and the widget (three other services) already had the choice, nothing to add. The «Лимиты и расход» footnote no longer says the thresholds are Claude's. 9 new strings in 13 languages, one footnote re-keyed with its translations; REFERENCE and SPEC-ai-services updated.
+Checked: `xcodebuild test` — 318 / 318 pass (new `PerServiceTests`: common / own / off thresholds and stored values cleaned up, the other-AI ear and its hint, the summary line and section). Live: Settings → Сервисы AI → Codex shows «Уведомления о лимитах» with «как у всех: 50, 80, 95 %» (window captured, dark theme).
+Left: the notch ear and the summary line not seen live (the island isn't installed here, the summary goes out on its day).
 
 ## 2026-11-02 — AI services stage 3: Codex in full (branch `feat/codex-in-full`)
 

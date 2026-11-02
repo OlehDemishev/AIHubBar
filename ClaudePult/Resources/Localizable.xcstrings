@@ -43830,6 +43830,82 @@
         }
       }
     },
+    "Один раз на окно лимита, когда порог пройден. Общие пороги — в «Модули» → «Лимиты».": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مرة واحدة لكل نافذة حد عند تجاوز العتبة. العتبات المشتركة في «الوحدات» ← «الحدود»."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Einmal pro Limitfenster, wenn die Schwelle überschritten ist. Gemeinsame Schwellen unter „Module“ → „Limits“."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Once per limit window, when a threshold is passed. Common thresholds are in “Modules” → “Limits”."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Una vez por ventana de límite, al pasar el umbral. Umbrales comunes en «Módulos» → «Límites»."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une fois par fenêtre de limite, quand le seuil est franchi. Seuils communs dans « Modules » → « Limites »."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sekali per jendela batas, saat ambang terlewati. Ambang umum ada di “Modul” → “Batas”."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Una volta per finestra di limite, quando la soglia è superata. Soglie comuni in «Moduli» → «Limiti»."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "しきい値を超えたとき、上限の期間ごとに1回。共通のしきい値は「モジュール」→「上限」。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "기준을 넘으면 한도 기간마다 한 번. 공통 기준은 “모듈” → “한도”에 있습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Raz na okno limitu, gdy próg zostanie przekroczony. Wspólne progi — w „Moduły” → „Limity”."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uma vez por janela de limite, ao passar o limite. Limites comuns em “Módulos” → “Limites”."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Один раз на вікно ліміту, коли поріг пройдено. Спільні пороги — у «Модулі» → «Ліміти»."
+          }
+        }
+      }
+    },
     "Один раз на окно при 50/80/95 % (пороги — в Настройках) и когда лимит восстановился; по желанию ещё и в Telegram.": {
       "localizations": {
         "ar": {
@@ -54097,6 +54173,82 @@
         }
       }
     },
+    "Пороги, %": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "العتبات، %"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schwellen, %"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Thresholds, %"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Umbrales, %"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seuils, %"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ambang, %"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Soglie, %"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "しきい値、%"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "기준, %"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Progi, %"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limites, %"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Пороги, %"
+          }
+        }
+      }
+    },
     "После сброса": {
       "localizations": {
         "ar": {
@@ -63305,78 +63457,78 @@
         }
       }
     },
-    "Сервис появляется под кольцами Claude сам, когда найден на Маке или сохранён его ключ. Ключи хранятся только в связке ключей. Codex и Copilot спрашиваются через свои программы (codex, gh); вход Gemini CLI и Cursor читается только с вашего согласия. Обновляется раз в 5 минут, пороги уведомлений — те же, что у Claude. Форматы ответов не документированы производителями и могут поменяться.": {
+    "Сервис появляется под кольцами Claude сам, когда найден на Маке или сохранён его ключ. Ключи хранятся только в связке ключей. Codex и Copilot спрашиваются через свои программы (codex, gh); вход Gemini CLI и Cursor читается только с вашего согласия. Обновляется раз в 5 минут. Форматы ответов не документированы производителями и могут поменяться.": {
       "localizations": {
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "تظهر الخدمة تلقائيًا تحت حلقات Claude عند العثور عليها على الـMac أو حفظ مفتاحها. تُحفظ المفاتيح في سلسلة المفاتيح فقط. يُسأل Codex وCopilot عبر أدواتهما (codex وgh)؛ ولا يُقرأ تسجيل دخول Gemini CLI وCursor إلا بموافقتك. يتحدث كل 5 دقائق، بحدود الإشعار نفسها المستخدمة لـClaude. صيغ الردود غير موثقة من الشركات وقد تتغير."
+            "value": "تظهر الخدمة تلقائيًا تحت حلقات Claude عند العثور عليها على الـMac أو حفظ مفتاحها. تُحفظ المفاتيح في سلسلة المفاتيح فقط. يُسأل Codex وCopilot عبر أدواتهما (codex وgh)؛ ولا يُقرأ تسجيل دخول Gemini CLI وCursor إلا بموافقتك. يتحدث كل 5 دقائق. صيغ الردود غير موثقة من الشركات وقد تتغير."
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ein Dienst erscheint von selbst unter den Claude-Ringen, sobald er auf dem Mac gefunden oder sein Schlüssel gespeichert ist. Schlüssel liegen nur im Schlüsselbund. Codex und Copilot werden über ihre eigenen Programme gefragt (codex, gh); die Anmeldung von Gemini CLI und Cursor wird nur mit Ihrer Zustimmung gelesen. Aktualisierung alle 5 Minuten, mit denselben Benachrichtigungsschwellen wie bei Claude. Die Antwortformate sind von den Herstellern nicht dokumentiert und können sich ändern."
+            "value": "Ein Dienst erscheint von selbst unter den Claude-Ringen, sobald er auf dem Mac gefunden oder sein Schlüssel gespeichert ist. Schlüssel liegen nur im Schlüsselbund. Codex und Copilot werden über ihre eigenen Programme gefragt (codex, gh); die Anmeldung von Gemini CLI und Cursor wird nur mit Ihrer Zustimmung gelesen. Aktualisierung alle 5 Minuten. Die Antwortformate sind von den Herstellern nicht dokumentiert und können sich ändern."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "A service appears under Claude's rings by itself once it's found on this Mac or its key is saved. Keys are kept only in the keychain. Codex and Copilot are asked through their own tools (codex, gh); the Gemini CLI and Cursor sign-ins are read only with your consent. Refreshed every 5 minutes, with the same notification thresholds as Claude. The answer formats aren't documented by the vendors and may change."
+            "value": "A service appears under Claude's rings by itself once it's found on this Mac or its key is saved. Keys are kept only in the keychain. Codex and Copilot are asked through their own tools (codex, gh); the Gemini CLI and Cursor sign-ins are read only with your consent. Refreshed every 5 minutes. The answer formats aren't documented by the vendors and may change."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Un servicio aparece solo bajo los anillos de Claude cuando se encuentra en el Mac o se guarda su clave. Las claves se guardan solo en el llavero. A Codex y Copilot se les pregunta con sus propias herramientas (codex, gh); la sesión de Gemini CLI y Cursor solo se lee con tu consentimiento. Se actualiza cada 5 minutos, con los mismos umbrales de aviso que Claude. Los formatos de respuesta no están documentados por los fabricantes y pueden cambiar."
+            "value": "Un servicio aparece solo bajo los anillos de Claude cuando se encuentra en el Mac o se guarda su clave. Las claves se guardan solo en el llavero. A Codex y Copilot se les pregunta con sus propias herramientas (codex, gh); la sesión de Gemini CLI y Cursor solo se lee con tu consentimiento. Se actualiza cada 5 minutos. Los formatos de respuesta no están documentados por los fabricantes y pueden cambiar."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Un service apparaît de lui-même sous les anneaux de Claude dès qu'il est trouvé sur le Mac ou que sa clé est enregistrée. Les clés sont conservées uniquement dans le trousseau. Codex et Copilot sont interrogés via leurs propres outils (codex, gh) ; la connexion de Gemini CLI et de Cursor n'est lue qu'avec votre accord. Mise à jour toutes les 5 minutes, avec les mêmes seuils d'alerte que Claude. Les formats de réponse ne sont pas documentés par les éditeurs et peuvent changer."
+            "value": "Un service apparaît de lui-même sous les anneaux de Claude dès qu'il est trouvé sur le Mac ou que sa clé est enregistrée. Les clés sont conservées uniquement dans le trousseau. Codex et Copilot sont interrogés via leurs propres outils (codex, gh) ; la connexion de Gemini CLI et de Cursor n'est lue qu'avec votre accord. Mise à jour toutes les 5 minutes. Les formats de réponse ne sont pas documentés par les éditeurs et peuvent changer."
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "Layanan muncul sendiri di bawah cincin Claude saat ditemukan di Mac atau kuncinya disimpan. Kunci hanya disimpan di rantai kunci. Codex dan Copilot ditanya melalui alatnya sendiri (codex, gh); info masuk Gemini CLI dan Cursor hanya dibaca dengan persetujuan Anda. Diperbarui setiap 5 menit, dengan ambang notifikasi yang sama seperti Claude. Format jawaban tidak didokumentasikan oleh vendor dan bisa berubah."
+            "value": "Layanan muncul sendiri di bawah cincin Claude saat ditemukan di Mac atau kuncinya disimpan. Kunci hanya disimpan di rantai kunci. Codex dan Copilot ditanya melalui alatnya sendiri (codex, gh); info masuk Gemini CLI dan Cursor hanya dibaca dengan persetujuan Anda. Diperbarui setiap 5 menit. Format jawaban tidak didokumentasikan oleh vendor dan bisa berubah."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Un servizio compare da solo sotto gli anelli di Claude quando viene trovato sul Mac o ne viene salvata la chiave. Le chiavi restano solo nel portachiavi. Codex e Copilot vengono interrogati tramite i loro strumenti (codex, gh); l'accesso di Gemini CLI e Cursor viene letto solo con il tuo consenso. Si aggiorna ogni 5 minuti, con le stesse soglie di notifica di Claude. I formati delle risposte non sono documentati dai produttori e possono cambiare."
+            "value": "Un servizio compare da solo sotto gli anelli di Claude quando viene trovato sul Mac o ne viene salvata la chiave. Le chiavi restano solo nel portachiavi. Codex e Copilot vengono interrogati tramite i loro strumenti (codex, gh); l'accesso di Gemini CLI e Cursor viene letto solo con il tuo consenso. Si aggiorna ogni 5 minuti. I formati delle risposte non sono documentati dai produttori e possono cambiare."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "サービスは Mac で見つかるか、キーを保存すると Claude のリングの下に自動で表示されます。キーはキーチェーンにのみ保存されます。Codex と Copilot はそれぞれのツール（codex、gh）経由で問い合わせ、Gemini CLI と Cursor のサインイン情報はあなたの同意がある場合のみ読み取ります。5分ごとに更新され、通知のしきい値は Claude と同じです。応答形式は提供元が公開しておらず、変わる可能性があります。"
+            "value": "サービスは Mac で見つかるか、キーを保存すると Claude のリングの下に自動で表示されます。キーはキーチェーンにのみ保存されます。Codex と Copilot はそれぞれのツール（codex、gh）経由で問い合わせ、Gemini CLI と Cursor のサインイン情報はあなたの同意がある場合のみ読み取ります。5分ごとに更新されます。応答形式は提供元が公開しておらず、変わる可能性があります。"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "서비스는 Mac에서 발견되거나 키를 저장하면 Claude 링 아래에 자동으로 나타납니다. 키는 키체인에만 보관됩니다. Codex와 Copilot은 자체 도구(codex, gh)로 조회하고, Gemini CLI와 Cursor 로그인 정보는 동의한 경우에만 읽습니다. 5분마다 새로 고치며 알림 기준은 Claude와 같습니다. 응답 형식은 제공업체가 문서화하지 않았으며 바뀔 수 있습니다."
+            "value": "서비스는 Mac에서 발견되거나 키를 저장하면 Claude 링 아래에 자동으로 나타납니다. 키는 키체인에만 보관됩니다. Codex와 Copilot은 자체 도구(codex, gh)로 조회하고, Gemini CLI와 Cursor 로그인 정보는 동의한 경우에만 읽습니다. 5분마다 새로 고칩니다. 응답 형식은 제공업체가 문서화하지 않았으며 바뀔 수 있습니다."
           }
         },
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Usługa pojawia się sama pod pierścieniami Claude, gdy zostanie znaleziona na Macu albo zapiszesz jej klucz. Klucze są tylko w pęku kluczy. Codex i Copilot są odpytywane przez własne narzędzia (codex, gh); logowanie Gemini CLI i Cursor jest odczytywane tylko za Twoją zgodą. Odświeżanie co 5 minut, progi powiadomień takie same jak dla Claude. Formaty odpowiedzi nie są udokumentowane przez producentów i mogą się zmienić."
+            "value": "Usługa pojawia się sama pod pierścieniami Claude, gdy zostanie znaleziona na Macu albo zapiszesz jej klucz. Klucze są tylko w pęku kluczy. Codex i Copilot są odpytywane przez własne narzędzia (codex, gh); logowanie Gemini CLI i Cursor jest odczytywane tylko za Twoją zgodą. Odświeżanie co 5 minut. Formaty odpowiedzi nie są udokumentowane przez producentów i mogą się zmienić."
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Um serviço aparece sozinho sob os anéis do Claude quando é encontrado no Mac ou sua chave é salva. As chaves ficam apenas nas Chaves. Codex e Copilot são consultados pelas próprias ferramentas (codex, gh); o login do Gemini CLI e do Cursor só é lido com seu consentimento. Atualiza a cada 5 minutos, com os mesmos limites de aviso do Claude. Os formatos de resposta não são documentados pelos fabricantes e podem mudar."
+            "value": "Um serviço aparece sozinho sob os anéis do Claude quando é encontrado no Mac ou sua chave é salva. As chaves ficam apenas nas Chaves. Codex e Copilot são consultados pelas próprias ferramentas (codex, gh); o login do Gemini CLI e do Cursor só é lido com seu consentimento. Atualiza a cada 5 minutos. Os formatos de resposta não são documentados pelos fabricantes e podem mudar."
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Сервіс з'являється під кільцями Claude сам, коли знайдений на Маку або збережено його ключ. Ключі зберігаються лише у в'язці ключів. Codex і Copilot опитуються через власні програми (codex, gh); вхід Gemini CLI і Cursor читається лише з вашої згоди. Оновлюється раз на 5 хвилин, пороги сповіщень — ті самі, що в Claude. Формати відповідей не задокументовані виробниками й можуть змінитися."
+            "value": "Сервіс з'являється під кільцями Claude сам, коли знайдений на Маку або збережено його ключ. Ключі зберігаються лише у в'язці ключів. Codex і Copilot опитуються через власні програми (codex, gh); вхід Gemini CLI і Cursor читається лише з вашої згоди. Оновлюється раз на 5 хвилин. Формати відповідей не задокументовані виробниками й можуть змінитися."
           }
         }
       }
@@ -72128,6 +72280,82 @@
         }
       }
     },
+    "Уведомления о лимитах": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إشعارات الحدود"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limit-Mitteilungen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limit notifications"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Avisos de límites"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notifications de limites"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notifikasi batas"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notifiche dei limiti"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "上限の通知"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "한도 알림"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Powiadomienia o limitach"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Avisos de limites"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Сповіщення про ліміти"
+          }
+        }
+      }
+    },
     "Уведомления о лимитах ещё и в Telegram": {
       "localizations": {
         "ar": {
@@ -72352,6 +72580,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Сповіщати на, %"
+          }
+        }
+      }
+    },
+    "Уведомлять о лимите": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الإشعار بالحد"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bei Limit benachrichtigen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notify about the limit"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Avisar del límite"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prévenir pour la limite"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beri tahu soal batas"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Avvisa per il limite"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "上限を通知"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "한도 알림"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Powiadamiaj o limicie"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Avisar sobre o limite"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Сповіщати про ліміт"
           }
         }
       }
@@ -81817,6 +82121,82 @@
         }
       }
     },
+    "за неделю +%@": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "خلال الأسبوع +%@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "diese Woche +%@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "this week +%@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "esta semana +%@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "cette semaine +%@"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "minggu ini +%@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "questa settimana +%@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今週 +%@"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이번 주 +%@"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "w tym tygodniu +%@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "nesta semana +%@"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "за тиждень +%@"
+          }
+        }
+      }
+    },
     "за сутки": {
       "localizations": {
         "ar": {
@@ -83490,6 +83870,82 @@
         }
       }
     },
+    "как у всех: %@ %%": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "كالبقية: %@ %%"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "wie alle: %@ %%"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "same as all: %@ %%"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "como todos: %@ %%"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "comme les autres : %@ %%"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "sama seperti semua: %@ %%"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "come gli altri: %@ %%"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "共通: %@ %%"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "공통: %@ %%"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "jak wszystkie: %@ %%"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "como todos: %@ %%"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "як у всіх: %@ %%"
+          }
+        }
+      }
+    },
     "квота": {
       "localizations": {
         "ar": {
@@ -84630,6 +85086,82 @@
         }
       }
     },
+    "на своих порогах": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "عند عتبات خاصة"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "bei eigenen Schwellen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "at its own thresholds"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "con umbrales propios"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "à ses propres seuils"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "pada ambang sendiri"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "con soglie proprie"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "独自のしきい値で"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "자체 기준으로"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "na własnych progach"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "com limites próprios"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "на власних порогах"
+          }
+        }
+      }
+    },
     "найден": {
       "localizations": {
         "ar": {
@@ -85158,6 +85690,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "не надсилати"
+          }
+        }
+      }
+    },
+    "не уведомлять": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "عدم الإشعار"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "nicht benachrichtigen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "don’t notify"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "no avisar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ne pas prévenir"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "jangan beri tahu"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "non avvisare"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "通知しない"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "알리지 않음"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "nie powiadamiaj"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "não avisar"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "не сповіщати"
           }
         }
       }
@@ -88363,6 +88971,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "проєкт.md"
+          }
+        }
+      }
+    },
+    "проекты: %@": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المشاريع: %@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Projekte: %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "projects: %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "proyectos: %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "projets : %@"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "proyek: %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "progetti: %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "プロジェクト: %@"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "프로젝트: %@"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "projekty: %@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "projetos: %@"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "проєкти: %@"
           }
         }
       }
