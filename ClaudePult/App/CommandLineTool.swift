@@ -105,6 +105,7 @@ enum CommandLineTool {
                 print("       modules: \(modules.joined(separator: ", "))")
             }
             print("installed: \(modes.installedModules.map(\.rawValue).joined(separator: ", "))")
+            print("off: \(modes.switchedOff.map(\.rawValue).joined(separator: ", "))")
             return 0
         }
         if let index = arguments.firstIndex(of: "--export-settings"), index + 1 < arguments.count {

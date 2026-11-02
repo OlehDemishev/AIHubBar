@@ -174,6 +174,19 @@ struct MenuBarElement: Codable, Equatable, Hashable, Identifiable, Sendable {
 
         var isGauge: Bool { [.session, .week, .modelWeek, .cpu, .memory, .otherAI].contains(self) }
 
+        /// The module whose data the element shows; nil for the icon, the free space and the profile.
+        var module: ModuleKind? {
+            switch self {
+            case .session, .week, .modelWeek, .resetCountdown, .forecast, .otherAI: .limits
+            case .waiting, .running, .background, .queued: .sessions
+            case .projectsAlert: .projects
+            case .deadline: .upcoming
+            case .cpu, .memory: .resources
+            case .keepAwake: .keepAwake
+            case .icon, .disk, .mode: nil
+            }
+        }
+
         /// For the order chips in Settings.
         var shortTitle: String {
             switch self {
@@ -276,6 +289,35 @@ struct MenuBarData: Equatable, Hashable, Sendable {
     var otherAI: [String: Double] = [:]
     /// Countdowns are drawn for this minute.
     var now: Date = .now
+
+    /// Nothing from modules switched off with their main switch (SPEC-settings §1): their elements then draw nothing.
+    func without(_ off: [ModuleKind]) -> MenuBarData {
+        var data = self
+        for module in off {
+            switch module {
+            case .limits:
+                data.session = nil
+                data.week = nil
+                data.modelWeeks = [:]
+                data.sessionResetsAt = nil
+                data.forecastRunsOut = nil
+                data.otherAI = [:]
+            case .sessions:
+                data.waiting = 0
+                data.running = 0
+                data.background = 0
+                data.queued = 0
+            case .projects: data.showsAlert = false
+            case .upcoming: data.deadline = nil
+            case .resources:
+                data.cpu = nil
+                data.memory = nil
+            case .keepAwake: data.keepingAwake = false
+            case .reports, .quickCommands, .toggles, .clipboard, .notes, .notch, .layout: break
+            }
+        }
+        return data
+    }
 
     static let sample = MenuBarData(
         showsAlert: true, waiting: 1, running: 2, background: 1, queued: 1, session: 34, week: 58,

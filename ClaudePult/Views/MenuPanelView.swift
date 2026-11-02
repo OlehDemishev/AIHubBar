@@ -140,7 +140,7 @@ struct MenuPanelView: View {
         let projectItems = folders.isActive
             ? folders.projects.map { PanelSearch.Item(id: $0.path, name: $0.name, detail: "") }
             : store.projects.map { PanelSearch.Item(id: $0.id, name: $0.name, detail: $0.branch ?? "") }
-        let quick = modes.installedModules.contains(.quickCommands)
+        let quick = modes.isOn(.quickCommands)
             ? settings.quickCommands.map { PanelSearch.Item(id: $0.id, name: $0.title, detail: "") } : []
         let common = modes.panelModules.contains(.reports) ? CommonCommand.allCases : []
         return PanelSearch.results(query, sessions: sessionItems, projects: projectItems, quickCommands: quick, commands: common)
@@ -212,7 +212,7 @@ struct MenuPanelView: View {
         .help(store.lastUpdated.map { String(localized: "Обновить · обновлено \(RelativeTime.ago($0))") } ?? String(localized: "Обновить"))
         .keyboardShortcut("r", modifiers: .command)
         // «Скрыть остров» for a screen recording or a demo (SPEC-notch §5), while the island is installed.
-        if modes.installedModules.contains(.notch) {
+        if modes.isOn(.notch) {
             Button { settings.notch.hidden.toggle() } label: {
                 Image(systemName: settings.notch.hidden ? "laptopcomputer.slash" : "laptopcomputer")
             }

@@ -205,7 +205,7 @@ struct QuickSearchWindow: View {
         let projectItems = folders.isActive
             ? folders.projects.map { PanelSearch.Item(id: $0.path, name: $0.name, detail: "") }
             : store.projects.map { PanelSearch.Item(id: $0.path, name: $0.name, detail: $0.branch ?? "") }
-        let quick = modes.installedModules.contains(.quickCommands)
+        let quick = modes.isOn(.quickCommands)
             ? settings.quickCommands.map { PanelSearch.Item(id: $0.id, name: $0.title, detail: "") } : []
         let common = modes.panelModules.contains(.reports) ? CommonCommand.allCases : []
         // Prompts run in a git project: not offered where the profile's projects are folders.
