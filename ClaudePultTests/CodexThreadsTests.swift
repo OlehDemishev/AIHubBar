@@ -74,11 +74,14 @@ struct CodexThreadsTests {
         #expect(CodexThreads.recent(home: home, now: now, within: 30 * 60).isEmpty)
     }
 
-    @Test func resumeCommand() {
-        let thread = CodexThreads.Recent(id: "019a-thread", project: "My App", folder: "/Users/me/My App", title: "", updatedAt: now)
-        let codex = "/Applications/ChatGPT.app/Contents/Resources/codex-cli/bin/codex"
-        #expect(CodexThreads.resumeCommandLine(thread, codexPath: codex)
-            == "cd \(ShellQuote.quote("/Users/me/My App")) && \(ShellQuote.quote(codex)) resume \(ShellQuote.quote("019a-thread"))")
+    @Test func resumeCommands() {
+        let codex = AgentThread(agent: .codex, id: "019a-thread", project: "My App", folder: "/Users/me/My App", title: "", updatedAt: now)
+        let path = "/Applications/ChatGPT.app/Contents/Resources/codex-cli/bin/codex"
+        #expect(codex.resumeCommandLine(path: path)
+            == "cd \(ShellQuote.quote("/Users/me/My App")) && \(ShellQuote.quote(path)) \(ShellQuote.quote("resume")) \(ShellQuote.quote("019a-thread"))")
+        var copilot = codex
+        copilot.agent = .copilot
+        #expect(copilot.resumeCommandLine(path: "/opt/homebrew/bin/copilot").hasSuffix(ShellQuote.quote("--resume=019a-thread")))
     }
 
     private func makeDatabase(_ url: URL, rows: [(String, Int, Date, String, Int)]) throws {

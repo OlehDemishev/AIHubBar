@@ -533,7 +533,13 @@ final class HubLimitsStore {
             guard result.exitCode == 0 else {
                 return done(nil, .failed(result.stderrText.split(separator: "\n").first.map(String.init) ?? "gh"))
             }
-            return done(HubParse.copilot(result.stdout))
+            // Beyond the quota (SPEC-ai-services stage 6): tokens and AI credits per project and the context, from
+            // Copilot CLI's own records when it is used here.
+            var limit = done(HubParse.copilot(result.stdout))
+            let extras = CopilotSessions.extras()
+            limit.notes = extras.notes
+            limit.projects = extras.projects
+            return limit
         case .gemini:
             if geminiQuota, let token = HubFetch.geminiAccessToken() {
                 let base = "https://cloudcode-pa.googleapis.com/v1internal"

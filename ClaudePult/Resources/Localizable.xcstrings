@@ -1089,6 +1089,82 @@
         }
       }
     },
+    "%@ · %@ — продолжить в Терминале": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ · %@ — المتابعة في Terminal"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ · %@ – im Terminal fortsetzen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ · %@ — continue in Terminal"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ · %@ — continuar en Terminal"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ · %@ — continuer dans Terminal"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ · %@ — lanjutkan di Terminal"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ · %@ — continua nel Terminale"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ · %@ — ターミナルで続ける"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ · %@ — 터미널에서 계속"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ · %@ — kontynuuj w Terminalu"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ · %@ — continuar no Terminal"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ · %@ — продовжити в Терміналі"
+          }
+        }
+      }
+    },
     "%@ из %@": {
       "localizations": {
         "ar": {
@@ -1477,6 +1553,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ знову доступна"
+          }
+        }
+      }
+    },
+    "%@, %@: %@": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@، %@: %@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@, %@: %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@, %@: %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@, %@: %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@, %@ : %@"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@, %@: %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@, %@: %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@、%@: %@"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@, %@: %@"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@, %@: %@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@, %@: %@"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@, %@: %@"
           }
         }
       }
@@ -5888,6 +6040,82 @@
         }
       }
     },
+    "AI-кредиты за неделю: %@": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "أرصدة AI هذا الأسبوع: %@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI-Credits diese Woche: %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI credits this week: %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Créditos de IA esta semana: %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Crédits IA cette semaine : %@"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kredit AI minggu ini: %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Crediti AI questa settimana: %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今週の AI クレジット: %@"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이번 주 AI 크레딧: %@"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kredyty AI w tym tygodniu: %@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Créditos de IA nesta semana: %@"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI-кредити за тиждень: %@"
+          }
+        }
+      }
+    },
     "API за месяц: %@": {
       "localizations": {
         "ar": {
@@ -7255,158 +7483,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Codex CLI, Gemini CLI, Antigravity, Copilot CLI, Cursor CLI — AI Hub Bar знаходить встановлені (Налаштування → «Сервіси AI») і відкриває їх у Терміналі в папці проєкту: «Відкрити в…» у блоці Claude проєкту. Вхід у кожного свій."
-          }
-        }
-      }
-    },
-    "Codex · %@ — продолжить в Терминале": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex · %@ — المتابعة في Terminal"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex · %@ – im Terminal fortsetzen"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex · %@ — continue in Terminal"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex · %@ — continuar en Terminal"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex · %@ — continuer dans Terminal"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex · %@ — lanjutkan di Terminal"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex · %@ — continua nel Terminale"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex · %@ — ターミナルで続ける"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex · %@ — 터미널에서 계속"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex · %@ — kontynuuj w Terminalu"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex · %@ — continuar no Terminal"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex · %@ — продовжити в Терміналі"
-          }
-        }
-      }
-    },
-    "Codex, %@: %@": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex، %@: %@"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex, %@: %@"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex, %@: %@"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex, %@: %@"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex, %@ : %@"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex, %@: %@"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex, %@: %@"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex、%@: %@"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex, %@: %@"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex, %@: %@"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex, %@: %@"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex, %@: %@"
           }
         }
       }
@@ -20617,78 +20693,78 @@
         }
       }
     },
-    "Для Code Assist и платных ключей API. Бесплатный вход и Google AI Pro/Ultra с июня 2026 — в Antigravity CLI.": {
+    "Для Code Assist и платных ключей API. Бесплатный вход и Google AI Pro/Ultra с июня 2026 — в Antigravity CLI. Homebrew отключает gemini-cli 18 декабря 2026.": {
       "localizations": {
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "لـ Code Assist ومفاتيح API المدفوعة. انتقل الدخول المجاني وGoogle AI Pro/Ultra إلى Antigravity CLI في يونيو 2026."
+            "value": "لـ Code Assist ومفاتيح API المدفوعة. انتقل الدخول المجاني وGoogle AI Pro/Ultra إلى Antigravity CLI في يونيو 2026. يوقف Homebrew ‏gemini-cli في 18 ديسمبر 2026."
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Für Code Assist und bezahlte API-Schlüssel. Die kostenlose Anmeldung und Google AI Pro/Ultra sind im Juni 2026 zu Antigravity CLI gewechselt."
+            "value": "Für Code Assist und bezahlte API-Schlüssel. Die kostenlose Anmeldung und Google AI Pro/Ultra sind im Juni 2026 zu Antigravity CLI gewechselt. Homebrew schaltet gemini-cli am 18. Dezember 2026 ab."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "For Code Assist and paid API keys. Free sign-in and Google AI Pro/Ultra moved to Antigravity CLI in June 2026."
+            "value": "For Code Assist and paid API keys. Free sign-in and Google AI Pro/Ultra moved to Antigravity CLI in June 2026. Homebrew disables gemini-cli on December 18, 2026."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Para Code Assist y claves de API de pago. El acceso gratuito y Google AI Pro/Ultra pasaron a Antigravity CLI en junio de 2026."
+            "value": "Para Code Assist y claves de API de pago. El acceso gratuito y Google AI Pro/Ultra pasaron a Antigravity CLI en junio de 2026. Homebrew desactiva gemini-cli el 18 de diciembre de 2026."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Pour Code Assist et les clés d'API payantes. La connexion gratuite et Google AI Pro/Ultra sont passés à Antigravity CLI en juin 2026."
+            "value": "Pour Code Assist et les clés d'API payantes. La connexion gratuite et Google AI Pro/Ultra sont passés à Antigravity CLI en juin 2026. Homebrew désactive gemini-cli le 18 décembre 2026."
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "Untuk Code Assist dan kunci API berbayar. Login gratis dan Google AI Pro/Ultra pindah ke Antigravity CLI pada Juni 2026."
+            "value": "Untuk Code Assist dan kunci API berbayar. Login gratis dan Google AI Pro/Ultra pindah ke Antigravity CLI pada Juni 2026. Homebrew menonaktifkan gemini-cli pada 18 Desember 2026."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Per Code Assist e chiavi API a pagamento. L'accesso gratuito e Google AI Pro/Ultra sono passati ad Antigravity CLI a giugno 2026."
+            "value": "Per Code Assist e chiavi API a pagamento. L'accesso gratuito e Google AI Pro/Ultra sono passati ad Antigravity CLI a giugno 2026. Homebrew disattiva gemini-cli il 18 dicembre 2026."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "Code Assist と有料 API キー向け。無料ログインと Google AI Pro/Ultra は 2026 年 6 月に Antigravity CLI へ移りました。"
+            "value": "Code Assist と有料 API キー向け。無料ログインと Google AI Pro/Ultra は 2026 年 6 月に Antigravity CLI へ移りました。 Homebrew は 2026 年 12 月 18 日に gemini-cli を無効にします。"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "Code Assist와 유료 API 키용. 무료 로그인과 Google AI Pro/Ultra는 2026년 6월에 Antigravity CLI로 옮겨 갔습니다."
+            "value": "Code Assist와 유료 API 키용. 무료 로그인과 Google AI Pro/Ultra는 2026년 6월에 Antigravity CLI로 옮겨 갔습니다. Homebrew는 2026년 12월 18일에 gemini-cli를 비활성화합니다."
           }
         },
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Dla Code Assist i płatnych kluczy API. Darmowe logowanie oraz Google AI Pro/Ultra przeszły w czerwcu 2026 do Antigravity CLI."
+            "value": "Dla Code Assist i płatnych kluczy API. Darmowe logowanie oraz Google AI Pro/Ultra przeszły w czerwcu 2026 do Antigravity CLI. Homebrew wyłącza gemini-cli 18 grudnia 2026."
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Para Code Assist e chaves de API pagas. O acesso gratuito e o Google AI Pro/Ultra passaram para o Antigravity CLI em junho de 2026."
+            "value": "Para Code Assist e chaves de API pagas. O acesso gratuito e o Google AI Pro/Ultra passaram para o Antigravity CLI em junho de 2026. O Homebrew desativa o gemini-cli em 18 de dezembro de 2026."
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Для Code Assist і платних ключів API. Безплатний вхід і Google AI Pro/Ultra з червня 2026 — в Antigravity CLI."
+            "value": "Для Code Assist і платних ключів API. Безплатний вхід і Google AI Pro/Ultra з червня 2026 — в Antigravity CLI. Homebrew вимикає gemini-cli 18 грудня 2026."
           }
         }
       }
@@ -51433,6 +51509,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "За записами Codex: токени розмов, оновлених за тиждень, — кожна розмова цілком."
+          }
+        }
+      }
+    },
+    "По записям Copilot CLI: токены запросов за неделю (ввод и вывод).": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "حسب سجلات Copilot CLI: رموز الطلبات هذا الأسبوع (الإدخال والإخراج)."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Laut Copilot-CLI-Aufzeichnungen: Tokens der Anfragen dieser Woche (Ein- und Ausgabe)."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "From Copilot CLI’s records: tokens of this week’s requests (input and output)."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Según los registros de Copilot CLI: tokens de las solicitudes de la semana (entrada y salida)."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "D’après les données de Copilot CLI : jetons des requêtes de la semaine (entrée et sortie)."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Menurut catatan Copilot CLI: token permintaan minggu ini (input dan output)."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dai registri di Copilot CLI: token delle richieste della settimana (input e output)."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copilot CLI の記録より: 今週のリクエストのトークン（入力と出力）。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copilot CLI 기록 기준: 이번 주 요청의 토큰(입력과 출력)."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Według zapisów Copilot CLI: tokeny zapytań z tego tygodnia (wejście i wyjście)."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pelos registros do Copilot CLI: tokens das solicitações da semana (entrada e saída)."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "За записами Copilot CLI: токени запитів за тиждень (введення й виведення)."
           }
         }
       }
@@ -90795,82 +90947,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "скопійовано"
-          }
-        }
-      }
-    },
-    "см. README Gemini CLI (раздел про Antigravity)": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "راجع README الخاص بـ Gemini CLI (قسم Antigravity)"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "siehe README von Gemini CLI (Abschnitt Antigravity)"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "see the Gemini CLI README (the Antigravity section)"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ver el README de Gemini CLI (sección sobre Antigravity)"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "voir le README de Gemini CLI (section Antigravity)"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "lihat README Gemini CLI (bagian Antigravity)"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "vedi il README di Gemini CLI (sezione Antigravity)"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Gemini CLI の README を参照 (Antigravity の節)"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Gemini CLI README 참고 (Antigravity 섹션)"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "zobacz README Gemini CLI (sekcja o Antigravity)"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "veja o README do Gemini CLI (seção sobre o Antigravity)"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "див. README Gemini CLI (розділ про Antigravity)"
           }
         }
       }

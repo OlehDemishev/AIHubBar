@@ -5,7 +5,7 @@
 **Updated:** 2026-11-02
 
 **Now:**
-- nothing in progress; merged 2026-11-02: AI services stages 5–6 — Codex threads in «Сессии», stage 3 checked live (#168), stage 4 — thresholds per service, «Другие AI» notch ear, other services in the weekly summary (#167), stage 3 — Codex plan, credits, tokens per project, context (#166), stage 2 — one limits card for every service (#165), Settings redone like System Settings (#164), «Сервисы AI» as a list on the left (#162) in the window colour (#163), glass panel background (#158) and its fix for macOS 27 (#160), AI services spec + stage 1 — Claude Code inside «Сервисы AI», a tab per service (#159)
+- in progress: Gemini CLI and Antigravity data after Oleh signs in; merged 2026-11-02: Copilot in full (#169), AI services stages 5–6 — Codex threads in «Сессии», stage 3 checked live (#168), stage 4 — thresholds per service, «Другие AI» notch ear, other services in the weekly summary (#167), stage 3 — Codex plan, credits, tokens per project, context (#166), stage 2 — one limits card for every service (#165), Settings redone like System Settings (#164), «Сервисы AI» as a list on the left (#162) in the window colour (#163), glass panel background (#158) and its fix for macOS 27 (#160), AI services spec + stage 1 — Claude Code inside «Сервисы AI», a tab per service (#159)
 - released 0.2.2 (v0.2.2, build 345): clickable widgets (#154), Codex from the ChatGPT desktop app (#155), notch island stage 2 (#153)
 - notch island stage 1 merged (#149): module, island over the notch, ears, hover card; target release 0.3.0
 - notch island stage 2 merged (#153): banners for events, permission requests with Allow / Deny in the island
@@ -28,6 +28,7 @@
 - Windows and Linux versions (docs/SPEC-windows.md, docs/SPEC-linux.md) — only when Oleh says; stage 0 (fact checks in VMs) first
 
 **Needs Oleh:**
+- sign in to Gemini CLI (`gemini` → «Sign in with Google») and Antigravity (`agy`, open the link, paste the code) — then I run one short task in each and read their files; Cursor CLI isn't installed yet (cursor.com/cli)
 - optional: a Codex thread named «codex-check» (from the live check) is in your Codex history — archive it in Codex if it's in the way
 - new Settings (build from main, installed): one sidebar with search — every page opens, search finds pages by setting names (e.g. «Telegram»), the dots match what's set up; in «Сервисы AI» → Claude Code has all the old options (path, hooks, Telegram answers, saved prompts, CLAUDE.md и MCP, background runs); Codex shows the agent and its limits row; Modules → Лимиты → «Другие AI» shows the summary and «Открыть «Сервисы AI»»
 - glass panel (installed build has the fix): checked by the agent in the light theme; look at it in the dark theme and with «Уменьшить прозрачность» on (must fall back to the standard background), say if the glass should be clearer or denser
@@ -42,6 +43,12 @@
 - decide SPEC-windows §10 and SPEC-linux §10 (Tauri 2 for both, Windows code signing, first Linux desktops) before that work starts
 - optional: Apple Developer ID (notarization, no «Open Anyway»); delete or archive the old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-02 — Copilot CLI in full; common agent rows (branch `feat/copilot-in-full`)
+
+Done: with Copilot CLI 1.0.105 installed by Oleh and one short task (it signed in through `gh`), its own records were read: `~/.copilot/session-store.db` (`sessions`, `assistant_usage_events` with tokens and `total_nano_aiu`) and `session-state/<id>/events.jsonl` (`session.usage_record` with `inputTokens` / `maxPromptTokens`). New `Services/AgentThreads.swift`: `AgentThread` (a recent conversation of any non-Claude agent, with its `resume` command), `SQLiteReader` (read-only queries; a WAL database whose agent has quit has no `-shm`, which a read-only open can't create — then it is read as immutable, nothing written next to it; Codex's reader broke exactly that way once Codex quit), `CopilotSessions` (recent sessions, context fill, tokens and AI credits per project this week). The Copilot card shows «AI-кредиты за неделю», tokens per project and the latest session's context; «Сессии» lists Codex and Copilot conversations with each agent's icon (click → `codex resume` / `copilot --resume=<id>`). Install commands: Antigravity is `brew install --cask antigravity-cli` (Homebrew's replacement for the deprecated `gemini-cli`, links `agy`); the Gemini CLI note says Homebrew disables `gemini-cli` on 2026-12-18. Strings: 4 new, the Gemini note re-keyed, 3 unused removed — 13 languages.
+Checked: `xcodebuild test` — 322 / 322 pass (new `CopilotSessionsTests` on the real schema: recent sessions, context 25 %, tokens and credits per project; `SQLiteReader` on a closed WAL database in a folder with a space; Codex resume / Copilot `--resume` commands). Live: `--services limits` → `copilot: … note AI-кредиты за неделю: 0,12, note Контекст … «agents-check»: 11 %, project agents-check: 14269 tokens` and Codex's notes back after the immutable fallback; the panel's «Сессии» (expanded for the capture, then restored) shows `agents-check` (Copilot) and `codex-check` (Codex) rows. An ISO formatter without the time zone made the first test crash — fixed with `ISO8601DateFormatter`.
+Left: Gemini CLI and Antigravity are installed but not signed in (their folders hold only what the failed runs left); Cursor CLI isn't installed.
 
 ## 2026-11-02 — AI services stages 5–6: Codex threads in «Сессии», Gemini / Copilot / Cursor (branch `feat/codex-sessions`)
 

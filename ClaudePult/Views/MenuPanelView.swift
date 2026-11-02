@@ -31,8 +31,8 @@ struct MenuPanelView: View {
     /// The panel draws its own glass instead of the system background.
     @State private var drawsGlass = false
     @State private var query = ""
-    /// Recent Codex threads for «Сессии», read when the panel opens.
-    @State private var codexThreads: [CodexThreads.Recent] = []
+    /// Recent Codex and Copilot conversations for «Сессии», read when the panel opens.
+    @State private var agentThreads: [AgentThread] = []
     @FocusState private var searchFocused: Bool
 
     /// The project list scrolls; its height leaves room for the other blocks on the current screen.
@@ -115,7 +115,7 @@ struct MenuPanelView: View {
             hooks.refresh()
             notifications.refresh()
             snapshotIfEnabled()
-            Task { codexThreads = await Task.detached(priority: .utility) { CodexThreads.recent() }.value }
+            Task { agentThreads = await Task.detached(priority: .utility) { AgentThread.recent() }.value }
         }
         .onDisappear {
             isShown = false
@@ -340,8 +340,8 @@ struct MenuPanelView: View {
                 .revealed(isShown, step: 1, reduceMotion: calm)
         case .sessions:
             let sessionRows = SessionRow.rows(sessions: sessions.items, runs: runs.runs)
-            if !sessionRows.isEmpty || !codexThreads.isEmpty {
-                SessionsView(rows: sessionRows, codex: codexThreads)
+            if !sessionRows.isEmpty || !agentThreads.isEmpty {
+                SessionsView(rows: sessionRows, others: agentThreads)
                     .panelCard()
                     .revealed(isShown, step: 1, reduceMotion: calm)
             } else if hooks.status == .notInstalled {

@@ -1,6 +1,6 @@
 # SPEC — AI services: Claude as one of them, the same view for every service
 
-Status: stages 1–6 done (#159, #162–#168), 2026-11-02; left: Gemini tokens per project (needs a Mac with Gemini CLI), a Codex «waiting» signal (see stage 5).
+Status: stages 1–6 done (#159, #162–#169), 2026-11-02; left: Gemini CLI and Antigravity data (waiting for Oleh's sign-in), a «waiting» signal for agents without hooks.
 Asked by Oleh on 2026-10-31 and 2026-11-02: move Claude Code into «Сервисы AI», give every AI its own nested tab
 with all its settings, and bring the other services up to Claude Code's level — one model per service for rings,
 forecast, week strip, credits, per-project tokens and context.
@@ -110,10 +110,16 @@ service mark. Sessions: Codex threads next to Claude sessions once a source exis
    hooks here. The `notify` hook is **not** installed: Codex has one `notify` command and on Oleh's Mac it already
    belongs to ChatGPT's computer use (`SkyComputerUseClient turn-ended`) — replacing it would break that, chaining it
    means editing ChatGPT's config. Revisit if Codex gets real hooks.
-6. **Gemini / Copilot / Cursor** (done as far as can be checked): their ⚙️ history and forecast came with stage 2's
-   `LimitHistory` (forecast, week by day for every limit with a percentage). Left: Gemini tokens per project
-   (`~/.gemini/tmp/<project hash>/` chats) — no Gemini CLI on this Mac to check the format; Copilot and Cursor have no
-   per-project or context data (§2 ❌).
+6. **Gemini / Copilot / Cursor**: their ⚙️ history and forecast came with stage 2's `LimitHistory`. **Copilot CLI**
+   (1.0.105, checked live 2026-11-02 on a real session): `~/.copilot/session-store.db` — `sessions` (`cwd`, `summary`,
+   ISO `updated_at`) and `assistant_usage_events` (per request tokens and `total_nano_aiu` = AI credits × 10⁹), and
+   `session-state/<id>/events.jsonl` `session.usage_record` (`inputTokens`, `maxPromptTokens` = the context window).
+   The Copilot card shows AI credits this week, tokens per project and the context of today's latest session; its
+   recent sessions join Codex's in «Сессии» (click → `copilot --resume=<id>`). Correction to §2: Copilot does have
+   per-project and context data. **Gemini CLI 0.66** keeps chats per project in `~/.gemini/tmp/<short name>/` with
+   `~/.gemini/projects.json` mapping folder → name (not a hash); its data and **Antigravity**'s
+   (`~/.gemini/antigravity-cli/conversation_summaries.db`) wait for a signed-in run. Homebrew's `gemini-cli` is
+   deprecated (disabled 2026-12-18); its replacement `antigravity-cli` links `agy`. Cursor CLI: not installed here.
 
 Rules for every stage: hover hint on each icon-only control, accessibility walk at the end of each UI stage
 (SPEC §3.1), all strings in 13 languages, nothing read without the consent the service already asks for.

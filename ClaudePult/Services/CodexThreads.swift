@@ -1,5 +1,4 @@
 import Foundation
-import SQLite3
 
 /// Codex's own records on this Mac (SPEC-ai-services stage 3): its threads in `~/.codex/state_<N>.sqlite` (table
 /// `threads`: `cwd`, `tokens_used`, `updated_at`, `rollout_path`, `archived` — the schema checked on Codex 0.166,
@@ -29,32 +28,13 @@ enum CodexThreads {
 
     /// Threads not archived and updated since `since`, newest first.
     static func threads(in database: URL, since: Date) -> [Thread] {
-        var db: OpaquePointer?
-        let uri = "file:\(database.path)?mode=ro"
-        guard sqlite3_open_v2(uri, &db, SQLITE_OPEN_READONLY | SQLITE_OPEN_URI, nil) == SQLITE_OK else {
-            sqlite3_close(db)
-            return []
+        SQLiteReader.rows(database, """
+            SELECT cwd, tokens_used, updated_at, rollout_path, id, title FROM threads
+            WHERE archived = 0 AND updated_at >= ? ORDER BY updated_at DESC
+            """, [.int(Int64(since.timeIntervalSince1970))]).map { row in
+            Thread(id: row[4].text, title: row[5].text, cwd: row[0].text, tokens: Int(row[1].int),
+                   updatedAt: Date(timeIntervalSince1970: TimeInterval(row[2].int)), rolloutPath: row[3].text)
         }
-        defer { sqlite3_close(db) }
-        sqlite3_busy_timeout(db, 500)
-        let sql = "SELECT cwd, tokens_used, updated_at, rollout_path, id, title FROM threads WHERE archived = 0 AND updated_at >= ? ORDER BY updated_at DESC"
-        var statement: OpaquePointer?
-        guard sqlite3_prepare_v2(db, sql, -1, &statement, nil) == SQLITE_OK else { return [] }
-        defer { sqlite3_finalize(statement) }
-        sqlite3_bind_int64(statement, 1, Int64(since.timeIntervalSince1970))
-        var result: [Thread] = []
-        while sqlite3_step(statement) == SQLITE_ROW {
-            func text(_ column: Int32) -> String { sqlite3_column_text(statement, column).map { String(cString: $0) } ?? "" }
-            result.append(Thread(
-                cwd: text(0),
-                tokens: Int(sqlite3_column_int64(statement, 1)),
-                updatedAt: Date(timeIntervalSince1970: TimeInterval(sqlite3_column_int64(statement, 2))),
-                rolloutPath: text(3)
-            ))
-            result[result.count - 1].id = text(4)
-            result[result.count - 1].title = text(5)
-        }
-        return result
     }
 
     /// Tokens per project folder, most first. A thread counts whole: Codex keeps one total per thread.
@@ -113,33 +93,17 @@ enum CodexThreads {
         return notes
     }
 
-    /// A Codex thread for the «Сессии» block (SPEC-ai-services stage 5): Codex has no hooks here, so there is no
-    /// «working» or «waiting» — only when the thread was last updated and how full its context is.
-    struct Recent: Equatable, Identifiable, Sendable {
-        var id: String
-        var project: String
-        var folder: String
-        var title: String
-        var updatedAt: Date
-        var context: Double?
-    }
-
-    /// Threads updated in the last `within` seconds (3 hours), newest first, at most `limit`.
+    /// Threads updated in the last `within` seconds (3 hours), newest first, at most `limit` (SPEC-ai-services stage 5).
     static func recent(home: URL = FileManager.default.homeDirectoryForCurrentUser, now: Date = .now,
-                       within: TimeInterval = 3 * 3600, limit: Int = 5) -> [Recent] {
+                       within: TimeInterval = 3 * 3600, limit: Int = 5) -> [AgentThread] {
         guard let database = database(home: home) else { return [] }
         return threads(in: database, since: now.addingTimeInterval(-within)).prefix(limit).map { thread in
-            Recent(
-                id: thread.id, project: URL(fileURLWithPath: thread.cwd).lastPathComponent, folder: thread.cwd,
+            AgentThread(
+                agent: .codex, id: thread.id, project: URL(fileURLWithPath: thread.cwd).lastPathComponent, folder: thread.cwd,
                 title: thread.title, updatedAt: thread.updatedAt,
                 context: thread.rolloutPath.isEmpty ? nil : context(rollout: URL(fileURLWithPath: thread.rolloutPath))
             )
         }
-    }
-
-    /// Terminal command that continues the thread in its folder.
-    static func resumeCommandLine(_ thread: Recent, codexPath: String) -> String {
-        "cd \(ShellQuote.quote(thread.folder)) && \(ShellQuote.quote(codexPath)) resume \(ShellQuote.quote(thread.id))"
     }
 
     /// What Codex adds beyond its limits: tokens per project this week and the context of a thread used today.
