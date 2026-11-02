@@ -87,19 +87,21 @@ final class LayoutSwitcher {
 
     /// Installs or removes the tap and the menu bar item as the module, the permission and the settings change.
     func sync() {
-        let granted = AXIsProcessTrusted()
+        let on = isActive()
+        if on, layouts.isEmpty { reloadLayouts() }
+        // The tap itself is the test: `AXIsProcessTrusted` can say no while the list in System Settings says yes.
+        if on { installTap() } else { removeTap() }
+        let granted = tap != nil
         if granted != trusted {
             trusted = granted
             updateStatusItem()
         }
-        let on = isActive()
-        if on, layouts.isEmpty { reloadLayouts() }
-        if on, trusted { installTap() } else { removeTap() }
         if on, settings.layout.menuBarIcon { showStatusItem() } else { hideStatusItem() }
         if on, !trusted, !askedForAccess {
             askedForAccess = true
-            AppLog.info("Layout: no Accessibility access, asking macOS")
+            AppLog.info("Layout: no key access (Accessibility \(AXIsProcessTrusted()), input monitoring \(CGPreflightListenEventAccess()), posting \(CGPreflightPostEventAccess())), asking macOS")
             AXIsProcessTrustedWithOptions(["AXTrustedCheckOptionPrompt": true] as CFDictionary)
+            CGRequestListenEventAccess()
         }
     }
 
@@ -173,7 +175,7 @@ final class LayoutSwitcher {
                                               return swallow ? nil : Unmanaged.passUnretained(event)
                                           },
                                           userInfo: Unmanaged.passUnretained(self).toOpaque()) else {
-            AppLog.error("Layout: the key tap was not created")
+            // Without access this fails on every check; logged once (`sync`).
             return
         }
         let source = CFMachPortCreateRunLoopSource(nil, tap, 0)
