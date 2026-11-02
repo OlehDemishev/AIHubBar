@@ -15,6 +15,20 @@ struct LimitWindow: Equatable, Identifiable, Sendable {
     var showsReset = true
 }
 
+/// A line under a service's limits: credits, plan, how full the context is.
+struct ServiceNote: Equatable, Hashable, Sendable {
+    var text: String
+    var symbol: String
+}
+
+/// Tokens a service spent in one project folder.
+struct ProjectTokens: Equatable, Identifiable, Sendable {
+    var path: String
+    var name: String
+    var tokens: Int
+    var id: String { path }
+}
+
 /// Everything the panel shows about one AI service's limits, the same for every service (SPEC-ai-services §3, stage 2):
 /// up to two windows as rings, the forecast, the week by day, the other windows as bars, notes (credits, spend) and
 /// the error. Claude builds it from `UsageSnapshot`, the other services from `HubLimit` and `LimitHistory`.
@@ -30,7 +44,9 @@ struct ServiceUsage: Equatable, Identifiable, Sendable {
     var bars: [LimitWindow]
     var forecast: UsageForecast
     var week: WeekUsage?
-    var notes: [String] = []
+    var notes: [ServiceNote] = []
+    /// Tokens per project this week, for services that keep them (Codex; Claude has its own breakdown).
+    var projects: [ProjectTokens] = []
     var error: String?
     /// The figures could not be refreshed: shown dimmed, not passed off as current.
     var isStale = false
@@ -41,8 +57,8 @@ struct ServiceUsage: Equatable, Identifiable, Sendable {
         func window(_ window: UsageWindow, showsReset: Bool = true) -> LimitWindow {
             LimitWindow(id: window.key, title: window.title, percent: window.utilization, resetsAt: window.resetsAt, showsReset: showsReset)
         }
-        var notes: [String] = []
-        if let extra = snapshot.extra, extra.isEnabled { notes.append(UsageText.extra(extra)) }
+        var notes: [ServiceNote] = []
+        if let extra = snapshot.extra, extra.isEnabled { notes.append(ServiceNote(text: UsageText.extra(extra), symbol: "creditcard")) }
         return ServiceUsage(
             service: .claude,
             title: "Claude",
@@ -79,7 +95,7 @@ struct ServiceUsage: Equatable, Identifiable, Sendable {
         if longest?.id == rings.first?.id { week?.forecast = .unknown }
         return ServiceUsage(
             service: .hub(limit.source), title: limit.source.title, rings: rings, bars: bars,
-            forecast: forecast, week: week, error: limit.error
+            forecast: forecast, week: week, notes: limit.notes, projects: limit.projects, error: limit.error
         )
     }
 }

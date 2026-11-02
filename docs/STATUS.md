@@ -5,7 +5,7 @@
 **Updated:** 2026-11-02
 
 **Now:**
-- nothing in progress; merged 2026-11-02: AI services stage 2 — one limits card for every service (#165), Settings redone like System Settings (#164), «Сервисы AI» as a list on the left (#162) in the window colour (#163), glass panel background (#158) and its fix for macOS 27 (#160), AI services spec + stage 1 — Claude Code inside «Сервисы AI», a tab per service (#159)
+- nothing in progress; merged 2026-11-02: AI services stage 3 — Codex plan, credits, tokens per project, context (#166), stage 2 — one limits card for every service (#165), Settings redone like System Settings (#164), «Сервисы AI» as a list on the left (#162) in the window colour (#163), glass panel background (#158) and its fix for macOS 27 (#160), AI services spec + stage 1 — Claude Code inside «Сервисы AI», a tab per service (#159)
 - released 0.2.2 (v0.2.2, build 345): clickable widgets (#154), Codex from the ChatGPT desktop app (#155), notch island stage 2 (#153)
 - notch island stage 1 merged (#149): module, island over the notch, ears, hover card; target release 0.3.0
 - notch island stage 2 merged (#153): banners for events, permission requests with Allow / Deny in the island
@@ -20,7 +20,7 @@
 
 **Next:**
 - notch island for 0.3.0 (docs/SPEC-notch.md §9): stage 3 — pill on screens without a notch, full screen, hot keys, first-setup window; then a 0.3.0 build for Oleh's MacBook Air before publishing
-- AI services (docs/SPEC-ai-services.md §5), one PR each: stage 3 Codex in full (credits, plan, history, forecast, per-project tokens, context); stage 4 per-service alerts, menu bar, widget, notch; stage 5 Codex sessions; stage 6 Gemini / Copilot / Cursor after live checks
+- AI services (docs/SPEC-ai-services.md §5), one PR each: stage 4 per-service alerts, menu bar, widget, notch; stage 5 Codex sessions; stage 6 Gemini / Copilot / Cursor after live checks
 - standing rule (SPEC §3.1): every new icon-only control gets a hover hint; finish each UI stage with the accessibility walk
 - fix whatever Oleh finds in the translations (automated checks pass; a native read for ja, ko, ar is still worth it)
 - stage 8: done without Developer ID (self-signed + Sparkle, PR #85; re-checked on main); notarization only if Oleh buys Developer ID; publishing is Oleh's step (Needs Oleh)
@@ -28,6 +28,7 @@
 - Windows and Linux versions (docs/SPEC-windows.md, docs/SPEC-linux.md) — only when Oleh says; stage 0 (fact checks in VMs) first
 
 **Needs Oleh:**
+- Codex with real threads (any Mac where you used Codex): run `~/Applications/AI\ Hub\ Bar.app/Contents/MacOS/AIHubBar --services limits` and send me the output — it should list projects with tokens and, after a thread today, a context line
 - new Settings (build from main, installed): one sidebar with search — every page opens, search finds pages by setting names (e.g. «Telegram»), the dots match what's set up; in «Сервисы AI» → Claude Code has all the old options (path, hooks, Telegram answers, saved prompts, CLAUDE.md и MCP, background runs); Codex shows the agent and its limits row; Modules → Лимиты → «Другие AI» shows the summary and «Открыть «Сервисы AI»»
 - glass panel (installed build has the fix): checked by the agent in the light theme; look at it in the dark theme and with «Уменьшить прозрачность» on (must fall back to the standard background), say if the glass should be clearer or denser
 - update to 0.2.2 («Обновления» in Settings), then: Settings → Модули → Лимиты → «Другие AI» should list Codex; click the limits widget (opens «Лимиты»), ↻ in it, the sessions widget's rows and ☕ — tell me what doesn't react
@@ -41,6 +42,12 @@
 - decide SPEC-windows §10 and SPEC-linux §10 (Tauri 2 for both, Windows code signing, first Linux desktops) before that work starts
 - optional: Apple Developer ID (notarization, no «Open Anyway»); delete or archive the old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-02 — AI services stage 3: Codex in full (branch `feat/codex-in-full`)
+
+Done: new `Services/CodexThreads.swift` — plan and credits from the same `account/rateLimits/read` answer as the limits (`rateLimits.planType`, `credits {unlimited, balance}`); tokens per project this week from Codex's own `~/.codex/state_<N>.sqlite` (`threads`: `cwd`, `tokens_used`, `updated_at`, not archived; the newest numbered file; opened read-only through SQLite3); how full the context of today's latest thread is, from the last `token_count` in its rollout (last request's tokens without reasoning over `model_context_window`). `HubLimit` and `ServiceUsage` carry `notes` (`ServiceNote`: text + symbol) and `projects` (`ProjectTokens`); the card shows the notes and a folded «Проекты за неделю». New CLI `AIHubBar --services limits` prints what the panel would show for each tool-based service. Fixed on the way: the first version of that command deadlocked — it read `AppSettings` (main thread) inside the task the main thread was waiting for. 6 new strings in 13 languages; REFERENCE and SPEC-ai-services updated.
+Checked: `xcodebuild test` — 315 / 315 pass (new `CodexThreadsTests`: free-plan answer → plan only, balance and unlimited credits, context from a `token_count` line, threads / projects / context from a temporary `.codex` with the real `threads` schema). Live: `--services limits` → `codex: window 30 дн 0 %, note План: Free`, `copilot: чат and дополнения 0 %`; the panel (Codex enabled for the check) shows «План: Free» under Codex's ring; Oleh's settings (all other services off) restored.
+Left: tokens per project and context not seen live — no Codex threads on this Mac (Needs Oleh).
 
 ## 2026-11-02 — AI services stage 2: one model and one limits card for every service (branch `feat/service-usage`)
 

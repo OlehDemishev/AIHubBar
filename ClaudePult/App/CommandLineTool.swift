@@ -192,6 +192,7 @@ enum CommandLineTool {
             }
         }
         if let index = arguments.firstIndex(of: "--services") {
+            if arguments.dropFirst(index + 1).first == "limits" { return limitsReport() }
             return servicesReport(check: arguments.dropFirst(index + 1).first == "check")
         }
         if let index = arguments.firstIndex(of: "--menubar-preview"), index + 1 < arguments.count {
@@ -418,6 +419,27 @@ enum CommandLineTool {
                     line += ", check: " + (await AIServiceStore.check(provider, baseURL: config.baseURL(provider))).text
                 }
                 print(line)
+            }
+            return 0
+        }
+    }
+
+    /// What the panel would show for each service found by its tool (Codex, Copilot, Gemini, Cursor): limits, notes
+    /// (plan, credits, context) and tokens per project — for live checks of SPEC-ai-services stage 3. Keys aren't read.
+    private static func limitsReport() -> Int32 {
+        // Read here: `AppSettings` belongs to the main thread, which `waitFor` blocks.
+        let settings = AppSettings()
+        let geminiLimit = settings.hubGeminiDailyLimit, geminiQuota = settings.hubGeminiQuota
+        return waitFor {
+            for source in HubLimit.Source.allCases where source.keychainAccount == nil {
+                guard HubLimitsStore.toolPresent(source) else { print("\(source.rawValue): not found"); continue }
+                let limit = await HubLimitsStore.read(source, geminiDailyLimit: geminiLimit, geminiQuota: geminiQuota)
+                print("\(source.rawValue):" + (limit.error.map { " error: \($0)" } ?? ""))
+                for window in limit.windows {
+                    print("  window \(window.title): " + [window.percent.map { "\($0) %" }, window.detail, window.resetsAt.map { "resets \($0.ISO8601Format())" }].compactMap { $0 }.joined(separator: ", "))
+                }
+                for note in limit.notes { print("  note \(note.text)") }
+                for project in limit.projects { print("  project \(project.name): \(project.tokens) tokens") }
             }
             return 0
         }
