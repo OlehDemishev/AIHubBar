@@ -23,7 +23,7 @@
 
 **Next:**
 - notch island for 0.3.0: stage 3 done (#181; left: «Скрыть остров» in the ✦ menu, a live VoiceOver walk); 0.3.0 built — after Oleh's check on the MacBook Air: `scripts/release.sh 0.3.0 --publish` (rebuilds with the then-current build number)
-- notch stages 4 (live activity) and 5 (file on the island) done; left for the island: «Скрыть остров» in the ✦ menu, a live VoiceOver walk, why one test drag didn't land
+- notch stages 4 (live activity) and 5 (file on the island) done; left for the island: a live VoiceOver walk, why one test drag didn't land
 - AI services (docs/SPEC-ai-services.md §5): all six stages done for Claude Code, Codex, Copilot CLI and Antigravity (Oleh, 2026-11-02: these three besides Claude are enough; Gemini CLI removed — its Google sign-in is gone; Cursor not used); left only a «waiting» signal if the agents get hooks
 - standing rule (SPEC §3.1): every new icon-only control gets a hover hint; finish each UI stage with the accessibility walk
 - fix whatever Oleh finds in the translations (automated checks pass; a native read for ja, ko, ar is still worth it)
@@ -56,6 +56,12 @@
 - decide SPEC-windows §10 and SPEC-linux §10 (Tauri 2 for both, Windows code signing, first Linux desktops) before that work starts
 - optional: Apple Developer ID (notarization, no «Open Anyway»); delete or archive the old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-02 — «Скрыть остров» in the panel header (branch `feat/notch-hide-in-panel`)
+
+Done: a laptop icon in the ✦ panel's header (next to ⚙) hides and shows the notch island (`laptopcomputer` / `laptopcomputer.slash`, hint «Скрыть / Показать остров у чёлки»), only while the island module is installed — the last open item of notch stage 3 besides VoiceOver. 2 strings in 13 languages; SPEC-notch §9, REFERENCE updated.
+Checked: `xcodebuild test` — 355 / 355 pass; Release build installed. The panel itself not opened (it needs a click on the menu bar while Oleh is away).
+Left: a look at the icon in the panel.
 
 ## 2026-11-02 — Notch island stage 5: a file on the island → AI commands (branch `feat/notch-file-drop`)
 

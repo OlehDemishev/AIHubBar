@@ -211,6 +211,13 @@ struct MenuPanelView: View {
         .disabled(store.isRefreshing)
         .help(store.lastUpdated.map { String(localized: "Обновить · обновлено \(RelativeTime.ago($0))") } ?? String(localized: "Обновить"))
         .keyboardShortcut("r", modifiers: .command)
+        // «Скрыть остров» for a screen recording or a demo (SPEC-notch §5), while the island is installed.
+        if modes.installedModules.contains(.notch) {
+            Button { settings.notch.hidden.toggle() } label: {
+                Image(systemName: settings.notch.hidden ? "laptopcomputer.slash" : "laptopcomputer")
+            }
+            .help(settings.notch.hidden ? String(localized: "Показать остров у чёлки") : String(localized: "Скрыть остров у чёлки"))
+        }
         // Settings, help and quit were three menu-like rows at the bottom; as icons they no longer outweigh the content.
         Button {
             NSApp.activate()
