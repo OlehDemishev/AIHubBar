@@ -5,7 +5,7 @@
 **Updated:** 2026-11-02
 
 **Now:**
-- branch `feat/settings-redesign`: Settings rebuilt around modules (docs/SPEC-settings.md), PR open
+- nothing in progress; new Settings merged (#201): module switches and pages, tiles, panel builder, menu bar dividers
 
 **Next:**
 - Oleh looks at the new Settings (Модули, Панель, Строка меню, a module page) and says what to change
@@ -14,7 +14,7 @@
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/SPEC-windows.md §9, stage 2–3 leftovers)
 
 **Needs Oleh:**
-- review and merge the Settings PR (`feat/settings-redesign`); drags in «Панель» and «Строка меню» are not tried by hand yet
+- try the new Settings: drags in «Панель» and «Строка меню» are not tried by hand yet
 - «Раскладка» is on and has Accessibility on this Mac: try it in Telegram, Chrome, Safari, Notes; ⌥⇧ on a selection is not tried yet
 - say when to publish the first beta (it creates the `beta` release that beta testers' copies read; until then their update check finds nothing)
 - MacBook Air: update to 0.3.0 and check the island at the real notch (see the 0.3.0 entry)
