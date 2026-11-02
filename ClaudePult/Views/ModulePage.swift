@@ -12,6 +12,31 @@ enum ModuleSwitch {
         return !kind.isBuiltIn || modes.installedModules.contains(kind)
     }
 
+    /// What brings a built-in module into the current profile: a calendar, the `_daily-report` commands, or (for
+    /// projects, which need a folder) the profile's page. Nil when there is no profile.
+    static func enableAction(_ kind: ModuleKind, modes: ModeStore) -> (title: String, run: () -> Void)? {
+        guard kind.isBuiltIn, !modes.installedModules.contains(kind), let mode = modes.current else { return nil }
+        switch kind {
+        case .upcoming:
+            return (String(localized: "Включить календарь в профиле «\(mode.name)»"), {
+                var changed = mode
+                changed.calendar = .dates
+                modes.update(changed)
+            })
+        case .reports where modes.hasDailyReport:
+            return (String(localized: "Включить команды _daily-report в профиле «\(mode.name)»"), {
+                var changed = mode
+                changed.commonCommands = .dailyReport
+                changed.showCommonCommands = true
+                modes.update(changed)
+            })
+        default:
+            return (String(localized: "Открыть профиль «\(mode.name)»…"), {
+                UserDefaults.standard.set(SettingsView.Tab.modes.rawValue, forKey: SettingsRoute.tabKey)
+            })
+        }
+    }
+
     /// Why a built-in module has no switch yet.
     static func unavailableReason(_ kind: ModuleKind) -> String {
         switch kind {
@@ -123,7 +148,10 @@ struct ModulePlaces: View {
         case .menuBar: String(localized: "Элементы модуля в строке меню; порядок и вид — «Строка меню»")
         case .island: String(localized: "Ушко у чёлки показывает модуль")
         case .notifications: String(localized: "Уведомления macOS от модуля; как часто — ниже, в «Как часто уведомлять»")
-        case .telegram: String(localized: "Дублировать в Telegram; бот — «Основные» → Telegram")
+        case .telegram:
+            kind == .sessions
+                ? String(localized: "Итоги фоновых задач в Telegram; ответы на запросы разрешений — ниже, «Ответы из Telegram»")
+                : String(localized: "Дублировать в Telegram; бот — «Основные» → Telegram")
         }
     }
 
@@ -255,6 +283,9 @@ struct ModulePage: View {
                     if kind.isBeta, !settings.betaUpdates {
                         Button("Включить бета-версии") { settings.betaUpdates = true }
                     }
+                    if let action = ModuleSwitch.enableAction(kind, modes: modes) {
+                        Button(action.title, action: action.run)
+                    }
                 }
             }
             if !ModulePlace.of(kind).isEmpty {
@@ -297,6 +328,7 @@ struct ModulePage: View {
             HubSection()
         case .sessions:
             SessionSection()
+            BackgroundRunsSection()
             TelegramApprovalsSection()
         case .upcoming: ReminderSection()
         case .projects: PullRequestAlertSection()
@@ -476,11 +508,20 @@ private struct ModuleTile: View {
                 Text(kind.title).font(.system(size: 14, weight: .semibold))
                 if kind.isBeta { BetaBadge() }
             }
-            Text(ModuleSwitch.canSwitch(kind, modes: modes) || !kind.isBuiltIn ? kind.tagline : String(localized: "Нужен в профиле"))
-                .font(.system(size: 12))
-                .foregroundStyle(.secondary)
-                .lineLimit(2)
-                .fixedSize(horizontal: false, vertical: true)
+            if let action = ModuleSwitch.enableAction(kind, modes: modes) {
+                Button(action: action.run) {
+                    Label(kind == .projects ? String(localized: "Нужен источник проектов") : String(localized: "Включить в профиле"), systemImage: "plus.circle")
+                        .font(.system(size: 12))
+                }
+                .buttonStyle(.link)
+                .help(action.title)
+            } else {
+                Text(kind.tagline)
+                    .font(.system(size: 12))
+                    .foregroundStyle(.secondary)
+                    .lineLimit(2)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
         }
         .padding(12)
         .frame(maxWidth: .infinity, minHeight: 118, maxHeight: 118, alignment: .topLeading)

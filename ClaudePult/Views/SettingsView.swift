@@ -418,24 +418,37 @@ struct ClaudeSettings: View {
             }
 
             Section {
-                Stepper(value: $settings.backgroundTimeLimitMinutes, in: 10...600, step: 10) {
-                    IconRow("Лимит времени", systemImage: "timer", value: String(localized: "\(settings.backgroundTimeLimitMinutes) мин"))
-                }
-                Toggle("Итог в Telegram", systemImage: "paperplane", isOn: $settings.telegramForBackground)
-                Picker("Ночные задачи начинаются в", systemImage: "moon.stars", selection: $settings.nightStartHour) {
-                    ForEach(NightQueue.hours, id: \.self) { Text(verbatim: String(format: "%02d:00", $0)).tag($0) }
-                }
-                if settings.telegramForBackground,
-                   Telegram.credentials(dailyReportDirectory: settings.dailyReportDirectory) == nil {
-                    Text("Telegram не настроен (Настройки → Основные → Telegram) — будет только уведомление macOS.")
-                        .font(.callout)
-                        .foregroundStyle(.orange)
-                }
-            } header: {
-                Text("Фоновые задачи")
-            } footer: {
-                Footnote(text: String(localized: "«Фон» запускает claude -p без окна: разрешены чтение и правка файлов проекта, проверки и сборки, git без push в main и без force, gh pr create/view/list; остальное отклоняется. Итог — уведомлением и в Telegram."))
+                Button("Сессии, hooks и фоновые задачи — «Сессии агентов»…") { SettingsRoute.open(module: .sessions) }
+                    .buttonStyle(.link)
             }
+        }
+    }
+}
+
+/// «Сессии агентов» → «Фоновые задачи»: `claude -p` runs without a window, their time limit, night start and results.
+struct BackgroundRunsSection: View {
+    @Environment(AppSettings.self) private var settings
+
+    var body: some View {
+        @Bindable var settings = settings
+        Section {
+            Stepper(value: $settings.backgroundTimeLimitMinutes, in: 10...600, step: 10) {
+                IconRow("Лимит времени", systemImage: "timer", value: String(localized: "\(settings.backgroundTimeLimitMinutes) мин"))
+            }
+            Toggle("Итог в Telegram", systemImage: "paperplane", isOn: $settings.telegramForBackground)
+            Picker("Ночные задачи начинаются в", systemImage: "moon.stars", selection: $settings.nightStartHour) {
+                ForEach(NightQueue.hours, id: \.self) { Text(verbatim: String(format: "%02d:00", $0)).tag($0) }
+            }
+            if settings.telegramForBackground,
+               Telegram.credentials(dailyReportDirectory: settings.dailyReportDirectory) == nil {
+                Text("Telegram не настроен (Настройки → Основные → Telegram) — будет только уведомление macOS.")
+                    .font(.callout)
+                    .foregroundStyle(.orange)
+            }
+        } header: {
+            Text("Фоновые задачи")
+        } footer: {
+            Footnote(text: String(localized: "«Фон» запускает claude -p без окна: разрешены чтение и правка файлов проекта, проверки и сборки, git без push в main и без force, gh pr create/view/list; остальное отклоняется. Итог — уведомлением и в Telegram."))
         }
     }
 }
