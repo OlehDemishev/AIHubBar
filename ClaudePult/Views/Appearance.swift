@@ -99,6 +99,19 @@ enum PanelTheme: String, CaseIterable, Sendable {
     }
 }
 
+/// Background of the menu bar panel: the system's menu material, or Liquid Glass like Control Center
+/// (macOS 26+, `PanelGlass`).
+enum PanelBackground: String, CaseIterable, Sendable {
+    case standard, glass
+
+    var title: String {
+        switch self {
+        case .standard: String(localized: "Обычный")
+        case .glass: String(localized: "Стекло")
+        }
+    }
+}
+
 /// Blocks of the panel that can be hidden.
 enum PanelBlock: String, CaseIterable, Identifiable, Sendable {
     case limits, sessions, calendar, projects, commands, resources, keepAwake, quickCommands, toggles, clipboard, notes
@@ -163,22 +176,49 @@ struct BlockTitle: View {
 }
 
 /// The panel's blocks sit on rounded cards (design variant A, 2026-10-30) instead of between dividers.
+/// With the glass background they become glass tiles, like Control Center's.
 private struct PanelCard: ViewModifier {
+    @Environment(\.panelGlass) private var glass
+
     func body(content: Content) -> some View {
-        content
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .background(RoundedRectangle(cornerRadius: 12, style: .continuous).fill(Color.primary.opacity(0.055)))
-            .padding(.horizontal, 8)
+        let shape = RoundedRectangle(cornerRadius: 12, style: .continuous)
+        if glass, #available(macOS 26.0, *) {
+            content
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .glassEffect(.regular, in: shape)
+                .padding(.horizontal, 8)
+        } else {
+            content
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(shape.fill(Color.primary.opacity(0.055)))
+                .padding(.horizontal, 8)
+        }
+    }
+}
+
+/// The panel's cards inside one `GlassEffectContainer` when they are glass, so the tiles render together.
+private struct PanelGlassGroup: ViewModifier {
+    @Environment(\.panelGlass) private var glass
+
+    func body(content: Content) -> some View {
+        if glass, #available(macOS 26.0, *) {
+            GlassEffectContainer(spacing: 4) { content }
+        } else {
+            content
+        }
     }
 }
 
 extension View {
     func panelCard() -> some View { modifier(PanelCard()) }
+    func panelGlassGroup() -> some View { modifier(PanelGlassGroup()) }
 }
 
 extension EnvironmentValues {
     @Entry var panelTextScale: CGFloat = 1
     @Entry var panelDensity: CGFloat = 1
+    /// The panel draws glass (its window background is hidden) — cards turn into glass tiles.
+    @Entry var panelGlass = false
 }
 
 /// macOS sizes of the system text styles, in points.

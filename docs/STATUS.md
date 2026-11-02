@@ -1,12 +1,11 @@
 # Status
 
 <!-- summary:start -->
-**Stage:** AI Hub Bar 0.2.2 released (github.com/OlehDemishev/AIHubBar, clickable widgets + Codex from ChatGPT.app + notch island stage 2); next: notch island stage 3 for 0.3.0
+**Stage:** AI Hub Bar 0.2.2 released; on main since: glass panel background, AI services stage 1 (Claude Code inside «Сервисы AI»); next: AI services stage 2, notch island stage 3 for 0.3.0
 **Updated:** 2026-11-02
 
 **Now:**
-- PR feat/ai-services-tabs: docs/SPEC-ai-services.md + stage 1 — «Claude Code» moved into Settings → «Сервисы AI», a nested tab per service (Claude Code · Codex · Gemini · Copilot · Cursor · Другие)
-- PR feat/glass-panel (#158): «Фон панели: Обычный / Стекло» — open, waits for Oleh's look and merge
+- nothing in progress; merged 2026-11-02: glass panel background (#158), AI services spec + stage 1 — Claude Code inside «Сервисы AI», a tab per service (#159)
 - released 0.2.2 (v0.2.2, build 345): clickable widgets (#154), Codex from the ChatGPT desktop app (#155), notch island stage 2 (#153)
 - notch island stage 1 merged (#149): module, island over the notch, ears, hover card; target release 0.3.0
 - notch island stage 2 merged (#153): banners for events, permission requests with Allow / Deny in the island
@@ -29,8 +28,8 @@
 - Windows and Linux versions (docs/SPEC-windows.md, docs/SPEC-linux.md) — only when Oleh says; stage 0 (fact checks in VMs) first
 
 **Needs Oleh:**
-- merge #158 (glass) and the AI services PR — both touch the STATUS header, the second needs a trivial STATUS merge; the agent's auto mode refused `gh pr merge`
-- AI services tabs (after the build with feat/ai-services-tabs): Settings → «Сервисы AI» — every sub-tab opens; Claude Code has all the old options (path, hooks, Telegram answers, saved prompts, CLAUDE.md и MCP, background runs); Codex shows the agent and its limits row; Modules → Лимиты → «Другие AI» shows the summary and «Открыть «Сервисы AI»»
+- AI services tabs (build from main): Settings → «Сервисы AI» — every sub-tab opens; Claude Code has all the old options (path, hooks, Telegram answers, saved prompts, CLAUDE.md и MCP, background runs); Codex shows the agent and its limits row; Modules → Лимиты → «Другие AI» shows the summary and «Открыть «Сервисы AI»»
+- glass panel (build from main): Settings → Внешний вид → Фон панели → «Стекло», open the panel in light and dark theme, over busy wallpaper, then with «Уменьшить прозрачность» on (must fall back to the standard background); check text is readable on the glass cards and the corners/shadow look right; send `grep 'Glass panel' ~/Library/Logs/ClaudePult/ClaudePult.log`
 - update to 0.2.2 («Обновления» in Settings), then: Settings → Модули → Лимиты → «Другие AI» should list Codex; click the limits widget (opens «Лимиты»), ↻ in it, the sessions widget's rows and ☕ — tell me what doesn't react
 - on the other Mac: install 0.2.2 (Releases, or «Обновления» in Settings) → Settings → Claude Code: the path field should show «авто: …» instead of «авто: не найден»; tell me the path it shows
 - notch island: on the MacBook Air (with this branch's build or later) — Settings → Модули → «Остров у чёлки» → Установить; check the ears beside the real notch, hover opens the card, moving away closes it, menu bar clicks next to the notch still work
@@ -48,6 +47,12 @@
 Done: docs/SPEC-ai-services.md — what Claude Code has, a table of what every other service has and can give (checked on this Mac: `claude` 2.1.314, `codex` 0.166.0-alpha.5.1 only inside ChatGPT.app, `~/.codex/state_5.sqlite` `threads` with `cwd` / `tokens_used` / `model`, no Gemini / agy / Copilot / Cursor), the common `ServiceUsage` model, the new Settings and panel, stages 1–6. Stage 1: the «Claude Code» tab is gone from Settings; «Сервисы AI» has a segmented nested tab per AI (`ServiceTab`: Claude Code · Codex · Gemini · Copilot · Cursor · Другие, kept in `servicesTab`). Claude Code's tab holds all of `ClaudeSettings` unchanged plus the Anthropic API key and Anthropic admin costs; Codex — agent, Codex limits, OpenAI API key and costs; Gemini — Gemini CLI, Antigravity, Gemini quota options, Google API; Copilot and Cursor — agent and limits; Другие — xAI, DeepSeek, Mistral, compatible API, OpenRouter, API spend and budget. Each «Другие AI» row (switch, key, consent) moved from Modules → Лимиты to its service's tab; Modules → Лимиты → «Другие AI» now shows a status summary, «Проверить сейчас» and «Открыть «Сервисы AI»». `SettingsRoute.migrate` turns a stored `settingsTab == "claude"` into «Сервисы AI» → Claude Code (called when Settings opens); Readiness' «Открыть «Сервисы AI»» opens the Claude Code tab; the Sessions module text and GUIDE / REFERENCE / README point to Settings → AI Services → Claude Code. Strings in 13 languages (French, Italian, Arabic reuse the existing names of the tab).
 Checked: `xcodebuild test` — 298 / 298 pass, incl. new `ServiceTabTests` (each agent / API provider / limit source in exactly one tab, old `claude` value migrated, other values untouched); Release build without warnings. No new icon-only controls (the segmented picker has the label «Сервис»), so the accessibility walk found nothing to add by reading the code; the live `axdump` walk and a look at the window were not possible — the screen was locked during this automated run.
 Left: stage 2 not started (left for its own PR, see Next); the window not seen with eyes (Needs Oleh). Branch is from origin/main without #158, so STATUS.md will conflict with it on merge (header lines only).
+
+## 2026-11-02 — Glass panel background (branch `feat/glass-panel`)
+
+Done: Settings → Внешний вид → Панель → «Фон панели: Обычный / Стекло» (`PanelBackground` next to `PanelTheme`, `AppSettings.panelBackground`, key `panelBackground`, reset by «Сбросить внешний вид»; not part of profile looks yet). With «Стекло» on macOS 26+ `PanelGlass` (new `Views/PanelGlass.swift`) finds the window's full-size system material (`NSVisualEffectView` or `NSGlassEffectView`): one behind the content is hidden, one around the content gets only its own layers hidden; the window turns clear (`isOpaque = false`, `.clear`, shadow re-computed) and the panel draws `.glassEffect(.regular)` in the window's corner radius (read from the material's layer, 16 pt otherwise). Cards (`panelCard()`) become glass tiles inside one `GlassEffectContainer`. «Обычный» puts everything back. When nothing recognisable is found, the panel keeps the standard background and the log says `Glass panel: no system background found…`; every change is logged once (`Glass panel: hid …`). «Уменьшить прозрачность» → always standard (with a note under the picker). macOS 14–15: the option is disabled with «Стекло — в macOS 26 и новее» — chose this over a lighter material because the lighter material can't be checked here and would look different from the 26+ glass. New strings in 13 languages.
+Checked: `xcodebuild test` — 299 / 299 pass, incl. new `PanelGlassTests` (material behind content hidden and restored, material around content keeps its subviews, unknown window untouched, reduce transparency) and persistence of the setting; Release build has no warnings. The real window hierarchy was NOT seen: the screen was locked during this automated run, so the panel couldn't be opened (synthetic clicks and AXPress on the status item don't open `MenuBarExtra`, see `QuickSearch`); the temporary hierarchy dump was written, built and removed unused.
+Left: visual check by Oleh (Needs Oleh) — whether the glass shows, corners and shadow, readability; if the log says no system background was found, the hierarchy needs a look with the window open.
 
 ## 2026-10-31 — Release 0.2.2 (branch `chore/status-release-022`)
 

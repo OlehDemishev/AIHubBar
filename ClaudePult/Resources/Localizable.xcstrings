@@ -14840,6 +14840,82 @@
         }
       }
     },
+    "Включено «Уменьшить прозрачность» — панель остаётся с обычным фоном.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "خيار «تقليل الشفافية» مفعّل، لذا تبقى اللوحة بالخلفية العادية."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "„Transparenz reduzieren“ ist aktiv, das Panel behält den normalen Hintergrund."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“Reduce transparency” is on, so the panel keeps the standard background."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«Reducir transparencia» está activado: el panel mantiene el fondo normal."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "« Réduire la transparence » est activé : le panneau garde le fond normal."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“Kurangi transparansi” aktif, jadi panel tetap memakai latar biasa."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«Riduci trasparenza» è attivo: il pannello mantiene lo sfondo normale."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「透明度を下げる」がオンのため、パネルは通常の背景のままです。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "‘투명도 줄이기’가 켜져 있어 패널은 기본 배경을 유지합니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Włączono „Zmniejsz przezroczystość”, więc panel ma zwykłe tło."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“Reduzir transparência” está ativado, então o painel mantém o fundo normal."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Увімкнено «Зменшити прозорість» — панель лишається зі звичайним тлом."
+          }
+        }
+      }
+    },
     "Включите «Сравнить», выберите 2–3 сервиса и команду: результаты лягут рядом («хуки (Claude).md», «хуки (OpenAI).md») и откроются в окне «Сравнение».": {
       "localizations": {
         "ar": {
@@ -67264,6 +67340,158 @@
         }
       }
     },
+    "Стекло": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "زجاج"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Glas"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Glass"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cristal"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verre"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kaca"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vetro"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ガラス"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "유리"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Szkło"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vidro"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Скло"
+          }
+        }
+      }
+    },
+    "Стекло — в macOS 26 и новее.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يتطلب الزجاج macOS 26 أو أحدث."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Glas erfordert macOS 26 oder neuer."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Glass needs macOS 26 or later."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cristal requiere macOS 26 o posterior."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le verre nécessite macOS 26 ou version ultérieure."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kaca memerlukan macOS 26 atau lebih baru."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il vetro richiede macOS 26 o successivo."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ガラスは macOS 26 以降で使えます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "유리는 macOS 26 이상에서 사용할 수 있습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Szkło wymaga systemu macOS 26 lub nowszego."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vidro requer macOS 26 ou posterior."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Скло — у macOS 26 і новіших."
+          }
+        }
+      }
+    },
     "Страницы": {
       "localizations": {
         "ar": {
@@ -73118,6 +73346,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Фон і ліміт"
+          }
+        }
+      }
+    },
+    "Фон панели": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "خلفية اللوحة"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hintergrund des Panels"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Panel background"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fondo del panel"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fond du panneau"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Latar panel"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sfondo del pannello"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "パネルの背景"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "패널 배경"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tło panelu"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fundo do painel"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Тло панелі"
           }
         }
       }
