@@ -5,7 +5,8 @@
 **Updated:** 2026-11-02
 
 **Now:**
-- 0.3.0 built, not published: `build/release/0.3.0/AIHubBar-0.3.0.dmg` (build 400) + `appcast.xml`, for the MacBook Air first
+- branch `feat/notch-live-activity` (PR): notch stage 4 — Claude's task list in the island (ring and «3/7» in the ear, steps in the card, «3/3 · 2 мин · файлов: 9» in «Готово»)
+- 0.3.0 built, not published: `build/release/0.3.0/AIHubBar-0.3.0.dmg` (build 400) + `appcast.xml`, for the MacBook Air first; publish it from `91d6c2b` (before stage 4): `git switch --detach 91d6c2b && scripts/release.sh 0.3.0 --publish`
 - nothing in progress; merged 2026-11-02: notch stage 3 part 3 — «все экраны» (an island on every screen) and «Остров» in Quick Toggles (#181), notch stage 3 part 2 — full screen, ⌃⌥Y / ⌃⌥N, first-setup window (#179), feedback — idea / problem links to GitHub issue forms, crash report prompt (#177), Chinese models by API — Qwen, Kimi, GLM, MiniMax (#172), notch stage 3 part 1 — pill, screen choice, summary in menu bar / island / both (#173), Antigravity conversations in «Сессии» (#170), Copilot in full (#169), AI services stages 5–6 — Codex threads in «Сессии», stage 3 checked live (#168), stage 4 — thresholds per service, «Другие AI» notch ear, other services in the weekly summary (#167), stage 3 — Codex plan, credits, tokens per project, context (#166), stage 2 — one limits card for every service (#165), Settings redone like System Settings (#164), «Сервисы AI» as a list on the left (#162) in the window colour (#163), glass panel background (#158) and its fix for macOS 27 (#160), AI services spec + stage 1 — Claude Code inside «Сервисы AI», a tab per service (#159)
 - released 0.2.2 (v0.2.2, build 345): clickable widgets (#154), Codex from the ChatGPT desktop app (#155), notch island stage 2 (#153)
 - notch island stage 1 merged (#149): module, island over the notch, ears, hover card; target release 0.3.0
@@ -21,7 +22,7 @@
 
 **Next:**
 - notch island for 0.3.0: stage 3 done (#181; left: «Скрыть остров» in the ✦ menu, a live VoiceOver walk); 0.3.0 built — after Oleh's check on the MacBook Air: `scripts/release.sh 0.3.0 --publish` (rebuilds with the then-current build number)
-- after 0.3.0: notch island stage 4 — Claude session live activity (docs/SPEC-notch.md §3.4, agreed by Oleh 2026-11-02): plan progress ring and «3/7» in the sessions ear, steps in the card, summary in «Сессия закончила»
+- notch stage 4 (live activity) done; next for the island: «Скрыть остров» in the ✦ menu, a live VoiceOver walk; stage 5 (drop a file on the island) only when Oleh says
 - AI services (docs/SPEC-ai-services.md §5): all six stages done for Claude Code, Codex, Copilot CLI and Antigravity (Oleh, 2026-11-02: these three besides Claude are enough; Gemini CLI removed — its Google sign-in is gone; Cursor not used); left only a «waiting» signal if the agents get hooks
 - standing rule (SPEC §3.1): every new icon-only control gets a hover hint; finish each UI stage with the accessibility walk
 - fix whatever Oleh finds in the translations (automated checks pass; a native read for ja, ko, ar is still worth it)
@@ -30,6 +31,8 @@
 - Windows and Linux versions (docs/SPEC-windows.md, docs/SPEC-linux.md) — only when Oleh says; stage 0 (fact checks in VMs) first
 
 **Needs Oleh:**
+- Claude Code CLI on the Mac mini is signed out («OAuth session expired»): run `claude` once and sign in, if agents here should use the CLI
+- stage 4 on a real session (build from main): ask Claude for something with a plan — the sessions ear shows a ring and «1/5», the card the steps, «Готово» the result; Settings → Модули → «Остров у чёлки» → «Ход работы Claude в ушке сессий» turns it off
 - 0.3.0: copy `build/release/0.3.0/AIHubBar-0.3.0.dmg` to the MacBook Air (AirDrop), install to Applications (first launch: «Open Anyway»), go through the island: ears and hover card at the real notch, a request with Allow / Deny, full screen, «все экраны» with a monitor; then say «публикуй» or what's wrong
 - on the MacBook Air with a monitor (build from main): Settings → Модули → «Остров у чёлки» → «Где показывать» → «все экраны» — the notch on the Air and the pill on the monitor, a banner on both, the card opens where you hover
 - answer the island's first-setup window (it is open now: requests, summary, pill, hot keys) and press «Готово»; on the MacBook Air later: full-screen app (only requests and waits, no ears) and, if you turn them on, ⌃⌥Y / ⌃⌥N on a request
@@ -51,6 +54,12 @@
 - decide SPEC-windows §10 and SPEC-linux §10 (Tauri 2 for both, Windows code signing, first Linux desktops) before that work starts
 - optional: Apple Developer ID (notarization, no «Open Anyway»); delete or archive the old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-02 — Notch island stage 4: Claude's task list in the island (branch `feat/notch-live-activity`)
+
+Done: the hook (format 3) keeps the session's task list in `todos` (up to 20, text cut to 120) and `prompt_at`: `TodoWrite` replaces the list, `TaskCreate` adds a task with the id from `tool_response.task.id`, `TaskUpdate` changes status / subject / `activeForm` or removes it (`"deleted"`); task-list calls skip the once-a-minute throttle; a new request after a finished list drops it, `Stop` keeps it, `SessionEnd` and a fresh start drop it. Field names read from Claude Code 2.1.314 itself (a live `claude -p` probe failed: the CLI's sign-in has expired here). `Session` reads `todos` / `prompt_at` (`progress`, `currentTodo`). The sessions ear: ring and «3/7» for the working session given a request last (older records without `prompt_at` count from their start), else for a single working session the dot and «4′»; hint and VoiceOver «ClaudePult: сделано 1 из 3, Пишет тесты, 4 мин». The card: steps under that session (✓ / ● activeForm / ○, up to 7 around the current one, «ещё N»), each working session's time since its request. «Готово»: «3/3 · 2 мин · файлов: 9» (files from git after the banner's short wait). Setting «Ход работы Claude в ушке сессий», on by default; off gives the old behaviour. The island's window is now 440 pt tall under the notch so the longer card isn't cut. 7 new strings in 13 languages; SPEC-notch §9, REFERENCE updated.
+Checked: `xcodebuild test` — 352 / 352 pass (new `NotchLiveActivityTests`: the hook with `TodoWrite` twice in a row, `TaskCreate` / `TaskUpdate` incl. deleted and unknown ids, when the list goes, the 20 limit, old records; which session the ear follows; texts; the seven-step window; the setting's default). Live with the simulated notch: the installed hook updated itself; fake events for a session «live-check-1» gave the ear «1/3» with a ring, the card its three steps and «2 мин», and after the list was done and `Stop` the banner «Готово: ClaudePult · 3/3 · 2 мин · файлов: 9» — all captured. The first try showed the card following the wrong session (one without `prompt_at` that had just used a tool); fixed and covered by a test. The fake session file and the simulation flag removed afterwards.
+Left: not seen with a real Claude session making a plan (needs the CLI signed in, or the MacBook Air); VoiceOver not walked live; 0.3.0 must be published from `91d6c2b` so this stage goes into the next version.
 
 ## 2026-11-02 — Build 0.3.0 for the MacBook Air (branch `chore/status-build-030`)
 

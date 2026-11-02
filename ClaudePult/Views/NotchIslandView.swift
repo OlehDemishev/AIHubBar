@@ -156,12 +156,16 @@ struct NotchShape: Shape {
 }
 
 /// One ear at rest (SPEC-notch §3.1): a small ring for a limit, a dot and a count for sessions or background runs.
+/// With the live activity (§3.4) a working session's task list shows as a ring and «3/7», or — without a list —
+/// the minutes since its request.
 private struct NotchEarView: View {
     let ear: NotchEar
     @Environment(UsageStore.self) private var usage
     @Environment(SessionStore.self) private var sessions
     @Environment(RunStore.self) private var runs
     @Environment(HubLimitsStore.self) private var hub
+    @Environment(AppSettings.self) private var settings
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     var body: some View {
         Group {
@@ -182,7 +186,8 @@ private struct NotchEarView: View {
     }
 
     private var summary: String {
-        NotchText.earSummary(ear, usage: usage.snapshot, sessions: sessions.items, background: runs.running.count, otherAI: hub.percents)
+        NotchText.earSummary(ear, usage: usage.snapshot, sessions: sessions.items, background: runs.running.count, otherAI: hub.percents,
+                             liveActivity: settings.notch.liveActivity)
     }
 
     @ViewBuilder
@@ -212,10 +217,53 @@ private struct NotchEarView: View {
     private var sessionDot: some View {
         let waiting = sessions.items.filter { $0.state == .waiting }.count
         let running = sessions.items.filter { $0.state == .running }.count
+        let featured = settings.notch.liveActivity ? NotchText.featured(sessions.items) : nil
         if waiting > 0 {
             dot(Session.State.waiting.color, count: waiting + running)
+        } else if let progress = featured?.session.progress {
+            progressRing(progress)
+        } else if running == 1, let start = featured?.session.promptAt {
+            TimelineView(.everyMinute) { context in
+                // The schedule's dates are minute boundaries, the first one before now.
+                minutesDot(NotchText.minutes(from: start, to: max(context.date, .now)))
+            }
         } else if running > 0 {
             dot(Session.State.running.color, count: running)
+        }
+    }
+
+    /// «3/7» beside a ring that fills as steps get done.
+    private func progressRing(_ progress: (done: Int, total: Int)) -> some View {
+        let color = Session.State.running.color
+        return HStack(spacing: 3) {
+            ZStack {
+                Circle().stroke(.white.opacity(0.2), lineWidth: 2.5)
+                Circle()
+                    .trim(from: 0, to: CGFloat(progress.done) / CGFloat(max(progress.total, 1)))
+                    .stroke(color, style: StrokeStyle(lineWidth: 2.5, lineCap: .round))
+                    .rotationEffect(.degrees(-90))
+            }
+            .frame(width: 11, height: 11)
+            .animation(reduceMotion ? nil : .easeInOut(duration: 0.3), value: progress.done)
+            Text("\(progress.done)/\(progress.total)")
+                .font(.system(size: 10, weight: .semibold).monospacedDigit())
+                .foregroundStyle(.white.opacity(0.85))
+                .lineLimit(1)
+                .minimumScaleFactor(0.7)
+        }
+    }
+
+    /// The «working» dot and «4′»: minutes since the request, when there is no task list to show.
+    private func minutesDot(_ minutes: Int) -> some View {
+        HStack(spacing: 3) {
+            Circle().fill(Session.State.running.color).frame(width: 7, height: 7)
+            if minutes > 0 {
+                Text("\(minutes)′")
+                    .font(.system(size: 10, weight: .semibold).monospacedDigit())
+                    .foregroundStyle(.white.opacity(0.85))
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.7)
+            }
         }
     }
 
@@ -237,6 +285,7 @@ private struct NotchCard: View {
     @Environment(UsageStore.self) private var usage
     @Environment(SessionStore.self) private var sessions
     @Environment(RunStore.self) private var runs
+    @Environment(AppSettings.self) private var settings
 
     static let sessionLimit = 4
 
@@ -268,8 +317,15 @@ private struct NotchCard: View {
                     .font(.callout)
                     .foregroundStyle(.secondary)
             } else {
+                let live = settings.notch.liveActivity
+                let featured = live ? NotchText.featured(sessions.items)?.id : nil
                 VStack(alignment: .leading, spacing: 4) {
-                    ForEach(shown) { item in NotchSessionRow(item: item) }
+                    ForEach(shown) { item in
+                        NotchSessionRow(item: item, showsTime: live)
+                        if item.id == featured, !item.session.todos.isEmpty {
+                            NotchSteps(todos: item.session.todos)
+                        }
+                    }
                 }
             }
             HStack {
@@ -430,6 +486,8 @@ private struct NotchButtonStyle: ButtonStyle {
 
 private struct NotchSessionRow: View {
     let item: SessionStore.Item
+    /// Minutes since the request while it works (SPEC-notch §3.4).
+    var showsTime = false
 
     var body: some View {
         Button { SessionActions.show(item.session) } label: {
@@ -445,6 +503,13 @@ private struct NotchSessionRow: View {
                     .lineLimit(1)
                     .truncationMode(.middle)
                 Spacer(minLength: 0)
+                if showsTime, item.state == .running, let start = item.session.promptAt {
+                    TimelineView(.everyMinute) { context in
+                        Text(DurationText.short(from: start, to: max(context.date, .now)))
+                            .foregroundStyle(.secondary)
+                            .monospacedDigit()
+                    }
+                }
             }
             .font(.callout)
             .contentShape(Rectangle())
@@ -454,10 +519,51 @@ private struct NotchSessionRow: View {
     }
 }
 
+/// A working session's task list in the card (SPEC-notch §3.4): ✓ done, ● in progress, ○ ahead; up to seven,
+/// chosen so the step in progress shows, then «ещё N».
+private struct NotchSteps: View {
+    let todos: [SessionTodo]
+
+    var body: some View {
+        let range = NotchText.visibleSteps(todos)
+        VStack(alignment: .leading, spacing: 2) {
+            ForEach(Array(todos[range].enumerated()), id: \.offset) { _, todo in
+                HStack(spacing: 6) {
+                    Image(systemName: symbol(todo.status))
+                        .font(.system(size: todo.status == .inProgress ? 7 : 9, weight: .semibold))
+                        .foregroundStyle(todo.status == .inProgress ? Session.State.running.color : .secondary)
+                        .frame(width: 12)
+                    Text(todo.text)
+                        .foregroundStyle(todo.status == .pending ? .secondary : .primary)
+                        .lineLimit(1)
+                        .truncationMode(.tail)
+                }
+                .accessibilityElement(children: .ignore)
+                .accessibilityLabel(NotchText.stepLabel(todo))
+            }
+            if todos.count > range.count {
+                Text("ещё \(todos.count - range.count)")
+                    .foregroundStyle(.secondary)
+                    .padding(.leading, 18)
+            }
+        }
+        .font(.caption)
+        .padding(.leading, 21)
+    }
+
+    private func symbol(_ status: SessionTodo.Status) -> String {
+        switch status {
+        case .completed: "checkmark"
+        case .inProgress: "circle.fill"
+        case .pending: "circle"
+        }
+    }
+}
+
 /// Words for the ears' hints and VoiceOver.
 enum NotchText {
     static func earSummary(_ ear: NotchEar, usage: UsageSnapshot?, sessions: [SessionStore.Item], background: Int,
-                           otherAI: [String: Double] = [:]) -> String {
+                           otherAI: [String: Double] = [:], liveActivity: Bool = false, now: Date = .now) -> String {
         switch ear {
         case .sessionLimit, .weekLimit:
             guard let window = ear == .sessionLimit ? usage?.session : usage?.week else { return ear.title }
@@ -468,6 +574,10 @@ enum NotchText {
         case .sessions:
             let waiting = sessions.filter { $0.state == .waiting }.count
             let running = sessions.filter { $0.state == .running }.count
+            if liveActivity, waiting == 0, let featured = featured(sessions) {
+                let others = running > 1 ? String(localized: "; ещё работают: \(running - 1)") : ""
+                return activity(featured.session, now: now) + others
+            }
             return String(localized: "Ждут ответа: \(waiting), работают: \(running)")
         case .background:
             return String(localized: "Фоновых задач: \(background)")
@@ -480,6 +590,51 @@ enum NotchText {
     static func fullestOther(_ percents: [String: Double]) -> (name: String, percent: Double)? {
         percents.max { $0.value == $1.value ? $0.key > $1.key : $0.value < $1.value }
             .map { (HubLimit.Source(rawValue: $0.key)?.shortTitle ?? $0.key, $0.value) }
+    }
+
+    // MARK: Live activity (SPEC-notch §3.4)
+
+    /// The working session the sessions ear follows: the one given a request last. A session recorded by an older
+    /// hook has no request time yet and counts from its start, never from its last tool call.
+    static func featured(_ items: [SessionStore.Item]) -> SessionStore.Item? {
+        func asked(_ item: SessionStore.Item) -> Date { item.session.promptAt ?? item.session.startedAt ?? .distantPast }
+        return items.filter { $0.state == .running }.max { asked($0) < asked($1) }
+    }
+
+    /// Whole minutes from `start` to `now`, never negative.
+    static func minutes(from start: Date, to now: Date) -> Int { max(0, Int(now.timeIntervalSince(start) / 60)) }
+
+    /// «ClaudePult: сделано 3 из 7, Пишет тесты, 4 мин» — the ear's hint and what VoiceOver reads.
+    static func activity(_ session: Session, now: Date) -> String {
+        var parts: [String] = []
+        if let progress = session.progress { parts.append(String(localized: "сделано \(progress.done) из \(progress.total)")) }
+        if let step = session.currentTodo { parts.append(step.text) } else if let action = session.actionText { parts.append(action) }
+        if let start = session.promptAt { parts.append(DurationText.short(from: start, to: now)) }
+        return parts.isEmpty ? session.displayProject : "\(session.displayProject): " + parts.joined(separator: ", ")
+    }
+
+    /// «7/7 · 12 мин · файлов: 5» under «Готово: …».
+    static func finishedBody(progress: (done: Int, total: Int)?, duration: String?, files: Int?) -> String {
+        [progress.map { "\($0.done)/\($0.total)" }, duration, files.flatMap { $0 > 0 ? String(localized: "файлов: \($0)") : nil }]
+            .compactMap { $0 }
+            .joined(separator: " · ")
+    }
+
+    /// The steps the card shows: all of them up to `limit`, else a window that keeps the step in progress in view
+    /// with two done ones above it.
+    static func visibleSteps(_ todos: [SessionTodo], limit: Int = 7) -> Range<Int> {
+        guard todos.count > limit else { return 0..<todos.count }
+        let current = todos.firstIndex { $0.status == .inProgress } ?? todos.firstIndex { $0.status == .pending } ?? todos.count - 1
+        let start = min(max(current - 2, 0), todos.count - limit)
+        return start..<(start + limit)
+    }
+
+    static func stepLabel(_ todo: SessionTodo) -> String {
+        switch todo.status {
+        case .completed: String(localized: "Сделано: \(todo.text)")
+        case .inProgress: String(localized: "Сейчас: \(todo.text)")
+        case .pending: String(localized: "Впереди: \(todo.text)")
+        }
     }
 
     static func sessionHelp(_ item: SessionStore.Item) -> String {

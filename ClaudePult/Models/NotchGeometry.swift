@@ -19,6 +19,9 @@ struct NotchGeometry: Equatable, Sendable {
     /// The card under the notch when the island is open (SPEC-notch §3.3).
     static let cardWidth: CGFloat = 380
     static let cardHeight: CGFloat = 250
+    /// Room under the notch for the tallest card (requests, limits, sessions and a task list); the window is
+    /// transparent and lets clicks through below the black part.
+    static let windowHeight: CGFloat = 440
 
     /// The notch from what `NSScreen` reports: the gap between the two menu bar areas beside it, as tall as the top
     /// safe-area inset. nil when the screen has no notch.
@@ -47,7 +50,7 @@ struct NotchGeometry: Equatable, Sendable {
     /// Its top is the notch's top — the screen's top edge, or the menu bar's bottom for the pill.
     var windowFrame: CGRect {
         let width = min(max(Self.cardWidth, restFrame.width), screen.width)
-        let height = notch.height + Self.cardHeight
+        let height = notch.height + Self.windowHeight
         let x = min(max(notch.midX - width / 2, screen.minX), screen.maxX - width)
         return CGRect(x: x, y: notch.maxY - height, width: width, height: height)
     }

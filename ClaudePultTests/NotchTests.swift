@@ -226,7 +226,7 @@ struct NotchPlacementTests {
         let pill = try #require(NotchGeometry.choose([monitor], on: .notch, pill: true).first)
         #expect(pill.isPill && pill.notch.height == 0 && pill.notch.minY == 1050, "just under the 30 pt menu bar")
         #expect(pill.notch.midX == monitor.frame.midX)
-        #expect(pill.windowFrame.maxY == 1050 && pill.windowFrame.height == NotchGeometry.cardHeight)
+        #expect(pill.windowFrame.maxY == 1050 && pill.windowFrame.height == NotchGeometry.windowHeight)
         #expect(pill.restFrame.height == 0, "nothing to hover at rest")
         #expect(NotchGeometry.choose([monitor], on: .notch, pill: false).isEmpty)
     }
