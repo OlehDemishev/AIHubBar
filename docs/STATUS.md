@@ -5,7 +5,7 @@
 **Updated:** 2026-11-02
 
 **Now:**
-- nothing in progress; merged 2026-11-02: «Сервисы AI» as a list on the left (#162), glass panel background (#158) and its fix for macOS 27 (#160), AI services spec + stage 1 — Claude Code inside «Сервисы AI», a tab per service (#159)
+- nothing in progress; merged 2026-11-02: «Сервисы AI» as a list on the left (#162) in the window colour (#163), glass panel background (#158) and its fix for macOS 27 (#160), AI services spec + stage 1 — Claude Code inside «Сервисы AI», a tab per service (#159)
 - released 0.2.2 (v0.2.2, build 345): clickable widgets (#154), Codex from the ChatGPT desktop app (#155), notch island stage 2 (#153)
 - notch island stage 1 merged (#149): module, island over the notch, ears, hover card; target release 0.3.0
 - notch island stage 2 merged (#153): banners for events, permission requests with Allow / Deny in the island
@@ -41,6 +41,12 @@
 - decide SPEC-windows §10 and SPEC-linux §10 (Tauri 2 for both, Windows code signing, first Linux desktops) before that work starts
 - optional: Apple Developer ID (notarization, no «Open Anyway»); delete or archive the old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-02 — «Сервисы AI» list without the grey sidebar (branch `fix/services-list-background`)
+
+Done: the new services list (#162) used the sidebar style, whose grey material ran up under the Settings tabs and split the window — the same bug as in «Профили» on 2026-10-30. The list background is hidden the same way (`scrollContentBackground(.hidden)`), so the tab has one window colour and the divider starts below the tabs.
+Checked: built and installed; the Settings window captured with `screencapture -l` — one colour, no grey strip. Tests not affected (view modifier only).
+Left: nothing.
 
 ## 2026-11-02 — «Сервисы AI»: services as a list on the left (branch `feat/services-sidebar`)
 
