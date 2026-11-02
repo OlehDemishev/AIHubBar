@@ -1,26 +1,29 @@
 # Status
 
 <!-- summary:start -->
-**Stage:** Mac: 0.3.0 built (notch island stages 1–3), not published; on main also island stages 4–5. Windows/Linux (`desktop/`, Tauri 2): stages 1–3 main parts merged, CI green
+**Stage:** Mac: 0.3.0 published (notch island stages 1–5, Settings like System Settings, more AI services). Windows/Linux (`desktop/`, Tauri 2): stages 1–3 main parts merged, CI green, not tried live
 **Updated:** 2026-11-02
 
 **Now:**
-- nothing in progress; merged 2026-11-02: Windows/Linux stage 1 «Каркас» (#189), stage 2 «Лимиты» (#190), stage 3 «Сессии» (#191); Mac: «Скрыть остров» in the panel header (#188), island stage 5 — file on the island (#186), stage 4 — Claude's task list (#184)
-- 0.3.0 built, not published: `build/release/0.3.0/AIHubBar-0.3.0.dmg` (build 400); publish from `91d6c2b` (before stages 4–5): `git switch --detach 91d6c2b && scripts/release.sh 0.3.0 --publish`
+- nothing in progress; 0.3.0 released from `c0fd510` (build 424): https://github.com/OlehDemishev/AIHubBar/releases/tag/v0.3.0
 
 **Next:**
 - Windows/Linux: rest of stage 2 (Telegram, spend per project, own thresholds), rest of stage 3 («Показать», alive check, permission answers), then stage 4 «Проекты и Claude» (docs/SPEC-windows.md §9)
 - Mac island: a live VoiceOver walk; why one test drag onto the island didn't land
-- after Oleh's Air check: publish 0.3.0, then a next version with island stages 4–5
 - Windows code signing, notarization on Mac — only after Oleh decides (Needs Oleh)
 
 **Needs Oleh:**
-- MacBook Air: install `AIHubBar-0.3.0.dmg` and check the island at the real notch (ears, card, Allow / Deny, full screen, «все экраны» with a monitor); then say «публикуй». On a build from main also: a Claude plan in the sessions ear, a file dragged from Finder onto the notch
-- Windows: the agent took SPEC-windows §10's proposals (Tauri 2, `desktop/` here, Windows 10 22H2 + 11, WSL later; DECISIONS.md) — say if any should change; signing (Azure Trusted Signing or a certificate) is yours
-- Windows: try the installer — GitHub → Actions → «Desktop» → latest run on main → artifact `ai-hub-bar-Windows` (`AI Hub Bar_0.1.0_x64-setup.exe`, for you only, no admin; SmartScreen warns, no signature yet): tray ring and hint, panel with limits and sessions, Settings → Hooks → «Установить hooks», then a Claude session should appear
-- Mac mini: Claude Code CLI is signed out («OAuth session expired») — run `claude` once and sign in, if agents here should use it
-- older, still open: the crash report alert from 16:46 («Сообщить на GitHub…»), Chinese model keys, translations read for ja/ko/ar, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
+- MacBook Air: update to 0.3.0 (Sparkle offers it) and check the island at the real notch: ears, card, Allow / Deny, full screen, «все экраны», a Claude plan in the sessions ear, a file dragged from Finder onto the notch
+- Windows: say if any SPEC-windows §10 default should change (DECISIONS.md); signing is yours; try the installer — Actions → «Desktop» → latest run on main → `ai-hub-bar-Windows`
+- Mac mini: Claude Code CLI is signed out — run `claude` once and sign in, if agents here should use it
+- older, still open: the crash report alert from 16:46, Chinese model keys, translations read for ja/ko/ar, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-02 — release 0.3.0 (branch `chore/status-release-0.3.0`)
+
+Done: on Oleh's «смержим все изменения и сделаем релиз последней версии» — nothing was left unmerged (no open PRs or branches); published 0.3.0 from main `c0fd510` (build 424) with `scripts/release.sh 0.3.0 --publish`, instead of the earlier plan to publish from `91d6c2b`. Release notes list what's new since 0.2.2.
+Checked: 355/355 Mac tests on main; the app signed «ClaudePult Release», Sparkle signature valid; `releases/latest/download/appcast.xml` gives 0.3.0 (424), the DMG downloads (200, 11.8 MB); the release is marked Latest.
+Left: not checked on the MacBook Air at a real notch. The Windows/Linux version is not part of this release.
 
 ## 2026-11-02 — local builds no longer «update» back to 0.2.2 (branch `fix/local-build-version`)
 
