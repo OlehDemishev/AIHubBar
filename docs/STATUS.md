@@ -19,6 +19,12 @@
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
 
+## 2026-11-02 — «Раскладка» always visible in Modules (branch `fix/beta-module-visible`)
+
+Done: Oleh couldn't find «Раскладка»: with «Бета-версии» off the module was hidden from the catalog, so the search led to an empty place. Now beta modules are always listed with the «бета» badge, a note and a «Включить бета-версии» button instead of «Установить»; the search finds «Раскладка» and its switches regardless. `betaUpdates` tells Sparkle itself (AppSettings), wherever it is switched on. Build 435 installed on this Mac.
+Checked: `xcodebuild test` — 370 green; build 435 opened on Settings → Модули on screen (the list itself not scrolled to «Раскладка»: the app's windows can't be driven from here).
+Left: «Раскладка» not tried live (Accessibility is Oleh's).
+
 ## 2026-11-02 — Settings search finds «Бета-версии» and «Раскладка» (branch `fix/settings-search-layout`)
 
 Done: The Settings sidebar search finds «Бета-версии» (General) and, with beta on, «Раскладка» and its switches (Modules). Build 432 installed on this Mac with `scripts/build-and-install.sh` — 0.3.0 from Releases had none of #195, which is why Oleh couldn't find the settings.
