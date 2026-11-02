@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>AI Hub Bar</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="panel">
+    <header>
+      <h1>AI Hub Bar</h1>
+      <span class="spacer"></span>
+      <button class="icon-button" id="settings" data-t-title="Настройки…" aria-label="Settings">⚙</button>
+      <button class="icon-button" id="quit" data-t-title="Выйти из AI Hub Bar" aria-label="Quit">⏻</button>
+    </header>
+    <section class="card hint" id="tray-hint" hidden>
+      <p data-t="Windows прячет новые значки под «^». Чтобы AI Hub Bar был всегда виден: Параметры → Персонализация → Панель задач → Другие значки на панели задач."></p>
+      <p style="margin-top: 8px"><button id="tray-hint-done" data-t="Готово"></button></p>
+    </section>
+    <section class="card">
+      <p data-t="Это первая сборка AI Hub Bar для Windows и Linux: значок, панель и настройки. Лимиты, сессии и проекты появятся на следующих этапах."></p>
+    </section>
+    <p class="secondary" id="version"></p>
+  </main>
+  <script type="module">
+    import { loadTexts, invoke, t } from "./app.js";
+    const ui = await loadTexts();
+    document.getElementById("version").textContent = t("Версия %@", ui.version);
+    document.getElementById("settings").onclick = () => invoke("open_settings");
+    document.getElementById("quit").onclick = () => invoke("quit");
+    const hint = document.getElementById("tray-hint");
+    hint.hidden = !ui.showTrayHint;
+    document.getElementById("tray-hint-done").onclick = async () => {
+      await invoke("dismiss_tray_hint");
+      hint.hidden = true;
+    };
+    window.addEventListener("keydown", (event) => { if (event.key === "Escape") invoke("hide_panel"); });
+  </script>
+</body>
+</html>

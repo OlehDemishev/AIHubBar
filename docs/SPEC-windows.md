@@ -1,6 +1,6 @@
 # ClaudePult для Windows — техзадание
 
-Только спецификация: реализацию не начинаем, пока Олег не скажет (2026-10-30). Что делает ClaudePult, описано в `docs/SPEC.md`, `docs/SPEC-modes.md` и `docs/SPEC-profiles.md`. Здесь — как то же самое сделать на Windows, что получится хуже, чем на Mac, и в каком порядке это делать. Linux — в `docs/SPEC-linux.md`; у двух версий общая технология (§2) и общие этапы (§9).
+Реализация начата 2026-11-02 по слову Олега («переделку под Windows»): этап 1 — папка `desktop/` (§9). Решения §10 приняты агентом по предложениям этого документа, пока Олег был не у компьютера, и записаны в DECISIONS.md — их можно поменять. Что делает ClaudePult, описано в `docs/SPEC.md`, `docs/SPEC-modes.md` и `docs/SPEC-profiles.md`. Здесь — как то же самое сделать на Windows, что получится хуже, чем на Mac, и в каком порядке это делать. Linux — в `docs/SPEC-linux.md`; у двух версий общая технология (§2) и общие этапы (§9).
 
 Пункты с пометкой **(предложено)** Олег ещё не подтверждал. Пункты с пометкой **(проверить)** — факты о Windows и Claude Code, которые надо подтвердить на настоящей машине на этапе 0, прежде чем на них опираться.
 
@@ -36,7 +36,7 @@
 | Настройки, «Календарь», «Сравнение», «Журнал», «Помощь» | Обычные окна, тот же состав вкладок |
 | Токен лимитов из Связки ключей «Claude Code-credentials» | Файл `%USERPROFILE%\.claude\.credentials.json`, тот же JSON `claudeAiOauth` **(проверить)**. Читается при каждом запросе, не сохраняется и не пишется в журнал. Запрос тот же: `https://api.anthropic.com/api/oauth/usage` |
 | `~/Library/Application Support/ClaudePult/` | `%LOCALAPPDATA%\ClaudePult\` (§6) |
-| Hook на Python | Маленькая консольная программа `claudepult-hook.exe` из установки (§4.3): Python на Windows может не быть |
+| Hook на Python | Маленькая консольная программа `claudepult-hook.exe` из установки (§4.3): Python на Windows может не быть. В `settings.json` — в форме exec (`"command"` + `"args"`, Claude Code 2.1.139+): без оболочки и без кавычек вокруг пути с пробелами |
 | Терминал через AppleScript | Windows Terminal (`wt.exe`), иначе окно PowerShell (§4.4) |
 | «Показать» по tty | Хуже: окно, но не вкладка (§4.5) |
 | `claude -p` в фоне, SIGTERM | То же `claude -p`, остановка через Ctrl+Break и Job Object (§4.6) |
@@ -45,7 +45,7 @@
 | Вход в систему (`SMAppService`) | `HKCU\…\CurrentVersion\Run`. Учитывается выключение в «Параметры → Приложения → Автозагрузка» (`StartupApproved`) |
 | Двойной клик по `.claudepult` | Регистрация расширения в `HKCU\Software\Classes` установщиком; файл передаётся уже запущенному экземпляру |
 | Виджет WidgetKit | Не в первой версии (§4.9) |
-| `ClaudePult --usage` и другие команды | Отдельная консольная программа `claudepult.exe` (§4.8) |
+| `AIHubBar --usage` и другие команды | Отдельная консольная программа `claudepult.exe` (§4.8); само приложение — `AIHubBar.exe` |
 | `brew install …` в «Сервисах AI» | `winget install …` или `npm i -g …` |
 | Свободное место на диске | Системный диск и диск папки проектов |
 | Тема, размер текста, плотность | То же; «как в системе» — по `AppsUseLightTheme` в реестре |
@@ -74,13 +74,14 @@
   - PID процесса Claude — поиск вверх по родителям через снимок процессов;
   - PID и окно терминала-хозяина;
   - `WT_SESSION` — идентификатор вкладки Windows Terminal из окружения.
-- Сессии приложения Claude для компьютера: папка `%APPDATA%\Claude\claude-code-sessions` и ссылка `claude://code/continue?session=…` **(проверить, что приложение на Windows их использует)**.
+- Сессии приложения Claude для компьютера: папка `%APPDATA%\Claude\claude-code-sessions` и ссылка `claude://code/continue?session=…` **(проверить, что приложение на Windows их использует)**. По этапу 0: приложение на Windows ставится как MSIX, его данные, по сообщениям людей, лежат в `%LOCALAPPDATA%\Packages\Claude_pzs8sxrjxfjjc\LocalCache\Roaming\Claude\` — искать в обоих местах; документирована только ссылка `claude://code/new?folder=…&q=…`, `continue` — нет.
 
 ### 4.4 Запуск Claude в терминале
 - Настройка «Терминал»: Windows Terminal (по умолчанию, если установлен), PowerShell в отдельном окне, Git Bash.
 - Windows Terminal: `wt.exe -w new new-tab -d "<папка>" --title "<проект>" pwsh -NoExit -File "<скрипт>"`.
   - Задача не передаётся в командной строке: `wt` делит команды по `;`, а кавычки в PowerShell и cmd экранируются по-разному.
   - Поэтому ClaudePult пишет задачу во временный файл, а маленький скрипт запускает `claude` с текстом из файла и удаляет файл.
+- Сессии, начатые через `wt`, — дети Windows Terminal, а не ClaudePult: Job Object и группа процессов их не касаются (этап 0); их «Показать» и «Остановить» идут по PID Claude из файла сессии.
 - Worktree — как на Mac (`.claude/worktrees/cb-<slug>`, ветка `claude/<slug>`). Перед первым worktree ClaudePult предлагает `git config --global core.longpaths true`: пути в `.claude\worktrees\…` легко превышают 260 символов.
 - «Открыть в…» для других агентов — так же, через Windows Terminal в папке проекта.
 
@@ -94,7 +95,7 @@
 ### 4.6 Фоновые задачи
 - Та же команда `claude -p … --permission-mode dontAsk --permission-prompts none --settings '<правила>'`, журнал в `%LOCALAPPDATA%\ClaudePult\runs\<id>.log`, то же чтение в «Журнале».
 - Процесс запускается в своей группе (`CREATE_NEW_PROCESS_GROUP`) и в Job Object без `KILL_ON_JOB_CLOSE`. Так задача переживает выход из ClaudePult, как на Mac.
-- Остановка: сначала Ctrl+Break группе, чтобы Claude успел выполнить `SessionEnd` **(проверить)**; через 10 с — `TerminateJobObject`.
+- Остановка: сначала Ctrl+Break группе, чтобы Claude успел выполнить `SessionEnd` **(проверить; по документации скорее нет)**; через 10 с — `TerminateJobObject`. По этапу 0: у Claude Code описаны только SIGINT и SIGTERM, а стандартный обработчик Ctrl+Break в Windows сразу завершает процесс, так что `SessionEnd`, вероятно, не выполнится; к тому же `GenerateConsoleCtrlEvent` доходит только до процессов той же консоли — окну Tauri сначала нужен `AttachConsole` к задаче. Запасной путь: файл сессии помечать «завершена» самому, когда процесс задачи кончился.
 - Правила разрешений — те же, плюс запреты для Windows:
   - `del`, `rd`, `rmdir`, `Remove-Item`, `format`, `reg`, `Set-ExecutionPolicy`, `runas`;
   - чтение `%USERPROFILE%\.ssh`, `.env` и ключей.
@@ -111,7 +112,7 @@
   - «Очистка» скрыта: `cleanup.py` чистит то, что бывает только на Mac (Xcode, симуляторы).
 
 ### 4.8 Командная строка
-- Главная программа `ClaudePult.exe` — оконная, в консоль она печатать не может. Поэтому рядом ставится `claudepult.exe` (консольная) с теми же командами, что на Mac: `--usage`, `--sessions`, `--hooks`, `--readiness`, `--modes`, `--app-command` и т. д.
+- Главная программа `AIHubBar.exe` — оконная, в консоль она печатать не может. Поэтому рядом ставится `claudepult.exe` (консольная). Имена `ClaudePult.exe` и `claudepult.exe` в одной папке невозможны: NTFS (и диск Mac) не различает регистр, и одна программа затирала другую — найдено на этапе 1 с теми же командами, что на Mac: `--usage`, `--sessions`, `--hooks`, `--readiness`, `--modes`, `--app-command` и т. д.
 - Связь с запущенным приложением (`--app-command`, второй запуск, открытый `.claudepult`) — именованный канал `\\.\pipe\ClaudePult-<пользователь>`.
 - Установщик добавляет папку программы в PATH пользователя **(предложено)**.
 
@@ -193,7 +194,24 @@
    - как запускаются hooks.
 
    Итог — исправления в этом документе.
-1. **Каркас**: значок в трее, панель, окно настроек, 13 языков, один экземпляр, автозапуск, `claudepult.exe`, канал связи.
+
+   **Проверено по документации (2026-11-02, без виртуальной машины):**
+   - **Токен.** `%USERPROFILE%\.claude\.credentials.json`, не Диспетчер учётных данных; `CLAUDE_CONFIG_DIR` учитывается. Claude Code сам продлевает токен и пишет его обратно в этот файл. Формат `claudeAiOauth` — как на Linux (вероятно).
+   - **Файлы Claude Code.** `~/.claude` = `%USERPROFILE%\.claude`: `settings.json`, `projects\<проект>\<сессия>.jsonl`.
+   - **Hooks.** Команда идёт через Git Bash, а без него — через PowerShell. Есть форма exec (`command` + `args`, 2.1.139+): без оболочки, нужен настоящий `.exe`. JSON приходит в stdin, как на Mac. У всех `SessionEnd` вместе 1,5 с.
+   - **Git for Windows** не обязателен. Установка: `irm https://claude.ai/install.ps1 | iex`, `winget install Anthropic.ClaudeCode`, npm. `claude.exe` искать через PATH.
+   - **`wt -w <имя> focus-tab -t 0`** выводит окно вперёд (так по исходникам Windows Terminal). Добавить `--suppressApplicationTitle`. На Windows 10 `wt` может не быть — нужен запасной путь через PowerShell.
+   - **Уведомления** без MSIX работают только у установленного приложения с ярлыком в «Пуске» и AppUserModelID; установщик Tauri (NSIS) это делает.
+   - **Автозапуск.** `HKCU\…\Run` и флаг `StartupApproved\Run` — так делает `tauri-plugin-autostart`.
+
+   **Не проверено:** Ctrl+Break и `SessionEnd`, папка сессий приложения Claude, `claude://code/continue`. Это проверяется на настоящей машине.
+1. **Каркас**: значок в трее, панель, окно настроек, 13 языков, один экземпляр, автозапуск, `claudepult.exe`, канал связи. Сделан 2026-11-02 (ветка `feat/desktop-skeleton`), см. `desktop/README.md`. Части:
+   - `core` — пути, `settings.json`, языки, канал, проверяется тестами;
+   - приложение `AIHubBar` — трей, меню, панель у значка (без клика по значку — в углу с треем), окно настроек с языком и автозапуском, подсказка про «^» на Windows;
+   - `claudepult --app-command panel|settings|quit`;
+   - тексты — из каталога Mac скриптом, CI проверяет, что ключи и переводы на месте.
+
+   Проверено на Mac (`cargo test`, запуск, команды через `claudepult`, снимки панели и настроек). Windows и Linux проверяются в CI: тесты и сборка установщика NSIS и `.deb`. Вживую на Windows не запускалось.
 2. **Лимиты**: токен, запрос, прогноз, уведомления, Telegram, `usage.json`, расход по проектам.
 3. **Сессии**: `claudepult-hook.exe`, установка и снятие hooks, список сессий, «Показать».
 4. **Проекты и Claude**: сканер git, STATUS.md, запуск в терминале и в фоне, worktree, журнал, правила разрешений.
@@ -202,7 +220,7 @@
 7. **Распространение**: установщик, подпись, обновления.
 8. **WSL** (если нужно): hooks и токен из Linux-части, запуск Claude через `wsl.exe -d <дистрибутив> --cd <папка>`.
 
-Проверка: CI нет (Actions платные), поэтому ядро на Rust тестируется на Mac, а сборка и интерфейс — в виртуальной машине. В STATUS → Checked пишется, что именно прогнано.
+Проверка: репозиторий публичный, поэтому GitHub Actions бесплатны. `.github/workflows/desktop.yml` на машинах GitHub с Windows и Linux прогоняет тесты и собирает установщики; их можно скачать из запуска. Интерфейс вживую — в виртуальной машине или у Олега на Windows. В STATUS → Checked пишется, что именно прогнано.
 
 ## 10. Открытые вопросы
 - Tauri 2 и одна кодовая база для Windows и Linux — подтвердить, или WinUI только для Windows.

@@ -1,0 +1,25 @@
+# AI Hub Bar for Windows and Linux (docs/SPEC-windows.md, docs/SPEC-linux.md): Tauri 2.
+# core — shared logic with no UI, tested on any system (`cargo test -p claudepult-core`);
+# app  — the tray app; cli — `claudepult`, the console program that talks to the running app.
+[workspace]
+resolver = "2"
+members = ["core", "app", "cli"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+repository = "https://github.com/OlehDemishev/AIHubBar"
+
+[workspace.dependencies]
+claudepult-core = { path = "core" }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+dirs = "6"
+interprocess = "2"
+sys-locale = "0.3"
+
+[profile.release]
+codegen-units = 1
+lto = true
+strip = true

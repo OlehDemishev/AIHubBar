@@ -9868,6 +9868,82 @@
         }
       }
     },
+    "Windows прячет новые значки под «^». Чтобы AI Hub Bar был всегда виден: Параметры → Персонализация → Панель задач → Другие значки на панели задач.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يخفي Windows الأيقونات الجديدة تحت «^». لإبقاء AI Hub Bar ظاهرًا: الإعدادات ← التخصيص ← شريط المهام ← أيقونات علبة النظام الأخرى."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Windows versteckt neue Symbole unter „^“. Damit AI Hub Bar immer sichtbar ist: Einstellungen → Personalisierung → Taskleiste → Andere Infobereichsymbole."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Windows hides new icons under “^”. To keep AI Hub Bar in view: Settings → Personalization → Taskbar → Other system tray icons."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Windows oculta los iconos nuevos bajo «^». Para tener AI Hub Bar siempre a la vista: Configuración → Personalización → Barra de tareas → Otros iconos de la bandeja del sistema."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Windows cache les nouvelles icônes sous « ^ ». Pour garder AI Hub Bar visible : Paramètres → Personnalisation → Barre des tâches → Autres icônes de la barre d’état système."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Windows menyembunyikan ikon baru di bawah “^”. Agar AI Hub Bar selalu terlihat: Pengaturan → Personalisasi → Bilah Tugas → Ikon baki sistem lainnya."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Windows nasconde le nuove icone sotto «^». Per tenere AI Hub Bar sempre visibile: Impostazioni → Personalizzazione → Barra delle applicazioni → Altre icone della barra delle applicazioni."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Windows は新しいアイコンを「^」の中に隠します。AI Hub Bar を常に表示するには：設定 → 個人用設定 → タスク バー → その他のシステム トレイ アイコン。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Windows는 새 아이콘을 “^” 아래에 숨깁니다. AI Hub Bar를 항상 보이게 하려면: 설정 → 개인 설정 → 작업 표시줄 → 기타 시스템 트레이 아이콘."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Windows chowa nowe ikony pod „^”. Aby AI Hub Bar był zawsze widoczny: Ustawienia → Personalizacja → Pasek zadań → Inne ikony zasobnika systemowego."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O Windows esconde ícones novos em “^”. Para manter o AI Hub Bar visível: Configurações → Personalização → Barra de Tarefas → Outros ícones da bandeja do sistema."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Windows ховає нові значки під «^». Щоб AI Hub Bar завжди було видно: Параметри → Персоналізація → Панель завдань → Інші значки на панелі завдань."
+          }
+        }
+      }
+    },
     "Worktree": {},
     "_daily-report: отчёт, сводка, очистка": {
       "localizations": {
@@ -15448,6 +15524,82 @@
         }
       }
     },
+    "Версия %@": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الإصدار %@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Version %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Version %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Versión %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Version %@"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Versi %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Versione %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "バージョン %@"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "버전 %@"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wersja %@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Versão %@"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Версія %@"
+          }
+        }
+      }
+    },
     "Весь проект": {
       "localizations": {
         "ar": {
@@ -18256,6 +18408,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Вивід очищення…"
+          }
+        }
+      }
+    },
+    "Выйти из AI Hub Bar": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إنهاء AI Hub Bar"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar beenden"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quit AI Hub Bar"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Salir de AI Hub Bar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quitter AI Hub Bar"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keluar dari AI Hub Bar"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esci da AI Hub Bar"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar を終了"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar 종료"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zakończ AI Hub Bar"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sair do AI Hub Bar"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Вийти з AI Hub Bar"
           }
         }
       }
@@ -49076,6 +49304,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Відкрити налаштування"
+          }
+        }
+      }
+    },
+    "Открыть панель": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "فتح اللوحة"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Panel öffnen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open Panel"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abrir panel"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ouvrir le panneau"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buka panel"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apri pannello"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "パネルを開く"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "패널 열기"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otwórz panel"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abrir painel"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Відкрити панель"
           }
         }
       }
@@ -82485,6 +82789,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Етапи, через які проходить кожен проєкт. Етап змінюється просто з панелі й записується в проєкт.md."
+          }
+        }
+      }
+    },
+    "Это первая сборка AI Hub Bar для Windows и Linux: значок, панель и настройки. Лимиты, сессии и проекты появятся на следующих этапах.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "هذا أول إصدار من AI Hub Bar لنظامي Windows وLinux: الأيقونة واللوحة والإعدادات. ستأتي الحدود والجلسات والمشاريع في المراحل التالية."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dies ist der erste Build von AI Hub Bar für Windows und Linux: Symbol, Panel und Einstellungen. Limits, Sitzungen und Projekte folgen in den nächsten Schritten."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This is the first build of AI Hub Bar for Windows and Linux: the icon, the panel and settings. Limits, sessions and projects come in the next stages."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esta es la primera versión de AI Hub Bar para Windows y Linux: el icono, el panel y los ajustes. Los límites, las sesiones y los proyectos llegarán en las próximas etapas."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Voici la première version d’AI Hub Bar pour Windows et Linux : l’icône, le panneau et les réglages. Les limites, les sessions et les projets arrivent aux étapes suivantes."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ini build pertama AI Hub Bar untuk Windows dan Linux: ikon, panel, dan pengaturan. Batas, sesi, dan proyek hadir di tahap berikutnya."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Questa è la prima build di AI Hub Bar per Windows e Linux: l’icona, il pannello e le impostazioni. Limiti, sessioni e progetti arriveranno nelle prossime fasi."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Windows と Linux 向け AI Hub Bar の最初のビルドです：アイコン、パネル、設定。制限、セッション、プロジェクトは次の段階で追加されます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Windows와 Linux용 AI Hub Bar의 첫 빌드입니다: 아이콘, 패널, 설정. 한도, 세션, 프로젝트는 다음 단계에서 추가됩니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "To pierwsza wersja AI Hub Bar dla Windows i Linuksa: ikona, panel i ustawienia. Limity, sesje i projekty pojawią się w kolejnych etapach."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esta é a primeira versão do AI Hub Bar para Windows e Linux: o ícone, o painel e as configurações. Limites, sessões e projetos chegam nas próximas etapas."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Це перша збірка AI Hub Bar для Windows і Linux: значок, панель і налаштування. Ліміти, сесії та проєкти з’являться на наступних етапах."
           }
         }
       }

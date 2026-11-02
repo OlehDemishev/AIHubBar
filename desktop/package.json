@@ -1,0 +1,14 @@
+{
+  "name": "ai-hub-bar-desktop",
+  "private": true,
+  "description": "AI Hub Bar for Windows and Linux (Tauri 2)",
+  "scripts": {
+    "tauri": "tauri",
+    "strings": "python3 scripts/strings.py",
+    "dev": "tauri dev",
+    "build": "tauri build"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "2.12.4"
+  }
+}

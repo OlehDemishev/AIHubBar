@@ -2,6 +2,36 @@
 
 Decisions made where the spec is silent or does not match reality. Newest at the top.
 
+## 2026-11-02 — Windows and Linux: Tauri 2 in `desktop/`, chosen while Oleh was away
+
+Oleh said «переделку под Windows» and stepped away. SPEC-windows §10 was still open, so the agent took the spec's own proposals. All of them can be reversed before stage 2:
+
+- **Tauri 2**, one code base for Windows and Linux.
+- **Folder `desktop/`** in this repository.
+- **Windows 10 22H2 and 11.** Claude Code itself supports Windows 10 1809+.
+- **«Ресурсы компьютера»** as the module's name.
+- **WSL later** (stage 8).
+- **Signing is not chosen.** It stays Oleh's decision (Azure Trusted Signing or a certificate).
+
+**Program names.** `ClaudePult.exe` and `claudepult.exe` can't live in one folder: NTFS and the Mac disk ignore case, and the first build of the console program overwrote the app. The app is `AIHubBar.exe` (as the Mac executable `AIHubBar`); the console program stays `claudepult.exe`.
+
+**Fallback language.** English when none of the system's languages is one of the 13. The Mac app falls back to Russian, its development language.
+
+**Stage 0 without a virtual machine.** The «проверить» points were checked against current documentation and source:
+- Claude Code docs 2.1.316;
+- Windows Terminal source;
+- Microsoft docs on toasts;
+- `auto-launch`.
+
+Three of them change the plan:
+- Ctrl+Break probably doesn't run `SessionEnd`;
+- sessions started through `wt` are outside AI Hub Bar's process tree;
+- hooks go in exec form.
+
+Still open: the desktop app's session folder (MSIX package folder), `claude://code/continue`.
+
+**CI.** The repository is public, so GitHub Actions cost nothing. Windows and Linux are tested and built there. The installers are artifacts of the run, not releases.
+
 ## 2026-11-02 — Chinese models by API: Qwen, Kimi, GLM, MiniMax
 
 Oleh asked for popular Chinese models and left the choice to the agent. Added as API providers under «Сервисы AI» → «Другие», next to DeepSeek (already there): **Alibaba Qwen** (`https://dashscope-intl.aliyuncs.com/compatible-mode/v1`, the international Singapore host; keys are region-bound), **Moonshot Kimi** (`https://api.moonshot.ai/v1`; its docs moved to platform.kimi.ai), **Z.ai GLM** (`https://api.z.ai/api/paas/v4`), **MiniMax** (`https://api.minimax.io/v1`). All are OpenAI-compatible chat completions with a Bearer key, so `APIClient` needed no change. **Doubao** (ByteDance) is left out: BytePlus ModelArk's docs could not be read, and Ark has used per-account endpoint ids rather than plain model names.

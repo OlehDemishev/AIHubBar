@@ -1,0 +1,13 @@
+{
+ "Windows прячет новые значки под «^». Чтобы AI Hub Bar был всегда виден: Параметры → Персонализация → Панель задач → Другие значки на панели задач.": "Windows hides new icons under “^”. To keep AI Hub Bar in view: Settings → Personalization → Taskbar → Other system tray icons.",
+ "Версия %@": "Version %@",
+ "Выйти из AI Hub Bar": "Quit AI Hub Bar",
+ "Готово": "Done",
+ "Запускать при входе в систему": "Start at login",
+ "Как в системе": "As in the system",
+ "Настройки…": "Settings…",
+ "Основные": "General",
+ "Открыть панель": "Open Panel",
+ "Это первая сборка AI Hub Bar для Windows и Linux: значок, панель и настройки. Лимиты, сессии и проекты появятся на следующих этапах.": "This is the first build of AI Hub Bar for Windows and Linux: the icon, the panel and settings. Limits, sessions and projects come in the next stages.",
+ "Язык интерфейса": "Interface language"
+}
