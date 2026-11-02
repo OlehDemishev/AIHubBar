@@ -11,3 +11,6 @@ serde_json.workspace = true
 dirs.workspace = true
 interprocess.workspace = true
 sys-locale.workspace = true
+chrono.workspace = true
+httpdate = "1"
+ureq = "3"
