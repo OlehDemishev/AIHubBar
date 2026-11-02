@@ -5,7 +5,7 @@
 **Updated:** 2026-11-02
 
 **Now:**
-- branch `feat/notch-file-drop` (PR): notch stage 5 — drop a file or folder on the island → the profile's AI commands for it
+- merged 2026-11-02 (#186): notch stage 5 — drop a file or folder on the island → the profile's AI commands for it
 - merged 2026-11-02 (#184): notch stage 4 — Claude's task list in the island (ring and «3/7» in the ear, steps in the card, «3/3 · 2 мин · файлов: 9» in «Готово»)
 - 0.3.0 built, not published: `build/release/0.3.0/AIHubBar-0.3.0.dmg` (build 400) + `appcast.xml`, for the MacBook Air first; publish it from `91d6c2b` (before stage 4): `git switch --detach 91d6c2b && scripts/release.sh 0.3.0 --publish`
 - nothing in progress; merged 2026-11-02: notch stage 3 part 3 — «все экраны» (an island on every screen) and «Остров» in Quick Toggles (#181), notch stage 3 part 2 — full screen, ⌃⌥Y / ⌃⌥N, first-setup window (#179), feedback — idea / problem links to GitHub issue forms, crash report prompt (#177), Chinese models by API — Qwen, Kimi, GLM, MiniMax (#172), notch stage 3 part 1 — pill, screen choice, summary in menu bar / island / both (#173), Antigravity conversations in «Сессии» (#170), Copilot in full (#169), AI services stages 5–6 — Codex threads in «Сессии», stage 3 checked live (#168), stage 4 — thresholds per service, «Другие AI» notch ear, other services in the weekly summary (#167), stage 3 — Codex plan, credits, tokens per project, context (#166), stage 2 — one limits card for every service (#165), Settings redone like System Settings (#164), «Сервисы AI» as a list on the left (#162) in the window colour (#163), glass panel background (#158) and its fix for macOS 27 (#160), AI services spec + stage 1 — Claude Code inside «Сервисы AI», a tab per service (#159)
