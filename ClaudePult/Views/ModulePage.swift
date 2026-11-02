@@ -699,22 +699,33 @@ private struct PanelBuilderRow: View {
     }
 }
 
-/// A sketch of the panel: one card per shown block, in order — what goes where, not live data.
+/// The panel in miniature: one card per shown block, in order, each with what it shows right now. Not the panel view
+/// itself — that one takes over its window (glass, background) and refreshes on open.
 private struct PanelSketch: View {
     let modules: [ModuleKind]
 
+    @Environment(UsageStore.self) private var usage
+    @Environment(SessionStore.self) private var sessions
+    @Environment(ProjectStore.self) private var store
+    @Environment(CalendarStore.self) private var calendar
+    @Environment(SystemMonitor.self) private var monitor
+    @Environment(KeepAwakeController.self) private var keepAwake
+    @Environment(ClipboardHistory.self) private var clipboard
+    @Environment(NotesStore.self) private var notes
+    @Environment(AppSettings.self) private var settings
+
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text("Схема панели").font(.system(size: 12, weight: .medium)).foregroundStyle(.secondary)
+            Text("Панель сейчас").font(.system(size: 12, weight: .medium)).foregroundStyle(.secondary)
             VStack(spacing: 6) {
                 ForEach(modules, id: \.self) { kind in
                     HStack(spacing: 8) {
                         Image(systemName: kind.symbol)
                             .foregroundStyle(kind.group.tint)
                             .frame(width: 18)
-                        VStack(alignment: .leading, spacing: 1) {
+                        VStack(alignment: .leading, spacing: 3) {
                             Text(kind.title).font(.system(size: 12, weight: .semibold))
-                            Text(kind.tagline).font(.system(size: 10.5)).foregroundStyle(.secondary).lineLimit(1)
+                            live(kind)
                         }
                         Spacer(minLength: 0)
                     }
@@ -732,6 +743,71 @@ private struct PanelSketch: View {
         }
         .accessibilityElement(children: .combine)
         .accessibilityLabel(String(localized: "Схема панели: ") + modules.map(\.title).joined(separator: ", "))
+    }
+
+    /// What the block shows now; its one line when there is nothing live to show.
+    @ViewBuilder private func live(_ kind: ModuleKind) -> some View {
+        switch kind {
+        case .limits:
+            if let session = usage.snapshot?.session?.utilization {
+                HStack(spacing: 6) {
+                    MiniBar(value: session)
+                    if let week = usage.snapshot?.week?.utilization { MiniBar(value: week) }
+                }
+            } else {
+                line(kind.tagline)
+            }
+        case .sessions:
+            let running = sessions.items.filter { $0.state == .running }.count
+            line(sessions.items.isEmpty ? String(localized: "Нет сессий")
+                 : String(localized: "Ждут: \(sessions.waitingCount) · работают: \(running)"))
+        case .projects:
+            let red = store.projects.filter { $0.health == .red }.count
+            line(store.projects.isEmpty ? kind.tagline : String(localized: "Проектов: \(store.projects.count) · с проблемами: \(red)"))
+        case .upcoming:
+            line(calendar.nearest().map { CalendarText.menuBar($0) } ?? String(localized: "Ничего на 7 дней"))
+        case .resources:
+            if let snapshot = monitor.snapshot {
+                line(String(localized: "Процессор \(Int(snapshot.cpu.rounded())) % · память \(Int(snapshot.memoryPercent.rounded())) %"))
+            } else {
+                line(kind.tagline)
+            }
+        case .keepAwake:
+            line(keepAwake.reason == nil ? String(localized: "Mac может уснуть") : String(localized: "Не даёт уснуть"))
+        case .clipboard:
+            line(String(localized: "Записей: \(clipboard.items.count)"))
+        case .notes:
+            line(String(localized: "Заметок: \(notes.names.count)"))
+        case .quickCommands:
+            line(String(localized: "Команд: \(settings.quickCommands.count)"))
+        case .toggles:
+            line(String(localized: "Переключателей: \(settings.quickToggles.count)"))
+        case .reports, .notch, .layout:
+            line(kind.tagline)
+        }
+    }
+
+    private func line(_ text: String) -> some View {
+        Text(text).font(.system(size: 10.5)).foregroundStyle(.secondary).lineLimit(1)
+    }
+}
+
+/// A limit as the panel draws it: a thin bar coloured by level and its percent.
+private struct MiniBar: View {
+    let value: Double
+
+    var body: some View {
+        HStack(spacing: 3) {
+            GeometryReader { geometry in
+                ZStack(alignment: .leading) {
+                    Capsule().fill(Color.secondary.opacity(0.25))
+                    Capsule().fill(Color(nsColor: MenuBarRenderer.color(value)))
+                        .frame(width: max(3, geometry.size.width * min(value, 100) / 100))
+                }
+            }
+            .frame(width: 44, height: 4)
+            Text("\(Int(value.rounded())) %").font(.system(size: 10.5, weight: .medium)).monospacedDigit()
+        }
     }
 }
 

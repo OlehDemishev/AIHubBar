@@ -424,6 +424,7 @@ struct ClaudePultApp: App {
 
         Settings {
             SettingsView()
+                .environment(sessions)
                 .environment(loginItem)
                 .environment(settings)
                 .environment(store)
