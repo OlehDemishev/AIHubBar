@@ -29,7 +29,7 @@
 
 **Needs Oleh:**
 - on the MacBook Air (build from main): Settings → Модули → «Остров у чёлки» → «Сводка» → «только в острове» — the menu bar should keep only the icon and the red dot while the ears show limits and sessions; «только в строке меню» — no ears
-- Chinese models (after merge): to try one, make a key (Qwen / Kimi / GLM / MiniMax — links next to each in «Сервисы AI» → «Другие»), paste it, «Проверить»; no key was available to the agent, so a real reply is unchecked
+- Chinese models (on main, in the next build): to try one, make a key (Qwen / Kimi / GLM / MiniMax — links next to each in «Сервисы AI» → «Другие»), paste it, «Проверить»; no key was available to the agent, so a real reply is unchecked
 - optional: test conversations «codex-check», «agents-check» can be archived in Codex / Copilot / Antigravity
 - optional: a Codex thread named «codex-check» (from the live check) is in your Codex history — archive it in Codex if it's in the way
 - new Settings (build from main, installed): one sidebar with search — every page opens, search finds pages by setting names (e.g. «Telegram»), the dots match what's set up; in «Сервисы AI» → Claude Code has all the old options (path, hooks, Telegram answers, saved prompts, CLAUDE.md и MCP, background runs); Codex shows the agent and its limits row; Modules → Лимиты → «Другие AI» shows the summary and «Открыть «Сервисы AI»»
