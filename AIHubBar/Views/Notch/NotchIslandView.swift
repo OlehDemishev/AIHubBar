@@ -617,7 +617,7 @@ private struct NotchDropCard: View {
                 ForEach(mode.commands + [.customTask]) { command in
                     Button(command.title) { start(command) }
                         .buttonStyle(NotchButtonStyle(fill: asking == command ? .accentColor : .white.opacity(0.16)))
-                        .help(command.task)
+                        .help(command.hint)
                 }
             }
             if let asking {

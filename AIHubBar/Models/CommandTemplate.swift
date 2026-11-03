@@ -58,6 +58,11 @@ struct CommandTemplate: Codable, Identifiable, Equatable, Hashable, Sendable {
         id: "custom-task", title: String(localized: "Своя задача"), task: "{текст}", output: "результат-<время>.md",
         asks: String(localized: "Задача")
     )
+
+    /// The hover hint on the command's button: what it asks the AI to do. «Своя задача» has no text of its own.
+    var hint: String {
+        id == Self.customTask.id ? String(localized: "Напишите задачу своими словами — AI выполнит её над файлом") : task
+    }
 }
 
 /// What a command is run on, for the placeholders.
