@@ -1,5 +1,5 @@
-//! `claudepult-hook` — the Claude Code hook of AI Hub Bar for Windows and Linux (docs/SPEC-windows.md §4.3), a port
-//! of the Mac's Python hook (`ClaudePult/Services/HookScript.swift`, format 3) so the session files are the same:
+//! `claudepult-hook` — the Claude Code hook of AI Hub Bar for Windows and Linux (docs/specs/SPEC-windows.md §4.3), a port
+//! of the Mac's Python hook (`AIHubBar/Services/HookScript.swift`, format 3) so the session files are the same:
 //! `<data dir>/sessions/<session_id>.json`. It must never affect Claude: it prints nothing and always exits 0.
 //! Answering permission requests from the app is not here yet (a later stage).
 //!

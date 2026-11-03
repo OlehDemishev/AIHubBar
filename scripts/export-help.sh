@@ -1,6 +1,6 @@
 #!/bin/bash
 # Exports the help window's topics into site/help/<language>.json, one file per interface language, for the site's
-# help page (docs/SPEC-help.md §4). Run after changing the help texts or their translations, then commit site/help/.
+# help page (docs/specs/SPEC-help.md §4). Run after changing the help texts or their translations, then commit site/help/.
 #
 # Usage: scripts/export-help.sh
 set -euo pipefail
@@ -12,7 +12,7 @@ LANGUAGES=(ru en uk de fr es it pt-BR pl ja ko ar id)
 cd "$ROOT"
 echo "==> Building"
 xcodegen generate --quiet
-xcodebuild build -project ClaudePult.xcodeproj -scheme ClaudePult -configuration Debug \
+xcodebuild build -project AIHubBar.xcodeproj -scheme AIHubBar -configuration Debug \
   -destination 'platform=macOS,arch=arm64' -derivedDataPath "$DERIVED" -quiet
 APP="$DERIVED/Build/Products/Debug/AIHubBar.app/Contents/MacOS/AIHubBar"
 

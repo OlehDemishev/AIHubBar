@@ -1,4 +1,4 @@
-# AI Hub Bar for Windows and Linux (docs/SPEC-windows.md, docs/SPEC-linux.md): Tauri 2.
+# AI Hub Bar for Windows and Linux (docs/specs/SPEC-windows.md, docs/specs/SPEC-linux.md): Tauri 2.
 # core — shared logic with no UI, tested on any system (`cargo test -p claudepult-core`);
 # app  — the tray app; cli — `claudepult`, the console program that talks to the running app.
 [workspace]

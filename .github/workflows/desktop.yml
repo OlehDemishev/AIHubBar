@@ -1,4 +1,4 @@
-# AI Hub Bar for Windows and Linux (desktop/, docs/SPEC-windows.md, docs/SPEC-linux.md).
+# AI Hub Bar for Windows and Linux (desktop/, docs/specs/SPEC-windows.md, docs/specs/SPEC-linux.md).
 # The repository is public, so GitHub's Windows and Linux machines cost nothing: they test the Rust code and build
 # the installers that can't be built on the Mac. The Mac app (Xcode) is not built here.
 name: Desktop
@@ -7,13 +7,13 @@ on:
   pull_request:
     paths:
       - "desktop/**"
-      - "ClaudePult/Resources/Localizable.xcstrings"
+      - "AIHubBar/Resources/Localizable.xcstrings"
       - ".github/workflows/desktop.yml"
   push:
     branches: [main]
     paths:
       - "desktop/**"
-      - "ClaudePult/Resources/Localizable.xcstrings"
+      - "AIHubBar/Resources/Localizable.xcstrings"
       - ".github/workflows/desktop.yml"
   workflow_dispatch:
 

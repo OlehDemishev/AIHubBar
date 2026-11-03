@@ -1,4 +1,4 @@
-//! The tray icon drawn on the fly (docs/SPEC-windows.md §4.1): Windows shows only a small square icon, so instead of
+//! The tray icon drawn on the fly (docs/specs/SPEC-windows.md §4.1): Windows shows only a small square icon, so instead of
 //! the Mac's menu bar text there is a ring of the session limit, coloured by level, and a dot in the corner when
 //! something waits for the person. Pure pixels (RGBA), so it is tested anywhere and handed to Tauri as is.
 

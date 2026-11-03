@@ -1,4 +1,4 @@
-//! The link between `claudepult` (console) and the running app (docs/SPEC-windows.md §4.8): a named pipe
+//! The link between `claudepult` (console) and the running app (docs/specs/SPEC-windows.md §4.8): a named pipe
 //! `\\.\pipe\ClaudePult-<user>` on Windows, an abstract socket on Linux, a socket file in `/tmp` on macOS
 //! (development only).
 //! One line per request — `app-command <name>` — and one line back: `ok`, `unknown` or `error <text>`.

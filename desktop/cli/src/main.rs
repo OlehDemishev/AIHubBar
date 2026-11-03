@@ -1,4 +1,4 @@
-//! `claudepult` — the console side of AI Hub Bar (docs/SPEC-windows.md §4.8). `AIHubBar.exe` is a window
+//! `claudepult` — the console side of AI Hub Bar (docs/specs/SPEC-windows.md §4.8). `AIHubBar.exe` is a window
 //! program and can't print to a console, so commands live here and reach the running app through
 //! `claudepult_core::ipc`. More commands (`--usage`, `--sessions`, `--hooks` …) come with their stages.
 

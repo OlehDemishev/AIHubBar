@@ -1,6 +1,6 @@
 #!/bin/bash
 # Build AI Hub Bar (Release), install it into ~/Applications and (re)launch it.
-# The Xcode project and scheme keep the old name ClaudePult; the app is «AI Hub Bar.app» with the executable AIHubBar.
+# Xcode project and scheme AIHubBar; the app is «AI Hub Bar.app» with the executable AIHubBar (bundle id still claudepult).
 #
 # Usage: scripts/build-and-install.sh [--test] [--no-launch]
 #   --test       run unit tests before building
@@ -8,7 +8,8 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-APP_NAME="ClaudePult"
+PROJECT="AIHubBar"
+OLD_NAME="ClaudePult"  # the app before the rename to AI Hub Bar
 EXECUTABLE="AIHubBar"
 DISPLAY_NAME="AI Hub Bar"
 BUNDLE_ID="com.demishev.claudepult"
@@ -38,7 +39,7 @@ xcodegen generate --quiet
 if [[ $RUN_TESTS -eq 1 ]]; then
   echo "==> Running tests"
   xcodebuild test \
-    -project "$APP_NAME.xcodeproj" -scheme "$APP_NAME" \
+    -project "$PROJECT.xcodeproj" -scheme "$PROJECT" \
     -destination 'platform=macOS,arch=arm64' -derivedDataPath "$DERIVED" \
     -quiet
 fi
@@ -51,8 +52,10 @@ VERSION="${VERSION#v}"
 VERSION="${VERSION:-0.1.0}"
 
 echo "==> Building Release $VERSION ($BUILD_NUMBER)"
+# A fresh bundle: Xcode keeps files of renamed targets (the old ClaudePultWidget.appex) in a reused one.
+rm -rf "$DERIVED/Build/Products/Release/$EXECUTABLE.app"
 xcodebuild build \
-  -project "$APP_NAME.xcodeproj" -scheme "$APP_NAME" -configuration Release \
+  -project "$PROJECT.xcodeproj" -scheme "$PROJECT" -configuration Release \
   -destination 'platform=macOS,arch=arm64' -derivedDataPath "$DERIVED" \
   MARKETING_VERSION="$VERSION" CURRENT_PROJECT_VERSION="$BUILD_NUMBER" \
   -quiet
@@ -63,17 +66,17 @@ BUILT="$DERIVED/Build/Products/Release/$EXECUTABLE.app"
 echo "==> Stopping the running app"
 osascript -e "tell application id \"$BUNDLE_ID\" to quit" >/dev/null 2>&1 || true
 for _ in {1..20}; do
-  pgrep -xq "$EXECUTABLE" || pgrep -xq "$APP_NAME" || break
+  pgrep -xq "$EXECUTABLE" || pgrep -xq "$OLD_NAME" || break
   sleep 0.25
 done
 pkill -x "$EXECUTABLE" 2>/dev/null || true
-pkill -x "$APP_NAME" 2>/dev/null || true
+pkill -x "$OLD_NAME" 2>/dev/null || true
 
 # The app used to be installed as ClaudePult.app: two copies with one bundle id confuse macOS. To the Trash, not deleted.
-OLD="$INSTALL_DIR/$APP_NAME.app"
+OLD="$INSTALL_DIR/$OLD_NAME.app"
 if [[ -d "$OLD" ]]; then
-  echo "==> Moving the old $APP_NAME.app to the Trash"
-  mv "$OLD" "$HOME/.Trash/$APP_NAME-$(date +%Y%m%d-%H%M%S).app"
+  echo "==> Moving the old $OLD_NAME.app to the Trash"
+  mv "$OLD" "$HOME/.Trash/$OLD_NAME-$(date +%Y%m%d-%H%M%S).app"
 fi
 
 echo "==> Installing to $DEST"

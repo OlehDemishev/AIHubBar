@@ -1,4 +1,4 @@
-//! `settings.json` (docs/SPEC-windows.md §6). Reading is tolerant like the Mac's `NotchSettings`: unknown keys from
+//! `settings.json` (docs/specs/SPEC-windows.md §6). Reading is tolerant like the Mac's `NotchSettings`: unknown keys from
 //! newer versions are ignored, missing or broken ones take their defaults, so a file never stops the app.
 
 use serde::{Deserialize, Serialize};

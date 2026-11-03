@@ -1,22 +1,22 @@
-# The Mac app's unit tests and string catalog on every PR that touches them (docs/SPEC-refactor.md §7). The repository
+# The Mac app's unit tests and string catalog on every PR that touches them (docs/specs/SPEC-refactor.md §7). The repository
 # is public, so GitHub's macOS machines cost nothing here. Locally the same: scripts/check.sh.
 name: Mac
 
 on:
   pull_request:
     paths:
-      - "ClaudePult/**"
-      - "ClaudePultTests/**"
-      - "ClaudePultWidget/**"
+      - "AIHubBar/**"
+      - "AIHubBarTests/**"
+      - "AIHubBarWidget/**"
       - "project.yml"
       - "scripts/strings-check.py"
       - ".github/workflows/mac.yml"
   push:
     branches: [main]
     paths:
-      - "ClaudePult/**"
-      - "ClaudePultTests/**"
-      - "ClaudePultWidget/**"
+      - "AIHubBar/**"
+      - "AIHubBarTests/**"
+      - "AIHubBarWidget/**"
       - "project.yml"
       - "scripts/strings-check.py"
       - ".github/workflows/mac.yml"
@@ -58,6 +58,6 @@ jobs:
       - name: Test
         run: |
           # Tests expect the app's source language (Russian) and a Russian region, as on Oleh's Mac.
-          xcodebuild test -project ClaudePult.xcodeproj -scheme ClaudePult \
+          xcodebuild test -project AIHubBar.xcodeproj -scheme AIHubBar \
             -destination 'platform=macOS' -derivedDataPath build/DerivedData \
             -testLanguage ru -testRegion RU

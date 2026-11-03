@@ -1,4 +1,4 @@
-//! Stage 3 «Сессии» (docs/SPEC-windows.md §4.3): the sessions the hook records, read every few seconds; the panel's
+//! Stage 3 «Сессии» (docs/specs/SPEC-windows.md §4.3): the sessions the hook records, read every few seconds; the panel's
 //! list, the tray icon's dot while one waits for an answer, and installing the hook into Claude Code's settings.
 
 use crate::limits::Limits;

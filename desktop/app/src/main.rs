@@ -1,4 +1,4 @@
-//! AI Hub Bar for Windows and Linux (docs/SPEC-windows.md §9): stage 1 «Каркас» — the tray icon, the panel at it,
+//! AI Hub Bar for Windows and Linux (docs/specs/SPEC-windows.md §9): stage 1 «Каркас» — the tray icon, the panel at it,
 //! the settings window, 13 languages, one running copy, start at sign-in and `claudepult --app-command`;
 //! stage 2 «Лимиты» in `limits.rs`; stage 3 «Сессии» in `sessions.rs` and the `claudepult-hook` program.
 

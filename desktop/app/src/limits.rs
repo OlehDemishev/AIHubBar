@@ -1,4 +1,4 @@
-//! Stage 2 «Лимиты» (docs/SPEC-windows.md §4.2): the session and week limits on a background thread — every 2 minutes
+//! Stage 2 «Лимиты» (docs/specs/SPEC-windows.md §4.2): the session and week limits on a background thread — every 2 minutes
 //! while the session grows, else every 5, a pause after 429 — with the forecast, notifications at 50 / 80 / 95 %,
 //! `usage.json` for `report.py`, and the tray icon drawn as a ring with the summary in its hint.
 

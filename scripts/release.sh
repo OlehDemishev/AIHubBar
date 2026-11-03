@@ -31,7 +31,7 @@ if [[ -n "$(git status --porcelain)" ]]; then
   exit 1
 fi
 
-# Nothing ships without the tests and the string catalog passing (docs/SPEC-refactor.md §7).
+# Nothing ships without the tests and the string catalog passing (docs/specs/SPEC-refactor.md §7).
 scripts/check.sh
 
 BUILD_NUMBER="$(git rev-list --count HEAD)"
@@ -44,7 +44,9 @@ rm -rf "$OUT" && mkdir -p "$OUT"
 
 echo "==> Building $VERSION ($BUILD_NUMBER)"
 xcodegen generate >/dev/null
-xcodebuild -project ClaudePult.xcodeproj -scheme ClaudePult -configuration Release \
+# A fresh bundle: Xcode keeps files of renamed targets (the old ClaudePultWidget.appex) in a reused one.
+rm -rf "$DERIVED/Build/Products/Release/AIHubBar.app"
+xcodebuild -project AIHubBar.xcodeproj -scheme AIHubBar -configuration Release \
   -destination 'generic/platform=macOS' -derivedDataPath "$DERIVED" \
   MARKETING_VERSION="$VERSION" CURRENT_PROJECT_VERSION="$BUILD_NUMBER" build >"$OUT/build.log" 2>&1 \
   || { tail -30 "$OUT/build.log" >&2; exit 1; }
