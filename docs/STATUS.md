@@ -34,6 +34,12 @@ Done: 🚀 Задача — the profile's projects (most active first) → the t
 Checked: scripts/check.sh green; 5 new tests (`TelegramTasksTests`: project keys, the screen with projects and runs, locked over the shared bot, the task shown back and the launcher's questions, log tail and stop), updated menu and route tests.
 Left: not tried live — start a small task from the phone and stop it.
 
+## 2026-11-03 — menu bar ☕ follows the «Не спать» switch (branch `fix/keep-awake-cup-follows-switch`)
+
+Done: after #248 the cup stayed orange whatever the panel switch said — the switch is only the manual hold, and the rule «Пока работает Claude» kept the Mac awake (and the cup lit) all the time. Oleh chose: the cup shows only while the switch is on (orange, label colour when level colours are off) and is gone when it is off; rules no longer light it. New `MenuBarData.keepAwakeSwitchedOn` (= manual hold); the tooltip still says «Mac не засыпает» from the real reason. Settings description reworded in 12 languages.
+Checked: `xcodebuild test` — 462 green (`KeepAwakeTests.menuBarCup`: off, rule alone, switch on, colours off). Installed build: menu bar screenshot with the switch off while the Claude rule held the Mac — no cup.
+Left: the switch-on state not seen live (the panel switch wasn't clicked by the agent).
+
 ## 2026-11-03 — Telegram stage 2: sessions, permission requests, limits (branch `feat/telegram-sessions-limits`)
 
 Done: 🤖 Сессии (waiting first, then working; project, agent, what it waits for or does) with the open permission requests numbered ✅ n / ❌ n / ℹ️ n; ⏳ Лимиты (every AI service of «Лимиты AI» with a ▓░ bar per window, the reset, «кончится к …», a switch for limit alerts to Telegram). Requests: with «Присылать запросы разрешений в Telegram» on (now also «Запросы разрешений в этот бот» on the module page) the Mac where Claude asks sends each request at once with «Разрешить / Отклонить / Подробнее»; answered anywhere, the message loses its buttons and says how; `TelegramApprovals` steps aside while the module does this (its section says so). Own bot: buttons only from the Mac that reads the bot; shared bot: the relay now sends a press back to the Mac that sent the message (`msg:<chat>:<id>`, the last 1000 per chat), and answering needs «Ответы на запросы через общий бот». The default bottom menu now has 🏠 🤖 / ⏳ 📊 / 🧹 ❓ (custom menus keep theirs; the new screens are in «Меню в боте»). Spec §2/§3/§8, REFERENCE. 17 new strings in 12 languages.
