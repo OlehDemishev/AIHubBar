@@ -13,7 +13,7 @@
 - `~/Projects/CLAUDE.md` — общие правила для Claude Code во всех проектах (STATUS.md, ветки, PR, merge делает только Олег, worktree только в `.claude/worktrees/`).
 - `docs/STATUS.md` в каждом проекте: шапка между `<!-- summary:start -->` и `<!-- summary:end -->` с полями `**Stage:**`, `**Updated:**`, `**Now:**`, `**Next:**`, `**Needs Oleh:**` + журнал записей `## YYYY-MM-DD — …` (новые сверху).
 - `~/Projects/_daily-report/` — Python-инструменты (не git):
-  - `report.py --json --no-fetch` — **источник данных о проектах для ClaudePult** (формат ниже). Логику git/STATUS не дублировать в Swift — вызывать этот скрипт. С `--no-fetch` отрабатывает за несколько секунд; без него делает `git fetch` (медленнее, раз в 30 мин достаточно).
+  - `report.py --json --no-fetch` — **источник данных о проектах для ClaudePult** (с 2026-10-30 — только у профиля-«отчёта» Олега; без `_daily-report` проекты читает встроенный `GitScanner`, см. `docs/specs/SPEC-modes.md`, этап 6) (формат ниже). Логику git/STATUS не дублировать в Swift — вызывать этот скрипт. С `--no-fetch` отрабатывает за несколько секунд; без него делает `git fetch` (медленнее, раз в 30 мин достаточно).
   - `report.py --since-hours N --no-open` — полный отчёт с AI-резюме, шлёт в Telegram (1–3 мин).
   - `report.py --no-ai --no-document --no-open --since-hours N` — быстрая сводка в Telegram.
   - `cleanup.py --dry-run` / `cleanup.py --now` — очистка сборок (вывод — текст, первая строка — итог).

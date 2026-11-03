@@ -8,7 +8,7 @@ are in each spec and in the journal: `docs/STATUS.md`, older months in `docs/sta
 | [SPEC.md](SPEC.md) | the programmer's control panel: projects, sessions, commands | done (stages 1–8) |
 | [SPEC-modes.md](SPEC-modes.md) | work modes, templates, the assistant, AI services | done; modes became profiles (next row) |
 | [SPEC-profiles.md](SPEC-profiles.md) | profiles made of modules, empty by default | done |
-| [SPEC-hub.md](SPEC-hub.md) | limits and usage of other AIs | done 2026-10-30; menu bar items and forecast for them not done |
+| [SPEC-hub.md](SPEC-hub.md) | limits and usage of other AIs | done 2026-10-30; its leftovers (forecast, per-service alerts, menu bar, widget) done in SPEC-ai-services |
 | [SPEC-ai-services.md](SPEC-ai-services.md) | Claude as one of the AI services, one view for every service | done (stages 1–6); «waiting» without hooks, Cursor CLI left |
 | [SPEC-notch.md](SPEC-notch.md) | the island at the notch | done (stages 1–5); a live VoiceOver walk left |
 | [SPEC-layout.md](SPEC-layout.md) | «Раскладка», automatic keyboard layout switch | in beta |
