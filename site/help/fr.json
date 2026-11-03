@@ -466,7 +466,7 @@
       "title" : "Île de l’encoche"
     },
     {
-      "beta" : true,
+      "beta" : false,
       "group" : "Mac",
       "id" : "layout",
       "sections" : [
@@ -494,7 +494,7 @@
         }
       ],
       "steps" : [
-        "Activez « Versions bêta » dans « Général », puis « Disposition du clavier » sur la page « Modules »."
+        "Activez « Disposition du clavier » sur la page « Modules »."
       ],
       "summary" : "Un mot tapé dans la mauvaise disposition est retapé tout seul dans la bonne, et la disposition change. Double Maj : le dernier mot, ⌥⇧ : le texte sélectionné. La langue est dans la barre des menus.",
       "title" : "Disposition du clavier"

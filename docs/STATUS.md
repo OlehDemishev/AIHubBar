@@ -1,7 +1,7 @@
 # Status
 
 <!-- summary:start -->
-**Stage:** Mac: 0.5.0 published, beta 0.5.1-beta.1 on the beta channel (refactoring stages 0–8 done; «Раскладка» still in beta). Windows/Linux (`desktop/`, Tauri 2): postponed by Oleh 2026-11-02 after stages 1–3 main parts
+**Stage:** Mac: 0.5.0 published, beta 0.5.1-beta.1 on the beta channel (refactoring stages 0–8 done); 0.6.0 being released — «Раскладка» out of beta. Windows/Linux (`desktop/`, Tauri 2): postponed by Oleh 2026-11-02 after stages 1–3 main parts
 **Updated:** 2026-11-03
 
 **Now:**
@@ -27,6 +27,12 @@
 - «Раскладка»: tried live in TextEdit, Safari, Chrome (⌥⇧ too); Telegram and Notes are yours to try (not typed into by the agent)
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-03 — «Раскладка» out of beta for 0.6.0 (branch `feat/layout-out-of-beta`)
+
+Done: Oleh's call — «Раскладка» works for everyone without «Бета-версии»: its `isBeta` dropped, the help step no longer mentions beta, and «Бета-версии» in General says only «new builds first» when no module is in testing (2 new strings in 13 languages, inserted without reordering the catalog). Docs (SPEC-layout, SPEC-settings, specs README, RELEASE, REFERENCE), the site's layout section and `site/help` updated.
+Checked: scripts/check.sh green; `ModuleRegistryTests` expects no beta modules, `ModuleSwitchTests` checks «Раскладка» works without beta builds.
+Left: the 0.6.0 release itself.
 
 ## 2026-11-03 — shared Telegram bot deployed (branch `chore/telegram-relay-url`)
 

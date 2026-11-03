@@ -466,7 +466,7 @@
       "title" : "Isla del notch"
     },
     {
-      "beta" : true,
+      "beta" : false,
       "group" : "Mac",
       "id" : "layout",
       "sections" : [
@@ -494,7 +494,7 @@
         }
       ],
       "steps" : [
-        "Activa «Versiones beta» en «General» y luego «Distribución del teclado» en la página «Módulos»."
+        "Activa «Distribución del teclado» en la página «Módulos»."
       ],
       "summary" : "Una palabra escrita con la distribución equivocada se reescribe sola con la correcta y la distribución cambia. Doble Shift: la última palabra; ⌥⇧: el texto seleccionado. El idioma, en la barra de menús.",
       "title" : "Distribución del teclado"

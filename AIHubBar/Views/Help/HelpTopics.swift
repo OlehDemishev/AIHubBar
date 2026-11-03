@@ -70,7 +70,7 @@ enum HelpTopic: String, CaseIterable, Identifiable, Sendable {
         }
     }
 
-    var isBeta: Bool { self == .layout }
+    var isBeta: Bool { false }
 
     /// One or two sentences under the title.
     var summary: String {
@@ -127,7 +127,7 @@ enum HelpTopic: String, CaseIterable, Identifiable, Sendable {
         case .notch:
             [String(localized: "Включите «Остров у чёлки» на странице «Модули».")]
         case .layout:
-            [String(localized: "Включите «Бета-версии» в «Основных», затем «Раскладку» на странице «Модули».")]
+            [String(localized: "Включите «Раскладку» на странице «Модули».")]
         case .reports, .utilities, .alerts, .commandLine:
             []
         }

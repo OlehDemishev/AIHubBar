@@ -18288,6 +18288,82 @@
         }
       }
     },
+    "Включите «Раскладку» на странице «Модули».": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "فعّل «تخطيط لوحة المفاتيح» في صفحة «الوحدات»."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aktivieren Sie „Tastaturlayout“ auf der Seite „Module“."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Turn on “Keyboard Layout” on the “Modules” page."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activa «Distribución del teclado» en la página «Módulos»."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activez « Disposition du clavier » sur la page « Modules »."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nyalakan «Tata letak keyboard» di halaman «Modul»."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Attiva «Layout tastiera» nella pagina «Moduli»."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「モジュール」ページで「キーボード配列」をオンにします。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«모듈» 페이지에서 «키보드 배열»을 켜세요."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Włącz „Układ klawiatury” na stronie „Moduły”."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ative «Layout do teclado» na página «Módulos»."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Увімкніть «Розкладка» на сторінці «Модулі»."
+          }
+        }
+      }
+    },
     "Включите «Сравнить», выберите 2–3 сервиса и команду: результаты лягут рядом («хуки (Claude).md», «хуки (OpenAI).md») и откроются в окне «Сравнение».": {
       "localizations": {
         "ar": {
@@ -52531,6 +52607,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Нові збірки раніше за всіх і функції на випробуванні: %@. Може працювати з помилками; вимкніть — залишитеся на цій версії до наступного звичайного випуску."
+          }
+        }
+      }
+    },
+    "Новые сборки раньше всех. Может работать с ошибками; выключите — останетесь на этой версии до следующего обычного выпуска.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إصدارات جديدة قبل الجميع. قد تحتوي على أخطاء؛ عند الإيقاف تبقى على هذا الإصدار حتى الإصدار العادي التالي."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Neue Versionen vor allen anderen. Kann Fehler haben; ausgeschaltet bleiben Sie bis zur nächsten regulären Version auf dieser."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "New builds before everyone else. May have bugs; switched off, you stay on this version until the next regular release."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Versiones nuevas antes que nadie. Puede tener errores; si lo desactivas, te quedas en esta versión hasta la próxima versión normal."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les nouvelles versions avant tout le monde. Peut contenir des bugs ; désactivé, vous restez sur cette version jusqu'à la prochaine version normale."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Versi baru lebih dulu. Bisa ada galat; jika dimatikan, Anda tetap di versi ini sampai rilis biasa berikutnya."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nuove versioni prima di tutti. Può avere errori; disattivandolo resti su questa versione fino alla prossima versione normale."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新しいビルドをいち早く。不具合があるかもしれません。オフにすると次の通常リリースまでこのバージョンのままです。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "새 빌드를 누구보다 먼저. 오류가 있을 수 있습니다. 끄면 다음 정식 릴리스까지 이 버전에 머뭅니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nowe wersje przed innymi. Mogą mieć błędy; po wyłączeniu zostajesz przy tej wersji do następnego zwykłego wydania."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Novas versões antes de todos. Pode ter erros; ao desligar, você fica nesta versão até o próximo lançamento normal."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Нові збірки раніше за всіх. Може працювати з помилками; вимкніть — залишитеся на цій версії до наступного звичайного випуску."
           }
         }
       }

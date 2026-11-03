@@ -82,10 +82,9 @@ struct ModuleSwitchTests {
         #expect(!modes.isSilenced(.resources), "not installed: nothing to silence")
         modes.setOn(.limits, false)
         #expect(modes.silencedModules == [.limits])
-        settings.betaUpdates = true
-        modes.setOn(.layout, true)
         settings.betaUpdates = false
-        #expect(modes.isSilenced(.layout), "a beta module without beta builds is quiet too")
+        modes.setOn(.layout, true)
+        #expect(!modes.isSilenced(.layout), "out of beta: works without beta builds")
 
         var mode = try #require(modes.current)
         mode.modules = mode.moduleList.map { var module = $0; if module.kind == .sessions { module.shown = false }; return module }
@@ -120,14 +119,12 @@ struct ModuleSwitchTests {
         #expect(!modes.panelModules.contains(.resources))
     }
 
-    @Test func betaModuleWorksOnlyWithBetaBuilds() throws {
+    @Test func layoutWorksWithoutBetaBuilds() throws {
         let (modes, settings, dir) = try store()
         defer { try? FileManager.default.removeItem(at: dir) }
-        settings.betaUpdates = true
+        settings.betaUpdates = false
         modes.setOn(.layout, true)
         #expect(modes.isOn(.layout))
-        settings.betaUpdates = false
-        #expect(!modes.isOn(.layout))
     }
 
     @Test func switchedOffModulesDrawNothingInTheMenuBar() {
