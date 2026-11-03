@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AI Hub Bar — your AI and your Mac, one click away</title>
-<meta name="description" content="A free, open-source Mac menu bar app: limits of every AI service, every agent session, a live island around the notch, automatic keyboard layout fixes and the small Mac tools you use every day.">
+<meta name="description" content="A free, open-source Mac menu bar app: limits of every AI service, every agent session, a live island around the notch, a Telegram bot for your phone, automatic keyboard layout fixes and the small Mac tools you use every day.">
 <meta property="og:title" content="AI Hub Bar">
 <meta property="og:description" content="AI limits and agent sessions, a live island around the notch and everyday Mac tools — in one menu bar app.">
 <meta property="og:image" content="https://olehdemishev.github.io/AIHubBar/social-preview.png">
@@ -20,6 +20,7 @@
     <nav>
       <a href="#ai">AI</a>
       <a href="#notch">Notch</a>
+      <a href="#telegram">Telegram</a>
       <a href="#layout">Layout</a>
       <a href="#tools">Mac tools</a>
       <a href="help.html">Help</a>
@@ -105,7 +106,7 @@
       <div class="ic">≡</div>
       <h3>Every agent session</h3>
       <ul>
-        <li>Claude Code and Copilot CLI sessions: working, waiting for you, done — and what they are doing right now.</li>
+        <li>Claude Code, Codex and Copilot CLI sessions: working, waiting for you, done — and what they are doing right now.</li>
         <li>Allow or Deny a permission request from the island, a notification, the panel or Telegram.</li>
         <li>Claude's task list as it goes: step 3 of 7, files changed, context left.</li>
         <li>Recent Codex threads, background runs and a night queue with a morning summary.</li>
@@ -118,6 +119,7 @@
         <li>Ready-made commands per project: next step, custom task, finish with checks, commit and PR.</li>
         <li>A command's result is always a new file — nothing is overwritten.</li>
         <li>Compare runs one command with two or three services side by side.</li>
+        <li><b>⌃⌥P from any app:</b> type a task, pick the project and the agent, send it to the background or to Terminal.</li>
         <li>Claude Code, Codex, Gemini, Copilot and Cursor CLIs, or models by API key.</li>
       </ul>
     </article>
@@ -146,6 +148,39 @@
   <div class="grid2 notes">
     <p><b>Answer without switching apps.</b> Permission requests stay at the notch until you choose, with optional hot keys: ⌃⌥Y to allow, ⌃⌥N to deny.</p>
     <p><b>No notch? No problem.</b> The island also lives as a pill on other screens, on every screen or only the main one, and steps aside for full-screen apps.</p>
+  </div>
+</section>
+
+<!-- Telegram -->
+<section id="telegram" class="wrap">
+  <div class="split2">
+    <div>
+      <div class="kicker">New · Telegram</div>
+      <h2>Your Mac in your pocket</h2>
+      <ul class="big">
+        <li><b>Answer Claude from your phone.</b> A permission request arrives with Allow, Deny and the whole command.</li>
+        <li><b>Start a task, stop a run.</b> Pick a project, type what to do — it runs in the background on your Mac, and the result comes back to the chat.</li>
+        <li><b>Limits, sessions, reports and cleanup</b> from a menu at the bottom of the chat — or as a small app behind the bot's Menu button.</li>
+        <li><b>Quiet when you want.</b> Choose which alerts come, set quiet hours or an hour of silence — right in the bot.</li>
+        <li><b>One tap to connect:</b> Settings → Modules → Telegram → “Connect Telegram” opens <a href="https://t.me/AIHubBarBot">@AIHubBarBot</a>. Or use your own bot from @BotFather.</li>
+      </ul>
+    </div>
+    <div class="phone" aria-label="The AI Hub Bar bot in Telegram: the home screen and a permission request">
+      <div class="phone-top"><b>AI Hub Bar</b><span>bot</span></div>
+      <div class="chat">
+        <div class="msg">
+          <p><b>🏠 Mac mini</b></p>
+          <p>Claude: session 42% · week 18%<br>resets in 2 h 14 min</p>
+          <p>Sessions: 2 working · 1 waiting<br>Background: 1 run</p>
+          <div class="kb"><span>🤖 Sessions</span><span>🚀 Task</span><span>⏳ Limits</span><span>📊 Reports</span></div>
+        </div>
+        <div class="msg">
+          <p>✋ <b>shop-app</b>: Claude asks — Bash<br><code>npm test</code></p>
+          <div class="kb req"><span class="ok">✅ Allow</span><span>❌ Deny</span><span>ℹ️</span></div>
+        </div>
+      </div>
+      <div class="menu-kb"><span>🏠 Home</span><span>📊 Reports</span><span>🧹 Mac</span><span>❓</span></div>
+    </div>
   </div>
 </section>
 
@@ -183,7 +218,11 @@
     <div><span class="ti">⏻</span><b>Quick toggles</b><em>dark mode, desktop icons, lock screen, eject disks, empty trash — one click each</em></div>
     <div><span class="ti">▦</span><b>Calendar</b><em>deadlines and content plans straight from your project files</em></div>
     <div><span class="ti">⌕</span><b>⌃⌥C search</b><em>sessions, projects and commands from any app</em></div>
-    <div><span class="ti">▣</span><b>Widgets &amp; Shortcuts</b><em>limits and status widgets, Shortcuts actions, Telegram alerts</em></div>
+    <div><span class="ti">▣</span><b>Widgets &amp; Shortcuts</b><em>limits and status widgets, Shortcuts actions</em></div>
+    <div><span class="ti">✦</span><b>⌃⌥P quick prompt</b><em>a task to Claude or another agent from any app, in two seconds</em></div>
+    <div><span class="ti">▶︎</span><b>Quick commands</b><em>your own scripts and commands, each with its own global shortcut</em></div>
+    <div><span class="ti">✈︎</span><b>Telegram bot</b><em>limits, sessions, requests and tasks from your phone — <a href="#telegram">see above</a></em></div>
+    <div><span class="ti">›_</span><b>Command line</b><em><code>AIHubBar --help</code>: the app's actions from Terminal and scripts</em></div>
   </div>
 </section>
 
@@ -225,11 +264,12 @@
 
 <section id="privacy" class="wrap">
   <div class="kicker">Privacy</div>
-  <h2>Nothing in between</h2>
-  <div class="grid3 privacy">
-    <p><b>No server, no account, no analytics.</b> AI Hub Bar talks only to the AI services you use; your files go only to the service you run a command with.</p>
+  <h2>Your Mac keeps your things</h2>
+  <div class="grid2 privacy">
+    <p><b>No account, no analytics.</b> AI Hub Bar talks only to the AI services you use; your files go only to the service you run a command with.</p>
     <p><b>Keys stay in the Keychain.</b> Never in logs or exported settings. Session hooks only write small status files on your Mac and come off in one click.</p>
     <p><b>Nothing you type is kept.</b> Layout fix looks at the word being typed and forgets it; clipboard history skips passwords and the apps you exclude.</p>
+    <p><b>Telegram is optional.</b> The shared bot passes messages through a small relay on Cloudflare. It logs no message text and keeps only which chat belongs to which Mac — plus messages waiting for a sleeping Mac, deleted once delivered or after a day. Answering requests and starting tasks through it stay off until you turn them on. Want nothing in between? Connect your own bot.</p>
   </div>
 </section>
 
