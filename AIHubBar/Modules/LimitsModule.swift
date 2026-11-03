@@ -120,7 +120,7 @@ struct LimitSection: View {
                     .foregroundStyle(.secondary)
                     .fixedSize(horizontal: false, vertical: true)
             }
-            if let error = usage.error {
+            if let error = usage.lastError {
                 Text(error).font(.callout).foregroundStyle(.orange)
             }
         } header: {

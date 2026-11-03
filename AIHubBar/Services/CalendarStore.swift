@@ -177,8 +177,10 @@ final class CalendarStore {
     }
 
     private static func saveReminded(_ keys: Set<String>) {
-        try? FileManager.default.createDirectory(at: SessionFiles.supportDirectory, withIntermediateDirectories: true)
-        try? JSONEncoder().encode(Array(keys.sorted().suffix(2000))).write(to: remindedURL, options: .atomic)
+        AppLog.attempt("Calendar reminders not saved") {
+            try FileManager.default.createDirectory(at: SessionFiles.supportDirectory, withIntermediateDirectories: true)
+            try JSONEncoder().encode(Array(keys.sorted().suffix(2000))).write(to: remindedURL, options: .atomic)
+        }
     }
 }
 

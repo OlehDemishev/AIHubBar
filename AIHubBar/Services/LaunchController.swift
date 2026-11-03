@@ -351,8 +351,10 @@ final class LaunchController {
     private func saveQueue() {
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .iso8601
-        try? FileManager.default.createDirectory(at: SessionFiles.supportDirectory, withIntermediateDirectories: true)
-        try? encoder.encode(queued).write(to: Self.queueURL, options: .atomic)
+        AppLog.attempt("Night queue not saved") {
+            try FileManager.default.createDirectory(at: SessionFiles.supportDirectory, withIntermediateDirectories: true)
+            try encoder.encode(queued).write(to: Self.queueURL, options: .atomic)
+        }
     }
 
     /// First click checks that the worktree is clean and pushed, the second removes it.

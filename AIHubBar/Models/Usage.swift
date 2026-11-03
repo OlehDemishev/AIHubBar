@@ -186,8 +186,10 @@ enum UsageFile {
 
     static func write(_ snapshot: UsageSnapshot) {
         guard let data = try? JSONSerialization.data(withJSONObject: payload(snapshot), options: [.prettyPrinted, .sortedKeys]) else { return }
-        try? FileManager.default.createDirectory(at: url.deletingLastPathComponent(), withIntermediateDirectories: true)
-        try? data.write(to: url, options: .atomic)
+        AppLog.attempt("Usage file for the widget not written") {
+            try FileManager.default.createDirectory(at: url.deletingLastPathComponent(), withIntermediateDirectories: true)
+            try data.write(to: url, options: .atomic)
+        }
     }
 }
 

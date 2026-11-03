@@ -18,10 +18,10 @@ struct ClaudeConfigWindow: View {
         .padding(8)
         .frame(minWidth: 760, minHeight: 480)
         .onAppear { config.reload() }
-        .alert("Не получилось", isPresented: Binding(get: { config.error != nil }, set: { if !$0 { config.error = nil } })) {
-            Button("OK") { config.error = nil }
+        .alert("Не получилось", isPresented: Binding(get: { config.lastError != nil }, set: { if !$0 { config.lastError = nil } })) {
+            Button("OK") { config.lastError = nil }
         } message: {
-            Text(config.error ?? "")
+            Text(config.lastError ?? "")
         }
     }
 }

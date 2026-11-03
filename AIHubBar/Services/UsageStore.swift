@@ -7,7 +7,7 @@ import WidgetKit
 @Observable
 final class UsageStore {
     private(set) var snapshot: UsageSnapshot?
-    private(set) var error: String?
+    private(set) var lastError: String?
     private(set) var isRefreshing = false
     private(set) var history: [UsagePoint] = []
     /// While set, no request is made: the server answered 429 (or kept failing).
@@ -97,7 +97,7 @@ final class UsageStore {
         do {
             let fresh = try await UsageService.fetch()
             apply(fresh)
-            error = nil
+            lastError = nil
             pausedUntil = nil
             rateLimitStrikes = 0
         } catch let UsageError.rateLimited(retryAfter) {
@@ -105,21 +105,21 @@ final class UsageStore {
             let pause = Self.backoff(strike: rateLimitStrikes, retryAfter: retryAfter)
             let until = Date.now.addingTimeInterval(pause)
             pausedUntil = until
-            error = String(localized: "Сервер лимитов просит запрашивать реже — следующая попытка в \(until.formatted(date: .omitted, time: .shortened))")
+            lastError = String(localized: "Сервер лимитов просит запрашивать реже — следующая попытка в \(until.formatted(date: .omitted, time: .shortened))")
             AppLog.error("Usage: HTTP 429, pause \(Int(pause / 60)) min (strike \(rateLimitStrikes), Retry-After \(retryAfter.map { "\(Int($0)) s" } ?? "none"))")
         } catch UsageError.expired where settings.renewClaudeLogin && LoginRenewal.shouldTry(lastAttempt: lastRenewal, now: .now) {
             // The sign-in expired (`claude` has not run lately): renew it through `claude` and ask once more.
             lastRenewal = .now
-            error = UsageError.expired.localizedDescription
+            lastError = UsageError.expired.localizedDescription
             if await LoginRenewal.run(claudePath: ClaudeLocator.resolve(configured: settings.claudePath)),
                let fresh = try? await UsageService.fetch() {
                 apply(fresh)
-                error = nil
+                lastError = nil
             }
         } catch {
             // The same failure repeats every few minutes; log it once.
-            if self.error != error.localizedDescription { AppLog.error("Usage refresh failed: \(error.localizedDescription)") }
-            self.error = error.localizedDescription
+            if lastError != error.localizedDescription { AppLog.error("Usage refresh failed: \(error.localizedDescription)") }
+            lastError = error.localizedDescription
         }
     }
 
@@ -266,12 +266,12 @@ final class UsageStore {
     private func saveSnapshot(_ snapshot: UsageSnapshot) {
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .iso8601
-        try? encoder.encode(snapshot).write(to: Self.snapshotURL, options: .atomic)
+        AppLog.attempt("Usage snapshot not saved") { try encoder.encode(snapshot).write(to: Self.snapshotURL, options: .atomic) }
     }
 
     private func saveHistory() {
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .iso8601
-        try? encoder.encode(history).write(to: Self.historyURL, options: .atomic)
+        AppLog.attempt("Usage history not saved") { try encoder.encode(history).write(to: Self.historyURL, options: .atomic) }
     }
 }

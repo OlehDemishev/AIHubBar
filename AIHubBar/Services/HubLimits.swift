@@ -590,8 +590,10 @@ final class HubLimitsStore {
     private func writeWidgetFile() {
         struct Entry: Encodable { var name: String; var percent: Double }
         let entries = limits.compactMap { limit in limit.fullest.map { Entry(name: limit.source.shortTitle, percent: $0) } }
-        try? FileManager.default.createDirectory(at: Self.widgetURL.deletingLastPathComponent(), withIntermediateDirectories: true)
-        try? JSONEncoder().encode(entries).write(to: Self.widgetURL, options: .atomic)
+        AppLog.attempt("Widget limits not written") {
+            try FileManager.default.createDirectory(at: Self.widgetURL.deletingLastPathComponent(), withIntermediateDirectories: true)
+            try JSONEncoder().encode(entries).write(to: Self.widgetURL, options: .atomic)
+        }
         WidgetCenter.shared.reloadTimelines(ofKind: "ClaudePultUsage")
     }
 

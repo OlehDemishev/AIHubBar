@@ -222,7 +222,9 @@ final class CommandEngine {
     private static func saveSpend(_ records: [SpendRecord]) {
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .iso8601
-        try? FileManager.default.createDirectory(at: SessionFiles.supportDirectory, withIntermediateDirectories: true)
-        try? encoder.encode(records).write(to: spendURL, options: .atomic)
+        AppLog.attempt("Command spend not saved") {
+            try FileManager.default.createDirectory(at: SessionFiles.supportDirectory, withIntermediateDirectories: true)
+            try encoder.encode(records).write(to: spendURL, options: .atomic)
+        }
     }
 }

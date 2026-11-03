@@ -11,7 +11,7 @@ final class NotesStore {
     private(set) var text = ""
     private(set) var selected: String?
     /// Set when a note could not be saved; the text stays in the editor (SPEC-refactor §2.5).
-    private(set) var saveError: String?
+    private(set) var lastError: String?
     var isActive: () -> Bool = { false }
     /// To the Trash in the app; tests swap it so they don't fill the real Trash.
     var discard: (URL) throws -> Void = { try FileManager.default.trashItem(at: $0, resultingItemURL: nil) }
@@ -88,9 +88,9 @@ final class NotesStore {
         if (try? String(contentsOf: target, encoding: .utf8)) != text {
             do {
                 try text.write(to: target, atomically: true, encoding: .utf8)
-                saveError = nil
+                lastError = nil
             } catch {
-                saveError = error.localizedDescription
+                lastError = error.localizedDescription
                 AppLog.error("Note «\(selected)» not saved: \(error.localizedDescription)")
             }
         }

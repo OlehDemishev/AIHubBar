@@ -111,7 +111,7 @@ struct NotesView: View {
                     .frame(height: 140)
                     .scrollContentBackground(.hidden)
                     .background(RoundedRectangle(cornerRadius: 6).fill(Color.primary.opacity(0.05)))
-                if let error = notes.saveError {
+                if let error = notes.lastError {
                     Label("Не сохранено: \(error)", systemImage: "exclamationmark.triangle")
                         .scaledFont(.caption)
                         .foregroundStyle(.orange)
