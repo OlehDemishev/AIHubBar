@@ -14,6 +14,8 @@ python3 desktop/scripts/strings.py --check
 
 echo "==> Mac tests"
 xcodegen generate --quiet
+# Swift warnings fail here, with the Xcode releases are built with; CI's older Xcode may warn differently, so not there.
 xcodebuild test -project AIHubBar.xcodeproj -scheme AIHubBar \
-  -destination 'platform=macOS,arch=arm64' -derivedDataPath build/DerivedData -testLanguage ru -testRegion RU -quiet
+  -destination 'platform=macOS,arch=arm64' -derivedDataPath build/DerivedData -testLanguage ru -testRegion RU -quiet \
+  SWIFT_TREAT_WARNINGS_AS_ERRORS=YES
 echo "All checks passed."

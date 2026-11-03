@@ -11,8 +11,11 @@ enum ResizableSettingsWindow {
         let id = ObjectIdentifier(window)
         guard observed[id] == nil else { return }
         observed[id] = window.observe(\.styleMask, options: [.new]) { window, _ in
-            guard !window.styleMask.contains(.resizable) else { return }
-            DispatchQueue.main.async { MainActor.assumeIsolated { window.styleMask.formUnion(.resizable) } }
+            // AppKit changes the style mask on the main thread.
+            MainActor.assumeIsolated {
+                guard !window.styleMask.contains(.resizable) else { return }
+                DispatchQueue.main.async { MainActor.assumeIsolated { window.styleMask.formUnion(.resizable) } }
+            }
         }
         DispatchQueue.main.async {
             window.styleMask.formUnion(.resizable)
