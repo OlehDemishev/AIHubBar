@@ -5,7 +5,7 @@
 **Updated:** 2026-11-03
 
 **Now:**
-- nothing in progress; refactoring stage 5 merged (#219, app composition); next — stage 6, services (docs/SPEC-refactor.md §9)
+- refactoring stage 6 (services) on branch `refactor/stage6-services`, PR open; next — stage 7, docs and names
 
 **Next:**
 - Oleh tries «Раскладка» in his own apps; next beta with fixes: `scripts/release.sh 0.5.0-beta.1 --publish`
@@ -13,7 +13,7 @@
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/SPEC-windows.md §9, stage 2–3 leftovers)
 
 **Needs Oleh:**
-- say when to start stage 6 (services)
+- review and merge the stage 6 PR
 - look at the new help: panel → «?» and https://olehdemishev.github.io/AIHubBar/help.html
 - look at the new Settings and say what to change next
 - MacBook Air: update to 0.4.0 through Sparkle (Settings → General → Updates) and check the island at the real notch
@@ -21,6 +21,12 @@
 - the beta channel exists now (release `beta`, points to 0.4.0): say when the next beta goes out
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-03 — refactoring stage 6: services (branch `refactor/stage6-services`)
+
+Done: module alerts go to Telegram through one `Telegram.notify(toggle, html:, settings:)` (seven copies of «setting on and a bot set up → send» in usage, other AIs, background runs, the night summary, PRs and calendar reminders); it uses the same `TelegramToggle`s as the module pages' «Telegram» chip (that `AppSettings` extension moved next to the settings). `AppSettings` reads each kind of value one way (`bool/int(_:default:)`, `positiveInt`, `value`, `decoded`, `setEncoded`) — same keys and the same meaning per key: 0 stays midnight for the night start, and «not set» for limits and sizes. The command line is a table of commands (flags, values needed, usage line, handler) in the old order, replacing a 238-line `if` chain; `--help` prints it.
+Checked: all Mac tests green (403; new: settings storage keeps the meaning of 0 and round-trips). CLI on the built app: `--help`, `--modes`, `--sessions`, `--background-settings`, an unknown `--app-command` (usage, exit 2).
+Left: one error naming across stores (`error` / `lastError` / `message` …) wasn't done: it means touching many screens for names alone.
 
 ## 2026-11-03 — refactoring stage 5: app composition (branch `refactor/stage5-composition`)
 
