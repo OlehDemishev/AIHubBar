@@ -163,7 +163,8 @@ final class AppContainer {
         keepAwake.claudeWorking = { [sessions, runs] in
             ClaudeActivity(sessions: sessions, runs: runs).isWorking
         }
-        modes.didApply = {
+        modes.didApply = { [telegramBot] in
+            telegramBot.profileChanged()
             Task { await store.refresh() }
             Task { await folders.refresh() }
             Task { await calendar.refresh() }
@@ -179,6 +180,8 @@ final class AppContainer {
         }
         let quickTools = QuickToolsController(settings: settings)
         self.quickTools = quickTools
+        telegramBot.runCommand = { [quickTools] command in await quickTools.runForBot(command) }
+        telegramBot.currentProfile = { [modes] in modes.current.map { ($0.id, $0.name) } }
         self.commandHotKeys = CommandHotKeys(settings: settings) { [modes] in modes.isOn(.quickCommands) }
         commandHotKeys.quickPromptOn = { [modes] in modes.isOn(.quickPrompt) }
         IntentBridge.settings = settings

@@ -20,7 +20,12 @@ extension ModuleDefinition {
 
 extension ModuleUI {
     static let telegram = ModuleUI(
-        settings: { AnyView(TelegramBotSection()) },
+        settings: {
+            AnyView(Group {
+                TelegramBotSection()
+                TelegramMenuSection()
+            })
+        },
         sketch: nil
     )
 }
@@ -155,5 +160,111 @@ struct TelegramBotSection: View {
         if bot.usesSharedBot, !bot.relay.answering, bot.relay.chat != nil { return String(localized: "Отвечает другой Мак") }
         if bot.isReading { return String(localized: "Отвечает") }
         return String(localized: "Не отвечает")
+    }
+}
+
+/// «Меню в боте» (SPEC-telegram §2): which buttons the menu at the bottom of the chat has, in what order, how many in a
+/// row; a profile can have its own. The same switches are in the bot: ❓ → ⚙️ «Настроить меню».
+struct TelegramMenuSection: View {
+    @Environment(AppSettings.self) private var settings
+    @Environment(TelegramBotController.self) private var bot
+    @Environment(ProfileStore.self) private var modes
+    @State private var forProfile = false
+    @State private var busy = false
+
+    var body: some View {
+        Section {
+            if let profile = modes.current {
+                Picker("Меню для", systemImage: "square.stack.3d.up", selection: $forProfile) {
+                    Text("всех профилей").tag(false)
+                    Text("профиля «\(profile.name)»").tag(true)
+                }
+                if forProfile {
+                    Toggle("Своё меню у этого профиля", systemImage: "person.crop.square", isOn: Binding(
+                        get: { settings.telegramBot.hasOwnMenu(profile.id) },
+                        set: { settings.telegramBot.setOwnMenu($0, for: profile.id) }
+                    ))
+                    .help("Выключено — у профиля общее меню")
+                }
+            }
+            Group {
+                ForEach(items, id: \.self) { item in
+                    row(item)
+                }
+                Picker("Кнопок в ряд", systemImage: "rectangle.split.3x1", selection: Binding(
+                    get: { config.columns },
+                    set: { columns in edit { $0.columns = columns } }
+                )) {
+                    Text(verbatim: "2").tag(2)
+                    Text(verbatim: "3").tag(3)
+                }
+            }
+            .disabled(isProfileWithoutOwnMenu)
+            if bot.usesSharedBot {
+                Toggle("Быстрые команды через общий бот", systemImage: "lock.open", isOn: Binding(
+                    get: { settings.telegramBot.commandsOverShared == true },
+                    set: { settings.telegramBot.commandsOverShared = $0 }
+                ))
+                .help("Выключено — команды из меню не запускаются через общий бот; включено — каждая спрашивает «Запустить?»")
+            }
+            LabeledContent {
+                Button("Обновить меню в Telegram") {
+                    busy = true
+                    Task { await bot.refreshMenu(); busy = false }
+                }
+                .disabled(bot.chatID.isEmpty || busy)
+                .help("Прислать 🏠 с новым меню; иначе оно обновится при следующем нажатии 🏠")
+            } label: {
+                Text(bot.currentMenu.entries.map(\.title).joined(separator: " · "))
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                    .lineLimit(2)
+            }
+        } header: {
+            Text("Меню в боте")
+        } footer: {
+            Footnote(text: String(localized: "Кнопки внизу чата: разделы бота и ваши быстрые команды (Модули → «Быстрые команды»). 🏠 есть всегда. Команда из меню выполняется на этом Маке, итог приходит в чат; «Спрашивать перед запуском» спрашивает и там. Удобно 6–9 кнопок."))
+        }
+    }
+
+    private var target: String? { forProfile ? modes.current?.id : nil }
+    private var config: BotMenuConfig { settings.telegramBot.menu(for: target) }
+
+    private var isProfileWithoutOwnMenu: Bool {
+        guard forProfile, let profile = modes.current else { return false }
+        return !settings.telegramBot.hasOwnMenu(profile.id)
+    }
+
+    /// The chosen ones in their order, then the rest.
+    private var items: [BotMenuItem] {
+        let all = BotScreen.menuScreens.map(BotMenuItem.screen) + settings.quickCommands.map { BotMenuItem.command($0.id) }
+        let chosen = config.items.compactMap(BotMenuItem.init(id:)).filter(all.contains)
+        return (chosen.contains(.screen(.home)) ? [] : [.screen(.home)]) + chosen + all.filter { !chosen.contains($0) && $0 != .screen(.home) }
+    }
+
+    private func row(_ item: BotMenuItem) -> some View {
+        let title = BotMenu.title(item, commands: settings.quickCommands)
+        let chosen = config.contains(item)
+        return HStack {
+            Toggle(title, isOn: Binding(get: { chosen }, set: { _ in edit { $0.toggle(item) } }))
+                .disabled(item == .screen(.home))
+            Spacer()
+            if chosen, item != .screen(.home) {
+                Button { edit { $0.move(item, by: -1) } } label: { Image(systemName: "chevron.up") }
+                    .buttonStyle(.borderless)
+                    .help("Выше")
+                    .accessibilityLabel(String(localized: "Выше: \(title)"))
+                Button { edit { $0.move(item, by: 1) } } label: { Image(systemName: "chevron.down") }
+                    .buttonStyle(.borderless)
+                    .help("Ниже")
+                    .accessibilityLabel(String(localized: "Ниже: \(title)"))
+            }
+        }
+    }
+
+    private func edit(_ change: (inout BotMenuConfig) -> Void) {
+        var config = config
+        change(&config)
+        settings.telegramBot.setMenu(config, for: target)
     }
 }

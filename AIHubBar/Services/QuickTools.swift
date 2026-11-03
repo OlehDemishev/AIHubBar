@@ -197,17 +197,50 @@ final class QuickToolsController {
             running.insert(command.id)
             Task {
                 defer { running.remove(command.id) }
-                let home = FileManager.default.homeDirectoryForCurrentUser
-                let result = try? await ProcessRunner.run(executable, arguments, currentDirectory: home, timeout: .seconds(600))
-                let output = Self.summary(stdout: result?.stdoutText ?? "", stderr: result.map { String(decoding: $0.stderr, as: UTF8.self) } ?? "")
-                let failed = result?.exitCode != 0
-                let text = failed ? String(localized: "Ошибка (код \(result.map { Int($0.exitCode) } ?? -1))") + (output.isEmpty ? "" : ": \(output)")
-                    : (output.isEmpty ? String(localized: "Готово") : output)
-                results[command.id] = Result(text: text, isError: failed)
-                Notifier.post(id: "quick-\(command.id)", title: command.title, body: text)
-                AppLog.info("Quick command «\(command.title)»: exit \(result.map { "\($0.exitCode)" } ?? "none")")
+                let result = await Self.execute(command, executable, arguments)
+                results[command.id] = result
+                Notifier.post(id: "quick-\(command.id)", title: command.title, body: result.text)
             }
         }
+    }
+
+    /// From the Telegram bot's menu (SPEC-telegram §2): runs it on this Mac and returns how it went; the bot replies
+    /// instead of a notification.
+    func runForBot(_ command: QuickCommand) async -> (ok: Bool, text: String) {
+        switch command.invocation {
+        case .invalid:
+            return (false, String(localized: "Команда пустая — заполните её в Настройках → «Модули»."))
+        case let .open(url):
+            return NSWorkspace.shared.open(url)
+                ? (true, String(localized: "Открыто на Маке"))
+                : (false, String(localized: "Не открылось: \(url.isFileURL ? url.path : url.absoluteString)"))
+        case let .terminal(line):
+            do {
+                try await TerminalLauncher.run(line)
+                return (true, String(localized: "Открыто в Терминале на Маке"))
+            } catch {
+                return (false, error.localizedDescription)
+            }
+        case let .process(executable, arguments):
+            guard !running.contains(command.id) else { return (false, String(localized: "Уже выполняется")) }
+            running.insert(command.id)
+            defer { running.remove(command.id) }
+            let result = await Self.execute(command, executable, arguments)
+            results[command.id] = result
+            return (!result.isError, result.text)
+        }
+    }
+
+    /// A script or shortcut in the home folder, up to 10 minutes; its last line or the error.
+    private static func execute(_ command: QuickCommand, _ executable: String, _ arguments: [String]) async -> Result {
+        let home = FileManager.default.homeDirectoryForCurrentUser
+        let result = try? await ProcessRunner.run(executable, arguments, currentDirectory: home, timeout: .seconds(600))
+        let output = summary(stdout: result?.stdoutText ?? "", stderr: result.map { String(decoding: $0.stderr, as: UTF8.self) } ?? "")
+        let failed = result?.exitCode != 0
+        let text = failed ? String(localized: "Ошибка (код \(result.map { Int($0.exitCode) } ?? -1))") + (output.isEmpty ? "" : ": \(output)")
+            : (output.isEmpty ? String(localized: "Готово") : output)
+        AppLog.info("Quick command «\(command.title)»: exit \(result.map { "\($0.exitCode)" } ?? "none")")
+        return Result(text: text, isError: failed)
     }
 
     /// The last non-empty line of the output, short enough for a notification.

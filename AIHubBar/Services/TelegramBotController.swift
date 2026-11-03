@@ -21,6 +21,10 @@ final class TelegramBotController {
     private(set) var job: String?
 
     var isActive: () -> Bool = { true }
+    /// The current profile (id, name), for its own menu.
+    var currentProfile: () -> (id: String, name: String)? = { nil }
+    /// Runs a quick command and returns how it went (`QuickToolsController.runForBot`).
+    var runCommand: (QuickCommand) async -> (ok: Bool, text: String) = { _ in (false, "") }
 
     /// The shared bot's connection; used while `usesSharedBot`.
     let relay = TelegramRelay()
@@ -40,6 +44,8 @@ final class TelegramBotController {
     private var menuScreens: [Int] = []
     /// The latest message that carries the bottom menu: kept while other screens come and go.
     private var menuCarrier: Int?
+    /// The menu last sent to the chat, to send it again when the profile changes it.
+    private var sentMenu: [BotMenuItem]?
     /// «Подключить Telegram» was pressed here: greet the chat once it is paired.
     private var greetWhenPaired = false
     private let macName = Host.current().localizedName ?? "Mac"
@@ -289,9 +295,16 @@ final class TelegramBotController {
                 AppLog.info("Telegram: an old command skipped")
                 return
             }
-            if let screen = BotMenu.screen(forText: text) {
+            switch currentMenu.item(forText: text) {
+            case let .screen(screen)?:
                 await show(screen, tapID: messageID)
                 return
+            case let .command(id)?:
+                if let messageID { await delete(messageID) }
+                await askOrRun(id)
+                return
+            case nil:
+                break
             }
             guard let command = BotCommand(text: text) else { return }
             await run(command)
@@ -342,10 +355,12 @@ final class TelegramBotController {
         case .home:
             message = homeScreen
             message.buttons = []
-            message.installsMenu = true
+            message.menu = currentMenu
+            sentMenu = currentMenu.entries.map(\.item)
         case .reports: message = reportsScreen(job: job)
         case .mac: message = macScreen
         case .help: message = helpScreen
+        case .menu: message = menuScreen
         }
         guard let id = await send(message) else { return false }
         if let tapID { await delete(tapID) }
@@ -366,6 +381,21 @@ final class TelegramBotController {
         case .show(.reports): screen = reportsScreen(job: job)
         case .show(.mac): screen = macScreen
         case .show(.help): screen = helpScreen
+        case .show(.menu): screen = menuScreen
+        case let .menuToggle(item):
+            editMenu { $0.toggle(item) }
+            screen = menuScreen
+        case let .menuColumns(columns):
+            editMenu { $0.columns = columns }
+            screen = menuScreen
+        case .menuDone:
+            if let messageID { await delete(messageID) }
+            await show(.home, tapID: nil)
+            return
+        case let .runCommand(id):
+            if let messageID { await delete(messageID) }
+            await run(commandID: id)
+            return
         case .cleanupAsk: screen = BotScreens.cleanupConfirm
         case .allCommands:
             await sendAllCommands()
@@ -381,6 +411,66 @@ final class TelegramBotController {
             return
         }
         if let messageID { await edit(messageID, screen) } else { _ = await send(screen) }
+    }
+
+    // MARK: - The menu and quick commands
+
+    /// The menu at the bottom for the current profile.
+    var currentMenu: BotMenu {
+        BotMenu(settings.telegramBot.menu(for: currentProfile()?.id), commands: settings.quickCommands)
+    }
+
+    /// The menu the bot's ⚙️ edits: the current profile's own, if it has one, else the common one.
+    private var editedProfile: String? {
+        currentProfile().flatMap { settings.telegramBot.hasOwnMenu($0.id) ? $0.id : nil }
+    }
+
+    private func editMenu(_ change: (inout BotMenuConfig) -> Void) {
+        var config = settings.telegramBot.menu(for: editedProfile)
+        change(&config)
+        settings.telegramBot.setMenu(config, for: editedProfile)
+    }
+
+    private var menuScreen: BotMessage {
+        let profile = editedProfile.flatMap { _ in currentProfile()?.name }
+        return BotScreens.menuSetup(settings.telegramBot.menu(for: editedProfile), commands: settings.quickCommands, profile: profile)
+    }
+
+    /// The profile changed: if its menu differs from the one in the chat, 🏠 brings the new one.
+    func profileChanged() {
+        guard isActive(), answersHere, !chatID.isEmpty, let sentMenu, sentMenu != currentMenu.entries.map(\.item) else { return }
+        Task { await show(.home, tapID: nil) }
+    }
+
+    /// «Обновить меню в Telegram» in Settings.
+    func refreshMenu() async {
+        guard !chatID.isEmpty else { status = String(localized: "Сначала привяжите чат"); return }
+        status = await show(.home, tapID: nil) ? String(localized: "Отправлено") : String(localized: "Не отправилось: проверьте токен и ID чата")
+    }
+
+    /// A quick command from the menu: over the shared bot only with its switch on, and then always asked first (§7);
+    /// otherwise asked first when the command says so.
+    private func askOrRun(_ id: String) async {
+        guard let command = settings.quickCommands.first(where: { $0.id == id }) else { return }
+        if usesSharedBot, settings.telegramBot.commandsOverShared != true {
+            _ = await send(BotMessage(html: "🔒 " + RunMessage.escape(String(localized: "Быстрые команды через общий бот выключены. На Маке: Настройки → Модули → Telegram → «Быстрые команды через общий бот»."))))
+            return
+        }
+        if command.confirm || usesSharedBot {
+            _ = await send(BotScreens.confirmCommand(command))
+        } else {
+            await run(commandID: id)
+        }
+    }
+
+    private func run(commandID id: String) async {
+        guard let command = settings.quickCommands.first(where: { $0.id == id }) else { return }
+        if usesSharedBot, settings.telegramBot.commandsOverShared != true { return }
+        AppLog.info("Telegram: quick command started")
+        Task {
+            let result = await runCommand(command)
+            _ = await send(BotMessage(html: BotScreens.commandResult(command, ok: result.ok, text: result.text)))
+        }
     }
 
     // MARK: - Reports and cleanup
