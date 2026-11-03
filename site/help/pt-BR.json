@@ -466,7 +466,7 @@
       "title" : "Ilha do notch"
     },
     {
-      "beta" : true,
+      "beta" : false,
       "group" : "Mac",
       "id" : "layout",
       "sections" : [
@@ -494,7 +494,7 @@
         }
       ],
       "steps" : [
-        "Ative «Versões beta» em «Geral» e depois «Layout do teclado» na página «Módulos»."
+        "Ative «Layout do teclado» na página «Módulos»."
       ],
       "summary" : "Uma palavra digitada no layout errado é redigitada sozinha no certo, e o layout muda. Shift duas vezes: a última palavra; ⌥⇧: o texto selecionado. O idioma fica na barra de menus.",
       "title" : "Layout do teclado"

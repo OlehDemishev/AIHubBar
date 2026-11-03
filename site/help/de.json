@@ -466,7 +466,7 @@
       "title" : "Notch-Insel"
     },
     {
-      "beta" : true,
+      "beta" : false,
       "group" : "Mac",
       "id" : "layout",
       "sections" : [
@@ -494,7 +494,7 @@
         }
       ],
       "steps" : [
-        "Aktivieren Sie „Beta-Versionen“ unter „Allgemein“, dann „Tastaturlayout“ auf der Seite „Module“."
+        "Aktivieren Sie „Tastaturlayout“ auf der Seite „Module“."
       ],
       "summary" : "Ein Wort im falschen Tastaturlayout wird von selbst im richtigen neu geschrieben, und das Layout wechselt. Zweimal Shift – das letzte Wort, ⌥⇧ – der markierte Text. Die Sprache steht in der Menüleiste.",
       "title" : "Tastaturlayout"

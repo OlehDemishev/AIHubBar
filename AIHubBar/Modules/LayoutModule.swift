@@ -11,7 +11,6 @@ extension ModuleDefinition {
         title: String(localized: "Раскладка"),
         summary: String(localized: "Слово, набранное не в той раскладке («ghbdtn»), исправляется само («привет»), и раскладка переключается. Двойной Shift — последнее слово, ⌥⇧ — выделенный текст. Язык — в строке меню."),
         tagline: String(localized: "Исправляет текст не в той раскладке"),
-        isBeta: true,
         isPanelBlock: false,
         places: [.menuBar],
         ownMenuBarItem: true,

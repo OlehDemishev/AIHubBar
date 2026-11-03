@@ -466,7 +466,7 @@
       "title" : "Notch Island"
     },
     {
-      "beta" : true,
+      "beta" : false,
       "group" : "Mac",
       "id" : "layout",
       "sections" : [
@@ -494,7 +494,7 @@
         }
       ],
       "steps" : [
-        "Turn on “Beta Builds” in “General”, then “Keyboard Layout” on the “Modules” page."
+        "Turn on “Keyboard Layout” on the “Modules” page."
       ],
       "summary" : "A word typed in the wrong keyboard layout is retyped in the right one by itself, and the layout switches. Double Shift converts the last word, ⌥⇧ the selected text. The language is in the menu bar.",
       "title" : "Keyboard Layout"

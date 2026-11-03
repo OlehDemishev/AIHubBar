@@ -205,7 +205,12 @@ struct BetaRow: View {
         @Bindable var settings = settings
         Toggle(isOn: $settings.betaUpdates) {
             Text("Бета-версии")
-            Text("Новые сборки раньше всех и функции на испытании: \(ModuleKind.allCases.filter(\.isBeta).map(\.title).joined(separator: ", ")). Может работать с ошибками; выключите — останетесь на этой версии до следующего обычного выпуска.")
+            let testing = ModuleKind.allCases.filter(\.isBeta).map(\.title)
+            if testing.isEmpty {
+                Text("Новые сборки раньше всех. Может работать с ошибками; выключите — останетесь на этой версии до следующего обычного выпуска.")
+            } else {
+                Text("Новые сборки раньше всех и функции на испытании: \(testing.joined(separator: ", ")). Может работать с ошибками; выключите — останетесь на этой версии до следующего обычного выпуска.")
+            }
         }
     }
 }

@@ -49,7 +49,7 @@ struct ModuleRegistryTests {
 
     @Test func flagsAsBefore() {
         #expect(ModuleKind.allCases.filter(\.isBuiltIn) == [.limits, .sessions, .upcoming, .projects, .reports])
-        #expect(ModuleKind.allCases.filter(\.isBeta) == [.layout])
+        #expect(ModuleKind.allCases.filter(\.isBeta).isEmpty)
         #expect(ModuleKind.allCases.filter { !$0.isPanelBlock } == [.notch, .layout, .quickPrompt, .telegram])
         #expect(ModuleKind.upcoming.definition.bringIn == .calendar && ModuleKind.projects.definition.bringIn == .profilePage)
     }
