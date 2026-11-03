@@ -12,7 +12,7 @@ struct TelegramBotSettings: Codable, Equatable, Sendable {
 /// One update from `getUpdates` the bot looks at: a text message or a button press.
 struct BotUpdate: Equatable, Sendable {
     enum Kind: Equatable, Sendable {
-        case message(text: String)
+        case message(text: String, messageID: Int?)
         case press(callbackID: String, data: String, messageID: Int?)
     }
 
@@ -52,7 +52,7 @@ struct BotUpdate: Equatable, Sendable {
                     updateID: id, chatID: Self.id(chat["id"]), fromID: Self.id((message["from"] as? [String: Any])?["id"]),
                     isPrivate: chat["type"] as? String == "private",
                     date: (message["date"] as? NSNumber).map { Date(timeIntervalSince1970: $0.doubleValue) },
-                    kind: .message(text: text)
+                    kind: .message(text: text, messageID: message["message_id"] as? Int)
                 ))
             } else if let callback = result["callback_query"] as? [String: Any],
                       let callbackID = callback["id"] as? String, let data = callback["data"] as? String {
@@ -198,9 +198,37 @@ struct BotMessage: Equatable, Sendable {
 
     var html: String
     var buttons: [[Button]] = []
+    /// Carries the menu at the bottom (`BotMenu`) instead of inline buttons: a message has one or the other.
+    var installsMenu = false
 
     var replyMarkup: [String: Any] {
-        ["inline_keyboard": buttons.map { row in row.map { ["text": $0.title, "callback_data": $0.route.data] } }]
+        if installsMenu { return BotMenu.replyMarkup }
+        return ["inline_keyboard": buttons.map { row in row.map { ["text": $0.title, "callback_data": $0.route.data] } }]
+    }
+}
+
+/// The menu that stays at the bottom of the chat instead of the keyboard (SPEC-telegram §2): a press sends its title as
+/// a message, which the bot reads back as a screen.
+enum BotMenu {
+    static let rows: [[BotScreen]] = [[.home, .reports], [.mac, .help]]
+
+    static func title(_ screen: BotScreen) -> String {
+        switch screen {
+        case .home: "🏠 " + String(localized: "Главная")
+        case .reports: "📊 " + String(localized: "Отчёты")
+        case .mac: "🧹 " + String(localized: "Мак")
+        case .help: "❓ " + String(localized: "Команды")
+        }
+    }
+
+    /// The screen a menu press asks for; nil for any other text.
+    static func screen(forText text: String) -> BotScreen? {
+        let text = text.trimmingCharacters(in: .whitespaces)
+        return BotScreen.allCases.first { title($0) == text }
+    }
+
+    static var replyMarkup: [String: Any] {
+        ["keyboard": rows.map { row in row.map { ["text": title($0)] } }, "is_persistent": true, "resize_keyboard": true]
     }
 }
 

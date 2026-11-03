@@ -5,16 +5,17 @@
 **Updated:** 2026-11-03
 
 **Now:**
-- nothing in progress; merged 2026-11-03: #241 Codex session states, #240 quick command shortcuts, #238 «Быстрый запрос», #236 content spec, #242 «Telegram» stage 1
+- `feat/telegram-menu`: Telegram menu always at the bottom of the chat (persistent reply keyboard) — PR open
+- merged 2026-11-03: #241 Codex session states, #240 quick command shortcuts, #238 «Быстрый запрос», #236 content spec, #242 «Telegram» stage 1
 
 **Next:**
 - next beta or 0.5.1 carries stage 8 (#230–#232) and #236–#242: 0.5.1-beta.1 was built from 27c5e2d, before them
-- Telegram (docs/specs/SPEC-telegram.md): stage 2 — sessions and requests in the bot, approvals bot moved in, notification settings; after Oleh connects the new bot
+- Telegram (docs/specs/SPEC-telegram.md): stage 2 — sessions and requests in the bot, approvals bot moved in, notification settings
 - content (docs/specs/SPEC-content.md, agreed): stage 1 — walkthrough of the «Тексты» profile on a sample folder, then «Версии», then batch tasks
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/specs/SPEC-windows.md §9, stage 2–3 leftovers)
 
 **Needs Oleh:**
-- Telegram bot: new bot at @BotFather → Mac mini: Settings → Modules → «Telegram» on, paste the token, «Привязать чат» → «Start»; then /menu. Reports keep coming from the `_daily-report` bot until config.json points at the new one (`python3 report.py --setup-telegram` with the module off). Delete `_daily-report/bot.py` and `install-bot.sh`
+- Telegram: after the menu PR is installed, send /menu once — the menu appears at the bottom; then try 📊 and 🧹. Delete `_daily-report/bot.py` and `install-bot.sh`
 - «Быстрый запрос»: Settings → Modules → «Быстрый запрос» on, then ⌃⌥P from Terminal or Xcode — send one task to the background and one to Codex
 - Settings → Codex → «Установить hook», then once in `codex` type `/hooks` and trust AI Hub Bar's hooks (Codex skips untrusted hooks); then check a Codex row in «Сессии» goes «ждёт» on an approval prompt
 - quick command shortcuts: Settings → Modules → «Быстрые команды» → a command → «Сочетание клавиш», record one and press it
@@ -25,6 +26,12 @@
 - «Раскладка»: tried live in TextEdit, Safari, Chrome (⌥⇧ too); Telegram and Notes are yours to try (not typed into by the agent)
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-03 — Telegram: the menu at the bottom of the chat (branch `feat/telegram-menu`)
+
+Done: Oleh asked for a menu that is always there instead of `/` commands. `BotMenu` (persistent reply keyboard: 🏠 Главная · 📊 Отчёты / 🧹 Мак · ❓ Команды); a press opens that screen as a new message and deletes the press and the earlier menu screens (kept while a report or cleanup edits one); 🏠 from the menu, /menu, /start, «Проверить» and the chat binding carry the menu. Spec §2 and §8 updated: Oleh connected the `_daily-report` bot (one chat with the reports); the wrong `report.py --setup-telegram` hint removed (it keeps an existing token). No new strings.
+Checked: scripts/check.sh green; 2 new tests (the menu's markup and titles read back, a message carries inline buttons or the menu). Live: Oleh's bot answered (`help.txt` screenshot); the bottom menu itself not yet tried live.
+Left: stages 2–4 as before; their sections join the bottom menu.
 
 ## 2026-11-03 — «Telegram» module: spec and stage 1 (branch `feat/telegram-bot`)
 

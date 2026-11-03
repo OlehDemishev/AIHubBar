@@ -31,6 +31,10 @@ final class TelegramBotController {
     private var lastRead: Date?
     private var bindingExpires: Date?
     private var commandsSetFor: String?
+    /// Screens opened from the bottom menu, oldest first; a new one replaces them so the chat keeps one or two.
+    private var menuScreens: [Int] = []
+    /// The latest message that carries the bottom menu: kept while other screens come and go.
+    private var menuCarrier: Int?
     private let macName = Host.current().localizedName ?? "Mac"
 
     init(settings: AppSettings, sessions: SessionStore, runs: RunStore, usage: UsageStore, approvals: TelegramApprovals) {
@@ -136,7 +140,7 @@ final class TelegramBotController {
     func test() async {
         guard let token else { status = String(localized: "Сначала сохраните токен бота"); return }
         guard !chatID.isEmpty else { status = String(localized: "Сначала привяжите чат"); return }
-        let ok = await send(homeScreen, token: token) != nil
+        let ok = await show(.home, tapID: nil, token: token)
         status = ok ? String(localized: "Отправлено") : String(localized: "Бот не может написать в этот чат — откройте его в Telegram и нажмите «Start»")
     }
 
@@ -187,22 +191,26 @@ final class TelegramBotController {
     }
 
     private func handle(_ update: BotUpdate, token: String, afterGap: Bool) async {
-        if case let .message(text) = update.kind, update.isPrivate, let code = bindingCode,
+        if case let .message(text, _) = update.kind, update.isPrivate, let code = bindingCode,
            BotCommand(text: text) == .start(code: code), !update.isStale(now: .now) {
             settings.telegramChatID = update.chatID
             cancelBinding()
             await Telegram.loadOwnBot(chatID: update.chatID)
             AppLog.info("Telegram chat bound")
             _ = await send(BotMessage(html: "✅ " + RunMessage.escape(String(localized: "Чат привязан к AI Hub Bar."))), token: token)
-            _ = await send(homeScreen, token: token)
+            await show(.home, tapID: nil, token: token)
             return
         }
         // Anyone else who found the bot gets nothing back.
         guard update.isFrom(chat: chatID) else { return }
         switch update.kind {
-        case let .message(text):
+        case let .message(text, messageID):
             guard !update.isStale(now: .now) else {
                 AppLog.info("Telegram: an old command skipped")
+                return
+            }
+            if let screen = BotMenu.screen(forText: text) {
+                await show(screen, tapID: messageID, token: token)
                 return
             }
             guard let command = BotCommand(text: text) else { return }
@@ -225,7 +233,7 @@ final class TelegramBotController {
     private func run(_ command: BotCommand, token: String) async {
         switch command {
         case .menu, .start:
-            _ = await send(homeScreen, token: token)
+            await show(.home, tapID: nil, token: token)
         case .help:
             _ = await send(helpScreen, token: token)
         case let .report(ai, hours):
@@ -242,6 +250,33 @@ final class TelegramBotController {
         case .unknown:
             _ = await send(BotMessage(html: RunMessage.escape(String(localized: "Не знаю такой команды. Все команды: /help"))), token: token)
         }
+    }
+
+    /// A screen from the bottom menu (or /menu) as a new message at the bottom of the chat. 🏠 carries the menu itself,
+    /// so it is set again whenever it is shown; the menu press and the screens before it are deleted (not while a report
+    /// or cleanup still edits one). Returns whether it was sent.
+    @discardableResult
+    private func show(_ screen: BotScreen, tapID: Int?, token: String) async -> Bool {
+        var message: BotMessage
+        switch screen {
+        case .home:
+            message = homeScreen
+            message.buttons = []
+            message.installsMenu = true
+        case .reports: message = reportsScreen(job: job)
+        case .mac: message = macScreen
+        case .help: message = helpScreen
+        }
+        guard let id = await send(message, token: token) else { return false }
+        if let tapID { await delete(tapID, token: token) }
+        if job == nil {
+            let keep = message.installsMenu ? [] : [menuCarrier].compactMap { $0 }
+            for old in menuScreens where !keep.contains(old) { await delete(old, token: token) }
+            menuScreens = keep
+        }
+        if message.installsMenu { menuCarrier = id }
+        menuScreens.append(id)
+        return true
     }
 
     private func press(_ route: BotRoute, messageID: Int?, token: String) async {
@@ -393,6 +428,11 @@ final class TelegramBotController {
         ], timeout: 20)
     }
 
+    /// Bots may delete messages in a private chat for 48 hours; older ones simply stay.
+    private func delete(_ messageID: Int, token: String) async {
+        _ = await Self.call(token, "deleteMessage", ["chat_id": chatID, "message_id": messageID], timeout: 20)
+    }
+
     private func answerPress(_ id: String, _ text: String?, token: String) async {
         var parameters: [String: Any] = ["callback_query_id": id]
         if let text { parameters["text"] = text }
@@ -410,7 +450,7 @@ final class TelegramBotController {
         do {
             let (data, response) = try await URLSession.shared.data(for: request)
             let code = (response as? HTTPURLResponse)?.statusCode ?? 0
-            if code != 200, !(code == 400 && method == "editMessageText") { AppLog.error("Telegram \(method) returned HTTP \(code)") }
+            if code != 200, !(code == 400 && ["editMessageText", "deleteMessage"].contains(method)) { AppLog.error("Telegram \(method) returned HTTP \(code)") }
             return (code, code == 200 ? data : nil)
         } catch {
             if (error as? URLError)?.code != .timedOut { AppLog.error("Telegram \(method) failed") }

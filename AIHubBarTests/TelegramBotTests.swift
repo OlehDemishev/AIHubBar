@@ -22,7 +22,7 @@ struct TelegramBotTests {
         ]))
         #expect(next == 9)
         #expect(updates == [
-            BotUpdate(updateID: 5, chatID: "42", fromID: "42", isPrivate: true, date: Date(timeIntervalSince1970: 1_700_000_000), kind: .message(text: "/menu")),
+            BotUpdate(updateID: 5, chatID: "42", fromID: "42", isPrivate: true, date: Date(timeIntervalSince1970: 1_700_000_000), kind: .message(text: "/menu", messageID: 1)),
             BotUpdate(updateID: 6, chatID: "42", fromID: "42", isPrivate: true, date: nil, kind: .press(callbackID: "c1", data: "nav:mac", messageID: 9)),
         ])
         #expect(BotUpdate.parse(Data("garbage".utf8)).updates.isEmpty)
@@ -47,7 +47,7 @@ struct TelegramBotTests {
         let now = Date(timeIntervalSince1970: 1_700_000_000)
         func message(minutesAgo: Double?) -> BotUpdate {
             BotUpdate(updateID: 1, chatID: "1", fromID: "1", isPrivate: true,
-                      date: minutesAgo.map { now.addingTimeInterval(-$0 * 60) }, kind: .message(text: "/report"))
+                      date: minutesAgo.map { now.addingTimeInterval(-$0 * 60) }, kind: .message(text: "/report", messageID: nil))
         }
         #expect(!message(minutesAgo: 29).isStale(now: now))
         #expect(message(minutesAgo: 31).isStale(now: now))
@@ -82,6 +82,28 @@ struct TelegramBotTests {
         #expect(!BotRoute.show(.home).isAction && !BotRoute.cleanupAsk.isAction && !BotRoute.allCommands.isAction)
         #expect(BotRoute.cleanupRun.isAction && BotRoute.cleanupCheck.isAction && BotRoute.report(ai: false, hours: nil).isAction)
         #expect(BotRoute.answer(requestID: "a", allow: true).isAction)
+    }
+
+    // MARK: The bottom menu
+
+    @Test func bottomMenuStaysAndReadsBack() throws {
+        let markup = BotMenu.replyMarkup
+        #expect(markup["is_persistent"] as? Bool == true && markup["resize_keyboard"] as? Bool == true)
+        let rows = try #require(markup["keyboard"] as? [[[String: String]]])
+        #expect(rows.flatMap { $0 }.map { $0["text"] } == ["🏠 Главная", "📊 Отчёты", "🧹 Мак", "❓ Команды"])
+        for screen in BotScreen.allCases {
+            #expect(BotMenu.screen(forText: BotMenu.title(screen)) == screen)
+        }
+        #expect(BotMenu.screen(forText: " 🧹 Мак ") == .mac)
+        #expect(BotMenu.screen(forText: "Мак") == nil && BotMenu.screen(forText: "/menu") == nil)
+    }
+
+    /// A message has inline buttons or the bottom menu, never both.
+    @Test func menuCarrierHasNoInlineButtons() {
+        var message = BotScreens.home(BotHomeState(macName: "Mac", working: 0, waiting: 0, runs: 0), now: .now)
+        #expect(message.replyMarkup["inline_keyboard"] != nil)
+        message.installsMenu = true
+        #expect(message.replyMarkup["inline_keyboard"] == nil && message.replyMarkup["keyboard"] != nil)
     }
 
     // MARK: Commands
