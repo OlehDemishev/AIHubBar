@@ -73,14 +73,9 @@ enum ModulePlace: CaseIterable, Sendable {
     static func of(_ kind: ModuleKind) -> [ModulePlace] { kind.definition.places }
 }
 
-/// Edits the menu bar the way Settings → «Строка меню» does: the current profile gets every change too.
+/// Menu bar helpers for a module's page; changes go through `ModeStore.setMenuBar`.
 @MainActor
 enum MenuBarEdit {
-    static func store(_ config: MenuBarConfig, settings: AppSettings, modes: ModeStore) {
-        settings.menuBarConfig = config
-        modes.setMenuBar(config)
-    }
-
     /// What switching a module's menu bar place on brings in.
     static func primaryKinds(_ kind: ModuleKind) -> [MenuBarElement.Kind] { kind.definition.primaryMenuBarKinds }
 }
@@ -111,7 +106,7 @@ struct ModulePlaces: View {
     private func available(_ place: ModulePlace) -> Bool {
         guard place == .panel else { return true }
         guard let mode = modes.current else { return false }
-        return !kind.isBuiltIn || mode.normalizedModules(hiddenBlocks: []).contains { $0.kind == kind }
+        return !kind.isBuiltIn || mode.moduleList.contains { $0.kind == kind }
     }
 
     private func help(_ place: ModulePlace) -> String {
@@ -139,7 +134,7 @@ struct ModulePlaces: View {
                 // «Раскладка»'s language is an item of its own, not an element of the main one.
                 Binding(get: { settings.layout.menuBarIcon }, set: { settings.layout.menuBarIcon = $0 })
             } else {
-                Binding(get: { menuBarKinds.contains { settings.menuBarConfig.element($0).enabled } }, set: { setMenuBar($0) })
+                Binding(get: { menuBarKinds.contains { modes.menuBar.element($0).enabled } }, set: { setMenuBar($0) })
             }
         case .island:
             Binding(get: { [settings.notch.leftEar, settings.notch.rightEar].contains(where: ears.contains) }, set: { setIsland($0) })
@@ -152,7 +147,7 @@ struct ModulePlaces: View {
 
     private func setPanel(_ shown: Bool) {
         guard var mode = modes.current else { return }
-        var list = mode.normalizedModules(hiddenBlocks: [])
+        var list = mode.moduleList
         if let index = list.firstIndex(where: { $0.kind == kind }) {
             list[index].shown = shown
         } else if shown, kind.isPanelBlock {
@@ -165,12 +160,12 @@ struct ModulePlaces: View {
     private var menuBarKinds: [MenuBarElement.Kind] { kind.definition.menuBarKinds }
 
     private func setMenuBar(_ on: Bool) {
-        var config = settings.menuBarConfig
+        var config = modes.menuBar
         for element in on ? MenuBarEdit.primaryKinds(kind) : menuBarKinds {
             config.set(element) { $0.enabled = on }
         }
         config.preset = .custom
-        MenuBarEdit.store(config, settings: settings, modes: modes)
+        modes.setMenuBar(config)
     }
 
     private var ears: [NotchEar] { kind.definition.island?.ears ?? [] }
@@ -579,7 +574,7 @@ struct PanelBuilder: View {
                         .clipShape(RoundedRectangle(cornerRadius: 10))
                         .overlay(RoundedRectangle(cornerRadius: 10).strokeBorder(Color.secondary.opacity(0.2), lineWidth: 0.5))
                         let addable = modes.activeModules.filter { kind in
-                            kind.isPanelBlock && !kind.isBuiltIn && !mode.normalizedModules(hiddenBlocks: []).contains { $0.kind == kind }
+                            kind.isPanelBlock && !kind.isBuiltIn && !mode.moduleList.contains { $0.kind == kind }
                         }
                         if !addable.isEmpty {
                             Menu {
@@ -606,12 +601,12 @@ struct PanelBuilder: View {
     }
 
     private func visible(_ mode: Mode) -> [ProfileModule] {
-        mode.normalizedModules(hiddenBlocks: []).filter { $0.kind.isPanelBlock && modes.isOn($0.kind) }
+        mode.moduleList.filter { $0.kind.isPanelBlock && modes.isOn($0.kind) }
     }
 
     /// `kind` takes `target`'s place; modules switched off keep their places in the full list.
     private func move(_ mode: Mode, _ kind: ModuleKind, onto target: ModuleKind) {
-        var list = mode.normalizedModules(hiddenBlocks: [])
+        var list = mode.moduleList
         guard kind != target, let from = list.firstIndex(where: { $0.kind == kind }),
               let to = list.firstIndex(where: { $0.kind == target }) else { return }
         list.insert(list.remove(at: from), at: to)
@@ -676,7 +671,7 @@ private struct PanelBuilderRow: View {
 
     private func set(_ change: (inout ProfileModule) -> Void) {
         var changed = mode
-        var list = mode.normalizedModules(hiddenBlocks: [])
+        var list = mode.moduleList
         guard let index = list.firstIndex(where: { $0.kind == module.kind }) else { return }
         change(&list[index])
         changed.modules = list

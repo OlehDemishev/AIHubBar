@@ -33,9 +33,9 @@ struct MenuBarSettings: View {
                 Text("Разделители — сколько угодно раз")
             }
             Section {
-                ElementPalette(config: settings.menuBarConfig, modules: modes.activeModules) { kind in
+                ElementPalette(config: modes.menuBar, modules: modes.activeModules) { kind in
                     edit { config in config.set(kind) { $0.enabled.toggle() } }
-                    if settings.menuBarConfig.element(kind).enabled { selection = .element(kind) }
+                    if modes.menuBar.element(kind).enabled { selection = .element(kind) }
                 }
             } header: {
                 Text("Элементы")
@@ -44,7 +44,7 @@ struct MenuBarSettings: View {
             }
             Section {
                 Picker("Набор", systemImage: "wand.and.stars", selection: Binding(
-                    get: { settings.menuBarConfig.preset },
+                    get: { modes.menuBar.preset },
                     set: { choose($0) }
                 )) {
                     ForEach(MenuBarConfig.Preset.allCases, id: \.self) { Text($0.title).tag($0) }
@@ -69,10 +69,10 @@ struct MenuBarSettings: View {
 
     // MARK: Preview
 
-    private var data: MenuBarData { (sample ? MenuBarData.sample : liveData).without(modes.switchedOff) }
+    private var data: MenuBarData { (sample ? MenuBarData.sample : liveData).without(modes.silencedModules) }
 
     private var preview: some View {
-        let config = settings.menuBarConfig
+        let config = modes.menuBar
         let width = MenuBarRenderer.width(config, data)
         return VStack(alignment: .leading, spacing: 10) {
             HStack {
@@ -126,7 +126,7 @@ struct MenuBarSettings: View {
 
     /// The switched-on elements and the dividers after each, in menu bar order.
     private var tokens: [OrderToken] {
-        let config = settings.menuBarConfig
+        let config = modes.menuBar
         var result = config.dividers.filter { $0.after == nil }.map(OrderToken.divider)
         for element in config.elements {
             if element.enabled { result.append(.element(element.kind)) }
@@ -135,7 +135,7 @@ struct MenuBarSettings: View {
         return result
     }
 
-    private var lastShown: MenuBarElement.Kind? { settings.menuBarConfig.elements.last(where: \.enabled)?.kind }
+    private var lastShown: MenuBarElement.Kind? { modes.menuBar.elements.last(where: \.enabled)?.kind }
 
     private var order: some View {
         FlowLayout(spacing: 6) {
@@ -215,8 +215,8 @@ struct MenuBarSettings: View {
 
     @ViewBuilder private var inspector: some View {
         switch selection {
-        case let .element(kind) where settings.menuBarConfig.element(kind).enabled:
-            let element = settings.menuBarConfig.element(kind)
+        case let .element(kind) where modes.menuBar.element(kind).enabled:
+            let element = modes.menuBar.element(kind)
             VStack(alignment: .leading, spacing: 8) {
                 HStack {
                     Label(element.kind.title, systemImage: element.kind.symbol).font(.headline)
@@ -232,7 +232,7 @@ struct MenuBarSettings: View {
                 }
             }
         case let .divider(id):
-            if let divider = settings.menuBarConfig.dividers.first(where: { $0.id == id }) {
+            if let divider = modes.menuBar.dividers.first(where: { $0.id == id }) {
                 HStack {
                     HStack(spacing: 8) {
                         DividerGlyph(style: divider.style)
@@ -265,26 +265,26 @@ struct MenuBarSettings: View {
     // MARK: Editing
 
     private func choose(_ preset: MenuBarConfig.Preset) {
-        var config = settings.menuBarConfig
+        var config = modes.menuBar
         if preset != .custom {
             let made = MenuBarConfig.make(preset)
             config.elements = made.elements
         }
         config.preset = preset
-        MenuBarEdit.store(config, settings: settings, modes: modes)
+        modes.setMenuBar(config)
     }
 
     private func edit(_ change: (inout MenuBarConfig) -> Void) {
-        var config = settings.menuBarConfig
+        var config = modes.menuBar
         change(&config)
         config.preset = .custom
-        MenuBarEdit.store(config, settings: settings, modes: modes)
+        modes.setMenuBar(config)
     }
 
     private func binding<Value>(_ path: WritableKeyPath<MenuBarConfig, Value>) -> Binding<Value> {
         Binding(
-            get: { settings.menuBarConfig[keyPath: path] },
-            set: { var config = settings.menuBarConfig; config[keyPath: path] = $0; MenuBarEdit.store(config, settings: settings, modes: modes) }
+            get: { modes.menuBar[keyPath: path] },
+            set: { var config = modes.menuBar; config[keyPath: path] = $0; modes.setMenuBar(config) }
         )
     }
 }

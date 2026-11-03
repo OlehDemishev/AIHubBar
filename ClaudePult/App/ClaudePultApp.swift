@@ -89,7 +89,7 @@ struct ClaudePultApp: App {
         usage.isActive = { [modes] in modes.isOn(.limits) }
         hub.isActive = { [modes] in modes.isOn(.limits) }
         Notifier.frequency = { [settings, modes] kind in
-            if let module = kind.module, modes.installedModules.contains(module), !modes.isOn(module) { return .off }
+            if let module = kind.module, modes.isSilenced(module) { return .off }
             return settings.frequency(kind)
         }
         monitor.isActive = { [modes] in modes.isOn(.resources) }
@@ -266,7 +266,7 @@ struct ClaudePultApp: App {
         data.modelWeeks = Dictionary((usage.snapshot?.otherWindows ?? []).map { ($0.key, $0.utilization) }) { first, _ in first }
         data.sessionResetsAt = usage.snapshot?.session?.resetsAt
         if case let .runsOutAt(date) = usage.forecast { data.forecastRunsOut = date }
-        if settings.menuBarConfig.element(.disk).enabled {
+        if modes.menuBar.element(.disk).enabled {
             data.diskFreeBytes = store.report?.diskFreeBytes ?? DiskSpace.freeBytes()
         }
         data.deadline = calendar.nearest().map { CalendarText.menuBar($0) }
@@ -276,7 +276,7 @@ struct ClaudePultApp: App {
         data.otherAI = hub.percents
         data.modeName = modes.current?.name
         data.modeIcon = modes.current?.icon
-        return data.without(modes.switchedOff)
+        return data.without(modes.silencedModules)
     }
 
     var body: some Scene {
@@ -304,7 +304,7 @@ struct ClaudePultApp: App {
                 .environment(engine)
                 .environment(calendar)
         } label: {
-            MenuBarLabel(state: MenuBarState(config: notchIsland.takesMenuBarSummary ? settings.menuBarConfig.iconOnly : settings.menuBarConfig,
+            MenuBarLabel(state: MenuBarState(config: notchIsland.takesMenuBarSummary ? modes.menuBar.iconOnly : modes.menuBar,
                                              data: menuBarData))
                 .environment(requests)
         }

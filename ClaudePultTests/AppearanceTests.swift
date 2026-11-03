@@ -41,7 +41,7 @@ struct AppearanceTests {
 
         reloaded.resetAppearance()
         #expect(reloaded.panelTextSize == .normal)
-        #expect(reloaded.hiddenBlocks.isEmpty)
+        #expect(!reloaded.shows(.commands), "the look's reset leaves old block flags alone: profiles decide the panel")
         #expect(AppSettings(defaults: defaults).panelTheme == .system)
         #expect(AppSettings(defaults: defaults).panelBackground == .standard)
     }

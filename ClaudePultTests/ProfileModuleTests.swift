@@ -119,8 +119,7 @@ struct ProfileModuleTests {
         store.update(quiet)
 
         store.select(quiet.id)
-        #expect(!settings.shows(.limits))
-        #expect(settings.shows(.sessions))
+        #expect(!store.panelModules.contains(.limits))
         #expect(store.panelModules.first == .sessions)
         #expect(settings.menuBarConfig == .make(.minimum))
 
@@ -131,7 +130,8 @@ struct ProfileModuleTests {
         store.setMenuBar(custom)
         store.select(first.id)
         #expect(settings.menuBarConfig == .make(.limits))
-        #expect(settings.shows(.limits))
+        #expect(store.menuBar == .make(.limits))
+        #expect(store.panelModules.contains(.limits))
         store.select(quiet.id)
         #expect(settings.menuBarConfig == custom)
 

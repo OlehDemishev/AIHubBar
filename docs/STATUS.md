@@ -5,7 +5,7 @@
 **Updated:** 2026-11-03
 
 **Now:**
-- nothing in progress; refactoring stage 1 merged (#211, module registry); next — stage 2, one source of truth (docs/SPEC-refactor.md §9)
+- refactoring stage 2 (one source of truth) on branch `refactor/stage2-one-truth`, PR open; next — stage 3, navigation
 
 **Next:**
 - Oleh tries «Раскладка» in his own apps; next beta with fixes: `scripts/release.sh 0.5.0-beta.1 --publish`
@@ -13,7 +13,7 @@
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/SPEC-windows.md §9, stage 2–3 leftovers)
 
 **Needs Oleh:**
-- say when to start stage 2 (one source of truth)
+- review and merge the stage 2 PR
 - look at the new help: panel → «?» and https://olehdemishev.github.io/AIHubBar/help.html
 - look at the new Settings and say what to change next
 - MacBook Air: update to 0.4.0 through Sparkle (Settings → General → Updates) and check the island at the real notch
@@ -21,6 +21,12 @@
 - the beta channel exists now (release `beta`, points to 0.4.0): say when the next beta goes out
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-03 — refactoring stage 2: one source of truth (branch `refactor/stage2-one-truth`)
+
+Done: one rule for modules that go quiet — `ModeStore.isSilenced` (installed but not working: switched off, or a beta module without beta builds) — now used by notifications and the menu bar data alike (the menu bar looked only at `switchedOff`); a module no profile uses still speaks, as Oleh chose. `apply` no longer writes the old panel block flags (`hiddenBlocks`): the panel is `panelModules`, the flags are only read for files from before profiles; the export's legacy `showLimits`/`showSessions`/`menuBar` come from the current profile; the look's reset leaves the flags alone; the panel's redundant `settings.shows(.projects)` check is gone. The menu bar has one writer, `ModeStore.setMenuBar` (profile + the settings' copy for no profile), and one reader, `ModeStore.menuBar` — the menu bar item, its editor, module pages and the assistant use them (`MenuBarEdit.store` removed). The assistant keeps unticked built-in modules as `Set<ModuleKind>` instead of `PanelBlock`s; views use `Mode.moduleList` instead of re-normalizing.
+Checked: all Mac tests green locally (400 → 402; three assertions that pinned the old flag writes now check `panelModules`/`menuBar`; new: one silence rule, legacy export fields from the profile, one menu bar writer). Installed build: «Строка меню» shows Oleh's profile config, and the real menu bar draws it (capsules, his lines, live data).
+Left: `MenuBarData.without` still lists each module's fields (could move into the registry); panel cards — stage 4.
 
 ## 2026-11-03 — refactoring stage 1: module registry (branch `refactor/stage1-module-registry`)
 

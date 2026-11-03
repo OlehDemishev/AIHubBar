@@ -311,7 +311,6 @@ final class AppSettings {
         panelTheme = .system
         panelBackground = .standard
         panelAnimations = true
-        hiddenBlocks = []
     }
 
     static let defaultProjectsDirectory = NSHomeDirectory() + "/Projects"

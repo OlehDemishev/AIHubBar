@@ -273,7 +273,7 @@ private struct ModeEditor: View {
 
     /// The profile's blocks are edited in Settings → «Панель» (SPEC-settings §4); here only what it shows and a way there.
     private var panelSection: some View {
-        let shown = mode.normalizedModules(hiddenBlocks: []).filter { $0.shown && modes.isOn($0.kind) }
+        let shown = mode.moduleList.filter { $0.shown && modes.isOn($0.kind) }
         return Section {
             LabeledContent {
                 Button("Изменить в «Панели»…") {

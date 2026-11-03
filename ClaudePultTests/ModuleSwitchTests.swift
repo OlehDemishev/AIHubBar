@@ -28,7 +28,7 @@ struct ModuleSwitchTests {
         #expect(!modes.isOn(.limits))
         #expect(modes.panelModules == [.sessions, .upcoming, .projects])
         #expect(modes.current?.modules?.first?.kind == .limits, "keeps its place in the profile")
-        #expect(!settings.shows(.limits))
+        #expect(settings.shows(.limits), "the old block flags aren't written any more (SPEC-refactor §4)")
 
         // Read back from disk.
         let reloaded = ModeStore(settings: settings, directory: dir)
@@ -38,7 +38,6 @@ struct ModuleSwitchTests {
         reloaded.setOn(.limits, true)
         #expect(reloaded.isOn(.limits))
         #expect(reloaded.panelModules.first == .limits)
-        #expect(settings.shows(.limits))
     }
 
     /// SPEC-refactor §2.1: switched-off modules travel in exports, and «Заменить всё» takes the file's, not the old ones.
@@ -72,6 +71,40 @@ struct ModuleSwitchTests {
         #expect(looking.modes.first { $0.id == "m2" }?.modules != nil, "normalized in memory")
         #expect(try String(contentsOf: dir.appending(path: "m2.json"), encoding: .utf8) == before)
         #expect(looking.exportBundle().installed?.contains("limits") == true)
+    }
+
+    /// SPEC-refactor §2.2, §4: one rule for which modules go quiet (notifications and menu bar data), and the old
+    /// export fields come from the profile, not from block flags in the settings.
+    @Test func oneRuleForSilenceAndTheProfileForExports() throws {
+        let (modes, settings, dir) = try store()
+        defer { try? FileManager.default.removeItem(at: dir) }
+        #expect(modes.silencedModules.isEmpty)
+        #expect(!modes.isSilenced(.resources), "not installed: nothing to silence")
+        modes.setOn(.limits, false)
+        #expect(modes.silencedModules == [.limits])
+        settings.betaUpdates = true
+        modes.setOn(.layout, true)
+        settings.betaUpdates = false
+        #expect(modes.isSilenced(.layout), "a beta module without beta builds is quiet too")
+
+        var mode = try #require(modes.current)
+        mode.modules = mode.moduleList.map { var module = $0; if module.kind == .sessions { module.shown = false }; return module }
+        modes.update(mode)
+        let appearance = try #require(modes.exportBundle().appearance)
+        #expect(!appearance.showSessions && appearance.showLimits)
+    }
+
+    @Test func theMenuBarHasOneWriter() throws {
+        let (modes, settings, dir) = try store()
+        defer { try? FileManager.default.removeItem(at: dir) }
+        var custom = MenuBarConfig.make(.everything)
+        custom.preset = .custom
+        modes.setMenuBar(custom)
+        #expect(modes.current?.menuBar == custom && settings.menuBarConfig == custom && modes.menuBar == custom)
+        // Without a profile the settings keep it.
+        for mode in modes.modes { modes.delete(mode.id) }
+        modes.setMenuBar(.make(.minimum))
+        #expect(modes.current == nil && modes.menuBar == .make(.minimum))
     }
 
     @Test func optionalModuleInstallsWithItsSwitch() throws {

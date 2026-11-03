@@ -197,11 +197,8 @@ final class ModeStore {
         // The built-in git scanner arrives with the templates (SPEC-modes §9, stage 6).
         // The profile's modules decide what the panel shows (SPEC-profiles §9.2); the blocks in `AppSettings` follow
         // them for the code that still reads those.
-        settings.setShows(.limits, mode.shows(.limits) && !switchedOff.contains(.limits))
-        settings.setShows(.sessions, mode.shows(.sessions) && !switchedOff.contains(.sessions))
-        settings.setShows(.calendar, mode.shows(.upcoming) && !switchedOff.contains(.upcoming))
-        settings.setShows(.projects, mode.shows(.projects) && mode.source.isShownInPanel && !switchedOff.contains(.projects))
-        settings.setShows(.commands, mode.shows(.reports) && !switchedOff.contains(.reports))
+        // What the panel shows is `panelModules` (SPEC-refactor §4); the old blocks in `AppSettings` are only read for
+        // files from before profiles. The settings keep a copy of the profile's menu bar for when there is no profile.
         if let menuBar = mode.menuBar, menuBar != settings.menuBarConfig { settings.menuBarConfig = menuBar }
         didApply?()
     }
@@ -219,6 +216,13 @@ final class ModeStore {
 
     /// «Раскладка» and other beta modules work only with beta builds.
     var isBetaAllowed: Bool { settings.betaUpdates }
+
+    /// Installed but not working — switched off, or a beta module without beta builds: its notifications and its
+    /// menu bar data are dropped. The one rule for both (SPEC-refactor §2.2); a module no profile uses yet still
+    /// speaks (Oleh, 2026-11-03: limit alerts come without a profile).
+    func isSilenced(_ kind: ModuleKind) -> Bool { installedModules.contains(kind) && !isOn(kind) }
+
+    var silencedModules: [ModuleKind] { ModuleKind.allCases.filter(isSilenced) }
 
     /// The working modules, in catalog order.
     var activeModules: [ModuleKind] { ModuleKind.allCases.filter(isOn) }
@@ -238,8 +242,12 @@ final class ModeStore {
         if let current { apply(current) }
     }
 
-    /// Settings → «Строка меню» edits the current profile's menu bar.
+    /// The menu bar shown now: the current profile's, else the one kept in the settings (no profile yet).
+    var menuBar: MenuBarConfig { current?.menuBar ?? settings.menuBarConfig }
+
+    /// The one way to change the menu bar (SPEC-refactor §4): the current profile's, and the settings' copy.
     func setMenuBar(_ config: MenuBarConfig) {
+        if settings.menuBarConfig != config { settings.menuBarConfig = config }
         guard var mode = current, mode.menuBar != config else { return }
         mode.menuBar = config
         update(mode)
@@ -391,9 +399,9 @@ final class ModeStore {
             appearance: .init(
                 textSize: settings.panelTextSize.rawValue, width: settings.panelWidth.rawValue,
                 density: settings.panelDensity.rawValue, theme: settings.panelTheme.rawValue,
-                animations: settings.panelAnimations, showLimits: settings.shows(.limits),
-                showSessions: settings.shows(.sessions), menuBar: settings.menuBarConfig.legacyMode.rawValue,
-                menuBarConfig: settings.menuBarConfig
+                animations: settings.panelAnimations, showLimits: current?.shows(.limits) ?? true,
+                showSessions: current?.shows(.sessions) ?? true, menuBar: menuBar.legacyMode.rawValue,
+                menuBarConfig: menuBar
             ),
             services: settings.aiServices,
             modes: modes.map(synced), enabled: enabledIDs, current: currentID,
