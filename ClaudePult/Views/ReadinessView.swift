@@ -44,7 +44,7 @@ struct ReadinessSection: View {
     @Environment(HookController.self) private var hooks
     @Environment(NotificationPermission.self) private var notifications
     @Environment(LoginItemController.self) private var loginItem
-    @Environment(\.openSettings) private var openSettings
+    @Environment(\.openSettingsPage) private var openSettings
     /// In «Помощь» a Mac with nothing left to do gets one line instead of four rows.
     var collapsesWhenReady = false
     @State private var expanded = false
@@ -97,9 +97,7 @@ struct ReadinessSection: View {
     private func perform(_ action: ReadinessItem.Action) {
         switch action {
         case .openServices:
-            SettingsRoute.open(service: .claude)
-            NSApp.activate()
-            openSettings()
+            openSettings(.service(.claude))
         case .installHooks, .updateHooks: hooks.install()
         case .allowNotifications: notifications.request()
         case .openNotificationSettings: NotificationPermission.openSystemSettings()

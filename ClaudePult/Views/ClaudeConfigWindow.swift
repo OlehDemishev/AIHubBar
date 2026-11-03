@@ -4,7 +4,7 @@ import SwiftUI
 /// «Claude Code» window: every CLAUDE.md / AGENTS.md in one place, and the MCP servers with an on/off switch.
 struct ClaudeConfigWindow: View {
     @Environment(ClaudeConfigStore.self) private var config
-    @AppStorage("claudeConfigTab") private var tab = "instructions"
+    @AppStorage(StorageKey.claudeConfigTab) private var tab = "instructions"
 
     var body: some View {
         TabView(selection: $tab) {

@@ -3,7 +3,7 @@ import SwiftUI
 /// «История буфера» in the panel: search, a click copies the entry back, pin, remove, clear.
 struct ClipboardView: View {
     @Environment(ClipboardHistory.self) private var history
-    @AppStorage("collapsedBlocks") private var collapsedRaw = ""
+    @AppStorage(StorageKey.collapsedBlocks) private var collapsedRaw = ""
     @State private var query = ""
     @State private var copied: String?
 
@@ -78,7 +78,7 @@ struct ClipboardView: View {
 /// «Заметки» in the panel: tabs over Markdown files, an editor, a new note, open in an editor, to the Trash.
 struct NotesView: View {
     @Environment(NotesStore.self) private var notes
-    @AppStorage("collapsedBlocks") private var collapsedRaw = ""
+    @AppStorage(StorageKey.collapsedBlocks) private var collapsedRaw = ""
     @State private var confirmingTrash = false
 
     var body: some View {

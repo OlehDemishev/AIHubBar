@@ -8,8 +8,8 @@ struct CalendarWindow: View {
 
     @Environment(CalendarStore.self) private var store
     @Environment(ModeStore.self) private var modes
-    @AppStorage("calendarScope") private var scope: Scope = .month
-    @AppStorage("calendarCurrentModeOnly") private var currentOnly = false
+    @AppStorage(StorageKey.calendarScope) private var scope: Scope = .month
+    @AppStorage(StorageKey.calendarCurrentModeOnly) private var currentOnly = false
     @State private var anchor = Date.now
     @State private var newEntryDay: Date?
 

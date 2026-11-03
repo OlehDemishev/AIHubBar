@@ -4,7 +4,7 @@ import SwiftUI
 struct KeepAwakeView: View {
     @Environment(KeepAwakeController.self) private var keepAwake
     @Environment(ModeStore.self) private var modes
-    @AppStorage("collapsedBlocks") private var collapsedRaw = ""
+    @AppStorage(StorageKey.collapsedBlocks) private var collapsedRaw = ""
 
     private var collapsed: Bool { PanelBlock.collapsed(in: collapsedRaw).contains(.keepAwake) }
     private var manual: Bool { keepAwake.manualUntil != nil }

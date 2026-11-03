@@ -167,7 +167,7 @@ final class CommandStore {
         if let output, command == .cleanupCheck || command == .cleanupRun {
             cleanupOutput = (command, output, result.date)
             // The spec shows the cleanup check output in a window.
-            if command == .cleanupCheck { requests.openWindow("cleanup-output") }
+            if command == .cleanupCheck { requests.openWindow(.cleanupOutput) }
         }
         if command == .cleanupRun {
             Task { await store.refresh() }

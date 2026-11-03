@@ -5,11 +5,6 @@ import SwiftUI
 /// section (AI, Работа, Mac) and «Сервисы AI» with a page per AI; the chosen page on the right under its header.
 /// One window size for every page.
 struct SettingsView: View {
-    /// What `settingsTab` stores; with `servicesTab` / `settingsModule` it names the open page (`SettingsPane`).
-    enum Tab: String, CaseIterable {
-        case general, modes, modules, panel, appearance, menuBar, services, module
-    }
-
     static let size = CGSize(width: 940, height: 700)
     /// The window can grow; below this the module tiles and the menu bar editor get cramped.
     static let minSize = CGSize(width: 820, height: 560)
@@ -18,18 +13,14 @@ struct SettingsView: View {
     @Environment(AIServiceStore.self) private var services
     @Environment(HubLimitsStore.self) private var hub
     @Environment(ModeStore.self) private var modes
-    @AppStorage(SettingsRoute.tabKey) private var tab: Tab = .general
-    @AppStorage(SettingsRoute.serviceKey) private var service: ServiceTab = .claude
-    @AppStorage(SettingsRoute.moduleKey) private var module: ModuleKind = .limits
+    @AppStorage(StorageKey.settingsPage) private var pane: SettingsPane = .general
     /// «Сервисы AI» folded by default: six rows the sidebar rarely needs.
-    @AppStorage("settingsServicesExpanded") private var servicesExpanded = false
+    @AppStorage(StorageKey.servicesExpanded) private var servicesExpanded = false
     @State private var query = ""
 
     init() {
         SettingsRoute.migrate()
     }
-
-    private var pane: SettingsPane { SettingsPane(tab: tab, service: service, module: module) }
 
     var body: some View {
         NavigationSplitView {
@@ -51,7 +42,7 @@ struct SettingsView: View {
                         if !found.isEmpty {
                             Section("Сервисы AI", isExpanded: Binding(
                                 // Open while searching or while one of them is the page shown.
-                                get: { servicesExpanded || !query.isEmpty || pane.tab == .services },
+                                get: { servicesExpanded || !query.isEmpty || pane.isService },
                                 set: { servicesExpanded = $0 }
                             )) {
                                 ForEach(found, id: \.self) { pane in
@@ -116,9 +107,7 @@ struct SettingsView: View {
     }
 
     private func select(_ new: SettingsPane) {
-        tab = new.tab
-        if case let .service(chosen) = new { service = chosen }
-        if case let .module(chosen) = new { module = chosen }
+        pane = new
     }
 
     private func isSetUp(_ pane: SettingsPane) -> Bool? {
@@ -445,7 +434,7 @@ struct ClaudeSettings: View {
             Section {
                 Button("Открыть инструкции и MCP-серверы…") {
                     NSApp.activate()
-                    openWindow(id: "claude-config")
+                    openWindow(.claudeConfig)
                 }
             } header: {
                 Text("CLAUDE.md и MCP")

@@ -6,7 +6,7 @@ import SwiftUI
 struct ResourcesView: View {
     @Environment(SystemMonitor.self) private var monitor
     @Environment(ModeStore.self) private var modes
-    @AppStorage("collapsedBlocks") private var collapsedRaw = ""
+    @AppStorage(StorageKey.collapsedBlocks) private var collapsedRaw = ""
 
     /// The current profile's choice of metrics (all when it made none).
     private func shows(_ metric: ResourceMetric) -> Bool {

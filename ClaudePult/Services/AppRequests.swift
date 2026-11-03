@@ -7,14 +7,13 @@ import Observation
 @Observable
 final class AppRequests {
     struct WindowRequest: Equatable {
-        var id: String
+        var id: WindowID
         var serial: Int
     }
 
     nonisolated static let notificationName = Notification.Name("com.demishev.claudepult.app-command")
     /// `--app-command` names that open a window instead of running a command.
-    static let windows = ["help": "help", "cleanup-output": "cleanup-output", "settings": "settings", "assistant": "assistant",
-                          "notch-setup": "notch-setup"]
+    static let windows: [String: WindowID] = Dictionary(uniqueKeysWithValues: [WindowID.help, .cleanupOutput, .settings, .assistant, .notchSetup].map { ($0.rawValue, $0) })
     /// Other `--app-command` names handled by the app itself.
     static let actions = ["test-notification", "test-island"]
 
@@ -23,12 +22,12 @@ final class AppRequests {
     @ObservationIgnored private var openedSerial = 0
     private var observer: NSObjectProtocol?
 
-    func openWindow(_ id: String) {
+    func openWindow(_ id: WindowID) {
         window = WindowRequest(id: id, serial: (window?.serial ?? 0) + 1)
     }
 
     /// The window to open now, once: nil when there is none or it was opened already.
-    func takeWindow() -> String? {
+    func takeWindow() -> WindowID? {
         guard let window, window.serial > openedSerial else { return nil }
         openedSerial = window.serial
         return window.id

@@ -5,7 +5,7 @@ import SwiftUI
 struct UpcomingView: View {
     @Environment(CalendarStore.self) private var calendar
     @Environment(\.openWindow) private var openWindow
-    @AppStorage("collapsedBlocks") private var collapsedRaw = ""
+    @AppStorage(StorageKey.collapsedBlocks) private var collapsedRaw = ""
 
     var body: some View {
         let entries = calendar.upcoming()
@@ -21,7 +21,7 @@ struct UpcomingView: View {
                 Spacer()
                 Button("Календарь") {
                     NSApp.activate()
-                    openWindow(id: "calendar")
+                    openWindow(.calendar)
                 }
                 .buttonStyle(.link)
                 .scaledFont(.caption)

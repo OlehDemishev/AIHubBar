@@ -60,7 +60,7 @@ struct ModesSettings: View {
                 Menu {
                     Button("Помощник…") {
                         NSApp.activate()
-                        openWindow(id: "assistant")
+                        openWindow(.assistant)
                     }
                     Divider()
                     Section("Сразу из шаблона") {
@@ -277,8 +277,8 @@ private struct ModeEditor: View {
         return Section {
             LabeledContent {
                 Button("Изменить в «Панели»…") {
-                    UserDefaults.standard.set(mode.id, forKey: PanelBuilder.profileKey)
-                    UserDefaults.standard.set(SettingsView.Tab.panel.rawValue, forKey: SettingsRoute.tabKey)
+                    UserDefaults.standard.set(mode.id, forKey: StorageKey.panelProfile)
+                    SettingsRoute.open(.panel)
                 }
             } label: {
                 Label(shown.isEmpty ? String(localized: "Панель пуста") : shown.map(\.kind.title).joined(separator: " · "),

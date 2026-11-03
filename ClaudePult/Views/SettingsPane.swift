@@ -2,7 +2,7 @@ import SwiftUI
 
 /// A page of Settings, listed in the sidebar like System Settings (SPEC-settings §2): the app's own areas, the
 /// modules by section, and «Сервисы AI» with a page per AI.
-enum SettingsPane: Hashable, Sendable {
+enum SettingsPane: Hashable, Sendable, RawRepresentable {
     case general, modes, modules, panel, appearance, menuBar
     case module(ModuleKind)
     case service(ServiceTab)
@@ -10,33 +10,32 @@ enum SettingsPane: Hashable, Sendable {
     static let areas: [SettingsPane] = [.general, .modes, .appearance, .modules, .panel, .menuBar]
     static let services: [SettingsPane] = ServiceTab.allCases.map(SettingsPane.service)
 
-    /// The pane `settingsTab` / `servicesTab` / `settingsModule` point at (kept as before, so links into Settings
-    /// still work).
-    init(tab: SettingsView.Tab, service: ServiceTab, module: ModuleKind) {
-        switch tab {
-        case .general: self = .general
-        case .modes: self = .modes
-        case .modules: self = .modules
-        case .panel: self = .panel
-        case .appearance: self = .appearance
-        case .menuBar: self = .menuBar
-        case .services: self = .service(service)
-        case .module: self = .module(module)
+    /// How the page is stored (`StorageKey.settingsPage`): «general», «module.limits», «service.claude»…
+    var rawValue: String {
+        switch self {
+        case .general: "general"
+        case .modes: "modes"
+        case .modules: "modules"
+        case .panel: "panel"
+        case .appearance: "appearance"
+        case .menuBar: "menuBar"
+        case let .module(kind): "module." + kind.rawValue
+        case let .service(service): "service." + service.rawValue
         }
     }
 
-    var tab: SettingsView.Tab {
-        switch self {
-        case .general: .general
-        case .modes: .modes
-        case .modules: .modules
-        case .panel: .panel
-        case .appearance: .appearance
-        case .menuBar: .menuBar
-        case .module: .module
-        case .service: .services
+    init?(rawValue: String) {
+        let parts = rawValue.split(separator: ".", maxSplits: 1).map(String.init)
+        switch (parts.first, parts.count) {
+        case ("module", 2): guard let kind = ModuleKind(rawValue: parts[1]) else { return nil }; self = .module(kind)
+        case ("service", 2): guard let service = ServiceTab(rawValue: parts[1]) else { return nil }; self = .service(service)
+        default:
+            guard let area = Self.areas.first(where: { $0.rawValue == rawValue }) else { return nil }
+            self = area
         }
     }
+
+    var isService: Bool { if case .service = self { true } else { false } }
 
     var title: String {
         switch self {

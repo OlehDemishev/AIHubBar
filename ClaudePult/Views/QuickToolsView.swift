@@ -11,7 +11,7 @@ struct QuickCommandsView: View {
         let chosen = modes.current?.module(.quickCommands)?.commands
         return settings.quickCommands.filter { ProfileModule.includes($0.id, in: chosen) }
     }
-    @AppStorage("collapsedBlocks") private var collapsedRaw = ""
+    @AppStorage(StorageKey.collapsedBlocks) private var collapsedRaw = ""
     @State private var confirming: String?
 
     private let columns = [GridItem(.flexible(), spacing: 6), GridItem(.flexible(), spacing: 6)]
@@ -85,7 +85,7 @@ struct QuickTogglesView: View {
             .filter { toggle in chosen.map { $0.contains(toggle.rawValue) } ?? settings.quickToggles.contains(toggle) }
     }
     @Environment(QuickToolsController.self) private var tools
-    @AppStorage("collapsedBlocks") private var collapsedRaw = ""
+    @AppStorage(StorageKey.collapsedBlocks) private var collapsedRaw = ""
     @State private var confirming: QuickToggle?
 
     var body: some View {

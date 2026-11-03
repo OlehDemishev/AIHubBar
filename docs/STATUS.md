@@ -5,7 +5,7 @@
 **Updated:** 2026-11-03
 
 **Now:**
-- nothing in progress; refactoring stage 2 merged (#213, one source of truth); next — stage 3, navigation (docs/SPEC-refactor.md §9)
+- refactoring stage 3 (navigation) on branch `refactor/stage3-navigation`, PR open; next — stage 4, views by folders
 
 **Next:**
 - Oleh tries «Раскладка» in his own apps; next beta with fixes: `scripts/release.sh 0.5.0-beta.1 --publish`
@@ -13,7 +13,7 @@
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/SPEC-windows.md §9, stage 2–3 leftovers)
 
 **Needs Oleh:**
-- say when to start stage 3 (navigation)
+- review and merge the stage 3 PR
 - look at the new help: panel → «?» and https://olehdemishev.github.io/AIHubBar/help.html
 - look at the new Settings and say what to change next
 - MacBook Air: update to 0.4.0 through Sparkle (Settings → General → Updates) and check the island at the real notch
@@ -21,6 +21,12 @@
 - the beta channel exists now (release `beta`, points to 0.4.0): say when the next beta goes out
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-03 — refactoring stage 3: navigation (branch `refactor/stage3-navigation`)
+
+Done: the Settings page is one key (`settingsPage`, `SettingsPane` as raw value: «general», «module.limits», «service.claude»); the three old keys (`settingsTab` + `servicesTab` / `settingsModule`, and the older «claude» tab) are migrated once and removed; `SettingsView.Tab` and the pane↔tab mapping are gone. Views open Settings one way — `@Environment(\.openSettingsPage)` (route + activate + open), replacing six hand-written variants; the assistant's «Подключить другой сервис…» opens Codex's page instead of whichever AI was viewed last. Windows have `WindowID` (scenes, `openWindow`, `dismissWindow`, `AppRequests`, CLI names); ids stored as text in notifications and widget links are converted at that boundary. UI state keys are in `StorageKey` (`collapsedBlocks` was spelled out in 12 places); the profile «Панель» edits is reset on every start. All in `Views/Navigation.swift`.
+Checked: all Mac tests green locally (402: the old tab tests replaced by raw-value round trip, migration of the old keys, and leaving a new key alone). Installed build: Oleh's stored page migrated (old keys gone), writing `module.notch` opens «Остров у чёлки», `--app-command help` opens help.
+Left: —
 
 ## 2026-11-03 — refactoring stage 2: one source of truth (branch `refactor/stage2-one-truth`)
 
