@@ -12,6 +12,7 @@
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/specs/SPEC-windows.md §9, stage 2–3 leftovers)
 
 **Needs Oleh:**
+- review the 1.0 site draft (branch `feat/site-1.0`, draft PR): publish as is, or what to change
 - Settings → Copilot → «Установить hook»: then start `copilot` and check its row in «Сессии» (the agent wasn't allowed to install it into ~/.copilot itself)
 - say what comes next: «Раскладка» to everyone, or new features
 - look at the new help: panel → «?» and https://olehdemishev.github.io/AIHubBar/help.html
@@ -20,6 +21,12 @@
 - «Раскладка»: tried live in TextEdit, Safari, Chrome (⌥⇧ too); Telegram and Notes are yours to try (not typed into by the agent)
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-03 — site draft for 1.0 (branch `feat/site-1.0`)
+
+Done: new landing page in site/ (index.html, new styles appended to style.css; help.html untouched): hero with a Mac screen top (the island asking for a permission, the panel with limits of several services and Claude/Copilot sessions), «works with», AI (limits, sessions, commands), the notch island (rest, events, file drop), Layout fix (beta) with a typing demo, Mac tools tiles, profiles and templates, install, privacy (3 points), final CTA.
+Checked: local preview at 1440 px light and dark and at 375 px (no horizontal scroll); feature claims checked against the code (toggles, keep-awake rules, island hot keys ⌃⌥Y/⌃⌥N).
+Left: waiting for Oleh's review; not merged, since merging site/ to main publishes it. Social preview image still the old one.
 
 ## 2026-11-03 — beta 0.5.1-beta.1 published (branch `chore/status-beta-0.5.1`)
 
