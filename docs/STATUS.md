@@ -8,19 +8,24 @@
 - nothing in progress; refactoring stage 8 (audit leftovers) done — #230–#232
 
 **Next:**
+- social preview image for the new site headline («Your AI and your Mac, one click away»)
 - next beta or 0.5.1 carries stage 8 (#230–#232): 0.5.1-beta.1 was built from 27c5e2d, before it
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/specs/SPEC-windows.md §9, stage 2–3 leftovers)
 
 **Needs Oleh:**
-- review the 1.0 site draft (branch `feat/site-1.0`, draft PR): publish as is, or what to change
 - Settings → Copilot → «Установить hook»: then start `copilot` and check its row in «Сессии» (the agent wasn't allowed to install it into ~/.copilot itself)
 - say what comes next: «Раскладка» to everyone, or new features
-- look at the new help: panel → «?» and https://olehdemishev.github.io/AIHubBar/help.html
 - look at the new Settings and say what to change next
 - MacBook Air: update to 0.5.0 through Sparkle (Settings → General → Updates) and check the island at the real notch
 - «Раскладка»: tried live in TextEdit, Safari, Chrome (⌥⇧ too); Telegram and Notes are yours to try (not typed into by the agent)
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-03 — 1.0 site published (branch `chore/status-site-published`)
+
+Done: on Oleh's «Публикуй» merged #234; the Pages workflow deployed it.
+Checked: https://olehdemishev.github.io/AIHubBar/ serves the new page (title, styles); help.html still loads its topics, no console errors.
+Left: the social preview image is still the old one.
 
 ## 2026-11-03 — site draft for 1.0 (branch `feat/site-1.0`)
 
