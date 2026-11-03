@@ -57,5 +57,7 @@ jobs:
         run: xcodegen generate
       - name: Test
         run: |
+          # Tests expect the app's source language (Russian) and a Russian region, as on Oleh's Mac.
           xcodebuild test -project ClaudePult.xcodeproj -scheme ClaudePult \
-            -destination 'platform=macOS' -derivedDataPath build/DerivedData -quiet
+            -destination 'platform=macOS' -derivedDataPath build/DerivedData \
+            -testLanguage ru -testRegion RU

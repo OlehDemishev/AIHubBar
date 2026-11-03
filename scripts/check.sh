@@ -15,5 +15,5 @@ python3 desktop/scripts/strings.py --check
 echo "==> Mac tests"
 xcodegen generate --quiet
 xcodebuild test -project ClaudePult.xcodeproj -scheme ClaudePult \
-  -destination 'platform=macOS,arch=arm64' -derivedDataPath build/DerivedData -quiet
+  -destination 'platform=macOS,arch=arm64' -derivedDataPath build/DerivedData -testLanguage ru -testRegion RU -quiet
 echo "All checks passed."
