@@ -5,12 +5,11 @@
 **Updated:** 2026-11-03
 
 **Now:**
-- `feat/keep-awake-indicator`: «Не спать» in the menu bar always shown — orange filled cup on, pale outline off — PR open
 - `feat/telegram-shared-bot`: shared Telegram bot through a Cloudflare Worker (spec §7, relay + Mac side) — PR open, the Worker not deployed yet
-- merged 2026-11-03: #241 Codex session states, #240 quick command shortcuts, #238 «Быстрый запрос», #236 content spec, #242 «Telegram» stage 1, #244 Telegram menu at the bottom of the chat
+- merged 2026-11-03: #248 «Не спать» on/off in the menu bar, #241 Codex session states, #240 quick command shortcuts, #238 «Быстрый запрос», #236 content spec, #242 «Telegram» stage 1, #244 Telegram menu at the bottom of the chat
 
 **Next:**
-- next beta or 0.5.1 carries stage 8 (#230–#232) and #236–#244: 0.5.1-beta.1 was built from 27c5e2d, before them
+- next beta or 0.5.1 carries stage 8 (#230–#232) and #236–#248: 0.5.1-beta.1 was built from 27c5e2d, before them
 - Telegram (docs/specs/SPEC-telegram.md): stage 2 — sessions and requests in the bot, approvals bot moved in, notification settings
 - content (docs/specs/SPEC-content.md, agreed): stage 1 — walkthrough of the «Тексты» profile on a sample folder, then «Версии», then batch tasks
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/specs/SPEC-windows.md §9, stage 2–3 leftovers)
