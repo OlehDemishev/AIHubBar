@@ -5,22 +5,28 @@
 **Updated:** 2026-11-03
 
 **Now:**
-- working through Next on Oleh's «всё по плану, до 12 не спрашивай» (2026-11-03 04:27); Copilot session states on `feat/copilot-session-states`
+- nothing in progress; the plan run of 2026-11-03 morning is done (#226–#228 merged)
 
 **Next:**
-- Oleh tries «Раскладка» in his own apps; next beta with fixes: `scripts/release.sh 0.5.0-beta.1 --publish`
+- beta 0.5.1-beta.1 (quick drops on the island, «Своя задача» hint, Copilot session states): built and published by Oleh — the agent's publish was refused as a public release
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/specs/SPEC-windows.md §9, stage 2–3 leftovers)
 
 **Needs Oleh:**
 - Settings → Copilot → «Установить hook»: then start `copilot` and check its row in «Сессии» (the agent wasn't allowed to install it into ~/.copilot itself)
-- say what comes next: the next beta with «Раскладка» fixes, or new features
+- publish the beta: `scripts/release.sh 0.5.1-beta.1 --publish` (from main, clean tree)
+- say what comes next: «Раскладка» to everyone, or new features
 - look at the new help: panel → «?» and https://olehdemishev.github.io/AIHubBar/help.html
 - look at the new Settings and say what to change next
 - MacBook Air: update to 0.5.0 through Sparkle (Settings → General → Updates) and check the island at the real notch
 - «Раскладка»: tried live in TextEdit, Safari, Chrome (⌥⇧ too); Telegram and Notes are yours to try (not typed into by the agent)
-- the beta channel exists now (release `beta`, points to 0.4.0): say when the next beta goes out
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-03 — Plan run while Oleh was away (no branch of its own, recorded here)
+
+Done: Oleh asked at 04:27 to go through the plan without questions until 12:00. Merged: #226 (island quick drops, «Своя задача» hint, live «Раскладка» check), #227 (docs after the refactoring), #228 (Copilot CLI session states). Looked into and closed without code: the test host writing into the real log (already guarded by `AppLog.writesFile`, no test lines in the log during a full run); one error naming across stores (kept as decided in stage 6).
+Checked: each PR's own checks and CI; the installed app is the build of main `39a09ea`.
+Left: refused to the agent and left to Oleh — publishing the beta (a public release) and installing the Copilot hook into ~/.copilot (another program's config). Windows/Linux untouched (postponed).
 
 ## 2026-11-03 — Copilot CLI sessions with states (branch `feat/copilot-session-states`)
 
