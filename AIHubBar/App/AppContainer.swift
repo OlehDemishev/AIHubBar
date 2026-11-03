@@ -177,7 +177,7 @@ final class AppContainer {
         // Unit tests use the app as their host; keep it from running report.py in the background.
         if !TestHost.isActive {
             store.start()
-            Updates.beta = settings.betaUpdates
+            followBetaUpdates()
             Updates.start()
             sessions.start()
             telegramApprovals.start()
@@ -204,7 +204,7 @@ final class AppContainer {
             clipboard.start()
             layoutSwitcher.start()
             // Windows can only be made once the app has finished launching.
-            DispatchQueue.main.async {
+            DispatchQueue.main.async { [unowned self] in
                 notchIsland.start { [unowned self] index in
                     AnyView(NotchIslandView(index: index).appEnvironment(self))
                 }
@@ -298,7 +298,15 @@ final class AppContainer {
         data.otherAI = hub.percents
         data.modeName = modes.current?.name
         data.modeIcon = modes.current?.icon
-        return data.without(modes.silencedModules)
+        return data
+    }
+
+    /// Sparkle's channel follows «Бета-версии» wherever it changes (Settings, an import), not from a `didSet` in
+    /// `AppSettings`.
+    private func followBetaUpdates() {
+        Updates.beta = withObservationTracking { settings.betaUpdates } onChange: { [weak self] in
+            Task { @MainActor in self?.followBetaUpdates() }
+        }
     }
 }
 

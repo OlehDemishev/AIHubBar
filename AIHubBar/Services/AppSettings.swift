@@ -111,30 +111,27 @@ final class AppSettings {
 
     /// «Не спать» (SPEC-profiles §4.2).
     var keepAwakeRules: KeepAwakeRules {
-        didSet { if let data = try? JSONEncoder().encode(keepAwakeRules) { defaults.set(data, forKey: Keys.keepAwakeRules) } }
+        didSet { defaults.setEncoded(keepAwakeRules, forKey: Keys.keepAwakeRules) }
     }
 
     /// «Остров у чёлки» (SPEC-notch §6).
     var notch: NotchSettings {
-        didSet { if let data = try? JSONEncoder().encode(notch) { defaults.set(data, forKey: Keys.notch) } }
+        didSet { defaults.setEncoded(notch, forKey: Keys.notch) }
     }
 
     /// Beta builds through Sparkle and the modules still in beta testing (docs/RELEASE.md «Beta builds»).
     var betaUpdates: Bool {
-        didSet {
-            defaults.set(betaUpdates, forKey: Keys.betaUpdates)
-            Updates.beta = betaUpdates
-        }
+        didSet { defaults.set(betaUpdates, forKey: Keys.betaUpdates) }
     }
 
     /// «Раскладка» (SPEC-layout §4).
     var layout: LayoutSettings {
-        didSet { if let data = try? JSONEncoder().encode(layout) { defaults.set(data, forKey: Keys.layout) } }
+        didSet { defaults.setEncoded(layout, forKey: Keys.layout) }
     }
 
     /// «Быстрые команды» and «Быстрые переключатели» (SPEC-profiles §4.3–4.4).
     var quickCommands: [QuickCommand] {
-        didSet { if let data = try? JSONEncoder().encode(quickCommands) { defaults.set(data, forKey: Keys.quickCommands) } }
+        didSet { defaults.setEncoded(quickCommands, forKey: Keys.quickCommands) }
     }
 
     var quickToggles: [QuickToggle] {
@@ -247,7 +244,7 @@ final class AppSettings {
 
     /// «Свои промпты» for the search (⌃⌥C).
     var savedPrompts: [SavedPrompt] {
-        didSet { if let data = try? JSONEncoder().encode(savedPrompts) { defaults.set(data, forKey: Keys.savedPrompts) } }
+        didSet { defaults.setEncoded(savedPrompts, forKey: Keys.savedPrompts) }
     }
 
     /// «Неделя Claude» in Telegram: on/off, weekday (1 = Sunday … 7 = Saturday) and hour.

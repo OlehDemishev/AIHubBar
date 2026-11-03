@@ -18,7 +18,8 @@ struct AIHubBarApp: App {
             MenuPanelView()
                 .appEnvironment(app)
         } label: {
-            MenuBarLabel(state: MenuBarState(config: app.notchIsland.takesMenuBarSummary ? app.modes.menuBar.iconOnly : app.modes.menuBar,
+            MenuBarLabel(state: MenuBarState(config: (app.notchIsland.takesMenuBarSummary ? app.modes.menuBar.iconOnly : app.modes.menuBar)
+                                                .without(app.modes.silencedModules),
                                              data: app.menuBarData))
                 .appEnvironment(app)
         }

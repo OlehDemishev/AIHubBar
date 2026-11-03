@@ -69,10 +69,10 @@ struct MenuBarSettings: View {
 
     // MARK: Preview
 
-    private var data: MenuBarData { (sample ? MenuBarData.sample : liveData).without(modes.silencedModules) }
+    private var data: MenuBarData { sample ? MenuBarData.sample : liveData }
 
     private var preview: some View {
-        let config = modes.menuBar
+        let config = modes.menuBar.without(modes.silencedModules)
         let width = MenuBarRenderer.width(config, data)
         return VStack(alignment: .leading, spacing: 10) {
             HStack {

@@ -224,7 +224,7 @@ private struct CopilotStatesSection: View {
     }
 
     private func refresh() {
-        try? hooks.updateScriptIfNeeded()
+        _ = try? hooks.updateScriptIfNeeded()
         status = hooks.status()
     }
 
