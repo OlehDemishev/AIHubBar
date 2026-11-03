@@ -45,8 +45,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Xcode
-        # The newest Xcode on the machine: releases are built with Xcode 27, and Xcode 26's compiler crashes on this
-        # code (an IRGen bug in Swift 6.3).
+        # The newest Xcode on the machine (releases are built with Xcode 27; GitHub's images had up to 26.6 in Nov 2026).
         run: |
           ls -d /Applications/Xcode*.app
           XCODE="$(ls -d /Applications/Xcode_*.app | sort -V | tail -1)"

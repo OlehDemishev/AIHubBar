@@ -137,7 +137,7 @@ private struct ThresholdsSection: View {
 
     var body: some View {
         Section {
-            Picker("Уведомлять о лимите", systemImage: "bell", selection: Binding(get: { mode }, set: choose)) {
+            Picker("Уведомлять о лимите", systemImage: "bell", selection: Binding(get: { mode }, set: { choose($0) })) {
                 Text("как у всех: \(Self.list(settings.limitThresholds)) %").tag(Mode.common)
                 Text("на своих порогах").tag(Mode.own)
                 Text("не уведомлять").tag(Mode.off)
