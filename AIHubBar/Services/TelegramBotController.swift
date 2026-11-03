@@ -23,6 +23,8 @@ final class TelegramBotController {
     var isActive: () -> Bool = { true }
     /// The current profile (id, name), for its own menu.
     var currentProfile: () -> (id: String, name: String)? = { nil }
+    /// Every AI service's limits, as the panel's «Лимиты AI» shows them.
+    var limitServices: () -> [ServiceUsage] = { [] }
     /// Runs a quick command and returns how it went (`QuickToolsController.runForBot`).
     var runCommand: (QuickCommand) async -> (ok: Bool, text: String) = { _ in (false, "") }
 
@@ -46,6 +48,13 @@ final class TelegramBotController {
     private var menuCarrier: Int?
     /// The menu last sent to the chat, to send it again when the profile changes it.
     private var sentMenu: [BotMenuItem]?
+    /// Permission requests sent to the chat: request id → its message.
+    private var sentRequests: [String: (message: Int, request: ApprovalRequest, project: String)] = [:]
+    /// Answered from the chat, until the request is gone: request id → allowed.
+    private var answeredHere: [String: Bool] = [:]
+    /// A request whose message didn't go out, and when to try again.
+    private var retryRequests: [String: Date] = [:]
+    private var requestLoop: Task<Void, Never>?
     /// «Подключить Telegram» was pressed here: greet the chat once it is paired.
     private var greetWhenPaired = false
     private let macName = Host.current().localizedName ?? "Mac"
@@ -89,6 +98,12 @@ final class TelegramBotController {
 
     func start() {
         guard loop == nil else { return }
+        requestLoop = Task { [weak self] in
+            while !Task.isCancelled {
+                await self?.syncRequests()
+                try? await Task.sleep(for: .seconds(1))
+            }
+        }
         loop = Task { [weak self] in
             await self?.loadToken()
             while !Task.isCancelled {
@@ -361,6 +376,8 @@ final class TelegramBotController {
         case .mac: message = macScreen
         case .help: message = helpScreen
         case .menu: message = menuScreen
+        case .sessions: message = sessionsScreen
+        case .limits: message = limitsScreen
         }
         guard let id = await send(message) else { return false }
         if let tapID { await delete(tapID) }
@@ -382,6 +399,14 @@ final class TelegramBotController {
         case .show(.mac): screen = macScreen
         case .show(.help): screen = helpScreen
         case .show(.menu): screen = menuScreen
+        case .show(.sessions): screen = sessionsScreen
+        case .show(.limits): screen = limitsScreen
+        case let .limitAlerts(on):
+            settings.limitAlertsToTelegram = on
+            screen = limitsScreen
+        case let .requestDetails(id):
+            await sendRequestDetails(id)
+            return
         case let .menuToggle(item):
             editMenu { $0.toggle(item) }
             screen = menuScreen
@@ -407,10 +432,100 @@ final class TelegramBotController {
             startCleanup(dryRun: route == .cleanupCheck, messageID: messageID)
             return
         case let .answer(requestID, allow):
-            approvals.answerFromBot(requestID: requestID, allow: allow, messageID: messageID)
+            guard handlesRequests else {
+                approvals.answerFromBot(requestID: requestID, allow: allow, messageID: messageID)
+                return
+            }
+            await answer(requestID, allow: allow, messageID: messageID)
             return
         }
         if let messageID { await edit(messageID, screen) } else { _ = await send(screen) }
+    }
+
+    // MARK: - Sessions, requests, limits (stage 2)
+
+    /// This Mac sends its permission requests to the chat itself: «Присылать запросы разрешений в Telegram» is on and
+    /// the bot is set up — then the separate approvals bot (`TelegramApprovals`) steps aside.
+    var handlesRequests: Bool {
+        isActive() && settings.telegramApprovals && !chatID.isEmpty && (usesSharedBot ? relay.connected : token != nil)
+    }
+
+    /// Own bot: a press reaches the Mac that reads the bot, so only that one offers ✅ / ❌. Shared bot: the relay
+    /// brings a press back to the Mac that sent the message, but answering needs its own switch (§7).
+    private var canAnswer: Bool {
+        usesSharedBot ? settings.telegramBot.answersOverShared == true : answersHere
+    }
+
+    private func projectName(_ request: ApprovalRequest) -> String {
+        sessions.items.first { $0.id == request.sessionID }?.session.displayProject ?? request.project ?? "Claude"
+    }
+
+    /// New requests get a message; answered ones (here, on the Mac or by Claude) lose their buttons.
+    private func syncRequests() async {
+        guard handlesRequests else { return }
+        let open = Array(sessions.approvals.values).sorted { $0.created < $1.created }
+        for request in open where sentRequests[request.id] == nil && (retryRequests[request.id] ?? .distantPast) < .now {
+            let project = projectName(request)
+            if let message = await send(BotScreens.request(request, project: project, canAnswer: canAnswer)) {
+                sentRequests[request.id] = (message, request, project)
+                retryRequests[request.id] = nil
+            } else {
+                retryRequests[request.id] = .now.addingTimeInterval(30)
+            }
+        }
+        for (id, entry) in sentRequests where !open.contains(where: { $0.id == id }) {
+            sentRequests[id] = nil
+            await edit(entry.message, BotScreens.requestClosed(entry.request, project: entry.project, outcome: answeredHere.removeValue(forKey: id)))
+        }
+        retryRequests = retryRequests.filter { id, _ in open.contains { $0.id == id } }
+    }
+
+    private func answer(_ requestID: String, allow: Bool, messageID: Int?) async {
+        guard canAnswer, sessions.approvals.values.contains(where: { $0.id == requestID }) else { return }
+        answeredHere[requestID] = allow
+        sessions.decide(requestID: requestID, allow: allow)
+        AppLog.info("Permission \(allow ? "allowed" : "denied") from Telegram")
+        // A press on 🤖 or «Подробнее»: that message shows the rest; the request's own message changes in `syncRequests`.
+        if let messageID, !sentRequests.values.contains(where: { $0.message == messageID }) {
+            await edit(messageID, sessionsScreen)
+        }
+    }
+
+    private func sendRequestDetails(_ id: String) async {
+        guard let request = sessions.approvals.values.first(where: { $0.id == id }) else {
+            _ = await send(BotMessage(html: "☑️ " + RunMessage.escape(String(localized: "Ответ уже дан"))))
+            return
+        }
+        let item = sessions.items.first { $0.id == request.sessionID }
+        _ = await send(BotScreens.requestDetails(request, project: projectName(request), task: item?.session.task,
+                                                 folder: item?.session.cwd, canAnswer: canAnswer && answeredHere[id] == nil))
+    }
+
+    private var sessionsScreen: BotMessage {
+        let lines = sessions.items.filter { $0.state == .waiting || $0.state == .running }.map { item in
+            BotSessionLine(
+                project: item.session.displayProject, agent: item.session.agentName, waiting: item.state == .waiting,
+                detail: item.state == .waiting ? (item.session.message ?? item.session.task) : (item.session.actionText ?? item.session.task),
+                since: item.session.updatedAt
+            )
+        }
+        let requests = sessions.approvals.values.filter { answeredHere[$0.id] == nil }.sorted { $0.created < $1.created }
+            .map { BotRequestLine(id: $0.id, project: projectName($0), tool: $0.tool, summary: $0.summary) }
+        return BotScreens.sessions(lines, requests: requests, canAnswer: canAnswer && handlesRequests, now: .now)
+    }
+
+    private var limitsScreen: BotMessage {
+        let services = limitServices().map { usage in
+            BotLimitService(
+                title: usage.title,
+                windows: (usage.rings + usage.bars).map {
+                    BotLimitService.Window(title: $0.title, percent: $0.percent, detail: $0.detail,
+                                           resetsAt: $0.showsReset ? $0.resetsAt : nil, runsOutAt: $0.runsOutAt)
+                },
+                error: usage.error, isStale: usage.isStale
+            )
+        }
+        return BotScreens.limits(services, alertsOn: settings.limitAlertsToTelegram, thresholds: settings.limitThresholds, now: .now)
     }
 
     // MARK: - The menu and quick commands
