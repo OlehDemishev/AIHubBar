@@ -215,6 +215,7 @@ enum MenuBarRenderer {
             for (position, segment) in group.enumerated() {
                 switch segment {
                 case let .symbol(name): add(.symbol(name, size: symbolSize, .labelColor))
+                case let .tintedSymbol(name, tint): add(.symbol(name, size: symbolSize, MenuBarRenderer.color(tint)))
                 case .dot: add(.dot(standalone: position == 0))
                 case let .text(text, tint): add(.text(text, MenuBarRenderer.color(tint)))
                 case let .labeled(symbol, text, tint):
