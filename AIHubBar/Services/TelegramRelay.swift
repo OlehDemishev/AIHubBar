@@ -76,9 +76,9 @@ enum RelayMessage {
 @MainActor
 @Observable
 final class TelegramRelay {
-    /// The Worker's address; filled in once Oleh has deployed it (relay/telegram/README.md). A Mac can be pointed
-    /// elsewhere with `defaults write com.demishev.claudepult telegramRelayURL https://…`.
-    static let defaultURL = ""
+    /// The Worker's address (relay/telegram/README.md). A Mac can be pointed elsewhere with
+    /// `defaults write com.demishev.claudepult telegramRelayURL https://…`.
+    static let defaultURL = "https://aihubbar-telegram.oleh-demishev.workers.dev"
     static let keychainAccount = "telegram-relay"
 
     private(set) var connected = false
