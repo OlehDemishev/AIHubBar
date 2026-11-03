@@ -21,40 +21,76 @@
   .hero-text p { font-size: 27px; line-height: 1.3; color: var(--ink-2); letter-spacing: -0.01em; margin: 0 0 26px; }
   .chips { display: flex; flex-wrap: wrap; gap: 10px; }
   .chips span { font-size: 17px; padding: 6px 14px; border-radius: 999px; background: #fff; border: 1px solid var(--line); color: var(--ink-2); }
-  .shot { zoom: 1.45; }
+  .hero-text h1 { font-size: 72px; }
+  .hero-text .tag { font-size: 34px; line-height: 1.15; color: var(--ink); font-weight: 650; letter-spacing: -0.02em; margin-bottom: 14px; }
+  .hero-text .sub { font-size: 21px; margin-bottom: 26px; }
+  /* The top of a Mac screen: the island at the notch asks for a permission, the panel hangs from the menu bar. */
+  .screen { position: relative; flex: 0 0 540px; height: 556px; border-radius: 22px; overflow: hidden; font-size: 13px;
+    background: linear-gradient(160deg, #6b7a99 0%, #a88f86 50%, #e3b48a 100%); box-shadow: 0 30px 60px rgba(80,40,20,.22); }
+  .mbar { height: 30px; display: flex; align-items: center; justify-content: flex-end; gap: 12px; padding: 0 14px; color: #fff;
+    background: rgba(30,30,34,.32); font-size: 13px; }
+  .mbar .on { background: rgba(255,255,255,.28); padding: 2px 8px; border-radius: 6px; }
+  .island { position: absolute; top: 0; left: 40px; width: 290px; background: #000; color: #f5f5f7;
+    border-radius: 0 0 24px 24px; padding: 38px 16px 14px; box-shadow: 0 16px 36px rgba(0,0,0,.35); }
+  .island .q { display: flex; align-items: center; gap: 9px; font-size: 14px; }
+  .island .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--orange); box-shadow: 0 0 0 4px rgba(232,149,47,.3); }
+  .island code { background: #1c1c1e; color: #f5f5f7; border: 1px solid #3a3a3c; border-radius: 4px; padding: 0 4px; font-size: 12px; }
+  .island .acts { display: flex; justify-content: flex-end; gap: 8px; margin-top: 12px; }
+  .island .acts span { padding: 4px 15px; border-radius: 999px; background: #2c2c2e; font-weight: 600; }
+  .island .acts .ok { background: #fff; color: #000; }
+  .p { position: absolute; top: 186px; right: 16px; width: 360px; padding: 12px; border-radius: 16px;
+    background: rgba(255,255,255,.88); border: 1px solid rgba(255,255,255,.6); box-shadow: 0 20px 50px rgba(0,0,0,.22); }
+  .p .card { background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 10px; margin-bottom: 8px; }
+  .p .card:last-child { margin-bottom: 0; }
+  .p .t { font-size: 10.5px; text-transform: uppercase; letter-spacing: .08em; color: var(--ink-3); font-weight: 650; margin-bottom: 7px; }
+  .p .rings { display: flex; gap: 12px; align-items: center; }
+  .p .ring { width: 52px; height: 52px; border-radius: 50%; display: grid; place-items: center; position: relative; flex: none; }
+  .p .ring::after { content: ""; position: absolute; inset: 6px; border-radius: 50%; background: #fff; }
+  .p .ring span { position: relative; z-index: 1; font-weight: 700; font-size: 13px; }
+  .p .rl { font-size: 11.5px; color: var(--ink-2); line-height: 1.3; white-space: nowrap; }
+  .p .rl b { color: var(--ink); }
+  .p .svc { display: flex; gap: 12px; margin-top: 9px; font-size: 11.5px; color: var(--ink-2); }
+  .p .svc b { color: var(--ink); }
+  .p .row { display: flex; align-items: center; gap: 8px; padding: 5px 0; border-top: 1px solid #f3eeea; }
+  .p .row:first-of-type { border-top: 0; }
+  .p .row i { width: 8px; height: 8px; border-radius: 50%; flex: none; }
+  .p .row small { color: var(--ink-3); font-size: 11.5px; }
+  .p .row .r { margin-left: auto; font-size: 11.5px; color: var(--ink-3); }
+  .p .row.w { background: #fff4e8; margin: 0 -5px; padding: 5px; border-radius: 6px; }
+  .p code { font-size: 10.5px; }
 </style>
 </head>
 <body>
 <div class="hero-wrap">
   <div class="hero-text">
-    <img src="../../ClaudePult/Resources/Assets.xcassets/AppIcon.appiconset/icon_512x512.png" alt="">
+    <img src="../../AIHubBar/Resources/Assets.xcassets/AppIcon.appiconset/icon_512x512.png" alt="">
     <h1>AI Hub Bar</h1>
-    <p>Claude limits, every agent session and AI commands for your projects — one click away in the Mac menu bar.</p>
+    <p class="tag">Your AI and your Mac,<br>one click away.</p>
+    <p class="sub">AI limits and agent sessions, a live island around the notch, layout fix and everyday Mac tools.</p>
     <div class="chips"><span>macOS 14+</span><span>Free · MIT</span><span>13 languages</span><span>No account</span></div>
   </div>
-  <div class="shot">
-    <div class="menubar" style="width:82mm">
-      <span class="item">✦ <span>42%</span><span class="muted">·</span><span>18%</span></span>
-      <span class="item">✋ 1</span>
-      <span class="muted">Fri 14:05</span>
+  <div class="screen">
+    <div class="mbar"><span class="on">✦ 42% · 18%</span><span>Tue 14:05</span></div>
+    <div class="island">
+      <div class="q"><span class="dot"></span><span><b>shop-app</b> wants to run <code>npm test</code></span></div>
+      <div class="acts"><span class="ok">Allow</span><span>Deny</span></div>
     </div>
-    <div class="panel">
-      <div class="head"><span class="prof">⌘ Developer ▾</span><span class="icons">↻ ⚙ ? ⏻</span></div>
-      <div class="pcard">
+    <div class="p">
+      <div class="card">
         <div class="t">Limits</div>
         <div class="rings">
           <div class="ring" style="background:conic-gradient(var(--green) 0 42%, #efe7e1 0)"><span>42%</span></div>
-          <div class="ringlabel"><b>Session</b><br>in 2 h 14 min</div>
+          <div class="rl"><b>Session</b><br>in 2 h 14 min</div>
           <div class="ring" style="background:conic-gradient(var(--green) 0 18%, #efe7e1 0)"><span>18%</span></div>
-          <div class="ringlabel"><b>Week</b><br>resets Tue 9:00</div>
+          <div class="rl"><b>Week</b><br>resets Tue 9:00</div>
         </div>
-        <div class="forecast">✓ Enough until the reset at this pace</div>
+        <div class="svc"><span>Codex <b>31%</b></span><span>Copilot <b>12%</b></span><span>OpenRouter <b>$4.20</b></span></div>
       </div>
-      <div class="pcard" style="margin-bottom:0">
+      <div class="card">
         <div class="t">Sessions</div>
-        <div class="row wait"><span class="st" style="background:var(--orange)"></span><span><span class="name">shop-app</span><br><span class="sub">wants to run <code>npm test</code></span></span><span class="right"><span class="btn ok">Allow</span> <span class="btn">Deny</span></span></div>
-        <div class="row"><span class="st" style="background:var(--green)"></span><span><span class="name">blog</span><br><span class="sub">editing header.tsx · +42 −7</span></span><span class="right">12 min</span></div>
-        <div class="row"><span class="st" style="background:var(--blue)"></span><span><span class="name">api</span><br><span class="sub">background · writing tests</span></span><span class="right">31 min</span></div>
+        <div class="row w"><i style="background:var(--orange)"></i><span><b>shop-app</b><br><small>Claude · wants to run <code>npm test</code></small></span><span class="r">now</span></div>
+        <div class="row"><i style="background:var(--green)"></i><span><b>blog</b><br><small>Claude · step 3/7 · writing tests</small></span><span class="r">12 min</span></div>
+        <div class="row"><i style="background:var(--green)"></i><span><b>api</b><br><small>Copilot · editing routes.ts</small></span><span class="r">4 min</span></div>
       </div>
     </div>
   </div>
