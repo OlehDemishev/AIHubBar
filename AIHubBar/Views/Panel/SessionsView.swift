@@ -187,6 +187,12 @@ private struct SessionRowView: View {
                     .fontWeight(.medium)
                     .lineLimit(1)
                     .layoutPriority(1)
+                if let agent = row.session?.agent, agent != .claudeCode {
+                    Image(systemName: ServiceTab(agent: agent).icon)
+                        .foregroundStyle(.secondary)
+                        .help(agent.title)
+                        .accessibilityLabel(agent.title)
+                }
                 if let worktree = row.worktree {
                     Label(worktree, systemImage: "arrow.triangle.branch")
                         .scaledFont(.callout)

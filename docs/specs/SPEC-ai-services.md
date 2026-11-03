@@ -1,6 +1,6 @@
 # SPEC — AI services: Claude as one of them, the same view for every service
 
-Status: stages 1–6 done (#159, #162–#170), 2026-11-02; left: a «waiting» signal for agents without hooks, Cursor CLI (not installed here).
+Status: stages 1–6 done (#159, #162–#170), 2026-11-02. 2026-11-03: Copilot CLI has hooks after all — with AI Hub Bar's hook (Settings → Copilot, `CopilotHooks`) its sessions are rows with «работает / ждёт / готово» and «ждёт» notifies. Left: «waiting» for Codex and Antigravity (no hooks; Antigravity's run status only has IDLE / RUNNING / BUSY / CANCELING), Cursor CLI (not installed here).
 Asked by Oleh on 2026-10-31 and 2026-11-02: move Claude Code into «Сервисы AI», give every AI its own nested tab
 with all its settings, and bring the other services up to Claude Code's level — one model per service for rings,
 forecast, week strip, credits, per-project tokens and context.

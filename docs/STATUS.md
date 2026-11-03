@@ -5,13 +5,14 @@
 **Updated:** 2026-11-03
 
 **Now:**
-- working through Next on Oleh's «всё по плану, до 12 не спрашивай» (2026-11-03 04:27); docs refresh on `docs/refresh-after-refactor`
+- working through Next on Oleh's «всё по плану, до 12 не спрашивай» (2026-11-03 04:27); Copilot session states on `feat/copilot-session-states`
 
 **Next:**
 - Oleh tries «Раскладка» in his own apps; next beta with fixes: `scripts/release.sh 0.5.0-beta.1 --publish`
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/specs/SPEC-windows.md §9, stage 2–3 leftovers)
 
 **Needs Oleh:**
+- Settings → Copilot → «Установить hook»: then start `copilot` and check its row in «Сессии» (the agent wasn't allowed to install it into ~/.copilot itself)
 - say what comes next: the next beta with «Раскладка» fixes, or new features
 - look at the new help: panel → «?» and https://olehdemishev.github.io/AIHubBar/help.html
 - look at the new Settings and say what to change next
@@ -20,6 +21,12 @@
 - the beta channel exists now (release `beta`, points to 0.4.0): say when the next beta goes out
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-03 — Copilot CLI sessions with states (branch `feat/copilot-session-states`)
+
+Done: the spec's leftover «a waiting signal for agents without hooks» — Copilot CLI turns out to have hooks (docs.github.com/en/copilot/reference/copilot-cli-reference/cli-hooks-reference). Given Claude-style PascalCase names (SessionStart, UserPromptSubmit, Notification, PostToolUse, Stop, SessionEnd) it sends Claude Code's snake_case payload, so the existing hook script serves it with `--agent copilot`: it finds the `copilot` process, writes `sessions/<id>.json` with `agent: copilot`, and never opens an approval request (PermissionRequest isn't registered: Copilot runs it before its own rules; the `permission_prompt` notification means a real prompt). `CopilotHooks` writes its own file `~/.copilot/hooks/aihubbar.json` (other hooks untouched; removing = deleting the file); Settings → Copilot has «Состояние сессий Copilot» with «Установить / Обновить / Снять hook»; CLI `--copilot-hooks [status|install|uninstall]`. Copilot sessions then are ordinary rows (its icon next to the project), count for the menu bar and island, notify «Copilot ждёт ответа — …»; the plain Copilot thread row is hidden while its session row is there. The script is kept current at start while our file is there. Codex and Antigravity: no hooks; Antigravity's run status has only IDLE / RUNNING / BUSY / CANCELING, nothing for «waiting».
+Checked: `scripts/check.sh` green (new `CopilotHooksTests`: a Copilot session through start → prompt → permission notification → tool → stop → end; no approval files for Copilot; Claude records stay Claude, old files too; the hook file's events, no PermissionRequest, no «*» matcher (Copilot matchers are regexes); status and removal; no duplicate thread). Installed build: Settings → Copilot shows the section (read through the accessibility API and captured), `--copilot-hooks status` → notInstalled.
+Left: not seen with a real Copilot session — installing the hook into ~/.copilot was refused to the agent as a persistent change to another program's config; Oleh installs it with the button. Payload field names come from the docs, not from a live run.
 
 ## 2026-11-03 — Docs refreshed after the refactoring (branch `docs/refresh-after-refactor`)
 

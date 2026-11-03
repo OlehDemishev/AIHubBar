@@ -82,9 +82,11 @@ struct Session: Decodable, Identifiable, Equatable, Sendable {
     var todos: [SessionTodo] = []
     /// When the last request was sent (UserPromptSubmit).
     var promptAt: Date?
+    /// Whose session: Claude Code, or Copilot CLI through the same hook (`CopilotHooks`).
+    var agent: AgentKind = .claudeCode
 
     enum CodingKeys: String, CodingKey {
-        case cwd, project, state, event, message, tty, entrypoint
+        case cwd, project, state, event, message, tty, entrypoint, agent
         case lastTool = "last_tool"
         case lastTarget = "last_target"
         case lastToolAt = "last_tool_at"
@@ -124,6 +126,16 @@ struct Session: Decodable, Identifiable, Equatable, Sendable {
         lastToolAt = c.isoDate(.lastToolAt)
         todos = (try? c.decodeIfPresent([SessionTodo].self, forKey: .todos)) ?? []
         promptAt = c.isoDate(.promptAt)
+        agent = (try? c.decodeIfPresent(AgentKind.self, forKey: .agent)) ?? .claudeCode
+    }
+
+    /// «Claude», «Copilot»: who waits or works, in notifications and hints.
+    var agentName: String {
+        switch agent {
+        case .claudeCode: "Claude"
+        case .copilot: "Copilot"
+        default: agent.binary
+        }
     }
 
     /// Steps done and all steps of the task list; nil without one.

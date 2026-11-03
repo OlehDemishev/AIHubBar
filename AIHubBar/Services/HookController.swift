@@ -20,6 +20,9 @@ final class HookController {
 
     func refresh() {
         if (try? installer.updateScriptIfNeeded()) == true { AppLog.info("Hook script updated to this version") }
+        if (try? CopilotHooks.live(projectsDirectory: settings.projectsDirectory).updateScriptIfNeeded()) == true {
+            AppLog.info("Hook script updated to this version (Copilot)")
+        }
         status = installer.status()
     }
 

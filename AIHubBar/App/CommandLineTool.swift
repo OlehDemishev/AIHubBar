@@ -8,6 +8,7 @@ import UserNotifications
 /// - `AIHubBar --login-item [status|on|off]`
 /// - `AIHubBar --claude next|finish|task <project-path> [task text] [--claude-path <path>] [--print] [--background]`
 /// - `AIHubBar --hooks [status|install|uninstall]`
+/// - `AIHubBar --copilot-hooks [status|install|uninstall]` (Copilot CLI session states, `CopilotHooks`)
 /// - `AIHubBar --sessions`, `AIHubBar --show-session <id>`, `AIHubBar --background-settings [code|filesOnly|filesAndWeb]`
 /// - `AIHubBar --command report|summary|cleanup-check|cleanup` (in this process)
 /// - `AIHubBar --app-command <command>|help|cleanup-output` (asks the running app)
@@ -71,6 +72,24 @@ enum CommandLineTool {
             },
             CLICommand(["--hooks"], needs: 0, usage: "--hooks [status|install|uninstall]  Claude Code session hooks") { arguments, index in
                 return hooks(arguments.dropFirst(index + 1).first ?? "status")
+            },
+            CLICommand(["--copilot-hooks"], needs: 0, usage: "--copilot-hooks [status|install|uninstall]  Copilot CLI session states") { arguments, index in
+                let hooks = CopilotHooks.live(projectsDirectory: AppSettings().projectsDirectory)
+                do {
+                    switch arguments.dropFirst(index + 1).first ?? "status" {
+                    case "status": break
+                    case "install": try hooks.install()
+                    case "uninstall": try hooks.uninstall()
+                    default:
+                        printError("Usage: AIHubBar --copilot-hooks [status|install|uninstall]")
+                        return 2
+                    }
+                } catch {
+                    printError(error.localizedDescription)
+                    return 1
+                }
+                print("copilot hooks: \(hooks.status()) (\(hooks.fileURL.path))")
+                return 0
             },
             CLICommand(["--app-command"], needs: 1, usage: "--app-command <command>  ask the running app (help, settings, assistant, cleanup-output, notch-setup, test-notification, test-island, report, summary…)") { arguments, index in
                 let name = arguments[index + 1]

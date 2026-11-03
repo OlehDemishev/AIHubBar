@@ -1165,6 +1165,88 @@
         }
       }
     },
+    "%@ ждёт ответа — %@": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "new",
+            "value": "%1$@ ждёт ответа — %2$@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ is waiting for you — %2$@"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ чекає на відповідь — %2$@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ wartet auf Sie — %2$@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ attend votre réponse — %2$@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ espera tu respuesta — %2$@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ attende una risposta — %2$@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ aguarda sua resposta — %2$@"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ czeka na odpowiedź — %2$@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ が応答を待っています — %2$@"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@이(가) 응답을 기다립니다 — %2$@"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ ينتظر ردك — %2$@"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ menunggu jawaban — %2$@"
+          }
+        }
+      }
+    },
     "%@ из %@": {
       "localizations": {
         "ar": {
@@ -8488,6 +8570,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Git-репозиторії"
+          }
+        }
+      }
+    },
+    "Hook AI Hub Bar для Copilot": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar hook for Copilot"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hook AI Hub Bar для Copilot"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI-Hub-Bar-Hook für Copilot"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hook AI Hub Bar pour Copilot"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hook de AI Hub Bar para Copilot"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hook di AI Hub Bar per Copilot"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hook do AI Hub Bar para o Copilot"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hook AI Hub Bar dla Copilota"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copilot 用 AI Hub Bar フック"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copilot용 AI Hub Bar 후크"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "خطاف AI Hub Bar لـ Copilot"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hook AI Hub Bar untuk Copilot"
           }
         }
       }
@@ -53063,6 +53221,82 @@
         }
       }
     },
+    "Обновить hook": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Update hook"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Оновити hook"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hook aktualisieren"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mettre à jour le hook"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Actualizar hook"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aggiorna hook"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Atualizar hook"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zaktualizuj hook"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "フックを更新"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "후크 업데이트"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تحديث الخطاف"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Perbarui hook"
+          }
+        }
+      }
+    },
     "Обновить hooks": {
       "localizations": {
         "ar": {
@@ -76354,6 +76588,82 @@
         }
       }
     },
+    "С hook сессии Copilot CLI видны в «Сессиях» как у Claude: работает, ждёт разрешения или ответа, готово — и «ждёт» приходит уведомлением. Это отдельный файл ~/.copilot/hooks/aihubbar.json; другие hooks Copilot не трогаются. Подхватывается новыми сессиями Copilot.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "With the hook, Copilot CLI sessions appear in «Sessions» like Claude’s: working, waiting for a permission or an answer, done — and «waiting» comes as a notification. It is a separate file, ~/.copilot/hooks/aihubbar.json; Copilot’s other hooks are not touched. New Copilot sessions pick it up."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "З hook сесії Copilot CLI видно в «Сесіях», як у Claude: працює, чекає дозволу чи відповіді, готово — і «чекає» приходить сповіщенням. Це окремий файл ~/.copilot/hooks/aihubbar.json; інші hooks Copilot не змінюються. Підхоплюється новими сесіями Copilot."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mit dem Hook erscheinen Copilot-CLI-Sitzungen unter «Sitzungen» wie die von Claude: arbeitet, wartet auf eine Erlaubnis oder Antwort, fertig – und «wartet» kommt als Mitteilung. Es ist eine eigene Datei, ~/.copilot/hooks/aihubbar.json; andere Copilot-Hooks bleiben unberührt. Neue Copilot-Sitzungen übernehmen ihn."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Avec le hook, les sessions Copilot CLI apparaissent dans « Sessions » comme celles de Claude : au travail, en attente d’une autorisation ou d’une réponse, terminé — et « en attente » arrive en notification. C’est un fichier à part, ~/.copilot/hooks/aihubbar.json ; les autres hooks de Copilot ne sont pas touchés. Les nouvelles sessions Copilot le prennent en compte."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Con el hook, las sesiones de Copilot CLI aparecen en «Sesiones» como las de Claude: trabajando, esperando un permiso o una respuesta, listo — y «esperando» llega como notificación. Es un archivo aparte, ~/.copilot/hooks/aihubbar.json; los demás hooks de Copilot no se tocan. Lo usan las sesiones nuevas de Copilot."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Con l’hook, le sessioni di Copilot CLI compaiono in «Sessioni» come quelle di Claude: al lavoro, in attesa di un permesso o di una risposta, finito — e «in attesa» arriva come notifica. È un file a sé, ~/.copilot/hooks/aihubbar.json; gli altri hook di Copilot restano intatti. Lo usano le nuove sessioni di Copilot."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Com o hook, as sessões do Copilot CLI aparecem em «Sessões» como as do Claude: trabalhando, aguardando permissão ou resposta, pronto — e «aguardando» chega como notificação. É um arquivo separado, ~/.copilot/hooks/aihubbar.json; os outros hooks do Copilot não são alterados. Novas sessões do Copilot passam a usá-lo."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Z hookiem sesje Copilot CLI widać w «Sesjach» jak sesje Claude: pracuje, czeka na zgodę lub odpowiedź, gotowe — a «czeka» przychodzi jako powiadomienie. To osobny plik ~/.copilot/hooks/aihubbar.json; inne hooki Copilota pozostają nietknięte. Używają go nowe sesje Copilota."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "フックを入れると、Copilot CLI のセッションが Claude と同じように「セッション」に表示されます：作業中、許可や返答を待機中、完了 — 「待機中」は通知でも届きます。別ファイル ~/.copilot/hooks/aihubbar.json で、Copilot の他のフックには触れません。新しい Copilot セッションから有効になります。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "후크를 설치하면 Copilot CLI 세션이 Claude처럼 「세션」에 표시됩니다: 작업 중, 권한이나 답변 대기, 완료 — 「대기」는 알림으로도 옵니다. 별도 파일 ~/.copilot/hooks/aihubbar.json이며 Copilot의 다른 후크는 건드리지 않습니다. 새 Copilot 세션부터 적용됩니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مع الخطاف تظهر جلسات Copilot CLI في «الجلسات» مثل جلسات Claude: يعمل، ينتظر إذنًا أو ردًا، انتهى — ويصل «ينتظر» كإشعار. إنه ملف مستقل ‎~/.copilot/hooks/aihubbar.json‏، ولا تُمس خطافات Copilot الأخرى. تستخدمه جلسات Copilot الجديدة."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dengan hook, sesi Copilot CLI tampil di «Sesi» seperti milik Claude: bekerja, menunggu izin atau jawaban, selesai — dan «menunggu» datang sebagai notifikasi. Ini file tersendiri, ~/.copilot/hooks/aihubbar.json; hook Copilot lainnya tidak disentuh. Sesi Copilot baru akan memakainya."
+          }
+        }
+      }
+    },
     "С закрытой крышкой": {
       "localizations": {
         "ar": {
@@ -83513,6 +83823,82 @@
         }
       }
     },
+    "Снять hook": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remove hook"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Зняти hook"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hook entfernen"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Retirer le hook"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quitar hook"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rimuovi hook"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remover hook"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Usuń hook"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "フックを削除"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "후크 제거"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إزالة الخطاف"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hapus hook"
+          }
+        }
+      }
+    },
     "Снять hooks": {
       "localizations": {
         "ar": {
@@ -84497,6 +84883,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Стан невідомий"
+          }
+        }
+      }
+    },
+    "Состояние сессий Copilot": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copilot session state"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Стан сесій Copilot"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Status der Copilot-Sitzungen"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "État des sessions Copilot"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Estado de las sesiones de Copilot"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stato delle sessioni Copilot"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Estado das sessões do Copilot"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stan sesji Copilota"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copilot セッションの状態"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copilot 세션 상태"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "حالة جلسات Copilot"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Status sesi Copilot"
           }
         }
       }
@@ -92795,6 +93257,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Встановити"
+          }
+        }
+      }
+    },
+    "Установить hook": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Install hook"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Встановити hook"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hook installieren"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Installer le hook"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Instalar hook"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Installa hook"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Instalar hook"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zainstaluj hook"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "フックをインストール"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "후크 설치"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تثبيت الخطاف"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pasang hook"
           }
         }
       }

@@ -113,7 +113,7 @@ final class SessionStore {
         }
     }
 
-    /// True when `pid` exists and is still a Claude Code executable (guards against PID reuse).
+    /// True when `pid` exists and is still an agent's executable — Claude Code or Copilot CLI (guards against PID reuse).
     nonisolated static func isClaudeProcessAlive(_ pid: Int32) -> Bool {
         guard pid > 0 else { return false }
         var buffer = [CChar](repeating: 0, count: 4096)
@@ -121,7 +121,7 @@ final class SessionStore {
         guard length > 0 else { return false }
         let path = String(decoding: buffer.prefix(Int(length)).map { UInt8(bitPattern: $0) }, as: UTF8.self)
         let name = (path as NSString).lastPathComponent
-        return RunningSessions.executableNames.contains(name)
+        return RunningSessions.sessionExecutableNames.contains(name)
     }
 
     nonisolated static func deleteOldFiles(in directory: URL, now: Date) {
@@ -209,7 +209,8 @@ final class SessionStore {
         }
         Notifier.post(
             id: "waiting-\(session.id)",
-            title: String(localized: "Claude ждёт ответа — \(session.displayProject)"),
+            title: session.agent == .claudeCode ? String(localized: "Claude ждёт ответа — \(session.displayProject)")
+                : String(localized: "\(session.agentName) ждёт ответа — \(session.displayProject)"),
             body: session.message ?? session.task ?? String(localized: "Нужно ваше решение."),
             target: .session(id: session.id)
         )

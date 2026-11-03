@@ -1,6 +1,7 @@
 import Foundation
 
-/// The Claude Code hook installed to Application Support. It must never affect Claude on its own:
+/// The Claude Code hook installed to Application Support, also used for GitHub Copilot CLI (`--agent copilot`, its
+/// Claude-style PascalCase events; `CopilotHooks`). It must never affect the agent on its own:
 /// no stdout (SessionStart/UserPromptSubmit stdout would enter Claude's context), no stderr, always exit 0.
 /// The one exception is an answer the person gave in AI Hub Bar to a PermissionRequest (see `ApprovalFiles`).
 /// Events and fields follow code.claude.com/docs/en/hooks (checked 2026-10-29, see DECISIONS.md).
@@ -13,14 +14,15 @@ enum HookScript {
 
     static let source = #"""
     #!/usr/bin/python3
-    # AI Hub Bar hook, format 3. Installed by AI Hub Bar; records Claude Code session state in
+    # AI Hub Bar hook, format 4. Installed by AI Hub Bar; records Claude Code (or, with --agent copilot, Copilot CLI)
+    # session state in
     # ~/Library/Application Support/ClaudePult/sessions/<session_id>.json for the menu bar app.
     # Always exits 0 and prints nothing, except on PermissionRequest when the person answered «Разрешить» or
     # «Отклонить» in AI Hub Bar: then it prints that decision. Claude shows its own dialog meanwhile.
     import datetime, fcntl, json, os, re, signal, subprocess, sys, time, uuid
 
     WAITING_NOTIFICATIONS = {"permission_prompt", "elicitation_dialog", "elicitation_url_dialog", "agent_needs_input"}
-    CLAUDE_NAMES = {"claude", "claude.exe"}
+    PROCESS_NAMES = {"claude": {"claude", "claude.exe"}, "copilot": {"copilot"}}
     PROMPT_LIMIT = 200
     APPROVAL_WAIT = 290
     ALIVE_WITHIN = 30
@@ -56,8 +58,12 @@ enum HookScript {
         return name, os.path.join(root, name)
 
 
+    def agent():
+        return arg("--agent", "claude")
+
+
     def claude_process():
-        """Walks up from the hook to the Claude Code process: (pid, tty or None)."""
+        """Walks up from the hook to the agent's process (Claude Code, Copilot CLI): (pid, tty or None)."""
         pid = os.getppid()
         for _ in range(5):
             try:
@@ -69,7 +75,7 @@ enum HookScript {
             if len(parts) < 3:
                 return None, None
             ppid, tty, comm = parts
-            if os.path.basename(comm) in CLAUDE_NAMES:
+            if os.path.basename(comm) in PROCESS_NAMES.get(agent(), set()):
                 return pid, (None if tty in ("??", "-") else "/dev/" + tty)
             pid = int(ppid)
             if pid <= 1:
@@ -262,7 +268,7 @@ enum HookScript {
         # The request goes first, so AI Hub Bar sees it together with the «waiting» state.
         request_id = None
         approvals = os.path.join(os.path.dirname(directory), "approvals")
-        if data.get("hook_event_name") == "PermissionRequest":
+        if data.get("hook_event_name") == "PermissionRequest" and agent() == "claude":
             try:
                 request_id = open_request(data, approvals, session_id)
             except Exception:
@@ -303,7 +309,8 @@ enum HookScript {
             if "claude_pid" not in record or (pid and pid != record.get("claude_pid")):
                 record["claude_pid"], record["tty"] = pid, tty
                 record["term_program"] = os.environ.get("TERM_PROGRAM")
-                record["entrypoint"] = os.environ.get("CLAUDE_CODE_ENTRYPOINT")
+                record["entrypoint"] = os.environ.get("CLAUDE_CODE_ENTRYPOINT") if agent() == "claude" else agent()
+            record["agent"] = agent()
             apply(record, data)
 
             tmp = path + ".tmp"
