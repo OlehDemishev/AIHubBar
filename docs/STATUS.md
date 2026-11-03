@@ -5,16 +5,17 @@
 **Updated:** 2026-11-03
 
 **Now:**
-- `feat/telegram-settings`: Telegram stage 4 — ⚙️ settings in the bot, quiet hours, «Не спать» — PR open (the last stage)
-- merged 2026-11-03: #251 menu bar ☕ follows the «Не спать» switch, #248 «Не спать» on/off in the menu bar, #241 Codex states, #240 quick command shortcuts, #238 «Быстрый запрос», #236 content spec, #242 «Telegram» stage 1, #244 menu at the bottom, #246 shared bot (Worker not deployed yet), #247 desktop CI off for Mac string changes, #249 the bot's menu set up by each person, #252 stage 2 (sessions, requests, limits), #254 stage 3 (tasks and runs)
+- `feat/telegram-mini-app`: Telegram Mini App — AI Hub Bar as a page in the bot's Menu button (shared bot) — PR open
+- merged 2026-11-03: #251 menu bar ☕ follows the «Не спать» switch, #248 «Не спать» on/off in the menu bar, #241 Codex states, #240 quick command shortcuts, #238 «Быстрый запрос», #236 content spec, #242 «Telegram» stage 1, #244 menu at the bottom, #246 shared bot (Worker not deployed yet), #247 desktop CI off for Mac string changes, #249 the bot's menu set up by each person, #252 stage 2 (sessions, requests, limits), #254 stage 3 (tasks and runs), #255 stage 4 (settings in the bot)
 
 **Next:**
-- next beta or 0.5.1 carries stage 8 (#230–#232) and #236–#254: 0.5.1-beta.1 was built from 27c5e2d, before them
-- Telegram: all four stages built; try them live in the bot; deploy the shared bot's Worker when ready (relay/telegram/README.md)
+- next beta or 0.5.1 carries stage 8 (#230–#232) and #236–#255: 0.5.1-beta.1 was built from 27c5e2d, before them
+- Telegram: after Oleh deploys the Worker — put its address into `TelegramRelay.defaultURL`, then try the bot and the Mini App live
 - content (docs/specs/SPEC-content.md, agreed): stage 1 — walkthrough of the «Тексты» profile on a sample folder, then «Версии», then batch tasks
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/specs/SPEC-windows.md §9, stage 2–3 leftovers)
 
 **Needs Oleh:**
+- Telegram Mini App (and the shared bot): create the bot at @BotFather, deploy `relay/telegram` (README: Cloudflare login, three secrets, `npm run deploy`, `/admin/setup`), send the workers.dev address; then in AI Hub Bar choose «Общий бот» and «Подключить Telegram» — the Menu button opens the app
 - shared Telegram bot: create the bot at @BotFather (pick its name), then deploy the Worker by `relay/telegram/README.md` (Cloudflare login, three secrets, `npm run deploy`, `/admin/setup`) and send the workers.dev address — it goes into `TelegramRelay.defaultURL`
 - Telegram: send /menu once — the menu appears at the bottom (the installed build has it); then try 📊 and 🧹. Delete `_daily-report/bot.py` and `install-bot.sh`
 - «Быстрый запрос»: Settings → Modules → «Быстрый запрос» on, then ⌃⌥P from Terminal or Xcode — send one task to the background and one to Codex
@@ -27,6 +28,12 @@
 - «Раскладка»: tried live in TextEdit, Safari, Chrome (⌥⇧ too); Telegram and Notes are yours to try (not typed into by the agent)
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-03 — Telegram Mini App (branch `feat/telegram-mini-app`)
+
+Done: Oleh chose the Mini App over a list of commands, with the shared bot. Spec §10. `relay/telegram/src/app.html`: one page served at `/app` (CSP: own scripts, Telegram's script, own API only) — tabs 🏠 (rings, requests, sessions, runs, disk), 🤖 (requests with Разрешить / Отклонить, sessions), 🚀 (projects, the task field, runs with Журнал / Остановить, PR links), ⏳ (every service with bars, resets, forecast), ••• (reports, cleanup, «Не спать», quick commands, alerts, quiet hours, silence); Telegram's theme colours, Russian or English by the user's language, haptics, Telegram's own confirm and popups, refresh every 10 s, «💤 … не на связи» when the Mac sleeps, `?demo=1` (and any local file) shows sample data. Relay: `POST /v1/app` checks Telegram's `initData` signature (HMAC with the bot token, under a day old) and passes `{type: "app"}` to the chat's answering Mac, 15 s for `appReply`; `/admin/setup` makes `/app` the Menu button. Mac: `MiniAppCall` (every action checked like the bot's buttons), `MiniAppState` / `MiniAppReply` (Codable), `TelegramBotController.handleApp` with the same rules as the bot (answers, tasks, quick commands over the shared bot need their switches); `startTask` shared by the bot and the app. Settings → Modules → Telegram → «Где меню»: at the bottom and in the Menu button, or only in the Menu button (the keyboard goes away with a note). 12 new strings in 12 languages; the page has its own Russian and English texts.
+Checked: scripts/check.sh green; 4 new relay tests (initData signature, age, tampering; a call reaches the answering Mac and back; refused / unpaired / offline / bad action; setup sets the Menu button), 6 new Swift tests (`TelegramMiniAppTests`); `wrangler deploy --dry-run` bundles the page (60 KB); end-to-end against `wrangler dev`: the page with its CSP, a signed call answered by a fake Mac, another bot's signature 401, another person 404, Mac offline 503; the page in the browser pane at phone size, all five tabs with sample data.
+Left: live in Telegram only after the Worker is deployed and its address is in the app.
 
 ## 2026-11-03 — Telegram stage 4: settings in the bot, quiet hours, «Не спать» (branch `feat/telegram-settings`)
 

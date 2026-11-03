@@ -216,3 +216,70 @@ test("a press goes back to the Mac that sent its message", async () => {
   await t.hub.onUpdate({ ...press, update_id: 52 });
   assert.equal(t.sent.at(-1).id, mini.device_id);
 });
+
+// MARK: Mini App (§10)
+
+import { createHmac } from "node:crypto";
+import { verifyInitData } from "../src/hub.js";
+
+const BOT_TOKEN = "123456:test-token-not-real";
+
+function initData(user, authDate, token = BOT_TOKEN) {
+  const fields = { auth_date: String(authDate), query_id: "AAE", user: JSON.stringify(user) };
+  const check = Object.keys(fields).sort().map((k) => `${k}=${fields[k]}`).join("\n");
+  const secret = createHmac("sha256", "WebAppData").update(token).digest();
+  const hash = createHmac("sha256", secret).update(check).digest("hex");
+  return new URLSearchParams({ ...fields, hash }).toString();
+}
+
+test("initData: Telegram's signature, fresh, with a user", async () => {
+  const now = 1_700_000_000;
+  assert.equal((await verifyInitData(initData({ id: 42, first_name: "O" }, now - 60), BOT_TOKEN, now)).id, 42);
+  assert.equal(await verifyInitData(initData({ id: 42 }, now - 60, "999:other-bot"), BOT_TOKEN, now), null);
+  assert.equal(await verifyInitData(initData({ id: 42 }, now - 2 * 86400), BOT_TOKEN, now), null);
+  const tampered = initData({ id: 42 }, now).replace("%22id%22%3A42", "%22id%22%3A43");
+  assert.equal(await verifyInitData(tampered, BOT_TOKEN, now), null);
+  assert.equal(await verifyInitData("", BOT_TOKEN, now), null);
+  assert.equal(await verifyInitData("hash=zz", BOT_TOKEN, now), null);
+  assert.equal(await verifyInitData(initData({ id: 42 }, now), "", now), null);
+});
+
+function makeAppHub() {
+  const t = makeHub();
+  t.hub.botToken = BOT_TOKEN;
+  return t;
+}
+
+test("a Mini App call goes to the answering Mac and its reply comes back", async () => {
+  const t = makeAppHub();
+  const mini = await paired(t, "Mac mini");
+  t.online.add(mini.device_id);
+  const now = Math.floor(1_700_000_000_000 / 1000);
+  const pending = t.hub.app(initData({ id: 42 }, now), "state", { x: 1 });
+  await new Promise((r) => setTimeout(r, 0));
+  const sent = t.sent.at(-1);
+  assert.equal(sent.id, mini.device_id);
+  assert.deepEqual([sent.message.type, sent.message.action, sent.message.params.x], ["app", "state", 1]);
+  await t.hub.onMessage(mini.device_id, { type: "appReply", id: sent.message.id, body: { ok: true } });
+  assert.deepEqual(await pending, { status: 200, body: { ok: true } });
+});
+
+test("a Mini App call: refused, unpaired, offline, bad action", async () => {
+  const t = makeAppHub();
+  const now = Math.floor(1_700_000_000_000 / 1000);
+  assert.equal((await t.hub.app("hash=bad", "state", {})).status, 401);
+  assert.equal((await t.hub.app(initData({ id: 42 }, now), "state", {})).status, 404);
+  await paired(t, "Mac mini");
+  const offline = await t.hub.app(initData({ id: 42 }, now), "state", {});
+  assert.deepEqual([offline.status, offline.body.mac], [503, "Mac mini"]);
+  assert.equal((await t.hub.app(initData({ id: 42 }, now), "rm -rf", {})).status, 400);
+  // Another person's initData reaches only their own chat.
+  assert.equal((await t.hub.app(initData({ id: 77 }, now), "state", {})).status, 404);
+});
+
+test("setup makes the Mini App the Menu button", async () => {
+  const t = makeHub();
+  await t.hub.setup("https://relay.example/telegram", "s", "https://relay.example/app");
+  const button = t.calls.find((c) => c.method === "setChatMenuButton").params.menu_button;
+  assert.deepEqual([button.type, button.web_app.url], ["web_app", "https://relay.example/app"]);
+});

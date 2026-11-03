@@ -23,6 +23,8 @@ struct TelegramBotSettings: Codable, Equatable, Sendable {
     var quietHours: QuietHours?
     /// ⚙️ «Тишина на 1 ч».
     var mutedUntil: Date?
+    /// «Где меню» (§10): false — only the Menu button (the Mini App with the shared bot), no keyboard at the bottom.
+    var bottomMenu: Bool?
 
     /// Alerts to Telegram are held back now: muted, or inside the quiet hours. Requests and replies still come.
     func isQuiet(now: Date, calendar: Calendar = .current) -> Bool {
@@ -440,10 +442,13 @@ struct BotMessage: Equatable, Sendable {
     var buttons: [[Button]] = []
     /// Carries the menu at the bottom instead of inline buttons: a message has one or the other.
     var menu: BotMenu?
+    /// Takes the menu at the bottom away («Где меню» → only the Menu button).
+    var removesMenu = false
 
     var installsMenu: Bool { menu != nil }
 
     var replyMarkup: [String: Any] {
+        if removesMenu { return ["remove_keyboard": true] }
         if let menu { return menu.replyMarkup }
         return ["inline_keyboard": buttons.map { row in row.map { ["text": $0.title, "callback_data": $0.route.data] } }]
     }

@@ -205,6 +205,19 @@ struct TelegramMenuSection: View {
                     .help("Выключено — у профиля общее меню")
                 }
             }
+            Picker("Где меню", systemImage: "menubar.dock.rectangle", selection: Binding(
+                get: { settings.telegramBot.bottomMenu != false },
+                set: { bottom in
+                    settings.telegramBot.bottomMenu = bottom ? nil : false
+                    Task { await bot.applyMenuPlacement() }
+                }
+            )) {
+                Text("Внизу чата и в кнопке «Меню»").tag(true)
+                Text("Только в кнопке «Меню»").tag(false)
+            }
+            .help(bot.usesSharedBot
+                  ? String(localized: "Кнопка «Меню» открывает приложение AI Hub Bar прямо в Telegram")
+                  : String(localized: "Кнопка «Меню» показывает список команд бота"))
             Group {
                 ForEach(items, id: \.self) { item in
                     row(item)

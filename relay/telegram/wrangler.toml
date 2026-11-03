@@ -12,6 +12,12 @@ class_name = "Hub"
 tag = "v1"
 new_sqlite_classes = ["Hub"]
 
+# The Mini App's page is imported as text (src/app.html).
+[[rules]]
+type = "Text"
+globs = ["**/*.html"]
+fallthrough = false
+
 [vars]
 SITE_URL = "https://github.com/OlehDemishev/AIHubBar"
 

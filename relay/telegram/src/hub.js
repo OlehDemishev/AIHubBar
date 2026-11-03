@@ -9,6 +9,10 @@ export const ALLOWED_METHODS = ["sendMessage", "editMessageText", "editMessageRe
 export const CODE_TTL_MS = 10 * 60 * 1000;
 export const QUEUE_TTL_MS = 24 * 60 * 60 * 1000;
 export const CALLS_PER_MINUTE = 30;
+/** The Mini App's calls wait this long for the Mac (§10). */
+export const APP_TIMEOUT_MS = 15_000;
+/** Telegram's `initData` older than this is refused. */
+export const INIT_DATA_MAX_AGE_S = 24 * 60 * 60;
 const OFFLINE_NOTICE_MS = 10 * 60 * 1000;
 const CODE_ALPHABET = "abcdefghijkmnpqrstuvwxyz23456789";
 
@@ -21,8 +25,13 @@ export class HubCore {
    * @param {() => number} deps.now
    * @param {(n:number) => Uint8Array} deps.random
    * @param {string} deps.siteURL
+   * @param {string} [deps.botToken] for checking the Mini App's `initData`
    */
-  constructor({ storage, telegram, sockets, now = Date.now, random, siteURL }) {
+  constructor({ storage, telegram, sockets, now = Date.now, random, siteURL, botToken = "" }) {
+    this.botToken = botToken;
+    /** Mini App calls waiting for their Mac: id → resolve. */
+    this.appCalls = new Map();
+    this.nextAppID = 1;
     this.storage = storage;
     this.telegram = telegram;
     this.sockets = sockets;
@@ -88,6 +97,11 @@ export class HubCore {
       case "unpair":
         await this.unpair(deviceId, device);
         return [await this.hello(deviceId)];
+      case "appReply": {
+        const resolve = this.appCalls.get(message.id);
+        if (resolve) resolve({ status: 200, body: message.body ?? null, deviceId });
+        return [];
+      }
       default:
         return [];
     }
@@ -259,10 +273,42 @@ export class HubCore {
     await this.telegram("sendMessage", { chat_id: chatID, text: message, disable_web_page_preview: true });
   }
 
+  // MARK: Mini App (§10)
+
+  /**
+   * One call from the Mini App: `initData` proves the Telegram user; the call goes to the Mac answering that private
+   * chat and its reply comes back. 401 bad or old `initData`, 404 no Mac paired, 503 the Mac is offline, 504 no answer.
+   */
+  async app(initData, action, params) {
+    const user = await verifyInitData(initData, this.botToken, this.now() / 1000);
+    if (!user) return { status: 401, body: { error: "unauthorized" } };
+    const chat = await this.storage.get(`chat:${user.id}`);
+    if (!chat?.active) return { status: 404, body: { error: "no Mac" } };
+    const device = await this.storage.get(`dev:${chat.active}`);
+    if (typeof action !== "string" || !/^[a-zA-Z]{1,20}$/.test(action)) return { status: 400, body: { error: "bad action" } };
+    const id = this.nextAppID++;
+    let timer;
+    const reply = new Promise((resolve) => {
+      this.appCalls.set(id, resolve);
+      timer = setTimeout(() => resolve({ status: 504, body: { error: "timeout", mac: device?.name || "Mac" } }), APP_TIMEOUT_MS);
+    });
+    if (!this.sockets.send(chat.active, { type: "app", id, action, params: params && typeof params === "object" ? params : {} })) {
+      clearTimeout(timer);
+      this.appCalls.delete(id);
+      return { status: 503, body: { error: "offline", mac: device?.name || "Mac" } };
+    }
+    const result = await reply;
+    clearTimeout(timer);
+    this.appCalls.delete(id);
+    // Only the answering Mac's reply counts.
+    if (result.deviceId && result.deviceId !== chat.active) return { status: 504, body: { error: "timeout" } };
+    return { status: result.status, body: result.body };
+  }
+
   // MARK: Setup
 
   /** Once after a deploy: the webhook, the bot's commands and description; remembers its username. */
-  async setup(webhookURL, webhookSecret) {
+  async setup(webhookURL, webhookSecret, appURL) {
     const me = await this.telegram("getMe", {});
     const username = me.body?.result?.username;
     if (username) await this.storage.put("meta:bot", username);
@@ -272,6 +318,11 @@ export class HubCore {
         url: webhookURL, secret_token: webhookSecret, allowed_updates: ["message", "callback_query"], drop_pending_updates: true,
       })).status,
     };
+    if (appURL) {
+      results.menuButton = (await this.telegram("setChatMenuButton", {
+        menu_button: { type: "web_app", text: "AI Hub Bar", web_app: { url: appURL } },
+      })).status;
+    }
     for (const language of ["en", "ru"]) {
       const scope = language === "en" ? {} : { language_code: language };
       results[`commands_${language}`] = (await this.telegram("setMyCommands", { ...scope, commands: text(language, "commands") })).status;
@@ -296,6 +347,42 @@ export function base64url(bytes) {
   let binary = "";
   for (const byte of bytes) binary += String.fromCharCode(byte);
   return btoa(binary).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+}
+
+/**
+ * Telegram's Mini App `initData` check: the data-check string (every field but `hash`, sorted, `key=value` lines)
+ * signed with HMAC-SHA-256 under HMAC-SHA-256("WebAppData", bot token). Returns the user, or null.
+ */
+export async function verifyInitData(initData, botToken, nowSeconds) {
+  if (typeof initData !== "string" || !initData || !botToken) return null;
+  const params = new URLSearchParams(initData);
+  const hash = params.get("hash");
+  if (!hash || !/^[0-9a-f]{64}$/.test(hash)) return null;
+  params.delete("hash");
+  const check = [...params.entries()].map(([k, v]) => `${k}=${v}`).sort().join("\n");
+  const secret = await hmac(new TextEncoder().encode("WebAppData"), new TextEncoder().encode(botToken));
+  const expected = hex(new Uint8Array(await hmac(secret, new TextEncoder().encode(check))));
+  if (!timingSafeEqual(expected, hash)) return null;
+  const authDate = Number(params.get("auth_date"));
+  if (!Number.isFinite(authDate) || nowSeconds - authDate > INIT_DATA_MAX_AGE_S) return null;
+  try {
+    const user = JSON.parse(params.get("user") || "null");
+    return user && Number.isInteger(user.id) ? user : null;
+  } catch {
+    return null;
+  }
+}
+
+async function hmac(keyBytes, data) {
+  const key = await crypto.subtle.importKey("raw", keyBytes, { name: "HMAC", hash: "SHA-256" }, false, ["sign"]);
+  return crypto.subtle.sign("HMAC", key, data);
+}
+
+function timingSafeEqual(a, b) {
+  if (a.length !== b.length) return false;
+  let diff = 0;
+  for (let i = 0; i < a.length; i++) diff |= a.charCodeAt(i) ^ b.charCodeAt(i);
+  return diff === 0;
 }
 
 export async function sha256(value) {

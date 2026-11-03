@@ -5,9 +5,11 @@
 //   POST /v1/devices      a Mac registers: {name} → {device_id, device_key}
 //   GET  /v1/connect      a Mac's WebSocket (Authorization: Bearer <device_key>)
 //   POST /admin/setup     once after a deploy (Authorization: Bearer <ADMIN_SECRET>)
+//   GET  /app             the Mini App (§10); POST /v1/app its calls ({initData, action, params})
 
 import { DurableObject } from "cloudflare:workers";
 import { HubCore } from "./hub.js";
+import APP_HTML from "./app.html";
 
 export default {
   async fetch(request, env) {
@@ -25,7 +27,17 @@ export default {
       }
       return hub.fetch(request);
     }
-    if ((url.pathname === "/v1/devices" && request.method === "POST") || url.pathname === "/v1/connect") {
+    if (url.pathname === "/app" && request.method === "GET") {
+      return new Response(APP_HTML, {
+        headers: {
+          "Content-Type": "text/html; charset=utf-8",
+          "Cache-Control": "no-cache",
+          "Content-Security-Policy": "default-src 'none'; script-src 'self' 'unsafe-inline' https://telegram.org; style-src 'unsafe-inline'; connect-src 'self'; img-src 'self' data:",
+        },
+      });
+    }
+    if ((url.pathname === "/v1/devices" && request.method === "POST") || url.pathname === "/v1/connect"
+        || (url.pathname === "/v1/app" && request.method === "POST")) {
       return hub.fetch(request);
     }
     return new Response("AI Hub Bar Telegram relay", { status: url.pathname === "/" ? 200 : 404 });
@@ -64,6 +76,7 @@ export class Hub extends DurableObject {
         },
       },
       random: (n) => crypto.getRandomValues(new Uint8Array(n)),
+      botToken: env.BOT_TOKEN,
       siteURL: env.SITE_URL || "https://github.com/OlehDemishev/AIHubBar",
     });
   }
@@ -91,8 +104,13 @@ export class Hub extends DurableObject {
         for (const message of await this.core.onConnect(deviceId)) server.send(JSON.stringify(message));
         return new Response(null, { status: 101, webSocket: client });
       }
+      case "/v1/app": {
+        const body = await request.json().catch(() => ({}));
+        const result = await this.core.app(body?.initData, body?.action, body?.params);
+        return Response.json(result.body, { status: result.status });
+      }
       case "/admin/setup":
-        return Response.json(await this.core.setup(`${url.origin}/telegram`, this.env.WEBHOOK_SECRET));
+        return Response.json(await this.core.setup(`${url.origin}/telegram`, this.env.WEBHOOK_SECRET, `${url.origin}/app`));
       default:
         return new Response("not found", { status: 404 });
     }

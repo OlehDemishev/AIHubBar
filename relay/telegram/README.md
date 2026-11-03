@@ -7,6 +7,8 @@ WebSocket. The bot's token is only in this Worker's secrets — never in the app
 - `src/hub.js` — the logic (pairing, routing, what a Mac may call), plain JavaScript without Cloudflare.
 - `src/index.js` — the Worker and the `Hub` Durable Object (WebSocket Hibernation API).
 - `src/texts.js` — what the bot says itself (Russian / English).
+- `src/app.html` — the Mini App: one page with Telegram's theme colours; every call carries Telegram's `initData`,
+  which `hub.js` checks with the bot token before passing the call to the Mac.
 - `test/` — `npm test` (Node 22, no packages needed).
 
 ## Deploy (once)
@@ -27,7 +29,9 @@ WebSocket. The bot's token is only in this Worker's secrets — never in the app
    ```bash
    curl -X POST -H "Authorization: Bearer <ADMIN_SECRET>" https://aihubbar-telegram.<account>.workers.dev/admin/setup
    ```
-   The answer lists the bot's username and HTTP 200 for each step.
+   The answer lists the bot's username and HTTP 200 for each step. It also makes the Mini App (`/app`, docs/specs/
+   SPEC-telegram.md §10) the bot's Menu button; open `https://aihubbar-telegram.<account>.workers.dev/app?demo=1` in a
+   browser to see it with sample data.
 6. Put the address into the app: `TelegramRelay.defaultURL` (`AIHubBar/Services/TelegramRelay.swift`). Until then a
    Mac can use it with `defaults write com.demishev.claudepult telegramRelayURL https://…workers.dev`.
 
