@@ -5,15 +5,15 @@
 **Updated:** 2026-11-03
 
 **Now:**
-- refactoring stage 7 (docs and names) on branch `refactor/stage7-docs-names`, PR open — the last stage
+- nothing in progress; refactoring finished: stages 0–7 merged (#209–#223), the last one renamed the project to `AIHubBar.xcodeproj` / scheme `AIHubBar`
 
 **Next:**
 - Oleh tries «Раскладка» in his own apps; next beta with fixes: `scripts/release.sh 0.5.0-beta.1 --publish`
 - Mac island: a live VoiceOver walk; why one test drag onto the island didn't land
-- Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/SPEC-windows.md §9, stage 2–3 leftovers)
+- Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/specs/SPEC-windows.md §9, stage 2–3 leftovers)
 
 **Needs Oleh:**
-- review and merge the stage 7 PR (the Xcode project is now `AIHubBar.xcodeproj`, scheme `AIHubBar`)
+- say what comes after the refactoring (a 0.5 release with it, the next beta, or new features)
 - look at the new help: panel → «?» and https://olehdemishev.github.io/AIHubBar/help.html
 - look at the new Settings and say what to change next
 - MacBook Air: update to 0.4.0 through Sparkle (Settings → General → Updates) and check the island at the real notch
