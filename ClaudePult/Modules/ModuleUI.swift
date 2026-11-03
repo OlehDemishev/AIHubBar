@@ -49,7 +49,7 @@ struct MiniBar: View {
             GeometryReader { geometry in
                 ZStack(alignment: .leading) {
                     Capsule().fill(Color.secondary.opacity(0.25))
-                    Capsule().fill(Color(nsColor: MenuBarRenderer.color(value)))
+                    Capsule().fill(UsageLevel(value).color)
                         .frame(width: max(3, geometry.size.width * min(value, 100) / 100))
                 }
             }

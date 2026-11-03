@@ -47,7 +47,7 @@ struct ProjectCommandsView: View {
             }
 
             if comparing {
-                FlowRow(spacing: 4) {
+                FlowLayout(spacing: 4) {
                     ForEach(services.available, id: \.id) { item in
                         Toggle(item.shortName(compatibleName: settings.aiServices.compatibleName), isOn: Binding(
                             get: { compareIDs.contains(item.id) },
@@ -64,7 +64,7 @@ struct ProjectCommandsView: View {
                     .foregroundStyle(.secondary)
             }
 
-            FlowRow(spacing: 4) {
+            FlowLayout(spacing: 4) {
                 ForEach(commands) { command in
                     Button(command.title) { start(command) }
                         .controlSize(.small)

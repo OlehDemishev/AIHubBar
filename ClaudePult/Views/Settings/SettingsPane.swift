@@ -135,12 +135,7 @@ struct PaneIcon: View {
     var size: CGFloat = 20
 
     var body: some View {
-        Image(systemName: pane.symbol)
-            .font(.system(size: size * 0.55, weight: .medium))
-            .foregroundStyle(.white)
-            .frame(width: size, height: size)
-            .background(RoundedRectangle(cornerRadius: size * 0.24, style: .continuous).fill(pane.tint.gradient))
-            .accessibilityHidden(true)
+        IconTile(symbol: pane.symbol, tint: pane.tint, size: size)
     }
 }
 

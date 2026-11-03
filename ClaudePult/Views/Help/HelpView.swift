@@ -42,11 +42,7 @@ private struct HelpTopicRow: View {
 
     var body: some View {
         HStack(spacing: 9) {
-            Image(systemName: topic.symbol)
-                .font(.system(size: 12, weight: .medium))
-                .foregroundStyle(.white)
-                .frame(width: 22, height: 22)
-                .background(RoundedRectangle(cornerRadius: 5.5, style: .continuous).fill(topic.tint.gradient))
+            IconTile(symbol: topic.symbol, tint: topic.tint, size: 22)
             Text(topic.title).font(.system(size: 13.5)).lineLimit(1)
             if topic.isBeta { BetaBadge() }
         }
@@ -118,11 +114,7 @@ private struct HelpPage: View {
 
     private var header: some View {
         HStack(alignment: .center, spacing: 16) {
-            Image(systemName: topic.symbol)
-                .font(.system(size: 26, weight: .medium))
-                .foregroundStyle(.white)
-                .frame(width: 54, height: 54)
-                .background(RoundedRectangle(cornerRadius: 13, style: .continuous).fill(topic.tint.gradient))
+            IconTile(symbol: topic.symbol, tint: topic.tint, size: 54)
             VStack(alignment: .leading, spacing: 4) {
                 HStack(spacing: 8) {
                     Text(topic.title).font(.system(size: 24, weight: .bold))

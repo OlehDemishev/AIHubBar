@@ -508,13 +508,6 @@ struct MenuPanelView: View {
     }
 }
 
-private struct ContentHeightKey: PreferenceKey {
-    static let defaultValue: CGFloat = 0
-    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
-        value = max(value, nextValue())
-    }
-}
-
 private struct EmptyStateView: View {
     let systemImage: String
     let title: String

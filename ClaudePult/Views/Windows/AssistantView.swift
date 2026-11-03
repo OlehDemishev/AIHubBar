@@ -526,7 +526,7 @@ struct AssistantPreview: View {
                             }
                         }
                     }
-                    FlowRow(spacing: 4) {
+                    FlowLayout(spacing: 4) {
                         ForEach(mode.commands.prefix(4) + [CommandTemplate.customTask]) { command in
                             Text(command.title).font(.caption2).padding(.horizontal, 6).padding(.vertical, 2)
                                 .background(Capsule().fill(Color.primary.opacity(0.08)))
