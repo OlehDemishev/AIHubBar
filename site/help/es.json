@@ -240,6 +240,10 @@
             {
               "detail" : "Las sesiones solo se ven con los hooks instalados en Ajustes (se añaden a ~/.claude/settings.json; se guarda una copia al lado).",
               "name" : "Hooks"
+            },
+            {
+              "detail" : "Sus sesiones también muestran «trabajando / esperando / listo» si el hook de AI Hub Bar está instalado en su página de «Servicios de IA». Codex ejecuta un hook nuevo solo tras revisarlo: escriba /hooks en codex y confíe en él. Sin hook, solo las conversaciones recientes, sin estado.",
+              "name" : "Codex y Copilot"
             }
           ],
           "monospaced" : false,
@@ -523,7 +527,7 @@
               "name" : "Notas"
             },
             {
-              "detail" : "Tus botones: un script en segundo plano o en Terminal, un atajo de «Atajos» de macOS, un enlace, archivo, carpeta o app.",
+              "detail" : "Tus botones: un script en segundo plano o en Terminal, un atajo de «Atajos» de macOS, un enlace, archivo, carpeta o app. Cada uno puede tener su propio atajo de teclado.",
               "name" : "Comandos rápidos"
             }
           ],

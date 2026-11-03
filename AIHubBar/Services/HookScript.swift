@@ -1,7 +1,8 @@
 import Foundation
 
 /// The Claude Code hook installed to Application Support, also used for GitHub Copilot CLI (`--agent copilot`, its
-/// Claude-style PascalCase events; `CopilotHooks`). It must never affect the agent on its own:
+/// Claude-style PascalCase events; `CopilotHooks`) and Codex CLI (`--agent codex`, `CodexHooks`). It must never
+/// affect the agent on its own:
 /// no stdout (SessionStart/UserPromptSubmit stdout would enter Claude's context), no stderr, always exit 0.
 /// The one exception is an answer the person gave in AI Hub Bar to a PermissionRequest (see `ApprovalFiles`).
 /// Events and fields follow code.claude.com/docs/en/hooks (checked 2026-10-29, see DECISIONS.md).
@@ -14,15 +15,15 @@ enum HookScript {
 
     static let source = #"""
     #!/usr/bin/python3
-    # AI Hub Bar hook, format 4. Installed by AI Hub Bar; records Claude Code (or, with --agent copilot, Copilot CLI)
-    # session state in
+    # AI Hub Bar hook, format 5. Installed by AI Hub Bar; records Claude Code (or, with --agent copilot / codex,
+    # Copilot CLI / Codex CLI) session state in
     # ~/Library/Application Support/ClaudePult/sessions/<session_id>.json for the menu bar app.
     # Always exits 0 and prints nothing, except on PermissionRequest when the person answered «Разрешить» or
     # «Отклонить» in AI Hub Bar: then it prints that decision. Claude shows its own dialog meanwhile.
     import datetime, fcntl, json, os, re, signal, subprocess, sys, time, uuid
 
     WAITING_NOTIFICATIONS = {"permission_prompt", "elicitation_dialog", "elicitation_url_dialog", "agent_needs_input"}
-    PROCESS_NAMES = {"claude": {"claude", "claude.exe"}, "copilot": {"copilot"}}
+    PROCESS_NAMES = {"claude": {"claude", "claude.exe"}, "copilot": {"copilot"}, "codex": {"codex"}}
     PROMPT_LIMIT = 200
     APPROVAL_WAIT = 290
     ALIVE_WITHIN = 30
@@ -172,6 +173,12 @@ enum HookScript {
             record.pop("message", None)
             for key in ("last_tool", "last_target", "last_tool_at"):
                 record.pop(key, None)
+        elif event == "Interrupt":
+            # Codex: Esc on a running turn — it waits for the next message, like after Stop.
+            record["state"] = "done"
+            record.pop("message", None)
+            for key in ("last_tool", "last_target", "last_tool_at"):
+                record.pop(key, None)
         elif event == "StopFailure":
             record["state"] = "done"
             record["message"] = "Ответ прерван ошибкой API"
@@ -187,6 +194,10 @@ enum HookScript {
         tool = str(data.get("tool_name") or "")
         tool_input = data.get("tool_input") or {}
         target = ""
+        if tool == "apply_patch" and isinstance(tool_input, dict):
+            # Codex edits files by a patch in `command`: the first file it touches.
+            match = re.search(r"^\*\*\* (?:Add|Update|Delete) File: (.+)$", str(tool_input.get("command") or ""), re.M)
+            return tool, os.path.basename(match.group(1).strip()) if match else ""
         if isinstance(tool_input, dict):
             for key in ("file_path", "notebook_path", "command", "pattern", "url", "query", "description", "prompt"):
                 value = tool_input.get(key)

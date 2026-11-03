@@ -53,6 +53,7 @@ final class AppContainer {
     let monitor: SystemMonitor
     let keepAwake: KeepAwakeController
     let quickTools: QuickToolsController
+    let commandHotKeys: CommandHotKeys
     let clipboard: ClipboardHistory
     let notesStore: NotesStore
     let notchIsland: NotchIsland
@@ -171,6 +172,8 @@ final class AppContainer {
         }
         let quickTools = QuickToolsController(settings: settings)
         self.quickTools = quickTools
+        self.commandHotKeys = CommandHotKeys(settings: settings) { [modes] in modes.isOn(.quickCommands) }
+        commandHotKeys.quickPromptOn = { [modes] in modes.isOn(.quickPrompt) }
         IntentBridge.settings = settings
         IntentBridge.quickTools = quickTools
         layoutSwitcher.openSettings = { [requests] in
@@ -211,6 +214,7 @@ final class AppContainer {
             GlobalHotKey.registerIsland(settings.notch.hotKeys)
             GlobalHotKey.islandAction = { [notchIsland] allow in notchIsland.answerByKey(allow: allow) }
             quickPrompt.start()
+            commandHotKeys.start { [quickTools] command in quickTools.runFromHotKey(command) }
             clipboard.start()
             layoutSwitcher.start()
             // Windows can only be made once the app has finished launching.
@@ -350,6 +354,7 @@ private struct AppEnvironment: ViewModifier {
             .environment(app.monitor)
             .environment(app.keepAwake)
             .environment(app.quickTools)
+            .environment(app.commandHotKeys)
             .environment(app.clipboard)
             .environment(app.notesStore)
             .environment(app.notchIsland)

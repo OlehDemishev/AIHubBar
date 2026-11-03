@@ -89,7 +89,59 @@ enum GlobalHotKey {
         var reference: EventHotKeyRef?
         let status = RegisterEventHotKey(keyCode, modifiers, EventHotKeyID(signature: signature, id: id.rawValue),
                                          GetApplicationEventTarget(), 0, &reference)
+        if status == noErr { combos[id.rawValue] = KeyCombo(keyCode: keyCode, modifiers: modifiers) }
         return status == noErr ? reference : nil
+    }
+
+    // MARK: Quick command shortcuts (SPEC-profiles §4.3)
+
+    private static var commandReferences: [EventHotKeyRef] = []
+    /// Hot key id → quick command id; the ids start far above `ID` so the fixed keys never collide.
+    private static var commandIDs: [UInt32: String] = [:]
+    private static let firstCommandID: UInt32 = 1000
+    /// The keys registered under each id, for the recorder below.
+    private static var combos: [UInt32: KeyCombo] = [:]
+    static var commandAction: ((String) -> Void)?
+    /// While a shortcut is being recorded, a registered key goes here instead of running: Carbon takes registered
+    /// keys before the recorder can see them.
+    static var recorder: ((KeyCombo) -> Void)?
+
+    /// Replaces the quick command shortcuts with these; returns the command ids that didn't register (taken).
+    @discardableResult
+    static func registerCommands(_ keys: [(command: String, combo: KeyCombo)]) -> Set<String> {
+        for reference in commandReferences { UnregisterEventHotKey(reference) }
+        commandReferences = []
+        for id in commandIDs.keys { combos[id] = nil }
+        commandIDs = [:]
+        guard !keys.isEmpty else { return [] }
+        installHandler()
+        var failed: Set<String> = []
+        for (index, key) in keys.enumerated() {
+            let id = firstCommandID + UInt32(index)
+            var reference: EventHotKeyRef?
+            let status = RegisterEventHotKey(key.combo.keyCode, key.combo.modifiers, EventHotKeyID(signature: signature, id: id),
+                                             GetApplicationEventTarget(), 0, &reference)
+            if status == noErr, let reference {
+                commandReferences.append(reference)
+                commandIDs[id] = key.command
+                combos[id] = key.combo
+            } else {
+                failed.insert(key.command)
+            }
+        }
+        AppLog.info("Quick command hot keys: \(commandReferences.count) registered, \(failed.count) not")
+        return failed
+    }
+
+    /// A quick command's key, or any key while recording; false leaves the press to the fixed keys.
+    private static func handleCommand(_ id: UInt32) -> Bool {
+        if let recorder, let combo = combos[id] {
+            recorder(combo)
+            return true
+        }
+        guard let command = commandIDs[id] else { return false }
+        commandAction?(command)
+        return true
     }
 
     private static func installHandler() {
@@ -102,6 +154,7 @@ enum GlobalHotKey {
             let id = hotKey.id
             DispatchQueue.main.async {
                 MainActor.assumeIsolated {
+                    if GlobalHotKey.handleCommand(id) { return }
                     switch ID(rawValue: id) {
                     case .allow: GlobalHotKey.islandAction?(true)
                     case .deny: GlobalHotKey.islandAction?(false)
