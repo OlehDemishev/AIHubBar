@@ -1,7 +1,7 @@
 # Status
 
 <!-- summary:start -->
-**Stage:** Mac: 0.5.0 published, beta 0.5.1-beta.1 on the beta channel (refactoring stages 0–8 done); 0.6.0 being released — «Раскладка» out of beta. Windows/Linux (`desktop/`, Tauri 2): postponed by Oleh 2026-11-02 after stages 1–3 main parts
+**Stage:** Mac: 0.6.0 published 2026-11-03 (Telegram, «Быстрый запрос», command shortcuts, Codex states; «Раскладка» out of beta). Windows/Linux (`desktop/`, Tauri 2): postponed by Oleh 2026-11-02
 **Updated:** 2026-11-03
 
 **Now:**
@@ -9,13 +9,13 @@
 - merged 2026-11-03: #251 menu bar ☕ follows the «Не спать» switch, #248 «Не спать» on/off in the menu bar, #241 Codex states, #240 quick command shortcuts, #238 «Быстрый запрос», #236 content spec, #242 «Telegram» stage 1, #244 menu at the bottom, #246 shared bot (Worker not deployed yet), #247 desktop CI off for Mac string changes, #249 the bot's menu set up by each person, #252 stage 2 (sessions, requests, limits), #254 stage 3 (tasks and runs), #255 stage 4 (settings in the bot), #256 Mini App
 
 **Next:**
-- next beta or 0.5.1 carries stage 8 (#230–#232) and #236–#256: 0.5.1-beta.1 was built from 27c5e2d, before them
+- site: privacy section and the shared Telegram bot (the site still says «No server»), new features on the landing page
 - Telegram: pair the Mac mini with the shared bot, try the bot and the Mini App live
 - content (docs/specs/SPEC-content.md, agreed): stage 1 — walkthrough of the «Тексты» profile on a sample folder, then «Версии», then batch tasks
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/specs/SPEC-windows.md §9, stage 2–3 leftovers)
 
 **Needs Oleh:**
-- Telegram: after this build — Settings → Modules → Telegram → «Общий бот» → «Подключить Telegram» → Start; put the new bot's token into `_daily-report/config.json` (the old bot is deleted, so the morning report can't send until then)
+- Telegram: Settings → Modules → Telegram → «Общий бот» → «Подключить Telegram» → Start (`_daily-report/config.json` already points at @AIHubBarBot)
 - Telegram: delete `_daily-report/bot.py` and `install-bot.sh`
 - «Быстрый запрос»: Settings → Modules → «Быстрый запрос» on, then ⌃⌥P from Terminal or Xcode — send one task to the background and one to Codex
 - Settings → Codex → «Установить hook», then once in `codex` type `/hooks` and trust AI Hub Bar's hooks (Codex skips untrusted hooks); then check a Codex row in «Сессии» goes «ждёт» on an approval prompt
@@ -23,10 +23,15 @@
 - GitHub → repository Settings → Social preview: upload docs/images/social-preview.png (only by hand)
 - Settings → Copilot → «Установить hook»: then start `copilot` and check its row in «Сессии» (the agent wasn't allowed to install it into ~/.copilot itself)
 - look at the new Settings and say what to change next
-- MacBook Air: update to 0.5.0 through Sparkle (Settings → General → Updates) and check the island at the real notch
-- «Раскладка»: tried live in TextEdit, Safari, Chrome (⌥⇧ too); Telegram and Notes are yours to try (not typed into by the agent)
+- MacBook Air: update to 0.6.0 through Sparkle (Settings → General → Updates) and check the island at the real notch
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-03 — release 0.6.0 (branch `chore/status-release-0.6.0`)
+
+Done: `scripts/release.sh 0.6.0 --publish` from main 295c267 (build 600): GitHub release v0.6.0 is Latest with the .dmg, appcast and overview PDFs; the beta channel now lists 0.6.0 above 0.5.1-beta.1. «What's new» added to the release notes (Telegram, «Быстрый запрос», command shortcuts, Codex states, «Раскладка» out of beta). `_daily-report/config.json` now sends through @AIHubBarBot (checked with getMe).
+Checked: release.sh ran the tests and the string catalog first; `releases/latest/download/appcast.xml` serves 0.6.0 / 600.
+Left: the overview PDFs attached are the 1.0 ones without Telegram; the site's privacy section still says «No server»; Telegram pairing not yet tried live.
 
 ## 2026-11-03 — «Раскладка» out of beta for 0.6.0 (branch `feat/layout-out-of-beta`)
 
