@@ -63,6 +63,9 @@ struct TelegramBotTests {
             .answer(requestID: "0f3a9c", allow: false), .menuToggle(.screen(.reports)),
             .menuToggle(.command("0f3a9c2e-1111-4222-8333-444455556666")), .menuColumns(2), .menuColumns(3), .menuDone,
             .runCommand("0f3a9c2e-1111-4222-8333-444455556666"), .requestDetails("0f3a9c"), .limitAlerts(true), .limitAlerts(false),
+            .taskProject("0a1b2c3d"), .taskGo, .taskCancel, .taskForce, .taskAfterReset, .taskWorktree,
+            .runLog("0f3a9c2e-1111-4222-8333-444455556666"), .runStopAsk("0f3a9c2e-1111-4222-8333-444455556666"),
+            .runStop("0f3a9c2e-1111-4222-8333-444455556666"),
         ]
         for route in routes {
             #expect(BotRoute(data: route.data) == route)
@@ -75,7 +78,7 @@ struct TelegramBotTests {
     @Test func rejectsTamperedData() {
         for data in ["", "nav", "nav:nowhere", "nav:home:x", "rep:ai:0", "rep:ai:169", "rep:ai:three", "cln:rm", "cln",
                      "allow:../../x", "allow:", "drop:0f3a9c", String(repeating: "a", count: 65),
-                     "mt:screen:menu", "mt:screen:nowhere", "mt:cmd:../x", "mt:", "mc:4", "md:x", "run:", "run:a b", "run:../x", "req:", "req:../x", "lim:maybe"] {
+                     "mt:screen:menu", "mt:screen:nowhere", "mt:cmd:../x", "mt:", "mc:4", "md:x", "run:", "run:a b", "run:../x", "req:", "req:../x", "lim:maybe", "tsk:p:xyz", "tsk:p:0a1b2c3", "tsk:maybe", "rx:", "rx:../x"] {
             #expect(BotRoute(data: data) == nil, "\(data)")
         }
     }
@@ -98,7 +101,7 @@ struct TelegramBotTests {
         let markup = menu.replyMarkup
         #expect(markup["is_persistent"] as? Bool == true && markup["resize_keyboard"] as? Bool == true)
         let rows = try #require(markup["keyboard"] as? [[[String: String]]])
-        #expect(rows.map { $0.map { $0["text"] } } == [["🏠 Главная", "🤖 Сессии"], ["⏳ Лимиты", "📊 Отчёты"], ["🧹 Мак", "❓ Команды"]])
+        #expect(rows.map { $0.map { $0["text"] } } == [["🏠 Главная", "🤖 Сессии"], ["🚀 Задача", "⏳ Лимиты"], ["📊 Отчёты", "🧹 Мак"], ["❓ Команды"]])
         for screen in BotScreen.menuScreens {
             #expect(menu.item(forText: BotMenu.title(screen)) == .screen(screen))
         }
@@ -129,7 +132,7 @@ struct TelegramBotTests {
         #expect(!config.contains(.screen(.reports)))
         config.toggle(.command(deploy.id))
         config.move(.command(deploy.id), by: -1)
-        #expect(config.items == ["screen:home", "screen:sessions", "screen:limits", "screen:mac", "cmd:\(deploy.id)", "screen:help"])
+        #expect(config.items == ["screen:home", "screen:sessions", "screen:task", "screen:limits", "screen:mac", "cmd:\(deploy.id)", "screen:help"])
         config.move(.command(deploy.id), by: -10)
         #expect(config.items.first == "cmd:\(deploy.id)")
     }
@@ -196,6 +199,7 @@ struct TelegramBotTests {
         #expect(BotCommand(text: "/clean check") == .clean(check: true))
         #expect(BotCommand(text: "/HELP") == .help)
         #expect(BotCommand(text: "/rm") == .unknown)
+        #expect(BotCommand(text: "/cancel") == .cancel)
         #expect(BotCommand.menuList.map(\.command) == ["menu", "report", "status", "clean", "help"])
     }
 
@@ -212,9 +216,9 @@ struct TelegramBotTests {
         #expect(screen.html.contains("Mac &lt;mini&gt;"))
         #expect(screen.html.contains("42 %") && screen.html.contains("12 %") && screen.html.contains("2 ч 10 мин"))
         #expect(screen.html.contains("2 работают, 1 ждут") && screen.html.contains("Фоновые задачи: 3"))
-        #expect(screen.buttons.flatMap { $0 }.map(\.route) == [.show(.sessions), .show(.limits), .show(.reports), .show(.mac), .show(.home), .show(.help)])
+        #expect(screen.buttons.flatMap { $0 }.map(\.route) == [.show(.sessions), .show(.task), .show(.limits), .show(.reports), .show(.mac), .show(.home), .show(.help)])
         let rows = try #require(screen.replyMarkup["inline_keyboard"] as? [[[String: String]]])
-        #expect(rows.first?.map { $0["callback_data"] } == ["nav:sessions", "nav:limits"])
+        #expect(rows.first?.map { $0["callback_data"] } == ["nav:sessions", "nav:task"])
     }
 
     @Test func homeWithoutLimits() {
@@ -324,5 +328,60 @@ struct TelegramSessionsLimitsTests {
         #expect(screen.buttons[0].first?.route == .limitAlerts(false))
         #expect(BotScreens.limits([], alertsOn: false, thresholds: [80], now: now).buttons[0].first?.route == .limitAlerts(true))
         #expect(BotScreens.bar(0) == "░░░░░░░░░░" && BotScreens.bar(100) == "▓▓▓▓▓▓▓▓▓▓" && BotScreens.bar(140) == "▓▓▓▓▓▓▓▓▓▓")
+    }
+}
+
+/// Stage 3 (docs/specs/SPEC-telegram.md §8): 🚀 a task in the background, run control.
+struct TelegramTasksTests {
+    private let now = Date(timeIntervalSince1970: 1_700_000_000)
+
+    private func run(_ id: String, _ state: BackgroundRun.State, pr: String? = nil, paused: Bool = false) -> BotRunLine {
+        BotRunLine(id: id, project: "Ambo <x>", task: "Почини сборку", state: state, paused: paused,
+                   startedAt: now.addingTimeInterval(-12 * 60), pullRequestURL: pr)
+    }
+
+    @Test func projectKeysAreShortAndStable() {
+        let key = BotRoute.projectKey("/Users/me/Projects/Ambo")
+        #expect(key.count == 8 && key.allSatisfy(\.isHexDigit))
+        #expect(key == BotRoute.projectKey("/Users/me/Projects/Ambo") && key != BotRoute.projectKey("/Users/me/Projects/Ambo2"))
+        #expect(BotRoute(data: BotRoute.taskProject(key).data) == .taskProject(key))
+    }
+
+    @Test func taskScreenListsProjectsAndRuns() {
+        let screen = BotScreens.task(
+            projects: [BotTaskProject(key: "0a1b2c3d", name: "Ambo"), BotTaskProject(key: "0a1b2c3e", name: "Cantero"), BotTaskProject(key: "0a1b2c3f", name: "ClaudePult")],
+            runs: [run("r-1", .running), run("r-2", .running, paused: true), run("r-3", .succeeded, pr: "https://github.com/me/ambo/pull/41")],
+            locked: false, now: now
+        )
+        #expect(screen.buttons[0].map(\.route) == [.taskProject("0a1b2c3d"), .taskProject("0a1b2c3e")])
+        #expect(screen.buttons[1].map(\.route) == [.taskProject("0a1b2c3f")])
+        #expect(screen.buttons[2].map(\.route) == [.runLog("r-1"), .runStopAsk("r-1")])
+        #expect(screen.html.contains("1. ⚙️ <b>Ambo &lt;x&gt;</b>: Почини сборку · 12 мин") && screen.html.contains("2. ⏸"))
+        #expect(screen.html.contains("<a href=\"https://github.com/me/ambo/pull/41\">PR #41</a>"))
+    }
+
+    @Test func lockedOverTheSharedBot() {
+        let screen = BotScreens.task(projects: [BotTaskProject(key: "0a1b2c3d", name: "Ambo")], runs: [run("r-1", .running)], locked: true, now: now)
+        #expect(screen.html.contains("🔒"))
+        #expect(!screen.buttons.flatMap { $0 }.contains { if case .taskProject = $0.route { true } else { false } })
+        #expect(screen.buttons[0].map(\.route) == [.runLog("r-1")])
+    }
+
+    @Test func theTaskIsShownBackFirst() {
+        let confirm = BotScreens.taskConfirm(project: "Ambo", text: "Почини <сборку>")
+        #expect(confirm.html.contains("<blockquote>Почини &lt;сборку&gt;</blockquote>"))
+        #expect(confirm.buttons[0].map(\.route) == [.taskGo, .taskCancel])
+        #expect(BotScreens.taskQuestion("Сессия 92 %", limit: true).buttons.flatMap { $0 }.map(\.route) == [.taskForce, .taskAfterReset, .taskCancel])
+        #expect(BotScreens.taskQuestion("Claude уже работает", limit: false).buttons[0].map(\.route) == [.taskWorktree, .taskCancel])
+        #expect(BotRoute.taskGo.isAction && BotRoute.runStop("a").isAction && !BotRoute.taskProject("0a1b2c3d").isAction && !BotRoute.runStopAsk("a").isAction)
+    }
+
+    @Test func logTailAndStop() {
+        let entries = (1...20).map { StreamJSON.Entry(id: $0, kind: $0 == 20 ? .result : .tool, text: "шаг <\($0)>\nвторая строка") }
+        let log = BotScreens.runLog(run("r-1", .running), entries: entries)
+        #expect(log.html.contains("шаг &lt;9&gt;") && !log.html.contains("шаг &lt;8&gt;") && log.html.contains("✅ шаг &lt;20&gt; вторая строка"))
+        #expect(log.buttons[0].map(\.route) == [.runLog("r-1"), .runStopAsk("r-1")])
+        #expect(BotScreens.runLog(run("r-3", .failed), entries: []).buttons[0].map(\.route) == [.runLog("r-3")])
+        #expect(BotScreens.runStopConfirm(run("r-1", .running)).buttons[0].map(\.route) == [.runStop("r-1"), .show(.task)])
     }
 }

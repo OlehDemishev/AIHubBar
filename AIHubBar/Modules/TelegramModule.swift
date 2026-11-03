@@ -69,6 +69,13 @@ struct TelegramBotSection: View {
                 ))
                 .help("Выключено — запросы приходят без кнопок, ответить можно только на Маке")
             }
+            if bot.usesSharedBot {
+                Toggle("Задачи через общий бот", systemImage: "paperplane.circle", isOn: Binding(
+                    get: { settings.telegramBot.tasksOverShared == true },
+                    set: { settings.telegramBot.tasksOverShared = $0 }
+                ))
+                .help("Выключено — из 🚀 через общий бот нельзя запускать и останавливать фоновые задачи")
+            }
             LabeledContent {
                 Button("Проверить") {
                     busy = true
