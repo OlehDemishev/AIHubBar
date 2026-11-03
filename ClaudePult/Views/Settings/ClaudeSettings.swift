@@ -67,7 +67,7 @@ struct SavedPromptsSection: View {
                             .textFieldStyle(.roundedBorder)
                         Button(role: .destructive) {
                             settings.savedPrompts.removeAll { $0.id == prompt.id }
-                        } label: { Image(systemName: "trash") }
+                        } label: { Label("Удалить промпт", systemImage: "trash").labelStyle(.iconOnly) }
                         .buttonStyle(.borderless)
                         .help("Удалить промпт")
                     }

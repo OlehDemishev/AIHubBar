@@ -181,10 +181,10 @@ struct MenuBarSettings: View {
 
     @ViewBuilder private func moveButtons() -> some View {
         if let index = selectedIndex {
-            Button { shift(at: index, by: -1) } label: { Image(systemName: "chevron.left") }
+            Button { shift(at: index, by: -1) } label: { Label("Левее", systemImage: "chevron.left").labelStyle(.iconOnly) }
                 .disabled(index == 0)
                 .help("Левее")
-            Button { shift(at: index, by: 1) } label: { Image(systemName: "chevron.right") }
+            Button { shift(at: index, by: 1) } label: { Label("Правее", systemImage: "chevron.right").labelStyle(.iconOnly) }
                 .disabled(index == tokens.count - 1)
                 .help("Правее")
         }

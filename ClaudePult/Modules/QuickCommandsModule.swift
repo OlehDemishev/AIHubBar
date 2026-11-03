@@ -51,13 +51,13 @@ struct QuickCommandsSection: View {
                         .frame(width: 60)
                         .help("Значок кнопки")
                         TextField("Название", text: $command.title)
-                        Button { move(command.id, by: -1) } label: { Image(systemName: "chevron.up") }
+                        Button { move(command.id, by: -1) } label: { Label("Выше", systemImage: "chevron.up").labelStyle(.iconOnly) }
                             .disabled(settings.quickCommands.first?.id == command.id)
                             .help("Выше")
-                        Button { move(command.id, by: 1) } label: { Image(systemName: "chevron.down") }
+                        Button { move(command.id, by: 1) } label: { Label("Ниже", systemImage: "chevron.down").labelStyle(.iconOnly) }
                             .disabled(settings.quickCommands.last?.id == command.id)
                             .help("Ниже")
-                        Button(role: .destructive) { settings.quickCommands.removeAll { $0.id == command.id } } label: { Image(systemName: "trash") }
+                        Button(role: .destructive) { settings.quickCommands.removeAll { $0.id == command.id } } label: { Label("Удалить команду", systemImage: "trash").labelStyle(.iconOnly) }
                             .help("Удалить команду")
                     }
                     .buttonStyle(.borderless)

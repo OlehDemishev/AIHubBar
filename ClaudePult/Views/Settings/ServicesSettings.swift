@@ -289,7 +289,7 @@ private struct AgentRow: View {
                     Button {
                         NSPasteboard.general.clearContents()
                         NSPasteboard.general.setString(kind.install, forType: .string)
-                    } label: { Image(systemName: "doc.on.doc") }
+                    } label: { Label("Скопировать: \(kind.install)", systemImage: "doc.on.doc").labelStyle(.iconOnly) }
                     .buttonStyle(.borderless)
                     .help("Скопировать: \(kind.install)")
                 }

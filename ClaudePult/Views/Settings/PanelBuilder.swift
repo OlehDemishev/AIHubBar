@@ -124,10 +124,10 @@ struct PanelBuilderRow: View {
                 .labelsHidden()
                 .controlSize(.small)
             HStack(spacing: 2) {
-                Button { onMove(-1) } label: { Image(systemName: "chevron.up") }
+                Button { onMove(-1) } label: { Label("Выше", systemImage: "chevron.up").labelStyle(.iconOnly) }
                     .disabled(!canMoveUp)
                     .help("Выше")
-                Button { onMove(1) } label: { Image(systemName: "chevron.down") }
+                Button { onMove(1) } label: { Label("Ниже", systemImage: "chevron.down").labelStyle(.iconOnly) }
                     .disabled(!canMoveDown)
                     .help("Ниже")
             }

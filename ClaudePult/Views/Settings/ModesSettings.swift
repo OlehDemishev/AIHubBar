@@ -68,27 +68,27 @@ struct ModesSettings: View {
                             Button(template.title) { add(template) }
                         }
                     }
-                } label: { Image(systemName: "plus") }
+                } label: { Label("Добавить профиль из шаблона", systemImage: "plus").labelStyle(.iconOnly) }
                 .menuStyle(.borderlessButton)
                 .fixedSize()
                 .help("Добавить профиль из шаблона")
-                Button { selection.map { _ = modes.duplicate($0) } } label: { Image(systemName: "plus.square.on.square") }
+                Button { selection.map { _ = modes.duplicate($0) } } label: { Label("Дублировать", systemImage: "plus.square.on.square").labelStyle(.iconOnly) }
                     .help("Дублировать")
-                Button { selection.map { modes.move($0, by: -1) } } label: { Image(systemName: "arrow.up") }
+                Button { selection.map { modes.move($0, by: -1) } } label: { Label("Выше", systemImage: "arrow.up").labelStyle(.iconOnly) }
                     .help("Выше")
-                Button { selection.map { modes.move($0, by: 1) } } label: { Image(systemName: "arrow.down") }
+                Button { selection.map { modes.move($0, by: 1) } } label: { Label("Ниже", systemImage: "arrow.down").labelStyle(.iconOnly) }
                     .help("Ниже")
                 Spacer()
                 Menu {
                     Button("Экспорт профиля…") { selection.map(exportMode) }
                     Button("Импорт…") { SettingsFiles.chooseImport(into: modes) }
-                } label: { Image(systemName: "square.and.arrow.up.on.square") }
+                } label: { Label("Экспорт и импорт", systemImage: "square.and.arrow.up.on.square").labelStyle(.iconOnly) }
                 .menuStyle(.borderlessButton)
                 .fixedSize()
                 .help("Экспорт и импорт")
                 Button(role: .destructive) {
                     if let id = selection { modes.delete(id); selection = modes.currentID }
-                } label: { Image(systemName: "trash") }
+                } label: { Label("Удалить профиль", systemImage: "trash").labelStyle(.iconOnly) }
                 .disabled(selection == nil || modes.modes.isEmpty)
                 .help("Удалить профиль")
             }

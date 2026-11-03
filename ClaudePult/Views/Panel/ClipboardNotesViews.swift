@@ -65,9 +65,12 @@ struct ClipboardView: View {
             } else {
                 Text(RelativeTime.ago(item.date, now: .now)).foregroundStyle(.tertiary)
             }
-            Button { history.togglePin(item) } label: { Image(systemName: item.pinned ? "pin.slash" : "pin") }
-                .help(item.pinned ? "Открепить" : "Закрепить")
-            Button { history.remove(item) } label: { Image(systemName: "xmark") }
+            let pinTitle = item.pinned ? String(localized: "Открепить") : String(localized: "Закрепить")
+            Button { history.togglePin(item) } label: {
+                Label(pinTitle, systemImage: item.pinned ? "pin.slash" : "pin").labelStyle(.iconOnly)
+            }
+            .help(pinTitle)
+            Button { history.remove(item) } label: { Label("Удалить", systemImage: "xmark").labelStyle(.iconOnly) }
                 .help("Удалить")
         }
         .buttonStyle(.borderless)
@@ -86,11 +89,11 @@ struct NotesView: View {
             HStack(spacing: 6) {
                 BlockTitle(block: .notes, title: "Заметки")
                 Spacer()
-                Button { notes.create() } label: { Image(systemName: "plus") }
+                Button { notes.create() } label: { Label("Новая заметка", systemImage: "plus").labelStyle(.iconOnly) }
                     .help("Новая заметка")
-                Button { notes.openInEditor() } label: { Image(systemName: "arrow.up.forward.square") }
+                Button { notes.openInEditor() } label: { Label("Открыть в редакторе", systemImage: "arrow.up.forward.square").labelStyle(.iconOnly) }
                     .help("Открыть в редакторе")
-                Button { confirmingTrash = true } label: { Image(systemName: "trash") }
+                Button { confirmingTrash = true } label: { Label("В корзину", systemImage: "trash").labelStyle(.iconOnly) }
                     .help("В корзину")
                     .disabled(notes.selected == nil)
             }

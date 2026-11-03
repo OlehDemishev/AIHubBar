@@ -219,20 +219,20 @@ struct MenuPanelView: View {
             .help(settings.notch.hidden ? String(localized: "Показать остров у чёлки") : String(localized: "Скрыть остров у чёлки"))
         }
         // Settings, help and quit were three menu-like rows at the bottom; as icons they no longer outweigh the content.
-        Button { openSettings() } label: { Image(systemName: "gearshape") }
+        Button { openSettings() } label: { Label("Настройки… (⌘,)", systemImage: "gearshape").labelStyle(.iconOnly) }
         .help("Настройки… (⌘,)")
         .keyboardShortcut(",", modifiers: .command)
         Button {
             NSApp.activate()
             openWindow(.claudeConfig)
-        } label: { Image(systemName: "doc.badge.gearshape") }
+        } label: { Label("Claude Code: все CLAUDE.md и MCP-серверы", systemImage: "doc.badge.gearshape").labelStyle(.iconOnly) }
         .help("Claude Code: все CLAUDE.md и MCP-серверы")
         Button {
             NSApp.activate()
             openWindow(.help)
-        } label: { Image(systemName: "questionmark.circle") }
+        } label: { Label("Помощь", systemImage: "questionmark.circle").labelStyle(.iconOnly) }
         .help("Помощь")
-        Button { NSApp.terminate(nil) } label: { Image(systemName: "power") }
+        Button { NSApp.terminate(nil) } label: { Label("Выйти из AI Hub Bar (⌘Q)", systemImage: "power").labelStyle(.iconOnly) }
             .help("Выйти из AI Hub Bar (⌘Q)")
             .keyboardShortcut("q", modifiers: .command)
     }
