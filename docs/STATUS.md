@@ -1,11 +1,11 @@
 # Status
 
 <!-- summary:start -->
-**Stage:** Mac: 0.5.0 published (new help, refactoring stages 0–7, stage 8 leftovers in progress; «Раскладка» still in beta). Windows/Linux (`desktop/`, Tauri 2): postponed by Oleh 2026-11-02 after stages 1–3 main parts
+**Stage:** Mac: 0.5.0 published (new help, refactoring stages 0–8 done; «Раскладка» still in beta). Windows/Linux (`desktop/`, Tauri 2): postponed by Oleh 2026-11-02 after stages 1–3 main parts
 **Updated:** 2026-11-03
 
 **Now:**
-- refactoring stage 8 (audit leftovers, docs/specs/SPEC-refactor.md §9): one PR per part
+- nothing in progress; refactoring stage 8 (audit leftovers) done — #230, #231 and the large-files PR
 
 **Next:**
 - beta 0.5.1-beta.1 (quick drops on the island, «Своя задача» hint, Copilot session states): built and published by Oleh — the agent's publish was refused as a public release
@@ -21,6 +21,12 @@
 - «Раскладка»: tried live in TextEdit, Safari, Chrome (⌥⇧ too); Telegram and Notes are yours to try (not typed into by the agent)
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-03 — refactoring stage 8, part 3: large files, warnings (branch `refactor/stage-8-files`)
+
+Done: whole types moved out of the largest files, no code changes: `NotchSettings` (ears, summary, screens, place), `NotchPanel` (hosting view, panel, full-screen detector), `NotchText`, `NotchShapes`, `HubFetch` (parsing, forecast, fetching), `MenuBarComposer` (data, segments, composer), `KeyboardLayouts`, `MenuBarOrderViews` (drag and drop, chips, palettes), `CommandLineActions` (what the CLI commands do). The largest file is now `HelpIllustrations` (713 lines, one scene per type). `scripts/check.sh` treats Swift warnings as errors (not CI: GitHub's Xcode is older and may warn differently); fixed the one it found (KVO closure in `ResizableSettingsWindow`). SPEC-refactor: stage 8 done.
+Checked: scripts/check.sh green with warnings as errors.
+Left: nothing from the audit, apart from the renames that need a migration (SPEC-refactor §8, by design).
 
 ## 2026-11-03 — refactoring stage 8, part 2: wiring and tests (branch `refactor/stage-8-wiring`)
 
