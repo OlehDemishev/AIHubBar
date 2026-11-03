@@ -117,7 +117,7 @@ struct ProjectCommandsView: View {
             engine.compare(command, project: project, mode: mode, services: chosen, text: input)
             comparing = false
             NSApp.activate()
-            openWindow(id: "compare")
+            openWindow(.compare)
         } else {
             let target = command.service.flatMap(AIService.init(id:)) ?? service
             engine.run(command, project: project, mode: mode, service: target, text: input)

@@ -33,7 +33,7 @@ extension MenuBarLabel {
     fileprivate func openRequested() {
         guard let id = requests.takeWindow() else { return }
         NSApp.activate()
-        if id == "settings" { openSettings() } else { openWindow(id: id) }
+        if id == .settings { openSettings() } else { openWindow(id) }
     }
 }
 

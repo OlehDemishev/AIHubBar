@@ -4,9 +4,7 @@ import SwiftUI
 /// The «Справка» window (docs/SPEC-help.md): topics in a sidebar with search, each a page with a moving picture, the
 /// steps to set it up, what it can do, and a way into its settings.
 struct HelpView: View {
-    static let topicKey = "helpTopic"
-
-    @AppStorage(HelpView.topicKey) private var topic: HelpTopic = .start
+    @AppStorage(StorageKey.helpTopic) private var topic: HelpTopic = .start
     @State private var query = ""
 
     var body: some View {
@@ -79,7 +77,7 @@ private struct HelpPage: View {
     let topic: HelpTopic
     let query: String
 
-    @Environment(\.openSettings) private var openSettings
+    @Environment(\.openSettingsPage) private var openSettings
     @State private var appeared = false
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
@@ -180,15 +178,7 @@ private struct HelpPage: View {
         return !query.isEmpty && (fact.name.localizedCaseInsensitiveContains(query) || fact.detail.localizedCaseInsensitiveContains(query))
     }
 
-    private func open(_ pane: SettingsPane) {
-        switch pane {
-        case let .module(kind): SettingsRoute.open(module: kind)
-        case let .service(service): SettingsRoute.open(service: service)
-        default: UserDefaults.standard.set(pane.tab.rawValue, forKey: SettingsRoute.tabKey)
-        }
-        NSApp.activate()
-        openSettings()
-    }
+    private func open(_ pane: SettingsPane) { openSettings(pane) }
 }
 
 private struct FactCard: View {

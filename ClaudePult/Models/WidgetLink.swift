@@ -10,8 +10,8 @@ enum WidgetLink {
         guard url.scheme?.lowercased() == scheme else { return nil }
         let path = url.pathComponents.filter { $0 != "/" }
         switch url.host?.lowercased() {
-        case "limits": return .openWindow(id: "limits")
-        case "search": return .openWindow(id: "search")
+        case "limits": return .openWindow(id: WindowID.limits.rawValue)
+        case "search": return .openWindow(id: WindowID.search.rawValue)
         case "session": return path.first.map { .showSession(id: $0) }
         default: return nil
         }

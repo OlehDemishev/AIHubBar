@@ -3,7 +3,7 @@ import SwiftUI
 
 /// Content of the menu bar panel: limits, sessions, projects, commands — each can be hidden in Settings.
 struct MenuPanelView: View {
-    @Environment(\.openSettings) private var openSettings
+    @Environment(\.openSettingsPage) private var openSettings
     @Environment(\.openWindow) private var openWindow
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
@@ -11,7 +11,7 @@ struct MenuPanelView: View {
     @Environment(UsageStore.self) private var usage
     @Environment(SystemMonitor.self) private var monitor
     @Environment(KeepAwakeController.self) private var keepAwake
-    @AppStorage("collapsedBlocks") private var collapsedRaw = ""
+    @AppStorage(StorageKey.collapsedBlocks) private var collapsedRaw = ""
     @Environment(SessionStore.self) private var sessions
     @Environment(HookController.self) private var hooks
     @Environment(RunStore.self) private var runs
@@ -219,20 +219,17 @@ struct MenuPanelView: View {
             .help(settings.notch.hidden ? String(localized: "Показать остров у чёлки") : String(localized: "Скрыть остров у чёлки"))
         }
         // Settings, help and quit were three menu-like rows at the bottom; as icons they no longer outweigh the content.
-        Button {
-            NSApp.activate()
-            openSettings()
-        } label: { Image(systemName: "gearshape") }
+        Button { openSettings() } label: { Image(systemName: "gearshape") }
         .help("Настройки… (⌘,)")
         .keyboardShortcut(",", modifiers: .command)
         Button {
             NSApp.activate()
-            openWindow(id: "claude-config")
+            openWindow(.claudeConfig)
         } label: { Image(systemName: "doc.badge.gearshape") }
         .help("Claude Code: все CLAUDE.md и MCP-серверы")
         Button {
             NSApp.activate()
-            openWindow(id: "help")
+            openWindow(.help)
         } label: { Image(systemName: "questionmark.circle") }
         .help("Помощь")
         Button { NSApp.terminate(nil) } label: { Image(systemName: "power") }
@@ -300,11 +297,7 @@ struct MenuPanelView: View {
                 .scaledFont(.caption)
                 .foregroundStyle(.secondary)
             Spacer(minLength: 4)
-            Button("Настройки…") {
-                SettingsRoute.open(module: .sessions)
-                NSApp.activate()
-                openSettings()
-            }
+            Button("Настройки…") { openSettings(.module(.sessions)) }
             .controlSize(.small)
         }
         .padding(.horizontal, 14)
@@ -322,15 +315,14 @@ struct MenuPanelView: View {
             HStack(spacing: 8) {
                 Button("Помощник…") {
                     NSApp.activate()
-                    openWindow(id: "assistant")
+                    openWindow(.assistant)
                 }
                 .buttonStyle(.borderedProminent)
                 Button("Импортировать файл…") {
                     SettingsFiles.chooseImport(into: modes)
                     // «Заменить» / «Добавить» are asked in Settings → «Профили».
                     guard modes.pendingImport != nil else { return }
-                    UserDefaults.standard.set(SettingsView.Tab.modes.rawValue, forKey: "settingsTab")
-                    openSettings()
+                    openSettings(.modes)
                 }
             }
             .controlSize(.small)

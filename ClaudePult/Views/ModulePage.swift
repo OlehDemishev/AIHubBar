@@ -32,7 +32,7 @@ enum ModuleSwitch {
             })
         case .dailyReport, .profilePage:
             return (String(localized: "Открыть профиль «\(mode.name)»…"), {
-                UserDefaults.standard.set(SettingsView.Tab.modes.rawValue, forKey: SettingsRoute.tabKey)
+                SettingsRoute.open(.modes)
             })
         }
     }
@@ -521,11 +521,8 @@ private struct ModuleTile: View {
 /// Settings → «Панель» (SPEC-settings §4): the current profile's modules top to bottom, dragged into order, with a
 /// sketch of the panel beside them.
 struct PanelBuilder: View {
-    /// Which profile «Панель» edits; «Профили» → profile → «Изменить в «Панели»» points it there.
-    static let profileKey = "settingsPanelProfile"
-
     @Environment(ModeStore.self) private var modes
-    @AppStorage(PanelBuilder.profileKey) private var profileID = ""
+    @AppStorage(StorageKey.panelProfile) private var profileID = ""
 
     @State private var targeted: ModuleKind?
 

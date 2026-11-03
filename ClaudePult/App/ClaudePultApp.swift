@@ -38,6 +38,8 @@ struct ClaudePultApp: App {
             AppLog.flush()
             exit(code)
         }
+        // «Панель» edits the current profile after a start; «Профили» points it at another one for a while.
+        UserDefaults.standard.removeObject(forKey: StorageKey.panelProfile)
         // Unit tests run inside this app: it gets throwaway settings and profiles, never the person's own
         // (docs/SPEC-refactor.md §2.4).
         let settings = AppSettings(defaults: TestHost.isActive ? TestHost.defaults : .standard)
@@ -131,19 +133,19 @@ struct ClaudePultApp: App {
         }
         AppDelegate.willTerminate = { keepAwake.releaseOnQuit() }
         GlobalHotKey.action = { QuickSearch.show() }
-        QuickSearch.open = { [requests] in requests.openWindow("search") }
+        QuickSearch.open = { [requests] in requests.openWindow(.search) }
         let quickTools = QuickToolsController(settings: settings)
         _quickTools = State(initialValue: quickTools)
         IntentBridge.settings = settings
         IntentBridge.quickTools = quickTools
         layoutSwitcher.openSettings = { [requests] in
             SettingsRoute.open(module: .layout)
-            requests.openWindow("settings")
+            requests.openWindow(.settings)
         }
         AppDelegate.openFile = { url in
             modes.prepareImport(from: url)
-            UserDefaults.standard.set(SettingsView.Tab.modes.rawValue, forKey: "settingsTab")
-            requests.openWindow("settings")
+            SettingsRoute.open(.modes)
+            requests.openWindow(.settings)
         }
         AppLog.info("AI Hub Bar \(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "?") started")
         // Unit tests use the app as their host; keep it from running report.py in the background.
@@ -200,7 +202,7 @@ struct ClaudePultApp: App {
             if modes.needsAssistant {
                 Task {
                     try? await Task.sleep(for: .seconds(1.5))
-                    requests.openWindow("assistant")
+                    requests.openWindow(.assistant)
                 }
             }
             calendar.start()
@@ -222,11 +224,12 @@ struct ClaudePultApp: App {
                     NSWorkspace.shared.open(url)
                 case let .openRunLog(id):
                     runs.selectedLogRunID = id
-                    requests.openWindow("run-log")
+                    requests.openWindow(.runLog)
                 case let .openFile(path):
                     NSWorkspace.shared.open(URL(fileURLWithPath: path))
                 case let .openWindow(id):
-                    requests.openWindow(id)
+                    // The id comes from a notification or a widget link, stored as text.
+                    if let window = WindowID(rawValue: id) { requests.openWindow(window) }
                 case .nothing:
                     break
                 }
@@ -235,7 +238,7 @@ struct ClaudePultApp: App {
             notchIsland.perform = handle
             notchIsland.needsSetup = { [requests] in
                 NSApp.activate()
-                requests.openWindow("notch-setup")
+                requests.openWindow(.notchSetup)
             }
             AppDelegate.openLink = { url in
                 guard let resolution = WidgetLink.resolve(url) else {
@@ -246,7 +249,7 @@ struct ClaudePultApp: App {
                 // A session that has ended since the widget drew it: the search lists what runs now.
                 if case let .showSession(id) = resolution,
                    !SessionStore.loadItems(from: SessionFiles.sessionsDirectory, now: .now).contains(where: { $0.id == id }) {
-                    handle(.openWindow(id: "search"))
+                    handle(.openWindow(id: WindowID.search.rawValue))
                 } else {
                     handle(resolution)
                 }
@@ -312,7 +315,7 @@ struct ClaudePultApp: App {
 
         // `.handlesExternalEvents(matching: [])` on every window: otherwise SwiftUI opens the first one (this search)
         // for each `aihubbar://` link or `*.claudepult` file, which `AppDelegate` handles itself.
-        Window("Поиск — AI Hub Bar", id: "search") {
+        Window("Поиск — AI Hub Bar", id: WindowID.search.rawValue) {
             QuickSearchWindow()
                 .environment(settings)
                 .environment(launcher)
@@ -330,7 +333,7 @@ struct ClaudePultApp: App {
         .windowResizability(.contentSize)
         .defaultPosition(.center)
 
-        Window(String(localized: "Claude Code: инструкции и MCP"), id: "claude-config") {
+        Window(String(localized: "Claude Code: инструкции и MCP"), id: WindowID.claudeConfig.rawValue) {
             ClaudeConfigWindow()
                 .environment(claudeConfig)
                 .preferredColorScheme(settings.panelTheme.colorScheme)
@@ -339,7 +342,7 @@ struct ClaudePultApp: App {
         .defaultSize(width: 900, height: 620)
 
         // A click on the limits widget: the panel's limits block on its own, since the panel can't be opened from code.
-        Window("Лимиты — AI Hub Bar", id: "limits") {
+        Window("Лимиты — AI Hub Bar", id: WindowID.limits.rawValue) {
             LimitsView()
                 .panelCard()
                 .padding(.vertical, 10)
@@ -354,7 +357,7 @@ struct ClaudePultApp: App {
         .windowResizability(.contentSize)
         .defaultPosition(.topTrailing)
 
-        Window("Журнал фоновой задачи", id: "run-log") {
+        Window("Журнал фоновой задачи", id: WindowID.runLog.rawValue) {
             RunLogView()
                 .environment(runs)
                 .preferredColorScheme(settings.panelTheme.colorScheme)
@@ -362,7 +365,7 @@ struct ClaudePultApp: App {
         .handlesExternalEvents(matching: [])
         .defaultSize(width: 640, height: 520)
 
-        Window("Помощник — AI Hub Bar", id: "assistant") {
+        Window("Помощник — AI Hub Bar", id: WindowID.assistant.rawValue) {
             AssistantView()
                 .environment(modes)
                 .environment(settings)
@@ -375,7 +378,7 @@ struct ClaudePultApp: App {
         .handlesExternalEvents(matching: [])
         .windowResizability(.contentSize)
 
-        Window("Календарь", id: "calendar") {
+        Window("Календарь", id: WindowID.calendar.rawValue) {
             CalendarWindow()
                 .environment(calendar)
                 .environment(modes)
@@ -385,7 +388,7 @@ struct ClaudePultApp: App {
         .handlesExternalEvents(matching: [])
         .defaultSize(width: 900, height: 640)
 
-        Window("Сравнение", id: "compare") {
+        Window("Сравнение", id: WindowID.compare.rawValue) {
             CompareView()
                 .environment(engine)
                 .preferredColorScheme(settings.panelTheme.colorScheme)
@@ -393,7 +396,7 @@ struct ClaudePultApp: App {
         .handlesExternalEvents(matching: [])
         .defaultSize(width: 980, height: 640)
 
-        Window("Очистка сборок", id: "cleanup-output") {
+        Window("Очистка сборок", id: WindowID.cleanupOutput.rawValue) {
             CleanupOutputView()
                 .environment(commands)
                 .preferredColorScheme(settings.panelTheme.colorScheme)
@@ -402,7 +405,7 @@ struct ClaudePultApp: App {
         .handlesExternalEvents(matching: [])
         .defaultSize(width: 720, height: 480)
 
-        Window("Остров у чёлки — AI Hub Bar", id: "notch-setup") {
+        Window("Остров у чёлки — AI Hub Bar", id: WindowID.notchSetup.rawValue) {
             NotchSetupView()
                 .environment(settings)
                 .preferredColorScheme(settings.panelTheme.colorScheme)
@@ -412,7 +415,7 @@ struct ClaudePultApp: App {
         .windowResizability(.contentSize)
         .defaultPosition(.center)
 
-        Window("Справка — AI Hub Bar", id: "help") {
+        Window("Справка — AI Hub Bar", id: WindowID.help.rawValue) {
             HelpView()
                 .environment(services)
                 .environment(hooks)

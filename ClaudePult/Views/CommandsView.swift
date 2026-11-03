@@ -6,7 +6,7 @@ struct CommandsView: View {
     @Environment(ProjectStore.self) private var store
     @Environment(\.openWindow) private var openWindow
     @State private var confirmCleanup = false
-    @AppStorage("collapsedBlocks") private var collapsedRaw = ""
+    @AppStorage(StorageKey.collapsedBlocks) private var collapsedRaw = ""
 
     private let columns = [GridItem(.flexible(), spacing: 6), GridItem(.flexible(), spacing: 6)]
 
@@ -121,7 +121,7 @@ struct CommandsView: View {
 
     private func showCleanupOutput() {
         NSApp.activate()
-        openWindow(id: "cleanup-output")
+        openWindow(.cleanupOutput)
     }
 }
 

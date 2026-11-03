@@ -69,30 +69,6 @@ enum ServiceTab: String, CaseIterable, Sendable {
     }
 }
 
-/// Which Settings tab opens next: `settingsTab` and, inside «Сервисы AI», `servicesTab`.
-enum SettingsRoute {
-    static let tabKey = "settingsTab"
-    static let serviceKey = "servicesTab"
-    static let moduleKey = "settingsModule"
-
-    /// Settings → the module's own page (SPEC-settings §2).
-    static func open(module: ModuleKind, defaults: UserDefaults = .standard) {
-        defaults.set(SettingsView.Tab.module.rawValue, forKey: tabKey)
-        defaults.set(module.rawValue, forKey: moduleKey)
-    }
-
-    /// Settings → «Сервисы AI» → `service`.
-    static func open(service: ServiceTab, defaults: UserDefaults = .standard) {
-        defaults.set(SettingsView.Tab.services.rawValue, forKey: tabKey)
-        defaults.set(service.rawValue, forKey: serviceKey)
-    }
-
-    /// The «Claude Code» tab became «Сервисы AI» → Claude Code (2026-11-02): a stored `claude` opens it there.
-    static func migrate(_ defaults: UserDefaults = .standard) {
-        if defaults.string(forKey: tabKey) == "claude" { open(service: .claude, defaults: defaults) }
-    }
-}
-
 /// Settings → «Сервисы AI» → one AI (SPEC-ai-services §4): everything that belongs to it — the agent, its limits,
 /// its API access and, for Claude Code, all of Claude Code's options.
 struct ServicePage: View {

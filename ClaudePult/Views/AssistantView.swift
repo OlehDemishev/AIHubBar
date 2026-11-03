@@ -8,7 +8,7 @@ struct AssistantView: View {
     @Environment(AppSettings.self) private var settings
     @Environment(AIServiceStore.self) private var services
     @Environment(\.dismissWindow) private var dismissWindow
-    @Environment(\.openSettings) private var openSettings
+    @Environment(\.openSettingsPage) private var openSettings
     @State private var draft: AssistantDraft?
 
     private static let templates = ModeTemplate.loadAll()
@@ -95,7 +95,7 @@ struct AssistantView: View {
         }
         modes.addFromAssistant(profile)
         for kind in draft.extraModules where !kind.isPanelBlock { modes.install(kind) }
-        dismissWindow(id: "assistant")
+        dismissWindow(.assistant)
     }
 
     // MARK: - Steps
@@ -141,7 +141,7 @@ struct AssistantView: View {
                     .buttonStyle(.borderedProminent)
             }
             if modes.lastMessage != nil, modes.pendingImport == nil {
-                Button("Закрыть помощника") { dismissWindow(id: "assistant") }
+                Button("Закрыть помощника") { dismissWindow(.assistant) }
             }
         }
     }
@@ -306,9 +306,8 @@ struct AssistantView: View {
             }
             .pickerStyle(.radioGroup)
             Button("Подключить другой сервис…") {
-                UserDefaults.standard.set(SettingsView.Tab.services.rawValue, forKey: SettingsRoute.tabKey)
-                NSApp.activate()
-                openSettings()
+                // The first AI besides Claude Code: its page has the agent and the API key.
+                openSettings(.service(.codex))
             }
             Text("Агенты ставятся отдельно; ключи API вставляются в Настройках → «Сервисы AI». Вернитесь сюда — список обновится.")
                 .font(.caption).foregroundStyle(.secondary)

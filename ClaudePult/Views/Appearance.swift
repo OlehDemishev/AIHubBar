@@ -165,7 +165,7 @@ extension PanelBlock {
 struct BlockTitle: View {
     let block: PanelBlock
     let title: LocalizedStringKey
-    @AppStorage("collapsedBlocks") private var collapsedRaw = ""
+    @AppStorage(StorageKey.collapsedBlocks) private var collapsedRaw = ""
 
     var body: some View {
         let collapsed = PanelBlock.collapsed(in: collapsedRaw).contains(block)

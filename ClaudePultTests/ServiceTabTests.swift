@@ -20,27 +20,15 @@ struct ServiceTabTests {
         #expect(ServiceTab.gemini.agents == [.gemini, .antigravity])
     }
 
-    @Test func oldClaudeTabOpensServicesClaudeCode() {
+    /// A page saved in the new key is left alone by the migration; opening a service writes its page.
+    @Test func newPageKeyIsLeftAlone() {
         let defaults = freshDefaults()
-        defaults.set("claude", forKey: SettingsRoute.tabKey)
-        defaults.set("codex", forKey: SettingsRoute.serviceKey)
+        defaults.set("module.notes", forKey: StorageKey.settingsPage)
+        defaults.set("services", forKey: "settingsTab")
         SettingsRoute.migrate(defaults)
-        #expect(defaults.string(forKey: SettingsRoute.tabKey) == SettingsView.Tab.services.rawValue)
-        #expect(defaults.string(forKey: SettingsRoute.serviceKey) == ServiceTab.claude.rawValue)
-        #expect(SettingsView.Tab(rawValue: "claude") == nil)
-    }
-
-    @Test func otherTabsAreLeftAlone() {
-        let defaults = freshDefaults()
-        defaults.set("appearance", forKey: SettingsRoute.tabKey)
-        defaults.set("gemini", forKey: SettingsRoute.serviceKey)
-        SettingsRoute.migrate(defaults)
-        #expect(defaults.string(forKey: SettingsRoute.tabKey) == "appearance")
-        #expect(defaults.string(forKey: SettingsRoute.serviceKey) == "gemini")
-
+        #expect(defaults.string(forKey: StorageKey.settingsPage) == "module.notes")
         SettingsRoute.open(service: .copilot, defaults: defaults)
-        #expect(defaults.string(forKey: SettingsRoute.tabKey) == "services")
-        #expect(defaults.string(forKey: SettingsRoute.serviceKey) == "copilot")
+        #expect(defaults.string(forKey: StorageKey.settingsPage) == "service.copilot")
     }
 
     @Test func setUpWhenAnythingOfTheServiceWorks() {
@@ -57,15 +45,34 @@ struct ServiceTabTests {
 struct SettingsPaneTests {
     private var modulePanes: [SettingsPane] { ModuleKind.allCases.map(SettingsPane.module) }
 
-    @Test func paneAndStoredTabRoundTrip() {
+    /// SPEC-refactor §5: one key holds the whole page.
+    @Test func paneRawValueRoundTrip() {
         for pane in SettingsPane.areas + SettingsPane.services + modulePanes {
-            let service: ServiceTab = if case let .service(chosen) = pane { chosen } else { .claude }
-            let module: ModuleKind = if case let .module(chosen) = pane { chosen } else { .limits }
-            #expect(SettingsPane(tab: pane.tab, service: service, module: module) == pane)
+            #expect(SettingsPane(rawValue: pane.rawValue) == pane, "\(pane.rawValue)")
         }
-        #expect(SettingsPane(tab: .services, service: .gemini, module: .notes) == .service(.gemini))
-        #expect(SettingsPane(tab: .module, service: .gemini, module: .notes) == .module(.notes))
-        #expect(SettingsPane(tab: .appearance, service: .gemini, module: .notes) == .appearance, "the service and module matter only on their pages")
+        #expect(SettingsPane.module(.limits).rawValue == "module.limits")
+        #expect(SettingsPane.service(.gemini).rawValue == "service.gemini")
+        #expect(SettingsPane(rawValue: "module.nonsense") == nil && SettingsPane(rawValue: "") == nil)
+    }
+
+    /// The three keys from before (`settingsTab` + `servicesTab` / `settingsModule`, and the older «claude») still
+    /// open the page they named, once.
+    @Test func oldPageKeysMigrate() throws {
+        let cases: [([String: String], SettingsPane)] = [
+            (["settingsTab": "services", "servicesTab": "gemini"], .service(.gemini)),
+            (["settingsTab": "module", "settingsModule": "notes"], .module(.notes)),
+            (["settingsTab": "claude"], .service(.claude)),
+            (["settingsTab": "menuBar"], .menuBar),
+        ]
+        for (old, pane) in cases {
+            let name = "claudepult-route-\(UUID().uuidString)"
+            let defaults = try #require(UserDefaults(suiteName: name))
+            defer { defaults.removePersistentDomain(forName: name) }
+            for (key, value) in old { defaults.set(value, forKey: key) }
+            SettingsRoute.migrate(defaults)
+            #expect(defaults.string(forKey: StorageKey.settingsPage) == pane.rawValue)
+            #expect(defaults.string(forKey: "settingsTab") == nil, "old keys go")
+        }
     }
 
     @Test func searchFindsByTitleAndSettingNames() {

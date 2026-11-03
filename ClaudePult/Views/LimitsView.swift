@@ -6,9 +6,9 @@ struct LimitsView: View {
     @Environment(HubLimitsStore.self) private var hub
     @Environment(LaunchController.self) private var launcher
     @Environment(CommandEngine.self) private var engine
-    @AppStorage("limitsBreakdownExpanded") private var showBreakdown = false
+    @AppStorage(StorageKey.limitsBreakdownExpanded) private var showBreakdown = false
     @State private var period: UsageStore.Period = .session
-    @AppStorage("collapsedBlocks") private var collapsedRaw = ""
+    @AppStorage(StorageKey.collapsedBlocks) private var collapsedRaw = ""
 
     private var collapsed: Bool { PanelBlock.collapsed(in: collapsedRaw).contains(.limits) }
 

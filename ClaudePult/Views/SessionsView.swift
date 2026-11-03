@@ -57,7 +57,7 @@ struct SessionsView: View {
     var others: [AgentThread] = []
 
     private var waiting: Int { rows.filter { $0.state == .waiting }.count }
-    @AppStorage("collapsedBlocks") private var collapsedRaw = ""
+    @AppStorage(StorageKey.collapsedBlocks) private var collapsedRaw = ""
 
     var body: some View {
         VStack(alignment: .leading, spacing: 2) {
@@ -305,7 +305,7 @@ private struct SessionRowView: View {
     private func showLog(_ run: BackgroundRun) {
         runs.selectedLogRunID = run.id
         NSApp.activate()
-        openWindow(id: "run-log")
+        openWindow(.runLog)
     }
 
     private func quietMinutes(now: Date) -> Int? {
