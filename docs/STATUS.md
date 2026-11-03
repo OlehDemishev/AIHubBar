@@ -5,7 +5,7 @@
 **Updated:** 2026-11-03
 
 **Now:**
-- nothing in progress; refactoring stage 3 merged (#215, navigation); next — stage 4, views by folders and shared pieces (docs/SPEC-refactor.md §9)
+- refactoring stage 4 (views by folders) on branch `refactor/stage4-views`, PR open; next — stage 5, app composition
 
 **Next:**
 - Oleh tries «Раскладка» in his own apps; next beta with fixes: `scripts/release.sh 0.5.0-beta.1 --publish`
@@ -13,7 +13,7 @@
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/SPEC-windows.md §9, stage 2–3 leftovers)
 
 **Needs Oleh:**
-- say when to start stage 4 (views by folders)
+- review and merge the stage 4 PR
 - look at the new help: panel → «?» and https://olehdemishev.github.io/AIHubBar/help.html
 - look at the new Settings and say what to change next
 - MacBook Air: update to 0.4.0 through Sparkle (Settings → General → Updates) and check the island at the real notch
@@ -21,6 +21,12 @@
 - the beta channel exists now (release `beta`, points to 0.4.0): say when the next beta goes out
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-03 — refactoring stage 4: views by folders and shared pieces (branch `refactor/stage4-views`)
+
+Done: `Views/` split into `Settings/`, `Panel/`, `MenuBar/`, `Notch/`, `Windows/`, `Support/` (+ `Help/`), moved without code changes in their own commit. SettingsView.swift (738 lines) became the window shell plus `SettingsControls`, `GeneralSettings`, `AppearanceSettings`, `ClaudeSettings` and `Support/WindowTweaks`; ModulePage.swift (785) became `ModulePage`, `ModuleCatalog`, `PanelBuilder`. Shared: one flow layout (`FlowRow` and `FlowLayout` were the same), one `ContentHeightKey` (panel and notch had a private copy each), `IconTile` (Settings' `PaneIcon` and the help's hand-copied tile), `UsageLevel.color` (views used the AppKit menu bar colour through `Color(nsColor:)`). 33 icon-only buttons now carry a label VoiceOver reads (the text of their tooltip, already translated); the pin button's title was never translated (a ternary of literals is plain text) — fixed. `PanelGlass`: reapplying on every panel update is kept on purpose (SwiftUI can bring the backdrop back; `apply` only hides what's new), but the panel no longer rewrites its window state and appearance when they didn't change.
+Checked: `scripts/check.sh` green (all Mac tests, catalog unchanged: no new keys). Installed build, live: the panel opened with one posted click on the menu bar item — glass background and glass cards as before; Settings «Основные» and «Модули» look as before.
+Left: —
 
 ## 2026-11-03 — refactoring stage 3: navigation (branch `refactor/stage3-navigation`)
 

@@ -96,9 +96,12 @@ struct MenuPanelView: View {
         .environment(\.font, ScaledFont.font(.body, scale: scale))
         .environment(\.panelGlass, drawsGlass)
         .preferredColorScheme(settings.panelTheme.colorScheme)
-        .background(WindowReader {
-            window = $0
-            $0?.appearance = settings.panelTheme.appearance
+        .background(WindowReader { found in
+            // Called on every update: state and appearance change only when they differ (each write is another
+            // render pass). The glass is reapplied every time on purpose — SwiftUI can bring its backdrop back, and
+            // `PanelGlass.apply` only hides what is new (SPEC-refactor §5).
+            if window !== found { window = found }
+            if let found, found.appearance != settings.panelTheme.appearance { found.appearance = settings.panelTheme.appearance }
             updateGlass()
         })
         .onChange(of: wantsGlass) { updateGlass() }
