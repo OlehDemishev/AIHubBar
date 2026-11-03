@@ -6,12 +6,14 @@
 
 **Now:**
 - quick command shortcuts (branch `feat/command-hotkeys`, PR open, waiting for review / merge)
+- PR `feat/agent-waiting`: «ждёт» for Codex CLI through its hooks (Antigravity: no reliable signal) — waiting for merge
 
 **Next:**
 - next beta or 0.5.1 carries stage 8 (#230–#232): 0.5.1-beta.1 was built from 27c5e2d, before it
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/specs/SPEC-windows.md §9, stage 2–3 leftovers)
 
 **Needs Oleh:**
+- Settings → Codex → «Установить hook», then once in `codex` type `/hooks` and trust AI Hub Bar's hooks (Codex skips untrusted hooks); then check a Codex row in «Сессии» goes «ждёт» on an approval prompt
 - GitHub → repository Settings → Social preview: upload docs/images/social-preview.png (only by hand)
 - Settings → Copilot → «Установить hook»: then start `copilot` and check its row in «Сессии» (the agent wasn't allowed to install it into ~/.copilot itself)
 - say what comes next: «Раскладка» to everyone, or new features
@@ -26,6 +28,12 @@
 Done: every «Быстрая команда» can have a global shortcut (SPEC-profiles §4.3, was second wave): a recorder in the command's editor («Записать», ✕ clears, Esc cancels; ⌘/⌃/⌥ or a lone F1–F20), stored with the command (`hotKey`, optional — old libraries decode), registered by the new `CommandHotKeys` while the module is installed and on, in any profile; a press runs the command like its button, «Спрашивать перед запуском» as an alert. The editor names conflicts: the app's own keys (search, island ⌃⌥Y/⌃⌥N) win, the first command in the library wins a duplicate, keys macOS refused; warnings for macOS's own keys and ⌘-only keys. The panel shows the key on the button (hover hint, VoiceOver label). `GlobalHotKey` got additive registration of N command keys and a recorder hand-off. Strings in all 12 languages, module summary and footnote updated, help JSON re-exported, SPEC-profiles and REFERENCE updated. The command library isn't in `.claudepult` files, so neither are the shortcuts.
 Checked: scripts/check.sh green (warnings as errors), new CommandHotKeysTests (storage with/without a shortcut, names, conflicts, registration bookkeeping, asking before a run). Live, this branch's Release build run from build/: with the module on and F19 on «Мой IP в сети», the log showed «1 registered» and a posted F19 ran the command (exit 0); Oleh's settings put back afterwards (module off again, default library). The editor and the panel were not looked at on screen.
 Left: if «быстрый запрос» (parallel branch) adds its own global key, add it to `CommandHotKeys.reserved` after both are merged. Panel search still runs a quick command without «Спрашивать перед запуском» (older behaviour, not changed here).
+
+## 2026-11-03 — «ждёт» for Codex CLI; Antigravity researched (branch `feat/agent-waiting`)
+
+Done: Codex 0.166 has stable lifecycle hooks (`~/.codex/hooks.json`, Claude-shaped, snake_case payload with `session_id` = thread id). `CodexHooks` merges AI Hub Bar's entries into that file (backup first, other hooks untouched, a file left empty is removed); Settings → Codex → «Состояние сессий Codex» with «Установить hook» / «Снять hook» and hover hints; `AIHubBar --codex-hooks status|install|uninstall`. The shared hook script (format 5) takes `--agent codex`: `PermissionRequest` → «ждёт» with the same notification as Claude's, `UserPromptSubmit` / `PostToolUse` → «работает» (`apply_patch` shows the file it edits), `Stop` / `Interrupt` → «готово», `SessionEnd` → ended (3 s timeout, Codex's maximum). A Codex hook session hides its thread row. `HookJSONFile` now holds the JSON read / backup / write that Claude's installer had; the read error names the file. Antigravity: its hooks (`PreToolUse`, `Stop`, …) have no event for an approval prompt and its run status has no waiting value, so nothing was built — findings in SPEC-ai-services stage 7. Strings in all 13 languages, help fact «Codex и Copilot», site/help exported, REFERENCE and specs README updated.
+Checked: `scripts/check.sh` green (strings, all Mac tests with warnings as errors; new `CodexHooksTests` — 6 tests on payloads from Codex's hooks docs); installed with `scripts/build-and-install.sh`, Settings → Codex shows the section, `--codex-hooks status` → notInstalled. Live: a `codex exec` with our hook passed by `-c hooks.…` ran nothing — Codex skips untrusted hooks silently (`--dangerously-bypass-hook-trust` was not used), so no live session states yet. An `agy -i` probe stopped at agy's first-run colour-scheme screen and was closed unanswered.
+Left: Oleh installs and trusts the hook, then a live check (whether the TUI's hooks run in `codex` itself or the shared app-server daemon decides what «Показать» finds). Approving Codex prompts from AI Hub Bar (its `PermissionRequest` answer has Claude's shape) — not offered until checked live. Codex's `request_user_input` question has no hook event. The `codex exec` probe left a thread in a scratch folder that shows in «Сессии» for 3 hours.
 
 ## 2026-11-03 — overview PDFs for 1.0 (branch `docs/overview-1.0`)
 

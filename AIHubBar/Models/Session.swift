@@ -82,7 +82,7 @@ struct Session: Decodable, Identifiable, Equatable, Sendable {
     var todos: [SessionTodo] = []
     /// When the last request was sent (UserPromptSubmit).
     var promptAt: Date?
-    /// Whose session: Claude Code, or Copilot CLI through the same hook (`CopilotHooks`).
+    /// Whose session: Claude Code, or Copilot / Codex CLI through the same hook (`CopilotHooks`, `CodexHooks`).
     var agent: AgentKind = .claudeCode
 
     enum CodingKeys: String, CodingKey {
@@ -134,6 +134,7 @@ struct Session: Decodable, Identifiable, Equatable, Sendable {
         switch agent {
         case .claudeCode: "Claude"
         case .copilot: "Copilot"
+        case .codex: "Codex"
         default: agent.binary
         }
     }
@@ -151,7 +152,7 @@ struct Session: Decodable, Identifiable, Equatable, Sendable {
         guard let tool = lastTool, !tool.isEmpty else { return nil }
         let target = lastTarget ?? ""
         let verb: String = switch tool {
-        case "Edit", "MultiEdit", "Write", "NotebookEdit": String(localized: "правит")
+        case "Edit", "MultiEdit", "Write", "NotebookEdit", "apply_patch": String(localized: "правит")
         case "Read": String(localized: "читает")
         case "Bash", "BashOutput": String(localized: "запускает")
         case "Grep", "Glob", "ToolSearch": String(localized: "ищет")

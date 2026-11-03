@@ -5,8 +5,8 @@ import Foundation
 enum RunningSessions {
     /// Executable names of the Claude Code CLI: Homebrew/npm (`claude.exe`) and the native/desktop build (`claude`).
     static let executableNames: Set<String> = ["claude", "claude.exe"]
-    /// Processes a session file may name as its own: Claude Code, and Copilot CLI through the same hook.
-    static let sessionExecutableNames = executableNames.union(["copilot"])
+    /// Processes a session file may name as its own: Claude Code, and Copilot / Codex CLI through the same hook.
+    static let sessionExecutableNames = executableNames.union(["copilot", "codex"])
 
     static func workingDirectories() async -> [String] {
         guard let ps = try? await ProcessRunner.run("/bin/ps", ["-axo", "pid=,comm="], timeout: .seconds(10)),

@@ -236,6 +236,10 @@
             {
               "detail" : "세션은 설정에서 hooks를 설치했을 때만 보입니다 (~/.claude/settings.json에 추가되고 옆에 사본이 남습니다).",
               "name" : "Hooks"
+            },
+            {
+              "detail" : "‘AI 서비스’의 각 페이지에서 AI Hub Bar 훅을 설치하면 이 세션들도 ‘작업 중 / 대기 중 / 완료’를 표시합니다. Codex는 새 훅을 검토한 뒤에만 실행합니다: codex에서 /hooks를 입력하고 신뢰하세요. 훅이 없으면 최근 대화만 표시되고 상태는 없습니다.",
+              "name" : "Codex 및 Copilot"
             }
           ],
           "monospaced" : false,

@@ -236,6 +236,10 @@
             {
               "detail" : "As sessões só aparecem com os hooks instalados em Ajustes (eles são adicionados a ~/.claude/settings.json; uma cópia fica ao lado).",
               "name" : "Hooks"
+            },
+            {
+              "detail" : "As sessões deles também mostram “trabalhando / aguardando / pronto” se o hook do AI Hub Bar estiver instalado na página deles em “Serviços de IA”. O Codex só executa um hook novo após revisão: digite /hooks no codex e confie nele. Sem o hook, apenas as conversas recentes, sem estado.",
+              "name" : "Codex e Copilot"
             }
           ],
           "monospaced" : false,

@@ -236,6 +236,10 @@
             {
               "detail" : "Sesje widać tylko wtedy, gdy w Ustawieniach zainstalowano hooki (są dopisywane do ~/.claude/settings.json; obok zostaje kopia).",
               "name" : "Hooks"
+            },
+            {
+              "detail" : "Ich sesje też pokazują „pracuje / czeka / gotowe”, jeśli na ich stronie w „Usługach AI” zainstalowano hook AI Hub Bar. Codex uruchamia nowy hook dopiero po sprawdzeniu: wpisz /hooks w codex i zaufaj mu. Bez hooka tylko ostatnie rozmowy, bez stanu.",
+              "name" : "Codex i Copilot"
             }
           ],
           "monospaced" : false,

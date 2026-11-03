@@ -3,7 +3,7 @@ import SQLite3
 
 /// A recent conversation of an agent other than Claude, for the «Сессии» block (SPEC-ai-services stages 5–6). Without
 /// a hook there is no «working» or «waiting» — only when it was last updated and how full its context is (Copilot with
-/// `CopilotHooks` is a session row instead). A click continues it in Terminal.
+/// `CopilotHooks` and Codex with `CodexHooks` are session rows instead). A click continues it in Terminal.
 struct AgentThread: Equatable, Identifiable, Sendable {
     var agent: AgentKind
     var id: String
@@ -25,7 +25,8 @@ struct AgentThread: Equatable, Identifiable, Sendable {
         return "cd \(ShellQuote.quote(folder)) && " + ([path] + arguments).map(ShellQuote.quote).joined(separator: " ")
     }
 
-    /// The threads not already shown as hook sessions (Copilot with `CopilotHooks`).
+    /// The threads not already shown as hook sessions (Copilot with `CopilotHooks`, Codex with `CodexHooks`: Codex's
+    /// hook `session_id` is its thread id).
     static func without(_ threads: [AgentThread], sessionIDs: Set<String>) -> [AgentThread] {
         threads.filter { !sessionIDs.contains($0.id) }
     }
