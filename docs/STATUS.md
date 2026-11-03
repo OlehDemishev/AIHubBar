@@ -5,24 +5,37 @@
 **Updated:** 2026-11-03
 
 **Now:**
-- «Быстрый запрос» (docs/specs/SPEC-quick-prompt.md): PR from `feat/quick-prompt`, waiting for merge
-- quick command shortcuts (branch `feat/command-hotkeys`, PR open, waiting for review / merge)
-- PR `feat/agent-waiting`: «ждёт» for Codex CLI through its hooks (Antigravity: no reliable signal) — waiting for merge
+- nothing in progress; merged 2026-11-03: #241 Codex session states, #240 quick command shortcuts, #238 «Быстрый запрос», #236 content spec
+- under discussion with Oleh: Telegram bot with its own menu (settings, answers, control, reports)
+
 **Next:**
-- next beta or 0.5.1 carries stage 8 (#230–#232): 0.5.1-beta.1 was built from 27c5e2d, before it
+- next beta or 0.5.1 carries stage 8 (#230–#232) and #236–#241: 0.5.1-beta.1 was built from 27c5e2d, before them
+- content (docs/specs/SPEC-content.md, agreed): stage 1 — walkthrough of the «Тексты» profile on a sample folder, then «Версии», then batch tasks
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/specs/SPEC-windows.md §9, stage 2–3 leftovers)
 
 **Needs Oleh:**
 - «Быстрый запрос»: Settings → Modules → «Быстрый запрос» on, then ⌃⌥P from Terminal or Xcode — send one task to the background and one to Codex
 - Settings → Codex → «Установить hook», then once in `codex` type `/hooks` and trust AI Hub Bar's hooks (Codex skips untrusted hooks); then check a Codex row in «Сессии» goes «ждёт» on an approval prompt
+- quick command shortcuts: Settings → Modules → «Быстрые команды» → a command → «Сочетание клавиш», record one and press it
 - GitHub → repository Settings → Social preview: upload docs/images/social-preview.png (only by hand)
 - Settings → Copilot → «Установить hook»: then start `copilot` and check its row in «Сессии» (the agent wasn't allowed to install it into ~/.copilot itself)
-- say what comes next: «Раскладка» to everyone, or new features
 - look at the new Settings and say what to change next
 - MacBook Air: update to 0.5.0 through Sparkle (Settings → General → Updates) and check the island at the real notch
 - «Раскладка»: tried live in TextEdit, Safari, Chrome (⌥⇧ too); Telegram and Notes are yours to try (not typed into by the agent)
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-03 — four feature PRs merged (main session)
+
+Done: merged #241 (Codex states), #240 (quick command shortcuts), #238 («Быстрый запрос») and #236 (content spec) in that order. String catalog conflicts resolved by a three-way JSON merge (no string lost: 1538 base + 26 + 10 + 17). While «Быстрый запрос» is on, its key is one of the app's own keys in `CommandHotKeys.reserved`, so a quick command can't take it (test in `CommandHotKeysTests.theAppsOwnKeys`); this closes the hotkeys entry's Left.
+Checked: scripts/check.sh green on each combined branch before its merge; CI green on every PR.
+Left: nothing from the merges.
+
+## 2026-11-03 — Spec: content as modules and the «Тексты» profile (branch `docs/content-spec`)
+
+Done: the October texts-mode draft (`docs/SPEC-content.md`, d4fbcd8) re-read against today's app as `docs/specs/SPEC-content.md`. Most of it already exists through SPEC-modes/profiles (folder projects, `проект.md`, stages, words and running time, commands with results next to the source, «только файлы» permissions, night queue, calendar, «Тексты» template) and is reused as is. New: optional module «Версии» (hidden draft versions in Application Support, own store without git, texts and the card only, before every AI run and on changes, compare and restore in the card) and batch tasks inside «Проекты» (one command over several projects, sequential, now / at night / after the reset). Quick prompt left to its own spec. Oleh's answers: walkthrough first, own store, texts only, batch tasks in this wave; versions every 10 min on changes, all of the last 24 h, then one a day for 30 days. Row in `docs/specs/README.md`.
+Checked: docs only; claims about what exists checked against the code (`FolderProject`, `CommandTemplate`, `BackgroundPermissions`, `NightQueue`, templates) and DECISIONS.md / CHECKLIST.md.
+Left: stage 1 (walkthrough).
 
 ## 2026-11-03 — «Быстрый запрос»: a task to an agent from any app (branch `feat/quick-prompt`)
 
