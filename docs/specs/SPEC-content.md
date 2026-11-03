@@ -1,7 +1,6 @@
 # SPEC — Content: writing texts with AI as modules and the «Тексты» profile
 
-Status: **agreed with Oleh 2026-11-03** (answers in §9); no code yet, stage 1 next. Defaults marked **(proposed)**
-were not asked about and can be changed before the stage they belong to.
+Status: **agreed with Oleh 2026-11-03** (answers in §9); no code yet, stage 1 next.
 
 Comes from the October draft `docs/SPEC-content.md` (commit d4fbcd8, a separate «Тексты» mode for people who write
 video scripts, posts and articles with Claude). That draft was folded into `SPEC-modes.md` the same day, and most of
@@ -67,9 +66,9 @@ Catalog row (SPEC-profiles §3):
 - **What is kept:** text files (`FolderProject.textExtensions`) and the card; images, audio and video are skipped
   (Oleh, §9). Files over the size limit (default 20 MB) are skipped and named in the log.
 - **When:** before every AI run on the project (background, Terminal, API, «Сравнить», drop on the island) and, while
-  the Mac is on, every 10 minutes if a file changed since the last version **(proposed)**. A version is taken only if
+  the Mac is on, every 10 minutes if a file changed since the last version (Oleh, §9). A version is taken only if
   something differs from the previous one.
-- **How long:** every version of the last 24 hours, then one per day for 30 days **(proposed)**; the store of a deleted
+- **How long:** every version of the last 24 hours, then one per day for 30 days (Oleh, §9); the store of a deleted
   or renamed project is removed after 30 days. Shown in «Модули → Версии»: size on disk, «Очистить».
 - **In the card:** «Версии» → list by time with reason («перед „Редактура“», «автоматически»), changed files.
   - «Сравнить с текущим» — a side-by-side text view of one file (`.docx` / `.rtf` read through `NSAttributedString`).
@@ -129,5 +128,5 @@ the AI service chosen for the command.
 2. Versions store — own simple store without git.
 3. Versions keep only texts and the card; media are skipped.
 4. Batch tasks — in this wave, as a stage after «Версии» (§7.4).
-
-Still open, not blocking stage 1: how often and how long versions are kept (§4 defaults, **(proposed)**).
+5. Versions — every 10 minutes if something changed (and before every AI run); all versions of the last 24 hours,
+   then one per day for 30 days. Both can be changed in «Модули → Версии».

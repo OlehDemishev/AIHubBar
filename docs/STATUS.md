@@ -24,9 +24,9 @@
 
 ## 2026-11-03 — Spec: content as modules and the «Тексты» profile (branch `docs/content-spec`)
 
-Done: the October texts-mode draft (`docs/SPEC-content.md`, d4fbcd8) re-read against today's app as `docs/specs/SPEC-content.md`. Most of it already exists through SPEC-modes/profiles (folder projects, `проект.md`, stages, words and running time, commands with results next to the source, «только файлы» permissions, night queue, calendar, «Тексты» template) and is reused as is. New: optional module «Версии» (hidden draft versions in Application Support, own store without git, texts and the card only, before every AI run and on changes, compare and restore in the card) and batch tasks inside «Проекты» (one command over several projects, sequential, now / at night / after the reset). Quick prompt left to its own spec. Oleh's answers: walkthrough first, own store, texts only, batch tasks in this wave. Row in `docs/specs/README.md`.
+Done: the October texts-mode draft (`docs/SPEC-content.md`, d4fbcd8) re-read against today's app as `docs/specs/SPEC-content.md`. Most of it already exists through SPEC-modes/profiles (folder projects, `проект.md`, stages, words and running time, commands with results next to the source, «только файлы» permissions, night queue, calendar, «Тексты» template) and is reused as is. New: optional module «Версии» (hidden draft versions in Application Support, own store without git, texts and the card only, before every AI run and on changes, compare and restore in the card) and batch tasks inside «Проекты» (one command over several projects, sequential, now / at night / after the reset). Quick prompt left to its own spec. Oleh's answers: walkthrough first, own store, texts only, batch tasks in this wave; versions every 10 min on changes, all of the last 24 h, then one a day for 30 days. Row in `docs/specs/README.md`.
 Checked: docs only; claims about what exists checked against the code (`FolderProject`, `CommandTemplate`, `BackgroundPermissions`, `NightQueue`, templates) and DECISIONS.md / CHECKLIST.md.
-Left: stage 1 (walkthrough); versions frequency/retention defaults are proposed, not confirmed.
+Left: stage 1 (walkthrough).
 
 ## 2026-11-03 — social preview for the 1.0 site (branch `chore/social-preview-1.0`)
 
