@@ -39,6 +39,8 @@ struct QuickCommand: Codable, Equatable, Identifiable, Sendable {
     var value: String
     /// Ask «Запустить?» first.
     var confirm = false
+    /// A global shortcut that runs it from any app; older libraries have none.
+    var hotKey: KeyCombo?
 
     var invocation: Invocation {
         let value = value.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -145,6 +147,30 @@ final class QuickToolsController {
         case .notchIsland: settings.map { !$0.notch.hidden }
         default: nil
         }
+    }
+
+    /// A shortcut press: what the panel button does. The panel may be closed, so «Спрашивать перед запуском» asks in
+    /// an alert; `ask` stands in for it in tests.
+    func runFromHotKey(_ command: QuickCommand, ask: ((QuickCommand) -> Bool)? = nil) {
+        if command.confirm {
+            guard !asking else { return }
+            asking = true
+            defer { asking = false }
+            guard (ask ?? Self.askToRun)(command) else { return }
+        }
+        run(command)
+    }
+
+    @ObservationIgnored private var asking = false
+
+    private static func askToRun(_ command: QuickCommand) -> Bool {
+        let alert = NSAlert()
+        alert.messageText = String(localized: "Запустить «\(command.title)»?")
+        alert.informativeText = command.value
+        alert.addButton(withTitle: String(localized: "Запустить"))
+        alert.addButton(withTitle: String(localized: "Отмена"))
+        NSApp.activate()
+        return alert.runModal() == .alertFirstButtonReturn
     }
 
     func run(_ command: QuickCommand) {

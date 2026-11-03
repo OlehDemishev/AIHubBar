@@ -9,7 +9,7 @@ extension ModuleDefinition {
         group: .work,
         symbol: "bolt.square",
         title: String(localized: "Быстрые команды"),
-        summary: String(localized: "Свои кнопки: скрипт в фоне или в Терминале, ярлык из «Команд» macOS, ссылка, файл, папка или приложение."),
+        summary: String(localized: "Свои кнопки: скрипт в фоне или в Терминале, ярлык из «Команд» macOS, ссылка, файл, папка или приложение. У каждой может быть своё сочетание клавиш."),
         tagline: String(localized: "Скрипты, ярлыки, ссылки, файлы"),
         notifications: [.commands],
         keywords: [String(localized: "Команды")]
@@ -35,6 +35,7 @@ private struct QuickCommandsSketch: View {
 /// The «Быстрые команды» library: what each button runs (SPEC-profiles §4.3).
 struct QuickCommandsSection: View {
     @Environment(AppSettings.self) private var settings
+    @Environment(CommandHotKeys.self) private var hotKeys
 
     private static let symbols = ["bolt", "terminal", "folder", "link", "doc", "arrow.down.circle", "network", "hammer", "play", "wand.and.stars", "camera", "music.note"]
 
@@ -67,6 +68,14 @@ struct QuickCommandsSection: View {
                     TextField(placeholder(command.kind), text: $command.value)
                         .font(.callout.monospaced())
                     Toggle("Спрашивать перед запуском", systemImage: "questionmark.circle", isOn: $command.confirm)
+                    IconRow("Сочетание клавиш", systemImage: "keyboard") {
+                        HotKeyRecorder(combo: $command.hotKey)
+                    }
+                    if let problem = hotKeys.problem(for: command) {
+                        Label(problem.text, systemImage: problem.blocks ? "exclamationmark.triangle.fill" : "info.circle")
+                            .font(.caption)
+                            .foregroundStyle(problem.blocks ? .orange : .secondary)
+                    }
                 }
                 .padding(.vertical, 4)
             }
@@ -76,7 +85,7 @@ struct QuickCommandsSection: View {
         } header: {
             Text("Команды")
         } footer: {
-            Footnote(text: String(localized: "Скрипт в фоне запускается через zsh в домашней папке, итог приходит уведомлением; «в Терминале» — открывает новое окно. Ярлык — имя из приложения «Команды». Открыть — ссылка (https://…) или путь (~/…)."))
+            Footnote(text: String(localized: "Скрипт в фоне запускается через zsh в домашней папке, итог приходит уведомлением; «в Терминале» — открывает новое окно. Ярлык — имя из приложения «Команды». Открыть — ссылка (https://…) или путь (~/…). Сочетание клавиш запускает команду из любого приложения, как кнопка в панели, — и тоже спрашивает, если включено «Спрашивать перед запуском»."))
         }
     }
 

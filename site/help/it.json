@@ -519,7 +519,7 @@
               "name" : "Note"
             },
             {
-              "detail" : "Pulsanti tuoi: uno script in background o nel Terminale, un comando di «Comandi rapidi» di macOS, un link, un file, una cartella o un’app.",
+              "detail" : "Pulsanti tuoi: uno script in background o nel Terminale, un comando di «Comandi rapidi» di macOS, un link, un file, una cartella o un’app. Ognuno può avere la sua scorciatoia da tastiera.",
               "name" : "Comandi rapidi"
             }
           ],

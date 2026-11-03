@@ -519,7 +519,7 @@
               "name" : "Catatan"
             },
             {
-              "detail" : "Tombol sendiri: skrip di latar belakang atau Terminal, pintasan «Pintasan» macOS, tautan, file, folder, atau aplikasi.",
+              "detail" : "Tombol sendiri: skrip di latar belakang atau Terminal, pintasan «Pintasan» macOS, tautan, file, folder, atau aplikasi. Masing-masing bisa punya pintasan papan ketik sendiri.",
               "name" : "Perintah cepat"
             }
           ],

@@ -519,7 +519,7 @@
               "name" : "Notes"
             },
             {
-              "detail" : "Vos boutons : un script en arrière-plan ou dans Terminal, un raccourci « Raccourcis » de macOS, un lien, un fichier, un dossier ou une app.",
+              "detail" : "Vos boutons : un script en arrière-plan ou dans Terminal, un raccourci « Raccourcis » de macOS, un lien, un fichier, un dossier ou une app. Chacun peut avoir son propre raccourci clavier.",
               "name" : "Commandes rapides"
             }
           ],

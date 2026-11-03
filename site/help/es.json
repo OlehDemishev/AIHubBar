@@ -519,7 +519,7 @@
               "name" : "Notas"
             },
             {
-              "detail" : "Tus botones: un script en segundo plano o en Terminal, un atajo de «Atajos» de macOS, un enlace, archivo, carpeta o app.",
+              "detail" : "Tus botones: un script en segundo plano o en Terminal, un atajo de «Atajos» de macOS, un enlace, archivo, carpeta o app. Cada uno puede tener su propio atajo de teclado.",
               "name" : "Comandos rápidos"
             }
           ],
