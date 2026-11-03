@@ -6,10 +6,10 @@
 
 **Now:**
 - `feat/telegram-settings`: Telegram stage 4 — ⚙️ settings in the bot, quiet hours, «Не спать» — PR open (the last stage)
-- merged 2026-11-03: #248 «Не спать» on/off in the menu bar, #241 Codex states, #240 quick command shortcuts, #238 «Быстрый запрос», #236 content spec, #242 «Telegram» stage 1, #244 menu at the bottom, #246 shared bot (Worker not deployed yet), #247 desktop CI off for Mac string changes, #249 the bot's menu set up by each person, #252 stage 2 (sessions, requests, limits), #254 stage 3 (tasks and runs)
+- merged 2026-11-03: #251 menu bar ☕ follows the «Не спать» switch, #248 «Не спать» on/off in the menu bar, #241 Codex states, #240 quick command shortcuts, #238 «Быстрый запрос», #236 content spec, #242 «Telegram» stage 1, #244 menu at the bottom, #246 shared bot (Worker not deployed yet), #247 desktop CI off for Mac string changes, #249 the bot's menu set up by each person, #252 stage 2 (sessions, requests, limits), #254 stage 3 (tasks and runs)
 
 **Next:**
-- next beta or 0.5.1 carries stage 8 (#230–#232) and #236–#248: 0.5.1-beta.1 was built from 27c5e2d, before them
+- next beta or 0.5.1 carries stage 8 (#230–#232) and #236–#254: 0.5.1-beta.1 was built from 27c5e2d, before them
 - Telegram: all four stages built; try them live in the bot; deploy the shared bot's Worker when ready (relay/telegram/README.md)
 - content (docs/specs/SPEC-content.md, agreed): stage 1 — walkthrough of the «Тексты» profile on a sample folder, then «Версии», then batch tasks
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/specs/SPEC-windows.md §9, stage 2–3 leftovers)
@@ -39,6 +39,12 @@ Left: not tried live.
 Done: 🚀 Задача — the profile's projects (most active first) → the task typed as the next message (10 minutes, `/cancel`) → shown back in a quote with «Запустить» → started like «Своя задача…» in the background (`LaunchController`); the 90 % question («Всё равно» / «После сброса») and «Claude уже работает здесь» («Да, в worktree») come as buttons; the outcome replaces the message. Below the projects: running background tasks with 📜 n (the last 12 log steps) and ⏹ n («Остановить?» first), the last three finished with their PR link (a link only). Over the shared bot starting and stopping need «Задачи через общий бот» (module page). Projects in buttons by an 8-hex FNV-1a of the path. 🚀 is in the default bottom menu (🏠 🤖 / 🚀 ⏳ / 📊 🧹 / ❓). Only Claude Code: other agents open in Terminal on the Mac with the task on the clipboard, useless from a phone (spec §8). 14 new strings in 12 languages.
 Checked: scripts/check.sh green; 5 new tests (`TelegramTasksTests`: project keys, the screen with projects and runs, locked over the shared bot, the task shown back and the launcher's questions, log tail and stop), updated menu and route tests.
 Left: not tried live — start a small task from the phone and stop it.
+
+## 2026-11-03 — menu bar ☕ follows the «Не спать» switch (branch `fix/keep-awake-cup-follows-switch`)
+
+Done: after #248 the cup stayed orange whatever the panel switch said — the switch is only the manual hold, and the rule «Пока работает Claude» kept the Mac awake (and the cup lit) all the time. Oleh chose: the cup shows only while the switch is on (orange, label colour when level colours are off) and is gone when it is off; rules no longer light it. New `MenuBarData.keepAwakeSwitchedOn` (= manual hold); the tooltip still says «Mac не засыпает» from the real reason. Settings description reworded in 12 languages.
+Checked: `xcodebuild test` — 462 green (`KeepAwakeTests.menuBarCup`: off, rule alone, switch on, colours off). Installed build: menu bar screenshot with the switch off while the Claude rule held the Mac — no cup.
+Left: the switch-on state not seen live (the panel switch wasn't clicked by the agent).
 
 ## 2026-11-03 — Telegram stage 2: sessions, permission requests, limits (branch `feat/telegram-sessions-limits`)
 
