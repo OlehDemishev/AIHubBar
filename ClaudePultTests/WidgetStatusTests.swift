@@ -15,17 +15,16 @@ struct WidgetStatusTests {
         #expect(Set(session.keys) == ["id", "project"])
     }
 
-    @Test func widgetRequestsArriveAsDarwinNotifications() async throws {
+    /// Requests are handled by name; the Darwin notifications themselves are not posted — they are system-wide and
+    /// would switch «Не спать» in the installed app (docs/SPEC-refactor.md §2.4).
+    @Test func widgetRequestsAreHandledByName() {
         var received: [Bool] = []
         var refreshes = 0
         WidgetRequests.keepAwake = { received.append($0) }
         WidgetRequests.refreshLimits = { refreshes += 1 }
-        WidgetRequests.listen()
-        let center = CFNotificationCenterGetDarwinNotifyCenter()
-        for name in [WidgetStatus.keepAwakeOn, WidgetStatus.keepAwakeOff, WidgetStatus.refreshLimits] {
-            CFNotificationCenterPostNotification(center, CFNotificationName(name as CFString), nil, nil, true)
+        for name in [WidgetStatus.keepAwakeOn, WidgetStatus.keepAwakeOff, WidgetStatus.refreshLimits, "something.else"] {
+            WidgetRequests.handle(name)
         }
-        for _ in 0..<40 where received.count < 2 || refreshes < 1 { try await Task.sleep(for: .milliseconds(50)) }
         #expect(received == [true, false])
         #expect(refreshes == 1)
         WidgetRequests.keepAwake = nil
