@@ -1,6 +1,6 @@
 # SPEC — AI services: Claude as one of them, the same view for every service
 
-Status: stages 1–6 done (#159, #162–#170), 2026-11-02. 2026-11-03: Copilot CLI has hooks after all — with AI Hub Bar's hook (Settings → Copilot, `CopilotHooks`) its sessions are rows with «работает / ждёт / готово» and «ждёт» notifies. Left: «waiting» for Codex and Antigravity (no hooks; Antigravity's run status only has IDLE / RUNNING / BUSY / CANCELING), Cursor CLI (not installed here).
+Status: stages 1–6 done (#159, #162–#170), 2026-11-02. 2026-11-03: Copilot CLI has hooks after all — with AI Hub Bar's hook (Settings → Copilot, `CopilotHooks`) its sessions are rows with «работает / ждёт / готово» and «ждёт» notifies. Stage 7 (2026-11-03): the same for Codex CLI through its own hooks (`CodexHooks`); Antigravity has no reliable «waiting» signal, so it keeps «работает» only. Left: Cursor CLI (not installed here).
 Asked by Oleh on 2026-10-31 and 2026-11-02: move Claude Code into «Сервисы AI», give every AI its own nested tab
 with all its settings, and bring the other services up to Claude Code's level — one model per service for rings,
 forecast, week strip, credits, per-project tokens and context.
@@ -36,7 +36,7 @@ Facts on Oleh's Mac (2026-11-02): `claude` 2.1.314 in `/opt/homebrew/bin`; `code
 | Service | Today in AI Hub Bar | Limits / windows | History, forecast | Credits / plan | Tokens per project | Context | Sessions | Background |
 |---|---|---|---|---|---|---|---|---|
 | Claude Code | everything in §1 | ✅ API | ✅ | ✅ extra usage | ✅ jsonl | ✅ | ✅ hooks | ✅ |
-| Codex | agent row, «Другие AI» row: 5 h + week % | ✅ `app-server` `account/rateLimits/read` (primary / secondary, resets, window length) | ⚙️ same store as Claude once readings are kept | ⚙️ `credits`, `planType` in the same answer (openai/codex `app-server-protocol/v2/account.rs`) | ⚙️ `state_5.sqlite` `threads` (`cwd`, `tokens_used`); session logs `~/.codex/sessions/**/rollout-*.jsonl` `token_count` | ⚙️ `token_count.info.last_token_usage` vs `model_context_window` | ⚙️ threads with recent `updated_at`; no hooks yet (Codex `notify` in `config.toml` can call a script) | ❌ until `--sandbox`/approval flags are checked live |
+| Codex | agent row, «Другие AI» row: 5 h + week % | ✅ `app-server` `account/rateLimits/read` (primary / secondary, resets, window length) | ⚙️ same store as Claude once readings are kept | ⚙️ `credits`, `planType` in the same answer (openai/codex `app-server-protocol/v2/account.rs`) | ⚙️ `state_5.sqlite` `threads` (`cwd`, `tokens_used`); session logs `~/.codex/sessions/**/rollout-*.jsonl` `token_count` | ⚙️ `token_count.info.last_token_usage` vs `model_context_window` | ✅ hooks (`~/.codex/hooks.json`, stage 7): работает / ждёт / готово | ❌ until `--sandbox`/approval flags are checked live |
 | Gemini CLI | agent row, quota with consent or today's requests | ✅ Code Assist `retrieveUserQuota` (consent) / requests per day | ⚙️ | — free / plan daily limit only | ⚙️ `~/.gemini/tmp/<hash>/` chats (project hash, not path — needs mapping) | ❓ | ❓ | ❌ |
 | Antigravity (`agy`) | agent row | ❓ not documented | — | — | ❓ | ❓ | ❓ | ❌ |
 | GitHub Copilot CLI | agent row, `gh api /copilot_internal/user` premium requests | ✅ monthly quota | ⚙️ | ✅ entitlement / remaining | ❌ | ❌ | ❌ | ❌ |
@@ -124,6 +124,38 @@ service mark. Sessions: Codex threads next to Claude sessions once a source exis
    each conversation's title, folder (`workspace_uris`), time and run status, so its recent conversations join «Сессии»
    with «работает» while running (click → `agy --conversation <id>`). Homebrew's `gemini-cli` is deprecated (disabled
    2026-12-18); its replacement `antigravity-cli` links `agy`. Cursor CLI: not installed here.
+
+7. **«Waiting» for Codex and Antigravity** (2026-11-03, research on this Mac: Codex 0.166.0-alpha.5.1, agy 1.4.12).
+   - **Codex — reliable, built.** Codex now has lifecycle hooks (`codex features list`: `hooks  stable  true`; docs
+     learn.chatgpt.com/docs/hooks, which developers.openai.com/codex/hooks redirects to). User hooks live in
+     `~/.codex/hooks.json` (or inline `[hooks]` in `config.toml`), in Claude Code's shape: event → matcher groups →
+     `{"type": "command", "command", "timeout"}`; all sources are loaded and merged. The stdin payload is Claude-style
+     snake_case (`session_id` = the thread id, as in `state_5.sqlite` and the rollout name; `cwd`, `hook_event_name`,
+     `transcript_path`, `prompt`, `tool_name`, `tool_input`; Codex adds `turn_id`, `model`, `permission_mode`). Events used:
+     `SessionStart`, `UserPromptSubmit` (→ работает), **`PermissionRequest`** — «runs when Codex is about to ask for
+     approval», not for commands that need none (→ ждёт, notifies), `PostToolUse` (→ работает again; `Bash`,
+     `apply_patch` — the file is read from the patch), `Stop` and `Interrupt` (→ готово: the turn ended, Codex waits for
+     the next message), `SessionEnd` (→ завершена; 3 s timeout at most). Empty stdout with exit 0 changes nothing.
+     **Trust:** Codex runs a new or changed non-managed hook only after it is reviewed in `/hooks` (it stores
+     `[hooks.state] trusted_hash` in `config.toml` itself); untrusted hooks are skipped silently (checked live: a `codex
+     exec` with our hook passed by `-c hooks.…` ran nothing). AI Hub Bar never writes that trust; the command line stays
+     the same across versions, so trusting is once. `CodexHooks` merges our entries into `~/.codex/hooks.json` like
+     Claude's settings.json (backup `hooks.json.claudepult-backup-<time>` first, other hooks untouched, a file left
+     empty is removed); Settings → Codex → «Установить hook», `AIHubBar --codex-hooks status|install|uninstall`. The
+     same hook script writes `sessions/<id>.json` with `agent: codex`; a Codex hook session hides its thread row.
+     Approving from AI Hub Bar is Claude-only: Codex's `PermissionRequest` answers have Claude's shape, but that needs a
+     live check before it is offered. `notify` (ChatGPT's computer use owns it here, stage 5) is not needed any more.
+     Not covered: Codex's `request_user_input` question tool has no hook event — such a question shows as «работает».
+     Without hooks the rollout `rollout-*.jsonl` has `task_started` / `task_complete` but no approval events: a guess.
+   - **Antigravity — no reliable signal, not built.** `agy` has `hooks.json` too (`~/.gemini/config/hooks.json`,
+     `<workspace>/.agents/hooks.json`; named hooks, camelCase payload with `conversationId`, `workspacePaths`), but its
+     events are `SessionStart`, `PreToolUse`, `PostToolUse`, `PreInvocation`, `PostInvocation`, `Stop` — none says an
+     approval prompt is shown (`PreToolUse` runs before every tool, prompted or not; a hook can only *ask* for one). The
+     run status in `conversation_summaries.db` has IDLE / RUNNING / BUSY / CANCELING only; the protobuf trajectory has
+     `requested_interaction` / `STATE_WAITING_FOR_USER`, undocumented and binary. So Antigravity keeps «работает» from
+     the run status. A `Stop` hook could add «готово», which IDLE already gives. Revisit if agy gets a permission event.
+     A live probe (`agy -i` in a scratch folder) stopped at agy's first-run colour-scheme screen in the app's terminal and
+     was closed without answering it.
 
 Rules for every stage: hover hint on each icon-only control, accessibility walk at the end of each UI stage
 (SPEC §3.1), all strings in 13 languages, nothing read without the consent the service already asks for.

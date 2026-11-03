@@ -5,6 +5,7 @@
 **Updated:** 2026-11-03
 
 **Now:**
+- PR `feat/agent-waiting`: «ждёт» for Codex CLI through its hooks (Antigravity: no reliable signal) — waiting for merge
 - nothing in progress; refactoring stage 8 (audit leftovers) done — #230–#232
 
 **Next:**
@@ -12,6 +13,7 @@
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/specs/SPEC-windows.md §9, stage 2–3 leftovers)
 
 **Needs Oleh:**
+- Settings → Codex → «Установить hook», then once in `codex` type `/hooks` and trust AI Hub Bar's hooks (Codex skips untrusted hooks); then check a Codex row in «Сессии» goes «ждёт» on an approval prompt
 - GitHub → repository Settings → Social preview: upload docs/images/social-preview.png (only by hand)
 - Settings → Copilot → «Установить hook»: then start `copilot` and check its row in «Сессии» (the agent wasn't allowed to install it into ~/.copilot itself)
 - say what comes next: «Раскладка» to everyone, or new features
@@ -20,6 +22,12 @@
 - «Раскладка»: tried live in TextEdit, Safari, Chrome (⌥⇧ too); Telegram and Notes are yours to try (not typed into by the agent)
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-03 — «ждёт» for Codex CLI; Antigravity researched (branch `feat/agent-waiting`)
+
+Done: Codex 0.166 has stable lifecycle hooks (`~/.codex/hooks.json`, Claude-shaped, snake_case payload with `session_id` = thread id). `CodexHooks` merges AI Hub Bar's entries into that file (backup first, other hooks untouched, a file left empty is removed); Settings → Codex → «Состояние сессий Codex» with «Установить hook» / «Снять hook» and hover hints; `AIHubBar --codex-hooks status|install|uninstall`. The shared hook script (format 5) takes `--agent codex`: `PermissionRequest` → «ждёт» with the same notification as Claude's, `UserPromptSubmit` / `PostToolUse` → «работает» (`apply_patch` shows the file it edits), `Stop` / `Interrupt` → «готово», `SessionEnd` → ended (3 s timeout, Codex's maximum). A Codex hook session hides its thread row. `HookJSONFile` now holds the JSON read / backup / write that Claude's installer had; the read error names the file. Antigravity: its hooks (`PreToolUse`, `Stop`, …) have no event for an approval prompt and its run status has no waiting value, so nothing was built — findings in SPEC-ai-services stage 7. Strings in all 13 languages, help fact «Codex и Copilot», site/help exported, REFERENCE and specs README updated.
+Checked: `scripts/check.sh` green (strings, all Mac tests with warnings as errors; new `CodexHooksTests` — 6 tests on payloads from Codex's hooks docs); installed with `scripts/build-and-install.sh`, Settings → Codex shows the section, `--codex-hooks status` → notInstalled. Live: a `codex exec` with our hook passed by `-c hooks.…` ran nothing — Codex skips untrusted hooks silently (`--dangerously-bypass-hook-trust` was not used), so no live session states yet. An `agy -i` probe stopped at agy's first-run colour-scheme screen and was closed unanswered.
+Left: Oleh installs and trusts the hook, then a live check (whether the TUI's hooks run in `codex` itself or the shared app-server daemon decides what «Показать» finds). Approving Codex prompts from AI Hub Bar (its `PermissionRequest` answer has Claude's shape) — not offered until checked live. Codex's `request_user_input` question has no hook event. The `codex exec` probe left a thread in a scratch folder that shows in «Сессии» for 3 hours.
 
 ## 2026-11-03 — overview PDFs for 1.0 (branch `docs/overview-1.0`)
 

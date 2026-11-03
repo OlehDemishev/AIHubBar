@@ -23,6 +23,9 @@ final class HookController {
         if (try? CopilotHooks.live(projectsDirectory: settings.projectsDirectory).updateScriptIfNeeded()) == true {
             AppLog.info("Hook script updated to this version (Copilot)")
         }
+        if (try? CodexHooks.live(projectsDirectory: settings.projectsDirectory).updateScriptIfNeeded()) == true {
+            AppLog.info("Hook script updated to this version (Codex)")
+        }
         status = installer.status()
     }
 
