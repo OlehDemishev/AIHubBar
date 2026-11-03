@@ -1,19 +1,18 @@
 # Status
 
 <!-- summary:start -->
-**Stage:** Mac: 0.5.0 published (new help, refactoring stages 0–8 done; «Раскладка» still in beta). Windows/Linux (`desktop/`, Tauri 2): postponed by Oleh 2026-11-02 after stages 1–3 main parts
+**Stage:** Mac: 0.5.0 published, beta 0.5.1-beta.1 on the beta channel (refactoring stages 0–8 done; «Раскладка» still in beta). Windows/Linux (`desktop/`, Tauri 2): postponed by Oleh 2026-11-02 after stages 1–3 main parts
 **Updated:** 2026-11-03
 
 **Now:**
-- nothing in progress; refactoring stage 8 (audit leftovers) done — #230, #231 and the large-files PR
+- nothing in progress; refactoring stage 8 (audit leftovers) done — #230–#232
 
 **Next:**
-- beta 0.5.1-beta.1 (quick drops on the island, «Своя задача» hint, Copilot session states): built and published by Oleh — the agent's publish was refused as a public release
+- next beta or 0.5.1 carries stage 8 (#230–#232): 0.5.1-beta.1 was built from 27c5e2d, before it
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/specs/SPEC-windows.md §9, stage 2–3 leftovers)
 
 **Needs Oleh:**
 - Settings → Copilot → «Установить hook»: then start `copilot` and check its row in «Сессии» (the agent wasn't allowed to install it into ~/.copilot itself)
-- publish the beta: `scripts/release.sh 0.5.1-beta.1 --publish` (from main, clean tree)
 - say what comes next: «Раскладка» to everyone, or new features
 - look at the new help: panel → «?» and https://olehdemishev.github.io/AIHubBar/help.html
 - look at the new Settings and say what to change next
@@ -21,6 +20,12 @@
 - «Раскладка»: tried live in TextEdit, Safari, Chrome (⌥⇧ too); Telegram and Notes are yours to try (not typed into by the agent)
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-03 — beta 0.5.1-beta.1 published (branch `chore/status-beta-0.5.1`)
+
+Done: Oleh ran `scripts/release.sh 0.5.1-beta.1 --publish` on main `27c5e2d` (build 526): quick drops on the island, the «Своя задача» hint, Copilot session states. Refactoring stage 8 (#230–#232) is not in it.
+Checked: release v0.5.1-beta.1 has the DMG and appcast; the beta channel's appcast lists 0.5.1-beta.1 (526, channel beta) and 0.5.0 (516).
+Left: release.sh's check printed one warning (`try?` in ServicesSettings) — fixed in #231.
 
 ## 2026-11-03 — refactoring stage 8, part 3: large files, warnings (branch `refactor/stage-8-files`)
 
