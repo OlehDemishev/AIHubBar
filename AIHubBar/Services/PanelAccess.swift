@@ -40,9 +40,12 @@ enum GlobalHotKey {
     static var action: (() -> Void)?
     /// ⌃⌥Y / ⌃⌥N for the permission request in the notch island (SPEC-notch §4): true = allow.
     static var islandAction: ((Bool) -> Void)?
+    private static var quickPromptReference: EventHotKeyRef?
+    /// «Быстрый запрос» (SPEC-quick-prompt): opens its window.
+    static var quickPromptAction: (() -> Void)?
 
     private static let signature: OSType = 0x4350_5554
-    private enum ID: UInt32 { case panel = 1, allow, deny }
+    private enum ID: UInt32 { case panel = 1, allow, deny, quickPrompt }
 
     static func register(_ key: PanelHotKey) {
         if let reference {
@@ -68,6 +71,18 @@ enum GlobalHotKey {
         let modifiers = UInt32(controlKey | optionKey)
         islandReferences = [add(UInt32(kVK_ANSI_Y), modifiers, .allow), add(UInt32(kVK_ANSI_N), modifiers, .deny)].compactMap { $0 }
         AppLog.info(islandReferences.count == 2 ? "Island hot keys ⌃⌥Y / ⌃⌥N registered" : "Island hot keys not registered (another app may use them)")
+    }
+
+    /// «Быстрый запрос»'s key while its module is on; `.off` unregisters it.
+    static func registerQuickPrompt(_ key: QuickPromptHotKey) {
+        if let quickPromptReference {
+            UnregisterEventHotKey(quickPromptReference)
+            self.quickPromptReference = nil
+        }
+        guard key != .off else { return }
+        installHandler()
+        quickPromptReference = add(key.keyCode, key.modifiers, .quickPrompt)
+        AppLog.info(quickPromptReference != nil ? "Quick prompt hot key \(key.rawValue) registered" : "Quick prompt hot key \(key.rawValue) not registered (another app may use it)")
     }
 
     private static func add(_ keyCode: UInt32, _ modifiers: UInt32, _ id: ID) -> EventHotKeyRef? {
@@ -143,6 +158,7 @@ enum GlobalHotKey {
                     switch ID(rawValue: id) {
                     case .allow: GlobalHotKey.islandAction?(true)
                     case .deny: GlobalHotKey.islandAction?(false)
+                    case .quickPrompt: GlobalHotKey.quickPromptAction?()
                     default: GlobalHotKey.action?()
                     }
                 }

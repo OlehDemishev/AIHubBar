@@ -226,6 +226,10 @@
               "name" : "Terminal / Hintergrund"
             },
             {
+              "detail" : "⌃⌥P in jeder App: Aufgabe, Projekt (das im Vordergrund oder das letzte) und Agent — ⌘↩, und sie läuft im Hintergrund oder im Terminal. Modul „Schnellauftrag“, das Kürzel steht auf seiner Seite.",
+              "name" : "Schnellauftrag"
+            },
+            {
               "detail" : "Hintergrundaufgabe: was Claude tut, Schritt für Schritt.",
               "name" : "Protokoll"
             },

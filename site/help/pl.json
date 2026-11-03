@@ -226,6 +226,10 @@
               "name" : "Terminal / W tle"
             },
             {
+              "detail" : "⌃⌥P w dowolnej aplikacji: zadanie, projekt (ten na wierzchu albo ostatni) i agent — ⌘↩, i działa w tle lub w Terminalu. Moduł „Szybkie zapytanie”, skrót jest na jego stronie.",
+              "name" : "Szybkie zapytanie"
+            },
+            {
               "detail" : "Zadanie w tle: co robi Claude, krok po kroku.",
               "name" : "Dziennik"
             },

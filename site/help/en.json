@@ -226,6 +226,10 @@
               "name" : "Terminal / Background"
             },
             {
+              "detail" : "⌃⌥P in any app: the task, the project (the one in front, or the last one) and the agent — ⌘↩, and it runs in the background or in Terminal. The “Quick Prompt” module; the key is on its page.",
+              "name" : "Quick Prompt"
+            },
+            {
               "detail" : "Background task: what Claude does, step by step.",
               "name" : "Log"
             },

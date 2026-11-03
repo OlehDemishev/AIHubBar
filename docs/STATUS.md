@@ -5,14 +5,15 @@
 **Updated:** 2026-11-03
 
 **Now:**
+- «Быстрый запрос» (docs/specs/SPEC-quick-prompt.md): PR from `feat/quick-prompt`, waiting for merge
 - quick command shortcuts (branch `feat/command-hotkeys`, PR open, waiting for review / merge)
 - PR `feat/agent-waiting`: «ждёт» for Codex CLI through its hooks (Antigravity: no reliable signal) — waiting for merge
-
 **Next:**
 - next beta or 0.5.1 carries stage 8 (#230–#232): 0.5.1-beta.1 was built from 27c5e2d, before it
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/specs/SPEC-windows.md §9, stage 2–3 leftovers)
 
 **Needs Oleh:**
+- «Быстрый запрос»: Settings → Modules → «Быстрый запрос» on, then ⌃⌥P from Terminal or Xcode — send one task to the background and one to Codex
 - Settings → Codex → «Установить hook», then once in `codex` type `/hooks` and trust AI Hub Bar's hooks (Codex skips untrusted hooks); then check a Codex row in «Сессии» goes «ждёт» on an approval prompt
 - GitHub → repository Settings → Social preview: upload docs/images/social-preview.png (only by hand)
 - Settings → Copilot → «Установить hook»: then start `copilot` and check its row in «Сессии» (the agent wasn't allowed to install it into ~/.copilot itself)
@@ -22,6 +23,12 @@
 - «Раскладка»: tried live in TextEdit, Safari, Chrome (⌥⇧ too); Telegram and Notes are yours to try (not typed into by the agent)
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-03 — «Быстрый запрос»: a task to an agent from any app (branch `feat/quick-prompt`)
+
+Done: new optional AI module «Быстрый запрос» (docs/specs/SPEC-quick-prompt.md). A Carbon hot key (⌃⌥P by default; ⌃⌥A, ⌃⇧Space, off — on the module's page; registered only while the module is on) opens a small floating window: task, project, agent, «Фон» / «Терминал»; ⌘↩ sends, Esc closes. The project starts as the one in front (front window's document or a project name in its title, read only if Accessibility is already granted), else the last one, else the most recently active. Claude Code goes through `LaunchController` like «Своя задача…» (worktree, the 90 % limit question and «Запустить всё равно» shown in the window); other installed agents open in Terminal with the task on the clipboard. `AIHubBar --app-command quick-prompt` opens it (module off → its Settings page). Help fact in «Сессии агентов», site help JSON exported, REFERENCE updated, 17 new strings in 13 languages. `GlobalHotKey` changes are additive (one more id, `registerQuickPrompt`).
+Checked: scripts/check.sh green (warnings as errors), new `QuickPromptTests` (project choice, agents and modes, keys, settings decoding); installed with scripts/build-and-install.sh, `--app-command quick-prompt` with the module off logs and opens the module's page (screenshot).
+Left: the window itself not tried live (Oleh was using the screen; turning the module on would change his setup) — see Needs Oleh. Other agents get the task through the clipboard; passing it as their first prompt waits for their flags to be checked live.
 
 ## 2026-11-03 — quick command shortcuts (branch `feat/command-hotkeys`)
 

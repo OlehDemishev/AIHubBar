@@ -226,6 +226,10 @@
               "name" : "Terminal / Arrière-plan"
             },
             {
+              "detail" : "⌃⌥P dans n’importe quelle app : la tâche, le projet (celui au premier plan, ou le dernier) et l’agent — ⌘↩, et elle tourne en arrière-plan ou dans Terminal. Module « Requête rapide », le raccourci est sur sa page.",
+              "name" : "Requête rapide"
+            },
+            {
               "detail" : "Tâche en arrière-plan : ce que fait Claude, étape par étape.",
               "name" : "Journal"
             },

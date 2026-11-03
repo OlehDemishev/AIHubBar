@@ -117973,6 +117973,1298 @@
           }
         }
       }
+    },
+    "Агент": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Agent"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Агент"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Agent"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Agent"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Agente"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Agente"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Agente"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Agent"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "エージェント"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "에이전트"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الوكيل"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Agen"
+          }
+        }
+      }
+    },
+    "Быстрый запрос": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quick Prompt"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Швидкий запит"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schnellauftrag"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Requête rapide"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Petición rápida"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Richiesta rapida"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pedido rápido"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Szybkie zapytanie"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "クイックプロンプト"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "빠른 요청"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "طلب سريع"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Permintaan cepat"
+          }
+        }
+      }
+    },
+    "Быстрый запрос — AI Hub Bar": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quick Prompt — AI Hub Bar"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Швидкий запит — AI Hub Bar"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schnellauftrag — AI Hub Bar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Requête rapide — AI Hub Bar"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Petición rápida — AI Hub Bar"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Richiesta rapida — AI Hub Bar"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pedido rápido — AI Hub Bar"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Szybkie zapytanie — AI Hub Bar"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "クイックプロンプト — AI Hub Bar"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "빠른 요청 — AI Hub Bar"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "طلب سريع — AI Hub Bar"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Permintaan cepat — AI Hub Bar"
+          }
+        }
+      }
+    },
+    "Где запустить": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Where to run"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Де запустити"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wo ausführen"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Où lancer"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dónde ejecutar"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dove avviare"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Onde executar"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gdzie uruchomić"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "実行場所"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "실행 위치"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مكان التشغيل"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tempat menjalankan"
+          }
+        }
+      }
+    },
+    "Горячая клавиша": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hot key"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Гаряча клавіша"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tastenkürzel"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Raccourci"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Atajo de teclado"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scorciatoia"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Atalho de teclado"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skrót klawiszowy"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ホットキー"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "단축키"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مفتاح الاختصار"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tombol pintas"
+          }
+        }
+      }
+    },
+    "Горячая клавиша в любом приложении открывает окно: задача, проект и агент — и она уходит в фон или в новое окно Терминала. ⌘↩ — отправить, Esc — закрыть.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A hot key in any app opens a window: the task, the project and the agent — and it goes to the background or to a new Terminal window. ⌘↩ sends, Esc closes."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Гаряча клавіша в будь-якій програмі відкриває вікно: завдання, проєкт і агент — і воно йде у фон або в нове вікно Термінала. ⌘↩ — надіслати, Esc — закрити."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ein Tastenkürzel in jeder App öffnet ein Fenster: Aufgabe, Projekt und Agent — und sie läuft im Hintergrund oder in einem neuen Terminal-Fenster. ⌘↩ sendet, Esc schließt."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un raccourci dans n’importe quelle app ouvre une fenêtre : la tâche, le projet et l’agent — et elle part en arrière-plan ou dans une nouvelle fenêtre de Terminal. ⌘↩ envoie, Échap ferme."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un atajo en cualquier app abre una ventana: la tarea, el proyecto y el agente — y se envía en segundo plano o a una nueva ventana de Terminal. ⌘↩ envía, Esc cierra."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Una scorciatoia in qualsiasi app apre una finestra: attività, progetto e agente — e parte in background o in una nuova finestra di Terminale. ⌘↩ invia, Esc chiude."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Um atalho em qualquer app abre uma janela: a tarefa, o projeto e o agente — e ela vai para segundo plano ou para uma nova janela do Terminal. ⌘↩ envia, Esc fecha."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skrót klawiszowy w dowolnej aplikacji otwiera okno: zadanie, projekt i agent — i zadanie trafia w tło albo do nowego okna Terminala. ⌘↩ wysyła, Esc zamyka."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "どのアプリでもホットキーでウインドウが開きます。タスク、プロジェクト、エージェントを選ぶと、バックグラウンドか新しいターミナルウインドウで実行されます。⌘↩ で送信、Esc で閉じます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "어떤 앱에서든 단축키로 창이 열립니다. 작업, 프로젝트, 에이전트를 고르면 백그라운드나 새 터미널 창에서 실행됩니다. ⌘↩ 보내기, Esc 닫기."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مفتاح اختصار في أي تطبيق يفتح نافذة: المهمة والمشروع والوكيل — فتُرسل إلى الخلفية أو إلى نافذة طرفية جديدة. ⌘↩ للإرسال، Esc للإغلاق."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tombol pintas di aplikasi mana pun membuka jendela: tugas, proyek, dan agen — lalu tugas berjalan di latar belakang atau di jendela Terminal baru. ⌘↩ mengirim, Esc menutup."
+          }
+        }
+      }
+    },
+    "Другие агенты — только в Терминале: задача в буфере обмена, вставьте ⌘V": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Other agents run only in Terminal: the task is on the clipboard, paste it with ⌘V"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Інші агенти — лише в Терміналі: завдання в буфері обміну, вставте ⌘V"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Andere Agenten nur im Terminal: Die Aufgabe liegt in der Zwischenablage, mit ⌘V einfügen"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les autres agents seulement dans Terminal : la tâche est dans le presse-papiers, collez-la avec ⌘V"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los demás agentes solo en Terminal: la tarea está en el portapapeles, pégala con ⌘V"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gli altri agenti solo in Terminale: l’attività è negli appunti, incollala con ⌘V"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Os outros agentes só no Terminal: a tarefa está na área de transferência, cole com ⌘V"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Inni agenci tylko w Terminalu: zadanie jest w schowku, wklej je ⌘V"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ほかのエージェントはターミナルのみ。タスクはクリップボードにあるので ⌘V で貼り付けてください"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "다른 에이전트는 터미널에서만: 작업이 클립보드에 있으니 ⌘V로 붙여 넣으세요"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الوكلاء الآخرون في الطرفية فقط: المهمة في الحافظة، الصقها بـ ⌘V"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Agen lain hanya di Terminal: tugas ada di papan klip, tempel dengan ⌘V"
+          }
+        }
+      }
+    },
+    "Задача агенту из любого приложения": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A task to an agent from any app"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Завдання агенту з будь-якої програми"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eine Aufgabe für einen Agenten aus jeder App"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une tâche à un agent depuis n’importe quelle app"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Una tarea a un agente desde cualquier app"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un’attività a un agente da qualsiasi app"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uma tarefa para um agente de qualquer app"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zadanie dla agenta z dowolnej aplikacji"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "どのアプリからでもエージェントにタスクを"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "어떤 앱에서든 에이전트에게 작업을"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مهمة لوكيل من أي تطبيق"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tugas untuk agen dari aplikasi mana pun"
+          }
+        }
+      }
+    },
+    "Настройки быстрого запроса": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quick Prompt settings"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Налаштування швидкого запиту"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Einstellungen für den Schnellauftrag"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Réglages de la requête rapide"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajustes de la petición rápida"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impostazioni della richiesta rapida"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajustes do pedido rápido"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ustawienia szybkiego zapytania"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "クイックプロンプトの設定"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "빠른 요청 설정"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إعدادات الطلب السريع"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pengaturan permintaan cepat"
+          }
+        }
+      }
+    },
+    "Нет git-проектов: укажите папку с проектами в профиле — Настройки → «Профили».": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No git projects: set the projects folder in the profile — Settings → “Profiles”."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Немає git-проєктів: вкажіть теку з проєктами в профілі — Налаштування → «Профілі»."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keine Git-Projekte: Legen Sie den Projektordner im Profil fest — Einstellungen → „Profile“."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucun projet git : indiquez le dossier des projets dans le profil — Réglages → « Profils »."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No hay proyectos git: indica la carpeta de proyectos en el perfil — Ajustes → «Perfiles»."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nessun progetto git: indica la cartella dei progetti nel profilo — Impostazioni → «Profili»."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nenhum projeto git: indique a pasta de projetos no perfil — Ajustes → «Perfis»."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Brak projektów git: wskaż folder z projektami w profilu — Ustawienia → „Profile”."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "git プロジェクトがありません。プロファイルでプロジェクトのフォルダを指定してください — 設定 →「プロファイル」。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "git 프로젝트가 없습니다. 프로필에서 프로젝트 폴더를 지정하세요 — 설정 → ‘프로필’."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لا توجد مشاريع git: حدّد مجلد المشاريع في ملف التعريف — الإعدادات ← «ملفات التعريف»."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tidak ada proyek git: tentukan folder proyek di profil — Pengaturan → «Profil»."
+          }
+        }
+      }
+    },
+    "Окно быстрого запроса": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quick Prompt window"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Вікно швидкого запиту"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fenster für den Schnellauftrag"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fenêtre de requête rapide"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ventana de petición rápida"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Finestra della richiesta rapida"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Janela do pedido rápido"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Okno szybkiego zapytania"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "クイックプロンプトのウインドウ"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "빠른 요청 창"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "نافذة الطلب السريع"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jendela permintaan cepat"
+          }
+        }
+      }
+    },
+    "Отправить": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Send"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Надіслати"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Senden"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Envoyer"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enviar"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Invia"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enviar"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wyślij"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "送信"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "보내기"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إرسال"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kirim"
+          }
+        }
+      }
+    },
+    "Проект — тот, что впереди (если «Универсальный доступ» уже выдан, например для «Раскладки»), иначе прошлый. Claude Code — в фоне или в Терминале, как «Своя задача…» у проекта; другие агенты открываются в Терминале, задача — в буфере обмена. Из скрипта: AIHubBar --app-command quick-prompt.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The project is the one in front (if Accessibility is already granted, for example for “Keyboard Layout”), otherwise the last one. Claude Code runs in the background or in Terminal, like “Custom task…” of a project; other agents open in Terminal with the task on the clipboard. From a script: AIHubBar --app-command quick-prompt."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Проєкт — той, що попереду (якщо «Універсальний доступ» уже надано, наприклад для «Розкладки»), інакше попередній. Claude Code — у фоні або в Терміналі, як «Своє завдання…» у проєкту; інші агенти відкриваються в Терміналі, завдання — в буфері обміну. Зі скрипта: AIHubBar --app-command quick-prompt."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Projekt ist das im Vordergrund (wenn „Bedienungshilfen“ schon erlaubt sind, etwa für das „Tastaturlayout“), sonst das letzte. Claude Code läuft im Hintergrund oder im Terminal wie „Eigene Aufgabe…“ eines Projekts; andere Agenten öffnen sich im Terminal, die Aufgabe liegt in der Zwischenablage. Aus einem Skript: AIHubBar --app-command quick-prompt."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le projet est celui au premier plan (si « Accessibilité » est déjà accordée, par exemple pour la « Disposition du clavier »), sinon le dernier. Claude Code tourne en arrière-plan ou dans Terminal, comme « Tâche libre… » d’un projet ; les autres agents s’ouvrent dans Terminal, la tâche dans le presse-papiers. Depuis un script : AIHubBar --app-command quick-prompt."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El proyecto es el que está delante (si «Accesibilidad» ya está concedida, por ejemplo para la «Distribución del teclado»); si no, el último. Claude Code va en segundo plano o en Terminal, como «Tarea propia…» de un proyecto; los demás agentes se abren en Terminal, con la tarea en el portapapeles. Desde un script: AIHubBar --app-command quick-prompt."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il progetto è quello in primo piano (se «Accessibilità» è già concessa, ad esempio per il «Layout tastiera»), altrimenti l’ultimo. Claude Code va in background o in Terminale, come «Attività personale…» di un progetto; gli altri agenti si aprono in Terminale, con l’attività negli appunti. Da uno script: AIHubBar --app-command quick-prompt."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O projeto é o que está à frente (se a «Acessibilidade» já foi concedida, por exemplo para o «Layout do teclado»), senão o último. O Claude Code roda em segundo plano ou no Terminal, como «Tarefa própria…» de um projeto; os outros agentes abrem no Terminal, com a tarefa na área de transferência. De um script: AIHubBar --app-command quick-prompt."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Projekt to ten na wierzchu (jeśli „Dostępność” jest już przyznana, np. dla „Układu klawiatury”), w przeciwnym razie ostatni. Claude Code działa w tle lub w Terminalu, jak „Własne zadanie…” projektu; inni agenci otwierają się w Terminalu, a zadanie trafia do schowka. Ze skryptu: AIHubBar --app-command quick-prompt."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "プロジェクトは前面にあるもの(「アクセシビリティ」がすでに許可されている場合、たとえば「キーボード配列」のため)、なければ前回のものです。Claude Code はプロジェクトの「自分のタスク…」と同じくバックグラウンドかターミナルで実行され、ほかのエージェントはターミナルで開き、タスクはクリップボードに入ります。スクリプトから: AIHubBar --app-command quick-prompt。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "프로젝트는 앞에 있는 것(‘손쉬운 사용’이 이미 허용된 경우, 예: ‘키보드 배열’용), 아니면 지난번 것입니다. Claude Code는 프로젝트의 ‘내 작업…’처럼 백그라운드나 터미널에서 실행되고, 다른 에이전트는 터미널에서 열리며 작업은 클립보드에 들어갑니다. 스크립트에서: AIHubBar --app-command quick-prompt."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المشروع هو الموجود في المقدمة (إذا كان إذن «تسهيلات الاستخدام» ممنوحًا مسبقًا، مثلًا لـ «تخطيط لوحة المفاتيح»)، وإلا فالأخير. يعمل Claude Code في الخلفية أو في الطرفية مثل «مهمة خاصة…» للمشروع؛ ويُفتح الوكلاء الآخرون في الطرفية والمهمة في الحافظة. من سكربت: AIHubBar --app-command quick-prompt."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Proyeknya adalah yang di depan (jika «Aksesibilitas» sudah diizinkan, misalnya untuk «Tata letak keyboard»), jika tidak yang terakhir. Claude Code berjalan di latar belakang atau di Terminal seperti «Tugas sendiri…» pada proyek; agen lain terbuka di Terminal dengan tugas di papan klip. Dari skrip: AIHubBar --app-command quick-prompt."
+          }
+        }
+      }
+    },
+    "Фон — claude -p без окна, итог уведомлением; Терминал — новое окно, можно отвечать Claude": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Background — claude -p without a window, the result as a notification; Terminal — a new window where you can answer Claude"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Фон — claude -p без вікна, підсумок сповіщенням; Термінал — нове вікно, можна відповідати Claude"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hintergrund — claude -p ohne Fenster, Ergebnis als Mitteilung; Terminal — neues Fenster, Sie können Claude antworten"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arrière-plan — claude -p sans fenêtre, résultat en notification ; Terminal — nouvelle fenêtre où répondre à Claude"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Segundo plano — claude -p sin ventana, resultado en una notificación; Terminal — ventana nueva donde responder a Claude"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Background — claude -p senza finestra, esito in una notifica; Terminale — nuova finestra dove rispondere a Claude"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Segundo plano — claude -p sem janela, resultado em notificação; Terminal — nova janela onde responder ao Claude"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "W tle — claude -p bez okna, wynik w powiadomieniu; Terminal — nowe okno, można odpowiadać Claude"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "バックグラウンド — ウインドウなしの claude -p、結果は通知で。ターミナル — 新しいウインドウで Claude に返答できます"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "백그라운드 — 창 없는 claude -p, 결과는 알림으로; 터미널 — 새 창에서 Claude에게 답할 수 있음"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الخلفية — claude -p بلا نافذة، والنتيجة في إشعار؛ الطرفية — نافذة جديدة يمكنك الرد فيها على Claude"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Latar belakang — claude -p tanpa jendela, hasil lewat notifikasi; Terminal — jendela baru, Anda bisa menjawab Claude"
+          }
+        }
+      }
+    },
+    "Что сделать?": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "What to do?"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Що зробити?"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Was ist zu tun?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Que faire ?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Qué hacer?"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cosa fare?"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O que fazer?"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Co zrobić?"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "何をしますか?"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "무엇을 할까요?"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ما المطلوب؟"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apa yang dikerjakan?"
+          }
+        }
+      }
+    },
+    "⌃⇧Пробел": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⌃⇧Space"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⌃⇧Пробіл"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⌃⇧Leertaste"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⌃⇧Espace"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⌃⇧Espacio"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⌃⇧Spazio"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⌃⇧Espaço"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⌃⇧Spacja"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⌃⇧Space"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⌃⇧Space"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⌃⇧مسافة"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⌃⇧Spasi"
+          }
+        }
+      }
+    },
+    "⌃⌥P в любом приложении: задача, проект (тот, что впереди, или прошлый) и агент — ⌘↩, и она в фоне или в Терминале. Модуль «Быстрый запрос», клавиша — на его странице.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⌃⌥P in any app: the task, the project (the one in front, or the last one) and the agent — ⌘↩, and it runs in the background or in Terminal. The “Quick Prompt” module; the key is on its page."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⌃⌥P у будь-якій програмі: завдання, проєкт (той, що попереду, або попередній) і агент — ⌘↩, і воно у фоні або в Терміналі. Модуль «Швидкий запит», клавіша — на його сторінці."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⌃⌥P in jeder App: Aufgabe, Projekt (das im Vordergrund oder das letzte) und Agent — ⌘↩, und sie läuft im Hintergrund oder im Terminal. Modul „Schnellauftrag“, das Kürzel steht auf seiner Seite."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⌃⌥P dans n’importe quelle app : la tâche, le projet (celui au premier plan, ou le dernier) et l’agent — ⌘↩, et elle tourne en arrière-plan ou dans Terminal. Module « Requête rapide », le raccourci est sur sa page."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⌃⌥P en cualquier app: la tarea, el proyecto (el que está delante o el último) y el agente — ⌘↩, y se ejecuta en segundo plano o en Terminal. Módulo «Petición rápida»; el atajo está en su página."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⌃⌥P in qualsiasi app: attività, progetto (quello in primo piano o l’ultimo) e agente — ⌘↩, e parte in background o in Terminale. Modulo «Richiesta rapida», la scorciatoia è nella sua pagina."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⌃⌥P em qualquer app: a tarefa, o projeto (o que está à frente, ou o último) e o agente — ⌘↩, e ela roda em segundo plano ou no Terminal. Módulo «Pedido rápido»; o atalho fica na página dele."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⌃⌥P w dowolnej aplikacji: zadanie, projekt (ten na wierzchu albo ostatni) i agent — ⌘↩, i działa w tle lub w Terminalu. Moduł „Szybkie zapytanie”, skrót jest na jego stronie."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "どのアプリでも ⌃⌥P: タスク、プロジェクト(前面のもの、または前回のもの)、エージェントを選んで ⌘↩ — バックグラウンドかターミナルで実行されます。「クイックプロンプト」モジュール、キーはそのページで。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "어떤 앱에서든 ⌃⌥P: 작업, 프로젝트(앞에 있는 것 또는 지난번 것), 에이전트를 고르고 ⌘↩ — 백그라운드나 터미널에서 실행됩니다. ‘빠른 요청’ 모듈, 키는 그 페이지에서."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⌃⌥P في أي تطبيق: المهمة والمشروع (الموجود في المقدمة أو الأخير) والوكيل — ⌘↩، فتعمل في الخلفية أو في الطرفية. وحدة «طلب سريع»، والمفتاح في صفحتها."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⌃⌥P di aplikasi mana pun: tugas, proyek (yang di depan, atau yang terakhir) dan agen — ⌘↩, lalu berjalan di latar belakang atau di Terminal. Modul «Permintaan cepat», tombolnya di halamannya."
+          }
+        }
+      }
     }
   },
   "version": "1.0"

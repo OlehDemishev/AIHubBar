@@ -136,6 +136,8 @@ final class CommandHotKeys {
     private(set) var problems: [String: HotKeyProblem] = [:]
     @ObservationIgnored private let settings: AppSettings
     @ObservationIgnored private let isInstalled: () -> Bool
+    /// Whether «Быстрый запрос» is on, so its key is kept from commands.
+    @ObservationIgnored var quickPromptOn: () -> Bool = { false }
     @ObservationIgnored private let register: ([(command: String, combo: KeyCombo)]) -> Set<String>
     @ObservationIgnored private var last: [Key]?
     @ObservationIgnored private var failed: Set<String> = []
@@ -165,7 +167,7 @@ final class CommandHotKeys {
 
     /// Reads everything the keys depend on, so `follow()` sees each change; registers again only when the keys change.
     func refresh() {
-        let plan = Self.plan(commands: isInstalled() ? settings.quickCommands : [], reserved: Self.reserved(settings))
+        let plan = Self.plan(commands: isInstalled() ? settings.quickCommands : [], reserved: Self.reserved(settings, quickPrompt: quickPromptOn()))
         if plan.keys != last {
             failed = register(plan.keys.map { ($0.command, $0.combo) })
             last = plan.keys
@@ -184,7 +186,7 @@ final class CommandHotKeys {
     }
 
     /// AI Hub Bar's own keys, by what they do.
-    static func reserved(_ settings: AppSettings) -> [KeyCombo: String] {
+    static func reserved(_ settings: AppSettings, quickPrompt: Bool = false) -> [KeyCombo: String] {
         var keys: [KeyCombo: String] = [:]
         if settings.panelHotKey != .off {
             keys[KeyCombo(keyCode: settings.panelHotKey.keyCode, modifiers: settings.panelHotKey.modifiers)] = String(localized: "поиск AI Hub Bar")
@@ -193,6 +195,9 @@ final class CommandHotKeys {
             let modifiers = UInt32(controlKey | optionKey)
             keys[KeyCombo(keyCode: UInt32(kVK_ANSI_Y), modifiers: modifiers)] = String(localized: "остров — разрешить запрос")
             keys[KeyCombo(keyCode: UInt32(kVK_ANSI_N), modifiers: modifiers)] = String(localized: "остров — отклонить запрос")
+        }
+        if quickPrompt, settings.quickPrompt.hotKey != .off {
+            keys[KeyCombo(keyCode: settings.quickPrompt.hotKey.keyCode, modifiers: settings.quickPrompt.hotKey.modifiers)] = String(localized: "Быстрый запрос")
         }
         return keys
     }

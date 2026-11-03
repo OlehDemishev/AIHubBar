@@ -398,7 +398,7 @@ struct MenuPanelView: View {
             CommandsView()
                 .panelCard()
                 .revealed(isShown, step: 2, reduceMotion: calm)
-        case .notch, .layout:
+        case .notch, .layout, .quickPrompt:
             EmptyView()
         }
     }

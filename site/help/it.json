@@ -226,6 +226,10 @@
               "name" : "Terminale / Background"
             },
             {
+              "detail" : "⌃⌥P in qualsiasi app: attività, progetto (quello in primo piano o l’ultimo) e agente — ⌘↩, e parte in background o in Terminale. Modulo «Richiesta rapida», la scorciatoia è nella sua pagina.",
+              "name" : "Richiesta rapida"
+            },
+            {
               "detail" : "Attività in background: cosa fa Claude, passo dopo passo.",
               "name" : "Registro"
             },

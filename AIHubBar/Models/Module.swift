@@ -5,7 +5,7 @@ import Foundation
 /// from Settings → «Модули» and added to a profile by hand (SPEC-profiles §3).
 enum ModuleKind: String, Codable, CaseIterable, Sendable {
     case limits, sessions, upcoming, projects, reports
-    case resources, keepAwake, quickCommands, toggles, clipboard, notes, notch, layout
+    case resources, keepAwake, quickCommands, toggles, clipboard, notes, notch, layout, quickPrompt
     // What each module is — title, symbol, section, places… — lives in its file in `Modules/` (`definition`).
 }
 
@@ -92,7 +92,7 @@ extension Profile {
             case .upcoming: !hidden.contains(.upcoming)
             case .projects: showProjects
             case .reports: showCommonCommands
-            case .resources, .keepAwake, .quickCommands, .toggles, .clipboard, .notes, .notch, .layout: true
+            case .resources, .keepAwake, .quickCommands, .toggles, .clipboard, .notes, .notch, .layout, .quickPrompt: true
             }
         }
 

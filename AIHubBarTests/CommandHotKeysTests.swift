@@ -63,6 +63,12 @@ struct CommandHotKeysTests {
         settings.panelHotKey = .off
         settings.notch.hotKeys = true
         #expect(Set(CommandHotKeys.reserved(settings).keys.map(\.title)) == ["⌃⌥Y", "⌃⌥N"])
+        settings.notch.hotKeys = false
+        settings.quickPrompt.hotKey = .controlOptionP
+        #expect(CommandHotKeys.reserved(settings).isEmpty)
+        #expect(CommandHotKeys.reserved(settings, quickPrompt: true).keys.map(\.title) == ["⌃⌥P"])
+        settings.quickPrompt.hotKey = .off
+        #expect(CommandHotKeys.reserved(settings, quickPrompt: true).isEmpty)
     }
 
     @Test func conflicts() {

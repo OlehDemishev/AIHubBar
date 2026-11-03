@@ -226,6 +226,10 @@
               "name" : "Terminal / Latar belakang"
             },
             {
+              "detail" : "⌃⌥P di aplikasi mana pun: tugas, proyek (yang di depan, atau yang terakhir) dan agen — ⌘↩, lalu berjalan di latar belakang atau di Terminal. Modul «Permintaan cepat», tombolnya di halamannya.",
+              "name" : "Permintaan cepat"
+            },
+            {
               "detail" : "Tugas latar belakang: apa yang dilakukan Claude, langkah demi langkah.",
               "name" : "Log"
             },
