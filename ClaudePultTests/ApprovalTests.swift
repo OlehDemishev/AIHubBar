@@ -119,8 +119,13 @@ struct ApprovalTests {
         try JSONEncoder().encode(gone).write(to: dir.appending(path: "d4.request.json"))
         #expect(!ApprovalFiles.requests(in: dir).contains { $0.id == "d4" })
         #expect(ApprovalFiles.isValidID("0f3a9c") && !ApprovalFiles.isValidID("../x") && !ApprovalFiles.isValidID(""))
-        ApprovalFiles.decide("../evil", allow: true, in: dir)
+        #expect(!ApprovalFiles.decide("../evil", allow: true, in: dir))
         #expect(!FileManager.default.fileExists(atPath: dir.deletingLastPathComponent().appending(path: "evil.decision").path))
+        // An answer that can't be written says so (SPEC-refactor §2.5): here the folder is a file.
+        let blocked = dir.appending(path: "blocked")
+        try Data().write(to: blocked)
+        #expect(!ApprovalFiles.decide("a1", allow: true, in: blocked))
+        #expect(ApprovalFiles.decide("a1", allow: true, in: dir))
     }
 
     @Test func notificationButtons() {

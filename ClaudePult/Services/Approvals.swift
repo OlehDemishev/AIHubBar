@@ -50,9 +50,19 @@ enum ApprovalFiles {
         !id.isEmpty && id.count <= 64 && id.allSatisfy { $0.isASCII && ($0.isLetter || $0.isNumber || $0 == "-") }
     }
 
-    nonisolated static func decide(_ id: String, allow: Bool, in directory: URL = directory) {
-        guard isValidID(id) else { return }
-        try? Data((allow ? "allow" : "deny").utf8).write(to: directory.appending(path: "\(id).decision"), options: .atomic)
+    /// Writes the answer the hook waits for; false when it could not be written — then the request stays open, so
+    /// the person can answer again or in Claude itself (SPEC-refactor §2.5).
+    @discardableResult
+    nonisolated static func decide(_ id: String, allow: Bool, in directory: URL = directory) -> Bool {
+        guard isValidID(id) else { return false }
+        do {
+            try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
+            try Data((allow ? "allow" : "deny").utf8).write(to: directory.appending(path: "\(id).decision"), options: .atomic)
+            return true
+        } catch {
+            AppLog.error("Permission answer not written: \(error.localizedDescription)")
+            return false
+        }
     }
 
     nonisolated static func touchAlive(in directory: URL = directory) {

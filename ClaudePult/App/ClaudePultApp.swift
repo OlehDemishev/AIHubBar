@@ -423,7 +423,6 @@ struct ClaudePultApp: App {
         }
         .defaultSize(width: 960, height: 720)
         .handlesExternalEvents(matching: [])
-        .defaultSize(width: 720, height: 640)
 
         Settings {
             SettingsView()

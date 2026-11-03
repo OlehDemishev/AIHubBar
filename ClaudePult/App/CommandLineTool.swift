@@ -99,7 +99,7 @@ enum CommandLineTool {
             }
         }
         if arguments.contains("--modes") {
-            let modes = ModeStore(settings: AppSettings())
+            let modes = ModeStore(settings: AppSettings(), readOnly: true)
             for mode in modes.modes {
                 let flags = (mode.id == modes.currentID ? "*" : " ") + (modes.enabledIDs.contains(mode.id) ? "on " : "off")
                 print("\(flags)  \(mode.name)  [\(mode.template)]  \(mode.source.title): \(mode.source.folder ?? "-")")
@@ -113,7 +113,7 @@ enum CommandLineTool {
         if let index = arguments.firstIndex(of: "--export-settings"), index + 1 < arguments.count {
             let url = URL(fileURLWithPath: (arguments[index + 1] as NSString).expandingTildeInPath)
             do {
-                try ModeStore.encode(ModeStore(settings: AppSettings()).exportBundle()).write(to: url, options: .atomic)
+                try ModeStore.encode(ModeStore(settings: AppSettings(), readOnly: true).exportBundle()).write(to: url, options: .atomic)
                 print("exported to \(url.path)")
                 return 0
             } catch {
@@ -156,7 +156,7 @@ enum CommandLineTool {
             if index + 1 < arguments.count {
                 infos = [.init(id: "cli", name: "папка", icon: "folder", source: .folders(arguments[index + 1]), calendar: .contentPlan)]
             } else {
-                let modes = ModeStore(settings: AppSettings())
+                let modes = ModeStore(settings: AppSettings(), readOnly: true)
                 infos = modes.enabledModes.map { .init(id: $0.id, name: $0.name, icon: $0.icon, source: $0.source, calendar: $0.calendar) }
             }
             let entries = CalendarScanner.entries(for: infos).sorted { $0.date < $1.date }

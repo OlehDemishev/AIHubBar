@@ -79,7 +79,7 @@ final class SessionStore {
 
     /// «Разрешить» / «Отклонить» from the panel or a notification.
     func decide(requestID: String, allow: Bool) {
-        ApprovalFiles.decide(requestID, allow: allow)
+        guard ApprovalFiles.decide(requestID, allow: allow) else { return }
         if let request = approvals.values.first(where: { $0.id == requestID }) {
             approvals[request.sessionID] = nil
             UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: ["waiting-\(request.sessionID)"])

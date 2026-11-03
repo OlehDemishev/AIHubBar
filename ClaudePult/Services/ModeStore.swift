@@ -39,6 +39,8 @@ struct SettingsBundle: Codable, Equatable, Sendable {
     var current: String?
     /// Installed modules (version 2, SPEC-profiles §1); a version 1 file installs what its modes use.
     var installed: [String]?
+    /// Modules switched off with their main switch (SPEC-settings §1); missing in older files — all on.
+    var off: [String]?
 
     /// Version 2: modes are profiles with modules, plus the installed modules.
     static let currentVersion = 2
@@ -79,9 +81,14 @@ final class ModeStore {
 
     static var defaultDirectory: URL { SessionFiles.supportDirectory.appending(path: "modes", directoryHint: .isDirectory) }
 
-    init(settings: AppSettings, directory: URL = ModeStore.defaultDirectory) {
+    /// Read-only: nothing is written to disk and the settings are left alone — for command-line commands that only
+    /// look (`--modes`, `--calendar`, `--export-settings`; SPEC-refactor §2.7).
+    private let readOnly: Bool
+
+    init(settings: AppSettings, directory: URL = ModeStore.defaultDirectory, readOnly: Bool = false) {
         self.settings = settings
         self.directory = directory
+        self.readOnly = readOnly
         load()
     }
 
@@ -127,6 +134,11 @@ final class ModeStore {
             currentID = saved ?? enabledIDs.first ?? ""
         }
         // Modes become profiles (SPEC-profiles §7): files without modules or a menu bar of their own are rewritten.
+        if readOnly {
+            modes = modes.map(synced)
+            installModules(of: modes)
+            return
+        }
         for mode in modes where synced(mode) != mode {
             save(mode)
             AppLog.info("Profiles: «\(mode.name)» updated to modules and its own menu bar")
@@ -385,7 +397,8 @@ final class ModeStore {
             ),
             services: settings.aiServices,
             modes: modes.map(synced), enabled: enabledIDs, current: currentID,
-            installed: installedModules.map(\.rawValue)
+            installed: installedModules.map(\.rawValue),
+            off: switchedOff.isEmpty ? nil : switchedOff.map(\.rawValue)
         )
     }
 
@@ -441,6 +454,8 @@ final class ModeStore {
             if enabledIDs.isEmpty { enabledIDs = Array(ids.prefix(1)) }
             currentID = bundle.current.flatMap { enabledIDs.contains($0) ? $0 : nil } ?? enabledIDs[0]
             installedModules = (bundle.installed ?? []).compactMap(ModuleKind.init(rawValue:))
+            // The file's switches, not this Mac's old ones (SPEC-refactor §2.1).
+            switchedOff = (bundle.off ?? []).compactMap(ModuleKind.init(rawValue:))
             saveAll()
             if let current { apply(current) }
             lastMessage = String(localized: "Настройки импортированы: \(modes.count) профиль(ов).")
@@ -504,6 +519,7 @@ final class ModeStore {
     }
 
     private func save(_ mode: Mode) {
+        guard !readOnly else { return }
         let mode = synced(mode)
         if let index = modes.firstIndex(where: { $0.id == mode.id }), modes[index] != mode { modes[index] = mode }
         let encoder = JSONEncoder()
@@ -524,6 +540,7 @@ final class ModeStore {
     }
 
     private func saveState() {
+        guard !readOnly else { return }
         let encoder = JSONEncoder()
         encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
         try? FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
