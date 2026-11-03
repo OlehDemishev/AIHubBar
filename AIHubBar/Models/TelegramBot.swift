@@ -19,6 +19,20 @@ struct TelegramBotSettings: Codable, Equatable, Sendable {
     var answersOverShared: Bool?
     /// 🚀 tasks started and runs stopped over the shared bot only with this on (§7).
     var tasksOverShared: Bool?
+    /// ⚙️ «Тихие часы»: notifications to Telegram wait for the morning (from, to: hours); nil = none.
+    var quietHours: QuietHours?
+    /// ⚙️ «Тишина на 1 ч».
+    var mutedUntil: Date?
+
+    /// Alerts to Telegram are held back now: muted, or inside the quiet hours. Requests and replies still come.
+    func isQuiet(now: Date, calendar: Calendar = .current) -> Bool {
+        if let mutedUntil, mutedUntil > now { return true }
+        guard let quietHours else { return false }
+        let hour = calendar.component(.hour, from: now)
+        return quietHours.from <= quietHours.to
+            ? (quietHours.from..<quietHours.to).contains(hour)
+            : hour >= quietHours.from || hour < quietHours.to
+    }
 
     /// The menu the chat gets while `profile` is the current one.
     func menu(for profile: String?) -> BotMenuConfig {
@@ -43,6 +57,33 @@ struct TelegramBotSettings: Codable, Equatable, Sendable {
         } else {
             profileMenus?[profile] = nil
             if profileMenus?.isEmpty == true { profileMenus = nil }
+        }
+    }
+}
+
+/// Hours when alerts to Telegram are held back, e.g. 23 → 8.
+struct QuietHours: Codable, Equatable, Hashable, Sendable {
+    var from: Int
+    var to: Int
+
+    /// What ⚙️ and Settings offer.
+    static let presets = [QuietHours(from: 22, to: 8), QuietHours(from: 23, to: 8), QuietHours(from: 0, to: 9)]
+
+    var title: String { String(format: "%02d:00–%02d:00", from, to) }
+}
+
+/// The notifications ⚙️ switches; each is a setting the modules' «Telegram» chips show too.
+enum BotEvent: String, CaseIterable, Sendable {
+    case backgroundResults = "bg", limitAlerts = "lim", calendarReminders = "cal", pullRequests = "pr", requests = "req", weeklySummary = "wk"
+
+    var title: String {
+        switch self {
+        case .backgroundResults: String(localized: "Итоги фоновых задач")
+        case .limitAlerts: String(localized: "Пороги лимитов")
+        case .calendarReminders: String(localized: "Напоминания календаря")
+        case .pullRequests: String(localized: "PR и CI")
+        case .requests: String(localized: "Запросы разрешений")
+        case .weeklySummary: String(localized: "Недельная сводка")
         }
     }
 }
@@ -170,10 +211,10 @@ enum BotScreen: String, CaseIterable, Sendable {
     case home, reports, mac, help
     /// ⚙️ «Меню»: which buttons the menu at the bottom has, from the bot itself.
     case menu
-    case sessions, limits, task
+    case sessions, limits, task, settings
 
     /// The screens a menu button can open, in the default menu's order.
-    static let menuScreens: [BotScreen] = [.home, .sessions, .task, .limits, .reports, .mac, .help]
+    static let menuScreens: [BotScreen] = [.home, .sessions, .task, .limits, .reports, .mac, .settings, .help]
 }
 
 /// What a button's `callback_data` means (§3): at most 64 ASCII bytes, `<verb>[:<arg>]`.
@@ -212,6 +253,12 @@ enum BotRoute: Equatable, Sendable {
     case runLog(String)
     case runStopAsk(String)
     case runStop(String)
+    /// ⚙️: a notification on or off, the quiet hours (nil = none), «Тишина на 1 ч» on or off.
+    case event(BotEvent)
+    case quiet(QuietHours?)
+    case mute(Bool)
+    /// 🧹: «Не спать» for an hour, or off.
+    case keepAwake(Bool)
 
     static let reportHours = [1, 3, 24]
 
@@ -249,6 +296,10 @@ enum BotRoute: Equatable, Sendable {
         case let .runLog(id): "rl:\(id)"
         case let .runStopAsk(id): "rs:\(id)"
         case let .runStop(id): "rx:\(id)"
+        case let .event(event): "ev:\(event.rawValue)"
+        case let .quiet(hours): hours.map { "qh:\($0.from):\($0.to)" } ?? "qh:off"
+        case let .mute(on): on ? "mute:1" : "mute:0"
+        case let .keepAwake(on): on ? "ka:1" : "ka:0"
         }
     }
 
@@ -299,6 +350,15 @@ enum BotRoute: Equatable, Sendable {
             case "wt": self = .taskWorktree
             default: return nil
             }
+        case ("ev", 2):
+            guard let event = BotEvent(rawValue: parts[1]) else { return nil }
+            self = .event(event)
+        case ("qh", 2) where parts[1] == "off": self = .quiet(nil)
+        case ("qh", 3):
+            guard let from = Int(parts[1]), let to = Int(parts[2]), QuietHours.presets.contains(QuietHours(from: from, to: to)) else { return nil }
+            self = .quiet(QuietHours(from: from, to: to))
+        case ("mute", 2) where ["0", "1"].contains(parts[1]): self = .mute(parts[1] == "1")
+        case ("ka", 2) where ["0", "1"].contains(parts[1]): self = .keepAwake(parts[1] == "1")
         case ("rl", 2), ("rs", 2), ("rx", 2):
             guard BotMenuItem.isCommandID(parts[1]) else { return nil }
             self = parts[0] == "rl" ? .runLog(parts[1]) : parts[0] == "rs" ? .runStopAsk(parts[1]) : .runStop(parts[1])
@@ -310,8 +370,9 @@ enum BotRoute: Equatable, Sendable {
     var isAction: Bool {
         switch self {
         case .show, .cleanupAsk, .allCommands, .menuToggle, .menuColumns, .menuDone, .requestDetails, .limitAlerts,
-             .taskProject, .taskCancel, .runLog, .runStopAsk: false
-        case .report, .cleanupCheck, .cleanupRun, .answer, .runCommand, .taskGo, .taskForce, .taskAfterReset, .taskWorktree, .runStop: true
+             .taskProject, .taskCancel, .runLog, .runStopAsk, .event, .quiet, .mute: false
+        case .report, .cleanupCheck, .cleanupRun, .answer, .runCommand, .taskGo, .taskForce, .taskAfterReset, .taskWorktree, .runStop,
+             .keepAwake: true
         }
     }
 }
@@ -433,6 +494,7 @@ struct BotMenu: Equatable, Sendable {
         case .sessions: "🤖 " + String(localized: "Сессии")
         case .limits: "⏳ " + String(localized: "Лимиты")
         case .task: "🚀 " + String(localized: "Задача")
+        case .settings: "⚙️ " + String(localized: "Настройки")
         }
     }
 
@@ -769,14 +831,45 @@ enum BotScreens {
         ])
     }
 
-    static func mac(freeBytes: Int64?, job: String?) -> BotMessage {
+    /// `keepAwake` — «Не спать» holds the Mac now; nil when that module isn't installed.
+    static func mac(freeBytes: Int64?, job: String?, keepAwake: Bool? = nil) -> BotMessage {
         var lines = ["🧹 <b>" + RunMessage.escape(String(localized: "Мак")) + "</b>"]
         if let freeBytes { lines.append("💾 " + RunMessage.escape(String(localized: "Свободно \(CommandStore.diskText(freeBytes))"))) }
+        if let keepAwake {
+            lines.append("☕ " + RunMessage.escape(keepAwake ? String(localized: "«Не спать» включено") : String(localized: "«Не спать» выключено")))
+        }
         if let job { lines.append("⏳ " + RunMessage.escape(job)) }
-        return BotMessage(html: lines.joined(separator: "\n"), buttons: [
-            [button("🔍", String(localized: "Что удалит очистка"), .cleanupCheck), button("🧹", String(localized: "Очистить"), .cleanupAsk)],
-            [back],
-        ])
+        var rows = [[button("🔍", String(localized: "Что удалит очистка"), .cleanupCheck), button("🧹", String(localized: "Очистить"), .cleanupAsk)]]
+        if let keepAwake {
+            rows.append([keepAwake ? button("☕", String(localized: "Выключить «Не спать»"), .keepAwake(false))
+                                   : button("☕", String(localized: "Не спать 1 ч"), .keepAwake(true))])
+        }
+        rows.append([back])
+        return BotMessage(html: lines.joined(separator: "\n"), buttons: rows)
+    }
+
+    // MARK: ⚙️ Settings (stage 4)
+
+    /// ⚙️: which notifications come, the quiet hours, an hour of silence, the morning report time (read only:
+    /// it belongs to `_daily-report`), and the way to the menu set-up.
+    static func settings(events: [(BotEvent, Bool)], quiet: QuietHours?, mutedUntil: Date?, morningHour: Int?, now: Date) -> BotMessage {
+        var lines = ["⚙️ <b>" + RunMessage.escape(String(localized: "Настройки")) + "</b>",
+                     RunMessage.escape(String(localized: "Что приходит в Telegram — нажмите, чтобы включить или выключить."))]
+        lines.append("🌙 " + RunMessage.escape(String(localized: "Тихие часы: \(quiet?.title ?? String(localized: "нет"))")))
+        if let mutedUntil, mutedUntil > now {
+            lines.append("🔕 " + RunMessage.escape(String(localized: "Тишина до \(mutedUntil.formatted(date: .omitted, time: .shortened))")))
+        }
+        if let morningHour { lines.append("🌅 " + RunMessage.escape(String(localized: "Утренний отчёт: \(String(format: "%02d:00", morningHour)) (меняется в _daily-report)"))) }
+        var rows = events.map { event, on in
+            [BotMessage.Button(title: (on ? "✅ " : "☐ ") + event.title, route: .event(event))]
+        }
+        rows.append([BotMessage.Button(title: (quiet == nil ? "● " : "○ ") + String(localized: "Без тихих часов"), route: .quiet(nil))]
+                    + QuietHours.presets.map { BotMessage.Button(title: (quiet == $0 ? "● " : "○ ") + String(format: "%02d–%02d", $0.from, $0.to), route: .quiet($0)) })
+        rows.append([(mutedUntil ?? .distantPast) > now
+            ? button("🔔", String(localized: "Снять тишину"), .mute(false))
+            : button("🔕", String(localized: "Тишина на 1 ч"), .mute(true))])
+        rows.append([button("⚙️", String(localized: "Настроить меню"), .show(.menu)), back])
+        return BotMessage(html: lines.joined(separator: "\n"), buttons: rows)
     }
 
     static var cleanupConfirm: BotMessage {

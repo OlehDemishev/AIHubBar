@@ -26,6 +26,9 @@ final class TelegramBotController {
     /// 🚀: the profile's git projects, and the launcher that starts a task in one (like «Своя задача…»).
     var projectList: () -> [Project] = { [] }
     weak var launcher: LaunchController?
+    /// «Не спать»: whether it holds the Mac now (nil — the module isn't installed), and for an hour or off.
+    var keepAwakeState: () -> Bool? = { nil }
+    var setKeepAwake: (Bool) -> Void = { _ in }
     /// Every AI service's limits, as the panel's «Лимиты AI» shows them.
     var limitServices: () -> [ServiceUsage] = { [] }
     /// Runs a quick command and returns how it went (`QuickToolsController.runForBot`).
@@ -355,7 +358,7 @@ final class TelegramBotController {
             _ = await send(helpScreen)
         case let .report(ai, hours):
             let id = await send(reportsScreen(job: nil))
-            startReport(ai: ai, hours: hours ?? BotScreens.hoursSinceMorning(now: .now), messageID: id)
+            startReport(ai: ai, hours: hours ?? BotScreens.hoursSinceMorning(now: .now, hour: morningHour ?? 10), messageID: id)
         case let .clean(check):
             if check {
                 startCleanup(dryRun: true, messageID: nil)
@@ -388,6 +391,7 @@ final class TelegramBotController {
         case .sessions: message = sessionsScreen
         case .limits: message = limitsScreen
         case .task: message = taskScreen
+        case .settings: message = settingsScreen
         }
         guard let id = await send(message) else { return false }
         if let tapID { await delete(tapID) }
@@ -414,6 +418,20 @@ final class TelegramBotController {
         case .show(.task):
             taskDraft = nil
             screen = taskScreen
+        case .show(.settings): screen = settingsScreen
+        case let .event(event):
+            setEvent(event, !isOn(event))
+            screen = settingsScreen
+        case let .quiet(hours):
+            settings.telegramBot.quietHours = hours
+            screen = settingsScreen
+        case let .mute(on):
+            settings.telegramBot.mutedUntil = on ? .now.addingTimeInterval(3600) : nil
+            screen = settingsScreen
+        case let .keepAwake(on):
+            setKeepAwake(on)
+            AppLog.info("Telegram: keep awake \(on ? "on for an hour" : "off")")
+            screen = macScreen
         case let .taskProject(key):
             guard tasksAllowed, let project = projectList().first(where: { BotRoute.projectKey($0.path) == key }) else {
                 screen = taskScreen
@@ -465,7 +483,7 @@ final class TelegramBotController {
             await sendAllCommands()
             return
         case let .report(ai, hours):
-            startReport(ai: ai, hours: hours.map(Double.init) ?? BotScreens.hoursSinceMorning(now: .now), messageID: messageID)
+            startReport(ai: ai, hours: hours.map(Double.init) ?? BotScreens.hoursSinceMorning(now: .now, hour: morningHour ?? 10), messageID: messageID)
             return
         case .cleanupCheck, .cleanupRun:
             startCleanup(dryRun: route == .cleanupCheck, messageID: messageID)
@@ -565,6 +583,52 @@ final class TelegramBotController {
             )
         }
         return BotScreens.limits(services, alertsOn: settings.limitAlertsToTelegram, thresholds: settings.limitThresholds, now: .now)
+    }
+
+    // MARK: - ⚙️ Settings (stage 4)
+
+    private func isOn(_ event: BotEvent) -> Bool {
+        switch event {
+        case .backgroundResults: settings.telegramForBackground
+        case .limitAlerts: settings.limitAlertsToTelegram
+        case .calendarReminders: settings.calendarRemindersToTelegram
+        case .pullRequests: settings.pullRequestAlertsToTelegram
+        case .requests: settings.telegramApprovals
+        case .weeklySummary: settings.weeklySummary
+        }
+    }
+
+    private func setEvent(_ event: BotEvent, _ on: Bool) {
+        switch event {
+        case .backgroundResults: settings.telegramForBackground = on
+        case .limitAlerts: settings.limitAlertsToTelegram = on
+        case .calendarReminders: settings.calendarRemindersToTelegram = on
+        case .pullRequests: settings.pullRequestAlertsToTelegram = on
+        case .requests: settings.telegramApprovals = on
+        case .weeklySummary: settings.weeklySummary = on
+        }
+    }
+
+    private var settingsScreen: BotMessage {
+        BotScreens.settings(events: BotEvent.allCases.map { ($0, isOn($0)) }, quiet: settings.telegramBot.quietHours,
+                            mutedUntil: settings.telegramBot.mutedUntil, morningHour: morningHour, now: .now)
+    }
+
+    /// The hour `_daily-report`'s morning report runs at: its launchd agent's `StartCalendarInterval`, found by its
+    /// `report.py` in the profile's folder. Nil without one.
+    var morningHour: Int? {
+        let agents = FileManager.default.homeDirectoryForCurrentUser.appending(path: "Library/LaunchAgents")
+        let script = (settings.dailyReportDirectory as NSString).appendingPathComponent("report.py")
+        for file in (try? FileManager.default.contentsOfDirectory(at: agents, includingPropertiesForKeys: nil)) ?? []
+        where file.pathExtension == "plist" {
+            guard let plist = NSDictionary(contentsOf: file),
+                  (plist["ProgramArguments"] as? [String])?.contains(where: { $0 == script || $0.hasSuffix("/_daily-report/report.py") && $0 == script }) == true
+            else { continue }
+            let interval = plist["StartCalendarInterval"]
+            let first = (interval as? [String: Any]) ?? (interval as? [[String: Any]])?.first
+            if let hour = first?["Hour"] as? Int { return hour }
+        }
+        return nil
     }
 
     // MARK: - 🚀 Tasks and runs (stage 3)
@@ -785,7 +849,7 @@ final class TelegramBotController {
     private var macScreen: BotMessage {
         let free = (try? URL(fileURLWithPath: "/").resourceValues(forKeys: [.volumeAvailableCapacityForImportantUsageKey]))?
             .volumeAvailableCapacityForImportantUsage
-        return BotScreens.mac(freeBytes: free, job: job)
+        return BotScreens.mac(freeBytes: free, job: job, keepAwake: keepAwakeState())
     }
 
     private var helpScreen: BotMessage {

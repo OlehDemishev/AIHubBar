@@ -184,6 +184,11 @@ final class AppContainer {
         telegramBot.currentProfile = { [modes] in modes.current.map { ($0.id, $0.name) } }
         telegramApprovals.handledElsewhere = { [telegramBot] in telegramBot.handlesRequests }
         telegramBot.launcher = launcher
+        // The panel's switch (#251): the manual hold, not any rule that keeps the Mac awake.
+        telegramBot.keepAwakeState = { [modes, keepAwake] in modes.isOn(.keepAwake) ? keepAwake.manualUntil != nil : nil }
+        telegramBot.setKeepAwake = { [keepAwake] on in
+            if on { keepAwake.holdManually(for: 3600) } else { keepAwake.stopManual() }
+        }
         telegramBot.projectList = { [store] in store.projects }
         telegramBot.limitServices = { [usage, hub] in
             (usage.snapshot.map { [ServiceUsage.claude($0, forecast: usage.forecast, week: usage.weekUsage, error: usage.lastError)] } ?? []) + hub.usages
