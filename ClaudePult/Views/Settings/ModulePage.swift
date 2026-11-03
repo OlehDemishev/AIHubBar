@@ -200,40 +200,6 @@ struct ModulePlaces: View {
     }
 }
 
-extension AppSettings {
-    /// The setting behind a module's Telegram place.
-    func isOn(_ toggle: TelegramToggle) -> Bool {
-        switch toggle {
-        case .limitAlerts: limitAlertsToTelegram
-        case .backgroundResults: telegramForBackground
-        case .calendarReminders: calendarRemindersToTelegram
-        case .pullRequests: pullRequestAlertsToTelegram
-        }
-    }
-
-    func set(_ toggle: TelegramToggle, _ on: Bool) {
-        switch toggle {
-        case .limitAlerts: limitAlertsToTelegram = on
-        case .backgroundResults: telegramForBackground = on
-        case .calendarReminders: calendarRemindersToTelegram = on
-        case .pullRequests: pullRequestAlertsToTelegram = on
-        }
-    }
-
-    /// The setting behind a module's own notifications switch.
-    func isOn(_ toggle: NotificationSwitch) -> Bool {
-        switch toggle {
-        case .resourceAlerts: resourceAlerts
-        }
-    }
-
-    func set(_ toggle: NotificationSwitch, _ on: Bool) {
-        switch toggle {
-        case .resourceAlerts: resourceAlerts = on
-        }
-    }
-}
-
 /// One place: a capsule with its symbol, tinted while on.
 private struct PlaceChip: View {
     let place: ModulePlace

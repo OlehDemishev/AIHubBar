@@ -68,6 +68,14 @@ enum Telegram {
         ownBot = token.isEmpty || chat.isEmpty ? nil : Credentials(token: token, chatID: chat)
     }
 
+    /// Sends `html` when the module's Telegram setting is on and a bot is set up — the one way modules send their
+    /// alerts there (SPEC-refactor §6); quietly nothing otherwise.
+    @MainActor
+    static func notify(_ toggle: TelegramToggle, html: String, settings: AppSettings) {
+        guard settings.isOn(toggle), let credentials = credentials(dailyReportDirectory: settings.dailyReportDirectory) else { return }
+        Task { _ = await send(html: html, with: credentials) }
+    }
+
     @MainActor
     static func credentials(dailyReportDirectory: String) -> Credentials? {
         ownBot ?? fileCredentials(dailyReportDirectory: dailyReportDirectory)

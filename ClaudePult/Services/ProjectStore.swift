@@ -38,13 +38,11 @@ final class ProjectStore {
         }
         guard !changes.isEmpty else { return }
         AppLog.info("Pull request changes: \(changes.count)")
-        if settings.pullRequestAlertsToTelegram, let credentials = Telegram.credentials(dailyReportDirectory: settings.dailyReportDirectory) {
-            let html = changes.map { change in
-                let title = RunMessage.escape(PullRequestAlerts.title(change)) + " — " + RunMessage.escape(PullRequestAlerts.body(change))
-                return PullRequestAlerts.url(change).map { "\(title)\n<a href=\"\(RunMessage.escape($0.absoluteString))\">PR</a>" } ?? title
-            }.joined(separator: "\n\n")
-            Task { _ = await Telegram.send(html: html, with: credentials) }
-        }
+        let html = changes.map { change in
+            let title = RunMessage.escape(PullRequestAlerts.title(change)) + " — " + RunMessage.escape(PullRequestAlerts.body(change))
+            return PullRequestAlerts.url(change).map { "\(title)\n<a href=\"\(RunMessage.escape($0.absoluteString))\">PR</a>" } ?? title
+        }.joined(separator: "\n\n")
+        Telegram.notify(.pullRequests, html: html, settings: settings)
     }
 
     func start() {

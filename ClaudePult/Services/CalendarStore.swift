@@ -153,11 +153,8 @@ final class CalendarStore {
             Notifier.post(id: "calendar-\(abs(key.hashValue))", title: "\(entry.kind.title): \(entry.title)",
                           body: [when, entry.detail, entry.modeName].compactMap { $0 }.filter { !$0.isEmpty }.joined(separator: " · "),
                           target: .file(path: entry.openPath))
-            if settings.calendarRemindersToTelegram,
-               let credentials = Telegram.credentials(dailyReportDirectory: settings.dailyReportDirectory) {
-                let html = "📅 <b>\(RunMessage.escape(entry.kind.title)): \(RunMessage.escape(entry.title))</b>\n\(RunMessage.escape(when))"
-                Task { _ = await Telegram.send(html: html, with: credentials) }
-            }
+            let html = "📅 <b>\(RunMessage.escape(entry.kind.title)): \(RunMessage.escape(entry.title))</b>\n\(RunMessage.escape(when))"
+            Telegram.notify(.calendarReminders, html: html, settings: settings)
         }
         Self.saveReminded(reminded)
     }
