@@ -103,7 +103,7 @@ struct LimitSection: View {
                     }
                     .controlSize(.small)
                     if let summarySent {
-                        Text(summarySent ? String(localized: "Отправлено") : String(localized: "Не отправилось: Telegram не настроен (Основные → Telegram) или нет связи"))
+                        Text(summarySent ? String(localized: "Отправлено") : String(localized: "Не отправилось: Telegram не настроен (модуль «Telegram») или нет связи"))
                             .font(.caption)
                             .foregroundStyle(summarySent ? Color.secondary : Color.orange)
                     }

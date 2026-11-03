@@ -246,7 +246,7 @@ enum HelpTopic: String, CaseIterable, Identifiable, Sendable {
         case .alerts:
             [HelpSection(facts: [
                 HelpFact(String(localized: "Как часто"), String(localized: "У каждого модуля на странице — «Как часто уведомлять»: каждый раз, не чаще раза в 15 мин, в час, в день или не присылать."), symbol: "clock"),
-                HelpFact("Telegram", String(localized: "Бот — в «Основные» → Telegram. Что дублировать — чипом «Telegram» на странице модуля."), symbol: "paperplane"),
+                HelpFact("Telegram", String(localized: "Бот — модуль «Telegram»: токен, чат и меню в самом боте (/menu — лимиты, сессии, отчёты, очистка). Что дублировать — чипом «Telegram» на странице модуля."), symbol: "paperplane"),
                 HelpFact(String(localized: "Ответы из Telegram"), String(localized: "Запросы разрешений Claude можно принимать и отклонять кнопками в Telegram — отдельный бот, страница «Сессии агентов»."), symbol: "hand.tap"),
                 HelpFact(String(localized: "Клик по уведомлению"), String(localized: "Ведёт к сессии, PR, журналу или отчёту."), symbol: "cursorarrow.click"),
             ])]

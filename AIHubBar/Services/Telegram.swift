@@ -48,7 +48,7 @@ enum RunMessage {
     }
 }
 
-/// Sends messages with the bot set in Settings → Основные → Telegram (token in the Keychain), or else the one from
+/// Sends messages with the «Telegram» module's bot (token in the Keychain), or else the one from
 /// `_daily-report/config.json` (`telegram.bot_token`, `telegram.chat_id`). The token is never logged.
 enum Telegram {
     struct Credentials: Sendable, Equatable {

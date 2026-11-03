@@ -553,7 +553,7 @@
               "name" : "Jak często"
             },
             {
-              "detail" : "Bot — w sekcji „Ogólne” → Telegram. Co przekazywać — chipem „Telegram” na stronie modułu.",
+              "detail" : "Bot to moduł „Telegram”: token, czat i menu w samym bocie (/menu — limity, sesje, raporty, czyszczenie). Co powielać — chip „Telegram” na stronie modułu.",
               "name" : "Telegram"
             },
             {

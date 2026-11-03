@@ -121,7 +121,7 @@ struct AssistantDraft: Equatable, Sendable {
         case .projects: hasProjects
         case .upcoming: mode.calendar != .off && mode.source.isFolders
         case .reports: mode.commonCommands == .dailyReport
-        case .resources, .keepAwake, .quickCommands, .toggles, .clipboard, .notes, .notch, .layout, .quickPrompt: extraModules.contains(kind)
+        case .resources, .keepAwake, .quickCommands, .toggles, .clipboard, .notes, .notch, .layout, .quickPrompt, .telegram: extraModules.contains(kind)
         }
     }
 
@@ -152,7 +152,7 @@ struct AssistantDraft: Equatable, Sendable {
             }
         case .reports:
             mode.commonCommands = on ? .dailyReport : .none
-        case .resources, .keepAwake, .quickCommands, .toggles, .clipboard, .notes, .notch, .layout, .quickPrompt:
+        case .resources, .keepAwake, .quickCommands, .toggles, .clipboard, .notes, .notch, .layout, .quickPrompt, .telegram:
             extraModules.removeAll { $0 == kind }
             if on { extraModules.append(kind) }
         }

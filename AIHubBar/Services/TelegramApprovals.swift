@@ -56,6 +56,10 @@ final class TelegramApprovals {
     private(set) var status: String?
     private(set) var hasToken = false
 
+    /// Whether the «Telegram» module's bot already reads this token's updates (the same bot): then its loop hands the
+    /// presses here (`answerFromBot`) and this one stops reading, or the two would take each other's updates.
+    var botReads: (String) -> Bool = { _ in false }
+
     private let settings: AppSettings
     private let sessions: SessionStore
     private var token: String?
@@ -140,22 +144,32 @@ final class TelegramApprovals {
             sent[id] = nil
             _ = await call(token, "editMessageReplyMarkup", ["chat_id": chatID, "message_id": message, "reply_markup": ["inline_keyboard": []]])
         }
-        guard !sent.isEmpty else { return }
+        guard !sent.isEmpty, !botReads(token) else { return }
         var parameters: [String: Any] = ["timeout": 20, "allowed_updates": ["callback_query"]]
         if let offset { parameters["offset"] = offset }
         guard let data = await callData(token, "getUpdates", parameters, timeout: 30) else { return }
         let (answers, next) = TelegramApprovalText.answers(in: data, chatID: chatID)
         if let next { offset = next }
         for answer in answers {
-            sessions.decide(requestID: answer.requestID, allow: answer.allow)
             _ = await call(token, "answerCallbackQuery", ["callback_query_id": answer.callbackID,
                                                          "text": answer.allow ? String(localized: "Разрешено") : String(localized: "Отклонено")])
-            if let message = answer.messageID ?? sent[answer.requestID] {
-                _ = await call(token, "editMessageReplyMarkup", ["chat_id": chatID, "message_id": message, "reply_markup": ["inline_keyboard": []]])
-            }
-            sent[answer.requestID] = nil
-            AppLog.info("Permission \(answer.allow ? "allowed" : "denied") from Telegram")
+            await apply(requestID: answer.requestID, allow: answer.allow, messageID: answer.messageID, token: token)
         }
+    }
+
+    /// A ✅/❌ press the module's bot read (SPEC-telegram §1); it has answered the press itself.
+    func answerFromBot(requestID: String, allow: Bool, messageID: Int?) {
+        guard let token else { return }
+        Task { await apply(requestID: requestID, allow: allow, messageID: messageID, token: token) }
+    }
+
+    private func apply(requestID: String, allow: Bool, messageID: Int?, token: String) async {
+        sessions.decide(requestID: requestID, allow: allow)
+        if let message = messageID ?? sent[requestID] {
+            _ = await call(token, "editMessageReplyMarkup", ["chat_id": chatID, "message_id": message, "reply_markup": ["inline_keyboard": []]])
+        }
+        sent[requestID] = nil
+        AppLog.info("Permission \(allow ? "allowed" : "denied") from Telegram")
     }
 
     private func call(_ token: String, _ method: String, _ parameters: [String: Any]) async -> [String: Any]? {

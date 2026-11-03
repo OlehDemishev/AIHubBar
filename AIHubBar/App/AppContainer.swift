@@ -16,6 +16,7 @@ extension NotesStore: ModuleService {}
 extension NotchIsland: ModuleService {}
 extension LayoutSwitcher: ModuleService {}
 extension QuickPromptController: ModuleService {}
+extension TelegramBotController: ModuleService {}
 
 /// «Claude is working», counted one way for the menu bar, the widget and «Не спать».
 @MainActor
@@ -40,6 +41,7 @@ final class AppContainer {
     let launcher: LaunchController
     let sessions: SessionStore
     let telegramApprovals: TelegramApprovals
+    let telegramBot: TelegramBotController
     let widgetStatus: WidgetStatusWriter
     let hooks: HookController
     let runs: RunStore
@@ -91,7 +93,8 @@ final class AppContainer {
         self.commands = commands
         let sessions = SessionStore()
         self.sessions = sessions
-        self.telegramApprovals = TelegramApprovals(settings: settings, sessions: sessions)
+        let telegramApprovals = TelegramApprovals(settings: settings, sessions: sessions)
+        self.telegramApprovals = telegramApprovals
         let usage = UsageStore(settings: settings, sessions: sessions)
         self.usage = usage
         let hub = HubLimitsStore(settings: settings)
@@ -113,6 +116,9 @@ final class AppContainer {
         let engine = CommandEngine(settings: settings, runs: runs)
         self.engine = engine
         let launcher = LaunchController(settings: settings, store: store, runs: runs, usage: usage)
+        let telegramBot = TelegramBotController(settings: settings, sessions: sessions, runs: runs, usage: usage, approvals: telegramApprovals)
+        self.telegramBot = telegramBot
+        telegramApprovals.botReads = { [telegramBot] token in telegramBot.reads(token) }
         self.weeklySummary = WeeklySummarySender(settings: settings, usage: usage, runs: runs, hub: hub)
         self.launcher = launcher
         let quickPrompt = QuickPromptController(settings: settings, launcher: launcher, services: services)
@@ -123,6 +129,7 @@ final class AppContainer {
         let moduleServices: [(ModuleKind, any ModuleService)] = [
             (.limits, usage), (.limits, hub), (.resources, monitor), (.keepAwake, keepAwake), (.clipboard, clipboard),
             (.notes, notesStore), (.notch, notchIsland), (.layout, layoutSwitcher), (.quickPrompt, quickPrompt),
+            (.telegram, telegramBot),
         ]
         for (kind, service) in moduleServices {
             service.isActive = { [modes] in modes.isOn(kind) }
@@ -206,7 +213,7 @@ final class AppContainer {
             requests.listen(commands: commands)
             usage.start()
             hub.start()
-            Task { await Telegram.loadOwnBot(chatID: settings.telegramChatID) }
+            telegramBot.start()
             weeklySummary.start()
             monitor.start()
             keepAwake.start()
@@ -342,6 +349,7 @@ private struct AppEnvironment: ViewModifier {
             .environment(app.launcher)
             .environment(app.sessions)
             .environment(app.telegramApprovals)
+            .environment(app.telegramBot)
             .environment(app.hooks)
             .environment(app.runs)
             .environment(app.commands)

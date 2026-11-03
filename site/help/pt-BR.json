@@ -553,7 +553,7 @@
               "name" : "Com que frequência"
             },
             {
-              "detail" : "O bot fica em «Geral» → Telegram. O que duplicar, pelo chip «Telegram» na página do módulo.",
+              "detail" : "O bot é o módulo “Telegram”: token, chat e um menu no próprio bot (/menu — limites, sessões, relatórios, limpeza). O que duplicar — o chip “Telegram” na página do módulo.",
               "name" : "Telegram"
             },
             {

@@ -51,7 +51,16 @@ struct GeneralSettings: View {
                 Footnote(text: String(localized: "Нужны для «Claude ждёт ответа», итогов фоновых задач, порогов лимитов и результатов команд. Клик по уведомлению ведёт к сессии, PR, журналу или отчёту."))
             }
 
-            TelegramBotSection()
+            Section {
+                LabeledContent {
+                    Button("Открыть") { SettingsRoute.open(module: .telegram) }
+                        .help("Токен бота, чат и какой Мак отвечает — на странице модуля «Telegram»")
+                } label: {
+                    Label("Бот, чат и меню — модуль «Telegram»", systemImage: "paperplane")
+                }
+            } header: {
+                Text("Telegram")
+            }
 
             Section {
                 ImportConfirmation()
@@ -102,108 +111,6 @@ struct GeneralSettings: View {
         let short = info?["CFBundleShortVersionString"] as? String ?? "?"
         let build = info?["CFBundleVersion"] as? String ?? "?"
         return "\(short) (\(build))"
-    }
-}
-
-/// Settings → Основные → Telegram: the bot results, limits and summaries go to. Without it, a `_daily-report/config.json`
-/// bot is used if there is one.
-struct TelegramBotSection: View {
-    @Environment(AppSettings.self) private var settings
-    @State private var token = ""
-    @State private var hasToken = false
-    @State private var status: String?
-    @State private var busy = false
-
-    var body: some View {
-        @Bindable var settings = settings
-        Section {
-            if hasToken {
-                IconRow("Токен бота", systemImage: "key") {
-                    HStack {
-                        Text("сохранён в связке ключей").foregroundStyle(.secondary)
-                        Button("Удалить", role: .destructive) {
-                            Task {
-                                await APIKeyStore.delete(account: Telegram.keychainAccount)
-                                hasToken = false
-                                await Telegram.loadOwnBot(chatID: settings.telegramChatID)
-                            }
-                        }
-                    }
-                }
-            } else {
-                IconRow("Токен бота", systemImage: "key") {
-                    HStack {
-                        SecureField("", text: $token, prompt: Text(verbatim: "123456:ABC…"))
-                            .textFieldStyle(.roundedBorder)
-                            .frame(width: 220)
-                        Button("Сохранить", action: saveToken)
-                            .disabled(token.trimmingCharacters(in: .whitespaces).isEmpty)
-                    }
-                }
-            }
-            IconRow("ID чата", systemImage: "number") {
-                HStack {
-                    TextField("", text: $settings.telegramChatID)
-                        .textFieldStyle(.roundedBorder)
-                        .frame(width: 140)
-                    Button("Определить", action: detectChat)
-                        .disabled(!hasToken || busy)
-                        .help("Напишите боту любое сообщение, затем нажмите — ID чата подставится сам")
-                    Button("Проверить", action: test)
-                        .disabled(!hasToken || settings.telegramChatID.isEmpty || busy)
-                }
-            }
-            if let status {
-                Text(status).font(.caption).foregroundStyle(.secondary)
-            }
-        } header: {
-            Text("Telegram")
-        } footer: {
-            Footnote(text: String(localized: "Сюда приходят итоги фоновых задач, пороги лимитов, недельная сводка, напоминания календаря — где в модуле включён Telegram. Бот создаётся у @BotFather; токен хранится только в связке ключей. Пока здесь пусто, используется бот из _daily-report/config.json, если он есть."))
-        }
-        .task {
-            hasToken = await APIKeyStore.exists(account: Telegram.keychainAccount)
-        }
-        .onChange(of: settings.telegramChatID) { Task { await Telegram.loadOwnBot(chatID: settings.telegramChatID) } }
-    }
-
-    private func saveToken() {
-        let value = token.trimmingCharacters(in: .whitespacesAndNewlines)
-        Task {
-            do {
-                try await APIKeyStore.save(value, account: Telegram.keychainAccount, label: "Telegram bot")
-                token = ""
-                hasToken = true
-                await Telegram.loadOwnBot(chatID: settings.telegramChatID)
-                status = String(localized: "Токен сохранён. Напишите боту любое сообщение и нажмите «Определить».")
-            } catch {
-                status = error.localizedDescription
-            }
-        }
-    }
-
-    private func detectChat() {
-        busy = true
-        Task {
-            defer { busy = false }
-            guard let token = await APIKeyStore.read(account: Telegram.keychainAccount),
-                  let chat = await Telegram.latestChat(token: token) else {
-                status = String(localized: "Сообщений боту не нашлось: напишите ему что-нибудь и попробуйте снова.")
-                return
-            }
-            settings.telegramChatID = chat
-            status = String(localized: "Чат найден.")
-        }
-    }
-
-    private func test() {
-        busy = true
-        Task {
-            defer { busy = false }
-            guard let bot = Telegram.ownBot else { return }
-            let ok = await Telegram.send(html: RunMessage.escape(String(localized: "AI Hub Bar: Telegram работает.")), with: bot)
-            status = ok ? String(localized: "Отправлено") : String(localized: "Не отправилось: проверьте токен и ID чата")
-        }
     }
 }
 

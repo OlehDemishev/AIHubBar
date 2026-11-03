@@ -553,7 +553,7 @@
               "name" : "How often"
             },
             {
-              "detail" : "The bot is in “General” → Telegram. What to forward is set with the “Telegram” chip on the module’s page.",
+              "detail" : "The bot is the “Telegram” module: the token, the chat and a menu in the bot itself (/menu — limits, sessions, reports, cleanup). What to copy there — the “Telegram” chip on a module's page.",
               "name" : "Telegram"
             },
             {

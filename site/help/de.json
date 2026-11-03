@@ -553,7 +553,7 @@
               "name" : "Wie oft"
             },
             {
-              "detail" : "Der Bot — unter „Allgemein“ → Telegram. Was weitergeleitet wird, legen Sie mit dem Chip „Telegram“ auf der Modulseite fest.",
+              "detail" : "Der Bot ist das Modul „Telegram“: Token, Chat und ein Menü im Bot selbst (/menu – Limits, Sitzungen, Berichte, Aufräumen). Was dorthin kopiert wird – der Chip „Telegram“ auf der Modulseite.",
               "name" : "Telegram"
             },
             {

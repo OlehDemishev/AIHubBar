@@ -553,7 +553,7 @@
               "name" : "Ogni quanto"
             },
             {
-              "detail" : "Il bot è in «Generali» → Telegram. Cosa inoltrare si sceglie con il chip «Telegram» nella pagina del modulo.",
+              "detail" : "Il bot è il modulo «Telegram»: token, chat e un menu nel bot stesso (/menu — limiti, sessioni, report, pulizia). Cosa duplicare — il chip «Telegram» nella pagina del modulo.",
               "name" : "Telegram"
             },
             {
