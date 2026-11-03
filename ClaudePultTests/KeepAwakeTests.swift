@@ -50,7 +50,7 @@ struct KeepAwakeTests {
     }
 
     @Test func developersGetItByDefault() throws {
-        var draft = AssistantDraft(firstLaunch: false, menuBar: .make(.limits), hiddenBlocks: [], reminderHours: [24])
+        var draft = AssistantDraft(firstLaunch: false, menuBar: .make(.limits), reminderHours: [24])
         let developer = try #require(ModeTemplate.loadAll(language: .ru).first { $0.id == "developer" })
         draft.choose(developer)
         #expect(draft.hasModule(.keepAwake))

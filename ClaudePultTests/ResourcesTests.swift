@@ -115,7 +115,7 @@ struct OptionalModuleTests {
     }
 
     @Test func theAssistantInstallsTickedOptionalModules() {
-        var draft = AssistantDraft(firstLaunch: false, menuBar: .make(.limits), hiddenBlocks: [], reminderHours: [24])
+        var draft = AssistantDraft(firstLaunch: false, menuBar: .make(.limits), reminderHours: [24])
         draft.setModule(.resources, true)
         #expect(draft.hasModule(.resources) && draft.extraModules == [.resources])
         draft.setModule(.resources, false)

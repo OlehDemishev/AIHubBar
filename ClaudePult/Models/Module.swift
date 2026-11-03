@@ -75,6 +75,11 @@ extension Mode {
     /// Which of them the panel shows, and in what order, is the profile's own choice; a module that becomes possible
     /// goes in its panel place, shown. Files from before profiles (no list) take visibility from the old blocks.
     func normalizedModules(hiddenBlocks: Set<PanelBlock>) -> [ProfileModule] {
+        normalizedModules(hidden: Set(hiddenBlocks.compactMap(\.module)))
+    }
+
+    /// The same with the hidden built-in modules given directly (the assistant's draft; SPEC-refactor §4).
+    func normalizedModules(hidden: Set<ModuleKind>) -> [ProfileModule] {
         var possible: [ModuleKind] = [.limits, .sessions]
         if calendar != .off { possible.append(.upcoming) }
         if source != .none { possible.append(.projects) }
@@ -82,9 +87,9 @@ extension Mode {
 
         func legacyShown(_ kind: ModuleKind) -> Bool {
             switch kind {
-            case .limits: !hiddenBlocks.contains(.limits)
-            case .sessions: !hiddenBlocks.contains(.sessions)
-            case .upcoming: !hiddenBlocks.contains(.calendar)
+            case .limits: !hidden.contains(.limits)
+            case .sessions: !hidden.contains(.sessions)
+            case .upcoming: !hidden.contains(.upcoming)
             case .projects: showProjects
             case .reports: showCommonCommands
             case .resources, .keepAwake, .quickCommands, .toggles, .clipboard, .notes, .notch, .layout: true
@@ -100,6 +105,9 @@ extension Mode {
         }
         return result
     }
+
+    /// The profile's modules as stored — normalized on every save — or worked out for a draft that has none yet.
+    var moduleList: [ProfileModule] { modules ?? normalizedModules(hidden: []) }
 
     /// Shown modules in panel order.
     var panelModules: [ModuleKind] { (modules ?? []).filter(\.shown).map(\.kind) }

@@ -122,7 +122,7 @@ enum CommandLineTool {
             }
         }
         if let index = arguments.firstIndex(of: "--assistant-preview"), index + 1 < arguments.count {
-            var draft = AssistantDraft(firstLaunch: false, menuBar: .make(.limits), hiddenBlocks: [], reminderHours: [24])
+            var draft = AssistantDraft(firstLaunch: false, menuBar: .make(.limits), reminderHours: [24])
             let id = arguments.dropFirst(index + 2).first
             draft.choose(ModeTemplate.loadAll().first { $0.id == id })
             let renderer = ImageRenderer(content: AssistantPreview(draft: draft).frame(width: 430, height: 560).background(Color(white: 0.95))

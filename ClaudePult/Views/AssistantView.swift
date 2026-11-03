@@ -45,8 +45,8 @@ struct AssistantView: View {
         .onAppear {
             if draft == nil {
                 // A new profile starts with every block shown; the «Что будет в панели» step decides.
-                draft = AssistantDraft(firstLaunch: modes.needsAssistant, menuBar: settings.menuBarConfig,
-                                       hiddenBlocks: [], reminderHours: settings.calendarReminderHours)
+                draft = AssistantDraft(firstLaunch: modes.needsAssistant, menuBar: modes.menuBar,
+                                       reminderHours: settings.calendarReminderHours)
             }
         }
     }
@@ -86,7 +86,7 @@ struct AssistantView: View {
         // The panel blocks and the menu bar chosen here belong to the new profile (SPEC-profiles §6).
         var profile = draft.mode
         profile.modules = nil
-        profile.modules = profile.normalizedModules(hiddenBlocks: draft.hiddenBlocks)
+        profile.modules = profile.normalizedModules(hidden: draft.hiddenModules)
             + draft.extraModules.filter(\.isPanelBlock).map { ProfileModule($0) }
         profile.menuBar = draft.menuBar
         settings.calendarReminderHours = draft.reminderHours
@@ -486,13 +486,13 @@ struct AssistantPreview: View {
                 Text(mode.name.isEmpty ? String(localized: "Новый профиль") : mode.name).fontWeight(.semibold)
             }
             .font(.callout)
-            if !draft.hiddenBlocks.contains(.limits) {
+            if !draft.hiddenModules.contains(.limits) {
                 VStack(alignment: .leading, spacing: 4) {
                     sampleBar(String(localized: "Сессия"), 0.34, .green)
                     sampleBar(String(localized: "Неделя"), 0.58, .orange)
                 }
             }
-            if mode.calendar != .off, mode.source.isFolders, !draft.hiddenBlocks.contains(.calendar) {
+            if mode.calendar != .off, mode.source.isFolders, !draft.hiddenModules.contains(.upcoming) {
                 Divider()
                 Text("Ближайшее").font(.caption.weight(.semibold)).foregroundStyle(.secondary)
                 ForEach(sampleProjects.prefix(2)) { project in

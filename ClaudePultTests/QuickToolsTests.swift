@@ -61,13 +61,13 @@ struct UtilitiesTemplateTests {
 
     @Test func theAssistantTakesItsModules() throws {
         let template = try #require(ModeTemplate.loadAll(language: .ru).first { $0.id == "utilities" })
-        var draft = AssistantDraft(firstLaunch: false, menuBar: .make(.limits), hiddenBlocks: [], reminderHours: [24])
+        var draft = AssistantDraft(firstLaunch: false, menuBar: .make(.limits), reminderHours: [24])
         draft.choose(template)
         #expect(draft.extraModules == [.resources, .keepAwake, .quickCommands, .toggles])
-        #expect(draft.hiddenBlocks == [.limits, .sessions])
+        #expect(draft.hiddenModules == [.limits, .sessions])
         #expect(draft.steps == [.template, .modules, .menuBar, .name], "no project questions")
         draft.choose(nil)
-        #expect(draft.extraModules.isEmpty && draft.hiddenBlocks.isEmpty, "another template starts clean")
+        #expect(draft.extraModules.isEmpty && draft.hiddenModules.isEmpty, "another template starts clean")
     }
 
     @Test func addingItFromSettingsInstallsItsModules() throws {

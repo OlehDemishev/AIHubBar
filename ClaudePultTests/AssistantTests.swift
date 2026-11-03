@@ -4,7 +4,7 @@ import Testing
 
 struct AssistantDraftTests {
     func draft(firstLaunch: Bool = false) -> AssistantDraft {
-        AssistantDraft(firstLaunch: firstLaunch, menuBar: .make(.limits), hiddenBlocks: [], reminderHours: [24])
+        AssistantDraft(firstLaunch: firstLaunch, menuBar: .make(.limits), reminderHours: [24])
     }
 
     @Test func stepsDependOnTheSource() throws {
@@ -42,10 +42,10 @@ struct AssistantDraftTests {
         d.setModule(.upcoming, false)
         d.setModule(.sessions, false)
         #expect(!d.steps.contains(.calendar) == false, "the calendar step stays for folder projects")
-        #expect(d.mode.calendar == .off && d.hiddenBlocks == [.sessions])
+        #expect(d.mode.calendar == .off && d.hiddenModules == [.sessions])
         d.mode.modules = nil
-        #expect(d.mode.normalizedModules(hiddenBlocks: d.hiddenBlocks).map(\.kind) == [.limits, .sessions, .projects])
-        #expect(d.mode.normalizedModules(hiddenBlocks: d.hiddenBlocks)[1].shown == false)
+        #expect(d.mode.normalizedModules(hidden: d.hiddenModules).map(\.kind) == [.limits, .sessions, .projects])
+        #expect(d.mode.normalizedModules(hidden: d.hiddenModules)[1].shown == false)
     }
 
     @Test func templatesAndFolders() throws {

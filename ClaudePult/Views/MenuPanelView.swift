@@ -364,17 +364,15 @@ struct MenuPanelView: View {
                     .revealed(isShown, step: 1, reduceMotion: calm)
             }
         case .projects:
-            if settings.shows(.projects) {
-                VStack(alignment: .leading, spacing: 0) {
-                    projectsHeader
-                    if !PanelBlock.collapsed(in: collapsedRaw).contains(.projects) {
-                        content
-                    }
+            VStack(alignment: .leading, spacing: 0) {
+                projectsHeader
+                if !PanelBlock.collapsed(in: collapsedRaw).contains(.projects) {
+                    content
                 }
-                .padding(.bottom, 6)
-                .panelCard()
-                .revealed(isShown, step: 1, reduceMotion: calm)
             }
+            .padding(.bottom, 6)
+            .panelCard()
+            .revealed(isShown, step: 1, reduceMotion: calm)
         case .clipboard:
             ClipboardView()
                 .panelCard()

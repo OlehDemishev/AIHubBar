@@ -116,6 +116,18 @@ enum PanelBackground: String, CaseIterable, Sendable {
 enum PanelBlock: String, CaseIterable, Identifiable, Sendable {
     case limits, sessions, calendar, projects, commands, resources, keepAwake, quickCommands, toggles, clipboard, notes
 
+    /// The module a block from before profiles stands for — for reading old settings and files.
+    var module: ModuleKind? {
+        switch self {
+        case .limits: .limits
+        case .sessions: .sessions
+        case .calendar: .upcoming
+        case .projects: .projects
+        case .commands: .reports
+        case .resources, .keepAwake, .quickCommands, .toggles, .clipboard, .notes: nil
+        }
+    }
+
     var id: String { rawValue }
 
     var title: String {

@@ -64,7 +64,8 @@ struct AssistantDraft: Equatable, Sendable {
     var templateID: String?
     var mode: Mode
     var menuBar: MenuBarConfig
-    var hiddenBlocks: Set<PanelBlock>
+    /// Built-in modules unticked here (limits, sessions); the rest follow the profile's own settings.
+    var hiddenModules: Set<ModuleKind>
     var reminderHours: [Int]
     var analysis: FolderAnalysis?
     var step: Step
@@ -74,11 +75,11 @@ struct AssistantDraft: Equatable, Sendable {
     /// Optional modules ticked here; they are installed with the profile.
     private(set) var extraModules: [ModuleKind] = []
 
-    init(firstLaunch: Bool, menuBar: MenuBarConfig, hiddenBlocks: Set<PanelBlock>, reminderHours: [Int]) {
+    init(firstLaunch: Bool, menuBar: MenuBarConfig, hiddenModules: Set<ModuleKind> = [], reminderHours: [Int]) {
         self.firstLaunch = firstLaunch
         mode = Self.blank
         self.menuBar = menuBar
-        self.hiddenBlocks = hiddenBlocks
+        self.hiddenModules = hiddenModules
         self.reminderHours = reminderHours
         step = firstLaunch ? .welcome : .template
     }
@@ -116,8 +117,7 @@ struct AssistantDraft: Equatable, Sendable {
 
     func hasModule(_ kind: ModuleKind) -> Bool {
         switch kind {
-        case .limits: !hiddenBlocks.contains(.limits)
-        case .sessions: !hiddenBlocks.contains(.sessions)
+        case .limits, .sessions: !hiddenModules.contains(kind)
         case .projects: hasProjects
         case .upcoming: mode.calendar != .off && mode.source.isFolders
         case .reports: mode.commonCommands == .dailyReport
@@ -132,8 +132,7 @@ struct AssistantDraft: Equatable, Sendable {
 
     mutating func setModule(_ kind: ModuleKind, _ on: Bool) {
         switch kind {
-        case .limits: if on { hiddenBlocks.remove(.limits) } else { hiddenBlocks.insert(.limits) }
-        case .sessions: if on { hiddenBlocks.remove(.sessions) } else { hiddenBlocks.insert(.sessions) }
+        case .limits, .sessions: if on { hiddenModules.remove(kind) } else { hiddenModules.insert(kind) }
         case .projects:
             if on {
                 mode.source = savedSource ?? Self.blank.source
@@ -189,11 +188,7 @@ struct AssistantDraft: Equatable, Sendable {
         if template?.id == "developer", !extraModules.contains(.keepAwake) { extraModules.append(.keepAwake) }
         // …and on a MacBook with a notch the island shows what Claude is doing (SPEC-notch §6).
         if template?.id == "developer", hasNotch, !extraModules.contains(.notch) { extraModules.append(.notch) }
-        hiddenBlocks = []
-        for module in templateModules where !module.shown {
-            if module.kind == .limits { hiddenBlocks.insert(.limits) }
-            if module.kind == .sessions { hiddenBlocks.insert(.sessions) }
-        }
+        hiddenModules = Set(templateModules.filter { !$0.shown && [.limits, .sessions].contains($0.kind) }.map(\.kind))
         mode.modules = nil
         if let folder, analysis != nil { setFolder(folder, analysis: analysis) }
         if template?.id == "developer" { menuBar = .make(.limits) }

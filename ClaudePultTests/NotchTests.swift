@@ -47,7 +47,7 @@ struct NotchTests {
 /// The island is a module of the screen, not of the panel (SPEC-notch §6).
 struct NotchModuleTests {
     @Test func developersGetItOnlyWithANotch() throws {
-        var draft = AssistantDraft(firstLaunch: false, menuBar: .make(.limits), hiddenBlocks: [], reminderHours: [24])
+        var draft = AssistantDraft(firstLaunch: false, menuBar: .make(.limits), reminderHours: [24])
         let developer = try #require(ModeTemplate.loadAll(language: .ru).first { $0.id == "developer" })
         draft.choose(developer, hasNotch: true)
         #expect(draft.hasModule(.notch))
