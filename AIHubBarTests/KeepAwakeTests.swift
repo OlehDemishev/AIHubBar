@@ -44,9 +44,11 @@ struct KeepAwakeTests {
         config.set(.icon) { $0.enabled = false }
         config.set(.keepAwake) { $0.enabled = true }
         var data = MenuBarData()
-        #expect(MenuBarComposer.groups(config, data) == [[.symbol("sparkle")]], "nothing while the Mac may sleep")
+        #expect(MenuBarComposer.groups(config, data) == [[.tintedSymbol("cup.and.saucer", .secondary)]], "a pale outline while the Mac may sleep")
         data.keepingAwake = true
-        #expect(MenuBarComposer.groups(config, data) == [[.symbol("cup.and.saucer.fill")]])
+        #expect(MenuBarComposer.groups(config, data) == [[.tintedSymbol("cup.and.saucer.fill", .warning)]])
+        config.colored = false
+        #expect(MenuBarComposer.groups(config, data) == [[.tintedSymbol("cup.and.saucer.fill", .label)]], "the fill alone tells it then")
     }
 
     @Test func developersGetItByDefault() throws {

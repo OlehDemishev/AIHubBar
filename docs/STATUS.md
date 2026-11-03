@@ -5,6 +5,7 @@
 **Updated:** 2026-11-03
 
 **Now:**
+- `feat/keep-awake-indicator`: «Не спать» in the menu bar always shown — orange filled cup on, pale outline off — PR open
 - `feat/telegram-shared-bot`: shared Telegram bot through a Cloudflare Worker (spec §7, relay + Mac side) — PR open, the Worker not deployed yet
 - merged 2026-11-03: #241 Codex session states, #240 quick command shortcuts, #238 «Быстрый запрос», #236 content spec, #242 «Telegram» stage 1, #244 Telegram menu at the bottom of the chat
 
@@ -27,6 +28,12 @@
 - «Раскладка»: tried live in TextEdit, Safari, Chrome (⌥⇧ too); Telegram and Notes are yours to try (not typed into by the agent)
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-03 — «Не спать» on/off in the menu bar (branch `feat/keep-awake-indicator`)
+
+Done: the «Не спать» menu bar element no longer disappears when off. On: filled `cup.and.saucer.fill` in orange (label colour when «цвет по уровню» is off); off: outline `cup.and.saucer` in the secondary colour. New segment `.tintedSymbol(name, tint)` drawn by `MenuBarRenderer`; the element only shows when the module is on (unchanged). Settings description of the element reworded in 12 languages.
+Checked: `xcodegen generate` + `xcodebuild test` — 462 green (`KeepAwakeTests.menuBarCup` covers on, off and colours off).
+Left: not looked at live in the real menu bar.
 
 ## 2026-11-03 — Telegram: the shared bot through a Cloudflare Worker (branch `feat/telegram-shared-bot`)
 

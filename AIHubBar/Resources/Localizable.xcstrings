@@ -117658,78 +117658,78 @@
         }
       }
     },
-    "☕, когда Mac не засыпает (модуль «Не спать»)": {
+    "☕: оранжевая — Mac не засыпает, бледная — может уснуть (модуль «Не спать»)": {
       "localizations": {
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "☕ أثناء بقاء الـMac مستيقظًا (وحدة «البقاء مستيقظًا»)"
+            "value": "☕: برتقالي — الـMac لا ينام، باهت — قد ينام (وحدة «البقاء مستيقظًا»)"
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "☕, solange der Mac wach bleibt (Modul „Wach bleiben“)"
+            "value": "☕: orange – der Mac bleibt wach, blass – er darf schlafen (Modul „Wach bleiben“)"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "☕ while the Mac is kept awake («Keep Awake» module)"
+            "value": "☕: orange keeps the Mac awake, pale lets it sleep («Keep Awake» module)"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "☕ mientras el Mac no duerme (módulo «No dormir»)"
+            "value": "☕: naranja, el Mac no duerme; pálida, puede dormir (módulo «No dormir»)"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "☕ quand le Mac reste éveillé (module « Rester éveillé »)"
+            "value": "☕ : orange, le Mac reste éveillé ; pâle, il peut dormir (module « Rester éveillé »)"
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "☕ saat Mac tetap terjaga (modul «Tetap terjaga»)"
+            "value": "☕: oranye — Mac tetap terjaga, pucat — boleh tidur (modul «Tetap terjaga»)"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "☕ mentre il Mac resta sveglio (modulo «Resta sveglio»)"
+            "value": "☕: arancione, il Mac resta sveglio; chiara, può dormire (modulo «Resta sveglio»)"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "☕ Mac をスリープさせていない間（「スリープしない」モジュール）"
+            "value": "☕：オレンジ＝スリープしない、淡色＝スリープ可（「スリープしない」モジュール）"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "☕ Mac이 깨어 있는 동안 («잠자기 방지» 모듈)"
+            "value": "☕: 주황색은 Mac이 깨어 있음, 흐린색은 잠들 수 있음 («잠자기 방지» 모듈)"
           }
         },
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "☕, gdy Mac nie usypia (moduł «Bez usypiania»)"
+            "value": "☕: pomarańczowa — Mac nie usypia, blada — może usnąć (moduł «Bez usypiania»)"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "☕ enquanto o Mac não dorme (módulo «Não dormir»)"
+            "value": "☕: laranja, o Mac não dorme; clara, pode dormir (módulo «Não dormir»)"
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "☕, коли Mac не засинає (модуль «Не спати»)"
+            "value": "☕: помаранчева — Mac не засинає, бліда — може заснути (модуль «Не спати»)"
           }
         }
       }
