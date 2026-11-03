@@ -82,6 +82,9 @@ struct ServicePage: View {
             if !service.agents.isEmpty, service != .claude {
                 AgentsSection(kinds: service.agents)
             }
+            if service == .copilot {
+                CopilotStatesSection()
+            }
             if !service.hubSources.isEmpty {
                 LimitsSourcesSection(sources: service.hubSources)
             }
@@ -176,6 +179,65 @@ private struct AgentsSection: View {
         } footer: {
             Footnote(text: String(localized: "Вход у каждого агента свой (его команда в подсказке), AI Hub Bar их токены не трогает. В фоне пока работает только Claude Code: остальные открываются в Терминале, пока их запрет действий не проверен вживую."))
         }
+    }
+}
+
+/// Copilot CLI sessions in «Сессии» with «работает / ждёт / готово» through AI Hub Bar's hook (`CopilotHooks`).
+private struct CopilotStatesSection: View {
+    @Environment(AppSettings.self) private var settings
+    @State private var status: HookStatus = .notInstalled
+    @State private var message: String?
+
+    private var hooks: CopilotHooks { .live(projectsDirectory: settings.projectsDirectory) }
+
+    /// One hook here, not Claude's «hooks».
+    private var statusText: String {
+        switch status {
+        case .installed: String(localized: "установлен")
+        case .notInstalled: String(localized: "не установлен")
+        case .outdated: status.title
+        }
+    }
+
+    var body: some View {
+        Section {
+            LabeledContent("Hook AI Hub Bar для Copilot", value: statusText)
+            HStack {
+                if status != .installed {
+                    Button(status == .outdated ? String(localized: "Обновить hook") : String(localized: "Установить hook")) {
+                        perform { try hooks.install() }
+                    }
+                }
+                if status != .notInstalled {
+                    Button("Снять hook") { perform { try hooks.uninstall() } }
+                }
+            }
+            if let message {
+                Text(message).font(.caption).foregroundStyle(.secondary)
+            }
+        } header: {
+            Text("Состояние сессий Copilot")
+        } footer: {
+            Footnote(text: String(localized: "С hook сессии Copilot CLI видны в «Сессиях» как у Claude: работает, ждёт разрешения или ответа, готово — и «ждёт» приходит уведомлением. Это отдельный файл ~/.copilot/hooks/aihubbar.json; другие hooks Copilot не трогаются. Подхватывается новыми сессиями Copilot."))
+        }
+        .onAppear(perform: refresh)
+    }
+
+    private func refresh() {
+        try? hooks.updateScriptIfNeeded()
+        status = hooks.status()
+    }
+
+    private func perform(_ action: () throws -> Void) {
+        do {
+            try action()
+            message = nil
+        } catch {
+            message = error.localizedDescription
+            AppLog.error("Copilot hook install/uninstall failed: \(error.localizedDescription)")
+        }
+        refresh()
+        AppLog.info("Copilot hook: \(status)")
     }
 }
 

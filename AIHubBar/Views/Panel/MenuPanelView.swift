@@ -343,8 +343,10 @@ struct MenuPanelView: View {
                 .revealed(isShown, step: 1, reduceMotion: calm)
         case .sessions:
             let sessionRows = SessionRow.rows(sessions: sessions.items, runs: runs.runs)
-            if !sessionRows.isEmpty || !agentThreads.isEmpty {
-                SessionsView(rows: sessionRows, others: agentThreads)
+            // A Copilot session with the hook is already a row of its own, with its state.
+            let others = AgentThread.without(agentThreads, sessionIDs: Set(sessions.items.map(\.id)))
+            if !sessionRows.isEmpty || !others.isEmpty {
+                SessionsView(rows: sessionRows, others: others)
                     .panelCard()
                     .revealed(isShown, step: 1, reduceMotion: calm)
             } else if hooks.status == .notInstalled {
