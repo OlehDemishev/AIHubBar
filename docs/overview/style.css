@@ -150,3 +150,27 @@ body.dense li { margin-bottom: .8mm; }
 body.dense .section { margin-bottom: 5.5mm; }
 body.dense .feature p, body.dense .feature li { font-size: 8.9pt; }
 body.dense td { padding: 1.8mm 3mm 1.8mm 0; font-size: 8.9pt; }
+
+/* Notch island and Layout fix page (1.0) */
+.wall { background: linear-gradient(160deg, #6b7a99, #a88f86 55%, #e3b48a); border-radius: 3mm; padding: 0 5mm 5mm; }
+.isl { background: #000; color: #f5f5f7; border-radius: 0 0 4mm 4mm; font-size: 8pt; margin: 0 auto 1.5mm; }
+.isl .d { display: inline-block; width: 2mm; height: 2mm; border-radius: 50%; flex: none; }
+.isl.rest { width: 56mm; height: 7mm; display: flex; justify-content: space-between; align-items: center; padding: 0 3mm; font-weight: 600; }
+.mring { display: inline-block; width: 3mm; height: 3mm; border-radius: 50%; vertical-align: -0.5mm; border: .7mm solid #3a3a3c; border-top-color: var(--green); border-right-color: var(--green); box-sizing: border-box; }
+.isl.ban { width: 66mm; padding: 5mm 3mm 2.5mm; display: flex; gap: 2mm; align-items: center; }
+.isl.req { width: 72mm; padding: 6mm 3.5mm 3mm; }
+.isl code { background: #1c1c1e; color: #f5f5f7; border-color: #3a3a3c; }
+.isl .acts { display: flex; justify-content: flex-end; gap: 2mm; margin-top: 2.5mm; }
+.isl .acts span { padding: .6mm 3mm; border-radius: 99px; background: #2c2c2e; font-weight: 600; font-size: 7.5pt; }
+.isl .acts .ok { background: #fff; color: #000; }
+.isl-cap { font-size: 7pt; color: rgba(255,255,255,.85); text-align: center; margin: 0 0 4mm; }
+.typing .isl-cap { color: var(--ink-3); }
+.typing { background: #fff; border: 1px solid var(--line); border-radius: 3mm; overflow: hidden; padding-bottom: 3mm; }
+.typing .tbar { display: flex; align-items: center; gap: 1.2mm; padding: 2mm 3mm; background: var(--card); border-bottom: 1px solid var(--line); }
+.typing .tbar i { width: 2mm; height: 2mm; border-radius: 50%; background: #e2dbd5; }
+.typing .tbar em { font-style: normal; font-size: 7.5pt; color: var(--ink-3); margin-left: 2mm; }
+.typing .tbar b { margin-left: auto; font-size: 7pt; padding: 0 1.5mm; border-radius: 1mm; background: var(--accent); color: #fff; }
+.typing .tline { font-size: 16pt; padding: 5mm 4mm 3mm; }
+.typing .tline s { color: var(--ink-3); }
+.typing .caret { display: inline-block; width: .5mm; height: 5mm; background: var(--blue); vertical-align: -0.8mm; margin-left: .5mm; }
+.typing .isl-cap { padding: 0 4mm; }
