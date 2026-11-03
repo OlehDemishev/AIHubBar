@@ -5,8 +5,8 @@
 **Updated:** 2026-11-03
 
 **Now:**
+- quick command shortcuts (branch `feat/command-hotkeys`, PR open, waiting for review / merge)
 - PR `feat/agent-waiting`: «ждёт» for Codex CLI through its hooks (Antigravity: no reliable signal) — waiting for merge
-- nothing in progress; refactoring stage 8 (audit leftovers) done — #230–#232
 
 **Next:**
 - next beta or 0.5.1 carries stage 8 (#230–#232): 0.5.1-beta.1 was built from 27c5e2d, before it
@@ -22,6 +22,12 @@
 - «Раскладка»: tried live in TextEdit, Safari, Chrome (⌥⇧ too); Telegram and Notes are yours to try (not typed into by the agent)
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-03 — quick command shortcuts (branch `feat/command-hotkeys`)
+
+Done: every «Быстрая команда» can have a global shortcut (SPEC-profiles §4.3, was second wave): a recorder in the command's editor («Записать», ✕ clears, Esc cancels; ⌘/⌃/⌥ or a lone F1–F20), stored with the command (`hotKey`, optional — old libraries decode), registered by the new `CommandHotKeys` while the module is installed and on, in any profile; a press runs the command like its button, «Спрашивать перед запуском» as an alert. The editor names conflicts: the app's own keys (search, island ⌃⌥Y/⌃⌥N) win, the first command in the library wins a duplicate, keys macOS refused; warnings for macOS's own keys and ⌘-only keys. The panel shows the key on the button (hover hint, VoiceOver label). `GlobalHotKey` got additive registration of N command keys and a recorder hand-off. Strings in all 12 languages, module summary and footnote updated, help JSON re-exported, SPEC-profiles and REFERENCE updated. The command library isn't in `.claudepult` files, so neither are the shortcuts.
+Checked: scripts/check.sh green (warnings as errors), new CommandHotKeysTests (storage with/without a shortcut, names, conflicts, registration bookkeeping, asking before a run). Live, this branch's Release build run from build/: with the module on and F19 on «Мой IP в сети», the log showed «1 registered» and a posted F19 ran the command (exit 0); Oleh's settings put back afterwards (module off again, default library). The editor and the panel were not looked at on screen.
+Left: if «быстрый запрос» (parallel branch) adds its own global key, add it to `CommandHotKeys.reserved` after both are merged. Panel search still runs a quick command without «Спрашивать перед запуском» (older behaviour, not changed here).
 
 ## 2026-11-03 — «ждёт» for Codex CLI; Antigravity researched (branch `feat/agent-waiting`)
 

@@ -523,7 +523,7 @@
               "name" : "Notizen"
             },
             {
-              "detail" : "Eigene Tasten: ein Skript im Hintergrund oder im Terminal, ein macOS-„Kurzbefehle“-Kurzbefehl, ein Link, eine Datei, ein Ordner oder eine App.",
+              "detail" : "Eigene Tasten: ein Skript im Hintergrund oder im Terminal, ein macOS-„Kurzbefehle“-Kurzbefehl, ein Link, eine Datei, ein Ordner oder eine App. Jede kann einen eigenen Tastaturkurzbefehl haben.",
               "name" : "Schnellbefehle"
             }
           ],

@@ -523,7 +523,7 @@
               "name" : "Notatki"
             },
             {
-              "detail" : "Własne przyciski: skrypt w tle lub w Terminalu, skrót z «Skróty» macOS, link, plik, folder albo aplikacja.",
+              "detail" : "Własne przyciski: skrypt w tle lub w Terminalu, skrót z «Skróty» macOS, link, plik, folder albo aplikacja. Każdy może mieć własny skrót klawiszowy.",
               "name" : "Szybkie polecenia"
             }
           ],

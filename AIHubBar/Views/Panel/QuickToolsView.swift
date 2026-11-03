@@ -5,6 +5,7 @@ struct QuickCommandsView: View {
     @Environment(AppSettings.self) private var settings
     @Environment(ProfileStore.self) private var modes
     @Environment(QuickToolsController.self) private var tools
+    @Environment(CommandHotKeys.self) private var hotKeys
 
     /// The library, minus what the current profile left out.
     private var commands: [QuickCommand] {
@@ -36,13 +37,20 @@ struct QuickCommandsView: View {
                                 }
                                 Text(command.title).lineLimit(1)
                                 Spacer(minLength: 0)
+                                if let key = hotKeys.registered[command.id] {
+                                    Text(key.title)
+                                        .foregroundStyle(.secondary)
+                                        .lineLimit(1)
+                                        .layoutPriority(1)
+                                }
                             }
                             .scaledFont(.caption)
                             .frame(maxWidth: .infinity, alignment: .leading)
                         }
                         .buttonStyle(.bordered)
                         .controlSize(.small)
-                        .help(command.value)
+                        .help(hotKeys.registered[command.id].map { command.value + "\n" + String(localized: "Сочетание клавиш: \($0.title)") } ?? command.value)
+                        .accessibilityLabel(hotKeys.registered[command.id].map { "\(command.title), \($0.spoken)" } ?? command.title)
                     }
                 }
                 if let id = confirming, let command = settings.quickCommands.first(where: { $0.id == id }) {

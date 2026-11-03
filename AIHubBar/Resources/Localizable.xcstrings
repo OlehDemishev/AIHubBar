@@ -1167,16 +1167,10 @@
     },
     "%@ ждёт ответа — %@": {
       "localizations": {
-        "ar": {
+        "ru": {
           "stringUnit": {
-            "state": "translated",
-            "value": "%1$@ ينتظر ردك — %2$@"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%1$@ wartet auf Sie — %2$@"
+            "state": "new",
+            "value": "%1$@ ждёт ответа — %2$@"
           }
         },
         "en": {
@@ -1185,10 +1179,16 @@
             "value": "%1$@ is waiting for you — %2$@"
           }
         },
-        "es": {
+        "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "%1$@ espera tu respuesta — %2$@"
+            "value": "%1$@ чекає на відповідь — %2$@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ wartet auf Sie — %2$@"
           }
         },
         "fr": {
@@ -1197,16 +1197,28 @@
             "value": "%1$@ attend votre réponse — %2$@"
           }
         },
-        "id": {
+        "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "%1$@ menunggu jawaban — %2$@"
+            "value": "%1$@ espera tu respuesta — %2$@"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "%1$@ attende una risposta — %2$@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ aguarda sua resposta — %2$@"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ czeka na odpowiedź — %2$@"
           }
         },
         "ja": {
@@ -1221,28 +1233,16 @@
             "value": "%1$@이(가) 응답을 기다립니다 — %2$@"
           }
         },
-        "pl": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "%1$@ czeka na odpowiedź — %2$@"
+            "value": "%1$@ ينتظر ردك — %2$@"
           }
         },
-        "pt-BR": {
+        "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "%1$@ aguarda sua resposta — %2$@"
-          }
-        },
-        "ru": {
-          "stringUnit": {
-            "state": "new",
-            "value": "%1$@ ждёт ответа — %2$@"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%1$@ чекає на відповідь — %2$@"
+            "value": "%1$@ menunggu jawaban — %2$@"
           }
         }
       }
@@ -8728,10 +8728,16 @@
     },
     "Hook AI Hub Bar для Copilot": {
       "localizations": {
-        "ar": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "خطاف AI Hub Bar لـ Copilot"
+            "value": "AI Hub Bar hook for Copilot"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hook AI Hub Bar для Copilot"
           }
         },
         "de": {
@@ -8740,10 +8746,10 @@
             "value": "AI-Hub-Bar-Hook für Copilot"
           }
         },
-        "en": {
+        "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "AI Hub Bar hook for Copilot"
+            "value": "Hook AI Hub Bar pour Copilot"
           }
         },
         "es": {
@@ -8752,22 +8758,22 @@
             "value": "Hook de AI Hub Bar para Copilot"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hook AI Hub Bar pour Copilot"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hook AI Hub Bar untuk Copilot"
-          }
-        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Hook di AI Hub Bar per Copilot"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hook do AI Hub Bar para o Copilot"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hook AI Hub Bar dla Copilota"
           }
         },
         "ja": {
@@ -8782,22 +8788,16 @@
             "value": "Copilot용 AI Hub Bar 후크"
           }
         },
-        "pl": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Hook AI Hub Bar dla Copilota"
+            "value": "خطاف AI Hub Bar لـ Copilot"
           }
         },
-        "pt-BR": {
+        "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "Hook do AI Hub Bar para o Copilot"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hook AI Hub Bar для Copilot"
+            "value": "Hook AI Hub Bar untuk Copilot"
           }
         }
       }
@@ -11633,6 +11633,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "https://… або ~/папка"
+          }
+        }
+      }
+    },
+    "macOS не дала занять это сочетание: похоже, оно у другого приложения.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لم يسمح macOS بحجز هذا الاختصار: يبدو أن تطبيقًا آخر يستخدمه."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS hat diesen Kurzbefehl nicht freigegeben: Wahrscheinlich nutzt ihn eine andere App."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS didn't let AI Hub Bar take this shortcut: another app probably uses it."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS no permitió usar este atajo: probablemente lo usa otra app."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS n’a pas accordé ce raccourci : une autre app l’utilise probablement."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS tidak mengizinkan pintasan ini: mungkin dipakai aplikasi lain."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS non ha concesso questa scorciatoia: probabilmente la usa un’altra app."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS がこのショートカットを許可しませんでした。別のアプリが使っている可能性があります。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS가 이 단축키를 허용하지 않았습니다. 다른 앱이 사용 중인 것 같습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS nie pozwolił zająć tego skrótu: pewnie używa go inna aplikacja."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O macOS não liberou este atalho: provavelmente outro app o usa."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS не дала зайняти це сполучення: схоже, воно в іншого застосунку."
           }
         }
       }
@@ -30154,6 +30230,82 @@
         }
       }
     },
+    "Записать": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تسجيل"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aufnehmen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Record"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Grabar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enregistrer"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rekam"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Registra"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "記録"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "기록"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nagraj"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gravar"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Записати"
+          }
+        }
+      }
+    },
     "Записать файл ~/.copilot/hooks/aihubbar.json": {
       "localizations": {
         "ar": {
@@ -44223,6 +44375,234 @@
         }
       }
     },
+    "Нажмите и введите сочетание; Escape — отменить": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اضغط ثم أدخل الاختصار؛ Escape للإلغاء"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Drücken und dann den Kurzbefehl eingeben; Escape bricht ab"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Press, then type the shortcut; Escape cancels"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pulsa y escribe el atajo; Escape cancela"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Appuyez, puis tapez le raccourci ; Échap annule"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tekan lalu ketik pintasan; Escape membatalkan"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Premi e digita la scorciatoia; Esc annulla"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "押してからショートカットを入力。Escape でキャンセル"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "누른 다음 단축키를 입력하세요. Escape로 취소"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Naciśnij i wpisz skrót; Escape anuluje"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pressione e digite o atalho; Escape cancela"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Натисніть і введіть сполучення; Escape — скасувати"
+          }
+        }
+      }
+    },
+    "Нажмите клавиши с ⌘, ⌃ или ⌥; Esc — отменить": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اضغط مفاتيح مع ⌘ أو ⌃ أو ⌥؛ Esc للإلغاء"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tasten mit ⌘, ⌃ oder ⌥ drücken; Esc bricht ab"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Press keys with ⌘, ⌃ or ⌥; Esc cancels"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pulsa teclas con ⌘, ⌃ u ⌥; Esc cancela"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Appuyez sur des touches avec ⌘, ⌃ ou ⌥ ; Échap annule"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tekan tombol dengan ⌘, ⌃, atau ⌥; Esc membatalkan"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Premi tasti con ⌘, ⌃ o ⌥; Esc annulla"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⌘、⌃、⌥ と一緒にキーを押す。Esc でキャンセル"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⌘, ⌃ 또는 ⌥와 함께 키를 누르세요. Esc로 취소"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Naciśnij klawisze z ⌘, ⌃ lub ⌥; Esc anuluje"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pressione teclas com ⌘, ⌃ ou ⌥; Esc cancela"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Натисніть клавіші з ⌘, ⌃ або ⌥; Esc — скасувати"
+          }
+        }
+      }
+    },
+    "Нажмите сочетание…": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اضغط الاختصار…"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kurzbefehl drücken …"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Press the shortcut…"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pulsa el atajo…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Appuyez sur le raccourci…"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tekan pintasan…"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Premi la scorciatoia…"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ショートカットを押す…"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "단축키를 누르세요…"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Naciśnij skrót…"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pressione o atalho…"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Натисніть сполучення…"
+          }
+        }
+      }
+    },
     "Нажмите ✦ в строке меню — откроется панель.": {
       "localizations": {
         "ar": {
@@ -45061,10 +45441,16 @@
     },
     "Напишите задачу своими словами — AI выполнит её над файлом": {
       "localizations": {
-        "ar": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "اكتب المهمة بكلماتك — سينفذها الذكاء الاصطناعي على الملف"
+            "value": "Describe the task in your own words — AI does it on the file"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Напишіть завдання своїми словами — AI виконає його над файлом"
           }
         },
         "de": {
@@ -45073,10 +45459,10 @@
             "value": "Beschreiben Sie die Aufgabe in eigenen Worten – die KI erledigt sie an der Datei"
           }
         },
-        "en": {
+        "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Describe the task in your own words — AI does it on the file"
+            "value": "Décrivez la tâche avec vos mots — l’IA l’exécute sur le fichier"
           }
         },
         "es": {
@@ -45085,22 +45471,22 @@
             "value": "Describe la tarea con tus palabras: la IA la hará con el archivo"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Décrivez la tâche avec vos mots — l’IA l’exécute sur le fichier"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tulis tugas dengan kata-kata Anda — AI mengerjakannya pada file"
-          }
-        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Descrivi il compito con parole tue: l’IA lo eseguirà sul file"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Descreva a tarefa com suas palavras — a IA a executa no arquivo"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Opisz zadanie własnymi słowami — AI wykona je na pliku"
           }
         },
         "ja": {
@@ -45115,22 +45501,16 @@
             "value": "작업을 직접 적어 주세요 — AI가 파일에 대해 실행합니다"
           }
         },
-        "pl": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Opisz zadanie własnymi słowami — AI wykona je na pliku"
+            "value": "اكتب المهمة بكلماتك — سينفذها الذكاء الاصطناعي على الملف"
           }
         },
-        "pt-BR": {
+        "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "Descreva a tarefa com suas palavras — a IA a executa no arquivo"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Напишіть завдання своїми словами — AI виконає його над файлом"
+            "value": "Tulis tugas dengan kata-kata Anda — AI mengerjakannya pada file"
           }
         }
       }
@@ -48034,10 +48414,10 @@
     },
     "Не сохранено: %@": {
       "localizations": {
-        "ar": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "لم يُحفظ: %@"
+            "value": "Not saved: %@"
           }
         },
         "de": {
@@ -48046,10 +48426,10 @@
             "value": "Nicht gespeichert: %@"
           }
         },
-        "en": {
+        "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Not saved: %@"
+            "value": "Non enregistré : %@"
           }
         },
         "es": {
@@ -48058,22 +48438,28 @@
             "value": "No guardado: %@"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Non enregistré : %@"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tidak tersimpan: %@"
-          }
-        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Non salvato: %@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Não salvo: %@"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nie zapisano: %@"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Не збережено: %@"
           }
         },
         "ja": {
@@ -48088,22 +48474,16 @@
             "value": "저장되지 않음: %@"
           }
         },
-        "pl": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Nie zapisano: %@"
+            "value": "لم يُحفظ: %@"
           }
         },
-        "pt-BR": {
+        "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "Não salvo: %@"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Не збережено: %@"
+            "value": "Tidak tersimpan: %@"
           }
         }
       }
@@ -52999,6 +53379,82 @@
         }
       }
     },
+    "Нужна ⌘, ⌃ или ⌥ — или одна клавиша F1–F20.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يلزم ⌘ أو ⌃ أو ⌥ — أو مفتاح واحد من F1–F20."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nötig ist ⌘, ⌃ oder ⌥ – oder eine einzelne Taste F1–F20."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Needs ⌘, ⌃ or ⌥ — or a single F1–F20 key."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hace falta ⌘, ⌃ u ⌥, o una sola tecla F1–F20."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il faut ⌘, ⌃ ou ⌥ — ou une seule touche F1–F20."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Perlu ⌘, ⌃, atau ⌥ — atau satu tombol F1–F20."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Serve ⌘, ⌃ o ⌥ — oppure un solo tasto F1–F20."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⌘、⌃、⌥ のいずれか、または F1〜F20 キー単体が必要です。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⌘, ⌃ 또는 ⌥가 필요합니다. 또는 F1–F20 키 하나만."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Potrzebny ⌘, ⌃ lub ⌥ — albo pojedynczy klawisz F1–F20."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "É preciso ⌘, ⌃ ou ⌥ — ou uma única tecla F1–F20."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Потрібна ⌘, ⌃ або ⌥ — або одна клавіша F1–F20."
+          }
+        }
+      }
+    },
     "Нужно ваше решение.": {
       "localizations": {
         "ar": {
@@ -53762,10 +54218,16 @@
     },
     "Обновить hook": {
       "localizations": {
-        "ar": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "تحديث الخطاف"
+            "value": "Update hook"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Оновити hook"
           }
         },
         "de": {
@@ -53774,10 +54236,10 @@
             "value": "Hook aktualisieren"
           }
         },
-        "en": {
+        "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Update hook"
+            "value": "Mettre à jour le hook"
           }
         },
         "es": {
@@ -53786,22 +54248,22 @@
             "value": "Actualizar hook"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mettre à jour le hook"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Perbarui hook"
-          }
-        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Aggiorna hook"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Atualizar hook"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zaktualizuj hook"
           }
         },
         "ja": {
@@ -53816,22 +54278,16 @@
             "value": "후크 업데이트"
           }
         },
-        "pl": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Zaktualizuj hook"
+            "value": "تحديث الخطاف"
           }
         },
-        "pt-BR": {
+        "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "Atualizar hook"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Оновити hook"
+            "value": "Perbarui hook"
           }
         }
       }
@@ -77205,10 +77661,16 @@
     },
     "С hook сессии Copilot CLI видны в «Сессиях» как у Claude: работает, ждёт разрешения или ответа, готово — и «ждёт» приходит уведомлением. Это отдельный файл ~/.copilot/hooks/aihubbar.json; другие hooks Copilot не трогаются. Подхватывается новыми сессиями Copilot.": {
       "localizations": {
-        "ar": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "مع الخطاف تظهر جلسات Copilot CLI في «الجلسات» مثل جلسات Claude: يعمل، ينتظر إذنًا أو ردًا، انتهى — ويصل «ينتظر» كإشعار. إنه ملف مستقل ‎~/.copilot/hooks/aihubbar.json‏، ولا تُمس خطافات Copilot الأخرى. تستخدمه جلسات Copilot الجديدة."
+            "value": "With the hook, Copilot CLI sessions appear in «Sessions» like Claude’s: working, waiting for a permission or an answer, done — and «waiting» comes as a notification. It is a separate file, ~/.copilot/hooks/aihubbar.json; Copilot’s other hooks are not touched. New Copilot sessions pick it up."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "З hook сесії Copilot CLI видно в «Сесіях», як у Claude: працює, чекає дозволу чи відповіді, готово — і «чекає» приходить сповіщенням. Це окремий файл ~/.copilot/hooks/aihubbar.json; інші hooks Copilot не змінюються. Підхоплюється новими сесіями Copilot."
           }
         },
         "de": {
@@ -77217,10 +77679,10 @@
             "value": "Mit dem Hook erscheinen Copilot-CLI-Sitzungen unter «Sitzungen» wie die von Claude: arbeitet, wartet auf eine Erlaubnis oder Antwort, fertig – und «wartet» kommt als Mitteilung. Es ist eine eigene Datei, ~/.copilot/hooks/aihubbar.json; andere Copilot-Hooks bleiben unberührt. Neue Copilot-Sitzungen übernehmen ihn."
           }
         },
-        "en": {
+        "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "With the hook, Copilot CLI sessions appear in «Sessions» like Claude’s: working, waiting for a permission or an answer, done — and «waiting» comes as a notification. It is a separate file, ~/.copilot/hooks/aihubbar.json; Copilot’s other hooks are not touched. New Copilot sessions pick it up."
+            "value": "Avec le hook, les sessions Copilot CLI apparaissent dans « Sessions » comme celles de Claude : au travail, en attente d’une autorisation ou d’une réponse, terminé — et « en attente » arrive en notification. C’est un fichier à part, ~/.copilot/hooks/aihubbar.json ; les autres hooks de Copilot ne sont pas touchés. Les nouvelles sessions Copilot le prennent en compte."
           }
         },
         "es": {
@@ -77229,22 +77691,22 @@
             "value": "Con el hook, las sesiones de Copilot CLI aparecen en «Sesiones» como las de Claude: trabajando, esperando un permiso o una respuesta, listo — y «esperando» llega como notificación. Es un archivo aparte, ~/.copilot/hooks/aihubbar.json; los demás hooks de Copilot no se tocan. Lo usan las sesiones nuevas de Copilot."
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Avec le hook, les sessions Copilot CLI apparaissent dans « Sessions » comme celles de Claude : au travail, en attente d’une autorisation ou d’une réponse, terminé — et « en attente » arrive en notification. C’est un fichier à part, ~/.copilot/hooks/aihubbar.json ; les autres hooks de Copilot ne sont pas touchés. Les nouvelles sessions Copilot le prennent en compte."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dengan hook, sesi Copilot CLI tampil di «Sesi» seperti milik Claude: bekerja, menunggu izin atau jawaban, selesai — dan «menunggu» datang sebagai notifikasi. Ini file tersendiri, ~/.copilot/hooks/aihubbar.json; hook Copilot lainnya tidak disentuh. Sesi Copilot baru akan memakainya."
-          }
-        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Con l’hook, le sessioni di Copilot CLI compaiono in «Sessioni» come quelle di Claude: al lavoro, in attesa di un permesso o di una risposta, finito — e «in attesa» arriva come notifica. È un file a sé, ~/.copilot/hooks/aihubbar.json; gli altri hook di Copilot restano intatti. Lo usano le nuove sessioni di Copilot."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Com o hook, as sessões do Copilot CLI aparecem em «Sessões» como as do Claude: trabalhando, aguardando permissão ou resposta, pronto — e «aguardando» chega como notificação. É um arquivo separado, ~/.copilot/hooks/aihubbar.json; os outros hooks do Copilot não são alterados. Novas sessões do Copilot passam a usá-lo."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Z hookiem sesje Copilot CLI widać w «Sesjach» jak sesje Claude: pracuje, czeka na zgodę lub odpowiedź, gotowe — a «czeka» przychodzi jako powiadomienie. To osobny plik ~/.copilot/hooks/aihubbar.json; inne hooki Copilota pozostają nietknięte. Używają go nowe sesje Copilota."
           }
         },
         "ja": {
@@ -77259,22 +77721,16 @@
             "value": "후크를 설치하면 Copilot CLI 세션이 Claude처럼 「세션」에 표시됩니다: 작업 중, 권한이나 답변 대기, 완료 — 「대기」는 알림으로도 옵니다. 별도 파일 ~/.copilot/hooks/aihubbar.json이며 Copilot의 다른 후크는 건드리지 않습니다. 새 Copilot 세션부터 적용됩니다."
           }
         },
-        "pl": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Z hookiem sesje Copilot CLI widać w «Sesjach» jak sesje Claude: pracuje, czeka na zgodę lub odpowiedź, gotowe — a «czeka» przychodzi jako powiadomienie. To osobny plik ~/.copilot/hooks/aihubbar.json; inne hooki Copilota pozostają nietknięte. Używają go nowe sesje Copilota."
+            "value": "مع الخطاف تظهر جلسات Copilot CLI في «الجلسات» مثل جلسات Claude: يعمل، ينتظر إذنًا أو ردًا، انتهى — ويصل «ينتظر» كإشعار. إنه ملف مستقل ‎~/.copilot/hooks/aihubbar.json‏، ولا تُمس خطافات Copilot الأخرى. تستخدمه جلسات Copilot الجديدة."
           }
         },
-        "pt-BR": {
+        "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "Com o hook, as sessões do Copilot CLI aparecem em «Sessões» como as do Claude: trabalhando, aguardando permissão ou resposta, pronto — e «aguardando» chega como notificação. É um arquivo separado, ~/.copilot/hooks/aihubbar.json; os outros hooks do Copilot não são alterados. Novas sessões do Copilot passam a usá-lo."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "З hook сесії Copilot CLI видно в «Сесіях», як у Claude: працює, чекає дозволу чи відповіді, готово — і «чекає» приходить сповіщенням. Це окремий файл ~/.copilot/hooks/aihubbar.json; інші hooks Copilot не змінюються. Підхоплюється новими сесіями Copilot."
+            "value": "Dengan hook, sesi Copilot CLI tampil di «Sesi» seperti milik Claude: bekerja, menunggu izin atau jawaban, selesai — dan «menunggu» datang sebagai notifikasi. Ini file tersendiri, ~/.copilot/hooks/aihubbar.json; hook Copilot lainnya tidak disentuh. Sesi Copilot baru akan memakainya."
           }
         }
       }
@@ -78959,6 +79415,7 @@
       }
     },
     "Свои кнопки: скрипт в фоне или в Терминале, ярлык из «Команд» macOS, ссылка, файл, папка или приложение.": {
+      "extractionState": "stale",
       "localizations": {
         "ar": {
           "stringUnit": {
@@ -79030,6 +79487,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Свої кнопки: скрипт у фоні чи в Терміналі, ярлик із «Швидкі команди» macOS, посилання, файл, папка або застосунок."
+          }
+        }
+      }
+    },
+    "Свои кнопки: скрипт в фоне или в Терминале, ярлык из «Команд» macOS, ссылка, файл, папка или приложение. У каждой может быть своё сочетание клавиш.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "أزرارك الخاصة: سكربت في الخلفية أو في الطرفية، اختصار من «الاختصارات» في macOS، رابط أو ملف أو مجلد أو تطبيق. ويمكن أن يكون لكل منها اختصار لوحة مفاتيح خاص."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eigene Tasten: ein Skript im Hintergrund oder im Terminal, ein macOS-„Kurzbefehle“-Kurzbefehl, ein Link, eine Datei, ein Ordner oder eine App. Jede kann einen eigenen Tastaturkurzbefehl haben."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your own buttons: a script in the background or in Terminal, a macOS «Shortcuts» shortcut, a link, file, folder or app. Each can have its own keyboard shortcut."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tus botones: un script en segundo plano o en Terminal, un atajo de «Atajos» de macOS, un enlace, archivo, carpeta o app. Cada uno puede tener su propio atajo de teclado."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vos boutons : un script en arrière-plan ou dans Terminal, un raccourci « Raccourcis » de macOS, un lien, un fichier, un dossier ou une app. Chacun peut avoir son propre raccourci clavier."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tombol sendiri: skrip di latar belakang atau Terminal, pintasan «Pintasan» macOS, tautan, file, folder, atau aplikasi. Masing-masing bisa punya pintasan papan ketik sendiri."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pulsanti tuoi: uno script in background o nel Terminale, un comando di «Comandi rapidi» di macOS, un link, un file, una cartella o un’app. Ognuno può avere la sua scorciatoia da tastiera."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "自分のボタン: バックグラウンドまたはターミナルのスクリプト、macOS の「ショートカット」、リンク、ファイル、フォルダ、アプリ。 それぞれに独自のキーボードショートカットを設定できます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "나만의 버튼: 백그라운드 또는 터미널 스크립트, macOS «단축어», 링크, 파일, 폴더, 앱. 각각 자신만의 키보드 단축키를 가질 수 있습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Własne przyciski: skrypt w tle lub w Terminalu, skrót z «Skróty» macOS, link, plik, folder albo aplikacja. Każdy może mieć własny skrót klawiszowy."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seus botões: script em segundo plano ou no Terminal, atalho do «Atalhos» do macOS, link, arquivo, pasta ou app. Cada um pode ter seu próprio atalho de teclado."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Свої кнопки: скрипт у фоні чи в Терміналі, ярлик із «Швидкі команди» macOS, посилання, файл, папка або застосунок. Кожна може мати своє сполучення клавіш."
           }
         }
       }
@@ -82765,6 +83298,7 @@
       }
     },
     "Скрипт в фоне запускается через zsh в домашней папке, итог приходит уведомлением; «в Терминале» — открывает новое окно. Ярлык — имя из приложения «Команды». Открыть — ссылка (https://…) или путь (~/…).": {
+      "extractionState": "stale",
       "localizations": {
         "ar": {
           "stringUnit": {
@@ -82836,6 +83370,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Скрипт у фоні запускається через zsh у домашній папці, підсумок приходить сповіщенням; «у Терміналі» — відкриває нове вікно. Ярлик — назва із застосунку «Швидкі команди». Відкрити — посилання (https://…) або шлях (~/…)."
+          }
+        }
+      }
+    },
+    "Скрипт в фоне запускается через zsh в домашней папке, итог приходит уведомлением; «в Терминале» — открывает новое окно. Ярлык — имя из приложения «Команды». Открыть — ссылка (https://…) или путь (~/…). Сочетание клавиш запускает команду из любого приложения, как кнопка в панели, — и тоже спрашивает, если включено «Спрашивать перед запуском».": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يعمل السكربت في الخلفية عبر zsh في المجلد الرئيسي وتصل النتيجة كإشعار؛ «في الطرفية» يفتح نافذة جديدة. الاختصار اسم من تطبيق «الاختصارات». الفتح يقبل رابطًا (https://…) أو مسارًا (~/…). يشغّل اختصار لوحة المفاتيح الأمر من أي تطبيق مثل زر اللوحة — ويسأل أيضًا إذا كان «السؤال قبل التشغيل» مفعّلًا."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ein Hintergrundskript läuft mit zsh in Ihrem Benutzerordner, das Ergebnis kommt als Mitteilung; „im Terminal“ öffnet ein neues Fenster. Ein Kurzbefehl ist ein Name aus der App „Kurzbefehle“. Öffnen nimmt einen Link (https://…) oder Pfad (~/…). Ein Tastaturkurzbefehl startet den Befehl aus jeder App wie die Taste in der Leiste – und fragt ebenfalls, wenn „Vor dem Start fragen“ an ist."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A background script runs with zsh in your home folder and its result arrives as a notification; «in Terminal» opens a new window. A shortcut is a name from the «Shortcuts» app. Open takes a link (https://…) or a path (~/…). A keyboard shortcut runs the command from any app, like the panel button — and asks too if «Ask before running» is on."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un script en segundo plano se ejecuta con zsh en tu carpeta de inicio y el resultado llega como notificación; «en Terminal» abre una ventana nueva. Un atajo es un nombre de la app «Atajos». Abrir admite un enlace (https://…) o una ruta (~/…). Un atajo de teclado ejecuta el comando desde cualquier app, como el botón del panel, y también pregunta si «Preguntar antes de ejecutar» está activado."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un script en arrière-plan s’exécute avec zsh dans votre dossier personnel et le résultat arrive en notification ; « dans Terminal » ouvre une nouvelle fenêtre. Un raccourci est un nom de l’app « Raccourcis ». Ouvrir accepte un lien (https://…) ou un chemin (~/…). Un raccourci clavier lance la commande depuis n’importe quelle app, comme le bouton du panneau — et demande aussi si « Demander avant de lancer » est activé."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skrip latar belakang dijalankan dengan zsh di folder rumah dan hasilnya datang sebagai pemberitahuan; «di Terminal» membuka jendela baru. Pintasan adalah nama dari aplikasi «Pintasan». Buka menerima tautan (https://…) atau jalur (~/…). Pintasan papan ketik menjalankan perintah dari aplikasi mana pun, seperti tombol panel — dan juga bertanya jika «Tanya sebelum menjalankan» aktif."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uno script in background gira con zsh nella cartella home e il risultato arriva come notifica; «nel Terminale» apre una nuova finestra. Un comando rapido è un nome dell’app «Comandi rapidi». Apri accetta un link (https://…) o un percorso (~/…). Una scorciatoia da tastiera avvia il comando da qualsiasi app, come il pulsante del pannello — e chiede anche se «Chiedi prima di avviare» è attivo."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "バックグラウンドのスクリプトはホームフォルダで zsh により実行され、結果は通知で届きます。「ターミナルで」は新しいウインドウを開きます。ショートカットは「ショートカット」アプリの名前です。開くにはリンク（https://…）またはパス（~/…）を指定します。 キーボードショートカットは、パネルのボタンと同じようにどのアプリからでもコマンドを実行します。「実行前に確認」がオンなら確認もします。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "백그라운드 스크립트는 홈 폴더에서 zsh로 실행되고 결과는 알림으로 옵니다. «터미널에서»는 새 창을 엽니다. 단축어는 «단축어» 앱의 이름입니다. 열기는 링크(https://…) 또는 경로(~/…)를 받습니다. 키보드 단축키는 패널 버튼처럼 어떤 앱에서든 명령을 실행하며, «실행 전에 묻기»가 켜져 있으면 묻기도 합니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skrypt w tle działa przez zsh w folderze domowym, a wynik przychodzi jako powiadomienie; «w Terminalu» otwiera nowe okno. Skrót to nazwa z aplikacji «Skróty». Otwórz przyjmuje link (https://…) lub ścieżkę (~/…). Skrót klawiszowy uruchamia polecenie z dowolnej aplikacji, jak przycisk w panelu — i też pyta, jeśli włączono «Pytaj przed uruchomieniem»."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Um script em segundo plano roda com zsh na pasta de início e o resultado chega como notificação; «no Terminal» abre uma janela nova. Um atalho é um nome do app «Atalhos». Abrir aceita link (https://…) ou caminho (~/…). Um atalho de teclado executa o comando de qualquer app, como o botão do painel — e também pergunta se «Perguntar antes de executar» estiver ativo."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Скрипт у фоні запускається через zsh у домашній папці, підсумок приходить сповіщенням; «у Терміналі» — відкриває нове вікно. Ярлик — назва із застосунку «Швидкі команди». Відкрити — посилання (https://…) або шлях (~/…). Сполучення клавіш запускає команду з будь-якого застосунку, як кнопка в панелі, — і теж питає, якщо ввімкнено «Питати перед запуском»."
           }
         }
       }
@@ -84440,10 +85050,16 @@
     },
     "Снять hook": {
       "localizations": {
-        "ar": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "إزالة الخطاف"
+            "value": "Remove hook"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Зняти hook"
           }
         },
         "de": {
@@ -84452,10 +85068,10 @@
             "value": "Hook entfernen"
           }
         },
-        "en": {
+        "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Remove hook"
+            "value": "Retirer le hook"
           }
         },
         "es": {
@@ -84464,22 +85080,22 @@
             "value": "Quitar hook"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Retirer le hook"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hapus hook"
-          }
-        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Rimuovi hook"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remover hook"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Usuń hook"
           }
         },
         "ja": {
@@ -84494,22 +85110,16 @@
             "value": "후크 제거"
           }
         },
-        "pl": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Usuń hook"
+            "value": "إزالة الخطاف"
           }
         },
-        "pt-BR": {
+        "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "Remover hook"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Зняти hook"
+            "value": "Hapus hook"
           }
         }
       }
@@ -85580,10 +86190,16 @@
     },
     "Состояние сессий Copilot": {
       "localizations": {
-        "ar": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "حالة جلسات Copilot"
+            "value": "Copilot session state"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Стан сесій Copilot"
           }
         },
         "de": {
@@ -85592,10 +86208,10 @@
             "value": "Status der Copilot-Sitzungen"
           }
         },
-        "en": {
+        "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Copilot session state"
+            "value": "État des sessions Copilot"
           }
         },
         "es": {
@@ -85604,22 +86220,22 @@
             "value": "Estado de las sesiones de Copilot"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "État des sessions Copilot"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Status sesi Copilot"
-          }
-        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Stato delle sessioni Copilot"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Estado das sessões do Copilot"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stan sesji Copilota"
           }
         },
         "ja": {
@@ -85634,22 +86250,16 @@
             "value": "Copilot 세션 상태"
           }
         },
-        "pl": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Stan sesji Copilota"
+            "value": "حالة جلسات Copilot"
           }
         },
-        "pt-BR": {
+        "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "Estado das sessões do Copilot"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Стан сесій Copilot"
+            "value": "Status sesi Copilot"
           }
         }
       }
@@ -85726,6 +86336,386 @@
           "stringUnit": {
             "state": "translated",
             "value": "Зберегти"
+          }
+        }
+      }
+    },
+    "Сочетание клавиш": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اختصار لوحة المفاتيح"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tastaturkurzbefehl"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Shortcut"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Atajo de teclado"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Raccourci clavier"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pintasan papan ketik"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scorciatoia da tastiera"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "キーボードショートカット"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "키보드 단축키"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skrót klawiszowy"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Atalho de teclado"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Сполучення клавіш"
+          }
+        }
+      }
+    },
+    "Сочетание клавиш запускает команду из любого приложения": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يشغّل الاختصار الأمر من أي تطبيق"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der Kurzbefehl startet den Befehl aus jeder App"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The shortcut runs the command from any app"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El atajo ejecuta el comando desde cualquier app"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le raccourci lance la commande depuis n’importe quelle app"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pintasan menjalankan perintah dari aplikasi mana pun"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La scorciatoia avvia il comando da qualsiasi app"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ショートカットでどのアプリからでもコマンドを実行します"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "단축키로 어떤 앱에서든 명령을 실행합니다"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skrót uruchamia polecenie z dowolnej aplikacji"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O atalho executa o comando de qualquer app"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Сполучення клавіш запускає команду з будь-якого застосунку"
+          }
+        }
+      }
+    },
+    "Сочетание клавиш не задано": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لا يوجد اختصار"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kein Kurzbefehl festgelegt"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No shortcut set"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sin atajo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucun raccourci défini"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Belum ada pintasan"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nessuna scorciatoia"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ショートカット未設定"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "단축키 없음"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Brak skrótu"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nenhum atalho definido"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Сполучення клавіш не задано"
+          }
+        }
+      }
+    },
+    "Сочетание клавиш: %@": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الاختصار: %@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kurzbefehl: %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Shortcut: %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Atajo: %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Raccourci : %@"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pintasan: %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scorciatoia: %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ショートカット: %@"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "단축키: %@"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skrót: %@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Atalho: %@"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Сполучення клавіш: %@"
+          }
+        }
+      }
+    },
+    "Сочетание только с ⌘ заменит его во всех приложениях.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الاختصار مع ⌘ فقط يحل محله في كل التطبيقات."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ein Kurzbefehl nur mit ⌘ ersetzt ihn in allen Apps."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A shortcut with only ⌘ replaces it in every app."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un atajo solo con ⌘ lo sustituye en todas las apps."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un raccourci avec seulement ⌘ le remplace dans toutes les apps."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pintasan hanya dengan ⌘ menggantikannya di semua aplikasi."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Una scorciatoia con solo ⌘ la sostituisce in tutte le app."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⌘ だけのショートカットは、すべてのアプリのそのショートカットを置き換えます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "⌘만 쓰는 단축키는 모든 앱에서 그 단축키를 대체합니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skrót tylko z ⌘ zastąpi go we wszystkich aplikacjach."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Um atalho só com ⌘ o substitui em todos os apps."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Сполучення лише з ⌘ замінить його в усіх застосунках."
           }
         }
       }
@@ -91739,6 +92729,82 @@
         }
       }
     },
+    "Убрать сочетание": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إزالة الاختصار"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kurzbefehl entfernen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remove shortcut"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quitar atajo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Supprimer le raccourci"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hapus pintasan"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rimuovi scorciatoia"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ショートカットを削除"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "단축키 제거"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Usuń skrót"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remover atalho"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Прибрати сполучення"
+          }
+        }
+      }
+    },
     "Убрать этап": {
       "localizations": {
         "ar": {
@@ -93717,6 +94783,158 @@
         }
       }
     },
+    "Уже занято в AI Hub Bar: %@. У команды оно не сработает.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مستخدم بالفعل في AI Hub Bar: %@. لن يعمل مع الأمر."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schon in AI Hub Bar belegt: %@. Für den Befehl funktioniert er nicht."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Already used in AI Hub Bar: %@. It won't work for the command."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ya se usa en AI Hub Bar: %@. No funcionará para el comando."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Déjà utilisé dans AI Hub Bar : %@. Il ne fonctionnera pas pour la commande."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sudah dipakai di AI Hub Bar: %@. Tidak akan berfungsi untuk perintah ini."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Già usata in AI Hub Bar: %@. Per il comando non funzionerà."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar ですでに使用中: %@。このコマンドでは動作しません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar에서 이미 사용 중: %@. 이 명령에서는 작동하지 않습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Już zajęty w AI Hub Bar: %@. Dla polecenia nie zadziała."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Já usado no AI Hub Bar: %@. Não vai funcionar para o comando."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Уже зайнято в AI Hub Bar: %@. Для команди воно не спрацює."
+          }
+        }
+      }
+    },
+    "Уже у команды «%@» — сработает только у неё.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مستخدم بالفعل لـ «%@» — سيعمل معه فقط."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schon bei „%@“ – nur dieser Befehl erhält ihn."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Already set for «%@» — only that command gets it."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ya lo tiene «%@»: solo funcionará ese comando."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Déjà attribué à « %@ » — seule cette commande le reçoit."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sudah dipakai «%@» — hanya perintah itu yang mendapatkannya."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Già assegnata a «%@» — funziona solo per quel comando."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "すでに「%@」に設定済み。そのコマンドだけで動作します。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이미 «%@»에 지정됨 — 그 명령에서만 작동합니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Już ma go «%@» — zadziała tylko tam."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Já está em «%@» — só esse comando vai recebê-lo."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Уже в команди «%@» — спрацює лише в неї."
+          }
+        }
+      }
+    },
     "Узкая": {
       "localizations": {
         "ar": {
@@ -94030,10 +95248,16 @@
     },
     "Установить hook": {
       "localizations": {
-        "ar": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "تثبيت الخطاف"
+            "value": "Install hook"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Встановити hook"
           }
         },
         "de": {
@@ -94042,10 +95266,10 @@
             "value": "Hook installieren"
           }
         },
-        "en": {
+        "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Install hook"
+            "value": "Installer le hook"
           }
         },
         "es": {
@@ -94054,22 +95278,22 @@
             "value": "Instalar hook"
           }
         },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Installer le hook"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Pasang hook"
-          }
-        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Installa hook"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Instalar hook"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zainstaluj hook"
           }
         },
         "ja": {
@@ -94084,22 +95308,16 @@
             "value": "후크 설치"
           }
         },
-        "pl": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Zainstaluj hook"
+            "value": "تثبيت الخطاف"
           }
         },
-        "pt-BR": {
+        "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "Instalar hook"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Встановити hook"
+            "value": "Pasang hook"
           }
         }
       }
@@ -99829,6 +101047,82 @@
         }
       }
     },
+    "Это сочетание macOS (%@) — может не сработать.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يستخدم macOS هذا الاختصار (%@) — قد لا يعمل."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS nutzt diesen Kurzbefehl (%@) – er funktioniert vielleicht nicht."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS uses this shortcut (%@) — it may not work."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS usa este atajo (%@): puede que no funcione."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS utilise ce raccourci (%@) — il peut ne pas fonctionner."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS memakai pintasan ini (%@) — mungkin tidak berfungsi."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS usa questa scorciatoia (%@) — potrebbe non funzionare."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS が使うショートカットです（%@）。動作しない場合があります。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS가 사용하는 단축키입니다(%@). 작동하지 않을 수 있습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "macOS używa tego skrótu (%@) — może nie zadziałać."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O macOS usa este atalho (%@) — pode não funcionar."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Це сполучення macOS (%@) — може не спрацювати."
+          }
+        }
+      }
+    },
     "Язык в строке меню": {
       "localizations": {
         "ar": {
@@ -100287,25 +101581,13 @@
     },
     "авто: …": {
       "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "تلقائي: …"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "auto: …"
-          }
-        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "auto: …"
           }
         },
-        "es": {
+        "de": {
           "stringUnit": {
             "state": "translated",
             "value": "auto: …"
@@ -100317,16 +101599,34 @@
             "value": "auto : …"
           }
         },
-        "id": {
+        "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "otomatis: …"
+            "value": "auto: …"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "auto: …"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "auto: …"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "auto: …"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "авто: …"
           }
         },
         "ja": {
@@ -100341,22 +101641,16 @@
             "value": "자동: …"
           }
         },
-        "pl": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "auto: …"
+            "value": "تلقائي: …"
           }
         },
-        "pt-BR": {
+        "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "auto: …"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "авто: …"
+            "value": "otomatis: …"
           }
         }
       }
@@ -100813,6 +102107,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "найближче: %@"
+          }
+        }
+      }
+    },
+    "блокировка экрана": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "قفل الشاشة"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bildschirm sperren"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "lock screen"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "bloqueo de pantalla"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "verrouillage de l’écran"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "kunci layar"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "blocco schermo"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "画面ロック"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "화면 잠금"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "blokada ekranu"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "bloqueio de tela"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "блокування екрана"
           }
         }
       }
@@ -110193,6 +111563,158 @@
         }
       }
     },
+    "остров — отклонить запрос": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الجزيرة — رفض الطلب"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Insel – Anfrage ablehnen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "island — deny the request"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "isla: rechazar la solicitud"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "îlot — refuser la demande"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "pulau — tolak permintaan"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "isola — rifiuta la richiesta"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アイランド — 要求を拒否"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "아일랜드 — 요청 거부"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "wyspa — odrzuć prośbę"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ilha — negar o pedido"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "острів — відхилити запит"
+          }
+        }
+      }
+    },
+    "остров — разрешить запрос": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الجزيرة — السماح بالطلب"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Insel – Anfrage erlauben"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "island — allow the request"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "isla: permitir la solicitud"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "îlot — autoriser la demande"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "pulau — izinkan permintaan"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "isola — consenti la richiesta"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アイランド — 要求を許可"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "아일랜드 — 요청 허용"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "wyspa — zezwól na prośbę"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ilha — permitir o pedido"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "острів — дозволити запит"
+          }
+        }
+      }
+    },
     "от %lld %%": {
       "localizations": {
         "ar": {
@@ -110801,6 +112323,158 @@
         }
       }
     },
+    "переключение приложений": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "التبديل بين التطبيقات"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "App-Umschalter"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "app switcher"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "cambio de app"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "changement d’app"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "pengalih aplikasi"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "cambio app"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アプリの切り替え"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "앱 전환"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "przełączanie aplikacji"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "alternar apps"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "перемикання застосунків"
+          }
+        }
+      }
+    },
+    "поиск AI Hub Bar": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بحث AI Hub Bar"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suche in AI Hub Bar"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar search"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "búsqueda de AI Hub Bar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "recherche AI Hub Bar"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "pencarian AI Hub Bar"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ricerca di AI Hub Bar"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar の検索"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar 검색"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "wyszukiwanie AI Hub Bar"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "busca do AI Hub Bar"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "пошук AI Hub Bar"
+          }
+        }
+      }
+    },
     "правит": {
       "localizations": {
         "ar": {
@@ -111025,6 +112699,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "за поточного темпу вистачить до ~%@"
+          }
+        }
+      }
+    },
+    "принудительное завершение": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "فرض الإنهاء"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sofort beenden"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "force quit"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "forzar salida"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "forcer à quitter"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "paksa keluar"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "uscita forzata"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "強制終了"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "강제 종료"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "wymuszone zakończenie"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "forçar encerrar"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "примусове завершення"
           }
         }
       }
@@ -111861,6 +113611,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "працюють сесії: %lld"
+          }
+        }
+      }
+    },
+    "рабочие столы": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "سطوح المكتب"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schreibtische"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "desktops"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "escritorios"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "bureaux"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "desktop"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "scrivanie"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "デスクトップ"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "데스크탑"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "biurka"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "mesas"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "робочі столи"
           }
         }
       }
@@ -112929,6 +114755,82 @@
         }
       }
     },
+    "смена раскладки": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تبديل مصدر الإدخال"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eingabequelle wechseln"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "input source switch"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "cambio de fuente de entrada"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "changement de source de saisie"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ganti sumber input"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "cambio sorgente di input"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "入力ソースの切り替え"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "입력 소스 전환"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "zmiana źródła wprowadzania"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "troca de fonte de entrada"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "зміна розкладки"
+          }
+        }
+      }
+    },
     "смотрит в сети": {
       "localizations": {
         "ar": {
@@ -113001,6 +114903,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "дивиться в мережі"
+          }
+        }
+      }
+    },
+    "снимок экрана": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لقطة شاشة"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bildschirmfoto"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "screenshot"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "captura de pantalla"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "capture d’écran"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "jepretan layar"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "istantanea dello schermo"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "スクリーンショット"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "스크린샷"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "zrzut ekranu"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "captura de tela"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "знімок екрана"
           }
         }
       }

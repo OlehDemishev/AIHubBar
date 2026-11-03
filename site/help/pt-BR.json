@@ -523,7 +523,7 @@
               "name" : "Notas"
             },
             {
-              "detail" : "Seus botões: script em segundo plano ou no Terminal, atalho do «Atalhos» do macOS, link, arquivo, pasta ou app.",
+              "detail" : "Seus botões: script em segundo plano ou no Terminal, atalho do «Atalhos» do macOS, link, arquivo, pasta ou app. Cada um pode ter seu próprio atalho de teclado.",
               "name" : "Comandos rápidos"
             }
           ],

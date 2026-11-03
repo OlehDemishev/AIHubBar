@@ -523,7 +523,7 @@
               "name" : "Notes"
             },
             {
-              "detail" : "Your own buttons: a script in the background or in Terminal, a macOS «Shortcuts» shortcut, a link, file, folder or app.",
+              "detail" : "Your own buttons: a script in the background or in Terminal, a macOS «Shortcuts» shortcut, a link, file, folder or app. Each can have its own keyboard shortcut.",
               "name" : "Quick Commands"
             }
           ],
