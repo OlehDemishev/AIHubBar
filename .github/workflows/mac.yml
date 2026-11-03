@@ -45,7 +45,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Xcode
-        run: xcodebuild -version
+        # The newest Xcode on the machine: releases are built with Xcode 27, and Xcode 26's compiler crashes on this
+        # code (an IRGen bug in Swift 6.3).
+        run: |
+          ls -d /Applications/Xcode*.app
+          XCODE="$(ls -d /Applications/Xcode_*.app | sort -V | tail -1)"
+          sudo xcode-select -s "$XCODE"
+          xcodebuild -version
       - name: XcodeGen
         run: brew install xcodegen
       - name: Generate the project
