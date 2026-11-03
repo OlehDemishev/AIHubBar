@@ -292,19 +292,6 @@ struct MenuBarElement: Codable, Equatable, Hashable, Identifiable, Sendable {
 
         var isGauge: Bool { [.session, .week, .modelWeek, .cpu, .memory, .otherAI].contains(self) }
 
-        /// The module whose data the element shows; nil for the icon, the free space and the profile.
-        var module: ModuleKind? {
-            switch self {
-            case .session, .week, .modelWeek, .resetCountdown, .forecast, .otherAI: .limits
-            case .waiting, .running, .background, .queued: .sessions
-            case .projectsAlert: .projects
-            case .deadline: .upcoming
-            case .cpu, .memory: .resources
-            case .keepAwake: .keepAwake
-            case .icon, .disk, .mode: nil
-            }
-        }
-
         /// For the order chips in Settings.
         var shortTitle: String {
             switch self {

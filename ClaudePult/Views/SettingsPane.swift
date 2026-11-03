@@ -215,29 +215,3 @@ extension ModuleGroup {
         }
     }
 }
-
-extension ModuleKind {
-    /// Words the sidebar search finds the module's page by: names of the settings on it.
-    var keywords: [String] {
-        switch self {
-        case .limits:
-            [String(localized: "Уведомлять на, %"), String(localized: "Ставить фоновые задачи на паузу"),
-             String(localized: "Сводка за неделю в Telegram"), String(localized: "Продлевать вход Claude Code сам"),
-             String(localized: "Другие AI")]
-        case .sessions: ["Hooks", "Telegram", String(localized: "Ответы из Telegram"), String(localized: "Фоновые задачи"), String(localized: "Ночные задачи начинаются в")]
-        case .upcoming: [String(localized: "Напоминания"), String(localized: "Календарь")]
-        case .projects: ["Pull requests", "CI"]
-        case .layout:
-            [String(localized: "Исправлять раскладку сам"), String(localized: "Двойной Shift — последнее слово"),
-             String(localized: "⌥⇧ — выделенный текст"), String(localized: "Язык в строке меню")]
-        case .notch: [String(localized: "Скрыть остров"), String(localized: "Слева от чёлки"), String(localized: "Справа от чёлки")]
-        case .keepAwake: [String(localized: "Правила «Не спать»"), String(localized: "С закрытой крышкой")]
-        case .resources: [String(localized: "Уведомления о ресурсах")]
-        case .clipboard: [String(localized: "Хранить последних")]
-        case .notes: [String(localized: "Папка")]
-        case .quickCommands: [String(localized: "Команды")]
-        case .toggles: [String(localized: "Какие переключатели показывать")]
-        case .reports: ["_daily-report"]
-        }
-    }
-}

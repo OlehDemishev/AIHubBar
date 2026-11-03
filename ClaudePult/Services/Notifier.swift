@@ -276,23 +276,6 @@ enum NotificationKind: String, CaseIterable, Identifiable, Sendable {
 
     var defaultFrequency: NotificationFrequency { self == .resources ? .hourly : .always }
 
-    /// The notifications a module's page sets the frequency of; command results show on both command modules.
-    static func of(_ module: ModuleKind) -> [NotificationKind] {
-        allCases.filter { $0.module == module || ($0 == .commands && [.reports, .quickCommands].contains(module)) }
-    }
-
-    /// The module these notifications belong to: switched off, it sends none (SPEC-settings §1).
-    var module: ModuleKind? {
-        switch self {
-        case .waiting, .context, .background: .sessions
-        case .limits: .limits
-        case .pullRequests: .projects
-        case .calendar: .upcoming
-        case .resources: .resources
-        case .commands: nil
-        }
-    }
-
     /// Every notification id starts with its kind's prefix (see the `Notifier.post` calls).
     init?(id: String) {
         let prefixes: [(String, NotificationKind)] = [

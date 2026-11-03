@@ -6,98 +6,7 @@ import Foundation
 enum ModuleKind: String, Codable, CaseIterable, Sendable {
     case limits, sessions, upcoming, projects, reports
     case resources, keepAwake, quickCommands, toggles, clipboard, notes, notch, layout
-
-    var isBuiltIn: Bool { ![.resources, .keepAwake, .quickCommands, .toggles, .clipboard, .notes, .notch, .layout].contains(self) }
-
-    /// Still in beta testing: offered and working only with Settings → General → «Бета-версии» on (docs/RELEASE.md).
-    var isBeta: Bool { self == .layout }
-
-    /// «Остров у чёлки» lives at the top of the screen and «Раскладка» in the keyboard, not in the panel: no profile
-    /// shows them (SPEC-notch §6, SPEC-layout §4).
-    var isPanelBlock: Bool { ![.notch, .layout].contains(self) }
-
-    var title: String {
-        switch self {
-        case .limits: String(localized: "Лимиты AI")
-        case .sessions: String(localized: "Сессии агентов")
-        case .upcoming: String(localized: "Ближайшее")
-        case .projects: String(localized: "Проекты")
-        case .reports: String(localized: "Отчёты _daily-report")
-        case .resources: String(localized: "Ресурсы Mac")
-        case .keepAwake: String(localized: "Не спать")
-        case .quickCommands: String(localized: "Быстрые команды")
-        case .toggles: String(localized: "Быстрые переключатели")
-        case .clipboard: String(localized: "История буфера")
-        case .notes: String(localized: "Заметки")
-        case .notch: String(localized: "Остров у чёлки")
-        case .layout: String(localized: "Раскладка")
-        }
-    }
-
-    /// What the module does, for Settings → «Модули».
-    var summary: String {
-        switch self {
-        case .limits: String(localized: "Сессия и неделя подписки Claude, прогноз, расход по проектам и по API.")
-        case .sessions: String(localized: "Сессии Claude Code на этом Маке и фоновые задачи. Нужны hooks — «Сервисы AI» → Claude Code.")
-        case .upcoming: String(localized: "Дедлайны, публикации и контент-план на 7 дней вперёд — из профилей с календарём.")
-        case .projects: String(localized: "Проекты профиля: git-репозитории или папки, карточки, команды. Настраиваются в профиле.")
-        case .reports: String(localized: "Команды _daily-report: отчёт, быстрая сводка, очистка сборок.")
-        case .resources: String(localized: "Процессор, память, диск, сеть, батарея и самые прожорливые приложения; уведомления о нагрузке, памяти, месте и заряде.")
-        case .keepAwake: String(localized: "Mac не засыпает, пока работает Claude, на время, при подключённом питании или мониторе, пока открыты выбранные приложения.")
-        case .quickCommands: String(localized: "Свои кнопки: скрипт в фоне или в Терминале, ярлык из «Команд» macOS, ссылка, файл, папка или приложение.")
-        case .toggles: String(localized: "Тёмная тема, значки на рабочем столе, блокировка и выключение экрана, извлечение дисков, корзина — в один клик.")
-        case .clipboard: String(localized: "Последние копирования: поиск, закрепление, снова в буфер одним кликом. Пароли из менеджеров паролей не запоминаются.")
-        case .notes: String(localized: "Заметки в Markdown прямо в панели: вкладки, обычные файлы .md в папке, которую откроет любой редактор.")
-        case .notch: String(localized: "Чёрный остров вокруг чёлки MacBook: лимит и сессии по бокам от неё, по наведению — карточка с лимитами и тем, что делает Claude.")
-        case .layout: String(localized: "Слово, набранное не в той раскладке («ghbdtn»), исправляется само («привет»), и раскладка переключается. Двойной Shift — последнее слово, ⌥⇧ — выделенный текст. Язык — в строке меню.")
-        }
-    }
-
-    /// The Settings sidebar section the module sits in (SPEC-settings §2).
-    var group: ModuleGroup {
-        switch self {
-        case .limits, .sessions: .ai
-        case .upcoming, .projects, .reports, .quickCommands, .notes, .clipboard: .work
-        case .resources, .keepAwake, .toggles, .layout, .notch: .mac
-        }
-    }
-
-    /// One line for the module's tile in Settings → «Модули».
-    var tagline: String {
-        switch self {
-        case .limits: String(localized: "Сессия, неделя, прогноз, другие AI")
-        case .sessions: String(localized: "Claude Code, фоновые задачи, очередь")
-        case .upcoming: String(localized: "Дедлайны и публикации на 7 дней")
-        case .projects: String(localized: "Репозитории и папки, PR, команды")
-        case .reports: String(localized: "Отчёт, сводка, очистка сборок")
-        case .resources: String(localized: "Процессор, память, диск, батарея")
-        case .keepAwake: String(localized: "Mac не засыпает по правилам")
-        case .quickCommands: String(localized: "Скрипты, ярлыки, ссылки, файлы")
-        case .toggles: String(localized: "Тема, экран, диски, корзина")
-        case .clipboard: String(localized: "Последние копирования, поиск")
-        case .notes: String(localized: "Markdown прямо в панели")
-        case .notch: String(localized: "Лимит и сессии у чёлки")
-        case .layout: String(localized: "Исправляет текст не в той раскладке")
-        }
-    }
-
-    var symbol: String {
-        switch self {
-        case .limits: "gauge.with.dots.needle.33percent"
-        case .sessions: "bubble.left.and.text.bubble.right"
-        case .upcoming: "calendar"
-        case .projects: "folder"
-        case .reports: "doc.text.magnifyingglass"
-        case .resources: "cpu"
-        case .keepAwake: "cup.and.saucer"
-        case .quickCommands: "bolt.square"
-        case .toggles: "switch.2"
-        case .clipboard: "doc.on.clipboard"
-        case .notes: "note.text"
-        case .notch: "laptopcomputer"
-        case .layout: "keyboard"
-        }
-    }
+    // What each module is — title, symbol, section, places… — lives in its file in `Modules/` (`definition`).
 }
 
 /// The sections of modules in the Settings sidebar and the «Модули» tiles (SPEC-settings §2).
@@ -109,15 +18,6 @@ enum ModuleGroup: String, CaseIterable, Sendable {
         case .ai: "AI"
         case .work: String(localized: "Работа")
         case .mac: "Mac"
-        }
-    }
-
-    /// Modules in sidebar order.
-    var modules: [ModuleKind] {
-        switch self {
-        case .ai: [.limits, .sessions]
-        case .work: [.upcoming, .projects, .reports, .quickCommands, .notes, .clipboard]
-        case .mac: [.resources, .keepAwake, .toggles, .layout, .notch]
         }
     }
 }

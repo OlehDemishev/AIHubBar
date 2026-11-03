@@ -5,7 +5,7 @@
 **Updated:** 2026-11-03
 
 **Now:**
-- nothing in progress; refactoring stage 0 merged (#209, with the audit #208); next — stage 1, the module registry (docs/SPEC-refactor.md §9)
+- refactoring stage 1 (module registry) on branch `refactor/stage1-module-registry`, PR open; next — stage 2, one source of truth
 
 **Next:**
 - Oleh tries «Раскладка» in his own apps; next beta with fixes: `scripts/release.sh 0.5.0-beta.1 --publish`
@@ -13,7 +13,7 @@
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/SPEC-windows.md §9, stage 2–3 leftovers)
 
 **Needs Oleh:**
-- say when to start stage 1 (module registry)
+- review and merge the stage 1 PR
 - look at the new help: panel → «?» and https://olehdemishev.github.io/AIHubBar/help.html
 - look at the new Settings and say what to change next
 - MacBook Air: update to 0.4.0 through Sparkle (Settings → General → Updates) and check the island at the real notch
@@ -21,6 +21,12 @@
 - the beta channel exists now (release `beta`, points to 0.4.0): say when the next beta goes out
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-03 — refactoring stage 1: module registry (branch `refactor/stage1-module-registry`)
+
+Done: `ClaudePult/Modules/` — one file per module (`LimitsModule.swift` … `NotchModule.swift`) holding its `ModuleDefinition` (section, symbol, title, summary, tagline, flags, search words, places, menu bar elements, notifications and the module's own switches for the island, Telegram and alerts, how a built-in module is brought into a profile), its Settings sections (moved out of SettingsView.swift: 1363 → 749 lines) and its «Панель сейчас» line (`ModuleUI`). `ModuleKind.title/summary/…`, `ModuleGroup.modules`, `MenuBarElement.Kind.module`, `NotificationKind.module/of`, `ModulePlace.of`, `MenuBarEdit.primaryKinds`, `ModuleSwitch.enableAction/unavailableReason` and the module page's island/Telegram/alerts bindings now read the registry instead of switching over kinds. Texts moved word for word by a script: the string catalog didn't change.
+Checked: `scripts/check.sh` green (all Mac tests, catalog: no new or lost keys); new `ModuleRegistryTests` (every module defined once, sidebar order as before, every place on a module's page has something behind it, menu bar elements and notifications have one owner at most). Installed build: «Сессии агентов», «Ресурсы Mac» and «Панель» look as before.
+Left: the panel cards (`MenuPanelView`), `MenuBarData.without`, the assistant's module logic and the services' `isActive` still switch over kinds — stages 2 and 5. «Сессии агентов»'s summary still says hooks are in «Сервисы AI» → Claude Code (they moved to its own page): fix with its translations.
 
 ## 2026-11-03 — refactoring stage 0: safety net and audit bugs (branch `refactor/stage0-safety`)
 
