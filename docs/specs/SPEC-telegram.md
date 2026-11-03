@@ -55,6 +55,14 @@ Code: `AIHubBar/Models/TelegramBot.swift` (updates, callback data, screens — p
   either inline buttons or this menu, so 🏠 opened from the menu carries the menu (and sets it again) instead of its
   inline buttons; while a report or cleanup still edits a screen, nothing is deleted. Later stages add their sections
   to it (🤖 Сессии, 🚀 Задача, ⏳ Лимиты, ⚙️ Настройки).
+- **The menu is the person's own** (Oleh, 2026-11-03): Settings → Modules → Telegram → «Меню в боте» — which buttons
+  (the screens, and any quick command from the library as «▶️ <name>»), their order (↑ ↓), 2 or 3 in a row; a profile
+  can have its own menu («Своё меню у этого профиля»), and when the profile changes to one with a different menu, the
+  Mac sends 🏠 with it. The same switches are in the bot: ❓ → ⚙️ «Настроить меню» (order stays a Settings thing).
+  🏠 is always there; a deleted command drops out; equal titles get « 2». Stored in `TelegramBotSettings.menu` /
+  `profileMenus` (`BotMenuConfig`: item ids `screen:<name>` / `cmd:<id>`, columns). A quick command from the menu runs
+  on the Mac (`QuickToolsController.runForBot`) and its result comes to the chat; «Спрашивать перед запуском» asks there
+  first (`run:<id>`). Over the shared bot commands run only with «Быстрые команды через общий бот» on, and then always ask.
 - `/menu` (and `/start`) sends 🏠 with the menu at the bottom. **Each section is one message edited in place**
   (`editMessageText`): a button changes the message it sits on, it never adds a new one. Results that are not a screen
   (a report, the cleanup output) come as new messages.
@@ -88,6 +96,8 @@ At most 64 bytes, ASCII, `<verb>[:<arg>…]`. Unknown or malformed data re-rende
 | `cln:check`, `cln:ask`, `cln:run` | cleanup: dry run; the confirmation screen; the confirmed run |
 | `help:all` | send `help.txt` |
 | `allow:<id>`, `deny:<id>` | answer a permission request (the approvals bot's format, kept) |
+| `nav:menu`, `mt:<item id>`, `mc:2`/`mc:3`, `md` | ⚙️ «Меню»: show, switch a button, buttons in a row, «Готово» (sends 🏠 with the menu) |
+| `run:<command id>` | run a quick command after «Запустить?» |
 
 Dangerous actions are two steps: the button opens a confirmation (`cln:ask` → «Удалить сборки и сбросить
 симуляторы?» ✅ Да / Отмена), and only the confirmation's own data (`cln:run`) acts.
