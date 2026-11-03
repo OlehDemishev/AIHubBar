@@ -179,7 +179,7 @@ struct CompareView: View {
                                 }
                             }
                             ScrollView {
-                                Text((try? String(contentsOfFile: file.path, encoding: .utf8)) ?? String(localized: "Ещё выполняется…"))
+                                Text(ChangedFile.text(file.path) ?? String(localized: "Ещё выполняется…"))
                                     .textSelection(.enabled)
                                     .frame(maxWidth: .infinity, alignment: .leading)
                             }
@@ -196,5 +196,20 @@ struct CompareView: View {
                 .foregroundStyle(.secondary)
                 .padding(40)
         }
+    }
+}
+
+/// A file's text, read again only when it changed: «Сравнение» looks every 2 s while the services write
+/// (SPEC-refactor §2.8).
+@MainActor
+enum ChangedFile {
+    private static var cache: [String: (modified: Date, text: String)] = [:]
+
+    static func text(_ path: String) -> String? {
+        guard let modified = (try? FileManager.default.attributesOfItem(atPath: path))?[.modificationDate] as? Date else { return nil }
+        if let cached = cache[path], cached.modified == modified { return cached.text }
+        guard let text = try? String(contentsOfFile: path, encoding: .utf8) else { return nil }
+        cache[path] = (modified, text)
+        return text
     }
 }

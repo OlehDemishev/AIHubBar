@@ -423,6 +423,8 @@ private struct TextSizePreview: View {
 struct ClaudeSettings: View {
     @Environment(AppSettings.self) private var settings
     @Environment(\.openWindow) private var openWindow
+    /// Where `claude` was found: looked up once, not on every keystroke in the path field (SPEC-refactor §2.8).
+    @State private var detected: String??
 
     var body: some View {
         @Bindable var settings = settings
@@ -430,7 +432,7 @@ struct ClaudeSettings: View {
             Section {
                 IconRow("Путь к claude", systemImage: "folder") {
                     TextField("", text: $settings.claudePath,
-                              prompt: Text(ClaudeLocator.detect().map { String(localized: "авто: \($0)") } ?? String(localized: "авто: не найден")))
+                              prompt: Text(detectedText))
                         .textFieldStyle(.roundedBorder)
                         .frame(width: 280)
                 }
@@ -456,12 +458,23 @@ struct ClaudeSettings: View {
                     .buttonStyle(.link)
             }
         }
+        .task { if detected == nil { detected = ClaudeLocator.detect() } }
+    }
+
+    private var detectedText: String {
+        switch detected {
+        case .none: String(localized: "авто: …")
+        case .some(.none): String(localized: "авто: не найден")
+        case let .some(.some(path)): String(localized: "авто: \(path)")
+        }
     }
 }
 
 /// «Сессии агентов» → «Фоновые задачи»: `claude -p` runs without a window, their time limit, night start and results.
 struct BackgroundRunsSection: View {
     @Environment(AppSettings.self) private var settings
+    /// Whether a Telegram bot is set up — read from disk when the page opens or the folder changes, not on every redraw.
+    @State private var hasTelegram = true
 
     var body: some View {
         @Bindable var settings = settings
@@ -473,8 +486,7 @@ struct BackgroundRunsSection: View {
             Picker("Ночные задачи начинаются в", systemImage: "moon.stars", selection: $settings.nightStartHour) {
                 ForEach(NightQueue.hours, id: \.self) { Text(verbatim: String(format: "%02d:00", $0)).tag($0) }
             }
-            if settings.telegramForBackground,
-               Telegram.credentials(dailyReportDirectory: settings.dailyReportDirectory) == nil {
+            if settings.telegramForBackground, !hasTelegram {
                 Text("Telegram не настроен (Настройки → Основные → Telegram) — будет только уведомление macOS.")
                     .font(.callout)
                     .foregroundStyle(.orange)
@@ -483,6 +495,9 @@ struct BackgroundRunsSection: View {
             Text("Фоновые задачи")
         } footer: {
             Footnote(text: String(localized: "«Фон» запускает claude -p без окна: разрешены чтение и правка файлов проекта, проверки и сборки, git без push в main и без force, gh pr create/view/list; остальное отклоняется. Итог — уведомлением и в Telegram."))
+        }
+        .task(id: "\(settings.dailyReportDirectory)|\(settings.telegramForBackground)") {
+            hasTelegram = Telegram.credentials(dailyReportDirectory: settings.dailyReportDirectory) != nil
         }
     }
 }

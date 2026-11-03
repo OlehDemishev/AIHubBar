@@ -341,7 +341,7 @@ private struct SessionsScene: View {
                     .frame(width: 16)
                 Text(verbatim: name).font(.system(size: 12, weight: .semibold))
                 Spacer()
-                Text(verbatim: state == .done ? "✓" : "12 min").font(.system(size: 10.5)).foregroundStyle(.secondary)
+                Text(state == .done ? "✓" : String(localized: "\(12) мин")).font(.system(size: 10.5)).foregroundStyle(.secondary)
             }
             if asks {
                 HStack(spacing: 6) {
@@ -368,7 +368,8 @@ private struct SessionsScene: View {
 
     private func color(_ state: State) -> Color {
         switch state {
-        case .running: .green
+        // The panel's own colours (SessionsView): running is blue there.
+        case .running: .blue
         case .waiting: .orange
         case .done: .secondary
         }
