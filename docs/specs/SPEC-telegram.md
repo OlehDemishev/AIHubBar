@@ -27,12 +27,12 @@ Code: `AIHubBar/Models/TelegramBot.swift` (updates, callback data, screens — p
 - **Only that chat is answered.** Updates from any other chat, groups and channels are dropped without a reply (a
   stranger who finds the bot learns nothing); `from.id` must equal the chat for a private chat.
 - **«Этот Мак отвечает боту»** (`telegramBot.answersHere`): by default on for a desktop Mac and off for a laptop (one
-  with an internal battery) — the Mac mini answers, the MacBook Air doesn't (Oleh, §8). Only a Mac with it on reads
+  with an internal battery) — the Mac mini answers, the MacBook Air doesn't (Oleh, §9). Only a Mac with it on reads
   updates; the other one still *sends* notifications (sending does not conflict). If Telegram answers
   409 («another getUpdates»), the page says «Этого бота уже читает другой Мак или программа» and the loop waits 60 s
   between tries; nothing breaks. The setting is per Mac: it is not part of the settings export.
 - **Migration**, never automatic (an old reader might still be running):
-  - Oleh took the **`_daily-report` bot** (§8) with «Взять бота из _daily-report», so `report.py` (the morning
+  - Oleh took the **`_daily-report` bot** (§9) with «Взять бота из _daily-report», so `report.py` (the morning
     report, «Отчёт сейчас», the bot's `/report`) sends into the same chat. With another bot, `report.py` keeps
     sending through the `config.json` one until its `telegram.bot_token` is replaced by hand
     (`report.py --setup-telegram` keeps a token that is already there); the report screen then says so.
@@ -43,7 +43,7 @@ Code: `AIHubBar/Models/TelegramBot.swift` (updates, callback data, screens — p
   - until migrated, the old ones keep working exactly as today: `Telegram.credentials` falls back to
     `config.json`, and `TelegramApprovals` keeps its own bot. If both tokens are the same bot, `TelegramApprovals`
     stops its own `getUpdates` and the module's loop hands it the ✅/❌ presses.
-- `bot.py` is retired (§8): its commands live here; Oleh deletes `bot.py` and `install-bot.sh` himself.
+- `bot.py` is retired (§9): its commands live here; Oleh deletes `bot.py` and `install-bot.sh` himself.
 
 ## 2. Menu
 
@@ -119,17 +119,68 @@ Dangerous actions are two steps: the button opens a confirmation (`cln:ask` → 
 - Notifications keep going out while the module is off (the modules' «Telegram» chips decide); the module adds the
   menu and the answers.
 
-## 7. Stages (one PR each)
+## 7. The shared bot (Cloudflare Worker)
+
+Decided by Oleh 2026-11-03: making a bot at @BotFather scares a newcomer away, so AI Hub Bar gets **one shared bot** run
+by a small relay on Cloudflare Workers; «Свой бот» (§1) stays for those who want nothing in between. Code:
+`relay/telegram/` (the Worker, plain JavaScript, no build step), `AIHubBar/Services/TelegramRelay.swift` (the Mac side).
+
+**Why a relay.** All of a bot's updates go to whoever holds its token. The token can't ship inside the app (anyone could
+pull it out and read every user's chat or press «✅» on their Macs), so it lives only in the Worker's secrets, and each
+Mac talks to the Worker instead of Telegram.
+
+**How it works.**
+- Telegram → Worker: a webhook (`setWebhook` with a secret header). The Worker hands the update to one Durable Object
+  (`Hub`, SQLite-backed, free plan), which knows chat ↔ Macs.
+- Mac ↔ Worker: one WebSocket per Mac (`GET /v1/connect`, `Authorization: Bearer <device key>`), kept by the Durable
+  Object with the Hibernation API — idle sockets cost nothing, an update arrives at once. Over it: updates to the Mac,
+  and the Mac's calls (`sendMessage`, `editMessageText`, `deleteMessage`, `answerCallbackQuery`) with their replies.
+  Updates for a Mac that is offline (asleep) wait in the Durable Object for 24 hours; the Mac's 30-minute rule (§4)
+  still drops old ones.
+- **Register:** the Mac posts `POST /v1/devices` once and keeps the device key in the Keychain (`telegram-relay`); the
+  Worker stores only its SHA-256.
+- **Pairing in one tap:** «Подключить Telegram» asks the Worker (over the socket) for a code; the app opens
+  `https://t.me/<bot>?start=<code>`; «Start» binds that chat to this Mac. The code lives 10 minutes.
+- **Several Macs:** a chat can have several Macs; one **answers** (gets the updates), all can **send** (notifications).
+  The last paired one answers; «Этот Мак отвечает боту» on another one takes over, and `/macs` in the bot (answered by
+  the Worker itself) lists them with buttons to switch. This replaces the 409 dance of §1.
+- **What the Mac may do:** only the four methods above, always into its own chat (the Worker sets `chat_id`), at most
+  30 calls a minute. Commands, the bot's name and description are set once by the Worker (`POST /admin/setup`).
+- **Strangers:** `/start` without a code gets a short «install AI Hub Bar» answer with the site link; anything else
+  from an unpaired chat is ignored.
+
+**Privacy and safety.**
+- The Worker sees messages in transit (Telegram bots are never end-to-end) but stores none: only chat id ↔ device ids,
+  pairing codes, and the queue of undelivered updates (deleted on delivery or after 24 h). It logs counts and errors,
+  never text. The site gets a privacy note.
+- A compromised Worker could drive every paired Mac. So over the shared bot the Mac allows reports, screens and
+  cleanup (asks first); permission answers (stage 2) and tasks (stage 3) need a switch on the Mac, off by default.
+- «Отключить» on the Mac unpairs it (the Worker forgets the device).
+
+**On the Mac.** The module page gets «Как подключаться»: **«Общий бот (быстро)»** — the default when no own token is
+set — with «Подключить Telegram», the bot's name, the paired chat and «Отключить»; or **«Свой бот (приватно)»** — §1 as
+it is. The rest of the module (screens, menu, reports) works the same over either. Notifications (`Telegram.notify`,
+the weekly summary) go through the shared bot when it is paired.
+
+**Cost.** Workers Free: 100 000 requests a day; a webhook update and each WebSocket message batch count, idle sockets
+don't. Enough for hundreds of users; beyond that Workers Paid is $5 a month.
+
+**Oleh does once** (`relay/telegram/README.md`): make the bot at @BotFather (its name is his call), `npx wrangler
+login`, `npx wrangler secret put BOT_TOKEN` / `WEBHOOK_SECRET` / `ADMIN_SECRET`, `npx wrangler deploy`, then
+`POST /admin/setup`. The Worker's address goes into the app (`TelegramRelay.defaultURL`) in a one-line follow-up.
+
+## 8. Stages (one PR each)
 
 1. **Connection, 🏠, reports, cleanup.** Token, chat binding, «Этот Мак отвечает боту», migration from `_daily-report`,
    the poll loop with 409 and stale handling, `setMyCommands`, 🏠 / 📊 / 🧹 / help, `/report`, `/status`, `/clean`.
+1b. **The shared bot** (§7): the Worker, pairing, «Общий бот / Свой бот», notifications through it.
 2. **Sessions and requests + notification settings.** 🤖 screen, requests through this bot with «Подробнее», moving the
    approvals bot here, which events come.
 3. **Tasks and run control.** 🚀: project → agent → text → background (`LaunchController`), stop, log tail, PR link.
 4. **Settings in the bot, limits, Mac.** ⚙️ (events, quiet hours, mute 1 h, morning report time), ⏳ every service
    with forecast and 80/90 % alerts, 🧹 «Не спать».
 
-## 8. Oleh's calls
+## 9. Oleh's calls
 
 Asked and answered 2026-11-03:
 
@@ -142,3 +193,4 @@ Asked and answered 2026-11-03:
   _daily-report», so reports, the menu and notifications share one chat. The approvals bot keeps working apart until
   stage 2 moves requests here.
 - **A menu always at the bottom** instead of typing `/` (asked 2026-11-03): §2, «The menu at the bottom».
+- **A shared bot for everyone, through Cloudflare Workers** (2026-11-03): §7; «Свой бот» stays as the private option.

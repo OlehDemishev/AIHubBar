@@ -150,7 +150,7 @@ final class WeeklySummarySender {
     /// Also «Отправить сейчас» in Settings.
     @discardableResult
     func send(now: Date = .now) async -> Bool {
-        guard let credentials = Telegram.credentials(dailyReportDirectory: settings.dailyReportDirectory) else { return false }
+        guard Telegram.isSetUp(settings) else { return false }
         let weekAgo = now.addingTimeInterval(-7 * 86_400)
         let hits = LimitHits.all().filter { $0.date >= weekAgo }
         let input = WeeklySummary.Input(
@@ -159,7 +159,7 @@ final class WeeklySummarySender {
             sessionHits: hits.filter { $0.window == "five_hour" }.count, weekHits: hits.filter { $0.window == "seven_day" }.count,
             runs: runs.runs.filter { $0.startedAt >= weekAgo && $0.state.isFinished }, others: hub.usages, now: now
         )
-        let ok = await Telegram.send(html: WeeklySummary.html(input), with: credentials)
+        let ok = await Telegram.deliver(html: WeeklySummary.html(input), settings: settings)
         AppLog.info("Weekly summary sent: \(ok)")
         return ok
     }

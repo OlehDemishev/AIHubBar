@@ -1,6 +1,6 @@
 #!/bin/bash
-# Everything to run before a push (docs/specs/SPEC-refactor.md §7): the Mac unit tests, the string catalog, and the
-# desktop texts check. CI runs the same (.github/workflows/mac.yml).
+# Everything to run before a push (docs/specs/SPEC-refactor.md §7): the Mac unit tests, the string catalog, the
+# desktop texts check and the Telegram relay's tests. CI runs the same (.github/workflows/mac.yml).
 #
 # Usage: scripts/check.sh
 set -euo pipefail
@@ -11,6 +11,9 @@ cd "$ROOT"
 echo "==> Strings"
 python3 scripts/strings-check.py
 python3 desktop/scripts/strings.py --check
+
+echo "==> Relay tests"
+if command -v node >/dev/null; then (cd relay/telegram && node --test); else echo "node not found: relay tests skipped"; fi
 
 echo "==> Mac tests"
 xcodegen generate --quiet

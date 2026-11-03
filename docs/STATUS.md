@@ -5,7 +5,8 @@
 **Updated:** 2026-11-03
 
 **Now:**
-- nothing in progress; merged 2026-11-03: #241 Codex session states, #240 quick command shortcuts, #238 «Быстрый запрос», #236 content spec, #242 «Telegram» stage 1, #244 Telegram menu at the bottom of the chat
+- `feat/telegram-shared-bot`: shared Telegram bot through a Cloudflare Worker (spec §7, relay + Mac side) — PR open, the Worker not deployed yet
+- merged 2026-11-03: #241 Codex session states, #240 quick command shortcuts, #238 «Быстрый запрос», #236 content spec, #242 «Telegram» stage 1, #244 Telegram menu at the bottom of the chat
 
 **Next:**
 - next beta or 0.5.1 carries stage 8 (#230–#232) and #236–#244: 0.5.1-beta.1 was built from 27c5e2d, before them
@@ -14,6 +15,7 @@
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/specs/SPEC-windows.md §9, stage 2–3 leftovers)
 
 **Needs Oleh:**
+- shared Telegram bot: create the bot at @BotFather (pick its name), then deploy the Worker by `relay/telegram/README.md` (Cloudflare login, three secrets, `npm run deploy`, `/admin/setup`) and send the workers.dev address — it goes into `TelegramRelay.defaultURL`
 - Telegram: send /menu once — the menu appears at the bottom (the installed build has it); then try 📊 and 🧹. Delete `_daily-report/bot.py` and `install-bot.sh`
 - «Быстрый запрос»: Settings → Modules → «Быстрый запрос» on, then ⌃⌥P from Terminal or Xcode — send one task to the background and one to Codex
 - Settings → Codex → «Установить hook», then once in `codex` type `/hooks` and trust AI Hub Bar's hooks (Codex skips untrusted hooks); then check a Codex row in «Сессии» goes «ждёт» on an approval prompt
@@ -25,6 +27,12 @@
 - «Раскладка»: tried live in TextEdit, Safari, Chrome (⌥⇧ too); Telegram and Notes are yours to try (not typed into by the agent)
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-03 — Telegram: the shared bot through a Cloudflare Worker (branch `feat/telegram-shared-bot`)
+
+Done: Oleh decided a newcomer shouldn't have to make a bot at @BotFather. Spec §7: one shared bot run by a relay on Cloudflare Workers, «Свой бот» stays as the private option; stage 1b. `relay/telegram/` (plain JavaScript, no build): `src/hub.js` (register, key hash only, pairing codes 10 min, chat ↔ Macs, the answering Mac, `/macs` switch, queue for an offline Mac 24 h with one «💤 asleep» notice per 10 min, a Mac's calls limited to five methods into its own chat and 30 a minute, strangers get a welcome), `src/index.js` (Worker + one SQLite Durable Object with WebSocket Hibernation, webhook secret, admin setup of webhook / commands / descriptions in en and ru), `README.md` with the deploy steps, `.github/workflows/relay.yml`. Mac: `TelegramRelay` (register once, key in the Keychain `telegram-relay`, one WebSocket with pings and reconnect, calls and pairing over it), `TelegramBotController` talks through one `api()` to either bot, «Как подключаться» on the module page, «Подключить Telegram» / «Отключить», greeting after pairing; `Telegram.notify` and the weekly summary go through the shared bot while paired. Also fixed: the bottom menu (#244) was never sent — a message with the menu has no inline buttons, and `send` skipped `reply_markup` then. 15 new strings in 12 languages.
+Checked: scripts/check.sh green (now also runs the relay's tests); 10 relay tests under Node, 4 new Swift tests (`TelegramRelayTests`); `wrangler deploy --dry-run` builds; end-to-end against `wrangler dev` with fake secrets: register, unknown key refused, ping/pong, pairing by code, update routed, forbidden method 403, update queued while offline and delivered on reconnect.
+Left: Oleh deploys the Worker and creates the shared bot; then its address goes into `TelegramRelay.defaultURL` (until then the module shows only «Свой бот»). Permission answers and tasks over the shared bot need a Mac-side switch (stages 2–3). A privacy note on the site.
 
 ## 2026-11-03 — Telegram: the menu at the bottom of the chat (branch `feat/telegram-menu`)
 

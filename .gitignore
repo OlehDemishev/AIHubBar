@@ -20,3 +20,8 @@ desktop/target/
 desktop/node_modules/
 desktop/app/gen/
 desktop/app/binaries/
+
+# relay/ (Cloudflare Workers)
+relay/**/.wrangler/
+relay/**/node_modules/
+relay/**/.dev.vars
