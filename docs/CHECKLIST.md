@@ -2,6 +2,8 @@
 
 Every scenario of docs/specs/SPEC.md with how it was checked. «Auto» = unit tests; «Live» = run on this Mac by Claude (command line, panel snapshot, screenshots of the menu bar and Terminal); «Oleh» = needs a person, because automation can neither click inside ClaudePult's windows nor see notifications and Telegram.
 
+Rows describe the app as it was on the day of the check. Names changed since: «Режимы» → «Профили» (2026-10-30), ClaudePult → AI Hub Bar (2026-10-30), Settings rebuilt around modules (2026-11-02, docs/specs/SPEC-settings.md); a profile's modules and panel order are now the profile's own, so rows naming a fixed list are history.
+
 Panel snapshots: `defaults write com.demishev.claudepult DebugPanelSnapshot -bool YES` saves `~/Library/Logs/ClaudePult/panel.png` (and `help.png`, `cleanup.png`) each time the window shows; turn off with `defaults delete com.demishev.claudepult DebugPanelSnapshot`.
 
 ## Menu bar and panel (§2.1)

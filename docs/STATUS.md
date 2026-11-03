@@ -5,7 +5,7 @@
 **Updated:** 2026-11-03
 
 **Now:**
-- working through Next on Oleh's «всё по плану, до 12 не спрашивай» (2026-11-03 04:27); island drop fix on `fix/notch-drop-early`
+- working through Next on Oleh's «всё по плану, до 12 не спрашивай» (2026-11-03 04:27); docs refresh on `docs/refresh-after-refactor`
 
 **Next:**
 - Oleh tries «Раскладка» in his own apps; next beta with fixes: `scripts/release.sh 0.5.0-beta.1 --publish`
@@ -20,6 +20,12 @@
 - the beta channel exists now (release `beta`, points to 0.4.0): say when the next beta goes out
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-03 — Docs refreshed after the refactoring (branch `docs/refresh-after-refactor`)
+
+Done: the stale statements the audit listed and a few more. `docs/specs/SPEC-hub.md` and the specs table say its leftovers (forecast, per-service alerts, menu bar, widget) were done in SPEC-ai-services; `SPEC.md` notes that `report.py` feeds only Oleh's report profile and the built-in `GitScanner` reads projects otherwise; `CHECKLIST.md` says its rows are as of their check day and names what was renamed since. `REFERENCE.md` points to `docs/specs/` and `docs/status/`, says the Xcode project is `AIHubBar.xcodeproj`, and its test command had a broken `-scheme AI Hub Bar` (now `AIHubBar`). `TEMPLATES.md`: the templates' path (`AIHubBar/Resources/Templates/`) and the app's name.
+Checked: relative links in docs and specs resolve (a script over every relative link); the test command from REFERENCE is the one `scripts/check.sh` runs.
+Left: specs and `DECISIONS.md` keep «ClaudePult» where they were written under that name (history); `~/Projects/_daily-report/help.txt` still titles the block «🖥 ClaudePult» (outside this project).
 
 ## 2026-11-03 — Island: quick drops land, readable «Своя задача» hint (branch `fix/notch-drop-early`)
 
