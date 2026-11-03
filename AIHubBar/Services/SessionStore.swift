@@ -113,7 +113,7 @@ final class SessionStore {
         }
     }
 
-    /// True when `pid` exists and is still an agent's executable — Claude Code or Copilot CLI (guards against PID reuse).
+    /// True when `pid` exists and is still an agent's executable — Claude Code, Copilot or Codex CLI (guards against PID reuse).
     nonisolated static func isClaudeProcessAlive(_ pid: Int32) -> Bool {
         guard pid > 0 else { return false }
         var buffer = [CChar](repeating: 0, count: 4096)

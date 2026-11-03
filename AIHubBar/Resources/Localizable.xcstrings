@@ -1167,22 +1167,10 @@
     },
     "%@ ждёт ответа — %@": {
       "localizations": {
-        "ru": {
-          "stringUnit": {
-            "state": "new",
-            "value": "%1$@ ждёт ответа — %2$@"
-          }
-        },
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "%1$@ is waiting for you — %2$@"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%1$@ чекає на відповідь — %2$@"
+            "value": "%1$@ ينتظر ردك — %2$@"
           }
         },
         "de": {
@@ -1191,10 +1179,10 @@
             "value": "%1$@ wartet auf Sie — %2$@"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "%1$@ attend votre réponse — %2$@"
+            "value": "%1$@ is waiting for you — %2$@"
           }
         },
         "es": {
@@ -1203,22 +1191,22 @@
             "value": "%1$@ espera tu respuesta — %2$@"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ attend votre réponse — %2$@"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ menunggu jawaban — %2$@"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "%1$@ attende una risposta — %2$@"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%1$@ aguarda sua resposta — %2$@"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%1$@ czeka na odpowiedź — %2$@"
           }
         },
         "ja": {
@@ -1233,16 +1221,28 @@
             "value": "%1$@이(가) 응답을 기다립니다 — %2$@"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "%1$@ ينتظر ردك — %2$@"
+            "value": "%1$@ czeka na odpowiedź — %2$@"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "%1$@ menunggu jawaban — %2$@"
+            "value": "%1$@ aguarda sua resposta — %2$@"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "new",
+            "value": "%1$@ ждёт ответа — %2$@"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ чекає на відповідь — %2$@"
           }
         }
       }
@@ -8112,6 +8112,82 @@
         }
       }
     },
+    "Codex и Copilot": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex and Copilot"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex і Copilot"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex und Copilot"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex et Copilot"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex y Copilot"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex e Copilot"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex e Copilot"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex i Copilot"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex と Copilot"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex 및 Copilot"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex وCopilot"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex dan Copilot"
+          }
+        }
+      }
+    },
     "Codex, Copilot, Gemini, Cursor и расход по API — такими же карточками, как Claude.": {
       "localizations": {
         "ar": {
@@ -8574,18 +8650,88 @@
         }
       }
     },
-    "Hook AI Hub Bar для Copilot": {
+    "Hook AI Hub Bar для Codex": {
       "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "خطّاف AI Hub Bar لـ Codex"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI-Hub-Bar-Hook für Codex"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "AI Hub Bar hook for Copilot"
+            "value": "AI Hub Bar hook for Codex"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hook de AI Hub Bar para Codex"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hook AI Hub Bar pour Codex"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hook AI Hub Bar untuk Codex"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hook di AI Hub Bar per Codex"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex 用の AI Hub Bar フック"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex용 AI Hub Bar 훅"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hook AI Hub Bar dla Codex"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hook do AI Hub Bar para o Codex"
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Hook AI Hub Bar для Copilot"
+            "value": "Hook AI Hub Bar для Codex"
+          }
+        }
+      }
+    },
+    "Hook AI Hub Bar для Copilot": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "خطاف AI Hub Bar لـ Copilot"
           }
         },
         "de": {
@@ -8594,10 +8740,10 @@
             "value": "AI-Hub-Bar-Hook für Copilot"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Hook AI Hub Bar pour Copilot"
+            "value": "AI Hub Bar hook for Copilot"
           }
         },
         "es": {
@@ -8606,22 +8752,22 @@
             "value": "Hook de AI Hub Bar para Copilot"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hook AI Hub Bar pour Copilot"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hook AI Hub Bar untuk Copilot"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Hook di AI Hub Bar per Copilot"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hook do AI Hub Bar para o Copilot"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hook AI Hub Bar dla Copilota"
           }
         },
         "ja": {
@@ -8636,16 +8782,22 @@
             "value": "Copilot용 AI Hub Bar 후크"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "خطاف AI Hub Bar لـ Copilot"
+            "value": "Hook AI Hub Bar dla Copilota"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Hook AI Hub Bar untuk Copilot"
+            "value": "Hook do AI Hub Bar para o Copilot"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hook AI Hub Bar для Copilot"
           }
         }
       }
@@ -23231,6 +23383,82 @@
         }
       }
     },
+    "Готово. Теперь в codex введите /hooks и доверьте hooks AI Hub Bar — до этого Codex их пропускает.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تم. اكتب الآن /hooks في codex ووثِق بخطّافات AI Hub Bar — حتى ذلك الحين يتخطاها Codex."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fertig. Geben Sie jetzt in codex /hooks ein und vertrauen Sie den Hooks von AI Hub Bar — bis dahin überspringt Codex sie."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Done. Now type /hooks in codex and trust AI Hub Bar's hooks — until then Codex skips them."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Listo. Ahora escriba /hooks en codex y confíe en los hooks de AI Hub Bar; hasta entonces Codex los omite."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "C'est fait. Tapez maintenant /hooks dans codex et faites confiance aux hooks d'AI Hub Bar — d'ici là, Codex les ignore."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Selesai. Sekarang ketik /hooks di codex dan percayai hook AI Hub Bar — sampai saat itu Codex melewatinya."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fatto. Ora digita /hooks in codex e accetta come attendibili gli hook di AI Hub Bar: fino ad allora Codex li salta."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "完了しました。codex で /hooks と入力し、AI Hub Bar のフックを信頼してください。それまで Codex はフックを実行しません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "완료되었습니다. 이제 codex에서 /hooks를 입력하고 AI Hub Bar 훅을 신뢰하세요. 그 전까지 Codex는 훅을 건너뜁니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gotowe. Teraz wpisz /hooks w codex i zaufaj hookom AI Hub Bar — do tego czasu Codex je pomija."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pronto. Agora digite /hooks no codex e confie nos hooks do AI Hub Bar — até lá o Codex os ignora."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Готово. Тепер у codex введіть /hooks і довірте hooks AI Hub Bar — доти Codex їх пропускає."
+          }
+        }
+      }
+    },
     "Готово: %@": {
       "localizations": {
         "ar": {
@@ -25431,6 +25659,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Додати"
+          }
+        }
+      }
+    },
+    "Добавить записи AI Hub Bar в ~/.codex/hooks.json": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إضافة إدخالات AI Hub Bar إلى ~/.codex/hooks.json"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Einträge von AI Hub Bar in ~/.codex/hooks.json hinzufügen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add AI Hub Bar's entries to ~/.codex/hooks.json"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Añadir las entradas de AI Hub Bar a ~/.codex/hooks.json"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajouter les entrées d'AI Hub Bar à ~/.codex/hooks.json"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tambahkan entri AI Hub Bar ke ~/.codex/hooks.json"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aggiungi le voci di AI Hub Bar a ~/.codex/hooks.json"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar のエントリを ~/.codex/hooks.json に追加"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "~/.codex/hooks.json에 AI Hub Bar 항목 추가"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dodaj wpisy AI Hub Bar do ~/.codex/hooks.json"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adicionar as entradas do AI Hub Bar a ~/.codex/hooks.json"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Додати записи AI Hub Bar у ~/.codex/hooks.json"
           }
         }
       }
@@ -29850,6 +30154,82 @@
         }
       }
     },
+    "Записать файл ~/.copilot/hooks/aihubbar.json": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "كتابة الملف ~/.copilot/hooks/aihubbar.json"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Datei ~/.copilot/hooks/aihubbar.json schreiben"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Write the file ~/.copilot/hooks/aihubbar.json"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escribir el archivo ~/.copilot/hooks/aihubbar.json"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Écrire le fichier ~/.copilot/hooks/aihubbar.json"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tulis berkas ~/.copilot/hooks/aihubbar.json"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scrivi il file ~/.copilot/hooks/aihubbar.json"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ファイル ~/.copilot/hooks/aihubbar.json を書き込む"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "~/.copilot/hooks/aihubbar.json 파일 쓰기"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zapisz plik ~/.copilot/hooks/aihubbar.json"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gravar o arquivo ~/.copilot/hooks/aihubbar.json"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Записати файл ~/.copilot/hooks/aihubbar.json"
+          }
+        }
+      }
+    },
     "Записей: %lld": {
       "localizations": {
         "ar": {
@@ -34027,6 +34407,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Підсумки фонових завдань у Telegram; відповіді на запити дозволів — нижче, «Відповіді з Telegram»"
+          }
+        }
+      }
+    },
+    "Их сессии тоже показывают «работает / ждёт / готово», если на их странице в «Сервисах AI» установлен hook AI Hub Bar. Codex запускает новый hook только после проверки: в codex введите /hooks и доверьте его. Без hook — только недавние беседы, без состояния.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Their sessions also show “running / waiting / done” when AI Hub Bar's hook is installed on their page under “AI Services”. Codex runs a new hook only after review: type /hooks in codex and trust it. Without the hook — only recent conversations, without a state."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Їхні сесії теж показують «працює / чекає / готово», якщо на їхній сторінці в «Сервісах AI» встановлено hook AI Hub Bar. Codex запускає новий hook лише після перевірки: у codex введіть /hooks і довірте його. Без hook — лише нещодавні бесіди, без стану."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ihre Sitzungen zeigen ebenfalls „arbeitet / wartet / fertig“, wenn auf ihrer Seite unter „KI-Dienste“ der Hook von AI Hub Bar installiert ist. Codex führt einen neuen Hook erst nach Prüfung aus: in codex /hooks eingeben und ihm vertrauen. Ohne Hook nur die letzten Unterhaltungen, ohne Status."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Leurs sessions affichent aussi « en cours / en attente / terminé » si le hook d'AI Hub Bar est installé sur leur page dans « Services IA ». Codex n'exécute un nouveau hook qu'après vérification : tapez /hooks dans codex et faites-lui confiance. Sans hook, seulement les conversations récentes, sans état."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sus sesiones también muestran «trabajando / esperando / listo» si el hook de AI Hub Bar está instalado en su página de «Servicios de IA». Codex ejecuta un hook nuevo solo tras revisarlo: escriba /hooks en codex y confíe en él. Sin hook, solo las conversaciones recientes, sin estado."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anche le loro sessioni mostrano «in corso / in attesa / pronto» se l'hook di AI Hub Bar è installato nella loro pagina in «Servizi AI». Codex esegue un nuovo hook solo dopo la verifica: digita /hooks in codex e accettalo. Senza hook, solo le conversazioni recenti, senza stato."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "As sessões deles também mostram “trabalhando / aguardando / pronto” se o hook do AI Hub Bar estiver instalado na página deles em “Serviços de IA”. O Codex só executa um hook novo após revisão: digite /hooks no codex e confie nele. Sem o hook, apenas as conversas recentes, sem estado."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ich sesje też pokazują „pracuje / czeka / gotowe”, jeśli na ich stronie w „Usługach AI” zainstalowano hook AI Hub Bar. Codex uruchamia nowy hook dopiero po sprawdzeniu: wpisz /hooks w codex i zaufaj mu. Bez hooka tylko ostatnie rozmowy, bez stanu."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「AI サービス」のそれぞれのページで AI Hub Bar のフックを入れると、これらのセッションにも「作業中/待機中/完了」が表示されます。Codex は新しいフックを確認後にのみ実行します。codex で /hooks と入力して信頼してください。フックがない場合は最近の会話のみで、状態は表示されません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "‘AI 서비스’의 각 페이지에서 AI Hub Bar 훅을 설치하면 이 세션들도 ‘작업 중 / 대기 중 / 완료’를 표시합니다. Codex는 새 훅을 검토한 뒤에만 실행합니다: codex에서 /hooks를 입력하고 신뢰하세요. 훅이 없으면 최근 대화만 표시되고 상태는 없습니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تُظهر جلساتهما أيضًا «يعمل / ينتظر / جاهز» إذا ثُبّت خطّاف AI Hub Bar في صفحتهما ضمن «خدمات الذكاء الاصطناعي». لا يشغّل Codex خطّافًا جديدًا إلا بعد مراجعته: اكتب /hooks في codex ووثِق به. بدون الخطّاف تظهر المحادثات الأخيرة فقط، بلا حالة."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sesi mereka juga menampilkan “bekerja / menunggu / selesai” jika hook AI Hub Bar dipasang di halamannya pada “Layanan AI”. Codex menjalankan hook baru hanya setelah ditinjau: ketik /hooks di codex lalu percayai. Tanpa hook, hanya percakapan terbaru tanpa status."
           }
         }
       }
@@ -44605,16 +45061,10 @@
     },
     "Напишите задачу своими словами — AI выполнит её над файлом": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Describe the task in your own words — AI does it on the file"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Напишіть завдання своїми словами — AI виконає його над файлом"
+            "value": "اكتب المهمة بكلماتك — سينفذها الذكاء الاصطناعي على الملف"
           }
         },
         "de": {
@@ -44623,10 +45073,10 @@
             "value": "Beschreiben Sie die Aufgabe in eigenen Worten – die KI erledigt sie an der Datei"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Décrivez la tâche avec vos mots — l’IA l’exécute sur le fichier"
+            "value": "Describe the task in your own words — AI does it on the file"
           }
         },
         "es": {
@@ -44635,22 +45085,22 @@
             "value": "Describe la tarea con tus palabras: la IA la hará con el archivo"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Décrivez la tâche avec vos mots — l’IA l’exécute sur le fichier"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tulis tugas dengan kata-kata Anda — AI mengerjakannya pada file"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Descrivi il compito con parole tue: l’IA lo eseguirà sul file"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Descreva a tarefa com suas palavras — a IA a executa no arquivo"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Opisz zadanie własnymi słowami — AI wykona je na pliku"
           }
         },
         "ja": {
@@ -44665,16 +45115,22 @@
             "value": "작업을 직접 적어 주세요 — AI가 파일에 대해 실행합니다"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "اكتب المهمة بكلماتك — سينفذها الذكاء الاصطناعي على الملف"
+            "value": "Opisz zadanie własnymi słowami — AI wykona je na pliku"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tulis tugas dengan kata-kata Anda — AI mengerjakannya pada file"
+            "value": "Descreva a tarefa com suas palavras — a IA a executa no arquivo"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Напишіть завдання своїми словами — AI виконає його над файлом"
           }
         }
       }
@@ -47578,10 +48034,10 @@
     },
     "Не сохранено: %@": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Not saved: %@"
+            "value": "لم يُحفظ: %@"
           }
         },
         "de": {
@@ -47590,10 +48046,10 @@
             "value": "Nicht gespeichert: %@"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Non enregistré : %@"
+            "value": "Not saved: %@"
           }
         },
         "es": {
@@ -47602,28 +48058,22 @@
             "value": "No guardado: %@"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Non enregistré : %@"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tidak tersimpan: %@"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Non salvato: %@"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Não salvo: %@"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nie zapisano: %@"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Не збережено: %@"
           }
         },
         "ja": {
@@ -47638,16 +48088,22 @@
             "value": "저장되지 않음: %@"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "لم يُحفظ: %@"
+            "value": "Nie zapisano: %@"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tidak tersimpan: %@"
+            "value": "Não salvo: %@"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Не збережено: %@"
           }
         }
       }
@@ -48272,7 +48728,90 @@
         }
       }
     },
+    "Не удалось прочитать %@ (%@). Файл не изменён.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تعذّرت قراءة %1$@ (%2$@). لم يتغير الملف."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ konnte nicht gelesen werden (%2$@). Die Datei ist unverändert."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Could not read %1$@ (%2$@). The file is unchanged."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se pudo leer %1$@ (%2$@). El archivo no ha cambiado."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impossible de lire %1$@ (%2$@). Le fichier n'a pas été modifié."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tidak dapat membaca %1$@ (%2$@). Berkas tidak diubah."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impossibile leggere %1$@ (%2$@). Il file non è cambiato."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ を読み込めませんでした (%2$@)。ファイルは変更されていません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@을(를) 읽을 수 없습니다 (%2$@). 파일은 바뀌지 않았습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nie udało się odczytać %1$@ (%2$@). Plik nie został zmieniony."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Não foi possível ler %1$@ (%2$@). O arquivo não foi alterado."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Не удалось прочитать %1$@ (%2$@). Файл не изменён."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Не вдалося прочитати %1$@ (%2$@). Файл не змінено."
+          }
+        }
+      }
+    },
     "Не удалось прочитать ~/.claude/settings.json (%@). Файл не изменён.": {
+      "extractionState": "stale",
       "localizations": {
         "ar": {
           "stringUnit": {
@@ -53223,16 +53762,10 @@
     },
     "Обновить hook": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Update hook"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Оновити hook"
+            "value": "تحديث الخطاف"
           }
         },
         "de": {
@@ -53241,10 +53774,10 @@
             "value": "Hook aktualisieren"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Mettre à jour le hook"
+            "value": "Update hook"
           }
         },
         "es": {
@@ -53253,22 +53786,22 @@
             "value": "Actualizar hook"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mettre à jour le hook"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Perbarui hook"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Aggiorna hook"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Atualizar hook"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Zaktualizuj hook"
           }
         },
         "ja": {
@@ -53283,16 +53816,22 @@
             "value": "후크 업데이트"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "تحديث الخطاف"
+            "value": "Zaktualizuj hook"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Perbarui hook"
+            "value": "Atualizar hook"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Оновити hook"
           }
         }
       }
@@ -76588,18 +77127,88 @@
         }
       }
     },
-    "С hook сессии Copilot CLI видны в «Сессиях» как у Claude: работает, ждёт разрешения или ответа, готово — и «ждёт» приходит уведомлением. Это отдельный файл ~/.copilot/hooks/aihubbar.json; другие hooks Copilot не трогаются. Подхватывается новыми сессиями Copilot.": {
+    "С hook сессии Codex CLI видны в «Сессиях» как у Claude: работает, ждёт разрешения, готово — и «ждёт» приходит уведомлением. Записи AI Hub Bar добавляются в ~/.codex/hooks.json (перед изменением — резервная копия рядом), другие hooks Codex не трогаются. Codex запускает новый hook только после проверки: один раз откройте codex, введите /hooks и доверьте hooks AI Hub Bar. Подхватывается новыми сессиями Codex.": {
       "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مع الخطّاف تظهر جلسات Codex CLI في «الجلسات» مثل جلسات Claude: يعمل، ينتظر الإذن، جاهز — وتصل «ينتظر» كإشعار. تُضاف إدخالات AI Hub Bar إلى ~/.codex/hooks.json (مع نسخة احتياطية بجانبه قبل التغيير)، ولا تُمسّ خطّافات Codex الأخرى. لا يشغّل Codex خطّافًا جديدًا إلا بعد مراجعته: افتح codex مرة واحدة واكتب /hooks ووثِق بخطّافات AI Hub Bar. تلتقطه جلسات Codex الجديدة."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mit dem Hook erscheinen Codex-CLI-Sitzungen in „Sitzungen“ wie die von Claude: arbeitet, wartet auf Erlaubnis, fertig — und „wartet“ kommt als Mitteilung. Die Einträge von AI Hub Bar werden zu ~/.codex/hooks.json hinzugefügt (vorher eine Sicherungskopie daneben); andere Hooks von Codex bleiben unberührt. Codex führt einen neuen Hook erst nach Prüfung aus: einmal codex öffnen, /hooks eingeben und den Hooks von AI Hub Bar vertrauen. Neue Codex-Sitzungen übernehmen ihn."
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "With the hook, Copilot CLI sessions appear in «Sessions» like Claude’s: working, waiting for a permission or an answer, done — and «waiting» comes as a notification. It is a separate file, ~/.copilot/hooks/aihubbar.json; Copilot’s other hooks are not touched. New Copilot sessions pick it up."
+            "value": "With the hook, Codex CLI sessions show in “Sessions” like Claude's: running, waiting for permission, done — and “waiting” comes as a notification. AI Hub Bar's entries are added to ~/.codex/hooks.json (a backup is made next to it first); Codex's other hooks are not touched. Codex runs a new hook only after review: once, open codex, type /hooks and trust AI Hub Bar's hooks. New Codex sessions pick it up."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Con el hook, las sesiones de Codex CLI aparecen en «Sesiones» como las de Claude: trabajando, esperando permiso, listo, y «esperando» llega como notificación. Las entradas de AI Hub Bar se añaden a ~/.codex/hooks.json (antes se guarda una copia de seguridad al lado); los demás hooks de Codex no se tocan. Codex ejecuta un hook nuevo solo tras revisarlo: una vez, abra codex, escriba /hooks y confíe en los hooks de AI Hub Bar. Las nuevas sesiones de Codex lo usan."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Avec le hook, les sessions Codex CLI apparaissent dans « Sessions » comme celles de Claude : en cours, en attente d'autorisation, terminé — et « en attente » arrive en notification. Les entrées d'AI Hub Bar sont ajoutées à ~/.codex/hooks.json (une copie de sauvegarde est faite à côté avant) ; les autres hooks de Codex ne sont pas touchés. Codex n'exécute un nouveau hook qu'après vérification : une fois, ouvrez codex, tapez /hooks et faites confiance aux hooks d'AI Hub Bar. Les nouvelles sessions Codex le prennent en compte."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dengan hook, sesi Codex CLI tampil di “Sesi” seperti milik Claude: bekerja, menunggu izin, selesai — dan “menunggu” datang sebagai notifikasi. Entri AI Hub Bar ditambahkan ke ~/.codex/hooks.json (cadangan dibuat di sebelahnya lebih dulu); hook Codex lainnya tidak disentuh. Codex menjalankan hook baru hanya setelah ditinjau: sekali saja, buka codex, ketik /hooks, lalu percayai hook AI Hub Bar. Sesi Codex baru akan memakainya."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Con l'hook, le sessioni di Codex CLI compaiono in «Sessioni» come quelle di Claude: in corso, in attesa di autorizzazione, pronto — e «in attesa» arriva come notifica. Le voci di AI Hub Bar vengono aggiunte a ~/.codex/hooks.json (prima viene fatta una copia di backup accanto); gli altri hook di Codex non vengono toccati. Codex esegue un nuovo hook solo dopo la verifica: una volta, apri codex, digita /hooks e accetta gli hook di AI Hub Bar. Le nuove sessioni di Codex lo usano."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "フックを入れると、Codex CLI のセッションも Claude と同じように「セッション」に表示されます(作業中・許可待ち・完了)。「待機中」は通知で届きます。AI Hub Bar のエントリは ~/.codex/hooks.json に追加され(変更前に隣にバックアップを作成)、Codex の他のフックには触れません。Codex は新しいフックを確認後にのみ実行します。一度 codex を開いて /hooks と入力し、AI Hub Bar のフックを信頼してください。新しい Codex セッションから反映されます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "훅을 설치하면 Codex CLI 세션도 Claude처럼 ‘세션’에 표시됩니다: 작업 중, 허가 대기, 완료 — ‘대기 중’은 알림으로 옵니다. AI Hub Bar 항목은 ~/.codex/hooks.json에 추가되며(변경 전 옆에 백업 생성) Codex의 다른 훅은 건드리지 않습니다. Codex는 새 훅을 검토한 뒤에만 실행합니다: 한 번 codex를 열고 /hooks를 입력해 AI Hub Bar 훅을 신뢰하세요. 새 Codex 세션부터 적용됩니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Z hookiem sesje Codex CLI widać w „Sesjach” jak u Claude: pracuje, czeka na pozwolenie, gotowe — a „czeka” przychodzi jako powiadomienie. Wpisy AI Hub Bar są dodawane do ~/.codex/hooks.json (przed zmianą obok powstaje kopia zapasowa); inne hooki Codex pozostają nietknięte. Codex uruchamia nowy hook dopiero po sprawdzeniu: raz otwórz codex, wpisz /hooks i zaufaj hookom AI Hub Bar. Nowe sesje Codex go przejmują."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Com o hook, as sessões do Codex CLI aparecem em “Sessões” como as do Claude: trabalhando, aguardando permissão, pronto — e “aguardando” chega como notificação. As entradas do AI Hub Bar são adicionadas a ~/.codex/hooks.json (antes é feita uma cópia de segurança ao lado); os outros hooks do Codex não são tocados. O Codex só executa um hook novo após revisão: uma vez, abra o codex, digite /hooks e confie nos hooks do AI Hub Bar. As novas sessões do Codex passam a usá-lo."
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "З hook сесії Copilot CLI видно в «Сесіях», як у Claude: працює, чекає дозволу чи відповіді, готово — і «чекає» приходить сповіщенням. Це окремий файл ~/.copilot/hooks/aihubbar.json; інші hooks Copilot не змінюються. Підхоплюється новими сесіями Copilot."
+            "value": "З hook сесії Codex CLI видно в «Сесіях», як у Claude: працює, чекає дозволу, готово — і «чекає» приходить сповіщенням. Записи AI Hub Bar додаються в ~/.codex/hooks.json (перед зміною — резервна копія поруч), інші hooks Codex не зачіпаються. Codex запускає новий hook лише після перевірки: один раз відкрийте codex, введіть /hooks і довірте hooks AI Hub Bar. Підхоплюється новими сесіями Codex."
+          }
+        }
+      }
+    },
+    "С hook сессии Copilot CLI видны в «Сессиях» как у Claude: работает, ждёт разрешения или ответа, готово — и «ждёт» приходит уведомлением. Это отдельный файл ~/.copilot/hooks/aihubbar.json; другие hooks Copilot не трогаются. Подхватывается новыми сессиями Copilot.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مع الخطاف تظهر جلسات Copilot CLI في «الجلسات» مثل جلسات Claude: يعمل، ينتظر إذنًا أو ردًا، انتهى — ويصل «ينتظر» كإشعار. إنه ملف مستقل ‎~/.copilot/hooks/aihubbar.json‏، ولا تُمس خطافات Copilot الأخرى. تستخدمه جلسات Copilot الجديدة."
           }
         },
         "de": {
@@ -76608,10 +77217,10 @@
             "value": "Mit dem Hook erscheinen Copilot-CLI-Sitzungen unter «Sitzungen» wie die von Claude: arbeitet, wartet auf eine Erlaubnis oder Antwort, fertig – und «wartet» kommt als Mitteilung. Es ist eine eigene Datei, ~/.copilot/hooks/aihubbar.json; andere Copilot-Hooks bleiben unberührt. Neue Copilot-Sitzungen übernehmen ihn."
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Avec le hook, les sessions Copilot CLI apparaissent dans « Sessions » comme celles de Claude : au travail, en attente d’une autorisation ou d’une réponse, terminé — et « en attente » arrive en notification. C’est un fichier à part, ~/.copilot/hooks/aihubbar.json ; les autres hooks de Copilot ne sont pas touchés. Les nouvelles sessions Copilot le prennent en compte."
+            "value": "With the hook, Copilot CLI sessions appear in «Sessions» like Claude’s: working, waiting for a permission or an answer, done — and «waiting» comes as a notification. It is a separate file, ~/.copilot/hooks/aihubbar.json; Copilot’s other hooks are not touched. New Copilot sessions pick it up."
           }
         },
         "es": {
@@ -76620,22 +77229,22 @@
             "value": "Con el hook, las sesiones de Copilot CLI aparecen en «Sesiones» como las de Claude: trabajando, esperando un permiso o una respuesta, listo — y «esperando» llega como notificación. Es un archivo aparte, ~/.copilot/hooks/aihubbar.json; los demás hooks de Copilot no se tocan. Lo usan las sesiones nuevas de Copilot."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Avec le hook, les sessions Copilot CLI apparaissent dans « Sessions » comme celles de Claude : au travail, en attente d’une autorisation ou d’une réponse, terminé — et « en attente » arrive en notification. C’est un fichier à part, ~/.copilot/hooks/aihubbar.json ; les autres hooks de Copilot ne sont pas touchés. Les nouvelles sessions Copilot le prennent en compte."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dengan hook, sesi Copilot CLI tampil di «Sesi» seperti milik Claude: bekerja, menunggu izin atau jawaban, selesai — dan «menunggu» datang sebagai notifikasi. Ini file tersendiri, ~/.copilot/hooks/aihubbar.json; hook Copilot lainnya tidak disentuh. Sesi Copilot baru akan memakainya."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Con l’hook, le sessioni di Copilot CLI compaiono in «Sessioni» come quelle di Claude: al lavoro, in attesa di un permesso o di una risposta, finito — e «in attesa» arriva come notifica. È un file a sé, ~/.copilot/hooks/aihubbar.json; gli altri hook di Copilot restano intatti. Lo usano le nuove sessioni di Copilot."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Com o hook, as sessões do Copilot CLI aparecem em «Sessões» como as do Claude: trabalhando, aguardando permissão ou resposta, pronto — e «aguardando» chega como notificação. É um arquivo separado, ~/.copilot/hooks/aihubbar.json; os outros hooks do Copilot não são alterados. Novas sessões do Copilot passam a usá-lo."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Z hookiem sesje Copilot CLI widać w «Sesjach» jak sesje Claude: pracuje, czeka na zgodę lub odpowiedź, gotowe — a «czeka» przychodzi jako powiadomienie. To osobny plik ~/.copilot/hooks/aihubbar.json; inne hooki Copilota pozostają nietknięte. Używają go nowe sesje Copilota."
           }
         },
         "ja": {
@@ -76650,16 +77259,22 @@
             "value": "후크를 설치하면 Copilot CLI 세션이 Claude처럼 「세션」에 표시됩니다: 작업 중, 권한이나 답변 대기, 완료 — 「대기」는 알림으로도 옵니다. 별도 파일 ~/.copilot/hooks/aihubbar.json이며 Copilot의 다른 후크는 건드리지 않습니다. 새 Copilot 세션부터 적용됩니다."
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "مع الخطاف تظهر جلسات Copilot CLI في «الجلسات» مثل جلسات Claude: يعمل، ينتظر إذنًا أو ردًا، انتهى — ويصل «ينتظر» كإشعار. إنه ملف مستقل ‎~/.copilot/hooks/aihubbar.json‏، ولا تُمس خطافات Copilot الأخرى. تستخدمه جلسات Copilot الجديدة."
+            "value": "Z hookiem sesje Copilot CLI widać w «Sesjach» jak sesje Claude: pracuje, czeka na zgodę lub odpowiedź, gotowe — a «czeka» przychodzi jako powiadomienie. To osobny plik ~/.copilot/hooks/aihubbar.json; inne hooki Copilota pozostają nietknięte. Używają go nowe sesje Copilota."
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Dengan hook, sesi Copilot CLI tampil di «Sesi» seperti milik Claude: bekerja, menunggu izin atau jawaban, selesai — dan «menunggu» datang sebagai notifikasi. Ini file tersendiri, ~/.copilot/hooks/aihubbar.json; hook Copilot lainnya tidak disentuh. Sesi Copilot baru akan memakainya."
+            "value": "Com o hook, as sessões do Copilot CLI aparecem em «Sessões» como as do Claude: trabalhando, aguardando permissão ou resposta, pronto — e «aguardando» chega como notificação. É um arquivo separado, ~/.copilot/hooks/aihubbar.json; os outros hooks do Copilot não são alterados. Novas sessões do Copilot passam a usá-lo."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "З hook сесії Copilot CLI видно в «Сесіях», як у Claude: працює, чекає дозволу чи відповіді, готово — і «чекає» приходить сповіщенням. Це окремий файл ~/.copilot/hooks/aihubbar.json; інші hooks Copilot не змінюються. Підхоплюється новими сесіями Copilot."
           }
         }
       }
@@ -83825,16 +84440,10 @@
     },
     "Снять hook": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Remove hook"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Зняти hook"
+            "value": "إزالة الخطاف"
           }
         },
         "de": {
@@ -83843,10 +84452,10 @@
             "value": "Hook entfernen"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Retirer le hook"
+            "value": "Remove hook"
           }
         },
         "es": {
@@ -83855,22 +84464,22 @@
             "value": "Quitar hook"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Retirer le hook"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hapus hook"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Rimuovi hook"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Remover hook"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Usuń hook"
           }
         },
         "ja": {
@@ -83885,16 +84494,22 @@
             "value": "후크 제거"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "إزالة الخطاف"
+            "value": "Usuń hook"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Hapus hook"
+            "value": "Remover hook"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Зняти hook"
           }
         }
       }
@@ -84887,18 +85502,88 @@
         }
       }
     },
-    "Состояние сессий Copilot": {
+    "Состояние сессий Codex": {
       "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "حالة جلسات Codex"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Status der Codex-Sitzungen"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Copilot session state"
+            "value": "Codex session states"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Estado de las sesiones de Codex"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "État des sessions Codex"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Status sesi Codex"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stato delle sessioni Codex"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex セッションの状態"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex 세션 상태"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stan sesji Codex"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Estado das sessões do Codex"
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Стан сесій Copilot"
+            "value": "Стан сесій Codex"
+          }
+        }
+      }
+    },
+    "Состояние сессий Copilot": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "حالة جلسات Copilot"
           }
         },
         "de": {
@@ -84907,10 +85592,10 @@
             "value": "Status der Copilot-Sitzungen"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "État des sessions Copilot"
+            "value": "Copilot session state"
           }
         },
         "es": {
@@ -84919,22 +85604,22 @@
             "value": "Estado de las sesiones de Copilot"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "État des sessions Copilot"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Status sesi Copilot"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Stato delle sessioni Copilot"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Estado das sessões do Copilot"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Stan sesji Copilota"
           }
         },
         "ja": {
@@ -84949,16 +85634,22 @@
             "value": "Copilot 세션 상태"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "حالة جلسات Copilot"
+            "value": "Stan sesji Copilota"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Status sesi Copilot"
+            "value": "Estado das sessões do Copilot"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Стан сесій Copilot"
           }
         }
       }
@@ -90743,6 +91434,82 @@
         }
       }
     },
+    "Убрать hook AI Hub Bar; другие hooks агента остаются": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إزالة خطّاف AI Hub Bar؛ تبقى خطّافات الوكيل الأخرى"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hook von AI Hub Bar entfernen; die anderen Hooks des Agenten bleiben"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remove AI Hub Bar's hook; the agent's other hooks stay"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quitar el hook de AI Hub Bar; los demás hooks del agente se mantienen"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Retirer le hook d'AI Hub Bar ; les autres hooks de l'agent restent"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hapus hook AI Hub Bar; hook agen lainnya tetap ada"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rimuovi l'hook di AI Hub Bar; gli altri hook dell'agente restano"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar のフックを外す(エージェントの他のフックは残ります)"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar 훅 제거. 에이전트의 다른 훅은 유지됩니다"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Usuń hook AI Hub Bar; pozostałe hooki agenta zostają"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remover o hook do AI Hub Bar; os outros hooks do agente ficam"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Прибрати hook AI Hub Bar; інші hooks агента залишаються"
+          }
+        }
+      }
+    },
     "Убрать готовые": {
       "localizations": {
         "ar": {
@@ -93263,16 +94030,10 @@
     },
     "Установить hook": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Install hook"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Встановити hook"
+            "value": "تثبيت الخطاف"
           }
         },
         "de": {
@@ -93281,10 +94042,10 @@
             "value": "Hook installieren"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Installer le hook"
+            "value": "Install hook"
           }
         },
         "es": {
@@ -93293,22 +94054,22 @@
             "value": "Instalar hook"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Installer le hook"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pasang hook"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Installa hook"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Instalar hook"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Zainstaluj hook"
           }
         },
         "ja": {
@@ -93323,16 +94084,22 @@
             "value": "후크 설치"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "تثبيت الخطاف"
+            "value": "Zainstaluj hook"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Pasang hook"
+            "value": "Instalar hook"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Встановити hook"
           }
         }
       }
@@ -99520,13 +100287,25 @@
     },
     "авто: …": {
       "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تلقائي: …"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "auto: …"
+          }
+        },
         "en": {
           "stringUnit": {
             "state": "translated",
             "value": "auto: …"
           }
         },
-        "de": {
+        "es": {
           "stringUnit": {
             "state": "translated",
             "value": "auto: …"
@@ -99538,34 +100317,16 @@
             "value": "auto : …"
           }
         },
-        "es": {
+        "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "auto: …"
+            "value": "otomatis: …"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "auto: …"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "auto: …"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "auto: …"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "авто: …"
           }
         },
         "ja": {
@@ -99580,16 +100341,22 @@
             "value": "자동: …"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "تلقائي: …"
+            "value": "auto: …"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "otomatis: …"
+            "value": "auto: …"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "авто: …"
           }
         }
       }

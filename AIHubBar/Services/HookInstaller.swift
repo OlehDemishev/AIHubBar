@@ -1,12 +1,13 @@
 import Foundation
 
 enum HookInstallError: LocalizedError {
-    case unreadableSettings(String)
+    /// The file shown as `~/…`, and why it couldn't be read.
+    case unreadableSettings(String, String)
 
     var errorDescription: String? {
         switch self {
-        case let .unreadableSettings(detail):
-            String(localized: "Не удалось прочитать ~/.claude/settings.json (\(detail)). Файл не изменён.")
+        case let .unreadableSettings(file, detail):
+            String(localized: "Не удалось прочитать \(file) (\(detail)). Файл не изменён.")
         }
     }
 }
@@ -64,8 +65,10 @@ struct HookInstaller {
 
     // MARK: - Status
 
+    private var file: HookJSONFile { HookJSONFile(url: settingsURL, shownAs: "~/.claude/settings.json") }
+
     func status() -> HookStatus {
-        guard let settings = try? readSettings() else { return .notInstalled }
+        guard let settings = try? file.read() else { return .notInstalled }
         let status = Self.status(of: settings, expectedCommand: command)
         return status == .installed && !scriptIsCurrent ? .outdated : status
     }
@@ -74,7 +77,7 @@ struct HookInstaller {
     /// then needs no «Обновить hooks». Only AI Hub Bar's own script file is written. Returns whether it was.
     @discardableResult
     func updateScriptIfNeeded() throws -> Bool {
-        guard !scriptIsCurrent, let settings = try? readSettings(),
+        guard !scriptIsCurrent, let settings = try? file.read(),
               Self.status(of: settings, expectedCommand: command, checkTimeouts: false) == .installed else { return false }
         try HookScript.write(to: scriptURL)
         return true
@@ -85,13 +88,15 @@ struct HookInstaller {
     }
 
     /// `checkTimeouts: false` — only whether our command is there for every event (enough to keep the script current).
-    static func status(of settings: [String: Any], expectedCommand: String, checkTimeouts: Bool = true) -> HookStatus {
+    /// `events` and `timeout` are Claude's unless given (Codex's hooks.json has the same shape, `CodexHooks`).
+    static func status(of settings: [String: Any], expectedCommand: String, checkTimeouts: Bool = true,
+                       events: [String] = events, timeout: (String) -> Int = timeout(for:)) -> HookStatus {
         let hooks = settings["hooks"] as? [String: Any] ?? [:]
         var found = 0, current = 0
         for event in events {
             let commands = ourCommands(in: hooks[event])
             if !commands.isEmpty { found += 1 }
-            if commands == [expectedCommand], !checkTimeouts || ourTimeouts(in: hooks[event]) == [timeout(for: event)] { current += 1 }
+            if commands == [expectedCommand], !checkTimeouts || ourTimeouts(in: hooks[event]) == [timeout(event)] { current += 1 }
         }
         if found == 0 { return .notInstalled }
         return current == events.count ? .installed : .outdated
@@ -104,38 +109,39 @@ struct HookInstaller {
     @discardableResult
     func install() throws -> URL? {
         try HookScript.write(to: scriptURL)
-        let current = try readSettings()
+        let current = try file.read()
         let settings = Self.merged(current ?? [:], command: command)
         if let current, NSDictionary(dictionary: current).isEqual(to: settings) { return nil }
-        let backup = try backupSettings()
-        try writeSettings(settings)
+        let backup = try file.backup()
+        try file.write(settings)
         AppLog.info("Hooks installed into \(settingsURL.path)" + (backup.map { ", backup \($0.lastPathComponent)" } ?? ""))
         return backup
     }
 
     @discardableResult
     func uninstall() throws -> URL? {
-        guard let current = try readSettings() else { return nil }
+        guard let current = try file.read() else { return nil }
         let settings = Self.removed(current)
         if NSDictionary(dictionary: current).isEqual(to: settings) {
             try? FileManager.default.removeItem(at: scriptURL)
             return nil
         }
-        let backup = try backupSettings()
-        try writeSettings(settings)
+        let backup = try file.backup()
+        try file.write(settings)
         try? FileManager.default.removeItem(at: scriptURL)
         AppLog.info("Hooks removed from \(settingsURL.path)" + (backup.map { ", backup \($0.lastPathComponent)" } ?? ""))
         return backup
     }
 
     /// Pure merge: drops previous AI Hub Bar entries, then appends one group per event. Other hooks stay untouched.
-    static func merged(_ settings: [String: Any], command: String) -> [String: Any] {
+    static func merged(_ settings: [String: Any], command: String,
+                       events: [String] = events, timeout: (String) -> Int = timeout(for:)) -> [String: Any] {
         var settings = removed(settings)
         var hooks = settings["hooks"] as? [String: Any] ?? [:]
         for event in events {
             var groups = hooks[event] as? [Any] ?? []
             var group: [String: Any] = [
-                "hooks": [["type": "command", "command": command, "timeout": timeout(for: event)]],
+                "hooks": [["type": "command", "command": command, "timeout": timeout(event)]],
             ]
             if event == "PostToolUse" { group["matcher"] = "*" }
             groups.append(group)
@@ -187,48 +193,57 @@ struct HookInstaller {
         }
     }
 
-    // MARK: - Files
+    static func singleQuote(_ text: String) -> String {
+        "'" + text.replacingOccurrences(of: "'", with: "'\\''") + "'"
+    }
+}
 
-    private func readSettings() throws -> [String: Any]? {
-        guard let data = try? Data(contentsOf: settingsURL) else { return nil }
+/// A JSON settings file of an agent that AI Hub Bar merges its hooks into (`~/.claude/settings.json`,
+/// `~/.codex/hooks.json`): read strictly, backed up before each change, written in a stable style.
+struct HookJSONFile {
+    var url: URL
+    /// `~/.claude/settings.json`: how the error names it.
+    var shownAs: String
+
+    /// Nil when there is no file; an empty file is an empty object; anything else unreadable throws.
+    func read() throws -> [String: Any]? {
+        guard let data = try? Data(contentsOf: url) else { return nil }
         if data.allSatisfy({ $0 == 0x20 || $0 == 0x0A || $0 == 0x0D || $0 == 0x09 }) { return [:] }
         do {
             guard let object = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
-                throw HookInstallError.unreadableSettings(String(localized: "корень не объект JSON"))
+                throw HookInstallError.unreadableSettings(shownAs, String(localized: "корень не объект JSON"))
             }
             return object
         } catch let error as HookInstallError {
             throw error
         } catch {
-            throw HookInstallError.unreadableSettings(error.localizedDescription)
+            throw HookInstallError.unreadableSettings(shownAs, error.localizedDescription)
         }
     }
 
-    private func backupSettings() throws -> URL? {
-        guard FileManager.default.fileExists(atPath: settingsURL.path) else { return nil }
+    /// A copy next to the file, `<name>.claudepult-backup-<time>`; nil when there is no file yet.
+    func backup() throws -> URL? {
+        guard FileManager.default.fileExists(atPath: url.path) else { return nil }
         // Local time, never overwriting an earlier backup (two changes within a second get -2, -3, …).
         let stamp = Date.now.formatted(Date.VerbatimFormatStyle(
             format: "\(year: .defaultDigits)\(month: .twoDigits)\(day: .twoDigits)-\(hour: .twoDigits(clock: .twentyFourHour, hourCycle: .zeroBased))\(minute: .twoDigits)\(second: .twoDigits)",
             timeZone: .current, calendar: Calendar(identifier: .gregorian)
         ))
-        let folder = settingsURL.deletingLastPathComponent()
-        var backup = folder.appending(path: "settings.json.claudepult-backup-\(stamp)")
+        let folder = url.deletingLastPathComponent()
+        let name = "\(url.lastPathComponent).claudepult-backup-\(stamp)"
+        var backup = folder.appending(path: name)
         var counter = 2
         while FileManager.default.fileExists(atPath: backup.path) {
-            backup = folder.appending(path: "settings.json.claudepult-backup-\(stamp)-\(counter)")
+            backup = folder.appending(path: "\(name)-\(counter)")
             counter += 1
         }
-        try FileManager.default.copyItem(at: settingsURL, to: backup)
+        try FileManager.default.copyItem(at: url, to: backup)
         return backup
     }
 
-    private func writeSettings(_ settings: [String: Any]) throws {
-        let data = try JSONSerialization.data(withJSONObject: settings, options: [.prettyPrinted, .sortedKeys, .withoutEscapingSlashes])
-        try FileManager.default.createDirectory(at: settingsURL.deletingLastPathComponent(), withIntermediateDirectories: true)
-        try (data + Data("\n".utf8)).write(to: settingsURL, options: .atomic)
-    }
-
-    static func singleQuote(_ text: String) -> String {
-        "'" + text.replacingOccurrences(of: "'", with: "'\\''") + "'"
+    func write(_ object: [String: Any]) throws {
+        let data = try JSONSerialization.data(withJSONObject: object, options: [.prettyPrinted, .sortedKeys, .withoutEscapingSlashes])
+        try FileManager.default.createDirectory(at: url.deletingLastPathComponent(), withIntermediateDirectories: true)
+        try (data + Data("\n".utf8)).write(to: url, options: .atomic)
     }
 }

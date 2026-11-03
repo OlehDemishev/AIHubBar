@@ -236,6 +236,10 @@
             {
               "detail" : "Les sessions ne sont visibles qu'avec les hooks installés dans Réglages (ils sont ajoutés à ~/.claude/settings.json ; une copie est gardée à côté).",
               "name" : "Hooks"
+            },
+            {
+              "detail" : "Leurs sessions affichent aussi « en cours / en attente / terminé » si le hook d'AI Hub Bar est installé sur leur page dans « Services IA ». Codex n'exécute un nouveau hook qu'après vérification : tapez /hooks dans codex et faites-lui confiance. Sans hook, seulement les conversations récentes, sans état.",
+              "name" : "Codex et Copilot"
             }
           ],
           "monospaced" : false,
