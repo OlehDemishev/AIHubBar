@@ -106,6 +106,13 @@ export class HubCore {
       safe.chat_id = device.chat;
     }
     const result = await this.telegram(method, safe);
+    // Remember which Mac sent the message: presses on its buttons go back to that Mac (a request from the MacBook
+    // is answered on the MacBook even while the Mac mini answers the chat). Ids grow, so the 1000th older is dropped.
+    const messageID = result.body?.result?.message_id;
+    if (method === "sendMessage" && result.status === 200 && Number.isInteger(messageID)) {
+      await this.storage.put(`msg:${device.chat}:${messageID}`, deviceId);
+      await this.storage.delete(`msg:${device.chat}:${messageID - 1000}`);
+    }
     return reply(result.status, result.body);
   }
 
@@ -188,15 +195,18 @@ export class HubCore {
     }
     if (command === "/macs") return this.listMacs(chatID, chat, language);
     if (callback?.data?.startsWith("relay:use:")) return this.useMac(chatID, chat, callback, language);
-    if (!chat.active) {
+    // A press goes to the Mac that sent the message it sits on; anything else to the Mac that answers.
+    const sender = callback?.message?.message_id ? await this.storage.get(`msg:${chatID}:${callback.message.message_id}`) : null;
+    const target = sender && chat.devices.includes(sender) ? sender : chat.active;
+    if (!target) {
       if (callback) await this.telegram("answerCallbackQuery", { callback_query_id: callback.id, text: text(language, "noMac") });
       else await this.say(chatID, text(language, "noMac"));
       return;
     }
-    if (this.sockets.send(chat.active, { type: "update", update })) return;
+    if (this.sockets.send(target, { type: "update", update })) return;
     // Telegram's update ids grow, so the keys list in order.
-    await this.storage.put(`q:${chat.active}:${String(update.update_id).padStart(12, "0")}`, { at: this.now(), update });
-    const device = await this.storage.get(`dev:${chat.active}`);
+    await this.storage.put(`q:${target}:${String(update.update_id).padStart(12, "0")}`, { at: this.now(), update });
+    const device = await this.storage.get(`dev:${target}`);
     if (callback) {
       await this.telegram("answerCallbackQuery", { callback_query_id: callback.id, text: text(language, "asleep", { mac: device?.name || "Mac" }) });
     } else if (this.now() - (chat.offlineNoticeAt || 0) > OFFLINE_NOTICE_MS) {

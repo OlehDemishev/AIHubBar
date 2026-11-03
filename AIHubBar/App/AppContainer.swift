@@ -182,6 +182,10 @@ final class AppContainer {
         self.quickTools = quickTools
         telegramBot.runCommand = { [quickTools] command in await quickTools.runForBot(command) }
         telegramBot.currentProfile = { [modes] in modes.current.map { ($0.id, $0.name) } }
+        telegramApprovals.handledElsewhere = { [telegramBot] in telegramBot.handlesRequests }
+        telegramBot.limitServices = { [usage, hub] in
+            (usage.snapshot.map { [ServiceUsage.claude($0, forecast: usage.forecast, week: usage.weekUsage, error: usage.lastError)] } ?? []) + hub.usages
+        }
         self.commandHotKeys = CommandHotKeys(settings: settings) { [modes] in modes.isOn(.quickCommands) }
         commandHotKeys.quickPromptOn = { [modes] in modes.isOn(.quickPrompt) }
         IntentBridge.settings = settings

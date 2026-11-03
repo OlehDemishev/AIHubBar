@@ -73,9 +73,9 @@ Code: `AIHubBar/Models/TelegramBot.swift` (updates, callback data, screens — p
 | 🏠 Главная ✓ | Mac name; Claude session and week %, reset; sessions working / waiting; background runs | the sections, 🔄 |
 | 📊 Отчёты ✓ | what each report does, a running one | ✨ Отчёт с AI (since the morning report), ⚡ Быстрая сводка, AI for 1 / 3 / 24 h |
 | 🧹 Мак ✓ | free disk; stage 4: «Не спать» | 🔍 Что удалит очистка, 🧹 Очистить (asks first) |
-| 🤖 Сессии (2) | waiting first, then working; each with project and what it does | ✅ / ❌ / «Подробнее» on a request |
+| 🤖 Сессии ✓ (2) | waiting first, then working; each with project, agent, what it waits for or does | numbered requests: ✅ n / ❌ n / ℹ️ n |
 | 🚀 Задача (3) | project → agent → text (the next message) → background | ⏹ stop a run, 📜 log tail, the PR link (a link only: PRs are not merged from the bot) |
-| ⏳ Лимиты (4) | every AI service from «Лимиты AI», forecast | alerts 80 / 90 % on/off |
+| ⏳ Лимиты ✓ (2) | every AI service from «Лимиты AI»: a ▓░ bar per window, the reset, «кончится к …» | Telegram limit alerts on/off (thresholds from Settings) |
 | ⚙️ Настройки (4) | which events come, quiet hours, mute 1 h, morning report time | toggles; written to the app's settings, the same switches as in Settings |
 
 - `/report [N]` — AI report since the morning report (10:00, `hours_since_morning` as in `bot.py`) or for N hours
@@ -98,6 +98,8 @@ At most 64 bytes, ASCII, `<verb>[:<arg>…]`. Unknown or malformed data re-rende
 | `allow:<id>`, `deny:<id>` | answer a permission request (the approvals bot's format, kept) |
 | `nav:menu`, `mt:<item id>`, `mc:2`/`mc:3`, `md` | ⚙️ «Меню»: show, switch a button, buttons in a row, «Готово» (sends 🏠 with the menu) |
 | `run:<command id>` | run a quick command after «Запустить?» |
+| `req:<id>` | «Подробнее» on a permission request: the whole command, the session's task, the folder |
+| `lim:on`, `lim:off` | ⏳: limit alerts to Telegram |
 
 Dangerous actions are two steps: the button opens a confirmation (`cln:ask` → «Удалить сборки и сбросить
 симуляторы?» ✅ Да / Отмена), and only the confirmation's own data (`cln:run`) acts.
@@ -184,7 +186,14 @@ login`, `npx wrangler secret put BOT_TOKEN` / `WEBHOOK_SECRET` / `ADMIN_SECRET`,
 1. **Connection, 🏠, reports, cleanup.** Token, chat binding, «Этот Мак отвечает боту», migration from `_daily-report`,
    the poll loop with 409 and stale handling, `setMyCommands`, 🏠 / 📊 / 🧹 / help, `/report`, `/status`, `/clean`.
 1b. **The shared bot** (§7): the Worker, pairing, «Общий бот / Свой бот», notifications through it.
-2. **Sessions and requests + notification settings.** 🤖 screen, requests through this bot with «Подробнее», moving the
+2. ✓ **Sessions and requests, limits** (done 2026-11-03). Requests: the Mac where Claude asks sends «✋ … — Bash» with
+   ✅ / ❌ / ℹ️ as soon as the request appears (the same switch «Присылать запросы разрешений в Telegram»; then
+   `TelegramApprovals` steps aside, its separate bot is no longer needed); the message loses its buttons and says
+   «Разрешено / Отклонено / Ответ уже дан» once answered anywhere. Own bot: ✅ / ❌ only from the Mac that reads the bot
+   (presses reach it alone); shared bot: the relay brings a press back to the Mac that sent the message
+   (`msg:<chat>:<id>` → device, the last 1000), and answering needs «Ответы на запросы через общий бот». Notification
+   settings moved to stage 4 with the rest of ⚙️.
+   Was: **Sessions and requests + notification settings.** 🤖 screen, requests through this bot with «Подробнее», moving the
    approvals bot here, which events come.
 3. **Tasks and run control.** 🚀: project → agent → text → background (`LaunchController`), stop, log tail, PR link.
 4. **Settings in the bot, limits, Mac.** ⚙️ (events, quiet hours, mute 1 h, morning report time), ⏳ every service

@@ -62,7 +62,7 @@ struct TelegramBotTests {
             .cleanupCheck, .cleanupAsk, .cleanupRun, .allCommands, .answer(requestID: "0f3a9c", allow: true),
             .answer(requestID: "0f3a9c", allow: false), .menuToggle(.screen(.reports)),
             .menuToggle(.command("0f3a9c2e-1111-4222-8333-444455556666")), .menuColumns(2), .menuColumns(3), .menuDone,
-            .runCommand("0f3a9c2e-1111-4222-8333-444455556666"),
+            .runCommand("0f3a9c2e-1111-4222-8333-444455556666"), .requestDetails("0f3a9c"), .limitAlerts(true), .limitAlerts(false),
         ]
         for route in routes {
             #expect(BotRoute(data: route.data) == route)
@@ -75,7 +75,7 @@ struct TelegramBotTests {
     @Test func rejectsTamperedData() {
         for data in ["", "nav", "nav:nowhere", "nav:home:x", "rep:ai:0", "rep:ai:169", "rep:ai:three", "cln:rm", "cln",
                      "allow:../../x", "allow:", "drop:0f3a9c", String(repeating: "a", count: 65),
-                     "mt:screen:menu", "mt:screen:nowhere", "mt:cmd:../x", "mt:", "mc:4", "md:x", "run:", "run:a b", "run:../x"] {
+                     "mt:screen:menu", "mt:screen:nowhere", "mt:cmd:../x", "mt:", "mc:4", "md:x", "run:", "run:a b", "run:../x", "req:", "req:../x", "lim:maybe"] {
             #expect(BotRoute(data: data) == nil, "\(data)")
         }
     }
@@ -98,7 +98,7 @@ struct TelegramBotTests {
         let markup = menu.replyMarkup
         #expect(markup["is_persistent"] as? Bool == true && markup["resize_keyboard"] as? Bool == true)
         let rows = try #require(markup["keyboard"] as? [[[String: String]]])
-        #expect(rows.map { $0.map { $0["text"] } } == [["🏠 Главная", "📊 Отчёты"], ["🧹 Мак", "❓ Команды"]])
+        #expect(rows.map { $0.map { $0["text"] } } == [["🏠 Главная", "🤖 Сессии"], ["⏳ Лимиты", "📊 Отчёты"], ["🧹 Мак", "❓ Команды"]])
         for screen in BotScreen.menuScreens {
             #expect(menu.item(forText: BotMenu.title(screen)) == .screen(screen))
         }
@@ -129,7 +129,7 @@ struct TelegramBotTests {
         #expect(!config.contains(.screen(.reports)))
         config.toggle(.command(deploy.id))
         config.move(.command(deploy.id), by: -1)
-        #expect(config.items == ["screen:home", "screen:mac", "cmd:\(deploy.id)", "screen:help"])
+        #expect(config.items == ["screen:home", "screen:sessions", "screen:limits", "screen:mac", "cmd:\(deploy.id)", "screen:help"])
         config.move(.command(deploy.id), by: -10)
         #expect(config.items.first == "cmd:\(deploy.id)")
     }
@@ -212,9 +212,9 @@ struct TelegramBotTests {
         #expect(screen.html.contains("Mac &lt;mini&gt;"))
         #expect(screen.html.contains("42 %") && screen.html.contains("12 %") && screen.html.contains("2 ч 10 мин"))
         #expect(screen.html.contains("2 работают, 1 ждут") && screen.html.contains("Фоновые задачи: 3"))
-        #expect(screen.buttons.flatMap { $0 }.map(\.route) == [.show(.reports), .show(.mac), .show(.home), .show(.help)])
+        #expect(screen.buttons.flatMap { $0 }.map(\.route) == [.show(.sessions), .show(.limits), .show(.reports), .show(.mac), .show(.home), .show(.help)])
         let rows = try #require(screen.replyMarkup["inline_keyboard"] as? [[[String: String]]])
-        #expect(rows.first?.map { $0["callback_data"] } == ["nav:reports", "nav:mac"])
+        #expect(rows.first?.map { $0["callback_data"] } == ["nav:sessions", "nav:limits"])
     }
 
     @Test func homeWithoutLimits() {
@@ -262,5 +262,67 @@ struct TelegramBotTests {
         #expect(BotScreens.hoursText(0.5) == "30 мин")
         #expect(BotScreens.hoursText(3) == "3 ч")
         #expect(BotScreens.hoursText(1.5).hasPrefix("1") && BotScreens.hoursText(1.5).hasSuffix("5 ч"))
+    }
+}
+
+/// Stage 2 (docs/specs/SPEC-telegram.md §8): 🤖 sessions with permission requests, ⏳ limits.
+struct TelegramSessionsLimitsTests {
+    private let now = Date(timeIntervalSince1970: 1_700_000_000)
+    private let request = ApprovalRequest(id: "0f3a9c", sessionID: "s1", project: "Ambo", tool: "Bash",
+                                          summary: "rm -rf build && echo <ok>", created: 1_699_999_000, pid: nil)
+
+    @Test func waitingSessionsComeFirst() {
+        let screen = BotScreens.sessions([
+            BotSessionLine(project: "ClaudePult", agent: "Claude", waiting: false, detail: "Правит TelegramBot.swift", since: now.addingTimeInterval(-120)),
+            BotSessionLine(project: "Ambo <x>", agent: "Codex", waiting: true, detail: "Ждёт ответа", since: nil),
+        ], requests: [], canAnswer: true, now: now)
+        let lines = screen.html.split(separator: "\n").map(String.init)
+        #expect(lines[1].hasPrefix("✋ <b>Ambo &lt;x&gt;</b> · Codex"))
+        #expect(screen.html.contains("⚙️ <b>ClaudePult</b> · Claude"))
+        #expect(screen.buttons.flatMap { $0 }.map(\.route) == [.show(.sessions), .show(.home)])
+        #expect(BotScreens.sessions([], requests: [], canAnswer: true, now: now).html.contains("Сессий сейчас нет"))
+    }
+
+    @Test func requestsAreNumberedWithAnswers() {
+        let lines = [BotRequestLine(id: "0f3a9c", project: "Ambo", tool: "Bash", summary: "rm -rf <build>"),
+                     BotRequestLine(id: "1b2c3d", project: "Cantero", tool: "Edit", summary: "")]
+        let screen = BotScreens.sessions([], requests: lines, canAnswer: true, now: now)
+        #expect(screen.html.contains("1. <b>Ambo</b>: Bash — <code>rm -rf &lt;build&gt;</code>"))
+        #expect(screen.buttons[0].map(\.route) == [.answer(requestID: "0f3a9c", allow: true), .answer(requestID: "0f3a9c", allow: false), .requestDetails("0f3a9c")])
+        #expect(screen.buttons[1].map(\.title) == ["✅ 2", "❌ 2", "ℹ️ 2"])
+        // Not allowed to answer from here: details only, and why.
+        let locked = BotScreens.sessions([], requests: lines, canAnswer: false, now: now)
+        #expect(locked.buttons[0].map(\.route) == [.requestDetails("0f3a9c")] && locked.html.contains("🔒"))
+    }
+
+    @Test func requestMessageAndItsEnd() {
+        let open = BotScreens.request(request, project: "Ambo", canAnswer: true)
+        #expect(open.html.contains("<b>Ambo</b>") && open.html.contains("&lt;ok&gt;"))
+        #expect(open.buttons[0].map(\.route) == [.answer(requestID: "0f3a9c", allow: true), .answer(requestID: "0f3a9c", allow: false), .requestDetails("0f3a9c")])
+        #expect(BotScreens.request(request, project: "Ambo", canAnswer: false).buttons[0].map(\.route) == [.requestDetails("0f3a9c")])
+        #expect(BotScreens.requestClosed(request, project: "Ambo", outcome: true).html.hasSuffix("✅ Разрешено"))
+        #expect(BotScreens.requestClosed(request, project: "Ambo", outcome: false).html.hasSuffix("❌ Отклонено"))
+        #expect(BotScreens.requestClosed(request, project: "Ambo", outcome: nil).buttons.isEmpty)
+        let details = BotScreens.requestDetails(request, project: "Ambo", task: "Почини <сборку>", folder: "/tmp/ambo", canAnswer: true)
+        #expect(details.html.contains("<pre>rm -rf build &amp;&amp; echo &lt;ok&gt;</pre>") && details.html.contains("Почини &lt;сборку&gt;"))
+        #expect(details.buttons.count == 2)
+    }
+
+    @Test func limitsOfEveryService() {
+        let screen = BotScreens.limits([
+            BotLimitService(title: "Claude", windows: [
+                .init(title: "Сессия", percent: 42, resetsAt: now.addingTimeInterval(130 * 60), runsOutAt: now.addingTimeInterval(60 * 60)),
+                .init(title: "Неделя", percent: 12),
+            ]),
+            BotLimitService(title: "OpenRouter", windows: [.init(title: "Баланс", detail: "$4.20")]),
+            BotLimitService(title: "Gemini", windows: [], error: "Нет ключа", isStale: true),
+        ], alertsOn: true, thresholds: [50, 80, 95], now: now)
+        #expect(screen.html.contains("Сессия <code>▓▓▓▓░░░░░░</code> 42 %") && screen.html.contains("2 ч 10 мин"))
+        #expect(screen.html.contains("кончится к") && screen.html.contains("Баланс $4.20"))
+        #expect(screen.html.contains("⚠️ Нет ключа") && screen.html.contains("устарело"))
+        #expect(screen.html.contains("50/80/95 %"))
+        #expect(screen.buttons[0].first?.route == .limitAlerts(false))
+        #expect(BotScreens.limits([], alertsOn: false, thresholds: [80], now: now).buttons[0].first?.route == .limitAlerts(true))
+        #expect(BotScreens.bar(0) == "░░░░░░░░░░" && BotScreens.bar(100) == "▓▓▓▓▓▓▓▓▓▓" && BotScreens.bar(140) == "▓▓▓▓▓▓▓▓▓▓")
     }
 }

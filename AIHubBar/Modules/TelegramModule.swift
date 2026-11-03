@@ -40,6 +40,7 @@ struct TelegramBotSection: View {
 
     var body: some View {
         @Bindable var bot = bot
+        @Bindable var settings = settings
         Section {
             if bot.relay.baseURL != nil {
                 Picker("Как подключаться", systemImage: "point.3.connected.trianglepath.dotted", selection: $bot.usesSharedBot) {
@@ -58,6 +59,15 @@ struct TelegramBotSection: View {
                     .help(bot.usesSharedBot
                           ? String(localized: "Отвечает один Мак этого чата; переключить можно и командой /macs в боте")
                           : String(localized: "Только один Мак читает сообщения бота; уведомления присылают все"))
+            }
+            Toggle("Запросы разрешений в этот бот", systemImage: "hand.raised", isOn: $settings.telegramApprovals)
+                .help("Когда Claude просит разрешение, бот присылает запрос с кнопками «Разрешить», «Отклонить», «Подробнее»")
+            if bot.usesSharedBot, settings.telegramApprovals {
+                Toggle("Ответы на запросы через общий бот", systemImage: "lock.open", isOn: Binding(
+                    get: { settings.telegramBot.answersOverShared == true },
+                    set: { settings.telegramBot.answersOverShared = $0 }
+                ))
+                .help("Выключено — запросы приходят без кнопок, ответить можно только на Маке")
             }
             LabeledContent {
                 Button("Проверить") {

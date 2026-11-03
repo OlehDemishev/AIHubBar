@@ -122,6 +122,7 @@ struct BackgroundRunsSection: View {
 struct TelegramApprovalsSection: View {
     @Environment(AppSettings.self) private var settings
     @Environment(TelegramApprovals.self) private var telegram
+    @Environment(TelegramBotController.self) private var bot
     @State private var token = ""
     @State private var busy = false
 
@@ -129,6 +130,10 @@ struct TelegramApprovalsSection: View {
         @Bindable var settings = settings
         Section {
             Toggle("Присылать запросы разрешений в Telegram", systemImage: "paperplane", isOn: $settings.telegramApprovals)
+            if bot.handlesRequests {
+                Label("Запросы идут через бот модуля «Telegram» — отдельный бот ниже не нужен.", systemImage: "checkmark.circle")
+                    .foregroundStyle(.secondary)
+            }
             IconRow("Токен бота", systemImage: "key") {
                 HStack {
                     if telegram.hasToken {

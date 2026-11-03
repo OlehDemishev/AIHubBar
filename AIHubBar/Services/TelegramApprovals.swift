@@ -59,6 +59,8 @@ final class TelegramApprovals {
     /// Whether the «Telegram» module's bot already reads this token's updates (the same bot): then its loop hands the
     /// presses here (`answerFromBot`) and this one stops reading, or the two would take each other's updates.
     var botReads: (String) -> Bool = { _ in false }
+    /// The «Telegram» module's bot sends and answers the requests itself (SPEC-telegram stage 2): this one steps aside.
+    var handledElsewhere: () -> Bool = { false }
 
     private let settings: AppSettings
     private let sessions: SessionStore
@@ -129,7 +131,7 @@ final class TelegramApprovals {
     }
 
     private func tick() async {
-        guard settings.telegramApprovals, let token, !chatID.isEmpty else { return }
+        guard settings.telegramApprovals, !handledElsewhere(), let token, !chatID.isEmpty else { return }
         let open = sessions.approvals.values
         // New requests get a message; answered ones (here, in Claude or by timeout) lose their buttons.
         for request in open where sent[request.id] == nil {
