@@ -6,10 +6,10 @@
 
 **Now:**
 - `feat/telegram-tasks`: Telegram stage 3 — 🚀 tasks and run control — PR open; then stage 4 (⚙️ settings)
-- merged 2026-11-03: #248 «Не спать» on/off in the menu bar, #241 Codex states, #240 quick command shortcuts, #238 «Быстрый запрос», #236 content spec, #242 «Telegram» stage 1, #244 menu at the bottom, #246 shared bot (Worker not deployed yet), #247 desktop CI off for Mac string changes, #249 the bot's menu set up by each person, #252 stage 2 (sessions, requests, limits)
+- merged 2026-11-03: #251 menu bar ☕ follows the «Не спать» switch, #248 «Не спать» on/off in the menu bar, #241 Codex states, #240 quick command shortcuts, #238 «Быстрый запрос», #236 content spec, #242 «Telegram» stage 1, #244 menu at the bottom, #246 shared bot (Worker not deployed yet), #247 desktop CI off for Mac string changes, #249 the bot's menu set up by each person, #252 stage 2 (sessions, requests, limits)
 
 **Next:**
-- next beta or 0.5.1 carries stage 8 (#230–#232) and #236–#248: 0.5.1-beta.1 was built from 27c5e2d, before them
+- next beta or 0.5.1 carries stage 8 (#230–#232) and #236–#251: 0.5.1-beta.1 was built from 27c5e2d, before them
 - Telegram (docs/specs/SPEC-telegram.md): stage 4 — ⚙️ settings in the bot (events, quiet hours, mute 1 h, morning report time)
 - content (docs/specs/SPEC-content.md, agreed): stage 1 — walkthrough of the «Тексты» profile on a sample folder, then «Версии», then batch tasks
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/specs/SPEC-windows.md §9, stage 2–3 leftovers)
