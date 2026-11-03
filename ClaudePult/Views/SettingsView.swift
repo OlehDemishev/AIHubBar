@@ -138,10 +138,10 @@ enum ResizableSettingsWindow {
         guard observed[id] == nil else { return }
         observed[id] = window.observe(\.styleMask, options: [.new]) { window, _ in
             guard !window.styleMask.contains(.resizable) else { return }
-            DispatchQueue.main.async { MainActor.assumeIsolated { window.styleMask.insert(.resizable) } }
+            DispatchQueue.main.async { MainActor.assumeIsolated { window.styleMask.formUnion(.resizable) } }
         }
         DispatchQueue.main.async {
-            window.styleMask.insert(.resizable)
+            window.styleMask.formUnion(.resizable)
             window.contentMinSize = minSize
             if window.frame.width < size.width || window.frame.height < size.height { window.setContentSize(size) }
         }

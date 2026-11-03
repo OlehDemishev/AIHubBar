@@ -272,15 +272,24 @@ private struct SessionRowView: View {
         // The whole row opens the session (or a background run's log), not only the icon on hover.
         .contentShape(Rectangle())
         .onTapGesture(perform: open)
-        .task(id: row.session?.updatedAt ?? row.run?.finishedAt ?? row.startedAt) {
+        .task(id: refreshKey) {
             guard let folder, row.state != .ended else { return }
             await changesStore.refresh(folder: folder, since: row.startedAt)
         }
         .onHover { isHovered = $0 }
         .animation(.easeOut(duration: 0.12), value: isHovered)
-        .help([inBackground ? String(localized: "в фоне") : row.state.title, action == nil ? nil : row.task, row.session?.cwd ?? row.run?.folder,
-               row.session != nil || row.run != nil ? String(localized: "Клик — открыть") : nil]
-            .compactMap { $0 }.joined(separator: " · "))
+        .help(helpText)
+    }
+
+    /// When the row's changes are read again. Split out of `body`: older compilers (Xcode 26) time out on it.
+    private var refreshKey: Date? { row.session?.updatedAt ?? row.run?.finishedAt ?? row.startedAt }
+
+    private var helpText: String {
+        var parts: [String] = [inBackground ? String(localized: "в фоне") : row.state.title]
+        if action != nil, let task = row.task { parts.append(task) }
+        if let folder = row.session?.cwd ?? row.run?.folder { parts.append(folder) }
+        if row.session != nil || row.run != nil { parts.append(String(localized: "Клик — открыть")) }
+        return parts.joined(separator: " · ")
     }
 
     /// A session comes to the front (its Terminal tab, the Claude app or the folder); a background run shows its log.
