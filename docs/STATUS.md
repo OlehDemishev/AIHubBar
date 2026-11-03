@@ -5,17 +5,16 @@
 **Updated:** 2026-11-03
 
 **Now:**
-- `feat/telegram-menu`: Telegram menu always at the bottom of the chat (persistent reply keyboard) — PR open
-- merged 2026-11-03: #241 Codex session states, #240 quick command shortcuts, #238 «Быстрый запрос», #236 content spec, #242 «Telegram» stage 1
+- nothing in progress; merged 2026-11-03: #241 Codex session states, #240 quick command shortcuts, #238 «Быстрый запрос», #236 content spec, #242 «Telegram» stage 1, #244 Telegram menu at the bottom of the chat
 
 **Next:**
-- next beta or 0.5.1 carries stage 8 (#230–#232) and #236–#242: 0.5.1-beta.1 was built from 27c5e2d, before them
+- next beta or 0.5.1 carries stage 8 (#230–#232) and #236–#244: 0.5.1-beta.1 was built from 27c5e2d, before them
 - Telegram (docs/specs/SPEC-telegram.md): stage 2 — sessions and requests in the bot, approvals bot moved in, notification settings
 - content (docs/specs/SPEC-content.md, agreed): stage 1 — walkthrough of the «Тексты» profile on a sample folder, then «Версии», then batch tasks
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/specs/SPEC-windows.md §9, stage 2–3 leftovers)
 
 **Needs Oleh:**
-- Telegram: after the menu PR is installed, send /menu once — the menu appears at the bottom; then try 📊 and 🧹. Delete `_daily-report/bot.py` and `install-bot.sh`
+- Telegram: send /menu once — the menu appears at the bottom (the installed build has it); then try 📊 and 🧹. Delete `_daily-report/bot.py` and `install-bot.sh`
 - «Быстрый запрос»: Settings → Modules → «Быстрый запрос» on, then ⌃⌥P from Terminal or Xcode — send one task to the background and one to Codex
 - Settings → Codex → «Установить hook», then once in `codex` type `/hooks` and trust AI Hub Bar's hooks (Codex skips untrusted hooks); then check a Codex row in «Сессии» goes «ждёт» on an approval prompt
 - quick command shortcuts: Settings → Modules → «Быстрые команды» → a command → «Сочетание клавиш», record one and press it
