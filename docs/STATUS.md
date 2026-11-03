@@ -5,11 +5,11 @@
 **Updated:** 2026-11-03
 
 **Now:**
-- `feat/telegram-bot`: «Telegram» module, spec docs/specs/SPEC-telegram.md + stage 1 (connection, 🏠 menu, /report, /status, /clean) — PR open, not merged
-- merged 2026-11-03: #241 Codex session states, #240 quick command shortcuts, #238 «Быстрый запрос», #236 content spec
+- nothing in progress; merged 2026-11-03: #241 Codex session states, #240 quick command shortcuts, #238 «Быстрый запрос», #236 content spec, #242 «Telegram» stage 1
 
 **Next:**
-- next beta or 0.5.1 carries stage 8 (#230–#232) and #236–#241: 0.5.1-beta.1 was built from 27c5e2d, before them
+- next beta or 0.5.1 carries stage 8 (#230–#232) and #236–#242: 0.5.1-beta.1 was built from 27c5e2d, before them
+- Telegram (docs/specs/SPEC-telegram.md): stage 2 — sessions and requests in the bot, approvals bot moved in, notification settings; after Oleh connects the new bot
 - content (docs/specs/SPEC-content.md, agreed): stage 1 — walkthrough of the «Тексты» profile on a sample folder, then «Версии», then batch tasks
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/specs/SPEC-windows.md §9, stage 2–3 leftovers)
 
