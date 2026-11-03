@@ -1,11 +1,11 @@
 # Status
 
 <!-- summary:start -->
-**Stage:** Mac: 0.4.0 published (Settings around modules, menu bar dividers, beta builds with «Раскладка» in beta). Windows/Linux (`desktop/`, Tauri 2): postponed by Oleh 2026-11-02 after stages 1–3 main parts
+**Stage:** Mac: 0.5.0 published (new help, full refactoring; «Раскладка» still in beta). Windows/Linux (`desktop/`, Tauri 2): postponed by Oleh 2026-11-02 after stages 1–3 main parts
 **Updated:** 2026-11-03
 
 **Now:**
-- nothing in progress; refactoring finished: stages 0–7 merged (#209–#223), the last one renamed the project to `AIHubBar.xcodeproj` / scheme `AIHubBar`
+- nothing in progress; 0.5.0 released (help + refactoring stages 0–7)
 
 **Next:**
 - Oleh tries «Раскладка» in his own apps; next beta with fixes: `scripts/release.sh 0.5.0-beta.1 --publish`
@@ -13,14 +13,20 @@
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/specs/SPEC-windows.md §9, stage 2–3 leftovers)
 
 **Needs Oleh:**
-- say what comes after the refactoring (a 0.5 release with it, the next beta, or new features)
+- say what comes next: the next beta with «Раскладка» fixes, or new features
 - look at the new help: panel → «?» and https://olehdemishev.github.io/AIHubBar/help.html
 - look at the new Settings and say what to change next
-- MacBook Air: update to 0.4.0 through Sparkle (Settings → General → Updates) and check the island at the real notch
+- MacBook Air: update to 0.5.0 through Sparkle (Settings → General → Updates) and check the island at the real notch
 - «Раскладка» is on and has Accessibility on this Mac: try it in Telegram, Chrome, Safari, Notes; ⌥⇧ on a selection is not tried yet
 - the beta channel exists now (release `beta`, points to 0.4.0): say when the next beta goes out
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-03 — Release 0.5.0 (branch `chore/status-release-0.5.0`)
+
+Done: `scripts/release.sh 0.5.0 --publish` from main `0b337e2` (build 516): v0.5.0 is GitHub's latest release with the `.dmg`, the appcast and the overview PDFs; the beta channel's appcast now points to 0.5.0 too. Release notes: the new help (app and site) and what the refactoring changed for people — a switched-off module really stops, exports keep switched-off modules, the profile editor keeps outside changes, permission answers and notes are no longer lost silently, less work while drawing, `AIHubBar --help`.
+Checked: release.sh ran `scripts/check.sh` first (green). The `.dmg` mounts, holds one widget extension (`AIHubBarWidget.appex`), passes `codesign --verify --deep --strict` (signed «ClaudePult Release»), version 0.5.0. `releases/latest/download/appcast.xml` → 0.5.0 build 516 with the v0.5.0 `.dmg` URL; the beta appcast → 0.5.0.
+Left: an update from 0.4.0 through Sparkle on another Mac isn't tried yet (MacBook Air).
 
 ## 2026-11-03 — refactoring stage 7: docs and names (branch `refactor/stage7-docs-names`)
 
