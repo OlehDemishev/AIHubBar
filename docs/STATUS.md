@@ -5,7 +5,7 @@
 **Updated:** 2026-11-03
 
 **Now:**
-- refactoring audit done: docs/SPEC-refactor.md (branch `docs/refactor-audit`, PR open); waiting for Oleh's decisions before stage 0
+- refactoring stage 0 (safety net and audit bugs) done on branch `refactor/stage0-safety`, PR open (includes the audit); next — stage 1, the module registry
 
 **Next:**
 - Oleh tries «Раскладка» in his own apps; next beta with fixes: `scripts/release.sh 0.5.0-beta.1 --publish`
@@ -13,7 +13,7 @@
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/SPEC-windows.md §9, stage 2–3 leftovers)
 
 **Needs Oleh:**
-- read docs/SPEC-refactor.md and answer its §10 (Mac tests in CI, limit alerts without a profile, renames, STATUS archive, stage order)
+- review and merge the stage 0 PR (it also carries the audit, PR #208)
 - look at the new help: panel → «?» and https://olehdemishev.github.io/AIHubBar/help.html
 - look at the new Settings and say what to change next
 - MacBook Air: update to 0.4.0 through Sparkle (Settings → General → Updates) and check the island at the real notch
@@ -21,6 +21,12 @@
 - the beta channel exists now (release `beta`, points to 0.4.0): say when the next beta goes out
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-03 — refactoring stage 0: safety net and audit bugs (branch `refactor/stage0-safety`)
+
+Done: Oleh took the proposed answers (docs/SPEC-refactor.md §10). The test host now runs on its own throwaway UserDefaults suite and a temp profiles folder (`TestHost`), and the widget test calls `WidgetRequests.handle` instead of posting system-wide Darwin notifications that reached the installed app. Audit bugs fixed: switched-off modules travel in exports and «Заменить всё» takes the file's (`SettingsBundle.off`); `ModeEditor` takes the store's version when the profile changes elsewhere; a permission answer that can't be written is logged and the request stays open; a note that can't be saved shows «Не сохранено» in the panel; the help window's double `.defaultSize`; `--modes`/`--calendar`/`--export-settings` use a read-only `ModeStore`; `claude` lookup and the Telegram config read once instead of on every redraw; «Сравнение» rereads a file only when it changed; help picture colours and «мин»; the hooks hint opens «Сессии агентов». New: `FileFormatTests` pin the keys of profile files, state.json, exports and the menu bar config; `scripts/strings-check.py`, `scripts/strings-sync.sh`, `scripts/check.sh` (release.sh runs it first); `.github/workflows/mac.yml` (catalog check on Linux, tests on macos-26).
+Checked: `scripts/check.sh` green (catalog 0 problems, desktop texts current, all Mac tests); the sync script found and the check now passes for the 2 new strings.
+Left: `PanelGlass` reapplied on every panel update — moved to stage 4 (needs a live look at the glass). The Mac CI job is new: first run on this PR shows whether `macos-26` and tests that use git/CPU work on GitHub's machines.
 
 ## 2026-11-03 — refactoring audit (branch `docs/refactor-audit`)
 
