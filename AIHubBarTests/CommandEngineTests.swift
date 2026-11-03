@@ -56,6 +56,7 @@ struct CommandTextTests {
         let mode = try JSONDecoder().decode(Profile.self, from: Data(#"{"name":"V","commands":[{"title":"Хуки"}]}"#.utf8))
         #expect(mode.commands.map(\.title) == ["Хуки"])
         #expect(CommandTemplate.customTask.asks != nil)
+        #expect(!CommandTemplate.customTask.hint.contains("{"), "the hint is words, not the raw placeholder")
     }
 }
 

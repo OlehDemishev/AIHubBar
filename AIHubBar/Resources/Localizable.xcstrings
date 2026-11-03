@@ -44445,6 +44445,82 @@
         }
       }
     },
+    "Напишите задачу своими словами — AI выполнит её над файлом": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Describe the task in your own words — AI does it on the file"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Напишіть завдання своїми словами — AI виконає його над файлом"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beschreiben Sie die Aufgabe in eigenen Worten – die KI erledigt sie an der Datei"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Décrivez la tâche avec vos mots — l’IA l’exécute sur le fichier"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Describe la tarea con tus palabras: la IA la hará con el archivo"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Descrivi il compito con parole tue: l’IA lo eseguirà sul file"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Descreva a tarefa com suas palavras — a IA a executa no arquivo"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Opisz zadanie własnymi słowami — AI wykona je na pliku"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "タスクを自分の言葉で書いてください — AI がファイルに対して実行します"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "작업을 직접 적어 주세요 — AI가 파일에 대해 실행합니다"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اكتب المهمة بكلماتك — سينفذها الذكاء الاصطناعي على الملف"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tulis tugas dengan kata-kata Anda — AI mengerjakannya pada file"
+          }
+        }
+      }
+    },
     "Напоминания": {
       "localizations": {
         "ar": {

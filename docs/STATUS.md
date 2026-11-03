@@ -5,11 +5,10 @@
 **Updated:** 2026-11-03
 
 **Now:**
-- nothing in progress; 0.5.0 released (help + refactoring stages 0–7)
+- working through Next on Oleh's «всё по плану, до 12 не спрашивай» (2026-11-03 04:27); island drop fix on `fix/notch-drop-early`
 
 **Next:**
 - Oleh tries «Раскладка» in his own apps; next beta with fixes: `scripts/release.sh 0.5.0-beta.1 --publish`
-- Mac island: a live VoiceOver walk; why one test drag onto the island didn't land
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/specs/SPEC-windows.md §9, stage 2–3 leftovers)
 
 **Needs Oleh:**
@@ -17,10 +16,22 @@
 - look at the new help: panel → «?» and https://olehdemishev.github.io/AIHubBar/help.html
 - look at the new Settings and say what to change next
 - MacBook Air: update to 0.5.0 through Sparkle (Settings → General → Updates) and check the island at the real notch
-- «Раскладка» is on and has Accessibility on this Mac: try it in Telegram, Chrome, Safari, Notes; ⌥⇧ on a selection is not tried yet
+- «Раскладка»: tried live in TextEdit, Safari, Chrome (⌥⇧ too); Telegram and Notes are yours to try (not typed into by the agent)
 - the beta channel exists now (release `beta`, points to 0.4.0): say when the next beta goes out
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-03 — Island: quick drops land, readable «Своя задача» hint (branch `fix/notch-drop-early`)
+
+Done: why a file drag onto the island sometimes didn't land: the window took the mouse only after a drag event inside the drop zone, and macOS sends a drag only to a window that took the mouse before the pointer got there — a quick release right after arriving fell through. Now, while a file drag is going on, the window takes the mouse 40 pt around the zone (`NotchIsland.dragMargin`) and accepts the drop only over the zone itself (`dragOver`, also lights the island from the window's own drag callbacks). The accessibility walk of the drop card found the «Своя задача» button's hint was the raw placeholder «{текст}»: `CommandTemplate.hint` gives it words (island and panel), translated into 12 languages.
+Checked: `scripts/check.sh` green (new: the custom task's hint has no placeholder). Live, a real Finder drag of a scratch file driven by posted mouse events, released at once on arrival: 0.5.0 — 1 of 9 landed (12 / 9 / 8 steps), the fix — 7 of 9; with a pause before release both always land. Accessibility tree of the drop card read through the AX API: card label «AI-команды для drop-test.md», file name, folder, «Отмена», «Своя задача» with its hint, the result note.
+Left: drags into apps under the 40 pt margin around the notch are refused while a file is dragged there; at rest on a screen without a notch the island window is an empty accessibility group (nothing is shown, VoiceOver lists it as «Остров у чёлки»).
+
+## 2026-11-03 — «Раскладка» checked live, no fixes needed (no branch, recorded here)
+
+Done: posted key events into a new TextEdit document, a local page in Safari and in Chrome: «ghbdtn» + space → «привет » with the layout switched to Russian; «руддщ» + double Shift → «hello»; ⌥⇧ on a selection «Привет hello» → «Ghbdtn hello» (the Cyrillic word converted, the Latin left), clipboard put back. Logged «fixed a word, en → ru» / «converted the selection» each time.
+Checked: the text read back from TextEdit by AppleScript and from the browsers by ⌘A ⌘C; documents and tabs closed unsaved.
+Left: Telegram and Notes not typed into (Oleh's accounts); a learned word (double Shift right after a fix) not tried live so as not to add a test word to his list; with no fixes there is no new beta.
 
 ## 2026-11-03 — Release 0.5.0 (branch `chore/status-release-0.5.0`)
 

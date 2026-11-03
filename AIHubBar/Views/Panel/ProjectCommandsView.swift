@@ -69,7 +69,7 @@ struct ProjectCommandsView: View {
                     Button(command.title) { start(command) }
                         .controlSize(.small)
                         .disabled(comparing && compareIDs.count < 2)
-                        .help(command.task)
+                        .help(command.hint)
                 }
             }
 
