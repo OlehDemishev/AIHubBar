@@ -30,9 +30,9 @@ struct ApprovalTests {
             )
         }
 
-        /// Waits for the hook's request file.
+        /// Waits for the hook's request file — up to 20 s: the first Python start on a fresh CI machine is slow.
         func request() async throws -> ApprovalRequest {
-            for _ in 0..<100 {
+            for _ in 0..<400 {
                 if let request = ApprovalFiles.requests(in: approvals).first { return request }
                 try await Task.sleep(for: .milliseconds(50))
             }
@@ -57,7 +57,7 @@ struct ApprovalTests {
         #expect(request.tool == "Bash" && request.summary == "npm test" && request.project == "Ambo" && request.sessionID == "abc-123")
         // The session shows as waiting right after the request (the request is written first).
         let record = h.sessions.appending(path: "abc-123.json")
-        for _ in 0..<100 where !FileManager.default.fileExists(atPath: record.path) {
+        for _ in 0..<400 where !FileManager.default.fileExists(atPath: record.path) {
             try await Task.sleep(for: .milliseconds(50))
         }
         #expect(try JSONDecoder().decode(Session.self, from: Data(contentsOf: record)).state == .waiting)
