@@ -23,6 +23,7 @@ extension ModuleUI {
         settings: {
             AnyView(Group {
                 TelegramBotSection()
+                TelegramNotificationsSection()
                 TelegramMenuSection()
             })
         },
@@ -283,5 +284,47 @@ struct TelegramMenuSection: View {
         var config = config
         change(&config)
         settings.telegramBot.setMenu(config, for: target)
+    }
+}
+
+/// «Уведомления в Telegram» (SPEC-telegram stage 4): the same switches as ⚙️ in the bot and the modules' «Telegram»
+/// chips, the quiet hours and an hour of silence.
+struct TelegramNotificationsSection: View {
+    @Environment(AppSettings.self) private var settings
+
+    var body: some View {
+        @Bindable var settings = settings
+        Section {
+            Toggle(BotEvent.backgroundResults.title, systemImage: "terminal", isOn: $settings.telegramForBackground)
+            Toggle(BotEvent.limitAlerts.title, systemImage: "gauge.with.dots.needle.67percent", isOn: $settings.limitAlertsToTelegram)
+            Toggle(BotEvent.calendarReminders.title, systemImage: "calendar", isOn: $settings.calendarRemindersToTelegram)
+            Toggle(BotEvent.pullRequests.title, systemImage: "arrow.triangle.pull", isOn: $settings.pullRequestAlertsToTelegram)
+            Toggle(BotEvent.weeklySummary.title, systemImage: "chart.bar", isOn: $settings.weeklySummary)
+            Picker("Тихие часы", systemImage: "moon", selection: $settings.telegramBot.quietHours) {
+                Text("нет").tag(QuietHours?.none)
+                ForEach(QuietHours.presets, id: \.self) { hours in
+                    Text(verbatim: hours.title).tag(QuietHours?.some(hours))
+                }
+            }
+            .help("В эти часы уведомления в Telegram не приходят; запросы разрешений и ответы бота — приходят")
+            if let until = settings.telegramBot.mutedUntil, until > .now {
+                LabeledContent {
+                    Button("Снять тишину") { settings.telegramBot.mutedUntil = nil }
+                } label: {
+                    Label("Тишина до \(until.formatted(date: .omitted, time: .shortened))", systemImage: "bell.slash")
+                }
+            } else {
+                LabeledContent {
+                    Button("Тишина на 1 ч") { settings.telegramBot.mutedUntil = .now.addingTimeInterval(3600) }
+                        .help("Час без уведомлений в Telegram")
+                } label: {
+                    Label("Уведомления идут", systemImage: "bell")
+                }
+            }
+        } header: {
+            Text("Уведомления в Telegram")
+        } footer: {
+            Footnote(text: String(localized: "То же меняется в боте: ⚙️ Настройки. Запросы разрешений — выше, у бота."))
+        }
     }
 }

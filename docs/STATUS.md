@@ -5,12 +5,12 @@
 **Updated:** 2026-11-03
 
 **Now:**
-- `feat/telegram-tasks`: Telegram stage 3 — 🚀 tasks and run control — PR open; then stage 4 (⚙️ settings)
-- merged 2026-11-03: #248 «Не спать» on/off in the menu bar, #241 Codex states, #240 quick command shortcuts, #238 «Быстрый запрос», #236 content spec, #242 «Telegram» stage 1, #244 menu at the bottom, #246 shared bot (Worker not deployed yet), #247 desktop CI off for Mac string changes, #249 the bot's menu set up by each person, #252 stage 2 (sessions, requests, limits)
+- `feat/telegram-settings`: Telegram stage 4 — ⚙️ settings in the bot, quiet hours, «Не спать» — PR open (the last stage)
+- merged 2026-11-03: #248 «Не спать» on/off in the menu bar, #241 Codex states, #240 quick command shortcuts, #238 «Быстрый запрос», #236 content spec, #242 «Telegram» stage 1, #244 menu at the bottom, #246 shared bot (Worker not deployed yet), #247 desktop CI off for Mac string changes, #249 the bot's menu set up by each person, #252 stage 2 (sessions, requests, limits), #254 stage 3 (tasks and runs)
 
 **Next:**
 - next beta or 0.5.1 carries stage 8 (#230–#232) and #236–#248: 0.5.1-beta.1 was built from 27c5e2d, before them
-- Telegram (docs/specs/SPEC-telegram.md): stage 4 — ⚙️ settings in the bot (events, quiet hours, mute 1 h, morning report time)
+- Telegram: all four stages built; try them live in the bot; deploy the shared bot's Worker when ready (relay/telegram/README.md)
 - content (docs/specs/SPEC-content.md, agreed): stage 1 — walkthrough of the «Тексты» profile on a sample folder, then «Версии», then batch tasks
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/specs/SPEC-windows.md §9, stage 2–3 leftovers)
 
@@ -27,6 +27,12 @@
 - «Раскладка»: tried live in TextEdit, Safari, Chrome (⌥⇧ too); Telegram and Notes are yours to try (not typed into by the agent)
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-03 — Telegram stage 4: settings in the bot, quiet hours, «Не спать» (branch `feat/telegram-settings`)
+
+Done: ⚙️ Настройки in the bot — ✅/☐ for what comes to Telegram (background results, limit thresholds, calendar, PR and CI, permission requests, weekly summary: the existing settings), quiet hours (none / 22–08 / 23–08 / 00–09), «Тишина на 1 ч» / «Снять тишину», the morning report time read from `_daily-report`'s launchd agent (shown, not changed; `/report` counts from it), «Настроить меню». Quiet hours and silence hold back alerts in `Telegram.notify` only. Settings → Modules → Telegram → «Уведомления в Telegram» shows the same. 🧹 Мак: «Не спать» on for an hour or off when that module is installed. ⚙️ joins the default bottom menu (8 buttons). 22 new strings in 12 languages.
+Checked: scripts/check.sh green; 4 new tests (`TelegramSettingsTests`: quiet hours across midnight, an hour of silence, the ⚙️ screen, «Не спать» on 🧹), updated menu and route tests.
+Left: not tried live.
 
 ## 2026-11-03 — Telegram stage 3: tasks and run control (branch `feat/telegram-tasks`)
 

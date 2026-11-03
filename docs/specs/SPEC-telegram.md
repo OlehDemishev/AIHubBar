@@ -72,11 +72,11 @@ Code: `AIHubBar/Models/TelegramBot.swift` (updates, callback data, screens — p
 |---|---|---|
 | 🏠 Главная ✓ | Mac name; Claude session and week %, reset; sessions working / waiting; background runs | the sections, 🔄 |
 | 📊 Отчёты ✓ | what each report does, a running one | ✨ Отчёт с AI (since the morning report), ⚡ Быстрая сводка, AI for 1 / 3 / 24 h |
-| 🧹 Мак ✓ | free disk; stage 4: «Не спать» | 🔍 Что удалит очистка, 🧹 Очистить (asks first) |
+| 🧹 Мак ✓ | free disk; «Не спать» on or off (when that module is installed) | 🔍 Что удалит очистка, 🧹 Очистить (asks first), ☕ Не спать 1 ч / Выключить |
 | 🤖 Сессии ✓ (2) | waiting first, then working; each with project, agent, what it waits for or does | numbered requests: ✅ n / ❌ n / ℹ️ n |
 | 🚀 Задача ✓ (3) | projects (most active first), then the task as the next message, shown back with «Запустить»; running runs (📜 n / ⏹ n) and the last finished ones with their PR link | ⏹ asks first; a link only — PRs are not merged from the bot |
 | ⏳ Лимиты ✓ (2) | every AI service from «Лимиты AI»: a ▓░ bar per window, the reset, «кончится к …» | Telegram limit alerts on/off (thresholds from Settings) |
-| ⚙️ Настройки (4) | which events come, quiet hours, mute 1 h, morning report time | toggles; written to the app's settings, the same switches as in Settings |
+| ⚙️ Настройки ✓ (4) | which events come (background results, limit thresholds, calendar, PR and CI, permission requests, weekly summary), quiet hours, an hour of silence, the morning report time (read from `_daily-report`'s launchd agent) | ✅/☐ per event, quiet hours presets, «Тишина на 1 ч» / «Снять тишину», «Настроить меню»; the same settings as Settings → Modules → Telegram → «Уведомления в Telegram» |
 
 - `/report [N]` — AI report since the morning report (10:00, `hours_since_morning` as in `bot.py`) or for N hours
   (0.25…168); `/status [N]` — the quick one without AI; `/clean check` — what cleanup would delete; `/clean` — asks
@@ -102,6 +102,8 @@ At most 64 bytes, ASCII, `<verb>[:<arg>…]`. Unknown or malformed data re-rende
 | `lim:on`, `lim:off` | ⏳: limit alerts to Telegram |
 | `tsk:p:<8 hex>`, `tsk:go`, `tsk:no`, `tsk:force`, `tsk:after`, `tsk:wt` | 🚀: a project (FNV-1a of its path), start, cancel, the launcher's questions (90 % limit: anyway / after the reset; Claude already in the folder: worktree) |
 | `rl:<run id>`, `rs:<run id>`, `rx:<run id>` | a run's log tail, «Остановить?», the confirmed stop |
+| `ev:<bg/lim/cal/pr/req/wk>`, `qh:off` / `qh:<from>:<to>`, `mute:1` / `mute:0` | ⚙️: an event on/off, quiet hours (presets only), an hour of silence |
+| `ka:1`, `ka:0` | 🧹: «Не спать» for an hour, or off |
 
 Dangerous actions are two steps: the button opens a confirmation (`cln:ask` → «Удалить сборки и сбросить
 симуляторы?» ✅ Да / Отмена), and only the confirmation's own data (`cln:run`) acts.
@@ -201,7 +203,10 @@ login`, `npx wrangler secret put BOT_TOKEN` / `WEBHOOK_SECRET` / `ADMIN_SECRET`,
    back → «Запустить» → `LaunchController.launch(.customTask, mode: .background)`, as «Своя задача…»; the launcher's
    questions come as buttons. Only Claude Code: the other agents run in Terminal on the Mac with the task on the
    clipboard, which a phone can't use. Over the shared bot starting and stopping need «Задачи через общий бот».
-4. **Settings in the bot, limits, Mac.** ⚙️ (events, quiet hours, mute 1 h, morning report time), ⏳ every service
+4. ✓ **Settings in the bot, Mac** (done 2026-11-03; limits went to stage 2). Quiet hours and the hour of silence hold back
+   alerts (`Telegram.notify`), not permission requests or the bot's replies. The morning report time is shown, not
+   changed: it is `_daily-report`'s launchd agent; `/report` counts from it.
+   Was: **Settings in the bot, limits, Mac.** ⚙️ (events, quiet hours, mute 1 h, morning report time), ⏳ every service
    with forecast and 80/90 % alerts, 🧹 «Не спать».
 
 ## 9. Oleh's calls

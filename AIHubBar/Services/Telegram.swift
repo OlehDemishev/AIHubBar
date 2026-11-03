@@ -76,7 +76,8 @@ enum Telegram {
     /// alerts there (SPEC-refactor §6); quietly nothing otherwise.
     @MainActor
     static func notify(_ toggle: TelegramToggle, html: String, settings: AppSettings) {
-        guard settings.isOn(toggle) else { return }
+        // ⚙️ «Тихие часы» and «Тишина на 1 ч» hold alerts back (SPEC-telegram stage 4).
+        guard settings.isOn(toggle), !settings.telegramBot.isQuiet(now: .now) else { return }
         Task { _ = await deliver(html: html, settings: settings) }
     }
 

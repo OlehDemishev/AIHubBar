@@ -65,7 +65,8 @@ struct TelegramBotTests {
             .runCommand("0f3a9c2e-1111-4222-8333-444455556666"), .requestDetails("0f3a9c"), .limitAlerts(true), .limitAlerts(false),
             .taskProject("0a1b2c3d"), .taskGo, .taskCancel, .taskForce, .taskAfterReset, .taskWorktree,
             .runLog("0f3a9c2e-1111-4222-8333-444455556666"), .runStopAsk("0f3a9c2e-1111-4222-8333-444455556666"),
-            .runStop("0f3a9c2e-1111-4222-8333-444455556666"),
+            .runStop("0f3a9c2e-1111-4222-8333-444455556666"), .event(.limitAlerts), .event(.weeklySummary),
+            .quiet(nil), .quiet(QuietHours(from: 23, to: 8)), .mute(true), .mute(false), .keepAwake(true), .keepAwake(false),
         ]
         for route in routes {
             #expect(BotRoute(data: route.data) == route)
@@ -78,7 +79,7 @@ struct TelegramBotTests {
     @Test func rejectsTamperedData() {
         for data in ["", "nav", "nav:nowhere", "nav:home:x", "rep:ai:0", "rep:ai:169", "rep:ai:three", "cln:rm", "cln",
                      "allow:../../x", "allow:", "drop:0f3a9c", String(repeating: "a", count: 65),
-                     "mt:screen:menu", "mt:screen:nowhere", "mt:cmd:../x", "mt:", "mc:4", "md:x", "run:", "run:a b", "run:../x", "req:", "req:../x", "lim:maybe", "tsk:p:xyz", "tsk:p:0a1b2c3", "tsk:maybe", "rx:", "rx:../x"] {
+                     "mt:screen:menu", "mt:screen:nowhere", "mt:cmd:../x", "mt:", "mc:4", "md:x", "run:", "run:a b", "run:../x", "req:", "req:../x", "lim:maybe", "tsk:p:xyz", "tsk:p:0a1b2c3", "tsk:maybe", "rx:", "rx:../x", "ev:x", "qh:5:6", "qh:23", "mute:2", "ka:on"] {
             #expect(BotRoute(data: data) == nil, "\(data)")
         }
     }
@@ -101,7 +102,7 @@ struct TelegramBotTests {
         let markup = menu.replyMarkup
         #expect(markup["is_persistent"] as? Bool == true && markup["resize_keyboard"] as? Bool == true)
         let rows = try #require(markup["keyboard"] as? [[[String: String]]])
-        #expect(rows.map { $0.map { $0["text"] } } == [["🏠 Главная", "🤖 Сессии"], ["🚀 Задача", "⏳ Лимиты"], ["📊 Отчёты", "🧹 Мак"], ["❓ Команды"]])
+        #expect(rows.map { $0.map { $0["text"] } } == [["🏠 Главная", "🤖 Сессии"], ["🚀 Задача", "⏳ Лимиты"], ["📊 Отчёты", "🧹 Мак"], ["⚙️ Настройки", "❓ Команды"]])
         for screen in BotScreen.menuScreens {
             #expect(menu.item(forText: BotMenu.title(screen)) == .screen(screen))
         }
@@ -132,7 +133,7 @@ struct TelegramBotTests {
         #expect(!config.contains(.screen(.reports)))
         config.toggle(.command(deploy.id))
         config.move(.command(deploy.id), by: -1)
-        #expect(config.items == ["screen:home", "screen:sessions", "screen:task", "screen:limits", "screen:mac", "cmd:\(deploy.id)", "screen:help"])
+        #expect(config.items == ["screen:home", "screen:sessions", "screen:task", "screen:limits", "screen:mac", "screen:settings", "cmd:\(deploy.id)", "screen:help"])
         config.move(.command(deploy.id), by: -10)
         #expect(config.items.first == "cmd:\(deploy.id)")
     }
@@ -383,5 +384,55 @@ struct TelegramTasksTests {
         #expect(log.buttons[0].map(\.route) == [.runLog("r-1"), .runStopAsk("r-1")])
         #expect(BotScreens.runLog(run("r-3", .failed), entries: []).buttons[0].map(\.route) == [.runLog("r-3")])
         #expect(BotScreens.runStopConfirm(run("r-1", .running)).buttons[0].map(\.route) == [.runStop("r-1"), .show(.task)])
+    }
+}
+
+/// Stage 4 (docs/specs/SPEC-telegram.md §8): ⚙️ in the bot, quiet hours, an hour of silence, «Не спать».
+struct TelegramSettingsTests {
+    private let calendar: Calendar = {
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = TimeZone(identifier: "Europe/Berlin")!
+        return calendar
+    }()
+
+    private func at(_ hour: Int, _ minute: Int = 0) -> Date {
+        calendar.date(from: DateComponents(year: 2026, month: 11, day: 3, hour: hour, minute: minute))!
+    }
+
+    @Test func quietHoursAcrossMidnight() {
+        var settings = TelegramBotSettings()
+        #expect(!settings.isQuiet(now: at(23), calendar: calendar))
+        settings.quietHours = QuietHours(from: 23, to: 8)
+        #expect(settings.isQuiet(now: at(23, 30), calendar: calendar) && settings.isQuiet(now: at(3), calendar: calendar))
+        #expect(!settings.isQuiet(now: at(8), calendar: calendar) && !settings.isQuiet(now: at(22, 59), calendar: calendar))
+        settings.quietHours = QuietHours(from: 0, to: 9)
+        #expect(settings.isQuiet(now: at(0), calendar: calendar) && !settings.isQuiet(now: at(9), calendar: calendar))
+    }
+
+    @Test func anHourOfSilence() {
+        var settings = TelegramBotSettings()
+        settings.mutedUntil = at(15)
+        #expect(settings.isQuiet(now: at(14, 30), calendar: calendar))
+        #expect(!settings.isQuiet(now: at(15, 1), calendar: calendar))
+    }
+
+    @Test func settingsScreen() {
+        let screen = BotScreens.settings(events: [(.backgroundResults, true), (.calendarReminders, false)],
+                                         quiet: QuietHours(from: 23, to: 8), mutedUntil: at(15), morningHour: 10, now: at(14))
+        let titles = screen.buttons.flatMap { $0 }.map(\.title)
+        #expect(titles.contains("✅ Итоги фоновых задач") && titles.contains("☐ Напоминания календаря"))
+        #expect(titles.contains("● 23–08") && titles.contains("○ Без тихих часов"))
+        #expect(screen.html.contains("23:00–08:00") && screen.html.contains("10:00"))
+        #expect(screen.buttons.flatMap { $0 }.map(\.route).contains(.mute(false)))
+        let calm = BotScreens.settings(events: [], quiet: nil, mutedUntil: nil, morningHour: nil, now: at(14))
+        #expect(calm.buttons.flatMap { $0 }.map(\.route).contains(.mute(true)) && !calm.html.contains("🌅"))
+        #expect(calm.buttons.flatMap { $0 }.map(\.title).contains("● Без тихих часов"))
+    }
+
+    @Test func keepAwakeOnTheMacScreen() {
+        #expect(!BotScreens.mac(freeBytes: nil, job: nil).buttons.flatMap { $0 }.map(\.route).contains(.keepAwake(true)))
+        #expect(BotScreens.mac(freeBytes: nil, job: nil, keepAwake: false).buttons[1].map(\.route) == [.keepAwake(true)])
+        #expect(BotScreens.mac(freeBytes: nil, job: nil, keepAwake: true).buttons[1].map(\.route) == [.keepAwake(false)])
+        #expect(BotRoute.keepAwake(true).isAction && !BotRoute.event(.requests).isAction && !BotRoute.mute(true).isAction)
     }
 }
