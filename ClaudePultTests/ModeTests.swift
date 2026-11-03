@@ -10,7 +10,7 @@ struct ModeStoreTests {
         defaults.removePersistentDomain(forName: name)
         let settings = AppSettings(defaults: defaults)
         settings.projectsDirectory = NSHomeDirectory() + "/Projects"
-        settings.dailyReportDirectory = NSHomeDirectory() + "/Projects/_daily-report"
+        settings.dailyReportDirectory = TestFolders.dailyReport()
         settings.defaultLaunchMode = .background
         let dir = FileManager.default.temporaryDirectory.appending(path: name)
         return (settings, dir)
@@ -24,7 +24,7 @@ struct ModeStoreTests {
         let store = ModeStore(settings: settings, directory: dir)
         #expect(store.modes.count == 1)
         let mode = try #require(store.current)
-        #expect(mode.source == .gitReport(projects: "~/Projects", dailyReport: "~/Projects/_daily-report"))
+        #expect(mode.source == .gitReport(projects: "~/Projects", dailyReport: PathText.tilde(settings.dailyReportDirectory)))
         #expect(mode.launchMode == .background)
         #expect(mode.commonCommands == .dailyReport)
         #expect(!mode.showCommonCommands)

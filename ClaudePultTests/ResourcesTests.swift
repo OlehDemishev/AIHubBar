@@ -82,7 +82,7 @@ struct OptionalModuleTests {
         defaults.removePersistentDomain(forName: name)
         let settings = AppSettings(defaults: defaults)
         settings.projectsDirectory = NSHomeDirectory() + "/Projects"
-        settings.dailyReportDirectory = NSHomeDirectory() + "/Projects/_daily-report"
+        settings.dailyReportDirectory = TestFolders.dailyReport()
         let dir = FileManager.default.temporaryDirectory.appending(path: name)
         return (ModeStore(settings: settings, directory: dir), settings, dir)
     }

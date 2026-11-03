@@ -134,6 +134,7 @@ struct CalendarStoreTests {
         let defaults = try #require(UserDefaults(suiteName: name))
         defer { defaults.removePersistentDomain(forName: name) }
         let settings = AppSettings(defaults: defaults)
+        settings.dailyReportDirectory = TestFolders.dailyReport()
         settings.calendarReminderHours = []
         let modes = ModeStore(settings: settings, directory: root.appending(path: ".modes"))
         var mode = try #require(modes.current)
