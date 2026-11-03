@@ -15,22 +15,22 @@ enum ModuleSwitch {
     /// What brings a built-in module into the current profile: a calendar, the `_daily-report` commands, or (for
     /// projects, which need a folder) the profile's page. Nil when there is no profile.
     static func enableAction(_ kind: ModuleKind, modes: ModeStore) -> (title: String, run: () -> Void)? {
-        guard kind.isBuiltIn, !modes.installedModules.contains(kind), let mode = modes.current else { return nil }
-        switch kind {
-        case .upcoming:
+        guard let bringIn = kind.definition.bringIn, !modes.installedModules.contains(kind), let mode = modes.current else { return nil }
+        switch bringIn {
+        case .calendar:
             return (String(localized: "Включить календарь в профиле «\(mode.name)»"), {
                 var changed = mode
                 changed.calendar = .dates
                 modes.update(changed)
             })
-        case .reports where modes.hasDailyReport:
+        case .dailyReport where modes.hasDailyReport:
             return (String(localized: "Включить команды _daily-report в профиле «\(mode.name)»"), {
                 var changed = mode
                 changed.commonCommands = .dailyReport
                 changed.showCommonCommands = true
                 modes.update(changed)
             })
-        default:
+        case .dailyReport, .profilePage:
             return (String(localized: "Открыть профиль «\(mode.name)»…"), {
                 UserDefaults.standard.set(SettingsView.Tab.modes.rawValue, forKey: SettingsRoute.tabKey)
             })
@@ -39,12 +39,7 @@ enum ModuleSwitch {
 
     /// Why a built-in module has no switch yet.
     static func unavailableReason(_ kind: ModuleKind) -> String {
-        switch kind {
-        case .upcoming: String(localized: "Появится, когда у профиля включён календарь — «Профили» → профиль.")
-        case .projects: String(localized: "Появится, когда у профиля есть источник проектов — «Профили» → профиль.")
-        case .reports: String(localized: "Появится, когда у профиля команды _daily-report — «Профили» → профиль.")
-        default: String(localized: "Появится вместе с первым профилем.")
-        }
+        kind.definition.bringIn?.unavailableReason ?? String(localized: "Появится вместе с первым профилем.")
     }
 }
 
@@ -75,17 +70,7 @@ enum ModulePlace: CaseIterable, Sendable {
     }
 
     /// The places a module has.
-    static func of(_ kind: ModuleKind) -> [ModulePlace] {
-        switch kind {
-        case .limits, .sessions: [.panel, .menuBar, .island, .notifications, .telegram]
-        case .upcoming, .projects: [.panel, .menuBar, .notifications, .telegram]
-        case .resources: [.panel, .menuBar, .notifications]
-        case .keepAwake: [.panel, .menuBar]
-        case .reports, .quickCommands, .toggles, .clipboard, .notes: [.panel]
-        case .layout: [.menuBar]
-        case .notch: []
-        }
-    }
+    static func of(_ kind: ModuleKind) -> [ModulePlace] { kind.definition.places }
 }
 
 /// Edits the menu bar the way Settings → «Строка меню» does: the current profile gets every change too.
@@ -97,17 +82,7 @@ enum MenuBarEdit {
     }
 
     /// What switching a module's menu bar place on brings in.
-    static func primaryKinds(_ kind: ModuleKind) -> [MenuBarElement.Kind] {
-        switch kind {
-        case .limits: [.session, .week]
-        case .sessions: [.waiting]
-        case .upcoming: [.deadline]
-        case .projects: [.projectsAlert]
-        case .resources: [.cpu, .memory]
-        case .keepAwake: [.keepAwake]
-        default: []
-        }
-    }
+    static func primaryKinds(_ kind: ModuleKind) -> [MenuBarElement.Kind] { kind.definition.primaryMenuBarKinds }
 }
 
 /// The «Где показывать» chips of one module.
@@ -149,7 +124,7 @@ struct ModulePlaces: View {
         case .island: String(localized: "Ушко у чёлки показывает модуль")
         case .notifications: String(localized: "Уведомления macOS от модуля; как часто — ниже, в «Как часто уведомлять»")
         case .telegram:
-            kind == .sessions
+            kind.definition.telegram == .backgroundResults
                 ? String(localized: "Итоги фоновых задач в Telegram; ответы на запросы разрешений — ниже, «Ответы из Telegram»")
                 : String(localized: "Дублировать в Telegram; бот — «Основные» → Telegram")
         }
@@ -160,7 +135,8 @@ struct ModulePlaces: View {
         case .panel:
             Binding(get: { modes.current?.shows(kind) ?? false }, set: { setPanel($0) })
         case .menuBar:
-            if kind == .layout {
+            if kind.definition.ownMenuBarItem {
+                // «Раскладка»'s language is an item of its own, not an element of the main one.
                 Binding(get: { settings.layout.menuBarIcon }, set: { settings.layout.menuBarIcon = $0 })
             } else {
                 Binding(get: { menuBarKinds.contains { settings.menuBarConfig.element($0).enabled } }, set: { setMenuBar($0) })
@@ -186,7 +162,7 @@ struct ModulePlaces: View {
         modes.update(mode)
     }
 
-    private var menuBarKinds: [MenuBarElement.Kind] { MenuBarElement.Kind.allCases.filter { $0.module == kind } }
+    private var menuBarKinds: [MenuBarElement.Kind] { kind.definition.menuBarKinds }
 
     private func setMenuBar(_ on: Bool) {
         var config = settings.menuBarConfig
@@ -197,26 +173,28 @@ struct ModulePlaces: View {
         MenuBarEdit.store(config, settings: settings, modes: modes)
     }
 
-    private var ears: [NotchEar] { kind == .limits ? [.sessionLimit, .weekLimit, .otherAI] : [.sessions, .background] }
+    private var ears: [NotchEar] { kind.definition.island?.ears ?? [] }
 
     private func setIsland(_ on: Bool) {
         if on {
-            if kind == .limits { settings.notch.leftEar = .sessionLimit } else { settings.notch.rightEar = .sessions }
+            guard let slot = kind.definition.island, let ear = slot.ears.first else { return }
+            if slot.left { settings.notch.leftEar = ear } else { settings.notch.rightEar = ear }
         } else {
             if ears.contains(settings.notch.leftEar) { settings.notch.leftEar = .none }
             if ears.contains(settings.notch.rightEar) { settings.notch.rightEar = .none }
         }
     }
 
-    private var notificationKinds: [NotificationKind] { NotificationKind.allCases.filter { $0.module == kind } }
+    /// The notifications that are this module's alone (command results belong to two modules: not here).
+    private var notificationKinds: [NotificationKind] { kind.definition.notifications.filter { $0.module == kind } }
 
     private var notificationsOn: Bool {
-        if kind == .resources, !settings.resourceAlerts { return false }
+        if let toggle = kind.definition.notificationSwitch, !settings.isOn(toggle) { return false }
         return notificationKinds.contains { settings.frequency($0) != .off }
     }
 
     private func setNotifications(_ on: Bool) {
-        if kind == .resources { settings.resourceAlerts = on }
+        if let toggle = kind.definition.notificationSwitch { settings.set(toggle, on) }
         for notification in notificationKinds {
             if on {
                 if settings.frequency(notification) == .off { settings.notificationFrequencies[notification.rawValue] = nil }
@@ -227,13 +205,40 @@ struct ModulePlaces: View {
     }
 
     private var telegram: Binding<Bool>? {
-        @Bindable var settings = settings
-        return switch kind {
-        case .limits: $settings.limitAlertsToTelegram
-        case .sessions: $settings.telegramForBackground
-        case .upcoming: $settings.calendarRemindersToTelegram
-        case .projects: $settings.pullRequestAlertsToTelegram
-        default: nil
+        kind.definition.telegram.map { toggle in Binding(get: { settings.isOn(toggle) }, set: { settings.set(toggle, $0) }) }
+    }
+}
+
+extension AppSettings {
+    /// The setting behind a module's Telegram place.
+    func isOn(_ toggle: TelegramToggle) -> Bool {
+        switch toggle {
+        case .limitAlerts: limitAlertsToTelegram
+        case .backgroundResults: telegramForBackground
+        case .calendarReminders: calendarRemindersToTelegram
+        case .pullRequests: pullRequestAlertsToTelegram
+        }
+    }
+
+    func set(_ toggle: TelegramToggle, _ on: Bool) {
+        switch toggle {
+        case .limitAlerts: limitAlertsToTelegram = on
+        case .backgroundResults: telegramForBackground = on
+        case .calendarReminders: calendarRemindersToTelegram = on
+        case .pullRequests: pullRequestAlertsToTelegram = on
+        }
+    }
+
+    /// The setting behind a module's own notifications switch.
+    func isOn(_ toggle: NotificationSwitch) -> Bool {
+        switch toggle {
+        case .resourceAlerts: resourceAlerts
+        }
+    }
+
+    func set(_ toggle: NotificationSwitch, _ on: Bool) {
+        switch toggle {
+        case .resourceAlerts: resourceAlerts = on
         }
     }
 }
@@ -322,30 +327,7 @@ struct ModulePage: View {
     }
 
     @ViewBuilder private var sections: some View {
-        switch kind {
-        case .limits:
-            LimitSection()
-            HubSection()
-        case .sessions:
-            SessionSection()
-            BackgroundRunsSection()
-            TelegramApprovalsSection()
-        case .upcoming: ReminderSection()
-        case .projects: PullRequestAlertSection()
-        case .reports:
-            Section {
-                Text("Команды _daily-report: отчёт, быстрая сводка, очистка сборок. Папка _daily-report — у профиля.")
-                    .foregroundStyle(.secondary)
-            }
-        case .resources: ResourceSection()
-        case .keepAwake: KeepAwakeSection()
-        case .quickCommands: QuickCommandsSection()
-        case .toggles: QuickTogglesSection()
-        case .clipboard: ClipboardSection()
-        case .notes: NotesSection()
-        case .notch: NotchSection()
-        case .layout: LayoutSection()
-        }
+        if let settings = ModuleUI.of(kind).settings { settings() }
     }
 
     private var profiles: String {
@@ -707,16 +689,6 @@ private struct PanelBuilderRow: View {
 private struct PanelSketch: View {
     let modules: [ModuleKind]
 
-    @Environment(UsageStore.self) private var usage
-    @Environment(SessionStore.self) private var sessions
-    @Environment(ProjectStore.self) private var store
-    @Environment(CalendarStore.self) private var calendar
-    @Environment(SystemMonitor.self) private var monitor
-    @Environment(KeepAwakeController.self) private var keepAwake
-    @Environment(ClipboardHistory.self) private var clipboard
-    @Environment(NotesStore.self) private var notes
-    @Environment(AppSettings.self) private var settings
-
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text("Панель сейчас").font(.system(size: 12, weight: .medium)).foregroundStyle(.secondary)
@@ -748,69 +720,9 @@ private struct PanelSketch: View {
         .accessibilityLabel(String(localized: "Схема панели: ") + modules.map(\.title).joined(separator: ", "))
     }
 
-    /// What the block shows now; its one line when there is nothing live to show.
+    /// What the block shows now, from the module's own file; its tagline when it has nothing live to show.
     @ViewBuilder private func live(_ kind: ModuleKind) -> some View {
-        switch kind {
-        case .limits:
-            if let session = usage.snapshot?.session?.utilization {
-                HStack(spacing: 6) {
-                    MiniBar(value: session)
-                    if let week = usage.snapshot?.week?.utilization { MiniBar(value: week) }
-                }
-            } else {
-                line(kind.tagline)
-            }
-        case .sessions:
-            let running = sessions.items.filter { $0.state == .running }.count
-            line(sessions.items.isEmpty ? String(localized: "Нет сессий")
-                 : String(localized: "Ждут: \(sessions.waitingCount) · работают: \(running)"))
-        case .projects:
-            let red = store.projects.filter { $0.health == .red }.count
-            line(store.projects.isEmpty ? kind.tagline : String(localized: "Проектов: \(store.projects.count) · с проблемами: \(red)"))
-        case .upcoming:
-            line(calendar.nearest().map { CalendarText.menuBar($0) } ?? String(localized: "Ничего на 7 дней"))
-        case .resources:
-            if let snapshot = monitor.snapshot {
-                line(String(localized: "Процессор \(Int(snapshot.cpu.rounded())) % · память \(Int(snapshot.memoryPercent.rounded())) %"))
-            } else {
-                line(kind.tagline)
-            }
-        case .keepAwake:
-            line(keepAwake.reason == nil ? String(localized: "Mac может уснуть") : String(localized: "Не даёт уснуть"))
-        case .clipboard:
-            line(String(localized: "Записей: \(clipboard.items.count)"))
-        case .notes:
-            line(String(localized: "Заметок: \(notes.names.count)"))
-        case .quickCommands:
-            line(String(localized: "Команд: \(settings.quickCommands.count)"))
-        case .toggles:
-            line(String(localized: "Переключателей: \(settings.quickToggles.count)"))
-        case .reports, .notch, .layout:
-            line(kind.tagline)
-        }
-    }
-
-    private func line(_ text: String) -> some View {
-        Text(text).font(.system(size: 10.5)).foregroundStyle(.secondary).lineLimit(1)
-    }
-}
-
-/// A limit as the panel draws it: a thin bar coloured by level and its percent.
-private struct MiniBar: View {
-    let value: Double
-
-    var body: some View {
-        HStack(spacing: 3) {
-            GeometryReader { geometry in
-                ZStack(alignment: .leading) {
-                    Capsule().fill(Color.secondary.opacity(0.25))
-                    Capsule().fill(Color(nsColor: MenuBarRenderer.color(value)))
-                        .frame(width: max(3, geometry.size.width * min(value, 100) / 100))
-                }
-            }
-            .frame(width: 44, height: 4)
-            Text("\(Int(value.rounded())) %").font(.system(size: 10.5, weight: .medium)).monospacedDigit()
-        }
+        if let sketch = ModuleUI.of(kind).sketch { sketch() } else { SketchLine(kind.tagline) }
     }
 }
 
