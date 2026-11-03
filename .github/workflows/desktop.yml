@@ -4,16 +4,16 @@
 name: Desktop
 
 on:
+  # Not on the Mac string catalog while Windows/Linux are postponed (Oleh, 2026-11-02): scripts/check.sh still checks
+  # the desktop texts locally. Put "AIHubBar/Resources/Localizable.xcstrings" back here when the work resumes.
   pull_request:
     paths:
       - "desktop/**"
-      - "AIHubBar/Resources/Localizable.xcstrings"
       - ".github/workflows/desktop.yml"
   push:
     branches: [main]
     paths:
       - "desktop/**"
-      - "AIHubBar/Resources/Localizable.xcstrings"
       - ".github/workflows/desktop.yml"
   workflow_dispatch:
 
