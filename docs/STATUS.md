@@ -5,19 +5,18 @@
 **Updated:** 2026-11-03
 
 **Now:**
-- nothing in progress; Telegram is complete in code (stages 1–4, shared bot, Mini App) and waits for the Worker deploy
+- Telegram: Worker deployed at https://aihubbar-telegram.oleh-demishev.workers.dev (new bot, old bots deleted by Oleh); the app points at it — pairing and a live check next
 - merged 2026-11-03: #251 menu bar ☕ follows the «Не спать» switch, #248 «Не спать» on/off in the menu bar, #241 Codex states, #240 quick command shortcuts, #238 «Быстрый запрос», #236 content spec, #242 «Telegram» stage 1, #244 menu at the bottom, #246 shared bot (Worker not deployed yet), #247 desktop CI off for Mac string changes, #249 the bot's menu set up by each person, #252 stage 2 (sessions, requests, limits), #254 stage 3 (tasks and runs), #255 stage 4 (settings in the bot), #256 Mini App
 
 **Next:**
 - next beta or 0.5.1 carries stage 8 (#230–#232) and #236–#256: 0.5.1-beta.1 was built from 27c5e2d, before them
-- Telegram: after Oleh deploys the Worker — put its address into `TelegramRelay.defaultURL`, then try the bot and the Mini App live
+- Telegram: pair the Mac mini with the shared bot, try the bot and the Mini App live
 - content (docs/specs/SPEC-content.md, agreed): stage 1 — walkthrough of the «Тексты» profile on a sample folder, then «Версии», then batch tasks
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/specs/SPEC-windows.md §9, stage 2–3 leftovers)
 
 **Needs Oleh:**
-- Telegram Mini App (and the shared bot): create the bot at @BotFather, deploy `relay/telegram` (README: Cloudflare login, three secrets, `npm run deploy`, `/admin/setup`), send the workers.dev address; then in AI Hub Bar choose «Общий бот» and «Подключить Telegram» — the Menu button opens the app
-- shared Telegram bot: create the bot at @BotFather (pick its name), then deploy the Worker by `relay/telegram/README.md` (Cloudflare login, three secrets, `npm run deploy`, `/admin/setup`) and send the workers.dev address — it goes into `TelegramRelay.defaultURL`
-- Telegram: send /menu once — the menu appears at the bottom (the installed build has it); then try 📊 and 🧹. Delete `_daily-report/bot.py` and `install-bot.sh`
+- Telegram: after this build — Settings → Modules → Telegram → «Общий бот» → «Подключить Telegram» → Start; put the new bot's token into `_daily-report/config.json` (the old bot is deleted, so the morning report can't send until then)
+- Telegram: delete `_daily-report/bot.py` and `install-bot.sh`
 - «Быстрый запрос»: Settings → Modules → «Быстрый запрос» on, then ⌃⌥P from Terminal or Xcode — send one task to the background and one to Codex
 - Settings → Codex → «Установить hook», then once in `codex` type `/hooks` and trust AI Hub Bar's hooks (Codex skips untrusted hooks); then check a Codex row in «Сессии» goes «ждёт» on an approval prompt
 - quick command shortcuts: Settings → Modules → «Быстрые команды» → a command → «Сочетание клавиш», record one and press it
@@ -28,6 +27,12 @@
 - «Раскладка»: tried live in TextEdit, Safari, Chrome (⌥⇧ too); Telegram and Notes are yours to try (not typed into by the agent)
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-03 — shared Telegram bot deployed (branch `chore/telegram-relay-url`)
+
+Done: Oleh deleted the old bots (`@DailyReportCCbot`, the dead approvals bot), made a new one and signed in to Cloudflare; the relay `relay/telegram` is deployed as `aihubbar-telegram` on `oleh-demishev.workers.dev` (the account's workers.dev subdomain had to be created in the dashboard first, error 10063), secrets BOT_TOKEN / WEBHOOK_SECRET / ADMIN_SECRET set (the last two random, kept in the Keychain, `aihubbar-relay`). `TelegramRelay.defaultURL` now points at it.
+Checked: `npm test` in relay/telegram (0 failed); `/app?demo=1` answers 200 and `/admin/setup` without the key 403 (the new subdomain needed ~80 s before TLS worked); scripts/check.sh green.
+Left: pairing and the live check (bot screens, Mini App, a permission request); `_daily-report/config.json` still has the deleted bot's token.
 
 ## 2026-11-03 — Telegram Mini App (branch `feat/telegram-mini-app`)
 

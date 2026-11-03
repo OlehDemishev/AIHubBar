@@ -184,6 +184,7 @@ don't. Enough for hundreds of users; beyond that Workers Paid is $5 a month.
 **Oleh does once** (`relay/telegram/README.md`): make the bot at @BotFather (its name is his call), `npx wrangler
 login`, `npx wrangler secret put BOT_TOKEN` / `WEBHOOK_SECRET` / `ADMIN_SECRET`, `npx wrangler deploy`, then
 `POST /admin/setup`. The Worker's address goes into the app (`TelegramRelay.defaultURL`) in a one-line follow-up.
+Deployed 2026-11-03: `https://aihubbar-telegram.oleh-demishev.workers.dev`.
 
 ## 8. Stages (one PR each)
 
