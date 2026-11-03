@@ -181,9 +181,11 @@ enum HelpTopic: String, CaseIterable, Identifiable, Sendable {
                 HelpFact(String(localized: "Разрешения"), String(localized: "«Разрешить» и «Отклонить» — в уведомлении, в строке сессии, в острове и, если включено, в Telegram. Работает ответ, который пришёл первым."), symbol: "hand.raised"),
                 HelpFact(String(localized: "Показать"), String(localized: "Вывести вкладку Терминала с этой сессией; для сессий приложения Claude — открыть эту сессию в Claude, иначе — папку."), symbol: "macwindow"),
                 HelpFact(String(localized: "Терминал / Фон"), String(localized: "Где запускать: окно Терминала (можно отвечать Claude) или claude -p без окна (только разрешённые действия, лимит времени, итог — уведомлением и в Telegram). «Запомнить выбор» или профиль по умолчанию — в Настройках."), symbol: "terminal"),
+                HelpFact(ModuleKind.quickPrompt.title, String(localized: "⌃⌥P в любом приложении: задача, проект (тот, что впереди, или прошлый) и агент — ⌘↩, и она в фоне или в Терминале. Модуль «Быстрый запрос», клавиша — на его странице."), symbol: ModuleKind.quickPrompt.symbol),
                 HelpFact(String(localized: "Журнал"), String(localized: "Фоновая задача: что делает Claude, по шагам."), symbol: "doc.text"),
                 HelpFact(String(localized: "Остановить"), String(localized: "Фоновая задача: остановить сейчас."), symbol: "stop.circle"),
                 HelpFact("Hooks", String(localized: "Сессии видны, только если в Настройках установлены hooks (они дописываются в ~/.claude/settings.json, копия сохраняется рядом)."), symbol: "link"),
+                HelpFact(String(localized: "Codex и Copilot"), String(localized: "Их сессии тоже показывают «работает / ждёт / готово», если на их странице в «Сервисах AI» установлен hook AI Hub Bar. Codex запускает новый hook только после проверки: в codex введите /hooks и доверьте его. Без hook — только недавние беседы, без состояния."), symbol: "person.2"),
             ])]
         case .services:
             [HelpSection(facts: [

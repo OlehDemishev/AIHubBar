@@ -226,6 +226,10 @@
               "name" : "Terminal / Background"
             },
             {
+              "detail" : "⌃⌥P in any app: the task, the project (the one in front, or the last one) and the agent — ⌘↩, and it runs in the background or in Terminal. The “Quick Prompt” module; the key is on its page.",
+              "name" : "Quick Prompt"
+            },
+            {
               "detail" : "Background task: what Claude does, step by step.",
               "name" : "Log"
             },
@@ -236,6 +240,10 @@
             {
               "detail" : "Sessions are visible only with hooks installed in Settings (they are added to ~/.claude/settings.json; a copy is kept next to it).",
               "name" : "Hooks"
+            },
+            {
+              "detail" : "Their sessions also show “running / waiting / done” when AI Hub Bar's hook is installed on their page under “AI Services”. Codex runs a new hook only after review: type /hooks in codex and trust it. Without the hook — only recent conversations, without a state.",
+              "name" : "Codex and Copilot"
             }
           ],
           "monospaced" : false,
@@ -519,7 +527,7 @@
               "name" : "Notes"
             },
             {
-              "detail" : "Your own buttons: a script in the background or in Terminal, a macOS «Shortcuts» shortcut, a link, file, folder or app.",
+              "detail" : "Your own buttons: a script in the background or in Terminal, a macOS «Shortcuts» shortcut, a link, file, folder or app. Each can have its own keyboard shortcut.",
               "name" : "Quick Commands"
             }
           ],

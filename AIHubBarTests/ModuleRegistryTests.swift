@@ -15,7 +15,7 @@ struct ModuleRegistryTests {
 
     /// The sidebar keeps the order it had before the registry.
     @Test func sidebarOrder() {
-        #expect(ModuleGroup.ai.modules == [.limits, .sessions])
+        #expect(ModuleGroup.ai.modules == [.limits, .sessions, .quickPrompt])
         #expect(ModuleGroup.work.modules == [.upcoming, .projects, .reports, .quickCommands, .notes, .clipboard])
         #expect(ModuleGroup.mac.modules == [.resources, .keepAwake, .toggles, .layout, .notch])
     }
@@ -50,7 +50,7 @@ struct ModuleRegistryTests {
     @Test func flagsAsBefore() {
         #expect(ModuleKind.allCases.filter(\.isBuiltIn) == [.limits, .sessions, .upcoming, .projects, .reports])
         #expect(ModuleKind.allCases.filter(\.isBeta) == [.layout])
-        #expect(ModuleKind.allCases.filter { !$0.isPanelBlock } == [.notch, .layout])
+        #expect(ModuleKind.allCases.filter { !$0.isPanelBlock } == [.notch, .layout, .quickPrompt])
         #expect(ModuleKind.upcoming.definition.bringIn == .calendar && ModuleKind.projects.definition.bringIn == .profilePage)
     }
 }

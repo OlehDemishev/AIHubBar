@@ -5,28 +5,61 @@
 **Updated:** 2026-11-03
 
 **Now:**
-- nothing in progress; refactoring stage 8 (audit leftovers) done — #230–#232
+- nothing in progress; merged 2026-11-03: #241 Codex session states, #240 quick command shortcuts, #238 «Быстрый запрос», #236 content spec
+- under discussion with Oleh: Telegram bot with its own menu (settings, answers, control, reports)
 
 **Next:**
-- next beta or 0.5.1 carries stage 8 (#230–#232): 0.5.1-beta.1 was built from 27c5e2d, before it
+- next beta or 0.5.1 carries stage 8 (#230–#232) and #236–#241: 0.5.1-beta.1 was built from 27c5e2d, before them
 - content (docs/specs/SPEC-content.md, agreed): stage 1 — walkthrough of the «Тексты» profile on a sample folder, then «Версии», then batch tasks
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/specs/SPEC-windows.md §9, stage 2–3 leftovers)
 
 **Needs Oleh:**
+- «Быстрый запрос»: Settings → Modules → «Быстрый запрос» on, then ⌃⌥P from Terminal or Xcode — send one task to the background and one to Codex
+- Settings → Codex → «Установить hook», then once in `codex` type `/hooks` and trust AI Hub Bar's hooks (Codex skips untrusted hooks); then check a Codex row in «Сессии» goes «ждёт» on an approval prompt
+- quick command shortcuts: Settings → Modules → «Быстрые команды» → a command → «Сочетание клавиш», record one and press it
 - GitHub → repository Settings → Social preview: upload docs/images/social-preview.png (only by hand)
 - Settings → Copilot → «Установить hook»: then start `copilot` and check its row in «Сессии» (the agent wasn't allowed to install it into ~/.copilot itself)
-- say what comes next: «Раскладка» to everyone, or new features
 - look at the new Settings and say what to change next
 - MacBook Air: update to 0.5.0 through Sparkle (Settings → General → Updates) and check the island at the real notch
 - «Раскладка»: tried live in TextEdit, Safari, Chrome (⌥⇧ too); Telegram and Notes are yours to try (not typed into by the agent)
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
 
+## 2026-11-03 — four feature PRs merged (main session)
+
+Done: merged #241 (Codex states), #240 (quick command shortcuts), #238 («Быстрый запрос») and #236 (content spec) in that order. String catalog conflicts resolved by a three-way JSON merge (no string lost: 1538 base + 26 + 10 + 17). While «Быстрый запрос» is on, its key is one of the app's own keys in `CommandHotKeys.reserved`, so a quick command can't take it (test in `CommandHotKeysTests.theAppsOwnKeys`); this closes the hotkeys entry's Left.
+Checked: scripts/check.sh green on each combined branch before its merge; CI green on every PR.
+Left: nothing from the merges.
+
 ## 2026-11-03 — Spec: content as modules and the «Тексты» profile (branch `docs/content-spec`)
 
 Done: the October texts-mode draft (`docs/SPEC-content.md`, d4fbcd8) re-read against today's app as `docs/specs/SPEC-content.md`. Most of it already exists through SPEC-modes/profiles (folder projects, `проект.md`, stages, words and running time, commands with results next to the source, «только файлы» permissions, night queue, calendar, «Тексты» template) and is reused as is. New: optional module «Версии» (hidden draft versions in Application Support, own store without git, texts and the card only, before every AI run and on changes, compare and restore in the card) and batch tasks inside «Проекты» (one command over several projects, sequential, now / at night / after the reset). Quick prompt left to its own spec. Oleh's answers: walkthrough first, own store, texts only, batch tasks in this wave; versions every 10 min on changes, all of the last 24 h, then one a day for 30 days. Row in `docs/specs/README.md`.
 Checked: docs only; claims about what exists checked against the code (`FolderProject`, `CommandTemplate`, `BackgroundPermissions`, `NightQueue`, templates) and DECISIONS.md / CHECKLIST.md.
 Left: stage 1 (walkthrough).
+
+## 2026-11-03 — «Быстрый запрос»: a task to an agent from any app (branch `feat/quick-prompt`)
+
+Done: new optional AI module «Быстрый запрос» (docs/specs/SPEC-quick-prompt.md). A Carbon hot key (⌃⌥P by default; ⌃⌥A, ⌃⇧Space, off — on the module's page; registered only while the module is on) opens a small floating window: task, project, agent, «Фон» / «Терминал»; ⌘↩ sends, Esc closes. The project starts as the one in front (front window's document or a project name in its title, read only if Accessibility is already granted), else the last one, else the most recently active. Claude Code goes through `LaunchController` like «Своя задача…» (worktree, the 90 % limit question and «Запустить всё равно» shown in the window); other installed agents open in Terminal with the task on the clipboard. `AIHubBar --app-command quick-prompt` opens it (module off → its Settings page). Help fact in «Сессии агентов», site help JSON exported, REFERENCE updated, 17 new strings in 13 languages. `GlobalHotKey` changes are additive (one more id, `registerQuickPrompt`).
+Checked: scripts/check.sh green (warnings as errors), new `QuickPromptTests` (project choice, agents and modes, keys, settings decoding); installed with scripts/build-and-install.sh, `--app-command quick-prompt` with the module off logs and opens the module's page (screenshot).
+Left: the window itself not tried live (Oleh was using the screen; turning the module on would change his setup) — see Needs Oleh. Other agents get the task through the clipboard; passing it as their first prompt waits for their flags to be checked live.
+
+## 2026-11-03 — quick command shortcuts (branch `feat/command-hotkeys`)
+
+Done: every «Быстрая команда» can have a global shortcut (SPEC-profiles §4.3, was second wave): a recorder in the command's editor («Записать», ✕ clears, Esc cancels; ⌘/⌃/⌥ or a lone F1–F20), stored with the command (`hotKey`, optional — old libraries decode), registered by the new `CommandHotKeys` while the module is installed and on, in any profile; a press runs the command like its button, «Спрашивать перед запуском» as an alert. The editor names conflicts: the app's own keys (search, island ⌃⌥Y/⌃⌥N) win, the first command in the library wins a duplicate, keys macOS refused; warnings for macOS's own keys and ⌘-only keys. The panel shows the key on the button (hover hint, VoiceOver label). `GlobalHotKey` got additive registration of N command keys and a recorder hand-off. Strings in all 12 languages, module summary and footnote updated, help JSON re-exported, SPEC-profiles and REFERENCE updated. The command library isn't in `.claudepult` files, so neither are the shortcuts.
+Checked: scripts/check.sh green (warnings as errors), new CommandHotKeysTests (storage with/without a shortcut, names, conflicts, registration bookkeeping, asking before a run). Live, this branch's Release build run from build/: with the module on and F19 on «Мой IP в сети», the log showed «1 registered» and a posted F19 ran the command (exit 0); Oleh's settings put back afterwards (module off again, default library). The editor and the panel were not looked at on screen.
+Left: if «быстрый запрос» (parallel branch) adds its own global key, add it to `CommandHotKeys.reserved` after both are merged. Panel search still runs a quick command without «Спрашивать перед запуском» (older behaviour, not changed here).
+
+## 2026-11-03 — «ждёт» for Codex CLI; Antigravity researched (branch `feat/agent-waiting`)
+
+Done: Codex 0.166 has stable lifecycle hooks (`~/.codex/hooks.json`, Claude-shaped, snake_case payload with `session_id` = thread id). `CodexHooks` merges AI Hub Bar's entries into that file (backup first, other hooks untouched, a file left empty is removed); Settings → Codex → «Состояние сессий Codex» with «Установить hook» / «Снять hook» and hover hints; `AIHubBar --codex-hooks status|install|uninstall`. The shared hook script (format 5) takes `--agent codex`: `PermissionRequest` → «ждёт» with the same notification as Claude's, `UserPromptSubmit` / `PostToolUse` → «работает» (`apply_patch` shows the file it edits), `Stop` / `Interrupt` → «готово», `SessionEnd` → ended (3 s timeout, Codex's maximum). A Codex hook session hides its thread row. `HookJSONFile` now holds the JSON read / backup / write that Claude's installer had; the read error names the file. Antigravity: its hooks (`PreToolUse`, `Stop`, …) have no event for an approval prompt and its run status has no waiting value, so nothing was built — findings in SPEC-ai-services stage 7. Strings in all 13 languages, help fact «Codex и Copilot», site/help exported, REFERENCE and specs README updated.
+Checked: `scripts/check.sh` green (strings, all Mac tests with warnings as errors; new `CodexHooksTests` — 6 tests on payloads from Codex's hooks docs); installed with `scripts/build-and-install.sh`, Settings → Codex shows the section, `--codex-hooks status` → notInstalled. Live: a `codex exec` with our hook passed by `-c hooks.…` ran nothing — Codex skips untrusted hooks silently (`--dangerously-bypass-hook-trust` was not used), so no live session states yet. An `agy -i` probe stopped at agy's first-run colour-scheme screen and was closed unanswered.
+Left: Oleh installs and trusts the hook, then a live check (whether the TUI's hooks run in `codex` itself or the shared app-server daemon decides what «Показать» finds). Approving Codex prompts from AI Hub Bar (its `PermissionRequest` answer has Claude's shape) — not offered until checked live. Codex's `request_user_input` question has no hook event. The `codex exec` probe left a thread in a scratch folder that shows in «Сессии» for 3 hours.
+
+## 2026-11-03 — overview PDFs for 1.0 (branch `docs/overview-1.0`)
+
+Done: docs/AI-Hub-Bar-Overview-en.pdf and -ru.pdf now 9 pages: a new page 5 «The notch, put to work» (notch island: ears, events, permission requests, file drop) with Layout fix (beta); the cover with the new tagline and bullets for the island and Mac tools; Copilot CLI sessions and Claude's task list on «At a glance» and «Agent sessions»; the notch island card instead of Calendar on page 2 (Calendar stays in Mac tools). Icon paths fixed after the AIHubBar rename.
+Checked: every page rendered to PNG and looked at in both languages; nothing runs into the footer.
+Left: the cover's panel mock-up still shows the older panel (no island).
 
 ## 2026-11-03 — social preview for the 1.0 site (branch `chore/social-preview-1.0`)
 

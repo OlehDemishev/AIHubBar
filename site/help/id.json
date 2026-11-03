@@ -226,6 +226,10 @@
               "name" : "Terminal / Latar belakang"
             },
             {
+              "detail" : "⌃⌥P di aplikasi mana pun: tugas, proyek (yang di depan, atau yang terakhir) dan agen — ⌘↩, lalu berjalan di latar belakang atau di Terminal. Modul «Permintaan cepat», tombolnya di halamannya.",
+              "name" : "Permintaan cepat"
+            },
+            {
               "detail" : "Tugas latar belakang: apa yang dilakukan Claude, langkah demi langkah.",
               "name" : "Log"
             },
@@ -236,6 +240,10 @@
             {
               "detail" : "Sesi hanya terlihat jika hook terpasang di Pengaturan (ditambahkan ke ~/.claude/settings.json; salinannya disimpan di sebelahnya).",
               "name" : "Hooks"
+            },
+            {
+              "detail" : "Sesi mereka juga menampilkan “bekerja / menunggu / selesai” jika hook AI Hub Bar dipasang di halamannya pada “Layanan AI”. Codex menjalankan hook baru hanya setelah ditinjau: ketik /hooks di codex lalu percayai. Tanpa hook, hanya percakapan terbaru tanpa status.",
+              "name" : "Codex dan Copilot"
             }
           ],
           "monospaced" : false,
@@ -519,7 +527,7 @@
               "name" : "Catatan"
             },
             {
-              "detail" : "Tombol sendiri: skrip di latar belakang atau Terminal, pintasan «Pintasan» macOS, tautan, file, folder, atau aplikasi.",
+              "detail" : "Tombol sendiri: skrip di latar belakang atau Terminal, pintasan «Pintasan» macOS, tautan, file, folder, atau aplikasi. Masing-masing bisa punya pintasan papan ketik sendiri.",
               "name" : "Perintah cepat"
             }
           ],

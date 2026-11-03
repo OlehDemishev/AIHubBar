@@ -83,7 +83,10 @@ struct ServicePage: View {
                 AgentsSection(kinds: service.agents)
             }
             if service == .copilot {
-                CopilotStatesSection()
+                AgentStatesSection(agent: .copilot)
+            }
+            if service == .codex {
+                AgentStatesSection(agent: .codex)
             }
             if !service.hubSources.isEmpty {
                 LimitsSourcesSection(sources: service.hubSources)
@@ -182,13 +185,23 @@ private struct AgentsSection: View {
     }
 }
 
-/// Copilot CLI sessions in «Сессии» with «работает / ждёт / готово» through AI Hub Bar's hook (`CopilotHooks`).
-private struct CopilotStatesSection: View {
+/// Copilot or Codex CLI sessions in «Сессии» with «работает / ждёт / готово» through AI Hub Bar's hook
+/// (`CopilotHooks`, `CodexHooks`).
+private struct AgentStatesSection: View {
+    let agent: AgentKind
     @Environment(AppSettings.self) private var settings
     @State private var status: HookStatus = .notInstalled
     @State private var message: String?
 
-    private var hooks: CopilotHooks { .live(projectsDirectory: settings.projectsDirectory) }
+    /// The agent's hook file: status and changes, the same for both.
+    private var hooks: (status: () -> HookStatus, install: () throws -> Void, uninstall: () throws -> Void, update: () throws -> Bool) {
+        if agent == .codex {
+            let hooks = CodexHooks.live(projectsDirectory: settings.projectsDirectory)
+            return (hooks.status, { try hooks.install() }, { try hooks.uninstall() }, hooks.updateScriptIfNeeded)
+        }
+        let hooks = CopilotHooks.live(projectsDirectory: settings.projectsDirectory)
+        return (hooks.status, hooks.install, hooks.uninstall, hooks.updateScriptIfNeeded)
+    }
 
     /// One hook here, not Claude's «hooks».
     private var statusText: String {
@@ -199,45 +212,63 @@ private struct CopilotStatesSection: View {
         }
     }
 
+    private var label: String {
+        agent == .codex ? String(localized: "Hook AI Hub Bar для Codex") : String(localized: "Hook AI Hub Bar для Copilot")
+    }
+
+    private var header: String {
+        agent == .codex ? String(localized: "Состояние сессий Codex") : String(localized: "Состояние сессий Copilot")
+    }
+
+    private var footnote: String {
+        agent == .codex
+            ? String(localized: "С hook сессии Codex CLI видны в «Сессиях» как у Claude: работает, ждёт разрешения, готово — и «ждёт» приходит уведомлением. Записи AI Hub Bar добавляются в ~/.codex/hooks.json (перед изменением — резервная копия рядом), другие hooks Codex не трогаются. Codex запускает новый hook только после проверки: один раз откройте codex, введите /hooks и доверьте hooks AI Hub Bar. Подхватывается новыми сессиями Codex.")
+            : String(localized: "С hook сессии Copilot CLI видны в «Сессиях» как у Claude: работает, ждёт разрешения или ответа, готово — и «ждёт» приходит уведомлением. Это отдельный файл ~/.copilot/hooks/aihubbar.json; другие hooks Copilot не трогаются. Подхватывается новыми сессиями Copilot.")
+    }
+
     var body: some View {
         Section {
-            LabeledContent("Hook AI Hub Bar для Copilot", value: statusText)
+            LabeledContent(label, value: statusText)
             HStack {
                 if status != .installed {
                     Button(status == .outdated ? String(localized: "Обновить hook") : String(localized: "Установить hook")) {
                         perform { try hooks.install() }
                     }
+                    .help(agent == .codex ? String(localized: "Добавить записи AI Hub Bar в ~/.codex/hooks.json")
+                        : String(localized: "Записать файл ~/.copilot/hooks/aihubbar.json"))
                 }
                 if status != .notInstalled {
                     Button("Снять hook") { perform { try hooks.uninstall() } }
+                        .help(String(localized: "Убрать hook AI Hub Bar; другие hooks агента остаются"))
                 }
             }
             if let message {
                 Text(message).font(.caption).foregroundStyle(.secondary)
             }
         } header: {
-            Text("Состояние сессий Copilot")
+            Text(header)
         } footer: {
-            Footnote(text: String(localized: "С hook сессии Copilot CLI видны в «Сессиях» как у Claude: работает, ждёт разрешения или ответа, готово — и «ждёт» приходит уведомлением. Это отдельный файл ~/.copilot/hooks/aihubbar.json; другие hooks Copilot не трогаются. Подхватывается новыми сессиями Copilot."))
+            Footnote(text: footnote)
         }
         .onAppear(perform: refresh)
     }
 
     private func refresh() {
-        _ = try? hooks.updateScriptIfNeeded()
+        _ = try? hooks.update()
         status = hooks.status()
     }
 
     private func perform(_ action: () throws -> Void) {
         do {
             try action()
-            message = nil
+            message = agent == .codex && hooks.status() == .installed
+                ? String(localized: "Готово. Теперь в codex введите /hooks и доверьте hooks AI Hub Bar — до этого Codex их пропускает.") : nil
         } catch {
             message = error.localizedDescription
-            AppLog.error("Copilot hook install/uninstall failed: \(error.localizedDescription)")
+            AppLog.error("\(agent.binary) hook install/uninstall failed: \(error.localizedDescription)")
         }
         refresh()
-        AppLog.info("Copilot hook: \(status)")
+        AppLog.info("\(agent.binary) hook: \(status)")
     }
 }
 

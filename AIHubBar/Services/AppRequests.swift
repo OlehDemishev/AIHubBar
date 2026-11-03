@@ -15,7 +15,7 @@ final class AppRequests {
     /// `--app-command` names that open a window instead of running a command.
     static let windows: [String: WindowID] = Dictionary(uniqueKeysWithValues: [WindowID.help, .cleanupOutput, .settings, .assistant, .notchSetup].map { ($0.rawValue, $0) })
     /// Other `--app-command` names handled by the app itself.
-    static let actions = ["test-notification", "test-island"]
+    static let actions = ["test-notification", "test-island", "quick-prompt"]
 
     private(set) var window: WindowRequest?
     /// The last request a view opened: one made before the menu bar label was there is opened when it appears.
@@ -46,6 +46,9 @@ final class AppRequests {
                     Notifier.postTest()
                 } else if name == "test-island" {
                     Notifier.postIslandTest()
+                } else if name == "quick-prompt" {
+                    // The same as its hot key: what is in front is read before the window comes up.
+                    GlobalHotKey.quickPromptAction?()
                 } else if let window = Self.windows[name] {
                     self?.openWindow(window)
                 } else if let command = CommonCommand.allCases.first(where: { $0.cliName == name }) {

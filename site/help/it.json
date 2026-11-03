@@ -226,6 +226,10 @@
               "name" : "Terminale / Background"
             },
             {
+              "detail" : "⌃⌥P in qualsiasi app: attività, progetto (quello in primo piano o l’ultimo) e agente — ⌘↩, e parte in background o in Terminale. Modulo «Richiesta rapida», la scorciatoia è nella sua pagina.",
+              "name" : "Richiesta rapida"
+            },
+            {
               "detail" : "Attività in background: cosa fa Claude, passo dopo passo.",
               "name" : "Registro"
             },
@@ -236,6 +240,10 @@
             {
               "detail" : "Le sessioni si vedono solo con gli hook installati nelle Impostazioni (vengono aggiunti a ~/.claude/settings.json; accanto resta una copia).",
               "name" : "Hooks"
+            },
+            {
+              "detail" : "Anche le loro sessioni mostrano «in corso / in attesa / pronto» se l'hook di AI Hub Bar è installato nella loro pagina in «Servizi AI». Codex esegue un nuovo hook solo dopo la verifica: digita /hooks in codex e accettalo. Senza hook, solo le conversazioni recenti, senza stato.",
+              "name" : "Codex e Copilot"
             }
           ],
           "monospaced" : false,
@@ -519,7 +527,7 @@
               "name" : "Note"
             },
             {
-              "detail" : "Pulsanti tuoi: uno script in background o nel Terminale, un comando di «Comandi rapidi» di macOS, un link, un file, una cartella o un’app.",
+              "detail" : "Pulsanti tuoi: uno script in background o nel Terminale, un comando di «Comandi rapidi» di macOS, un link, un file, una cartella o un’app. Ognuno può avere la sua scorciatoia da tastiera.",
               "name" : "Comandi rapidi"
             }
           ],

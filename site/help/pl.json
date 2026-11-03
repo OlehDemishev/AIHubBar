@@ -226,6 +226,10 @@
               "name" : "Terminal / W tle"
             },
             {
+              "detail" : "⌃⌥P w dowolnej aplikacji: zadanie, projekt (ten na wierzchu albo ostatni) i agent — ⌘↩, i działa w tle lub w Terminalu. Moduł „Szybkie zapytanie”, skrót jest na jego stronie.",
+              "name" : "Szybkie zapytanie"
+            },
+            {
               "detail" : "Zadanie w tle: co robi Claude, krok po kroku.",
               "name" : "Dziennik"
             },
@@ -236,6 +240,10 @@
             {
               "detail" : "Sesje widać tylko wtedy, gdy w Ustawieniach zainstalowano hooki (są dopisywane do ~/.claude/settings.json; obok zostaje kopia).",
               "name" : "Hooks"
+            },
+            {
+              "detail" : "Ich sesje też pokazują „pracuje / czeka / gotowe”, jeśli na ich stronie w „Usługach AI” zainstalowano hook AI Hub Bar. Codex uruchamia nowy hook dopiero po sprawdzeniu: wpisz /hooks w codex i zaufaj mu. Bez hooka tylko ostatnie rozmowy, bez stanu.",
+              "name" : "Codex i Copilot"
             }
           ],
           "monospaced" : false,
@@ -519,7 +527,7 @@
               "name" : "Notatki"
             },
             {
-              "detail" : "Własne przyciski: skrypt w tle lub w Terminalu, skrót z «Skróty» macOS, link, plik, folder albo aplikacja.",
+              "detail" : "Własne przyciski: skrypt w tle lub w Terminalu, skrót z «Skróty» macOS, link, plik, folder albo aplikacja. Każdy może mieć własny skrót klawiszowy.",
               "name" : "Szybkie polecenia"
             }
           ],

@@ -37,6 +37,17 @@ struct AIHubBarApp: App {
         .windowResizability(.contentSize)
         .defaultPosition(.center)
 
+        Window("Быстрый запрос — AI Hub Bar", id: WindowID.quickPrompt.rawValue) {
+            QuickPromptWindow()
+                .appEnvironment(app)
+                .preferredColorScheme(app.settings.panelTheme.colorScheme)
+                .debugSnapshot("quick-prompt")
+        }
+        .handlesExternalEvents(matching: [])
+        .windowStyle(.hiddenTitleBar)
+        .windowResizability(.contentSize)
+        .defaultPosition(.center)
+
         Window(String(localized: "Claude Code: инструкции и MCP"), id: WindowID.claudeConfig.rawValue) {
             ClaudeConfigWindow()
                 .appEnvironment(app)
