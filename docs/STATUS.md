@@ -5,8 +5,8 @@
 **Updated:** 2026-11-03
 
 **Now:**
-- nothing in progress; merged 2026-11-03: #241 Codex session states, #240 quick command shortcuts, #238 «Быстрый запрос», #236 content spec
-- under discussion with Oleh: Telegram bot with its own menu (settings, answers, control, reports)
+- `feat/telegram-bot`: «Telegram» module, spec docs/specs/SPEC-telegram.md + stage 1 (connection, 🏠 menu, /report, /status, /clean) — PR open, not merged
+- merged 2026-11-03: #241 Codex session states, #240 quick command shortcuts, #238 «Быстрый запрос», #236 content spec
 
 **Next:**
 - next beta or 0.5.1 carries stage 8 (#230–#232) and #236–#241: 0.5.1-beta.1 was built from 27c5e2d, before them
@@ -14,6 +14,7 @@
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/specs/SPEC-windows.md §9, stage 2–3 leftovers)
 
 **Needs Oleh:**
+- Telegram bot: new bot at @BotFather → Mac mini: Settings → Modules → «Telegram» on, paste the token, «Привязать чат» → «Start»; then /menu. Reports keep coming from the `_daily-report` bot until config.json points at the new one (`python3 report.py --setup-telegram` with the module off). Delete `_daily-report/bot.py` and `install-bot.sh`
 - «Быстрый запрос»: Settings → Modules → «Быстрый запрос» on, then ⌃⌥P from Terminal or Xcode — send one task to the background and one to Codex
 - Settings → Codex → «Установить hook», then once in `codex` type `/hooks` and trust AI Hub Bar's hooks (Codex skips untrusted hooks); then check a Codex row in «Сессии» goes «ждёт» on an approval prompt
 - quick command shortcuts: Settings → Modules → «Быстрые команды» → a command → «Сочетание клавиш», record one and press it
@@ -24,6 +25,12 @@
 - «Раскладка»: tried live in TextEdit, Safari, Chrome (⌥⇧ too); Telegram and Notes are yours to try (not typed into by the agent)
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-03 — «Telegram» module: spec and stage 1 (branch `feat/telegram-bot`)
+
+Done: docs/specs/SPEC-telegram.md (one bot inside AI Hub Bar with its own menu: screens, callback data, safety, state, settings, migration, 4 stages; Oleh's answers: no PR merging from the phone, the Mac mini answers, `bot.py` retired, a new bot). Stage 1: optional AI module «Telegram» (`Modules/TelegramModule.swift`, `Services/TelegramBotController.swift`, pure logic in `Models/TelegramBot.swift`): token in the Keychain (`telegram-bot`, the send-only bot's account), chat linked by a `t.me/<bot>?start=<code>` link (or the chat already set / the `_daily-report` one), «Этот Мак отвечает боту» (desktop on, laptop off by default; HTTP 409 shown as «Бота читает другой Мак»), «Взять бота из _daily-report», `setMyCommands` (/menu, /report, /status, /clean, /help), screens 🏠 / 📊 / 🧹 / ❓ edited in place, `report.py` / `cleanup.py` one at a time, /clean asks first, messages older than 30 min and action presses right after a gap skipped, only the linked private chat answered. Approvals: if the approvals bot is the same bot, its own `getUpdates` stops and the module hands it the ✅/❌ presses. Settings → General → Telegram is now a pointer to the module; the help fact, the site help and the old «Основные → Telegram» pointers updated. 67 new strings in 12 languages. `_daily-report/help.txt`: the bot section now lists AI Hub Bar's commands; the `bot.py` maintenance lines removed.
+Checked: scripts/check.sh (strings, desktop texts, all Mac tests with warnings as errors); 14 new tests in `TelegramBotTests` (update parsing, only the linked private chat, stale messages, route round trip and tampered data, commands as in bot.py, screens and escaping, hours since the morning report). Not checked live: Oleh hasn't connected the new bot yet.
+Left: stage 2 (sessions and requests in the bot, moving the approvals bot, which events come — the approvals section's texts still describe a separate bot), stage 3 (tasks and run control), stage 4 (settings in the bot, all limits, «Не спать», morning report time). `report.py` sends through the `config.json` bot, so until Oleh points it at the new bot the reports come from the old one.
 
 ## 2026-11-03 — four feature PRs merged (main session)
 

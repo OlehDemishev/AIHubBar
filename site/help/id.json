@@ -553,7 +553,7 @@
               "name" : "Seberapa sering"
             },
             {
-              "detail" : "Bot ada di «Umum» → Telegram. Apa yang diteruskan diatur dengan chip «Telegram» di halaman modul.",
+              "detail" : "Bot adalah modul “Telegram”: token, chat, dan menu di dalam bot (/menu — batas, sesi, laporan, pembersihan). Apa yang diteruskan — chip “Telegram” di halaman modul.",
               "name" : "Telegram"
             },
             {

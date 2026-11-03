@@ -129,6 +129,11 @@ final class AppSettings {
         didSet { defaults.setEncoded(layout, forKey: Keys.layout) }
     }
 
+    /// «Telegram» (SPEC-telegram §6).
+    var telegramBot: TelegramBotSettings {
+        didSet { defaults.setEncoded(telegramBot, forKey: Keys.telegramBot) }
+    }
+
     /// «Быстрый запрос» (SPEC-quick-prompt §4): its hot key, and the project and mode of the last request.
     var quickPrompt: QuickPromptSettings {
         didSet { defaults.setEncoded(quickPrompt, forKey: Keys.quickPrompt) }
@@ -242,7 +247,7 @@ final class AppSettings {
         notificationFrequencies[kind.rawValue].flatMap(NotificationFrequency.init(rawValue:)) ?? kind.defaultFrequency
     }
 
-    /// The chat of the bot set in Settings → Основные → Telegram (the token is in the Keychain).
+    /// The chat of the bot set in the «Telegram» module (the token is in the Keychain).
     var telegramChatID: String {
         didSet { defaults.set(telegramChatID, forKey: Keys.telegramChatID) }
     }
@@ -357,6 +362,7 @@ final class AppSettings {
         betaUpdates = defaults.bool(forKey: Keys.betaUpdates)
         layout = defaults.decoded(LayoutSettings.self, forKey: Keys.layout) ?? LayoutSettings()
         quickPrompt = defaults.decoded(QuickPromptSettings.self, forKey: Keys.quickPrompt) ?? QuickPromptSettings()
+        telegramBot = defaults.decoded(TelegramBotSettings.self, forKey: Keys.telegramBot) ?? TelegramBotSettings()
         resourceDiskBelowGB = defaults.positiveInt(Keys.resourceDiskBelowGB, default: 20)
         panelTextSize = defaults.value(PanelTextSize.self, forKey: Keys.panelTextSize) ?? .normal
         panelWidth = defaults.value(PanelWidth.self, forKey: Keys.panelWidth) ?? .normal
@@ -416,6 +422,7 @@ final class AppSettings {
         static let notch = "notch"
         static let layout = "layout"
         static let quickPrompt = "quickPrompt"
+        static let telegramBot = "telegramBot"
         static let betaUpdates = "betaUpdates"
         static let resourceDiskBelowGB = "resourceDiskBelowGB"
         static let panelTextSize = "panelTextSize"

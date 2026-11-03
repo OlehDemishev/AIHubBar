@@ -103,7 +103,7 @@ struct BackgroundRunsSection: View {
                 ForEach(NightQueue.hours, id: \.self) { Text(verbatim: String(format: "%02d:00", $0)).tag($0) }
             }
             if settings.telegramForBackground, !hasTelegram {
-                Text("Telegram не настроен (Настройки → Основные → Telegram) — будет только уведомление macOS.")
+                Text("Telegram не настроен (модуль «Telegram») — будет только уведомление macOS.")
                     .font(.callout)
                     .foregroundStyle(.orange)
             }

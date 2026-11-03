@@ -553,7 +553,7 @@
               "name" : "Fréquence"
             },
             {
-              "detail" : "Le bot se règle dans « Général » → Telegram. Ce qu’il faut y relayer se choisit avec la puce « Telegram » sur la page du module.",
+              "detail" : "Le bot est le module « Telegram » : jeton, chat et menu dans le bot lui-même (/menu — limites, sessions, rapports, nettoyage). Ce qu'il faut y copier — la puce « Telegram » sur la page du module.",
               "name" : "Telegram"
             },
             {

@@ -117,7 +117,7 @@ struct ModulePlaces: View {
         case .telegram:
             kind.definition.telegram == .backgroundResults
                 ? String(localized: "Итоги фоновых задач в Telegram; ответы на запросы разрешений — ниже, «Ответы из Telegram»")
-                : String(localized: "Дублировать в Telegram; бот — «Основные» → Telegram")
+                : String(localized: "Дублировать в Telegram; бот — модуль «Telegram»")
         }
     }
 
