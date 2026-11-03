@@ -1,6 +1,6 @@
 # Scenario checklist
 
-Every scenario of docs/SPEC.md with how it was checked. «Auto» = unit tests; «Live» = run on this Mac by Claude (command line, panel snapshot, screenshots of the menu bar and Terminal); «Oleh» = needs a person, because automation can neither click inside ClaudePult's windows nor see notifications and Telegram.
+Every scenario of docs/specs/SPEC.md with how it was checked. «Auto» = unit tests; «Live» = run on this Mac by Claude (command line, panel snapshot, screenshots of the menu bar and Terminal); «Oleh» = needs a person, because automation can neither click inside ClaudePult's windows nor see notifications and Telegram.
 
 Panel snapshots: `defaults write com.demishev.claudepult DebugPanelSnapshot -bool YES` saves `~/Library/Logs/ClaudePult/panel.png` (and `help.png`, `cleanup.png`) each time the window shows; turn off with `defaults delete com.demishev.claudepult DebugPanelSnapshot`.
 

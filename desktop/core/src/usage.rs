@@ -1,4 +1,4 @@
-//! Subscription limits (SPEC §2.8, docs/SPEC-windows.md §4.2), ported from the Mac app's `Usage.swift` and
+//! Subscription limits (SPEC §2.8, docs/specs/SPEC-windows.md §4.2), ported from the Mac app's `Usage.swift` and
 //! `UsageService.swift` with the same rules: the undocumented `/api/oauth/usage` endpoint read tolerantly, the
 //! forecast, alerts once per window, `usage.json` in the same format for `report.py` and the bot.
 //! The token is read from Claude Code's own file for each request and never stored, logged or refreshed.

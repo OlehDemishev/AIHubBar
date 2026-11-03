@@ -90,9 +90,9 @@ Needs Xcode with Swift 6. The project is generated from `project.yml`; SwiftUI, 
 - [Guide](docs/GUIDE.md) — install, first start, everyday use, privacy, troubleshooting, uninstall
 - [Overview PDF](docs/AI-Hub-Bar-Overview-en.pdf) · [in Russian](docs/AI-Hub-Bar-Overview-ru.pdf)
 - [Reference](docs/REFERENCE.md) — every feature in detail, background mode rules, session hooks, command line
-- [Specification](docs/SPEC.md) · [Decisions](DECISIONS.md) · [Status](docs/STATUS.md)
+- [Specification](docs/specs/SPEC.md) · [Decisions](DECISIONS.md) · [Status](docs/STATUS.md)
 
-> AI Hub Bar was called **ClaudePult** until October 2026; the bundle id, the Xcode project and the data folders keep the old name.
+> AI Hub Bar was called **ClaudePult** until October 2026; the bundle id and the data folders keep the old name.
 
 ## License
 

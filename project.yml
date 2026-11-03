@@ -1,4 +1,4 @@
-name: ClaudePult
+name: AIHubBar
 
 options:
   bundleIdPrefix: com.demishev
@@ -28,13 +28,13 @@ settings:
     LOCALIZATION_PREFERS_STRING_CATALOGS: YES
 
 targets:
-  ClaudePult:
+  AIHubBar:
     type: application
     platform: macOS
     sources:
-      - path: ClaudePult
+      - path: AIHubBar
     info:
-      path: ClaudePult/Info.plist
+      path: AIHubBar/Info.plist
       properties:
         CFBundleDisplayName: AI Hub Bar
         CFBundleName: AI Hub Bar
@@ -71,28 +71,27 @@ targets:
             LSItemContentTypes: [com.demishev.claudepult.settings]
     settings:
       base:
-        # Renamed to AI Hub Bar (2026-10-30): the bundle id, module name and data folders keep the old name, so
-        # settings, macOS permissions and Keychain items carry over.
+        # Renamed to AI Hub Bar (2026-10-30; project, targets and module 2026-11-03): the bundle id and data folders keep the
+        # old name, so settings, macOS permissions and Keychain items carry over.
         PRODUCT_BUNDLE_IDENTIFIER: com.demishev.claudepult
         PRODUCT_NAME: AIHubBar
-        PRODUCT_MODULE_NAME: ClaudePult
         ENABLE_APP_SANDBOX: NO
         ENABLE_HARDENED_RUNTIME: NO
         GENERATE_INFOPLIST_FILE: NO
         COMBINE_HIDPI_IMAGES: YES
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
     dependencies:
-      - target: ClaudePultWidget
+      - target: AIHubBarWidget
       - package: Sparkle
 
   # Desktop / Notification Center widget: subscription limits from usage.json.
-  ClaudePultWidget:
+  AIHubBarWidget:
     type: app-extension
     platform: macOS
     sources:
-      - path: ClaudePultWidget
+      - path: AIHubBarWidget
     info:
-      path: ClaudePultWidget/Info.plist
+      path: AIHubBarWidget/Info.plist
       properties:
         CFBundleDisplayName: AI Hub Bar
         CFBundleShortVersionString: $(MARKETING_VERSION)
@@ -102,7 +101,7 @@ targets:
         NSExtension:
           NSExtensionPointIdentifier: com.apple.widgetkit-extension
     entitlements:
-      path: ClaudePultWidget/ClaudePultWidget.entitlements
+      path: AIHubBarWidget/AIHubBarWidget.entitlements
       properties:
         com.apple.security.app-sandbox: true
         # Widgets must be sandboxed; this read-only exception lets the widget read usage.json without an
@@ -112,18 +111,18 @@ targets:
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.demishev.claudepult.widget
-        PRODUCT_NAME: ClaudePultWidget
+        PRODUCT_NAME: AIHubBarWidget
         GENERATE_INFOPLIST_FILE: NO
         ENABLE_HARDENED_RUNTIME: NO
         SKIP_INSTALL: YES
 
-  ClaudePultTests:
+  AIHubBarTests:
     type: bundle.unit-test
     platform: macOS
     sources:
-      - path: ClaudePultTests
+      - path: AIHubBarTests
     dependencies:
-      - target: ClaudePult
+      - target: AIHubBar
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.demishev.claudepult.tests
@@ -132,11 +131,11 @@ targets:
         BUNDLE_LOADER: $(TEST_HOST)
 
 schemes:
-  ClaudePult:
+  AIHubBar:
     build:
       targets:
-        ClaudePult: all
-        ClaudePultTests: [test]
+        AIHubBar: all
+        AIHubBarTests: [test]
     test:
       targets:
-        - ClaudePultTests
+        - AIHubBarTests

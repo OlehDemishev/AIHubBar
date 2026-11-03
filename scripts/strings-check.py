@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Checks the Mac string catalog (ClaudePult/Resources/Localizable.xcstrings) — docs/SPEC-refactor.md §7.
+"""Checks the Mac string catalog (AIHubBar/Resources/Localizable.xcstrings) — docs/specs/SPEC-refactor.md §7.
 
     python3 scripts/strings-check.py            # check, exit 1 on problems
     python3 scripts/strings-check.py --format   # also rewrite the file in the repository's JSON style
@@ -13,7 +13,7 @@ import re
 import sys
 from pathlib import Path
 
-CATALOG = Path(__file__).resolve().parent.parent / "ClaudePult/Resources/Localizable.xcstrings"
+CATALOG = Path(__file__).resolve().parent.parent / "AIHubBar/Resources/Localizable.xcstrings"
 LANGUAGES = ["en", "uk", "de", "fr", "es", "it", "pt-BR", "pl", "ja", "ko", "ar", "id"]
 SPECIFIER = re.compile(r"%(?:\d+\$)?(?:lld|ld|d|@|f|%)")
 CYRILLIC = re.compile(r"[А-Яа-яЁё]")

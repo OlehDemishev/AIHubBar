@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Texts for the Windows and Linux versions from the Mac app's String Catalog (docs/SPEC-windows.md §2).
+"""Texts for the Windows and Linux versions from the Mac app's String Catalog (docs/specs/SPEC-windows.md §2).
 
 Finds the keys the desktop code uses — `data-t="…"` / `data-t-title="…"` in ui/*.html, `t("…")` in ui/*,
 `s.t("…")` / `texts.format("…"` in app/src and core/src — and writes ui/i18n/<code>.json with just those keys for
-each language but Russian (the keys are the Russian texts). A new text goes into ClaudePult/Resources/Localizable.xcstrings first, with all
+each language but Russian (the keys are the Russian texts). A new text goes into AIHubBar/Resources/Localizable.xcstrings first, with all
 translations, so the Mac and desktop versions never drift.
 
     python3 scripts/strings.py          # write the files
@@ -16,7 +16,7 @@ import sys
 from pathlib import Path
 
 DESKTOP = Path(__file__).resolve().parent.parent
-CATALOG = DESKTOP.parent / "ClaudePult" / "Resources" / "Localizable.xcstrings"
+CATALOG = DESKTOP.parent / "AIHubBar" / "Resources" / "Localizable.xcstrings"
 OUT = DESKTOP / "ui" / "i18n"
 LANGUAGES = ["en", "es", "pt-BR", "fr", "de", "ja", "id", "ko", "it", "ar", "pl", "uk"]
 

@@ -1,9 +1,9 @@
-// Generates ClaudePult/Resources/Assets.xcassets/AppIcon.appiconset from code, so the icon is reproducible.
+// Generates AIHubBar/Resources/Assets.xcassets/AppIcon.appiconset from code, so the icon is reproducible.
 // Usage: swift scripts/make-app-icon.swift
 import AppKit
 
 let root = URL(fileURLWithPath: CommandLine.arguments[0]).deletingLastPathComponent().deletingLastPathComponent()
-let iconSet = root.appending(path: "ClaudePult/Resources/Assets.xcassets/AppIcon.appiconset")
+let iconSet = root.appending(path: "AIHubBar/Resources/Assets.xcassets/AppIcon.appiconset")
 try FileManager.default.createDirectory(at: iconSet, withIntermediateDirectories: true)
 
 /// macOS icon grid: 1024 canvas, 824 body with ~185 corner radius, drop shadow below.

@@ -1,6 +1,6 @@
 # AI Hub Bar for Windows and Linux
 
-Tauri 2: a Rust core plus a small HTML interface. The plan and the stages are in [docs/SPEC-windows.md](../docs/SPEC-windows.md) and [docs/SPEC-linux.md](../docs/SPEC-linux.md). The Mac app (Swift, in `ClaudePult/`) shares no code with this folder, only file formats and texts.
+Tauri 2: a Rust core plus a small HTML interface. The plan and the stages are in [docs/specs/SPEC-windows.md](../docs/specs/SPEC-windows.md) and [docs/specs/SPEC-linux.md](../docs/specs/SPEC-linux.md). The Mac app (Swift, in `AIHubBar/`) shares no code with this folder, only file formats and texts.
 
 **Stage 1 «Каркас»** is done:
 - the tray icon with its menu;
@@ -44,7 +44,7 @@ The two programs are called `AIHubBar` and `claudepult`, not `ClaudePult` and `c
 
 ## Texts
 
-Keys are the Russian texts of the Mac catalog, `ClaudePult/Resources/Localizable.xcstrings`. A new text works like this:
+Keys are the Russian texts of the Mac catalog, `AIHubBar/Resources/Localizable.xcstrings`. A new text works like this:
 1. Add it to the catalog first, with all 12 translations.
 2. Use it in the code: `data-t="…"` or `t("…")` in `ui/`, `.t("…")` in Rust.
 3. Run `python3 scripts/strings.py`.

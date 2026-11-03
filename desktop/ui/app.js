@@ -1,5 +1,5 @@
 // Shared by the panel and the settings window: texts in the interface language, calls into the Rust side.
-// Texts are keyed by the Mac app's Russian source text (docs/SPEC-windows.md §2); `data-t` marks an element whose
+// Texts are keyed by the Mac app's Russian source text (docs/specs/SPEC-windows.md §2); `data-t` marks an element whose
 // text is one such key, `data-t-title` its hover hint.
 
 const invoke = window.__TAURI__.core.invoke;

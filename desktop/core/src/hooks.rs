@@ -1,4 +1,4 @@
-//! AI Hub Bar's entries in Claude Code's `settings.json` (docs/SPEC-windows.md §4.3), ported from the Mac's
+//! AI Hub Bar's entries in Claude Code's `settings.json` (docs/specs/SPEC-windows.md §4.3), ported from the Mac's
 //! `HookInstaller`: merged into the existing file, backed up first, idempotent, removable, other hooks untouched.
 //! Unlike the Mac (a shell command with quoted paths), the entries use Claude Code's exec form — `command` is the
 //! program, `args` its arguments — so no shell runs and a path with spaces needs no quoting (Claude Code 2.1.139+).

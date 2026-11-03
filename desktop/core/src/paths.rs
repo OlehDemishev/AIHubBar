@@ -1,4 +1,4 @@
-//! Where AI Hub Bar keeps its files (docs/SPEC-windows.md §6, docs/SPEC-linux.md §6).
+//! Where AI Hub Bar keeps its files (docs/specs/SPEC-windows.md §6, docs/specs/SPEC-linux.md §6).
 //!
 //! - Windows: `%LOCALAPPDATA%\ClaudePult\` — machine-local, sessions and runs don't roam with the profile.
 //! - Linux: `$XDG_DATA_HOME/claudepult/` (`~/.local/share/claudepult/`).

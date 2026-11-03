@@ -52,7 +52,7 @@ scripts/release.sh 0.4.0 --publish          # the release, later
 - **The beta channel:** beta testers' copies read `https://github.com/OlehDemishev/AIHubBar/releases/download/beta/appcast.xml` instead (`Updates.betaFeedURL`). It is an asset of the release tagged `beta`, which holds no build. Every `--publish`, beta or not, replaces it with the newest release and the newest beta (`scripts/release-tools/beta-feed.py`). The first beta creates that release. Beta items carry `<sparkle:channel>beta</sparkle:channel>`; Sparkle takes them only in a beta tester's copy.
 - **After the release:** a release with a higher build number than the beta reaches beta testers too, so nobody stays on an old beta.
 - **Switched off:** Sparkle doesn't go back to an older version. The copy stays on the beta until the next release, which is newer.
-- **Features in beta testing:** a module with `ModuleKind.isBeta` is in the Modules catalog and works only with “Beta builds” on. Today: «Раскладка» (docs/SPEC-layout.md). To release it to everyone, drop it from `isBeta`.
+- **Features in beta testing:** a module with `ModuleKind.isBeta` is in the Modules catalog and works only with “Beta builds” on. Today: «Раскладка» (docs/specs/SPEC-layout.md). To release it to everyone, drop it from `isBeta`.
 - **Version names:** `0.4.0-beta.1`, `-beta.2` …. The build number (commit count) decides what is newer, as for releases. `scripts/build-and-install.sh` skips beta tags when it names a local build.
 
 ## First launch for people
