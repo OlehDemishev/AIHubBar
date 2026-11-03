@@ -13,6 +13,7 @@ are in each spec and in the journal: `docs/STATUS.md`, older months in `docs/sta
 | [SPEC-notch.md](SPEC-notch.md) | the island at the notch | done (stages 1–5); a live VoiceOver walk left |
 | [SPEC-layout.md](SPEC-layout.md) | «Раскладка», automatic keyboard layout switch | in beta |
 | [SPEC-settings.md](SPEC-settings.md) | Settings around modules, places, menu bar | done (#201, #203) |
+| [SPEC-content.md](SPEC-content.md) | writing texts with AI: «Тексты» profile, «Версии» module, batch tasks | agreed 2026-11-03, stage 1 next |
 | [SPEC-help.md](SPEC-help.md) | help in the app and on the site | done (#206) |
 | [SPEC-refactor.md](SPEC-refactor.md) | refactoring audit and plan | done (stages 0–8) |
 | [SPEC-windows.md](SPEC-windows.md) | Windows version (`desktop/`, Tauri 2) | postponed after stages 1–3 main parts |

@@ -9,6 +9,7 @@
 
 **Next:**
 - next beta or 0.5.1 carries stage 8 (#230–#232): 0.5.1-beta.1 was built from 27c5e2d, before it
+- content (docs/specs/SPEC-content.md, agreed): stage 1 — walkthrough of the «Тексты» profile on a sample folder, then «Версии», then batch tasks
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/specs/SPEC-windows.md §9, stage 2–3 leftovers)
 
 **Needs Oleh:**
@@ -20,6 +21,12 @@
 - «Раскладка»: tried live in TextEdit, Safari, Chrome (⌥⇧ too); Telegram and Notes are yours to try (not typed into by the agent)
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-03 — Spec: content as modules and the «Тексты» profile (branch `docs/content-spec`)
+
+Done: the October texts-mode draft (`docs/SPEC-content.md`, d4fbcd8) re-read against today's app as `docs/specs/SPEC-content.md`. Most of it already exists through SPEC-modes/profiles (folder projects, `проект.md`, stages, words and running time, commands with results next to the source, «только файлы» permissions, night queue, calendar, «Тексты» template) and is reused as is. New: optional module «Версии» (hidden draft versions in Application Support, own store without git, texts and the card only, before every AI run and on changes, compare and restore in the card) and batch tasks inside «Проекты» (one command over several projects, sequential, now / at night / after the reset). Quick prompt left to its own spec. Oleh's answers: walkthrough first, own store, texts only, batch tasks in this wave. Row in `docs/specs/README.md`.
+Checked: docs only; claims about what exists checked against the code (`FolderProject`, `CommandTemplate`, `BackgroundPermissions`, `NightQueue`, templates) and DECISIONS.md / CHECKLIST.md.
+Left: stage 1 (walkthrough); versions frequency/retention defaults are proposed, not confirmed.
 
 ## 2026-11-03 — social preview for the 1.0 site (branch `chore/social-preview-1.0`)
 
