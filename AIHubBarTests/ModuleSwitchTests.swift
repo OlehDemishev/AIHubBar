@@ -133,11 +133,12 @@ struct ModuleSwitchTests {
     @Test func switchedOffModulesDrawNothingInTheMenuBar() {
         var config = MenuBarConfig.make(.everything)
         config.colored = false
-        let data = MenuBarData.sample.without([.limits, .sessions, .resources, .keepAwake, .upcoming, .projects])
-        let groups = MenuBarComposer.groups(config, data)
+        let off = config.without([.limits, .sessions, .resources, .keepAwake, .upcoming, .projects])
+        let groups = MenuBarComposer.groups(off, .sample)
+        #expect(MenuBarComposer.groups(config, .sample).flatMap { $0 }.contains(.text("34%", .label)))
         #expect(!groups.flatMap { $0 }.contains(.text("34%", .label)))
         #expect(!groups.flatMap { $0 }.contains(.dot))
-        #expect(data.waiting == 0 && data.session == nil && data.cpu == nil && data.deadline == nil)
+        #expect(off.element(.icon).enabled && !off.element(.waiting).enabled && !off.element(.cpu).enabled && !off.element(.deadline).enabled)
         #expect(MenuBarElement.Kind.allCases.filter { $0.module == .limits } == [.session, .week, .modelWeek, .resetCountdown, .forecast, .otherAI])
     }
 

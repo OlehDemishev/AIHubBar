@@ -15,7 +15,7 @@ enum Updates {
     /// The beta channel's appcast, replaced by every release (`scripts/release-tools/beta-feed.py`).
     nonisolated static let betaFeedURL = "https://github.com/OlehDemishev/AIHubBar/releases/download/beta/appcast.xml"
 
-    /// Takes betas; set from `AppSettings.betaUpdates`.
+    /// Takes betas; follows `AppSettings.betaUpdates` (`AppContainer.followBetaUpdates`).
     static var beta = false {
         didSet {
             guard beta != oldValue, let updater = controller?.updater else { return }
@@ -34,6 +34,12 @@ enum Updates {
         controller?.checkForUpdates(nil)
     }
 
+    /// The appcast Sparkle reads: nil is the default one from Info.plist.
+    nonisolated static func feedURL(beta: Bool) -> String? { beta ? betaFeedURL : nil }
+
+    /// The `<sparkle:channel>` items Sparkle may take besides the default ones.
+    nonisolated static func channels(beta: Bool) -> Set<String> { beta ? ["beta"] : [] }
+
     static var checksAutomatically: Bool {
         get { controller?.updater.automaticallyChecksForUpdates ?? false }
         set { controller?.updater.automaticallyChecksForUpdates = newValue }
@@ -44,7 +50,7 @@ enum Updates {
 private final class UpdateChannel: NSObject, SPUUpdaterDelegate {
     private var beta: Bool { MainActor.assumeIsolated { Updates.beta } }
 
-    func feedURLString(for updater: SPUUpdater) -> String? { beta ? Updates.betaFeedURL : nil }
+    func feedURLString(for updater: SPUUpdater) -> String? { Updates.feedURL(beta: beta) }
 
-    func allowedChannels(for updater: SPUUpdater) -> Set<String> { beta ? ["beta"] : [] }
+    func allowedChannels(for updater: SPUUpdater) -> Set<String> { Updates.channels(beta: beta) }
 }

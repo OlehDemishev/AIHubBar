@@ -146,7 +146,6 @@ struct TelegramBotSection: View {
                     TextField("", text: $settings.telegramChatID)
                         .textFieldStyle(.roundedBorder)
                         .frame(width: 140)
-                        .onSubmit { Task { await Telegram.loadOwnBot(chatID: settings.telegramChatID) } }
                     Button("Определить", action: detectChat)
                         .disabled(!hasToken || busy)
                         .help("Напишите боту любое сообщение, затем нажмите — ID чата подставится сам")
@@ -193,7 +192,6 @@ struct TelegramBotSection: View {
                 return
             }
             settings.telegramChatID = chat
-            await Telegram.loadOwnBot(chatID: chat)
             status = String(localized: "Чат найден.")
         }
     }
@@ -202,7 +200,6 @@ struct TelegramBotSection: View {
         busy = true
         Task {
             defer { busy = false }
-            await Telegram.loadOwnBot(chatID: settings.telegramChatID)
             guard let bot = Telegram.ownBot else { return }
             let ok = await Telegram.send(html: RunMessage.escape(String(localized: "AI Hub Bar: Telegram работает.")), with: bot)
             status = ok ? String(localized: "Отправлено") : String(localized: "Не отправилось: проверьте токен и ID чата")

@@ -62,7 +62,7 @@ enum CommandLineTool {
 
     /// Every command: its flags, how many values must follow the flag, the usage line for `--help`, and what it does
     /// (SPEC-refactor §6 — it was one `if` chain).
-    private static var commands: [CLICommand] {
+    static var commands: [CLICommand] {
         [
             CLICommand(["--login-item"], needs: 0, usage: "--login-item status|on|off  start at login") { arguments, index in
                 return loginItem(arguments.dropFirst(index + 1).first ?? "status")

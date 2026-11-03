@@ -22,6 +22,12 @@
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
 
+## 2026-11-03 — refactoring stage 8, part 2: wiring and tests (branch `refactor/stage-8-wiring`)
+
+Done: `AppSettings.betaUpdates` no longer flips Sparkle's channel from its `didSet` — `AppContainer.followBetaUpdates` observes it (tests changing the setting no longer touch the global). Telegram settings read the bot from the Keychain 3 times less (no reload on Enter, after «Определить», before «Проверить»). JSON settings save through `setEncoded`. `MenuBarData.without` (a switch per module) replaced by `MenuBarConfig.without`, which turns off the elements the module registry gives a switched-off module. Fixed both compiler warnings. New tests: the CLI command table (usage lines, unique flags, `--help`, missing values, usage errors), `--app-command` names, `AppRequests` window requests, the Sparkle channel.
+Checked: scripts/check.sh green; installed build, the menu bar shows limits, disk, CPU and memory as before.
+Left: large files, warnings as errors. `@Persisted` dropped: property wrappers don't work inside `@Observable` classes.
+
 ## 2026-11-03 — refactoring stage 8, part 1: store errors (branch `refactor/stage-8-errors`)
 
 Done: stores report errors under one name, `lastError` (was also `error` in UsageStore and ClaudeConfigStore, `saveError` in NotesStore). `AppLog.attempt` logs the writes that used to fail silently with `try?`: profiles and their state, the night queue, runs, usage snapshot and history, command spend, calendar reminders, widget files, limit history, the MCP stash restore, clipboard history. Stage 8 added to SPEC-refactor §9; STATUS no longer calls the refactoring «full».
