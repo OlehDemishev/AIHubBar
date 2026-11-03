@@ -44,11 +44,17 @@ struct CalendarWindow: View {
 
     private var toolbar: some View {
         HStack(spacing: 10) {
-            Button { shift(-1) } label: { Image(systemName: "chevron.left") }
-                .help(scope == .month ? String(localized: "Предыдущий месяц") : String(localized: "Предыдущая неделя"))
+            Button { shift(-1) } label: {
+                Label(scope == .month ? String(localized: "Предыдущий месяц") : String(localized: "Предыдущая неделя"), systemImage: "chevron.left")
+                    .labelStyle(.iconOnly)
+            }
+            .help(scope == .month ? String(localized: "Предыдущий месяц") : String(localized: "Предыдущая неделя"))
             Button("Сегодня") { anchor = .now }
-            Button { shift(1) } label: { Image(systemName: "chevron.right") }
-                .help(scope == .month ? String(localized: "Следующий месяц") : String(localized: "Следующая неделя"))
+            Button { shift(1) } label: {
+                Label(scope == .month ? String(localized: "Следующий месяц") : String(localized: "Следующая неделя"), systemImage: "chevron.right")
+                    .labelStyle(.iconOnly)
+            }
+            .help(scope == .month ? String(localized: "Следующий месяц") : String(localized: "Следующая неделя"))
             Text(title).font(.title3.weight(.semibold))
             Spacer()
             Toggle("Только текущий профиль", isOn: $currentOnly)
@@ -60,7 +66,7 @@ struct CalendarWindow: View {
             .pickerStyle(.segmented)
             .labelsHidden()
             .fixedSize()
-            Button { Task { await store.refresh() } } label: { Image(systemName: "arrow.clockwise") }
+            Button { Task { await store.refresh() } } label: { Label("Перечитать файлы", systemImage: "arrow.clockwise").labelStyle(.iconOnly) }
                 .help("Перечитать файлы")
         }
         .buttonStyle(.borderless)

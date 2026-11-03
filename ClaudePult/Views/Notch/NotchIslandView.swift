@@ -101,11 +101,6 @@ struct NotchIslandView: View {
     }
 }
 
-private struct ContentHeightKey: PreferenceKey {
-    static let defaultValue: CGFloat = 0
-    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) { value = max(value, nextValue()) }
-}
-
 /// Content under the notch, as wide as the window, reporting how tall it is so the black shape can follow.
 private struct MeasuredUnderNotch: ViewModifier {
     let notchHeight: CGFloat
@@ -618,7 +613,7 @@ private struct NotchDropCard: View {
                 .font(.caption)
                 .foregroundStyle(.secondary)
                 .lineLimit(1)
-            FlowRow(spacing: 6) {
+            FlowLayout(spacing: 6) {
                 ForEach(mode.commands + [.customTask]) { command in
                     Button(command.title) { start(command) }
                         .buttonStyle(NotchButtonStyle(fill: asking == command ? .accentColor : .white.opacity(0.16)))

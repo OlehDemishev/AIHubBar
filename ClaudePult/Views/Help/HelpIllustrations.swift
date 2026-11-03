@@ -303,7 +303,7 @@ private struct LimitsScene: View {
                 Circle().stroke(Color.secondary.opacity(0.2), lineWidth: 10)
                 Circle()
                     .trim(from: 0, to: value / 100)
-                    .stroke(Color(nsColor: MenuBarRenderer.color(value)), style: StrokeStyle(lineWidth: 10, lineCap: .round))
+                    .stroke(UsageLevel(value).color, style: StrokeStyle(lineWidth: 10, lineCap: .round))
                     .rotationEffect(.degrees(-90))
                 Text(verbatim: "\(Int(value)) %").font(.system(size: 17, weight: .semibold)).monospacedDigit()
                     .contentTransition(.numericText(value: value))
@@ -570,7 +570,7 @@ private struct NotchScene: View {
             GeometryReader { geometry in
                 ZStack(alignment: .leading) {
                     Capsule().fill(.white.opacity(0.18))
-                    Capsule().fill(Color(nsColor: MenuBarRenderer.color(value))).frame(width: geometry.size.width * value / 100)
+                    Capsule().fill(UsageLevel(value).color).frame(width: geometry.size.width * value / 100)
                 }
             }
             .frame(height: 6)
@@ -634,7 +634,7 @@ private struct UtilitiesScene: View {
                     GeometryReader { geometry in
                         ZStack(alignment: .leading) {
                             Capsule().fill(Color.secondary.opacity(0.2))
-                            Capsule().fill(Color(nsColor: MenuBarRenderer.color(cpu[phase]))).frame(width: geometry.size.width * cpu[phase] / 100)
+                            Capsule().fill(UsageLevel(cpu[phase]).color).frame(width: geometry.size.width * cpu[phase] / 100)
                         }
                     }
                     .frame(width: 180, height: 7)

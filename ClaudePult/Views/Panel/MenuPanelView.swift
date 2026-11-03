@@ -96,9 +96,12 @@ struct MenuPanelView: View {
         .environment(\.font, ScaledFont.font(.body, scale: scale))
         .environment(\.panelGlass, drawsGlass)
         .preferredColorScheme(settings.panelTheme.colorScheme)
-        .background(WindowReader {
-            window = $0
-            $0?.appearance = settings.panelTheme.appearance
+        .background(WindowReader { found in
+            // Called on every update: state and appearance change only when they differ (each write is another
+            // render pass). The glass is reapplied every time on purpose — SwiftUI can bring its backdrop back, and
+            // `PanelGlass.apply` only hides what is new (SPEC-refactor §5).
+            if window !== found { window = found }
+            if let found, found.appearance != settings.panelTheme.appearance { found.appearance = settings.panelTheme.appearance }
             updateGlass()
         })
         .onChange(of: wantsGlass) { updateGlass() }
@@ -219,20 +222,20 @@ struct MenuPanelView: View {
             .help(settings.notch.hidden ? String(localized: "Показать остров у чёлки") : String(localized: "Скрыть остров у чёлки"))
         }
         // Settings, help and quit were three menu-like rows at the bottom; as icons they no longer outweigh the content.
-        Button { openSettings() } label: { Image(systemName: "gearshape") }
+        Button { openSettings() } label: { Label("Настройки… (⌘,)", systemImage: "gearshape").labelStyle(.iconOnly) }
         .help("Настройки… (⌘,)")
         .keyboardShortcut(",", modifiers: .command)
         Button {
             NSApp.activate()
             openWindow(.claudeConfig)
-        } label: { Image(systemName: "doc.badge.gearshape") }
+        } label: { Label("Claude Code: все CLAUDE.md и MCP-серверы", systemImage: "doc.badge.gearshape").labelStyle(.iconOnly) }
         .help("Claude Code: все CLAUDE.md и MCP-серверы")
         Button {
             NSApp.activate()
             openWindow(.help)
-        } label: { Image(systemName: "questionmark.circle") }
+        } label: { Label("Помощь", systemImage: "questionmark.circle").labelStyle(.iconOnly) }
         .help("Помощь")
-        Button { NSApp.terminate(nil) } label: { Image(systemName: "power") }
+        Button { NSApp.terminate(nil) } label: { Label("Выйти из AI Hub Bar (⌘Q)", systemImage: "power").labelStyle(.iconOnly) }
             .help("Выйти из AI Hub Bar (⌘Q)")
             .keyboardShortcut("q", modifiers: .command)
     }
@@ -505,13 +508,6 @@ struct MenuPanelView: View {
                 if isOn { expanded.insert(id) } else { expanded.remove(id) }
             }
         )
-    }
-}
-
-private struct ContentHeightKey: PreferenceKey {
-    static let defaultValue: CGFloat = 0
-    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
-        value = max(value, nextValue())
     }
 }
 

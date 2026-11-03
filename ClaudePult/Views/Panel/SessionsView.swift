@@ -318,19 +318,19 @@ private struct SessionRowView: View {
     private var actions: some View {
         HStack(spacing: 8) {
             if let run = row.run {
-                Button { showLog(run) } label: { Image(systemName: "doc.text") }
+                Button { showLog(run) } label: { Label("Журнал", systemImage: "doc.text").labelStyle(.iconOnly) }
                 .help("Журнал")
                 if run.isPaused {
-                    Button { launcher.resumeNow(run.id) } label: { Image(systemName: "play.circle") }
+                    Button { launcher.resumeNow(run.id) } label: { Label("На паузе до сброса лимита. Продолжить сейчас", systemImage: "play.circle").labelStyle(.iconOnly) }
                         .help("На паузе до сброса лимита. Продолжить сейчас")
                 }
                 if run.state == .running {
-                    Button { runs.stop(run.id) } label: { Image(systemName: "stop.circle") }
+                    Button { runs.stop(run.id) } label: { Label("Остановить", systemImage: "stop.circle").labelStyle(.iconOnly) }
                         .foregroundStyle(.red)
                         .help("Остановить")
                 }
             } else if let session = row.session {
-                Button { SessionActions.show(session) } label: { Image(systemName: "macwindow") }
+                Button { SessionActions.show(session) } label: { Label("Показать", systemImage: "macwindow").labelStyle(.iconOnly) }
                     .help("Показать")
             }
         }

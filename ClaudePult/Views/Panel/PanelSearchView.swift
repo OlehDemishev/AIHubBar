@@ -79,7 +79,7 @@ struct PanelSearchField: View {
                 // Esc clears the query, and with nothing typed closes the search window.
                 .onExitCommand { if query.isEmpty { onCancel?() } else { query = "" } }
             if !query.isEmpty {
-                Button { query = "" } label: { Image(systemName: "xmark.circle.fill") }
+                Button { query = "" } label: { Label("Очистить поиск (Esc)", systemImage: "xmark.circle.fill").labelStyle(.iconOnly) }
                     .buttonStyle(.borderless)
                     .foregroundStyle(.secondary)
                     .help("Очистить поиск (Esc)")
