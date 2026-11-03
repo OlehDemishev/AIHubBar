@@ -15,6 +15,8 @@ struct TelegramBotSettings: Codable, Equatable, Sendable {
     var profileMenus: [String: BotMenuConfig]?
     /// Quick commands from the shared bot's menu run only with this on (§7: the relay must not be able to run them).
     var commandsOverShared: Bool?
+    /// Permission requests answered over the shared bot only with this on (§7); without it they come without buttons.
+    var answersOverShared: Bool?
 
     /// The menu the chat gets while `profile` is the current one.
     func menu(for profile: String?) -> BotMenuConfig {
@@ -166,9 +168,10 @@ enum BotScreen: String, CaseIterable, Sendable {
     case home, reports, mac, help
     /// ⚙️ «Меню»: which buttons the menu at the bottom has, from the bot itself.
     case menu
+    case sessions, limits
 
-    /// The screens a menu button can open.
-    static let menuScreens: [BotScreen] = [.home, .reports, .mac, .help]
+    /// The screens a menu button can open, in the default menu's order.
+    static let menuScreens: [BotScreen] = [.home, .sessions, .limits, .reports, .mac, .help]
 }
 
 /// What a button's `callback_data` means (§3): at most 64 ASCII bytes, `<verb>[:<arg>]`.
@@ -191,6 +194,10 @@ enum BotRoute: Equatable, Sendable {
     case menuDone
     /// A quick command, after «Запустить?».
     case runCommand(String)
+    /// «Подробнее» on a permission request.
+    case requestDetails(String)
+    /// ⏳: limit notifications to Telegram on or off.
+    case limitAlerts(Bool)
 
     static let reportHours = [1, 3, 24]
 
@@ -207,6 +214,8 @@ enum BotRoute: Equatable, Sendable {
         case let .menuColumns(columns): "mc:\(columns)"
         case .menuDone: "md"
         case let .runCommand(id): "run:\(id)"
+        case let .requestDetails(id): "req:\(id)"
+        case let .limitAlerts(on): on ? "lim:on" : "lim:off"
         }
     }
 
@@ -241,6 +250,10 @@ enum BotRoute: Equatable, Sendable {
         case ("run", 2):
             guard BotMenuItem.isCommandID(parts[1]) else { return nil }
             self = .runCommand(parts[1])
+        case ("req", 2):
+            guard ApprovalFiles.isValidID(parts[1]) else { return nil }
+            self = .requestDetails(parts[1])
+        case ("lim", 2) where ["on", "off"].contains(parts[1]): self = .limitAlerts(parts[1] == "on")
         default: return nil
         }
     }
@@ -248,7 +261,7 @@ enum BotRoute: Equatable, Sendable {
     /// Does something rather than only showing a screen: skipped right after the Mac slept (§4).
     var isAction: Bool {
         switch self {
-        case .show, .cleanupAsk, .allCommands, .menuToggle, .menuColumns, .menuDone: false
+        case .show, .cleanupAsk, .allCommands, .menuToggle, .menuColumns, .menuDone, .requestDetails, .limitAlerts: false
         case .report, .cleanupCheck, .cleanupRun, .answer, .runCommand: true
         }
     }
@@ -365,6 +378,8 @@ struct BotMenu: Equatable, Sendable {
         case .mac: "🧹 " + String(localized: "Мак")
         case .help: "❓ " + String(localized: "Команды")
         case .menu: "⚙️ " + String(localized: "Меню")
+        case .sessions: "🤖 " + String(localized: "Сессии")
+        case .limits: "⏳ " + String(localized: "Лимиты")
         }
     }
 
@@ -390,6 +405,40 @@ struct BotMenu: Equatable, Sendable {
     var replyMarkup: [String: Any] {
         ["keyboard": rows.map { row in row.map { ["text": $0.title] } }, "is_persistent": true, "resize_keyboard": true]
     }
+}
+
+/// One session in 🤖.
+struct BotSessionLine: Equatable, Sendable {
+    var project: String
+    var agent: String
+    var waiting: Bool
+    /// What it waits for or does now.
+    var detail: String?
+    var since: Date?
+}
+
+/// One open permission request in 🤖.
+struct BotRequestLine: Equatable, Sendable {
+    var id: String
+    var project: String
+    var tool: String
+    var summary: String
+}
+
+/// One AI service in ⏳.
+struct BotLimitService: Equatable, Sendable {
+    struct Window: Equatable, Sendable {
+        var title: String
+        var percent: Double?
+        var detail: String?
+        var resetsAt: Date?
+        var runsOutAt: Date?
+    }
+
+    var title: String
+    var windows: [Window]
+    var error: String?
+    var isStale = false
 }
 
 /// What 🏠 shows (§2).
@@ -419,9 +468,129 @@ enum BotScreens {
         lines.append("🤖 " + String(localized: "Сессии: \(state.working) работают, \(state.waiting) ждут"))
         lines.append("🚀 " + String(localized: "Фоновые задачи: \(state.runs)"))
         return BotMessage(html: lines.joined(separator: "\n"), buttons: [
+            [button("🤖", String(localized: "Сессии"), .show(.sessions)), button("⏳", String(localized: "Лимиты"), .show(.limits))],
             [button("📊", String(localized: "Отчёты"), .show(.reports)), button("🧹", String(localized: "Мак"), .show(.mac))],
             [button("🔄", String(localized: "Обновить"), .show(.home)), button("❓", String(localized: "Команды"), .show(.help))],
         ])
+    }
+
+    // MARK: 🤖 Sessions and requests (stage 2)
+
+    /// 🤖: waiting sessions first, then working ones; open permission requests numbered, with ✅ / ❌ when this chat
+    /// may answer them (`canAnswer`), and «ℹ️» always.
+    static func sessions(_ lines: [BotSessionLine], requests: [BotRequestLine], canAnswer: Bool, now: Date) -> BotMessage {
+        var text = ["🤖 <b>" + RunMessage.escape(String(localized: "Сессии")) + "</b>"]
+        let ordered = lines.filter(\.waiting) + lines.filter { !$0.waiting }
+        if ordered.isEmpty { text.append(RunMessage.escape(String(localized: "Сессий сейчас нет."))) }
+        for line in ordered.prefix(15) {
+            var row = (line.waiting ? "✋ " : "⚙️ ") + "<b>" + RunMessage.escape(line.project) + "</b> · " + RunMessage.escape(line.agent)
+            if let since = line.since { row += " · " + RunMessage.escape(RelativeTime.ago(since, now: now)) }
+            if let detail = line.detail, !detail.isEmpty { row += "\n    " + RunMessage.escape(String(detail.prefix(120))) }
+            text.append(row)
+        }
+        if ordered.count > 15 { text.append(RunMessage.escape(String(localized: "… и ещё \(ordered.count - 15)"))) }
+        var rows: [[BotMessage.Button]] = []
+        if !requests.isEmpty {
+            text.append("")
+            text.append("✋ <b>" + RunMessage.escape(String(localized: "Запросы разрешений")) + "</b>")
+            for (index, request) in requests.prefix(8).enumerated() {
+                let number = index + 1
+                text.append("\(number). <b>" + RunMessage.escape(request.project) + "</b>: " + RunMessage.escape(request.tool)
+                            + (request.summary.isEmpty ? "" : " — <code>" + RunMessage.escape(String(request.summary.prefix(80))) + "</code>"))
+                var row = [BotMessage.Button(title: "ℹ️ \(number)", route: .requestDetails(request.id))]
+                if canAnswer {
+                    row.insert(BotMessage.Button(title: "❌ \(number)", route: .answer(requestID: request.id, allow: false)), at: 0)
+                    row.insert(BotMessage.Button(title: "✅ \(number)", route: .answer(requestID: request.id, allow: true)), at: 0)
+                }
+                rows.append(row)
+            }
+            if !canAnswer { text.append("🔒 " + RunMessage.escape(String(localized: "Отвечать отсюда нельзя — включите на Маке «Ответы на запросы через общий бот»."))) }
+        }
+        rows.append([button("🔄", String(localized: "Обновить"), .show(.sessions)), back])
+        return BotMessage(html: text.joined(separator: "\n"), buttons: rows)
+    }
+
+    /// A new permission request, sent by the Mac where Claude asks.
+    static func request(_ request: ApprovalRequest, project: String, canAnswer: Bool) -> BotMessage {
+        var html = TelegramApprovalText.html(ApprovalRequest(id: request.id, sessionID: request.sessionID, project: project,
+                                                              tool: request.tool, summary: request.summary, created: request.created, pid: request.pid))
+        var row = [button("ℹ️", String(localized: "Подробнее"), .requestDetails(request.id))]
+        if canAnswer {
+            row.insert(button("❌", String(localized: "Отклонить"), .answer(requestID: request.id, allow: false)), at: 0)
+            row.insert(button("✅", String(localized: "Разрешить"), .answer(requestID: request.id, allow: true)), at: 0)
+        } else {
+            html += "\n🔒 " + RunMessage.escape(String(localized: "Ответить можно на Маке или с включёнными «Ответами на запросы через общий бот»."))
+        }
+        return BotMessage(html: html, buttons: [row])
+    }
+
+    /// The request message once it is answered (here, on the Mac or by Claude itself): no more buttons.
+    static func requestClosed(_ request: ApprovalRequest, project: String, outcome: Bool?) -> BotMessage {
+        let base = TelegramApprovalText.html(ApprovalRequest(id: request.id, sessionID: request.sessionID, project: project,
+                                                              tool: request.tool, summary: request.summary, created: request.created, pid: request.pid))
+        let note = switch outcome {
+        case true?: "✅ " + RunMessage.escape(String(localized: "Разрешено"))
+        case false?: "❌ " + RunMessage.escape(String(localized: "Отклонено"))
+        case nil: "☑️ " + RunMessage.escape(String(localized: "Ответ уже дан"))
+        }
+        return BotMessage(html: base + "\n" + note)
+    }
+
+    /// «Подробнее»: the whole request and what the session was asked to do.
+    static func requestDetails(_ request: ApprovalRequest, project: String, task: String?, folder: String?, canAnswer: Bool) -> BotMessage {
+        var lines = ["✋ <b>" + RunMessage.escape(project) + "</b> — " + RunMessage.escape(request.tool)]
+        if !request.summary.isEmpty { lines.append("<pre>" + RunMessage.escape(request.summary) + "</pre>") }
+        if let task, !task.isEmpty { lines.append(RunMessage.escape(String(localized: "Задача сессии:")) + " " + RunMessage.escape(String(task.prefix(300)))) }
+        if let folder { lines.append("📁 <code>" + RunMessage.escape(PathText.tilde(folder)) + "</code>") }
+        var rows: [[BotMessage.Button]] = [[button("🤖", String(localized: "Сессии"), .show(.sessions))]]
+        if canAnswer {
+            rows.insert([button("✅", String(localized: "Разрешить"), .answer(requestID: request.id, allow: true)),
+                         button("❌", String(localized: "Отклонить"), .answer(requestID: request.id, allow: false))], at: 0)
+        }
+        return BotMessage(html: lines.joined(separator: "\n"), buttons: rows)
+    }
+
+    // MARK: ⏳ Limits (stage 2)
+
+    /// ⏳: every AI service's windows with a bar, the reset and the forecast; the Telegram alerts switch.
+    static func limits(_ services: [BotLimitService], alertsOn: Bool, thresholds: [Int], now: Date) -> BotMessage {
+        var lines = ["⏳ <b>" + RunMessage.escape(String(localized: "Лимиты")) + "</b>"]
+        if services.isEmpty { lines.append(RunMessage.escape(String(localized: "лимиты ещё не загружены"))) }
+        for service in services {
+            lines.append("")
+            lines.append("<b>" + RunMessage.escape(service.title) + "</b>" + (service.isStale ? " · " + RunMessage.escape(String(localized: "устарело")) : ""))
+            if let error = service.error, service.windows.isEmpty { lines.append("⚠️ " + RunMessage.escape(error)) }
+            for window in service.windows.prefix(5) {
+                var line = RunMessage.escape(window.title) + " "
+                if let percent = window.percent {
+                    line += "<code>" + bar(percent) + "</code> " + "\(Int(percent.rounded())) %"
+                } else if let detail = window.detail {
+                    line += RunMessage.escape(detail)
+                }
+                if let resets = window.resetsAt, resets > now {
+                    line += " · " + RunMessage.escape(String(localized: "сброс через \(MenuBarComposer.countdown(to: resets, now: now, long: true))"))
+                }
+                if let runsOut = window.runsOutAt, runsOut > now {
+                    line += "\n    ⚠️ " + RunMessage.escape(String(localized: "при этом темпе кончится к \(runsOut.formatted(date: .omitted, time: .shortened))"))
+                }
+                lines.append(line)
+            }
+        }
+        lines.append("")
+        let levels = thresholds.map { "\($0)" }.joined(separator: "/")
+        lines.append("🔔 " + RunMessage.escape(alertsOn
+            ? String(localized: "Уведомления в Telegram: при \(levels) %")
+            : String(localized: "Уведомления о лимитах в Telegram выключены")))
+        return BotMessage(html: lines.joined(separator: "\n"), buttons: [
+            [button(alertsOn ? "🔕" : "🔔", alertsOn ? String(localized: "Выключить уведомления") : String(localized: "Включить уведомления"), .limitAlerts(!alertsOn))],
+            [button("🔄", String(localized: "Обновить"), .show(.limits)), back],
+        ])
+    }
+
+    /// `▓▓▓▓░░░░░░` for 0…100 %.
+    static func bar(_ percent: Double) -> String {
+        let filled = min(10, max(0, Int((percent / 10).rounded())))
+        return String(repeating: "▓", count: filled) + String(repeating: "░", count: 10 - filled)
     }
 
     /// `job` — what is running now, if anything; `otherBot` — `report.py` sends through another bot.

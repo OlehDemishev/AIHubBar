@@ -5,12 +5,12 @@
 **Updated:** 2026-11-03
 
 **Now:**
-- `feat/telegram-custom-menu`: the bot's menu set up by each person (screens, quick commands, order, per profile) — PR open
-- merged 2026-11-03: #248 «Не спать» on/off in the menu bar, #241 Codex states, #240 quick command shortcuts, #238 «Быстрый запрос», #236 content spec, #242 «Telegram» stage 1, #244 menu at the bottom, #246 shared bot (Worker not deployed yet), #247 desktop CI off for Mac string changes
+- `feat/telegram-sessions-limits`: Telegram stage 2 — 🤖 sessions with permission requests, ⏳ limits — PR open; then stage 3 (🚀 tasks), stage 4 (⚙️ settings)
+- merged 2026-11-03: #248 «Не спать» on/off in the menu bar, #241 Codex states, #240 quick command shortcuts, #238 «Быстрый запрос», #236 content spec, #242 «Telegram» stage 1, #244 menu at the bottom, #246 shared bot (Worker not deployed yet), #247 desktop CI off for Mac string changes, #249 the bot's menu set up by each person
 
 **Next:**
 - next beta or 0.5.1 carries stage 8 (#230–#232) and #236–#248: 0.5.1-beta.1 was built from 27c5e2d, before them
-- Telegram (docs/specs/SPEC-telegram.md): stage 2 — sessions and requests in the bot, approvals bot moved in, notification settings
+- Telegram (docs/specs/SPEC-telegram.md): stage 3 — 🚀 tasks (project → agent → text → background, stop, log, PR link); stage 4 — ⚙️ settings in the bot (events, quiet hours, mute 1 h, morning report time)
 - content (docs/specs/SPEC-content.md, agreed): stage 1 — walkthrough of the «Тексты» profile on a sample folder, then «Версии», then batch tasks
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/specs/SPEC-windows.md §9, stage 2–3 leftovers)
 
@@ -27,6 +27,12 @@
 - «Раскладка»: tried live in TextEdit, Safari, Chrome (⌥⇧ too); Telegram and Notes are yours to try (not typed into by the agent)
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-03 — Telegram stage 2: sessions, permission requests, limits (branch `feat/telegram-sessions-limits`)
+
+Done: 🤖 Сессии (waiting first, then working; project, agent, what it waits for or does) with the open permission requests numbered ✅ n / ❌ n / ℹ️ n; ⏳ Лимиты (every AI service of «Лимиты AI» with a ▓░ bar per window, the reset, «кончится к …», a switch for limit alerts to Telegram). Requests: with «Присылать запросы разрешений в Telegram» on (now also «Запросы разрешений в этот бот» on the module page) the Mac where Claude asks sends each request at once with «Разрешить / Отклонить / Подробнее»; answered anywhere, the message loses its buttons and says how; `TelegramApprovals` steps aside while the module does this (its section says so). Own bot: buttons only from the Mac that reads the bot; shared bot: the relay now sends a press back to the Mac that sent the message (`msg:<chat>:<id>`, the last 1000 per chat), and answering needs «Ответы на запросы через общий бот». The default bottom menu now has 🏠 🤖 / ⏳ 📊 / 🧹 ❓ (custom menus keep theirs; the new screens are in «Меню в боте»). Spec §2/§3/§8, REFERENCE. 17 new strings in 12 languages.
+Checked: scripts/check.sh green; 4 new Swift tests (`TelegramSessionsLimitsTests`: order and requests, answers locked, request message and its end, details, limits screen and bars), updated menu and route tests; 1 new relay test (a press returns to the sending Mac, falls back after unpairing).
+Left: not tried live (needs a real permission request in a Claude session). The relay change needs a redeploy once the Worker is deployed.
 
 ## 2026-11-03 — Telegram: the bot's menu set up by each person (branch `feat/telegram-custom-menu`)
 

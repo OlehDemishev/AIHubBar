@@ -194,3 +194,25 @@ test("setup sets the webhook with its secret and the commands in two languages",
   assert.deepEqual(commands.map((c) => c.params.language_code), [undefined, "ru"]);
   assert.ok(commands[1].params.commands.some((c) => c.command === "macs"));
 });
+
+test("a press goes back to the Mac that sent its message", async () => {
+  const t = makeHub();
+  const mini = await paired(t, "Mac mini");
+  const air = await paired(t, "MacBook Air");
+  await t.hub.onMessage(mini.device_id, { type: "answer", on: true });
+  t.online.add(mini.device_id).add(air.device_id);
+  // The MacBook sends a permission request; the fake Telegram gives it message id 1.
+  await t.hub.onMessage(air.device_id, { type: "call", id: 1, method: "sendMessage", params: { text: "✋ Bash" } });
+  const press = { update_id: 50, callback_query: { id: "cb", data: "allow:abc", from: { id: 42 }, message: { message_id: 1, chat: { id: 42, type: "private" } } } };
+  await t.hub.onUpdate(press);
+  assert.equal(t.sent.at(-1).id, air.device_id);
+  // Text and presses on other messages still go to the answering Mac.
+  await t.hub.onUpdate(message(42, "/menu"));
+  assert.equal(t.sent.at(-1).id, mini.device_id);
+  await t.hub.onUpdate({ ...press, update_id: 51, callback_query: { ...press.callback_query, message: { message_id: 77, chat: { id: 42, type: "private" } } } });
+  assert.equal(t.sent.at(-1).id, mini.device_id);
+  // After unpairing, its old messages fall back to the answering Mac.
+  await t.hub.onMessage(air.device_id, { type: "unpair" });
+  await t.hub.onUpdate({ ...press, update_id: 52 });
+  assert.equal(t.sent.at(-1).id, mini.device_id);
+});
