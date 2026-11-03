@@ -14,9 +14,9 @@
 
 **Needs Oleh:**
 - «Быстрый запрос»: Settings → Modules → «Быстрый запрос» on, then ⌃⌥P from Terminal or Xcode — send one task to the background and one to Codex
+- GitHub → repository Settings → Social preview: upload docs/images/social-preview.png (only by hand)
 - Settings → Copilot → «Установить hook»: then start `copilot` and check its row in «Сессии» (the agent wasn't allowed to install it into ~/.copilot itself)
 - say what comes next: «Раскладка» to everyone, or new features
-- look at the new help: panel → «?» and https://olehdemishev.github.io/AIHubBar/help.html
 - look at the new Settings and say what to change next
 - MacBook Air: update to 0.5.0 through Sparkle (Settings → General → Updates) and check the island at the real notch
 - «Раскладка»: tried live in TextEdit, Safari, Chrome (⌥⇧ too); Telegram and Notes are yours to try (not typed into by the agent)
@@ -28,6 +28,24 @@
 Done: new optional AI module «Быстрый запрос» (docs/specs/SPEC-quick-prompt.md). A Carbon hot key (⌃⌥P by default; ⌃⌥A, ⌃⇧Space, off — on the module's page; registered only while the module is on) opens a small floating window: task, project, agent, «Фон» / «Терминал»; ⌘↩ sends, Esc closes. The project starts as the one in front (front window's document or a project name in its title, read only if Accessibility is already granted), else the last one, else the most recently active. Claude Code goes through `LaunchController` like «Своя задача…» (worktree, the 90 % limit question and «Запустить всё равно» shown in the window); other installed agents open in Terminal with the task on the clipboard. `AIHubBar --app-command quick-prompt` opens it (module off → its Settings page). Help fact in «Сессии агентов», site help JSON exported, REFERENCE updated, 17 new strings in 13 languages. `GlobalHotKey` changes are additive (one more id, `registerQuickPrompt`).
 Checked: scripts/check.sh green (warnings as errors), new `QuickPromptTests` (project choice, agents and modes, keys, settings decoding); installed with scripts/build-and-install.sh, `--app-command quick-prompt` with the module off logs and opens the module's page (screenshot).
 Left: the window itself not tried live (Oleh was using the screen; turning the module on would change his setup) — see Needs Oleh. Other agents get the task through the clipboard; passing it as their first prompt waits for their flags to be checked live.
+
+## 2026-11-03 — social preview for the 1.0 site (branch `chore/social-preview-1.0`)
+
+Done: docs/overview/hero.html redrawn as the site's hero: «Your AI and your Mac, one click away», the island at the notch asking for a permission and the panel with several services and Claude/Copilot sessions; the icon path fixed after the AIHubBar rename. Rendered docs/images/hero.png (README header, 2x) and social-preview.png (1280×640), copied to site/. README alt text updated.
+Checked: both images looked at after rendering; nothing overlaps.
+Left: the GitHub repository's own social preview (Settings → General → Social preview) is uploaded by hand — Oleh. The overview PDFs still have the old tagline.
+
+## 2026-11-03 — 1.0 site published (branch `chore/status-site-published`)
+
+Done: on Oleh's «Публикуй» merged #234; the Pages workflow deployed it.
+Checked: https://olehdemishev.github.io/AIHubBar/ serves the new page (title, styles); help.html still loads its topics, no console errors.
+Left: the social preview image is still the old one.
+
+## 2026-11-03 — site draft for 1.0 (branch `feat/site-1.0`)
+
+Done: new landing page in site/ (index.html, new styles appended to style.css; help.html untouched): hero with a Mac screen top (the island asking for a permission, the panel with limits of several services and Claude/Copilot sessions), «works with», AI (limits, sessions, commands), the notch island (rest, events, file drop), Layout fix (beta) with a typing demo, Mac tools tiles, profiles and templates, install, privacy (3 points), final CTA.
+Checked: local preview at 1440 px light and dark and at 375 px (no horizontal scroll); feature claims checked against the code (toggles, keep-awake rules, island hot keys ⌃⌥Y/⌃⌥N).
+Left: waiting for Oleh's review; not merged, since merging site/ to main publishes it. Social preview image still the old one.
 
 ## 2026-11-03 — beta 0.5.1-beta.1 published (branch `chore/status-beta-0.5.1`)
 
