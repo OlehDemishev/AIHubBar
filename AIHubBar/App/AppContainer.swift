@@ -316,6 +316,7 @@ final class AppContainer {
         data.cpu = monitor.snapshot?.cpu
         data.memory = monitor.snapshot?.memoryPercent
         data.keepingAwake = keepAwake.reason != nil
+        data.keepAwakeSwitchedOn = keepAwake.manualUntil != nil
         data.otherAI = hub.percents
         data.modeName = modes.current?.name
         data.modeIcon = modes.current?.icon

@@ -5,6 +5,7 @@
 **Updated:** 2026-11-03
 
 **Now:**
+- `fix/keep-awake-cup-follows-switch`: the menu bar ☕ follows the «Не спать» switch only — PR open
 - `feat/telegram-shared-bot`: shared Telegram bot through a Cloudflare Worker (spec §7, relay + Mac side) — PR open, the Worker not deployed yet
 - merged 2026-11-03: #248 «Не спать» on/off in the menu bar, #241 Codex session states, #240 quick command shortcuts, #238 «Быстрый запрос», #236 content spec, #242 «Telegram» stage 1, #244 Telegram menu at the bottom of the chat
 
@@ -27,6 +28,12 @@
 - «Раскладка»: tried live in TextEdit, Safari, Chrome (⌥⇧ too); Telegram and Notes are yours to try (not typed into by the agent)
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-03 — menu bar ☕ follows the «Не спать» switch (branch `fix/keep-awake-cup-follows-switch`)
+
+Done: after #248 the cup stayed orange whatever the panel switch said — the switch is only the manual hold, and the rule «Пока работает Claude» kept the Mac awake (and the cup lit) all the time. Oleh chose: the cup shows only while the switch is on (orange, label colour when level colours are off) and is gone when it is off; rules no longer light it. New `MenuBarData.keepAwakeSwitchedOn` (= manual hold); the tooltip still says «Mac не засыпает» from the real reason. Settings description reworded in 12 languages.
+Checked: `xcodebuild test` — 462 green (`KeepAwakeTests.menuBarCup`: off, rule alone, switch on, colours off). Installed build: menu bar screenshot with the switch off while the Claude rule held the Mac — no cup.
+Left: the switch-on state not seen live (the panel switch wasn't clicked by the agent).
 
 ## 2026-11-03 — «Не спать» on/off in the menu bar (branch `feat/keep-awake-indicator`)
 
