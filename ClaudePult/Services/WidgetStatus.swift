@@ -80,15 +80,19 @@ enum WidgetRequests {
             CFNotificationCenterAddObserver(center, nil, { _, _, name, _, _ in
                 let name = name?.rawValue as String?
                 DispatchQueue.main.async {
-                    MainActor.assumeIsolated {
-                        if name == WidgetStatus.refreshLimits {
-                            WidgetRequests.refreshLimits?()
-                        } else {
-                            WidgetRequests.keepAwake?(name == WidgetStatus.keepAwakeOn)
-                        }
-                    }
+                    MainActor.assumeIsolated { WidgetRequests.handle(name) }
                 }
             }, name as CFString, nil, .deliverImmediately)
+        }
+    }
+
+    /// What a widget's request means. Tests call this directly: posting the real notification would reach the
+    /// installed AI Hub Bar too.
+    static func handle(_ name: String?) {
+        if name == WidgetStatus.refreshLimits {
+            refreshLimits?()
+        } else if name == WidgetStatus.keepAwakeOn || name == WidgetStatus.keepAwakeOff {
+            keepAwake?(name == WidgetStatus.keepAwakeOn)
         }
     }
 }

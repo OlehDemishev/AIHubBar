@@ -31,6 +31,9 @@ if [[ -n "$(git status --porcelain)" ]]; then
   exit 1
 fi
 
+# Nothing ships without the tests and the string catalog passing (docs/SPEC-refactor.md §7).
+scripts/check.sh
+
 BUILD_NUMBER="$(git rev-list --count HEAD)"
 OUT="$ROOT/build/release/$VERSION"
 DERIVED="$ROOT/build/release/DerivedData"

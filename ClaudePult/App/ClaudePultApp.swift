@@ -38,9 +38,11 @@ struct ClaudePultApp: App {
             AppLog.flush()
             exit(code)
         }
-        let settings = AppSettings()
+        // Unit tests run inside this app: it gets throwaway settings and profiles, never the person's own
+        // (docs/SPEC-refactor.md §2.4).
+        let settings = AppSettings(defaults: TestHost.isActive ? TestHost.defaults : .standard)
         // Applies the current mode to the settings before anything reads them.
-        let modes = ModeStore(settings: settings)
+        let modes = TestHost.isActive ? ModeStore(settings: settings, directory: TestHost.modesDirectory) : ModeStore(settings: settings)
         _modes = State(initialValue: modes)
         let services = AIServiceStore(settings: settings)
         _services = State(initialValue: services)
@@ -145,7 +147,7 @@ struct ClaudePultApp: App {
         }
         AppLog.info("AI Hub Bar \(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "?") started")
         // Unit tests use the app as their host; keep it from running report.py in the background.
-        if ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] == nil {
+        if !TestHost.isActive {
             store.start()
             Updates.beta = settings.betaUpdates
             Updates.start()
@@ -421,7 +423,6 @@ struct ClaudePultApp: App {
         }
         .defaultSize(width: 960, height: 720)
         .handlesExternalEvents(matching: [])
-        .defaultSize(width: 720, height: 640)
 
         Settings {
             SettingsView()
@@ -448,6 +449,24 @@ struct ClaudePultApp: App {
                 .environment(weeklySummary)
         }
         .windowResizability(.contentMinSize)
+    }
+}
+
+/// The app as the unit tests' host: same code, its own empty settings and profiles folder.
+enum TestHost {
+    static let isActive = ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] != nil
+
+    static var defaults: UserDefaults {
+        let name = "com.demishev.claudepult.test-host"
+        let defaults = UserDefaults(suiteName: name) ?? .standard
+        defaults.removePersistentDomain(forName: name)
+        return defaults
+    }
+
+    static var modesDirectory: URL {
+        let url = FileManager.default.temporaryDirectory.appending(path: "AIHubBar-test-host-\(ProcessInfo.processInfo.processIdentifier)/modes")
+        try? FileManager.default.removeItem(at: url)
+        return url
     }
 }
 

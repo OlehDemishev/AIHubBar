@@ -132,6 +132,9 @@ private struct ModeEditor: View {
     @Environment(AppSettings.self) private var settings
     @State var mode: Mode
 
+    /// The profile as the store has it now.
+    private var stored: Mode? { modes.modes.first { $0.id == mode.id } }
+
     private static let icons = [
         "chevron.left.forwardslash.chevron.right", "video", "doc.text", "books.vertical", "megaphone", "sparkle",
         "pencil.and.outline", "graduationcap", "briefcase", "paintbrush",
@@ -262,7 +265,10 @@ private struct ModeEditor: View {
             }
         }
         .formStyle(.grouped)
-        .onChange(of: mode) { modes.update(mode) }
+        .onChange(of: mode) { if stored != mode { modes.update(mode) } }
+        // The store changes the profile too («Панель», an import, normalizing on save): take its version, so the next
+        // edit here doesn't write the old copy back (SPEC-refactor §2.3).
+        .onChange(of: stored) { if let stored, stored != mode { mode = stored } }
     }
 
     /// The profile's blocks are edited in Settings → «Панель» (SPEC-settings §4); here only what it shows and a way there.

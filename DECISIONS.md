@@ -106,7 +106,7 @@ Oleh picked variant A of three mock-ups (cards / tabs / Raycast-like list). Bloc
 
 **Not translated, on purpose:** file formats (`проект.md` and `контент-план.md` field names and templates — English synonyms are already read), the prompts sent to AI services and their wrappers, the hook script, log lines and command-line output. Template JSON (mode names, stages, command texts) and these prompts get English versions in the next step; until then an English interface shows Russian template content.
 
-**Catalog upkeep:** keys come from the compiler's `.stringsdata` (`SWIFT_EMIT_LOC_STRINGS`) via `xcrun xcstringstool sync`; translations were checked by a script for missing keys and matching format specifiers. Localized interpolation formats numbers by the system region («1 500 сл.»).
+**Catalog upkeep:** keys come from the compiler's `.stringsdata` (`SWIFT_EMIT_LOC_STRINGS`) via `xcrun xcstringstool sync`; translations were checked by a script for missing keys and matching format specifiers. Since 2026-11-03: `scripts/strings-sync.sh` (sync, keep the repository's JSON style, check) and `scripts/strings-check.py` (also in `scripts/check.sh` and the Mac CI). Localized interpolation formats numbers by the system region («1 500 сл.»).
 
 **Language choice:** Settings → Основные → «Язык интерфейса» writes the app's own `AppleLanguages` and relaunches; «Как в системе» removes it.
 

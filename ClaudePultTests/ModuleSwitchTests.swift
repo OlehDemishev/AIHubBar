@@ -41,6 +41,39 @@ struct ModuleSwitchTests {
         #expect(settings.shows(.limits))
     }
 
+    /// SPEC-refactor §2.1: switched-off modules travel in exports, and «Заменить всё» takes the file's, not the old ones.
+    @Test func switchedOffModulesTravelWithExports() throws {
+        let (source, _, sourceDir) = try store()
+        defer { try? FileManager.default.removeItem(at: sourceDir) }
+        source.setOn(.sessions, false)
+        let bundle = source.exportBundle()
+        #expect(bundle.off == ["sessions"])
+
+        let (target, _, targetDir) = try store()
+        defer { try? FileManager.default.removeItem(at: targetDir) }
+        target.setOn(.limits, false)
+        target.importBundle(bundle, style: .replace)
+        #expect(target.switchedOff == [.sessions])
+        #expect(target.isOn(.limits))
+
+        var old = bundle
+        old.off = nil
+        target.importBundle(old, style: .replace)
+        #expect(target.switchedOff.isEmpty, "a file from before the switch has everything on")
+    }
+
+    /// SPEC-refactor §2.7: `--modes` and friends look without writing — an old file stays as it was.
+    @Test func readOnlyStoreWritesNothing() throws {
+        let (_, settings, dir) = try store()
+        defer { try? FileManager.default.removeItem(at: dir) }
+        try Data(#"{"id": "m2", "name": "Тексты", "source": {"folders": {"_0": "~/Texts"}}}"#.utf8).write(to: dir.appending(path: "m2.json"))
+        let before = try String(contentsOf: dir.appending(path: "m2.json"), encoding: .utf8)
+        let looking = ModeStore(settings: settings, directory: dir, readOnly: true)
+        #expect(looking.modes.first { $0.id == "m2" }?.modules != nil, "normalized in memory")
+        #expect(try String(contentsOf: dir.appending(path: "m2.json"), encoding: .utf8) == before)
+        #expect(looking.exportBundle().installed?.contains("limits") == true)
+    }
+
     @Test func optionalModuleInstallsWithItsSwitch() throws {
         let (modes, _, dir) = try store()
         defer { try? FileManager.default.removeItem(at: dir) }

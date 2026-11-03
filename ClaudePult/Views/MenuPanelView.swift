@@ -301,6 +301,7 @@ struct MenuPanelView: View {
                 .foregroundStyle(.secondary)
             Spacer(minLength: 4)
             Button("Настройки…") {
+                SettingsRoute.open(module: .sessions)
                 NSApp.activate()
                 openSettings()
             }

@@ -30,9 +30,9 @@ struct ApprovalTests {
             )
         }
 
-        /// Waits for the hook's request file.
+        /// Waits for the hook's request file — up to 20 s: the first Python start on a fresh CI machine is slow.
         func request() async throws -> ApprovalRequest {
-            for _ in 0..<100 {
+            for _ in 0..<400 {
                 if let request = ApprovalFiles.requests(in: approvals).first { return request }
                 try await Task.sleep(for: .milliseconds(50))
             }
@@ -57,7 +57,7 @@ struct ApprovalTests {
         #expect(request.tool == "Bash" && request.summary == "npm test" && request.project == "Ambo" && request.sessionID == "abc-123")
         // The session shows as waiting right after the request (the request is written first).
         let record = h.sessions.appending(path: "abc-123.json")
-        for _ in 0..<100 where !FileManager.default.fileExists(atPath: record.path) {
+        for _ in 0..<400 where !FileManager.default.fileExists(atPath: record.path) {
             try await Task.sleep(for: .milliseconds(50))
         }
         #expect(try JSONDecoder().decode(Session.self, from: Data(contentsOf: record)).state == .waiting)
@@ -119,8 +119,13 @@ struct ApprovalTests {
         try JSONEncoder().encode(gone).write(to: dir.appending(path: "d4.request.json"))
         #expect(!ApprovalFiles.requests(in: dir).contains { $0.id == "d4" })
         #expect(ApprovalFiles.isValidID("0f3a9c") && !ApprovalFiles.isValidID("../x") && !ApprovalFiles.isValidID(""))
-        ApprovalFiles.decide("../evil", allow: true, in: dir)
+        #expect(!ApprovalFiles.decide("../evil", allow: true, in: dir))
         #expect(!FileManager.default.fileExists(atPath: dir.deletingLastPathComponent().appending(path: "evil.decision").path))
+        // An answer that can't be written says so (SPEC-refactor §2.5): here the folder is a file.
+        let blocked = dir.appending(path: "blocked")
+        try Data().write(to: blocked)
+        #expect(!ApprovalFiles.decide("a1", allow: true, in: blocked))
+        #expect(ApprovalFiles.decide("a1", allow: true, in: dir))
     }
 
     @Test func notificationButtons() {

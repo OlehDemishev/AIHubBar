@@ -1,0 +1,63 @@
+# The Mac app's unit tests and string catalog on every PR that touches them (docs/SPEC-refactor.md §7). The repository
+# is public, so GitHub's macOS machines cost nothing here. Locally the same: scripts/check.sh.
+name: Mac
+
+on:
+  pull_request:
+    paths:
+      - "ClaudePult/**"
+      - "ClaudePultTests/**"
+      - "ClaudePultWidget/**"
+      - "project.yml"
+      - "scripts/strings-check.py"
+      - ".github/workflows/mac.yml"
+  push:
+    branches: [main]
+    paths:
+      - "ClaudePult/**"
+      - "ClaudePultTests/**"
+      - "ClaudePultWidget/**"
+      - "project.yml"
+      - "scripts/strings-check.py"
+      - ".github/workflows/mac.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: mac-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  strings:
+    name: String catalog
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 scripts/strings-check.py
+
+  test:
+    name: Mac tests
+    # The app uses macOS 26 APIs behind availability checks, so it needs the macOS 26 SDK.
+    runs-on: macos-26
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Xcode
+        # The newest Xcode on the machine (releases are built with Xcode 27; GitHub's images had up to 26.6 in Nov 2026).
+        run: |
+          ls -d /Applications/Xcode*.app
+          XCODE="$(ls -d /Applications/Xcode_*.app | sort -V | tail -1)"
+          sudo xcode-select -s "$XCODE"
+          xcodebuild -version
+      - name: XcodeGen
+        run: brew install xcodegen
+      - name: Generate the project
+        run: xcodegen generate
+      - name: Test
+        run: |
+          # Tests expect the app's source language (Russian) and a Russian region, as on Oleh's Mac.
+          xcodebuild test -project ClaudePult.xcodeproj -scheme ClaudePult \
+            -destination 'platform=macOS' -derivedDataPath build/DerivedData \
+            -testLanguage ru -testRegion RU
