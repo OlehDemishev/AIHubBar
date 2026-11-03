@@ -6,10 +6,10 @@
 
 **Now:**
 - `feat/telegram-custom-menu`: the bot's menu set up by each person (screens, quick commands, order, per profile) — PR open
-- merged 2026-11-03: #241 Codex states, #240 quick command shortcuts, #238 «Быстрый запрос», #236 content spec, #242 «Telegram» stage 1, #244 menu at the bottom, #246 shared bot (Worker not deployed yet), #247 desktop CI off for Mac string changes
+- merged 2026-11-03: #248 «Не спать» on/off in the menu bar, #241 Codex states, #240 quick command shortcuts, #238 «Быстрый запрос», #236 content spec, #242 «Telegram» stage 1, #244 menu at the bottom, #246 shared bot (Worker not deployed yet), #247 desktop CI off for Mac string changes
 
 **Next:**
-- next beta or 0.5.1 carries stage 8 (#230–#232) and #236–#247: 0.5.1-beta.1 was built from 27c5e2d, before them
+- next beta or 0.5.1 carries stage 8 (#230–#232) and #236–#248: 0.5.1-beta.1 was built from 27c5e2d, before them
 - Telegram (docs/specs/SPEC-telegram.md): stage 2 — sessions and requests in the bot, approvals bot moved in, notification settings
 - content (docs/specs/SPEC-content.md, agreed): stage 1 — walkthrough of the «Тексты» profile on a sample folder, then «Версии», then batch tasks
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/specs/SPEC-windows.md §9, stage 2–3 leftovers)
@@ -33,6 +33,12 @@
 Done: Oleh asked for a menu each user sets up. `BotMenuConfig` (item ids `screen:<name>` / `cmd:<quick command id>`, 2 or 3 per row) in `TelegramBotSettings.menu`, a profile's own in `profileMenus`; `BotMenu` builds the keyboard from it (🏠 always first if left out, deleted commands drop out, equal titles numbered). Settings → Modules → Telegram → «Меню в боте»: switches, ↑ ↓, columns, «Меню для» всех профилей / профиля with «Своё меню у этого профиля», «Быстрые команды через общий бот», «Обновить меню в Telegram». In the bot: ❓ → ⚙️ «Настроить меню» (toggles, columns, «Готово»). A quick command from the menu runs on the Mac (`QuickToolsController.runForBot`, the process part shared with `run`) and replies with its result; «Спрашивать перед запуском» asks in the chat; over the shared bot only with the switch on, always asking. A profile change with a different menu sends 🏠 with it. Spec §2/§3, REFERENCE. 25 new strings in 12 languages. #247 (merged): the desktop CI no longer runs on Mac string changes while Windows/Linux are postponed.
 Checked: scripts/check.sh green; 6 new tests (menu from a config with commands, home can't be removed and order moves, per-profile menus, ⚙️ screen, command confirmation and result, new routes and tampered data).
 Left: not tried live in Telegram yet — set a menu in Settings, then «Обновить меню в Telegram».
+
+## 2026-11-03 — «Не спать» on/off in the menu bar (branch `feat/keep-awake-indicator`)
+
+Done: the «Не спать» menu bar element no longer disappears when off. On: filled `cup.and.saucer.fill` in orange (label colour when «цвет по уровню» is off); off: outline `cup.and.saucer` in the secondary colour. New segment `.tintedSymbol(name, tint)` drawn by `MenuBarRenderer`; the element only shows when the module is on (unchanged). Settings description of the element reworded in 12 languages.
+Checked: `xcodegen generate` + `xcodebuild test` — 462 green (`KeepAwakeTests.menuBarCup` covers on, off and colours off).
+Left: not looked at live in the real menu bar.
 
 ## 2026-11-03 — Telegram: the shared bot through a Cloudflare Worker (branch `feat/telegram-shared-bot`)
 

@@ -272,7 +272,7 @@ struct MenuBarElement: Codable, Equatable, Hashable, Identifiable, Sendable {
         case waiting, running, background, queued, deadline, disk, mode
         /// From «Ресурсы Mac» (SPEC-profiles §4.1).
         case cpu, memory
-        /// ☕ while «Не спать» holds the Mac awake.
+        /// ☕ «Не спать»: filled orange while it holds the Mac awake, a pale outline otherwise.
         case keepAwake
         /// The fullest limit of the other AI services, or the chosen one (SPEC-hub).
         case otherAI
@@ -295,7 +295,7 @@ struct MenuBarElement: Codable, Equatable, Hashable, Identifiable, Sendable {
             case .mode: String(localized: "Текущий профиль")
             case .cpu: String(localized: "Процессор (модуль «Ресурсы Mac»)")
             case .memory: String(localized: "Память (модуль «Ресурсы Mac»)")
-            case .keepAwake: String(localized: "☕, когда Mac не засыпает (модуль «Не спать»)")
+            case .keepAwake: String(localized: "☕: оранжевая — Mac не засыпает, бледная — может уснуть (модуль «Не спать»)")
             case .otherAI: String(localized: "Другие AI: Codex, Copilot, Gemini…")
             }
         }

@@ -42,6 +42,8 @@ enum MenuBarSegment: Hashable, Sendable {
     }
 
     case symbol(String)
+    /// A full-size symbol in a colour: ☕ on or off.
+    case tintedSymbol(String, Tint)
     /// Red dot over the preceding symbol.
     case dot
     case text(String, Tint)
@@ -159,7 +161,10 @@ enum MenuBarComposer {
             case .bar: [.symbol(symbol), .bar(value, level(value))]
             }
         case .keepAwake:
-            return data.keepingAwake ? [.symbol("cup.and.saucer.fill")] : nil
+            // Always there, so off is seen too: a filled orange cup holds the Mac, a pale outline lets it sleep.
+            return data.keepingAwake
+                ? [.tintedSymbol("cup.and.saucer.fill", config.colored ? .warning : .label)]
+                : [.tintedSymbol("cup.and.saucer", .secondary)]
         case .otherAI:
             guard let (source, value) = otherAI(element, data), value >= Double(element.showAbove) else { return nil }
             let name = HubLimit.Source(rawValue: source)?.shortTitle ?? source
