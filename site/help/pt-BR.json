@@ -226,6 +226,10 @@
               "name" : "Terminal / Segundo plano"
             },
             {
+              "detail" : "⌃⌥P em qualquer app: a tarefa, o projeto (o que está à frente, ou o último) e o agente — ⌘↩, e ela roda em segundo plano ou no Terminal. Módulo «Pedido rápido»; o atalho fica na página dele.",
+              "name" : "Pedido rápido"
+            },
+            {
               "detail" : "Tarefa em segundo plano: o que o Claude faz, passo a passo.",
               "name" : "Registro"
             },

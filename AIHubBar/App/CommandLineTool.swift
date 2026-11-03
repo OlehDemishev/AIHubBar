@@ -91,7 +91,7 @@ enum CommandLineTool {
                 print("copilot hooks: \(hooks.status()) (\(hooks.fileURL.path))")
                 return 0
             },
-            CLICommand(["--app-command"], needs: 1, usage: "--app-command <command>  ask the running app (help, settings, assistant, cleanup-output, notch-setup, test-notification, test-island, report, summary…)") { arguments, index in
+            CLICommand(["--app-command"], needs: 1, usage: "--app-command <command>  ask the running app (help, settings, assistant, cleanup-output, notch-setup, quick-prompt, test-notification, test-island, report, summary…)") { arguments, index in
                 let name = arguments[index + 1]
                 let known = Array(AppRequests.windows.keys) + AppRequests.actions + CommonCommand.allCases.map(\.cliName)
                 guard known.contains(name) else {

@@ -226,6 +226,10 @@
               "name" : "Terminal / Segundo plano"
             },
             {
+              "detail" : "⌃⌥P en cualquier app: la tarea, el proyecto (el que está delante o el último) y el agente — ⌘↩, y se ejecuta en segundo plano o en Terminal. Módulo «Petición rápida»; el atajo está en su página.",
+              "name" : "Petición rápida"
+            },
+            {
               "detail" : "Tarea en segundo plano: qué hace Claude, paso a paso.",
               "name" : "Registro"
             },

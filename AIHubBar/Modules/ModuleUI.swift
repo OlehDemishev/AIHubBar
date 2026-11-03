@@ -25,6 +25,7 @@ struct ModuleUI {
         case .notes: .notes
         case .notch: .notch
         case .layout: .layout
+        case .quickPrompt: .quickPrompt
         }
     }
 }

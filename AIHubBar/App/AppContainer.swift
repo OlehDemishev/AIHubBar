@@ -15,6 +15,7 @@ extension ClipboardHistory: ModuleService {}
 extension NotesStore: ModuleService {}
 extension NotchIsland: ModuleService {}
 extension LayoutSwitcher: ModuleService {}
+extension QuickPromptController: ModuleService {}
 
 /// «Claude is working», counted one way for the menu bar, the widget and «Не спать».
 @MainActor
@@ -56,6 +57,7 @@ final class AppContainer {
     let notesStore: NotesStore
     let notchIsland: NotchIsland
     let layoutSwitcher: LayoutSwitcher
+    let quickPrompt: QuickPromptController
     let notifications = NotificationPermission()
     let modes: ProfileStore
     let services: AIServiceStore
@@ -112,12 +114,14 @@ final class AppContainer {
         let launcher = LaunchController(settings: settings, store: store, runs: runs, usage: usage)
         self.weeklySummary = WeeklySummarySender(settings: settings, usage: usage, runs: runs, hub: hub)
         self.launcher = launcher
+        let quickPrompt = QuickPromptController(settings: settings, launcher: launcher, services: services)
+        self.quickPrompt = quickPrompt
         let hooks = HookController(settings: settings)
         self.hooks = hooks
         // Each module's service works only while its module does (SPEC-settings §1): one table, not a closure each.
         let moduleServices: [(ModuleKind, any ModuleService)] = [
             (.limits, usage), (.limits, hub), (.resources, monitor), (.keepAwake, keepAwake), (.clipboard, clipboard),
-            (.notes, notesStore), (.notch, notchIsland), (.layout, layoutSwitcher),
+            (.notes, notesStore), (.notch, notchIsland), (.layout, layoutSwitcher), (.quickPrompt, quickPrompt),
         ]
         for (kind, service) in moduleServices {
             service.isActive = { [modes] in modes.isOn(kind) }
@@ -160,6 +164,11 @@ final class AppContainer {
         AppDelegate.willTerminate = { keepAwake.releaseOnQuit() }
         GlobalHotKey.action = { QuickSearch.show() }
         QuickSearch.open = { [requests] in requests.openWindow(.search) }
+        quickPrompt.openWindow = { [requests] in requests.openWindow(.quickPrompt) }
+        quickPrompt.openSettings = { [requests] in
+            SettingsRoute.open(module: .quickPrompt)
+            requests.openWindow(.settings)
+        }
         let quickTools = QuickToolsController(settings: settings)
         self.quickTools = quickTools
         IntentBridge.settings = settings
@@ -201,6 +210,7 @@ final class AppContainer {
             GlobalHotKey.register(settings.panelHotKey)
             GlobalHotKey.registerIsland(settings.notch.hotKeys)
             GlobalHotKey.islandAction = { [notchIsland] allow in notchIsland.answerByKey(allow: allow) }
+            quickPrompt.start()
             clipboard.start()
             layoutSwitcher.start()
             // Windows can only be made once the app has finished launching.
@@ -344,6 +354,7 @@ private struct AppEnvironment: ViewModifier {
             .environment(app.notesStore)
             .environment(app.notchIsland)
             .environment(app.layoutSwitcher)
+            .environment(app.quickPrompt)
             .environment(app.notifications)
             .environment(app.modes)
             .environment(app.services)

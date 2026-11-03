@@ -129,6 +129,11 @@ final class AppSettings {
         didSet { defaults.setEncoded(layout, forKey: Keys.layout) }
     }
 
+    /// «Быстрый запрос» (SPEC-quick-prompt §4): its hot key, and the project and mode of the last request.
+    var quickPrompt: QuickPromptSettings {
+        didSet { defaults.setEncoded(quickPrompt, forKey: Keys.quickPrompt) }
+    }
+
     /// «Быстрые команды» and «Быстрые переключатели» (SPEC-profiles §4.3–4.4).
     var quickCommands: [QuickCommand] {
         didSet { defaults.setEncoded(quickCommands, forKey: Keys.quickCommands) }
@@ -351,6 +356,7 @@ final class AppSettings {
         notch = defaults.decoded(NotchSettings.self, forKey: Keys.notch) ?? NotchSettings()
         betaUpdates = defaults.bool(forKey: Keys.betaUpdates)
         layout = defaults.decoded(LayoutSettings.self, forKey: Keys.layout) ?? LayoutSettings()
+        quickPrompt = defaults.decoded(QuickPromptSettings.self, forKey: Keys.quickPrompt) ?? QuickPromptSettings()
         resourceDiskBelowGB = defaults.positiveInt(Keys.resourceDiskBelowGB, default: 20)
         panelTextSize = defaults.value(PanelTextSize.self, forKey: Keys.panelTextSize) ?? .normal
         panelWidth = defaults.value(PanelWidth.self, forKey: Keys.panelWidth) ?? .normal
@@ -409,6 +415,7 @@ final class AppSettings {
         static let keepAwakeRules = "keepAwakeRules"
         static let notch = "notch"
         static let layout = "layout"
+        static let quickPrompt = "quickPrompt"
         static let betaUpdates = "betaUpdates"
         static let resourceDiskBelowGB = "resourceDiskBelowGB"
         static let panelTextSize = "panelTextSize"

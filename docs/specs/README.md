@@ -14,6 +14,7 @@ are in each spec and in the journal: `docs/STATUS.md`, older months in `docs/sta
 | [SPEC-layout.md](SPEC-layout.md) | «Раскладка», automatic keyboard layout switch | in beta |
 | [SPEC-settings.md](SPEC-settings.md) | Settings around modules, places, menu bar | done (#201, #203) |
 | [SPEC-help.md](SPEC-help.md) | help in the app and on the site | done (#206) |
+| [SPEC-quick-prompt.md](SPEC-quick-prompt.md) | «Быстрый запрос»: a task to an agent from any app by a hot key | done (2026-11-03) |
 | [SPEC-refactor.md](SPEC-refactor.md) | refactoring audit and plan | done (stages 0–8) |
 | [SPEC-windows.md](SPEC-windows.md) | Windows version (`desktop/`, Tauri 2) | postponed after stages 1–3 main parts |
 | [SPEC-linux.md](SPEC-linux.md) | Linux version (same code as Windows) | postponed with Windows |
