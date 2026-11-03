@@ -7,6 +7,8 @@ import Foundation
 struct TelegramBotSettings: Codable, Equatable, Sendable {
     /// «Этот Мак отвечает боту»; nil = the default (a desktop answers, a laptop doesn't).
     var answersHere: Bool?
+    /// «Общий бот» (SPEC-telegram §7); nil = the shared bot unless an own bot is already set up.
+    var shared: Bool?
 }
 
 /// One update from `getUpdates` the bot looks at: a text message or a button press.

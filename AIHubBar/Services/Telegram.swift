@@ -68,12 +68,29 @@ enum Telegram {
         ownBot = token.isEmpty || chat.isEmpty ? nil : Credentials(token: token, chatID: chat)
     }
 
+    /// The shared bot (SPEC-telegram §7), set by `TelegramBotController` while this Mac is paired: it wins over the
+    /// own bot and `config.json`.
+    @MainActor static var shared: (@MainActor (String) async -> Bool)?
+
     /// Sends `html` when the module's Telegram setting is on and a bot is set up — the one way modules send their
     /// alerts there (SPEC-refactor §6); quietly nothing otherwise.
     @MainActor
     static func notify(_ toggle: TelegramToggle, html: String, settings: AppSettings) {
-        guard settings.isOn(toggle), let credentials = credentials(dailyReportDirectory: settings.dailyReportDirectory) else { return }
-        Task { _ = await send(html: html, with: credentials) }
+        guard settings.isOn(toggle) else { return }
+        Task { _ = await deliver(html: html, settings: settings) }
+    }
+
+    /// Through the shared bot, the own bot or `config.json`'s; false when none is set up or it failed.
+    @MainActor
+    static func deliver(html: String, settings: AppSettings) async -> Bool {
+        if let shared { return await shared(html) }
+        guard let credentials = credentials(dailyReportDirectory: settings.dailyReportDirectory) else { return false }
+        return await send(html: html, with: credentials)
+    }
+
+    @MainActor
+    static func isSetUp(_ settings: AppSettings) -> Bool {
+        shared != nil || credentials(dailyReportDirectory: settings.dailyReportDirectory) != nil
     }
 
     @MainActor

@@ -113,7 +113,7 @@ struct BackgroundRunsSection: View {
             Footnote(text: String(localized: "«Фон» запускает claude -p без окна: разрешены чтение и правка файлов проекта, проверки и сборки, git без push в main и без force, gh pr create/view/list; остальное отклоняется. Итог — уведомлением и в Telegram."))
         }
         .task(id: "\(settings.dailyReportDirectory)|\(settings.telegramForBackground)") {
-            hasTelegram = Telegram.credentials(dailyReportDirectory: settings.dailyReportDirectory) != nil
+            hasTelegram = Telegram.isSetUp(settings)
         }
     }
 }

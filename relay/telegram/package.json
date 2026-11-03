@@ -1,0 +1,10 @@
+{
+  "name": "aihubbar-telegram-relay",
+  "private": true,
+  "type": "module",
+  "description": "The shared AI Hub Bar Telegram bot: a Cloudflare Worker relay (docs/specs/SPEC-telegram.md §7)",
+  "scripts": {
+    "test": "node --test",
+    "deploy": "npx wrangler@4.151.0 deploy"
+  }
+}

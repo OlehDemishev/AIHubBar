@@ -1,10 +1,12 @@
+import AppKit
 import Foundation
 import IOKit.ps
 import Observation
 
 /// The «Telegram» module's bot (docs/specs/SPEC-telegram.md): reads its updates while this Mac answers it, answers only
 /// the bound chat, keeps each screen in one message and runs `report.py` / `cleanup.py` like the panel's commands.
-/// The token is the send-only bot's (`Telegram.keychainAccount`); it is only in request URLs, never in the log.
+/// Two ways to the bot (§7): the shared bot through the relay (`TelegramRelay`), or the person's own bot, whose token is
+/// the send-only bot's (`Telegram.keychainAccount`) and only in request URLs, never in the log.
 @MainActor
 @Observable
 final class TelegramBotController {
@@ -19,6 +21,9 @@ final class TelegramBotController {
     private(set) var job: String?
 
     var isActive: () -> Bool = { true }
+
+    /// The shared bot's connection; used while `usesSharedBot`.
+    let relay = TelegramRelay()
 
     private let settings: AppSettings
     private let sessions: SessionStore
@@ -35,6 +40,8 @@ final class TelegramBotController {
     private var menuScreens: [Int] = []
     /// The latest message that carries the bottom menu: kept while other screens come and go.
     private var menuCarrier: Int?
+    /// «Подключить Telegram» was pressed here: greet the chat once it is paired.
+    private var greetWhenPaired = false
     private let macName = Host.current().localizedName ?? "Mac"
 
     init(settings: AppSettings, sessions: SessionStore, runs: RunStore, usage: UsageStore, approvals: TelegramApprovals) {
@@ -45,18 +52,28 @@ final class TelegramBotController {
         self.approvals = approvals
     }
 
-    /// The bound chat: the module's own, else the `_daily-report` one (a private chat's id is the person's id, the same
-    /// for every bot).
+    /// «Общий бот»: the setting, else the shared bot unless an own bot is already set up.
+    var usesSharedBot: Bool {
+        get { (settings.telegramBot.shared ?? !hasToken) && relay.baseURL != nil }
+        set { settings.telegramBot.shared = newValue }
+    }
+
+    /// The bound chat: the shared bot's paired one; the own bot's, else the `_daily-report` one (a private chat's id is
+    /// the person's id, the same for every bot).
     var chatID: String {
+        if usesSharedBot { return relay.chat ?? "" }
         let own = settings.telegramChatID.trimmingCharacters(in: .whitespaces)
         if !own.isEmpty { return own }
         return Telegram.fileCredentials(dailyReportDirectory: settings.dailyReportDirectory)?.chatID ?? ""
     }
 
-    /// «Этот Мак отвечает боту»: by default a desktop Mac answers and a laptop doesn't (SPEC-telegram §8).
+    /// «Этот Мак отвечает боту». Own bot: by default a desktop Mac answers and a laptop doesn't (SPEC-telegram §9).
+    /// Shared bot: the Worker decides — the last paired Mac, or the one that took over here or with /macs.
     var answersHere: Bool {
-        get { settings.telegramBot.answersHere ?? !Self.hasInternalBattery }
-        set { settings.telegramBot.answersHere = newValue }
+        get { usesSharedBot ? relay.answering : settings.telegramBot.answersHere ?? !Self.hasInternalBattery }
+        set {
+            if usesSharedBot { relay.setAnswering(newValue) } else { settings.telegramBot.answersHere = newValue }
+        }
     }
 
     /// A bot in `_daily-report/config.json` that isn't this one yet: «Взять бота из _daily-report».
@@ -136,11 +153,28 @@ final class TelegramBotController {
         Task { await Telegram.loadOwnBot(chatID: "") }
     }
 
+    /// «Подключить Telegram» (shared bot): opens the bot with a one-time code.
+    func connectShared() async {
+        guard let link = await relay.pairLink() else {
+            status = String(localized: "Нет связи с общим ботом")
+            return
+        }
+        status = nil
+        greetWhenPaired = true
+        NSWorkspace.shared.open(link)
+    }
+
+    /// «Отключить» (shared bot): this Mac leaves the chat.
+    func disconnectShared() {
+        relay.unpair()
+        Telegram.shared = nil
+    }
+
     /// «Проверить»: the home screen as a new message.
     func test() async {
-        guard let token else { status = String(localized: "Сначала сохраните токен бота"); return }
+        guard usesSharedBot || token != nil else { status = String(localized: "Сначала сохраните токен бота"); return }
         guard !chatID.isEmpty else { status = String(localized: "Сначала привяжите чат"); return }
-        let ok = await show(.home, tapID: nil, token: token)
+        let ok = await show(.home, tapID: nil)
         status = ok ? String(localized: "Отправлено") : String(localized: "Бот не может написать в этот чат — откройте его в Telegram и нажмите «Start»")
     }
 
@@ -148,6 +182,11 @@ final class TelegramBotController {
 
     /// One read of the updates; returns how long to wait before the next one.
     private func tick() async -> Double {
+        if usesSharedBot { return await sharedTick() }
+        if relay.isRunning {
+            relay.stop()
+            Telegram.shared = nil
+        }
         if let expires = bindingExpires, expires < .now { cancelBinding() }
         guard isActive(), answersHere, let token, !chatID.isEmpty || bindingCode != nil else {
             isReading = false
@@ -155,11 +194,11 @@ final class TelegramBotController {
         }
         if commandsSetFor != token {
             commandsSetFor = token
-            await setCommands(token: token)
+            await setCommands()
         }
         var parameters: [String: Any] = ["timeout": 25, "allowed_updates": ["message", "callback_query"]]
         if let offset { parameters["offset"] = offset }
-        let (code, data) = await Self.call(token, "getUpdates", parameters, timeout: 35)
+        let (code, data) = await api("getUpdates", parameters, timeout: 35)
         switch code {
         case 200:
             break
@@ -185,20 +224,61 @@ final class TelegramBotController {
         let (updates, next) = BotUpdate.parse(data)
         if let next { offset = next }
         for update in updates {
-            await handle(update, token: token, afterGap: afterGap)
+            await handle(update, afterGap: afterGap)
         }
         return 0.2
     }
 
-    private func handle(_ update: BotUpdate, token: String, afterGap: Bool) async {
+    /// The shared bot: the relay pushes the updates; this waits for them like `getUpdates` would.
+    private func sharedTick() async -> Double {
+        guard isActive() else {
+            if relay.isRunning { relay.stop() }
+            isReading = false
+            Telegram.shared = nil
+            return 5
+        }
+        relay.start(name: macName)
+        botName = relay.bot.map { "@" + $0 }
+        // Notifications of every module go through the shared bot while this Mac is paired.
+        if relay.chat == nil {
+            Telegram.shared = nil
+        } else if Telegram.shared == nil {
+            Telegram.shared = { @MainActor [weak self] (html: String) async -> Bool in
+                guard let self else { return false }
+                return await self.send(BotMessage(html: html)) != nil
+            }
+        }
+        guard relay.connected, relay.chat != nil else {
+            isReading = false
+            if !relay.connected, let error = relay.lastError { status = error }
+            return 2
+        }
+        if status == relay.lastError ?? String(localized: "Нет связи с общим ботом") { status = nil }
+        if greetWhenPaired {
+            greetWhenPaired = false
+            AppLog.info("Telegram: paired with the shared bot")
+            _ = await send(BotMessage(html: "✅ " + RunMessage.escape(String(localized: "Чат привязан к AI Hub Bar."))))
+            await show(.home, tapID: nil)
+        }
+        isReading = relay.answering
+        let data = await relay.nextUpdates(timeout: 25)
+        let afterGap = lastRead.map { Date.now.timeIntervalSince($0) > BotUpdate.maxAge } ?? true
+        lastRead = .now
+        for update in BotUpdate.parse(data).updates {
+            await handle(update, afterGap: afterGap)
+        }
+        return 0
+    }
+
+    private func handle(_ update: BotUpdate, afterGap: Bool) async {
         if case let .message(text, _) = update.kind, update.isPrivate, let code = bindingCode,
            BotCommand(text: text) == .start(code: code), !update.isStale(now: .now) {
             settings.telegramChatID = update.chatID
             cancelBinding()
             await Telegram.loadOwnBot(chatID: update.chatID)
             AppLog.info("Telegram chat bound")
-            _ = await send(BotMessage(html: "✅ " + RunMessage.escape(String(localized: "Чат привязан к AI Hub Bar."))), token: token)
-            await show(.home, tapID: nil, token: token)
+            _ = await send(BotMessage(html: "✅ " + RunMessage.escape(String(localized: "Чат привязан к AI Hub Bar."))))
+            await show(.home, tapID: nil)
             return
         }
         // Anyone else who found the bot gets nothing back.
@@ -210,45 +290,45 @@ final class TelegramBotController {
                 return
             }
             if let screen = BotMenu.screen(forText: text) {
-                await show(screen, tapID: messageID, token: token)
+                await show(screen, tapID: messageID)
                 return
             }
             guard let command = BotCommand(text: text) else { return }
-            await run(command, token: token)
+            await run(command)
         case let .press(callbackID, data, messageID):
             guard let route = BotRoute(data: data) else {
-                await answerPress(callbackID, String(localized: "Кнопка устарела"), token: token)
-                if let messageID { await edit(messageID, homeScreen, token: token) }
+                await answerPress(callbackID, String(localized: "Кнопка устарела"))
+                if let messageID { await edit(messageID, homeScreen) }
                 return
             }
             if route.isAction, afterGap {
-                await answerPress(callbackID, String(localized: "Устарело — откройте меню заново"), token: token)
+                await answerPress(callbackID, String(localized: "Устарело — откройте меню заново"))
                 return
             }
-            await answerPress(callbackID, nil, token: token)
-            await press(route, messageID: messageID, token: token)
+            await answerPress(callbackID, nil)
+            await press(route, messageID: messageID)
         }
     }
 
-    private func run(_ command: BotCommand, token: String) async {
+    private func run(_ command: BotCommand) async {
         switch command {
         case .menu, .start:
-            await show(.home, tapID: nil, token: token)
+            await show(.home, tapID: nil)
         case .help:
-            _ = await send(helpScreen, token: token)
+            _ = await send(helpScreen)
         case let .report(ai, hours):
-            let id = await send(reportsScreen(job: nil), token: token)
-            startReport(ai: ai, hours: hours ?? BotScreens.hoursSinceMorning(now: .now), messageID: id, token: token)
+            let id = await send(reportsScreen(job: nil))
+            startReport(ai: ai, hours: hours ?? BotScreens.hoursSinceMorning(now: .now), messageID: id)
         case let .clean(check):
             if check {
-                startCleanup(dryRun: true, messageID: nil, token: token)
+                startCleanup(dryRun: true, messageID: nil)
             } else {
-                _ = await send(BotScreens.cleanupConfirm, token: token)
+                _ = await send(BotScreens.cleanupConfirm)
             }
         case .badHours:
-            _ = await send(BotMessage(html: RunMessage.escape(String(localized: "Число часов не понял. Пример: /report 3"))), token: token)
+            _ = await send(BotMessage(html: RunMessage.escape(String(localized: "Число часов не понял. Пример: /report 3"))))
         case .unknown:
-            _ = await send(BotMessage(html: RunMessage.escape(String(localized: "Не знаю такой команды. Все команды: /help"))), token: token)
+            _ = await send(BotMessage(html: RunMessage.escape(String(localized: "Не знаю такой команды. Все команды: /help"))))
         }
     }
 
@@ -256,7 +336,7 @@ final class TelegramBotController {
     /// so it is set again whenever it is shown; the menu press and the screens before it are deleted (not while a report
     /// or cleanup still edits one). Returns whether it was sent.
     @discardableResult
-    private func show(_ screen: BotScreen, tapID: Int?, token: String) async -> Bool {
+    private func show(_ screen: BotScreen, tapID: Int?) async -> Bool {
         var message: BotMessage
         switch screen {
         case .home:
@@ -267,11 +347,11 @@ final class TelegramBotController {
         case .mac: message = macScreen
         case .help: message = helpScreen
         }
-        guard let id = await send(message, token: token) else { return false }
-        if let tapID { await delete(tapID, token: token) }
+        guard let id = await send(message) else { return false }
+        if let tapID { await delete(tapID) }
         if job == nil {
             let keep = message.installsMenu ? [] : [menuCarrier].compactMap { $0 }
-            for old in menuScreens where !keep.contains(old) { await delete(old, token: token) }
+            for old in menuScreens where !keep.contains(old) { await delete(old) }
             menuScreens = keep
         }
         if message.installsMenu { menuCarrier = id }
@@ -279,7 +359,7 @@ final class TelegramBotController {
         return true
     }
 
-    private func press(_ route: BotRoute, messageID: Int?, token: String) async {
+    private func press(_ route: BotRoute, messageID: Int?) async {
         let screen: BotMessage
         switch route {
         case .show(.home): screen = homeScreen
@@ -288,27 +368,27 @@ final class TelegramBotController {
         case .show(.help): screen = helpScreen
         case .cleanupAsk: screen = BotScreens.cleanupConfirm
         case .allCommands:
-            await sendAllCommands(token: token)
+            await sendAllCommands()
             return
         case let .report(ai, hours):
-            startReport(ai: ai, hours: hours.map(Double.init) ?? BotScreens.hoursSinceMorning(now: .now), messageID: messageID, token: token)
+            startReport(ai: ai, hours: hours.map(Double.init) ?? BotScreens.hoursSinceMorning(now: .now), messageID: messageID)
             return
         case .cleanupCheck, .cleanupRun:
-            startCleanup(dryRun: route == .cleanupCheck, messageID: messageID, token: token)
+            startCleanup(dryRun: route == .cleanupCheck, messageID: messageID)
             return
         case let .answer(requestID, allow):
             approvals.answerFromBot(requestID: requestID, allow: allow, messageID: messageID)
             return
         }
-        if let messageID { await edit(messageID, screen, token: token) } else { _ = await send(screen, token: token) }
+        if let messageID { await edit(messageID, screen) } else { _ = await send(screen) }
     }
 
     // MARK: - Reports and cleanup
 
-    private func startReport(ai: Bool, hours: Double, messageID: Int?, token: String) {
+    private func startReport(ai: Bool, hours: Double, messageID: Int?) {
         let period = BotScreens.hoursText(hours)
         guard job == nil else {
-            Task { _ = await send(BotMessage(html: "⏳ " + RunMessage.escape(String(localized: "Сейчас идёт другая задача, подождите."))), token: token) }
+            Task { _ = await send(BotMessage(html: "⏳ " + RunMessage.escape(String(localized: "Сейчас идёт другая задача, подождите.")))) }
             return
         }
         let title = ai ? String(localized: "Готовлю отчёт за \(period), 1–3 минуты…") : String(localized: "Готовлю быструю сводку за \(period)…")
@@ -317,7 +397,7 @@ final class TelegramBotController {
         var arguments = ["--since-hours", String(format: "%.2f", hours), "--no-open"]
         if !ai { arguments += ["--no-ai", "--no-document"] }
         Task {
-            if let messageID { await edit(messageID, reportsScreen(job: title), token: token) }
+            if let messageID { await edit(messageID, reportsScreen(job: title)) }
             let result = await Self.runScript("report.py", arguments, in: directory, timeout: .seconds(ai ? 900 : 180))
             job = nil
             let command: CommonCommand = ai ? .reportNow : .quickSummary
@@ -329,35 +409,35 @@ final class TelegramBotController {
                 : "✅ " + RunMessage.escape(String(localized: "Отчёт за \(period) отправлен"))
             var screen = reportsScreen(job: nil)
             screen.html = text + "\n\n" + screen.html
-            if let messageID { await edit(messageID, screen, token: token) } else { _ = await send(screen, token: token) }
+            if let messageID { await edit(messageID, screen) } else { _ = await send(screen) }
         }
     }
 
-    private func startCleanup(dryRun: Bool, messageID: Int?, token: String) {
+    private func startCleanup(dryRun: Bool, messageID: Int?) {
         guard job == nil else {
-            Task { _ = await send(BotMessage(html: "⏳ " + RunMessage.escape(String(localized: "Сейчас идёт другая задача, подождите."))), token: token) }
+            Task { _ = await send(BotMessage(html: "⏳ " + RunMessage.escape(String(localized: "Сейчас идёт другая задача, подождите.")))) }
             return
         }
         let title = dryRun ? String(localized: "Считаю, что можно удалить…") : String(localized: "Чищу сборки…")
         job = title
         let directory = settings.dailyReportDirectory
         Task {
-            if let messageID { await edit(messageID, macScreen, token: token) }
+            if let messageID { await edit(messageID, macScreen) }
             let result = await Self.runScript("cleanup.py", [dryRun ? "--dry-run" : "--now"], in: directory, timeout: .seconds(dryRun ? 300 : 1800))
             job = nil
             AppLog.info("Telegram cleanup \(dryRun ? "check" : "run") finished")
             let text = result.map { $0.exitCode == 0 ? BotScreens.cleanupOutput($0.output) : BotScreens.failure(String(localized: "Очистка не получилась"), output: $0.output) }
                 ?? BotScreens.failure(String(localized: "Очистка не получилась"), output: String(localized: "Не найден cleanup.py в \(directory)"))
-            _ = await send(BotMessage(html: text), token: token)
-            if let messageID { await edit(messageID, macScreen, token: token) }
+            _ = await send(BotMessage(html: text))
+            if let messageID { await edit(messageID, macScreen) }
         }
     }
 
-    private func sendAllCommands(token: String) async {
+    private func sendAllCommands() async {
         let url = URL(fileURLWithPath: settings.dailyReportDirectory).appending(path: "help.txt")
         guard let text = try? String(contentsOf: url, encoding: .utf8), !text.isEmpty else { return }
         // help.txt is Telegram HTML already (≤ 4000 characters, ~/Projects/CLAUDE.md).
-        _ = await send(BotMessage(html: String(text.prefix(4000))), token: token)
+        _ = await send(BotMessage(html: String(text.prefix(4000))))
     }
 
     /// `python3 <script>` in the `_daily-report` folder; the output without bot tokens. Nil when the script is missing.
@@ -383,7 +463,7 @@ final class TelegramBotController {
 
     private func reportsScreen(job: String?) -> BotMessage {
         let file = Telegram.fileCredentials(dailyReportDirectory: settings.dailyReportDirectory)
-        return BotScreens.reports(job: job, otherBot: file != nil && file?.token != token)
+        return BotScreens.reports(job: job, otherBot: file != nil && (usesSharedBot || file?.token != token))
     }
 
     private var macScreen: BotMessage {
@@ -400,53 +480,60 @@ final class TelegramBotController {
     // MARK: - Telegram
 
     private func loadName() async {
-        guard let token else { return }
-        let (code, data) = await Self.call(token, "getMe", [:], timeout: 20)
+        guard token != nil else { return }
+        let (code, data) = await api("getMe", [:], timeout: 20)
         let result = data.flatMap { (try? JSONSerialization.jsonObject(with: $0)) as? [String: Any] }?["result"] as? [String: Any]
         botName = code == 200 ? (result?["username"] as? String).map { "@" + $0 } : nil
     }
 
-    private func setCommands(token: String) async {
+    private func setCommands() async {
         let commands = BotCommand.menuList.map { ["command": $0.command, "description": $0.description] }
-        _ = await Self.call(token, "setMyCommands", ["commands": commands], timeout: 20)
-        _ = await Self.call(token, "setChatMenuButton", ["menu_button": ["type": "commands"]], timeout: 20)
+        _ = await api("setMyCommands", ["commands": commands], timeout: 20)
+        _ = await api("setChatMenuButton", ["menu_button": ["type": "commands"]], timeout: 20)
     }
 
     /// The new message's id.
-    private func send(_ message: BotMessage, token: String) async -> Int? {
+    private func send(_ message: BotMessage) async -> Int? {
         var parameters: [String: Any] = ["chat_id": chatID, "text": message.html, "parse_mode": "HTML", "disable_web_page_preview": true]
-        if !message.buttons.isEmpty { parameters["reply_markup"] = message.replyMarkup }
-        let (_, data) = await Self.call(token, "sendMessage", parameters, timeout: 20)
+        if message.installsMenu || !message.buttons.isEmpty { parameters["reply_markup"] = message.replyMarkup }
+        let (_, data) = await api("sendMessage", parameters, timeout: 20)
         let object = data.flatMap { (try? JSONSerialization.jsonObject(with: $0)) as? [String: Any] }
         return (object?["result"] as? [String: Any])?["message_id"] as? Int
     }
 
-    private func edit(_ messageID: Int, _ message: BotMessage, token: String) async {
-        _ = await Self.call(token, "editMessageText", [
+    private func edit(_ messageID: Int, _ message: BotMessage) async {
+        _ = await api("editMessageText", [
             "chat_id": chatID, "message_id": messageID, "text": message.html, "parse_mode": "HTML",
             "disable_web_page_preview": true, "reply_markup": message.replyMarkup,
         ], timeout: 20)
     }
 
     /// Bots may delete messages in a private chat for 48 hours; older ones simply stay.
-    private func delete(_ messageID: Int, token: String) async {
-        _ = await Self.call(token, "deleteMessage", ["chat_id": chatID, "message_id": messageID], timeout: 20)
+    private func delete(_ messageID: Int) async {
+        _ = await api("deleteMessage", ["chat_id": chatID, "message_id": messageID], timeout: 20)
     }
 
-    private func answerPress(_ id: String, _ text: String?, token: String) async {
+    private func answerPress(_ id: String, _ text: String?) async {
         var parameters: [String: Any] = ["callback_query_id": id]
         if let text { parameters["text"] = text }
-        _ = await Self.call(token, "answerCallbackQuery", parameters, timeout: 20)
+        _ = await api("answerCallbackQuery", parameters, timeout: 20)
+    }
+
+    /// A Telegram method through the shared bot or straight to the own one.
+    private func api(_ method: String, _ parameters: [String: Any], timeout: TimeInterval) async -> (Int, Data?) {
+        if usesSharedBot { return await relay.call(method, parameters) }
+        guard let token else { return (0, nil) }
+        return await Self.call(token, method, body: try? JSONSerialization.data(withJSONObject: parameters), timeout: timeout)
     }
 
     /// HTTP status and body. The URL holds the token: errors are logged with the method only; «message is not
     /// modified» (400 on 🔄 with nothing new) is not an error worth a line.
-    nonisolated private static func call(_ token: String, _ method: String, _ parameters: [String: Any], timeout: TimeInterval) async -> (Int, Data?) {
+    nonisolated private static func call(_ token: String, _ method: String, body: Data?, timeout: TimeInterval) async -> (Int, Data?) {
         guard let url = URL(string: "https://api.telegram.org/bot\(token)/\(method)") else { return (0, nil) }
         var request = URLRequest(url: url, timeoutInterval: timeout)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = try? JSONSerialization.data(withJSONObject: parameters)
+        request.httpBody = body
         do {
             let (data, response) = try await URLSession.shared.data(for: request)
             let code = (response as? HTTPURLResponse)?.statusCode ?? 0

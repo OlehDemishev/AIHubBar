@@ -1,0 +1,18 @@
+# The shared AI Hub Bar Telegram bot (docs/specs/SPEC-telegram.md §7). Deploy: see README.md.
+name = "aihubbar-telegram"
+main = "src/index.js"
+compatibility_date = "2026-10-01"
+
+# One Durable Object keeps chat ↔ Macs and the Macs' WebSockets (SQLite-backed: on the Workers free plan).
+[[durable_objects.bindings]]
+name = "HUB"
+class_name = "Hub"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["Hub"]
+
+[vars]
+SITE_URL = "https://github.com/OlehDemishev/AIHubBar"
+
+# Secrets (npx wrangler secret put …): BOT_TOKEN, WEBHOOK_SECRET, ADMIN_SECRET.
