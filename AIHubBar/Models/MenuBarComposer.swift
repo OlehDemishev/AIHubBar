@@ -21,6 +21,8 @@ struct MenuBarData: Equatable, Hashable, Sendable {
     var cpu: Double?
     var memory: Double?
     var keepingAwake = false
+    /// The «Не спать» switch is on (a manual hold); the rules alone don't count.
+    var keepAwakeSwitchedOn = false
     /// Other AI services: source raw value → its fullest limit, in percent.
     var otherAI: [String: Double] = [:]
     /// Countdowns are drawn for this minute.
@@ -31,7 +33,7 @@ struct MenuBarData: Equatable, Hashable, Sendable {
         modelWeeks: ["seven_day_fable": 12], sessionResetsAt: Date.now.addingTimeInterval(2 * 3600 + 14 * 60),
         forecastRunsOut: Date.now.addingTimeInterval(90 * 60), diskFreeBytes: 12_000_000_000,
         deadline: String(localized: "Ролик · 2 дн"), modeName: String(localized: "Видео"), modeIcon: "video",
-        cpu: 23, memory: 71, keepingAwake: true, otherAI: ["codex": 42]
+        cpu: 23, memory: 71, keepingAwake: true, keepAwakeSwitchedOn: true, otherAI: ["codex": 42]
     )
 }
 
@@ -42,7 +44,7 @@ enum MenuBarSegment: Hashable, Sendable {
     }
 
     case symbol(String)
-    /// A full-size symbol in a colour: ☕ on or off.
+    /// A full-size symbol in a colour: the orange ☕.
     case tintedSymbol(String, Tint)
     /// Red dot over the preceding symbol.
     case dot
@@ -161,10 +163,8 @@ enum MenuBarComposer {
             case .bar: [.symbol(symbol), .bar(value, level(value))]
             }
         case .keepAwake:
-            // Always there, so off is seen too: a filled orange cup holds the Mac, a pale outline lets it sleep.
-            return data.keepingAwake
-                ? [.tintedSymbol("cup.and.saucer.fill", config.colored ? .warning : .label)]
-                : [.tintedSymbol("cup.and.saucer", .secondary)]
+            // Follows the switch only: a rule such as «Пока работает Claude» would keep it lit all day.
+            return data.keepAwakeSwitchedOn ? [.tintedSymbol("cup.and.saucer.fill", config.colored ? .warning : .label)] : nil
         case .otherAI:
             guard let (source, value) = otherAI(element, data), value >= Double(element.showAbove) else { return nil }
             let name = HubLimit.Source(rawValue: source)?.shortTitle ?? source
