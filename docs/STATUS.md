@@ -9,7 +9,6 @@
 - merged 2026-11-03: #251 menu bar ☕ follows the «Не спать» switch, #248 «Не спать» on/off in the menu bar, #241 Codex states, #240 quick command shortcuts, #238 «Быстрый запрос», #236 content spec, #242 «Telegram» stage 1, #244 menu at the bottom, #246 shared bot (Worker not deployed yet), #247 desktop CI off for Mac string changes, #249 the bot's menu set up by each person, #252 stage 2 (sessions, requests, limits), #254 stage 3 (tasks and runs), #255 stage 4 (settings in the bot), #256 Mini App
 
 **Next:**
-- site: privacy section and the shared Telegram bot (the site still says «No server»), new features on the landing page
 - Telegram: pair the Mac mini with the shared bot, try the bot and the Mini App live
 - content (docs/specs/SPEC-content.md, agreed): stage 1 — walkthrough of the «Тексты» profile on a sample folder, then «Версии», then batch tasks
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/specs/SPEC-windows.md §9, stage 2–3 leftovers)
@@ -26,6 +25,12 @@
 - MacBook Air: update to 0.6.0 through Sparkle (Settings → General → Updates) and check the island at the real notch
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-03 — site and overview for 0.6.0 (branch `feat/site-0.6.0`)
+
+Done: site — a «Telegram» section (phone mock-up: 🏠 screen and a permission request with ✅ / ❌, the menu at the bottom; link to @AIHubBarBot) and a nav link; privacy rewritten («No account, no analytics» instead of «No server», a paragraph on the shared bot's relay: no message text logged, only chat ↔ Mac and messages for a sleeping Mac up to a day; requests and tasks over it off by default; own bot as the alternative); Codex in the sessions line, ⌃⌥P in the commands card; Mac tools tiles for «Быстрый запрос», quick commands with shortcuts, the Telegram bot and the command line. Overview PDFs (en, ru): no «beta» on Layout fix, cover chip «No account», ⌃⌥P with the search, quick commands' shortcuts, «Telegram bot» card, privacy line about the relay; rebuilt with scripts/make-overview-pdf.sh.
+Checked: site in the browser at 1280 px and 375 px (no horizontal scroll, request buttons on one row); both PDFs still 9 pages, page 8 rendered and looked at in both languages.
+Left: the v0.6.0 release's attached PDFs are replaced after merge.
 
 ## 2026-11-03 — release 0.6.0 (branch `chore/status-release-0.6.0`)
 
