@@ -32,10 +32,10 @@ Code: `AIHubBar/Models/TelegramBot.swift` (updates, callback data, screens — p
   409 («another getUpdates»), the page says «Этого бота уже читает другой Мак или программа» and the loop waits 60 s
   between tries; nothing breaks. The setting is per Mac: it is not part of the settings export.
 - **Migration**, never automatic (an old reader might still be running):
-  - Oleh chose a **new bot** (§8): its token is typed on the page. `report.py` (the morning report, «Отчёт сейчас»,
-    the bot's `/report`) still sends through the `config.json` bot until that file points at the new bot
-    (`python3 report.py --setup-telegram`, done by Oleh while the module is off — it reads the bot's updates too).
-    When the two tokens differ, the report screen says the text comes from the `_daily-report` bot.
+  - Oleh took the **`_daily-report` bot** (§8) with «Взять бота из _daily-report», so `report.py` (the morning
+    report, «Отчёт сейчас», the bot's `/report`) sends into the same chat. With another bot, `report.py` keeps
+    sending through the `config.json` one until its `telegram.bot_token` is replaced by hand
+    (`report.py --setup-telegram` keeps a token that is already there); the report screen then says so.
   - for others: no token yet and `_daily-report/config.json` has one → «Взять бота из _daily-report» copies its token
     and chat into the Keychain and the settings.
   - an approvals token in `telegram-approvals` → «Взять бота для ответов» moves it to `telegram-bot` (stage 2; until
@@ -49,7 +49,13 @@ Code: `AIHubBar/Models/TelegramBot.swift` (updates, callback data, screens — p
 
 - `setMyCommands` on connect: `/menu`, `/report`, `/status`, `/clean`, `/help` (the old `bot.py` commands keep their
   meaning, so the habit carries over). The Menu button shows this list (Telegram's default «commands» button).
-- `/menu` (and `/start`) sends the 🏠 screen as a new message. **Each section is one message edited in place**
+- **The menu at the bottom** (a persistent reply keyboard, `BotMenu`): 🏠 Главная · 📊 Отчёты / 🧹 Мак · ❓ Команды
+  always sit under the chat instead of the keyboard. A press sends its title, the bot shows that screen as a new message
+  at the bottom and deletes the press and the screens opened before it, so the chat keeps one or two. A message carries
+  either inline buttons or this menu, so 🏠 opened from the menu carries the menu (and sets it again) instead of its
+  inline buttons; while a report or cleanup still edits a screen, nothing is deleted. Later stages add their sections
+  to it (🤖 Сессии, 🚀 Задача, ⏳ Лимиты, ⚙️ Настройки).
+- `/menu` (and `/start`) sends 🏠 with the menu at the bottom. **Each section is one message edited in place**
   (`editMessageText`): a button changes the message it sits on, it never adds a new one. Results that are not a screen
   (a report, the cleanup output) come as new messages.
 - Screens (✓ = stage 1):
@@ -132,5 +138,7 @@ Asked and answered 2026-11-03:
   switched on the module's page.
 - **`bot.py` — retired.** Oleh removes it (and `install-bot.sh`) himself; `report.py`, `cleanup.py` and the morning
   report stay.
-- **The one bot — a new one** from @BotFather. The approvals bot and the `_daily-report` bot keep working until moved
-  (§1); pointing `config.json` at the new bot puts the reports into the same chat.
+- **The one bot — first a new one, then (the same day) the `_daily-report` bot**: Oleh connected it with «Взять бота из
+  _daily-report», so reports, the menu and notifications share one chat. The approvals bot keeps working apart until
+  stage 2 moves requests here.
+- **A menu always at the bottom** instead of typing `/` (asked 2026-11-03): §2, «The menu at the bottom».
