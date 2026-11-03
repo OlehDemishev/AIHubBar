@@ -17,6 +17,8 @@ struct TelegramBotSettings: Codable, Equatable, Sendable {
     var commandsOverShared: Bool?
     /// Permission requests answered over the shared bot only with this on (§7); without it they come without buttons.
     var answersOverShared: Bool?
+    /// 🚀 tasks started and runs stopped over the shared bot only with this on (§7).
+    var tasksOverShared: Bool?
 
     /// The menu the chat gets while `profile` is the current one.
     func menu(for profile: String?) -> BotMenuConfig {
@@ -168,10 +170,10 @@ enum BotScreen: String, CaseIterable, Sendable {
     case home, reports, mac, help
     /// ⚙️ «Меню»: which buttons the menu at the bottom has, from the bot itself.
     case menu
-    case sessions, limits
+    case sessions, limits, task
 
     /// The screens a menu button can open, in the default menu's order.
-    static let menuScreens: [BotScreen] = [.home, .sessions, .limits, .reports, .mac, .help]
+    static let menuScreens: [BotScreen] = [.home, .sessions, .task, .limits, .reports, .mac, .help]
 }
 
 /// What a button's `callback_data` means (§3): at most 64 ASCII bytes, `<verb>[:<arg>]`.
@@ -198,8 +200,30 @@ enum BotRoute: Equatable, Sendable {
     case requestDetails(String)
     /// ⏳: limit notifications to Telegram on or off.
     case limitAlerts(Bool)
+    /// 🚀: a project (by `projectKey`), then the task typed as a message, then «Запустить» or «Отмена».
+    case taskProject(String)
+    case taskGo
+    case taskCancel
+    /// After the 90 % question: start anyway, or after the reset; after «Claude already works here»: in a worktree.
+    case taskForce
+    case taskAfterReset
+    case taskWorktree
+    /// A background run: its log tail, «Остановить?», the confirmed stop.
+    case runLog(String)
+    case runStopAsk(String)
+    case runStop(String)
 
     static let reportHours = [1, 3, 24]
+
+    /// A project's path as 8 hex digits (FNV-1a), short enough for a button and stable while the list changes.
+    static func projectKey(_ path: String) -> String {
+        var hash: UInt32 = 2_166_136_261
+        for byte in path.utf8 {
+            hash ^= UInt32(byte)
+            hash = hash &* 16_777_619
+        }
+        return String(format: "%08x", hash)
+    }
 
     var data: String {
         switch self {
@@ -216,6 +240,15 @@ enum BotRoute: Equatable, Sendable {
         case let .runCommand(id): "run:\(id)"
         case let .requestDetails(id): "req:\(id)"
         case let .limitAlerts(on): on ? "lim:on" : "lim:off"
+        case let .taskProject(key): "tsk:p:\(key)"
+        case .taskGo: "tsk:go"
+        case .taskCancel: "tsk:no"
+        case .taskForce: "tsk:force"
+        case .taskAfterReset: "tsk:after"
+        case .taskWorktree: "tsk:wt"
+        case let .runLog(id): "rl:\(id)"
+        case let .runStopAsk(id): "rs:\(id)"
+        case let .runStop(id): "rx:\(id)"
         }
     }
 
@@ -254,6 +287,21 @@ enum BotRoute: Equatable, Sendable {
             guard ApprovalFiles.isValidID(parts[1]) else { return nil }
             self = .requestDetails(parts[1])
         case ("lim", 2) where ["on", "off"].contains(parts[1]): self = .limitAlerts(parts[1] == "on")
+        case ("tsk", 3) where parts[1] == "p":
+            guard parts[2].count == 8, parts[2].allSatisfy(\.isHexDigit) else { return nil }
+            self = .taskProject(parts[2])
+        case ("tsk", 2):
+            switch parts[1] {
+            case "go": self = .taskGo
+            case "no": self = .taskCancel
+            case "force": self = .taskForce
+            case "after": self = .taskAfterReset
+            case "wt": self = .taskWorktree
+            default: return nil
+            }
+        case ("rl", 2), ("rs", 2), ("rx", 2):
+            guard BotMenuItem.isCommandID(parts[1]) else { return nil }
+            self = parts[0] == "rl" ? .runLog(parts[1]) : parts[0] == "rs" ? .runStopAsk(parts[1]) : .runStop(parts[1])
         default: return nil
         }
     }
@@ -261,8 +309,9 @@ enum BotRoute: Equatable, Sendable {
     /// Does something rather than only showing a screen: skipped right after the Mac slept (§4).
     var isAction: Bool {
         switch self {
-        case .show, .cleanupAsk, .allCommands, .menuToggle, .menuColumns, .menuDone, .requestDetails, .limitAlerts: false
-        case .report, .cleanupCheck, .cleanupRun, .answer, .runCommand: true
+        case .show, .cleanupAsk, .allCommands, .menuToggle, .menuColumns, .menuDone, .requestDetails, .limitAlerts,
+             .taskProject, .taskCancel, .runLog, .runStopAsk: false
+        case .report, .cleanupCheck, .cleanupRun, .answer, .runCommand, .taskGo, .taskForce, .taskAfterReset, .taskWorktree, .runStop: true
         }
     }
 }
@@ -276,6 +325,8 @@ enum BotCommand: Equatable, Sendable {
     /// `ai` false = `/status`, the quick one. `hours` nil = since the morning report.
     case report(ai: Bool, hours: Double?)
     case clean(check: Bool)
+    /// Drops a 🚀 task being typed.
+    case cancel
     case badHours
     case unknown
 
@@ -311,6 +362,7 @@ enum BotCommand: Equatable, Sendable {
                 self = .report(ai: name == "report", hours: nil)
             }
         case "clean": self = .clean(check: argument.map { ["check", "dry", "проверка", "?"].contains($0.lowercased()) } ?? false)
+        case "cancel", "отмена": self = .cancel
         default: self = .unknown
         }
     }
@@ -380,6 +432,7 @@ struct BotMenu: Equatable, Sendable {
         case .menu: "⚙️ " + String(localized: "Меню")
         case .sessions: "🤖 " + String(localized: "Сессии")
         case .limits: "⏳ " + String(localized: "Лимиты")
+        case .task: "🚀 " + String(localized: "Задача")
         }
     }
 
@@ -425,6 +478,23 @@ struct BotRequestLine: Equatable, Sendable {
     var summary: String
 }
 
+/// A project to start a 🚀 task in.
+struct BotTaskProject: Equatable, Sendable {
+    var key: String
+    var name: String
+}
+
+/// A background run in 🚀.
+struct BotRunLine: Equatable, Sendable {
+    var id: String
+    var project: String
+    var task: String
+    var state: BackgroundRun.State
+    var paused: Bool
+    var startedAt: Date
+    var pullRequestURL: String?
+}
+
 /// One AI service in ⏳.
 struct BotLimitService: Equatable, Sendable {
     struct Window: Equatable, Sendable {
@@ -468,8 +538,9 @@ enum BotScreens {
         lines.append("🤖 " + String(localized: "Сессии: \(state.working) работают, \(state.waiting) ждут"))
         lines.append("🚀 " + String(localized: "Фоновые задачи: \(state.runs)"))
         return BotMessage(html: lines.joined(separator: "\n"), buttons: [
-            [button("🤖", String(localized: "Сессии"), .show(.sessions)), button("⏳", String(localized: "Лимиты"), .show(.limits))],
-            [button("📊", String(localized: "Отчёты"), .show(.reports)), button("🧹", String(localized: "Мак"), .show(.mac))],
+            [button("🤖", String(localized: "Сессии"), .show(.sessions)), button("🚀", String(localized: "Задача"), .show(.task))],
+            [button("⏳", String(localized: "Лимиты"), .show(.limits)), button("📊", String(localized: "Отчёты"), .show(.reports))],
+            [button("🧹", String(localized: "Мак"), .show(.mac))],
             [button("🔄", String(localized: "Обновить"), .show(.home)), button("❓", String(localized: "Команды"), .show(.help))],
         ])
     }
@@ -585,6 +656,95 @@ enum BotScreens {
             [button(alertsOn ? "🔕" : "🔔", alertsOn ? String(localized: "Выключить уведомления") : String(localized: "Включить уведомления"), .limitAlerts(!alertsOn))],
             [button("🔄", String(localized: "Обновить"), .show(.limits)), back],
         ])
+    }
+
+    // MARK: 🚀 Tasks and runs (stage 3)
+
+    /// 🚀: projects to start a task in (`locked` — over the shared bot without its switch), then the runs: running ones
+    /// with 📜 / ⏹, the last finished ones with their PR link (a link only — PRs are merged in GitHub).
+    static func task(projects: [BotTaskProject], runs: [BotRunLine], locked: Bool, now: Date) -> BotMessage {
+        var lines = ["🚀 <b>" + RunMessage.escape(String(localized: "Задача")) + "</b>"]
+        var rows: [[BotMessage.Button]] = []
+        if locked {
+            lines.append("🔒 " + RunMessage.escape(String(localized: "Задачи через общий бот выключены. На Маке: Настройки → Модули → Telegram → «Задачи через общий бот».")))
+        } else if projects.isEmpty {
+            lines.append(RunMessage.escape(String(localized: "Проектов нет: у профиля нет папки с git-проектами.")))
+        } else {
+            lines.append(RunMessage.escape(String(localized: "Выберите проект, затем напишите задачу. Её выполнит Claude Code в фоне.")))
+            let buttons = projects.prefix(12).map { BotMessage.Button(title: "📁 " + String($0.name.prefix(24)), route: .taskProject($0.key)) }
+            rows += stride(from: 0, to: buttons.count, by: 2).map { Array(buttons[$0..<min($0 + 2, buttons.count)]) }
+        }
+        let running = runs.filter { $0.state == .running }
+        let finished = runs.filter { $0.state != .running }.prefix(3)
+        if !running.isEmpty || !finished.isEmpty {
+            lines.append("")
+            lines.append("<b>" + RunMessage.escape(String(localized: "Фоновые задачи")) + "</b>")
+        }
+        for (index, run) in running.prefix(6).enumerated() {
+            let number = index + 1
+            let minutes = max(0, Int(now.timeIntervalSince(run.startedAt) / 60))
+            lines.append("\(number). " + (run.paused ? "⏸ " : "⚙️ ") + "<b>" + RunMessage.escape(run.project) + "</b>: "
+                         + RunMessage.escape(RunMessage.taskStart(run.task)) + " · " + RunMessage.escape(String(localized: "\(minutes) мин")))
+            var row = [BotMessage.Button(title: "📜 \(number)", route: .runLog(run.id))]
+            if !locked { row.append(BotMessage.Button(title: "⏹ \(number)", route: .runStopAsk(run.id))) }
+            rows.append(row)
+        }
+        for run in finished {
+            var line = RunMessage.icon(run.state) + " <b>" + RunMessage.escape(run.project) + "</b>: " + RunMessage.escape(RunMessage.taskStart(run.task))
+            if let url = run.pullRequestURL {
+                let number = url.split(separator: "/").last.map { " #\($0)" } ?? ""
+                line += " — <a href=\"" + RunMessage.escape(url) + "\">PR" + number + "</a>"
+            }
+            lines.append(line)
+        }
+        rows.append([button("🔄", String(localized: "Обновить"), .show(.task)), back])
+        return BotMessage(html: lines.joined(separator: "\n"), buttons: rows)
+    }
+
+    static func taskAskText(project: String) -> BotMessage {
+        BotMessage(html: "🚀 <b>" + RunMessage.escape(project) + "</b>\n"
+                   + RunMessage.escape(String(localized: "Напишите задачу одним сообщением. /cancel — отмена.")),
+                   buttons: [[button("✖️", String(localized: "Отмена"), .taskCancel)]])
+    }
+
+    /// The task shown back before it starts (§4).
+    static func taskConfirm(project: String, text: String) -> BotMessage {
+        BotMessage(html: "🚀 " + RunMessage.escape(String(localized: "Запустить в фоне в «\(project)»?")) + "\n<blockquote>"
+                   + RunMessage.escape(String(text.prefix(1500))) + "</blockquote>",
+                   buttons: [[button("▶️", String(localized: "Запустить"), .taskGo), button("✖️", String(localized: "Отмена"), .taskCancel)]])
+    }
+
+    /// The launch stopped to ask: the session is above 90 %, or Claude already works in the folder.
+    static func taskQuestion(_ text: String, limit: Bool) -> BotMessage {
+        let rows: [[BotMessage.Button]] = limit
+            ? [[button("▶️", String(localized: "Всё равно"), .taskForce), button("⏰", String(localized: "После сброса"), .taskAfterReset)],
+               [button("✖️", String(localized: "Отмена"), .taskCancel)]]
+            : [[button("✅", String(localized: "Да, в worktree"), .taskWorktree), button("✖️", String(localized: "Отмена"), .taskCancel)]]
+        return BotMessage(html: "⚠️ " + RunMessage.escape(text), buttons: rows)
+    }
+
+    /// The last steps of a run's log.
+    static func runLog(_ run: BotRunLine, entries: [StreamJSON.Entry]) -> BotMessage {
+        var lines = ["📜 <b>" + RunMessage.escape(run.project) + "</b>: " + RunMessage.escape(RunMessage.taskStart(run.task))]
+        let tail = entries.suffix(12).map { entry -> String in
+            let icon = switch entry.kind {
+            case .text: "💬"
+            case .tool: "🔧"
+            case .result: "✅"
+            case .error: "❌"
+            }
+            let flat = entry.text.split(whereSeparator: \.isNewline).joined(separator: " ")
+            return icon + " " + String(flat.prefix(160))
+        }
+        lines.append(tail.isEmpty ? RunMessage.escape(String(localized: "В журнале пока пусто.")) : "<pre>" + RunMessage.escape(tail.joined(separator: "\n")) + "</pre>")
+        var row = [button("🔄", String(localized: "Обновить"), .runLog(run.id))]
+        if run.state == .running { row.append(button("⏹", String(localized: "Остановить"), .runStopAsk(run.id))) }
+        return BotMessage(html: lines.joined(separator: "\n"), buttons: [row, [button("🚀", String(localized: "Задача"), .show(.task))]])
+    }
+
+    static func runStopConfirm(_ run: BotRunLine) -> BotMessage {
+        BotMessage(html: "⏹ " + RunMessage.escape(String(localized: "Остановить «\(RunMessage.taskStart(run.task))» в «\(run.project)»?")),
+                   buttons: [[button("⏹", String(localized: "Остановить"), .runStop(run.id)), button("✖️", String(localized: "Отмена"), .show(.task))]])
     }
 
     /// `▓▓▓▓░░░░░░` for 0…100 %.

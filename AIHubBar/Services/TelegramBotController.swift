@@ -23,6 +23,9 @@ final class TelegramBotController {
     var isActive: () -> Bool = { true }
     /// The current profile (id, name), for its own menu.
     var currentProfile: () -> (id: String, name: String)? = { nil }
+    /// 🚀: the profile's git projects, and the launcher that starts a task in one (like «Своя задача…»).
+    var projectList: () -> [Project] = { [] }
+    weak var launcher: LaunchController?
     /// Every AI service's limits, as the panel's «Лимиты AI» shows them.
     var limitServices: () -> [ServiceUsage] = { [] }
     /// Runs a quick command and returns how it went (`QuickToolsController.runForBot`).
@@ -55,6 +58,8 @@ final class TelegramBotController {
     /// A request whose message didn't go out, and when to try again.
     private var retryRequests: [String: Date] = [:]
     private var requestLoop: Task<Void, Never>?
+    /// 🚀 being set up: the project, then the task text once typed; it lapses after 10 minutes.
+    private var taskDraft: (path: String, name: String, text: String?, until: Date)?
     /// «Подключить Telegram» was pressed here: greet the chat once it is paired.
     private var greetWhenPaired = false
     private let macName = Host.current().localizedName ?? "Mac"
@@ -310,6 +315,7 @@ final class TelegramBotController {
                 AppLog.info("Telegram: an old command skipped")
                 return
             }
+            if await takeTaskText(text) { return }
             switch currentMenu.item(forText: text) {
             case let .screen(screen)?:
                 await show(screen, tapID: messageID)
@@ -342,6 +348,9 @@ final class TelegramBotController {
         switch command {
         case .menu, .start:
             await show(.home, tapID: nil)
+        case .cancel:
+            taskDraft = nil
+            _ = await send(BotMessage(html: "✖️ " + RunMessage.escape(String(localized: "Отменено"))))
         case .help:
             _ = await send(helpScreen)
         case let .report(ai, hours):
@@ -378,6 +387,7 @@ final class TelegramBotController {
         case .menu: message = menuScreen
         case .sessions: message = sessionsScreen
         case .limits: message = limitsScreen
+        case .task: message = taskScreen
         }
         guard let id = await send(message) else { return false }
         if let tapID { await delete(tapID) }
@@ -401,6 +411,35 @@ final class TelegramBotController {
         case .show(.menu): screen = menuScreen
         case .show(.sessions): screen = sessionsScreen
         case .show(.limits): screen = limitsScreen
+        case .show(.task):
+            taskDraft = nil
+            screen = taskScreen
+        case let .taskProject(key):
+            guard tasksAllowed, let project = projectList().first(where: { BotRoute.projectKey($0.path) == key }) else {
+                screen = taskScreen
+                break
+            }
+            taskDraft = (project.path, project.name, nil, .now.addingTimeInterval(10 * 60))
+            screen = BotScreens.taskAskText(project: project.name)
+        case .taskCancel:
+            taskDraft = nil
+            screen = taskScreen
+        case .taskGo, .taskForce, .taskAfterReset, .taskWorktree:
+            await launchTask(route, messageID: messageID)
+            return
+        case let .runLog(id):
+            guard let run = runs.run(id: id) else { screen = taskScreen; break }
+            let text = (try? String(contentsOf: run.logURL, encoding: .utf8)) ?? ""
+            screen = BotScreens.runLog(runLine(run), entries: StreamJSON.entries(fromLog: text))
+        case let .runStopAsk(id):
+            guard tasksAllowed, let run = runs.run(id: id), run.state == .running else { screen = taskScreen; break }
+            screen = BotScreens.runStopConfirm(runLine(run))
+        case let .runStop(id):
+            if tasksAllowed, runs.run(id: id)?.state == .running {
+                runs.stop(id)
+                AppLog.info("Telegram: background run stopped")
+            }
+            screen = taskScreen
         case let .limitAlerts(on):
             settings.limitAlertsToTelegram = on
             screen = limitsScreen
@@ -526,6 +565,78 @@ final class TelegramBotController {
             )
         }
         return BotScreens.limits(services, alertsOn: settings.limitAlertsToTelegram, thresholds: settings.limitThresholds, now: .now)
+    }
+
+    // MARK: - 🚀 Tasks and runs (stage 3)
+
+    /// Over the shared bot only with «Задачи через общий бот» (§7).
+    private var tasksAllowed: Bool {
+        !usesSharedBot || settings.telegramBot.tasksOverShared == true
+    }
+
+    private var taskScreen: BotMessage {
+        let projects = projectList()
+            .sorted { ($0.lastActivity ?? .distantPast) > ($1.lastActivity ?? .distantPast) }
+            .map { BotTaskProject(key: BotRoute.projectKey($0.path), name: $0.name) }
+        let recent = runs.runs.filter { $0.state == .running || ($0.finishedAt ?? .distantPast) > .now.addingTimeInterval(-86_400) }
+            .sorted { $0.startedAt > $1.startedAt }
+            .map(runLine)
+        return BotScreens.task(projects: projects, runs: recent, locked: !tasksAllowed, now: .now)
+    }
+
+    private func runLine(_ run: BackgroundRun) -> BotRunLine {
+        BotRunLine(id: run.id, project: run.project, task: run.task, state: run.state, paused: run.isPaused,
+                   startedAt: run.startedAt, pullRequestURL: run.pullRequestURL)
+    }
+
+    /// A message while 🚀 waits for the task: it becomes the task (shown back with «Запустить»). Commands and menu
+    /// presses go their usual way.
+    private func takeTaskText(_ text: String) async -> Bool {
+        guard let draft = taskDraft, draft.text == nil else { return false }
+        guard draft.until > .now else {
+            taskDraft = nil
+            return false
+        }
+        let trimmed = text.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmed.isEmpty, !trimmed.hasPrefix("/"), currentMenu.item(forText: trimmed) == nil else { return false }
+        taskDraft?.text = trimmed
+        _ = await send(BotScreens.taskConfirm(project: draft.name, text: trimmed))
+        return true
+    }
+
+    /// «Запустить», and the answers to the launcher's questions; then how it went, in the same message.
+    private func launchTask(_ route: BotRoute, messageID: Int?) async {
+        guard tasksAllowed, let draft = taskDraft, let text = draft.text, let launcher,
+              let project = projectList().first(where: { $0.path == draft.path }) else {
+            if let messageID { await edit(messageID, taskScreen) }
+            return
+        }
+        switch route {
+        case .taskForce: launcher.launchDespiteLimit(in: project)
+        case .taskAfterReset: launcher.launchAfterReset(in: project)
+        case .taskWorktree: launcher.confirmPending(in: project)
+        default: launcher.launch(.customTask(text), in: project, mode: .background)
+        }
+        AppLog.info("Telegram: task sent to \(project.name)")
+        // The launcher works in the background: wait for its answer for the project (a minute at most).
+        for _ in 0..<120 where launcher.working.contains(project.path) {
+            try? await Task.sleep(for: .milliseconds(500))
+        }
+        let reply: BotMessage
+        if let message = launcher.messages[project.path], launcher.pendingLimit[project.path] != nil {
+            reply = BotScreens.taskQuestion(message.text, limit: true)
+        } else if let message = launcher.messages[project.path], launcher.pendingConfirmation[project.path] != nil {
+            reply = BotScreens.taskQuestion(message.text, limit: false)
+        } else {
+            taskDraft = nil
+            let message = launcher.messages[project.path]
+            let text = route == .taskAfterReset
+                ? String(localized: "Запустится после сброса лимита.")
+                : message?.text ?? String(localized: "Задача отправлена.")
+            reply = BotMessage(html: (message?.isError == true ? "❌ " : "✅ ") + RunMessage.escape(text),
+                               buttons: [[BotMessage.Button(title: "🚀 " + String(localized: "Задача"), route: .show(.task))]])
+        }
+        if let messageID { await edit(messageID, reply) } else { _ = await send(reply) }
     }
 
     // MARK: - The menu and quick commands

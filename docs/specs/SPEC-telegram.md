@@ -74,7 +74,7 @@ Code: `AIHubBar/Models/TelegramBot.swift` (updates, callback data, screens — p
 | 📊 Отчёты ✓ | what each report does, a running one | ✨ Отчёт с AI (since the morning report), ⚡ Быстрая сводка, AI for 1 / 3 / 24 h |
 | 🧹 Мак ✓ | free disk; stage 4: «Не спать» | 🔍 Что удалит очистка, 🧹 Очистить (asks first) |
 | 🤖 Сессии ✓ (2) | waiting first, then working; each with project, agent, what it waits for or does | numbered requests: ✅ n / ❌ n / ℹ️ n |
-| 🚀 Задача (3) | project → agent → text (the next message) → background | ⏹ stop a run, 📜 log tail, the PR link (a link only: PRs are not merged from the bot) |
+| 🚀 Задача ✓ (3) | projects (most active first), then the task as the next message, shown back with «Запустить»; running runs (📜 n / ⏹ n) and the last finished ones with their PR link | ⏹ asks first; a link only — PRs are not merged from the bot |
 | ⏳ Лимиты ✓ (2) | every AI service from «Лимиты AI»: a ▓░ bar per window, the reset, «кончится к …» | Telegram limit alerts on/off (thresholds from Settings) |
 | ⚙️ Настройки (4) | which events come, quiet hours, mute 1 h, morning report time | toggles; written to the app's settings, the same switches as in Settings |
 
@@ -100,6 +100,8 @@ At most 64 bytes, ASCII, `<verb>[:<arg>…]`. Unknown or malformed data re-rende
 | `run:<command id>` | run a quick command after «Запустить?» |
 | `req:<id>` | «Подробнее» on a permission request: the whole command, the session's task, the folder |
 | `lim:on`, `lim:off` | ⏳: limit alerts to Telegram |
+| `tsk:p:<8 hex>`, `tsk:go`, `tsk:no`, `tsk:force`, `tsk:after`, `tsk:wt` | 🚀: a project (FNV-1a of its path), start, cancel, the launcher's questions (90 % limit: anyway / after the reset; Claude already in the folder: worktree) |
+| `rl:<run id>`, `rs:<run id>`, `rx:<run id>` | a run's log tail, «Остановить?», the confirmed stop |
 
 Dangerous actions are two steps: the button opens a confirmation (`cln:ask` → «Удалить сборки и сбросить
 симуляторы?» ✅ Да / Отмена), and only the confirmation's own data (`cln:run`) acts.
@@ -195,7 +197,10 @@ login`, `npx wrangler secret put BOT_TOKEN` / `WEBHOOK_SECRET` / `ADMIN_SECRET`,
    settings moved to stage 4 with the rest of ⚙️.
    Was: **Sessions and requests + notification settings.** 🤖 screen, requests through this bot with «Подробнее», moving the
    approvals bot here, which events come.
-3. **Tasks and run control.** 🚀: project → agent → text → background (`LaunchController`), stop, log tail, PR link.
+3. ✓ **Tasks and run control** (done 2026-11-03). 🚀: project → the task as the next message (10 minutes, `/cancel`) → shown
+   back → «Запустить» → `LaunchController.launch(.customTask, mode: .background)`, as «Своя задача…»; the launcher's
+   questions come as buttons. Only Claude Code: the other agents run in Terminal on the Mac with the task on the
+   clipboard, which a phone can't use. Over the shared bot starting and stopping need «Задачи через общий бот».
 4. **Settings in the bot, limits, Mac.** ⚙️ (events, quiet hours, mute 1 h, morning report time), ⏳ every service
    with forecast and 80/90 % alerts, 🧹 «Не спать».
 

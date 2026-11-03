@@ -5,12 +5,12 @@
 **Updated:** 2026-11-03
 
 **Now:**
-- `feat/telegram-sessions-limits`: Telegram stage 2 — 🤖 sessions with permission requests, ⏳ limits — PR open; then stage 3 (🚀 tasks), stage 4 (⚙️ settings)
-- merged 2026-11-03: #251 menu bar ☕ follows the «Не спать» switch, #248 «Не спать» in the menu bar, #241 Codex states, #240 quick command shortcuts, #238 «Быстрый запрос», #236 content spec, #242 «Telegram» stage 1, #244 menu at the bottom, #246 shared bot (Worker not deployed yet), #247 desktop CI off for Mac string changes, #249 the bot's menu set up by each person
+- `feat/telegram-tasks`: Telegram stage 3 — 🚀 tasks and run control — PR open; then stage 4 (⚙️ settings)
+- merged 2026-11-03: #251 menu bar ☕ follows the «Не спать» switch, #248 «Не спать» on/off in the menu bar, #241 Codex states, #240 quick command shortcuts, #238 «Быстрый запрос», #236 content spec, #242 «Telegram» stage 1, #244 menu at the bottom, #246 shared bot (Worker not deployed yet), #247 desktop CI off for Mac string changes, #249 the bot's menu set up by each person, #252 stage 2 (sessions, requests, limits)
 
 **Next:**
 - next beta or 0.5.1 carries stage 8 (#230–#232) and #236–#251: 0.5.1-beta.1 was built from 27c5e2d, before them
-- Telegram (docs/specs/SPEC-telegram.md): stage 3 — 🚀 tasks (project → agent → text → background, stop, log, PR link); stage 4 — ⚙️ settings in the bot (events, quiet hours, mute 1 h, morning report time)
+- Telegram (docs/specs/SPEC-telegram.md): stage 4 — ⚙️ settings in the bot (events, quiet hours, mute 1 h, morning report time)
 - content (docs/specs/SPEC-content.md, agreed): stage 1 — walkthrough of the «Тексты» profile on a sample folder, then «Версии», then batch tasks
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/specs/SPEC-windows.md §9, stage 2–3 leftovers)
 
@@ -27,6 +27,12 @@
 - «Раскладка»: tried live in TextEdit, Safari, Chrome (⌥⇧ too); Telegram and Notes are yours to try (not typed into by the agent)
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-03 — Telegram stage 3: tasks and run control (branch `feat/telegram-tasks`)
+
+Done: 🚀 Задача — the profile's projects (most active first) → the task typed as the next message (10 minutes, `/cancel`) → shown back in a quote with «Запустить» → started like «Своя задача…» in the background (`LaunchController`); the 90 % question («Всё равно» / «После сброса») and «Claude уже работает здесь» («Да, в worktree») come as buttons; the outcome replaces the message. Below the projects: running background tasks with 📜 n (the last 12 log steps) and ⏹ n («Остановить?» first), the last three finished with their PR link (a link only). Over the shared bot starting and stopping need «Задачи через общий бот» (module page). Projects in buttons by an 8-hex FNV-1a of the path. 🚀 is in the default bottom menu (🏠 🤖 / 🚀 ⏳ / 📊 🧹 / ❓). Only Claude Code: other agents open in Terminal on the Mac with the task on the clipboard, useless from a phone (spec §8). 14 new strings in 12 languages.
+Checked: scripts/check.sh green; 5 new tests (`TelegramTasksTests`: project keys, the screen with projects and runs, locked over the shared bot, the task shown back and the launcher's questions, log tail and stop), updated menu and route tests.
+Left: not tried live — start a small task from the phone and stop it.
 
 ## 2026-11-03 — menu bar ☕ follows the «Не спать» switch (branch `fix/keep-awake-cup-follows-switch`)
 
