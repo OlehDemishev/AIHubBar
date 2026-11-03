@@ -9,6 +9,90 @@ struct TelegramBotSettings: Codable, Equatable, Sendable {
     var answersHere: Bool?
     /// «Общий бот» (SPEC-telegram §7); nil = the shared bot unless an own bot is already set up.
     var shared: Bool?
+    /// The menu at the bottom of the chat (§2, «Меню в боте»); nil = the default four.
+    var menu: BotMenuConfig?
+    /// A profile's own menu, by profile id; profiles without one use `menu`.
+    var profileMenus: [String: BotMenuConfig]?
+    /// Quick commands from the shared bot's menu run only with this on (§7: the relay must not be able to run them).
+    var commandsOverShared: Bool?
+
+    /// The menu the chat gets while `profile` is the current one.
+    func menu(for profile: String?) -> BotMenuConfig {
+        profile.flatMap { profileMenus?[$0] } ?? menu ?? BotMenuConfig()
+    }
+
+    func hasOwnMenu(_ profile: String) -> Bool { profileMenus?[profile] != nil }
+
+    /// `profile` nil edits the common menu; a profile id edits that profile's own one.
+    mutating func setMenu(_ config: BotMenuConfig, for profile: String?) {
+        if let profile {
+            profileMenus = (profileMenus ?? [:]).merging([profile: config]) { $1 }
+        } else {
+            menu = config == BotMenuConfig() ? nil : config
+        }
+    }
+
+    /// «Своё меню у профиля»: on copies the common menu, off forgets the profile's one.
+    mutating func setOwnMenu(_ on: Bool, for profile: String) {
+        if on {
+            setMenu(menu(for: nil), for: profile)
+        } else {
+            profileMenus?[profile] = nil
+            if profileMenus?.isEmpty == true { profileMenus = nil }
+        }
+    }
+}
+
+/// What the menu at the bottom holds and how it is laid out. Items are `BotMenuItem` ids, in order.
+struct BotMenuConfig: Codable, Equatable, Sendable {
+    var items: [String] = BotMenuConfig.defaultItems
+    /// Buttons in a row: 2 or 3.
+    var columns = 2
+
+    static let defaultItems = BotScreen.menuScreens.map { BotMenuItem.screen($0).id }
+
+    func contains(_ item: BotMenuItem) -> Bool { item == .screen(.home) || items.contains(item.id) }
+
+    /// 🏠 always stays: it is what sets the menu again.
+    mutating func toggle(_ item: BotMenuItem) {
+        guard item != .screen(.home) else { return }
+        if items.contains(item.id) { items.removeAll { $0 == item.id } } else { items.append(item.id) }
+    }
+
+    /// Moves an item up (`by` < 0) or down among the chosen ones.
+    mutating func move(_ item: BotMenuItem, by offset: Int) {
+        guard let index = items.firstIndex(of: item.id) else { return }
+        let target = min(max(index + offset, 0), items.count - 1)
+        items.insert(items.remove(at: index), at: target)
+    }
+}
+
+/// One button of the menu at the bottom: a screen, or a quick command from the library (by its id).
+enum BotMenuItem: Equatable, Hashable, Sendable {
+    case screen(BotScreen)
+    case command(String)
+
+    var id: String {
+        switch self {
+        case let .screen(screen): "screen:\(screen.rawValue)"
+        case let .command(id): "cmd:\(id)"
+        }
+    }
+
+    init?(id: String) {
+        if id.hasPrefix("screen:"), let screen = BotScreen(rawValue: String(id.dropFirst(7))), BotScreen.menuScreens.contains(screen) {
+            self = .screen(screen)
+        } else if id.hasPrefix("cmd:"), BotMenuItem.isCommandID(String(id.dropFirst(4))) {
+            self = .command(String(id.dropFirst(4)))
+        } else {
+            return nil
+        }
+    }
+
+    /// Quick command ids are lowercase UUIDs; anything else is not trusted from a button.
+    static func isCommandID(_ id: String) -> Bool {
+        !id.isEmpty && id.count <= 40 && id.allSatisfy { ($0.isASCII && ($0.isLetter || $0.isNumber)) || $0 == "-" }
+    }
 }
 
 /// One update from `getUpdates` the bot looks at: a text message or a button press.
@@ -80,6 +164,11 @@ struct BotUpdate: Equatable, Sendable {
 /// The bot's screens; each is one message, edited in place by its buttons (§2).
 enum BotScreen: String, CaseIterable, Sendable {
     case home, reports, mac, help
+    /// ⚙️ «Меню»: which buttons the menu at the bottom has, from the bot itself.
+    case menu
+
+    /// The screens a menu button can open.
+    static let menuScreens: [BotScreen] = [.home, .reports, .mac, .help]
 }
 
 /// What a button's `callback_data` means (§3): at most 64 ASCII bytes, `<verb>[:<arg>]`.
@@ -95,6 +184,13 @@ enum BotRoute: Equatable, Sendable {
     case allCommands
     /// A permission request, in the approvals bot's format.
     case answer(requestID: String, allow: Bool)
+    /// ⚙️ «Меню»: switch a button on or off; the buttons in a row.
+    case menuToggle(BotMenuItem)
+    case menuColumns(Int)
+    /// «Готово»: the menu at the bottom is sent again.
+    case menuDone
+    /// A quick command, after «Запустить?».
+    case runCommand(String)
 
     static let reportHours = [1, 3, 24]
 
@@ -107,11 +203,20 @@ enum BotRoute: Equatable, Sendable {
         case .cleanupRun: "cln:run"
         case .allCommands: "help:all"
         case let .answer(id, allow): "\(allow ? "allow" : "deny"):\(id)"
+        case let .menuToggle(item): "mt:\(item.id)"
+        case let .menuColumns(columns): "mc:\(columns)"
+        case .menuDone: "md"
+        case let .runCommand(id): "run:\(id)"
         }
     }
 
     init?(data: String) {
         guard data.utf8.count <= 64 else { return nil }
+        if data.hasPrefix("mt:") {
+            guard let item = BotMenuItem(id: String(data.dropFirst(3))) else { return nil }
+            self = .menuToggle(item)
+            return
+        }
         let parts = data.split(separator: ":", omittingEmptySubsequences: false).map(String.init)
         switch (parts[0], parts.count) {
         case ("nav", 2):
@@ -129,6 +234,13 @@ enum BotRoute: Equatable, Sendable {
         case ("allow", 2), ("deny", 2):
             guard ApprovalFiles.isValidID(parts[1]) else { return nil }
             self = .answer(requestID: parts[1], allow: parts[0] == "allow")
+        case ("mc", 2):
+            guard let columns = Int(parts[1]), [2, 3].contains(columns) else { return nil }
+            self = .menuColumns(columns)
+        case ("md", 1): self = .menuDone
+        case ("run", 2):
+            guard BotMenuItem.isCommandID(parts[1]) else { return nil }
+            self = .runCommand(parts[1])
         default: return nil
         }
     }
@@ -136,8 +248,8 @@ enum BotRoute: Equatable, Sendable {
     /// Does something rather than only showing a screen: skipped right after the Mac slept (§4).
     var isAction: Bool {
         switch self {
-        case .show, .cleanupAsk, .allCommands: false
-        case .report, .cleanupCheck, .cleanupRun, .answer: true
+        case .show, .cleanupAsk, .allCommands, .menuToggle, .menuColumns, .menuDone: false
+        case .report, .cleanupCheck, .cleanupRun, .answer, .runCommand: true
         }
     }
 }
@@ -200,19 +312,51 @@ struct BotMessage: Equatable, Sendable {
 
     var html: String
     var buttons: [[Button]] = []
-    /// Carries the menu at the bottom (`BotMenu`) instead of inline buttons: a message has one or the other.
-    var installsMenu = false
+    /// Carries the menu at the bottom instead of inline buttons: a message has one or the other.
+    var menu: BotMenu?
+
+    var installsMenu: Bool { menu != nil }
 
     var replyMarkup: [String: Any] {
-        if installsMenu { return BotMenu.replyMarkup }
+        if let menu { return menu.replyMarkup }
         return ["inline_keyboard": buttons.map { row in row.map { ["text": $0.title, "callback_data": $0.route.data] } }]
     }
 }
 
-/// The menu that stays at the bottom of the chat instead of the keyboard (SPEC-telegram §2): a press sends its title as
-/// a message, which the bot reads back as a screen.
-enum BotMenu {
-    static let rows: [[BotScreen]] = [[.home, .reports], [.mac, .help]]
+/// The menu that stays at the bottom of the chat instead of the keyboard (SPEC-telegram §2), as the person set it up:
+/// a press sends its title as a message, which the bot reads back as an item.
+struct BotMenu: Equatable, Sendable {
+    struct Entry: Equatable, Sendable {
+        var item: BotMenuItem
+        var title: String
+    }
+
+    let entries: [Entry]
+    let columns: Int
+
+    /// The chosen items that still exist (a deleted quick command drops out), 🏠 first if it was left out, titles made
+    /// unique — the press is read back by its title.
+    init(_ config: BotMenuConfig, commands: [QuickCommand]) {
+        var items = config.items.compactMap(BotMenuItem.init(id:)).filter { item in
+            if case let .command(id) = item { return commands.contains { $0.id == id } }
+            return true
+        }
+        if !items.contains(.screen(.home)) { items.insert(.screen(.home), at: 0) }
+        var seen: Set<String> = []
+        var entries: [Entry] = []
+        for item in items where !entries.contains(where: { $0.item == item }) {
+            var title = Self.title(item, commands: commands)
+            var number = 2
+            while seen.contains(title) {
+                title = Self.title(item, commands: commands) + " \(number)"
+                number += 1
+            }
+            seen.insert(title)
+            entries.append(Entry(item: item, title: title))
+        }
+        self.entries = entries
+        self.columns = min(max(config.columns, 2), 3)
+    }
 
     static func title(_ screen: BotScreen) -> String {
         switch screen {
@@ -220,17 +364,31 @@ enum BotMenu {
         case .reports: "📊 " + String(localized: "Отчёты")
         case .mac: "🧹 " + String(localized: "Мак")
         case .help: "❓ " + String(localized: "Команды")
+        case .menu: "⚙️ " + String(localized: "Меню")
         }
     }
 
-    /// The screen a menu press asks for; nil for any other text.
-    static func screen(forText text: String) -> BotScreen? {
-        let text = text.trimmingCharacters(in: .whitespaces)
-        return BotScreen.allCases.first { title($0) == text }
+    static func title(_ item: BotMenuItem, commands: [QuickCommand]) -> String {
+        switch item {
+        case let .screen(screen): return title(screen)
+        case let .command(id):
+            let name = commands.first { $0.id == id }?.title.trimmingCharacters(in: .whitespaces) ?? ""
+            return "▶️ " + (name.count > 28 ? String(name.prefix(27)) + "…" : name)
+        }
     }
 
-    static var replyMarkup: [String: Any] {
-        ["keyboard": rows.map { row in row.map { ["text": title($0)] } }, "is_persistent": true, "resize_keyboard": true]
+    /// The item a menu press asks for; nil for any other text.
+    func item(forText text: String) -> BotMenuItem? {
+        let text = text.trimmingCharacters(in: .whitespaces)
+        return entries.first { $0.title == text }?.item
+    }
+
+    var rows: [[Entry]] {
+        stride(from: 0, to: entries.count, by: columns).map { Array(entries[$0..<min($0 + columns, entries.count)]) }
+    }
+
+    var replyMarkup: [String: Any] {
+        ["keyboard": rows.map { row in row.map { ["text": $0.title] } }, "is_persistent": true, "resize_keyboard": true]
     }
 }
 
@@ -301,9 +459,38 @@ enum BotScreens {
     static func help(hasAllCommands: Bool) -> BotMessage {
         let lines = ["❓ <b>" + RunMessage.escape(String(localized: "Команды")) + "</b>"]
             + BotCommand.menuList.map { "/\($0.command) — " + RunMessage.escape($0.description) }
-        var rows = [[back]]
+        var rows = [[button("⚙️", String(localized: "Настроить меню"), .show(.menu))], [back]]
         if hasAllCommands { rows.insert([button("📖", String(localized: "Все команды Мака"), .allCommands)], at: 0) }
         return BotMessage(html: lines.joined(separator: "\n"), buttons: rows)
+    }
+
+    /// ⚙️ «Меню»: a switch per screen and quick command (🏠 always stays), the buttons in a row. `profile` — the
+    /// current profile's name when it has a menu of its own.
+    static func menuSetup(_ config: BotMenuConfig, commands: [QuickCommand], profile: String?) -> BotMessage {
+        var lines = ["⚙️ <b>" + RunMessage.escape(String(localized: "Меню внизу чата")) + "</b>"]
+        if let profile { lines.append(RunMessage.escape(String(localized: "Своё меню профиля «\(profile)»."))) }
+        lines.append(RunMessage.escape(String(localized: "Нажмите, чтобы добавить или убрать кнопку; порядок — в Настройках на Маке.")))
+        let candidates = BotScreen.menuScreens.filter { $0 != .home }.map(BotMenuItem.screen) + commands.map { BotMenuItem.command($0.id) }
+        var rows = candidates.map { item in
+            [BotMessage.Button(title: (config.contains(item) ? "✅ " : "☐ ") + BotMenu.title(item, commands: commands), route: .menuToggle(item))]
+        }
+        rows.append([2, 3].map { columns in
+            BotMessage.Button(title: (config.columns == columns ? "● " : "○ ") + String(localized: "\(columns) в ряд"), route: .menuColumns(columns))
+        })
+        rows.append([button("✅", String(localized: "Готово"), .menuDone)])
+        return BotMessage(html: lines.joined(separator: "\n"), buttons: rows)
+    }
+
+    /// «Запустить?» for a quick command marked to ask first, and for any over the shared bot.
+    static func confirmCommand(_ command: QuickCommand) -> BotMessage {
+        BotMessage(html: "▶️ " + RunMessage.escape(String(localized: "Запустить «\(command.title)» на Маке?")), buttons: [[
+            button("✅", String(localized: "Запустить"), .runCommand(command.id)), button("✖️", String(localized: "Отмена"), .show(.home)),
+        ]])
+    }
+
+    /// A quick command's result.
+    static func commandResult(_ command: QuickCommand, ok: Bool, text: String) -> String {
+        (ok ? "✅" : "❌") + " <b>" + RunMessage.escape(command.title) + "</b>" + (text.isEmpty ? "" : "\n<code>" + RunMessage.escape(String(text.prefix(3000))) + "</code>")
     }
 
     /// The cleanup output: its first line and up to 24 more, as `bot.py` sent it.

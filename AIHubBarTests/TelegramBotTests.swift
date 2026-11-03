@@ -60,7 +60,9 @@ struct TelegramBotTests {
         let routes: [BotRoute] = BotScreen.allCases.map(BotRoute.show) + [
             .report(ai: true, hours: nil), .report(ai: false, hours: nil), .report(ai: true, hours: 3),
             .cleanupCheck, .cleanupAsk, .cleanupRun, .allCommands, .answer(requestID: "0f3a9c", allow: true),
-            .answer(requestID: "0f3a9c", allow: false),
+            .answer(requestID: "0f3a9c", allow: false), .menuToggle(.screen(.reports)),
+            .menuToggle(.command("0f3a9c2e-1111-4222-8333-444455556666")), .menuColumns(2), .menuColumns(3), .menuDone,
+            .runCommand("0f3a9c2e-1111-4222-8333-444455556666"),
         ]
         for route in routes {
             #expect(BotRoute(data: route.data) == route)
@@ -72,7 +74,8 @@ struct TelegramBotTests {
 
     @Test func rejectsTamperedData() {
         for data in ["", "nav", "nav:nowhere", "nav:home:x", "rep:ai:0", "rep:ai:169", "rep:ai:three", "cln:rm", "cln",
-                     "allow:../../x", "allow:", "drop:0f3a9c", String(repeating: "a", count: 65)] {
+                     "allow:../../x", "allow:", "drop:0f3a9c", String(repeating: "a", count: 65),
+                     "mt:screen:menu", "mt:screen:nowhere", "mt:cmd:../x", "mt:", "mc:4", "md:x", "run:", "run:a b", "run:../x"] {
             #expect(BotRoute(data: data) == nil, "\(data)")
         }
     }
@@ -82,27 +85,96 @@ struct TelegramBotTests {
         #expect(!BotRoute.show(.home).isAction && !BotRoute.cleanupAsk.isAction && !BotRoute.allCommands.isAction)
         #expect(BotRoute.cleanupRun.isAction && BotRoute.cleanupCheck.isAction && BotRoute.report(ai: false, hours: nil).isAction)
         #expect(BotRoute.answer(requestID: "a", allow: true).isAction)
+        #expect(BotRoute.runCommand("a").isAction && !BotRoute.menuToggle(.screen(.mac)).isAction && !BotRoute.menuDone.isAction)
     }
 
     // MARK: The bottom menu
 
+    private let deploy = QuickCommand(id: "0f3a9c2e-1111-4222-8333-444455556666", title: "Собрать <Cantero>", kind: .script, value: "make")
+    private let downloads = QuickCommand(id: "aa00bb11-1111-4222-8333-444455556666", title: "Загрузки", kind: .open, value: "~/Downloads")
+
     @Test func bottomMenuStaysAndReadsBack() throws {
-        let markup = BotMenu.replyMarkup
+        let menu = BotMenu(BotMenuConfig(), commands: [])
+        let markup = menu.replyMarkup
         #expect(markup["is_persistent"] as? Bool == true && markup["resize_keyboard"] as? Bool == true)
         let rows = try #require(markup["keyboard"] as? [[[String: String]]])
-        #expect(rows.flatMap { $0 }.map { $0["text"] } == ["🏠 Главная", "📊 Отчёты", "🧹 Мак", "❓ Команды"])
-        for screen in BotScreen.allCases {
-            #expect(BotMenu.screen(forText: BotMenu.title(screen)) == screen)
+        #expect(rows.map { $0.map { $0["text"] } } == [["🏠 Главная", "📊 Отчёты"], ["🧹 Мак", "❓ Команды"]])
+        for screen in BotScreen.menuScreens {
+            #expect(menu.item(forText: BotMenu.title(screen)) == .screen(screen))
         }
-        #expect(BotMenu.screen(forText: " 🧹 Мак ") == .mac)
-        #expect(BotMenu.screen(forText: "Мак") == nil && BotMenu.screen(forText: "/menu") == nil)
+        #expect(menu.item(forText: " 🧹 Мак ") == .screen(.mac))
+        #expect(menu.item(forText: "Мак") == nil && menu.item(forText: "/menu") == nil)
+    }
+
+    @Test func ownMenuWithQuickCommands() throws {
+        var config = BotMenuConfig(items: ["screen:mac", "cmd:\(deploy.id)", "cmd:deleted-command", "screen:nowhere", "cmd:\(downloads.id)"], columns: 3)
+        let menu = BotMenu(config, commands: [deploy, downloads])
+        // 🏠 comes back first; a deleted command and an unknown screen drop out.
+        #expect(menu.entries.map(\.title) == ["🏠 Главная", "🧹 Мак", "▶️ Собрать <Cantero>", "▶️ Загрузки"])
+        #expect(menu.rows.map(\.count) == [3, 1])
+        #expect(menu.item(forText: "▶️ Загрузки") == .command(downloads.id))
+        // Two commands with one title stay apart.
+        let twin = QuickCommand(id: "bb00cc11-1111-4222-8333-444455556666", title: "Загрузки", kind: .open, value: "~")
+        config.items.append("cmd:\(twin.id)")
+        let twins = BotMenu(config, commands: [deploy, downloads, twin])
+        #expect(twins.item(forText: "▶️ Загрузки 2") == .command(twin.id))
+        #expect(BotMenu(BotMenuConfig(items: [], columns: 7), commands: []).columns == 3)
+    }
+
+    @Test func homeCantBeRemovedAndOrderMoves() {
+        var config = BotMenuConfig()
+        config.toggle(.screen(.home))
+        #expect(config.contains(.screen(.home)) && config.items.first == "screen:home")
+        config.toggle(.screen(.reports))
+        #expect(!config.contains(.screen(.reports)))
+        config.toggle(.command(deploy.id))
+        config.move(.command(deploy.id), by: -1)
+        #expect(config.items == ["screen:home", "screen:mac", "cmd:\(deploy.id)", "screen:help"])
+        config.move(.command(deploy.id), by: -10)
+        #expect(config.items.first == "cmd:\(deploy.id)")
+    }
+
+    @Test func profilesCanHaveTheirOwnMenu() {
+        var settings = TelegramBotSettings()
+        #expect(settings.menu(for: "work") == BotMenuConfig())
+        var common = BotMenuConfig()
+        common.columns = 3
+        settings.setMenu(common, for: nil)
+        settings.setOwnMenu(true, for: "texts")
+        #expect(settings.hasOwnMenu("texts") && settings.menu(for: "texts").columns == 3)
+        settings.setMenu(BotMenuConfig(items: ["screen:home"], columns: 2), for: "texts")
+        #expect(settings.menu(for: "texts").items == ["screen:home"] && settings.menu(for: "work").columns == 3)
+        settings.setOwnMenu(false, for: "texts")
+        #expect(settings.profileMenus == nil && settings.menu(for: "texts").columns == 3)
+        // Back to the default four: nothing stored.
+        settings.setMenu(BotMenuConfig(), for: nil)
+        #expect(settings.menu == nil)
+    }
+
+    @Test func menuSetupScreen() {
+        var config = BotMenuConfig()
+        config.items.append("cmd:\(deploy.id)")
+        let screen = BotScreens.menuSetup(config, commands: [deploy, downloads], profile: "Тексты <x>")
+        let titles = screen.buttons.flatMap { $0 }.map(\.title)
+        #expect(titles.contains("✅ 📊 Отчёты") && titles.contains("✅ ▶️ Собрать <Cantero>") && titles.contains("☐ ▶️ Загрузки"))
+        #expect(!titles.contains { $0.contains("Главная") })
+        #expect(screen.html.contains("Тексты &lt;x&gt;"))
+        #expect(screen.buttons.flatMap { $0 }.map(\.route).contains(.menuColumns(3)))
+        #expect(screen.buttons.last?.first?.route == .menuDone)
+    }
+
+    @Test func commandConfirmationAndResult() {
+        #expect(BotScreens.confirmCommand(deploy).buttons[0].map(\.route) == [.runCommand(deploy.id), .show(.home)])
+        #expect(BotScreens.confirmCommand(deploy).html.contains("Собрать &lt;Cantero&gt;"))
+        #expect(BotScreens.commandResult(deploy, ok: false, text: "a < b").contains("❌ <b>Собрать &lt;Cantero&gt;</b>\n<code>a &lt; b</code>"))
+        #expect(!BotScreens.commandResult(downloads, ok: true, text: "").contains("<code>"))
     }
 
     /// A message has inline buttons or the bottom menu, never both.
     @Test func menuCarrierHasNoInlineButtons() {
         var message = BotScreens.home(BotHomeState(macName: "Mac", working: 0, waiting: 0, runs: 0), now: .now)
         #expect(message.replyMarkup["inline_keyboard"] != nil)
-        message.installsMenu = true
+        message.menu = BotMenu(BotMenuConfig(), commands: [])
         #expect(message.replyMarkup["inline_keyboard"] == nil && message.replyMarkup["keyboard"] != nil)
     }
 
@@ -164,7 +236,7 @@ struct TelegramBotTests {
 
     @Test func helpOffersAllCommandsWhenThereAreSome() {
         #expect(BotScreens.help(hasAllCommands: true).buttons.first?.first?.route == .allCommands)
-        #expect(BotScreens.help(hasAllCommands: false).buttons.flatMap { $0 }.map(\.route) == [.show(.home)])
+        #expect(BotScreens.help(hasAllCommands: false).buttons.flatMap { $0 }.map(\.route) == [.show(.menu), .show(.home)])
         #expect(BotScreens.help(hasAllCommands: false).html.contains("/clean"))
     }
 
