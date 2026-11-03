@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AI Hub Bar — Claude limits and agent sessions in the Mac menu bar</title>
-<meta name="description" content="A free, open-source Mac menu bar app: Claude subscription limits, every Claude Code session, and ready-made AI commands for your projects.">
+<title>AI Hub Bar — your AI and your Mac, one click away</title>
+<meta name="description" content="A free, open-source Mac menu bar app: limits of every AI service, every agent session, a live island around the notch, automatic keyboard layout fixes and the small Mac tools you use every day.">
 <meta property="og:title" content="AI Hub Bar">
-<meta property="og:description" content="Claude limits, every agent session and AI commands for your projects — one click away in the Mac menu bar.">
+<meta property="og:description" content="AI limits and agent sessions, a live island around the notch and everyday Mac tools — in one menu bar app.">
 <meta property="og:image" content="https://olehdemishev.github.io/AIHubBar/social-preview.png">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/png" href="favicon.png">
@@ -18,9 +18,10 @@
   <div class="wrap nav-in">
     <a class="brand" href="#top"><img src="icon.png" alt="" width="28" height="28">AI Hub Bar</a>
     <nav>
-      <a href="#features">Features</a>
-      <a href="#install">Install</a>
-      <a href="#privacy">Privacy</a>
+      <a href="#ai">AI</a>
+      <a href="#notch">Notch</a>
+      <a href="#layout">Layout</a>
+      <a href="#tools">Mac tools</a>
       <a href="help.html">Help</a>
       <a href="https://github.com/OlehDemishev/AIHubBar">GitHub</a>
     </nav>
@@ -29,26 +30,35 @@
 
 <main id="top">
 
-<section class="hero">
-  <div class="wrap hero-in">
-    <div class="hero-text">
-      <img class="hero-icon" src="icon.png" alt="AI Hub Bar icon" width="96" height="96">
-      <h1>AI Hub Bar</h1>
-      <p class="tagline">Claude limits, every agent session and AI commands for your projects — one click away in the Mac menu bar.</p>
-      <div class="cta">
-        <a class="btn-primary" href="https://github.com/OlehDemishev/AIHubBar/releases/latest">Download for Mac</a>
-        <a class="btn-ghost" href="https://github.com/OlehDemishev/AIHubBar">View on GitHub</a>
-      </div>
-      <div class="chips"><span>macOS 14+</span><span>Free · MIT</span><span>13 languages</span><span>No account</span></div>
+<!-- Hero: the top of a Mac screen — the island at the notch asks for a permission, the panel hangs from the menu bar. -->
+<section class="hero2">
+  <div class="wrap hero2-text">
+    <img class="hero-icon" src="icon.png" alt="AI Hub Bar icon" width="88" height="88">
+    <h1>Your AI and your Mac, <br>one click away.</h1>
+    <p class="tagline">Limits of every AI service, every agent session, a live island around the notch and the small Mac tools you reach for all day — in one menu bar app.</p>
+    <div class="cta center">
+      <a class="btn-primary" href="https://github.com/OlehDemishev/AIHubBar/releases/latest">Download for Mac</a>
+      <a class="btn-ghost" href="https://github.com/OlehDemishev/AIHubBar">View on GitHub</a>
     </div>
+    <div class="chips center"><span>macOS 14+</span><span>Free · MIT</span><span>13 languages</span><span>No account</span></div>
+  </div>
 
-    <div class="shot" aria-hidden="true">
-      <div class="menubar">
-        <span class="item">✦ 42% <span class="muted">·</span> 18%</span>
-        <span class="item">✋ 1</span>
-        <span class="muted">Fri 14:05</span>
+  <div class="wrap">
+    <div class="screen" aria-hidden="true">
+      <div class="mbar">
+        <span class="apple"></span><b>Terminal</b><span class="dim">Shell</span><span class="dim">Edit</span><span class="dim">View</span>
+        <span class="mbar-right">
+          <span class="mitem on">✦ 42% · 18%</span><span class="mitem">EN</span><span class="dim">Tue 14:05</span>
+        </span>
       </div>
-      <div class="panel">
+      <div class="island open">
+        <div class="isl-row">
+          <span class="isl-dot wait"></span>
+          <span class="isl-text"><b>shop-app</b> wants to run <code>npm test</code></span>
+        </div>
+        <div class="isl-actions"><span class="isl-btn ok">Allow</span><span class="isl-btn">Deny</span></div>
+      </div>
+      <div class="panel2">
         <div class="phead"><b>⌘ Developer ▾</b><span class="icons">↻ ⚙ ? ⏻</span></div>
         <div class="pcard">
           <div class="t">Limits</div>
@@ -58,63 +68,130 @@
             <div class="ring" style="--p:18%"><span>18%</span></div>
             <div class="ringlabel"><b>Week</b><br>resets Tue 9:00</div>
           </div>
-          <div class="forecast">✓ Enough until the reset at this pace</div>
+          <div class="svc"><span>Codex <b>31%</b></span><span>Copilot <b>12%</b></span><span>OpenRouter <b>$4.20</b></span></div>
         </div>
         <div class="pcard">
           <div class="t">Sessions</div>
-          <div class="row wait"><i style="background:var(--orange)"></i><span><b>shop-app</b><br><small>wants to run <code>npm test</code></small></span><span class="right"><span class="b ok">Allow</span> <span class="b">Deny</span></span></div>
-          <div class="row"><i style="background:var(--green)"></i><span><b>blog</b><br><small>editing header.tsx · +42 −7</small></span><span class="right">12 min</span></div>
-          <div class="row"><i style="background:var(--blue)"></i><span><b>api</b><br><small>background · writing tests</small></span><span class="right">31 min</span></div>
+          <div class="row wait"><i style="background:var(--orange)"></i><span><b>shop-app</b><br><small>Claude · wants to run <code>npm test</code></small></span><span class="right">now</span></div>
+          <div class="row"><i style="background:var(--green)"></i><span><b>blog</b><br><small>Claude · step 3/7 · writing tests</small></span><span class="right">12 min</span></div>
+          <div class="row"><i style="background:var(--green)"></i><span><b>api</b><br><small>Copilot · editing routes.ts</small></span><span class="right">4 min</span></div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="intro wrap">
-  <p>AI Hub Bar doesn't replace Claude, Codex or any other AI tool — it keeps an eye on them and starts them for you. Free, open source, no account and no server of its own.</p>
+<section class="wrap works">
+  <span>Works with</span>
+  <b>Claude Code</b><b>Codex</b><b>GitHub Copilot CLI</b><b>Gemini CLI</b><b>Cursor</b><b>OpenRouter</b><b>OpenAI &amp; Anthropic API</b>
 </section>
 
-<section id="features" class="wrap">
-  <div class="kicker">Features</div>
-  <h2>Three things, one click on ✦</h2>
+<!-- AI -->
+<section id="ai" class="wrap">
+  <div class="kicker">AI</div>
+  <h2>See what every AI is doing — and what it has left</h2>
   <div class="grid3">
     <article class="feature">
       <div class="ic">◔</div>
-      <h3>Limits — how much is left</h3>
+      <h3>Limits of every service</h3>
       <ul>
-        <li>Claude's 5-hour and weekly limits as rings, with a reset countdown, right in the menu bar.</li>
+        <li>Claude's 5-hour and weekly limits as rings, with a reset countdown in the menu bar.</li>
         <li>A forecast from your pace: “enough until the reset” or “lasts until ~16:40”.</li>
-        <li>Usage by project, and notifications at the thresholds you choose.</li>
-        <li>Codex, GitHub Copilot, Gemini CLI, Cursor, OpenRouter and API spend appear by themselves.</li>
+        <li>Codex, Copilot, Gemini, Cursor, OpenRouter and API spend show up by themselves.</li>
+        <li>Alerts at the thresholds you choose — on the Mac or in Telegram.</li>
       </ul>
     </article>
     <article class="feature">
       <div class="ic">≡</div>
-      <h3>Every Claude Code session</h3>
+      <h3>Every agent session</h3>
       <ul>
-        <li>Terminal, the Claude app, background runs: state, task, duration — and what Claude is doing right now.</li>
-        <li>Allow or Deny permission requests from the notification, the panel or Telegram.</li>
-        <li>Context fullness, files changed, and a heads-up when a session goes quiet.</li>
-        <li>Background runs under an explicit permission list, a night queue and a morning summary.</li>
+        <li>Claude Code and Copilot CLI sessions: working, waiting for you, done — and what they are doing right now.</li>
+        <li>Allow or Deny a permission request from the island, a notification, the panel or Telegram.</li>
+        <li>Claude's task list as it goes: step 3 of 7, files changed, context left.</li>
+        <li>Recent Codex threads, background runs and a night queue with a morning summary.</li>
       </ul>
     </article>
     <article class="feature">
       <div class="ic">⌘</div>
-      <h3>Projects and AI commands</h3>
+      <h3>Commands for your projects</h3>
       <ul>
-        <li>Profiles built from modules, each with its own panel and menu bar.</li>
+        <li>Ready-made commands per project: next step, custom task, finish with checks, commit and PR.</li>
         <li>A command's result is always a new file — nothing is overwritten.</li>
         <li>Compare runs one command with two or three services side by side.</li>
-        <li>Claude Code, Codex CLI, Gemini CLI, Copilot CLI, Cursor CLI and models by API.</li>
+        <li>Claude Code, Codex, Gemini, Copilot and Cursor CLIs, or models by API key.</li>
       </ul>
     </article>
   </div>
 </section>
 
+<!-- Notch -->
+<section id="notch" class="wrap">
+  <div class="kicker">New · The notch island</div>
+  <h2>The notch, put to work</h2>
+  <p class="lead">On a MacBook with a notch, the black area around it becomes a live island. At rest it is two small ears; when something happens it opens just long enough to tell you — right where you are already looking.</p>
+  <div class="notch-states">
+    <figure>
+      <div class="bezel"><div class="island rest"><span class="ear"><span class="mini-ring" style="--p:42%"></span>42%</span><span class="cut"></span><span class="ear"><span class="isl-dot run"></span>3/7</span></div></div>
+      <figcaption><b>At rest</b> — the limit on the left, Claude's progress on the right.</figcaption>
+    </figure>
+    <figure>
+      <div class="bezel"><div class="island banner"><span class="isl-dot done"></span><span class="isl-text"><b>Done:</b> blog · 7/7 · 12 min · 5 files</span></div></div>
+      <figcaption><b>Events</b> — a session finished, Claude is waiting, a limit is near.</figcaption>
+    </figure>
+    <figure>
+      <div class="bezel"><div class="island drop"><span class="drop-file">📄 report.md</span><span class="drop-cmds"><span>Summarize</span><span>Translate</span><span>Custom task…</span></span></div></div>
+      <figcaption><b>Drop a file</b> on it and pick a command — the result lands next to the file.</figcaption>
+    </figure>
+  </div>
+  <div class="grid2 notes">
+    <p><b>Answer without switching apps.</b> Permission requests stay at the notch until you choose, with optional hot keys: ⌃⌥Y to allow, ⌃⌥N to deny.</p>
+    <p><b>No notch? No problem.</b> The island also lives as a pill on other screens, on every screen or only the main one, and steps aside for full-screen apps.</p>
+  </div>
+</section>
+
+<!-- Layout -->
+<section id="layout" class="wrap">
+  <div class="split2">
+    <div>
+      <div class="kicker">New · Layout fix <span class="beta">beta</span></div>
+      <h2>Typed in the wrong layout? It fixes itself.</h2>
+      <ul class="big">
+        <li>Finish a word in the wrong layout and it is retyped in the right one, and the layout switches.</li>
+        <li><b>Double Shift</b> converts the last word, or undoes a fix — and remembers the word.</li>
+        <li><b>⌥⇧</b> converts the selected text.</li>
+        <li>English, Russian, Ukrainian, German, French, Portuguese and Spanish. No dictionaries to fill, nothing typed is stored, password fields and terminals are left alone.</li>
+      </ul>
+    </div>
+    <div class="typing" aria-label="ghbdtn becomes привет">
+      <div class="typing-bar"><span></span><span></span><span></span><em>Notes</em><b class="lang-chip" id="langChip">EN</b></div>
+      <div class="typing-body"><span id="typed">ghbdtn</span><span class="caret"></span></div>
+      <div class="typing-hint" id="typingHint">“ghbdtn” + space → “привет ”</div>
+    </div>
+  </div>
+</section>
+
+<!-- Mac tools -->
+<section id="tools" class="wrap">
+  <div class="kicker">Mac tools</div>
+  <h2>The small things, without five more apps</h2>
+  <p class="lead">Every tool is a module: add the ones you want, each with its own card in the panel, its own spot in the menu bar and its own settings.</p>
+  <div class="tiles">
+    <div><span class="ti">☕︎</span><b>Keep Awake</b><em>for a time, while Claude works, while an app runs, with the lid closed — or from Control Center</em></div>
+    <div><span class="ti">◐</span><b>Mac resources</b><em>processor, memory, disk, network, battery and the hungriest apps</em></div>
+    <div><span class="ti">⧉</span><b>Clipboard history</b><em>search what you copied; passwords and chosen apps are skipped</em></div>
+    <div><span class="ti">✎</span><b>Notes</b><em>quick notes saved as plain files in a folder you choose</em></div>
+    <div><span class="ti">⏻</span><b>Quick toggles</b><em>dark mode, desktop icons, lock screen, eject disks, empty trash — one click each</em></div>
+    <div><span class="ti">▦</span><b>Calendar</b><em>deadlines and content plans straight from your project files</em></div>
+    <div><span class="ti">⌕</span><b>⌃⌥C search</b><em>sessions, projects and commands from any app</em></div>
+    <div><span class="ti">▣</span><b>Widgets &amp; Shortcuts</b><em>limits and status widgets, Shortcuts actions, Telegram alerts</em></div>
+  </div>
+</section>
+
+<!-- Profiles -->
 <section class="wrap">
-  <div class="kicker">Not only for developers</div>
-  <h2>Start from a template</h2>
+  <div class="kicker">Profiles</div>
+  <h2>One app, set up your way</h2>
+  <p class="lead">A profile is what the panel and the menu bar show: the modules you picked, in your order. Switch profiles in one click — or start from a template and the assistant sets it up in two minutes.</p>
   <div class="templates">
     <div><b>Developer</b><span>a git repository</span><em>Next step · Custom task · Finish (checks, commit, push, PR)</em></div>
     <div><b>Video</b><span>a folder per video</span><em>Hooks · a Shorts version · description with timestamps</em></div>
@@ -122,20 +199,6 @@
     <div><b>Research</b><span>a folder per topic</span><em>Source summary · quotes with references · overview table</em></div>
     <div><b>Social media</b><span>a campaign or platform</span><em>Posts per platform · ad variants · a week's plan</em></div>
     <div><b>Custom</b><span>any folder</span><em>Your own, with <code>{project}</code>, <code>{file}</code>, <code>{language}</code></em></div>
-  </div>
-</section>
-
-<section class="wrap more">
-  <div class="kicker">And more</div>
-  <div class="grid2">
-    <ul>
-      <li><b>Calendar</b> of deadlines and content plans straight from your project files.</li>
-      <li><b>Mac tools</b> as optional modules: resources, Keep Awake, quick toggles, clipboard history, notes.</li>
-    </ul>
-    <ul>
-      <li><b>⌃⌥C search</b> from any app, widgets, a Control Center toggle and Shortcuts actions.</li>
-      <li><b>Telegram</b> alerts and a weekly summary.</li>
-    </ul>
   </div>
   <div class="langs">
     <span>English</span><span>Русский</span><span>Українська</span><span>Español</span><span>Português (Brasil)</span><span>Français</span><span>Deutsch</span><span>Italiano</span><span>Polski</span><span>日本語</span><span>한국어</span><span>Bahasa Indonesia</span><span>العربية</span>
@@ -154,8 +217,8 @@
     </ol>
     <div class="callout">
       <p>The app isn't signed with an Apple Developer ID, so macOS asks once. After that it updates itself, and the first start opens an assistant that sets up your first profile.</p>
-      <p><b>Needs:</b> macOS 14 or later (Apple Silicon or Intel) and at least one AI service. Limits and the session list need Claude Code.</p>
-      <p><a href="https://github.com/OlehDemishev/AIHubBar/blob/main/docs/GUIDE.md">Read the guide →</a></p>
+      <p><b>Needs:</b> macOS 14 or later (Apple Silicon or Intel). AI features need at least one AI service; the Mac tools work without any.</p>
+      <p><a href="help.html">Open the help →</a></p>
     </div>
   </div>
 </section>
@@ -163,9 +226,10 @@
 <section id="privacy" class="wrap">
   <div class="kicker">Privacy</div>
   <h2>Nothing in between</h2>
-  <div class="grid2 privacy">
-    <p><b>No server, no account, no analytics.</b> AI Hub Bar talks only to the AI services you use, and your files go only to the service you run a command with.</p>
-    <p><b>Keys stay in the Keychain.</b> Never in logs or exported settings. The session hook only writes small status files on your Mac and can be removed in Settings.</p>
+  <div class="grid3 privacy">
+    <p><b>No server, no account, no analytics.</b> AI Hub Bar talks only to the AI services you use; your files go only to the service you run a command with.</p>
+    <p><b>Keys stay in the Keychain.</b> Never in logs or exported settings. Session hooks only write small status files on your Mac and come off in one click.</p>
+    <p><b>Nothing you type is kept.</b> Layout fix looks at the word being typed and forgets it; clipboard history skips passwords and the apps you exclude.</p>
   </div>
 </section>
 
@@ -182,8 +246,31 @@
 
 <footer class="wrap foot">
   <span>MIT license · <a href="https://github.com/OlehDemishev/AIHubBar">Source on GitHub</a></span>
-  <span>An independent project, not affiliated with Anthropic, OpenAI, Google or GitHub.</span>
+  <span>An independent project, not affiliated with Anthropic, OpenAI, Google, GitHub or Apple.</span>
 </footer>
 
+<script>
+// Layout fix demo: wrong-layout word, then the fix. Static under Reduce Motion.
+(() => {
+  const typed = document.getElementById('typed'), chip = document.getElementById('langChip'), hint = document.getElementById('typingHint');
+  if (!typed || matchMedia('(prefers-reduced-motion: reduce)').matches) { if (typed) { typed.textContent = 'привет '; chip.textContent = 'RU'; } return; }
+  const pairs = [['ghbdtn', 'привет', 'RU', 'EN'], ['vjkjrj', 'молоко', 'RU', 'EN'], ['руддщ', 'hello', 'EN', 'RU']];
+  let i = 0;
+  const wait = ms => new Promise(r => setTimeout(r, ms));
+  async function run() {
+    for (;;) {
+      const [wrong, right, to, from] = pairs[i++ % pairs.length];
+      chip.textContent = from; chip.classList.remove('flash');
+      hint.textContent = `“${wrong}” + space → “${right} ”`;
+      typed.textContent = '';
+      for (const ch of wrong) { typed.textContent += ch; await wait(110); }
+      await wait(450);
+      typed.textContent = right + ' '; chip.textContent = to; chip.classList.add('flash');
+      await wait(2200);
+    }
+  }
+  run();
+})();
+</script>
 </body>
 </html>

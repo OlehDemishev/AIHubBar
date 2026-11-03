@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/images/hero.png" alt="AI Hub Bar: Claude limits, agent sessions and AI commands in the Mac menu bar" width="100%">
+  <img src="docs/images/hero.png" alt="AI Hub Bar: your AI and your Mac, one click away — AI limits and agent sessions, the notch island and Mac tools in the menu bar" width="100%">
 </p>
 
 <p align="center">
