@@ -14,9 +14,9 @@
 
 **Needs Oleh:**
 - Settings → Codex → «Установить hook», then once in `codex` type `/hooks` and trust AI Hub Bar's hooks (Codex skips untrusted hooks); then check a Codex row in «Сессии» goes «ждёт» on an approval prompt
+- GitHub → repository Settings → Social preview: upload docs/images/social-preview.png (only by hand)
 - Settings → Copilot → «Установить hook»: then start `copilot` and check its row in «Сессии» (the agent wasn't allowed to install it into ~/.copilot itself)
 - say what comes next: «Раскладка» to everyone, or new features
-- look at the new help: panel → «?» and https://olehdemishev.github.io/AIHubBar/help.html
 - look at the new Settings and say what to change next
 - MacBook Air: update to 0.5.0 through Sparkle (Settings → General → Updates) and check the island at the real notch
 - «Раскладка»: tried live in TextEdit, Safari, Chrome (⌥⇧ too); Telegram and Notes are yours to try (not typed into by the agent)
@@ -28,6 +28,30 @@
 Done: Codex 0.166 has stable lifecycle hooks (`~/.codex/hooks.json`, Claude-shaped, snake_case payload with `session_id` = thread id). `CodexHooks` merges AI Hub Bar's entries into that file (backup first, other hooks untouched, a file left empty is removed); Settings → Codex → «Состояние сессий Codex» with «Установить hook» / «Снять hook» and hover hints; `AIHubBar --codex-hooks status|install|uninstall`. The shared hook script (format 5) takes `--agent codex`: `PermissionRequest` → «ждёт» with the same notification as Claude's, `UserPromptSubmit` / `PostToolUse` → «работает» (`apply_patch` shows the file it edits), `Stop` / `Interrupt` → «готово», `SessionEnd` → ended (3 s timeout, Codex's maximum). A Codex hook session hides its thread row. `HookJSONFile` now holds the JSON read / backup / write that Claude's installer had; the read error names the file. Antigravity: its hooks (`PreToolUse`, `Stop`, …) have no event for an approval prompt and its run status has no waiting value, so nothing was built — findings in SPEC-ai-services stage 7. Strings in all 13 languages, help fact «Codex и Copilot», site/help exported, REFERENCE and specs README updated.
 Checked: `scripts/check.sh` green (strings, all Mac tests with warnings as errors; new `CodexHooksTests` — 6 tests on payloads from Codex's hooks docs); installed with `scripts/build-and-install.sh`, Settings → Codex shows the section, `--codex-hooks status` → notInstalled. Live: a `codex exec` with our hook passed by `-c hooks.…` ran nothing — Codex skips untrusted hooks silently (`--dangerously-bypass-hook-trust` was not used), so no live session states yet. An `agy -i` probe stopped at agy's first-run colour-scheme screen and was closed unanswered.
 Left: Oleh installs and trusts the hook, then a live check (whether the TUI's hooks run in `codex` itself or the shared app-server daemon decides what «Показать» finds). Approving Codex prompts from AI Hub Bar (its `PermissionRequest` answer has Claude's shape) — not offered until checked live. Codex's `request_user_input` question has no hook event. The `codex exec` probe left a thread in a scratch folder that shows in «Сессии» for 3 hours.
+
+## 2026-11-03 — overview PDFs for 1.0 (branch `docs/overview-1.0`)
+
+Done: docs/AI-Hub-Bar-Overview-en.pdf and -ru.pdf now 9 pages: a new page 5 «The notch, put to work» (notch island: ears, events, permission requests, file drop) with Layout fix (beta); the cover with the new tagline and bullets for the island and Mac tools; Copilot CLI sessions and Claude's task list on «At a glance» and «Agent sessions»; the notch island card instead of Calendar on page 2 (Calendar stays in Mac tools). Icon paths fixed after the AIHubBar rename.
+Checked: every page rendered to PNG and looked at in both languages; nothing runs into the footer.
+Left: the cover's panel mock-up still shows the older panel (no island).
+
+## 2026-11-03 — social preview for the 1.0 site (branch `chore/social-preview-1.0`)
+
+Done: docs/overview/hero.html redrawn as the site's hero: «Your AI and your Mac, one click away», the island at the notch asking for a permission and the panel with several services and Claude/Copilot sessions; the icon path fixed after the AIHubBar rename. Rendered docs/images/hero.png (README header, 2x) and social-preview.png (1280×640), copied to site/. README alt text updated.
+Checked: both images looked at after rendering; nothing overlaps.
+Left: the GitHub repository's own social preview (Settings → General → Social preview) is uploaded by hand — Oleh. The overview PDFs still have the old tagline.
+
+## 2026-11-03 — 1.0 site published (branch `chore/status-site-published`)
+
+Done: on Oleh's «Публикуй» merged #234; the Pages workflow deployed it.
+Checked: https://olehdemishev.github.io/AIHubBar/ serves the new page (title, styles); help.html still loads its topics, no console errors.
+Left: the social preview image is still the old one.
+
+## 2026-11-03 — site draft for 1.0 (branch `feat/site-1.0`)
+
+Done: new landing page in site/ (index.html, new styles appended to style.css; help.html untouched): hero with a Mac screen top (the island asking for a permission, the panel with limits of several services and Claude/Copilot sessions), «works with», AI (limits, sessions, commands), the notch island (rest, events, file drop), Layout fix (beta) with a typing demo, Mac tools tiles, profiles and templates, install, privacy (3 points), final CTA.
+Checked: local preview at 1440 px light and dark and at 375 px (no horizontal scroll); feature claims checked against the code (toggles, keep-awake rules, island hot keys ⌃⌥Y/⌃⌥N).
+Left: waiting for Oleh's review; not merged, since merging site/ to main publishes it. Social preview image still the old one.
 
 ## 2026-11-03 — beta 0.5.1-beta.1 published (branch `chore/status-beta-0.5.1`)
 
