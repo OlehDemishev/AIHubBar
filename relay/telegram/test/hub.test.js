@@ -256,7 +256,8 @@ test("a Mini App call goes to the answering Mac and its reply comes back", async
   t.online.add(mini.device_id);
   const now = Math.floor(1_700_000_000_000 / 1000);
   const pending = t.hub.app(initData({ id: 42 }, now), "state", { x: 1 });
-  await new Promise((r) => setTimeout(r, 0));
+  // The signature check is async: wait for the call to reach the Mac.
+  for (let i = 0; i < 200 && t.sent.at(-1)?.message.type !== "app"; i++) await new Promise((r) => setTimeout(r, 5));
   const sent = t.sent.at(-1);
   assert.equal(sent.id, mini.device_id);
   assert.deepEqual([sent.message.type, sent.message.action, sent.message.params.x], ["app", "state", 1]);
