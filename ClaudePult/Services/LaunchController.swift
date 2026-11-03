@@ -264,9 +264,7 @@ final class LaunchController {
     }
 
     private func sendToTelegram(_ html: String) {
-        guard settings.telegramForBackground,
-              let credentials = Telegram.credentials(dailyReportDirectory: settings.dailyReportDirectory) else { return }
-        Task { _ = await Telegram.send(html: html, with: credentials) }
+        Telegram.notify(.backgroundResults, html: html, settings: settings)
     }
 
     /// «На ночь»: the run waits for the night start hour (Settings → «Сервисы AI» → Claude Code).
@@ -290,10 +288,8 @@ final class LaunchController {
         guard !batch.isEmpty else { return }
         let summary = NightQueue.summary(batch)
         Notifier.post(id: "night-summary", title: summary.title, body: summary.body)
-        if settings.telegramForBackground, let credentials = Telegram.credentials(dailyReportDirectory: settings.dailyReportDirectory) {
-            let html = "🌙 <b>\(RunMessage.escape(summary.title))</b>\n" + batch.map { RunMessage.telegramHTML($0) }.joined(separator: "\n")
-            Task { _ = await Telegram.send(html: html, with: credentials) }
-        }
+        let html = "🌙 <b>\(RunMessage.escape(summary.title))</b>\n" + batch.map { RunMessage.telegramHTML($0) }.joined(separator: "\n")
+        Telegram.notify(.backgroundResults, html: html, settings: settings)
         AppLog.info("Night summary: \(batch.count) runs")
     }
 

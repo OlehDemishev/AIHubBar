@@ -608,10 +608,7 @@ final class HubLimitsStore {
                 let body = [window.title, window.detail, window.resetsAt.map { String(localized: "сброс \($0.formatted(date: .abbreviated, time: .shortened))") }]
                     .compactMap { $0 }.joined(separator: " · ")
                 Notifier.post(id: "hub-\(key)", title: title, body: body)
-                if settings.limitAlertsToTelegram, let credentials = Telegram.credentials(dailyReportDirectory: settings.dailyReportDirectory) {
-                    let html = "⚠️ <b>\(RunMessage.escape(title))</b>\n\(RunMessage.escape(body))"
-                    Task { _ = await Telegram.send(html: html, with: credentials) }
-                }
+                Telegram.notify(.limitAlerts, html: "⚠️ <b>\(RunMessage.escape(title))</b>\n\(RunMessage.escape(body))", settings: settings)
             }
         }
     }

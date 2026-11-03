@@ -241,10 +241,7 @@ final class UsageStore {
         }
         AppLog.info("Usage alert: \(title)")
         Notifier.post(id: id, title: title, body: body)
-        guard settings.limitAlertsToTelegram,
-              let credentials = Telegram.credentials(dailyReportDirectory: settings.dailyReportDirectory) else { return }
-        let html = "⚠️ <b>\(RunMessage.escape(title))</b>\n\(RunMessage.escape(body))"
-        Task { _ = await Telegram.send(html: html, with: credentials) }
+        Telegram.notify(.limitAlerts, html: "⚠️ <b>\(RunMessage.escape(title))</b>\n\(RunMessage.escape(body))", settings: settings)
     }
 
     // MARK: - History file (survives restarts so the forecast is available right away)

@@ -194,10 +194,7 @@ final class RunStore {
             target: run.resultFile.flatMap { FileManager.default.fileExists(atPath: $0) ? .file(path: $0) : nil }
                 ?? .run(id: run.id, pullRequest: run.pullRequestURL)
         )
-        guard settings.telegramForBackground,
-              let credentials = Telegram.credentials(dailyReportDirectory: settings.dailyReportDirectory) else { return }
-        let html = RunMessage.telegramHTML(run)
-        Task { _ = await Telegram.send(html: html, with: credentials) }
+        Telegram.notify(.backgroundResults, html: RunMessage.telegramHTML(run), settings: settings)
     }
 
     // MARK: - Files

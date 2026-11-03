@@ -61,7 +61,7 @@ final class AppSettings {
 
     /// What the menu bar item shows (SPEC-modes §7).
     var menuBarConfig: MenuBarConfig {
-        didSet { defaults.set(try? JSONEncoder().encode(menuBarConfig), forKey: Keys.menuBarConfig) }
+        didSet { defaults.setEncoded(menuBarConfig, forKey: Keys.menuBarConfig) }
     }
 
     /// Where the current mode's projects come from; set by `ModeStore` when a mode is applied, not stored.
@@ -72,7 +72,7 @@ final class AppSettings {
 
     /// Chosen models and the compatible server's address (SPEC-modes §11); keys live in the Keychain.
     var aiServices: AIServicesConfig {
-        didSet { defaults.set(try? JSONEncoder().encode(aiServices), forKey: Keys.aiServices) }
+        didSet { defaults.setEncoded(aiServices, forKey: Keys.aiServices) }
     }
 
     /// Calendar reminders this many hours before a date (SPEC-modes §6); empty = none.
@@ -321,13 +321,12 @@ final class AppSettings {
         projectsDirectory = defaults.string(forKey: Keys.projectsDirectory) ?? Self.defaultProjectsDirectory
         dailyReportDirectory = defaults.string(forKey: Keys.dailyReportDirectory) ?? Self.defaultDailyReportDirectory
         claudePath = defaults.string(forKey: Keys.claudePath) ?? ""
-        defaultLaunchMode = defaults.string(forKey: Keys.defaultLaunchMode).flatMap(LaunchMode.init(rawValue:))
-        telegramForBackground = defaults.object(forKey: Keys.telegramForBackground) as? Bool ?? true
-        let limit = defaults.integer(forKey: Keys.backgroundTimeLimitMinutes)
-        backgroundTimeLimitMinutes = limit > 0 ? limit : 90
-        menuBarConfig = defaults.data(forKey: Keys.menuBarConfig).flatMap { try? JSONDecoder().decode(MenuBarConfig.self, from: $0) }
-            ?? MenuBarConfig.migrated(from: defaults.string(forKey: Keys.menuBarUsageMode).flatMap(MenuBarUsageMode.init(rawValue:)) ?? .session)
-        aiServices = defaults.data(forKey: Keys.aiServices).flatMap { try? JSONDecoder().decode(AIServicesConfig.self, from: $0) }
+        defaultLaunchMode = defaults.value(LaunchMode.self, forKey: Keys.defaultLaunchMode)
+        telegramForBackground = defaults.bool(Keys.telegramForBackground, default: true)
+        backgroundTimeLimitMinutes = defaults.positiveInt(Keys.backgroundTimeLimitMinutes, default: 90)
+        menuBarConfig = defaults.decoded(MenuBarConfig.self, forKey: Keys.menuBarConfig)
+            ?? MenuBarConfig.migrated(from: defaults.value(MenuBarUsageMode.self, forKey: Keys.menuBarUsageMode) ?? .session)
+        aiServices = defaults.decoded(AIServicesConfig.self, forKey: Keys.aiServices)
             ?? AIServicesConfig()
         calendarReminderHours = (defaults.array(forKey: Keys.calendarReminderHours) as? [Int]) ?? [24]
         calendarRemindersToTelegram = defaults.bool(forKey: Keys.calendarRemindersToTelegram)
@@ -336,47 +335,44 @@ final class AppSettings {
         serviceThresholds = ((defaults.dictionary(forKey: Keys.serviceThresholds) as? [String: [Int]]) ?? [:])
             .mapValues { $0.filter { (1...100).contains($0) }.sorted() }
         limitAlertsToTelegram = defaults.bool(forKey: Keys.limitAlertsToTelegram)
-        renewClaudeLogin = defaults.object(forKey: Keys.renewClaudeLogin) as? Bool ?? true
-        resourceAlerts = defaults.object(forKey: Keys.resourceAlerts) as? Bool ?? true
-        let clipLimit = defaults.integer(forKey: Keys.clipboardLimit)
-        clipboardLimit = clipLimit > 0 ? clipLimit : 50
+        renewClaudeLogin = defaults.bool(Keys.renewClaudeLogin, default: true)
+        resourceAlerts = defaults.bool(Keys.resourceAlerts, default: true)
+        clipboardLimit = defaults.positiveInt(Keys.clipboardLimit, default: 50)
         clipboardRemember = defaults.bool(forKey: Keys.clipboardRemember)
-        approvalsFromClaudePult = defaults.object(forKey: Keys.approvalsFromClaudePult) as? Bool ?? true
+        approvalsFromClaudePult = defaults.bool(Keys.approvalsFromClaudePult, default: true)
         telegramApprovals = defaults.bool(forKey: Keys.telegramApprovals)
-        pullRequestAlerts = defaults.object(forKey: Keys.pullRequestAlerts) as? Bool ?? true
-        nightStartHour = defaults.object(forKey: Keys.nightStartHour) as? Int ?? 1
-        panelHotKey = defaults.string(forKey: Keys.panelHotKey).flatMap(PanelHotKey.init(rawValue:)) ?? .controlOptionC
+        pullRequestAlerts = defaults.bool(Keys.pullRequestAlerts, default: true)
+        nightStartHour = defaults.int(Keys.nightStartHour, default: 1)
+        panelHotKey = defaults.value(PanelHotKey.self, forKey: Keys.panelHotKey) ?? .controlOptionC
         pullRequestAlertsToTelegram = defaults.bool(forKey: Keys.pullRequestAlertsToTelegram)
         telegramApprovalsChatID = defaults.string(forKey: Keys.telegramApprovalsChatID) ?? ""
         clipboardExcludedApps = defaults.stringArray(forKey: Keys.clipboardExcludedApps) ?? ClipboardPolicy.defaultExcludedApps
         notesFolder = defaults.string(forKey: Keys.notesFolder) ?? "~/Documents/ClaudePult Notes"
-        quickCommands = defaults.data(forKey: Keys.quickCommands).flatMap { try? JSONDecoder().decode([QuickCommand].self, from: $0) } ?? QuickCommand.examples
+        quickCommands = defaults.decoded([QuickCommand].self, forKey: Keys.quickCommands) ?? QuickCommand.examples
         quickToggles = defaults.stringArray(forKey: Keys.quickToggles)?.compactMap(QuickToggle.init(rawValue:)) ?? QuickToggle.allCases
-        keepAwakeRules = defaults.data(forKey: Keys.keepAwakeRules).flatMap { try? JSONDecoder().decode(KeepAwakeRules.self, from: $0) } ?? KeepAwakeRules()
-        notch = defaults.data(forKey: Keys.notch).flatMap { try? JSONDecoder().decode(NotchSettings.self, from: $0) } ?? NotchSettings()
+        keepAwakeRules = defaults.decoded(KeepAwakeRules.self, forKey: Keys.keepAwakeRules) ?? KeepAwakeRules()
+        notch = defaults.decoded(NotchSettings.self, forKey: Keys.notch) ?? NotchSettings()
         betaUpdates = defaults.bool(forKey: Keys.betaUpdates)
-        layout = defaults.data(forKey: Keys.layout).flatMap { try? JSONDecoder().decode(LayoutSettings.self, from: $0) } ?? LayoutSettings()
-        let diskBelow = defaults.integer(forKey: Keys.resourceDiskBelowGB)
-        resourceDiskBelowGB = diskBelow > 0 ? diskBelow : 20
-        panelTextSize = defaults.string(forKey: Keys.panelTextSize).flatMap(PanelTextSize.init(rawValue:)) ?? .normal
-        panelWidth = defaults.string(forKey: Keys.panelWidth).flatMap(PanelWidth.init(rawValue:)) ?? .normal
-        panelDensity = defaults.string(forKey: Keys.panelDensity).flatMap(PanelDensity.init(rawValue:)) ?? .normal
-        panelTheme = defaults.string(forKey: Keys.panelTheme).flatMap(PanelTheme.init(rawValue:)) ?? .system
-        panelBackground = defaults.string(forKey: Keys.panelBackground).flatMap(PanelBackground.init(rawValue:)) ?? .standard
-        panelAnimations = defaults.object(forKey: Keys.panelAnimations) as? Bool ?? true
+        layout = defaults.decoded(LayoutSettings.self, forKey: Keys.layout) ?? LayoutSettings()
+        resourceDiskBelowGB = defaults.positiveInt(Keys.resourceDiskBelowGB, default: 20)
+        panelTextSize = defaults.value(PanelTextSize.self, forKey: Keys.panelTextSize) ?? .normal
+        panelWidth = defaults.value(PanelWidth.self, forKey: Keys.panelWidth) ?? .normal
+        panelDensity = defaults.value(PanelDensity.self, forKey: Keys.panelDensity) ?? .normal
+        panelTheme = defaults.value(PanelTheme.self, forKey: Keys.panelTheme) ?? .system
+        panelBackground = defaults.value(PanelBackground.self, forKey: Keys.panelBackground) ?? .standard
+        panelAnimations = defaults.bool(Keys.panelAnimations, default: true)
         hiddenBlocks = Set((defaults.stringArray(forKey: Keys.hiddenBlocks) ?? []).compactMap(PanelBlock.init(rawValue:)))
         hubDisabled = Set(defaults.stringArray(forKey: Keys.hubDisabled) ?? [])
         hubGeminiQuota = defaults.bool(forKey: Keys.hubGeminiQuota)
-        let geminiLimit = defaults.integer(forKey: Keys.hubGeminiDailyLimit)
-        hubGeminiDailyLimit = geminiLimit > 0 ? geminiLimit : 1000
+        hubGeminiDailyLimit = defaults.positiveInt(Keys.hubGeminiDailyLimit, default: 1000)
         hubCursor = defaults.bool(forKey: Keys.hubCursor)
-        runGuardPercent = defaults.object(forKey: Keys.runGuardPercent) as? Int ?? 95
-        weeklySummary = defaults.object(forKey: Keys.weeklySummary) as? Bool ?? true
+        runGuardPercent = defaults.int(Keys.runGuardPercent, default: 95)
+        weeklySummary = defaults.bool(Keys.weeklySummary, default: true)
         telegramChatID = defaults.string(forKey: Keys.telegramChatID) ?? ""
         notificationFrequencies = defaults.dictionary(forKey: Keys.notificationFrequencies) as? [String: String] ?? [:]
-        savedPrompts = defaults.data(forKey: Keys.savedPrompts).flatMap { try? JSONDecoder().decode([SavedPrompt].self, from: $0) } ?? SavedPrompt.examples
-        weeklySummaryWeekday = defaults.object(forKey: Keys.weeklySummaryWeekday) as? Int ?? 1
-        weeklySummaryHour = defaults.object(forKey: Keys.weeklySummaryHour) as? Int ?? 19
+        savedPrompts = defaults.decoded([SavedPrompt].self, forKey: Keys.savedPrompts) ?? SavedPrompt.examples
+        weeklySummaryWeekday = defaults.int(Keys.weeklySummaryWeekday, default: 1)
+        weeklySummaryHour = defaults.int(Keys.weeklySummaryHour, default: 19)
     }
 
     var reportScript: String {
@@ -436,5 +432,66 @@ final class AppSettings {
         static let telegramChatID = "telegramChatID"
         static let weeklySummaryWeekday = "weeklySummaryWeekday"
         static let weeklySummaryHour = "weeklySummaryHour"
+    }
+}
+
+extension AppSettings {
+    /// The setting behind a module's Telegram place (its «Telegram» chip) and `Telegram.notify`.
+    func isOn(_ toggle: TelegramToggle) -> Bool {
+        switch toggle {
+        case .limitAlerts: limitAlertsToTelegram
+        case .backgroundResults: telegramForBackground
+        case .calendarReminders: calendarRemindersToTelegram
+        case .pullRequests: pullRequestAlertsToTelegram
+        }
+    }
+
+    func set(_ toggle: TelegramToggle, _ on: Bool) {
+        switch toggle {
+        case .limitAlerts: limitAlertsToTelegram = on
+        case .backgroundResults: telegramForBackground = on
+        case .calendarReminders: calendarRemindersToTelegram = on
+        case .pullRequests: pullRequestAlertsToTelegram = on
+        }
+    }
+
+    /// The setting behind a module's own notifications switch.
+    func isOn(_ toggle: NotificationSwitch) -> Bool {
+        switch toggle {
+        case .resourceAlerts: resourceAlerts
+        }
+    }
+
+    func set(_ toggle: NotificationSwitch, _ on: Bool) {
+        switch toggle {
+        case .resourceAlerts: resourceAlerts = on
+        }
+    }
+}
+
+/// How `AppSettings` reads and writes its keys — one way for each kind of value (SPEC-refactor §6).
+extension UserDefaults {
+    /// A stored Bool, or `fallback` when the key was never written.
+    func bool(_ key: String, default fallback: Bool) -> Bool { object(forKey: key) as? Bool ?? fallback }
+
+    /// A stored Int (0 included), or `fallback` when the key was never written.
+    func int(_ key: String, default fallback: Int) -> Int { object(forKey: key) as? Int ?? fallback }
+
+    /// A stored Int above 0, else `fallback` (for sizes and limits, where 0 means «not set»).
+    func positiveInt(_ key: String, default fallback: Int) -> Int {
+        let value = integer(forKey: key)
+        return value > 0 ? value : fallback
+    }
+
+    func value<Value: RawRepresentable>(_ type: Value.Type, forKey key: String) -> Value? where Value.RawValue == String {
+        string(forKey: key).flatMap(Value.init(rawValue:))
+    }
+
+    func decoded<Value: Decodable>(_ type: Value.Type, forKey key: String) -> Value? {
+        data(forKey: key).flatMap { try? JSONDecoder().decode(Value.self, from: $0) }
+    }
+
+    func setEncoded(_ value: some Encodable, forKey key: String) {
+        set(try? JSONEncoder().encode(value), forKey: key)
     }
 }
