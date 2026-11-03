@@ -5,7 +5,7 @@
 **Updated:** 2026-11-03
 
 **Now:**
-- nothing in progress; refactoring stage 4 merged (#217, views by folders); next — stage 5, app composition (docs/SPEC-refactor.md §9)
+- refactoring stage 5 (app composition) on branch `refactor/stage5-composition`, PR open; next — stage 6, services
 
 **Next:**
 - Oleh tries «Раскладка» in his own apps; next beta with fixes: `scripts/release.sh 0.5.0-beta.1 --publish`
@@ -13,7 +13,7 @@
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/SPEC-windows.md §9, stage 2–3 leftovers)
 
 **Needs Oleh:**
-- say when to start stage 5 (app composition)
+- review and merge the stage 5 PR
 - look at the new help: panel → «?» and https://olehdemishev.github.io/AIHubBar/help.html
 - look at the new Settings and say what to change next
 - MacBook Air: update to 0.4.0 through Sparkle (Settings → General → Updates) and check the island at the real notch
@@ -21,6 +21,12 @@
 - the beta channel exists now (release `beta`, points to 0.4.0): say when the next beta goes out
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-03 — refactoring stage 5: app composition (branch `refactor/stage5-composition`)
+
+Done: `App/AppContainer.swift` — the 29 stores and controllers, the hooks between them and the background start moved out of `ClaudePultApp.init` (the App is 168 lines of scenes now). Every window and the notch island get the same environment through `.appEnvironment(app)` (12 hand-kept lists, 1–21 stores each, a missing one crashing at runtime). The module services are one table of (module, service) pairs behind a `ModuleService` protocol instead of eight `isActive` closures. «Claude is working» is one `ClaudeActivity` for the menu bar, the widget and «Не спать» (counted three ways before). The clipboard checks every 5 s instead of 0.7 s while its module is off; Telegram answers check every 10 s instead of 2 s while switched off.
+Checked: `scripts/check.sh` green. Installed build, live: menu bar item, notch island window, the panel with glass and all its blocks (one posted click to open, one to close), help window via `--app-command help`.
+Left: the test host still writes to the real `~/Library/Logs/ClaudePult` log (log lines only, no data).
 
 ## 2026-11-03 — refactoring stage 4: views by folders and shared pieces (branch `refactor/stage4-views`)
 
