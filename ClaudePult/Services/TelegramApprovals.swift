@@ -76,7 +76,8 @@ final class TelegramApprovals {
             while !Task.isCancelled {
                 guard let self else { return }
                 await tick()
-                try? await Task.sleep(for: .seconds(sent.isEmpty ? 2 : 0.2))
+                // Off in Settings: look again in a while instead of every 2 s (SPEC-refactor §6).
+                try? await Task.sleep(for: .seconds(!settings.telegramApprovals ? 10 : sent.isEmpty ? 2 : 0.2))
             }
         }
     }

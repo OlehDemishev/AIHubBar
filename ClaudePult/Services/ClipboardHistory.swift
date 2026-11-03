@@ -82,7 +82,8 @@ final class ClipboardHistory {
             while !Task.isCancelled {
                 guard let self else { return }
                 poll()
-                try? await Task.sleep(for: .milliseconds(700))
+                // Switched off, it only checks now and then whether it is back on (SPEC-refactor §6).
+                try? await Task.sleep(for: .milliseconds(isActive() ? 700 : 5000))
             }
         }
     }
