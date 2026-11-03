@@ -21,6 +21,12 @@
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
 
+## 2026-11-03 — overview PDFs for 1.0 (branch `docs/overview-1.0`)
+
+Done: docs/AI-Hub-Bar-Overview-en.pdf and -ru.pdf now 9 pages: a new page 5 «The notch, put to work» (notch island: ears, events, permission requests, file drop) with Layout fix (beta); the cover with the new tagline and bullets for the island and Mac tools; Copilot CLI sessions and Claude's task list on «At a glance» and «Agent sessions»; the notch island card instead of Calendar on page 2 (Calendar stays in Mac tools). Icon paths fixed after the AIHubBar rename.
+Checked: every page rendered to PNG and looked at in both languages; nothing runs into the footer.
+Left: the cover's panel mock-up still shows the older panel (no island).
+
 ## 2026-11-03 — social preview for the 1.0 site (branch `chore/social-preview-1.0`)
 
 Done: docs/overview/hero.html redrawn as the site's hero: «Your AI and your Mac, one click away», the island at the notch asking for a permission and the panel with several services and Claude/Copilot sessions; the icon path fixed after the AIHubBar rename. Rendered docs/images/hero.png (README header, 2x) and social-preview.png (1280×640), copied to site/. README alt text updated.
