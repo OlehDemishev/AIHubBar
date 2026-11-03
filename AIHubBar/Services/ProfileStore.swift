@@ -323,7 +323,9 @@ final class ProfileStore {
         modes.removeAll { $0.id == id }
         enabledIDs.removeAll { $0 == id }
         if enabledIDs.isEmpty, let first = modes.first { enabledIDs = [first.id] }
-        try? FileManager.default.removeItem(at: fileURL(id))
+        if FileManager.default.fileExists(atPath: fileURL(id).path) {
+            AppLog.attempt("Profile \(id) not deleted") { try FileManager.default.removeItem(at: fileURL(id)) }
+        }
         if currentID == id {
             currentID = ""
             if let next = enabledModes.first { select(next.id) }
@@ -532,8 +534,10 @@ final class ProfileStore {
         if let index = modes.firstIndex(where: { $0.id == mode.id }), modes[index] != mode { modes[index] = mode }
         let encoder = JSONEncoder()
         encoder.outputFormatting = [.prettyPrinted, .sortedKeys, .withoutEscapingSlashes]
-        try? FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
-        try? encoder.encode(mode).write(to: fileURL(mode.id), options: .atomic)
+        AppLog.attempt("Profile \(mode.id) not saved") {
+            try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
+            try encoder.encode(mode).write(to: fileURL(mode.id), options: .atomic)
+        }
         installModules(of: [mode])
     }
 
@@ -551,10 +555,12 @@ final class ProfileStore {
         guard !readOnly else { return }
         let encoder = JSONEncoder()
         encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
-        try? FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
         let state = State(order: modes.map(\.id), enabled: enabledIDs, current: currentID, installed: installedModules.map(\.rawValue),
                           off: switchedOff.isEmpty ? nil : switchedOff.map(\.rawValue))
-        try? encoder.encode(state).write(to: directory.appending(path: "state.json"), options: .atomic)
+        AppLog.attempt("Profile state not saved") {
+            try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
+            try encoder.encode(state).write(to: directory.appending(path: "state.json"), options: .atomic)
+        }
     }
 
     private func saveAll() {

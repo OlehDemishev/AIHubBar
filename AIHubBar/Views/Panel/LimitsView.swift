@@ -36,7 +36,7 @@ struct LimitsView: View {
     @ViewBuilder
     private var details: some View {
         if let snapshot = usage.snapshot {
-            ServiceCard(usage: .claude(snapshot, forecast: usage.forecast, week: usage.weekUsage, error: usage.error),
+            ServiceCard(usage: .claude(snapshot, forecast: usage.forecast, week: usage.weekUsage, error: usage.lastError),
                         showsTitle: !hub.limits.isEmpty)
             // Models by API (SPEC-modes §11.2): shown once AI Hub Bar has spent something this month.
             let month = engine.summary(since: engine.monthStart)
@@ -45,7 +45,7 @@ struct LimitsView: View {
                     .scaledFont(.caption)
                     .foregroundStyle(.secondary)
             }
-        } else if let error = usage.error {
+        } else if let error = usage.lastError {
             Label("Лимиты недоступны. \(error)", systemImage: "exclamationmark.triangle")
                 .scaledFont(.caption)
                 .foregroundStyle(.orange)
@@ -64,7 +64,7 @@ struct LimitsView: View {
         breakdown
     }
 
-    private var isStale: Bool { usage.error != nil }
+    private var isStale: Bool { usage.lastError != nil }
 
     /// The panel's own refresh (⌘R) updates the limits too; the age shows only while the figures are old.
     private var header: some View {

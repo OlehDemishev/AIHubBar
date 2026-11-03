@@ -190,7 +190,7 @@ final class ClaudeConfigStore {
     private(set) var files: [InstructionFile] = []
     private(set) var texts: [String: String] = [:]
     private(set) var busy: Set<String> = []
-    var error: String?
+    var lastError: String?
 
     private let settings: AppSettings
     private let projects: ProjectStore
@@ -232,7 +232,7 @@ final class ClaudeConfigStore {
             texts[file.path] = text
             AppLog.info("Saved \(file.path)")
         } catch {
-            self.error = error.localizedDescription
+            lastError = error.localizedDescription
         }
     }
 
@@ -258,7 +258,7 @@ final class ClaudeConfigStore {
             }
             AppLog.info("MCP «\(server.name)» (\(server.scope.key)) \(on ? "on" : "off")")
         } catch {
-            self.error = error.localizedDescription
+            lastError = error.localizedDescription
             AppLog.error("MCP «\(server.name)» switch failed: \(error.localizedDescription)")
         }
     }
@@ -308,7 +308,7 @@ final class ClaudeConfigStore {
                 try await runClaude(claude, arguments, in: folder)
             } catch {
                 stash.removeLast()
-                try? MCPStash.save(stash)
+                AppLog.attempt("MCP stash not restored") { try MCPStash.save(stash) }
                 throw error
             }
         }

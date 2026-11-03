@@ -56,8 +56,10 @@ final class WidgetStatusWriter {
         let status = make()
         guard status != last else { return }
         last = status
-        try? FileManager.default.createDirectory(at: WidgetStatus.url.deletingLastPathComponent(), withIntermediateDirectories: true)
-        try? JSONEncoder().encode(status).write(to: WidgetStatus.url, options: .atomic)
+        AppLog.attempt("Widget status not written") {
+            try FileManager.default.createDirectory(at: WidgetStatus.url.deletingLastPathComponent(), withIntermediateDirectories: true)
+            try JSONEncoder().encode(status).write(to: WidgetStatus.url, options: .atomic)
+        }
         WidgetCenter.shared.reloadTimelines(ofKind: "ClaudePultStatus")
         if #available(macOS 26.0, *) {
             ControlCenter.shared.reloadControls(ofKind: "com.demishev.claudepult.keepawake")

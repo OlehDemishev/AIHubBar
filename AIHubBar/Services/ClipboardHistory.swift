@@ -167,7 +167,9 @@ final class ClipboardHistory {
         encoder.dateEncodingStrategy = .iso8601
         guard let data = try? encoder.encode(items) else { return }
         try? FileManager.default.createDirectory(at: file.deletingLastPathComponent(), withIntermediateDirectories: true)
-        FileManager.default.createFile(atPath: file.path, contents: data, attributes: [.posixPermissions: 0o600])
+        if !FileManager.default.createFile(atPath: file.path, contents: data, attributes: [.posixPermissions: 0o600]) {
+            AppLog.error("Clipboard history not saved")
+        }
     }
 
     private func load() -> [ClipItem] {

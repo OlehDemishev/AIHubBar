@@ -24,6 +24,18 @@ enum AppLog {
         write("ERROR", message)
     }
 
+    /// Runs a write whose failure used to be silent (`try?`) and logs that failure instead: «what» says what was lost.
+    @discardableResult
+    static func attempt(_ what: String, _ body: () throws -> Void) -> Bool {
+        do {
+            try body()
+            return true
+        } catch {
+            self.error("\(what): \(error.localizedDescription)")
+            return false
+        }
+    }
+
     /// Waits for pending writes; call before `exit()` in command-line mode.
     static func flush() {
         queue.sync {}

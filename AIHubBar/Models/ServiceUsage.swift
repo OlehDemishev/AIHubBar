@@ -184,7 +184,9 @@ struct LimitHistory: Codable, Equatable, Sendable {
     }
 
     func save(to url: URL = Self.url) {
-        try? FileManager.default.createDirectory(at: url.deletingLastPathComponent(), withIntermediateDirectories: true)
-        try? JSONEncoder().encode(self).write(to: url, options: .atomic)
+        AppLog.attempt("Limit history not saved") {
+            try FileManager.default.createDirectory(at: url.deletingLastPathComponent(), withIntermediateDirectories: true)
+            try JSONEncoder().encode(self).write(to: url, options: .atomic)
+        }
     }
 }

@@ -203,7 +203,7 @@ final class RunStore {
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .iso8601
         encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
-        try? encoder.encode(run).write(to: run.metadataURL, options: .atomic)
+        AppLog.attempt("Run \(run.id) not saved") { try encoder.encode(run).write(to: run.metadataURL, options: .atomic) }
     }
 
     nonisolated static func loadRuns(from directory: URL = BackgroundRun.runsDirectory, now: Date = .now) -> [BackgroundRun] {

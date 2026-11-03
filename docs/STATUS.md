@@ -1,11 +1,11 @@
 # Status
 
 <!-- summary:start -->
-**Stage:** Mac: 0.5.0 published (new help, full refactoring; «Раскладка» still in beta). Windows/Linux (`desktop/`, Tauri 2): postponed by Oleh 2026-11-02 after stages 1–3 main parts
+**Stage:** Mac: 0.5.0 published (new help, refactoring stages 0–7, stage 8 leftovers in progress; «Раскладка» still in beta). Windows/Linux (`desktop/`, Tauri 2): postponed by Oleh 2026-11-02 after stages 1–3 main parts
 **Updated:** 2026-11-03
 
 **Now:**
-- nothing in progress; the plan run of 2026-11-03 morning is done (#226–#228 merged)
+- refactoring stage 8 (audit leftovers, docs/specs/SPEC-refactor.md §9): one PR per part
 
 **Next:**
 - beta 0.5.1-beta.1 (quick drops on the island, «Своя задача» hint, Copilot session states): built and published by Oleh — the agent's publish was refused as a public release
@@ -21,6 +21,12 @@
 - «Раскладка»: tried live in TextEdit, Safari, Chrome (⌥⇧ too); Telegram and Notes are yours to try (not typed into by the agent)
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-03 — refactoring stage 8, part 1: store errors (branch `refactor/stage-8-errors`)
+
+Done: stores report errors under one name, `lastError` (was also `error` in UsageStore and ClaudeConfigStore, `saveError` in NotesStore). `AppLog.attempt` logs the writes that used to fail silently with `try?`: profiles and their state, the night queue, runs, usage snapshot and history, command spend, calendar reminders, widget files, limit history, the MCP stash restore, clipboard history. Stage 8 added to SPEC-refactor §9; STATUS no longer calls the refactoring «full».
+Checked: scripts/check.sh green (strings, desktop strings, Mac tests with the new AppLogTests).
+Left: the other stage 8 parts (global hooks, `@Persisted`, tests, large files, warnings as errors).
 
 ## 2026-11-03 — Plan run while Oleh was away (no branch of its own, recorded here)
 
