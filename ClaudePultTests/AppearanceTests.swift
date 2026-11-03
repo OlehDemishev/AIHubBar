@@ -133,3 +133,27 @@ struct CollapsedBlocksTests {
         #expect(PanelBlock.collapsed(in: "projects,unknown,,") == [.projects], "unknown names are ignored")
     }
 }
+
+/// SPEC-refactor §6: one way to read each kind of setting, the stored meaning unchanged.
+@MainActor
+struct SettingsStorageTests {
+    @Test func zeroMeansWhatItMeantBefore() throws {
+        let name = "claudepult-storage-\(UUID().uuidString)"
+        let defaults = try #require(UserDefaults(suiteName: name))
+        defer { defaults.removePersistentDomain(forName: name) }
+        let fresh = AppSettings(defaults: defaults)
+        #expect(fresh.nightStartHour == 1 && fresh.backgroundTimeLimitMinutes == 90 && fresh.telegramForBackground)
+
+        // Midnight is a real hour; a time limit of 0 is «not set».
+        defaults.set(0, forKey: "nightStartHour")
+        defaults.set(0, forKey: "backgroundTimeLimitMinutes")
+        defaults.set(false, forKey: "telegramForBackground")
+        let read = AppSettings(defaults: defaults)
+        #expect(read.nightStartHour == 0 && read.backgroundTimeLimitMinutes == 90 && !read.telegramForBackground)
+
+        read.notch.hotKeys = true
+        read.panelTheme = .dark
+        let again = AppSettings(defaults: defaults)
+        #expect(again.notch.hotKeys && again.panelTheme == .dark)
+    }
+}
