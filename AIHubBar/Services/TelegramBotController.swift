@@ -106,6 +106,9 @@ final class TelegramBotController {
 
     func start() {
         guard loop == nil else { return }
+        relay.onApp = { [weak self] name, parameters in
+            await self?.handleApp(name, parameters) ?? MiniAppReply.failure("gone").json
+        }
         requestLoop = Task { [weak self] in
             while !Task.isCancelled {
                 await self?.syncRequests()
@@ -381,9 +384,12 @@ final class TelegramBotController {
         switch screen {
         case .home:
             message = homeScreen
-            message.buttons = []
-            message.menu = currentMenu
-            sentMenu = currentMenu.entries.map(\.item)
+            // «Где меню» → only the Menu button: 🏠 keeps its own buttons, no keyboard at the bottom.
+            if settings.telegramBot.bottomMenu != false {
+                message.buttons = []
+                message.menu = currentMenu
+                sentMenu = currentMenu.entries.map(\.item)
+            }
         case .reports: message = reportsScreen(job: job)
         case .mac: message = macScreen
         case .help: message = helpScreen
@@ -670,11 +676,29 @@ final class TelegramBotController {
 
     /// «Запустить», and the answers to the launcher's questions; then how it went, in the same message.
     private func launchTask(_ route: BotRoute, messageID: Int?) async {
-        guard tasksAllowed, let draft = taskDraft, let text = draft.text, let launcher,
-              let project = projectList().first(where: { $0.path == draft.path }) else {
+        guard tasksAllowed, let draft = taskDraft, let text = draft.text,
+              let project = projectList().first(where: { $0.path == draft.path }),
+              let outcome = await startTask(route, project: project, text: text) else {
             if let messageID { await edit(messageID, taskScreen) }
             return
         }
+        let reply: BotMessage = switch outcome {
+        case let .question(text, limit): BotScreens.taskQuestion(text, limit: limit)
+        case let .done(text, isError):
+            BotMessage(html: (isError ? "❌ " : "✅ ") + RunMessage.escape(text),
+                       buttons: [[BotMessage.Button(title: "🚀 " + String(localized: "Задача"), route: .show(.task))]])
+        }
+        if let messageID { await edit(messageID, reply) } else { _ = await send(reply) }
+    }
+
+    enum TaskOutcome {
+        case question(String, limit: Bool)
+        case done(String, isError: Bool)
+    }
+
+    /// Starts the task (or answers the launcher's question) and waits for how it went; the bot and the Mini App show it.
+    private func startTask(_ route: BotRoute, project: Project, text: String) async -> TaskOutcome? {
+        guard let launcher else { return nil }
         switch route {
         case .taskForce: launcher.launchDespiteLimit(in: project)
         case .taskAfterReset: launcher.launchAfterReset(in: project)
@@ -686,21 +710,148 @@ final class TelegramBotController {
         for _ in 0..<120 where launcher.working.contains(project.path) {
             try? await Task.sleep(for: .milliseconds(500))
         }
-        let reply: BotMessage
         if let message = launcher.messages[project.path], launcher.pendingLimit[project.path] != nil {
-            reply = BotScreens.taskQuestion(message.text, limit: true)
-        } else if let message = launcher.messages[project.path], launcher.pendingConfirmation[project.path] != nil {
-            reply = BotScreens.taskQuestion(message.text, limit: false)
-        } else {
-            taskDraft = nil
-            let message = launcher.messages[project.path]
-            let text = route == .taskAfterReset
-                ? String(localized: "Запустится после сброса лимита.")
-                : message?.text ?? String(localized: "Задача отправлена.")
-            reply = BotMessage(html: (message?.isError == true ? "❌ " : "✅ ") + RunMessage.escape(text),
-                               buttons: [[BotMessage.Button(title: "🚀 " + String(localized: "Задача"), route: .show(.task))]])
+            return .question(message.text, limit: true)
         }
-        if let messageID { await edit(messageID, reply) } else { _ = await send(reply) }
+        if let message = launcher.messages[project.path], launcher.pendingConfirmation[project.path] != nil {
+            return .question(message.text, limit: false)
+        }
+        taskDraft = nil
+        let message = launcher.messages[project.path]
+        let text = route == .taskAfterReset
+            ? String(localized: "Запустится после сброса лимита.")
+            : message?.text ?? String(localized: "Задача отправлена.")
+        return .done(text, isError: message?.isError == true)
+    }
+
+    // MARK: - Mini App (§10)
+
+    /// A call from the Mini App, through the relay; the reply is JSON (`MiniAppReply`).
+    func handleApp(_ name: String, _ parameters: Data) async -> Data {
+        guard let call = MiniAppCall(action: name, parameters: parameters) else { return MiniAppReply.failure("bad call").json }
+        if call.action != .state { AppLog.info("Telegram Mini App: \(name)") }
+        return await reply(to: call.action).json
+    }
+
+    private func project(_ key: String) -> Project? {
+        projectList().first { BotRoute.projectKey($0.path) == key }
+    }
+
+    private func reply(to action: MiniAppCall.Action) async -> MiniAppReply {
+        var note: String?
+        switch action {
+        case .state:
+            break
+        case let .answer(id, allow):
+            guard canAnswer else { return .failure(String(localized: "Отвечать отсюда нельзя — включите на Маке «Ответы на запросы через общий бот».")) }
+            await answer(id, allow: allow, messageID: nil)
+            note = allow ? String(localized: "Разрешено") : String(localized: "Отклонено")
+        case let .report(ai, hours):
+            guard job == nil else { return .failure(String(localized: "Сейчас идёт другая задача, подождите.")) }
+            startReport(ai: ai, hours: hours ?? BotScreens.hoursSinceMorning(now: .now, hour: morningHour ?? 10), messageID: nil)
+            note = String(localized: "Итог придёт в чат")
+        case let .cleanup(run):
+            guard job == nil else { return .failure(String(localized: "Сейчас идёт другая задача, подождите.")) }
+            startCleanup(dryRun: !run, messageID: nil)
+            note = String(localized: "Итог придёт в чат")
+        case let .task(key, text):
+            guard tasksAllowed else { return .failure(String(localized: "Задачи через общий бот выключены. На Маке: Настройки → Модули → Telegram → «Задачи через общий бот».")) }
+            guard let project = project(key) else { return .failure(String(localized: "Проект не найден")) }
+            taskDraft = (project.path, project.name, text, .now.addingTimeInterval(10 * 60))
+            return outcomeReply(await startTask(.taskGo, project: project, text: text), project: key)
+        case let .taskForce(key), let .taskAfterReset(key), let .taskWorktree(key):
+            guard tasksAllowed, let project = project(key), let draft = taskDraft, draft.path == project.path, let text = draft.text else {
+                return .failure(String(localized: "Проект не найден"))
+            }
+            let route: BotRoute = switch action {
+            case .taskForce: .taskForce
+            case .taskAfterReset: .taskAfterReset
+            default: .taskWorktree
+            }
+            return outcomeReply(await startTask(route, project: project, text: text), project: key)
+        case let .stopRun(id):
+            guard tasksAllowed else { return .failure(String(localized: "Задачи через общий бот выключены. На Маке: Настройки → Модули → Telegram → «Задачи через общий бот».")) }
+            if runs.run(id: id)?.state == .running {
+                runs.stop(id)
+                note = String(localized: "Остановлено")
+            }
+        case let .log(id):
+            guard let run = runs.run(id: id) else { return .failure(String(localized: "Задача не найдена")) }
+            let text = (try? String(contentsOf: run.logURL, encoding: .utf8)) ?? ""
+            return MiniAppReply(ok: true, log: MiniAppReply.logLines(StreamJSON.entries(fromLog: text)))
+        case let .command(id):
+            guard !usesSharedBot || settings.telegramBot.commandsOverShared == true else {
+                return .failure(String(localized: "Быстрые команды через общий бот выключены. На Маке: Настройки → Модули → Telegram → «Быстрые команды через общий бот»."))
+            }
+            guard let command = settings.quickCommands.first(where: { $0.id == id }) else { return .failure(String(localized: "Команда не найдена")) }
+            AppLog.info("Telegram Mini App: quick command started")
+            let result = await runCommand(command)
+            return MiniAppReply(ok: result.ok, error: result.ok ? nil : result.text, note: result.ok ? result.text : nil, state: miniAppState)
+        case let .event(event, on):
+            setEvent(event, on)
+        case let .quiet(hours):
+            settings.telegramBot.quietHours = hours
+        case let .mute(on):
+            settings.telegramBot.mutedUntil = on ? .now.addingTimeInterval(3600) : nil
+        case let .keepAwake(on):
+            setKeepAwake(on)
+        }
+        return MiniAppReply(ok: true, note: note, state: miniAppState)
+    }
+
+    private func outcomeReply(_ outcome: TaskOutcome?, project: String) -> MiniAppReply {
+        switch outcome {
+        case let .question(text, limit)?:
+            MiniAppReply(ok: true, state: miniAppState, question: .init(text: text, limit: limit, project: project))
+        case let .done(text, isError)?:
+            MiniAppReply(ok: !isError, error: isError ? text : nil, note: isError ? nil : text, state: miniAppState)
+        case nil:
+            .failure(String(localized: "Проект не найден"))
+        }
+    }
+
+    var miniAppState: MiniAppState {
+        let free = (try? URL(fileURLWithPath: "/").resourceValues(forKeys: [.volumeAvailableCapacityForImportantUsageKey]))?
+            .volumeAvailableCapacityForImportantUsage
+        let report = URL(fileURLWithPath: settings.dailyReportDirectory).appending(path: "report.py")
+        return MiniAppState(
+            mac: macName, freeBytes: free, keepAwake: keepAwakeState(), job: job,
+            sessions: sessions.items.filter { $0.state == .waiting || $0.state == .running }.map { item in
+                MiniAppState.Session(
+                    project: item.session.displayProject, agent: item.session.agentName, waiting: item.state == .waiting,
+                    detail: item.state == .waiting ? (item.session.message ?? item.session.task) : (item.session.actionText ?? item.session.task),
+                    since: item.session.updatedAt
+                )
+            },
+            requests: sessions.approvals.values.filter { answeredHere[$0.id] == nil }.sorted { $0.created < $1.created }.map { request in
+                MiniAppState.Request(id: request.id, project: projectName(request), tool: request.tool, summary: request.summary,
+                                     task: sessions.items.first { $0.id == request.sessionID }?.session.task)
+            },
+            canAnswer: canAnswer,
+            services: limitServices().map { usage in
+                MiniAppState.Service(
+                    title: usage.title,
+                    windows: (usage.rings + usage.bars).map {
+                        MiniAppState.Window(title: $0.title, percent: $0.percent, detail: $0.detail,
+                                            resetsAt: $0.showsReset ? $0.resetsAt : nil, runsOutAt: $0.runsOutAt)
+                    },
+                    error: usage.error, stale: usage.isStale
+                )
+            },
+            projects: projectList().sorted { ($0.lastActivity ?? .distantPast) > ($1.lastActivity ?? .distantPast) }
+                .map { MiniAppState.Project(key: BotRoute.projectKey($0.path), name: $0.name) },
+            runs: runs.runs.filter { $0.state == .running || ($0.finishedAt ?? .distantPast) > .now.addingTimeInterval(-86_400) }
+                .sorted { $0.startedAt > $1.startedAt }
+                .map { MiniAppState.Run(id: $0.id, project: $0.project, task: $0.task, state: $0.state.rawValue, paused: $0.isPaused,
+                                        startedAt: $0.startedAt, pr: $0.pullRequestURL) },
+            tasksAllowed: tasksAllowed,
+            commands: settings.quickCommands.map { MiniAppState.Command(id: $0.id, title: $0.title, confirm: $0.confirm) },
+            commandsAllowed: !usesSharedBot || settings.telegramBot.commandsOverShared == true,
+            events: BotEvent.allCases.map { MiniAppState.Event(id: $0.rawValue, title: $0.title, on: isOn($0)) },
+            quiet: settings.telegramBot.quietHours, quietPresets: QuietHours.presets,
+            mutedUntil: settings.telegramBot.mutedUntil.flatMap { $0 > .now ? $0 : nil },
+            hasDailyReport: FileManager.default.fileExists(atPath: report.path)
+        )
     }
 
     // MARK: - The menu and quick commands
@@ -730,6 +881,21 @@ final class TelegramBotController {
     func profileChanged() {
         guard isActive(), answersHere, !chatID.isEmpty, let sentMenu, sentMenu != currentMenu.entries.map(\.item) else { return }
         Task { await show(.home, tapID: nil) }
+    }
+
+    /// «Где меню» changed: the keyboard at the bottom comes back with 🏠, or goes away with a note where the menu is.
+    func applyMenuPlacement() async {
+        guard !chatID.isEmpty else { return }
+        if settings.telegramBot.bottomMenu == false {
+            var note = BotMessage(html: "☰ " + RunMessage.escape(usesSharedBot
+                ? String(localized: "Меню — в кнопке «Меню» слева от поля ввода: там всё приложение.")
+                : String(localized: "Меню — в кнопке «Меню» слева от поля ввода.")))
+            note.removesMenu = true
+            _ = await send(note)
+            sentMenu = nil
+        } else {
+            await show(.home, tapID: nil)
+        }
     }
 
     /// «Обновить меню в Telegram» in Settings.
@@ -875,7 +1041,7 @@ final class TelegramBotController {
     /// The new message's id.
     private func send(_ message: BotMessage) async -> Int? {
         var parameters: [String: Any] = ["chat_id": chatID, "text": message.html, "parse_mode": "HTML", "disable_web_page_preview": true]
-        if message.installsMenu || !message.buttons.isEmpty { parameters["reply_markup"] = message.replyMarkup }
+        if message.installsMenu || message.removesMenu || !message.buttons.isEmpty { parameters["reply_markup"] = message.replyMarkup }
         let (_, data) = await api("sendMessage", parameters, timeout: 20)
         let object = data.flatMap { (try? JSONSerialization.jsonObject(with: $0)) as? [String: Any] }
         return (object?["result"] as? [String: Any])?["message_id"] as? Int

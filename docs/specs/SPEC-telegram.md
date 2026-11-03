@@ -223,3 +223,38 @@ Asked and answered 2026-11-03:
   stage 2 moves requests here.
 - **A menu always at the bottom** instead of typing `/` (asked 2026-11-03): §2, «The menu at the bottom».
 - **A shared bot for everyone, through Cloudflare Workers** (2026-11-03): §7; «Свой бот» stays as the private option.
+
+## 10. Mini App
+
+Decided by Oleh 2026-11-03: the Menu button opens a page of its own — a Telegram Mini App — instead of a list of
+commands. The menu at the bottom stays, with «Где меню» in Settings to drop it. Oleh moves to the shared bot: a Mini App
+needs a public HTTPS address, so it lives on the relay (§7) and works with the shared bot only.
+
+**Where it lives.** The Worker serves the page at `GET /app` (one HTML file, `relay/telegram/src/app.html`: inline CSS
+and JS plus Telegram's own `telegram-web-app.js`). `/admin/setup` makes it the bot's default Menu button
+(`setChatMenuButton` `web_app`). Telegram's colours (`themeParams`) and the light or dark scheme come from Telegram.
+
+**Who is asking.** The page sends Telegram's `initData` with every call (`POST /v1/app`). The Worker checks its
+signature (HMAC-SHA-256 with the bot token, as Telegram documents) and that it is less than a day old; `user.id` is the
+private chat, so the page reaches only that chat's Macs. Nothing else identifies the page: no cookies, no keys in it.
+
+**How it gets data.** The Worker passes the call to the chat's answering Mac over its WebSocket (`{"type": "app", id,
+action, params}`) and waits up to 15 s for `{"type": "appReply", id, body}`. A Mac that is offline → the page says
+«💤 Mac mini не на связи» and keeps the last data it had. The Mac answers from the same stores as the bot screens.
+
+**Screens** (tabs at the bottom of the page): 🏠 Главная (Claude rings for session and week, sessions working /
+waiting, background runs, the Mac's name and disk), 🤖 Сессии (waiting first; requests with Разрешить / Отклонить and
+the whole command), 🚀 Задача (a project list, a text field, «Запустить в фоне»; running runs with log and stop;
+the last finished with PR links), ⏳ Лимиты (every AI service, a bar per window, reset, forecast), ••• Ещё (reports:
+AI since the morning / quick / 1 · 3 · 24 h; cleanup check / run; «Не спать»; quick commands; notifications, quiet
+hours, an hour of silence). Pull or the ↻ button refreshes; the page refreshes itself every 10 s while open.
+
+**Actions** (`action` values): `state` (everything above in one JSON), `answer` {id, allow}, `report` {ai, hours},
+`cleanup` {run}, `task` {project, text}, `taskForce` / `taskAfterReset` / `taskWorktree` {project}, `stopRun` {id},
+`log` {id}, `command` {id}, `event` {id, on}, `quiet` {from, to | null}, `mute` {on}, `keepAwake` {on}. The same rules
+as in the bot: over the shared bot answering, tasks and quick commands need their switches (§7), dangerous ones ask
+first (Telegram's own confirm dialog), and the Mac logs the action, not its text.
+
+**On the Mac.** `MiniAppState` (Codable, pure) is built from the stores; `TelegramBotController` answers `app`
+messages. Settings → Modules → Telegram → «Где меню»: «Внизу и в кнопке «Меню»» (default) / «Только в кнопке «Меню»»
+(the bottom keyboard is removed with `remove_keyboard`).

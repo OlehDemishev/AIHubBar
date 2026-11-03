@@ -1,0 +1,445 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AI Hub Bar</title>
+<!-- The Mini App of AI Hub Bar's shared bot (docs/specs/SPEC-telegram.md §10). Every call carries Telegram's initData;
+     the relay checks it and asks the Mac that answers this chat. ?demo=1 shows sample data outside Telegram. -->
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+  :root {
+    --bg: var(--tg-theme-bg-color, #ffffff);
+    --bg2: var(--tg-theme-secondary-bg-color, #f2f2f7);
+    --text: var(--tg-theme-text-color, #1c1c1e);
+    --hint: var(--tg-theme-hint-color, #8e8e93);
+    --link: var(--tg-theme-link-color, #2481cc);
+    --accent: var(--tg-theme-button-color, #2481cc);
+    --accent-text: var(--tg-theme-button-text-color, #ffffff);
+    --section: var(--tg-theme-section-bg-color, var(--bg));
+    --danger: var(--tg-theme-destructive-text-color, #e5484d);
+    --ok: #30a46c;
+    --warn: #f5a623;
+    --radius: 14px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-tg]) { --bg: #1c1c1e; --bg2: #000000; --text: #f2f2f7; --hint: #8e8e93; --section: #2c2c2e; }
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body { margin: 0; background: var(--bg2); color: var(--text); font: 15px/1.35 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif; }
+  body { padding: 0 0 calc(76px + env(safe-area-inset-bottom)); min-height: 100vh; }
+  header { position: sticky; top: 0; z-index: 5; display: flex; align-items: center; gap: 10px; padding: 12px 16px; background: var(--bg2); }
+  header h1 { flex: 1; margin: 0; font-size: 17px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--hint); flex: none; }
+  .dot.on { background: var(--ok); } .dot.off { background: var(--warn); }
+  .icon-btn { border: 0; background: var(--section); color: var(--link); width: 34px; height: 34px; border-radius: 50%; font-size: 17px; cursor: pointer; }
+  main { padding: 0 16px; }
+  .banner { margin: 0 0 12px; padding: 10px 14px; border-radius: var(--radius); background: color-mix(in srgb, var(--warn) 18%, var(--section)); font-size: 14px; }
+  .banner.error { background: color-mix(in srgb, var(--danger) 16%, var(--section)); }
+  h2 { margin: 18px 4px 8px; font-size: 13px; font-weight: 500; color: var(--hint); text-transform: uppercase; letter-spacing: .02em; }
+  .card { background: var(--section); border-radius: var(--radius); padding: 14px; margin-bottom: 10px; }
+  .list { background: var(--section); border-radius: var(--radius); overflow: hidden; margin-bottom: 10px; }
+  .row { display: flex; align-items: center; gap: 12px; padding: 12px 14px; min-height: 48px; }
+  .row + .row { border-top: 0.5px solid color-mix(in srgb, var(--hint) 30%, transparent); }
+  .row .grow { flex: 1; min-width: 0; }
+  .row .title { font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .row .sub { color: var(--hint); font-size: 13px; margin-top: 2px; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+  .row.tap { cursor: pointer; } .row.tap:active { background: var(--bg2); }
+  .emoji { font-size: 20px; width: 26px; text-align: center; flex: none; }
+  .chev { color: var(--hint); }
+  .tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+  .tile { background: var(--section); border-radius: var(--radius); padding: 14px; cursor: pointer; }
+  .tile .big { font-size: 26px; font-weight: 600; margin-top: 4px; }
+  .tile .label { color: var(--hint); font-size: 13px; }
+  .tile.alert { background: color-mix(in srgb, var(--warn) 22%, var(--section)); }
+  .rings { display: flex; justify-content: space-around; padding: 6px 0 2px; }
+  .ring { text-align: center; } .ring svg { display: block; margin: 0 auto 6px; }
+  .ring .pct { font-size: 20px; font-weight: 600; } .ring .cap { color: var(--hint); font-size: 12px; }
+  .bar { height: 8px; border-radius: 4px; background: color-mix(in srgb, var(--hint) 22%, transparent); overflow: hidden; margin: 6px 0 4px; }
+  .bar > i { display: block; height: 100%; border-radius: 4px; background: var(--accent); }
+  .bar > i.hi { background: var(--warn); } .bar > i.max { background: var(--danger); }
+  .win { margin-bottom: 12px; } .win:last-child { margin-bottom: 0; }
+  .win .top { display: flex; justify-content: space-between; gap: 8px; font-size: 14px; }
+  .win .meta { color: var(--hint); font-size: 12px; }
+  .warn { color: var(--warn); }
+  button.btn { border: 0; border-radius: 10px; padding: 10px 14px; font: inherit; font-weight: 500; cursor: pointer; background: var(--accent); color: var(--accent-text); }
+  button.btn.secondary { background: color-mix(in srgb, var(--accent) 14%, var(--section)); color: var(--link); }
+  button.btn.danger { background: color-mix(in srgb, var(--danger) 14%, var(--section)); color: var(--danger); }
+  button.btn:disabled { opacity: .45; cursor: default; }
+  .btns { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+  .btns .btn { flex: 1; min-width: 92px; }
+  pre { margin: 8px 0 0; padding: 10px; border-radius: 10px; background: var(--bg2); font: 12px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; white-space: pre-wrap; word-break: break-word; max-height: 220px; overflow: auto; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip { border: 0; padding: 8px 12px; border-radius: 18px; background: var(--section); color: var(--text); font: inherit; cursor: pointer; }
+  .chip.on { background: var(--accent); color: var(--accent-text); }
+  textarea { width: 100%; min-height: 96px; resize: vertical; border: 0; border-radius: var(--radius); padding: 12px 14px; background: var(--section); color: var(--text); font: inherit; outline: none; }
+  .switch { position: relative; width: 50px; height: 30px; flex: none; }
+  .switch input { opacity: 0; width: 0; height: 0; }
+  .switch span { position: absolute; inset: 0; border-radius: 15px; background: color-mix(in srgb, var(--hint) 40%, transparent); transition: background .2s; cursor: pointer; }
+  .switch span::after { content: ""; position: absolute; top: 2px; left: 2px; width: 26px; height: 26px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.25); transition: transform .2s; }
+  .switch input:checked + span { background: var(--ok); }
+  .switch input:checked + span::after { transform: translateX(20px); }
+  .empty { color: var(--hint); text-align: center; padding: 22px 14px; }
+  nav { position: fixed; left: 0; right: 0; bottom: 0; z-index: 6; display: grid; grid-template-columns: repeat(5, 1fr); padding: 6px 4px calc(6px + env(safe-area-inset-bottom)); background: var(--bg); border-top: 0.5px solid color-mix(in srgb, var(--hint) 30%, transparent); }
+  nav button { border: 0; background: none; color: var(--hint); font: 11px/1.2 inherit; padding: 4px 0; cursor: pointer; position: relative; }
+  nav button .e { display: block; font-size: 21px; margin-bottom: 2px; filter: grayscale(1); opacity: .7; }
+  nav button.on { color: var(--link); } nav button.on .e { filter: none; opacity: 1; }
+  nav .badge { position: absolute; top: 0; left: 55%; min-width: 17px; height: 17px; padding: 0 5px; border-radius: 9px; background: var(--danger); color: #fff; font-size: 11px; line-height: 17px; }
+  .toast { position: fixed; left: 16px; right: 16px; bottom: calc(84px + env(safe-area-inset-bottom)); z-index: 9; padding: 12px 14px; border-radius: 12px; background: color-mix(in srgb, var(--text) 88%, transparent); color: var(--bg); font-size: 14px; opacity: 0; transform: translateY(8px); transition: opacity .2s, transform .2s; pointer-events: none; }
+  .toast.show { opacity: 1; transform: none; }
+  .sheet { position: fixed; inset: 0; z-index: 10; background: rgba(0,0,0,.35); display: none; align-items: flex-end; }
+  .sheet.show { display: flex; }
+  .sheet .panel { width: 100%; max-height: 80vh; overflow: auto; background: var(--bg); border-radius: 18px 18px 0 0; padding: 16px 16px calc(16px + env(safe-area-inset-bottom)); }
+  .sheet h3 { margin: 0 0 8px; font-size: 16px; }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<header>
+  <span class="dot" id="dot"></span>
+  <h1 id="title">AI Hub Bar</h1>
+  <button class="icon-btn" id="refresh" aria-label="Refresh">↻</button>
+</header>
+<main id="main"></main>
+<nav id="tabs"></nav>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true"><div class="panel" id="sheetPanel"></div></div>
+<script>
+"use strict";
+const tg = window.Telegram && window.Telegram.WebApp;
+// A local file has no relay to ask: sample data then too.
+const demo = new URLSearchParams(location.search).has("demo") || !/^https?:$/.test(location.protocol);
+if (tg && tg.initData) document.documentElement.dataset.tg = "1";
+const lang = ((tg && tg.initDataUnsafe && tg.initDataUnsafe.user && tg.initDataUnsafe.user.language_code) || navigator.language || "en").slice(0, 2);
+const ru = ["ru", "uk", "be"].includes(lang);
+
+const T = ru ? {
+  home: "Главная", sessions: "Сессии", task: "Задача", limits: "Лимиты", more: "Ещё",
+  working: "работают", waiting: "ждут", runs: "Фоновые задачи", requests: "Запросы", disk: "Свободно",
+  session: "Сессия", week: "Неделя", noLimits: "Лимиты ещё не загружены", noSessions: "Сессий сейчас нет",
+  allow: "Разрешить", deny: "Отклонить", locked: "Отвечать отсюда нельзя — включите на Маке «Ответы на запросы через общий бот».",
+  pickProject: "Проект", taskPlaceholder: "Что сделать? Claude Code выполнит в фоне", run: "Запустить в фоне",
+  tasksLocked: "Задачи через общий бот выключены. На Маке: Настройки → Модули → Telegram → «Задачи через общий бот».",
+  noProjects: "Проектов нет: у профиля нет папки с git-проектами.", log: "Журнал", stop: "Остановить",
+  stopAsk: "Остановить эту задачу?", running: "Сейчас", finished: "Недавно", noRuns: "Фоновых задач нет",
+  anyway: "Всё равно", afterReset: "После сброса", worktree: "Да, в worktree", cancel: "Отмена",
+  reports: "Отчёты", aiMorning: "С AI с утра", quick: "Быстрая сводка", cleanup: "Очистка сборок",
+  cleanupCheck: "Что удалит", cleanupRun: "Очистить", cleanupAsk: "Удалить сборки, кэши и сбросить симуляторы?",
+  keepAwake: "Не спать", keepAwakeHint: "на 1 час", commands: "Быстрые команды", commandsLocked: "Через общий бот выключены — включите на Маке.",
+  runAsk: "Запустить на Маке?", notifications: "Уведомления в Telegram", quiet: "Тихие часы", none: "нет",
+  mute: "Тишина на 1 ч", unmute: "Снять тишину", mutedUntil: "Тишина до", offline: "не на связи — покажу, когда проснётся.",
+  noMac: "Этому чату пока не отвечает ни один Мак. В AI Hub Bar: Настройки → Модули → Telegram → «Подключить Telegram».",
+  unauthorized: "Откройте это окно кнопкой «Меню» в чате бота.", failed: "Не получилось", resets: "сброс через",
+  runsOut: "кончится к", min: "мин", h: "ч", d: "д", ago: "назад", stale: "устарело", job: "Сейчас идёт", empty: "пусто"
+} : {
+  home: "Home", sessions: "Sessions", task: "Task", limits: "Limits", more: "More",
+  working: "working", waiting: "waiting", runs: "Background tasks", requests: "Requests", disk: "Free",
+  session: "Session", week: "Week", noLimits: "Limits not loaded yet", noSessions: "No sessions right now",
+  allow: "Allow", deny: "Deny", locked: "You can't answer from here — on the Mac, turn on “Answers to requests over the shared bot”.",
+  pickProject: "Project", taskPlaceholder: "What to do? Claude Code runs it in the background", run: "Run in the background",
+  tasksLocked: "Tasks over the shared bot are off. On the Mac: Settings → Modules → Telegram → “Tasks over the shared bot”.",
+  noProjects: "No projects: the profile has no folder with git projects.", log: "Log", stop: "Stop",
+  stopAsk: "Stop this task?", running: "Now", finished: "Recent", noRuns: "No background tasks",
+  anyway: "Anyway", afterReset: "After the reset", worktree: "Yes, in a worktree", cancel: "Cancel",
+  reports: "Reports", aiMorning: "AI since morning", quick: "Quick summary", cleanup: "Build cleanup",
+  cleanupCheck: "What it deletes", cleanupRun: "Clean up", cleanupAsk: "Delete builds and caches and reset simulators?",
+  keepAwake: "Keep Awake", keepAwakeHint: "for 1 hour", commands: "Quick commands", commandsLocked: "Off over the shared bot — turn on on the Mac.",
+  runAsk: "Run on the Mac?", notifications: "Telegram alerts", quiet: "Quiet hours", none: "none",
+  mute: "Silence for 1 h", unmute: "End the silence", mutedUntil: "Silent until", offline: "is offline — it will show once it wakes up.",
+  noMac: "No Mac answers this chat yet. In AI Hub Bar: Settings → Modules → Telegram → “Connect Telegram”.",
+  unauthorized: "Open this with the Menu button in the bot's chat.", failed: "That didn't work", resets: "resets in",
+  runsOut: "runs out by", min: "min", h: "h", d: "d", ago: "ago", stale: "out of date", job: "Running", empty: "empty"
+};
+
+let state = null, tab = "home", project = null, banner = null, busy = false;
+
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const haptic = (kind) => { try { tg && tg.HapticFeedback && (kind === "ok" || kind === "error" ? tg.HapticFeedback.notificationOccurred(kind === "ok" ? "success" : "error") : tg.HapticFeedback.impactOccurred("light")); } catch (_) {} };
+const minutes = (date) => Math.max(0, Math.round((date * 1000 - Date.now()) / 60000));
+const duration = (m) => m >= 2880 ? `${Math.floor(m / 1440)} ${T.d} ${Math.floor(m % 1440 / 60)} ${T.h}`
+  : m >= 60 ? `${Math.floor(m / 60)} ${T.h} ${m % 60} ${T.min}` : `${m} ${T.min}`;
+const clock = (date) => new Date(date * 1000).toLocaleTimeString(ru ? "ru-RU" : undefined, { hour: "2-digit", minute: "2-digit" });
+const ago = (date) => duration(Math.max(0, Math.round((Date.now() - date * 1000) / 60000))) + " " + T.ago;
+const bytes = (n) => n >= 1e12 ? (n / 1e12).toFixed(1) + " TB" : (n / 1e9).toFixed(0) + " GB";
+
+function toast(text) {
+  const el = $("toast");
+  el.textContent = text;
+  el.classList.add("show");
+  clearTimeout(toast.timer);
+  toast.timer = setTimeout(() => el.classList.remove("show"), 2600);
+}
+
+function confirmAsk(text) {
+  return new Promise((resolve) => {
+    if (tg && tg.initData && tg.showConfirm) tg.showConfirm(text, resolve);
+    else resolve(window.confirm(text));
+  });
+}
+
+async function call(action, params = {}) {
+  if (demo) return demoCall(action, params);
+  const response = await fetch("/v1/app", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ initData: (tg && tg.initData) || "", action, params }),
+  }).catch(() => null);
+  if (!response) return { ok: false, error: T.failed };
+  const body = await response.json().catch(() => ({}));
+  if (response.status === 401) banner = { error: true, text: T.unauthorized };
+  else if (response.status === 404) banner = { text: T.noMac };
+  else if (response.status === 503 || response.status === 504) banner = { text: `💤 ${body.mac || "Mac"} ${T.offline}` };
+  else banner = null;
+  if (response.status !== 200) return { ok: false, offline: true };
+  return body;
+}
+
+async function act(action, params, { confirm } = {}) {
+  if (busy) return;
+  if (confirm && !(await confirmAsk(confirm))) return;
+  busy = true;
+  haptic();
+  const reply = await call(action, params);
+  busy = false;
+  if (reply.state) state = reply.state;
+  if (reply.question) return askQuestion(reply.question);
+  if (reply.note) { toast(reply.note); haptic("ok"); }
+  if (reply.ok === false && reply.error) { toast(reply.error); haptic("error"); }
+  render();
+  return reply;
+}
+
+function askQuestion(q) {
+  const buttons = q.limit
+    ? [{ id: "taskForce", text: T.anyway }, { id: "taskAfterReset", text: T.afterReset }, { id: "cancel", type: "cancel" }]
+    : [{ id: "taskWorktree", text: T.worktree }, { id: "cancel", type: "cancel" }];
+  const go = (id) => { if (id && id !== "cancel") act(id, { project: q.project }); else render(); };
+  if (tg && tg.initData && tg.showPopup) tg.showPopup({ message: q.text.slice(0, 250), buttons }, go);
+  else go(window.confirm(q.text) ? buttons[0].id : "cancel");
+}
+
+async function refresh() {
+  const reply = await call("state");
+  if (reply.state) state = reply.state;
+  render();
+}
+
+// MARK: Screens
+
+function ring(pct, label) {
+  const p = Math.max(0, Math.min(100, pct ?? 0)), r = 34, c = 2 * Math.PI * r;
+  const color = p >= 90 ? "var(--danger)" : p >= 75 ? "var(--warn)" : "var(--accent)";
+  return `<div class="ring"><svg width="84" height="84" viewBox="0 0 84 84" aria-hidden="true">
+    <circle cx="42" cy="42" r="${r}" fill="none" stroke="color-mix(in srgb, var(--hint) 22%, transparent)" stroke-width="8"/>
+    <circle cx="42" cy="42" r="${r}" fill="none" stroke="${color}" stroke-width="8" stroke-linecap="round"
+      stroke-dasharray="${(c * p / 100).toFixed(1)} ${c.toFixed(1)}" transform="rotate(-90 42 42)"/></svg>
+    <div class="pct">${pct == null ? "—" : Math.round(p) + " %"}</div><div class="cap">${esc(label)}</div></div>`;
+}
+
+function homeView() {
+  const claude = state.services.find((s) => s.title === "Claude");
+  const win = (i) => claude && claude.windows[i];
+  const working = state.sessions.filter((s) => !s.waiting).length, waiting = state.sessions.filter((s) => s.waiting).length;
+  const running = state.runs.filter((r) => r.state === "running").length;
+  let html = `<div class="card"><div class="rings">${ring(win(0)?.percent, T.session)}${ring(win(1)?.percent, T.week)}</div>`;
+  if (win(0)?.resetsAt) html += `<div class="win meta" style="text-align:center;margin-top:8px">${T.resets} ${duration(minutes(win(0).resetsAt))}${win(0).runsOutAt ? ` · <span class="warn">${T.runsOut} ${clock(win(0).runsOutAt)}</span>` : ""}</div>`;
+  if (!claude) html += `<div class="empty">${T.noLimits}</div>`;
+  html += `</div><div class="tiles">
+    <div class="tile${state.requests.length ? " alert" : ""}" data-tab="sessions"><div class="label">✋ ${T.requests}</div><div class="big">${state.requests.length}</div></div>
+    <div class="tile" data-tab="sessions"><div class="label">🤖 ${T.sessions}</div><div class="big">${working}<span class="label"> ${T.working}</span></div><div class="label">${waiting} ${T.waiting}</div></div>
+    <div class="tile" data-tab="task"><div class="label">🚀 ${T.runs}</div><div class="big">${running}</div></div>
+    <div class="tile" data-tab="more"><div class="label">💾 ${T.disk}</div><div class="big">${state.freeBytes ? bytes(state.freeBytes) : "—"}</div></div></div>`;
+  if (state.job) html += `<div class="banner">⏳ ${T.job}: ${esc(state.job)}</div>`;
+  return html;
+}
+
+function requestCard(r) {
+  return `<div class="card"><div class="title">✋ <b>${esc(r.project)}</b> — ${esc(r.tool)}</div>
+    ${r.summary ? `<pre>${esc(r.summary)}</pre>` : ""}${r.task ? `<div class="sub" style="margin-top:8px">${esc(r.task)}</div>` : ""}
+    ${state.canAnswer ? `<div class="btns"><button class="btn" data-act="answer" data-id="${esc(r.id)}" data-allow="1">✅ ${T.allow}</button>
+      <button class="btn danger" data-act="answer" data-id="${esc(r.id)}" data-allow="0">❌ ${T.deny}</button></div>` : `<div class="sub" style="margin-top:8px">🔒 ${T.locked}</div>`}</div>`;
+}
+
+function sessionsView() {
+  let html = "";
+  if (state.requests.length) html += `<h2>✋ ${T.requests}</h2>` + state.requests.map(requestCard).join("");
+  const list = [...state.sessions.filter((s) => s.waiting), ...state.sessions.filter((s) => !s.waiting)];
+  html += `<h2>🤖 ${T.sessions}</h2>`;
+  if (!list.length) return html + `<div class="list"><div class="empty">${T.noSessions}</div></div>`;
+  return html + `<div class="list">` + list.map((s) => `<div class="row"><span class="emoji">${s.waiting ? "✋" : "⚙️"}</span>
+    <div class="grow"><div class="title">${esc(s.project)} <span class="sub" style="display:inline">· ${esc(s.agent)}${s.since ? " · " + ago(s.since) : ""}</span></div>
+    ${s.detail ? `<div class="sub">${esc(s.detail)}</div>` : ""}</div></div>`).join("") + `</div>`;
+}
+
+function runRow(r) {
+  const live = r.state === "running";
+  const icon = live ? (r.paused ? "⏸" : "⚙️") : r.state === "succeeded" ? "✅" : "❌";
+  const meta = live ? duration(Math.round((Date.now() - r.startedAt * 1000) / 60000)) : ago(r.startedAt);
+  return `<div class="row"><span class="emoji">${icon}</span><div class="grow"><div class="title">${esc(r.project)}</div>
+    <div class="sub">${esc(r.task)} · ${meta}</div>
+    <div class="btns" style="margin-top:8px"><button class="btn secondary" data-act="log" data-id="${esc(r.id)}">📜 ${T.log}</button>
+    ${live && state.tasksAllowed ? `<button class="btn danger" data-act="stopRun" data-id="${esc(r.id)}">⏹ ${T.stop}</button>` : ""}
+    ${r.pr ? `<button class="btn secondary" data-link="${esc(r.pr)}">PR #${esc(r.pr.split("/").pop())}</button>` : ""}</div></div></div>`;
+}
+
+function taskView() {
+  let html = `<h2>🚀 ${T.task}</h2>`;
+  if (!state.tasksAllowed) html += `<div class="banner">🔒 ${T.tasksLocked}</div>`;
+  else if (!state.projects.length) html += `<div class="card empty">${T.noProjects}</div>`;
+  else {
+    if (!project || !state.projects.some((p) => p.key === project)) project = state.projects[0].key;
+    html += `<div class="chips" style="margin-bottom:10px">` + state.projects.slice(0, 16).map((p) =>
+      `<button class="chip${p.key === project ? " on" : ""}" data-project="${esc(p.key)}">${esc(p.name)}</button>`).join("") + `</div>
+      <textarea id="taskText" placeholder="${esc(T.taskPlaceholder)}" aria-label="${esc(T.task)}"></textarea>
+      <div class="btns"><button class="btn" id="runTask">▶️ ${T.run}</button></div>`;
+  }
+  const running = state.runs.filter((r) => r.state === "running"), finished = state.runs.filter((r) => r.state !== "running").slice(0, 5);
+  html += `<h2>${T.running}</h2>` + (running.length ? `<div class="list">${running.map(runRow).join("")}</div>` : `<div class="list"><div class="empty">${T.noRuns}</div></div>`);
+  if (finished.length) html += `<h2>${T.finished}</h2><div class="list">${finished.map(runRow).join("")}</div>`;
+  return html;
+}
+
+function limitsView() {
+  if (!state.services.length) return `<div class="card empty">${T.noLimits}</div>`;
+  return state.services.map((s) => `<h2>${esc(s.title)}${s.stale ? ` · ${T.stale}` : ""}</h2><div class="card">` +
+    (s.error && !s.windows.length ? `<div class="sub">⚠️ ${esc(s.error)}</div>` : "") +
+    s.windows.map((w) => {
+      const p = w.percent;
+      const cls = p == null ? "" : p >= 90 ? "max" : p >= 75 ? "hi" : "";
+      return `<div class="win"><div class="top"><span>${esc(w.title)}</span><b>${p == null ? esc(w.detail || "") : Math.round(p) + " %"}</b></div>
+        ${p == null ? "" : `<div class="bar"><i class="${cls}" style="width:${Math.min(100, p)}%"></i></div>`}
+        <div class="meta">${w.resetsAt && w.resetsAt * 1000 > Date.now() ? `${T.resets} ${duration(minutes(w.resetsAt))}` : ""}${w.runsOutAt ? ` · <span class="warn">${T.runsOut} ${clock(w.runsOutAt)}</span>` : ""}</div></div>`;
+    }).join("") + `</div>`).join("");
+}
+
+function toggleRow(emoji, title, on, attrs, sub) {
+  return `<label class="row"><span class="emoji">${emoji}</span><div class="grow"><div class="title">${esc(title)}</div>${sub ? `<div class="sub">${esc(sub)}</div>` : ""}</div>
+    <span class="switch"><input type="checkbox" ${on ? "checked" : ""} ${attrs}><span></span></span></label>`;
+}
+
+function moreView() {
+  let html = "";
+  if (state.hasDailyReport) {
+    html += `<h2>📊 ${T.reports}</h2><div class="card"><div class="btns" style="margin-top:0">
+      <button class="btn" data-act="report" data-ai="1">✨ ${T.aiMorning}</button><button class="btn secondary" data-act="report" data-ai="0">⚡ ${T.quick}</button></div>
+      <div class="btns">${[1, 3, 24].map((h) => `<button class="btn secondary" data-act="report" data-ai="1" data-hours="${h}">✨ ${h} ${T.h}</button>`).join("")}</div></div>
+      <h2>🧹 ${T.cleanup}</h2><div class="card"><div class="btns" style="margin-top:0">
+      <button class="btn secondary" data-act="cleanup" data-run="0">🔍 ${T.cleanupCheck}</button><button class="btn danger" data-act="cleanup" data-run="1">🧹 ${T.cleanupRun}</button></div></div>`;
+  }
+  html += `<h2>🖥 ${esc(state.mac)}</h2><div class="list">`;
+  if (state.keepAwake != null) html += toggleRow("☕", T.keepAwake, state.keepAwake, `data-toggle="keepAwake"`, T.keepAwakeHint);
+  html += `<div class="row"><span class="emoji">💾</span><div class="grow"><div class="title">${T.disk}</div></div><b>${state.freeBytes ? bytes(state.freeBytes) : "—"}</b></div></div>`;
+  if (state.commands.length) {
+    html += `<h2>▶️ ${T.commands}</h2>` + (state.commandsAllowed ? "" : `<div class="banner">🔒 ${T.commandsLocked}</div>`) + `<div class="list">` +
+      state.commands.map((c) => `<div class="row${state.commandsAllowed ? " tap" : ""}" ${state.commandsAllowed ? `data-act="command" data-id="${esc(c.id)}" data-confirm="${c.confirm ? 1 : 0}" data-title="${esc(c.title)}"` : ""}>
+        <span class="emoji">▶️</span><div class="grow"><div class="title">${esc(c.title)}</div></div><span class="chev">›</span></div>`).join("") + `</div>`;
+  }
+  html += `<h2>🔔 ${T.notifications}</h2><div class="list">` +
+    state.events.map((e) => toggleRow("•", e.title, e.on, `data-event="${esc(e.id)}"`)).join("") + `</div>`;
+  const q = state.quiet;
+  html += `<h2>🌙 ${T.quiet}</h2><div class="chips" style="margin-bottom:10px"><button class="chip${q ? "" : " on"}" data-quiet="">${T.none}</button>` +
+    state.quietPresets.map((p) => `<button class="chip${q && q.from === p.from && q.to === p.to ? " on" : ""}" data-quiet="${p.from}:${p.to}">${String(p.from).padStart(2, "0")}–${String(p.to).padStart(2, "0")}</button>`).join("") + `</div>`;
+  html += `<div class="btns">` + (state.mutedUntil
+    ? `<button class="btn secondary" data-act="mute" data-on="0">🔔 ${T.unmute} (${T.mutedUntil} ${clock(state.mutedUntil)})</button>`
+    : `<button class="btn secondary" data-act="mute" data-on="1">🔕 ${T.mute}</button>`) + `</div>`;
+  return html;
+}
+
+const TABS = [["home", "🏠"], ["sessions", "🤖"], ["task", "🚀"], ["limits", "⏳"], ["more", "•••"]];
+
+function render() {
+  $("tabs").innerHTML = TABS.map(([id, e]) => `<button class="${id === tab ? "on" : ""}" data-tab="${id}" aria-label="${esc(T[id])}">
+    <span class="e">${e}</span>${esc(T[id])}${id === "sessions" && state && state.requests.length ? `<span class="badge">${state.requests.length}</span>` : ""}</button>`).join("");
+  $("dot").className = "dot " + (state && !banner ? "on" : banner ? "off" : "");
+  $("title").textContent = state ? state.mac : "AI Hub Bar";
+  const top = banner ? `<div class="banner${banner.error ? " error" : ""}">${esc(banner.text)}</div>` : "";
+  if (!state) { $("main").innerHTML = top || `<div class="empty">…</div>`; return; }
+  const draft = $("taskText") ? $("taskText").value : "";
+  $("main").innerHTML = top + ({ home: homeView, sessions: sessionsView, task: taskView, limits: limitsView, more: moreView }[tab])();
+  if ($("taskText")) $("taskText").value = draft;
+}
+
+document.addEventListener("click", async (event) => {
+  const el = event.target.closest("[data-tab],[data-act],[data-project],[data-quiet],[data-link],#runTask,#refresh");
+  if (!el) return;
+  if (el.id === "refresh") { haptic(); return refresh(); }
+  if (el.dataset.tab) { tab = el.dataset.tab; haptic(); window.scrollTo(0, 0); return render(); }
+  if (el.dataset.project) { project = el.dataset.project; return render(); }
+  if (el.dataset.link) { return tg && tg.openLink ? tg.openLink(el.dataset.link) : window.open(el.dataset.link); }
+  if (el.dataset.quiet !== undefined) {
+    const [from, to] = el.dataset.quiet ? el.dataset.quiet.split(":").map(Number) : [null, null];
+    return act("quiet", from == null ? {} : { from, to });
+  }
+  if (el.id === "runTask") {
+    const text = $("taskText").value.trim();
+    if (!text) return $("taskText").focus();
+    const name = (state.projects.find((p) => p.key === project) || {}).name || "";
+    const reply = await act("task", { project, text }, { confirm: `${T.run}: ${name}?\n\n${text.slice(0, 300)}` });
+    if (reply && reply.ok && !reply.question && $("taskText")) $("taskText").value = "";
+    return;
+  }
+  const d = el.dataset;
+  switch (d.act) {
+    case "answer": return act("answer", { id: d.id, allow: d.allow === "1" });
+    case "report": return act("report", { ai: d.ai === "1", ...(d.hours ? { hours: Number(d.hours) } : {}) });
+    case "cleanup": return act("cleanup", { run: d.run === "1" }, d.run === "1" ? { confirm: T.cleanupAsk } : {});
+    case "stopRun": return act("stopRun", { id: d.id }, { confirm: T.stopAsk });
+    case "mute": return act("mute", { on: d.on === "1" });
+    case "command": return act("command", { id: d.id }, d.confirm === "1" ? { confirm: `${d.title}: ${T.runAsk}` } : {});
+    case "log": {
+      const reply = await call("log", { id: d.id });
+      const icons = { text: "💬", tool: "🔧", result: "✅", error: "❌" };
+      $("sheetPanel").innerHTML = `<h3>📜 ${T.log}</h3><pre style="max-height:60vh">${(reply.log || []).map((l) => esc(icons[l.kind] + " " + l.text)).join("\n") || T.empty}</pre>
+        <div class="btns"><button class="btn secondary" id="closeSheet">OK</button></div>`;
+      $("sheet").classList.add("show");
+      return;
+    }
+  }
+});
+
+document.addEventListener("change", (event) => {
+  const input = event.target;
+  if (input.dataset.event) act("event", { id: input.dataset.event, on: input.checked });
+  if (input.dataset.toggle === "keepAwake") act("keepAwake", { on: input.checked });
+});
+
+$("sheet").addEventListener("click", (event) => {
+  if (event.target.id === "sheet" || event.target.id === "closeSheet") $("sheet").classList.remove("show");
+});
+
+// MARK: Demo data (?demo=1): the page without Telegram or a Mac, for checking the layout.
+
+function demoCall(action) {
+  const now = Date.now() / 1000;
+  if (!demoCall.state) demoCall.state = {
+    mac: "Mac mini", freeBytes: 182e9, keepAwake: false, job: null, canAnswer: true, tasksAllowed: true, commandsAllowed: true, hasDailyReport: true,
+    sessions: [{ project: "Ambo", agent: "Claude", waiting: true, detail: "Ждёт ответа", since: now - 300 },
+               { project: "ClaudePult", agent: "Claude", waiting: false, detail: "Правит TelegramBot.swift", since: now - 60 }],
+    requests: [{ id: "0f3a9c", project: "Ambo", tool: "Bash", summary: "rm -rf build && xcodebuild test", task: "Почини сборку" }],
+    services: [{ title: "Claude", stale: false, windows: [{ title: "Сессия", percent: 42, resetsAt: now + 7800, runsOutAt: now + 5400 }, { title: "Неделя", percent: 12, resetsAt: now + 400000 }] },
+               { title: "Codex", stale: false, windows: [{ title: "5 ч", percent: 81, resetsAt: now + 3000 }] },
+               { title: "OpenRouter", stale: false, windows: [{ title: "Баланс", detail: "$4.20" }] }],
+    projects: [{ key: "0a1b2c3d", name: "ClaudePult" }, { key: "0a1b2c3e", name: "Ambo" }, { key: "0a1b2c3f", name: "Cantero" }],
+    runs: [{ id: "r-1", project: "Cantero", task: "Обнови зависимости и прогони тесты", state: "running", paused: false, startedAt: now - 720 },
+           { id: "r-2", project: "Ambo", task: "Почини CI", state: "succeeded", paused: false, startedAt: now - 7200, pr: "https://github.com/example/ambo/pull/41" }],
+    commands: [{ id: "c-1", title: "Собрать Cantero", confirm: true }, { id: "c-2", title: "Мой IP в сети", confirm: false }],
+    events: [{ id: "bg", title: "Итоги фоновых задач", on: true }, { id: "lim", title: "Пороги лимитов", on: true }, { id: "req", title: "Запросы разрешений", on: true }],
+    quiet: { from: 23, to: 8 }, quietPresets: [{ from: 22, to: 8 }, { from: 23, to: 8 }, { from: 0, to: 9 }], mutedUntil: null,
+  };
+  const s = demoCall.state;
+  if (action === "log") return Promise.resolve({ ok: true, log: [{ kind: "tool", text: "Read Package.swift" }, { kind: "text", text: "Обновляю зависимости" }] });
+  return Promise.resolve({ ok: true, state: s, note: action === "state" ? null : "✓ " + action });
+}
+
+if (tg) {
+  tg.ready();
+  tg.expand();
+  if (tg.setHeaderColor) try { tg.setHeaderColor("secondary_bg_color"); } catch (_) {}
+}
+render();
+refresh();
+setInterval(() => { if (!document.hidden && !busy) refresh(); }, 10000);
+</script>
+</body>
+</html>

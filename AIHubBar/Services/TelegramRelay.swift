@@ -10,6 +10,8 @@ enum RelayMessage {
         case update(Data)
         case reply(id: Int, status: Int, body: Data?)
         case pairCode(id: Int, link: URL?)
+        /// A Mini App call (§10): its id, the action and the parameters as JSON.
+        case app(id: Int, action: String, parameters: Data)
     }
 
     static func decode(_ text: String) -> Event? {
@@ -28,6 +30,10 @@ enum RelayMessage {
         case "pairCode":
             guard let id = object["id"] as? Int else { return nil }
             return .pairCode(id: id, link: (object["link"] as? String).flatMap(URL.init(string:)))
+        case "app":
+            guard let id = object["id"] as? Int, let action = object["action"] as? String else { return nil }
+            let parameters = (object["params"] as? [String: Any]).flatMap { try? JSONSerialization.data(withJSONObject: $0) } ?? Data("{}".utf8)
+            return .app(id: id, action: action, parameters: parameters)
         default:
             return nil
         }
@@ -40,6 +46,11 @@ enum RelayMessage {
     static func pair(id: Int) -> String { encode(["type": "pair", "id": id]) }
     static func answer(_ on: Bool) -> String { encode(["type": "answer", "on": on]) }
     static let unpair = #"{"type":"unpair"}"#
+
+    /// The reply to a Mini App call; `body` is JSON already.
+    static func appReply(id: Int, body: Data) -> String {
+        #"{"type":"appReply","id":"# + "\(id)" + #","body":"# + String(decoding: body, as: UTF8.self) + "}"
+    }
 
     /// Updates in `getUpdates`' shape, so `BotUpdate.parse` reads them like the own bot's.
     static func updatesResponse(_ updates: [Data]) -> Data {
@@ -76,6 +87,8 @@ final class TelegramRelay {
     private(set) var answering = false
     private(set) var macs = 0
     private(set) var lastError: String?
+    /// Answers the Mini App's calls (`TelegramBotController.handleApp`).
+    @ObservationIgnored var onApp: ((String, Data) async -> Data)?
 
     private var socket: URLSessionWebSocketTask?
     private var loop: Task<Void, Never>?
@@ -215,6 +228,12 @@ final class TelegramRelay {
             calls.removeValue(forKey: id)?.resume(returning: (status, body))
         case let .pairCode(id, link):
             pairings.removeValue(forKey: id)?.resume(returning: link)
+        case let .app(id, action, parameters):
+            Task { [weak self] in
+                guard let self, let onApp else { return }
+                let body = await onApp(action, parameters)
+                socket?.send(.string(RelayMessage.appReply(id: id, body: body))) { _ in }
+            }
         }
     }
 
