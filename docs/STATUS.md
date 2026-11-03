@@ -5,7 +5,7 @@
 **Updated:** 2026-11-03
 
 **Now:**
-- refactoring stage 6 (services) on branch `refactor/stage6-services`, PR open; next — stage 7, docs and names
+- nothing in progress; refactoring stage 6 merged (#221, services); next — stage 7, docs and names (docs/SPEC-refactor.md §9)
 
 **Next:**
 - Oleh tries «Раскладка» in his own apps; next beta with fixes: `scripts/release.sh 0.5.0-beta.1 --publish`
@@ -13,7 +13,7 @@
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/SPEC-windows.md §9, stage 2–3 leftovers)
 
 **Needs Oleh:**
-- review and merge the stage 6 PR
+- say when to start stage 7 (docs, STATUS archive, Mode→Profile and project renames)
 - look at the new help: panel → «?» and https://olehdemishev.github.io/AIHubBar/help.html
 - look at the new Settings and say what to change next
 - MacBook Air: update to 0.4.0 through Sparkle (Settings → General → Updates) and check the island at the real notch
