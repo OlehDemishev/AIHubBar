@@ -6,7 +6,7 @@
 
 **Now:**
 - Telegram: Worker deployed at https://aihubbar-telegram.oleh-demishev.workers.dev (new bot, old bots deleted by Oleh); the app points at it — pairing and a live check next
-- merged 2026-11-06: #262 donations («Поддержать проект» in Settings → General, site/support.html with Ko-fi and GitHub Sponsors; the app button reaches people with the next release)
+- merged 2026-11-06: #262 donations («Поддержать проект» in Settings → General, site/support.html with Ko-fi, GitHub Sponsors and Buy Me a Coffee; the app button reaches people with the next release)
 - merged 2026-11-03: #251 menu bar ☕ follows the «Не спать» switch, #248 «Не спать» on/off in the menu bar, #241 Codex states, #240 quick command shortcuts, #238 «Быстрый запрос», #236 content spec, #242 «Telegram» stage 1, #244 menu at the bottom, #246 shared bot (Worker not deployed yet), #247 desktop CI off for Mac string changes, #249 the bot's menu set up by each person, #252 stage 2 (sessions, requests, limits), #254 stage 3 (tasks and runs), #255 stage 4 (settings in the bot), #256 Mini App
 
 **Next:**
@@ -15,7 +15,7 @@
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/specs/SPEC-windows.md §9, stage 2–3 leftovers)
 
 **Needs Oleh:**
-- donations: repository Settings → General → Features → Sponsorships on, for the Sponsor button. Buy Me a Coffee only if wanted (its card in site/support.html is ready)
+- donations: repository Settings → General → Features → Sponsorships on, for the Sponsor button
 - Telegram: Settings → Modules → Telegram → «Общий бот» → «Подключить Telegram» → Start (`_daily-report/config.json` already points at @AIHubBarBot)
 - Telegram: delete `_daily-report/bot.py` and `install-bot.sh`
 - «Быстрый запрос»: Settings → Modules → «Быстрый запрос» on, then ⌃⌥P from Terminal or Xcode — send one task to the background and one to Codex
@@ -27,6 +27,12 @@
 - MacBook Air: update to 0.6.0 through Sparkle (Settings → General → Updates) and check the island at the real notch
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-06 — Buy Me a Coffee on the support page (branch `feat/buy-me-a-coffee`)
+
+Done: the Buy Me a Coffee card in site/support.html is live (buymeacoffee.com/olehdemishev), added to `.github/FUNDING.yml`. The Ko-fi card now says one-off or monthly.
+Checked: the Buy Me a Coffee page opened as a visitor and shows its payment form; scripts/strings-check.py not needed, only the site, FUNDING and STATUS changed.
+Left: the Sponsor button in the repository needs Sponsorships turned on by Oleh.
 
 ## 2026-11-06 — Donations (branch `feat/donations`)
 
