@@ -4,12 +4,11 @@ import Foundation
 /// settings the assistant also asks about (menu bar, panel blocks, reminders). Nothing is saved until «Готово».
 struct AssistantDraft: Equatable, Sendable {
     enum Step: String, CaseIterable, Sendable {
-        case welcome, importSettings, template, modules, folder, stages, metrics, calendar, service, commands, launch, menuBar, name
+        case welcome, template, modules, folder, stages, metrics, calendar, service, commands, launch, menuBar, name, finish
 
         var title: String {
             switch self {
             case .welcome: String(localized: "Добро пожаловать в AI Hub Bar")
-            case .importSettings: String(localized: "Перенести настройки?")
             case .template: String(localized: "Чем вы занимаетесь?")
             case .folder: String(localized: "Где лежат проекты?")
             case .stages: String(localized: "Этапы")
@@ -21,6 +20,7 @@ struct AssistantDraft: Equatable, Sendable {
             case .modules: String(localized: "Что будет в панели")
             case .menuBar: String(localized: "Строка меню")
             case .name: String(localized: "Название и значок")
+            case .finish: String(localized: "Всё готово")
             }
         }
     }
@@ -69,6 +69,8 @@ struct AssistantDraft: Equatable, Sendable {
     var reminderHours: [Int]
     var analysis: FolderAnalysis?
     var step: Step
+    /// A first launch asks only what can't be guessed; the rest comes with «Настроить подробнее».
+    private(set) var detailed: Bool
     /// What «Проекты» and «Ближайшее» had before they were switched off, to bring it back when switched on again.
     private var savedSource: ProjectSource?
     private var savedCalendar: CalendarMode?
@@ -81,6 +83,7 @@ struct AssistantDraft: Equatable, Sendable {
         self.menuBar = menuBar
         self.hiddenModules = hiddenModules
         self.reminderHours = reminderHours
+        detailed = !firstLaunch
         step = firstLaunch ? .welcome : .template
     }
 
@@ -91,16 +94,25 @@ struct AssistantDraft: Equatable, Sendable {
     )
 
     /// The steps that apply: the project steps only with «Проекты» (SPEC-profiles §5); cards, stages, metrics,
-    /// calendar and commands only for folder projects.
+    /// calendar and commands only for folder projects. The short path of a first launch stops after the folder.
     var steps: [Step] {
         Step.allCases.filter { step in
             switch step {
-            case .welcome, .importSettings: firstLaunch
-            case .folder, .service, .launch: hasProjects
-            case .stages, .metrics, .calendar, .commands: mode.source.isFolders
-            default: true
+            case .welcome, .finish: firstLaunch
+            case .template, .modules: true
+            case .folder: hasProjects
+            case .service, .launch: detailed && hasProjects
+            case .stages, .metrics, .calendar, .commands: detailed && mode.source.isFolders
+            case .menuBar, .name: detailed
             }
         }
+    }
+
+    /// «Настроить подробнее» on the last screen of the short path.
+    mutating func showAllSteps() {
+        let short = steps
+        detailed = true
+        step = steps.first { !short.contains($0) } ?? step
     }
 
     // MARK: Modules (SPEC-profiles §5)
@@ -113,6 +125,7 @@ struct AssistantDraft: Equatable, Sendable {
     @MainActor static var offeredModules: [ModuleKind] {
         [.limits, .sessions, .projects, .upcoming, .resources, .keepAwake, .quickCommands, .toggles, .clipboard, .notes]
             + (NotchGeometry.macHasNotch ? [.notch] : [])
+            + [ModuleKind.layout, .quickPrompt, .telegram].filter { !$0.isBeta }
     }
 
     func hasModule(_ kind: ModuleKind) -> Bool {

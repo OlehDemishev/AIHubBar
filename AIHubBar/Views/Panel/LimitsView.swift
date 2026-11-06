@@ -6,6 +6,8 @@ struct LimitsView: View {
     @Environment(HubLimitsStore.self) private var hub
     @Environment(LaunchController.self) private var launcher
     @Environment(CommandEngine.self) private var engine
+    @Environment(AIServiceStore.self) private var services
+    @Environment(AppSettings.self) private var settings
     @AppStorage(StorageKey.limitsBreakdownExpanded) private var showBreakdown = false
     @State private var period: UsageStore.Period = .session
     @AppStorage(StorageKey.collapsedBlocks) private var collapsedRaw = ""
@@ -44,6 +46,22 @@ struct LimitsView: View {
                 Label("API за месяц: \(SpendText.line(month))", systemImage: "cpu")
                     .scaledFont(.caption)
                     .foregroundStyle(.secondary)
+            }
+        } else if usage.signedOut, services.hasScanned, services.agents[.claudeCode] == nil {
+            VStack(alignment: .leading, spacing: 6) {
+                Text("Лимиты подписки показывает Claude Code.")
+                    .scaledFont(.caption)
+                    .foregroundStyle(.secondary)
+                Button("Установить Claude Code") { ClaudeSignIn.openInstallPage() }
+                    .controlSize(.small)
+            }
+        } else if usage.signedOut {
+            VStack(alignment: .leading, spacing: 6) {
+                Text("Чтобы видеть лимиты подписки, войдите в Claude Code.")
+                    .scaledFont(.caption)
+                    .foregroundStyle(.secondary)
+                Button("Войти в Claude Code") { ClaudeSignIn.start(usage: usage, claudePath: settings.claudePath) }
+                    .controlSize(.small)
             }
         } else if let error = usage.lastError {
             Label("Лимиты недоступны. \(error)", systemImage: "exclamationmark.triangle")

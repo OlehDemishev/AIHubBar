@@ -10,19 +10,20 @@ struct AssistantDraftTests {
     @Test func stepsDependOnTheSource() throws {
         var d = draft(firstLaunch: true)
         #expect(d.step == .welcome, "a new Mac starts with the welcome screen")
-        d.next()
-        #expect(d.step == .importSettings)
+        #expect(d.steps == [.welcome, .template, .modules, .folder, .finish], "a first launch takes the short path")
+        d.showAllSteps()
+        #expect(d.step == .stages, "«Настроить подробнее» goes on from where the short path ended")
         #expect(d.steps.count == AssistantDraft.Step.allCases.count)
+        d.step = .welcome
         d.mode.source = .gitBuiltin(projects: "~/Code")
         #expect(!d.steps.contains(.stages) && !d.steps.contains(.commands) && !d.steps.contains(.calendar))
-        #expect(draft().steps.first == .template, "welcome and import only on the first launch")
+        #expect(draft().steps.first == .template, "the welcome screen only on the first launch")
+        #expect(draft().steps.last == .name)
         d.next()
-        #expect(d.step == .template)
-        d.back()
-        #expect(d.step == .importSettings && !d.isFirst)
+        #expect(d.step == .template && !d.isFirst)
         d.back()
         #expect(d.step == .welcome && d.isFirst)
-        d.step = .name
+        d.step = .finish
         #expect(d.isLast)
     }
 

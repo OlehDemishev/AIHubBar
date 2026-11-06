@@ -14,11 +14,12 @@ struct ReadinessItem: Equatable, Identifiable, Sendable {
     }
 
     enum Action: Equatable, Sendable {
-        case openServices, installHooks, updateHooks, allowNotifications, openNotificationSettings, enableLoginItem, openLoginItems
+        case installClaude, signInClaude, installHooks, updateHooks, allowNotifications, openNotificationSettings, enableLoginItem, openLoginItems
 
         var title: String {
             switch self {
-            case .openServices: String(localized: "Открыть «Сервисы AI»")
+            case .installClaude: String(localized: "Установить Claude Code")
+            case .signInClaude: String(localized: "Войти в Claude Code")
             case .installHooks: String(localized: "Установить hooks")
             case .updateHooks: String(localized: "Обновить hooks")
             case .allowNotifications: String(localized: "Разрешить")
@@ -41,6 +42,8 @@ enum Readiness {
     struct Input: Sendable {
         /// nil = Claude Code not found; "" = found, version unknown.
         var claudeVersion: String?
+        /// Claude Code has no valid sign-in, seen from the limits request. Nothing else reads the Keychain for this.
+        var claudeSignedOut = false
         /// Other usable services: installed agents and API keys, by title.
         var otherServices: [String]
         /// False while the first search for agents and keys is still running.
@@ -61,6 +64,11 @@ enum Readiness {
 
     private static func service(_ input: Input) -> ReadinessItem {
         let title = String(localized: "Сервис AI")
+        if input.claudeVersion != nil, input.claudeSignedOut {
+            return ReadinessItem(id: .service, title: title,
+                                 detail: String(localized: "Claude Code найден, но вход не выполнен: без него нет лимитов подписки."),
+                                 state: .todo, action: .signInClaude)
+        }
         if let version = input.claudeVersion {
             let found = version.isEmpty ? "Claude Code" : "Claude Code \(version)"
             let others = input.otherServices.isEmpty ? "" : String(localized: "; ещё: ") + input.otherServices.joined(separator: ", ")
@@ -75,8 +83,8 @@ enum Readiness {
                                  state: .done)
         }
         return ReadinessItem(id: .service, title: title,
-                             detail: String(localized: "Ничего не найдено. Установите Claude Code (claude.com/claude-code) или вставьте ключ API в Настройках → «Сервисы AI»."),
-                             state: .todo, action: .openServices)
+                             detail: String(localized: "Ничего не найдено. Установите Claude Code или вставьте ключ API в Настройках → «Сервисы AI»."),
+                             state: .todo, action: .installClaude)
     }
 
     private static func hooks(_ input: Input) -> ReadinessItem {

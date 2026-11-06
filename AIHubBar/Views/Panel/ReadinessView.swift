@@ -42,9 +42,10 @@ struct ReadinessList: View {
 struct ReadinessSection: View {
     @Environment(AIServiceStore.self) private var services
     @Environment(HookController.self) private var hooks
+    @Environment(UsageStore.self) private var usage
     @Environment(NotificationPermission.self) private var notifications
     @Environment(LoginItemController.self) private var loginItem
-    @Environment(\.openSettingsPage) private var openSettings
+    @Environment(AppSettings.self) private var settings
     /// In «Помощь» a Mac with nothing left to do gets one line instead of four rows.
     var collapsesWhenReady = false
     @State private var expanded = false
@@ -61,6 +62,12 @@ struct ReadinessSection: View {
                 }
             } else {
                 ReadinessList(items: items, perform: perform)
+                if hooks.isError, let message = hooks.message {
+                    Label(message, systemImage: "exclamationmark.triangle")
+                        .font(.caption)
+                        .foregroundStyle(.orange)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
                 Button("Проверить снова", action: refresh)
                     .controlSize(.small)
                     .disabled(services.isScanning)
@@ -78,6 +85,7 @@ struct ReadinessSection: View {
         }
         return Readiness.Input(
             claudeVersion: services.agents[.claudeCode].map { $0.version ?? "" },
+            claudeSignedOut: usage.signedOut,
             otherServices: AgentKind.allCases.filter { $0 != .claudeCode && services.agents[$0] != nil }.map(\.title)
                 + APIProvider.allCases.filter { services.hasKey.contains($0) }.map(\.title),
             servicesChecked: services.hasScanned,
@@ -92,12 +100,13 @@ struct ReadinessSection: View {
         notifications.refresh()
         loginItem.refresh()
         Task { await services.scan() }
+        if usage.signedOut { Task { await usage.refresh() } }
     }
 
     private func perform(_ action: ReadinessItem.Action) {
         switch action {
-        case .openServices:
-            openSettings(.service(.claude))
+        case .installClaude: ClaudeSignIn.openInstallPage()
+        case .signInClaude: ClaudeSignIn.start(usage: usage, claudePath: settings.claudePath)
         case .installHooks, .updateHooks: hooks.install()
         case .allowNotifications: notifications.request()
         case .openNotificationSettings: NotificationPermission.openSystemSettings()

@@ -21,7 +21,15 @@ struct ReadinessTests {
 
     @Test func service() {
         let none = item(.service, input(claude: nil))
-        #expect(none.state == .todo && none.action == .openServices)
+        #expect(none.state == .todo && none.action == .installClaude)
+        var signedOut = input()
+        signedOut.claudeSignedOut = true
+        #expect(item(.service, signedOut).state == .todo && item(.service, signedOut).action == .signInClaude)
+        var signedOutWithoutClaude = input(claude: nil)
+        signedOutWithoutClaude.claudeSignedOut = true
+        #expect(item(.service, signedOutWithoutClaude).action == .installClaude, "no sign-in to ask for without Claude Code")
+        #expect(UsageError.noCredentials.needsSignIn && UsageError.http(401).needsSignIn)
+        #expect(!UsageError.http(500).needsSignIn && !UsageError.keychainDenied.needsSignIn)
         let other = item(.service, input(claude: nil, others: ["OpenAI"]))
         #expect(other.state == .done && other.detail.contains("OpenAI"), "another service is enough to start")
         #expect(item(.service, input(claude: "")).detail.contains("Claude Code."), "unknown version")
