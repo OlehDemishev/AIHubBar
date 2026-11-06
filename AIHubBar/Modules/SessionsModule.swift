@@ -9,7 +9,7 @@ extension ModuleDefinition {
         group: .ai,
         symbol: "bubble.left.and.text.bubble.right",
         title: String(localized: "Сессии агентов"),
-        summary: String(localized: "Сессии Claude Code на этом Маке и фоновые задачи. Нужны hooks — «Сервисы AI» → Claude Code."),
+        summary: String(localized: "Сессии Claude Code на этом Маке и фоновые задачи. Включается на этой странице."),
         tagline: String(localized: "Claude Code, фоновые задачи, очередь"),
         isBuiltIn: true,
         places: ModulePlace.allCases,
@@ -53,17 +53,17 @@ struct SessionSection: View {
     var body: some View {
         @Bindable var settings = settings
         Section {
-            IconRow("Hooks", systemImage: "link") {
+            IconRow("Отслеживание сессий", systemImage: "link") {
                 Text(hooks.status.title)
                     .foregroundStyle(hooks.status == .installed ? .green : hooks.status == .outdated ? .orange : .secondary)
             }
             HStack {
                 // «Обновить» only when something is out of date: installed hooks need nothing.
                 if hooks.status != .installed {
-                    Button(hooks.status == .notInstalled ? String(localized: "Установить hooks") : String(localized: "Обновить hooks")) { hooks.install() }
+                    Button(hooks.status == .notInstalled ? String(localized: "Включить отслеживание") : String(localized: "Обновить отслеживание")) { hooks.install() }
                 }
                 if hooks.status != .notInstalled {
-                    Button("Снять hooks") { hooks.uninstall() }
+                    Button("Выключить отслеживание") { hooks.uninstall() }
                 }
             }
             if let message = hooks.message {
@@ -154,7 +154,7 @@ struct TelegramApprovalsSection: View {
                     }
                 }
             }
-            TextField("ID чата", text: $settings.telegramApprovalsChatID, prompt: Text("как в «Основные → Telegram»"))
+            TextField("ID чата", text: $settings.telegramApprovalsChatID, prompt: Text("как на странице «Telegram»"))
             HStack {
                 Button("Проверить") {
                     busy = true
@@ -168,7 +168,7 @@ struct TelegramApprovalsSection: View {
         } header: {
             Text("Ответы из Telegram")
         } footer: {
-            Footnote(text: String(localized: "Нужен отдельный бот, не тот, что в «Основные → Telegram»: эти ответы бот получает через свои обновления, а у основного бота их может читать другая программа (например, бот _daily-report), и они забирали бы сообщения друг у друга. Создайте бота в @BotFather (/newbot), вставьте его токен, откройте бота в Telegram и нажмите «Start», затем «Проверить». Кнопки принимаются только из указанного чата."))
+            Footnote(text: String(localized: "Нужен отдельный бот, не тот, что на странице «Telegram»: эти ответы бот получает через свои обновления, а у основного бота их может читать другая программа (например, бот _daily-report), и они забирали бы сообщения друг у друга. Создайте бота в @BotFather (/newbot), вставьте его токен, откройте бота в Telegram и нажмите «Start», затем «Проверить». Кнопки принимаются только из указанного чата."))
         }
     }
 }

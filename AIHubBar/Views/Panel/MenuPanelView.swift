@@ -255,8 +255,8 @@ struct MenuPanelView: View {
         Button {
             NSApp.activate()
             openWindow(.help)
-        } label: { Label("Помощь", systemImage: "questionmark.circle").labelStyle(.iconOnly) }
-        .help("Помощь")
+        } label: { Label("Справка", systemImage: "questionmark.circle").labelStyle(.iconOnly) }
+        .help("Справка")
         Button { NSApp.terminate(nil) } label: { Label("Выйти из AI Hub Bar (⌘Q)", systemImage: "power").labelStyle(.iconOnly) }
             .help("Выйти из AI Hub Bar (⌘Q)")
             .keyboardShortcut("q", modifiers: .command)

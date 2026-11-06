@@ -30,6 +30,12 @@
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
 
+## 2026-11-06 — Settings and texts (branch `feat/settings-polish`)
+
+Done: the sidebar lists the modules in use; the rest stay in «Модули» and the search, «Отчёты» only on a Mac with `_daily-report`. New page «Клавиши» with every shortcut. Deleting a profile asks first. One name for each action: «Запустить» for runs, «Справка» for help. «Отслеживание сессий» replaces hooks in everyday text; the technical footnotes keep the word. Old pointers fixed («этап 4», «Основные → Telegram», «в низу панели»). 23 changed strings in 12 languages, most built from the existing translations.
+Checked: scripts/check.sh passed.
+Left: site/help is exported again after the last change of this plan.
+
 ## 2026-11-06 — Panel polish (branch `feat/panel-polish`)
 
 Done: the forecast reads as one line when both limits last («хватит и на сессию, и на неделю»), «неделе до сброса хватит» is gone. The week's days are slim bars with their percentage and a caption. Cards on glass get a tint of the window colour and block titles are no longer grey there. «Сессии» shows how many are active, and stays in place with «нет активных» when none are; the hint no longer appears without Claude Code. Search takes focus when the panel opens, ↑ ↓ move the selection, ↵ works for folder projects and background runs. Session rows have a context menu and a VoiceOver action; icon-only buttons have labels; the session pulse follows Reduce Motion. «Сравнить» says why a service failed instead of «ещё выполняется». 6 new strings in 12 languages.

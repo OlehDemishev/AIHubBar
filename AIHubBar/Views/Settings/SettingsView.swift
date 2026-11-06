@@ -88,13 +88,18 @@ struct SettingsView: View {
         case .panel: PanelBuilder()
         case .appearance: AppearanceSettings()
         case .menuBar: MenuBarSettings()
+        case .shortcuts: ShortcutsSettings()
         case let .module(kind): ModulePage(kind: kind).id(kind)
         case let .service(service): ServicePage(service: service).id(service)
         }
     }
 
-    /// «Раскладка» is offered only with beta builds (SPEC-layout).
-    private func isListed(_ kind: ModuleKind) -> Bool { !kind.isBeta || settings.betaUpdates }
+    /// The sidebar lists what is in use; the rest is in «Модули» and in the search. A module in beta testing needs
+    /// beta builds, and «Отчёты» only exist on a Mac with `_daily-report`.
+    private func isListed(_ kind: ModuleKind) -> Bool {
+        guard !kind.isBeta || settings.betaUpdates, kind != .reports || modes.hasDailyReport else { return false }
+        return modes.isOn(kind) || !query.isEmpty || pane == .module(kind)
+    }
 
     private func isOn(_ pane: SettingsPane) -> Bool {
         guard case let .module(kind) = pane else { return true }

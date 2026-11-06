@@ -116,7 +116,7 @@ enum HelpTopic: String, CaseIterable, Identifiable, Sendable {
             [String(localized: "Пороги уведомлений — на странице «Лимиты AI»."),
              String(localized: "Другие AI подключаются в «Сервисы AI»: вход в их CLI или ключ API.")]
         case .sessions:
-            [String(localized: "Установите hooks: страница «Сессии агентов» → Hooks."),
+            [String(localized: "Включите отслеживание на странице «Сессии агентов»."),
              String(localized: "Отвечайте на запросы разрешений прямо из уведомления или строки сессии.")]
         case .services:
             [String(localized: "Настройки → «Сервисы AI»: зелёная точка — сервис найден или настроен.")]
@@ -184,7 +184,7 @@ enum HelpTopic: String, CaseIterable, Identifiable, Sendable {
                 HelpFact(ModuleKind.quickPrompt.title, String(localized: "⌃⌥P в любом приложении: задача, проект (тот, что впереди, или прошлый) и агент — ⌘↩, и она в фоне или в Терминале. Модуль «Быстрый запрос», клавиша — на его странице."), symbol: ModuleKind.quickPrompt.symbol),
                 HelpFact(String(localized: "Журнал"), String(localized: "Фоновая задача: что делает Claude, по шагам."), symbol: "doc.text"),
                 HelpFact(String(localized: "Остановить"), String(localized: "Фоновая задача: остановить сейчас."), symbol: "stop.circle"),
-                HelpFact("Hooks", String(localized: "Сессии видны, только если в Настройках установлены hooks (они дописываются в ~/.claude/settings.json, копия сохраняется рядом)."), symbol: "link"),
+                HelpFact(String(localized: "Отслеживание сессий"), String(localized: "Сессии видны, только если отслеживание включено: небольшой скрипт дописывается в ~/.claude/settings.json, копия сохраняется рядом."), symbol: "link"),
                 HelpFact(String(localized: "Codex и Copilot"), String(localized: "Их сессии тоже показывают «работает / ждёт / готово», если на их странице в «Сервисах AI» установлен hook AI Hub Bar. Codex запускает новый hook только после проверки: в codex введите /hooks и доверьте его. Без hook — только недавние беседы, без состояния."), symbol: "person.2"),
             ])]
         case .services:

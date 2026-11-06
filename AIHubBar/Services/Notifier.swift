@@ -171,7 +171,7 @@ enum Notifier {
 
     static func postTest() {
         post(id: "test", title: String(localized: "AI Hub Bar: уведомления работают"),
-             body: String(localized: "Кликните — откроется окно «Помощь»."), target: .window(id: "help"))
+             body: String(localized: "Кликните — откроется окно «Справка»."), target: .window(id: "help"))
     }
 
     /// The person's choice per kind (Settings); set by the app at launch.

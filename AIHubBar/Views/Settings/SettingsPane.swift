@@ -3,11 +3,11 @@ import SwiftUI
 /// A page of Settings, listed in the sidebar like System Settings (SPEC-settings §2): the app's own areas, the
 /// modules by section, and «Сервисы AI» with a page per AI.
 enum SettingsPane: Hashable, Sendable, RawRepresentable {
-    case general, modes, modules, panel, appearance, menuBar
+    case general, modes, modules, panel, appearance, menuBar, shortcuts
     case module(ModuleKind)
     case service(ServiceTab)
 
-    static let areas: [SettingsPane] = [.general, .modes, .appearance, .modules, .panel, .menuBar]
+    static let areas: [SettingsPane] = [.general, .modes, .appearance, .modules, .panel, .menuBar, .shortcuts]
     static let services: [SettingsPane] = ServiceTab.allCases.map(SettingsPane.service)
 
     /// How the page is stored (`StorageKey.settingsPage`): «general», «module.limits», «service.claude»…
@@ -19,6 +19,7 @@ enum SettingsPane: Hashable, Sendable, RawRepresentable {
         case .panel: "panel"
         case .appearance: "appearance"
         case .menuBar: "menuBar"
+        case .shortcuts: "shortcuts"
         case let .module(kind): "module." + kind.rawValue
         case let .service(service): "service." + service.rawValue
         }
@@ -45,6 +46,7 @@ enum SettingsPane: Hashable, Sendable, RawRepresentable {
         case .panel: String(localized: "Панель")
         case .appearance: String(localized: "Внешний вид")
         case .menuBar: String(localized: "Строка меню")
+        case .shortcuts: String(localized: "Клавиши")
         case let .module(kind): kind.title
         case let .service(service): service.title
         }
@@ -58,6 +60,7 @@ enum SettingsPane: Hashable, Sendable, RawRepresentable {
         case .panel: String(localized: "Какие блоки показывать и в каком порядке")
         case .appearance: String(localized: "Тема, фон и размер текста панели")
         case .menuBar: String(localized: "Что показывать рядом со значком")
+        case .shortcuts: String(localized: "Все сочетания клавиш в одном месте")
         case let .module(kind): kind.summary
         case .service(.claude): String(localized: "Путь, свои промпты, CLAUDE.md и MCP")
         case .service(.codex): String(localized: "Агент, лимиты и ключ OpenAI")
@@ -75,6 +78,7 @@ enum SettingsPane: Hashable, Sendable, RawRepresentable {
         case .panel: "rectangle.stack"
         case .appearance: "paintbrush"
         case .menuBar: "menubar.rectangle"
+        case .shortcuts: "keyboard"
         case let .module(kind): kind.symbol
         case let .service(service): service.icon
         }
@@ -83,7 +87,7 @@ enum SettingsPane: Hashable, Sendable, RawRepresentable {
     /// The icon tile's colour, as in System Settings; modules by their section.
     var tint: Color {
         switch self {
-        case .general, .modes, .modules, .panel, .appearance, .menuBar: .gray
+        case .general, .modes, .modules, .panel, .appearance, .menuBar, .shortcuts: .gray
         case let .module(kind): kind.group.tint
         case .service(.claude): .orange
         case .service(.codex): .black
@@ -115,6 +119,8 @@ enum SettingsPane: Hashable, Sendable, RawRepresentable {
              String(localized: "Ширина"), String(localized: "Плотность строк")]
         case .menuBar:
             MenuBarElement.Kind.allCases.map(\.title)
+        case .shortcuts:
+            [String(localized: "Сочетание клавиш"), String(localized: "Открывать поиск с клавиатуры"), String(localized: "Быстрый запрос")]
         case let .service(service):
             service.agents.map(\.title) + service.providers.map(\.title) + service.hubSources.map(\.title)
                 + (service == .claude ? [String(localized: "Путь к claude"), String(localized: "Свои промпты")] : [])

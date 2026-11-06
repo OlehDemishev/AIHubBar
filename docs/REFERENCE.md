@@ -79,7 +79,7 @@ Generates `AIHubBar.xcodeproj` from `project.yml`, builds Release, installs `~/A
 
 First steps after installing:
 
-1. “Settings…” → “AI Services” → “Claude Code” → “Install hooks” (adds AI Hub Bar's hook to `~/.claude/settings.json`, backup saved next to it).
+1. “Settings…” → “Agent sessions” → “Turn On Tracking” (adds AI Hub Bar's hook to `~/.claude/settings.json`, backup saved next to it).
 2. Optionally “Start at login”.
 3. The first “Terminal” launch makes macOS ask to let AI Hub Bar control Terminal — allow it; notifications — allow them.
 4. For the limits, macOS may ask whether `security` may read “Claude Code-credentials” — “Always Allow”.
@@ -91,6 +91,7 @@ Notifications are clickable: “Claude is waiting for an answer” → the sessi
 
 “Settings…” (⌘,), one tab per area:
 
+- **Shortcuts** — every shortcut on one page: search, “Quick Prompt”, the island’s request keys and each quick command. The modules keep theirs too.
 - **General** — start at login, a pointer to the “Telegram” module (the bot moved there), projects folder, `_daily-report` folder, feedback (“Suggest an Idea…” / “Report a Problem…” open the repository's issue forms, `.github/ISSUE_TEMPLATE`, with `version` and `macos` filled through the link's query; also at the bottom of “Help”), “Offer to send a report after a crash”, “Support the project” (opens `site/support.html`, where the donation platforms are listed; the app never asks by itself), version, app log.
 - **Appearance** — theme (system / light / dark, also for AI Hub Bar's windows), text size (small / normal / large / extra large; the panel widens with it), panel width, row density, opening animation, which blocks to show (Limits, Sessions, Projects, Commands), “Reset appearance”.
 - **Menu Bar** — the menu bar builder (SPEC-modes §7): presets “Minimum” / “Limits” / “Everything” / “Custom”; elements in order, each on/off with its options (icon symbol or the mode's icon; session / week / model week as number, ring or bar, shown always or from N %; reset countdown “2:14” or “2 h 14 min”; forecast; waiting, running sessions, background runs, queued launches — only when > 0; free disk below N GB; current mode as icon or name); separator, small text, colour by level or mono; live preview with “Now” / “Everything example” and a warning when the item gets wider than 180 pt; under the preview the switched-on elements as chips in menu bar order — drag one onto another to move it there (the ˄ ˅ buttons in the list still work). CLI: `AIHubBar --menubar-preview <file.png> [minimum|limits|everything]` draws the item (dark and light) with sample data.
@@ -115,7 +116,7 @@ Full rule set: `AIHubBar --background-settings`. Log: `~/Library/Application Sup
 
 ## Session hooks
 
-The hook (`~/Library/Application Support/ClaudePult/hooks/claudepult-hook.py`) listens to `SessionStart`, `UserPromptSubmit`, `PermissionRequest`, `Notification`, `PostToolUse`, `Stop`, `StopFailure`, `SessionEnd` and writes one file per session to `~/Library/Application Support/ClaudePult/sessions/<session_id>.json` (state, cwd, project, first/last prompt up to 200 characters, Claude's pid and tty). It prints nothing and always exits 0, so it never changes what Claude does. “Remove hooks” removes only AI Hub Bar's entries. Session files older than 7 days are deleted.
+The hook (`~/Library/Application Support/ClaudePult/hooks/claudepult-hook.py`) listens to `SessionStart`, `UserPromptSubmit`, `PermissionRequest`, `Notification`, `PostToolUse`, `Stop`, `StopFailure`, `SessionEnd` and writes one file per session to `~/Library/Application Support/ClaudePult/sessions/<session_id>.json` (state, cwd, project, first/last prompt up to 200 characters, Claude's pid and tty). It prints nothing and always exits 0, so it never changes what Claude does. “Turn Off Tracking” removes only AI Hub Bar's entries. Session files older than 7 days are deleted.
 
 ## Command line
 

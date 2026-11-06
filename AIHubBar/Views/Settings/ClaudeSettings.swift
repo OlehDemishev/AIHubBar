@@ -38,11 +38,11 @@ struct ClaudeSettings: View {
             } header: {
                 Text("CLAUDE.md и MCP")
             } footer: {
-                Footnote(text: String(localized: "Отдельное окно: все CLAUDE.md и AGENTS.md (общие и проектов) с поиском и правкой, и MCP-серверы Claude Code с выключателем. То же окно — значок в низу панели."))
+                Footnote(text: String(localized: "Отдельное окно: все CLAUDE.md и AGENTS.md (общие и проектов) с поиском и правкой, и MCP-серверы Claude Code с выключателем."))
             }
 
             Section {
-                Button("Сессии, hooks и фоновые задачи — «Сессии агентов»…") { SettingsRoute.open(module: .sessions) }
+                Button("Сессии и фоновые задачи — «Сессии агентов»…") { SettingsRoute.open(module: .sessions) }
                     .buttonStyle(.link)
             }
         }

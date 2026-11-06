@@ -76,7 +76,7 @@ struct ModuleCatalog: View {
         }
     }
 
-    private var listed: [ModuleKind] { ModuleKind.allCases.filter { !$0.isBeta || settings.betaUpdates } }
+    private var listed: [ModuleKind] { ModuleKind.allCases.filter { (!$0.isBeta || settings.betaUpdates) && ($0 != .reports || modes.hasDailyReport) } }
     private var onCount: Int { listed.filter(modes.isOn).count }
     private var presets: [Preset] { Preset.allCases.filter { $0 != .layout || settings.betaUpdates } }
 
