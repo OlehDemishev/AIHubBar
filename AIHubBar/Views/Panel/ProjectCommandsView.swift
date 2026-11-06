@@ -78,7 +78,7 @@ struct ProjectCommandsView: View {
                     TextField(asking.asks ?? String(localized: "Текст"), text: $text)
                         .textFieldStyle(.roundedBorder)
                         .onSubmit { perform(asking) }
-                    Button("Выполнить") { perform(asking) }
+                    Button("Запустить") { perform(asking) }
                         .disabled(text.trimmingCharacters(in: .whitespaces).isEmpty)
                     Button("Отмена") { self.asking = nil; text = "" }
                 }

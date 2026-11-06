@@ -6,6 +6,7 @@ import UniformTypeIdentifiers
 struct ProfilesSettings: View {
     @Environment(ProfileStore.self) private var modes
     @Environment(\.openWindow) private var openWindow
+    @State private var confirmingDelete = false
     @State private var selection: String?
 
     var body: some View {
@@ -86,11 +87,19 @@ struct ProfilesSettings: View {
                 .menuStyle(.borderlessButton)
                 .fixedSize()
                 .help("Экспорт и импорт")
-                Button(role: .destructive) {
-                    if let id = selection { modes.delete(id); selection = modes.currentID }
-                } label: { Label("Удалить профиль", systemImage: "trash").labelStyle(.iconOnly) }
+                Button(role: .destructive) { confirmingDelete = true } label: {
+                    Label("Удалить профиль", systemImage: "trash").labelStyle(.iconOnly)
+                }
                 .disabled(selection == nil || modes.modes.isEmpty)
                 .help("Удалить профиль")
+                .confirmationDialog("Удалить профиль?", isPresented: $confirmingDelete) {
+                    Button("Удалить", role: .destructive) {
+                        if let id = selection { modes.delete(id); selection = modes.currentID }
+                    }
+                    Button("Отмена", role: .cancel) {}
+                } message: {
+                    Text("Настройки профиля пропадут. Папки проектов останутся на месте.")
+                }
             }
             .buttonStyle(.borderless)
             .padding(8)
@@ -231,7 +240,7 @@ private struct ProfileEditor: View {
             } header: {
                 Text("Сервис AI")
             } footer: {
-                Text("Сервис команд-шаблонов профиля (этап 4). Агенты и ключи — Настройки → «Сервисы AI».").font(.caption).foregroundStyle(.secondary)
+                Text("Сервис команд-шаблонов профиля. Агенты и ключи — Настройки → «Сервисы AI».").font(.caption).foregroundStyle(.secondary)
             }
 
             if mode.source.isFolders {

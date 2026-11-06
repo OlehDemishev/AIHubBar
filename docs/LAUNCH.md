@@ -35,7 +35,7 @@ Watch after each step: DMG downloads, stars, repository traffic (`gh api repos/O
 - **"Why is it unsigned?"** No Apple Developer ID yet; the source is open and can be built with `scripts/build-and-install.sh`.
 - **"It reads my Claude token?"** It reads Claude Code's sign-in from the Keychain on each refresh and never stores it. It talks to the AI services you use and to GitHub for updates. There are no analytics. The only server of ours is the relay of the optional shared Telegram bot, which logs no message text.
 - **"Is the limits API official?"** No. It is an undocumented Anthropic usage endpoint, so it can change or stop working. Say this plainly, don't wait to be asked.
-- **"Does the hook change what Claude does?"** No, it only writes small status files on the Mac, and Settings → AI Services → Claude Code → Remove hooks takes it out.
+- **"Does the hook change what Claude does?"** No, it only writes small status files on the Mac, and Settings → Agent sessions → Turn Off Tracking takes it out.
 
 ## r/ClaudeAI
 

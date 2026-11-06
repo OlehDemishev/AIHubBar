@@ -20,8 +20,8 @@ struct ReadinessItem: Equatable, Identifiable, Sendable {
             switch self {
             case .installClaude: String(localized: "Установить Claude Code")
             case .signInClaude: String(localized: "Войти в Claude Code")
-            case .installHooks: String(localized: "Установить hooks")
-            case .updateHooks: String(localized: "Обновить hooks")
+            case .installHooks: String(localized: "Включить отслеживание")
+            case .updateHooks: String(localized: "Обновить отслеживание")
             case .allowNotifications: String(localized: "Разрешить")
             case .openNotificationSettings, .openLoginItems: String(localized: "Открыть Системные настройки")
             case .enableLoginItem: String(localized: "Включить")
@@ -94,12 +94,12 @@ enum Readiness {
         }
         switch input.hooks {
         case .installed:
-            return ReadinessItem(id: .hooks, title: title, detail: String(localized: "Hooks установлены: сессии видны в панели."), state: .done)
+            return ReadinessItem(id: .hooks, title: title, detail: String(localized: "Отслеживание включено: сессии видны в панели."), state: .done)
         case .outdated:
-            return ReadinessItem(id: .hooks, title: title, detail: String(localized: "Hooks устарели — обновите их."), state: .todo, action: .updateHooks)
+            return ReadinessItem(id: .hooks, title: title, detail: String(localized: "Отслеживание устарело — обновите его."), state: .todo, action: .updateHooks)
         case .notInstalled:
             return ReadinessItem(id: .hooks, title: title,
-                                 detail: String(localized: "Список сессий и «Claude ждёт ответа» работают через hooks: AI Hub Bar добавит свой в ~/.claude/settings.json, сохранив резервную копию."),
+                                 detail: String(localized: "Список сессий и «Claude ждёт ответа» работают через небольшой скрипт: AI Hub Bar добавит его в ~/.claude/settings.json, сохранив резервную копию."),
                                  state: .todo, action: .installHooks)
         }
     }

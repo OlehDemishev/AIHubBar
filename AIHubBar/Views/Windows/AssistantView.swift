@@ -138,7 +138,7 @@ struct AssistantView: View {
             Text("AI Hub Bar живёт в строке меню (✦): проекты, лимиты подписки Claude, сессии и команды для AI — в одной панели. Сначала проверим, что всё готово, потом настроим первый профиль.")
                 .fixedSize(horizontal: false, vertical: true)
             ReadinessSection()
-            Text("Всё это можно сделать и позже: в Настройках и в окне «Помощь».")
+            Text("Всё это можно сделать и позже: в Настройках и в окне «Справка».")
                 .font(.caption).foregroundStyle(.secondary)
             ImportConfirmation()
             HStack {
@@ -155,7 +155,7 @@ struct AssistantView: View {
     private func finishStep(_ draft: Binding<AssistantDraft>) -> some View {
         VStack(alignment: .leading, spacing: 14) {
             Label("Панель открывается по значку ✦ в строке меню.", systemImage: "menubar.arrow.up.rectangle")
-            Label("Поиск по проектам, сессиям и командам — из любой программы, сочетанием в Настройках → «Основные».", systemImage: "magnifyingglass")
+            Label("Поиск по проектам, сессиям и командам — из любой программы, сочетанием в Настройках → «Клавиши».", systemImage: "magnifyingglass")
             Label("Модули, профили и внешний вид меняются в Настройках в любой момент.", systemImage: "gearshape")
             if !draft.wrappedValue.detailed {
                 Button("Настроить подробнее…") { withAnimation(.snappy) { draft.wrappedValue.showAllSteps() } }

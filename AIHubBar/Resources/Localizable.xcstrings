@@ -18668,6 +18668,82 @@
         }
       }
     },
+    "Включите отслеживание на странице «Сессии агентов».": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "فعّل التتبّع في صفحة «جلسات الوكلاء»."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schalten Sie die Erfassung auf der Seite „Agentensitzungen“ ein."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Turn on tracking on the “Agent sessions” page."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activa el seguimiento en la página «Sesiones de agentes»."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activez le suivi sur la page « Sessions des agents »."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aktifkan pelacakan di halaman “Sesi agen”."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Attiva il monitoraggio nella pagina «Sessioni degli agenti»."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「エージェントのセッション」ページで追跡をオンにしてください。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "‘에이전트 세션’ 페이지에서 추적을 켜세요."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Włącz śledzenie na stronie „Sesje agentów”."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ative o acompanhamento na página “Sessões de agentes”."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Увімкніть відстеження на сторінці «Сесії агентів»."
+          }
+        }
+      }
+    },
     "Включите отслеживание, чтобы видеть сессии Claude.": {
       "localizations": {
         "ar": {
@@ -19348,6 +19424,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Увімкнути модуль"
+          }
+        }
+      }
+    },
+    "Включить отслеживание": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تفعيل التتبّع"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Erfassung einschalten"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Turn On Tracking"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activar el seguimiento"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activer le suivi"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aktifkan pelacakan"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Attiva il monitoraggio"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "追跡をオンにする"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "추적 켜기"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Włącz śledzenie"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ativar acompanhamento"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Увімкнути відстеження"
           }
         }
       }
@@ -20492,6 +20644,82 @@
         }
       }
     },
+    "Все сочетания клавиш в одном месте": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "كل الاختصارات في مكان واحد"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alle Kurzbefehle an einem Ort"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Every shortcut in one place"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Todos los atajos en un solo lugar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tous les raccourcis au même endroit"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Semua pintasan di satu tempat"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tutte le scorciatoie in un unico posto"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "すべてのショートカットを一か所に"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "모든 단축키를 한곳에서"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wszystkie skróty w jednym miejscu"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Todos os atalhos em um só lugar"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Усі поєднання клавіш в одному місці"
+          }
+        }
+      }
+    },
     "Встроенный сканер git: ветки, незакоммиченное, stash, PR и CI (если есть gh), шапка STATUS.md. Промты Claude — по правилам самого проекта (CLAUDE.md / AGENTS.md).": {
       "extractionState": "stale",
       "localizations": {
@@ -20798,6 +21026,82 @@
       }
     },
     "Всё это можно сделать и позже: в Настройках и в окне «Помощь».": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يمكنك فعل كل هذا لاحقًا أيضًا، في الإعدادات ونافذة «المساعدة»."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "All das geht auch später, in den Einstellungen und im Hilfe-Fenster."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You can also do all of this later, in Settings and in the Help window."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "También puedes hacerlo más tarde, en Ajustes y en la ventana Ayuda."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vous pourrez aussi le faire plus tard, dans les Réglages et la fenêtre Aide."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Semua ini juga bisa dilakukan nanti, di Pengaturan dan jendela Bantuan."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Puoi farlo anche più tardi, nelle Impostazioni e nella finestra Aiuto."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "これらはあとから「設定」や「ヘルプ」ウインドウでも行えます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이 모든 것은 나중에 설정과 도움말 창에서도 할 수 있습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wszystko to można zrobić też później: w Ustawieniach i w oknie Pomoc."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Você também pode fazer tudo isso depois, em Ajustes e na janela Ajuda."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Усе це можна зробити й пізніше: у Налаштуваннях і у вікні «Допомога»."
+          }
+        }
+      }
+    },
+    "Всё это можно сделать и позже: в Настройках и в окне «Справка».": {
       "localizations": {
         "ar": {
           "stringUnit": {
@@ -22542,6 +22846,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Вимкнути модуль: перестане працювати, місце в профілях збережеться"
+          }
+        }
+      }
+    },
+    "Выключить отслеживание": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إيقاف التتبّع"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Erfassung ausschalten"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Turn Off Tracking"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Desactivar el seguimiento"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Désactiver le suivi"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nonaktifkan pelacakan"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Disattiva il monitoraggio"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "追跡をオフにする"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "추적 끄기"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wyłącz śledzenie"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Desativar acompanhamento"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Вимкнути відстеження"
           }
         }
       }
@@ -36692,6 +37072,82 @@
         }
       }
     },
+    "Клавиши": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الاختصارات"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kurzbefehle"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Shortcuts"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Atajos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Raccourcis"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pintasan"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scorciatoie"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ショートカット"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "단축키"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skróty"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Atalhos"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Клавіші"
+          }
+        }
+      }
+    },
     "Клик включает или убирает элемент; его можно и перетащить в нужное место в порядке. Элементов выключенных модулей здесь нет.": {
       "localizations": {
         "ar": {
@@ -37225,6 +37681,82 @@
       }
     },
     "Кликните — откроется окно «Помощь».": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "انقر — تُفتح نافذة «المساعدة»."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Klick — das Fenster „Hilfe“ öffnet sich."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Click — the “Help” window opens."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Haz clic — se abrirá la ventana «Ayuda»."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cliquez — la fenêtre «Aide» s'ouvre."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Klik — jendela «Bantuan» terbuka."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clic — si apre la finestra «Aiuto»."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "クリック — 「ヘルプ」ウィンドウが開きます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "클릭 — «도움말» 창이 열립니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kliknięcie — otworzy się okno „Pomoc”."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clique — a janela «Ajuda» abre."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Клікніть — відкриється вікно «Допомога»."
+          }
+        }
+      }
+    },
+    "Кликните — откроется окно «Справка».": {
       "localizations": {
         "ar": {
           "stringUnit": {
@@ -46427,6 +46959,82 @@
         }
       }
     },
+    "Настройки профиля пропадут. Папки проектов останутся на месте.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ستُفقد إعدادات ملف التعريف. تبقى مجلدات المشاريع في مكانها."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Einstellungen des Profils gehen verloren. Projektordner bleiben, wo sie sind."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The profile's settings will be lost. Project folders stay where they are."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se perderán los ajustes del perfil. Las carpetas de proyectos se quedan donde están."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les réglages du profil seront perdus. Les dossiers de projets restent en place."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pengaturan profil akan hilang. Folder proyek tetap di tempatnya."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le impostazioni del profilo andranno perse. Le cartelle dei progetti restano al loro posto."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "プロファイルの設定は失われます。プロジェクトのフォルダはそのまま残ります。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "프로필 설정이 사라집니다. 프로젝트 폴더는 그대로 유지됩니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ustawienia profilu zostaną utracone. Foldery projektów pozostaną na miejscu."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Os ajustes do perfil serão perdidos. As pastas de projetos continuam onde estão."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Налаштування профілю зникнуть. Папки проєктів залишаться на місці."
+          }
+        }
+      }
+    },
     "Настройки раскладки…": {
       "localizations": {
         "ar": {
@@ -54214,6 +54822,82 @@
         }
       }
     },
+    "Нужен отдельный бот, не тот, что на странице «Telegram»: эти ответы бот получает через свои обновления, а у основного бота их может читать другая программа (например, бот _daily-report), и они забирали бы сообщения друг у друга. Создайте бота в @BotFather (/newbot), вставьте его токен, откройте бота в Telegram и нажмите «Start», затем «Проверить». Кнопки принимаются только из указанного чата.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يلزم بوت منفصل، غير الموجود في «Telegram»: تصل هذه الردود عبر تحديثات البوت، وقد يقرأ برنامج آخر (مثل بوت ‎_daily-report‎) تحديثات البوت الرئيسي، فيأخذان الرسائل من بعضهما. أنشئ بوتًا عبر ‎@BotFather‎ ‏(/newbot)، والصق رمزه، وافتح البوت في Telegram واضغط «Start» ثم «تحقق». لا تُقبل الأزرار إلا من الدردشة المحددة."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ein eigener Bot ist nötig, nicht der unter „Telegram“: Diese Antworten kommen über die Updates des Bots, und ein anderes Programm (etwa der _daily-report-Bot) liest womöglich die des Haupt-Bots – sie würden sich die Nachrichten wegnehmen. Erstellen Sie einen Bot mit @BotFather (/newbot), fügen Sie sein Token ein, öffnen Sie den Bot in Telegram und tippen Sie „Start“, dann „Prüfen“. Tasten werden nur aus dem angegebenen Chat angenommen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A separate bot is needed, not the one in “Telegram”: these answers come through the bot's updates, and another program (the _daily-report bot, say) may read the main bot's updates, so they would take each other's messages. Create a bot with @BotFather (/newbot), paste its token, open the bot in Telegram and press «Start», then «Check». Buttons are accepted only from the chat set here."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hace falta un bot aparte, no el de «Telegram»: estas respuestas llegan por las actualizaciones del bot, y otro programa (por ejemplo, el bot de _daily-report) puede leer las del bot principal, así que se quitarían los mensajes. Crea un bot con @BotFather (/newbot), pega su token, abre el bot en Telegram, pulsa «Start» y luego «Comprobar». Los botones solo se aceptan desde el chat indicado."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un bot distinct est nécessaire, pas celui de « Telegram » : ces réponses arrivent par les mises à jour du bot, et un autre programme (le bot _daily-report, par exemple) peut lire celles du bot principal, ils se prendraient les messages. Créez un bot avec @BotFather (/newbot), collez son jeton, ouvrez le bot dans Telegram, appuyez sur « Start » puis « Vérifier ». Les boutons ne sont acceptés que depuis le chat indiqué."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Perlu bot terpisah, bukan yang di “Telegram”: jawaban ini datang lewat pembaruan bot, dan program lain (misalnya bot _daily-report) mungkin membaca pembaruan bot utama, sehingga keduanya saling merebut pesan. Buat bot di @BotFather (/newbot), tempel tokennya, buka bot di Telegram, tekan «Start», lalu «Periksa». Tombol hanya diterima dari obrolan yang ditetapkan."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Serve un bot a parte, non quello di «Telegram»: queste risposte arrivano dagli aggiornamenti del bot, e un altro programma (ad esempio il bot di _daily-report) potrebbe leggere quelli del bot principale, rubandosi i messaggi a vicenda. Crea un bot con @BotFather (/newbot), incolla il token, apri il bot in Telegram, premi «Start» e poi «Verifica». I pulsanti sono accettati solo dalla chat indicata."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「Telegram」とは別のボットが必要です。これらの返答はボットの更新で届きますが、メインのボットの更新は別のプログラム（たとえば _daily-report のボット）が読んでいることがあり、メッセージを奪い合ってしまいます。@BotFather（/newbot）でボットを作り、トークンを貼り付け、Telegram でボットを開いて「Start」を押してから「確認」を押してください。ボタンは指定したチャットからのみ受け付けます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“Telegram”과는 다른 봇이 필요합니다. 이 응답은 봇 업데이트로 들어오는데, 기본 봇의 업데이트는 다른 프로그램(예: _daily-report 봇)이 읽을 수 있어 서로 메시지를 가져가게 됩니다. @BotFather(/newbot)에서 봇을 만들고 토큰을 붙여넣은 뒤 Telegram에서 봇을 열어 «Start», 그다음 «확인»을 누르세요. 버튼은 지정한 채팅에서만 받습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Potrzebny jest osobny bot, nie ten z „Telegram”: te odpowiedzi przychodzą przez aktualizacje bota, a aktualizacje głównego bota może czytać inny program (np. bot _daily-report), więc zabierałyby sobie wiadomości. Utwórz bota w @BotFather (/newbot), wklej jego token, otwórz bota w Telegramie, naciśnij «Start», a potem «Sprawdź». Przyciski są przyjmowane tylko z podanego czatu."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "É preciso um bot separado, não o de “Telegram”: essas respostas chegam pelas atualizações do bot, e outro programa (por exemplo, o bot do _daily-report) pode ler as do bot principal, e eles tomariam as mensagens um do outro. Crie um bot no @BotFather (/newbot), cole o token, abra o bot no Telegram, toque em «Start» e depois em «Verificar». Os botões só são aceitos do chat indicado."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Потрібен окремий бот, не той, що в «Telegram»: ці відповіді бот отримує через свої оновлення, а оновлення основного бота може читати інша програма (наприклад, бот _daily-report), і вони забирали б повідомлення одне в одного. Створіть бота в @BotFather (/newbot), вставте його токен, відкрийте бота в Telegram і натисніть «Start», потім «Перевірити». Кнопки приймаються лише з указаного чату."
+          }
+        }
+      }
+    },
     "Нужен отдельный бот: бот _daily-report уже читает свои обновления, и второй читатель забирал бы у него сообщения. Создайте бота в @BotFather (/newbot), вставьте его токен, откройте бота в Telegram и нажмите «Start», затем «Проверить». Кнопки принимаются только из указанного чата.": {
       "extractionState": "stale",
       "localizations": {
@@ -55352,6 +56036,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Оновити · оновлено %@"
+          }
+        }
+      }
+    },
+    "Обновить отслеживание": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تحديث التتبّع"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Erfassung aktualisieren"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Update Tracking"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Actualizar el seguimiento"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mettre à jour le suivi"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Perbarui pelacakan"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aggiorna il monitoraggio"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "追跡を更新"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "추적 업데이트"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zaktualizuj śledzenie"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Atualizar acompanhamento"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Оновити відстеження"
           }
         }
       }
@@ -57936,6 +58696,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Окрема робоча копія git (worktree)"
+          }
+        }
+      }
+    },
+    "Отдельное окно: все CLAUDE.md и AGENTS.md (общие и проектов) с поиском и правкой, и MCP-серверы Claude Code с выключателем.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "نافذة منفصلة: كل ملفات CLAUDE.md وAGENTS.md (العامة وللمشاريع) مع البحث والتحرير، وخوادم MCP في Claude Code مع مفتاح تشغيل."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ein eigenes Fenster: alle CLAUDE.md und AGENTS.md (allgemein und je Projekt) mit Suche und Bearbeitung sowie die MCP-Server von Claude Code mit Schalter."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A separate window: every CLAUDE.md and AGENTS.md (general and per project) with search and editing, and Claude Code's MCP servers with an on/off switch."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Una ventana aparte: todos los CLAUDE.md y AGENTS.md (generales y de proyectos) con búsqueda y edición, y los servidores MCP de Claude Code con interruptor."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une fenêtre à part : tous les CLAUDE.md et AGENTS.md (généraux et des projets) avec recherche et édition, et les serveurs MCP de Claude Code avec un interrupteur."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jendela terpisah: semua CLAUDE.md dan AGENTS.md (umum dan per proyek) dengan pencarian dan penyuntingan, serta server MCP Claude Code dengan sakelar."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Una finestra a parte: tutti i CLAUDE.md e AGENTS.md (generali e dei progetti) con ricerca e modifica, e i server MCP di Claude Code con interruttore."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "別ウィンドウ: すべての CLAUDE.md と AGENTS.md（共通とプロジェクト別）を検索・編集でき、Claude Code の MCP サーバーをオン/オフできます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "별도 창: 모든 CLAUDE.md와 AGENTS.md(공통 및 프로젝트별)를 검색·편집하고, Claude Code MCP 서버를 켜고 끌 수 있습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Osobne okno: wszystkie CLAUDE.md i AGENTS.md (ogólne i projektów) z wyszukiwaniem i edycją oraz serwery MCP Claude Code z przełącznikiem."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uma janela à parte: todos os CLAUDE.md e AGENTS.md (gerais e dos projetos) com busca e edição, e os servidores MCP do Claude Code com interruptor."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Окреме вікно: усі CLAUDE.md і AGENTS.md (загальні та проєктів) із пошуком і правкою, а також MCP-сервери Claude Code з вимикачем."
           }
         }
       }
@@ -60907,6 +61743,234 @@
           "stringUnit": {
             "state": "translated",
             "value": "Відпустити"
+          }
+        }
+      }
+    },
+    "Отслеживание включено: сессии видны в панели.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "التتبّع مفعّل: تظهر الجلسات في اللوحة."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Erfassung ist an: Sitzungen erscheinen im Panel."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tracking is on: sessions show in the panel."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El seguimiento está activado: las sesiones se ven en el panel."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le suivi est activé : les sessions apparaissent dans le panneau."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pelacakan aktif: sesi terlihat di panel."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il monitoraggio è attivo: le sessioni sono visibili nel pannello."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "追跡はオンです。セッションがパネルに表示されます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "추적이 켜져 있습니다. 세션이 패널에 표시됩니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Śledzenie włączone: sesje są widoczne w panelu."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O acompanhamento está ativo: as sessões aparecem no painel."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Відстеження увімкнено: сесії видно в панелі."
+          }
+        }
+      }
+    },
+    "Отслеживание сессий": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تتبّع الجلسات"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sitzungserfassung"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Session tracking"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seguimiento de sesiones"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suivi des sessions"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pelacakan sesi"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Monitoraggio delle sessioni"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "セッションの追跡"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "세션 추적"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Śledzenie sesji"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Acompanhamento de sessões"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Відстеження сесій"
+          }
+        }
+      }
+    },
+    "Отслеживание устарело — обновите его.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "التتبّع قديم: حدّثه."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Erfassung ist veraltet: Bitte aktualisieren."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tracking is out of date: update it."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El seguimiento está desactualizado: actualízalo."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le suivi est obsolète : mettez-le à jour."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pelacakan sudah usang: perbarui."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il monitoraggio è obsoleto: aggiornalo."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "追跡が古くなっています。更新してください。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "추적이 오래되었습니다. 업데이트하세요."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Śledzenie jest nieaktualne: zaktualizuj je."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O acompanhamento está desatualizado: atualize-o."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Відстеження застаріло — оновіть його."
           }
         }
       }
@@ -67369,6 +68433,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Пошук і запуск…"
+          }
+        }
+      }
+    },
+    "Поиск по проектам, сессиям и командам — из любой программы, сочетанием в Настройках → «Клавиши».": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ابحث في المشاريع والجلسات والأوامر من أي تطبيق باستخدام الاختصار في الإعدادات ← «الاختصارات»."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suche nach Projekten, Sitzungen und Befehlen aus jeder App, mit dem Kurzbefehl unter Einstellungen → „Kurzbefehle“."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Search projects, sessions and commands from any app, with the shortcut in Settings → “Shortcuts”."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Busca proyectos, sesiones y comandos desde cualquier app con el atajo de Ajustes → «Atajos»."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cherchez projets, sessions et commandes depuis n’importe quelle app, avec le raccourci de Réglages → « Raccourcis »."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cari proyek, sesi, dan perintah dari aplikasi apa pun dengan pintasan di Pengaturan → “Pintasan”."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cerca progetti, sessioni e comandi da qualsiasi app, con la scorciatoia in Impostazioni → «Scorciatoie»."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "プロジェクト、セッション、コマンドの検索は、設定 →「ショートカット」のショートカットでどのアプリからでも使えます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "프로젝트, 세션, 명령 검색은 설정 → ‘단축키’의 단축키로 어느 앱에서든 할 수 있습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Szukaj projektów, sesji i poleceń z dowolnej aplikacji skrótem z Ustawień → „Skróty”."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Busque projetos, sessões e comandos em qualquer app, com o atalho em Ajustes → “Atalhos”."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Пошук проєктів, сесій і команд — з будь-якої програми, поєднанням клавіш у Налаштуваннях → «Клавіші»."
           }
         }
       }
@@ -76211,6 +77351,82 @@
         }
       }
     },
+    "Работают из любой программы. В панели: ⌘R — обновить, ⌘, — настройки, ↑ ↓ и ↵ — результаты поиска.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تعمل من أي تطبيق. في اللوحة: ⌘R للتحديث، و⌘, للإعدادات، و↑ ↓ و↵ لنتائج البحث."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Funktionieren in jeder App. Im Panel: ⌘R aktualisiert, ⌘, öffnet die Einstellungen, ↑ ↓ und ↵ steuern die Suchergebnisse."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "These work from any app. In the panel: ⌘R refreshes, ⌘, opens Settings, ↑ ↓ and ↵ move through search results."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Funcionan desde cualquier app. En el panel: ⌘R actualiza, ⌘, abre Ajustes, ↑ ↓ y ↵ recorren los resultados."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fonctionnent depuis n’importe quelle app. Dans le panneau : ⌘R actualise, ⌘, ouvre les Réglages, ↑ ↓ et ↵ parcourent les résultats."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Berfungsi dari aplikasi apa pun. Di panel: ⌘R memuat ulang, ⌘, membuka Pengaturan, ↑ ↓ dan ↵ menelusuri hasil pencarian."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Funzionano da qualsiasi app. Nel pannello: ⌘R aggiorna, ⌘, apre le Impostazioni, ↑ ↓ e ↵ scorrono i risultati."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "どのアプリからでも使えます。パネルでは ⌘R で更新、⌘, で設定、↑ ↓ と ↵ で検索結果を操作します。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "어느 앱에서든 작동합니다. 패널에서 ⌘R은 새로 고침, ⌘,는 설정, ↑ ↓와 ↵는 검색 결과 이동입니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Działają z każdej aplikacji. W panelu: ⌘R odświeża, ⌘, otwiera Ustawienia, ↑ ↓ i ↵ obsługują wyniki wyszukiwania."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Funcionam em qualquer app. No painel: ⌘R atualiza, ⌘, abre Ajustes, ↑ ↓ e ↵ percorrem os resultados."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Працюють з будь-якої програми. У панелі: ⌘R — оновити, ⌘, — налаштування, ↑ ↓ і ↵ — результати пошуку."
+          }
+        }
+      }
+    },
     "Работают сессии": {
       "localizations": {
         "ar": {
@@ -82303,6 +83519,82 @@
         }
       }
     },
+    "Сервис команд-шаблонов профиля. Агенты и ключи — Настройки → «Сервисы AI».": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "خدمة أوامر ملف التعريف. الوكلاء والمفاتيح — الإعدادات ← «خدمات الذكاء الاصطناعي»."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der Dienst für die Befehle des Profils. Agenten und Schlüssel — Einstellungen → „KI-Dienste“."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The service for the profile's command templates. Agents and keys — Settings → “AI Services”."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El servicio de los comandos del perfil. Agentes y claves — Ajustes → «Servicios de IA»."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le service des commandes du profil. Agents et clés — Réglages → «Services d'IA»."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Layanan untuk perintah profil. Agen dan kunci — Pengaturan → «Layanan AI»."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il servizio dei comandi del profilo. Agenti e chiavi — Impostazioni → «Servizi IA»."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "プロファイルのコマンドを実行するサービス。エージェントとキー — 設定 → 「AI サービス」。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "프로필 명령에 쓰는 서비스. 에이전트와 키 — 설정 → «AI 서비스»."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Usługa dla poleceń profilu. Agenci i klucze — Ustawienia → „Usługi AI”."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O serviço dos comandos do perfil. Agentes e chaves — Ajustes → «Serviços de IA»."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Сервіс команд профілю. Агенти й ключі — Налаштування → «Сервіси AI»."
+          }
+        }
+      }
+    },
     "Сервис по умолчанию": {
       "localizations": {
         "ar": {
@@ -82759,6 +84051,82 @@
         }
       }
     },
+    "Сессии Claude Code на этом Маке и фоновые задачи. Включается на этой странице.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "جلسات Claude Code على هذا الـ Mac والمهام في الخلفية. يُفعَّل من هذه الصفحة."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude-Code-Sitzungen auf diesem Mac und Hintergrundaufgaben. Wird auf dieser Seite eingeschaltet."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude Code sessions on this Mac and background runs. Turned on from this page."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sesiones de Claude Code en este Mac y tareas en segundo plano. Se activa en esta página."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sessions Claude Code sur ce Mac et tâches en arrière-plan. S’active sur cette page."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sesi Claude Code di Mac ini dan tugas latar belakang. Diaktifkan dari halaman ini."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sessioni di Claude Code su questo Mac e attività in background. Si attiva da questa pagina."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "この Mac の Claude Code セッションとバックグラウンドタスク。このページでオンにします。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이 Mac의 Claude Code 세션과 백그라운드 작업. 이 페이지에서 켭니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sesje Claude Code na tym Macu i zadania w tle. Włącza się na tej stronie."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sessões do Claude Code neste Mac e tarefas em segundo plano. Ativado nesta página."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Сесії Claude Code на цьому Mac і фонові задачі. Вмикається на цій сторінці."
+          }
+        }
+      }
+    },
     "Сессии Claude Code на этом Маке и фоновые задачи. Нужны hooks — «Сервисы AI» → Claude Code.": {
       "localizations": {
         "ar": {
@@ -83059,6 +84427,158 @@
           "stringUnit": {
             "state": "translated",
             "value": "Сесії видно, лише якщо в Налаштуваннях встановлено hooks (вони дописуються в ~/.claude/settings.json, копія зберігається поруч)."
+          }
+        }
+      }
+    },
+    "Сессии видны, только если отслеживание включено: небольшой скрипт дописывается в ~/.claude/settings.json, копия сохраняется рядом.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تظهر الجلسات فقط عند تفعيل التتبّع: يُضاف برنامج نصي صغير إلى ~/.claude/settings.json مع نسخة احتياطية بجانبه."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sitzungen erscheinen nur bei eingeschalteter Erfassung: Ein kleines Skript wird in ~/.claude/settings.json eingetragen, daneben liegt eine Sicherung."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sessions show only with tracking on: a small script is added to ~/.claude/settings.json, with a backup next to it."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Las sesiones solo se ven con el seguimiento activado: se añade un pequeño script a ~/.claude/settings.json, con una copia al lado."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les sessions n’apparaissent qu’avec le suivi activé : un petit script est ajouté à ~/.claude/settings.json, avec une sauvegarde à côté."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sesi hanya terlihat saat pelacakan aktif: skrip kecil ditambahkan ke ~/.claude/settings.json, dengan cadangan di sebelahnya."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le sessioni sono visibili solo con il monitoraggio attivo: un piccolo script viene aggiunto a ~/.claude/settings.json, con un backup accanto."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "セッションは追跡がオンのときだけ表示されます。小さなスクリプトが ~/.claude/settings.json に追加され、隣にバックアップが残ります。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "세션은 추적이 켜져 있을 때만 표시됩니다. 작은 스크립트가 ~/.claude/settings.json에 추가되고 옆에 백업이 남습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sesje są widoczne tylko przy włączonym śledzeniu: mały skrypt jest dopisywany do ~/.claude/settings.json, a obok powstaje kopia."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "As sessões só aparecem com o acompanhamento ativo: um pequeno script é adicionado a ~/.claude/settings.json, com um backup ao lado."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Сесії видно, лише якщо відстеження увімкнено: невеликий скрипт дописується в ~/.claude/settings.json, копія зберігається поруч."
+          }
+        }
+      }
+    },
+    "Сессии и фоновые задачи — «Сессии агентов»…": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الجلسات والمهام في الخلفية: «جلسات الوكلاء»…"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sitzungen und Hintergrundaufgaben: „Agentensitzungen“…"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sessions and background runs: “Agent sessions”…"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sesiones y tareas en segundo plano: «Sesiones de agentes»…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sessions et tâches en arrière-plan : « Sessions des agents »…"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sesi dan tugas latar belakang: “Sesi agen”…"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sessioni e attività in background: «Sessioni degli agenti»…"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "セッションとバックグラウンドタスク:「エージェントのセッション」…"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "세션과 백그라운드 작업: ‘에이전트 세션’…"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sesje i zadania w tle: „Sesje agentów”…"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sessões e tarefas em segundo plano: “Sessões de agentes”…"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Сесії та фонові задачі — «Сесії агентів»…"
           }
         }
       }
@@ -88160,6 +89680,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Список сесій і «Claude чекає відповіді» працюють через hooks: AI Hub Bar додасть свій у ~/.claude/settings.json, зберігши резервну копію."
+          }
+        }
+      }
+    },
+    "Список сессий и «Claude ждёт ответа» работают через небольшой скрипт: AI Hub Bar добавит его в ~/.claude/settings.json, сохранив резервную копию.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "قائمة الجلسات و«Claude ينتظر الرد» تعملان عبر برنامج نصي صغير: يضيفه AI Hub Bar إلى ~/.claude/settings.json ويحتفظ بنسخة احتياطية."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sitzungsliste und „Claude wartet“ laufen über ein kleines Skript: AI Hub Bar fügt es in ~/.claude/settings.json ein und legt eine Sicherung an."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The session list and “Claude is waiting” work through a small script: AI Hub Bar adds it to ~/.claude/settings.json and keeps a backup."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La lista de sesiones y «Claude espera respuesta» funcionan con un pequeño script: AI Hub Bar lo añade a ~/.claude/settings.json y guarda una copia de seguridad."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La liste des sessions et « Claude attend une réponse » passent par un petit script : AI Hub Bar l’ajoute à ~/.claude/settings.json et garde une sauvegarde."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Daftar sesi dan “Claude menunggu jawaban” bekerja lewat skrip kecil: AI Hub Bar menambahkannya ke ~/.claude/settings.json dan menyimpan cadangan."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L’elenco delle sessioni e «Claude attende risposta» funzionano tramite un piccolo script: AI Hub Bar lo aggiunge a ~/.claude/settings.json e conserva un backup."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "セッション一覧と「Claude が返答待ち」は小さなスクリプトで動作します。AI Hub Bar は ~/.claude/settings.json にそれを追加し、バックアップを残します。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "세션 목록과 ‘Claude가 답을 기다림’은 작은 스크립트로 작동합니다. AI Hub Bar가 ~/.claude/settings.json에 이를 추가하고 백업을 남깁니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lista sesji i „Claude czeka na odpowiedź” działają przez mały skrypt: AI Hub Bar doda go do ~/.claude/settings.json i zachowa kopię zapasową."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A lista de sessões e “Claude aguardando resposta” funcionam com um pequeno script: o AI Hub Bar o adiciona em ~/.claude/settings.json e guarda um backup."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Список сесій і «Claude чекає відповіді» працюють через невеликий скрипт: AI Hub Bar додасть його в ~/.claude/settings.json, зберігши резервну копію."
           }
         }
       }
@@ -95767,6 +97363,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Видалити профіль"
+          }
+        }
+      }
+    },
+    "Удалить профиль?": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "هل تريد حذف ملف التعريف؟"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Profil löschen?"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete the Profile?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Eliminar el perfil?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Supprimer le profil ?"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hapus profil?"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eliminare il profilo?"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "プロファイルを削除しますか?"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "프로필을 삭제할까요?"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Usunąć profil?"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apagar o perfil?"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Видалити профіль?"
           }
         }
       }
@@ -108656,6 +110328,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "як в «Основні → Telegram»"
+          }
+        }
+      }
+    },
+    "как на странице «Telegram»": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "كما في «Telegram»"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "wie in „Telegram“"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "as in “Telegram”"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "como en «Telegram»"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "comme dans « Telegram »"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "seperti di “Telegram”"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "come in «Telegram»"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「Telegram」と同じ"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“Telegram”과 같음"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "jak w „Telegram”"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "como em “Telegram”"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "як в «Telegram»"
           }
         }
       }

@@ -582,7 +582,7 @@ private struct NotchDropCard: View {
                         .textFieldStyle(.roundedBorder)
                         .focused($focused)
                         .onSubmit { perform(asking) }
-                    Button("Выполнить") { perform(asking) }
+                    Button("Запустить") { perform(asking) }
                         .buttonStyle(NotchButtonStyle(fill: .accentColor))
                         .disabled(text.trimmingCharacters(in: .whitespaces).isEmpty)
                 }

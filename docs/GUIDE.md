@@ -41,7 +41,7 @@ AI Hub Bar starts empty: until you create a profile, the panel only offers **Ass
 | Row | Why it matters | Needed? |
 |---|---|---|
 | AI service | Commands need someone to run them. **Install Claude Code** opens its page; **Sign In to Claude Code** runs the sign-in in Terminal, and the limits appear by themselves after it. | Yes: Claude Code, another agent or an API key. |
-| Claude Code sessions | The session list and the "Claude is waiting" alerts come from a small hook. **Install hooks** adds it to `~/.claude/settings.json` and saves a backup next to it. | With Claude Code |
+| Claude Code sessions | The session list and the "Claude is waiting" alerts come from a small hook. **Turn On Tracking** adds it to `~/.claude/settings.json` and saves a backup next to it. | With Claude Code |
 | Notifications | Limit alerts, Claude waiting for you, finished commands and deadlines. | Recommended |
 | Open at Login | Keeps ✦ in the menu bar after a restart. | Optional |
 
@@ -90,7 +90,7 @@ Everything can be changed later in **Settings… → Profiles**. To run the assi
 - **Other AI services:** Codex and Copilot are asked through their own tools (`codex`, `gh`). The Gemini CLI and Cursor sign-ins are read only after you turn on consent for each in **Settings… → AI Services** (the Gemini and Cursor tabs); without it Gemini is counted from its local logs and Cursor stays off.
 - **What gets sent:** your files go only to the AI service you run a command with. AI Hub Bar has no server of its own, except the relay of the optional shared Telegram bot: it logs no message text, and a bot of your own skips it.
 - **Feedback and crash reports:** **Settings… → General → Feedback** (also at the bottom of the Help window) opens a GitHub issue form with the version and macOS filled in. After a crash AI Hub Bar offers to report it: the form gets the crash's short description and the last lines of the app log, and the full report (home folder removed) is shown in Finder to drag into the form. Nothing is sent by the app itself — you see the whole form on GitHub before you submit it. **Don't offer again** in that dialog, or the switch in Settings, turns the offer off.
-- **Session hook:** it only writes small status files on this Mac and never changes what Claude does. **Settings… → AI Services → Claude Code → Remove hooks** takes it out again.
+- **Session hook:** it only writes small status files on this Mac and never changes what Claude does. **Settings… → Agent sessions → Turn Off Tracking** takes it out again.
 - **Background runs:** each runs under an explicit permission list. With **Project files only**, Claude can read and write inside the project folder, with no shell and no internet.
 
 ## Languages
@@ -111,7 +111,7 @@ AI Hub Bar follows the system language. To pick another one, go to **Settings…
 
 ## Uninstall
 
-1. Choose **Settings… → AI Services → Claude Code → Remove hooks**.
+1. Choose **Settings… → Agent sessions → Turn Off Tracking**.
 2. Quit AI Hub Bar.
 3. Delete AI Hub Bar from Applications, then `~/Library/Application Support/ClaudePult` and `~/Library/Logs/ClaudePult`.
 4. API keys are stored in Keychain Access under "ClaudePult API key". Delete those entries too if you want them gone.

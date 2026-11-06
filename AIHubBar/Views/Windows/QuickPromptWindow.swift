@@ -76,7 +76,7 @@ struct QuickPromptWindow: View {
                 Spacer()
                 Button("Отмена") { dismiss() }
                     .keyboardShortcut(.cancelAction)
-                Button("Отправить") { send() }
+                Button("Запустить") { send() }
                     .keyboardShortcut(.return, modifiers: .command)
                     .buttonStyle(.borderedProminent)
                     .disabled(!canSend)
