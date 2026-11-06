@@ -59,6 +59,8 @@ Data refreshes at launch, on panel open when older than 60 s, every 5 min (`--no
 
 **Recently finished:** under the sessions, the last five finished Claude Code sessions whose folder still exists (session files are kept for 7 days). A click continues one with `claude --resume` in Terminal.
 
+**Several Claude accounts:** Settings → AI Services → Claude Code → “Other Claude accounts”: choose an account's config folder (`CLAUDE_CONFIG_DIR`) and sign in. Its session and week limits appear in the limits block, read every 5 minutes from its own Keychain entry. No forecast or history, which come from the main account's journals.
+
 **Outages:** when the limits fail with a server or network error, the app asks Anthropic's public status page (`status.claude.com`, at most every 10 minutes, no account involved) and says so in the limits block if something is reported there.
 
 **What Claude is doing now:** a working session's row shows its last tool call in words — “editing LimitsView.swift”, “running npm test”, “searching TODO” (the task moves to the hover hint). With no tool call for 10 minutes the time turns into an orange “quiet N min”. The hook keeps `last_tool`, `last_target`, `last_tool_at` from PostToolUse (written when the action changes, else once a minute; cleared on Stop).

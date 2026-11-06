@@ -140,6 +140,11 @@ final class AppSettings {
     }
 
     /// «Быстрые команды» and «Быстрые переключатели» (SPEC-profiles §4.3–4.4).
+    /// Extra Claude accounts whose limits the panel shows.
+    var claudeAccounts: [ClaudeAccount] {
+        didSet { defaults.setEncoded(claudeAccounts, forKey: Keys.claudeAccounts) }
+    }
+
     var quickCommands: [QuickCommand] {
         didSet { defaults.setEncoded(quickCommands, forKey: Keys.quickCommands) }
     }
@@ -361,6 +366,7 @@ final class AppSettings {
         clipboardExcludedApps = defaults.stringArray(forKey: Keys.clipboardExcludedApps) ?? ClipboardPolicy.defaultExcludedApps
         notesFolder = defaults.string(forKey: Keys.notesFolder) ?? "~/Documents/ClaudePult Notes"
         quickCommands = defaults.decoded([QuickCommand].self, forKey: Keys.quickCommands) ?? QuickCommand.examples
+        claudeAccounts = defaults.decoded([ClaudeAccount].self, forKey: Keys.claudeAccounts) ?? []
         quickToggles = defaults.stringArray(forKey: Keys.quickToggles)?.compactMap(QuickToggle.init(rawValue:)) ?? QuickToggle.allCases
         keepAwakeRules = defaults.decoded(KeepAwakeRules.self, forKey: Keys.keepAwakeRules) ?? KeepAwakeRules()
         notch = defaults.decoded(NotchSettings.self, forKey: Keys.notch) ?? NotchSettings()
@@ -423,6 +429,7 @@ final class AppSettings {
         static let clipboardExcludedApps = "clipboardExcludedApps"
         static let notesFolder = "notesFolder"
         static let quickCommands = "quickCommands"
+        static let claudeAccounts = "claudeAccounts"
         static let quickToggles = "quickToggles"
         static let keepAwakeRules = "keepAwakeRules"
         static let notch = "notch"

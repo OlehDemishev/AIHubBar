@@ -20416,6 +20416,82 @@
         }
       }
     },
+    "Войти": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تسجيل الدخول"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anmelden"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sign In"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Iniciar sesión"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se connecter"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Masuk"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Accedi"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "サインイン"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "로그인"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zaloguj się"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Entrar"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Увійти"
+          }
+        }
+      }
+    },
     "Войти в Claude Code": {
       "localizations": {
         "ar": {
@@ -26955,6 +27031,82 @@
         }
       }
     },
+    "Добавить аккаунт…": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إضافة حساب…"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Konto hinzufügen…"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add Account…"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Añadir cuenta…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajouter un compte…"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tambah akun…"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aggiungi account…"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アカウントを追加…"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "계정 추가…"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dodaj konto…"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adicionar conta…"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Додати акаунт…"
+          }
+        }
+      }
+    },
     "Добавить записи AI Hub Bar в ~/.codex/hooks.json": {
       "localizations": {
         "ar": {
@@ -28243,6 +28395,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Інші AI: Codex, Copilot, Gemini…"
+          }
+        }
+      }
+    },
+    "Другие аккаунты Claude": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "حسابات Claude الأخرى"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Weitere Claude-Konten"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Other Claude accounts"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otras cuentas de Claude"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Autres comptes Claude"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Akun Claude lainnya"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Altri account Claude"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "他の Claude アカウント"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "다른 Claude 계정"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Inne konta Claude"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Outras contas do Claude"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Інші акаунти Claude"
           }
         }
       }
@@ -58316,6 +58544,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Визначити"
+          }
+        }
+      }
+    },
+    "Основной аккаунт настраивать не нужно. Для другого выберите его папку настроек (CLAUDE_CONFIG_DIR) и нажмите «Войти»: его лимиты появятся в панели. Прогноза и истории у таких аккаунтов нет.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لا يحتاج الحساب الرئيسي إلى إعداد. لحساب آخر، اختر مجلد إعداداته (CLAUDE_CONFIG_DIR) وانقر على «تسجيل الدخول»: ستظهر حدوده في اللوحة. لا توجد توقعات أو سجل لهذه الحسابات."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Das Hauptkonto braucht keine Einrichtung. Für ein weiteres wählen Sie dessen Konfigurationsordner (CLAUDE_CONFIG_DIR) und klicken auf „Anmelden“: Seine Limits erscheinen im Panel. Solche Konten haben keine Prognose und keinen Verlauf."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The main account needs no setup. For another one, choose its config folder (CLAUDE_CONFIG_DIR) and click Sign In: its limits appear in the panel. These accounts have no forecast or history."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La cuenta principal no necesita configuración. Para otra, elige su carpeta de configuración (CLAUDE_CONFIG_DIR) y pulsa «Iniciar sesión»: sus límites aparecerán en el panel. Estas cuentas no tienen previsión ni historial."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le compte principal n’a rien à configurer. Pour un autre, choisissez son dossier de configuration (CLAUDE_CONFIG_DIR) et cliquez sur « Se connecter » : ses limites apparaissent dans le panneau. Ces comptes n’ont ni prévision ni historique."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Akun utama tidak perlu diatur. Untuk akun lain, pilih folder konfigurasinya (CLAUDE_CONFIG_DIR) lalu klik “Masuk”: batasnya muncul di panel. Akun seperti ini tidak punya perkiraan atau riwayat."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L’account principale non va configurato. Per un altro, scegli la sua cartella di configurazione (CLAUDE_CONFIG_DIR) e fai clic su «Accedi»: i suoi limiti appaiono nel pannello. Questi account non hanno previsione né cronologia."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "メインのアカウントは設定不要です。別のアカウントは設定フォルダ(CLAUDE_CONFIG_DIR)を選んで「サインイン」をクリックすると、制限がパネルに表示されます。これらのアカウントには予測と履歴はありません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "기본 계정은 설정이 필요 없습니다. 다른 계정은 설정 폴더(CLAUDE_CONFIG_DIR)를 선택하고 ‘로그인’을 클릭하면 한도가 패널에 표시됩니다. 이런 계정에는 예측과 기록이 없습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Konta głównego nie trzeba konfigurować. Dla innego wybierz jego folder konfiguracji (CLAUDE_CONFIG_DIR) i kliknij „Zaloguj się”: jego limity pojawią się w panelu. Takie konta nie mają prognozy ani historii."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A conta principal não precisa de configuração. Para outra, escolha a pasta de configuração dela (CLAUDE_CONFIG_DIR) e clique em “Entrar”: os limites aparecem no painel. Essas contas não têm previsão nem histórico."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Основний акаунт налаштовувати не потрібно. Для іншого виберіть його папку налаштувань (CLAUDE_CONFIG_DIR) і натисніть «Увійти»: його ліміти з’являться в панелі. Прогнозу й історії в таких акаунтів немає."
           }
         }
       }
@@ -96980,6 +97284,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Прибрати hook AI Hub Bar; інші hooks агента залишаються"
+          }
+        }
+      }
+    },
+    "Убрать аккаунт": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إزالة الحساب"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Konto entfernen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remove Account"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quitar cuenta"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Retirer le compte"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hapus akun"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rimuovi account"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アカウントを削除"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "계정 제거"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Usuń konto"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remover conta"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Прибрати акаунт"
           }
         }
       }

@@ -80,7 +80,7 @@ enum UsageService {
 
     /// Reads the token with Apple's `security` tool: its Keychain permission survives AI Hub Bar rebuilds
     /// (an ad-hoc signed app would be asked again after every build).
-    static func credentials() async throws -> Credentials {
+    static func credentials(keychainService: String = keychainService) async throws -> Credentials {
         let result: ProcessResult
         do {
             result = try await ProcessRunner.run(
@@ -110,8 +110,8 @@ enum UsageService {
         return Credentials(accessToken: token, expiresAt: expires)
     }
 
-    static func fetchData() async throws -> Data {
-        let credentials = try await credentials()
+    static func fetchData(keychainService: String = keychainService) async throws -> Data {
+        let credentials = try await credentials(keychainService: keychainService)
         var request = URLRequest(url: endpoint, timeoutInterval: 20)
         request.setValue("Bearer \(credentials.accessToken)", forHTTPHeaderField: "Authorization")
         request.setValue("oauth-2025-04-20", forHTTPHeaderField: "anthropic-beta")
@@ -144,8 +144,8 @@ enum UsageService {
         return formatter.date(from: header).map { max(0, $0.timeIntervalSince(now)) }
     }
 
-    static func fetch() async throws -> UsageSnapshot {
-        let data = try await fetchData()
+    static func fetch(keychainService: String = keychainService) async throws -> UsageSnapshot {
+        let data = try await fetchData(keychainService: keychainService)
         guard let snapshot = UsageSnapshot.decode(data, fetchedAt: .now) else {
             AppLog.error("Usage response in an unknown format (\(data.count) bytes)")
             throw UsageError.badResponse

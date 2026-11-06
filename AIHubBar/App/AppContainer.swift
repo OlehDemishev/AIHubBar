@@ -49,6 +49,7 @@ final class AppContainer {
     let requests: AppRequests
     let usage: UsageStore
     let hub: HubLimitsStore
+    let claudeAccounts: ClaudeAccountsStore
     let sessionChanges = SessionChangesStore()
     let claudeConfig: ClaudeConfigStore
     let weeklySummary: WeeklySummarySender
@@ -99,6 +100,9 @@ final class AppContainer {
         self.usage = usage
         let hub = HubLimitsStore(settings: settings)
         self.hub = hub
+        let claudeAccounts = ClaudeAccountsStore(settings: settings)
+        self.claudeAccounts = claudeAccounts
+        claudeAccounts.isActive = { [modes] in modes.isOn(.limits) }
         let monitor = SystemMonitor(settings: settings)
         self.monitor = monitor
         let keepAwake = KeepAwakeController(settings: settings)
@@ -230,6 +234,7 @@ final class AppContainer {
             requests.listen(commands: commands)
             usage.start()
             hub.start()
+            claudeAccounts.start()
             telegramBot.start()
             weeklySummary.start()
             monitor.start()
@@ -375,6 +380,7 @@ private struct AppEnvironment: ViewModifier {
             .environment(app.requests)
             .environment(app.usage)
             .environment(app.hub)
+            .environment(app.claudeAccounts)
             .environment(app.sessionChanges)
             .environment(app.claudeConfig)
             .environment(app.weeklySummary)

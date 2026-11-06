@@ -35,6 +35,7 @@ struct ProjectTokens: Equatable, Identifiable, Sendable {
 struct ServiceUsage: Equatable, Identifiable, Sendable {
     enum Service: Hashable, Sendable {
         case claude
+        case claudeAccount(String)
         case hub(HubLimit.Source)
     }
 
