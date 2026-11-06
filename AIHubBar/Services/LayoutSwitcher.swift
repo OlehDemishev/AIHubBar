@@ -24,6 +24,8 @@ final class LayoutSwitcher {
     @ObservationIgnored private var tap: CFMachPort?
     @ObservationIgnored private var tapSource: CFRunLoopSource?
     @ObservationIgnored private var statusItem: NSStatusItem?
+    /// For `PanelOpener`, which must not take this item for the panel's.
+    var statusWindow: NSWindow? { statusItem?.button?.window }
     @ObservationIgnored private let menuActions = LayoutMenuActions()
     @ObservationIgnored private var loop: Task<Void, Never>?
     @ObservationIgnored private var blinking: Task<Void, Never>?

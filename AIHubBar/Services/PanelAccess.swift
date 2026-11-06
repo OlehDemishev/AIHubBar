@@ -81,10 +81,22 @@ enum PanelOpener {
         CGWarpMouseCursorPosition(CGPoint(x: back.x, y: primary.frame.height - back.y))
     }
 
-    /// The middle of the app's status item, in AppKit screen coordinates.
+    /// The window of the app's other menu bar item (the layout indicator), which is not the panel's.
+    static var otherItemWindow: () -> NSWindow? = { nil }
+
+    /// The middle of the panel's status item, in AppKit screen coordinates.
     private static var itemCentre: CGPoint? {
-        NSApp.windows.first { $0.className.contains("NSStatusBarWindow") && $0.frame.width > 0 }
-            .map { CGPoint(x: $0.frame.midX, y: $0.frame.midY) }
+        let items = NSApp.windows.filter { $0.className.contains("NSStatusBarWindow") && $0.frame.width > 0 }
+        return panelItem(among: items, other: otherItemWindow()).map { CGPoint(x: $0.frame.midX, y: $0.frame.midY) }
+    }
+
+    static func panelItem<Item: AnyObject>(among items: [Item], other: Item?) -> Item? {
+        items.first { $0 !== other }
+    }
+
+    /// Where the key would click, for the log: a wrong item shows here without clicking anything.
+    static func logItem() {
+        AppLog.info("Panel item: \(itemCentre.map { "x \(Int($0.x))" } ?? "not found"), layout item: \(otherItemWindow().map { "x \(Int($0.frame.midX))" } ?? "none")")
     }
 }
 
