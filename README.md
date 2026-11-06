@@ -94,6 +94,10 @@ Needs Xcode with Swift 6. The project is generated from `project.yml`; SwiftUI, 
 
 > AI Hub Bar was called **ClaudePult** until October 2026; the bundle id and the data folders keep the old name.
 
+## Support the project
+
+AI Hub Bar is free. If it saves you time, there are a few ways to help on the [support page](https://olehdemishev.github.io/AIHubBar/support.html).
+
 ## License
 
 [MIT](LICENSE). AI Hub Bar is an independent project and is not affiliated with Anthropic, OpenAI, Google or GitHub.
