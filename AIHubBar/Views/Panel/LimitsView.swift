@@ -5,6 +5,7 @@ import SwiftUI
 struct LimitsView: View {
     @Environment(UsageStore.self) private var usage
     @Environment(HubLimitsStore.self) private var hub
+    @Environment(ClaudeAccountsStore.self) private var accounts
     @Environment(LaunchController.self) private var launcher
     @Environment(CommandEngine.self) private var engine
     @Environment(AIServiceStore.self) private var services
@@ -31,6 +32,10 @@ struct LimitsView: View {
     /// Other AI services (SPEC-hub) under Claude, each drawn by the same card (SPEC-ai-services stage 2).
     @ViewBuilder
     private var hubRows: some View {
+        ForEach(accounts.usages) { account in
+            Divider().padding(.vertical, 2)
+            ServiceCard(usage: account)
+        }
         ForEach(hub.usages) { service in
             Divider().padding(.vertical, 2)
             ServiceCard(usage: service)
@@ -41,7 +46,7 @@ struct LimitsView: View {
     private var details: some View {
         if let snapshot = usage.snapshot {
             ServiceCard(usage: .claude(snapshot, forecast: usage.forecast, week: usage.weekUsage, error: usage.lastError),
-                        showsTitle: !hub.limits.isEmpty)
+                        showsTitle: !hub.limits.isEmpty || !accounts.usages.isEmpty)
             // Models by API (SPEC-modes §11.2): shown once AI Hub Bar has spent something this month.
             let month = engine.summary(since: engine.monthStart)
             if month.tokens > 0 {

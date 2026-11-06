@@ -30,6 +30,12 @@
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
 
+## 2026-11-06 — Several Claude accounts (branch `feat/claude-accounts`)
+
+Done: Settings → AI Services → Claude Code → «Другие аккаунты Claude»: a name and a config folder (`CLAUDE_CONFIG_DIR`), «Войти» runs `claude auth login` for it in Terminal, and its limits appear in the block, every 5 minutes, 30 minutes' pause after HTTP 429. The Keychain name follows Claude Code's own rule, read from its code in 2.1.316: `Claude Code-credentials-` plus the first 8 hex digits of the folder's SHA-256. 5 new strings in 12 languages.
+Checked: scripts/check.sh passed with new tests for the Keychain name and the sign-in line.
+Left: not tried with a real second account (none on this Mac). If Claude Code changes the naming, such an account shows the sign-in error.
+
 ## 2026-11-06 — Service status (branch `feat/service-status`)
 
 Done: when the limits fail with a server or network error or an unknown answer, the app asks Anthropic's status page at most every 10 minutes and shows «Сбой у Anthropic: …» with a link in the limits block. It clears when the limits work again. Without internet nothing is claimed. README lists the page among what the app talks to.
