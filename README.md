@@ -20,7 +20,7 @@
 
 **AI Hub Bar** is a small, native Mac app that lives in the menu bar. One click on ✦ opens a panel with your Claude subscription limits, every Claude Code session running on the Mac, and ready-made AI commands for your projects. It doesn't replace Claude, Codex or any other AI tool — it keeps an eye on them and starts them for you.
 
-Free, open source, no account and no server of its own.
+Free, open source, no account. Nothing goes through a server of ours, except the optional shared Telegram bot.
 
 ## Features
 
@@ -71,7 +71,8 @@ You only do this once; after that the app updates itself (Settings → General �
 
 ## Privacy
 
-- No server, no account, no analytics. AI Hub Bar talks only to the AI services you use.
+- No account, no analytics. AI Hub Bar talks to the AI services you use and to GitHub for updates.
+- The one server of ours is the relay of the optional shared Telegram bot, on Cloudflare: it logs no message text and keeps only which chat belongs to which Mac. With a bot of your own, or without Telegram, nothing goes through it.
 - Your files go only to the service you run a command with.
 - API keys are kept in the macOS Keychain, never in logs or exported settings. Claude Code's sign-in is read from the Keychain on each refresh and never stored.
 - The session hook only writes small status files on your Mac and never changes what Claude does; Settings → AI Services → Claude Code → Remove hooks takes it out.
