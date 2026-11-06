@@ -5,8 +5,8 @@
 **Updated:** 2026-11-06
 
 **Now:**
-- donations (branch `feat/donations`, PR #262): «Поддержать проект» in Settings → General and site/support.html with Ko-fi and GitHub Sponsors live
 - Telegram: Worker deployed at https://aihubbar-telegram.oleh-demishev.workers.dev (new bot, old bots deleted by Oleh); the app points at it — pairing and a live check next
+- merged 2026-11-06: #262 donations («Поддержать проект» in Settings → General, site/support.html with Ko-fi and GitHub Sponsors; the app button reaches people with the next release)
 - merged 2026-11-03: #251 menu bar ☕ follows the «Не спать» switch, #248 «Не спать» on/off in the menu bar, #241 Codex states, #240 quick command shortcuts, #238 «Быстрый запрос», #236 content spec, #242 «Telegram» stage 1, #244 menu at the bottom, #246 shared bot (Worker not deployed yet), #247 desktop CI off for Mac string changes, #249 the bot's menu set up by each person, #252 stage 2 (sessions, requests, limits), #254 stage 3 (tasks and runs), #255 stage 4 (settings in the bot), #256 Mini App
 
 **Next:**
