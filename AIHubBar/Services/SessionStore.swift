@@ -16,6 +16,8 @@ final class SessionStore {
     }
 
     private(set) var items: [Item] = []
+    /// Finished sessions that can be continued, newest first (`SessionRules.isResumable`).
+    private(set) var resumable: [Session] = []
     /// Open permission requests, by session id (`ApprovalFiles`).
     private(set) var approvals: [String: ApprovalRequest] = [:]
     /// Set by the app: whether permissions may be answered from AI Hub Bar («Отвечать из уведомлений»).
@@ -61,9 +63,11 @@ final class SessionStore {
     func reload() {
         let directory = directory
         Task {
-            let (loaded, requests) = await Task.detached(priority: .utility) {
-                (SessionStore.loadItems(from: directory, now: .now), ApprovalFiles.bySession(ApprovalFiles.requests()))
+            let (loaded, finished, requests) = await Task.detached(priority: .utility) {
+                (SessionStore.loadItems(from: directory, now: .now), SessionStore.loadResumable(from: directory, now: .now),
+                 ApprovalFiles.bySession(ApprovalFiles.requests()))
             }.value
+            if finished != resumable { resumable = finished }
             apply(loaded, requests: requests)
         }
     }
@@ -111,6 +115,20 @@ final class SessionStore {
                 .map(ContextUsage.fraction)
             return Item(session: entry.session, state: entry.state, context: context)
         }
+    }
+
+    nonisolated static func loadResumable(from directory: URL, now: Date) -> [Session] {
+        let files = (try? FileManager.default.contentsOfDirectory(at: directory, includingPropertiesForKeys: nil)) ?? []
+        let decoder = JSONDecoder()
+        let sessions = files
+            .filter { $0.pathExtension == "json" }
+            .compactMap { url -> Session? in
+                guard let data = try? Data(contentsOf: url), let session = try? decoder.decode(Session.self, from: data) else { return nil }
+                let exists = FileManager.default.fileExists(atPath: session.cwd)
+                return SessionRules.isResumable(session, isAlive: session.claudePID.map(isClaudeProcessAlive), now: now, folderExists: exists)
+                    ? session : nil
+            }
+        return Array(sessions.sorted { $0.updatedAt > $1.updatedAt }.prefix(SessionRules.resumableCount))
     }
 
     /// True when `pid` exists and is still an agent's executable — Claude Code, Copilot or Codex CLI (guards against PID reuse).
@@ -221,6 +239,18 @@ final class SessionStore {
 
 @MainActor
 enum SessionActions {
+    /// A finished Claude Code session goes on in Terminal, in its own folder.
+    static func resume(_ session: Session, claudePath: String) {
+        let commandLine = ShellQuote.claudeResumeCommandLine(folder: session.cwd, claude: ClaudeLocator.resolve(configured: claudePath), sessionID: session.id)
+        Task {
+            do {
+                try await TerminalLauncher.run(commandLine)
+            } catch {
+                AppLog.error("Resume session \(session.id): \(error.localizedDescription)")
+            }
+        }
+    }
+
     /// Terminal.app sessions: bring the tab with the session's tty forward. Desktop-app sessions: open that session
     /// in Claude (just Claude if the app has no record of it); `claude` started in the Claude app's own terminal
     /// lives in Claude too, so Claude comes forward rather than Finder. Otherwise (or if the tab is gone): the folder.

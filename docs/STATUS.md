@@ -30,6 +30,12 @@
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
 
+## 2026-11-06 — Continue finished sessions (branch `feat/resume-sessions`)
+
+Done: «Сессии» has «Недавно завершённые»: the last five finished Claude Code sessions whose folder still exists. A click runs `claude --resume` in Terminal, in that folder. Ended rows have «Продолжить в Терминале» in their context menu. The block stays when only such sessions are left. 3 new strings in 12 languages.
+Checked: scripts/check.sh passed, with a new test for which sessions can be continued and for the command line.
+Left: not clicked live: Oleh was using the Mac.
+
 ## 2026-11-06 — Usage history (branch `feat/usage-history`)
 
 Done: «История расхода…» under «Расход по проектам» opens a window with Claude Code tokens by day (7, 30, 90 days), totals, the busiest day, a CSV export and a cost estimate at the price the person entered. Days are kept in `usage-days.json` for about a year with the day's highest limit percentages; the first run reads the journals' last three months once. `--app-command usage-history` opens the window. 18 new strings in 12 languages.

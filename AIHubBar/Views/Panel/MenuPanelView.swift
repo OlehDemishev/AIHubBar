@@ -380,8 +380,8 @@ struct MenuPanelView: View {
             let sessionRows = SessionRow.rows(sessions: sessions.items, runs: runs.runs)
             // A Copilot or Codex session with the hook is already a row of its own, with its state.
             let others = AgentThread.without(agentThreads, sessionIDs: Set(sessions.items.map(\.id)))
-            if !sessionRows.isEmpty || !others.isEmpty {
-                SessionsView(rows: sessionRows, others: others)
+            if !sessionRows.isEmpty || !others.isEmpty || !sessions.resumable.isEmpty {
+                SessionsView(rows: sessionRows, others: others, resumable: sessions.resumable)
                     .panelCard()
                     .revealed(isShown, step: 1, reduceMotion: calm)
             } else if hooks.status == .installed {

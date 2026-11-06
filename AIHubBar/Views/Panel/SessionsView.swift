@@ -55,6 +55,9 @@ struct SessionsView: View {
     let rows: [SessionRow]
     /// Recent Codex and Copilot conversations (SPEC-ai-services stages 5–6), under Claude's sessions.
     var others: [AgentThread] = []
+    /// Finished Claude Code sessions that can be continued.
+    var resumable: [Session] = []
+    @AppStorage(StorageKey.recentSessionsExpanded) private var showsResumable = false
 
     private var waiting: Int { rows.filter { $0.state == .waiting }.count }
     private var active: Int { rows.filter { $0.state != .ended }.count }
@@ -86,9 +89,72 @@ struct SessionsView: View {
                 ForEach(others) { thread in
                     AgentThreadRow(thread: thread)
                 }
+                if !resumable.isEmpty {
+                    Button {
+                        withAnimation(.snappy(duration: 0.2)) { showsResumable.toggle() }
+                    } label: {
+                        HStack(spacing: 4) {
+                            Image(systemName: "chevron.right")
+                                .rotationEffect(.degrees(showsResumable ? 90 : 0))
+                            Text("Недавно завершённые")
+                            Spacer()
+                        }
+                        .scaledFont(.caption)
+                        .foregroundStyle(.secondary)
+                        .contentShape(Rectangle())
+                    }
+                    .buttonStyle(.plain)
+                    .padding(.horizontal, 8)
+                    .padding(.vertical, 2)
+                    if showsResumable {
+                        ForEach(resumable) { session in
+                            ResumableSessionRow(session: session)
+                        }
+                    }
+                }
             }
         }
         .padding(4)
+    }
+}
+
+/// A finished Claude Code session: a click continues it in Terminal with `claude --resume`.
+private struct ResumableSessionRow: View {
+    let session: Session
+    @Environment(AppSettings.self) private var settings
+    @State private var isHovered = false
+
+    var body: some View {
+        HStack(spacing: 6) {
+            Image(systemName: "arrow.uturn.backward")
+                .foregroundStyle(.secondary)
+                .frame(width: 14)
+            Text(session.displayProject)
+                .fontWeight(.medium)
+                .lineLimit(1)
+                .layoutPriority(1)
+            if let task = session.task {
+                Text(task)
+                    .scaledFont(.callout)
+                    .lineLimit(1)
+                    .truncationMode(.tail)
+                    .foregroundStyle(.secondary)
+            }
+            Spacer(minLength: 4)
+            Text(RelativeTime.ago(session.updatedAt))
+                .scaledFont(.caption)
+                .foregroundStyle(.secondary)
+        }
+        .padding(.horizontal, 8)
+        .densityPadding(4)
+        .background(RoundedRectangle(cornerRadius: 7).fill(Color.primary.opacity(isHovered ? 0.06 : 0)))
+        .contentShape(Rectangle())
+        .onTapGesture { SessionActions.resume(session, claudePath: settings.claudePath) }
+        .onHover { isHovered = $0 }
+        .help(String(localized: "Продолжить в Терминале · \(session.cwd)"))
+        .accessibilityElement(children: .combine)
+        .accessibilityAddTraits(.isButton)
+        .accessibilityAction { SessionActions.resume(session, claudePath: settings.claudePath) }
     }
 }
 
@@ -182,6 +248,7 @@ private struct SessionRowView: View {
     /// Running with no tool call for this long looks stuck.
     static let quietAfter: TimeInterval = 10 * 60
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(AppSettings.self) private var settings
 
     var body: some View {
         VStack(alignment: .leading, spacing: 2) {
@@ -339,7 +406,11 @@ private struct SessionRowView: View {
             if run.isPaused { Button("Продолжить сейчас") { launcher.resumeNow(run.id) } }
             if run.state == .running { Button("Остановить", role: .destructive) { runs.stop(run.id) } }
         } else if let session = row.session {
-            Button("Показать") { SessionActions.show(session) }
+            if row.state == .ended, session.agent == .claudeCode {
+                Button("Продолжить в Терминале") { SessionActions.resume(session, claudePath: settings.claudePath) }
+            } else {
+                Button("Показать") { SessionActions.show(session) }
+            }
         }
     }
 
