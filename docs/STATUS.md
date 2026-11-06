@@ -30,6 +30,12 @@
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
 
+## 2026-11-06 — Panel shortcut (branch `feat/panel-hotkey`)
+
+Done: «Клавиши» → «Открывать панель» (⌃⌥B by default, also ⌃⌥M and ⌥⌘B). `MenuBarExtra` has no call to open it, so `PanelOpener` posts a real click on the app's item and puts the pointer back; that needs the Accessibility permission, and without it the search window opens. The key counts as the app's own in the shortcut conflict check. `--app-command open-panel` runs it. 3 new strings in 12 languages.
+Checked: scripts/check.sh passed.
+Left: not pressed live, Oleh was using the Mac. The earlier note said `MenuBarExtra` ignores synthetic clicks, while a click posted from outside the app opened it on 2026-11-06, so this one needs a live check: `AIHubBar --app-command open-panel`.
+
 ## 2026-11-06 — Continue finished sessions (branch `feat/resume-sessions`)
 
 Done: «Сессии» has «Недавно завершённые»: the last five finished Claude Code sessions whose folder still exists. A click runs `claude --resume` in Terminal, in that folder. Ended rows have «Продолжить в Терминале» in their context menu. The block stays when only such sessions are left. 3 new strings in 12 languages.

@@ -32,6 +32,62 @@ enum PanelHotKey: String, CaseIterable, Sendable {
     }
 }
 
+/// The global shortcut that opens the panel itself (`PanelOpener`).
+enum OpenPanelHotKey: String, CaseIterable, Sendable {
+    case off, controlOptionB, controlOptionM, optionCommandB
+
+    var title: String {
+        switch self {
+        case .off: String(localized: "Выключено")
+        case .controlOptionB: "⌃⌥B"
+        case .controlOptionM: "⌃⌥M"
+        case .optionCommandB: "⌥⌘B"
+        }
+    }
+
+    var keyCode: UInt32 {
+        switch self {
+        case .off: 0
+        case .controlOptionB, .optionCommandB: UInt32(kVK_ANSI_B)
+        case .controlOptionM: UInt32(kVK_ANSI_M)
+        }
+    }
+
+    var modifiers: UInt32 {
+        switch self {
+        case .off: 0
+        case .controlOptionB, .controlOptionM: UInt32(controlKey | optionKey)
+        case .optionCommandB: UInt32(optionKey | cmdKey)
+        }
+    }
+}
+
+/// Opens the panel by clicking the app's own menu bar item. `MenuBarExtra` has no call for it, and `performClick` and
+/// the item's action do nothing (tried 2026-10-30): only a real click does, and posting one needs the Accessibility
+/// permission. Without it the search window opens instead. The pointer goes back to where it was.
+@MainActor
+enum PanelOpener {
+    static func toggle() {
+        guard AXIsProcessTrusted(), let point = itemCentre, let primary = NSScreen.screens.first else {
+            QuickSearch.show()
+            return
+        }
+        let target = CGPoint(x: point.x, y: primary.frame.height - point.y)
+        let back = NSEvent.mouseLocation
+        let source = CGEventSource(stateID: .hidSystemState)
+        for type in [CGEventType.mouseMoved, .leftMouseDown, .leftMouseUp] {
+            CGEvent(mouseEventSource: source, mouseType: type, mouseCursorPosition: target, mouseButton: .left)?.post(tap: .cghidEventTap)
+        }
+        CGWarpMouseCursorPosition(CGPoint(x: back.x, y: primary.frame.height - back.y))
+    }
+
+    /// The middle of the app's status item, in AppKit screen coordinates.
+    private static var itemCentre: CGPoint? {
+        NSApp.windows.first { $0.className.contains("NSStatusBarWindow") && $0.frame.width > 0 }
+            .map { CGPoint(x: $0.frame.midX, y: $0.frame.midY) }
+    }
+}
+
 @MainActor
 enum GlobalHotKey {
     private static var reference: EventHotKeyRef?
@@ -45,7 +101,8 @@ enum GlobalHotKey {
     static var quickPromptAction: (() -> Void)?
 
     private static let signature: OSType = 0x4350_5554
-    private enum ID: UInt32 { case panel = 1, allow, deny, quickPrompt }
+    private enum ID: UInt32 { case panel = 1, allow, deny, quickPrompt, openPanel }
+    private static var openPanelReference: EventHotKeyRef?
 
     static func register(_ key: PanelHotKey) {
         if let reference {
@@ -60,6 +117,18 @@ enum GlobalHotKey {
         } else {
             AppLog.error("Hot key \(key.rawValue) not registered (another app may use it)")
         }
+    }
+
+    /// The key that opens the panel; `.off` unregisters it.
+    static func registerOpenPanel(_ key: OpenPanelHotKey) {
+        if let openPanelReference {
+            UnregisterEventHotKey(openPanelReference)
+            self.openPanelReference = nil
+        }
+        guard key != .off else { return }
+        installHandler()
+        openPanelReference = add(key.keyCode, key.modifiers, .openPanel)
+        AppLog.info(openPanelReference != nil ? "Panel hot key \(key.rawValue) registered" : "Panel hot key \(key.rawValue) not registered (another app may use it)")
     }
 
     /// ⌃⌥Y and ⌃⌥N while the person has them on; off unregisters both.
@@ -159,6 +228,7 @@ enum GlobalHotKey {
                     case .allow: GlobalHotKey.islandAction?(true)
                     case .deny: GlobalHotKey.islandAction?(false)
                     case .quickPrompt: GlobalHotKey.quickPromptAction?()
+                    case .openPanel: PanelOpener.toggle()
                     default: GlobalHotKey.action?()
                     }
                 }
@@ -168,9 +238,8 @@ enum GlobalHotKey {
     }
 }
 
-/// The hot key and the Shortcuts action open a small search window in the middle of the screen. The menu bar
-/// panel itself can't be opened from code: `MenuBarExtra` ignores synthetic clicks on its item (tried
-/// `performClick`, its action and mouse events, 2026-10-30).
+/// The hot key and the Shortcuts action open a small search window in the middle of the screen, and the panel's own
+/// key falls back to it without the Accessibility permission (`PanelOpener`).
 @MainActor
 enum QuickSearch {
     static var open: (() -> Void)?

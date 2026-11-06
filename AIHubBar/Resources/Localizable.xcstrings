@@ -60220,6 +60220,82 @@
         }
       }
     },
+    "Открывать панель": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "فتح اللوحة"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Panel öffnen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open the panel"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abrir el panel"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ouvrir le panneau"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buka panel"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apri il pannello"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "パネルを開く"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "패널 열기"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otwieraj panel"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abrir o painel"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Відкривати панель"
+          }
+        }
+      }
+    },
     "Открывать поиск с клавиатуры": {
       "localizations": {
         "ar": {
@@ -64935,6 +65011,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Панель порожня"
+          }
+        }
+      }
+    },
+    "Панель с клавиатуры открывается через разрешение «Универсальный доступ» (то же, что у «Раскладки»). Без него откроется окно поиска.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يتطلب فتح اللوحة من لوحة المفاتيح إذن تسهيلات الاستخدام (نفسه الخاص بتخطيط لوحة المفاتيح). من دونه تُفتح نافذة البحث."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Das Öffnen des Panels per Tastatur braucht die Berechtigung „Bedienungshilfen“ (wie beim Tastaturlayout). Ohne sie öffnet sich das Suchfenster."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Opening the panel from the keyboard needs the Accessibility permission (the same as Keyboard Layout). Without it the search window opens."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abrir el panel con el teclado requiere el permiso de Accesibilidad (el mismo que la distribución del teclado). Sin él se abre la ventana de búsqueda."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ouvrir le panneau au clavier nécessite l’autorisation Accessibilité (la même que pour la disposition du clavier). Sans elle, la fenêtre de recherche s’ouvre."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Membuka panel dari papan ketik memerlukan izin Aksesibilitas (sama seperti tata letak papan ketik). Tanpanya jendela pencarian terbuka."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aprire il pannello da tastiera richiede il permesso Accessibilità (lo stesso del layout di tastiera). Senza di esso si apre la finestra di ricerca."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "キーボードからパネルを開くにはアクセシビリティの許可が必要です(キーボード配列と同じ)。許可がない場合は検索ウインドウが開きます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "키보드로 패널을 열려면 손쉬운 사용 권한이 필요합니다(키보드 배열과 동일). 권한이 없으면 검색 창이 열립니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otwieranie panelu z klawiatury wymaga uprawnienia Dostępność (tego samego co układ klawiatury). Bez niego otworzy się okno wyszukiwania."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abrir o painel pelo teclado precisa da permissão de Acessibilidade (a mesma do layout do teclado). Sem ela abre a janela de busca."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Панель із клавіатури відкривається через дозвіл «Універсальний доступ» (той самий, що й у «Розкладки»). Без нього відкриється вікно пошуку."
           }
         }
       }
@@ -117031,6 +117183,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "пам’ять %lld %%"
+          }
+        }
+      }
+    },
+    "панель AI Hub Bar": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لوحة AI Hub Bar"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI-Hub-Bar-Panel"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "the AI Hub Bar panel"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "panel de AI Hub Bar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "panneau AI Hub Bar"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "panel AI Hub Bar"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "pannello di AI Hub Bar"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar のパネル"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar 패널"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "panel AI Hub Bar"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "painel do AI Hub Bar"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "панель AI Hub Bar"
           }
         }
       }

@@ -58,8 +58,12 @@ struct CommandHotKeysTests {
     @Test func theAppsOwnKeys() {
         let settings = settings()
         settings.panelHotKey = .controlOptionC
+        settings.openPanelHotKey = .off
         settings.notch.hotKeys = false
         #expect(CommandHotKeys.reserved(settings).keys.map(\.title) == ["⌃⌥C"])
+        settings.openPanelHotKey = .controlOptionB
+        #expect(Set(CommandHotKeys.reserved(settings).keys.map(\.title)) == ["⌃⌥C", "⌃⌥B"])
+        settings.openPanelHotKey = .off
         settings.panelHotKey = .off
         settings.notch.hotKeys = true
         #expect(Set(CommandHotKeys.reserved(settings).keys.map(\.title)) == ["⌃⌥Y", "⌃⌥N"])
