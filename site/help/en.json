@@ -238,8 +238,8 @@
               "name" : "Stop"
             },
             {
-              "detail" : "Sessions are visible only with hooks installed in Settings (they are added to ~/.claude/settings.json; a copy is kept next to it).",
-              "name" : "Hooks"
+              "detail" : "Sessions show only with tracking on: a small script is added to ~/.claude/settings.json, with a backup next to it.",
+              "name" : "Session tracking"
             },
             {
               "detail" : "Their sessions also show “running / waiting / done” when AI Hub Bar's hook is installed on their page under “AI Services”. Codex runs a new hook only after review: type /hooks in codex and trust it. Without the hook — only recent conversations, without a state.",
@@ -251,7 +251,7 @@
         }
       ],
       "steps" : [
-        "Install hooks: “Agent sessions” page → Hooks.",
+        "Turn on tracking on the “Agent sessions” page.",
         "Answer permission requests right from the notification or the session row."
       ],
       "summary" : "All Claude Code sessions on this Mac: what they’re doing, which are waiting for an answer, background tasks and the queue.",

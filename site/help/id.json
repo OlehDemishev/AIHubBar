@@ -238,8 +238,8 @@
               "name" : "Hentikan"
             },
             {
-              "detail" : "Sesi hanya terlihat jika hook terpasang di Pengaturan (ditambahkan ke ~/.claude/settings.json; salinannya disimpan di sebelahnya).",
-              "name" : "Hooks"
+              "detail" : "Sesi hanya terlihat saat pelacakan aktif: skrip kecil ditambahkan ke ~/.claude/settings.json, dengan cadangan di sebelahnya.",
+              "name" : "Pelacakan sesi"
             },
             {
               "detail" : "Sesi mereka juga menampilkan “bekerja / menunggu / selesai” jika hook AI Hub Bar dipasang di halamannya pada “Layanan AI”. Codex menjalankan hook baru hanya setelah ditinjau: ketik /hooks di codex lalu percayai. Tanpa hook, hanya percakapan terbaru tanpa status.",
@@ -251,7 +251,7 @@
         }
       ],
       "steps" : [
-        "Pasang hooks: halaman «Sesi agen» → Hooks.",
+        "Aktifkan pelacakan di halaman “Sesi agen”.",
         "Jawab permintaan izin langsung dari pemberitahuan atau baris sesi."
       ],
       "summary" : "Semua sesi Claude Code di Mac ini: apa yang dikerjakan, mana yang menunggu jawaban, tugas latar belakang, dan antrean.",

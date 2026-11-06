@@ -238,8 +238,8 @@
               "name" : "Parar"
             },
             {
-              "detail" : "As sessões só aparecem com os hooks instalados em Ajustes (eles são adicionados a ~/.claude/settings.json; uma cópia fica ao lado).",
-              "name" : "Hooks"
+              "detail" : "As sessões só aparecem com o acompanhamento ativo: um pequeno script é adicionado a ~/.claude/settings.json, com um backup ao lado.",
+              "name" : "Acompanhamento de sessões"
             },
             {
               "detail" : "As sessões deles também mostram “trabalhando / aguardando / pronto” se o hook do AI Hub Bar estiver instalado na página deles em “Serviços de IA”. O Codex só executa um hook novo após revisão: digite /hooks no codex e confie nele. Sem o hook, apenas as conversas recentes, sem estado.",
@@ -251,7 +251,7 @@
         }
       ],
       "steps" : [
-        "Instale os hooks: página «Sessões de agentes» → Hooks.",
+        "Ative o acompanhamento na página “Sessões de agentes”.",
         "Responda às solicitações de permissão direto da notificação ou da linha da sessão."
       ],
       "summary" : "Todas as sessões do Claude Code neste Mac: o que fazem, quais aguardam resposta, as tarefas em segundo plano e a fila.",

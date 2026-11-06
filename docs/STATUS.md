@@ -5,7 +5,7 @@
 **Updated:** 2026-11-06
 
 **Now:**
-- polish plan agreed with Oleh 2026-11-06, in order: first run, panel, settings and texts, usage history, ended sessions, panel hotkey, service status, several Claude accounts
+- release 0.7.0: first run, panel, settings, usage history, finished sessions, panel shortcut, outages, several Claude accounts
 - Telegram: Worker deployed at https://aihubbar-telegram.oleh-demishev.workers.dev (new bot, old bots deleted by Oleh); the app points at it — pairing and a live check next
 - merged 2026-11-06: #262 donations («Поддержать проект» in Settings → General, site/support.html with Ko-fi, GitHub Sponsors and Buy Me a Coffee; the app button reaches people with the next release)
 - merged 2026-11-03: #251 menu bar ☕ follows the «Не спать» switch, #248 «Не спать» on/off in the menu bar, #241 Codex states, #240 quick command shortcuts, #238 «Быстрый запрос», #236 content spec, #242 «Telegram» stage 1, #244 menu at the bottom, #246 shared bot (Worker not deployed yet), #247 desktop CI off for Mac string changes, #249 the bot's menu set up by each person, #252 stage 2 (sessions, requests, limits), #254 stage 3 (tasks and runs), #255 stage 4 (settings in the bot), #256 Mini App
@@ -17,6 +17,7 @@
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/specs/SPEC-windows.md §9, stage 2–3 leftovers)
 
 **Needs Oleh:**
+- 0.7.0 live checks: press ⌃⌥B (or `AIHubBar --app-command open-panel`), open «История расхода…», right-click a session row; with a second account: Settings → Claude Code → «Другие аккаунты Claude»
 - promotion: decide on the Apple Developer ID (paid yearly; needed before Show HN and Homebrew), record a 20–30 s demo, post the drafts in docs/LAUNCH.md from your accounts
 - Telegram: Settings → Modules → Telegram → «Общий бот» → «Подключить Telegram» → Start (`_daily-report/config.json` already points at @AIHubBarBot)
 - Telegram: delete `_daily-report/bot.py` and `install-bot.sh`

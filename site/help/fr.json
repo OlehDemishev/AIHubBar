@@ -238,8 +238,8 @@
               "name" : "Arrêter"
             },
             {
-              "detail" : "Les sessions ne sont visibles qu'avec les hooks installés dans Réglages (ils sont ajoutés à ~/.claude/settings.json ; une copie est gardée à côté).",
-              "name" : "Hooks"
+              "detail" : "Les sessions n’apparaissent qu’avec le suivi activé : un petit script est ajouté à ~/.claude/settings.json, avec une sauvegarde à côté.",
+              "name" : "Suivi des sessions"
             },
             {
               "detail" : "Leurs sessions affichent aussi « en cours / en attente / terminé » si le hook d'AI Hub Bar est installé sur leur page dans « Services IA ». Codex n'exécute un nouveau hook qu'après vérification : tapez /hooks dans codex et faites-lui confiance. Sans hook, seulement les conversations récentes, sans état.",
@@ -251,7 +251,7 @@
         }
       ],
       "steps" : [
-        "Installez les hooks : page « Sessions des agents » → Hooks.",
+        "Activez le suivi sur la page « Sessions des agents ».",
         "Répondez aux demandes d’autorisation directement depuis la notification ou la ligne de la session."
       ],
       "summary" : "Toutes les sessions Claude Code sur ce Mac : ce qu’elles font, lesquelles attendent une réponse, les tâches en arrière-plan et la file d’attente.",
