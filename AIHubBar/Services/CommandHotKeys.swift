@@ -191,6 +191,9 @@ final class CommandHotKeys {
         if settings.panelHotKey != .off {
             keys[KeyCombo(keyCode: settings.panelHotKey.keyCode, modifiers: settings.panelHotKey.modifiers)] = String(localized: "поиск AI Hub Bar")
         }
+        if settings.openPanelHotKey != .off {
+            keys[KeyCombo(keyCode: settings.openPanelHotKey.keyCode, modifiers: settings.openPanelHotKey.modifiers)] = String(localized: "панель AI Hub Bar")
+        }
         if settings.notch.hotKeys {
             let modifiers = UInt32(controlKey | optionKey)
             keys[KeyCombo(keyCode: UInt32(kVK_ANSI_Y), modifiers: modifiers)] = String(localized: "остров — разрешить запрос")

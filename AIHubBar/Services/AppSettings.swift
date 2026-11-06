@@ -166,6 +166,10 @@ final class AppSettings {
         didSet { defaults.set(panelHotKey.rawValue, forKey: Keys.panelHotKey) }
     }
 
+    var openPanelHotKey: OpenPanelHotKey {
+        didSet { defaults.set(openPanelHotKey.rawValue, forKey: Keys.openPanelHotKey) }
+    }
+
     /// Notify when a pull request's CI fails or recovers, or the PR closes (`PullRequestAlerts`).
     var pullRequestAlerts: Bool {
         didSet { defaults.set(pullRequestAlerts, forKey: Keys.pullRequestAlerts) }
@@ -351,6 +355,7 @@ final class AppSettings {
         pullRequestAlerts = defaults.bool(Keys.pullRequestAlerts, default: true)
         nightStartHour = defaults.int(Keys.nightStartHour, default: 1)
         panelHotKey = defaults.value(PanelHotKey.self, forKey: Keys.panelHotKey) ?? .controlOptionC
+        openPanelHotKey = defaults.value(OpenPanelHotKey.self, forKey: Keys.openPanelHotKey) ?? .controlOptionB
         pullRequestAlertsToTelegram = defaults.bool(forKey: Keys.pullRequestAlertsToTelegram)
         telegramApprovalsChatID = defaults.string(forKey: Keys.telegramApprovalsChatID) ?? ""
         clipboardExcludedApps = defaults.stringArray(forKey: Keys.clipboardExcludedApps) ?? ClipboardPolicy.defaultExcludedApps
@@ -411,6 +416,7 @@ final class AppSettings {
         static let telegramApprovals = "telegramApprovals"
         static let pullRequestAlerts = "pullRequestAlerts"
         static let panelHotKey = "panelHotKey"
+        static let openPanelHotKey = "openPanelHotKey"
         static let nightStartHour = "nightStartHour"
         static let pullRequestAlertsToTelegram = "pullRequestAlertsToTelegram"
         static let telegramApprovalsChatID = "telegramApprovalsChatID"

@@ -235,6 +235,7 @@ final class AppContainer {
             monitor.start()
             keepAwake.start()
             GlobalHotKey.register(settings.panelHotKey)
+            GlobalHotKey.registerOpenPanel(settings.openPanelHotKey)
             GlobalHotKey.registerIsland(settings.notch.hotKeys)
             GlobalHotKey.islandAction = { [notchIsland] allow in notchIsland.answerByKey(allow: allow) }
             quickPrompt.start()

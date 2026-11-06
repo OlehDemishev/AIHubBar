@@ -14,6 +14,10 @@ struct ShortcutsSettings: View {
                     ForEach(PanelHotKey.allCases, id: \.self) { Text($0.title).tag($0) }
                 }
                 .onChange(of: settings.panelHotKey) { GlobalHotKey.register(settings.panelHotKey) }
+                Picker("Открывать панель", systemImage: "menubar.rectangle", selection: $settings.openPanelHotKey) {
+                    ForEach(OpenPanelHotKey.allCases, id: \.self) { Text($0.title).tag($0) }
+                }
+                .onChange(of: settings.openPanelHotKey) { GlobalHotKey.registerOpenPanel(settings.openPanelHotKey) }
                 if modes.isOn(.quickPrompt) {
                     Picker("Быстрый запрос", systemImage: "text.bubble", selection: $settings.quickPrompt.hotKey) {
                         ForEach(QuickPromptHotKey.allCases, id: \.self) { Text($0.title).tag($0) }
@@ -25,6 +29,7 @@ struct ShortcutsSettings: View {
                 }
             } footer: {
                 Footnote(text: String(localized: "Работают из любой программы. В панели: ⌘R — обновить, ⌘, — настройки, ↑ ↓ и ↵ — результаты поиска."))
+                Footnote(text: String(localized: "Панель с клавиатуры открывается через разрешение «Универсальный доступ» (то же, что у «Раскладки»). Без него откроется окно поиска."))
             }
 
             if modes.isOn(.quickCommands), !settings.quickCommands.isEmpty {
