@@ -71,7 +71,7 @@ You only do this once; after that the app updates itself (Settings â†’ General â
 
 ## Privacy
 
-- No account, no analytics. AI Hub Bar talks to the AI services you use and to GitHub for updates.
+- No account, no analytics. AI Hub Bar talks to the AI services you use, to GitHub for updates and, when the limits fail, to Anthropic's public status page.
 - The one server of ours is the relay of the optional shared Telegram bot, on Cloudflare: it logs no message text and keeps only which chat belongs to which Mac. With a bot of your own, or without Telegram, nothing goes through it.
 - Your files go only to the service you run a command with.
 - API keys are kept in the macOS Keychain, never in logs or exported settings. Claude Code's sign-in is read from the Keychain on each refresh and never stored.

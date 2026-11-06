@@ -77,6 +77,18 @@ struct LimitsView: View {
             }
         }
 
+        if let outage = usage.outage {
+            HStack(spacing: 6) {
+                Label("Сбой у Anthropic: \(outage)", systemImage: "exclamationmark.icloud")
+                    .scaledFont(.caption)
+                    .foregroundStyle(.orange)
+                    .fixedSize(horizontal: false, vertical: true)
+                Spacer(minLength: 4)
+                Link("Подробнее", destination: ServiceStatus.page)
+                    .scaledFont(.caption)
+            }
+        }
+
         ForEach(launcher.queued) { item in
             QueuedRow(item: item)
         }

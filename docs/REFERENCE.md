@@ -59,6 +59,8 @@ Data refreshes at launch, on panel open when older than 60 s, every 5 min (`--no
 
 **Recently finished:** under the sessions, the last five finished Claude Code sessions whose folder still exists (session files are kept for 7 days). A click continues one with `claude --resume` in Terminal.
 
+**Outages:** when the limits fail with a server or network error, the app asks Anthropic's public status page (`status.claude.com`, at most every 10 minutes, no account involved) and says so in the limits block if something is reported there.
+
 **What Claude is doing now:** a working session's row shows its last tool call in words — “editing LimitsView.swift”, “running npm test”, “searching TODO” (the task moves to the hover hint). With no tool call for 10 minutes the time turns into an orange “quiet N min”. The hook keeps `last_tool`, `last_target`, `last_tool_at` from PostToolUse (written when the action changes, else once a minute; cleared on Stop).
 
 **Answering Claude from AI Hub Bar:** when a Claude Code session asks for a permission (a command, a file edit), the notification and the session row in the panel get “Allow” / “Deny”. The hook writes `approvals/<id>.request.json` and waits up to 290 s for AI Hub Bar's answer; Claude's own dialog is on screen at the same time, so whichever answer comes first applies. The hook only waits while AI Hub Bar runs with the option on (Settings → AI Services → Claude Code, on by default); hooks installed before need “Update hooks” once (the PermissionRequest timeout grows from 5 to 300 s). In auto mode Claude rarely asks.
