@@ -194,7 +194,7 @@ private struct ServiceCard: View {
                             .foregroundStyle(runsOut ? .orange : .secondary)
                     }
                     if let week = usage.week, !week.days.isEmpty {
-                        WeekStrip(week: week)
+                        WeekStrip(week: week, showsForecast: !bothLast)
                     }
                     ForEach(usage.bars) { window in
                         WindowRow(window: window, now: context.date)
@@ -227,6 +227,11 @@ private struct ServiceCard: View {
         return false
     }
 
+    /// Both forecasts are good news: one line instead of two.
+    private var bothLast: Bool {
+        usage.forecast == .lastsUntilReset && usage.week?.forecast == .lastsUntilReset
+    }
+
     /// Where a service's tokens per project come from and what they count.
     private var projectsFootnote: String {
         switch usage.service {
@@ -237,6 +242,7 @@ private struct ServiceCard: View {
 
     /// Claude's session forecast keeps its wording; other services' limits can run for days, so they say the day.
     private var forecastLine: String? {
+        if bothLast { return String(localized: "хватит и на сессию, и на неделю") }
         guard usage.service != .claude, case let .runsOutAt(date) = usage.forecast else { return UsageText.forecast(usage.forecast) }
         return String(localized: "кончится \(date.formatted(.dateTime.weekday(.abbreviated).hour().minute())) при таком темпе")
     }
@@ -337,27 +343,38 @@ private struct WindowRow: View {
 /// The week's forecast and its days as small bars (today highlighted); hover a bar for its share of the week.
 private struct WeekStrip: View {
     let week: WeekUsage
+    var showsForecast = true
 
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
-            switch week.forecast {
-            case let .runsOutAt(date):
-                Text("неделя кончится \(date.formatted(.dateTime.weekday(.abbreviated).hour().minute())) при таком темпе")
-                    .foregroundStyle(.orange)
-            case .lastsUntilReset:
-                Text("неделе до сброса хватит")
-                    .foregroundStyle(.secondary)
-            case .unknown:
-                EmptyView()
+            if showsForecast {
+                switch week.forecast {
+                case let .runsOutAt(date):
+                    Text("неделя кончится \(date.formatted(.dateTime.weekday(.abbreviated).hour().minute())) при таком темпе")
+                        .foregroundStyle(.orange)
+                case .lastsUntilReset:
+                    Text("на неделю хватит")
+                        .foregroundStyle(.secondary)
+                case .unknown:
+                    EmptyView()
+                }
             }
+            Text("Расход недели по дням, в процентах")
+                .foregroundStyle(.secondary)
             let top = max(week.days.map(\.percent).max() ?? 0, 1)
             HStack(alignment: .bottom, spacing: 4) {
                 ForEach(week.days) { day in
                     VStack(spacing: 2) {
                         Spacer(minLength: 0)
-                        RoundedRectangle(cornerRadius: 2)
-                            .fill(day.isToday ? Color.accentColor : Color.primary.opacity(0.25))
-                            .frame(height: max(2, 24 * day.percent / top))
+                        if day.percent >= 0.5 {
+                            Text(verbatim: "\(Int(day.percent.rounded()))")
+                                .scaledFont(.caption2)
+                                .monospacedDigit()
+                                .foregroundStyle(.secondary)
+                        }
+                        RoundedRectangle(cornerRadius: 3)
+                            .fill(day.isToday ? Color.accentColor : Color.primary.opacity(0.35))
+                            .frame(width: 16, height: max(2, 22 * day.percent / top))
                         Text(day.date.formatted(.dateTime.weekday(.narrow)))
                             .scaledFont(.caption2)
                             .foregroundStyle(day.isToday ? .primary : .secondary)
@@ -366,7 +383,7 @@ private struct WeekStrip: View {
                     .help(String(localized: "\(day.date.formatted(.dateTime.weekday(.wide).day().month())): \(Int(day.percent.rounded())) % недельного лимита"))
                 }
             }
-            .frame(height: 40)
+            .frame(height: 56)
         }
         .scaledFont(.caption)
     }

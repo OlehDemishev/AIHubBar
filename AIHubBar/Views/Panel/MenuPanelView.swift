@@ -22,6 +22,7 @@ struct MenuPanelView: View {
     @Environment(CalendarStore.self) private var calendar
     @Environment(QuickToolsController.self) private var quickTools
     @Environment(CommandStore.self) private var commands
+    @Environment(AIServiceStore.self) private var services
 
     /// Drives the entrance animation; reset when the panel closes so it replays on every open.
     @State private var isShown = false
@@ -31,6 +32,8 @@ struct MenuPanelView: View {
     /// The panel draws its own glass instead of the system background.
     @State private var drawsGlass = false
     @State private var query = ""
+    @State private var searchSelection = 0
+    @State private var folderExpanded: Set<String> = []
     /// Recent Codex and Copilot conversations for «Сессии», read when the panel opens.
     @State private var agentThreads: [AgentThread] = []
     @FocusState private var searchFocused: Bool
@@ -57,14 +60,16 @@ struct MenuPanelView: View {
             header
                 .revealed(isShown, step: 0, reduceMotion: calm)
 
-            PanelSearchField(query: $query, focused: $searchFocused) {
-                if let first = searchResults.first { activate(first) }
+            PanelSearchField(query: $query, focused: $searchFocused, onMove: moveSelection) {
+                let results = searchResults
+                if results.indices.contains(searchSelection) { activate(results[searchSelection]) }
             }
+            .onChange(of: query) { searchSelection = 0 }
             .padding(.bottom, 8)
             .revealed(isShown, step: 0, reduceMotion: calm)
 
             if !query.isEmpty {
-                PanelSearchResults(results: searchResults, activate: activate)
+                PanelSearchResults(results: searchResults, selected: searchSelection, activate: activate)
                     .panelCard()
                     .padding(.bottom, 8)
             } else {
@@ -118,6 +123,8 @@ struct MenuPanelView: View {
             hooks.refresh()
             notifications.refresh()
             snapshotIfEnabled()
+            // Typing right after the click finds things; ↑ ↓ ↵ work from here.
+            searchFocused = true
             Task { agentThreads = await Task.detached(priority: .utility) { AgentThread.recent() }.value }
         }
         .onDisappear {
@@ -149,13 +156,26 @@ struct MenuPanelView: View {
         return PanelSearch.results(query, sessions: sessionItems, projects: projectItems, quickCommands: quick, commands: common)
     }
 
+    private func moveSelection(_ step: Int) {
+        let count = searchResults.count
+        guard count > 0 else { return }
+        searchSelection = min(max(searchSelection + step, 0), count - 1)
+    }
+
     private func activate(_ result: PanelSearch.Result) {
         query = ""
         switch result {
         case let .session(id, _, _):
-            if let session = sessions.items.first(where: { $0.id == id })?.session { SessionActions.show(session) }
+            // Like a click on the row: a background run shows its log.
+            if runs.runs.contains(where: { $0.id == id }) {
+                runs.selectedLogRunID = id
+                NSApp.activate()
+                openWindow(.runLog)
+            } else if let session = sessions.items.first(where: { $0.id == id })?.session {
+                SessionActions.show(session)
+            }
         case let .project(id, _, _):
-            expanded.insert(id)
+            if folders.isActive { folderExpanded.insert(id) } else { expanded.insert(id) }
             collapsedRaw = PanelBlock.collapsed(in: collapsedRaw).contains(.projects)
                 ? PanelBlock.toggling(.projects, in: collapsedRaw) : collapsedRaw
         case let .quickCommand(id, _):
@@ -213,6 +233,7 @@ struct MenuPanelView: View {
         .frame(width: 18, height: 18)
         .disabled(store.isRefreshing)
         .help(store.lastUpdated.map { String(localized: "Обновить · обновлено \(RelativeTime.ago($0))") } ?? String(localized: "Обновить"))
+        .accessibilityLabel("Обновить")
         .keyboardShortcut("r", modifiers: .command)
         // «Скрыть остров» for a screen recording or a demo (SPEC-notch §5), while the island is installed.
         if modes.isOn(.notch) {
@@ -220,6 +241,7 @@ struct MenuPanelView: View {
                 Image(systemName: settings.notch.hidden ? "laptopcomputer.slash" : "laptopcomputer")
             }
             .help(settings.notch.hidden ? String(localized: "Показать остров у чёлки") : String(localized: "Скрыть остров у чёлки"))
+            .accessibilityLabel(settings.notch.hidden ? String(localized: "Показать остров у чёлки") : String(localized: "Скрыть остров у чёлки"))
         }
         // Settings, help and quit were three menu-like rows at the bottom; as icons they no longer outweigh the content.
         Button { openSettings() } label: { Label("Настройки… (⌘,)", systemImage: "gearshape").labelStyle(.iconOnly) }
@@ -292,11 +314,24 @@ struct MenuPanelView: View {
         .padding(.vertical, 8)
     }
 
+    /// The block stays in its place when nothing is running, so it doesn't look lost.
+    private var noSessions: some View {
+        HStack(spacing: 6) {
+            BlockTitle(block: .sessions, title: "Сессии")
+            Text("нет активных")
+                .scaledFont(.caption)
+                .foregroundStyle(.secondary)
+            Spacer(minLength: 0)
+        }
+        .padding(.horizontal, 10)
+        .padding(.vertical, 8)
+    }
+
     private var hooksHint: some View {
         HStack(spacing: 8) {
             Image(systemName: "bell.slash")
                 .foregroundStyle(.secondary)
-            Text("Сессии Claude не отслеживаются: hooks не установлены.")
+            Text("Включите отслеживание, чтобы видеть сессии Claude.")
                 .scaledFont(.caption)
                 .foregroundStyle(.secondary)
             Spacer(minLength: 4)
@@ -349,7 +384,11 @@ struct MenuPanelView: View {
                 SessionsView(rows: sessionRows, others: others)
                     .panelCard()
                     .revealed(isShown, step: 1, reduceMotion: calm)
-            } else if hooks.status == .notInstalled {
+            } else if hooks.status == .installed {
+                noSessions
+                    .panelCard()
+                    .revealed(isShown, step: 1, reduceMotion: calm)
+            } else if services.agents[.claudeCode] != nil {
                 hooksHint
                     .panelCard()
                     .revealed(isShown, step: 1, reduceMotion: calm)
@@ -427,7 +466,7 @@ struct MenuPanelView: View {
     @ViewBuilder
     private var content: some View {
         if folders.isActive {
-            scrolling { FolderProjectsView() }
+            scrolling { FolderProjectsView(expanded: $folderExpanded) }
         } else {
             gitContent
         }

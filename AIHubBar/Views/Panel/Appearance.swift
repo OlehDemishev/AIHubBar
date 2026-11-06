@@ -166,6 +166,7 @@ struct BlockTitle: View {
     let block: PanelBlock
     let title: LocalizedStringKey
     @AppStorage(StorageKey.collapsedBlocks) private var collapsedRaw = ""
+    @Environment(\.panelGlass) private var glass
 
     var body: some View {
         let collapsed = PanelBlock.collapsed(in: collapsedRaw).contains(block)
@@ -179,7 +180,8 @@ struct BlockTitle: View {
                 Text(title)
                     .scaledFont(.caption, weight: .semibold)
             }
-            .foregroundStyle(.secondary)
+            // Grey disappears on glass over a bright window.
+            .foregroundStyle(glass ? AnyShapeStyle(Color.primary.opacity(0.85)) : AnyShapeStyle(.secondary))
             .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
@@ -197,7 +199,8 @@ private struct PanelCard: ViewModifier {
         if glass, #available(macOS 26.0, *) {
             content
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .glassEffect(.regular, in: shape)
+                // A tint of the window colour keeps text readable over whatever is behind the panel.
+                .glassEffect(.regular.tint(Color(nsColor: .windowBackgroundColor).opacity(0.45)), in: shape)
                 .padding(.horizontal, 8)
         } else {
             content

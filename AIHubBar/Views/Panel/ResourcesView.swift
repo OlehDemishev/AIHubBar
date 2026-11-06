@@ -32,6 +32,7 @@ struct ResourcesView: View {
                 }
                 .buttonStyle(.borderless)
                 .help("Открыть Мониторинг системы")
+                .accessibilityLabel("Открыть Мониторинг системы")
             }
             if !collapsed {
                 if let snapshot = monitor.snapshot {

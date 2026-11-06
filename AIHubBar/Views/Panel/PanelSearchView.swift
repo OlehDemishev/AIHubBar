@@ -66,6 +66,8 @@ struct PanelSearchField: View {
     var focused: FocusState<Bool>.Binding
     var placeholder: String?
     var onCancel: (() -> Void)?
+    /// ↑ and ↓ in the field: -1 or 1.
+    var onMove: ((Int) -> Void)?
     let onSubmit: () -> Void
 
     var body: some View {
@@ -76,6 +78,8 @@ struct PanelSearchField: View {
                 .textFieldStyle(.plain)
                 .focused(focused)
                 .onSubmit(onSubmit)
+                .onKeyPress(.upArrow) { move(-1) }
+                .onKeyPress(.downArrow) { move(1) }
                 // Esc clears the query, and with nothing typed closes the search window.
                 .onExitCommand { if query.isEmpty { onCancel?() } else { query = "" } }
             if !query.isEmpty {
@@ -91,11 +95,18 @@ struct PanelSearchField: View {
         .background(RoundedRectangle(cornerRadius: 9, style: .continuous).fill(Color.primary.opacity(0.06)))
         .padding(.horizontal, 8)
     }
+
+    private func move(_ step: Int) -> KeyPress.Result {
+        guard let onMove else { return .ignored }
+        onMove(step)
+        return .handled
+    }
 }
 
-/// What the search found; the first row is what ↵ does.
+/// What the search found; the selected row is what ↵ does.
 struct PanelSearchResults: View {
     let results: [PanelSearch.Result]
+    var selected = 0
     let activate: (PanelSearch.Result) -> Void
 
     var body: some View {
@@ -118,13 +129,13 @@ struct PanelSearchResults: View {
                             .foregroundStyle(.secondary)
                             .lineLimit(1)
                         Spacer(minLength: 4)
-                        if index == 0 {
+                        if index == selected {
                             Text(verbatim: "↵").foregroundStyle(.tertiary)
                         }
                     }
                     .padding(.horizontal, 8)
                     .padding(.vertical, 5)
-                    .background(RoundedRectangle(cornerRadius: 7).fill(index == 0 ? Color.accentColor.opacity(0.15) : .clear))
+                    .background(RoundedRectangle(cornerRadius: 7).fill(index == selected ? Color.accentColor.opacity(0.15) : .clear))
                     .contentShape(Rectangle())
                 }
                 .buttonStyle(.plain)

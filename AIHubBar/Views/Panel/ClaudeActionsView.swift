@@ -239,6 +239,7 @@ struct WorktreeListView: View {
                         Image(systemName: "trash")
                     }
                     .help("Удалить worktree (только если нет незакоммиченного и ветка запушена)")
+                    .accessibilityLabel("Удалить worktree (только если нет незакоммиченного и ветка запушена)")
                 }
             }
             if case let .blocked(reason) = state {

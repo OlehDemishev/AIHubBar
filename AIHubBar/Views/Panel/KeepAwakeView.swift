@@ -23,6 +23,7 @@ struct KeepAwakeView: View {
                     set: { $0 ? keepAwake.holdManually(for: nil) : keepAwake.stopManual() }
                 ))
                 .labelsHidden()
+                .accessibilityLabel("Не спать")
                 .toggleStyle(.switch)
                 .controlSize(.mini)
                 .help("Не давать Mac засыпать, пока не выключите")

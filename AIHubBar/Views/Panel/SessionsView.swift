@@ -57,12 +57,19 @@ struct SessionsView: View {
     var others: [AgentThread] = []
 
     private var waiting: Int { rows.filter { $0.state == .waiting }.count }
+    private var active: Int { rows.filter { $0.state != .ended }.count }
     @AppStorage(StorageKey.collapsedBlocks) private var collapsedRaw = ""
 
     var body: some View {
         VStack(alignment: .leading, spacing: 2) {
             HStack {
                 BlockTitle(block: .sessions, title: "Сессии")
+                if active > 0 {
+                    Text(verbatim: "\(active)")
+                        .scaledFont(.caption, weight: .medium)
+                        .monospacedDigit()
+                        .foregroundStyle(.secondary)
+                }
                 if waiting > 0 {
                     Text("ждут ответа: \(waiting)")
                         .scaledFont(.caption, weight: .medium)
@@ -174,13 +181,14 @@ private struct SessionRowView: View {
     private var action: String? { row.state == .running ? row.session?.actionText : nil }
     /// Running with no tool call for this long looks stuck.
     static let quietAfter: TimeInterval = 10 * 60
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     var body: some View {
         VStack(alignment: .leading, spacing: 2) {
             HStack(spacing: 6) {
                 Image(systemName: paused ? "pause.circle.fill" : inBackground ? "moon.zzz.fill" : row.state.symbol)
                     .foregroundStyle(paused ? Color.orange : row.state.color)
-                    .symbolEffect(.pulse, options: .repeating, isActive: row.state == .running && !paused)
+                    .symbolEffect(.pulse, options: .repeating, isActive: row.state == .running && !paused && !reduceMotion)
                     .frame(width: 14)
                     .help(paused ? String(localized: "на паузе до сброса лимита") : inBackground ? String(localized: "в фоне") : row.state.title)
                 Text(row.project)
@@ -278,6 +286,9 @@ private struct SessionRowView: View {
         // The whole row opens the session (or a background run's log), not only the icon on hover.
         .contentShape(Rectangle())
         .onTapGesture(perform: open)
+        // The buttons appear on hover: this is the way to them without a mouse, and for VoiceOver.
+        .contextMenu { menuActions }
+        .accessibilityAction(named: Text("Показать"), open)
         .task(id: refreshKey) {
             guard let folder, row.state != .ended else { return }
             await changesStore.refresh(folder: folder, since: row.startedAt)
@@ -319,6 +330,17 @@ private struct SessionRowView: View {
         let last = session.lastToolAt ?? session.updatedAt
         let quiet = now.timeIntervalSince(last)
         return quiet > Self.quietAfter ? Int(quiet / 60) : nil
+    }
+
+    @ViewBuilder
+    private var menuActions: some View {
+        if let run = row.run {
+            Button("Журнал") { showLog(run) }
+            if run.isPaused { Button("Продолжить сейчас") { launcher.resumeNow(run.id) } }
+            if run.state == .running { Button("Остановить", role: .destructive) { runs.stop(run.id) } }
+        } else if let session = row.session {
+            Button("Показать") { SessionActions.show(session) }
+        }
     }
 
     private var actions: some View {

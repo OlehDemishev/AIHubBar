@@ -6,7 +6,8 @@ import SwiftUI
 struct FolderProjectsView: View {
     @Environment(FolderProjectStore.self) private var store
     @Environment(ProfileStore.self) private var modes
-    @State private var expanded: Set<String> = []
+    /// Held by the panel, so a project found in the search can open here.
+    @Binding var expanded: Set<String>
     @State private var newName = ""
     @State private var isCreating = false
     @State private var createError: String?

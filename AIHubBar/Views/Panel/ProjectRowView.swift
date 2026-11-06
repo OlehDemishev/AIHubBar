@@ -224,6 +224,7 @@ struct HealthDot: View {
             .fill(health.color)
             .frame(width: 8, height: 8)
             .help(health.title)
+            .accessibilityLabel(health.title)
     }
 }
 
