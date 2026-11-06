@@ -38,6 +38,10 @@ final class UsageStore {
     private(set) var breakdownUpdated: Date?
     /// The week by day and its forecast, from the journals (refreshed with the breakdowns).
     private(set) var weekUsage: WeekUsage?
+    /// «История расхода», by day.
+    private(set) var days: [UsageDay] = []
+    /// The first look through the older journals is running.
+    private(set) var isBackfilling = false
     private var weekRecords: [TokenRecord] = []
     private let scanner = TokenScanner()
     private var isScanning = false
@@ -56,6 +60,7 @@ final class UsageStore {
     private static let notifiedKey = "usageNotified"
     private static var historyURL: URL { SessionFiles.supportDirectory.appending(path: "usage-history.json") }
     private static var snapshotURL: URL { SessionFiles.supportDirectory.appending(path: "usage-snapshot.json") }
+    private static var daysURL: URL { SessionFiles.supportDirectory.appending(path: "usage-days.json") }
 
     /// Pause after a 429: 5, 10, 20, 40, then 60 minutes, or longer if `Retry-After` says so. A shorter
     /// `Retry-After` is not trusted — the server answered «Retry-After: 0» and went on refusing.
@@ -69,6 +74,7 @@ final class UsageStore {
         self.sessions = sessions
         notified = Set(UserDefaults.standard.stringArray(forKey: Self.notifiedKey) ?? [])
         history = Self.loadHistory()
+        days = Self.loadDays()
         // The last values are shown right away after a restart, without a request.
         snapshot = Self.loadSnapshot()
     }
@@ -169,6 +175,9 @@ final class UsageStore {
         breakdowns = result
         weekRecords = records
         updateWeek()
+        days = UsageDays.merging(days, records: records)
+        saveDays()
+        backfillDaysOnce()
         breakdownUpdated = .now
         AppLog.info("Token breakdown: \(records.count) messages in \((ContinuousClock.now - started).formatted(.units(allowed: [.seconds], fractionalPart: .show(length: 1))))")
     }
@@ -225,6 +234,8 @@ final class UsageStore {
             lastGrowth = .now
         }
         snapshot = fresh
+        days = UsageDays.noting(days, session: fresh.session?.utilization, week: fresh.week?.utilization)
+        saveDays()
         UsageFile.write(fresh)
         saveSnapshot(fresh)
         WidgetCenter.shared.reloadTimelines(ofKind: "ClaudePultUsage")
@@ -279,6 +290,38 @@ final class UsageStore {
               let snapshot = try? decoder.decode(UsageSnapshot.self, from: data),
               Date.now.timeIntervalSince(snapshot.fetchedAt) < 24 * 3600 else { return nil }
         return snapshot
+    }
+
+    /// The journals' last three months, once: the history starts full instead of empty. Heavy, so it runs apart
+    /// from the regular scanner and at low priority.
+    private func backfillDaysOnce() {
+        guard !UserDefaults.standard.bool(forKey: Self.backfilledKey), !isBackfilling else { return }
+        isBackfilling = true
+        Task { [weak self] in
+            let days = 92.0
+            let records = await Task.detached(priority: .utility) {
+                await TokenScanner().scan(days: days, since: Date.now.addingTimeInterval(-days * 86_400))
+            }.value
+            guard let self else { return }
+            self.days = UsageDays.merging(self.days, records: records)
+            saveDays()
+            isBackfilling = false
+            UserDefaults.standard.set(true, forKey: Self.backfilledKey)
+            AppLog.info("Usage history: \(records.count) older messages, \(self.days.count) days")
+        }
+    }
+
+    private static let backfilledKey = "usageDaysBackfilled"
+
+    private static func loadDays() -> [UsageDay] {
+        guard let data = try? Data(contentsOf: daysURL) else { return [] }
+        return (try? JSONDecoder().decode([UsageDay].self, from: data)) ?? []
+    }
+
+    private func saveDays() {
+        AppLog.attempt("Usage days not saved") {
+            try JSONEncoder().encode(days).write(to: Self.daysURL, options: .atomic)
+        }
     }
 
     private func saveSnapshot(_ snapshot: UsageSnapshot) {

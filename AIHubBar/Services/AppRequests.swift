@@ -13,7 +13,7 @@ final class AppRequests {
 
     nonisolated static let notificationName = Notification.Name("com.demishev.claudepult.app-command")
     /// `--app-command` names that open a window instead of running a command.
-    static let windows: [String: WindowID] = Dictionary(uniqueKeysWithValues: [WindowID.help, .cleanupOutput, .settings, .assistant, .notchSetup].map { ($0.rawValue, $0) })
+    static let windows: [String: WindowID] = Dictionary(uniqueKeysWithValues: [WindowID.help, .cleanupOutput, .settings, .assistant, .notchSetup, .usageHistory].map { ($0.rawValue, $0) })
     /// Other `--app-command` names handled by the app itself.
     static let actions = ["test-notification", "test-island", "quick-prompt"]
 

@@ -12,6 +12,7 @@ enum WindowID: String, CaseIterable, Sendable {
     case cleanupOutput = "cleanup-output"
     case notchSetup = "notch-setup"
     case quickPrompt = "quick-prompt"
+    case usageHistory = "usage-history"
     /// Not a scene: the Settings window, opened with `openSettings`.
     case settings
 }

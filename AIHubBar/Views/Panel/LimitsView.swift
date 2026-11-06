@@ -1,3 +1,4 @@
+import AppKit
 import SwiftUI
 
 /// «Лимиты» block at the top of the panel (spec §2.8): bars, resets, forecast, extra usage, per-project breakdown.
@@ -8,6 +9,7 @@ struct LimitsView: View {
     @Environment(CommandEngine.self) private var engine
     @Environment(AIServiceStore.self) private var services
     @Environment(AppSettings.self) private var settings
+    @Environment(\.openWindow) private var openWindow
     @AppStorage(StorageKey.limitsBreakdownExpanded) private var showBreakdown = false
     @State private var period: UsageStore.Period = .session
     @AppStorage(StorageKey.collapsedBlocks) private var collapsedRaw = ""
@@ -161,6 +163,12 @@ struct LimitsView: View {
                     .scaledFont(.caption2)
                     .foregroundStyle(.tertiary)
                     .fixedSize(horizontal: false, vertical: true)
+                Button("История расхода…") {
+                    NSApp.activate()
+                    openWindow(.usageHistory)
+                }
+                .buttonStyle(.link)
+                .scaledFont(.caption)
             }
         }
     }
