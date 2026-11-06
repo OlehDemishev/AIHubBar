@@ -79,7 +79,7 @@ https://github.com/OlehDemishev/AIHubBar
 
 ## Show HN
 
-**Title:** Show HN: AI Hub Bar – Claude limits and every agent session in the Mac menu bar
+**Title:** Show HN: AI Hub Bar – Claude limits and agent sessions in the Mac menu bar
 
 **URL:** https://github.com/OlehDemishev/AIHubBar
 
