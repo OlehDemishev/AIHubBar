@@ -33,7 +33,7 @@ Watch after each step: DMG downloads, stars, repository traffic (`gh api repos/O
 ## Questions to be ready for
 
 - **"Why is it unsigned?"** No Apple Developer ID yet; the source is open and can be built with `scripts/build-and-install.sh`.
-- **"It reads my Claude token?"** It reads Claude Code's sign-in from the Keychain on each refresh and never stores it. It talks only to the AI services you use. There is no server and no analytics.
+- **"It reads my Claude token?"** It reads Claude Code's sign-in from the Keychain on each refresh and never stores it. It talks to the AI services you use and to GitHub for updates. There are no analytics. The only server of ours is the relay of the optional shared Telegram bot, which logs no message text.
 - **"Is the limits API official?"** No. It is an undocumented Anthropic usage endpoint, so it can change or stop working. Say this plainly, don't wait to be asked.
 - **"Does the hook change what Claude does?"** No, it only writes small status files on the Mac, and Settings → AI Services → Claude Code → Remove hooks takes it out.
 
@@ -52,7 +52,7 @@ AI Hub Bar sits in the menu bar and shows:
 
 It also picks up Codex, Copilot, Gemini CLI, Cursor and OpenRouter if you use them.
 
-Native SwiftUI, MIT, no account, no server, no analytics. Two things to know before you install it: it isn't signed with an Apple Developer ID yet, so the first start needs Open Anyway in Privacy & Security, and the limits come from an undocumented Anthropic endpoint, so they can break if it changes.
+Native SwiftUI, MIT, no account, no analytics. Two things to know before you install it: it isn't signed with an Apple Developer ID yet, so the first start needs Open Anyway in Privacy & Security, and the limits come from an undocumented Anthropic endpoint, so they can break if it changes.
 
 GitHub: https://github.com/OlehDemishev/AIHubBar
 Website: https://olehdemishev.github.io/AIHubBar/
@@ -91,7 +91,7 @@ AI Hub Bar is a native SwiftUI menu bar app. It shows Claude's 5-hour and weekly
 
 How it works: a Claude Code hook writes small status files on the Mac, and the app reads those and the session journals. The hook doesn't change what Claude does. Limits come from an undocumented Anthropic usage endpoint with Claude Code's sign-in, read from the Keychain on each refresh and never stored, so that part can break if the endpoint changes.
 
-There is no server, account or analytics. MIT licensed.
+There is no account and no analytics, and nothing goes through a server of ours unless you turn on the shared Telegram bot. MIT licensed.
 
 I'd like to hear what's missing and what you'd want to check in the code before trusting it.
 
@@ -111,7 +111,7 @@ I'd like to hear what's missing and what you'd want to check in the code before 
 
 I built AI Hub Bar: a free, open-source Mac menu bar app that shows your Claude limits, a forecast from your pace, and every Claude Code session with what it's doing right now. Allow or deny requests from a notification.
 
-No account, no server, no analytics.
+No account, no analytics.
 
 https://olehdemishev.github.io/AIHubBar/
 
