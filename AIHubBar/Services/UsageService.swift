@@ -10,6 +10,15 @@ enum UsageError: LocalizedError, Equatable {
     case network(Int)
     case badResponse
 
+    /// A failure Anthropic's own trouble could explain, so its status page is worth asking.
+    var mayBeOutage: Bool {
+        switch self {
+        case let .http(code): code >= 500
+        case .network, .badResponse: true
+        default: false
+        }
+    }
+
     /// Only a new sign-in fixes this one.
     var needsSignIn: Bool {
         switch self {

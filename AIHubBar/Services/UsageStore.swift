@@ -8,6 +8,9 @@ import WidgetKit
 final class UsageStore {
     private(set) var snapshot: UsageSnapshot?
     private(set) var lastError: String?
+    /// What Anthropic's status page says while the limits fail; nil when it says nothing is wrong.
+    private(set) var outage: String?
+    private var statusChecked: Date?
     /// The last request failed for want of a sign-in; what «Войти в Claude Code» is shown for.
     private(set) var signedOut = false
     private(set) var isRefreshing = false
@@ -107,6 +110,7 @@ final class UsageStore {
             apply(fresh)
             lastError = nil
             signedOut = false
+            outage = nil
             pausedUntil = nil
             rateLimitStrikes = 0
         } catch let UsageError.rateLimited(retryAfter) {
@@ -132,7 +136,16 @@ final class UsageStore {
             if lastError != error.localizedDescription { AppLog.error("Usage refresh failed: \(error.localizedDescription)") }
             lastError = error.localizedDescription
             signedOut = (error as? UsageError)?.needsSignIn ?? false
+            if (error as? UsageError)?.mayBeOutage == true { await checkStatus() }
         }
+    }
+
+    /// At most every ten minutes, however often the limits fail.
+    private func checkStatus() async {
+        if let statusChecked, Date.now.timeIntervalSince(statusChecked) < 10 * 60 { return }
+        statusChecked = .now
+        outage = await ServiceStatus.check()
+        if let outage { AppLog.info("Anthropic status: \(outage)") }
     }
 
     /// After «Войти в Claude Code»: asks again every 10 s for two minutes, so the limits appear without ⌘R.

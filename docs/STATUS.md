@@ -30,6 +30,12 @@
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
 
+## 2026-11-06 — Service status (branch `feat/service-status`)
+
+Done: when the limits fail with a server or network error or an unknown answer, the app asks Anthropic's status page at most every 10 minutes and shows «Сбой у Anthropic: …» with a link in the limits block. It clears when the limits work again. Without internet nothing is claimed. README lists the page among what the app talks to.
+Checked: scripts/check.sh passed with new tests for reading the page and for which errors ask it; the page answered live from this Mac («All Systems Operational»).
+Left: only Anthropic for now; the banner itself hasn't been seen in a real outage.
+
 ## 2026-11-06 — Panel shortcut (branch `feat/panel-hotkey`)
 
 Done: «Клавиши» → «Открывать панель» (⌃⌥B by default, also ⌃⌥M and ⌥⌘B). `MenuBarExtra` has no call to open it, so `PanelOpener` posts a real click on the app's item and puts the pointer back; that needs the Accessibility permission, and without it the search window opens. The key counts as the app's own in the shortcut conflict check. `--app-command open-panel` runs it. 3 new strings in 12 languages.
