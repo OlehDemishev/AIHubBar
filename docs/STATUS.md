@@ -15,7 +15,6 @@
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/specs/SPEC-windows.md §9, stage 2–3 leftovers)
 
 **Needs Oleh:**
-- donations: repository Settings → General → Features → Sponsorships on, for the Sponsor button
 - Telegram: Settings → Modules → Telegram → «Общий бот» → «Подключить Telegram» → Start (`_daily-report/config.json` already points at @AIHubBarBot)
 - Telegram: delete `_daily-report/bot.py` and `install-bot.sh`
 - «Быстрый запрос»: Settings → Modules → «Быстрый запрос» on, then ⌃⌥P from Terminal or Xcode — send one task to the background and one to Codex
