@@ -28,6 +28,8 @@ Free, open source, no account. Nothing goes through a server of ours, except the
 - Claude's **5-hour session and weekly limits** as rings, with a reset countdown, right in the menu bar.
 - A **forecast** from your recent pace: "enough until the reset" or "lasts until ~16:40", and the same for the week.
 - **Usage by project** — which project and which session ate the limit today or this week.
+- **Usage history** — tokens by day for up to 90 days, CSV export, and a cost estimate at the price you enter.
+- **Several Claude accounts**, each with its limits, and a note when Anthropic reports an outage.
 - Notifications at the thresholds you choose; near the limit, background runs pause and resume after the reset.
 - **Other AI services** appear by themselves: Codex, GitHub Copilot, Gemini CLI, Cursor, OpenRouter credits, OpenAI and Anthropic API spend.
 
@@ -35,6 +37,7 @@ Free, open source, no account. Nothing goes through a server of ours, except the
 - Terminal, the Claude app, background runs: state, task, duration — and **what Claude is doing right now** ("editing LimitsView.swift", "running npm test").
 - **Allow / Deny** permission requests from the notification, the panel or Telegram.
 - Context fullness, files changed since the session started, and a heads-up when a session goes quiet.
+- **Recently finished** sessions continue in Terminal with one click.
 - **Background runs** under an explicit permission list (no push to main, no force push, no deleting, no reading secrets), a night queue and a morning summary.
 
 ### Projects and AI commands — not only for developers
@@ -55,7 +58,7 @@ A command's result is always a **new file** — nothing is overwritten. **Compar
 - **Calendar** of deadlines, publications and content plans straight from your project files — drag an entry and the file is updated.
 - **Mac tools** as optional modules: Mac Resources, Keep Awake, Quick Commands, Quick Toggles, Clipboard History, Notes and Keyboard Layout: a word typed in the wrong layout fixes itself.
 - **Beta builds** (Settings → General): new versions and features in testing before everyone else.
-- **⌃⌥C search** from any app, **widgets**, a **Control Center** toggle, **Shortcuts** actions, **Telegram** alerts and a weekly summary.
+- **⌃⌥C search** and **⌃⌥B for the panel** from any app, **widgets**, a **Control Center** toggle, **Shortcuts** actions, **Telegram** alerts and a weekly summary.
 - **13 languages**: English, Русский, Українська, Español, Português (Brasil), Français, Deutsch, Italiano, Polski, 日本語, 한국어, Bahasa Indonesia, العربية.
 
 ## Install

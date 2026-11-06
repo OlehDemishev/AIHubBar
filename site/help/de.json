@@ -238,8 +238,8 @@
               "name" : "Stoppen"
             },
             {
-              "detail" : "Sitzungen sind nur sichtbar, wenn in den Einstellungen Hooks installiert sind (sie werden in ~/.claude/settings.json ergänzt; daneben bleibt eine Kopie).",
-              "name" : "Hooks"
+              "detail" : "Sitzungen erscheinen nur bei eingeschalteter Erfassung: Ein kleines Skript wird in ~/.claude/settings.json eingetragen, daneben liegt eine Sicherung.",
+              "name" : "Sitzungserfassung"
             },
             {
               "detail" : "Ihre Sitzungen zeigen ebenfalls „arbeitet / wartet / fertig“, wenn auf ihrer Seite unter „KI-Dienste“ der Hook von AI Hub Bar installiert ist. Codex führt einen neuen Hook erst nach Prüfung aus: in codex /hooks eingeben und ihm vertrauen. Ohne Hook nur die letzten Unterhaltungen, ohne Status.",
@@ -251,7 +251,7 @@
         }
       ],
       "steps" : [
-        "Installieren Sie die hooks: Seite „Agentensitzungen“ → Hooks.",
+        "Schalten Sie die Erfassung auf der Seite „Agentensitzungen“ ein.",
         "Beantworten Sie Berechtigungsanfragen direkt in der Mitteilung oder in der Sitzungszeile."
       ],
       "summary" : "Alle Claude-Code-Sitzungen auf diesem Mac: was sie tun, welche auf eine Antwort warten, Hintergrundaufgaben und die Warteschlange.",
