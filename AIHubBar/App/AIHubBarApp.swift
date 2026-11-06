@@ -101,6 +101,15 @@ struct AIHubBarApp: App {
         .handlesExternalEvents(matching: [])
         .defaultSize(width: 980, height: 640)
 
+        Window("История расхода", id: WindowID.usageHistory.rawValue) {
+            UsageHistoryWindow()
+                .appEnvironment(app)
+                .preferredColorScheme(app.settings.panelTheme.colorScheme)
+                .debugSnapshot("usage-history")
+        }
+        .handlesExternalEvents(matching: [])
+        .defaultSize(width: 720, height: 520)
+
         Window("Очистка сборок", id: WindowID.cleanupOutput.rawValue) {
             CleanupOutputView()
                 .appEnvironment(app)

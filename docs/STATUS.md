@@ -30,6 +30,12 @@
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
 
+## 2026-11-06 — Usage history (branch `feat/usage-history`)
+
+Done: «История расхода…» under «Расход по проектам» opens a window with Claude Code tokens by day (7, 30, 90 days), totals, the busiest day, a CSV export and a cost estimate at the price the person entered. Days are kept in `usage-days.json` for about a year with the day's highest limit percentages; the first run reads the journals' last three months once. `--app-command usage-history` opens the window. 18 new strings in 12 languages.
+Checked: scripts/check.sh passed with new tests for merging days, peaks, retention, cost and CSV; installed on this Mac.
+Left: the window was seen only behind another app, not read closely.
+
 ## 2026-11-06 — Settings and texts (branch `feat/settings-polish`)
 
 Done: the sidebar lists the modules in use; the rest stay in «Модули» and the search, «Отчёты» only on a Mac with `_daily-report`. New page «Клавиши» with every shortcut. Deleting a profile asks first. One name for each action: «Запустить» for runs, «Справка» for help. «Отслеживание сессий» replaces hooks in everyday text; the technical footnotes keep the word. Old pointers fixed («этап 4», «Основные → Telegram», «в низу панели»). 23 changed strings in 12 languages, most built from the existing translations.
