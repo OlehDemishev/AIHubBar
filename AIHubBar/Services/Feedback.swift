@@ -4,6 +4,8 @@ import AppKit
 /// and macOS already filled in. Nothing is sent by the app itself — the person sees the whole form on GitHub first.
 enum Feedback {
     static let repository = URL(string: "https://github.com/OlehDemishev/AIHubBar")!
+    /// site/support.html: the donation platforms live on that page, so changing them needs no app release.
+    static let supportPage = URL(string: "https://olehdemishev.github.io/AIHubBar/support.html")!
 
     enum Template: String {
         case bug = "bug_report.yml"
@@ -44,6 +46,10 @@ enum Feedback {
 
     @MainActor static func reportProblem() {
         NSWorkspace.shared.open(issueURL(.bug, fields: ["version": appVersion, "macos": system]))
+    }
+
+    @MainActor static func supportProject() {
+        NSWorkspace.shared.open(supportPage)
     }
 
     /// The home folder and the account name out of anything that goes into an issue.

@@ -76,6 +76,8 @@ struct GeneralSettings: View {
 
             FeedbackSection()
 
+            SupportSection()
+
             Section {
                 IconRow("Версия", systemImage: "info.circle", value: Self.version)
                 UpdatesRow()
@@ -178,6 +180,19 @@ struct FeedbackSection: View {
             Toggle("После сбоя предлагать отправить отчёт", systemImage: "exclamationmark.bubble", isOn: $asksAfterCrash)
         } footer: {
             Footnote(text: String(localized: "Откроется форма на GitHub, версия и macOS в ней уже заполнены. Сама программа ничего не отправляет: перед отправкой видно всё, что уходит. Нужен аккаунт GitHub."))
+        }
+    }
+}
+
+/// A quiet link to site/support.html; the app never asks for a donation by itself.
+struct SupportSection: View {
+    var body: some View {
+        Section {
+            IconRow("Поддержать проект", systemImage: "heart") {
+                Button("Открыть") { Feedback.supportProject() }
+            }
+        } footer: {
+            Footnote(text: String(localized: "AI Hub Bar бесплатный. Откроется страница на сайте со способами поддержки."))
         }
     }
 }

@@ -65777,6 +65777,82 @@
         }
       }
     },
+    "Поддержать проект": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Support the Project"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Підтримати проєкт"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Projekt unterstützen"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Soutenir le projet"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apoyar el proyecto"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sostieni il progetto"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apoiar o projeto"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wesprzyj projekt"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "プロジェクトを支援"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "프로젝트 후원"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "دعم المشروع"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dukung proyek"
+          }
+        }
+      }
+    },
     "Подключить другой сервис…": {
       "localizations": {
         "ar": {
@@ -132486,6 +132562,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Hanya di tombol Menu"
+          }
+        }
+      }
+    },
+    "AI Hub Bar бесплатный. Откроется страница на сайте со способами поддержки.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar is free. This opens a page on the website with ways to support it."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar безплатний. Відкриється сторінка на сайті зі способами підтримки."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar ist kostenlos. Es öffnet sich eine Seite auf der Website mit Möglichkeiten zur Unterstützung."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar est gratuit. Une page du site s’ouvre avec les façons de le soutenir."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar es gratuito. Se abrirá una página del sitio web con formas de apoyarlo."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar è gratuito. Si aprirà una pagina del sito con i modi per sostenerlo."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O AI Hub Bar é gratuito. Será aberta uma página do site com formas de apoiá-lo."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar jest bezpłatny. Otworzy się strona w witrynie ze sposobami wsparcia."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar は無料です。支援の方法を載せたウェブサイトのページが開きます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar는 무료입니다. 후원 방법이 안내된 웹사이트 페이지가 열립니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar مجاني. ستُفتح صفحة على الموقع تعرض طرق دعمه."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar gratis. Halaman di situs web akan terbuka dengan cara-cara mendukungnya."
           }
         }
       }
