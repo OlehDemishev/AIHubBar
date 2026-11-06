@@ -5,7 +5,7 @@
 **Updated:** 2026-11-06
 
 **Now:**
-- donations (branch `feat/donations`, PR #262): «Поддержать проект» in Settings → General and site/support.html with Ko-fi live
+- donations (branch `feat/donations`, PR #262): «Поддержать проект» in Settings → General and site/support.html with Ko-fi and GitHub Sponsors live
 - Telegram: Worker deployed at https://aihubbar-telegram.oleh-demishev.workers.dev (new bot, old bots deleted by Oleh); the app points at it — pairing and a live check next
 - merged 2026-11-03: #251 menu bar ☕ follows the «Не спать» switch, #248 «Не спать» on/off in the menu bar, #241 Codex states, #240 quick command shortcuts, #238 «Быстрый запрос», #236 content spec, #242 «Telegram» stage 1, #244 menu at the bottom, #246 shared bot (Worker not deployed yet), #247 desktop CI off for Mac string changes, #249 the bot's menu set up by each person, #252 stage 2 (sessions, requests, limits), #254 stage 3 (tasks and runs), #255 stage 4 (settings in the bot), #256 Mini App
 
@@ -15,7 +15,7 @@
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/specs/SPEC-windows.md §9, stage 2–3 leftovers)
 
 **Needs Oleh:**
-- donations: repository Settings → General → Features → Sponsorships on, for the Sponsor button; apply to GitHub Sponsors and send the link (its card in site/support.html is ready). Buy Me a Coffee only if wanted
+- donations: repository Settings → General → Features → Sponsorships on, for the Sponsor button. Buy Me a Coffee only if wanted (its card in site/support.html is ready)
 - Telegram: Settings → Modules → Telegram → «Общий бот» → «Подключить Telegram» → Start (`_daily-report/config.json` already points at @AIHubBarBot)
 - Telegram: delete `_daily-report/bot.py` and `install-bot.sh`
 - «Быстрый запрос»: Settings → Modules → «Быстрый запрос» on, then ⌃⌥P from Terminal or Xcode — send one task to the background and one to Codex
@@ -30,9 +30,9 @@
 
 ## 2026-11-06 — Donations (branch `feat/donations`)
 
-Done: Settings → General → «Поддержать проект» opens site/support.html (`Feedback.supportPage`); the app never asks by itself. New page site/support.html with a live Ko-fi card (ko-fi.com/olehdemishev), cards for GitHub Sponsors and Buy Me a Coffee kept in an HTML comment until those accounts exist, and free ways to help. Link in the site footer, README section, `.github/FUNDING.yml` with Ko-fi and the page, REFERENCE updated. 2 new strings in 12 languages. The platforms live on the page, so changing them needs no app release.
-Checked: scripts/check.sh passed (strings, desktop texts, relay tests, Mac tests); support.html opened in the local preview, no console errors.
-Left: GitHub Sponsors and Buy Me a Coffee links (accounts are Oleh's). The new row was not opened in the running app, only built and tested. The button reaches people with the next release.
+Done: Settings → General → «Поддержать проект» opens site/support.html (`Feedback.supportPage`); the app never asks by itself. New page site/support.html with live Ko-fi (ko-fi.com/olehdemishev) and GitHub Sponsors cards, a Buy Me a Coffee card kept in an HTML comment until that account exists, and free ways to help. Link in the site footer, README section, `.github/FUNDING.yml` with GitHub Sponsors, Ko-fi and the page, REFERENCE updated. 2 new strings in 12 languages. The platforms live on the page, so changing them needs no app release.
+Checked: scripts/check.sh passed (strings, desktop texts, relay tests, Mac tests); support.html opened in the local preview, no console errors; both donation pages opened as a visitor, each shows its payment form.
+Left: Buy Me a Coffee is optional and has no account; Stripe is still verifying the GitHub Sponsors account. The new row was not opened in the running app, only built and tested. The button reaches people with the next release.
 
 ## 2026-11-03 — site and overview for 0.6.0 (branch `feat/site-0.6.0`)
 
