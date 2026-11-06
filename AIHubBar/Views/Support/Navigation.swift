@@ -39,6 +39,7 @@ enum StorageKey {
     static let calendarScope = "calendarScope"
     static let calendarCurrentModeOnly = "calendarCurrentModeOnly"
     static let limitsBreakdownExpanded = "limitsBreakdownExpanded"
+    static let recentSessionsExpanded = "recentSessionsExpanded"
 }
 
 /// Which Settings page opens next. One key holds the whole page; the three keys it replaced are read once

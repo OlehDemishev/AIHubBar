@@ -219,6 +219,16 @@ enum SessionRules {
     /// Session files older than this are deleted.
     static let deleteAfter: TimeInterval = 7 * 86_400
 
+    /// How many finished sessions the panel offers to continue.
+    static let resumableCount = 5
+
+    /// A finished Claude Code session that has left the list and can still be continued: its folder is there and
+    /// nothing runs it. (Other agents have their own list, `AgentThread`.)
+    static func isResumable(_ session: Session, isAlive: Bool?, now: Date, folderExists: Bool) -> Bool {
+        guard folderExists, isAlive != true, session.agent == .claudeCode else { return false }
+        return !isVisible(session, isAlive: isAlive, now: now)
+    }
+
     /// The state to show: a session whose process is gone counts as ended.
     static func effectiveState(_ session: Session, isAlive: Bool?) -> Session.State {
         if session.state != .ended, isAlive == false { return .ended }

@@ -252,6 +252,18 @@ struct SessionRulesTests {
         #expect(SessionRules.effectiveState(s, isAlive: nil) == .running)
     }
 
+    @Test func finishedSessionsCanBeContinued() throws {
+        let now = Date.now
+        let old = try session(state: "done", updated: now.addingTimeInterval(-3 * 3600))
+        #expect(SessionRules.isResumable(old, isAlive: nil, now: now, folderExists: true))
+        #expect(!SessionRules.isResumable(old, isAlive: nil, now: now, folderExists: false), "a removed worktree can't be continued")
+        #expect(!SessionRules.isResumable(old, isAlive: true, now: now, folderExists: true), "still running")
+        let fresh = try session(state: "ended", updated: now.addingTimeInterval(-60))
+        #expect(!SessionRules.isResumable(fresh, isAlive: false, now: now, folderExists: true), "still a row in the list")
+        #expect(ShellQuote.claudeResumeCommandLine(folder: "/P/My App", claude: "/bin/claude", sessionID: "abc")
+            == "cd \(ShellQuote.quote("/P/My App")) && \(ShellQuote.quote("/bin/claude")) --resume \(ShellQuote.quote("abc"))")
+    }
+
     @Test func visibility() throws {
         let now = Date.now
         #expect(SessionRules.isVisible(try session(state: "done", updated: now.addingTimeInterval(-3 * 3600)), isAlive: true, now: now))

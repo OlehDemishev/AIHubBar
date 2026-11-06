@@ -84,6 +84,10 @@ enum ShellQuote {
     static func claudeCommandLine(folder: String, claude: String, prompt: String) -> String {
         "cd \(quote(folder)) && \(quote(claude)) \(quote(prompt))"
     }
+
+    static func claudeResumeCommandLine(folder: String, claude: String, sessionID: String) -> String {
+        "cd \(quote(folder)) && \(quote(claude)) --resume \(quote(sessionID))"
+    }
 }
 
 /// Worktree folder and branch names for a parallel session: `.claude/worktrees/cb-<slug>`, branch `claude/<slug>`.
