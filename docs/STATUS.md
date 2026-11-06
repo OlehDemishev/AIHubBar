@@ -30,6 +30,12 @@
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
 
+## 2026-11-06 — Panel polish (branch `feat/panel-polish`)
+
+Done: the forecast reads as one line when both limits last («хватит и на сессию, и на неделю»), «неделе до сброса хватит» is gone. The week's days are slim bars with their percentage and a caption. Cards on glass get a tint of the window colour and block titles are no longer grey there. «Сессии» shows how many are active, and stays in place with «нет активных» when none are; the hint no longer appears without Claude Code. Search takes focus when the panel opens, ↑ ↓ move the selection, ↵ works for folder projects and background runs. Session rows have a context menu and a VoiceOver action; icon-only buttons have labels; the session pulse follows Reduce Motion. «Сравнить» says why a service failed instead of «ещё выполняется». 6 new strings in 12 languages.
+Checked: scripts/check.sh passed; installed and looked at the live panel: titles and cards readable over the wallpaper, session count shown.
+Left: arrow keys in search were not pressed live.
+
 ## 2026-11-06 — First run (branch `feat/first-run`)
 
 Done: the first launch takes a short path of five screens (welcome, template, modules, folder, finish) with «Настроить подробнее…» for the rest; importing moved onto the welcome screen, «Пропустить» is gone. Readiness knows a missing sign-in (from the limits request, no extra Keychain read) and offers «Войти в Claude Code» (`claude auth login` in Terminal, then the limits are asked again for two minutes) and «Установить Claude Code». The panel shows those buttons instead of an orange error, and a person without Claude Code gets a plain explanation. A first profile refreshes the limits at once. Commands start on an installed service when Claude Code is missing. A hook install failure shows on the welcome screen, a folder that can't be created stops with an alert. The assistant offers «Раскладка», «Быстрый запрос» and Telegram. 13 new strings in 12 languages.

@@ -164,6 +164,12 @@ private struct JobRow: View {
 struct CompareView: View {
     @Environment(CommandEngine.self) private var engine
 
+    /// A service that failed never writes its file: its column says why instead of «ещё выполняется».
+    private func failure(_ path: String) -> String? {
+        guard let job = engine.jobs.first(where: { $0.resultFile == path }), case let .failed(message) = job.state else { return nil }
+        return String(localized: "Не получилось: \(message)")
+    }
+
     var body: some View {
         if let comparison = engine.comparison {
             TimelineView(.periodic(from: .now, by: 2)) { _ in
@@ -179,7 +185,7 @@ struct CompareView: View {
                                 }
                             }
                             ScrollView {
-                                Text(ChangedFile.text(file.path) ?? String(localized: "Ещё выполняется…"))
+                                Text(ChangedFile.text(file.path) ?? failure(file.path) ?? String(localized: "Ещё выполняется…"))
                                     .textSelection(.enabled)
                                     .frame(maxWidth: .infinity, alignment: .leading)
                             }

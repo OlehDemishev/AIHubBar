@@ -434,6 +434,7 @@ private struct ProviderRow: View {
                     if let page = provider.keyPage, let url = URL(string: page) {
                         Link(destination: url) { Image(systemName: "arrow.up.right.square") }
                             .help("Где взять ключ: \(page)")
+                            .accessibilityLabel("Где взять ключ: \(page)")
                     }
                 }
             }
