@@ -19,6 +19,11 @@ struct ClaudeSettings: View {
                         .textFieldStyle(.roundedBorder)
                         .frame(width: 280)
                 }
+                if case .some(.none) = detected {
+                    IconRow("Claude Code не установлен", systemImage: "arrow.down.circle") {
+                        Button("Установить Claude Code") { ClaudeSignIn.openInstallPage() }
+                    }
+                }
             } footer: {
                 Footnote(text: String(localized: "Путь пустой — искать в /opt/homebrew/bin, /usr/local/bin, ~/.local/bin, ~/.claude/local. Где запускать команды (Терминал / Фон / спрашивать) — у каждого профиля на вкладке «Профили»."))
             }

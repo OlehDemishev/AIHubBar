@@ -40,20 +40,20 @@ AI Hub Bar starts empty: until you create a profile, the panel only offers **Ass
 
 | Row | Why it matters | Needed? |
 |---|---|---|
-| AI service | Commands need someone to run them. | Yes: Claude Code, another agent or an API key. |
+| AI service | Commands need someone to run them. **Install Claude Code** opens its page; **Sign In to Claude Code** runs the sign-in in Terminal, and the limits appear by themselves after it. | Yes: Claude Code, another agent or an API key. |
 | Claude Code sessions | The session list and the "Claude is waiting" alerts come from a small hook. **Install hooks** adds it to `~/.claude/settings.json` and saves a backup next to it. | With Claude Code |
 | Notifications | Limit alerts, Claude waiting for you, finished commands and deadlines. | Recommended |
 | Open at Login | Keeps ✦ in the menu bar after a restart. | Optional |
 
-Next, the assistant asks a few more things:
+If you have a `.claudepult` file from another Mac or a colleague, **Bring Settings from a File…** on that screen imports it and you are done. Otherwise the assistant asks a few more things:
 
-1. **Bring your settings over?** If you have a `.claudepult` file from another Mac or a colleague, import it and you are done. Otherwise choose **No, set up from scratch**.
-2. Pick a template or **From scratch**.
-3. **What the panel shows**: tick the modules this profile has — AI limits, agent sessions, projects, upcoming dates. Without projects the assistant skips the project questions.
-4. If the profile has projects, the folder where they live. AI Hub Bar looks inside and suggests a source: git repositories, or one folder per project.
-5. Set the stages, what each project row shows, the calendar, the AI service, the commands, where Claude runs and what it may do, the menu bar, and the profile's name and icon. The right side shows a live preview.
+1. Pick a template or **From scratch**.
+2. **What the panel shows**: tick the modules this profile has — AI limits, agent sessions, projects, upcoming dates, Mac tools. Without projects the assistant skips the folder question.
+3. If the profile has projects, the folder where they live. AI Hub Bar looks inside and suggests a source: git repositories, or one folder per project.
 
-You can skip any step: **Skip** keeps the template's choice. Everything can be changed later in **Settings… → Profiles**. To run the assistant again, go to **Settings… → Profiles → + → Assistant…**. The same readiness checks are at the top of the **Help** window.
+The last screen says where everything is. **Set Up in More Detail…** there goes through the stages, what each project row shows, the calendar, the AI service, the commands, where Claude runs and what it may do, the menu bar, and the profile's name and icon. The right side shows a live preview.
+
+Everything can be changed later in **Settings… → Profiles**. To run the assistant again, go to **Settings… → Profiles → + → Assistant…**. The same readiness checks are at the top of the **Help** window.
 
 ## Everyday use
 

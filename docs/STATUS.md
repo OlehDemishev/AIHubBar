@@ -5,6 +5,7 @@
 **Updated:** 2026-11-06
 
 **Now:**
+- polish plan agreed with Oleh 2026-11-06, in order: first run, panel, settings and texts, usage history, ended sessions, panel hotkey, service status, several Claude accounts
 - Telegram: Worker deployed at https://aihubbar-telegram.oleh-demishev.workers.dev (new bot, old bots deleted by Oleh); the app points at it — pairing and a live check next
 - merged 2026-11-06: #262 donations («Поддержать проект» in Settings → General, site/support.html with Ko-fi, GitHub Sponsors and Buy Me a Coffee; the app button reaches people with the next release)
 - merged 2026-11-03: #251 menu bar ☕ follows the «Не спать» switch, #248 «Не спать» on/off in the menu bar, #241 Codex states, #240 quick command shortcuts, #238 «Быстрый запрос», #236 content spec, #242 «Telegram» stage 1, #244 menu at the bottom, #246 shared bot (Worker not deployed yet), #247 desktop CI off for Mac string changes, #249 the bot's menu set up by each person, #252 stage 2 (sessions, requests, limits), #254 stage 3 (tasks and runs), #255 stage 4 (settings in the bot), #256 Mini App
@@ -28,6 +29,12 @@
 - MacBook Air: update to 0.6.0 through Sparkle (Settings → General → Updates) and check the island at the real notch
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-06 — First run (branch `feat/first-run`)
+
+Done: the first launch takes a short path of five screens (welcome, template, modules, folder, finish) with «Настроить подробнее…» for the rest; importing moved onto the welcome screen, «Пропустить» is gone. Readiness knows a missing sign-in (from the limits request, no extra Keychain read) and offers «Войти в Claude Code» (`claude auth login` in Terminal, then the limits are asked again for two minutes) and «Установить Claude Code». The panel shows those buttons instead of an orange error, and a person without Claude Code gets a plain explanation. A first profile refreshes the limits at once. Commands start on an installed service when Claude Code is missing. A hook install failure shows on the welcome screen, a folder that can't be created stops with an alert. The assistant offers «Раскладка», «Быстрый запрос» and Telegram. 13 new strings in 12 languages.
+Checked: scripts/check.sh passed, with new tests for the short path, sign-in rows and which errors need a sign-in.
+Left: the short path and the sign-in flow were not walked through live (this Mac is set up and signed in).
 
 ## 2026-11-06 — Launch kit (branch `chore/launch-kit`)
 

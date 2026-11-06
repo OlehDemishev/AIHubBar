@@ -165,6 +165,9 @@ final class AppContainer {
         }
         modes.didApply = { [telegramBot] in
             telegramBot.profileChanged()
+            // A first profile turns the limits on: the loop would otherwise wait out its 5 minutes.
+            if usage.snapshot == nil { Task { await usage.refresh() } }
+            if hub.limits.isEmpty { Task { await hub.refresh() } }
             Task { await store.refresh() }
             Task { await folders.refresh() }
             Task { await calendar.refresh() }

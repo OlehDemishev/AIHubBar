@@ -10,6 +10,7 @@ struct AssistantView: View {
     @Environment(\.dismissWindow) private var dismissWindow
     @Environment(\.openSettingsPage) private var openSettings
     @State private var draft: AssistantDraft?
+    @State private var folderError: String?
 
     private static let templates = ProfileTemplate.loadAll()
     static let icons = [
@@ -42,6 +43,11 @@ struct AssistantView: View {
             }
         }
         .frame(width: 900, height: 620)
+        .alert("Не удалось создать папку", isPresented: Binding(get: { folderError != nil }, set: { if !$0 { folderError = nil } })) {
+            Button("OK") {}
+        } message: {
+            Text(folderError ?? "")
+        }
         .onAppear {
             if draft == nil {
                 // A new profile starts with every block shown; the «Что будет в панели» step decides.
@@ -65,10 +71,6 @@ struct AssistantView: View {
             Button("Назад") { withAnimation(.snappy) { draft.wrappedValue.back() } }
                 .disabled(draft.wrappedValue.isFirst)
             Spacer()
-            if !draft.wrappedValue.isLast, ![.welcome, .importSettings, .template].contains(draft.wrappedValue.step) {
-                Button("Пропустить") { withAnimation(.snappy) { draft.wrappedValue.next() } }
-                    .help("Оставить как в шаблоне")
-            }
             if draft.wrappedValue.isLast {
                 Button("Готово") { finish(draft.wrappedValue) }
                     .buttonStyle(.borderedProminent)
@@ -89,10 +91,21 @@ struct AssistantView: View {
         profile.modules = profile.normalizedModules(hidden: draft.hiddenModules)
             + draft.extraModules.filter(\.isPanelBlock).map { ProfileModule($0) }
         profile.menuBar = draft.menuBar
-        settings.calendarReminderHours = draft.reminderHours
-        if let folder = draft.mode.source.folder.map(PathText.expand), !FileManager.default.fileExists(atPath: folder) {
-            try? FileManager.default.createDirectory(atPath: folder, withIntermediateDirectories: true)
+        // Commands shouldn't start out on a service this Mac doesn't have.
+        if profile.service == nil, services.hasScanned, services.agents[.claudeCode] == nil,
+           let other = services.available.first(where: { $0 != .claudeCode }) {
+            profile.service = other.id
         }
+        if let folder = draft.mode.source.folder.map(PathText.expand), !FileManager.default.fileExists(atPath: folder) {
+            do {
+                try FileManager.default.createDirectory(atPath: folder, withIntermediateDirectories: true)
+            } catch {
+                AppLog.error("Assistant: folder \(folder): \(error.localizedDescription)")
+                folderError = error.localizedDescription
+                return
+            }
+        }
+        settings.calendarReminderHours = draft.reminderHours
         modes.addFromAssistant(profile)
         for kind in draft.extraModules where !kind.isPanelBlock { modes.install(kind) }
         dismissWindow(.assistant)
@@ -104,7 +117,6 @@ struct AssistantView: View {
     private func step(_ draft: Binding<AssistantDraft>) -> some View {
         switch draft.wrappedValue.step {
         case .welcome: welcomeStep
-        case .importSettings: importStep(draft)
         case .template: templateStep(draft)
         case .modules: modulesStep(draft)
         case .folder: folderStep(draft)
@@ -116,6 +128,7 @@ struct AssistantView: View {
         case .launch: launchStep(draft)
         case .menuBar: menuBarStep(draft)
         case .name: nameStep(draft)
+        case .finish: finishStep(draft)
         }
     }
 
@@ -127,23 +140,29 @@ struct AssistantView: View {
             ReadinessSection()
             Text("Всё это можно сделать и позже: в Настройках и в окне «Помощь».")
                 .font(.caption).foregroundStyle(.secondary)
+            ImportConfirmation()
+            HStack {
+                Button("Перенести настройки из файла…") { SettingsFiles.chooseImport(into: modes) }
+                    .buttonStyle(.link)
+                if modes.lastMessage != nil, modes.pendingImport == nil {
+                    Button("Закрыть помощника") { dismissWindow(.assistant) }
+                }
+            }
         }
     }
 
-    private func importStep(_ draft: Binding<AssistantDraft>) -> some View {
+    /// The last screen of a first launch: where everything is now.
+    private func finishStep(_ draft: Binding<AssistantDraft>) -> some View {
         VStack(alignment: .leading, spacing: 14) {
-            Text("Есть файл настроек AI Hub Bar (.claudepult) с другого Мака или от коллеги? Его можно перенести целиком — профили, строку меню, внешний вид. Ключи API в файл не попадают.")
-                .fixedSize(horizontal: false, vertical: true)
-            ImportConfirmation()
-            HStack {
-                Button("Импортировать файл…") { SettingsFiles.chooseImport(into: modes) }
-                Button("Нет, настроить заново") { withAnimation(.snappy) { draft.wrappedValue.next() } }
-                    .buttonStyle(.borderedProminent)
-            }
-            if modes.lastMessage != nil, modes.pendingImport == nil {
-                Button("Закрыть помощника") { dismissWindow(.assistant) }
+            Label("Панель открывается по значку ✦ в строке меню.", systemImage: "menubar.arrow.up.rectangle")
+            Label("Поиск по проектам, сессиям и командам — из любой программы, сочетанием в Настройках → «Основные».", systemImage: "magnifyingglass")
+            Label("Модули, профили и внешний вид меняются в Настройках в любой момент.", systemImage: "gearshape")
+            if !draft.wrappedValue.detailed {
+                Button("Настроить подробнее…") { withAnimation(.snappy) { draft.wrappedValue.showAllSteps() } }
+                    .buttonStyle(.link)
             }
         }
+        .fixedSize(horizontal: false, vertical: true)
     }
 
     private func templateStep(_ draft: Binding<AssistantDraft>) -> some View {

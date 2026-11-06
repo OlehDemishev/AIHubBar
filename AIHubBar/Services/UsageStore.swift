@@ -8,6 +8,8 @@ import WidgetKit
 final class UsageStore {
     private(set) var snapshot: UsageSnapshot?
     private(set) var lastError: String?
+    /// The last request failed for want of a sign-in; what «Войти в Claude Code» is shown for.
+    private(set) var signedOut = false
     private(set) var isRefreshing = false
     private(set) var history: [UsagePoint] = []
     /// While set, no request is made: the server answered 429 (or kept failing).
@@ -98,6 +100,7 @@ final class UsageStore {
             let fresh = try await UsageService.fetch()
             apply(fresh)
             lastError = nil
+            signedOut = false
             pausedUntil = nil
             rateLimitStrikes = 0
         } catch let UsageError.rateLimited(retryAfter) {
@@ -111,15 +114,30 @@ final class UsageStore {
             // The sign-in expired (`claude` has not run lately): renew it through `claude` and ask once more.
             lastRenewal = .now
             lastError = UsageError.expired.localizedDescription
+            signedOut = true
             if await LoginRenewal.run(claudePath: ClaudeLocator.resolve(configured: settings.claudePath)),
                let fresh = try? await UsageService.fetch() {
                 apply(fresh)
                 lastError = nil
+                signedOut = false
             }
         } catch {
             // The same failure repeats every few minutes; log it once.
             if lastError != error.localizedDescription { AppLog.error("Usage refresh failed: \(error.localizedDescription)") }
             lastError = error.localizedDescription
+            signedOut = (error as? UsageError)?.needsSignIn ?? false
+        }
+    }
+
+    /// After «Войти в Claude Code»: asks again every 10 s for two minutes, so the limits appear without ⌘R.
+    /// Until the sign-in exists nothing leaves the Mac: the request stops at the Keychain.
+    func watchSignIn() {
+        Task { [weak self] in
+            for _ in 0..<12 {
+                try? await Task.sleep(for: .seconds(10))
+                guard let self, signedOut else { return }
+                await refresh()
+            }
         }
     }
 

@@ -1,4 +1,4 @@
-import Foundation
+import AppKit
 
 enum UsageError: LocalizedError, Equatable {
     case noCredentials
@@ -9,6 +9,15 @@ enum UsageError: LocalizedError, Equatable {
     case rateLimited(retryAfter: TimeInterval?)
     case network(Int)
     case badResponse
+
+    /// Only a new sign-in fixes this one.
+    var needsSignIn: Bool {
+        switch self {
+        case .noCredentials, .expired: true
+        case let .http(code): code == 401 || code == 403
+        default: false
+        }
+    }
 
     var errorDescription: String? {
         switch self {
@@ -21,6 +30,29 @@ enum UsageError: LocalizedError, Equatable {
         case .rateLimited: String(localized: "Сервер лимитов просит запрашивать реже")
         case let .network(code): String(localized: "Лимиты недоступны: нет связи (\(code))")
         case .badResponse: String(localized: "Лимиты недоступны: ответ в неизвестном формате")
+        }
+    }
+}
+
+/// «Установить Claude Code» and «Войти в Claude Code», from the readiness rows and the panel.
+@MainActor
+enum ClaudeSignIn {
+    static let installPage = URL(string: "https://claude.com/claude-code")!
+
+    static func openInstallPage() {
+        NSWorkspace.shared.open(installPage)
+    }
+
+    /// `claude auth login` in Terminal, then the limits are asked again until the sign-in shows up.
+    static func start(usage: UsageStore, claudePath: String) {
+        let claude = ClaudeLocator.resolve(configured: claudePath)
+        Task {
+            do {
+                try await TerminalLauncher.run("\(ShellQuote.quote(claude)) auth login")
+                usage.watchSignIn()
+            } catch {
+                AppLog.error("Claude sign-in: \(error.localizedDescription)")
+            }
         }
     }
 }
