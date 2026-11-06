@@ -27,10 +27,9 @@ You can enable several profiles and switch between them at the top of the panel.
 
 1. Download `AIHubBar-<version>.dmg` from [Releases](https://github.com/OlehDemishev/AIHubBar/releases).
 2. Open it and drag AI Hub Bar to Applications.
-3. Open AI Hub Bar. macOS says it can't check the developer: AI Hub Bar isn't signed with an Apple Developer ID. Close the message.
-4. Go to System Settings → Privacy & Security, find «AI Hub Bar was blocked…» and press **Open Anyway**.
+3. Open AI Hub Bar. It is signed with a Developer ID and notarized by Apple, so macOS only asks whether to open an app from the internet.
 
-You only do this once. AI Hub Bar then updates itself: **Settings… → General → Updates** checks daily or on demand.
+AI Hub Bar then updates itself: **Settings… → General → Updates** checks daily or on demand.
 
 To build from source instead, install Xcode and [XcodeGen](https://github.com/yonaskolb/XcodeGen) (`brew install xcodegen`), then run `scripts/build-and-install.sh` in the repository folder.
 

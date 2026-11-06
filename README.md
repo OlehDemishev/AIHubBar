@@ -65,10 +65,9 @@ A command's result is always a **new file** — nothing is overwritten. **Compar
 
 1. Download `AIHubBar-<version>.dmg` from [Releases](https://github.com/OlehDemishev/AIHubBar/releases/latest).
 2. Open it and drag **AI Hub Bar** to Applications.
-3. Open the app. macOS says it can't check the developer (the app isn't signed with an Apple Developer ID) — close the message.
-4. System Settings → Privacy & Security → **Open Anyway**.
+3. Open the app. It is signed with a Developer ID and notarized by Apple.
 
-You only do this once; after that the app updates itself (Settings → General → Updates). The first start opens an assistant that checks what the Mac still needs and sets up your first profile. Everything else is in the [guide](docs/GUIDE.md).
+After that the app updates itself (Settings → General → Updates). The first start opens an assistant that checks what the Mac still needs and sets up your first profile. Everything else is in the [guide](docs/GUIDE.md).
 
 **Requirements:** macOS 14 or later (Apple Silicon or Intel) and at least one AI service — Claude Code with a Claude subscription, another agent, or an API key. The limits and the session list need Claude Code.
 

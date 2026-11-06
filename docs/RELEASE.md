@@ -1,10 +1,9 @@
-# Releasing AI Hub Bar without an Apple Developer account
+# Releasing AI Hub Bar
 
-AI Hub Bar is shared as a `.dmg` on GitHub Releases. It updates itself through [Sparkle](https://sparkle-project.org). There is no Apple Developer ID, so the build is signed with a self-signed certificate.
+AI Hub Bar is shared as a `.dmg` on GitHub Releases. It updates itself through [Sparkle](https://sparkle-project.org). Builds are signed with a Developer ID (team 365835Q3S6, Apple Developer Program paid 2026-11-06) and notarized by Apple.
 
-- **What works:** updates install themselves. Permissions given to AI Hub Bar (Terminal automation, notifications) survive updates, because every release carries the same signature.
-- **What it costs:** macOS cannot vouch for the app, so the first launch needs one extra step (see “First launch” below).
-- **Developer ID later:** buying it means adding notarization to `scripts/release.sh`; everything else stays.
+- **What works:** a first launch without Gatekeeper's block, and updates that install themselves. Permissions given to AI Hub Bar (Terminal automation, notifications) survive updates, because every release carries the same signature.
+- **Changing from the self-signed certificate:** the first Developer ID build has a new signature, so macOS asks for permissions once more. Sparkle takes it: the update's Ed25519 key is the same.
 
 ## One-time setup (done on Oleh's Mac 2026-10-30)
 
@@ -17,7 +16,8 @@ Both commands write to `~/Library/Application Support/ClaudePult-release/`. Neit
 
 | File | What it is |
 |---|---|
-| `codesign.p12` + `codesign.pass` | The “ClaudePult Release” code signing certificate and its password. During a release it goes into a temporary keychain that is deleted at the end. |
+| `developer-id.p12` + `developer-id.pass` | The Developer ID Application certificate with its private key (`developer-id.key`, `developer-id.cer`), valid until December 2027. During a release it goes into a temporary keychain that is deleted at the end. |
+| `codesign.p12` + `codesign.pass` | The old self-signed “ClaudePult Release” certificate, no longer used. |
 | `codesign.crt` | The certificate alone, public. |
 | `sparkle-ed25519.key` | The private Ed25519 key that signs updates. Its public half is `SUPublicEDKey` in `project.yml`. |
 
@@ -26,6 +26,8 @@ Both commands write to `~/Library/Application Support/ClaudePult-release/`. Neit
 - With a different certificate, macOS asks for permissions again.
 
 The folder is never committed.
+
+Developer ID setup (done 2026-11-07): the certificate was requested with `openssl` because Keychain Access opens Passwords on this macOS. Apple's intermediate `DeveloperIDG2CA.cer` has to be in the login keychain, or `codesign` fails with `errSecInternalComponent`. Notarization uses the keychain profile from `xcrun notarytool store-credentials "AIHubBar" --team-id 365835Q3S6` with an app-specific password.
 
 ## A release
 
@@ -58,10 +60,8 @@ scripts/release.sh 0.4.0 --publish          # the release, later
 ## First launch for people
 
 1. Download `AIHubBar-<version>.dmg` from Releases, open it and drag AI Hub Bar to Applications.
-2. Open AI Hub Bar. macOS says it can't check the app; close that message.
-3. Open System Settings → Privacy & Security, scroll to “AI Hub Bar was blocked…” and press “Open Anyway”. Confirm with your password.
-4. AI Hub Bar opens from then on. Later updates come through Sparkle (“Updates” in Settings → General) without these steps.
+2. Open AI Hub Bar. Later updates come through Sparkle (“Updates” in Settings → General).
 
 ## Developer builds
 
-`scripts/build-and-install.sh` installs to `~/Applications` and signs with the same «ClaudePult Release» certificate when this Mac has the keys (`scripts/release-tools/sign-app.sh`), otherwise ad hoc. With the certificate macOS keeps the app's permissions across builds; an ad-hoc signature changes with every build, and permissions such as Accessibility (needed by «Раскладка») stop working while the switch in System Settings still shows on. Coming from an ad-hoc build: `tccutil reset Accessibility com.demishev.claudepult` once, then allow again. A release installs to `/Applications`. Don't run both at once: they share the bundle id, so there would be two ✦ in the menu bar.
+`scripts/build-and-install.sh` installs to `~/Applications` and signs with the same Developer ID certificate, without notarization, when this Mac has the keys (`scripts/release-tools/sign-app.sh`), otherwise ad hoc. With the certificate macOS keeps the app's permissions across builds; an ad-hoc signature changes with every build, and permissions such as Accessibility (needed by «Раскладка») stop working while the switch in System Settings still shows on. Coming from an ad-hoc build: `tccutil reset Accessibility com.demishev.claudepult` once, then allow again. A release installs to `/Applications`. Don't run both at once: they share the bundle id, so there would be two ✦ in the menu bar.

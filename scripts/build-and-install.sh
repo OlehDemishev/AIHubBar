@@ -87,8 +87,8 @@ ditto "$BUILT" "$DEST"
 # The release certificate, when this Mac has it: macOS then keeps the app's permissions (Accessibility for
 # «Раскладка») across builds. An ad-hoc signature changes with every build, and macOS forgets them.
 KEYS="${CLAUDEPULT_RELEASE_DIR:-$HOME/Library/Application Support/ClaudePult-release}"
-if [[ -f "$KEYS/codesign.p12" ]]; then
-  echo "==> Signing with «ClaudePult Release»"
+if [[ -f "$KEYS/developer-id.p12" ]]; then
+  echo "==> Signing with Developer ID"
   "$ROOT/scripts/release-tools/sign-app.sh" "$DEST"
 else
   echo "    (signed ad hoc: no release certificate in $KEYS, so macOS asks for permissions again after each build)"
