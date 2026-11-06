@@ -1,11 +1,11 @@
 # Status
 
 <!-- summary:start -->
-**Stage:** Mac: 0.6.0 published 2026-11-03 (Telegram, «Быстрый запрос», command shortcuts, Codex states; «Раскладка» out of beta). Windows/Linux (`desktop/`, Tauri 2): postponed by Oleh 2026-11-02
+**Stage:** Mac: 0.7.0 published 2026-11-06 (shorter first run, panel polish, usage history, finished sessions, ⌃⌥B, outages, several Claude accounts). Windows/Linux (`desktop/`, Tauri 2): postponed by Oleh 2026-11-02
 **Updated:** 2026-11-06
 
 **Now:**
-- release 0.7.0: first run, panel, settings, usage history, finished sessions, panel shortcut, outages, several Claude accounts
+- fix for ⌃⌥B in 0.7.0: it opens the «Раскладка» menu when that module is on; 0.7.1 after a live press
 - Telegram: Worker deployed at https://aihubbar-telegram.oleh-demishev.workers.dev (new bot, old bots deleted by Oleh); the app points at it — pairing and a live check next
 - merged 2026-11-06: #262 donations («Поддержать проект» in Settings → General, site/support.html with Ko-fi, GitHub Sponsors and Buy Me a Coffee; the app button reaches people with the next release)
 - merged 2026-11-03: #251 menu bar ☕ follows the «Не спать» switch, #248 «Не спать» on/off in the menu bar, #241 Codex states, #240 quick command shortcuts, #238 «Быстрый запрос», #236 content spec, #242 «Telegram» stage 1, #244 menu at the bottom, #246 shared bot (Worker not deployed yet), #247 desktop CI off for Mac string changes, #249 the bot's menu set up by each person, #252 stage 2 (sessions, requests, limits), #254 stage 3 (tasks and runs), #255 stage 4 (settings in the bot), #256 Mini App
@@ -17,7 +17,7 @@
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/specs/SPEC-windows.md §9, stage 2–3 leftovers)
 
 **Needs Oleh:**
-- 0.7.0 live checks: press ⌃⌥B (or `AIHubBar --app-command open-panel`), open «История расхода…», right-click a session row; with a second account: Settings → Claude Code → «Другие аккаунты Claude»
+- 0.7.0 live checks: press ⌃⌥B, right-click a session row; with a second account: Settings → Claude Code → «Другие аккаунты Claude»
 - promotion: decide on the Apple Developer ID (paid yearly; needed before Show HN and Homebrew), record a 20–30 s demo, post the drafts in docs/LAUNCH.md from your accounts
 - Telegram: Settings → Modules → Telegram → «Общий бот» → «Подключить Telegram» → Start (`_daily-report/config.json` already points at @AIHubBarBot)
 - Telegram: delete `_daily-report/bot.py` and `install-bot.sh`
@@ -30,6 +30,12 @@
 - MacBook Air: update to 0.6.0 through Sparkle (Settings → General → Updates) and check the island at the real notch
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-06 — Release 0.7.0 and the panel shortcut fix (branch `fix/panel-hotkey-item`)
+
+Done: 0.7.0 published (build 639). A check after publishing found ⌃⌥B opening the «Раскладка» menu: the app has two menu bar items and `PanelOpener` took the first. It now leaves out the layout item, and the log says which item it would click.
+Checked: scripts/check.sh passed with a new test; the release, its appcast and the download answer. On the running app: see the log line «Panel item».
+Left: the fix needs a live press of ⌃⌥B and a release of its own (0.7.1).
 
 ## 2026-11-06 — Several Claude accounts (branch `feat/claude-accounts`)
 

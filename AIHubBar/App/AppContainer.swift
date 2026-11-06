@@ -241,6 +241,11 @@ final class AppContainer {
             keepAwake.start()
             GlobalHotKey.register(settings.panelHotKey)
             GlobalHotKey.registerOpenPanel(settings.openPanelHotKey)
+            PanelOpener.otherItemWindow = { [layoutSwitcher] in layoutSwitcher.statusWindow }
+            Task {
+                try? await Task.sleep(for: .seconds(5))
+                PanelOpener.logItem()
+            }
             GlobalHotKey.registerIsland(settings.notch.hotKeys)
             GlobalHotKey.islandAction = { [notchIsland] allow in notchIsland.answerByKey(allow: allow) }
             quickPrompt.start()

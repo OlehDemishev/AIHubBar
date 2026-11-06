@@ -55,6 +55,15 @@ struct CommandHotKeysTests {
         #expect(!KeyCombo(keyCode: UInt32(kVK_Escape), modifiers: UInt32(cmdKey)).isValid)
     }
 
+    @Test func theLayoutItemIsNotThePanels() {
+        final class Item {}
+        let layout = Item(), panel = Item()
+        #expect(PanelOpener.panelItem(among: [layout, panel], other: layout) === panel)
+        #expect(PanelOpener.panelItem(among: [panel, layout], other: layout) === panel)
+        #expect(PanelOpener.panelItem(among: [panel], other: nil) === panel)
+        #expect(PanelOpener.panelItem(among: [layout], other: layout) == nil)
+    }
+
     @Test func theAppsOwnKeys() {
         let settings = settings()
         settings.panelHotKey = .controlOptionC
