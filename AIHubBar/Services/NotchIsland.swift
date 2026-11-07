@@ -126,7 +126,9 @@ final class NotchIsland {
         update()
         guard !places.isEmpty else { return }
         answered.formIntersection(requests.map(\.id))
-        queue.syncRequests(settings.notch.events.contains(.request) ? requests.filter { !answered.contains($0.id) } : [])
+        let changed = queue.syncRequests(settings.notch.events.contains(.request) ? requests.filter { !answered.contains($0.id) } : [])
+        // The rows of the open card moved: the buttons wait, or a click meant for a row would land on «Разрешить».
+        if changed, isOpen { resetGuard() }
         noticeFinished(items)
         showNext()
     }
@@ -286,6 +288,8 @@ final class NotchIsland {
         perform(.decide(requestID: requestID, allow: allow))
         answered.insert(event.id)
         queue.remove(event.id)
+        // The next request slides up under the pointer: a second click must not answer it unread.
+        if isOpen { resetGuard() }
         showNext()
     }
 

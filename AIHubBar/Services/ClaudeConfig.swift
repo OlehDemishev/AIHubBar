@@ -189,6 +189,8 @@ final class ClaudeConfigStore {
     private(set) var servers: [MCPServer] = []
     private(set) var files: [InstructionFile] = []
     private(set) var texts: [String: String] = [:]
+    /// Unsaved edits by path. They live here, not in the window: switching files or closing it loses nothing.
+    private(set) var drafts: [String: String] = [:]
     private(set) var busy: Set<String> = []
     var lastError: String?
 
@@ -226,10 +228,18 @@ final class ClaudeConfigStore {
         texts = Dictionary(uniqueKeysWithValues: files.map { ($0.path, (try? String(contentsOfFile: $0.path, encoding: .utf8)) ?? "") })
     }
 
+    /// What the editor shows: the unsaved edit if there is one.
+    func text(of path: String) -> String { drafts[path] ?? texts[path] ?? "" }
+
+    func edit(_ text: String, of path: String) {
+        drafts[path] = text == (texts[path] ?? "") ? nil : text
+    }
+
     func save(_ text: String, to file: InstructionFile) {
         do {
             try text.write(toFile: file.path, atomically: true, encoding: .utf8)
             texts[file.path] = text
+            drafts[file.path] = nil
             AppLog.info("Saved \(file.path)")
         } catch {
             lastError = error.localizedDescription

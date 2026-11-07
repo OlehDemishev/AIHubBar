@@ -246,7 +246,8 @@ enum SessionRules {
         }
     }
 
-    /// Waiting first, then running, then the rest; newest activity first within a group.
+    /// Waiting first, then running, then the rest. Inside a group rows stay put, so a button isn't swapped under the
+    /// pointer: the oldest request first (a new one joins below it), the others by when they started, not by activity.
     static func sorted(_ sessions: [(session: Session, state: Session.State)]) -> [(session: Session, state: Session.State)] {
         func rank(_ state: Session.State) -> Int {
             switch state {
@@ -258,8 +259,11 @@ enum SessionRules {
             case .ended: 5
             }
         }
-        return sessions.sorted {
-            rank($0.state) != rank($1.state) ? rank($0.state) < rank($1.state) : $0.session.updatedAt > $1.session.updatedAt
+        return sessions.sorted { a, b in
+            if rank(a.state) != rank(b.state) { return rank(a.state) < rank(b.state) }
+            if a.state == .waiting, a.session.updatedAt != b.session.updatedAt { return a.session.updatedAt < b.session.updatedAt }
+            let (first, second) = (a.session.startedAt ?? a.session.updatedAt, b.session.startedAt ?? b.session.updatedAt)
+            return first != second ? first > second : a.session.id < b.session.id
         }
     }
 }

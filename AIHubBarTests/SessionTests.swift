@@ -238,8 +238,8 @@ struct HookScriptTests {
 }
 
 struct SessionRulesTests {
-    private func session(state: String, updated: Date, pid: Int? = nil) throws -> Session {
-        var json: [String: Any] = ["session_id": UUID().uuidString, "cwd": "/P/A", "state": state,
+    private func session(id: String = UUID().uuidString, state: String, updated: Date, pid: Int? = nil) throws -> Session {
+        var json: [String: Any] = ["session_id": id, "cwd": "/P/A", "state": state,
                                    "updated_at": updated.ISO8601Format()]
         if let pid { json["claude_pid"] = pid }
         return try JSONDecoder().decode(Session.self, from: JSONSerialization.data(withJSONObject: json))
@@ -281,6 +281,25 @@ struct SessionRulesTests {
         let running = try session(state: "running", updated: now.addingTimeInterval(-60))
         let sorted = SessionRules.sorted([(done, .done), (running, .running), (waiting, .waiting)])
         #expect(sorted.map(\.state) == [.waiting, .running, .done])
+    }
+
+    @Test func aNewRequestJoinsBelowTheOlderOnes() throws {
+        let now = Date.now
+        let older = try session(id: "older", state: "waiting", updated: now.addingTimeInterval(-60))
+        let newer = try session(id: "newer", state: "waiting", updated: now)
+        let sorted = SessionRules.sorted([(newer, .waiting), (older, .waiting)])
+        #expect(sorted.map(\.session.id) == ["older", "newer"])
+    }
+
+    @Test func activityDoesNotReorderRunningSessions() throws {
+        let now = Date.now
+        var first = try session(id: "first", state: "running", updated: now)
+        first.startedAt = now.addingTimeInterval(-600)
+        var second = try session(id: "second", state: "running", updated: now.addingTimeInterval(-300))
+        second.startedAt = now.addingTimeInterval(-60)
+        #expect(SessionRules.sorted([(first, .running), (second, .running)]).map(\.session.id) == ["second", "first"])
+        second.updatedAt = now.addingTimeInterval(-500)
+        #expect(SessionRules.sorted([(first, .running), (second, .running)]).map(\.session.id) == ["second", "first"])
     }
 
     @Test func taskTitleDropsClaudePultWrappers() {

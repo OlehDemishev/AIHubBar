@@ -32,14 +32,19 @@ private struct InstructionsView: View {
     @Environment(ClaudeConfigStore.self) private var config
     @State private var selection: String?
     @State private var query = ""
-    @State private var draft = ""
 
     private var shown: [InstructionFile] {
         query.isEmpty ? config.files : config.files.filter { !InstructionFile.matches(config.texts[$0.path] ?? "", query: query).isEmpty }
     }
 
     private var selected: InstructionFile? { config.files.first { $0.path == selection } }
-    private var changed: Bool { selected.map { (config.texts[$0.path] ?? "") != draft } ?? false }
+    private var changed: Bool { selected.map { config.drafts[$0.path] != nil } ?? false }
+    private var draft: String { selected.map { config.text(of: $0.path) } ?? "" }
+    private var editor: Binding<String> {
+        Binding(get: { draft }, set: { text in
+            if let path = selected?.path { config.edit(text, of: path) }
+        })
+    }
 
     var body: some View {
         HSplitView {
@@ -52,6 +57,13 @@ private struct InstructionsView: View {
                             ForEach(files) { file in
                                 HStack {
                                     Text(file.title)
+                                    if config.drafts[file.path] != nil {
+                                        Image(systemName: "circle.fill")
+                                            .font(.system(size: 6))
+                                            .foregroundStyle(.orange)
+                                            .help("Есть несохранённые правки")
+                                            .accessibilityLabel("Есть несохранённые правки")
+                                    }
                                     Spacer()
                                     if !query.isEmpty {
                                         Text("\(InstructionFile.matches(config.texts[file.path] ?? "", query: query).count)")
@@ -99,7 +111,7 @@ private struct InstructionsView: View {
                         }
                         .frame(maxHeight: 90)
                     }
-                    TextEditor(text: $draft)
+                    TextEditor(text: editor)
                         .font(.body.monospaced())
                 } else {
                     Text("Выберите файл слева").foregroundStyle(.secondary).frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -108,10 +120,8 @@ private struct InstructionsView: View {
             .padding(.leading, 6)
             .frame(minWidth: 420)
         }
-        .onChange(of: selection) { draft = selected.map { config.texts[$0.path] ?? "" } ?? "" }
         .onAppear {
             if selection == nil { selection = config.files.first?.path }
-            draft = selected.map { config.texts[$0.path] ?? "" } ?? ""
         }
     }
 

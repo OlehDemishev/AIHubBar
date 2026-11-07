@@ -387,6 +387,11 @@ private struct NotchRequestView: View {
     let event: NotchEvent
     @Environment(NotchIsland.self) private var island
 
+    /// The hook keeps a request to 200 characters: about four lines here.
+    private static let bodyLines = 4
+    /// Dark enough for white text (5:1); the system green gives about 2:1.
+    private static let allowFill = Color(red: 0.09, green: 0.5, blue: 0.22)
+
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
             HStack(spacing: 7) {
@@ -401,22 +406,22 @@ private struct NotchRequestView: View {
                 Text(event.body)
                     .font(.system(.caption, design: .monospaced))
                     .foregroundStyle(.white.opacity(0.85))
-                    .lineLimit(2)
-                    .truncationMode(.middle)
+                    .lineLimit(Self.bodyLines)
                     .help(event.body)
             }
+            // The order of the panel's row: «Разрешить» is always the last button.
             HStack(spacing: 8) {
-                Group {
-                    Button("Разрешить") { island.answer(event, allow: true) }
-                        .buttonStyle(NotchButtonStyle(fill: .green))
-                    Button("Отклонить") { island.answer(event, allow: false) }
-                        .buttonStyle(NotchButtonStyle(fill: .white.opacity(0.18)))
-                }
-                .disabled(!island.armed)
-                Spacer()
                 Button("Открыть") { island.openTarget(of: event) }
                     .buttonStyle(.borderless)
                     .help("Перейти к сессии")
+                Spacer()
+                Group {
+                    Button("Отклонить") { island.answer(event, allow: false) }
+                        .buttonStyle(NotchButtonStyle(fill: .white.opacity(0.18)))
+                    Button("Разрешить") { island.answer(event, allow: true) }
+                        .buttonStyle(NotchButtonStyle(fill: Self.allowFill))
+                }
+                .disabled(!island.armed)
             }
             .controlSize(.small)
         }
