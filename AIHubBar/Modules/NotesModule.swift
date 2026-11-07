@@ -47,8 +47,6 @@ struct NotesSection: View {
                     }
                 }
             }
-        } header: {
-            Text("Заметки")
         } footer: {
             Footnote(text: String(localized: "Каждая заметка — файл .md в этой папке; удалённые уходят в корзину. Папку можно положить в iCloud Drive, чтобы заметки были и на других Маках."))
         }

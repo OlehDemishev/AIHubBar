@@ -40,8 +40,6 @@ struct QuickPromptSection: View {
             } label: {
                 Label("Окно быстрого запроса", systemImage: "macwindow")
             }
-        } header: {
-            Text("Быстрый запрос")
         } footer: {
             Footnote(text: String(localized: "Проект — тот, что впереди (если «Универсальный доступ» уже выдан, например для «Раскладки»), иначе прошлый. Claude Code — в фоне или в Терминале, как «Своя задача…» у проекта; другие агенты открываются в Терминале, задача — в буфере обмена. Из скрипта: AIHubBar --app-command quick-prompt."))
         }

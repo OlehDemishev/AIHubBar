@@ -11,6 +11,39 @@ struct SettingsPage<Content: View>: View {
     }
 }
 
+/// One column for the icons of every row in Settings: a plain `Label` starts its title where the symbol ends, so the
+/// titles in a card did not line up. Set once on the page; `.iconOnly` buttons keep their own style.
+struct SettingsRowLabelStyle: LabelStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        HStack(spacing: 8) {
+            configuration.icon
+                .frame(width: 22)
+            configuration.title
+        }
+    }
+}
+
+/// A field on a line of its own. A grouped `Form` would put the title beside it and align the text to the right, which
+/// reads badly for anything longer than a word; the title is the placeholder here.
+struct FormField: View {
+    let title: Text
+    @Binding var text: String
+    var axis: Axis = .horizontal
+
+    init(_ title: Text, text: Binding<String>, axis: Axis = .horizontal) {
+        self.title = title
+        _text = text
+        self.axis = axis
+    }
+
+    var body: some View {
+        TextField(text: $text, prompt: title, axis: axis) { title }
+            .labelsHidden()
+            .multilineTextAlignment(.leading)
+            .textFieldStyle(.roundedBorder)
+    }
+}
+
 /// A settings row with an icon in front of its title, like the toggles and pickers that take `systemImage:`.
 struct IconRow<Content: View>: View {
     let title: LocalizedStringKey

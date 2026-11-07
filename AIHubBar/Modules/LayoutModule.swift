@@ -50,8 +50,6 @@ struct LayoutSection: View {
             Toggle("⌥⇧ — выделенный текст", systemImage: "option", isOn: $settings.layout.optionShift)
             Toggle("Язык в строке меню", systemImage: "menubar.rectangle", isOn: $settings.layout.menuBarIcon)
                 .onChange(of: settings.layout.menuBarIcon) { switcher.sync() }
-        } header: {
-            Text("Раскладка")
         } footer: {
             Footnote(text: switcher.layouts.count < 2
                 ? String(localized: "Нужны хотя бы две раскладки из: русская, английская, украинская, немецкая, французская, испанская, португальская. Добавьте их в Системных настройках → Клавиатура → Источники ввода.")

@@ -34,6 +34,8 @@ Items 7–12 fixed in branch `fix/panel-frame`; Esc (8) needs the Accessibility 
 
 ## P1: Settings
 
+Items 19–21 and 27–29 fixed in branch `fix/settings-rows`.
+
 19. **Row labels do not line up.** `IconRow` uses a plain `Label` (`SettingsControls.swift:30`), so the text starts where each symbol ends: 581, 583, 586 px down one card on «Внешний вид», and rows without an icon start further left («Название» and «Значок», «Источник» and «Папка проектов»). One label style with a fixed icon column fixes every page. *live*
 20. **Multi-line prompts are right-aligned, and two prompts in one list have different layouts** («Текст» above the field in one, beside it in the other). A grouped `Form` right-aligns `TextField` (`ClaudeSettings.swift:73`, `:81`). The same on «Быстрые команды», where placeholders act as labels. *live*
 21. **The sidebar hides what is selected.** About 22 rows plus headers do not fit 700 pt, it opens scrolled, and the first five pages are out of view; a selected row can sit under the search field. Deep links never scroll to it (`SettingsView.swift:27`). «Сервисы AI» reads as an empty heading until hovered. *live*

@@ -51,7 +51,7 @@ struct QuickCommandsSection: View {
                         .labelsHidden()
                         .frame(width: 60)
                         .help("Значок кнопки")
-                        TextField("Название", text: $command.title)
+                        FormField(Text("Название"), text: $command.title)
                         Button { move(command.id, by: -1) } label: { Label("Выше", systemImage: "chevron.up").labelStyle(.iconOnly) }
                             .disabled(settings.quickCommands.first?.id == command.id)
                             .help("Выше")
@@ -65,7 +65,7 @@ struct QuickCommandsSection: View {
                     Picker("Что делает", systemImage: "bolt", selection: $command.kind) {
                         ForEach(QuickCommand.Kind.allCases, id: \.self) { Text($0.title).tag($0) }
                     }
-                    TextField(placeholder(command.kind), text: $command.value)
+                    FormField(Text(verbatim: placeholder(command.kind)), text: $command.value)
                         .font(.callout.monospaced())
                     Toggle("Спрашивать перед запуском", systemImage: "questionmark.circle", isOn: $command.confirm)
                     IconRow("Сочетание клавиш", systemImage: "keyboard") {

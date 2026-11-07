@@ -44,19 +44,19 @@ struct ModuleCatalog: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 18) {
-                HStack(spacing: 8) {
+                FlowLayout(spacing: 8) {
                     ForEach(presets, id: \.self) { preset in
                         Button { apply(preset) } label: {
                             Label(preset.title, systemImage: preset.symbol)
                                 .padding(.horizontal, 4)
+                                .fixedSize()
                         }
                         .controlSize(.large)
                         .help(String(localized: "Включить модули набора и выключить остальные"))
                     }
-                    Spacer(minLength: 0)
-                    Text("Включено: \(onCount) из \(listed.count)")
-                        .foregroundStyle(.secondary)
                 }
+                Text("Включено: \(onCount) из \(listed.count)")
+                    .foregroundStyle(.secondary)
                 ForEach(ModuleGroup.allCases, id: \.self) { group in
                     VStack(alignment: .leading, spacing: 10) {
                         HStack(spacing: 7) {

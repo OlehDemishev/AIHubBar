@@ -36,6 +36,12 @@
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
 
+## 2026-11-07 — Settings rows and sidebar (branch `fix/settings-rows`)
+
+Done: audit items 19–21, 27–29. Every row's icon stands in one column, so titles line up on all pages, and rows that had no icon got one. Prompts and quick commands use fields on their own line, aligned left. The sidebar scrolls to the chosen page, also after a link, «Сервисы AI» always shows its arrow and a service's page opens the section. Search reads subtitles and more setting names and says «Ничего не найдено». Presets wrap, module options sit under the title in «Панель», the page header keeps its height for one or two lines, sections no longer repeat the page's title.
+Checked: scripts/check.sh passed, with a new test for the search; installed and looked at eight pages.
+Left: three-line subtitles still move the page; the texts come in the next branch.
+
 ## 2026-11-07 — The panel's frame (branch `fix/panel-frame`)
 
 Done: audit items 7–12. The blocks scroll under a fixed header and search and stop at the bottom of the panel's own screen; the project list no longer scrolls on its own. Week days read «Пн Вт Ср…». «Команды» and the menu bar show the same live free space as «Ресурсы Mac». Folded cards are one height, block titles are one step larger. Esc closes the panel through the same real click as ⌃⌥B.

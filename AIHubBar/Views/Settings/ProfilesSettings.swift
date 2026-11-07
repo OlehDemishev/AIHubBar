@@ -152,7 +152,11 @@ private struct ProfileEditor: View {
     var body: some View {
         Form {
             Section {
-                TextField("Название", text: $mode.name)
+                IconRow("Название", systemImage: "character.cursor.ibeam") {
+                    TextField("Название", text: $mode.name)
+                        .labelsHidden()
+                        .multilineTextAlignment(.trailing)
+                }
                 Picker("Значок", systemImage: "star", selection: $mode.icon) {
                     ForEach(Self.icons, id: \.self) { Image(systemName: $0).tag($0) }
                 }
@@ -292,7 +296,7 @@ private struct ProfileEditor: View {
             } label: {
                 Label(shown.isEmpty ? String(localized: "Панель пуста") : shown.map(\.kind.title).joined(separator: " · "),
                       systemImage: "rectangle.stack")
-                    .lineLimit(2)
+                    .lineLimit(3)
             }
         } header: {
             Text("Панель")
@@ -309,7 +313,7 @@ private struct TildeFolderField: View {
     let onChange: (String) -> Void
 
     var body: some View {
-        LabeledContent(title) {
+        LabeledContent {
             HStack(spacing: 6) {
                 Text(path)
                     .lineLimit(1)
@@ -325,6 +329,8 @@ private struct TildeFolderField: View {
                     if panel.runModal() == .OK, let url = panel.url { onChange(PathText.tilde(url.path)) }
                 }
             }
+        } label: {
+            Label(title, systemImage: "folder")
         }
     }
 }
