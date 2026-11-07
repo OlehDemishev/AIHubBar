@@ -24,6 +24,7 @@ struct SettingsView: View {
 
     var body: some View {
         NavigationSplitView {
+            ScrollViewReader { sidebar in
             List(selection: Binding(get: { pane }, set: { if let new = $0 { select(new) } })) {
                 ForEach(SettingsPane.areas.filter { $0.matches(query) }, id: \.self) { pane in
                     PaneRow(pane: pane)
@@ -40,20 +41,35 @@ struct SettingsView: View {
                     if group == .ai {
                         let found = SettingsPane.services.filter { $0.matches(query) }
                         if !found.isEmpty {
-                            Section("Сервисы AI", isExpanded: Binding(
-                                // Open while searching or while one of them is the page shown.
-                                get: { servicesExpanded || !query.isEmpty || pane.isService },
-                                set: { servicesExpanded = $0 }
-                            )) {
-                                ForEach(found, id: \.self) { pane in
-                                    PaneRow(pane: pane, isSetUp: isSetUp(pane))
+                            Section {
+                                if servicesOpen {
+                                    ForEach(found, id: \.self) { pane in
+                                        PaneRow(pane: pane, isSetUp: isSetUp(pane))
+                                    }
                                 }
+                            } header: {
+                                servicesHeader
                             }
                         }
                     }
                 }
+                if nothingFound {
+                    Text("Ничего не найдено")
+                        .foregroundStyle(.secondary)
+                        .selectionDisabled()
+                }
             }
             .searchable(text: $query, placement: .sidebar, prompt: Text("Поиск"))
+            // The list is taller than the window: the chosen page's row stays in sight, also after a link to it.
+            .onAppear {
+                openServices(for: pane)
+                DispatchQueue.main.async { sidebar.scrollTo(pane, anchor: .center) }
+            }
+            .onChange(of: pane) {
+                openServices(for: pane)
+                DispatchQueue.main.async { withAnimation { sidebar.scrollTo(pane) } }
+            }
+            }
             .navigationSplitViewColumnWidth(230)
             .toolbar(removing: .sidebarToggle)
         } detail: {
@@ -65,6 +81,7 @@ struct SettingsView: View {
                 page
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .font(.system(size: 13.5))
+                    .labelStyle(SettingsRowLabelStyle())
             }
             .navigationTitle(pane.title)
         }
@@ -78,6 +95,36 @@ struct SettingsView: View {
         .task { if services.agents.isEmpty { await services.scan() } }
         .preferredColorScheme(settings.panelTheme.colorScheme)
         .debugSnapshot("settings")
+    }
+
+    private var servicesOpen: Bool { servicesExpanded || !query.isEmpty }
+
+    /// The system's own section arrow appears only on hover, and the folded section looked like an empty heading.
+    private var servicesHeader: some View {
+        Button {
+            withAnimation(.snappy(duration: 0.2)) { servicesExpanded.toggle() }
+        } label: {
+            HStack(spacing: 4) {
+                Text("Сервисы AI")
+                Image(systemName: "chevron.right")
+                    .font(.caption2.weight(.semibold))
+                    .rotationEffect(.degrees(servicesOpen ? 90 : 0))
+                Spacer(minLength: 0)
+            }
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+    }
+
+    /// A service's page never sits under a folded section.
+    private func openServices(for pane: SettingsPane) {
+        if pane.isService, !servicesExpanded { servicesExpanded = true }
+    }
+
+    private var nothingFound: Bool {
+        guard !query.isEmpty else { return false }
+        let modules = ModuleGroup.allCases.flatMap(\.modules).filter(isListed).map(SettingsPane.module)
+        return !(SettingsPane.areas + modules + SettingsPane.services).contains { $0.matches(query) }
     }
 
     @ViewBuilder private var page: some View {

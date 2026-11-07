@@ -99,4 +99,13 @@ struct SettingsPaneTests {
         #expect(Set(listed) == Set(ModuleKind.allCases))
         #expect(listed.allSatisfy { kind in ModuleGroup.allCases.first { $0.modules.contains(kind) } == kind.group })
     }
+
+    @Test func searchFindsSettingsNotOnlyPages() {
+        #expect(SettingsPane.general.matches("язык"))
+        #expect(SettingsPane.general.matches("экспорт"))
+        #expect(SettingsPane.service(.claude).matches("MCP"))
+        #expect(SettingsPane.service(.claude).matches("аккаунт"))
+        #expect(SettingsPane.module(.sessions).matches("отслеживание"))
+        #expect(!SettingsPane.general.matches("токен"))
+    }
 }

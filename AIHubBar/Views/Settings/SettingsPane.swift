@@ -102,8 +102,9 @@ enum SettingsPane: Hashable, Sendable, RawRepresentable {
     var keywords: [String] {
         switch self {
         case .general:
-            [String(localized: "Запускать при входе в систему"), String(localized: "Уведомления"), "Telegram",
-             String(localized: "Токен бота"), String(localized: "Версия"), String(localized: "Журнал"), String(localized: "Обновления"),
+            [String(localized: "Запускать при входе в систему"), String(localized: "Язык интерфейса"), String(localized: "Уведомления"),
+             "Telegram", String(localized: "Экспорт настроек…"), String(localized: "Импорт…"), String(localized: "Версия"),
+             String(localized: "Журнал"), String(localized: "Обновления"),
              String(localized: "Обратная связь"), String(localized: "Сообщить о проблеме…"), String(localized: "Предложить идею…"),
              String(localized: "Бета-версии")]
         case .modes:
@@ -123,7 +124,8 @@ enum SettingsPane: Hashable, Sendable, RawRepresentable {
             [String(localized: "Сочетание клавиш"), String(localized: "Открывать поиск с клавиатуры"), String(localized: "Быстрый запрос")]
         case let .service(service):
             service.agents.map(\.title) + service.providers.map(\.title) + service.hubSources.map(\.title)
-                + (service == .claude ? [String(localized: "Путь к claude"), String(localized: "Свои промпты")] : [])
+                + (service == .claude ? [String(localized: "Путь к claude"), String(localized: "Свои промпты"),
+                                         String(localized: "Другие аккаунты Claude")] : [])
         }
     }
 
@@ -131,7 +133,7 @@ enum SettingsPane: Hashable, Sendable, RawRepresentable {
     func matches(_ query: String) -> Bool {
         let query = query.trimmingCharacters(in: .whitespaces)
         guard !query.isEmpty else { return true }
-        return ([title] + keywords).contains { $0.localizedCaseInsensitiveContains(query) }
+        return ([title, subtitle] + keywords).contains { $0.localizedCaseInsensitiveContains(query) }
     }
 }
 
@@ -182,7 +184,8 @@ struct PaneHeader: View {
     var isOn: Binding<Bool>?
 
     var body: some View {
-        HStack(alignment: .center, spacing: 14) {
+        // From the top and with room for two lines: the page below stays in place from one page to the next.
+        HStack(alignment: .top, spacing: 14) {
             PaneIcon(pane: pane, size: 46)
             VStack(alignment: .leading, spacing: 3) {
                 Text(pane.title).font(.system(size: 20, weight: .semibold))
@@ -200,9 +203,11 @@ struct PaneHeader: View {
                     .toggleStyle(.switch)
                     .controlSize(.large)
                     .labelsHidden()
+                    .frame(height: 46)
                     .help(isOn.wrappedValue ? String(localized: "Выключить модуль: перестанет работать, место в профилях сохранится") : String(localized: "Включить модуль"))
             }
         }
+        .frame(minHeight: 56, alignment: .top)
     }
 }
 

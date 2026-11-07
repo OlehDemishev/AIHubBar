@@ -110,15 +110,17 @@ struct PanelBuilderRow: View {
             Image(systemName: "line.3.horizontal")
                 .foregroundStyle(.tertiary)
             PaneIcon(pane: .module(module.kind), size: 26)
-            Text(module.kind.title)
-                .font(.system(size: 14))
-                .lineLimit(1)
-                .layoutPriority(1)
-            Spacer(minLength: 4)
-            ProfileModuleOptions(module: module) { new in
-                set { $0 = new }
+            // The options go under the title: beside it they squeezed it down to «Ресурсы…».
+            VStack(alignment: .leading, spacing: 2) {
+                Text(module.kind.title)
+                    .font(.system(size: 14))
+                    .lineLimit(1)
+                ProfileModuleOptions(module: module) { new in
+                    set { $0 = new }
+                }
+                .fixedSize()
             }
-            .fixedSize()
+            Spacer(minLength: 4)
             Toggle(module.kind.title, isOn: Binding(get: { module.shown }, set: { shown in set { $0.shown = shown } }))
                 .toggleStyle(.switch)
                 .labelsHidden()

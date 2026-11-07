@@ -70,17 +70,15 @@ struct SavedPromptsSection: View {
             ForEach($settings.savedPrompts) { $prompt in
                 VStack(alignment: .leading, spacing: 4) {
                     HStack {
-                        TextField("Название", text: $prompt.title)
-                            .textFieldStyle(.roundedBorder)
+                        FormField(Text("Название"), text: $prompt.title)
                         Button(role: .destructive) {
                             settings.savedPrompts.removeAll { $0.id == prompt.id }
                         } label: { Label("Удалить промпт", systemImage: "trash").labelStyle(.iconOnly) }
                         .buttonStyle(.borderless)
                         .help("Удалить промпт")
                     }
-                    TextField("Текст", text: $prompt.text, axis: .vertical)
+                    FormField(Text("Текст"), text: $prompt.text, axis: .vertical)
                         .lineLimit(2...6)
-                        .textFieldStyle(.roundedBorder)
                 }
                 .padding(.vertical, 2)
             }

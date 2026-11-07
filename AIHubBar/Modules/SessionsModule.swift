@@ -18,7 +18,7 @@ extension ModuleDefinition {
         notifications: [.waiting, .context, .background],
         island: IslandSlot(ears: [.sessions, .background], left: false),
         telegram: .backgroundResults,
-        keywords: ["Hooks", "Telegram", String(localized: "Ответы из Telegram"), String(localized: "Фоновые задачи"), String(localized: "Ночные задачи начинаются в")]
+        keywords: ["Hooks", String(localized: "Отслеживание сессий"), "Telegram", String(localized: "Ответы из Telegram"), String(localized: "Фоновые задачи"), String(localized: "Ночные задачи начинаются в")]
     )
 }
 
