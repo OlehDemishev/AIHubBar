@@ -110,6 +110,8 @@ struct PanelSearchField: View {
 struct PanelSearchResults: View {
     let results: [PanelSearch.Result]
     var selected = 0
+    /// The hot-key window opens a project in Terminal; the panel expands it.
+    var opensInTerminal = false
     let activate: (PanelSearch.Result) -> Void
 
     var body: some View {
@@ -180,7 +182,7 @@ struct PanelSearchResults: View {
     private func hint(_ result: PanelSearch.Result) -> String {
         switch result {
         case .session: String(localized: "Показать сессию")
-        case .project: String(localized: "Раскрыть проект в панели")
+        case .project: opensInTerminal ? String(localized: "Открыть в Терминале") : String(localized: "Раскрыть проект в панели")
         case .quickCommand, .command: String(localized: "Запустить")
         case .prompt: String(localized: "Выбрать проект и запустить")
         }
@@ -200,7 +202,9 @@ struct QuickSearchWindow: View {
     @Environment(QuickToolsController.self) private var quickTools
     @Environment(CommandStore.self) private var commands
     @Environment(LaunchController.self) private var launcher
+    @Environment(\.openWindow) private var openWindow
     @State private var query = ""
+    @State private var selection = 0
     @FocusState private var focused: Bool
     /// A saved prompt was chosen: the list is now projects to run it in.
     @State private var prompt: SavedPrompt?
@@ -236,11 +240,11 @@ struct QuickSearchWindow: View {
                 }
                 PromptProjectList(projects: Array(promptProjects.prefix(PanelSearch.limit))) { run(prompt, in: $0) }
             } else {
-                PanelSearchField(query: $query, focused: $focused, onCancel: { dismiss() }) {
-                    if let first = results.first { activate(first) }
+                PanelSearchField(query: $query, focused: $focused, onCancel: { dismiss() }, onMove: move) {
+                    if results.indices.contains(selection) { activate(results[selection]) }
                 }
                 if !query.isEmpty {
-                    PanelSearchResults(results: results, activate: activate)
+                    PanelSearchResults(results: results, selected: selection, opensInTerminal: true, activate: activate)
                 }
             }
         }
@@ -251,11 +255,16 @@ struct QuickSearchWindow: View {
             prompt = nil
             focused = true
         }
+        .onChange(of: query) { selection = 0 }
         // The project step brings a new field: give it the keyboard (typing and Esc go nowhere otherwise).
         .onChange(of: prompt) {
             focused = false
             DispatchQueue.main.async { focused = true }
         }
+    }
+
+    private func move(_ step: Int) {
+        selection = min(max(selection + step, 0), max(results.count - 1, 0))
     }
 
     /// Fills the placeholders and starts Claude with the default launch mode (Terminal when it asks each time).
@@ -270,7 +279,14 @@ struct QuickSearchWindow: View {
     private func activate(_ result: PanelSearch.Result) {
         switch result {
         case let .session(id, _, _):
-            if let session = sessions.items.first(where: { $0.id == id })?.session { SessionActions.show(session) }
+            // A background run has no window of its own: its log, as in the panel.
+            if runs.runs.contains(where: { $0.id == id }) {
+                runs.selectedLogRunID = id
+                NSApp.activate()
+                openWindow(.runLog)
+            } else if let session = sessions.items.first(where: { $0.id == id })?.session {
+                SessionActions.show(session)
+            }
         case let .project(id, _, _):
             ProjectActions.openInTerminal(id)
         case let .quickCommand(id, _):

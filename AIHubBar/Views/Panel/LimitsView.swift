@@ -42,11 +42,23 @@ struct LimitsView: View {
         }
     }
 
+    private var signIn: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            Text("Чтобы видеть лимиты подписки, войдите в Claude Code.")
+                .scaledFont(.caption)
+                .foregroundStyle(.secondary)
+            Button("Войти в Claude Code") { ClaudeSignIn.start(usage: usage, claudePath: settings.claudePath) }
+                .controlSize(.small)
+        }
+    }
+
     @ViewBuilder
     private var details: some View {
         if let snapshot = usage.snapshot {
             ServiceCard(usage: .claude(snapshot, forecast: usage.forecast, week: usage.weekUsage, error: usage.lastError),
                         showsTitle: !hub.limits.isEmpty || !accounts.usages.isEmpty)
+            // A snapshot is kept for a day: an expired sign-in must still say so.
+            if usage.signedOut, services.agents[.claudeCode] != nil { signIn }
             // Models by API (SPEC-modes §11.2): shown once AI Hub Bar has spent something this month.
             let month = engine.summary(since: engine.monthStart)
             if month.tokens > 0 {
@@ -63,13 +75,7 @@ struct LimitsView: View {
                     .controlSize(.small)
             }
         } else if usage.signedOut {
-            VStack(alignment: .leading, spacing: 6) {
-                Text("Чтобы видеть лимиты подписки, войдите в Claude Code.")
-                    .scaledFont(.caption)
-                    .foregroundStyle(.secondary)
-                Button("Войти в Claude Code") { ClaudeSignIn.start(usage: usage, claudePath: settings.claudePath) }
-                    .controlSize(.small)
-            }
+            signIn
         } else if let error = usage.lastError {
             Label("Лимиты недоступны. \(error)", systemImage: "exclamationmark.triangle")
                 .scaledFont(.caption)

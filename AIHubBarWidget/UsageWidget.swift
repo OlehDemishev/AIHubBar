@@ -120,7 +120,8 @@ func levelColor(_ percent: Double) -> Color {
 }
 
 func resetText(_ date: Date?, now: Date) -> String? {
-    guard let date else { return nil }
+    // Past the reset the app hasn't written new figures: no «через 0 мин».
+    guard let date, date > now else { return nil }
     let minutes = Int(max(0, date.timeIntervalSince(now)) / 60)
     if minutes < 60 { return String(localized: "сброс через \(minutes) мин") }
     if minutes < 24 * 60 { return String(localized: "сброс через \(minutes / 60) ч \(minutes % 60) мин") }
@@ -131,7 +132,8 @@ struct SmallUsageView: View {
     let entry: UsageEntry
 
     var body: some View {
-        if let session = entry.usage?.session {
+        // Only the week known: it stands in for the session.
+        if let session = entry.usage?.session ?? entry.usage?.week {
             VStack(spacing: 6) {
                 ZStack {
                     Circle().stroke(.quaternary, lineWidth: 9)
@@ -140,10 +142,12 @@ struct SmallUsageView: View {
                         .stroke(levelColor(session.utilization), style: StrokeStyle(lineWidth: 9, lineCap: .round))
                         .rotationEffect(.degrees(-90))
                     VStack(spacing: 0) {
-                        Text("\(Int(session.utilization.rounded()))%")
+                        Text("\(Int(session.utilization.rounded())) %")
                             .font(.title2.weight(.semibold))
                             .monospacedDigit()
-                        Text("сессия").font(.caption2).foregroundStyle(.secondary)
+                        Text(entry.usage?.session != nil ? String(localized: "сессия") : String(localized: "Неделя"))
+                            .font(.caption2)
+                            .foregroundStyle(.secondary)
                     }
                 }
                 .padding(.horizontal, 10)
@@ -179,7 +183,7 @@ struct MediumUsageView: View {
                         ForEach(Array(entry.otherAI.prefix(3).enumerated()), id: \.offset) { _, other in
                             HStack(spacing: 3) {
                                 Text(other.name).foregroundStyle(.secondary)
-                                Text("\(Int(other.percent.rounded()))%")
+                                Text("\(Int(other.percent.rounded())) %")
                                     .monospacedDigit()
                                     .foregroundStyle(levelColor(other.percent))
                             }

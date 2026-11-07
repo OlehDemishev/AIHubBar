@@ -570,7 +570,7 @@ struct AssistantPreview: View {
                 }
             }
             .frame(height: 6)
-            Text("\(Int((value * 100).rounded()))%").font(.caption).monospacedDigit()
+            Text(verbatim: UsageText.percent(value * 100)).font(.caption).monospacedDigit()
         }
     }
 

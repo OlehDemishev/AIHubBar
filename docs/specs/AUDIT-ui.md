@@ -4,6 +4,8 @@ What was looked at: the live panel on the Mac mini (light, glass, large text, sp
 
 Not seen live: dark theme (see «Testing notes»), the panel with the system background, the island at a real notch, other languages, VoiceOver. Findings marked *code* come from reading the code; *live* means it was also seen on screen.
 
+**State (2026-11-07):** everything below is fixed except 13, 14, 16, 17 and the rest of 18; 26 keeps `.claudepult`, «ClaudePult Notes» and `_daily-report` for people who have it; 36 keeps bars in the previews.
+
 ## P0: wrong action or lost data
 
 Items 1–5 fixed in branch `fix/permission-safety`.
