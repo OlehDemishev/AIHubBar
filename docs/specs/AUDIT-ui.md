@@ -4,7 +4,7 @@ What was looked at: the live panel on the Mac mini (light, glass, large text, sp
 
 Not seen live: dark theme (see «Testing notes»), the panel with the system background, the island at a real notch, other languages, VoiceOver. Findings marked *code* come from reading the code; *live* means it was also seen on screen.
 
-**State (2026-11-07):** everything below is fixed; 26 keeps `.claudepult`, «ClaudePult Notes» and `_daily-report` for people who have it; 36 keeps bars in the previews.
+**State (2026-11-07):** the items below are fixed, the final pass at the end of this file found new ones; 26 keeps `.claudepult`, «ClaudePult Notes» and `_daily-report` for people who have it; 36 keeps bars in the previews.
 
 ## P0: wrong action or lost data
 
@@ -76,3 +76,19 @@ Items 31–33 and 22 fixed in branch `fix/island-state`, plus one found on the w
 
 - `@AppStorage` keys follow `defaults write` in the running app, so `settingsPage` switches Settings pages with no mouse, and `screencapture -l <id>` takes them behind other windows.
 - `AppSettings` values (`panelTheme`, `panelBackground`) do not; they need the Settings control or a relaunch, so the dark captures of this audit are not valid and dark theme stays unchecked.
+
+## Final pass (2026-11-07, build 674)
+
+Looked at on the installed build: all 28 Settings pages in Russian light and German dark, eight pages at the minimum size, the panel in dark and light on glass and standard, the ⋯ menu, panel search, the delete dialog, usage history, help, island setup, quick prompt, the assistant, the ⌃⌥C window, the pill's banner. Nothing is fixed yet.
+
+F1. **On glass the scrolled cards cover the search and the header.** Standard background clips them. The glass of `PanelCard` is drawn by the `GlassEffectContainer` around the whole panel, outside the `ScrollView`'s clip. Glass is the default background. Came with the panel scroll (#286).
+F2. **«Ближайшее» is promised and not there.** In a git profile the block is on in «Панель», its preview says «Ничего на 7 дней», the module page ticks «Панель», but the panel draws nothing: `calendar.isActive` needs folders. `Module.swift` and `CalendarStore.swift` use different rules.
+F3. **VoiceOver: every text of a session row became a button** («файлов: 94», «2 ч 14 мин», «Выбрано»), the state icon reads «Круг Из Точек…». `.accessibilityAddTraits(.isButton)` from #292 on a row that isn't one element.
+F4. **«Панель» is wider than the window at the minimum size:** the whole window content shifts left and the sidebar is cut, in Russian too.
+F5. **Titles in «Панель» truncate with free room:** «Mac-Ressou…» at 940, «Ресурс…» at 820. Only rows with options under the title.
+F6. **German: memory and disk are both «Speicher»** in «Mac-Ressourcen», and the disk element of the menu bar too.
+F7. **Wording:** «Отслеживание сессий — установлены» doesn't agree; Codex and Copilot still open with «С hook…», Claude Code with «Hooks добавляются…».
+F8. **«Не запоминать из приложений»:** the row sits a step right of the others because of the arrow, the list isn't aligned to titles, apps not on this Mac show as bundle ids.
+F9. Small: the section «AI» stays English next to «KI-Dienste» in German; «Проверить» and «Ключ (если нужен)» of the OpenAI-compatible service look like plain text; island setup options start in lower case; Help illustrations still say «Cantero»; limit names stay in the old language until the next refresh after a language change.
+
+Not checked: posted keys don't reach the app's windows, so ↑ ↓ in search, Esc in the panel and the Settings search with typing remain for a person. Calendar window (needs a folder profile), `CLAUDE.md` window, widgets, a real notch, VoiceOver by ear. System Settings shows AI Hub Bar on under Accessibility, yet the app logs `Accessibility false`: the entry needs removing and adding again.
