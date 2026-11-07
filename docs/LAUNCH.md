@@ -10,7 +10,7 @@ Text in `[brackets]` needs Oleh's own words: it is a personal detail nobody else
 
 Blockers, most important first:
 
-1. **No Apple Developer ID.** The first start needs System Settings → Open Anyway. Most people stop there, and technical readers will call it out. It also rules out the official Homebrew cask.
+1. **Done: Developer ID and notarization** from the first release that has them. Update this list once it is out.
 2. **No demo.** The README and the site have pictures only. A 20–30 s screen recording of the rings, a session waiting and Allow from the notification is what people share.
 3. **The repository has no website set** in its About box.
 
@@ -21,10 +21,10 @@ Blockers, most important first:
 | 1 | Website in the repository's About box, demo recording | Oleh's OK, a recording |
 | 2 | r/ClaudeAI post: the audience that has the problem. Fix what comes back | Nothing else; read the subreddit's rules first |
 | 3 | Open-source and Claude Code lists (below) | First feedback handled |
-| 4 | r/macapps post | Better after the Developer ID |
-| 5 | Show HN | Developer ID and a notarized release |
+| 4 | r/macapps post | A notarized release |
+| 5 | Show HN | A notarized release |
 | 6 | Product Hunt | Show HN done, demo ready |
-| 7 | Homebrew | Developer ID; own tap first, official cask once the project is notable |
+| 7 | Homebrew | Own tap first, official cask once the project is notable |
 
 One post every few days, so each round of feedback can be fixed before the next. On the day of a post, stay and answer comments. Never ask for votes or stars from friends: HN forbids it.
 
@@ -32,7 +32,7 @@ Watch after each step: DMG downloads, stars, repository traffic (`gh api repos/O
 
 ## Questions to be ready for
 
-- **"Why is it unsigned?"** No Apple Developer ID yet; the source is open and can be built with `scripts/build-and-install.sh`.
+- **"Is it signed?"** Yes, with a Developer ID, and notarized by Apple. The source is open and can be built with `scripts/build-and-install.sh`.
 - **"It reads my Claude token?"** It reads Claude Code's sign-in from the Keychain on each refresh and never stores it. It talks to the AI services you use and to GitHub for updates. There are no analytics. The only server of ours is the relay of the optional shared Telegram bot, which logs no message text.
 - **"Is the limits API official?"** No. It is an undocumented Anthropic usage endpoint, so it can change or stop working. Say this plainly, don't wait to be asked.
 - **"Does the hook change what Claude does?"** No, it only writes small status files on the Mac, and Settings → Agent sessions → Turn Off Tracking takes it out.
@@ -52,7 +52,7 @@ AI Hub Bar sits in the menu bar and shows:
 
 It also picks up Codex, Copilot, Gemini CLI, Cursor and OpenRouter if you use them.
 
-Native SwiftUI, MIT, no account, no analytics. Two things to know before you install it: it isn't signed with an Apple Developer ID yet, so the first start needs Open Anyway in Privacy & Security, and the limits come from an undocumented Anthropic endpoint, so they can break if it changes.
+Native SwiftUI, MIT, no account, no analytics. One thing to know before you install it: the limits come from an undocumented Anthropic endpoint, so they can break if it changes.
 
 GitHub: https://github.com/OlehDemishev/AIHubBar
 Website: https://olehdemishev.github.io/AIHubBar/
@@ -73,7 +73,7 @@ It started as a way to watch Claude limits and Claude Code sessions, and grew in
 - clipboard history, notes, keep awake, quick commands and toggles, Mac resources
 - a Telegram bot for alerts on your phone
 
-SwiftUI, macOS 14+, 13 languages, MIT, no account, no analytics. [If still true: not signed with a Developer ID yet, so the first start needs Open Anyway.]
+SwiftUI, macOS 14+, 13 languages, MIT, no account, no analytics.
 
 https://github.com/OlehDemishev/AIHubBar
 
@@ -127,4 +127,4 @@ Check each list's contribution rules first, as they can change. Candidates:
 
 ## Homebrew
 
-The official cask needs notability, and repositories this new with no stars are rejected. Unsigned apps are also a problem there. So the order is: Developer ID, then a cask in an own tap (`OlehDemishev/homebrew-tap`, `brew install --cask olehdemishev/tap/ai-hub-bar`), then the official cask once the project has the numbers.
+The official cask needs notability, and repositories this new with no stars are rejected. So the order is: a cask in an own tap (`OlehDemishev/homebrew-tap`, `brew install --cask olehdemishev/tap/ai-hub-bar`), then the official cask once the project has the numbers.

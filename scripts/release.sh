@@ -2,8 +2,8 @@
 # A release without an Apple Developer account (docs/RELEASE.md):
 #   scripts/release.sh <version> [--publish]
 #   scripts/release.sh <version>-beta.<n> [--publish]   a beta build: a GitHub pre-release, offered only to beta testers
-# Builds Release, signs it with the self-signed «ClaudePult Release» certificate (always the same one, so macOS
-# keeps permissions and Sparkle accepts the update; the certificate keeps the app's old name), makes AIHubBar-<version>.dmg, signs it for Sparkle and writes
+# Builds Release, signs it with the Developer ID certificate, notarizes and staples it (the notarytool profile «AIHubBar»),
+# makes AIHubBar-<version>.dmg, notarizes that too, signs it for Sparkle and writes
 # appcast.xml into build/release/<version>/. With --publish it creates the GitHub release v<version> with both files
 # (the repository must be public for people to download them), and replaces the beta channel's appcast (the release
 # tagged `beta`) with the newest release and the newest beta (scripts/release-tools/beta-feed.py).
@@ -23,7 +23,7 @@ BETA=0
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
 KEYS="${CLAUDEPULT_RELEASE_DIR:-$HOME/Library/Application Support/ClaudePult-release}"
-for file in codesign.p12 codesign.pass sparkle-ed25519.key; do
+for file in developer-id.p12 developer-id.pass sparkle-ed25519.key; do
   [[ -f "$KEYS/$file" ]] || { echo "Missing $KEYS/$file — see docs/RELEASE.md (one-time setup)." >&2; exit 1; }
 done
 if [[ -n "$(git status --porcelain)" ]]; then
@@ -53,8 +53,20 @@ xcodebuild -project AIHubBar.xcodeproj -scheme AIHubBar -configuration Release \
 APP="$OUT/$NAME.app"
 ditto "$DERIVED/Build/Products/Release/AIHubBar.app" "$APP"
 
-echo "==> Signing with «ClaudePult Release»"
-scripts/release-tools/sign-app.sh "$APP"
+echo "==> Signing with Developer ID"
+SIGN_TIMESTAMP=1 scripts/release-tools/sign-app.sh "$APP"
+
+notarize() {
+  xcrun notarytool submit "$1" --keychain-profile AIHubBar --wait --timeout 30m | tee "$OUT/notary.log" | tail -3
+  grep -q 'status: Accepted' "$OUT/notary.log" || { echo "Notarization failed: $1" >&2; exit 1; }
+}
+
+echo "==> Notarizing the app"
+ZIP="$OUT/notarize.zip"
+ditto -c -k --keepParent "$APP" "$ZIP"
+notarize "$ZIP"
+rm -f "$ZIP"
+xcrun stapler staple "$APP"
 
 echo "==> Making $DMG"
 STAGE="$(mktemp -d)"
@@ -62,6 +74,12 @@ ditto "$APP" "$STAGE/$NAME.app"
 ln -s /Applications "$STAGE/Applications"
 hdiutil create -volname "$NAME $VERSION" -srcfolder "$STAGE" -ov -format UDZO "$OUT/$DMG" >/dev/null 2>&1
 rm -rf "$STAGE"
+
+echo "==> Notarizing the disk image"
+SIGN_TIMESTAMP=1 scripts/release-tools/sign-app.sh "$OUT/$DMG"
+notarize "$OUT/$DMG"
+xcrun stapler staple "$OUT/$DMG"
+spctl --assess --type open --context context:primary-signature "$OUT/$DMG"
 
 echo "==> Signing the update for Sparkle"
 SIGNATURE="$(swift scripts/release-tools/sparkle-key.swift sign "$OUT/$DMG")"
@@ -98,7 +116,7 @@ if [[ "$PUBLISH" == "--publish" ]]; then
   # The overview PDFs (scripts/make-overview-pdf.sh) go along when they exist.
   EXTRA=()
   for pdf in docs/AI-Hub-Bar-Overview-*.pdf; do [ -f "$pdf" ] && EXTRA+=("$pdf"); done
-  NOTES="Download $DMG, open it and drag AI Hub Bar to Applications. The first launch asks once: System Settings → Privacy & Security → **Open Anyway** (see docs/GUIDE.md). What AI Hub Bar does: AI-Hub-Bar-Overview-en.pdf (русский: AI-Hub-Bar-Overview-ru.pdf)."
+  NOTES="Download $DMG, open it and drag AI Hub Bar to Applications."
   if [[ $BETA -eq 1 ]]; then
     # A pre-release is never «latest», so copies outside the beta channel don't see it.
     gh release create "v$VERSION" "$OUT/$DMG" "$OUT/appcast.xml" --repo "$REPO" --title "$NAME $VERSION" --prerelease \

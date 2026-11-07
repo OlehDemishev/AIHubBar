@@ -17,6 +17,7 @@
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/specs/SPEC-windows.md §9, stage 2–3 leftovers)
 
 **Needs Oleh:**
+- after 0.7.2: System Settings → Privacy & Security → Accessibility: allow AI Hub Bar again, then press ⌃⌥B and run a command in Terminal once
 - 0.7.0 live checks: press ⌃⌥B, right-click a session row; with a second account: Settings → Claude Code → «Другие аккаунты Claude»
 - promotion: decide on the Apple Developer ID (paid yearly; needed before Show HN and Homebrew), record a 20–30 s demo, post the drafts in docs/LAUNCH.md from your accounts
 - Telegram: Settings → Modules → Telegram → «Общий бот» → «Подключить Telegram» → Start (`_daily-report/config.json` already points at @AIHubBarBot)
@@ -30,6 +31,12 @@
 - MacBook Air: update to 0.6.0 through Sparkle (Settings → General → Updates) and check the island at the real notch
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-07 — Developer ID and notarization (branch `feat/developer-id`)
+
+Done: Apple Developer Program active (team 365835Q3S6). Builds are signed with a Developer ID, hardened runtime on, Apple Events entitlement for Terminal. `scripts/release.sh` notarizes and staples the app and the disk image and stops if Apple refuses. `scripts/build-and-install.sh` uses the same certificate. README, GUIDE, site, RELEASE and LAUNCH no longer talk about Open Anyway.
+Checked: scripts/check.sh passed; 0.7.2 built unpublished, both notarizations «Accepted», `spctl` says «Notarized Developer ID» for the app and the DMG, stapler validates both. Installed on this Mac: it starts, no crash report, projects and agents load.
+Left: the new signature drops macOS permissions once: Accessibility for «Раскладка» and ⌃⌥B, Automation for Terminal. Sparkle allows a new certificate with the same Ed25519 key (its docs), but the update from 0.7.1 itself hasn't been run.
 
 ## 2026-11-06 — Release 0.7.1 (branch `chore/status-release-0.7.1`)
 
