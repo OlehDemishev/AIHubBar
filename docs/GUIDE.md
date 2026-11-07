@@ -1,6 +1,6 @@
 # AI Hub Bar — guide
 
-AI Hub Bar is a small Mac app that lives in the menu bar (✦). One click opens a panel with your projects, your Claude subscription limits, the Claude Code sessions running on this Mac and ready-made AI commands for each project. It does not replace Claude, Codex or any other AI tool. It keeps an eye on them and starts them for you.
+AI Hub Bar is a small Mac app that lives in the menu bar (✦). One click opens a panel with your projects, the limits of your AI services, the agent sessions running on this Mac and ready-made AI commands for each project. It does not replace Claude Code, Codex or any other AI tool. It keeps an eye on them and starts them for you.
 
 It works in **profiles**. Each profile is a set of modules — limits, sessions, projects with their commands, the calendar — in the order you choose, so AI Hub Bar fits different kinds of work:
 
@@ -19,8 +19,7 @@ You can enable several profiles and switch between them at the top of the panel.
 
 - A Mac with macOS 14 or later.
 - At least one AI service:
-  - **Claude Code** with a Claude subscription. The limits block and the session list work only with Claude Code.
-  - **Other agents:** OpenAI Codex CLI, Gemini CLI, Antigravity, Copilot CLI or Cursor CLI.
+  - **An agent:** Claude Code, OpenAI Codex CLI, Gemini CLI, Antigravity, Copilot CLI or Cursor CLI. Each one's limits appear once it is found; live session rows need Claude Code, Codex or Copilot CLI.
   - **A model by API**, with your own key: Anthropic, OpenAI, Google, xAI, DeepSeek, Mistral, Alibaba Qwen, Moonshot Kimi, Z.ai GLM, MiniMax, or any OpenAI-compatible server (Ollama, LM Studio, OpenRouter).
 
 ## Install

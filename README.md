@@ -18,23 +18,23 @@
   <a href="docs/AI-Hub-Bar-Overview-ru.pdf">Overview in Russian (PDF)</a>
 </p>
 
-**AI Hub Bar** is a small, native Mac app that lives in the menu bar. One click on ✦ opens a panel with your Claude subscription limits, every Claude Code session running on the Mac, and ready-made AI commands for your projects. It doesn't replace Claude, Codex or any other AI tool — it keeps an eye on them and starts them for you.
+**AI Hub Bar** is a small, native Mac app that lives in the menu bar. One click on ✦ opens a panel with the limits of your AI services, every agent session running on the Mac, and ready-made AI commands for your projects. It doesn't replace Claude Code, Codex, Gemini, Copilot or any other AI tool — it keeps an eye on them and starts them for you.
 
 Free, open source, no account. Nothing goes through a server of ours, except the optional shared Telegram bot.
 
 ## Features
 
 ### Limits — how much is left, and for how long
-- Claude's **5-hour session and weekly limits** as rings, with a reset countdown, right in the menu bar.
+- **Every AI service in one place:** Claude, Codex, GitHub Copilot, Gemini CLI, Cursor, OpenRouter credits, OpenAI and Anthropic API spend. They appear by themselves.
+- **Session and weekly limits** as rings, with a reset countdown, right in the menu bar.
 - A **forecast** from your recent pace: "enough until the reset" or "lasts until ~16:40", and the same for the week.
 - **Usage by project** — which project and which session ate the limit today or this week.
 - **Usage history** — tokens by day for up to 90 days, CSV export, and a cost estimate at the price you enter.
 - **Several Claude accounts**, each with its limits, and a note when Anthropic reports an outage.
-- Notifications at the thresholds you choose; near the limit, background runs pause and resume after the reset.
-- **Other AI services** appear by themselves: Codex, GitHub Copilot, Gemini CLI, Cursor, OpenRouter credits, OpenAI and Anthropic API spend.
+- Notifications at the thresholds you choose, for each service; near the limit, background runs pause and resume after the reset.
 
-### Every Claude Code session in one list
-- Terminal, the Claude app, background runs: state, task, duration — and **what Claude is doing right now** ("editing LimitsView.swift", "running npm test").
+### Every agent session in one list
+- Claude Code, Codex and Copilot CLI, in Terminal, the Claude app or in the background: state, task, duration — and **what the agent is doing right now** ("editing LimitsView.swift", "running npm test").
 - **Allow / Deny** permission requests from the notification, the panel or Telegram.
 - Context fullness, files changed since the session started, and a heads-up when a session goes quiet.
 - **Recently finished** sessions continue in Terminal with one click.
@@ -69,7 +69,7 @@ A command's result is always a **new file** — nothing is overwritten. **Compar
 
 After that the app updates itself (Settings → General → Updates). The first start opens an assistant that checks what the Mac still needs and sets up your first profile. Everything else is in the [guide](docs/GUIDE.md).
 
-**Requirements:** macOS 14 or later (Apple Silicon or Intel) and at least one AI service — Claude Code with a Claude subscription, another agent, or an API key. The limits and the session list need Claude Code.
+**Requirements:** macOS 14 or later (Apple Silicon or Intel) and at least one AI service: an agent such as Claude Code, Codex, Gemini CLI, Copilot CLI or Cursor CLI, or a model by API key. Each service's limits need that service; live session rows need Claude Code, Codex or Copilot CLI.
 
 ## Privacy
 
@@ -77,7 +77,7 @@ After that the app updates itself (Settings → General → Updates). The first 
 - The one server of ours is the relay of the optional shared Telegram bot, on Cloudflare: it logs no message text and keeps only which chat belongs to which Mac. With a bot of your own, or without Telegram, nothing goes through it.
 - Your files go only to the service you run a command with.
 - API keys are kept in the macOS Keychain, never in logs or exported settings. Claude Code's sign-in is read from the Keychain on each refresh and never stored.
-- The session hook only writes small status files on your Mac and never changes what Claude does; Settings → Agent sessions → Turn Off Tracking takes it out.
+- The session hook only writes small status files on your Mac and never changes what the agent does; Settings → Agent sessions → Turn Off Tracking takes it out.
 
 ## Build from source
 

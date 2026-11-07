@@ -36,6 +36,12 @@
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
 
+## 2026-11-07 — GitHub description covers every AI service (branch `docs/ai-services-wording`)
+
+Done: the repository description, README, guide, site and overview PDFs speak of AI services and agents instead of Claude alone. Claude stays named where a feature is really its own: several accounts, Anthropic's status, the sign-in. The old claim that limits and sessions need Claude Code is corrected.
+Checked: both PDFs rebuilt; the description read back from GitHub.
+Left: the social preview image and the drafts in docs/LAUNCH.md were not touched.
+
 ## 2026-11-07 — Final pass fixes (branch `fix/final-pass`)
 
 Done: F1–F9. Scrolled cards no longer cover the search and header on glass. «Ближайшее» belongs to folder profiles by one rule, so a git profile no longer lists a block it never draws. VoiceOver reads session rows as text again, with the state by name. «Панель» fits the minimum window: the sketch hides there, titles don't truncate. German disk is «Festplatte». Tracking reads «включено / выключено», and the first lines of its footnotes no longer say hook. The clipboard apps row lines up and shows names. The AI section is translated, the OpenAI-compatible buttons look like buttons, island setup options start with a capital, Help illustrations use neutral names, limit names follow the language at once. 4 new strings in 12 languages.
