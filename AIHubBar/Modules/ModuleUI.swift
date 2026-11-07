@@ -43,20 +43,21 @@ struct SketchLine: View {
 }
 
 /// A limit as the panel draws it: a thin bar coloured by level and its percent.
-struct MiniBar: View {
+struct MiniRing: View {
     let value: Double
 
     var body: some View {
-        HStack(spacing: 3) {
-            GeometryReader { geometry in
-                ZStack(alignment: .leading) {
-                    Capsule().fill(Color.secondary.opacity(0.25))
-                    Capsule().fill(UsageLevel(value).color)
-                        .frame(width: max(3, geometry.size.width * min(value, 100) / 100))
-                }
+        HStack(spacing: 4) {
+            ZStack {
+                Circle().stroke(Color.secondary.opacity(0.25), lineWidth: 2.5)
+                Circle()
+                    .trim(from: 0, to: min(value, 100) / 100)
+                    .stroke(UsageLevel(value).color, style: StrokeStyle(lineWidth: 2.5, lineCap: .round))
+                    .rotationEffect(.degrees(-90))
             }
-            .frame(width: 44, height: 4)
+            .frame(width: 13, height: 13)
             Text("\(Int(value.rounded())) %").font(.system(size: 10.5, weight: .medium)).monospacedDigit()
         }
     }
+
 }

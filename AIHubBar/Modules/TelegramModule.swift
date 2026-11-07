@@ -10,8 +10,8 @@ extension ModuleDefinition {
         group: .ai,
         symbol: "paperplane",
         title: "Telegram",
-        summary: String(localized: "Свой бот в Telegram с меню: лимиты, сессии и фоновые задачи, отчёты, очистка сборок. Отвечает только вашему чату и только с одного Мака."),
-        tagline: String(localized: "Бот с меню: отчёты, сессии, Мак"),
+        summary: String(localized: "Свой бот в Telegram с меню: лимиты, сессии и фоновые задачи, отчёты, очистка сборок. Отвечает только вашему чату и только с одного Mac."),
+        tagline: String(localized: "Бот с меню: отчёты, сессии, Mac"),
         isPanelBlock: false,
         places: [],
         keywords: ["Telegram", String(localized: "Бот"), "@BotFather", "/report"]
@@ -56,10 +56,10 @@ struct TelegramBotSection: View {
                 ownRows
             }
             if !bot.chatID.isEmpty {
-                Toggle("Этот Мак отвечает боту", systemImage: "desktopcomputer", isOn: $bot.answersHere)
+                Toggle("Этот Mac отвечает боту", systemImage: "desktopcomputer", isOn: $bot.answersHere)
                     .help(bot.usesSharedBot
-                          ? String(localized: "Отвечает один Мак этого чата; переключить можно и командой /macs в боте")
-                          : String(localized: "Только один Мак читает сообщения бота; уведомления присылают все"))
+                          ? String(localized: "Отвечает один Mac этого чата; переключить можно и командой /macs в боте")
+                          : String(localized: "Только один Mac читает сообщения бота; уведомления присылают все"))
             }
             Toggle("Запросы разрешений в этот бот", systemImage: "hand.raised", isOn: $settings.telegramApprovals)
                 .help("Когда Claude просит разрешение, бот присылает запрос с кнопками «Разрешить», «Отклонить», «Подробнее»")
@@ -68,7 +68,7 @@ struct TelegramBotSection: View {
                     get: { settings.telegramBot.answersOverShared == true },
                     set: { settings.telegramBot.answersOverShared = $0 }
                 ))
-                .help("Выключено — запросы приходят без кнопок, ответить можно только на Маке")
+                .help("Выключено — запросы приходят без кнопок, ответить можно только на Mac")
             }
             if bot.usesSharedBot {
                 Toggle("Задачи через общий бот", systemImage: "paperplane.circle", isOn: Binding(
@@ -110,11 +110,11 @@ struct TelegramBotSection: View {
                 if bot.relay.chat != nil {
                     Text("подключён").foregroundStyle(.secondary)
                     Button("Отключить") { bot.disconnectShared() }
-                        .help("Этот Мак больше не будет связан с чатом; другие Маки останутся")
+                        .help("Этот Mac больше не будет связан с чатом; другие Mac останутся")
                 } else {
                     Button("Подключить Telegram") { Task { await bot.connectShared() } }
                         .disabled(!bot.relay.connected)
-                        .help("Откроется бот в Telegram — нажмите «Start», и он будет отвечать с этого Мака")
+                        .help("Откроется бот в Telegram — нажмите «Start», и он будет отвечать с этого Mac")
                 }
             }
         }
@@ -174,8 +174,8 @@ struct TelegramBotSection: View {
     }
 
     private var stateText: String {
-        if bot.conflict { return String(localized: "Бота читает другой Мак") }
-        if bot.usesSharedBot, !bot.relay.answering, bot.relay.chat != nil { return String(localized: "Отвечает другой Мак") }
+        if bot.conflict { return String(localized: "Бота читает другой Mac") }
+        if bot.usesSharedBot, !bot.relay.answering, bot.relay.chat != nil { return String(localized: "Отвечает другой Mac") }
         if bot.isReading { return String(localized: "Отвечает") }
         return String(localized: "Не отвечает")
     }
@@ -254,7 +254,7 @@ struct TelegramMenuSection: View {
         } header: {
             Text("Меню в боте")
         } footer: {
-            Footnote(text: String(localized: "Кнопки внизу чата: разделы бота и ваши быстрые команды (Модули → «Быстрые команды»). 🏠 есть всегда. Команда из меню выполняется на этом Маке, итог приходит в чат; «Спрашивать перед запуском» спрашивает и там. Удобно 6–9 кнопок."))
+            Footnote(text: String(localized: "Кнопки внизу чата: разделы бота и ваши быстрые команды (Модули → «Быстрые команды»). 🏠 есть всегда. Команда из меню выполняется на этом Mac, итог приходит в чат; «Спрашивать перед запуском» спрашивает и там. Удобно 6–9 кнопок."))
         }
     }
 

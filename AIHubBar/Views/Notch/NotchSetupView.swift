@@ -24,7 +24,7 @@ struct NotchSetupView: View {
                 }
                 .pickerStyle(.radioGroup)
                 .labelsHidden()
-                Footnote(text: String(localized: "Если острова не видно (экран спит, Мак заблокирован), уведомление всё равно придёт."))
+                Footnote(text: String(localized: "Если острова не видно (экран спит, Mac заблокирован), уведомление всё равно придёт."))
             }
             Section("Сводка — лимиты и сессии") {
                 Picker("Сводка — лимиты и сессии", selection: $summary) {

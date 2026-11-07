@@ -484,6 +484,7 @@ extension AppSettings {
         switch toggle {
         case .resourceAlerts: resourceAlerts
         case .pullRequestAlerts: pullRequestAlerts
+        case .calendarReminders: !calendarReminderHours.isEmpty
         }
     }
 
@@ -491,6 +492,7 @@ extension AppSettings {
         switch toggle {
         case .resourceAlerts: resourceAlerts = on
         case .pullRequestAlerts: pullRequestAlerts = on
+        case .calendarReminders: calendarReminderHours = on ? (calendarReminderHours.isEmpty ? [24] : calendarReminderHours) : []
         }
     }
 }

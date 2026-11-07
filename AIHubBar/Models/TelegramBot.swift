@@ -642,7 +642,7 @@ enum BotScreens {
                 }
                 rows.append(row)
             }
-            if !canAnswer { text.append("🔒 " + RunMessage.escape(String(localized: "Отвечать отсюда нельзя — включите на Маке «Ответы на запросы через общий бот»."))) }
+            if !canAnswer { text.append("🔒 " + RunMessage.escape(String(localized: "Отвечать отсюда нельзя — включите на Mac «Ответы на запросы через общий бот»."))) }
         }
         rows.append([button("🔄", String(localized: "Обновить"), .show(.sessions)), back])
         return BotMessage(html: text.joined(separator: "\n"), buttons: rows)
@@ -657,7 +657,7 @@ enum BotScreens {
             row.insert(button("❌", String(localized: "Отклонить"), .answer(requestID: request.id, allow: false)), at: 0)
             row.insert(button("✅", String(localized: "Разрешить"), .answer(requestID: request.id, allow: true)), at: 0)
         } else {
-            html += "\n🔒 " + RunMessage.escape(String(localized: "Ответить можно на Маке или с включёнными «Ответами на запросы через общий бот»."))
+            html += "\n🔒 " + RunMessage.escape(String(localized: "Ответить можно на Mac или с включёнными «Ответами на запросы через общий бот»."))
         }
         return BotMessage(html: html, buttons: [row])
     }
@@ -733,7 +733,7 @@ enum BotScreens {
         var lines = ["🚀 <b>" + RunMessage.escape(String(localized: "Задача")) + "</b>"]
         var rows: [[BotMessage.Button]] = []
         if locked {
-            lines.append("🔒 " + RunMessage.escape(String(localized: "Задачи через общий бот выключены. На Маке: Настройки → Модули → Telegram → «Задачи через общий бот».")))
+            lines.append("🔒 " + RunMessage.escape(String(localized: "Задачи через общий бот выключены. На Mac: Настройки → Модули → Telegram → «Задачи через общий бот».")))
         } else if projects.isEmpty {
             lines.append(RunMessage.escape(String(localized: "Проектов нет: у профиля нет папки с git-проектами.")))
         } else {
@@ -887,7 +887,7 @@ enum BotScreens {
         let lines = ["❓ <b>" + RunMessage.escape(String(localized: "Команды")) + "</b>"]
             + BotCommand.menuList.map { "/\($0.command) — " + RunMessage.escape($0.description) }
         var rows = [[button("⚙️", String(localized: "Настроить меню"), .show(.menu))], [back]]
-        if hasAllCommands { rows.insert([button("📖", String(localized: "Все команды Мака"), .allCommands)], at: 0) }
+        if hasAllCommands { rows.insert([button("📖", String(localized: "Все команды Mac"), .allCommands)], at: 0) }
         return BotMessage(html: lines.joined(separator: "\n"), buttons: rows)
     }
 
@@ -896,7 +896,7 @@ enum BotScreens {
     static func menuSetup(_ config: BotMenuConfig, commands: [QuickCommand], profile: String?) -> BotMessage {
         var lines = ["⚙️ <b>" + RunMessage.escape(String(localized: "Меню внизу чата")) + "</b>"]
         if let profile { lines.append(RunMessage.escape(String(localized: "Своё меню профиля «\(profile)»."))) }
-        lines.append(RunMessage.escape(String(localized: "Нажмите, чтобы добавить или убрать кнопку; порядок — в Настройках на Маке.")))
+        lines.append(RunMessage.escape(String(localized: "Нажмите, чтобы добавить или убрать кнопку; порядок — в Настройках на Mac.")))
         let candidates = BotScreen.menuScreens.filter { $0 != .home }.map(BotMenuItem.screen) + commands.map { BotMenuItem.command($0.id) }
         var rows = candidates.map { item in
             [BotMessage.Button(title: (config.contains(item) ? "✅ " : "☐ ") + BotMenu.title(item, commands: commands), route: .menuToggle(item))]
@@ -910,7 +910,7 @@ enum BotScreens {
 
     /// «Запустить?» for a quick command marked to ask first, and for any over the shared bot.
     static func confirmCommand(_ command: QuickCommand) -> BotMessage {
-        BotMessage(html: "▶️ " + RunMessage.escape(String(localized: "Запустить «\(command.title)» на Маке?")), buttons: [[
+        BotMessage(html: "▶️ " + RunMessage.escape(String(localized: "Запустить «\(command.title)» на Mac?")), buttons: [[
             button("✅", String(localized: "Запустить"), .runCommand(command.id)), button("✖️", String(localized: "Отмена"), .show(.home)),
         ]])
     }

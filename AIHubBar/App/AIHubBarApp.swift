@@ -28,7 +28,7 @@ struct AIHubBarApp: App {
 
         // `.handlesExternalEvents(matching: [])` on every window: otherwise SwiftUI opens the first one (this search)
         // for each `aihubbar://` link or `*.claudepult` file, which `AppDelegate` handles itself.
-        Window("Поиск — AI Hub Bar", id: WindowID.search.rawValue) {
+        Window("Поиск", id: WindowID.search.rawValue) {
             QuickSearchWindow()
                 .appEnvironment(app)
                 .preferredColorScheme(app.settings.panelTheme.colorScheme)
@@ -38,7 +38,7 @@ struct AIHubBarApp: App {
         .windowResizability(.contentSize)
         .defaultPosition(.center)
 
-        Window("Быстрый запрос — AI Hub Bar", id: WindowID.quickPrompt.rawValue) {
+        Window("Быстрый запрос", id: WindowID.quickPrompt.rawValue) {
             QuickPromptWindow()
                 .appEnvironment(app)
                 .preferredColorScheme(app.settings.panelTheme.colorScheme)
@@ -58,7 +58,7 @@ struct AIHubBarApp: App {
         .defaultSize(width: 900, height: 620)
 
         // A click on the limits widget: the panel's limits block on its own, since the panel can't be opened from code.
-        Window("Лимиты — AI Hub Bar", id: WindowID.limits.rawValue) {
+        Window("Лимиты", id: WindowID.limits.rawValue) {
             LimitsView()
                 .appEnvironment(app)
                 .panelCard()
@@ -78,7 +78,7 @@ struct AIHubBarApp: App {
         .handlesExternalEvents(matching: [])
         .defaultSize(width: 640, height: 520)
 
-        Window("Помощник — AI Hub Bar", id: WindowID.assistant.rawValue) {
+        Window("Помощник", id: WindowID.assistant.rawValue) {
             AssistantView()
                 .appEnvironment(app)
                 .preferredColorScheme(app.settings.panelTheme.colorScheme)
@@ -120,7 +120,7 @@ struct AIHubBarApp: App {
         .handlesExternalEvents(matching: [])
         .defaultSize(width: 720, height: 480)
 
-        Window("Остров у чёлки — AI Hub Bar", id: WindowID.notchSetup.rawValue) {
+        Window("Остров у чёлки", id: WindowID.notchSetup.rawValue) {
             NotchSetupView()
                 .appEnvironment(app)
                 .preferredColorScheme(app.settings.panelTheme.colorScheme)
@@ -130,7 +130,7 @@ struct AIHubBarApp: App {
         .windowResizability(.contentSize)
         .defaultPosition(.center)
 
-        Window("Справка — AI Hub Bar", id: WindowID.help.rawValue) {
+        Window("Справка", id: WindowID.help.rawValue) {
             HelpView()
                 .appEnvironment(app)
                 .preferredColorScheme(app.settings.panelTheme.colorScheme)
