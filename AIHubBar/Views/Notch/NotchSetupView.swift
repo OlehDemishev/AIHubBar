@@ -13,7 +13,7 @@ struct NotchSetupView: View {
     var body: some View {
         Form {
             Section {
-                Text("Остров у чёлки показывает лимиты, сессии и запросы Claude рядом с чёлкой. Четыре вопроса — всё потом меняется в Настройках → «Модули» → «Остров у чёлки».")
+                Text("Остров у чёлки показывает лимиты, сессии и запросы Claude рядом с чёлкой. Четыре вопроса — всё потом меняется в Настройках → «Остров у чёлки».")
                     .foregroundStyle(.secondary)
                     .fixedSize(horizontal: false, vertical: true)
             }

@@ -263,7 +263,7 @@ struct ModulePage: View {
                 Section {
                     IconRow("В профилях", systemImage: "square.stack.3d.up", value: profiles)
                 } footer: {
-                    Footnote(text: String(localized: "Порядок блоков — «Панель»; что показывает модуль в каждом профиле — «Профили»."))
+                    Footnote(text: String(localized: "Порядок блоков и что показывает модуль — на странице «Панель»."))
                 }
             }
         }

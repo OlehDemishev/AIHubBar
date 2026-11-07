@@ -25,7 +25,7 @@ struct HubSection: View {
         } header: {
             Text("Другие AI")
         } footer: {
-            Footnote(text: String(localized: "Включить сервис, вставить ключ или дать согласие — в «Сервисы AI», на вкладке сервиса."))
+            Footnote(text: String(localized: "Включить сервис, вставить ключ или дать согласие — на странице сервиса в разделе «Сервисы AI»."))
         }
     }
 }

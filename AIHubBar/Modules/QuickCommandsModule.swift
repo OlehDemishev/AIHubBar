@@ -9,7 +9,7 @@ extension ModuleDefinition {
         group: .work,
         symbol: "bolt.square",
         title: String(localized: "Быстрые команды"),
-        summary: String(localized: "Свои кнопки: скрипт в фоне или в Терминале, ярлык из «Команд» macOS, ссылка, файл, папка или приложение. У каждой может быть своё сочетание клавиш."),
+        summary: String(localized: "Свои кнопки: скрипт в фоне или в Терминале, ярлык из «Команд» macOS, ссылка, файл, папка или приложение."),
         tagline: String(localized: "Скрипты, ярлыки, ссылки, файлы"),
         notifications: [.commands],
         keywords: [String(localized: "Команды")]

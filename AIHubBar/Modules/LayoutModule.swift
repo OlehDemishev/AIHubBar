@@ -9,7 +9,7 @@ extension ModuleDefinition {
         group: .mac,
         symbol: "keyboard",
         title: String(localized: "Раскладка"),
-        summary: String(localized: "Слово, набранное не в той раскладке («ghbdtn»), исправляется само («привет»), и раскладка переключается. Двойной Shift — последнее слово, ⌥⇧ — выделенный текст. Язык — в строке меню."),
+        summary: String(localized: "Слово, набранное не в той раскладке («ghbdtn»), исправляется само («привет»), и раскладка переключается."),
         tagline: String(localized: "Исправляет текст не в той раскладке"),
         isPanelBlock: false,
         places: [.menuBar],
@@ -38,7 +38,7 @@ struct LayoutSection: View {
                 LabeledContent {
                     Button("Открыть настройки") { switcher.requestAccess() }
                 } label: {
-                    Label("Нужен доступ к «Универсальному доступу»", systemImage: "exclamationmark.triangle")
+                    Label("Нужно разрешение «Универсальный доступ»", systemImage: "exclamationmark.triangle")
                         .foregroundStyle(.orange)
                 }
             }

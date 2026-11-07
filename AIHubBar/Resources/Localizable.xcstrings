@@ -7198,7 +7198,6 @@
         }
       }
     },
-    "Cantero · claude/feature": {},
     "Claude": {},
     "Claude Code найден, но вход не выполнен: без него нет лимитов подписки.": {
       "localizations": {
@@ -9026,158 +9025,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Git-репозиторії"
-          }
-        }
-      }
-    },
-    "Hook AI Hub Bar для Codex": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "خطّاف AI Hub Bar لـ Codex"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "AI-Hub-Bar-Hook für Codex"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "AI Hub Bar hook for Codex"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hook de AI Hub Bar para Codex"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hook AI Hub Bar pour Codex"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hook AI Hub Bar untuk Codex"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hook di AI Hub Bar per Codex"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex 用の AI Hub Bar フック"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex용 AI Hub Bar 훅"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hook AI Hub Bar dla Codex"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hook do AI Hub Bar para o Codex"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hook AI Hub Bar для Codex"
-          }
-        }
-      }
-    },
-    "Hook AI Hub Bar для Copilot": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "AI Hub Bar hook for Copilot"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hook AI Hub Bar для Copilot"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "AI-Hub-Bar-Hook für Copilot"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hook AI Hub Bar pour Copilot"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hook de AI Hub Bar para Copilot"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hook di AI Hub Bar per Copilot"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hook do AI Hub Bar para o Copilot"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hook AI Hub Bar dla Copilota"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Copilot 用 AI Hub Bar フック"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Copilot용 AI Hub Bar 후크"
-          }
-        },
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "خطاف AI Hub Bar لـ Copilot"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hook AI Hub Bar untuk Copilot"
           }
         }
       }
@@ -19808,82 +19655,6 @@
         }
       }
     },
-    "Включить сервис, вставить ключ или дать согласие — в «Сервисы AI», на вкладке сервиса.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "لتشغيل خدمة أو لصق مفتاح أو إعطاء الموافقة، افتح «خدمات الذكاء الاصطناعي» وتبويب الخدمة."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dienst einschalten, Schlüssel einfügen oder zustimmen: in „KI-Dienste“ auf dem Tab des Dienstes."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "To turn a service on, paste a key or give consent, open AI Services and the service’s tab."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Para activar un servicio, pegar una clave o dar tu consentimiento, abre Servicios de IA y la pestaña del servicio."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Pour activer un service, coller une clé ou donner votre accord : Services d’IA, onglet du service."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Untuk menyalakan layanan, menempel kunci, atau memberi izin, buka Layanan AI di tab layanan itu."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Per attivare un servizio, incollare una chiave o dare il consenso, apri Servizi IA e la scheda del servizio."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "サービスのオン、キーの貼り付け、同意は「AI サービス」の各サービスのタブで行います。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "서비스 켜기, 키 붙여넣기, 동의는 ‘AI 서비스’의 해당 서비스 탭에서 합니다."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Aby włączyć usługę, wkleić klucz lub wyrazić zgodę, otwórz Usługi AI i kartę usługi."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Para ativar um serviço, colar uma chave ou dar consentimento, abra Serviços de IA e a aba do serviço."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Увімкнути сервіс, вставити ключ чи дати згоду — у «Сервіси AI», на вкладці сервісу."
-          }
-        }
-      }
-    },
     "Включить ⌃⌥Y / ⌃⌥N": {
       "localizations": {
         "ar": {
@@ -25207,82 +24978,6 @@
         }
       }
     },
-    "Данные — с того же адреса, что использует Claude Code (токен читается из связки ключей «Claude Code-credentials» и нигде не сохраняется). Уведомление — один раз на окно сессии/недели при пересечении порога и когда лимит восстановился. Значения пишутся в ~/Library/Application Support/ClaudePult/usage.json. Что показывать в строке меню — во вкладке «Строка меню».": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "تأتي البيانات من العنوان نفسه الذي يستخدمه Claude Code (يُقرأ الرمز من عنصر سلسلة المفاتيح «Claude Code-credentials» ولا يُحفظ في أي مكان). إشعار واحد لكل نافذة جلسة/أسبوع عند تجاوز حدّ وعند عودة الحد. تُكتب القيم في ~/Library/Application Support/ClaudePult/usage.json. ما يعرضه شريط القائمة — في علامة التبويب «شريط القائمة»."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Die Daten kommen von derselben Adresse, die Claude Code nutzt (das Token wird aus dem Schlüsselbund-Eintrag „Claude Code-credentials“ gelesen und nirgends gespeichert). Eine Mitteilung pro Sitzungs-/Wochenfenster, wenn eine Schwelle überschritten wird und wenn das Limit zurück ist. Die Werte werden in ~/Library/Application Support/ClaudePult/usage.json geschrieben. Was die Menüleiste zeigt — im Tab „Menüleiste“."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Data comes from the same address Claude Code uses (the token is read from the “Claude Code-credentials” Keychain item and stored nowhere). A notification once per session/week window when a threshold is crossed and when the limit is back. Values are written to ~/Library/Application Support/ClaudePult/usage.json. What the menu bar shows — on the “Menu Bar” tab."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Los datos vienen de la misma dirección que usa Claude Code (el token se lee del elemento de llavero «Claude Code-credentials» y no se guarda en ningún sitio). Una notificación por ventana de sesión/semana al cruzar un umbral y cuando el límite vuelve. Los valores se escriben en ~/Library/Application Support/ClaudePult/usage.json. Qué muestra la barra de menús, en la pestaña «Barra de menús»."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Les données viennent de la même adresse que celle de Claude Code (le jeton est lu dans l'élément de trousseau «Claude Code-credentials» et n'est conservé nulle part). Une notification par fenêtre de session/semaine au franchissement d'un seuil et quand la limite revient. Les valeurs sont écrites dans ~/Library/Application Support/ClaudePult/usage.json. Ce qu'affiche la barre des menus, dans l'onglet «Barre des menus»."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Data berasal dari alamat yang sama dengan yang dipakai Claude Code (token dibaca dari butir Rantai Kunci «Claude Code-credentials» dan tidak disimpan di mana pun). Pemberitahuan sekali per jendela sesi/minggu saat ambang terlewati dan saat batas kembali. Nilai ditulis ke ~/Library/Application Support/ClaudePult/usage.json. Apa yang ditampilkan bar menu — di tab «Bar Menu»."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "I dati arrivano dallo stesso indirizzo usato da Claude Code (il token viene letto dalla voce del portachiavi «Claude Code-credentials» e non viene salvato da nessuna parte). Una notifica per finestra di sessione/settimana quando si supera una soglia e quando il limite torna. I valori vengono scritti in ~/Library/Application Support/ClaudePult/usage.json. Cosa mostra la barra dei menu — nella scheda «Barra dei menu»."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "データは Claude Code と同じアドレスから取得します (トークンはキーチェーン項目「Claude Code-credentials」から読み取り、どこにも保存しません)。セッション/週の期間ごとに、しきい値を超えたときと制限が戻ったときに 1 回通知します。値は ~/Library/Application Support/ClaudePult/usage.json に書き込まれます。メニューバーの表示内容は「メニューバー」タブで。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "데이터는 Claude Code가 쓰는 주소와 같은 곳에서 옵니다 (토큰은 키체인 항목 «Claude Code-credentials»에서 읽고 어디에도 저장하지 않음). 세션/주간 기간마다 기준을 넘을 때와 한도가 돌아올 때 한 번씩 알립니다. 값은 ~/Library/Application Support/ClaudePult/usage.json에 기록됩니다. 메뉴 막대에 보일 내용은 «메뉴 막대» 탭에서."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dane pochodzą z tego samego adresu, którego używa Claude Code (token jest czytany z pozycji pęku kluczy „Claude Code-credentials” i nigdzie nie zapisywany). Powiadomienie raz na okno sesji/tygodnia po przekroczeniu progu i gdy limit wraca. Wartości są zapisywane w ~/Library/Application Support/ClaudePult/usage.json. Co pokazuje pasek menu — na karcie „Pasek menu”."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Os dados vêm do mesmo endereço que o Claude Code usa (o token é lido do item das Chaves «Claude Code-credentials» e não é guardado em lugar nenhum). Uma notificação por janela de sessão/semana ao cruzar um limite e quando o limite volta. Os valores são gravados em ~/Library/Application Support/ClaudePult/usage.json. O que a barra de menus mostra, na aba «Barra de menus»."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Дані — з тієї самої адреси, що й у Claude Code (токен читається зі зв'язки ключів «Claude Code-credentials» і ніде не зберігається). Сповіщення — один раз на вікно сесії/тижня при перетині порога і коли ліміт відновився. Значення пишуться в ~/Library/Application Support/ClaudePult/usage.json. Що показувати в рядку меню — на вкладці «Рядок меню»."
-          }
-        }
-      }
-    },
     "Дата": {
       "localizations": {
         "ar": {
@@ -25431,82 +25126,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Дата публікації"
-          }
-        }
-      }
-    },
-    "Даты — из проект.md (дедлайн, публикация) и контент-план.md у профилей с календарём (вкладка «Профили»).": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "تأتي التواريخ من مشروع.md (الموعد النهائي، النشر) وخطة-المحتوى.md في ملفات التعريف ذات التقويم (علامة التبويب «ملفات التعريف»)."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Die Daten kommen aus projekt.md (Frist, Veröffentlichung) und inhaltsplan.md der Profile mit Kalender (Tab „Profile“)."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dates come from project.md (deadline, publication) and content-plan.md of profiles with a calendar (the “Profiles” tab)."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Las fechas vienen de proyecto.md (fecha límite, publicación) y de plan-de-contenido.md en los perfiles con calendario (pestaña «Perfiles»)."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Les dates viennent de projet.md (échéance, publication) et de plan-de-contenu.md dans les profils avec calendrier (onglet «Profils»)."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tanggal diambil dari proyek.md (tenggat, publikasi) dan rencana-konten.md di profil dengan kalender (tab «Profil»)."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Le date vengono da progetto.md (scadenza, pubblicazione) e da piano-contenuti.md dei profili con calendario (scheda «Profili»)."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "日付は、カレンダーを使うプロファイルの プロジェクト.md (締め切り、公開) と コンテンツ計画.md から取ります (「プロファイル」タブ)。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "날짜는 캘린더를 쓰는 프로필의 프로젝트.md (마감, 게시)와 콘텐츠-계획.md에서 가져옵니다 («프로필» 탭)."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Daty pochodzą z projekt.md (termin, publikacja) i plan-tresci.md w profilach z kalendarzem (karta „Profile”)."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "As datas vêm de projeto.md (prazo, publicação) e de plano-de-conteudo.md nos perfis com calendário (aba «Perfis»)."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Дати — з проєкт.md (дедлайн, публікація) і контент-план.md у профілів з календарем (вкладка «Профілі»)."
           }
         }
       }
@@ -33726,82 +33345,6 @@
         }
       }
     },
-    "Здесь только включённые модули. Остальные — на странице «Модули»; что показывает модуль в каждом профиле — «Профили».": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "هنا الوحدات المفعّلة فقط. الباقي في صفحة «الوحدات»؛ وما تعرضه الوحدة في كل ملف تعريف في «ملفات التعريف»."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hier stehen nur eingeschaltete Module. Die übrigen finden Sie unter „Module“; was ein Modul in jedem Profil zeigt, unter „Profile“."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Only modules that are on are here. The rest are on the “Modules” page; what a module shows in each profile is in “Profiles”."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Aquí solo están los módulos activados. El resto, en la página «Módulos»; lo que muestra un módulo en cada perfil, en «Perfiles»."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Seuls les modules activés figurent ici. Les autres sont sur la page « Modules » ; ce qu’un module affiche dans chaque profil se règle dans « Profils »."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hanya modul yang aktif ada di sini. Sisanya di halaman «Modul»; apa yang ditampilkan modul di tiap profil ada di «Profil»."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Qui ci sono solo i moduli attivi. Gli altri sono nella pagina «Moduli»; cosa mostra un modulo in ogni profilo è in «Profili»."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ここにはオンのモジュールだけが表示されます。その他は「モジュール」ページに、各プロファイルでの表示内容は「プロファイル」にあります。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "여기에는 켜진 모듈만 있습니다. 나머지는 «모듈» 페이지에, 프로필별 표시 내용은 «프로필»에 있습니다."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tu są tylko włączone moduły. Pozostałe — na stronie „Moduły”; co moduł pokazuje w każdym profilu — „Profile”."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Aqui ficam só os módulos ativados. Os demais estão na página «Módulos»; o que um módulo mostra em cada perfil fica em «Perfis»."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Тут лише увімкнені модулі. Решта — на сторінці «Модулі»; що показує модуль у кожному профілі — «Профілі»."
-          }
-        }
-      }
-    },
     "Значки": {
       "localizations": {
         "ar": {
@@ -36767,82 +36310,6 @@
         }
       }
     },
-    "Какие блоки показывать в панели и в каком порядке — у каждого профиля: вкладка «Профили» → «Панель».": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "أي الكتل تظهر في اللوحة وبأي ترتيب يُضبط لكل ملف تعريف: علامة التبويب «ملفات التعريف» ← «اللوحة»."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Welche Blöcke das Panel zeigt und in welcher Reihenfolge, legt jedes Profil fest: Tab „Profile“ → „Panel“."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Which blocks the panel shows and in what order is set per profile: the «Profiles» tab → «Panel»."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Qué bloques muestra el panel y en qué orden se elige en cada perfil: pestaña «Perfiles» → «Panel»."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Les blocs du panneau et leur ordre se règlent dans chaque profil : onglet «Profils» → «Panneau»."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Blok yang tampil di panel dan urutannya diatur per profil: tab «Profil» → «Panel»."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Quali blocchi mostra il pannello e in che ordine si sceglie in ogni profilo: scheda «Profili» → «Pannello»."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "パネルに表示するブロックと順番はプロファイルごとに設定します: 「プロファイル」 タブ → 「パネル」。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "패널에 보일 블록과 순서는 프로필마다 정합니다: «프로필» 탭 → «패널»."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Jakie bloki pokazuje panel i w jakiej kolejności, ustawia każdy profil: karta «Profile» → «Panel»."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Quais blocos o painel mostra e em que ordem é definido em cada perfil: aba «Perfis» → «Painel»."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Які блоки показувати в панелі й у якому порядку — у кожного профілю: вкладка «Профілі» → «Панель»."
-          }
-        }
-      }
-    },
     "Какие блоки показывать и в каком порядке": {
       "localizations": {
         "ar": {
@@ -39348,82 +38815,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Кнопки «15 хв», «1 год», «2 год» у панелі"
-          }
-        }
-      }
-    },
-    "Когда Claude просит разрешение (команда, правка файла), в уведомлении и в строке сессии появляются «Разрешить» и «Отклонить». Диалог Claude при этом тоже на месте — работает тот ответ, что пришёл первым. В режиме auto Claude спрашивает редко. Если у hooks написано «нужно обновить», нажмите «Обновить hooks».": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "عندما يطلب Claude إذنًا (أمر أو تعديل ملف) يظهر «السماح» و«رفض» في الإشعار وفي سطر الجلسة. ويبقى حوار Claude أيضًا — يُعتمد الرد الذي يصل أولًا. في وضع auto نادرًا ما يسأل Claude. إذا ظهر عند hooks «يلزم التحديث» فاضغط «تحديث hooks»."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Wenn Claude um Erlaubnis bittet (ein Befehl, eine Dateiänderung), erscheinen „Erlauben“ und „Ablehnen“ in der Mitteilung und in der Sitzungszeile. Claudes eigener Dialog bleibt auch – es gilt die Antwort, die zuerst kommt. Im Auto-Modus fragt Claude selten. Steht bei den Hooks „Aktualisierung nötig“, klicken Sie „Hooks aktualisieren“."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "When Claude asks for permission (a command, a file edit), «Allow» and «Deny» appear in the notification and in the session row. Claude’s own dialog stays too — whichever answer comes first applies. In auto mode Claude rarely asks. If hooks say «update needed», press «Update hooks»."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cuando Claude pide permiso (un comando, editar un archivo), aparecen «Permitir» y «Rechazar» en la notificación y en la fila de la sesión. El diálogo de Claude también sigue ahí: vale la respuesta que llegue primero. En modo auto Claude pregunta poco. Si los hooks dicen «hay que actualizar», pulsa «Actualizar hooks»."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Quand Claude demande une autorisation (une commande, une modification de fichier), « Autoriser » et « Refuser » apparaissent dans la notification et la ligne de la session. La boîte de dialogue de Claude reste aussi : la première réponse l’emporte. En mode auto, Claude demande rarement. Si les hooks indiquent « mise à jour nécessaire », cliquez « Mettre à jour les hooks »."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Saat Claude meminta izin (perintah, edit file), «Izinkan» dan «Tolak» muncul di notifikasi dan baris sesi. Dialog Claude sendiri tetap ada — jawaban yang datang lebih dulu yang berlaku. Dalam mode auto Claude jarang bertanya. Jika hook bertuliskan «perlu diperbarui», tekan «Perbarui hook»."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Quando Claude chiede un permesso (un comando, una modifica a un file), «Consenti» e «Rifiuta» compaiono nella notifica e nella riga della sessione. Anche la finestra di Claude resta: vale la risposta che arriva prima. In modalità auto Claude chiede di rado. Se gli hook dicono «serve un aggiornamento», premi «Aggiorna hook»."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Claude が許可を求めると（コマンドやファイル編集）、通知とセッションの行に「許可」と「拒否」が表示されます。Claude 自身のダイアログも残り、先に届いた回答が適用されます。auto モードでは Claude はあまり尋ねません。hooks に「更新が必要」と出ていたら「hooks を更新」を押してください。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Claude가 권한을 요청하면(명령 실행, 파일 편집) 알림과 세션 행에 «허용»과 «거부»가 나타납니다. Claude 자체 대화 상자도 그대로 있으며, 먼저 온 응답이 적용됩니다. auto 모드에서는 Claude가 거의 묻지 않습니다. hooks에 «업데이트 필요»가 표시되면 «hooks 업데이트»를 누르세요."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Gdy Claude prosi o zgodę (polecenie, edycja pliku), w powiadomieniu i wierszu sesji pojawiają się „Zezwól” i „Odrzuć”. Okno Claude też zostaje — liczy się odpowiedź, która przyjdzie pierwsza. W trybie auto Claude pyta rzadko. Jeśli przy hookach jest „wymaga aktualizacji”, kliknij „Zaktualizuj hooki”."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Quando o Claude pede permissão (um comando, editar um arquivo), «Permitir» e «Recusar» aparecem na notificação e na linha da sessão. O diálogo do Claude continua lá — vale a resposta que chegar primeiro. No modo auto o Claude pergunta pouco. Se os hooks disserem «precisa atualizar», toque em «Atualizar hooks»."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Коли Claude просить дозвіл (команда, правка файлу), у сповіщенні й у рядку сесії з’являються «Дозволити» і «Відхилити». Діалог Claude теж лишається — діє та відповідь, що надійшла першою. У режимі auto Claude питає рідко. Якщо біля hooks написано «потрібно оновити», натисніть «Оновити hooks»."
           }
         }
       }
@@ -55582,82 +54973,6 @@
         }
       }
     },
-    "Нужен доступ к «Универсальному доступу»": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "يلزم إذن «تسهيلات الاستخدام»"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Zugriff auf „Bedienungshilfen“ nötig"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Accessibility access needed"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Se necesita acceso a «Accesibilidad»"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Accès à « Accessibilité » nécessaire"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Perlu akses «Aksesibilitas»"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Serve l'accesso ad «Accessibilità»"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "「アクセシビリティ」へのアクセスが必要です"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "‘손쉬운 사용’ 접근 권한이 필요합니다"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Potrzebny dostęp do „Dostępności”"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "É necessário acesso à «Acessibilidade»"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Потрібен доступ до «Універсального доступу»"
-          }
-        }
-      }
-    },
     "Нужен источник проектов": {
       "localizations": {
         "ar": {
@@ -56796,82 +56111,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Оновити"
-          }
-        }
-      }
-    },
-    "Обновить hook": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Update hook"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Оновити hook"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hook aktualisieren"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mettre à jour le hook"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Actualizar hook"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Aggiorna hook"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Atualizar hook"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Zaktualizuj hook"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "フックを更新"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "후크 업데이트"
-          }
-        },
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "تحديث الخطاف"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Perbarui hook"
           }
         }
       }
@@ -58016,82 +57255,6 @@
         }
       }
     },
-    "Один раз на окно лимита, когда порог пройден. Общие пороги — в «Модули» → «Лимиты».": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "مرة واحدة لكل نافذة حد عند تجاوز العتبة. العتبات المشتركة في «الوحدات» ← «الحدود»."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Einmal pro Limitfenster, wenn die Schwelle überschritten ist. Gemeinsame Schwellen unter „Module“ → „Limits“."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Once per limit window, when a threshold is passed. Common thresholds are in “Modules” → “Limits”."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Una vez por ventana de límite, al pasar el umbral. Umbrales comunes en «Módulos» → «Límites»."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Une fois par fenêtre de limite, quand le seuil est franchi. Seuils communs dans « Modules » → « Limites »."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sekali per jendela batas, saat ambang terlewati. Ambang umum ada di “Modul” → “Batas”."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Una volta per finestra di limite, quando la soglia è superata. Soglie comuni in «Moduli» → «Limiti»."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "しきい値を超えたとき、上限の期間ごとに1回。共通のしきい値は「モジュール」→「上限」。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "기준을 넘으면 한도 기간마다 한 번. 공통 기준은 “모듈” → “한도”에 있습니다."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Raz na okno limitu, gdy próg zostanie przekroczony. Wspólne progi — w „Moduły” → „Limity”."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Uma vez por janela de limite, ao passar o limite. Limites comuns em “Módulos” → “Limites”."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Один раз на вікно ліміту, коли поріг пройдено. Спільні пороги — у «Модулі» → «Ліміти»."
-          }
-        }
-      }
-    },
     "Один раз на окно при 50/80/95 % (пороги — в Настройках) и когда лимит восстановился; по желанию ещё и в Telegram.": {
       "localizations": {
         "ar": {
@@ -59228,82 +58391,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Острів біля виїмки"
-          }
-        }
-      }
-    },
-    "Остров у чёлки показывает лимиты, сессии и запросы Claude рядом с чёлкой. Четыре вопроса — всё потом меняется в Настройках → «Модули» → «Остров у чёлки».": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "تعرض جزيرة النتوء حدود Claude وجلساته وطلباته بجانب النتوء. أربعة أسئلة — ويمكن تغيير كل شيء لاحقًا في الإعدادات ← «الوحدات» ← «جزيرة النتوء»."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Die Notch-Insel zeigt Limits, Sitzungen und Anfragen von Claude neben der Notch. Vier Fragen – alles lässt sich später unter Einstellungen → „Module“ → „Notch-Insel“ ändern."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "The notch island shows Claude's limits, sessions and requests beside the notch. Four questions — everything can be changed later in Settings → “Modules” → “Notch island”."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "La isla de la muesca muestra los límites, las sesiones y las solicitudes de Claude junto a la muesca. Cuatro preguntas; todo se puede cambiar después en Ajustes → «Módulos» → «Isla de la muesca»."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "L’île de l’encoche affiche les limites, sessions et demandes de Claude à côté de l’encoche. Quatre questions — tout se modifie ensuite dans Réglages → « Modules » → « Île de l’encoche »."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Pulau notch menampilkan batas, sesi, dan permintaan Claude di samping notch. Empat pertanyaan — semuanya bisa diubah nanti di Pengaturan → “Modul” → “Pulau notch”."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "L’isola del notch mostra limiti, sessioni e richieste di Claude accanto al notch. Quattro domande: tutto si può cambiare poi in Impostazioni → «Moduli» → «Isola del notch»."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ノッチアイランドは Claude の上限、セッション、リクエストをノッチの横に表示します。質問は4つ。あとから設定 →「モジュール」→「ノッチアイランド」で変更できます。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "노치 아일랜드는 Claude의 한도, 세션, 요청을 노치 옆에 보여 줍니다. 질문은 네 가지이며, 나중에 설정 → “모듈” → “노치 아일랜드”에서 모두 바꿀 수 있습니다."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Wyspa przy wycięciu pokazuje limity, sesje i prośby Claude obok wycięcia. Cztery pytania — wszystko można później zmienić w Ustawieniach → „Moduły” → „Wyspa przy wycięciu”."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "A ilha do notch mostra limites, sessões e solicitações do Claude ao lado do notch. Quatro perguntas — tudo pode ser alterado depois em Ajustes → “Módulos” → “Ilha do notch”."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Острів біля чубчика показує ліміти, сесії й запити Claude поруч із чубчиком. Чотири запитання — усе потім змінюється в Налаштуваннях → «Модулі» → «Острів біля чубчика»."
           }
         }
       }
@@ -72694,82 +71781,6 @@
         }
       }
     },
-    "Порядок блоков — «Панель»; что показывает модуль в каждом профиле — «Профили».": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ترتيب الكتل في «اللوحة»؛ وما تعرضه الوحدة في كل ملف تعريف في «ملفات التعريف»."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Reihenfolge der Blöcke unter „Panel“; was ein Modul in jedem Profil zeigt, unter „Profile“."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Block order is in “Panel”; what a module shows in each profile is in “Profiles”."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "El orden de los bloques, en «Panel»; lo que muestra un módulo en cada perfil, en «Perfiles»."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "L’ordre des blocs se règle dans « Panneau » ; ce qu’un module affiche dans chaque profil, dans « Profils »."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Urutan blok ada di «Panel»; apa yang ditampilkan modul di tiap profil ada di «Profil»."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "L’ordine dei blocchi è in «Pannello»; cosa mostra un modulo in ogni profilo è in «Profili»."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ブロックの順序は「パネル」、各プロファイルでの表示内容は「プロファイル」で設定します。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "블록 순서는 «패널»에서, 프로필별 표시 내용은 «프로필»에서 정합니다."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Kolejność bloków — „Panel”; co moduł pokazuje w każdym profilu — „Profile”."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "A ordem dos blocos fica em «Painel»; o que um módulo mostra em cada perfil, em «Perfis»."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Порядок блоків — «Панель»; що показує модуль у кожному профілі — «Профілі»."
-          }
-        }
-      }
-    },
     "Порядок слева направо": {
       "localizations": {
         "ar": {
@@ -77653,82 +76664,6 @@
         }
       }
     },
-    "Процессор выше 90 % дольше 5 минут, критическая нехватка памяти, мало места, заряд ниже 15 % без зарядки — по одному уведомлению, пока не наладится. В строку меню процессор и память добавляются во вкладке «Строка меню».": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "المعالج فوق 90 % — لأكثر من 5 دقائق، نقص حاد في الذاكرة، مساحة قليلة، البطارية تحت 15 % — دون شحن: إشعار واحد لكل حالة حتى تعود طبيعية. يُضاف المعالج والذاكرة إلى شريط القائمة من علامة التبويب «شريط القائمة»."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Prozessor über 90 % — länger als 5 Minuten, kritischer Speichermangel, wenig Platz, Akku unter 15 % — ohne Ladegerät: je eine Mitteilung, bis es sich normalisiert. Prozessor und Speicher kommen im Tab „Menüleiste“ in die Menüleiste."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Processor above 90 % — longer than 5 minutes, a critical memory shortage, low disk space, battery below 15 % — not charging: one notification each until it's back to normal. Processor and memory go into the menu bar on the «Menu Bar» tab."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Procesador por encima del 90 % — más de 5 minutos, falta crítica de memoria, poco espacio, batería por debajo del 15 % — sin cargar: una notificación por caso hasta que se normalice. El procesador y la memoria se añaden a la barra de menús en la pestaña «Barra de menús»."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Processeur au-dessus de 90 % — plus de 5 minutes, manque critique de mémoire, peu d’espace, batterie sous 15 % — sans charge : une notification par cas jusqu’au retour à la normale. Processeur et mémoire s’ajoutent à la barre des menus dans l’onglet « Barre des menus »."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Prosesor di atas 90 % — lebih dari 5 menit, kekurangan memori kritis, ruang sedikit, baterai di bawah 15 % — tanpa pengisian: satu pemberitahuan per kasus sampai normal. Prosesor dan memori ditambahkan ke bilah menu di tab «Bar Menu»."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Processore oltre il 90 % — per più di 5 minuti, carenza critica di memoria, poco spazio, batteria sotto il 15 % — senza carica: una notifica per caso finché non si normalizza. Processore e memoria si aggiungono alla barra dei menu nella scheda «Barra dei menu»."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "プロセッサ 90 % 超えが 5 分以上、メモリの深刻な不足、空き容量の不足、充電なしでバッテリー 15 % 未満 — それぞれ正常に戻るまで 1 回だけ通知します。プロセッサとメモリは「メニューバー」タブでメニューバーに追加できます。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "프로세서 90 % 초과 5분 이상, 심각한 메모리 부족, 디스크 공간 부족, 충전 없이 배터리 15 % 미만 — 정상으로 돌아올 때까지 한 번씩 알립니다. 프로세서와 메모리는 «메뉴 막대» 탭에서 메뉴 막대에 추가합니다."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Procesor powyżej 90 % — dłużej niż 5 minut, krytyczny brak pamięci, mało miejsca, bateria poniżej 15 % — bez ładowania: po jednym powiadomieniu, aż wróci do normy. Procesor i pamięć dodaje się do paska menu w karcie «Pasek menu»."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Processador acima de 90 % — mais de 5 minutos, falta crítica de memória, pouco espaço, bateria abaixo de 15 % — sem carregar: uma notificação por caso até normalizar. Processador e memória vão para a barra de menus na aba «Barra de menus»."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Процесор понад 90 % — довше 5 хвилин, критична нестача пам’яті, мало місця, заряд нижче 15 % — без зарядки: по одному сповіщенню, доки не налагодиться. Процесор і пам’ять додаються в рядок меню на вкладці «Рядок меню»."
-          }
-        }
-      }
-    },
     "Процессор загружен": {
       "localizations": {
         "ar": {
@@ -78257,82 +77192,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Шлях до claude"
-          }
-        }
-      }
-    },
-    "Путь пустой — искать в /opt/homebrew/bin, /usr/local/bin, ~/.local/bin, ~/.claude/local. Где запускать команды (Терминал / Фон / спрашивать) — у каждого профиля на вкладке «Профили».": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "المسار فارغ — يُبحث في /opt/homebrew/bin و/usr/local/bin و~/.local/bin و~/.claude/local. مكان تشغيل الأوامر (الطرفية / الخلفية / السؤال) يُضبط لكل ملف تعريف في علامة التبويب «ملفات التعريف»."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Leerer Pfad — gesucht wird in /opt/homebrew/bin, /usr/local/bin, ~/.local/bin, ~/.claude/local. Wo Befehle laufen (Terminal / Hintergrund / fragen), wird pro Profil im Tab „Profile“ festgelegt."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Empty path — look in /opt/homebrew/bin, /usr/local/bin, ~/.local/bin, ~/.claude/local. Where commands run (Terminal / Background / ask) is set per profile on the “Profiles” tab."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ruta vacía — se busca en /opt/homebrew/bin, /usr/local/bin, ~/.local/bin, ~/.claude/local. Dónde se ejecutan los comandos (Terminal / Segundo plano / preguntar) se define por perfil en la pestaña «Perfiles»."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Chemin vide — recherche dans /opt/homebrew/bin, /usr/local/bin, ~/.local/bin, ~/.claude/local. Où s'exécutent les commandes (Terminal / Arrière-plan / demander) se règle par profil dans l'onglet «Profils»."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Jalur kosong — cari di /opt/homebrew/bin, /usr/local/bin, ~/.local/bin, ~/.claude/local. Tempat perintah berjalan (Terminal / Latar belakang / tanya) diatur per profil di tab «Profil»."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Percorso vuoto — cerca in /opt/homebrew/bin, /usr/local/bin, ~/.local/bin, ~/.claude/local. Dove girano i comandi (Terminale / Background / chiedi) si imposta per profilo nella scheda «Profili»."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "空欄なら /opt/homebrew/bin、/usr/local/bin、~/.local/bin、~/.claude/local を探します。コマンドの実行場所 (ターミナル / バックグラウンド / 毎回確認) は「プロファイル」タブでプロファイルごとに設定します。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "비워 두면 /opt/homebrew/bin, /usr/local/bin, ~/.local/bin, ~/.claude/local에서 찾습니다. 명령 실행 위치 (터미널 / 백그라운드 / 묻기)는 «프로필» 탭에서 프로필별로 정합니다."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Pusta ścieżka — szukaj w /opt/homebrew/bin, /usr/local/bin, ~/.local/bin, ~/.claude/local. Gdzie wykonywane są polecenia (Terminal / W tle / pytaj), ustawia się dla każdego profilu na karcie „Profile”."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Caminho vazio — procurar em /opt/homebrew/bin, /usr/local/bin, ~/.local/bin, ~/.claude/local. Onde os comandos rodam (Terminal / Segundo plano / perguntar) é definido por perfil na aba «Perfis»."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Шлях порожній — шукати в /opt/homebrew/bin, /usr/local/bin, ~/.local/bin, ~/.claude/local. Де запускати команди (Термінал / Фон / питати) — у кожного профілю на вкладці «Профілі»."
           }
         }
       }
@@ -83747,82 +82606,6 @@
         }
       }
     },
-    "Свои кнопки: скрипт в фоне или в Терминале, ярлык из «Команд» macOS, ссылка, файл, папка или приложение. У каждой может быть своё сочетание клавиш.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "أزرارك الخاصة: سكربت في الخلفية أو في الطرفية، اختصار من «الاختصارات» في macOS، رابط أو ملف أو مجلد أو تطبيق. ويمكن أن يكون لكل منها اختصار لوحة مفاتيح خاص."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Eigene Tasten: ein Skript im Hintergrund oder im Terminal, ein macOS-„Kurzbefehle“-Kurzbefehl, ein Link, eine Datei, ein Ordner oder eine App. Jede kann einen eigenen Tastaturkurzbefehl haben."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Your own buttons: a script in the background or in Terminal, a macOS «Shortcuts» shortcut, a link, file, folder or app. Each can have its own keyboard shortcut."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tus botones: un script en segundo plano o en Terminal, un atajo de «Atajos» de macOS, un enlace, archivo, carpeta o app. Cada uno puede tener su propio atajo de teclado."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Vos boutons : un script en arrière-plan ou dans Terminal, un raccourci « Raccourcis » de macOS, un lien, un fichier, un dossier ou une app. Chacun peut avoir son propre raccourci clavier."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tombol sendiri: skrip di latar belakang atau Terminal, pintasan «Pintasan» macOS, tautan, file, folder, atau aplikasi. Masing-masing bisa punya pintasan papan ketik sendiri."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Pulsanti tuoi: uno script in background o nel Terminale, un comando di «Comandi rapidi» di macOS, un link, un file, una cartella o un’app. Ognuno può avere la sua scorciatoia da tastiera."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "自分のボタン: バックグラウンドまたはターミナルのスクリプト、macOS の「ショートカット」、リンク、ファイル、フォルダ、アプリ。 それぞれに独自のキーボードショートカットを設定できます。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "나만의 버튼: 백그라운드 또는 터미널 스크립트, macOS «단축어», 링크, 파일, 폴더, 앱. 각각 자신만의 키보드 단축키를 가질 수 있습니다."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Własne przyciski: skrypt w tle lub w Terminalu, skrót z «Skróty» macOS, link, plik, folder albo aplikacja. Każdy może mieć własny skrót klawiszowy."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Seus botões: script em segundo plano ou no Terminal, atalho do «Atalhos» do macOS, link, arquivo, pasta ou app. Cada um pode ter seu próprio atalho de teclado."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Свої кнопки: скрипт у фоні чи в Терміналі, ярлик із «Швидкі команди» macOS, посилання, файл, папка або застосунок. Кожна може мати своє сполучення клавіш."
-          }
-        }
-      }
-    },
     "Свои промпты": {
       "localizations": {
         "ar": {
@@ -83895,82 +82678,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Власні промпти"
-          }
-        }
-      }
-    },
-    "Своим сообщением, через бота ежедневного отчёта: расход недели по проектам, самые тяжёлые сессии, сколько раз упирался в лимит, итоги фоновых задач.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "رسالة منفصلة عبر بوت التقرير اليومي: استهلاك الأسبوع حسب المشروع، وأثقل الجلسات، وعدد مرات بلوغ الحد، ونتائج المهام الخلفية."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Eine eigene Nachricht über den Bot des Tagesberichts: Wochenverbrauch nach Projekt, aufwendigste Sitzungen, wie oft das Limit erreicht wurde, Ergebnisse der Hintergrundaufgaben."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "A message of its own through the daily report bot: the week's use by project, the heaviest sessions, how often the limit was hit, background run results."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Un mensaje propio a través del bot del informe diario: uso de la semana por proyecto, sesiones más pesadas, cuántas veces se llegó al límite y resultados de tareas en segundo plano."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Un message à part via le bot du rapport quotidien : usage de la semaine par projet, sessions les plus lourdes, nombre de limites atteintes, résultats des tâches en arrière-plan."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Pesan tersendiri lewat bot laporan harian: pemakaian minggu ini per proyek, sesi terberat, berapa kali mencapai batas, hasil tugas latar belakang."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Un messaggio a parte tramite il bot del report giornaliero: uso della settimana per progetto, sessioni più pesanti, quante volte si è toccato il limite, esiti delle attività in background."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "日次レポートのボットから別メッセージで: プロジェクト別の週の使用量、最も重いセッション、上限に達した回数、バックグラウンドタスクの結果。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "일일 보고서 봇으로 별도 메시지: 프로젝트별 주간 사용량, 가장 무거운 세션, 한도에 닿은 횟수, 백그라운드 작업 결과."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Osobna wiadomość przez bota raportu dziennego: zużycie tygodnia według projektów, najcięższe sesje, ile razy osiągnięto limit, wyniki zadań w tle."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Uma mensagem à parte pelo bot do relatório diário: uso da semana por projeto, sessões mais pesadas, quantas vezes bateu no limite, resultados das tarefas em segundo plano."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Окремим повідомленням через бота щоденного звіту: витрати тижня за проєктами, найважчі сесії, скільки разів упирався в ліміт, підсумки фонових завдань."
           }
         }
       }
@@ -85795,82 +84502,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Сесії Claude Code"
-          }
-        }
-      }
-    },
-    "Сессии Claude Code на этом Маке и фоновые задачи. Включается на этой странице.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "جلسات Claude Code على هذا الـ Mac والمهام في الخلفية. يُفعَّل من هذه الصفحة."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Claude-Code-Sitzungen auf diesem Mac und Hintergrundaufgaben. Wird auf dieser Seite eingeschaltet."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Claude Code sessions on this Mac and background runs. Turned on from this page."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sesiones de Claude Code en este Mac y tareas en segundo plano. Se activa en esta página."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sessions Claude Code sur ce Mac et tâches en arrière-plan. S’active sur cette page."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sesi Claude Code di Mac ini dan tugas latar belakang. Diaktifkan dari halaman ini."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sessioni di Claude Code su questo Mac e attività in background. Si attiva da questa pagina."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "この Mac の Claude Code セッションとバックグラウンドタスク。このページでオンにします。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "이 Mac의 Claude Code 세션과 백그라운드 작업. 이 페이지에서 켭니다."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sesje Claude Code na tym Macu i zadania w tle. Włącza się na tej stronie."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sessões do Claude Code neste Mac e tarefas em segundo plano. Ativado nesta página."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Сесії Claude Code на цьому Mac і фонові задачі. Вмикається на цій сторінці."
           }
         }
       }
@@ -89303,82 +87934,6 @@
         }
       }
     },
-    "Слово, набранное не в той раскладке («ghbdtn»), исправляется само («привет»), и раскладка переключается. Двойной Shift — последнее слово, ⌥⇧ — выделенный текст. Язык — в строке меню.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "تُعاد كتابة الكلمة المكتوبة بالتخطيط الخطأ بالتخطيط الصحيح تلقائيًا، ويتبدّل التخطيط. Shift مرتين — آخر كلمة، ⌥⇧ — النص المحدد. اللغة في شريط القوائم."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ein Wort im falschen Tastaturlayout wird von selbst im richtigen neu geschrieben, und das Layout wechselt. Zweimal Shift – das letzte Wort, ⌥⇧ – der markierte Text. Die Sprache steht in der Menüleiste."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "A word typed in the wrong keyboard layout is retyped in the right one by itself, and the layout switches. Double Shift converts the last word, ⌥⇧ the selected text. The language is in the menu bar."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Una palabra escrita con la distribución equivocada se reescribe sola con la correcta y la distribución cambia. Doble Shift: la última palabra; ⌥⇧: el texto seleccionado. El idioma, en la barra de menús."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Un mot tapé dans la mauvaise disposition est retapé tout seul dans la bonne, et la disposition change. Double Maj : le dernier mot, ⌥⇧ : le texte sélectionné. La langue est dans la barre des menus."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Kata yang diketik dengan tata letak yang salah otomatis diketik ulang dengan yang benar, dan tata letaknya berganti. Shift dua kali — kata terakhir, ⌥⇧ — teks yang dipilih. Bahasa tampil di bar menu."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Una parola scritta con il layout sbagliato viene riscritta da sola con quello giusto, e il layout cambia. Doppio Maiusc: l'ultima parola; ⌥⇧: il testo selezionato. La lingua è nella barra dei menu."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "違う配列で入力した単語を正しい配列で自動的に打ち直し、配列も切り替えます。Shift を2回で直前の単語、⌥⇧ で選択したテキストを変換。言語はメニューバーに表示。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "잘못된 배열로 입력한 단어를 올바른 배열로 자동으로 다시 입력하고 배열을 전환합니다. Shift 두 번 — 마지막 단어, ⌥⇧ — 선택한 텍스트. 언어는 메뉴 막대에 표시됩니다."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Słowo wpisane w złym układzie klawiatury samo wpisuje się ponownie we właściwym, a układ się przełącza. Dwa razy Shift — ostatnie słowo, ⌥⇧ — zaznaczony tekst. Język widać na pasku menu."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Uma palavra digitada no layout errado é redigitada sozinha no certo, e o layout muda. Shift duas vezes: a última palavra; ⌥⇧: o texto selecionado. O idioma fica na barra de menus."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Слово, набране не в тій розкладці («ghbdsn»), виправляється само («привіт»), і розкладка перемикається. Подвійний Shift — останнє слово, ⌥⇧ — виділений текст. Мова — у рядку меню."
-          }
-        }
-      }
-    },
     "Сменить профиль": {
       "localizations": {
         "ar": {
@@ -89604,82 +88159,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Зняти"
-          }
-        }
-      }
-    },
-    "Снять hook": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Remove hook"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Зняти hook"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hook entfernen"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Retirer le hook"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Quitar hook"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Rimuovi hook"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Remover hook"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Usuń hook"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "フックを削除"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "후크 제거"
-          }
-        },
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "إزالة الخطاف"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hapus hook"
           }
         }
       }
@@ -100338,82 +98817,6 @@
         }
       }
     },
-    "Установить hook": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Install hook"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Встановити hook"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hook installieren"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Installer le hook"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Instalar hook"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Installa hook"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Instalar hook"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Zainstaluj hook"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "フックをインストール"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "후크 설치"
-          }
-        },
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "تثبيت الخطاف"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Pasang hook"
-          }
-        }
-      }
-    },
     "Установить hooks": {
       "localizations": {
         "ar": {
@@ -103691,82 +102094,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Що в ньому"
-          }
-        }
-      }
-    },
-    "Что включено — плитками и готовыми наборами": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ما هو مفعّل — بطاقات ومجموعات جاهزة"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Was aktiv ist – als Kacheln und fertige Sets"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "What’s on — as tiles and ready-made sets"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Qué está activado: en mosaicos y conjuntos listos"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ce qui est activé — en tuiles et ensembles prêts"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Apa yang aktif — ubin dan set siap pakai"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cosa è attivo — a riquadri e set pronti"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "オンのもの — タイルと既製セット"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "켜진 항목 — 타일과 미리 만든 세트"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Co jest włączone — kafelki i gotowe zestawy"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "O que está ativado — em blocos e conjuntos prontos"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Що увімкнено — плитками й готовими наборами"
           }
         }
       }
@@ -124054,82 +122381,6 @@
         }
       }
     },
-    "Горячая клавиша в любом приложении открывает окно: задача, проект и агент — и она уходит в фон или в новое окно Терминала. ⌘↩ — отправить, Esc — закрыть.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "A hot key in any app opens a window: the task, the project and the agent — and it goes to the background or to a new Terminal window. ⌘↩ sends, Esc closes."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Гаряча клавіша в будь-якій програмі відкриває вікно: завдання, проєкт і агент — і воно йде у фон або в нове вікно Термінала. ⌘↩ — надіслати, Esc — закрити."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ein Tastenkürzel in jeder App öffnet ein Fenster: Aufgabe, Projekt und Agent — und sie läuft im Hintergrund oder in einem neuen Terminal-Fenster. ⌘↩ sendet, Esc schließt."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Un raccourci dans n’importe quelle app ouvre une fenêtre : la tâche, le projet et l’agent — et elle part en arrière-plan ou dans une nouvelle fenêtre de Terminal. ⌘↩ envoie, Échap ferme."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Un atajo en cualquier app abre una ventana: la tarea, el proyecto y el agente — y se envía en segundo plano o a una nueva ventana de Terminal. ⌘↩ envía, Esc cierra."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Una scorciatoia in qualsiasi app apre una finestra: attività, progetto e agente — e parte in background o in una nuova finestra di Terminale. ⌘↩ invia, Esc chiude."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Um atalho em qualquer app abre uma janela: a tarefa, o projeto e o agente — e ela vai para segundo plano ou para uma nova janela do Terminal. ⌘↩ envia, Esc fecha."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Skrót klawiszowy w dowolnej aplikacji otwiera okno: zadanie, projekt i agent — i zadanie trafia w tło albo do nowego okna Terminala. ⌘↩ wysyła, Esc zamyka."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "どのアプリでもホットキーでウインドウが開きます。タスク、プロジェクト、エージェントを選ぶと、バックグラウンドか新しいターミナルウインドウで実行されます。⌘↩ で送信、Esc で閉じます。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "어떤 앱에서든 단축키로 창이 열립니다. 작업, 프로젝트, 에이전트를 고르면 백그라운드나 새 터미널 창에서 실행됩니다. ⌘↩ 보내기, Esc 닫기."
-          }
-        },
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "مفتاح اختصار في أي تطبيق يفتح نافذة: المهمة والمشروع والوكيل — فتُرسل إلى الخلفية أو إلى نافذة طرفية جديدة. ⌘↩ للإرسال، Esc للإغلاق."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tombol pintas di aplikasi mana pun membuka jendela: tugas, proyek, dan agen — lalu tugas berjalan di latar belakang atau di jendela Terminal baru. ⌘↩ mengirim, Esc menutup."
-          }
-        }
-      }
-    },
     "Другие агенты — только в Терминале: задача в буфере обмена, вставьте ⌘V": {
       "localizations": {
         "en": {
@@ -138186,6 +136437,1298 @@
           "stringUnit": {
             "state": "translated",
             "value": "Є незбережені зміни"
+          }
+        }
+      }
+    },
+    "Какие блоки показывать и в каком порядке — на странице «Панель».": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الكتل وترتيبها: صفحة «اللوحة»."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blöcke und ihre Reihenfolge: Seite „Panel“."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Which blocks show and in what order is on the “Panel” page."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bloques y su orden: página «Panel»."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blocs et leur ordre : page « Panneau »."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blok dan urutannya: halaman “Panel”."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blocchi e ordine: pagina «Pannello»."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ブロックとその順序:「パネル」ページ。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "블록과 순서: ‘패널’ 페이지."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bloki i ich kolejność: strona „Panel”."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blocos e ordem: página “Painel”."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Які блоки показувати й у якому порядку — на сторінці «Панель»."
+          }
+        }
+      }
+    },
+    "Порядок блоков и что показывает модуль — на странице «Панель».": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ترتيب الكتل وما تعرضه الوحدة: صفحة «اللوحة»."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reihenfolge der Blöcke und Inhalt eines Moduls: Seite „Panel“."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Block order and what a module shows are on the “Panel” page."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Orden de los bloques y qué muestra cada módulo: página «Panel»."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ordre des blocs et contenu d’un module : page « Panneau »."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Urutan blok dan isi modul: halaman “Panel”."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ordine dei blocchi e contenuto di un modulo: pagina «Pannello»."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ブロックの順序とモジュールの表示内容:「パネル」ページ。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "블록 순서와 모듈 표시 내용: ‘패널’ 페이지."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kolejność bloków i zawartość modułu: strona „Panel”."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ordem dos blocos e o que um módulo mostra: página “Painel”."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Порядок блоків і що показує модуль — на сторінці «Панель»."
+          }
+        }
+      }
+    },
+    "Здесь только включённые модули. Остальные — на странице «Модули».": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تظهر هنا الوحدات المفعّلة فقط. البقية في صفحة «الوحدات»."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hier stehen nur aktive Module. Die übrigen: Seite „Module“."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Only modules that are on are here. The rest are on the “Modules” page."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aquí solo aparecen los módulos activos. El resto: página «Módulos»."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seuls les modules actifs sont ici. Les autres : page « Modules »."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Di sini hanya modul yang aktif. Lainnya: halaman “Modul”."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Qui ci sono solo i moduli attivi. Gli altri: pagina «Moduli»."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ここにはオンのモジュールだけが表示されます。その他は「モジュール」ページにあります。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "켜진 모듈만 여기에 표시됩니다. 나머지는 ‘모듈’ 페이지에 있습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tu są tylko włączone moduły. Pozostałe: strona „Moduły”."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aqui ficam só os módulos ativos. Os demais: página “Módulos”."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Тут лише ввімкнені модулі. Решта — на сторінці «Модулі»."
+          }
+        }
+      }
+    },
+    "Один раз на окно лимита, когда порог пройден. Общие пороги — на странице «Лимиты AI».": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مرة واحدة لكل نافذة حد عند تجاوز العتبة. العتبات المشتركة: صفحة «حدود الذكاء الاصطناعي»."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Einmal pro Limitfenster, wenn die Schwelle überschritten ist. Gemeinsame Schwellen: Seite „KI-Limits“."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Once per limit window, when a threshold is passed. Common thresholds are on the “AI limits” page."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Una vez por ventana de límite, al pasar el umbral. Umbrales comunes: página «Límites de IA»."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une fois par fenêtre de limite, quand le seuil est franchi. Seuils communs : page « Limites d'IA »."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sekali per jendela batas, saat ambang terlewati. Ambang bersama: halaman “Batas AI”."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Una volta per finestra di limite, quando la soglia è superata. Soglie comuni: pagina «Limiti IA»."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "しきい値を超えたとき、上限の期間ごとに1回。共通のしきい値:「AI の上限」ページ。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "기준을 넘으면 한도 기간마다 한 번. 공통 임계값: ‘AI 한도’ 페이지."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Raz na okno limitu, gdy próg zostanie przekroczony. Wspólne progi: strona „Limity AI”."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uma vez por janela de limite, ao passar o limite. Limites comuns: página “Limites de IA”."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Один раз на вікно ліміту, коли поріг пройдено. Спільні пороги — на сторінці «Ліміти AI»."
+          }
+        }
+      }
+    },
+    "Даты — из проект.md (дедлайн, публикация) и контент-план.md у профилей с календарём.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تأتي التواريخ من مشروع.md (الموعد النهائي، النشر) وخطة-المحتوى.md في ملفات التعريف ذات التقويم."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Daten kommen aus projekt.md (Frist, Veröffentlichung) und inhaltsplan.md der Profile mit Kalender."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dates come from project.md (deadline, publication) and content-plan.md of profiles with a calendar."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Las fechas vienen de proyecto.md (fecha límite, publicación) y de plan-de-contenido.md en los perfiles con calendario."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les dates viennent de projet.md (échéance, publication) et de plan-de-contenu.md dans les profils avec calendrier."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tanggal diambil dari proyek.md (tenggat, publikasi) dan rencana-konten.md di profil dengan kalender."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le date vengono da progetto.md (scadenza, pubblicazione) e da piano-contenuti.md dei profili con calendario."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "日付は、カレンダーを使うプロファイルの プロジェクト.md (締め切り、公開) と コンテンツ計画.md から取ります。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "날짜는 캘린더를 쓰는 프로필의 프로젝트.md (마감, 게시)와 콘텐츠-계획.md에서 가져옵니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Daty pochodzą z projekt.md (termin, publikacja) i plan-tresci.md w profilach z kalendarzem."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "As datas vêm de projeto.md (prazo, publicação) e de plano-de-conteudo.md nos perfis com calendário."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Дати — з проєкт.md (дедлайн, публікація) і контент-план.md у профілів з календарем."
+          }
+        }
+      }
+    },
+    "Включить сервис, вставить ключ или дать согласие — на странице сервиса в разделе «Сервисы AI».": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لتفعيل خدمة أو لصق مفتاح أو إعطاء موافقة: صفحة الخدمة ضمن «خدمات الذكاء الاصطناعي»."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dienst aktivieren, Schlüssel einfügen oder zustimmen: Seite des Dienstes unter „KI-Dienste“."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "To turn a service on, paste a key or give consent, open the service’s page under “AI Services”."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Para activar un servicio, pegar una clave o dar consentimiento: página del servicio en «Servicios de IA»."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activer un service, coller une clé ou donner son accord : page du service dans « Services d'IA »."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mengaktifkan layanan, menempel kunci, atau memberi izin: halaman layanan di “Layanan AI”."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Attivare un servizio, incollare una chiave o dare il consenso: pagina del servizio in «Servizi IA»."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "サービスの有効化、キーの貼り付け、同意:「AI サービス」のサービスページ。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "서비스 켜기, 키 붙여넣기, 동의: ‘AI 서비스’의 서비스 페이지."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Włączenie usługi, wklejenie klucza lub zgoda: strona usługi w sekcji „Usługi AI”."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ativar um serviço, colar uma chave ou dar consentimento: página do serviço em “Serviços de IA”."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Увімкнути сервіс, вставити ключ чи дати згоду — на сторінці сервісу в розділі «Сервіси AI»."
+          }
+        }
+      }
+    },
+    "Данные — с того же адреса, что использует Claude Code (токен читается из связки ключей «Claude Code-credentials» и нигде не сохраняется). Уведомление — один раз на окно сессии/недели при пересечении порога и когда лимит восстановился. Значения пишутся в ~/Library/Application Support/ClaudePult/usage.json.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تأتي البيانات من العنوان نفسه الذي يستخدمه Claude Code (يُقرأ الرمز من عنصر سلسلة المفاتيح «Claude Code-credentials» ولا يُحفظ في أي مكان). إشعار واحد لكل نافذة جلسة/أسبوع عند تجاوز حدّ وعند عودة الحد. تُكتب القيم في ~/Library/Application Support/ClaudePult/usage.json."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Daten kommen von derselben Adresse, die Claude Code nutzt (das Token wird aus dem Schlüsselbund-Eintrag „Claude Code-credentials“ gelesen und nirgends gespeichert). Eine Mitteilung pro Sitzungs-/Wochenfenster, wenn eine Schwelle überschritten wird und wenn das Limit zurück ist. Die Werte werden in ~/Library/Application Support/ClaudePult/usage.json geschrieben."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Data comes from the same address Claude Code uses (the token is read from the “Claude Code-credentials” Keychain item and stored nowhere). A notification once per session/week window when a threshold is crossed and when the limit is back. Values are written to ~/Library/Application Support/ClaudePult/usage.json."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los datos vienen de la misma dirección que usa Claude Code (el token se lee del elemento de llavero «Claude Code-credentials» y no se guarda en ningún sitio). Una notificación por ventana de sesión/semana al cruzar un umbral y cuando el límite vuelve. Los valores se escriben en ~/Library/Application Support/ClaudePult/usage.json."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les données viennent de la même adresse que celle de Claude Code (le jeton est lu dans l'élément de trousseau «Claude Code-credentials» et n'est conservé nulle part). Une notification par fenêtre de session/semaine au franchissement d'un seuil et quand la limite revient. Les valeurs sont écrites dans ~/Library/Application Support/ClaudePult/usage.json."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Data berasal dari alamat yang sama dengan yang dipakai Claude Code (token dibaca dari butir Rantai Kunci «Claude Code-credentials» dan tidak disimpan di mana pun). Pemberitahuan sekali per jendela sesi/minggu saat ambang terlewati dan saat batas kembali. Nilai ditulis ke ~/Library/Application Support/ClaudePult/usage.json."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I dati arrivano dallo stesso indirizzo usato da Claude Code (il token viene letto dalla voce del portachiavi «Claude Code-credentials» e non viene salvato da nessuna parte). Una notifica per finestra di sessione/settimana quando si supera una soglia e quando il limite torna. I valori vengono scritti in ~/Library/Application Support/ClaudePult/usage.json."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "データは Claude Code と同じアドレスから取得します (トークンはキーチェーン項目「Claude Code-credentials」から読み取り、どこにも保存しません)。セッション/週の期間ごとに、しきい値を超えたときと制限が戻ったときに 1 回通知します。値は ~/Library/Application Support/ClaudePult/usage.json に書き込まれます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "데이터는 Claude Code가 쓰는 주소와 같은 곳에서 옵니다 (토큰은 키체인 항목 «Claude Code-credentials»에서 읽고 어디에도 저장하지 않음). 세션/주간 기간마다 기준을 넘을 때와 한도가 돌아올 때 한 번씩 알립니다. 값은 ~/Library/Application Support/ClaudePult/usage.json에 기록됩니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dane pochodzą z tego samego adresu, którego używa Claude Code (token jest czytany z pozycji pęku kluczy „Claude Code-credentials” i nigdzie nie zapisywany). Powiadomienie raz na okno sesji/tygodnia po przekroczeniu progu i gdy limit wraca. Wartości są zapisywane w ~/Library/Application Support/ClaudePult/usage.json."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Os dados vêm do mesmo endereço que o Claude Code usa (o token é lido do item das Chaves «Claude Code-credentials» e não é guardado em lugar nenhum). Uma notificação por janela de sessão/semana ao cruzar um limite e quando o limite volta. Os valores são gravados em ~/Library/Application Support/ClaudePult/usage.json."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Дані — з тієї самої адреси, що й у Claude Code (токен читається зі зв'язки ключів «Claude Code-credentials» і ніде не зберігається). Сповіщення — один раз на вікно сесії/тижня при перетині порога і коли ліміт відновився. Значення пишуться в ~/Library/Application Support/ClaudePult/usage.json."
+          }
+        }
+      }
+    },
+    "Процессор выше 90 % дольше 5 минут, критическая нехватка памяти, мало места, заряд ниже 15 % без зарядки — по одному уведомлению, пока не наладится.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المعالج فوق 90 % — لأكثر من 5 دقائق، نقص حاد في الذاكرة، مساحة قليلة، البطارية تحت 15 % — دون شحن: إشعار واحد لكل حالة حتى تعود طبيعية."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prozessor über 90 % — länger als 5 Minuten, kritischer Speichermangel, wenig Platz, Akku unter 15 % — ohne Ladegerät: je eine Mitteilung, bis es sich normalisiert."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Processor above 90 % — longer than 5 minutes, a critical memory shortage, low disk space, battery below 15 % — not charging: one notification each until it's back to normal."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Procesador por encima del 90 % — más de 5 minutos, falta crítica de memoria, poco espacio, batería por debajo del 15 % — sin cargar: una notificación por caso hasta que se normalice."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Processeur au-dessus de 90 % — plus de 5 minutes, manque critique de mémoire, peu d’espace, batterie sous 15 % — sans charge : une notification par cas jusqu’au retour à la normale."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prosesor di atas 90 % — lebih dari 5 menit, kekurangan memori kritis, ruang sedikit, baterai di bawah 15 % — tanpa pengisian: satu pemberitahuan per kasus sampai normal."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Processore oltre il 90 % — per più di 5 minuti, carenza critica di memoria, poco spazio, batteria sotto il 15 % — senza carica: una notifica per caso finché non si normalizza."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "プロセッサ 90 % 超えが 5 分以上、メモリの深刻な不足、空き容量の不足、充電なしでバッテリー 15 % 未満 — それぞれ正常に戻るまで 1 回だけ通知します。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "프로세서 90 % 초과 5분 이상, 심각한 메모리 부족, 디스크 공간 부족, 충전 없이 배터리 15 % 미만 — 정상으로 돌아올 때까지 한 번씩 알립니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Procesor powyżej 90 % — dłużej niż 5 minut, krytyczny brak pamięci, mało miejsca, bateria poniżej 15 % — bez ładowania: po jednym powiadomieniu, aż wróci do normy."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Processador acima de 90 % — mais de 5 minutos, falta crítica de memória, pouco espaço, bateria abaixo de 15 % — sem carregar: uma notificação por caso até normalizar."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Процесор понад 90 % — довше 5 хвилин, критична нестача пам’яті, мало місця, заряд нижче 15 % — без зарядки: по одному сповіщенню, доки не налагодиться."
+          }
+        }
+      }
+    },
+    "Путь пустой — искать в /opt/homebrew/bin, /usr/local/bin, ~/.local/bin, ~/.claude/local.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المسار فارغ — يُبحث في /opt/homebrew/bin و/usr/local/bin و~/.local/bin و~/.claude/local."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Leerer Pfad — gesucht wird in /opt/homebrew/bin, /usr/local/bin, ~/.local/bin, ~/.claude/local."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Empty path — look in /opt/homebrew/bin, /usr/local/bin, ~/.local/bin, ~/.claude/local."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ruta vacía — se busca en /opt/homebrew/bin, /usr/local/bin, ~/.local/bin, ~/.claude/local."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chemin vide — recherche dans /opt/homebrew/bin, /usr/local/bin, ~/.local/bin, ~/.claude/local."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jalur kosong — cari di /opt/homebrew/bin, /usr/local/bin, ~/.local/bin, ~/.claude/local."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Percorso vuoto — cerca in /opt/homebrew/bin, /usr/local/bin, ~/.local/bin, ~/.claude/local."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "空欄なら /opt/homebrew/bin、/usr/local/bin、~/.local/bin、~/.claude/local を探します。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "비워 두면 /opt/homebrew/bin, /usr/local/bin, ~/.local/bin, ~/.claude/local에서 찾습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pusta ścieżka — szukaj w /opt/homebrew/bin, /usr/local/bin, ~/.local/bin, ~/.claude/local."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Caminho vazio — procurar em /opt/homebrew/bin, /usr/local/bin, ~/.local/bin, ~/.claude/local."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Шлях порожній — шукати в /opt/homebrew/bin, /usr/local/bin, ~/.local/bin, ~/.claude/local."
+          }
+        }
+      }
+    },
+    "Сессии Claude Code на этом Маке и фоновые задачи.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "جلسات Claude Code على هذا الـ Mac والمهام في الخلفية."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude-Code-Sitzungen auf diesem Mac und Hintergrundaufgaben."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude Code sessions on this Mac and background runs."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sesiones de Claude Code en este Mac y tareas en segundo plano."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sessions Claude Code sur ce Mac et tâches en arrière-plan."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sesi Claude Code di Mac ini dan tugas latar belakang."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sessioni di Claude Code su questo Mac e attività in background."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "この Mac の Claude Code セッションとバックグラウンドタスク。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이 Mac의 Claude Code 세션과 백그라운드 작업."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sesje Claude Code na tym Macu i zadania w tle."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sessões do Claude Code neste Mac e tarefas em segundo plano."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Сесії Claude Code на цьому Mac і фонові задачі."
+          }
+        }
+      }
+    },
+    "Слово, набранное не в той раскладке («ghbdtn»), исправляется само («привет»), и раскладка переключается.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تُعاد كتابة الكلمة المكتوبة بالتخطيط الخطأ بالتخطيط الصحيح تلقائيًا، ويتبدّل التخطيط."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ein Wort im falschen Tastaturlayout wird von selbst im richtigen neu geschrieben, und das Layout wechselt."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A word typed in the wrong keyboard layout is retyped in the right one by itself, and the layout switches."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Una palabra escrita con la distribución equivocada se reescribe sola con la correcta y la distribución cambia."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un mot tapé dans la mauvaise disposition est retapé tout seul dans la bonne, et la disposition change."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kata yang diketik dengan tata letak yang salah otomatis diketik ulang dengan yang benar, dan tata letaknya berganti."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Una parola scritta con il layout sbagliato viene riscritta da sola con quello giusto, e il layout cambia."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "違う配列で入力した単語を正しい配列で自動的に打ち直し、配列も切り替えます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "잘못된 배열로 입력한 단어를 올바른 배열로 자동으로 다시 입력하고 배열을 전환합니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Słowo wpisane w złym układzie klawiatury samo wpisuje się ponownie we właściwym, a układ się przełącza."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uma palavra digitada no layout errado é redigitada sozinha no certo, e o layout muda."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Слово, набране не в тій розкладці («ghbdsn»), виправляється само («привіт»), і розкладка перемикається."
+          }
+        }
+      }
+    },
+    "Горячая клавиша в любом приложении открывает окно: задача, проект и агент — и она уходит в фон или в новое окно Терминала.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مفتاح اختصار في أي تطبيق يفتح نافذة: المهمة والمشروع والوكيل — فتُرسل إلى الخلفية أو إلى نافذة طرفية جديدة."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ein Tastenkürzel in jeder App öffnet ein Fenster: Aufgabe, Projekt und Agent — und sie läuft im Hintergrund oder in einem neuen Terminal-Fenster."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A hot key in any app opens a window: the task, the project and the agent — and it goes to the background or to a new Terminal window."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un atajo en cualquier app abre una ventana: la tarea, el proyecto y el agente — y se envía en segundo plano o a una nueva ventana de Terminal."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un raccourci dans n’importe quelle app ouvre une fenêtre : la tâche, le projet et l’agent — et elle part en arrière-plan ou dans une nouvelle fenêtre de Terminal."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tombol pintas di aplikasi mana pun membuka jendela: tugas, proyek, dan agen — lalu tugas berjalan di latar belakang atau di jendela Terminal baru."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Una scorciatoia in qualsiasi app apre una finestra: attività, progetto e agente — e parte in background o in una nuova finestra di Terminale."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "どのアプリでもホットキーでウインドウが開きます。タスク、プロジェクト、エージェントを選ぶと、バックグラウンドか新しいターミナルウインドウで実行されます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "어떤 앱에서든 단축키로 창이 열립니다. 작업, 프로젝트, 에이전트를 고르면 백그라운드나 새 터미널 창에서 실행됩니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skrót klawiszowy w dowolnej aplikacji otwiera okno: zadanie, projekt i agent — i zadanie trafia w tło albo do nowego okna Terminala."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Um atalho em qualquer app abre uma janela: a tarefa, o projeto e o agente — e ela vai para segundo plano ou para uma nova janela do Terminal."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Гаряча клавіша в будь-якій програмі відкриває вікно: завдання, проєкт і агент — і воно йде у фон або в нове вікно Термінала."
+          }
+        }
+      }
+    },
+    "Остров у чёлки показывает лимиты, сессии и запросы Claude рядом с чёлкой. Четыре вопроса — всё потом меняется в Настройках → «Остров у чёлки».": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تعرض جزيرة النتوء حدود Claude وجلساته وطلباته بجانب النتوء. أربعة أسئلة — ويمكن تغيير كل شيء لاحقًا في الإعدادات ← «الوحدات» ← «جزيرة النتوء»."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Notch-Insel zeigt Limits, Sitzungen und Anfragen von Claude neben der Notch. Vier Fragen – alles lässt sich später unter Einstellungen → „Notch-Insel“ ändern."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The notch island shows Claude's limits, sessions and requests beside the notch. Four questions — everything can be changed later in Settings → “Notch island”."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La isla de la muesca muestra los límites, las sesiones y las solicitudes de Claude junto a la muesca. Cuatro preguntas; todo se puede cambiar después en Ajustes → «Isla de la muesca»."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L’île de l’encoche affiche les limites, sessions et demandes de Claude à côté de l’encoche. Quatre questions — tout se modifie ensuite dans Réglages → « Île de l’encoche »."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pulau notch menampilkan batas, sesi, dan permintaan Claude di samping notch. Empat pertanyaan — semuanya bisa diubah nanti di Pengaturan → “Pulau notch”."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L’isola del notch mostra limiti, sessioni e richieste di Claude accanto al notch. Quattro domande: tutto si può cambiare poi in Impostazioni → «Isola del notch»."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ノッチアイランドは Claude の上限、セッション、リクエストをノッチの横に表示します。質問は4つ。あとから設定 →「ノッチアイランド」で変更できます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "노치 아일랜드는 Claude의 한도, 세션, 요청을 노치 옆에 보여 줍니다. 질문은 네 가지이며, 나중에 설정 → “노치 아일랜드”에서 모두 바꿀 수 있습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wyspa przy wycięciu pokazuje limity, sesje i prośby Claude obok wycięcia. Cztery pytania — wszystko można później zmienić w Ustawieniach → „Wyspa przy wycięciu”."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A ilha do notch mostra limites, sessões e solicitações do Claude ao lado do notch. Quatro perguntas — tudo pode ser alterado depois em Ajustes → “Ilha do notch”."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Острів біля чубчика показує ліміти, сесії й запити Claude поруч із чубчиком. Чотири запитання — усе потім змінюється в Налаштуваннях → «Острів біля чубчика»."
+          }
+        }
+      }
+    },
+    "Когда Claude просит разрешение (команда, правка файла), в уведомлении и в строке сессии появляются «Разрешить» и «Отклонить». Диалог Claude при этом тоже на месте — работает тот ответ, что пришёл первым. В режиме auto Claude спрашивает редко. Если у отслеживания написано «нужно обновить», нажмите «Обновить отслеживание».": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "عندما يطلب Claude إذنًا (أمر أو تعديل ملف) يظهر «السماح» و«رفض» في الإشعار وفي سطر الجلسة. ويبقى حوار Claude أيضًا — يُعتمد الرد الذي يصل أولًا. في وضع auto نادرًا ما يسأل Claude. إذا ظهر عند hooks «يلزم التحديث» فاضغط «تحديث التتبّع»."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wenn Claude um Erlaubnis bittet (ein Befehl, eine Dateiänderung), erscheinen „Erlauben“ und „Ablehnen“ in der Mitteilung und in der Sitzungszeile. Claudes eigener Dialog bleibt auch – es gilt die Antwort, die zuerst kommt. Im Auto-Modus fragt Claude selten. Steht bei den Hooks „Aktualisierung nötig“, klicken Sie „Erfassung aktualisieren“."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "When Claude asks for permission (a command, a file edit), «Allow» and «Deny» appear in the notification and in the session row. Claude’s own dialog stays too — whichever answer comes first applies. In auto mode Claude rarely asks. If hooks say «update needed», press «Update Tracking»."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cuando Claude pide permiso (un comando, editar un archivo), aparecen «Permitir» y «Rechazar» en la notificación y en la fila de la sesión. El diálogo de Claude también sigue ahí: vale la respuesta que llegue primero. En modo auto Claude pregunta poco. Si los hooks dicen «hay que actualizar», pulsa «Actualizar el seguimiento»."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quand Claude demande une autorisation (une commande, une modification de fichier), « Autoriser » et « Refuser » apparaissent dans la notification et la ligne de la session. La boîte de dialogue de Claude reste aussi : la première réponse l’emporte. En mode auto, Claude demande rarement. Si les hooks indiquent « mise à jour nécessaire », cliquez « Mettre à jour le suivi »."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Saat Claude meminta izin (perintah, edit file), «Izinkan» dan «Tolak» muncul di notifikasi dan baris sesi. Dialog Claude sendiri tetap ada — jawaban yang datang lebih dulu yang berlaku. Dalam mode auto Claude jarang bertanya. Jika hook bertuliskan «perlu diperbarui», tekan «Perbarui pelacakan»."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quando Claude chiede un permesso (un comando, una modifica a un file), «Consenti» e «Rifiuta» compaiono nella notifica e nella riga della sessione. Anche la finestra di Claude resta: vale la risposta che arriva prima. In modalità auto Claude chiede di rado. Se gli hook dicono «serve un aggiornamento», premi «Aggiorna il monitoraggio»."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude が許可を求めると（コマンドやファイル編集）、通知とセッションの行に「許可」と「拒否」が表示されます。Claude 自身のダイアログも残り、先に届いた回答が適用されます。auto モードでは Claude はあまり尋ねません。hooks に「更新が必要」と出ていたら「追跡を更新」を押してください。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude가 권한을 요청하면(명령 실행, 파일 편집) 알림과 세션 행에 «허용»과 «거부»가 나타납니다. Claude 자체 대화 상자도 그대로 있으며, 먼저 온 응답이 적용됩니다. auto 모드에서는 Claude가 거의 묻지 않습니다. hooks에 «업데이트 필요»가 표시되면 «추적 업데이트»를 누르세요."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gdy Claude prosi o zgodę (polecenie, edycja pliku), w powiadomieniu i wierszu sesji pojawiają się „Zezwól” i „Odrzuć”. Okno Claude też zostaje — liczy się odpowiedź, która przyjdzie pierwsza. W trybie auto Claude pyta rzadko. Jeśli przy hookach jest „wymaga aktualizacji”, kliknij „Zaktualizuj śledzenie”."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quando o Claude pede permissão (um comando, editar um arquivo), «Permitir» e «Recusar» aparecem na notificação e na linha da sessão. O diálogo do Claude continua lá — vale a resposta que chegar primeiro. No modo auto o Claude pergunta pouco. Se os hooks disserem «precisa atualizar», toque em «Atualizar acompanhamento»."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Коли Claude просить дозвіл (команда, правка файлу), у сповіщенні й у рядку сесії з’являються «Дозволити» і «Відхилити». Діалог Claude теж лишається — діє та відповідь, що надійшла першою. У режимі auto Claude питає рідко. Якщо біля hooks написано «потрібно оновити», натисніть «Оновити відстеження»."
+          }
+        }
+      }
+    },
+    "Отдельным сообщением в Telegram: расход недели по проектам, самые тяжёлые сессии, сколько раз упирался в лимит, итоги фоновых задач.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "في رسالة مستقلة على Telegram: استهلاك الأسبوع حسب المشروع، وأثقل الجلسات، وعدد مرات بلوغ الحد، ونتائج المهام الخلفية."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Als eigene Nachricht in Telegram: Wochenverbrauch nach Projekt, aufwendigste Sitzungen, wie oft das Limit erreicht wurde, Ergebnisse der Hintergrundaufgaben."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A message of its own in Telegram: the week's use by project, the heaviest sessions, how often the limit was hit, background run results."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En un mensaje propio en Telegram: uso de la semana por proyecto, sesiones más pesadas, cuántas veces se llegó al límite y resultados de tareas en segundo plano."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dans un message à part sur Telegram : usage de la semaine par projet, sessions les plus lourdes, nombre de limites atteintes, résultats des tâches en arrière-plan."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sebagai pesan tersendiri di Telegram: pemakaian minggu ini per proyek, sesi terberat, berapa kali mencapai batas, hasil tugas latar belakang."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In un messaggio a parte su Telegram: uso della settimana per progetto, sessioni più pesanti, quante volte si è toccato il limite, esiti delle attività in background."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Telegram の個別メッセージで:プロジェクト別の週の使用量、最も重いセッション、上限に達した回数、バックグラウンドタスクの結果。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Telegram 별도 메시지로: 프로젝트별 주간 사용량, 가장 무거운 세션, 한도에 닿은 횟수, 백그라운드 작업 결과."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Osobną wiadomością w Telegramie: zużycie tygodnia według projektów, najcięższe sesje, ile razy osiągnięto limit, wyniki zadań w tle."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Em uma mensagem própria no Telegram: uso da semana por projeto, sessões mais pesadas, quantas vezes bateu no limite, resultados das tarefas em segundo plano."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Окремим повідомленням у Telegram: витрати тижня за проєктами, найважчі сесії, скільки разів упирався в ліміт, підсумки фонових завдань."
+          }
+        }
+      }
+    },
+    "Нужно разрешение «Универсальный доступ»": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يلزم إذن تسهيلات الاستخدام"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Berechtigung „Bedienungshilfen“ nötig"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Accessibility permission needed"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se necesita el permiso de Accesibilidad"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Autorisation Accessibilité requise"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Perlu izin Aksesibilitas"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Serve il permesso Accessibilità"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アクセシビリティの許可が必要です"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "손쉬운 사용 권한이 필요합니다"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wymagane uprawnienie Dostępność"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "É preciso a permissão de Acessibilidade"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Потрібен дозвіл «Універсальний доступ»"
+          }
+        }
+      }
+    },
+    "Что включено и готовые наборы": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ما هو مفعّل ومجموعات جاهزة"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aktive Module und fertige Sets"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "What’s on, and ready-made sets"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Qué está activo y conjuntos listos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modules actifs et ensembles prêts"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yang aktif dan set siap pakai"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Moduli attivi e set pronti"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "オンのモジュールと既定のセット"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "켜진 모듈과 기본 세트"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Włączone moduły i gotowe zestawy"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O que está ativo e conjuntos prontos"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Що ввімкнено та готові набори"
           }
         }
       }
