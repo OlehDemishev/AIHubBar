@@ -98,7 +98,6 @@ struct BackgroundRunsSection: View {
             Stepper(value: $settings.backgroundTimeLimitMinutes, in: 10...600, step: 10) {
                 IconRow("Лимит времени", systemImage: "timer", value: String(localized: "\(settings.backgroundTimeLimitMinutes) мин"))
             }
-            Toggle("Итог в Telegram", systemImage: "paperplane", isOn: $settings.telegramForBackground)
             Picker("Ночные задачи начинаются в", systemImage: "moon.stars", selection: $settings.nightStartHour) {
                 ForEach(NightQueue.hours, id: \.self) { Text(verbatim: String(format: "%02d:00", $0)).tag($0) }
             }

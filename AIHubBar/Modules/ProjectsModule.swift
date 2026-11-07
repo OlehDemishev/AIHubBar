@@ -16,6 +16,7 @@ extension ModuleDefinition {
         menuBarKinds: [.projectsAlert],
         primaryMenuBarKinds: [.projectsAlert],
         notifications: [.pullRequests],
+        notificationSwitch: .pullRequestAlerts,
         telegram: .pullRequests,
         bringIn: .profilePage,
         keywords: ["Pull requests", "CI"]
@@ -47,8 +48,6 @@ struct PullRequestAlertSection: View {
         @Bindable var settings = settings
         Section {
             Toggle("Уведомлять, когда CI упал или починился и когда PR закрыт", systemImage: "arrow.triangle.pull", isOn: $settings.pullRequestAlerts)
-            Toggle("Дублировать в Telegram", systemImage: "paperplane", isOn: $settings.pullRequestAlertsToTelegram)
-                .disabled(!settings.pullRequestAlerts)
         } header: {
             Text("Pull requests")
         } footer: {

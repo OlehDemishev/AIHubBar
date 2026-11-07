@@ -135,6 +135,11 @@ struct ModuleTile: View {
         .opacity(on ? 1 : 0.6)
         .contentShape(RoundedRectangle(cornerRadius: 12))
         .onTapGesture(perform: open)
+        .focusable()
+        .onKeyPress(keys: [.return, .space]) { _ in
+            open()
+            return .handled
+        }
         .onHover { hovering = $0 }
         .help(kind.summary)
         .accessibilityElement(children: .contain)

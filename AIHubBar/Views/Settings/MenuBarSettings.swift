@@ -5,6 +5,7 @@ import SwiftUI
 struct MenuBarSettings: View {
     @Environment(AppSettings.self) private var settings
     @Environment(UsageStore.self) private var usage
+    @State private var replacing: MenuBarConfig.Preset?
     @Environment(NotchIsland.self) private var island
     @Environment(ProfileStore.self) private var modes
     @State private var sample = true
@@ -46,7 +47,10 @@ struct MenuBarSettings: View {
             Section {
                 Picker("Набор", systemImage: "wand.and.stars", selection: Binding(
                     get: { modes.menuBar.preset },
-                    set: { choose($0) }
+                    set: { preset in
+                        // A ready-made set overwrites what the person arranged by hand.
+                        if modes.menuBar.preset == .custom, preset != .custom { replacing = preset } else { choose(preset) }
+                    }
                 )) {
                     ForEach(MenuBarConfig.Preset.allCases, id: \.self) { Text($0.title).tag($0) }
                 }
@@ -66,6 +70,15 @@ struct MenuBarSettings: View {
             }
         }
         .formStyle(.grouped)
+        .confirmationDialog("Заменить свой порядок элементов?", isPresented: Binding(
+            get: { replacing != nil },
+            set: { if !$0 { replacing = nil } }
+        )) {
+            Button("Заменить", role: .destructive) {
+                if let replacing { choose(replacing) }
+            }
+            Button("Отмена", role: .cancel) {}
+        }
     }
 
     // MARK: Preview

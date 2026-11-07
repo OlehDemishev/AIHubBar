@@ -71,7 +71,7 @@ struct SavedPromptsSection: View {
                 VStack(alignment: .leading, spacing: 4) {
                     HStack {
                         FormField(Text("Название"), text: $prompt.title)
-                        Button(role: .destructive) {
+                        ConfirmedButton(title: "Удалить промпт", message: prompt.title) {
                             settings.savedPrompts.removeAll { $0.id == prompt.id }
                         } label: { Label("Удалить промпт", systemImage: "trash").labelStyle(.iconOnly) }
                         .buttonStyle(.borderless)
@@ -148,6 +148,7 @@ private struct ClaudeAccountsSection: View {
                 try await TerminalLauncher.run(commandLine)
             } catch {
                 AppLog.error("Claude account sign-in: \(error.localizedDescription)")
+                NSAlert(error: error).runModal()
             }
         }
     }

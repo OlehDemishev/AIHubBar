@@ -385,6 +385,7 @@ enum SettingsFiles {
             AppLog.info("Exported \(bundle.format) to \(url.lastPathComponent)")
         } catch {
             AppLog.error("Export failed: \(error.localizedDescription)")
+            NSAlert(error: error).runModal()
         }
     }
 

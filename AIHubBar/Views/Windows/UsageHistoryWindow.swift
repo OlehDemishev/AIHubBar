@@ -67,7 +67,7 @@ struct UsageHistoryWindow: View {
             } else {
                 VStack(alignment: .leading, spacing: 2) {
                     Text("Стоимость").font(.caption).foregroundStyle(.secondary)
-                    Button("Указать цену…") { openSettings(.service(.claude)) }
+                    Button("Указать цену…") { openSettings(.service(.other)) }
                         .buttonStyle(.link)
                         .help("Цена токенов Anthropic: без неё стоимость не считается")
                 }

@@ -483,12 +483,14 @@ extension AppSettings {
     func isOn(_ toggle: NotificationSwitch) -> Bool {
         switch toggle {
         case .resourceAlerts: resourceAlerts
+        case .pullRequestAlerts: pullRequestAlerts
         }
     }
 
     func set(_ toggle: NotificationSwitch, _ on: Bool) {
         switch toggle {
         case .resourceAlerts: resourceAlerts = on
+        case .pullRequestAlerts: pullRequestAlerts = on
         }
     }
 }

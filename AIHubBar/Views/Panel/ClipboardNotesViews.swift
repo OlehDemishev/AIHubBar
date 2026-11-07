@@ -6,6 +6,7 @@ struct ClipboardView: View {
     @AppStorage(StorageKey.collapsedBlocks) private var collapsedRaw = ""
     @State private var query = ""
     @State private var copied: String?
+    @State private var confirmingClear = false
 
     private var shown: [ClipItem] {
         let found = query.isEmpty ? history.items : history.items.filter { $0.text.localizedCaseInsensitiveContains(query) }
@@ -21,11 +22,24 @@ struct ClipboardView: View {
                 }
                 Spacer()
                 if !history.items.isEmpty {
-                    Button("Очистить") { history.clear() }
+                    Button("Очистить") { confirmingClear = true }
                         .buttonStyle(.link)
                         .scaledFont(.caption)
                         .help("Удалить всё, кроме закреплённого")
                 }
+            }
+            if confirmingClear {
+                HStack(spacing: 6) {
+                    Text("Удалить всё, кроме закреплённого").scaledFont(.caption)
+                    Spacer()
+                    Button("Отмена") { confirmingClear = false }
+                    Button("Очистить") {
+                        confirmingClear = false
+                        history.clear()
+                    }
+                    .buttonStyle(.borderedProminent)
+                }
+                .controlSize(.small)
             }
             if !PanelBlock.collapsed(in: collapsedRaw).contains(.clipboard) {
                 if history.items.isEmpty {
@@ -52,6 +66,10 @@ struct ClipboardView: View {
             Button {
                 history.copy(item)
                 copied = item.id
+                Task {
+                    try? await Task.sleep(for: .seconds(2))
+                    if copied == item.id { copied = nil }
+                }
             } label: {
                 Text(item.text.replacingOccurrences(of: "\n", with: " ⏎ "))
                     .lineLimit(1)
@@ -95,7 +113,8 @@ struct NotesView: View {
                     .help("Открыть в редакторе")
                 Button { confirmingTrash = true } label: { Label("В корзину", systemImage: "trash").labelStyle(.iconOnly) }
                     .help("В корзину")
-                    .disabled(notes.selected == nil)
+                    // Folded, the question under the note would not be seen.
+                    .disabled(notes.selected == nil || PanelBlock.collapsed(in: collapsedRaw).contains(.notes))
             }
             .buttonStyle(.borderless)
             if !PanelBlock.collapsed(in: collapsedRaw).contains(.notes) {
