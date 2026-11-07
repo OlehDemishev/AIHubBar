@@ -42,6 +42,10 @@ struct MenuPanelView: View {
 
     /// Header, search and a margin under the panel, at the normal text size.
     private static let pinnedHeight: CGFloat = 76
+    /// Most of the 8 pt above the first card (the search keeps 2), where scrolled cards fade out.
+    private static let scrollFade: CGFloat = 6
+    /// Under the header and the search on glass: the cards' own colour (white in light, dark grey in dark).
+    private static let headerTint = Color(nsColor: .controlBackgroundColor).opacity(0.55)
 
     /// The blocks scroll once the panel would pass the bottom of its screen; header and search stay.
     private var blocksMaxHeight: CGFloat {
@@ -71,14 +75,19 @@ struct MenuPanelView: View {
                     if results.indices.contains(searchSelection) { activate(results[searchSelection]) }
                 }
                 .onChange(of: query) { searchSelection = 0 }
-                .padding(.bottom, 8)
+                .padding(.bottom, query.isEmpty ? 2 : 8)
                 .revealed(isShown, step: 0, reduceMotion: calm)
             }
             // Clear glass under dark text or light text over the opposite window can't be read: the cards' tint here too.
+            // The colour of the cards rather than the window's grey, fading out at the bottom: no slab with an edge.
             .background {
                 if drawsGlass {
                     UnevenRoundedRectangle(topLeadingRadius: 16, topTrailingRadius: 16, style: .continuous)
-                        .fill(Color(nsColor: .windowBackgroundColor).opacity(0.62))
+                        .fill(LinearGradient(stops: [
+                            .init(color: Self.headerTint, location: 0),
+                            .init(color: Self.headerTint, location: 0.6),
+                            .init(color: Self.headerTint.opacity(0), location: 1),
+                        ], startPoint: .top, endPoint: .bottom))
                 }
             }
 
@@ -94,8 +103,17 @@ struct MenuPanelView: View {
                     ScrollView {
                         blocks
                             .panelGlassGroup()
+                            .padding(.top, Self.scrollFade)
                     }
-                    .clipped()
+                    // With the search's 2 pt, the same 8 pt above the first card as between cards; scrolled cards fade out
+                    // there instead of being cut at a hard line.
+                    .mask {
+                        VStack(spacing: 0) {
+                            LinearGradient(colors: [.clear, .black], startPoint: .top, endPoint: .bottom)
+                                .frame(height: Self.scrollFade)
+                            Color.black
+                        }
+                    }
                     .scrollBounceBehavior(.basedOnSize)
                     .frame(maxHeight: blocksMaxHeight)
                     .fixedSize(horizontal: false, vertical: true)
