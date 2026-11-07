@@ -65,7 +65,7 @@ struct PanelBuilder: View {
                             }
                             .fixedSize()
                         }
-                        Footnote(text: String(localized: "Здесь только включённые модули. Остальные — на странице «Модули»; что показывает модуль в каждом профиле — «Профили»."))
+                        Footnote(text: String(localized: "Здесь только включённые модули. Остальные — на странице «Модули»."))
                     }
                     PanelSketch(modules: visible(mode).filter(\.shown).map(\.kind))
                         .frame(width: 236)

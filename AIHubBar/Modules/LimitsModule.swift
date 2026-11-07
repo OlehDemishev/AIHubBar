@@ -108,7 +108,7 @@ struct LimitSection: View {
                             .foregroundStyle(summarySent ? Color.secondary : Color.orange)
                     }
                 }
-                Text("Своим сообщением, через бота ежедневного отчёта: расход недели по проектам, самые тяжёлые сессии, сколько раз упирался в лимит, итоги фоновых задач.")
+                Text("Отдельным сообщением в Telegram: расход недели по проектам, самые тяжёлые сессии, сколько раз упирался в лимит, итоги фоновых задач.")
                     .font(.caption)
                     .foregroundStyle(.secondary)
                     .fixedSize(horizontal: false, vertical: true)
@@ -126,7 +126,7 @@ struct LimitSection: View {
         } header: {
             Text("Лимиты подписки")
         } footer: {
-            Footnote(text: String(localized: "Данные — с того же адреса, что использует Claude Code (токен читается из связки ключей «Claude Code-credentials» и нигде не сохраняется). Уведомление — один раз на окно сессии/недели при пересечении порога и когда лимит восстановился. Значения пишутся в ~/Library/Application Support/ClaudePult/usage.json. Что показывать в строке меню — во вкладке «Строка меню»."))
+            Footnote(text: String(localized: "Данные — с того же адреса, что использует Claude Code (токен читается из связки ключей «Claude Code-credentials» и нигде не сохраняется). Уведомление — один раз на окно сессии/недели при пересечении порога и когда лимит восстановился. Значения пишутся в ~/Library/Application Support/ClaudePult/usage.json."))
         }
         .onAppear { thresholdsText = settings.limitThresholds.map(String.init).joined(separator: ", ") }
         .onDisappear(perform: applyThresholds)

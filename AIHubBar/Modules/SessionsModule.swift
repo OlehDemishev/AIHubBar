@@ -9,7 +9,7 @@ extension ModuleDefinition {
         group: .ai,
         symbol: "bubble.left.and.text.bubble.right",
         title: String(localized: "Сессии агентов"),
-        summary: String(localized: "Сессии Claude Code на этом Маке и фоновые задачи. Включается на этой странице."),
+        summary: String(localized: "Сессии Claude Code на этом Маке и фоновые задачи."),
         tagline: String(localized: "Claude Code, фоновые задачи, очередь"),
         isBuiltIn: true,
         places: ModulePlace.allCases,
@@ -73,7 +73,7 @@ struct SessionSection: View {
                     .fixedSize(horizontal: false, vertical: true)
             }
             Toggle("Отвечать на запросы разрешений из уведомлений и панели", systemImage: "hand.raised", isOn: $settings.approvalsFromClaudePult)
-            Text("Когда Claude просит разрешение (команда, правка файла), в уведомлении и в строке сессии появляются «Разрешить» и «Отклонить». Диалог Claude при этом тоже на месте — работает тот ответ, что пришёл первым. В режиме auto Claude спрашивает редко. Если у hooks написано «нужно обновить», нажмите «Обновить hooks».")
+            Text("Когда Claude просит разрешение (команда, правка файла), в уведомлении и в строке сессии появляются «Разрешить» и «Отклонить». Диалог Claude при этом тоже на месте — работает тот ответ, что пришёл первым. В режиме auto Claude спрашивает редко. Если у отслеживания написано «нужно обновить», нажмите «Обновить отслеживание».")
                 .font(.caption)
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)

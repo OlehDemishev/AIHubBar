@@ -56,7 +56,7 @@ enum SettingsPane: Hashable, Sendable, RawRepresentable {
         switch self {
         case .general: String(localized: "Запуск, уведомления, Telegram и обновления")
         case .modes: String(localized: "Наборы проектов, модулей и команд")
-        case .modules: String(localized: "Что включено — плитками и готовыми наборами")
+        case .modules: String(localized: "Что включено и готовые наборы")
         case .panel: String(localized: "Какие блоки показывать и в каком порядке")
         case .appearance: String(localized: "Тема, фон и размер текста панели")
         case .menuBar: String(localized: "Что показывать рядом со значком")

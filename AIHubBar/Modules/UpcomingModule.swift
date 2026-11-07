@@ -58,7 +58,7 @@ struct ReminderSection: View {
         } header: {
             Text("Напоминания")
         } footer: {
-            Footnote(text: String(localized: "Даты — из проект.md (дедлайн, публикация) и контент-план.md у профилей с календарём (вкладка «Профили»)."))
+            Footnote(text: String(localized: "Даты — из проект.md (дедлайн, публикация) и контент-план.md у профилей с календарём."))
         }
     }
 }

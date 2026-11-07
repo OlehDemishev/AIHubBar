@@ -5,13 +5,13 @@
 **Updated:** 2026-11-07
 
 **Now:**
-- UI audit of 0.7.3: permissions and the panel's frame fixed; Settings next (docs/specs/AUDIT-ui.md)
+- UI audit of 0.7.3: permissions, the panel's frame, Settings rows and texts fixed; the island's wording and state next (docs/specs/AUDIT-ui.md)
 - Telegram: Worker deployed at https://aihubbar-telegram.oleh-demishev.workers.dev (new bot, old bots deleted by Oleh); the app points at it — pairing and a live check next
 - merged 2026-11-06: #262 donations («Поддержать проект» in Settings → General, site/support.html with Ko-fi, GitHub Sponsors and Buy Me a Coffee; the app button reaches people with the next release)
 - merged 2026-11-03: #251 menu bar ☕ follows the «Не спать» switch, #248 «Не спать» on/off in the menu bar, #241 Codex states, #240 quick command shortcuts, #238 «Быстрый запрос», #236 content spec, #242 «Telegram» stage 1, #244 menu at the bottom, #246 shared bot (Worker not deployed yet), #247 desktop CI off for Mac string changes, #249 the bot's menu set up by each person, #252 stage 2 (sessions, requests, limits), #254 stage 3 (tasks and runs), #255 stage 4 (settings in the bot), #256 Mini App
 
 **Next:**
-- UI fixes in the audit's order: one settings row, island wording, one text pass
+- UI fixes in the audit's order: the island (22, 31, 33), then Settings leftovers (25, 30)
 - check on the Air: the update through Sparkle across the certificate change, then the island at the real notch
 - promotion (docs/LAUNCH.md): demo recording, then r/ClaudeAI, the lists, r/macapps; Show HN and Product Hunt after the Developer ID
 - Telegram: pair the Mac mini with the shared bot, try the bot and the Mini App live
@@ -35,6 +35,12 @@
 - MacBook Air: update to 0.6.0 through Sparkle (Settings → General → Updates) and check the island at the real notch
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-07 — Settings texts (branch `fix/settings-texts`)
+
+Done: audit items 23, 24 and part of 26. Footnotes point to pages that exist («Панель», «Лимиты AI») instead of tabs and old routes. Codex and Copilot use the same words as Claude Code: «Отслеживание сессий», «Включить отслеживание», «Выключить отслеживание». Long module subtitles are cut to what fits two lines, and the owner's project names are gone from the sample and the widget gallery. 18 strings changed in 12 languages.
+Checked: scripts/check.sh passed.
+Left: `.claudepult` and «ClaudePult Notes» stay: they are a real file type and folder. Technical footnotes keep the word hook. Audit items 22, 25 and 30 are still open.
 
 ## 2026-11-07 — Settings rows and sidebar (branch `fix/settings-rows`)
 

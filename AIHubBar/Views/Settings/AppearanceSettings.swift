@@ -34,7 +34,7 @@ struct AppearanceSettings: View {
 
             Section {
             } footer: {
-                Footnote(text: String(localized: "Какие блоки показывать в панели и в каком порядке — у каждого профиля: вкладка «Профили» → «Панель»."))
+                Footnote(text: String(localized: "Какие блоки показывать и в каком порядке — на странице «Панель»."))
             }
 
             Section {
@@ -65,7 +65,7 @@ struct TextSizePreview: View {
     var body: some View {
         IconRow("Пример", systemImage: "textformat") {
             VStack(alignment: .trailing, spacing: 2) {
-                Text("Cantero · claude/feature")
+                Text(verbatim: "my-app · feature/login")
                     .font(ScaledFont.font(.body, scale: scale, weight: .medium))
                 Text("22 файла · 15 мин назад")
                     .font(ScaledFont.font(.caption, scale: scale))

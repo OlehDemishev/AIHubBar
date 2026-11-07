@@ -136,7 +136,7 @@ private struct ThresholdsSection: View {
         } header: {
             Text("Уведомления о лимитах")
         } footer: {
-            Footnote(text: String(localized: "Один раз на окно лимита, когда порог пройден. Общие пороги — в «Модули» → «Лимиты»."))
+            Footnote(text: String(localized: "Один раз на окно лимита, когда порог пройден. Общие пороги — на странице «Лимиты AI»."))
         }
         .onAppear { text = Self.list(settings.thresholds(for: service)) }
         .onDisappear { if mode == .own { apply() } }
@@ -212,9 +212,7 @@ private struct AgentStatesSection: View {
         }
     }
 
-    private var label: String {
-        agent == .codex ? String(localized: "Hook AI Hub Bar для Codex") : String(localized: "Hook AI Hub Bar для Copilot")
-    }
+    private var label: String { String(localized: "Отслеживание сессий") }
 
     private var header: String {
         agent == .codex ? String(localized: "Состояние сессий Codex") : String(localized: "Состояние сессий Copilot")
@@ -231,14 +229,14 @@ private struct AgentStatesSection: View {
             LabeledContent(label, value: statusText)
             HStack {
                 if status != .installed {
-                    Button(status == .outdated ? String(localized: "Обновить hook") : String(localized: "Установить hook")) {
+                    Button(status == .outdated ? String(localized: "Обновить отслеживание") : String(localized: "Включить отслеживание")) {
                         perform { try hooks.install() }
                     }
                     .help(agent == .codex ? String(localized: "Добавить записи AI Hub Bar в ~/.codex/hooks.json")
                         : String(localized: "Записать файл ~/.copilot/hooks/aihubbar.json"))
                 }
                 if status != .notInstalled {
-                    Button("Снять hook") { perform { try hooks.uninstall() } }
+                    Button("Выключить отслеживание") { perform { try hooks.uninstall() } }
                         .help(String(localized: "Убрать hook AI Hub Bar; другие hooks агента остаются"))
                 }
             }

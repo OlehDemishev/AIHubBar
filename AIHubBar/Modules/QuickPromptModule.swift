@@ -9,7 +9,7 @@ extension ModuleDefinition {
         group: .ai,
         symbol: "text.bubble",
         title: String(localized: "Быстрый запрос"),
-        summary: String(localized: "Горячая клавиша в любом приложении открывает окно: задача, проект и агент — и она уходит в фон или в новое окно Терминала. ⌘↩ — отправить, Esc — закрыть."),
+        summary: String(localized: "Горячая клавиша в любом приложении открывает окно: задача, проект и агент — и она уходит в фон или в новое окно Терминала."),
         tagline: String(localized: "Задача агенту из любого приложения"),
         isPanelBlock: false,
         places: [],

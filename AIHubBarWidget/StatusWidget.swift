@@ -24,8 +24,8 @@ struct WidgetStatusData: Decodable {
         (try? Data(contentsOf: fileURL)).flatMap { try? JSONDecoder().decode(WidgetStatusData.self, from: $0) }
     }
 
-    static let sample = WidgetStatusData(waiting: ["Survikon"], waitingSessions: [Session(id: "sample", project: "Survikon")], running: 2,
-                                         problems: ["Ambo", "Cantero"], keepAwake: true, keepAwakeInstalled: true)
+    static let sample = WidgetStatusData(waiting: ["my-app"], waitingSessions: [Session(id: "sample", project: "my-app")], running: 2,
+                                         problems: ["site", "api"], keepAwake: true, keepAwakeInstalled: true)
 
     /// A click on the small widget: the one waiting session, otherwise the search with every session and project.
     var mainLink: URL {
