@@ -338,7 +338,7 @@ final class AppContainer {
         data.sessionResetsAt = usage.snapshot?.session?.resetsAt
         if case let .runsOutAt(date) = usage.forecast { data.forecastRunsOut = date }
         if modes.menuBar.element(.disk).enabled {
-            data.diskFreeBytes = store.report?.diskFreeBytes ?? DiskSpace.freeBytes()
+            data.diskFreeBytes = monitor.snapshot?.diskFree ?? DiskSpace.freeBytes()
         }
         data.deadline = calendar.nearest().map { CalendarText.menuBar($0) }
         data.cpu = monitor.snapshot?.cpu

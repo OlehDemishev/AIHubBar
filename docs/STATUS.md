@@ -5,13 +5,13 @@
 **Updated:** 2026-11-07
 
 **Now:**
-- UI audit of 0.7.3 done, fixes not started: docs/specs/AUDIT-ui.md
+- UI audit of 0.7.3: permissions and the panel's frame fixed; Settings next (docs/specs/AUDIT-ui.md)
 - Telegram: Worker deployed at https://aihubbar-telegram.oleh-demishev.workers.dev (new bot, old bots deleted by Oleh); the app points at it — pairing and a live check next
 - merged 2026-11-06: #262 donations («Поддержать проект» in Settings → General, site/support.html with Ko-fi, GitHub Sponsors and Buy Me a Coffee; the app button reaches people with the next release)
 - merged 2026-11-03: #251 menu bar ☕ follows the «Не спать» switch, #248 «Не спать» on/off in the menu bar, #241 Codex states, #240 quick command shortcuts, #238 «Быстрый запрос», #236 content spec, #242 «Telegram» stage 1, #244 menu at the bottom, #246 shared bot (Worker not deployed yet), #247 desktop CI off for Mac string changes, #249 the bot's menu set up by each person, #252 stage 2 (sessions, requests, limits), #254 stage 3 (tasks and runs), #255 stage 4 (settings in the bot), #256 Mini App
 
 **Next:**
-- UI fixes in the audit's order: permission buttons and rows, the panel's scroll and Esc, one settings row, island wording, one text pass
+- UI fixes in the audit's order: one settings row, island wording, one text pass
 - check on the Air: the update through Sparkle across the certificate change, then the island at the real notch
 - promotion (docs/LAUNCH.md): demo recording, then r/ClaudeAI, the lists, r/macapps; Show HN and Product Hunt after the Developer ID
 - Telegram: pair the Mac mini with the shared bot, try the bot and the Mini App live
@@ -20,7 +20,7 @@
 
 **Needs Oleh:**
 - free disk space: 0.1–7 GB free on the Mac mini on 2026-11-07, swap 13 GB; `~/.colima` holds 25 GB, Claude's VM 10 GB
-- say which UI fixes from docs/specs/AUDIT-ui.md to start with
+- after a build with these fixes: allow AI Hub Bar in Accessibility, then press Esc in the open panel and scroll it with the trackpad
 - after 0.7.2: System Settings → Privacy & Security → Accessibility: allow AI Hub Bar again, then press ⌃⌥B and run a command in Terminal once
 - 0.7.0 live checks: press ⌃⌥B, right-click a session row; with a second account: Settings → Claude Code → «Другие аккаунты Claude»
 - promotion: decide on the Apple Developer ID (paid yearly; needed before Show HN and Homebrew), record a 20–30 s demo, post the drafts in docs/LAUNCH.md from your accounts
@@ -35,6 +35,12 @@
 - MacBook Air: update to 0.6.0 through Sparkle (Settings → General → Updates) and check the island at the real notch
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-07 — The panel's frame (branch `fix/panel-frame`)
+
+Done: audit items 7–12. The blocks scroll under a fixed header and search and stop at the bottom of the panel's own screen; the project list no longer scrolls on its own. Week days read «Пн Вт Ср…». «Команды» and the menu bar show the same live free space as «Ресурсы Mac». Folded cards are one height, block titles are one step larger. Esc closes the panel through the same real click as ⌃⌥B.
+Checked: scripts/check.sh passed; installed and looked at the live panel: 1041 pt on a 1080 pt screen with everything open, «Не спать» reached through the scroll bar, equal folded cards, two fake requests with whole commands and buttons under them.
+Left: posted wheel events did not move the scroll view, so a real trackpad scroll is unchecked. Esc needs the Accessibility permission (no call closes a `MenuBarExtra`: window close breaks the next click, resigning key or active does nothing) and was not pressed by hand. The island's button order and guard were not seen live.
 
 ## 2026-11-07 — Permission buttons you can trust (branch `fix/permission-safety`)
 

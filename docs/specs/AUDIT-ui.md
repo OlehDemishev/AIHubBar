@@ -17,6 +17,8 @@ Items 1–5 fixed in branch `fix/permission-safety`.
 
 ## P1: the panel
 
+Items 7–12 fixed in branch `fix/panel-frame`; Esc (8) needs the Accessibility permission.
+
 7. **The panel runs off the screen and cannot scroll.** With all blocks open the window was 1170 pt on a 1080 pt screen: the end of «Ресурсы Mac» and all of «Не спать» could not be reached. Only the project list scrolls; `maxListHeight` assumes 700 pt for everything else and uses `NSScreen.main` (`MenuPanelView.swift:42`). On the 13-inch Air this comes much sooner. Fix: one outer scroll capped by the panel's own screen, header and search pinned. *live*
 8. **Esc does not close the panel.** Search takes focus on open, and `onExitCommand` calls `onCancel`, which the panel never passes (`PanelSearchView.swift:84`, `MenuPanelView.swift:64`). *live*
 9. **Week days are one letter: П В С Ч П С В П.** Three letters repeat, so Monday and Friday read the same (`weekday(.narrow)`, `LimitsView.swift:403`). Use «Пн Вт Ср…». *live*

@@ -400,7 +400,8 @@ private struct WeekStrip: View {
                         RoundedRectangle(cornerRadius: 3)
                             .fill(day.isToday ? Color.accentColor : Color.primary.opacity(0.35))
                             .frame(width: 16, height: max(2, 22 * day.percent / top))
-                        Text(day.date.formatted(.dateTime.weekday(.narrow)))
+                        // Two letters: one repeats in most languages (Russian П, В and С, English T and S).
+                        Text(day.date.formatted(.dateTime.weekday(.short)).localizedCapitalized)
                             .scaledFont(.caption2)
                             .foregroundStyle(day.isToday ? .primary : .secondary)
                     }

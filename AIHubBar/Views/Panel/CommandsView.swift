@@ -3,7 +3,7 @@ import SwiftUI
 /// «Общие команды» block and the free disk space (docs/specs/SPEC.md §2.5).
 struct CommandsView: View {
     @Environment(CommandStore.self) private var commands
-    @Environment(ProjectStore.self) private var store
+    @Environment(SystemMonitor.self) private var monitor
     @Environment(\.openWindow) private var openWindow
     @State private var confirmCleanup = false
     @AppStorage(StorageKey.collapsedBlocks) private var collapsedRaw = ""
@@ -60,7 +60,8 @@ struct CommandsView: View {
 
     @ViewBuilder
     private var disk: some View {
-        if let bytes = store.report?.diskFreeBytes {
+        // The live figure, the one «Ресурсы Mac» shows; the report's is as old as the report.
+        if let bytes = monitor.snapshot?.diskFree ?? DiskSpace.freeBytes() {
             let low = bytes < CommandStore.lowDiskBytes
             Label("Свободно \(CommandStore.diskText(bytes))", systemImage: low ? "exclamationmark.triangle.fill" : "internaldrive")
                 .scaledFont(.caption, weight: low ? .semibold : .regular)
