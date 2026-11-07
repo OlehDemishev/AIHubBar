@@ -18,7 +18,7 @@
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/specs/SPEC-windows.md §9, stage 2–3 leftovers)
 
 **Needs Oleh:**
-- free disk space: 0.1–7 GB free on the Mac mini on 2026-11-07, swap 13 GB; `~/.colima` holds 25 GB, Claude's VM 10 GB
+- free disk space: on 2026-11-07 about 20 GB free after caches and old builds were removed; `~/.colima` holds 37 GB and its Docker disk needs a repair (`colima stop && colima start`)
 - System Settings → Accessibility: remove AI Hub Bar and add it again (the switch is on, the app sees no access), then press Esc in the open panel and scroll it with the trackpad
 - after 0.7.2: System Settings → Privacy & Security → Accessibility: allow AI Hub Bar again, then press ⌃⌥B and run a command in Terminal once
 - 0.7.0 live checks: press ⌃⌥B, right-click a session row; with a second account: Settings → Claude Code → «Другие аккаунты Claude»
@@ -34,6 +34,12 @@
 - MacBook Air: update to 0.6.0 through Sparkle (Settings → General → Updates) and check the island at the real notch
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-07 — overnight readiness check (branch `chore/status-overnight-check`)
+
+Done: no code changes; 0.7.4 was already out with the UI audit fixes. Removed old local release folders 0.7.0–0.7.3 (all on GitHub Releases), `build/DerivedData`, `build/release/DerivedData` and the merged worktree `feat-quick-prompt-de3c78` with its branch; `build/` went from 2.3 GB to 64 MB, `build/release/0.7.4` kept.
+Checked: `scripts/check.sh` green on `main` 90e1a51: strings check, desktop strings, relay `node --test` 15/15, `xcodebuild test` with `SWIFT_TREAT_WARNINGS_AS_ERRORS=YES`.
+Left: the Sparkle update across the certificate change and the notch island are still to be checked on the Air; the rest of «Needs Oleh» unchanged.
 
 ## 2026-11-07 — Release 0.7.4 (branch `chore/status-release-0.7.4`)
 
