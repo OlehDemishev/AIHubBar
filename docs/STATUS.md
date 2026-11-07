@@ -5,13 +5,13 @@
 **Updated:** 2026-11-07
 
 **Now:**
-- UI audit of 0.7.3 done (docs/specs/AUDIT-ui.md); waiting for Oleh's go on 0.7.4
+- final UI pass found F1–F9 (docs/specs/AUDIT-ui.md), not fixed yet; 0.7.4 waits for them
 - Telegram: Worker deployed at https://aihubbar-telegram.oleh-demishev.workers.dev (new bot, old bots deleted by Oleh); the app points at it — pairing and a live check next
 - merged 2026-11-06: #262 donations («Поддержать проект» in Settings → General, site/support.html with Ko-fi, GitHub Sponsors and Buy Me a Coffee; the app button reaches people with the next release)
 - merged 2026-11-03: #251 menu bar ☕ follows the «Не спать» switch, #248 «Не спать» on/off in the menu bar, #241 Codex states, #240 quick command shortcuts, #238 «Быстрый запрос», #236 content spec, #242 «Telegram» stage 1, #244 menu at the bottom, #246 shared bot (Worker not deployed yet), #247 desktop CI off for Mac string changes, #249 the bot's menu set up by each person, #252 stage 2 (sessions, requests, limits), #254 stage 3 (tasks and runs), #255 stage 4 (settings in the bot), #256 Mini App
 
 **Next:**
-- release 0.7.4 with the UI fixes (scripts/release.sh, Oleh's go)
+- fix F1–F9, then release 0.7.4 (scripts/release.sh, Oleh's go)
 - check on the Air: the update through Sparkle across the certificate change, then the island at the real notch
 - promotion (docs/LAUNCH.md): demo recording, then r/ClaudeAI, the lists, r/macapps; Show HN and Product Hunt after the Developer ID
 - Telegram: pair the Mac mini with the shared bot, try the bot and the Mini App live
@@ -20,7 +20,7 @@
 
 **Needs Oleh:**
 - free disk space: 0.1–7 GB free on the Mac mini on 2026-11-07, swap 13 GB; `~/.colima` holds 25 GB, Claude's VM 10 GB
-- after a build with these fixes: allow AI Hub Bar in Accessibility, then press Esc in the open panel and scroll it with the trackpad
+- System Settings → Accessibility: remove AI Hub Bar and add it again (the switch is on, the app sees no access), then press Esc in the open panel and scroll it with the trackpad
 - after 0.7.2: System Settings → Privacy & Security → Accessibility: allow AI Hub Bar again, then press ⌃⌥B and run a command in Terminal once
 - 0.7.0 live checks: press ⌃⌥B, right-click a session row; with a second account: Settings → Claude Code → «Другие аккаунты Claude»
 - promotion: decide on the Apple Developer ID (paid yearly; needed before Show HN and Homebrew), record a 20–30 s demo, post the drafts in docs/LAUNCH.md from your accounts
@@ -35,6 +35,12 @@
 - MacBook Air: update to 0.6.0 through Sparkle (Settings → General → Updates) and check the island at the real notch
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-07 — Final UI pass (branch `docs/ui-final-pass`)
+
+Done: a full look at build 674, recorded as F1–F9 in docs/specs/AUDIT-ui.md. The main one: on glass, the default background, scrolled cards cover the search and the header. No code changed.
+Checked: 28 Settings pages in Russian light and German dark, the minimum window, the panel in four modes, the ⋯ menu, search, the delete dialog, six windows, the pill's banner.
+Left: F1–F9 are open. Keys posted by a script don't reach the app, so ↑ ↓, Esc and typing in Settings search are unchecked; the calendar and CLAUDE.md windows, widgets, a real notch and VoiceOver by ear too.
 
 ## 2026-11-07 — Settings and windows details (branch `fix/settings-details`)
 
