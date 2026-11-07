@@ -206,9 +206,7 @@ private struct AgentStatesSection: View {
     /// One hook here, not Claude's «hooks».
     private var statusText: String {
         switch status {
-        case .installed: String(localized: "установлен")
-        case .notInstalled: String(localized: "не установлен")
-        case .outdated: status.title
+        case .installed, .notInstalled, .outdated: status.title
         }
     }
 
@@ -220,8 +218,8 @@ private struct AgentStatesSection: View {
 
     private var footnote: String {
         agent == .codex
-            ? String(localized: "С hook сессии Codex CLI видны в «Сессиях» как у Claude: работает, ждёт разрешения, готово — и «ждёт» приходит уведомлением. Записи AI Hub Bar добавляются в ~/.codex/hooks.json (перед изменением — резервная копия рядом), другие hooks Codex не трогаются. Codex запускает новый hook только после проверки: один раз откройте codex, введите /hooks и доверьте hooks AI Hub Bar. Подхватывается новыми сессиями Codex.")
-            : String(localized: "С hook сессии Copilot CLI видны в «Сессиях» как у Claude: работает, ждёт разрешения или ответа, готово — и «ждёт» приходит уведомлением. Это отдельный файл ~/.copilot/hooks/aihubbar.json; другие hooks Copilot не трогаются. Подхватывается новыми сессиями Copilot.")
+            ? String(localized: "С отслеживанием сессии Codex CLI видны в «Сессиях» как у Claude: работает, ждёт разрешения, готово — и «ждёт» приходит уведомлением. Записи AI Hub Bar добавляются в ~/.codex/hooks.json (перед изменением — резервная копия рядом), другие hooks Codex не трогаются. Codex запускает новый hook только после проверки: один раз откройте codex, введите /hooks и доверьте hooks AI Hub Bar. Подхватывается новыми сессиями Codex.")
+            : String(localized: "С отслеживанием сессии Copilot CLI видны в «Сессиях» как у Claude: работает, ждёт разрешения или ответа, готово — и «ждёт» приходит уведомлением. Это отдельный файл ~/.copilot/hooks/aihubbar.json; другие hooks Copilot не трогаются. Подхватывается новыми сессиями Copilot.")
     }
 
     var body: some View {
@@ -464,7 +462,6 @@ private struct ProviderRow: View {
                     Text(model).font(.caption).foregroundStyle(.secondary)
                 }
             }
-            .buttonStyle(.borderless)
             .controlSize(.small)
             if let error {
                 Text(error).font(.caption).foregroundStyle(.red)

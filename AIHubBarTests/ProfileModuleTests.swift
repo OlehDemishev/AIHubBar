@@ -165,4 +165,12 @@ struct ProfileModuleTests {
         #expect(!reloaded.needsAssistant, "an emptied AI Hub Bar doesn't push the assistant on every start")
         #expect(!FileManager.default.fileExists(atPath: dir.appending(path: "\(only.id).json").path))
     }
+
+    @Test func upcomingOnlyWithFolderProjects() {
+        var profile = Profile(name: "git", source: .gitBuiltin(projects: "~/Projects"))
+        profile.calendar = .dates
+        #expect(!profile.normalizedModules(hidden: []).contains { $0.kind == .upcoming })
+        profile.source = .folders("~/Texts")
+        #expect(profile.normalizedModules(hidden: []).contains { $0.kind == .upcoming })
+    }
 }

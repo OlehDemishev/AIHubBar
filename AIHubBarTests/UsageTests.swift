@@ -293,4 +293,10 @@ struct LoginRenewalTests {
         let window = UsageWindow(key: "five_hour", title: "Сессия", utilization: 40, resetsAt: now.addingTimeInterval(-60))
         #expect(UsageText.resetText(window, now: now) == nil)
     }
+
+    @Test func savedTitlesFollowTheLanguage() throws {
+        let json = #"{"key":"five_hour","title":"Sitzung (5 h)","utilization":3}"#
+        let window = try JSONDecoder().decode(UsageWindow.self, from: Data(json.utf8))
+        #expect(window.title == UsageWindow.title(forKey: "five_hour"))
+    }
 }

@@ -3,6 +3,7 @@ import SwiftUI
 /// Settings → «Панель» (SPEC-settings §4): the current profile's modules top to bottom, dragged into order, with a
 /// sketch of the panel beside them.
 struct PanelBuilder: View {
+    @State private var roomy = true
     @Environment(ProfileStore.self) private var modes
     @AppStorage(StorageKey.panelProfile) private var profileID = ""
 
@@ -67,12 +68,16 @@ struct PanelBuilder: View {
                         }
                         Footnote(text: String(localized: "Здесь только включённые модули. Остальные — на странице «Модули»."))
                     }
-                    PanelSketch(modules: visible(mode).filter(\.shown).map(\.kind))
-                        .frame(width: 236)
+                    // On a narrow window the rows need the room; the sketch only repeats them.
+                    if roomy {
+                        PanelSketch(modules: visible(mode).filter(\.shown).map(\.kind))
+                            .frame(width: 236)
+                    }
                 }
                 .padding(.horizontal, 24)
                 .padding(.vertical, 12)
             }
+            .onGeometryChange(for: Bool.self) { $0.size.width >= 660 } action: { roomy = $0 }
         } else {
             ContentUnavailableView("Нет профиля", systemImage: "rectangle.stack",
                                    description: Text("Панель показывает модули профиля. Создайте профиль на странице «Профили»."))
@@ -115,6 +120,7 @@ struct PanelBuilderRow: View {
                 Text(module.kind.title)
                     .font(.system(size: 14))
                     .lineLimit(1)
+                    .fixedSize()
                 ProfileModuleOptions(module: module) { new in
                     set { $0 = new }
                 }

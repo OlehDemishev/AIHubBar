@@ -80,7 +80,7 @@ struct SessionSection: View {
         } header: {
             Text("Сессии Claude Code")
         } footer: {
-            Footnote(text: String(localized: "Hooks добавляются в ~/.claude/settings.json (остальные настройки не трогаются, перед изменением рядом сохраняется копия). Они записывают состояние каждой сессии Claude Code на этом Mac — в Терминале, в приложении Claude, фоновых — чтобы AI Hub Bar показывал их в панели."))
+            Footnote(text: String(localized: "Записи отслеживания добавляются в ~/.claude/settings.json (остальные настройки не трогаются, перед изменением рядом сохраняется копия). Они записывают состояние каждой сессии Claude Code на этом Mac — в Терминале, в приложении Claude, фоновых — чтобы AI Hub Bar показывал их в панели."))
         }
         .onAppear { hooks.refresh() }
     }

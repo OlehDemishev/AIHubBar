@@ -12,7 +12,7 @@ are in each spec and in the journal: `docs/STATUS.md`, older months in `docs/sta
 | [SPEC-ai-services.md](SPEC-ai-services.md) | Claude as one of the AI services, one view for every service | done (stages 1–7); Copilot and Codex states via their hooks (2026-11-03); Antigravity has no reliable «waiting» signal; Cursor CLI left |
 | [SPEC-notch.md](SPEC-notch.md) | the island at the notch | done (stages 1–5); a live VoiceOver walk left |
 | [SPEC-layout.md](SPEC-layout.md) | «Раскладка», automatic keyboard layout switch | done; out of beta in 0.6.0 |
-| [AUDIT-ui.md](AUDIT-ui.md) | UI audit of 0.7.3: 38 findings and an order of work | final pass found F1–F9, not fixed |
+| [AUDIT-ui.md](AUDIT-ui.md) | UI audit of 0.7.3: 38 findings and an order of work | done |
 | [SPEC-settings.md](SPEC-settings.md) | Settings around modules, places, menu bar | done (#201, #203) |
 | [SPEC-content.md](SPEC-content.md) | writing texts with AI: «Тексты» profile, «Версии» module, batch tasks | agreed 2026-11-03, stage 1 next |
 | [SPEC-help.md](SPEC-help.md) | help in the app and on the site | done (#206) |

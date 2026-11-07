@@ -20,8 +20,8 @@ enum HookStatus: Equatable, Sendable {
 
     var title: String {
         switch self {
-        case .notInstalled: String(localized: "не установлены")
-        case .installed: String(localized: "установлены")
+        case .notInstalled: String(localized: "выключено")
+        case .installed: String(localized: "включено")
         case .outdated: String(localized: "нужно обновить")
         }
     }

@@ -321,8 +321,8 @@ private struct SessionsScene: View {
     var body: some View {
         HelpLoop(count: 4, interval: 1.4) { phase in
             VStack(spacing: 6) {
-                row("Cantero", phase == 1 || phase == 2 ? .waiting : .running, asks: phase == 2)
-                row("AIHubBar", .running, asks: false)
+                row("my-app", phase == 1 || phase == 2 ? .waiting : .running, asks: phase == 2)
+                row("api", .running, asks: false)
                 row("site", .done, asks: false)
             }
             .padding(10)
@@ -405,7 +405,7 @@ private struct ServicesScene: View {
 
 /// Projects with their health; one opens to show the branch and its PR.
 private struct ProjectsScene: View {
-    private let projects: [(String, Color)] = [("Cantero", .green), ("AIHubBar", .orange), ("site", .green), ("_daily-report", .red)]
+    private let projects: [(String, Color)] = [("my-app", .green), ("api", .orange), ("site", .green), ("docs", .red)]
 
     var body: some View {
         HelpLoop(count: 3, interval: 1.6) { phase in
@@ -542,7 +542,7 @@ private struct NotchScene: View {
                             if phase == 3 {
                                 HStack(spacing: 6) {
                                     Image(systemName: "hand.raised.fill").foregroundStyle(.orange)
-                                    Text(verbatim: "Cantero · Bash").foregroundStyle(.white)
+                                    Text(verbatim: "my-app · Bash").foregroundStyle(.white)
                                     Spacer()
                                     Text("Разрешить").font(.system(size: 11, weight: .semibold)).foregroundStyle(.white)
                                         .padding(.horizontal, 9).padding(.vertical, 3).background(Capsule().fill(Color.accentColor))
@@ -687,7 +687,7 @@ private struct AlertsScene: View {
 /// A command typed in Terminal and its answer.
 private struct TerminalScene: View {
     private let command = Array("AIHubBar --sessions")
-    private let output = ["● Cantero    running   12 min", "✋ AIHubBar  waiting    3 min", "✓ site       done"]
+    private let output = ["● my-app     running   12 min", "✋ api       waiting    3 min", "✓ site       done"]
 
     var body: some View {
         HelpLoop(count: 6, interval: 0.8) { phase in

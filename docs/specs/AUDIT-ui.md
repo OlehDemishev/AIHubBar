@@ -4,7 +4,7 @@ What was looked at: the live panel on the Mac mini (light, glass, large text, sp
 
 Not seen live: dark theme (see «Testing notes»), the panel with the system background, the island at a real notch, other languages, VoiceOver. Findings marked *code* come from reading the code; *live* means it was also seen on screen.
 
-**State (2026-11-07):** the items below are fixed, the final pass at the end of this file found new ones; 26 keeps `.claudepult`, «ClaudePult Notes» and `_daily-report` for people who have it; 36 keeps bars in the previews.
+**State (2026-11-07):** the items below are fixed, so are F1–F9 of the final pass at the end of this file; 26 keeps `.claudepult`, «ClaudePult Notes» and `_daily-report` for people who have it; 36 keeps bars in the previews.
 
 ## P0: wrong action or lost data
 
@@ -79,7 +79,7 @@ Items 31–33 and 22 fixed in branch `fix/island-state`, plus one found on the w
 
 ## Final pass (2026-11-07, build 674)
 
-Looked at on the installed build: all 28 Settings pages in Russian light and German dark, eight pages at the minimum size, the panel in dark and light on glass and standard, the ⋯ menu, panel search, the delete dialog, usage history, help, island setup, quick prompt, the assistant, the ⌃⌥C window, the pill's banner. Nothing is fixed yet.
+Looked at on the installed build: all 28 Settings pages in Russian light and German dark, eight pages at the minimum size, the panel in dark and light on glass and standard, the ⋯ menu, panel search, the delete dialog, usage history, help, island setup, quick prompt, the assistant, the ⌃⌥C window, the pill's banner. All nine are fixed in branch `fix/final-pass`.
 
 F1. **On glass the scrolled cards cover the search and the header.** Standard background clips them. The glass of `PanelCard` is drawn by the `GlassEffectContainer` around the whole panel, outside the `ScrollView`'s clip. Glass is the default background. Came with the panel scroll (#286).
 F2. **«Ближайшее» is promised and not there.** In a git profile the block is on in «Панель», its preview says «Ничего на 7 дней», the module page ticks «Панель», but the panel draws nothing: `calendar.isActive` needs folders. `Module.swift` and `CalendarStore.swift` use different rules.
