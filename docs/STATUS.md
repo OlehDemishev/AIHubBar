@@ -1,16 +1,17 @@
 # Status
 
 <!-- summary:start -->
-**Stage:** Mac: 0.7.1 published 2026-11-06 (shorter first run, panel polish, usage history, finished sessions, ⌃⌥B, outages, several Claude accounts). Windows/Linux (`desktop/`, Tauri 2): postponed by Oleh 2026-11-02
-**Updated:** 2026-11-06
+**Stage:** Mac: 0.7.2 published 2026-11-07, signed and notarized (Developer ID; before that shorter first run, panel polish, usage history, finished sessions, ⌃⌥B, outages, several Claude accounts). Windows/Linux (`desktop/`, Tauri 2): postponed by Oleh 2026-11-02
+**Updated:** 2026-11-07
 
 **Now:**
-- nothing in progress: 0.7.1 is out with the ⌃⌥B fix
+- nothing in progress: 0.7.2 is out, signed with a Developer ID and notarized
 - Telegram: Worker deployed at https://aihubbar-telegram.oleh-demishev.workers.dev (new bot, old bots deleted by Oleh); the app points at it — pairing and a live check next
 - merged 2026-11-06: #262 donations («Поддержать проект» in Settings → General, site/support.html with Ko-fi, GitHub Sponsors and Buy Me a Coffee; the app button reaches people with the next release)
 - merged 2026-11-03: #251 menu bar ☕ follows the «Не спать» switch, #248 «Не спать» on/off in the menu bar, #241 Codex states, #240 quick command shortcuts, #238 «Быстрый запрос», #236 content spec, #242 «Telegram» stage 1, #244 menu at the bottom, #246 shared bot (Worker not deployed yet), #247 desktop CI off for Mac string changes, #249 the bot's menu set up by each person, #252 stage 2 (sessions, requests, limits), #254 stage 3 (tasks and runs), #255 stage 4 (settings in the bot), #256 Mini App
 
 **Next:**
+- watch that 0.7.1 copies take the 0.7.2 update through Sparkle (first update across the certificate change)
 - promotion (docs/LAUNCH.md): demo recording, then r/ClaudeAI, the lists, r/macapps; Show HN and Product Hunt after the Developer ID
 - Telegram: pair the Mac mini with the shared bot, try the bot and the Mini App live
 - content (docs/specs/SPEC-content.md, agreed): stage 1 — walkthrough of the «Тексты» profile on a sample folder, then «Версии», then batch tasks
@@ -31,6 +32,12 @@
 - MacBook Air: update to 0.6.0 through Sparkle (Settings → General → Updates) and check the island at the real notch
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-07 — Release 0.7.2 (branch `chore/status-release-0.7.2`)
+
+Done: 0.7.2 published (build 646), the first release with a Developer ID and notarization. The release notes say that macOS asks for permissions once more after updating.
+Checked: the DMG downloaded from GitHub passes `spctl` as «Notarized Developer ID», its ticket validates, both appcasts point at 0.7.2, the site no longer mentions Open Anyway, CI on main is green.
+Left: the update from 0.7.1 through Sparkle hasn't been run.
 
 ## 2026-11-07 — Developer ID and notarization (branch `feat/developer-id`)
 
