@@ -58,20 +58,23 @@ struct SessionsView: View {
     /// Finished Claude Code sessions that can be continued.
     var resumable: [Session] = []
     @AppStorage(StorageKey.recentSessionsExpanded) private var showsResumable = false
+    @Environment(LaunchController.self) private var launcher
 
     private var waiting: Int { rows.filter { $0.state == .waiting }.count }
-    private var active: Int { rows.filter { $0.state != .ended }.count }
+    /// Working or waiting: finished rows stay listed for a while and aren't counted.
+    private var active: Int { rows.filter { $0.state == .running || $0.state == .waiting }.count }
     @AppStorage(StorageKey.collapsedBlocks) private var collapsedRaw = ""
 
     var body: some View {
         VStack(alignment: .leading, spacing: 2) {
             HStack {
-                BlockTitle(block: .sessions, title: "Сессии")
+                BlockTitle(block: .sessions, title: "Сессии агентов")
                 if active > 0 {
                     Text(verbatim: "\(active)")
                         .scaledFont(.caption, weight: .medium)
                         .monospacedDigit()
                         .foregroundStyle(.secondary)
+                        .help("Работают и ждут ответа")
                 }
                 if waiting > 0 {
                     Text("ждут ответа: \(waiting)")
@@ -85,6 +88,11 @@ struct SessionsView: View {
             if !PanelBlock.collapsed(in: collapsedRaw).contains(.sessions) {
                 ForEach(rows) { row in
                     SessionRowView(row: row, waitingRows: rows.filter { $0.state == .waiting }.map(\.id))
+                }
+                // Waiting launches live here, with what is running: the menu bar counts them whatever else is shown.
+                ForEach(launcher.queued) { item in
+                    QueuedRow(item: item)
+                        .padding(.horizontal, 8)
                 }
                 ForEach(others) { thread in
                     AgentThreadRow(thread: thread)
@@ -151,7 +159,7 @@ private struct ResumableSessionRow: View {
         .contentShape(Rectangle())
         .onTapGesture { SessionActions.resume(session, claudePath: settings.claudePath) }
         .onHover { isHovered = $0 }
-        .help(String(localized: "Продолжить в Терминале · \(session.cwd)"))
+        .help([session.task, String(localized: "Продолжить в Терминале · \(session.cwd)")].compactMap(\.self).joined(separator: "\n"))
         .accessibilityElement(children: .combine)
         .accessibilityAddTraits(.isButton)
         .accessibilityAction { SessionActions.resume(session, claudePath: settings.claudePath) }
@@ -201,7 +209,7 @@ private struct AgentThreadRow: View {
         .contentShape(Rectangle())
         .onTapGesture(perform: open)
         .onHover { isHovered = $0 }
-        .help(String(localized: "\(thread.agent.title) · \(thread.folder) — продолжить в Терминале"))
+        .help(thread.title + "\n" + String(localized: "\(thread.agent.title) · \(thread.folder) — продолжить в Терминале"))
         .accessibilityElement(children: .combine)
         .accessibilityLabel(String(localized: "\(thread.agent.title), \(thread.project): \(thread.title)"))
         .accessibilityAddTraits(.isButton)
@@ -311,8 +319,8 @@ private struct SessionRowView: View {
                         .fixedSize()
                         .help("Насколько заполнен контекст сессии (по журналу Claude Code). Ближе к 100 %, Claude сжимает историю и часть деталей теряется.")
                 }
-                if isHovered || row.state == .waiting {
-                    actions
+                if row.state == .waiting || row.startedAt == nil {
+                    if isHovered || row.state == .waiting { actions }
                 } else if let startedAt = row.startedAt {
                     TimelineView(.periodic(from: .now, by: 30)) { context in
                         if let quiet = quietMinutes(now: context.date) {
@@ -324,10 +332,20 @@ private struct SessionRowView: View {
                             Text(DurationText.short(from: startedAt, to: row.endedAt ?? context.date))
                                 .scaledFont(.callout)
                                 .monospacedDigit()
-                                .foregroundStyle(.tertiary)
+                                .foregroundStyle(.secondary)
                         }
                     }
                     .fixedSize()
+                    .opacity(isHovered ? 0 : 1)
+                    // Over the row's end, not instead of the time: the task beside it keeps its length.
+                    .overlay(alignment: .trailing) {
+                        if isHovered {
+                            actions
+                                .fixedSize()
+                                .padding(.leading, 6)
+                                .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 6))
+                        }
+                    }
                 }
             }
             if let request {
@@ -380,6 +398,8 @@ private struct SessionRowView: View {
             if !Task.isCancelled { requestArmed = true }
         }
         .onHover { isHovered = $0 }
+        .onDisappear { isHovered = false }
+        .accessibilityAddTraits(.isButton)
         .animation(.easeOut(duration: 0.12), value: isHovered)
         .help(helpText)
     }
@@ -389,7 +409,7 @@ private struct SessionRowView: View {
 
     private var helpText: String {
         var parts: [String] = [inBackground ? String(localized: "в фоне") : row.state.title]
-        if action != nil, let task = row.task { parts.append(task) }
+        if let task = row.task { parts.append(task) }
         if let folder = row.session?.cwd ?? row.run?.folder { parts.append(folder) }
         if row.session != nil || row.run != nil { parts.append(String(localized: "Клик — открыть")) }
         return parts.joined(separator: " · ")
@@ -499,7 +519,7 @@ private struct SessionChangesView: View {
             HStack {
                 Button("Показать папку") { NSWorkspace.shared.open(URL(fileURLWithPath: folder)) }
                 Spacer()
-                Text(folder).font(.caption2).foregroundStyle(.tertiary).lineLimit(1).truncationMode(.head)
+                Text(folder).font(.caption2).foregroundStyle(.secondary).lineLimit(1).truncationMode(.head)
             }
             .controlSize(.small)
         }

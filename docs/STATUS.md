@@ -36,6 +36,13 @@
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
 
+## 2026-11-07 — Panel details (branch `fix/panel-details`)
+
+Done: audit items 13, 14, 16, 17 and the rest of 18. Block titles match Settings («Лимиты AI», «Сессии агентов», «Отчёты»), the module lost `_daily-report` from its name, the folded summary says «Процессор · память». The count over the sessions means working and waiting. Grey on glass is darker, the search field has the cards' tint, grey captions moved a step up. The header has four icons: help, CLAUDE.md and quit moved into a menu, ⌘Q still works. A project found in search is scrolled to, and only offered when the profile shows projects. Queued launches moved to the sessions block. ⌘R also refreshes folder projects and the calendar. An empty panel says so with a way to Settings, command results can be hidden, a failed clipboard search says so, hover no longer cuts the task short. Old limits lose their colour in the menu bar. 1 new string in 12 languages.
+Dark theme on glass was unreadable over a bright window (white header on white): the header and search now have the cards' tint.
+Checked: scripts/check.sh passed, with a new test for stale limits; looked at the live panel in dark and light, on glass and on the standard background.
+Left: the ⋯ menu was not opened by hand.
+
 ## 2026-11-07 — Windows and widgets leftovers (branch `fix/windows-leftovers`)
 
 Done: audit items 15, 34–38. An expired sign-in shows «Войти в Claude Code» also while old limits are on screen, and past the reset there is no countdown. ↑ ↓ work in the ⌃⌥C window, a background run opens its log there, and the tooltip says «Открыть в Терминале». The empty «Очистка сборок» window offers the check. CSV exports the chosen period, the calendar's «ещё» counts right and its sheet answers Esc and ↵. Widgets: no «сброс через 0 мин», the small one falls back to the week, percent written one way, «с проблемами» fits the small size. 2 new strings.

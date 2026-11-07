@@ -9,6 +9,8 @@ struct MenuBarData: Equatable, Hashable, Sendable {
     var queued = 0
     var session: Double?
     var week: Double?
+    /// The last request for the limits failed: the numbers are old, so they lose their colour.
+    var limitsStale = false
     /// Per-model weeks: window key → percent.
     var modelWeeks: [String: Double] = [:]
     var sessionResetsAt: Date?
@@ -129,10 +131,11 @@ enum MenuBarComposer {
             default: element.model.flatMap { data.modelWeeks[$0] } ?? data.modelWeeks.sorted { $0.key < $1.key }.first?.value
             }
             guard let value, value >= Double(element.showAbove) else { return nil }
+            let tint = data.limitsStale ? MenuBarSegment.Tint.secondary : level(value)
             return switch element.style {
-            case .number: [.text("\(Int(value.rounded()))%", level(value))]
-            case .ring: [.ring(value, level(value))]
-            case .bar: [.bar(value, level(value))]
+            case .number: [.text("\(Int(value.rounded()))%", tint)]
+            case .ring: [.ring(value, tint)]
+            case .bar: [.bar(value, tint)]
             }
         case .resetCountdown:
             guard let resets = data.sessionResetsAt, resets > data.now else { return nil }

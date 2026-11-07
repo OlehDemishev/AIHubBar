@@ -18,7 +18,7 @@ struct ClipboardView: View {
             HStack {
                 BlockTitle(block: .clipboard, title: "История буфера")
                 if !history.items.isEmpty {
-                    Text(verbatim: "\(history.items.count)").scaledFont(.caption).foregroundStyle(.tertiary)
+                    Text(verbatim: "\(history.items.count)").scaledFont(.caption).foregroundStyle(.secondary)
                 }
                 Spacer()
                 if !history.items.isEmpty {
@@ -50,6 +50,9 @@ struct ClipboardView: View {
                         .textFieldStyle(.roundedBorder)
                         .controlSize(.small)
                     ForEach(shown) { item in row(item) }
+                    if shown.isEmpty {
+                        Text("Ничего не найдено").scaledFont(.caption).foregroundStyle(.secondary)
+                    }
                 }
             }
         }
@@ -81,7 +84,7 @@ struct ClipboardView: View {
             if copied == item.id {
                 Text("скопировано").foregroundStyle(.green)
             } else {
-                Text(RelativeTime.ago(item.date, now: .now)).foregroundStyle(.tertiary)
+                Text(RelativeTime.ago(item.date, now: .now)).foregroundStyle(.secondary)
             }
             let pinTitle = item.pinned ? String(localized: "Открепить") : String(localized: "Закрепить")
             Button { history.togglePin(item) } label: {
@@ -119,14 +122,14 @@ struct NotesView: View {
             .buttonStyle(.borderless)
             if !PanelBlock.collapsed(in: collapsedRaw).contains(.notes) {
                 if notes.names.count > 1 {
-                    Picker("", selection: Binding(get: { notes.selected ?? "" }, set: { notes.select($0) })) {
+                    Picker("Заметки", selection: Binding(get: { notes.selected ?? "" }, set: { notes.select($0) })) {
                         ForEach(notes.names, id: \.self) { Text($0).tag($0) }
                     }
                     .labelsHidden()
                     .controlSize(.small)
                 }
                 TextEditor(text: Binding(get: { notes.text }, set: { notes.edit($0) }))
-                    .font(.system(.callout, design: .monospaced))
+                    .scaledFont(.callout, design: .monospaced)
                     .frame(height: 140)
                     .scrollContentBackground(.hidden)
                     .background(RoundedRectangle(cornerRadius: 6).fill(Color.primary.opacity(0.05)))

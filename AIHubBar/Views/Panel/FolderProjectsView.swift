@@ -225,7 +225,7 @@ struct StageChip: View {
     private var color: Color {
         guard let index, count > 1 else { return .gray }
         let progress = Double(index) / Double(count - 1)
-        return Color(hue: 0.6 - 0.27 * progress, saturation: 0.65, brightness: 0.85)
+        return Color(hue: 0.6 - 0.27 * progress, saturation: 0.65, brightness: 0.62)
     }
 
     var body: some View {

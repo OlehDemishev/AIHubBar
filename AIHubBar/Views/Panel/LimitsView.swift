@@ -100,9 +100,6 @@ struct LimitsView: View {
             }
         }
 
-        ForEach(launcher.queued) { item in
-            QueuedRow(item: item)
-        }
 
         breakdown
     }
@@ -112,7 +109,7 @@ struct LimitsView: View {
     /// The panel's own refresh (⌘R) updates the limits too; the age shows only while the figures are old.
     private var header: some View {
         HStack(spacing: 6) {
-            BlockTitle(block: .limits, title: "Лимиты")
+            BlockTitle(block: .limits, title: "Лимиты AI")
             // Folded, the block still says the two numbers that matter.
             if collapsed, let snapshot = usage.snapshot {
                 Text(verbatim: [snapshot.session, snapshot.week].compactMap { $0.map { UsageText.percent($0.utilization) } }.joined(separator: " · "))
@@ -152,7 +149,7 @@ struct LimitsView: View {
             .buttonStyle(.plain)
 
             if showBreakdown {
-                Picker("", selection: $period) {
+                Picker("Период", selection: $period) {
                     ForEach(UsageStore.Period.allCases) { Text($0.title).tag($0) }
                 }
                 .pickerStyle(.segmented)
@@ -184,7 +181,7 @@ struct LimitsView: View {
                 }
                 Text("Оценка по журналам Claude Code, а не точный расход лимита. Доли учитывают цену токенов (вывод ×5, чтение кэша ×0,1); токены — без чтения кэша.")
                     .scaledFont(.caption2)
-                    .foregroundStyle(.tertiary)
+                    .foregroundStyle(.secondary)
                     .fixedSize(horizontal: false, vertical: true)
                 Button("История расхода…") {
                     NSApp.activate()
@@ -317,7 +314,7 @@ private struct ProjectTokensList: View {
                 }
                 Text(footnote)
                     .scaledFont(.caption2)
-                    .foregroundStyle(.tertiary)
+                    .foregroundStyle(.secondary)
                     .fixedSize(horizontal: false, vertical: true)
             }
         }
@@ -373,6 +370,7 @@ private struct WindowRow: View {
 
 /// The week's forecast and its days as small bars (today highlighted); hover a bar for its share of the week.
 private struct WeekStrip: View {
+    @Environment(\.panelTextScale) private var scale
     let week: WeekUsage
     var showsForecast = true
 
@@ -415,7 +413,7 @@ private struct WeekStrip: View {
                     .help(String(localized: "\(day.date.formatted(.dateTime.weekday(.wide).day().month())): \(Int(day.percent.rounded())) % недельного лимита"))
                 }
             }
-            .frame(height: 56)
+            .frame(height: 56 * scale)
         }
         .scaledFont(.caption)
     }
@@ -463,7 +461,7 @@ private struct LimitRing: View {
     }
 }
 
-private struct QueuedRow: View {
+struct QueuedRow: View {
     let item: LaunchController.QueuedLaunch
     @Environment(LaunchController.self) private var launcher
 

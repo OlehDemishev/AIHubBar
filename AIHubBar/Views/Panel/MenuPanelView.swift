@@ -23,6 +23,7 @@ struct MenuPanelView: View {
     @Environment(QuickToolsController.self) private var quickTools
     @Environment(CommandStore.self) private var commands
     @Environment(AIServiceStore.self) private var services
+    @Environment(LaunchController.self) private var launcher
 
     /// Drives the entrance animation; reset when the panel closes so it replays on every open.
     @State private var isShown = false
@@ -32,6 +33,8 @@ struct MenuPanelView: View {
     @State private var drawsGlass = false
     @State private var query = ""
     @State private var searchSelection = 0
+    /// A project picked in the search: scrolled to when the blocks are back.
+    @State private var scrollTarget: String?
     @State private var folderExpanded: Set<String> = []
     /// Recent Codex and Copilot conversations for «Сессии», read when the panel opens.
     @State private var agentThreads: [AgentThread] = []
@@ -59,16 +62,25 @@ struct MenuPanelView: View {
     var body: some View {
         let scale = settings.panelTextSize.scale
         VStack(alignment: .leading, spacing: 0) {
-            header
-                .revealed(isShown, step: 0, reduceMotion: calm)
+            VStack(alignment: .leading, spacing: 0) {
+                header
+                    .revealed(isShown, step: 0, reduceMotion: calm)
 
-            PanelSearchField(query: $query, focused: $searchFocused, onCancel: { PanelOpener.close() }, onMove: moveSelection) {
-                let results = searchResults
-                if results.indices.contains(searchSelection) { activate(results[searchSelection]) }
+                PanelSearchField(query: $query, focused: $searchFocused, onCancel: { PanelOpener.close() }, onMove: moveSelection) {
+                    let results = searchResults
+                    if results.indices.contains(searchSelection) { activate(results[searchSelection]) }
+                }
+                .onChange(of: query) { searchSelection = 0 }
+                .padding(.bottom, 8)
+                .revealed(isShown, step: 0, reduceMotion: calm)
             }
-            .onChange(of: query) { searchSelection = 0 }
-            .padding(.bottom, 8)
-            .revealed(isShown, step: 0, reduceMotion: calm)
+            // Clear glass under dark text or light text over the opposite window can't be read: the cards' tint here too.
+            .background {
+                if drawsGlass {
+                    UnevenRoundedRectangle(topLeadingRadius: 16, topTrailingRadius: 16, style: .continuous)
+                        .fill(Color(nsColor: .windowBackgroundColor).opacity(0.62))
+                }
+            }
 
             if !query.isEmpty {
                 PanelSearchResults(results: searchResults, selected: searchSelection, activate: activate)
@@ -76,12 +88,19 @@ struct MenuPanelView: View {
                     .padding(.bottom, 8)
             } else {
                 // Hugs its content up to `blocksMaxHeight`; a window of its own size can't scroll otherwise.
-                ScrollView {
-                    blocks
+                ScrollViewReader { reader in
+                    ScrollView {
+                        blocks
+                    }
+                    .scrollBounceBehavior(.basedOnSize)
+                    .frame(maxHeight: blocksMaxHeight)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .onAppear {
+                        guard let target = scrollTarget else { return }
+                        scrollTarget = nil
+                        DispatchQueue.main.async { withAnimation { reader.scrollTo(target, anchor: .top) } }
+                    }
                 }
-                .scrollBounceBehavior(.basedOnSize)
-                .frame(maxHeight: blocksMaxHeight)
-                .fixedSize(horizontal: false, vertical: true)
             }
         }
         .panelGlassGroup()
@@ -144,6 +163,20 @@ struct MenuPanelView: View {
             ForEach(modes.panelModules, id: \.self) { kind in
                 module(kind)
             }
+
+            if !modes.modes.isEmpty, modes.panelModules.isEmpty {
+                HStack(spacing: 8) {
+                    Text("Панель пуста")
+                        .scaledFont(.callout)
+                        .foregroundStyle(.secondary)
+                    Spacer(minLength: 4)
+                    Button("Настройки…") { openSettings(.panel) }
+                        .controlSize(.small)
+                }
+                .padding(.horizontal, 10)
+                .padding(.vertical, 8)
+                .panelCard()
+            }
         }
         .padding(.bottom, 8)
     }
@@ -159,7 +192,8 @@ struct MenuPanelView: View {
         let sessionItems = SessionRow.rows(sessions: sessions.items, runs: runs.runs).map {
             PanelSearch.Item(id: $0.id, name: $0.project, detail: $0.task ?? "")
         }
-        let projectItems = folders.isActive
+        // A project found must have a place to open in.
+        let projectItems = !modes.panelModules.contains(.projects) ? [] : folders.isActive
             ? folders.projects.map { PanelSearch.Item(id: $0.path, name: $0.name, detail: "") }
             : store.projects.map { PanelSearch.Item(id: $0.id, name: $0.name, detail: $0.branch ?? "") }
         let quick = modes.isOn(.quickCommands)
@@ -188,6 +222,7 @@ struct MenuPanelView: View {
             }
         case let .project(id, _, _):
             if folders.isActive { folderExpanded.insert(id) } else { expanded.insert(id) }
+            scrollTarget = id
             collapsedRaw = PanelBlock.collapsed(in: collapsedRaw).contains(.projects)
                 ? PanelBlock.toggling(.projects, in: collapsedRaw) : collapsedRaw
         case let .quickCommand(id, _):
@@ -223,7 +258,8 @@ struct MenuPanelView: View {
             Spacer(minLength: 4)
             HStack(spacing: 8) { headerButtons }
                 .buttonStyle(.borderless)
-                .foregroundStyle(.secondary)
+                // Grey disappears on clear glass over a bright window.
+                .foregroundStyle(drawsGlass ? AnyShapeStyle(Color.primary.opacity(0.75)) : AnyShapeStyle(.secondary))
         }
         .padding(.horizontal, 14)
         .padding(.vertical, 10)
@@ -235,6 +271,8 @@ struct MenuPanelView: View {
         Button {
             Task { await store.refresh() }
             Task { await usage.refresh() }
+            if folders.isActive { Task { await folders.refresh() } }
+            if calendar.isActive { Task { await calendar.refresh() } }
         } label: {
             if store.isRefreshing {
                 ProgressView().controlSize(.small)
@@ -259,19 +297,31 @@ struct MenuPanelView: View {
         Button { openSettings() } label: { Label("Настройки… (⌘,)", systemImage: "gearshape").labelStyle(.iconOnly) }
         .help("Настройки… (⌘,)")
         .keyboardShortcut(",", modifiers: .command)
-        Button {
-            NSApp.activate()
-            openWindow(.claudeConfig)
-        } label: { Label("Claude Code: все CLAUDE.md и MCP-серверы", systemImage: "doc.badge.gearshape").labelStyle(.iconOnly) }
-        .help("Claude Code: все CLAUDE.md и MCP-серверы")
-        Button {
-            NSApp.activate()
-            openWindow(.help)
-        } label: { Label("Справка", systemImage: "questionmark.circle").labelStyle(.iconOnly) }
-        .help("Справка")
-        Button { NSApp.terminate(nil) } label: { Label("Выйти из AI Hub Bar (⌘Q)", systemImage: "power").labelStyle(.iconOnly) }
-            .help("Выйти из AI Hub Bar (⌘Q)")
+        // What is rarely needed waits in a menu, quit included: one click beside help was too easy.
+        Menu {
+            Button("Claude Code: все CLAUDE.md и MCP-серверы", systemImage: "doc.badge.gearshape") {
+                NSApp.activate()
+                openWindow(.claudeConfig)
+            }
+            Button("Справка", systemImage: "questionmark.circle") {
+                NSApp.activate()
+                openWindow(.help)
+            }
+            Divider()
+            Button("Выйти из AI Hub Bar (⌘Q)", systemImage: "power") { NSApp.terminate(nil) }
+        } label: {
+            Label("Ещё", systemImage: "ellipsis.circle").labelStyle(.iconOnly)
+        }
+        .menuStyle(.borderlessButton)
+        .menuIndicator(.hidden)
+        .fixedSize()
+        .help("Ещё")
+        // ⌘Q works without opening the menu.
+        Button("") { NSApp.terminate(nil) }
             .keyboardShortcut("q", modifiers: .command)
+            .frame(width: 0, height: 0)
+            .opacity(0)
+            .accessibilityHidden(true)
     }
 
     /// The current profile; with several enabled it is the switcher (it replaces the row of chips).
@@ -329,7 +379,7 @@ struct MenuPanelView: View {
     /// The block stays in its place when nothing is running, so it doesn't look lost.
     private var noSessions: some View {
         HStack(spacing: 6) {
-            BlockTitle(block: .sessions, title: "Сессии")
+            BlockTitle(block: .sessions, title: "Сессии агентов", foldable: false)
             Text("нет активных")
                 .scaledFont(.caption)
                 .foregroundStyle(.secondary)
@@ -350,7 +400,7 @@ struct MenuPanelView: View {
             Button("Настройки…") { openSettings(.module(.sessions)) }
             .controlSize(.small)
         }
-        .padding(.horizontal, 14)
+        .padding(.horizontal, 10)
         .padding(.vertical, 8)
     }
 
@@ -392,7 +442,7 @@ struct MenuPanelView: View {
             let sessionRows = SessionRow.rows(sessions: sessions.items, runs: runs.runs)
             // A Copilot or Codex session with the hook is already a row of its own, with its state.
             let others = AgentThread.without(agentThreads, sessionIDs: Set(sessions.items.map(\.id)))
-            if !sessionRows.isEmpty || !others.isEmpty || !sessions.resumable.isEmpty {
+            if !sessionRows.isEmpty || !others.isEmpty || !sessions.resumable.isEmpty || !launcher.queued.isEmpty {
                 SessionsView(rows: sessionRows, others: others, resumable: sessions.resumable)
                     .panelCard()
                     .revealed(isShown, step: 1, reduceMotion: calm)
@@ -464,7 +514,7 @@ struct MenuPanelView: View {
             if count > 0 {
                 Text(verbatim: "\(count)")
                     .scaledFont(.caption)
-                    .foregroundStyle(.tertiary)
+                    .foregroundStyle(.secondary)
             }
             if red > 0 {
                 Text("с проблемами: \(red)")
@@ -533,6 +583,7 @@ struct MenuPanelView: View {
         VStack(alignment: .leading, spacing: 2) {
             ForEach(store.projects) { project in
                 ProjectRowView(project: project, isExpanded: expandedBinding(project.id))
+                    .id(project.id)
             }
         }
         .padding(4)

@@ -128,6 +128,7 @@ struct QuickTogglesView: View {
                             .contentShape(Rectangle())
                         }
                         .buttonStyle(.plain)
+                        .accessibilityValue(on ? String(localized: "включено") : String(localized: "выключено"))
                         .help(toggle.title + (tools.isOn(toggle).map { $0 ? String(localized: " — включено") : String(localized: " — выключено") } ?? ""))
                     }
                 }

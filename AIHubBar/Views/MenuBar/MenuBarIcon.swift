@@ -84,7 +84,8 @@ enum StatusItemTooltip {
     }
 
     static func statusButton() -> NSButton? {
-        NSApp.windows.lazy.filter { $0.className.contains("StatusBarWindow") }.compactMap { button(in: $0.contentView) }.first
+        let items = NSApp.windows.filter { $0.className.contains("StatusBarWindow") }
+        return PanelOpener.panelItem(among: items, other: PanelOpener.otherItemWindow()).flatMap { button(in: $0.contentView) }
     }
 
     private static func button(in view: NSView?) -> NSButton? {
