@@ -230,7 +230,7 @@ private struct ProfileEditor: View {
                     Text(AIService.claudeCode.title).tag(String?.none)
                     ForEach(services.available.filter { $0 != .claudeCode }, id: \.id) { Text($0.title).tag(String?.some($0.id)) }
                     if let id = mode.service, !services.available.contains(where: { $0.id == id }) {
-                        Text((AIService(id: id)?.title ?? id) + String(localized: " — не найден на этом Маке")).tag(String?.some(id))
+                        Text((AIService(id: id)?.title ?? id) + String(localized: " — не найден на этом Mac")).tag(String?.some(id))
                     }
                 }
                 Picker("Права Claude в фоне", systemImage: "lock", selection: $mode.permissions) {
@@ -319,7 +319,7 @@ private struct TildeFolderField: View {
                     .lineLimit(1)
                     .truncationMode(.middle)
                     .foregroundStyle(FileManager.default.fileExists(atPath: PathText.expand(path)) ? .primary : Color.red)
-                    .help(FileManager.default.fileExists(atPath: PathText.expand(path)) ? PathText.expand(path) : String(localized: "Папки нет на этом Маке — выберите свою"))
+                    .help(FileManager.default.fileExists(atPath: PathText.expand(path)) ? PathText.expand(path) : String(localized: "Папки нет на этом Mac — выберите свою"))
                 Button("Выбрать…") {
                     let panel = NSOpenPanel()
                     panel.canChooseDirectories = true
@@ -365,7 +365,7 @@ struct ImportConfirmation: View {
         let names = bundle.modes.map(\.name).joined(separator: ", ")
         let what = bundle.format == SettingsBundle.settingsFormat ? String(localized: "Все настройки и профили") : String(localized: "Профиль")
         let missing = bundle.modes.flatMap(ProfileStore.missingFolders)
-        return "\(what): \(names)." + (missing.isEmpty ? "" : String(localized: " Нет на этом Маке: \(missing.joined(separator: "), String(localized: ")) — после импорта выберите свои папки."))
+        return "\(what): \(names)." + (missing.isEmpty ? "" : String(localized: " Нет на этом Mac: \(missing.joined(separator: "), String(localized: ")) — после импорта выберите свои папки."))
     }
 }
 

@@ -237,7 +237,7 @@ final class TelegramBotController {
         case 409:
             conflict = true
             isReading = false
-            status = String(localized: "Этого бота уже читает другой Мак или программа")
+            status = String(localized: "Этого бота уже читает другой Mac или программа")
             return 60
         case 401, 404:
             isReading = false
@@ -743,7 +743,7 @@ final class TelegramBotController {
         case .state:
             break
         case let .answer(id, allow):
-            guard canAnswer else { return .failure(String(localized: "Отвечать отсюда нельзя — включите на Маке «Ответы на запросы через общий бот».")) }
+            guard canAnswer else { return .failure(String(localized: "Отвечать отсюда нельзя — включите на Mac «Ответы на запросы через общий бот».")) }
             await answer(id, allow: allow, messageID: nil)
             note = allow ? String(localized: "Разрешено") : String(localized: "Отклонено")
         case let .report(ai, hours):
@@ -755,7 +755,7 @@ final class TelegramBotController {
             startCleanup(dryRun: !run, messageID: nil)
             note = String(localized: "Итог придёт в чат")
         case let .task(key, text):
-            guard tasksAllowed else { return .failure(String(localized: "Задачи через общий бот выключены. На Маке: Настройки → Модули → Telegram → «Задачи через общий бот».")) }
+            guard tasksAllowed else { return .failure(String(localized: "Задачи через общий бот выключены. На Mac: Настройки → Модули → Telegram → «Задачи через общий бот».")) }
             guard let project = project(key) else { return .failure(String(localized: "Проект не найден")) }
             taskDraft = (project.path, project.name, text, .now.addingTimeInterval(10 * 60))
             return outcomeReply(await startTask(.taskGo, project: project, text: text), project: key)
@@ -770,7 +770,7 @@ final class TelegramBotController {
             }
             return outcomeReply(await startTask(route, project: project, text: text), project: key)
         case let .stopRun(id):
-            guard tasksAllowed else { return .failure(String(localized: "Задачи через общий бот выключены. На Маке: Настройки → Модули → Telegram → «Задачи через общий бот».")) }
+            guard tasksAllowed else { return .failure(String(localized: "Задачи через общий бот выключены. На Mac: Настройки → Модули → Telegram → «Задачи через общий бот».")) }
             if runs.run(id: id)?.state == .running {
                 runs.stop(id)
                 note = String(localized: "Остановлено")
@@ -781,7 +781,7 @@ final class TelegramBotController {
             return MiniAppReply(ok: true, log: MiniAppReply.logLines(StreamJSON.entries(fromLog: text)))
         case let .command(id):
             guard !usesSharedBot || settings.telegramBot.commandsOverShared == true else {
-                return .failure(String(localized: "Быстрые команды через общий бот выключены. На Маке: Настройки → Модули → Telegram → «Быстрые команды через общий бот»."))
+                return .failure(String(localized: "Быстрые команды через общий бот выключены. На Mac: Настройки → Модули → Telegram → «Быстрые команды через общий бот»."))
             }
             guard let command = settings.quickCommands.first(where: { $0.id == id }) else { return .failure(String(localized: "Команда не найдена")) }
             AppLog.info("Telegram Mini App: quick command started")
@@ -909,7 +909,7 @@ final class TelegramBotController {
     private func askOrRun(_ id: String) async {
         guard let command = settings.quickCommands.first(where: { $0.id == id }) else { return }
         if usesSharedBot, settings.telegramBot.commandsOverShared != true {
-            _ = await send(BotMessage(html: "🔒 " + RunMessage.escape(String(localized: "Быстрые команды через общий бот выключены. На Маке: Настройки → Модули → Telegram → «Быстрые команды через общий бот»."))))
+            _ = await send(BotMessage(html: "🔒 " + RunMessage.escape(String(localized: "Быстрые команды через общий бот выключены. На Mac: Настройки → Модули → Telegram → «Быстрые команды через общий бот»."))))
             return
         }
         if command.confirm || usesSharedBot {

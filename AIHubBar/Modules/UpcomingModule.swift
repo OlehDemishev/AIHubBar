@@ -16,6 +16,7 @@ extension ModuleDefinition {
         menuBarKinds: [.deadline],
         primaryMenuBarKinds: [.deadline],
         notifications: [.calendar],
+        notificationSwitch: .calendarReminders,
         telegram: .calendarReminders,
         bringIn: .calendar,
         keywords: [String(localized: "Напоминания"), String(localized: "Календарь")]

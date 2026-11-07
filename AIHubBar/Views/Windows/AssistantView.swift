@@ -563,13 +563,16 @@ struct AssistantPreview: View {
     private func sampleBar(_ title: String, _ value: Double, _ color: Color) -> some View {
         HStack {
             Text(title).font(.caption).frame(width: 52, alignment: .leading)
-            GeometryReader { proxy in
-                ZStack(alignment: .leading) {
-                    Capsule().fill(Color.primary.opacity(0.1))
-                    Capsule().fill(color).frame(width: proxy.size.width * value)
-                }
+            Spacer()
+            // Rings, as in the panel.
+            ZStack {
+                Circle().stroke(Color.primary.opacity(0.1), lineWidth: 3)
+                Circle()
+                    .trim(from: 0, to: value)
+                    .stroke(color, style: StrokeStyle(lineWidth: 3, lineCap: .round))
+                    .rotationEffect(.degrees(-90))
             }
-            .frame(height: 6)
+            .frame(width: 16, height: 16)
             Text(verbatim: UsageText.percent(value * 100)).font(.caption).monospacedDigit()
         }
     }

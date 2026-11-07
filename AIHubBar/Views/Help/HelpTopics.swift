@@ -80,7 +80,7 @@ enum HelpTopic: String, CaseIterable, Identifiable, Sendable {
         case .panel: String(localized: "Панель открывается по клику на ✦: блоки модулей текущего профиля сверху вниз и поиск.")
         case .modules: String(localized: "Модуль — одна возможность AI Hub Bar. Профиль решает, какие модули видны в панели и в каком порядке.")
         case .limits: String(localized: "Сколько осталось от 5-часовой сессии и недели подписки Claude — и от лимитов других AI.")
-        case .sessions: String(localized: "Все сессии Claude Code на этом Маке: что делают, кто ждёт ответа, фоновые задачи и очередь.")
+        case .sessions: String(localized: "Все сессии Claude Code на этом Mac: что делают, кто ждёт ответа, фоновые задачи и очередь.")
         case .services: String(localized: "Агенты и модели, которые AI Hub Bar находит и запускает: Claude Code, Codex, Gemini, Copilot, Cursor и модели по API.")
         case .projects: String(localized: "Проекты профиля: git-репозитории или папки с работой — состояние, PR, этапы и команды для AI.")
         case .calendar: String(localized: "Дедлайны и публикации из карточек проектов и контент-плана — на неделю вперёд и в окне «Календарь».")
@@ -177,7 +177,7 @@ enum HelpTopic: String, CaseIterable, Identifiable, Sendable {
             ])]
         case .sessions:
             [HelpSection(facts: [
-                HelpFact(String(localized: "Список"), String(localized: "Все сессии на этом Маке — в Терминале, в приложении Claude, фоновые: проект, worktree, задача, длительность, состояние (работает, в фоне, ждёт ответа, готово, ошибка, завершена). Ждущие ответа подсвечены и приходят уведомлением."), symbol: "list.bullet"),
+                HelpFact(String(localized: "Список"), String(localized: "Все сессии на этом Mac — в Терминале, в приложении Claude, фоновые: проект, worktree, задача, длительность, состояние (работает, в фоне, ждёт ответа, готово, ошибка, завершена). Ждущие ответа подсвечены и приходят уведомлением."), symbol: "list.bullet"),
                 HelpFact(String(localized: "Разрешения"), String(localized: "«Разрешить» и «Отклонить» — в уведомлении, в строке сессии, в острове и, если включено, в Telegram. Работает ответ, который пришёл первым."), symbol: "hand.raised"),
                 HelpFact(String(localized: "Показать"), String(localized: "Вывести вкладку Терминала с этой сессией; для сессий приложения Claude — открыть эту сессию в Claude, иначе — папку."), symbol: "macwindow"),
                 HelpFact(String(localized: "Терминал / Фон"), String(localized: "Где запускать: окно Терминала (можно отвечать Claude) или claude -p без окна (только разрешённые действия, лимит времени, итог — уведомлением и в Telegram). «Запомнить выбор» или профиль по умолчанию — в Настройках."), symbol: "terminal"),

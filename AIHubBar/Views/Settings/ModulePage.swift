@@ -84,12 +84,11 @@ struct ModulePlaces: View {
     @Environment(ProfileStore.self) private var modes
 
     var body: some View {
-        HStack(spacing: 8) {
+        FlowLayout(spacing: 8) {
             ForEach(places, id: \.self) { place in
                 PlaceChip(place: place, isOn: binding(place), help: help(place))
                     .disabled(!available(place))
             }
-            Spacer(minLength: 0)
         }
         .padding(.vertical, 2)
     }

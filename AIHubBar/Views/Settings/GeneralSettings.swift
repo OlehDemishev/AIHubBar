@@ -50,7 +50,7 @@ struct GeneralSettings: View {
             Section {
                 LabeledContent {
                     Button("Открыть") { SettingsRoute.open(module: .telegram) }
-                        .help("Токен бота, чат и какой Мак отвечает — на странице модуля «Telegram»")
+                        .help("Токен бота, чат и какой Mac отвечает — на странице модуля «Telegram»")
                 } label: {
                     Label("Бот, чат и меню — модуль «Telegram»", systemImage: "paperplane")
                 }
@@ -115,7 +115,8 @@ struct GeneralSettings: View {
 /// The interface language (SPEC-modes §13): the system's, or one of AI Hub Bar's translations. macOS reads the
 /// per-app `AppleLanguages` at launch, so a change needs a relaunch.
 struct LanguagePicker: View {
-    @State private var choice = UserDefaults.standard.stringArray(forKey: "AppleLanguages")?.first.flatMap { language in
+    // The app's own domain: through `standard` the system's list comes back, and «Как в системе» would not show.
+    @State private var choice = (UserDefaults.standard.persistentDomain(forName: Bundle.main.bundleIdentifier ?? "")?["AppleLanguages"] as? [String])?.first.flatMap { language in
         (Bundle.main.localizations + ["ru"]).first { language.hasPrefix($0) }
     } ?? ""
     @State private var changed = false

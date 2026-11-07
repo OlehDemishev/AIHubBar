@@ -97,7 +97,7 @@ enum GitScanner {
                     continue
                 }
                 let ahead = Int(await git(repo, ["rev-list", "--count", "\(base)..\(parts[0])"])) ?? 0
-                if ahead > 0 { attend("high", String(localized: "ветка \(parts[0]): \(ahead) коммит(ов) только на этом Маке")) }
+                if ahead > 0 { attend("high", String(localized: "ветка \(parts[0]): \(ahead) коммит(ов) только на этом Mac")) }
             } else if let range = parts[2].range(of: #"ahead (\d+)"#, options: .regularExpression),
                       let count = Int(parts[2][range].dropFirst("ahead ".count)) {
                 attend("mid", String(localized: "ветка \(parts[0]): \(count) не запушено"))

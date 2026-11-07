@@ -212,12 +212,12 @@ final class QuickToolsController {
             return (false, String(localized: "Команда пустая — заполните её в Настройках → «Модули»."))
         case let .open(url):
             return NSWorkspace.shared.open(url)
-                ? (true, String(localized: "Открыто на Маке"))
+                ? (true, String(localized: "Открыто на Mac"))
                 : (false, String(localized: "Не открылось: \(url.isFileURL ? url.path : url.absoluteString)"))
         case let .terminal(line):
             do {
                 try await TerminalLauncher.run(line)
-                return (true, String(localized: "Открыто в Терминале на Маке"))
+                return (true, String(localized: "Открыто в Терминале на Mac"))
             } catch {
                 return (false, error.localizedDescription)
             }

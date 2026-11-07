@@ -9,7 +9,7 @@ extension ModuleDefinition {
         group: .ai,
         symbol: "bubble.left.and.text.bubble.right",
         title: String(localized: "Сессии агентов"),
-        summary: String(localized: "Сессии Claude Code на этом Маке и фоновые задачи."),
+        summary: String(localized: "Сессии Claude Code на этом Mac и фоновые задачи."),
         tagline: String(localized: "Claude Code, фоновые задачи, очередь"),
         isBuiltIn: true,
         places: ModulePlace.allCases,
@@ -80,7 +80,7 @@ struct SessionSection: View {
         } header: {
             Text("Сессии Claude Code")
         } footer: {
-            Footnote(text: String(localized: "Hooks добавляются в ~/.claude/settings.json (остальные настройки не трогаются, перед изменением рядом сохраняется копия). Они записывают состояние каждой сессии Claude Code на этом Маке — в Терминале, в приложении Claude, фоновых — чтобы AI Hub Bar показывал их в панели."))
+            Footnote(text: String(localized: "Hooks добавляются в ~/.claude/settings.json (остальные настройки не трогаются, перед изменением рядом сохраняется копия). Они записывают состояние каждой сессии Claude Code на этом Mac — в Терминале, в приложении Claude, фоновых — чтобы AI Hub Bar показывал их в панели."))
         }
         .onAppear { hooks.refresh() }
     }

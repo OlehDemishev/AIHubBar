@@ -205,6 +205,7 @@ struct QuickSearchWindow: View {
     @Environment(\.openWindow) private var openWindow
     @State private var query = ""
     @State private var selection = 0
+    @State private var window: NSWindow?
     @FocusState private var focused: Bool
     /// A saved prompt was chosen: the list is now projects to run it in.
     @State private var prompt: SavedPrompt?
@@ -256,6 +257,16 @@ struct QuickSearchWindow: View {
             focused = true
         }
         .onChange(of: query) { selection = 0 }
+        .background(WindowReader { found in
+            // As «Быстрый запрос»: over every app, on the current Space, next to a full-screen app.
+            if window !== found { window = found }
+            found?.level = .floating
+            found?.collectionBehavior.formUnion([.moveToActiveSpace, .fullScreenAuxiliary])
+        })
+        // Like Spotlight: a click elsewhere puts it away.
+        .onReceive(NotificationCenter.default.publisher(for: NSWindow.didResignKeyNotification)) { note in
+            if let window, note.object as? NSWindow === window { dismiss() }
+        }
         // The project step brings a new field: give it the keyboard (typing and Esc go nowhere otherwise).
         .onChange(of: prompt) {
             focused = false

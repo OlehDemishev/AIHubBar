@@ -34,13 +34,13 @@ struct UsageHistoryWindow: View {
                 ContentUnavailableView(
                     usage.isBackfilling ? "Считаю по журналам Claude Code…" : "За этот период расхода нет",
                     systemImage: "chart.bar",
-                    description: Text("История собирается из журналов Claude Code на этом Маке.")
+                    description: Text("История собирается из журналов Claude Code на этом Mac.")
                 )
             } else {
                 summary
                 chart
             }
-            Text("Оценка по журналам Claude Code на этом Маке: токены без чтения кэша. Лимиты считает сама Anthropic, и чаты на claude.ai сюда не попадают.")
+            Text("Оценка по журналам Claude Code на этом Mac: токены без чтения кэша. Лимиты считает сама Anthropic, и чаты на claude.ai сюда не попадают.")
                 .font(.caption)
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)

@@ -43,8 +43,8 @@ private struct LimitsSketch: View {
     var body: some View {
         if let session = usage.snapshot?.session?.utilization {
             HStack(spacing: 6) {
-                MiniBar(value: session)
-                if let week = usage.snapshot?.week?.utilization { MiniBar(value: week) }
+                MiniRing(value: session)
+                if let week = usage.snapshot?.week?.utilization { MiniRing(value: week) }
             }
         } else {
             SketchLine(ModuleKind.limits.tagline)
