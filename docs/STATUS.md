@@ -1,17 +1,16 @@
 # Status
 
 <!-- summary:start -->
-**Stage:** Mac: 0.7.3 published 2026-11-07, signed and notarized (Developer ID; before that shorter first run, panel polish, usage history, finished sessions, ⌃⌥B, outages, several Claude accounts). Windows/Linux (`desktop/`, Tauri 2): postponed by Oleh 2026-11-02
+**Stage:** Mac: 0.7.4 published 2026-11-07, signed and notarized (Developer ID; before that shorter first run, panel polish, usage history, finished sessions, ⌃⌥B, outages, several Claude accounts). Windows/Linux (`desktop/`, Tauri 2): postponed by Oleh 2026-11-02
 **Updated:** 2026-11-07
 
 **Now:**
-- UI audit and final pass closed (docs/specs/AUDIT-ui.md); waiting for Oleh's go on 0.7.4
+- nothing in progress: 0.7.4 is out with the UI audit's fixes
 - Telegram: Worker deployed at https://aihubbar-telegram.oleh-demishev.workers.dev (new bot, old bots deleted by Oleh); the app points at it — pairing and a live check next
 - merged 2026-11-06: #262 donations («Поддержать проект» in Settings → General, site/support.html with Ko-fi, GitHub Sponsors and Buy Me a Coffee; the app button reaches people with the next release)
 - merged 2026-11-03: #251 menu bar ☕ follows the «Не спать» switch, #248 «Не спать» on/off in the menu bar, #241 Codex states, #240 quick command shortcuts, #238 «Быстрый запрос», #236 content spec, #242 «Telegram» stage 1, #244 menu at the bottom, #246 shared bot (Worker not deployed yet), #247 desktop CI off for Mac string changes, #249 the bot's menu set up by each person, #252 stage 2 (sessions, requests, limits), #254 stage 3 (tasks and runs), #255 stage 4 (settings in the bot), #256 Mini App
 
 **Next:**
-- release 0.7.4 (scripts/release.sh, Oleh's go)
 - check on the Air: the update through Sparkle across the certificate change, then the island at the real notch
 - promotion (docs/LAUNCH.md): demo recording, then r/ClaudeAI, the lists, r/macapps; Show HN and Product Hunt after the Developer ID
 - Telegram: pair the Mac mini with the shared bot, try the bot and the Mini App live
@@ -35,6 +34,12 @@
 - MacBook Air: update to 0.6.0 through Sparkle (Settings → General → Updates) and check the island at the real notch
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-07 — Release 0.7.4 (branch `chore/status-release-0.7.4`)
+
+Done: 0.7.4 (build 680) published with the UI audit's fixes: permission requests, the panel, Settings, the island, windows and widgets.
+Checked: the release ran scripts/check.sh and both notarizations were accepted; the DMG downloaded from GitHub, its ticket and the app inside were checked, both appcasts read back.
+Left: the update through Sparkle and the real notch on the Air; keys, the calendar and CLAUDE.md windows, widgets.
 
 ## 2026-11-07 — GitHub description covers every AI service (branch `docs/ai-services-wording`)
 
