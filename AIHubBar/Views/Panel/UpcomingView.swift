@@ -30,7 +30,7 @@ struct UpcomingView: View {
                 if entries.isEmpty {
                     Text("На неделю дат нет.")
                         .scaledFont(.caption)
-                        .foregroundStyle(.tertiary)
+                        .foregroundStyle(.secondary)
                 }
                 ForEach(entries.prefix(8)) { entry in
                     Button {
@@ -56,7 +56,7 @@ struct UpcomingView: View {
                     .help("\(entry.kind.title) · \(entry.modeName) — открыть")
                 }
                 if entries.count > 8 {
-                    Text("и ещё \(entries.count - 8)…").scaledFont(.caption2).foregroundStyle(.tertiary)
+                    Text("и ещё \(entries.count - 8)…").scaledFont(.caption2).foregroundStyle(.secondary)
                 }
             }
         }

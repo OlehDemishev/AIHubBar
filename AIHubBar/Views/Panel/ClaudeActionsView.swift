@@ -26,7 +26,7 @@ struct ClaudeActionsView: View {
                 otherAgents
             }
 
-            HStack(spacing: 6) {
+            FlowLayout(spacing: 6) {
                 ActionButton(title: String(localized: "Следующий шаг"), systemImage: "forward.fill", isProminent: true) {
                     launcher.request(.nextStep, in: project)
                 }

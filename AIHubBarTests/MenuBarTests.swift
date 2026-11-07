@@ -45,6 +45,15 @@ struct MenuBarConfigTests {
 }
 
 struct MenuBarComposerTests {
+    @Test func staleLimitsLoseTheirColour() {
+        var config = MenuBarConfig.make(.minimum)
+        config.set(.session) { $0.enabled = true }
+        let fresh = MenuBarComposer.groups(config, MenuBarData(session: 90)).flatMap(\.self)
+        let stale = MenuBarComposer.groups(config, MenuBarData(session: 90, limitsStale: true)).flatMap(\.self)
+        #expect(fresh.contains(.text("90%", .level(90))))
+        #expect(stale.contains(.text("90%", .secondary)))
+    }
+
     let now = Date(timeIntervalSince1970: 1_793_300_000)
 
     @Test func olehsLookIsUnchanged() {

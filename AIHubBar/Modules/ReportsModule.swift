@@ -8,7 +8,7 @@ extension ModuleDefinition {
         kind: .reports,
         group: .work,
         symbol: "doc.text.magnifyingglass",
-        title: String(localized: "Отчёты _daily-report"),
+        title: String(localized: "Отчёты"),
         summary: String(localized: "Команды _daily-report: отчёт, быстрая сводка, очистка сборок."),
         tagline: String(localized: "Отчёт, сводка, очистка сборок"),
         isBuiltIn: true,

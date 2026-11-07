@@ -95,7 +95,7 @@ struct PanelSearchField: View {
         .scaledFont(.callout)
         .padding(.horizontal, 10)
         .padding(.vertical, 6)
-        .background(RoundedRectangle(cornerRadius: 9, style: .continuous).fill(Color.primary.opacity(0.06)))
+        .background(RoundedRectangle(cornerRadius: 9, style: .continuous).fill(Color.primary.opacity(0.07)))
         .padding(.horizontal, 8)
     }
 

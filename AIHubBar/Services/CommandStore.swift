@@ -107,6 +107,8 @@ final class CommandStore {
 
     private(set) var running: Set<CommonCommand> = []
     private(set) var results: [CommonCommand: Result] = [:]
+
+    func dismissResult(of command: CommonCommand) { results[command] = nil }
     /// Full output of the last cleanup run or check, for the «Очистка» window.
     private(set) var cleanupOutput: (command: CommonCommand, text: String, date: Date)?
 

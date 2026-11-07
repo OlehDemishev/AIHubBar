@@ -20,7 +20,7 @@ struct ResourcesView: View {
             HStack(spacing: 6) {
                 BlockTitle(block: .resources, title: "Ресурсы Mac")
                 if collapsed, let snapshot = monitor.snapshot {
-                    Text(verbatim: "CPU \(UsageText.percent(snapshot.cpu)) · RAM \(UsageText.percent(snapshot.memoryPercent))")
+                    Text("Процессор \(Int(snapshot.cpu.rounded())) % · память \(Int(snapshot.memoryPercent.rounded())) %")
                         .scaledFont(.caption, weight: .semibold)
                         .monospacedDigit()
                 }

@@ -344,6 +344,7 @@ final class AppContainer {
         data.queued = launcher.queued.count
         data.session = usage.snapshot?.session?.utilization
         data.week = usage.snapshot?.week?.utilization
+        data.limitsStale = usage.lastError != nil
         data.modelWeeks = Dictionary((usage.snapshot?.otherWindows ?? []).map { ($0.key, $0.utilization) }) { first, _ in first }
         data.sessionResetsAt = usage.snapshot?.session?.resetsAt
         if case let .runsOutAt(date) = usage.forecast { data.forecastRunsOut = date }

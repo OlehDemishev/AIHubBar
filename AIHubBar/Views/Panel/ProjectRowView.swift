@@ -51,7 +51,7 @@ struct ProjectRowView: View {
             if let lastActivity = project.lastActivity {
                 Text(RelativeTime.ago(lastActivity))
                     .scaledFont(.callout)
-                    .foregroundStyle(.tertiary)
+                    .foregroundStyle(.secondary)
                     .fixedSize()
             }
         }
@@ -180,14 +180,14 @@ private struct PullRequestRow: View {
                 Text("#\(pr.number)").foregroundStyle(.secondary)
                 Text(pr.title).lineLimit(1)
                 if pr.isDraft {
-                    Text("черновик").foregroundStyle(.tertiary)
+                    Text("черновик").foregroundStyle(.secondary)
                 }
             }
             .scaledFont(.caption)
         }
         .buttonStyle(.plain)
         .disabled(pr.url == nil)
-        .help("CI: \(pr.ci.title)")
+        .help(pr.title + " · CI: " + pr.ci.title)
     }
 }
 

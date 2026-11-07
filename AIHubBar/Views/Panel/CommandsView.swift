@@ -13,7 +13,7 @@ struct CommandsView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
             HStack {
-                BlockTitle(block: .commands, title: "Команды")
+                BlockTitle(block: .commands, title: "Отчёты")
                 Spacer()
                 disk
             }
@@ -39,13 +39,21 @@ struct CommandsView: View {
 
         ForEach(CommonCommand.allCases) { command in
             if let result = commands.results[command] {
-                Label {
-                    Text("\(command.title): \(result.text)")
-                        .lineLimit(2)
-                        .fixedSize(horizontal: false, vertical: true)
-                } icon: {
-                    Image(systemName: result.isError ? "exclamationmark.triangle.fill" : "checkmark.circle")
-                        .foregroundStyle(result.isError ? .red : .green)
+                HStack(alignment: .firstTextBaseline, spacing: 6) {
+                    Label {
+                        Text("\(command.title): \(result.text)")
+                            .lineLimit(2)
+                            .fixedSize(horizontal: false, vertical: true)
+                    } icon: {
+                        Image(systemName: result.isError ? "exclamationmark.triangle.fill" : "checkmark.circle")
+                            .foregroundStyle(result.isError ? .red : .green)
+                    }
+                    Spacer(minLength: 4)
+                    Button { commands.dismissResult(of: command) } label: {
+                        Label("Скрыть", systemImage: "xmark").labelStyle(.iconOnly)
+                    }
+                    .buttonStyle(.borderless)
+                    .help("Скрыть")
                 }
                 .scaledFont(.caption)
                 if command == commands.cleanupOutput?.command {
