@@ -6,6 +6,8 @@ Not seen live: dark theme (see «Testing notes»), the panel with the system bac
 
 ## P0: wrong action or lost data
 
+Items 1–5 fixed in branch `fix/permission-safety`.
+
 1. **Permission buttons change order.** The panel shows «Отклонить, Разрешить» (`SessionsView.swift:333`), the island «Разрешить, Отклонить» (`NotchIslandView.swift:410`). Same decision, opposite positions. White on green is about 2:1. *code*
 2. **Rows move under the pointer.** Sessions sort by state, then `updatedAt` (`Session.swift:262`). With two sessions waiting, a newer request can put another session's «Разрешить» where the pointer is. *code*
 3. **A new request in the open island has live buttons at once.** `showNext` returns early while the card is open (`NotchIsland.swift:252`), so the click guard is armed only in `open` (`:466`). The new row pushes the others down. *code*

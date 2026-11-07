@@ -36,6 +36,12 @@
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
 
+## 2026-11-07 — Permission buttons you can trust (branch `fix/permission-safety`)
+
+Done: audit items 1–5. The panel and the island show «Отклонить, Разрешить» in the same order, «Разрешить» last, in a darker green on the island. Rows inside a group keep their place: the oldest request first, a new one below it, running sessions by when they started. Whenever a request comes or goes, the buttons wait 0.6 s in the panel and re-arm the guard in the open island. The whole command is shown, with the buttons on their own line. Edits in the CLAUDE.md window stay as drafts when another file is chosen or the window closes, with a dot on the file; they live until the app quits. 1 new string in 12 languages.
+Checked: scripts/check.sh passed, with new tests for the order of rows and for changes in the request list.
+Left: not tried live yet.
+
 ## 2026-11-07 — UI audit of 0.7.3 (branch `docs/ui-audit`)
 
 Done: docs/specs/AUDIT-ui.md with 38 findings by priority and an order of work. Main ones: permission buttons swap places between the panel and the island, the panel runs off the screen with no scroll, Esc does not close it, week days repeat letters, Settings row labels do not line up.

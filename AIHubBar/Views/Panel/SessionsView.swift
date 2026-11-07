@@ -84,7 +84,7 @@ struct SessionsView: View {
 
             if !PanelBlock.collapsed(in: collapsedRaw).contains(.sessions) {
                 ForEach(rows) { row in
-                    SessionRowView(row: row)
+                    SessionRowView(row: row, waitingRows: rows.filter { $0.state == .waiting }.map(\.id))
                 }
                 ForEach(others) { thread in
                     AgentThreadRow(thread: thread)
@@ -226,6 +226,8 @@ private struct AgentThreadRow: View {
 
 private struct SessionRowView: View {
     let row: SessionRow
+    /// The rows that may show buttons, in order: when this changes, this row may have moved.
+    var waitingRows: [String] = []
 
     @Environment(RunStore.self) private var runs
     @Environment(SessionStore.self) private var sessions
@@ -234,6 +236,8 @@ private struct SessionRowView: View {
     @Environment(\.openWindow) private var openWindow
     @State private var isHovered = false
     @State private var showsChanges = false
+    /// «Разрешить» and «Отклонить» are live: the rows have stood still long enough to see what is under the pointer.
+    @State private var requestArmed = false
 
     private var folder: String? { row.session?.cwd ?? row.run?.folder }
     private var changes: SessionChanges? {
@@ -243,10 +247,14 @@ private struct SessionRowView: View {
     private var inBackground: Bool { row.run != nil && row.state == .running }
     private var paused: Bool { row.run?.isPaused == true }
     private var request: ApprovalRequest? { row.state == .waiting ? sessions.approvals[row.id] : nil }
+    /// Changes whenever a request comes or goes, that is whenever the rows with buttons move.
+    private var requestLayout: [String] { sessions.approvals.values.map(\.id).sorted() + waitingRows }
     /// While Claude works, the last tool call says more than the task it was given.
     private var action: String? { row.state == .running ? row.session?.actionText : nil }
     /// Running with no tool call for this long looks stuck.
     static let quietAfter: TimeInterval = 10 * 60
+    /// A request's text fits here whole: the hook keeps it to 200 characters.
+    static let requestLines = 8
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(AppSettings.self) private var settings
 
@@ -323,19 +331,25 @@ private struct SessionRowView: View {
                 }
             }
             if let request {
-                HStack(spacing: 6) {
+                // The whole command, on its own lines: it is what the person agrees to.
+                VStack(alignment: .leading, spacing: 4) {
                     Text(request.text)
                         .scaledFont(.callout, design: .monospaced)
                         .foregroundStyle(.orange)
-                        .lineLimit(2)
-                        .truncationMode(.middle)
-                    Spacer(minLength: 4)
-                    Button("Отклонить") { sessions.decide(requestID: request.id, allow: false) }
-                    Button("Разрешить") { sessions.decide(requestID: request.id, allow: true) }
-                        .buttonStyle(.borderedProminent)
+                        .lineLimit(Self.requestLines)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    HStack(spacing: 6) {
+                        Spacer()
+                        Button("Отклонить") { sessions.decide(requestID: request.id, allow: false) }
+                        Button("Разрешить") { sessions.decide(requestID: request.id, allow: true) }
+                            .buttonStyle(.borderedProminent)
+                    }
+                    .disabled(!requestArmed)
                 }
                 .controlSize(.small)
                 .padding(.leading, 20)
+                .help(request.text)
             } else if let message = row.message, row.state == .waiting || row.state == .error {
                 Text(message)
                     .scaledFont(.callout)
@@ -359,6 +373,11 @@ private struct SessionRowView: View {
         .task(id: refreshKey) {
             guard let folder, row.state != .ended else { return }
             await changesStore.refresh(folder: folder, since: row.startedAt)
+        }
+        .task(id: requestLayout) {
+            requestArmed = false
+            try? await Task.sleep(for: .seconds(NotchClickGuard.delay))
+            if !Task.isCancelled { requestArmed = true }
         }
         .onHover { isHovered = $0 }
         .animation(.easeOut(duration: 0.12), value: isHovered)

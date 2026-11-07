@@ -108,11 +108,14 @@ struct NotchEventQueue: Equatable, Sendable {
         }
     }
 
-    /// The open requests right now: new ones come in, answered or cancelled ones go.
-    mutating func syncRequests(_ requests: [NotchEvent]) {
+    /// The open requests right now: new ones come in, answered or cancelled ones go. true = the list changed.
+    @discardableResult
+    mutating func syncRequests(_ requests: [NotchEvent]) -> Bool {
+        let before = items.filter { $0.kind == .request }.map(\.id)
         let ids = Set(requests.map(\.id))
         for item in items where item.kind == .request && !ids.contains(item.id) { remove(item.id) }
         for request in requests where !items.contains(where: { $0.id == request.id }) { push(request) }
+        return Set(before) != Set(items.filter { $0.kind == .request }.map(\.id))
     }
 
     mutating func remove(_ id: String) {

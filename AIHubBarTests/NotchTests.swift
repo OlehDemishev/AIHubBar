@@ -136,6 +136,13 @@ struct NotchEventTests {
         #expect(queue.deadline == t0.addingTimeInterval(26), "full time again after the pointer leaves")
     }
 
+    @Test func syncSaysWhenRequestsChanged() {
+        var queue = NotchEventQueue()
+        let first = event("first", .request), second = event("second", .request)
+        let results = [[first], [first], [first, second], [second]].map { queue.syncRequests($0) }
+        #expect(results == [true, false, true, true])
+    }
+
     @Test func requestsStayUntilAnswered() {
         var queue = NotchEventQueue()
         let request = event("request-1", .request)
