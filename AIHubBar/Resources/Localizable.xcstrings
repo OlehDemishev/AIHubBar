@@ -25749,7 +25749,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Speicher"
+            "value": "Festplatte"
           }
         },
         "en": {
@@ -71553,82 +71553,6 @@
         }
       }
     },
-    "Появится, когда у профиля включён календарь — «Профили» → профиль.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "تظهر عندما يكون التقويم مفعّلًا في ملف تعريف — «ملفات التعريف» ← ملف التعريف."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Erscheint, wenn ein Profil den Kalender eingeschaltet hat – „Profile“ → Profil."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Appears when a profile has the calendar on — “Profiles” → profile."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Aparecerá cuando un perfil tenga el calendario activado: «Perfiles» → perfil."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Apparaît quand un profil a le calendrier activé — « Profils » → profil."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Muncul saat kalender aktif di profil — «Profil» → profil."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Comparirà quando un profilo ha il calendario attivo — «Profili» → profilo."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "プロファイルでカレンダーがオンのときに表示されます —「プロファイル」→ プロファイル。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "프로필에서 캘린더가 켜지면 나타납니다 — «프로필» → 프로필."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Pojawi się, gdy profil ma włączony kalendarz — „Profile” → profil."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Aparece quando um perfil tem o calendário ativado — «Perfis» → perfil."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "З’явиться, коли в профілі увімкнено календар — «Профілі» → профіль."
-          }
-        }
-      }
-    },
     "Появится, когда у профиля есть источник проектов — «Профили» → профиль.": {
       "localizations": {
         "ar": {
@@ -79478,158 +79402,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ролик про каву"
-          }
-        }
-      }
-    },
-    "С hook сессии Codex CLI видны в «Сессиях» как у Claude: работает, ждёт разрешения, готово — и «ждёт» приходит уведомлением. Записи AI Hub Bar добавляются в ~/.codex/hooks.json (перед изменением — резервная копия рядом), другие hooks Codex не трогаются. Codex запускает новый hook только после проверки: один раз откройте codex, введите /hooks и доверьте hooks AI Hub Bar. Подхватывается новыми сессиями Codex.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "مع الخطّاف تظهر جلسات Codex CLI في «الجلسات» مثل جلسات Claude: يعمل، ينتظر الإذن، جاهز — وتصل «ينتظر» كإشعار. تُضاف إدخالات AI Hub Bar إلى ~/.codex/hooks.json (مع نسخة احتياطية بجانبه قبل التغيير)، ولا تُمسّ خطّافات Codex الأخرى. لا يشغّل Codex خطّافًا جديدًا إلا بعد مراجعته: افتح codex مرة واحدة واكتب /hooks ووثِق بخطّافات AI Hub Bar. تلتقطه جلسات Codex الجديدة."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mit dem Hook erscheinen Codex-CLI-Sitzungen in „Sitzungen“ wie die von Claude: arbeitet, wartet auf Erlaubnis, fertig — und „wartet“ kommt als Mitteilung. Die Einträge von AI Hub Bar werden zu ~/.codex/hooks.json hinzugefügt (vorher eine Sicherungskopie daneben); andere Hooks von Codex bleiben unberührt. Codex führt einen neuen Hook erst nach Prüfung aus: einmal codex öffnen, /hooks eingeben und den Hooks von AI Hub Bar vertrauen. Neue Codex-Sitzungen übernehmen ihn."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "With the hook, Codex CLI sessions show in “Sessions” like Claude's: running, waiting for permission, done — and “waiting” comes as a notification. AI Hub Bar's entries are added to ~/.codex/hooks.json (a backup is made next to it first); Codex's other hooks are not touched. Codex runs a new hook only after review: once, open codex, type /hooks and trust AI Hub Bar's hooks. New Codex sessions pick it up."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Con el hook, las sesiones de Codex CLI aparecen en «Sesiones» como las de Claude: trabajando, esperando permiso, listo, y «esperando» llega como notificación. Las entradas de AI Hub Bar se añaden a ~/.codex/hooks.json (antes se guarda una copia de seguridad al lado); los demás hooks de Codex no se tocan. Codex ejecuta un hook nuevo solo tras revisarlo: una vez, abra codex, escriba /hooks y confíe en los hooks de AI Hub Bar. Las nuevas sesiones de Codex lo usan."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Avec le hook, les sessions Codex CLI apparaissent dans « Sessions » comme celles de Claude : en cours, en attente d'autorisation, terminé — et « en attente » arrive en notification. Les entrées d'AI Hub Bar sont ajoutées à ~/.codex/hooks.json (une copie de sauvegarde est faite à côté avant) ; les autres hooks de Codex ne sont pas touchés. Codex n'exécute un nouveau hook qu'après vérification : une fois, ouvrez codex, tapez /hooks et faites confiance aux hooks d'AI Hub Bar. Les nouvelles sessions Codex le prennent en compte."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dengan hook, sesi Codex CLI tampil di “Sesi” seperti milik Claude: bekerja, menunggu izin, selesai — dan “menunggu” datang sebagai notifikasi. Entri AI Hub Bar ditambahkan ke ~/.codex/hooks.json (cadangan dibuat di sebelahnya lebih dulu); hook Codex lainnya tidak disentuh. Codex menjalankan hook baru hanya setelah ditinjau: sekali saja, buka codex, ketik /hooks, lalu percayai hook AI Hub Bar. Sesi Codex baru akan memakainya."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Con l'hook, le sessioni di Codex CLI compaiono in «Sessioni» come quelle di Claude: in corso, in attesa di autorizzazione, pronto — e «in attesa» arriva come notifica. Le voci di AI Hub Bar vengono aggiunte a ~/.codex/hooks.json (prima viene fatta una copia di backup accanto); gli altri hook di Codex non vengono toccati. Codex esegue un nuovo hook solo dopo la verifica: una volta, apri codex, digita /hooks e accetta gli hook di AI Hub Bar. Le nuove sessioni di Codex lo usano."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "フックを入れると、Codex CLI のセッションも Claude と同じように「セッション」に表示されます(作業中・許可待ち・完了)。「待機中」は通知で届きます。AI Hub Bar のエントリは ~/.codex/hooks.json に追加され(変更前に隣にバックアップを作成)、Codex の他のフックには触れません。Codex は新しいフックを確認後にのみ実行します。一度 codex を開いて /hooks と入力し、AI Hub Bar のフックを信頼してください。新しい Codex セッションから反映されます。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "훅을 설치하면 Codex CLI 세션도 Claude처럼 ‘세션’에 표시됩니다: 작업 중, 허가 대기, 완료 — ‘대기 중’은 알림으로 옵니다. AI Hub Bar 항목은 ~/.codex/hooks.json에 추가되며(변경 전 옆에 백업 생성) Codex의 다른 훅은 건드리지 않습니다. Codex는 새 훅을 검토한 뒤에만 실행합니다: 한 번 codex를 열고 /hooks를 입력해 AI Hub Bar 훅을 신뢰하세요. 새 Codex 세션부터 적용됩니다."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Z hookiem sesje Codex CLI widać w „Sesjach” jak u Claude: pracuje, czeka na pozwolenie, gotowe — a „czeka” przychodzi jako powiadomienie. Wpisy AI Hub Bar są dodawane do ~/.codex/hooks.json (przed zmianą obok powstaje kopia zapasowa); inne hooki Codex pozostają nietknięte. Codex uruchamia nowy hook dopiero po sprawdzeniu: raz otwórz codex, wpisz /hooks i zaufaj hookom AI Hub Bar. Nowe sesje Codex go przejmują."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Com o hook, as sessões do Codex CLI aparecem em “Sessões” como as do Claude: trabalhando, aguardando permissão, pronto — e “aguardando” chega como notificação. As entradas do AI Hub Bar são adicionadas a ~/.codex/hooks.json (antes é feita uma cópia de segurança ao lado); os outros hooks do Codex não são tocados. O Codex só executa um hook novo após revisão: uma vez, abra o codex, digite /hooks e confie nos hooks do AI Hub Bar. As novas sessões do Codex passam a usá-lo."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "З hook сесії Codex CLI видно в «Сесіях», як у Claude: працює, чекає дозволу, готово — і «чекає» приходить сповіщенням. Записи AI Hub Bar додаються в ~/.codex/hooks.json (перед зміною — резервна копія поруч), інші hooks Codex не зачіпаються. Codex запускає новий hook лише після перевірки: один раз відкрийте codex, введіть /hooks і довірте hooks AI Hub Bar. Підхоплюється новими сесіями Codex."
-          }
-        }
-      }
-    },
-    "С hook сессии Copilot CLI видны в «Сессиях» как у Claude: работает, ждёт разрешения или ответа, готово — и «ждёт» приходит уведомлением. Это отдельный файл ~/.copilot/hooks/aihubbar.json; другие hooks Copilot не трогаются. Подхватывается новыми сессиями Copilot.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "With the hook, Copilot CLI sessions appear in «Sessions» like Claude’s: working, waiting for a permission or an answer, done — and «waiting» comes as a notification. It is a separate file, ~/.copilot/hooks/aihubbar.json; Copilot’s other hooks are not touched. New Copilot sessions pick it up."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "З hook сесії Copilot CLI видно в «Сесіях», як у Claude: працює, чекає дозволу чи відповіді, готово — і «чекає» приходить сповіщенням. Це окремий файл ~/.copilot/hooks/aihubbar.json; інші hooks Copilot не змінюються. Підхоплюється новими сесіями Copilot."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mit dem Hook erscheinen Copilot-CLI-Sitzungen unter «Sitzungen» wie die von Claude: arbeitet, wartet auf eine Erlaubnis oder Antwort, fertig – und «wartet» kommt als Mitteilung. Es ist eine eigene Datei, ~/.copilot/hooks/aihubbar.json; andere Copilot-Hooks bleiben unberührt. Neue Copilot-Sitzungen übernehmen ihn."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Avec le hook, les sessions Copilot CLI apparaissent dans « Sessions » comme celles de Claude : au travail, en attente d’une autorisation ou d’une réponse, terminé — et « en attente » arrive en notification. C’est un fichier à part, ~/.copilot/hooks/aihubbar.json ; les autres hooks de Copilot ne sont pas touchés. Les nouvelles sessions Copilot le prennent en compte."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Con el hook, las sesiones de Copilot CLI aparecen en «Sesiones» como las de Claude: trabajando, esperando un permiso o una respuesta, listo — y «esperando» llega como notificación. Es un archivo aparte, ~/.copilot/hooks/aihubbar.json; los demás hooks de Copilot no se tocan. Lo usan las sesiones nuevas de Copilot."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Con l’hook, le sessioni di Copilot CLI compaiono in «Sessioni» come quelle di Claude: al lavoro, in attesa di un permesso o di una risposta, finito — e «in attesa» arriva come notifica. È un file a sé, ~/.copilot/hooks/aihubbar.json; gli altri hook di Copilot restano intatti. Lo usano le nuove sessioni di Copilot."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Com o hook, as sessões do Copilot CLI aparecem em «Sessões» como as do Claude: trabalhando, aguardando permissão ou resposta, pronto — e «aguardando» chega como notificação. É um arquivo separado, ~/.copilot/hooks/aihubbar.json; os outros hooks do Copilot não são alterados. Novas sessões do Copilot passam a usá-lo."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Z hookiem sesje Copilot CLI widać w «Sesjach» jak sesje Claude: pracuje, czeka na zgodę lub odpowiedź, gotowe — a «czeka» przychodzi jako powiadomienie. To osobny plik ~/.copilot/hooks/aihubbar.json; inne hooki Copilota pozostają nietknięte. Używają go nowe sesje Copilota."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "フックを入れると、Copilot CLI のセッションが Claude と同じように「セッション」に表示されます：作業中、許可や返答を待機中、完了 — 「待機中」は通知でも届きます。別ファイル ~/.copilot/hooks/aihubbar.json で、Copilot の他のフックには触れません。新しい Copilot セッションから有効になります。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "후크를 설치하면 Copilot CLI 세션이 Claude처럼 「세션」에 표시됩니다: 작업 중, 권한이나 답변 대기, 완료 — 「대기」는 알림으로도 옵니다. 별도 파일 ~/.copilot/hooks/aihubbar.json이며 Copilot의 다른 후크는 건드리지 않습니다. 새 Copilot 세션부터 적용됩니다."
-          }
-        },
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "مع الخطاف تظهر جلسات Copilot CLI في «الجلسات» مثل جلسات Claude: يعمل، ينتظر إذنًا أو ردًا، انتهى — ويصل «ينتظر» كإشعار. إنه ملف مستقل ‎~/.copilot/hooks/aihubbar.json‏، ولا تُمس خطافات Copilot الأخرى. تستخدمه جلسات Copilot الجديدة."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dengan hook, sesi Copilot CLI tampil di «Sesi» seperti milik Claude: bekerja, menunggu izin atau jawaban, selesai — dan «menunggu» datang sebagai notifikasi. Ini file tersendiri, ~/.copilot/hooks/aihubbar.json; hook Copilot lainnya tidak disentuh. Sesi Copilot baru akan memakainya."
           }
         }
       }
@@ -135295,82 +135067,6 @@
         }
       }
     },
-    "Hooks добавляются в ~/.claude/settings.json (остальные настройки не трогаются, перед изменением рядом сохраняется копия). Они записывают состояние каждой сессии Claude Code на этом Mac — в Терминале, в приложении Claude, фоновых — чтобы AI Hub Bar показывал их в панели.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "تُضاف hooks إلى ~/.claude/settings.json (تبقى الإعدادات الأخرى كما هي، وتُحفظ نسخة بجانبه قبل التغيير). تسجّل حالة كل جلسة Claude Code على هذا الـ Mac — في الطرفية وفي تطبيق Claude وفي الخلفية — ليعرضها AI Hub Bar في اللوحة."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hooks werden zu ~/.claude/settings.json hinzugefügt (andere Einstellungen bleiben unberührt; vorher wird daneben eine Kopie gespeichert). Sie zeichnen den Zustand jeder Claude-Code-Sitzung auf diesem Mac auf — im Terminal, in der Claude-App, im Hintergrund —, damit AI Hub Bar sie im Panel zeigt."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hooks are added to ~/.claude/settings.json (other settings are left alone; a copy is saved next to it first). They record the state of every Claude Code session on this Mac — in Terminal, in the Claude app, in the background — so AI Hub Bar can show them in the panel."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Los hooks se añaden a ~/.claude/settings.json (el resto de ajustes no se toca; antes se guarda una copia al lado). Registran el estado de cada sesión de Claude Code en este Mac — en Terminal, en la app Claude, en segundo plano — para que AI Hub Bar las muestre en el panel."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Les hooks sont ajoutés à ~/.claude/settings.json (les autres réglages restent intacts ; une copie est enregistrée à côté avant). Ils enregistrent l'état de chaque session Claude Code sur ce Mac — dans Terminal, dans l'app Claude, en arrière-plan — pour que AI Hub Bar les affiche dans le panneau."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hook ditambahkan ke ~/.claude/settings.json (pengaturan lain tidak disentuh; sebelumnya salinan disimpan di sebelahnya). Hook mencatat status setiap sesi Claude Code di Mac ini — di Terminal, di aplikasi Claude, di latar belakang — agar AI Hub Bar menampilkannya di panel."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Gli hook vengono aggiunti a ~/.claude/settings.json (le altre impostazioni restano intatte; prima viene salvata una copia accanto). Registrano lo stato di ogni sessione di Claude Code su questo Mac — nel Terminale, nell'app Claude, in background — perché AI Hub Bar le mostri nel pannello."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "hooks は ~/.claude/settings.json に追加されます (他の設定はそのまま。事前に隣へコピーを保存します)。この Mac のすべての Claude Code セッション — ターミナル、Claude アプリ、バックグラウンド — の状態を記録し、AI Hub Bar がパネルに表示できるようにします。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "hooks는 ~/.claude/settings.json에 추가됩니다 (다른 설정은 그대로이며, 먼저 옆에 사본을 저장합니다). 이 Mac의 모든 Claude Code 세션 — 터미널, Claude 앱, 백그라운드 — 의 상태를 기록해 AI Hub Bar가 패널에 보여 줄 수 있게 합니다."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hooki są dopisywane do ~/.claude/settings.json (pozostałe ustawienia zostają nietknięte; wcześniej obok zapisywana jest kopia). Zapisują stan każdej sesji Claude Code na tym Macu — w Terminalu, w aplikacji Claude, w tle — żeby AI Hub Bar pokazywał je w panelu."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Os hooks são adicionados a ~/.claude/settings.json (os outros ajustes não são tocados; antes é salva uma cópia ao lado). Eles registram o estado de cada sessão do Claude Code neste Mac — no Terminal, no app Claude, em segundo plano — para que o AI Hub Bar as mostre no painel."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hooks додаються в ~/.claude/settings.json (інші налаштування не змінюються, перед зміною поруч зберігається копія). Вони записують стан кожної сесії Claude Code на цьому Маку — у Терміналі, у застосунку Claude, фонових — щоб AI Hub Bar показував їх у панелі."
-          }
-        }
-      }
-    },
     "Все сессии Claude Code на этом Mac: что делают, кто ждёт ответа, фоновые задачи и очередь.": {
       "localizations": {
         "ar": {
@@ -138261,6 +137957,462 @@
           "stringUnit": {
             "state": "translated",
             "value": "Mac"
+          }
+        }
+      }
+    },
+    "AI": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الذكاء الاصطناعي"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "KI"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "IA"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "IA"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "IA"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "IA"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI"
+          }
+        }
+      }
+    },
+    "Появится у профиля с проектами-папками и календарём — «Профили» → профиль.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يظهر في ملف تعريف بمشاريع مجلدات وتقويم — «ملفات التعريف» ← الملف."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Erscheint bei einem Profil mit Ordnerprojekten und Kalender – „Profile“ → Profil."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Appears for a profile with folder projects and a calendar — “Profiles” → the profile."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aparece en un perfil con proyectos de carpeta y calendario — «Perfiles» → perfil."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apparaît pour un profil avec projets-dossiers et calendrier — « Profils » → profil."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Muncul pada profil dengan proyek folder dan kalender — “Profil” → profil."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Compare in un profilo con progetti-cartella e calendario — «Profili» → profilo."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "フォルダプロジェクトとカレンダーのあるプロファイルに表示されます —「プロファイル」→ プロファイル。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "폴더 프로젝트와 캘린더가 있는 프로필에 나타납니다 — ‘프로필’ → 프로필."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pojawi się w profilu z projektami-folderami i kalendarzem — „Profile” → profil."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aparece em um perfil com projetos em pastas e calendário — “Perfis” → perfil."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "З’явиться у профілі з проєктами-папками й календарем — «Профілі» → профіль."
+          }
+        }
+      }
+    },
+    "Показать приложения": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "عرض التطبيقات"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apps anzeigen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Show the apps"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mostrar las apps"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Afficher les apps"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tampilkan aplikasi"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mostra le app"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アプリを表示"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "앱 보기"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pokaż aplikacje"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mostrar os apps"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Показати застосунки"
+          }
+        }
+      }
+    },
+    "С отслеживанием сессии Codex CLI видны в «Сессиях» как у Claude: работает, ждёт разрешения, готово — и «ждёт» приходит уведомлением. Записи AI Hub Bar добавляются в ~/.codex/hooks.json (перед изменением — резервная копия рядом), другие hooks Codex не трогаются. Codex запускает новый hook только после проверки: один раз откройте codex, введите /hooks и доверьте hooks AI Hub Bar. Подхватывается новыми сессиями Codex.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مع التتبّع تظهر جلسات Codex CLI في «الجلسات» مثل جلسات Claude: يعمل، ينتظر الإذن، جاهز — وتصل «ينتظر» كإشعار. تُضاف إدخالات AI Hub Bar إلى ~/.codex/hooks.json (مع نسخة احتياطية بجانبه قبل التغيير)، ولا تُمسّ خطّافات Codex الأخرى. لا يشغّل Codex خطّافًا جديدًا إلا بعد مراجعته: افتح codex مرة واحدة واكتب /hooks ووثِق بخطّافات AI Hub Bar. تلتقطه جلسات Codex الجديدة."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mit der Sitzungserfassung erscheinen Codex-CLI-Sitzungen in „Sitzungen“ wie die von Claude: arbeitet, wartet auf Erlaubnis, fertig — und „wartet“ kommt als Mitteilung. Die Einträge von AI Hub Bar werden zu ~/.codex/hooks.json hinzugefügt (vorher eine Sicherungskopie daneben); andere Hooks von Codex bleiben unberührt. Codex führt einen neuen Hook erst nach Prüfung aus: einmal codex öffnen, /hooks eingeben und den Hooks von AI Hub Bar vertrauen. Neue Codex-Sitzungen übernehmen ihn."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "With tracking on, Codex CLI sessions show in “Sessions” like Claude's: running, waiting for permission, done — and “waiting” comes as a notification. AI Hub Bar's entries are added to ~/.codex/hooks.json (a backup is made next to it first); Codex's other hooks are not touched. Codex runs a new hook only after review: once, open codex, type /hooks and trust AI Hub Bar's hooks. New Codex sessions pick it up."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Con el seguimiento activo, las sesiones de Codex CLI aparecen en «Sesiones» como las de Claude: trabajando, esperando permiso, listo, y «esperando» llega como notificación. Las entradas de AI Hub Bar se añaden a ~/.codex/hooks.json (antes se guarda una copia de seguridad al lado); los demás hooks de Codex no se tocan. Codex ejecuta un hook nuevo solo tras revisarlo: una vez, abra codex, escriba /hooks y confíe en los hooks de AI Hub Bar. Las nuevas sesiones de Codex lo usan."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Avec le suivi activé, les sessions Codex CLI apparaissent dans « Sessions » comme celles de Claude : en cours, en attente d'autorisation, terminé — et « en attente » arrive en notification. Les entrées d'AI Hub Bar sont ajoutées à ~/.codex/hooks.json (une copie de sauvegarde est faite à côté avant) ; les autres hooks de Codex ne sont pas touchés. Codex n'exécute un nouveau hook qu'après vérification : une fois, ouvrez codex, tapez /hooks et faites confiance aux hooks d'AI Hub Bar. Les nouvelles sessions Codex le prennent en compte."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dengan pelacakan aktif, sesi Codex CLI tampil di “Sesi” seperti milik Claude: bekerja, menunggu izin, selesai — dan “menunggu” datang sebagai notifikasi. Entri AI Hub Bar ditambahkan ke ~/.codex/hooks.json (cadangan dibuat di sebelahnya lebih dulu); hook Codex lainnya tidak disentuh. Codex menjalankan hook baru hanya setelah ditinjau: sekali saja, buka codex, ketik /hooks, lalu percayai hook AI Hub Bar. Sesi Codex baru akan memakainya."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Con il monitoraggio attivo, le sessioni di Codex CLI compaiono in «Sessioni» come quelle di Claude: in corso, in attesa di autorizzazione, pronto — e «in attesa» arriva come notifica. Le voci di AI Hub Bar vengono aggiunte a ~/.codex/hooks.json (prima viene fatta una copia di backup accanto); gli altri hook di Codex non vengono toccati. Codex esegue un nuovo hook solo dopo la verifica: una volta, apri codex, digita /hooks e accetta gli hook di AI Hub Bar. Le nuove sessioni di Codex lo usano."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "追跡を有効にすると、Codex CLI のセッションも Claude と同じように「セッション」に表示されます(作業中・許可待ち・完了)。「待機中」は通知で届きます。AI Hub Bar のエントリは ~/.codex/hooks.json に追加され(変更前に隣にバックアップを作成)、Codex の他のフックには触れません。Codex は新しいフックを確認後にのみ実行します。一度 codex を開いて /hooks と入力し、AI Hub Bar のフックを信頼してください。新しい Codex セッションから反映されます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "추적을 켜면 Codex CLI 세션도 Claude처럼 ‘세션’에 표시됩니다: 작업 중, 허가 대기, 완료 — ‘대기 중’은 알림으로 옵니다. AI Hub Bar 항목은 ~/.codex/hooks.json에 추가되며(변경 전 옆에 백업 생성) Codex의 다른 훅은 건드리지 않습니다. Codex는 새 훅을 검토한 뒤에만 실행합니다: 한 번 codex를 열고 /hooks를 입력해 AI Hub Bar 훅을 신뢰하세요. 새 Codex 세션부터 적용됩니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Przy włączonym śledzeniu sesje Codex CLI widać w „Sesjach” jak u Claude: pracuje, czeka na pozwolenie, gotowe — a „czeka” przychodzi jako powiadomienie. Wpisy AI Hub Bar są dodawane do ~/.codex/hooks.json (przed zmianą obok powstaje kopia zapasowa); inne hooki Codex pozostają nietknięte. Codex uruchamia nowy hook dopiero po sprawdzeniu: raz otwórz codex, wpisz /hooks i zaufaj hookom AI Hub Bar. Nowe sesje Codex go przejmują."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Com o rastreamento ativo, as sessões do Codex CLI aparecem em “Sessões” como as do Claude: trabalhando, aguardando permissão, pronto — e “aguardando” chega como notificação. As entradas do AI Hub Bar são adicionadas a ~/.codex/hooks.json (antes é feita uma cópia de segurança ao lado); os outros hooks do Codex não são tocados. O Codex só executa um hook novo após revisão: uma vez, abra o codex, digite /hooks e confie nos hooks do AI Hub Bar. As novas sessões do Codex passam a usá-lo."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Із відстеженням сесії Codex CLI видно в «Сесіях», як у Claude: працює, чекає дозволу, готово — і «чекає» приходить сповіщенням. Записи AI Hub Bar додаються в ~/.codex/hooks.json (перед зміною — резервна копія поруч), інші hooks Codex не зачіпаються. Codex запускає новий hook лише після перевірки: один раз відкрийте codex, введіть /hooks і довірте hooks AI Hub Bar. Підхоплюється новими сесіями Codex."
+          }
+        }
+      }
+    },
+    "С отслеживанием сессии Copilot CLI видны в «Сессиях» как у Claude: работает, ждёт разрешения или ответа, готово — и «ждёт» приходит уведомлением. Это отдельный файл ~/.copilot/hooks/aihubbar.json; другие hooks Copilot не трогаются. Подхватывается новыми сессиями Copilot.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مع التتبّع تظهر جلسات Copilot CLI في «الجلسات» مثل جلسات Claude: يعمل، ينتظر إذنًا أو ردًا، انتهى — ويصل «ينتظر» كإشعار. إنه ملف مستقل ‎~/.copilot/hooks/aihubbar.json‏، ولا تُمس خطافات Copilot الأخرى. تستخدمه جلسات Copilot الجديدة."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mit der Sitzungserfassung erscheinen Copilot-CLI-Sitzungen unter «Sitzungen» wie die von Claude: arbeitet, wartet auf eine Erlaubnis oder Antwort, fertig – und «wartet» kommt als Mitteilung. Es ist eine eigene Datei, ~/.copilot/hooks/aihubbar.json; andere Copilot-Hooks bleiben unberührt. Neue Copilot-Sitzungen übernehmen ihn."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "With tracking on, Copilot CLI sessions appear in «Sessions» like Claude’s: working, waiting for a permission or an answer, done — and «waiting» comes as a notification. It is a separate file, ~/.copilot/hooks/aihubbar.json; Copilot’s other hooks are not touched. New Copilot sessions pick it up."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Con el seguimiento activo, las sesiones de Copilot CLI aparecen en «Sesiones» como las de Claude: trabajando, esperando un permiso o una respuesta, listo — y «esperando» llega como notificación. Es un archivo aparte, ~/.copilot/hooks/aihubbar.json; los demás hooks de Copilot no se tocan. Lo usan las sesiones nuevas de Copilot."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Avec le suivi activé, les sessions Copilot CLI apparaissent dans « Sessions » comme celles de Claude : au travail, en attente d’une autorisation ou d’une réponse, terminé — et « en attente » arrive en notification. C’est un fichier à part, ~/.copilot/hooks/aihubbar.json ; les autres hooks de Copilot ne sont pas touchés. Les nouvelles sessions Copilot le prennent en compte."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dengan pelacakan aktif, sesi Copilot CLI tampil di «Sesi» seperti milik Claude: bekerja, menunggu izin atau jawaban, selesai — dan «menunggu» datang sebagai notifikasi. Ini file tersendiri, ~/.copilot/hooks/aihubbar.json; hook Copilot lainnya tidak disentuh. Sesi Copilot baru akan memakainya."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Con il monitoraggio attivo, le sessioni di Copilot CLI compaiono in «Sessioni» come quelle di Claude: al lavoro, in attesa di un permesso o di una risposta, finito — e «in attesa» arriva come notifica. È un file a sé, ~/.copilot/hooks/aihubbar.json; gli altri hook di Copilot restano intatti. Lo usano le nuove sessioni di Copilot."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "追跡を有効にすると、Copilot CLI のセッションが Claude と同じように「セッション」に表示されます：作業中、許可や返答を待機中、完了 — 「待機中」は通知でも届きます。別ファイル ~/.copilot/hooks/aihubbar.json で、Copilot の他のフックには触れません。新しい Copilot セッションから有効になります。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "추적을 켜면 Copilot CLI 세션이 Claude처럼 「세션」에 표시됩니다: 작업 중, 권한이나 답변 대기, 완료 — 「대기」는 알림으로도 옵니다. 별도 파일 ~/.copilot/hooks/aihubbar.json이며 Copilot의 다른 후크는 건드리지 않습니다. 새 Copilot 세션부터 적용됩니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Przy włączonym śledzeniu sesje Copilot CLI widać w «Sesjach» jak sesje Claude: pracuje, czeka na zgodę lub odpowiedź, gotowe — a «czeka» przychodzi jako powiadomienie. To osobny plik ~/.copilot/hooks/aihubbar.json; inne hooki Copilota pozostają nietknięte. Używają go nowe sesje Copilota."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Com o rastreamento ativo, as sessões do Copilot CLI aparecem em «Sessões» como as do Claude: trabalhando, aguardando permissão ou resposta, pronto — e «aguardando» chega como notificação. É um arquivo separado, ~/.copilot/hooks/aihubbar.json; os outros hooks do Copilot não são alterados. Novas sessões do Copilot passam a usá-lo."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Із відстеженням сесії Copilot CLI видно в «Сесіях», як у Claude: працює, чекає дозволу чи відповіді, готово — і «чекає» приходить сповіщенням. Це окремий файл ~/.copilot/hooks/aihubbar.json; інші hooks Copilot не змінюються. Підхоплюється новими сесіями Copilot."
+          }
+        }
+      }
+    },
+    "Записи отслеживания добавляются в ~/.claude/settings.json (остальные настройки не трогаются, перед изменением рядом сохраняется копия). Они записывают состояние каждой сессии Claude Code на этом Mac — в Терминале, в приложении Claude, фоновых — чтобы AI Hub Bar показывал их в панели.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تُضاف إدخالات التتبّع إلى ~/.claude/settings.json (تبقى الإعدادات الأخرى كما هي، وتُحفظ نسخة بجانبه قبل التغيير). تسجّل حالة كل جلسة Claude Code على هذا الـ Mac — في الطرفية وفي تطبيق Claude وفي الخلفية — ليعرضها AI Hub Bar في اللوحة."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Erfassungseinträge werden zu ~/.claude/settings.json hinzugefügt (andere Einstellungen bleiben unberührt; vorher wird daneben eine Kopie gespeichert). Sie zeichnen den Zustand jeder Claude-Code-Sitzung auf diesem Mac auf — im Terminal, in der Claude-App, im Hintergrund —, damit AI Hub Bar sie im Panel zeigt."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tracking entries are added to ~/.claude/settings.json (other settings are left alone; a copy is saved next to it first). They record the state of every Claude Code session on this Mac — in Terminal, in the Claude app, in the background — so AI Hub Bar can show them in the panel."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Las entradas de seguimiento se añaden a ~/.claude/settings.json (el resto de ajustes no se toca; antes se guarda una copia al lado). Registran el estado de cada sesión de Claude Code en este Mac — en Terminal, en la app Claude, en segundo plano — para que AI Hub Bar las muestre en el panel."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les entrées de suivi sont ajoutées à ~/.claude/settings.json (les autres réglages restent intacts ; une copie est enregistrée à côté avant). Ils enregistrent l'état de chaque session Claude Code sur ce Mac — dans Terminal, dans l'app Claude, en arrière-plan — pour que AI Hub Bar les affiche dans le panneau."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Entri pelacakan ditambahkan ke ~/.claude/settings.json (pengaturan lain tidak disentuh; sebelumnya salinan disimpan di sebelahnya). Hook mencatat status setiap sesi Claude Code di Mac ini — di Terminal, di aplikasi Claude, di latar belakang — agar AI Hub Bar menampilkannya di panel."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le voci di monitoraggio vengono aggiunte a ~/.claude/settings.json (le altre impostazioni restano intatte; prima viene salvata una copia accanto). Registrano lo stato di ogni sessione di Claude Code su questo Mac — nel Terminale, nell'app Claude, in background — perché AI Hub Bar le mostri nel pannello."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "追跡の設定は  ~/.claude/settings.json に追加されます (他の設定はそのまま。事前に隣へコピーを保存します)。この Mac のすべての Claude Code セッション — ターミナル、Claude アプリ、バックグラウンド — の状態を記録し、AI Hub Bar がパネルに表示できるようにします。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "추적 항목은 ~/.claude/settings.json에 추가됩니다 (다른 설정은 그대로이며, 먼저 옆에 사본을 저장합니다). 이 Mac의 모든 Claude Code 세션 — 터미널, Claude 앱, 백그라운드 — 의 상태를 기록해 AI Hub Bar가 패널에 보여 줄 수 있게 합니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wpisy śledzenia są dopisywane do ~/.claude/settings.json (pozostałe ustawienia zostają nietknięte; wcześniej obok zapisywana jest kopia). Zapisują stan każdej sesji Claude Code na tym Macu — w Terminalu, w aplikacji Claude, w tle — żeby AI Hub Bar pokazywał je w panelu."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "As entradas de rastreamento são adicionadas a ~/.claude/settings.json (os outros ajustes não são tocados; antes é salva uma cópia ao lado). Eles registram o estado de cada sessão do Claude Code neste Mac — no Terminal, no app Claude, em segundo plano — para que o AI Hub Bar as mostre no painel."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Записи відстеження додаються в ~/.claude/settings.json (інші налаштування не змінюються, перед зміною поруч зберігається копія). Вони записують стан кожної сесії Claude Code на цьому Маку — у Терміналі, у застосунку Claude, фонових — щоб AI Hub Bar показував їх у панелі."
           }
         }
       }

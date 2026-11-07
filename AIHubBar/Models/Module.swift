@@ -15,7 +15,7 @@ enum ModuleGroup: String, CaseIterable, Sendable {
 
     var title: String {
         switch self {
-        case .ai: "AI"
+        case .ai: String(localized: "AI")
         case .work: String(localized: "Работа")
         case .mac: "Mac"
         }
@@ -81,7 +81,8 @@ extension Profile {
     /// The same with the hidden built-in modules given directly (the assistant's draft; SPEC-refactor §4).
     func normalizedModules(hidden: Set<ModuleKind>) -> [ProfileModule] {
         var possible: [ModuleKind] = [.limits, .sessions]
-        if calendar != .off { possible.append(.upcoming) }
+        // The same rule as `CalendarStore`: dates come from folder projects, so only those have the block.
+        if calendar != .off, source.isFolders { possible.append(.upcoming) }
         if source != .none { possible.append(.projects) }
         if commonCommands == .dailyReport { possible.append(.reports) }
 

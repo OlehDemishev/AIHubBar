@@ -28,7 +28,7 @@ struct NotchSetupView: View {
             }
             Section("Сводка — лимиты и сессии") {
                 Picker("Сводка — лимиты и сессии", selection: $summary) {
-                    ForEach(NotchSummary.allCases, id: \.self) { Text($0.title).tag($0) }
+                    ForEach(NotchSummary.allCases, id: \.self) { Text($0.title.prefix(1).uppercased() + $0.title.dropFirst()).tag($0) }
                 }
                 .pickerStyle(.radioGroup)
                 .labelsHidden()

@@ -15,6 +15,9 @@ enum ModuleSwitch {
     static func enableAction(_ kind: ModuleKind, modes: ProfileStore) -> (title: String, run: () -> Void)? {
         guard let bringIn = kind.definition.bringIn, !modes.installedModules.contains(kind), let mode = modes.current else { return nil }
         switch bringIn {
+        case .calendar where !mode.source.isFolders:
+            // Dates come from folder projects: a calendar here would stay empty, the choice is in the profile.
+            return (String(localized: "Открыть профиль «\(mode.name)»…"), { SettingsRoute.open(.modes) })
         case .calendar:
             return (String(localized: "Включить календарь в профиле «\(mode.name)»"), {
                 var changed = mode

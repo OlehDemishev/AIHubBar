@@ -273,6 +273,7 @@ private struct SessionRowView: View {
                     .foregroundStyle(paused ? Color.orange : row.state.color)
                     .symbolEffect(.pulse, options: .repeating, isActive: row.state == .running && !paused && !reduceMotion)
                     .frame(width: 14)
+                    .accessibilityLabel(paused ? String(localized: "на паузе до сброса лимита") : inBackground ? String(localized: "в фоне") : row.state.title)
                     .help(paused ? String(localized: "на паузе до сброса лимита") : inBackground ? String(localized: "в фоне") : row.state.title)
                 Text(row.project)
                     .fontWeight(.medium)
@@ -399,7 +400,6 @@ private struct SessionRowView: View {
         }
         .onHover { isHovered = $0 }
         .onDisappear { isHovered = false }
-        .accessibilityAddTraits(.isButton)
         .animation(.easeOut(duration: 0.12), value: isHovered)
         .help(helpText)
     }

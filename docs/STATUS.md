@@ -5,13 +5,13 @@
 **Updated:** 2026-11-07
 
 **Now:**
-- final UI pass found F1–F9 (docs/specs/AUDIT-ui.md), not fixed yet; 0.7.4 waits for them
+- UI audit and final pass closed (docs/specs/AUDIT-ui.md); waiting for Oleh's go on 0.7.4
 - Telegram: Worker deployed at https://aihubbar-telegram.oleh-demishev.workers.dev (new bot, old bots deleted by Oleh); the app points at it — pairing and a live check next
 - merged 2026-11-06: #262 donations («Поддержать проект» in Settings → General, site/support.html with Ko-fi, GitHub Sponsors and Buy Me a Coffee; the app button reaches people with the next release)
 - merged 2026-11-03: #251 menu bar ☕ follows the «Не спать» switch, #248 «Не спать» on/off in the menu bar, #241 Codex states, #240 quick command shortcuts, #238 «Быстрый запрос», #236 content spec, #242 «Telegram» stage 1, #244 menu at the bottom, #246 shared bot (Worker not deployed yet), #247 desktop CI off for Mac string changes, #249 the bot's menu set up by each person, #252 stage 2 (sessions, requests, limits), #254 stage 3 (tasks and runs), #255 stage 4 (settings in the bot), #256 Mini App
 
 **Next:**
-- fix F1–F9, then release 0.7.4 (scripts/release.sh, Oleh's go)
+- release 0.7.4 (scripts/release.sh, Oleh's go)
 - check on the Air: the update through Sparkle across the certificate change, then the island at the real notch
 - promotion (docs/LAUNCH.md): demo recording, then r/ClaudeAI, the lists, r/macapps; Show HN and Product Hunt after the Developer ID
 - Telegram: pair the Mac mini with the shared bot, try the bot and the Mini App live
@@ -35,6 +35,12 @@
 - MacBook Air: update to 0.6.0 through Sparkle (Settings → General → Updates) and check the island at the real notch
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-07 — Final pass fixes (branch `fix/final-pass`)
+
+Done: F1–F9. Scrolled cards no longer cover the search and header on glass. «Ближайшее» belongs to folder profiles by one rule, so a git profile no longer lists a block it never draws. VoiceOver reads session rows as text again, with the state by name. «Панель» fits the minimum window: the sketch hides there, titles don't truncate. German disk is «Festplatte». Tracking reads «включено / выключено», and the first lines of its footnotes no longer say hook. The clipboard apps row lines up and shows names. The AI section is translated, the OpenAI-compatible buttons look like buttons, island setup options start with a capital, Help illustrations use neutral names, limit names follow the language at once. 4 new strings in 12 languages.
+Checked: scripts/check.sh passed, with new tests for the rule and the titles; on the installed app: the scrolled panel on glass, «Панель» at 940 and 820, the clipboard list, the «Ближайшее» page.
+Left: dark theme after the glass change was not looked at again; keys, the calendar and CLAUDE.md windows, widgets, a real notch.
 
 ## 2026-11-07 — Final UI pass (branch `docs/ui-final-pass`)
 

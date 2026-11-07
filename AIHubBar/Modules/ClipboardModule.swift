@@ -32,6 +32,7 @@ private struct ClipboardSketch: View {
 }
 
 struct ClipboardSection: View {
+    @State private var showsApps = false
     @Environment(AppSettings.self) private var settings
     @Environment(ClipboardHistory.self) private var history
 
@@ -43,7 +44,27 @@ struct ClipboardSection: View {
             }
             Toggle("Помнить после перезапуска", systemImage: "arrow.clockwise", isOn: $settings.clipboardRemember)
                 .onChange(of: settings.clipboardRemember) { history.rememberChanged() }
-            DisclosureGroup {
+            IconRow("Не запоминать из приложений", systemImage: "hand.raised.slash", content: {
+                HStack {
+                    Button {
+                        withAnimation(.snappy(duration: 0.2)) { showsApps.toggle() }
+                    } label: {
+                        HStack(spacing: 4) {
+                            Text(verbatim: "\(settings.clipboardExcludedApps.count)")
+                            Image(systemName: "chevron.right")
+                                .font(.caption2.weight(.semibold))
+                                .rotationEffect(.degrees(showsApps ? 90 : 0))
+                        }
+                        .foregroundStyle(.secondary)
+                        .contentShape(Rectangle())
+                    }
+                    .buttonStyle(.plain)
+                    .help("Показать приложения")
+                    Button("Добавить…", action: addApps)
+                    Button("По умолчанию") { settings.clipboardExcludedApps = ClipboardPolicy.defaultExcludedApps }
+                }
+            })
+            if showsApps {
                 ForEach(settings.clipboardExcludedApps, id: \.self) { app in
                     HStack {
                         Text(verbatim: Self.name(app))
@@ -54,14 +75,7 @@ struct ClipboardSection: View {
                         .buttonStyle(.borderless)
                         .help("Убрать")
                     }
-                }
-            } label: {
-                IconRow("Не запоминать из приложений", systemImage: "hand.raised.slash") {
-                    HStack {
-                        Text(verbatim: "\(settings.clipboardExcludedApps.count)").foregroundStyle(.secondary)
-                        Button("Добавить…", action: addApps)
-                        Button("По умолчанию") { settings.clipboardExcludedApps = ClipboardPolicy.defaultExcludedApps }
-                    }
+                    .padding(.leading, 30)
                 }
             }
             ConfirmedButton(title: "Очистить историю", message: String(localized: "Удалить всё, кроме закреплённого"), confirm: "Очистить") {
@@ -74,9 +88,16 @@ struct ClipboardSection: View {
         }
     }
 
-    /// An app's name from its bundle id; the id itself when the app isn't on this Mac.
+    /// The default list's apps, by name also on a Mac that doesn't have them.
+    private static let knownApps = [
+        "com.1password.1password": "1Password", "com.agilebits.onepassword7": "1Password 7", "com.bitwarden.desktop": "Bitwarden",
+        "org.keepassxc.keepassxc": "KeePassXC", "com.lastpass.LastPass": "LastPass", "com.dashlane.dashlanephonefinal": "Dashlane",
+    ]
+
+    /// An app's name from its bundle id; the id itself when the app isn't on this Mac and isn't a known one.
     private static func name(_ id: String) -> String {
-        NSWorkspace.shared.urlForApplication(withBundleIdentifier: id).map { FileManager.default.displayName(atPath: $0.path) } ?? id
+        NSWorkspace.shared.urlForApplication(withBundleIdentifier: id).map { FileManager.default.displayName(atPath: $0.path) }
+            ?? knownApps[id] ?? id
     }
 
     private func addApps() {

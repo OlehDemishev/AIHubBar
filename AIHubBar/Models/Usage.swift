@@ -15,6 +15,22 @@ struct UsageWindow: Codable, Equatable, Sendable {
 
     static func sameReset(_ a: Date?, _ b: Date?) -> Bool { resetMinutes(a) == resetMinutes(b) }
 
+    /// Titles are read by key: one saved under another language must not outlive the language.
+    init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        key = try c.decode(String.self, forKey: .key)
+        title = Self.title(forKey: key)
+        utilization = try c.decode(Double.self, forKey: .utilization)
+        resetsAt = try c.decodeIfPresent(Date.self, forKey: .resetsAt)
+    }
+
+    init(key: String, title: String, utilization: Double, resetsAt: Date?) {
+        self.key = key
+        self.title = title
+        self.utilization = utilization
+        self.resetsAt = resetsAt
+    }
+
     static func title(forKey key: String) -> String {
         switch key {
         case "five_hour": String(localized: "Сессия (5 ч)")

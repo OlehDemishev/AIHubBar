@@ -69,7 +69,7 @@ enum BringIn: Sendable {
 
     var unavailableReason: String {
         switch self {
-        case .calendar: String(localized: "Появится, когда у профиля включён календарь — «Профили» → профиль.")
+        case .calendar: String(localized: "Появится у профиля с проектами-папками и календарём — «Профили» → профиль.")
         case .profilePage: String(localized: "Появится, когда у профиля есть источник проектов — «Профили» → профиль.")
         case .dailyReport: String(localized: "Появится, когда у профиля команды _daily-report — «Профили» → профиль.")
         }

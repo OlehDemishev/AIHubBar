@@ -85,13 +85,17 @@ struct MenuPanelView: View {
             if !query.isEmpty {
                 PanelSearchResults(results: searchResults, selected: searchSelection, activate: activate)
                     .panelCard()
+                    .panelGlassGroup()
                     .padding(.bottom, 8)
             } else {
                 // Hugs its content up to `blocksMaxHeight`; a window of its own size can't scroll otherwise.
                 ScrollViewReader { reader in
+                    // The glass group goes inside: around the scroll view its glass is drawn past the clip, over the header.
                     ScrollView {
                         blocks
+                            .panelGlassGroup()
                     }
+                    .clipped()
                     .scrollBounceBehavior(.basedOnSize)
                     .frame(maxHeight: blocksMaxHeight)
                     .fixedSize(horizontal: false, vertical: true)
@@ -103,7 +107,6 @@ struct MenuPanelView: View {
                 }
             }
         }
-        .panelGlassGroup()
         // Larger text needs a wider panel, otherwise most lines would truncate.
         .frame(width: (settings.panelWidth.points * max(1, scale)).rounded())
         .environment(\.panelTextScale, scale)
