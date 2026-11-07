@@ -151,9 +151,12 @@ struct CleanupOutputView: View {
                     }
                 }
             } else {
-                Text("Очистка ещё не запускалась")
-                    .foregroundStyle(.secondary)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                VStack(spacing: 10) {
+                    Text("Очистка ещё не запускалась")
+                        .foregroundStyle(.secondary)
+                    Button(CommonCommand.cleanupCheck.title) { commands.run(.cleanupCheck) }
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
         }
         .frame(minWidth: 560, minHeight: 360)

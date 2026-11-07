@@ -209,7 +209,8 @@ enum UsageText {
 
     /// `short`: the weekday and time without the date, for the limit rings.
     static func resetText(_ window: UsageWindow, now: Date = .now, short: Bool = false) -> String? {
-        guard let resets = window.resetsAt else { return nil }
+        // Past the reset the figures are old: no countdown to a moment that has gone.
+        guard let resets = window.resetsAt, resets > now else { return nil }
         if resets.timeIntervalSince(now) < 24 * 3600 { return String(localized: "сброс \(countdown(to: resets, now: now))") }
         // The weekday alone is enough within a week; a month's reset needs the date.
         let format: Date.FormatStyle = short && resets.timeIntervalSince(now) < 7 * 86_400

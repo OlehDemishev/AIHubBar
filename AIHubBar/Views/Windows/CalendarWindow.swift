@@ -172,11 +172,12 @@ private struct DayCell: View {
                 .foregroundStyle(isToday ? Color.white : inMonth ? Color.primary : Color.secondary)
                 .padding(.horizontal, 5)
                 .background(Capsule().fill(isToday ? Color.accentColor : .clear))
-            ForEach(entries.prefix(tall ? 20 : 4)) { entry in
+            let limit = tall ? 20 : 4
+            ForEach(entries.prefix(limit)) { entry in
                 EntryChip(entry: entry, color: Self.palette[colorIndex(entry) % Self.palette.count])
             }
-            if entries.count > (tall ? 20 : 4) {
-                Text("ещё \(entries.count - 4)").font(.caption2).foregroundStyle(.secondary)
+            if entries.count > limit {
+                Text("ещё \(entries.count - limit)").font(.caption2).foregroundStyle(.secondary)
             }
             Spacer(minLength: 0)
         }
@@ -256,8 +257,10 @@ private struct NewEntrySheet: View {
             HStack {
                 Spacer()
                 Button("Отмена", action: done)
+                    .keyboardShortcut(.cancelAction)
                 Button("Добавить", action: add)
                     .buttonStyle(.borderedProminent)
+                    .keyboardShortcut(.defaultAction)
                     .disabled(kind == .plan ? topic.trimmingCharacters(in: .whitespaces).isEmpty : projectPath.isEmpty)
             }
         }

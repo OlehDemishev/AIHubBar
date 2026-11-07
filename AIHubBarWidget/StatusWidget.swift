@@ -78,7 +78,7 @@ struct StatusWidgetView: View {
                     linked(WidgetLink.search) {
                         VStack(alignment: .leading, spacing: 1) {
                             row(symbol: "exclamationmark.circle.fill", color: status.problems.isEmpty ? .secondary : .red,
-                                count: status.problems.count, title: String(localized: "проекты с проблемами"))
+                                count: status.problems.count, title: family == .systemSmall ? String(localized: "с проблемами") : String(localized: "проекты с проблемами"))
                             if family != .systemSmall, !status.problems.isEmpty {
                                 names(Text(status.problems.joined(separator: ", ")))
                             }

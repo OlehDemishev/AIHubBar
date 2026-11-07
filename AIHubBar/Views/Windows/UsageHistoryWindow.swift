@@ -25,7 +25,7 @@ struct UsageHistoryWindow: View {
                 }
                 .pickerStyle(.segmented)
                 .labelsHidden()
-                .frame(width: 260)
+                .fixedSize()
                 Spacer()
                 Button("Экспорт CSV…", action: export)
                     .disabled(usage.days.isEmpty)
@@ -105,7 +105,7 @@ struct UsageHistoryWindow: View {
         panel.allowedContentTypes = [.commaSeparatedText]
         guard panel.runModal() == .OK, let url = panel.url else { return }
         do {
-            try UsageDays.csv(usage.days).write(to: url, atomically: true, encoding: .utf8)
+            try UsageDays.csv(days).write(to: url, atomically: true, encoding: .utf8)
             exportError = nil
         } catch {
             AppLog.error("Usage export: \(error.localizedDescription)")

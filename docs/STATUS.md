@@ -5,13 +5,13 @@
 **Updated:** 2026-11-07
 
 **Now:**
-- UI audit of 0.7.3: permissions, the panel's frame, Settings and the island fixed; leftovers in docs/specs/AUDIT-ui.md
+- UI audit of 0.7.3: main items fixed, what is open is listed at the top of docs/specs/AUDIT-ui.md; release 0.7.4 next
 - Telegram: Worker deployed at https://aihubbar-telegram.oleh-demishev.workers.dev (new bot, old bots deleted by Oleh); the app points at it — pairing and a live check next
 - merged 2026-11-06: #262 donations («Поддержать проект» in Settings → General, site/support.html with Ko-fi, GitHub Sponsors and Buy Me a Coffee; the app button reaches people with the next release)
 - merged 2026-11-03: #251 menu bar ☕ follows the «Не спать» switch, #248 «Не спать» on/off in the menu bar, #241 Codex states, #240 quick command shortcuts, #238 «Быстрый запрос», #236 content spec, #242 «Telegram» stage 1, #244 menu at the bottom, #246 shared bot (Worker not deployed yet), #247 desktop CI off for Mac string changes, #249 the bot's menu set up by each person, #252 stage 2 (sessions, requests, limits), #254 stage 3 (tasks and runs), #255 stage 4 (settings in the bot), #256 Mini App
 
 **Next:**
-- UI leftovers: Settings (25, 30), then P2 items 34–38
+- release 0.7.4 with the UI fixes (scripts/release.sh, Oleh's go)
 - check on the Air: the update through Sparkle across the certificate change, then the island at the real notch
 - promotion (docs/LAUNCH.md): demo recording, then r/ClaudeAI, the lists, r/macapps; Show HN and Product Hunt after the Developer ID
 - Telegram: pair the Mac mini with the shared bot, try the bot and the Mini App live
@@ -35,6 +35,12 @@
 - MacBook Air: update to 0.6.0 through Sparkle (Settings → General → Updates) and check the island at the real notch
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-07 — Windows and widgets leftovers (branch `fix/windows-leftovers`)
+
+Done: audit items 15, 34–38. An expired sign-in shows «Войти в Claude Code» also while old limits are on screen, and past the reset there is no countdown. ↑ ↓ work in the ⌃⌥C window, a background run opens its log there, and the tooltip says «Открыть в Терминале». The empty «Очистка сборок» window offers the check. CSV exports the chosen period, the calendar's «ещё» counts right and its sheet answers Esc and ↵. Widgets: no «сброс через 0 мин», the small one falls back to the week, percent written one way, «с проблемами» fits the small size. 2 new strings.
+Checked: scripts/check.sh passed, with a new test for the reset.
+Left: not looked at live. Open from the audit: 13 (names), 14, 16 (contrast), 17, the rest of 18, the menu bar's stale percent. Settings and the assistant still draw limits as bars, the panel as rings.
 
 ## 2026-11-07 — Settings leftovers (branch `fix/settings-leftovers`)
 

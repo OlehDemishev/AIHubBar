@@ -287,4 +287,10 @@ struct LoginRenewalTests {
         #expect(zip(args, args.dropFirst()).contains { $0 == "--setting-sources" && $1.isEmpty }, "no settings, so no hooks")
         #expect(!args.contains("--bare"), "--bare skips the keychain, so it would not sign in")
     }
+
+    @Test func noCountdownPastTheReset() throws {
+        let now = Date.now
+        let window = UsageWindow(key: "five_hour", title: "Сессия", utilization: 40, resetsAt: now.addingTimeInterval(-60))
+        #expect(UsageText.resetText(window, now: now) == nil)
+    }
 }
