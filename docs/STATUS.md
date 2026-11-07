@@ -35,6 +35,12 @@
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
 
+## 2026-11-07 — Panel header blends in (branch `fix/panel-header-blend`)
+
+Done: on glass the header and search no longer sit on a grey slab with a hard edge: their tint is the cards' colour and fades out at the bottom. The first card is 8 pt below the search, as cards are from each other, and scrolled cards fade out in that gap.
+Checked: scripts/check.sh passed; live panel in light at rest after the last change, in light and dark scrolled with the earlier 16 pt gap.
+Left: the scroll fade was not looked at again after the gap went to 8 pt (Oleh was in a game); not in a release yet.
+
 ## 2026-11-07 — overnight readiness check (branch `chore/status-overnight-check`)
 
 Done: no code changes; 0.7.4 was already out with the UI audit fixes. Removed old local release folders 0.7.0–0.7.3 (all on GitHub Releases), `build/DerivedData`, `build/release/DerivedData` and the merged worktree `feat-quick-prompt-de3c78` with its branch; `build/` went from 2.3 GB to 64 MB, `build/release/0.7.4` kept.
