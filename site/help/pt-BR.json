@@ -435,7 +435,7 @@
         {
           "facts" : [
             {
-              "detail" : "À esquerda e à direita do notch — um limite e as sessões; o que exatamente, você escolhe na página do módulo.",
+              "detail" : "À esquerda e à direita do notch — um limite e as sessões, com o resumo “só na ilha”; o que exatamente, você escolhe na página do módulo.",
               "name" : "Laterais"
             },
             {
@@ -462,7 +462,7 @@
       "steps" : [
         "Ative «Ilha do notch» na página «Módulos»."
       ],
-      "summary" : "Uma ilha preta ao redor do notch do MacBook: o limite e as sessões ao lado; ao passar o cursor, um cartão com os limites e o que o Claude está fazendo.",
+      "summary" : "Uma ilha preta ao redor do notch do MacBook: pedidos, eventos e, ao passar o cursor, um cartão com os limites e o que o Claude está fazendo.",
       "title" : "Ilha do notch"
     },
     {
@@ -496,7 +496,7 @@
       "steps" : [
         "Ative «Layout do teclado» na página «Módulos»."
       ],
-      "summary" : "Uma palavra digitada no layout errado é redigitada sozinha no certo, e o layout muda. Shift duas vezes: a última palavra; ⌥⇧: o texto selecionado. O idioma fica na barra de menus.",
+      "summary" : "Uma palavra digitada no layout errado é redigitada sozinha no certo, e o layout muda.",
       "title" : "Layout do teclado"
     },
     {
@@ -527,7 +527,7 @@
               "name" : "Notas"
             },
             {
-              "detail" : "Seus botões: script em segundo plano ou no Terminal, atalho do «Atalhos» do macOS, link, arquivo, pasta ou app. Cada um pode ter seu próprio atalho de teclado.",
+              "detail" : "Seus botões: script em segundo plano ou no Terminal, atalho do «Atalhos» do macOS, link, arquivo, pasta ou app.",
               "name" : "Comandos rápidos"
             }
           ],

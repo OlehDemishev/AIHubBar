@@ -5,13 +5,13 @@
 **Updated:** 2026-11-07
 
 **Now:**
-- UI audit of 0.7.3: permissions, the panel's frame, Settings rows and texts fixed; the island's wording and state next (docs/specs/AUDIT-ui.md)
+- UI audit of 0.7.3: permissions, the panel's frame, Settings and the island fixed; leftovers in docs/specs/AUDIT-ui.md
 - Telegram: Worker deployed at https://aihubbar-telegram.oleh-demishev.workers.dev (new bot, old bots deleted by Oleh); the app points at it — pairing and a live check next
 - merged 2026-11-06: #262 donations («Поддержать проект» in Settings → General, site/support.html with Ko-fi, GitHub Sponsors and Buy Me a Coffee; the app button reaches people with the next release)
 - merged 2026-11-03: #251 menu bar ☕ follows the «Не спать» switch, #248 «Не спать» on/off in the menu bar, #241 Codex states, #240 quick command shortcuts, #238 «Быстрый запрос», #236 content spec, #242 «Telegram» stage 1, #244 menu at the bottom, #246 shared bot (Worker not deployed yet), #247 desktop CI off for Mac string changes, #249 the bot's menu set up by each person, #252 stage 2 (sessions, requests, limits), #254 stage 3 (tasks and runs), #255 stage 4 (settings in the bot), #256 Mini App
 
 **Next:**
-- UI fixes in the audit's order: the island (22, 31, 33), then Settings leftovers (25, 30)
+- UI leftovers: Settings (25, 30), then P2 items 34–38
 - check on the Air: the update through Sparkle across the certificate change, then the island at the real notch
 - promotion (docs/LAUNCH.md): demo recording, then r/ClaudeAI, the lists, r/macapps; Show HN and Product Hunt after the Developer ID
 - Telegram: pair the Mac mini with the shared bot, try the bot and the Mini App live
@@ -35,6 +35,12 @@
 - MacBook Air: update to 0.6.0 through Sparkle (Settings → General → Updates) and check the island at the real notch
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-07 — The island's state (branch `fix/island-state`)
+
+Done: audit items 22, 31–33. The buttons in the open card could stay dim for good: the panel got no mouse moves, so the click guard never let go; now it does. Only what is drawn reacts to the pointer, so the free space beside the notch no longer opens the card, and hover does nothing over a full-screen app. An ear with nothing to show takes no room, each side on its own. With both ears empty the numbers stay in the menu bar. Requests in the card scroll past 230 pt, the window is 520 pt tall, and a click on the notch opens the card behind a banner. The «Остров» chip is off with a reason unless ears can show, the ear pickers wait for «только в острове», the menu bar preview follows the island with a note. Help and the module text no longer promise ears by default; site/help exported. 6 strings in 12 languages.
+Checked: scripts/check.sh passed, with a new test for the ears' room; on the simulated notch: one ear shown and the other side free, no card from the empty side, the card from the notch, three fake requests scrolling, buttons lit after a move, the menu bar with only its icon.
+Left: a real notch and a full-screen app on the Air; the pill still has no way to open its card (its rest frame stays empty on purpose); `Сессий Claude Code сейчас нет` stays in the catalog for desktop/.
 
 ## 2026-11-07 — Settings texts (branch `fix/settings-texts`)
 

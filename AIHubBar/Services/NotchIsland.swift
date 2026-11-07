@@ -46,6 +46,8 @@ final class NotchIsland {
     @ObservationIgnored var isActive: () -> Bool = { false }
     /// The open permission requests, as banners.
     @ObservationIgnored var openRequests: () -> [NotchEvent] = { [] }
+    /// An ear has something to show right now.
+    @ObservationIgnored var hasEarContent: (NotchEar) -> Bool = { _ in false }
     /// The sessions, to notice one that has finished.
     @ObservationIgnored var sessionItems: () -> [SessionStore.Item] = { [] }
     /// What a click on a banner or a button does: the same as on a notification.
@@ -203,8 +205,23 @@ final class NotchIsland {
         places.indices.contains(index) && !places[index].geometry.isPill && !places[index].isFullScreen && settings.notch.summary != .menuBar
     }
 
-    /// «Только в острове»: the menu bar keeps only its icon while some ears show the summary.
-    var takesMenuBarSummary: Bool { settings.notch.summary == .island && places.indices.contains { showsSummary(on: $0) } }
+    /// The ears shown on one screen: those with something on them.
+    func ears(on index: Int) -> (left: Bool, right: Bool) {
+        guard showsSummary(on: index) else { return (false, false) }
+        return (hasEarContent(settings.notch.leftEar), hasEarContent(settings.notch.rightEar))
+    }
+
+    /// «Только в острове»: the menu bar keeps only its icon while some ear shows the summary; with both ears empty the
+    /// numbers stay in the menu bar, or they would be nowhere.
+    var takesMenuBarSummary: Bool {
+        settings.notch.summary == .island && places.indices.contains { ears(on: $0).left || ears(on: $0).right }
+    }
+
+    /// What the pointer reacts to at rest: only what is drawn, not the room for ears that aren't there.
+    private func restZone(on index: Int) -> CGRect {
+        let ears = ears(on: index)
+        return places[index].geometry.restFrame(left: ears.left, right: ears.right)
+    }
 
     // MARK: - Events (SPEC-notch §3.2)
 
@@ -429,19 +446,25 @@ final class NotchIsland {
                 schedule(after: Self.closeDelay) { [weak self] in self?.close() }
             }
         } else if banner != nil {
+            // A click on the notch opens the card: further requests wait there behind the banner.
+            if type == .leftMouseDown, let index = places.indices.first(where: { places[$0].geometry.notch.contains(location) }) {
+                open(on: index)
+                return
+            }
             // A banner: the pointer on it keeps it; leaving gives it its full time again.
             let onBanner = places.indices.contains { bannerFrame(on: $0)?.contains(location) == true }
             if onBanner != pointerOnBanner {
                 pointerOnBanner = onBanner
                 showNext()
             }
-        } else if let index = places.firstIndex(where: { $0.geometry.restFrame.contains(location) }) {
+        } else if let index = places.indices.first(where: { restZone(on: $0).contains(location) }) {
             if type == .leftMouseDown {
                 open(on: index)
-            } else if settings.notch.openOnHover, !isPending {
+            } else if settings.notch.openOnHover, !isPending, !places[index].isFullScreen {
+                // Over a full-screen app the pointer goes up there for the menu bar, not for the island.
                 schedule(after: Self.openDelay) { [weak self] in
                     guard let self, self.places.indices.contains(index),
-                          self.places[index].geometry.restFrame.contains(NSEvent.mouseLocation) else { return }
+                          self.restZone(on: index).contains(NSEvent.mouseLocation) else { return }
                     self.open(on: index)
                 }
             }

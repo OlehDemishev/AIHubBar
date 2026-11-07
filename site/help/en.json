@@ -435,7 +435,7 @@
         {
           "facts" : [
             {
-              "detail" : "Left and right of the notch — a limit and sessions; exactly what is chosen on the module’s page.",
+              "detail" : "Left and right of the notch — a limit and sessions, when the summary is “only on the island”; exactly what is chosen on the module’s page.",
               "name" : "Ears"
             },
             {
@@ -462,7 +462,7 @@
       "steps" : [
         "Turn on “Notch Island” on the “Modules” page."
       ],
-      "summary" : "A black island around the MacBook notch: the limit and sessions beside it; hover for a card with limits and what Claude is doing.",
+      "summary" : "A black island around the MacBook notch: requests, events and, on hover, a card with limits and what Claude is doing.",
       "title" : "Notch Island"
     },
     {
@@ -496,7 +496,7 @@
       "steps" : [
         "Turn on “Keyboard Layout” on the “Modules” page."
       ],
-      "summary" : "A word typed in the wrong keyboard layout is retyped in the right one by itself, and the layout switches. Double Shift converts the last word, ⌥⇧ the selected text. The language is in the menu bar.",
+      "summary" : "A word typed in the wrong keyboard layout is retyped in the right one by itself, and the layout switches.",
       "title" : "Keyboard Layout"
     },
     {
@@ -527,7 +527,7 @@
               "name" : "Notes"
             },
             {
-              "detail" : "Your own buttons: a script in the background or in Terminal, a macOS «Shortcuts» shortcut, a link, file, folder or app. Each can have its own keyboard shortcut.",
+              "detail" : "Your own buttons: a script in the background or in Terminal, a macOS «Shortcuts» shortcut, a link, file, folder or app.",
               "name" : "Quick Commands"
             }
           ],

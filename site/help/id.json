@@ -435,7 +435,7 @@
         {
           "facts" : [
             {
-              "detail" : "Di kiri dan kanan notch — batas dan sesi; isinya dipilih di halaman modul.",
+              "detail" : "Di kiri dan kanan notch — batas dan sesi, dengan ringkasan “hanya di pulau”; isinya dipilih di halaman modul.",
               "name" : "Telinga"
             },
             {
@@ -462,7 +462,7 @@
       "steps" : [
         "Nyalakan «Pulau notch» di halaman «Modul»."
       ],
-      "summary" : "Pulau hitam di sekitar notch MacBook: batas dan sesi di sampingnya; arahkan kursor untuk kartu berisi batas dan apa yang sedang dikerjakan Claude.",
+      "summary" : "Pulau hitam di sekitar notch MacBook: permintaan, peristiwa, dan saat kursor diarahkan, kartu berisi batas dan apa yang sedang dikerjakan Claude.",
       "title" : "Pulau notch"
     },
     {
@@ -496,7 +496,7 @@
       "steps" : [
         "Nyalakan «Tata letak keyboard» di halaman «Modul»."
       ],
-      "summary" : "Kata yang diketik dengan tata letak yang salah otomatis diketik ulang dengan yang benar, dan tata letaknya berganti. Shift dua kali — kata terakhir, ⌥⇧ — teks yang dipilih. Bahasa tampil di bar menu.",
+      "summary" : "Kata yang diketik dengan tata letak yang salah otomatis diketik ulang dengan yang benar, dan tata letaknya berganti.",
       "title" : "Tata letak keyboard"
     },
     {
@@ -527,7 +527,7 @@
               "name" : "Catatan"
             },
             {
-              "detail" : "Tombol sendiri: skrip di latar belakang atau Terminal, pintasan «Pintasan» macOS, tautan, file, folder, atau aplikasi. Masing-masing bisa punya pintasan papan ketik sendiri.",
+              "detail" : "Tombol sendiri: skrip di latar belakang atau Terminal, pintasan «Pintasan» macOS, tautan, file, folder, atau aplikasi.",
               "name" : "Perintah cepat"
             }
           ],

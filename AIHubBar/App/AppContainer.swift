@@ -149,6 +149,16 @@ final class AppContainer {
             }
         }
         notchIsland.sessionItems = { [sessions] in sessions.items }
+        notchIsland.hasEarContent = { [usage, hub, sessions, runs] ear in
+            switch ear {
+            case .sessionLimit: usage.snapshot?.session != nil
+            case .weekLimit: usage.snapshot?.week != nil
+            case .otherAI: NotchText.fullestOther(hub.percents) != nil
+            case .sessions: sessions.items.contains { $0.state == .waiting || $0.state == .running }
+            case .background: !runs.running.isEmpty
+            case .none: false
+            }
+        }
         Notifier.island = { [notchIsland] id, kind, title, body, target in
             notchIsland.notification(id: id, kind: kind, title: title, body: body, target: target)
         }
@@ -377,6 +387,7 @@ private struct AppEnvironment: ViewModifier {
             .environment(app.store)
             .environment(app.launcher)
             .environment(app.sessions)
+            .environment(app.notchIsland)
             .environment(app.telegramApprovals)
             .environment(app.telegramBot)
             .environment(app.hooks)

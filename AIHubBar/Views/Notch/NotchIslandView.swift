@@ -23,10 +23,12 @@ struct NotchIslandView: View {
             let dropping = island.dropTarget == index
             let banner = dropping ? nil : island.banner(on: index)
             let wide = open || banner != nil || dropping
-            let earsShown = island.showsSummary(on: index) && (hasEar(settings.notch.leftEar) || hasEar(settings.notch.rightEar))
-            let restWidth = earsShown ? geometry.restFrame.width : geometry.notch.width
-            // At rest the island is centred on the notch; open or with a banner, it fills the window.
-            let restOffset = geometry.notch.midX - window.midX
+            let ears = island.ears(on: index)
+            let earsShown = ears.left || ears.right
+            // At rest the island covers the notch and the ears in use; open or with a banner, it fills the window.
+            let rest = geometry.restFrame(left: ears.left, right: ears.right)
+            let restWidth = rest.width
+            let restOffset = rest.midX - window.midX
             let height = open ? island.cardHeight : dropping ? NotchIsland.dropHeight : banner != nil ? island.bannerHeight : 0
 
             ZStack(alignment: .top) {
@@ -61,11 +63,15 @@ struct NotchIslandView: View {
                         .transition(.opacity)
                 } else if earsShown {
                     HStack(spacing: 0) {
-                        NotchEarView(ear: settings.notch.leftEar)
-                            .frame(width: NotchGeometry.earWidth)
+                        if ears.left {
+                            NotchEarView(ear: settings.notch.leftEar)
+                                .frame(width: NotchGeometry.earWidth)
+                        }
                         Color.clear.frame(width: geometry.notch.width)
-                        NotchEarView(ear: settings.notch.rightEar)
-                            .frame(width: NotchGeometry.earWidth)
+                        if ears.right {
+                            NotchEarView(ear: settings.notch.rightEar)
+                                .frame(width: NotchGeometry.earWidth)
+                        }
                     }
                     .frame(height: geometry.notch.height)
                     .offset(x: restOffset)
@@ -86,17 +92,6 @@ struct NotchIslandView: View {
                     island.bannerHeight = measured
                 }
             }
-        }
-    }
-
-    private func hasEar(_ ear: NotchEar) -> Bool {
-        switch ear {
-        case .sessionLimit: usage.snapshot?.session != nil
-        case .weekLimit: usage.snapshot?.week != nil
-        case .otherAI: NotchText.fullestOther(hub.percents) != nil
-        case .sessions: sessions.items.contains { $0.state == .waiting || $0.state == .running }
-        case .background: !runs.running.isEmpty
-        case .none: false
         }
     }
 }
@@ -252,9 +247,14 @@ private struct NotchCard: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             if !island.requests.isEmpty {
-                VStack(alignment: .leading, spacing: 8) {
-                    ForEach(island.requests) { request in NotchRequestView(event: request) }
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 8) {
+                        ForEach(island.requests) { request in NotchRequestView(event: request) }
+                    }
                 }
+                .scrollBounceBehavior(.basedOnSize)
+                .frame(maxHeight: NotchGeometry.requestsHeight)
+                .fixedSize(horizontal: false, vertical: true)
                 Divider().overlay(.white.opacity(0.15))
             }
             if usage.snapshot?.session != nil || usage.snapshot?.week != nil {
@@ -273,7 +273,7 @@ private struct NotchCard: View {
             }
             let shown = Array(sessions.items.prefix(Self.sessionLimit))
             if shown.isEmpty {
-                Text("Сессий Claude Code сейчас нет")
+                Text("Сессий сейчас нет")
                     .font(.callout)
                     .foregroundStyle(.secondary)
             } else {

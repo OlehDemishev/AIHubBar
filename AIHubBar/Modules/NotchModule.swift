@@ -9,8 +9,8 @@ extension ModuleDefinition {
         group: .mac,
         symbol: "laptopcomputer",
         title: String(localized: "Остров у чёлки"),
-        summary: String(localized: "Чёрный остров вокруг чёлки MacBook: лимит и сессии по бокам от неё, по наведению — карточка с лимитами и тем, что делает Claude."),
-        tagline: String(localized: "Лимит и сессии у чёлки"),
+        summary: String(localized: "Чёрный остров вокруг чёлки MacBook: запросы, события и по наведению карточка с лимитами и тем, что делает Claude."),
+        tagline: String(localized: "Запросы и лимиты у чёлки"),
         isPanelBlock: false,
         places: [],
         keywords: [String(localized: "Скрыть остров"), String(localized: "Слева от чёлки"), String(localized: "Справа от чёлки")]
@@ -27,6 +27,8 @@ extension ModuleUI {
 /// «Остров у чёлки» (SPEC-notch §6): what the ears show and how the card opens.
 struct NotchSection: View {
     @Environment(AppSettings.self) private var settings
+
+    static var earsHint: String { String(localized: "Ушки видны на экране с чёлкой и со сводкой «только в острове».") }
 
     var body: some View {
         @Bindable var settings = settings
@@ -46,12 +48,16 @@ struct NotchSection: View {
             Footnote(text: String(localized: "«Только в острове»: в строке меню остаются значок и красная точка проектов, лимиты и сессии — в ушках у чёлки. Пилюля — чёрный остров под строкой меню по центру, только для событий и запросов: у неё нет ушек, поэтому сводка тогда остаётся в строке меню. Скрытый остров ничего не показывает, уведомления приходят как обычно."))
         }
         Section {
-            Picker("Слева от чёлки", systemImage: "arrow.left.to.line", selection: $settings.notch.leftEar) {
-                ForEach(NotchEar.allCases, id: \.self) { Text($0.title).tag($0) }
+            Group {
+                Picker("Слева от чёлки", systemImage: "arrow.left.to.line", selection: $settings.notch.leftEar) {
+                    ForEach(NotchEar.allCases, id: \.self) { Text($0.title).tag($0) }
+                }
+                Picker("Справа от чёлки", systemImage: "arrow.right.to.line", selection: $settings.notch.rightEar) {
+                    ForEach(NotchEar.allCases, id: \.self) { Text($0.title).tag($0) }
+                }
             }
-            Picker("Справа от чёлки", systemImage: "arrow.right.to.line", selection: $settings.notch.rightEar) {
-                ForEach(NotchEar.allCases, id: \.self) { Text($0.title).tag($0) }
-            }
+            .disabled(settings.notch.summary == .menuBar)
+            .help(Self.earsHint)
             Toggle("Открывать карточку при наведении", systemImage: "cursorarrow.motionlines", isOn: $settings.notch.openOnHover)
             Toggle("Файл на остров — AI-команды", systemImage: "doc.badge.arrow.up", isOn: $settings.notch.fileDrop)
                 .help("Перетащите файл или папку на чёлку: команды профиля и «Своя задача» для него, результат — новым файлом рядом.")
