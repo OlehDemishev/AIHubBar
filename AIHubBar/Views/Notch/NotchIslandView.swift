@@ -158,19 +158,17 @@ private struct NotchEarView: View {
             let color = UsageWindow.color(for: percent)
             HStack(spacing: 3) {
                 ZStack {
-                    Circle().stroke(.white.opacity(0.2), lineWidth: 2.5)
+                    // The track has to show, or a ring at 40 % reads as a broken half circle.
+                    Circle().stroke(.white.opacity(0.35), lineWidth: 2.5)
                     Circle()
                         .trim(from: 0, to: min(max(percent, 0), 100) / 100)
                         .stroke(color, style: StrokeStyle(lineWidth: 2.5, lineCap: .round))
                         .rotationEffect(.degrees(-90))
                 }
                 .frame(width: 13, height: 13)
-                // Near the limit the number matters more than the ring.
-                if percent >= 80 {
-                    Text("\(Int(percent.rounded()))")
-                        .font(.system(size: 10, weight: .semibold).monospacedDigit())
-                        .foregroundStyle(color)
-                }
+                Text("\(Int(percent.rounded()))")
+                    .font(.system(size: 10, weight: .semibold).monospacedDigit())
+                    .foregroundStyle(color)
             }
         }
     }

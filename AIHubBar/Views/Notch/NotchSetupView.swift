@@ -6,7 +6,7 @@ struct NotchSetupView: View {
     @Environment(AppSettings.self) private var settings
     @Environment(\.dismiss) private var dismiss
     @State private var islandOnly = false
-    @State private var summary: NotchSummary = .both
+    @State private var summary: NotchSummary = .menuBar
     @State private var pill = !NotchGeometry.macHasNotch
     @State private var hotKeys = false
 
