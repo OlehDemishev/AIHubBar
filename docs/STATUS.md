@@ -36,6 +36,12 @@
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
 
+## 2026-11-07 — Settings leftovers (branch `fix/settings-leftovers`)
+
+Done: audit items 6, 25, 30. Deleting a quick command, a prompt, a service key and clearing the clipboard history ask first, and a ready-made menu bar set asks before replacing a custom one. A switch to Telegram or the language in the menu bar lives once, in the chips under «Где показывать»; the rows repeating them are gone. The «Уведомления» chip on «Проекты» follows the PR alerts. Module tiles and menu bar chips work from the keyboard. A failed export or «Войти» shows an alert. Excluded clipboard apps are listed by name and can be removed one by one. «Указать цену…» leads to the Anthropic price, which no longer needs a key. In the panel «Очистить» asks, «скопировано» goes away, the Notes trash waits for the block to unfold. 2 new strings in 12 languages.
+Checked: scripts/check.sh passed.
+Left: not looked at live yet; the «Уведомления» chip on «Ближайшее» still ignores «не напоминать».
+
 ## 2026-11-07 — The island's state (branch `fix/island-state`)
 
 Done: audit items 22, 31–33. The buttons in the open card could stay dim for good: the panel got no mouse moves, so the click guard never let go; now it does. Only what is drawn reacts to the pointer, so the free space beside the notch no longer opens the card, and hover does nothing over a full-screen app. An ear with nothing to show takes no room, each side on its own. With both ears empty the numbers stay in the menu bar. Requests in the card scroll past 230 pt, the window is 520 pt tall, and a click on the notch opens the card behind a banner. The «Остров» chip is off with a reason unless ears can show, the ear pickers wait for «только в острове», the menu bar preview follows the island with a note. Help and the module text no longer promise ears by default; site/help exported. 6 strings in 12 languages.

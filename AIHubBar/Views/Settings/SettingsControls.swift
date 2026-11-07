@@ -44,6 +44,26 @@ struct FormField: View {
     }
 }
 
+/// A destructive button that asks first: for what can't be brought back.
+struct ConfirmedButton<Content: View>: View {
+    let title: LocalizedStringKey
+    var message: String?
+    var confirm: LocalizedStringKey = "Удалить"
+    let action: () -> Void
+    @ViewBuilder let label: Content
+    @State private var asking = false
+
+    var body: some View {
+        Button(role: .destructive) { asking = true } label: { label }
+            .confirmationDialog(title, isPresented: $asking) {
+                Button(confirm, role: .destructive, action: action)
+                Button("Отмена", role: .cancel) {}
+            } message: {
+                if let message { Text(verbatim: message) }
+            }
+    }
+}
+
 /// A settings row with an icon in front of its title, like the toggles and pickers that take `systemImage:`.
 struct IconRow<Content: View>: View {
     let title: LocalizedStringKey

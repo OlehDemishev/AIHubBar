@@ -54,7 +54,6 @@ struct ReminderSection: View {
                 Text("за сутки и за 2 часа").tag([24, 2])
                 Text("за 3 дня и за сутки").tag([72, 24])
             }
-            Toggle("Дублировать напоминания в Telegram", systemImage: "paperplane", isOn: $settings.calendarRemindersToTelegram)
         } header: {
             Text("Напоминания")
         } footer: {

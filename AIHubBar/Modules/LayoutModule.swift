@@ -48,7 +48,7 @@ struct LayoutSection: View {
                 .disabled(!settings.layout.auto)
             Toggle("Двойной Shift — последнее слово", systemImage: "shift", isOn: $settings.layout.doubleShift)
             Toggle("⌥⇧ — выделенный текст", systemImage: "option", isOn: $settings.layout.optionShift)
-            Toggle("Язык в строке меню", systemImage: "menubar.rectangle", isOn: $settings.layout.menuBarIcon)
+                // The language in the menu bar is the chip under «Где показывать».
                 .onChange(of: settings.layout.menuBarIcon) { switcher.sync() }
         } footer: {
             Footnote(text: switcher.layouts.count < 2

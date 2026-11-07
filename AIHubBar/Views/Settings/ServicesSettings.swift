@@ -327,7 +327,8 @@ private struct SpendSection: View {
                     .multilineTextAlignment(.trailing)
                     .frame(width: 90)
             }
-            ForEach(APIProvider.allCases.filter { services.hasKey.contains($0) || $0 == .compatible }, id: \.self) { provider in
+            // Anthropic always: «История расхода» counts Claude Code's tokens at this price, no key needed.
+            ForEach(APIProvider.allCases.filter { services.hasKey.contains($0) || $0 == .compatible || $0 == .anthropic }, id: \.self) { provider in
                 LabeledContent("\(provider.title): $ за 1 млн токенов (вход / выход)") {
                     HStack(spacing: 4) {
                         TextField("", value: price(provider, \.input), format: .number, prompt: Text("—")).frame(width: 60)
@@ -443,7 +444,9 @@ private struct ProviderRow: View {
                 }
                 if services.hasKey.contains(provider) {
                     Button(editing ? String(localized: "Отмена") : String(localized: "Заменить ключ")) { editing.toggle(); keyText = "" }
-                    Button("Удалить ключ", role: .destructive) { Task { await services.deleteKey(provider) } }
+                    ConfirmedButton(title: "Удалить ключ", message: provider.title) {
+                        Task { await services.deleteKey(provider) }
+                    } label: { Text("Удалить ключ") }
                 }
                 if !provider.keyRequired, !services.hasKey.contains(provider) {
                     Button("Ключ (если нужен)") { editing.toggle() }

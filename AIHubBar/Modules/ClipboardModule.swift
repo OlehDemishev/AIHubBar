@@ -43,19 +43,40 @@ struct ClipboardSection: View {
             }
             Toggle("Помнить после перезапуска", systemImage: "arrow.clockwise", isOn: $settings.clipboardRemember)
                 .onChange(of: settings.clipboardRemember) { history.rememberChanged() }
-            IconRow("Не запоминать из приложений", systemImage: "hand.raised.slash") {
-                HStack {
-                    Text(verbatim: "\(settings.clipboardExcludedApps.count)").foregroundStyle(.secondary)
-                    Button("Добавить…", action: addApps)
-                    Button("По умолчанию") { settings.clipboardExcludedApps = ClipboardPolicy.defaultExcludedApps }
+            DisclosureGroup {
+                ForEach(settings.clipboardExcludedApps, id: \.self) { app in
+                    HStack {
+                        Text(verbatim: Self.name(app))
+                        Spacer()
+                        Button { settings.clipboardExcludedApps.removeAll { $0 == app } } label: {
+                            Label("Убрать", systemImage: "minus.circle").labelStyle(.iconOnly)
+                        }
+                        .buttonStyle(.borderless)
+                        .help("Убрать")
+                    }
+                }
+            } label: {
+                IconRow("Не запоминать из приложений", systemImage: "hand.raised.slash") {
+                    HStack {
+                        Text(verbatim: "\(settings.clipboardExcludedApps.count)").foregroundStyle(.secondary)
+                        Button("Добавить…", action: addApps)
+                        Button("По умолчанию") { settings.clipboardExcludedApps = ClipboardPolicy.defaultExcludedApps }
+                    }
                 }
             }
-            Button("Очистить историю") { history.clear() }
+            ConfirmedButton(title: "Очистить историю", message: String(localized: "Удалить всё, кроме закреплённого"), confirm: "Очистить") {
+                history.clear()
+            } label: { Text("Очистить историю") }
         } header: {
             Text("История буфера")
         } footer: {
             Footnote(text: String(localized: "Не запоминается то, что менеджеры паролей помечают как скрытое, и всё, что скопировано, пока впереди менеджер паролей или «Связка ключей». Без «Помнить после перезапуска» история живёт только в памяти; с ним — в файле, доступном только вам."))
         }
+    }
+
+    /// An app's name from its bundle id; the id itself when the app isn't on this Mac.
+    private static func name(_ id: String) -> String {
+        NSWorkspace.shared.urlForApplication(withBundleIdentifier: id).map { FileManager.default.displayName(atPath: $0.path) } ?? id
     }
 
     private func addApps() {

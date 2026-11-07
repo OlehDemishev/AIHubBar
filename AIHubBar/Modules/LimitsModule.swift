@@ -70,7 +70,6 @@ struct LimitSection: View {
                     .frame(width: 140)
                     .onSubmit(applyThresholds)
             }
-            Toggle("Уведомления о лимитах ещё и в Telegram", systemImage: "paperplane", isOn: $settings.limitAlertsToTelegram)
             VStack(alignment: .leading, spacing: 2) {
                 Picker("Ставить фоновые задачи на паузу", systemImage: "pause.circle", selection: $settings.runGuardPercent) {
                     ForEach(RunGuard.thresholds, id: \.self) { value in

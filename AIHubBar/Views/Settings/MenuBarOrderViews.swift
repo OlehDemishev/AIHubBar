@@ -77,6 +77,11 @@ struct OrderChip: View {
             .overlay(Capsule().strokeBorder(targeted || isSelected ? Color.accentColor : Color.secondary.opacity(isDivider ? 0.35 : 0), style: StrokeStyle(lineWidth: 1, dash: isDivider && !targeted && !isSelected ? [3, 2] : [])))
             .contentShape(Capsule())
             .onTapGesture(perform: onTap)
+            .focusable()
+            .onKeyPress(keys: [.return, .space]) { _ in
+                onTap()
+                return .handled
+            }
             .draggable(token.payload.text) { label.padding(6) }
             .dropDestination(for: String.self) { items, _ in
                 guard let payload = items.first.flatMap(DragPayload.init) else { return false }

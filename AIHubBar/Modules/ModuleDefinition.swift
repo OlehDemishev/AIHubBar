@@ -55,7 +55,7 @@ enum TelegramToggle: Sendable {
 
 /// A module's own on/off switch for its notifications.
 enum NotificationSwitch: Sendable {
-    case resourceAlerts
+    case resourceAlerts, pullRequestAlerts
 }
 
 /// How a built-in module gets into the current profile (SPEC-settings §3).
