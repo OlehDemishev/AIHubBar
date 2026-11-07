@@ -33,6 +33,12 @@
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
 
+## 2026-11-07 — English for languages without a translation (branch `fix/english-fallback`)
+
+Done: with a system language outside the 13 the app opened in Russian, its development language. At launch `LanguageFallback` now sets English for that launch. A change of `CFBundleDevelopmentRegion` was tried first and dropped: Russian has no `.lproj`, so it broke Russian, and a `ru.lproj` table can't sit next to the string catalog.
+Checked: scripts/check.sh passed with new tests; `--help-export` with `-AppleLanguages`: Dutch and Turkish give English, Russian, German and Ukrainian stay.
+Left: system permission texts from Info.plist stay Russian for such languages. Goes out with the next release.
+
 ## 2026-11-07 — Release 0.7.2 (branch `chore/status-release-0.7.2`)
 
 Done: 0.7.2 published (build 646), the first release with a Developer ID and notarization. The release notes say that macOS asks for permissions once more after updating.

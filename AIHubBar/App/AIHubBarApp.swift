@@ -6,6 +6,7 @@ struct AIHubBarApp: App {
     @NSApplicationDelegateAdaptor private var appDelegate: AppDelegate
 
     init() {
+        LanguageFallback.apply()
         if let code = CommandLineTool.run(CommandLine.arguments) {
             AppLog.flush()
             exit(code)
