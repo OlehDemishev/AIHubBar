@@ -435,7 +435,7 @@
         {
           "facts" : [
             {
-              "detail" : "Po lewej i prawej stronie notcha — limit i sesje; co dokładnie, wybierasz na stronie modułu.",
+              "detail" : "Po lewej i prawej stronie notcha — limit i sesje, przy podsumowaniu „tylko na wyspie”; co dokładnie, wybierasz na stronie modułu.",
               "name" : "Uszy"
             },
             {
@@ -462,7 +462,7 @@
       "steps" : [
         "Włącz „Wyspa przy notchu” na stronie „Moduły”."
       ],
-      "summary" : "Czarna wyspa wokół notcha MacBooka: limit i sesje po bokach, po najechaniu — karta z limitami i tym, co robi Claude.",
+      "summary" : "Czarna wyspa wokół notcha MacBooka: prośby, zdarzenia i po najechaniu karta z limitami i tym, co robi Claude.",
       "title" : "Wyspa przy notchu"
     },
     {
@@ -496,7 +496,7 @@
       "steps" : [
         "Włącz „Układ klawiatury” na stronie „Moduły”."
       ],
-      "summary" : "Słowo wpisane w złym układzie klawiatury samo wpisuje się ponownie we właściwym, a układ się przełącza. Dwa razy Shift — ostatnie słowo, ⌥⇧ — zaznaczony tekst. Język widać na pasku menu.",
+      "summary" : "Słowo wpisane w złym układzie klawiatury samo wpisuje się ponownie we właściwym, a układ się przełącza.",
       "title" : "Układ klawiatury"
     },
     {
@@ -527,7 +527,7 @@
               "name" : "Notatki"
             },
             {
-              "detail" : "Własne przyciski: skrypt w tle lub w Terminalu, skrót z «Skróty» macOS, link, plik, folder albo aplikacja. Każdy może mieć własny skrót klawiszowy.",
+              "detail" : "Własne przyciski: skrypt w tle lub w Terminalu, skrót z «Skróty» macOS, link, plik, folder albo aplikacja.",
               "name" : "Szybkie polecenia"
             }
           ],

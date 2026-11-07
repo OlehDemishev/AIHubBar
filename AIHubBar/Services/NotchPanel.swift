@@ -45,6 +45,8 @@ final class NotchPanel: NSPanel {
         hidesOnDeactivate = false
         isReleasedWhenClosed = false
         ignoresMouseEvents = true
+        // Moves inside the card reach the local monitor only with this; without them the click guard never lets go.
+        acceptsMouseMovedEvents = true
         setAccessibilityLabel(String(localized: "Остров у чёлки"))
     }
 

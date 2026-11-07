@@ -27,7 +27,7 @@ struct NotchTests {
     }
 
     @Test func windowCentredUnderNotch() {
-        let geometry = NotchGeometry(notch: CGRect(x: 640, y: 924, width: 190, height: 32), screen: air)
+        let geometry = NotchGeometry(notch: CGRect(x: 640, y: 924, width: 190, height: 32), screen: CGRect(x: 0, y: 0, width: 1470, height: 956))
         let window = geometry.windowFrame
         #expect(window.width == NotchGeometry.cardWidth)
         #expect(window.maxY == air.maxY)
@@ -227,6 +227,16 @@ struct NotchPlacementTests {
         let geometry = try #require(screen.notchGeometry)
         #expect(geometry.notch.width == 184 && geometry.notch.midX == monitor.frame.midX)
         #expect(geometry.notch.height == 32 && geometry.notch.maxY == monitor.frame.maxY)
+    }
+
+    @Test func anEmptySideTakesNoRoom() {
+        let geometry = NotchGeometry(notch: CGRect(x: 640, y: 924, width: 190, height: 32), screen: CGRect(x: 0, y: 0, width: 1470, height: 956))
+        #expect(geometry.restFrame(left: false, right: false) == geometry.notch, "no ears: only the notch reacts")
+        let right = geometry.restFrame(left: false, right: true)
+        #expect(right.minX == 640 && right.maxX == 830 + NotchGeometry.earWidth)
+        let left = geometry.restFrame(left: true, right: false)
+        #expect(left.minX == 640 - NotchGeometry.earWidth && left.maxX == 830)
+        #expect(geometry.restFrame(left: true, right: true) == geometry.restFrame)
     }
 
     @Test func pillUnderTheMenuBar() throws {

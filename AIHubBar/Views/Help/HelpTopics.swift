@@ -226,7 +226,7 @@ enum HelpTopic: String, CaseIterable, Identifiable, Sendable {
             ])]
         case .notch:
             [HelpSection(facts: [
-                HelpFact(String(localized: "Ушки"), String(localized: "Слева и справа от чёлки — лимит и сессии; что именно, выбирается на странице модуля."), symbol: "capsule.tophalf.filled"),
+                HelpFact(String(localized: "Ушки"), String(localized: "Слева и справа от чёлки — лимит и сессии, когда сводка «только в острове»; что именно, выбирается на странице модуля."), symbol: "capsule.tophalf.filled"),
                 HelpFact(String(localized: "Карточка"), String(localized: "Наведите курсор на чёлку — откроется карточка с лимитами и тем, что делает Claude."), symbol: "rectangle.portrait.topthird.inset.filled"),
                 HelpFact(String(localized: "Запросы"), String(localized: "Запрос разрешения появляется в острове с «Разрешить» и «Отклонить»; ⌃⌥Y / ⌃⌥N — с клавиатуры, если включено."), symbol: "hand.raised"),
                 HelpFact(String(localized: "Файл на остров"), String(localized: "Перетащите файл на остров — откроются AI-команды профиля для него."), symbol: "doc.badge.arrow.up"),

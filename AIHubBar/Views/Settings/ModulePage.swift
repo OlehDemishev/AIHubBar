@@ -99,7 +99,11 @@ struct ModulePlaces: View {
         ModulePlace.of(kind).filter { $0 != .island || modes.isOn(.notch) }
     }
 
+    /// Ears exist only with the summary in the island and on a screen with a notch: otherwise the chip stays off.
+    private var earsPossible: Bool { settings.notch.summary == .island && NotchGeometry.macHasNotch }
+
     private func available(_ place: ModulePlace) -> Bool {
+        if place == .island { return earsPossible }
         guard place == .panel else { return true }
         guard let mode = modes.current else { return false }
         return !kind.isBuiltIn || mode.moduleList.contains { $0.kind == kind }
@@ -112,7 +116,7 @@ struct ModulePlaces: View {
                 : available(place) ? String(localized: "Блок в панели текущего профиля «\(modes.current?.name ?? "")»")
                 : ModuleSwitch.unavailableReason(kind)
         case .menuBar: String(localized: "Элементы модуля в строке меню; порядок и вид — «Строка меню»")
-        case .island: String(localized: "Ушко у чёлки показывает модуль")
+        case .island: earsPossible ? String(localized: "Ушко у чёлки показывает модуль") : NotchSection.earsHint
         case .notifications: String(localized: "Уведомления macOS от модуля; как часто — ниже, в «Как часто уведомлять»")
         case .telegram:
             kind.definition.telegram == .backgroundResults
@@ -133,7 +137,7 @@ struct ModulePlaces: View {
                 Binding(get: { menuBarKinds.contains { modes.menuBar.element($0).enabled } }, set: { setMenuBar($0) })
             }
         case .island:
-            Binding(get: { [settings.notch.leftEar, settings.notch.rightEar].contains(where: ears.contains) }, set: { setIsland($0) })
+            Binding(get: { earsPossible && [settings.notch.leftEar, settings.notch.rightEar].contains(where: ears.contains) }, set: { setIsland($0) })
         case .notifications:
             Binding(get: { notificationsOn }, set: { setNotifications($0) })
         case .telegram:

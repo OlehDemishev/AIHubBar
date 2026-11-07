@@ -435,7 +435,7 @@
         {
           "facts" : [
             {
-              "detail" : "A izquierda y derecha del notch — un límite y las sesiones; qué exactamente se elige en la página del módulo.",
+              "detail" : "A izquierda y derecha del notch — un límite y las sesiones, con el resumen «solo en la isla»; qué exactamente se elige en la página del módulo.",
               "name" : "Orejas"
             },
             {
@@ -462,7 +462,7 @@
       "steps" : [
         "Activa «Isla del notch» en la página «Módulos»."
       ],
-      "summary" : "Una isla negra alrededor del notch del MacBook: el límite y las sesiones a los lados; al pasar el cursor, una tarjeta con los límites y lo que está haciendo Claude.",
+      "summary" : "Una isla negra alrededor del notch del MacBook: solicitudes, eventos y, al pasar el cursor, una tarjeta con los límites y lo que está haciendo Claude.",
       "title" : "Isla del notch"
     },
     {
@@ -496,7 +496,7 @@
       "steps" : [
         "Activa «Distribución del teclado» en la página «Módulos»."
       ],
-      "summary" : "Una palabra escrita con la distribución equivocada se reescribe sola con la correcta y la distribución cambia. Doble Shift: la última palabra; ⌥⇧: el texto seleccionado. El idioma, en la barra de menús.",
+      "summary" : "Una palabra escrita con la distribución equivocada se reescribe sola con la correcta y la distribución cambia.",
       "title" : "Distribución del teclado"
     },
     {
@@ -527,7 +527,7 @@
               "name" : "Notas"
             },
             {
-              "detail" : "Tus botones: un script en segundo plano o en Terminal, un atajo de «Atajos» de macOS, un enlace, archivo, carpeta o app. Cada uno puede tener su propio atajo de teclado.",
+              "detail" : "Tus botones: un script en segundo plano o en Terminal, un atajo de «Atajos» de macOS, un enlace, archivo, carpeta o app.",
               "name" : "Comandos rápidos"
             }
           ],

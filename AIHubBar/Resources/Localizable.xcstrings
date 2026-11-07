@@ -41409,82 +41409,6 @@
         }
       }
     },
-    "Лимит и сессии у чёлки": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "الحد والجلسات بجانب النتوء"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Limit und Sitzungen an der Notch"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Limit and sessions by the notch"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Límite y sesiones junto al notch"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Limite et sessions près de l’encoche"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Batas dan sesi di samping notch"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Limite e sessioni accanto al notch"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ノッチ横に制限とセッション"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "노치 옆에 한도와 세션"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Limit i sesje przy notchu"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Limite e sessões junto ao notch"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ліміт і сесії біля виїмки"
-          }
-        }
-      }
-    },
     "Лимит недели": {
       "localizations": {
         "ar": {
@@ -85038,82 +84962,6 @@
         }
       }
     },
-    "Сессий Claude Code сейчас нет": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "لا توجد جلسات Claude Code الآن"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Gerade keine Claude-Code-Sitzungen"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "No Claude Code sessions right now"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ahora no hay sesiones de Claude Code"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Aucune session Claude Code pour l’instant"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tidak ada sesi Claude Code saat ini"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nessuna sessione di Claude Code al momento"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "現在 Claude Code のセッションはありません"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "현재 Claude Code 세션이 없습니다"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Brak sesji Claude Code"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nenhuma sessão do Claude Code no momento"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Сесій Claude Code зараз немає"
-          }
-        }
-      }
-    },
     "Сессия": {
       "localizations": {
         "ar": {
@@ -86941,82 +86789,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Сховати острів біля виїмки"
-          }
-        }
-      }
-    },
-    "Слева и справа от чёлки — лимит и сессии; что именно, выбирается на странице модуля.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "على يسار النتوء ويمينه — حدّ والجلسات؛ وما يظهر بالضبط يُختار في صفحة الوحدة."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Links und rechts der Notch — Limit und Sitzungen; was genau, wählen Sie auf der Modulseite."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Left and right of the notch — a limit and sessions; exactly what is chosen on the module’s page."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "A izquierda y derecha del notch — un límite y las sesiones; qué exactamente se elige en la página del módulo."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "À gauche et à droite de l’encoche — une limite et les sessions ; le contenu exact se choisit sur la page du module."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Di kiri dan kanan notch — batas dan sesi; isinya dipilih di halaman modul."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "A sinistra e a destra del notch — un limite e le sessioni; cosa esattamente si sceglie nella pagina del modulo."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ノッチの左右に制限とセッションを表示します。何を表示するかはモジュールのページで選びます。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "노치 왼쪽과 오른쪽에 한도와 세션이 표시됩니다. 무엇을 보일지는 모듈 페이지에서 고릅니다."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Po lewej i prawej stronie notcha — limit i sesje; co dokładnie, wybierasz na stronie modułu."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "À esquerda e à direita do notch — um limite e as sessões; o que exatamente, você escolhe na página do módulo."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ліворуч і праворуч від виїмки — ліміт і сесії; що саме, вибирається на сторінці модуля."
           }
         }
       }
@@ -103008,82 +102780,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Щоб бачити ліміти підписки, увійдіть у Claude Code."
-          }
-        }
-      }
-    },
-    "Чёрный остров вокруг чёлки MacBook: лимит и сессии по бокам от неё, по наведению — карточка с лимитами и тем, что делает Claude.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "جزيرة سوداء حول نتوء MacBook: الحد والجلسات بجانبه، وعند التمرير بطاقة بالحدود وبما يفعله Claude."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Eine schwarze Insel um die Notch des MacBook: Limit und Sitzungen daneben, beim Darüberfahren eine Karte mit Limits und dem, was Claude gerade tut."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "A black island around the MacBook notch: the limit and sessions beside it; hover for a card with limits and what Claude is doing."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Una isla negra alrededor del notch del MacBook: el límite y las sesiones a los lados; al pasar el cursor, una tarjeta con los límites y lo que está haciendo Claude."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Une île noire autour de l’encoche du MacBook : la limite et les sessions de chaque côté ; au survol, une carte avec les limites et ce que fait Claude."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Pulau hitam di sekitar notch MacBook: batas dan sesi di sampingnya; arahkan kursor untuk kartu berisi batas dan apa yang sedang dikerjakan Claude."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Un’isola nera intorno al notch del MacBook: limite e sessioni ai lati; passandoci sopra, una scheda con i limiti e ciò che sta facendo Claude."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "MacBook のノッチを囲む黒いアイランド：両側に上限とセッション、ポインタを合わせると上限と Claude の作業内容をカードで表示します。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "MacBook 노치를 둘러싼 검은 아일랜드: 양옆에 한도와 세션, 포인터를 올리면 한도와 Claude가 하고 있는 일을 카드로 보여 줍니다."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Czarna wyspa wokół notcha MacBooka: limit i sesje po bokach, po najechaniu — karta z limitami i tym, co robi Claude."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Uma ilha preta ao redor do notch do MacBook: o limite e as sessões ao lado; ao passar o cursor, um cartão com os limites e o que o Claude está fazendo."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Чорний острів навколо виїмки MacBook: ліміт і сесії обабіч неї, при наведенні — картка з лімітами й тим, що робить Claude."
           }
         }
       }
@@ -137729,6 +137425,538 @@
           "stringUnit": {
             "state": "translated",
             "value": "Що ввімкнено та готові набори"
+          }
+        }
+      }
+    },
+    "Ушки видны на экране с чёлкой и со сводкой «только в острове».": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الجانبان: على شاشة بها نتوء، مع الملخص «في الجزيرة فقط»."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ohren: auf einem Bildschirm mit Notch, mit der Übersicht „nur auf der Insel“."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ears: on a screen with a notch, with the summary “only on the island”."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Orejas: en una pantalla con notch, con el resumen «solo en la isla»."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Oreilles : sur un écran à encoche, avec le résumé « seulement sur l’île »."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Telinga: di layar dengan notch, dengan ringkasan “hanya di pulau”."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Orecchie: su uno schermo con notch, con il riepilogo «solo sull’isola»."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ノッチの左右:ノッチのある画面で、概要が「アイランドのみ」のとき。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "양옆 표시: 노치가 있는 화면에서 요약이 ‘아일랜드에만’일 때."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uszy: na ekranie z notchem, przy podsumowaniu „tylko na wyspie”."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Laterais: em uma tela com notch, com o resumo “só na ilha”."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Вушка видно на екрані з виїмкою і зі зведенням «лише на острові»."
+          }
+        }
+      }
+    },
+    "Лимиты и сессии сейчас в острове: в строке меню остаются значок и красная точка проектов.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الحدود والجلسات الآن في الجزيرة: يبقى في شريط القوائم الرمز والنقطة الحمراء للمشاريع."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limits und Sitzungen sind jetzt auf der Insel: In der Menüleiste bleiben das Symbol und der rote Punkt der Projekte."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limits and sessions are on the island now: the menu bar keeps the icon and the projects’ red dot."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los límites y las sesiones están ahora en la isla: en la barra de menús quedan el icono y el punto rojo de proyectos."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les limites et les sessions sont sur l’île : la barre des menus garde l’icône et le point rouge des projets."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Batas dan sesi kini ada di pulau: bilah menu menyisakan ikon dan titik merah proyek."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limiti e sessioni ora sono sull’isola: nella barra dei menu restano l’icona e il punto rosso dei progetti."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "上限とセッションは今アイランドにあります。メニューバーにはアイコンとプロジェクトの赤い点が残ります。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "한도와 세션은 지금 아일랜드에 있습니다. 메뉴 막대에는 아이콘과 프로젝트의 빨간 점이 남습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limity i sesje są teraz na wyspie: na pasku menu zostają ikona i czerwona kropka projektów."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limites e sessões estão agora na ilha: na barra de menus ficam o ícone e o ponto vermelho dos projetos."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ліміти й сесії зараз на острові: у рядку меню лишаються значок і червона крапка проєктів."
+          }
+        }
+      }
+    },
+    "Сессий сейчас нет": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لا توجد جلسات الآن"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gerade keine Sitzungen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No sessions right now"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ahora no hay sesiones"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucune session pour l’instant"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tidak ada sesi saat ini"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nessuna sessione al momento"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "現在セッションはありません"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "현재 세션이 없습니다"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Teraz nie ma sesji"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nenhuma sessão agora"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Зараз сесій немає"
+          }
+        }
+      }
+    },
+    "Чёрный остров вокруг чёлки MacBook: запросы, события и по наведению карточка с лимитами и тем, что делает Claude.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "جزيرة سوداء حول نتوء MacBook: الطلبات والأحداث، وعند التمرير بطاقة بالحدود وبما يفعله Claude."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eine schwarze Insel um die Notch des MacBook: Anfragen, Ereignisse und beim Darüberfahren eine Karte mit Limits und dem, was Claude gerade tut."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A black island around the MacBook notch: requests, events and, on hover, a card with limits and what Claude is doing."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Una isla negra alrededor del notch del MacBook: solicitudes, eventos y, al pasar el cursor, una tarjeta con los límites y lo que está haciendo Claude."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une île noire autour de l’encoche du MacBook : demandes, événements et, au survol, une carte avec les limites et ce que fait Claude."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pulau hitam di sekitar notch MacBook: permintaan, peristiwa, dan saat kursor diarahkan, kartu berisi batas dan apa yang sedang dikerjakan Claude."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un’isola nera intorno al notch del MacBook: richieste, eventi e, passandoci sopra, una scheda con i limiti e ciò che sta facendo Claude."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "MacBook のノッチを囲む黒いアイランド:リクエスト、イベント、ポインタを合わせると上限と Claude の作業内容をカードで表示します。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "MacBook 노치를 둘러싼 검은 아일랜드: 요청, 이벤트, 포인터를 올리면 한도와 Claude가 하고 있는 일을 카드로 보여 줍니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Czarna wyspa wokół notcha MacBooka: prośby, zdarzenia i po najechaniu karta z limitami i tym, co robi Claude."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uma ilha preta ao redor do notch do MacBook: pedidos, eventos e, ao passar o cursor, um cartão com os limites e o que o Claude está fazendo."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Чорний острів навколо виїмки MacBook: запити, події та при наведенні картка з лімітами й тим, що робить Claude."
+          }
+        }
+      }
+    },
+    "Запросы и лимиты у чёлки": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الطلبات والحدود بجانب النتوء"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anfragen und Limits an der Notch"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Requests and limits by the notch"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Solicitudes y límites junto al notch"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Demandes et limites près de l’encoche"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Permintaan dan batas di samping notch"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Richieste e limiti accanto al notch"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ノッチ横にリクエストと上限"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "노치 옆에 요청과 한도"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prośby i limity przy notchu"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pedidos e limites junto ao notch"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Запити й ліміти біля виїмки"
+          }
+        }
+      }
+    },
+    "Слева и справа от чёлки — лимит и сессии, когда сводка «только в острове»; что именно, выбирается на странице модуля.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "على يسار النتوء ويمينه — حدّ والجلسات، مع الملخص «في الجزيرة فقط»؛ وما يظهر بالضبط يُختار في صفحة الوحدة."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Links und rechts der Notch — Limit und Sitzungen, wenn die Übersicht „nur auf der Insel“ ist; was genau, wählen Sie auf der Modulseite."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Left and right of the notch — a limit and sessions, when the summary is “only on the island”; exactly what is chosen on the module’s page."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A izquierda y derecha del notch — un límite y las sesiones, con el resumen «solo en la isla»; qué exactamente se elige en la página del módulo."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "À gauche et à droite de l’encoche — une limite et les sessions, avec le résumé « seulement sur l’île » ; le contenu exact se choisit sur la page du module."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Di kiri dan kanan notch — batas dan sesi, dengan ringkasan “hanya di pulau”; isinya dipilih di halaman modul."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A sinistra e a destra del notch — un limite e le sessioni, con il riepilogo «solo sull’isola»; cosa esattamente si sceglie nella pagina del modulo."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "概要が「アイランドのみ」のとき、ノッチの左右に制限とセッションを表示します。何を表示するかはモジュールのページで選びます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "요약이 ‘아일랜드에만’일 때 노치 왼쪽과 오른쪽에 한도와 세션이 표시됩니다. 무엇을 보일지는 모듈 페이지에서 고릅니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Po lewej i prawej stronie notcha — limit i sesje, przy podsumowaniu „tylko na wyspie”; co dokładnie, wybierasz na stronie modułu."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "À esquerda e à direita do notch — um limite e as sessões, com o resumo “só na ilha”; o que exatamente, você escolhe na página do módulo."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ліворуч і праворуч від виїмки — ліміт і сесії, коли зведення «лише на острові»; що саме, вибирається на сторінці модуля."
+          }
+        }
+      }
+    },
+    "Сессий Claude Code сейчас нет": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لا توجد جلسات Claude Code الآن"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gerade keine Claude-Code-Sitzungen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No Claude Code sessions right now"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ahora no hay sesiones de Claude Code"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucune session Claude Code pour l’instant"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tidak ada sesi Claude Code saat ini"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nessuna sessione di Claude Code al momento"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "現在 Claude Code のセッションはありません"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "현재 Claude Code 세션이 없습니다"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Brak sesji Claude Code"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nenhuma sessão do Claude Code no momento"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Сесій Claude Code зараз немає"
           }
         }
       }

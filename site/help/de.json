@@ -435,7 +435,7 @@
         {
           "facts" : [
             {
-              "detail" : "Links und rechts der Notch — Limit und Sitzungen; was genau, wählen Sie auf der Modulseite.",
+              "detail" : "Links und rechts der Notch — Limit und Sitzungen, wenn die Übersicht „nur auf der Insel“ ist; was genau, wählen Sie auf der Modulseite.",
               "name" : "Ohren"
             },
             {
@@ -462,7 +462,7 @@
       "steps" : [
         "Aktivieren Sie „Notch-Insel“ auf der Seite „Module“."
       ],
-      "summary" : "Eine schwarze Insel um die Notch des MacBook: Limit und Sitzungen daneben, beim Darüberfahren eine Karte mit Limits und dem, was Claude gerade tut.",
+      "summary" : "Eine schwarze Insel um die Notch des MacBook: Anfragen, Ereignisse und beim Darüberfahren eine Karte mit Limits und dem, was Claude gerade tut.",
       "title" : "Notch-Insel"
     },
     {
@@ -496,7 +496,7 @@
       "steps" : [
         "Aktivieren Sie „Tastaturlayout“ auf der Seite „Module“."
       ],
-      "summary" : "Ein Wort im falschen Tastaturlayout wird von selbst im richtigen neu geschrieben, und das Layout wechselt. Zweimal Shift – das letzte Wort, ⌥⇧ – der markierte Text. Die Sprache steht in der Menüleiste.",
+      "summary" : "Ein Wort im falschen Tastaturlayout wird von selbst im richtigen neu geschrieben, und das Layout wechselt.",
       "title" : "Tastaturlayout"
     },
     {
@@ -527,7 +527,7 @@
               "name" : "Notizen"
             },
             {
-              "detail" : "Eigene Tasten: ein Skript im Hintergrund oder im Terminal, ein macOS-„Kurzbefehle“-Kurzbefehl, ein Link, eine Datei, ein Ordner oder eine App. Jede kann einen eigenen Tastaturkurzbefehl haben.",
+              "detail" : "Eigene Tasten: ein Skript im Hintergrund oder im Terminal, ein macOS-„Kurzbefehle“-Kurzbefehl, ein Link, eine Datei, ein Ordner oder eine App.",
               "name" : "Schnellbefehle"
             }
           ],

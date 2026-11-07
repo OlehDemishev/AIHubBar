@@ -435,7 +435,7 @@
         {
           "facts" : [
             {
-              "detail" : "À gauche et à droite de l’encoche — une limite et les sessions ; le contenu exact se choisit sur la page du module.",
+              "detail" : "À gauche et à droite de l’encoche — une limite et les sessions, avec le résumé « seulement sur l’île » ; le contenu exact se choisit sur la page du module.",
               "name" : "Oreilles"
             },
             {
@@ -462,7 +462,7 @@
       "steps" : [
         "Activez « Île de l’encoche » sur la page « Modules »."
       ],
-      "summary" : "Une île noire autour de l’encoche du MacBook : la limite et les sessions de chaque côté ; au survol, une carte avec les limites et ce que fait Claude.",
+      "summary" : "Une île noire autour de l’encoche du MacBook : demandes, événements et, au survol, une carte avec les limites et ce que fait Claude.",
       "title" : "Île de l’encoche"
     },
     {
@@ -496,7 +496,7 @@
       "steps" : [
         "Activez « Disposition du clavier » sur la page « Modules »."
       ],
-      "summary" : "Un mot tapé dans la mauvaise disposition est retapé tout seul dans la bonne, et la disposition change. Double Maj : le dernier mot, ⌥⇧ : le texte sélectionné. La langue est dans la barre des menus.",
+      "summary" : "Un mot tapé dans la mauvaise disposition est retapé tout seul dans la bonne, et la disposition change.",
       "title" : "Disposition du clavier"
     },
     {
@@ -527,7 +527,7 @@
               "name" : "Notes"
             },
             {
-              "detail" : "Vos boutons : un script en arrière-plan ou dans Terminal, un raccourci « Raccourcis » de macOS, un lien, un fichier, un dossier ou une app. Chacun peut avoir son propre raccourci clavier.",
+              "detail" : "Vos boutons : un script en arrière-plan ou dans Terminal, un raccourci « Raccourcis » de macOS, un lien, un fichier, un dossier ou une app.",
               "name" : "Commandes rapides"
             }
           ],

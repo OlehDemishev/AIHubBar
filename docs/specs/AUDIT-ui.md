@@ -51,6 +51,8 @@ Items 19–21 and 27–29 fixed in branch `fix/settings-rows`, 23, 24 and part o
 
 ## P2: island and windows
 
+Items 31–33 and 22 fixed in branch `fix/island-state`, plus one found on the way: the card's buttons could stay dim, the panel got no mouse moves.
+
 31. **The invisible zone beside the notch still opens the card** in the default mode with no ears, also over full-screen apps (`NotchGeometry.swift:47`, `NotchIsland.swift:434`). The pill's rest frame has zero height, so its card never opens (`NotchGeometry.swift:42`). *code; check on the Air*
 32. **The island card does not scroll** and is capped at 440 pt; several requests lose their buttons (`NotchGeometry.swift:24`). *code*
 33. **«Ничего» in one ear does not free the menus** while the other ear has content (`NotchIslandView.swift:26`). *code*

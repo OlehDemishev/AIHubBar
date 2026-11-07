@@ -5,6 +5,7 @@ import SwiftUI
 struct MenuBarSettings: View {
     @Environment(AppSettings.self) private var settings
     @Environment(UsageStore.self) private var usage
+    @Environment(NotchIsland.self) private var island
     @Environment(ProfileStore.self) private var modes
     @State private var sample = true
     @State private var selection: Selection?
@@ -72,7 +73,7 @@ struct MenuBarSettings: View {
     private var data: MenuBarData { sample ? MenuBarData.sample : liveData }
 
     private var preview: some View {
-        let config = modes.menuBar.without(modes.silencedModules)
+        let config = (island.takesMenuBarSummary ? modes.menuBar.iconOnly : modes.menuBar).without(modes.silencedModules)
         let width = MenuBarRenderer.width(config, data)
         return VStack(alignment: .leading, spacing: 10) {
             HStack {
@@ -97,6 +98,11 @@ struct MenuBarSettings: View {
             .padding(.horizontal, 18)
             .frame(height: 44)
             .background(RoundedRectangle(cornerRadius: 9).fill(.quaternary))
+            if island.takesMenuBarSummary {
+                Text("Лимиты и сессии сейчас в острове: в строке меню остаются значок и красная точка проектов.")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
             if width > MenuBarRenderer.wideWidth {
                 Label("Строка широкая (\(Int(width)) pt): на MacBook с вырезом её может закрыть вырез или скрыть система.",
                       systemImage: "exclamationmark.triangle")
