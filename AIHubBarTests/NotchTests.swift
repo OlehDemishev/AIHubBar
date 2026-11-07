@@ -233,7 +233,7 @@ struct NotchPlacementTests {
 
     @Test func pillDefaultAndOldSettings() throws {
         let old = try JSONDecoder().decode(NotchSettings.self, from: Data(#"{"leftEar": "weekLimit"}"#.utf8))
-        #expect(old.summary == .both && old.screen == .notch && old.pill == nil && !old.hidden)
+        #expect(old.summary == .menuBar && old.screen == .notch && old.pill == nil && !old.hidden)
         #expect(old.showsPill(macHasNotch: false) && !old.showsPill(macHasNotch: true), "by default only where no notch exists")
         var chosen = old
         chosen.pill = false
@@ -241,6 +241,13 @@ struct NotchPlacementTests {
         let round = try JSONDecoder().decode(NotchSettings.self, from: JSONEncoder().encode(chosen))
         #expect(round.pill == false && round.summary == .island)
         #expect(!round.showsPill(macHasNotch: false))
+    }
+
+    @Test func theSummaryIsInOnePlace() throws {
+        let decoder = JSONDecoder()
+        #expect(try decoder.decode(NotchSettings.self, from: Data(#"{"summary":"both"}"#.utf8)).summary == .menuBar, "the former «both»")
+        #expect(try decoder.decode(NotchSettings.self, from: Data(#"{"summary":"island"}"#.utf8)).summary == .island)
+        #expect(NotchSummary.allCases == [.island, .menuBar])
     }
 
     @Test func menuBarIconOnly() {

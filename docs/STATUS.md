@@ -33,6 +33,12 @@
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
 
+## 2026-11-07 — Notch or menu bar (branch `feat/notch-or-menubar`)
+
+Done: from Oleh's look at the real notch on the Air: the ears sat on the menus of the app in front and repeated the menu bar. «Сводка» is now one place: the menu bar (the default, the island shows only events) or the island (the menu bar keeps only ✦, which opens the panel). The former «both» becomes the menu bar. The left ear's ring has a visible track and always shows its number: at 40 % it looked like a broken half circle.
+Checked: scripts/check.sh passed with a new test for the choice.
+Left: not seen on the real notch; the Air needs this build. In «только в острове» the left ear can still cover long app menus: «Ничего» in its picker turns it off.
+
 ## 2026-11-07 — English for languages without a translation (branch `fix/english-fallback`)
 
 Done: with a system language outside the 13 the app opened in Russian, its development language. At launch `LanguageFallback` now sets English for that launch. A change of `CFBundleDevelopmentRegion` was tried first and dropped: Russian has no `.lproj`, so it broke Russian, and a `ru.lproj` table can't sit next to the string catalog.

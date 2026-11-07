@@ -16,18 +16,21 @@ enum NotchEar: String, Codable, CaseIterable, Sendable {
     }
 }
 
-/// Where the summary — limits and sessions — is shown when the island is on screen (SPEC-notch §6, Oleh 2026-11-02).
+/// Where the summary — limits and sessions — is shown when the island is on screen: one place, never both
+/// (SPEC-notch §6, Oleh 2026-11-07: on the MacBook the ears sat on top of the menus and repeated the menu bar).
 enum NotchSummary: String, Codable, CaseIterable, Sendable {
-    /// The menu bar as configured and the island's ears.
-    case both
     /// The ears; the menu bar keeps only its icon and the projects' red dot.
     case island
     /// The menu bar; the island has no ears and shows only events.
     case menuBar
 
+    /// The former «both», and anything unknown, is the menu bar.
+    init(from decoder: Decoder) throws {
+        self = try NotchSummary(rawValue: decoder.singleValueContainer().decode(String.self)) ?? .menuBar
+    }
+
     var title: String {
         switch self {
-        case .both: String(localized: "в строке меню и в острове")
         case .island: String(localized: "только в острове")
         case .menuBar: String(localized: "только в строке меню")
         }
@@ -62,7 +65,7 @@ struct NotchSettings: Codable, Equatable, Sendable {
     var events: [NotchEventKind] = NotchEventKind.defaultOn
     /// «Только остров»: no system notification about a request or a wait while the island is on screen (SPEC-notch §4).
     var replaceNotifications = false
-    var summary: NotchSummary = .both
+    var summary: NotchSummary = .menuBar
     var screen: NotchScreen = .notch
     /// The pill on a screen without a notch (SPEC-notch §5); nil — on a Mac that has no notch screen at all.
     var pill: Bool?
