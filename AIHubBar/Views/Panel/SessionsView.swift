@@ -80,7 +80,7 @@ struct SessionsView: View {
                 }
             }
             .padding(.horizontal, 6)
-            .padding(.top, 4)
+            .padding(.vertical, 4)
 
             if !PanelBlock.collapsed(in: collapsedRaw).contains(.sessions) {
                 ForEach(rows) { row in

@@ -27,7 +27,6 @@ struct MenuPanelView: View {
     /// Drives the entrance animation; reset when the panel closes so it replays on every open.
     @State private var isShown = false
     @State private var expanded: Set<String> = []
-    @State private var listHeight: CGFloat = 0
     @State private var window: NSWindow?
     /// The panel draws its own glass instead of the system background.
     @State private var drawsGlass = false
@@ -38,10 +37,13 @@ struct MenuPanelView: View {
     @State private var agentThreads: [AgentThread] = []
     @FocusState private var searchFocused: Bool
 
-    /// The project list scrolls; its height leaves room for the other blocks on the current screen.
-    private static var maxListHeight: CGFloat {
-        let visible = NSScreen.main?.visibleFrame.height ?? 1000
-        return min(420, max(180, visible - 700))
+    /// Header, search and a margin under the panel, at the normal text size.
+    private static let pinnedHeight: CGFloat = 76
+
+    /// The blocks scroll once the panel would pass the bottom of its screen; header and search stay.
+    private var blocksMaxHeight: CGFloat {
+        let visible = (window?.screen ?? NSScreen.main)?.visibleFrame.height ?? 800
+        return max(240, visible - Self.pinnedHeight * max(1, settings.panelTextSize.scale))
     }
 
     private let log = Logger(subsystem: "com.demishev.claudepult", category: "panel")
@@ -60,7 +62,7 @@ struct MenuPanelView: View {
             header
                 .revealed(isShown, step: 0, reduceMotion: calm)
 
-            PanelSearchField(query: $query, focused: $searchFocused, onMove: moveSelection) {
+            PanelSearchField(query: $query, focused: $searchFocused, onCancel: { PanelOpener.close() }, onMove: moveSelection) {
                 let results = searchResults
                 if results.indices.contains(searchSelection) { activate(results[searchSelection]) }
             }
@@ -73,24 +75,13 @@ struct MenuPanelView: View {
                     .panelCard()
                     .padding(.bottom, 8)
             } else {
-            VStack(alignment: .leading, spacing: 8) {
-                if notifications.state == .denied {
-                    notificationsHint
-                        .panelCard()
+                // Hugs its content up to `blocksMaxHeight`; a window of its own size can't scroll otherwise.
+                ScrollView {
+                    blocks
                 }
-
-                if modes.modes.isEmpty {
-                    noProfile
-                        .panelCard()
-                        .revealed(isShown, step: 1, reduceMotion: calm)
-                }
-
-                // The current profile's modules, in its order (SPEC-profiles §9.2), each on its card.
-                ForEach(modes.panelModules, id: \.self) { kind in
-                    module(kind)
-                }
-            }
-            .padding(.bottom, 8)
+                .scrollBounceBehavior(.basedOnSize)
+                .frame(maxHeight: blocksMaxHeight)
+                .fixedSize(horizontal: false, vertical: true)
             }
         }
         .panelGlassGroup()
@@ -134,6 +125,27 @@ struct MenuPanelView: View {
         }
         .onChange(of: expanded) { snapshotIfEnabled() }
         .onChange(of: store.lastUpdated) { snapshotIfEnabled() }
+    }
+
+    private var blocks: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            if notifications.state == .denied {
+                notificationsHint
+                    .panelCard()
+            }
+
+            if modes.modes.isEmpty {
+                noProfile
+                    .panelCard()
+                    .revealed(isShown, step: 1, reduceMotion: calm)
+            }
+
+            // The current profile's modules, in its order (SPEC-profiles §9.2), each on its card.
+            ForEach(modes.panelModules, id: \.self) { kind in
+                module(kind)
+            }
+        }
+        .padding(.bottom, 8)
     }
 
     private func updateGlass() {
@@ -404,9 +416,10 @@ struct MenuPanelView: View {
                 projectsHeader
                 if !PanelBlock.collapsed(in: collapsedRaw).contains(.projects) {
                     content
+                        .padding(.top, -6)
+                        .padding(.bottom, 6)
                 }
             }
-            .padding(.bottom, 6)
             .panelCard()
             .revealed(isShown, step: 1, reduceMotion: calm)
         case .clipboard:
@@ -460,13 +473,13 @@ struct MenuPanelView: View {
             }
         }
         .padding(.horizontal, 10)
-        .padding(.top, 8)
+        .padding(.vertical, 8)
     }
 
     @ViewBuilder
     private var content: some View {
         if folders.isActive {
-            scrolling { FolderProjectsView(expanded: $folderExpanded) }
+            FolderProjectsView(expanded: $folderExpanded)
         } else {
             gitContent
         }
@@ -517,29 +530,12 @@ struct MenuPanelView: View {
     }
 
     private var projectList: some View {
-        scrolling {
-            VStack(alignment: .leading, spacing: 2) {
-                ForEach(store.projects) { project in
-                    ProjectRowView(project: project, isExpanded: expandedBinding(project.id))
-                }
+        VStack(alignment: .leading, spacing: 2) {
+            ForEach(store.projects) { project in
+                ProjectRowView(project: project, isExpanded: expandedBinding(project.id))
             }
-            .padding(4)
         }
-    }
-
-    /// The project list scrolls once it is taller than `maxListHeight`.
-    private func scrolling<Content: View>(@ViewBuilder _ content: () -> Content) -> some View {
-        ScrollView {
-            content()
-            .background(GeometryReader { proxy in
-                Color.clear.preference(key: ContentHeightKey.self, value: proxy.size.height)
-            })
-        }
-        .scrollBounceBehavior(.basedOnSize)
-        .frame(height: min(max(listHeight, 1), Self.maxListHeight))
-        .onPreferenceChange(ContentHeightKey.self) { [$listHeight] height in
-            $listHeight.wrappedValue = height
-        }
+        .padding(4)
     }
 
     private func expandedBinding(_ id: String) -> Binding<Bool> {

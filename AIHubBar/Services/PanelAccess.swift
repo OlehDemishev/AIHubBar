@@ -68,10 +68,19 @@ enum OpenPanelHotKey: String, CaseIterable, Sendable {
 @MainActor
 enum PanelOpener {
     static func toggle() {
-        guard AXIsProcessTrusted(), let point = itemCentre, let primary = NSScreen.screens.first else {
-            QuickSearch.show()
-            return
-        }
+        if !clickItem() { QuickSearch.show() }
+    }
+
+    /// Esc in the panel. `MenuBarExtra` has no call for this either: `close()` on its window leaves the item out of
+    /// step, so the next click does nothing, and giving up key or active state or sending the item an event from
+    /// inside the app changes nothing (tried 2026-11-07). Without the permission Esc stays without effect.
+    static func close() {
+        clickItem()
+    }
+
+    @discardableResult
+    private static func clickItem() -> Bool {
+        guard AXIsProcessTrusted(), let point = itemCentre, let primary = NSScreen.screens.first else { return false }
         let target = CGPoint(x: point.x, y: primary.frame.height - point.y)
         let back = NSEvent.mouseLocation
         let source = CGEventSource(stateID: .hidSystemState)
@@ -79,6 +88,7 @@ enum PanelOpener {
             CGEvent(mouseEventSource: source, mouseType: type, mouseCursorPosition: target, mouseButton: .left)?.post(tap: .cghidEventTap)
         }
         CGWarpMouseCursorPosition(CGPoint(x: back.x, y: primary.frame.height - back.y))
+        return true
     }
 
     /// The window of the app's other menu bar item (the layout indicator), which is not the panel's.

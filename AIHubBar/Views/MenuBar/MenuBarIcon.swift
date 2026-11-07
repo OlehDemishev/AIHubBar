@@ -313,7 +313,7 @@ enum MenuBarRenderer {
     }
 }
 
-/// Free space on the system volume, for the menu bar when no report gives it. Read at most every 5 minutes.
+/// Free space on the system volume, when the resources monitor has no reading yet. Read at most every 5 minutes.
 @MainActor
 enum DiskSpace {
     private static var cached: (bytes: Int64?, at: Date)?

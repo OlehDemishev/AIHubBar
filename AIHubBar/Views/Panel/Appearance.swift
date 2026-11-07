@@ -167,6 +167,7 @@ struct BlockTitle: View {
     let title: LocalizedStringKey
     @AppStorage(StorageKey.collapsedBlocks) private var collapsedRaw = ""
     @Environment(\.panelGlass) private var glass
+    @Environment(\.panelTextScale) private var scale
 
     var body: some View {
         let collapsed = PanelBlock.collapsed(in: collapsedRaw).contains(block)
@@ -178,8 +179,10 @@ struct BlockTitle: View {
                     .scaledFont(.caption2, weight: .semibold)
                     .rotationEffect(.degrees(collapsed ? 0 : 90))
                 Text(title)
-                    .scaledFont(.caption, weight: .semibold)
+                    .scaledFont(.callout, weight: .semibold)
             }
+            // Tall enough for whatever stands beside a title: folded cards come out the same height.
+            .frame(minHeight: max(20, 16 * scale))
             // Grey disappears on glass over a bright window.
             .foregroundStyle(glass ? AnyShapeStyle(Color.primary.opacity(0.85)) : AnyShapeStyle(.secondary))
             .contentShape(Rectangle())

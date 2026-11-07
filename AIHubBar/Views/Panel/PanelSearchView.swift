@@ -80,8 +80,11 @@ struct PanelSearchField: View {
                 .onSubmit(onSubmit)
                 .onKeyPress(.upArrow) { move(-1) }
                 .onKeyPress(.downArrow) { move(1) }
-                // Esc clears the query, and with nothing typed closes the search window.
-                .onExitCommand { if query.isEmpty { onCancel?() } else { query = "" } }
+                // Esc clears the query, and with nothing typed closes the search window or the panel.
+                .onKeyPress(.escape) {
+                    if query.isEmpty { onCancel?() } else { query = "" }
+                    return .handled
+                }
             if !query.isEmpty {
                 Button { query = "" } label: { Label("Очистить поиск (Esc)", systemImage: "xmark.circle.fill").labelStyle(.iconOnly) }
                     .buttonStyle(.borderless)
