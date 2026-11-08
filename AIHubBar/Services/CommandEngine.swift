@@ -127,6 +127,9 @@ final class CommandEngine {
             if mode.launchMode == .terminal {
                 openInTerminal(ShellQuote.claudeCommandLine(folder: project.path, claude: claude, prompt: prompt), job: &job)
             } else {
+                // Unattended there is no shell to open a `.docx` with; in Terminal the agent can ask for one.
+                let fileText = context.file.flatMap { FolderScanner.inlineText(of: folder.appending(path: $0)) }
+                let prompt = fileText == nil ? prompt : CommandText.agentPrompt(task: task, context: context, output: name, fileText: fileText)
                 do {
                     let run = try runs.launch(
                         title: template.title, prompt: prompt, project: project.name, projectPath: project.path,

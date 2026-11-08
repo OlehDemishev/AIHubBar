@@ -67,6 +67,9 @@ final class AppSettings {
     /// Where the current mode's projects come from; set by `ProfileStore` when a mode is applied, not stored.
     var activeSource: ProjectSource = .none
 
+    /// `Profile.resultPatterns` of the current mode; set with the source, not stored.
+    var activeResultPatterns: [String] = []
+
     /// Whose rules the developer prompts follow; set with the mode, not stored.
     var promptStyle: PromptStyle = .workspace
 

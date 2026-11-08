@@ -54,7 +54,8 @@ final class FolderProjectStore {
         isRefreshing = true
         defer { isRefreshing = false }
         let started = ContinuousClock.now
-        let scanned = await Task.detached(priority: .utility) { FolderScanner.scan(source: source) }.value
+        let patterns = settings.activeResultPatterns
+        let scanned = await Task.detached(priority: .utility) { FolderScanner.scan(source: source, resultPatterns: patterns) }.value
         projects = scanned
         scannedSource = source
         lastUpdated = .now

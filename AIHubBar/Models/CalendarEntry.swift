@@ -42,6 +42,8 @@ struct CalendarEntry: Identifiable, Hashable, Sendable {
     /// What a click opens: the project folder, the plan row's file, or the plan.
     var openPath: String
     var source: Source
+    /// The project is at its profile's last stage (or the plan row's status is that stage): nothing left to do.
+    var isDone = false
 
     var id: String {
         switch source {
@@ -57,7 +59,8 @@ struct CalendarEntry: Identifiable, Hashable, Sendable {
 
     /// Only date-only deadlines become overdue the day after; timed ones right after the time.
     func isOverdue(now: Date = .now) -> Bool {
-        hasTime ? date < now : date < Calendar.current.startOfDay(for: now)
+        guard !isDone else { return false }
+        return hasTime ? date < now : date < Calendar.current.startOfDay(for: now)
     }
 }
 
@@ -191,6 +194,7 @@ enum CalendarScanner {
         var icon: String
         var source: ProjectSource
         var calendar: CalendarMode
+        var doneStage: String? = nil
     }
 
     static func entries(for modes: [ProfileInfo]) -> [CalendarEntry] {
@@ -207,7 +211,8 @@ enum CalendarScanner {
                     date: date, hasTime: text.contains(":"), kind: kind, title: project.name,
                     detail: project.card.values[.platform] ?? project.card.stage,
                     modeID: mode.id, modeName: mode.name, modeIcon: mode.icon, openPath: project.path,
-                    source: .card(path: ProjectCardFile.path(in: project.path), key: key)
+                    source: .card(path: ProjectCardFile.path(in: project.path), key: key),
+                    isDone: mode.doneStage != nil && project.card.stage == mode.doneStage
                 ))
             }
         }
@@ -226,7 +231,8 @@ enum CalendarScanner {
                     detail: [row.value(.platform), row.value(.status)].compactMap { $0 }.joined(separator: " · "),
                     modeID: mode.id, modeName: mode.name, modeIcon: mode.icon,
                     openPath: file.flatMap { FileManager.default.fileExists(atPath: $0) ? $0 : nil } ?? path,
-                    source: .plan(path: path, line: row.line)
+                    source: .plan(path: path, line: row.line),
+                    isDone: mode.doneStage != nil && row.value(.status) == mode.doneStage
                 ))
             }
         }

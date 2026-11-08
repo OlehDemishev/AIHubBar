@@ -28,17 +28,28 @@ final class CalendarStore {
     var planModes: [Profile] { modes.enabledModes.filter { $0.calendar == .contentPlan && $0.source.isFolders } }
 
     func upcoming(days: Int = 7, now: Date = .now) -> [CalendarEntry] {
-        let end = Calendar.current.date(byAdding: .day, value: days, to: Calendar.current.startOfDay(for: now)) ?? now
+        Self.upcoming(entries, days: days, now: now)
+    }
+
+    nonisolated static func upcoming(_ entries: [CalendarEntry], days: Int = 7, now: Date) -> [CalendarEntry] {
+        let today = Calendar.current.startOfDay(for: now)
+        let end = Calendar.current.date(byAdding: .day, value: days, to: today) ?? now
         // Overdue deadlines stay until they are moved; overdue publications and plan rows only for a day.
-        let since = Calendar.current.date(byAdding: .day, value: -1, to: Calendar.current.startOfDay(for: now)) ?? now
+        let since = Calendar.current.date(byAdding: .day, value: -1, to: today) ?? now
         return entries.filter { entry in
-            entry.date < end && (entry.date >= since || entry.kind == .deadline)
+            // Finished work has no deadline left, and its past dates need nothing from anyone.
+            if entry.isDone { return entry.kind != .deadline && entry.date >= today && entry.date < end }
+            return entry.date < end && (entry.date >= since || entry.kind == .deadline)
         }
     }
 
     /// The nearest date that is not past, for the menu bar.
     func nearest(now: Date = .now) -> CalendarEntry? {
-        entries.first { !$0.isOverdue(now: now) }
+        Self.nearest(entries, now: now)
+    }
+
+    nonisolated static func nearest(_ entries: [CalendarEntry], now: Date) -> CalendarEntry? {
+        entries.first { !$0.isDone && !$0.isOverdue(now: now) }
     }
 
     func start() {
@@ -61,7 +72,7 @@ final class CalendarStore {
         isRefreshing = true
         defer { isRefreshing = false }
         let infos = modes.enabledModes.map {
-            CalendarScanner.ProfileInfo(id: $0.id, name: $0.name, icon: $0.icon, source: $0.source, calendar: $0.calendar)
+            CalendarScanner.ProfileInfo(id: $0.id, name: $0.name, icon: $0.icon, source: $0.source, calendar: $0.calendar, doneStage: $0.doneStage)
         }
         let found = await Task.detached(priority: .utility) { CalendarScanner.entries(for: infos) }.value
         entries = found.sorted { $0.date < $1.date }
@@ -164,7 +175,7 @@ final class CalendarStore {
     nonisolated static func due(_ entries: [CalendarEntry], hours: [Int], reminded: Set<String>, now: Date) -> [(CalendarEntry, String)] {
         let offsets = hours.filter { $0 > 0 }.sorted()
         var result: [(CalendarEntry, String)] = []
-        for entry in entries where entry.date > now {
+        for entry in entries where entry.date > now && !entry.isDone {
             guard let offset = offsets.first(where: { now >= entry.date.addingTimeInterval(-Double($0) * 3600) }) else { continue }
             let key = entry.reminderKey + "|\(offset)"
             if !reminded.contains(key) { result.append((entry, key)) }

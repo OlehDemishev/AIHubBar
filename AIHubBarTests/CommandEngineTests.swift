@@ -49,6 +49,25 @@ struct CommandTextTests {
         #expect(!CommandText.apiPrompt(task: "x", context: context, fileText: nil).contains("---"))
     }
 
+    @Test func agentPromptCarriesATextItCantOpen() {
+        let agent = CommandText.agentPrompt(task: "Сделай хуки", context: context, output: "хуки.md", fileText: "ТЕКСТ")
+        #expect(agent.hasPrefix(CommandText.agentPrompt(task: "Сделай хуки", context: context, output: "хуки.md")))
+        #expect(agent.hasSuffix("Ниже — текст файла «текст/сценарий.md».\n---\nТЕКСТ\n---"))
+    }
+
+    @Test func recognisesWhatCommandsWrite() {
+        let patterns = ["корректура.md", "тон-{текст}.md", "конспект-<файл>", "результат-<время>.md"]
+        for name in ["корректура.md", "корректура-2.md", "корректура (Claude).md", "корректура (Claude)-3.md", "Корректура.MD",
+                     "тон-дружелюбнее.md", "конспект-статья.md", "результат-2026-11-08-1500.md"] {
+            #expect(CommandText.isResult(name, patterns: patterns), "\(name)")
+        }
+        for name in ["статья.md", "корректура-старая.md", "корректура.txt", "папка/корректура.md", "тон-.md", "мой тон-x.md"] {
+            #expect(!CommandText.isResult(name, patterns: patterns), "\(name)")
+        }
+        #expect(CommandText.isResult("и\u{0306}.md", patterns: ["й.md"]), "the same letter in another Unicode form")
+        #expect(!CommandText.isResult("статья.md", patterns: []))
+    }
+
     @Test func templatesAreTolerant() throws {
         let template = try JSONDecoder().decode(CommandTemplate.self, from: Data(#"{"title":"Хуки","task":"t","input":"nope"}"#.utf8))
         #expect(template.input == .mainFile)
