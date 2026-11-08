@@ -178,9 +178,16 @@ struct Session: Decodable, Identifiable, Equatable, Sendable {
     /// The task: the first prompt of the session, else the latest one. Prompts sent by AI Hub Bar's own commands
     /// are shown without their wrapper («Задача: …. Работай по правилам …»).
     var task: String? {
-        [firstPrompt, lastPrompt].compactMap { $0?.trimmingCharacters(in: .whitespacesAndNewlines) }
+        [firstPrompt, lastPrompt].compactMap { $0.map(Self.withoutSystemText) }
             .first { !$0.isEmpty }
             .map(Self.taskTitle)
+    }
+
+    /// A prompt without the `<system-reminder>` the Claude app puts in front of the person's words. Files from older
+    /// hooks can hold that text alone, cut off at the hook's limit, with no closing tag.
+    static func withoutSystemText(_ prompt: String) -> String {
+        prompt.replacingOccurrences(of: #"(?s)<system-reminder>.*?(</system-reminder>|$)"#, with: " ", options: .regularExpression)
+            .trimmingCharacters(in: .whitespacesAndNewlines)
     }
 
     static func taskTitle(_ prompt: String) -> String {

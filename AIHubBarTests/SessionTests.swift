@@ -129,6 +129,40 @@ struct HookScriptTests {
         }
     }
 
+    @Test func theClaudeAppsSystemTextIsNotATitle() async throws {
+        let h = try Harness()
+        defer { try? FileManager.default.removeItem(at: h.dir) }
+        let reminder = "<system-reminder>\n" + String(repeating: "Служебный текст. ", count: 40) + "\n</system-reminder>\n"
+        try await h.send(event("UserPromptSubmit", ["prompt": reminder + "Почини заголовок сессии"]))
+        var session = try h.session("abc-123")
+        #expect(session.firstPrompt == "Почини заголовок сессии")
+        #expect(session.task == "Почини заголовок сессии")
+
+        // Only that text: nothing to call the session by, and no title made of it.
+        let other = event("UserPromptSubmit", ["prompt": reminder, "session_id": "only-system"])
+        try await h.send(other)
+        session = try h.session("only-system")
+        #expect(session.firstPrompt == nil)
+        #expect(session.task == nil)
+
+        // A file from the previous hook: the title is that text cut off at its limit, and the next prompt replaces it.
+        let old = h.sessions.appending(path: "old-format.json")
+        var record = try JSONSerialization.jsonObject(with: Data(contentsOf: h.sessions.appending(path: "only-system.json"))) as! [String: Any]
+        record["first_prompt"] = "<system-reminder> The user started this session"
+        record["last_prompt"] = "<system-reminder> The user started this session"
+        record["session_id"] = "old-format"
+        try JSONSerialization.data(withJSONObject: record).write(to: old)
+        session = try h.session("old-format")
+        #expect(session.task == nil, "the app hides it in files already there")
+        try await h.send(event("UserPromptSubmit", ["prompt": "Новая задача", "session_id": "old-format"]))
+        #expect(try h.session("old-format").firstPrompt == "Новая задача")
+    }
+
+    @Test func aPromptAboutTheTagKeepsItsWords() {
+        #expect(Session.withoutSystemText("Что такое тег? <system-reminder>x</system-reminder> Объясни") == "Что такое тег?   Объясни")
+        #expect(Session.withoutSystemText("  Обычный запрос\n") == "Обычный запрос")
+    }
+
     private func event(_ name: String, _ extra: [String: Any] = [:]) -> [String: Any] {
         ["session_id": "abc-123", "hook_event_name": name, "cwd": "/Users/me/Projects/Ambo/.claude/worktrees/cb-x/apps",
          "transcript_path": "/t.jsonl"].merging(extra) { $1 }

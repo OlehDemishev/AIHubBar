@@ -5,12 +5,12 @@
 **Updated:** 2026-11-08
 
 **Now:**
-- nothing in progress: 0.7.6 is out; content stage 1 is walked, what needs a person is in CHECKLIST
+- `fix/session-title-wrapper`: session titles from the Claude app no longer show raw `<system-reminder>` text
+- 0.7.6 is out; content stage 1 is walked, what needs a person is in CHECKLIST
 - merged 2026-11-06: #262 donations («Поддержать проект» in Settings → General, site/support.html with Ko-fi, GitHub Sponsors and Buy Me a Coffee; the app button reaches people with the next release)
 - merged 2026-11-03: #251 menu bar ☕ follows the «Не спать» switch, #248 «Не спать» on/off in the menu bar, #241 Codex states, #240 quick command shortcuts, #238 «Быстрый запрос», #236 content spec, #242 «Telegram» stage 1, #244 menu at the bottom, #246 shared bot (Worker not deployed yet), #247 desktop CI off for Mac string changes, #249 the bot's menu set up by each person, #252 stage 2 (sessions, requests, limits), #254 stage 3 (tasks and runs), #255 stage 4 (settings in the bot), #256 Mini App
 
 **Next:**
-- a session's title can be raw `<system-reminder>` text (seen on a finished session of the Claude app, among the active rows, 4 days old): hide that wrapper in the title
 - check on the Air: the island at the real notch
 - promotion (docs/LAUNCH.md): website in the About box and a demo recording, then r/ClaudeAI, the lists, r/macapps, Show HN, Product Hunt, Homebrew
 - content (docs/specs/SPEC-content.md, agreed): stage 2 «Версии», then batch tasks; better after the first feedback from people
@@ -33,6 +33,12 @@
 - MacBook Air: update to 0.7.6 through Sparkle and check the island at the real notch
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-08 — Session titles without the Claude app's system text (branch `fix/session-title-wrapper`)
+
+Done: the Claude app puts a `<system-reminder>` block before the person's words, and the hook kept the first 200 characters, so the title was that text and the words were lost (all 27 stored values on this Mac). The hook, format 6, removes the block before clipping and replaces a title saved by the old format with the next prompt; the app updates the script by itself. The app hides the text in files already there: such a session has no title until its next prompt.
+Checked: `scripts/check.sh`, new tests run the real hook script with the block, with the block alone, and on an old-format file.
+Left: not seen in the running app, so the next release brings it. Sessions already open keep no title until their next prompt, because the words were never saved. The session that looked stale was alive, started 4 days ago: not a bug.
 
 ## 2026-11-08 — Release 0.7.6 (branch `chore/status-release-0.7.6`)
 
