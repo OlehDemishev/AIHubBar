@@ -133,12 +133,31 @@ enum CommandText {
         return "\(base)-\(counter).\(ext)"
     }
 
-    /// For an agent working in the folder (docs/TEMPLATES.md).
-    static func agentPrompt(task: String, context: CommandContext, output: String, language: ContentLanguage = .current) -> String {
+    /// Whether a file of a project is what one of these `output` patterns writes, also with the `-2` of `uniqueName`
+    /// and the ` (Claude)` of a comparison. Paths are relative to the project, and results land at its top level.
+    static func isResult(_ name: String, patterns: [String]) -> Bool {
+        let name = name.precomposedStringWithCanonicalMapping
+        return patterns.contains { pattern in
+            let pattern = pattern.precomposedStringWithCanonicalMapping as NSString
+            let ext = pattern.pathExtension.isEmpty ? "md" : pattern.pathExtension
+            let base = pattern.pathExtension.isEmpty ? pattern as String : pattern.deletingPathExtension
+            let marked = base.replacingOccurrences(of: #"\{[^}]*\}|<[^>]*>"#, with: "\u{1}", options: .regularExpression)
+            let stem = NSRegularExpression.escapedPattern(for: marked).replacingOccurrences(of: "\u{1}", with: ".+")
+            let regex = "^\(stem)( \\(.+\\))?(-[0-9]+)?\\.\(NSRegularExpression.escapedPattern(for: ext))$"
+            return name.range(of: regex, options: [.regularExpression, .caseInsensitive]) != nil
+        }
+    }
+
+    /// For an agent working in the folder (docs/TEMPLATES.md). `fileText`: the source file's text when the agent can't
+    /// read the format itself (`FolderScanner.inlineText`).
+    static func agentPrompt(task: String, context: CommandContext, output: String, fileText: String? = nil,
+                            language: ContentLanguage = .current) -> String {
         let words = language.strings
-        return ContentStrings.fill(words.agentPrompt, [
+        let prompt = ContentStrings.fill(words.agentPrompt, [
             "project": context.projectName, "file": context.file ?? words.agentNoFile, "output": output, "task": task,
         ])
+        guard let fileText, let file = context.file else { return prompt }
+        return [prompt, "", ContentStrings.fill(words.apiFileIntro, ["file": file]), "---", fileText, "---"].joined(separator: "\n")
     }
 
     /// For a model by API: AI Hub Bar sends the file text and writes the answer itself (docs/TEMPLATES.md).

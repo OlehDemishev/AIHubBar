@@ -92,6 +92,18 @@ struct Profile: Codable, Identifiable, Equatable, Sendable {
     /// Stages without the empty items a half-typed list may have.
     var stageList: [String] { stages.filter { !$0.isEmpty } }
 
+    /// The stage that means the work is finished: the last one, as `StageChip`'s colours already treat it.
+    var doneStage: String? {
+        let list = stageList
+        return list.count > 1 ? list.last : nil
+    }
+
+    /// `output` patterns of the commands that work on the main file: what they write is derived from it, so it never
+    /// becomes the main file itself (`FolderScanner.project`). Commands on the whole project may write the main text.
+    var resultPatterns: [String] {
+        commands.filter { $0.input == .mainFile }.map(\.output) + [CommandTemplate.customTask.output]
+    }
+
     /// The developer setup AI Hub Bar had before modes (report.py, `_daily-report`), as a mode.
     static func developerWithReport(
         projectsDirectory: String, dailyReportDirectory: String, launchMode: LaunchMode?,

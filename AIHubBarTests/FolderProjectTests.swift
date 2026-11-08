@@ -1,3 +1,4 @@
+import AppKit
 import Foundation
 import Testing
 @testable import AIHubBar
@@ -101,6 +102,43 @@ struct FolderScannerTests {
         #expect(FolderScanner.scan(source: .inbox(root.appending(path: "Чай").path)).map(\.name) == ["Чай"])
         #expect(FolderScanner.scan(source: .folders(root.appending(path: "нет").path)).isEmpty)
         #expect(FolderScanner.scan(source: .none).isEmpty)
+    }
+
+    @Test func aCommandsResultDoesNotBecomeTheMainFile() throws {
+        let root = FileManager.default.temporaryDirectory.appending(path: "claudepult-results-\(UUID().uuidString)")
+        defer { try? FileManager.default.removeItem(at: root) }
+        func write(_ path: String, ago: TimeInterval) throws {
+            let url = root.appending(path: path)
+            try FileManager.default.createDirectory(at: url.deletingLastPathComponent(), withIntermediateDirectories: true)
+            try "раз два".write(to: url, atomically: true, encoding: .utf8)
+            try FileManager.default.setAttributes([.modificationDate: Date.now.addingTimeInterval(-ago)], ofItemAtPath: url.path)
+        }
+        try write("Статья/вопросы.md", ago: 5000)
+        try write("Статья/корректура.md", ago: 10)
+        try write("Статья/тон-строже (Claude)-2.md", ago: 5)
+        try write("Только результат/корректура.md", ago: 10)
+        let patterns = ["корректура.md", "тон-{текст}.md"]
+        let projects = FolderScanner.scan(source: .folders(root.path), resultPatterns: patterns)
+        #expect(projects.first { $0.name == "Статья" }?.mainFile == "вопросы.md")
+        #expect(projects.first { $0.name == "Только результат" }?.mainFile == "корректура.md", "better than no file at all")
+        #expect(FolderScanner.scan(source: .folders(root.path)).first { $0.name == "Статья" }?.mainFile != "вопросы.md")
+    }
+
+    @Test func inlineTextOnlyForFormatsAnAgentCantRead() throws {
+        let root = FileManager.default.temporaryDirectory.appending(path: "claudepult-inline-\(UUID().uuidString)")
+        defer { try? FileManager.default.removeItem(at: root) }
+        try FileManager.default.createDirectory(at: root, withIntermediateDirectories: true)
+        let text = NSAttributedString(string: "Текст выпуска")
+        let docx = root.appending(path: "выпуск.docx")
+        try text.data(from: NSRange(location: 0, length: text.length), documentAttributes: [.documentType: NSAttributedString.DocumentType.officeOpenXML]).write(to: docx)
+        #expect(FolderScanner.inlineText(of: docx)?.contains("Текст выпуска") == true)
+        let long = root.appending(path: "длинный.docx")
+        let big = NSAttributedString(string: String(repeating: "слово ", count: 70_000))
+        try big.data(from: NSRange(location: 0, length: big.length), documentAttributes: [.documentType: NSAttributedString.DocumentType.officeOpenXML]).write(to: long)
+        #expect(FolderScanner.inlineText(of: long) == nil)
+        let plain = root.appending(path: "статья.md")
+        try "текст".write(to: plain, atomically: true, encoding: .utf8)
+        #expect(FolderScanner.inlineText(of: plain) == nil)
     }
 
     @MainActor

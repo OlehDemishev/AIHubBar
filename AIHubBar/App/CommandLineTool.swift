@@ -18,8 +18,9 @@ import UserNotifications
 /// - `AIHubBar --modes`, `AIHubBar --export-settings <file.claudepult>` (import: open the file in Finder)
 /// - `AIHubBar --assistant-preview <file.png> [template]` (the assistant's preview pane for a template, sample data)
 /// - `AIHubBar --git-scan <folder>` (the built-in git scanner: health, branch, changes, PRs, attention)
-/// - `AIHubBar --calendar [folder]` (calendar dates of the enabled modes, or of a folder read as «папки» + контент-план)
-/// - `AIHubBar --folder-projects <folder>` (folder projects as the panel would list them)
+/// - `AIHubBar --calendar [folder] [template]` (calendar dates of the enabled modes, or of a folder read as «папки» +
+///   контент-план, with a template's stages)
+/// - `AIHubBar --folder-projects <folder> [template]` (folder projects as the panel would list them in that template)
 /// - `AIHubBar --api-complete <provider> <prompt> [base-url]` (one request to a model by API, prints reply and tokens)
 /// - `AIHubBar --services [check]` (installed agents, stored API keys; `check` lists each provider's models)
 /// - `AIHubBar --menubar-preview <file.png> [minimum|limits|everything]` (the menu bar item with sample data)
@@ -224,13 +225,14 @@ enum CommandLineTool {
                     return 0
                 }
             },
-            CLICommand(["--calendar"], needs: 0, usage: "--calendar [folder]  calendar dates") { arguments, index in
+            CLICommand(["--calendar"], needs: 0, usage: "--calendar [folder] [template]  calendar dates") { arguments, index in
                 let infos: [CalendarScanner.ProfileInfo]
                 if index + 1 < arguments.count {
-                    infos = [.init(id: "cli", name: "папка", icon: "folder", source: .folders(arguments[index + 1]), calendar: .contentPlan)]
+                    let template = ProfileTemplate.loadAll().first { $0.id == arguments.dropFirst(index + 2).first }
+                    infos = [.init(id: "cli", name: "папка", icon: "folder", source: .folders(arguments[index + 1]), calendar: .contentPlan, doneStage: template?.mode.doneStage)]
                 } else {
                     let modes = ProfileStore(settings: AppSettings(), readOnly: true)
-                    infos = modes.enabledModes.map { .init(id: $0.id, name: $0.name, icon: $0.icon, source: $0.source, calendar: $0.calendar) }
+                    infos = modes.enabledModes.map { .init(id: $0.id, name: $0.name, icon: $0.icon, source: $0.source, calendar: $0.calendar, doneStage: $0.doneStage) }
                 }
                 let entries = CalendarScanner.entries(for: infos).sorted { $0.date < $1.date }
                 for entry in entries {
@@ -241,8 +243,9 @@ enum CommandLineTool {
                 if entries.isEmpty { print("no calendar dates") }
                 return 0
             },
-            CLICommand(["--folder-projects"], needs: 1, usage: "--folder-projects <folder>  folder projects as the panel lists them") { arguments, index in
-                let projects = FolderScanner.scan(source: .folders(arguments[index + 1]))
+            CLICommand(["--folder-projects"], needs: 1, usage: "--folder-projects <folder> [template]  folder projects as the panel lists them") { arguments, index in
+                let template = ProfileTemplate.loadAll().first { $0.id == arguments.dropFirst(index + 2).first }
+                let projects = FolderScanner.scan(source: .folders(arguments[index + 1]), resultPatterns: template?.mode.resultPatterns ?? [])
                 for project in projects {
                     let metrics = FolderMetric.allCases.compactMap { metric in metric.text(for: project, wordsPerMinute: 150).map { "\(metric.rawValue)=\($0)" } }
                     print("\(project.name)  [\(project.card.stage ?? "—")]  main=\(project.mainFile ?? "—")  " + metrics.joined(separator: "  "))

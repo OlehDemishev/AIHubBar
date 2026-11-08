@@ -119,6 +119,50 @@ struct CalendarScannerTests {
     }
 }
 
+struct FinishedWorkInTheCalendarTests {
+    let now = Date(timeIntervalSince1970: 1_793_300_000)
+
+    func entry(_ days: Int, _ kind: CalendarEntry.Kind, done: Bool) -> CalendarEntry {
+        let date = Calendar.current.date(byAdding: .day, value: days, to: Calendar.current.startOfDay(for: now))!
+        return CalendarEntry(date: date, hasTime: false, kind: kind, title: "\(kind.rawValue)\(days)\(done)", detail: nil, modeID: "m", modeName: "M",
+                             modeIcon: "v", openPath: "/p\(days)\(kind.rawValue)\(done)", source: .plan(path: "/p\(days)\(kind.rawValue)\(done)", line: 0), isDone: done)
+    }
+
+    @Test func isNeverOverdueOrReminded() {
+        #expect(!entry(-30, .deadline, done: true).isOverdue(now: now))
+        #expect(entry(-30, .deadline, done: false).isOverdue(now: now))
+        let due = CalendarStore.due([entry(1, .publish, done: true), entry(1, .publish, done: false)], hours: [48], reminded: [], now: now)
+        #expect(due.map(\.0.isDone) == [false])
+    }
+
+    @Test func leavesTheWeekAndTheMenuBar() {
+        let open = entry(-30, .deadline, done: false)
+        let entries = [entry(-30, .deadline, done: true), open, entry(-1, .publish, done: true), entry(0, .publish, done: true),
+                       entry(2, .deadline, done: true), entry(3, .deadline, done: false)]
+        #expect(CalendarStore.upcoming(entries, now: now).map(\.title) == [open.title, "publish0true", "deadline3false"])
+        #expect(CalendarStore.nearest(entries, now: now)?.title == "deadline3false", "not a finished piece's date")
+    }
+
+    @Test func comesFromTheLastStageOfTheProfile() throws {
+        let root = FileManager.default.temporaryDirectory.appending(path: "claudepult-done-\(UUID().uuidString)")
+        defer { try? FileManager.default.removeItem(at: root) }
+        for (name, stage) in [("Вышла", "опубликовано"), ("Пишется", "черновик")] {
+            try FileManager.default.createDirectory(at: root.appending(path: name), withIntermediateDirectories: true)
+            try "Этап: \(stage)\nДедлайн: 2026-01-01\n".write(to: root.appending(path: "\(name)/проект.md"), atomically: true, encoding: .utf8)
+        }
+        try "| Дата | Тема | Статус |\n|---|---|---|\n| 2026-01-01 | Пост | опубликовано |\n".write(to: root.appending(path: "контент-план.md"), atomically: true, encoding: .utf8)
+        var mode = CalendarScanner.ProfileInfo(id: "m", name: "M", icon: "v", source: .folders(root.path), calendar: .contentPlan, doneStage: "опубликовано")
+        var found = CalendarScanner.entries(for: mode)
+        #expect(found.first { $0.title == "Вышла" }?.isDone == true)
+        #expect(found.first { $0.title == "Пишется" }?.isDone == false)
+        #expect(found.first { $0.title == "Пост" }?.isDone == true)
+        mode.doneStage = nil
+        found = CalendarScanner.entries(for: mode)
+        #expect(found.allSatisfy { !$0.isDone }, "a profile with no stages has no finished work")
+        #expect(Profile(name: "x", stages: ["один"]).doneStage == nil)
+    }
+}
+
 @MainActor
 struct CalendarStoreTests {
     @Test func movesDatesInTheirFiles() async throws {

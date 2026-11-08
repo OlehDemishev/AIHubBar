@@ -112,6 +112,18 @@ No new module: it is a way to run the existing commands.
 Rules for every stage: hover hint on each icon-only control, all strings in 13 languages, nothing sent anywhere but
 the AI service chosen for the command.
 
+### Stage 1 results so far (2026-11-08)
+
+Run on a sample folder with the installed 0.7.5, without the panel: `--folder-projects`, `--calendar`, and the «Корректура» command with the app's exact «только файлы» arguments on `.md`, `.rtf` and `.docx`. Fixed from this:
+
+- **`.docx` commands failed.** With no shell the agent can't open one: it wrote a «could not read» file and the run counted as a success. Background runs now get the text of `.docx` and `.rtf` in the prompt.
+- **A result became the main file.** With no «Главный файл» in the card, the newest text file won, so after «Корректура» the next command ran on `корректура.md`. Results of main-file commands no longer count, unless there is nothing else.
+- **Finished work stayed overdue.** A project at the profile's last stage kept red dates in «Проекты» and «Ближайшее» forever. It is no longer overdue or reminded of, and leaves the menu bar's nearest date.
+
+Worked as specified: row metrics and word counts (checked against `wc`), card forms, `_` folders skipped, a project with no card, results never over an existing file, source files unchanged by runs, a denied tool stays denied.
+
+Still to look at in the real app: panel rows and stage chips, the panel's command buttons, «Сравнить», «Ближайшее», the «Календарь» window, the island drop.
+
 ## 8. Not doing
 
 - No separate «Тексты» mode or second app: it is a profile of modules.

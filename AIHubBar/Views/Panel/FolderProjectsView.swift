@@ -110,6 +110,7 @@ private struct FolderProjectRow: View {
 
     private var overdue: Bool {
         guard let deadline = project.card.deadline else { return false }
+        if let done = mode?.doneStage, project.card.stage == done { return false }
         return deadline < Calendar.current.startOfDay(for: .now)
     }
 

@@ -5,18 +5,18 @@
 **Updated:** 2026-11-08
 
 **Now:**
-- nothing in progress: 0.7.5 is out (0.7.4 brought the UI audit's fixes, 0.7.5 the panel header)
+- content stage 1 (branch `feat/content-walkthrough`): three fixes from the headless half of the walkthrough; the look at the real panel is still to do
 - merged 2026-11-06: #262 donations («Поддержать проект» in Settings → General, site/support.html with Ko-fi, GitHub Sponsors and Buy Me a Coffee; the app button reaches people with the next release)
 - merged 2026-11-03: #251 menu bar ☕ follows the «Не спать» switch, #248 «Не спать» on/off in the menu bar, #241 Codex states, #240 quick command shortcuts, #238 «Быстрый запрос», #236 content spec, #242 «Telegram» stage 1, #244 menu at the bottom, #246 shared bot (Worker not deployed yet), #247 desktop CI off for Mac string changes, #249 the bot's menu set up by each person, #252 stage 2 (sessions, requests, limits), #254 stage 3 (tasks and runs), #255 stage 4 (settings in the bot), #256 Mini App
 
 **Next:**
 - check on the Air: the island at the real notch
 - promotion (docs/LAUNCH.md): website in the About box and a demo recording, then r/ClaudeAI, the lists, r/macapps, Show HN, Product Hunt, Homebrew
-- content (docs/specs/SPEC-content.md, agreed): stage 1 — walkthrough of the «Тексты» profile on a sample folder, then «Версии», then batch tasks
+- content (docs/specs/SPEC-content.md, agreed): finish stage 1 — panel rows, stage chips, command buttons, «Сравнить», «Ближайшее», «Календарь», island drop, with screenshots; then «Версии», then batch tasks
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/specs/SPEC-windows.md §9, stage 2–3 leftovers)
 
 **Needs Oleh:**
-- free disk space: on 2026-11-07 about 20 GB free after caches and old builds were removed; `~/.colima` holds 37 GB and its Docker disk needs a repair (`colima stop && colima start`)
+- free disk space: on 2026-11-08 it swung between 1.5 and 10 GB free with swap near 12 GB, too little to build safely; `~/.colima` holds 37 GB and its Docker disk needs a repair (`colima stop && colima start`)
 - System Settings → Accessibility: remove AI Hub Bar and add it again (the switch is on, the app sees no access), then press Esc in the open panel and scroll it with the trackpad
 - after 0.7.2: System Settings → Privacy & Security → Accessibility: allow AI Hub Bar again, then press ⌃⌥B and run a command in Terminal once
 - 0.7.0 live checks: press ⌃⌥B, right-click a session row; with a second account: Settings → Claude Code → «Другие аккаунты Claude»
@@ -31,6 +31,12 @@
 - MacBook Air: check the island at the real notch
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-08 — Content stage 1: headless walkthrough and three fixes (branch `feat/content-walkthrough`)
+
+Done: walked the «Тексты» logic on a sample folder without touching the panel. Fixed: background commands on `.docx` failed (the agent has no shell to open one; now `.docx` and `.rtf` text goes in the prompt, up to 400,000 bytes); a command's result became the main file when the card names none; projects at the profile's last stage stayed overdue in «Проекты» and «Ближайшее», got reminders and could be the menu bar's nearest date. `--calendar` and `--folder-projects` take an optional template, so they follow the same rules. Findings in SPEC-content §7.
+Checked: installed 0.7.5 from the command line and «Корректура» with the app's exact arguments on `.md`, `.rtf`, `.docx`, which reproduced the bugs. The same run with the `.docx` text in the prompt, built by a script, gave a real proofreading. New tests added. Mac tests and String catalog passed in the PR's CI. Locally only `swiftc -parse` and `scripts/strings-check.py`: `scripts/check.sh` not run, the disk was at 1.5–2.6 GB free.
+Left: no local build, so the fixes have not been seen in the running app. With the text in the prompt the agent still tries to open the `.docx` first and may mention the failure in its result; the fix is a wording change in all 13 languages. Nothing in the panel was looked at yet (Oleh was in a game and the screen stays his): rows, chips, command buttons, «Сравнить», «Ближайшее», «Календарь», island drop. A result of a command on the whole project still counts as a main file candidate, on purpose. A person's own file named like a result, such as `сценарий-финал.md` next to the pattern `сценарий-{язык}.md`, needs «Главный файл» in the card.
 
 ## 2026-11-08 — Air update and Telegram confirmed (branch `chore/status-air-telegram-checked`)
 

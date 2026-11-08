@@ -8,7 +8,8 @@ struct FolderProject: Identifiable, Equatable, Sendable {
     var path: String
     var card: ProjectCardFile
     var hasCardFile: Bool
-    /// The text the metrics are counted on: «Главный файл» from the card, else the latest text file.
+    /// The text the metrics are counted on: «Главный файл» from the card, else the latest text file that is not a
+    /// command's result.
     var mainFile: String?
     var words: Int?
     /// PDFs, links and notes in a sources folder (`источники`, `sources`) or PDFs anywhere in the project.
@@ -209,7 +210,7 @@ enum FolderScanner {
     static let sourceFolders: Set<String> = ["источники", "sources", "материалы"]
 
     /// `.folders`: every visible subfolder; `.inbox`: the folder itself.
-    static func scan(source: ProjectSource) -> [FolderProject] {
+    static func scan(source: ProjectSource, resultPatterns: [String] = []) -> [FolderProject] {
         let fm = FileManager.default
         switch source {
         case let .folders(path):
@@ -217,26 +218,28 @@ enum FolderScanner {
             let children = (try? fm.contentsOfDirectory(at: root, includingPropertiesForKeys: [.isDirectoryKey], options: [.skipsHiddenFiles])) ?? []
             return children
                 .filter { (try? $0.resourceValues(forKeys: [.isDirectoryKey]).isDirectory) == true && !$0.lastPathComponent.hasPrefix("_") }
-                .map(project)
+                .map { project($0, resultPatterns: resultPatterns) }
                 .sorted { ($0.lastActivity ?? .distantPast) > ($1.lastActivity ?? .distantPast) }
         case let .inbox(path):
             let url = URL(fileURLWithPath: PathText.expand(path))
-            return fm.fileExists(atPath: url.path) ? [project(url)] : []
+            return fm.fileExists(atPath: url.path) ? [project(url, resultPatterns: resultPatterns)] : []
         default:
             return []
         }
     }
 
-    static func project(_ folder: URL) -> FolderProject {
+    static func project(_ folder: URL, resultPatterns: [String] = []) -> FolderProject {
         let cardURL = URL(fileURLWithPath: ProjectCardFile.path(in: folder.path))
         let cardText = try? String(contentsOf: cardURL, encoding: .utf8)
         let card = cardText.map(ProjectCardFile.parse) ?? ProjectCardFile()
         let files = self.files(in: folder)
         let texts = files.filter { textExtensions.contains($0.url.pathExtension.lowercased()) && !ProjectCardFile.fileNames.contains($0.url.lastPathComponent) }
+        // A command's result is newer than its source, but the next command must still run on the source.
+        let own = texts.filter { !CommandText.isResult(relativePath($0.url, in: folder), patterns: resultPatterns) }
         let main: URL? = card.values[.mainFile]
             .map { folder.appending(path: $0) }
             .flatMap { FileManager.default.fileExists(atPath: $0.path) ? $0 : nil }
-            ?? texts.max { $0.modified < $1.modified }?.url
+            ?? (own.isEmpty ? texts : own).max { $0.modified < $1.modified }?.url
         let sources = files.filter { file in
             file.url.pathExtension.lowercased() == "pdf"
                 || file.url.pathComponents.contains { sourceFolders.contains($0.lowercased()) }
@@ -281,6 +284,15 @@ enum FolderScanner {
         default:
             return try? String(contentsOf: url, encoding: .utf8)
         }
+    }
+
+    /// The text of a formatted file for a background agent's prompt. With no shell in its permissions the agent can't
+    /// open a `.docx` (Read refuses binary files) and reads raw `.rtf` markup, so AI Hub Bar reads it, as it does for
+    /// models by API. Nil for plain text, which the agent reads itself, and for a text too long for a command line.
+    static func inlineText(of url: URL) -> String? {
+        guard ["rtf", "docx"].contains(url.pathExtension.lowercased()), let text = text(of: url),
+              text.utf8.count <= 400_000 else { return nil }
+        return text
     }
 
     static func wordCount(_ url: URL) -> Int? {
