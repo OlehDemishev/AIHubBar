@@ -119,7 +119,13 @@ struct LanguagePicker: View {
     @State private var choice = (UserDefaults.standard.persistentDomain(forName: Bundle.main.bundleIdentifier ?? "")?["AppleLanguages"] as? [String])?.first.flatMap { language in
         (Bundle.main.localizations + ["ru"]).first { language.hasPrefix($0) }
     } ?? ""
-    @State private var changed = false
+
+    /// Kept in the saved values, not in this view's state: the page is rebuilt each time it is opened, and the button
+    /// has to stay until the app really runs in the chosen language.
+    private var needsRelaunch: Bool {
+        let system = UserDefaults.standard.persistentDomain(forName: UserDefaults.globalDomain)?["AppleLanguages"] as? [String]
+        return InterfaceLanguage.afterRelaunch(choice: choice, system: system ?? Locale.preferredLanguages, available: Bundle.main.localizations) != InterfaceLanguage.running
+    }
 
     /// Translations plus the development language (Russian), which has no `.lproj` of its own.
     private var languages: [String] {
@@ -139,9 +145,8 @@ struct LanguagePicker: View {
             } else {
                 UserDefaults.standard.set([choice], forKey: "AppleLanguages")
             }
-            changed = true
         }
-        if changed {
+        if needsRelaunch {
             HStack {
                 Text("Язык сменится после перезапуска.").font(.callout).foregroundStyle(.secondary)
                 Spacer()
