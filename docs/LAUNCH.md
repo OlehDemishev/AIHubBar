@@ -4,15 +4,16 @@ Drafts and the order of posts for getting AI Hub Bar its first users. Nothing he
 
 Text in `[brackets]` needs Oleh's own words: it is a personal detail nobody else can vouch for.
 
-## Where we start from (2026-11-06)
+## Where we start from (2026-11-08)
 
-0 stars, 24 DMG downloads in total, 6 unique repository visitors in two weeks.
+0 stars, 41 DMG downloads in total, 6 unique repository visitors in two weeks.
+
+Developer ID and notarization are done, from 0.7.2 on, so nothing about signing holds back r/macapps, Show HN or Homebrew.
 
 Blockers, most important first:
 
-1. **Done: Developer ID and notarization** from the first release that has them. Update this list once it is out.
-2. **No demo.** The README and the site have pictures only. A 20–30 s screen recording of the rings, a session waiting and Allow from the notification is what people share.
-3. **The repository has no website set** in its About box.
+1. **No demo.** The README and the site have pictures only. A 20–30 s screen recording of the rings, a session waiting and Allow from the notification is what people share.
+2. **The repository has no website set** in its About box.
 
 ## Order
 
