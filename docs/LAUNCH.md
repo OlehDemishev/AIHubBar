@@ -17,7 +17,7 @@ The demo is in the README and on the site (`site/demo.mp4`, `docs/images/demo.gi
 | Step | What | Needs |
 |---|---|---|
 | 1 | Done: demo recording, the website in the About box | — |
-| 2 | r/ClaudeAI post: the audience that has the problem. Fix what comes back | Nothing else; read the subreddit's rules first |
+| 2 | r/ClaudeAI post: the audience that has the problem. Fix what comes back | Karma over 100, or the megathread |
 | 3 | Open-source and Claude Code lists (below) | First feedback handled |
 | 4 | r/macapps post | A notarized release |
 | 5 | Show HN | A notarized release |
@@ -37,43 +37,57 @@ Watch after each step: DMG downloads, stars, repository traffic (`gh api repos/O
 
 ## r/ClaudeAI
 
-Before posting, from the subreddit's sidebar and pinned posts (Reddit was closed to the agent's browser on 2026-11-08, so these are not confirmed):
-- Are standalone project posts allowed, or do they go to the «Built with Claude» project showcase megathread? A moderator's megathread existed in April 2026.
-- Which flair: «Built with Claude» was in use. Any rule on self-promotion, account age or karma?
+The subreddit's rules, read 2026-11-08 (Oleh pasted them):
+- A project post is welcome if you built it with Claude Code or for Claude, and it says what was built, **how Claude helped, in detail**, and what it does.
+- It must be free to try and say so. Minimal promotional language, no referral links, no job seeking.
+- **Posts on the feed need karma over 100.** Below that, use the comment version in the project showcase megathread ([list of megathreads](https://www.reddit.com/r/ClaudeAI/comments/1s7fepn/rclaudeai_list_of_ongoing_megathreads/)).
+- Choose the flair closest to the post: «Built with Claude» if it is offered. Upvote manipulation is an immediate permanent ban.
 
-Attach `site/demo.mp4`. Say «I made this» up front.
+Attach `site/demo.mp4`. The numbers below are from git on 2026-11-08.
 
 ### As a post
 
-**Title:** I built a free, open-source Mac menu bar app that shows Claude limits and every Claude Code session
+**Title:** I built a free, open-source Mac menu bar app with Claude Code to keep an eye on limits and sessions
 
-I built this because I needed to always see my limits and what each session was working on, and to stay in control of both.
+I built this because I needed to always see my limits and what each session was working on, and to stay in control of both. It's free and open source (MIT), with no paid tier.
 
-AI Hub Bar sits in the menu bar and shows:
+**What it does**
 
-- your 5-hour and weekly limits as rings, with a reset countdown and a forecast from your pace ("lasts until ~16:40")
+- 5-hour and weekly limits as rings, with a reset countdown and a forecast from your pace ("lasts until ~16:40")
 - which project and session used the limit
 - every Claude Code session on the Mac, with what it is doing right now ("running npm test")
 - permission requests you can Allow or Deny from a notification, the panel or Telegram
 
 It also picks up Codex, Copilot, Gemini CLI, Cursor and OpenRouter if you use them.
 
-I built it with Claude Code. It is native SwiftUI, MIT, with no account and no analytics, signed and notarized. The sessions in the video are samples.
+**How Claude helped**
 
-One thing to know before you install it: the limits come from an undocumented Anthropic endpoint, so they can break if it changes. The app reads Claude Code's sign-in from the Keychain on each refresh and never stores it.
+Claude Code built all of it in about ten days: 376 commits, every one co-authored by Claude, across 320 pull requests. That's about 36,000 lines of SwiftUI and 527 tests.
+
+The way of working mattered more than any prompt. For anything big, Claude wrote a short spec and I answered its questions. Then one task, one branch, one PR. Claude ran the tests before each push and kept a status file, so the next session could pick up where the last one stopped. A separate agent translated the interface into 13 languages. For the interface, Claude drove the running app through Accessibility and read screenshots of it.
+
+**A few things I learned**
+
+- Tests aren't the same as looking. One walk through the real app found five bugs that 500+ tests had missed, such as a whole line turning red with no word about why.
+- A hook can watch sessions without changing what Claude does. It writes a small status file and prints nothing, because stdout from some hooks goes into Claude's context.
+- In the Claude app, the prompt a hook receives can start with a `<system-reminder>` block. If you clip the prompt for a title, remove that first, or your own words are gone.
+- A background run with no shell can't open a `.docx`. It reports the failure in its result file and the run still counts as a success, so check what you got, not just the exit status.
+
+**Good to know**
+
+The limits come from an undocumented Anthropic endpoint, so they can break if it changes. The app reads Claude Code's sign-in from the Keychain on each refresh and never stores it. There's no account and no analytics, and it's signed and notarized. The sessions in the video are samples.
 
 GitHub: https://github.com/OlehDemishev/AIHubBar
-Website: https://olehdemishev.github.io/AIHubBar/
 
 What would you want from it that isn't there?
 
 ### As a comment in the megathread
 
-**AI Hub Bar**: a free, open-source Mac menu bar app for Claude limits and Claude Code sessions. I made it with Claude Code.
+**AI Hub Bar**: a free, open-source (MIT) Mac menu bar app for Claude limits and Claude Code sessions.
 
-I needed to always see my limits and what each session was working on, and to stay in control of both.
+I needed to always see my limits and what each session was working on, and to stay in control of both. It shows your 5-hour and weekly limits with a forecast from your pace and every session with what it is doing right now, and you can Allow or Deny permission requests from a notification, the panel or Telegram.
 
-It shows your 5-hour and weekly limits with a forecast from your pace and every session with what it is doing right now, and you can Allow or Deny permission requests from a notification, the panel or Telegram. Native SwiftUI, MIT, no account, no analytics. The limits come from an undocumented Anthropic endpoint, so they can break if it changes.
+Claude Code built it in about ten days: 376 commits and 320 pull requests, with a short spec for anything big, one branch per task, and a status file so each session could pick up from the last. The limits come from an undocumented Anthropic endpoint, so they can break if it changes.
 
 https://github.com/OlehDemishev/AIHubBar
 

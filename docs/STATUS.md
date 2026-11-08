@@ -19,7 +19,7 @@
 - free disk space: on 2026-11-08 it swung between 1.5 and 10 GB free with swap near 12 GB, too little to build safely; `~/.colima` holds 37 GB and its Docker disk needs a repair (`colima stop && colima start`)
 - press ⌃⌥B, Esc in the open panel, scroll it with the trackpad and run a command in Terminal once (Accessibility works since 2026-11-08)
 - 0.7.0 live checks: press ⌃⌥B, right-click a session row; with a second account: Settings → Claude Code → «Другие аккаунты Claude»
-- promotion: r/ClaudeAI: check the rules (post or megathread, docs/LAUNCH.md) and post the text with `site/demo.mp4` from your account
+- promotion: r/ClaudeAI: read the text in docs/LAUNCH.md, check your karma (over 100 for a post, else the megathread) and post it with `site/demo.mp4` from your account
 - Telegram: delete `_daily-report/bot.py` and `install-bot.sh`
 - «Быстрый запрос»: Settings → Modules → «Быстрый запрос» on, then ⌃⌥P from Terminal or Xcode — send one task to the background and one to Codex
 - Settings → Codex → «Установить hook», then once in `codex` type `/hooks` and trust AI Hub Bar's hooks (Codex skips untrusted hooks); then check a Codex row in «Сессии» goes «ждёт» on an approval prompt
@@ -30,6 +30,12 @@
 - MacBook Air: update to 0.7.8 through Sparkle and check the island at the real notch
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-08 — The r/ClaudeAI post rewritten to the subreddit's rules (branch `docs/reddit-post-rules`)
+
+Done: Oleh pasted the rules: a standalone project post is allowed if it says in detail how Claude helped, says it's free, and keeps promotion minimal; the feed needs karma over 100. The post in docs/LAUNCH.md now has «How Claude helped» and «A few things I learned», and a matching megathread comment.
+Checked: numbers from git today (first commit 2026-10-29, 376 commits, all co-authored by Claude, 320 merged PRs, 36k lines of Swift, 527 tests); the lessons come from this week's fixes.
+Left: Oleh confirms the first-person claims and his karma, then posts. Nothing has been posted.
 
 ## 2026-11-08 — The r/ClaudeAI text brought up to date (branch `docs/reddit-post-claudeai`)
 
