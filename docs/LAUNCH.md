@@ -6,7 +6,7 @@ Text in `[brackets]` needs Oleh's own words: it is a personal detail nobody else
 
 ## Where we start from (2026-11-08)
 
-0 stars, 41 DMG downloads in total, 6 unique repository visitors in two weeks.
+0 stars, 50 DMG downloads in total, 6 unique repository visitors in two weeks.
 
 Developer ID and notarization are done, from 0.7.2 on, so nothing about signing holds back r/macapps, Show HN or Homebrew.
 
@@ -37,6 +37,14 @@ Watch after each step: DMG downloads, stars, repository traffic (`gh api repos/O
 
 ## r/ClaudeAI
 
+Before posting, from the subreddit's sidebar and pinned posts (Reddit was closed to the agent's browser on 2026-11-08, so these are not confirmed):
+- Are standalone project posts allowed, or do they go to the «Built with Claude» project showcase megathread? A moderator's megathread existed in April 2026.
+- Which flair: «Built with Claude» was in use. Any rule on self-promotion, account age or karma?
+
+Attach `site/demo.mp4`. Say «I made this» up front.
+
+### As a post
+
 **Title:** I built a free, open-source Mac menu bar app that shows Claude limits and every Claude Code session
 
 [One or two sentences: the moment that made you build it.]
@@ -50,12 +58,24 @@ AI Hub Bar sits in the menu bar and shows:
 
 It also picks up Codex, Copilot, Gemini CLI, Cursor and OpenRouter if you use them.
 
-Native SwiftUI, MIT, no account, no analytics. One thing to know before you install it: the limits come from an undocumented Anthropic endpoint, so they can break if it changes.
+I built it with Claude Code. It is native SwiftUI, MIT, with no account and no analytics, signed and notarized. The sessions in the video are samples.
+
+One thing to know before you install it: the limits come from an undocumented Anthropic endpoint, so they can break if it changes. The app reads Claude Code's sign-in from the Keychain on each refresh and never stores it.
 
 GitHub: https://github.com/OlehDemishev/AIHubBar
 Website: https://olehdemishev.github.io/AIHubBar/
 
 What would you want from it that isn't there?
+
+### As a comment in the megathread
+
+**AI Hub Bar**: a free, open-source Mac menu bar app for Claude limits and Claude Code sessions. I made it with Claude Code.
+
+[One sentence: why you made it.]
+
+It shows your 5-hour and weekly limits with a forecast from your pace and every session with what it is doing right now, and you can Allow or Deny permission requests from a notification, the panel or Telegram. Native SwiftUI, MIT, no account, no analytics. The limits come from an undocumented Anthropic endpoint, so they can break if it changes.
+
+https://github.com/OlehDemishev/AIHubBar
 
 ## r/macapps
 
