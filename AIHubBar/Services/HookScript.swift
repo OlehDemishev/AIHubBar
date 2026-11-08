@@ -15,7 +15,7 @@ enum HookScript {
 
     static let source = #"""
     #!/usr/bin/python3
-    # AI Hub Bar hook, format 5. Installed by AI Hub Bar; records Claude Code (or, with --agent copilot / codex,
+    # AI Hub Bar hook, format 6. Installed by AI Hub Bar; records Claude Code (or, with --agent copilot / codex,
     # Copilot CLI / Codex CLI) session state in
     # ~/Library/Application Support/ClaudePult/sessions/<session_id>.json for the menu bar app.
     # Always exits 0 and prints nothing, except on PermissionRequest when the person answered «Разрешить» or
@@ -25,6 +25,8 @@ enum HookScript {
     WAITING_NOTIFICATIONS = {"permission_prompt", "elicitation_dialog", "elicitation_url_dialog", "agent_needs_input"}
     PROCESS_NAMES = {"claude": {"claude", "claude.exe"}, "copilot": {"copilot"}, "codex": {"codex"}}
     PROMPT_LIMIT = 200
+    # The Claude app puts this in front of the person's words: over the limit it would leave nothing of them.
+    SYSTEM_TEXT = re.compile(r"<system-reminder>.*?(</system-reminder>|$)", re.S)
     APPROVAL_WAIT = 290
     ALIVE_WITHIN = 30
     # Claude Code's task list: TodoWrite sends the whole list, TaskCreate / TaskUpdate one task at a time.
@@ -150,9 +152,12 @@ enum HookScript {
             todos = record.get("todos") or []
             if todos and all(isinstance(t, dict) and t.get("status") == "completed" for t in todos):
                 record.pop("todos", None)
-            prompt = clip(data.get("prompt"))
+            prompt = clip(SYSTEM_TEXT.sub(" ", data.get("prompt") or ""))
             if prompt:
                 record["last_prompt"] = prompt
+                # A title saved by format 5 can be that text alone.
+                if str(record.get("first_prompt") or "").startswith("<system-reminder>"):
+                    record["first_prompt"] = prompt
                 record.setdefault("first_prompt", prompt)
         elif event == "PermissionRequest":
             record["state"] = "waiting"
