@@ -187,6 +187,8 @@ Panel snapshots: `defaults write com.demishev.claudepult DebugPanelSnapshot -boo
 | First start without `_daily-report`: starter mode, assistant opens; «Готово» replaces the starter with the new mode | Auto (store) |
 | Oleh's first start logic unchanged (report.py present → his mode) | Auto + Live |
 | Preview pane: menu bar, limits, «Ближайшее», sample projects with stages and metrics, commands | Live (`--assistant-preview` for video, developer, social) |
+| First screen: map of the panel, notes and arrows, light, dark, all 13 languages, right-to-left | Live (`--assistant-preview <file> welcome [--dark] -AppleLanguages '(ar)'`) |
+| The map in the real first-launch window, its entrance animation | **Oleh: on a Mac with no settings yet** |
 | The assistant window itself (pickers, folder dialog, «Готово») | **Oleh: Settings → Режимы → «+» → «Помощник…»** |
 
 ## Languages (SPEC-modes §9.9, English)

@@ -5,6 +5,7 @@
 **Updated:** 2026-11-08
 
 **Now:**
+- #304 open (`feat/welcome-panel-map`): a map of the panel on the assistant's first screen
 - nothing in progress: content stage 1 is half done; #302 merged 2026-11-08 with three fixes from the headless walkthrough, the look at the real panel is still to do
 - merged 2026-11-06: #262 donations («Поддержать проект» in Settings → General, site/support.html with Ko-fi, GitHub Sponsors and Buy Me a Coffee; the app button reaches people with the next release)
 - merged 2026-11-03: #251 menu bar ☕ follows the «Не спать» switch, #248 «Не спать» on/off in the menu bar, #241 Codex states, #240 quick command shortcuts, #238 «Быстрый запрос», #236 content spec, #242 «Telegram» stage 1, #244 menu at the bottom, #246 shared bot (Worker not deployed yet), #247 desktop CI off for Mac string changes, #249 the bot's menu set up by each person, #252 stage 2 (sessions, requests, limits), #254 stage 3 (tasks and runs), #255 stage 4 (settings in the bot), #256 Mini App
@@ -31,6 +32,12 @@
 - MacBook Air: check the island at the real notch
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-08 — First screen: a map of the panel (branch `feat/welcome-panel-map`)
+
+Done: on the assistant's first screen the right side no longer repeats the plain preview: it shows the panel on sample data, with five notes and arrows (menu bar, limits and forecast, agent sessions, answering a permission request, modules). Drawn from the app's own pieces (the menu bar renderer, the limit ring, session colours), so it follows the interface. The arrows use the pieces' real positions and hold in long languages and right to left. A short entrance, none with Reduce Motion. `--assistant-preview <file> welcome [--dark]` renders it, also usable for the README and Product Hunt. 5 new strings in 13 languages, added by hand: `scripts/strings-sync.sh` also marked 56 keys stale and removed 3, so that part was not kept.
+Checked: `scripts/check.sh` green. Rendered and looked at in all 13 languages, light, and in Russian and Arabic dark.
+Left: not seen in the real first-launch window, which needs a Mac with no settings, and the entrance animation not seen at all (CHECKLIST). The sync's 56 stale keys and 3 removals on main are a separate question.
 
 ## 2026-11-08 — Content stage 1: headless walkthrough and three fixes (branch `feat/content-walkthrough`)
 
