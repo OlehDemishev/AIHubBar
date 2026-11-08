@@ -36,7 +36,7 @@ struct LayoutSection: View {
         Section {
             if !switcher.trusted {
                 LabeledContent {
-                    Button("Открыть настройки") { switcher.requestAccess() }
+                    Button("Дать доступ к клавиатуре…") { switcher.requestAccess() }
                 } label: {
                     Label("Нужно разрешение «Универсальный доступ»", systemImage: "exclamationmark.triangle")
                         .foregroundStyle(.orange)

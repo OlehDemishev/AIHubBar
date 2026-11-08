@@ -24,6 +24,7 @@ struct MenuPanelView: View {
     @Environment(CommandStore.self) private var commands
     @Environment(AIServiceStore.self) private var services
     @Environment(LaunchController.self) private var launcher
+    @Environment(LayoutSwitcher.self) private var layoutSwitcher
 
     /// Drives the entrance animation; reset when the panel closes so it replays on every open.
     @State private var isShown = false
@@ -183,6 +184,21 @@ struct MenuPanelView: View {
             // The current profile's modules, in its order (SPEC-profiles §9.2), each on its card.
             ForEach(modes.panelModules, id: \.self) { kind in
                 module(kind)
+            }
+
+            // macOS is asked once by itself (`LayoutSwitcher`); after that this quiet line is all that says so.
+            if modes.isOn(.layout), !layoutSwitcher.trusted {
+                HStack(spacing: 8) {
+                    Text("Нужно разрешение «Универсальный доступ»")
+                        .scaledFont(.caption)
+                        .foregroundStyle(.secondary)
+                    Spacer(minLength: 4)
+                    Button("Дать доступ к клавиатуре…") { layoutSwitcher.requestAccess() }
+                        .controlSize(.small)
+                }
+                .padding(.horizontal, 10)
+                .padding(.vertical, 6)
+                .panelCard()
             }
 
             if !modes.modes.isEmpty, modes.panelModules.isEmpty {
