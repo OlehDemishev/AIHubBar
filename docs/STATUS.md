@@ -19,7 +19,8 @@
 - free disk space: on 2026-11-08 it swung between 1.5 and 10 GB free with swap near 12 GB, too little to build safely; `~/.colima` holds 37 GB and its Docker disk needs a repair (`colima stop && colima start`)
 - press ⌃⌥B, Esc in the open panel, scroll it with the trackpad and run a command in Terminal once (Accessibility works since 2026-11-08)
 - 0.7.0 live checks: press ⌃⌥B, right-click a session row; with a second account: Settings → Claude Code → «Другие аккаунты Claude»
-- promotion: r/ClaudeAI: read the text in docs/LAUNCH.md, check your karma (over 100 for a post, else the megathread) and post it with `site/demo.mp4` from your account
+- social accounts (docs/SOCIAL.md): sign up under your name, make the avatar, post the first posts; Reddit needs karma over 100 from real answers before the post in docs/LAUNCH.md, the megathread comment can come sooner
+- say which of the lists and the Homebrew tap to prepare (docs/LAUNCH.md): the agent is ready to
 - Telegram: delete `_daily-report/bot.py` and `install-bot.sh`
 - «Быстрый запрос»: Settings → Modules → «Быстрый запрос» on, then ⌃⌥P from Terminal or Xcode — send one task to the background and one to Codex
 - Settings → Codex → «Установить hook», then once in `codex` type `/hooks` and trust AI Hub Bar's hooks (Codex skips untrusted hooks); then check a Codex row in «Сессии» goes «ждёт» on an approval prompt
@@ -30,6 +31,12 @@
 - MacBook Air: update to 0.7.8 through Sparkle and check the island at the real notch
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-08 — Social accounts kit (branch `docs/social-kit`)
+
+Done: Oleh has almost no social accounts and wants new ones only for our products, with clean karma. He chose his own name with an avatar for now; a product can get its own account later. docs/SOCIAL.md has the sign-up order, profile texts, an avatar prompt, first posts, the GitHub profile text and a template for release news.
+Checked: post and bio lengths by script; facts from git and the README. Limits as the agent knows them, not checked on the sites. Names not checked for being free.
+Left: Oleh signs up and posts; the agent can't sign up or sign in. Which networks are final is his to confirm. Nothing has been posted.
 
 ## 2026-11-08 — The r/ClaudeAI post rewritten to the subreddit's rules (branch `docs/reddit-post-rules`)
 
