@@ -22,6 +22,10 @@
 
 Free, open source, no account. Nothing goes through a server of ours, except the optional shared Telegram bot.
 
+<p align="center">
+  <a href="https://olehdemishev.github.io/AIHubBar/#demo"><img src="docs/images/demo.gif" alt="The AI Hub Bar panel opens from the menu bar and shows Claude limits and two agent sessions. One session asks to run git push, Allow is clicked in the panel, and the session finishes." width="540"></a>
+</p>
+
 ## Features
 
 ### Limits — how much is left, and for how long

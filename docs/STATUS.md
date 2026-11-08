@@ -11,7 +11,7 @@
 
 **Next:**
 - check on the Air: the island at the real notch
-- promotion (docs/LAUNCH.md): Oleh's verdict on the English demo draft, then r/ClaudeAI, the lists, r/macapps, Show HN, Product Hunt, Homebrew
+- promotion (docs/LAUNCH.md): r/ClaudeAI, the lists, r/macapps, Show HN, Product Hunt, Homebrew
 - content (docs/specs/SPEC-content.md, agreed): stage 2 «Версии», then batch tasks; better after the first feedback from people
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/specs/SPEC-windows.md §9, stage 2–3 leftovers)
 
@@ -19,7 +19,7 @@
 - free disk space: on 2026-11-08 it swung between 1.5 and 10 GB free with swap near 12 GB, too little to build safely; `~/.colima` holds 37 GB and its Docker disk needs a repair (`colima stop && colima start`)
 - press ⌃⌥B, Esc in the open panel, scroll it with the trackpad and run a command in Terminal once (Accessibility works since 2026-11-08)
 - 0.7.0 live checks: press ⌃⌥B, right-click a session row; with a second account: Settings → Claude Code → «Другие аккаунты Claude»
-- promotion: look at the demo draft (a local file, not committed), write the [bracketed] parts of the drafts in docs/LAUNCH.md and post them from your accounts
+- promotion: write the [bracketed] parts of the drafts in docs/LAUNCH.md and post them from your accounts
 - Telegram: delete `_daily-report/bot.py` and `install-bot.sh`
 - «Быстрый запрос»: Settings → Modules → «Быстрый запрос» on, then ⌃⌥P from Terminal or Xcode — send one task to the background and one to Codex
 - Settings → Codex → «Установить hook», then once in `codex` type `/hooks` and trust AI Hub Bar's hooks (Codex skips untrusted hooks); then check a Codex row in «Сессии» goes «ждёт» on an approval prompt
@@ -30,6 +30,12 @@
 - MacBook Air: update to 0.7.8 through Sparkle and check the island at the real notch
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-08 — Demo in the README and on the site (branch `docs/demo-video`)
+
+Done: Oleh chose the second take over the first, which looked jerky with dialogs cut off. In this one the item keeps its width, so the panel stays put; the pointer is slower and leaves the item before a tooltip; the frame has room around the panel; a plain background hides the banner with its Russian button. `site/demo.mp4` with a poster in a new «See it work» section of the site, which respects Reduce Motion; `docs/images/demo.gif` in the README, linked to it, because GitHub doesn't play a local video.
+Checked: the site locally in the browser pane, wide and at 375 pt: the video loads and plays, no console errors, no sideways scroll. Oleh looked at the take. Reduce Motion and the README on GitHub were not looked at before merging.
+Left: the banner isn't shown in the demo; that takes a Mac in English. The menu bar's ✋ isn't in the take either, by choice.
 
 ## 2026-11-08 — Accessibility confirmed, website set, demo draft (branch `chore/status-demo-draft`)
 

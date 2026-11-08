@@ -87,6 +87,21 @@
   <b>Claude Code</b><b>Codex</b><b>GitHub Copilot CLI</b><b>Gemini CLI</b><b>Cursor</b><b>OpenRouter</b><b>OpenAI &amp; Anthropic API</b>
 </section>
 
+<!-- The app itself, recorded: sample sessions, real limits. -->
+<section id="demo" class="wrap demo">
+  <h2>See it work</h2>
+  <video class="demo-video" src="demo.mp4" poster="demo-poster.jpg" width="523" height="440" autoplay muted loop playsinline controls preload="metadata"
+         aria-label="The panel opens from the menu bar and shows Claude limits and two agent sessions. One session asks to run git push, Allow is clicked in the panel, and the session finishes."></video>
+  <p class="demo-note">The real app, with sample sessions: limits, what each session is doing, and a permission answered from the panel.</p>
+  <script>
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      var demo = document.querySelector(".demo-video");
+      demo.autoplay = false;
+      demo.pause();
+    }
+  </script>
+</section>
+
 <!-- AI -->
 <section id="ai" class="wrap">
   <div class="kicker">AI</div>
