@@ -134,7 +134,7 @@ final class CommandEngine {
                     let run = try runs.launch(
                         title: template.title, prompt: prompt, project: project.name, projectPath: project.path,
                         folder: project.path, worktreeBranch: nil, profile: mode.permissions, resultFile: resultPath,
-                        claudePath: claude
+                        claudePath: claude, taskTitle: CommandText.runTitle(template.title, text: context.text)
                     )
                     job.state = .background(runID: run.id)
                 } catch {

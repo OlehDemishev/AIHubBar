@@ -52,7 +52,18 @@ struct CommandTextTests {
     @Test func agentPromptCarriesATextItCantOpen() {
         let agent = CommandText.agentPrompt(task: "Сделай хуки", context: context, output: "хуки.md", fileText: "ТЕКСТ")
         #expect(agent.hasPrefix(CommandText.agentPrompt(task: "Сделай хуки", context: context, output: "хуки.md")))
-        #expect(agent.hasSuffix("Ниже — текст файла «текст/сценарий.md».\n---\nТЕКСТ\n---"))
+        #expect(agent.hasSuffix("Файл «текст/сценарий.md» открывать не нужно: его текст уже здесь.\n---\nТЕКСТ\n---"))
+    }
+
+    @Test func aRunIsCalledByItsCommand() {
+        #expect(CommandText.runTitle("Корректура", text: nil) == "Корректура")
+        #expect(CommandText.runTitle("Корректура", text: "") == "Корректура")
+        #expect(CommandText.runTitle("Другой тон", text: "дружелюбнее") == "Другой тон: дружелюбнее")
+    }
+
+    @Test func hintsHaveNoRawPlaceholders() {
+        let command = CommandTemplate(title: "Посты", task: "Сделай посты для {площадка} в тоне {текст}.", output: "посты.md")
+        #expect(command.hint == "Сделай посты для … в тоне ….")
     }
 
     @Test func recognisesWhatCommandsWrite() {

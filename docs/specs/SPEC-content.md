@@ -122,7 +122,15 @@ Run on a sample folder with the installed 0.7.5, without the panel: `--folder-pr
 
 Worked as specified: row metrics and word counts (checked against `wc`), card forms, `_` folders skipped, a project with no card, results never over an existing file, source files unchanged by runs, a denied tool stays denied.
 
-Still to look at in the real app: panel rows and stage chips, the panel's command buttons, «Сравнить», «Ближайшее», the «Календарь» window, the island drop.
+Then in the real app, on the sample folder, with no mouse except clicks on the menu bar item. Seen working: rows, stage chips and stage changes written to the card, the running job's row and its result link, the fixes above from the panel's own buttons (`.docx` proofread for real, `вопросы.rtf` still the main file after a result, finished work not red), «Ближайшее», the «Календарь» month view, choosing services for «Сравнить». Fixed from this:
+
+- The whole metrics line went red with no word about why, and the deadline may not be among the metrics. Now only «просрочено 2 дн» is red.
+- Sessions, notifications and the bot called a run «Ты работаешь в папке проекта…», the start of the wrapper. Now the command: «Корректура», «Другой тон: дружелюбнее».
+- A new stage reached «Ближайшее» up to 5 minutes later. Now at once.
+- Hover hints showed raw `{текст}` and `{площадка}`.
+- With the text in the prompt the agent still tried to open the `.docx` first. The prompt now says it needn't.
+
+Not done: a command that asks for text past its field (no way to type into the panel without posted keys), a real «Сравнить» (no API keys here; a second agent opens Terminal and overwrites the clipboard), the week view, dragging a date, the island drop. These need a person: CHECKLIST.
 
 ## 8. Not doing
 

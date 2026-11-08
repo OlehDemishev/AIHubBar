@@ -49,6 +49,8 @@ struct ContentStrings: Sendable {
     var agentNoFile: String
     var apiHeader: String
     var apiFileIntro: String
+    /// For an agent whose file AI Hub Bar has read for it (`FolderScanner.inlineText`): it need not try to open it.
+    var agentFileIntro: String
     var apiTask: String
     var apiRule: String
     var nextStep: String
@@ -74,6 +76,7 @@ struct ContentStrings: Sendable {
         agentNoFile: "нет — работай с файлами папки",
         apiHeader: "Проект: «{project}». Формат: {format}.",
         apiFileIntro: "Ниже — текст файла «{file}».",
+        agentFileIntro: "Файл «{file}» открывать не нужно: его текст уже здесь.",
         apiTask: "Задача: {task}",
         apiRule: "Ответь только результатом в Markdown, без вступлений и пояснений. Если данных не хватает — скажи об этом первой строкой, не выдумывай.",
         nextStep: "Прочитай README и, если есть, docs/STATUS.md, CLAUDE.md или AGENTS.md. Определи следующий разумный шаг: первый пункт списка «Next / Дальше», если он есть, иначе самую очевидную незаконченную задачу. Сделай его в отдельной ветке от основной: изменения, проверки проекта (тесты, сборка, линтер — что есть), коммит с понятным сообщением, push и pull request. Если шаг требует решения человека или неясен — ничего не меняй, а коротко опиши вопрос.",
@@ -98,6 +101,7 @@ struct ContentStrings: Sendable {
         agentNoFile: "none — work with the files of the folder",
         apiHeader: "Project: «{project}». Format: {format}.",
         apiFileIntro: "Below is the text of the file «{file}».",
+        agentFileIntro: "You don't need to open «{file}»: its text is right here.",
         apiTask: "Task: {task}",
         apiRule: "Reply with the result only, in Markdown, without introductions or explanations. If data is missing, say so in the first line — do not make things up.",
         nextStep: "Read the README and, if present, docs/STATUS.md, CLAUDE.md or AGENTS.md. Find the next sensible step: the first item of the «Next» list if there is one, otherwise the most obvious unfinished task. Do it on a separate branch from the main one: the changes, the project's checks (tests, build, linter — whatever exists), a commit with a clear message, push and a pull request. If the step needs a person's decision or is unclear, change nothing and briefly describe the question.",
@@ -122,6 +126,7 @@ struct ContentStrings: Sendable {
         agentNoFile: "ninguno — trabaja con los archivos de la carpeta",
         apiHeader: "Proyecto: «{project}». Formato: {format}.",
         apiFileIntro: "A continuación, el texto del archivo «{file}».",
+        agentFileIntro: "No hace falta abrir «{file}»: su texto está aquí.",
         apiTask: "Tarea: {task}",
         apiRule: "Responde solo con el resultado en Markdown, sin introducciones ni explicaciones. Si faltan datos, dilo en la primera línea; no inventes nada.",
         nextStep: "Lee el README y, si existen, docs/STATUS.md, CLAUDE.md o AGENTS.md. Determina el siguiente paso razonable: el primer punto de la lista «Next / Siguiente» si existe; si no, la tarea pendiente más evidente. Hazlo en una rama aparte de la principal: los cambios, las comprobaciones del proyecto (tests, build, linter — lo que haya), un commit con un mensaje claro, push y un pull request. Si el paso requiere la decisión de una persona o no está claro, no cambies nada y describe brevemente la pregunta.",
@@ -146,6 +151,7 @@ struct ContentStrings: Sendable {
         agentNoFile: "nenhum — trabalhe com os arquivos da pasta",
         apiHeader: "Projeto: «{project}». Formato: {format}.",
         apiFileIntro: "Abaixo está o texto do arquivo «{file}».",
+        agentFileIntro: "Não é preciso abrir «{file}»: o texto está aqui.",
         apiTask: "Tarefa: {task}",
         apiRule: "Responda apenas com o resultado em Markdown, sem introduções nem explicações. Se faltarem dados, diga isso na primeira linha — não invente nada.",
         nextStep: "Leia o README e, se existirem, docs/STATUS.md, CLAUDE.md ou AGENTS.md. Defina o próximo passo sensato: o primeiro item da lista «Next / Próximo», se houver; caso contrário, a tarefa inacabada mais óbvia. Faça-o em um branch separado do principal: as mudanças, as verificações do projeto (testes, build, linter — o que existir), um commit com mensagem clara, push e um pull request. Se o passo exigir a decisão de uma pessoa ou não estiver claro, não altere nada e descreva a dúvida brevemente.",
@@ -170,6 +176,7 @@ struct ContentStrings: Sendable {
         agentNoFile: "aucun — travaille avec les fichiers du dossier",
         apiHeader: "Projet : «{project}». Format : {format}.",
         apiFileIntro: "Voici le texte du fichier «{file}».",
+        agentFileIntro: "Inutile d’ouvrir «{file}» : son texte est ici.",
         apiTask: "Tâche : {task}",
         apiRule: "Réponds uniquement par le résultat en Markdown, sans introduction ni explication. S'il manque des données, dis-le en première ligne — n'invente rien.",
         nextStep: "Lis le README et, s'ils existent, docs/STATUS.md, CLAUDE.md ou AGENTS.md. Détermine la prochaine étape raisonnable : le premier point de la liste «Next / Ensuite» s'il existe, sinon la tâche inachevée la plus évidente. Fais-la dans une branche séparée de la branche principale : les modifications, les vérifications du projet (tests, build, linter — ce qui existe), un commit au message clair, un push et une pull request. Si l'étape demande la décision d'une personne ou n'est pas claire, ne modifie rien et décris brièvement la question.",
@@ -194,6 +201,7 @@ struct ContentStrings: Sendable {
         agentNoFile: "keine — arbeite mit den Dateien des Ordners",
         apiHeader: "Projekt: «{project}». Format: {format}.",
         apiFileIntro: "Unten steht der Text der Datei «{file}».",
+        agentFileIntro: "«{file}» musst du nicht öffnen: Der Text steht hier.",
         apiTask: "Aufgabe: {task}",
         apiRule: "Antworte nur mit dem Ergebnis in Markdown, ohne Einleitung und Erklärungen. Wenn Daten fehlen, sag das in der ersten Zeile — erfinde nichts.",
         nextStep: "Lies die README und, falls vorhanden, docs/STATUS.md, CLAUDE.md oder AGENTS.md. Bestimme den nächsten sinnvollen Schritt: den ersten Punkt der Liste «Next / Als Nächstes», falls es sie gibt, sonst die offensichtlichste unerledigte Aufgabe. Erledige ihn in einem eigenen Branch vom Hauptbranch: die Änderungen, die Prüfungen des Projekts (Tests, Build, Linter — was vorhanden ist), ein Commit mit klarer Nachricht, Push und ein Pull Request. Wenn der Schritt die Entscheidung eines Menschen braucht oder unklar ist, ändere nichts und beschreibe die Frage kurz.",
@@ -218,6 +226,7 @@ struct ContentStrings: Sendable {
         agentNoFile: "なし — フォルダー内のファイルで作業してください",
         apiHeader: "プロジェクト: 「{project}」。形式: {format}。",
         apiFileIntro: "以下はファイル「{file}」のテキストです。",
+        agentFileIntro: "ファイル「{file}」を開く必要はありません。テキストはここにあります。",
         apiTask: "課題: {task}",
         apiRule: "結果だけを Markdown で答えてください。前置きや説明は不要です。データが足りない場合は 1 行目にそう書き、推測で作らないでください。",
         nextStep: "README と、あれば docs/STATUS.md、CLAUDE.md または AGENTS.md を読んでください。次にやるべき妥当な一歩を決めてください。「Next / 次」リストがあればその最初の項目、なければ最も明らかな未完了のタスクです。メインから分けたブランチで行ってください: 変更、プロジェクトのチェック(テスト、ビルド、リンター — あるもの)、分かりやすいメッセージのコミット、push、pull request。人の判断が必要な場合や不明確な場合は何も変更せず、質問を短く書いてください。",
@@ -242,6 +251,7 @@ struct ContentStrings: Sendable {
         agentNoFile: "tidak ada — kerjakan dengan berkas di folder",
         apiHeader: "Proyek: «{project}». Format: {format}.",
         apiFileIntro: "Berikut teks berkas «{file}».",
+        agentFileIntro: "Berkas «{file}» tidak perlu dibuka: teksnya ada di sini.",
         apiTask: "Tugas: {task}",
         apiRule: "Jawab hanya dengan hasilnya dalam Markdown, tanpa pembuka dan penjelasan. Jika data kurang, katakan di baris pertama — jangan mengarang.",
         nextStep: "Baca README dan, jika ada, docs/STATUS.md, CLAUDE.md, atau AGENTS.md. Tentukan langkah berikutnya yang masuk akal: butir pertama daftar «Next / Berikutnya» jika ada, jika tidak tugas belum selesai yang paling jelas. Kerjakan di branch terpisah dari branch utama: perubahan, pemeriksaan proyek (tes, build, linter — yang ada), commit dengan pesan yang jelas, push, dan pull request. Jika langkah itu butuh keputusan seseorang atau tidak jelas, jangan ubah apa pun dan jelaskan pertanyaannya secara singkat.",
@@ -266,6 +276,7 @@ struct ContentStrings: Sendable {
         agentNoFile: "없음 — 폴더의 파일로 작업하세요",
         apiHeader: "프로젝트: «{project}». 형식: {format}.",
         apiFileIntro: "아래는 파일 «{file}»의 텍스트입니다.",
+        agentFileIntro: "파일 «{file}»을(를) 열 필요 없습니다. 텍스트가 여기 있습니다.",
         apiTask: "과제: {task}",
         apiRule: "결과만 Markdown으로 답하세요. 서론이나 설명은 빼세요. 데이터가 부족하면 첫 줄에 그렇게 쓰고, 지어내지 마세요.",
         nextStep: "README와, 있다면 docs/STATUS.md, CLAUDE.md 또는 AGENTS.md를 읽으세요. 다음으로 할 합리적인 단계를 정하세요: «Next / 다음» 목록이 있으면 그 첫 항목, 없으면 가장 분명한 미완료 작업입니다. 메인과 분리된 브랜치에서 하세요: 변경, 프로젝트 검사(테스트, 빌드, 린터 — 있는 것), 명확한 메시지의 커밋, push, pull request. 사람의 결정이 필요하거나 불분명하면 아무것도 바꾸지 말고 질문을 짧게 적으세요.",
@@ -290,6 +301,7 @@ struct ContentStrings: Sendable {
         agentNoFile: "nessuno — lavora con i file della cartella",
         apiHeader: "Progetto: «{project}». Formato: {format}.",
         apiFileIntro: "Di seguito il testo del file «{file}».",
+        agentFileIntro: "Non serve aprire «{file}»: il testo è qui.",
         apiTask: "Compito: {task}",
         apiRule: "Rispondi solo con il risultato in Markdown, senza introduzioni né spiegazioni. Se mancano dati, dillo nella prima riga — non inventare.",
         nextStep: "Leggi il README e, se esistono, docs/STATUS.md, CLAUDE.md o AGENTS.md. Individua il prossimo passo sensato: il primo punto dell'elenco «Next / Prossimo», se c'è, altrimenti il compito incompiuto più evidente. Fallo in un branch separato da quello principale: le modifiche, i controlli del progetto (test, build, linter — quello che c'è), un commit con un messaggio chiaro, push e una pull request. Se il passo richiede la decisione di una persona o non è chiaro, non modificare nulla e descrivi brevemente la domanda.",
@@ -314,6 +326,7 @@ struct ContentStrings: Sendable {
         agentNoFile: "لا يوجد — اعمل على ملفات المجلد",
         apiHeader: "المشروع: «{project}». الصيغة: {format}.",
         apiFileIntro: "فيما يلي نص الملف «{file}».",
+        agentFileIntro: "لا حاجة إلى فتح الملف «{file}»: نصه موجود هنا.",
         apiTask: "المهمة: {task}",
         apiRule: "أجب بالنتيجة فقط بصيغة Markdown، دون مقدمات أو شروح. إذا كانت البيانات ناقصة فاذكر ذلك في السطر الأول — ولا تختلق شيئًا.",
         nextStep: "اقرأ ملف README، وكذلك docs/STATUS.md أو CLAUDE.md أو AGENTS.md إن وُجدت. حدّد الخطوة التالية المعقولة: البند الأول من قائمة «Next / التالي» إن وُجدت، وإلا فالمهمة غير المكتملة الأوضح. نفّذها في فرع منفصل عن الفرع الرئيسي: التغييرات، وفحوصات المشروع (الاختبارات، البناء، أداة الفحص — ما يتوفر منها)، و commit برسالة واضحة، و push، و pull request. إذا احتاجت الخطوة إلى قرار من شخص أو كانت غير واضحة، فلا تغيّر شيئًا وصِف السؤال باختصار.",
@@ -338,6 +351,7 @@ struct ContentStrings: Sendable {
         agentNoFile: "brak — pracuj na plikach folderu",
         apiHeader: "Projekt: «{project}». Format: {format}.",
         apiFileIntro: "Poniżej tekst pliku «{file}».",
+        agentFileIntro: "Nie trzeba otwierać pliku «{file}»: jego tekst jest tutaj.",
         apiTask: "Zadanie: {task}",
         apiRule: "Odpowiedz tylko wynikiem w Markdown, bez wstępów i wyjaśnień. Jeśli brakuje danych, napisz o tym w pierwszej linii — niczego nie wymyślaj.",
         nextStep: "Przeczytaj README oraz, jeśli istnieją, docs/STATUS.md, CLAUDE.md lub AGENTS.md. Ustal następny rozsądny krok: pierwszy punkt listy «Next / Dalej», jeśli jest, a jeśli nie — najbardziej oczywiste niedokończone zadanie. Wykonaj go w osobnej gałęzi od głównej: zmiany, kontrole projektu (testy, build, linter — co jest), commit z jasnym opisem, push i pull request. Jeśli krok wymaga decyzji człowieka lub jest niejasny, niczego nie zmieniaj i krótko opisz pytanie.",
@@ -362,6 +376,7 @@ struct ContentStrings: Sendable {
         agentNoFile: "немає — працюй з файлами папки",
         apiHeader: "Проєкт: «{project}». Формат: {format}.",
         apiFileIntro: "Нижче — текст файлу «{file}».",
+        agentFileIntro: "Файл «{file}» відкривати не потрібно: його текст уже тут.",
         apiTask: "Завдання: {task}",
         apiRule: "Відповідай лише результатом у Markdown, без вступів і пояснень. Якщо бракує даних — скажи про це першим рядком, не вигадуй.",
         nextStep: "Прочитай README і, якщо є, docs/STATUS.md, CLAUDE.md або AGENTS.md. Визнач наступний розумний крок: перший пункт списку «Next / Далі», якщо він є, інакше найочевидніше незавершене завдання. Зроби його в окремій гілці від основної: зміни, перевірки проєкту (тести, збірка, лінтер — що є), коміт зі зрозумілим повідомленням, push і pull request. Якщо крок потребує рішення людини або незрозумілий — нічого не змінюй, а коротко опиши питання.",

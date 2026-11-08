@@ -61,7 +61,8 @@ struct CommandTemplate: Codable, Identifiable, Equatable, Hashable, Sendable {
 
     /// The hover hint on the command's button: what it asks the AI to do. «Своя задача» has no text of its own.
     var hint: String {
-        id == Self.customTask.id ? String(localized: "Напишите задачу своими словами — AI выполнит её над файлом") : task
+        id == Self.customTask.id ? String(localized: "Напишите задачу своими словами — AI выполнит её над файлом")
+            : task.replacingOccurrences(of: #"\{[^}]*\}"#, with: "…", options: .regularExpression)
     }
 }
 
@@ -133,6 +134,12 @@ enum CommandText {
         return "\(base)-\(counter).\(ext)"
     }
 
+    /// What a run is called in the panel and in notifications: «Другой тон: дружелюбнее».
+    static func runTitle(_ title: String, text: String?) -> String {
+        guard let text, !text.isEmpty else { return title }
+        return "\(title): \(text)"
+    }
+
     /// Whether a file of a project is what one of these `output` patterns writes, also with the `-2` of `uniqueName`
     /// and the ` (Claude)` of a comparison. Paths are relative to the project, and results land at its top level.
     static func isResult(_ name: String, patterns: [String]) -> Bool {
@@ -157,7 +164,7 @@ enum CommandText {
             "project": context.projectName, "file": context.file ?? words.agentNoFile, "output": output, "task": task,
         ])
         guard let fileText, let file = context.file else { return prompt }
-        return [prompt, "", ContentStrings.fill(words.apiFileIntro, ["file": file]), "---", fileText, "---"].joined(separator: "\n")
+        return [prompt, "", ContentStrings.fill(words.agentFileIntro, ["file": file]), "---", fileText, "---"].joined(separator: "\n")
     }
 
     /// For a model by API: AI Hub Bar sends the file text and writes the answer itself (docs/TEMPLATES.md).
