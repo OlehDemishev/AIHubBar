@@ -184,6 +184,10 @@ li b { color: var(--ink); }
 .hero2 .tagline { margin: 0 auto 28px; max-width: 680px; }
 .hero2 .chips { justify-content: center; margin-bottom: 48px; }
 
+.demo { text-align: center; }
+.demo-video { display: block; width: min(523px, 100%); height: auto; margin: 0 auto; border-radius: 14px; border: 1px solid var(--line); box-shadow: 0 24px 48px var(--shadow); }
+.demo-note { max-width: 560px; margin: 16px auto 0; color: var(--ink-2); }
+
 .screen {
   position: relative; height: 470px; border-radius: 22px 22px 0 0; overflow: hidden; font-size: 13px;
   background: linear-gradient(160deg, #6b7a99 0%, #a88f86 45%, #e3b48a 100%);

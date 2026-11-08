@@ -10,15 +10,13 @@ Text in `[brackets]` needs Oleh's own words: it is a personal detail nobody else
 
 Developer ID and notarization are done, from 0.7.2 on, so nothing about signing holds back r/macapps, Show HN or Homebrew.
 
-Blockers, most important first:
-
-1. **No demo yet.** A draft exists: limits, a session waiting, Allow in the panel. The README and the site have pictures only. The notification's own button is in the Mac's language, so a shot of Allow on the banner takes a Mac in English.
+The demo is in the README and on the site (`site/demo.mp4`, `docs/images/demo.gif`): limits, a session waiting, Allow in the panel. The notification's own button is in the Mac's language, so a shot of Allow on the banner takes a Mac in English. Attach `site/demo.mp4` to posts.
 
 ## Order
 
 | Step | What | Needs |
 |---|---|---|
-| 1 | Demo recording (the website in the About box is done) | Oleh's OK on the draft |
+| 1 | Done: demo recording, the website in the About box | — |
 | 2 | r/ClaudeAI post: the audience that has the problem. Fix what comes back | Nothing else; read the subreddit's rules first |
 | 3 | Open-source and Claude Code lists (below) | First feedback handled |
 | 4 | r/macapps post | A notarized release |
