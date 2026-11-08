@@ -5,12 +5,13 @@
 **Updated:** 2026-11-08
 
 **Now:**
-- `fix/accessibility-ask-once`: the Accessibility prompt comes up once, not at every launch; a button clears an old record
-- 0.7.7 is out; content stage 1 is walked, what needs a person is in CHECKLIST
+- merged 2026-11-08, not released yet: #314 the Accessibility prompt comes up once, not at every launch; a button clears an old record
+- nothing in progress: 0.7.7 is out; content stage 1 is walked, what needs a person is in CHECKLIST
 - merged 2026-11-06: #262 donations («Поддержать проект» in Settings → General, site/support.html with Ko-fi, GitHub Sponsors and Buy Me a Coffee; the app button reaches people with the next release)
 - merged 2026-11-03: #251 menu bar ☕ follows the «Не спать» switch, #248 «Не спать» on/off in the menu bar, #241 Codex states, #240 quick command shortcuts, #238 «Быстрый запрос», #236 content spec, #242 «Telegram» stage 1, #244 menu at the bottom, #246 shared bot (Worker not deployed yet), #247 desktop CI off for Mac string changes, #249 the bot's menu set up by each person, #252 stage 2 (sessions, requests, limits), #254 stage 3 (tasks and runs), #255 stage 4 (settings in the bot), #256 Mini App
 
 **Next:**
+- release 0.7.8 with #314 on Oleh's word, before the first post
 - check on the Air: the island at the real notch
 - promotion (docs/LAUNCH.md): website in the About box and a demo recording in English (the agent can try a draft when Oleh frees the Mac; check a real notification and the panel in English then), then r/ClaudeAI, the lists, r/macapps, Show HN, Product Hunt, Homebrew
 - content (docs/specs/SPEC-content.md, agreed): stage 2 «Версии», then batch tasks; better after the first feedback from people
