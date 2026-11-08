@@ -64,7 +64,7 @@ It also picks up Codex, Copilot, Gemini CLI, Cursor and OpenRouter if you use th
 
 Claude Code built all of it in about ten days: 376 commits, every one co-authored by Claude, across 320 pull requests. That's about 36,000 lines of SwiftUI and 527 tests.
 
-The way of working mattered more than any prompt. For anything big, Claude wrote a short spec and I answered its questions. Then one task, one branch, one PR. Claude ran the tests before each push and kept a status file, so the next session could pick up where the last one stopped. A separate agent translated the interface into 13 languages. For the interface, Claude drove the running app through Accessibility and read screenshots of it.
+The way of working mattered more than any prompt. For anything big, Claude wrote a short spec and I answered its questions. Then one task, one branch, one PR. Claude ran the tests for each change and kept a status file, so the next session could pick up where the last one stopped. A separate agent translated the interface into 13 languages. For the interface, Claude drove the running app through Accessibility and read screenshots of it.
 
 **A few things I learned**
 
