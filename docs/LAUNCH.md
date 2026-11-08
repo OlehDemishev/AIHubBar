@@ -47,7 +47,7 @@ Attach `site/demo.mp4`. Say «I made this» up front.
 
 **Title:** I built a free, open-source Mac menu bar app that shows Claude limits and every Claude Code session
 
-[One or two sentences: the moment that made you build it.]
+I built this because I needed to always see my limits and what each session was working on, and to stay in control of both.
 
 AI Hub Bar sits in the menu bar and shows:
 
@@ -71,7 +71,7 @@ What would you want from it that isn't there?
 
 **AI Hub Bar**: a free, open-source Mac menu bar app for Claude limits and Claude Code sessions. I made it with Claude Code.
 
-[One sentence: why you made it.]
+I needed to always see my limits and what each session was working on, and to stay in control of both.
 
 It shows your 5-hour and weekly limits with a forecast from your pace and every session with what it is doing right now, and you can Allow or Deny permission requests from a notification, the panel or Telegram. Native SwiftUI, MIT, no account, no analytics. The limits come from an undocumented Anthropic endpoint, so they can break if it changes.
 
