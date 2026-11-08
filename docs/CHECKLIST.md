@@ -189,6 +189,7 @@ Panel snapshots: `defaults write com.demishev.claudepult DebugPanelSnapshot -boo
 | Preview pane: menu bar, limits, «Ближайшее», sample projects with stages and metrics, commands | Live (`--assistant-preview` for video, developer, social) |
 | First screen: map of the panel, notes and arrows, light, dark, all 13 languages, right-to-left | Live (`--assistant-preview <file> welcome [--dark] -AppleLanguages '(ar)'`) |
 | The map in the real first-launch window, its entrance animation | **Oleh: on a Mac with no settings yet** |
+| «Раскладка» without access: one system prompt in the app's life, the quiet line in the panel, «Дать доступ к клавиатуре…» clears the old record and asks again | **Oleh: with the next release** |
 | «Тексты»: a command that asks for text («Другой тон»), a real «Сравнить», week view and dragging a date in «Календарь», a file dropped on the island | **Oleh: on a folder profile** |
 | The assistant window itself (pickers, folder dialog, «Готово») | **Oleh: Settings → Режимы → «+» → «Помощник…»** |
 

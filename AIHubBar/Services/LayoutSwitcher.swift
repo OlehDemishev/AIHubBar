@@ -41,8 +41,6 @@ final class LayoutSwitcher {
     /// The key-up of a space or Return held back with its key-down, so the app doesn't get it alone.
     @ObservationIgnored private var heldKeyUp: UInt16?
     @ObservationIgnored private var converting = false
-    /// macOS's Accessibility prompt is shown once a launch, the first time the module runs without it.
-    @ObservationIgnored private var askedForAccess = false
 
     /// Marks the events «Раскладка» types itself, so the tap lets them through.
     private static let marker: Int64 = 0x4C41_594F
@@ -99,19 +97,36 @@ final class LayoutSwitcher {
             updateStatusItem()
         }
         if on, settings.layout.menuBarIcon { showStatusItem() } else { hideStatusItem() }
-        if on, !trusted, !askedForAccess {
-            askedForAccess = true
+        if Self.shouldAskForAccess(isOn: on, granted: trusted, alreadyAsked: settings.layoutAccessAsked) {
+            settings.layoutAccessAsked = true
             AppLog.info("Layout: no key access (Accessibility \(AXIsProcessTrusted()), input monitoring \(CGPreflightListenEventAccess()), posting \(CGPreflightPostEventAccess())), asking macOS")
             AXIsProcessTrustedWithOptions(["AXTrustedCheckOptionPrompt": true] as CFDictionary)
             CGRequestListenEventAccess()
         }
     }
 
-    /// Asks macOS for Accessibility: the system prompt, and the list in System Settings to switch it on.
+    /// The system prompt comes up by itself once in the life of the app. Without access it would otherwise be back at
+    /// every launch and after every update; from then on the panel and Settings offer `requestAccess`.
+    nonisolated static func shouldAskForAccess(isOn: Bool, granted: Bool, alreadyAsked: Bool) -> Bool {
+        isOn && !granted && !alreadyAsked
+    }
+
+    /// A click on «Дать доступ»: clears this app's old records, asks macOS again and opens the list in System Settings.
+    /// A record from an earlier signature keeps its switch on while the app gets no access, and turning it off and on
+    /// does nothing; only removing the record helps (seen 2026-11-08).
     func requestAccess() {
-        AXIsProcessTrustedWithOptions(["AXTrustedCheckOptionPrompt": true] as CFDictionary)
-        if let url = URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_Accessibility") {
-            NSWorkspace.shared.open(url)
+        settings.layoutAccessAsked = true
+        Task {
+            if let id = Bundle.main.bundleIdentifier {
+                for service in ["Accessibility", "ListenEvent"] {
+                    _ = try? await ProcessRunner.run("/usr/bin/tccutil", ["reset", service, id], timeout: .seconds(5))
+                }
+            }
+            AXIsProcessTrustedWithOptions(["AXTrustedCheckOptionPrompt": true] as CFDictionary)
+            CGRequestListenEventAccess()
+            if let url = URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_Accessibility") {
+                NSWorkspace.shared.open(url)
+            }
         }
     }
 

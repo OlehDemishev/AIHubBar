@@ -170,3 +170,23 @@ struct LayoutSwitchTests {
         #expect(LayoutWords.correction(for: "hello".compactMap(english.stroke(for:)), in: english, others: [english, russian], learned: [], isWord: isWord) == nil)
     }
 }
+
+@MainActor
+struct LayoutAccessTests {
+    @Test func theSystemPromptComesUpOnce() {
+        #expect(LayoutSwitcher.shouldAskForAccess(isOn: true, granted: false, alreadyAsked: false))
+        #expect(!LayoutSwitcher.shouldAskForAccess(isOn: true, granted: false, alreadyAsked: true), "not at every launch")
+        #expect(!LayoutSwitcher.shouldAskForAccess(isOn: true, granted: true, alreadyAsked: false))
+        #expect(!LayoutSwitcher.shouldAskForAccess(isOn: false, granted: false, alreadyAsked: false), "a module that is off asks nothing")
+    }
+
+    @Test func havingAskedOutlivesALaunch() throws {
+        let name = "claudepult-layout-access-\(UUID().uuidString)"
+        let defaults = try #require(UserDefaults(suiteName: name))
+        defer { defaults.removePersistentDomain(forName: name) }
+        let settings = AppSettings(defaults: defaults)
+        #expect(!settings.layoutAccessAsked)
+        settings.layoutAccessAsked = true
+        #expect(AppSettings(defaults: defaults).layoutAccessAsked)
+    }
+}

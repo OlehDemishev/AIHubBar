@@ -51,6 +51,11 @@ final class AppSettings {
         didSet { defaults.set(defaultLaunchMode?.rawValue, forKey: Keys.defaultLaunchMode) }
     }
 
+    /// macOS's Accessibility prompt was shown for «Раскладка»: it comes up by itself once, not at every launch.
+    var layoutAccessAsked: Bool {
+        didSet { defaults.set(layoutAccessAsked, forKey: Keys.layoutAccessAsked) }
+    }
+
     var telegramForBackground: Bool {
         didSet { defaults.set(telegramForBackground, forKey: Keys.telegramForBackground) }
     }
@@ -341,6 +346,7 @@ final class AppSettings {
         dailyReportDirectory = defaults.string(forKey: Keys.dailyReportDirectory) ?? Self.defaultDailyReportDirectory
         claudePath = defaults.string(forKey: Keys.claudePath) ?? ""
         defaultLaunchMode = defaults.value(LaunchMode.self, forKey: Keys.defaultLaunchMode)
+        layoutAccessAsked = defaults.bool(Keys.layoutAccessAsked, default: false)
         telegramForBackground = defaults.bool(Keys.telegramForBackground, default: true)
         backgroundTimeLimitMinutes = defaults.positiveInt(Keys.backgroundTimeLimitMinutes, default: 90)
         menuBarConfig = defaults.decoded(MenuBarConfig.self, forKey: Keys.menuBarConfig)
@@ -407,6 +413,7 @@ final class AppSettings {
         static let dailyReportDirectory = "dailyReportDirectory"
         static let claudePath = "claudePath"
         static let defaultLaunchMode = "defaultLaunchMode"
+        static let layoutAccessAsked = "layoutAccessAsked"
         static let telegramForBackground = "telegramForBackground"
         static let backgroundTimeLimitMinutes = "backgroundTimeLimitMinutes"
         static let menuBarUsageMode = "menuBarUsageMode"

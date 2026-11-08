@@ -5,7 +5,8 @@
 **Updated:** 2026-11-08
 
 **Now:**
-- nothing in progress: 0.7.7 is out; content stage 1 is walked, what needs a person is in CHECKLIST
+- `fix/accessibility-ask-once`: the Accessibility prompt comes up once, not at every launch; a button clears an old record
+- 0.7.7 is out; content stage 1 is walked, what needs a person is in CHECKLIST
 - merged 2026-11-06: #262 donations («Поддержать проект» in Settings → General, site/support.html with Ko-fi, GitHub Sponsors and Buy Me a Coffee; the app button reaches people with the next release)
 - merged 2026-11-03: #251 menu bar ☕ follows the «Не спать» switch, #248 «Не спать» on/off in the menu bar, #241 Codex states, #240 quick command shortcuts, #238 «Быстрый запрос», #236 content spec, #242 «Telegram» stage 1, #244 menu at the bottom, #246 shared bot (Worker not deployed yet), #247 desktop CI off for Mac string changes, #249 the bot's menu set up by each person, #252 stage 2 (sessions, requests, limits), #254 stage 3 (tasks and runs), #255 stage 4 (settings in the bot), #256 Mini App
 
@@ -18,8 +19,7 @@
 **Needs Oleh:**
 - promotion: OK for the website in the repository's About box (asked 2026-11-08, no answer yet)
 - free disk space: on 2026-11-08 it swung between 1.5 and 10 GB free with swap near 12 GB, too little to build safely; `~/.colima` holds 37 GB and its Docker disk needs a repair (`colima stop && colima start`)
-- System Settings → Accessibility: remove AI Hub Bar and add it again (the switch is on, the app sees no access), then press Esc in the open panel and scroll it with the trackpad
-- after 0.7.2: System Settings → Privacy & Security → Accessibility: allow AI Hub Bar again, then press ⌃⌥B and run a command in Terminal once
+- Accessibility: old records reset by Oleh 2026-11-08; quit and open AI Hub Bar, allow Accessibility and Input Monitoring, then press ⌃⌥B, Esc in the open panel, scroll it with the trackpad and run a command in Terminal once
 - 0.7.0 live checks: press ⌃⌥B, right-click a session row; with a second account: Settings → Claude Code → «Другие аккаунты Claude»
 - promotion: record a 20–30 s demo or let the agent try a draft, write the [bracketed] parts of the drafts in docs/LAUNCH.md and post them from your accounts
 - Telegram: delete `_daily-report/bot.py` and `install-bot.sh`
@@ -32,6 +32,12 @@
 - MacBook Air: update to 0.7.7 through Sparkle and check the island at the real notch
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-08 — Accessibility asked once (branch `fix/accessibility-ask-once`)
+
+Done: Oleh asked why macOS keeps asking. «Раскладка» showed the system prompt at every launch while it had no access (8 times on 2026-11-08, 6 of them from the agent's own restarts), and the log said `Accessibility false` although the switch in System Settings was recorded as on. The designated requirement is the same in 0.7.5 and 0.7.7, so updates don't lose the permission; a record from an earlier signature is the likely cause, not proven, because TCC.db can't be read. Now the prompt comes up by itself once in the app's life. After that a quiet line in the panel, the module's settings and its menu offer «Дать доступ к клавиатуре…», which clears the app's records with `tccutil reset`, asks again and opens System Settings. No new strings.
+Checked: `scripts/check.sh`, new tests for when it asks and for the setting being kept. Oleh ran `tccutil reset` for Accessibility and ListenEvent by hand.
+Left: not seen running: the line in the panel, the button, and whether access works after Oleh's reset. The next release brings it. Current users who were asked before see the prompt one more time, because the old flag wasn't stored.
 
 ## 2026-11-08 — Release 0.7.7 (branch `chore/status-release-0.7.7`)
 
