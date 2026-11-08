@@ -34,7 +34,7 @@ struct AssistantView: View {
                     }
                     .frame(width: 470)
                     Divider()
-                    AssistantPreview(draft: binding.wrappedValue)
+                    AssistantSidePane(draft: binding.wrappedValue)
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .background(Color.primary.opacity(0.03))
                 }

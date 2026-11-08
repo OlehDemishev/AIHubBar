@@ -16,7 +16,8 @@ import UserNotifications
 /// - `AIHubBar --usage`, `AIHubBar --usage-raw` (subscription limits; the token is never printed), `--token-usage`
 /// - `AIHubBar --notifications-status`
 /// - `AIHubBar --modes`, `AIHubBar --export-settings <file.claudepult>` (import: open the file in Finder)
-/// - `AIHubBar --assistant-preview <file.png> [template]` (the assistant's preview pane for a template, sample data)
+/// - `AIHubBar --assistant-preview <file.png> [template|welcome] [--dark]` (the assistant's right side for a template, or
+///   the map of the panel on its first screen; sample data)
 /// - `AIHubBar --git-scan <folder>` (the built-in git scanner: health, branch, changes, PRs, attention)
 /// - `AIHubBar --calendar [folder] [template]` (calendar dates of the enabled modes, or of a folder read as «папки» +
 ///   контент-план, with a template's stages)
@@ -195,11 +196,14 @@ enum CommandLineTool {
                     return 1
                 }
             },
-            CLICommand(["--assistant-preview"], needs: 1, usage: "--assistant-preview <file.png> [template]  the assistant preview with sample data") { arguments, index in
-                var draft = AssistantDraft(firstLaunch: false, menuBar: .make(.limits), reminderHours: [24])
+            CLICommand(["--assistant-preview"], needs: 1, usage: "--assistant-preview <file.png> [template|welcome] [--dark]  the assistant's right side with sample data") { arguments, index in
                 let id = arguments.dropFirst(index + 2).first
-                draft.choose(ProfileTemplate.loadAll().first { $0.id == id })
-                let renderer = ImageRenderer(content: AssistantPreview(draft: draft).frame(width: 430, height: 560).background(Color(white: 0.95))
+                let dark = arguments.contains("--dark")
+                var draft = AssistantDraft(firstLaunch: id == "welcome", menuBar: .make(.limits), reminderHours: [24])
+                if id != "welcome" { draft.choose(ProfileTemplate.loadAll().first { $0.id == id }) }
+                let renderer = ImageRenderer(content: AssistantSidePane(draft: draft, animated: false).frame(width: 430, height: 620)
+                    .background(Color(white: dark ? 0.15 : 0.95))
+                    .environment(\.colorScheme, dark ? .dark : .light)
                     .environment(\.layoutDirection, layoutDirection))
                 renderer.scale = 2
                 guard let image = renderer.nsImage, let tiff = image.tiffRepresentation,
