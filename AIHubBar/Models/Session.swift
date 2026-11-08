@@ -115,7 +115,7 @@ struct Session: Decodable, Identifiable, Equatable, Sendable {
         updatedAt = c.isoDate(.updatedAt) ?? .distantPast
         firstPrompt = try? c.decodeIfPresent(String.self, forKey: .firstPrompt)
         lastPrompt = try? c.decodeIfPresent(String.self, forKey: .lastPrompt)
-        message = try? c.decodeIfPresent(String.self, forKey: .message)
+        message = (try? c.decodeIfPresent(String.self, forKey: .message)).map(Self.localizedMessage)
         transcriptPath = try? c.decodeIfPresent(String.self, forKey: .transcriptPath)
         claudePID = try? c.decodeIfPresent(Int32.self, forKey: .claudePID)
         tty = try? c.decodeIfPresent(String.self, forKey: .tty)
@@ -181,6 +181,17 @@ struct Session: Decodable, Identifiable, Equatable, Sendable {
         [firstPrompt, lastPrompt].compactMap { $0.map(Self.withoutSystemText) }
             .first { !$0.isEmpty }
             .map(Self.taskTitle)
+    }
+
+    /// The hook is a script with no translations, so it writes these in Russian and they are shown in the app's
+    /// language here. Every other message is the agent's own and stays as it came.
+    static func localizedMessage(_ message: String) -> String {
+        let permission = "Нужно разрешение: "
+        if message.hasPrefix(permission) {
+            let tool = String(message.dropFirst(permission.count))
+            return String(localized: "Нужно разрешение: \(tool == "инструмент" ? String(localized: "инструмент") : tool)")
+        }
+        return message == "Ответ прерван ошибкой API" ? String(localized: "Ответ прерван ошибкой API") : message
     }
 
     /// A prompt without the `<system-reminder>` the Claude app puts in front of the person's words. Files from older

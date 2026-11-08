@@ -5,7 +5,8 @@
 **Updated:** 2026-11-08
 
 **Now:**
-- nothing in progress: 0.7.6 is out; content stage 1 is walked, what needs a person is in CHECKLIST
+- `fix/hook-messages-language`: the permission and API error messages follow the app's language; needed before an English demo
+- 0.7.6 is out; content stage 1 is walked, what needs a person is in CHECKLIST
 - merged 2026-11-08, not released yet: #309 session titles from the Claude app no longer show raw `<system-reminder>` text
 - merged 2026-11-06: #262 donations («Поддержать проект» in Settings → General, site/support.html with Ko-fi, GitHub Sponsors and Buy Me a Coffee; the app button reaches people with the next release)
 - merged 2026-11-03: #251 menu bar ☕ follows the «Не спать» switch, #248 «Не спать» on/off in the menu bar, #241 Codex states, #240 quick command shortcuts, #238 «Быстрый запрос», #236 content spec, #242 «Telegram» stage 1, #244 menu at the bottom, #246 shared bot (Worker not deployed yet), #247 desktop CI off for Mac string changes, #249 the bot's menu set up by each person, #252 stage 2 (sessions, requests, limits), #254 stage 3 (tasks and runs), #255 stage 4 (settings in the bot), #256 Mini App
@@ -33,6 +34,12 @@
 - MacBook Air: update to 0.7.6 through Sparkle and check the island at the real notch
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-08 — Hook messages in the app's language (branch `fix/hook-messages-language`)
+
+Done: the hook wrote «Нужно разрешение: Bash» and «Ответ прерван ошибкой API» in Russian, and every language showed them so: the session row, the notification, the island and Telegram. The app now translates them when it reads a session file, so files from older hooks are covered too (2 new strings in 13 languages). The answer to the agent after «Отклонить» is English now: «Denied in AI Hub Bar». `--sessions` prints the message as a last column. Hook format 7.
+Checked: `scripts/check.sh`; the Debug build's `--sessions` with a separate home folder and sessions written by the real hook script, in en, de, ja, ar, ru: both messages and the fallback for no tool name.
+Left: the next release brings it. Not seen in a real notification or in the panel in English. Reminder for the demo: macOS itself stays in its own language, so the recording is cropped to the panel and its menu bar item.
 
 ## 2026-11-08 — Session titles without the Claude app's system text (branch `fix/session-title-wrapper`)
 
