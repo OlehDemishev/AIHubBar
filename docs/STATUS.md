@@ -2,18 +2,16 @@
 
 <!-- summary:start -->
 **Stage:** Mac: 0.7.5 published 2026-11-07, signed and notarized (Developer ID; before that shorter first run, panel polish, usage history, finished sessions, ⌃⌥B, outages, several Claude accounts). Windows/Linux (`desktop/`, Tauri 2): postponed by Oleh 2026-11-02
-**Updated:** 2026-11-07
+**Updated:** 2026-11-08
 
 **Now:**
 - nothing in progress: 0.7.5 is out (0.7.4 brought the UI audit's fixes, 0.7.5 the panel header)
-- Telegram: Worker deployed at https://aihubbar-telegram.oleh-demishev.workers.dev (new bot, old bots deleted by Oleh); the app points at it — pairing and a live check next
 - merged 2026-11-06: #262 donations («Поддержать проект» in Settings → General, site/support.html with Ko-fi, GitHub Sponsors and Buy Me a Coffee; the app button reaches people with the next release)
 - merged 2026-11-03: #251 menu bar ☕ follows the «Не спать» switch, #248 «Не спать» on/off in the menu bar, #241 Codex states, #240 quick command shortcuts, #238 «Быстрый запрос», #236 content spec, #242 «Telegram» stage 1, #244 menu at the bottom, #246 shared bot (Worker not deployed yet), #247 desktop CI off for Mac string changes, #249 the bot's menu set up by each person, #252 stage 2 (sessions, requests, limits), #254 stage 3 (tasks and runs), #255 stage 4 (settings in the bot), #256 Mini App
 
 **Next:**
-- check on the Air: the update through Sparkle across the certificate change, then the island at the real notch
-- promotion (docs/LAUNCH.md): demo recording, then r/ClaudeAI, the lists, r/macapps; Show HN and Product Hunt after the Developer ID
-- Telegram: pair the Mac mini with the shared bot, try the bot and the Mini App live
+- check on the Air: the island at the real notch
+- promotion (docs/LAUNCH.md): website in the About box and a demo recording, then r/ClaudeAI, the lists, r/macapps, Show HN, Product Hunt, Homebrew
 - content (docs/specs/SPEC-content.md, agreed): stage 1 — walkthrough of the «Тексты» profile on a sample folder, then «Версии», then batch tasks
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/specs/SPEC-windows.md §9, stage 2–3 leftovers)
 
@@ -22,8 +20,7 @@
 - System Settings → Accessibility: remove AI Hub Bar and add it again (the switch is on, the app sees no access), then press Esc in the open panel and scroll it with the trackpad
 - after 0.7.2: System Settings → Privacy & Security → Accessibility: allow AI Hub Bar again, then press ⌃⌥B and run a command in Terminal once
 - 0.7.0 live checks: press ⌃⌥B, right-click a session row; with a second account: Settings → Claude Code → «Другие аккаунты Claude»
-- promotion: decide on the Apple Developer ID (paid yearly; needed before Show HN and Homebrew), record a 20–30 s demo, post the drafts in docs/LAUNCH.md from your accounts
-- Telegram: Settings → Modules → Telegram → «Общий бот» → «Подключить Telegram» → Start (`_daily-report/config.json` already points at @AIHubBarBot)
+- promotion: OK for the website in the repository's About box, record a 20–30 s demo, write the [bracketed] parts of the drafts in docs/LAUNCH.md and post them from your accounts
 - Telegram: delete `_daily-report/bot.py` and `install-bot.sh`
 - «Быстрый запрос»: Settings → Modules → «Быстрый запрос» on, then ⌃⌥P from Terminal or Xcode — send one task to the background and one to Codex
 - Settings → Codex → «Установить hook», then once in `codex` type `/hooks` and trust AI Hub Bar's hooks (Codex skips untrusted hooks); then check a Codex row in «Сессии» goes «ждёт» on an approval prompt
@@ -31,9 +28,15 @@
 - GitHub → repository Settings → Social preview: upload docs/images/social-preview.png (only by hand)
 - Settings → Copilot → «Установить hook»: then start `copilot` and check its row in «Сессии» (the agent wasn't allowed to install it into ~/.copilot itself)
 - look at the new Settings and say what to change next
-- MacBook Air: update to 0.6.0 through Sparkle (Settings → General → Updates) and check the island at the real notch
+- MacBook Air: check the island at the real notch
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-08 — Air update and Telegram confirmed (branch `chore/status-air-telegram-checked`)
+
+Done: recorded Oleh's live checks: the Air updated through Sparkle across the certificate change and asked for permissions again, as docs/RELEASE.md expects; the Telegram bot and the Mini App work. The Developer ID decision is gone from Needs Oleh, since it is done. docs/LAUNCH.md: starting numbers and blockers brought up to date.
+Checked: Oleh's word for the live checks; numbers from `gh` (0 stars, 41 DMG downloads over all releases, 6 unique visitors in two weeks, no website in the About box). Docs only, no code changed, so scripts/check.sh not run.
+Left: the island at the real notch on the Air was not mentioned, so it stays in Next.
 
 ## 2026-11-07 — Release 0.7.5 (branch `chore/status-release-0.7.5`)
 
