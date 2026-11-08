@@ -17,3 +17,18 @@ enum LanguageFallback {
         defaults.setVolatileDomain(arguments, forName: UserDefaults.argumentDomain)
     }
 }
+
+/// The language the app runs in and the one it will have after a relaunch. They differ once the choice in Settings
+/// changes, because macOS reads `AppleLanguages` at launch.
+enum InterfaceLanguage {
+    /// Fixed at launch (`AIHubBarApp.init` reads it first), so a later change in Settings can't alter it.
+    static let running = Bundle.main.preferredLocalizations.first ?? "ru"
+
+    /// `choice` is the language picked in Settings, empty for «Как в системе»; `system` is the system's list.
+    static func afterRelaunch(choice: String, system: [String], available: [String]) -> String {
+        guard choice.isEmpty else { return choice }
+        guard !LanguageFallback.needsEnglish(preferred: system, available: available) else { return "en" }
+        let known = available.contains("ru") ? available : available + ["ru"]
+        return Bundle.preferredLocalizations(from: known, forPreferences: system).first ?? "en"
+    }
+}

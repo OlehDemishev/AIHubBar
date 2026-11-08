@@ -7,6 +7,7 @@ struct AIHubBarApp: App {
 
     init() {
         LanguageFallback.apply()
+        _ = InterfaceLanguage.running
         if let code = CommandLineTool.run(CommandLine.arguments) {
             AppLog.flush()
             exit(code)

@@ -108,7 +108,7 @@ Oleh picked variant A of three mock-ups (cards / tabs / Raycast-like list). Bloc
 
 **Catalog upkeep:** keys come from the compiler's `.stringsdata` (`SWIFT_EMIT_LOC_STRINGS`) via `xcrun xcstringstool sync`; translations were checked by a script for missing keys and matching format specifiers. Since 2026-11-03: `scripts/strings-sync.sh` (sync, keep the repository's JSON style, check) and `scripts/strings-check.py` (also in `scripts/check.sh` and the Mac CI). Localized interpolation formats numbers by the system region («1 500 сл.»).
 
-**Language choice:** Settings → Основные → «Язык интерфейса» writes the app's own `AppleLanguages` and relaunches; «Как в системе» removes it.
+**Language choice:** Settings → Основные → «Язык интерфейса» writes the app's own `AppleLanguages`; «Как в системе» removes it. It takes effect at the next launch. «Перезапустить» stays under the picker for as long as the language after a relaunch differs from the running one (since 2026-11-08; before that the button was lost when the page was left, and the picker showed a language the app wasn't in). No automatic relaunch: the app would close under the person's hands while they try languages.
 
 ## 2026-10-30 — Setup assistant (SPEC-modes §9.7)
 

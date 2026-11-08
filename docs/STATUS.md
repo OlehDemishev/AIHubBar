@@ -10,6 +10,7 @@
 - merged 2026-11-03: #251 menu bar ☕ follows the «Не спать» switch, #248 «Не спать» on/off in the menu bar, #241 Codex states, #240 quick command shortcuts, #238 «Быстрый запрос», #236 content spec, #242 «Telegram» stage 1, #244 menu at the bottom, #246 shared bot (Worker not deployed yet), #247 desktop CI off for Mac string changes, #249 the bot's menu set up by each person, #252 stage 2 (sessions, requests, limits), #254 stage 3 (tasks and runs), #255 stage 4 (settings in the bot), #256 Mini App
 
 **Next:**
+- next release: the language picker's relaunch button reaches people with it (fixed after 0.7.8)
 - check on the Air: the island at the real notch
 - promotion (docs/LAUNCH.md): r/ClaudeAI, the lists, r/macapps, Show HN, Product Hunt, Homebrew
 - content (docs/specs/SPEC-content.md, agreed): stage 2 «Версии», then batch tasks; better after the first feedback from people
@@ -31,6 +32,12 @@
 - MacBook Air: update to 0.7.8 through Sparkle and check the island at the real notch
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-08 — The language picker keeps its relaunch button (branch `fix/language-picker-relaunch`)
+
+Done: Oleh changed the language and nothing happened. The choice was saved, but it applies at launch and the app kept running; «Перезапустить» lived in the view's state, so leaving the page lost it, and picking the same language again brought nothing back. The picker then showed a language the app wasn't in. Now the button stays while the language after a relaunch differs from the running one (`InterfaceLanguage`), «Как в системе» included. No automatic relaunch: DECISIONS corrected.
+Checked: `scripts/check.sh` green, 530 tests, 3 new. Live, in a Debug copy with its own bundle id: running Russian, English → button; another page and back → button still there; Русский and «Как в системе» → no button; Deutsch → button; pressed → the old process exited and a new launch happened (a marker script stood in for the binary). Not seen: the copy actually starting in German with no button, my script failed there; `--help-export` shows the running language equals the choice for en, ru, de, uk.
+Left: reaches people with the next release. The real 0.7.8 restarted at 22:36:09 during this check, cause not found (no crash report, no system log). In earlier test passes the copy shared the real settings: `settingsPage` was switched and put back, the language stayed `en`, other keys could not be compared. That same-id copy also moved the login item record to its own path (`sfltool dumpbtm`), so after the reboot at 22:42 the app did not start; opening the real app put the record back on `~/Applications/AI Hub Bar.app`, enabled. The start at login itself is not yet seen after that: it shows at the next reboot.
 
 ## 2026-11-08 — Social accounts kit (branch `docs/social-kit`)
 
