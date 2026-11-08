@@ -5,23 +5,25 @@
 **Updated:** 2026-11-08
 
 **Now:**
-- merged 2026-11-08: #304 a map of the panel on the assistant's first screen; it reaches people with the next release
-- nothing in progress: content stage 1 is half done; #302 merged 2026-11-08 with three fixes from the headless walkthrough, the look at the real panel is still to do
+- content stage 1 (branch `fix/content-panel-findings`): the panel was walked live, five more fixes in review; what needs a person is in CHECKLIST
+- merged 2026-11-08, not released yet: #304 a map of the panel on the assistant's first screen, #302 `.docx` commands, the main file choice, finished work no longer overdue
 - merged 2026-11-06: #262 donations («Поддержать проект» in Settings → General, site/support.html with Ko-fi, GitHub Sponsors and Buy Me a Coffee; the app button reaches people with the next release)
 - merged 2026-11-03: #251 menu bar ☕ follows the «Не спать» switch, #248 «Не спать» on/off in the menu bar, #241 Codex states, #240 quick command shortcuts, #238 «Быстрый запрос», #236 content spec, #242 «Telegram» stage 1, #244 menu at the bottom, #246 shared bot (Worker not deployed yet), #247 desktop CI off for Mac string changes, #249 the bot's menu set up by each person, #252 stage 2 (sessions, requests, limits), #254 stage 3 (tasks and runs), #255 stage 4 (settings in the bot), #256 Mini App
 
 **Next:**
+- release 0.7.6 with the content fixes and the new first screen, on Oleh's word, before the first post
 - check on the Air: the island at the real notch
 - promotion (docs/LAUNCH.md): website in the About box and a demo recording, then r/ClaudeAI, the lists, r/macapps, Show HN, Product Hunt, Homebrew
-- content (docs/specs/SPEC-content.md, agreed): finish stage 1 — panel rows, stage chips, command buttons, «Сравнить», «Ближайшее», «Календарь», island drop, with screenshots; then «Версии», then batch tasks
+- content (docs/specs/SPEC-content.md, agreed): stage 2 «Версии», then batch tasks; better after the first feedback from people
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/specs/SPEC-windows.md §9, stage 2–3 leftovers)
 
 **Needs Oleh:**
+- promotion: OK for the website in the repository's About box (asked 2026-11-08, no answer yet)
 - free disk space: on 2026-11-08 it swung between 1.5 and 10 GB free with swap near 12 GB, too little to build safely; `~/.colima` holds 37 GB and its Docker disk needs a repair (`colima stop && colima start`)
 - System Settings → Accessibility: remove AI Hub Bar and add it again (the switch is on, the app sees no access), then press Esc in the open panel and scroll it with the trackpad
 - after 0.7.2: System Settings → Privacy & Security → Accessibility: allow AI Hub Bar again, then press ⌃⌥B and run a command in Terminal once
 - 0.7.0 live checks: press ⌃⌥B, right-click a session row; with a second account: Settings → Claude Code → «Другие аккаунты Claude»
-- promotion: OK for the website in the repository's About box, record a 20–30 s demo, write the [bracketed] parts of the drafts in docs/LAUNCH.md and post them from your accounts
+- promotion: record a 20–30 s demo or let the agent try a draft, write the [bracketed] parts of the drafts in docs/LAUNCH.md and post them from your accounts
 - Telegram: delete `_daily-report/bot.py` and `install-bot.sh`
 - «Быстрый запрос»: Settings → Modules → «Быстрый запрос» on, then ⌃⌥P from Terminal or Xcode — send one task to the background and one to Codex
 - Settings → Codex → «Установить hook», then once in `codex` type `/hooks` and trust AI Hub Bar's hooks (Codex skips untrusted hooks); then check a Codex row in «Сессии» goes «ждёт» on an approval prompt
@@ -32,6 +34,12 @@
 - MacBook Air: check the island at the real notch
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-08 — Content stage 1: the panel walked live, five fixes (branch `fix/content-panel-findings`)
+
+Done: walked the «Тексты» profile in the running app, a build of main (0.7.5, build 700, installed on the Mac mini), on a sample folder. Fixed: the whole metrics line went red with no word about why (now only «просрочено 2 дн»); sessions, notifications and the bot called a run «Ты работаешь в папке проекта…» (now «Корректура», «Другой тон: дружелюбнее»); a new stage reached «Ближайшее» up to 5 minutes later; hover hints showed raw `{текст}`; the agent tried to open a `.docx` whose text it already had (a new line in 13 languages). Findings in SPEC-content §7.
+Checked: live, by Accessibility and window captures with only clicks on the menu bar item: rows, stage chips and stage changes in the card, the job's row and result link, `.docx` proofread for real from the panel's button, `вопросы.rtf` still the main file after a result, finished work not red, «Ближайшее», the «Календарь» month view. `scripts/check.sh` green with new tests. Oleh's profiles, settings and «Не спать» restored and compared with a backup.
+Left: these five fixes were made after the live pass, so they have tests where they can but were not seen running; the row and the instant «Ближайшее» have no test at all. Not walked: a command that asks for text past its field, a real «Сравнить», the week view, dragging a date, the island drop (CHECKLIST). `--app-command open-panel` opens search instead of the panel here because the app has no Accessibility permission, the item already in Needs Oleh.
 
 ## 2026-11-08 — First screen: a map of the panel (branch `feat/welcome-panel-map`)
 

@@ -106,12 +106,14 @@ private struct FolderProjectRow: View {
     @Binding var isExpanded: Bool
 
     @Environment(FolderProjectStore.self) private var store
+    @Environment(CalendarStore.self) private var calendar
     @State private var isHovered = false
 
-    private var overdue: Bool {
-        guard let deadline = project.card.deadline else { return false }
-        if let done = mode?.doneStage, project.card.stage == done { return false }
-        return deadline < Calendar.current.startOfDay(for: .now)
+    /// «просрочено 2 дн», unless the work is finished. The deadline itself may not be among the row's metrics.
+    private var overdue: String? {
+        guard let deadline = project.card.deadline, deadline < Calendar.current.startOfDay(for: .now) else { return nil }
+        if let done = mode?.doneStage, project.card.stage == done { return nil }
+        return CalendarText.relative(deadline, hasTime: false)
     }
 
     var body: some View {
@@ -157,11 +159,17 @@ private struct FolderProjectRow: View {
                     }
                 }
                 let line = metrics.compactMap { $0.text(for: project, wordsPerMinute: wordsPerMinute) }
-                if !line.isEmpty {
-                    Text(line.joined(separator: " · "))
-                        .scaledFont(.caption)
-                        .foregroundStyle(overdue ? AnyShapeStyle(.red) : AnyShapeStyle(.secondary))
-                        .lineLimit(1)
+                if !line.isEmpty || overdue != nil {
+                    HStack(spacing: 6) {
+                        if !line.isEmpty {
+                            Text(line.joined(separator: " · ")).foregroundStyle(.secondary)
+                        }
+                        if let overdue {
+                            Text(overdue).foregroundStyle(.red).layoutPriority(1)
+                        }
+                    }
+                    .scaledFont(.caption)
+                    .lineLimit(1)
                 }
             }
         }
@@ -179,6 +187,7 @@ private struct FolderProjectRow: View {
                         ForEach(Array(stages.enumerated()), id: \.offset) { index, stage in
                             Button {
                                 store.setStage(stage, of: project)
+                                Task { await calendar.refresh() }
                             } label: {
                                 StageChip(stage: stage, index: index, count: stages.count, isSelected: project.card.stage == stage)
                             }

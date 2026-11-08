@@ -56,12 +56,12 @@ final class RunStore {
     /// A command of a folder mode (SPEC-modes §3): its own permission profile and the file it should write.
     func launch(
         title: String, prompt: String, project: String, projectPath: String, folder: String, worktreeBranch: String?,
-        profile: PermissionProfile, resultFile: String?, claudePath: String
+        profile: PermissionProfile, resultFile: String?, claudePath: String, taskTitle: String? = nil
     ) throws -> BackgroundRun {
         let id = UUID().uuidString.lowercased()
         var run = BackgroundRun(
             id: id, project: project, projectPath: projectPath, folder: folder, worktreeBranch: worktreeBranch,
-            commandTitle: title, task: Session.taskTitle(prompt), startedAt: .now,
+            commandTitle: title, task: taskTitle ?? Session.taskTitle(prompt), startedAt: .now,
             timeLimitMinutes: settings.backgroundTimeLimitMinutes, pid: nil, state: .running, notified: false,
             resultFile: resultFile
         )
