@@ -1,17 +1,15 @@
 # Status
 
 <!-- summary:start -->
-**Stage:** Mac: 0.7.7 published 2026-11-08, signed and notarized (Developer ID; hook messages in the app's language, clean session titles; 0.7.6 a map of the panel on the first screen, «Тексты» fixes; before that shorter first run, panel polish, usage history, finished sessions, ⌃⌥B, outages, several Claude accounts). Windows/Linux (`desktop/`, Tauri 2): postponed by Oleh 2026-11-02
+**Stage:** Mac: 0.7.8 published 2026-11-08, signed and notarized (Developer ID; Accessibility asked once; 0.7.7 hook messages in the app's language, clean session titles; 0.7.6 a map of the panel on the first screen, «Тексты» fixes; before that shorter first run, panel polish, usage history, finished sessions, ⌃⌥B, outages, several Claude accounts). Windows/Linux (`desktop/`, Tauri 2): postponed by Oleh 2026-11-02
 **Updated:** 2026-11-08
 
 **Now:**
-- merged 2026-11-08, not released yet: #314 the Accessibility prompt comes up once, not at every launch; a button clears an old record
-- nothing in progress: 0.7.7 is out; content stage 1 is walked, what needs a person is in CHECKLIST
+- nothing in progress: 0.7.8 is out; content stage 1 is walked, what needs a person is in CHECKLIST
 - merged 2026-11-06: #262 donations («Поддержать проект» in Settings → General, site/support.html with Ko-fi, GitHub Sponsors and Buy Me a Coffee; the app button reaches people with the next release)
 - merged 2026-11-03: #251 menu bar ☕ follows the «Не спать» switch, #248 «Не спать» on/off in the menu bar, #241 Codex states, #240 quick command shortcuts, #238 «Быстрый запрос», #236 content spec, #242 «Telegram» stage 1, #244 menu at the bottom, #246 shared bot (Worker not deployed yet), #247 desktop CI off for Mac string changes, #249 the bot's menu set up by each person, #252 stage 2 (sessions, requests, limits), #254 stage 3 (tasks and runs), #255 stage 4 (settings in the bot), #256 Mini App
 
 **Next:**
-- release 0.7.8 with #314 on Oleh's word, before the first post
 - check on the Air: the island at the real notch
 - promotion (docs/LAUNCH.md): website in the About box and a demo recording in English (the agent can try a draft when Oleh frees the Mac; check a real notification and the panel in English then), then r/ClaudeAI, the lists, r/macapps, Show HN, Product Hunt, Homebrew
 - content (docs/specs/SPEC-content.md, agreed): stage 2 «Версии», then batch tasks; better after the first feedback from people
@@ -30,9 +28,15 @@
 - GitHub → repository Settings → Social preview: upload docs/images/social-preview.png (only by hand)
 - Settings → Copilot → «Установить hook»: then start `copilot` and check its row in «Сессии» (the agent wasn't allowed to install it into ~/.copilot itself)
 - look at the new Settings and say what to change next
-- MacBook Air: update to 0.7.7 through Sparkle and check the island at the real notch
+- MacBook Air: update to 0.7.8 through Sparkle and check the island at the real notch
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-08 — Release 0.7.8 (branch `chore/status-release-0.7.8`)
+
+Done: 0.7.8 (build 720) published on Oleh's word, with release notes: Accessibility asked once, a button that clears an old record (#314).
+Checked: the release ran `scripts/check.sh`, both notarizations were accepted. The DMG downloaded from GitHub matches the built one, it and the app inside pass `spctl` as «Notarized Developer ID», their tickets validate, both appcasts read back at 720.
+Left: not seen running: the line in the panel and the button. Whether an old record was the cause is still open: the app hadn't been restarted since Oleh's reset when this was written.
 
 ## 2026-11-08 — Accessibility asked once (branch `fix/accessibility-ask-once`)
 
