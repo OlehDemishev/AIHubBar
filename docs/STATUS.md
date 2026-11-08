@@ -16,7 +16,7 @@
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/specs/SPEC-windows.md §9, stage 2–3 leftovers)
 
 **Needs Oleh:**
-- free disk space, urgent: on 2026-11-08 it fell to 2.6 GB free with swap at 11.5 GB, so local builds and tests can't run; `~/.colima` holds 37 GB and its Docker disk needs a repair (`colima stop && colima start`)
+- free disk space: on 2026-11-08 it swung between 1.5 and 10 GB free with swap near 12 GB, too little to build safely; `~/.colima` holds 37 GB and its Docker disk needs a repair (`colima stop && colima start`)
 - System Settings → Accessibility: remove AI Hub Bar and add it again (the switch is on, the app sees no access), then press Esc in the open panel and scroll it with the trackpad
 - after 0.7.2: System Settings → Privacy & Security → Accessibility: allow AI Hub Bar again, then press ⌃⌥B and run a command in Terminal once
 - 0.7.0 live checks: press ⌃⌥B, right-click a session row; with a second account: Settings → Claude Code → «Другие аккаунты Claude»
@@ -35,8 +35,8 @@
 ## 2026-11-08 — Content stage 1: headless walkthrough and three fixes (branch `feat/content-walkthrough`)
 
 Done: walked the «Тексты» logic on a sample folder without touching the panel. Fixed: background commands on `.docx` failed (the agent has no shell to open one; now `.docx` and `.rtf` text goes in the prompt, up to 400,000 bytes); a command's result became the main file when the card names none; projects at the profile's last stage stayed overdue in «Проекты» and «Ближайшее», got reminders and could be the menu bar's nearest date. `--calendar` and `--folder-projects` take an optional template, so they follow the same rules. Findings in SPEC-content §7.
-Checked: installed 0.7.5 from the command line and «Корректура» with the app's exact arguments on `.md`, `.rtf`, `.docx`, which reproduced the bugs. New tests added. Locally only `swiftc -parse` and `scripts/strings-check.py`: `scripts/check.sh` not run, 2.6 GB free is too little to build. The unit tests run in the PR's Mac CI.
-Left: no local build, so the fixes have not been seen in the running app. Nothing in the panel was looked at yet (Oleh was in a game and the screen stays his): rows, chips, command buttons, «Сравнить», «Ближайшее», «Календарь», island drop. A result of a command on the whole project still counts as a main file candidate, on purpose. A person's own file named like a result, such as `сценарий-финал.md` next to the pattern `сценарий-{язык}.md`, needs «Главный файл» in the card.
+Checked: installed 0.7.5 from the command line and «Корректура» with the app's exact arguments on `.md`, `.rtf`, `.docx`, which reproduced the bugs. The same run with the `.docx` text in the prompt, built by a script, gave a real proofreading. New tests added. Mac tests and String catalog passed in the PR's CI. Locally only `swiftc -parse` and `scripts/strings-check.py`: `scripts/check.sh` not run, the disk was at 1.5–2.6 GB free.
+Left: no local build, so the fixes have not been seen in the running app. With the text in the prompt the agent still tries to open the `.docx` first and may mention the failure in its result; the fix is a wording change in all 13 languages. Nothing in the panel was looked at yet (Oleh was in a game and the screen stays his): rows, chips, command buttons, «Сравнить», «Ближайшее», «Календарь», island drop. A result of a command on the whole project still counts as a main file candidate, on purpose. A person's own file named like a result, such as `сценарий-финал.md` next to the pattern `сценарий-{язык}.md`, needs «Главный файл» in the card.
 
 ## 2026-11-08 — Air update and Telegram confirmed (branch `chore/status-air-telegram-checked`)
 
