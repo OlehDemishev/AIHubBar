@@ -158,6 +158,14 @@ struct HookScriptTests {
         #expect(try h.session("old-format").firstPrompt == "Новая задача")
     }
 
+    @Test func hookMessagesFollowTheAppsLanguage() {
+        // Tests run in Russian, where the wording is the key itself; the catalog check covers the 12 translations.
+        #expect(Session.localizedMessage("Нужно разрешение: Bash") == String(localized: "Нужно разрешение: \("Bash")"))
+        #expect(Session.localizedMessage("Нужно разрешение: инструмент") == String(localized: "Нужно разрешение: \(String(localized: "инструмент"))"))
+        #expect(Session.localizedMessage("Ответ прерван ошибкой API") == String(localized: "Ответ прерван ошибкой API"))
+        #expect(Session.localizedMessage("Claude needs your permission") == "Claude needs your permission", "the agent's own words stay")
+    }
+
     @Test func aPromptAboutTheTagKeepsItsWords() {
         #expect(Session.withoutSystemText("Что такое тег? <system-reminder>x</system-reminder> Объясни") == "Что такое тег?   Объясни")
         #expect(Session.withoutSystemText("  Обычный запрос\n") == "Обычный запрос")

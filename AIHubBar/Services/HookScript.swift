@@ -15,7 +15,7 @@ enum HookScript {
 
     static let source = #"""
     #!/usr/bin/python3
-    # AI Hub Bar hook, format 6. Installed by AI Hub Bar; records Claude Code (or, with --agent copilot / codex,
+    # AI Hub Bar hook, format 7. Installed by AI Hub Bar; records Claude Code (or, with --agent copilot / codex,
     # Copilot CLI / Codex CLI) session state in
     # ~/Library/Application Support/ClaudePult/sessions/<session_id>.json for the menu bar app.
     # Always exits 0 and prints nothing, except on PermissionRequest when the person answered «Разрешить» or
@@ -161,6 +161,7 @@ enum HookScript {
                 record.setdefault("first_prompt", prompt)
         elif event == "PermissionRequest":
             record["state"] = "waiting"
+            # This wording and «Ответ прерван…» are keys: the app shows them in its language (Session.localizedMessage).
             record["message"] = clip("Нужно разрешение: " + str(data.get("tool_name") or "инструмент"))
         elif event == "Notification":
             if data.get("notification_type") in WAITING_NOTIFICATIONS:
@@ -339,7 +340,7 @@ enum HookScript {
             if behavior == "allow":
                 decision = {"behavior": "allow"}
             elif behavior == "deny":
-                decision = {"behavior": "deny", "message": "Отклонено в AI Hub Bar"}
+                decision = {"behavior": "deny", "message": "Denied in AI Hub Bar"}
             else:
                 return
             sys.__stdout__.write(json.dumps({"hookSpecificOutput": {"hookEventName": "PermissionRequest", "decision": decision}}))

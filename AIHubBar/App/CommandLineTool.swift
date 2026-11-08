@@ -319,7 +319,7 @@ enum CommandLineTool {
             CLICommand(["--sessions"], needs: 0, usage: "--sessions  Claude Code sessions on this Mac") { arguments, index in
                 for item in SessionStore.loadItems(from: SessionFiles.sessionsDirectory, now: .now) {
                     let s = item.session
-                    print([s.id, item.state.rawValue, s.displayProject, s.worktreeName ?? "-", s.tty ?? "-", s.task ?? "-"].joined(separator: "\t"))
+                    print([s.id, item.state.rawValue, s.displayProject, s.worktreeName ?? "-", s.tty ?? "-", s.task ?? "-", s.message ?? "-"].joined(separator: "\t"))
                 }
                 return 0
             },
