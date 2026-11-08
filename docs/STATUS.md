@@ -19,7 +19,7 @@
 - free disk space: on 2026-11-08 it swung between 1.5 and 10 GB free with swap near 12 GB, too little to build safely; `~/.colima` holds 37 GB and its Docker disk needs a repair (`colima stop && colima start`)
 - press ⌃⌥B, Esc in the open panel, scroll it with the trackpad and run a command in Terminal once (Accessibility works since 2026-11-08)
 - 0.7.0 live checks: press ⌃⌥B, right-click a session row; with a second account: Settings → Claude Code → «Другие аккаунты Claude»
-- promotion: write the [bracketed] parts of the drafts in docs/LAUNCH.md and post them from your accounts
+- promotion: r/ClaudeAI: check the rules (post or megathread, docs/LAUNCH.md), write the [bracketed] part and post it with `site/demo.mp4` from your account
 - Telegram: delete `_daily-report/bot.py` and `install-bot.sh`
 - «Быстрый запрос»: Settings → Modules → «Быстрый запрос» on, then ⌃⌥P from Terminal or Xcode — send one task to the background and one to Codex
 - Settings → Codex → «Установить hook», then once in `codex` type `/hooks` and trust AI Hub Bar's hooks (Codex skips untrusted hooks); then check a Codex row in «Сессии» goes «ждёт» on an approval prompt
@@ -30,6 +30,12 @@
 - MacBook Air: update to 0.7.8 through Sparkle and check the island at the real notch
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-08 — The r/ClaudeAI text brought up to date (branch `docs/reddit-post-claudeai`)
+
+Done: docs/LAUNCH.md has the post for 0.7.8 and a shorter version for the «Built with Claude» project showcase megathread, and says it was made with Claude Code, that it is signed, and that the video's sessions are samples.
+Checked: the claims against the README. Reddit was closed to the agent's browser and search didn't find the rules' text, so whether a standalone post is allowed is not confirmed.
+Left: Oleh checks the rules, gives the reason he built it in his own words, and posts from his account. Nothing has been posted.
 
 ## 2026-11-08 — Demo in the README and on the site (branch `docs/demo-video`)
 
