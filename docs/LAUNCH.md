@@ -12,14 +12,13 @@ Developer ID and notarization are done, from 0.7.2 on, so nothing about signing 
 
 Blockers, most important first:
 
-1. **No demo.** The README and the site have pictures only. A 20–30 s screen recording of the rings, a session waiting and Allow from the notification is what people share.
-2. **The repository has no website set** in its About box.
+1. **No demo yet.** A draft exists: limits, a session waiting, Allow in the panel. The README and the site have pictures only. The notification's own button is in the Mac's language, so a shot of Allow on the banner takes a Mac in English.
 
 ## Order
 
 | Step | What | Needs |
 |---|---|---|
-| 1 | Website in the repository's About box, demo recording | Oleh's OK, a recording |
+| 1 | Demo recording (the website in the About box is done) | Oleh's OK on the draft |
 | 2 | r/ClaudeAI post: the audience that has the problem. Fix what comes back | Nothing else; read the subreddit's rules first |
 | 3 | Open-source and Claude Code lists (below) | First feedback handled |
 | 4 | r/macapps post | A notarized release |

@@ -11,16 +11,15 @@
 
 **Next:**
 - check on the Air: the island at the real notch
-- promotion (docs/LAUNCH.md): website in the About box and a demo recording in English (the agent can try a draft when Oleh frees the Mac; check a real notification and the panel in English then), then r/ClaudeAI, the lists, r/macapps, Show HN, Product Hunt, Homebrew
+- promotion (docs/LAUNCH.md): Oleh's verdict on the English demo draft, then r/ClaudeAI, the lists, r/macapps, Show HN, Product Hunt, Homebrew
 - content (docs/specs/SPEC-content.md, agreed): stage 2 «Версии», then batch tasks; better after the first feedback from people
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/specs/SPEC-windows.md §9, stage 2–3 leftovers)
 
 **Needs Oleh:**
-- promotion: OK for the website in the repository's About box (asked 2026-11-08, no answer yet)
 - free disk space: on 2026-11-08 it swung between 1.5 and 10 GB free with swap near 12 GB, too little to build safely; `~/.colima` holds 37 GB and its Docker disk needs a repair (`colima stop && colima start`)
-- Accessibility: old records reset by Oleh 2026-11-08; quit and open AI Hub Bar, allow Accessibility and Input Monitoring, then press ⌃⌥B, Esc in the open panel, scroll it with the trackpad and run a command in Terminal once
+- press ⌃⌥B, Esc in the open panel, scroll it with the trackpad and run a command in Terminal once (Accessibility works since 2026-11-08)
 - 0.7.0 live checks: press ⌃⌥B, right-click a session row; with a second account: Settings → Claude Code → «Другие аккаунты Claude»
-- promotion: record a 20–30 s demo or let the agent try a draft, write the [bracketed] parts of the drafts in docs/LAUNCH.md and post them from your accounts
+- promotion: look at the demo draft (a local file, not committed), write the [bracketed] parts of the drafts in docs/LAUNCH.md and post them from your accounts
 - Telegram: delete `_daily-report/bot.py` and `install-bot.sh`
 - «Быстрый запрос»: Settings → Modules → «Быстрый запрос» on, then ⌃⌥P from Terminal or Xcode — send one task to the background and one to Codex
 - Settings → Codex → «Установить hook», then once in `codex` type `/hooks` and trust AI Hub Bar's hooks (Codex skips untrusted hooks); then check a Codex row in «Сессии» goes «ждёт» on an approval prompt
@@ -31,6 +30,12 @@
 - MacBook Air: update to 0.7.8 through Sparkle and check the island at the real notch
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-08 — Accessibility confirmed, website set, demo draft (branch `chore/status-demo-draft`)
+
+Done: the repository's About box has the website. A 23 s English demo draft was recorded: limits, sessions, a permission request, Allow in the panel, the session finishing. It ran in a separate home folder (`open --env CFFIXED_USER_HOME=… --args -AppleLanguages '(en)' -dailyReportDirectory /nonexistent`) with fake sessions from the real hook script, so none of Oleh's projects or settings are in it. The strip of the menu bar around the app's item is masked: macOS's recording mark, the Russian date.
+Checked: after `tccutil reset` and a new grant the log says `Layout: watching keys`, and the next launch kept access with no prompt, so an old record was the cause. Seen live for the first time: the first-launch window with the map, in English; «Permission needed: Bash»; the demo's Allow reached the hook as `allow`; Allow from the notification, per the log at 19:20:34. Oleh's copy runs again in Russian with its settings untouched.
+Left: the map's entrance animation is still unseen. macOS draws the notification's «Параметры» button in the system's language, so the banner stays out of a Russian Mac's shot; showing it in English takes a Mac in English. In the draft a tooltip on the item is cut off at the edge for a moment, and the panel moves a little when the item widens, as it does for real.
 
 ## 2026-11-08 — Release 0.7.8 (branch `chore/status-release-0.7.8`)
 
