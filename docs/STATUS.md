@@ -1,17 +1,16 @@
 # Status
 
 <!-- summary:start -->
-**Stage:** Mac: 0.7.5 published 2026-11-07, signed and notarized (Developer ID; before that shorter first run, panel polish, usage history, finished sessions, ⌃⌥B, outages, several Claude accounts). Windows/Linux (`desktop/`, Tauri 2): postponed by Oleh 2026-11-02
+**Stage:** Mac: 0.7.6 published 2026-11-08, signed and notarized (Developer ID; a map of the panel on the first screen, «Тексты» fixes; before that shorter first run, panel polish, usage history, finished sessions, ⌃⌥B, outages, several Claude accounts). Windows/Linux (`desktop/`, Tauri 2): postponed by Oleh 2026-11-02
 **Updated:** 2026-11-08
 
 **Now:**
-- nothing in progress: content stage 1 is walked; what needs a person is in CHECKLIST
-- merged 2026-11-08, not released yet: #306 five fixes from the live walk of the panel, #304 a map of the panel on the assistant's first screen, #302 `.docx` commands, the main file choice, finished work no longer overdue
+- nothing in progress: 0.7.6 is out; content stage 1 is walked, what needs a person is in CHECKLIST
 - merged 2026-11-06: #262 donations («Поддержать проект» in Settings → General, site/support.html with Ko-fi, GitHub Sponsors and Buy Me a Coffee; the app button reaches people with the next release)
 - merged 2026-11-03: #251 menu bar ☕ follows the «Не спать» switch, #248 «Не спать» on/off in the menu bar, #241 Codex states, #240 quick command shortcuts, #238 «Быстрый запрос», #236 content spec, #242 «Telegram» stage 1, #244 menu at the bottom, #246 shared bot (Worker not deployed yet), #247 desktop CI off for Mac string changes, #249 the bot's menu set up by each person, #252 stage 2 (sessions, requests, limits), #254 stage 3 (tasks and runs), #255 stage 4 (settings in the bot), #256 Mini App
 
 **Next:**
-- release 0.7.6 with the content fixes and the new first screen, on Oleh's word, before the first post
+- a session's title can be raw `<system-reminder>` text (seen on a finished session of the Claude app, among the active rows, 4 days old): hide that wrapper in the title
 - check on the Air: the island at the real notch
 - promotion (docs/LAUNCH.md): website in the About box and a demo recording, then r/ClaudeAI, the lists, r/macapps, Show HN, Product Hunt, Homebrew
 - content (docs/specs/SPEC-content.md, agreed): stage 2 «Версии», then batch tasks; better after the first feedback from people
@@ -31,9 +30,15 @@
 - GitHub → repository Settings → Social preview: upload docs/images/social-preview.png (only by hand)
 - Settings → Copilot → «Установить hook»: then start `copilot` and check its row in «Сессии» (the agent wasn't allowed to install it into ~/.copilot itself)
 - look at the new Settings and say what to change next
-- MacBook Air: check the island at the real notch
+- MacBook Air: update to 0.7.6 through Sparkle and check the island at the real notch
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-08 — Release 0.7.6 (branch `chore/status-release-0.7.6`)
+
+Done: 0.7.6 (build 704) published on Oleh's word, with release notes: a map of the panel on the first screen, the «Тексты» fixes from #302 and #306.
+Checked: the release ran `scripts/check.sh`, both notarizations were accepted. The DMG downloaded from GitHub matches the built one, it and the app inside pass `spctl` as «Notarized Developer ID», their tickets validate, both appcasts read back at 704. On the release binary, on the sample folder: only «просрочено 2 дн» red in a row, a deadline leaving and coming back in «Ближайшее» at once with the stage, a run called «Корректура» in sessions and in its notification, hints with «…». Oleh's profiles, settings and «Не спать» restored and compared with a backup.
+Left: the real first-launch window and its animation, and the rows in CHECKLIST, need a person. The Mac mini now runs the release from ~/Applications. The app still has no Accessibility permission here (Needs Oleh).
 
 ## 2026-11-08 — Content stage 1: the panel walked live, five fixes (branch `fix/content-panel-findings`)
 
