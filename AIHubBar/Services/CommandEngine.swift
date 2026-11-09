@@ -38,18 +38,32 @@ final class CommandEngine {
         }
     }
 
-    private(set) var jobs: [Job] = []
+    /// Set from outside only by the tests.
+    var jobs: [Job] = []
     private(set) var spend: [SpendRecord] = []
     var comparison: Comparison?
 
     private let settings: AppSettings
     private let runs: RunStore
-    private static var spendURL: URL { SessionFiles.supportDirectory.appending(path: "api-spend.json") }
+    private let spendURL: URL
+    private let defaults: UserDefaults
 
-    init(settings: AppSettings, runs: RunStore) {
+    // What reaches outside this Mac or the person's screen; the tests answer here.
+    @ObservationIgnored var complete: @MainActor (APIProvider, AIServicesConfig, String) async throws -> APIClient.Reply = {
+        try await APIClient.complete($0, config: $1, prompt: $2)
+    }
+    @ObservationIgnored var runInTerminal: @MainActor (String) async throws -> Void = { try await TerminalLauncher.run($0) }
+    @ObservationIgnored var post: @MainActor (_ id: String, _ title: String, _ body: String, _ target: NotificationTarget) -> Void = {
+        Notifier.post(id: $0, title: $1, body: $2, target: $3)
+    }
+
+    init(settings: AppSettings, runs: RunStore,
+         spendURL: URL = SessionFiles.supportDirectory.appending(path: "api-spend.json"), defaults: UserDefaults = .standard) {
         self.settings = settings
         self.runs = runs
-        spend = Self.loadSpend()
+        self.spendURL = spendURL
+        self.defaults = defaults
+        spend = Self.loadSpend(from: spendURL)
     }
 
     func jobs(for projectPath: String) -> [Job] {
@@ -108,13 +122,12 @@ final class CommandEngine {
             let id = job.id
             Task {
                 do {
-                    let reply = try await APIClient.complete(provider, config: config, prompt: prompt)
+                    let reply = try await complete(provider, config, prompt)
                     try reply.text.write(toFile: resultPath, atomically: true, encoding: .utf8)
                     record(SpendRecord(date: .now, provider: provider, model: config.model(provider) ?? "?",
                                        inputTokens: reply.inputTokens, outputTokens: reply.outputTokens))
                     update(id) { $0.state = .done }
-                    Notifier.post(id: "command-\(id)", title: String(localized: "Готово: \(template.title)"), body: "\(project.name) · \(name)",
-                                  target: .file(path: resultPath))
+                    post("command-\(id)", String(localized: "Готово: \(template.title)"), "\(project.name) · \(name)", .file(path: resultPath))
                 } catch {
                     update(id) { $0.state = .failed(error.localizedDescription) }
                     AppLog.error("Command «\(template.title)» via \(provider.rawValue) failed: \(error.localizedDescription)")
@@ -175,7 +188,7 @@ final class CommandEngine {
         let id = job.id
         Task {
             do {
-                try await TerminalLauncher.run(commandLine)
+                try await runInTerminal(commandLine)
             } catch {
                 update(id) { $0.state = .failed(error.localizedDescription) }
             }
@@ -198,7 +211,7 @@ final class CommandEngine {
         spend.append(record)
         let yearAgo = Date.now.addingTimeInterval(-400 * 86_400)
         spend.removeAll { $0.date < yearAgo }
-        Self.saveSpend(spend)
+        saveSpend()
         warnAboutBudget()
     }
 
@@ -208,26 +221,26 @@ final class CommandEngine {
         let month = Date.now.formatted(.iso8601.year().month())
         for level in [100, 80] where cost >= budget * Double(level) / 100 {
             let key = "spendWarned-\(month)-\(level)"
-            guard !UserDefaults.standard.bool(forKey: key) else { return }
-            UserDefaults.standard.set(true, forKey: key)
-            Notifier.post(id: key, title: String(localized: "Расход по API: \(level) % бюджета"),
-                          body: String(format: String(localized: "$%.2f из $%.2f в этом месяце"), cost, budget), target: .window(id: "settings"))
+            guard !defaults.bool(forKey: key) else { return }
+            defaults.set(true, forKey: key)
+            post(key, String(localized: "Расход по API: \(level) % бюджета"),
+                 String(format: String(localized: "$%.2f из $%.2f в этом месяце"), cost, budget), .window(id: "settings"))
             return
         }
     }
 
-    private static func loadSpend() -> [SpendRecord] {
+    private static func loadSpend(from url: URL) -> [SpendRecord] {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
-        return (try? Data(contentsOf: spendURL)).flatMap { try? decoder.decode([SpendRecord].self, from: $0) } ?? []
+        return (try? Data(contentsOf: url)).flatMap { try? decoder.decode([SpendRecord].self, from: $0) } ?? []
     }
 
-    private static func saveSpend(_ records: [SpendRecord]) {
+    private func saveSpend() {
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .iso8601
         AppLog.attempt("Command spend not saved") {
-            try FileManager.default.createDirectory(at: SessionFiles.supportDirectory, withIntermediateDirectories: true)
-            try encoder.encode(records).write(to: spendURL, options: .atomic)
+            try FileManager.default.createDirectory(at: spendURL.deletingLastPathComponent(), withIntermediateDirectories: true)
+            try encoder.encode(spend).write(to: spendURL, options: .atomic)
         }
     }
 }
