@@ -63,13 +63,16 @@ struct NotchIslandView: View {
                         .transition(.opacity)
                 } else if earsShown {
                     HStack(spacing: 0) {
+                        // Centred in the black, past the outline's flare on the outer side.
                         if ears.left {
                             NotchEarView(ear: settings.notch.leftEar)
+                                .padding(.leading, NotchShape.flare)
                                 .frame(width: NotchGeometry.earWidth)
                         }
                         Color.clear.frame(width: geometry.notch.width)
                         if ears.right {
                             NotchEarView(ear: settings.notch.rightEar)
+                                .padding(.trailing, NotchShape.flare)
                                 .frame(width: NotchGeometry.earWidth)
                         }
                     }
