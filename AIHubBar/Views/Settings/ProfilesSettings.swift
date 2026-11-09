@@ -250,7 +250,7 @@ private struct ProfileEditor: View {
             if mode.source.isFolders {
                 Section {
                     ForEach($mode.commands) { $command in
-                        CommandEditor(command: $command) { mode.commands.removeAll { $0.id == command.id } }
+                        CommandEditor(command: $command) { let id = command.id; mode.commands.removeAll { $0.id == id } }
                     }
                     Button("Добавить команду") {
                         mode.commands.append(CommandTemplate(title: String(localized: "Новая команда"), task: "", output: String(localized: "результат-<время>.md")))
@@ -343,7 +343,7 @@ struct ImportConfirmation: View {
         if let pending = modes.pendingImport {
             VStack(alignment: .leading, spacing: 6) {
                 Text("Импорт «\(pending.url.lastPathComponent)»").font(.headline)
-                Text(summary(pending.bundle)).font(.callout).foregroundStyle(.secondary)
+                Text(Self.summary(pending.bundle)).font(.callout).foregroundStyle(.secondary)
                 HStack {
                     if pending.bundle.format == SettingsBundle.settingsFormat {
                         Button("Заменить все настройки") { modes.importBundle(pending.bundle, style: .replace) }
@@ -361,7 +361,7 @@ struct ImportConfirmation: View {
         }
     }
 
-    private func summary(_ bundle: SettingsBundle) -> String {
+    static func summary(_ bundle: SettingsBundle) -> String {
         let names = bundle.modes.map(\.name).joined(separator: ", ")
         let what = bundle.format == SettingsBundle.settingsFormat ? String(localized: "Все настройки и профили") : String(localized: "Профиль")
         let missing = bundle.modes.flatMap(ProfileStore.missingFolders)

@@ -48,11 +48,7 @@ struct RunQuickCommandIntent: AppIntent {
     @MainActor
     func perform() async throws -> some IntentResult & ProvidesDialog {
         let commands = IntentBridge.settings?.quickCommands ?? []
-        // Part of a name is enough only when it means one command: «clean» must not pick the first of two.
-        let partial = commands.filter { $0.title.localizedCaseInsensitiveContains(name) }
-        guard let command = commands.first(where: { $0.title.localizedCaseInsensitiveCompare(name) == .orderedSame })
-            ?? (partial.count == 1 ? partial.first : nil),
-              let tools = IntentBridge.quickTools else {
+        guard let command = Self.command(named: name, in: commands), let tools = IntentBridge.quickTools else {
             return .result(dialog: IntentDialog(stringLiteral: String(localized: "Нет быстрой команды «\(name)»")))
         }
         // A command marked «Спрашивать перед запуском» asks here too, like from a hot key.
@@ -60,6 +56,16 @@ struct RunQuickCommandIntent: AppIntent {
             return .result(dialog: IntentDialog(stringLiteral: String(localized: "Отменено")))
         }
         return .result(dialog: IntentDialog(stringLiteral: String(localized: "Запущено: \(command.title)")))
+    }
+}
+
+extension RunQuickCommandIntent {
+    /// The command with this title, any case. Part of a name is enough only when it means one command: «clean»
+    /// must not pick the first of two.
+    static func command(named name: String, in commands: [QuickCommand]) -> QuickCommand? {
+        if let exact = commands.first(where: { $0.title.localizedCaseInsensitiveCompare(name) == .orderedSame }) { return exact }
+        let partial = commands.filter { $0.title.localizedCaseInsensitiveContains(name) }
+        return partial.count == 1 ? partial.first : nil
     }
 }
 

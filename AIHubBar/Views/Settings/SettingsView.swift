@@ -70,7 +70,10 @@ struct SettingsView: View {
                 DispatchQueue.main.async { withAnimation { sidebar.scrollTo(pane) } }
             }
             }
-            .navigationSplitViewColumnWidth(230)
+            // The column width alone is not kept on macOS 27: the sidebar came up 144 pt wide and cut the names to
+            // «Внешний…», «Строка ме…». The content's own minimum holds it.
+            .frame(minWidth: 230)
+            .navigationSplitViewColumnWidth(min: 230, ideal: 230, max: 320)
             .toolbar(removing: .sidebarToggle)
         } detail: {
             VStack(alignment: .leading, spacing: 0) {

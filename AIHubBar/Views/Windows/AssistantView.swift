@@ -340,7 +340,7 @@ struct AssistantView: View {
                 .fixedSize(horizontal: false, vertical: true)
             Form {
                 ForEach(draft.mode.commands) { $command in
-                    CommandEditor(command: $command) { draft.wrappedValue.mode.commands.removeAll { $0.id == command.id } }
+                    CommandEditor(command: $command) { let id = command.id; draft.wrappedValue.mode.commands.removeAll { $0.id == id } }
                 }
                 Button("Добавить команду") {
                     draft.wrappedValue.mode.commands.append(CommandTemplate(title: String(localized: "Новая команда"), task: "", output: String(localized: "результат-<время>.md")))

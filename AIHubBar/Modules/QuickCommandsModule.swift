@@ -58,7 +58,7 @@ struct QuickCommandsSection: View {
                         Button { move(command.id, by: 1) } label: { Label("Ниже", systemImage: "chevron.down").labelStyle(.iconOnly) }
                             .disabled(settings.quickCommands.last?.id == command.id)
                             .help("Ниже")
-                        ConfirmedButton(title: "Удалить команду", message: command.title) { settings.quickCommands.removeAll { $0.id == command.id } } label: { Label("Удалить команду", systemImage: "trash").labelStyle(.iconOnly) }
+                        ConfirmedButton(title: "Удалить команду", message: command.title) { let id = command.id; settings.quickCommands.removeAll { $0.id == id } } label: { Label("Удалить команду", systemImage: "trash").labelStyle(.iconOnly) }
                             .help("Удалить команду")
                     }
                     .buttonStyle(.borderless)

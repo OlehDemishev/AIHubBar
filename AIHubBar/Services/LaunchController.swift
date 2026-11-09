@@ -303,8 +303,7 @@ final class LaunchController {
         postponeHeld(now: now)
         // One run per project a tick: `launch` drops a second one for a project it is already starting, and that
         // run would be gone from the queue with no word. The others stay due and start on the next ticks.
-        var taken = working
-        let due = queued.filter { $0.launchAt <= now && taken.insert($0.target.path).inserted }
+        let due = Self.dueNow(queued, busy: working, now: now)
         guard !due.isEmpty else { return }
         if due.contains(where: \.night), UserDefaults.standard.double(forKey: "nightBatchStart") == 0 {
             UserDefaults.standard.set(now.timeIntervalSince1970, forKey: "nightBatchStart")
@@ -316,6 +315,12 @@ final class LaunchController {
             AppLog.info("Starting queued «\(item.command.title)» for \(item.target.name)")
             launch(item.command, target: item.target, mode: .background, allowBusyFolder: false, skipLimitGuard: true)
         }
+    }
+
+    /// What starts on this tick: the due runs, one per project, none for a project that is being started.
+    nonisolated static func dueNow(_ queued: [QueuedLaunch], busy: Set<String>, now: Date) -> [QueuedLaunch] {
+        var taken = busy
+        return queued.filter { $0.launchAt <= now && taken.insert($0.target.path).inserted }
     }
 
     func dismissMessage(for project: Project) {

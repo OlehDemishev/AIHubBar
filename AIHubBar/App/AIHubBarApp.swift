@@ -10,6 +10,7 @@ struct AIHubBarApp: App {
         // an error, not end the app with SIGPIPE and no crash report.
         signal(SIGPIPE, SIG_IGN)
         LanguageFallback.apply()
+        RightToLeftLayout.apply()
         _ = InterfaceLanguage.running
         if let code = CommandLineTool.run(CommandLine.arguments) {
             AppLog.flush()
