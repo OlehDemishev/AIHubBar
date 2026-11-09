@@ -6,6 +6,7 @@
 
 **Now:**
 - nothing in progress: 0.7.8 is out; content stage 1 is walked, what needs a person is in CHECKLIST
+- merged 2026-11-09: #327 Debug builds have their own bundle id, so tests no longer move the login item record
 - merged 2026-11-06: #262 donations («Поддержать проект» in Settings → General, site/support.html with Ko-fi, GitHub Sponsors and Buy Me a Coffee; the app button reaches people with the next release)
 - merged 2026-11-03: #251 menu bar ☕ follows the «Не спать» switch, #248 «Не спать» on/off in the menu bar, #241 Codex states, #240 quick command shortcuts, #238 «Быстрый запрос», #236 content spec, #242 «Telegram» stage 1, #244 menu at the bottom, #246 shared bot (Worker not deployed yet), #247 desktop CI off for Mac string changes, #249 the bot's menu set up by each person, #252 stage 2 (sessions, requests, limits), #254 stage 3 (tasks and runs), #255 stage 4 (settings in the bot), #256 Mini App
 
@@ -36,17 +37,29 @@
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
 
+## 2026-11-09 — Conflict with main resolved (branch `fix/desktop-icons-keep-selection`)
+
+Done: `origin/main` (#327, #328) merged into this branch. The only conflict was in this journal, where both sides added entries in the same place; all entries are kept, and a missing blank line before the «Значки» entry is added. The branch now has the Debug bundle id fix, so its test runs no longer move the login item record.
+Checked: no conflict markers left in the tree; no code was edited by hand. `scripts/check.sh` was not run locally for this merge, Mac tests and the string catalog are left to CI on the merge commit.
+Left: the same as the entries below: the note is unseen in the real panel (Needs Oleh).
+
 ## 2026-11-09 — The toggle's tile compiles on CI's Xcode (branch `fix/desktop-icons-keep-selection`)
 
 Done: CI's Mac tests failed on Xcode 26.6 with `QuickToolsView.swift:106: unable to type-check this expression in reasonable time`, on the toggle's `Button` that this branch's hover hint had grown; Xcode 27.2 here compiled it. The tile moved to `QuickToggleTile` and the hint to `hint(for:)`; what they show is the same. `origin/main` merged (#326): the STATUS header keeps both sides' items.
 Checked: `scripts/check.sh` green on the merged tree (strings, desktop texts, relay tests, Mac tests with warnings as errors) on Xcode 27.2; the CI result is on the PR.
 Left: the panel wasn't opened, the view split is checked by compiling and tests only. The note itself is still unseen in the real panel (Needs Oleh). The local `xcodebuild test` moved the login item record to this worktree's `build/DerivedData` again (`sfltool dumpbtm`); a launch of the installed app puts it back.
+
 ## 2026-11-09 — The «Значки» toggle says what it takes away (branch `fix/desktop-icons-keep-selection`)
 
 Done: Oleh's desktop showed no files, no right-click menu and no drag selection. Cause: `CreateDesktop = 0`, which stops Finder drawing the desktop at all; the only writer found is this toggle (QuickTools.swift), though nothing proves it was pressed. While the toggle is off, the panel now keeps a note under the tiles saying so and that the files stay in the Desktop folder; the same text is in the tile's hover hint and the module's Settings footer. The toggle still uses `CreateDesktop`.
 Checked: `scripts/check.sh` green, 531 tests, 1 new; 12 translations in the catalog. Live on the Mac mini: `CreateDesktop` was 0; after Oleh ran the restore command it is 1, Finder restarted at 13:59:05 and its full-screen desktop window is back on screen.
 Left: the note has not been seen in the real panel, that needs the icons off on a real Mac. `StandardHideDesktopIcons` is not tested: the one answer («рамки нет») came with the desktop still off, so it says nothing about that key, and web sources did not settle it. `scripts/strings-sync.sh` rewrote the whole catalog (46k changed lines) and dropped 3 keys (`%lld%%`, `CI: %@`, `Hooks`), so the catalog was restored and only the new key added; the script itself is unchanged.
 
+## 2026-11-09 — Debug builds no longer move the login item record (branch `fix/debug-bundle-id`)
+
+Done: Debug builds have their own ids, `com.demishev.claudepult.debug` and `.debug.widget`; Release keeps the real ones. The Debug build also gives up `aihubbar://` (it has `aihubbar-debug://`) and doesn't open `*.claudepult` files (`LSHandlerRank` None), because with only a new id macOS sent the widget link to the Debug build. Explained in `docs/RELEASE.md`. Cause found: reading `SMAppService.mainApp.status` in a same-id build moves the record, which `LoginItemController.init` does in every launch and in the test host. Building and `--help-export` don't move it (the earlier note blamed `export-help.sh`; it doesn't).
+Checked: on unmodified main, the record moved to the Debug build after `--login-item status` and back after the same command from the installed app; a test run in another worktree moved it there. With the fix: `scripts/check.sh` and `scripts/export-help.sh` green with no change in `site/help`; the Debug build reports `login-item: disabled`; `aihubbar://` and `.claudepult` resolve to `~/Applications/AI Hub Bar.app` after check and after a Release build; a Release build's plist still has the real ids, `aihubbar` and `Owner`. One `sfltool dumpbtm` after all of that (two `check.sh` runs, the export, the Release build): the record is on `~/Applications/AI Hub Bar.app`, generation 483, the same as before the first run, and there is no `.debug` record. The installed app stayed on one pid through all of it. Keychain code uses no access groups or the bundle id, and hooks don't use the id either. Debug settings now go to their own domain, so tests stopped writing to the real one; `defaults write com.demishev.claudepult …` still drives installed builds, a Debug build needs `.debug`.
+Left: `pluginkit` lists the Debug widget as a separate extension while a Debug build exists, so the widget gallery may show a second AI Hub Bar; the gallery itself wasn't looked at. Branches without this fix still move the record when their tests run, including #325. `sfltool dumpbtm` asks for an admin password on every call, so it isn't in any script.
 
 ## 2026-11-09 — «Раскладка»: directions and a dictionary of exceptions (branch `feat/layout-directions-exceptions`)
 
