@@ -9,7 +9,9 @@ on:
       - "AIHubBarTests/**"
       - "AIHubBarWidget/**"
       - "project.yml"
+      - "scripts/check.sh"
       - "scripts/strings-check.py"
+      - "desktop/scripts/strings.py"
       - ".github/workflows/mac.yml"
   push:
     branches: [main]
@@ -18,7 +20,9 @@ on:
       - "AIHubBarTests/**"
       - "AIHubBarWidget/**"
       - "project.yml"
+      - "scripts/check.sh"
       - "scripts/strings-check.py"
+      - "desktop/scripts/strings.py"
       - ".github/workflows/mac.yml"
   workflow_dispatch:
 
@@ -39,25 +43,18 @@ jobs:
 
   test:
     name: Mac tests
-    # The app uses macOS 26 APIs behind availability checks, so it needs the macOS 26 SDK.
-    runs-on: macos-26
+    # The same Xcode releases are built with (docs/RELEASE.md), so what passes here also compiles there. GitHub calls this
+    # image a preview: it can queue longer.
+    runs-on: xcode-27
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
       - name: Xcode
-        # The newest Xcode on the machine (releases are built with Xcode 27; GitHub's images had up to 26.6 in Nov 2026).
         run: |
-          ls -d /Applications/Xcode*.app
-          XCODE="$(ls -d /Applications/Xcode_*.app | sort -V | tail -1)"
-          sudo xcode-select -s "$XCODE"
+          sudo xcode-select -s /Applications/Xcode_27.2.app
           xcodebuild -version
       - name: XcodeGen
         run: brew install xcodegen
-      - name: Generate the project
-        run: xcodegen generate
-      - name: Test
-        run: |
-          # Tests expect the app's source language (Russian) and a Russian region, as on Oleh's Mac.
-          xcodebuild test -project AIHubBar.xcodeproj -scheme AIHubBar \
-            -destination 'platform=macOS' -derivedDataPath build/DerivedData \
-            -testLanguage ru -testRegion RU
+      - name: Check
+        # Everything a push needs, the same as locally: strings, the relay's tests, the Mac tests.
+        run: scripts/check.sh

@@ -401,3 +401,7 @@ Oleh asked to rename everything from ClaudeBar to ClaudePult. Done in one go: Gi
 **Tests** use Swift Testing (`import Testing`) in a hosted unit-test bundle.
 
 **Build script** builds with `-destination 'platform=macOS,arch=arm64'` (Apple Silicon only, avoids the "multiple matching destinations" warning) into `build/DerivedData` inside the project, so builds are reproducible and covered by the auto-cleanup of `build/`.
+
+## 2026-11-09 — CI on the Xcode releases are built with
+
+**Mac CI moved to GitHub's `xcode-27` image and runs `scripts/check.sh`.** CI on Xcode 26.6 failed twice on expressions Xcode 27.2 compiled, and warnings could only be errors locally. A slow-expression check locally was tried first and dropped: with `-warn-long-expression-type-checking` the old code that failed CI took under 100 ms on 27.2, and with `-warn-long-function-bodies` it took 568 ms while `FlowLayout`, which 26.6 compiles fine, took 983 ms. Timings on the newer compiler don't predict the older one's failures, and they move with the machine's load. There is no reason left to keep compiling with an older Xcode: nothing ships from it. The image is a GitHub preview, so it can queue longer. If it becomes unreliable, go back to `macos-26` and drop warnings as errors there.
