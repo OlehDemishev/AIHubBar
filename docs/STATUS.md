@@ -5,7 +5,7 @@
 **Updated:** 2026-11-09
 
 **Now:**
-- nothing in progress: 0.7.8 is out; content stage 1 is walked, what needs a person is in CHECKLIST
+- tech debt pass agreed with Oleh on 2026-11-09, ending in 0.8.0: Sparkle, lock screen, stale strings, slow expressions check, tests for three controllers, Telegram files split; each its own PR
 - merged 2026-11-09: #325 the «Значки» toggle warns that it turns off the whole desktop, #327 Debug builds have their own bundle id, so tests no longer move the login item record
 - merged 2026-11-06: #262 donations («Поддержать проект» in Settings → General, site/support.html with Ko-fi, GitHub Sponsors and Buy Me a Coffee; the app button reaches people with the next release)
 - merged 2026-11-03: #251 menu bar ☕ follows the «Не спать» switch, #248 «Не спать» on/off in the menu bar, #241 Codex states, #240 quick command shortcuts, #238 «Быстрый запрос», #236 content spec, #242 «Telegram» stage 1, #244 menu at the bottom, #246 shared bot (Worker not deployed yet), #247 desktop CI off for Mac string changes, #249 the bot's menu set up by each person, #252 stage 2 (sessions, requests, limits), #254 stage 3 (tasks and runs), #255 stage 4 (settings in the bot), #256 Mini App
@@ -36,6 +36,12 @@
 - MacBook Air: update to 0.7.8 through Sparkle and check the island at the real notch
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-09 — Sparkle 2.10.1 (branch `chore/sparkle-2.10.1`)
+
+Done: Sparkle goes from 2.6.4 to 2.10.1, which brings the security fixes of 2.7.2, 2.9.2, 2.9.5 and 2.9.6 (its changelog). No code change was needed. `docs/RELEASE.md` now says a new Sparkle goes out as a beta first.
+Checked: `scripts/check.sh` green with warnings as errors (after removing `build/DerivedData`: the old module cache breaks a build across this version change). A Release build signed by `sign-app.sh`: `codesign --verify --deep --strict` passes, Installer.xpc, Downloader.xpc, Autoupdate and Updater.app carry Developer ID and the hardened runtime, and the framework reports 2.10.1. Our appcast has no deltas and signs the DMG with our own script, so Sparkle's delta and tool changes don't touch us.
+Left: not notarized yet and the update itself isn't tried: the changelog says nothing about going from 2.6.4 to 2.10.1, so 0.8.0-beta.1 tests that on a real 0.7.8 before 0.8.0 reaches everyone.
 
 ## 2026-11-09 — Conflict with main resolved (branch `fix/desktop-icons-keep-selection`)
 

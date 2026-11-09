@@ -41,6 +41,10 @@ scripts/release.sh 0.2.0 --publish  # the same, then the GitHub release v0.2.0 w
 - **How copies find updates:** they read `https://github.com/OlehDemishev/AIHubBar/releases/latest/download/appcast.xml`, which is the newest release's appcast. Nothing else has to be uploaded or committed.
 - **Public repository needed:** people can only download the files once the repository is public.
 
+## A new version of Sparkle
+
+The copies on people's Macs run the old Sparkle's installer, and a broken update can't be fixed by another update. So a new Sparkle goes out as a beta first (below): update a real copy of the latest release through it and see the app restart with its permissions. After changing the version remove `build/DerivedData`, or the old module cache fails the build.
+
 ## Beta builds
 
 Beta (canary) builds go to beta testers first: people who switched on Settings → General → **Beta builds** («Бета-версии»).
