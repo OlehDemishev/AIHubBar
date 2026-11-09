@@ -35,6 +35,12 @@
 - MacBook Air: update to 0.7.8 through Sparkle and check the island at the real notch
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-09 — The toggle's tile compiles on CI's Xcode (branch `fix/desktop-icons-keep-selection`)
+
+Done: CI's Mac tests failed on Xcode 26.6 with `QuickToolsView.swift:106: unable to type-check this expression in reasonable time`, on the toggle's `Button` that this branch's hover hint had grown; Xcode 27.2 here compiled it. The tile moved to `QuickToggleTile` and the hint to `hint(for:)`; what they show is the same. `origin/main` merged (#326): the STATUS header keeps both sides' items.
+Checked: `scripts/check.sh` green on the merged tree (strings, desktop texts, relay tests, Mac tests with warnings as errors) on Xcode 27.2; the CI result is on the PR.
+Left: the panel wasn't opened, the view split is checked by compiling and tests only. The note itself is still unseen in the real panel (Needs Oleh). The local `xcodebuild test` moved the login item record to this worktree's `build/DerivedData` again (`sfltool dumpbtm`); a launch of the installed app puts it back.
 ## 2026-11-09 — The «Значки» toggle says what it takes away (branch `fix/desktop-icons-keep-selection`)
 
 Done: Oleh's desktop showed no files, no right-click menu and no drag selection. Cause: `CreateDesktop = 0`, which stops Finder drawing the desktop at all; the only writer found is this toggle (QuickTools.swift), though nothing proves it was pressed. While the toggle is off, the panel now keeps a note under the tiles saying so and that the files stay in the Desktop folder; the same text is in the tile's hover hint and the module's Settings footer. The toggle still uses `CreateDesktop`.
