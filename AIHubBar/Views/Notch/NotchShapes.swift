@@ -19,8 +19,11 @@ struct IslandShape: Shape {
 
 /// The notch's own outline: flat top that flares into the menu bar, rounded bottom corners.
 struct NotchShape: Shape {
+    /// How far the top flare reaches in on each side: the black starts this far from the shape's edge.
+    static let flare: CGFloat = 6
+
     var bottomRadius: CGFloat
-    var topRadius: CGFloat = 6
+    var topRadius: CGFloat = flare
 
     var animatableData: CGFloat {
         get { bottomRadius }

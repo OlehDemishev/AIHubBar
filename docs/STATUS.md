@@ -7,6 +7,7 @@
 **Now:**
 - tech debt pass done 2026-11-09, all merged: #330 Sparkle 2.10.1, #331 the lock screen tile checks it locked, #332 unused strings removed and the catalog compared with the code, #333 Mac CI on Xcode 27.2 running `check.sh`, #334 and #335 tests for the Telegram controller, the notch island and the command engine (77 new), #336 Telegram files split
 - 0.8.0 (build 773) published 2026-11-09 after Oleh's beta checks of 0.8.0-beta.1 passed
+- the island's ears are 50 pt wide instead of 38, so the rings stay inside the black (branch `fix/notch-background-width`); reaches people with the next release
 - merged 2026-11-09: #325 the «Значки» toggle warns that it turns off the whole desktop, #327 Debug builds have their own bundle id, so tests no longer move the login item record
 - merged 2026-11-06: #262 donations («Поддержать проект» in Settings → General, site/support.html with Ko-fi, GitHub Sponsors and Buy Me a Coffee; the app button reaches people with the next release)
 - merged 2026-11-03: #251 menu bar ☕ follows the «Не спать» switch, #248 «Не спать» on/off in the menu bar, #241 Codex states, #240 quick command shortcuts, #238 «Быстрый запрос», #236 content spec, #242 «Telegram» stage 1, #244 menu at the bottom, #246 shared bot (Worker not deployed yet), #247 desktop CI off for Mac string changes, #249 the bot's menu set up by each person, #252 stage 2 (sessions, requests, limits), #254 stage 3 (tasks and runs), #255 stage 4 (settings in the bot), #256 Mini App
@@ -33,9 +34,15 @@
 - GitHub → repository Settings → Social preview: upload docs/images/social-preview.png (only by hand)
 - Settings → Copilot → «Установить hook»: then start `copilot` and check its row in «Сессии» (the agent wasn't allowed to install it into ~/.copilot itself)
 - look at the new Settings and say what to change next
-- MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch
+- MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; after the next release check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+## 2026-11-09 — The island's rings fit in the black (branch `fix/notch-background-width`)
+
+Done: Oleh saw the ears' rings stick out past the island's black. Each ear had 38 pt, of which the outline's top flare takes 6, while a ring with «100» needs about 37 pt and sat centred in the whole 38. `NotchGeometry.earWidth` is 50 now, and each ear's content is padded by `NotchShape.flare` on its outer side, so it is centred in the black.
+Checked: `scripts/check.sh` green. A render of the outline and the ear rings (a copy of `NotchShape` and the ring at 4×, 42/100/7 %) shows the rings outside the black at 38 and inside, with room, at 50; not seen on a real notch, since the Mac mini has none.
+Left: Oleh checks it on the Air after the next release.
+
 ## 2026-11-09 — 0.8.0 published (branch `chore/status-release-0.8.0`)
 
 Done: Oleh checked 0.8.0-beta.1 (the Sparkle 2.6.4 → 2.10.1 update from 0.7.8 restarted with its permissions, the «Замок» tile, a permission request answered from the bot): all work. `scripts/release.sh 0.8.0 --publish` ran in Oleh's Terminal tab: build 773, the app and the disk image notarized and stapled.

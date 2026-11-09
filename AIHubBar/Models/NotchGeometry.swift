@@ -14,8 +14,9 @@ struct NotchGeometry: Equatable, Sendable {
     /// The pill's width while it shows nothing wider.
     static let pillWidth: CGFloat = 200
 
-    /// Room on each side of the notch for an «ear» (SPEC-notch §3.1).
-    static let earWidth: CGFloat = 38
+    /// Room on each side of the notch for an «ear» (SPEC-notch §3.1). The outline's flare takes `NotchShape.flare` of it,
+    /// and a ring with «100» needs about 37 pt of the rest; at 38 the rings stuck out past the black.
+    static let earWidth: CGFloat = 50
     /// The card under the notch when the island is open (SPEC-notch §3.3).
     static let cardWidth: CGFloat = 380
     static let cardHeight: CGFloat = 250
