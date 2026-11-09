@@ -38,6 +38,12 @@
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
 
+## 2026-11-09 — String catalog cleaned and compared with the code (branch `chore/catalog-cleanup`)
+
+Done: the catalog hadn't been synced for a while, so it showed 58 stale keys where a real sync gives 112. Removed 104 unused keys (101 marked stale, 3 untranslated ones the sync dropped itself); the 11 stale keys `desktop/` still uses stay. The file now keeps `xcstringstool`'s order, so the next sync gives a small diff. `scripts/check.sh` syncs a copy with what was just compiled, so an untranslated new text or a key nobody uses fails it, and `strings-check.py` fails on a stale key `desktop/` doesn't use either. Note that the copy must be named `Localizable.xcstrings`: sync matches by table name, any other name marks everything stale.
+Checked: `scripts/check.sh` green. A semantic comparison of the sync's output with main: no text changed. None of the 101 keys occurs as an exact literal in the Mac's Swift code, and the code has no dynamic `LocalizationValue` or `localizedString` lookup of app texts. The guard: a copy with a made-up key and a missing translation fails. A second sync gives a byte-identical file.
+Left: the comparison runs in `scripts/check.sh` (also before every release), not in CI.
+
 ## 2026-11-09 — The lock screen tile checks that it locked (branch `fix/lock-screen-verified`)
 
 Done: the tile relied on a private call and fell back only if the call was gone; a call still there but doing nothing would have passed for success. `ScreenLock` now tries the private call, then ⌃⌘Q by key code (independent of the keyboard layout), then the display's sleep, reading after each step whether the screen did lock (`CGSessionCopyCurrentDictionary`), and logs which step worked. If none did, the tile says «Не удалось заблокировать экран» (13 languages). A test fails on the first macOS that drops the private call; it only looks the call up.
