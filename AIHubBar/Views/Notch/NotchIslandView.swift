@@ -77,6 +77,9 @@ struct NotchIslandView: View {
                         }
                     }
                     .frame(height: geometry.notch.height)
+                    // «Left» and «right» are sides of the screen here, as the offset and the black shape are: in a
+                    // right-to-left language the row must not swap the ears.
+                    .environment(\.layoutDirection, .leftToRight)
                     .offset(x: restOffset)
                     .transition(.opacity)
                 }

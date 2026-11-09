@@ -45,13 +45,13 @@ struct CalendarWindow: View {
     private var toolbar: some View {
         HStack(spacing: 10) {
             Button { shift(-1) } label: {
-                Label(scope == .month ? String(localized: "Предыдущий месяц") : String(localized: "Предыдущая неделя"), systemImage: "chevron.left")
+                Label(scope == .month ? String(localized: "Предыдущий месяц") : String(localized: "Предыдущая неделя"), systemImage: "chevron.backward")
                     .labelStyle(.iconOnly)
             }
             .help(scope == .month ? String(localized: "Предыдущий месяц") : String(localized: "Предыдущая неделя"))
             Button("Сегодня") { anchor = .now }
             Button { shift(1) } label: {
-                Label(scope == .month ? String(localized: "Следующий месяц") : String(localized: "Следующая неделя"), systemImage: "chevron.right")
+                Label(scope == .month ? String(localized: "Следующий месяц") : String(localized: "Следующая неделя"), systemImage: "chevron.forward")
                     .labelStyle(.iconOnly)
             }
             .help(scope == .month ? String(localized: "Следующий месяц") : String(localized: "Следующая неделя"))
@@ -248,7 +248,7 @@ private struct NewEntrySheet: View {
             TextField("Время", text: $time, prompt: Text("18:00 — можно пусто"))
             if kind == .plan {
                 TextField("Площадка", text: $platform, prompt: Text("Instagram"))
-                TextField("Тема", text: $topic)
+                TextField("Тема публикации", text: $topic)
             } else {
                 Picker("Проект", selection: $projectPath) {
                     ForEach(projects) { Text($0.name).tag($0.path) }

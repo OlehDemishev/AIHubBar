@@ -48,12 +48,17 @@ struct RunQuickCommandIntent: AppIntent {
     @MainActor
     func perform() async throws -> some IntentResult & ProvidesDialog {
         let commands = IntentBridge.settings?.quickCommands ?? []
+        // Part of a name is enough only when it means one command: «clean» must not pick the first of two.
+        let partial = commands.filter { $0.title.localizedCaseInsensitiveContains(name) }
         guard let command = commands.first(where: { $0.title.localizedCaseInsensitiveCompare(name) == .orderedSame })
-            ?? commands.first(where: { $0.title.localizedCaseInsensitiveContains(name) }),
+            ?? (partial.count == 1 ? partial.first : nil),
               let tools = IntentBridge.quickTools else {
             return .result(dialog: IntentDialog(stringLiteral: String(localized: "Нет быстрой команды «\(name)»")))
         }
-        tools.run(command)
+        // A command marked «Спрашивать перед запуском» asks here too, like from a hot key.
+        guard tools.runFromHotKey(command) else {
+            return .result(dialog: IntentDialog(stringLiteral: String(localized: "Отменено")))
+        }
         return .result(dialog: IntentDialog(stringLiteral: String(localized: "Запущено: \(command.title)")))
     }
 }

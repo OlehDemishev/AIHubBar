@@ -195,7 +195,7 @@ struct WeekUsage: Equatable, Sendable {
         }
 
         let window = min(24 * 3600, now.timeIntervalSince(start))
-        guard total > 0, window >= 3600 else { return WeekUsage(days: days, forecast: .unknown) }
+        guard total > 0, window >= 3600, utilization < 100 else { return WeekUsage(days: days, forecast: .unknown) }
         let recent = week.filter { now.timeIntervalSince($0.date) <= window }.reduce(0) { $0 + $1.weight }
         let perSecond = utilization * recent / total / window
         guard perSecond > 0 else { return WeekUsage(days: days, forecast: .lastsUntilReset) }

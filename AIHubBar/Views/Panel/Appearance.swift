@@ -163,6 +163,7 @@ extension PanelBlock {
 /// A panel block's title that folds the block — the panel gets tall on a laptop screen. A click toggles it,
 /// and the choice is kept between openings.
 struct BlockTitle: View {
+    @Environment(\.panelCalm) private var panelCalm
     let block: PanelBlock
     let title: LocalizedStringKey
     /// A block with nothing under its title has no arrow to fold it.
@@ -173,7 +174,7 @@ struct BlockTitle: View {
     var body: some View {
         let collapsed = PanelBlock.collapsed(in: collapsedRaw).contains(block)
         Button {
-            withAnimation(.snappy(duration: 0.2)) { collapsedRaw = PanelBlock.toggling(block, in: collapsedRaw) }
+            withAnimation(panelCalm ? nil : .snappy(duration: 0.2)) { collapsedRaw = PanelBlock.toggling(block, in: collapsedRaw) }
         } label: {
             HStack(spacing: 4) {
                 Image(systemName: "chevron.right")
@@ -241,6 +242,11 @@ extension EnvironmentValues {
     @Entry var panelDensity: CGFloat = 1
     /// The panel draws glass instead of the system background — cards turn into glass tiles.
     @Entry var panelGlass = false
+    /// False while the panel is closed: its views stay alive then, and an animation that repeats (the pulse of a
+    /// working session) would keep drawing frames nobody sees.
+    @Entry var panelIsShown = true
+    /// «Уменьшение движения» or the panel's own «анимации» switch off: blocks fold and open at once.
+    @Entry var panelCalm = false
 }
 
 /// macOS sizes of the system text styles, in points.

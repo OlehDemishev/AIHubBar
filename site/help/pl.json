@@ -3,7 +3,7 @@
     "beta" : "beta",
     "help" : "Pomoc",
     "replay" : "Pokaż jeszcze raz",
-    "scripts" : "Polecenia dla skryptów wywołuje się tak: ~/Applications/AI\\ Hub\\ Bar.app/Contents/MacOS/AIHubBar --sessions",
+    "scripts" : "Polecenia dla skryptów wywołuje się tak: /Applications/AI\\ Hub\\ Bar.app/Contents/MacOS/AIHubBar --sessions",
     "search" : "Szukaj w pomocy",
     "start" : "Jak zacząć"
   },
@@ -94,7 +94,7 @@
         {
           "facts" : [
             {
-              "detail" : "Pole u góry panelu szuka projektów, sesji, poleceń i własnych promptów. Otwieranie z klawiatury — skrót w sekcji „Ogólne”.",
+              "detail" : "Pole u góry panelu szuka projektów, sesji, poleceń i własnych promptów. Otwieranie z klawiatury — skrót w sekcji „Skróty”.",
               "name" : "Szukaj"
             },
             {
@@ -144,7 +144,7 @@
               "name" : "Asystent"
             },
             {
-              "detail" : "Ustawienia → „Profile” → „+”: „Programista (GitHub)”, „Wideo”, „Teksty”, „Research”, „Media społecznościowe”, „Własny”. Wybierz folder — profil jest gotowy; resztę zmienisz w jego ustawieniach.",
+              "detail" : "Ustawienia → „Profile” → „+”: „Programista (GitHub)”, „Wideo”, „Teksty”, „Research”, „Media społecznościowe”, „Narzędzia dla Maca”, „Własny”. Wybierz folder — profil jest gotowy; resztę zmienisz w jego ustawieniach.",
               "name" : "Dodaj profil"
             }
           ],

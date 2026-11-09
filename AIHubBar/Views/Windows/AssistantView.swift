@@ -379,7 +379,7 @@ struct AssistantView: View {
     /// Which modules the new profile has (SPEC-profiles §5). «Проекты» brings the project steps that follow.
     private func modulesStep(_ draft: Binding<AssistantDraft>) -> some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text("Что будет в панели этого профиля. Порядок и всё остальное можно поменять потом в Настройках → «Профили».")
+            Text("Что будет в панели этого профиля. Порядок и всё остальное можно поменять потом в Настройках → «Панель».")
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)
             ForEach(AssistantDraft.offeredModules, id: \.self) { kind in
@@ -417,7 +417,7 @@ struct AssistantView: View {
                 ForEach(MenuBarConfig.Preset.allCases.filter { $0 != .custom }, id: \.self) { Text($0.title).tag($0) }
             }
             .pickerStyle(.segmented)
-            Text("«Минимум» — значок и события, «Лимиты» — ещё проценты сессии и недели, «Всё» — всё, что есть. Отдельные элементы — в Настройках → «Строка меню». Набор общий для всех профилей.")
+            Text("«Минимум» — значок и события, «Лимиты» — ещё проценты сессии и недели, «Всё» — всё, что есть. Отдельные элементы — в Настройках → «Строка меню».")
                 .font(.caption).foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)
             Toggle("Значок профиля вместо ✦", isOn: Binding(

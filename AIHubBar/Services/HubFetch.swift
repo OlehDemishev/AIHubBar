@@ -212,7 +212,13 @@ enum HubFetch {
                 process.standardError = FileHandle.nullDevice
                 guard (try? process.run()) != nil else { continuation.resume(returning: nil); return }
                 // Ending the process closes its output, which ends the read loop below if codex never answers.
-                DispatchQueue.global().asyncAfter(deadline: .now() + 10) { if process.isRunning { process.terminate() } }
+                DispatchQueue.global().asyncAfter(deadline: .now() + 10) {
+                    guard process.isRunning else { return }
+                    process.terminate()
+                    DispatchQueue.global().asyncAfter(deadline: .now() + ProcessRunner.killAfter) {
+                        if process.isRunning { kill(process.processIdentifier, SIGKILL) }
+                    }
+                }
                 func send(_ object: [String: Any]) {
                     guard var data = try? JSONSerialization.data(withJSONObject: object) else { return }
                     data.append(0x0A)

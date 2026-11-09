@@ -5,6 +5,7 @@
 **Updated:** 2026-11-09
 
 **Now:**
+- audit pass 2026-11-09 (branch `fix/audit-2026-11-09`): the closed panel no longer uses a third of a CPU core while a session works; 30 fixes from a UI and code review (list in the journal); 0.9.0 follows
 - tech debt pass done 2026-11-09, all merged: #330 Sparkle 2.10.1, #331 the lock screen tile checks it locked, #332 unused strings removed and the catalog compared with the code, #333 Mac CI on Xcode 27.2 running `check.sh`, #334 and #335 tests for the Telegram controller, the notch island and the command engine (77 new), #336 Telegram files split
 - 0.8.0 (build 773) published 2026-11-09 after Oleh's beta checks of 0.8.0-beta.1 passed
 - 0.8.1 (build 777) published 2026-11-09: the island's ears are 50 pt wide instead of 38, so the rings stay inside the black (#340)
@@ -37,6 +38,20 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+## 2026-11-09 — Audit: idle CPU, UI slips and code defects (branch `fix/audit-2026-11-09`)
+
+Done: a review of the running app and the code, then the fixes.
+- CPU: with the panel closed the app used 33–38 % of a core while any session was working (measured on the running 0.8.0; 3 % with «Сессии агентов» folded). The working row's pulse kept drawing in the hidden panel. It now runs only while the panel is shown (`panelIsShown`).
+- Sessions: the Claude app's wrappers (`<artifact-view-context …>`, `<pasted_content …>`) are no longer a session's title, in the app and in the hook; the header says «работают: N» instead of a bare number; the task keeps a readable width beside the change counts, and counts from 10 000 are short («23,9 тыс.»).
+- Limits: a week of eight calendar days labels its two same weekdays with the date; «сессии до сброса хватит» above a warning about the week; no forecast at 100 %.
+- The menu bar tooltip is hidden while the panel is open. «Раскладка»: the example in the exceptions field looks like an example.
+- Text: the import banner printed a piece of code for two or more missing folders; the dark mode tile was «Topic» in English (the calendar's field has its own key now); help and the assistant named the wrong Settings pages and said the menu bar set is shared; the help's script path follows the running copy (`/Applications` on the site).
+- Runs and processes: SIGPIPE is ignored (a write to an exited `codex app-server` could end the app); `ProcessRunner` ends at its timeout even when a descendant holds the pipes or the child ignores SIGTERM, and reads both pipes on its own threads; a run's pid is checked before any signal, and a run that ended while the app was closed is not marked timed out; two queued runs for one project no longer lose the second; «На ночь» pressed after the night began starts at once.
+- Data: a note changed in another editor is not overwritten when the panel opens; config writes go through symlinks (`settings.json`, `CLAUDE.md`); an imported profile's id cannot leave the profiles folder, and the imported time limit is clamped.
+- Other: report and cleanup results are compared as the scripts print them (a good report showed ❌ outside Russian); the Shortcuts action asks before a command marked to ask and needs one match for a partial name; the widget's «Не спать» shows the manual hold, like the panel; confirmations for deleting a key, a profile command and an account, resetting the appearance, a module set and stopping a run; the run log stays where it was scrolled; sub-section chevrons mirror in Arabic, the island's ears keep their sides, calendar arrows follow the direction; folds honour «Уменьшение движения».
+Checked: `scripts/check.sh` green (625 tests, 8 new: night queue, forecast at 100 %, wrappers in the app and the hook, notes, profile import, `ProcessRunner`). On a Debug build with one working session and the panel opened and closed once: 0.8–1.3 % CPU over two 10 s windows. The new panel seen in a screenshot: «работают: 1», «без задачи» for the wrapper-only session, no tooltip over the title.
+Left: not seen live: Settings pages, the confirmations, Arabic, the widget. Not changed: «Левее/Правее» in Arabic in the menu bar builder, the 9-day-old row (a live Claude desktop session, correct), the «DSK 90 %» figure (another app's menu bar item). The structural notes (`AppContainer.init`, `LaunchController`, `TelegramBotController`, `MenuPanelView`, duplicated rows and rings) are untouched. Smaller findings from the review are not fixed: main-actor file reads in `RunStore.checkRuns` and the bot, `TelegramRelay.call` without a timeout, `GitScanner` without a cap, profile name validation, the icon picker's short list.
+
 ## 2026-11-09 — 0.8.1 published (branch `chore/status-release-0.8.1`)
 
 Done: `scripts/release.sh 0.8.1 --publish` in Oleh's Terminal tab: build 777 with #340, the app and the disk image notarized and stapled, the GitHub release made. The Mac restarted during the last step, so the beta channel wasn't updated; the agent ran that step by hand (the script's own commands: `beta-feed.py` over the beta and latest appcasts, `xmllint`, `gh release upload beta --clobber`).

@@ -365,7 +365,7 @@ struct ImportConfirmation: View {
         let names = bundle.modes.map(\.name).joined(separator: ", ")
         let what = bundle.format == SettingsBundle.settingsFormat ? String(localized: "Все настройки и профили") : String(localized: "Профиль")
         let missing = bundle.modes.flatMap(ProfileStore.missingFolders)
-        return "\(what): \(names)." + (missing.isEmpty ? "" : String(localized: " Нет на этом Mac: \(missing.joined(separator: "), String(localized: ")) — после импорта выберите свои папки."))
+        return "\(what): \(names)." + (missing.isEmpty ? "" : String(localized: " Нет на этом Mac: \(missing.joined(separator: ", ")) — после импорта выберите свои папки."))
     }
 }
 
@@ -465,7 +465,7 @@ struct CommandEditor: View {
                     .font(.body)
                     .frame(minHeight: 70)
             }
-            Button("Удалить команду", role: .destructive, action: onDelete)
+            ConfirmedButton(title: "Удалить команду", message: command.title, action: onDelete) { Text("Удалить команду") }
         }
     }
 }

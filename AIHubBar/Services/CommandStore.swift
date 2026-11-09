@@ -77,14 +77,15 @@ enum CommonCommand: String, CaseIterable, Identifiable, Sendable {
         }
     }
 
+    /// The scripts have no translations and always answer in Russian, so these are compared as written there.
     /// report.py exits 0 even when Telegram failed; its last line is «Telegram: отправлено» only on success.
     /// A cleanup skipped because of a running build did nothing, so it is not shown as done.
     func isFailure(exitCode: Int32, summary: String) -> Bool {
         if exitCode != 0 { return true }
         switch self {
-        case .reportNow, .quickSummary: return summary.hasPrefix("Telegram") && summary != String(localized: "Telegram: отправлено")
+        case .reportNow, .quickSummary: return summary.hasPrefix("Telegram") && summary != "Telegram: отправлено"
         // cleanup.py skips everything while a build runs and says so in its first line.
-        case .cleanupCheck, .cleanupRun: return summary.hasPrefix(String(localized: "Идёт сборка"))
+        case .cleanupCheck, .cleanupRun: return summary.hasPrefix("Идёт сборка")
         default: return false
         }
     }

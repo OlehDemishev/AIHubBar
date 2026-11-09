@@ -79,8 +79,17 @@ struct MenuBarItemImage: View {
 /// hovering over it shows what the icons and numbers mean.
 @MainActor
 enum StatusItemTooltip {
+    private static var text: String?
+    /// The open panel says all of it already, and the tooltip would come up over its title.
+    static var panelIsOpen = false { didSet { apply() } }
+
     static func set(_ text: String) {
-        statusButton()?.toolTip = text
+        self.text = text
+        apply()
+    }
+
+    private static func apply() {
+        statusButton()?.toolTip = panelIsOpen ? nil : text
     }
 
     static func statusButton() -> NSButton? {

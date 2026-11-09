@@ -43,7 +43,7 @@ struct CopilotHooks {
         try HookScript.write(to: scriptURL)
         try FileManager.default.createDirectory(at: fileURL.deletingLastPathComponent(), withIntermediateDirectories: true)
         let data = try JSONSerialization.data(withJSONObject: configuration, options: [.prettyPrinted, .sortedKeys])
-        try data.write(to: fileURL, options: .atomic)
+        try data.write(to: fileURL.resolvingSymlinksInPath(), options: .atomic)
     }
 
     func uninstall() throws {

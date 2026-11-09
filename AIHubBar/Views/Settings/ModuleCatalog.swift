@@ -39,6 +39,7 @@ struct ModuleCatalog: View {
         }
     }
 
+    @State private var asked: Preset?
     private let columns = [GridItem(.adaptive(minimum: 196, maximum: 320), spacing: 12)]
 
     var body: some View {
@@ -46,7 +47,7 @@ struct ModuleCatalog: View {
             VStack(alignment: .leading, spacing: 18) {
                 FlowLayout(spacing: 8) {
                     ForEach(presets, id: \.self) { preset in
-                        Button { apply(preset) } label: {
+                        Button { if preset == .everything { apply(preset) } else { asked = preset } } label: {
                             Label(preset.title, systemImage: preset.symbol)
                                 .padding(.horizontal, 4)
                                 .fixedSize()
@@ -54,6 +55,12 @@ struct ModuleCatalog: View {
                         .controlSize(.large)
                         .help(String(localized: "Включить модули набора и выключить остальные"))
                     }
+                }
+                .confirmationDialog(askedTitle, isPresented: Binding(get: { asked != nil }, set: { if !$0 { asked = nil } })) {
+                    Button(askedTitle) { if let asked { apply(asked) } }
+                    Button("Отмена", role: .cancel) {}
+                } message: {
+                    Text("Включить модули набора и выключить остальные")
                 }
                 Text("Включено: \(onCount) из \(listed.count)")
                     .foregroundStyle(.secondary)
@@ -79,6 +86,9 @@ struct ModuleCatalog: View {
     private var listed: [ModuleKind] { ModuleKind.allCases.filter { (!$0.isBeta || settings.betaUpdates) && ($0 != .reports || modes.hasDailyReport) } }
     private var onCount: Int { listed.filter(modes.isOn).count }
     private var presets: [Preset] { Preset.allCases.filter { $0 != .layout || settings.betaUpdates } }
+
+    /// A set also switches off every module it does not name: one click must not do that unasked.
+    private var askedTitle: String { asked?.title ?? "" }
 
     private func apply(_ preset: Preset) {
         for kind in listed where ModuleSwitch.canSwitch(kind, modes: modes) || !kind.isBuiltIn {

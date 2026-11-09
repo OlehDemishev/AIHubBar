@@ -3,7 +3,7 @@
     "beta" : "beta",
     "help" : "Bantuan",
     "replay" : "Tampilkan lagi",
-    "scripts" : "Perintah skrip dipanggil seperti ini: ~/Applications/AI\\ Hub\\ Bar.app/Contents/MacOS/AIHubBar --sessions",
+    "scripts" : "Perintah skrip dipanggil seperti ini: /Applications/AI\\ Hub\\ Bar.app/Contents/MacOS/AIHubBar --sessions",
     "search" : "Cari di bantuan",
     "start" : "Cara memulai"
   },
@@ -94,7 +94,7 @@
         {
           "facts" : [
             {
-              "detail" : "Kolom di atas panel mencari proyek, sesi, perintah, dan prompt Anda sendiri. Untuk membukanya dari keyboard — pintasan di «Umum».",
+              "detail" : "Kolom di atas panel mencari proyek, sesi, perintah, dan prompt Anda sendiri. Untuk membukanya dari keyboard — pintasan di «Pintasan».",
               "name" : "Cari"
             },
             {
@@ -144,7 +144,7 @@
               "name" : "Asisten"
             },
             {
-              "detail" : "Pengaturan → «Profil» → «+»: «Developer (GitHub)», «Video», «Tulisan», «Riset», «Media sosial», «Kustom». Pilih folder — profil siap; sisanya diubah di pengaturannya.",
+              "detail" : "Pengaturan → «Profil» → «+»: «Developer (GitHub)», «Video», «Tulisan», «Riset», «Media sosial», «Utilitas Mac», «Kustom». Pilih folder — profil siap; sisanya diubah di pengaturannya.",
               "name" : "Tambah profil"
             }
           ],

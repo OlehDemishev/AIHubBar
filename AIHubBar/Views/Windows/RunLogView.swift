@@ -5,6 +5,7 @@ import SwiftUI
 struct RunLogView: View {
     @Environment(RunStore.self) private var runs
     @State private var entries: [StreamJSON.Entry] = []
+    @State private var followsEnd = true
 
     private var run: BackgroundRun? { runs.selectedLogRunID.flatMap(runs.run(id:)) }
 
@@ -56,7 +57,9 @@ struct RunLogView: View {
                     .help("На паузе до сброса лимита")
             }
             if run.state == .running {
-                Button("Остановить") { runs.stop(run.id) }
+                ConfirmedButton(title: "Остановить", message: run.task, confirm: "Остановить", role: nil) {
+                    runs.stop(run.id)
+                } label: { Text("Остановить") }
             }
             Button("Файл журнала") {
                 NSWorkspace.shared.activateFileViewerSelecting([run.logURL])
@@ -72,12 +75,17 @@ struct RunLogView: View {
                     ForEach(entries) { entry in
                         row(entry).id(entry.id)
                     }
+                    // On screen only while the log is scrolled to its end.
+                    Color.clear.frame(height: 1)
+                        .onAppear { followsEnd = true }
+                        .onDisappear { followsEnd = false }
                 }
                 .padding(12)
                 .textSelection(.enabled)
             }
             .onChange(of: entries.count) {
-                if let last = entries.last { proxy.scrollTo(last.id, anchor: .bottom) }
+                // New lines pull the view down only for someone reading the end: scrolled up, earlier output stays put.
+                if followsEnd, let last = entries.last { proxy.scrollTo(last.id, anchor: .bottom) }
             }
         }
     }

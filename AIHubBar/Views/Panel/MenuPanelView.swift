@@ -121,7 +121,7 @@ struct MenuPanelView: View {
                     .onAppear {
                         guard let target = scrollTarget else { return }
                         scrollTarget = nil
-                        DispatchQueue.main.async { withAnimation { reader.scrollTo(target, anchor: .top) } }
+                        DispatchQueue.main.async { withAnimation(calm ? nil : .default) { reader.scrollTo(target, anchor: .top) } }
                     }
                 }
             }
@@ -132,6 +132,8 @@ struct MenuPanelView: View {
         .environment(\.panelDensity, settings.panelDensity.spacing)
         .environment(\.font, ScaledFont.font(.body, scale: scale))
         .environment(\.panelGlass, drawsGlass)
+        .environment(\.panelIsShown, isShown)
+        .environment(\.panelCalm, calm)
         .preferredColorScheme(settings.panelTheme.colorScheme)
         .background(WindowReader { found in
             // Called on every update: state and appearance change only when they differ (each write is another
@@ -147,6 +149,7 @@ struct MenuPanelView: View {
             log.debug("Panel shown")
             isShown = true
             monitor.isPanelOpen = true
+            StatusItemTooltip.panelIsOpen = true
             keepAwake.evaluate()
             store.refreshIfStale()
             folders.refreshIfStale()
@@ -163,6 +166,7 @@ struct MenuPanelView: View {
             isShown = false
             query = ""
             monitor.isPanelOpen = false
+            StatusItemTooltip.panelIsOpen = false
         }
         .onChange(of: expanded) { snapshotIfEnabled() }
         .onChange(of: store.lastUpdated) { snapshotIfEnabled() }
@@ -372,7 +376,7 @@ struct MenuPanelView: View {
                 Menu {
                     ForEach(modes.enabledModes) { mode in
                         Button {
-                            withAnimation(.snappy(duration: 0.2)) { modes.select(mode.id) }
+                            withAnimation(calm ? nil : .snappy(duration: 0.2)) { modes.select(mode.id) }
                         } label: {
                             Label(mode.name, systemImage: mode.id == modes.currentID ? "checkmark" : mode.icon)
                         }

@@ -113,7 +113,9 @@ private struct ClaudeAccountsSection: View {
                         .truncationMode(.middle)
                     Spacer(minLength: 4)
                     Button("Войти") { signIn(account) }
-                    Button { settings.claudeAccounts.removeAll { $0.id == account.id } } label: {
+                    ConfirmedButton(title: "Убрать аккаунт", message: account.name, confirm: "Убрать", role: nil) {
+                        settings.claudeAccounts.removeAll { $0.id == account.id }
+                    } label: {
                         Label("Убрать аккаунт", systemImage: "minus.circle").labelStyle(.iconOnly)
                     }
                     .buttonStyle(.borderless)

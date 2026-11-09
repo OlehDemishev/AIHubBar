@@ -6,6 +6,9 @@ struct AIHubBarApp: App {
     @NSApplicationDelegateAdaptor private var appDelegate: AppDelegate
 
     init() {
+        // Writing to a child that has already exited (`codex app-server` on an old CLI, `security -i`) must fail with
+        // an error, not end the app with SIGPIPE and no crash report.
+        signal(SIGPIPE, SIG_IGN)
         LanguageFallback.apply()
         _ = InterfaceLanguage.running
         if let code = CommandLineTool.run(CommandLine.arguments) {

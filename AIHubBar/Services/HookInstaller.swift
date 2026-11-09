@@ -244,6 +244,7 @@ struct HookJSONFile {
     func write(_ object: [String: Any]) throws {
         let data = try JSONSerialization.data(withJSONObject: object, options: [.prettyPrinted, .sortedKeys, .withoutEscapingSlashes])
         try FileManager.default.createDirectory(at: url.deletingLastPathComponent(), withIntermediateDirectories: true)
-        try (data + Data("\n".utf8)).write(to: url, options: .atomic)
+        // Through a symlink (settings kept in a dotfiles repository): an atomic write to the link would replace it.
+        try (data + Data("\n".utf8)).write(to: url.resolvingSymlinksInPath(), options: .atomic)
     }
 }

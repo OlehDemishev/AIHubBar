@@ -153,7 +153,7 @@ enum HelpTopic: String, CaseIterable, Identifiable, Sendable {
             ])]
         case .panel:
             [HelpSection(facts: [
-                HelpFact(String(localized: "Поиск"), String(localized: "Поле сверху панели ищет проекты, сессии, команды и свои промпты. Открыть с клавиатуры — сочетание в «Основных»."), symbol: "magnifyingglass"),
+                HelpFact(String(localized: "Поиск"), String(localized: "Поле сверху панели ищет проекты, сессии, команды и свои промпты. Открыть с клавиатуры — сочетание в «Клавишах»."), symbol: "magnifyingglass"),
                 HelpFact(String(localized: "Свернуть блок"), String(localized: "Клик по заголовку блока сворачивает его; панель это запоминает."), symbol: "chevron.down"),
                 HelpFact(String(localized: "Внешний вид"), String(localized: "Тема, стеклянный фон, размер текста, ширина и плотность — Настройки → «Внешний вид»."), symbol: "paintbrush"),
             ])]
@@ -164,7 +164,7 @@ enum HelpTopic: String, CaseIterable, Identifiable, Sendable {
              ]),
              HelpSection(title: String(localized: "Профили"), facts: [
                 HelpFact(String(localized: "Помощник"), String(localized: "Настройки → «Профили» → «+» → «Помощник…»: профиль по шагам — шаблон, папка, этапы, метрики, календарь, сервис AI, команды, права, блоки панели, строка меню, название. Справа — как это будет выглядеть."), symbol: "wand.and.stars"),
-                HelpFact(String(localized: "Добавить профиль"), String(localized: "Настройки → «Профили» → «+»: «Разработчик (GitHub)», «Видео», «Тексты», «Ресёрч», «Соцсети», «Свой». Выберите папку — профиль готов, дальше всё правится в его настройках."), symbol: "plus.circle"),
+                HelpFact(String(localized: "Добавить профиль"), String(localized: "Настройки → «Профили» → «+»: «Разработчик (GitHub)», «Видео», «Тексты», «Ресёрч», «Соцсети», «Утилиты Mac», «Свой». Выберите папку — профиль готов, дальше всё правится в его настройках."), symbol: "plus.circle"),
              ])]
         case .limits:
             [HelpSection(facts: [
@@ -294,7 +294,14 @@ enum HelpTopic: String, CaseIterable, Identifiable, Sendable {
         return words.contains { $0.localizedCaseInsensitiveContains(query) }
     }
 
-    static let binary = "~/Applications/AI\\ Hub\\ Bar.app/Contents/MacOS/AIHubBar"
+    /// Where the DMG puts the app: what the site's help says.
+    static let installedBinary = "/Applications/AI\\ Hub\\ Bar.app/Contents/MacOS/AIHubBar"
+
+    /// This copy's own path, ready to paste into Terminal: the app can live in /Applications or ~/Applications.
+    static var binary: String {
+        guard let path = Bundle.main.executablePath, path.hasSuffix("/Contents/MacOS/AIHubBar") else { return installedBinary }
+        return PathText.tilde(path).replacingOccurrences(of: " ", with: "\\ ")
+    }
 }
 
 struct HelpSection: Identifiable {
@@ -357,7 +364,7 @@ struct HelpExport: Encodable {
             "search": String(localized: "Поиск по справке"),
             "replay": String(localized: "Показать ещё раз"),
             "beta": String(localized: "бета"),
-            "scripts": String(localized: "Команды для скриптов вызываются так: \(HelpTopic.binary) --sessions"),
+            "scripts": String(localized: "Команды для скриптов вызываются так: \(HelpTopic.installedBinary) --sessions"),
         ]
         return HelpExport(language: Bundle.main.preferredLocalizations.first ?? "ru", labels: labels, topics: topics)
     }

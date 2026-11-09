@@ -34,9 +34,14 @@ struct SessionChanges: Equatable, Sendable {
     /// «3 файла +120 −8».
     var summary: String {
         var text = String(localized: "файлов: \(files.count)")
-        if added > 0 { text += " +\(added)" }
-        if removed > 0 { text += " −\(removed)" }
+        if added > 0 { text += " +\(Self.count(added))" }
+        if removed > 0 { text += " −\(Self.count(removed))" }
         return text
+    }
+
+    /// «982», then «23,9 тыс.» from ten thousand lines: the row is narrow, and the exact number is in the list.
+    static func count(_ lines: Int) -> String {
+        lines < 10_000 ? "\(lines)" : lines.formatted(.number.notation(.compactName).precision(.fractionLength(0...1)))
     }
 
     /// Git's empty tree: the base when the repository has no commit from before the session.

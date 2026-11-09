@@ -52,6 +52,7 @@ struct SessionRow: Identifiable, Equatable {
 
 /// «Сессии» block at the top of the panel (docs/specs/SPEC.md §2.3).
 struct SessionsView: View {
+    @Environment(\.panelCalm) private var panelCalm
     let rows: [SessionRow]
     /// Recent Codex and Copilot conversations (SPEC-ai-services stages 5–6), under Claude's sessions.
     var others: [AgentThread] = []
@@ -61,20 +62,20 @@ struct SessionsView: View {
     @Environment(LaunchController.self) private var launcher
 
     private var waiting: Int { rows.filter { $0.state == .waiting }.count }
-    /// Working or waiting: finished rows stay listed for a while and aren't counted.
-    private var active: Int { rows.filter { $0.state == .running || $0.state == .waiting }.count }
+    /// Finished rows stay listed for a while and aren't counted.
+    private var working: Int { rows.filter { $0.state == .running }.count }
     @AppStorage(StorageKey.collapsedBlocks) private var collapsedRaw = ""
 
     var body: some View {
         VStack(alignment: .leading, spacing: 2) {
             HStack {
                 BlockTitle(block: .sessions, title: "Сессии агентов")
-                if active > 0 {
-                    Text(verbatim: "\(active)")
+                if working > 0 {
+                    // Not a bare number: finished rows stay listed below, so «3» beside five rows reads as a mistake.
+                    Text("работают: \(working)")
                         .scaledFont(.caption, weight: .medium)
                         .monospacedDigit()
                         .foregroundStyle(.secondary)
-                        .help("Работают и ждут ответа")
                 }
                 if waiting > 0 {
                     Text("ждут ответа: \(waiting)")
@@ -99,11 +100,12 @@ struct SessionsView: View {
                 }
                 if !resumable.isEmpty {
                     Button {
-                        withAnimation(.snappy(duration: 0.2)) { showsResumable.toggle() }
+                        withAnimation(panelCalm ? nil : .snappy(duration: 0.2)) { showsResumable.toggle() }
                     } label: {
                         HStack(spacing: 4) {
                             Image(systemName: "chevron.right")
                                 .rotationEffect(.degrees(showsResumable ? 90 : 0))
+                            .flipsForRightToLeftLayoutDirection(true)
                             Text("Недавно завершённые")
                             Spacer()
                         }
@@ -264,6 +266,7 @@ private struct SessionRowView: View {
     /// A request's text fits here whole: the hook keeps it to 200 characters.
     static let requestLines = 8
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.panelIsShown) private var panelIsShown
     @Environment(AppSettings.self) private var settings
 
     var body: some View {
@@ -271,7 +274,7 @@ private struct SessionRowView: View {
             HStack(spacing: 6) {
                 Image(systemName: paused ? "pause.circle.fill" : inBackground ? "moon.zzz.fill" : row.state.symbol)
                     .foregroundStyle(paused ? Color.orange : row.state.color)
-                    .symbolEffect(.pulse, options: .repeating, isActive: row.state == .running && !paused && !reduceMotion)
+                    .symbolEffect(.pulse, options: .repeating, isActive: row.state == .running && !paused && !reduceMotion && panelIsShown)
                     .frame(width: 14)
                     .accessibilityLabel(paused ? String(localized: "на паузе до сброса лимита") : inBackground ? String(localized: "в фоне") : row.state.title)
                     .help(paused ? String(localized: "на паузе до сброса лимита") : inBackground ? String(localized: "в фоне") : row.state.title)
@@ -298,6 +301,8 @@ private struct SessionRowView: View {
                     .lineLimit(1)
                     .truncationMode(.tail)
                     .foregroundStyle(action == nil && row.task == nil ? .tertiary : .secondary)
+                    // The counts beside it are fixed in size; without this a long diff leaves the task a few letters.
+                    .frame(minWidth: 70, alignment: .leading)
                 Spacer(minLength: 4)
                 if let changes, let folder {
                     Button { showsChanges.toggle() } label: {

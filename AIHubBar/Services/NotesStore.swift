@@ -18,6 +18,8 @@ final class NotesStore {
 
     private let settings: AppSettings
     private var pendingSave: Task<Void, Never>?
+    /// The text was typed here since it was last read or written.
+    private var isDirty = false
 
     init(settings: AppSettings) {
         self.settings = settings
@@ -56,6 +58,7 @@ final class NotesStore {
 
     func select(_ name: String) {
         flush()
+        isDirty = false
         selected = name
         UserDefaults.standard.set(name, forKey: "notesSelected")
         text = (try? String(contentsOf: url(name), encoding: .utf8)) ?? ""
@@ -72,6 +75,7 @@ final class NotesStore {
     /// Edits are written a second after the last keystroke, and when switching tabs or closing the panel.
     func edit(_ newText: String) {
         text = newText
+        isDirty = true
         pendingSave?.cancel()
         pendingSave = Task { [weak self] in
             try? await Task.sleep(for: .seconds(1))
@@ -83,12 +87,15 @@ final class NotesStore {
     func flush() {
         pendingSave?.cancel()
         pendingSave = nil
-        guard let selected else { return }
+        // Only what was typed here is written: a note changed in another editor (or by iCloud) while the panel was
+        // closed must be read, not overwritten with the text the panel still holds.
+        guard let selected, isDirty else { return }
         let target = url(selected)
         if (try? String(contentsOf: target, encoding: .utf8)) != text {
             do {
                 try text.write(to: target, atomically: true, encoding: .utf8)
                 lastError = nil
+                isDirty = false
             } catch {
                 lastError = error.localizedDescription
                 AppLog.error("Note «\(selected)» not saved: \(error.localizedDescription)")

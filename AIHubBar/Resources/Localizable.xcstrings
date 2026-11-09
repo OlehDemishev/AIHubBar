@@ -10945,82 +10945,6 @@
         }
       }
     },
-    "Telegram: отправлено": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Telegram: أُرسل"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Telegram: gesendet"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Telegram: sent"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Telegram: enviado"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Telegram : envoyé"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Telegram: terkirim"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Telegram: inviato"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Telegram: 送信しました"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Telegram: 보냄"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Telegram: wysłano"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Telegram: enviado"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Telegram: надіслано"
-          }
-        }
-      }
-    },
     "Windows прячет новые значки под «^». Чтобы AI Hub Bar был всегда виден: Параметры → Персонализация → Панель задач → Другие значки на панели задач.": {
       "extractionState": "stale",
       "localizations": {
@@ -12795,78 +12719,78 @@
         }
       }
     },
-    "«Минимум» — значок и события, «Лимиты» — ещё проценты сессии и недели, «Всё» — всё, что есть. Отдельные элементы — в Настройках → «Строка меню». Набор общий для всех профилей.": {
+    "«Минимум» — значок и события, «Лимиты» — ещё проценты сессии и недели, «Всё» — всё, что есть. Отдельные элементы — в Настройках → «Строка меню».": {
       "localizations": {
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "«الحد الأدنى» — الأيقونة والأحداث، «الحدود» — مع نسب الجلسة والأسبوع، «الكل» — كل ما هو متاح. العناصر المفردة — من الإعدادات ← «شريط القائمة». المجموعة مشتركة بين كل ملفات التعريف."
+            "value": "«الحد الأدنى» — الأيقونة والأحداث، «الحدود» — مع نسب الجلسة والأسبوع، «الكل» — كل ما هو متاح. العناصر المفردة — من الإعدادات ← «شريط القائمة»."
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "„Minimum“ — Symbol und Ereignisse, „Limits“ — dazu Prozente von Sitzung und Woche, „Alles“ — alles, was es gibt. Einzelne Elemente — unter Einstellungen → „Menüleiste“. Die Auswahl gilt für alle Profile."
+            "value": "„Minimum“ — Symbol und Ereignisse, „Limits“ — dazu Prozente von Sitzung und Woche, „Alles“ — alles, was es gibt. Einzelne Elemente — unter Einstellungen → „Menüleiste“."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "“Minimum” — the icon and events, “Limits” — plus session and week percentages, “Everything” — all there is. Single elements — in Settings → “Menu Bar”. The set is shared by all profiles."
+            "value": "“Minimum” — the icon and events, “Limits” — plus session and week percentages, “Everything” — all there is. Single elements — in Settings → “Menu Bar”."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "«Mínimo» — el icono y los eventos, «Límites» — además los porcentajes de sesión y semana, «Todo» — todo lo que hay. Los elementos sueltos, en Ajustes → «Barra de menús». El conjunto es común a todos los perfiles."
+            "value": "«Mínimo» — el icono y los eventos, «Límites» — además los porcentajes de sesión y semana, «Todo» — todo lo que hay. Los elementos sueltos, en Ajustes → «Barra de menús»."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "«Minimum» — l'icône et les événements, «Limites» — plus les pourcentages de session et de semaine, «Tout» — tout ce qui existe. Les éléments un par un, dans Réglages → «Barre des menus». L'ensemble est commun à tous les profils."
+            "value": "«Minimum» — l'icône et les événements, «Limites» — plus les pourcentages de session et de semaine, «Tout» — tout ce qui existe. Les éléments un par un, dans Réglages → «Barre des menus»."
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "«Minimum» — ikon dan peristiwa, «Batas» — ditambah persentase sesi dan minggu, «Semua» — semua yang ada. Elemen satu per satu — di Pengaturan → «Bar Menu». Set ini berlaku untuk semua profil."
+            "value": "«Minimum» — ikon dan peristiwa, «Batas» — ditambah persentase sesi dan minggu, «Semua» — semua yang ada. Elemen satu per satu — di Pengaturan → «Bar Menu»."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "«Minimo» — l'icona e gli eventi, «Limiti» — più le percentuali di sessione e settimana, «Tutto» — tutto quello che c'è. I singoli elementi — in Impostazioni → «Barra dei menu». La selezione vale per tutti i profili."
+            "value": "«Minimo» — l'icona e gli eventi, «Limiti» — più le percentuali di sessione e settimana, «Tutto» — tutto quello che c'è. I singoli elementi — in Impostazioni → «Barra dei menu»."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "「最小」 — アイコンとイベント、「制限」 — セッションと週の使用率も、「すべて」 — あるものすべて。個別の要素は設定 → 「メニューバー」で。この組み合わせはすべてのプロファイルで共通です。"
+            "value": "「最小」 — アイコンとイベント、「制限」 — セッションと週の使用率も、「すべて」 — あるものすべて。個別の要素は設定 → 「メニューバー」で。"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "«최소» — 아이콘과 이벤트, «한도» — 세션과 주간 사용률 추가, «전체» — 있는 것 모두. 개별 요소는 설정 → «메뉴 막대»에서. 이 구성은 모든 프로필에 공통입니다."
+            "value": "«최소» — 아이콘과 이벤트, «한도» — 세션과 주간 사용률 추가, «전체» — 있는 것 모두. 개별 요소는 설정 → «메뉴 막대»에서."
           }
         },
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "„Minimum” — ikona i zdarzenia, „Limity” — do tego procenty sesji i tygodnia, „Wszystko” — wszystko, co jest. Pojedyncze elementy — w Ustawieniach → „Pasek menu”. Zestaw jest wspólny dla wszystkich profili."
+            "value": "„Minimum” — ikona i zdarzenia, „Limity” — do tego procenty sesji i tygodnia, „Wszystko” — wszystko, co jest. Pojedyncze elementy — w Ustawieniach → „Pasek menu”."
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "«Mínimo» — o ícone e os eventos, «Limites» — mais os percentuais de sessão e semana, «Tudo» — tudo o que há. Elementos avulsos, em Ajustes → «Barra de menus». O conjunto é comum a todos os perfis."
+            "value": "«Mínimo» — o ícone e os eventos, «Limites» — mais os percentuais de sessão e semana, «Tudo» — tudo o que há. Elementos avulsos, em Ajustes → «Barra de menus»."
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "«Мінімум» — значок і події, «Ліміти» — ще відсотки сесії й тижня, «Усе» — усе, що є. Окремі елементи — в Налаштуваннях → «Рядок меню». Набір спільний для всіх профілів."
+            "value": "«Мінімум» — значок і події, «Ліміти» — ще відсотки сесії й тижня, «Усе» — усе, що є. Окремі елементи — в Налаштуваннях → «Рядок меню»."
           }
         }
       }
@@ -37971,82 +37895,6 @@
         }
       }
     },
-    "Идёт сборка": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "جارٍ البناء"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Build läuft"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Building"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Compilando"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Compilation en cours"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sedang build"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Build in corso"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ビルド中"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "빌드 중"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Trwa budowanie"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Compilando"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Іде збирання"
-          }
-        }
-      }
-    },
     "Извлечено дисков: %lld": {
       "localizations": {
         "ar": {
@@ -53253,78 +53101,78 @@
         }
       }
     },
-    "Настройки → «Профили» → «+»: «Разработчик (GitHub)», «Видео», «Тексты», «Ресёрч», «Соцсети», «Свой». Выберите папку — профиль готов, дальше всё правится в его настройках.": {
+    "Настройки → «Профили» → «+»: «Разработчик (GitHub)», «Видео», «Тексты», «Ресёрч», «Соцсети», «Утилиты Mac», «Свой». Выберите папку — профиль готов, дальше всё правится в его настройках.": {
       "localizations": {
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "الإعدادات ← «ملفات التعريف» ← «+»: «مطوّر (GitHub)»، «فيديو»، «نصوص»، «بحث»، «وسائل التواصل»، «مخصّص». اختر مجلدًا — وملف التعريف جاهز؛ وما تبقى يُعدَّل من إعداداته."
+            "value": "الإعدادات ← «ملفات التعريف» ← «+»: «مطوّر (GitHub)»، «فيديو»، «نصوص»، «بحث»، «وسائل التواصل»، «أدوات Mac»، «مخصّص». اختر مجلدًا — وملف التعريف جاهز؛ وما تبقى يُعدَّل من إعداداته."
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Einstellungen → „Profile“ → „+“: „Entwickler (GitHub)“, „Video“, „Texte“, „Recherche“, „Social Media“, „Eigener“. Ordner wählen — das Profil ist fertig; alles Weitere in seinen Einstellungen."
+            "value": "Einstellungen → „Profile“ → „+“: „Entwickler (GitHub)“, „Video“, „Texte“, „Recherche“, „Social Media“, „Mac-Werkzeuge“, „Eigener“. Ordner wählen — das Profil ist fertig; alles Weitere in seinen Einstellungen."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Settings → “Profiles” → “+”: “Developer (GitHub)”, “Video”, “Writing”, “Research”, “Social media”, “Custom”. Pick a folder — the profile is ready; everything else is changed in its settings."
+            "value": "Settings → “Profiles” → “+”: “Developer (GitHub)”, “Video”, “Writing”, “Research”, “Social media”, “Mac utilities”, “Custom”. Pick a folder — the profile is ready; everything else is changed in its settings."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ajustes → «Perfiles» → «+»: «Desarrollador (GitHub)», «Vídeo», «Textos», «Investigación», «Redes sociales», «Propio». Elige una carpeta y el perfil está listo; lo demás se cambia en sus ajustes."
+            "value": "Ajustes → «Perfiles» → «+»: «Desarrollador (GitHub)», «Vídeo», «Textos», «Investigación», «Redes sociales», «Utilidades del Mac», «Propio». Elige una carpeta y el perfil está listo; lo demás se cambia en sus ajustes."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Réglages → «Profils» → «+» : «Développeur (GitHub)», «Vidéo», «Textes», «Recherche», «Réseaux sociaux», «Personnalisé». Choisissez un dossier et le profil est prêt ; le reste se règle dans ses réglages."
+            "value": "Réglages → «Profils» → «+» : «Développeur (GitHub)», «Vidéo», «Textes», «Recherche», «Réseaux sociaux», «Utilitaires Mac», «Personnalisé». Choisissez un dossier et le profil est prêt ; le reste se règle dans ses réglages."
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "Pengaturan → «Profil» → «+»: «Developer (GitHub)», «Video», «Tulisan», «Riset», «Media sosial», «Kustom». Pilih folder — profil siap; sisanya diubah di pengaturannya."
+            "value": "Pengaturan → «Profil» → «+»: «Developer (GitHub)», «Video», «Tulisan», «Riset», «Media sosial», «Utilitas Mac», «Kustom». Pilih folder — profil siap; sisanya diubah di pengaturannya."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Impostazioni → «Profili» → «+»: «Sviluppatore (GitHub)», «Video», «Testi», «Ricerca», «Social», «Personale». Scegli una cartella e il profilo è pronto; il resto si cambia nelle sue impostazioni."
+            "value": "Impostazioni → «Profili» → «+»: «Sviluppatore (GitHub)», «Video», «Testi», «Ricerca», «Social», «Utility per Mac», «Personale». Scegli una cartella e il profilo è pronto; il resto si cambia nelle sue impostazioni."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "設定 → 「プロファイル」 → 「+」: 「開発者 (GitHub)」、「動画」、「文章」、「リサーチ」、「SNS」、「カスタム」。フォルダーを選べばプロファイルの完成。あとはその設定で変更できます。"
+            "value": "設定 → 「プロファイル」 → 「+」: 「開発者 (GitHub)」、「動画」、「文章」、「リサーチ」、「SNS」、「Macユーティリティ」、「カスタム」。フォルダーを選べばプロファイルの完成。あとはその設定で変更できます。"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "설정 → «프로필» → «+»: «개발자 (GitHub)», «동영상», «글쓰기», «리서치», «소셜 미디어», «사용자 지정». 폴더를 고르면 프로필이 완성되고, 나머지는 그 설정에서 바꿉니다."
+            "value": "설정 → «프로필» → «+»: «개발자 (GitHub)», «동영상», «글쓰기», «리서치», «소셜 미디어», «Mac 유틸리티», «사용자 지정». 폴더를 고르면 프로필이 완성되고, 나머지는 그 설정에서 바꿉니다."
           }
         },
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ustawienia → „Profile” → „+”: „Programista (GitHub)”, „Wideo”, „Teksty”, „Research”, „Media społecznościowe”, „Własny”. Wybierz folder — profil jest gotowy; resztę zmienisz w jego ustawieniach."
+            "value": "Ustawienia → „Profile” → „+”: „Programista (GitHub)”, „Wideo”, „Teksty”, „Research”, „Media społecznościowe”, „Narzędzia dla Maca”, „Własny”. Wybierz folder — profil jest gotowy; resztę zmienisz w jego ustawieniach."
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ajustes → «Perfis» → «+»: «Desenvolvedor (GitHub)», «Vídeo», «Textos», «Pesquisa», «Redes sociais», «Personalizado». Escolha uma pasta e o perfil fica pronto; o resto se ajusta nas configurações dele."
+            "value": "Ajustes → «Perfis» → «+»: «Desenvolvedor (GitHub)», «Vídeo», «Textos», «Pesquisa», «Redes sociais», «Utilitários do Mac», «Personalizado». Escolha uma pasta e o perfil fica pronto; o resto se ajusta nas configurações dele."
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Налаштування → «Профілі» → «+»: «Розробник (GitHub)», «Відео», «Тексти», «Ресерч», «Соцмережі», «Свій». Виберіть папку — профіль готовий, далі все правиться в його налаштуваннях."
+            "value": "Налаштування → «Профілі» → «+»: «Розробник (GitHub)», «Відео», «Тексти», «Ресерч», «Соцмережі», «Утиліти Mac», «Свій». Виберіть папку — профіль готовий, далі все правиться в його налаштуваннях."
           }
         }
       }
@@ -78599,78 +78447,78 @@
         }
       }
     },
-    "Поле сверху панели ищет проекты, сессии, команды и свои промпты. Открыть с клавиатуры — сочетание в «Основных».": {
+    "Поле сверху панели ищет проекты, сессии, команды и свои промпты. Открыть с клавиатуры — сочетание в «Клавишах».": {
       "localizations": {
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "يبحث الحقل أعلى اللوحة في المشاريع والجلسات والأوامر ومطالباتك الخاصة. ولفتحه من لوحة المفاتيح — الاختصار في «عام»."
+            "value": "يبحث الحقل أعلى اللوحة في المشاريع والجلسات والأوامر ومطالباتك الخاصة. ولفتحه من لوحة المفاتيح — الاختصار في «الاختصارات»."
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Das Feld oben im Panel durchsucht Projekte, Sitzungen, Befehle und eigene Prompts. Per Tastatur öffnen — Tastenkürzel unter „Allgemein“."
+            "value": "Das Feld oben im Panel durchsucht Projekte, Sitzungen, Befehle und eigene Prompts. Per Tastatur öffnen — Tastenkürzel unter „Kurzbefehle“."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "The field at the top of the panel searches projects, sessions, commands and your own prompts. To open it from the keyboard, set a shortcut in “General”."
+            "value": "The field at the top of the panel searches projects, sessions, commands and your own prompts. To open it from the keyboard, set a shortcut in “Shortcuts”."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "El campo de arriba del panel busca proyectos, sesiones, comandos y tus propios prompts. Para abrirlo con el teclado, el atajo está en «General»."
+            "value": "El campo de arriba del panel busca proyectos, sesiones, comandos y tus propios prompts. Para abrirlo con el teclado, el atajo está en «Atajos»."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Le champ en haut du panneau cherche projets, sessions, commandes et vos propres prompts. Pour l’ouvrir au clavier, un raccourci dans « Général »."
+            "value": "Le champ en haut du panneau cherche projets, sessions, commandes et vos propres prompts. Pour l’ouvrir au clavier, un raccourci dans « Raccourcis »."
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "Kolom di atas panel mencari proyek, sesi, perintah, dan prompt Anda sendiri. Untuk membukanya dari keyboard — pintasan di «Umum»."
+            "value": "Kolom di atas panel mencari proyek, sesi, perintah, dan prompt Anda sendiri. Untuk membukanya dari keyboard — pintasan di «Pintasan»."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Il campo in cima al pannello cerca progetti, sessioni, comandi e i tuoi prompt. Per aprirlo da tastiera, la scorciatoia è in «Generali»."
+            "value": "Il campo in cima al pannello cerca progetti, sessioni, comandi e i tuoi prompt. Per aprirlo da tastiera, la scorciatoia è in «Scorciatoie»."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "パネル上部の欄で、プロジェクト、セッション、コマンド、自分のプロンプトを検索できます。キーボードで開くショートカットは「一般」で設定します。"
+            "value": "パネル上部の欄で、プロジェクト、セッション、コマンド、自分のプロンプトを検索できます。キーボードで開くショートカットは「ショートカット」で設定します。"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "패널 위쪽 입력란에서 프로젝트, 세션, 명령, 직접 만든 프롬프트를 검색합니다. 키보드로 열려면 «일반»에서 단축키를 지정하세요."
+            "value": "패널 위쪽 입력란에서 프로젝트, 세션, 명령, 직접 만든 프롬프트를 검색합니다. 키보드로 열려면 «단축키»에서 단축키를 지정하세요."
           }
         },
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Pole u góry panelu szuka projektów, sesji, poleceń i własnych promptów. Otwieranie z klawiatury — skrót w sekcji „Ogólne”."
+            "value": "Pole u góry panelu szuka projektów, sesji, poleceń i własnych promptów. Otwieranie z klawiatury — skrót w sekcji „Skróty”."
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "O campo no topo do painel busca projetos, sessões, comandos e seus próprios prompts. Para abrir pelo teclado, o atalho fica em «Geral»."
+            "value": "O campo no topo do painel busca projetos, sessões, comandos e seus próprios prompts. Para abrir pelo teclado, o atalho fica em «Atalhos»."
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Поле вгорі панелі шукає проєкти, сесії, команди й власні промпти. Відкрити з клавіатури — сполучення клавіш у розділі «Загальні»."
+            "value": "Поле вгорі панелі шукає проєкти, сесії, команди й власні промпти. Відкрити з клавіатури — сполучення клавіш у розділі «Клавіші»."
           }
         }
       }
@@ -85913,82 +85761,6 @@
         }
       }
     },
-    "Работают и ждут ответа": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "تعمل أو تنتظر ردًا"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Arbeiten und warten auf Antwort"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Working and waiting for an answer"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Trabajando y esperando respuesta"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "En cours et en attente de réponse"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bekerja dan menunggu jawaban"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "In corso e in attesa di risposta"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "作業中と応答待ち"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "작업 중이거나 답변을 기다리는 세션"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Pracują i czekają na odpowiedź"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Trabalhando e aguardando resposta"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Працюють і чекають на відповідь"
-          }
-        }
-      }
-    },
     "Работают из любой программы. В панели: ⌘R — обновить, ⌘, — настройки, ↑ ↓ и ↵ — результаты поиска.": {
       "localizations": {
         "ar": {
@@ -89639,6 +89411,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Скидання"
+          }
+        }
+      }
+    },
+    "Сбросить": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إعادة تعيين"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zurücksetzen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reset"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restablecer"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Réinitialiser"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Atur Ulang"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ripristina"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "リセット"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "재설정"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Resetuj"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Redefinir"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Скинути"
           }
         }
       }
@@ -101208,6 +101056,82 @@
         "ar": {
           "stringUnit": {
             "state": "translated",
+            "value": "السمة"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Design"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Theme"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tema"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Thème"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tema"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tema"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "テーマ"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "테마"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Motyw"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tema"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Тема"
+          }
+        }
+      }
+    },
+    "Тема публикации": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
             "value": "الموضوع"
           }
         },
@@ -111254,78 +111178,78 @@
         }
       }
     },
-    "Что будет в панели этого профиля. Порядок и всё остальное можно поменять потом в Настройках → «Профили».": {
+    "Что будет в панели этого профиля. Порядок и всё остальное можно поменять потом в Настройках → «Панель».": {
       "localizations": {
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "ما ستعرضه لوحة ملف التعريف هذا. يمكن تغيير الترتيب وكل ما تبقى لاحقًا من الإعدادات ← «ملفات التعريف»."
+            "value": "ما ستعرضه لوحة ملف التعريف هذا. يمكن تغيير الترتيب وكل ما تبقى لاحقًا من الإعدادات ← «اللوحة»."
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Was das Panel dieses Profils zeigt. Reihenfolge und alles Weitere lassen sich später unter Einstellungen → „Profile“ ändern."
+            "value": "Was das Panel dieses Profils zeigt. Reihenfolge und alles Weitere lassen sich später unter Einstellungen → „Panel“ ändern."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "What this profile's panel shows. The order and everything else can be changed later in Settings → «Profiles»."
+            "value": "What this profile's panel shows. The order and everything else can be changed later in Settings → «Panel»."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Lo que mostrará el panel de este perfil. El orden y lo demás se cambian luego en Ajustes → «Perfiles»."
+            "value": "Lo que mostrará el panel de este perfil. El orden y lo demás se cambian luego en Ajustes → «Panel»."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ce que montrera le panneau de ce profil. L’ordre et le reste se changent ensuite dans Réglages → «Profils»."
+            "value": "Ce que montrera le panneau de ce profil. L’ordre et le reste se changent ensuite dans Réglages → «Panneau»."
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "Isi panel profil ini. Urutan dan lainnya bisa diubah nanti di Pengaturan → «Profil»."
+            "value": "Isi panel profil ini. Urutan dan lainnya bisa diubah nanti di Pengaturan → «Panel»."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Cosa mostra il pannello di questo profilo. L’ordine e il resto si cambiano poi in Impostazioni → «Profili»."
+            "value": "Cosa mostra il pannello di questo profilo. L’ordine e il resto si cambiano poi in Impostazioni → «Pannello»."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "このプロファイルのパネルに表示する内容。順番などはあとで 設定 → 「プロファイル」 で変えられます。"
+            "value": "このプロファイルのパネルに表示する内容。順番などはあとで 設定 → 「パネル」 で変えられます。"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "이 프로필의 패널에 보일 내용. 순서와 나머지는 나중에 설정 → «프로필»에서 바꿀 수 있습니다."
+            "value": "이 프로필의 패널에 보일 내용. 순서와 나머지는 나중에 설정 → «패널»에서 바꿀 수 있습니다."
           }
         },
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Co pokaże panel tego profilu. Kolejność i resztę zmienisz później w Ustawienia → «Profile»."
+            "value": "Co pokaże panel tego profilu. Kolejność i resztę zmienisz później w Ustawienia → «Panel»."
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "O que o painel deste perfil mostra. A ordem e o resto podem ser mudados depois em Ajustes → «Perfis»."
+            "value": "O que o painel deste perfil mostra. A ordem e o resto podem ser mudados depois em Ajustes → «Painel»."
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Що буде в панелі цього профілю. Порядок і решту можна змінити потім у Налаштування → «Профілі»."
+            "value": "Що буде в панелі цього профілю. Порядок і решту можна змінити потім у Налаштування → «Панель»."
           }
         }
       }
@@ -127169,6 +127093,82 @@
         }
       }
     },
+    "работают: %lld": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "قيد العمل: %lld"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "aktiv: %lld"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "running: %lld"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "en marcha: %lld"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "en cours : %lld"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "berjalan: %lld"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "in corso: %lld"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "実行中: %lld"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "실행 중: %lld"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "działają: %lld"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "em execução: %lld"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "працюють: %lld"
+          }
+        }
+      }
+    },
     "рабочие столы": {
       "localizations": {
         "ar": {
@@ -128153,6 +128153,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "сервіс відповів HTTP %lld"
+          }
+        }
+      }
+    },
+    "сессии до сброса хватит": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الجلسة تكفي حتى إعادة الضبط"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "die Sitzung reicht bis zur Zurücksetzung"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "the session will last until its reset"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "la sesión alcanza hasta el reinicio"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "la session tiendra jusqu'à la réinitialisation"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "sesi cukup sampai reset"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "la sessione basta fino all'azzeramento"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "セッションはリセットまで持ちます"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "세션은 초기화까지 충분합니다"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "sesji starczy do resetu"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "a sessão dura até o reinício"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "сесії до скидання вистачить"
           }
         }
       }

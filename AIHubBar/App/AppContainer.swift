@@ -170,7 +170,9 @@ final class AppContainer {
                     .map { WidgetStatus.Session(id: $0.id, project: $0.session.displayProject) },
                 running: ClaudeActivity(sessions: sessions, runs: runs).working,
                 problems: store.projects.filter { $0.health == .red }.map(\.name),
-                keepAwake: keepAwake.reason != nil,
+                // The switch, as in the panel and the bot (#251): its «off» only ends the manual hold, so a rule keeping
+                // the Mac awake must not show it on, or the tap would do nothing.
+                keepAwake: keepAwake.manualUntil != nil,
                 keepAwakeInstalled: modes.isOn(.keepAwake)
             )
         }

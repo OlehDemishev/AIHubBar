@@ -3,7 +3,7 @@
     "beta" : "bêta",
     "help" : "Aide",
     "replay" : "Revoir",
-    "scripts" : "Les commandes pour scripts s'appellent ainsi : ~/Applications/AI\\ Hub\\ Bar.app/Contents/MacOS/AIHubBar --sessions",
+    "scripts" : "Les commandes pour scripts s'appellent ainsi : /Applications/AI\\ Hub\\ Bar.app/Contents/MacOS/AIHubBar --sessions",
     "search" : "Rechercher dans l’aide",
     "start" : "Pour commencer"
   },
@@ -94,7 +94,7 @@
         {
           "facts" : [
             {
-              "detail" : "Le champ en haut du panneau cherche projets, sessions, commandes et vos propres prompts. Pour l’ouvrir au clavier, un raccourci dans « Général ».",
+              "detail" : "Le champ en haut du panneau cherche projets, sessions, commandes et vos propres prompts. Pour l’ouvrir au clavier, un raccourci dans « Raccourcis ».",
               "name" : "Rechercher"
             },
             {
@@ -144,7 +144,7 @@
               "name" : "Assistant"
             },
             {
-              "detail" : "Réglages → «Profils» → «+» : «Développeur (GitHub)», «Vidéo», «Textes», «Recherche», «Réseaux sociaux», «Personnalisé». Choisissez un dossier et le profil est prêt ; le reste se règle dans ses réglages.",
+              "detail" : "Réglages → «Profils» → «+» : «Développeur (GitHub)», «Vidéo», «Textes», «Recherche», «Réseaux sociaux», «Utilitaires Mac», «Personnalisé». Choisissez un dossier et le profil est prêt ; le reste se règle dans ses réglages.",
               "name" : "Ajouter un profil"
             }
           ],

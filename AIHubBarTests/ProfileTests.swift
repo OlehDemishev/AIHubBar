@@ -139,6 +139,22 @@ struct ProfileStoreTests {
         #expect(store.currentID == mode.id)
     }
 
+    @Test func aFileCannotNameAProfileOutsideTheFolder() throws {
+        let json = #"""
+        {"format": "claudepult-settings", "version": 3, "exportedAt": "2026-10-30T00:00:00Z",
+         "general": {"backgroundTimeLimitMinutes": 0, "telegramForBackground": false, "limitThresholds": [80], "limitAlertsToTelegram": false},
+         "modes": [{"id": "../../evil", "name": "A"}, {"id": "ok-1", "name": "B"}, {"id": "ok-1", "name": "C"}],
+         "enabled": ["../../evil", "ok-1"], "current": "../../evil"}
+        """#
+        let bundle = try #require(ProfileStore.decodeBundle(Data(json.utf8)))
+        let ids = bundle.modes.map(\.id)
+        #expect(ids.allSatisfy { $0.range(of: "^[A-Za-z0-9-]+$", options: .regularExpression) != nil })
+        #expect(Set(ids).count == 3, "a repeated id gets its own file too")
+        #expect(ids[1] == "ok-1")
+        #expect(bundle.current == ids[0] && bundle.enabled == [ids[0], "ok-1"], "the renamed profile stays current and on")
+        #expect(bundle.general?.backgroundTimeLimitMinutes == 10)
+    }
+
     @Test func rejectsForeignFilesAndToleratesUnknownBlocks() throws {
         #expect(ProfileStore.decodeBundle(Data(#"{"format": "other", "version": 1, "exportedAt": "2026-10-30T00:00:00Z", "modes": []}"#.utf8)) == nil)
         #expect(ProfileStore.decodeBundle(Data("garbage".utf8)) == nil)

@@ -5,9 +5,19 @@ import Foundation
 enum NightQueue {
     static let hours = [22, 23, 0, 1, 2, 3, 4]
 
-    /// The next time it is `hour` o'clock; tonight if still ahead, else tomorrow.
+    /// The night lasts from the start hour to this one.
+    static let endHour = 6
+
+    /// When a run queued now starts: at the next `hour` o'clock, or at once if the night has already begun
+    /// (queued at 23:30 with a 22:00 start, it must not wait for tomorrow's night).
     static func nextStart(hour: Int, now: Date = .now, calendar: Calendar = .current) -> Date {
         let today = calendar.date(bySettingHour: hour, minute: 0, second: 0, of: now) ?? now
+        let lastStart = today <= now ? today : calendar.date(byAdding: .day, value: -1, to: today) ?? today
+        // The first 06:00 after that start: the same morning for a start after midnight, the next one otherwise.
+        if let end = calendar.nextDate(after: lastStart, matching: DateComponents(hour: endHour, minute: 0, second: 0),
+                                       matchingPolicy: .nextTime), now < end {
+            return now
+        }
         return today > now ? today : calendar.date(byAdding: .day, value: 1, to: today) ?? today
     }
 

@@ -49,7 +49,7 @@ struct LayoutSection: View {
             Toggle("Не исправлять в терминалах", systemImage: "terminal", isOn: $settings.layout.skipTerminals)
                 .disabled(!settings.layout.auto)
             Toggle("Двойной Shift — последнее слово", systemImage: "shift", isOn: $settings.layout.doubleShift)
-            Toggle("⌥⇧ — выделенный текст", systemImage: "option", isOn: $settings.layout.optionShift)
+            Toggle("⌥⇧ — выделенный текст", systemImage: "character.cursor.ibeam", isOn: $settings.layout.optionShift)
                 // The language in the menu bar is the chip under «Где показывать».
                 .onChange(of: settings.layout.menuBarIcon) { switcher.sync() }
         } footer: {
@@ -76,8 +76,10 @@ struct LayoutSection: View {
             IconRow("Добавить слова", systemImage: "plus") {
                 HStack {
                     // No title: in a Form a titled field also shows its title as a label next to it.
-                    TextField("", text: $newExceptions, prompt: Text(verbatim: "vs, github"))
+                    TextField("", text: $newExceptions, prompt: Text(verbatim: "vs, github").foregroundStyle(.tertiary))
                         .labelsHidden()
+                        // A Form aligns a field's text to the trailing edge, where the example reads as an entry.
+                        .multilineTextAlignment(.leading)
                         .textFieldStyle(.roundedBorder)
                         .frame(width: 140)
                         .onSubmit(addExceptions)
