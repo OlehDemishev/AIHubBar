@@ -59,7 +59,9 @@ struct HubSourceRow: View {
                     if hub.savedKeys.contains(source) {
                         Text("Ключ сохранён").font(.caption)
                         Spacer()
-                        Button("Удалить ключ", role: .destructive) { Task { await hub.deleteKey(for: source) } }
+                        ConfirmedButton(title: "Удалить ключ", message: source.title) {
+                            Task { await hub.deleteKey(for: source) }
+                        } label: { Text("Удалить ключ") }
                     } else {
                         SecureField("Ключ", text: $keyText)
                             .textFieldStyle(.roundedBorder)

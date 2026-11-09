@@ -38,7 +38,9 @@ struct AppearanceSettings: View {
             }
 
             Section {
-                Button("Сбросить внешний вид") { settings.resetAppearance() }
+                ConfirmedButton(title: "Сбросить внешний вид", confirm: "Сбросить", role: nil) {
+                    settings.resetAppearance()
+                } label: { Text("Сбросить внешний вид") }
             }
         }
     }

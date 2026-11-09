@@ -3,7 +3,7 @@
     "beta" : "beta",
     "help" : "Help",
     "replay" : "Show again",
-    "scripts" : "Script commands are called like this: ~/Applications/AI\\ Hub\\ Bar.app/Contents/MacOS/AIHubBar --sessions",
+    "scripts" : "Script commands are called like this: /Applications/AI\\ Hub\\ Bar.app/Contents/MacOS/AIHubBar --sessions",
     "search" : "Search Help",
     "start" : "Get started"
   },
@@ -94,7 +94,7 @@
         {
           "facts" : [
             {
-              "detail" : "The field at the top of the panel searches projects, sessions, commands and your own prompts. To open it from the keyboard, set a shortcut in “General”.",
+              "detail" : "The field at the top of the panel searches projects, sessions, commands and your own prompts. To open it from the keyboard, set a shortcut in “Shortcuts”.",
               "name" : "Search"
             },
             {
@@ -144,7 +144,7 @@
               "name" : "Assistant"
             },
             {
-              "detail" : "Settings → “Profiles” → “+”: “Developer (GitHub)”, “Video”, “Writing”, “Research”, “Social media”, “Custom”. Pick a folder — the profile is ready; everything else is changed in its settings.",
+              "detail" : "Settings → “Profiles” → “+”: “Developer (GitHub)”, “Video”, “Writing”, “Research”, “Social media”, “Mac utilities”, “Custom”. Pick a folder — the profile is ready; everything else is changed in its settings.",
               "name" : "Add profile"
             }
           ],

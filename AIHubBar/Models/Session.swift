@@ -195,11 +195,19 @@ struct Session: Decodable, Identifiable, Equatable, Sendable {
     }
 
     /// A prompt without the `<system-reminder>` the Claude app puts in front of the person's words. Files from older
-    /// hooks can hold that text alone, cut off at the hook's limit, with no closing tag.
+    /// hooks can hold that text alone, cut off at the hook's limit, with no closing tag. The app's other wrappers
+    /// (`<artifact-view-context …>`, `<pasted_content …>`) go too, but only at the start: their names have a hyphen or an underscore,
+    /// which a tag the person writes about rarely has, and the person's own words follow them.
     static func withoutSystemText(_ prompt: String) -> String {
-        prompt.replacingOccurrences(of: #"(?s)<system-reminder>.*?(</system-reminder>|$)"#, with: " ", options: .regularExpression)
+        var text = prompt.replacingOccurrences(of: #"(?s)<system-reminder>.*?(</system-reminder>|$)"#, with: " ", options: .regularExpression)
             .trimmingCharacters(in: .whitespacesAndNewlines)
+        while let wrapper = text.range(of: appWrapper, options: .regularExpression) {
+            text = text[wrapper.upperBound...].trimmingCharacters(in: .whitespacesAndNewlines)
+        }
+        return text
     }
+
+    private static let appWrapper = #"(?s)^<([a-z]+(?:[-_][a-z]+)+)(?:\s[^>]*)?>.*?(?:</\1>|$)"#
 
     static func taskTitle(_ prompt: String) -> String {
         // The hook keeps 200 characters with whitespace collapsed; compare the same way.

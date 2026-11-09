@@ -237,7 +237,8 @@ final class ClaudeConfigStore {
 
     func save(_ text: String, to file: InstructionFile) {
         do {
-            try text.write(toFile: file.path, atomically: true, encoding: .utf8)
+            // `CLAUDE.md` is often a link to `AGENTS.md`: the link stays, the file behind it changes.
+            try text.write(to: URL(fileURLWithPath: file.path).resolvingSymlinksInPath(), atomically: true, encoding: .utf8)
             texts[file.path] = text
             drafts[file.path] = nil
             AppLog.info("Saved \(file.path)")
@@ -341,7 +342,7 @@ final class ClaudeConfigStore {
 
     private func writeJSON(_ object: [String: Any], to url: URL) throws {
         let data = try JSONSerialization.data(withJSONObject: object, options: [.prettyPrinted, .sortedKeys, .withoutEscapingSlashes])
-        try data.write(to: url, options: .atomic)
+        try data.write(to: url.resolvingSymlinksInPath(), options: .atomic)
     }
 
     private func jsonString(_ object: Any) throws -> String {

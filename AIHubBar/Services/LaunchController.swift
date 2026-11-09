@@ -301,12 +301,16 @@ final class LaunchController {
     private func launchDueQueued(now: Date = .now) {
         summarizeNight(now: now)
         postponeHeld(now: now)
-        let due = queued.filter { $0.launchAt <= now }
+        // One run per project a tick: `launch` drops a second one for a project it is already starting, and that
+        // run would be gone from the queue with no word. The others stay due and start on the next ticks.
+        var taken = working
+        let due = queued.filter { $0.launchAt <= now && taken.insert($0.target.path).inserted }
         guard !due.isEmpty else { return }
         if due.contains(where: \.night), UserDefaults.standard.double(forKey: "nightBatchStart") == 0 {
             UserDefaults.standard.set(now.timeIntervalSince1970, forKey: "nightBatchStart")
         }
-        queued.removeAll { $0.launchAt <= now }
+        let started = Set(due.map(\.id))
+        queued.removeAll { started.contains($0.id) }
         saveQueue()
         for item in due {
             AppLog.info("Starting queued «\(item.command.title)» for \(item.target.name)")

@@ -15,11 +15,21 @@ struct NightQueueTests {
     }
 
     @Test func nextStart() {
-        // 20:00 → 01:00 the next calendar day; 00:30 → 01:00 the same day; 01:00 sharp → the next night.
+        // 20:00 → 01:00 the next calendar day; 00:30 → 01:00 the same day.
         #expect(NightQueue.nextStart(hour: 1, now: date(30, 20), calendar: calendar) == date(31, 1))
         #expect(NightQueue.nextStart(hour: 1, now: date(31, 0, 30), calendar: calendar) == date(31, 1))
-        #expect(NightQueue.nextStart(hour: 1, now: date(31, 1), calendar: calendar) == date(32, 1)) // 1 November
         #expect(NightQueue.nextStart(hour: 23, now: date(30, 20), calendar: calendar) == date(30, 23))
+    }
+
+    @Test func aNightThatHasBegunStartsAtOnce() {
+        // Queued at 23:30 with a 22:00 start, or at 03:00 with a midnight start: tonight, not in 22 hours.
+        #expect(NightQueue.nextStart(hour: 22, now: date(30, 23, 30), calendar: calendar) == date(30, 23, 30))
+        #expect(NightQueue.nextStart(hour: 22, now: date(31, 5, 59), calendar: calendar) == date(31, 5, 59))
+        #expect(NightQueue.nextStart(hour: 0, now: date(31, 3), calendar: calendar) == date(31, 3))
+        #expect(NightQueue.nextStart(hour: 1, now: date(31, 1), calendar: calendar) == date(31, 1))
+        // In the morning the night is over: the next one.
+        #expect(NightQueue.nextStart(hour: 22, now: date(31, 6), calendar: calendar) == date(31, 22))
+        #expect(NightQueue.nextStart(hour: 1, now: date(31, 9), calendar: calendar) == date(32, 1)) // 1 November
     }
 
     @Test func oldQueueFilesStillLoad() throws {

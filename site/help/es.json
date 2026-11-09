@@ -3,7 +3,7 @@
     "beta" : "beta",
     "help" : "Ayuda",
     "replay" : "Ver de nuevo",
-    "scripts" : "Los comandos para scripts se llaman así: ~/Applications/AI\\ Hub\\ Bar.app/Contents/MacOS/AIHubBar --sessions",
+    "scripts" : "Los comandos para scripts se llaman así: /Applications/AI\\ Hub\\ Bar.app/Contents/MacOS/AIHubBar --sessions",
     "search" : "Buscar en la ayuda",
     "start" : "Cómo empezar"
   },
@@ -94,7 +94,7 @@
         {
           "facts" : [
             {
-              "detail" : "El campo de arriba del panel busca proyectos, sesiones, comandos y tus propios prompts. Para abrirlo con el teclado, el atajo está en «General».",
+              "detail" : "El campo de arriba del panel busca proyectos, sesiones, comandos y tus propios prompts. Para abrirlo con el teclado, el atajo está en «Atajos».",
               "name" : "Buscar"
             },
             {
@@ -144,7 +144,7 @@
               "name" : "Asistente"
             },
             {
-              "detail" : "Ajustes → «Perfiles» → «+»: «Desarrollador (GitHub)», «Vídeo», «Textos», «Investigación», «Redes sociales», «Propio». Elige una carpeta y el perfil está listo; lo demás se cambia en sus ajustes.",
+              "detail" : "Ajustes → «Perfiles» → «+»: «Desarrollador (GitHub)», «Vídeo», «Textos», «Investigación», «Redes sociales», «Utilidades del Mac», «Propio». Elige una carpeta y el perfil está listo; lo demás se cambia en sus ajustes.",
               "name" : "Añadir perfil"
             }
           ],

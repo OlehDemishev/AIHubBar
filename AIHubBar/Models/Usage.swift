@@ -141,7 +141,8 @@ enum UsageForecast: Equatable, Sendable {
 
     /// Pace over the last `window` seconds of the current session window (same `resets_at`).
     static func make(history: [UsagePoint], current: UsageWindow?, now: Date = .now, window: TimeInterval = 30 * 60) -> UsageForecast {
-        guard let current, let resets = current.resetsAt else { return .unknown }
+        // A limit already used up has no «lasts until»: the ring says 100 %, and a forecast of «now» would only confuse.
+        guard let current, let resets = current.resetsAt, current.utilization < 100 else { return .unknown }
         let points = history.filter { $0.sessionResetsAt.map { abs($0.timeIntervalSince(resets)) < 60 } ?? false && now.timeIntervalSince($0.date) <= window }
         guard let first = points.min(by: { $0.date < $1.date }) else { return .unknown }
         let elapsed = now.timeIntervalSince(first.date)

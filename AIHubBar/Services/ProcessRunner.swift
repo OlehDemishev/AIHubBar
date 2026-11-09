@@ -41,6 +41,11 @@ enum ProcessRunner {
         return env
     }
 
+    /// After SIGTERM at the timeout, how long a process has before SIGKILL.
+    static let killAfter: TimeInterval = 3
+    /// After the process exits, how long its output is waited for.
+    static let drainFor: TimeInterval = 2
+
     static func run(
         _ executable: String,
         _ arguments: [String],
@@ -50,7 +55,7 @@ enum ProcessRunner {
         timeout: Duration
     ) async throws -> ProcessResult {
         let command = ([URL(fileURLWithPath: executable).lastPathComponent] + arguments.prefix(1)).joined(separator: " ")
-        let seconds = Double(timeout.components.seconds)
+        let seconds = Double(timeout.components.seconds) + Double(timeout.components.attoseconds) / 1e18
 
         return try await withCheckedThrowingContinuation { continuation in
             DispatchQueue.global(qos: .utility).async {
@@ -79,32 +84,42 @@ enum ProcessRunner {
                     }
                 }
 
+                // Both pipes are drained on threads of their own, so a chatty process cannot block on a full pipe and
+                // many runs at once (one per repository) do not wait for each other's readers in the GCD pool.
+                let outputData = DataBox(), errorData = DataBox()
+                let readers = DispatchGroup()
+                for (pipe, box) in [(stdout, outputData), (stderr, errorData)] {
+                    readers.enter()
+                    Thread.detachNewThread {
+                        let handle = pipe.fileHandleForReading
+                        while case let chunk = handle.availableData, !chunk.isEmpty { box.append(chunk) }
+                        readers.leave()
+                    }
+                }
+
                 let timedOut = Flag()
                 let watchdog = DispatchWorkItem {
                     guard process.isRunning else { return }
                     timedOut.set()
                     process.terminate()
+                    // A child that ignores SIGTERM must not hold the caller for ever.
+                    DispatchQueue.global().asyncAfter(deadline: .now() + Self.killAfter) {
+                        if process.isRunning { kill(process.processIdentifier, SIGKILL) }
+                    }
                 }
                 DispatchQueue.global().asyncAfter(deadline: .now() + seconds, execute: watchdog)
 
-                // Drain stderr concurrently so a chatty process cannot block on a full pipe.
-                let errorData = DataBox()
-                let group = DispatchGroup()
-                group.enter()
-                DispatchQueue.global(qos: .utility).async {
-                    errorData.data = stderr.fileHandleForReading.readDataToEndOfFile()
-                    group.leave()
-                }
-                let outputData = stdout.fileHandleForReading.readDataToEndOfFile()
-                group.wait()
                 process.waitUntilExit()
                 watchdog.cancel()
+                // What the process wrote is already in the pipes. A descendant it left behind (`server &`) can keep
+                // them open for hours: the call ends without waiting for it.
+                _ = readers.wait(timeout: .now() + Self.drainFor)
 
                 if timedOut.isSet {
                     continuation.resume(throwing: ProcessError.timedOut(command, seconds: Int(seconds)))
                 } else {
                     continuation.resume(returning: ProcessResult(
-                        exitCode: process.terminationStatus, stdout: outputData, stderr: errorData.data
+                        exitCode: process.terminationStatus, stdout: outputData.data, stderr: errorData.data
                     ))
                 }
             }
@@ -120,7 +135,11 @@ private final class Flag: @unchecked Sendable {
     func set() { lock.withLock { value = true } }
 }
 
-/// Written once by the stderr reader before `group.leave()`, read after `group.wait()`.
+/// What a pipe's reader thread has collected so far.
 private final class DataBox: @unchecked Sendable {
-    var data = Data()
+    private let lock = NSLock()
+    private var collected = Data()
+
+    var data: Data { lock.withLock { collected } }
+    func append(_ chunk: Data) { lock.withLock { collected.append(chunk) } }
 }

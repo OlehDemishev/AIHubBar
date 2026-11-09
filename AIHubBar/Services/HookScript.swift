@@ -27,6 +27,8 @@ enum HookScript {
     PROMPT_LIMIT = 200
     # The Claude app puts this in front of the person's words: over the limit it would leave nothing of them.
     SYSTEM_TEXT = re.compile(r"<system-reminder>.*?(</system-reminder>|$)", re.S)
+    # The app's other wrappers in front of the person's words: <artifact-view-context …>, <ide-selection>.
+    APP_TEXT = re.compile(r"^\s*<([a-z]+(?:[-_][a-z]+)+)(?:\s[^>]*)?>.*?(?:</\1>|$)", re.S)
     APPROVAL_WAIT = 290
     ALIVE_WITHIN = 30
     # Claude Code's task list: TodoWrite sends the whole list, TaskCreate / TaskUpdate one task at a time.
@@ -152,11 +154,15 @@ enum HookScript {
             todos = record.get("todos") or []
             if todos and all(isinstance(t, dict) and t.get("status") == "completed" for t in todos):
                 record.pop("todos", None)
-            prompt = clip(SYSTEM_TEXT.sub(" ", data.get("prompt") or ""))
+            prompt = SYSTEM_TEXT.sub(" ", data.get("prompt") or "")
+            while APP_TEXT.match(prompt):
+                prompt = APP_TEXT.sub("", prompt, count=1)
+            prompt = clip(prompt)
             if prompt:
                 record["last_prompt"] = prompt
-                # A title saved by format 5 can be that text alone.
-                if str(record.get("first_prompt") or "").startswith("<system-reminder>"):
+                # A title saved by an older hook can be that text alone.
+                first = str(record.get("first_prompt") or "")
+                if first.startswith("<system-reminder>") or APP_TEXT.match(first):
                     record["first_prompt"] = prompt
                 record.setdefault("first_prompt", prompt)
         elif event == "PermissionRequest":

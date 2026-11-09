@@ -57,6 +57,12 @@ struct NotesStoreTests {
         #expect(notes.names.count == 2 && notes.text.isEmpty)
         notes.select(first)
         #expect(notes.text == "# План\n- пункт")
+        // Changed in another editor while the panel was closed: read, not overwritten with the text held here.
+        try "из другого редактора".write(to: notes.url(first), atomically: true, encoding: .utf8)
+        notes.flush()
+        notes.reload()
+        #expect(try String(contentsOf: notes.url(first), encoding: .utf8) == "из другого редактора")
+        #expect(notes.text == "из другого редактора")
         notes.trashSelected()
         #expect(!FileManager.default.fileExists(atPath: notes.url(first).path) && notes.names.count == 1)
     }

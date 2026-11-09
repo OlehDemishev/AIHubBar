@@ -98,6 +98,7 @@ struct FolderProjectsView: View {
 }
 
 private struct FolderProjectRow: View {
+    @Environment(\.panelCalm) private var panelCalm
     let project: FolderProject
     let mode: Profile?
     let stages: [String]
@@ -119,7 +120,7 @@ private struct FolderProjectRow: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             Button {
-                withAnimation(.snappy(duration: 0.25)) { isExpanded.toggle() }
+                withAnimation(panelCalm ? nil : .snappy(duration: 0.25)) { isExpanded.toggle() }
             } label: {
                 summary
             }
@@ -147,6 +148,7 @@ private struct FolderProjectRow: View {
                 .scaledFont(.caption2, weight: .semibold)
                 .foregroundStyle(.tertiary)
                 .rotationEffect(.degrees(isExpanded ? 90 : 0))
+                .flipsForRightToLeftLayoutDirection(true)
                 .frame(width: 8)
             VStack(alignment: .leading, spacing: 2) {
                 HStack(spacing: 6) {

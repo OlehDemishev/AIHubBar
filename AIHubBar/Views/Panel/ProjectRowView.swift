@@ -2,6 +2,7 @@ import SwiftUI
 
 /// One project in the panel: a compact summary row that expands into STATUS, attention items and actions.
 struct ProjectRowView: View {
+    @Environment(\.panelCalm) private var panelCalm
     let project: Project
     @Binding var isExpanded: Bool
 
@@ -10,7 +11,7 @@ struct ProjectRowView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             Button {
-                withAnimation(.snappy(duration: 0.25)) { isExpanded.toggle() }
+                withAnimation(panelCalm ? nil : .snappy(duration: 0.25)) { isExpanded.toggle() }
             } label: {
                 summary
             }

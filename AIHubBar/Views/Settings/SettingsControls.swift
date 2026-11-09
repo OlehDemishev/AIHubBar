@@ -49,12 +49,14 @@ struct ConfirmedButton<Content: View>: View {
     let title: LocalizedStringKey
     var message: String?
     var confirm: LocalizedStringKey = "Удалить"
+    /// How the button itself looks; the choice in the dialog is always destructive.
+    var role: ButtonRole? = .destructive
     let action: () -> Void
     @ViewBuilder let label: Content
     @State private var asking = false
 
     var body: some View {
-        Button(role: .destructive) { asking = true } label: { label }
+        Button(role: role) { asking = true } label: { label }
             .confirmationDialog(title, isPresented: $asking) {
                 Button(confirm, role: .destructive, action: action)
                 Button("Отмена", role: .cancel) {}

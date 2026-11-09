@@ -3,6 +3,7 @@ import SwiftUI
 
 /// «Лимиты» block at the top of the panel (spec §2.8): bars, resets, forecast, extra usage, per-project breakdown.
 struct LimitsView: View {
+    @Environment(\.panelCalm) private var panelCalm
     @Environment(UsageStore.self) private var usage
     @Environment(HubLimitsStore.self) private var hub
     @Environment(ClaudeAccountsStore.self) private var accounts
@@ -134,11 +135,12 @@ struct LimitsView: View {
     private var breakdown: some View {
         VStack(alignment: .leading, spacing: 6) {
             Button {
-                withAnimation(.snappy(duration: 0.2)) { showBreakdown.toggle() }
+                withAnimation(panelCalm ? nil : .snappy(duration: 0.2)) { showBreakdown.toggle() }
             } label: {
                 HStack(spacing: 4) {
                     Image(systemName: "chevron.right")
                         .rotationEffect(.degrees(showBreakdown ? 90 : 0))
+                            .flipsForRightToLeftLayoutDirection(true)
                     Text("Расход по проектам")
                     Spacer()
                 }
@@ -271,6 +273,10 @@ private struct ServiceCard: View {
     /// Claude's session forecast keeps its wording; other services' limits can run for days, so they say the day.
     private var forecastLine: String? {
         if bothLast { return String(localized: "хватит и на сессию, и на неделю") }
+        // Good news about the session right above a warning about the week: say which of the two it is.
+        if usage.service == .claude, usage.forecast == .lastsUntilReset, case .runsOutAt = usage.week?.forecast {
+            return String(localized: "сессии до сброса хватит")
+        }
         guard usage.service != .claude, case let .runsOutAt(date) = usage.forecast else { return UsageText.forecast(usage.forecast) }
         return String(localized: "кончится \(date.formatted(.dateTime.weekday(.abbreviated).hour().minute())) при таком темпе")
     }
@@ -278,6 +284,7 @@ private struct ServiceCard: View {
 
 /// A service's tokens per project this week, folded by default.
 private struct ProjectTokensList: View {
+    @Environment(\.panelCalm) private var panelCalm
     let projects: [ProjectTokens]
     let footnote: String
     @State private var expanded = false
@@ -285,11 +292,12 @@ private struct ProjectTokensList: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
             Button {
-                withAnimation(.snappy(duration: 0.2)) { expanded.toggle() }
+                withAnimation(panelCalm ? nil : .snappy(duration: 0.2)) { expanded.toggle() }
             } label: {
                 HStack(spacing: 4) {
                     Image(systemName: "chevron.right")
                         .rotationEffect(.degrees(expanded ? 90 : 0))
+                            .flipsForRightToLeftLayoutDirection(true)
                     Text("Проекты за неделю")
                     Spacer()
                 }
@@ -405,7 +413,9 @@ private struct WeekStrip: View {
                             .fill(day.isToday ? Color.accentColor : Color.primary.opacity(0.35))
                             .frame(width: 16, height: max(2, 22 * day.percent / top))
                         // Two letters: one repeats in most languages (Russian П, В and С, English T and S).
-                        Text(day.date.formatted(.dateTime.weekday(.short)).localizedCapitalized)
+                        Text(label(day))
+                            .lineLimit(1)
+                            .fixedSize()
                             .scaledFont(.caption2)
                             .foregroundStyle(day.isToday ? .primary : .secondary)
                     }
@@ -416,6 +426,14 @@ private struct WeekStrip: View {
             .frame(height: 56 * scale)
         }
         .scaledFont(.caption)
+    }
+
+    /// A week that resets in the middle of a day touches eight calendar days, so its first and last columns are the
+    /// same weekday: those two say the date too («Пн 9» … «Пн 16»).
+    private func label(_ day: WeekUsage.Day) -> String {
+        let weekday = day.date.formatted(.dateTime.weekday(.short)).localizedCapitalized
+        guard week.days.count > 7, day.id == week.days.first?.id || day.id == week.days.last?.id else { return weekday }
+        return weekday + " " + day.date.formatted(.dateTime.day())
     }
 }
 

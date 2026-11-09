@@ -429,6 +429,31 @@ final class ProfileStore {
         guard let bundle = try? decoder.decode(SettingsBundle.self, from: data),
               [SettingsBundle.settingsFormat, SettingsBundle.modeFormat].contains(bundle.format),
               !bundle.modes.isEmpty else { return nil }
+        return sanitized(bundle)
+    }
+
+    /// A file from someone else is not trusted: a profile id becomes a file name here, so anything but letters,
+    /// digits and hyphens («../../x») gets a fresh id, and the time limit stays within what Settings allows.
+    static func sanitized(_ bundle: SettingsBundle) -> SettingsBundle {
+        var bundle = bundle
+        var renamed: [String: String] = [:]
+        var seen: Set<String> = []
+        for index in bundle.modes.indices {
+            let id = bundle.modes[index].id
+            let safe = id.range(of: #"^[A-Za-z0-9-]{1,64}$"#, options: .regularExpression) != nil
+            if !safe || !seen.insert(id).inserted {
+                let fresh = UUID().uuidString.lowercased()
+                // A repeated id stays with the first profile that has it; «enabled» and «current» mean that one.
+                if !safe, renamed[id] == nil { renamed[id] = fresh }
+                bundle.modes[index].id = fresh
+                seen.insert(fresh)
+            }
+        }
+        bundle.enabled = bundle.enabled?.map { renamed[$0] ?? $0 }
+        bundle.current = bundle.current.map { renamed[$0] ?? $0 }
+        if let minutes = bundle.general?.backgroundTimeLimitMinutes {
+            bundle.general?.backgroundTimeLimitMinutes = min(max(minutes, 10), 600)
+        }
         return bundle
     }
 

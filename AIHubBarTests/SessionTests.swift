@@ -158,6 +158,17 @@ struct HookScriptTests {
         #expect(try h.session("old-format").firstPrompt == "Новая задача")
     }
 
+    @Test func theHookDropsTheAppsWrappers() async throws {
+        let h = try Harness()
+        defer { try? FileManager.default.removeItem(at: h.dir) }
+        let context = #"<artifact-view-context artifact="775dd6db"> {"context":{"mode":"edit","rev":17}}"#
+        // The wrapper alone is no prompt; a real one after it is the title, with nothing lost to the 200-character limit.
+        try await h.send(event("UserPromptSubmit", ["prompt": context]))
+        #expect(try h.session("abc-123").firstPrompt == nil)
+        try await h.send(event("UserPromptSubmit", ["prompt": context + "</artifact-view-context>\nПоправь заголовок"]))
+        #expect(try h.session("abc-123").firstPrompt == "Поправь заголовок")
+    }
+
     @Test func hookMessagesFollowTheAppsLanguage() {
         // Tests run in Russian, where the wording is the key itself; the catalog check covers the 12 translations.
         #expect(Session.localizedMessage("Нужно разрешение: Bash") == String(localized: "Нужно разрешение: \("Bash")"))
@@ -169,6 +180,18 @@ struct HookScriptTests {
     @Test func aPromptAboutTheTagKeepsItsWords() {
         #expect(Session.withoutSystemText("Что такое тег? <system-reminder>x</system-reminder> Объясни") == "Что такое тег?   Объясни")
         #expect(Session.withoutSystemText("  Обычный запрос\n") == "Обычный запрос")
+    }
+
+    @Test func theAppsWrappersAreNotTheTask() {
+        // What the Claude app puts in front of the person's words (seen 2026-11-09 as a session's title).
+        let context = #"<artifact-view-context artifact="775dd6db"> {"context":{"mode":"edit","rev":17}}"#
+        #expect(Session.withoutSystemText(context).isEmpty, "no closing tag: the hook cut it off")
+        #expect(Session.withoutSystemText(context + "</artifact-view-context> Поправь заголовок") == "Поправь заголовок")
+        #expect(Session.withoutSystemText("<ide-selection>let x = 1</ide-selection>\n<ide-opened-file>a.swift</ide-opened-file> Что это?") == "Что это?")
+        #expect(Session.withoutSystemText(#"<pasted_content id="2d13">3 строки</pasted_content> Разбери"#) == "Разбери")
+        // A tag the person writes about stays: no hyphen in its name, or not at the start.
+        #expect(Session.withoutSystemText("<div> не закрыт, почему?") == "<div> не закрыт, почему?")
+        #expect(Session.withoutSystemText("Что делает <my-tag>?") == "Что делает <my-tag>?")
     }
 
     private func event(_ name: String, _ extra: [String: Any] = [:]) -> [String: Any] {

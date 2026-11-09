@@ -2,6 +2,7 @@ import SwiftUI
 
 /// «Claude» block of an expanded project: the three commands, the custom-task field and the launch result.
 struct ClaudeActionsView: View {
+    @Environment(\.panelCalm) private var panelCalm
     let project: Project
 
     @Environment(LaunchController.self) private var launcher
@@ -32,7 +33,7 @@ struct ClaudeActionsView: View {
                 }
                 .help(project.status?.summary?.next.first.map { String(localized: "Первый пункт Next: \($0)") } ?? String(localized: "Первый пункт Next из STATUS.md"))
                 ActionButton(title: String(localized: "Своя задача…"), systemImage: "text.cursor") {
-                    withAnimation(.snappy(duration: 0.2)) { isEditingTask.toggle() }
+                    withAnimation(panelCalm ? nil : .snappy(duration: 0.2)) { isEditingTask.toggle() }
                     taskFocused = isEditingTask
                 }
                 ActionButton(title: String(localized: "Завершить"), systemImage: "checkmark.circle") {
@@ -134,27 +135,27 @@ struct ClaudeActionsView: View {
                 .focused($taskFocused)
             HStack(spacing: 6) {
                 Button("Отмена") {
-                    withAnimation(.snappy(duration: 0.2)) { isEditingTask = false }
+                    withAnimation(panelCalm ? nil : .snappy(duration: 0.2)) { isEditingTask = false }
                 }
                 .keyboardShortcut(.cancelAction)
                 Button("На ночь") {
                     launcher.queueForNight(.customTask(task), in: project)
                     task = ""
-                    withAnimation(.snappy(duration: 0.2)) { isEditingTask = false }
+                    withAnimation(panelCalm ? nil : .snappy(duration: 0.2)) { isEditingTask = false }
                 }
                 .help("Запустить в фоне ночью; утром придёт сводка")
                 .disabled(task.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || isWorking)
                 Button("После сброса") {
                     launcher.queueAfterReset(.customTask(task), in: project)
                     task = ""
-                    withAnimation(.snappy(duration: 0.2)) { isEditingTask = false }
+                    withAnimation(panelCalm ? nil : .snappy(duration: 0.2)) { isEditingTask = false }
                 }
                 .help("Запустить в фоне, когда сбросится лимит сессии")
                 .disabled(task.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || isWorking)
                 Button("Запустить") {
                     launcher.request(.customTask(task), in: project)
                     task = ""
-                    withAnimation(.snappy(duration: 0.2)) { isEditingTask = false }
+                    withAnimation(panelCalm ? nil : .snappy(duration: 0.2)) { isEditingTask = false }
                 }
                 .keyboardShortcut(.return, modifiers: .command)
                 .buttonStyle(.borderedProminent)

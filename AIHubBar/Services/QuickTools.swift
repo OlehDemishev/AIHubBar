@@ -160,14 +160,18 @@ final class QuickToolsController {
 
     /// A shortcut press: what the panel button does. The panel may be closed, so «Спрашивать перед запуском» asks in
     /// an alert; `ask` stands in for it in tests.
-    func runFromHotKey(_ command: QuickCommand, ask: ((QuickCommand) -> Bool)? = nil) {
+    /// From a hot key or the «Команды» app, where there is no button to press twice: a command marked «Спрашивать
+    /// перед запуском» asks first. False when the person said no.
+    @discardableResult
+    func runFromHotKey(_ command: QuickCommand, ask: ((QuickCommand) -> Bool)? = nil) -> Bool {
         if command.confirm {
-            guard !asking else { return }
+            guard !asking else { return false }
             asking = true
             defer { asking = false }
-            guard (ask ?? Self.askToRun)(command) else { return }
+            guard (ask ?? Self.askToRun)(command) else { return false }
         }
         run(command)
+        return true
     }
 
     @ObservationIgnored private var asking = false

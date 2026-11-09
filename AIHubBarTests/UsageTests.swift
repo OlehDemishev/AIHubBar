@@ -90,6 +90,13 @@ struct UsageForecastTests {
         #expect(UsageForecast.make(history: flat, current: window(60), now: now) == .lastsUntilReset)
     }
 
+    @Test func aUsedUpLimitHasNoForecast() {
+        // At 100 % «lasts until now» would be shown as a time that has already passed.
+        let history = [UsagePoint(date: now.addingTimeInterval(-20 * 60), session: 80, sessionResetsAt: resets)]
+        #expect(UsageForecast.make(history: history, current: window(100), now: now) == .unknown)
+        #expect(UsageForecast.make(history: history, current: window(104), now: now) == .unknown)
+    }
+
     @Test func unknownWithoutEnoughData() {
         let recent = [UsagePoint(date: now.addingTimeInterval(-60), session: 50, sessionResetsAt: resets)]
         #expect(UsageForecast.make(history: recent, current: window(60), now: now) == .unknown)

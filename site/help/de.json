@@ -3,7 +3,7 @@
     "beta" : "Beta",
     "help" : "Hilfe",
     "replay" : "Noch einmal zeigen",
-    "scripts" : "Skriptbefehle werden so aufgerufen: ~/Applications/AI\\ Hub\\ Bar.app/Contents/MacOS/AIHubBar --sessions",
+    "scripts" : "Skriptbefehle werden so aufgerufen: /Applications/AI\\ Hub\\ Bar.app/Contents/MacOS/AIHubBar --sessions",
     "search" : "Hilfe durchsuchen",
     "start" : "So beginnen Sie"
   },
@@ -94,7 +94,7 @@
         {
           "facts" : [
             {
-              "detail" : "Das Feld oben im Panel durchsucht Projekte, Sitzungen, Befehle und eigene Prompts. Per Tastatur öffnen — Tastenkürzel unter „Allgemein“.",
+              "detail" : "Das Feld oben im Panel durchsucht Projekte, Sitzungen, Befehle und eigene Prompts. Per Tastatur öffnen — Tastenkürzel unter „Kurzbefehle“.",
               "name" : "Suchen"
             },
             {
@@ -144,7 +144,7 @@
               "name" : "Assistent"
             },
             {
-              "detail" : "Einstellungen → „Profile“ → „+“: „Entwickler (GitHub)“, „Video“, „Texte“, „Recherche“, „Social Media“, „Eigener“. Ordner wählen — das Profil ist fertig; alles Weitere in seinen Einstellungen.",
+              "detail" : "Einstellungen → „Profile“ → „+“: „Entwickler (GitHub)“, „Video“, „Texte“, „Recherche“, „Social Media“, „Mac-Werkzeuge“, „Eigener“. Ordner wählen — das Profil ist fertig; alles Weitere in seinen Einstellungen.",
               "name" : "Profil hinzufügen"
             }
           ],
