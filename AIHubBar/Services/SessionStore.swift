@@ -18,8 +18,8 @@ final class SessionStore {
     private(set) var items: [Item] = []
     /// Finished sessions that can be continued, newest first (`SessionRules.isResumable`).
     private(set) var resumable: [Session] = []
-    /// Open permission requests, by session id (`ApprovalFiles`).
-    private(set) var approvals: [String: ApprovalRequest] = [:]
+    /// Open permission requests, by session id (`ApprovalFiles`). Set from outside only by the tests.
+    var approvals: [String: ApprovalRequest] = [:]
     /// Set by the app: whether permissions may be answered from AI Hub Bar («Отвечать из уведомлений»).
     var approvalsEnabled: () -> Bool = { true }
 
@@ -27,6 +27,7 @@ final class SessionStore {
     var activeItems: [Item] { items }
 
     private let directory: URL
+    private let approvalsDirectory: URL
     private var watcher: DispatchSourceFileSystemObject?
     private var ticker: Task<Void, Never>?
     private var reloadScheduled = false
@@ -37,8 +38,9 @@ final class SessionStore {
         didSet { UserDefaults.standard.set(Array(contextNotified.suffix(200)), forKey: "contextNotified") }
     }
 
-    init(directory: URL = SessionFiles.sessionsDirectory) {
+    init(directory: URL = SessionFiles.sessionsDirectory, approvalsDirectory: URL = ApprovalFiles.directory) {
         self.directory = directory
+        self.approvalsDirectory = approvalsDirectory
     }
 
     func start() {
@@ -83,7 +85,7 @@ final class SessionStore {
 
     /// «Разрешить» / «Отклонить» from the panel or a notification.
     func decide(requestID: String, allow: Bool) {
-        guard ApprovalFiles.decide(requestID, allow: allow) else { return }
+        guard ApprovalFiles.decide(requestID, allow: allow, in: approvalsDirectory) else { return }
         if let request = approvals.values.first(where: { $0.id == requestID }) {
             approvals[request.sessionID] = nil
             UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: ["waiting-\(request.sessionID)"])

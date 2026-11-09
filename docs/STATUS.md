@@ -18,6 +18,7 @@
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/specs/SPEC-windows.md §9, stage 2–3 leftovers)
 
 **Needs Oleh:**
+- in 0.8.0-beta.1: open a screen in the bot and answer one permission request from Telegram
 - in 0.8.0-beta.1: press the «Замок» tile once (Быстрые переключатели); the screen must lock with no error under the tile when you come back
 - «Значки» after the next install: press the toggle once, read the note under the tiles, press it again to bring the desktop back (the agent does not change this setting on your Mac)
 - optional, one minute: with the desktop on, does `StandardHideDesktopIcons` keep the context menu and drag selection? If yes, the toggle can move to it
@@ -37,6 +38,12 @@
 - MacBook Air: update to 0.7.8 through Sparkle and check the island at the real notch
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-09 — Tests for the Telegram bot's controller (branch `test/telegram-controller`)
+
+Done: `TelegramBotController` had no tests of its own. 36 now, on a fake Telegram, with answers to permission requests written to a temporary folder: strangers get nothing, only the code binds a chat, presses after a gap only navigate, a request is sent once and retried after a wait, an answer reaches the hook's file once, the shared bot's three switches, the task draft, the Mini App's refusals, reading the bot (409, 401, no network, offset). No user-visible change. Seams added: `transport` and `reloadOwnBot` on the controller, `approvalsDirectory` on `SessionStore`; some `private` members became internal for the tests.
+Checked: `scripts/check.sh` green. Mutations: with the stranger check, the gap check, `canAnswer`, the shared command switch, the stale check on binding or the retry wait removed one at a time, tests fail each time. That pass also showed shared-bot refusals passing for the wrong reason (no paired chat in the test), fixed by pairing one.
+Left: real Telegram isn't touched; a press in the bot and one permission request are in the beta's live check.
 
 ## 2026-11-09 — CI on the Xcode releases are built with (branch `chore/ci-xcode-27`)
 
