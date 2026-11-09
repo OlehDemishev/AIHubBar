@@ -28,3 +28,29 @@ struct ProcessRunnerTests {
         #expect(result.stdout.count == 300_000 && result.stderr.count == 300_000)
     }
 }
+
+/// Things that could end or damage what they touch: a broken pipe, a config that is a link.
+struct SafeWritesTests {
+    @Test func aWriteToAClosedPipeIsAnErrorNotTheEndOfTheApp() {
+        // The test host is the app, so its start-up has run. Without SIGPIPE ignored this write ends the process.
+        let pipe = Pipe()
+        try? pipe.fileHandleForReading.close()
+        #expect(throws: (any Error).self) {
+            try pipe.fileHandleForWriting.write(contentsOf: Data("x".utf8))
+        }
+    }
+
+    @Test func aConfigThatIsALinkStaysALink() throws {
+        let dir = FileManager.default.temporaryDirectory.appending(path: "claudepult-link-\(UUID().uuidString)")
+        try FileManager.default.createDirectory(at: dir, withIntermediateDirectories: true)
+        defer { try? FileManager.default.removeItem(at: dir) }
+        let real = dir.appending(path: "dotfiles-settings.json"), link = dir.appending(path: "settings.json")
+        try Data("{}".utf8).write(to: real)
+        try FileManager.default.createSymbolicLink(at: link, withDestinationURL: real)
+
+        try HookJSONFile(url: link, shownAs: "settings.json").write(["theme": "dark"])
+        let values = try link.resourceValues(forKeys: [.isSymbolicLinkKey])
+        #expect(values.isSymbolicLink == true)
+        #expect(try String(contentsOf: real, encoding: .utf8).contains("dark"), "the file behind the link got the change")
+    }
+}
