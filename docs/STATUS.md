@@ -6,7 +6,7 @@
 
 **Now:**
 - tech debt pass done 2026-11-09, all merged: #330 Sparkle 2.10.1, #331 the lock screen tile checks it locked, #332 unused strings removed and the catalog compared with the code, #333 Mac CI on Xcode 27.2 running `check.sh`, #334 and #335 tests for the Telegram controller, the notch island and the command engine (77 new), #336 Telegram files split
-- 0.8.0-beta.1 is built from main but not published: notarization needs the `AIHubBar` keychain profile, which the agent's shell can't reach (Needs Oleh)
+- 0.8.0-beta.1 (build 771) published 2026-11-09 as a pre-release, in the beta channel only; waiting for Oleh's beta checks
 - merged 2026-11-09: #325 the «Значки» toggle warns that it turns off the whole desktop, #327 Debug builds have their own bundle id, so tests no longer move the login item record
 - merged 2026-11-06: #262 donations («Поддержать проект» in Settings → General, site/support.html with Ko-fi, GitHub Sponsors and Buy Me a Coffee; the app button reaches people with the next release)
 - merged 2026-11-03: #251 menu bar ☕ follows the «Не спать» switch, #248 «Не спать» on/off in the menu bar, #241 Codex states, #240 quick command shortcuts, #238 «Быстрый запрос», #236 content spec, #242 «Telegram» stage 1, #244 menu at the bottom, #246 shared bot (Worker not deployed yet), #247 desktop CI off for Mac string changes, #249 the bot's menu set up by each person, #252 stage 2 (sessions, requests, limits), #254 stage 3 (tasks and runs), #255 stage 4 (settings in the bot), #256 Mini App
@@ -19,7 +19,6 @@
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/specs/SPEC-windows.md §9, stage 2–3 leftovers)
 
 **Needs Oleh:**
-- publish the beta from your Terminal, on main: `scripts/release.sh 0.8.0-beta.1 --publish` (about 15 minutes, notarization included). Then say so here, and the agent takes it from there
 - in 0.8.0-beta.1, first: on a Mac with 0.7.8, Settings → General → «Бета-версии» on, then «Проверить обновления». It must install and restart by itself with its permissions kept: the first update from Sparkle 2.6.4 to 2.10.1
 - in 0.8.0-beta.1: open a screen in the bot and answer one permission request from Telegram
 - in 0.8.0-beta.1: press the «Замок» tile once (Быстрые переключатели); the screen must lock with no error under the tile when you come back
@@ -41,6 +40,12 @@
 - MacBook Air: update to 0.7.8 through Sparkle and check the island at the real notch
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+## 2026-11-09 — 0.8.0-beta.1 published (branch `chore/status-beta-published`)
+
+Done: Oleh renewed the app-specific password in the `AIHubBar` notarytool profile (the old one got 401 Invalid credentials) and ran `scripts/release.sh 0.8.0-beta.1 --publish`. Build 771, the app and the disk image notarized and stapled.
+Checked: `gh release view` shows a pre-release with the .dmg and appcast.xml; the beta feed lists 771 (channel beta) and 720; the normal feed still lists 720, and 0.7.8 is still GitHub's latest.
+Left: Oleh's beta checks (the Sparkle 2.6.4 → 2.10.1 update from 0.7.8, the «Замок» tile, a permission request answered from the bot), then 0.8.0 with a higher build number.
+
 
 ## 2026-11-09 — 0.8.0-beta.1 built, not published (branch `chore/status-beta-0.8.0`)
 
