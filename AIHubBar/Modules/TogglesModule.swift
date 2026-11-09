@@ -48,7 +48,7 @@ struct QuickTogglesSection: View {
         } header: {
             Text("Какие переключатели показывать")
         } footer: {
-            Footnote(text: String(localized: "Тёмная тема и корзина в первый раз попросят разрешение «Автоматизация» (System Events, Finder). Корзина очищается только после подтверждения."))
+            Footnote(text: [String(localized: "Тёмная тема и корзина в первый раз попросят разрешение «Автоматизация» (System Events, Finder). Корзина очищается только после подтверждения."), QuickToggle.desktopIcons.offNote].compactMap { $0 }.joined(separator: " "))
         }
     }
 }

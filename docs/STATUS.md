@@ -11,13 +11,15 @@
 - merged 2026-11-03: #251 menu bar ☕ follows the «Не спать» switch, #248 «Не спать» on/off in the menu bar, #241 Codex states, #240 quick command shortcuts, #238 «Быстрый запрос», #236 content spec, #242 «Telegram» stage 1, #244 menu at the bottom, #246 shared bot (Worker not deployed yet), #247 desktop CI off for Mac string changes, #249 the bot's menu set up by each person, #252 stage 2 (sessions, requests, limits), #254 stage 3 (tasks and runs), #255 stage 4 (settings in the bot), #256 Mini App
 
 **Next:**
-- next release: the language picker's relaunch button and «Раскладка» directions and exceptions reach people with it (both after 0.7.8)
+- next release: the language picker's relaunch button, «Раскладка» directions and exceptions, and the «Значки» note reach people with it (all after 0.7.8)
 - check on the Air: the island at the real notch
 - promotion (docs/LAUNCH.md): r/ClaudeAI, the lists, r/macapps, Show HN, Product Hunt, Homebrew
 - content (docs/specs/SPEC-content.md, agreed): stage 2 «Версии», then batch tasks; better after the first feedback from people
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/specs/SPEC-windows.md §9, stage 2–3 leftovers)
 
 **Needs Oleh:**
+- «Значки»: press the toggle once, read the note under the tiles, press it again to bring the desktop back (the agent does not change this setting on your Mac)
+- optional, one minute: with the desktop on, does `StandardHideDesktopIcons` keep the context menu and drag selection? If yes, the toggle can move to it
 - «Раскладка» after the next install: in the language's menu turn off EN → RU, type «ghbdtn» and a space (it must stay); add «vs» to «Словарь исключений» and check it stays too
 - free disk space: on 2026-11-08 it swung between 1.5 and 10 GB free with swap near 12 GB, too little to build safely; `~/.colima` holds 37 GB and its Docker disk needs a repair (`colima stop && colima start`)
 - press ⌃⌥B, Esc in the open panel, scroll it with the trackpad and run a command in Terminal once (Accessibility works since 2026-11-08)
@@ -34,6 +36,24 @@
 - MacBook Air: update to 0.7.8 through Sparkle and check the island at the real notch
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-09 — Conflict with main resolved (branch `fix/desktop-icons-keep-selection`)
+
+Done: `origin/main` (#327, #328) merged into this branch. The only conflict was in this journal, where both sides added entries in the same place; all entries are kept, and a missing blank line before the «Значки» entry is added. The branch now has the Debug bundle id fix, so its test runs no longer move the login item record.
+Checked: no conflict markers left in the tree; no code was edited by hand. `scripts/check.sh` was not run locally for this merge, Mac tests and the string catalog are left to CI on the merge commit.
+Left: the same as the entries below: the note is unseen in the real panel (Needs Oleh).
+
+## 2026-11-09 — The toggle's tile compiles on CI's Xcode (branch `fix/desktop-icons-keep-selection`)
+
+Done: CI's Mac tests failed on Xcode 26.6 with `QuickToolsView.swift:106: unable to type-check this expression in reasonable time`, on the toggle's `Button` that this branch's hover hint had grown; Xcode 27.2 here compiled it. The tile moved to `QuickToggleTile` and the hint to `hint(for:)`; what they show is the same. `origin/main` merged (#326): the STATUS header keeps both sides' items.
+Checked: `scripts/check.sh` green on the merged tree (strings, desktop texts, relay tests, Mac tests with warnings as errors) on Xcode 27.2; the CI result is on the PR.
+Left: the panel wasn't opened, the view split is checked by compiling and tests only. The note itself is still unseen in the real panel (Needs Oleh). The local `xcodebuild test` moved the login item record to this worktree's `build/DerivedData` again (`sfltool dumpbtm`); a launch of the installed app puts it back.
+
+## 2026-11-09 — The «Значки» toggle says what it takes away (branch `fix/desktop-icons-keep-selection`)
+
+Done: Oleh's desktop showed no files, no right-click menu and no drag selection. Cause: `CreateDesktop = 0`, which stops Finder drawing the desktop at all; the only writer found is this toggle (QuickTools.swift), though nothing proves it was pressed. While the toggle is off, the panel now keeps a note under the tiles saying so and that the files stay in the Desktop folder; the same text is in the tile's hover hint and the module's Settings footer. The toggle still uses `CreateDesktop`.
+Checked: `scripts/check.sh` green, 531 tests, 1 new; 12 translations in the catalog. Live on the Mac mini: `CreateDesktop` was 0; after Oleh ran the restore command it is 1, Finder restarted at 13:59:05 and its full-screen desktop window is back on screen.
+Left: the note has not been seen in the real panel, that needs the icons off on a real Mac. `StandardHideDesktopIcons` is not tested: the one answer («рамки нет») came with the desktop still off, so it says nothing about that key, and web sources did not settle it. `scripts/strings-sync.sh` rewrote the whole catalog (46k changed lines) and dropped 3 keys (`%lld%%`, `CI: %@`, `Hooks`), so the catalog was restored and only the new key added; the script itself is unchanged.
 
 ## 2026-11-09 — Debug builds no longer move the login item record (branch `fix/debug-bundle-id`)
 

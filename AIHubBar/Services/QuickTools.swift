@@ -110,6 +110,15 @@ enum QuickToggle: String, Codable, CaseIterable, Sendable {
         allCases.filter { $0 != .notchIsland || installed.contains(.notch) }
     }
 
+    /// What switching it off takes away, when the title doesn't say. `CreateDesktop = false` stops Finder drawing the
+    /// desktop at all, so the files, the context menu and drag selection go with the icons; Oleh took that for a broken Mac.
+    var offNote: String? {
+        switch self {
+        case .desktopIcons: String(localized: "Пока значки выключены, на рабочем столе не видно файлов, не работают меню правой кнопки и выделение мышкой. Файлы остаются в папке «Рабочий стол».")
+        default: nil
+        }
+    }
+
     /// Can't be undone: asked first.
     var needsConfirmation: Bool { self == .emptyTrash }
 }

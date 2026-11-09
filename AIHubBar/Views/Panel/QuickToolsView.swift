@@ -106,30 +106,20 @@ struct QuickTogglesView: View {
                         Button {
                             if toggle.needsConfirmation { confirming = toggle } else { tools.perform(toggle) }
                         } label: {
-                            VStack(spacing: 3) {
-                                Group {
-                                    if tools.running.contains(toggle.rawValue) {
-                                        ProgressView().controlSize(.mini)
-                                    } else {
-                                        Image(systemName: toggle.symbol).scaledFont(size: 14)
-                                    }
-                                }
-                                .frame(height: 18)
-                                Text(toggle.shortTitle)
-                                    .scaledFont(.caption2)
-                                    .lineLimit(1)
-                                    .minimumScaleFactor(0.8)
-                            }
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical, 6)
-                            .background(RoundedRectangle(cornerRadius: 9, style: .continuous)
-                                .fill(on ? Color.accentColor.opacity(0.22) : Color.primary.opacity(0.07)))
-                            .foregroundStyle(on ? Color.accentColor : .primary)
-                            .contentShape(Rectangle())
+                            QuickToggleTile(toggle: toggle, isOn: on, isRunning: tools.running.contains(toggle.rawValue))
                         }
                         .buttonStyle(.plain)
                         .accessibilityValue(on ? String(localized: "включено") : String(localized: "выключено"))
-                        .help(toggle.title + (tools.isOn(toggle).map { $0 ? String(localized: " — включено") : String(localized: " — выключено") } ?? ""))
+                        .help(hint(for: toggle))
+                    }
+                }
+                // Stays while it's off: the person may open the panel long after, wondering where the desktop went.
+                ForEach(toggles, id: \.self) { toggle in
+                    if tools.isOn(toggle) == false, let note = toggle.offNote {
+                        Label(note, systemImage: "info.circle")
+                            .scaledFont(.caption)
+                            .foregroundStyle(.secondary)
+                            .fixedSize(horizontal: false, vertical: true)
                     }
                 }
                 if let toggle = confirming {
@@ -159,5 +149,47 @@ struct QuickTogglesView: View {
         .padding(.horizontal, 10)
         .padding(.vertical, 8)
         .onAppear { tools.refreshStates() }
+    }
+
+    /// The tile's hover hint: its name, its state when known, and what turning it off takes away.
+    private func hint(for toggle: QuickToggle) -> String {
+        var hint = toggle.title
+        if let isOn = tools.isOn(toggle) {
+            hint += isOn ? String(localized: " — включено") : String(localized: " — выключено")
+        }
+        if let note = toggle.offNote {
+            hint += "\n" + note
+        }
+        return hint
+    }
+}
+
+/// One tile in «Быстрые переключатели»: the symbol (or a spinner while it runs) over the short name.
+private struct QuickToggleTile: View {
+    let toggle: QuickToggle
+    let isOn: Bool
+    let isRunning: Bool
+
+    var body: some View {
+        VStack(spacing: 3) {
+            Group {
+                if isRunning {
+                    ProgressView().controlSize(.mini)
+                } else {
+                    Image(systemName: toggle.symbol).scaledFont(size: 14)
+                }
+            }
+            .frame(height: 18)
+            Text(toggle.shortTitle)
+                .scaledFont(.caption2)
+                .lineLimit(1)
+                .minimumScaleFactor(0.8)
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, 6)
+        .background(RoundedRectangle(cornerRadius: 9, style: .continuous)
+            .fill(isOn ? Color.accentColor.opacity(0.22) : Color.primary.opacity(0.07)))
+        .foregroundStyle(isOn ? Color.accentColor : .primary)
+        .contentShape(Rectangle())
     }
 }
