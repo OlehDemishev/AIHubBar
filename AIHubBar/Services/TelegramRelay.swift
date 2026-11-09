@@ -83,7 +83,8 @@ final class TelegramRelay {
 
     private(set) var connected = false
     private(set) var bot: String?
-    private(set) var chat: String?
+    /// The paired chat. Set from outside only by the tests.
+    var chat: String?
     private(set) var answering = false
     private(set) var macs = 0
     private(set) var lastError: String?

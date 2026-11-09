@@ -36,13 +36,17 @@ final class TelegramBotController {
 
     /// The shared bot's connection; used while `usesSharedBot`.
     let relay = TelegramRelay()
+    /// Telegram's API, when set: the tests answer here, so nothing leaves the Mac.
+    @ObservationIgnored var transport: (@MainActor (_ method: String, _ parameters: [String: Any], _ timeout: TimeInterval) async -> (Int, Data?))?
+    /// The notifications' own copy of the bot; the tests leave the Keychain alone.
+    @ObservationIgnored var reloadOwnBot: @MainActor (_ chatID: String) async -> Void = { await Telegram.loadOwnBot(chatID: $0) }
 
     private let settings: AppSettings
     private let sessions: SessionStore
     private let runs: RunStore
     private let usage: UsageStore
     private let approvals: TelegramApprovals
-    private var token: String?
+    var token: String?
     private var loop: Task<Void, Never>?
     private var offset: Int?
     private var lastRead: Date?
@@ -62,7 +66,7 @@ final class TelegramBotController {
     private var retryRequests: [String: Date] = [:]
     private var requestLoop: Task<Void, Never>?
     /// 🚀 being set up: the project, then the task text once typed; it lapses after 10 minutes.
-    private var taskDraft: (path: String, name: String, text: String?, until: Date)?
+    var taskDraft: (path: String, name: String, text: String?, until: Date)?
     /// «Подключить Telegram» was pressed here: greet the chat once it is paired.
     private var greetWhenPaired = false
     private let macName = Host.current().localizedName ?? "Mac"
@@ -213,7 +217,7 @@ final class TelegramBotController {
     // MARK: - The loop
 
     /// One read of the updates; returns how long to wait before the next one.
-    private func tick() async -> Double {
+    func tick() async -> Double {
         if usesSharedBot { return await sharedTick() }
         if relay.isRunning {
             relay.stop()
@@ -302,12 +306,12 @@ final class TelegramBotController {
         return 0
     }
 
-    private func handle(_ update: BotUpdate, afterGap: Bool) async {
+    func handle(_ update: BotUpdate, afterGap: Bool) async {
         if case let .message(text, _) = update.kind, update.isPrivate, let code = bindingCode,
            BotCommand(text: text) == .start(code: code), !update.isStale(now: .now) {
             settings.telegramChatID = update.chatID
             cancelBinding()
-            await Telegram.loadOwnBot(chatID: update.chatID)
+            await reloadOwnBot(update.chatID)
             AppLog.info("Telegram chat bound")
             _ = await send(BotMessage(html: "✅ " + RunMessage.escape(String(localized: "Чат привязан к AI Hub Bar."))))
             await show(.home, tapID: nil)
@@ -524,7 +528,7 @@ final class TelegramBotController {
     }
 
     /// New requests get a message; answered ones (here, on the Mac or by Claude) lose their buttons.
-    private func syncRequests() async {
+    func syncRequests() async {
         guard handlesRequests else { return }
         let open = Array(sessions.approvals.values).sorted { $0.created < $1.created }
         for request in open where sentRequests[request.id] == nil && (retryRequests[request.id] ?? .distantPast) < .now {
@@ -1025,7 +1029,7 @@ final class TelegramBotController {
 
     // MARK: - Telegram
 
-    private func loadName() async {
+    func loadName() async {
         guard token != nil else { return }
         let (code, data) = await api("getMe", [:], timeout: 20)
         let result = data.flatMap { (try? JSONSerialization.jsonObject(with: $0)) as? [String: Any] }?["result"] as? [String: Any]
@@ -1067,6 +1071,7 @@ final class TelegramBotController {
 
     /// A Telegram method through the shared bot or straight to the own one.
     private func api(_ method: String, _ parameters: [String: Any], timeout: TimeInterval) async -> (Int, Data?) {
+        if let transport { return await transport(method, parameters, timeout) }
         if usesSharedBot { return await relay.call(method, parameters) }
         guard let token else { return (0, nil) }
         return await Self.call(token, method, body: try? JSONSerialization.data(withJSONObject: parameters), timeout: timeout)
