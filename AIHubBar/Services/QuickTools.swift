@@ -282,7 +282,7 @@ final class QuickToolsController {
                 _ = try? await ProcessRunner.run("/usr/bin/killall", ["Finder"], timeout: .seconds(10))
                 error = nil
             case .lockScreen:
-                error = Self.lockScreen() ? nil : await Self.displaySleep()
+                error = await ScreenLock.lock() ? nil : String(localized: "Не удалось заблокировать экран")
             case .displaySleep:
                 error = await Self.displaySleep()
             case .ejectDisks:
@@ -303,7 +303,7 @@ final class QuickToolsController {
     }
 
     /// The first run asks for the Automation permission (System Events, Finder).
-    private static func osascript(_ line: String) async -> String? {
+    static func osascript(_ line: String) async -> String? {
         guard let result = try? await ProcessRunner.run("/usr/bin/osascript", ["-e", line], timeout: .seconds(60)) else {
             return String(localized: "Не удалось выполнить")
         }
@@ -312,18 +312,9 @@ final class QuickToolsController {
         return message.contains("-1743") ? String(localized: "Нет разрешения: Системные настройки → Конфиденциальность → Автоматизация → AI Hub Bar") : message
     }
 
-    private static func displaySleep() async -> String? {
+    static func displaySleep() async -> String? {
         let result = try? await ProcessRunner.run("/usr/bin/pmset", ["displaysleepnow"], timeout: .seconds(10))
         return result?.exitCode == 0 ? nil : String(localized: "Не удалось погасить экран")
-    }
-
-    /// The system's own «Заблокировать экран» (the one in the Apple menu), from the login framework.
-    private static func lockScreen() -> Bool {
-        guard let handle = dlopen("/System/Library/PrivateFrameworks/login.framework/Versions/Current/login", RTLD_LAZY),
-              let symbol = dlsym(handle, "SACLockScreenImmediate") else { return false }
-        typealias Lock = @convention(c) () -> Int32
-        _ = unsafeBitCast(symbol, to: Lock.self)()
-        return true
     }
 
     /// External and removable volumes, ejected the way Finder does it.
