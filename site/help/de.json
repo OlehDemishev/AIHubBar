@@ -485,6 +485,14 @@
               "name" : "⌥⇧"
             },
             {
+              "detail" : "Im Sprachmenü der Menüleiste wählen Sie, von welchem Layout zu welchem automatisch korrigiert wird, zum Beispiel nur EN → RU.",
+              "name" : "Richtungen"
+            },
+            {
+              "detail" : "Wörter aus dem Ausnahmewörterbuch werden nicht automatisch korrigiert, und ⌥⇧ lässt sie unverändert.",
+              "name" : "Ausnahmen"
+            },
+            {
               "detail" : "Benötigt „Bedienungshilfen“: Das Modul fragt selbst danach und zeigt, wo Sie es einschalten.",
               "name" : "Zugriff"
             }

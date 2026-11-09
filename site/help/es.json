@@ -485,6 +485,14 @@
               "name" : "⌥⇧"
             },
             {
+              "detail" : "En el menú del idioma, en la barra de menús, elija de qué distribución a cuál se corrige sola, por ejemplo solo EN → RU.",
+              "name" : "Direcciones"
+            },
+            {
+              "detail" : "Las palabras del diccionario de excepciones no se corrigen solas y ⌥⇧ las deja como están.",
+              "name" : "Excepciones"
+            },
+            {
               "detail" : "Necesita «Accesibilidad»: el módulo lo pedirá y te mostrará dónde activarlo.",
               "name" : "Acceso"
             }
