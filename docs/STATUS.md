@@ -38,6 +38,12 @@
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
 
+## 2026-11-09 — CI on the Xcode releases are built with (branch `chore/ci-xcode-27`)
+
+Done: the Mac job moved from `macos-26` (Xcode 26.6) to GitHub's `xcode-27` image with Xcode 27.2, and runs `scripts/check.sh`, so warnings fail there too and CI runs the same checks as a push. The agreed plan was a slow-expression check in `check.sh`; measured and dropped, because it did not catch the old code that failed CI (DECISIONS).
+Checked: `scripts/check.sh` locally on this branch; the Mac job on this PR is the real check of the new image.
+Left: the image is a GitHub preview, so it can queue longer. PR #332 (catalog cleanup) was merged before its Mac job had finished, by my mistake: the wait ended at once with «no checks reported». Its run on main then passed (18b2e97), and so did `check.sh` before the push. From here on a merge waits for the checks' result.
+
 ## 2026-11-09 — String catalog cleaned and compared with the code (branch `chore/catalog-cleanup`)
 
 Done: the catalog hadn't been synced for a while, so it showed 58 stale keys where a real sync gives 112. Removed 104 unused keys (101 marked stale, 3 untranslated ones the sync dropped itself); the 11 stale keys `desktop/` still uses stay. The file now keeps `xcstringstool`'s order, so the next sync gives a small diff. `scripts/check.sh` syncs a copy with what was just compiled, so an untranslated new text or a key nobody uses fails it, and `strings-check.py` fails on a stale key `desktop/` doesn't use either. Note that the copy must be named `Localizable.xcstrings`: sync matches by table name, any other name marks everything stale.

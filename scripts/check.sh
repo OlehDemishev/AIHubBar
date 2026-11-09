@@ -17,7 +17,7 @@ if command -v node >/dev/null; then (cd relay/telegram && node --test); else ech
 
 echo "==> Mac tests"
 xcodegen generate --quiet
-# Swift warnings fail here, with the Xcode releases are built with; CI's older Xcode may warn differently, so not there.
+# Swift warnings fail, here and in CI: both use the Xcode releases are built with.
 xcodebuild test -project AIHubBar.xcodeproj -scheme AIHubBar \
   -destination 'platform=macOS,arch=arm64' -derivedDataPath build/DerivedData -testLanguage ru -testRegion RU -quiet \
   SWIFT_TREAT_WARNINGS_AS_ERRORS=YES
