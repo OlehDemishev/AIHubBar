@@ -2,7 +2,7 @@
 
 <!-- summary:start -->
 **Stage:** Mac: 0.7.8 published 2026-11-08, signed and notarized (Developer ID; Accessibility asked once; 0.7.7 hook messages in the app's language, clean session titles; 0.7.6 a map of the panel on the first screen, «Тексты» fixes; before that shorter first run, panel polish, usage history, finished sessions, ⌃⌥B, outages, several Claude accounts). Windows/Linux (`desktop/`, Tauri 2): postponed by Oleh 2026-11-02
-**Updated:** 2026-11-08
+**Updated:** 2026-11-09
 
 **Now:**
 - nothing in progress: 0.7.8 is out; content stage 1 is walked, what needs a person is in CHECKLIST
@@ -10,13 +10,15 @@
 - merged 2026-11-03: #251 menu bar ☕ follows the «Не спать» switch, #248 «Не спать» on/off in the menu bar, #241 Codex states, #240 quick command shortcuts, #238 «Быстрый запрос», #236 content spec, #242 «Telegram» stage 1, #244 menu at the bottom, #246 shared bot (Worker not deployed yet), #247 desktop CI off for Mac string changes, #249 the bot's menu set up by each person, #252 stage 2 (sessions, requests, limits), #254 stage 3 (tasks and runs), #255 stage 4 (settings in the bot), #256 Mini App
 
 **Next:**
-- next release: the language picker's relaunch button reaches people with it (fixed after 0.7.8)
+- next release: the language picker's relaunch button and the «Значки» note reach people with it (both fixed after 0.7.8)
 - check on the Air: the island at the real notch
 - promotion (docs/LAUNCH.md): r/ClaudeAI, the lists, r/macapps, Show HN, Product Hunt, Homebrew
 - content (docs/specs/SPEC-content.md, agreed): stage 2 «Версии», then batch tasks; better after the first feedback from people
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/specs/SPEC-windows.md §9, stage 2–3 leftovers)
 
 **Needs Oleh:**
+- «Значки»: press the toggle once, read the note under the tiles, press it again to bring the desktop back (the agent does not change this setting on your Mac)
+- optional, one minute: with the desktop on, does `StandardHideDesktopIcons` keep the context menu and drag selection? If yes, the toggle can move to it
 - free disk space: on 2026-11-08 it swung between 1.5 and 10 GB free with swap near 12 GB, too little to build safely; `~/.colima` holds 37 GB and its Docker disk needs a repair (`colima stop && colima start`)
 - press ⌃⌥B, Esc in the open panel, scroll it with the trackpad and run a command in Terminal once (Accessibility works since 2026-11-08)
 - 0.7.0 live checks: press ⌃⌥B, right-click a session row; with a second account: Settings → Claude Code → «Другие аккаунты Claude»
@@ -32,6 +34,12 @@
 - MacBook Air: update to 0.7.8 through Sparkle and check the island at the real notch
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+## 2026-11-09 — The «Значки» toggle says what it takes away (branch `fix/desktop-icons-keep-selection`)
+
+Done: Oleh's desktop showed no files, no right-click menu and no drag selection. Cause: `CreateDesktop = 0`, which stops Finder drawing the desktop at all; the only writer found is this toggle (QuickTools.swift), though nothing proves it was pressed. While the toggle is off, the panel now keeps a note under the tiles saying so and that the files stay in the Desktop folder; the same text is in the tile's hover hint and the module's Settings footer. The toggle still uses `CreateDesktop`.
+Checked: `scripts/check.sh` green, 531 tests, 1 new; 12 translations in the catalog. Live on the Mac mini: `CreateDesktop` was 0; after Oleh ran the restore command it is 1, Finder restarted at 13:59:05 and its full-screen desktop window is back on screen.
+Left: the note has not been seen in the real panel, that needs the icons off on a real Mac. `StandardHideDesktopIcons` is not tested: the one answer («рамки нет») came with the desktop still off, so it says nothing about that key, and web sources did not settle it. `scripts/strings-sync.sh` rewrote the whole catalog (46k changed lines) and dropped 3 keys (`%lld%%`, `CI: %@`, `Hooks`), so the catalog was restored and only the new key added; the script itself is unchanged.
+
 
 ## 2026-11-08 — The language picker keeps its relaunch button (branch `fix/language-picker-relaunch`)
 

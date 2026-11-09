@@ -138948,6 +138948,82 @@
           }
         }
       }
+    },
+    "Пока значки выключены, на рабочем столе не видно файлов, не работают меню правой кнопки и выделение мышкой. Файлы остаются в папке «Рабочий стол».": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "While icons are off, the desktop shows no files, and the right-click menu and drag selection don’t work there. Your files stay in the Desktop folder."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Поки значки вимкнені, на робочому столі не видно файлів, не працюють меню правої кнопки й виділення мишею. Файли залишаються в папці «Робочий стіл»."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Solange die Symbole aus sind, zeigt der Schreibtisch keine Dateien, und Kontextmenü und Auswahl mit der Maus funktionieren dort nicht. Die Dateien bleiben im Ordner „Schreibtisch“."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tant que les icônes sont désactivées, le bureau n’affiche aucun fichier, et le menu contextuel et la sélection à la souris n’y fonctionnent pas. Vos fichiers restent dans le dossier Bureau."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mientras los iconos estén desactivados, el escritorio no muestra archivos, y el menú contextual y la selección con el ratón no funcionan allí. Los archivos siguen en la carpeta Escritorio."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Finché le icone sono disattivate, la scrivania non mostra file, e il menu contestuale e la selezione con il mouse non funzionano. I file restano nella cartella Scrivania."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enquanto os ícones estiverem desativados, a mesa não mostra arquivos, e o menu de contexto e a seleção com o mouse não funcionam nela. Os arquivos continuam na pasta Mesa."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gdy ikony są wyłączone, biurko nie pokazuje plików, a menu kontekstowe i zaznaczanie myszą na nim nie działają. Pliki pozostają w folderze Biurko."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アイコンがオフの間は、デスクトップにファイルが表示されず、右クリックメニューやマウスでの選択も使えません。ファイルは「デスクトップ」フォルダに残ります。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "아이콘이 꺼져 있는 동안에는 데스크탑에 파일이 표시되지 않고 오른쪽 클릭 메뉴와 마우스 선택도 작동하지 않습니다. 파일은 데스크탑 폴더에 그대로 있습니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ما دامت الأيقونات متوقفة، لا يعرض سطح المكتب أي ملفات، ولا تعمل عليه قائمة النقر بالزر الأيمن ولا التحديد بالماوس. تبقى الملفات في مجلد سطح المكتب."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Selama ikon dimatikan, desktop tidak menampilkan file, serta menu klik kanan dan pemilihan dengan mouse tidak berfungsi di sana. File tetap ada di folder Desktop."
+          }
+        }
+      }
     }
   },
   "version": "1.0"

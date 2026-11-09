@@ -129,7 +129,16 @@ struct QuickTogglesView: View {
                         }
                         .buttonStyle(.plain)
                         .accessibilityValue(on ? String(localized: "включено") : String(localized: "выключено"))
-                        .help(toggle.title + (tools.isOn(toggle).map { $0 ? String(localized: " — включено") : String(localized: " — выключено") } ?? ""))
+                        .help(toggle.title + (tools.isOn(toggle).map { $0 ? String(localized: " — включено") : String(localized: " — выключено") } ?? "") + (toggle.offNote.map { "\n" + $0 } ?? ""))
+                    }
+                }
+                // Stays while it's off: the person may open the panel long after, wondering where the desktop went.
+                ForEach(toggles, id: \.self) { toggle in
+                    if tools.isOn(toggle) == false, let note = toggle.offNote {
+                        Label(note, systemImage: "info.circle")
+                            .scaledFont(.caption)
+                            .foregroundStyle(.secondary)
+                            .fixedSize(horizontal: false, vertical: true)
                     }
                 }
                 if let toggle = confirming {

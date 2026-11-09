@@ -24,6 +24,10 @@ struct QuickToolsTests {
         #expect(QuickToggle.allCases.filter(\.needsConfirmation) == [.emptyTrash])
     }
 
+    @Test func onlyDesktopIconsWarnWhileOff() {
+        #expect(QuickToggle.allCases.filter { $0.offNote != nil } == [.desktopIcons])
+    }
+
     @Test func islandToggleOnlyWithTheIsland() {
         #expect(!QuickToggle.available(installed: [.toggles]).contains(.notchIsland))
         #expect(QuickToggle.available(installed: [.toggles, .notch]).contains(.notchIsland))
