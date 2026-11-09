@@ -2,7 +2,7 @@
 
 <!-- summary:start -->
 **Stage:** Mac: 0.7.8 published 2026-11-08, signed and notarized (Developer ID; Accessibility asked once; 0.7.7 hook messages in the app's language, clean session titles; 0.7.6 a map of the panel on the first screen, «Тексты» fixes; before that shorter first run, panel polish, usage history, finished sessions, ⌃⌥B, outages, several Claude accounts). Windows/Linux (`desktop/`, Tauri 2): postponed by Oleh 2026-11-02
-**Updated:** 2026-11-08
+**Updated:** 2026-11-09
 
 **Now:**
 - nothing in progress: 0.7.8 is out; content stage 1 is walked, what needs a person is in CHECKLIST
@@ -10,13 +10,14 @@
 - merged 2026-11-03: #251 menu bar ☕ follows the «Не спать» switch, #248 «Не спать» on/off in the menu bar, #241 Codex states, #240 quick command shortcuts, #238 «Быстрый запрос», #236 content spec, #242 «Telegram» stage 1, #244 menu at the bottom, #246 shared bot (Worker not deployed yet), #247 desktop CI off for Mac string changes, #249 the bot's menu set up by each person, #252 stage 2 (sessions, requests, limits), #254 stage 3 (tasks and runs), #255 stage 4 (settings in the bot), #256 Mini App
 
 **Next:**
-- next release: the language picker's relaunch button reaches people with it (fixed after 0.7.8)
+- next release: the language picker's relaunch button and «Раскладка» directions and exceptions reach people with it (both after 0.7.8)
 - check on the Air: the island at the real notch
 - promotion (docs/LAUNCH.md): r/ClaudeAI, the lists, r/macapps, Show HN, Product Hunt, Homebrew
 - content (docs/specs/SPEC-content.md, agreed): stage 2 «Версии», then batch tasks; better after the first feedback from people
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/specs/SPEC-windows.md §9, stage 2–3 leftovers)
 
 **Needs Oleh:**
+- «Раскладка» after the next install: in the language's menu turn off EN → RU, type «ghbdtn» and a space (it must stay); add «vs» to «Словарь исключений» and check it stays too
 - free disk space: on 2026-11-08 it swung between 1.5 and 10 GB free with swap near 12 GB, too little to build safely; `~/.colima` holds 37 GB and its Docker disk needs a repair (`colima stop && colima start`)
 - press ⌃⌥B, Esc in the open panel, scroll it with the trackpad and run a command in Terminal once (Accessibility works since 2026-11-08)
 - 0.7.0 live checks: press ⌃⌥B, right-click a session row; with a second account: Settings → Claude Code → «Другие аккаунты Claude»
@@ -32,6 +33,12 @@
 - MacBook Air: update to 0.7.8 through Sparkle and check the island at the real notch
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-09 — «Раскладка»: directions and a dictionary of exceptions (branch `feat/layout-directions-exceptions`)
+
+Done: the language's menu in the menu bar and the module's settings now choose which directions fix by themselves (`EN → RU`, `RU → EN`, every pair of languages among the enabled layouts, all on by default; a turned-off direction neither fixes nor switches, double Shift and ⌥⇧ still work). The «Не исправлять» list became «Словарь исключений»: words can be added by hand (spaces or commas between them), a word counts on either side of a fix (typed «vs» or its result «мы», any case, punctuation at the ends ignored), and ⌥⇧ leaves such words as they are. The menu has «Словарь исключений…». Saved in the same `layout` settings (`learned`, new `offDirections`), so nothing is lost on update. Help, SPEC-layout, REFERENCE, all 12 translations and `site/help` are updated.
+Checked: `scripts/check.sh` green (strings, relay, Mac tests with 8 new ones in `LayoutSwitchTests`). In an isolated copy with its own bundle id, no mouse: the settings page shows all 6 directions for en, uk, ru; a switch turned off, «VS, «github»» added as `vs` and `github`, a row pressed in the real menu bar menu, all read back from the saved settings.
+Left: the fix itself with real typing wasn't run: the copy has no Accessibility, so turning a direction off is proven by unit tests only; the row is in Needs Oleh. `xcodebuild test` and `scripts/export-help.sh` run a Debug app with the real bundle id, which moved the login item record to `build/DerivedData` (`sfltool dumpbtm`) again; a launch of the installed app puts it back. The menu lists directions flat: 6 rows for three languages, more for someone with many layouts.
 
 ## 2026-11-08 — The language picker keeps its relaunch button (branch `fix/language-picker-relaunch`)
 

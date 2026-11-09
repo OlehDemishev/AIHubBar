@@ -15,7 +15,8 @@ extension ModuleDefinition {
         places: [.menuBar],
         ownMenuBarItem: true,
         keywords: [String(localized: "Исправлять раскладку сам"), String(localized: "Двойной Shift — последнее слово"),
-            String(localized: "⌥⇧ — выделенный текст"), String(localized: "Язык в строке меню")]
+            String(localized: "⌥⇧ — выделенный текст"), String(localized: "Язык в строке меню"),
+            String(localized: "С какой раскладки на какую"), String(localized: "Словарь исключений")]
     )
 }
 
@@ -30,6 +31,7 @@ extension ModuleUI {
 struct LayoutSection: View {
     @Environment(AppSettings.self) private var settings
     @Environment(LayoutSwitcher.self) private var switcher
+    @State private var newExceptions = ""
 
     var body: some View {
         @Bindable var settings = settings
@@ -55,7 +57,34 @@ struct LayoutSection: View {
                 ? String(localized: "Нужны хотя бы две раскладки из: русская, английская, украинская, немецкая, французская, испанская, португальская. Добавьте их в Системных настройках → Клавиатура → Источники ввода.")
                 : String(localized: "Слово проверяется системным словарём, когда вы ставите пробел, Enter или Tab. Двойной Shift сразу после исправления отменяет его и запоминает слово. Пароли и поля паролей не читаются, набранное никуда не записывается."))
         }
+        let directions = LayoutWords.directions(among: switcher.layouts)
+        if !directions.isEmpty {
+            Section {
+                ForEach(directions, id: \.self) { direction in
+                    Toggle(direction.title, isOn: Binding(
+                        get: { settings.layout.fixes(direction) },
+                        set: { settings.layout.setFixes(direction, $0) }))
+                }
+            } header: {
+                Text("С какой раскладки на какую")
+            } footer: {
+                Footnote(text: String(localized: "Выключите направление, и слова с этой раскладки на ту больше не исправляются сами. Двойной Shift и ⌥⇧ работают всегда."))
+            }
+            .disabled(!settings.layout.auto)
+        }
         Section {
+            IconRow("Добавить слова", systemImage: "plus") {
+                HStack {
+                    // No title: in a Form a titled field also shows its title as a label next to it.
+                    TextField("", text: $newExceptions, prompt: Text(verbatim: "vs, github"))
+                        .labelsHidden()
+                        .textFieldStyle(.roundedBorder)
+                        .frame(width: 140)
+                        .onSubmit(addExceptions)
+                    Button("Добавить", action: addExceptions)
+                        .disabled(newExceptions.allSatisfy(\.isWhitespace))
+                }
+            }
             if settings.layout.learned.isEmpty {
                 Text("Пока пусто")
                     .foregroundStyle(.secondary)
@@ -67,9 +96,14 @@ struct LayoutSection: View {
                 }
             }
         } header: {
-            Text("Не исправлять")
+            Text("Словарь исключений")
         } footer: {
-            Footnote(text: String(localized: "Слова, исправление которых вы отменили двойным Shift или ⌘Z. Уберите слово, чтобы оно снова исправлялось."))
+            Footnote(text: String(localized: "Эти слова не исправляются сами, а ⌥⇧ оставляет их как есть. Подходит и то, что вы набираете («vs»), и то, во что оно превращается («мы»). Слова, исправление которых вы отменили двойным Shift или ⌘Z, попадают сюда сами."))
         }
+    }
+
+    private func addExceptions() {
+        settings.layout.learned = LayoutWords.addingExceptions(newExceptions, to: settings.layout.learned)
+        newExceptions = ""
     }
 }

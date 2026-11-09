@@ -22545,6 +22545,82 @@
         }
       }
     },
+    "Выключите направление, и слова с этой раскладки на ту больше не исправляются сами. Двойной Shift и ⌥⇧ работают всегда.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Turn a direction off and words stop being fixed automatically from that layout to the other. Double Shift and ⌥⇧ always work."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Вимкніть напрямок, і слова з цієї розкладки на ту більше не виправлятимуться самі. Подвійний Shift і ⌥⇧ працюють завжди."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schalten Sie eine Richtung aus, werden Wörter von diesem Layout zum anderen nicht mehr automatisch korrigiert. Doppel-Shift und ⌥⇧ funktionieren immer."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Désactivez une direction et les mots ne sont plus corrigés automatiquement de cette disposition vers l'autre. Le double Maj et ⌥⇧ fonctionnent toujours."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Desactive una dirección y las palabras dejarán de corregirse solas de esa distribución a la otra. El doble Shift y ⌥⇧ siempre funcionan."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Disattiva una direzione e le parole non vengono più corrette da sole da quel layout all'altro. Il doppio Shift e ⌥⇧ funzionano sempre."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Desative uma direção e as palavras deixam de ser corrigidas sozinhas desse layout para o outro. O Shift duplo e ⌥⇧ sempre funcionam."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wyłącz kierunek, a słowa z tego układu na tamten przestaną być poprawiane samodzielnie. Podwójny Shift i ⌥⇧ działają zawsze."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "方向をオフにすると、その配列からもう一方への自動修正は行われなくなります。Shift の2回押しと ⌥⇧ はいつでも使えます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "방향을 끄면 그 배열에서 다른 배열로 자동 수정하지 않습니다. Shift 두 번과 ⌥⇧은 항상 작동합니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "أوقف اتجاهًا فلن تُصحَّح الكلمات تلقائيًا من هذا التخطيط إلى الآخر. يعمل Shift المزدوج و⌥⇧ دائمًا."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Matikan satu arah, maka kata tidak lagi diperbaiki otomatis dari tata letak itu ke yang lain. Shift ganda dan ⌥⇧ selalu berfungsi."
+          }
+        }
+      }
+    },
     "Выключить «%@»": {
       "localizations": {
         "ar": {
@@ -26874,6 +26950,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Додати профіль із шаблону"
+          }
+        }
+      }
+    },
+    "Добавить слова": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add Words"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Додати слова"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wörter hinzufügen"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajouter des mots"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Añadir palabras"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aggiungi parole"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adicionar palavras"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dodaj słowa"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "単語を追加"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "단어 추가"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إضافة كلمات"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tambah kata"
           }
         }
       }
@@ -34406,6 +34558,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Шукати в усіх файлах"
+          }
+        }
+      }
+    },
+    "Исключения": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exceptions"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Винятки"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ausnahmen"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exceptions"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Excepciones"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eccezioni"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exceções"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wyjątki"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "例外"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "예외"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الاستثناءات"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pengecualian"
           }
         }
       }
@@ -46122,6 +46350,82 @@
         }
       }
     },
+    "Направления": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Directions"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Напрямки"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Richtungen"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Directions"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Direcciones"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Direzioni"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Direções"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kierunki"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "方向"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "방향"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الاتجاهات"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arah"
+          }
+        }
+      }
+    },
     "Насколько заполнен контекст сессии (по журналу Claude Code). Ближе к 100 %, Claude сжимает историю и часть деталей теряется.": {
       "localizations": {
         "ar": {
@@ -48025,6 +48329,7 @@
       }
     },
     "Не исправлять": {
+      "extractionState": "stale",
       "localizations": {
         "ar": {
           "stringUnit": {
@@ -79482,6 +79787,82 @@
         }
       }
     },
+    "С какой раскладки на какую": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "From Which Layout to Which"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "З якої розкладки на яку"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Von welchem Layout zu welchem"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "D'une disposition à l'autre"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "De qué distribución a cuál"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Da quale layout a quale"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "De qual layout para qual"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Z jakiego układu na jaki"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "どの配列からどの配列へ"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "어떤 배열에서 어떤 배열로"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "من أي تخطيط إلى أي تخطيط"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dari tata letak mana ke mana"
+          }
+        }
+      }
+    },
     "С нуля": {
       "localizations": {
         "ar": {
@@ -86034,6 +86415,82 @@
         }
       }
     },
+    "Слова из словаря исключений не исправляются сами, а ⌥⇧ оставляет их как есть.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Words in the dictionary of exceptions aren't fixed automatically, and ⌥⇧ leaves them as they are."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Слова зі словника винятків не виправляються самі, а ⌥⇧ залишає їх як є."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wörter aus dem Ausnahmewörterbuch werden nicht automatisch korrigiert, und ⌥⇧ lässt sie unverändert."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les mots du dictionnaire d'exceptions ne sont pas corrigés automatiquement, et ⌥⇧ les laisse tels quels."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Las palabras del diccionario de excepciones no se corrigen solas y ⌥⇧ las deja como están."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le parole del dizionario delle eccezioni non vengono corrette da sole e ⌥⇧ le lascia come sono."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "As palavras do dicionário de exceções não são corrigidas sozinhas, e ⌥⇧ as deixa como estão."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Słowa ze słownika wyjątków nie są poprawiane samodzielnie, a ⌥⇧ zostawia je bez zmian."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "例外辞書の単語は自動で直されず、⌥⇧ でもそのまま残ります。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "예외 사전의 단어는 자동으로 수정되지 않으며 ⌥⇧도 그대로 둡니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لا تُصحَّح كلمات قاموس الاستثناءات تلقائيًا، ويتركها ⌥⇧ كما هي."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kata dalam kamus pengecualian tidak diperbaiki otomatis, dan ⌥⇧ membiarkannya apa adanya."
+          }
+        }
+      }
+    },
     "Слова считаются по главному файлу проекта (.md, .txt, .rtf, .docx).": {
       "localizations": {
         "ar": {
@@ -86111,6 +86568,7 @@
       }
     },
     "Слова, исправление которых вы отменили двойным Shift или ⌘Z. Уберите слово, чтобы оно снова исправлялось.": {
+      "extractionState": "stale",
       "localizations": {
         "ar": {
           "stringUnit": {
@@ -86182,6 +86640,158 @@
           "stringUnit": {
             "state": "translated",
             "value": "Слова, виправлення яких ви скасували подвійним Shift або ⌘Z. Приберіть слово, щоб воно знову виправлялося."
+          }
+        }
+      }
+    },
+    "Словарь исключений": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dictionary of Exceptions"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Словник винятків"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ausnahmewörterbuch"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dictionnaire d'exceptions"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diccionario de excepciones"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dizionario delle eccezioni"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dicionário de exceções"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Słownik wyjątków"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "例外辞書"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "예외 사전"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "قاموس الاستثناءات"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kamus pengecualian"
+          }
+        }
+      }
+    },
+    "Словарь исключений…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dictionary of Exceptions…"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Словник винятків…"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ausnahmewörterbuch…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dictionnaire d'exceptions…"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diccionario de excepciones…"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dizionario delle eccezioni…"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dicionário de exceções…"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Słownik wyjątków…"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "例外辞書…"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "예외 사전…"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "قاموس الاستثناءات…"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kamus pengecualian…"
           }
         }
       }
@@ -102865,6 +103475,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Етапи, через які проходить кожен проєкт. Етап змінюється просто з панелі й записується в проєкт.md."
+          }
+        }
+      }
+    },
+    "Эти слова не исправляются сами, а ⌥⇧ оставляет их как есть. Подходит и то, что вы набираете («vs»), и то, во что оно превращается («мы»). Слова, исправление которых вы отменили двойным Shift или ⌘Z, попадают сюда сами.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "These words aren't fixed automatically, and ⌥⇧ leaves them as they are. Add what you type or what it would turn into. Words whose fix you took back with double Shift or ⌘Z land here by themselves."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ці слова не виправляються самі, а ⌥⇧ залишає їх як є. Додавайте те, що набираєте, або те, чим воно стало б. Слова, виправлення яких ви скасували подвійним Shift або ⌘Z, потрапляють сюди самі."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diese Wörter werden nicht automatisch korrigiert, und ⌥⇧ lässt sie unverändert. Tragen Sie ein, was Sie tippen oder was daraus würde. Wörter, deren Korrektur Sie mit Doppel-Shift oder ⌘Z zurückgenommen haben, landen von selbst hier."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ces mots ne sont pas corrigés automatiquement, et ⌥⇧ les laisse tels quels. Ajoutez ce que vous tapez ou ce que cela deviendrait. Les mots dont vous avez annulé la correction avec le double Maj ou ⌘Z arrivent ici d'eux-mêmes."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Estas palabras no se corrigen solas y ⌥⇧ las deja como están. Añada lo que escribe o aquello en lo que se convertiría. Las palabras cuya corrección deshizo con doble Shift o ⌘Z llegan aquí solas."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Queste parole non vengono corrette da sole e ⌥⇧ le lascia come sono. Aggiungi ciò che digiti o ciò in cui si trasformerebbe. Le parole di cui hai annullato la correzione con il doppio Shift o ⌘Z finiscono qui da sole."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Estas palavras não são corrigidas sozinhas, e ⌥⇧ as deixa como estão. Adicione o que você digita ou aquilo em que se transformaria. Palavras cuja correção você desfez com Shift duplo ou ⌘Z vêm para cá sozinhas."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Te słowa nie są poprawiane samodzielnie, a ⌥⇧ zostawia je bez zmian. Dodaj to, co wpisujesz, albo to, czym by się stało. Słowa, których poprawkę cofnięto podwójnym Shift lub ⌘Z, trafiają tu same."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "これらの単語は自動で直されず、⌥⇧ でもそのまま残ります。入力する形でも、変換後の形でも追加できます。Shift の2回押しや ⌘Z で修正を取り消した単語は自動でここに入ります。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이 단어들은 자동으로 수정되지 않으며 ⌥⇧도 그대로 둡니다. 입력하는 형태나 바뀔 형태를 추가하세요. Shift 두 번이나 ⌘Z로 수정을 취소한 단어는 자동으로 여기에 들어옵니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لا تُصحَّح هذه الكلمات تلقائيًا، ويتركها ⌥⇧ كما هي. أضف ما تكتبه أو ما سيتحول إليه. الكلمات التي ألغيت تصحيحها بـ Shift المزدوج أو ⌘Z تصل إلى هنا تلقائيًا."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kata-kata ini tidak diperbaiki otomatis, dan ⌥⇧ membiarkannya apa adanya. Tambahkan yang Anda ketik atau hasil perubahannya. Kata yang perbaikannya Anda batalkan dengan Shift ganda atau ⌘Z masuk ke sini sendiri."
           }
         }
       }
@@ -120167,6 +120853,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "❌ CI впав: %@ #%lld"
+          }
+        }
+      }
+    },
+    "В меню языка в строке меню можно выбрать, с какой раскладки на какую исправлять само, например только EN → RU.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In the language's menu in the menu bar, choose which layouts are fixed into which, for example only EN → RU."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "У меню мови в рядку меню можна вибрати, з якої розкладки на яку виправляти самостійно, наприклад лише EN → RU."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Im Sprachmenü der Menüleiste wählen Sie, von welchem Layout zu welchem automatisch korrigiert wird, zum Beispiel nur EN → RU."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dans le menu de la langue, dans la barre des menus, choisissez d'une disposition à l'autre ce qui est corrigé automatiquement, par exemple seulement EN → RU."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En el menú del idioma, en la barra de menús, elija de qué distribución a cuál se corrige sola, por ejemplo solo EN → RU."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nel menu della lingua, nella barra dei menu, scegli da quale layout a quale correggere da solo, ad esempio solo EN → RU."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No menu do idioma, na barra de menus, escolha de qual layout para qual corrigir sozinho, por exemplo só EN → RU."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "W menu języka na pasku menu wybierz, z jakiego układu na jaki poprawiać samodzielnie, na przykład tylko EN → RU."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "メニューバーの言語メニューで、どの配列からどの配列へ自動で直すかを選べます。例: EN → RU のみ。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "메뉴 막대의 언어 메뉴에서 어떤 배열에서 어떤 배열로 자동 수정할지 고를 수 있습니다. 예: EN → RU만."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "من قائمة اللغة في شريط القائمة، اختر من أي تخطيط إلى أي تخطيط يتم التصحيح تلقائيًا، مثل EN → RU فقط."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Di menu bahasa pada bilah menu, pilih dari tata letak mana ke mana yang diperbaiki otomatis, misalnya hanya EN → RU."
           }
         }
       }

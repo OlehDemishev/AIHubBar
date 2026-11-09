@@ -38,6 +38,15 @@ struct LayoutCorrection: Equatable, Sendable {
     var text: String
 }
 
+/// One way an automatic fix can go, by language: «EN → RU». A person thinks in languages, and a second Russian layout
+/// shouldn't bring new switches.
+struct FixDirection: Codable, Hashable, Sendable {
+    var from: String
+    var to: String
+
+    var title: String { "\(LayoutWords.badge(from)) → \(LayoutWords.badge(to))" }
+}
+
 /// Words, layouts and the choice between them. Pure: «is this a word» comes from outside (the system spell checker
 /// in the app, a word list in tests).
 enum LayoutWords {
@@ -50,6 +59,12 @@ enum LayoutWords {
     static let maximumStrokes = 40
 
     static func badge(_ language: String) -> String { language == "uk" ? "UA" : language.uppercased() }
+
+    /// Every direction between the languages of `layouts`, in their order. Layouts of one language aren't offered.
+    static func directions(among layouts: [KeyLayout]) -> [FixDirection] {
+        let languages = layouts.map(\.language).reduce(into: [String]()) { if !$0.contains($1) { $0.append($1) } }
+        return languages.flatMap { from in languages.filter { $0 != from }.map { FixDirection(from: from, to: $0) } }
+    }
 
     /// A press that belongs inside a word: a letter, or an apostrophe or hyphen between letters («don't», «кто-то»).
     private static func isLetter(_ text: String) -> Bool { text.count == 1 && text.first?.isLetter == true }
@@ -65,7 +80,7 @@ enum LayoutWords {
     }
 
     /// The word typed with `strokes` in `current`, if it was meant for another layout: nil when it is a word here,
-    /// was un-corrected before (`learned`), has digits, or reads as a word in no other layout.
+    /// is an exception or would become one (`learned`), has digits, or reads as a word in no other layout.
     ///
     /// The ends are read both ways: «ghbdtn,» is «привет,» (the comma as typed), «kj,» is «лоб» (the comma key is «б»).
     static func correction(for strokes: [KeyStroke], in current: KeyLayout, others: [KeyLayout], learned: Set<String>,
@@ -74,7 +89,7 @@ enum LayoutWords {
         let typedParts = strokes.map { current.keys[$0] ?? "" }
         guard !typedParts.contains(where: { $0.isEmpty || $0.contains(where: \.isNumber) }) else { return nil }
         let typed = typedParts.joined()
-        guard !learned.contains(typed.lowercased()) else { return nil }
+        guard !isException(typed, in: learned) else { return nil }
         let typedRange = wordRange(typedParts)
         if let typedRange, isWord(typedParts[typedRange].joined(), current.language) { return nil }
 
@@ -90,7 +105,7 @@ enum LayoutWords {
                     text = typedParts[..<typedRange.lowerBound].joined() + core.joined() + typedParts[typedRange.upperBound...].joined()
                 }
             }
-            if let text, text != typed { return LayoutCorrection(layoutID: layout.id, typed: typed, text: text) }
+            if let text, text != typed, !isException(text, in: learned) { return LayoutCorrection(layoutID: layout.id, typed: typed, text: text) }
         }
         return nil
     }
@@ -108,8 +123,9 @@ enum LayoutWords {
     }
 
     /// ⌥⇧ on selected text: which layout it was typed in (the one that can type most of its letters; `current` wins
-    /// a tie), and the text as the same presses type it in the layout where most of it reads as words.
-    static func convert(_ text: String, among layouts: [KeyLayout], current: String?,
+    /// a tie), and the text as the same presses type it in the layout where most of it reads as words. Exceptions stay
+    /// as they are, so «ghbdtn GitHub» can become «привет GitHub».
+    static func convert(_ text: String, among layouts: [KeyLayout], current: String?, exceptions: Set<String> = [],
                         isWord: (String, String) -> Bool) -> (text: String, layoutID: String)? {
         let letters = text.filter(\.isLetter)
         guard !letters.isEmpty, layouts.count > 1 else { return nil }
@@ -125,10 +141,13 @@ enum LayoutWords {
         let targets = (layouts[(start + 1)...] + layouts[..<start]).filter { $0.id != source.id }
         var best: (text: String, layoutID: String, score: Int)?
         for target in targets {
-            let converted = String(text.flatMap { character -> String in
-                guard let stroke = source.stroke(for: character), let typed = target.keys[stroke] else { return String(character) }
-                return typed
-            })
+            let converted = mappingWords(of: text) { word in
+                let mapped = String(word.flatMap { character -> String in
+                    guard let stroke = source.stroke(for: character), let typed = target.keys[stroke] else { return String(character) }
+                    return typed
+                })
+                return isException(word, in: exceptions) || isException(mapped, in: exceptions) ? word : mapped
+            }
             let words = converted.split(whereSeparator: { $0.isWhitespace }).map { $0.trimmingCharacters(in: .punctuationCharacters) }
             let score = words.filter { !$0.isEmpty && isWord($0, target.language) }.count
             if converted != text, best == nil || score > best!.score { best = (converted, target.id, score) }
@@ -136,7 +155,36 @@ enum LayoutWords {
         return best.map { ($0.text, $0.layoutID) }
     }
 
-    /// An un-corrected word goes on the «не исправлять» list once, newest first.
+    /// `text` with each run of non-spaces replaced; the spaces and line breaks stay where they are.
+    private static func mappingWords(of text: String, _ transform: (String) -> String) -> String {
+        var result = ""
+        var word = ""
+        for character in text {
+            if character.isWhitespace {
+                result += transform(word)
+                word = ""
+                result.append(character)
+            } else {
+                word.append(character)
+            }
+        }
+        return result + transform(word)
+    }
+
+    /// Whether the dictionary of exceptions has this word, with or without what sits at its ends («vs,» is «vs»).
+    static func isException(_ word: String, in exceptions: Set<String>) -> Bool {
+        let key = word.lowercased()
+        return exceptions.contains(key) || exceptions.contains(key.trimmingCharacters(in: CharacterSet.letters.inverted))
+    }
+
+    /// Words added by hand: spaces, commas or semicolons between them, quotes and the like around them are dropped.
+    /// The first one typed ends up on top.
+    static func addingExceptions(_ text: String, to list: [String]) -> [String] {
+        let words = text.split { $0.isWhitespace || $0 == "," || $0 == ";" }.map { $0.trimmingCharacters(in: .punctuationCharacters) }
+        return words.reversed().reduce(list) { learning($1, into: $0) }
+    }
+
+    /// An un-corrected word goes on the list of exceptions once, newest first.
     static func learning(_ word: String, into list: [String], limit: Int = 500) -> [String] {
         let key = word.lowercased()
         guard !key.isEmpty else { return list }
@@ -217,8 +265,10 @@ struct LayoutSettings: Codable, Equatable, Sendable {
     var menuBarIcon = true
     /// Terminals take commands, not words: no automatic fixes there.
     var skipTerminals = true
-    /// Words the person un-corrected: never fixed again. Lowercased, as typed.
+    /// The dictionary of exceptions: words added by hand and words the person un-corrected. Lowercased, as typed.
     var learned: [String] = []
+    /// Directions turned off for automatic fixes; everything else is on, so a newly added layout just works.
+    var offDirections: [FixDirection] = []
 
     static let terminals: Set<String> = [
         "com.apple.Terminal", "com.googlecode.iterm2", "com.mitchellh.ghostty", "dev.warp.Warp-Stable", "net.kovidgoyal.kitty",
@@ -226,6 +276,18 @@ struct LayoutSettings: Codable, Equatable, Sendable {
     ]
 
     init() {}
+
+    func fixes(_ direction: FixDirection) -> Bool { !offDirections.contains(direction) }
+
+    mutating func setFixes(_ direction: FixDirection, _ on: Bool) {
+        offDirections.removeAll { $0 == direction }
+        if !on { offDirections.append(direction) }
+    }
+
+    /// The layouts a word typed in `current` may be fixed into.
+    func autoTargets(from current: KeyLayout, among layouts: [KeyLayout]) -> [KeyLayout] {
+        layouts.filter { fixes(FixDirection(from: current.language, to: $0.language)) }
+    }
 
     init(from decoder: Decoder) throws {
         let c = try decoder.container(keyedBy: CodingKeys.self)
@@ -236,5 +298,6 @@ struct LayoutSettings: Codable, Equatable, Sendable {
         menuBarIcon = (try? c.decodeIfPresent(Bool.self, forKey: .menuBarIcon)) ?? defaults.menuBarIcon
         skipTerminals = (try? c.decodeIfPresent(Bool.self, forKey: .skipTerminals)) ?? defaults.skipTerminals
         learned = (try? c.decodeIfPresent([String].self, forKey: .learned)) ?? defaults.learned
+        offDirections = (try? c.decodeIfPresent([FixDirection].self, forKey: .offDirections)) ?? defaults.offDirections
     }
 }

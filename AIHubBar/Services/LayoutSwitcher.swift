@@ -299,7 +299,8 @@ final class LayoutSwitcher {
         let front = NSWorkspace.shared.frontmostApplication?.bundleIdentifier
         let skipped = settings.layout.skipTerminals && front.map(LayoutSettings.terminals.contains) == true
         if settings.layout.auto, !skipped,
-           let correction = LayoutWords.correction(for: strokes, in: layout, others: layouts, learned: Set(settings.layout.learned),
+           let correction = LayoutWords.correction(for: strokes, in: layout, others: settings.layout.autoTargets(from: layout, among: layouts),
+                                                   learned: Set(settings.layout.learned),
                                                    isWord: { isWord($0, $1) }),
            let target = layouts.first(where: { $0.id == correction.layoutID }) {
             erase(correction.typed.count)
@@ -378,7 +379,8 @@ final class LayoutSwitcher {
             }
             guard pasteboard.changeCount != before else { return }
             guard let text = pasteboard.string(forType: .string), text.count <= 5000,
-                  let result = LayoutWords.convert(text, among: layouts, current: currentID, isWord: { self.isWord($0, $1) }) else {
+                  let result = LayoutWords.convert(text, among: layouts, current: currentID, exceptions: Set(settings.layout.learned),
+                                                   isWord: { self.isWord($0, $1) }) else {
                 saved.restore(to: pasteboard)
                 return
             }
@@ -493,6 +495,18 @@ final class LayoutSwitcher {
         auto.state = settings.layout.auto ? .on : .off
         menu.addItem(auto)
         menu.addItem(.separator())
+        let directions = LayoutWords.directions(among: layouts)
+        if settings.layout.auto, !directions.isEmpty {
+            menu.addItem(.sectionHeader(title: String(localized: "С какой раскладки на какую")))
+            for direction in directions {
+                let on = settings.layout.fixes(direction)
+                let item = menuActions.item(direction.title) { [weak self] in self?.settings.layout.setFixes(direction, !on) }
+                item.state = on ? .on : .off
+                menu.addItem(item)
+            }
+            menu.addItem(.separator())
+        }
+        menu.addItem(menuActions.item(String(localized: "Словарь исключений…")) { [weak self] in self?.openSettings?() })
         menu.addItem(menuActions.item(String(localized: "Настройки раскладки…")) { [weak self] in self?.openSettings?() })
     }
 }

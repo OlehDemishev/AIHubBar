@@ -237,6 +237,8 @@ enum HelpTopic: String, CaseIterable, Identifiable, Sendable {
                 HelpFact(String(localized: "Само"), String(localized: "Слово в чужой раскладке исправляется после пробела, и раскладка переключается."), symbol: "wand.and.stars"),
                 HelpFact(String(localized: "Двойной Shift"), String(localized: "Переводит последнее слово или отменяет неверное исправление — и запоминает слово."), symbol: "shift"),
                 HelpFact("⌥⇧", String(localized: "Переводит выделенный текст."), symbol: "option"),
+                HelpFact(String(localized: "Направления"), String(localized: "В меню языка в строке меню можно выбрать, с какой раскладки на какую исправлять само, например только EN → RU."), symbol: "arrow.left.arrow.right"),
+                HelpFact(String(localized: "Исключения"), String(localized: "Слова из словаря исключений не исправляются сами, а ⌥⇧ оставляет их как есть."), symbol: "text.badge.xmark"),
                 HelpFact(String(localized: "Доступ"), String(localized: "Нужен «Универсальный доступ»: модуль сам попросит и покажет, где его включить."), symbol: "lock.shield"),
             ])]
         case .utilities:

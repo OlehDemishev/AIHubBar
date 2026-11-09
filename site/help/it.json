@@ -485,6 +485,14 @@
               "name" : "⌥⇧"
             },
             {
+              "detail" : "Nel menu della lingua, nella barra dei menu, scegli da quale layout a quale correggere da solo, ad esempio solo EN → RU.",
+              "name" : "Direzioni"
+            },
+            {
+              "detail" : "Le parole del dizionario delle eccezioni non vengono corrette da sole e ⌥⇧ le lascia come sono.",
+              "name" : "Eccezioni"
+            },
+            {
               "detail" : "Serve «Accessibilità»: il modulo lo chiede da solo e mostra dove attivarlo.",
               "name" : "Accesso"
             }

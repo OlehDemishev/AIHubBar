@@ -485,6 +485,14 @@
               "name" : "⌥⇧"
             },
             {
+              "detail" : "Di menu bahasa pada bilah menu, pilih dari tata letak mana ke mana yang diperbaiki otomatis, misalnya hanya EN → RU.",
+              "name" : "Arah"
+            },
+            {
+              "detail" : "Kata dalam kamus pengecualian tidak diperbaiki otomatis, dan ⌥⇧ membiarkannya apa adanya.",
+              "name" : "Pengecualian"
+            },
+            {
               "detail" : "Perlu «Aksesibilitas»: modul akan memintanya sendiri dan menunjukkan tempat menyalakannya.",
               "name" : "Akses"
             }
