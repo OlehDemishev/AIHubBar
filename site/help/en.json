@@ -485,6 +485,14 @@
               "name" : "⌥⇧"
             },
             {
+              "detail" : "In the language's menu in the menu bar, choose which layouts are fixed into which, for example only EN → RU.",
+              "name" : "Directions"
+            },
+            {
+              "detail" : "Words in the dictionary of exceptions aren't fixed automatically, and ⌥⇧ leaves them as they are.",
+              "name" : "Exceptions"
+            },
+            {
               "detail" : "Needs “Accessibility” access: the module asks for it and shows where to turn it on.",
               "name" : "Access"
             }

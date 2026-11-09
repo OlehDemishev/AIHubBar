@@ -485,6 +485,14 @@
               "name" : "⌥⇧"
             },
             {
+              "detail" : "W menu języka na pasku menu wybierz, z jakiego układu na jaki poprawiać samodzielnie, na przykład tylko EN → RU.",
+              "name" : "Kierunki"
+            },
+            {
+              "detail" : "Słowa ze słownika wyjątków nie są poprawiane samodzielnie, a ⌥⇧ zostawia je bez zmian.",
+              "name" : "Wyjątki"
+            },
+            {
               "detail" : "Wymaga „Dostępności”: moduł sam poprosi i pokaże, gdzie ją włączyć.",
               "name" : "Dostęp"
             }

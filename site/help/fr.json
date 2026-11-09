@@ -485,6 +485,14 @@
               "name" : "⌥⇧"
             },
             {
+              "detail" : "Dans le menu de la langue, dans la barre des menus, choisissez d'une disposition à l'autre ce qui est corrigé automatiquement, par exemple seulement EN → RU.",
+              "name" : "Directions"
+            },
+            {
+              "detail" : "Les mots du dictionnaire d'exceptions ne sont pas corrigés automatiquement, et ⌥⇧ les laisse tels quels.",
+              "name" : "Exceptions"
+            },
+            {
               "detail" : "Nécessite « Accessibilité » : le module le demande lui-même et montre où l’activer.",
               "name" : "Accès"
             }

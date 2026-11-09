@@ -149,6 +149,82 @@ struct LayoutSwitchTests {
         #expect(partial.doubleShift)
     }
 
+    @Test func everyLanguagePairIsOffered() {
+        let abc2 = KeyLayout(id: "abc2", language: "en", name: "abc2", keys: en.keys)
+        let directions = LayoutWords.directions(among: [en, ru, abc2, de])
+        #expect(directions.map(\.title) == ["EN → RU", "EN → DE", "RU → EN", "RU → DE", "DE → EN", "DE → RU"])
+        #expect(LayoutWords.directions(among: [en, abc2]).isEmpty)
+    }
+
+    /// EN → RU off: «ghbdtn» stays, while RU → EN still fixes. Only that way round, and it comes back when turned on.
+    @Test func aDirectionTurnedOffFixesNothing() {
+        var settings = LayoutSettings()
+        let direction = FixDirection(from: "en", to: "ru")
+        #expect(settings.fixes(direction))
+        settings.setFixes(direction, false)
+        settings.setFixes(direction, false)
+        #expect(settings.offDirections == [direction])
+        #expect(fix("ghbdtn", in: en, others: settings.autoTargets(from: en, among: [en, ru])) == nil)
+        #expect(fix("руддщ", in: ru, others: settings.autoTargets(from: ru, among: [en, ru])) == "hello")
+        settings.setFixes(direction, true)
+        #expect(settings.offDirections.isEmpty)
+        #expect(fix("ghbdtn", in: en, others: settings.autoTargets(from: en, among: [en, ru])) == "привет")
+    }
+
+    /// The same presses read as «zes» in English and «yes» in German: turning one way off leaves the other.
+    private func typedInRussian(others: [KeyLayout], learned: Set<String> = []) -> String? {
+        LayoutWords.correction(for: strokes("яуы", in: ru), in: ru, others: others, learned: learned) { word, language in
+            (language == "en" && word == "zes") || (language == "de" && word == "yes")
+        }?.text
+    }
+
+    @Test func aDirectionOffLeavesTheOthersOpen() {
+        var settings = LayoutSettings()
+        #expect(typedInRussian(others: settings.autoTargets(from: ru, among: [ru, en, de])) == "zes")
+        settings.setFixes(FixDirection(from: "ru", to: "en"), false)
+        #expect(typedInRussian(others: settings.autoTargets(from: ru, among: [ru, en, de])) == "yes")
+    }
+
+    @Test func offDirectionsSurviveSaving() throws {
+        var settings = LayoutSettings()
+        settings.setFixes(FixDirection(from: "ru", to: "en"), false)
+        let decoded = try JSONDecoder().decode(LayoutSettings.self, from: JSONEncoder().encode(settings))
+        #expect(decoded == settings)
+        // Garbage in the field costs that field only.
+        let odd = try JSONDecoder().decode(LayoutSettings.self, from: Data(#"{"auto":false,"offDirections":"x"}"#.utf8))
+        #expect(odd.offDirections.isEmpty)
+        #expect(odd.auto == false)
+    }
+
+    /// Either side of a fix may be in the dictionary, in any case, with punctuation after it.
+    @Test func exceptionsStopAFixFromEitherSide() {
+        #expect(fix("ghbdtn,", in: en, learned: ["ghbdtn"]) == nil)
+        #expect(fix("Ghbdtn", in: en, learned: ["ghbdtn"]) == nil)
+        #expect(fix("ghbdtn", in: en, learned: ["привет"]) == nil)
+        #expect(fix("ghbdtn,", in: en, learned: ["привет"]) == nil)
+        #expect(fix("ghbdtn", in: en, learned: ["другое"]) == "привет")
+    }
+
+    /// An exception in one language doesn't stop the fix into another.
+    @Test func anExceptionLeavesTheNextLayoutInPlay() {
+        #expect(typedInRussian(others: [ru, en, de], learned: ["zes"]) == "yes")
+        #expect(typedInRussian(others: [ru, en, de], learned: ["zes", "yes"]) == nil)
+    }
+
+    @Test func wordsAreAddedByHand() {
+        #expect(LayoutWords.addingExceptions(" VS, «github»;\nкто-то  don't ", to: ["old", "vs"]) == ["vs", "github", "кто-то", "don't", "old"])
+        #expect(LayoutWords.addingExceptions(" ,; «» ", to: ["old"]) == ["old"])
+    }
+
+    /// ⌥⇧ converts around an exception and keeps the spaces and line breaks.
+    @Test func selectionKeepsExceptions() {
+        let result = LayoutWords.convert("ghbdtn hello\nvbh", among: [en, ru], current: "abc", exceptions: ["hello"], isWord: isWord)
+        #expect(result?.text == "привет hello\nмир")
+        #expect(result?.layoutID == "ru")
+        #expect(LayoutWords.convert("ghbdtn vbh", among: [en, ru], current: "abc", exceptions: ["мир"], isWord: isWord)?.text == "привет vbh")
+        #expect(LayoutWords.convert("hello", among: [en, ru], current: "abc", exceptions: ["hello"], isWord: isWord) == nil)
+    }
+
     @Test func layoutIsAModuleOutsideThePanel() {
         #expect(!ModuleKind.layout.isBuiltIn)
         #expect(!ModuleKind.layout.isPanelBlock)
