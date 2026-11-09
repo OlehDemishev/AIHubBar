@@ -1,11 +1,11 @@
 # Status
 
 <!-- summary:start -->
-**Stage:** Mac: 0.8.1 published 2026-11-09 (the island's rings fit in the black ears); 0.8.0 the same day, signed and notarized (Sparkle 2.10.1, the lock screen tile checks it locked, «Раскладка» directions and exceptions, «Поддержать проект»; 0.7.8 Developer ID, Accessibility asked once; 0.7.7 hook messages in the app's language, clean session titles; 0.7.6 a map of the panel on the first screen, «Тексты» fixes; before that shorter first run, panel polish, usage history, finished sessions, ⌃⌥B, outages, several Claude accounts). Windows/Linux (`desktop/`, Tauri 2): postponed by Oleh 2026-11-02
+**Stage:** Mac: 0.9.0 published 2026-11-09 (the closed panel no longer uses a third of a CPU core, 30 fixes from an audit); 0.8.1 the same day (the island's rings fit in the black ears); 0.8.0 the same day, signed and notarized (Sparkle 2.10.1, the lock screen tile checks it locked, «Раскладка» directions and exceptions, «Поддержать проект»; 0.7.8 Developer ID, Accessibility asked once; 0.7.7 hook messages in the app's language, clean session titles; 0.7.6 a map of the panel on the first screen, «Тексты» fixes; before that shorter first run, panel polish, usage history, finished sessions, ⌃⌥B, outages, several Claude accounts). Windows/Linux (`desktop/`, Tauri 2): postponed by Oleh 2026-11-02
 **Updated:** 2026-11-09
 
 **Now:**
-- audit pass 2026-11-09 (branch `fix/audit-2026-11-09`): the closed panel no longer uses a third of a CPU core while a session works; 30 fixes from a UI and code review (list in the journal); 0.9.0 follows
+- 0.9.0 (build 781) published 2026-11-09 with the audit pass (#342): the closed panel no longer uses a third of a CPU core while a session works; 30 fixes from a UI and code review (list in the journal)
 - tech debt pass done 2026-11-09, all merged: #330 Sparkle 2.10.1, #331 the lock screen tile checks it locked, #332 unused strings removed and the catalog compared with the code, #333 Mac CI on Xcode 27.2 running `check.sh`, #334 and #335 tests for the Telegram controller, the notch island and the command engine (77 new), #336 Telegram files split
 - 0.8.0 (build 773) published 2026-11-09 after Oleh's beta checks of 0.8.0-beta.1 passed
 - 0.8.1 (build 777) published 2026-11-09: the island's ears are 50 pt wide instead of 38, so the rings stay inside the black (#340)
@@ -20,6 +20,7 @@
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/specs/SPEC-windows.md §9, stage 2–3 leftovers)
 
 **Needs Oleh:**
+- 0.9.0: the Mac mini runs a 0.8.0 build from `.claude/worktrees/jolly-wiles-db1b62` started at login, not `~/Applications/AI Hub Bar.app`: quit it, open the installed app and let Sparkle update; then look at the new confirmations (Settings → «Внешний вид» → «Сбросить внешний вид», «Модули» → «Только AI») and the week strip's «Пн 9 … Пн 16»
 - «Значки» after the next install: press the toggle once, read the note under the tiles, press it again to bring the desktop back (the agent does not change this setting on your Mac)
 - optional, one minute: with the desktop on, does `StandardHideDesktopIcons` keep the context menu and drag selection? If yes, the toggle can move to it
 - «Раскладка» after the next install: in the language's menu turn off EN → RU, type «ghbdtn» and a space (it must stay); add «vs» to «Словарь исключений» and check it stays too
@@ -38,6 +39,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+## 2026-11-09 — 0.9.0 published (branch `chore/status-release-0.9.0`)
+
+Done: #342 merged with green CI, then `scripts/release.sh 0.9.0 --publish`: build 781, the app and the disk image notarized and stapled, the GitHub release made, the beta channel updated.
+Checked: v0.9.0 is GitHub's latest with the .dmg, appcast.xml and both overview PDFs; the normal feed lists 781 (0.9.0), the beta feed 781 and 771. After the release, on a Debug build of the same code: the Settings pages «Раскладка», «Внешний вид» and «Модули» drawn as expected; «Сбросить внешний вид» and the «Только AI» set each ask first (buttons read through Accessibility, cancelled, «Включено: 9 из 15» unchanged); the panel shows «работают: 2» and «без задачи» for the wrapper-only session.
+Left: not seen live: Claude's week strip with the dated weekdays (the Debug copy had no week data yet), the other confirmations, the run log, Arabic, the widget. The Debug copy's Settings sidebar was 144 pt wide from a saved frame and cut its labels («Внешний…»): a fixed 230 does not stop a narrower saved width. The installed copy has not been updated or checked.
+
 ## 2026-11-09 — Audit: idle CPU, UI slips and code defects (branch `fix/audit-2026-11-09`)
 
 Done: a review of the running app and the code, then the fixes.
