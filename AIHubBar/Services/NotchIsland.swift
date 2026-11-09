@@ -11,15 +11,16 @@ import SwiftUI
 @MainActor
 @Observable
 final class NotchIsland {
-    /// The screens the island is on; empty — nowhere.
-    private(set) var places: [NotchPlace] = []
+    /// The screens the island is on; empty — nowhere. Set from outside only by the tests.
+    var places: [NotchPlace] = []
     /// The place whose card is open.
     private(set) var openIndex: Int?
     /// A file is being dragged over this place's drop zone (SPEC-notch §9, stage 5).
     private(set) var dropTarget: Int?
     /// The file or folder dropped on the island; the open card offers the profile's AI commands for it.
     private(set) var dropped: URL?
-    private(set) var queue = NotchEventQueue()
+    /// Set from outside only by the tests.
+    var queue = NotchEventQueue()
     /// «Разрешить» / «Отклонить» are live (SPEC-notch §4).
     private(set) var armed = false
     /// The open card's and the banner's height under the notch, measured by the view.
@@ -74,7 +75,7 @@ final class NotchIsland {
     @ObservationIgnored private var pending: Task<Void, Never>?
     @ObservationIgnored private var bannerTimer: Task<Void, Never>?
     @ObservationIgnored private var screenObserver: NSObjectProtocol?
-    @ObservationIgnored private var clickGuard: NotchClickGuard?
+    @ObservationIgnored var clickGuard: NotchClickGuard?
     @ObservationIgnored private var shownBannerID: String?
     @ObservationIgnored private var pointerOnBanner = false
     @ObservationIgnored private var lastStates: [String: Session.State]?
@@ -241,7 +242,7 @@ final class NotchIsland {
 
     /// A session that went from working to done gets a short banner (no system notification has this). With the
     /// live activity on it says how far the task list got, how long the answer took and how many files changed.
-    private func noticeFinished(_ items: [SessionStore.Item]) {
+    func noticeFinished(_ items: [SessionStore.Item]) {
         let states = Dictionary(items.map { ($0.id, $0.state) }) { first, _ in first }
         defer { lastStates = states }
         guard let lastStates, settings.notch.events.contains(.done), !isFullScreen else { return }
@@ -327,7 +328,7 @@ final class NotchIsland {
         }
     }
 
-    private func updateArmed() {
+    func updateArmed() {
         let now = clickGuard?.isArmed(now: .now) ?? false
         if now != armed { armed = now }
     }
@@ -372,7 +373,7 @@ final class NotchIsland {
         dropped = url
         if openIndex == nil { open(on: index) }
         // Typing a task needs the keyboard; the panel takes it without bringing the app forward.
-        panels[index].makeKey()
+        if panels.indices.contains(index) { panels[index].makeKey() }
         return true
     }
 
