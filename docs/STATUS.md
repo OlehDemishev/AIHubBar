@@ -5,6 +5,7 @@
 **Updated:** 2026-11-09
 
 **Now:**
+- merged after 0.9.0, not released yet: a worktree's name is shown whole in a crowded session row (branch `fix/session-row-worktree`)
 - 0.9.0 (build 781) published 2026-11-09 with the audit pass (#342): the closed panel no longer uses a third of a CPU core while a session works; 30 fixes from a UI and code review (list in the journal)
 - tech debt pass done 2026-11-09, all merged: #330 Sparkle 2.10.1, #331 the lock screen tile checks it locked, #332 unused strings removed and the catalog compared with the code, #333 Mac CI on Xcode 27.2 running `check.sh`, #334 and #335 tests for the Telegram controller, the notch island and the command engine (77 new), #336 Telegram files split
 - 0.8.0 (build 773) published 2026-11-09 after Oleh's beta checks of 0.8.0-beta.1 passed
@@ -20,7 +21,8 @@
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/specs/SPEC-windows.md §9, stage 2–3 leftovers)
 
 **Needs Oleh:**
-- 0.9.0: the Mac mini runs a 0.8.0 build from `.claude/worktrees/jolly-wiles-db1b62` started at login, not `~/Applications/AI Hub Bar.app`: quit it, open the installed app and let Sparkle update; then look at the new confirmations (Settings → «Внешний вид» → «Сбросить внешний вид», «Модули» → «Только AI») and the week strip's «Пн 9 … Пн 16»
+- after the next restart: does `~/Applications/AI Hub Bar.app` (0.9.0) start at login? Until 2026-11-09 a build from `.claude/worktrees/jolly-wiles-db1b62` started instead
+- say whether the stop button on a run's row in the panel should ask first, like «Остановить» in the log window now does
 - «Значки» after the next install: press the toggle once, read the note under the tiles, press it again to bring the desktop back (the agent does not change this setting on your Mac)
 - optional, one minute: with the desktop on, does `StandardHideDesktopIcons` keep the context menu and drag selection? If yes, the toggle can move to it
 - «Раскладка» after the next install: in the language's menu turn off EN → RU, type «ghbdtn» and a space (it must stay); add «vs» to «Словарь исключений» and check it stays too
@@ -39,6 +41,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+## 2026-11-09 — Checks on the installed 0.9.0, the worktree name in a session row (branch `fix/session-row-worktree`)
+
+Done: in a crowded session row a worktree's name was cut to «ch…er» (it shared what was left with the task; the task's 70 pt minimum from #342 made it «…»). The name now comes first, whole up to 96 pt, and the task's minimum applies only to rows without a worktree. Two tests added: a write to a closed pipe is an error and not the end of the process, and a hook config that is a symlink stays one.
+Checked: `scripts/check.sh` green. On the installed 0.9.0 (updated by Sparkle from 0.8.0): 2–6 % CPU with the panel closed, one working session and Settings open (one 10 s window at 19.7 %, cause not looked for); the week strip says «Пн 9»; «сессии до сброса хватит» above the week's warning; the hook script updated itself; no errors in the log. On a Debug build, with a stand-in script for `claude` (no limit spent): a background run from the command line appears in the panel, its log follows the end and stays put when scrolled up, «Остановить» in the log window opens a sheet with «Отмена» and «Остановить», «Отмена» leaves the run going, and a confirmed stop ends it as `stopped`; the row then shows «charger» whole.
+Left: the stop button on the run's row in the panel stops at once, with no question (as before; the first test press hit it). With `-AppleLanguages (ar)` the panel's texts are Arabic but the layout is not mirrored, so the right-to-left fixes from #342 could not be seen. Not checked: the confirmations for a key, an account and a profile command (the same `ConfirmedButton`), the widget, a real notch, start at login. This fix is on main and not in a release.
+
 ## 2026-11-09 — 0.9.0 published (branch `chore/status-release-0.9.0`)
 
 Done: #342 merged with green CI, then `scripts/release.sh 0.9.0 --publish`: build 781, the app and the disk image notarized and stapled, the GitHub release made, the beta channel updated.

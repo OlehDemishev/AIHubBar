@@ -294,6 +294,11 @@ private struct SessionRowView: View {
                         .foregroundStyle(.secondary)
                         .lineLimit(1)
                         .truncationMode(.middle)
+                        // The name comes before the task in a crowded row (the task is in the tooltip): a short one
+                        // («charger») is shown whole, a long one is cut in the middle at this width.
+                        .frame(maxWidth: 96, alignment: .leading)
+                        .fixedSize(horizontal: true, vertical: false)
+                        .layoutPriority(0.5)
                         .help("Отдельная рабочая копия git (worktree)")
                 }
                 Text(action ?? row.task ?? String(localized: "без задачи"))
@@ -302,7 +307,8 @@ private struct SessionRowView: View {
                     .truncationMode(.tail)
                     .foregroundStyle(action == nil && row.task == nil ? .tertiary : .secondary)
                     // The counts beside it are fixed in size; without this a long diff leaves the task a few letters.
-                    .frame(minWidth: 70, alignment: .leading)
+                    // Not beside a worktree's name: there the minimum would be taken from that name («ch…er»).
+                    .frame(minWidth: row.worktree == nil ? 70 : 0, alignment: .leading)
                 Spacer(minLength: 4)
                 if let changes, let folder {
                     Button { showsChanges.toggle() } label: {
