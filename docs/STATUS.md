@@ -18,6 +18,7 @@
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/specs/SPEC-windows.md §9, stage 2–3 leftovers)
 
 **Needs Oleh:**
+- in 0.8.0-beta.1: press the «Замок» tile once (Быстрые переключатели); the screen must lock with no error under the tile when you come back
 - «Значки» after the next install: press the toggle once, read the note under the tiles, press it again to bring the desktop back (the agent does not change this setting on your Mac)
 - optional, one minute: with the desktop on, does `StandardHideDesktopIcons` keep the context menu and drag selection? If yes, the toggle can move to it
 - «Раскладка» after the next install: in the language's menu turn off EN → RU, type «ghbdtn» and a space (it must stay); add «vs» to «Словарь исключений» and check it stays too
@@ -36,6 +37,12 @@
 - MacBook Air: update to 0.7.8 through Sparkle and check the island at the real notch
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-09 — The lock screen tile checks that it locked (branch `fix/lock-screen-verified`)
+
+Done: the tile relied on a private call and fell back only if the call was gone; a call still there but doing nothing would have passed for success. `ScreenLock` now tries the private call, then ⌃⌘Q by key code (independent of the keyboard layout), then the display's sleep, reading after each step whether the screen did lock (`CGSessionCopyCurrentDictionary`), and logs which step worked. If none did, the tile says «Не удалось заблокировать экран» (13 languages). A test fails on the first macOS that drops the private call; it only looks the call up.
+Checked: `scripts/check.sh` green, 3 new tests. `scripts/strings-sync.sh` was not used for the string: it reordered the whole catalog and marked 112 keys stale, so the key was added by hand next to its neighbour.
+Left: the real lock isn't run, it would take over Oleh's screen. `CGSSessionScreenIsLocked` is an undocumented key: if macOS doesn't report it, the tile runs all three steps and shows the error although the screen locked. Oleh's press in the beta settles that (Needs Oleh).
 
 ## 2026-11-09 — Sparkle 2.10.1 (branch `chore/sparkle-2.10.1`)
 

@@ -90,3 +90,38 @@ struct UtilitiesTemplateTests {
         #expect(Set(store.installedModules).isSuperset(of: [.resources, .keepAwake, .quickCommands, .toggles]))
     }
 }
+
+/// The order of `ScreenLock`'s steps. Nothing here calls the real ones: that would lock this Mac.
+@MainActor
+struct ScreenLockTests {
+    final class Log {
+        var ran: [String] = []
+        var lockedBy: String?
+        var isLocked: Bool { lockedBy != nil && ran.contains(lockedBy!) }
+    }
+
+    private func steps(_ log: Log) -> [ScreenLock.Step] {
+        ["first", "second", "third"].map { name in ScreenLock.Step(name: name) { log.ran.append(name) } }
+    }
+
+    @Test func stopsAtTheStepThatLocked() async {
+        let log = Log()
+        log.lockedBy = "second"
+        let locked = await ScreenLock.run(steps(log), isLocked: { log.isLocked }, settle: .milliseconds(1))
+        #expect(locked)
+        #expect(log.ran == ["first", "second"])
+    }
+
+    /// A private call that is still there but does nothing must not read as success.
+    @Test func noStepLockedIsAFailure() async {
+        let log = Log()
+        let locked = await ScreenLock.run(steps(log), isLocked: { log.isLocked }, settle: .milliseconds(1))
+        #expect(!locked)
+        #expect(log.ran == ["first", "second", "third"])
+    }
+
+    /// Fails on the first macOS that drops the private call. Only looks it up.
+    @Test func thePrivateCallIsStillThere() {
+        #expect(ScreenLock.privateLock() != nil)
+    }
+}
