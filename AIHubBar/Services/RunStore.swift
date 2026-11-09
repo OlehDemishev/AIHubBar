@@ -8,7 +8,8 @@ import Observation
 @MainActor
 @Observable
 final class RunStore {
-    private(set) var runs: [BackgroundRun] = []
+    /// Set from outside only by the tests.
+    var runs: [BackgroundRun] = []
     /// The run shown in the «Журнал» window.
     var selectedLogRunID: String?
 

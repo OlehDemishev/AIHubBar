@@ -44,6 +44,11 @@
 Done: `TelegramBotController.swift` (1107 lines) is now the class with its state and settings-page actions (216) plus six extensions by its old sections: `+Loop`, `+Requests`, `+Tasks`, `+MiniApp`, `+Menu`, `+API`. `TelegramBot.swift` (961) keeps the settings and menu types (143); `TelegramBotRoutes`, `TelegramBotMessages` and `TelegramBotScreens` hold the rest. The largest file is now 373 lines. No code changed, only where it lives. Swift's `private` is per file, so 55 members used across the new files became internal and five setters lost `private(set)`.
 Checked: `scripts/check.sh` green, including the 36 controller tests written before the split for this. A comparison of every code line before and after (access modifiers aside) finds nothing added or lost.
 Left: nothing.
+## 2026-11-09 — Tests for the notch island and the command engine (branch `test/notch-command-engine`)
+
+Done: `NotchIsland` and `CommandEngine` had no tests of their own. 26 for the island: a fresh card takes no clicks, the pointer has to move, an answer goes out once and the next request waits again, ⌃⌥Y / ⌃⌥N only when on and after the delay, what comes in (switched-off kinds, full-screen apps, requests only from their files), the finished-session banner, file drops. 15 for the engine: an API result written and counted, spend kept across a restart, a failure that leaves no file and costs nothing, an earlier result never overwritten, «Сравнить» names, budget warnings once per level, Terminal, a background run's state, clearing. No user-visible change. Seams: the engine's API call, Terminal and notifications, its spend file and defaults; settable `places`, `queue`, `clickGuard` on the island and `runs` on `RunStore`. A drop on an island with no window no longer crashes (`panels` was indexed unchecked; in the app a place always has its window).
+Checked: `scripts/check.sh` green. Mutations: removing the armed check, the re-arm after an answer, the keys' delay, the request kept on «Открыть», the result-file check, the once-per-month warning or the unique file name each fails a test.
+Left: the island's pointer tracking, windows and timers need a screen and aren't covered.
 
 ## 2026-11-09 — Tests for the Telegram bot's controller (branch `test/telegram-controller`)
 
