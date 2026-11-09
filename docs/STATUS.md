@@ -5,19 +5,22 @@
 **Updated:** 2026-11-09
 
 **Now:**
-- tech debt pass agreed with Oleh on 2026-11-09, ending in 0.8.0: Sparkle, lock screen, stale strings, slow expressions check, tests for three controllers, Telegram files split; each its own PR
+- tech debt pass done 2026-11-09, all merged: #330 Sparkle 2.10.1, #331 the lock screen tile checks it locked, #332 unused strings removed and the catalog compared with the code, #333 Mac CI on Xcode 27.2 running `check.sh`, #334 and #335 tests for the Telegram controller, the notch island and the command engine (77 new), #336 Telegram files split
+- 0.8.0-beta.1 is built from main but not published: notarization needs the `AIHubBar` keychain profile, which the agent's shell can't reach (Needs Oleh)
 - merged 2026-11-09: #325 the «Значки» toggle warns that it turns off the whole desktop, #327 Debug builds have their own bundle id, so tests no longer move the login item record
 - merged 2026-11-06: #262 donations («Поддержать проект» in Settings → General, site/support.html with Ko-fi, GitHub Sponsors and Buy Me a Coffee; the app button reaches people with the next release)
 - merged 2026-11-03: #251 menu bar ☕ follows the «Не спать» switch, #248 «Не спать» on/off in the menu bar, #241 Codex states, #240 quick command shortcuts, #238 «Быстрый запрос», #236 content spec, #242 «Telegram» stage 1, #244 menu at the bottom, #246 shared bot (Worker not deployed yet), #247 desktop CI off for Mac string changes, #249 the bot's menu set up by each person, #252 stage 2 (sessions, requests, limits), #254 stage 3 (tasks and runs), #255 stage 4 (settings in the bot), #256 Mini App
 
 **Next:**
-- next release: the language picker's relaunch button, «Раскладка» directions and exceptions, and the «Значки» note reach people with it (all after 0.7.8)
+- 0.8.0 after Oleh's beta checks: `scripts/release.sh 0.8.0 --publish` from main, with a commit after the beta so its build number is higher. It brings Sparkle 2.10.1, the lock screen check, the language picker's relaunch button, «Раскладка» directions and exceptions, the «Значки» note and «Поддержать проект»
 - check on the Air: the island at the real notch
 - promotion (docs/LAUNCH.md): r/ClaudeAI, the lists, r/macapps, Show HN, Product Hunt, Homebrew
 - content (docs/specs/SPEC-content.md, agreed): stage 2 «Версии», then batch tasks; better after the first feedback from people
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/specs/SPEC-windows.md §9, stage 2–3 leftovers)
 
 **Needs Oleh:**
+- publish the beta from your Terminal, on main: `scripts/release.sh 0.8.0-beta.1 --publish` (about 15 minutes, notarization included). Then say so here, and the agent takes it from there
+- in 0.8.0-beta.1, first: on a Mac with 0.7.8, Settings → General → «Бета-версии» on, then «Проверить обновления». It must install and restart by itself with its permissions kept: the first update from Sparkle 2.6.4 to 2.10.1
 - in 0.8.0-beta.1: open a screen in the bot and answer one permission request from Telegram
 - in 0.8.0-beta.1: press the «Замок» tile once (Быстрые переключатели); the screen must lock with no error under the tile when you come back
 - «Значки» after the next install: press the toggle once, read the note under the tiles, press it again to bring the desktop back (the agent does not change this setting on your Mac)
@@ -38,6 +41,12 @@
 - MacBook Air: update to 0.7.8 through Sparkle and check the island at the real notch
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-09 — 0.8.0-beta.1 built, not published (branch `chore/status-beta-0.8.0`)
+
+Done: `scripts/release.sh 0.8.0-beta.1 --publish` on main `abff4ee` (build 769). The first run failed to compile on Sparkle's old module cache in `build/release/DerivedData` (the same as after the version change locally, docs/RELEASE.md); removed, the second run built and signed. Notarization stopped: `notarytool` found no keychain item for the profile `AIHubBar` from the agent's shell. The agent didn't look into the keychain or work around it.
+Checked: `scripts/check.sh` green inside both runs; `gh release view v0.8.0-beta.1` — nothing published.
+Left: Oleh runs the same command from his own Terminal; then the live checks in Needs Oleh, then 0.8.0.
 
 ## 2026-11-09 — Telegram files split (branch `refactor/split-telegram`)
 
