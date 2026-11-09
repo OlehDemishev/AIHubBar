@@ -3,17 +3,24 @@
 
     python3 scripts/strings-check.py            # check, exit 1 on problems
     python3 scripts/strings-check.py --format   # also rewrite the file in the repository's JSON style
+    python3 scripts/strings-check.py --catalog <file>   # check a copy (scripts/check.sh: one synced with the code)
 
 Problems: a Russian string in use without all 12 translations, format specifiers that differ from the Russian,
-Russian letters left in a translation, Russian-only letters in Ukrainian. Stale keys are only counted: some are used
-by desktop/ (desktop/scripts/strings.py checks those).
+Russian letters left in a translation, Russian-only letters in Ukrainian, a stale key that desktop/ doesn't use either.
+Stale keys desktop/ does use stay: the Mac code doesn't need them (desktop/scripts/strings.py checks those).
 """
 import json
 import re
 import sys
 from pathlib import Path
 
-CATALOG = Path(__file__).resolve().parent.parent / "AIHubBar/Resources/Localizable.xcstrings"
+ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT / "desktop/scripts"))
+from strings import used_keys  # noqa: E402
+
+CATALOG = ROOT / "AIHubBar/Resources/Localizable.xcstrings"
+if "--catalog" in sys.argv:
+    CATALOG = Path(sys.argv[sys.argv.index("--catalog") + 1])
 LANGUAGES = ["en", "uk", "de", "fr", "es", "it", "pt-BR", "pl", "ja", "ko", "ar", "id"]
 SPECIFIER = re.compile(r"%(?:\d+\$)?(?:lld|ld|d|@|f|%)")
 CYRILLIC = re.compile(r"[А-Яа-яЁё]")
@@ -29,9 +36,12 @@ def main():
     data = json.loads(CATALOG.read_text(encoding="utf-8"))
     problems = []
     stale = 0
+    desktop = set(used_keys())
     for key, entry in data["strings"].items():
         if entry.get("extractionState") == "stale":
             stale += 1
+            if key not in desktop:
+                problems.append(f"not used any more, remove it (scripts/strings-sync.sh marks them): {key[:90]}")
             continue
         if entry.get("shouldTranslate") is False:
             continue
