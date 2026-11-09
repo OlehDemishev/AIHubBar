@@ -39,6 +39,12 @@
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
 
+## 2026-11-09 — Telegram files split (branch `refactor/split-telegram`)
+
+Done: `TelegramBotController.swift` (1107 lines) is now the class with its state and settings-page actions (216) plus six extensions by its old sections: `+Loop`, `+Requests`, `+Tasks`, `+MiniApp`, `+Menu`, `+API`. `TelegramBot.swift` (961) keeps the settings and menu types (143); `TelegramBotRoutes`, `TelegramBotMessages` and `TelegramBotScreens` hold the rest. The largest file is now 373 lines. No code changed, only where it lives. Swift's `private` is per file, so 55 members used across the new files became internal and five setters lost `private(set)`.
+Checked: `scripts/check.sh` green, including the 36 controller tests written before the split for this. A comparison of every code line before and after (access modifiers aside) finds nothing added or lost.
+Left: nothing.
+
 ## 2026-11-09 — Tests for the Telegram bot's controller (branch `test/telegram-controller`)
 
 Done: `TelegramBotController` had no tests of its own. 36 now, on a fake Telegram, with answers to permission requests written to a temporary folder: strangers get nothing, only the code binds a chat, presses after a gap only navigate, a request is sent once and retried after a wait, an answer reaches the hook's file once, the shared bot's three switches, the task draft, the Mini App's refusals, reading the bot (409, 401, no network, offset). No user-visible change. Seams added: `transport` and `reloadOwnBot` on the controller, `approvalsDirectory` on `SessionStore`; some `private` members became internal for the tests.
