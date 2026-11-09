@@ -5,7 +5,8 @@
 **Updated:** 2026-11-09
 
 **Now:**
-- nothing in progress: 0.7.8 is out; content stage 1 is walked, what needs a person is in CHECKLIST
+- PR from `fix/debug-bundle-id`: Debug builds get their own bundle id, so tests no longer move the login item record
+- otherwise nothing in progress: 0.7.8 is out; content stage 1 is walked, what needs a person is in CHECKLIST
 - merged 2026-11-06: #262 donations («Поддержать проект» in Settings → General, site/support.html with Ko-fi, GitHub Sponsors and Buy Me a Coffee; the app button reaches people with the next release)
 - merged 2026-11-03: #251 menu bar ☕ follows the «Не спать» switch, #248 «Не спать» on/off in the menu bar, #241 Codex states, #240 quick command shortcuts, #238 «Быстрый запрос», #236 content spec, #242 «Telegram» stage 1, #244 menu at the bottom, #246 shared bot (Worker not deployed yet), #247 desktop CI off for Mac string changes, #249 the bot's menu set up by each person, #252 stage 2 (sessions, requests, limits), #254 stage 3 (tasks and runs), #255 stage 4 (settings in the bot), #256 Mini App
 
@@ -33,6 +34,12 @@
 - MacBook Air: update to 0.7.8 through Sparkle and check the island at the real notch
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-09 — Debug builds no longer move the login item record (branch `fix/debug-bundle-id`)
+
+Done: Debug builds have their own ids, `com.demishev.claudepult.debug` and `.debug.widget`; Release keeps the real ones. The Debug build also gives up `aihubbar://` (it has `aihubbar-debug://`) and doesn't open `*.claudepult` files (`LSHandlerRank` None), because with only a new id macOS sent the widget link to the Debug build. Explained in `docs/RELEASE.md`. Cause found: reading `SMAppService.mainApp.status` in a same-id build moves the record, which `LoginItemController.init` does in every launch and in the test host. Building and `--help-export` don't move it (the earlier note blamed `export-help.sh`; it doesn't).
+Checked: on unmodified main, the record moved to the Debug build after `--login-item status` and back after the same command from the installed app; a test run in another worktree moved it there. With the fix: `scripts/check.sh` and `scripts/export-help.sh` green with no change in `site/help`; the Debug build reports `login-item: disabled`; `aihubbar://` and `.claudepult` resolve to `~/Applications/AI Hub Bar.app` after check and after a Release build; a Release build's plist still has the real ids, `aihubbar` and `Owner`. The installed app stayed on one pid through all of it. Keychain code uses no access groups or the bundle id, and hooks don't use the id either. Debug settings now go to their own domain, so tests stopped writing to the real one; `defaults write com.demishev.claudepult …` still drives installed builds, a Debug build needs `.debug`.
+Left: `pluginkit` lists the Debug widget as a separate extension while a Debug build exists, so the widget gallery may show a second AI Hub Bar; the gallery itself wasn't looked at. Branches without this fix still move the record when their tests run, including #325. `sfltool dumpbtm` asks for an admin password on every call, so it isn't in any script.
 
 ## 2026-11-09 — «Раскладка»: directions and a dictionary of exceptions (branch `feat/layout-directions-exceptions`)
 

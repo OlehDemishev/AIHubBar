@@ -56,7 +56,7 @@ targets:
         # aihubbar://limits, aihubbar://session/<id>, aihubbar://search — clicks on the desktop widgets (WidgetLink).
         CFBundleURLTypes:
           - CFBundleURLName: com.demishev.claudepult.widget-link
-            CFBundleURLSchemes: [aihubbar]
+            CFBundleURLSchemes: [$(APP_LINK_SCHEME)]
         # *.claudepult — exported settings and modes (SPEC-modes §12).
         UTExportedTypeDeclarations:
           - UTTypeIdentifier: com.demishev.claudepult.settings
@@ -67,7 +67,7 @@ targets:
         CFBundleDocumentTypes:
           - CFBundleTypeName: Настройки AI Hub Bar
             CFBundleTypeRole: Viewer
-            LSHandlerRank: Owner
+            LSHandlerRank: $(SETTINGS_FILE_HANDLER_RANK)
             LSItemContentTypes: [com.demishev.claudepult.settings]
     settings:
       base:
@@ -80,6 +80,17 @@ targets:
         GENERATE_INFOPLIST_FILE: NO
         COMBINE_HIDPI_IMAGES: YES
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        APP_LINK_SCHEME: aihubbar
+        SETTINGS_FILE_HANDLER_RANK: Owner
+      configs:
+        # Tests and scripts run Debug builds. With the real id, `SMAppService.mainApp.status` in such a build moves the
+        # installed app's login item record to the build's folder, which gets deleted, and the app then doesn't start at login.
+        # A different id alone would make macOS send the widgets' links and *.claudepult files to the Debug build, so it
+        # gives both up.
+        Debug:
+          PRODUCT_BUNDLE_IDENTIFIER: com.demishev.claudepult.debug
+          APP_LINK_SCHEME: aihubbar-debug
+          SETTINGS_FILE_HANDLER_RANK: None
     dependencies:
       - target: AIHubBarWidget
       - package: Sparkle
@@ -115,6 +126,10 @@ targets:
         GENERATE_INFOPLIST_FILE: NO
         ENABLE_HARDENED_RUNTIME: NO
         SKIP_INSTALL: YES
+      configs:
+        # An embedded extension's id has to start with its app's id.
+        Debug:
+          PRODUCT_BUNDLE_IDENTIFIER: com.demishev.claudepult.debug.widget
 
   AIHubBarTests:
     type: bundle.unit-test
