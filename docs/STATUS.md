@@ -5,6 +5,7 @@
 **Updated:** 2026-11-10
 
 **Now:**
+- merged after 0.10.0, not released: the stop button on a run's row asks with a second click, Arabic percents without the space, a clearer message when Anthropic changes the limits service (branch `fix/known-holes`)
 - 0.10.0 (build 795) published 2026-11-10 with the redesign after Oleh's «перегружено» (#347, #348, #349): limits as a big number over a bar with the pace (bars or rings), Settings sidebar of seven rows with one page «Что показывать», the Claude account and plan in the panel's header, the other blocks under «Ещё»
 - 0.9.1 (build 787) published 2026-11-10 with #344 and #345: removing a Claude account no longer crashes the app (it did in 0.8.1 and 0.9.0), Arabic is mirrored, the Settings sidebar shows whole names, a worktree's name in a session row
 - 0.9.0 (build 781) published 2026-11-09 with the audit pass (#342): the closed panel no longer uses a third of a CPU core while a session works; 30 fixes from a UI and code review (list in the journal)
@@ -25,7 +26,6 @@
 **Needs Oleh:**
 - update to 0.10.0 (Settings → «Основные» → «Обновления»); «Не спать» has to be switched on again after the restart of the app
 - after the next restart: does `~/Applications/AI Hub Bar.app` (0.9.0) start at login? Until 2026-11-09 a build from `.claude/worktrees/jolly-wiles-db1b62` started instead
-- say whether the stop button on a run's row in the panel should ask first, like «Остановить» in the log window now does
 - «Значки» after the next install: press the toggle once, read the note under the tiles, press it again to bring the desktop back (the agent does not change this setting on your Mac)
 - optional, one minute: with the desktop on, does `StandardHideDesktopIcons` keep the context menu and drag selection? If yes, the toggle can move to it
 - «Раскладка» after the next install: in the language's menu turn off EN → RU, type «ghbdtn» and a space (it must stay); add «vs» to «Словарь исключений» and check it stays too
@@ -44,6 +44,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-10 — Known holes: stop asks, Arabic percents, limits message (branch `fix/known-holes`)
+
+Done: Oleh asked to fix what is known. The stop button on a run's row in the panel no longer stops at once: the first click turns it into a red «Остановить?» for four seconds, the second stops (no dialog — a sheet over the menu bar panel closes it); the row menu's «Остановить…» does the same. Arabic writes percents without the space («27%»): with it a right-to-left line drew «% 27»; 20 translations changed, and the panel's own percents (`UsageText.percent`, the battery) now go through the catalog. When the limits address answers 404, 410 or in an unknown format the message says Anthropic changed its service and to check for updates.
+Checked: `scripts/check.sh` green.
+Left: nothing of this seen live — the two-click stop needs a running background task, the percents an Arabic run. The 19.7 % CPU window from the audit is still unexplained (not reproduced).
 
 ## 2026-11-10 — Release 0.10.0 (branch `chore/status-release-0.10.0`)
 

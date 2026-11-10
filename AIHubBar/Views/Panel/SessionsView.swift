@@ -245,7 +245,10 @@ private struct SessionRowView: View {
     @Environment(SessionChangesStore.self) private var changesStore
     @Environment(\.openWindow) private var openWindow
     @State private var isHovered = false
+    @Environment(\.panelCalm) private var panelCalm
     @State private var showsChanges = false
+    /// The stop button was pressed once and waits for the second click.
+    @State private var confirmingStop = false
     /// «Разрешить» and «Отклонить» are live: the rows have stood still long enough to see what is under the pointer.
     @State private var requestArmed = false
 
@@ -440,12 +443,21 @@ private struct SessionRowView: View {
         return quiet > Self.quietAfter ? Int(quiet / 60) : nil
     }
 
+    /// Shows «Остановить?» in the row for a few seconds; without a second click the run goes on.
+    private func askToStop() {
+        withAnimation(panelCalm ? nil : .snappy(duration: 0.15)) { confirmingStop = true }
+        Task {
+            try? await Task.sleep(for: .seconds(4))
+            withAnimation(panelCalm ? nil : .snappy(duration: 0.15)) { confirmingStop = false }
+        }
+    }
+
     @ViewBuilder
     private var menuActions: some View {
         if let run = row.run {
             Button("Журнал") { showLog(run) }
             if run.isPaused { Button("Продолжить сейчас") { launcher.resumeNow(run.id) } }
-            if run.state == .running { Button("Остановить", role: .destructive) { runs.stop(run.id) } }
+            if run.state == .running { Button("Остановить…", role: .destructive) { askToStop() } }
         } else if let session = row.session {
             if row.state == .ended, session.agent == .claudeCode {
                 Button("Продолжить в Терминале") { SessionActions.resume(session, claudePath: settings.claudePath) }
@@ -465,9 +477,23 @@ private struct SessionRowView: View {
                         .help("На паузе до сброса лимита. Продолжить сейчас")
                 }
                 if run.state == .running {
-                    Button { runs.stop(run.id) } label: { Label("Остановить", systemImage: "stop.circle").labelStyle(.iconOnly) }
-                        .foregroundStyle(.red)
-                        .help("Остановить")
+                    // One click on a small icon must not end an hour of work: the first asks, the second stops. No dialog —
+                    // a sheet over the menu bar panel closes it.
+                    if confirmingStop {
+                        Button { confirmingStop = false; runs.stop(run.id) } label: {
+                            Text("Остановить?")
+                                .scaledFont(.caption, weight: .semibold)
+                                .foregroundStyle(.white)
+                                .padding(.horizontal, 7)
+                                .padding(.vertical, 2)
+                                .background(Capsule().fill(Color.red))
+                        }
+                        .help("Нажмите ещё раз, чтобы остановить задачу")
+                    } else {
+                        Button { askToStop() } label: { Label("Остановить", systemImage: "stop.circle").labelStyle(.iconOnly) }
+                            .foregroundStyle(.red)
+                            .help("Остановить")
+                    }
                 }
             } else if let session = row.session {
                 Button { SessionActions.show(session) } label: { Label("Показать", systemImage: "macwindow").labelStyle(.iconOnly) }

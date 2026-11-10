@@ -1002,7 +1002,7 @@
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "%@ %%/س"
+            "value": "%@%%/س"
           }
         },
         "de": {
@@ -2432,7 +2432,7 @@
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "%@: استُخدم %lld %%"
+            "value": "%@: استُخدم %lld%%"
           }
         },
         "de": {
@@ -2668,13 +2668,22 @@
       }
     },
     "%lld": {},
-    "%lld %%": {},
+    "%lld %%": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld%%"
+          }
+        }
+      }
+    },
     "%lld %% · заряжается": {
       "localizations": {
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "%lld %% · قيد الشحن"
+            "value": "%lld%% · قيد الشحن"
           }
         },
         "de": {
@@ -2750,7 +2759,7 @@
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "%lld %% · متبقٍ %lld س %lld د"
+            "value": "%lld%% · متبقٍ %lld س %lld د"
           }
         },
         "de": {
@@ -2826,7 +2835,7 @@
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "%lld %% · على الشاحن"
+            "value": "%lld%% · على الشاحن"
           }
         },
         "de": {
@@ -14240,16 +14249,10 @@
     },
     "Аккаунт Claude Code": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Claude Code account"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Обліковий запис Claude Code"
+            "value": "حساب Claude Code"
           }
         },
         "de": {
@@ -14258,10 +14261,10 @@
             "value": "Claude Code-Konto"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Compte Claude Code"
+            "value": "Claude Code account"
           }
         },
         "es": {
@@ -14270,22 +14273,22 @@
             "value": "Cuenta de Claude Code"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Compte Claude Code"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Akun Claude Code"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Account Claude Code"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Conta do Claude Code"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Konto Claude Code"
           }
         },
         "ja": {
@@ -14300,16 +14303,22 @@
             "value": "Claude Code 계정"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "حساب Claude Code"
+            "value": "Konto Claude Code"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Akun Claude Code"
+            "value": "Conta do Claude Code"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Обліковий запис Claude Code"
           }
         }
       }
@@ -45265,7 +45274,7 @@
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "سياق آخر محادثة في «%@»: %lld %%"
+            "value": "سياق آخر محادثة في «%@»: %lld%%"
           }
         },
         "de": {
@@ -47318,6 +47327,82 @@
         }
       }
     },
+    "Лимиты недоступны: Anthropic изменил свой сервис. Проверьте обновления AI Hub Bar.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limits unavailable: Anthropic changed its service. Check for AI Hub Bar updates."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ліміти недоступні: Anthropic змінив свій сервіс. Перевірте оновлення AI Hub Bar."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limits nicht verfügbar: Anthropic hat seinen Dienst geändert. Suchen Sie nach Updates für AI Hub Bar."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limites indisponibles : Anthropic a modifié son service. Vérifiez les mises à jour d’AI Hub Bar."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Límites no disponibles: Anthropic cambió su servicio. Busca actualizaciones de AI Hub Bar."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limiti non disponibili: Anthropic ha modificato il servizio. Controlla gli aggiornamenti di AI Hub Bar."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limites indisponíveis: a Anthropic mudou o serviço. Verifique as atualizações do AI Hub Bar."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limity niedostępne: Anthropic zmienił swoją usługę. Sprawdź aktualizacje AI Hub Bar."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "リミットを取得できません: Anthropicがサービスを変更しました。AI Hub Barのアップデートを確認してください。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "한도를 가져올 수 없습니다: Anthropic이 서비스를 변경했습니다. AI Hub Bar 업데이트를 확인하세요."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الحدود غير متاحة: غيّرت Anthropic خدمتها. تحقّق من تحديثات AI Hub Bar."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Batas tidak tersedia: Anthropic mengubah layanannya. Periksa pembaruan AI Hub Bar."
+          }
+        }
+      }
+    },
     "Лимиты недоступны: нет связи (%lld)": {
       "localizations": {
         "ar": {
@@ -47395,6 +47480,7 @@
       }
     },
     "Лимиты недоступны: ответ в неизвестном формате": {
+      "extractionState": "stale",
       "localizations": {
         "ar": {
           "stringUnit": {
@@ -51190,6 +51276,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Наведіть курсор на виїмку — відкриється картка з лімітами й тим, що робить Claude."
+          }
+        }
+      }
+    },
+    "Нажмите ещё раз, чтобы остановить задачу": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Click again to stop the task"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Натисніть ще раз, щоб зупинити завдання"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Noch einmal klicken, um die Aufgabe zu stoppen"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cliquez encore une fois pour arrêter la tâche"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Haz clic otra vez para detener la tarea"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fai clic di nuovo per fermare l’attività"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clique de novo para parar a tarefa"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kliknij jeszcze raz, aby zatrzymać zadanie"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "もう一度クリックするとタスクを停止します"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "한 번 더 클릭하면 작업을 중지합니다"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "انقر مرة أخرى لإيقاف المهمة"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Klik sekali lagi untuk menghentikan tugas"
           }
         }
       }
@@ -64299,16 +64461,10 @@
     },
     "Оставить в панели только лимиты и сессии": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Keep only limits and sessions in the panel"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Залишити в панелі лише ліміти й сесії"
+            "value": "إبقاء الحدود والجلسات فقط في اللوحة"
           }
         },
         "de": {
@@ -64317,10 +64473,10 @@
             "value": "Nur Limits und Sitzungen im Panel lassen"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ne garder que les limites et les sessions dans le panneau"
+            "value": "Keep only limits and sessions in the panel"
           }
         },
         "es": {
@@ -64329,22 +64485,22 @@
             "value": "Dejar en el panel solo los límites y las sesiones"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ne garder que les limites et les sessions dans le panneau"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sisakan hanya batas dan sesi di panel"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Lascia nel pannello solo limiti e sessioni"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Deixar no painel só os limites e as sessões"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Zostaw w panelu tylko limity i sesje"
           }
         },
         "ja": {
@@ -64359,16 +64515,22 @@
             "value": "패널에 한도와 세션만 남기기"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "إبقاء الحدود والجلسات فقط في اللوحة"
+            "value": "Zostaw w panelu tylko limity i sesje"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sisakan hanya batas dan sesi di panel"
+            "value": "Deixar no painel só os limites e as sessões"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Залишити в панелі лише ліміти й сесії"
           }
         }
       }
@@ -64378,7 +64540,7 @@
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "المتبقي %lld %%. وصّل الشاحن."
+            "value": "المتبقي %lld%%. وصّل الشاحن."
           }
         },
         "de": {
@@ -64749,6 +64911,158 @@
           "stringUnit": {
             "state": "translated",
             "value": "Зупинити «%1$@» в «%2$@»?"
+          }
+        }
+      }
+    },
+    "Остановить?": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stop?"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Зупинити?"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stoppen?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arrêter ?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Detener?"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ferma?"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Parar?"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zatrzymaj?"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "停止?"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "중지?"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إيقاف؟"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hentikan?"
+          }
+        }
+      }
+    },
+    "Остановить…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stop…"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Зупинити…"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stoppen…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arrêter…"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Detener…"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ferma…"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Parar…"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zatrzymaj…"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "停止…"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "중지…"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إيقاف…"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hentikan…"
           }
         }
       }
@@ -78214,16 +78528,10 @@
     },
     "Показать остальные блоки": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Show the other blocks"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Показати решту блоків"
+            "value": "إظهار باقي الأقسام"
           }
         },
         "de": {
@@ -78232,10 +78540,10 @@
             "value": "Die übrigen Blöcke anzeigen"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Afficher les autres blocs"
+            "value": "Show the other blocks"
           }
         },
         "es": {
@@ -78244,22 +78552,22 @@
             "value": "Mostrar los demás bloques"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Afficher les autres blocs"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tampilkan blok lainnya"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Mostra gli altri blocchi"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mostrar os outros blocos"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Pokaż pozostałe bloki"
           }
         },
         "ja": {
@@ -78274,16 +78582,22 @@
             "value": "나머지 블록 표시"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "إظهار باقي الأقسام"
+            "value": "Pokaż pozostałe bloki"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tampilkan blok lainnya"
+            "value": "Mostrar os outros blocos"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Показати решту блоків"
           }
         }
       }
@@ -79661,7 +79975,7 @@
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "العتبة %lld %%"
+            "value": "العتبة %lld%%"
           }
         },
         "de": {
@@ -85145,7 +85459,7 @@
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "المعالج %lld %% · الذاكرة %lld %%"
+            "value": "المعالج %lld%% · الذاكرة %lld%%"
           }
         },
         "de": {
@@ -88115,7 +88429,7 @@
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "إنفاق API: %lld %% من الميزانية"
+            "value": "إنفاق API: %lld%% من الميزانية"
           }
         },
         "de": {
@@ -89407,7 +89721,7 @@
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "أغلى جلسة: %@ — %lld %% (%@ رمز)"
+            "value": "أغلى جلسة: %@ — %lld%% (%@ رمز)"
           }
         },
         "de": {
@@ -101730,16 +102044,10 @@
     },
     "Тариф Claude": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Claude plan"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Тариф Claude"
+            "value": "خطة Claude"
           }
         },
         "de": {
@@ -101748,10 +102056,10 @@
             "value": "Claude-Tarif"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Forfait Claude"
+            "value": "Claude plan"
           }
         },
         "es": {
@@ -101760,22 +102068,22 @@
             "value": "Plan de Claude"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Forfait Claude"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Paket Claude"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Piano Claude"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Plano do Claude"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Plan Claude"
           }
         },
         "ja": {
@@ -101790,16 +102098,22 @@
             "value": "Claude 요금제"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "خطة Claude"
+            "value": "Plan Claude"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Paket Claude"
+            "value": "Plano do Claude"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Тариф Claude"
           }
         }
       }
@@ -106065,7 +106379,7 @@
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "إشعارات Telegram: عند %@ %%"
+            "value": "إشعارات Telegram: عند %@%%"
           }
         },
         "de": {
@@ -121074,7 +121388,7 @@
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "كالبقية: %@ %%"
+            "value": "كالبقية: %@%%"
           }
         },
         "de": {
@@ -123583,7 +123897,7 @@
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "الأسبوع %lld %%"
+            "value": "الأسبوع %lld%%"
           }
         },
         "de": {
@@ -125647,7 +125961,7 @@
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "من %lld %%"
+            "value": "من %lld%%"
           }
         },
         "de": {
@@ -125951,7 +126265,7 @@
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "الذاكرة %lld %%"
+            "value": "الذاكرة %lld%%"
           }
         },
         "de": {
@@ -127471,7 +127785,7 @@
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "المعالج %lld %%"
+            "value": "المعالج %lld%%"
           }
         },
         "de": {
@@ -128155,7 +128469,7 @@
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "من %lld %%"
+            "value": "من %lld%%"
           }
         },
         "de": {
@@ -129067,7 +129381,7 @@
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "الجلسة %lld %%"
+            "value": "الجلسة %lld%%"
           }
         },
         "de": {
