@@ -75,6 +75,7 @@ Or with Homebrew:
 
 ```bash
 brew tap olehdemishev/aihubbar https://github.com/OlehDemishev/AIHubBar
+brew trust olehdemishev/aihubbar      # newer Homebrew asks for this before a tap outside its own
 brew install --cask ai-hub-bar
 ```
 
