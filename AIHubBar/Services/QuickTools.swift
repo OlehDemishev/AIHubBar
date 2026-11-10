@@ -191,7 +191,7 @@ final class QuickToolsController {
         let invocation = command.invocation
         switch invocation {
         case .invalid:
-            results[command.id] = Result(text: String(localized: "Команда пустая — заполните её в Настройках → «Модули»."), isError: true)
+            results[command.id] = Result(text: String(localized: "Команда пустая — заполните её в Настройках → «Что показывать»."), isError: true)
         case let .open(url):
             let opened = NSWorkspace.shared.open(url)
             results[command.id] = opened ? nil : Result(text: String(localized: "Не открылось: \(url.isFileURL ? url.path : url.absoluteString)"), isError: true)
@@ -222,7 +222,7 @@ final class QuickToolsController {
     func runForBot(_ command: QuickCommand) async -> (ok: Bool, text: String) {
         switch command.invocation {
         case .invalid:
-            return (false, String(localized: "Команда пустая — заполните её в Настройках → «Модули»."))
+            return (false, String(localized: "Команда пустая — заполните её в Настройках → «Что показывать»."))
         case let .open(url):
             return NSWorkspace.shared.open(url)
                 ? (true, String(localized: "Открыто на Mac"))

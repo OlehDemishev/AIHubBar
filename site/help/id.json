@@ -40,8 +40,8 @@
       "steps" : [
         "Klik ✦ di bar menu — panel akan terbuka.",
         "Buat profil: Pengaturan → «Profil» → «+» → «Asisten…».",
-        "Di halaman «Modul», sisakan yang diperlukan saja — sisanya mati bersama pekerjaan latar belakangnya.",
-        "Di «Bar Menu», pilih apa yang tampil di samping ikon."
+        "Di halaman «Yang Ditampilkan», sisakan yang diperlukan saja — sisanya mati bersama pekerjaan latar belakangnya.",
+        "Di tempat yang sama, di «Bar Menu», pilih apa yang tampil di samping ikon."
       ],
       "summary" : "AI Hub Bar menjaga batas AI, sesi agen, dan proyek Anda tetap dekat — di bar menu Mac, cukup sekali klik.",
       "title" : "Memulai"
@@ -58,7 +58,7 @@
               "name" : "✦"
             },
             {
-              "detail" : "Pemakaian sesi 5 jam dan minggu — sebagai angka, cincin, atau bilah (Pengaturan → «Bar Menu»): hijau di bawah 50 %, oranye di bawah 80 %, merah di atasnya.",
+              "detail" : "Pemakaian sesi 5 jam dan minggu — sebagai angka, cincin, atau bilah (Pengaturan → «Yang Ditampilkan» → «Bar Menu»): hijau di bawah 50 %, oranye di bawah 80 %, merah di atasnya.",
               "name" : "Di samping ikon"
             },
             {
@@ -79,7 +79,7 @@
         }
       ],
       "steps" : [
-        "Buka Pengaturan → «Bar Menu».",
+        "Buka Pengaturan → «Yang Ditampilkan» → «Bar Menu».",
         "Klik elemen di «Urutan» — pengaturannya akan muncul: angka, cincin atau bilah, ambang.",
         "Seret pemisah ke elemen — pemisah akan berada tepat setelahnya. Tanpa mouse — «Lebih ke kiri» dan «Lebih ke kanan»."
       ],
@@ -111,7 +111,7 @@
         }
       ],
       "steps" : [
-        "Buka Pengaturan → «Panel».",
+        "Buka Pengaturan → «Yang Ditampilkan».",
         "Seret blok ke blok lain atau klik ⌃ / ⌄.",
         "Di kanan terlihat tampilan panel saat ini."
       ],
@@ -153,8 +153,8 @@
         }
       ],
       "steps" : [
-        "Pengaturan → «Modul»: nyalakan satu set («Hanya AI», «Utilitas Mac», «Semua») atau ubin satu per satu.",
-        "Klik ubin untuk membuka halaman modul: sakelar, «Tampilkan di», dan semua pengaturannya."
+        "Pengaturan → «Yang Ditampilkan»: setiap modul punya dua sakelar — bloknya di panel dan elemennya di bar menu. «Set siap pakai» menyalakan beberapa modul sekaligus.",
+        "Klik nama modul untuk membuka halamannya: sakelar dan semua pengaturannya."
       ],
       "summary" : "Modul adalah satu fitur AI Hub Bar. Profil menentukan modul mana yang tampil di panel dan urutannya.",
       "title" : "Modul dan profil"
@@ -384,7 +384,7 @@
         }
       ],
       "steps" : [
-        "Nyalakan kalender di profil — atau lewat tombol «Aktifkan di profil» pada ubin «Mendatang»."
+        "Nyalakan kalender di profil — atau lewat tombol «Aktifkan di profil» di baris «Mendatang» pada halaman «Yang Ditampilkan»."
       ],
       "summary" : "Tenggat dan publikasi dari kartu proyek dan rencana konten — untuk seminggu ke depan dan di jendela «Kalender».",
       "title" : "Mendatang dan kalender"
@@ -460,7 +460,7 @@
         }
       ],
       "steps" : [
-        "Nyalakan «Pulau notch» di halaman «Modul»."
+        "Nyalakan «Pulau notch» di halamannya di Pengaturan."
       ],
       "summary" : "Pulau hitam di sekitar notch MacBook: permintaan, peristiwa, dan saat kursor diarahkan, kartu berisi batas dan apa yang sedang dikerjakan Claude.",
       "title" : "Pulau notch"
@@ -502,7 +502,7 @@
         }
       ],
       "steps" : [
-        "Nyalakan «Tata letak keyboard» di halaman «Modul»."
+        "Nyalakan «Tata letak keyboard» di halaman «Yang Ditampilkan»."
       ],
       "summary" : "Kata yang diketik dengan tata letak yang salah otomatis diketik ulang dengan yang benar, dan tata letaknya berganti.",
       "title" : "Tata letak keyboard"

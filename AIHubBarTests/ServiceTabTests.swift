@@ -53,6 +53,17 @@ struct SettingsPaneTests {
         #expect(SettingsPane.module(.limits).rawValue == "module.limits")
         #expect(SettingsPane.service(.gemini).rawValue == "service.gemini")
         #expect(SettingsPane(rawValue: "module.nonsense") == nil && SettingsPane(rawValue: "") == nil)
+        // «Модули» and «Панель» became «Что показывать»: links saved before open it.
+        #expect(SettingsPane(rawValue: "modules") == .show && SettingsPane(rawValue: "panel") == .show)
+    }
+
+    /// The sidebar keeps a few rows: a module's page and «Строка меню» open from «Что показывать» and go back to it;
+    /// the island has a row of its own.
+    @Test func pagesOpenFromWhatToShow() {
+        #expect(SettingsPane.module(.limits).parent == .show && SettingsPane.menuBar.parent == .show)
+        #expect(SettingsPane.module(.notch).parent == nil && SettingsPane.service(.codex).parent == nil)
+        #expect(SettingsPane.areas.filter { $0 != .menuBar }.allSatisfy { $0.parent == nil })
+        #expect(SettingsPane.show.matches("модули") && SettingsPane.show.matches("панель"))
     }
 
     /// The three keys from before (`settingsTab` + `servicesTab` / `settingsModule`, and the older «claude») still

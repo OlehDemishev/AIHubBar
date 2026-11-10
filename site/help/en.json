@@ -40,8 +40,8 @@
       "steps" : [
         "Click ✦ in the menu bar to open the panel.",
         "Create a profile: Settings → “Profiles” → “+” → “Assistant…”.",
-        "On the “Modules” page, keep only what you need — the rest turns off along with its background work.",
-        "In “Menu Bar”, pick what shows next to the icon."
+        "On the “What to Show” page, keep only what you need — the rest turns off along with its background work.",
+        "In the same place, under “Menu Bar”, pick what shows next to the icon."
       ],
       "summary" : "AI Hub Bar keeps your AI limits, agent sessions and projects at hand — in the Mac menu bar, one click away.",
       "title" : "Getting started"
@@ -58,7 +58,7 @@
               "name" : "✦"
             },
             {
-              "detail" : "Share of the 5-hour session and the week used — as a number, ring or bar (Settings → “Menu Bar”): green below 50%, orange below 80%, red above.",
+              "detail" : "Share of the 5-hour session and the week used — as a number, ring or bar (Settings → “What to Show” → “Menu Bar”): green below 50%, orange below 80%, red above.",
               "name" : "Next to the icon"
             },
             {
@@ -79,7 +79,7 @@
         }
       ],
       "steps" : [
-        "Open Settings → “Menu Bar”.",
+        "Open Settings → “What to Show” → “Menu Bar”.",
         "Click an item in “Order” to see its settings: number, ring or bar, threshold.",
         "Drag a separator onto an item and it lands right after it. Without a mouse — “Further left” and “Further right”."
       ],
@@ -111,7 +111,7 @@
         }
       ],
       "steps" : [
-        "Open Settings → “Panel”.",
+        "Open Settings → “What to Show”.",
         "Drag a block onto another or click ⌃ / ⌄.",
         "On the right you can see how the panel looks now."
       ],
@@ -153,8 +153,8 @@
         }
       ],
       "steps" : [
-        "Settings → “Modules”: turn on a set (“AI only”, “Mac utilities”, “Everything”) or single tiles.",
-        "Clicking a tile opens the module’s page: the on/off switch, “Where to show” and all its settings."
+        "Settings → “What to Show”: each module has two switches — its block in the panel and its elements in the menu bar. “Ready-Made Set” turns on several modules at once.",
+        "Click a module’s name for its page: the switch and all of its settings."
       ],
       "summary" : "A module is one feature of AI Hub Bar. A profile decides which modules show in the panel and in what order.",
       "title" : "Modules and profiles"
@@ -384,7 +384,7 @@
         }
       ],
       "steps" : [
-        "Turn on the calendar in the profile — or use the “Turn on in the profile” button on the “Upcoming” tile."
+        "Turn on the calendar in the profile — or use the “Turn on in the profile” button in the “Upcoming” row on the “What to Show” page."
       ],
       "summary" : "Deadlines and publications from project cards and the content plan — a week ahead, and in the “Calendar” window.",
       "title" : "Upcoming and calendar"
@@ -460,7 +460,7 @@
         }
       ],
       "steps" : [
-        "Turn on “Notch Island” on the “Modules” page."
+        "Turn on “Notch Island” on its page in Settings."
       ],
       "summary" : "A black island around the MacBook notch: requests, events and, on hover, a card with limits and what Claude is doing.",
       "title" : "Notch Island"
@@ -502,7 +502,7 @@
         }
       ],
       "steps" : [
-        "Turn on “Keyboard Layout” on the “Modules” page."
+        "Turn on “Keyboard Layout” on the “What to Show” page."
       ],
       "summary" : "A word typed in the wrong keyboard layout is retyped in the right one by itself, and the layout switches.",
       "title" : "Keyboard Layout"

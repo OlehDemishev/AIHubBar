@@ -40,8 +40,8 @@
       "steps" : [
         "Cliquez sur ✦ dans la barre des menus : le panneau s’ouvre.",
         "Créez un profil : Réglages → « Profils » → « + » → « Assistant… ».",
-        "Sur la page « Modules », ne gardez que l’utile — le reste se désactive, travail en arrière-plan compris.",
-        "Dans « Barre des menus », choisissez ce qui s’affiche à côté de l’icône."
+        "Sur la page « Quoi afficher », ne gardez que l’utile — le reste se désactive, travail en arrière-plan compris.",
+        "Au même endroit, dans « Barre des menus », choisissez ce qui s’affiche à côté de l’icône."
       ],
       "summary" : "AI Hub Bar garde sous la main les limites d’IA, les sessions des agents et vos projets — dans la barre des menus du Mac, en un clic.",
       "title" : "Premiers pas"
@@ -58,7 +58,7 @@
               "name" : "✦"
             },
             {
-              "detail" : "Pourcentage utilisé de la session de 5 heures et de la semaine — en nombre, anneau ou barre (Réglages → «Barre des menus») : vert sous 50 %, orange sous 80 %, rouge au-dessus.",
+              "detail" : "Pourcentage utilisé de la session de 5 heures et de la semaine — en nombre, anneau ou barre (Réglages → «Quoi afficher» → «Barre des menus») : vert sous 50 %, orange sous 80 %, rouge au-dessus.",
               "name" : "À côté de l'icône"
             },
             {
@@ -79,7 +79,7 @@
         }
       ],
       "steps" : [
-        "Ouvrez Réglages → « Barre des menus ».",
+        "Ouvrez Réglages → « Quoi afficher » → « Barre des menus ».",
         "Cliquez sur un élément dans « Ordre » : ses réglages apparaissent — nombre, anneau ou barre, seuil.",
         "Faites glisser un séparateur sur un élément : il se place juste après. Sans souris — « Plus à gauche » et « Plus à droite »."
       ],
@@ -111,7 +111,7 @@
         }
       ],
       "steps" : [
-        "Ouvrez Réglages → « Panneau ».",
+        "Ouvrez Réglages → « Quoi afficher ».",
         "Faites glisser un bloc sur un autre ou cliquez sur ⌃ / ⌄.",
         "À droite, vous voyez l’aspect actuel du panneau."
       ],
@@ -153,8 +153,8 @@
         }
       ],
       "steps" : [
-        "Réglages → « Modules » : activez un ensemble (« IA uniquement », « Utilitaires Mac », « Tout ») ou des tuiles une par une.",
-        "Un clic sur une tuile ouvre la page du module : interrupteur, « Où afficher » et tous ses réglages."
+        "Réglages → « Quoi afficher » : chaque module a deux interrupteurs — son bloc dans le panneau et ses éléments dans la barre des menus. « Ensemble prêt » active plusieurs modules d’un coup.",
+        "Cliquez sur le nom d’un module pour ouvrir sa page : l’interrupteur et tous ses réglages."
       ],
       "summary" : "Un module est une fonction d’AI Hub Bar. Le profil décide quels modules apparaissent dans le panneau et dans quel ordre.",
       "title" : "Modules et profils"
@@ -384,7 +384,7 @@
         }
       ],
       "steps" : [
-        "Activez le calendrier dans le profil — ou avec le bouton « Activer dans le profil » sur la tuile « À venir »."
+        "Activez le calendrier dans le profil — ou avec le bouton « Activer dans le profil » dans la ligne « À venir » de la page « Quoi afficher »."
       ],
       "summary" : "Échéances et publications des fiches de projet et du plan de contenu — sur la semaine à venir et dans la fenêtre « Calendrier ».",
       "title" : "À venir et calendrier"
@@ -460,7 +460,7 @@
         }
       ],
       "steps" : [
-        "Activez « Île de l’encoche » sur la page « Modules »."
+        "Activez « Île de l’encoche » sur sa page dans Réglages."
       ],
       "summary" : "Une île noire autour de l’encoche du MacBook : demandes, événements et, au survol, une carte avec les limites et ce que fait Claude.",
       "title" : "Île de l’encoche"
@@ -502,7 +502,7 @@
         }
       ],
       "steps" : [
-        "Activez « Disposition du clavier » sur la page « Modules »."
+        "Activez « Disposition du clavier » sur la page « Quoi afficher »."
       ],
       "summary" : "Un mot tapé dans la mauvaise disposition est retapé tout seul dans la bonne, et la disposition change.",
       "title" : "Disposition du clavier"

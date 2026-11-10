@@ -284,14 +284,14 @@ private struct ProfileEditor: View {
         .onChange(of: stored) { if let stored, stored != mode { mode = stored } }
     }
 
-    /// The profile's blocks are edited in Settings → «Панель» (SPEC-settings §4); here only what it shows and a way there.
+    /// The profile's blocks are edited in Settings → «Что показывать» (SPEC-settings §3); here only what it shows and a way there.
     private var panelSection: some View {
         let shown = mode.moduleList.filter { $0.shown && modes.isOn($0.kind) }
         return Section {
             LabeledContent {
-                Button("Изменить в «Панели»…") {
+                Button("Изменить в «Что показывать»…") {
                     UserDefaults.standard.set(mode.id, forKey: StorageKey.panelProfile)
-                    SettingsRoute.open(.panel)
+                    SettingsRoute.open(.show)
                 }
             } label: {
                 Label(shown.isEmpty ? String(localized: "Панель пуста") : shown.map(\.kind.title).joined(separator: " · "),

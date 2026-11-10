@@ -40,8 +40,8 @@
       "steps" : [
         "Clique em ✦ na barra de menus para abrir o painel.",
         "Crie um perfil: Ajustes → «Perfis» → «+» → «Assistente…».",
-        "Na página «Módulos», deixe só o que precisa — o resto é desligado junto com o trabalho em segundo plano.",
-        "Em «Barra de menus», escolha o que aparece ao lado do ícone."
+        "Na página «O que mostrar», deixe só o que precisa — o resto é desligado junto com o trabalho em segundo plano.",
+        "Ali mesmo, em «Barra de menus», escolha o que aparece ao lado do ícone."
       ],
       "summary" : "O AI Hub Bar deixa à mão os limites de IA, as sessões de agentes e seus projetos — na barra de menus do Mac, a um clique.",
       "title" : "Primeiros passos"
@@ -58,7 +58,7 @@
               "name" : "✦"
             },
             {
-              "detail" : "Percentual da sessão de 5 horas e da semana — como número, anel ou barra (Ajustes → «Barra de menus»): verde abaixo de 50 %, laranja abaixo de 80 %, vermelho acima.",
+              "detail" : "Percentual da sessão de 5 horas e da semana — como número, anel ou barra (Ajustes → «O que mostrar» → «Barra de menus»): verde abaixo de 50 %, laranja abaixo de 80 %, vermelho acima.",
               "name" : "Ao lado do ícone"
             },
             {
@@ -79,7 +79,7 @@
         }
       ],
       "steps" : [
-        "Abra Ajustes → «Barra de menus».",
+        "Abra Ajustes → «O que mostrar» → «Barra de menus».",
         "Clique em um item em «Ordem» para ver seus ajustes: número, anel ou barra, limiar.",
         "Arraste um separador sobre um item e ele fica logo depois. Sem mouse — «Mais à esquerda» e «Mais à direita»."
       ],
@@ -111,7 +111,7 @@
         }
       ],
       "steps" : [
-        "Abra Ajustes → «Painel».",
+        "Abra Ajustes → «O que mostrar».",
         "Arraste um bloco sobre outro ou clique em ⌃ / ⌄.",
         "À direita você vê como o painel está agora."
       ],
@@ -153,8 +153,8 @@
         }
       ],
       "steps" : [
-        "Ajustes → «Módulos»: ative um conjunto («Só IA», «Utilitários do Mac», «Tudo») ou blocos individuais.",
-        "Um clique em um bloco abre a página do módulo: a chave liga/desliga, «Onde mostrar» e todos os seus ajustes."
+        "Ajustes → «O que mostrar»: cada módulo tem duas chaves — o bloco no painel e os elementos na barra de menus. «Conjunto pronto» ativa vários módulos de uma vez.",
+        "Clique no nome do módulo para abrir a página dele: a chave e todos os ajustes."
       ],
       "summary" : "Um módulo é um recurso do AI Hub Bar. O perfil decide quais módulos aparecem no painel e em que ordem.",
       "title" : "Módulos e perfis"
@@ -384,7 +384,7 @@
         }
       ],
       "steps" : [
-        "Ative o calendário no perfil — ou pelo botão «Ativar no perfil» no bloco «Próximos»."
+        "Ative o calendário no perfil — ou pelo botão «Ativar no perfil» na linha «Próximos» da página «O que mostrar»."
       ],
       "summary" : "Prazos e publicações dos cartões de projeto e do plano de conteúdo — para a semana seguinte e na janela «Calendário».",
       "title" : "Próximos e calendário"
@@ -460,7 +460,7 @@
         }
       ],
       "steps" : [
-        "Ative «Ilha do notch» na página «Módulos»."
+        "Ative «Ilha do notch» na página dele em Ajustes."
       ],
       "summary" : "Uma ilha preta ao redor do notch do MacBook: pedidos, eventos e, ao passar o cursor, um cartão com os limites e o que o Claude está fazendo.",
       "title" : "Ilha do notch"
@@ -502,7 +502,7 @@
         }
       ],
       "steps" : [
-        "Ative «Layout do teclado» na página «Módulos»."
+        "Ative «Layout do teclado» na página «O que mostrar»."
       ],
       "summary" : "Uma palavra digitada no layout errado é redigitada sozinha no certo, e o layout muda.",
       "title" : "Layout do teclado"

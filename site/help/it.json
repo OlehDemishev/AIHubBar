@@ -40,8 +40,8 @@
       "steps" : [
         "Fai clic su ✦ nella barra dei menu: si apre il pannello.",
         "Crea un profilo: Impostazioni → «Profili» → «+» → «Assistente…».",
-        "Nella pagina «Moduli» tieni solo ciò che ti serve — il resto si spegne insieme al lavoro in background.",
-        "In «Barra dei menu» scegli cosa si vede accanto all’icona."
+        "Nella pagina «Cosa mostrare» tieni solo ciò che ti serve — il resto si spegne insieme al lavoro in background.",
+        "Nello stesso punto, in «Barra dei menu», scegli cosa si vede accanto all’icona."
       ],
       "summary" : "AI Hub Bar tiene a portata di mano i limiti IA, le sessioni degli agenti e i tuoi progetti — nella barra dei menu del Mac, a un clic.",
       "title" : "Primi passi"
@@ -58,7 +58,7 @@
               "name" : "✦"
             },
             {
-              "detail" : "Quota della sessione di 5 ore e della settimana — come numero, anello o barra (Impostazioni → «Barra dei menu»): verde sotto il 50 %, arancione sotto l'80 %, rosso sopra.",
+              "detail" : "Quota della sessione di 5 ore e della settimana — come numero, anello o barra (Impostazioni → «Cosa mostrare» → «Barra dei menu»): verde sotto il 50 %, arancione sotto l'80 %, rosso sopra.",
               "name" : "Accanto all'icona"
             },
             {
@@ -79,7 +79,7 @@
         }
       ],
       "steps" : [
-        "Apri Impostazioni → «Barra dei menu».",
+        "Apri Impostazioni → «Cosa mostrare» → «Barra dei menu».",
         "Fai clic su un elemento in «Ordine» e compariranno le sue impostazioni: numero, anello o barra, soglia.",
         "Trascina un separatore su un elemento: si posiziona subito dopo. Senza mouse — «Più a sinistra» e «Più a destra»."
       ],
@@ -111,7 +111,7 @@
         }
       ],
       "steps" : [
-        "Apri Impostazioni → «Pannello».",
+        "Apri Impostazioni → «Cosa mostrare».",
         "Trascina un blocco su un altro o premi ⌃ / ⌄.",
         "A destra si vede com’è il pannello in questo momento."
       ],
@@ -153,8 +153,8 @@
         }
       ],
       "steps" : [
-        "Impostazioni → «Moduli»: attiva un set («Solo IA», «Utility per Mac», «Tutto») o singoli riquadri.",
-        "Un clic su un riquadro apre la pagina del modulo: interruttore, «Dove mostrare» e tutte le sue impostazioni."
+        "Impostazioni → «Cosa mostrare»: ogni modulo ha due interruttori — il blocco nel pannello e gli elementi nella barra dei menu. «Set pronto» attiva più moduli in una volta.",
+        "Fai clic sul nome del modulo per aprire la sua pagina: l’interruttore e tutte le impostazioni."
       ],
       "summary" : "Un modulo è una funzione di AI Hub Bar. Il profilo decide quali moduli si vedono nel pannello e in che ordine.",
       "title" : "Moduli e profili"
@@ -384,7 +384,7 @@
         }
       ],
       "steps" : [
-        "Attiva il calendario nel profilo — oppure con il pulsante «Attiva nel profilo» sul riquadro «In arrivo»."
+        "Attiva il calendario nel profilo — oppure con il pulsante «Attiva nel profilo» nella riga «In arrivo» della pagina «Cosa mostrare»."
       ],
       "summary" : "Scadenze e pubblicazioni dalle schede dei progetti e dal piano editoriale — per la settimana successiva e nella finestra «Calendario».",
       "title" : "In arrivo e calendario"
@@ -460,7 +460,7 @@
         }
       ],
       "steps" : [
-        "Attiva «Isola del notch» nella pagina «Moduli»."
+        "Attiva «Isola del notch» nella sua pagina in Impostazioni."
       ],
       "summary" : "Un’isola nera intorno al notch del MacBook: richieste, eventi e, passandoci sopra, una scheda con i limiti e ciò che sta facendo Claude.",
       "title" : "Isola del notch"
@@ -502,7 +502,7 @@
         }
       ],
       "steps" : [
-        "Attiva «Layout tastiera» nella pagina «Moduli»."
+        "Attiva «Layout tastiera» nella pagina «Cosa mostrare»."
       ],
       "summary" : "Una parola scritta con il layout sbagliato viene riscritta da sola con quello giusto, e il layout cambia.",
       "title" : "Layout tastiera"

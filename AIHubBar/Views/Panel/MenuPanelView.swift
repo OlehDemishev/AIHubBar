@@ -211,7 +211,7 @@ struct MenuPanelView: View {
                         .scaledFont(.callout)
                         .foregroundStyle(.secondary)
                     Spacer(minLength: 4)
-                    Button("Настройки…") { openSettings(.panel) }
+                    Button("Настройки…") { openSettings(.show) }
                         .controlSize(.small)
                 }
                 .padding(.horizontal, 10)
