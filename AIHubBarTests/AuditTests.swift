@@ -70,10 +70,10 @@ struct AuditTests {
     /// The panel keeps the AI blocks in sight and folds the rest under «Ещё», unless there is nothing to gain.
     @Test func panelFoldsWhatIsNotAboutAI() {
         let all: [ModuleKind] = [.projects, .limits, .resources, .sessions, .keepAwake]
-        #expect(PanelFold.split(all).main == [.limits, .sessions])
-        #expect(PanelFold.split(all).more == [.projects, .resources, .keepAwake])
+        #expect(PanelFold.split(all).main == [.projects, .limits, .sessions], "projects stay in sight, in the profile's order")
+        #expect(PanelFold.split(all).more == [.resources, .keepAwake])
         #expect(PanelFold.split([.limits, .resources]).more.isEmpty, "one block is not worth a row")
-        #expect(PanelFold.split([.projects, .resources]).main == [.projects, .resources], "no AI block to keep")
+        #expect(PanelFold.split([.notes, .resources]).main == [.notes, .resources], "nothing to keep in sight")
     }
 
     /// The header's account and plan come from Claude Code's own file; the e-mail is never taken.

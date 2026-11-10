@@ -45,6 +45,12 @@
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
 
+## 2026-11-10 — «Проекты» stay in sight (branch `fix/projects-in-sight`)
+
+Done: Oleh's answer to the question from the live pass — the panel's «Ещё» row no longer takes the projects: limits, sessions and projects stay, the rest folds. A first Developer profile now opens with its projects.
+Checked: `scripts/check.sh` green (the fold test updated).
+Left: not seen live. Not released.
+
 ## 2026-11-10 — Live pass over what was not checked (branch `fix/live-check-findings`)
 
 Done: everything below was pressed in an isolated copy (`CFFIXED_USER_HOME`, a copy of the profiles), because the Debug build shares `Application Support/ClaudePult/modes` with the installed app — its switches would have changed Oleh's real profiles. One fix came out of it: VoiceOver said «выключен» for the pale «Профили» row.
