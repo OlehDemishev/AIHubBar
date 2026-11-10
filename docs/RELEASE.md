@@ -41,6 +41,28 @@ scripts/release.sh 0.2.0 --publish  # the same, then the GitHub release v0.2.0 w
 - **How copies find updates:** they read `https://github.com/OlehDemishev/AIHubBar/releases/latest/download/appcast.xml`, which is the newest release's appcast. Nothing else has to be uploaded or committed.
 - **Public repository needed:** people can only download the files once the repository is public.
 
+## Release notes
+
+Every release that changes what people see has `docs/release-notes/<version>.md` (English, a few `- ` lines under
+`## ` headings, written for the person who uses the app, not for the journal). `scripts/release.sh` puts it on the
+release page and, as HTML, into the appcast's `<description>`, so Sparkle's update window shows it; without the file
+the script says so and the window shows the release page as before.
+
+What moved or looks different also goes into the panel's «Что нового» card (`WhatsNew` in
+`AIHubBar/Views/Panel/WhatsNewView.swift`): set `WhatsNew.version` to the new version and rewrite its lines. The card
+is shown once to whoever had a profile before; a release with nothing to say leaves `WhatsNew.version` alone.
+
+## What goes to beta first
+
+Since 2026-11-10 the app is on other people's Macs, and 0.10.0 — new Settings and a new panel — went to everyone
+unchecked by anyone but Oleh; the same day his own Settings opened without a sidebar. So:
+
+- **A beta first** (`scripts/release.sh <version>-beta.1 --publish`) for anything that changes the layout of the panel
+  or of Settings, moves or removes a setting, changes how profiles or settings are stored, or touches the updater,
+  the hooks or the Keychain. Oleh updates his own copy through Sparkle, uses it for a day, then the release.
+- **Straight to everyone** for a fix of something broken, texts and translations.
+- When unsure, a beta: it costs one more run of the script.
+
 ## A new version of Sparkle
 
 The copies on people's Macs run the old Sparkle's installer, and a broken update can't be fixed by another update. So a new Sparkle goes out as a beta first (below): update a real copy of the latest release through it and see the app restart with its permissions. After changing the version remove `build/DerivedData`, or the old module cache fails the build.

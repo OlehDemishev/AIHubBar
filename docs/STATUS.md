@@ -5,6 +5,7 @@
 **Updated:** 2026-11-10
 
 **Now:**
+- night run 2026-11-10 on Oleh's word («с первой по пятую»): what's new card and release notes, the beta-first rule, week pace, Homebrew cask, the crash signal — merged as they pass, not released
 - 0.10.2 (build 807) published 2026-11-10 with #355: the Settings sidebar can no longer stay collapsed. Oleh's Mac has 0.10.1 installed by the agent from the release build
 - 0.10.1 (build 803) published 2026-11-10 with #351, #352 and #353: the stop button on a run's row asks with a second click, Arabic percents without the space, a clearer message when Anthropic changes the limits service, the VoiceOver label of «Профили», projects stay out of «Ещё»
 - 0.10.0 (build 795) published 2026-11-10 with the redesign after Oleh's «перегружено» (#347, #348, #349): limits as a big number over a bar with the pace (bars or rings), Settings sidebar of seven rows with one page «Что показывать», the Claude account and plan in the panel's header, the other blocks under «Ещё»
@@ -46,6 +47,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-10 — «Что нового» and release notes; what goes to beta first (branch `feat/whats-new`)
+
+Done: the app is on other people's Macs and 0.10 moved three Settings pages without a word. The panel now shows a «Что нового» card once to whoever had a profile before (four lines about 0.10, «Открыть настройки» and «Понятно»; a first profile from the assistant marks it seen). `scripts/release.sh` takes `docs/release-notes/<version>.md` for the release page and, as HTML (`release-tools/release-notes.py`), for the appcast's `<description>`, so Sparkle's window says what changed; without the file it warns. `docs/release-notes/0.11.0.md` is written for the next release. docs/RELEASE.md has «Release notes» and «What goes to beta first» (layout, moved settings, storage, updater, hooks, Keychain → a beta and a day on Oleh's copy first).
+Checked: `scripts/check.sh` green (a test for when the card shows); the card seen live in the Debug copy's panel; `bash -n` on the release script and the notes rendered to HTML.
+Left: the release script's new path runs for the first time at the next release — look at Sparkle's window then; the card's buttons were not pressed.
 
 ## 2026-11-10 — Release 0.10.2 (branch `chore/status-release-0.10.2`)
 

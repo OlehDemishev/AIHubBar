@@ -43141,6 +43141,82 @@
         }
       }
     },
+    "Кнопка «стоп» у фоновой задачи останавливает со второго клика.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The stop button of a background task stops on the second click."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Кнопка «стоп» у фонового завдання зупиняє з другого клацання."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Stopp-Taste einer Hintergrundaufgabe stoppt erst beim zweiten Klick."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le bouton d’arrêt d’une tâche en arrière-plan arrête au deuxième clic."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El botón de detener de una tarea en segundo plano detiene al segundo clic."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il pulsante di arresto di un’attività in background ferma al secondo clic."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O botão de parar de uma tarefa em segundo plano para no segundo clique."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Przycisk zatrzymania zadania w tle zatrzymuje przy drugim kliknięciu."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "バックグラウンドタスクの停止ボタンは、2回目のクリックで停止します。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "백그라운드 작업의 중지 버튼은 두 번째 클릭에서 중지합니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "زر الإيقاف لمهمة في الخلفية يوقفها عند النقرة الثانية."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tombol berhenti pada tugas latar belakang menghentikan pada klik kedua."
+          }
+        }
+      }
+    },
     "Кнопка устарела": {
       "localizations": {
         "ar": {
@@ -47329,16 +47405,10 @@
     },
     "Лимиты недоступны: Anthropic изменил свой сервис. Проверьте обновления AI Hub Bar.": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Limits unavailable: Anthropic changed its service. Check for AI Hub Bar updates."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ліміти недоступні: Anthropic змінив свій сервіс. Перевірте оновлення AI Hub Bar."
+            "value": "الحدود غير متاحة: غيّرت Anthropic خدمتها. تحقّق من تحديثات AI Hub Bar."
           }
         },
         "de": {
@@ -47347,10 +47417,10 @@
             "value": "Limits nicht verfügbar: Anthropic hat seinen Dienst geändert. Suchen Sie nach Updates für AI Hub Bar."
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Limites indisponibles : Anthropic a modifié son service. Vérifiez les mises à jour d’AI Hub Bar."
+            "value": "Limits unavailable: Anthropic changed its service. Check for AI Hub Bar updates."
           }
         },
         "es": {
@@ -47359,22 +47429,22 @@
             "value": "Límites no disponibles: Anthropic cambió su servicio. Busca actualizaciones de AI Hub Bar."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limites indisponibles : Anthropic a modifié son service. Vérifiez les mises à jour d’AI Hub Bar."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Batas tidak tersedia: Anthropic mengubah layanannya. Periksa pembaruan AI Hub Bar."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Limiti non disponibili: Anthropic ha modificato il servizio. Controlla gli aggiornamenti di AI Hub Bar."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Limites indisponíveis: a Anthropic mudou o serviço. Verifique as atualizações do AI Hub Bar."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Limity niedostępne: Anthropic zmienił swoją usługę. Sprawdź aktualizacje AI Hub Bar."
           }
         },
         "ja": {
@@ -47389,16 +47459,22 @@
             "value": "한도를 가져올 수 없습니다: Anthropic이 서비스를 변경했습니다. AI Hub Bar 업데이트를 확인하세요."
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "الحدود غير متاحة: غيّرت Anthropic خدمتها. تحقّق من تحديثات AI Hub Bar."
+            "value": "Limity niedostępne: Anthropic zmienił swoją usługę. Sprawdź aktualizacje AI Hub Bar."
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Batas tidak tersedia: Anthropic mengubah layanannya. Periksa pembaruan AI Hub Bar."
+            "value": "Limites indisponíveis: a Anthropic mudou o serviço. Verifique as atualizações do AI Hub Bar."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ліміти недоступні: Anthropic змінив свій сервіс. Перевірте оновлення AI Hub Bar."
           }
         }
       }
@@ -47780,6 +47856,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ліміти підписки; витрати за проєктами."
+          }
+        }
+      }
+    },
+    "Лимиты — крупное число и полоса с темпом; кольца возвращаются в настройках блока «Лимиты AI».": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limits are a big number over a bar with the pace; rings come back in the settings of the “AI limits” block."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ліміти — велике число і смуга з темпом; кільця повертаються в налаштуваннях блоку «Ліміти AI»."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limits sind eine große Zahl über einem Balken mit dem Tempo; Ringe gibt es wieder in den Einstellungen des Blocks „KI-Limits“."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les limites : un grand nombre au-dessus d’une barre avec le rythme ; les anneaux reviennent dans les réglages du bloc « Limites d'IA »."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los límites son un número grande sobre una barra con el ritmo; los anillos vuelven en los ajustes del bloque «Límites de IA»."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I limiti sono un numero grande sopra una barra con il ritmo; gli anelli tornano nelle impostazioni del blocco «Limiti IA»."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Os limites são um número grande sobre uma barra com o ritmo; os anéis voltam nos ajustes do bloco «Limites de IA»."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limity to duża liczba nad paskiem z tempem; pierścienie wracają w ustawieniach bloku „Limity AI”."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "リミットは大きな数字とペース付きのバーになりました。リングは「AI の上限」ブロックの設定で戻せます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "한도는 큰 숫자와 속도가 표시된 막대로 바뀌었습니다. 링은 «AI 한도» 블록 설정에서 되돌릴 수 있습니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الحدود رقم كبير فوق شريط مع الوتيرة؛ والحلقات تعود من إعدادات قسم «حدود الذكاء الاصطناعي»."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Batas kini berupa angka besar di atas bilah dengan laju; cincin bisa dikembalikan di pengaturan blok «Batas AI»."
           }
         }
       }
@@ -51282,16 +51434,10 @@
     },
     "Нажмите ещё раз, чтобы остановить задачу": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Click again to stop the task"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Натисніть ще раз, щоб зупинити завдання"
+            "value": "انقر مرة أخرى لإيقاف المهمة"
           }
         },
         "de": {
@@ -51300,10 +51446,10 @@
             "value": "Noch einmal klicken, um die Aufgabe zu stoppen"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Cliquez encore une fois pour arrêter la tâche"
+            "value": "Click again to stop the task"
           }
         },
         "es": {
@@ -51312,22 +51458,22 @@
             "value": "Haz clic otra vez para detener la tarea"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cliquez encore une fois pour arrêter la tâche"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Klik sekali lagi untuk menghentikan tugas"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Fai clic di nuovo per fermare l’attività"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Clique de novo para parar a tarefa"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Kliknij jeszcze raz, aby zatrzymać zadanie"
           }
         },
         "ja": {
@@ -51342,16 +51488,22 @@
             "value": "한 번 더 클릭하면 작업을 중지합니다"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "انقر مرة أخرى لإيقاف المهمة"
+            "value": "Kliknij jeszcze raz, aby zatrzymać zadanie"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Klik sekali lagi untuk menghentikan tugas"
+            "value": "Clique de novo para parar a tarefa"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Натисніть ще раз, щоб зупинити завдання"
           }
         }
       }
@@ -53556,6 +53708,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Налаштування розкладки…"
+          }
+        }
+      }
+    },
+    "Настройки стали короче: «Модули», «Панель» и «Строка меню» теперь на одной странице «Что показывать».": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Settings are shorter: “Modules”, “Panel” and “Menu Bar” are now one page, “What to Show”."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Налаштування стали коротшими: «Модулі», «Панель» і «Рядок меню» тепер на одній сторінці «Що показувати»."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Einstellungen sind kürzer: „Module“, „Panel“ und „Menüleiste“ sind jetzt eine Seite, „Was anzeigen“."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les réglages sont plus courts : « Modules », « Panneau » et « Barre des menus » forment désormais une seule page, « Quoi afficher »."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los ajustes son más cortos: «Módulos», «Panel» y «Barra de menús» ahora están en una sola página, «Qué mostrar»."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le impostazioni sono più brevi: «Moduli», «Pannello» e «Barra dei menu» ora sono in un’unica pagina, «Cosa mostrare»."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Os ajustes ficaram mais curtos: «Módulos», «Painel» e «Barra de menus» agora estão em uma página só, «O que mostrar»."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ustawienia są krótsze: „Moduły”, „Panel” i „Pasek menu” są teraz na jednej stronie, „Co pokazywać”."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "設定が短くなりました。「モジュール」、「パネル」、「メニューバー」は1つのページ「表示する内容」にまとまりました。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "설정이 짧아졌습니다. «모듈», «패널», «메뉴 막대»이(가) 이제 한 페이지 «표시할 항목»에 있습니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الإعدادات أقصر: «الوحدات» و«اللوحة» و«شريط القائمة» صارت في صفحة واحدة، «ما يُعرض»."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pengaturan lebih ringkas: «Modul», «Panel», dan «Bar Menu» kini di satu halaman, «Yang Ditampilkan»."
           }
         }
       }
@@ -64841,16 +65069,10 @@
     },
     "Остановить?": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Stop?"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Зупинити?"
+            "value": "إيقاف؟"
           }
         },
         "de": {
@@ -64859,10 +65081,10 @@
             "value": "Stoppen?"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Arrêter ?"
+            "value": "Stop?"
           }
         },
         "es": {
@@ -64871,22 +65093,22 @@
             "value": "Detener?"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arrêter ?"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hentikan?"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Ferma?"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Parar?"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Zatrzymaj?"
           }
         },
         "ja": {
@@ -64901,32 +65123,32 @@
             "value": "중지?"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "إيقاف؟"
+            "value": "Zatrzymaj?"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Hentikan?"
+            "value": "Parar?"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Зупинити?"
           }
         }
       }
     },
     "Остановить…": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Stop…"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Зупинити…"
+            "value": "إيقاف…"
           }
         },
         "de": {
@@ -64935,10 +65157,10 @@
             "value": "Stoppen…"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Arrêter…"
+            "value": "Stop…"
           }
         },
         "es": {
@@ -64947,22 +65169,22 @@
             "value": "Detener…"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arrêter…"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hentikan…"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Ferma…"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Parar…"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Zatrzymaj…"
           }
         },
         "ja": {
@@ -64977,16 +65199,22 @@
             "value": "중지…"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "إيقاف…"
+            "value": "Zatrzymaj…"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Hentikan…"
+            "value": "Parar…"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Зупинити…"
           }
         }
       }
@@ -79890,6 +80118,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Знадобляться, коли буде встановлено Claude Code."
+          }
+        }
+      }
+    },
+    "Понятно": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Got It"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Зрозуміло"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verstanden"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Compris"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Entendido"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ho capito"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Entendi"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rozumiem"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "了解"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "확인"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "فهمت"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mengerti"
           }
         }
       }
@@ -100902,6 +101206,82 @@
         }
       }
     },
+    "Строка «Свернуть» внизу панели оставляет лимиты, сессии и проекты; «Ещё» возвращает остальные блоки.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The “Collapse” row at the bottom of the panel keeps limits, sessions and projects; “More” brings the other blocks back."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Рядок «Згорнути» унизу панелі залишає ліміти, сесії та проєкти; «Ще» повертає решту блоків."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Zeile „Zuklappen“ unten im Panel lässt Limits, Sitzungen und Projekte stehen; „Mehr“ holt die übrigen Blöcke zurück."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La ligne « Réduire » en bas du panneau garde les limites, les sessions et les projets ; « Plus » ramène les autres blocs."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La fila «Contraer» al final del panel deja los límites, las sesiones y los proyectos; «Más» recupera los demás bloques."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La riga «Comprimi» in fondo al pannello lascia limiti, sessioni e progetti; «Altro» riporta gli altri blocchi."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A linha «Recolher» no fim do painel deixa os limites, as sessões e os projetos; «Mais» traz os outros blocos de volta."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wiersz „Zwiń” na dole panelu zostawia limity, sesje i projekty; „Więcej” przywraca pozostałe bloki."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "パネル下部の「折りたたむ」の行は、リミット、セッション、プロジェクトだけを残します。「その他」でほかのブロックが戻ります。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "패널 아래의 «접기» 행은 한도, 세션, 프로젝트만 남깁니다. «기타»를 누르면 나머지 블록이 돌아옵니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "صف «طيّ» أسفل اللوحة يُبقي الحدود والجلسات والمشاريع؛ و«المزيد» يعيد باقي الأقسام."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Baris «Ciutkan» di bawah panel menyisakan batas, sesi, dan proyek; «Lainnya» mengembalikan blok lainnya."
+          }
+        }
+      }
+    },
     "Строка контент-плана сдвинулась — обновите календарь": {
       "localizations": {
         "ar": {
@@ -112621,6 +113001,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Що робить"
+          }
+        }
+      }
+    },
+    "Что нового": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "What's New"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Що нового"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Neuigkeiten"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nouveautés"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Novedades"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Novità"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Novidades"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Co nowego"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新機能"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "새로운 기능"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ما الجديد"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yang Baru"
           }
         }
       }
