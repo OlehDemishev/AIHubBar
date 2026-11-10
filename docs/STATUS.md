@@ -1,11 +1,11 @@
 # Status
 
 <!-- summary:start -->
-**Stage:** Mac: 0.9.1 published 2026-11-10 (no crash on removing an account, Arabic mirrored, the Settings sidebar, a worktree's name in a session row); 0.9.0 on 2026-11-09 (the closed panel no longer uses a third of a CPU core, 30 fixes from an audit); 0.8.1 the same day (the island's rings fit in the black ears); 0.8.0 the same day, signed and notarized (Sparkle 2.10.1, the lock screen tile checks it locked, «Раскладка» directions and exceptions, «Поддержать проект»; 0.7.8 Developer ID, Accessibility asked once; 0.7.7 hook messages in the app's language, clean session titles; 0.7.6 a map of the panel on the first screen, «Тексты» fixes; before that shorter first run, panel polish, usage history, finished sessions, ⌃⌥B, outages, several Claude accounts). Windows/Linux (`desktop/`, Tauri 2): postponed by Oleh 2026-11-02
+**Stage:** Mac: 0.10.0 published 2026-11-10 (the redesign: a calmer limits block, Settings with seven rows and «Что показывать», account and plan in the panel's header, the «Ещё» row); 0.9.1 the same day (no crash on removing an account, Arabic mirrored, the Settings sidebar, a worktree's name in a session row); 0.9.0 on 2026-11-09 (the closed panel no longer uses a third of a CPU core, 30 fixes from an audit); 0.8.1 the same day (the island's rings fit in the black ears); 0.8.0 the same day, signed and notarized (Sparkle 2.10.1, the lock screen tile checks it locked, «Раскладка» directions and exceptions, «Поддержать проект»; 0.7.8 Developer ID, Accessibility asked once; 0.7.7 hook messages in the app's language, clean session titles; 0.7.6 a map of the panel on the first screen, «Тексты» fixes; before that shorter first run, panel polish, usage history, finished sessions, ⌃⌥B, outages, several Claude accounts). Windows/Linux (`desktop/`, Tauri 2): postponed by Oleh 2026-11-02
 **Updated:** 2026-11-10
 
 **Now:**
-- redesign after Oleh's «перегружено» (2026-11-10), agreed on a mock-up: step 1 merged, not released — the limits block is a big number over a bar with the pace, bars or rings by choice, the rest behind «Подробнее» (branch `feat/panel-compact-limits`); step 3 done, not released — Settings sidebar is seven rows, one page «Что показывать» (branch `feat/settings-what-to-show`); step 2 done, not released — the Claude account and plan in the panel's header, the blocks that are not about AI under one «Ещё» row (branch `feat/panel-more-row`)
+- 0.10.0 (build 795) published 2026-11-10 with the redesign after Oleh's «перегружено» (#347, #348, #349): limits as a big number over a bar with the pace (bars or rings), Settings sidebar of seven rows with one page «Что показывать», the Claude account and plan in the panel's header, the other blocks under «Ещё»
 - 0.9.1 (build 787) published 2026-11-10 with #344 and #345: removing a Claude account no longer crashes the app (it did in 0.8.1 and 0.9.0), Arabic is mirrored, the Settings sidebar shows whole names, a worktree's name in a session row
 - 0.9.0 (build 781) published 2026-11-09 with the audit pass (#342): the closed panel no longer uses a third of a CPU core while a session works; 30 fixes from a UI and code review (list in the journal)
 - tech debt pass done 2026-11-09, all merged: #330 Sparkle 2.10.1, #331 the lock screen tile checks it locked, #332 unused strings removed and the catalog compared with the code, #333 Mac CI on Xcode 27.2 running `check.sh`, #334 and #335 tests for the Telegram controller, the notch island and the command engine (77 new), #336 Telegram files split
@@ -16,14 +16,14 @@
 - merged 2026-11-03: #251 menu bar ☕ follows the «Не спать» switch, #248 «Не спать» on/off in the menu bar, #241 Codex states, #240 quick command shortcuts, #238 «Быстрый запрос», #236 content spec, #242 «Telegram» stage 1, #244 menu at the bottom, #246 shared bot (Worker not deployed yet), #247 desktop CI off for Mac string changes, #249 the bot's menu set up by each person, #252 stage 2 (sessions, requests, limits), #254 stage 3 (tasks and runs), #255 stage 4 (settings in the bot), #256 Mini App
 
 **Next:**
-- release the redesign (steps 1–3) after Oleh looks at it; before that click through «Что показывать» live (switches, dragging, back, search) and look at the light theme and one more language
+- towards 1.0 (discussed 2026-11-10): click through what was not checked live, a first run on a clean copy in English, freeze what is in 1.0 and what stays beta, release notes, new screenshots, translations read by people, then feedback from strangers before 1.0
 - check on the Air: the island at the real notch
 - promotion (docs/LAUNCH.md): r/ClaudeAI, the lists, r/macapps, Show HN, Product Hunt, Homebrew
 - content (docs/specs/SPEC-content.md, agreed): stage 2 «Версии», then batch tasks; better after the first feedback from people
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/specs/SPEC-windows.md §9, stage 2–3 leftovers)
 
 **Needs Oleh:**
-- update to 0.9.1 (Settings → «Основные» → «Обновления»); «Не спать» has to be switched on again after the restart of the app
+- update to 0.10.0 (Settings → «Основные» → «Обновления»); «Не спать» has to be switched on again after the restart of the app
 - after the next restart: does `~/Applications/AI Hub Bar.app` (0.9.0) start at login? Until 2026-11-09 a build from `.claude/worktrees/jolly-wiles-db1b62` started instead
 - say whether the stop button on a run's row in the panel should ask first, like «Остановить» in the log window now does
 - «Значки» after the next install: press the toggle once, read the note under the tiles, press it again to bring the desktop back (the agent does not change this setting on your Mac)
@@ -44,6 +44,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-10 — Release 0.10.0 (branch `chore/status-release-0.10.0`)
+
+Done: `scripts/release.sh 0.10.0 --publish` after Oleh looked at the Debug copy and said to release: build 795 with #347, #348 and #349.
+Checked: the release's own tests and catalog check passed; v0.10.0 is not a pre-release and has the dmg and appcast; the main feed and the beta feed both offer 0.10.0 (795); `stapler validate` worked; `spctl` says accepted, Notarized Developer ID.
+Left: the installed copy was not updated by the agent; the live checks listed in the three redesign entries below are still open.
 
 ## 2026-11-10 — Panel: account and plan in the header, the «Ещё» row (branch `feat/panel-more-row`)
 
