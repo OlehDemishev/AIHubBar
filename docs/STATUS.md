@@ -26,6 +26,7 @@
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/specs/SPEC-windows.md §9, stage 2–3 leftovers)
 
 **Needs Oleh:**
+- try the Homebrew install once (README → Install, three lines) on a Mac without the app, e.g. the Air: the agent did not trust the tap or install through it
 - say whether the app may report crashes by itself (opt-in, anonymous) — today it only offers a GitHub issue after a crash
 - update 0.10.1 → 0.10.2 through Settings → «Основные» → «Обновления» and say whether Sparkle replaced the copy: the update to 0.9.1 never reached `~/Applications`
 - «Не спать» has to be switched on again after the restart of the app
@@ -48,6 +49,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-10 — Homebrew: the tap tried from GitHub (branch `chore/homebrew-trust-step`)
+
+Done: `brew tap olehdemishev/aihubbar https://github.com/OlehDemishev/AIHubBar` worked («Tapped 1 cask»), but Homebrew 7.0.12 then refused the cask: «Refusing to load cask … from untrusted tap», with `brew trust olehdemishev/aihubbar` as the way on. README, docs/RELEASE.md and the 0.11.0 notes now have that step.
+Checked: the tap and the refusal seen on Oleh's Mac; the test tap was removed again (`brew untap`).
+Left: `brew trust` and the install itself were not run — trusting a tap is the person's own decision, and the app is already installed here. So `brew install --cask ai-hub-bar` is not proven end to end; Oleh or anyone with Homebrew can try the three lines.
 
 ## 2026-11-10 — Homebrew cask; the crash signal looked at (branch `chore/homebrew-cask`)
 
