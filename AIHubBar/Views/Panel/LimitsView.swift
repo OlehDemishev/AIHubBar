@@ -56,8 +56,8 @@ struct LimitsView: View {
     @ViewBuilder
     private var details: some View {
         if let snapshot = usage.snapshot {
-            ServiceCard(usage: .claude(snapshot, forecast: usage.forecast, week: usage.weekUsage, error: usage.lastError),
-                        showsTitle: !hub.limits.isEmpty || !accounts.usages.isEmpty)
+            ServiceCard(usage: .claude(snapshot, forecast: usage.forecast, pace: usage.pace, week: usage.weekUsage, error: usage.lastError),
+                        showsTitle: !hub.limits.isEmpty || !accounts.usages.isEmpty, showsDetails: false)
             // A snapshot is kept for a day: an expired sign-in must still say so.
             if usage.signedOut, services.agents[.claudeCode] != nil { signIn }
             // Models by API (SPEC-modes §11.2): shown once AI Hub Bar has spent something this month.
@@ -141,7 +141,7 @@ struct LimitsView: View {
                     Image(systemName: "chevron.right")
                         .rotationEffect(.degrees(showBreakdown ? 90 : 0))
                             .flipsForRightToLeftLayoutDirection(true)
-                    Text("Расход по проектам")
+                    Text("Подробнее")
                     Spacer()
                 }
                 .scaledFont(.caption)
@@ -151,6 +151,10 @@ struct LimitsView: View {
             .buttonStyle(.plain)
 
             if showBreakdown {
+                if let week = usage.weekUsage, !week.days.isEmpty { WeekStrip(week: week) }
+                Text("Расход по проектам")
+                    .scaledFont(.caption)
+                    .foregroundStyle(.secondary)
                 Picker("Период", selection: $period) {
                     ForEach(UsageStore.Period.allCases) { Text($0.title).tag($0) }
                 }
@@ -196,11 +200,15 @@ struct LimitsView: View {
     }
 }
 
-/// One service's limits, the same for Claude and every other AI (SPEC-ai-services stage 2): up to two rings, the
-/// forecast, the week by day, the other limits as bars, then notes and the error.
+/// One service's limits, the same for Claude and every other AI (SPEC-ai-services stage 2). The first limit is the
+/// main one: a big number over a bar with the pace beside it, or rings for those who chose them. A forecast is shown
+/// only when it is bad news; the week by day and the projects wait behind «Подробнее».
 private struct ServiceCard: View {
     let usage: ServiceUsage
     var showsTitle = true
+    /// False for Claude, whose details (with its own spend by project) are drawn by `LimitsView`.
+    var showsDetails = true
+    @Environment(AppSettings.self) private var settings
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -211,22 +219,33 @@ private struct ServiceCard: View {
             }
             TimelineView(.periodic(from: .now, by: 30)) { context in
                 VStack(alignment: .leading, spacing: 8) {
-                    if !usage.rings.isEmpty {
-                        HStack(alignment: .top, spacing: 8) {
-                            ForEach(usage.rings) { window in
-                                LimitRing(window: window, caption: UsageText.resetText(window.resetsAt, now: context.date, short: true))
+                    if settings.limitsStyle == .rings {
+                        if !usage.rings.isEmpty {
+                            HStack(alignment: .top, spacing: 8) {
+                                ForEach(usage.rings) { window in
+                                    LimitRing(window: window, caption: UsageText.resetText(window.resetsAt, now: context.date, short: true))
+                                }
+                            }
+                        }
+                    } else {
+                        // The big number is Claude's: the other services are a glance, two limits in a row.
+                        if isMain, let main = usage.rings.first {
+                            MainLimit(window: main, pace: usage.pace, now: context.date)
+                        }
+                        if !secondary.isEmpty {
+                            LazyVGrid(columns: [GridItem(.flexible(), spacing: 14, alignment: .top), GridItem(.flexible(), alignment: .top)],
+                                      alignment: .leading, spacing: 8) {
+                                ForEach(secondary) { SmallLimit(window: $0, now: context.date) }
                             }
                         }
                     }
-                    if let line = forecastLine {
+                    ForEach(warnings, id: \.self) { line in
                         Text(line)
                             .scaledFont(.caption)
-                            .foregroundStyle(runsOut ? .orange : .secondary)
+                            .foregroundStyle(.orange)
+                            .fixedSize(horizontal: false, vertical: true)
                     }
-                    if let week = usage.week, !week.days.isEmpty {
-                        WeekStrip(week: week, showsForecast: !bothLast)
-                    }
-                    ForEach(usage.bars) { window in
+                    ForEach(rows) { window in
                         WindowRow(window: window, now: context.date)
                     }
                 }
@@ -238,8 +257,8 @@ private struct ServiceCard: View {
                     .scaledFont(.caption)
                     .foregroundStyle(.secondary)
             }
-            if !usage.projects.isEmpty {
-                ProjectTokensList(projects: usage.projects, footnote: projectsFootnote)
+            if showsDetails, hasDetails {
+                ServiceDetails(week: usage.week, projects: usage.projects, footnote: projectsFootnote)
             }
             if let error = usage.error {
                 Label(usage.rings.isEmpty && usage.bars.isEmpty ? error : String(localized: "Не обновилось: \(error)"),
@@ -252,14 +271,33 @@ private struct ServiceCard: View {
         .help([usage.title, usage.error].compactMap { $0 }.joined(separator: " · "))
     }
 
-    private var runsOut: Bool {
-        if case .runsOutAt = usage.forecast { return true }
-        return false
+    private var bars: Bool { settings.limitsStyle == .bars }
+    /// Beside the main limit, two in a row: the other main limits and the bars that have a percentage.
+    private var secondary: [LimitWindow] {
+        Array(usage.rings.dropFirst(isMain ? 1 : 0)) + usage.bars.filter { $0.percent != nil }
     }
+    private var isMain: Bool {
+        switch usage.service {
+        case .claude, .claudeAccount: true
+        case .hub: false
+        }
+    }
+    /// Full-width rows: everything that isn't a ring with rings, only plain spend with bars.
+    private var rows: [LimitWindow] { bars ? usage.bars.filter { $0.percent == nil } : usage.bars }
+    private var hasDetails: Bool { !(usage.week?.days.isEmpty ?? true) || !usage.projects.isEmpty }
 
-    /// Both forecasts are good news: one line instead of two.
-    private var bothLast: Bool {
-        usage.forecast == .lastsUntilReset && usage.week?.forecast == .lastsUntilReset
+    /// Only bad news: «хватит» says nothing a calm bar doesn't.
+    private var warnings: [String] {
+        var lines: [String] = []
+        if case let .runsOutAt(date) = usage.forecast {
+            lines.append(usage.service == .claude
+                ? UsageText.forecast(usage.forecast) ?? ""
+                : String(localized: "кончится \(date.formatted(.dateTime.weekday(.abbreviated).hour().minute())) при таком темпе"))
+        }
+        if case let .runsOutAt(date) = usage.week?.forecast {
+            lines.append(String(localized: "неделя кончится \(date.formatted(.dateTime.weekday(.abbreviated).hour().minute())) при таком темпе"))
+        }
+        return lines.filter { !$0.isEmpty }
     }
 
     /// Where a service's tokens per project come from and what they count.
@@ -269,22 +307,96 @@ private struct ServiceCard: View {
         default: String(localized: "По записям Codex: токены бесед, обновлённых за неделю, — каждая беседа целиком.")
         }
     }
+}
 
-    /// Claude's session forecast keeps its wording; other services' limits can run for days, so they say the day.
-    private var forecastLine: String? {
-        if bothLast { return String(localized: "хватит и на сессию, и на неделю") }
-        // Good news about the session right above a warning about the week: say which of the two it is.
-        if usage.service == .claude, usage.forecast == .lastsUntilReset, case .runsOutAt = usage.week?.forecast {
-            return String(localized: "сессии до сброса хватит")
+/// One colour while all is well: the accent below half, then orange and red as for every limit.
+private func limitTint(_ percent: Double) -> Color {
+    UsageLevel(percent) == .low ? .accentColor : UsageWindow.color(for: percent)
+}
+
+/// The main limit with bars: its name and the pace, a big number, the bar, when it resets.
+private struct MainLimit: View {
+    let window: LimitWindow
+    let pace: Double?
+    let now: Date
+
+    private var percent: Double { window.percent ?? 0 }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 3) {
+            HStack(alignment: .firstTextBaseline) {
+                Text(window.title)
+                    .scaledFont(.caption)
+                    .foregroundStyle(.secondary)
+                Spacer(minLength: 6)
+                if let pace {
+                    Text(UsageText.pace(pace))
+                        .scaledFont(.caption)
+                        .monospacedDigit()
+                        .foregroundStyle(.secondary)
+                        .help("Сколько процентов лимита уходит за час, по последним 30 минутам")
+                }
+            }
+            Text(UsageText.percent(percent))
+                .scaledFont(.title2, weight: .semibold)
+                .monospacedDigit()
+                .foregroundStyle(UsageLevel(percent) == .low ? Color.primary : UsageWindow.color(for: percent))
+            ProgressView(value: min(max(percent, 0), 100), total: 100)
+                .progressViewStyle(.linear)
+                .tint(limitTint(percent))
+            if let reset = UsageText.resetText(window.resetsAt, now: now) {
+                Text(reset)
+                    .scaledFont(.caption2)
+                    .foregroundStyle(.secondary)
+            }
         }
-        guard usage.service != .claude, case let .runsOutAt(date) = usage.forecast else { return UsageText.forecast(usage.forecast) }
-        return String(localized: "кончится \(date.formatted(.dateTime.weekday(.abbreviated).hour().minute())) при таком темпе")
+        .accessibilityElement(children: .combine)
     }
 }
 
-/// A service's tokens per project this week, folded by default.
-private struct ProjectTokensList: View {
+/// A limit beside the main one: name, number, bar, and its reset when it differs from what is already said.
+private struct SmallLimit: View {
+    let window: LimitWindow
+    let now: Date
+
+    private var percent: Double { window.percent ?? 0 }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 2) {
+            Text(window.title)
+                .scaledFont(.caption)
+                .foregroundStyle(.secondary)
+                .lineLimit(1)
+            Text(UsageText.percent(percent))
+                .scaledFont(.callout, weight: .semibold)
+                .monospacedDigit()
+                .foregroundStyle(UsageLevel(percent) == .low ? Color.primary : UsageWindow.color(for: percent))
+            ProgressView(value: min(max(percent, 0), 100), total: 100)
+                .progressViewStyle(.linear)
+                .tint(limitTint(percent))
+                .controlSize(.mini)
+            if window.showsReset, let reset = UsageText.resetText(window.resetsAt, now: now, short: true) {
+                Text(reset)
+                    .scaledFont(.caption2)
+                    .foregroundStyle(.secondary)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.8)
+            }
+            if let runsOut = window.runsOutAt {
+                Text("кончится \(runsOut.formatted(.dateTime.weekday(.abbreviated).hour().minute())) при таком темпе")
+                    .scaledFont(.caption2)
+                    .foregroundStyle(.orange)
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .accessibilityElement(children: .combine)
+    }
+}
+
+/// «Подробнее» under a service: its week by day and its tokens per project, folded by default.
+private struct ServiceDetails: View {
     @Environment(\.panelCalm) private var panelCalm
+    let week: WeekUsage?
     let projects: [ProjectTokens]
     let footnote: String
     @State private var expanded = false
@@ -297,8 +409,8 @@ private struct ProjectTokensList: View {
                 HStack(spacing: 4) {
                     Image(systemName: "chevron.right")
                         .rotationEffect(.degrees(expanded ? 90 : 0))
-                            .flipsForRightToLeftLayoutDirection(true)
-                    Text("Проекты за неделю")
+                        .flipsForRightToLeftLayoutDirection(true)
+                    Text("Подробнее")
                     Spacer()
                 }
                 .scaledFont(.caption)
@@ -307,23 +419,29 @@ private struct ProjectTokensList: View {
             }
             .buttonStyle(.plain)
             if expanded {
-                let total = max(projects.reduce(0) { $0 + $1.tokens }, 1)
-                ForEach(projects.prefix(6)) { project in
-                    HStack(spacing: 6) {
-                        Text(project.name).lineLimit(1)
-                        Spacer()
-                        Text(TokenBreakdown.tokensText(project.tokens)).foregroundStyle(.secondary)
-                        Text("\(Int((Double(project.tokens) / Double(total) * 100).rounded())) %")
-                            .monospacedDigit()
-                            .frame(width: 38, alignment: .trailing)
+                if let week, !week.days.isEmpty { WeekStrip(week: week) }
+                if !projects.isEmpty {
+                    Text("Проекты за неделю")
+                        .scaledFont(.caption)
+                        .foregroundStyle(.secondary)
+                    let total = max(projects.reduce(0) { $0 + $1.tokens }, 1)
+                    ForEach(projects.prefix(6)) { project in
+                        HStack(spacing: 6) {
+                            Text(project.name).lineLimit(1)
+                            Spacer()
+                            Text(TokenBreakdown.tokensText(project.tokens)).foregroundStyle(.secondary)
+                            Text("\(Int((Double(project.tokens) / Double(total) * 100).rounded())) %")
+                                .monospacedDigit()
+                                .frame(width: 38, alignment: .trailing)
+                        }
+                        .scaledFont(.caption)
+                        .help(project.path)
                     }
-                    .scaledFont(.caption)
-                    .help(project.path)
+                    Text(footnote)
+                        .scaledFont(.caption2)
+                        .foregroundStyle(.secondary)
+                        .fixedSize(horizontal: false, vertical: true)
                 }
-                Text(footnote)
-                    .scaledFont(.caption2)
-                    .foregroundStyle(.secondary)
-                    .fixedSize(horizontal: false, vertical: true)
             }
         }
     }
@@ -380,22 +498,9 @@ private struct WindowRow: View {
 private struct WeekStrip: View {
     @Environment(\.panelTextScale) private var scale
     let week: WeekUsage
-    var showsForecast = true
 
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
-            if showsForecast {
-                switch week.forecast {
-                case let .runsOutAt(date):
-                    Text("неделя кончится \(date.formatted(.dateTime.weekday(.abbreviated).hour().minute())) при таком темпе")
-                        .foregroundStyle(.orange)
-                case .lastsUntilReset:
-                    Text("на неделю хватит")
-                        .foregroundStyle(.secondary)
-                case .unknown:
-                    EmptyView()
-                }
-            }
             Text("Расход недели по дням, в процентах")
                 .foregroundStyle(.secondary)
             let top = max(week.days.map(\.percent).max() ?? 0, 1)

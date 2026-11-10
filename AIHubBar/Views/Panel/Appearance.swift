@@ -46,6 +46,18 @@ enum PanelWidth: String, CaseIterable, Sendable {
     }
 }
 
+/// How limits are drawn in the panel: a big number over a bar, or rings as in the menu bar and the island.
+enum LimitsStyle: String, CaseIterable, Sendable {
+    case bars, rings
+
+    var title: String {
+        switch self {
+        case .bars: String(localized: "Полосы")
+        case .rings: String(localized: "Кольца")
+        }
+    }
+}
+
 /// Spacing of rows in the panel.
 enum PanelDensity: String, CaseIterable, Sendable {
     case compact, normal, spacious

@@ -152,6 +152,17 @@ enum UsageForecast: Equatable, Sendable {
         let runsOut = now.addingTimeInterval((100 - current.utilization) / perSecond)
         return runsOut < resets ? .runsOutAt(runsOut) : .lastsUntilReset
     }
+
+    /// How fast the session limit is being used, in percent per hour, over the same window as the forecast.
+    /// Nil without five minutes of history in this session window; zero when nothing was used.
+    static func pace(history: [UsagePoint], current: UsageWindow?, now: Date = .now, window: TimeInterval = 30 * 60) -> Double? {
+        guard let current, let resets = current.resetsAt else { return nil }
+        let points = history.filter { $0.sessionResetsAt.map { abs($0.timeIntervalSince(resets)) < 60 } ?? false && now.timeIntervalSince($0.date) <= window }
+        guard let first = points.min(by: { $0.date < $1.date }) else { return nil }
+        let elapsed = now.timeIntervalSince(first.date)
+        guard elapsed >= 5 * 60 else { return nil }
+        return max(0, current.utilization - first.session) / elapsed * 3600
+    }
 }
 
 /// Threshold notifications «once per window» and «limit restored» (spec §2.8).
@@ -213,6 +224,12 @@ enum UsageFile {
 /// Human texts for the limits block.
 enum UsageText {
     static func percent(_ value: Double) -> String { "\(Int(value.rounded())) %" }
+
+    /// «4 %/ч»: one decimal below ten, none above.
+    static func pace(_ perHour: Double) -> String {
+        let number = perHour.formatted(.number.precision(.fractionLength(perHour < 10 ? 0...1 : 0...0)))
+        return String(localized: "\(number) %/ч")
+    }
 
     /// «через 2 ч 14 мин», «через 35 мин», «меньше минуты».
     static func countdown(to date: Date, now: Date = .now) -> String {

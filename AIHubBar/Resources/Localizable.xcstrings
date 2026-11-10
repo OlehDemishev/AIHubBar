@@ -997,6 +997,82 @@
         }
       }
     },
+    "%@ %%/ч": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ %%/س"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ %%/h"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ %%/h"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ %%/h"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ %%/h"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ %%/jam"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ %%/h"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ %%/時"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ %%/시간"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ %%/h"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ %%/h"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ %%/год"
+          }
+        }
+      }
+    },
     "%@ · %@": {
       "localizations": {
         "ru": {
@@ -19106,6 +19182,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Вигляд"
+          }
+        }
+      }
+    },
+    "Вид лимитов": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مظهر الحدود"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Darstellung der Limits"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limits look"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aspecto de los límites"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Affichage des limites"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tampilan batas"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aspetto dei limiti"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "制限の表示"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "한도 표시"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wygląd limitów"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aparência dos limites"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Вигляд лімітів"
           }
         }
       }
@@ -38123,6 +38275,82 @@
         }
       }
     },
+    "Изменения: %@": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "التغييرات: %@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Änderungen: %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Changes: %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cambios: %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modifications : %@"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Perubahan: %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modifiche: %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "変更: %@"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "변경: %@"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zmiany: %@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alterações: %@"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Зміни: %@"
+          }
+        }
+      }
+    },
     "Изменить в «Панели»…": {
       "localizations": {
         "ar": {
@@ -43667,6 +43895,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Код: git, збирання, PR"
+          }
+        }
+      }
+    },
+    "Кольца": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "حلقات"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ringe"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rings"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anillos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anneaux"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cincin"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anelli"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "リング"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "링"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pierścienie"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anéis"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Кільця"
           }
         }
       }
@@ -78675,6 +78979,82 @@
         }
       }
     },
+    "Полосы": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "أشرطة"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Balken"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bars"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Barras"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Barres"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Batang"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Barre"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "バー"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "막대"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Paski"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Barras"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Смуги"
+          }
+        }
+      }
+    },
     "Помнить после перезапуска": {
       "localizations": {
         "ar": {
@@ -94283,6 +94663,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Скільки лишилося від 5-годинної сесії й тижня підписки Claude — і від лімітів інших AI."
+          }
+        }
+      }
+    },
+    "Сколько процентов лимита уходит за час, по последним 30 минутам": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "نسبة الحد المستهلكة في الساعة، بحسب آخر 30 دقيقة"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prozent des Limits pro Stunde, nach den letzten 30 Minuten"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Percent of the limit used per hour, over the last 30 minutes"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Porcentaje del límite usado por hora, según los últimos 30 minutos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pourcentage de la limite utilisé par heure, sur les 30 dernières minutes"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Persen batas yang terpakai per jam, dari 30 menit terakhir"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Percentuale del limite usata all'ora, sugli ultimi 30 minuti"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "直近30分から見た、1時間あたりの制限の使用率"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "최근 30분 기준, 시간당 한도 사용률"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ile procent limitu schodzi na godzinę, według ostatnich 30 minut"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Percentual do limite usado por hora, nos últimos 30 minutos"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Скільки відсотків ліміту йде за годину, за останні 30 хвилин"
           }
         }
       }
@@ -111482,82 +111938,6 @@
         }
       }
     },
-    "Что изменила сессия с начала (git): файлы и строки, включая закоммиченное. Клик — список": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ما غيّرته الجلسة منذ بدايتها (git): الملفات والأسطر، بما فيها المُثبتة. انقر للقائمة"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Was die Sitzung seit Beginn geändert hat (git): Dateien und Zeilen, Commits eingeschlossen. Klick für die Liste"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "What the session changed since it started (git): files and lines, committed work included. Click for the list"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Lo que cambió la sesión desde el inicio (git): archivos y líneas, incluido lo confirmado. Clic: la lista"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ce que la session a modifié depuis le début (git) : fichiers et lignes, commits compris. Cliquez pour la liste"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Yang diubah sesi sejak mulai (git): file dan baris, termasuk yang sudah di-commit. Klik untuk daftar"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cosa ha cambiato la sessione dall'inizio (git): file e righe, commit inclusi. Clic per l'elenco"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "セッション開始以降の変更（git）: ファイルと行数、コミット済みも含む。クリックで一覧"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "세션 시작 이후 변경(git): 파일과 줄, 커밋한 것 포함. 클릭하면 목록"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Co sesja zmieniła od początku (git): pliki i wiersze, także zatwierdzone. Kliknij, by zobaczyć listę"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "O que a sessão mudou desde o início (git): arquivos e linhas, incluindo o que já foi commitado. Clique para a lista"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Що змінила сесія від початку (git): файли й рядки, включно із закоміченим. Клік — список"
-          }
-        }
-      }
-    },
     "Что показывать в строке проекта": {
       "localizations": {
         "ar": {
@@ -121380,82 +121760,6 @@
         }
       }
     },
-    "на неделю хватит": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "يكفي للأسبوع"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "reicht für die Woche"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "enough for the week"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "alcanza para la semana"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "suffisant pour la semaine"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "cukup untuk minggu ini"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "basta per la settimana"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "今週分は足ります"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "이번 주는 충분합니다"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "wystarczy na tydzień"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "dá para a semana"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "на тиждень вистачить"
-          }
-        }
-      }
-    },
     "на паузе до сброса лимита": {
       "localizations": {
         "ar": {
@@ -128157,82 +128461,6 @@
         }
       }
     },
-    "сессии до сброса хватит": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "الجلسة تكفي حتى إعادة الضبط"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "die Sitzung reicht bis zur Zurücksetzung"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "the session will last until its reset"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "la sesión alcanza hasta el reinicio"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "la session tiendra jusqu'à la réinitialisation"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "sesi cukup sampai reset"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "la sessione basta fino all'azzeramento"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "セッションはリセットまで持ちます"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "세션은 초기화까지 충분합니다"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "sesji starczy do resetu"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "a sessão dura até o reinício"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "сесії до скидання вистачить"
-          }
-        }
-      }
-    },
     "сессия %@": {
       "localizations": {
         "ar": {
@@ -130434,82 +130662,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "фонових завдань: %lld"
-          }
-        }
-      }
-    },
-    "хватит и на сессию, и на неделю": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "يكفي للجلسة والأسبوع"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "reicht für Sitzung und Woche"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "enough for the session and the week"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "alcanza para la sesión y la semana"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "suffisant pour la session et la semaine"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "cukup untuk sesi dan minggu ini"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "basta per la sessione e la settimana"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "セッション分も今週分も足ります"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "세션과 이번 주 모두 충분합니다"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "wystarczy na sesję i na tydzień"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "dá para a sessão e para a semana"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "вистачить і на сесію, і на тиждень"
           }
         }
       }

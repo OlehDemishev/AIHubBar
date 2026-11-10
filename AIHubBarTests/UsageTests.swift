@@ -97,6 +97,16 @@ struct UsageForecastTests {
         #expect(UsageForecast.make(history: history, current: window(104), now: now) == .unknown)
     }
 
+    @Test func paceIsPercentPerHour() {
+        // 20 % in 20 minutes is 60 % an hour; nothing used is zero; under five minutes of history there is no pace.
+        let history = [UsagePoint(date: now.addingTimeInterval(-20 * 60), session: 40, sessionResetsAt: resets)]
+        #expect(UsageForecast.pace(history: history, current: window(60), now: now) == 60)
+        #expect(UsageForecast.pace(history: history, current: window(40), now: now) == 0)
+        let recent = [UsagePoint(date: now.addingTimeInterval(-60), session: 50, sessionResetsAt: resets)]
+        #expect(UsageForecast.pace(history: recent, current: window(60), now: now) == nil)
+        #expect(UsageText.pace(4.26) == String(localized: "\("4,3") %/ч") && UsageText.pace(60) == String(localized: "\("60") %/ч"))
+    }
+
     @Test func unknownWithoutEnoughData() {
         let recent = [UsagePoint(date: now.addingTimeInterval(-60), session: 50, sessionResetsAt: resets)]
         #expect(UsageForecast.make(history: recent, current: window(60), now: now) == .unknown)
