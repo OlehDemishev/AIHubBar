@@ -40,8 +40,8 @@
       "steps" : [
         "Kliknij ✦ na pasku menu — otworzy się panel.",
         "Utwórz profil: Ustawienia → „Profile” → „+” → „Asystent…”.",
-        "Na stronie „Moduły” zostaw tylko to, czego potrzebujesz — reszta wyłączy się razem z pracą w tle.",
-        "W sekcji „Pasek menu” wybierz, co widać obok ikony."
+        "Na stronie „Co pokazywać” zostaw tylko to, czego potrzebujesz — reszta wyłączy się razem z pracą w tle.",
+        "W tym samym miejscu, w sekcji „Pasek menu”, wybierz, co widać obok ikony."
       ],
       "summary" : "AI Hub Bar trzyma pod ręką limity AI, sesje agentów i Twoje projekty — na pasku menu Maca, jednym kliknięciem.",
       "title" : "Pierwsze kroki"
@@ -58,7 +58,7 @@
               "name" : "✦"
             },
             {
-              "detail" : "Wykorzystanie 5-godzinnej sesji i tygodnia — jako liczba, pierścień lub pasek (Ustawienia → „Pasek menu”): zielony poniżej 50 %, pomarańczowy poniżej 80 %, czerwony powyżej.",
+              "detail" : "Wykorzystanie 5-godzinnej sesji i tygodnia — jako liczba, pierścień lub pasek (Ustawienia → „Co pokazywać” → „Pasek menu”): zielony poniżej 50 %, pomarańczowy poniżej 80 %, czerwony powyżej.",
               "name" : "Obok ikony"
             },
             {
@@ -79,7 +79,7 @@
         }
       ],
       "steps" : [
-        "Otwórz Ustawienia → „Pasek menu”.",
+        "Otwórz Ustawienia → „Co pokazywać” → „Pasek menu”.",
         "Kliknij element w sekcji „Kolejność” — pojawią się jego ustawienia: liczba, pierścień lub pasek, próg.",
         "Przeciągnij separator na element — stanie zaraz za nim. Bez myszy — „Bardziej w lewo” i „Bardziej w prawo”."
       ],
@@ -111,7 +111,7 @@
         }
       ],
       "steps" : [
-        "Otwórz Ustawienia → „Panel”.",
+        "Otwórz Ustawienia → „Co pokazywać”.",
         "Przeciągnij blok na inny albo kliknij ⌃ / ⌄.",
         "Po prawej widać, jak panel wygląda teraz."
       ],
@@ -153,8 +153,8 @@
         }
       ],
       "steps" : [
-        "Ustawienia → „Moduły”: włącz zestaw („Tylko AI”, „Narzędzia dla Maca”, „Wszystko”) albo pojedyncze kafelki.",
-        "Kliknięcie kafelka otwiera stronę modułu: przełącznik, „Gdzie pokazywać” i wszystkie jego ustawienia."
+        "Ustawienia → „Co pokazywać”: każdy moduł ma dwa przełączniki — blok w panelu i elementy w pasku menu. „Gotowy zestaw” włącza kilka modułów naraz.",
+        "Kliknij nazwę modułu, aby otworzyć jego stronę: przełącznik i wszystkie ustawienia."
       ],
       "summary" : "Moduł to jedna funkcja AI Hub Bar. Profil decyduje, które moduły widać w panelu i w jakiej kolejności.",
       "title" : "Moduły i profile"
@@ -384,7 +384,7 @@
         }
       ],
       "steps" : [
-        "Włącz kalendarz w profilu — albo przyciskiem „Włącz w profilu” na kafelku „Najbliższe”."
+        "Włącz kalendarz w profilu — albo przyciskiem „Włącz w profilu” w wierszu „Najbliższe” na stronie „Co pokazywać”."
       ],
       "summary" : "Terminy i publikacje z kart projektów i planu treści — na tydzień naprzód i w oknie „Kalendarz”.",
       "title" : "Najbliższe i kalendarz"
@@ -460,7 +460,7 @@
         }
       ],
       "steps" : [
-        "Włącz „Wyspa przy notchu” na stronie „Moduły”."
+        "Włącz „Wyspa przy notchu” na jej stronie w Ustawieniach."
       ],
       "summary" : "Czarna wyspa wokół notcha MacBooka: prośby, zdarzenia i po najechaniu karta z limitami i tym, co robi Claude.",
       "title" : "Wyspa przy notchu"
@@ -502,7 +502,7 @@
         }
       ],
       "steps" : [
-        "Włącz „Układ klawiatury” na stronie „Moduły”."
+        "Włącz „Układ klawiatury” na stronie „Co pokazywać”."
       ],
       "summary" : "Słowo wpisane w złym układzie klawiatury samo wpisuje się ponownie we właściwym, a układ się przełącza.",
       "title" : "Układ klawiatury"

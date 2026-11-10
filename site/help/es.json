@@ -40,8 +40,8 @@
       "steps" : [
         "Haz clic en ✦ en la barra de menús y se abrirá el panel.",
         "Crea un perfil: Ajustes → «Perfiles» → «+» → «Asistente…».",
-        "En la página «Módulos», deja solo lo que necesites — el resto se apaga junto con su trabajo en segundo plano.",
-        "En «Barra de menús», elige qué se ve junto al icono."
+        "En la página «Qué mostrar», deja solo lo que necesites — el resto se apaga junto con su trabajo en segundo plano.",
+        "Ahí mismo, en «Barra de menús», elige qué se ve junto al icono."
       ],
       "summary" : "AI Hub Bar tiene a mano los límites de IA, las sesiones de agentes y tus proyectos — en la barra de menús del Mac, a un clic.",
       "title" : "Primeros pasos"
@@ -58,7 +58,7 @@
               "name" : "✦"
             },
             {
-              "detail" : "Porcentaje usado de la sesión de 5 horas y de la semana — como número, anillo o barra (Ajustes → «Barra de menús»): verde por debajo del 50 %, naranja por debajo del 80 %, rojo por encima.",
+              "detail" : "Porcentaje usado de la sesión de 5 horas y de la semana — como número, anillo o barra (Ajustes → «Qué mostrar» → «Barra de menús»): verde por debajo del 50 %, naranja por debajo del 80 %, rojo por encima.",
               "name" : "Junto al icono"
             },
             {
@@ -79,7 +79,7 @@
         }
       ],
       "steps" : [
-        "Abre Ajustes → «Barra de menús».",
+        "Abre Ajustes → «Qué mostrar» → «Barra de menús».",
         "Haz clic en un elemento de «Orden» y aparecerán sus ajustes: número, anillo o barra, umbral.",
         "Arrastra un separador sobre un elemento y quedará justo después. Sin ratón — «Más a la izquierda» y «Más a la derecha»."
       ],
@@ -111,7 +111,7 @@
         }
       ],
       "steps" : [
-        "Abre Ajustes → «Panel».",
+        "Abre Ajustes → «Qué mostrar».",
         "Arrastra un bloque sobre otro o pulsa ⌃ / ⌄.",
         "A la derecha se ve cómo queda el panel ahora."
       ],
@@ -153,8 +153,8 @@
         }
       ],
       "steps" : [
-        "Ajustes → «Módulos»: activa un conjunto («Solo IA», «Utilidades del Mac», «Todo») o mosaicos sueltos.",
-        "Un clic en un mosaico abre la página del módulo: el interruptor, «Dónde mostrar» y todos sus ajustes."
+        "Ajustes → «Qué mostrar»: cada módulo tiene dos interruptores — su bloque en el panel y sus elementos en la barra de menús. «Conjunto listo» activa varios módulos a la vez.",
+        "Haz clic en el nombre del módulo para abrir su página: el interruptor y todos sus ajustes."
       ],
       "summary" : "Un módulo es una función de AI Hub Bar. El perfil decide qué módulos se ven en el panel y en qué orden.",
       "title" : "Módulos y perfiles"
@@ -384,7 +384,7 @@
         }
       ],
       "steps" : [
-        "Activa el calendario en el perfil — o con el botón «Activar en el perfil» en el mosaico «Próximo»."
+        "Activa el calendario en el perfil — o con el botón «Activar en el perfil» en la fila «Próximo» de la página «Qué mostrar»."
       ],
       "summary" : "Fechas límite y publicaciones de las fichas de proyecto y del plan de contenido — para la próxima semana y en la ventana «Calendario».",
       "title" : "Próximo y calendario"
@@ -460,7 +460,7 @@
         }
       ],
       "steps" : [
-        "Activa «Isla del notch» en la página «Módulos»."
+        "Activa «Isla del notch» en su página de Ajustes."
       ],
       "summary" : "Una isla negra alrededor del notch del MacBook: solicitudes, eventos y, al pasar el cursor, una tarjeta con los límites y lo que está haciendo Claude.",
       "title" : "Isla del notch"
@@ -502,7 +502,7 @@
         }
       ],
       "steps" : [
-        "Activa «Distribución del teclado» en la página «Módulos»."
+        "Activa «Distribución del teclado» en la página «Qué mostrar»."
       ],
       "summary" : "Una palabra escrita con la distribución equivocada se reescribe sola con la correcta y la distribución cambia.",
       "title" : "Distribución del teclado"

@@ -5,7 +5,7 @@
 **Updated:** 2026-11-10
 
 **Now:**
-- redesign after Oleh's «перегружено» (2026-11-10), agreed on a mock-up: step 1 merged, not released — the limits block is a big number over a bar with the pace, bars or rings by choice, the rest behind «Подробнее» (branch `feat/panel-compact-limits`)
+- redesign after Oleh's «перегружено» (2026-11-10), agreed on a mock-up: step 1 merged, not released — the limits block is a big number over a bar with the pace, bars or rings by choice, the rest behind «Подробнее» (branch `feat/panel-compact-limits`); step 3 done, not released — Settings sidebar is seven rows, one page «Что показывать» (branch `feat/settings-what-to-show`)
 - 0.9.1 (build 787) published 2026-11-10 with #344 and #345: removing a Claude account no longer crashes the app (it did in 0.8.1 and 0.9.0), Arabic is mirrored, the Settings sidebar shows whole names, a worktree's name in a session row
 - 0.9.0 (build 781) published 2026-11-09 with the audit pass (#342): the closed panel no longer uses a third of a CPU core while a session works; 30 fixes from a UI and code review (list in the journal)
 - tech debt pass done 2026-11-09, all merged: #330 Sparkle 2.10.1, #331 the lock screen tile checks it locked, #332 unused strings removed and the catalog compared with the code, #333 Mac CI on Xcode 27.2 running `check.sh`, #334 and #335 tests for the Telegram controller, the notch island and the command engine (77 new), #336 Telegram files split
@@ -17,7 +17,6 @@
 
 **Next:**
 - redesign step 2: the panel's other blocks off for new people and folded into one «Ещё» row; account and plan in the header
-- redesign step 3: Settings — one page «Что показывать» instead of «Модули», «Панель», «Строка меню» and the «Где показывать» chips; «Сервисы AI» as one page; «Профили» greyed while there is one; the island keeps its own page
 - check on the Air: the island at the real notch
 - promotion (docs/LAUNCH.md): r/ClaudeAI, the lists, r/macapps, Show HN, Product Hunt, Homebrew
 - content (docs/specs/SPEC-content.md, agreed): stage 2 «Версии», then batch tasks; better after the first feedback from people
@@ -45,6 +44,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-10 — Settings: «Что показывать», seven rows in the sidebar (branch `feat/settings-what-to-show`)
+
+Done: redesign step 3. The sidebar is «Основные», «Что показывать», «Внешний вид», «Сервисы AI», «Остров у чёлки», «Профили», «Клавиши» (it listed seven areas, every working module and six services). «Что показывать» replaces «Модули», «Панель» and the «Панель»/«Строка меню» chips: one list, two switches per module (its block in the panel, its elements in the menu bar), the profile's blocks on top and dragged into order, the rest below; «Готовый набор» is a menu. A module's page opens by a click on its row and has a back button (⌘[); «Строка меню» opens from a button on the same page. «Сервисы AI» is one row, the services are capsules with a status dot above the page. «Профили» is pale while there is one profile. The search still lists modules and services one by one. Old links `modules` and `panel` open the new page. Help, the assistant and hints name the new page; 24 unused strings removed, 28 new ones in 12 languages; SPEC-settings §5b.
+Checked: `scripts/check.sh` green (a new test for the parents of pages and the old links). Seen live on the Debug copy, dark theme, Russian: «Что показывать», a module's page with the back button, «Сервисы AI» on Codex, «Строка меню», «Остров у чёлки».
+Left: not clicked live — the switches, dragging, the back button, «Готовый набор», the search; not seen — light theme, other languages, a narrow window, two profiles (the picker), the panel sketch in a wide window. Not released.
 ## 2026-11-10 — Redesign step 1: a calmer limits block (branch `feat/panel-compact-limits`)
 
 Done: Oleh finds the panel and Settings overloaded and showed a simpler app of the same kind. A mock-up was agreed (session as the main number, the rest smaller, details folded; rings or bars by choice; the island keeps its own Settings page). This step is the limits block and the session rows.

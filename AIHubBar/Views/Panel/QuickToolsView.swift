@@ -22,7 +22,7 @@ struct QuickCommandsView: View {
             BlockTitle(block: .quickCommands, title: "Быстрые команды")
             if !PanelBlock.collapsed(in: collapsedRaw).contains(.quickCommands) {
                 if commands.isEmpty {
-                    Text("Команд нет — добавьте в Настройках → «Модули».").scaledFont(.caption).foregroundStyle(.secondary)
+                    Text("Команд нет — добавьте в Настройках → «Что показывать».").scaledFont(.caption).foregroundStyle(.secondary)
                 }
                 LazyVGrid(columns: columns, alignment: .leading, spacing: 6) {
                     ForEach(commands) { command in

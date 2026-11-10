@@ -14,8 +14,8 @@ struct SettingsView: View {
     @Environment(HubLimitsStore.self) private var hub
     @Environment(ProfileStore.self) private var modes
     @AppStorage(StorageKey.settingsPage) private var pane: SettingsPane = .general
-    /// «Сервисы AI» folded by default: six rows the sidebar rarely needs.
-    @AppStorage(StorageKey.servicesExpanded) private var servicesExpanded = false
+    /// The service «Сервисы AI» opens on: the last one looked at.
+    @State private var lastService = ServiceTab.claude
     @State private var query = ""
 
     init() {
@@ -24,52 +24,41 @@ struct SettingsView: View {
 
     var body: some View {
         NavigationSplitView {
-            ScrollViewReader { sidebar in
-            List(selection: Binding(get: { pane }, set: { if let new = $0 { select(new) } })) {
-                ForEach(SettingsPane.areas.filter { $0.matches(query) }, id: \.self) { pane in
-                    PaneRow(pane: pane)
-                }
-                ForEach(ModuleGroup.allCases, id: \.self) { group in
-                    let found = group.modules.filter(isListed).map(SettingsPane.module).filter { $0.matches(query) }
-                    if !found.isEmpty {
-                        Section(group.title) {
-                            ForEach(found, id: \.self) { pane in
+            List(selection: Binding(get: { selected }, set: { if let new = $0 { select(new) } })) {
+                if query.isEmpty {
+                    ForEach(sidebar, id: \.self) { pane in
+                        PaneRow(pane: pane, isOff: isPale(pane), allServices: pane.isService)
+                    }
+                } else {
+                    ForEach(SettingsPane.areas.filter { $0.matches(query) }, id: \.self) { pane in
+                        PaneRow(pane: pane)
+                    }
+                    let modules = foundModules
+                    if !modules.isEmpty {
+                        Section("Модули") {
+                            ForEach(modules, id: \.self) { pane in
                                 PaneRow(pane: pane, isOff: !isOn(pane))
                             }
                         }
                     }
-                    if group == .ai {
-                        let found = SettingsPane.services.filter { $0.matches(query) }
-                        if !found.isEmpty {
-                            Section {
-                                if servicesOpen {
-                                    ForEach(found, id: \.self) { pane in
-                                        PaneRow(pane: pane, isSetUp: isSetUp(pane))
-                                    }
-                                }
-                            } header: {
-                                servicesHeader
+                    let services = SettingsPane.services.filter { $0.matches(query) }
+                    if !services.isEmpty {
+                        Section("Сервисы AI") {
+                            ForEach(services, id: \.self) { pane in
+                                PaneRow(pane: pane, isSetUp: isSetUp(pane))
                             }
                         }
                     }
-                }
-                if nothingFound {
-                    Text("Ничего не найдено")
-                        .foregroundStyle(.secondary)
-                        .selectionDisabled()
+                    if nothingFound {
+                        Text("Ничего не найдено")
+                            .foregroundStyle(.secondary)
+                            .selectionDisabled()
+                    }
                 }
             }
             .searchable(text: $query, placement: .sidebar, prompt: Text("Поиск"))
-            // The list is taller than the window: the chosen page's row stays in sight, also after a link to it.
-            .onAppear {
-                openServices(for: pane)
-                DispatchQueue.main.async { sidebar.scrollTo(pane, anchor: .center) }
-            }
-            .onChange(of: pane) {
-                openServices(for: pane)
-                DispatchQueue.main.async { withAnimation { sidebar.scrollTo(pane) } }
-            }
-            }
+            .onAppear { remember(pane) }
+            .onChange(of: pane) { remember(pane) }
             // The column width alone is not kept on macOS 27: the sidebar came up 144 pt wide and cut the names to
             // «Внешний…», «Строка ме…». The content's own minimum holds it.
             .frame(minWidth: 230)
@@ -77,10 +66,15 @@ struct SettingsView: View {
             .toolbar(removing: .sidebarToggle)
         } detail: {
             VStack(alignment: .leading, spacing: 0) {
-                PaneHeader(pane: pane, isOn: mainSwitch)
+                PaneHeader(pane: pane, isOn: mainSwitch, back: pane.parent.map { parent in { select(parent) } })
                     .padding(.horizontal, 24)
                     .padding(.top, 18)
                     .padding(.bottom, 8)
+                if case let .service(service) = pane {
+                    ServiceTabsBar(selection: service, isSetUp: { isSetUp(.service($0)) ?? false }) { select(.service($0)) }
+                        .padding(.horizontal, 24)
+                        .padding(.bottom, 4)
+                }
                 page
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .font(.system(size: 13.5))
@@ -100,42 +94,41 @@ struct SettingsView: View {
         .debugSnapshot("settings")
     }
 
-    private var servicesOpen: Bool { servicesExpanded || !query.isEmpty }
-
-    /// The system's own section arrow appears only on hover, and the folded section looked like an empty heading.
-    private var servicesHeader: some View {
-        Button {
-            withAnimation(.snappy(duration: 0.2)) { servicesExpanded.toggle() }
-        } label: {
-            HStack(spacing: 4) {
-                Text("Сервисы AI")
-                Image(systemName: "chevron.right")
-                    .font(.caption2.weight(.semibold))
-                    .rotationEffect(.degrees(servicesOpen ? 90 : 0))
-                Spacer(minLength: 0)
-            }
-            .contentShape(Rectangle())
-        }
-        .buttonStyle(.plain)
+    /// The sidebar without a search: seven rows. The modules' pages and «Строка меню» open from «Что показывать».
+    private var sidebar: [SettingsPane] {
+        var rows: [SettingsPane] = [.general, .show, .appearance, servicesRow]
+        if isAvailable(.notch) { rows.append(.module(.notch)) }
+        return rows + [.modes, .shortcuts]
     }
 
-    /// A service's page never sits under a folded section.
-    private func openServices(for pane: SettingsPane) {
-        if pane.isService, !servicesExpanded { servicesExpanded = true }
+    /// One row for every service: it stands for the service on screen, else for the last one looked at.
+    private var servicesRow: SettingsPane { pane.isService ? pane : .service(lastService) }
+
+    /// The row the page on screen belongs to.
+    private var selected: SettingsPane { query.isEmpty ? pane.parent ?? pane : pane }
+
+    private func remember(_ pane: SettingsPane) {
+        if case let .service(service) = pane { lastService = service }
+    }
+
+    /// «Профили» while there is one profile: nothing to switch between yet. A module switched off.
+    private func isPale(_ pane: SettingsPane) -> Bool {
+        pane == .modes ? modes.modes.count < 2 : !isOn(pane)
+    }
+
+    private var foundModules: [SettingsPane] {
+        ModuleDefinition.all.map(\.kind).filter(isAvailable).map(SettingsPane.module).filter { $0.matches(query) }
     }
 
     private var nothingFound: Bool {
-        guard !query.isEmpty else { return false }
-        let modules = ModuleGroup.allCases.flatMap(\.modules).filter(isListed).map(SettingsPane.module)
-        return !(SettingsPane.areas + modules + SettingsPane.services).contains { $0.matches(query) }
+        !(SettingsPane.areas + foundModules + SettingsPane.services).contains { $0.matches(query) }
     }
 
     @ViewBuilder private var page: some View {
         switch pane {
         case .general: GeneralSettings()
         case .modes: ProfilesSettings()
-        case .modules: ModuleCatalog { select(.module($0)) }
-        case .panel: PanelBuilder()
+        case .show: ShowSettings { select($0) }
         case .appearance: AppearanceSettings()
         case .menuBar: MenuBarSettings()
         case .shortcuts: ShortcutsSettings()
@@ -144,11 +137,9 @@ struct SettingsView: View {
         }
     }
 
-    /// The sidebar lists what is in use; the rest is in «Модули» and in the search. A module in beta testing needs
-    /// beta builds, and «Отчёты» only exist on a Mac with `_daily-report`.
-    private func isListed(_ kind: ModuleKind) -> Bool {
-        guard !kind.isBeta || settings.betaUpdates, kind != .reports || modes.hasDailyReport else { return false }
-        return modes.isOn(kind) || !query.isEmpty || pane == .module(kind)
+    /// A module in beta testing needs beta builds, and «Отчёты» only exist on a Mac with `_daily-report`.
+    private func isAvailable(_ kind: ModuleKind) -> Bool {
+        ModuleSwitch.isOffered(kind, settings: settings, modes: modes)
     }
 
     private func isOn(_ pane: SettingsPane) -> Bool {

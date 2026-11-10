@@ -10,6 +10,12 @@ enum ModuleSwitch {
         return !kind.isBuiltIn || modes.installedModules.contains(kind)
     }
 
+    /// Offered in Settings at all: a module in beta testing needs beta builds, and «Отчёты» only exist on a Mac with
+    /// `_daily-report`.
+    static func isOffered(_ kind: ModuleKind, settings: AppSettings, modes: ProfileStore) -> Bool {
+        (!kind.isBeta || settings.betaUpdates) && (kind != .reports || modes.hasDailyReport)
+    }
+
     /// What brings a built-in module into the current profile: a calendar, the `_daily-report` commands, or (for
     /// projects, which need a folder) the profile's page. Nil when there is no profile.
     static func enableAction(_ kind: ModuleKind, modes: ProfileStore) -> (title: String, run: () -> Void)? {
@@ -96,9 +102,14 @@ struct ModulePlaces: View {
         .padding(.vertical, 2)
     }
 
+    /// The places besides the panel and the menu bar: those two are switched on «Что показывать».
+    static func extra(_ kind: ModuleKind) -> [ModulePlace] {
+        ModulePlace.of(kind).filter { $0 != .panel && $0 != .menuBar }
+    }
+
     /// The island only while «Остров у чёлки» works.
     private var places: [ModulePlace] {
-        ModulePlace.of(kind).filter { $0 != .island || modes.isOn(.notch) }
+        Self.extra(kind).filter { $0 != .island || modes.isOn(.notch) }
     }
 
     /// Ears exist only with the summary in the island and on a screen with a notch: otherwise the chip stays off.
@@ -254,11 +265,13 @@ struct ModulePage: View {
                     }
                 }
             }
-            if !ModulePlace.of(kind).isEmpty {
+            if !ModulePlaces.extra(kind).isEmpty {
                 Section {
                     ModulePlaces(kind: kind)
                 } header: {
-                    Text("Где показывать")
+                    Text("Где ещё показывать")
+                } footer: {
+                    Footnote(text: String(localized: "Панель и строка меню — на странице «Что показывать»."))
                 }
             }
             sections
@@ -269,7 +282,7 @@ struct ModulePage: View {
                 Section {
                     IconRow("В профилях", systemImage: "square.stack.3d.up", value: profiles)
                 } footer: {
-                    Footnote(text: String(localized: "Порядок блоков и что показывает модуль — на странице «Панель»."))
+                    Footnote(text: String(localized: "Порядок блоков и что показывает модуль — на странице «Что показывать»."))
                 }
             }
         }

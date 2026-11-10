@@ -40,8 +40,8 @@
       "steps" : [
         "Klicken Sie in der Menüleiste auf ✦ — das Panel öffnet sich.",
         "Legen Sie ein Profil an: Einstellungen → „Profile“ → „+“ → „Assistent…“.",
-        "Behalten Sie auf der Seite „Module“ nur, was Sie brauchen — der Rest wird samt Hintergrundarbeit ausgeschaltet.",
-        "Stellen Sie unter „Menüleiste“ zusammen, was neben dem Symbol erscheint."
+        "Behalten Sie auf der Seite „Was anzeigen“ nur, was Sie brauchen — der Rest wird samt Hintergrundarbeit ausgeschaltet.",
+        "Stellen Sie dort unter „Menüleiste“ zusammen, was neben dem Symbol erscheint."
       ],
       "summary" : "AI Hub Bar hält KI-Limits, Agentensitzungen und Ihre Projekte griffbereit — in der Menüleiste des Mac, mit einem Klick.",
       "title" : "Erste Schritte"
@@ -58,7 +58,7 @@
               "name" : "✦"
             },
             {
-              "detail" : "Anteil der 5-Stunden-Sitzung und der Woche — als Zahl, Ring oder Balken (Einstellungen → „Menüleiste“): grün unter 50 %, orange unter 80 %, rot darüber.",
+              "detail" : "Anteil der 5-Stunden-Sitzung und der Woche — als Zahl, Ring oder Balken (Einstellungen → „Was anzeigen“ → „Menüleiste“): grün unter 50 %, orange unter 80 %, rot darüber.",
               "name" : "Neben dem Symbol"
             },
             {
@@ -79,7 +79,7 @@
         }
       ],
       "steps" : [
-        "Öffnen Sie Einstellungen → „Menüleiste“.",
+        "Öffnen Sie Einstellungen → „Was anzeigen“ → „Menüleiste“.",
         "Klicken Sie auf ein Element unter „Reihenfolge“ — dann erscheinen seine Einstellungen: Zahl, Ring oder Balken, Schwelle.",
         "Ziehen Sie einen Trenner auf ein Element — er landet direkt dahinter. Ohne Maus — „Weiter links“ und „Weiter rechts“."
       ],
@@ -111,7 +111,7 @@
         }
       ],
       "steps" : [
-        "Öffnen Sie Einstellungen → „Panel“.",
+        "Öffnen Sie Einstellungen → „Was anzeigen“.",
         "Ziehen Sie einen Block auf einen anderen oder klicken Sie auf ⌃ / ⌄.",
         "Rechts sehen Sie, wie das Panel gerade aussieht."
       ],
@@ -153,8 +153,8 @@
         }
       ],
       "steps" : [
-        "Einstellungen → „Module“: Aktivieren Sie ein Set („Nur KI“, „Mac-Werkzeuge“, „Alles“) oder einzelne Kacheln.",
-        "Ein Klick auf eine Kachel öffnet die Modulseite: Schalter, „Wo anzeigen“ und alle Einstellungen."
+        "Einstellungen → „Was anzeigen“: Jedes Modul hat zwei Schalter — seinen Block im Panel und seine Elemente in der Menüleiste. „Fertiges Set“ schaltet mehrere Module auf einmal ein.",
+        "Ein Klick auf den Namen des Moduls öffnet seine Seite: Schalter und alle Einstellungen."
       ],
       "summary" : "Ein Modul ist eine Funktion von AI Hub Bar. Das Profil bestimmt, welche Module im Panel erscheinen und in welcher Reihenfolge.",
       "title" : "Module und Profile"
@@ -384,7 +384,7 @@
         }
       ],
       "steps" : [
-        "Aktivieren Sie den Kalender im Profil — oder mit der Taste „Im Profil einschalten“ auf der Kachel „Demnächst“."
+        "Aktivieren Sie den Kalender im Profil — oder mit der Taste „Im Profil einschalten“ in der Zeile „Demnächst“ auf der Seite „Was anzeigen“."
       ],
       "summary" : "Deadlines und Veröffentlichungen aus Projektkarten und dem Content-Plan — eine Woche im Voraus und im Fenster „Kalender“.",
       "title" : "Demnächst und Kalender"
@@ -460,7 +460,7 @@
         }
       ],
       "steps" : [
-        "Aktivieren Sie „Notch-Insel“ auf der Seite „Module“."
+        "Aktivieren Sie „Notch-Insel“ auf der zugehörigen Seite in den Einstellungen."
       ],
       "summary" : "Eine schwarze Insel um die Notch des MacBook: Anfragen, Ereignisse und beim Darüberfahren eine Karte mit Limits und dem, was Claude gerade tut.",
       "title" : "Notch-Insel"
@@ -502,7 +502,7 @@
         }
       ],
       "steps" : [
-        "Aktivieren Sie „Tastaturlayout“ auf der Seite „Module“."
+        "Aktivieren Sie „Tastaturlayout“ auf der Seite „Was anzeigen“."
       ],
       "summary" : "Ein Wort im falschen Tastaturlayout wird von selbst im richtigen neu geschrieben, und das Layout wechselt.",
       "title" : "Tastaturlayout"

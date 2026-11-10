@@ -69,6 +69,42 @@ enum ServiceTab: String, CaseIterable, Sendable {
     }
 }
 
+/// The services in a row on top of «Сервисы AI»: one page for all of them, the chosen one below. A green dot — something
+/// of the service works here.
+struct ServiceTabsBar: View {
+    let selection: ServiceTab
+    let isSetUp: (ServiceTab) -> Bool
+    let select: (ServiceTab) -> Void
+
+    var body: some View {
+        FlowLayout(spacing: 6) {
+            ForEach(ServiceTab.allCases, id: \.self) { service in
+                let chosen = service == selection
+                let ready = isSetUp(service)
+                Button { select(service) } label: {
+                    HStack(spacing: 6) {
+                        Circle()
+                            .fill(ready ? Color.green : Color.secondary.opacity(0.35))
+                            .frame(width: 7, height: 7)
+                        Text(service.title)
+                            .font(.system(size: 13, weight: chosen ? .semibold : .regular))
+                    }
+                    .padding(.horizontal, 11)
+                    .padding(.vertical, 5)
+                    .foregroundStyle(chosen ? Color.accentColor : .primary)
+                    .background(Capsule().fill(chosen ? Color.accentColor.opacity(0.15) : Color.secondary.opacity(0.08)))
+                    .overlay(Capsule().strokeBorder(chosen ? Color.accentColor.opacity(0.5) : Color.secondary.opacity(0.2), lineWidth: 0.5))
+                    .contentShape(Capsule())
+                }
+                .buttonStyle(.plain)
+                .help(PaneRow.status(ready))
+                .accessibilityAddTraits(chosen ? .isSelected : [])
+                .accessibilityValue(PaneRow.status(ready))
+            }
+        }
+    }
+}
+
 /// Settings → «Сервисы AI» → one AI (SPEC-ai-services §4): everything that belongs to it — the agent, its limits,
 /// its API access and, for Claude Code, all of Claude Code's options.
 struct ServicePage: View {

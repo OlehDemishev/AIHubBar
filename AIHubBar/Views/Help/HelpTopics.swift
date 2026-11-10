@@ -99,19 +99,19 @@ enum HelpTopic: String, CaseIterable, Identifiable, Sendable {
         case .start:
             [String(localized: "Нажмите ✦ в строке меню — откроется панель."),
              String(localized: "Создайте профиль: Настройки → «Профили» → «+» → «Помощник…»."),
-             String(localized: "На странице «Модули» оставьте только нужное — остальное выключится вместе с фоновой работой."),
-             String(localized: "В «Строке меню» соберите, что видно рядом со значком.")]
+             String(localized: "На странице «Что показывать» оставьте только нужное — остальное выключится вместе с фоновой работой."),
+             String(localized: "Там же, в «Строке меню», соберите, что видно рядом со значком.")]
         case .menuBar:
-            [String(localized: "Откройте Настройки → «Строка меню»."),
+            [String(localized: "Откройте Настройки → «Что показывать» → «Строка меню»."),
              String(localized: "Кликните элемент в «Порядке» — появятся его настройки: число, кольцо или полоска, порог."),
              String(localized: "Перетащите разделитель на элемент — он встанет сразу после него. Без мыши — «Левее» и «Правее».")]
         case .panel:
-            [String(localized: "Откройте Настройки → «Панель»."),
+            [String(localized: "Откройте Настройки → «Что показывать»."),
              String(localized: "Перетащите блок на другой или нажмите ⌃ / ⌄."),
              String(localized: "Справа видно, как панель выглядит сейчас.")]
         case .modules:
-            [String(localized: "Настройки → «Модули»: включите набор («Только AI», «Утилиты Mac», «Всё») или отдельные плитки."),
-             String(localized: "Клик по плитке — страница модуля: выключатель, «Где показывать» и все его настройки.")]
+            [String(localized: "Настройки → «Что показывать»: у каждого модуля два выключателя — блок в панели и элементы в строке меню. «Готовый набор» включает сразу несколько модулей."),
+             String(localized: "Клик по названию модуля — его страница: выключатель и все его настройки.")]
         case .limits:
             [String(localized: "Пороги уведомлений — на странице «Лимиты AI»."),
              String(localized: "Другие AI подключаются в «Сервисы AI»: вход в их CLI или ключ API.")]
@@ -123,11 +123,11 @@ enum HelpTopic: String, CaseIterable, Identifiable, Sendable {
         case .projects:
             [String(localized: "Настройки → «Профили» → профиль → «Источник»: папка с проектами.")]
         case .calendar:
-            [String(localized: "Включите календарь в профиле — или кнопкой «Включить в профиле» на плитке «Ближайшее».")]
+            [String(localized: "Включите календарь в профиле — или кнопкой «Включить в профиле» в строке «Ближайшее» на странице «Что показывать».")]
         case .notch:
-            [String(localized: "Включите «Остров у чёлки» на странице «Модули».")]
+            [String(localized: "Включите «Остров у чёлки» на его странице в Настройках.")]
         case .layout:
-            [String(localized: "Включите «Раскладку» на странице «Модули».")]
+            [String(localized: "Включите «Раскладку» на странице «Что показывать».")]
         case .reports, .utilities, .alerts, .commandLine:
             []
         }
@@ -146,7 +146,7 @@ enum HelpTopic: String, CaseIterable, Identifiable, Sendable {
         case .menuBar:
             [HelpSection(facts: [
                 HelpFact("✦", String(localized: "Клик — панель. Красная точка: у какого-то проекта состояние «красное». ✋ с числом: сколько сессий Claude ждут ответа.")),
-                HelpFact(String(localized: "У значка"), String(localized: "% 5-часовой сессии и недели — числом, кольцом или полоской (Настройки → «Строка меню»): зелёный до 50 %, оранжевый до 80 %, красный выше."), symbol: "gauge.with.dots.needle.33percent"),
+                HelpFact(String(localized: "У значка"), String(localized: "% 5-часовой сессии и недели — числом, кольцом или полоской (Настройки → «Что показывать» → «Строка меню»): зелёный до 50 %, оранжевый до 80 %, красный выше."), symbol: "gauge.with.dots.needle.33percent"),
                 HelpFact(String(localized: "Разделители"), String(localized: "Пробел, широкий пробел, «·», «|», тонкая линия, «/», «›» и «Новая группа» — сколько угодно раз. Видны, только когда с обеих сторон есть что показать."), symbol: "poweron"),
                 HelpFact(String(localized: "Капсулы по группам"), String(localized: "Элементы между «Новыми группами» рисуются на общей скруглённой подложке."), symbol: "capsule"),
                 HelpFact(String(localized: "У каждого профиля своя"), String(localized: "Переключили профиль — сменилась и строка меню."), symbol: "square.stack.3d.up"),
@@ -270,8 +270,8 @@ enum HelpTopic: String, CaseIterable, Identifiable, Sendable {
         switch self {
         case .start: .general
         case .menuBar: .menuBar
-        case .panel: .panel
-        case .modules: .modules
+        case .panel: .show
+        case .modules: .show
         case .limits: .module(.limits)
         case .sessions: .module(.sessions)
         case .services: .service(.claude)
@@ -280,7 +280,7 @@ enum HelpTopic: String, CaseIterable, Identifiable, Sendable {
         case .reports: .module(.reports)
         case .notch: .module(.notch)
         case .layout: .module(.layout)
-        case .utilities: .modules
+        case .utilities: .show
         case .alerts: .general
         case .commandLine: nil
         }

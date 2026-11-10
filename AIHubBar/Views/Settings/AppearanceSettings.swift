@@ -34,7 +34,7 @@ struct AppearanceSettings: View {
 
             Section {
             } footer: {
-                Footnote(text: String(localized: "Какие блоки показывать и в каком порядке — на странице «Панель»."))
+                Footnote(text: String(localized: "Какие блоки показывать и в каком порядке — на странице «Что показывать»."))
             }
 
             Section {

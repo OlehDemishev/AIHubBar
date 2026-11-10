@@ -769,78 +769,78 @@
         }
       }
     },
-    "% 5-часовой сессии и недели — числом, кольцом или полоской (Настройки → «Строка меню»): зелёный до 50 %, оранжевый до 80 %, красный выше.": {
+    "% 5-часовой сессии и недели — числом, кольцом или полоской (Настройки → «Что показывать» → «Строка меню»): зелёный до 50 %, оранжевый до 80 %, красный выше.": {
       "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "نسبة استخدام جلسة الساعات الخمس والأسبوع — كرقم أو حلقة أو شريط (الإعدادات ← «شريط القائمة»): أخضر تحت 50 %، برتقالي تحت 80 %، أحمر فوق ذلك."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Anteil der 5-Stunden-Sitzung und der Woche — als Zahl, Ring oder Balken (Einstellungen → „Menüleiste“): grün unter 50 %, orange unter 80 %, rot darüber."
-          }
-        },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Share of the 5-hour session and the week used — as a number, ring or bar (Settings → “Menu Bar”): green below 50%, orange below 80%, red above."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Porcentaje usado de la sesión de 5 horas y de la semana — como número, anillo o barra (Ajustes → «Barra de menús»): verde por debajo del 50 %, naranja por debajo del 80 %, rojo por encima."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Pourcentage utilisé de la session de 5 heures et de la semaine — en nombre, anneau ou barre (Réglages → «Barre des menus») : vert sous 50 %, orange sous 80 %, rouge au-dessus."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Pemakaian sesi 5 jam dan minggu — sebagai angka, cincin, atau bilah (Pengaturan → «Bar Menu»): hijau di bawah 50 %, oranye di bawah 80 %, merah di atasnya."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Quota della sessione di 5 ore e della settimana — come numero, anello o barra (Impostazioni → «Barra dei menu»): verde sotto il 50 %, arancione sotto l'80 %, rosso sopra."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "5 時間セッションと週の使用率 — 数値、リング、バーで表示 (設定 → 「メニューバー」): 50 % 未満は緑、80 % 未満はオレンジ、それ以上は赤。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "5시간 세션과 주간 사용량 — 숫자, 링, 막대로 표시 (설정 → «메뉴 막대»): 50 % 미만은 초록, 80 % 미만은 주황, 그 이상은 빨강."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Wykorzystanie 5-godzinnej sesji i tygodnia — jako liczba, pierścień lub pasek (Ustawienia → „Pasek menu”): zielony poniżej 50 %, pomarańczowy poniżej 80 %, czerwony powyżej."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Percentual da sessão de 5 horas e da semana — como número, anel ou barra (Ajustes → «Barra de menus»): verde abaixo de 50 %, laranja abaixo de 80 %, vermelho acima."
+            "value": "Share of the 5-hour session and the week used — as a number, ring or bar (Settings → “What to Show” → “Menu Bar”): green below 50%, orange below 80%, red above."
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Використання 5-годинної сесії та тижня — числом, кільцем або смужкою (Налаштування → «Рядок меню»): зелений до 50 %, помаранчевий до 80 %, червоний вище."
+            "value": "Використання 5-годинної сесії та тижня — числом, кільцем або смужкою (Налаштування → «Що показувати» → «Рядок меню»): зелений до 50 %, помаранчевий до 80 %, червоний вище."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anteil der 5-Stunden-Sitzung und der Woche — als Zahl, Ring oder Balken (Einstellungen → „Was anzeigen“ → „Menüleiste“): grün unter 50 %, orange unter 80 %, rot darüber."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pourcentage utilisé de la session de 5 heures et de la semaine — en nombre, anneau ou barre (Réglages → «Quoi afficher» → «Barre des menus») : vert sous 50 %, orange sous 80 %, rouge au-dessus."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Porcentaje usado de la sesión de 5 horas y de la semana — como número, anillo o barra (Ajustes → «Qué mostrar» → «Barra de menús»): verde por debajo del 50 %, naranja por debajo del 80 %, rojo por encima."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quota della sessione di 5 ore e della settimana — come numero, anello o barra (Impostazioni → «Cosa mostrare» → «Barra dei menu»): verde sotto il 50 %, arancione sotto l'80 %, rosso sopra."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Percentual da sessão de 5 horas e da semana — como número, anel ou barra (Ajustes → «O que mostrar» → «Barra de menus»): verde abaixo de 50 %, laranja abaixo de 80 %, vermelho acima."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wykorzystanie 5-godzinnej sesji i tygodnia — jako liczba, pierścień lub pasek (Ustawienia → „Co pokazywać” → „Pasek menu”): zielony poniżej 50 %, pomarańczowy poniżej 80 %, czerwony powyżej."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "5 時間セッションと週の使用率 — 数値、リング、バーで表示 (設定 → 「表示する内容」 → 「メニューバー」): 50 % 未満は緑、80 % 未満はオレンジ、それ以上は赤。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "5시간 세션과 주간 사용량 — 숫자, 링, 막대로 표시 (설정 → «표시할 항목» → «메뉴 막대»): 50 % 미만은 초록, 80 % 미만은 주황, 그 이상은 빨강."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "نسبة استخدام جلسة الساعات الخمس والأسبوع — كرقم أو حلقة أو شريط (الإعدادات ← «ما يُعرض» ← «شريط القائمة»): أخضر تحت 50 %، برتقالي تحت 80 %، أحمر فوق ذلك."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pemakaian sesi 5 jam dan minggu — sebagai angka, cincin, atau bilah (Pengaturan → «Yang Ditampilkan» → «Bar Menu»): hijau di bawah 50 %, oranye di bawah 80 %, merah di atasnya."
           }
         }
       }
@@ -12795,78 +12795,78 @@
         }
       }
     },
-    "«Минимум» — значок и события, «Лимиты» — ещё проценты сессии и недели, «Всё» — всё, что есть. Отдельные элементы — в Настройках → «Строка меню».": {
+    "«Минимум» — значок и события, «Лимиты» — ещё проценты сессии и недели, «Всё» — всё, что есть. Отдельные элементы — в Настройках → «Что показывать» → «Строка меню».": {
       "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "«الحد الأدنى» — الأيقونة والأحداث، «الحدود» — مع نسب الجلسة والأسبوع، «الكل» — كل ما هو متاح. العناصر المفردة — من الإعدادات ← «شريط القائمة»."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "„Minimum“ — Symbol und Ereignisse, „Limits“ — dazu Prozente von Sitzung und Woche, „Alles“ — alles, was es gibt. Einzelne Elemente — unter Einstellungen → „Menüleiste“."
-          }
-        },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "“Minimum” — the icon and events, “Limits” — plus session and week percentages, “Everything” — all there is. Single elements — in Settings → “Menu Bar”."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "«Mínimo» — el icono y los eventos, «Límites» — además los porcentajes de sesión y semana, «Todo» — todo lo que hay. Los elementos sueltos, en Ajustes → «Barra de menús»."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "«Minimum» — l'icône et les événements, «Limites» — plus les pourcentages de session et de semaine, «Tout» — tout ce qui existe. Les éléments un par un, dans Réglages → «Barre des menus»."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "«Minimum» — ikon dan peristiwa, «Batas» — ditambah persentase sesi dan minggu, «Semua» — semua yang ada. Elemen satu per satu — di Pengaturan → «Bar Menu»."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "«Minimo» — l'icona e gli eventi, «Limiti» — più le percentuali di sessione e settimana, «Tutto» — tutto quello che c'è. I singoli elementi — in Impostazioni → «Barra dei menu»."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "「最小」 — アイコンとイベント、「制限」 — セッションと週の使用率も、「すべて」 — あるものすべて。個別の要素は設定 → 「メニューバー」で。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "«최소» — 아이콘과 이벤트, «한도» — 세션과 주간 사용률 추가, «전체» — 있는 것 모두. 개별 요소는 설정 → «메뉴 막대»에서."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "„Minimum” — ikona i zdarzenia, „Limity” — do tego procenty sesji i tygodnia, „Wszystko” — wszystko, co jest. Pojedyncze elementy — w Ustawieniach → „Pasek menu”."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "«Mínimo» — o ícone e os eventos, «Limites» — mais os percentuais de sessão e semana, «Tudo» — tudo o que há. Elementos avulsos, em Ajustes → «Barra de menus»."
+            "value": "“Minimum” — the icon and events, “Limits” — plus session and week percentages, “Everything” — all there is. Single elements — in Settings → “What to Show” → “Menu Bar”."
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "«Мінімум» — значок і події, «Ліміти» — ще відсотки сесії й тижня, «Усе» — усе, що є. Окремі елементи — в Налаштуваннях → «Рядок меню»."
+            "value": "«Мінімум» — значок і події, «Ліміти» — ще відсотки сесії й тижня, «Усе» — усе, що є. Окремі елементи — в Налаштуваннях → «Що показувати» → «Рядок меню»."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "„Minimum“ — Symbol und Ereignisse, „Limits“ — dazu Prozente von Sitzung und Woche, „Alles“ — alles, was es gibt. Einzelne Elemente — unter Einstellungen → „Was anzeigen“ → „Menüleiste“."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«Minimum» — l'icône et les événements, «Limites» — plus les pourcentages de session et de semaine, «Tout» — tout ce qui existe. Les éléments un par un, dans Réglages → «Quoi afficher» → «Barre des menus»."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«Mínimo» — el icono y los eventos, «Límites» — además los porcentajes de sesión y semana, «Todo» — todo lo que hay. Los elementos sueltos, en Ajustes → «Qué mostrar» → «Barra de menús»."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«Minimo» — l'icona e gli eventi, «Limiti» — più le percentuali di sessione e settimana, «Tutto» — tutto quello che c'è. I singoli elementi — in Impostazioni → «Cosa mostrare» → «Barra dei menu»."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«Mínimo» — o ícone e os eventos, «Limites» — mais os percentuais de sessão e semana, «Tudo» — tudo o que há. Elementos avulsos, em Ajustes → «O que mostrar» → «Barra de menus»."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "„Minimum” — ikona i zdarzenia, „Limity” — do tego procenty sesji i tygodnia, „Wszystko” — wszystko, co jest. Pojedyncze elementy — w Ustawieniach → „Co pokazywać” → „Pasek menu”."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「最小」 — アイコンとイベント、「制限」 — セッションと週の使用率も、「すべて」 — あるものすべて。個別の要素は設定 → 「表示する内容」 → 「メニューバー」で。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«최소» — 아이콘과 이벤트, «한도» — 세션과 주간 사용률 추가, «전체» — 있는 것 모두. 개별 요소는 설정 → «표시할 항목» → «메뉴 막대»에서."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«الحد الأدنى» — الأيقونة والأحداث، «الحدود» — مع نسب الجلسة والأسبوع، «الكل» — كل ما هو متاح. العناصر المفردة — من الإعدادات ← «ما يُعرض» ← «شريط القائمة»."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«Minimum» — ikon dan peristiwa, «Batas» — ditambah persentase sesi dan minggu, «Semua» — semua yang ada. Elemen satu per satu — di Pengaturan → «Yang Ditampilkan» → «Bar Menu»."
           }
         }
       }
@@ -15379,6 +15379,82 @@
         }
       }
     },
+    "Блок в панели профиля «%@»": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The block in the panel of the “%@” profile"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Блок у панелі профілю «%@»"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Block im Panel des Profils „%@“"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bloc dans le panneau du profil « %@ »"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bloque en el panel del perfil «%@»"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blocco nel pannello del profilo «%@»"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bloco no painel do perfil «%@»"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blok w panelu profilu „%@”"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "プロファイル「%@」のパネルのブロック"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "프로필 «%@» 패널의 블록"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "القسم في لوحة ملف التعريف «%@»"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blok di panel profil «%@»"
+          }
+        }
+      }
+    },
     "Блок в панели текущего профиля «%@»": {
       "localizations": {
         "ar": {
@@ -15607,6 +15683,82 @@
         }
       }
     },
+    "Блоки панели": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Panel Blocks"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Блоки панелі"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Panel-Blöcke"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blocs du panneau"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bloques del panel"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blocchi del pannello"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blocos do painel"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bloki panelu"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "パネルのブロック"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "패널 블록"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "أقسام اللوحة"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blok panel"
+          }
+        }
+      }
+    },
     "Блоки панели этого профиля сверху вниз. «Ближайшее», «Проекты» и «Отчёты» появляются, когда у профиля включён календарь, есть источник проектов или команды _daily-report.": {
       "localizations": {
         "ar": {
@@ -15679,6 +15831,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Блоки панелі цього профілю згори донизу. «Найближче», «Проєкти» і «Звіти» з’являються, коли в профілі ввімкнено календар, є джерело проєктів або команди _daily-report."
+          }
+        }
+      }
+    },
+    "Блоки панели, строка меню и их порядок": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Panel blocks, the menu bar and their order"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Блоки панелі, рядок меню та їхній порядок"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Panel-Blöcke, Menüleiste und ihre Reihenfolge"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blocs du panneau, barre des menus et leur ordre"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bloques del panel, barra de menús y su orden"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blocchi del pannello, barra dei menu e il loro ordine"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blocos do painel, barra de menus e a ordem deles"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bloki panelu, pasek menu i ich kolejność"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "パネルのブロック、メニューバーとその並び順"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "패널 블록, 메뉴 막대와 그 순서"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "أقسام اللوحة وشريط القائمة وترتيبها"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blok panel, bar menu, dan urutannya"
           }
         }
       }
@@ -17275,82 +17503,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "У worktree є незакомічені зміни."
-          }
-        }
-      }
-    },
-    "В «Строке меню» соберите, что видно рядом со значком.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "في «شريط القائمة»، اختر ما يظهر بجانب الرمز."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Stellen Sie unter „Menüleiste“ zusammen, was neben dem Symbol erscheint."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "In “Menu Bar”, pick what shows next to the icon."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "En «Barra de menús», elige qué se ve junto al icono."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dans « Barre des menus », choisissez ce qui s’affiche à côté de l’icône."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Di «Bar Menu», pilih apa yang tampil di samping ikon."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "In «Barra dei menu» scegli cosa si vede accanto all’icona."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "「メニューバー」で、アイコンの横に表示するものを選びます。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "«메뉴 막대»에서 아이콘 옆에 보일 항목을 고르세요."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "W sekcji „Pasek menu” wybierz, co widać obok ikony."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Em «Barra de menus», escolha o que aparece ao lado do ícone."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "У розділі «Рядок меню» зберіть те, що видно поруч зі значком."
           }
         }
       }
@@ -19490,236 +19642,154 @@
         }
       }
     },
-    "Включено: %lld из %lld": {
+    "Включите «Остров у чёлки» на его странице в Настройках.": {
       "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "مفعّل: %lld من %lld"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Aktiv: %lld von %lld"
-          }
-        },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "On: %lld of %lld"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Activados: %lld de %lld"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Activés : %lld sur %lld"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Aktif: %lld dari %lld"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Attivi: %lld di %lld"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "オン: %lld / %lld"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "켜짐: %lld / %lld"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Włączone: %lld z %lld"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ativados: %lld de %lld"
-          }
-        },
-        "ru": {
-          "stringUnit": {
-            "state": "new",
-            "value": "Включено: %1$lld из %2$lld"
+            "value": "Turn on “Notch Island” on its page in Settings."
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Увімкнено: %lld з %lld"
+            "value": "Увімкніть «Острів біля виїмки» на його сторінці в Налаштуваннях."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aktivieren Sie „Notch-Insel“ auf der zugehörigen Seite in den Einstellungen."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activez « Île de l’encoche » sur sa page dans Réglages."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activa «Isla del notch» en su página de Ajustes."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Attiva «Isola del notch» nella sua pagina in Impostazioni."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ative «Ilha do notch» na página dele em Ajustes."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Włącz „Wyspa przy notchu” na jej stronie w Ustawieniach."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "設定の専用ページで「ノッチアイランド」をオンにします。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "설정의 해당 페이지에서 «노치 아일랜드»를 켜세요."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "فعّل «جزيرة النتوء» في صفحتها ضمن الإعدادات."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nyalakan «Pulau notch» di halamannya di Pengaturan."
           }
         }
       }
     },
-    "Включите «Остров у чёлки» на странице «Модули».": {
+    "Включите «Раскладку» на странице «Что показывать».": {
       "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "فعّل «جزيرة النتوء» في صفحة «الوحدات»."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Aktivieren Sie „Notch-Insel“ auf der Seite „Module“."
-          }
-        },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Turn on “Notch Island” on the “Modules” page."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Activa «Isla del notch» en la página «Módulos»."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Activez « Île de l’encoche » sur la page « Modules »."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nyalakan «Pulau notch» di halaman «Modul»."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Attiva «Isola del notch» nella pagina «Moduli»."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "「モジュール」ページで「ノッチアイランド」をオンにします。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "«모듈» 페이지에서 «노치 아일랜드»를 켜세요."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Włącz „Wyspa przy notchu” na stronie „Moduły”."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ative «Ilha do notch» na página «Módulos»."
+            "value": "Turn on “Keyboard Layout” on the “What to Show” page."
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Увімкніть «Острів біля виїмки» на сторінці «Модулі»."
-          }
-        }
-      }
-    },
-    "Включите «Раскладку» на странице «Модули».": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "فعّل «تخطيط لوحة المفاتيح» في صفحة «الوحدات»."
+            "value": "Увімкніть «Розкладка» на сторінці «Що показувати»."
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Aktivieren Sie „Tastaturlayout“ auf der Seite „Module“."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Turn on “Keyboard Layout” on the “Modules” page."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Activa «Distribución del teclado» en la página «Módulos»."
+            "value": "Aktivieren Sie „Tastaturlayout“ auf der Seite „Was anzeigen“."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Activez « Disposition du clavier » sur la page « Modules »."
+            "value": "Activez « Disposition du clavier » sur la page « Quoi afficher »."
           }
         },
-        "id": {
+        "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Nyalakan «Tata letak keyboard» di halaman «Modul»."
+            "value": "Activa «Distribución del teclado» en la página «Qué mostrar»."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Attiva «Layout tastiera» nella pagina «Moduli»."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "「モジュール」ページで「キーボード配列」をオンにします。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "«모듈» 페이지에서 «키보드 배열»을 켜세요."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Włącz „Układ klawiatury” na stronie „Moduły”."
+            "value": "Attiva «Layout tastiera» nella pagina «Cosa mostrare»."
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ative «Layout do teclado» na página «Módulos»."
+            "value": "Ative «Layout do teclado» na página «O que mostrar»."
           }
         },
-        "uk": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Увімкніть «Розкладка» на сторінці «Модулі»."
+            "value": "Włącz „Układ klawiatury” na stronie „Co pokazywać”."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「表示する内容」ページで「キーボード配列」をオンにします。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«표시할 항목» 페이지에서 «키보드 배열»을 켜세요."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "فعّل «تخطيط لوحة المفاتيح» في صفحة «ما يُعرض»."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nyalakan «Tata letak keyboard» di halaman «Yang Ditampilkan»."
           }
         }
       }
@@ -19800,78 +19870,78 @@
         }
       }
     },
-    "Включите календарь в профиле — или кнопкой «Включить в профиле» на плитке «Ближайшее».": {
+    "Включите календарь в профиле — или кнопкой «Включить в профиле» в строке «Ближайшее» на странице «Что показывать».": {
       "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "فعّل التقويم في ملف التعريف — أو بزر «التفعيل في ملف التعريف» في بطاقة «القريب»."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Aktivieren Sie den Kalender im Profil — oder mit der Taste „Im Profil einschalten“ auf der Kachel „Demnächst“."
-          }
-        },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Turn on the calendar in the profile — or use the “Turn on in the profile” button on the “Upcoming” tile."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Activa el calendario en el perfil — o con el botón «Activar en el perfil» en el mosaico «Próximo»."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Activez le calendrier dans le profil — ou avec le bouton « Activer dans le profil » sur la tuile « À venir »."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nyalakan kalender di profil — atau lewat tombol «Aktifkan di profil» pada ubin «Mendatang»."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Attiva il calendario nel profilo — oppure con il pulsante «Attiva nel profilo» sul riquadro «In arrivo»."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "プロファイルでカレンダーをオンにします。「今後の予定」タイルの「プロファイルでオンにする」ボタンからもできます。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "프로필에서 캘린더를 켜세요. «다가오는 일정» 타일의 «프로필에서 켜기» 버튼으로도 됩니다."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Włącz kalendarz w profilu — albo przyciskiem „Włącz w profilu” na kafelku „Najbliższe”."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ative o calendário no perfil — ou pelo botão «Ativar no perfil» no bloco «Próximos»."
+            "value": "Turn on the calendar in the profile — or use the “Turn on in the profile” button in the “Upcoming” row on the “What to Show” page."
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Увімкніть календар у профілі — або кнопкою «Увімкнути в профілі» на плитці «Найближче»."
+            "value": "Увімкніть календар у профілі — або кнопкою «Увімкнути в профілі» у рядку «Найближче» на сторінці «Що показувати»."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aktivieren Sie den Kalender im Profil — oder mit der Taste „Im Profil einschalten“ in der Zeile „Demnächst“ auf der Seite „Was anzeigen“."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activez le calendrier dans le profil — ou avec le bouton « Activer dans le profil » dans la ligne « À venir » de la page « Quoi afficher »."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activa el calendario en el perfil — o con el botón «Activar en el perfil» en la fila «Próximo» de la página «Qué mostrar»."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Attiva il calendario nel profilo — oppure con il pulsante «Attiva nel profilo» nella riga «In arrivo» della pagina «Cosa mostrare»."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ative o calendário no perfil — ou pelo botão «Ativar no perfil» na linha «Próximos» da página «O que mostrar»."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Włącz kalendarz w profilu — albo przyciskiem „Włącz w profilu” w wierszu „Najbliższe” na stronie „Co pokazywać”."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "プロファイルでカレンダーをオンにします。「表示する内容」ページの「今後の予定」の行にある「プロファイルでオンにする」ボタンからもできます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "프로필에서 캘린더를 켜세요. «표시할 항목» 페이지의 «다가오는 일정» 행에 있는 «프로필에서 켜기» 버튼으로도 됩니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "فعّل التقويم في ملف التعريف — أو بزر «التفعيل في ملف التعريف» في صف «القريب» ضمن صفحة «ما يُعرض»."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nyalakan kalender di profil — atau lewat tombol «Aktifkan di profil» di baris «Mendatang» pada halaman «Yang Ditampilkan»."
           }
         }
       }
@@ -25425,6 +25495,82 @@
         }
       }
     },
+    "Где ещё показывать": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Where Else to Show"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Де ще показувати"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wo noch anzeigen"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Où afficher aussi"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dónde más mostrar"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dove altro mostrare"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Onde mais mostrar"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gdzie jeszcze pokazywać"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ほかの表示先"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "그 밖의 표시 위치"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "أماكن عرض أخرى"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tampilkan juga di"
+          }
+        }
+      }
+    },
     "Где запускать Claude": {
       "localizations": {
         "ar": {
@@ -27093,6 +27239,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Готово: %@"
+          }
+        }
+      }
+    },
+    "Готовый набор": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ready-Made Set"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Готовий набір"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fertiges Set"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ensemble prêt"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Conjunto listo"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Set pronto"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Conjunto pronto"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gotowy zestaw"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "既製セット"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "기본 세트"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مجموعة جاهزة"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Set siap pakai"
           }
         }
       }
@@ -29677,82 +29899,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Додати команду"
-          }
-        }
-      }
-    },
-    "Добавить модуль": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "إضافة وحدة"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Modul hinzufügen"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Add Module"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Añadir módulo"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ajouter un module"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tambah modul"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Aggiungi modulo"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "モジュールを追加"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "모듈 추가"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dodaj moduł"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Adicionar módulo"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Додати модуль"
           }
         }
       }
@@ -37363,82 +37509,6 @@
         }
       }
     },
-    "Здесь только включённые модули. Остальные — на странице «Модули».": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "تظهر هنا الوحدات المفعّلة فقط. البقية في صفحة «الوحدات»."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hier stehen nur aktive Module. Die übrigen: Seite „Module“."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Only modules that are on are here. The rest are on the “Modules” page."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Aquí solo aparecen los módulos activos. El resto: página «Módulos»."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Seuls les modules actifs sont ici. Les autres : page « Modules »."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Di sini hanya modul yang aktif. Lainnya: halaman “Modul”."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Qui ci sono solo i moduli attivi. Gli altri: pagina «Moduli»."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ここにはオンのモジュールだけが表示されます。その他は「モジュール」ページにあります。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "켜진 모듈만 여기에 표시됩니다. 나머지는 ‘모듈’ 페이지에 있습니다."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tu są tylko włączone moduły. Pozostałe: strona „Moduły”."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Aqui ficam só os módulos ativos. Os demais: página “Módulos”."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Тут лише ввімкнені модулі. Решта — на сторінці «Модулі»."
-          }
-        }
-      }
-    },
     "Значки": {
       "localizations": {
         "ar": {
@@ -38351,78 +38421,78 @@
         }
       }
     },
-    "Изменить в «Панели»…": {
+    "Изменить в «Что показывать»…": {
       "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "التعديل في «اللوحة»…"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "In „Panel“ bearbeiten…"
-          }
-        },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Edit in “Panel”…"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Editar en «Panel»…"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Modifier dans « Panneau »…"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ubah di «Panel»…"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Modifica in «Pannello»…"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "「パネル」で編集…"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "«패널»에서 편집…"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Edytuj w „Panelu”…"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Editar em «Painel»…"
+            "value": "Edit in “What to Show”…"
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Змінити в «Панелі»…"
+            "value": "Змінити в «Що показувати»…"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In „Was anzeigen“ bearbeiten…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modifier dans « Quoi afficher »…"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Editar en «Qué mostrar»…"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modifica in «Cosa mostrare»…"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Editar em «O que mostrar»…"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Edytuj w „Co pokazywać”…"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「表示する内容」で編集…"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«표시할 항목»에서 편집…"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "التعديل في «ما يُعرض»…"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ubah di «Yang Ditampilkan»…"
           }
         }
       }
@@ -40555,154 +40625,78 @@
         }
       }
     },
-    "Какие блоки показывать и в каком порядке": {
+    "Какие блоки показывать и в каком порядке — на странице «Что показывать».": {
       "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "الكتل المعروضة وترتيبها"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Welche Blöcke und in welcher Reihenfolge"
-          }
-        },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Which blocks to show and in what order"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Qué bloques mostrar y en qué orden"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Quels blocs afficher et dans quel ordre"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Blok yang ditampilkan dan urutannya"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Quali blocchi mostrare e in che ordine"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "表示するブロックとその順序"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "표시할 블록과 순서"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Które bloki pokazywać i w jakiej kolejności"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Quais blocos mostrar e em que ordem"
+            "value": "Which blocks show and in what order is on the “What to Show” page."
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Які блоки показувати і в якому порядку"
-          }
-        }
-      }
-    },
-    "Какие блоки показывать и в каком порядке — на странице «Панель».": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "الكتل وترتيبها: صفحة «اللوحة»."
+            "value": "Які блоки показувати й у якому порядку — на сторінці «Що показувати»."
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Blöcke und ihre Reihenfolge: Seite „Panel“."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Which blocks show and in what order is on the “Panel” page."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bloques y su orden: página «Panel»."
+            "value": "Blöcke und ihre Reihenfolge: Seite „Was anzeigen“."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Blocs et leur ordre : page « Panneau »."
+            "value": "Blocs et leur ordre : page « Quoi afficher »."
           }
         },
-        "id": {
+        "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Blok dan urutannya: halaman “Panel”."
+            "value": "Bloques y su orden: página «Qué mostrar»."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Blocchi e ordine: pagina «Pannello»."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ブロックとその順序:「パネル」ページ。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "블록과 순서: ‘패널’ 페이지."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bloki i ich kolejność: strona „Panel”."
+            "value": "Blocchi e ordine: pagina «Cosa mostrare»."
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Blocos e ordem: página “Painel”."
+            "value": "Blocos e ordem: página “O que mostrar”."
           }
         },
-        "uk": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Які блоки показувати й у якому порядку — на сторінці «Панель»."
+            "value": "Bloki i ich kolejność: strona „Co pokazywać”."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ブロックとその順序:「表示する内容」ページ。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "블록과 순서: ‘표시할 항목’ 페이지."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الكتل وترتيبها: صفحة «ما يُعرض»."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blok dan urutannya: halaman “Yang Ditampilkan”."
           }
         }
       }
@@ -41923,78 +41917,78 @@
         }
       }
     },
-    "Клик по плитке — страница модуля: выключатель, «Где показывать» и все его настройки.": {
+    "Клик по названию модуля — его страница: выключатель и все его настройки.": {
       "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "النقر على البطاقة يفتح صفحة الوحدة: مفتاح التشغيل و«مكان العرض» وكل إعداداتها."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ein Klick auf eine Kachel öffnet die Modulseite: Schalter, „Wo anzeigen“ und alle Einstellungen."
-          }
-        },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Clicking a tile opens the module’s page: the on/off switch, “Where to show” and all its settings."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Un clic en un mosaico abre la página del módulo: el interruptor, «Dónde mostrar» y todos sus ajustes."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Un clic sur une tuile ouvre la page du module : interrupteur, « Où afficher » et tous ses réglages."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Klik ubin untuk membuka halaman modul: sakelar, «Tampilkan di», dan semua pengaturannya."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Un clic su un riquadro apre la pagina del modulo: interruttore, «Dove mostrare» e tutte le sue impostazioni."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "タイルをクリックするとモジュールのページが開きます: オン/オフスイッチ、「表示場所」、すべての設定。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "타일을 클릭하면 모듈 페이지가 열립니다: 켜기/끄기 스위치, «표시 위치», 그리고 모든 설정."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Kliknięcie kafelka otwiera stronę modułu: przełącznik, „Gdzie pokazywać” i wszystkie jego ustawienia."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Um clique em um bloco abre a página do módulo: a chave liga/desliga, «Onde mostrar» e todos os seus ajustes."
+            "value": "Click a module’s name for its page: the switch and all of its settings."
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Клік на плитку — сторінка модуля: перемикач, «Де показувати» й усі його налаштування."
+            "value": "Клацніть назву модуля — відкриється його сторінка: вимикач і всі його налаштування."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ein Klick auf den Namen des Moduls öffnet seine Seite: Schalter und alle Einstellungen."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cliquez sur le nom d’un module pour ouvrir sa page : l’interrupteur et tous ses réglages."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Haz clic en el nombre del módulo para abrir su página: el interruptor y todos sus ajustes."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fai clic sul nome del modulo per aprire la sua pagina: l’interruttore e tutte le impostazioni."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Clique no nome do módulo para abrir a página dele: a chave e todos os ajustes."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kliknij nazwę modułu, aby otworzyć jego stronę: przełącznik i wszystkie ustawienia."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "モジュール名をクリックすると、そのページが開きます。スイッチとすべての設定があります。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "모듈 이름을 클릭하면 해당 페이지가 열립니다. 스위치와 모든 설정이 있습니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "انقر على اسم الوحدة لفتح صفحتها: المفتاح وكل إعداداتها."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Klik nama modul untuk membuka halamannya: sakelar dan semua pengaturannya."
           }
         }
       }
@@ -44127,78 +44121,78 @@
         }
       }
     },
-    "Команд нет — добавьте в Настройках → «Модули».": {
+    "Команд нет — добавьте в Настройках → «Что показывать».": {
       "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "لا توجد أوامر — أضفها من الإعدادات ← «الوحدات»."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Keine Befehle — unter Einstellungen → „Module“ hinzufügen."
-          }
-        },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "No commands — add some in Settings → «Modules»."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "No hay comandos: añádelos en Ajustes → «Módulos»."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Aucune commande — ajoutez-en dans Réglages → « Modules »."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Belum ada perintah — tambahkan di Pengaturan → «Modul»."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nessun comando — aggiungili in Impostazioni → «Moduli»."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "コマンドがありません — 設定 →「モジュール」で追加してください。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "명령이 없습니다 — 설정 → «모듈»에서 추가하세요."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Brak poleceń — dodaj je w Ustawieniach → «Moduły»."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sem comandos — adicione em Ajustes → «Módulos»."
+            "value": "No commands — add some in Settings → «What to Show»."
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Команд немає — додайте в Налаштуваннях → «Модулі»."
+            "value": "Команд немає — додайте в Налаштуваннях → «Що показувати»."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keine Befehle — unter Einstellungen → „Was anzeigen“ hinzufügen."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucune commande — ajoutez-en dans Réglages → « Quoi afficher »."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No hay comandos: añádelos en Ajustes → «Qué mostrar»."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nessun comando — aggiungili in Impostazioni → «Cosa mostrare»."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sem comandos — adicione em Ajustes → «O que mostrar»."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Brak poleceń — dodaj je w Ustawieniach → «Co pokazywać»."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "コマンドがありません — 設定 →「表示する内容」で追加してください。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "명령이 없습니다 — 설정 → «표시할 항목»에서 추가하세요."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لا توجد أوامر — أضفها من الإعدادات ← «ما يُعرض»."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Belum ada perintah — tambahkan di Pengaturan → «Yang Ditampilkan»."
           }
         }
       }
@@ -44431,78 +44425,78 @@
         }
       }
     },
-    "Команда пустая — заполните её в Настройках → «Модули».": {
+    "Команда пустая — заполните её в Настройках → «Что показывать».": {
       "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "الأمر فارغ — املأه من الإعدادات ← «الوحدات»."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Der Befehl ist leer — unter Einstellungen → „Module“ ausfüllen."
-          }
-        },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "The command is empty — fill it in under Settings → «Modules»."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "El comando está vacío: complétalo en Ajustes → «Módulos»."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "La commande est vide — complétez-la dans Réglages → « Modules »."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Perintah kosong — isi di Pengaturan → «Modul»."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Il comando è vuoto — compilalo in Impostazioni → «Moduli»."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "コマンドが空です — 設定 →「モジュール」で入力してください。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "명령이 비어 있습니다 — 설정 → «모듈»에서 채우세요."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Polecenie jest puste — uzupełnij je w Ustawieniach → «Moduły»."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "O comando está vazio — preencha em Ajustes → «Módulos»."
+            "value": "The command is empty — fill it in under Settings → «What to Show»."
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Команда порожня — заповніть її в Налаштуваннях → «Модулі»."
+            "value": "Команда порожня — заповніть її в Налаштуваннях → «Що показувати»."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der Befehl ist leer — unter Einstellungen → „Was anzeigen“ ausfüllen."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La commande est vide — complétez-la dans Réglages → « Quoi afficher »."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El comando está vacío: complétalo en Ajustes → «Qué mostrar»."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il comando è vuoto — compilalo in Impostazioni → «Cosa mostrare»."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O comando está vazio — preencha em Ajustes → «O que mostrar»."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Polecenie jest puste — uzupełnij je w Ustawieniach → «Co pokazywać»."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "コマンドが空です — 設定 →「表示する内容」で入力してください。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "명령이 비어 있습니다 — 설정 → «표시할 항목»에서 채우세요."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الأمر فارغ — املأه من الإعدادات ← «ما يُعرض»."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Perintah kosong — isi di Pengaturan → «Yang Ditampilkan»."
           }
         }
       }
@@ -50365,78 +50359,78 @@
         }
       }
     },
-    "На странице «Модули» оставьте только нужное — остальное выключится вместе с фоновой работой.": {
+    "На странице «Что показывать» оставьте только нужное — остальное выключится вместе с фоновой работой.": {
       "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "في صفحة «الوحدات»، أبقِ ما تحتاجه فقط — ويتوقف الباقي مع عمله في الخلفية."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Behalten Sie auf der Seite „Module“ nur, was Sie brauchen — der Rest wird samt Hintergrundarbeit ausgeschaltet."
-          }
-        },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "On the “Modules” page, keep only what you need — the rest turns off along with its background work."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "En la página «Módulos», deja solo lo que necesites — el resto se apaga junto con su trabajo en segundo plano."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sur la page « Modules », ne gardez que l’utile — le reste se désactive, travail en arrière-plan compris."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Di halaman «Modul», sisakan yang diperlukan saja — sisanya mati bersama pekerjaan latar belakangnya."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nella pagina «Moduli» tieni solo ciò che ti serve — il resto si spegne insieme al lavoro in background."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "「モジュール」ページで必要なものだけを残します。残りはバックグラウンドの処理ごとオフになります。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "«모듈» 페이지에서 필요한 것만 남기세요. 나머지는 백그라운드 작업과 함께 꺼집니다."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Na stronie „Moduły” zostaw tylko to, czego potrzebujesz — reszta wyłączy się razem z pracą w tle."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Na página «Módulos», deixe só o que precisa — o resto é desligado junto com o trabalho em segundo plano."
+            "value": "On the “What to Show” page, keep only what you need — the rest turns off along with its background work."
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "На сторінці «Модулі» залиште лише потрібне — решта вимкнеться разом із фоновою роботою."
+            "value": "На сторінці «Що показувати» залиште лише потрібне — решта вимкнеться разом із фоновою роботою."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Behalten Sie auf der Seite „Was anzeigen“ nur, was Sie brauchen — der Rest wird samt Hintergrundarbeit ausgeschaltet."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sur la page « Quoi afficher », ne gardez que l’utile — le reste se désactive, travail en arrière-plan compris."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En la página «Qué mostrar», deja solo lo que necesites — el resto se apaga junto con su trabajo en segundo plano."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nella pagina «Cosa mostrare» tieni solo ciò che ti serve — il resto si spegne insieme al lavoro in background."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Na página «O que mostrar», deixe só o que precisa — o resto é desligado junto com o trabalho em segundo plano."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Na stronie „Co pokazywać” zostaw tylko to, czego potrzebujesz — reszta wyłączy się razem z pracą w tle."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「表示する内容」ページで必要なものだけを残します。残りはバックグラウンドの処理ごとオフになります。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«표시할 항목» 페이지에서 필요한 것만 남기세요. 나머지는 백그라운드 작업과 함께 꺼집니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "في صفحة «ما يُعرض»، أبقِ ما تحتاجه فقط — ويتوقف الباقي مع عمله في الخلفية."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Di halaman «Yang Ditampilkan», sisakan yang diperlukan saja — sisanya mati bersama pekerjaan latar belakangnya."
           }
         }
       }
@@ -51577,6 +51571,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Назад"
+          }
+        }
+      }
+    },
+    "Назад: %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Back: %@"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Назад: %@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zurück: %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Retour : %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Atrás: %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Indietro: %@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Voltar: %@"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wstecz: %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "戻る: %@"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "뒤로: %@"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "رجوع: %@"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kembali: %@"
           }
         }
       }
@@ -53253,82 +53323,6 @@
         }
       }
     },
-    "Настройки → «Модули»: включите набор («Только AI», «Утилиты Mac», «Всё») или отдельные плитки.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "الإعدادات ← «الوحدات»: فعّل مجموعة («الذكاء الاصطناعي فقط» أو «أدوات Mac» أو «الكل») أو بطاقات منفردة."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Einstellungen → „Module“: Aktivieren Sie ein Set („Nur KI“, „Mac-Werkzeuge“, „Alles“) oder einzelne Kacheln."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Settings → “Modules”: turn on a set (“AI only”, “Mac utilities”, “Everything”) or single tiles."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ajustes → «Módulos»: activa un conjunto («Solo IA», «Utilidades del Mac», «Todo») o mosaicos sueltos."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Réglages → « Modules » : activez un ensemble (« IA uniquement », « Utilitaires Mac », « Tout ») ou des tuiles une par une."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Pengaturan → «Modul»: nyalakan satu set («Hanya AI», «Utilitas Mac», «Semua») atau ubin satu per satu."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Impostazioni → «Moduli»: attiva un set («Solo IA», «Utility per Mac», «Tutto») o singoli riquadri."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "設定 → 「モジュール」: セット (「AIのみ」、「Macユーティリティ」、「すべて」) か個別のタイルをオンにします。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "설정 → «모듈»: 세트(«AI만», «Mac 유틸리티», «전체») 또는 개별 타일을 켜세요."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ustawienia → „Moduły”: włącz zestaw („Tylko AI”, „Narzędzia dla Maca”, „Wszystko”) albo pojedyncze kafelki."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ajustes → «Módulos»: ative um conjunto («Só IA», «Utilitários do Mac», «Tudo») ou blocos individuais."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Налаштування → «Модулі»: увімкніть набір («Лише AI», «Утиліти Mac», «Усе») або окремі плитки."
-          }
-        }
-      }
-    },
     "Настройки → «Профили» → «+» → «Помощник…»: профиль по шагам — шаблон, папка, этапы, метрики, календарь, сервис AI, команды, права, блоки панели, строка меню, название. Справа — как это будет выглядеть.": {
       "localizations": {
         "ar": {
@@ -53781,6 +53775,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Налаштування → «Сервіси AI»: зелена крапка — сервіс знайдено або налаштовано."
+          }
+        }
+      }
+    },
+    "Настройки → «Что показывать»: у каждого модуля два выключателя — блок в панели и элементы в строке меню. «Готовый набор» включает сразу несколько модулей.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Settings → “What to Show”: each module has two switches — its block in the panel and its elements in the menu bar. “Ready-Made Set” turns on several modules at once."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Налаштування → «Що показувати»: у кожного модуля два вимикачі — блок у панелі та елементи в рядку меню. «Готовий набір» вмикає одразу кілька модулів."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Einstellungen → „Was anzeigen“: Jedes Modul hat zwei Schalter — seinen Block im Panel und seine Elemente in der Menüleiste. „Fertiges Set“ schaltet mehrere Module auf einmal ein."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Réglages → « Quoi afficher » : chaque module a deux interrupteurs — son bloc dans le panneau et ses éléments dans la barre des menus. « Ensemble prêt » active plusieurs modules d’un coup."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajustes → «Qué mostrar»: cada módulo tiene dos interruptores — su bloque en el panel y sus elementos en la barra de menús. «Conjunto listo» activa varios módulos a la vez."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impostazioni → «Cosa mostrare»: ogni modulo ha due interruttori — il blocco nel pannello e gli elementi nella barra dei menu. «Set pronto» attiva più moduli in una volta."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajustes → «O que mostrar»: cada módulo tem duas chaves — o bloco no painel e os elementos na barra de menus. «Conjunto pronto» ativa vários módulos de uma vez."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ustawienia → „Co pokazywać”: każdy moduł ma dwa przełączniki — blok w panelu i elementy w pasku menu. „Gotowy zestaw” włącza kilka modułów naraz."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "設定 → 「表示する内容」: 各モジュールにスイッチが2つあります。パネルのブロックとメニューバーの要素です。「既製セット」は複数のモジュールをまとめてオンにします。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "설정 → «표시할 항목»: 모듈마다 스위치가 두 개 있습니다. 패널의 블록과 메뉴 막대의 요소입니다. «기본 세트»는 여러 모듈을 한 번에 켭니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الإعدادات ← «ما يُعرض»: لكل وحدة مفتاحان — قسمها في اللوحة وعناصرها في شريط القائمة. «مجموعة جاهزة» تفعّل عدة وحدات دفعة واحدة."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pengaturan → «Yang Ditampilkan»: setiap modul punya dua sakelar — bloknya di panel dan elemennya di bar menu. «Set siap pakai» menyalakan beberapa modul sekaligus."
           }
         }
       }
@@ -58745,82 +58815,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Немає ключа API — Налаштування → «Сервіси AI»"
-          }
-        }
-      }
-    },
-    "Нет профиля": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "لا يوجد ملف تعريف"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Kein Profil"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "No profile"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sin perfil"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Aucun profil"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tidak ada profil"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nessun profilo"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "プロファイルがありません"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "프로필 없음"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Brak profilu"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nenhum perfil"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Немає профілю"
           }
         }
       }
@@ -64304,6 +64298,82 @@
         }
       }
     },
+    "Остальное": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Everything Else"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Решта"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alles andere"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le reste"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El resto"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il resto"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O restante"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pozostałe"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "その他"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "그 밖의 항목"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الباقي"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lainnya"
+          }
+        }
+      }
+    },
     "Остальное — модули: включите только нужное": {
       "localizations": {
         "ar": {
@@ -66736,154 +66806,154 @@
         }
       }
     },
-    "Откройте Настройки → «Панель».": {
+    "Откройте Настройки → «Что показывать» → «Строка меню».": {
       "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "افتح الإعدادات ← «اللوحة»."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Öffnen Sie Einstellungen → „Panel“."
-          }
-        },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Open Settings → “Panel”."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Abre Ajustes → «Panel»."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ouvrez Réglages → « Panneau »."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Buka Pengaturan → «Panel»."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Apri Impostazioni → «Pannello»."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "設定 → 「パネル」を開きます。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "설정 → «패널»을 여세요."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Otwórz Ustawienia → „Panel”."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Abra Ajustes → «Painel»."
+            "value": "Open Settings → “What to Show” → “Menu Bar”."
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Відкрийте Налаштування → «Панель»."
+            "value": "Відкрийте Налаштування → «Що показувати» → «Рядок меню»."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Öffnen Sie Einstellungen → „Was anzeigen“ → „Menüleiste“."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ouvrez Réglages → « Quoi afficher » → « Barre des menus »."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abre Ajustes → «Qué mostrar» → «Barra de menús»."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apri Impostazioni → «Cosa mostrare» → «Barra dei menu»."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abra Ajustes → «O que mostrar» → «Barra de menus»."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otwórz Ustawienia → „Co pokazywać” → „Pasek menu”."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "設定 → 「表示する内容」 → 「メニューバー」を開きます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "설정 → «표시할 항목» → «메뉴 막대»를 여세요."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "افتح الإعدادات ← «ما يُعرض» ← «شريط القائمة»."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buka Pengaturan → «Yang Ditampilkan» → «Bar Menu»."
           }
         }
       }
     },
-    "Откройте Настройки → «Строка меню».": {
+    "Откройте Настройки → «Что показывать».": {
       "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "افتح الإعدادات ← «شريط القائمة»."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Öffnen Sie Einstellungen → „Menüleiste“."
-          }
-        },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Open Settings → “Menu Bar”."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Abre Ajustes → «Barra de menús»."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ouvrez Réglages → « Barre des menus »."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Buka Pengaturan → «Bar Menu»."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Apri Impostazioni → «Barra dei menu»."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "設定 → 「メニューバー」を開きます。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "설정 → «메뉴 막대»를 여세요."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Otwórz Ustawienia → „Pasek menu”."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Abra Ajustes → «Barra de menus»."
+            "value": "Open Settings → “What to Show”."
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Відкрийте Налаштування → «Рядок меню»."
+            "value": "Відкрийте Налаштування → «Що показувати»."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Öffnen Sie Einstellungen → „Was anzeigen“."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ouvrez Réglages → « Quoi afficher »."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abre Ajustes → «Qué mostrar»."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apri Impostazioni → «Cosa mostrare»."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abra Ajustes → «O que mostrar»."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otwórz Ustawienia → „Co pokazywać”."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "設定 → 「表示する内容」を開きます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "설정 → «표시할 항목»을 여세요."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "افتح الإعدادات ← «ما يُعرض»."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buka Pengaturan → «Yang Ditampilkan»."
           }
         }
       }
@@ -72215,6 +72285,82 @@
         }
       }
     },
+    "Панель и строка меню — на странице «Что показывать».": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The panel and the menu bar are on the “What to Show” page."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Панель і рядок меню — на сторінці «Що показувати»."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Panel und Menüleiste — auf der Seite „Was anzeigen“."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le panneau et la barre des menus — sur la page « Quoi afficher »."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El panel y la barra de menús — en la página «Qué mostrar»."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pannello e barra dei menu — nella pagina «Cosa mostrare»."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Painel e barra de menus — na página «O que mostrar»."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Panel i pasek menu — na stronie „Co pokazywać”."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "パネルとメニューバーは「表示する内容」ページにあります。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "패널과 메뉴 막대는 «표시할 항목» 페이지에 있습니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اللوحة وشريط القائمة — في صفحة «ما يُعرض»."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Panel dan bar menu — di halaman «Yang Ditampilkan»."
+          }
+        }
+      }
+    },
     "Панель открывается из строки меню": {
       "localizations": {
         "ar": {
@@ -72439,82 +72585,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Панель відкривається кліком на ✦: блоки модулів поточного профілю згори донизу та пошук."
-          }
-        }
-      }
-    },
-    "Панель показывает модули профиля. Создайте профиль на странице «Профили».": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "تعرض اللوحة وحدات ملف التعريف. أنشئ ملف تعريف في صفحة «ملفات التعريف»."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Das Panel zeigt die Module eines Profils. Legen Sie unter „Profile“ ein Profil an."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "The panel shows a profile’s modules. Create a profile on the “Profiles” page."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "El panel muestra los módulos de un perfil. Crea un perfil en la página «Perfiles»."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Le panneau affiche les modules d’un profil. Créez un profil sur la page « Profils »."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Panel menampilkan modul profil. Buat profil di halaman «Profil»."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Il pannello mostra i moduli di un profilo. Crea un profilo nella pagina «Profili»."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "パネルにはプロファイルのモジュールが表示されます。「プロファイル」ページでプロファイルを作成してください。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "패널은 프로필의 모듈을 보여 줍니다. «프로필» 페이지에서 프로필을 만드세요."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Panel pokazuje moduły profilu. Utwórz profil na stronie „Profile”."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "O painel mostra os módulos de um perfil. Crie um perfil na página «Perfis»."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Панель показує модулі профілю. Створіть профіль на сторінці «Профілі»."
           }
         }
       }
@@ -79739,78 +79809,78 @@
         }
       }
     },
-    "Порядок блоков и что показывает модуль — на странице «Панель».": {
+    "Порядок блоков и что показывает модуль — на странице «Что показывать».": {
       "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ترتيب الكتل وما تعرضه الوحدة: صفحة «اللوحة»."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Reihenfolge der Blöcke und Inhalt eines Moduls: Seite „Panel“."
-          }
-        },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Block order and what a module shows are on the “Panel” page."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Orden de los bloques y qué muestra cada módulo: página «Panel»."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ordre des blocs et contenu d’un module : page « Panneau »."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Urutan blok dan isi modul: halaman “Panel”."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ordine dei blocchi e contenuto di un modulo: pagina «Pannello»."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ブロックの順序とモジュールの表示内容:「パネル」ページ。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "블록 순서와 모듈 표시 내용: ‘패널’ 페이지."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Kolejność bloków i zawartość modułu: strona „Panel”."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ordem dos blocos e o que um módulo mostra: página “Painel”."
+            "value": "Block order and what a module shows are on the “What to Show” page."
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Порядок блоків і що показує модуль — на сторінці «Панель»."
+            "value": "Порядок блоків і що показує модуль — на сторінці «Що показувати»."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reihenfolge der Blöcke und Inhalt eines Moduls: Seite „Was anzeigen“."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ordre des blocs et contenu d’un module : page « Quoi afficher »."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Orden de los bloques y qué muestra cada módulo: página «Qué mostrar»."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ordine dei blocchi e contenuto di un modulo: pagina «Cosa mostrare»."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ordem dos blocos e o que um módulo mostra: página “O que mostrar”."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kolejność bloków i zawartość modułu: strona „Co pokazywać”."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ブロックの順序とモジュールの表示内容:「表示する内容」ページ。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "블록 순서와 모듈 표시 내용: ‘표시할 항목’ 페이지."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ترتيب الكتل وما تعرضه الوحدة: صفحة «ما يُعرض»."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Urutan blok dan isi modul: halaman “Yang Ditampilkan”."
           }
         }
       }
@@ -100519,6 +100589,82 @@
         }
       }
     },
+    "Строка меню…": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Menu Bar…"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Рядок меню…"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Menüleiste…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Barre des menus…"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Barra de menús…"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Barra dei menu…"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Barra de menus…"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pasek menu…"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "メニューバー…"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "메뉴 막대…"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "شريط القائمة…"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bar Menu…"
+          }
+        }
+      }
+    },
     "Строка широкая (%lld pt): на MacBook с вырезом её может закрыть вырез или скрыть система.": {
       "localizations": {
         "ar": {
@@ -101275,6 +101421,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Такої папки поки немає — її буде створено після «Готово»."
+          }
+        }
+      }
+    },
+    "Там же, в «Строке меню», соберите, что видно рядом со значком.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In the same place, under “Menu Bar”, pick what shows next to the icon."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Там само, у розділі «Рядок меню», зберіть те, що видно поруч зі значком."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stellen Sie dort unter „Menüleiste“ zusammen, was neben dem Symbol erscheint."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Au même endroit, dans « Barre des menus », choisissez ce qui s’affiche à côté de l’icône."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ahí mismo, en «Barra de menús», elige qué se ve junto al icono."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nello stesso punto, in «Barra dei menu», scegli cosa si vede accanto all’icona."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ali mesmo, em «Barra de menus», escolha o que aparece ao lado do ícone."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "W tym samym miejscu, w sekcji „Pasek menu”, wybierz, co widać obok ikony."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "同じ場所の「メニューバー」で、アイコンの横に表示するものを選びます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "같은 곳의 «메뉴 막대»에서 아이콘 옆에 보일 항목을 고르세요."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "في المكان نفسه، ضمن «شريط القائمة»، اختر ما يظهر بجانب الرمز."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Di tempat yang sama, di «Bar Menu», pilih apa yang tampil di samping ikon."
           }
         }
       }
@@ -111634,78 +111856,78 @@
         }
       }
     },
-    "Что будет в панели этого профиля. Порядок и всё остальное можно поменять потом в Настройках → «Панель».": {
+    "Что будет в панели этого профиля. Порядок и всё остальное можно поменять потом в Настройках → «Что показывать».": {
       "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ما ستعرضه لوحة ملف التعريف هذا. يمكن تغيير الترتيب وكل ما تبقى لاحقًا من الإعدادات ← «اللوحة»."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Was das Panel dieses Profils zeigt. Reihenfolge und alles Weitere lassen sich später unter Einstellungen → „Panel“ ändern."
-          }
-        },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "What this profile's panel shows. The order and everything else can be changed later in Settings → «Panel»."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Lo que mostrará el panel de este perfil. El orden y lo demás se cambian luego en Ajustes → «Panel»."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ce que montrera le panneau de ce profil. L’ordre et le reste se changent ensuite dans Réglages → «Panneau»."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Isi panel profil ini. Urutan dan lainnya bisa diubah nanti di Pengaturan → «Panel»."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cosa mostra il pannello di questo profilo. L’ordine e il resto si cambiano poi in Impostazioni → «Pannello»."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "このプロファイルのパネルに表示する内容。順番などはあとで 設定 → 「パネル」 で変えられます。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "이 프로필의 패널에 보일 내용. 순서와 나머지는 나중에 설정 → «패널»에서 바꿀 수 있습니다."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Co pokaże panel tego profilu. Kolejność i resztę zmienisz później w Ustawienia → «Panel»."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "O que o painel deste perfil mostra. A ordem e o resto podem ser mudados depois em Ajustes → «Painel»."
+            "value": "What this profile's panel shows. The order and everything else can be changed later in Settings → «What to Show»."
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Що буде в панелі цього профілю. Порядок і решту можна змінити потім у Налаштування → «Панель»."
+            "value": "Що буде в панелі цього профілю. Порядок і решту можна змінити потім у Налаштування → «Що показувати»."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Was das Panel dieses Profils zeigt. Reihenfolge und alles Weitere lassen sich später unter Einstellungen → „Was anzeigen“ ändern."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ce que montrera le panneau de ce profil. L’ordre et le reste se changent ensuite dans Réglages → «Quoi afficher»."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lo que mostrará el panel de este perfil. El orden y lo demás se cambian luego en Ajustes → «Qué mostrar»."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cosa mostra il pannello di questo profilo. L’ordine e il resto si cambiano poi in Impostazioni → «Cosa mostrare»."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O que o painel deste perfil mostra. A ordem e o resto podem ser mudados depois em Ajustes → «O que mostrar»."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Co pokaże panel tego profilu. Kolejność i resztę zmienisz później w Ustawienia → «Co pokazywać»."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "このプロファイルのパネルに表示する内容。順番などはあとで 設定 → 「表示する内容」 で変えられます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이 프로필의 패널에 보일 내용. 순서와 나머지는 나중에 설정 → «표시할 항목»에서 바꿀 수 있습니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ما ستعرضه لوحة ملف التعريف هذا. يمكن تغيير الترتيب وكل ما تبقى لاحقًا من الإعدادات ← «ما يُعرض»."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Isi panel profil ini. Urutan dan lainnya bisa diubah nanti di Pengaturan → «Yang Ditampilkan»."
           }
         }
       }
@@ -111786,82 +112008,6 @@
         }
       }
     },
-    "Что включено и готовые наборы": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ما هو مفعّل ومجموعات جاهزة"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Aktive Module und fertige Sets"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "What’s on, and ready-made sets"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Qué está activo y conjuntos listos"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Modules actifs et ensembles prêts"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Yang aktif dan set siap pakai"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Moduli attivi e set pronti"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "オンのモジュールと既定のセット"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "켜진 모듈과 기본 세트"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Włączone moduły i gotowe zestawy"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "O que está ativo e conjuntos prontos"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Що ввімкнено та готові набори"
-          }
-        }
-      }
-    },
     "Что делает": {
       "localizations": {
         "ar": {
@@ -111934,6 +112080,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Що робить"
+          }
+        }
+      }
+    },
+    "Что показывать": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "What to Show"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Що показувати"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Was anzeigen"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quoi afficher"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Qué mostrar"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cosa mostrare"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O que mostrar"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Co pokazywać"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "表示する内容"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "표시할 항목"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ما يُعرض"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yang Ditampilkan"
           }
         }
       }

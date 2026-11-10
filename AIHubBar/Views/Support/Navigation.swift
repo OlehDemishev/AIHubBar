@@ -33,7 +33,6 @@ enum StorageKey {
     static let collapsedBlocks = "collapsedBlocks"
     /// The profile «Панель» edits; cleared on every start, so it is the current one unless chosen.
     static let panelProfile = "settingsPanelProfile"
-    static let servicesExpanded = "settingsServicesExpanded"
     static let helpTopic = "helpTopic"
     static let claudeConfigTab = "claudeConfigTab"
     static let calendarScope = "calendarScope"
