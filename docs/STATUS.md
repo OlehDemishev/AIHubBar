@@ -48,6 +48,12 @@
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
 
+## 2026-11-10 — Week pace: faster or slower than an even spend (branch `feat/week-pace`)
+
+Done: what people ask usage trackers for. Claude's week limits (the week and the week by model) carry a small mark on the bar where an even spend would be by now, and a line under it — «на 16 % быстрее ровного расхода» (orange from 10) or «на 9 % медленнее…» — when the difference is 5 points or more. Nothing in the first 12 hours of a week, and no line when the «кончится … при таком темпе» warning already speaks. The mark's tooltip says the even percent. One more line in the «Что нового» card.
+Checked: `scripts/check.sh` green (a test for the even spend); seen live in the Debug copy's panel: 28 % on Tuesday morning, the mark near 12 %, «на 16 % быстрее ровного расхода».
+Left: the mark was shortened after that capture and not looked at again; the rings style does not show it; other languages not seen.
+
 ## 2026-11-10 — «Что нового» and release notes; what goes to beta first (branch `feat/whats-new`)
 
 Done: the app is on other people's Macs and 0.10 moved three Settings pages without a word. The panel now shows a «Что нового» card once to whoever had a profile before (four lines about 0.10, «Открыть настройки» and «Понятно»; a first profile from the assistant marks it seen). `scripts/release.sh` takes `docs/release-notes/<version>.md` for the release page and, as HTML (`release-tools/release-notes.py`), for the appcast's `<description>`, so Sparkle's window says what changed; without the file it warns. `docs/release-notes/0.11.0.md` is written for the next release. docs/RELEASE.md has «Release notes» and «What goes to beta first» (layout, moved settings, storage, updater, hooks, Keychain → a beta and a day on Oleh's copy first).

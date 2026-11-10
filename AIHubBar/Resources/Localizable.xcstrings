@@ -43143,16 +43143,10 @@
     },
     "Кнопка «стоп» у фоновой задачи останавливает со второго клика.": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "The stop button of a background task stops on the second click."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Кнопка «стоп» у фонового завдання зупиняє з другого клацання."
+            "value": "زر الإيقاف لمهمة في الخلفية يوقفها عند النقرة الثانية."
           }
         },
         "de": {
@@ -43161,10 +43155,10 @@
             "value": "Die Stopp-Taste einer Hintergrundaufgabe stoppt erst beim zweiten Klick."
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Le bouton d’arrêt d’une tâche en arrière-plan arrête au deuxième clic."
+            "value": "The stop button of a background task stops on the second click."
           }
         },
         "es": {
@@ -43173,22 +43167,22 @@
             "value": "El botón de detener de una tarea en segundo plano detiene al segundo clic."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le bouton d’arrêt d’une tâche en arrière-plan arrête au deuxième clic."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tombol berhenti pada tugas latar belakang menghentikan pada klik kedua."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Il pulsante di arresto di un’attività in background ferma al secondo clic."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "O botão de parar de uma tarefa em segundo plano para no segundo clique."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Przycisk zatrzymania zadania w tle zatrzymuje przy drugim kliknięciu."
           }
         },
         "ja": {
@@ -43203,16 +43197,22 @@
             "value": "백그라운드 작업의 중지 버튼은 두 번째 클릭에서 중지합니다."
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "زر الإيقاف لمهمة في الخلفية يوقفها عند النقرة الثانية."
+            "value": "Przycisk zatrzymania zadania w tle zatrzymuje przy drugim kliknięciu."
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tombol berhenti pada tugas latar belakang menghentikan pada klik kedua."
+            "value": "O botão de parar de uma tarefa em segundo plano para no segundo clique."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Кнопка «стоп» у фонового завдання зупиняє з другого клацання."
           }
         }
       }
@@ -47862,16 +47862,10 @@
     },
     "Лимиты — крупное число и полоса с темпом; кольца возвращаются в настройках блока «Лимиты AI».": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Limits are a big number over a bar with the pace; rings come back in the settings of the “AI limits” block."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ліміти — велике число і смуга з темпом; кільця повертаються в налаштуваннях блоку «Ліміти AI»."
+            "value": "الحدود رقم كبير فوق شريط مع الوتيرة؛ والحلقات تعود من إعدادات قسم «حدود الذكاء الاصطناعي»."
           }
         },
         "de": {
@@ -47880,10 +47874,10 @@
             "value": "Limits sind eine große Zahl über einem Balken mit dem Tempo; Ringe gibt es wieder in den Einstellungen des Blocks „KI-Limits“."
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Les limites : un grand nombre au-dessus d’une barre avec le rythme ; les anneaux reviennent dans les réglages du bloc « Limites d'IA »."
+            "value": "Limits are a big number over a bar with the pace; rings come back in the settings of the “AI limits” block."
           }
         },
         "es": {
@@ -47892,22 +47886,22 @@
             "value": "Los límites son un número grande sobre una barra con el ritmo; los anillos vuelven en los ajustes del bloque «Límites de IA»."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les limites : un grand nombre au-dessus d’une barre avec le rythme ; les anneaux reviennent dans les réglages du bloc « Limites d'IA »."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Batas kini berupa angka besar di atas bilah dengan laju; cincin bisa dikembalikan di pengaturan blok «Batas AI»."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "I limiti sono un numero grande sopra una barra con il ritmo; gli anelli tornano nelle impostazioni del blocco «Limiti IA»."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Os limites são um número grande sobre uma barra com o ritmo; os anéis voltam nos ajustes do bloco «Limites de IA»."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Limity to duża liczba nad paskiem z tempem; pierścienie wracają w ustawieniach bloku „Limity AI”."
           }
         },
         "ja": {
@@ -47922,16 +47916,22 @@
             "value": "한도는 큰 숫자와 속도가 표시된 막대로 바뀌었습니다. 링은 «AI 한도» 블록 설정에서 되돌릴 수 있습니다."
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "الحدود رقم كبير فوق شريط مع الوتيرة؛ والحلقات تعود من إعدادات قسم «حدود الذكاء الاصطناعي»."
+            "value": "Limity to duża liczba nad paskiem z tempem; pierścienie wracają w ustawieniach bloku „Limity AI”."
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Batas kini berupa angka besar di atas bilah dengan laju; cincin bisa dikembalikan di pengaturan blok «Batas AI»."
+            "value": "Os limites são um número grande sobre uma barra com o ritmo; os anéis voltam nos ajustes do bloco «Limites de IA»."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ліміти — велике число і смуга з темпом; кільця повертаються в налаштуваннях блоку «Ліміти AI»."
           }
         }
       }
@@ -53714,16 +53714,10 @@
     },
     "Настройки стали короче: «Модули», «Панель» и «Строка меню» теперь на одной странице «Что показывать».": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Settings are shorter: “Modules”, “Panel” and “Menu Bar” are now one page, “What to Show”."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Налаштування стали коротшими: «Модулі», «Панель» і «Рядок меню» тепер на одній сторінці «Що показувати»."
+            "value": "الإعدادات أقصر: «الوحدات» و«اللوحة» و«شريط القائمة» صارت في صفحة واحدة، «ما يُعرض»."
           }
         },
         "de": {
@@ -53732,10 +53726,10 @@
             "value": "Die Einstellungen sind kürzer: „Module“, „Panel“ und „Menüleiste“ sind jetzt eine Seite, „Was anzeigen“."
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Les réglages sont plus courts : « Modules », « Panneau » et « Barre des menus » forment désormais une seule page, « Quoi afficher »."
+            "value": "Settings are shorter: “Modules”, “Panel” and “Menu Bar” are now one page, “What to Show”."
           }
         },
         "es": {
@@ -53744,22 +53738,22 @@
             "value": "Los ajustes son más cortos: «Módulos», «Panel» y «Barra de menús» ahora están en una sola página, «Qué mostrar»."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les réglages sont plus courts : « Modules », « Panneau » et « Barre des menus » forment désormais une seule page, « Quoi afficher »."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pengaturan lebih ringkas: «Modul», «Panel», dan «Bar Menu» kini di satu halaman, «Yang Ditampilkan»."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Le impostazioni sono più brevi: «Moduli», «Pannello» e «Barra dei menu» ora sono in un’unica pagina, «Cosa mostrare»."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Os ajustes ficaram mais curtos: «Módulos», «Painel» e «Barra de menus» agora estão em uma página só, «O que mostrar»."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ustawienia są krótsze: „Moduły”, „Panel” i „Pasek menu” są teraz na jednej stronie, „Co pokazywać”."
           }
         },
         "ja": {
@@ -53774,16 +53768,22 @@
             "value": "설정이 짧아졌습니다. «모듈», «패널», «메뉴 막대»이(가) 이제 한 페이지 «표시할 항목»에 있습니다."
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "الإعدادات أقصر: «الوحدات» و«اللوحة» و«شريط القائمة» صارت في صفحة واحدة، «ما يُعرض»."
+            "value": "Ustawienia są krótsze: „Moduły”, „Panel” i „Pasek menu” są teraz na jednej stronie, „Co pokazywać”."
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Pengaturan lebih ringkas: «Modul», «Panel», dan «Bar Menu» kini di satu halaman, «Yang Ditampilkan»."
+            "value": "Os ajustes ficaram mais curtos: «Módulos», «Painel» e «Barra de menus» agora estão em uma página só, «O que mostrar»."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Налаштування стали коротшими: «Модулі», «Панель» і «Рядок меню» тепер на одній сторінці «Що показувати»."
           }
         }
       }
@@ -80124,16 +80124,10 @@
     },
     "Понятно": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Got It"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Зрозуміло"
+            "value": "فهمت"
           }
         },
         "de": {
@@ -80142,10 +80136,10 @@
             "value": "Verstanden"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Compris"
+            "value": "Got It"
           }
         },
         "es": {
@@ -80154,22 +80148,22 @@
             "value": "Entendido"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Compris"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mengerti"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Ho capito"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Entendi"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Rozumiem"
           }
         },
         "ja": {
@@ -80184,16 +80178,22 @@
             "value": "확인"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "فهمت"
+            "value": "Rozumiem"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Mengerti"
+            "value": "Entendi"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Зрозуміло"
           }
         }
       }
@@ -89256,6 +89256,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ресурси Mac: процесор, пам'ять, диск, батарея"
+          }
+        }
+      }
+    },
+    "Ровный расход к этому моменту: %lld %%": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "An even spend by now: %lld %%"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Рівна витрата на цей момент: %lld %%"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gleichmäßiger Verbrauch bis jetzt: %lld %%"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dépense régulière à ce stade : %lld %%"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gasto uniforme hasta ahora: %lld %%"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Consumo uniforme fino a ora: %lld %%"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gasto uniforme até agora: %lld %%"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Równe zużycie do tej chwili: %lld %%"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "現時点での均等な消費: %lld %%"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "지금까지의 고른 사용: %lld %%"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الاستهلاك المنتظم حتى الآن: %lld%%"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pemakaian merata sampai saat ini: %lld %%"
           }
         }
       }
@@ -101208,16 +101284,10 @@
     },
     "Строка «Свернуть» внизу панели оставляет лимиты, сессии и проекты; «Ещё» возвращает остальные блоки.": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "The “Collapse” row at the bottom of the panel keeps limits, sessions and projects; “More” brings the other blocks back."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Рядок «Згорнути» унизу панелі залишає ліміти, сесії та проєкти; «Ще» повертає решту блоків."
+            "value": "صف «طيّ» أسفل اللوحة يُبقي الحدود والجلسات والمشاريع؛ و«المزيد» يعيد باقي الأقسام."
           }
         },
         "de": {
@@ -101226,10 +101296,10 @@
             "value": "Die Zeile „Zuklappen“ unten im Panel lässt Limits, Sitzungen und Projekte stehen; „Mehr“ holt die übrigen Blöcke zurück."
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "La ligne « Réduire » en bas du panneau garde les limites, les sessions et les projets ; « Plus » ramène les autres blocs."
+            "value": "The “Collapse” row at the bottom of the panel keeps limits, sessions and projects; “More” brings the other blocks back."
           }
         },
         "es": {
@@ -101238,22 +101308,22 @@
             "value": "La fila «Contraer» al final del panel deja los límites, las sesiones y los proyectos; «Más» recupera los demás bloques."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La ligne « Réduire » en bas du panneau garde les limites, les sessions et les projets ; « Plus » ramène les autres blocs."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Baris «Ciutkan» di bawah panel menyisakan batas, sesi, dan proyek; «Lainnya» mengembalikan blok lainnya."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "La riga «Comprimi» in fondo al pannello lascia limiti, sessioni e progetti; «Altro» riporta gli altri blocchi."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "A linha «Recolher» no fim do painel deixa os limites, as sessões e os projetos; «Mais» traz os outros blocos de volta."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Wiersz „Zwiń” na dole panelu zostawia limity, sesje i projekty; „Więcej” przywraca pozostałe bloki."
           }
         },
         "ja": {
@@ -101268,16 +101338,22 @@
             "value": "패널 아래의 «접기» 행은 한도, 세션, 프로젝트만 남깁니다. «기타»를 누르면 나머지 블록이 돌아옵니다."
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "صف «طيّ» أسفل اللوحة يُبقي الحدود والجلسات والمشاريع؛ و«المزيد» يعيد باقي الأقسام."
+            "value": "Wiersz „Zwiń” na dole panelu zostawia limity, sesje i projekty; „Więcej” przywraca pozostałe bloki."
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Baris «Ciutkan» di bawah panel menyisakan batas, sesi, dan proyek; «Lainnya» mengembalikan blok lainnya."
+            "value": "A linha «Recolher» no fim do painel deixa os limites, as sessões e os projetos; «Mais» traz os outros blocos de volta."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Рядок «Згорнути» унизу панелі залишає ліміти, сесії та проєкти; «Ще» повертає решту блоків."
           }
         }
       }
@@ -105610,6 +105686,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "У кожного профілю свій"
+          }
+        }
+      }
+    },
+    "У недели видно, быстрее или медленнее ровного расхода вы тратите лимит: отметка на полосе и строка под ней.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The week shows whether you spend the limit faster or slower than an even spend: a mark on the bar and a line under it."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "У тижня видно, швидше чи повільніше за рівну витрату ви витрачаєте ліміт: позначка на смузі та рядок під нею."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Woche zeigt, ob Sie das Limit schneller oder langsamer als gleichmäßig verbrauchen: eine Marke auf dem Balken und eine Zeile darunter."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La semaine montre si vous dépensez la limite plus vite ou moins vite qu’une dépense régulière : un repère sur la barre et une ligne dessous."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La semana muestra si gastas el límite más rápido o más lento que un gasto uniforme: una marca en la barra y una línea debajo."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La settimana mostra se consumi il limite più o meno velocemente di un consumo uniforme: un segno sulla barra e una riga sotto."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A semana mostra se você gasta o limite mais rápido ou mais devagar que um gasto uniforme: uma marca na barra e uma linha abaixo."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tydzień pokazuje, czy zużywasz limit szybciej, czy wolniej niż przy równym zużyciu: znacznik na pasku i wiersz pod nim."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "週のリミットで、均等な消費より速いか遅いかがわかります。バーの目印とその下の行で示します。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "주간 한도에서 고른 사용보다 빠른지 느린지 볼 수 있습니다. 막대의 표시와 그 아래 줄로 알려 줍니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يُظهر الأسبوع هل تستهلك الحد أسرع أم أبطأ من الاستهلاك المنتظم: علامة على الشريط وسطر تحته."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Minggu menunjukkan apakah Anda memakai batas lebih cepat atau lebih lambat dari pemakaian merata: tanda pada bilah dan satu baris di bawahnya."
           }
         }
       }
@@ -113007,16 +113159,10 @@
     },
     "Что нового": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "What's New"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Що нового"
+            "value": "ما الجديد"
           }
         },
         "de": {
@@ -113025,10 +113171,10 @@
             "value": "Neuigkeiten"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Nouveautés"
+            "value": "What's New"
           }
         },
         "es": {
@@ -113037,22 +113183,22 @@
             "value": "Novedades"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nouveautés"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yang Baru"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Novità"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Novidades"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Co nowego"
           }
         },
         "ja": {
@@ -113067,16 +113213,22 @@
             "value": "새로운 기능"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "ما الجديد"
+            "value": "Co nowego"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Yang Baru"
+            "value": "Novidades"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Що нового"
           }
         }
       }
@@ -122975,6 +123127,158 @@
           "stringUnit": {
             "state": "translated",
             "value": "менше ніж за хвилину"
+          }
+        }
+      }
+    },
+    "на %lld %% быстрее ровного расхода": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld %% faster than an even spend"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "на %lld %% швидше за рівну витрату"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld %% schneller als gleichmäßiger Verbrauch"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld %% plus vite qu’une dépense régulière"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld %% más rápido que un gasto uniforme"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld %% più veloce di un consumo uniforme"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld %% mais rápido que um gasto uniforme"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "o %lld %% szybciej niż równe zużycie"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "均等な消費より %lld %% 速い"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "고른 사용보다 %lld %% 빠름"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "أسرع بـ %lld%% من الاستهلاك المنتظم"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld %% lebih cepat dari pemakaian merata"
+          }
+        }
+      }
+    },
+    "на %lld %% медленнее ровного расхода": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld %% slower than an even spend"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "на %lld %% повільніше за рівну витрату"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld %% langsamer als gleichmäßiger Verbrauch"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld %% moins vite qu’une dépense régulière"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld %% más lento que un gasto uniforme"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld %% più lento di un consumo uniforme"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld %% mais lento que um gasto uniforme"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "o %lld %% wolniej niż równe zużycie"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "均等な消費より %lld %% 遅い"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "고른 사용보다 %lld %% 느림"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "أبطأ بـ %lld%% من الاستهلاك المنتظم"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld %% lebih lambat dari pemakaian merata"
           }
         }
       }

@@ -360,6 +360,7 @@ private struct SmallLimit: View {
     let now: Date
 
     private var percent: Double { window.percent ?? 0 }
+    private var even: Double? { window.evenSpend(now: now) }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 2) {
@@ -375,6 +376,26 @@ private struct SmallLimit: View {
                 .progressViewStyle(.linear)
                 .tint(limitTint(percent))
                 .controlSize(.mini)
+                // Where an even spend would be by now: the bar short of the mark is behind it, past it — ahead.
+                .overlay(alignment: .leading) {
+                    if let even {
+                        GeometryReader { proxy in
+                            Capsule()
+                                .fill(Color.primary.opacity(0.55))
+                                .frame(width: 1.5, height: 9)
+                                .position(x: proxy.size.width * even / 100, y: proxy.size.height / 2)
+                        }
+                        .accessibilityHidden(true)
+                    }
+                }
+                .help(even.map { String(localized: "Ровный расход к этому моменту: \(Int($0.rounded())) %") } ?? "")
+            if window.runsOutAt == nil, let difference = EvenSpend.difference(percent: percent, expected: even) {
+                Text(difference > 0 ? String(localized: "на \(difference) % быстрее ровного расхода") : String(localized: "на \(-difference) % медленнее ровного расхода"))
+                    .scaledFont(.caption2)
+                    .foregroundStyle(difference >= 10 ? AnyShapeStyle(.orange) : AnyShapeStyle(.secondary))
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.8)
+            }
             if window.showsReset, let reset = UsageText.resetText(window.resetsAt, now: now, short: true) {
                 Text(reset)
                     .scaledFont(.caption2)

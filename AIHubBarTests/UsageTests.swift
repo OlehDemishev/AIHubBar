@@ -316,4 +316,22 @@ struct LoginRenewalTests {
         let window = try JSONDecoder().decode(UsageWindow.self, from: Data(json.utf8))
         #expect(window.title == UsageWindow.title(forKey: "five_hour"))
     }
+
+    /// The week against an even spend: nothing in its first hours, a line only for a difference worth saying.
+    @Test func evenSpendOfTheWeek() throws {
+        let now = Date(timeIntervalSince1970: 1_800_000_000)
+        let week = EvenSpend.week
+        let halfway = try #require(EvenSpend.expected(resetsAt: now.addingTimeInterval(week / 2), length: week, now: now))
+        #expect(abs(halfway - 50) < 0.001)
+        #expect(EvenSpend.expected(resetsAt: now.addingTimeInterval(week - 3600), length: week, now: now) == nil, "one hour in")
+        #expect(EvenSpend.expected(resetsAt: now.addingTimeInterval(-60), length: week, now: now) == nil, "past the reset")
+        #expect(EvenSpend.difference(percent: 62, expected: 50) == 12)
+        #expect(EvenSpend.difference(percent: 41, expected: 50) == -9)
+        #expect(EvenSpend.difference(percent: 53, expected: 50) == nil)
+        #expect(EvenSpend.difference(percent: 90, expected: nil) == nil)
+        var window = LimitWindow(id: "seven_day", title: "", percent: 70, resetsAt: now.addingTimeInterval(week / 2))
+        #expect(window.evenSpend(now: now) == nil, "a window of unknown length has no even spend")
+        window.length = week
+        #expect(window.evenSpend(now: now).map { Int($0.rounded()) } == 50)
+    }
 }
