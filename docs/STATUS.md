@@ -1,11 +1,11 @@
 # Status
 
 <!-- summary:start -->
-**Stage:** Mac: 0.10.2 published 2026-11-10 (the Settings sidebar can no longer stay collapsed); 0.10.1 the same day (the stop button asks, Arabic percents, projects stay in sight); 0.10.0 the same day (the redesign: a calmer limits block, Settings with seven rows and «Что показывать», account and plan in the panel's header, the «Ещё» row); 0.9.1 the same day (no crash on removing an account, Arabic mirrored, the Settings sidebar, a worktree's name in a session row); 0.9.0 on 2026-11-09 (the closed panel no longer uses a third of a CPU core, 30 fixes from an audit); 0.8.1 the same day (the island's rings fit in the black ears); 0.8.0 the same day, signed and notarized (Sparkle 2.10.1, the lock screen tile checks it locked, «Раскладка» directions and exceptions, «Поддержать проект»; 0.7.8 Developer ID, Accessibility asked once; 0.7.7 hook messages in the app's language, clean session titles; 0.7.6 a map of the panel on the first screen, «Тексты» fixes; before that shorter first run, panel polish, usage history, finished sessions, ⌃⌥B, outages, several Claude accounts). Windows/Linux (`desktop/`, Tauri 2): postponed by Oleh 2026-11-02
+**Stage:** Mac: 0.11.0-beta.1 out to beta testers 2026-11-10 (what's new card, week pace, release notes, Homebrew cask); 0.10.2 published 2026-11-10 (the Settings sidebar can no longer stay collapsed); 0.10.1 the same day (the stop button asks, Arabic percents, projects stay in sight); 0.10.0 the same day (the redesign: a calmer limits block, Settings with seven rows and «Что показывать», account and plan in the panel's header, the «Ещё» row); 0.9.1 the same day (no crash on removing an account, Arabic mirrored, the Settings sidebar, a worktree's name in a session row); 0.9.0 on 2026-11-09 (the closed panel no longer uses a third of a CPU core, 30 fixes from an audit); 0.8.1 the same day (the island's rings fit in the black ears); 0.8.0 the same day, signed and notarized (Sparkle 2.10.1, the lock screen tile checks it locked, «Раскладка» directions and exceptions, «Поддержать проект»; 0.7.8 Developer ID, Accessibility asked once; 0.7.7 hook messages in the app's language, clean session titles; 0.7.6 a map of the panel on the first screen, «Тексты» fixes; before that shorter first run, panel polish, usage history, finished sessions, ⌃⌥B, outages, several Claude accounts). Windows/Linux (`desktop/`, Tauri 2): postponed by Oleh 2026-11-02
 **Updated:** 2026-11-10
 
 **Now:**
-- night run 2026-11-10 on Oleh's word («с первой по пятую»): what's new card and release notes, the beta-first rule, week pace, Homebrew cask, the crash signal — merged as they pass, not released
+- 0.11.0-beta.1 (build 817) published 2026-11-10 for beta testers with #357–#360: the «Что нового» card, release notes in the update window, week pace, the Homebrew cask. Waits a day on Oleh's copy, then 0.11.0
 - 0.10.2 (build 807) published 2026-11-10 with #355: the Settings sidebar can no longer stay collapsed. Oleh's Mac has 0.10.1 installed by the agent from the release build
 - 0.10.1 (build 803) published 2026-11-10 with #351, #352 and #353: the stop button on a run's row asks with a second click, Arabic percents without the space, a clearer message when Anthropic changes the limits service, the VoiceOver label of «Профили», projects stay out of «Ещё»
 - 0.10.0 (build 795) published 2026-11-10 with the redesign after Oleh's «перегружено» (#347, #348, #349): limits as a big number over a bar with the pace (bars or rings), Settings sidebar of seven rows with one page «Что показывать», the Claude account and plan in the panel's header, the other blocks under «Ещё»
@@ -19,6 +19,7 @@
 - merged 2026-11-03: #251 menu bar ☕ follows the «Не спать» switch, #248 «Не спать» on/off in the menu bar, #241 Codex states, #240 quick command shortcuts, #238 «Быстрый запрос», #236 content spec, #242 «Telegram» stage 1, #244 menu at the bottom, #246 shared bot (Worker not deployed yet), #247 desktop CI off for Mac string changes, #249 the bot's menu set up by each person, #252 stage 2 (sessions, requests, limits), #254 stage 3 (tasks and runs), #255 stage 4 (settings in the bot), #256 Mini App
 
 **Next:**
+- release 0.11.0 after the beta has lived a day on Oleh's copy (docs/RELEASE.md «What goes to beta first»); then `scripts/release-tools/update-cask.sh 0.11.0`
 - towards 1.0 (discussed 2026-11-10): the live pass is done (journal 2026-11-10); left — freeze what is in 1.0 and what stays beta, release notes, new screenshots (the assistant's map and the help still draw rings), translations read by people, feedback from strangers before 1.0
 - check on the Air: the island at the real notch
 - promotion (docs/LAUNCH.md): r/ClaudeAI, the lists, r/macapps, Show HN, Product Hunt, Homebrew
@@ -26,6 +27,7 @@
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/specs/SPEC-windows.md §9, stage 2–3 leftovers)
 
 **Needs Oleh:**
+- update to 0.11.0-beta.1 (Settings → «Основные» → «Обновления»): does the update window show the list of changes, and does the «Что нового» card appear in the panel once
 - try the Homebrew install once (README → Install, three lines) on a Mac without the app, e.g. the Air: the agent did not trust the tap or install through it
 - say whether the app may report crashes by itself (opt-in, anonymous) — today it only offers a GitHub issue after a crash
 - update 0.10.1 → 0.10.2 through Settings → «Основные» → «Обновления» and say whether Sparkle replaced the copy: the update to 0.9.1 never reached `~/Applications`
@@ -49,6 +51,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-10 — Beta 0.11.0-beta.1 (branch `chore/status-beta-0.11.0`)
+
+Done: `scripts/release.sh 0.11.0-beta.1 --publish` on Oleh's word — the first release under the beta-first rule: build 817 with #357–#360. The release page's beta line and the notes ran together on one line; the script now puts an empty line between them, and this release's page was corrected by hand.
+Checked: v0.11.0-beta.1 is a pre-release with the dmg and appcast; the main feed still offers 0.10.2; the beta feed offers 0.11.0-beta.1 (817, channel beta) and 0.10.2, and its item carries the notes in `<description>`; `stapler validate` worked; `spctl`: Notarized Developer ID. Before the release the shortened week mark was looked at live on the Debug copy.
+Left: whether Sparkle's window renders the notes — to be seen when Oleh updates; the cask stays at 0.10.2 (a beta does not go into it).
 
 ## 2026-11-10 — Homebrew: the tap tried from GitHub (branch `chore/homebrew-trust-step`)
 
