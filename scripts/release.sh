@@ -41,6 +41,14 @@ REPO="OlehDemishev/AIHubBar"
 DMG="AIHubBar-$VERSION.dmg"
 NAME="AI Hub Bar"
 rm -rf "$OUT" && mkdir -p "$OUT"
+# What changed, written by hand (docs/RELEASE.md «Release notes»): the release page and Sparkle's update window show
+# it. A beta takes its own file, else the one of the version it leads to.
+NOTES_FILE="docs/release-notes/$VERSION.md"
+[[ -f "$NOTES_FILE" ]] || NOTES_FILE="docs/release-notes/${VERSION%%-beta.*}.md"
+if [[ ! -f "$NOTES_FILE" ]]; then
+  NOTES_FILE=""
+  echo "!!  No docs/release-notes/$VERSION.md: people will update without knowing what changed."
+fi
 
 echo "==> Building $VERSION ($BUILD_NUMBER)"
 xcodegen generate >/dev/null
@@ -88,6 +96,10 @@ LENGTH="$(stat -f%z "$OUT/$DMG")"
 # Only beta testers' copies take an item marked with the beta channel (Updates.swift).
 CHANNEL=""
 if [[ $BETA -eq 1 ]]; then CHANNEL=$'\n      <sparkle:channel>beta</sparkle:channel>'; fi
+NOTES_XML="      <sparkle:releaseNotesLink>https://github.com/$REPO/releases/tag/v$VERSION</sparkle:releaseNotesLink>"
+if [[ -n "$NOTES_FILE" ]]; then
+  NOTES_XML="      <description><![CDATA[$(python3 scripts/release-tools/release-notes.py "$NOTES_FILE")]]></description>"
+fi
 cat > "$OUT/appcast.xml" <<XML
 <?xml version="1.0" encoding="utf-8"?>
 <rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle">
@@ -100,7 +112,7 @@ cat > "$OUT/appcast.xml" <<XML
       <sparkle:version>$BUILD_NUMBER</sparkle:version>
       <sparkle:shortVersionString>$VERSION</sparkle:shortVersionString>
       <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>$CHANNEL
-      <sparkle:releaseNotesLink>https://github.com/$REPO/releases/tag/v$VERSION</sparkle:releaseNotesLink>
+$NOTES_XML
       <enclosure url="https://github.com/$REPO/releases/download/v$VERSION/$DMG" length="$LENGTH" type="application/octet-stream" sparkle:edSignature="$SIGNATURE"/>
     </item>
   </channel>
@@ -117,6 +129,7 @@ if [[ "$PUBLISH" == "--publish" ]]; then
   EXTRA=()
   for pdf in docs/AI-Hub-Bar-Overview-*.pdf; do [ -f "$pdf" ] && EXTRA+=("$pdf"); done
   NOTES="Download $DMG, open it and drag AI Hub Bar to Applications."
+  if [[ -n "$NOTES_FILE" ]]; then NOTES="$(cat "$NOTES_FILE")"$'\n\n'"$NOTES"; fi
   if [[ $BETA -eq 1 ]]; then
     # A pre-release is never «latest», so copies outside the beta channel don't see it.
     gh release create "v$VERSION" "$OUT/$DMG" "$OUT/appcast.xml" --repo "$REPO" --title "$NAME $VERSION" --prerelease \

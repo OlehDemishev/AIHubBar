@@ -86,4 +86,13 @@ struct AuditTests {
         #expect(ClaudeIdentity.plan(type: "something_new", tier: nil) == nil)
         #expect(ClaudeIdentity.parse(Data("{}".utf8)) == nil)
     }
+
+    /// «Что нового» is for whoever had the app before: once per version with news, never on a first start.
+    @Test func whatsNewOncePerVersion() {
+        #expect(WhatsNew.shouldShow(seen: "", hasProfiles: true))
+        #expect(WhatsNew.shouldShow(seen: "0.9", hasProfiles: true))
+        #expect(!WhatsNew.shouldShow(seen: WhatsNew.version, hasProfiles: true))
+        #expect(!WhatsNew.shouldShow(seen: "", hasProfiles: false))
+        #expect(!WhatsNew.items.isEmpty)
+    }
 }

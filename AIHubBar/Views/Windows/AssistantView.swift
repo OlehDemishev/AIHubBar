@@ -87,7 +87,11 @@ struct AssistantView: View {
     private func finish(_ draft: AssistantDraft) {
         // The panel blocks and the menu bar chosen here belong to the new profile (SPEC-profiles §6).
         // A first profile starts calm: limits and sessions in sight, the rest under the panel's «Ещё» row.
-        if draft.firstLaunch { UserDefaults.standard.set(false, forKey: StorageKey.panelMoreExpanded) }
+        if draft.firstLaunch {
+            UserDefaults.standard.set(false, forKey: StorageKey.panelMoreExpanded)
+            // Nothing is new to someone who starts today.
+            UserDefaults.standard.set(WhatsNew.version, forKey: StorageKey.whatsNewSeen)
+        }
         var profile = draft.mode
         profile.modules = nil
         profile.modules = profile.normalizedModules(hidden: draft.hiddenModules)

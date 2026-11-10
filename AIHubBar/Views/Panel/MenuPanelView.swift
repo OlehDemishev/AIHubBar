@@ -43,6 +43,7 @@ struct MenuPanelView: View {
     @State private var identity: ClaudeIdentity?
     /// The blocks besides limits, sessions and projects wait under one «Ещё» row until it is opened; the choice is kept.
     @AppStorage(StorageKey.panelMoreExpanded) private var moreExpanded = false
+    @AppStorage(StorageKey.whatsNewSeen) private var whatsNewSeen = ""
     @FocusState private var searchFocused: Bool
 
     /// Header, search and a margin under the panel, at the normal text size.
@@ -184,6 +185,12 @@ struct MenuPanelView: View {
             if notifications.state == .denied {
                 notificationsHint
                     .panelCard()
+            }
+
+            if WhatsNew.shouldShow(seen: whatsNewSeen, hasProfiles: !modes.modes.isEmpty) {
+                WhatsNewView()
+                    .panelCard()
+                    .revealed(isShown, step: 1, reduceMotion: calm)
             }
 
             if modes.modes.isEmpty {

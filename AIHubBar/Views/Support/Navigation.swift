@@ -35,6 +35,8 @@ enum StorageKey {
     static let panelProfile = "settingsPanelProfile"
     /// The panel's «Ещё» row is open: every block of the profile is in sight.
     static let panelMoreExpanded = "panelMoreExpanded"
+    /// The `WhatsNew.version` whose card was closed.
+    static let whatsNewSeen = "whatsNewSeen"
     static let helpTopic = "helpTopic"
     static let claudeConfigTab = "claudeConfigTab"
     static let calendarScope = "calendarScope"
