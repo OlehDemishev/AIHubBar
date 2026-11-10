@@ -72,7 +72,8 @@ struct SavedPromptsSection: View {
                     HStack {
                         FormField(Text("Название"), text: $prompt.title)
                         ConfirmedButton(title: "Удалить промпт", message: prompt.title) {
-                            settings.savedPrompts.removeAll { $0.id == prompt.id }
+                            let id = prompt.id
+                            settings.savedPrompts.removeAll { $0.id == id }
                         } label: { Label("Удалить промпт", systemImage: "trash").labelStyle(.iconOnly) }
                         .buttonStyle(.borderless)
                         .help("Удалить промпт")
@@ -114,7 +115,10 @@ private struct ClaudeAccountsSection: View {
                     Spacer(minLength: 4)
                     Button("Войти") { signIn(account) }
                     ConfirmedButton(title: "Убрать аккаунт", message: account.name, confirm: "Убрать", role: nil) {
-                        settings.claudeAccounts.removeAll { $0.id == account.id }
+                        // The id is read first: read inside the closure, it goes through the binding into the array
+                        // being changed, and Swift ends the app for overlapping access (seen on this button, 2026-11-10).
+                        let id = account.id
+                        settings.claudeAccounts.removeAll { $0.id == id }
                     } label: {
                         Label("Убрать аккаунт", systemImage: "minus.circle").labelStyle(.iconOnly)
                     }

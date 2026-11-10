@@ -5,7 +5,7 @@
 **Updated:** 2026-11-09
 
 **Now:**
-- merged after 0.9.0, not released yet: a worktree's name is shown whole in a crowded session row (branch `fix/session-row-worktree`)
+- final checks 2026-11-10 (branch `fix/final-checks`), 0.9.1 follows: removing a Claude account crashed the app (also in 0.8.1 and 0.9.0), Arabic was never mirrored, the Settings sidebar cut its names; with #344 (a worktree's name in a session row)
 - 0.9.0 (build 781) published 2026-11-09 with the audit pass (#342): the closed panel no longer uses a third of a CPU core while a session works; 30 fixes from a UI and code review (list in the journal)
 - tech debt pass done 2026-11-09, all merged: #330 Sparkle 2.10.1, #331 the lock screen tile checks it locked, #332 unused strings removed and the catalog compared with the code, #333 Mac CI on Xcode 27.2 running `check.sh`, #334 and #335 tests for the Telegram controller, the notch island and the command engine (77 new), #336 Telegram files split
 - 0.8.0 (build 773) published 2026-11-09 after Oleh's beta checks of 0.8.0-beta.1 passed
@@ -41,6 +41,18 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+## 2026-11-10 — The rest of the audit list checked live; a crash, Arabic and the sidebar fixed (branch `fix/final-checks`)
+
+Done: everything left unchecked after 0.9.0 was gone through, and three defects came out of it.
+- Crash: «Убрать аккаунт» ended the app (`_swift_reportExclusivityConflict`: the predicate of `removeAll` read the id through the binding into the array being changed). In 0.8.1 and 0.9.0 too. The id is read first now, here and in the four places with the same shape (saved prompts, quick commands, a profile's commands in Settings and in the assistant).
+- Arabic was laid out left-to-right: `preferredLocalizations` was «ar», yet `NSApp.userInterfaceLayoutDirection` stayed left-to-right, so windows and the panel were never mirrored. `RightToLeftLayout.apply()` sets the two defaults Xcode's «Right-to-Left» option passes, for the launch, when the running language is right-to-left.
+- The Settings sidebar came up 144 pt wide on a fresh window state and cut names («Внешний…», «Claud…»); the column width alone is not kept on macOS 27. The content has a 230 pt minimum now.
+- For tests: `LaunchController.dueNow`, `RunQuickCommandIntent.command(named:in:)`, `ImportConfirmation.summary` are separate functions.
+Checked: `scripts/check.sh` green; `AuditTests` (5): two queued runs for one project, a Shortcuts name that fits two commands, the import note with two missing folders, right-to-left, a good report whatever the language. Live:
+- installed 0.9.0: a five-hour-old «running» record pointing at an unrelated `sleep` was closed as failed and the process left alone; with the manual hold off and the «работает Claude» rule still holding the Mac awake, `widget-status.json` says `keepAwake: false`, and `true` again with the hold on; `--login-item status` says enabled;
+- Debug build: the account and a saved prompt removed through their sheets with the app still running; the sidebar shows whole names; in Arabic (no extra flags) the direction is right-to-left, Settings and the panel are mirrored, sub-section chevrons point the right way; `--command cleanup-check` in English prints «ok».
+Left: not seen: the island's ears in Arabic and on a real notch, the widget itself on the desktop (only its file), a profile command's and a key's deletion sheets (the same `ConfirmedButton`; the Debug copy had neither), a real «Отчёт сейчас» in English (it sends to Telegram; covered by the test), start at login after a restart, folds with «Уменьшение движения». In Arabic percentages read «% 27» (hand-made format). The stop button on a run's row in the panel still stops with no question.
+
 ## 2026-11-09 — Checks on the installed 0.9.0, the worktree name in a session row (branch `fix/session-row-worktree`)
 
 Done: in a crowded session row a worktree's name was cut to «ch…er» (it shared what was left with the task; the task's 70 pt minimum from #342 made it «…»). The name now comes first, whole up to 96 pt, and the task's minimum applies only to rows without a worktree. Two tests added: a write to a closed pipe is an error and not the end of the process, and a hook config that is a symlink stays one.

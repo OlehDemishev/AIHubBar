@@ -18,6 +18,23 @@ enum LanguageFallback {
     }
 }
 
+/// AppKit keeps this app left-to-right in Arabic (seen 2026-11-10: `preferredLocalizations` is «ar», yet
+/// `NSApp.userInterfaceLayoutDirection` is left-to-right, windows and the panel unmirrored). The two defaults Xcode's
+/// «Right-to-Left» option passes turn the mirroring on; they are set for this launch only, before the first window.
+enum RightToLeftLayout {
+    static func isNeeded(language: String) -> Bool {
+        Locale.Language(identifier: language).characterDirection == .rightToLeft
+    }
+
+    static func apply(defaults: UserDefaults = .standard, language: String = Bundle.main.preferredLocalizations.first ?? "ru") {
+        guard isNeeded(language: language) else { return }
+        var arguments = defaults.volatileDomain(forName: UserDefaults.argumentDomain)
+        arguments["AppleTextDirection"] = true
+        arguments["NSForceRightToLeftWritingDirection"] = true
+        defaults.setVolatileDomain(arguments, forName: UserDefaults.argumentDomain)
+    }
+}
+
 /// The language the app runs in and the one it will have after a relaunch. They differ once the choice in Settings
 /// changes, because macOS reads `AppleLanguages` at launch.
 enum InterfaceLanguage {
