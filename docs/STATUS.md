@@ -1,11 +1,11 @@
 # Status
 
 <!-- summary:start -->
-**Stage:** Mac: 0.9.0 published 2026-11-09 (the closed panel no longer uses a third of a CPU core, 30 fixes from an audit); 0.8.1 the same day (the island's rings fit in the black ears); 0.8.0 the same day, signed and notarized (Sparkle 2.10.1, the lock screen tile checks it locked, «Раскладка» directions and exceptions, «Поддержать проект»; 0.7.8 Developer ID, Accessibility asked once; 0.7.7 hook messages in the app's language, clean session titles; 0.7.6 a map of the panel on the first screen, «Тексты» fixes; before that shorter first run, panel polish, usage history, finished sessions, ⌃⌥B, outages, several Claude accounts). Windows/Linux (`desktop/`, Tauri 2): postponed by Oleh 2026-11-02
-**Updated:** 2026-11-09
+**Stage:** Mac: 0.9.1 published 2026-11-10 (no crash on removing an account, Arabic mirrored, the Settings sidebar, a worktree's name in a session row); 0.9.0 on 2026-11-09 (the closed panel no longer uses a third of a CPU core, 30 fixes from an audit); 0.8.1 the same day (the island's rings fit in the black ears); 0.8.0 the same day, signed and notarized (Sparkle 2.10.1, the lock screen tile checks it locked, «Раскладка» directions and exceptions, «Поддержать проект»; 0.7.8 Developer ID, Accessibility asked once; 0.7.7 hook messages in the app's language, clean session titles; 0.7.6 a map of the panel on the first screen, «Тексты» fixes; before that shorter first run, panel polish, usage history, finished sessions, ⌃⌥B, outages, several Claude accounts). Windows/Linux (`desktop/`, Tauri 2): postponed by Oleh 2026-11-02
+**Updated:** 2026-11-10
 
 **Now:**
-- final checks 2026-11-10 (branch `fix/final-checks`), 0.9.1 follows: removing a Claude account crashed the app (also in 0.8.1 and 0.9.0), Arabic was never mirrored, the Settings sidebar cut its names; with #344 (a worktree's name in a session row)
+- 0.9.1 (build 787) published 2026-11-10 with #344 and #345: removing a Claude account no longer crashes the app (it did in 0.8.1 and 0.9.0), Arabic is mirrored, the Settings sidebar shows whole names, a worktree's name in a session row
 - 0.9.0 (build 781) published 2026-11-09 with the audit pass (#342): the closed panel no longer uses a third of a CPU core while a session works; 30 fixes from a UI and code review (list in the journal)
 - tech debt pass done 2026-11-09, all merged: #330 Sparkle 2.10.1, #331 the lock screen tile checks it locked, #332 unused strings removed and the catalog compared with the code, #333 Mac CI on Xcode 27.2 running `check.sh`, #334 and #335 tests for the Telegram controller, the notch island and the command engine (77 new), #336 Telegram files split
 - 0.8.0 (build 773) published 2026-11-09 after Oleh's beta checks of 0.8.0-beta.1 passed
@@ -21,6 +21,7 @@
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/specs/SPEC-windows.md §9, stage 2–3 leftovers)
 
 **Needs Oleh:**
+- update to 0.9.1 (Settings → «Основные» → «Обновления»); «Не спать» has to be switched on again after the restart of the app
 - after the next restart: does `~/Applications/AI Hub Bar.app` (0.9.0) start at login? Until 2026-11-09 a build from `.claude/worktrees/jolly-wiles-db1b62` started instead
 - say whether the stop button on a run's row in the panel should ask first, like «Остановить» in the log window now does
 - «Значки» after the next install: press the toggle once, read the note under the tiles, press it again to bring the desktop back (the agent does not change this setting on your Mac)
@@ -41,6 +42,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+## 2026-11-10 — 0.9.1 published (branch `chore/status-release-0.9.1`)
+
+Done: #345 merged with green CI, then `scripts/release.sh 0.9.1 --publish`: build 787, the app and the disk image notarized and stapled, the GitHub release made, the beta channel updated.
+Checked: v0.9.1 is GitHub's latest with the .dmg, appcast.xml and both overview PDFs; the normal feed lists 787 (0.9.1), the beta feed 787 and 771; `stapler validate` passes on the disk image, and `spctl` accepts the disk image and the app as «Notarized Developer ID». The changed UI was looked at on a Debug build before the release (the entry below).
+Left: the published disk image was not downloaded and opened, and the installed copy (0.9.0) was not updated by the agent.
+
 ## 2026-11-10 — The rest of the audit list checked live; a crash, Arabic and the sidebar fixed (branch `fix/final-checks`)
 
 Done: everything left unchecked after 0.9.0 was gone through, and three defects came out of it.
