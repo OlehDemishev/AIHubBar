@@ -62,6 +62,11 @@ struct LimitSection: View {
     var body: some View {
         @Bindable var settings = settings
         Section {
+            Picker("Вид лимитов", systemImage: "chart.bar.fill", selection: $settings.limitsStyle) {
+                ForEach(LimitsStyle.allCases, id: \.self) { Text($0.title).tag($0) }
+            }
+        }
+        Section {
             IconRow("Уведомлять на, %", systemImage: "bell.badge") {
                 // No title: in a Form a titled field also shows its title as a label next to it.
                 TextField("", text: $thresholdsText, prompt: Text(verbatim: "50, 80, 95"))

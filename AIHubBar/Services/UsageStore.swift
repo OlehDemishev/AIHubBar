@@ -23,6 +23,7 @@ final class UsageStore {
     private var lastRenewal: Date?
 
     var forecast: UsageForecast { UsageForecast.make(history: history, current: snapshot?.session) }
+    var pace: Double? { UsageForecast.pace(history: history, current: snapshot?.session) }
 
     /// Periods of the per-project breakdown.
     enum Period: String, CaseIterable, Identifiable, Sendable {

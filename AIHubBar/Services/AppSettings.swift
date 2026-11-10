@@ -235,6 +235,10 @@ final class AppSettings {
         didSet { defaults.set(panelWidth.rawValue, forKey: Keys.panelWidth) }
     }
 
+    var limitsStyle: LimitsStyle {
+        didSet { defaults.set(limitsStyle.rawValue, forKey: Keys.limitsStyle) }
+    }
+
     var panelDensity: PanelDensity {
         didSet { defaults.set(panelDensity.rawValue, forKey: Keys.panelDensity) }
     }
@@ -387,6 +391,7 @@ final class AppSettings {
         panelTextSize = defaults.value(PanelTextSize.self, forKey: Keys.panelTextSize) ?? .normal
         panelWidth = defaults.value(PanelWidth.self, forKey: Keys.panelWidth) ?? .normal
         panelDensity = defaults.value(PanelDensity.self, forKey: Keys.panelDensity) ?? .normal
+        limitsStyle = defaults.value(LimitsStyle.self, forKey: Keys.limitsStyle) ?? .bars
         panelTheme = defaults.value(PanelTheme.self, forKey: Keys.panelTheme) ?? .system
         panelBackground = defaults.value(PanelBackground.self, forKey: Keys.panelBackground) ?? .standard
         panelAnimations = defaults.bool(Keys.panelAnimations, default: true)
@@ -451,6 +456,7 @@ final class AppSettings {
         static let panelTextSize = "panelTextSize"
         static let panelWidth = "panelWidth"
         static let panelDensity = "panelDensity"
+        static let limitsStyle = "limitsStyle"
         static let panelTheme = "panelTheme"
         static let panelBackground = "panelBackground"
         static let panelAnimations = "panelAnimations"

@@ -306,24 +306,7 @@ private struct SessionRowView: View {
                     .lineLimit(1)
                     .truncationMode(.tail)
                     .foregroundStyle(action == nil && row.task == nil ? .tertiary : .secondary)
-                    // The counts beside it are fixed in size; without this a long diff leaves the task a few letters.
-                    // Not beside a worktree's name: there the minimum would be taken from that name («ch…er»).
-                    .frame(minWidth: row.worktree == nil ? 70 : 0, alignment: .leading)
                 Spacer(minLength: 4)
-                if let changes, let folder {
-                    Button { showsChanges.toggle() } label: {
-                        Text(changes.summary)
-                            .scaledFont(.caption)
-                            .monospacedDigit()
-                            .foregroundStyle(.secondary)
-                    }
-                    .buttonStyle(.borderless)
-                    .fixedSize()
-                    .help("Что изменила сессия с начала (git): файлы и строки, включая закоммиченное. Клик — список")
-                    .popover(isPresented: $showsChanges, arrowEdge: .bottom) {
-                        SessionChangesView(changes: changes, folder: folder)
-                    }
-                }
                 if let context = row.context, context >= ContextUsage.warnAt {
                     Text("контекст \(Int((context * 100).rounded())) %")
                         .scaledFont(.caption)
@@ -398,7 +381,14 @@ private struct SessionRowView: View {
         .contentShape(Rectangle())
         .onTapGesture(perform: open)
         // The buttons appear on hover: this is the way to them without a mouse, and for VoiceOver.
-        .contextMenu { menuActions }
+        .contextMenu {
+            menuActions
+            // What the session changed is not in the row any more: it took the room of the task.
+            if let changes { Button(String(localized: "Изменения: \(changes.summary)")) { showsChanges = true } }
+        }
+        .popover(isPresented: $showsChanges, arrowEdge: .bottom) {
+            if let changes, let folder { SessionChangesView(changes: changes, folder: folder) }
+        }
         .accessibilityAction(named: Text("Показать"), open)
         .task(id: refreshKey) {
             guard let folder, row.state != .ended else { return }
@@ -421,6 +411,7 @@ private struct SessionRowView: View {
     private var helpText: String {
         var parts: [String] = [inBackground ? String(localized: "в фоне") : row.state.title]
         if let task = row.task { parts.append(task) }
+        if let changes { parts.append(changes.summary) }
         if let folder = row.session?.cwd ?? row.run?.folder { parts.append(folder) }
         if row.session != nil || row.run != nil { parts.append(String(localized: "Клик — открыть")) }
         return parts.joined(separator: " · ")

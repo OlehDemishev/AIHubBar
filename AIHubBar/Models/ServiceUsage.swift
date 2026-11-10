@@ -44,6 +44,8 @@ struct ServiceUsage: Equatable, Identifiable, Sendable {
     var rings: [LimitWindow]
     var bars: [LimitWindow]
     var forecast: UsageForecast
+    /// Percent of the first limit used per hour, when known (Claude's session).
+    var pace: Double? = nil
     var week: WeekUsage?
     var notes: [ServiceNote] = []
     /// Tokens per project this week, for services that keep them (Codex; Claude has its own breakdown).
@@ -54,7 +56,7 @@ struct ServiceUsage: Equatable, Identifiable, Sendable {
 
     var id: Service { service }
 
-    static func claude(_ snapshot: UsageSnapshot, forecast: UsageForecast, week: WeekUsage?, error: String?) -> ServiceUsage {
+    static func claude(_ snapshot: UsageSnapshot, forecast: UsageForecast, pace: Double? = nil, week: WeekUsage?, error: String?) -> ServiceUsage {
         func window(_ window: UsageWindow, showsReset: Bool = true) -> LimitWindow {
             LimitWindow(id: window.key, title: window.title, percent: window.utilization, resetsAt: window.resetsAt, showsReset: showsReset)
         }
@@ -67,6 +69,7 @@ struct ServiceUsage: Equatable, Identifiable, Sendable {
             // A model week usually resets with the week: no need to say it twice.
             bars: snapshot.shownOtherWindows.map { window($0, showsReset: !UsageWindow.sameReset($0.resetsAt, snapshot.week?.resetsAt)) },
             forecast: forecast,
+            pace: pace,
             week: week,
             notes: notes,
             error: error,

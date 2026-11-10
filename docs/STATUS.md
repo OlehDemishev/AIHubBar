@@ -5,6 +5,7 @@
 **Updated:** 2026-11-10
 
 **Now:**
+- redesign after Oleh's «перегружено» (2026-11-10), agreed on a mock-up: step 1 merged, not released — the limits block is a big number over a bar with the pace, bars or rings by choice, the rest behind «Подробнее» (branch `feat/panel-compact-limits`)
 - 0.9.1 (build 787) published 2026-11-10 with #344 and #345: removing a Claude account no longer crashes the app (it did in 0.8.1 and 0.9.0), Arabic is mirrored, the Settings sidebar shows whole names, a worktree's name in a session row
 - 0.9.0 (build 781) published 2026-11-09 with the audit pass (#342): the closed panel no longer uses a third of a CPU core while a session works; 30 fixes from a UI and code review (list in the journal)
 - tech debt pass done 2026-11-09, all merged: #330 Sparkle 2.10.1, #331 the lock screen tile checks it locked, #332 unused strings removed and the catalog compared with the code, #333 Mac CI on Xcode 27.2 running `check.sh`, #334 and #335 tests for the Telegram controller, the notch island and the command engine (77 new), #336 Telegram files split
@@ -15,6 +16,8 @@
 - merged 2026-11-03: #251 menu bar ☕ follows the «Не спать» switch, #248 «Не спать» on/off in the menu bar, #241 Codex states, #240 quick command shortcuts, #238 «Быстрый запрос», #236 content spec, #242 «Telegram» stage 1, #244 menu at the bottom, #246 shared bot (Worker not deployed yet), #247 desktop CI off for Mac string changes, #249 the bot's menu set up by each person, #252 stage 2 (sessions, requests, limits), #254 stage 3 (tasks and runs), #255 stage 4 (settings in the bot), #256 Mini App
 
 **Next:**
+- redesign step 2: the panel's other blocks off for new people and folded into one «Ещё» row; account and plan in the header
+- redesign step 3: Settings — one page «Что показывать» instead of «Модули», «Панель», «Строка меню» and the «Где показывать» chips; «Сервисы AI» as one page; «Профили» greyed while there is one; the island keeps its own page
 - check on the Air: the island at the real notch
 - promotion (docs/LAUNCH.md): r/ClaudeAI, the lists, r/macapps, Show HN, Product Hunt, Homebrew
 - content (docs/specs/SPEC-content.md, agreed): stage 2 «Версии», then batch tasks; better after the first feedback from people
@@ -42,6 +45,17 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+## 2026-11-10 — Redesign step 1: a calmer limits block (branch `feat/panel-compact-limits`)
+
+Done: Oleh finds the panel and Settings overloaded and showed a simpler app of the same kind. A mock-up was agreed (session as the main number, the rest smaller, details folded; rings or bars by choice; the island keeps its own Settings page). This step is the limits block and the session rows.
+- Limits, «Полосы» (the default): Claude's session is a big number over a bar, with the pace beside it («13 %/ч», over the last 30 minutes, `UsageForecast.pace`); the week and the model week are two small limits in a row. Other services have no big number, two limits in a row. One colour below 50 %, then orange and red as before.
+- «Кольца»: the earlier look, chosen in Settings → «Лимиты AI» → «Вид лимитов» (`AppSettings.limitsStyle`).
+- A forecast is shown only when it is bad news; «до сброса хватит», «на неделю хватит» and «хватит и на сессию, и на неделю» are gone from the block.
+- The week by day and the spend by project are behind «Подробнее» (Claude's own, and one per service that has a week or projects).
+- Session rows no longer carry «файлов: N +a −b»: it is in the tooltip and in the row's menu («Изменения: …», which opens the list).
+Checked: `scripts/check.sh` green (a test for the pace). On a Debug build, the panel captured by its window: «Полосы» with «Подробнее» open, and «Кольца».
+Left: not seen: the week strip inside «Подробнее» and a warning line (the Debug copy had no week data yet when captured), the «Вид лимитов» picker itself, the menu item with the changes, other languages. Steps 2 and 3 are in Next. Not released.
+
 ## 2026-11-10 — 0.9.1 published (branch `chore/status-release-0.9.1`)
 
 Done: #345 merged with green CI, then `scripts/release.sh 0.9.1 --publish`: build 787, the app and the disk image notarized and stapled, the GitHub release made, the beta channel updated.
