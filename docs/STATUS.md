@@ -5,6 +5,7 @@
 **Updated:** 2026-11-10
 
 **Now:**
+- merged after 0.10.1, not released: the Settings sidebar can no longer stay collapsed (branch `fix/settings-sidebar-collapsed`); Oleh's Mac has 0.10.1 installed by the agent from the release build, his saved split reset by hand
 - 0.10.1 (build 803) published 2026-11-10 with #351, #352 and #353: the stop button on a run's row asks with a second click, Arabic percents without the space, a clearer message when Anthropic changes the limits service, the VoiceOver label of «Профили», projects stay out of «Ещё»
 - 0.10.0 (build 795) published 2026-11-10 with the redesign after Oleh's «перегружено» (#347, #348, #349): limits as a big number over a bar with the pace (bars or rings), Settings sidebar of seven rows with one page «Что показывать», the Claude account and plan in the panel's header, the other blocks under «Ещё»
 - 0.9.1 (build 787) published 2026-11-10 with #344 and #345: removing a Claude account no longer crashes the app (it did in 0.8.1 and 0.9.0), Arabic is mirrored, the Settings sidebar shows whole names, a worktree's name in a session row
@@ -24,7 +25,7 @@
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/specs/SPEC-windows.md §9, stage 2–3 leftovers)
 
 **Needs Oleh:**
-- update to 0.10.1 (Settings → «Основные» → «Обновления»); «Не спать» has to be switched on again after the restart of the app
+- «Не спать» has to be switched on again after the restart of the app
 - after the next restart: does `~/Applications/AI Hub Bar.app` (0.9.0) start at login? Until 2026-11-09 a build from `.claude/worktrees/jolly-wiles-db1b62` started instead
 - «Значки» after the next install: press the toggle once, read the note under the tiles, press it again to bring the desktop back (the agent does not change this setting on your Mac)
 - optional, one minute: with the desktop on, does `StandardHideDesktopIcons` keep the context menu and drag selection? If yes, the toggle can move to it
@@ -44,6 +45,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-10 — The Settings sidebar could stay collapsed (branch `fix/settings-sidebar-collapsed`)
+
+Done: Oleh opened Settings in 0.10.1 and saw «Основные» alone, no list of pages. His defaults remembered the split with the sidebar collapsed («…, YES, YES»), and this window has no button to bring it back (the toggle is removed), so no other page could be reached. Now the split view's column visibility is fixed to all columns, and a remembered collapsed split is dropped before the window is made. On Oleh's Mac the key was deleted by hand and the app restarted. Before that the agent installed 0.10.1 into `~/Applications` from `build/release/0.10.1` on his request: the copy there was still 0.9.0 (781) — the update to 0.9.1 he had mentioned was not on disk; why Sparkle did not replace it is not known.
+Checked: `scripts/check.sh` green (a test for the remembered split); live on the Debug copy with the collapsed split written into its defaults — Settings opened with the sidebar, and the saved split became «230 … NO, NO»; Oleh's installed Settings captured with all seven rows after the reset.
+Left: how the sidebar got collapsed is not known (dragging the divider is the likely way); whether Sparkle updates the installed copy from 0.10.1 to the next release is to be watched. The old 0.9.0 copy is in the session's scratchpad. Not released.
 
 ## 2026-11-10 — Release 0.10.1 (branch `chore/status-release-0.10.1`)
 
