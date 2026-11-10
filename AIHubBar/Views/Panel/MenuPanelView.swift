@@ -41,7 +41,7 @@ struct MenuPanelView: View {
     @State private var agentThreads: [AgentThread] = []
     /// The Claude account's name and plan for the header, read when the panel opens.
     @State private var identity: ClaudeIdentity?
-    /// The blocks after limits and sessions wait under one «Ещё» row until it is opened; the choice is kept.
+    /// The blocks besides limits, sessions and projects wait under one «Ещё» row until it is opened; the choice is kept.
     @AppStorage(StorageKey.panelMoreExpanded) private var moreExpanded = false
     @FocusState private var searchFocused: Bool
 
@@ -361,7 +361,7 @@ struct MenuPanelView: View {
             .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
-        .help(moreExpanded ? String(localized: "Оставить в панели только лимиты и сессии") : String(localized: "Показать остальные блоки"))
+        .help(moreExpanded ? String(localized: "Свернуть") : String(localized: "Показать остальные блоки"))
         .accessibilityLabel(moreExpanded ? String(localized: "Свернуть") : String(localized: "Ещё") + ": " + kinds.map(\.title).joined(separator: ", "))
     }
 
@@ -739,12 +739,15 @@ private extension View {
     }
 }
 
-/// Which blocks stay in sight and which wait under «Ещё»: the AI ones (limits, sessions) stay. Nothing is folded when
-/// there is no AI block to keep or only one other block — a row instead of one block saves nothing.
+/// Which blocks stay in sight and which wait under «Ещё»: the AI ones (limits, sessions) and the projects stay — a
+/// profile made for projects must show them (Oleh, 2026-11-10). Nothing is folded when there is nothing to keep or
+/// only one other block — a row instead of one block saves nothing.
 enum PanelFold {
     static func split(_ modules: [ModuleKind]) -> (main: [ModuleKind], more: [ModuleKind]) {
-        let main = modules.filter { $0.group == .ai }
-        let more = modules.filter { $0.group != .ai }
+        let main = modules.filter(staysInSight)
+        let more = modules.filter { !staysInSight($0) }
         return main.isEmpty || more.count < 2 ? (modules, []) : (main, more)
     }
+
+    static func staysInSight(_ kind: ModuleKind) -> Bool { kind.group == .ai || kind == .projects }
 }
