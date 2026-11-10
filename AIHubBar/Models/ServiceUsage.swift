@@ -13,6 +13,39 @@ struct LimitWindow: Equatable, Identifiable, Sendable {
     var runsOutAt: Date?
     /// False when the reset is already said elsewhere (a model week that resets with the week).
     var showsReset = true
+    /// How long the window lasts, when it is known (Claude's week): then the panel can say how the spend compares
+    /// with an even one.
+    var length: TimeInterval?
+
+    /// The percent an even spend would have reached by now.
+    func evenSpend(now: Date = .now) -> Double? {
+        guard let length, let resetsAt else { return nil }
+        return EvenSpend.expected(resetsAt: resetsAt, length: length, now: now)
+    }
+}
+
+/// «Ahead or behind an even spend» for a limit that lasts days: people asked trackers like this one for exactly it
+/// (2026-11-10) — at 40 % on Wednesday morning, is that a lot?
+enum EvenSpend {
+    static let week: TimeInterval = 7 * 24 * 3600
+    /// The first hours of a window say nothing: one long session is far above an even spend.
+    static let quietStart: TimeInterval = 12 * 3600
+    /// Differences smaller than this are «on track» and not worth a line.
+    static let worthSaying = 5.0
+
+    /// 0…100: how much of the window has passed. Nil outside the window or at its very start.
+    static func expected(resetsAt: Date, length: TimeInterval, now: Date) -> Double? {
+        let elapsed = length - resetsAt.timeIntervalSince(now)
+        guard length > 0, elapsed >= quietStart, elapsed <= length else { return nil }
+        return elapsed / length * 100
+    }
+
+    /// Whole percent points above (+) or below (−) an even spend; nil when the difference is not worth a line.
+    static func difference(percent: Double, expected: Double?) -> Int? {
+        guard let expected else { return nil }
+        let delta = percent - expected
+        return abs(delta) >= worthSaying ? Int(delta.rounded()) : nil
+    }
 }
 
 /// A line under a service's limits: credits, plan, how full the context is.
@@ -58,7 +91,8 @@ struct ServiceUsage: Equatable, Identifiable, Sendable {
 
     static func claude(_ snapshot: UsageSnapshot, forecast: UsageForecast, pace: Double? = nil, week: WeekUsage?, error: String?) -> ServiceUsage {
         func window(_ window: UsageWindow, showsReset: Bool = true) -> LimitWindow {
-            LimitWindow(id: window.key, title: window.title, percent: window.utilization, resetsAt: window.resetsAt, showsReset: showsReset)
+            LimitWindow(id: window.key, title: window.title, percent: window.utilization, resetsAt: window.resetsAt, showsReset: showsReset,
+                        length: window.key.hasPrefix("seven_day") ? EvenSpend.week : nil)
         }
         var notes: [ServiceNote] = []
         if let extra = snapshot.extra, extra.isEnabled { notes.append(ServiceNote(text: UsageText.extra(extra), symbol: "creditcard")) }
