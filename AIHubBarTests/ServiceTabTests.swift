@@ -57,6 +57,22 @@ struct SettingsPaneTests {
         #expect(SettingsPane(rawValue: "modules") == .show && SettingsPane(rawValue: "panel") == .show)
     }
 
+    /// A sidebar dragged shut must not stay shut: the remembered split goes, a normal one stays.
+    @Test func collapsedSidebarIsForgotten() throws {
+        let name = "claudepult-sidebar-\(UUID().uuidString)"
+        let defaults = try #require(UserDefaults(suiteName: name))
+        defer { defaults.removePersistentDomain(forName: name) }
+        let shut = ["0.000000, 0.000000, 234.000000, 700.000000, YES, YES", "0.000000, 0.000000, 940.000000, 700.000000, NO, NO"]
+        let open = ["0.000000, 0.000000, 230.000000, 700.000000, NO, NO", "0.000000, 0.000000, 710.000000, 700.000000, NO, NO"]
+        #expect(SettingsSidebar.isCollapsed(shut) && !SettingsSidebar.isCollapsed(open) && !SettingsSidebar.isCollapsed([]))
+        defaults.set(open, forKey: SettingsSidebar.framesKey)
+        SettingsSidebar.forgetCollapsed(defaults)
+        #expect(defaults.stringArray(forKey: SettingsSidebar.framesKey) == open)
+        defaults.set(shut, forKey: SettingsSidebar.framesKey)
+        SettingsSidebar.forgetCollapsed(defaults)
+        #expect(defaults.object(forKey: SettingsSidebar.framesKey) == nil)
+    }
+
     /// The sidebar keeps a few rows: a module's page and «Строка меню» open from «Что показывать» and go back to it;
     /// the island has a row of its own.
     @Test func pagesOpenFromWhatToShow() {

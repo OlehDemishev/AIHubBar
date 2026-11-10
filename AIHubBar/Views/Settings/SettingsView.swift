@@ -20,10 +20,12 @@ struct SettingsView: View {
 
     init() {
         SettingsRoute.migrate()
+        SettingsSidebar.forgetCollapsed()
     }
 
     var body: some View {
-        NavigationSplitView {
+        // The sidebar is the only way between pages and the window has no button to bring it back: always shown.
+        NavigationSplitView(columnVisibility: .constant(.all)) {
             List(selection: Binding(get: { selected }, set: { if let new = $0 { select(new) } })) {
                 if query.isEmpty {
                     ForEach(sidebar, id: \.self) { pane in
@@ -154,5 +156,24 @@ struct SettingsView: View {
     private func isSetUp(_ pane: SettingsPane) -> Bool? {
         guard case let .service(service) = pane else { return nil }
         return service.isSetUp(agents: Set(services.agents.keys), keys: services.hasKey, limits: hub.available.union(hub.savedKeys))
+    }
+}
+
+/// The Settings sidebar dragged shut stayed shut: macOS remembers the split, and the toggle button is removed from
+/// this window. Oleh's 0.10.1 opened with «Основные» alone and no way to any other page (2026-11-10).
+enum SettingsSidebar {
+    static let framesKey = "NSSplitView Subview Frames com_apple_SwiftUI_Settings_window, SidebarNavigationSplitView"
+
+    /// Drops the remembered split when it says the sidebar is collapsed, before the window is made.
+    static func forgetCollapsed(_ defaults: UserDefaults = .standard) {
+        guard let frames = defaults.stringArray(forKey: framesKey), isCollapsed(frames) else { return }
+        defaults.removeObject(forKey: framesKey)
+    }
+
+    /// AppKit writes a pane as «x, y, width, height, hidden, collapsed»; the sidebar is the first one.
+    static func isCollapsed(_ frames: [String]) -> Bool {
+        guard let sidebar = frames.first else { return false }
+        let parts = sidebar.split(separator: ",").map { $0.trimmingCharacters(in: .whitespaces) }
+        return parts.suffix(2).contains("YES")
     }
 }
