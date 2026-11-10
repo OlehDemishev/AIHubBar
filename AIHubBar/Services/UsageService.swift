@@ -35,10 +35,11 @@ enum UsageError: LocalizedError, Equatable {
         case .expired: String(localized: "Вход Claude Code устарел — обновится при следующем запуске claude в Терминале (если нет: claude → /login)")
         case .keychainDenied: String(localized: "Нет доступа к связке ключей: разрешите AI Hub Bar читать «Claude Code-credentials»")
         case let .http(code) where code == 401 || code == 403: String(localized: "Сессия Claude Code истекла (HTTP \(code)): claude → /login")
+        // The endpoint is undocumented: when it moves or answers differently, only a newer AI Hub Bar helps.
+        case .http(404), .http(410), .badResponse: String(localized: "Лимиты недоступны: Anthropic изменил свой сервис. Проверьте обновления AI Hub Bar.")
         case let .http(code): String(localized: "Лимиты недоступны (HTTP \(code))")
         case .rateLimited: String(localized: "Сервер лимитов просит запрашивать реже")
         case let .network(code): String(localized: "Лимиты недоступны: нет связи (\(code))")
-        case .badResponse: String(localized: "Лимиты недоступны: ответ в неизвестном формате")
         }
     }
 }

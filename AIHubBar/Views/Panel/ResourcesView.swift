@@ -125,7 +125,7 @@ struct ResourcesView: View {
     private func batteryText(_ battery: SystemSnapshot.Battery) -> String {
         if battery.charging { return String(localized: "\(battery.percent) % · заряжается") }
         if battery.onAC { return String(localized: "\(battery.percent) % · от сети") }
-        guard let minutes = battery.minutesLeft else { return "\(battery.percent) %" }
+        guard let minutes = battery.minutesLeft else { return String(localized: "\(battery.percent) %") }
         return String(localized: "\(battery.percent) % · осталось \(minutes / 60) ч \(minutes % 60) мин")
     }
 }

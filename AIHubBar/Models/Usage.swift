@@ -223,7 +223,8 @@ enum UsageFile {
 
 /// Human texts for the limits block.
 enum UsageText {
-    static func percent(_ value: Double) -> String { "\(Int(value.rounded())) %" }
+    /// Through the catalog: Arabic writes «27%» without the space — in a right-to-left line «27 %» is drawn «% 27».
+    static func percent(_ value: Double) -> String { String(localized: "\(Int(value.rounded())) %") }
 
     /// «4 %/ч»: one decimal below ten, none above.
     static func pace(_ perHour: Double) -> String {
