@@ -133,7 +133,7 @@ if [[ "$PUBLISH" == "--publish" ]]; then
   if [[ $BETA -eq 1 ]]; then
     # A pre-release is never «latest», so copies outside the beta channel don't see it.
     gh release create "v$VERSION" "$OUT/$DMG" "$OUT/appcast.xml" --repo "$REPO" --title "$NAME $VERSION" --prerelease \
-      --notes "**Beta build** for beta testers (Settings → General → Beta builds). $NOTES"
+      --notes "**Beta build** for beta testers (Settings → General → Beta builds)."$'\n\n'"$NOTES"
   else
     gh release create "v$VERSION" "$OUT/$DMG" "$OUT/appcast.xml" ${EXTRA[@]+"${EXTRA[@]}"} --repo "$REPO" --title "$NAME $VERSION" \
       --notes "$NOTES"
