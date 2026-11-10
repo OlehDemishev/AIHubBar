@@ -26,6 +26,7 @@
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/specs/SPEC-windows.md §9, stage 2–3 leftovers)
 
 **Needs Oleh:**
+- say whether the app may report crashes by itself (opt-in, anonymous) — today it only offers a GitHub issue after a crash
 - update 0.10.1 → 0.10.2 through Settings → «Основные» → «Обновления» and say whether Sparkle replaced the copy: the update to 0.9.1 never reached `~/Applications`
 - «Не спать» has to be switched on again after the restart of the app
 - after the next restart: does `~/Applications/AI Hub Bar.app` (0.9.0) start at login? Until 2026-11-09 a build from `.claude/worktrees/jolly-wiles-db1b62` started instead
@@ -47,6 +48,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-10 — Homebrew cask; the crash signal looked at (branch `chore/homebrew-cask`)
+
+Done: `Casks/ai-hub-bar.rb` (0.10.2 and its checksum, `auto_updates`, zap of the support folder and the preferences) makes the repository itself a tap — no second repository to keep. `scripts/release-tools/update-cask.sh <version>` rewrites the version and checksum from the released disk image; docs/RELEASE.md «Homebrew» says to run it after every release; README has the two commands. The fifth item of the night, a signal about crashes, needed no code: the app already reads macOS's crash reports of itself and offers a filled-in GitHub issue with the home folder redacted (`CrashReport`, Settings → «После сбоя предлагать отправить отчёт»). Knowing about a crash without the person doing anything would mean sending data to a server — a decision for Oleh, not made here.
+Checked: `brew style Casks/ai-hub-bar.rb` — no offenses; the script run for 0.10.2 gives the checksum of the published file.
+Left: the tap is tried from GitHub right after the merge (it needs the cask on `main`); the result is in the next entry or in the answer to Oleh.
 
 ## 2026-11-10 — Week pace: faster or slower than an even spend (branch `feat/week-pace`)
 

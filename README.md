@@ -71,6 +71,13 @@ A command's result is always a **new file** — nothing is overwritten. **Compar
 2. Open it and drag **AI Hub Bar** to Applications.
 3. Open the app. It is signed with a Developer ID and notarized by Apple.
 
+Or with Homebrew:
+
+```bash
+brew tap olehdemishev/aihubbar https://github.com/OlehDemishev/AIHubBar
+brew install --cask ai-hub-bar
+```
+
 After that the app updates itself (Settings → General → Updates). The first start opens an assistant that checks what the Mac still needs and sets up your first profile. Everything else is in the [guide](docs/GUIDE.md).
 
 **Requirements:** macOS 14 or later (Apple Silicon or Intel) and at least one AI service: an agent such as Claude Code, Codex, Gemini CLI, Copilot CLI or Cursor CLI, or a model by API key. Each service's limits need that service; live session rows need Claude Code, Codex or Copilot CLI.
