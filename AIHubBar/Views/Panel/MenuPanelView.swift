@@ -39,6 +39,10 @@ struct MenuPanelView: View {
     @State private var folderExpanded: Set<String> = []
     /// Recent Codex and Copilot conversations for «Сессии», read when the panel opens.
     @State private var agentThreads: [AgentThread] = []
+    /// The Claude account's name and plan for the header, read when the panel opens.
+    @State private var identity: ClaudeIdentity?
+    /// The blocks after limits and sessions wait under one «Ещё» row until it is opened; the choice is kept.
+    @AppStorage(StorageKey.panelMoreExpanded) private var moreExpanded = false
     @FocusState private var searchFocused: Bool
 
     /// Header, search and a margin under the panel, at the normal text size.
@@ -161,6 +165,9 @@ struct MenuPanelView: View {
             // Typing right after the click finds things; ↑ ↓ ↵ work from here.
             searchFocused = true
             Task { agentThreads = await Task.detached(priority: .utility) { AgentThread.recent() }.value }
+            Task { identity = await Task.detached(priority: .utility) { ClaudeIdentity.read() }.value }
+            // Whoever had the panel before the «Ещё» row keeps every block in sight.
+            if UserDefaults.standard.object(forKey: StorageKey.panelMoreExpanded) == nil { moreExpanded = !modes.modes.isEmpty }
         }
         .onDisappear {
             isShown = false
@@ -186,8 +193,14 @@ struct MenuPanelView: View {
             }
 
             // The current profile's modules, in its order (SPEC-profiles §9.2), each on its card.
-            ForEach(modes.panelModules, id: \.self) { kind in
+            let folded = PanelFold.split(modes.panelModules)
+            ForEach(moreExpanded ? modes.panelModules : folded.main, id: \.self) { kind in
                 module(kind)
+            }
+            if !folded.more.isEmpty {
+                moreRow(folded.more)
+                    .panelCard()
+                    .revealed(isShown, step: 2, reduceMotion: calm)
             }
 
             // macOS is asked once by itself (`LayoutSwitcher`); after that this quiet line is all that says so.
@@ -263,6 +276,7 @@ struct MenuPanelView: View {
             }
         case let .project(id, _, _):
             if folders.isActive { folderExpanded.insert(id) } else { expanded.insert(id) }
+            moreExpanded = true
             scrollTarget = id
             collapsedRaw = PanelBlock.collapsed(in: collapsedRaw).contains(.projects)
                 ? PanelBlock.toggling(.projects, in: collapsedRaw) : collapsedRaw
@@ -293,8 +307,21 @@ struct MenuPanelView: View {
                 .scaledFont(.title3)
                 .foregroundStyle(.orange)
                 .symbolEffect(.bounce, options: .nonRepeating, value: calm ? false : isShown)
-            Text("AI Hub Bar")
+            Text(verbatim: accountName ?? "AI Hub Bar")
                 .scaledFont(.headline)
+                .lineLimit(1)
+                .help(accountName == nil ? "" : String(localized: "Аккаунт Claude Code"))
+            if let plan = accountPlan {
+                Text(verbatim: plan)
+                    .scaledFont(.caption, weight: .medium)
+                    .lineLimit(1)
+                    .fixedSize()
+                    .foregroundStyle(.orange)
+                    .padding(.horizontal, 7)
+                    .padding(.vertical, 2)
+                    .background(Capsule().fill(Color.orange.opacity(0.14)))
+                    .help(String(localized: "Тариф Claude"))
+            }
             profileChip
             Spacer(minLength: 4)
             HStack(spacing: 8) { headerButtons }
@@ -304,6 +331,38 @@ struct MenuPanelView: View {
         }
         .padding(.horizontal, 14)
         .padding(.vertical, 10)
+    }
+
+    /// The account and its plan stand in the header while the limits are shown: they say whose limits these are.
+    private var accountName: String? { modes.panelModules.contains(.limits) ? identity?.name : nil }
+    private var accountPlan: String? { modes.panelModules.contains(.limits) ? identity?.plan : nil }
+
+    /// One quiet row for the blocks that are not about AI: their names, and a click opens or folds them.
+    private func moreRow(_ kinds: [ModuleKind]) -> some View {
+        Button {
+            withAnimation(calm ? nil : .snappy(duration: 0.2)) { moreExpanded.toggle() }
+        } label: {
+            HStack(spacing: 6) {
+                Text(moreExpanded ? String(localized: "Свернуть") : String(localized: "Ещё"))
+                    .scaledFont(.caption, weight: .semibold)
+                if !moreExpanded {
+                    Text(verbatim: kinds.map(\.title).joined(separator: " · "))
+                        .scaledFont(.caption)
+                        .foregroundStyle(.secondary)
+                        .lineLimit(1)
+                }
+                Spacer(minLength: 4)
+                Image(systemName: moreExpanded ? "chevron.up" : "chevron.down")
+                    .scaledFont(.caption2, weight: .semibold)
+                    .foregroundStyle(.secondary)
+            }
+            .padding(.horizontal, 10)
+            .padding(.vertical, 7)
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+        .help(moreExpanded ? String(localized: "Оставить в панели только лимиты и сессии") : String(localized: "Показать остальные блоки"))
+        .accessibilityLabel(moreExpanded ? String(localized: "Свернуть") : String(localized: "Ещё") + ": " + kinds.map(\.title).joined(separator: ", "))
     }
 
     @ViewBuilder
@@ -677,5 +736,15 @@ private extension View {
                     : nil,
                 value: isShown
             )
+    }
+}
+
+/// Which blocks stay in sight and which wait under «Ещё»: the AI ones (limits, sessions) stay. Nothing is folded when
+/// there is no AI block to keep or only one other block — a row instead of one block saves nothing.
+enum PanelFold {
+    static func split(_ modules: [ModuleKind]) -> (main: [ModuleKind], more: [ModuleKind]) {
+        let main = modules.filter { $0.group == .ai }
+        let more = modules.filter { $0.group != .ai }
+        return main.isEmpty || more.count < 2 ? (modules, []) : (main, more)
     }
 }

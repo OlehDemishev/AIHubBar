@@ -66,4 +66,24 @@ struct AuditTests {
         #expect(CommonCommand.reportNow.isFailure(exitCode: 0, summary: "Telegram: ошибка 401"))
         #expect(CommonCommand.cleanupRun.isFailure(exitCode: 0, summary: "Идёт сборка, пропускаю"))
     }
+
+    /// The panel keeps the AI blocks in sight and folds the rest under «Ещё», unless there is nothing to gain.
+    @Test func panelFoldsWhatIsNotAboutAI() {
+        let all: [ModuleKind] = [.projects, .limits, .resources, .sessions, .keepAwake]
+        #expect(PanelFold.split(all).main == [.limits, .sessions])
+        #expect(PanelFold.split(all).more == [.projects, .resources, .keepAwake])
+        #expect(PanelFold.split([.limits, .resources]).more.isEmpty, "one block is not worth a row")
+        #expect(PanelFold.split([.projects, .resources]).main == [.projects, .resources], "no AI block to keep")
+    }
+
+    /// The header's account and plan come from Claude Code's own file; the e-mail is never taken.
+    @Test func claudeIdentityFromConfig() throws {
+        let json = #"{"oauthAccount":{"displayName":"Ann","emailAddress":"a@example.com","organizationType":"claude_max","organizationRateLimitTier":"default_claude_max_5x"}}"#
+        let identity = try #require(ClaudeIdentity.parse(Data(json.utf8)))
+        #expect(identity == ClaudeIdentity(name: "Ann", plan: "Max 5x"))
+        #expect(ClaudeIdentity.plan(type: "claude_max", tier: "default_claude_max_20x") == "Max 20x")
+        #expect(ClaudeIdentity.plan(type: "claude_pro", tier: "default_claude_ai") == "Pro")
+        #expect(ClaudeIdentity.plan(type: "something_new", tier: nil) == nil)
+        #expect(ClaudeIdentity.parse(Data("{}".utf8)) == nil)
+    }
 }

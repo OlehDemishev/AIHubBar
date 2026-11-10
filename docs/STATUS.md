@@ -5,7 +5,7 @@
 **Updated:** 2026-11-10
 
 **Now:**
-- redesign after Oleh's «перегружено» (2026-11-10), agreed on a mock-up: step 1 merged, not released — the limits block is a big number over a bar with the pace, bars or rings by choice, the rest behind «Подробнее» (branch `feat/panel-compact-limits`); step 3 done, not released — Settings sidebar is seven rows, one page «Что показывать» (branch `feat/settings-what-to-show`)
+- redesign after Oleh's «перегружено» (2026-11-10), agreed on a mock-up: step 1 merged, not released — the limits block is a big number over a bar with the pace, bars or rings by choice, the rest behind «Подробнее» (branch `feat/panel-compact-limits`); step 3 done, not released — Settings sidebar is seven rows, one page «Что показывать» (branch `feat/settings-what-to-show`); step 2 done, not released — the Claude account and plan in the panel's header, the blocks that are not about AI under one «Ещё» row (branch `feat/panel-more-row`)
 - 0.9.1 (build 787) published 2026-11-10 with #344 and #345: removing a Claude account no longer crashes the app (it did in 0.8.1 and 0.9.0), Arabic is mirrored, the Settings sidebar shows whole names, a worktree's name in a session row
 - 0.9.0 (build 781) published 2026-11-09 with the audit pass (#342): the closed panel no longer uses a third of a CPU core while a session works; 30 fixes from a UI and code review (list in the journal)
 - tech debt pass done 2026-11-09, all merged: #330 Sparkle 2.10.1, #331 the lock screen tile checks it locked, #332 unused strings removed and the catalog compared with the code, #333 Mac CI on Xcode 27.2 running `check.sh`, #334 and #335 tests for the Telegram controller, the notch island and the command engine (77 new), #336 Telegram files split
@@ -16,7 +16,7 @@
 - merged 2026-11-03: #251 menu bar ☕ follows the «Не спать» switch, #248 «Не спать» on/off in the menu bar, #241 Codex states, #240 quick command shortcuts, #238 «Быстрый запрос», #236 content spec, #242 «Telegram» stage 1, #244 menu at the bottom, #246 shared bot (Worker not deployed yet), #247 desktop CI off for Mac string changes, #249 the bot's menu set up by each person, #252 stage 2 (sessions, requests, limits), #254 stage 3 (tasks and runs), #255 stage 4 (settings in the bot), #256 Mini App
 
 **Next:**
-- redesign step 2: the panel's other blocks off for new people and folded into one «Ещё» row; account and plan in the header
+- release the redesign (steps 1–3) after Oleh looks at it; before that click through «Что показывать» live (switches, dragging, back, search) and look at the light theme and one more language
 - check on the Air: the island at the real notch
 - promotion (docs/LAUNCH.md): r/ClaudeAI, the lists, r/macapps, Show HN, Product Hunt, Homebrew
 - content (docs/specs/SPEC-content.md, agreed): stage 2 «Версии», then batch tasks; better after the first feedback from people
@@ -44,6 +44,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-10 — Panel: account and plan in the header, the «Ещё» row (branch `feat/panel-more-row`)
+
+Done: redesign step 2. The header shows the Claude account's name and plan («Oleh», «Max 5x») instead of «AI Hub Bar» while the limits block is in the panel; both come from `~/.claude.json` → `oauthAccount` (display name, never the e-mail; plans this version doesn't know show nothing), read when the panel opens. The blocks that are not about AI wait under one «Ещё» row with their names; a click opens them all in the profile's order and «Свернуть» folds them back, the choice is kept. Nothing is folded with no AI block or with only one other block. Whoever had the panel before keeps every block open; a first profile made by the assistant starts folded. A project picked in the search opens the row. The assistant's templates are unchanged.
+Checked: `scripts/check.sh` green (tests for the fold and for reading the account). Seen live on the Debug copy: the header with name and plan, limits and sessions, the «Ещё» row with «Отчёты · Ресурсы Mac · Не спать».
+Left: not clicked live — opening and folding the row; not seen — the open state with «Свернуть», a first run through the assistant, light theme, other languages, an account without a display name. Not released.
 
 ## 2026-11-10 — Settings: «Что показывать», seven rows in the sidebar (branch `feat/settings-what-to-show`)
 
