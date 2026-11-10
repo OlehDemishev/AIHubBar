@@ -17,7 +17,7 @@
 - merged 2026-11-03: #251 menu bar ☕ follows the «Не спать» switch, #248 «Не спать» on/off in the menu bar, #241 Codex states, #240 quick command shortcuts, #238 «Быстрый запрос», #236 content spec, #242 «Telegram» stage 1, #244 menu at the bottom, #246 shared bot (Worker not deployed yet), #247 desktop CI off for Mac string changes, #249 the bot's menu set up by each person, #252 stage 2 (sessions, requests, limits), #254 stage 3 (tasks and runs), #255 stage 4 (settings in the bot), #256 Mini App
 
 **Next:**
-- towards 1.0 (discussed 2026-11-10): click through what was not checked live, a first run on a clean copy in English, freeze what is in 1.0 and what stays beta, release notes, new screenshots, translations read by people, then feedback from strangers before 1.0
+- towards 1.0 (discussed 2026-11-10): the live pass is done (journal 2026-11-10); left — freeze what is in 1.0 and what stays beta, release notes, new screenshots (the assistant's map and the help still draw rings), translations read by people, feedback from strangers before 1.0
 - check on the Air: the island at the real notch
 - promotion (docs/LAUNCH.md): r/ClaudeAI, the lists, r/macapps, Show HN, Product Hunt, Homebrew
 - content (docs/specs/SPEC-content.md, agreed): stage 2 «Версии», then batch tasks; better after the first feedback from people
@@ -44,6 +44,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-10 — Live pass over what was not checked (branch `fix/live-check-findings`)
+
+Done: everything below was pressed in an isolated copy (`CFFIXED_USER_HOME`, a copy of the profiles), because the Debug build shares `Application Support/ClaudePult/modes` with the installed app — its switches would have changed Oleh's real profiles. One fix came out of it: VoiceOver said «выключен» for the pale «Профили» row.
+Checked, by AX presses and captures: «Что показывать» — a menu bar switch on and off, the panel switch on a module that was off (it joins the blocks), «Выше» moves a block, the panel switch off keeps its place, a module's page and back, «Строка меню…» and back, «Готовый набор» → «Только AI» → the confirmation → «Отмена». The panel — «Свернуть», «Ещё», «Подробнее»; the stop button: the first press shows «Остановить?» and the run goes on, the second stops it (state `stopped`). English with the light theme and Arabic: Settings and the panel; Arabic percents read «16%». A first run on a clean copy with its own bundle id, in English: the assistant's five steps with the Developer template, «Done», then the panel folded as «More · Projects · Keep Awake».
+Left: the Settings search field (AX cannot type into it; `matches` is covered by tests); dragging a row (only the buttons); «Остановить?» going back by itself after four seconds; the week strip inside «Подробнее» (no history in the isolated copy); the «Вид лимитов» picker. Seen on the way: the assistant's map and help pictures still draw rings; a few English texts use «» where others use “”; a first Developer profile starts with «Projects» under «More» — Oleh to say whether projects should stay in sight.
 
 ## 2026-11-10 — Known holes: stop asks, Arabic percents, limits message (branch `fix/known-holes`)
 

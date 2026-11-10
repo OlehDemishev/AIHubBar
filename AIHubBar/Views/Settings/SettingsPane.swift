@@ -160,6 +160,8 @@ struct PaneRow: View {
     let pane: SettingsPane
     var isSetUp: Bool?
     var isOff = false
+    /// Pale without being a module that is off: «Профили» while there is one profile.
+    var isQuiet = false
     /// The one row for all services carries their common name and icon.
     var allServices = false
 
@@ -181,7 +183,7 @@ struct PaneRow: View {
             }
         }
         .padding(.vertical, 1)
-        .opacity(isOff ? 0.45 : 1)
+        .opacity(isOff || isQuiet ? 0.45 : 1)
         .accessibilityElement(children: .combine)
         .accessibilityValue(isOff ? String(localized: "выключен") : isSetUp.map(Self.status) ?? "")
     }

@@ -27,7 +27,7 @@ struct SettingsView: View {
             List(selection: Binding(get: { selected }, set: { if let new = $0 { select(new) } })) {
                 if query.isEmpty {
                     ForEach(sidebar, id: \.self) { pane in
-                        PaneRow(pane: pane, isOff: isPale(pane), allServices: pane.isService)
+                        PaneRow(pane: pane, isOff: !isOn(pane), isQuiet: pane == .modes && modes.modes.count < 2, allServices: pane.isService)
                     }
                 } else {
                     ForEach(SettingsPane.areas.filter { $0.matches(query) }, id: \.self) { pane in
@@ -109,11 +109,6 @@ struct SettingsView: View {
 
     private func remember(_ pane: SettingsPane) {
         if case let .service(service) = pane { lastService = service }
-    }
-
-    /// «Профили» while there is one profile: nothing to switch between yet. A module switched off.
-    private func isPale(_ pane: SettingsPane) -> Bool {
-        pane == .modes ? modes.modes.count < 2 : !isOn(pane)
     }
 
     private var foundModules: [SettingsPane] {
