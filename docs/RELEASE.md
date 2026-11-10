@@ -41,6 +41,14 @@ scripts/release.sh 0.2.0 --publish  # the same, then the GitHub release v0.2.0 w
 - **How copies find updates:** they read `https://github.com/OlehDemishev/AIHubBar/releases/latest/download/appcast.xml`, which is the newest release's appcast. Nothing else has to be uploaded or committed.
 - **Public repository needed:** people can only download the files once the repository is public.
 
+## Homebrew
+
+`Casks/ai-hub-bar.rb` makes this repository a tap: `brew tap olehdemishev/aihubbar https://github.com/OlehDemishev/AIHubBar`,
+then `brew install --cask ai-hub-bar`. The cask names one version and the checksum of its disk image, so after every
+release (not a beta) run `scripts/release-tools/update-cask.sh <version>` and commit the cask together with the
+STATUS entry that records the release. The app updates itself through Sparkle (`auto_updates true`), so a cask that
+lags a release behind still installs a working copy.
+
 ## Release notes
 
 Every release that changes what people see has `docs/release-notes/<version>.md` (English, a few `- ` lines under
