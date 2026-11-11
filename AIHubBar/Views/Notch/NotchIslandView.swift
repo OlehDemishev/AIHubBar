@@ -133,8 +133,8 @@ private struct NotchEarView: View {
     var body: some View {
         Group {
             switch ear {
-            case .sessionLimit: limit(usage.snapshot?.session?.utilization)
-            case .weekLimit: limit(usage.snapshot?.week?.utilization)
+            case .sessionLimit: limit(main?.firstLimit?.percent)
+            case .weekLimit: limit(main?.secondLimit?.percent)
             case .otherAI: limit(NotchText.fullestOther(hub.percents)?.percent)
             case .sessions: sessionDot
             case .background:
@@ -148,8 +148,11 @@ private struct NotchEarView: View {
         .accessibilityLabel(summary)
     }
 
+    /// The main service's limits: Claude's, or another service's for whoever has no Claude.
+    private var main: ServiceUsage? { MainService.current(usage: usage, hub: hub, settings: settings) }
+
     private var summary: String {
-        NotchText.earSummary(ear, usage: usage.snapshot, sessions: sessions.items, background: runs.running.count, otherAI: hub.percents,
+        NotchText.earSummary(ear, main: main, sessions: sessions.items, background: runs.running.count, otherAI: hub.percents,
                              liveActivity: settings.notch.liveActivity)
     }
 
@@ -242,6 +245,7 @@ private struct NotchEarView: View {
 
 /// The open card (SPEC-notch §3.3): both limits with the forecast, then up to four sessions and what each is doing.
 private struct NotchCard: View {
+    @Environment(HubLimitsStore.self) private var hub
     @Environment(NotchIsland.self) private var island
     @Environment(UsageStore.self) private var usage
     @Environment(SessionStore.self) private var sessions
@@ -263,13 +267,13 @@ private struct NotchCard: View {
                 .fixedSize(horizontal: false, vertical: true)
                 Divider().overlay(.white.opacity(0.15))
             }
-            if usage.snapshot?.session != nil || usage.snapshot?.week != nil {
+            if let main = MainService.current(usage: usage, hub: hub, settings: settings), main.firstLimit != nil {
                 HStack(spacing: 14) {
-                    if let session = usage.snapshot?.session { ring(session) }
-                    if let week = usage.snapshot?.week { ring(week) }
+                    if let first = main.firstLimit { ring(first) }
+                    if let second = main.secondLimit { ring(second) }
                     Spacer(minLength: 0)
                 }
-                if let forecast = UsageText.forecast(usage.forecast) {
+                if let forecast = UsageText.forecast(main.forecast) {
                     Text(forecast)
                         .font(.caption)
                         .foregroundStyle(.secondary)
@@ -316,20 +320,21 @@ private struct NotchCard: View {
         .accessibilityLabel(String(localized: "Остров у чёлки"))
     }
 
-    private func ring(_ window: UsageWindow) -> some View {
-        HStack(spacing: 7) {
+    private func ring(_ window: LimitWindow) -> some View {
+        let percent = window.percent ?? 0
+        return HStack(spacing: 7) {
             ZStack {
                 Circle().stroke(.white.opacity(0.18), lineWidth: 3.5)
                 Circle()
-                    .trim(from: 0, to: min(max(window.utilization, 0), 100) / 100)
-                    .stroke(window.levelColor, style: StrokeStyle(lineWidth: 3.5, lineCap: .round))
+                    .trim(from: 0, to: min(max(percent, 0), 100) / 100)
+                    .stroke(UsageWindow.color(for: percent), style: StrokeStyle(lineWidth: 3.5, lineCap: .round))
                     .rotationEffect(.degrees(-90))
             }
             .frame(width: 26, height: 26)
             VStack(alignment: .leading, spacing: 0) {
-                Text(UsageText.percent(window.utilization))
+                Text(UsageText.percent(percent))
                     .font(.callout.weight(.semibold).monospacedDigit())
-                    .foregroundStyle(window.levelColor)
+                    .foregroundStyle(UsageWindow.color(for: percent))
                 Text(window.title)
                     .font(.caption2)
                     .foregroundStyle(.secondary)

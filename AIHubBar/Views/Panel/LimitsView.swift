@@ -22,12 +22,20 @@ struct LimitsView: View {
         VStack(alignment: .leading, spacing: 8) {
             header
             if !collapsed {
+                if let lead { ServiceCard(usage: lead, main: true) }
                 details
                 hubRows
             }
         }
         .padding(.horizontal, 10)
         .padding(.vertical, 8)
+    }
+
+    /// Another service leading the block (`MainService`): the chosen one, or the first with limits while Claude has
+    /// none. Nil while Claude leads, as it always did.
+    private var lead: ServiceUsage? {
+        guard let main = MainService.current(usage: usage, hub: hub, settings: settings), main.hubSource != nil else { return nil }
+        return main
     }
 
     /// Other AI services (SPEC-hub) under Claude, each drawn by the same card (SPEC-ai-services stage 2).
@@ -37,7 +45,7 @@ struct LimitsView: View {
             Divider().padding(.vertical, 2)
             ServiceCard(usage: account)
         }
-        ForEach(hub.usages) { service in
+        ForEach(hub.usages.filter { $0.id != lead?.id }) { service in
             Divider().padding(.vertical, 2)
             ServiceCard(usage: service)
         }
@@ -56,8 +64,9 @@ struct LimitsView: View {
     @ViewBuilder
     private var details: some View {
         if let snapshot = usage.snapshot {
+            if lead != nil { Divider().padding(.vertical, 2) }
             ServiceCard(usage: .claude(snapshot, forecast: usage.forecast, pace: usage.pace, week: usage.weekUsage, error: usage.lastError),
-                        showsTitle: !hub.limits.isEmpty || !accounts.usages.isEmpty, showsDetails: false)
+                        showsTitle: !hub.limits.isEmpty || !accounts.usages.isEmpty, showsDetails: false, main: lead == nil)
             // A snapshot is kept for a day: an expired sign-in must still say so.
             if usage.signedOut, services.agents[.claudeCode] != nil { signIn }
             // Models by API (SPEC-modes §11.2): shown once AI Hub Bar has spent something this month.
@@ -68,6 +77,8 @@ struct LimitsView: View {
                     .foregroundStyle(.secondary)
             }
         } else if usage.signedOut, services.hasScanned, services.agents[.claudeCode] == nil {
+            // Whoever works with another service is not asked to install Claude Code.
+            if lead == nil {
             VStack(alignment: .leading, spacing: 6) {
                 Text("Лимиты подписки показывает Claude Code.")
                     .scaledFont(.caption)
@@ -75,14 +86,17 @@ struct LimitsView: View {
                 Button("Установить Claude Code") { ClaudeSignIn.openInstallPage() }
                     .controlSize(.small)
             }
+            }
         } else if usage.signedOut {
+            if lead != nil { Divider().padding(.vertical, 2) }
             signIn
         } else if let error = usage.lastError {
+            if lead != nil { Divider().padding(.vertical, 2) }
             Label("Лимиты недоступны. \(error)", systemImage: "exclamationmark.triangle")
                 .scaledFont(.caption)
                 .foregroundStyle(.orange)
                 .fixedSize(horizontal: false, vertical: true)
-        } else {
+        } else if lead == nil {
             HStack(spacing: 6) {
                 ProgressView().controlSize(.mini)
                 Text("Загружаю лимиты…").scaledFont(.caption).foregroundStyle(.secondary)
@@ -112,11 +126,11 @@ struct LimitsView: View {
         HStack(spacing: 6) {
             BlockTitle(block: .limits, title: "Лимиты AI")
             // Folded, the block still says the two numbers that matter.
-            if collapsed, let snapshot = usage.snapshot {
-                Text(verbatim: [snapshot.session, snapshot.week].compactMap { $0.map { UsageText.percent($0.utilization) } }.joined(separator: " · "))
+            if collapsed, let main = MainService.current(usage: usage, hub: hub, settings: settings) {
+                Text(verbatim: [main.firstLimit, main.secondLimit].compactMap { $0?.percent.map(UsageText.percent) }.joined(separator: " · "))
                     .scaledFont(.caption, weight: .semibold)
                     .monospacedDigit()
-                    .opacity(isStale ? 0.45 : 1)
+                    .opacity(main.isStale ? 0.45 : 1)
             }
             Spacer()
             if usage.isRefreshing {
@@ -208,6 +222,8 @@ private struct ServiceCard: View {
     var showsTitle = true
     /// False for Claude, whose details (with its own spend by project) are drawn by `LimitsView`.
     var showsDetails = true
+    /// Drawn with the big number: the service that leads the block. Nil — Claude and its other accounts, as before.
+    var main: Bool?
     @Environment(AppSettings.self) private var settings
 
     var body: some View {
@@ -228,7 +244,7 @@ private struct ServiceCard: View {
                             }
                         }
                     } else {
-                        // The big number is Claude's: the other services are a glance, two limits in a row.
+                        // The big number is the main service's: the others are a glance, two limits in a row.
                         if isMain, let main = usage.rings.first {
                             MainLimit(window: main, pace: usage.pace, now: context.date)
                         }
@@ -277,7 +293,8 @@ private struct ServiceCard: View {
         Array(usage.rings.dropFirst(isMain ? 1 : 0)) + usage.bars.filter { $0.percent != nil }
     }
     private var isMain: Bool {
-        switch usage.service {
+        if let main { return main }
+        return switch usage.service {
         case .claude, .claudeAccount: true
         case .hub: false
         }

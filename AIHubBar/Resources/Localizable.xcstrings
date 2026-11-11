@@ -7434,16 +7434,10 @@
     },
     "Antigravity сам передаёт остаток квоты и тариф своей строке состояния. AI Hub Bar добавляет в ~/.gemini/antigravity-cli/settings.json команду, которая сохраняет эти данные на Mac и ничего не выводит: обычная строка Antigravity остаётся на месте, вход Antigravity не читается. Перед изменением рядом кладётся резервная копия. Цифры обновляются, пока Antigravity открыт; свою строку состояния AI Hub Bar не заменяет.": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Antigravity itself passes the remaining quota and the plan to its status line. AI Hub Bar adds a command to ~/.gemini/antigravity-cli/settings.json that keeps this data on the Mac and prints nothing: Antigravity’s usual line stays in place, and Antigravity’s sign-in is not read. A backup is saved next to the file before the change. The numbers update while Antigravity is open; AI Hub Bar doesn’t replace a status line of your own."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Antigravity сам передає залишок квоти й тариф своєму рядку стану. AI Hub Bar додає в ~/.gemini/antigravity-cli/settings.json команду, яка зберігає ці дані на Mac і нічого не виводить: звичайний рядок Antigravity лишається на місці, вхід Antigravity не читається. Перед зміною поруч кладеться резервна копія. Цифри оновлюються, поки Antigravity відкрито; власний рядок стану AI Hub Bar не замінює."
+            "value": "يمرّر Antigravity بنفسه الحصة المتبقية والخطة إلى سطر الحالة الخاص به. يضيف AI Hub Bar إلى ~/.gemini/antigravity-cli/settings.json أمرًا يحفظ هذه البيانات على Mac ولا يطبع شيئًا: يبقى سطر Antigravity المعتاد في مكانه ولا يُقرأ تسجيل دخول Antigravity. قبل التغيير تُحفظ نسخة احتياطية بجانب الملف. تتحدّث الأرقام ما دام Antigravity مفتوحًا، ولا يستبدل AI Hub Bar سطر الحالة الخاص بك."
           }
         },
         "de": {
@@ -7452,10 +7446,10 @@
             "value": "Antigravity gibt das verbleibende Kontingent und den Tarif selbst an seine Statuszeile weiter. AI Hub Bar trägt in ~/.gemini/antigravity-cli/settings.json einen Befehl ein, der diese Daten auf dem Mac ablegt und nichts ausgibt: Die gewohnte Zeile von Antigravity bleibt, die Anmeldung von Antigravity wird nicht gelesen. Vor der Änderung wird daneben eine Sicherungskopie abgelegt. Die Zahlen werden aktualisiert, solange Antigravity geöffnet ist; eine eigene Statuszeile ersetzt AI Hub Bar nicht."
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Antigravity transmet lui-même le quota restant et le forfait à sa ligne d’état. AI Hub Bar ajoute à ~/.gemini/antigravity-cli/settings.json une commande qui conserve ces données sur le Mac et n’affiche rien : la ligne habituelle d’Antigravity reste en place et la connexion d’Antigravity n’est pas lue. Une copie de sauvegarde est placée à côté avant la modification. Les chiffres se mettent à jour tant qu’Antigravity est ouvert ; AI Hub Bar ne remplace pas votre propre ligne d’état."
+            "value": "Antigravity itself passes the remaining quota and the plan to its status line. AI Hub Bar adds a command to ~/.gemini/antigravity-cli/settings.json that keeps this data on the Mac and prints nothing: Antigravity’s usual line stays in place, and Antigravity’s sign-in is not read. A backup is saved next to the file before the change. The numbers update while Antigravity is open; AI Hub Bar doesn’t replace a status line of your own."
           }
         },
         "es": {
@@ -7464,22 +7458,22 @@
             "value": "Antigravity pasa por sí mismo la cuota restante y el plan a su línea de estado. AI Hub Bar añade a ~/.gemini/antigravity-cli/settings.json un comando que guarda esos datos en el Mac y no muestra nada: la línea habitual de Antigravity sigue en su sitio y el inicio de sesión de Antigravity no se lee. Antes del cambio se guarda al lado una copia de seguridad. Las cifras se actualizan mientras Antigravity está abierto; AI Hub Bar no sustituye tu propia línea de estado."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Antigravity transmet lui-même le quota restant et le forfait à sa ligne d’état. AI Hub Bar ajoute à ~/.gemini/antigravity-cli/settings.json une commande qui conserve ces données sur le Mac et n’affiche rien : la ligne habituelle d’Antigravity reste en place et la connexion d’Antigravity n’est pas lue. Une copie de sauvegarde est placée à côté avant la modification. Les chiffres se mettent à jour tant qu’Antigravity est ouvert ; AI Hub Bar ne remplace pas votre propre ligne d’état."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Antigravity sendiri meneruskan sisa kuota dan paket ke baris statusnya. AI Hub Bar menambahkan perintah ke ~/.gemini/antigravity-cli/settings.json yang menyimpan data ini di Mac dan tidak menampilkan apa pun: baris Antigravity yang biasa tetap di tempatnya, dan data masuk Antigravity tidak dibaca. Sebelum diubah, salinan cadangan disimpan di sebelahnya. Angka diperbarui selama Antigravity terbuka; AI Hub Bar tidak mengganti baris status Anda sendiri."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Antigravity passa da sé la quota rimanente e il piano alla propria riga di stato. AI Hub Bar aggiunge a ~/.gemini/antigravity-cli/settings.json un comando che conserva questi dati sul Mac e non stampa nulla: la solita riga di Antigravity resta al suo posto e l’accesso di Antigravity non viene letto. Prima della modifica viene salvata accanto una copia di backup. I numeri si aggiornano mentre Antigravity è aperto; AI Hub Bar non sostituisce una tua riga di stato."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "O próprio Antigravity passa a cota restante e o plano para a sua linha de status. O AI Hub Bar adiciona a ~/.gemini/antigravity-cli/settings.json um comando que guarda esses dados no Mac e não exibe nada: a linha habitual do Antigravity continua no lugar e o login do Antigravity não é lido. Antes da alteração, uma cópia de segurança é salva ao lado. Os números são atualizados enquanto o Antigravity está aberto; o AI Hub Bar não substitui uma linha de status sua."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Antigravity sam przekazuje pozostały limit i plan do swojego wiersza stanu. AI Hub Bar dodaje do ~/.gemini/antigravity-cli/settings.json polecenie, które zapisuje te dane na Macu i niczego nie wypisuje: zwykły wiersz Antigravity zostaje na miejscu, a logowanie Antigravity nie jest odczytywane. Przed zmianą obok zapisywana jest kopia zapasowa. Liczby odświeżają się, gdy Antigravity jest otwarty; własnego wiersza stanu AI Hub Bar nie zastępuje."
           }
         },
         "ja": {
@@ -7494,16 +7488,22 @@
             "value": "Antigravity는 남은 할당량과 요금제를 자체 상태 줄에 직접 전달합니다. AI Hub Bar는 ~/.gemini/antigravity-cli/settings.json에 이 데이터를 Mac에 저장하고 아무것도 출력하지 않는 명령을 추가합니다. Antigravity의 기본 줄은 그대로 남고 Antigravity 로그인 정보는 읽지 않습니다. 변경 전에 옆에 백업을 저장합니다. 숫자는 Antigravity가 열려 있는 동안 업데이트되며, 직접 설정한 상태 줄은 AI Hub Bar가 바꾸지 않습니다."
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "يمرّر Antigravity بنفسه الحصة المتبقية والخطة إلى سطر الحالة الخاص به. يضيف AI Hub Bar إلى ~/.gemini/antigravity-cli/settings.json أمرًا يحفظ هذه البيانات على Mac ولا يطبع شيئًا: يبقى سطر Antigravity المعتاد في مكانه ولا يُقرأ تسجيل دخول Antigravity. قبل التغيير تُحفظ نسخة احتياطية بجانب الملف. تتحدّث الأرقام ما دام Antigravity مفتوحًا، ولا يستبدل AI Hub Bar سطر الحالة الخاص بك."
+            "value": "Antigravity sam przekazuje pozostały limit i plan do swojego wiersza stanu. AI Hub Bar dodaje do ~/.gemini/antigravity-cli/settings.json polecenie, które zapisuje te dane na Macu i niczego nie wypisuje: zwykły wiersz Antigravity zostaje na miejscu, a logowanie Antigravity nie jest odczytywane. Przed zmianą obok zapisywana jest kopia zapasowa. Liczby odświeżają się, gdy Antigravity jest otwarty; własnego wiersza stanu AI Hub Bar nie zastępuje."
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Antigravity sendiri meneruskan sisa kuota dan paket ke baris statusnya. AI Hub Bar menambahkan perintah ke ~/.gemini/antigravity-cli/settings.json yang menyimpan data ini di Mac dan tidak menampilkan apa pun: baris Antigravity yang biasa tetap di tempatnya, dan data masuk Antigravity tidak dibaca. Sebelum diubah, salinan cadangan disimpan di sebelahnya. Angka diperbarui selama Antigravity terbuka; AI Hub Bar tidak mengganti baris status Anda sendiri."
+            "value": "O próprio Antigravity passa a cota restante e o plano para a sua linha de status. O AI Hub Bar adiciona a ~/.gemini/antigravity-cli/settings.json um comando que guarda esses dados no Mac e não exibe nada: a linha habitual do Antigravity continua no lugar e o login do Antigravity não é lido. Antes da alteração, uma cópia de segurança é salva ao lado. Os números são atualizados enquanto o Antigravity está aberto; o AI Hub Bar não substitui uma linha de status sua."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Antigravity сам передає залишок квоти й тариф своєму рядку стану. AI Hub Bar додає в ~/.gemini/antigravity-cli/settings.json команду, яка зберігає ці дані на Mac і нічого не виводить: звичайний рядок Antigravity лишається на місці, вхід Antigravity не читається. Перед зміною поруч кладеться резервна копія. Цифри оновлюються, поки Antigravity відкрито; власний рядок стану AI Hub Bar не замінює."
           }
         }
       }
@@ -13715,6 +13715,82 @@
         }
       }
     },
+    "Автоматически": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Automatic"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Автоматично"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Automatisch"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Automatique"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Automático"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Automatico"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Automático"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Automatycznie"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "自動"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "자동"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تلقائي"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otomatis"
+          }
+        }
+      }
+    },
     "Агент": {
       "localizations": {
         "ar": {
@@ -17517,16 +17593,10 @@
     },
     "В Antigravity уже настроена своя строка состояния — AI Hub Bar её не заменяет.": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Antigravity already has a status line of your own — AI Hub Bar doesn’t replace it."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "В Antigravity вже налаштовано власний рядок стану — AI Hub Bar його не замінює."
+            "value": "في Antigravity سطر حالة خاص بك مُعدّ مسبقًا — AI Hub Bar لا يستبدله."
           }
         },
         "de": {
@@ -17535,10 +17605,10 @@
             "value": "In Antigravity ist bereits eine eigene Statuszeile eingerichtet — AI Hub Bar ersetzt sie nicht."
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Antigravity a déjà votre propre ligne d’état — AI Hub Bar ne la remplace pas."
+            "value": "Antigravity already has a status line of your own — AI Hub Bar doesn’t replace it."
           }
         },
         "es": {
@@ -17547,22 +17617,22 @@
             "value": "Antigravity ya tiene tu propia línea de estado: AI Hub Bar no la sustituye."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Antigravity a déjà votre propre ligne d’état — AI Hub Bar ne la remplace pas."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Antigravity sudah memiliki baris status Anda sendiri — AI Hub Bar tidak menggantinya."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Antigravity ha già una tua riga di stato: AI Hub Bar non la sostituisce."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "O Antigravity já tem uma linha de status sua — o AI Hub Bar não a substitui."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "W Antigravity jest już ustawiony własny wiersz stanu — AI Hub Bar go nie zastępuje."
           }
         },
         "ja": {
@@ -17577,16 +17647,22 @@
             "value": "Antigravity에 이미 직접 설정한 상태 줄이 있습니다. AI Hub Bar는 이를 바꾸지 않습니다."
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "في Antigravity سطر حالة خاص بك مُعدّ مسبقًا — AI Hub Bar لا يستبدله."
+            "value": "W Antigravity jest już ustawiony własny wiersz stanu — AI Hub Bar go nie zastępuje."
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Antigravity sudah memiliki baris status Anda sendiri — AI Hub Bar tidak menggantinya."
+            "value": "O Antigravity já tem uma linha de status sua — o AI Hub Bar não a substitui."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "В Antigravity вже налаштовано власний рядок стану — AI Hub Bar його не замінює."
           }
         }
       }
@@ -20716,16 +20792,10 @@
     },
     "Включить квоту Antigravity": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Turn on Antigravity quota"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Увімкнути квоту Antigravity"
+            "value": "تشغيل حصة Antigravity"
           }
         },
         "de": {
@@ -20734,10 +20804,10 @@
             "value": "Antigravity-Kontingent einschalten"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Activer le quota Antigravity"
+            "value": "Turn on Antigravity quota"
           }
         },
         "es": {
@@ -20746,22 +20816,22 @@
             "value": "Activar la cuota de Antigravity"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activer le quota Antigravity"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nyalakan kuota Antigravity"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Attiva la quota di Antigravity"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ativar a cota do Antigravity"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Włącz limit Antigravity"
           }
         },
         "ja": {
@@ -20776,16 +20846,22 @@
             "value": "Antigravity 할당량 켜기"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "تشغيل حصة Antigravity"
+            "value": "Włącz limit Antigravity"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Nyalakan kuota Antigravity"
+            "value": "Ativar a cota do Antigravity"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Увімкнути квоту Antigravity"
           }
         }
       }
@@ -25277,16 +25353,10 @@
     },
     "Выключить квоту Antigravity": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Turn off Antigravity quota"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Вимкнути квоту Antigravity"
+            "value": "إيقاف حصة Antigravity"
           }
         },
         "de": {
@@ -25295,10 +25365,10 @@
             "value": "Antigravity-Kontingent ausschalten"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Désactiver le quota Antigravity"
+            "value": "Turn off Antigravity quota"
           }
         },
         "es": {
@@ -25307,22 +25377,22 @@
             "value": "Desactivar la cuota de Antigravity"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Désactiver le quota Antigravity"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Matikan kuota Antigravity"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Disattiva la quota di Antigravity"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Desativar a cota do Antigravity"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Wyłącz limit Antigravity"
           }
         },
         "ja": {
@@ -25337,16 +25407,22 @@
             "value": "Antigravity 할당량 끄기"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "إيقاف حصة Antigravity"
+            "value": "Wyłącz limit Antigravity"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Matikan kuota Antigravity"
+            "value": "Desativar a cota do Antigravity"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Вимкнути квоту Antigravity"
           }
         }
       }
@@ -26715,6 +26791,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Головна: ліміти, сесії, фонові задачі"
+          }
+        }
+      }
+    },
+    "Главный сервис": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Main service"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Головний сервіс"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hauptdienst"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Service principal"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Servicio principal"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Servizio principale"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Serviço principal"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Główna usługa"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "メインのサービス"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "기본 서비스"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الخدمة الرئيسية"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Layanan utama"
           }
         }
       }
@@ -30065,16 +30217,10 @@
     },
     "Добавить statusLine в ~/.gemini/antigravity-cli/settings.json": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Add statusLine to ~/.gemini/antigravity-cli/settings.json"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Додати statusLine у ~/.gemini/antigravity-cli/settings.json"
+            "value": "إضافة statusLine إلى ~/.gemini/antigravity-cli/settings.json"
           }
         },
         "de": {
@@ -30083,10 +30229,10 @@
             "value": "statusLine in ~/.gemini/antigravity-cli/settings.json eintragen"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ajouter statusLine à ~/.gemini/antigravity-cli/settings.json"
+            "value": "Add statusLine to ~/.gemini/antigravity-cli/settings.json"
           }
         },
         "es": {
@@ -30095,22 +30241,22 @@
             "value": "Añadir statusLine a ~/.gemini/antigravity-cli/settings.json"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajouter statusLine à ~/.gemini/antigravity-cli/settings.json"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tambahkan statusLine ke ~/.gemini/antigravity-cli/settings.json"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Aggiungi statusLine a ~/.gemini/antigravity-cli/settings.json"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Adicionar statusLine a ~/.gemini/antigravity-cli/settings.json"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dodaj statusLine do ~/.gemini/antigravity-cli/settings.json"
           }
         },
         "ja": {
@@ -30125,16 +30271,22 @@
             "value": "~/.gemini/antigravity-cli/settings.json에 statusLine 추가"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "إضافة statusLine إلى ~/.gemini/antigravity-cli/settings.json"
+            "value": "Dodaj statusLine do ~/.gemini/antigravity-cli/settings.json"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tambahkan statusLine ke ~/.gemini/antigravity-cli/settings.json"
+            "value": "Adicionar statusLine a ~/.gemini/antigravity-cli/settings.json"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Додати statusLine у ~/.gemini/antigravity-cli/settings.json"
           }
         }
       }
@@ -42079,16 +42231,10 @@
     },
     "Квота Antigravity": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Antigravity quota"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Квота Antigravity"
+            "value": "حصة Antigravity"
           }
         },
         "de": {
@@ -42097,10 +42243,10 @@
             "value": "Antigravity-Kontingent"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Quota Antigravity"
+            "value": "Antigravity quota"
           }
         },
         "es": {
@@ -42109,22 +42255,22 @@
             "value": "Cuota de Antigravity"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quota Antigravity"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kuota Antigravity"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Quota di Antigravity"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cota do Antigravity"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Limit Antigravity"
           }
         },
         "ja": {
@@ -42139,32 +42285,32 @@
             "value": "Antigravity 할당량"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "حصة Antigravity"
+            "value": "Limit Antigravity"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Kuota Antigravity"
+            "value": "Cota do Antigravity"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Квота Antigravity"
           }
         }
       }
     },
     "Квота из Antigravity": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Quota from Antigravity"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Квота з Antigravity"
+            "value": "الحصة من Antigravity"
           }
         },
         "de": {
@@ -42173,10 +42319,10 @@
             "value": "Kontingent aus Antigravity"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Quota depuis Antigravity"
+            "value": "Quota from Antigravity"
           }
         },
         "es": {
@@ -42185,22 +42331,22 @@
             "value": "Cuota desde Antigravity"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quota depuis Antigravity"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kuota dari Antigravity"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Quota da Antigravity"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cota vinda do Antigravity"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Limit z Antigravity"
           }
         },
         "ja": {
@@ -42215,16 +42361,22 @@
             "value": "Antigravity에서 받는 할당량"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "الحصة من Antigravity"
+            "value": "Limit z Antigravity"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Kuota dari Antigravity"
+            "value": "Cota vinda do Antigravity"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Квота з Antigravity"
           }
         }
       }
@@ -47551,6 +47703,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ліміти Claude і прогноз за вашим темпом"
+          }
+        }
+      }
+    },
+    "Лимиты главного сервиса идут первыми в панели и показаны в строке меню и на острове. «Автоматически» — Claude, а без него первый сервис, у которого есть лимиты.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The main service's limits come first in the panel and are shown in the menu bar and on the island. “Automatic” is Claude, or without it the first service that has limits."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ліміти головного сервісу йдуть першими в панелі та показані в рядку меню й на острові. «Автоматично» — Claude, а без нього перший сервіс, у якого є ліміти."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Limits des Hauptdienstes stehen im Panel an erster Stelle und werden in der Menüleiste und auf der Insel angezeigt. „Automatisch“ bedeutet Claude, ohne Claude der erste Dienst mit Limits."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les limites du service principal viennent en premier dans le panneau et s’affichent dans la barre des menus et sur l’île. « Automatique » : Claude, ou sans lui le premier service qui a des limites."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los límites del servicio principal van primero en el panel y se muestran en la barra de menús y en la isla. «Automático» es Claude o, sin él, el primer servicio que tenga límites."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I limiti del servizio principale vengono per primi nel pannello e sono mostrati nella barra dei menu e sull’isola. «Automatico» è Claude o, senza di lui, il primo servizio che ha limiti."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Os limites do serviço principal vêm primeiro no painel e aparecem na barra de menus e na ilha. “Automático” é o Claude ou, sem ele, o primeiro serviço que tiver limites."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limity głównej usługi są pierwsze w panelu i widać je na pasku menu oraz na wyspie. „Automatycznie” to Claude, a bez niego pierwsza usługa, która ma limity."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "メインのサービスの制限はパネルの先頭に表示され、メニューバーとアイランドにも表示されます。「自動」は Claude、Claude がなければ制限のある最初のサービスです。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "기본 서비스의 한도는 패널 맨 위에 오고 메뉴 막대와 아일랜드에도 표시됩니다. ‘자동’은 Claude이며, Claude가 없으면 한도가 있는 첫 번째 서비스입니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تأتي حدود الخدمة الرئيسية أولًا في اللوحة وتظهر في شريط القائمة وعلى الجزيرة. «تلقائي» يعني Claude، وبدونه أول خدمة لها حدود."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Batas layanan utama tampil pertama di panel dan ditampilkan di bar menu serta di pulau. “Otomatis” berarti Claude, atau tanpa Claude layanan pertama yang punya batas."
           }
         }
       }
@@ -106604,16 +106832,10 @@
     },
     "Убрать statusLine AI Hub Bar из настроек Antigravity": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Remove AI Hub Bar's statusLine from Antigravity's settings"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Прибрати statusLine AI Hub Bar з налаштувань Antigravity"
+            "value": "إزالة statusLine الخاص بـ AI Hub Bar من إعدادات Antigravity"
           }
         },
         "de": {
@@ -106622,10 +106844,10 @@
             "value": "statusLine von AI Hub Bar aus den Antigravity-Einstellungen entfernen"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Retirer le statusLine d’AI Hub Bar des réglages d’Antigravity"
+            "value": "Remove AI Hub Bar's statusLine from Antigravity's settings"
           }
         },
         "es": {
@@ -106634,22 +106856,22 @@
             "value": "Quitar el statusLine de AI Hub Bar de los ajustes de Antigravity"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Retirer le statusLine d’AI Hub Bar des réglages d’Antigravity"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hapus statusLine AI Hub Bar dari pengaturan Antigravity"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Rimuovi lo statusLine di AI Hub Bar dalle impostazioni di Antigravity"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Remover o statusLine do AI Hub Bar dos ajustes do Antigravity"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Usuń statusLine AI Hub Bar z ustawień Antigravity"
           }
         },
         "ja": {
@@ -106664,16 +106886,22 @@
             "value": "Antigravity 설정에서 AI Hub Bar의 statusLine 제거"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "إزالة statusLine الخاص بـ AI Hub Bar من إعدادات Antigravity"
+            "value": "Usuń statusLine AI Hub Bar z ustawień Antigravity"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Hapus statusLine AI Hub Bar dari pengaturan Antigravity"
+            "value": "Remover o statusLine do AI Hub Bar dos ajustes do Antigravity"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Прибрати statusLine AI Hub Bar з налаштувань Antigravity"
           }
         }
       }
@@ -118269,16 +118497,10 @@
     },
     "включённая квота Antigravity (выше) и открытый agy": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Antigravity quota turned on (above) and agy open"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "увімкнена квота Antigravity (вище) і відкритий agy"
+            "value": "تشغيل حصة Antigravity (أعلاه) مع بقاء agy مفتوحًا"
           }
         },
         "de": {
@@ -118287,10 +118509,10 @@
             "value": "eingeschaltetes Antigravity-Kontingent (oben) und geöffnetes agy"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "le quota Antigravity activé (ci-dessus) et agy ouvert"
+            "value": "Antigravity quota turned on (above) and agy open"
           }
         },
         "es": {
@@ -118299,22 +118521,22 @@
             "value": "la cuota de Antigravity activada (arriba) y agy abierto"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "le quota Antigravity activé (ci-dessus) et agy ouvert"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "kuota Antigravity dinyalakan (di atas) dan agy terbuka"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "la quota di Antigravity attiva (sopra) e agy aperto"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "a cota do Antigravity ativada (acima) e o agy aberto"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "włączony limit Antigravity (wyżej) i otwarty agy"
           }
         },
         "ja": {
@@ -118329,16 +118551,22 @@
             "value": "Antigravity 할당량 켜기(위)와 열려 있는 agy"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "تشغيل حصة Antigravity (أعلاه) مع بقاء agy مفتوحًا"
+            "value": "włączony limit Antigravity (wyżej) i otwarty agy"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "kuota Antigravity dinyalakan (di atas) dan agy terbuka"
+            "value": "a cota do Antigravity ativada (acima) e o agy aberto"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "увімкнена квота Antigravity (вище) і відкритий agy"
           }
         }
       }
@@ -119333,16 +119561,10 @@
     },
     "данные на %@ — обновятся, когда открыт Antigravity": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "as of %@ — updates while Antigravity is open"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "дані на %@ — оновляться, коли відкрито Antigravity"
+            "value": "بيانات %@ — تتحدّث عندما يكون Antigravity مفتوحًا"
           }
         },
         "de": {
@@ -119351,10 +119573,10 @@
             "value": "Stand %@ — wird aktualisiert, solange Antigravity geöffnet ist"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "données de %@ — mises à jour quand Antigravity est ouvert"
+            "value": "as of %@ — updates while Antigravity is open"
           }
         },
         "es": {
@@ -119363,22 +119585,22 @@
             "value": "datos de %@: se actualizan con Antigravity abierto"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "données de %@ — mises à jour quand Antigravity est ouvert"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "data per %@ — diperbarui saat Antigravity terbuka"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "dati delle %@: si aggiornano con Antigravity aperto"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "dados de %@ — atualizam com o Antigravity aberto"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "dane z %@ — odświeżą się, gdy Antigravity jest otwarty"
           }
         },
         "ja": {
@@ -119393,16 +119615,22 @@
             "value": "%@ 기준 — Antigravity가 열려 있을 때 업데이트됩니다"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "بيانات %@ — تتحدّث عندما يكون Antigravity مفتوحًا"
+            "value": "dane z %@ — odświeżą się, gdy Antigravity jest otwarty"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "data per %@ — diperbarui saat Antigravity terbuka"
+            "value": "dados de %@ — atualizam com o Antigravity aberto"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "дані на %@ — оновляться, коли відкрито Antigravity"
           }
         }
       }
@@ -120245,16 +120473,10 @@
     },
     "другие модели": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "other models"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "інші моделі"
+            "value": "نماذج أخرى"
           }
         },
         "de": {
@@ -120263,10 +120485,10 @@
             "value": "andere Modelle"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "autres modèles"
+            "value": "other models"
           }
         },
         "es": {
@@ -120275,22 +120497,22 @@
             "value": "otros modelos"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "autres modèles"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "model lain"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "altri modelli"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "outros modelos"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "inne modele"
           }
         },
         "ja": {
@@ -120305,16 +120527,22 @@
             "value": "다른 모델"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "نماذج أخرى"
+            "value": "inne modele"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "model lain"
+            "value": "outros modelos"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "інші моделі"
           }
         }
       }
@@ -127554,16 +127782,10 @@
     },
     "откройте Antigravity (agy), чтобы увидеть квоту": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "open Antigravity (agy) to see the quota"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "відкрийте Antigravity (agy), щоб побачити квоту"
+            "value": "افتح Antigravity (agy) لرؤية الحصة"
           }
         },
         "de": {
@@ -127572,10 +127794,10 @@
             "value": "Antigravity (agy) öffnen, um das Kontingent zu sehen"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "ouvrez Antigravity (agy) pour voir le quota"
+            "value": "open Antigravity (agy) to see the quota"
           }
         },
         "es": {
@@ -127584,22 +127806,22 @@
             "value": "abre Antigravity (agy) para ver la cuota"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ouvrez Antigravity (agy) pour voir le quota"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "buka Antigravity (agy) untuk melihat kuota"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "apri Antigravity (agy) per vedere la quota"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "abra o Antigravity (agy) para ver a cota"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "otwórz Antigravity (agy), aby zobaczyć limit"
           }
         },
         "ja": {
@@ -127614,16 +127836,22 @@
             "value": "할당량을 보려면 Antigravity(agy)를 여세요"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "افتح Antigravity (agy) لرؤية الحصة"
+            "value": "otwórz Antigravity (agy), aby zobaczyć limit"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "buka Antigravity (agy) untuk melihat kuota"
+            "value": "abra o Antigravity (agy) para ver a cota"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "відкрийте Antigravity (agy), щоб побачити квоту"
           }
         }
       }

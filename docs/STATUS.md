@@ -5,6 +5,7 @@
 **Updated:** 2026-11-11
 
 **Now:**
+- branch `feat/main-service`, PR open, not merged on purpose: the main AI service can be another one than Claude (panel, menu bar, island). Merge after 0.11.0 is out, then a beta
 - 2026-11-11: the pictures draw limits as bars, like the panel (the assistant's map and profile preview, the help's «Лимиты AI» scene); goes out with 0.11.0
 - 0.11.0-beta.2 (build 826) published 2026-11-11 for beta testers on Oleh's word: beta.1 plus #362 Antigravity's quota and plan in the limits, through Antigravity's own status line (no sign-in read, off until turned on). Lives on Oleh's copy until the release on Tuesday 2026-11-17
 - 0.11.0-beta.1 (build 817) published 2026-11-10 for beta testers with #357–#360: the «Что нового» card, release notes in the update window, week pace, the Homebrew cask. Waits a day on Oleh's copy, then 0.11.0
@@ -31,6 +32,7 @@
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/specs/SPEC-windows.md §9, stage 2–3 leftovers)
 
 **Needs Oleh:**
+- main service (after its beta): Settings → «Что показывать» → «Лимиты AI» → «Главный сервис» — pick Codex, look at the panel and the menu bar item, put «Автоматически» back
 - update to 0.11.0-beta.2 (Settings → «Основные» → «Обновления», «Бета-версии» on), then the Antigravity quota: Settings → «Сервисы AI» → Gemini → «Включить квоту Antigravity», open `agy` once, then look at the panel — «Gemini» and «другие модели» with the plan. The agent was not allowed to press that button on your Mac, so the install into `~/.gemini/antigravity-cli/settings.json` is not seen live
 - in the same update to 0.11.0-beta.2: does the update window show the list of changes, and does the «Что нового» card appear in the panel once
 - try the Homebrew install once (README → Install, three lines) on a Mac without the app, e.g. the Air: the agent did not trust the tap or install through it
@@ -56,6 +58,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-11 — The main AI service can be another one than Claude (branch `feat/main-service`)
+
+Done: Oleh asked to move Claude into «Сервисы AI»; that was done on 2026-11-02 (stages 1–2 of SPEC-ai-services), what was left is that Claude was the main service everywhere. Now `MainService` picks whose limits lead: Claude while it has limits, else the first other service that has them, or the one chosen in Settings → «Лимиты AI» → «Главный сервис» («Автоматически», Claude, the services with limits). The main service's card goes first in the panel's block with the big number, Claude under it as a compact card; with another service leading, «Установить Claude Code» and «Загружаю лимиты…» are not shown. The two numbers of the menu bar item, the folded block, the island's ears and card, the module's sketch and the forecast follow the main service; the island's tooltip names another service («Codex · 5 ч: 40 %»). Three new texts in 12 languages. SPEC-ai-services §5 stage 9.
+Checked: `scripts/check.sh` passed (646 tests, 5 new in `MainServiceTests`). Live in an isolated copy (own bundle id, its own settings; Oleh's profiles copied read-only): with Codex chosen, the panel starts with Codex (30 дн 2 %, big number), Claude is under it in two columns, the menu bar item shows 2 %; with a chosen service that has no limits (Antigravity not turned on) Claude leads as before; the Settings page shows the picker and its footnote. The copy was quit, unregistered and removed.
+Left: not seen live — a Mac with no Claude at all (the copy still reads the real Keychain; covered by tests only), the island, the collapsed block, other languages. The widget still shows Claude only (`usage.json`), the run guard, Telegram and the weekly summary are about Claude on purpose. The menu bar's «Другие AI» element can repeat the main service's number. Not merged: it changes the panel and the menu bar, so it waits for 0.11.0 and then goes to a beta.
 
 ## 2026-11-11 — Pictures draw limits as bars (branch `fix/pictures-bars`)
 

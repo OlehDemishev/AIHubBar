@@ -181,3 +181,11 @@ service mark. Sessions: Codex threads next to Claude sessions once a source exis
 
 Rules for every stage: hover hint on each icon-only control, accessibility walk at the end of each UI stage
 (SPEC §3.1), all strings in 13 languages, nothing read without the consent the service already asks for.
+
+9. **The main service** (2026-11-11, `MainService`): Claude was the main service everywhere — a person with only
+   Codex or Antigravity saw «Установить Claude Code» on top of the limits and nothing in the menu bar. Now the main
+   service is Claude while it has limits, else the first other service with a limit in percent, or the one chosen in
+   Settings → «Лимиты AI» → «Главный сервис»; a chosen service without limits falls back to the automatic choice.
+   Its card leads the panel's block with the big number, and its first two limits are the two numbers of the menu
+   bar item, the folded block and the island. Not moved: the widget (`usage.json` is Claude's), the run guard,
+   Telegram and the weekly summary, which are about Claude Code's own runs.

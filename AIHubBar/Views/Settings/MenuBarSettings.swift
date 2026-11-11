@@ -5,6 +5,7 @@ import SwiftUI
 struct MenuBarSettings: View {
     @Environment(AppSettings.self) private var settings
     @Environment(UsageStore.self) private var usage
+    @Environment(HubLimitsStore.self) private var hub
     @State private var replacing: MenuBarConfig.Preset?
     @Environment(NotchIsland.self) private var island
     @Environment(ProfileStore.self) private var modes
@@ -133,11 +134,13 @@ struct MenuBarSettings: View {
     /// Only what Settings can see; the real menu bar also counts sessions, runs and the queue.
     private var liveData: MenuBarData {
         var data = MenuBarData()
-        data.session = usage.snapshot?.session?.utilization
-        data.week = usage.snapshot?.week?.utilization
+        // The two numbers are the main service's: Claude, or another one for whoever has no Claude.
+        let main = MainService.current(usage: usage, hub: hub, settings: settings)
+        data.session = main?.firstLimit?.percent
+        data.week = main?.secondLimit?.percent
         data.modelWeeks = Dictionary((usage.snapshot?.otherWindows ?? []).map { ($0.key, $0.utilization) }) { first, _ in first }
-        data.sessionResetsAt = usage.snapshot?.session?.resetsAt
-        if case let .runsOutAt(date) = usage.forecast { data.forecastRunsOut = date }
+        data.sessionResetsAt = main?.firstLimit?.resetsAt
+        if case let .runsOutAt(date) = main?.forecast { data.forecastRunsOut = date }
         return data
     }
 

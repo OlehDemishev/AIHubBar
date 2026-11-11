@@ -150,9 +150,9 @@ struct NotchLiveActivityTests {
         let working = try item("ClaudePult", .running, promptAt: "2026-11-02T18:56:00+01:00", todos: todos)
         let now = try #require(ISODate.parse("2026-11-02T19:00:30+01:00"))
         #expect(NotchText.activity(working.session, now: now) == "ClaudePult: сделано 1 из 3, Пишет тесты, 4 мин")
-        let summary = NotchText.earSummary(.sessions, usage: nil, sessions: [working], background: 0, liveActivity: true, now: now)
+        let summary = NotchText.earSummary(.sessions, main: nil, sessions: [working], background: 0, liveActivity: true, now: now)
         #expect(summary.hasPrefix("ClaudePult: сделано 1 из 3"))
-        #expect(NotchText.earSummary(.sessions, usage: nil, sessions: [working], background: 0) == "Ждут ответа: 0, работают: 1",
+        #expect(NotchText.earSummary(.sessions, main: nil, sessions: [working], background: 0) == "Ждут ответа: 0, работают: 1",
                 "with the live activity off, as before")
         #expect(NotchText.minutes(from: now, to: now.addingTimeInterval(-30)) == 0)
         #expect(NotchText.minutes(from: now, to: now.addingTimeInterval(125)) == 2)
