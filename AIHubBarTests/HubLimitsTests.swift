@@ -115,6 +115,88 @@ struct HubLimitsTests {
         #expect(window.resetsAt == Date(timeIntervalSince1970: 1_793_000_000))
     }
 
+    @Test func antigravityStatus() throws {
+        let now = Date(timeIntervalSince1970: 1_794_400_000)
+        func time(_ hours: Double) -> String { now.addingTimeInterval(hours * 3600).ISO8601Format() }
+        let status = """
+        {"product":"antigravity","plan_tier":"Antigravity Starter Quota","email":"someone@example.com","quota":{
+          "3p-weekly":{"remaining_fraction":1,"reset_time":"\(time(160))","reset_in_seconds":576000},
+          "gemini-weekly":{"remaining_fraction":0.75,"reset_time":"\(time(100))","reset_in_seconds":360000},
+          "gemini-5h":{"reset_in_seconds":3600},
+          "old-weekly":{"remaining_fraction":0.1,"reset_time":"\(time(-1))"}}}
+        """
+        let read = try #require(HubParse.antigravityStatus(data(status), now: now))
+        #expect(read.plan == "Antigravity Starter Quota")
+        #expect(read.windows.map(\.title) == ["Gemini · 5h", "Gemini", String(localized: "другие модели")], "Gemini first; a passed reset is no limit")
+        #expect(read.windows[0].percent == 100, "nothing left: the zero is left out")
+        #expect(read.windows[0].resetsAt == now.addingTimeInterval(3600))
+        #expect(read.windows[1].percent == 25)
+        #expect(read.windows[1].resetsAt == now.addingTimeInterval(100 * 3600))
+        #expect(read.windows[2].percent == 0)
+        // Before the quota arrives («authenticating») there is nothing to show.
+        #expect(HubParse.antigravityStatus(data(#"{"product":"antigravity","agent_state":"authenticating"}"#), now: now) == nil)
+        #expect(HubParse.antigravityStatus(data("not json"), now: now) == nil)
+    }
+
+    @Test func antigravityStatusLineIsAddedAndTakenOut() throws {
+        let folder = FileManager.default.temporaryDirectory.appending(path: "agy-\(UUID())")
+        defer { try? FileManager.default.removeItem(at: folder) }
+        let line = AntigravityStatusLine(settingsURL: folder.appending(path: "agy/settings.json"), scriptURL: folder.appending(path: "App Support/statusline.sh"))
+        #expect(line.status() == .notInstalled)
+        #expect(line.limit().error != nil)
+
+        // No settings yet: the file is made, and removed again when ours was all it held.
+        try line.install()
+        #expect(line.status() == .installed)
+        #expect(FileManager.default.isExecutableFile(atPath: line.scriptURL.path))
+        try line.uninstall()
+        #expect(!FileManager.default.fileExists(atPath: line.settingsURL.path))
+
+        // The person's other settings stay, with a backup before each change.
+        try Data(#"{"theme":"dark"}"#.utf8).write(to: line.settingsURL)
+        let backup = try #require(try line.install())
+        #expect(try String(contentsOf: backup, encoding: .utf8) == #"{"theme":"dark"}"#)
+        var settings = try #require(HubParse.object(try Data(contentsOf: line.settingsURL)))
+        #expect(settings["theme"] as? String == "dark")
+        let entry = try #require(settings["statusLine"] as? [String: Any])
+        #expect(entry["command"] as? String == "'\(line.scriptURL.path)'", "a path with a space is quoted")
+        #expect(entry["stack_with_default"] as? Bool == true, "Antigravity's own line stays")
+        #expect(try line.install() == nil, "nothing to change the second time")
+
+        // An older script is «outdated» and comes back by itself.
+        try "#!/bin/sh\n".write(to: line.scriptURL, atomically: true, encoding: .utf8)
+        #expect(line.status() == .outdated)
+        #expect(try line.updateScriptIfNeeded())
+        #expect(line.status() == .installed)
+
+        // What the script keeps is read; the script itself works with a space in its path.
+        let process = Process()
+        process.executableURL = URL(fileURLWithPath: "/bin/sh")
+        process.arguments = ["-c", "printf '%s' '{\"plan_tier\":\"Pro\",\"quota\":{\"gemini-weekly\":{\"remaining_fraction\":0.5,\"reset_in_seconds\":7200}}}' | \(line.command)"]
+        try process.run()
+        process.waitUntilExit()
+        let limit = line.limit()
+        #expect(limit.error == nil)
+        #expect(limit.windows.first?.percent == 50)
+        #expect(limit.notes.first?.text.contains("Pro") == true)
+        let later = line.limit(now: Date.now.addingTimeInterval(3600))
+        #expect(later.error != nil && later.windows.count == 1, "closed for an hour: the last numbers with their time")
+        #expect(ServiceUsage.hub(later, history: LimitHistory()).isStale)
+
+        try line.uninstall()
+        settings = try #require(HubParse.object(try Data(contentsOf: line.settingsURL)))
+        #expect(settings["statusLine"] == nil && settings["theme"] as? String == "dark")
+        #expect(!FileManager.default.fileExists(atPath: line.statusURL.path))
+
+        // A status line the person set up is theirs.
+        try Data(#"{"statusLine":{"type":"command","command":"my-line.sh"}}"#.utf8).write(to: line.settingsURL)
+        #expect(throws: AntigravityStatusLine.Failure.self) { try line.install() }
+        #expect(line.status() == .notInstalled)
+        try line.uninstall()
+        #expect(try String(contentsOf: line.settingsURL, encoding: .utf8).contains("my-line.sh"))
+        #expect(ServiceTab(hub: .antigravity) == .gemini)
+    }
+
     @Test func windowTitles() {
         #expect(HubParse.windowTitle(minutes: 300) == String(localized: "\(5) ч"))
         #expect(HubParse.windowTitle(minutes: 10080) == String(localized: "неделя"))

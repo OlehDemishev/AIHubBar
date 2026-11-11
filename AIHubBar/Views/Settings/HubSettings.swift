@@ -120,6 +120,8 @@ extension HubLimitsStore {
             }.joined(separator: " · ")
         }
         if available.contains(source) { return String(localized: "найден") }
+        // Antigravity is not looked for: its quota is turned on in the section above.
+        if source == .antigravity { return HookStatus.notInstalled.title }
         return source.keychainAccount != nil ? String(localized: "нет ключа") : String(localized: "не найден")
     }
 }

@@ -133,7 +133,9 @@ struct ServiceUsage: Equatable, Identifiable, Sendable {
         if longest?.id == rings.first?.id { week?.forecast = .unknown }
         return ServiceUsage(
             service: .hub(limit.source), title: limit.source.title, rings: rings, bars: bars,
-            forecast: forecast, week: week, notes: limit.notes, projects: limit.projects, error: limit.error
+            forecast: forecast, week: week, notes: limit.notes, projects: limit.projects, error: limit.error,
+            // Numbers with an error are the last ones known (Antigravity past its sign-in's hour).
+            isStale: limit.error != nil && !limit.windows.isEmpty
         )
     }
 }
