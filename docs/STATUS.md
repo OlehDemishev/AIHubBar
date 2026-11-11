@@ -5,6 +5,7 @@
 **Updated:** 2026-11-11
 
 **Now:**
+- 2026-11-11: every translation read against the Russian original (12 languages × 1763 texts), 1038 fixes applied; goes out with 0.11.0. Next on this line: bring the help up to date with 0.9–0.11
 - 2026-11-11: the pictures draw limits as bars, like the panel (the assistant's map and profile preview, the help's «Лимиты AI» scene); goes out with 0.11.0
 - 0.11.0-beta.2 (build 826) published 2026-11-11 for beta testers on Oleh's word: beta.1 plus #362 Antigravity's quota and plan in the limits, through Antigravity's own status line (no sign-in read, off until turned on). Lives on Oleh's copy until the release on Tuesday 2026-11-17
 - 0.11.0-beta.1 (build 817) published 2026-11-10 for beta testers with #357–#360: the «Что нового» card, release notes in the update window, week pace, the Homebrew cask. Waits a day on Oleh's copy, then 0.11.0
@@ -56,6 +57,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-11 — Translations read against the Russian original (branch `chore/translations-review`)
+
+Done: Oleh asked whether every language matches the original. Twelve reviewers (one per language: en, uk, de, fr, es, it, pt-BR, pl, ja, ko, ar, id) each read all 1763 texts of the catalog next to the Russian and wrote down what differs with a corrected text: 1070 findings (24 a wrong meaning, about 660 a wrong or inconsistent term or grammar, the rest unnatural phrasing and quotes). 1038 were applied. The main groups: one app term translated two ways inside a language («Не спать», «Отклонить», «порог», «фоновые задачи», «профиль», «строка меню», «лимиты» in Japanese three ways); text that read the opposite (Polish «stan czuwania» for keeping the Mac awake, Arabic hover as scrolling and a pushed branch as a paid one, German «seit Morgen»); Settings paths that named a page differently from the page itself; «Mac» written «Мак» in 34 Ukrainian texts; macOS's own names (uk «Монітор активності», «Джерела вводу»; id «Item Masuk», «Papan Ketik» — checked against the system's own files on this Mac). The Russian original was wrong in one place: «ответы Claude» in the notifications line of the readiness list is now «сессии Claude, которые ждут ответа», which is what the app sends. `site/help/*.json` and `desktop/ui/i18n` regenerated.
+Checked: every applied fix passed a script — the current text is the one the reviewer saw, the placeholders equal the Russian's, no Russian letters outside Ukrainian, no percent sign followed by a Latin letter where there was none. `scripts/check.sh` passed (catalog: 0 problems). The 12 stale keys stay: `desktop/` uses them.
+Left: 32 findings not applied — «Замок» is the lock screen switch, not a padlock (4 languages); Polish «Нет» and «Записать» and Spanish «На чём» were right for where the code uses them; fixes that put the Russian examples («ghbdtn», «привет») back or a letter right after a percent sign break the catalog's rules. Not done: the longer texts were not looked at in the windows (a label may now be cut in some language); straight and curly apostrophes and two quote styles are still mixed in English, French, Portuguese and Indonesian; nobody who speaks ja, ko, ar or id has read them — this was a model's reading, not a native's.
 
 ## 2026-11-11 — Pictures draw limits as bars (branch `fix/pictures-bars`)
 

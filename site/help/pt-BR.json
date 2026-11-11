@@ -17,7 +17,7 @@
         {
           "facts" : [
             {
-              "detail" : "Atualizar os projetos com o painel aberto.",
+              "detail" : "Atualizar os projetos no painel aberto.",
               "name" : "⌘R"
             },
             {
@@ -153,8 +153,8 @@
         }
       ],
       "steps" : [
-        "Ajustes → «O que mostrar»: cada módulo tem duas chaves — o bloco no painel e os elementos na barra de menus. «Conjunto pronto» ativa vários módulos de uma vez.",
-        "Clique no nome do módulo para abrir a página dele: a chave e todos os ajustes."
+        "Ajustes → «O que mostrar»: cada módulo tem dois interruptores — o bloco no painel e os elementos na barra de menus. «Conjunto pronto» ativa vários módulos de uma vez.",
+        "Clique no nome do módulo para abrir a página dele: o interruptor e todos os ajustes."
       ],
       "summary" : "Um módulo é um recurso do AI Hub Bar. O perfil decide quais módulos aparecem no painel e em que ordem.",
       "title" : "Módulos e perfis"
@@ -179,7 +179,7 @@
               "name" : "Uso por projeto"
             },
             {
-              "detail" : "Uma vez por janela em 50/80/95 % (limites em Ajustes) e quando o limite volta; se quiser, também no Telegram.",
+              "detail" : "Uma vez por janela em 50/80/95 % (limiares em Ajustes) e quando o limite volta; se quiser, também no Telegram.",
               "name" : "Notificações"
             },
             {
@@ -222,7 +222,7 @@
               "name" : "Mostrar"
             },
             {
-              "detail" : "Onde rodar: uma janela do Terminal (você pode responder ao Claude) ou claude -p sem janela (só ações permitidas, limite de tempo, resultado por notificação e no Telegram). «Lembrar» ou um padrão, em Ajustes.",
+              "detail" : "Onde rodar: uma janela do Terminal (você pode responder ao Claude) ou claude -p sem janela (só ações permitidas, limite de tempo, resultado por notificação e no Telegram). «Lembrar escolha» ou um padrão, em Ajustes.",
               "name" : "Terminal / Segundo plano"
             },
             {
@@ -252,7 +252,7 @@
       ],
       "steps" : [
         "Ative o acompanhamento na página “Sessões de agentes”.",
-        "Responda às solicitações de permissão direto da notificação ou da linha da sessão."
+        "Responda aos pedidos de permissão direto da notificação ou da linha da sessão."
       ],
       "summary" : "Todas as sessões do Claude Code neste Mac: o que fazem, quais aguardam resposta, as tarefas em segundo plano e a fila.",
       "title" : "Sessões de agentes"
@@ -386,7 +386,7 @@
       "steps" : [
         "Ative o calendário no perfil — ou pelo botão «Ativar no perfil» na linha «Próximos» da página «O que mostrar»."
       ],
-      "summary" : "Prazos e publicações dos cartões de projeto e do plano de conteúdo — para a semana seguinte e na janela «Calendário».",
+      "summary" : "Prazos e publicações das fichas de projeto e do plano de conteúdo — para a semana seguinte e na janela «Calendário».",
       "title" : "Próximos e calendário"
     },
     {
@@ -443,7 +443,7 @@
               "name" : "Cartão"
             },
             {
-              "detail" : "Uma solicitação de permissão aparece na ilha com «Permitir» e «Recusar»; ⌃⌥Y / ⌃⌥N pelo teclado, se ativado.",
+              "detail" : "Um pedido de permissão aparece na ilha com «Permitir» e «Recusar»; ⌃⌥Y / ⌃⌥N pelo teclado, se ativado.",
               "name" : "Solicitações"
             },
             {
@@ -565,7 +565,7 @@
               "name" : "Telegram"
             },
             {
-              "detail" : "As solicitações de permissão do Claude podem ser aceitas ou recusadas com botões no Telegram — um bot separado, página «Sessões de agentes».",
+              "detail" : "Os pedidos de permissão do Claude podem ser aceitos ou recusados com botões no Telegram — um bot separado, página «Sessões de agentes».",
               "name" : "Respostas pelo Telegram"
             },
             {

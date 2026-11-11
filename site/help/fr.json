@@ -115,7 +115,7 @@
         "Faites glisser un bloc sur un autre ou cliquez sur ⌃ / ⌄.",
         "À droite, vous voyez l’aspect actuel du panneau."
       ],
-      "summary" : "Le panneau s’ouvre d’un clic sur ✦ : les blocs des modules du profil actuel de haut en bas, et la recherche.",
+      "summary" : "Le panneau s’ouvre d’un clic sur ✦ : les blocs des modules du profil actif de haut en bas, et la recherche.",
       "title" : "Panneau"
     },
     {
@@ -153,7 +153,7 @@
         }
       ],
       "steps" : [
-        "Réglages → « Quoi afficher » : chaque module a deux interrupteurs — son bloc dans le panneau et ses éléments dans la barre des menus. « Ensemble prêt » active plusieurs modules d’un coup.",
+        "Réglages → « Quoi afficher » : chaque module a deux interrupteurs — son bloc dans le panneau et ses éléments dans la barre des menus. « Ensemble prédéfini » active plusieurs modules d’un coup.",
         "Cliquez sur le nom d’un module pour ouvrir sa page : l’interrupteur et tous ses réglages."
       ],
       "summary" : "Un module est une fonction d’AI Hub Bar. Le profil décide quels modules apparaissent dans le panneau et dans quel ordre.",
@@ -242,7 +242,7 @@
               "name" : "Suivi des sessions"
             },
             {
-              "detail" : "Leurs sessions affichent aussi « en cours / en attente / terminé » si le hook d'AI Hub Bar est installé sur leur page dans « Services IA ». Codex n'exécute un nouveau hook qu'après vérification : tapez /hooks dans codex et faites-lui confiance. Sans hook, seulement les conversations récentes, sans état.",
+              "detail" : "Leurs sessions affichent aussi « en cours / en attente / terminé » si le hook d'AI Hub Bar est installé sur leur page dans « Services d'IA ». Codex n'exécute un nouveau hook qu'après vérification : tapez /hooks dans codex et faites-lui confiance. Sans hook, seulement les conversations récentes, sans état.",
               "name" : "Codex et Copilot"
             }
           ],
@@ -401,8 +401,8 @@
               "name" : "Rapport maintenant"
             },
             {
-              "detail" : "Synthèse sans IA des dernières 24 h sur Telegram.",
-              "name" : "Synthèse rapide"
+              "detail" : "Résumé sans IA des dernières 24 h sur Telegram.",
+              "name" : "Résumé rapide"
             },
             {
               "detail" : "Ouvrir _daily-report/reports/latest.html.",
@@ -485,7 +485,7 @@
               "name" : "⌥⇧"
             },
             {
-              "detail" : "Dans le menu de la langue, dans la barre des menus, choisissez d'une disposition à l'autre ce qui est corrigé automatiquement, par exemple seulement EN → RU.",
+              "detail" : "Dans le menu de la langue, dans la barre des menus, vous pouvez choisir de quelle disposition vers quelle autre corriger automatiquement, par exemple seulement EN → RU.",
               "name" : "Directions"
             },
             {

@@ -171,7 +171,7 @@
               "name" : "Blok «Batas»"
             },
             {
-              "detail" : "Codex, Copilot, Gemini, Cursor, dan pemakaian API — dalam kartu yang sama seperti Claude.",
+              "detail" : "Codex, Copilot, Gemini, Cursor, dan pengeluaran API — dalam kartu yang sama seperti Claude.",
               "name" : "AI lain"
             },
             {
@@ -329,7 +329,7 @@
               "name" : "Sumber «folder»"
             },
             {
-              "detail" : "Kartu proyek berupa teks biasa: «Tahap: naskah», «Tenggat: 2026-11-05», «Publikasi: 2026-11-05 18:00», «Format: …», «Berkas utama: naskah.md», «Platform: YouTube». Bisa diedit manual kapan saja.",
+              "detail" : "Kartu proyek berupa teks biasa: «Tahap: naskah», «Tenggat: 2026-11-05», «Publikasi: 2026-11-05 18:00», «Format: …», «Berkas utama: naskah.md», «Platform: YouTube». Bisa diedit manual.",
               "name" : "proyek.md"
             },
             {
@@ -485,7 +485,7 @@
               "name" : "⌥⇧"
             },
             {
-              "detail" : "Di menu bahasa pada bilah menu, pilih dari tata letak mana ke mana yang diperbaiki otomatis, misalnya hanya EN → RU.",
+              "detail" : "Di menu bahasa pada bar menu, pilih dari tata letak mana ke mana yang diperbaiki otomatis, misalnya hanya EN → RU.",
               "name" : "Arah"
             },
             {
@@ -531,7 +531,7 @@
               "name" : "Riwayat papan klip"
             },
             {
-              "detail" : "Catatan Markdown langsung di panel: tab untuk file .md biasa di folder yang bisa dibuka editor apa pun.",
+              "detail" : "Catatan Markdown langsung di panel: tab, file .md biasa di folder yang bisa dibuka editor apa pun.",
               "name" : "Catatan"
             },
             {
@@ -607,7 +607,7 @@
               "name" : "--hooks status|install|uninstall"
             },
             {
-              "detail" : "Buka saat login.",
+              "detail" : "Buka saat masuk.",
               "name" : "--login-item status|on|off"
             },
             {
