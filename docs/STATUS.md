@@ -5,7 +5,8 @@
 **Updated:** 2026-11-11
 
 **Now:**
-- 2026-11-11: every translation read against the Russian original (12 languages × 1763 texts), 1038 fixes applied; goes out with 0.11.0. Next on this line: bring the help up to date with 0.9–0.11
+- 2026-11-11: every translation read against the Russian original (12 languages × 1763 texts), 1038 fixes applied; goes out with 0.11.0.
+- 2026-11-11: the help brought up to date with 0.9–0.11 in all 13 languages (15 facts added, 4 rewritten); goes out with 0.11.0
 - 2026-11-11: the pictures draw limits as bars, like the panel (the assistant's map and profile preview, the help's «Лимиты AI» scene); goes out with 0.11.0
 - 0.11.0-beta.2 (build 826) published 2026-11-11 for beta testers on Oleh's word: beta.1 plus #362 Antigravity's quota and plan in the limits, through Antigravity's own status line (no sign-in read, off until turned on). Lives on Oleh's copy until the release on Tuesday 2026-11-17
 - 0.11.0-beta.1 (build 817) published 2026-11-10 for beta testers with #357–#360: the «Что нового» card, release notes in the update window, week pace, the Homebrew cask. Waits a day on Oleh's copy, then 0.11.0
@@ -57,6 +58,19 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-11 — The help brought up to date with 0.9–0.11 (branch `docs/help-up-to-date`)
+
+Done: Oleh asked whether the help matches what the app does now. It did not lie but it had fallen behind, so 15 facts were added and 4 rewritten, in Russian and the 12 other languages.
+- «Начало»: ⌃⌥B to open the panel, updates and «Бета-версии», the «Что нового» card.
+- «Панель»: the «Свернуть» and «Ещё» rows.
+- «Лимиты AI»: the block as it looks since 0.10.0 (a big number over a bar, pace, forecast only as bad news), the week against an even spend, «Вид лимитов», Antigravity's quota and how to turn it on, «Другие аккаунты Claude», «История расхода», the pause of background tasks at a threshold.
+- «Сессии агентов»: the stop button asks «Остановить?» first (the help said «остановить сейчас», wrong since 0.10.1), «Недавно завершённые».
+- «Остров у чёлки»: Claude's progress in the sessions ear, the «Другие AI» ear.
+- «Для скриптов»: `--services`, `--app-command`, `--export-settings`.
+The new translations use each language's names for the pages and buttons as they stand after the translation review. Four replaced texts removed from the catalog; `site/help/*.json` exported again.
+Checked: every new statement against the code (the shortcut's default, where each button is, the 90 % and the threshold pause, what the history window shows). `scripts/check.sh` passed (catalog 1806 keys, 0 problems). The «Лимиты AI» topic seen in the Debug copy's help window in Russian: the new facts are there. Debug copy quit, widget unregistered.
+Left: only the top of one topic was looked at live, in Russian; the other topics and languages were not. Not in the help on purpose: the main service (PR #367, not merged — its help line goes in with it) and the Telegram Mini App (the shared bot's Worker is not deployed).
 
 ## 2026-11-11 — Translations read against the Russian original (branch `chore/translations-review`)
 
