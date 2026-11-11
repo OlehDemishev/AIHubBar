@@ -1,11 +1,11 @@
 # Status
 
 <!-- summary:start -->
-**Stage:** Mac: 0.11.0-beta.1 out to beta testers 2026-11-10 (what's new card, week pace, release notes, Homebrew cask); 0.10.2 published 2026-11-10 (the Settings sidebar can no longer stay collapsed); 0.10.1 the same day (the stop button asks, Arabic percents, projects stay in sight); 0.10.0 the same day (the redesign: a calmer limits block, Settings with seven rows and «Что показывать», account and plan in the panel's header, the «Ещё» row); 0.9.1 the same day (no crash on removing an account, Arabic mirrored, the Settings sidebar, a worktree's name in a session row); 0.9.0 on 2026-11-09 (the closed panel no longer uses a third of a CPU core, 30 fixes from an audit); 0.8.1 the same day (the island's rings fit in the black ears); 0.8.0 the same day, signed and notarized (Sparkle 2.10.1, the lock screen tile checks it locked, «Раскладка» directions and exceptions, «Поддержать проект»; 0.7.8 Developer ID, Accessibility asked once; 0.7.7 hook messages in the app's language, clean session titles; 0.7.6 a map of the panel on the first screen, «Тексты» fixes; before that shorter first run, panel polish, usage history, finished sessions, ⌃⌥B, outages, several Claude accounts). Windows/Linux (`desktop/`, Tauri 2): postponed by Oleh 2026-11-02
+**Stage:** Mac: 0.11.0-beta.2 out to beta testers 2026-11-11 (adds Antigravity's quota to beta.1: what's new card, week pace, release notes, Homebrew cask); releases once a week on Tuesday since 2026-11-11; 0.10.2 published 2026-11-10 (the Settings sidebar can no longer stay collapsed); 0.10.1 the same day (the stop button asks, Arabic percents, projects stay in sight); 0.10.0 the same day (the redesign: a calmer limits block, Settings with seven rows and «Что показывать», account and plan in the panel's header, the «Ещё» row); 0.9.1 the same day (no crash on removing an account, Arabic mirrored, the Settings sidebar, a worktree's name in a session row); 0.9.0 on 2026-11-09 (the closed panel no longer uses a third of a CPU core, 30 fixes from an audit); 0.8.1 the same day (the island's rings fit in the black ears); 0.8.0 the same day, signed and notarized (Sparkle 2.10.1, the lock screen tile checks it locked, «Раскладка» directions and exceptions, «Поддержать проект»; 0.7.8 Developer ID, Accessibility asked once; 0.7.7 hook messages in the app's language, clean session titles; 0.7.6 a map of the panel on the first screen, «Тексты» fixes; before that shorter first run, panel polish, usage history, finished sessions, ⌃⌥B, outages, several Claude accounts). Windows/Linux (`desktop/`, Tauri 2): postponed by Oleh 2026-11-02
 **Updated:** 2026-11-11
 
 **Now:**
-- merged 2026-11-11: #362 Antigravity's quota and plan in the limits, through Antigravity's own status line (no sign-in read, off until turned on). Not in a release yet: goes out with 0.11.0 or the next beta
+- 0.11.0-beta.2 (build 826) published 2026-11-11 for beta testers on Oleh's word: beta.1 plus #362 Antigravity's quota and plan in the limits, through Antigravity's own status line (no sign-in read, off until turned on). Lives on Oleh's copy until the release on Tuesday 2026-11-17
 - 0.11.0-beta.1 (build 817) published 2026-11-10 for beta testers with #357–#360: the «Что нового» card, release notes in the update window, week pace, the Homebrew cask. Waits a day on Oleh's copy, then 0.11.0
 - 0.10.2 (build 807) published 2026-11-10 with #355: the Settings sidebar can no longer stay collapsed. Oleh's Mac has 0.10.1 installed by the agent from the release build
 - 0.10.1 (build 803) published 2026-11-10 with #351, #352 and #353: the stop button on a run's row asks with a second click, Arabic percents without the space, a clearer message when Anthropic changes the limits service, the VoiceOver label of «Профили», projects stay out of «Ещё»
@@ -20,7 +20,9 @@
 - merged 2026-11-03: #251 menu bar ☕ follows the «Не спать» switch, #248 «Не спать» on/off in the menu bar, #241 Codex states, #240 quick command shortcuts, #238 «Быстрый запрос», #236 content spec, #242 «Telegram» stage 1, #244 menu at the bottom, #246 shared bot (Worker not deployed yet), #247 desktop CI off for Mac string changes, #249 the bot's menu set up by each person, #252 stage 2 (sessions, requests, limits), #254 stage 3 (tasks and runs), #255 stage 4 (settings in the bot), #256 Mini App
 
 **Next:**
-- release 0.11.0 after the beta has lived a day on Oleh's copy (docs/RELEASE.md «What goes to beta first»); then `scripts/release-tools/update-cask.sh 0.11.0`
+- releases go out once a week, on Tuesday, on Oleh's word (agreed 2026-11-11); merged work waits in `main`
+- Monday 2026-11-16: live pass over the changed screens on the Debug copy; new pictures for the assistant's map and the help (they still draw rings)
+- Tuesday 2026-11-17: release 0.11.0 after Oleh's beta checks (docs/RELEASE.md «What goes to beta first»); then `scripts/release-tools/update-cask.sh 0.11.0`
 - towards 1.0 (discussed 2026-11-10): the live pass is done (journal 2026-11-10); left — freeze what is in 1.0 and what stays beta, release notes, new screenshots (the assistant's map and the help still draw rings), translations read by people, feedback from strangers before 1.0
 - check on the Air: the island at the real notch
 - promotion (docs/LAUNCH.md): r/ClaudeAI, the lists, r/macapps, Show HN, Product Hunt, Homebrew
@@ -28,8 +30,8 @@
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/specs/SPEC-windows.md §9, stage 2–3 leftovers)
 
 **Needs Oleh:**
-- Antigravity quota (after the next install): Settings → «Сервисы AI» → Gemini → «Включить квоту Antigravity», open `agy` once, then look at the panel — «Gemini» and «другие модели» with the plan. The agent was not allowed to press that button on your Mac, so the install into `~/.gemini/antigravity-cli/settings.json` is not seen live
-- update to 0.11.0-beta.1 (Settings → «Основные» → «Обновления»): does the update window show the list of changes, and does the «Что нового» card appear in the panel once
+- update to 0.11.0-beta.2 (Settings → «Основные» → «Обновления», «Бета-версии» on), then the Antigravity quota: Settings → «Сервисы AI» → Gemini → «Включить квоту Antigravity», open `agy` once, then look at the panel — «Gemini» and «другие модели» with the plan. The agent was not allowed to press that button on your Mac, so the install into `~/.gemini/antigravity-cli/settings.json` is not seen live
+- in the same update to 0.11.0-beta.2: does the update window show the list of changes, and does the «Что нового» card appear in the panel once
 - try the Homebrew install once (README → Install, three lines) on a Mac without the app, e.g. the Air: the agent did not trust the tap or install through it
 - say whether the app may report crashes by itself (opt-in, anonymous) — today it only offers a GitHub issue after a crash
 - update 0.10.1 → 0.10.2 through Settings → «Основные» → «Обновления» and say whether Sparkle replaced the copy: the update to 0.9.1 never reached `~/Applications`
@@ -53,6 +55,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-11 — 0.11.0-beta.2 with Antigravity's quota (branch `chore/status-beta-0.11.0-2`)
+
+Done: Oleh asked for releases once a week (Tuesday) instead of one after every merge, and for a second beta so that Antigravity's quota (#362) is on his copy before 0.11.0 on Tuesday 2026-11-17. #364 added the quota's line to `docs/release-notes/0.11.0.md`. `scripts/release.sh 0.11.0-beta.2 --publish` built build 826, signed it with the Developer ID, Apple notarized the app and the disk image, and the pre-release v0.11.0-beta.2 was published; the beta channel's appcast was replaced.
+Checked: the release script ended with exit 0, both notarizations «Accepted», staple validated. The pre-release has the disk image and its appcast; GitHub's «latest» is still v0.10.2, so copies outside the beta channel see nothing. The beta channel's appcast lists 0.11.0-beta.2 (826, channel beta, the Antigravity line in its notes) and 0.10.2 (807). #364 is docs only: `release-notes.py` renders the file, no CI runs on it.
+Left: not installed or opened by the agent — the update through Sparkle, the notes in the update window and the «Включить квоту Antigravity» button are Oleh's checks. The «Что нового» card has no line about Antigravity (it lists what moved, the quota is new and off by default).
 
 ## 2026-11-11 — Antigravity's quota through its status line (branch `feat/antigravity-limits`)
 
