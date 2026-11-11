@@ -268,7 +268,8 @@ private struct ModulesScene: View {
     }
 }
 
-/// Session and week rings filling up; past 80 % a notification comes.
+/// The session and the week filling up as the panel draws them — a big number over a bar; past 80 % a notification
+/// comes.
 private struct LimitsScene: View {
     private let frames: [(Double, Double)] = [(0, 0), (34, 58), (62, 71), (86, 74)]
 
@@ -276,10 +277,14 @@ private struct LimitsScene: View {
         HelpLoop(count: 4, interval: 1.4) { phase in
             let (session, week) = frames[phase]
             ZStack(alignment: .topTrailing) {
-                HStack(spacing: 40) {
-                    ring(session, String(localized: "Сессия"))
-                    ring(week, String(localized: "Неделя"))
+                HStack(alignment: .bottom, spacing: 22) {
+                    limit(session, String(localized: "Сессия"), main: true)
+                    limit(week, String(localized: "Неделя"), main: false)
+                        .frame(width: 96)
                 }
+                .padding(14)
+                .background(RoundedRectangle(cornerRadius: 12, style: .continuous).fill(Color.primary.opacity(0.05)))
+                .frame(width: 300)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 if phase == 3 {
                     HStack(spacing: 8) {
@@ -297,20 +302,16 @@ private struct LimitsScene: View {
         }
     }
 
-    private func ring(_ value: Double, _ title: String) -> some View {
-        VStack(spacing: 8) {
-            ZStack {
-                Circle().stroke(Color.secondary.opacity(0.2), lineWidth: 10)
-                Circle()
-                    .trim(from: 0, to: value / 100)
-                    .stroke(UsageLevel(value).color, style: StrokeStyle(lineWidth: 10, lineCap: .round))
-                    .rotationEffect(.degrees(-90))
-                Text(verbatim: "\(Int(value)) %").font(.system(size: 17, weight: .semibold)).monospacedDigit()
-                    .contentTransition(.numericText(value: value))
-            }
-            .frame(width: 92, height: 92)
-            Text(title).font(.system(size: 12, weight: .medium)).foregroundStyle(.secondary)
+    private func limit(_ value: Double, _ title: String, main: Bool) -> some View {
+        VStack(alignment: .leading, spacing: 4) {
+            Text(title).font(.system(size: 11.5, weight: .medium)).foregroundStyle(.secondary).lineLimit(1)
+            Text(verbatim: "\(Int(value)) %")
+                .font(.system(size: main ? 26 : 16, weight: .semibold)).monospacedDigit()
+                .foregroundStyle(UsageLevel(value) == .low ? Color.primary : UsageLevel(value).color)
+                .contentTransition(.numericText(value: value))
+            SampleLimitBar(value: value, height: main ? 7 : 4)
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
 

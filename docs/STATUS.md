@@ -5,6 +5,7 @@
 **Updated:** 2026-11-11
 
 **Now:**
+- 2026-11-11: the pictures draw limits as bars, like the panel (the assistant's map and profile preview, the help's «Лимиты AI» scene); goes out with 0.11.0
 - 0.11.0-beta.2 (build 826) published 2026-11-11 for beta testers on Oleh's word: beta.1 plus #362 Antigravity's quota and plan in the limits, through Antigravity's own status line (no sign-in read, off until turned on). Lives on Oleh's copy until the release on Tuesday 2026-11-17
 - 0.11.0-beta.1 (build 817) published 2026-11-10 for beta testers with #357–#360: the «Что нового» card, release notes in the update window, week pace, the Homebrew cask. Waits a day on Oleh's copy, then 0.11.0
 - 0.10.2 (build 807) published 2026-11-10 with #355: the Settings sidebar can no longer stay collapsed. Oleh's Mac has 0.10.1 installed by the agent from the release build
@@ -21,9 +22,9 @@
 
 **Next:**
 - releases go out once a week, on Tuesday, on Oleh's word (agreed 2026-11-11); merged work waits in `main`
-- Monday 2026-11-16: live pass over the changed screens on the Debug copy; new pictures for the assistant's map and the help (they still draw rings)
+- Monday 2026-11-16: live pass over the changed screens on the Debug copy
 - Tuesday 2026-11-17: release 0.11.0 after Oleh's beta checks (docs/RELEASE.md «What goes to beta first»); then `scripts/release-tools/update-cask.sh 0.11.0`
-- towards 1.0 (discussed 2026-11-10): the live pass is done (journal 2026-11-10); left — freeze what is in 1.0 and what stays beta, release notes, new screenshots (the assistant's map and the help still draw rings), translations read by people, feedback from strangers before 1.0
+- towards 1.0 (discussed 2026-11-10): the live pass is done (journal 2026-11-10); left — freeze what is in 1.0 and what stays beta, release notes, translations read by people, feedback from strangers before 1.0
 - check on the Air: the island at the real notch
 - promotion (docs/LAUNCH.md): r/ClaudeAI, the lists, r/macapps, Show HN, Product Hunt, Homebrew
 - content (docs/specs/SPEC-content.md, agreed): stage 2 «Версии», then batch tasks; better after the first feedback from people
@@ -55,6 +56,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-11 — Pictures draw limits as bars (branch `fix/pictures-bars`)
+
+Done: since 0.10.0 the panel shows limits as a big number over a bar, but three pictures still drew rings. Now the assistant's map of the panel (first screen) has the session as a number over a bar with the pace and the week under it; the assistant's profile preview has two bars; the help's «Лимиты AI» scene fills two bars and turns red past 80 % with the notification. One shared `SampleLimitBar` in `ModuleUI.swift`. No new texts.
+Checked: `scripts/check.sh` passed. Rendered with `--assistant-preview` (welcome in ru, de, ar and dark; the Developer template) and looked at the pictures: bars, numbers and arrows in place, Arabic mirrored. The help scene seen in the Debug copy's help window at two moments (34 % green, 86 % red with the notification). Debug copy quit, its widget unregistered.
+Left: the tiny «Панель сейчас» sketch of the limits module keeps its two small rings — it mirrors the menu bar item, where rings are still a choice. The site's hero picture and demo video were not looked at.
 
 ## 2026-11-11 — 0.11.0-beta.2 with Antigravity's quota (branch `chore/status-beta-0.11.0-2`)
 

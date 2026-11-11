@@ -160,20 +160,28 @@ struct WelcomePanelMap: View {
 
     private var limits: some View {
         VStack(alignment: .leading, spacing: 6) {
-            limit(String(localized: "Сессия"), 34)
-            limit(String(localized: "Неделя"), 58)
+            // As in the panel: the main limit is a big number over a bar with the pace, the week is smaller under it.
+            VStack(alignment: .leading, spacing: 2) {
+                HStack(alignment: .firstTextBaseline) {
+                    Text("Сессия").foregroundStyle(.secondary).lineLimit(1)
+                    Spacer(minLength: 6)
+                    Text(UsageText.pace(12)).foregroundStyle(.secondary).monospacedDigit().lineLimit(1)
+                }
+                Text(UsageText.percent(34)).font(.title3.weight(.semibold)).monospacedDigit()
+                SampleLimitBar(value: 34, height: 5)
+            }
+            VStack(alignment: .leading, spacing: 3) {
+                HStack(alignment: .firstTextBaseline) {
+                    Text("Неделя").foregroundStyle(.secondary).lineLimit(1)
+                    Spacer(minLength: 6)
+                    Text(UsageText.percent(58)).fontWeight(.medium).monospacedDigit()
+                }
+                SampleLimitBar(value: 58, height: 3)
+            }
             Text("при текущем темпе хватит до ~\("16:40")")
                 .font(.caption2)
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)
-        }
-    }
-
-    private func limit(_ title: String, _ value: Double) -> some View {
-        HStack {
-            Text(title).lineLimit(1)
-            Spacer(minLength: 6)
-            MiniRing(value: value)
         }
     }
 

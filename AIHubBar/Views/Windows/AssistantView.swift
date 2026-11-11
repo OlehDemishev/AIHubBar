@@ -567,19 +567,14 @@ struct AssistantPreview: View {
     }
 
     private func sampleBar(_ title: String, _ value: Double, _ color: Color) -> some View {
-        HStack {
-            Text(title).font(.caption).frame(width: 52, alignment: .leading)
-            Spacer()
-            // Rings, as in the panel.
-            ZStack {
-                Circle().stroke(Color.primary.opacity(0.1), lineWidth: 3)
-                Circle()
-                    .trim(from: 0, to: value)
-                    .stroke(color, style: StrokeStyle(lineWidth: 3, lineCap: .round))
-                    .rotationEffect(.degrees(-90))
+        // Bars, as in the panel.
+        VStack(alignment: .leading, spacing: 3) {
+            HStack(alignment: .firstTextBaseline) {
+                Text(title).font(.caption).foregroundStyle(.secondary)
+                Spacer()
+                Text(verbatim: UsageText.percent(value * 100)).font(.caption.weight(.medium)).monospacedDigit()
             }
-            .frame(width: 16, height: 16)
-            Text(verbatim: UsageText.percent(value * 100)).font(.caption).monospacedDigit()
+            SampleLimitBar(value: value * 100)
         }
     }
 
