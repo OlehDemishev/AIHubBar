@@ -38,7 +38,7 @@ Facts on Oleh's Mac (2026-11-02): `claude` 2.1.314 in `/opt/homebrew/bin`; `code
 | Claude Code | everything in §1 | ✅ API | ✅ | ✅ extra usage | ✅ jsonl | ✅ | ✅ hooks | ✅ |
 | Codex | agent row, «Другие AI» row: 5 h + week % | ✅ `app-server` `account/rateLimits/read` (primary / secondary, resets, window length) | ⚙️ same store as Claude once readings are kept | ⚙️ `credits`, `planType` in the same answer (openai/codex `app-server-protocol/v2/account.rs`) | ⚙️ `state_5.sqlite` `threads` (`cwd`, `tokens_used`); session logs `~/.codex/sessions/**/rollout-*.jsonl` `token_count` | ⚙️ `token_count.info.last_token_usage` vs `model_context_window` | ✅ hooks (`~/.codex/hooks.json`, stage 7): работает / ждёт / готово | ❌ until `--sandbox`/approval flags are checked live |
 | Gemini CLI | agent row, quota with consent or today's requests | ✅ Code Assist `retrieveUserQuota` (consent) / requests per day | ⚙️ | — free / plan daily limit only | ⚙️ `~/.gemini/tmp/<hash>/` chats (project hash, not path — needs mapping) | ❓ | ❓ | ❌ |
-| Antigravity (`agy`) | agent row | ❓ not documented | — | — | ❓ | ❓ | ❓ | ❌ |
+| Antigravity (`agy`) | agent row, quota once turned on | ✅ its own status line JSON (`AntigravityStatusLine`): `quota` buckets and `plan_tier`, while agy is open | — | ✅ plan | ❓ | ❓ | ❓ | ❌ |
 | GitHub Copilot CLI | agent row, `gh api /copilot_internal/user` premium requests | ✅ monthly quota | ⚙️ | ✅ entitlement / remaining | ❌ | ❌ | ❌ | ❌ |
 | Cursor CLI | agent row, usage with consent | ✅ requests / spend | ⚙️ | ✅ | ❌ | ❌ | ❌ | ❌ |
 | API providers (Anthropic, OpenAI, Google, xAI, DeepSeek, Mistral, Qwen, Kimi, GLM, MiniMax, compatible) | key, check, model, own spend | — (pay per token) | ✅ own requests (`CommandEngine`) | OpenAI / Anthropic admin cost APIs, OpenRouter credits | ✅ own requests per project | — | — | text only |
@@ -156,6 +156,28 @@ service mark. Sessions: Codex threads next to Claude sessions once a source exis
      the run status. A `Stop` hook could add «готово», which IDLE already gives. Revisit if agy gets a permission event.
      A live probe (`agy -i` in a scratch folder) stopped at agy's first-run colour-scheme screen in the app's terminal and
      was closed without answering it.
+
+8. **Antigravity's quota through its status line** (2026-11-11, agy 1.4.12 → 1.5.5, free plan «Antigravity Starter
+   Quota»). What was tried, in order:
+   - Files and print mode: no quota. `agy -p --output-format stream-json` gives tokens per turn only, and starts no
+     status line.
+   - The Code Assist address `agy` itself asks (`…cloudcode-pa.googleapis.com/v1internal:fetchAvailableModels`, with
+     its sign-in from the Keychain record `gemini` / `antigravity`): it answers with `quotaInfo` per model, but only
+     to a client whose User-Agent says Antigravity — 403 otherwise. Calling ourselves Antigravity is refused by Oleh
+     (2026-11-11): it goes round Google's client check and could cost people their accounts. **Not built.**
+   - **Built: the status line.** Antigravity runs a custom command for its status line (`/statusline <command>`,
+     `statusLine` in `~/.gemini/antigravity-cli/settings.json`) and passes JSON on stdin: `quota` — buckets such as
+     `gemini-weekly` and `3p-weekly` with `remaining_fraction`, `reset_time`, `reset_in_seconds` — plus `plan_tier`,
+     `model`, `context_window`, `agent_state`, `email`. `AntigravityStatusLine` adds
+     `{"type": "command", "command": "'<script>'", "stack_with_default": true}`; the script keeps the JSON in
+     `antigravity-status.json` (0600) and prints nothing, so Antigravity's own line stays. A status line the person
+     already has is not replaced; the settings are backed up before each change; turning it off takes the entry out
+     and deletes what was kept.
+   - The numbers are current while agy is open; ten minutes after the last one the panel shows them dimmed with their
+     time. A bucket whose reset has passed is dropped. The source shows up only once it is turned on (Settings →
+     «Сервисы AI» → Gemini → «Квота Antigravity»).
+   - Open: `agent_state` in the same JSON may be the «waiting» signal stage 7 lacked (seen: `authenticating`,
+     `initializing`); paid plans' bucket names are not seen yet.
 
 Rules for every stage: hover hint on each icon-only control, accessibility walk at the end of each UI stage
 (SPEC §3.1), all strings in 13 languages, nothing read without the consent the service already asks for.

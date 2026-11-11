@@ -61,7 +61,7 @@ enum ServiceTab: String, CaseIterable, Sendable {
         switch hub {
         case .anthropicCosts: self = .claude
         case .codex, .openAICosts: self = .codex
-        case .gemini: self = .gemini
+        case .gemini, .antigravity: self = .gemini
         case .copilot: self = .copilot
         case .cursor: self = .cursor
         case .openRouter: self = .other
@@ -123,6 +123,9 @@ struct ServicePage: View {
             }
             if service == .codex {
                 AgentStatesSection(agent: .codex)
+            }
+            if service == .gemini {
+                AntigravityQuotaSection()
             }
             if !service.hubSources.isEmpty {
                 LimitsSourcesSection(sources: service.hubSources)
@@ -301,6 +304,58 @@ private struct AgentStatesSection: View {
         }
         refresh()
         AppLog.info("\(agent.binary) hook: \(status)")
+    }
+}
+
+/// Antigravity's quota through its own status line (`AntigravityStatusLine`): on, off, and what it changes.
+private struct AntigravityQuotaSection: View {
+    @Environment(HubLimitsStore.self) private var hub
+    @State private var status: HookStatus = .notInstalled
+    @State private var message: String?
+
+    private var line: AntigravityStatusLine { .live }
+
+    var body: some View {
+        Section {
+            LabeledContent(String(localized: "Квота из Antigravity"), value: status.title)
+            HStack {
+                if status != .installed {
+                    Button(status == .outdated ? String(localized: "Обновить") : String(localized: "Включить квоту Antigravity")) {
+                        perform { try line.install() }
+                    }
+                    .help(String(localized: "Добавить statusLine в ~/.gemini/antigravity-cli/settings.json"))
+                }
+                if status != .notInstalled {
+                    Button("Выключить квоту Antigravity") { perform { try line.uninstall() } }
+                        .help(String(localized: "Убрать statusLine AI Hub Bar из настроек Antigravity"))
+                }
+            }
+            if let message {
+                Text(message).font(.caption).foregroundStyle(.secondary)
+            }
+        } header: {
+            Text("Квота Antigravity")
+        } footer: {
+            Footnote(text: String(localized: "Antigravity сам передаёт остаток квоты и тариф своей строке состояния. AI Hub Bar добавляет в ~/.gemini/antigravity-cli/settings.json команду, которая сохраняет эти данные на Mac и ничего не выводит: обычная строка Antigravity остаётся на месте, вход Antigravity не читается. Перед изменением рядом кладётся резервная копия. Цифры обновляются, пока Antigravity открыт; свою строку состояния AI Hub Bar не заменяет."))
+        }
+        .onAppear(perform: refresh)
+    }
+
+    private func refresh() {
+        _ = try? line.updateScriptIfNeeded()
+        status = line.status()
+    }
+
+    private func perform(_ action: () throws -> Void) {
+        do {
+            try action()
+            message = nil
+        } catch {
+            message = error.localizedDescription
+            AppLog.error("Antigravity status line install/uninstall failed: \(error.localizedDescription)")
+        }
+        refresh()
+        Task { await hub.refresh() }
     }
 }
 

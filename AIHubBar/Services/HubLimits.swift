@@ -7,7 +7,7 @@ import WidgetKit
 /// is tolerant and a source that can't be read shows its error instead of numbers.
 struct HubLimit: Equatable, Identifiable, Sendable {
     enum Source: String, CaseIterable, Identifiable, Sendable {
-        case codex, openRouter, copilot, gemini, openAICosts, anthropicCosts, cursor
+        case codex, openRouter, copilot, gemini, antigravity, openAICosts, anthropicCosts, cursor
 
         var id: String { rawValue }
 
@@ -17,6 +17,7 @@ struct HubLimit: Equatable, Identifiable, Sendable {
             case .openRouter: "OpenRouter"
             case .copilot: "GitHub Copilot"
             case .gemini: "Gemini CLI"
+            case .antigravity: "Antigravity"
             case .openAICosts: String(localized: "OpenAI API")
             case .anthropicCosts: String(localized: "Anthropic API")
             case .cursor: "Cursor"
@@ -29,7 +30,7 @@ struct HubLimit: Equatable, Identifiable, Sendable {
             case .openRouter: "hub-openrouter"
             case .openAICosts: "hub-openai-admin"
             case .anthropicCosts: "hub-anthropic-admin"
-            case .codex, .copilot, .gemini, .cursor: nil
+            case .codex, .copilot, .gemini, .antigravity, .cursor: nil
             }
         }
 
@@ -40,6 +41,7 @@ struct HubLimit: Equatable, Identifiable, Sendable {
             case .openRouter: "OpenRouter"
             case .copilot: "Copilot"
             case .gemini: "Gemini"
+            case .antigravity: "Antigravity"
             case .openAICosts: "OpenAI"
             case .anthropicCosts: "Anthropic"
             case .cursor: "Cursor"
@@ -51,7 +53,7 @@ struct HubLimit: Equatable, Identifiable, Sendable {
             case .openRouter: URL(string: "https://openrouter.ai/settings/keys")
             case .openAICosts: URL(string: "https://platform.openai.com/settings/organization/admin-keys")
             case .anthropicCosts: URL(string: "https://console.anthropic.com/settings/admin-keys")
-            case .codex, .copilot, .gemini, .cursor: nil
+            case .codex, .copilot, .gemini, .antigravity, .cursor: nil
             }
         }
 
@@ -62,6 +64,7 @@ struct HubLimit: Equatable, Identifiable, Sendable {
             case .openRouter: String(localized: "ключ OpenRouter")
             case .copilot: String(localized: "установленный gh с входом в GitHub и Copilot")
             case .gemini: String(localized: "установленный Gemini CLI")
+            case .antigravity: String(localized: "включённая квота Antigravity (выше) и открытый agy")
             case .openAICosts: String(localized: "админский ключ организации OpenAI (sk-admin-…)")
             case .anthropicCosts: String(localized: "админский ключ Anthropic (sk-ant-admin…)")
             case .cursor: String(localized: "Cursor с входом и ваше согласие")
@@ -184,6 +187,8 @@ final class HubLimitsStore {
         case .codex: return AgentKind.codex.detect() != nil || FileManager.default.fileExists(atPath: home.appending(path: ".codex/sessions").path)
         case .copilot: return HubFetch.tool("gh") != nil
         case .gemini: return FileManager.default.fileExists(atPath: home.appending(path: ".gemini").path)
+        // Only once the person turned it on: an installed agy alone gives nothing to show.
+        case .antigravity: return AntigravityStatusLine.live.status() != .notInstalled
         case .cursor: return FileManager.default.fileExists(atPath: home.appending(path: "Library/Application Support/Cursor/User/globalStorage/state.vscdb").path)
         case .openRouter, .openAICosts, .anthropicCosts: return false
         }
@@ -243,6 +248,8 @@ final class HubLimitsStore {
                 }
             }
             return done([HubParse.geminiRequests(today: HubFetch.geminiTodayRequests(), dailyLimit: geminiDailyLimit)])
+        case .antigravity:
+            return AntigravityStatusLine.live.limit()
         case .openAICosts:
             guard let key = await APIKeyStore.read(account: "hub-openai-admin") else { return done(nil, .missing) }
             let start = Int(Calendar.current.dateInterval(of: .month, for: .now)?.start.timeIntervalSince1970 ?? 0)

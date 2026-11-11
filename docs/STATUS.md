@@ -2,9 +2,10 @@
 
 <!-- summary:start -->
 **Stage:** Mac: 0.11.0-beta.1 out to beta testers 2026-11-10 (what's new card, week pace, release notes, Homebrew cask); 0.10.2 published 2026-11-10 (the Settings sidebar can no longer stay collapsed); 0.10.1 the same day (the stop button asks, Arabic percents, projects stay in sight); 0.10.0 the same day (the redesign: a calmer limits block, Settings with seven rows and «Что показывать», account and plan in the panel's header, the «Ещё» row); 0.9.1 the same day (no crash on removing an account, Arabic mirrored, the Settings sidebar, a worktree's name in a session row); 0.9.0 on 2026-11-09 (the closed panel no longer uses a third of a CPU core, 30 fixes from an audit); 0.8.1 the same day (the island's rings fit in the black ears); 0.8.0 the same day, signed and notarized (Sparkle 2.10.1, the lock screen tile checks it locked, «Раскладка» directions and exceptions, «Поддержать проект»; 0.7.8 Developer ID, Accessibility asked once; 0.7.7 hook messages in the app's language, clean session titles; 0.7.6 a map of the panel on the first screen, «Тексты» fixes; before that shorter first run, panel polish, usage history, finished sessions, ⌃⌥B, outages, several Claude accounts). Windows/Linux (`desktop/`, Tauri 2): postponed by Oleh 2026-11-02
-**Updated:** 2026-11-10
+**Updated:** 2026-11-11
 
 **Now:**
+- 2026-11-11, branch `feat/antigravity-limits`: Antigravity's quota and plan in the limits, through Antigravity's own status line (no sign-in read, off until turned on). Not in a release yet
 - 0.11.0-beta.1 (build 817) published 2026-11-10 for beta testers with #357–#360: the «Что нового» card, release notes in the update window, week pace, the Homebrew cask. Waits a day on Oleh's copy, then 0.11.0
 - 0.10.2 (build 807) published 2026-11-10 with #355: the Settings sidebar can no longer stay collapsed. Oleh's Mac has 0.10.1 installed by the agent from the release build
 - 0.10.1 (build 803) published 2026-11-10 with #351, #352 and #353: the stop button on a run's row asks with a second click, Arabic percents without the space, a clearer message when Anthropic changes the limits service, the VoiceOver label of «Профили», projects stay out of «Ещё»
@@ -27,6 +28,7 @@
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/specs/SPEC-windows.md §9, stage 2–3 leftovers)
 
 **Needs Oleh:**
+- Antigravity quota (after the next install): Settings → «Сервисы AI» → Gemini → «Включить квоту Antigravity», open `agy` once, then look at the panel — «Gemini» and «другие модели» with the plan. The agent was not allowed to press that button on your Mac, so the install into `~/.gemini/antigravity-cli/settings.json` is not seen live
 - update to 0.11.0-beta.1 (Settings → «Основные» → «Обновления»): does the update window show the list of changes, and does the «Что нового» card appear in the panel once
 - try the Homebrew install once (README → Install, three lines) on a Mac without the app, e.g. the Air: the agent did not trust the tap or install through it
 - say whether the app may report crashes by itself (opt-in, anonymous) — today it only offers a GitHub issue after a crash
@@ -51,6 +53,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-11 — Antigravity's quota through its status line (branch `feat/antigravity-limits`)
+
+Done: a new limit source «Antigravity» on the Gemini page of «Сервисы AI». Antigravity passes its quota and plan to a custom status line command, so `AntigravityStatusLine` adds `statusLine` to `~/.gemini/antigravity-cli/settings.json` (backup first, `stack_with_default` keeps Antigravity's own line, a status line the person already has is not replaced) with a script that keeps that JSON in `antigravity-status.json` and prints nothing. The panel shows a window per bucket («Gemini», «другие модели»), the plan as a note, and dims the numbers with their time ten minutes after agy was last open. Off until turned on in the new section «Квота Antigravity»; turning it off takes the entry out and deletes the kept file. Numbers that come with an error are now marked stale for every hub source. The first approach — Antigravity's sign-in from the Keychain and Google's Code Assist address — was dropped: Google answers only to a client that calls itself Antigravity, and Oleh refused that (SPEC-ai-services §5 stage 8 has the whole research). 12 new strings in 12 languages.
+Checked: `scripts/check.sh` green (two new tests: the status JSON; adding, updating and removing the status line with a script path that has a space, the person's own status line left alone). Live: agy 1.5.5 run with the same `statusLine` entry through `--settings` (session only) passed `quota` with `gemini-weekly` and `3p-weekly` and `plan_tier`, and with `stack_with_default` and a silent command its own line stayed on screen. The Gemini page seen on the Debug copy (Russian, light): the section and the «Antigravity» row are there.
+Left: the button «Включить квоту Antigravity» was not pressed live (the agent's permission check refused changing Antigravity's settings on Oleh's Mac), so the real install and the panel with real numbers are for Oleh after the next install. Bucket names on paid plans are not seen. During the research eight requests went to Google's Code Assist address under Antigravity's client name from Oleh's account (four more under a plain client name) (before the User-Agent was found to be the reason they worked); none since.
 
 ## 2026-11-10 — Beta 0.11.0-beta.1 (branch `chore/status-beta-0.11.0`)
 
