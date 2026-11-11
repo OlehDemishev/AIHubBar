@@ -5,7 +5,7 @@
 **Updated:** 2026-11-11
 
 **Now:**
-- 2026-11-11, branch `feat/antigravity-limits`: Antigravity's quota and plan in the limits, through Antigravity's own status line (no sign-in read, off until turned on). Not in a release yet
+- merged 2026-11-11: #362 Antigravity's quota and plan in the limits, through Antigravity's own status line (no sign-in read, off until turned on). Not in a release yet: goes out with 0.11.0 or the next beta
 - 0.11.0-beta.1 (build 817) published 2026-11-10 for beta testers with #357–#360: the «Что нового» card, release notes in the update window, week pace, the Homebrew cask. Waits a day on Oleh's copy, then 0.11.0
 - 0.10.2 (build 807) published 2026-11-10 with #355: the Settings sidebar can no longer stay collapsed. Oleh's Mac has 0.10.1 installed by the agent from the release build
 - 0.10.1 (build 803) published 2026-11-10 with #351, #352 and #353: the stop button on a run's row asks with a second click, Arabic percents without the space, a clearer message when Anthropic changes the limits service, the VoiceOver label of «Профили», projects stay out of «Ещё»
