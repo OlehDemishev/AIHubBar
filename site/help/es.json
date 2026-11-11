@@ -29,6 +29,18 @@
               "name" : "⌘Q"
             },
             {
+              "detail" : "Abrir el panel desde cualquier app. El atajo está en Ajustes → «Atajos» → «Abrir el panel».",
+              "name" : "⌃⌥B"
+            },
+            {
+              "detail" : "AI Hub Bar busca por sí mismo las versiones nuevas y la ventana de actualización muestra qué ha cambiado (Ajustes → «General» → «Actualizaciones»). «Versiones beta»: recibir las compilaciones antes que los demás.",
+              "name" : "Actualizaciones"
+            },
+            {
+              "detail" : "Tras una actualización aparece una vez, en la parte superior del panel, una tarjeta con lo que ha cambiado; «Entendido» la quita.",
+              "name" : "Novedades"
+            },
+            {
               "detail" : "Con más de un perfil activado, arriba del panel hay un selector. Los perfiles se configuran en Ajustes → «Perfiles»; todos los ajustes se guardan en un archivo .claudepult (General → «Exportar ajustes…»); un doble clic en ese archivo lo importa.",
               "name" : "Perfiles"
             }
@@ -102,6 +114,10 @@
               "name" : "Contraer un bloque"
             },
             {
+              "detail" : "La fila «Contraer» al final del panel deja los límites, las sesiones y los proyectos; «Más» recupera los demás bloques.",
+              "name" : "Más"
+            },
+            {
               "detail" : "Tema, fondo de cristal, tamaño del texto, ancho y densidad — Ajustes → «Apariencia».",
               "name" : "Apariencia"
             }
@@ -167,16 +183,36 @@
         {
           "facts" : [
             {
-              "detail" : "La sesión con cuenta atrás hasta el reinicio y previsión según el ritmo de los últimos 30 min, la semana, semanas por modelo, extra usage.",
+              "detail" : "El límite principal es un número grande sobre una barra, con el ritmo por hora y el tiempo hasta el reinicio al lado; la semana, las semanas por modelo y el extra usage van debajo. La previsión aparece solo si el límite se va a agotar antes del reinicio.",
               "name" : "Bloque «Límites»"
             },
             {
-              "detail" : "Codex, Copilot, Gemini, Cursor y el gasto de API — con las mismas tarjetas que Claude.",
+              "detail" : "La semana muestra si gastas el límite más rápido o más lento que un gasto uniforme: una marca en la barra y una línea debajo.",
+              "name" : "Semana"
+            },
+            {
+              "detail" : "Barras o anillos: se elige en la página «Límites de IA».",
+              "name" : "Aspecto de los límites"
+            },
+            {
+              "detail" : "Codex, Copilot, Gemini, Antigravity, Cursor y el gasto de API — con las mismas tarjetas que Claude.",
               "name" : "Otras IA"
+            },
+            {
+              "detail" : "Antigravity pasa por sí mismo la cuota y el plan: Ajustes → «Servicios de IA» → Gemini → «Activar la cuota de Antigravity» y luego abre agy una vez.",
+              "name" : "Antigravity"
+            },
+            {
+              "detail" : "Ajustes → «Servicios de IA» → Claude Code → «Otras cuentas de Claude»: los límites de cada cuenta van en una tarjeta aparte en el panel.",
+              "name" : "Otras cuentas de Claude"
             },
             {
               "detail" : "Una estimación a partir de los registros de Claude Code: proporción por proyecto y la sesión más costosa en la sesión, hoy, la semana.",
               "name" : "Uso por proyecto"
+            },
+            {
+              "detail" : "«Historial de consumo…», debajo del uso por proyecto, abre una ventana: los tokens de Claude Code por día de las últimas semanas.",
+              "name" : "Historial de consumo"
             },
             {
               "detail" : "Una vez por ventana al 50/80/95 % (umbrales en Ajustes) y cuando el límite vuelve; si quieres, también por Telegram.",
@@ -187,7 +223,7 @@
               "name" : "Widget"
             },
             {
-              "detail" : "Si la sesión está usada en más del 90 %, la tarea en segundo plano pregunta: iniciar ahora o después del reinicio.",
+              "detail" : "Si la sesión está usada en más del 90 %, la tarea en segundo plano pregunta: iniciar ahora o después del reinicio. «Pausar tareas en segundo plano», en la página «Límites de IA», detiene en el umbral las tareas en curso y las continúa después del reinicio.",
               "name" : "Segundo plano y límite"
             }
           ],
@@ -234,7 +270,7 @@
               "name" : "Registro"
             },
             {
-              "detail" : "Tarea en segundo plano: detener ahora.",
+              "detail" : "Tarea en segundo plano: el primer clic pregunta «¿Detener?» y el segundo la detiene.",
               "name" : "Detener"
             },
             {
@@ -244,6 +280,10 @@
             {
               "detail" : "Sus sesiones también muestran «trabajando / esperando / listo» si el hook de AI Hub Bar está instalado en su página de «Servicios de IA». Codex ejecuta un hook nuevo solo tras revisarlo: escribe /hooks en codex y confía en él. Sin hook, solo las conversaciones recientes, sin estado.",
               "name" : "Codex y Copilot"
+            },
+            {
+              "detail" : "Las sesiones que terminaron hace poco están plegadas bajo esta línea: puedes continuarlas.",
+              "name" : "Finalizadas recientemente"
             }
           ],
           "monospaced" : false,
@@ -439,6 +479,14 @@
               "name" : "Orejas"
             },
             {
+              "detail" : "«Progreso de Claude en la oreja de sesiones», en la página del módulo: la oreja muestra qué está haciendo Claude ahora, no solo el número de sesiones.",
+              "name" : "Progreso"
+            },
+            {
+              "detail" : "Una oreja puede mostrar el límite más lleno de otra IA.",
+              "name" : "Otras IA"
+            },
+            {
               "detail" : "Pasa el puntero por el notch y se abrirá una tarjeta con los límites y lo que hace Claude.",
               "name" : "Tarjeta"
             },
@@ -617,6 +665,18 @@
             {
               "detail" : "Límites de la suscripción; uso por proyecto.",
               "name" : "--usage · --token-usage"
+            },
+            {
+              "detail" : "Los agentes y las claves encontrados; los límites de otras IA.",
+              "name" : "--services · --services limits"
+            },
+            {
+              "detail" : "Abrir una ventana en la app en ejecución.",
+              "name" : "--app-command help|settings|assistant|usage-history|quick-prompt"
+            },
+            {
+              "detail" : "Guardar todos los ajustes en un archivo.",
+              "name" : "--export-settings <archivo.claudepult>"
             }
           ],
           "monospaced" : true,

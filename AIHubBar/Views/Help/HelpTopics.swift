@@ -141,6 +141,9 @@ enum HelpTopic: String, CaseIterable, Identifiable, Sendable {
                 HelpFact("⌘R", String(localized: "Обновить проекты в открытой панели.")),
                 HelpFact("⌘,", String(localized: "Настройки.")),
                 HelpFact("⌘Q", String(localized: "Выйти из AI Hub Bar.")),
+                HelpFact("⌃⌥B", String(localized: "Открыть панель из любого приложения. Сочетание — в Настройках → «Клавиши» → «Открывать панель».")),
+                HelpFact(String(localized: "Обновления"), String(localized: "AI Hub Bar сам проверяет новые версии и в окне обновления показывает, что изменилось (Настройки → «Основные» → «Обновления»). «Бета-версии» — получать сборки раньше остальных.")),
+                HelpFact(String(localized: "Что нового"), String(localized: "После обновления вверху панели один раз появляется карточка с тем, что изменилось; «Понятно» её убирает.")),
                 HelpFact(String(localized: "Профили"), String(localized: "Если включено больше одного профиля, вверху панели — переключатель. Профили настраиваются в Настройках → «Профили»; все настройки сохраняются в файл .claudepult (Основные → «Экспорт настроек…»), двойной клик по такому файлу — импорт."), symbol: "square.stack.3d.up"),
             ])]
         case .menuBar:
@@ -155,6 +158,7 @@ enum HelpTopic: String, CaseIterable, Identifiable, Sendable {
             [HelpSection(facts: [
                 HelpFact(String(localized: "Поиск"), String(localized: "Поле сверху панели ищет проекты, сессии, команды и свои промпты. Открыть с клавиатуры — сочетание в «Клавишах»."), symbol: "magnifyingglass"),
                 HelpFact(String(localized: "Свернуть блок"), String(localized: "Клик по заголовку блока сворачивает его; панель это запоминает."), symbol: "chevron.down"),
+                HelpFact(String(localized: "Ещё"), String(localized: "Строка «Свернуть» внизу панели оставляет лимиты, сессии и проекты; «Ещё» возвращает остальные блоки.")),
                 HelpFact(String(localized: "Внешний вид"), String(localized: "Тема, стеклянный фон, размер текста, ширина и плотность — Настройки → «Внешний вид»."), symbol: "paintbrush"),
             ])]
         case .modules:
@@ -168,12 +172,17 @@ enum HelpTopic: String, CaseIterable, Identifiable, Sendable {
              ])]
         case .limits:
             [HelpSection(facts: [
-                HelpFact(String(localized: "Блок «Лимиты»"), String(localized: "Сессия с обратным отсчётом до сброса и прогнозом по темпу за 30 мин, неделя, недели по моделям, extra usage."), symbol: "gauge.with.dots.needle.33percent"),
-                HelpFact(String(localized: "Другие AI"), String(localized: "Codex, Copilot, Gemini, Cursor и расход по API — такими же карточками, как Claude."), symbol: "sparkles"),
+                HelpFact(String(localized: "Блок «Лимиты»"), String(localized: "Главный лимит — крупное число над полосой, рядом темп за час и время до сброса; неделя, недели по моделям и extra usage — под ним. Прогноз появляется, только если лимит кончится раньше сброса."), symbol: "gauge.with.dots.needle.33percent"),
+                HelpFact(String(localized: "Неделя"), String(localized: "У недели видно, быстрее или медленнее ровного расхода вы тратите лимит: отметка на полосе и строка под ней."), symbol: "calendar"),
+                HelpFact(String(localized: "Вид лимитов"), String(localized: "Полосы или кольца — выбирается на странице «Лимиты AI»."), symbol: "chart.bar.fill"),
+                HelpFact(String(localized: "Другие AI"), String(localized: "Codex, Copilot, Gemini, Antigravity, Cursor и расход по API — такими же карточками, как Claude."), symbol: "sparkles"),
+                HelpFact("Antigravity", String(localized: "Квоту и тариф передаёт сам Antigravity: Настройки → «Сервисы AI» → Gemini → «Включить квоту Antigravity», затем один раз откройте agy."), symbol: "diamond"),
+                HelpFact(String(localized: "Другие аккаунты Claude"), String(localized: "Настройки → «Сервисы AI» → Claude Code → «Другие аккаунты Claude»: лимиты каждого аккаунта — отдельной карточкой в панели."), symbol: "person.2"),
                 HelpFact(String(localized: "Расход по проектам"), String(localized: "Оценка по журналам Claude Code: доли проектов и самая затратная сессия за сессию, сегодня, неделю."), symbol: "chart.pie"),
+                HelpFact(String(localized: "История расхода"), String(localized: "«История расхода…» под расходом по проектам открывает окно: токены Claude Code по дням за последние недели."), symbol: "chart.xyaxis.line"),
                 HelpFact(String(localized: "Уведомления"), String(localized: "Один раз на окно при 50/80/95 % (пороги — в Настройках) и когда лимит восстановился; по желанию ещё и в Telegram."), symbol: "bell"),
                 HelpFact(String(localized: "Виджет"), String(localized: "«Лимиты Claude» для рабочего стола: правый клик по столу → «Изменить виджеты…» → AI Hub Bar. Маленький — кольцо сессии, средний — сессия и неделя."), symbol: "widget.small"),
-                HelpFact(String(localized: "Фон и лимит"), String(localized: "Если сессия использована больше чем на 90 %, фоновая задача спрашивает: запустить сейчас или после сброса."), symbol: "moon.zzz"),
+                HelpFact(String(localized: "Фон и лимит"), String(localized: "Если сессия использована больше чем на 90 %, фоновая задача спрашивает: запустить сейчас или после сброса. «Ставить фоновые задачи на паузу» на странице «Лимиты AI» останавливает идущие задачи у порога и продолжает их после сброса."), symbol: "moon.zzz"),
             ])]
         case .sessions:
             [HelpSection(facts: [
@@ -183,9 +192,10 @@ enum HelpTopic: String, CaseIterable, Identifiable, Sendable {
                 HelpFact(String(localized: "Терминал / Фон"), String(localized: "Где запускать: окно Терминала (можно отвечать Claude) или claude -p без окна (только разрешённые действия, лимит времени, итог — уведомлением и в Telegram). «Запомнить выбор» или профиль по умолчанию — в Настройках."), symbol: "terminal"),
                 HelpFact(ModuleKind.quickPrompt.title, String(localized: "⌃⌥P в любом приложении: задача, проект (тот, что впереди, или прошлый) и агент — ⌘↩, и она в фоне или в Терминале. Модуль «Быстрый запрос», клавиша — на его странице."), symbol: ModuleKind.quickPrompt.symbol),
                 HelpFact(String(localized: "Журнал"), String(localized: "Фоновая задача: что делает Claude, по шагам."), symbol: "doc.text"),
-                HelpFact(String(localized: "Остановить"), String(localized: "Фоновая задача: остановить сейчас."), symbol: "stop.circle"),
+                HelpFact(String(localized: "Остановить"), String(localized: "Фоновая задача: первый клик спрашивает «Остановить?», второй останавливает."), symbol: "stop.circle"),
                 HelpFact(String(localized: "Отслеживание сессий"), String(localized: "Сессии видны, только если отслеживание включено: небольшой скрипт дописывается в ~/.claude/settings.json, копия сохраняется рядом."), symbol: "link"),
                 HelpFact(String(localized: "Codex и Copilot"), String(localized: "Их сессии тоже показывают «работает / ждёт / готово», если на их странице в «Сервисах AI» установлен hook AI Hub Bar. Codex запускает новый hook только после проверки: в codex введите /hooks и доверьте его. Без hook — только недавние беседы, без состояния."), symbol: "person.2"),
+                HelpFact(String(localized: "Недавно завершённые"), String(localized: "Сессии, которые недавно закончились, сложены под этой строкой — их можно продолжить."), symbol: "clock.arrow.circlepath"),
             ])]
         case .services:
             [HelpSection(facts: [
@@ -227,6 +237,8 @@ enum HelpTopic: String, CaseIterable, Identifiable, Sendable {
         case .notch:
             [HelpSection(facts: [
                 HelpFact(String(localized: "Ушки"), String(localized: "Слева и справа от чёлки — лимит и сессии, когда сводка «только в острове»; что именно, выбирается на странице модуля."), symbol: "capsule.tophalf.filled"),
+                HelpFact(String(localized: "Ход работы"), String(localized: "«Ход работы Claude в ушке сессий» на странице модуля: ушко показывает, что Claude делает сейчас, а не только число сессий.")),
+                HelpFact(String(localized: "Другие AI"), String(localized: "В ушко можно поставить самый заполненный лимит другого AI.")),
                 HelpFact(String(localized: "Карточка"), String(localized: "Наведите курсор на чёлку — откроется карточка с лимитами и тем, что делает Claude."), symbol: "rectangle.portrait.topthird.inset.filled"),
                 HelpFact(String(localized: "Запросы"), String(localized: "Запрос разрешения появляется в острове с «Разрешить» и «Отклонить»; ⌃⌥Y / ⌃⌥N — с клавиатуры, если включено."), symbol: "hand.raised"),
                 HelpFact(String(localized: "Файл на остров"), String(localized: "Перетащите файл на остров — откроются AI-команды профиля для него."), symbol: "doc.badge.arrow.up"),
@@ -261,6 +273,9 @@ enum HelpTopic: String, CaseIterable, Identifiable, Sendable {
                 HelpFact("--login-item status|on|off", String(localized: "Автозапуск при входе.")),
                 HelpFact("--background-settings", String(localized: "Правила доступа фоновых задач.")),
                 HelpFact("--usage · --token-usage", String(localized: "Лимиты подписки; расход по проектам.")),
+                HelpFact("--services · --services limits", String(localized: "Найденные агенты и ключи; лимиты других AI.")),
+                HelpFact("--app-command help|settings|assistant|usage-history|quick-prompt", String(localized: "Открыть окно в запущенном приложении.")),
+                HelpFact(String(localized: "--export-settings <файл.claudepult>"), String(localized: "Сохранить все настройки в файл.")),
             ], monospaced: true)]
         }
     }

@@ -4770,6 +4770,82 @@
         }
       }
     },
+    "--export-settings <файл.claudepult>": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "--export-settings <file.claudepult>"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "--export-settings <файл.claudepult>"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "--export-settings <Datei.claudepult>"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "--export-settings <fichier.claudepult>"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "--export-settings <archivo.claudepult>"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "--export-settings <file.claudepult>"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "--export-settings <arquivo.claudepult>"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "--export-settings <plik.claudepult>"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "--export-settings <ファイル.claudepult>"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "--export-settings <파일.claudepult>"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "--export-settings <ملف.claudepult>"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "--export-settings <berkas.claudepult>"
+          }
+        }
+      }
+    },
     ". Резервная копия: ~/.claude/%@": {
       "localizations": {
         "ar": {
@@ -6672,6 +6748,82 @@
         }
       }
     },
+    "AI Hub Bar сам проверяет новые версии и в окне обновления показывает, что изменилось (Настройки → «Основные» → «Обновления»). «Бета-версии» — получать сборки раньше остальных.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar checks for new versions by itself and the update window shows what changed (Settings → “General” → “Updates”). “Beta Builds” — get builds before everyone else."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar сам перевіряє нові версії й у вікні оновлення показує, що змінилося (Налаштування → «Загальні» → «Оновлення»). «Бета-версії» — отримувати збірки раніше за інших."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar sucht selbst nach neuen Versionen, und das Update-Fenster zeigt, was sich geändert hat (Einstellungen → „Allgemein“ → „Updates“). „Beta-Versionen“ — Builds früher als alle anderen erhalten."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar recherche lui-même les nouvelles versions et la fenêtre de mise à jour montre ce qui a changé (Réglages → « Général » → « Mises à jour »). « Versions bêta » : recevoir les versions avant tout le monde."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar busca por sí mismo las versiones nuevas y la ventana de actualización muestra qué ha cambiado (Ajustes → «General» → «Actualizaciones»). «Versiones beta»: recibir las compilaciones antes que los demás."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar cerca da solo le nuove versioni e la finestra di aggiornamento mostra che cosa è cambiato (Impostazioni → «Generali» → «Aggiornamenti»). «Versioni beta»: ricevi le build prima degli altri."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O AI Hub Bar procura novas versões sozinho e a janela de atualização mostra o que mudou (Ajustes → “Geral” → “Atualizações”). “Versões beta”: receber as compilações antes de todo mundo."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar sam sprawdza nowe wersje, a okno aktualizacji pokazuje, co się zmieniło (Ustawienia → „Ogólne” → „Aktualizacje”). „Wersje beta” — otrzymuj kompilacje wcześniej niż inni."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar は新しいバージョンを自動で確認し、アップデートのウインドウに変更点を表示します（設定 →「一般」→「アップデート」）。「ベータ版」をオンにすると、ほかの人より先にビルドを受け取れます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar가 새 버전을 직접 확인하고 업데이트 창에 바뀐 내용을 보여 줍니다(설정 → «일반» → «업데이트»). «베타 버전»을 켜면 다른 사람보다 먼저 빌드를 받습니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يتحقق AI Hub Bar بنفسه من الإصدارات الجديدة، وتعرض نافذة التحديث ما تغيّر (الإعدادات ← «عام» ← «التحديثات»). «الإصدارات التجريبية»: الحصول على الإصدارات قبل الآخرين."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar memeriksa versi baru sendiri dan jendela pembaruan menampilkan apa yang berubah (Pengaturan → “Umum” → “Pembaruan”). “Versi beta” — menerima build lebih awal daripada yang lain."
+          }
+        }
+      }
+    },
     "AI Hub Bar считает токены своих запросов по ответам сервисов; стоимость — по ценам, которые вы введёте (цены меняются, поэтому они не зашиты). Уведомление при 80 % и 100 % бюджета.": {
       "localizations": {
         "ar": {
@@ -7434,16 +7586,10 @@
     },
     "Antigravity сам передаёт остаток квоты и тариф своей строке состояния. AI Hub Bar добавляет в ~/.gemini/antigravity-cli/settings.json команду, которая сохраняет эти данные на Mac и ничего не выводит: обычная строка Antigravity остаётся на месте, вход Antigravity не читается. Перед изменением рядом кладётся резервная копия. Цифры обновляются, пока Antigravity открыт; свою строку состояния AI Hub Bar не заменяет.": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Antigravity itself passes the remaining quota and the plan to its status line. AI Hub Bar adds a command to ~/.gemini/antigravity-cli/settings.json that keeps this data on the Mac and prints nothing: Antigravity’s usual line stays in place, and Antigravity’s sign-in is not read. A backup is saved next to the file before the change. The numbers update while Antigravity is open; AI Hub Bar doesn’t replace a status line of your own."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Antigravity сам передає залишок квоти й тариф своєму рядку стану. AI Hub Bar додає в ~/.gemini/antigravity-cli/settings.json команду, яка зберігає ці дані на Mac і нічого не виводить: звичайний рядок Antigravity лишається на місці, вхід Antigravity не читається. Перед зміною поруч кладеться резервна копія. Цифри оновлюються, поки Antigravity відкрито; власний рядок стану AI Hub Bar не замінює."
+            "value": "يمرّر Antigravity بنفسه الحصة المتبقية والخطة إلى سطر الحالة الخاص به. يضيف AI Hub Bar إلى ~/.gemini/antigravity-cli/settings.json أمرًا يحفظ هذه البيانات على Mac ولا يطبع شيئًا: يبقى سطر Antigravity المعتاد في مكانه ولا يُقرأ تسجيل دخول Antigravity. قبل التغيير تُحفظ نسخة احتياطية بجانب الملف. تُحدَّث الأرقام ما دام Antigravity مفتوحًا، ولا يستبدل AI Hub Bar سطر الحالة الخاص بك."
           }
         },
         "de": {
@@ -7452,10 +7598,10 @@
             "value": "Antigravity gibt das verbleibende Kontingent und den Tarif selbst an seine Statuszeile weiter. AI Hub Bar trägt in ~/.gemini/antigravity-cli/settings.json einen Befehl ein, der diese Daten auf dem Mac ablegt und nichts ausgibt: Die gewohnte Zeile von Antigravity bleibt, die Anmeldung von Antigravity wird nicht gelesen. Vor der Änderung wird daneben eine Sicherungskopie abgelegt. Die Zahlen werden aktualisiert, solange Antigravity geöffnet ist; eine eigene Statuszeile ersetzt AI Hub Bar nicht."
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Antigravity transmet lui-même le quota restant et le forfait à sa ligne d’état. AI Hub Bar ajoute à ~/.gemini/antigravity-cli/settings.json une commande qui conserve ces données sur le Mac et n’affiche rien : la ligne habituelle d’Antigravity reste en place et la connexion d’Antigravity n’est pas lue. Une copie de sauvegarde est placée à côté avant la modification. Les chiffres se mettent à jour tant qu’Antigravity est ouvert ; AI Hub Bar ne remplace pas votre propre ligne d’état."
+            "value": "Antigravity itself passes the remaining quota and the plan to its status line. AI Hub Bar adds a command to ~/.gemini/antigravity-cli/settings.json that keeps this data on the Mac and prints nothing: Antigravity’s usual line stays in place, and Antigravity’s sign-in is not read. A backup is saved next to the file before the change. The numbers update while Antigravity is open; AI Hub Bar doesn’t replace a status line of your own."
           }
         },
         "es": {
@@ -7464,22 +7610,22 @@
             "value": "Antigravity pasa por sí mismo la cuota restante y el plan a su línea de estado. AI Hub Bar añade a ~/.gemini/antigravity-cli/settings.json un comando que guarda esos datos en el Mac y no muestra nada: la línea habitual de Antigravity sigue en su sitio y el inicio de sesión de Antigravity no se lee. Antes del cambio se guarda al lado una copia de seguridad. Las cifras se actualizan mientras Antigravity está abierto; AI Hub Bar no sustituye tu propia línea de estado."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Antigravity transmet lui-même le quota restant et le forfait à sa ligne d’état. AI Hub Bar ajoute à ~/.gemini/antigravity-cli/settings.json une commande qui conserve ces données sur le Mac et n’affiche rien : la ligne habituelle d’Antigravity reste en place et la connexion d’Antigravity n’est pas lue. Une copie de sauvegarde est placée à côté avant la modification. Les chiffres se mettent à jour tant qu’Antigravity est ouvert ; AI Hub Bar ne remplace pas votre propre ligne d’état."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Antigravity sendiri meneruskan sisa kuota dan paket ke baris statusnya. AI Hub Bar menambahkan perintah ke ~/.gemini/antigravity-cli/settings.json yang menyimpan data ini di Mac dan tidak menampilkan apa pun: baris Antigravity yang biasa tetap di tempatnya, dan info masuk Antigravity tidak dibaca. Sebelum diubah, salinan cadangan disimpan di sebelahnya. Angka diperbarui selama Antigravity terbuka; AI Hub Bar tidak mengganti baris status Anda sendiri."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Antigravity passa da sé la quota rimanente e il piano alla propria riga di stato. AI Hub Bar aggiunge a ~/.gemini/antigravity-cli/settings.json un comando che conserva questi dati sul Mac e non stampa nulla: la solita riga di Antigravity resta al suo posto e l’accesso di Antigravity non viene letto. Prima della modifica viene salvata accanto una copia di backup. I numeri si aggiornano mentre Antigravity è aperto; AI Hub Bar non sostituisce una tua riga di stato."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "O próprio Antigravity passa a cota restante e o plano para a sua linha de status. O AI Hub Bar adiciona a ~/.gemini/antigravity-cli/settings.json um comando que guarda esses dados no Mac e não exibe nada: a linha habitual do Antigravity continua no lugar e o login do Antigravity não é lido. Antes da alteração, uma cópia de segurança é salva ao lado. Os números são atualizados enquanto o Antigravity está aberto; o AI Hub Bar não substitui uma linha de status sua."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Antigravity sam przekazuje pozostały limit i plan do swojego wiersza stanu. AI Hub Bar dodaje do ~/.gemini/antigravity-cli/settings.json polecenie, które zapisuje te dane na Macu i niczego nie wypisuje: zwykły wiersz Antigravity zostaje na miejscu, a logowanie Antigravity nie jest odczytywane. Przed zmianą obok zapisywana jest kopia zapasowa. Liczby odświeżają się, gdy Antigravity jest otwarty; własnego wiersza stanu AI Hub Bar nie zastępuje."
           }
         },
         "ja": {
@@ -7494,16 +7640,22 @@
             "value": "Antigravity는 남은 할당량과 요금제를 자체 상태 줄에 직접 전달합니다. AI Hub Bar는 ~/.gemini/antigravity-cli/settings.json에 이 데이터를 Mac에 저장하고 아무것도 출력하지 않는 명령을 추가합니다. Antigravity의 기본 줄은 그대로 남고 Antigravity 로그인 정보는 읽지 않습니다. 변경 전에 옆에 백업을 저장합니다. 숫자는 Antigravity가 열려 있는 동안 업데이트되며, 직접 설정한 상태 줄은 AI Hub Bar가 바꾸지 않습니다."
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "يمرّر Antigravity بنفسه الحصة المتبقية والخطة إلى سطر الحالة الخاص به. يضيف AI Hub Bar إلى ~/.gemini/antigravity-cli/settings.json أمرًا يحفظ هذه البيانات على Mac ولا يطبع شيئًا: يبقى سطر Antigravity المعتاد في مكانه ولا يُقرأ تسجيل دخول Antigravity. قبل التغيير تُحفظ نسخة احتياطية بجانب الملف. تُحدَّث الأرقام ما دام Antigravity مفتوحًا، ولا يستبدل AI Hub Bar سطر الحالة الخاص بك."
+            "value": "Antigravity sam przekazuje pozostały limit i plan do swojego wiersza stanu. AI Hub Bar dodaje do ~/.gemini/antigravity-cli/settings.json polecenie, które zapisuje te dane na Macu i niczego nie wypisuje: zwykły wiersz Antigravity zostaje na miejscu, a logowanie Antigravity nie jest odczytywane. Przed zmianą obok zapisywana jest kopia zapasowa. Liczby odświeżają się, gdy Antigravity jest otwarty; własnego wiersza stanu AI Hub Bar nie zastępuje."
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Antigravity sendiri meneruskan sisa kuota dan paket ke baris statusnya. AI Hub Bar menambahkan perintah ke ~/.gemini/antigravity-cli/settings.json yang menyimpan data ini di Mac dan tidak menampilkan apa pun: baris Antigravity yang biasa tetap di tempatnya, dan info masuk Antigravity tidak dibaca. Sebelum diubah, salinan cadangan disimpan di sebelahnya. Angka diperbarui selama Antigravity terbuka; AI Hub Bar tidak mengganti baris status Anda sendiri."
+            "value": "O próprio Antigravity passa a cota restante e o plano para a sua linha de status. O AI Hub Bar adiciona a ~/.gemini/antigravity-cli/settings.json um comando que guarda esses dados no Mac e não exibe nada: a linha habitual do Antigravity continua no lugar e o login do Antigravity não é lido. Antes da alteração, uma cópia de segurança é salva ao lado. Os números são atualizados enquanto o Antigravity está aberto; o AI Hub Bar não substitui uma linha de status sua."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Antigravity сам передає залишок квоти й тариф своєму рядку стану. AI Hub Bar додає в ~/.gemini/antigravity-cli/settings.json команду, яка зберігає ці дані на Mac і нічого не виводить: звичайний рядок Antigravity лишається на місці, вхід Antigravity не читається. Перед зміною поруч кладеться резервна копія. Цифри оновлюються, поки Antigravity відкрито; власний рядок стану AI Hub Bar не замінює."
           }
         }
       }
@@ -8953,78 +9105,78 @@
         }
       }
     },
-    "Codex, Copilot, Gemini, Cursor и расход по API — такими же карточками, как Claude.": {
+    "Codex, Copilot, Gemini, Antigravity, Cursor и расход по API — такими же карточками, как Claude.": {
       "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex وCopilot وGemini وCursor واستهلاك API — ببطاقات مثل بطاقات Claude."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex, Copilot, Gemini, Cursor und API-Verbrauch — als dieselben Karten wie Claude."
-          }
-        },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Codex, Copilot, Gemini, Cursor and API spend — in the same cards as Claude."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex, Copilot, Gemini, Cursor y el gasto de API — con las mismas tarjetas que Claude."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex, Copilot, Gemini, Cursor et la consommation d’API — sous forme des mêmes cartes que Claude."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex, Copilot, Gemini, Cursor, dan pengeluaran API — dalam kartu yang sama seperti Claude."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex, Copilot, Gemini, Cursor e la spesa API — con le stesse schede di Claude."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex、Copilot、Gemini、Cursor、API の支出も Claude と同じカードで表示します。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex, Copilot, Gemini, Cursor와 API 지출도 Claude와 같은 카드로 표시됩니다."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex, Copilot, Gemini, Cursor i wydatki na API — w takich samych kartach jak Claude."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex, Copilot, Gemini, Cursor e o gasto de API — nos mesmos cartões que o Claude."
+            "value": "Codex, Copilot, Gemini, Antigravity, Cursor and API spend — in the same cards as Claude."
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Codex, Copilot, Gemini, Cursor і витрати за API — такими самими картками, як Claude."
+            "value": "Codex, Copilot, Gemini, Antigravity, Cursor і витрати за API — такими самими картками, як Claude."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex, Copilot, Gemini, Antigravity, Cursor und API-Verbrauch — als dieselben Karten wie Claude."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex, Copilot, Gemini, Antigravity, Cursor et la consommation d’API — sous forme des mêmes cartes que Claude."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex, Copilot, Gemini, Antigravity, Cursor y el gasto de API — con las mismas tarjetas que Claude."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex, Copilot, Gemini, Antigravity, Cursor e la spesa API — con le stesse schede di Claude."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex, Copilot, Gemini, Antigravity, Cursor e o gasto de API — nos mesmos cartões que o Claude."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex, Copilot, Gemini, Antigravity, Cursor i wydatki na API — w takich samych kartach jak Claude."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex、Copilot、Gemini、Antigravity、Cursor、API の支出も Claude と同じカードで表示します。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex, Copilot, Gemini, Antigravity, Cursor와 API 지출도 Claude와 같은 카드로 표시됩니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex وCopilot وGemini وAntigravity وCursor واستهلاك API — ببطاقات مثل بطاقات Claude."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex, Copilot, Gemini, Antigravity, Cursor, dan pengeluaran API — dalam kartu yang sama seperti Claude."
           }
         }
       }
@@ -12803,6 +12955,82 @@
         }
       }
     },
+    "«История расхода…» под расходом по проектам открывает окно: токены Claude Code по дням за последние недели.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“Usage History…” under the usage by project opens a window: Claude Code tokens by day for the last weeks."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«Історія витрат…» під витратами за проєктами відкриває вікно: токени Claude Code за днями за останні тижні."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "„Verbrauchsverlauf…“ unter dem Verbrauch nach Projekt öffnet ein Fenster: Claude-Code-Tokens pro Tag für die letzten Wochen."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "« Historique de consommation… » sous la consommation par projet ouvre une fenêtre : les tokens de Claude Code par jour sur les dernières semaines."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«Historial de consumo…», debajo del uso por proyecto, abre una ventana: los tokens de Claude Code por día de las últimas semanas."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«Cronologia dei consumi…», sotto il consumo per progetto, apre una finestra: i token di Claude Code per giorno nelle ultime settimane."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“Histórico de consumo…”, abaixo do uso por projeto, abre uma janela: os tokens do Claude Code por dia nas últimas semanas."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "„Historia zużycia…” pod zużyciem według projektów otwiera okno: tokeny Claude Code według dni z ostatnich tygodni."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "プロジェクト別の使用量の下にある「使用履歴…」でウインドウが開き、直近数週間の Claude Code のトークンを日別に表示します。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "프로젝트별 사용량 아래의 «사용 기록…»은 최근 몇 주 동안의 Claude Code 토큰을 날짜별로 보여 주는 창을 엽니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«سجل الاستهلاك…» أسفل الاستهلاك حسب المشروع يفتح نافذة: رموز Claude Code حسب اليوم خلال الأسابيع الأخيرة."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“Riwayat pemakaian…” di bawah pemakaian per proyek membuka jendela: token Claude Code per hari selama beberapa minggu terakhir."
+          }
+        }
+      }
+    },
     "«Лимиты Claude» для рабочего стола: правый клик по столу → «Изменить виджеты…» → AI Hub Bar. Маленький — кольцо сессии, средний — сессия и неделя.": {
       "localizations": {
         "ar": {
@@ -13559,6 +13787,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "«Фон» запускає claude -p без вікна: дозволено читання й зміну файлів проєкту, перевірки й збирання, git без push у main і без force, gh pr create/view/list; решта відхиляється. Підсумок — сповіщенням і в Telegram."
+          }
+        }
+      }
+    },
+    "«Ход работы Claude в ушке сессий» на странице модуля: ушко показывает, что Claude делает сейчас, а не только число сессий.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“Claude’s progress in the sessions ear” on the module’s page: the ear shows what Claude is doing now, not only the number of sessions."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«Хід роботи Claude у вушку сесій» на сторінці модуля: вушко показує, що Claude робить зараз, а не лише кількість сесій."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "„Claudes Fortschritt im Sitzungs-Ohr“ auf der Seite des Moduls: Das Ohr zeigt, was Claude gerade tut, nicht nur die Zahl der Sitzungen."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "« Progression de Claude dans l’oreille des sessions » sur la page du module : l’oreille montre ce que Claude fait en ce moment, pas seulement le nombre de sessions."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«Progreso de Claude en la oreja de sesiones», en la página del módulo: la oreja muestra qué está haciendo Claude ahora, no solo el número de sesiones."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«Avanzamento di Claude nell’orecchio delle sessioni», nella pagina del modulo: l’orecchio mostra che cosa sta facendo Claude adesso, non solo il numero di sessioni."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“Progresso do Claude na lateral de sessões”, na página do módulo: a lateral mostra o que o Claude está fazendo agora, não só o número de sessões."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "„Postęp Claude w uchu sesji” na stronie modułu: ucho pokazuje, co Claude robi teraz, a nie tylko liczbę sesji."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "モジュールのページの「ノッチ横のセッション表示に Claude の進捗」: ノッチ横にセッション数だけでなく、Claude が今していることを表示します。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "모듈 페이지의 «노치 옆 세션 표시에 Claude 진행 상황»: 노치 옆에 세션 수뿐 아니라 Claude가 지금 하는 일을 표시합니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«تقدّم Claude في أذن الجلسات» في صفحة الوحدة: تعرض الأذن ما يفعله Claude الآن، وليس عدد الجلسات فقط."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“Progres Claude di telinga sesi” di halaman modul: telinga menampilkan apa yang sedang dikerjakan Claude, bukan hanya jumlah sesi."
           }
         }
       }
@@ -17517,16 +17821,10 @@
     },
     "В Antigravity уже настроена своя строка состояния — AI Hub Bar её не заменяет.": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Antigravity already has your own status line set up — AI Hub Bar doesn’t replace it."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "В Antigravity вже налаштовано власний рядок стану — AI Hub Bar його не замінює."
+            "value": "في Antigravity سطر حالة خاص بك مُعدّ مسبقًا — AI Hub Bar لا يستبدله."
           }
         },
         "de": {
@@ -17535,10 +17833,10 @@
             "value": "In Antigravity ist bereits eine eigene Statuszeile eingerichtet — AI Hub Bar ersetzt sie nicht."
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Antigravity a déjà sa propre ligne d’état — AI Hub Bar ne la remplace pas."
+            "value": "Antigravity already has your own status line set up — AI Hub Bar doesn’t replace it."
           }
         },
         "es": {
@@ -17547,22 +17845,22 @@
             "value": "Antigravity ya tiene una línea de estado propia: AI Hub Bar no la sustituye."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Antigravity a déjà sa propre ligne d’état — AI Hub Bar ne la remplace pas."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Antigravity sudah memiliki baris status Anda sendiri — AI Hub Bar tidak menggantinya."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Antigravity ha già una tua riga di stato: AI Hub Bar non la sostituisce."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "O Antigravity já tem uma linha de status sua — o AI Hub Bar não a substitui."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "W Antigravity jest już ustawiony własny wiersz stanu — AI Hub Bar go nie zastępuje."
           }
         },
         "ja": {
@@ -17577,16 +17875,22 @@
             "value": "Antigravity에 이미 직접 설정한 상태 줄이 있습니다. AI Hub Bar는 이를 바꾸지 않습니다."
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "في Antigravity سطر حالة خاص بك مُعدّ مسبقًا — AI Hub Bar لا يستبدله."
+            "value": "W Antigravity jest już ustawiony własny wiersz stanu — AI Hub Bar go nie zastępuje."
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Antigravity sudah memiliki baris status Anda sendiri — AI Hub Bar tidak menggantinya."
+            "value": "O Antigravity já tem uma linha de status sua — o AI Hub Bar não a substitui."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "В Antigravity вже налаштовано власний рядок стану — AI Hub Bar його не замінює."
           }
         }
       }
@@ -18733,6 +19037,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "У середньому за робочий день"
+          }
+        }
+      }
+    },
+    "В ушко можно поставить самый заполненный лимит другого AI.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "An ear can show the fullest limit of another AI."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "У вушко можна поставити найбільш заповнений ліміт іншого AI."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ein Ohr kann das vollste Limit einer anderen KI zeigen."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une oreille peut afficher la limite la plus remplie d’une autre IA."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Una oreja puede mostrar el límite más lleno de otra IA."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un orecchio può mostrare il limite più pieno di un’altra IA."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uma lateral pode mostrar o limite mais cheio de outra IA."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "W uchu można pokazać najbardziej wypełniony limit innego AI."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ノッチ横には、ほかの AI で最も使用率の高い上限を表示できます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "노치 옆에는 다른 AI의 가장 많이 찬 한도를 표시할 수 있습니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يمكن أن تعرض الأذن أكثر حدود ذكاء اصطناعي آخر امتلاءً."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Telinga dapat menampilkan batas AI lain yang paling penuh."
           }
         }
       }
@@ -20716,16 +21096,10 @@
     },
     "Включить квоту Antigravity": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Turn on Antigravity quota"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Увімкнути квоту Antigravity"
+            "value": "تشغيل حصة Antigravity"
           }
         },
         "de": {
@@ -20734,10 +21108,10 @@
             "value": "Antigravity-Kontingent einschalten"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Activer le quota Antigravity"
+            "value": "Turn on Antigravity quota"
           }
         },
         "es": {
@@ -20746,22 +21120,22 @@
             "value": "Activar la cuota de Antigravity"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activer le quota Antigravity"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nyalakan kuota Antigravity"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Attiva la quota di Antigravity"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ativar a cota do Antigravity"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Włącz limit Antigravity"
           }
         },
         "ja": {
@@ -20776,16 +21150,22 @@
             "value": "Antigravity 할당량 켜기"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "تشغيل حصة Antigravity"
+            "value": "Włącz limit Antigravity"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Nyalakan kuota Antigravity"
+            "value": "Ativar a cota do Antigravity"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Увімкнути квоту Antigravity"
           }
         }
       }
@@ -25277,16 +25657,10 @@
     },
     "Выключить квоту Antigravity": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Turn off Antigravity quota"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Вимкнути квоту Antigravity"
+            "value": "إيقاف حصة Antigravity"
           }
         },
         "de": {
@@ -25295,10 +25669,10 @@
             "value": "Antigravity-Kontingent ausschalten"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Désactiver le quota Antigravity"
+            "value": "Turn off Antigravity quota"
           }
         },
         "es": {
@@ -25307,22 +25681,22 @@
             "value": "Desactivar la cuota de Antigravity"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Désactiver le quota Antigravity"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Matikan kuota Antigravity"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Disattiva la quota di Antigravity"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Desativar a cota do Antigravity"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Wyłącz limit Antigravity"
           }
         },
         "ja": {
@@ -25337,16 +25711,22 @@
             "value": "Antigravity 할당량 끄기"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "إيقاف حصة Antigravity"
+            "value": "Wyłącz limit Antigravity"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Matikan kuota Antigravity"
+            "value": "Desativar a cota do Antigravity"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Вимкнути квоту Antigravity"
           }
         }
       }
@@ -26715,6 +27095,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Головна: ліміти, сесії, фонові завдання"
+          }
+        }
+      }
+    },
+    "Главный лимит — крупное число над полосой, рядом темп за час и время до сброса; неделя, недели по моделям и extra usage — под ним. Прогноз появляется, только если лимит кончится раньше сброса.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The main limit is a big number over a bar, with the pace per hour and the time to the reset beside it; the week, the weeks by model and extra usage are under it. A forecast appears only when the limit will run out before the reset."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Головний ліміт — велике число над смугою, поруч темп за годину й час до скидання; тиждень, тижні за моделями та extra usage — під ним. Прогноз з’являється, лише якщо ліміт закінчиться раніше скидання."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Das Hauptlimit ist eine große Zahl über einem Balken, daneben das Tempo pro Stunde und die Zeit bis zur Zurücksetzung; Woche, Wochen nach Modell und Extra Usage stehen darunter. Eine Prognose erscheint nur, wenn das Limit vor der Zurücksetzung aufgebraucht wäre."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La limite principale est un grand nombre au-dessus d’une barre, avec à côté le rythme par heure et le temps avant la réinitialisation ; la semaine, les semaines par modèle et l’extra usage sont en dessous. Une prévision n’apparaît que si la limite doit s’épuiser avant la réinitialisation."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El límite principal es un número grande sobre una barra, con el ritmo por hora y el tiempo hasta el reinicio al lado; la semana, las semanas por modelo y el extra usage van debajo. La previsión aparece solo si el límite se va a agotar antes del reinicio."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il limite principale è un numero grande sopra una barra, con accanto il ritmo orario e il tempo all’azzeramento; la settimana, le settimane per modello e l’extra usage sono sotto. La previsione compare solo se il limite finirà prima dell’azzeramento."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O limite principal é um número grande sobre uma barra, com o ritmo por hora e o tempo até o reinício ao lado; a semana, as semanas por modelo e o extra usage ficam abaixo. A previsão aparece só quando o limite vai acabar antes do reinício."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Główny limit to duża liczba nad paskiem, obok tempo na godzinę i czas do resetu; tydzień, tygodnie według modeli i extra usage są pod nim. Prognoza pojawia się tylko wtedy, gdy limit skończy się przed resetem."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "メインの上限はバーの上に大きな数字で表示され、横に 1 時間あたりのペースとリセットまでの時間が出ます。週、モデル別の週、extra usage はその下です。予測は、リセット前に上限に達しそうなときだけ表示されます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "주 한도는 막대 위의 큰 숫자로 표시되고 옆에 시간당 속도와 초기화까지 남은 시간이 나옵니다. 주간, 모델별 주간, extra usage는 그 아래에 있습니다. 예측은 초기화 전에 한도가 바닥날 때만 나타납니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الحد الرئيسي رقم كبير فوق شريط، وبجانبه الوتيرة في الساعة والوقت حتى إعادة الضبط؛ الأسبوع والأسابيع حسب النموذج وextra usage تحته. يظهر التوقع فقط إذا كان الحد سينتهي قبل إعادة الضبط."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Batas utama berupa angka besar di atas bilah, dengan laju per jam dan waktu hingga reset di sampingnya; minggu, minggu per model, dan extra usage ada di bawahnya. Prakiraan muncul hanya jika batas akan habis sebelum reset."
           }
         }
       }
@@ -30065,16 +30521,10 @@
     },
     "Добавить statusLine в ~/.gemini/antigravity-cli/settings.json": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Add statusLine to ~/.gemini/antigravity-cli/settings.json"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Додати statusLine у ~/.gemini/antigravity-cli/settings.json"
+            "value": "إضافة statusLine إلى ~/.gemini/antigravity-cli/settings.json"
           }
         },
         "de": {
@@ -30083,10 +30533,10 @@
             "value": "statusLine in ~/.gemini/antigravity-cli/settings.json eintragen"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ajouter statusLine à ~/.gemini/antigravity-cli/settings.json"
+            "value": "Add statusLine to ~/.gemini/antigravity-cli/settings.json"
           }
         },
         "es": {
@@ -30095,22 +30545,22 @@
             "value": "Añadir statusLine a ~/.gemini/antigravity-cli/settings.json"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajouter statusLine à ~/.gemini/antigravity-cli/settings.json"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tambahkan statusLine ke ~/.gemini/antigravity-cli/settings.json"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Aggiungi statusLine a ~/.gemini/antigravity-cli/settings.json"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Adicionar statusLine a ~/.gemini/antigravity-cli/settings.json"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dodaj statusLine do ~/.gemini/antigravity-cli/settings.json"
           }
         },
         "ja": {
@@ -30125,16 +30575,22 @@
             "value": "~/.gemini/antigravity-cli/settings.json에 statusLine 추가"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "إضافة statusLine إلى ~/.gemini/antigravity-cli/settings.json"
+            "value": "Dodaj statusLine do ~/.gemini/antigravity-cli/settings.json"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tambahkan statusLine ke ~/.gemini/antigravity-cli/settings.json"
+            "value": "Adicionar statusLine a ~/.gemini/antigravity-cli/settings.json"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Додати statusLine у ~/.gemini/antigravity-cli/settings.json"
           }
         }
       }
@@ -32115,78 +32571,78 @@
         }
       }
     },
-    "Если сессия использована больше чем на 90 %, фоновая задача спрашивает: запустить сейчас или после сброса.": {
+    "Если сессия использована больше чем на 90 %, фоновая задача спрашивает: запустить сейчас или после сброса. «Ставить фоновые задачи на паузу» на странице «Лимиты AI» останавливает идущие задачи у порога и продолжает их после сброса.": {
       "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "إذا استُخدمت الجلسة بأكثر من 90 بالمئة، تسأل المهمة الخلفية: البدء الآن أم بعد إعادة الضبط."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ist die Sitzung zu mehr als 90 Prozent verbraucht, fragt eine Hintergrundaufgabe: jetzt starten oder nach der Zurücksetzung."
-          }
-        },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "If the session is more than 90 percent used, a background task asks: start now or after the reset."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Si la sesión está usada en más del 90 %, la tarea en segundo plano pregunta: iniciar ahora o después del reinicio."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Si la session est utilisée à plus de 90 %, la tâche en arrière-plan demande : lancer maintenant ou après la réinitialisation."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Jika sesi terpakai lebih dari 90 persen, tugas latar belakang bertanya: mulai sekarang atau setelah reset."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Se la sessione è usata per più del 90 per cento, un'attività in background chiede: avviare ora o dopo l'azzeramento."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "セッションの使用が 90 パーセントを超えると、バックグラウンドタスクは今すぐ開始するかリセット後にするかを尋ねます。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "세션을 90퍼센트 넘게 썼다면 백그라운드 작업이 지금 시작할지 초기화 뒤에 시작할지 묻습니다."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Jeśli sesja jest zużyta w ponad 90 procentach, zadanie w tle pyta: uruchomić teraz czy po resecie."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Se mais de 90 por cento da sessão estiver usada, a tarefa em segundo plano pergunta: iniciar agora ou depois do reinício."
+            "value": "If the session is more than 90 percent used, a background task asks: start now or after the reset. “Pause background tasks” on the “AI limits” page stops running tasks at the threshold and continues them after the reset."
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Якщо сесію використано більше ніж на 90 відсотків, фонове завдання питає: запустити зараз чи після скидання."
+            "value": "Якщо сесію використано більше ніж на 90 відсотків, фонове завдання питає: запустити зараз чи після скидання. «Ставити фонові завдання на паузу» на сторінці «Ліміти AI» зупиняє запущені завдання біля порога й продовжує їх після скидання."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ist die Sitzung zu mehr als 90 Prozent verbraucht, fragt eine Hintergrundaufgabe: jetzt starten oder nach der Zurücksetzung. „Hintergrundaufgaben pausieren“ auf der Seite „KI-Limits“ hält laufende Aufgaben an der Schwelle an und setzt sie nach der Zurücksetzung fort."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Si la session est utilisée à plus de 90 %, la tâche en arrière-plan demande : lancer maintenant ou après la réinitialisation. « Mettre en pause les tâches en arrière-plan », sur la page « Limites d'IA », arrête au seuil les tâches en cours et les reprend après la réinitialisation."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Si la sesión está usada en más del 90 %, la tarea en segundo plano pregunta: iniciar ahora o después del reinicio. «Pausar tareas en segundo plano», en la página «Límites de IA», detiene en el umbral las tareas en curso y las continúa después del reinicio."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se la sessione è usata per più del 90 per cento, un'attività in background chiede: avviare ora o dopo l'azzeramento. «Metti in pausa le attività in background», nella pagina «Limiti IA», ferma alla soglia le attività in corso e le riprende dopo l’azzeramento."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se mais de 90 por cento da sessão estiver usada, a tarefa em segundo plano pergunta: iniciar agora ou depois do reinício. “Pausar tarefas em segundo plano”, na página “Limites de IA”, para no limiar as tarefas em andamento e as continua depois do reinício."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jeśli sesja jest zużyta w ponad 90 procentach, zadanie w tle pyta: uruchomić teraz czy po resecie. „Wstrzymuj zadania w tle” na stronie „Limity AI” zatrzymuje trwające zadania przy progu i wznawia je po resecie."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "セッションの使用が 90 パーセントを超えると、バックグラウンドタスクは今すぐ開始するかリセット後にするかを尋ねます。「AI の上限」ページの「バックグラウンドタスクを一時停止」は、しきい値で実行中のタスクを止め、リセット後に再開します。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "세션을 90퍼센트 넘게 썼다면 백그라운드 작업이 지금 시작할지 초기화 뒤에 시작할지 묻습니다. «AI 한도» 페이지의 «백그라운드 작업 일시 정지»는 임계값에서 실행 중인 작업을 멈추고 초기화 뒤에 이어서 진행합니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إذا استُخدمت الجلسة بأكثر من 90 بالمئة، تسأل المهمة الخلفية: البدء الآن أم بعد إعادة الضبط. «إيقاف المهام الخلفية مؤقتًا» في صفحة «حدود الذكاء الاصطناعي» يوقف المهام الجارية عند العتبة ويستأنفها بعد إعادة الضبط."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jika sesi terpakai lebih dari 90 persen, tugas latar belakang bertanya: mulai sekarang atau setelah reset. “Jeda tugas latar belakang” di halaman “Batas AI” menghentikan tugas yang berjalan pada ambang dan melanjutkannya setelah reset."
           }
         }
       }
@@ -42079,16 +42535,10 @@
     },
     "Квота Antigravity": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Antigravity quota"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Квота Antigravity"
+            "value": "حصة Antigravity"
           }
         },
         "de": {
@@ -42097,10 +42547,10 @@
             "value": "Antigravity-Kontingent"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Quota Antigravity"
+            "value": "Antigravity quota"
           }
         },
         "es": {
@@ -42109,22 +42559,22 @@
             "value": "Cuota de Antigravity"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quota Antigravity"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kuota Antigravity"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Quota di Antigravity"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cota do Antigravity"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Limit Antigravity"
           }
         },
         "ja": {
@@ -42139,32 +42589,32 @@
             "value": "Antigravity 할당량"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "حصة Antigravity"
+            "value": "Limit Antigravity"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Kuota Antigravity"
+            "value": "Cota do Antigravity"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Квота Antigravity"
           }
         }
       }
     },
     "Квота из Antigravity": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Quota from Antigravity"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Квота з Antigravity"
+            "value": "الحصة من Antigravity"
           }
         },
         "de": {
@@ -42173,10 +42623,10 @@
             "value": "Kontingent aus Antigravity"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Quota depuis Antigravity"
+            "value": "Quota from Antigravity"
           }
         },
         "es": {
@@ -42185,22 +42635,22 @@
             "value": "Cuota desde Antigravity"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quota depuis Antigravity"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kuota dari Antigravity"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Quota da Antigravity"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cota vinda do Antigravity"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Limit z Antigravity"
           }
         },
         "ja": {
@@ -42215,16 +42665,98 @@
             "value": "Antigravity에서 받는 할당량"
           }
         },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limit z Antigravity"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cota vinda do Antigravity"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Квота з Antigravity"
+          }
+        }
+      }
+    },
+    "Квоту и тариф передаёт сам Antigravity: Настройки → «Сервисы AI» → Gemini → «Включить квоту Antigravity», затем один раз откройте agy.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Antigravity passes its quota and plan itself: Settings → “AI Services” → Gemini → “Turn on Antigravity quota”, then open agy once."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Квоту й тариф передає сам Antigravity: Налаштування → «Сервіси AI» → Gemini → «Увімкнути квоту Antigravity», потім один раз відкрийте agy."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kontingent und Tarif liefert Antigravity selbst: Einstellungen → „KI-Dienste“ → Gemini → „Antigravity-Kontingent einschalten“, dann agy einmal öffnen."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Antigravity transmet lui-même le quota et le forfait : Réglages → « Services d'IA » → Gemini → « Activer le quota Antigravity », puis ouvrez agy une fois."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Antigravity pasa por sí mismo la cuota y el plan: Ajustes → «Servicios de IA» → Gemini → «Activar la cuota de Antigravity» y luego abre agy una vez."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quota e piano li passa Antigravity stesso: Impostazioni → «Servizi IA» → Gemini → «Attiva la quota di Antigravity», poi apri agy una volta."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O próprio Antigravity passa a cota e o plano: Ajustes → “Serviços de IA” → Gemini → “Ativar a cota do Antigravity”; depois abra o agy uma vez."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limit i plan przekazuje sam Antigravity: Ustawienia → „Usługi AI” → Gemini → „Włącz limit Antigravity”, a potem raz otwórz agy."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "クォータとプランは Antigravity 自身が渡します。設定 →「AI サービス」→ Gemini →「Antigravity のクォータをオンにする」を選び、agy を一度開いてください。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "할당량과 요금제는 Antigravity가 직접 전달합니다. 설정 → «AI 서비스» → Gemini → «Antigravity 할당량 켜기»를 누른 다음 agy를 한 번 여세요."
+          }
+        },
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "الحصة من Antigravity"
+            "value": "يمرّر Antigravity الحصة والخطة بنفسه: الإعدادات ← «خدمات الذكاء الاصطناعي» ← Gemini ← «تشغيل حصة Antigravity»، ثم افتح agy مرة واحدة."
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "Kuota dari Antigravity"
+            "value": "Antigravity sendiri meneruskan kuota dan paketnya: Pengaturan → “Layanan AI” → Gemini → “Nyalakan kuota Antigravity”, lalu buka agy satu kali."
           }
         }
       }
@@ -52952,6 +53484,82 @@
         }
       }
     },
+    "Найденные агенты и ключи; лимиты других AI.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The agents and keys found; the limits of other AIs."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Знайдені агенти та ключі; ліміти інших AI."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gefundene Agenten und Schlüssel; Limits anderer KIs."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les agents et les clés trouvés ; les limites des autres IA."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los agentes y las claves encontrados; los límites de otras IA."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gli agenti e le chiavi trovati; i limiti delle altre IA."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Os agentes e as chaves encontrados; os limites de outras IAs."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Znalezione agenty i klucze; limity innych AI."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "見つかったエージェントとキー、ほかの AI の上限。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "찾은 에이전트와 키, 다른 AI의 한도."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الوكلاء والمفاتيح التي عُثر عليها؛ حدود خدمات الذكاء الاصطناعي الأخرى."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Agen dan kunci yang ditemukan; batas AI lain."
+          }
+        }
+      }
+    },
     "Найдено: %@. Лимиты подписки и список сессий работают только с Claude Code.": {
       "localizations": {
         "ar": {
@@ -54696,6 +55304,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Налаштування → «Профілі» → профіль → «Джерело»: папка з проєктами."
+          }
+        }
+      }
+    },
+    "Настройки → «Сервисы AI» → Claude Code → «Другие аккаунты Claude»: лимиты каждого аккаунта — отдельной карточкой в панели.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Settings → “AI Services” → Claude Code → “Other Claude accounts”: each account’s limits are a separate card in the panel."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Налаштування → «Сервіси AI» → Claude Code → «Інші акаунти Claude»: ліміти кожного акаунта — окремою карткою в панелі."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Einstellungen → „KI-Dienste“ → Claude Code → „Weitere Claude-Konten“: Die Limits jedes Kontos stehen als eigene Karte im Panel."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Réglages → « Services d'IA » → Claude Code → « Autres comptes Claude » : les limites de chaque compte forment une carte à part dans le panneau."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajustes → «Servicios de IA» → Claude Code → «Otras cuentas de Claude»: los límites de cada cuenta van en una tarjeta aparte en el panel."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impostazioni → «Servizi IA» → Claude Code → «Altri account Claude»: i limiti di ogni account sono una scheda a parte nel pannello."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajustes → “Serviços de IA” → Claude Code → “Outras contas do Claude”: os limites de cada conta ficam em um cartão separado no painel."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ustawienia → „Usługi AI” → Claude Code → „Inne konta Claude”: limity każdego konta to osobna karta w panelu."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "設定 →「AI サービス」→ Claude Code →「他の Claude アカウント」: 各アカウントの上限がパネルに別々のカードで表示されます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "설정 → «AI 서비스» → Claude Code → «다른 Claude 계정»: 계정마다 한도가 패널에 별도 카드로 표시됩니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الإعدادات ← «خدمات الذكاء الاصطناعي» ← Claude Code ← «حسابات Claude الأخرى»: حدود كل حساب في بطاقة مستقلة في اللوحة."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pengaturan → “Layanan AI” → Claude Code → “Akun Claude lainnya”: batas tiap akun tampil sebagai kartu tersendiri di panel."
           }
         }
       }
@@ -69937,6 +70621,82 @@
         }
       }
     },
+    "Открыть окно в запущенном приложении.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open a window in the running app."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Відкрити вікно в запущеному застосунку."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ein Fenster in der laufenden App öffnen."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ouvrir une fenêtre dans l’app en cours d’exécution."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abrir una ventana en la app en ejecución."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apri una finestra nell’app in esecuzione."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abrir uma janela no app em execução."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otwórz okno w uruchomionej aplikacji."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "実行中のアプリでウインドウを開きます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "실행 중인 앱에서 창을 엽니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "فتح نافذة في التطبيق الذي يعمل."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Membuka jendela di app yang sedang berjalan."
+          }
+        }
+      }
+    },
     "Открыть панель": {
       "extractionState": "stale",
       "localizations": {
@@ -70010,6 +70770,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Відкрити панель"
+          }
+        }
+      }
+    },
+    "Открыть панель из любого приложения. Сочетание — в Настройках → «Клавиши» → «Открывать панель».": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open the panel from any app. The shortcut is in Settings → “Shortcuts” → “Open the panel”."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Відкрити панель із будь-якого застосунку. Сполучення — у Налаштуваннях → «Клавіші» → «Відкривати панель»."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Das Panel aus jeder App öffnen. Der Kurzbefehl steht in Einstellungen → „Kurzbefehle“ → „Panel öffnen“."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ouvrir le panneau depuis n’importe quelle app. Le raccourci se trouve dans Réglages → « Raccourcis » → « Ouvrir le panneau »."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abrir el panel desde cualquier app. El atajo está en Ajustes → «Atajos» → «Abrir el panel»."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apri il pannello da qualsiasi app. La scorciatoia è in Impostazioni → «Scorciatoie» → «Apri il pannello»."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abrir o painel a partir de qualquer app. O atalho fica em Ajustes → “Atalhos” → “Abrir o painel”."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otwórz panel z dowolnej aplikacji. Skrót jest w Ustawieniach → „Skróty” → „Otwieraj panel”."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "どのアプリからでもパネルを開きます。ショートカットは 設定 →「ショートカット」→「パネルを開く」で選びます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "어느 앱에서든 패널을 엽니다. 단축키는 설정 → «단축키» → «패널 열기»에서 고릅니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "فتح اللوحة من أي تطبيق. الاختصار في الإعدادات ← «الاختصارات» ← «فتح اللوحة»."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Membuka panel dari app mana pun. Pintasannya ada di Pengaturan → “Pintasan” → “Buka panel”."
           }
         }
       }
@@ -80350,6 +81186,82 @@
         }
       }
     },
+    "Полосы или кольца — выбирается на странице «Лимиты AI».": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bars or rings — chosen on the “AI limits” page."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Смуги або кільця — вибирається на сторінці «Ліміти AI»."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Balken oder Ringe — wählbar auf der Seite „KI-Limits“."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Barres ou anneaux — à choisir sur la page « Limites d'IA »."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Barras o anillos: se elige en la página «Límites de IA»."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Barre o anelli: si sceglie nella pagina «Limiti IA»."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Barras ou anéis: escolha na página “Limites de IA”."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Paski lub pierścienie — do wyboru na stronie „Limity AI”."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "バーかリングか — 「AI の上限」ページで選びます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "막대 또는 링 — «AI 한도» 페이지에서 선택합니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "أشرطة أو حلقات — يُختار في صفحة «حدود الذكاء الاصطناعي»."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bilah atau cincin — dipilih di halaman “Batas AI”."
+          }
+        }
+      }
+    },
     "Помнить после перезапуска": {
       "localizations": {
         "ar": {
@@ -81258,6 +82170,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Порядок зліва направо"
+          }
+        }
+      }
+    },
+    "После обновления вверху панели один раз появляется карточка с тем, что изменилось; «Понятно» её убирает.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "After an update a card with what changed appears once at the top of the panel; “Got It” removes it."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Після оновлення вгорі панелі один раз з’являється картка з тим, що змінилося; «Зрозуміло» її прибирає."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nach einem Update erscheint oben im Panel einmal eine Karte mit den Änderungen; „Verstanden“ blendet sie aus."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Après une mise à jour, une carte indiquant ce qui a changé apparaît une fois en haut du panneau ; « Compris » la retire."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tras una actualización aparece una vez, en la parte superior del panel, una tarjeta con lo que ha cambiado; «Entendido» la quita."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dopo un aggiornamento compare una volta, in cima al pannello, una scheda con ciò che è cambiato; «Ho capito» la toglie."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Depois de uma atualização, aparece uma vez no topo do painel um cartão com o que mudou; “Entendi” o remove."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Po aktualizacji u góry panelu raz pojawia się karta z tym, co się zmieniło; „Rozumiem” ją usuwa."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アップデート後、パネルの上部に変更点のカードが一度だけ表示されます。「了解」で消えます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "업데이트 후 패널 맨 위에 바뀐 내용을 담은 카드가 한 번 나타납니다. «확인»을 누르면 사라집니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بعد التحديث تظهر مرة واحدة أعلى اللوحة بطاقة بما تغيّر؛ «فهمت» يزيلها."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Setelah pembaruan, kartu berisi apa yang berubah muncul satu kali di bagian atas panel; “Mengerti” menghilangkannya."
           }
         }
       }
@@ -94891,6 +95879,82 @@
         }
       }
     },
+    "Сессии, которые недавно закончились, сложены под этой строкой — их можно продолжить.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sessions that ended recently are folded under this line — you can continue them."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Сесії, які нещодавно закінчилися, складено під цим рядком — їх можна продовжити."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kürzlich beendete Sitzungen liegen unter dieser Zeile — sie lassen sich fortsetzen."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les sessions terminées récemment sont rangées sous cette ligne — vous pouvez les reprendre."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Las sesiones que terminaron hace poco están plegadas bajo esta línea: puedes continuarlas."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le sessioni finite da poco sono raccolte sotto questa riga: puoi riprenderle."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "As sessões que terminaram há pouco ficam recolhidas sob esta linha: você pode continuá-las."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sesje, które niedawno się zakończyły, są zwinięte pod tym wierszem — można je kontynuować."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "最近終了したセッションはこの行の下にまとめられ、続きから再開できます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "최근에 끝난 세션은 이 줄 아래에 접혀 있으며 이어서 진행할 수 있습니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الجلسات التي انتهت مؤخرًا مطوية تحت هذا السطر — يمكنك متابعتها."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sesi yang baru saja selesai dilipat di bawah baris ini — Anda dapat melanjutkannya."
+          }
+        }
+      }
+    },
     "Сессии: %lld работают, %lld ждут": {
       "localizations": {
         "ar": {
@@ -95654,82 +96718,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Сесію використано на %@%@. Фонове завдання може впертися в ліміт."
-          }
-        }
-      }
-    },
-    "Сессия с обратным отсчётом до сброса и прогнозом по темпу за 30 мин, неделя, недели по моделям, extra usage.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "الجلسة مع عدّ تنازلي لإعادة الضبط وتوقّع بحسب وتيرة آخر 30 د، والأسبوع، والأسابيع حسب النموذج، وextra usage."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Die Sitzung mit Countdown bis zur Zurücksetzung und Prognose nach dem Tempo der letzten 30 min, die Woche, Wochen nach Modell, Extra usage."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "The session with a countdown to the reset and a forecast from the last 30 min, the week, weeks per model, extra usage."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "La sesión con cuenta atrás hasta el reinicio y previsión según el ritmo de los últimos 30 min, la semana, semanas por modelo, extra usage."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "La session avec un compte à rebours avant la réinitialisation et une prévision selon le rythme des 30 dernières minutes, la semaine, les semaines par modèle, extra usage."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sesi dengan hitung mundur ke reset dan prakiraan berdasarkan laju 30 mnt terakhir, minggu, minggu per model, extra usage."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "La sessione con conto alla rovescia fino all'azzeramento e previsione in base al ritmo degli ultimi 30 min, la settimana, le settimane per modello, extra usage."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "リセットまでのカウントダウンと直近 30 分のペースによる予測付きのセッション、週、モデル別の週、extra usage。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "초기화까지 카운트다운과 최근 30분 속도에 따른 예측이 있는 세션, 주간, 모델별 주간, extra usage."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sesja z odliczaniem do resetu i prognozą według tempa z ostatnich 30 min, tydzień, tygodnie według modeli, extra usage."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "A sessão com contagem até o reinício e previsão pelo ritmo dos últimos 30 min, a semana, semanas por modelo, extra usage."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Сесія з відліком до скидання і прогнозом за темпом за 30 хв, тиждень, тижні за моделями, extra usage."
           }
         }
       }
@@ -99682,6 +100670,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Зберегти"
+          }
+        }
+      }
+    },
+    "Сохранить все настройки в файл.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Save all settings to a file."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Зберегти всі налаштування у файл."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alle Einstellungen in eine Datei sichern."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enregistrer tous les réglages dans un fichier."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Guardar todos los ajustes en un archivo."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Salva tutte le impostazioni in un file."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Salvar todos os ajustes em um arquivo."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zapisz wszystkie ustawienia w pliku."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "すべての設定をファイルに保存します。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "모든 설정을 파일로 저장합니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "حفظ كل الإعدادات في ملف."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Simpan semua pengaturan ke berkas."
           }
         }
       }
@@ -106604,16 +107668,10 @@
     },
     "Убрать statusLine AI Hub Bar из настроек Antigravity": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Remove AI Hub Bar's statusLine from Antigravity's settings"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Прибрати statusLine AI Hub Bar з налаштувань Antigravity"
+            "value": "إزالة statusLine الخاص بـ AI Hub Bar من إعدادات Antigravity"
           }
         },
         "de": {
@@ -106622,10 +107680,10 @@
             "value": "statusLine von AI Hub Bar aus den Antigravity-Einstellungen entfernen"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Retirer le statusLine d’AI Hub Bar des réglages d’Antigravity"
+            "value": "Remove AI Hub Bar's statusLine from Antigravity's settings"
           }
         },
         "es": {
@@ -106634,22 +107692,22 @@
             "value": "Quitar el statusLine de AI Hub Bar de los ajustes de Antigravity"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Retirer le statusLine d’AI Hub Bar des réglages d’Antigravity"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hapus statusLine AI Hub Bar dari pengaturan Antigravity"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Rimuovi lo statusLine di AI Hub Bar dalle impostazioni di Antigravity"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Remover o statusLine do AI Hub Bar dos ajustes do Antigravity"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Usuń statusLine AI Hub Bar z ustawień Antigravity"
           }
         },
         "ja": {
@@ -106664,16 +107722,22 @@
             "value": "Antigravity 설정에서 AI Hub Bar의 statusLine 제거"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "إزالة statusLine الخاص بـ AI Hub Bar من إعدادات Antigravity"
+            "value": "Usuń statusLine AI Hub Bar z ustawień Antigravity"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Hapus statusLine AI Hub Bar dari pengaturan Antigravity"
+            "value": "Remover o statusLine do AI Hub Bar dos ajustes do Antigravity"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Прибрати statusLine AI Hub Bar з налаштувань Antigravity"
           }
         }
       }
@@ -111397,78 +112461,78 @@
         }
       }
     },
-    "Фоновая задача: остановить сейчас.": {
+    "Фоновая задача: первый клик спрашивает «Остановить?», второй останавливает.": {
       "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "مهمة خلفية: إيقاف الآن."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hintergrundaufgabe: jetzt stoppen."
-          }
-        },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Background task: stop now."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tarea en segundo plano: detener ahora."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tâche en arrière-plan : arrêter maintenant."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tugas latar belakang: hentikan sekarang."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Attività in background: ferma ora."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "バックグラウンドタスク: 今すぐ停止。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "백그라운드 작업: 지금 중지."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Zadanie w tle: zatrzymaj teraz."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tarefa em segundo plano: parar agora."
+            "value": "A background task: the first click asks “Stop?”, the second one stops it."
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Фонове завдання: зупинити зараз."
+            "value": "Фонове завдання: перший клік питає «Зупинити?», другий зупиняє."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hintergrundaufgabe: Der erste Klick fragt „Stoppen?“, der zweite stoppt."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tâche en arrière-plan : le premier clic demande « Arrêter ? », le second l’arrête."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tarea en segundo plano: el primer clic pregunta «¿Detener?» y el segundo la detiene."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Attività in background: il primo clic chiede «Fermare?», il secondo la ferma."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tarefa em segundo plano: o primeiro clique pergunta “Parar?” e o segundo a para."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zadanie w tle: pierwsze kliknięcie pyta „Zatrzymać?”, drugie zatrzymuje."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "バックグラウンドタスク: 最初のクリックで「停止しますか?」と尋ね、2 回目で停止します。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "백그라운드 작업: 첫 번째 클릭은 «중지?»라고 묻고 두 번째 클릭에 중지합니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مهمة خلفية: النقرة الأولى تسأل «إيقاف؟»، والثانية توقفها."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tugas latar belakang: klik pertama bertanya “Hentikan?”, klik kedua menghentikannya."
           }
         }
       }
@@ -112089,6 +113153,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Формат"
+          }
+        }
+      }
+    },
+    "Ход работы": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Progress"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Хід роботи"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fortschritt"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Progression"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Progreso"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Avanzamento"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Progresso"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Postęp"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "進捗"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "진행 상황"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "سير العمل"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Progres"
           }
         }
       }
@@ -118269,16 +119409,10 @@
     },
     "включённая квота Antigravity (выше) и открытый agy": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Antigravity quota turned on (above) and agy open"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "увімкнена квота Antigravity (вище) і відкритий agy"
+            "value": "تشغيل حصة Antigravity (أعلاه) مع بقاء agy مفتوحًا"
           }
         },
         "de": {
@@ -118287,10 +119421,10 @@
             "value": "eingeschaltetes Antigravity-Kontingent (oben) und geöffnetes agy"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "le quota Antigravity activé (ci-dessus) et agy ouvert"
+            "value": "Antigravity quota turned on (above) and agy open"
           }
         },
         "es": {
@@ -118299,22 +119433,22 @@
             "value": "la cuota de Antigravity activada (arriba) y agy abierto"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "le quota Antigravity activé (ci-dessus) et agy ouvert"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "kuota Antigravity dinyalakan (di atas) dan agy terbuka"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "la quota di Antigravity attiva (sopra) e agy aperto"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "a cota do Antigravity ativada (acima) e o agy aberto"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "włączony limit Antigravity (wyżej) i otwarty agy"
           }
         },
         "ja": {
@@ -118329,16 +119463,22 @@
             "value": "켜진 Antigravity 할당량(위)과 열려 있는 agy"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "تشغيل حصة Antigravity (أعلاه) مع بقاء agy مفتوحًا"
+            "value": "włączony limit Antigravity (wyżej) i otwarty agy"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "kuota Antigravity dinyalakan (di atas) dan agy terbuka"
+            "value": "a cota do Antigravity ativada (acima) e o agy aberto"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "увімкнена квота Antigravity (вище) і відкритий agy"
           }
         }
       }
@@ -119333,16 +120473,10 @@
     },
     "данные на %@ — обновятся, когда открыт Antigravity": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "as of %@ — updates while Antigravity is open"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "дані на %@ — оновляться, коли відкрито Antigravity"
+            "value": "بيانات %@ — تُحدَّث عندما يكون Antigravity مفتوحًا"
           }
         },
         "de": {
@@ -119351,10 +120485,10 @@
             "value": "Stand %@ — wird aktualisiert, solange Antigravity geöffnet ist"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "données de %@ — mises à jour quand Antigravity est ouvert"
+            "value": "as of %@ — updates while Antigravity is open"
           }
         },
         "es": {
@@ -119363,22 +120497,22 @@
             "value": "datos de %@: se actualizan con Antigravity abierto"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "données de %@ — mises à jour quand Antigravity est ouvert"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "data per %@ — diperbarui saat Antigravity terbuka"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "dati delle %@: si aggiornano con Antigravity aperto"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "dados de %@ — atualizam com o Antigravity aberto"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "dane z %@ — odświeżą się, gdy Antigravity jest otwarty"
           }
         },
         "ja": {
@@ -119393,16 +120527,22 @@
             "value": "%@ 기준 — Antigravity가 열려 있을 때 업데이트됩니다"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "بيانات %@ — تُحدَّث عندما يكون Antigravity مفتوحًا"
+            "value": "dane z %@ — odświeżą się, gdy Antigravity jest otwarty"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "data per %@ — diperbarui saat Antigravity terbuka"
+            "value": "dados de %@ — atualizam com o Antigravity aberto"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "дані на %@ — оновляться, коли відкрито Antigravity"
           }
         }
       }
@@ -120245,16 +121385,10 @@
     },
     "другие модели": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "other models"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "інші моделі"
+            "value": "نماذج أخرى"
           }
         },
         "de": {
@@ -120263,10 +121397,10 @@
             "value": "andere Modelle"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "autres modèles"
+            "value": "other models"
           }
         },
         "es": {
@@ -120275,22 +121409,22 @@
             "value": "otros modelos"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "autres modèles"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "model lain"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "altri modelli"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "outros modelos"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "inne modele"
           }
         },
         "ja": {
@@ -120305,16 +121439,22 @@
             "value": "다른 모델"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "نماذج أخرى"
+            "value": "inne modele"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "model lain"
+            "value": "outros modelos"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "інші моделі"
           }
         }
       }
@@ -127554,16 +128694,10 @@
     },
     "откройте Antigravity (agy), чтобы увидеть квоту": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "open Antigravity (agy) to see the quota"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "відкрийте Antigravity (agy), щоб побачити квоту"
+            "value": "افتح Antigravity (agy) لرؤية الحصة"
           }
         },
         "de": {
@@ -127572,10 +128706,10 @@
             "value": "Antigravity (agy) öffnen, um das Kontingent zu sehen"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "ouvrez Antigravity (agy) pour voir le quota"
+            "value": "open Antigravity (agy) to see the quota"
           }
         },
         "es": {
@@ -127584,22 +128718,22 @@
             "value": "abre Antigravity (agy) para ver la cuota"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ouvrez Antigravity (agy) pour voir le quota"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "buka Antigravity (agy) untuk melihat kuota"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "apri Antigravity (agy) per vedere la quota"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "abra o Antigravity (agy) para ver a cota"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "otwórz Antigravity (agy), aby zobaczyć limit"
           }
         },
         "ja": {
@@ -127614,16 +128748,22 @@
             "value": "할당량을 보려면 Antigravity(agy)를 여세요"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "افتح Antigravity (agy) لرؤية الحصة"
+            "value": "otwórz Antigravity (agy), aby zobaczyć limit"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "buka Antigravity (agy) untuk melihat kuota"
+            "value": "abra o Antigravity (agy) para ver a cota"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "відкрийте Antigravity (agy), щоб побачити квоту"
           }
         }
       }
