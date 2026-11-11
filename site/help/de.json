@@ -325,7 +325,7 @@
         {
           "facts" : [
             {
-              "detail" : "Einstellungen → „Profile“ → „Quelle“: jeder Ordner im Projektordner ist ein Projekt (ein Video, ein Artikel, ein Thema).",
+              "detail" : "Einstellungen → „Profile“ → „Quelle“: jeder Ordner im Projekte-Ordner ist ein Projekt (ein Video, ein Artikel, ein Thema).",
               "name" : "Quelle „Ordner“"
             },
             {
@@ -386,7 +386,7 @@
       "steps" : [
         "Aktivieren Sie den Kalender im Profil — oder mit der Taste „Im Profil einschalten“ in der Zeile „Demnächst“ auf der Seite „Was anzeigen“."
       ],
-      "summary" : "Deadlines und Veröffentlichungen aus Projektkarten und dem Content-Plan — eine Woche im Voraus und im Fenster „Kalender“.",
+      "summary" : "Fristen und Veröffentlichungen aus Projektkarten und dem Inhaltsplan — eine Woche im Voraus und im Fenster „Kalender“.",
       "title" : "Demnächst und Kalender"
     },
     {
@@ -515,7 +515,7 @@
         {
           "facts" : [
             {
-              "detail" : "Prozessor, Speicher, Festplatte, Netzwerk, Akku und die hungrigsten Apps; Hinweise zu Last, Speicher, Platz und Akku.",
+              "detail" : "Prozessor, Speicher, Festplatte, Netzwerk, Batterie und die hungrigsten Apps; Hinweise zu Last, Speicher, Platz und Akku.",
               "name" : "Mac-Ressourcen"
             },
             {
@@ -531,11 +531,11 @@
               "name" : "Zwischenablage-Verlauf"
             },
             {
-              "detail" : "Markdown-Notizen direkt im Panel: Tabs über normale .md-Dateien in einem Ordner, den jeder Editor öffnet.",
+              "detail" : "Markdown-Notizen direkt im Panel: Tabs, normale .md-Dateien in einem Ordner, den jeder Editor öffnet.",
               "name" : "Notizen"
             },
             {
-              "detail" : "Eigene Tasten: ein Skript im Hintergrund oder im Terminal, ein macOS-„Kurzbefehle“-Kurzbefehl, ein Link, eine Datei, ein Ordner oder eine App.",
+              "detail" : "Eigene Tasten: ein Skript im Hintergrund oder im Terminal, ein Kurzbefehl aus „Kurzbefehle“ (macOS), ein Link, eine Datei, ein Ordner oder eine App.",
               "name" : "Schnellbefehle"
             }
           ],

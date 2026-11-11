@@ -63,10 +63,10 @@
             },
             {
               "detail" : "Space, wide space, “·”, “|”, thin line, “/”, “›” and “New group” — as many times as you like. They show only when there’s something to show on both sides.",
-              "name" : "Separators"
+              "name" : "Dividers"
             },
             {
-              "detail" : "Items between “New group” dividers are drawn on a shared rounded backing.",
+              "detail" : "Elements between “New group” dividers are drawn on a shared rounded backing.",
               "name" : "Capsules by group"
             },
             {
@@ -80,8 +80,8 @@
       ],
       "steps" : [
         "Open Settings → “What to Show” → “Menu Bar”.",
-        "Click an item in “Order” to see its settings: number, ring or bar, threshold.",
-        "Drag a separator onto an item and it lands right after it. Without a mouse — “Further left” and “Further right”."
+        "Click an element in “Order” to see its settings: number, ring or bar, threshold.",
+        "Drag a divider onto an element and it lands right after it. Without a mouse — “Further left” and “Further right”."
       ],
       "summary" : "The icon and numbers next to the clock: limits, sessions waiting for an answer, project problems — whatever you put there.",
       "title" : "Menu Bar"
@@ -295,7 +295,7 @@
         {
           "facts" : [
             {
-              "detail" : "Health dot, branch, uncommitted files, open PRs (colour — CI), last activity.",
+              "detail" : "Health dot, branch, uncommitted files, open PRs (color — CI), last activity.",
               "name" : "Row"
             },
             {
@@ -311,7 +311,7 @@
               "name" : "Finish"
             },
             {
-              "detail" : "If Claude already works in the project, a new task goes to a separate worktree .claude/worktrees/cb-… on a fresh branch from origin/main.",
+              "detail" : "If Claude is already working in the project, a new task goes to a separate worktree .claude/worktrees/cb-… on a fresh branch from origin/main.",
               "name" : "Folder in use"
             },
             {
@@ -341,7 +341,7 @@
               "name" : "Compare"
             },
             {
-              "detail" : "The profile's stages, comma-separated; a stage changes with a button in an expanded project. Words, duration, reading time and pages are counted on the main file (.md, .txt, .rtf, .docx).",
+              "detail" : "The profile's stages, comma-separated; a stage changes with a button in an expanded project. Words, duration, reading time and pages are counted from the main file (.md, .txt, .rtf, .docx).",
               "name" : "Stages and metrics"
             }
           ],
@@ -485,7 +485,7 @@
               "name" : "⌥⇧"
             },
             {
-              "detail" : "In the language's menu in the menu bar, choose which layouts are fixed into which, for example only EN → RU.",
+              "detail" : "In the language menu in the menu bar, choose which layout gets fixed to which automatically, for example only EN → RU.",
               "name" : "Directions"
             },
             {
@@ -515,7 +515,7 @@
         {
           "facts" : [
             {
-              "detail" : "Processor, memory, disk, network, battery and the hungriest apps; alerts about load, memory, space and charge.",
+              "detail" : "CPU, memory, disk, network, battery and the hungriest apps; alerts about load, memory, space and charge.",
               "name" : "Mac Resources"
             },
             {
@@ -535,7 +535,7 @@
               "name" : "Notes"
             },
             {
-              "detail" : "Your own buttons: a script in the background or in Terminal, a macOS «Shortcuts» shortcut, a link, file, folder or app.",
+              "detail" : "Your own buttons: a script in the background or in Terminal, a macOS “Shortcuts” shortcut, a link, file, folder or app.",
               "name" : "Quick Commands"
             }
           ],

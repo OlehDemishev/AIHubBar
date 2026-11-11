@@ -153,7 +153,7 @@
         }
       ],
       "steps" : [
-        "Ustawienia → „Co pokazywać”: każdy moduł ma dwa przełączniki — blok w panelu i elementy w pasku menu. „Gotowy zestaw” włącza kilka modułów naraz.",
+        "Ustawienia → „Co pokazywać”: każdy moduł ma dwa przełączniki — blok w panelu i elementy na pasku menu. „Gotowy zestaw” włącza kilka modułów naraz.",
         "Kliknij nazwę modułu, aby otworzyć jego stronę: przełącznik i wszystkie ustawienia."
       ],
       "summary" : "Moduł to jedna funkcja AI Hub Bar. Profil decyduje, które moduły widać w panelu i w jakiej kolejności.",
@@ -171,11 +171,11 @@
               "name" : "Blok „Limity”"
             },
             {
-              "detail" : "Codex, Copilot, Gemini, Cursor i zużycie API — w takich samych kartach jak Claude.",
+              "detail" : "Codex, Copilot, Gemini, Cursor i wydatki na API — w takich samych kartach jak Claude.",
               "name" : "Inne AI"
             },
             {
-              "detail" : "Szacunek z dzienników Claude Code: udziały projektów i najdroższa sesja za sesję, dziś, tydzień.",
+              "detail" : "Szacunek z dzienników Claude Code: udziały projektów i najdroższa sesja — w sesji, dziś, w tygodniu.",
               "name" : "Zużycie według projektów"
             },
             {
@@ -188,7 +188,7 @@
             },
             {
               "detail" : "Jeśli sesja jest zużyta w ponad 90 procentach, zadanie w tle pyta: uruchomić teraz czy po resecie.",
-              "name" : "Tło i limit"
+              "name" : "W tle i limit"
             }
           ],
           "monospaced" : false,
@@ -242,7 +242,7 @@
               "name" : "Śledzenie sesji"
             },
             {
-              "detail" : "Ich sesje też pokazują „pracuje / czeka / gotowe”, jeśli na ich stronie w „Usługach AI” zainstalowano hook AI Hub Bar. Codex uruchamia nowy hook dopiero po sprawdzeniu: wpisz /hooks w codex i zaufaj mu. Bez hooka tylko ostatnie rozmowy, bez stanu.",
+              "detail" : "Ich sesje też pokazują „pracuje / czeka / gotowe”, jeśli na ich stronie w „Usługach AI” zainstalowano hook AI Hub Bar. Codex uruchamia nowy hook dopiero po sprawdzeniu: wpisz /hooks w codex i zaufaj mu. Bez hooka tylko ostatnie wątki, bez stanu.",
               "name" : "Codex i Copilot"
             }
           ],
@@ -485,11 +485,11 @@
               "name" : "⌥⇧"
             },
             {
-              "detail" : "W menu języka na pasku menu wybierz, z jakiego układu na jaki poprawiać samodzielnie, na przykład tylko EN → RU.",
+              "detail" : "W menu języka na pasku menu wybierz, z jakiego układu na jaki poprawiać automatycznie, na przykład tylko EN → RU.",
               "name" : "Kierunki"
             },
             {
-              "detail" : "Słowa ze słownika wyjątków nie są poprawiane samodzielnie, a ⌥⇧ zostawia je bez zmian.",
+              "detail" : "Słowa ze słownika wyjątków nie są poprawiane automatycznie, a ⌥⇧ zostawia je bez zmian.",
               "name" : "Wyjątki"
             },
             {
@@ -527,15 +527,15 @@
               "name" : "Szybkie przełączniki"
             },
             {
-              "detail" : "Ostatnie kopie: wyszukiwanie, przypinanie, z powrotem do schowka jednym kliknięciem. Hasła z menedżerów haseł nie są zapamiętywane.",
+              "detail" : "Ostatnio skopiowane: wyszukiwanie, przypinanie, z powrotem do schowka jednym kliknięciem. Hasła z menedżerów haseł nie są zapamiętywane.",
               "name" : "Historia schowka"
             },
             {
-              "detail" : "Notatki w Markdown w panelu: karty na zwykłych plikach .md w folderze, który otworzy każdy edytor.",
+              "detail" : "Notatki w Markdown prosto w panelu: karty, zwykłe pliki .md w folderze, który otworzy każdy edytor.",
               "name" : "Notatki"
             },
             {
-              "detail" : "Własne przyciski: skrypt w tle lub w Terminalu, skrót z «Skróty» macOS, link, plik, folder albo aplikacja.",
+              "detail" : "Własne przyciski: skrypt w tle lub w Terminalu, skrót z aplikacji „Skróty” macOS, link, plik, folder albo aplikacja.",
               "name" : "Szybkie polecenia"
             }
           ],

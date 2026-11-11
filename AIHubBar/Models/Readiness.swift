@@ -111,7 +111,7 @@ enum Readiness {
             return ReadinessItem(id: .notifications, title: title, detail: String(localized: "Разрешены."), state: .done)
         case .notAsked:
             return ReadinessItem(id: .notifications, title: title,
-                                 detail: String(localized: "Лимиты, ответы Claude, готовые команды и дедлайны приходят уведомлениями."),
+                                 detail: String(localized: "Лимиты, сессии Claude, которые ждут ответа, готовые команды и дедлайны приходят уведомлениями."),
                                  state: .todo, action: .allowNotifications)
         case .denied:
             return ReadinessItem(id: .notifications, title: title,

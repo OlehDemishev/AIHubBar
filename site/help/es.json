@@ -242,7 +242,7 @@
               "name" : "Seguimiento de sesiones"
             },
             {
-              "detail" : "Sus sesiones también muestran «trabajando / esperando / listo» si el hook de AI Hub Bar está instalado en su página de «Servicios de IA». Codex ejecuta un hook nuevo solo tras revisarlo: escriba /hooks en codex y confíe en él. Sin hook, solo las conversaciones recientes, sin estado.",
+              "detail" : "Sus sesiones también muestran «trabajando / esperando / listo» si el hook de AI Hub Bar está instalado en su página de «Servicios de IA». Codex ejecuta un hook nuevo solo tras revisarlo: escribe /hooks en codex y confía en él. Sin hook, solo las conversaciones recientes, sin estado.",
               "name" : "Codex y Copilot"
             }
           ],
@@ -333,7 +333,7 @@
               "name" : "proyecto.md"
             },
             {
-              "detail" : "En un proyecto desplegado: los comandos del perfil y «Tarea propia». El resultado es siempre un archivo nuevo en la carpeta del proyecto. Un modelo por API recibe el texto del archivo principal; Claude trabaja en segundo plano con los permisos del perfil («solo archivos» — sin terminal ni internet); otros agentes se abren en Terminal con la tarea en el portapapeles.",
+              "detail" : "En un proyecto expandido: los comandos del perfil y «Tarea propia». El resultado es siempre un archivo nuevo en la carpeta del proyecto. Un modelo por API recibe el texto del archivo principal; Claude trabaja en segundo plano con los permisos del perfil («solo archivos» — sin terminal ni internet); otros agentes se abren en Terminal con la tarea en el portapapeles.",
               "name" : "Comandos"
             },
             {
@@ -341,7 +341,7 @@
               "name" : "Comparar"
             },
             {
-              "detail" : "Las etapas del perfil, separadas por comas; la etapa se cambia con un botón en el proyecto desplegado. Palabras, duración, tiempo de lectura y páginas se cuentan sobre el archivo principal (.md, .txt, .rtf, .docx).",
+              "detail" : "Las etapas del perfil, separadas por comas; la etapa se cambia con un botón en el proyecto expandido. Palabras, duración, tiempo de lectura y páginas se cuentan sobre el archivo principal (.md, .txt, .rtf, .docx).",
               "name" : "Etapas y métricas"
             }
           ],
@@ -409,7 +409,7 @@
               "name" : "Último informe"
             },
             {
-              "detail" : "Mostrar qué borraría la limpieza de builds, sin tocar nada.",
+              "detail" : "Mostrar qué borraría la limpieza de compilaciones, sin tocar nada.",
               "name" : "Limpieza: revisar"
             },
             {
@@ -485,7 +485,7 @@
               "name" : "⌥⇧"
             },
             {
-              "detail" : "En el menú del idioma, en la barra de menús, elija de qué distribución a cuál se corrige sola, por ejemplo solo EN → RU.",
+              "detail" : "En el menú del idioma, en la barra de menús, elige de qué distribución a cuál se corrige sola, por ejemplo solo EN → RU.",
               "name" : "Direcciones"
             },
             {

@@ -179,7 +179,7 @@
               "name" : "Consumo per progetto"
             },
             {
-              "detail" : "Una volta per finestra al 50/80/95 per cento (soglie nelle Impostazioni) e quando il limite torna; se vuoi, anche su Telegram.",
+              "detail" : "Una volta per finestra al 50/80/95 per cento (soglie nelle Impostazioni) e quando il limite si ripristina; se vuoi, anche su Telegram.",
               "name" : "Notifiche"
             },
             {
@@ -222,7 +222,7 @@
               "name" : "Mostra"
             },
             {
-              "detail" : "Dove eseguire: una finestra del Terminale (puoi rispondere a Claude) o claude -p senza finestra (solo azioni consentite, limite di tempo, risultato con una notifica e su Telegram). «Ricorda» o un'impostazione predefinita in Impostazioni.",
+              "detail" : "Dove eseguire: una finestra del Terminale (puoi rispondere a Claude) o claude -p senza finestra (solo azioni consentite, limite di tempo, risultato con una notifica e su Telegram). «Ricorda» o il valore predefinito del profilo — in Impostazioni.",
               "name" : "Terminale / Background"
             },
             {
@@ -242,7 +242,7 @@
               "name" : "Monitoraggio delle sessioni"
             },
             {
-              "detail" : "Anche le loro sessioni mostrano «in corso / in attesa / pronto» se l'hook di AI Hub Bar è installato nella loro pagina in «Servizi AI». Codex esegue un nuovo hook solo dopo la verifica: digita /hooks in codex e accettalo. Senza hook, solo le conversazioni recenti, senza stato.",
+              "detail" : "Anche le loro sessioni mostrano «in corso / in attesa / fatto» se l'hook di AI Hub Bar è installato nella loro pagina in «Servizi IA». Codex esegue un nuovo hook solo dopo la verifica: digita /hooks in codex e accettalo. Senza hook, solo le conversazioni recenti, senza stato.",
               "name" : "Codex e Copilot"
             }
           ],
@@ -367,7 +367,7 @@
               "name" : "Contenuto"
             },
             {
-              "detail" : "Un blocco del pannello: 7 giorni avanti, il ritardo in rosso; un clic apre il progetto o il file.",
+              "detail" : "Un blocco del pannello: 7 giorni avanti, le voci scadute in rosso; un clic apre il progetto o il file.",
               "name" : "In arrivo"
             },
             {
@@ -386,7 +386,7 @@
       "steps" : [
         "Attiva il calendario nel profilo — oppure con il pulsante «Attiva nel profilo» nella riga «In arrivo» della pagina «Cosa mostrare»."
       ],
-      "summary" : "Scadenze e pubblicazioni dalle schede dei progetti e dal piano editoriale — per la settimana successiva e nella finestra «Calendario».",
+      "summary" : "Scadenze e pubblicazioni dalle schede dei progetti e dal piano dei contenuti — per i prossimi 7 giorni e nella finestra «Calendario».",
       "title" : "In arrivo e calendario"
     },
     {
