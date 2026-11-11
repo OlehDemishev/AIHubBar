@@ -43,6 +43,23 @@ struct SketchLine: View {
 }
 
 /// A limit as the panel draws it: a thin bar coloured by level and its percent.
+/// A limit as a bar on sample data: the pictures of the panel (the assistant's map, the help) draw limits the way
+/// the panel does by default.
+struct SampleLimitBar: View {
+    let value: Double
+    var height: CGFloat = 4
+
+    var body: some View {
+        GeometryReader { proxy in
+            ZStack(alignment: .leading) {
+                Capsule().fill(Color.secondary.opacity(0.2))
+                Capsule().fill(UsageLevel(value).color).frame(width: proxy.size.width * min(max(value, 0), 100) / 100)
+            }
+        }
+        .frame(height: height)
+    }
+}
+
 struct MiniRing: View {
     let value: Double
 
