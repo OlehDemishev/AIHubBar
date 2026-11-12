@@ -3,7 +3,7 @@
     "beta" : "bêta",
     "help" : "Aide",
     "replay" : "Revoir",
-    "scripts" : "Les commandes pour scripts s'appellent ainsi : /Applications/AI\\ Hub\\ Bar.app/Contents/MacOS/AIHubBar --sessions",
+    "scripts" : "Les commandes pour scripts s’appellent ainsi : /Applications/AI\\ Hub\\ Bar.app/Contents/MacOS/AIHubBar --sessions",
     "search" : "Rechercher dans l’aide",
     "start" : "Pour commencer"
   },
@@ -41,7 +41,7 @@
               "name" : "Nouveautés"
             },
             {
-              "detail" : "Avec plus d'un profil activé, un sélecteur apparaît en haut du panneau. Les profils se règlent dans Réglages → «Profils» ; tous les réglages s'enregistrent dans un fichier .claudepult (Général → «Exporter les réglages…») ; un double-clic sur ce fichier l'importe.",
+              "detail" : "Avec plus d’un profil activé, un sélecteur apparaît en haut du panneau. Les profils se règlent dans Réglages → «Profils» ; tous les réglages s’enregistrent dans un fichier .claudepult (Général → «Exporter les réglages…») ; un double-clic sur ce fichier l’importe.",
               "name" : "Profils"
             }
           ],
@@ -71,7 +71,7 @@
             },
             {
               "detail" : "Pourcentage utilisé de la session de 5 heures et de la semaine — en nombre, anneau ou barre (Réglages → «Quoi afficher» → «Barre des menus») : vert sous 50 %, orange sous 80 %, rouge au-dessus.",
-              "name" : "À côté de l'icône"
+              "name" : "À côté de l’icône"
             },
             {
               "detail" : "Espace, espace large, « · », « | », trait fin, « / », « › » et « Nouveau groupe » — autant de fois que vous voulez. Ils ne s’affichent que s’il y a quelque chose à montrer des deux côtés.",
@@ -156,7 +156,7 @@
         {
           "facts" : [
             {
-              "detail" : "Réglages → «Profils» → «+» → «Assistant…» : un profil pas à pas — modèle, dossier, étapes, métriques, calendrier, service d'IA, commandes, autorisations, blocs du panneau, barre des menus, nom. À droite, le rendu.",
+              "detail" : "Réglages → «Profils» → «+» → «Assistant…» : un profil pas à pas — modèle, dossier, étapes, métriques, calendrier, service d’IA, commandes, autorisations, blocs du panneau, barre des menus, nom. À droite, le rendu.",
               "name" : "Assistant"
             },
             {
@@ -195,7 +195,7 @@
               "name" : "Service principal"
             },
             {
-              "detail" : "Barres ou anneaux — à choisir sur la page « Limites d'IA ».",
+              "detail" : "Barres ou anneaux — à choisir sur la page « Limites d’IA ».",
               "name" : "Affichage des limites"
             },
             {
@@ -203,15 +203,15 @@
               "name" : "Autres IA"
             },
             {
-              "detail" : "Antigravity transmet lui-même le quota et le forfait : Réglages → « Services d'IA » → Gemini → « Activer le quota Antigravity », puis ouvrez agy une fois.",
+              "detail" : "Antigravity transmet lui-même le quota et le forfait : Réglages → « Services d’IA » → Gemini → « Activer le quota Antigravity », puis ouvrez agy une fois.",
               "name" : "Antigravity"
             },
             {
-              "detail" : "Réglages → « Services d'IA » → Claude Code → « Autres comptes Claude » : les limites de chaque compte forment une carte à part dans le panneau.",
+              "detail" : "Réglages → « Services d’IA » → Claude Code → « Autres comptes Claude » : les limites de chaque compte forment une carte à part dans le panneau.",
               "name" : "Autres comptes Claude"
             },
             {
-              "detail" : "Une estimation d'après les journaux de Claude Code : parts des projets et la session la plus coûteuse pour la session, aujourd'hui, la semaine.",
+              "detail" : "Une estimation d’après les journaux de Claude Code : parts des projets et la session la plus coûteuse pour la session, aujourd’hui, la semaine.",
               "name" : "Consommation par projet"
             },
             {
@@ -223,11 +223,11 @@
               "name" : "Notifications"
             },
             {
-              "detail" : "«Limites de Claude» pour le bureau : clic droit sur le bureau → «Modifier les widgets…» → AI Hub Bar. Petit — l'anneau de la session, moyen — session et semaine.",
+              "detail" : "«Limites de Claude» pour le bureau : clic droit sur le bureau → «Modifier les widgets…» → AI Hub Bar. Petit — l’anneau de la session, moyen — session et semaine.",
               "name" : "Widget"
             },
             {
-              "detail" : "Si la session est utilisée à plus de 90 %, la tâche en arrière-plan demande : lancer maintenant ou après la réinitialisation. « Mettre en pause les tâches en arrière-plan », sur la page « Limites d'IA », arrête au seuil les tâches en cours et les reprend après la réinitialisation.",
+              "detail" : "Si la session est utilisée à plus de 90 %, la tâche en arrière-plan demande : lancer maintenant ou après la réinitialisation. « Mettre en pause les tâches en arrière-plan », sur la page « Limites d’IA », arrête au seuil les tâches en cours et les reprend après la réinitialisation.",
               "name" : "Arrière-plan et limite"
             }
           ],
@@ -236,11 +236,11 @@
         }
       ],
       "steps" : [
-        "Les seuils de notification se règlent sur la page « Limites d'IA ».",
-        "Les autres IA se connectent dans « Services d'IA » : connexion à leur CLI ou clé d’API."
+        "Les seuils de notification se règlent sur la page « Limites d’IA ».",
+        "Les autres IA se connectent dans « Services d’IA » : connexion à leur CLI ou clé d’API."
       ],
       "summary" : "Ce qui reste de la session de 5 heures et de la semaine de l’abonnement Claude — et des limites des autres IA.",
-      "title" : "Limites d'IA"
+      "title" : "Limites d’IA"
     },
     {
       "beta" : false,
@@ -250,7 +250,7 @@
         {
           "facts" : [
             {
-              "detail" : "Toutes les sessions de ce Mac — dans Terminal, dans l'app Claude, en arrière-plan : projet, worktree, tâche, durée, état (en cours, arrière-plan, en attente, terminé, erreur, fermée). Celles en attente de réponse sont mises en évidence et notifiées.",
+              "detail" : "Toutes les sessions de ce Mac — dans Terminal, dans l’app Claude, en arrière-plan : projet, worktree, tâche, durée, état (en cours, arrière-plan, en attente, terminé, erreur, fermée). Celles en attente de réponse sont mises en évidence et notifiées.",
               "name" : "Liste"
             },
             {
@@ -258,7 +258,7 @@
               "name" : "Autorisations"
             },
             {
-              "detail" : "Afficher l'onglet Terminal de cette session ; pour les sessions de l'app Claude, ouvrir cette session dans Claude ; sinon, le dossier.",
+              "detail" : "Afficher l’onglet Terminal de cette session ; pour les sessions de l’app Claude, ouvrir cette session dans Claude ; sinon, le dossier.",
               "name" : "Afficher"
             },
             {
@@ -282,7 +282,7 @@
               "name" : "Suivi des sessions"
             },
             {
-              "detail" : "Leurs sessions affichent aussi « en cours / en attente / terminé » si le hook d'AI Hub Bar est installé sur leur page dans « Services d'IA ». Codex n'exécute un nouveau hook qu'après vérification : tapez /hooks dans codex et faites-lui confiance. Sans hook, seulement les conversations récentes, sans état.",
+              "detail" : "Leurs sessions affichent aussi « en cours / en attente / terminé » si le hook d’AI Hub Bar est installé sur leur page dans « Services d’IA ». Codex n’exécute un nouveau hook qu’après vérification : tapez /hooks dans codex et faites-lui confiance. Sans hook, seulement les conversations récentes, sans état.",
               "name" : "Codex et Copilot"
             },
             {
@@ -309,7 +309,7 @@
         {
           "facts" : [
             {
-              "detail" : "Codex CLI, Gemini CLI, Antigravity, Copilot CLI, Cursor CLI — AI Hub Bar trouve ceux qui sont installés (Réglages → «Services d'IA») et les ouvre dans Terminal dans le dossier du projet : «Ouvrir dans…» dans le bloc Claude du projet. Chacun a sa propre connexion.",
+              "detail" : "Codex CLI, Gemini CLI, Antigravity, Copilot CLI, Cursor CLI — AI Hub Bar trouve ceux qui sont installés (Réglages → «Services d’IA») et les ouvre dans Terminal dans le dossier du projet : «Ouvrir dans…» dans le bloc Claude du projet. Chacun a sa propre connexion.",
               "name" : "Agents"
             },
             {
@@ -326,10 +326,10 @@
         }
       ],
       "steps" : [
-        "Réglages → « Services d'IA » : un point vert signifie que le service est trouvé ou configuré."
+        "Réglages → « Services d’IA » : un point vert signifie que le service est trouvé ou configuré."
       ],
       "summary" : "Les agents et modèles qu’AI Hub Bar trouve et lance : Claude Code, Codex, Gemini, Copilot, Cursor et les modèles par API.",
-      "title" : "Services d'IA"
+      "title" : "Services d’IA"
     },
     {
       "beta" : false,
@@ -339,7 +339,7 @@
         {
           "facts" : [
             {
-              "detail" : "Point d'état, branche, fichiers non commités, PR ouvertes (couleur — CI), dernière activité.",
+              "detail" : "Point d’état, branche, fichiers non commités, PR ouvertes (couleur — CI), dernière activité.",
               "name" : "Ligne"
             },
             {
@@ -377,15 +377,15 @@
               "name" : "projet.md"
             },
             {
-              "detail" : "Dans un projet déplié : les commandes du profil et «Tâche libre». Le résultat est toujours un nouveau fichier dans le dossier du projet. Un modèle par API reçoit le texte du fichier principal ; Claude travaille en arrière-plan avec les autorisations du profil («fichiers uniquement» — sans terminal ni internet) ; les autres agents s'ouvrent dans Terminal avec la tâche dans le presse-papiers.",
+              "detail" : "Dans un projet déplié : les commandes du profil et «Tâche libre». Le résultat est toujours un nouveau fichier dans le dossier du projet. Un modèle par API reçoit le texte du fichier principal ; Claude travaille en arrière-plan avec les autorisations du profil («fichiers uniquement» — sans terminal ni internet) ; les autres agents s’ouvrent dans Terminal avec la tâche dans le presse-papiers.",
               "name" : "Commandes"
             },
             {
-              "detail" : "Activez «Comparer», choisissez 2–3 services et une commande : les résultats se placent côte à côte («accroches (Claude).md», «accroches (OpenAI).md») et s'ouvrent dans la fenêtre «Comparaison».",
+              "detail" : "Activez «Comparer», choisissez 2–3 services et une commande : les résultats se placent côte à côte («accroches (Claude).md», «accroches (OpenAI).md») et s’ouvrent dans la fenêtre «Comparaison».",
               "name" : "Comparer"
             },
             {
-              "detail" : "Les étapes du profil, séparées par des virgules ; l'étape change avec un bouton dans le projet déplié. Mots, durée, temps de lecture et pages sont comptés dans le fichier principal (.md, .txt, .rtf, .docx).",
+              "detail" : "Les étapes du profil, séparées par des virgules ; l’étape change avec un bouton dans le projet déplié. Mots, durée, temps de lecture et pages sont comptés dans le fichier principal (.md, .txt, .rtf, .docx).",
               "name" : "Étapes et métriques"
             }
           ],
@@ -541,7 +541,7 @@
               "name" : "Directions"
             },
             {
-              "detail" : "Les mots du dictionnaire d'exceptions ne sont pas corrigés automatiquement, et ⌥⇧ les laisse tels quels.",
+              "detail" : "Les mots du dictionnaire d’exceptions ne sont pas corrigés automatiquement, et ⌥⇧ les laisse tels quels.",
               "name" : "Exceptions"
             },
             {
@@ -613,7 +613,7 @@
               "name" : "Fréquence"
             },
             {
-              "detail" : "Le bot est le module « Telegram » : jeton, chat et menu dans le bot lui-même (/menu — limites, sessions, rapports, nettoyage). Ce qu'il faut y copier — la puce « Telegram » sur la page du module.",
+              "detail" : "Le bot est le module « Telegram » : jeton, chat et menu dans le bot lui-même (/menu — limites, sessions, rapports, nettoyage). Ce qu’il faut y copier — la puce « Telegram » sur la page du module.",
               "name" : "Telegram"
             },
             {
@@ -643,7 +643,7 @@
         {
           "facts" : [
             {
-              "detail" : "Lancer une commande Claude (--background — en arrière-plan, --print — seulement l'afficher).",
+              "detail" : "Lancer une commande Claude (--background — en arrière-plan, --print — seulement l’afficher).",
               "name" : "--claude next|task|finish <dossier>"
             },
             {
@@ -663,11 +663,11 @@
               "name" : "--login-item status|on|off"
             },
             {
-              "detail" : "Règles d'accès des tâches en arrière-plan.",
+              "detail" : "Règles d’accès des tâches en arrière-plan.",
               "name" : "--background-settings"
             },
             {
-              "detail" : "Limites de l'abonnement ; consommation par projet.",
+              "detail" : "Limites de l’abonnement ; consommation par projet.",
               "name" : "--usage · --token-usage"
             },
             {

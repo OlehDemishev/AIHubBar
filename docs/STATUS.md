@@ -5,6 +5,7 @@
 **Updated:** 2026-11-12
 
 **Now:**
+- 2026-11-12: polish for 0.11.0 — one style of quotes and apostrophes per language, Settings looked at in de/ja/ar/pl after the translation fixes, the «Что нового» card and the release notes name the main service
 - 2026-11-12: «Не спать» stays on across restarts. Antigravity's «ждёт» not built: `agy` on this Mac stops at its first-run screen, so its states could not be seen
 - 2026-11-12: the main AI service can be another one than Claude (panel, menu bar, island, widget; #367). Goes to 0.11.0-beta.3, then 0.11.0 on Tuesday 2026-11-17
 - 2026-11-11: every translation read against the Russian original (12 languages × 1763 texts), 1038 fixes applied; goes out with 0.11.0.
@@ -62,6 +63,15 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-12 — Quotes, a look at the layout, the card and the notes for 0.11.0 (branch `chore/quotes-and-layout`)
+
+Done: polish before beta 3.
+- One style per language: the straight apostrophe became the typographic one inside words in English, French, Italian and Ukrainian (351 texts), and «» became “” in Brazilian Portuguese and Indonesian (133 each) and in one English text.
+- The «Что нового» card has a sixth line, about the main service (12 languages); `WhatsNew.version` stays «0.11», so whoever closed the card in a beta does not get it again.
+- `docs/release-notes/0.11.0.md`: the main service under «New» and a «Fixed» part (Keep Awake after a restart, the translations, the help).
+Checked: `scripts/check.sh` passed (catalog 1810 keys, 0 problems). Layout after the 1038 translation fixes: seven Settings pages (General, What to Show, AI limits, Agent sessions, Claude Code, Gemini, Profiles) pictured in German, Japanese, Arabic and Polish in an isolated copy with its own bundle id; six of the 28 pictures were looked at closely (German General, What to Show and AI limits, Arabic AI limits, Japanese Agent sessions, Polish Claude Code) — no label is cut, Arabic is mirrored. The copy was quit, unregistered, its defaults deleted.
+Left: the panel was not looked at in other languages (it needs a click on the menu bar item per language); 22 of the 28 pictures were taken but not looked at one by one. A list of short labels whose translation is much longer than the Russian (German 10, French 13, Spanish 9…) showed sentences and messages, not tight buttons, so nothing was shortened.
 
 ## 2026-11-12 — «Не спать» stays on across restarts; Antigravity's «ждёт» looked at (branch `fix/keep-awake-restart`)
 
