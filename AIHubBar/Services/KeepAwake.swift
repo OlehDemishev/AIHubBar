@@ -62,6 +62,32 @@ struct KeepAwakeRules: Codable, Equatable, Sendable {
     }
 }
 
+/// The manual hold as it is kept in the defaults: −1 — until switched off, a time — until then.
+enum KeepAwakeManualHold {
+    static let key = "keepAwakeManualHold"
+
+    static func stored(_ manual: Date??) -> Double? {
+        guard let manual else { return nil }
+        return manual.map(\.timeIntervalSince1970) ?? -1
+    }
+
+    /// A hold whose time has passed while the app was closed is gone.
+    static func manual(_ stored: Double?, now: Date = .now) -> Date?? {
+        guard let stored else { return nil }
+        if stored < 0 { return .some(nil) }
+        let until = Date(timeIntervalSince1970: stored)
+        return until > now ? .some(until) : nil
+    }
+
+    static func save(_ manual: Date??, to defaults: UserDefaults) {
+        if let value = stored(manual) { defaults.set(value, forKey: key) } else { defaults.removeObject(forKey: key) }
+    }
+
+    static func load(from defaults: UserDefaults, now: Date = .now) -> Date?? {
+        manual(defaults.object(forKey: key) as? Double, now: now)
+    }
+}
+
 /// Holds the Mac awake through a power assertion while a rule says so. Nothing in System Settings changes; when no
 /// rule holds, the assertion is released and the Mac sleeps as usual. Only while «Не спать» is installed.
 @MainActor
@@ -69,7 +95,10 @@ struct KeepAwakeRules: Codable, Equatable, Sendable {
 final class KeepAwakeController {
     private(set) var reason: KeepAwakeRules.Reason?
     /// A manual hold: `.some(nil)` = until switched off, `.some(date)` = until then, nil = none.
-    private(set) var manualUntil: Date??
+    private(set) var manualUntil: Date?? {
+        // Kept across restarts: an update or a relaunch used to switch «Не спать» off without a word.
+        didSet { KeepAwakeManualHold.save(manualUntil, to: defaults) }
+    }
     /// Set by the app: whether «Не спать» is installed, and whether Claude is working right now.
     var isActive: () -> Bool = { false }
     var claudeWorking: () -> Bool = { false }
@@ -79,12 +108,15 @@ final class KeepAwakeController {
     private var lidBusy = false
 
     private let settings: AppSettings
+    private let defaults: UserDefaults
     private var systemAssertion: IOPMAssertionID?
     private var displayAssertion: IOPMAssertionID?
     private var loop: Task<Void, Never>?
 
-    init(settings: AppSettings) {
+    init(settings: AppSettings, defaults: UserDefaults = .standard) {
         self.settings = settings
+        self.defaults = defaults
+        manualUntil = KeepAwakeManualHold.load(from: defaults)
     }
 
     func start() {

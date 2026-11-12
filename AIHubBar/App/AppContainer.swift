@@ -105,7 +105,7 @@ final class AppContainer {
         claudeAccounts.isActive = { [modes] in modes.isOn(.limits) }
         let monitor = SystemMonitor(settings: settings)
         self.monitor = monitor
-        let keepAwake = KeepAwakeController(settings: settings)
+        let keepAwake = KeepAwakeController(settings: settings, defaults: TestHost.isActive ? TestHost.defaults : .standard)
         let clipboard = ClipboardHistory(settings: settings)
         self.clipboard = clipboard
         let notesStore = NotesStore(settings: settings)

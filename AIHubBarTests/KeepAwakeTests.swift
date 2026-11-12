@@ -69,7 +69,7 @@ struct KeepAwakeControllerTests {
         let name = "claudepult-keepawake-\(UUID().uuidString)"
         let defaults = UserDefaults(suiteName: name)!
         defer { defaults.removePersistentDomain(forName: name) }
-        let controller = KeepAwakeController(settings: AppSettings(defaults: defaults))
+        let controller = KeepAwakeController(settings: AppSettings(defaults: defaults), defaults: defaults)
         controller.claudeWorking = { true }
         controller.holdManually(for: nil)
         #expect(controller.reason == nil && controller.manualUntil == nil, "not installed: nothing is held")
@@ -119,5 +119,24 @@ struct LidSleepTests {
         var lid = KeepAwakeRules()
         lid.lidClosed = true
         #expect(try JSONDecoder().decode(KeepAwakeRules.self, from: JSONEncoder().encode(lid)).lidClosed)
+    }
+
+    @Test func theManualHoldSurvivesARestart() {
+        let now = Date(timeIntervalSince1970: 1_000_000)
+        #expect(KeepAwakeManualHold.stored(nil) == nil)
+        #expect(KeepAwakeManualHold.stored(.some(nil)) == -1)
+        #expect(KeepAwakeManualHold.stored(.some(now)) == 1_000_000)
+        #expect(KeepAwakeManualHold.manual(nil, now: now) == nil)
+        #expect(KeepAwakeManualHold.manual(-1, now: now) == .some(nil), "«до выключения» stays until switched off")
+        #expect(KeepAwakeManualHold.manual(1_000_600, now: now) == .some(now.addingTimeInterval(600)))
+        #expect(KeepAwakeManualHold.manual(999_000, now: now) == nil, "a hold that ran out while the app was closed is gone")
+
+        let name = "keep-awake-\(UUID())"
+        let defaults = UserDefaults(suiteName: name)!
+        defer { defaults.removePersistentDomain(forName: name) }
+        KeepAwakeManualHold.save(.some(nil), to: defaults)
+        #expect(KeepAwakeManualHold.load(from: defaults, now: now) == .some(nil))
+        KeepAwakeManualHold.save(nil, to: defaults)
+        #expect(defaults.object(forKey: KeepAwakeManualHold.key) == nil)
     }
 }
