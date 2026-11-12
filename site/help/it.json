@@ -41,7 +41,7 @@
               "name" : "Novità"
             },
             {
-              "detail" : "Con più di un profilo attivo, in cima al pannello c'è un selettore. I profili si configurano in Impostazioni → «Profili»; tutte le impostazioni si salvano in un file .claudepult (Generali → «Esporta impostazioni…»); un doppio clic su quel file lo importa.",
+              "detail" : "Con più di un profilo attivo, in cima al pannello c’è un selettore. I profili si configurano in Impostazioni → «Profili»; tutte le impostazioni si salvano in un file .claudepult (Generali → «Esporta impostazioni…»); un doppio clic su quel file lo importa.",
               "name" : "Profili"
             }
           ],
@@ -71,7 +71,7 @@
             },
             {
               "detail" : "Quota della sessione di 5 ore e della settimana — come numero, anello o barra (Impostazioni → «Cosa mostrare» → «Barra dei menu»): verde sotto il 50 %, arancione sotto l'80 %, rosso sopra.",
-              "name" : "Accanto all'icona"
+              "name" : "Accanto all’icona"
             },
             {
               "detail" : "Spazio, spazio ampio, «·», «|», linea sottile, «/», «›» e «Nuovo gruppo» — quante volte vuoi. Si vedono solo se da entrambi i lati c’è qualcosa da mostrare.",
@@ -223,11 +223,11 @@
               "name" : "Notifiche"
             },
             {
-              "detail" : "«Limiti di Claude» per la scrivania: clic destro sulla scrivania → «Modifica widget…» → AI Hub Bar. Piccolo — l'anello della sessione, medio — sessione e settimana.",
+              "detail" : "«Limiti di Claude» per la scrivania: clic destro sulla scrivania → «Modifica widget…» → AI Hub Bar. Piccolo — l’anello della sessione, medio — sessione e settimana.",
               "name" : "Widget"
             },
             {
-              "detail" : "Se la sessione è usata per più del 90 per cento, un'attività in background chiede: avviare ora o dopo l'azzeramento. «Metti in pausa le attività in background», nella pagina «Limiti IA», ferma alla soglia le attività in corso e le riprende dopo l’azzeramento.",
+              "detail" : "Se la sessione è usata per più del 90 per cento, un’attività in background chiede: avviare ora o dopo l’azzeramento. «Metti in pausa le attività in background», nella pagina «Limiti IA», ferma alla soglia le attività in corso e le riprende dopo l’azzeramento.",
               "name" : "Background e limite"
             }
           ],
@@ -250,7 +250,7 @@
         {
           "facts" : [
             {
-              "detail" : "Tutte le sessioni su questo Mac — nel Terminale, nell'app Claude, in background: progetto, worktree, attività, durata, stato (in corso, background, in attesa, fatto, errore, chiusa). Quelle in attesa di risposta sono evidenziate e notificate.",
+              "detail" : "Tutte le sessioni su questo Mac — nel Terminale, nell’app Claude, in background: progetto, worktree, attività, durata, stato (in corso, background, in attesa, fatto, errore, chiusa). Quelle in attesa di risposta sono evidenziate e notificate.",
               "name" : "Elenco"
             },
             {
@@ -258,7 +258,7 @@
               "name" : "Permessi"
             },
             {
-              "detail" : "Porta in primo piano la scheda del Terminale di questa sessione; per le sessioni dell'app Claude apri questa sessione in Claude, altrimenti la cartella.",
+              "detail" : "Porta in primo piano la scheda del Terminale di questa sessione; per le sessioni dell’app Claude apri questa sessione in Claude, altrimenti la cartella.",
               "name" : "Mostra"
             },
             {
@@ -282,7 +282,7 @@
               "name" : "Monitoraggio delle sessioni"
             },
             {
-              "detail" : "Anche le loro sessioni mostrano «in corso / in attesa / fatto» se l'hook di AI Hub Bar è installato nella loro pagina in «Servizi IA». Codex esegue un nuovo hook solo dopo la verifica: digita /hooks in codex e accettalo. Senza hook, solo le conversazioni recenti, senza stato.",
+              "detail" : "Anche le loro sessioni mostrano «in corso / in attesa / fatto» se l’hook di AI Hub Bar è installato nella loro pagina in «Servizi IA». Codex esegue un nuovo hook solo dopo la verifica: digita /hooks in codex e accettalo. Senza hook, solo le conversazioni recenti, senza stato.",
               "name" : "Codex e Copilot"
             },
             {
@@ -377,11 +377,11 @@
               "name" : "progetto.md"
             },
             {
-              "detail" : "In un progetto espanso: i comandi del profilo e «Attività personale». Il risultato è sempre un nuovo file nella cartella del progetto. Un modello via API riceve il testo del file principale; Claude lavora in background con i permessi del profilo («solo file» — niente terminale né internet); gli altri agenti si aprono nel Terminale con l'attività negli appunti.",
+              "detail" : "In un progetto espanso: i comandi del profilo e «Attività personale». Il risultato è sempre un nuovo file nella cartella del progetto. Un modello via API riceve il testo del file principale; Claude lavora in background con i permessi del profilo («solo file» — niente terminale né internet); gli altri agenti si aprono nel Terminale con l’attività negli appunti.",
               "name" : "Comandi"
             },
             {
-              "detail" : "Attiva «Confronta», scegli 2–3 servizi e un comando: i risultati finiscono uno accanto all'altro («hook (Claude).md», «hook (OpenAI).md») e si aprono nella finestra «Confronto».",
+              "detail" : "Attiva «Confronta», scegli 2–3 servizi e un comando: i risultati finiscono uno accanto all’altro («hook (Claude).md», «hook (OpenAI).md») e si aprono nella finestra «Confronto».",
               "name" : "Confronta"
             },
             {
@@ -667,7 +667,7 @@
               "name" : "--background-settings"
             },
             {
-              "detail" : "Limiti dell'abbonamento; consumo per progetto.",
+              "detail" : "Limiti dell’abbonamento; consumo per progetto.",
               "name" : "--usage · --token-usage"
             },
             {

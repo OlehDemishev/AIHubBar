@@ -38,7 +38,7 @@
             },
             {
               "detail" : "After an update a card with what changed appears once at the top of the panel; “Got It” removes it.",
-              "name" : "What's New"
+              "name" : "What’s New"
             },
             {
               "detail" : "With more than one profile enabled, a switcher sits at the top of the panel. Profiles are set up in Settings → “Profiles”; all settings can be saved to a .claudepult file (General → “Export Settings…”); double-clicking such a file imports it.",
@@ -191,7 +191,7 @@
               "name" : "Week"
             },
             {
-              "detail" : "The main service's limits come first in the panel and are shown in the menu bar and on the island. “Automatic” is Claude, or without it the first service that has limits.",
+              "detail" : "The main service’s limits come first in the panel and are shown in the menu bar and on the island. “Automatic” is Claude, or without it the first service that has limits.",
               "name" : "Main service"
             },
             {
@@ -211,7 +211,7 @@
               "name" : "Other Claude accounts"
             },
             {
-              "detail" : "An estimate from Claude Code's logs: project shares and the most expensive session for the session, today, the week.",
+              "detail" : "An estimate from Claude Code’s logs: project shares and the most expensive session for the session, today, the week.",
               "name" : "Usage by project"
             },
             {
@@ -258,7 +258,7 @@
               "name" : "Permissions"
             },
             {
-              "detail" : "Bring this session's Terminal tab forward; for Claude app sessions open this session in Claude, otherwise the folder.",
+              "detail" : "Bring this session’s Terminal tab forward; for Claude app sessions open this session in Claude, otherwise the folder.",
               "name" : "Show"
             },
             {
@@ -282,7 +282,7 @@
               "name" : "Session tracking"
             },
             {
-              "detail" : "Their sessions also show “running / waiting / done” when AI Hub Bar's hook is installed on their page under “AI Services”. Codex runs a new hook only after review: type /hooks in codex and trust it. Without the hook — only recent conversations, without a state.",
+              "detail" : "Their sessions also show “running / waiting / done” when AI Hub Bar’s hook is installed on their page under “AI Services”. Codex runs a new hook only after review: type /hooks in codex and trust it. Without the hook — only recent conversations, without a state.",
               "name" : "Codex and Copilot"
             },
             {
@@ -309,7 +309,7 @@
         {
           "facts" : [
             {
-              "detail" : "Codex CLI, Gemini CLI, Antigravity, Copilot CLI, Cursor CLI — AI Hub Bar finds the installed ones (Settings → “AI Services”) and opens them in Terminal in the project folder: “Open in…” in a project's Claude block. Each has its own sign-in.",
+              "detail" : "Codex CLI, Gemini CLI, Antigravity, Copilot CLI, Cursor CLI — AI Hub Bar finds the installed ones (Settings → “AI Services”) and opens them in Terminal in the project folder: “Open in…” in a project’s Claude block. Each has its own sign-in.",
               "name" : "Agents"
             },
             {
@@ -317,8 +317,8 @@
               "name" : "Models by API"
             },
             {
-              "detail" : "Settings → “Profiles” → “Default service”: it runs the profile's command templates.",
-              "name" : "Profile's service"
+              "detail" : "Settings → “Profiles” → “Default service”: it runs the profile’s command templates.",
+              "name" : "Profile’s service"
             }
           ],
           "monospaced" : false,
@@ -377,7 +377,7 @@
               "name" : "project.md"
             },
             {
-              "detail" : "In an expanded project: the profile's commands and “Custom task”. The result is always a new file in the project folder. A model by API gets the main file's text; Claude works in the background with the profile's permissions (“files only” — no terminal, no internet); other agents open in Terminal with the task on the clipboard.",
+              "detail" : "In an expanded project: the profile’s commands and “Custom task”. The result is always a new file in the project folder. A model by API gets the main file’s text; Claude works in the background with the profile’s permissions (“files only” — no terminal, no internet); other agents open in Terminal with the task on the clipboard.",
               "name" : "Commands"
             },
             {
@@ -385,7 +385,7 @@
               "name" : "Compare"
             },
             {
-              "detail" : "The profile's stages, comma-separated; a stage changes with a button in an expanded project. Words, duration, reading time and pages are counted from the main file (.md, .txt, .rtf, .docx).",
+              "detail" : "The profile’s stages, comma-separated; a stage changes with a button in an expanded project. Words, duration, reading time and pages are counted from the main file (.md, .txt, .rtf, .docx).",
               "name" : "Stages and metrics"
             }
           ],
@@ -408,7 +408,7 @@
           "facts" : [
             {
               "detail" : "Deadlines and publications from project.md, rows of content-plan.md — for profiles with the calendar on (Settings → “Profiles”).",
-              "name" : "What's in it"
+              "name" : "What’s in it"
             },
             {
               "detail" : "A panel block: 7 days ahead, overdue in red; a click opens the project or file.",
@@ -541,7 +541,7 @@
               "name" : "Directions"
             },
             {
-              "detail" : "Words in the dictionary of exceptions aren't fixed automatically, and ⌥⇧ leaves them as they are.",
+              "detail" : "Words in the dictionary of exceptions aren’t fixed automatically, and ⌥⇧ leaves them as they are.",
               "name" : "Exceptions"
             },
             {
@@ -613,7 +613,7 @@
               "name" : "How often"
             },
             {
-              "detail" : "The bot is the “Telegram” module: the token, the chat and a menu in the bot itself (/menu — limits, sessions, reports, cleanup). What to copy there — the “Telegram” chip on a module's page.",
+              "detail" : "The bot is the “Telegram” module: the token, the chat and a menu in the bot itself (/menu — limits, sessions, reports, cleanup). What to copy there — the “Telegram” chip on a module’s page.",
               "name" : "Telegram"
             },
             {
