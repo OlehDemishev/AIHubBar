@@ -9181,82 +9181,6 @@
         }
       }
     },
-    "Codex, Copilot, Gemini, Cursor и расход по API — такими же карточками, как Claude.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex وCopilot وGemini وCursor واستهلاك API — ببطاقات مثل بطاقات Claude."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex, Copilot, Gemini, Cursor und API-Verbrauch — als dieselben Karten wie Claude."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex, Copilot, Gemini, Cursor and API spend — in the same cards as Claude."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex, Copilot, Gemini, Cursor y el gasto de API — con las mismas tarjetas que Claude."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex, Copilot, Gemini, Cursor et la consommation d’API — sous forme des mêmes cartes que Claude."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex, Copilot, Gemini, Cursor, dan pemakaian API — dalam kartu yang sama seperti Claude."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex, Copilot, Gemini, Cursor e la spesa API — con le stesse schede di Claude."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex、Copilot、Gemini、Cursor、API の使用量も Claude と同じカードで表示します。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex, Copilot, Gemini, Cursor와 API 사용량도 Claude와 같은 카드로 표시됩니다."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex, Copilot, Gemini, Cursor i zużycie API — w takich samych kartach jak Claude."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex, Copilot, Gemini, Cursor e o gasto de API — nos mesmos cartões que o Claude."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex, Copilot, Gemini, Cursor і витрати за API — такими самими картками, як Claude."
-          }
-        }
-      }
-    },
     "Cursor с входом и ваше согласие": {
       "localizations": {
         "ar": {
@@ -14091,82 +14015,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Автоматизація"
-          }
-        }
-      }
-    },
-    "Автоматически": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Automatic"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Автоматично"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Automatisch"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Automatique"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Automático"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Automatico"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Automático"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Automatycznie"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "自動"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "자동"
-          }
-        },
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "تلقائي"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Otomatis"
           }
         }
       }
@@ -27327,82 +27175,6 @@
         }
       }
     },
-    "Главный сервис": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Main service"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Головний сервіс"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hauptdienst"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Service principal"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Servicio principal"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Servizio principale"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Serviço principal"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Główna usługa"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "メインのサービス"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "기본 서비스"
-          }
-        },
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "الخدمة الرئيسية"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Layanan utama"
-          }
-        }
-      }
-    },
     "Главный файл": {
       "localizations": {
         "ar": {
@@ -32795,82 +32567,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Якщо острова не видно (екран спить, Mac заблоковано), сповіщення все одно прийде."
-          }
-        }
-      }
-    },
-    "Если сессия использована больше чем на 90 %, фоновая задача спрашивает: запустить сейчас или после сброса.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "إذا استُخدمت الجلسة بأكثر من 90 بالمئة، تسأل المهمة الخلفية: البدء الآن أم بعد إعادة الضبط."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ist die Sitzung zu mehr als 90 Prozent verbraucht, fragt eine Hintergrundaufgabe: jetzt starten oder nach der Zurücksetzung."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "If the session is more than 90 percent used, a background task asks: start now or after the reset."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Si la sesión está usada en más del 90 %, la tarea en segundo plano pregunta: iniciar ahora o después del reinicio."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Si la session est utilisée à plus de 90 %, la tâche en arrière-plan demande : lancer maintenant ou après la réinitialisation."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Jika sesi terpakai lebih dari 90 persen, tugas latar belakang bertanya: mulai sekarang atau setelah reset."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Se la sessione è usata per più del 90 per cento, un'attività in background chiede: avviare ora o dopo l'azzeramento."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "セッションの使用が 90 パーセントを超えると、バックグラウンドタスクは今すぐ開始するかリセット後にするかを尋ねます。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "세션을 90퍼센트 넘게 썼다면 백그라운드 작업이 지금 시작할지 초기화 뒤에 시작할지 묻습니다."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Jeśli sesja jest zużyta w ponad 90 procentach, zadanie w tle pyta: uruchomić teraz czy po resecie."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Se mais de 90 por cento da sessão estiver usada, a tarefa em segundo plano pergunta: iniciar agora ou depois do reinício."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Якщо сесію використано більше ніж на 90 відсотків, фонове завдання питає: запустити зараз чи після скидання."
           }
         }
       }
@@ -48391,82 +48087,6 @@
         }
       }
     },
-    "Лимиты главного сервиса идут первыми в панели и показаны в строке меню и на острове. «Автоматически» — Claude, а без него первый сервис, у которого есть лимиты.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "The main service's limits come first in the panel and are shown in the menu bar and on the island. “Automatic” is Claude, or without it the first service that has limits."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ліміти головного сервісу йдуть першими в панелі та показані в рядку меню й на острові. «Автоматично» — Claude, а без нього перший сервіс, у якого є ліміти."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Die Limits des Hauptdienstes stehen im Panel an erster Stelle und werden in der Menüleiste und auf der Insel angezeigt. „Automatisch“ bedeutet Claude, ohne Claude der erste Dienst mit Limits."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Les limites du service principal viennent en premier dans le panneau et s’affichent dans la barre des menus et sur l’île. « Automatique » : Claude, ou sans lui le premier service qui a des limites."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Los límites del servicio principal van primero en el panel y se muestran en la barra de menús y en la isla. «Automático» es Claude o, sin él, el primer servicio que tenga límites."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "I limiti del servizio principale vengono per primi nel pannello e sono mostrati nella barra dei menu e sull’isola. «Automatico» è Claude o, senza di lui, il primo servizio che ha limiti."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Os limites do serviço principal vêm primeiro no painel e aparecem na barra de menus e na ilha. “Automático” é o Claude ou, sem ele, o primeiro serviço que tiver limites."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Limity głównej usługi są pierwsze w panelu i widać je na pasku menu oraz na wyspie. „Automatycznie” to Claude, a bez niego pierwsza usługa, która ma limity."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "メインのサービスの制限はパネルの先頭に表示され、メニューバーとアイランドにも表示されます。「自動」は Claude、Claude がなければ制限のある最初のサービスです。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "기본 서비스의 한도는 패널 맨 위에 오고 메뉴 막대와 아일랜드에도 표시됩니다. ‘자동’은 Claude이며, Claude가 없으면 한도가 있는 첫 번째 서비스입니다."
-          }
-        },
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "تأتي حدود الخدمة الرئيسية أولًا في اللوحة وتظهر في شريط القائمة وعلى الجزيرة. «تلقائي» يعني Claude، وبدونه أول خدمة لها حدود."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Batas layanan utama tampil pertama di panel dan ditampilkan di bar menu serta di pulau. “Otomatis” berarti Claude, atau tanpa Claude layanan pertama yang punya batas."
-          }
-        }
-      }
-    },
     "Лимиты ещё не загружены — откройте панель AI Hub Bar": {
       "localizations": {
         "ar": {
@@ -49376,82 +48996,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ліміти — велике число і смуга з темпом; кільця повертаються в налаштуваннях блоку «Ліміти AI»."
-          }
-        }
-      }
-    },
-    "Лимиты, ответы Claude, готовые команды и дедлайны приходят уведомлениями.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "تصل الحدود وانتظار Claude للرد والأوامر المكتملة والمواعيد النهائية كإشعارات."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Limits, wartende Claude-Sitzungen, fertige Befehle und Fristen kommen als Mitteilungen."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Limits, Claude waiting for you, finished commands and deadlines arrive as notifications."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Los límites, Claude esperando respuesta, los comandos terminados y las fechas límite llegan como notificaciones."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Limites, Claude en attente de réponse, commandes terminées et échéances arrivent en notifications."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Batas, Claude yang menunggu jawaban, perintah selesai, dan tenggat datang sebagai pemberitahuan."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Limiti, Claude in attesa di risposta, comandi completati e scadenze arrivano come notifiche."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "上限、返答待ちの Claude、完了したコマンド、締め切りが通知で届きます。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "한도, 답을 기다리는 Claude, 완료된 명령, 마감일이 알림으로 옵니다."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Limity, Claude czekający na odpowiedź, gotowe polecenia i terminy przychodzą jako powiadomienia."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Limites, Claude esperando resposta, comandos concluídos e prazos chegam como notificações."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ліміти, відповіді Claude, готові команди й дедлайни приходять сповіщеннями."
           }
         }
       }
@@ -97178,82 +96722,6 @@
         }
       }
     },
-    "Сессия с обратным отсчётом до сброса и прогнозом по темпу за 30 мин, неделя, недели по моделям, extra usage.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "الجلسة مع عدّ تنازلي لإعادة الضبط وتوقّع بحسب وتيرة آخر 30 د، والأسبوع، والأسابيع حسب النموذج، وextra usage."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Die Sitzung mit Countdown bis zur Zurücksetzung und Prognose nach dem Tempo der letzten 30 min, die Woche, Wochen nach Modell, Extra usage."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "The session with a countdown to the reset and a forecast from the last 30 min, the week, weeks per model, extra usage."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "La sesión con cuenta atrás hasta el reinicio y previsión según el ritmo de los últimos 30 min, la semana, semanas por modelo, extra usage."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "La session avec un compte à rebours avant la réinitialisation et une prévision selon le rythme des 30 dernières minutes, la semaine, les semaines par modèle, extra usage."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sesi dengan hitung mundur ke reset dan prakiraan berdasarkan laju 30 mnt terakhir, minggu, minggu per model, extra usage."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "La sessione con conto alla rovescia fino all'azzeramento e previsione in base al ritmo degli ultimi 30 min, la settimana, le settimane per modello, extra usage."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "リセットまでのカウントダウンと直近 30 分のペースによる予測付きのセッション、週、モデル別の週、extra usage。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "초기화까지 카운트다운과 최근 30분 속도에 따른 예측이 있는 세션, 주간, 모델별 주간, extra usage."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sesja z odliczaniem do resetu i prognozą według tempa z ostatnich 30 min, tydzień, tygodnie według modeli, extra usage."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "A sessão com contagem até o reinício e previsão pelo ritmo dos últimos 30 min, a semana, semanas por modelo, extra usage."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Сесія з відліком до скидання і прогнозом за темпом за 30 хв, тиждень, тижні за моделями, extra usage."
-          }
-        }
-      }
-    },
     "Сессия, неделя, прогноз, другие AI": {
       "localizations": {
         "ar": {
@@ -112989,82 +112457,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Фонове завдання: %@"
-          }
-        }
-      }
-    },
-    "Фоновая задача: остановить сейчас.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "مهمة خلفية: إيقاف الآن."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hintergrundaufgabe: jetzt stoppen."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Background task: stop now."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tarea en segundo plano: detener ahora."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tâche en arrière-plan : arrêter maintenant."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tugas latar belakang: hentikan sekarang."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Attività in background: ferma ora."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "バックグラウンドタスク: 今すぐ停止。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "백그라운드 작업: 지금 중지."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Zadanie w tle: zatrzymaj teraz."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tarefa em segundo plano: parar agora."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Фонове завдання: зупинити зараз."
           }
         }
       }
@@ -136544,6 +135936,234 @@
           "stringUnit": {
             "state": "translated",
             "value": "❌ CI впав: %@ #%lld"
+          }
+        }
+      }
+    },
+    "Автоматически": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Automatic"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Автоматично"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Automatisch"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Automatique"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Automático"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Automatico"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Automático"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Automatycznie"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "自動"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "자동"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تلقائي"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otomatis"
+          }
+        }
+      }
+    },
+    "Главный сервис": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Main service"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Головний сервіс"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hauptdienst"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Service principal"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Servicio principal"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Servizio principale"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Serviço principal"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Główna usługa"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "メインのサービス"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "기본 서비스"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الخدمة الرئيسية"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Layanan utama"
+          }
+        }
+      }
+    },
+    "Лимиты главного сервиса идут первыми в панели и показаны в строке меню и на острове. «Автоматически» — Claude, а без него первый сервис, у которого есть лимиты.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The main service's limits come first in the panel and are shown in the menu bar and on the island. “Automatic” is Claude, or without it the first service that has limits."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ліміти головного сервісу йдуть першими в панелі та показані в рядку меню й на острові. «Автоматично» — Claude, а без нього перший сервіс, у якого є ліміти."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Limits des Hauptdienstes stehen im Panel an erster Stelle und werden in der Menüleiste und auf der Insel angezeigt. „Automatisch“ bedeutet Claude, ohne Claude der erste Dienst mit Limits."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les limites du service principal viennent en premier dans le panneau et s’affichent dans la barre des menus et sur l’île. « Automatique » : Claude, ou sans lui le premier service qui a des limites."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los límites del servicio principal van primero en el panel y se muestran en la barra de menús y en la isla. «Automático» es Claude o, sin él, el primer servicio que tenga límites."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I limiti del servizio principale vengono per primi nel pannello e sono mostrati nella barra dei menu e sull’isola. «Automatico» è Claude o, senza di lui, il primo servizio che ha limiti."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Os limites do serviço principal vêm primeiro no painel e aparecem na barra de menus e na ilha. “Automático” é o Claude ou, sem ele, o primeiro serviço que tiver limites."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limity głównej usługi są pierwsze w panelu i widać je na pasku menu oraz na wyspie. „Automatycznie” to Claude, a bez niego pierwsza usługa, która ma limity."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "メインのサービスの制限はパネルの先頭に表示され、メニューバーとアイランドにも表示されます。「自動」は Claude、Claude がなければ制限のある最初のサービスです。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "기본 서비스의 한도는 패널 맨 위에 오고 메뉴 막대와 아일랜드에도 표시됩니다. ‘자동’은 Claude이며, Claude가 없으면 한도가 있는 첫 번째 서비스입니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تأتي حدود الخدمة الرئيسية أولًا في اللوحة وتظهر في شريط القائمة وعلى الجزيرة. «تلقائي» يعني Claude، وبدونه أول خدمة لها حدود."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Batas layanan utama tampil pertama di panel dan ditampilkan di bar menu serta di pulau. “Otomatis” berarti Claude, atau tanpa Claude layanan pertama yang punya batas."
           }
         }
       }
