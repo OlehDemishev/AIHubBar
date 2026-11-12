@@ -1,10 +1,11 @@
 # Status
 
 <!-- summary:start -->
-**Stage:** Mac: 0.11.0-beta.2 out to beta testers 2026-11-11 (adds Antigravity's quota to beta.1: what's new card, week pace, release notes, Homebrew cask); releases once a week on Tuesday since 2026-11-11; 0.10.2 published 2026-11-10 (the Settings sidebar can no longer stay collapsed); 0.10.1 the same day (the stop button asks, Arabic percents, projects stay in sight); 0.10.0 the same day (the redesign: a calmer limits block, Settings with seven rows and «Что показывать», account and plan in the panel's header, the «Ещё» row); 0.9.1 the same day (no crash on removing an account, Arabic mirrored, the Settings sidebar, a worktree's name in a session row); 0.9.0 on 2026-11-09 (the closed panel no longer uses a third of a CPU core, 30 fixes from an audit); 0.8.1 the same day (the island's rings fit in the black ears); 0.8.0 the same day, signed and notarized (Sparkle 2.10.1, the lock screen tile checks it locked, «Раскладка» directions and exceptions, «Поддержать проект»; 0.7.8 Developer ID, Accessibility asked once; 0.7.7 hook messages in the app's language, clean session titles; 0.7.6 a map of the panel on the first screen, «Тексты» fixes; before that shorter first run, panel polish, usage history, finished sessions, ⌃⌥B, outages, several Claude accounts). Windows/Linux (`desktop/`, Tauri 2): postponed by Oleh 2026-11-02
+**Stage:** Mac: 0.11.0-beta.3 out to beta testers 2026-11-12 — everything planned for 0.11.0 (the main service can be another one than Claude, Antigravity's quota, what's new card, week pace, release notes, Homebrew cask, translations read against the original, the help up to date); releases once a week on Tuesday since 2026-11-11; 0.10.2 published 2026-11-10 (the Settings sidebar can no longer stay collapsed); 0.10.1 the same day (the stop button asks, Arabic percents, projects stay in sight); 0.10.0 the same day (the redesign: a calmer limits block, Settings with seven rows and «Что показывать», account and plan in the panel's header, the «Ещё» row); 0.9.1 the same day (no crash on removing an account, Arabic mirrored, the Settings sidebar, a worktree's name in a session row); 0.9.0 on 2026-11-09 (the closed panel no longer uses a third of a CPU core, 30 fixes from an audit); 0.8.1 the same day (the island's rings fit in the black ears); 0.8.0 the same day, signed and notarized (Sparkle 2.10.1, the lock screen tile checks it locked, «Раскладка» directions and exceptions, «Поддержать проект»; 0.7.8 Developer ID, Accessibility asked once; 0.7.7 hook messages in the app's language, clean session titles; 0.7.6 a map of the panel on the first screen, «Тексты» fixes; before that shorter first run, panel polish, usage history, finished sessions, ⌃⌥B, outages, several Claude accounts). Windows/Linux (`desktop/`, Tauri 2): postponed by Oleh 2026-11-02
 **Updated:** 2026-11-12
 
 **Now:**
+- 0.11.0-beta.3 (build 844) published 2026-11-12 for beta testers: #367 the main service, #370 «Не спать» across restarts, #368 translations, #369 the help, #371 quotes and the card. Lives on Oleh's copy until Tuesday 2026-11-17; nothing new goes into 0.11.0 after it, only fixes
 - 2026-11-12: polish for 0.11.0 — one style of quotes and apostrophes per language, Settings looked at in de/ja/ar/pl after the translation fixes, the «Что нового» card and the release notes name the main service
 - 2026-11-12: «Не спать» stays on across restarts. Antigravity's «ждёт» not built: `agy` on this Mac stops at its first-run screen, so its states could not be seen
 - 2026-11-12: the main AI service can be another one than Claude (panel, menu bar, island, widget; #367). Goes to 0.11.0-beta.3, then 0.11.0 on Tuesday 2026-11-17
@@ -37,8 +38,8 @@
 
 **Needs Oleh:**
 - main service (in beta 3): Settings → «Что показывать» → «Лимиты AI» → «Главный сервис» — pick Codex, look at the panel and the menu bar item, put «Автоматически» back
-- update to 0.11.0-beta.2 (Settings → «Основные» → «Обновления», «Бета-версии» on), then the Antigravity quota: Settings → «Сервисы AI» → Gemini → «Включить квоту Antigravity», open `agy` once, then look at the panel — «Gemini» and «другие модели» with the plan. The agent was not allowed to press that button on your Mac, so the install into `~/.gemini/antigravity-cli/settings.json` is not seen live
-- in the same update to 0.11.0-beta.2: does the update window show the list of changes, and does the «Что нового» card appear in the panel once
+- update to 0.11.0-beta.3 (Settings → «Основные» → «Обновления», «Бета-версии» on) and say whether Sparkle replaced the copy in `~/Applications`; then the Antigravity quota: Settings → «Сервисы AI» → Gemini → «Включить квоту Antigravity», open `agy` once, then look at the panel — «Gemini» and «другие модели» with the plan. The agent was not allowed to press that button on your Mac, so the install into `~/.gemini/antigravity-cli/settings.json` is not seen live
+- in the same update to 0.11.0-beta.3: does the update window show the list of changes, and does the «Что нового» card appear in the panel once
 - try the Homebrew install once (README → Install, three lines) on a Mac without the app, e.g. the Air: the agent did not trust the tap or install through it
 - say whether the app may report crashes by itself (opt-in, anonymous) — today it only offers a GitHub issue after a crash
 - update 0.10.1 → 0.10.2 through Settings → «Основные» → «Обновления» and say whether Sparkle replaced the copy: the update to 0.9.1 never reached `~/Applications`
@@ -63,6 +64,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-12 — 0.11.0-beta.3: everything planned for 0.11.0 (branch `chore/status-beta-0.11.0-3`)
+
+Done: Oleh asked to finish the plan for the Tuesday release so that Monday is quiet. Merged today: #367 the main service (panel, menu bar, island, widget, «Другие AI»), #370 «Не спать» across restarts, #371 quotes, the card and the release notes; yesterday #368 the translation review and #369 the help. `scripts/release.sh 0.11.0-beta.3 --publish` built build 844, signed and notarized it and published the pre-release v0.11.0-beta.3; the beta channel's appcast was replaced.
+Checked: the script ended with exit 0, both notarizations «Accepted». The pre-release has the disk image and its appcast; GitHub's «latest» is still v0.10.2. The beta channel lists 0.11.0-beta.3 (844, channel beta) and 0.10.2 (807).
+Left: the beta was not installed or opened by the agent. Not in it: the «ждёт» state for Antigravity sessions (`agy` here stops at its first-run screen). Not seen live by anyone yet: the widget with another main service, a Mac with no Claude, «Не спать» after a restart, the panel in other languages.
 
 ## 2026-11-12 — Quotes, a look at the layout, the card and the notes for 0.11.0 (branch `chore/quotes-and-layout`)
 
