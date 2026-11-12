@@ -62,4 +62,28 @@ struct MainServiceTests {
         let session = NotchText.earSummary(.sessionLimit, main: claude, sessions: [], background: 0)
         #expect(session.hasSuffix(UsageText.percent(42)) && !session.contains("Claude"), "Claude's own limits are named as before")
     }
+
+    @Test func theMainServiceLeavesTheOtherAINumbersAndClaudeJoinsThem() {
+        let hub = ["codex": 30.0, "copilot": 12.0]
+        #expect(MainService.otherPercents(main: claude, claude: 42, hub: hub) == hub, "Claude leads: nothing changes")
+        #expect(MainService.otherPercents(main: nil, claude: 42, hub: hub) == hub)
+        let others = MainService.otherPercents(main: other(.codex, [30, 60]), claude: 42, hub: hub)
+        #expect(others == ["copilot": 12, "claude": 42], "Codex is not shown twice, Claude is among the others")
+        #expect(MainService.otherPercents(main: other(.codex, [30]), claude: nil, hub: hub) == ["copilot": 12])
+        #expect(MainService.name("claude") == "Claude")
+        #expect(MainService.name("codex") == HubLimit.Source.codex.shortTitle)
+        #expect(NotchText.fullestOther(others)?.name == "Claude")
+    }
+
+    @Test func theWidgetFileCarriesTheMainServicesTwoLimits() throws {
+        let file = WidgetMainLimits(other(.codex, [30, 60, 5]), now: now)
+        #expect(file.title == HubLimit.Source.codex.title)
+        #expect(file.first == .init(title: "w0", utilization: 30, resetsAt: nil))
+        #expect(file.second?.utilization == 60)
+        let data = try #require(file.encoded())
+        let object = try #require(JSONSerialization.jsonObject(with: data) as? [String: Any])
+        #expect((object["first"] as? [String: Any])?["utilization"] as? Double == 30)
+        #expect(object["updated"] as? String == now.ISO8601Format())
+        #expect(WidgetMainLimits(other(.antigravity, [25]), now: now).second == nil)
+    }
 }

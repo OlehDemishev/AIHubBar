@@ -191,6 +191,10 @@
               "name" : "Tydzień"
             },
             {
+              "detail" : "Limity głównej usługi są pierwsze w panelu i widać je na pasku menu oraz na wyspie. „Automatycznie” to Claude, a bez niego pierwsza usługa, która ma limity.",
+              "name" : "Główna usługa"
+            },
+            {
               "detail" : "Paski lub pierścienie — do wyboru na stronie „Limity AI”.",
               "name" : "Wygląd limitów"
             },

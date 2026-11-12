@@ -149,11 +149,13 @@ final class AppContainer {
             }
         }
         notchIsland.sessionItems = { [sessions] in sessions.items }
+        hub.mainUsage = { [usage, hub, settings] in MainService.current(usage: usage, hub: hub, settings: settings) }
+        hub.claudePercent = { [usage] in [usage.snapshot?.session?.utilization, usage.snapshot?.week?.utilization].compactMap { $0 }.max() }
         notchIsland.hasEarContent = { [usage, hub, sessions, runs, settings] ear in
             switch ear {
             case .sessionLimit: MainService.current(usage: usage, hub: hub, settings: settings)?.firstLimit != nil
             case .weekLimit: MainService.current(usage: usage, hub: hub, settings: settings)?.secondLimit != nil
-            case .otherAI: NotchText.fullestOther(hub.percents) != nil
+            case .otherAI: NotchText.fullestOther(MainService.others(usage: usage, hub: hub, settings: settings)) != nil
             case .sessions: sessions.items.contains { $0.state == .waiting || $0.state == .running }
             case .background: !runs.running.isEmpty
             case .none: false
@@ -360,7 +362,7 @@ final class AppContainer {
         data.memory = monitor.snapshot?.memoryPercent
         data.keepingAwake = keepAwake.reason != nil
         data.keepAwakeSwitchedOn = keepAwake.manualUntil != nil
-        data.otherAI = hub.percents
+        data.otherAI = MainService.others(usage: usage, hub: hub, settings: settings)
         data.modeName = modes.current?.name
         data.modeIcon = modes.current?.icon
         return data

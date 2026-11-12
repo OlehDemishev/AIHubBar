@@ -31,7 +31,7 @@ enum NotchText {
     /// The other AI service closest to its limit (source raw value → percent, as `HubLimitsStore.percents`).
     static func fullestOther(_ percents: [String: Double]) -> (name: String, percent: Double)? {
         percents.max { $0.value == $1.value ? $0.key > $1.key : $0.value < $1.value }
-            .map { (HubLimit.Source(rawValue: $0.key)?.shortTitle ?? $0.key, $0.value) }
+            .map { (MainService.name($0.key), $0.value) }
     }
 
     // MARK: Live activity (SPEC-notch §3.4)

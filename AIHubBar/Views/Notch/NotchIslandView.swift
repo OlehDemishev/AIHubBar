@@ -135,7 +135,7 @@ private struct NotchEarView: View {
             switch ear {
             case .sessionLimit: limit(main?.firstLimit?.percent)
             case .weekLimit: limit(main?.secondLimit?.percent)
-            case .otherAI: limit(NotchText.fullestOther(hub.percents)?.percent)
+            case .otherAI: limit(NotchText.fullestOther(MainService.others(usage: usage, hub: hub, settings: settings))?.percent)
             case .sessions: sessionDot
             case .background:
                 if !runs.running.isEmpty { dot(.purple, count: runs.running.count) }
@@ -152,7 +152,7 @@ private struct NotchEarView: View {
     private var main: ServiceUsage? { MainService.current(usage: usage, hub: hub, settings: settings) }
 
     private var summary: String {
-        NotchText.earSummary(ear, main: main, sessions: sessions.items, background: runs.running.count, otherAI: hub.percents,
+        NotchText.earSummary(ear, main: main, sessions: sessions.items, background: runs.running.count, otherAI: MainService.others(usage: usage, hub: hub, settings: settings),
                              liveActivity: settings.notch.liveActivity)
     }
 

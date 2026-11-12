@@ -191,6 +191,10 @@
               "name" : "Semaine"
             },
             {
+              "detail" : "Les limites du service principal viennent en premier dans le panneau et s’affichent dans la barre des menus et sur l’île. « Automatique » : Claude, ou sans lui le premier service qui a des limites.",
+              "name" : "Service principal"
+            },
+            {
               "detail" : "Barres ou anneaux — à choisir sur la page « Limites d'IA ».",
               "name" : "Affichage des limites"
             },

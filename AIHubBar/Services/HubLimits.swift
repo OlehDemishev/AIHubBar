@@ -105,6 +105,9 @@ final class HubLimitsStore {
     private(set) var available: Set<HubLimit.Source> = []
     private(set) var savedKeys: Set<HubLimit.Source> = []
     var isActive: () -> Bool = { false }
+    /// The main service and Claude's fullest limit, for the widget's files (`MainService`); set by the app container.
+    var mainUsage: () -> ServiceUsage? = { nil }
+    var claudePercent: () -> Double? = { nil }
 
     private let settings: AppSettings
     private var loop: Task<Void, Never>?
@@ -124,6 +127,8 @@ final class HubLimitsStore {
     }
 
     static let widgetURL = SessionFiles.supportDirectory.appending(path: "other-ai.json")
+    /// The main service's two limits for the widget, written only while another service than Claude leads.
+    static let widgetMainURL = SessionFiles.supportDirectory.appending(path: "main-limits.json")
 
     init(settings: AppSettings) {
         self.settings = settings
@@ -287,10 +292,19 @@ final class HubLimitsStore {
     /// `other-ai.json` for the «Лимиты» widget: the sandboxed widget only reads Application Support/ClaudePult.
     private func writeWidgetFile() {
         struct Entry: Encodable { var name: String; var percent: Double }
-        let entries = limits.compactMap { limit in limit.fullest.map { Entry(name: limit.source.shortTitle, percent: $0) } }
+        let main = mainUsage()
+        // The widget's small rows are the other services: without the main one, and with Claude when it is not main.
+        let others = MainService.otherPercents(main: main, claude: claudePercent(), hub: percents)
+        let order = [MainService.claude] + limits.map(\.source.rawValue)
+        let entries = order.compactMap { key in others[key].map { Entry(name: MainService.name(key), percent: $0) } }
         AppLog.attempt("Widget limits not written") {
             try FileManager.default.createDirectory(at: Self.widgetURL.deletingLastPathComponent(), withIntermediateDirectories: true)
             try JSONEncoder().encode(entries).write(to: Self.widgetURL, options: .atomic)
+            if let main, main.hubSource != nil, let data = WidgetMainLimits(main).encoded() {
+                try data.write(to: Self.widgetMainURL, options: .atomic)
+            } else if FileManager.default.fileExists(atPath: Self.widgetMainURL.path) {
+                try FileManager.default.removeItem(at: Self.widgetMainURL)
+            }
         }
         WidgetCenter.shared.reloadTimelines(ofKind: "ClaudePultUsage")
     }
