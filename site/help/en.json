@@ -29,6 +29,18 @@
               "name" : "⌘Q"
             },
             {
+              "detail" : "Open the panel from any app. The shortcut is in Settings → “Shortcuts” → “Open the panel”.",
+              "name" : "⌃⌥B"
+            },
+            {
+              "detail" : "AI Hub Bar checks for new versions by itself and the update window shows what changed (Settings → “General” → “Updates”). “Beta Builds” — get builds before everyone else.",
+              "name" : "Updates"
+            },
+            {
+              "detail" : "After an update a card with what changed appears once at the top of the panel; “Got It” removes it.",
+              "name" : "What's New"
+            },
+            {
               "detail" : "With more than one profile enabled, a switcher sits at the top of the panel. Profiles are set up in Settings → “Profiles”; all settings can be saved to a .claudepult file (General → “Export Settings…”); double-clicking such a file imports it.",
               "name" : "Profiles"
             }
@@ -63,10 +75,10 @@
             },
             {
               "detail" : "Space, wide space, “·”, “|”, thin line, “/”, “›” and “New group” — as many times as you like. They show only when there’s something to show on both sides.",
-              "name" : "Separators"
+              "name" : "Dividers"
             },
             {
-              "detail" : "Items between “New group” dividers are drawn on a shared rounded backing.",
+              "detail" : "Elements between “New group” dividers are drawn on a shared rounded backing.",
               "name" : "Capsules by group"
             },
             {
@@ -80,8 +92,8 @@
       ],
       "steps" : [
         "Open Settings → “What to Show” → “Menu Bar”.",
-        "Click an item in “Order” to see its settings: number, ring or bar, threshold.",
-        "Drag a separator onto an item and it lands right after it. Without a mouse — “Further left” and “Further right”."
+        "Click an element in “Order” to see its settings: number, ring or bar, threshold.",
+        "Drag a divider onto an element and it lands right after it. Without a mouse — “Further left” and “Further right”."
       ],
       "summary" : "The icon and numbers next to the clock: limits, sessions waiting for an answer, project problems — whatever you put there.",
       "title" : "Menu Bar"
@@ -100,6 +112,10 @@
             {
               "detail" : "Clicking a block’s header collapses it; the panel remembers this.",
               "name" : "Collapse a block"
+            },
+            {
+              "detail" : "The “Collapse” row at the bottom of the panel keeps limits, sessions and projects; “More” brings the other blocks back.",
+              "name" : "More"
             },
             {
               "detail" : "Theme, glass background, text size, width and density — Settings → “Appearance”.",
@@ -167,16 +183,36 @@
         {
           "facts" : [
             {
-              "detail" : "The session with a countdown to the reset and a forecast from the last 30 min, the week, weeks per model, extra usage.",
+              "detail" : "The main limit is a big number over a bar, with the pace per hour and the time to the reset beside it; the week, the weeks by model and extra usage are under it. A forecast appears only when the limit will run out before the reset.",
               "name" : "“Limits” block"
             },
             {
-              "detail" : "Codex, Copilot, Gemini, Cursor and API spend — in the same cards as Claude.",
+              "detail" : "The week shows whether you spend the limit faster or slower than an even spend: a mark on the bar and a line under it.",
+              "name" : "Week"
+            },
+            {
+              "detail" : "Bars or rings — chosen on the “AI limits” page.",
+              "name" : "Limits look"
+            },
+            {
+              "detail" : "Codex, Copilot, Gemini, Antigravity, Cursor and API spend — in the same cards as Claude.",
               "name" : "Other AI"
+            },
+            {
+              "detail" : "Antigravity passes its quota and plan itself: Settings → “AI Services” → Gemini → “Turn on Antigravity quota”, then open agy once.",
+              "name" : "Antigravity"
+            },
+            {
+              "detail" : "Settings → “AI Services” → Claude Code → “Other Claude accounts”: each account’s limits are a separate card in the panel.",
+              "name" : "Other Claude accounts"
             },
             {
               "detail" : "An estimate from Claude Code's logs: project shares and the most expensive session for the session, today, the week.",
               "name" : "Usage by project"
+            },
+            {
+              "detail" : "“Usage History…” under the usage by project opens a window: Claude Code tokens by day for the last weeks.",
+              "name" : "Usage History"
             },
             {
               "detail" : "Once per window at 50/80/95% (thresholds in Settings) and when the limit is back; optionally to Telegram too.",
@@ -187,7 +223,7 @@
               "name" : "Widget"
             },
             {
-              "detail" : "If the session is more than 90 percent used, a background task asks: start now or after the reset.",
+              "detail" : "If the session is more than 90 percent used, a background task asks: start now or after the reset. “Pause background tasks” on the “AI limits” page stops running tasks at the threshold and continues them after the reset.",
               "name" : "Background and limit"
             }
           ],
@@ -234,7 +270,7 @@
               "name" : "Log"
             },
             {
-              "detail" : "Background task: stop now.",
+              "detail" : "A background task: the first click asks “Stop?”, the second one stops it.",
               "name" : "Stop"
             },
             {
@@ -244,6 +280,10 @@
             {
               "detail" : "Their sessions also show “running / waiting / done” when AI Hub Bar's hook is installed on their page under “AI Services”. Codex runs a new hook only after review: type /hooks in codex and trust it. Without the hook — only recent conversations, without a state.",
               "name" : "Codex and Copilot"
+            },
+            {
+              "detail" : "Sessions that ended recently are folded under this line — you can continue them.",
+              "name" : "Recently finished"
             }
           ],
           "monospaced" : false,
@@ -295,7 +335,7 @@
         {
           "facts" : [
             {
-              "detail" : "Health dot, branch, uncommitted files, open PRs (colour — CI), last activity.",
+              "detail" : "Health dot, branch, uncommitted files, open PRs (color — CI), last activity.",
               "name" : "Row"
             },
             {
@@ -311,7 +351,7 @@
               "name" : "Finish"
             },
             {
-              "detail" : "If Claude already works in the project, a new task goes to a separate worktree .claude/worktrees/cb-… on a fresh branch from origin/main.",
+              "detail" : "If Claude is already working in the project, a new task goes to a separate worktree .claude/worktrees/cb-… on a fresh branch from origin/main.",
               "name" : "Folder in use"
             },
             {
@@ -341,7 +381,7 @@
               "name" : "Compare"
             },
             {
-              "detail" : "The profile's stages, comma-separated; a stage changes with a button in an expanded project. Words, duration, reading time and pages are counted on the main file (.md, .txt, .rtf, .docx).",
+              "detail" : "The profile's stages, comma-separated; a stage changes with a button in an expanded project. Words, duration, reading time and pages are counted from the main file (.md, .txt, .rtf, .docx).",
               "name" : "Stages and metrics"
             }
           ],
@@ -439,6 +479,14 @@
               "name" : "Ears"
             },
             {
+              "detail" : "“Claude’s progress in the sessions ear” on the module’s page: the ear shows what Claude is doing now, not only the number of sessions.",
+              "name" : "Progress"
+            },
+            {
+              "detail" : "An ear can show the fullest limit of another AI.",
+              "name" : "Other AI"
+            },
+            {
               "detail" : "Hover over the notch to open a card with limits and what Claude is doing.",
               "name" : "Card"
             },
@@ -485,7 +533,7 @@
               "name" : "⌥⇧"
             },
             {
-              "detail" : "In the language's menu in the menu bar, choose which layouts are fixed into which, for example only EN → RU.",
+              "detail" : "In the language menu in the menu bar, choose which layout gets fixed to which automatically, for example only EN → RU.",
               "name" : "Directions"
             },
             {
@@ -515,7 +563,7 @@
         {
           "facts" : [
             {
-              "detail" : "Processor, memory, disk, network, battery and the hungriest apps; alerts about load, memory, space and charge.",
+              "detail" : "CPU, memory, disk, network, battery and the hungriest apps; alerts about load, memory, space and charge.",
               "name" : "Mac Resources"
             },
             {
@@ -535,7 +583,7 @@
               "name" : "Notes"
             },
             {
-              "detail" : "Your own buttons: a script in the background or in Terminal, a macOS «Shortcuts» shortcut, a link, file, folder or app.",
+              "detail" : "Your own buttons: a script in the background or in Terminal, a macOS “Shortcuts” shortcut, a link, file, folder or app.",
               "name" : "Quick Commands"
             }
           ],
@@ -617,6 +665,18 @@
             {
               "detail" : "Subscription limits; usage by project.",
               "name" : "--usage · --token-usage"
+            },
+            {
+              "detail" : "The agents and keys found; the limits of other AIs.",
+              "name" : "--services · --services limits"
+            },
+            {
+              "detail" : "Open a window in the running app.",
+              "name" : "--app-command help|settings|assistant|usage-history|quick-prompt"
+            },
+            {
+              "detail" : "Save all settings to a file.",
+              "name" : "--export-settings <file.claudepult>"
             }
           ],
           "monospaced" : true,

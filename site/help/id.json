@@ -29,6 +29,18 @@
               "name" : "⌘Q"
             },
             {
+              "detail" : "Membuka panel dari app mana pun. Pintasannya ada di Pengaturan → “Pintasan” → “Buka panel”.",
+              "name" : "⌃⌥B"
+            },
+            {
+              "detail" : "AI Hub Bar memeriksa versi baru sendiri dan jendela pembaruan menampilkan apa yang berubah (Pengaturan → “Umum” → “Pembaruan”). “Versi beta” — menerima build lebih awal daripada yang lain.",
+              "name" : "Pembaruan"
+            },
+            {
+              "detail" : "Setelah pembaruan, kartu berisi apa yang berubah muncul satu kali di bagian atas panel; “Mengerti” menghilangkannya.",
+              "name" : "Yang Baru"
+            },
+            {
               "detail" : "Jika lebih dari satu profil aktif, ada pengalih di atas panel. Profil diatur di Pengaturan → «Profil»; semua pengaturan bisa disimpan ke berkas .claudepult (Umum → «Ekspor Pengaturan…»); klik dua kali berkas itu untuk mengimpornya.",
               "name" : "Profil"
             }
@@ -102,6 +114,10 @@
               "name" : "Ciutkan blok"
             },
             {
+              "detail" : "Baris «Ciutkan» di bawah panel menyisakan batas, sesi, dan proyek; «Lainnya» mengembalikan blok lainnya.",
+              "name" : "Lainnya"
+            },
+            {
               "detail" : "Tema, latar kaca, ukuran teks, lebar, dan kerapatan — Pengaturan → «Tampilan».",
               "name" : "Tampilan"
             }
@@ -167,16 +183,36 @@
         {
           "facts" : [
             {
-              "detail" : "Sesi dengan hitung mundur ke reset dan prakiraan berdasarkan laju 30 mnt terakhir, minggu, minggu per model, extra usage.",
+              "detail" : "Batas utama berupa angka besar di atas bilah, dengan laju per jam dan waktu hingga reset di sampingnya; minggu, minggu per model, dan extra usage ada di bawahnya. Prakiraan muncul hanya jika batas akan habis sebelum reset.",
               "name" : "Blok «Batas»"
             },
             {
-              "detail" : "Codex, Copilot, Gemini, Cursor, dan pemakaian API — dalam kartu yang sama seperti Claude.",
+              "detail" : "Minggu menunjukkan apakah Anda memakai batas lebih cepat atau lebih lambat dari pemakaian merata: tanda pada bilah dan satu baris di bawahnya.",
+              "name" : "Minggu"
+            },
+            {
+              "detail" : "Bilah atau cincin — dipilih di halaman “Batas AI”.",
+              "name" : "Tampilan batas"
+            },
+            {
+              "detail" : "Codex, Copilot, Gemini, Antigravity, Cursor, dan pengeluaran API — dalam kartu yang sama seperti Claude.",
               "name" : "AI lain"
+            },
+            {
+              "detail" : "Antigravity sendiri meneruskan kuota dan paketnya: Pengaturan → “Layanan AI” → Gemini → “Nyalakan kuota Antigravity”, lalu buka agy satu kali.",
+              "name" : "Antigravity"
+            },
+            {
+              "detail" : "Pengaturan → “Layanan AI” → Claude Code → “Akun Claude lainnya”: batas tiap akun tampil sebagai kartu tersendiri di panel.",
+              "name" : "Akun Claude lainnya"
             },
             {
               "detail" : "Perkiraan dari log Claude Code: porsi proyek dan sesi paling mahal untuk sesi, hari ini, minggu ini.",
               "name" : "Pemakaian per proyek"
+            },
+            {
+              "detail" : "“Riwayat pemakaian…” di bawah pemakaian per proyek membuka jendela: token Claude Code per hari selama beberapa minggu terakhir.",
+              "name" : "Riwayat pemakaian"
             },
             {
               "detail" : "Sekali per jendela pada 50/80/95 persen (ambang di Pengaturan) dan saat batas kembali; bila mau, juga ke Telegram.",
@@ -187,7 +223,7 @@
               "name" : "Widget"
             },
             {
-              "detail" : "Jika sesi terpakai lebih dari 90 persen, tugas latar belakang bertanya: mulai sekarang atau setelah reset.",
+              "detail" : "Jika sesi terpakai lebih dari 90 persen, tugas latar belakang bertanya: mulai sekarang atau setelah reset. “Jeda tugas latar belakang” di halaman “Batas AI” menghentikan tugas yang berjalan pada ambang dan melanjutkannya setelah reset.",
               "name" : "Latar belakang dan batas"
             }
           ],
@@ -234,7 +270,7 @@
               "name" : "Log"
             },
             {
-              "detail" : "Tugas latar belakang: hentikan sekarang.",
+              "detail" : "Tugas latar belakang: klik pertama bertanya “Hentikan?”, klik kedua menghentikannya.",
               "name" : "Hentikan"
             },
             {
@@ -244,6 +280,10 @@
             {
               "detail" : "Sesi mereka juga menampilkan “bekerja / menunggu / selesai” jika hook AI Hub Bar dipasang di halamannya pada “Layanan AI”. Codex menjalankan hook baru hanya setelah ditinjau: ketik /hooks di codex lalu percayai. Tanpa hook, hanya percakapan terbaru tanpa status.",
               "name" : "Codex dan Copilot"
+            },
+            {
+              "detail" : "Sesi yang baru saja selesai dilipat di bawah baris ini — Anda dapat melanjutkannya.",
+              "name" : "Baru selesai"
             }
           ],
           "monospaced" : false,
@@ -329,7 +369,7 @@
               "name" : "Sumber «folder»"
             },
             {
-              "detail" : "Kartu proyek berupa teks biasa: «Tahap: naskah», «Tenggat: 2026-11-05», «Publikasi: 2026-11-05 18:00», «Format: …», «Berkas utama: naskah.md», «Platform: YouTube». Bisa diedit manual kapan saja.",
+              "detail" : "Kartu proyek berupa teks biasa: «Tahap: naskah», «Tenggat: 2026-11-05», «Publikasi: 2026-11-05 18:00», «Format: …», «Berkas utama: naskah.md», «Platform: YouTube». Bisa diedit manual.",
               "name" : "proyek.md"
             },
             {
@@ -439,6 +479,14 @@
               "name" : "Telinga"
             },
             {
+              "detail" : "“Progres Claude di telinga sesi” di halaman modul: telinga menampilkan apa yang sedang dikerjakan Claude, bukan hanya jumlah sesi.",
+              "name" : "Progres"
+            },
+            {
+              "detail" : "Telinga dapat menampilkan batas AI lain yang paling penuh.",
+              "name" : "AI lain"
+            },
+            {
               "detail" : "Arahkan kursor ke notch — kartu berisi batas dan apa yang dikerjakan Claude akan terbuka.",
               "name" : "Kartu"
             },
@@ -485,7 +533,7 @@
               "name" : "⌥⇧"
             },
             {
-              "detail" : "Di menu bahasa pada bilah menu, pilih dari tata letak mana ke mana yang diperbaiki otomatis, misalnya hanya EN → RU.",
+              "detail" : "Di menu bahasa pada bar menu, pilih dari tata letak mana ke mana yang diperbaiki otomatis, misalnya hanya EN → RU.",
               "name" : "Arah"
             },
             {
@@ -531,7 +579,7 @@
               "name" : "Riwayat papan klip"
             },
             {
-              "detail" : "Catatan Markdown langsung di panel: tab untuk file .md biasa di folder yang bisa dibuka editor apa pun.",
+              "detail" : "Catatan Markdown langsung di panel: tab, file .md biasa di folder yang bisa dibuka editor apa pun.",
               "name" : "Catatan"
             },
             {
@@ -607,7 +655,7 @@
               "name" : "--hooks status|install|uninstall"
             },
             {
-              "detail" : "Buka saat login.",
+              "detail" : "Buka saat masuk.",
               "name" : "--login-item status|on|off"
             },
             {
@@ -617,6 +665,18 @@
             {
               "detail" : "Batas langganan; pemakaian per proyek.",
               "name" : "--usage · --token-usage"
+            },
+            {
+              "detail" : "Agen dan kunci yang ditemukan; batas AI lain.",
+              "name" : "--services · --services limits"
+            },
+            {
+              "detail" : "Membuka jendela di app yang sedang berjalan.",
+              "name" : "--app-command help|settings|assistant|usage-history|quick-prompt"
+            },
+            {
+              "detail" : "Simpan semua pengaturan ke berkas.",
+              "name" : "--export-settings <berkas.claudepult>"
             }
           ],
           "monospaced" : true,

@@ -27,7 +27,7 @@
  "Порог %lld %%": "Schwelle %lld %%",
  "Сервер лимитов просит запрашивать реже": "Der Limit-Server bittet um weniger Anfragen",
  "Сессии Claude Code": "Claude-Code-Sitzungen",
- "Сессии Claude не отслеживаются: hooks не установлены.": "Claude-Sitzungen werden nicht verfolgt: Hooks sind nicht installiert.",
+ "Сессии Claude не отслеживаются: hooks не установлены.": "Claude-Sitzungen werden nicht erfasst: Hooks sind nicht installiert.",
  "Сессий Claude Code сейчас нет": "Gerade keine Claude-Code-Sitzungen",
  "Сессия (5 ч)": "Sitzung (5 h)",
  "Сессия Claude Code истекла (HTTP %lld): claude → /login": "Die Claude-Code-Sitzung ist abgelaufen (HTTP %lld): claude → /login",

@@ -29,6 +29,18 @@
               "name" : "⌘Q"
             },
             {
+              "detail" : "Ouvrir le panneau depuis n’importe quelle app. Le raccourci se trouve dans Réglages → « Raccourcis » → « Ouvrir le panneau ».",
+              "name" : "⌃⌥B"
+            },
+            {
+              "detail" : "AI Hub Bar recherche lui-même les nouvelles versions et la fenêtre de mise à jour montre ce qui a changé (Réglages → « Général » → « Mises à jour »). « Versions bêta » : recevoir les versions avant tout le monde.",
+              "name" : "Mises à jour"
+            },
+            {
+              "detail" : "Après une mise à jour, une carte indiquant ce qui a changé apparaît une fois en haut du panneau ; « Compris » la retire.",
+              "name" : "Nouveautés"
+            },
+            {
               "detail" : "Avec plus d'un profil activé, un sélecteur apparaît en haut du panneau. Les profils se règlent dans Réglages → «Profils» ; tous les réglages s'enregistrent dans un fichier .claudepult (Général → «Exporter les réglages…») ; un double-clic sur ce fichier l'importe.",
               "name" : "Profils"
             }
@@ -102,6 +114,10 @@
               "name" : "Réduire un bloc"
             },
             {
+              "detail" : "La ligne « Réduire » en bas du panneau garde les limites, les sessions et les projets ; « Plus » ramène les autres blocs.",
+              "name" : "Plus"
+            },
+            {
               "detail" : "Thème, fond en verre, taille du texte, largeur et densité — Réglages → « Apparence ».",
               "name" : "Apparence"
             }
@@ -115,7 +131,7 @@
         "Faites glisser un bloc sur un autre ou cliquez sur ⌃ / ⌄.",
         "À droite, vous voyez l’aspect actuel du panneau."
       ],
-      "summary" : "Le panneau s’ouvre d’un clic sur ✦ : les blocs des modules du profil actuel de haut en bas, et la recherche.",
+      "summary" : "Le panneau s’ouvre d’un clic sur ✦ : les blocs des modules du profil actif de haut en bas, et la recherche.",
       "title" : "Panneau"
     },
     {
@@ -153,7 +169,7 @@
         }
       ],
       "steps" : [
-        "Réglages → « Quoi afficher » : chaque module a deux interrupteurs — son bloc dans le panneau et ses éléments dans la barre des menus. « Ensemble prêt » active plusieurs modules d’un coup.",
+        "Réglages → « Quoi afficher » : chaque module a deux interrupteurs — son bloc dans le panneau et ses éléments dans la barre des menus. « Ensemble prédéfini » active plusieurs modules d’un coup.",
         "Cliquez sur le nom d’un module pour ouvrir sa page : l’interrupteur et tous ses réglages."
       ],
       "summary" : "Un module est une fonction d’AI Hub Bar. Le profil décide quels modules apparaissent dans le panneau et dans quel ordre.",
@@ -167,16 +183,36 @@
         {
           "facts" : [
             {
-              "detail" : "La session avec un compte à rebours avant la réinitialisation et une prévision selon le rythme des 30 dernières minutes, la semaine, les semaines par modèle, extra usage.",
+              "detail" : "La limite principale est un grand nombre au-dessus d’une barre, avec à côté le rythme par heure et le temps avant la réinitialisation ; la semaine, les semaines par modèle et l’extra usage sont en dessous. Une prévision n’apparaît que si la limite doit s’épuiser avant la réinitialisation.",
               "name" : "Bloc «Limites»"
             },
             {
-              "detail" : "Codex, Copilot, Gemini, Cursor et la consommation d’API — sous forme des mêmes cartes que Claude.",
+              "detail" : "La semaine montre si vous dépensez la limite plus vite ou moins vite qu’une dépense régulière : un repère sur la barre et une ligne dessous.",
+              "name" : "Semaine"
+            },
+            {
+              "detail" : "Barres ou anneaux — à choisir sur la page « Limites d'IA ».",
+              "name" : "Affichage des limites"
+            },
+            {
+              "detail" : "Codex, Copilot, Gemini, Antigravity, Cursor et la consommation d’API — sous forme des mêmes cartes que Claude.",
               "name" : "Autres IA"
+            },
+            {
+              "detail" : "Antigravity transmet lui-même le quota et le forfait : Réglages → « Services d'IA » → Gemini → « Activer le quota Antigravity », puis ouvrez agy une fois.",
+              "name" : "Antigravity"
+            },
+            {
+              "detail" : "Réglages → « Services d'IA » → Claude Code → « Autres comptes Claude » : les limites de chaque compte forment une carte à part dans le panneau.",
+              "name" : "Autres comptes Claude"
             },
             {
               "detail" : "Une estimation d'après les journaux de Claude Code : parts des projets et la session la plus coûteuse pour la session, aujourd'hui, la semaine.",
               "name" : "Consommation par projet"
+            },
+            {
+              "detail" : "« Historique de consommation… » sous la consommation par projet ouvre une fenêtre : les tokens de Claude Code par jour sur les dernières semaines.",
+              "name" : "Historique de consommation"
             },
             {
               "detail" : "Une fois par fenêtre à 50/80/95 % (seuils dans Réglages) et quand la limite revient ; si vous le souhaitez, aussi sur Telegram.",
@@ -187,7 +223,7 @@
               "name" : "Widget"
             },
             {
-              "detail" : "Si la session est utilisée à plus de 90 %, la tâche en arrière-plan demande : lancer maintenant ou après la réinitialisation.",
+              "detail" : "Si la session est utilisée à plus de 90 %, la tâche en arrière-plan demande : lancer maintenant ou après la réinitialisation. « Mettre en pause les tâches en arrière-plan », sur la page « Limites d'IA », arrête au seuil les tâches en cours et les reprend après la réinitialisation.",
               "name" : "Arrière-plan et limite"
             }
           ],
@@ -234,7 +270,7 @@
               "name" : "Journal"
             },
             {
-              "detail" : "Tâche en arrière-plan : arrêter maintenant.",
+              "detail" : "Tâche en arrière-plan : le premier clic demande « Arrêter ? », le second l’arrête.",
               "name" : "Arrêter"
             },
             {
@@ -242,8 +278,12 @@
               "name" : "Suivi des sessions"
             },
             {
-              "detail" : "Leurs sessions affichent aussi « en cours / en attente / terminé » si le hook d'AI Hub Bar est installé sur leur page dans « Services IA ». Codex n'exécute un nouveau hook qu'après vérification : tapez /hooks dans codex et faites-lui confiance. Sans hook, seulement les conversations récentes, sans état.",
+              "detail" : "Leurs sessions affichent aussi « en cours / en attente / terminé » si le hook d'AI Hub Bar est installé sur leur page dans « Services d'IA ». Codex n'exécute un nouveau hook qu'après vérification : tapez /hooks dans codex et faites-lui confiance. Sans hook, seulement les conversations récentes, sans état.",
               "name" : "Codex et Copilot"
+            },
+            {
+              "detail" : "Les sessions terminées récemment sont rangées sous cette ligne — vous pouvez les reprendre.",
+              "name" : "Terminées récemment"
             }
           ],
           "monospaced" : false,
@@ -401,8 +441,8 @@
               "name" : "Rapport maintenant"
             },
             {
-              "detail" : "Synthèse sans IA des dernières 24 h sur Telegram.",
-              "name" : "Synthèse rapide"
+              "detail" : "Résumé sans IA des dernières 24 h sur Telegram.",
+              "name" : "Résumé rapide"
             },
             {
               "detail" : "Ouvrir _daily-report/reports/latest.html.",
@@ -437,6 +477,14 @@
             {
               "detail" : "À gauche et à droite de l’encoche — une limite et les sessions, avec le résumé « seulement sur l’île » ; le contenu exact se choisit sur la page du module.",
               "name" : "Oreilles"
+            },
+            {
+              "detail" : "« Progression de Claude dans l’oreille des sessions » sur la page du module : l’oreille montre ce que Claude fait en ce moment, pas seulement le nombre de sessions.",
+              "name" : "Progression"
+            },
+            {
+              "detail" : "Une oreille peut afficher la limite la plus remplie d’une autre IA.",
+              "name" : "Autres IA"
             },
             {
               "detail" : "Survolez l’encoche avec le pointeur : une carte s’ouvre avec les limites et ce que fait Claude.",
@@ -485,7 +533,7 @@
               "name" : "⌥⇧"
             },
             {
-              "detail" : "Dans le menu de la langue, dans la barre des menus, choisissez d'une disposition à l'autre ce qui est corrigé automatiquement, par exemple seulement EN → RU.",
+              "detail" : "Dans le menu de la langue, dans la barre des menus, vous pouvez choisir de quelle disposition vers quelle autre corriger automatiquement, par exemple seulement EN → RU.",
               "name" : "Directions"
             },
             {
@@ -617,6 +665,18 @@
             {
               "detail" : "Limites de l'abonnement ; consommation par projet.",
               "name" : "--usage · --token-usage"
+            },
+            {
+              "detail" : "Les agents et les clés trouvés ; les limites des autres IA.",
+              "name" : "--services · --services limits"
+            },
+            {
+              "detail" : "Ouvrir une fenêtre dans l’app en cours d’exécution.",
+              "name" : "--app-command help|settings|assistant|usage-history|quick-prompt"
+            },
+            {
+              "detail" : "Enregistrer tous les réglages dans un fichier.",
+              "name" : "--export-settings <fichier.claudepult>"
             }
           ],
           "monospaced" : true,

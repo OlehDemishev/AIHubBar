@@ -17,7 +17,7 @@
         {
           "facts" : [
             {
-              "detail" : "Atualizar os projetos com o painel aberto.",
+              "detail" : "Atualizar os projetos no painel aberto.",
               "name" : "⌘R"
             },
             {
@@ -27,6 +27,18 @@
             {
               "detail" : "Sair do AI Hub Bar.",
               "name" : "⌘Q"
+            },
+            {
+              "detail" : "Abrir o painel a partir de qualquer app. O atalho fica em Ajustes → “Atalhos” → “Abrir o painel”.",
+              "name" : "⌃⌥B"
+            },
+            {
+              "detail" : "O AI Hub Bar procura novas versões sozinho e a janela de atualização mostra o que mudou (Ajustes → “Geral” → “Atualizações”). “Versões beta”: receber as compilações antes de todo mundo.",
+              "name" : "Atualizações"
+            },
+            {
+              "detail" : "Depois de uma atualização, aparece uma vez no topo do painel um cartão com o que mudou; “Entendi” o remove.",
+              "name" : "Novidades"
             },
             {
               "detail" : "Com mais de um perfil ativado, há um seletor no topo do painel. Os perfis são configurados em Ajustes → «Perfis»; todos os ajustes podem ser salvos em um arquivo .claudepult (Geral → «Exportar ajustes…»); um clique duplo nesse arquivo o importa.",
@@ -102,6 +114,10 @@
               "name" : "Recolher um bloco"
             },
             {
+              "detail" : "A linha «Recolher» no fim do painel deixa os limites, as sessões e os projetos; «Mais» traz os outros blocos de volta.",
+              "name" : "Mais"
+            },
+            {
               "detail" : "Tema, fundo de vidro, tamanho do texto, largura e densidade — Ajustes → «Aparência».",
               "name" : "Aparência"
             }
@@ -153,8 +169,8 @@
         }
       ],
       "steps" : [
-        "Ajustes → «O que mostrar»: cada módulo tem duas chaves — o bloco no painel e os elementos na barra de menus. «Conjunto pronto» ativa vários módulos de uma vez.",
-        "Clique no nome do módulo para abrir a página dele: a chave e todos os ajustes."
+        "Ajustes → «O que mostrar»: cada módulo tem dois interruptores — o bloco no painel e os elementos na barra de menus. «Conjunto pronto» ativa vários módulos de uma vez.",
+        "Clique no nome do módulo para abrir a página dele: o interruptor e todos os ajustes."
       ],
       "summary" : "Um módulo é um recurso do AI Hub Bar. O perfil decide quais módulos aparecem no painel e em que ordem.",
       "title" : "Módulos e perfis"
@@ -167,19 +183,39 @@
         {
           "facts" : [
             {
-              "detail" : "A sessão com contagem até o reinício e previsão pelo ritmo dos últimos 30 min, a semana, semanas por modelo, extra usage.",
+              "detail" : "O limite principal é um número grande sobre uma barra, com o ritmo por hora e o tempo até o reinício ao lado; a semana, as semanas por modelo e o extra usage ficam abaixo. A previsão aparece só quando o limite vai acabar antes do reinício.",
               "name" : "Bloco «Limites»"
             },
             {
-              "detail" : "Codex, Copilot, Gemini, Cursor e o gasto de API — nos mesmos cartões que o Claude.",
+              "detail" : "A semana mostra se você gasta o limite mais rápido ou mais devagar que um gasto uniforme: uma marca na barra e uma linha abaixo.",
+              "name" : "Semana"
+            },
+            {
+              "detail" : "Barras ou anéis: escolha na página “Limites de IA”.",
+              "name" : "Aparência dos limites"
+            },
+            {
+              "detail" : "Codex, Copilot, Gemini, Antigravity, Cursor e o gasto de API — nos mesmos cartões que o Claude.",
               "name" : "Outras IAs"
+            },
+            {
+              "detail" : "O próprio Antigravity passa a cota e o plano: Ajustes → “Serviços de IA” → Gemini → “Ativar a cota do Antigravity”; depois abra o agy uma vez.",
+              "name" : "Antigravity"
+            },
+            {
+              "detail" : "Ajustes → “Serviços de IA” → Claude Code → “Outras contas do Claude”: os limites de cada conta ficam em um cartão separado no painel.",
+              "name" : "Outras contas do Claude"
             },
             {
               "detail" : "Uma estimativa a partir dos registros do Claude Code: proporção por projeto e a sessão mais cara na sessão, hoje, na semana.",
               "name" : "Uso por projeto"
             },
             {
-              "detail" : "Uma vez por janela em 50/80/95 % (limites em Ajustes) e quando o limite volta; se quiser, também no Telegram.",
+              "detail" : "“Histórico de consumo…”, abaixo do uso por projeto, abre uma janela: os tokens do Claude Code por dia nas últimas semanas.",
+              "name" : "Histórico de consumo"
+            },
+            {
+              "detail" : "Uma vez por janela em 50/80/95 % (limiares em Ajustes) e quando o limite volta; se quiser, também no Telegram.",
               "name" : "Notificações"
             },
             {
@@ -187,7 +223,7 @@
               "name" : "Widget"
             },
             {
-              "detail" : "Se mais de 90 por cento da sessão estiver usada, a tarefa em segundo plano pergunta: iniciar agora ou depois do reinício.",
+              "detail" : "Se mais de 90 por cento da sessão estiver usada, a tarefa em segundo plano pergunta: iniciar agora ou depois do reinício. “Pausar tarefas em segundo plano”, na página “Limites de IA”, para no limiar as tarefas em andamento e as continua depois do reinício.",
               "name" : "Segundo plano e limite"
             }
           ],
@@ -222,7 +258,7 @@
               "name" : "Mostrar"
             },
             {
-              "detail" : "Onde rodar: uma janela do Terminal (você pode responder ao Claude) ou claude -p sem janela (só ações permitidas, limite de tempo, resultado por notificação e no Telegram). «Lembrar» ou um padrão, em Ajustes.",
+              "detail" : "Onde rodar: uma janela do Terminal (você pode responder ao Claude) ou claude -p sem janela (só ações permitidas, limite de tempo, resultado por notificação e no Telegram). «Lembrar escolha» ou um padrão, em Ajustes.",
               "name" : "Terminal / Segundo plano"
             },
             {
@@ -234,7 +270,7 @@
               "name" : "Registro"
             },
             {
-              "detail" : "Tarefa em segundo plano: parar agora.",
+              "detail" : "Tarefa em segundo plano: o primeiro clique pergunta “Parar?” e o segundo a para.",
               "name" : "Parar"
             },
             {
@@ -244,6 +280,10 @@
             {
               "detail" : "As sessões deles também mostram “trabalhando / aguardando / pronto” se o hook do AI Hub Bar estiver instalado na página deles em “Serviços de IA”. O Codex só executa um hook novo após revisão: digite /hooks no codex e confie nele. Sem o hook, apenas as conversas recentes, sem estado.",
               "name" : "Codex e Copilot"
+            },
+            {
+              "detail" : "As sessões que terminaram há pouco ficam recolhidas sob esta linha: você pode continuá-las.",
+              "name" : "Encerradas recentemente"
             }
           ],
           "monospaced" : false,
@@ -252,7 +292,7 @@
       ],
       "steps" : [
         "Ative o acompanhamento na página “Sessões de agentes”.",
-        "Responda às solicitações de permissão direto da notificação ou da linha da sessão."
+        "Responda aos pedidos de permissão direto da notificação ou da linha da sessão."
       ],
       "summary" : "Todas as sessões do Claude Code neste Mac: o que fazem, quais aguardam resposta, as tarefas em segundo plano e a fila.",
       "title" : "Sessões de agentes"
@@ -386,7 +426,7 @@
       "steps" : [
         "Ative o calendário no perfil — ou pelo botão «Ativar no perfil» na linha «Próximos» da página «O que mostrar»."
       ],
-      "summary" : "Prazos e publicações dos cartões de projeto e do plano de conteúdo — para a semana seguinte e na janela «Calendário».",
+      "summary" : "Prazos e publicações das fichas de projeto e do plano de conteúdo — para a semana seguinte e na janela «Calendário».",
       "title" : "Próximos e calendário"
     },
     {
@@ -439,11 +479,19 @@
               "name" : "Laterais"
             },
             {
+              "detail" : "“Progresso do Claude na lateral de sessões”, na página do módulo: a lateral mostra o que o Claude está fazendo agora, não só o número de sessões.",
+              "name" : "Progresso"
+            },
+            {
+              "detail" : "Uma lateral pode mostrar o limite mais cheio de outra IA.",
+              "name" : "Outras IAs"
+            },
+            {
               "detail" : "Passe o ponteiro sobre o notch para abrir um cartão com os limites e o que o Claude está fazendo.",
               "name" : "Cartão"
             },
             {
-              "detail" : "Uma solicitação de permissão aparece na ilha com «Permitir» e «Recusar»; ⌃⌥Y / ⌃⌥N pelo teclado, se ativado.",
+              "detail" : "Um pedido de permissão aparece na ilha com «Permitir» e «Recusar»; ⌃⌥Y / ⌃⌥N pelo teclado, se ativado.",
               "name" : "Solicitações"
             },
             {
@@ -565,7 +613,7 @@
               "name" : "Telegram"
             },
             {
-              "detail" : "As solicitações de permissão do Claude podem ser aceitas ou recusadas com botões no Telegram — um bot separado, página «Sessões de agentes».",
+              "detail" : "Os pedidos de permissão do Claude podem ser aceitos ou recusados com botões no Telegram — um bot separado, página «Sessões de agentes».",
               "name" : "Respostas pelo Telegram"
             },
             {
@@ -617,6 +665,18 @@
             {
               "detail" : "Limites da assinatura; uso por projeto.",
               "name" : "--usage · --token-usage"
+            },
+            {
+              "detail" : "Os agentes e as chaves encontrados; os limites de outras IAs.",
+              "name" : "--services · --services limits"
+            },
+            {
+              "detail" : "Abrir uma janela no app em execução.",
+              "name" : "--app-command help|settings|assistant|usage-history|quick-prompt"
+            },
+            {
+              "detail" : "Salvar todos os ajustes em um arquivo.",
+              "name" : "--export-settings <arquivo.claudepult>"
             }
           ],
           "monospaced" : true,

@@ -29,6 +29,18 @@
               "name" : "⌘Q"
             },
             {
+              "detail" : "Otwórz panel z dowolnej aplikacji. Skrót jest w Ustawieniach → „Skróty” → „Otwieraj panel”.",
+              "name" : "⌃⌥B"
+            },
+            {
+              "detail" : "AI Hub Bar sam sprawdza nowe wersje, a okno aktualizacji pokazuje, co się zmieniło (Ustawienia → „Ogólne” → „Aktualizacje”). „Wersje beta” — otrzymuj kompilacje wcześniej niż inni.",
+              "name" : "Aktualizacje"
+            },
+            {
+              "detail" : "Po aktualizacji u góry panelu raz pojawia się karta z tym, co się zmieniło; „Rozumiem” ją usuwa.",
+              "name" : "Co nowego"
+            },
+            {
               "detail" : "Gdy włączony jest więcej niż jeden profil, na górze panelu jest przełącznik. Profile ustawia się w Ustawieniach → „Profile”; wszystkie ustawienia można zapisać do pliku .claudepult (Ogólne → „Eksportuj ustawienia…”); dwuklik na takim pliku go importuje.",
               "name" : "Profile"
             }
@@ -102,6 +114,10 @@
               "name" : "Zwijanie bloku"
             },
             {
+              "detail" : "Wiersz „Zwiń” na dole panelu zostawia limity, sesje i projekty; „Więcej” przywraca pozostałe bloki.",
+              "name" : "Więcej"
+            },
+            {
               "detail" : "Motyw, szklane tło, rozmiar tekstu, szerokość i gęstość — Ustawienia → „Wygląd”.",
               "name" : "Wygląd"
             }
@@ -153,7 +169,7 @@
         }
       ],
       "steps" : [
-        "Ustawienia → „Co pokazywać”: każdy moduł ma dwa przełączniki — blok w panelu i elementy w pasku menu. „Gotowy zestaw” włącza kilka modułów naraz.",
+        "Ustawienia → „Co pokazywać”: każdy moduł ma dwa przełączniki — blok w panelu i elementy na pasku menu. „Gotowy zestaw” włącza kilka modułów naraz.",
         "Kliknij nazwę modułu, aby otworzyć jego stronę: przełącznik i wszystkie ustawienia."
       ],
       "summary" : "Moduł to jedna funkcja AI Hub Bar. Profil decyduje, które moduły widać w panelu i w jakiej kolejności.",
@@ -167,16 +183,36 @@
         {
           "facts" : [
             {
-              "detail" : "Sesja z odliczaniem do resetu i prognozą według tempa z ostatnich 30 min, tydzień, tygodnie według modeli, extra usage.",
+              "detail" : "Główny limit to duża liczba nad paskiem, obok tempo na godzinę i czas do resetu; tydzień, tygodnie według modeli i extra usage są pod nim. Prognoza pojawia się tylko wtedy, gdy limit skończy się przed resetem.",
               "name" : "Blok „Limity”"
             },
             {
-              "detail" : "Codex, Copilot, Gemini, Cursor i zużycie API — w takich samych kartach jak Claude.",
+              "detail" : "Tydzień pokazuje, czy zużywasz limit szybciej, czy wolniej niż przy równym zużyciu: znacznik na pasku i wiersz pod nim.",
+              "name" : "Tydzień"
+            },
+            {
+              "detail" : "Paski lub pierścienie — do wyboru na stronie „Limity AI”.",
+              "name" : "Wygląd limitów"
+            },
+            {
+              "detail" : "Codex, Copilot, Gemini, Antigravity, Cursor i wydatki na API — w takich samych kartach jak Claude.",
               "name" : "Inne AI"
             },
             {
-              "detail" : "Szacunek z dzienników Claude Code: udziały projektów i najdroższa sesja za sesję, dziś, tydzień.",
+              "detail" : "Limit i plan przekazuje sam Antigravity: Ustawienia → „Usługi AI” → Gemini → „Włącz limit Antigravity”, a potem raz otwórz agy.",
+              "name" : "Antigravity"
+            },
+            {
+              "detail" : "Ustawienia → „Usługi AI” → Claude Code → „Inne konta Claude”: limity każdego konta to osobna karta w panelu.",
+              "name" : "Inne konta Claude"
+            },
+            {
+              "detail" : "Szacunek z dzienników Claude Code: udziały projektów i najdroższa sesja — w sesji, dziś, w tygodniu.",
               "name" : "Zużycie według projektów"
+            },
+            {
+              "detail" : "„Historia zużycia…” pod zużyciem według projektów otwiera okno: tokeny Claude Code według dni z ostatnich tygodni.",
+              "name" : "Historia zużycia"
             },
             {
               "detail" : "Raz na okno przy 50/80/95 procentach (progi w Ustawieniach) i gdy limit wraca; na życzenie także na Telegram.",
@@ -187,8 +223,8 @@
               "name" : "Widżet"
             },
             {
-              "detail" : "Jeśli sesja jest zużyta w ponad 90 procentach, zadanie w tle pyta: uruchomić teraz czy po resecie.",
-              "name" : "Tło i limit"
+              "detail" : "Jeśli sesja jest zużyta w ponad 90 procentach, zadanie w tle pyta: uruchomić teraz czy po resecie. „Wstrzymuj zadania w tle” na stronie „Limity AI” zatrzymuje trwające zadania przy progu i wznawia je po resecie.",
+              "name" : "W tle i limit"
             }
           ],
           "monospaced" : false,
@@ -234,7 +270,7 @@
               "name" : "Dziennik"
             },
             {
-              "detail" : "Zadanie w tle: zatrzymaj teraz.",
+              "detail" : "Zadanie w tle: pierwsze kliknięcie pyta „Zatrzymać?”, drugie zatrzymuje.",
               "name" : "Zatrzymaj"
             },
             {
@@ -242,8 +278,12 @@
               "name" : "Śledzenie sesji"
             },
             {
-              "detail" : "Ich sesje też pokazują „pracuje / czeka / gotowe”, jeśli na ich stronie w „Usługach AI” zainstalowano hook AI Hub Bar. Codex uruchamia nowy hook dopiero po sprawdzeniu: wpisz /hooks w codex i zaufaj mu. Bez hooka tylko ostatnie rozmowy, bez stanu.",
+              "detail" : "Ich sesje też pokazują „pracuje / czeka / gotowe”, jeśli na ich stronie w „Usługach AI” zainstalowano hook AI Hub Bar. Codex uruchamia nowy hook dopiero po sprawdzeniu: wpisz /hooks w codex i zaufaj mu. Bez hooka tylko ostatnie wątki, bez stanu.",
               "name" : "Codex i Copilot"
+            },
+            {
+              "detail" : "Sesje, które niedawno się zakończyły, są zwinięte pod tym wierszem — można je kontynuować.",
+              "name" : "Ostatnio zakończone"
             }
           ],
           "monospaced" : false,
@@ -439,6 +479,14 @@
               "name" : "Uszy"
             },
             {
+              "detail" : "„Postęp Claude w uchu sesji” na stronie modułu: ucho pokazuje, co Claude robi teraz, a nie tylko liczbę sesji.",
+              "name" : "Postęp"
+            },
+            {
+              "detail" : "W uchu można pokazać najbardziej wypełniony limit innego AI.",
+              "name" : "Inne AI"
+            },
+            {
               "detail" : "Najedź kursorem na notch — otworzy się karta z limitami i tym, co robi Claude.",
               "name" : "Karta"
             },
@@ -485,11 +533,11 @@
               "name" : "⌥⇧"
             },
             {
-              "detail" : "W menu języka na pasku menu wybierz, z jakiego układu na jaki poprawiać samodzielnie, na przykład tylko EN → RU.",
+              "detail" : "W menu języka na pasku menu wybierz, z jakiego układu na jaki poprawiać automatycznie, na przykład tylko EN → RU.",
               "name" : "Kierunki"
             },
             {
-              "detail" : "Słowa ze słownika wyjątków nie są poprawiane samodzielnie, a ⌥⇧ zostawia je bez zmian.",
+              "detail" : "Słowa ze słownika wyjątków nie są poprawiane automatycznie, a ⌥⇧ zostawia je bez zmian.",
               "name" : "Wyjątki"
             },
             {
@@ -527,15 +575,15 @@
               "name" : "Szybkie przełączniki"
             },
             {
-              "detail" : "Ostatnie kopie: wyszukiwanie, przypinanie, z powrotem do schowka jednym kliknięciem. Hasła z menedżerów haseł nie są zapamiętywane.",
+              "detail" : "Ostatnio skopiowane: wyszukiwanie, przypinanie, z powrotem do schowka jednym kliknięciem. Hasła z menedżerów haseł nie są zapamiętywane.",
               "name" : "Historia schowka"
             },
             {
-              "detail" : "Notatki w Markdown w panelu: karty na zwykłych plikach .md w folderze, który otworzy każdy edytor.",
+              "detail" : "Notatki w Markdown prosto w panelu: karty, zwykłe pliki .md w folderze, który otworzy każdy edytor.",
               "name" : "Notatki"
             },
             {
-              "detail" : "Własne przyciski: skrypt w tle lub w Terminalu, skrót z «Skróty» macOS, link, plik, folder albo aplikacja.",
+              "detail" : "Własne przyciski: skrypt w tle lub w Terminalu, skrót z aplikacji „Skróty” macOS, link, plik, folder albo aplikacja.",
               "name" : "Szybkie polecenia"
             }
           ],
@@ -617,6 +665,18 @@
             {
               "detail" : "Limity subskrypcji; zużycie według projektów.",
               "name" : "--usage · --token-usage"
+            },
+            {
+              "detail" : "Znalezione agenty i klucze; limity innych AI.",
+              "name" : "--services · --services limits"
+            },
+            {
+              "detail" : "Otwórz okno w uruchomionej aplikacji.",
+              "name" : "--app-command help|settings|assistant|usage-history|quick-prompt"
+            },
+            {
+              "detail" : "Zapisz wszystkie ustawienia w pliku.",
+              "name" : "--export-settings <plik.claudepult>"
             }
           ],
           "monospaced" : true,

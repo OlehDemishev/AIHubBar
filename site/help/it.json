@@ -29,6 +29,18 @@
               "name" : "⌘Q"
             },
             {
+              "detail" : "Apri il pannello da qualsiasi app. La scorciatoia è in Impostazioni → «Scorciatoie» → «Apri il pannello».",
+              "name" : "⌃⌥B"
+            },
+            {
+              "detail" : "AI Hub Bar cerca da solo le nuove versioni e la finestra di aggiornamento mostra che cosa è cambiato (Impostazioni → «Generali» → «Aggiornamenti»). «Versioni beta»: ricevi le build prima degli altri.",
+              "name" : "Aggiornamenti"
+            },
+            {
+              "detail" : "Dopo un aggiornamento compare una volta, in cima al pannello, una scheda con ciò che è cambiato; «Ho capito» la toglie.",
+              "name" : "Novità"
+            },
+            {
               "detail" : "Con più di un profilo attivo, in cima al pannello c'è un selettore. I profili si configurano in Impostazioni → «Profili»; tutte le impostazioni si salvano in un file .claudepult (Generali → «Esporta impostazioni…»); un doppio clic su quel file lo importa.",
               "name" : "Profili"
             }
@@ -102,6 +114,10 @@
               "name" : "Comprimi un blocco"
             },
             {
+              "detail" : "La riga «Comprimi» in fondo al pannello lascia limiti, sessioni e progetti; «Altro» riporta gli altri blocchi.",
+              "name" : "Altro"
+            },
+            {
               "detail" : "Tema, sfondo in vetro, dimensione del testo, larghezza e densità — Impostazioni → «Aspetto».",
               "name" : "Aspetto"
             }
@@ -167,19 +183,39 @@
         {
           "facts" : [
             {
-              "detail" : "La sessione con conto alla rovescia fino all'azzeramento e previsione in base al ritmo degli ultimi 30 min, la settimana, le settimane per modello, extra usage.",
+              "detail" : "Il limite principale è un numero grande sopra una barra, con accanto il ritmo orario e il tempo all’azzeramento; la settimana, le settimane per modello e l’extra usage sono sotto. La previsione compare solo se il limite finirà prima dell’azzeramento.",
               "name" : "Blocco «Limiti»"
             },
             {
-              "detail" : "Codex, Copilot, Gemini, Cursor e la spesa API — con le stesse schede di Claude.",
+              "detail" : "La settimana mostra se consumi il limite più o meno velocemente di un consumo uniforme: un segno sulla barra e una riga sotto.",
+              "name" : "Settimana"
+            },
+            {
+              "detail" : "Barre o anelli: si sceglie nella pagina «Limiti IA».",
+              "name" : "Aspetto dei limiti"
+            },
+            {
+              "detail" : "Codex, Copilot, Gemini, Antigravity, Cursor e la spesa API — con le stesse schede di Claude.",
               "name" : "Altre IA"
+            },
+            {
+              "detail" : "Quota e piano li passa Antigravity stesso: Impostazioni → «Servizi IA» → Gemini → «Attiva la quota di Antigravity», poi apri agy una volta.",
+              "name" : "Antigravity"
+            },
+            {
+              "detail" : "Impostazioni → «Servizi IA» → Claude Code → «Altri account Claude»: i limiti di ogni account sono una scheda a parte nel pannello.",
+              "name" : "Altri account Claude"
             },
             {
               "detail" : "Una stima dai registri di Claude Code: quote dei progetti e la sessione più costosa per la sessione, oggi, la settimana.",
               "name" : "Consumo per progetto"
             },
             {
-              "detail" : "Una volta per finestra al 50/80/95 per cento (soglie nelle Impostazioni) e quando il limite torna; se vuoi, anche su Telegram.",
+              "detail" : "«Cronologia dei consumi…», sotto il consumo per progetto, apre una finestra: i token di Claude Code per giorno nelle ultime settimane.",
+              "name" : "Cronologia dei consumi"
+            },
+            {
+              "detail" : "Una volta per finestra al 50/80/95 per cento (soglie nelle Impostazioni) e quando il limite si ripristina; se vuoi, anche su Telegram.",
               "name" : "Notifiche"
             },
             {
@@ -187,7 +223,7 @@
               "name" : "Widget"
             },
             {
-              "detail" : "Se la sessione è usata per più del 90 per cento, un'attività in background chiede: avviare ora o dopo l'azzeramento.",
+              "detail" : "Se la sessione è usata per più del 90 per cento, un'attività in background chiede: avviare ora o dopo l'azzeramento. «Metti in pausa le attività in background», nella pagina «Limiti IA», ferma alla soglia le attività in corso e le riprende dopo l’azzeramento.",
               "name" : "Background e limite"
             }
           ],
@@ -222,7 +258,7 @@
               "name" : "Mostra"
             },
             {
-              "detail" : "Dove eseguire: una finestra del Terminale (puoi rispondere a Claude) o claude -p senza finestra (solo azioni consentite, limite di tempo, risultato con una notifica e su Telegram). «Ricorda» o un'impostazione predefinita in Impostazioni.",
+              "detail" : "Dove eseguire: una finestra del Terminale (puoi rispondere a Claude) o claude -p senza finestra (solo azioni consentite, limite di tempo, risultato con una notifica e su Telegram). «Ricorda» o il valore predefinito del profilo — in Impostazioni.",
               "name" : "Terminale / Background"
             },
             {
@@ -234,7 +270,7 @@
               "name" : "Registro"
             },
             {
-              "detail" : "Attività in background: ferma ora.",
+              "detail" : "Attività in background: il primo clic chiede «Fermare?», il secondo la ferma.",
               "name" : "Ferma"
             },
             {
@@ -242,8 +278,12 @@
               "name" : "Monitoraggio delle sessioni"
             },
             {
-              "detail" : "Anche le loro sessioni mostrano «in corso / in attesa / pronto» se l'hook di AI Hub Bar è installato nella loro pagina in «Servizi AI». Codex esegue un nuovo hook solo dopo la verifica: digita /hooks in codex e accettalo. Senza hook, solo le conversazioni recenti, senza stato.",
+              "detail" : "Anche le loro sessioni mostrano «in corso / in attesa / fatto» se l'hook di AI Hub Bar è installato nella loro pagina in «Servizi IA». Codex esegue un nuovo hook solo dopo la verifica: digita /hooks in codex e accettalo. Senza hook, solo le conversazioni recenti, senza stato.",
               "name" : "Codex e Copilot"
+            },
+            {
+              "detail" : "Le sessioni finite da poco sono raccolte sotto questa riga: puoi riprenderle.",
+              "name" : "Terminate di recente"
             }
           ],
           "monospaced" : false,
@@ -367,7 +407,7 @@
               "name" : "Contenuto"
             },
             {
-              "detail" : "Un blocco del pannello: 7 giorni avanti, il ritardo in rosso; un clic apre il progetto o il file.",
+              "detail" : "Un blocco del pannello: 7 giorni avanti, le voci scadute in rosso; un clic apre il progetto o il file.",
               "name" : "In arrivo"
             },
             {
@@ -386,7 +426,7 @@
       "steps" : [
         "Attiva il calendario nel profilo — oppure con il pulsante «Attiva nel profilo» nella riga «In arrivo» della pagina «Cosa mostrare»."
       ],
-      "summary" : "Scadenze e pubblicazioni dalle schede dei progetti e dal piano editoriale — per la settimana successiva e nella finestra «Calendario».",
+      "summary" : "Scadenze e pubblicazioni dalle schede dei progetti e dal piano dei contenuti — per i prossimi 7 giorni e nella finestra «Calendario».",
       "title" : "In arrivo e calendario"
     },
     {
@@ -437,6 +477,14 @@
             {
               "detail" : "A sinistra e a destra del notch — un limite e le sessioni, con il riepilogo «solo sull’isola»; cosa esattamente si sceglie nella pagina del modulo.",
               "name" : "Orecchie"
+            },
+            {
+              "detail" : "«Avanzamento di Claude nell’orecchio delle sessioni», nella pagina del modulo: l’orecchio mostra che cosa sta facendo Claude adesso, non solo il numero di sessioni.",
+              "name" : "Avanzamento"
+            },
+            {
+              "detail" : "Un orecchio può mostrare il limite più pieno di un’altra IA.",
+              "name" : "Altre IA"
             },
             {
               "detail" : "Passa il puntatore sul notch: si apre una scheda con i limiti e cosa sta facendo Claude.",
@@ -617,6 +665,18 @@
             {
               "detail" : "Limiti dell'abbonamento; consumo per progetto.",
               "name" : "--usage · --token-usage"
+            },
+            {
+              "detail" : "Gli agenti e le chiavi trovati; i limiti delle altre IA.",
+              "name" : "--services · --services limits"
+            },
+            {
+              "detail" : "Apri una finestra nell’app in esecuzione.",
+              "name" : "--app-command help|settings|assistant|usage-history|quick-prompt"
+            },
+            {
+              "detail" : "Salva tutte le impostazioni in un file.",
+              "name" : "--export-settings <file.claudepult>"
             }
           ],
           "monospaced" : true,

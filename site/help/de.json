@@ -29,6 +29,18 @@
               "name" : "⌘Q"
             },
             {
+              "detail" : "Das Panel aus jeder App öffnen. Der Kurzbefehl steht in Einstellungen → „Kurzbefehle“ → „Panel öffnen“.",
+              "name" : "⌃⌥B"
+            },
+            {
+              "detail" : "AI Hub Bar sucht selbst nach neuen Versionen, und das Update-Fenster zeigt, was sich geändert hat (Einstellungen → „Allgemein“ → „Updates“). „Beta-Versionen“ — Builds früher als alle anderen erhalten.",
+              "name" : "Updates"
+            },
+            {
+              "detail" : "Nach einem Update erscheint oben im Panel einmal eine Karte mit den Änderungen; „Verstanden“ blendet sie aus.",
+              "name" : "Neuigkeiten"
+            },
+            {
               "detail" : "Sind mehrere Profile aktiv, steht oben im Panel ein Umschalter. Profile werden unter Einstellungen → „Profile“ eingerichtet; alle Einstellungen lassen sich in eine .claudepult-Datei speichern (Allgemein → „Einstellungen exportieren…“); ein Doppelklick auf eine solche Datei importiert sie.",
               "name" : "Profile"
             }
@@ -102,6 +114,10 @@
               "name" : "Block zuklappen"
             },
             {
+              "detail" : "Die Zeile „Zuklappen“ unten im Panel lässt Limits, Sitzungen und Projekte stehen; „Mehr“ holt die übrigen Blöcke zurück.",
+              "name" : "Mehr"
+            },
+            {
               "detail" : "Design, Glashintergrund, Textgröße, Breite und Dichte — Einstellungen → „Darstellung“.",
               "name" : "Darstellung"
             }
@@ -167,16 +183,36 @@
         {
           "facts" : [
             {
-              "detail" : "Die Sitzung mit Countdown bis zur Zurücksetzung und Prognose nach dem Tempo der letzten 30 min, die Woche, Wochen nach Modell, Extra usage.",
+              "detail" : "Das Hauptlimit ist eine große Zahl über einem Balken, daneben das Tempo pro Stunde und die Zeit bis zur Zurücksetzung; Woche, Wochen nach Modell und Extra Usage stehen darunter. Eine Prognose erscheint nur, wenn das Limit vor der Zurücksetzung aufgebraucht wäre.",
               "name" : "Block „Limits“"
             },
             {
-              "detail" : "Codex, Copilot, Gemini, Cursor und API-Verbrauch — als dieselben Karten wie Claude.",
+              "detail" : "Die Woche zeigt, ob Sie das Limit schneller oder langsamer als gleichmäßig verbrauchen: eine Marke auf dem Balken und eine Zeile darunter.",
+              "name" : "Woche"
+            },
+            {
+              "detail" : "Balken oder Ringe — wählbar auf der Seite „KI-Limits“.",
+              "name" : "Darstellung der Limits"
+            },
+            {
+              "detail" : "Codex, Copilot, Gemini, Antigravity, Cursor und API-Verbrauch — als dieselben Karten wie Claude.",
               "name" : "Andere KI"
+            },
+            {
+              "detail" : "Kontingent und Tarif liefert Antigravity selbst: Einstellungen → „KI-Dienste“ → Gemini → „Antigravity-Kontingent einschalten“, dann agy einmal öffnen.",
+              "name" : "Antigravity"
+            },
+            {
+              "detail" : "Einstellungen → „KI-Dienste“ → Claude Code → „Weitere Claude-Konten“: Die Limits jedes Kontos stehen als eigene Karte im Panel.",
+              "name" : "Weitere Claude-Konten"
             },
             {
               "detail" : "Eine Schätzung aus den Protokollen von Claude Code: Anteile der Projekte und die teuerste Sitzung für die Sitzung, heute, die Woche.",
               "name" : "Verbrauch nach Projekt"
+            },
+            {
+              "detail" : "„Verbrauchsverlauf…“ unter dem Verbrauch nach Projekt öffnet ein Fenster: Claude-Code-Tokens pro Tag für die letzten Wochen.",
+              "name" : "Verbrauchsverlauf"
             },
             {
               "detail" : "Einmal pro Fenster bei 50/80/95 Prozent (Schwellen in den Einstellungen) und wenn das Limit zurück ist; auf Wunsch auch an Telegram.",
@@ -187,7 +223,7 @@
               "name" : "Widget"
             },
             {
-              "detail" : "Ist die Sitzung zu mehr als 90 Prozent verbraucht, fragt eine Hintergrundaufgabe: jetzt starten oder nach der Zurücksetzung.",
+              "detail" : "Ist die Sitzung zu mehr als 90 Prozent verbraucht, fragt eine Hintergrundaufgabe: jetzt starten oder nach der Zurücksetzung. „Hintergrundaufgaben pausieren“ auf der Seite „KI-Limits“ hält laufende Aufgaben an der Schwelle an und setzt sie nach der Zurücksetzung fort.",
               "name" : "Hintergrund und Limit"
             }
           ],
@@ -234,7 +270,7 @@
               "name" : "Protokoll"
             },
             {
-              "detail" : "Hintergrundaufgabe: jetzt stoppen.",
+              "detail" : "Hintergrundaufgabe: Der erste Klick fragt „Stoppen?“, der zweite stoppt.",
               "name" : "Stoppen"
             },
             {
@@ -244,6 +280,10 @@
             {
               "detail" : "Ihre Sitzungen zeigen ebenfalls „arbeitet / wartet / fertig“, wenn auf ihrer Seite unter „KI-Dienste“ der Hook von AI Hub Bar installiert ist. Codex führt einen neuen Hook erst nach Prüfung aus: in codex /hooks eingeben und ihm vertrauen. Ohne Hook nur die letzten Unterhaltungen, ohne Status.",
               "name" : "Codex und Copilot"
+            },
+            {
+              "detail" : "Kürzlich beendete Sitzungen liegen unter dieser Zeile — sie lassen sich fortsetzen.",
+              "name" : "Kürzlich beendet"
             }
           ],
           "monospaced" : false,
@@ -325,7 +365,7 @@
         {
           "facts" : [
             {
-              "detail" : "Einstellungen → „Profile“ → „Quelle“: jeder Ordner im Projektordner ist ein Projekt (ein Video, ein Artikel, ein Thema).",
+              "detail" : "Einstellungen → „Profile“ → „Quelle“: jeder Ordner im Projekte-Ordner ist ein Projekt (ein Video, ein Artikel, ein Thema).",
               "name" : "Quelle „Ordner“"
             },
             {
@@ -386,7 +426,7 @@
       "steps" : [
         "Aktivieren Sie den Kalender im Profil — oder mit der Taste „Im Profil einschalten“ in der Zeile „Demnächst“ auf der Seite „Was anzeigen“."
       ],
-      "summary" : "Deadlines und Veröffentlichungen aus Projektkarten und dem Content-Plan — eine Woche im Voraus und im Fenster „Kalender“.",
+      "summary" : "Fristen und Veröffentlichungen aus Projektkarten und dem Inhaltsplan — eine Woche im Voraus und im Fenster „Kalender“.",
       "title" : "Demnächst und Kalender"
     },
     {
@@ -437,6 +477,14 @@
             {
               "detail" : "Links und rechts der Notch — Limit und Sitzungen, wenn die Übersicht „nur auf der Insel“ ist; was genau, wählen Sie auf der Modulseite.",
               "name" : "Ohren"
+            },
+            {
+              "detail" : "„Claudes Fortschritt im Sitzungs-Ohr“ auf der Seite des Moduls: Das Ohr zeigt, was Claude gerade tut, nicht nur die Zahl der Sitzungen.",
+              "name" : "Fortschritt"
+            },
+            {
+              "detail" : "Ein Ohr kann das vollste Limit einer anderen KI zeigen.",
+              "name" : "Andere KI"
             },
             {
               "detail" : "Bewegen Sie den Zeiger auf die Notch — es öffnet sich eine Karte mit Limits und dem, was Claude gerade tut.",
@@ -515,7 +563,7 @@
         {
           "facts" : [
             {
-              "detail" : "Prozessor, Speicher, Festplatte, Netzwerk, Akku und die hungrigsten Apps; Hinweise zu Last, Speicher, Platz und Akku.",
+              "detail" : "Prozessor, Speicher, Festplatte, Netzwerk, Batterie und die hungrigsten Apps; Hinweise zu Last, Speicher, Platz und Akku.",
               "name" : "Mac-Ressourcen"
             },
             {
@@ -531,11 +579,11 @@
               "name" : "Zwischenablage-Verlauf"
             },
             {
-              "detail" : "Markdown-Notizen direkt im Panel: Tabs über normale .md-Dateien in einem Ordner, den jeder Editor öffnet.",
+              "detail" : "Markdown-Notizen direkt im Panel: Tabs, normale .md-Dateien in einem Ordner, den jeder Editor öffnet.",
               "name" : "Notizen"
             },
             {
-              "detail" : "Eigene Tasten: ein Skript im Hintergrund oder im Terminal, ein macOS-„Kurzbefehle“-Kurzbefehl, ein Link, eine Datei, ein Ordner oder eine App.",
+              "detail" : "Eigene Tasten: ein Skript im Hintergrund oder im Terminal, ein Kurzbefehl aus „Kurzbefehle“ (macOS), ein Link, eine Datei, ein Ordner oder eine App.",
               "name" : "Schnellbefehle"
             }
           ],
@@ -617,6 +665,18 @@
             {
               "detail" : "Abo-Limits; Verbrauch nach Projekt.",
               "name" : "--usage · --token-usage"
+            },
+            {
+              "detail" : "Gefundene Agenten und Schlüssel; Limits anderer KIs.",
+              "name" : "--services · --services limits"
+            },
+            {
+              "detail" : "Ein Fenster in der laufenden App öffnen.",
+              "name" : "--app-command help|settings|assistant|usage-history|quick-prompt"
+            },
+            {
+              "detail" : "Alle Einstellungen in eine Datei sichern.",
+              "name" : "--export-settings <Datei.claudepult>"
             }
           ],
           "monospaced" : true,
