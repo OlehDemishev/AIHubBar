@@ -170,7 +170,7 @@ enum MenuBarComposer {
             return data.keepAwakeSwitchedOn ? [.tintedSymbol("cup.and.saucer.fill", config.colored ? .warning : .label)] : nil
         case .otherAI:
             guard let (source, value) = otherAI(element, data), value >= Double(element.showAbove) else { return nil }
-            let name = HubLimit.Source(rawValue: source)?.shortTitle ?? source
+            let name = MainService.name(source)
             return switch element.style {
             case .number: [.text("\(name) \(Int(value.rounded()))%", level(value))]
             case .ring: [.text(name, .secondary), .ring(value, level(value))]
@@ -247,7 +247,7 @@ enum MenuBarComposer {
         if on.contains(.memory), let memory = data.memory { parts.append(String(localized: "память \(Int(memory.rounded())) %")) }
         if on.contains(.keepAwake), data.keepingAwake { parts.append(String(localized: "Mac не засыпает")) }
         if on.contains(.otherAI), let element = config.elements.first(where: { $0.kind == .otherAI }), let (source, value) = otherAI(element, data) {
-            parts.append("\(HubLimit.Source(rawValue: source)?.title ?? source) \(Int(value.rounded())) %")
+            parts.append("\(source == MainService.claude ? "Claude" : HubLimit.Source(rawValue: source)?.title ?? source) \(Int(value.rounded())) %")
         }
         if on.contains(.mode), let name = data.modeName { parts.append(String(localized: "профиль «\(name)»")) }
         return parts.joined(separator: ", ")

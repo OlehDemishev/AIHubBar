@@ -30,6 +30,10 @@ struct WidgetUsage: Decodable, Equatable {
     var session: Window?
     var week: Window?
     var updated: Date?
+    /// Set when another service than Claude is the main one (`main-limits.json`): its name and its limits' names.
+    var title: String?
+    var sessionTitle: String?
+    var weekTitle: String?
 
     enum CodingKeys: String, CodingKey {
         case session = "five_hour"
@@ -67,9 +71,11 @@ struct WidgetUsage: Decodable, Equatable {
             data = try Data(contentsOf: fileURL)
         } catch {
             log.error("Cannot read usage.json: \(error.localizedDescription, privacy: .public)")
-            return nil
+            // No Claude at all: the main service may still be another one.
+            return WidgetMain.load()?.usage
         }
-        let usage = try? JSONDecoder().decode(WidgetUsage.self, from: data)
+        var usage = try? JSONDecoder().decode(WidgetUsage.self, from: data)
+        if let main = WidgetMain.load() { usage = main.usage }
         log.notice("usage.json read: session \(usage?.session?.utilization ?? -1, privacy: .public)%")
         return usage
     }
@@ -79,6 +85,36 @@ struct WidgetUsage: Decodable, Equatable {
         week: Window(utilization: 58, resetsAt: .now.addingTimeInterval(3 * 86_400)),
         updated: .now
     )
+}
+
+/// `main-limits.json` written by AI Hub Bar while another service than Claude is the main one.
+struct WidgetMain: Decodable {
+    struct Window: Decodable {
+        var title: String
+        var utilization: Double
+        var resets_at: String?
+    }
+
+    var title: String
+    var first: Window?
+    var second: Window?
+    var updated: String?
+
+    static func load() -> WidgetMain? {
+        let url = WidgetUsage.fileURL.deletingLastPathComponent().appending(path: "main-limits.json")
+        return (try? Data(contentsOf: url)).flatMap { try? JSONDecoder().decode(WidgetMain.self, from: $0) }
+    }
+
+    var usage: WidgetUsage {
+        func window(_ window: Window?) -> WidgetUsage.Window? {
+            window.map { WidgetUsage.Window(utilization: $0.utilization, resetsAt: $0.resets_at.flatMap(WidgetUsage.date)) }
+        }
+        var usage = WidgetUsage(session: window(first), week: window(second), updated: updated.flatMap(WidgetUsage.date))
+        usage.title = title
+        usage.sessionTitle = first?.title
+        usage.weekTitle = second?.title
+        return usage
+    }
 }
 
 struct UsageEntry: TimelineEntry {
@@ -145,7 +181,7 @@ struct SmallUsageView: View {
                         Text("\(Int(session.utilization.rounded())) %")
                             .font(.title2.weight(.semibold))
                             .monospacedDigit()
-                        Text(entry.usage?.session != nil ? String(localized: "сессия") : String(localized: "Неделя"))
+                        Text(entry.usage?.sessionTitle ?? (entry.usage?.session != nil ? String(localized: "сессия") : String(localized: "Неделя")))
                             .font(.caption2)
                             .foregroundStyle(.secondary)
                     }
@@ -169,15 +205,19 @@ struct MediumUsageView: View {
         if let usage = entry.usage, usage.session != nil || usage.week != nil {
             VStack(alignment: .leading, spacing: 10) {
                 HStack {
-                    Label("Лимиты Claude", systemImage: "sparkle").font(.headline)
+                    if let title = usage.title {
+                        Label { Text(verbatim: title) } icon: { Image(systemName: "sparkle") }.font(.headline)
+                    } else {
+                        Label("Лимиты Claude", systemImage: "sparkle").font(.headline)
+                    }
                     Spacer()
                     if let updated = usage.updated {
                         Text(updated, style: .relative).font(.caption2).foregroundStyle(.secondary)
                     }
                     RefreshLimitsButton()
                 }
-                if let session = usage.session { row(String(localized: "Сессия (5 ч)"), session) }
-                if let week = usage.week { row(String(localized: "Неделя"), week) }
+                if let session = usage.session { row(usage.sessionTitle ?? String(localized: "Сессия (5 ч)"), session) }
+                if let week = usage.week { row(usage.weekTitle ?? String(localized: "Неделя"), week) }
                 if !entry.otherAI.isEmpty {
                     HStack(spacing: 8) {
                         ForEach(Array(entry.otherAI.prefix(3).enumerated()), id: \.offset) { _, other in

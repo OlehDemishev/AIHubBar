@@ -28,8 +28,8 @@ struct PerServiceTests {
         #expect(NotchText.fullestOther([:]) == nil)
         let fullest = NotchText.fullestOther(["codex": 40, "copilot": 70, "gemini": 70])
         #expect(fullest?.name == "Copilot" && fullest?.percent == 70, "ties go to the first name")
-        #expect(NotchText.earSummary(.otherAI, usage: nil, sessions: [], background: 0, otherAI: ["codex": 12]) == "Codex: 12 %")
-        #expect(NotchText.earSummary(.otherAI, usage: nil, sessions: [], background: 0) == NotchEar.otherAI.title)
+        #expect(NotchText.earSummary(.otherAI, main: nil, sessions: [], background: 0, otherAI: ["codex": 12]) == "Codex: 12 %")
+        #expect(NotchText.earSummary(.otherAI, main: nil, sessions: [], background: 0) == NotchEar.otherAI.title)
         #expect(NotchEar(rawValue: "otherAI") == .otherAI)
     }
 

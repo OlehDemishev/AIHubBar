@@ -191,6 +191,10 @@
               "name" : "Semana"
             },
             {
+              "detail" : "Os limites do serviço principal vêm primeiro no painel e aparecem na barra de menus e na ilha. “Automático” é o Claude ou, sem ele, o primeiro serviço que tiver limites.",
+              "name" : "Serviço principal"
+            },
+            {
               "detail" : "Barras ou anéis: escolha na página “Limites de IA”.",
               "name" : "Aparência dos limites"
             },

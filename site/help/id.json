@@ -191,6 +191,10 @@
               "name" : "Minggu"
             },
             {
+              "detail" : "Batas layanan utama tampil pertama di panel dan ditampilkan di bar menu serta di pulau. “Otomatis” berarti Claude, atau tanpa Claude layanan pertama yang punya batas.",
+              "name" : "Layanan utama"
+            },
+            {
               "detail" : "Bilah atau cincin — dipilih di halaman “Batas AI”.",
               "name" : "Tampilan batas"
             },

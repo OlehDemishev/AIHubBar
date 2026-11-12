@@ -174,6 +174,7 @@ enum HelpTopic: String, CaseIterable, Identifiable, Sendable {
             [HelpSection(facts: [
                 HelpFact(String(localized: "Блок «Лимиты»"), String(localized: "Главный лимит — крупное число над полосой, рядом темп за час и время до сброса; неделя, недели по моделям и extra usage — под ним. Прогноз появляется, только если лимит кончится раньше сброса."), symbol: "gauge.with.dots.needle.33percent"),
                 HelpFact(String(localized: "Неделя"), String(localized: "У недели видно, быстрее или медленнее ровного расхода вы тратите лимит: отметка на полосе и строка под ней."), symbol: "calendar"),
+                HelpFact(String(localized: "Главный сервис"), String(localized: "Лимиты главного сервиса идут первыми в панели и показаны в строке меню и на острове. «Автоматически» — Claude, а без него первый сервис, у которого есть лимиты."), symbol: "star"),
                 HelpFact(String(localized: "Вид лимитов"), String(localized: "Полосы или кольца — выбирается на странице «Лимиты AI»."), symbol: "chart.bar.fill"),
                 HelpFact(String(localized: "Другие AI"), String(localized: "Codex, Copilot, Gemini, Antigravity, Cursor и расход по API — такими же карточками, как Claude."), symbol: "sparkles"),
                 HelpFact("Antigravity", String(localized: "Квоту и тариф передаёт сам Antigravity: Настройки → «Сервисы AI» → Gemini → «Включить квоту Antigravity», затем один раз откройте agy."), symbol: "diamond"),

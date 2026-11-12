@@ -191,6 +191,10 @@
               "name" : "Week"
             },
             {
+              "detail" : "The main service's limits come first in the panel and are shown in the menu bar and on the island. “Automatic” is Claude, or without it the first service that has limits.",
+              "name" : "Main service"
+            },
+            {
               "detail" : "Bars or rings — chosen on the “AI limits” page.",
               "name" : "Limits look"
             },

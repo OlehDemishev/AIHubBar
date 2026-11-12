@@ -135939,6 +135939,234 @@
           }
         }
       }
+    },
+    "Автоматически": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Automatic"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Автоматично"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Automatisch"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Automatique"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Automático"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Automatico"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Automático"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Automatycznie"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "自動"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "자동"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تلقائي"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otomatis"
+          }
+        }
+      }
+    },
+    "Главный сервис": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Main service"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Головний сервіс"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hauptdienst"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Service principal"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Servicio principal"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Servizio principale"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Serviço principal"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Główna usługa"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "メインのサービス"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "기본 서비스"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الخدمة الرئيسية"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Layanan utama"
+          }
+        }
+      }
+    },
+    "Лимиты главного сервиса идут первыми в панели и показаны в строке меню и на острове. «Автоматически» — Claude, а без него первый сервис, у которого есть лимиты.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The main service's limits come first in the panel and are shown in the menu bar and on the island. “Automatic” is Claude, or without it the first service that has limits."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ліміти головного сервісу йдуть першими в панелі та показані в рядку меню й на острові. «Автоматично» — Claude, а без нього перший сервіс, у якого є ліміти."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Limits des Hauptdienstes stehen im Panel an erster Stelle und werden in der Menüleiste und auf der Insel angezeigt. „Automatisch“ bedeutet Claude, ohne Claude der erste Dienst mit Limits."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les limites du service principal viennent en premier dans le panneau et s’affichent dans la barre des menus et sur l’île. « Automatique » : Claude, ou sans lui le premier service qui a des limites."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los límites del servicio principal van primero en el panel y se muestran en la barra de menús y en la isla. «Automático» es Claude o, sin él, el primer servicio que tenga límites."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I limiti del servizio principale vengono per primi nel pannello e sono mostrati nella barra dei menu e sull’isola. «Automatico» è Claude o, senza di lui, il primo servizio che ha limiti."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Os limites do serviço principal vêm primeiro no painel e aparecem na barra de menus e na ilha. “Automático” é o Claude ou, sem ele, o primeiro serviço que tiver limites."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limity głównej usługi są pierwsze w panelu i widać je na pasku menu oraz na wyspie. „Automatycznie” to Claude, a bez niego pierwsza usługa, która ma limity."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "メインのサービスの制限はパネルの先頭に表示され、メニューバーとアイランドにも表示されます。「自動」は Claude、Claude がなければ制限のある最初のサービスです。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "기본 서비스의 한도는 패널 맨 위에 오고 메뉴 막대와 아일랜드에도 표시됩니다. ‘자동’은 Claude이며, Claude가 없으면 한도가 있는 첫 번째 서비스입니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تأتي حدود الخدمة الرئيسية أولًا في اللوحة وتظهر في شريط القائمة وعلى الجزيرة. «تلقائي» يعني Claude، وبدونه أول خدمة لها حدود."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Batas layanan utama tampil pertama di panel dan ditampilkan di bar menu serta di pulau. “Otomatis” berarti Claude, atau tanpa Claude layanan pertama yang punya batas."
+          }
+        }
+      }
     }
   },
   "version": "1.0"

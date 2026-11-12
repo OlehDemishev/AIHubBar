@@ -311,6 +311,12 @@ final class AppSettings {
         didSet { defaults.set(hubGeminiDailyLimit, forKey: Keys.hubGeminiDailyLimit) }
     }
 
+    /// Which service's limits lead the panel, the menu bar item and the island: `MainService.auto`, `claude` or a
+    /// `HubLimit.Source` raw value.
+    var mainService: String {
+        didSet { defaults.set(mainService, forKey: Keys.mainService) }
+    }
+
     /// Consent to read Cursor's own sign-in token from its settings database.
     var hubCursor: Bool {
         didSet { defaults.set(hubCursor, forKey: Keys.hubCursor) }
@@ -400,6 +406,7 @@ final class AppSettings {
         hubGeminiQuota = defaults.bool(forKey: Keys.hubGeminiQuota)
         hubGeminiDailyLimit = defaults.positiveInt(Keys.hubGeminiDailyLimit, default: 1000)
         hubCursor = defaults.bool(forKey: Keys.hubCursor)
+        mainService = defaults.string(forKey: Keys.mainService) ?? MainService.auto
         runGuardPercent = defaults.int(Keys.runGuardPercent, default: 95)
         weeklySummary = defaults.bool(Keys.weeklySummary, default: true)
         telegramChatID = defaults.string(forKey: Keys.telegramChatID) ?? ""
@@ -465,6 +472,7 @@ final class AppSettings {
         static let hubGeminiQuota = "hubGeminiQuota"
         static let hubGeminiDailyLimit = "hubGeminiDailyLimit"
         static let hubCursor = "hubCursor"
+        static let mainService = "mainService"
         static let runGuardPercent = "runGuardPercent"
         static let weeklySummary = "weeklySummary"
         static let savedPrompts = "savedPrompts"

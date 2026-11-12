@@ -39,12 +39,15 @@ extension ModuleUI {
 /// «Панель сейчас»: the session and week bars, else its tagline.
 private struct LimitsSketch: View {
     @Environment(UsageStore.self) private var usage
+    @Environment(HubLimitsStore.self) private var hub
+    @Environment(AppSettings.self) private var settings
 
     var body: some View {
-        if let session = usage.snapshot?.session?.utilization {
+        let main = MainService.current(usage: usage, hub: hub, settings: settings)
+        if let session = main?.firstLimit?.percent {
             HStack(spacing: 6) {
                 MiniRing(value: session)
-                if let week = usage.snapshot?.week?.utilization { MiniRing(value: week) }
+                if let week = main?.secondLimit?.percent { MiniRing(value: week) }
             }
         } else {
             SketchLine(ModuleKind.limits.tagline)
@@ -54,6 +57,7 @@ private struct LimitsSketch: View {
 
 struct LimitSection: View {
     @Environment(AppSettings.self) private var settings
+    @Environment(HubLimitsStore.self) private var hub
     @Environment(UsageStore.self) private var usage
     @Environment(WeeklySummarySender.self) private var weeklySummary
     @State private var thresholdsText = ""
@@ -65,6 +69,15 @@ struct LimitSection: View {
             Picker("Вид лимитов", systemImage: "chart.bar.fill", selection: $settings.limitsStyle) {
                 ForEach(LimitsStyle.allCases, id: \.self) { Text($0.title).tag($0) }
             }
+            Picker("Главный сервис", systemImage: "star", selection: $settings.mainService) {
+                Text("Автоматически").tag(MainService.auto)
+                Text(verbatim: "Claude").tag(MainService.claude)
+                ForEach(MainService.choices(saved: settings.mainService, others: hub.usages)) { source in
+                    Text(source.title).tag(source.rawValue)
+                }
+            }
+        } footer: {
+            Footnote(text: String(localized: "Лимиты главного сервиса идут первыми в панели и показаны в строке меню и на острове. «Автоматически» — Claude, а без него первый сервис, у которого есть лимиты."))
         }
         Section {
             IconRow("Уведомлять на, %", systemImage: "bell.badge") {

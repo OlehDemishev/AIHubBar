@@ -191,6 +191,10 @@
               "name" : "Woche"
             },
             {
+              "detail" : "Die Limits des Hauptdienstes stehen im Panel an erster Stelle und werden in der Menüleiste und auf der Insel angezeigt. „Automatisch“ bedeutet Claude, ohne Claude der erste Dienst mit Limits.",
+              "name" : "Hauptdienst"
+            },
+            {
               "detail" : "Balken oder Ringe — wählbar auf der Seite „KI-Limits“.",
               "name" : "Darstellung der Limits"
             },

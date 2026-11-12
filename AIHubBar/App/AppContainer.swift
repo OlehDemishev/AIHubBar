@@ -149,11 +149,13 @@ final class AppContainer {
             }
         }
         notchIsland.sessionItems = { [sessions] in sessions.items }
-        notchIsland.hasEarContent = { [usage, hub, sessions, runs] ear in
+        hub.mainUsage = { [usage, hub, settings] in MainService.current(usage: usage, hub: hub, settings: settings) }
+        hub.claudePercent = { [usage] in [usage.snapshot?.session?.utilization, usage.snapshot?.week?.utilization].compactMap { $0 }.max() }
+        notchIsland.hasEarContent = { [usage, hub, sessions, runs, settings] ear in
             switch ear {
-            case .sessionLimit: usage.snapshot?.session != nil
-            case .weekLimit: usage.snapshot?.week != nil
-            case .otherAI: NotchText.fullestOther(hub.percents) != nil
+            case .sessionLimit: MainService.current(usage: usage, hub: hub, settings: settings)?.firstLimit != nil
+            case .weekLimit: MainService.current(usage: usage, hub: hub, settings: settings)?.secondLimit != nil
+            case .otherAI: NotchText.fullestOther(MainService.others(usage: usage, hub: hub, settings: settings)) != nil
             case .sessions: sessions.items.contains { $0.state == .waiting || $0.state == .running }
             case .background: !runs.running.isEmpty
             case .none: false
@@ -344,12 +346,14 @@ final class AppContainer {
         data.running = ClaudeActivity(sessions: sessions, runs: runs).runningSessions
         data.background = runs.running.count
         data.queued = launcher.queued.count
-        data.session = usage.snapshot?.session?.utilization
-        data.week = usage.snapshot?.week?.utilization
-        data.limitsStale = usage.lastError != nil
+        // The two numbers are the main service's: Claude, or another one for whoever has no Claude.
+        let main = MainService.current(usage: usage, hub: hub, settings: settings)
+        data.session = main?.firstLimit?.percent
+        data.week = main?.secondLimit?.percent
+        data.limitsStale = main?.isStale ?? false
         data.modelWeeks = Dictionary((usage.snapshot?.otherWindows ?? []).map { ($0.key, $0.utilization) }) { first, _ in first }
-        data.sessionResetsAt = usage.snapshot?.session?.resetsAt
-        if case let .runsOutAt(date) = usage.forecast { data.forecastRunsOut = date }
+        data.sessionResetsAt = main?.firstLimit?.resetsAt
+        if case let .runsOutAt(date) = main?.forecast { data.forecastRunsOut = date }
         if modes.menuBar.element(.disk).enabled {
             data.diskFreeBytes = monitor.snapshot?.diskFree ?? DiskSpace.freeBytes()
         }
@@ -358,7 +362,7 @@ final class AppContainer {
         data.memory = monitor.snapshot?.memoryPercent
         data.keepingAwake = keepAwake.reason != nil
         data.keepAwakeSwitchedOn = keepAwake.manualUntil != nil
-        data.otherAI = hub.percents
+        data.otherAI = MainService.others(usage: usage, hub: hub, settings: settings)
         data.modeName = modes.current?.name
         data.modeIcon = modes.current?.icon
         return data

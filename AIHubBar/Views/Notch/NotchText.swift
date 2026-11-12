@@ -2,12 +2,14 @@ import Foundation
 
 /// Words for the ears' hints and VoiceOver.
 enum NotchText {
-    static func earSummary(_ ear: NotchEar, usage: UsageSnapshot?, sessions: [SessionStore.Item], background: Int,
+    static func earSummary(_ ear: NotchEar, main: ServiceUsage?, sessions: [SessionStore.Item], background: Int,
                            otherAI: [String: Double] = [:], liveActivity: Bool = false, now: Date = .now) -> String {
         switch ear {
         case .sessionLimit, .weekLimit:
-            guard let window = ear == .sessionLimit ? usage?.session : usage?.week else { return ear.title }
-            return "\(window.title): \(UsageText.percent(window.utilization))"
+            guard let window = ear == .sessionLimit ? main?.firstLimit : main?.secondLimit, let percent = window.percent else { return ear.title }
+            // Another service's limit is named with it: «Codex · 5 ч: 40 %».
+            let name = main?.hubSource.map { "\($0.shortTitle) · \(window.title)" } ?? window.title
+            return "\(name): \(UsageText.percent(percent))"
         case .otherAI:
             guard let fullest = fullestOther(otherAI) else { return ear.title }
             return "\(fullest.name): \(UsageText.percent(fullest.percent))"
@@ -29,7 +31,7 @@ enum NotchText {
     /// The other AI service closest to its limit (source raw value → percent, as `HubLimitsStore.percents`).
     static func fullestOther(_ percents: [String: Double]) -> (name: String, percent: Double)? {
         percents.max { $0.value == $1.value ? $0.key > $1.key : $0.value < $1.value }
-            .map { (HubLimit.Source(rawValue: $0.key)?.shortTitle ?? $0.key, $0.value) }
+            .map { (MainService.name($0.key), $0.value) }
     }
 
     // MARK: Live activity (SPEC-notch §3.4)
