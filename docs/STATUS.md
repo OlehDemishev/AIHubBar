@@ -5,6 +5,7 @@
 **Updated:** 2026-11-12
 
 **Now:**
+- 2026-11-12: «Не спать» stays on across restarts. Antigravity's «ждёт» not built: `agy` on this Mac stops at its first-run screen, so its states could not be seen
 - 2026-11-12: the main AI service can be another one than Claude (panel, menu bar, island, widget; #367). Goes to 0.11.0-beta.3, then 0.11.0 on Tuesday 2026-11-17
 - 2026-11-11: every translation read against the Russian original (12 languages × 1763 texts), 1038 fixes applied; goes out with 0.11.0.
 - 2026-11-11: the help brought up to date with 0.9–0.11 in all 13 languages (15 facts added, 4 rewritten); goes out with 0.11.0
@@ -40,7 +41,8 @@
 - try the Homebrew install once (README → Install, three lines) on a Mac without the app, e.g. the Air: the agent did not trust the tap or install through it
 - say whether the app may report crashes by itself (opt-in, anonymous) — today it only offers a GitHub issue after a crash
 - update 0.10.1 → 0.10.2 through Settings → «Основные» → «Обновления» and say whether Sparkle replaced the copy: the update to 0.9.1 never reached `~/Applications`
-- «Не спать» has to be switched on again after the restart of the app
+- open `agy` once in Terminal and finish its welcome screen (colour scheme): the quota check needs it, and so does the «ждёт» state for Antigravity sessions
+- «Не спать» (after beta 3): switch it on «до выключения», quit and open the app — it must still be on
 - after the next restart: does `~/Applications/AI Hub Bar.app` (0.9.0) start at login? Until 2026-11-09 a build from `.claude/worktrees/jolly-wiles-db1b62` started instead
 - «Значки» after the next install: press the toggle once, read the note under the tiles, press it again to bring the desktop back (the agent does not change this setting on your Mac)
 - optional, one minute: with the desktop on, does `StandardHideDesktopIcons` keep the context menu and drag selection? If yes, the toggle can move to it
@@ -60,6 +62,13 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-12 — «Не спать» stays on across restarts; Antigravity's «ждёт» looked at (branch `fix/keep-awake-restart`)
+
+Done: the manual hold of «Не спать» («до выключения» or until a time) is kept in the defaults (`keepAwakeManualHold`) and restored at launch, so an update or a relaunch no longer switches it off without a word; a hold whose time ran out while the app was closed is gone. This was on Oleh's list as «has to be switched on again after the restart».
+Antigravity's «ждёт» (planned for 0.11.0) was not built. What was found with one session-only `agy` run in a scratch folder: the status line's JSON also carries `conversation_id` and `session_id` (the same id as in `conversation_summaries.db`), `cwd`, `workspace`, `transcript_path`, so a state can be tied to a session row. But the only `agent_state` values seen were `authenticating` and `initializing`: on Oleh's Mac the interactive `agy` has never been run and stops at its first-run screen (colour scheme), and passing it would change his Antigravity settings. The program's text has the words `idle`, `thinking`, `working`, `running`, `waiting`, `waiting_for_input`, `awaiting_runs` — which of them the status line sends is not known. Recorded in SPEC-ai-services §5 stage 8.
+Checked: `scripts/check.sh` passed with a new test (what is stored, what comes back, a hold that ran out).
+Left: the restart was not tried live (the Debug copy shares Oleh's profiles, the switch is not pressed there). Antigravity's «ждёт» waits until Oleh opens `agy` once and finishes its welcome screen — the same step the quota check needs.
 
 ## 2026-11-12 — The main service: widget, «Другие AI», help (branch `feat/main-service`)
 
