@@ -2,9 +2,10 @@
 
 <!-- summary:start -->
 **Stage:** Mac: 0.11.0-beta.3 out to beta testers 2026-11-12 — everything planned for 0.11.0 (the main service can be another one than Claude, Antigravity's quota, what's new card, week pace, release notes, Homebrew cask, translations read against the original, the help up to date); releases once a week on Tuesday since 2026-11-11; 0.10.2 published 2026-11-10 (the Settings sidebar can no longer stay collapsed); 0.10.1 the same day (the stop button asks, Arabic percents, projects stay in sight); 0.10.0 the same day (the redesign: a calmer limits block, Settings with seven rows and «Что показывать», account and plan in the panel's header, the «Ещё» row); 0.9.1 the same day (no crash on removing an account, Arabic mirrored, the Settings sidebar, a worktree's name in a session row); 0.9.0 on 2026-11-09 (the closed panel no longer uses a third of a CPU core, 30 fixes from an audit); 0.8.1 the same day (the island's rings fit in the black ears); 0.8.0 the same day, signed and notarized (Sparkle 2.10.1, the lock screen tile checks it locked, «Раскладка» directions and exceptions, «Поддержать проект»; 0.7.8 Developer ID, Accessibility asked once; 0.7.7 hook messages in the app's language, clean session titles; 0.7.6 a map of the panel on the first screen, «Тексты» fixes; before that shorter first run, panel polish, usage history, finished sessions, ⌃⌥B, outages, several Claude accounts). Windows/Linux (`desktop/`, Tauri 2): postponed by Oleh 2026-11-02
-**Updated:** 2026-11-12
+**Updated:** 2026-11-16
 
 **Now:**
+- 2026-11-16: the pass before the release — checks green on main (649 tests), Oleh's copy is on 0.11.0-beta.3 through Sparkle, the widget's files seen live with Codex as main. 0.11.0 waits for Oleh's word on Tuesday 2026-11-17
 - 0.11.0-beta.3 (build 844) published 2026-11-12 for beta testers: #367 the main service, #370 «Не спать» across restarts, #368 translations, #369 the help, #371 quotes and the card. Lives on Oleh's copy until Tuesday 2026-11-17; nothing new goes into 0.11.0 after it, only fixes
 - 2026-11-12: polish for 0.11.0 — one style of quotes and apostrophes per language, Settings looked at in de/ja/ar/pl after the translation fixes, the «Что нового» card and the release notes name the main service
 - 2026-11-12: «Не спать» stays on across restarts. Antigravity's «ждёт» not built: `agy` on this Mac stops at its first-run screen, so its states could not be seen
@@ -38,7 +39,7 @@
 
 **Needs Oleh:**
 - main service (in beta 3): Settings → «Что показывать» → «Лимиты AI» → «Главный сервис» — pick Codex, look at the panel and the menu bar item, put «Автоматически» back
-- update to 0.11.0-beta.3 (Settings → «Основные» → «Обновления», «Бета-версии» on) and say whether Sparkle replaced the copy in `~/Applications`; then the Antigravity quota: Settings → «Сервисы AI» → Gemini → «Включить квоту Antigravity», open `agy` once, then look at the panel — «Gemini» and «другие модели» with the plan. The agent was not allowed to press that button on your Mac, so the install into `~/.gemini/antigravity-cli/settings.json` is not seen live
+- update to 0.11.0-beta.3 (Settings → «Основные» → «Обновления», «Бета-версии» on) (done: the copy in `~/Applications` is beta.3, build 844); then the Antigravity quota: Settings → «Сервисы AI» → Gemini → «Включить квоту Antigravity», open `agy` once, then look at the panel — «Gemini» and «другие модели» with the plan. The agent was not allowed to press that button on your Mac, so the install into `~/.gemini/antigravity-cli/settings.json` is not seen live
 - in the same update to 0.11.0-beta.3: does the update window show the list of changes, and does the «Что нового» card appear in the panel once
 - try the Homebrew install once (README → Install, three lines) on a Mac without the app, e.g. the Air: the agent did not trust the tap or install through it
 - say whether the app may report crashes by itself (opt-in, anonymous) — today it only offers a GitHub issue after a crash
@@ -64,6 +65,16 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-16 — The Monday pass before 0.11.0 (branch `chore/status-monday-pass`)
+
+Done: the pass promised for the day before the release. No code changed.
+Checked:
+- main is clean and equals origin, no open pull requests or issues.
+- `scripts/check.sh` on main passed: 649 tests, catalog 1810 keys with 0 problems.
+- Oleh's copy in `~/Applications` is 0.11.0-beta.3 (build 844) and is running, so Sparkle did replace the copy this time; no crash report since 2026-11-10.
+- The widget's files, live, in an isolated copy with Codex chosen as the main service: `main-limits.json` has Codex with its 30-day limit and reset, `other-ai.json` has Claude and Copilot without Codex. This was the part of the main service nobody had seen running.
+Left: the panel of that copy was not looked at. The posted click opened it while Oleh was typing in another app and its search field took his keystrokes; the panel was closed, the copy quit and removed, the picture deleted, and the mouse check stopped there. The panel with another main service was seen on 2026-11-11, before the «Другие AI» change. Still Oleh's: the update window's list of changes, the «Что нового» card, Antigravity's quota after opening `agy`, «Не спать» after a restart.
 
 ## 2026-11-12 — 0.11.0-beta.3: everything planned for 0.11.0 (branch `chore/status-beta-0.11.0-3`)
 
