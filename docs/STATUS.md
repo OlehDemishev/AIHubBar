@@ -5,6 +5,7 @@
 **Updated:** 2026-11-17
 
 **Now:**
+- 2026-11-17: Codex's summary shows file names instead of Markdown links with full paths (branch `fix/codex-summary-links`); goes out with 0.12.0
 - 2026-11-17: live pass over the windows of the nine features on the Debug copy, merged as #388: two fixes — «История расхода» scrolls instead of cutting its top and bottom, Codex skills are also read from `~/.agents/skills`. Not seen: approvals, a background Codex run, handover, review and the pair inside the app
 - 2026-11-17: nine Claude and Codex features merged (#377–#386), waiting in `main` for 0.12.0: Codex approvals, Codex in the background, the limit guard for Codex, handover to Codex, review by the other service, one task to both, the «Skills и плагины» tab, the day summary, the plan against the API price; the help and `docs/release-notes/0.12.0.md` cover them. Checks green (tests, catalog 1851 keys); live only `codex exec` itself was run
 - 2026-11-17: a hidden demo copy for recording release news (branch `feat/demo-mode`): `scripts/demo.sh` starts the app filled with sample data under its own bundle id and home folder; `DemoData` is brought up to date with every release that has news (docs/RELEASE.md → Demo). Merged as #375; goes out with the next release
@@ -75,6 +76,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-17 — Codex's summary without file links (branch `fix/codex-summary-links`)
+
+Done: Codex names the files it touched as Markdown links with the full path (`[NOTES.md](/…/NOTES.md)`), seen in the live run today. `CodexExec.plainFileLinks` turns such a link into the file's name in the run's summary and log lines, so the notification, the row and Telegram read cleanly. Links to the web stay.
+Checked: `scripts/check.sh` green, a new test (file links, a web link left alone, the outcome of a log).
+Left: not seen in a live notification.
 
 ## 2026-11-17 — A background Codex run seen end to end (branch `chore/status-codex-live-run`)
 

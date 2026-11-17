@@ -49,7 +49,7 @@ enum CodexExec {
             switch type {
             case "item.completed":
                 if let item = event["item"] as? [String: Any], item["type"] as? String == "agent_message", let text = item["text"] as? String {
-                    message = text
+                    message = plainFileLinks(text)
                 }
             case "turn.completed":
                 outcome = StreamJSON.Outcome(isError: false, subtype: type, result: message, deniedTools: [])
@@ -69,7 +69,7 @@ enum CodexExec {
             guard let item = event["item"] as? [String: Any] else { return nil }
             switch item["type"] as? String {
             case "agent_message":
-                return (item["text"] as? String).flatMap { $0.isEmpty ? nil : (.text, $0) }
+                return (item["text"] as? String).flatMap { $0.isEmpty ? nil : (.text, plainFileLinks($0)) }
             case "command_execution":
                 return (.tool, "Bash: " + shellCommand(item["command"] as? String ?? ""))
             case "file_change":
@@ -83,6 +83,13 @@ enum CodexExec {
         default:
             return nil
         }
+    }
+
+    /// `[NOTES.md](/Users/me/project/NOTES.md)` → `NOTES.md`: Codex links the files it names by their full path (seen
+    /// live 2026-11-17), which a notification or a Telegram message would show raw. Links to the web stay as they are.
+    static func plainFileLinks(_ text: String) -> String {
+        guard text.contains("](") else { return text }
+        return text.replacing(/\[([^\]\n]+)\]\((?:\/|~\/|file:)[^)\n]*\)/) { String($0.1) }
     }
 
     /// `/bin/zsh -lc "npm test"` → `npm test`: Codex wraps every command in a login shell.
