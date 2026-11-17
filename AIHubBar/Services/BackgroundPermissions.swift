@@ -6,16 +6,25 @@ import Foundation
 /// compound command (`&&`, `|`, `;`, `$()`) must be allowed, and deny rules match any part.
 /// Bash rules are pattern matching, not a sandbox — see DECISIONS.md.
 enum BackgroundPermissions {
-    static func arguments(prompt: String, sessionID: String, profile: PermissionProfile = .code) -> [String] {
+    static func arguments(prompt: String, sessionID: String, profile: PermissionProfile = .code, readOnly: Bool = false) -> [String] {
         [
             "-p", prompt,
             "--session-id", sessionID,
             "--output-format", "stream-json", "--verbose",
             "--permission-mode", "dontAsk",
             "--permission-prompts", "none",
-            "--settings", settingsJSON(profile),
+            "--settings", readOnly ? settingsJSON(reviewRules) : settingsJSON(profile),
         ]
     }
+
+    /// A review of someone else's work (`CrossReview`): read files and git history, change nothing, no network.
+    static let reviewRules: (allow: [String], deny: [String]) = (
+        ["Read", "Glob", "Grep", "TodoWrite",
+         "Bash(git status)", "Bash(git status *)", "Bash(git diff)", "Bash(git diff *)", "Bash(git log *)", "Bash(git log)",
+         "Bash(git show *)", "Bash(git branch)", "Bash(git branch *)", "Bash(git rev-parse *)", "Bash(git ls-files *)",
+         "Bash(git merge-base *)"],
+        ["Edit", "Write", "NotebookEdit", "WebFetch", "WebSearch"] + deny
+    )
 
     /// «Только файлы» (SPEC-modes §3): read, search and write inside the project folder; no shell, no network.
     /// «Файлы + поиск в интернете» adds web search and page fetching.
@@ -78,8 +87,9 @@ enum BackgroundPermissions {
         "Bash(env)", "Bash(env *)", "Bash(printenv*)", "Bash(security *)",
     ]
 
-    static func settingsJSON(_ profile: PermissionProfile = .code) -> String {
-        let rules = rules(profile)
+    static func settingsJSON(_ profile: PermissionProfile = .code) -> String { settingsJSON(rules(profile)) }
+
+    static func settingsJSON(_ rules: (allow: [String], deny: [String])) -> String {
         let settings: [String: Any] = [
             "permissions": [
                 "allow": rules.allow,

@@ -35,6 +35,8 @@ struct BackgroundRun: Codable, Identifiable, Equatable, Sendable {
     var threadID: String? = nil
     /// The whole task as it was sent, kept so the run can be handed to another service (`Handover`).
     var prompt: String? = nil
+    /// A review by the other service: the id of the run it reads (`CrossReview`). Such a run changes nothing.
+    var reviewOf: String? = nil
 
     var agentTitle: String { agent == CodexExec.agent ? AgentKind.codex.title : AgentKind.claudeCode.title }
 

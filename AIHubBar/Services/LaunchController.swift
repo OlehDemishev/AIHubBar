@@ -254,6 +254,28 @@ final class LaunchController {
         }
     }
 
+    /// «Проверить в Codex / Claude» on a finished run: the other service reads the changes in the run's folder.
+    func canReview(_ run: BackgroundRun) -> Bool {
+        CrossReview.canReview(run, runs: runs.runs) && run.prompt?.isEmpty == false
+            && (!CrossReview.reviewerIsCodex(run) || codexPath() != nil)
+    }
+
+    func review(_ run: BackgroundRun) {
+        guard canReview(run), let task = run.prompt else { return }
+        let codex = CrossReview.reviewerIsCodex(run) ? codexPath() : nil
+        do {
+            _ = try runs.launch(
+                title: String(localized: "Проверка"), prompt: CrossReview.prompt(task: task, author: run.agentTitle),
+                project: run.project, projectPath: run.projectPath, folder: run.folder, worktreeBranch: run.worktreeBranch,
+                profile: .code, resultFile: nil, claudePath: ClaudeLocator.resolve(configured: settings.claudePath),
+                taskTitle: String(localized: "Проверка: \(run.task)"), codexPath: codex, reviewOf: run.id
+            )
+            AppLog.info("Review of run \(run.id) started by \(codex == nil ? "claude" : "codex")")
+        } catch {
+            messages[run.projectPath] = Message(text: error.localizedDescription, isError: true)
+        }
+    }
+
     /// «Запустить после сброса»: queued for the reset time + 2 min (spec §2.8).
     func launchAfterReset(in project: Project) {
         guard let pending = pendingLimit.removeValue(forKey: project.id) else { return }

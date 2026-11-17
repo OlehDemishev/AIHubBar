@@ -58,14 +58,14 @@ final class RunStore {
     func launch(
         title: String, prompt: String, project: String, projectPath: String, folder: String, worktreeBranch: String?,
         profile: PermissionProfile, resultFile: String?, claudePath: String, taskTitle: String? = nil,
-        codexPath: String? = nil
+        codexPath: String? = nil, reviewOf: String? = nil
     ) throws -> BackgroundRun {
         let id = UUID().uuidString.lowercased()
         var run = BackgroundRun(
             id: id, project: project, projectPath: projectPath, folder: folder, worktreeBranch: worktreeBranch,
             commandTitle: title, task: taskTitle ?? Session.taskTitle(prompt), startedAt: .now,
             timeLimitMinutes: settings.backgroundTimeLimitMinutes, pid: nil, state: .running, notified: false,
-            resultFile: resultFile, agent: codexPath == nil ? nil : CodexExec.agent, prompt: prompt
+            resultFile: resultFile, agent: codexPath == nil ? nil : CodexExec.agent, prompt: prompt, reviewOf: reviewOf
         )
 
         try FileManager.default.createDirectory(at: BackgroundRun.runsDirectory, withIntermediateDirectories: true)
@@ -75,8 +75,8 @@ final class RunStore {
         let process = Process()
         process.executableURL = URL(fileURLWithPath: codexPath ?? claudePath)
         process.arguments = codexPath == nil
-            ? BackgroundPermissions.arguments(prompt: prompt, sessionID: id, profile: profile)
-            : CodexExec.arguments(prompt: prompt, gitDirectory: CodexExec.gitDirectory(folder: folder))
+            ? BackgroundPermissions.arguments(prompt: prompt, sessionID: id, profile: profile, readOnly: reviewOf != nil)
+            : CodexExec.arguments(prompt: prompt, gitDirectory: CodexExec.gitDirectory(folder: folder), readOnly: reviewOf != nil)
         process.currentDirectoryURL = URL(fileURLWithPath: folder, isDirectory: true)
         process.environment = ProcessRunner.environment()
         process.standardInput = FileHandle.nullDevice
