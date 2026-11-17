@@ -4,11 +4,13 @@
 
 pub mod agent_hooks;
 pub mod approvals;
+pub mod command;
 pub mod hooks;
 pub mod i18n;
 pub mod ipc;
 pub mod paths;
 pub mod process;
+pub mod projects;
 pub mod sessions;
 pub mod settings;
 pub mod texts;

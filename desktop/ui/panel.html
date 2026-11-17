@@ -34,6 +34,11 @@
         <p style="margin-top: 6px"><button id="hooks-settings" data-t="Настройки…"></button></p>
       </div>
     </section>
+    <section class="card projects">
+      <h2 data-t="Проекты"></h2>
+      <div id="project-rows"></div>
+      <p class="secondary" id="projects-message" hidden></p>
+    </section>
     <p class="secondary" id="version"></p>
   </main>
   <script type="module">
@@ -42,7 +47,10 @@
     document.getElementById("version").textContent = t("Версия %@", ui.version);
     document.getElementById("settings").onclick = () => invoke("open_settings");
     document.getElementById("quit").onclick = () => invoke("quit");
-    document.getElementById("refresh").onclick = () => invoke("refresh_limits");
+    document.getElementById("refresh").onclick = () => {
+      invoke("refresh_limits");
+      invoke("refresh_projects");
+    };
     const hint = document.getElementById("tray-hint");
     hint.hidden = !ui.showTrayHint;
     document.getElementById("tray-hint-done").onclick = async () => {
@@ -138,6 +146,119 @@
     document.getElementById("hooks-settings").onclick = () => invoke("open_settings");
     await showSessions();
     window.__TAURI__.event.listen("sessions-changed", showSessions);
+
+    // STATUS.md items and attention texts carry inline Markdown: `code` and **bold**, as the Mac panel shows them.
+    function inline(text) {
+      const element = document.createElement("span");
+      for (const part of text.split(/(`[^`]+`|\*\*[^*]+\*\*)/)) {
+        if (!part) continue;
+        const code = part.startsWith("`") && part.endsWith("`") && part.length > 1;
+        const bold = part.startsWith("**") && part.endsWith("**") && part.length > 3;
+        const piece = document.createElement(code ? "code" : bold ? "strong" : "span");
+        piece.textContent = code ? part.slice(1, -1) : bold ? part.slice(2, -2) : part;
+        element.append(piece);
+      }
+      return element;
+    }
+
+    function element(tag, className, text) {
+      const item = document.createElement(tag);
+      if (className) item.className = className;
+      if (text !== undefined) item.textContent = text;
+      return item;
+    }
+
+    function bullets(title, items, tint) {
+      if (!items.length) return [];
+      const box = element("div", `bullets ${tint ?? ""}`);
+      box.append(element("div", "bullets-title", title));
+      for (const item of items) {
+        const line = element("div", "bullet");
+        line.append(element("span", "secondary", "•"), inline(item));
+        box.append(line);
+      }
+      return [box];
+    }
+
+    function action(title, onclick) {
+      const button = element("button", "small", title);
+      button.onclick = onclick;
+      return button;
+    }
+
+    // A project's details, as the Mac row opens: actions first, then STATUS, attention, PRs, worktrees.
+    function details(row) {
+      const box = element("div", "details");
+      const actions = element("div", "actions");
+      actions.append(action(t("Терминал"), () => invoke("open_project", { path: row.path, target: "terminal" })));
+      actions.append(action(t("Папка"), () => invoke("open_project", { path: row.path, target: "folder" })));
+      if (row.github) actions.append(action("GitHub", () => invoke("open_link", { url: row.github })));
+      box.append(actions);
+      if (row.stage) box.append(Object.assign(inline(row.stage), { className: "stage" }));
+      box.append(...bullets(t("Сейчас"), row.now), ...bullets(t("Дальше"), row.next), ...bullets(t("Нужно от вас"), row.needs, "needs"));
+      if (row.statusNote) box.append(element("p", "secondary", row.statusNote));
+      for (const item of row.attention) {
+        const line = element("div", `attention ${item.level}`);
+        line.append(element("span", "mark", item.level === "high" ? "▲" : item.level === "mid" ? "●" : "ⓘ"), inline(item.text));
+        box.append(line);
+      }
+      for (const pr of row.pullRequests) {
+        const line = element("button", `pr link ci-${pr.ci}`);
+        line.append(element("span", "mark", "⇄"), element("span", "secondary", `#${pr.number}`), element("span", "title", pr.title));
+        if (pr.draft) line.append(element("span", "secondary", t("черновик")));
+        line.title = `${pr.title} · CI: ${pr.ciTitle}`;
+        line.disabled = !pr.url;
+        line.onclick = () => invoke("open_link", { url: pr.url });
+        box.append(line);
+      }
+      if (row.worktrees.length) {
+        box.append(element("div", "bullets-title", "Worktree"));
+        for (const worktree of row.worktrees) {
+          const line = element("div", "worktree");
+          const text = element("div", "worktree-text");
+          text.append(element("div", "name", worktree.name), element("div", "secondary", worktree.detail));
+          line.append(text, action(t("Терминал"), () => invoke("open_project", { path: worktree.path, target: "terminal" })));
+          box.append(line);
+        }
+      }
+      return box;
+    }
+
+    // Projects, as the Mac panel lists them: health dot, name, branch, badges, last activity; a click opens the rest.
+    const expanded = new Set();
+    async function showProjects() {
+      const view = await invoke("projects_view");
+      const rows = document.getElementById("project-rows");
+      rows.replaceChildren(...view.rows.map((row) => {
+        const item = element("div", "project");
+        const open = expanded.has(row.path);
+        const summary = element("button", "project-summary");
+        summary.setAttribute("aria-expanded", String(open));
+        summary.title = open ? t("Свернуть") : t("Подробнее и действия");
+        const dot = element("span", `dot ${row.health}`);
+        dot.title = row.healthTitle;
+        dot.setAttribute("aria-label", row.healthTitle);
+        summary.append(dot, element("span", "name", row.name));
+        if (row.branch) summary.append(element("span", "secondary branch", `⎇ ${row.branch}`));
+        summary.append(element("span", "spacer"));
+        if (row.dirty) summary.append(Object.assign(element("span", "badge dirty", `✎ ${row.dirty}`), { title: row.dirtyTitle }));
+        if (row.prs) summary.append(Object.assign(element("span", `badge ci-${row.prsCi}`, `⇄ ${row.prs}`), { title: row.prsTitle }));
+        if (row.ago) summary.append(element("span", "secondary ago", row.ago));
+        summary.onclick = () => {
+          if (expanded.has(row.path)) expanded.delete(row.path); else expanded.add(row.path);
+          showProjects();
+        };
+        item.append(summary);
+        if (open) item.append(details(row));
+        return item;
+      }));
+      const message = document.getElementById("projects-message");
+      message.hidden = !view.message;
+      message.textContent = view.message ?? "";
+    }
+    await showProjects();
+    window.__TAURI__.event.listen("projects-changed", showProjects);
+    window.addEventListener("focus", () => invoke("projects_panel_opened"));
   </script>
 </body>
 </html>

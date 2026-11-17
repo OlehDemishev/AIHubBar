@@ -122311,6 +122311,82 @@
         }
       }
     },
+    "ветка %@: %lld коммит(ов) только на этом компьютере": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الفرع %@: %lld commit على هذا الكمبيوتر فقط"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Branch %@: %lld Commit(s) nur auf diesem Computer"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "branch %@: %lld commit(s) only on this computer"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "rama %@: %lld commit(s) solo en este ordenador"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "branche %@ : %lld commit(s) uniquement sur cet ordinateur"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "branch %@: %lld commit hanya di komputer ini"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "branch %@: %lld commit solo su questo computer"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ブランチ %@: %lld 件のコミットがこのコンピュータだけに"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "브랜치 %@: 커밋 %lld개가 이 컴퓨터에만 있음"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "gałąź %@: %lld commit(ów) tylko na tym komputerze"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "branch %@: %lld commit(s) só neste computador"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "гілка %@: %lld коміт(ів) лише на цьому комп’ютері"
+          }
+        }
+      }
+    },
     "ветка %@: %lld не запушено": {
       "localizations": {
         "ar": {

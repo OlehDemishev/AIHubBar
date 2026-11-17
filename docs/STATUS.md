@@ -2,9 +2,10 @@
 
 <!-- summary:start -->
 **Stage:** Mac: nine Claude and Codex features merged 2026-11-17 for 0.12.0 (not before Tuesday 2026-11-24), their windows seen live, the runs themselves not yet; 0.11.0 published 2026-11-17 (the main service can be another one than Claude, Antigravity's quota, what's new card, week pace, release notes, Homebrew cask, translations read against the original, the help up to date); releases once a week on Tuesday since 2026-11-11; 0.10.2 published 2026-11-10 (the Settings sidebar can no longer stay collapsed); 0.10.1 the same day (the stop button asks, Arabic percents, projects stay in sight); 0.10.0 the same day (the redesign: a calmer limits block, Settings with seven rows and «Что показывать», account and plan in the panel's header, the «Ещё» row); 0.9.1 the same day (no crash on removing an account, Arabic mirrored, the Settings sidebar, a worktree's name in a session row); 0.9.0 on 2026-11-09 (the closed panel no longer uses a third of a CPU core, 30 fixes from an audit); 0.8.1 the same day (the island's rings fit in the black ears); 0.8.0 the same day, signed and notarized (Sparkle 2.10.1, the lock screen tile checks it locked, «Раскладка» directions and exceptions, «Поддержать проект»; 0.7.8 Developer ID, Accessibility asked once; 0.7.7 hook messages in the app's language, clean session titles; 0.7.6 a map of the panel on the first screen, «Тексты» fixes; before that shorter first run, panel polish, usage history, finished sessions, ⌃⌥B, outages, several Claude accounts). Windows/Linux (`desktop/`, Tauri 2): resumed 2026-11-17 on Oleh's word — started on the Mac, carried on on his Windows laptop
-**Updated:** 2026-11-17
+**Updated:** 2026-11-18
 
 **Now:**
+- 2026-11-18: Windows stage 4 begun — the git scanner and STATUS.md in the panel's «Проекты» card (branch `feat/desktop-projects`)
 - 2026-11-17: Windows — the hook installed for Codex and Copilot from Settings (#398, merged; both lines run on Windows in CI)
 - 2026-11-17: Windows — answers to permission requests from the panel and a process alive check (#396, merged)
 - 2026-11-17: the Windows hook brought to the Mac's format 7 (#394, merged): Codex and Copilot sessions, clean prompts, answers to permission requests through `approvals/`
@@ -45,7 +46,7 @@
 - check on the Air: the island at the real notch
 - promotion (docs/LAUNCH.md): r/ClaudeAI, the lists, r/macapps, Show HN, Product Hunt, Homebrew
 - content (docs/specs/SPEC-content.md, agreed): stage 2 «Версии», then batch tasks; better after the first feedback from people
-- Windows: on the laptop the live check of SPEC-windows §11.4 (with a real permission request answered from the panel), then stage 3 leftovers («Показать», buttons in the notification), then stage 4
+- Windows: on the laptop the live check of SPEC-windows §11.4 (with a real permission request answered from the panel) and the «Проекты» card's buttons; then stage 4 on: launching Claude in the terminal and in the background, worktrees, the log; stage 3 leftovers («Показать», buttons in the notification) need the laptop
 
 **Needs Oleh:**
 - Windows laptop: install the tools and copy the two CLAUDE.md files as in `desktop/WINDOWS-DEV.md`, sign in to Claude Code there; choose the Windows signing (SPEC-windows §7)
@@ -81,6 +82,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-18 — Windows: projects in the panel (branch `feat/desktop-projects`)
+
+Done: stage 4 begun. `desktop/core/projects.rs` ports the Mac's `GitScanner` and `StatusText` with the same rules and texts: branch, uncommitted files, stashes, unpushed branches, worktrees, open PRs with CI through `gh`, the STATUS.md summary (CRLF too), attention items and the health dot. `desktop/core/command.rs` runs `git` and `gh` found through PATH/PATHEXT, with no console window and a time limit; git gets `LC_ALL=C` and never asks for a password in the background. The panel has a «Проекты» card like the Mac's: a row with dot, name, branch, badges and last activity, opening into STATUS, attention, PRs, worktrees and «Терминал» / «Папка» / GitHub (only folders and links the scan found). Refreshed at start, every 5 minutes, with `git fetch` every 30 and on opening the panel when older than a minute. The panel is 380 × 600 and scrolls. One new catalog text with 12 translations: «ветка %@: %lld коммит(ов) только на этом компьютере».
+Checked: `python3 scripts/strings.py --check` (104 texts), `cargo test --workspace` on the Mac (core 41, a real temporary repository with a Cyrillic and apostrophe name among them; `git` and a time limit through `command.rs`). The scanner over the real `~/Projects` (read only, no fetch): 10 projects in 1.7 s, attention items match the Mac's. The dev app scanned at start by itself (log `projects: 10 in 1.7 s`); its panel was not opened (it takes the keyboard). The panel's HTML with sample data in a browser, dark and light: rows, the opened row, the buttons' calls.
+Left: the buttons on Windows and Linux are not pressed live (Windows Terminal / PowerShell, Explorer, `rundll32` for links); PR notifications, the red dot on the tray icon, launching Claude, worktrees from the panel, the log, permission rules; the projects folder is fixed at `~/Projects` until profiles (stage 5).
 
 ## 2026-11-17 — Windows: the hook for Codex and Copilot (branch `feat/desktop-agent-hooks`)
 
