@@ -5,7 +5,7 @@
 **Updated:** 2026-11-17
 
 **Now:**
-- 2026-11-17: Windows — the hook installed for Codex and Copilot from Settings (branch `feat/desktop-agent-hooks`)
+- 2026-11-17: Windows — the hook installed for Codex and Copilot from Settings (#398, merged; both lines run on Windows in CI)
 - 2026-11-17: Windows — answers to permission requests from the panel and a process alive check (#396, merged)
 - 2026-11-17: the Windows hook brought to the Mac's format 7 (#394, merged): Codex and Copilot sessions, clean prompts, answers to permission requests through `approvals/`
 - 2026-11-17: Windows resumed (#393, merged): SPEC-windows §11 maps every Mac feature to works / worse / won't work, `desktop/WINDOWS-DEV.md` sets up the laptop, `desktop/CLAUDE.md` holds the agent's rules, `.gitattributes` keeps LF, desktop CI runs on catalog changes again
