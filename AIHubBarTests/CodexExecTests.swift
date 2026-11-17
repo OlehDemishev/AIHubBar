@@ -80,4 +80,11 @@ struct CodexExecTests {
         run.threadID = nil
         #expect(SessionRow.rows(sessions: [], runs: [run]).count == 1)
     }
+
+    @Test func fileLinksInTheSummaryBecomePlainNames() {
+        #expect(CodexExec.plainFileLinks("Создал [NOTES.md](/tmp/Demo/NOTES.md) и [a b.txt](~/x/a b.txt:12).") == "Создал NOTES.md и a b.txt.")
+        #expect(CodexExec.plainFileLinks("See [the docs](https://example.com/a) and list[0](x)") == "See [the docs](https://example.com/a) and list[0](x)")
+        let log = #"{"type":"item.completed","item":{"type":"agent_message","text":"Done: [b.txt](/tmp/p/b.txt)"}}"# + "\n" + #"{"type":"turn.completed","usage":{}}"#
+        #expect(CodexExec.outcome(fromLog: log)?.result == "Done: b.txt")
+    }
 }
