@@ -1,7 +1,8 @@
 import Foundation
 
 /// What is added to an agent besides MCP servers: its skills, plugins and hooks (seen on disk 2026-11-17, Claude Code
-/// 2.1.325 and Codex 0.166). Skills are folders with a `SKILL.md` in `~/.claude/skills` and `~/.codex/skills`; Claude
+/// 2.1.325 and Codex 0.166). Skills are folders with a `SKILL.md` in `~/.claude/skills`, and for Codex in `~/.codex/skills` and the shared
+/// `~/.agents/skills` (both paths are in Codex's binary; on Oleh's Mac only the second exists); Claude
 /// Code's plugins are listed in `~/.claude/plugins/installed_plugins.json` and switched by `enabledPlugins` in
 /// `~/.claude/settings.json`; hooks are `hooks` in that file and `~/.codex/hooks.json`.
 struct AgentSkill: Identifiable, Equatable, Sendable {
@@ -37,25 +38,29 @@ enum AgentExtras {
     /// A switched-off skill is moved here whole and moved back as it was: nothing in it is edited.
     static let offSuffix = ".disabled"
 
-    static func skillsFolder(_ agent: AgentKind, home: String) -> String? {
+    /// Where an agent looks for the person's skills, in the order they are listed.
+    static func skillsFolders(_ agent: AgentKind, home: String) -> [String] {
         switch agent {
-        case .claudeCode: home + "/.claude/skills"
-        case .codex: home + "/.codex/skills"
-        default: nil
+        case .claudeCode: [home + "/.claude/skills"]
+        case .codex: [home + "/.codex/skills", home + "/.agents/skills"]
+        default: []
         }
     }
 
     static func skills(home: String = NSHomeDirectory()) -> [AgentSkill] {
         var found: [AgentSkill] = []
         for agent in [AgentKind.claudeCode, .codex] {
-            guard let folder = skillsFolder(agent, home: home) else { continue }
-            for (root, isOn) in [(folder, true), (folder + offSuffix, false)] {
-                let names = ((try? FileManager.default.contentsOfDirectory(atPath: root)) ?? []).sorted()
-                for name in names where !name.hasPrefix(".") {
-                    let path = root + "/" + name
-                    guard let text = try? String(contentsOfFile: path + "/SKILL.md", encoding: .utf8) else { continue }
-                    let meta = frontmatter(text)
-                    found.append(AgentSkill(agent: agent, name: meta["name"] ?? name, description: meta["description"] ?? "", folder: path, isOn: isOn))
+            for folder in skillsFolders(agent, home: home) {
+                for (root, isOn) in [(folder, true), (folder + offSuffix, false)] {
+                    let names = ((try? FileManager.default.contentsOfDirectory(atPath: root)) ?? []).sorted()
+                    for name in names where !name.hasPrefix(".") {
+                        let path = root + "/" + name
+                        guard let text = try? String(contentsOfFile: path + "/SKILL.md", encoding: .utf8) else { continue }
+                        let meta = frontmatter(text)
+                        let skill = AgentSkill(agent: agent, name: meta["name"] ?? name, description: meta["description"] ?? "", folder: path, isOn: isOn)
+                        // The same skill in both of Codex's folders is listed once: the first folder wins.
+                        if !found.contains(where: { $0.id == skill.id }) { found.append(skill) }
+                    }
                 }
             }
         }
@@ -79,16 +84,18 @@ enum AgentExtras {
         return values
     }
 
-    /// Where the skill's folder goes when it is switched: into the skills folder or out of it. Nil when it is
-    /// already there or a folder of that name is in the way.
-    static func destination(_ skill: AgentSkill, on: Bool, home: String = NSHomeDirectory()) -> String? {
-        guard skill.isOn != on, let folder = skillsFolder(skill.agent, home: home) else { return nil }
-        let target = (on ? folder : folder + offSuffix) + "/" + (skill.folder as NSString).lastPathComponent
+    /// Where the skill's folder goes when it is switched: out of the folder it is in to the one beside it, or back.
+    /// Nil when it is already there or a folder of that name is in the way.
+    static func destination(_ skill: AgentSkill, on: Bool) -> String? {
+        guard skill.isOn != on else { return nil }
+        let root = (skill.folder as NSString).deletingLastPathComponent
+        guard on ? root.hasSuffix(offSuffix) : true else { return nil }
+        let target = (on ? String(root.dropLast(offSuffix.count)) : root + offSuffix) + "/" + (skill.folder as NSString).lastPathComponent
         return FileManager.default.fileExists(atPath: target) ? nil : target
     }
 
-    static func move(_ skill: AgentSkill, on: Bool, home: String = NSHomeDirectory()) throws {
-        guard let target = destination(skill, on: on, home: home) else { throw CocoaError(.fileWriteFileExists) }
+    static func move(_ skill: AgentSkill, on: Bool) throws {
+        guard let target = destination(skill, on: on) else { throw CocoaError(.fileWriteFileExists) }
         try FileManager.default.createDirectory(atPath: (target as NSString).deletingLastPathComponent, withIntermediateDirectories: true)
         try FileManager.default.moveItem(atPath: skill.folder, toPath: target)
     }

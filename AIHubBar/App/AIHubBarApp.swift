@@ -119,7 +119,7 @@ struct AIHubBarApp: App {
                 .debugSnapshot("usage-history")
         }
         .handlesExternalEvents(matching: [])
-        .defaultSize(width: 720, height: 520)
+        .defaultSize(width: 720, height: 680)
 
         Window("Очистка сборок", id: WindowID.cleanupOutput.rawValue) {
             CleanupOutputView()

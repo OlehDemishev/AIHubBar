@@ -34,13 +34,32 @@ struct AgentExtrasTests {
         let home = try home()
         defer { try? FileManager.default.removeItem(at: home) }
         let animate = try #require(AgentExtras.skills(home: home.path).first { $0.name == "animate" })
-        try AgentExtras.move(animate, on: false, home: home.path)
+        try AgentExtras.move(animate, on: false)
         let off = try #require(AgentExtras.skills(home: home.path).first { $0.name == "animate" })
         #expect(!off.isOn && off.folder.hasSuffix(".claude/skills.disabled/animate"))
         #expect(!FileManager.default.fileExists(atPath: animate.folder))
-        #expect(AgentExtras.destination(off, on: false, home: home.path) == nil, "already off")
-        try AgentExtras.move(off, on: true, home: home.path)
+        #expect(AgentExtras.destination(off, on: false) == nil, "already off")
+        try AgentExtras.move(off, on: true)
         #expect(AgentExtras.skills(home: home.path).first { $0.name == "animate" } == animate, "back as it was")
+    }
+
+    /// Codex also reads the shared `~/.agents/skills`; a skill there is switched beside that folder, not Codex's own.
+    @Test func codexSkillsInTheSharedFolder() throws {
+        let home = try home()
+        defer { try? FileManager.default.removeItem(at: home) }
+        for name in ["review", "shared"] {
+            let url = home.appending(path: ".agents/skills/\(name)")
+            try FileManager.default.createDirectory(at: url, withIntermediateDirectories: true)
+            try "---\ndescription: Shared\n---".write(to: url.appending(path: "SKILL.md"), atomically: true, encoding: .utf8)
+        }
+        let codex = AgentExtras.skills(home: home.path).filter { $0.agent == .codex }
+        #expect(codex.map(\.name) == ["review", "shared"], "the one in both folders is listed once")
+        #expect(codex[0].folder.hasSuffix(".codex/skills/review") && codex[1].folder.hasSuffix(".agents/skills/shared"))
+        try AgentExtras.move(codex[1], on: false)
+        let off = try #require(AgentExtras.skills(home: home.path).first { $0.name == "shared" })
+        #expect(!off.isOn && off.folder.hasSuffix(".agents/skills.disabled/shared"))
+        try AgentExtras.move(off, on: true)
+        #expect(AgentExtras.skills(home: home.path).first { $0.name == "shared" } == codex[1])
     }
 
     @Test func pluginsAreOnUnlessSwitchedOff() {

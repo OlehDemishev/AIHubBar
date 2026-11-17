@@ -244,7 +244,7 @@ final class ClaudeConfigStore {
     /// Off — the skill's folder moves next to the skills folder; on — back. Nothing inside it changes.
     func setEnabled(_ skill: AgentSkill, _ on: Bool) {
         do {
-            try AgentExtras.move(skill, on: on, home: home)
+            try AgentExtras.move(skill, on: on)
             AppLog.info("Skill «\(skill.name)» of \(skill.agent.binary) switched \(on ? "on" : "off")")
         } catch {
             lastError = error.localizedDescription
