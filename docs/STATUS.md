@@ -5,7 +5,7 @@
 **Updated:** 2026-11-18
 
 **Now:**
-- 2026-11-18: Windows stage 4 begun — the git scanner and STATUS.md in the panel's «Проекты» card (branch `feat/desktop-projects`)
+- 2026-11-18: Windows stage 4 begun — the git scanner and STATUS.md in the panel's «Проекты» card (#400, merged; tests green on Windows and Linux)
 - 2026-11-17: Windows — the hook installed for Codex and Copilot from Settings (#398, merged; both lines run on Windows in CI)
 - 2026-11-17: Windows — answers to permission requests from the panel and a process alive check (#396, merged)
 - 2026-11-17: the Windows hook brought to the Mac's format 7 (#394, merged): Codex and Copilot sessions, clean prompts, answers to permission requests through `approvals/`
