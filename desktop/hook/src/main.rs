@@ -1,17 +1,20 @@
 //! `claudepult-hook` — the Claude Code hook of AI Hub Bar for Windows and Linux (docs/specs/SPEC-windows.md §4.3), a port
-//! of the Mac's Python hook (`AIHubBar/Services/HookScript.swift`, format 3) so the session files are the same:
-//! `<data dir>/sessions/<session_id>.json`. It must never affect Claude: it prints nothing and always exits 0.
-//! Answering permission requests from the app is not here yet (a later stage).
+//! of the Mac's Python hook (`AIHubBar/Services/HookScript.swift`, format 7) so the session files are the same:
+//! `<data dir>/sessions/<session_id>.json`. With `--agent copilot` or `--agent codex` it records Copilot CLI or Codex
+//! CLI sessions the same way. It must never affect the agent: it prints nothing and always exits 0, except on a
+//! PermissionRequest the person answered in the app (`approvals.rs`): then it prints that decision.
 //!
 //! Instead of a tty it records what finds the window later: the Claude process id (walking up the parents) and
 //! `WT_SESSION`, Windows Terminal's tab id.
 
+mod approvals;
 mod process;
+mod text;
 
 use chrono::{DateTime, Local};
 use serde_json::{json, Map, Value};
 use std::fs::File;
-use std::io::Read;
+use std::io::{Read, Write};
 use std::path::{Path, PathBuf};
 
 const WAITING_NOTIFICATIONS: [&str; 4] = ["permission_prompt", "elicitation_dialog", "elicitation_url_dialog", "agent_needs_input"];
@@ -56,6 +59,10 @@ fn project_of(cwd: Option<&str>, projects_dir: Option<&str>) -> (Value, Value) {
 /// What a tool call did, for «what Claude is doing now»: (tool, target).
 fn action_of(data: &Value) -> (String, String) {
     let tool = data.get("tool_name").and_then(Value::as_str).unwrap_or("").to_owned();
+    if tool == "apply_patch" {
+        // Codex edits files by a patch in `command`: the first file it touches.
+        return (tool, approvals::patch_files(data).into_iter().next().unwrap_or_default());
+    }
     let mut target = String::new();
     if let Some(input) = data.get("tool_input").and_then(Value::as_object) {
         for key in ["file_path", "notebook_path", "command", "pattern", "url", "query", "description", "prompt"] {
@@ -161,9 +168,18 @@ fn apply(record: &mut Map<String, Value>, data: &Value) {
             if finished {
                 record.remove("todos");
             }
-            let prompt = clip(data.get("prompt"));
+            let mut prompt = text::without_system_text(data.get("prompt").and_then(Value::as_str).unwrap_or(""));
+            while text::starts_with_app_text(&prompt) {
+                prompt = text::without_app_text(&prompt);
+            }
+            let prompt = squeeze(&prompt, PROMPT_LIMIT);
             if !prompt.is_empty() {
                 record.insert("last_prompt".into(), json!(prompt));
+                // A title saved by an older hook can be that wrapper alone.
+                let first = record.get("first_prompt").and_then(Value::as_str).unwrap_or("");
+                if first.starts_with("<system-reminder>") || text::starts_with_app_text(first) {
+                    record.insert("first_prompt".into(), json!(prompt));
+                }
                 record.entry("first_prompt").or_insert(json!(prompt));
             }
         }
@@ -190,6 +206,13 @@ fn apply(record: &mut Map<String, Value>, data: &Value) {
             }
         }
         "Stop" => {
+            record.insert("state".into(), json!("done"));
+            for key in ["message", "last_tool", "last_target", "last_tool_at"] {
+                record.remove(key);
+            }
+        }
+        "Interrupt" => {
+            // Codex: Esc on a running turn — it waits for the next message, like after Stop.
             record.insert("state".into(), json!("done"));
             for key in ["message", "last_tool", "last_target", "last_tool_at"] {
                 record.remove(key);
@@ -239,16 +262,45 @@ fn run() -> Option<()> {
     if !valid {
         return None;
     }
+    let agent = arg(&args, "--agent").unwrap_or_else(|| "claude".into());
     let directory = arg(&args, "--sessions-dir").map(PathBuf::from).unwrap_or_else(claudepult_core::paths::sessions_dir);
     std::fs::create_dir_all(&directory).ok()?;
     let path = directory.join(format!("{session_id}.json"));
+    let projects_dir = arg(&args, "--projects-dir");
 
+    // The request goes first, so the app sees it together with the «waiting» state.
+    let approvals_dir = directory.parent().map(|p| p.join("approvals")).unwrap_or_else(|| directory.join("approvals"));
+    let request = (data.get("hook_event_name").and_then(Value::as_str) == Some("PermissionRequest")
+        && matches!(agent.as_str(), "claude" | "codex"))
+    .then(|| {
+        let cwd = data.get("cwd").and_then(Value::as_str);
+        let project = match project_of(cwd, projects_dir.as_deref()).0 {
+            Value::String(name) => name,
+            _ => cwd.map(|c| c.trim_end_matches(['/', '\\']).rsplit(['/', '\\']).next().unwrap_or("").to_owned()).unwrap_or_default(),
+        };
+        approvals::open(&approvals_dir, &data, &session_id, &project, &agent, |t| squeeze(t, PROMPT_LIMIT))
+    })
+    .flatten();
+
+    write_record(&directory, &path, &session_id, &data, projects_dir.as_deref(), &agent)?;
+
+    if let Some(id) = request {
+        let behavior = approvals::wait(&approvals_dir, &id, &path)?;
+        let mut stdout = std::io::stdout();
+        stdout.write_all(approvals::output(behavior).to_string().as_bytes()).ok()?;
+        stdout.flush().ok()?;
+    }
+    Some(())
+}
+
+/// Updates the session file under the lock; the lock is released before any wait for an answer.
+fn write_record(directory: &Path, path: &Path, session_id: &str, data: &Value, projects_dir: Option<&str>, agent: &str) -> Option<()> {
     // One writer at a time: hooks of one session can overlap.
     let lock = File::create(directory.join(".lock")).ok()?;
     lock.lock().ok()?;
     let mut record: Map<String, Value> =
-        std::fs::read_to_string(&path).ok().and_then(|t| serde_json::from_str(&t).ok()).unwrap_or_default();
-    if skip_repeat(&record, &data) {
+        std::fs::read_to_string(path).ok().and_then(|t| serde_json::from_str(&t).ok()).unwrap_or_default();
+    if skip_repeat(&record, data) {
         return Some(());
     }
     let stamp = now();
@@ -261,23 +313,25 @@ fn run() -> Option<()> {
             record.insert(key.into(), value.clone());
         }
     }
-    let (project, project_path) = project_of(record.get("cwd").and_then(Value::as_str), arg(&args, "--projects-dir").as_deref());
+    let (project, project_path) = project_of(record.get("cwd").and_then(Value::as_str), projects_dir);
     record.insert("project".into(), project);
     record.insert("project_path".into(), project_path);
     // A resumed session runs in a new process: follow it.
-    let pid = process::claude_pid();
+    let pid = process::agent_pid(agent);
     if !record.contains_key("claude_pid") || (pid.is_some() && pid.map(Value::from) != record.get("claude_pid").cloned()) {
         record.insert("claude_pid".into(), pid.map(Value::from).unwrap_or(Value::Null));
         record.insert("tty".into(), Value::Null);
         record.insert("wt_session".into(), std::env::var("WT_SESSION").ok().map(Value::from).unwrap_or(Value::Null));
         record.insert("term_program".into(), std::env::var("TERM_PROGRAM").ok().map(Value::from).unwrap_or(Value::Null));
-        record.insert("entrypoint".into(), std::env::var("CLAUDE_CODE_ENTRYPOINT").ok().map(Value::from).unwrap_or(Value::Null));
+        let entrypoint = if agent == "claude" { std::env::var("CLAUDE_CODE_ENTRYPOINT").ok() } else { Some(agent.to_owned()) };
+        record.insert("entrypoint".into(), entrypoint.map(Value::from).unwrap_or(Value::Null));
     }
-    apply(&mut record, &data);
+    record.insert("agent".into(), json!(agent));
+    apply(&mut record, data);
 
     let tmp = path.with_extension("json.tmp");
     std::fs::write(&tmp, serde_json::to_string_pretty(&Value::Object(record)).ok()?).ok()?;
-    std::fs::rename(&tmp, &path).ok()?;
+    std::fs::rename(&tmp, path).ok()?;
     Some(())
 }
 

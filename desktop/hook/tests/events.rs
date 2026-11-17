@@ -4,6 +4,7 @@ use serde_json::{json, Value};
 use std::io::Write;
 use std::path::PathBuf;
 use std::process::{Command, Stdio};
+use std::time::{Duration, Instant};
 
 struct Hook {
     dir: PathBuf,
@@ -17,10 +18,18 @@ impl Hook {
     }
 
     fn send(&self, event: Value) -> std::process::Output {
+        self.send_as("claude", event)
+    }
+
+    fn send_as(&self, agent: &str, event: Value) -> std::process::Output {
+        self.spawn(agent, event).wait_with_output().unwrap()
+    }
+
+    fn spawn(&self, agent: &str, event: Value) -> std::process::Child {
         let mut data = json!({"session_id": "s-1", "cwd": "/Users/me/Projects/Ambo/app", "transcript_path": "/t.jsonl"});
         data.as_object_mut().unwrap().extend(event.as_object().unwrap().clone());
         let mut child = Command::new(env!("CARGO_BIN_EXE_claudepult-hook"))
-            .args(["--projects-dir", "/Users/me/Projects", "--sessions-dir"])
+            .args(["--agent", agent, "--projects-dir", "/Users/me/Projects", "--sessions-dir"])
             .arg(self.dir.join("sessions"))
             .stdin(Stdio::piped())
             .stdout(Stdio::piped())
@@ -28,16 +37,60 @@ impl Hook {
             .spawn()
             .unwrap();
         child.stdin.take().unwrap().write_all(data.to_string().as_bytes()).unwrap();
-        child.wait_with_output().unwrap()
+        child
     }
 
     fn run(&self, events: Vec<Value>) -> Value {
+        self.run_as("claude", events)
+    }
+
+    fn run_as(&self, agent: &str, events: Vec<Value>) -> Value {
         for event in events {
-            let output = self.send(event);
+            let output = self.send_as(agent, event);
             assert!(output.status.success(), "always exit 0");
             assert!(output.stdout.is_empty() && output.stderr.is_empty(), "never print anything");
         }
+        self.record()
+    }
+
+    fn record(&self) -> Value {
         serde_json::from_str(&std::fs::read_to_string(self.dir.join("sessions/s-1.json")).unwrap()).unwrap()
+    }
+
+    fn approvals(&self) -> PathBuf {
+        self.dir.join("approvals")
+    }
+
+    /// The app running with answers on: it touches `approvals/alive`.
+    fn app_alive(&self) {
+        std::fs::create_dir_all(self.approvals()).unwrap();
+        std::fs::write(self.approvals().join("alive"), "1").unwrap();
+    }
+
+    fn requests(&self) -> Vec<PathBuf> {
+        std::fs::read_dir(self.approvals())
+            .map(|d| d.filter_map(Result::ok).map(|e| e.path()).filter(|p| p.to_string_lossy().ends_with(".request.json")).collect())
+            .unwrap_or_default()
+    }
+
+    /// A PermissionRequest answered in the app with `behavior`: what the hook printed.
+    fn answered(&self, agent: &str, behavior: &str) -> (String, Value) {
+        let child = self.spawn(agent, json!({"hook_event_name": "PermissionRequest", "tool_name": "Bash", "tool_input": {"command": "npm   test"}}));
+        let started = Instant::now();
+        let request = loop {
+            if let Some(path) = self.requests().pop() {
+                break path;
+            }
+            assert!(started.elapsed() < Duration::from_secs(10), "the hook writes a request");
+            std::thread::sleep(Duration::from_millis(50));
+        };
+        let request_json: Value = serde_json::from_str(&std::fs::read_to_string(&request).unwrap()).unwrap();
+        let id = request_json["id"].as_str().unwrap().to_owned();
+        std::fs::write(self.approvals().join(format!("{id}.decision")), behavior).unwrap();
+        let output = child.wait_with_output().unwrap();
+        assert!(output.status.success() && output.stderr.is_empty());
+        assert!(!request.exists(), "the request file is removed");
+        (String::from_utf8(output.stdout).unwrap(), request_json)
     }
 }
 
@@ -142,4 +195,77 @@ fn bad_input_changes_nothing() {
     let sessions = hook.dir.join("sessions");
     let files: Vec<_> = std::fs::read_dir(&sessions).map(|d| d.filter_map(Result::ok).map(|e| e.file_name()).collect()).unwrap_or_default();
     assert!(files.iter().all(|name| name == ".lock"), "no session file for a bad id: {files:?}");
+}
+
+#[test]
+fn codex_sessions() {
+    let hook = Hook::new("codex");
+    let record = hook.run_as("codex", vec![
+        json!({"hook_event_name": "UserPromptSubmit", "prompt": "Обнови README"}),
+        json!({"hook_event_name": "PostToolUse", "tool_name": "apply_patch",
+               "tool_input": {"command": "*** Begin Patch\n*** Update File: docs/README.md\n@@\n*** End Patch"}}),
+    ]);
+    assert_eq!(record["agent"], "codex");
+    assert_eq!(record["entrypoint"], "codex");
+    assert_eq!(record["last_tool"], "apply_patch");
+    assert_eq!(record["last_target"], "README.md", "the patch's first file");
+    let record = hook.run_as("codex", vec![json!({"hook_event_name": "Interrupt"})]);
+    assert_eq!(record["state"], "done", "Esc in Codex waits for the next message");
+    assert!(record.get("last_tool").is_none());
+}
+
+#[test]
+fn prompt_without_app_wrappers() {
+    let hook = Hook::new("wrappers");
+    let record = hook.run(vec![json!({"hook_event_name": "UserPromptSubmit",
+        "prompt": "<system-reminder>long context</system-reminder><ide_selection>code</ide_selection>  Почини тест"})]);
+    assert_eq!(record["first_prompt"], "Почини тест");
+    assert_eq!(record["last_prompt"], "Почини тест");
+
+    let hook = Hook::new("old-title");
+    std::fs::create_dir_all(hook.dir.join("sessions")).unwrap();
+    std::fs::write(hook.dir.join("sessions/s-1.json"), r#"{"first_prompt": "<system-reminder>left by an old hook"}"#).unwrap();
+    let record = hook.run(vec![json!({"hook_event_name": "UserPromptSubmit", "prompt": "Новая задача"})]);
+    assert_eq!(record["first_prompt"], "Новая задача", "a title that is only a wrapper is replaced");
+}
+
+#[test]
+fn answers_from_the_app() {
+    let hook = Hook::new("approve");
+    hook.app_alive();
+    let (printed, request) = hook.answered("claude", "allow");
+    assert_eq!(request["tool"], "Bash");
+    assert_eq!(request["summary"], "npm test");
+    assert_eq!(request["project"], "Ambo");
+    assert_eq!(request["agent"], "claude");
+    let printed: Value = serde_json::from_str(&printed).unwrap();
+    assert_eq!(printed["hookSpecificOutput"]["hookEventName"], "PermissionRequest");
+    assert_eq!(printed["hookSpecificOutput"]["decision"]["behavior"], "allow");
+    assert_eq!(hook.record()["state"], "waiting");
+
+    let (printed, _) = hook.answered("codex", "deny");
+    let printed: Value = serde_json::from_str(&printed).unwrap();
+    assert_eq!(printed["hookSpecificOutput"]["decision"]["behavior"], "deny");
+    assert_eq!(printed["hookSpecificOutput"]["decision"]["message"], "Denied in AI Hub Bar");
+}
+
+#[test]
+fn no_wait_without_the_app() {
+    let hook = Hook::new("no-app");
+    let started = Instant::now();
+    let record = hook.run(vec![json!({"hook_event_name": "PermissionRequest", "tool_name": "Bash"})]);
+    assert_eq!(record["state"], "waiting");
+    assert!(started.elapsed() < Duration::from_secs(5), "no alive file: no wait");
+    assert!(hook.requests().is_empty());
+
+    // Copilot's requests are not answered from the app (as on the Mac).
+    hook.app_alive();
+    let output = hook.send_as("copilot", json!({"hook_event_name": "PermissionRequest", "tool_name": "Bash"}));
+    assert!(output.stdout.is_empty() && hook.requests().is_empty());
+
+    // An old alive file means the app is gone.
+    let stale = std::time::SystemTime::now() - Duration::from_secs(120);
+    std::fs::File::options().write(true).open(hook.approvals().join("alive")).unwrap().set_modified(stale).unwrap();
+    let output = hook.send(json!({"hook_event_name": "PermissionRequest", "tool_name": "Bash"}));
+    assert!(output.stdout.is_empty() && hook.requests().is_empty());
 }
