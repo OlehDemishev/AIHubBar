@@ -1,10 +1,11 @@
 # Status
 
 <!-- summary:start -->
-**Stage:** Mac: 0.11.0-beta.3 out to beta testers 2026-11-12 — everything planned for 0.11.0 (the main service can be another one than Claude, Antigravity's quota, what's new card, week pace, release notes, Homebrew cask, translations read against the original, the help up to date); releases once a week on Tuesday since 2026-11-11; 0.10.2 published 2026-11-10 (the Settings sidebar can no longer stay collapsed); 0.10.1 the same day (the stop button asks, Arabic percents, projects stay in sight); 0.10.0 the same day (the redesign: a calmer limits block, Settings with seven rows and «Что показывать», account and plan in the panel's header, the «Ещё» row); 0.9.1 the same day (no crash on removing an account, Arabic mirrored, the Settings sidebar, a worktree's name in a session row); 0.9.0 on 2026-11-09 (the closed panel no longer uses a third of a CPU core, 30 fixes from an audit); 0.8.1 the same day (the island's rings fit in the black ears); 0.8.0 the same day, signed and notarized (Sparkle 2.10.1, the lock screen tile checks it locked, «Раскладка» directions and exceptions, «Поддержать проект»; 0.7.8 Developer ID, Accessibility asked once; 0.7.7 hook messages in the app's language, clean session titles; 0.7.6 a map of the panel on the first screen, «Тексты» fixes; before that shorter first run, panel polish, usage history, finished sessions, ⌃⌥B, outages, several Claude accounts). Windows/Linux (`desktop/`, Tauri 2): postponed by Oleh 2026-11-02
-**Updated:** 2026-11-16
+**Stage:** Mac: 0.11.0 published 2026-11-17 (the main service can be another one than Claude, Antigravity's quota, what's new card, week pace, release notes, Homebrew cask, translations read against the original, the help up to date); releases once a week on Tuesday since 2026-11-11; 0.10.2 published 2026-11-10 (the Settings sidebar can no longer stay collapsed); 0.10.1 the same day (the stop button asks, Arabic percents, projects stay in sight); 0.10.0 the same day (the redesign: a calmer limits block, Settings with seven rows and «Что показывать», account and plan in the panel's header, the «Ещё» row); 0.9.1 the same day (no crash on removing an account, Arabic mirrored, the Settings sidebar, a worktree's name in a session row); 0.9.0 on 2026-11-09 (the closed panel no longer uses a third of a CPU core, 30 fixes from an audit); 0.8.1 the same day (the island's rings fit in the black ears); 0.8.0 the same day, signed and notarized (Sparkle 2.10.1, the lock screen tile checks it locked, «Раскладка» directions and exceptions, «Поддержать проект»; 0.7.8 Developer ID, Accessibility asked once; 0.7.7 hook messages in the app's language, clean session titles; 0.7.6 a map of the panel on the first screen, «Тексты» fixes; before that shorter first run, panel polish, usage history, finished sessions, ⌃⌥B, outages, several Claude accounts). Windows/Linux (`desktop/`, Tauri 2): postponed by Oleh 2026-11-02
+**Updated:** 2026-11-17
 
 **Now:**
+- 0.11.0 (build 848) published 2026-11-17 on Oleh's word: beta 3 without changes to the code. GitHub «latest», both appcasts and the Homebrew cask point at it
 - 2026-11-16: the pass before the release — checks green on main (649 tests), Oleh's copy is on 0.11.0-beta.3 through Sparkle, the widget's files seen live with Codex as main. 0.11.0 waits for Oleh's word on Tuesday 2026-11-17
 - 0.11.0-beta.3 (build 844) published 2026-11-12 for beta testers: #367 the main service, #370 «Не спать» across restarts, #368 translations, #369 the help, #371 quotes and the card. Lives on Oleh's copy until Tuesday 2026-11-17; nothing new goes into 0.11.0 after it, only fixes
 - 2026-11-12: polish for 0.11.0 — one style of quotes and apostrophes per language, Settings looked at in de/ja/ar/pl after the translation fixes, the «Что нового» card and the release notes name the main service
@@ -29,8 +30,7 @@
 
 **Next:**
 - releases go out once a week, on Tuesday, on Oleh's word (agreed 2026-11-11); merged work waits in `main`
-- Monday 2026-11-16: live pass over the changed screens on the Debug copy
-- Tuesday 2026-11-17: release 0.11.0 after Oleh's beta checks (docs/RELEASE.md «What goes to beta first»); then `scripts/release-tools/update-cask.sh 0.11.0`
+- next release not before Tuesday 2026-11-24; candidate: the «ждёт» state for Antigravity sessions (needs `agy` opened once)
 - towards 1.0 (discussed 2026-11-10): the live pass is done (journal 2026-11-10); left — freeze what is in 1.0 and what stays beta, release notes, translations read by people, feedback from strangers before 1.0
 - check on the Air: the island at the real notch
 - promotion (docs/LAUNCH.md): r/ClaudeAI, the lists, r/macapps, Show HN, Product Hunt, Homebrew
@@ -38,7 +38,8 @@
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/specs/SPEC-windows.md §9, stage 2–3 leftovers)
 
 **Needs Oleh:**
-- main service (in beta 3): Settings → «Что показывать» → «Лимиты AI» → «Главный сервис» — pick Codex, look at the panel and the menu bar item, put «Автоматически» back
+- update to 0.11.0 (Settings → «Основные» → «Обновления») and say whether the window showed the list of changes
+- main service (in 0.11.0): Settings → «Что показывать» → «Лимиты AI» → «Главный сервис» — pick Codex, look at the panel and the menu bar item, put «Автоматически» back
 - update to 0.11.0-beta.3 (Settings → «Основные» → «Обновления», «Бета-версии» on) (done: the copy in `~/Applications` is beta.3, build 844); then the Antigravity quota: Settings → «Сервисы AI» → Gemini → «Включить квоту Antigravity», open `agy` once, then look at the panel — «Gemini» and «другие модели» with the plan. The agent was not allowed to press that button on your Mac, so the install into `~/.gemini/antigravity-cli/settings.json` is not seen live
 - in the same update to 0.11.0-beta.3: does the update window show the list of changes, and does the «Что нового» card appear in the panel once
 - try the Homebrew install once (README → Install, three lines) on a Mac without the app, e.g. the Air: the agent did not trust the tap or install through it
@@ -65,6 +66,15 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-17 — Release 0.11.0 (branch `chore/release-0.11.0`)
+
+Done: `scripts/release.sh 0.11.0 --publish` on Oleh's word: build 848 from main `4fd5112`, signed with the Developer ID, the app and the disk image notarized and stapled, GitHub release v0.11.0 marked «latest», the beta channel's appcast lists 0.11.0 and beta 3. The Homebrew cask points at 0.11.0 with the new checksum.
+Checked:
+- `scripts/check.sh` inside the release script passed.
+- The public appcast (`releases/latest/download/appcast.xml`) names 0.11.0, build 848; the beta feed names 0.11.0 (848) and 0.11.0-beta.3 (844).
+- The disk image downloaded from the release page has the same SHA-256 as the local one and as the cask; `spctl` accepts it as Notarized Developer ID.
+Left: the update itself was not run on Oleh's copy (it is on beta 3). Not seen live before the release: the panel with another main service after the «Другие AI» change, the widget on the desktop, «Не спать» after a restart. Homebrew install not tried. Antigravity's «ждёт» not built.
 
 ## 2026-11-16 — The Monday pass before 0.11.0 (branch `chore/status-monday-pass`)
 
