@@ -5,7 +5,7 @@
 **Updated:** 2026-11-17
 
 **Now:**
-- 2026-11-17: nine AI features for the next releases, one branch each, in this order: 1 Codex approvals (done, not seen live), 2 background tasks for Codex (done, the window not seen live), 3 run guard on Codex's limits (done, not seen live), 4 hand a task over at the limit, 5 review by the second service, 6 one task to two services, 7 skills, plugins and hooks page, 8 day summary, 9 spend at API prices
+- 2026-11-17: nine AI features for the next releases, one branch each, in this order: 1 Codex approvals (done, not seen live), 2 background tasks for Codex (done, the window not seen live), 3 run guard on Codex's limits (done, not seen live), 4 hand a task over at the limit (done, not seen live), 5 review by the second service, 6 one task to two services, 7 skills, plugins and hooks page, 8 day summary, 9 spend at API prices
 - 2026-11-17: a hidden demo copy for recording release news (branch `feat/demo-mode`): `scripts/demo.sh` starts the app filled with sample data under its own bundle id and home folder; `DemoData` is brought up to date with every release that has news (docs/RELEASE.md → Demo). Merged as #375; goes out with the next release
 - 0.11.0 (build 848) published 2026-11-17 on Oleh's word: beta 3 without changes to the code. GitHub «latest», both appcasts and the Homebrew cask point at it
 - 2026-11-16: the pass before the release — checks green on main (649 tests), Oleh's copy is on 0.11.0-beta.3 through Sparkle, the widget's files seen live with Codex as main. 0.11.0 waits for Oleh's word on Tuesday 2026-11-17
@@ -71,6 +71,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-17 — Hand a task over to Codex at the limit (branch `feat/handover`)
+
+Done: fourth of the nine. Claude's limit warning before a background launch offers «В Codex» (project row and «Быстрый запрос»); a Claude background run that is paused by the limit, failed or stopped has «Передать Codex» in its menu — Codex continues in the same folder with the same task and is told to look at the work already there. A run's file now keeps the whole task (`prompt`).
+Checked: `scripts/check.sh` (new `HandoverTests`; catalog 1818 keys, 0 problems).
+Left: not seen live (no Claude run at its limit to hand over). Telegram has no such button. Only towards Codex.
 
 ## 2026-11-17 — Codex's limits hold Codex's runs (branch `feat/codex-run-guard`)
 

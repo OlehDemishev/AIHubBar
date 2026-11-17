@@ -2259,22 +2259,10 @@
     },
     "%@: %@ использовано на %@%@. Фоновая задача может упереться в лимит.": {
       "localizations": {
-        "ru": {
-          "stringUnit": {
-            "state": "new",
-            "value": "%1$@: %2$@ использовано на %3$@%4$@. Фоновая задача может упереться в лимит."
-          }
-        },
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "%@: %@ is %@ used%@. A background task may hit the limit."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@: %@ використано на %@%@. Фонове завдання може впертися в ліміт."
+            "value": "%@: استُخدم %@ بنسبة %@%@. قد تصطدم المهمة الخلفية بالحد."
           }
         },
         "de": {
@@ -2283,10 +2271,10 @@
             "value": "%@: %@ ist zu %@ verbraucht%@. Eine Hintergrundaufgabe kann ans Limit stoßen."
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "%@ : %@ est utilisé à %@%@. La tâche en arrière-plan risque d’atteindre la limite."
+            "value": "%@: %@ is %@ used%@. A background task may hit the limit."
           }
         },
         "es": {
@@ -2295,22 +2283,22 @@
             "value": "%@: %@ está usado al %@%@. La tarea en segundo plano puede chocar con el límite."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ : %@ est utilisé à %@%@. La tâche en arrière-plan risque d’atteindre la limite."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: %@ sudah terpakai %@%@. Tugas latar belakang bisa terbentur batas."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "%@: %@ è usato al %@%@. Un’attività in background può raggiungere il limite."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@: %@ está %@ usado%@. A tarefa em segundo plano pode bater no limite."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@: %@ jest zużyte w %@%@. Zadanie w tle może dojść do limitu."
           }
         },
         "ja": {
@@ -2325,16 +2313,28 @@
             "value": "%@: %@ 한도를 %@ 썼습니다%@. 백그라운드 작업이 한도에 걸릴 수 있습니다."
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "%@: استُخدم %@ بنسبة %@%@. قد تصطدم المهمة الخلفية بالحد."
+            "value": "%@: %@ jest zużyte w %@%@. Zadanie w tle może dojść do limitu."
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "%@: %@ sudah terpakai %@%@. Tugas latar belakang bisa terbentur batas."
+            "value": "%@: %@ está %@ usado%@. A tarefa em segundo plano pode bater no limite."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "new",
+            "value": "%1$@: %2$@ использовано на %3$@%4$@. Фоновая задача может упереться в лимит."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@: %@ використано на %@%@. Фонове завдання може впертися в ліміт."
           }
         }
       }
@@ -8427,6 +8427,82 @@
         }
       }
     },
+    "Claude близок к лимиту: ту же задачу выполнит Codex в фоне": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude is near its limit: Codex will do the same task in the background"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude близький до ліміту: те саме завдання виконає Codex у фоні"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude ist nahe am Limit: Codex erledigt dieselbe Aufgabe im Hintergrund"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude approche de sa limite : Codex fera la même tâche en arrière-plan"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude está cerca del límite: Codex hará la misma tarea en segundo plano"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude è vicino al limite: Codex farà la stessa attività in background"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O Claude está perto do limite: o Codex fará a mesma tarefa em segundo plano"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude jest blisko limitu: to samo zadanie wykona Codex w tle"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude が上限に近づいています。同じタスクを Codex がバックグラウンドで実行します"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude가 한도에 가까워졌습니다. 같은 작업을 Codex가 백그라운드에서 수행합니다"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude قريب من الحد: سينفّذ Codex المهمة نفسها في الخلفية"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude hampir mencapai batas: Codex akan mengerjakan tugas yang sama di latar belakang"
+          }
+        }
+      }
+    },
     "Claude выполняет ваш текст по тем же правилам.": {
       "localizations": {
         "ar": {
@@ -12957,6 +13033,88 @@
           "stringUnit": {
             "state": "translated",
             "value": "«%@» запущено у фоні (ліміт %lld хв). Підсумок прийде сповіщенням."
+          }
+        }
+      }
+    },
+    "«%@» передана %@: продолжит в той же папке.": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "new",
+            "value": "«%1$@» передана %2$@: продолжит в той же папке."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“%@” was handed to %@: it will continue in the same folder."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«%@» передано %@: продовжить у тій самій теці."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "„%@“ wurde an %@ übergeben: Es geht im selben Ordner weiter."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "« %@ » a été confiée à %@ : la suite se fait dans le même dossier."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«%@» pasó a %@: seguirá en la misma carpeta."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«%@» è passata a %@: continuerà nella stessa cartella."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“%@” foi passada para %@: vai continuar na mesma pasta."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "„%@” przekazano do %@: będzie kontynuowane w tym samym folderze."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「%@」を %@ に引き継ぎました。同じフォルダで続行します。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«%@» 작업을 %@에 넘겼습니다. 같은 폴더에서 이어집니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تم تسليم «%@» إلى %@: سيكمل في المجلد نفسه."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“%@” diserahkan ke %@: dilanjutkan di folder yang sama."
           }
         }
       }
@@ -18125,6 +18283,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Бюджет на місяць, $"
+          }
+        }
+      }
+    },
+    "В %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "To %@"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "У %@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "An %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vers %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A %@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Para %@"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Do %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ へ"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@(으)로"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إلى %@"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ke %@"
           }
         }
       }
@@ -76476,6 +76710,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Переводить останнє слово в іншу розкладку або скасовує хибне виправлення — і запам’ятовує слово."
+          }
+        }
+      }
+    },
+    "Передать %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hand Over to %@"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Передати %@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "An %@ übergeben"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Confier à %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pasar a %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Passa a %@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Passar para %@"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Przekaż do %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ に引き継ぐ"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@에 넘기기"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تسليم إلى %@"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Serahkan ke %@"
           }
         }
       }

@@ -458,6 +458,9 @@ private struct SessionRowView: View {
         if let run = row.run {
             Button("Журнал") { showLog(run) }
             if run.isPaused { Button("Продолжить сейчас") { launcher.resumeNow(run.id) } }
+            if Handover.canHandOver(run), launcher.canHandOverPending {
+                Button("Передать \(AgentKind.codex.title)") { launcher.handOver(run) }
+            }
             if run.state == .running { Button("Остановить…", role: .destructive) { askToStop() } }
         } else if let session = row.session {
             if row.state == .ended, session.agent == .claudeCode {

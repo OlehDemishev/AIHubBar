@@ -183,6 +183,10 @@ struct ClaudeActionsView: View {
                 if launcher.pendingLimit[project.id] != nil {
                     Button("Запустить после сброса") { launcher.launchAfterReset(in: project) }
                     Button("Запустить сейчас") { launcher.launchDespiteLimit(in: project) }
+                    if launcher.pendingLimit[project.id]?.codexPath == nil, launcher.canHandOverPending {
+                        Button("В \(AgentKind.codex.title)") { launcher.handOverPending(in: project) }
+                            .help("Claude близок к лимиту: ту же задачу выполнит Codex в фоне")
+                    }
                 }
                 if message.isError, message.text.contains(String(localized: "Автоматизация")) {
                     Button("Открыть настройки") { LaunchController.openAutomationSettings() }

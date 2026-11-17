@@ -120,6 +120,10 @@ struct QuickPromptWindow: View {
                     if launcher.pendingLimit[path] != nil {
                         Button("Запустить после сброса") { followUp { launcher.launchAfterReset(in: project) } }
                         Button("Запустить сейчас") { followUp { launcher.launchDespiteLimit(in: project) } }
+                        if launcher.pendingLimit[path]?.codexPath == nil, launcher.canHandOverPending {
+                            Button("В \(AgentKind.codex.title)") { followUp { launcher.handOverPending(in: project) } }
+                                .help("Claude близок к лимиту: ту же задачу выполнит Codex в фоне")
+                        }
                     }
                 }
                 .controlSize(.small)

@@ -75,6 +75,8 @@ final class LaunchController {
     private(set) var pendingLimit: [String: (command: ClaudeCommand, target: LaunchTarget, resetsAt: Date?, codexPath: String?)] = [:]
     /// Codex's limits as the panel shows them (the first is its 5 hours); set by the app, empty without Codex.
     var codexLimits: () -> [LimitWindow] = { [] }
+    /// Where `codex` is, nil when it is not installed; set by the app.
+    var codexPath: () -> String? = { nil }
     /// Commands waiting for the Terminal / Фон choice, keyed by project path.
     private(set) var pendingModeChoice: [String: ClaudeCommand] = [:]
     private(set) var worktreeStates: [String: WorktreeState] = [:]
@@ -222,6 +224,34 @@ final class LaunchController {
     func launchDespiteLimit(in project: Project) {
         guard let pending = pendingLimit.removeValue(forKey: project.id) else { return }
         launch(pending.command, target: pending.target, mode: .background, skipLimitGuard: true, codexPath: pending.codexPath)
+    }
+
+    /// «В Codex» after Claude's limit warning: the same task goes to Codex in the background.
+    var canHandOverPending: Bool { codexPath() != nil }
+
+    func handOverPending(in project: Project) {
+        guard let pending = pendingLimit[project.id], pending.codexPath == nil, let path = codexPath() else { return }
+        pendingLimit[project.id] = nil
+        AppLog.info("Handing «\(pending.command.title)» for \(pending.target.name) to Codex: Claude is near its limit")
+        launch(pending.command, target: pending.target, mode: .background, codexPath: path)
+    }
+
+    /// «Передать Codex» on a Claude run that is paused by the limit or ended badly: the run stops and Codex goes on
+    /// in the same folder (the worktree included) with the same task and a word about the work already there.
+    func handOver(_ run: BackgroundRun) {
+        guard Handover.canHandOver(run), let task = run.prompt, let path = codexPath() else { return }
+        if run.state == .running { runs.stop(run.id) }
+        do {
+            _ = try runs.launch(
+                title: run.commandTitle, prompt: Handover.prompt(task: task, from: run.agentTitle), project: run.project,
+                projectPath: run.projectPath, folder: run.folder, worktreeBranch: run.worktreeBranch,
+                profile: .code, resultFile: run.resultFile, claudePath: path, taskTitle: run.task, codexPath: path
+            )
+            messages[run.projectPath] = Message(text: String(localized: "«\(run.task)» передана \(AgentKind.codex.title): продолжит в той же папке."))
+            AppLog.info("Run \(run.id) handed to Codex in \(run.folder)")
+        } catch {
+            messages[run.projectPath] = Message(text: error.localizedDescription, isError: true)
+        }
     }
 
     /// «Запустить после сброса»: queued for the reset time + 2 min (spec §2.8).

@@ -65,7 +65,7 @@ final class RunStore {
             id: id, project: project, projectPath: projectPath, folder: folder, worktreeBranch: worktreeBranch,
             commandTitle: title, task: taskTitle ?? Session.taskTitle(prompt), startedAt: .now,
             timeLimitMinutes: settings.backgroundTimeLimitMinutes, pid: nil, state: .running, notified: false,
-            resultFile: resultFile, agent: codexPath == nil ? nil : CodexExec.agent
+            resultFile: resultFile, agent: codexPath == nil ? nil : CodexExec.agent, prompt: prompt
         )
 
         try FileManager.default.createDirectory(at: BackgroundRun.runsDirectory, withIntermediateDirectories: true)
