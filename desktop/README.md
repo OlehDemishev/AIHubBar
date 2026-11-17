@@ -1,6 +1,6 @@
 # AI Hub Bar for Windows and Linux
 
-Tauri 2: a Rust core plus a small HTML interface. The plan and the stages are in [docs/specs/SPEC-windows.md](../docs/specs/SPEC-windows.md) and [docs/specs/SPEC-linux.md](../docs/specs/SPEC-linux.md). The Mac app (Swift, in `AIHubBar/`) shares no code with this folder, only file formats and texts.
+Tauri 2: a Rust core plus a small HTML interface. The plan and the stages are in [docs/specs/SPEC-windows.md](../docs/specs/SPEC-windows.md) and [docs/specs/SPEC-linux.md](../docs/specs/SPEC-linux.md). The Mac app (Swift, in `AIHubBar/`) shares no code with this folder, only file formats and texts. Since 2026-11-17 this folder is developed on a Windows PC: setup in [WINDOWS-DEV.md](WINDOWS-DEV.md), rules for agents in [CLAUDE.md](CLAUDE.md), what of the Mac app works on Windows in [SPEC-windows §11](../docs/specs/SPEC-windows.md).
 
 **Stage 1 «Каркас»** is done:
 - the tray icon with its menu;

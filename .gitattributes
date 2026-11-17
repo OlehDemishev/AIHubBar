@@ -1,0 +1,5 @@
+# Text files are LF in the repository and in every checkout, whatever core.autocrlf says: the shell scripts break
+# with CRLF in Git Bash, and the Windows version is developed on Windows (desktop/WINDOWS-DEV.md).
+* text=auto eol=lf
+*.cmd text eol=crlf
+*.bat text eol=crlf

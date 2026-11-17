@@ -66,7 +66,7 @@ def main():
                 stale.append(path.name)
         else:
             OUT.mkdir(parents=True, exist_ok=True)
-            path.write_text(text, encoding="utf-8")
+            path.write_text(text, encoding="utf-8", newline="\n")
     if stale:
         print("out of date (run python3 scripts/strings.py): " + ", ".join(stale), file=sys.stderr)
         sys.exit(1)
