@@ -5,7 +5,7 @@
 **Updated:** 2026-11-17
 
 **Now:**
-- 2026-11-17: live pass over the windows of the nine features on the Debug copy (branch `fix/live-pass-nine`): two fixes — «История расхода» scrolls instead of cutting its top and bottom, Codex skills are also read from `~/.agents/skills`. Not seen: approvals, a background Codex run, handover, review and the pair inside the app
+- 2026-11-17: live pass over the windows of the nine features on the Debug copy, merged as #388: two fixes — «История расхода» scrolls instead of cutting its top and bottom, Codex skills are also read from `~/.agents/skills`. Not seen: approvals, a background Codex run, handover, review and the pair inside the app
 - 2026-11-17: nine Claude and Codex features merged (#377–#386), waiting in `main` for 0.12.0: Codex approvals, Codex in the background, the limit guard for Codex, handover to Codex, review by the other service, one task to both, the «Skills и плагины» tab, the day summary, the plan against the API price; the help and `docs/release-notes/0.12.0.md` cover them. Checks green (tests, catalog 1851 keys); live only `codex exec` itself was run
 - 2026-11-17: a hidden demo copy for recording release news (branch `feat/demo-mode`): `scripts/demo.sh` starts the app filled with sample data under its own bundle id and home folder; `DemoData` is brought up to date with every release that has news (docs/RELEASE.md → Demo). Merged as #375; goes out with the next release
 - 0.11.0 (build 848) published 2026-11-17 on Oleh's word: beta 3 without changes to the code. GitHub «latest», both appcasts and the Homebrew cask point at it
