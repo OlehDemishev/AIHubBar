@@ -283,6 +283,15 @@ final class AppSettings {
         didSet { defaults.set(weeklySummary, forKey: Keys.weeklySummary) }
     }
 
+    /// «Итог дня» in Telegram: off by default, sent at this hour on days when something was done.
+    var daySummary: Bool {
+        didSet { defaults.set(daySummary, forKey: Keys.daySummary) }
+    }
+
+    var daySummaryHour: Int {
+        didSet { defaults.set(daySummaryHour, forKey: Keys.daySummaryHour) }
+    }
+
     var weeklySummaryWeekday: Int {
         didSet { defaults.set(weeklySummaryWeekday, forKey: Keys.weeklySummaryWeekday) }
     }
@@ -412,6 +421,8 @@ final class AppSettings {
         telegramChatID = defaults.string(forKey: Keys.telegramChatID) ?? ""
         notificationFrequencies = defaults.dictionary(forKey: Keys.notificationFrequencies) as? [String: String] ?? [:]
         savedPrompts = defaults.decoded([SavedPrompt].self, forKey: Keys.savedPrompts) ?? SavedPrompt.examples
+        daySummary = defaults.bool(forKey: Keys.daySummary)
+        daySummaryHour = defaults.int(Keys.daySummaryHour, default: 21)
         weeklySummaryWeekday = defaults.int(Keys.weeklySummaryWeekday, default: 1)
         weeklySummaryHour = defaults.int(Keys.weeklySummaryHour, default: 19)
     }
@@ -478,6 +489,8 @@ final class AppSettings {
         static let savedPrompts = "savedPrompts"
         static let notificationFrequencies = "notificationFrequencies"
         static let telegramChatID = "telegramChatID"
+        static let daySummary = "daySummary"
+        static let daySummaryHour = "daySummaryHour"
         static let weeklySummaryWeekday = "weeklySummaryWeekday"
         static let weeklySummaryHour = "weeklySummaryHour"
     }

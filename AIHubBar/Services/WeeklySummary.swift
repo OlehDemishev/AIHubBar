@@ -138,7 +138,40 @@ final class WeeklySummarySender {
         }
     }
 
+    private static let daySentKey = "daySummarySent"
+
+    /// What today's summary is made of; the «История расхода» window shows the same.
+    func dayInput(now: Date = .now) -> DaySummary.Input {
+        let start = Calendar.current.startOfDay(for: now)
+        return DaySummary.Input(
+            sessionPercent: usage.snapshot?.session?.utilization, weekPercent: usage.snapshot?.week?.utilization,
+            breakdown: usage.breakdowns[.today], hits: LimitHits.all().filter { $0.date >= start }.count,
+            runs: DaySummary.today(runs.runs, now: now), others: hub.usages
+        )
+    }
+
+    /// «Отправить сейчас» for the day; the daily send skips a day with nothing done.
+    @discardableResult
+    func sendDay(now: Date = .now, evenIfEmpty: Bool = true) async -> Bool {
+        guard Telegram.isSetUp(settings) else { return false }
+        let input = dayInput(now: now)
+        if !evenIfEmpty, DaySummary.isEmpty(input) { return true }
+        let ok = await Telegram.deliver(html: DaySummary.html(input), settings: settings)
+        AppLog.info("Day summary sent: \(ok)")
+        return ok
+    }
+
+    private func sendDayIfDue(now: Date = .now) async {
+        guard settings.daySummary else { return }
+        let due = DaySummary.due(hour: settings.daySummaryHour, now: now)
+        let sent = UserDefaults.standard.double(forKey: Self.daySentKey)
+        // Sent for this day already, or the app was off through the evening: no summary of yesterday in the morning.
+        guard sent < due.timeIntervalSince1970, now.timeIntervalSince(due) < 3 * 3600 else { return }
+        if await sendDay(now: now, evenIfEmpty: false) { UserDefaults.standard.set(now.timeIntervalSince1970, forKey: Self.daySentKey) }
+    }
+
     private func sendIfDue(now: Date = .now) async {
+        await sendDayIfDue(now: now)
         guard settings.weeklySummary else { return }
         let due = WeeklySummary.due(weekday: settings.weeklySummaryWeekday, hour: settings.weeklySummaryHour, now: now)
         let sent = UserDefaults.standard.double(forKey: Self.sentKey)

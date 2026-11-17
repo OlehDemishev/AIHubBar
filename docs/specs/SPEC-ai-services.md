@@ -16,6 +16,7 @@ forecast, week strip, credits, per-project tokens and context.
 | Alerts | thresholds per window, once per window, Telegram copy | `UsageStore`, Settings → Модули → Лимиты |
 | Run guard | pause background runs at a threshold, resume after reset | `LaunchController`, `runGuardPercent` |
 | Weekly summary | Telegram: week spend by project, heavy sessions, limit hits | `WeeklySummary` |
+| Day summary | «Сегодня» at the top of «История расхода» and, once a day at a chosen hour, a Telegram message (off by default, not sent on a day with no spend and no runs): limits now, today's tokens by project, the day's background runs with their state and agent, limit hits, the other services' limits | `DaySummary`, `WeeklySummarySender.sendDay` |
 | Tokens per project | from `~/.claude/projects/**/*.jsonl` | `TokenUsage` |
 | Context | how full each session's context is | `ContextUsage` |
 | Sessions | live list of sessions (Terminal, Claude app, background) via hooks; current action; approve / deny | `HookController`, `SessionStore`, `Approvals` |
