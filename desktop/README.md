@@ -26,7 +26,9 @@ Still to come in stage 2: Telegram, spend per project, custom thresholds.
 - «Разрешить» / «Отклонить» under a session that asks for a permission, and a notification for each new request (the app keeps `approvals/alive` fresh while it runs and removes it on quit);
 - an orange dot on the tray icon while a session waits.
 
-Still to come in stage 3: «Show» (bringing the terminal forward), buttons in the notification itself (to check on Windows), a switch to turn the answers off, installing the hook for Codex and Copilot.
+- Settings → Hooks also installs the hook for Codex (`~/.codex/hooks.json`, merged with a backup; `commandWindows` for cmd.exe, `command` for sh; trusted once in `codex` → `/hooks`) and Copilot CLI (`~/.copilot/hooks/aihubbar.json`, `powershell` and `bash`). On a Mac only into another `CODEX_HOME` / `COPILOT_HOME`.
+
+Still to come in stage 3: «Show» (bringing the terminal forward), buttons in the notification itself (to check on Windows), a switch to turn the answers off.
 
 On a Mac this build never installs hooks into the real `~/.claude/settings.json`: the Mac app owns it. It does so only with another `CLAUDE_CONFIG_DIR`.
 

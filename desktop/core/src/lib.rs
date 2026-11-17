@@ -2,6 +2,7 @@
 //! the settings file, the interface languages and the link between `claudepult` and the running app.
 //! The Mac version (Swift) shares no code with this; only file formats and texts (docs/specs/SPEC-windows.md §2, §6).
 
+pub mod agent_hooks;
 pub mod approvals;
 pub mod hooks;
 pub mod i18n;

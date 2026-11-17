@@ -5,6 +5,7 @@
 **Updated:** 2026-11-17
 
 **Now:**
+- 2026-11-17: Windows — the hook installed for Codex and Copilot from Settings (branch `feat/desktop-agent-hooks`)
 - 2026-11-17: Windows — answers to permission requests from the panel and a process alive check (#396, merged)
 - 2026-11-17: the Windows hook brought to the Mac's format 7 (#394, merged): Codex and Copilot sessions, clean prompts, answers to permission requests through `approvals/`
 - 2026-11-17: Windows resumed (#393, merged): SPEC-windows §11 maps every Mac feature to works / worse / won't work, `desktop/WINDOWS-DEV.md` sets up the laptop, `desktop/CLAUDE.md` holds the agent's rules, `.gitattributes` keeps LF, desktop CI runs on catalog changes again
@@ -44,7 +45,7 @@
 - check on the Air: the island at the real notch
 - promotion (docs/LAUNCH.md): r/ClaudeAI, the lists, r/macapps, Show HN, Product Hunt, Homebrew
 - content (docs/specs/SPEC-content.md, agreed): stage 2 «Версии», then batch tasks; better after the first feedback from people
-- Windows: on the laptop the live check of SPEC-windows §11.4 (with a real permission request answered from the panel), then stage 3 leftovers («Показать», buttons in the notification, the hook for Codex and Copilot), then stage 4
+- Windows: on the laptop the live check of SPEC-windows §11.4 (with a real permission request answered from the panel), then stage 3 leftovers («Показать», buttons in the notification), then stage 4
 
 **Needs Oleh:**
 - Windows laptop: install the tools and copy the two CLAUDE.md files as in `desktop/WINDOWS-DEV.md`, sign in to Claude Code there; choose the Windows signing (SPEC-windows §7)
@@ -80,6 +81,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-17 — Windows: the hook for Codex and Copilot (branch `feat/desktop-agent-hooks`)
+
+Done: Settings → Hooks has a card each for Codex and Copilot CLI (the Mac's texts «Состояние сессий Codex / Copilot»). Codex: our entries merged into `~/.codex/hooks.json` (backup first, other hooks kept, a file left with only ours removed on uninstall), timeouts 300 s for PermissionRequest and 3 s for Interrupt and SessionEnd, and the Mac's note to trust them in `codex` → `/hooks`. Read in Codex's source: on Windows it runs `commandWindows` (0.131+) as `%COMSPEC% /C "<line>"`, i.e. cmd.exe, so the path is double-quoted there; `command` stays the sh line. Copilot: its own `~/.copilot/hooks/aihubbar.json` with `powershell` (`& '<path>' …`) and `bash`. `hooks.rs` merges and checks any event list now (`merged_entries`, `status_entries`); backups take the file's own name. `CODEX_HOME` and `COPILOT_HOME` are respected; on a Mac the dev build only writes there.
+Checked: `cargo test --workspace` — 45 green on the Mac (3 new in core: quoting for sh, cmd and PowerShell with `C:\Users\Олег O'Neil\…`, the Codex file with someone else's hook, the Copilot file). Live with the dev build and temporary `CODEX_HOME` / `COPILOT_HOME`: both «Установить hooks» pressed in Settings, both files written as above (the other Stop hook kept, a backup made), the Codex note shown; the written `command` and `bash` lines run through `sh -c` recorded sessions with `agent: codex` and `agent: copilot`. A new Windows-only test runs the `commandWindows` line through `%COMSPEC% /C` and the `powershell` line through PowerShell from a folder with spaces, Cyrillic and an apostrophe: by this PR's CI. During the check one AppleScript call brought the installed Mac app (its process has the same name, `AIHubBar`) to the front by mistake; nothing was pressed in it.
+Left: no live Codex or Copilot on Windows yet; whether Copilot runs `powershell` with `pwsh` or Windows PowerShell is not documented (the line works in both).
 
 ## 2026-11-17 — Windows: answering permission requests from the panel (branch `feat/desktop-approvals`)
 

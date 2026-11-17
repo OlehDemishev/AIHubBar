@@ -34,6 +34,29 @@
       <p class="secondary" style="margin-top: 8px" data-t="Hooks добавляются в settings.json Claude Code (остальные настройки не трогаются, перед изменением рядом сохраняется копия). Они записывают состояние каждой сессии Claude Code на этом компьютере, чтобы AI Hub Bar показывал их в панели."></p>
       <p class="error" id="hooks-error" hidden></p>
     </section>
+    <section class="card agent-hooks" data-agent="codex">
+      <div class="row">
+        <span data-t="Состояние сессий Codex"></span>
+        <strong class="status"></strong>
+      </div>
+      <div class="row">
+        <span class="secondary path"></span>
+        <span><button class="install"></button> <button class="remove" data-t="Удалить"></button></span>
+      </div>
+      <p class="secondary note" style="margin-top: 8px" hidden></p>
+      <p class="error" hidden></p>
+    </section>
+    <section class="card agent-hooks" data-agent="copilot">
+      <div class="row">
+        <span data-t="Состояние сессий Copilot"></span>
+        <strong class="status"></strong>
+      </div>
+      <div class="row">
+        <span class="secondary path"></span>
+        <span><button class="install"></button> <button class="remove" data-t="Удалить"></button></span>
+      </div>
+      <p class="error" hidden></p>
+    </section>
     <p class="secondary" id="version"></p>
   </main>
   <script type="module">
@@ -66,6 +89,33 @@
     showHooks(await invoke("hooks_state"));
     document.getElementById("hooks-install").onclick = async () => showHooks(await invoke("install_hooks"));
     document.getElementById("hooks-remove").onclick = async () => showHooks(await invoke("uninstall_hooks"));
+
+    // Codex and Copilot: the same hook with --agent, in their own files.
+    for (const card of document.querySelectorAll(".agent-hooks")) {
+      const agent = card.dataset.agent;
+      const show = (state) => {
+        card.querySelector(".status").textContent = state.title;
+        card.querySelector(".path").textContent = state.settingsPath;
+        const install = card.querySelector(".install");
+        install.textContent = state.status === "outdated" ? t("Обновить hooks") : t("Установить hooks");
+        install.hidden = state.status === "installed";
+        install.disabled = !state.mayInstall;
+        const remove = card.querySelector(".remove");
+        remove.hidden = state.status === "notInstalled";
+        remove.disabled = !state.mayInstall;
+        const note = card.querySelector(".note");
+        if (note) {
+          note.hidden = !state.note;
+          note.textContent = state.note ?? "";
+        }
+        const error = card.querySelector(".error");
+        error.hidden = !state.error;
+        error.textContent = state.error ?? "";
+      };
+      show(await invoke("agent_hooks_state", { agent }));
+      card.querySelector(".install").onclick = async () => show(await invoke("install_agent_hooks", { agent }));
+      card.querySelector(".remove").onclick = async () => show(await invoke("uninstall_agent_hooks", { agent }));
+    }
 
     const autostart = document.getElementById("autostart");
     autostart.checked = await invoke("autostart_enabled");
