@@ -158,6 +158,7 @@ final class AppContainer {
             }
         }
         notchIsland.sessionItems = { [sessions] in sessions.items }
+        launcher.codexLimits = { [hub] in hub.usages.first { $0.hubSource == .codex }?.rings ?? [] }
         hub.mainUsage = { [usage, hub, settings] in MainService.current(usage: usage, hub: hub, settings: settings) }
         hub.claudePercent = { [usage] in [usage.snapshot?.session?.utilization, usage.snapshot?.week?.utilization].compactMap { $0 }.max() }
         notchIsland.hasEarContent = { [usage, hub, sessions, runs, settings] ear in

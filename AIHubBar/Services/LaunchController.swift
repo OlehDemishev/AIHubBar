@@ -35,9 +35,13 @@ final class LaunchController {
         var night = false
         /// Waits for the session limit to reset: if the limit is still full at `launchAt`, it waits for the next reset.
         var afterReset = false
+        /// The run goes to Codex (`codex exec`) and waits for Codex's limits, not Claude's.
+        var codexPath: String? = nil
         var projectName: String { target.name }
 
-        init(id: String, command: ClaudeCommand, target: LaunchTarget, launchAt: Date, night: Bool = false, afterReset: Bool = false) {
+        init(id: String, command: ClaudeCommand, target: LaunchTarget, launchAt: Date, night: Bool = false, afterReset: Bool = false,
+             codexPath: String? = nil) {
+            self.codexPath = codexPath
             self.id = id
             self.command = command
             self.target = target
@@ -46,7 +50,7 @@ final class LaunchController {
             self.afterReset = afterReset
         }
 
-        enum CodingKeys: String, CodingKey { case id, command, target, launchAt, night, afterReset }
+        enum CodingKeys: String, CodingKey { case id, command, target, launchAt, night, afterReset, codexPath }
 
         init(from decoder: Decoder) throws {
             let c = try decoder.container(keyedBy: CodingKeys.self)
@@ -56,6 +60,7 @@ final class LaunchController {
             launchAt = try c.decode(Date.self, forKey: .launchAt)
             night = (try? c.decodeIfPresent(Bool.self, forKey: .night)) ?? false
             afterReset = (try? c.decodeIfPresent(Bool.self, forKey: .afterReset)) ?? false
+            codexPath = try? c.decodeIfPresent(String.self, forKey: .codexPath)
         }
     }
 
@@ -67,7 +72,9 @@ final class LaunchController {
     /// Commands waiting for «Запустить всё равно», keyed by project path.
     private(set) var pendingConfirmation: [String: (command: ClaudeCommand, mode: LaunchMode, codexPath: String?)] = [:]
     /// Background commands stopped by the limit guard, keyed by project path.
-    private(set) var pendingLimit: [String: (command: ClaudeCommand, target: LaunchTarget, resetsAt: Date?)] = [:]
+    private(set) var pendingLimit: [String: (command: ClaudeCommand, target: LaunchTarget, resetsAt: Date?, codexPath: String?)] = [:]
+    /// Codex's limits as the panel shows them (the first is its 5 hours); set by the app, empty without Codex.
+    var codexLimits: () -> [LimitWindow] = { [] }
     /// Commands waiting for the Terminal / Фон choice, keyed by project path.
     private(set) var pendingModeChoice: [String: ClaudeCommand] = [:]
     private(set) var worktreeStates: [String: WorktreeState] = [:]
@@ -139,9 +146,16 @@ final class LaunchController {
         pendingConfirmation[id] = nil
         pendingLimit[id] = nil
 
+        if mode == .background, !skipLimitGuard, codexPath != nil,
+           let window = codexLimits().first(where: { ($0.percent ?? 0) > Self.backgroundLimitGuard }) {
+            pendingLimit[id] = (command, target, window.resetsAt, codexPath)
+            let reset = window.resetsAt.map { String(localized: ", сброс в \($0.formatted(date: .omitted, time: .shortened))") } ?? ""
+            messages[id] = Message(text: String(localized: "\(AgentKind.codex.title): \(window.title) использовано на \(UsageText.percent(window.percent ?? 0))\(reset). Фоновая задача может упереться в лимит."))
+            return
+        }
         if mode == .background, !skipLimitGuard, codexPath == nil, let session = usage.snapshot?.session,
            session.utilization > Self.backgroundLimitGuard {
-            pendingLimit[id] = (command, target, session.resetsAt)
+            pendingLimit[id] = (command, target, session.resetsAt, nil)
             let reset = session.resetsAt.map { String(localized: ", сброс в \($0.formatted(date: .omitted, time: .shortened))") } ?? ""
             messages[id] = Message(text: String(localized: "Сессия использована на \(UsageText.percent(session.utilization))\(reset). Фоновая задача может упереться в лимит."))
             return
@@ -207,13 +221,13 @@ final class LaunchController {
     /// «Запустить всё равно» after the limit warning.
     func launchDespiteLimit(in project: Project) {
         guard let pending = pendingLimit.removeValue(forKey: project.id) else { return }
-        launch(pending.command, target: pending.target, mode: .background, skipLimitGuard: true)
+        launch(pending.command, target: pending.target, mode: .background, skipLimitGuard: true, codexPath: pending.codexPath)
     }
 
     /// «Запустить после сброса»: queued for the reset time + 2 min (spec §2.8).
     func launchAfterReset(in project: Project) {
         guard let pending = pendingLimit.removeValue(forKey: project.id) else { return }
-        queueAfterReset(pending.command, target: pending.target, resetsAt: pending.resetsAt)
+        queueAfterReset(pending.command, target: pending.target, resetsAt: pending.resetsAt, codexPath: pending.codexPath)
     }
 
     /// «После сброса лимита» from the commands: whatever the usage now, the run waits for the session reset.
@@ -222,9 +236,9 @@ final class LaunchController {
         queueAfterReset(command, target: project.launchTarget, resetsAt: usage.snapshot?.session?.resetsAt)
     }
 
-    private func queueAfterReset(_ command: ClaudeCommand, target: LaunchTarget, resetsAt: Date?) {
+    private func queueAfterReset(_ command: ClaudeCommand, target: LaunchTarget, resetsAt: Date?, codexPath: String? = nil) {
         let launchAt = (resetsAt ?? .now.addingTimeInterval(3600)).addingTimeInterval(120)
-        queued.append(QueuedLaunch(id: UUID().uuidString, command: command, target: target, launchAt: launchAt, afterReset: true))
+        queued.append(QueuedLaunch(id: UUID().uuidString, command: command, target: target, launchAt: launchAt, afterReset: true, codexPath: codexPath))
         saveQueue()
         messages[target.path] = Message(text: String(localized: "«\(command.title)» запустится в фоне в \(launchAt.formatted(date: .omitted, time: .shortened)), после сброса лимита."))
         AppLog.info("Queued «\(command.title)» for \(target.name) after the reset, at \(launchAt.ISO8601Format())")
@@ -238,24 +252,31 @@ final class LaunchController {
     private var guardExempt: Set<String> = []
 
     /// Pauses running background runs near the limit and resumes them after the reset; one notification each way.
+    /// Each service's limits hold its own runs: Claude's hold `claude -p`, Codex's hold `codex exec`.
     private func guardRuns(now: Date = .now) {
-        if let hold = RunGuard.hold(usage.snapshot, threshold: settings.runGuardPercent, now: now) {
-            // Claude's limits hold Claude's runs; a Codex run does not spend them.
-            let paused = runs.running.filter { $0.pausedAt == nil && $0.agent == nil && !guardExempt.contains($0.id) }
+        guardRuns(codex: false, hold: RunGuard.hold(usage.snapshot, threshold: settings.runGuardPercent, now: now))
+        guardRuns(codex: true, hold: RunGuard.hold(codexLimits(), threshold: settings.runGuardPercent, now: now))
+    }
+
+    private func guardRuns(codex: Bool, hold: RunGuard.Hold?) {
+        let mine: (BackgroundRun) -> Bool = { ($0.agent == CodexExec.agent) == codex }
+        let name = codex ? "\(AgentKind.codex.title) · " : ""
+        if let hold {
+            let paused = runs.running.filter { $0.pausedAt == nil && mine($0) && !guardExempt.contains($0.id) }
             guard !paused.isEmpty else { return }
             paused.forEach { runs.pause($0.id) }
             let until = hold.resetsAt.map { String(localized: " Продолжу после сброса в \($0.formatted(date: .omitted, time: .shortened)).") } ?? ""
-            let title = String(localized: "Фоновые задачи на паузе: \(hold.title) \(UsageText.percent(hold.utilization))")
+            let title = String(localized: "Фоновые задачи на паузе: \(name + hold.title) \(UsageText.percent(hold.utilization))")
             let body = paused.map { "\($0.project): \($0.commandTitle)" }.joined(separator: "\n") + until
-            Notifier.post(id: "run-guard", title: title, body: body)
+            Notifier.post(id: codex ? "run-guard-codex" : "run-guard", title: title, body: body)
             sendToTelegram("⏸ <b>\(RunMessage.escape(title))</b>\n\(RunMessage.escape(body))")
         } else {
-            let paused = runs.paused
+            let paused = runs.paused.filter(mine)
             guard !paused.isEmpty else { return }
             paused.forEach { runs.resume($0.id) }
             let title = String(localized: "Лимит сбросился: фоновые задачи продолжают работу")
             let body = paused.map { "\($0.project): \($0.commandTitle)" }.joined(separator: "\n")
-            Notifier.post(id: "run-guard", title: title, body: body)
+            Notifier.post(id: codex ? "run-guard-codex" : "run-guard", title: title, body: body)
             sendToTelegram("▶️ <b>\(RunMessage.escape(title))</b>\n\(RunMessage.escape(body))")
         }
     }
@@ -316,7 +337,7 @@ final class LaunchController {
         saveQueue()
         for item in due {
             AppLog.info("Starting queued «\(item.command.title)» for \(item.target.name)")
-            launch(item.command, target: item.target, mode: .background, allowBusyFolder: false, skipLimitGuard: true)
+            launch(item.command, target: item.target, mode: .background, allowBusyFolder: false, skipLimitGuard: true, codexPath: item.codexPath)
         }
     }
 
@@ -335,14 +356,21 @@ final class LaunchController {
     /// Due runs that would only hit the limit wait for the next reset: everything while the guard holds, and
     /// «после сброса» runs while the session is still above the launch warning.
     private func postponeHeld(now: Date) {
-        let hold = RunGuard.hold(usage.snapshot, threshold: settings.runGuardPercent, now: now)
+        let claudeHold = RunGuard.hold(usage.snapshot, threshold: settings.runGuardPercent, now: now)
+        let codexWindows = codexLimits()
+        let codexHold = RunGuard.hold(codexWindows, threshold: settings.runGuardPercent, now: now)
         let session = usage.snapshot?.session
         var changed = false
         for index in queued.indices where queued[index].launchAt <= now {
-            if let hold {
+            let codex = queued[index].codexPath != nil
+            // The window a «после сброса» run waits for: Claude's session, or Codex's first limit.
+            let first: (percent: Double, reset: Date?)? = codex
+                ? codexWindows.first.flatMap { window in window.percent.map { ($0, window.resetsAt) } }
+                : session.map { ($0.utilization, $0.resetsAt) }
+            if let hold = codex ? codexHold : claudeHold {
                 queued[index].launchAt = hold.retryAt(now: now)
-            } else if queued[index].afterReset, let session, session.utilization > Self.backgroundLimitGuard,
-                      let reset = session.resetsAt, reset > now {
+            } else if queued[index].afterReset, let first, first.percent > Self.backgroundLimitGuard,
+                      let reset = first.reset, reset > now {
                 queued[index].launchAt = reset.addingTimeInterval(120)
             } else {
                 continue

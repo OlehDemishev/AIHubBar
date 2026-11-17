@@ -5,7 +5,7 @@
 **Updated:** 2026-11-17
 
 **Now:**
-- 2026-11-17: nine AI features for the next releases, one branch each, in this order: 1 Codex approvals (done, not seen live), 2 background tasks for Codex (done, the window not seen live), 3 run guard on Codex's limits, 4 hand a task over at the limit, 5 review by the second service, 6 one task to two services, 7 skills, plugins and hooks page, 8 day summary, 9 spend at API prices
+- 2026-11-17: nine AI features for the next releases, one branch each, in this order: 1 Codex approvals (done, not seen live), 2 background tasks for Codex (done, the window not seen live), 3 run guard on Codex's limits (done, not seen live), 4 hand a task over at the limit, 5 review by the second service, 6 one task to two services, 7 skills, plugins and hooks page, 8 day summary, 9 spend at API prices
 - 2026-11-17: a hidden demo copy for recording release news (branch `feat/demo-mode`): `scripts/demo.sh` starts the app filled with sample data under its own bundle id and home folder; `DemoData` is brought up to date with every release that has news (docs/RELEASE.md → Demo). Merged as #375; goes out with the next release
 - 0.11.0 (build 848) published 2026-11-17 on Oleh's word: beta 3 without changes to the code. GitHub «latest», both appcasts and the Homebrew cask point at it
 - 2026-11-16: the pass before the release — checks green on main (649 tests), Oleh's copy is on 0.11.0-beta.3 through Sparkle, the widget's files seen live with Codex as main. 0.11.0 waits for Oleh's word on Tuesday 2026-11-17
@@ -71,6 +71,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-17 — Codex's limits hold Codex's runs (branch `feat/codex-run-guard`)
+
+Done: third of the nine. The limit guard works per service: Claude's limits pause `claude -p` runs, Codex's limits (its card's windows) pause `codex exec` runs, each with its own notification; a Codex background task started above 90 % of its first limit asks first («Запустить всё равно», «После сброса»); a queued Codex run waits for Codex's reset and keeps its agent across restarts.
+Checked: `scripts/check.sh` (new tests for the guard on `LimitWindow`s and the queue's new field; catalog 1814 keys, 0 problems).
+Left: not seen live — Oleh's Codex is far from its limits, so neither the pause nor the question could be shown.
 
 ## 2026-11-17 — Background tasks for Codex (branch `feat/codex-background`)
 
