@@ -10,7 +10,7 @@ enum TelegramApprovalText {
     static func html(_ request: ApprovalRequest) -> String {
         let project = RunMessage.escape(request.project ?? "Claude")
         let summary = request.summary.isEmpty ? "" : "\n<code>\(RunMessage.escape(request.summary))</code>"
-        return "✋ <b>\(project)</b>: " + RunMessage.escape(String(localized: "Claude просит разрешение")) + " — \(RunMessage.escape(request.tool))" + summary
+        return "✋ <b>\(project)</b>: " + RunMessage.escape(request.asksTitle) + " — \(RunMessage.escape(request.tool))" + summary
     }
 
     static func keyboard(_ request: ApprovalRequest) -> [String: Any] {

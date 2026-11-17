@@ -13,8 +13,9 @@ struct CodexHooks {
     static let events = ["SessionStart", "UserPromptSubmit", "PermissionRequest", "PostToolUse", "Stop", "Interrupt", "SessionEnd"]
 
     /// Codex allows `SessionEnd` and `Interrupt` 3 seconds at most (it clamps a longer timeout with a warning).
+    /// `PermissionRequest` waits for «Разрешить» / «Отклонить» from AI Hub Bar, like Claude's.
     static func timeout(for event: String) -> Int {
-        ["SessionEnd", "Interrupt"].contains(event) ? 3 : HookInstaller.timeoutSeconds
+        ["SessionEnd", "Interrupt"].contains(event) ? 3 : HookInstaller.timeout(for: event)
     }
 
     var fileURL: URL

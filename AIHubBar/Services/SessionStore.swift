@@ -238,7 +238,8 @@ final class SessionStore {
         if let request = approvals[session.id] {
             Notifier.post(
                 id: "waiting-\(session.id)",
-                title: String(localized: "Claude просит разрешение — \(session.displayProject)"),
+                title: request.agent == "codex" ? "\(request.asksTitle) — \(session.displayProject)"
+                    : String(localized: "Claude просит разрешение — \(session.displayProject)"),
                 body: request.text,
                 target: .approval(sessionID: session.id, requestID: request.id)
             )

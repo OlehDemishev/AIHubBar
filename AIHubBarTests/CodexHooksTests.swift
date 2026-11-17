@@ -90,13 +90,43 @@ struct CodexHooksTests {
         #expect(try h.session(Self.id).state == .ended)
     }
 
-    @Test func codexNeverOpensAnApprovalRequest() async throws {
+    /// Codex takes Claude's answer shape (learn.chatgpt.com/docs/hooks, PermissionRequest): allow skips its prompt,
+    /// deny carries a message, no output leaves its own prompt.
+    @Test func anAnswerFromAIHubBarReachesCodex() async throws {
+        let h = try Harness()
+        defer { try? FileManager.default.removeItem(at: h.dir) }
+        let approvals = h.dir.appending(path: "approvals")
+        ApprovalFiles.touchAlive(in: approvals)
+        let patch = "*** Begin Patch\n*** Update File: Sources/App/Main.swift\n@@\n-a\n+b\n*** Add File: Notes.md\n+x\n*** End Patch"
+        let input = try JSONSerialization.data(withJSONObject: event("PermissionRequest", ["tool_name": "apply_patch", "tool_input": ["command": patch]]))
+        async let result = ProcessRunner.run(
+            h.script.path, ["--agent", "codex", "--projects-dir", "/Users/me/Projects", "--sessions-dir", h.sessions.path],
+            input: input, timeout: .seconds(20)
+        )
+        var found: ApprovalRequest?
+        for _ in 0..<400 where found == nil {
+            found = ApprovalFiles.requests(in: approvals).first
+            if found == nil { try await Task.sleep(for: .milliseconds(50)) }
+        }
+        let request = try #require(found)
+        #expect(request.agent == "codex" && request.tool == "apply_patch")
+        #expect(request.summary == "Main.swift, Notes.md", "a patch is named by its files")
+        #expect(request.asksTitle.hasPrefix(HubLimit.Source.codex.shortTitle))
+        ApprovalFiles.decide(request.id, allow: false, in: approvals)
+
+        let output = try await result
+        let json = try #require(try JSONSerialization.jsonObject(with: output.stdout) as? [String: Any])
+        let decision = try #require((json["hookSpecificOutput"] as? [String: Any])?["decision"] as? [String: Any])
+        #expect(decision["behavior"] as? String == "deny")
+    }
+
+    @Test func withoutAIHubBarCodexAsksAsUsual() async throws {
         let h = try Harness()
         defer { try? FileManager.default.removeItem(at: h.dir) }
         try await h.send(event("PermissionRequest", ["tool_name": "Bash", "tool_input": ["command": "ls"]]))
-        let approvals = h.dir.appending(path: "approvals")
-        let files = (try? FileManager.default.contentsOfDirectory(atPath: approvals.path)) ?? []
+        let files = (try? FileManager.default.contentsOfDirectory(atPath: h.dir.appending(path: "approvals").path)) ?? []
         #expect(files.filter { $0.hasSuffix(".request.json") }.isEmpty)
+        #expect(try h.session(Self.id).state == .waiting)
     }
 
     @Test func installMergesIntoTheSharedFile() throws {
@@ -122,7 +152,7 @@ struct CodexHooksTests {
         let entry = try #require((events["PermissionRequest"]?.first?["hooks"] as? [[String: Any]])?.first)
         #expect(entry["type"] as? String == "command")
         #expect((entry["command"] as? String)?.contains("--agent codex") == true)
-        #expect(entry["timeout"] as? Int == HookInstaller.timeoutSeconds)
+        #expect(entry["timeout"] as? Int == ApprovalFiles.waitSeconds + 10, "the hook waits for an answer from AI Hub Bar")
         let end = try #require((events["SessionEnd"]?.first?["hooks"] as? [[String: Any]])?.first)
         #expect(end["timeout"] as? Int == 3, "Codex clamps SessionEnd to 3 s")
 
