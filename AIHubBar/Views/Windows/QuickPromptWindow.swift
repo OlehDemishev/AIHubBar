@@ -15,6 +15,8 @@ struct QuickPromptWindow: View {
     @State private var projectPath: String?
     @State private var agent: AgentKind = .claudeCode
     @State private var mode: LaunchMode = .background
+    /// The same task to Codex as well, each service in its own worktree.
+    @State private var alsoCodex = false
     /// The project a Claude Code launch went to: the window waits for its answer there.
     @State private var sentPath: String?
     @FocusState private var focused: Bool
@@ -62,6 +64,11 @@ struct QuickPromptWindow: View {
                     ForEach(agents, id: \.self) { Text($0.title).tag($0) }
                 }
                 .fixedSize()
+            }
+            if agent == .claudeCode, mode == .background, launcher.canLaunchBoth {
+                Toggle("И в Codex — сравнить", isOn: $alsoCodex)
+                    .toggleStyle(.checkbox)
+                    .help("Ту же задачу получат Claude и Codex, каждый в своём worktree проекта; итог придёт, когда закончат оба")
             }
             HStack(spacing: 8) {
                 Picker("Где запустить", selection: $mode) {
@@ -158,7 +165,7 @@ struct QuickPromptWindow: View {
     private func send() {
         guard canSend, let project else { return }
         let task = text
-        quickPrompt.send(task, project: project, agent: agent, mode: mode)
+        quickPrompt.send(task, project: project, agent: agent, mode: mode, alsoCodex: alsoCodex)
         guard agent == .claudeCode || (agent == .codex && mode == .background) else { return }
         sentPath = project.path
         if !isLaunching { closeIfLaunched() }

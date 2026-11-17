@@ -37,6 +37,8 @@ struct BackgroundRun: Codable, Identifiable, Equatable, Sendable {
     var prompt: String? = nil
     /// A review by the other service: the id of the run it reads (`CrossReview`). Such a run changes nothing.
     var reviewOf: String? = nil
+    /// One task given to two services at once (`TwoServices`): both runs carry the same id.
+    var pair: String? = nil
 
     var agentTitle: String { agent == CodexExec.agent ? AgentKind.codex.title : AgentKind.claudeCode.title }
 
