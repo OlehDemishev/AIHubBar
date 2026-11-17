@@ -518,10 +518,12 @@ dependencies = [
  "dirs 6.0.0",
  "httpdate",
  "interprocess",
+ "libc",
  "serde",
  "serde_json",
  "sys-locale",
  "ureq",
+ "windows-sys 0.61.2",
 ]
 
 [[package]]

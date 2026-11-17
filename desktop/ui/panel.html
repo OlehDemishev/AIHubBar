@@ -91,11 +91,38 @@
     await showLimits();
     window.__TAURI__.event.listen("limits-changed", showLimits);
 
+    // A permission request under its session: what is asked and «Разрешить» / «Отклонить», as in the Mac panel.
+    // Claude's own dialog is on screen too; the first answer applies.
+    function request(view) {
+      const box = document.createElement("div");
+      box.className = "request";
+      box.innerHTML = `<span class="secondary text"></span><button class="allow"></button><button class="deny"></button><p class="error" hidden></p>`;
+      box.querySelector(".text").textContent = view.text;
+      box.title = `${view.title}: ${view.text}`;
+      const buttons = [box.querySelector(".allow"), box.querySelector(".deny")];
+      buttons[0].textContent = t("Разрешить");
+      buttons[1].textContent = t("Отклонить");
+      buttons.forEach((button, index) => {
+        button.onclick = async () => {
+          buttons.forEach((b) => (b.disabled = true));
+          try {
+            await invoke("decide_request", { id: view.id, allow: index === 0 });
+          } catch (error) {
+            const message = box.querySelector(".error");
+            message.textContent = String(error);
+            message.hidden = false;
+            buttons.forEach((b) => (b.disabled = false));
+          }
+        };
+      });
+      return box;
+    }
+
     // Sessions, as the Mac panel lists them: state, project, what it waits for or does, the task list's progress.
     async function showSessions() {
       const view = await invoke("sessions_view");
       const rows = document.getElementById("session-rows");
-      rows.replaceChildren(...view.rows.map((row) => {
+      rows.replaceChildren(...view.rows.flatMap((row) => {
         const item = document.createElement("div");
         item.className = `session ${row.state}`;
         item.innerHTML = `<span class="dot" aria-hidden="true"></span><span class="project"></span><span class="secondary detail"></span><span class="secondary progress"></span>`;
@@ -103,7 +130,7 @@
         item.querySelector(".detail").textContent = row.detail ?? row.stateTitle;
         item.querySelector(".progress").textContent = row.progress ?? "";
         item.title = `${row.project} · ${row.stateTitle}${row.detail ? " · " + row.detail : ""}`;
-        return item;
+        return row.request ? [item, request(row.request)] : [item];
       }));
       document.getElementById("no-hooks").hidden = view.hooks === "installed";
       document.getElementById("no-sessions").hidden = view.rows.length > 0 || view.hooks !== "installed";
