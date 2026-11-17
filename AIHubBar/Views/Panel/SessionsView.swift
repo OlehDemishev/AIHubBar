@@ -16,7 +16,8 @@ struct SessionRow: Identifiable, Equatable {
 
     /// Sessions from hooks, joined with background runs by id; runs without a session file (hooks off) are added.
     static func rows(sessions: [SessionStore.Item], runs: [BackgroundRun], now: Date = .now) -> [SessionRow] {
-        let runsByID = Dictionary(runs.map { ($0.id, $0) }, uniquingKeysWith: { first, _ in first })
+        // A Codex run's hook session is named by its thread id, Claude's by the run's own id.
+        let runsByID = Dictionary(runs.flatMap { run in [run.id, run.threadID].compactMap { $0 }.map { ($0, run) } }, uniquingKeysWith: { first, _ in first })
         var rows = sessions.map { item -> SessionRow in
             let run = runsByID[item.id]
             let s = item.session
@@ -31,7 +32,7 @@ struct SessionRow: Identifiable, Equatable {
                 session: s, run: run
             )
         }
-        let shown = Set(rows.map(\.id))
+        let shown = Set(rows.map(\.id) + rows.compactMap { $0.run?.id })
         for run in runs where !shown.contains(run.id) {
             let recent = run.finishedAt.map { now.timeIntervalSince($0) < SessionRules.keepEndedFor } ?? true
             guard run.state == .running || recent else { continue }

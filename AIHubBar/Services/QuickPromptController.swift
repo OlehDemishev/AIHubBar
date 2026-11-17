@@ -79,6 +79,12 @@ final class QuickPromptController {
             note = LaunchController.Message(text: String(localized: "\(agent.title) не установлен"), isError: true)
             return
         }
+        if agent == .codex, mode == .background {
+            settings.quickPrompt.lastMode = mode.rawValue
+            AppLog.info("Quick prompt → Codex (background) in \(project.name)")
+            launcher.launch(command, in: project, mode: .background, codexPath: path)
+            return
+        }
         // Other agents only in Terminal, as «Открыть в…»: the agent opens in the folder, the task waits on the clipboard.
         let prompt = command.prompt(settings.promptStyle, rulesFile: PathText.tilde(settings.projectsDirectory + "/CLAUDE.md"))
         NSPasteboard.general.clearContents()

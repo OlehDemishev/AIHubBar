@@ -57,14 +57,15 @@ final class RunStore {
     /// A command of a folder mode (SPEC-modes §3): its own permission profile and the file it should write.
     func launch(
         title: String, prompt: String, project: String, projectPath: String, folder: String, worktreeBranch: String?,
-        profile: PermissionProfile, resultFile: String?, claudePath: String, taskTitle: String? = nil
+        profile: PermissionProfile, resultFile: String?, claudePath: String, taskTitle: String? = nil,
+        codexPath: String? = nil
     ) throws -> BackgroundRun {
         let id = UUID().uuidString.lowercased()
         var run = BackgroundRun(
             id: id, project: project, projectPath: projectPath, folder: folder, worktreeBranch: worktreeBranch,
             commandTitle: title, task: taskTitle ?? Session.taskTitle(prompt), startedAt: .now,
             timeLimitMinutes: settings.backgroundTimeLimitMinutes, pid: nil, state: .running, notified: false,
-            resultFile: resultFile
+            resultFile: resultFile, agent: codexPath == nil ? nil : CodexExec.agent
         )
 
         try FileManager.default.createDirectory(at: BackgroundRun.runsDirectory, withIntermediateDirectories: true)
@@ -72,8 +73,10 @@ final class RunStore {
         let log = try FileHandle(forWritingTo: run.logURL)
 
         let process = Process()
-        process.executableURL = URL(fileURLWithPath: claudePath)
-        process.arguments = BackgroundPermissions.arguments(prompt: prompt, sessionID: id, profile: profile)
+        process.executableURL = URL(fileURLWithPath: codexPath ?? claudePath)
+        process.arguments = codexPath == nil
+            ? BackgroundPermissions.arguments(prompt: prompt, sessionID: id, profile: profile)
+            : CodexExec.arguments(prompt: prompt, gitDirectory: CodexExec.gitDirectory(folder: folder))
         process.currentDirectoryURL = URL(fileURLWithPath: folder, isDirectory: true)
         process.environment = ProcessRunner.environment()
         process.standardInput = FileHandle.nullDevice
@@ -87,14 +90,14 @@ final class RunStore {
             try process.run()
         } catch {
             try? log.close()
-            throw ProcessError.launchFailed("claude -p", underlying: error.localizedDescription)
+            throw ProcessError.launchFailed(codexPath == nil ? "claude -p" : "codex exec", underlying: error.localizedDescription)
         }
 
         run.pid = process.processIdentifier
         processes[id] = process
         save(run)
         runs.insert(run, at: 0)
-        AppLog.info("Background run \(id) started: «\(title)» in \(folder), profile \(profile.rawValue), limit \(run.timeLimitMinutes) min")
+        AppLog.info("Background run \(id) (\(run.agent ?? "claude")) started: «\(title)» in \(folder), profile \(profile.rawValue), limit \(run.timeLimitMinutes) min")
         return run
     }
 
@@ -152,7 +155,12 @@ final class RunStore {
         let added = Self.loadRuns().filter { !known.contains($0.id) }
         if !added.isEmpty { runs = (runs + added).sorted { $0.startedAt > $1.startedAt } }
 
-        for run in runs where run.state == .running {
+        for var run in runs where run.state == .running {
+            if run.agent == CodexExec.agent, run.threadID == nil,
+               let thread = CodexExec.threadID(fromLog: (try? String(contentsOf: run.logURL, encoding: .utf8)) ?? "") {
+                run.threadID = thread
+                update(run)
+            }
             if processes[run.id] == nil, !(run.pid.map { Self.isRunProcessAlive($0, startedAt: run.startedAt) } ?? false) {
                 // Started before an app restart: no termination handler, so detect the exit here. Before the time
                 // limit: a run that ended while the app was closed did not time out.
@@ -177,8 +185,10 @@ final class RunStore {
             run.state = outcome.map { $0.isError ? .failed : .succeeded } ?? .failed
         }
         run.finishedAt = .now
+        if run.threadID == nil { run.threadID = CodexExec.threadID(fromLog: log) }
         run.summary = StreamJSON.summary(outcome?.result) ?? (outcome == nil && run.state == .failed
-            ? String(localized: "Claude завершился без результата — см. журнал") : nil)
+            ? (run.agent == nil ? String(localized: "Claude завершился без результата — см. журнал")
+                : String(localized: "\(run.agentTitle) завершился без результата — см. журнал")) : nil)
         if let denied = outcome?.deniedTools, !denied.isEmpty {
             let list = Array(Set(denied)).sorted().joined(separator: ", ")
             run.summary = [run.summary, String(localized: "Отклонено правилами фона: \(list)")].compactMap { $0 }.joined(separator: "\n")

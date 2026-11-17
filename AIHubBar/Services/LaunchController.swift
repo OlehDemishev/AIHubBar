@@ -65,7 +65,7 @@ final class LaunchController {
     private(set) var working: Set<String> = []
     private(set) var messages: [String: Message] = [:]
     /// Commands waiting for «Запустить всё равно», keyed by project path.
-    private(set) var pendingConfirmation: [String: (command: ClaudeCommand, mode: LaunchMode)] = [:]
+    private(set) var pendingConfirmation: [String: (command: ClaudeCommand, mode: LaunchMode, codexPath: String?)] = [:]
     /// Background commands stopped by the limit guard, keyed by project path.
     private(set) var pendingLimit: [String: (command: ClaudeCommand, target: LaunchTarget, resetsAt: Date?)] = [:]
     /// Commands waiting for the Terminal / Фон choice, keyed by project path.
@@ -123,13 +123,15 @@ final class LaunchController {
         pendingModeChoice[project.id] = nil
     }
 
-    func launch(_ command: ClaudeCommand, in project: Project, mode: LaunchMode, allowBusyFolder: Bool = false) {
-        launch(command, target: project.launchTarget, mode: mode, allowBusyFolder: allowBusyFolder)
+    func launch(_ command: ClaudeCommand, in project: Project, mode: LaunchMode, allowBusyFolder: Bool = false, codexPath: String? = nil) {
+        launch(command, target: project.launchTarget, mode: mode, allowBusyFolder: allowBusyFolder, codexPath: codexPath)
     }
 
+    /// `codexPath` — the task goes to Codex in the background (`codex exec`) instead of Claude; Claude's session
+    /// limit is then not this run's concern.
     func launch(
         _ command: ClaudeCommand, target: LaunchTarget, mode: LaunchMode,
-        allowBusyFolder: Bool = false, skipLimitGuard: Bool = false
+        allowBusyFolder: Bool = false, skipLimitGuard: Bool = false, codexPath: String? = nil
     ) {
         let id = target.path
         guard !working.contains(id) else { return }
@@ -137,7 +139,7 @@ final class LaunchController {
         pendingConfirmation[id] = nil
         pendingLimit[id] = nil
 
-        if mode == .background, !skipLimitGuard, let session = usage.snapshot?.session,
+        if mode == .background, !skipLimitGuard, codexPath == nil, let session = usage.snapshot?.session,
            session.utilization > Self.backgroundLimitGuard {
             pendingLimit[id] = (command, target, session.resetsAt)
             let reset = session.resetsAt.map { String(localized: ", сброс в \($0.formatted(date: .omitted, time: .shortened))") } ?? ""
@@ -161,7 +163,7 @@ final class LaunchController {
             do {
                 switch try await ClaudeLauncher.prepareFolder(request) {
                 case let .needsConfirmation(question):
-                    pendingConfirmation[id] = (command, mode)
+                    pendingConfirmation[id] = (command, mode, codexPath)
                     messages[id] = Message(text: question)
                 case let .ready(folder, worktree):
                     switch mode {
@@ -174,7 +176,7 @@ final class LaunchController {
                         _ = try runs.launch(
                             title: command.title, prompt: command.prompt(request.style, rulesFile: request.rulesFile), project: target.name,
                             projectPath: target.path, folder: folder, worktreeBranch: worktree?.branch,
-                            profile: .code, resultFile: nil, claudePath: request.claudePath
+                            profile: .code, resultFile: nil, claudePath: request.claudePath, codexPath: codexPath
                         )
                     }
                     messages[id] = Message(text: Self.launchedText(command, mode: mode, worktree: worktree, limit: settings.backgroundTimeLimitMinutes))
@@ -199,7 +201,7 @@ final class LaunchController {
 
     func confirmPending(in project: Project) {
         guard let pending = pendingConfirmation[project.id] else { return }
-        launch(pending.command, in: project, mode: pending.mode, allowBusyFolder: true)
+        launch(pending.command, in: project, mode: pending.mode, allowBusyFolder: true, codexPath: pending.codexPath)
     }
 
     /// «Запустить всё равно» after the limit warning.
@@ -238,7 +240,8 @@ final class LaunchController {
     /// Pauses running background runs near the limit and resumes them after the reset; one notification each way.
     private func guardRuns(now: Date = .now) {
         if let hold = RunGuard.hold(usage.snapshot, threshold: settings.runGuardPercent, now: now) {
-            let paused = runs.running.filter { $0.pausedAt == nil && !guardExempt.contains($0.id) }
+            // Claude's limits hold Claude's runs; a Codex run does not spend them.
+            let paused = runs.running.filter { $0.pausedAt == nil && $0.agent == nil && !guardExempt.contains($0.id) }
             guard !paused.isEmpty else { return }
             paused.forEach { runs.pause($0.id) }
             let until = hold.resetsAt.map { String(localized: " Продолжу после сброса в \($0.formatted(date: .omitted, time: .shortened)).") } ?? ""
