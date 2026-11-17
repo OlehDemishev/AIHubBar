@@ -65,10 +65,16 @@ final class QuickPromptController {
     }
 
     /// Sends the task. The window learns how a Claude Code launch went from the launcher's state for the project.
-    func send(_ text: String, project: Project, agent: AgentKind, mode: LaunchMode) {
+    func send(_ text: String, project: Project, agent: AgentKind, mode: LaunchMode, alsoCodex: Bool = false) {
         settings.quickPrompt.lastProject = project.path
         note = nil
         let command = ClaudeCommand.customTask(text)
+        if agent == .claudeCode, mode == .background, alsoCodex, launcher.canLaunchBoth {
+            settings.quickPrompt.lastMode = mode.rawValue
+            AppLog.info("Quick prompt → Claude Code and Codex (background) in \(project.name)")
+            launcher.launchBoth(command, in: project)
+            return
+        }
         if agent == .claudeCode {
             settings.quickPrompt.lastMode = mode.rawValue
             AppLog.info("Quick prompt → Claude Code (\(mode.rawValue)) in \(project.name)")

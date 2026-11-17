@@ -9035,6 +9035,82 @@
         }
       }
     },
+    "Claude и Codex закончили — %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude and Codex have finished — %@"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude і Codex закінчили — %@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude und Codex sind fertig — %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude et Codex ont terminé — %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude y Codex han terminado — %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude e Codex hanno finito — %@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude e Codex terminaram — %@"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude i Codex skończyły — %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude と Codex が完了しました — %@"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude와 Codex가 끝났습니다 — %@"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "انتهى Claude و Codex — %@"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude dan Codex selesai — %@"
+          }
+        }
+      }
+    },
     "Claude просит разрешение": {
       "localizations": {
         "ar": {
@@ -13033,6 +13109,88 @@
           "stringUnit": {
             "state": "translated",
             "value": "«%@» запущено у фоні (ліміт %lld хв). Підсумок прийде сповіщенням."
+          }
+        }
+      }
+    },
+    "«%@» запущен в фоне у Claude и Codex, каждый в своём worktree: %@. Итог придёт, когда закончат оба.": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "new",
+            "value": "«%1$@» запущен в фоне у Claude и Codex, каждый в своём worktree: %2$@. Итог придёт, когда закончат оба."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“%@” started in the background in Claude and Codex, each in its own worktree: %@. The result comes when both have finished."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«%@» запущено у фоні в Claude і Codex, кожен у своєму worktree: %@. Підсумок надійде, коли закінчать обидва."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "„%@“ läuft im Hintergrund bei Claude und Codex, jeder in seinem eigenen Worktree: %@. Das Ergebnis kommt, wenn beide fertig sind."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "« %@ » est lancé en arrière-plan chez Claude et Codex, chacun dans son worktree : %@. Le résultat arrive quand les deux ont terminé."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«%@» se inició en segundo plano en Claude y Codex, cada uno en su worktree: %@. El resultado llegará cuando terminen los dos."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«%@» è partito in background in Claude e Codex, ciascuno nel proprio worktree: %@. L’esito arriva quando hanno finito entrambi."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“%@” foi iniciado em segundo plano no Claude e no Codex, cada um em seu worktree: %@. O resultado chega quando os dois terminarem."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "„%@” uruchomiono w tle w Claude i Codex, każdy we własnym worktree: %@. Wynik przyjdzie, gdy skończą oba."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「%@」を Claude と Codex でバックグラウンド実行中です。それぞれ専用の worktree を使います：%@。両方が終わると結果が届きます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«%@» 작업을 Claude와 Codex에서 백그라운드로 시작했습니다. 각자 자기 worktree에서 실행합니다: %@. 둘 다 끝나면 결과가 옵니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بدأ «%@» في الخلفية لدى Claude و Codex، كلٌّ في worktree خاص به: %@. تصل النتيجة عندما ينتهي الاثنان."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“%@” dimulai di latar belakang di Claude dan Codex, masing-masing di worktree sendiri: %@. Hasil datang setelah keduanya selesai."
           }
         }
       }
@@ -39653,6 +39811,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Значок профілю замість ✦"
+          }
+        }
+      }
+    },
+    "И в Codex — сравнить": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Also in Codex — to compare"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "І в Codex — порівняти"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Auch in Codex — zum Vergleich"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aussi dans Codex — pour comparer"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "También en Codex — para comparar"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anche in Codex — per confrontare"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Também no Codex — para comparar"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Także w Codex — do porównania"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex でも実行して比較"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex에서도 실행해 비교"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "وفي Codex أيضًا — للمقارنة"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Juga di Codex — untuk membandingkan"
           }
         }
       }
@@ -85614,16 +85848,10 @@
     },
     "Проверить в %@": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Review in %@"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Перевірити в %@"
+            "value": "مراجعة في %@"
           }
         },
         "de": {
@@ -85632,10 +85860,10 @@
             "value": "In %@ prüfen"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Relire dans %@"
+            "value": "Review in %@"
           }
         },
         "es": {
@@ -85644,22 +85872,22 @@
             "value": "Revisar en %@"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Relire dans %@"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tinjau di %@"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Rivedi in %@"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Revisar no %@"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sprawdź w %@"
           }
         },
         "ja": {
@@ -85674,16 +85902,22 @@
             "value": "%@에서 검토"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "مراجعة في %@"
+            "value": "Sprawdź w %@"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tinjau di %@"
+            "value": "Revisar no %@"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Перевірити в %@"
           }
         }
       }
@@ -85842,16 +86076,10 @@
     },
     "Проверка": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Review"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Перевірка"
+            "value": "مراجعة"
           }
         },
         "de": {
@@ -85860,10 +86088,10 @@
             "value": "Prüfung"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Relecture"
+            "value": "Review"
           }
         },
         "es": {
@@ -85872,22 +86100,22 @@
             "value": "Revisión"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Relecture"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tinjauan"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Revisione"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Revisão"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sprawdzenie"
           }
         },
         "ja": {
@@ -85902,32 +86130,32 @@
             "value": "검토"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "مراجعة"
+            "value": "Sprawdzenie"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tinjauan"
+            "value": "Revisão"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Перевірка"
           }
         }
       }
     },
     "Проверка: %@": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Review: %@"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Перевірка: %@"
+            "value": "مراجعة: %@"
           }
         },
         "de": {
@@ -85936,10 +86164,10 @@
             "value": "Prüfung: %@"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Relecture : %@"
+            "value": "Review: %@"
           }
         },
         "es": {
@@ -85948,22 +86176,22 @@
             "value": "Revisión: %@"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Relecture : %@"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tinjauan: %@"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Revisione: %@"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Revisão: %@"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sprawdzenie: %@"
           }
         },
         "ja": {
@@ -85978,16 +86206,22 @@
             "value": "검토: %@"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "مراجعة: %@"
+            "value": "Sprawdzenie: %@"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tinjauan: %@"
+            "value": "Revisão: %@"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Перевірка: %@"
           }
         }
       }
@@ -107826,6 +108060,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Потребує уваги"
+          }
+        }
+      }
+    },
+    "Ту же задачу получат Claude и Codex, каждый в своём worktree проекта; итог придёт, когда закончат оба": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude and Codex get the same task, each in its own worktree of the project; the result comes when both have finished"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Те саме завдання отримають Claude і Codex, кожен у своєму worktree проєкту; підсумок надійде, коли закінчать обидва"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude und Codex erhalten dieselbe Aufgabe, jeder in seinem eigenen Worktree des Projekts; das Ergebnis kommt, wenn beide fertig sind"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude et Codex reçoivent la même tâche, chacun dans son worktree du projet ; le résultat arrive quand les deux ont terminé"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude y Codex reciben la misma tarea, cada uno en su worktree del proyecto; el resultado llegará cuando terminen los dos"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude e Codex ricevono la stessa attività, ciascuno nel proprio worktree del progetto; l’esito arriva quando hanno finito entrambi"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude e Codex recebem a mesma tarefa, cada um em seu worktree do projeto; o resultado chega quando os dois terminarem"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude i Codex dostaną to samo zadanie, każdy we własnym worktree projektu; wynik przyjdzie, gdy skończą oba"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude と Codex が同じタスクを、それぞれプロジェクトの専用 worktree で実行します。両方が終わると結果が届きます"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude와 Codex가 같은 작업을 각자 프로젝트의 자기 worktree에서 수행합니다. 둘 다 끝나면 결과가 옵니다"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يحصل Claude و Codex على المهمة نفسها، كلٌّ في worktree خاص به من المشروع؛ تصل النتيجة عندما ينتهي الاثنان"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude dan Codex mendapat tugas yang sama, masing-masing di worktree proyek sendiri; hasil datang setelah keduanya selesai"
           }
         }
       }

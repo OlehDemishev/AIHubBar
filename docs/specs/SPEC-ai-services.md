@@ -104,6 +104,12 @@ service mark. Sessions: Codex threads next to Claude sessions once a source exis
   answer starts with «OK» or «Fix: N» and comes as the run's result. By hand only; one review per run, a failed one
   can be asked again.
 
+- **One task to two services** (`TwoServices`, `LaunchController.launchBoth`): «Быстрый запрос» with Claude Code in
+  the background shows the checkbox «И в Codex — сравнить» while Codex is installed. Each service gets its own new
+  worktree from the base branch (`…-claude`, `…-codex`) and the same prompt; the two runs share `pair`. When both have
+  finished there is one notification (and a Telegram line) with each one's outcome and branch. Comparing the branches
+  is the person's: there is no diff view of the two. The launch does not ask about limits; the guards still pause.
+
 ## 5. Stages (one PR each)
 
 1. **Settings structure** (done): «Claude Code» tab moves into «Сервисы AI» with nested tabs per service; all

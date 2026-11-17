@@ -104,6 +104,7 @@ final class LaunchController {
         queueTimer = Task { [weak self] in
             while !Task.isCancelled {
                 self?.guardRuns()
+                self?.announcePairs()
                 self?.launchDueQueued()
                 try? await Task.sleep(for: .seconds(30))
             }
@@ -251,6 +252,65 @@ final class LaunchController {
             AppLog.info("Run \(run.id) handed to Codex in \(run.folder)")
         } catch {
             messages[run.projectPath] = Message(text: error.localizedDescription, isError: true)
+        }
+    }
+
+    /// «И в Codex — сравнить»: the same task goes to Claude and to Codex, each in its own new worktree.
+    var canLaunchBoth: Bool { codexPath() != nil }
+
+    func launchBoth(_ command: ClaudeCommand, in project: Project) {
+        let target = project.launchTarget
+        let id = target.path
+        guard !working.contains(id), command.canUseWorktree, let codex = codexPath() else { return }
+        messages[id] = nil
+        pendingConfirmation[id] = nil
+        pendingLimit[id] = nil
+        working.insert(id)
+        let claude = ClaudeLocator.resolve(configured: settings.claudePath)
+        let prompt = command.prompt(settings.promptStyle, rulesFile: PathText.tilde(settings.projectsDirectory + "/CLAUDE.md"))
+        let source = command.nameSource(nextItems: target.nextItems)
+        let pair = UUID().uuidString.lowercased()
+        Task {
+            defer { working.remove(id) }
+            do {
+                var branches: [String] = []
+                for codexPath in [nil, codex] {
+                    let plan = try await GitService.createWorktree(
+                        projectPath: target.path, nameSource: TwoServices.nameSource(source, codex: codexPath != nil), baseRef: target.baseRef
+                    )
+                    _ = try runs.launch(
+                        title: command.title, prompt: prompt, project: target.name, projectPath: target.path, folder: plan.path,
+                        worktreeBranch: plan.branch, profile: .code, resultFile: nil, claudePath: claude,
+                        codexPath: codexPath, pair: pair
+                    )
+                    branches.append(plan.branch)
+                }
+                messages[id] = Message(text: String(localized: "«\(command.title)» запущен в фоне у Claude и Codex, каждый в своём worktree: \(branches.joined(separator: ", ")). Итог придёт, когда закончат оба."))
+                AppLog.info("Pair \(pair) started for \(target.name): \(branches.joined(separator: ", "))")
+                await store.refresh()
+            } catch {
+                messages[id] = Message(text: error.localizedDescription, isError: true)
+                AppLog.error("Pair launch in \(target.name) failed: \(error.localizedDescription)")
+            }
+        }
+    }
+
+    /// Pairs already told about; kept across restarts (the last 100).
+    private var pairsAnnounced = Set(UserDefaults.standard.stringArray(forKey: "pairsAnnounced") ?? []) {
+        didSet { UserDefaults.standard.set(Array(pairsAnnounced.suffix(100)), forKey: "pairsAnnounced") }
+    }
+
+    /// One notification when both runs of a pair have finished.
+    private func announcePairs() {
+        for pair in Set(runs.runs.compactMap(\.pair)) where !pairsAnnounced.contains(pair) {
+            guard let both = TwoServices.finishedPair(pair, runs: runs.runs) else { continue }
+            pairsAnnounced.insert(pair)
+            // Finished long ago (the app was closed): not news any more.
+            guard both.contains(where: { $0.finishedAt.map { Date.now.timeIntervalSince($0) < 3600 } ?? false }) else { continue }
+            let title = String(localized: "Claude и Codex закончили — \(both[0].project)")
+            let body = TwoServices.lines(both).joined(separator: "\n")
+            Notifier.post(id: "pair-\(pair)", title: title, body: body)
+            sendToTelegram("⚖️ <b>\(RunMessage.escape(title))</b>\n\(RunMessage.escape(body))")
         }
     }
 
