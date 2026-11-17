@@ -27,6 +27,15 @@ final class ProjectStore {
 
     var projects: [Project] { report?.projects ?? [] }
 
+    /// The demo copy (`DemoMode`) shows sample projects and never scans: a refresh would put the empty folder back.
+    private var isDemo = false
+
+    func showDemo(_ report: ProjectsReport) {
+        isDemo = true
+        self.report = report
+        lastUpdated = .now
+    }
+
     /// CI went red or green, a PR closed: a notification (and Telegram if chosen) whose click opens the PR.
     private func announcePullRequests(from old: [Project]?, to new: [Project]?) {
         guard settings.pullRequestAlerts, let old, let new else { return }
@@ -65,7 +74,7 @@ final class ProjectStore {
     }
 
     func refresh(fetch: Bool = false) async {
-        guard !isRefreshing else { return }
+        guard !isRefreshing, !isDemo else { return }
         isRefreshing = true
         defer { isRefreshing = false }
         if fetch { lastFetch = .now }

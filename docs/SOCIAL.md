@@ -112,6 +112,8 @@ I build software with Claude Code and share how it's made.
 
 The agent drafts one post per network from the release notes; Oleh checks and posts it. One thing per post, in plain words, with a picture or a video when there's something to see. A small fix doesn't need a post.
 
+Pictures and videos are recorded from the demo copy, never from the installed app: `scripts/demo.sh` starts the release filled with sample data (docs/RELEASE.md → Demo), so no real project, request or account gets into a post. It is brought up to date with every release that has news.
+
 Template:
 
 AI Hub Bar {version}: {the one change people will notice, and what it does for them}.

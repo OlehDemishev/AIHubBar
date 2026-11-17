@@ -63,6 +63,7 @@ final class SessionStore {
     }
 
     func reload() {
+        guard !isDemo else { return }
         let directory = directory
         Task {
             let (loaded, finished, requests) = await Task.detached(priority: .utility) {
@@ -83,8 +84,24 @@ final class SessionStore {
         announceFullContext(loaded)
     }
 
+    /// The demo copy (`DemoMode`) shows sample sessions; it never starts the watcher, so they stay as they are.
+    private var isDemo = false
+
+    func showDemo(items: [Item], approvals: [String: ApprovalRequest]) {
+        isDemo = true
+        self.items = items
+        self.approvals = approvals
+    }
+
     /// «Разрешить» / «Отклонить» from the panel or a notification.
     func decide(requestID: String, allow: Bool) {
+        if isDemo {
+            // No hook waits for the answer: the sample session just goes on, as a real one would.
+            guard let request = approvals.values.first(where: { $0.id == requestID }) else { return }
+            approvals[request.sessionID] = nil
+            if let index = items.firstIndex(where: { $0.id == request.sessionID }) { items[index].state = .running }
+            return
+        }
         guard ApprovalFiles.decide(requestID, allow: allow, in: approvalsDirectory) else { return }
         if let request = approvals.values.first(where: { $0.id == requestID }) {
             approvals[request.sessionID] = nil

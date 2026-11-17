@@ -5,6 +5,7 @@
 **Updated:** 2026-11-17
 
 **Now:**
+- 2026-11-17: a hidden demo copy for recording release news (branch `feat/demo-mode`): `scripts/demo.sh` starts the app filled with sample data under its own bundle id and home folder; `DemoData` is brought up to date with every release that has news (docs/RELEASE.md → Demo). Waits for the merge
 - 0.11.0 (build 848) published 2026-11-17 on Oleh's word: beta 3 without changes to the code. GitHub «latest», both appcasts and the Homebrew cask point at it
 - 2026-11-16: the pass before the release — checks green on main (649 tests), Oleh's copy is on 0.11.0-beta.3 through Sparkle, the widget's files seen live with Codex as main. 0.11.0 waits for Oleh's word on Tuesday 2026-11-17
 - 0.11.0-beta.3 (build 844) published 2026-11-12 for beta testers: #367 the main service, #370 «Не спать» across restarts, #368 translations, #369 the help, #371 quotes and the card. Lives on Oleh's copy until Tuesday 2026-11-17; nothing new goes into 0.11.0 after it, only fixes
@@ -38,6 +39,7 @@
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/specs/SPEC-windows.md §9, stage 2–3 leftovers)
 
 **Needs Oleh:**
+- demo copy: merge `feat/demo-mode`, then run `scripts/demo.sh --solo --lang en`, look at the panel below the limits (sessions, «Allow», background tasks, projects) and say what a recording still lacks; `scripts/demo.sh stop` brings the installed app back
 - update to 0.11.0 (Settings → «Основные» → «Обновления») and say whether the window showed the list of changes
 - main service (in 0.11.0): Settings → «Что показывать» → «Лимиты AI» → «Главный сервис» — pick Codex, look at the panel and the menu bar item, put «Автоматически» back
 - update to 0.11.0-beta.3 (Settings → «Основные» → «Обновления», «Бета-версии» on) (done: the copy in `~/Applications` is beta.3, build 844); then the Antigravity quota: Settings → «Сервисы AI» → Gemini → «Включить квоту Antigravity», open `agy` once, then look at the panel — «Gemini» and «другие модели» with the plan. The agent was not allowed to press that button on your Mac, so the install into `~/.gemini/antigravity-cli/settings.json` is not seen live
@@ -66,6 +68,14 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-17 — Hidden demo copy for release news (branch `feat/demo-mode`)
+
+Done: `scripts/demo.sh [scene] [--lang] [--open <window>] [--solo] [--debug] [--no-build]` and `stop`. It copies the build to `build/demo/`, gives the copy the bundle id `com.demishev.claudepult.demo` and its own home folder, removes the widget, the `aihubbar://` links and `*.claudepult` files from it and starts it. `DemoMode` is on only with that id and that home (the copy started any other way quits); the app has no setting or argument for it. In the copy the stores get `DemoData` — limits of Claude, Codex, Copilot and Antigravity, four sessions (one waits, «Allow» works), two background tasks, four projects, a month of usage — and nothing that reaches outside starts: limits requests, Keychain, Telegram, updates, global keys, clipboard and keyboard watching, the project scan. Scenes: `default`, `codex-main` (no Claude, Codex leads). `DemoData.version` must equal `WhatsNew.version` (a test), so a release with news cannot go out with an old demo; the steps are in docs/RELEASE.md → Demo, docs/SOCIAL.md points at it, `_daily-report/help.txt` lists the script.
+Checked:
+- `scripts/check.sh` passed, with 6 new tests in `DemoTests`.
+- Live, Debug build, English: `scripts/demo.sh --debug --lang en` — the log names the profile and the scene; the menu bar item shows 62 %, the red dot and one waiting session; the panel (opened once, on Oleh's word) shows «Alex · Max 5x», the «What's New» card, Claude with the week's pace, Codex, Copilot, Antigravity with their plans, and the sessions' header «running: 3, waiting: 1». `scripts/demo.sh stop` quit it and removed its home.
+Left: not seen live — the panel below the sessions' header (session rows, «Allow», background tasks, projects), Settings, the windows of `--open`, the scene `codex-main`, `--solo`, and the Release build (only Debug was started). In the sample week the line «slower than an even spend» stands next to «the week runs out Thu» — both come from the app's own rules on the sample month; tune the records if it looks odd in a recording. The pace line of the session goes away half an hour after the start.
 
 ## 2026-11-17 — Release 0.11.0 (branch `chore/release-0.11.0`)
 

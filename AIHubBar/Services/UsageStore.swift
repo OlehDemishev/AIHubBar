@@ -83,6 +83,17 @@ final class UsageStore {
         snapshot = Self.loadSnapshot()
     }
 
+    /// The demo copy (`DemoMode`): sample numbers put in place of a fetch. The copy never starts the refresh loop.
+    func showDemo(snapshot: UsageSnapshot?, history: [UsagePoint], week: WeekUsage?, days: [UsageDay],
+                  breakdowns: [Period: TokenBreakdown]) {
+        self.snapshot = snapshot
+        self.history = history
+        weekUsage = week
+        self.days = days
+        self.breakdowns = breakdowns
+        breakdownUpdated = .now
+    }
+
     func start() {
         guard loop == nil else { return }
         loop = Task { [weak self] in
