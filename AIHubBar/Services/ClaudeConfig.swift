@@ -192,6 +192,9 @@ final class ClaudeConfigStore {
     /// Unsaved edits by path. They live here, not in the window: switching files or closing it loses nothing.
     private(set) var drafts: [String: String] = [:]
     private(set) var busy: Set<String> = []
+    private(set) var skills: [AgentSkill] = []
+    private(set) var plugins: [AgentPlugin] = []
+    private(set) var hooks: [AgentHook] = []
     var lastError: String?
 
     private let settings: AppSettings
@@ -226,6 +229,39 @@ final class ClaudeConfigStore {
         files = InstructionFile.all(home: home, projectsDirectory: settings.projectsDirectory,
                                     projects: projects.projects.map { ($0.name, $0.path) })
         texts = Dictionary(uniqueKeysWithValues: files.map { ($0.path, (try? String(contentsOfFile: $0.path, encoding: .utf8)) ?? "") })
+    }
+
+    private var installedPluginsURL: URL { URL(fileURLWithPath: home + "/.claude/plugins/installed_plugins.json") }
+    private var codexHooksURL: URL { URL(fileURLWithPath: home + "/.codex/hooks.json") }
+
+    /// Skills, plugins and hooks of Claude Code and Codex, as they are on disk now.
+    func reloadExtras() {
+        skills = AgentExtras.skills(home: home)
+        plugins = AgentExtras.plugins(installed: readJSON(installedPluginsURL), settings: readJSON(settingsURL))
+        hooks = AgentExtras.hooks(readJSON(settingsURL), agent: .claudeCode) + AgentExtras.hooks(readJSON(codexHooksURL), agent: .codex)
+    }
+
+    /// Off — the skill's folder moves next to the skills folder; on — back. Nothing inside it changes.
+    func setEnabled(_ skill: AgentSkill, _ on: Bool) {
+        do {
+            try AgentExtras.move(skill, on: on, home: home)
+            AppLog.info("Skill «\(skill.name)» of \(skill.agent.binary) switched \(on ? "on" : "off")")
+        } catch {
+            lastError = error.localizedDescription
+        }
+        reloadExtras()
+    }
+
+    /// `enabledPlugins` in `~/.claude/settings.json`, with a backup of the file first.
+    func setEnabled(_ plugin: AgentPlugin, _ on: Bool) {
+        do {
+            try backup(settingsURL)
+            try writeJSON(AgentExtras.settings(readJSON(settingsURL) ?? [:], plugin: plugin.key, on: on), to: settingsURL)
+            AppLog.info("Plugin «\(plugin.key)» switched \(on ? "on" : "off")")
+        } catch {
+            lastError = error.localizedDescription
+        }
+        reloadExtras()
     }
 
     /// What the editor shows: the unsaved edit if there is one.

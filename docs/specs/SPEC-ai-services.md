@@ -20,7 +20,7 @@ forecast, week strip, credits, per-project tokens and context.
 | Context | how full each session's context is | `ContextUsage` |
 | Sessions | live list of sessions (Terminal, Claude app, background) via hooks; current action; approve / deny | `HookController`, `SessionStore`, `Approvals` |
 | Launch | Terminal / background (`claude -p`), worktrees, night queue, saved prompts | `ClaudeLauncher`, `LaunchController`, `NightQueue` |
-| Config | CLAUDE.md / AGENTS.md editor, MCP servers on/off | `ClaudeConfig`, `ClaudeConfigWindow` |
+| Config | CLAUDE.md / AGENTS.md editor, MCP servers on/off; skills and plugins on/off, hooks listed (`AgentExtras`, 2026-11-17: a switched-off skill's folder moves to `skills.disabled` beside the skills folder, a plugin is switched by `enabledPlugins` in `~/.claude/settings.json` after a backup, hooks are read-only; Codex's skills too) | `ClaudeConfig`, `ClaudeConfigWindow` |
 | Login | keep the Claude Code sign-in fresh | `LoginRenewal` |
 | Menu bar, widget, notch | session / week %, forecast | `MenuBarConfig`, `WidgetStatus`, `NotchIsland` |
 

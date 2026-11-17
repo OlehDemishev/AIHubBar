@@ -6450,6 +6450,7 @@
         }
       }
     },
+    "AI Hub Bar": {},
     "AI Hub Bar бесплатный. Откроется страница на сайте со способами поддержки.": {
       "localizations": {
         "ar": {
@@ -9037,16 +9038,10 @@
     },
     "Claude и Codex закончили — %@": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Claude and Codex have finished — %@"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Claude і Codex закінчили — %@"
+            "value": "انتهى Claude و Codex — %@"
           }
         },
         "de": {
@@ -9055,10 +9050,10 @@
             "value": "Claude und Codex sind fertig — %@"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Claude et Codex ont terminé — %@"
+            "value": "Claude and Codex have finished — %@"
           }
         },
         "es": {
@@ -9067,22 +9062,22 @@
             "value": "Claude y Codex han terminado — %@"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude et Codex ont terminé — %@"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude dan Codex selesai — %@"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Claude e Codex hanno finito — %@"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Claude e Codex terminaram — %@"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Claude i Codex skończyły — %@"
           }
         },
         "ja": {
@@ -9097,16 +9092,22 @@
             "value": "Claude와 Codex가 끝났습니다 — %@"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "انتهى Claude و Codex — %@"
+            "value": "Claude i Codex skończyły — %@"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Claude dan Codex selesai — %@"
+            "value": "Claude e Codex terminaram — %@"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude і Codex закінчили — %@"
           }
         }
       }
@@ -9953,6 +9954,7 @@
         }
       }
     },
+    "Hooks": {},
     "Hooks добавляются в settings.json Claude Code (остальные настройки не трогаются, перед изменением рядом сохраняется копия). Они записывают состояние каждой сессии Claude Code на этом компьютере, чтобы AI Hub Bar показывал их в панели.": {
       "extractionState": "stale",
       "localizations": {
@@ -11490,6 +11492,159 @@
         }
       }
     },
+    "Skills и плагины": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skills and Plugins"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skills і плагіни"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skills und Plug-ins"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skills et plugins"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skills y plugins"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skill e plugin"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skills e plugins"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skille i wtyczki"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "スキルとプラグイン"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "스킬과 플러그인"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المهارات والإضافات"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skill dan plugin"
+          }
+        }
+      }
+    },
+    "Skills лежат в ~/.claude/skills и ~/.codex/skills, плагины ставятся командой /plugin в Claude Code.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skills live in ~/.claude/skills and ~/.codex/skills; plugins are installed with /plugin in Claude Code."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skills лежать у ~/.claude/skills і ~/.codex/skills, плагіни встановлюються командою /plugin у Claude Code."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skills liegen in ~/.claude/skills und ~/.codex/skills; Plug-ins werden mit /plugin in Claude Code installiert."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les skills se trouvent dans ~/.claude/skills et ~/.codex/skills ; les plugins s’installent avec /plugin dans Claude Code."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los skills están en ~/.claude/skills y ~/.codex/skills; los plugins se instalan con /plugin en Claude Code."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le skill stanno in ~/.claude/skills e ~/.codex/skills; i plugin si installano con /plugin in Claude Code."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Os skills ficam em ~/.claude/skills e ~/.codex/skills; os plugins são instalados com /plugin no Claude Code."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skille leżą w ~/.claude/skills i ~/.codex/skills; wtyczki instaluje się poleceniem /plugin w Claude Code."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "スキルは ~/.claude/skills と ~/.codex/skills にあります。プラグインは Claude Code の /plugin でインストールします。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "스킬은 ~/.claude/skills와 ~/.codex/skills에 있고, 플러그인은 Claude Code의 /plugin 명령으로 설치합니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "توجد المهارات في ‎~/.claude/skills و ‎~/.codex/skills، وتُثبَّت الإضافات بالأمر ‎/plugin في Claude Code."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skill ada di ~/.claude/skills dan ~/.codex/skills; plugin dipasang dengan /plugin di Claude Code."
+          }
+        }
+      }
+    },
+    "Skills — %@": {},
     "Telegram": {},
     "Telegram не настроен (модуль «Telegram») — будет только уведомление macOS.": {
       "localizations": {
@@ -13115,22 +13270,10 @@
     },
     "«%@» запущен в фоне у Claude и Codex, каждый в своём worktree: %@. Итог придёт, когда закончат оба.": {
       "localizations": {
-        "ru": {
-          "stringUnit": {
-            "state": "new",
-            "value": "«%1$@» запущен в фоне у Claude и Codex, каждый в своём worktree: %2$@. Итог придёт, когда закончат оба."
-          }
-        },
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "“%@” started in the background in Claude and Codex, each in its own worktree: %@. The result comes when both have finished."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "«%@» запущено у фоні в Claude і Codex, кожен у своєму worktree: %@. Підсумок надійде, коли закінчать обидва."
+            "value": "بدأ «%@» في الخلفية لدى Claude و Codex، كلٌّ في worktree خاص به: %@. تصل النتيجة عندما ينتهي الاثنان."
           }
         },
         "de": {
@@ -13139,10 +13282,10 @@
             "value": "„%@“ läuft im Hintergrund bei Claude und Codex, jeder in seinem eigenen Worktree: %@. Das Ergebnis kommt, wenn beide fertig sind."
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "« %@ » est lancé en arrière-plan chez Claude et Codex, chacun dans son worktree : %@. Le résultat arrive quand les deux ont terminé."
+            "value": "“%@” started in the background in Claude and Codex, each in its own worktree: %@. The result comes when both have finished."
           }
         },
         "es": {
@@ -13151,22 +13294,22 @@
             "value": "«%@» se inició en segundo plano en Claude y Codex, cada uno en su worktree: %@. El resultado llegará cuando terminen los dos."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "« %@ » est lancé en arrière-plan chez Claude et Codex, chacun dans son worktree : %@. Le résultat arrive quand les deux ont terminé."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“%@” dimulai di latar belakang di Claude dan Codex, masing-masing di worktree sendiri: %@. Hasil datang setelah keduanya selesai."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "«%@» è partito in background in Claude e Codex, ciascuno nel proprio worktree: %@. L’esito arriva quando hanno finito entrambi."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "“%@” foi iniciado em segundo plano no Claude e no Codex, cada um em seu worktree: %@. O resultado chega quando os dois terminarem."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "„%@” uruchomiono w tle w Claude i Codex, każdy we własnym worktree: %@. Wynik przyjdzie, gdy skończą oba."
           }
         },
         "ja": {
@@ -13181,16 +13324,28 @@
             "value": "«%@» 작업을 Claude와 Codex에서 백그라운드로 시작했습니다. 각자 자기 worktree에서 실행합니다: %@. 둘 다 끝나면 결과가 옵니다."
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "بدأ «%@» في الخلفية لدى Claude و Codex، كلٌّ في worktree خاص به: %@. تصل النتيجة عندما ينتهي الاثنان."
+            "value": "„%@” uruchomiono w tle w Claude i Codex, każdy we własnym worktree: %@. Wynik przyjdzie, gdy skończą oba."
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "“%@” dimulai di latar belakang di Claude dan Codex, masing-masing di worktree sendiri: %@. Hasil datang setelah keduanya selesai."
+            "value": "“%@” foi iniciado em segundo plano no Claude e no Codex, cada um em seu worktree: %@. O resultado chega quando os dois terminarem."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "new",
+            "value": "«%1$@» запущен в фоне у Claude и Codex, каждый в своём worktree: %2$@. Итог придёт, когда закончат оба."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«%@» запущено у фоні в Claude і Codex, кожен у своєму worktree: %@. Підсумок надійде, коли закінчать обидва."
           }
         }
       }
@@ -25517,6 +25672,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Вимкнено"
+          }
+        }
+      }
+    },
+    "Выключенный skill переносится в папку рядом (skills.disabled) и возвращается как был. Hooks здесь только для просмотра. Изменения подхватит следующая сессия.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A skill that is switched off moves to a folder beside it (skills.disabled) and comes back as it was. Hooks are shown here only to look at. The next session picks up the changes."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Вимкнений skill переноситься в теку поруч (skills.disabled) і повертається таким, як був. Hooks тут лише для перегляду. Зміни підхопить наступна сесія."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ein ausgeschalteter Skill wandert in einen Ordner daneben (skills.disabled) und kommt unverändert zurück. Hooks sind hier nur zur Ansicht. Die nächste Sitzung übernimmt die Änderungen."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un skill désactivé est déplacé dans un dossier voisin (skills.disabled) et revient tel quel. Les hooks sont ici en lecture seule. La prochaine session prendra en compte les changements."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un skill desactivado se mueve a una carpeta contigua (skills.disabled) y vuelve tal como estaba. Los hooks aquí son solo para consultar. La próxima sesión tomará los cambios."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Una skill disattivata viene spostata in una cartella accanto (skills.disabled) e torna com’era. Gli hook qui sono in sola lettura. La prossima sessione recepirà le modifiche."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Um skill desativado vai para uma pasta ao lado (skills.disabled) e volta como estava. Os hooks aqui são só para consulta. A próxima sessão pega as mudanças."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wyłączony skill trafia do folderu obok (skills.disabled) i wraca taki, jaki był. Hooki są tu tylko do podglądu. Zmiany uwzględni następna sesja."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "オフにしたスキルは隣のフォルダ（skills.disabled）に移され、そのまま戻せます。フックはここでは表示のみです。変更は次のセッションから反映されます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "끈 스킬은 옆 폴더(skills.disabled)로 옮겨지고, 다시 켜면 그대로 돌아옵니다. 훅은 여기서 보기만 할 수 있습니다. 변경 사항은 다음 세션부터 적용됩니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تُنقل المهارة الموقوفة إلى مجلد مجاور (skills.disabled) وتعود كما كانت. الـ hooks هنا للعرض فقط. ستأخذ الجلسة التالية بالتغييرات."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skill yang dimatikan dipindahkan ke folder di sebelahnya (skills.disabled) dan kembali seperti semula. Hook di sini hanya untuk dilihat. Sesi berikutnya akan memakai perubahannya."
           }
         }
       }
@@ -39817,16 +40048,10 @@
     },
     "И в Codex — сравнить": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Also in Codex — to compare"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "І в Codex — порівняти"
+            "value": "وفي Codex أيضًا — للمقارنة"
           }
         },
         "de": {
@@ -39835,10 +40060,10 @@
             "value": "Auch in Codex — zum Vergleich"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Aussi dans Codex — pour comparer"
+            "value": "Also in Codex — to compare"
           }
         },
         "es": {
@@ -39847,22 +40072,22 @@
             "value": "También en Codex — para comparar"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aussi dans Codex — pour comparer"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Juga di Codex — untuk membandingkan"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Anche in Codex — per confrontare"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Também no Codex — para comparar"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Także w Codex — do porównania"
           }
         },
         "ja": {
@@ -39877,16 +40102,22 @@
             "value": "Codex에서도 실행해 비교"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "وفي Codex أيضًا — للمقارنة"
+            "value": "Także w Codex — do porównania"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Juga di Codex — untuk membandingkan"
+            "value": "Também no Codex — para comparar"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "І в Codex — порівняти"
           }
         }
       }
@@ -62722,6 +62953,82 @@
         }
       }
     },
+    "Ничего не установлено": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nothing Installed"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Нічого не встановлено"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nichts installiert"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rien d’installé"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nada instalado"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Niente installato"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nada instalado"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nic nie zainstalowano"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "何もインストールされていません"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "설치된 항목 없음"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لا شيء مثبَّت"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Belum ada yang terpasang"
+          }
+        }
+      }
+    },
     "Новая группа": {
       "localizations": {
         "ar": {
@@ -78312,6 +78619,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Пігулка на екранах без виїмки"
+          }
+        }
+      }
+    },
+    "Плагины — %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plugins — %@"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Плагіни — %@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plug-ins — %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plugins — %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plugins — %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plugin — %@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plugins — %@"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wtyczki — %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "プラグイン — %@"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "플러그인 — %@"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الإضافات — %@"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plugin — %@"
           }
         }
       }
@@ -108066,16 +108449,10 @@
     },
     "Ту же задачу получат Claude и Codex, каждый в своём worktree проекта; итог придёт, когда закончат оба": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Claude and Codex get the same task, each in its own worktree of the project; the result comes when both have finished"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Те саме завдання отримають Claude і Codex, кожен у своєму worktree проєкту; підсумок надійде, коли закінчать обидва"
+            "value": "يحصل Claude و Codex على المهمة نفسها، كلٌّ في worktree خاص به من المشروع؛ تصل النتيجة عندما ينتهي الاثنان"
           }
         },
         "de": {
@@ -108084,10 +108461,10 @@
             "value": "Claude und Codex erhalten dieselbe Aufgabe, jeder in seinem eigenen Worktree des Projekts; das Ergebnis kommt, wenn beide fertig sind"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Claude et Codex reçoivent la même tâche, chacun dans son worktree du projet ; le résultat arrive quand les deux ont terminé"
+            "value": "Claude and Codex get the same task, each in its own worktree of the project; the result comes when both have finished"
           }
         },
         "es": {
@@ -108096,22 +108473,22 @@
             "value": "Claude y Codex reciben la misma tarea, cada uno en su worktree del proyecto; el resultado llegará cuando terminen los dos"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude et Codex reçoivent la même tâche, chacun dans son worktree du projet ; le résultat arrive quand les deux ont terminé"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude dan Codex mendapat tugas yang sama, masing-masing di worktree proyek sendiri; hasil datang setelah keduanya selesai"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Claude e Codex ricevono la stessa attività, ciascuno nel proprio worktree del progetto; l’esito arriva quando hanno finito entrambi"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Claude e Codex recebem a mesma tarefa, cada um em seu worktree do projeto; o resultado chega quando os dois terminarem"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Claude i Codex dostaną to samo zadanie, każdy we własnym worktree projektu; wynik przyjdzie, gdy skończą oba"
           }
         },
         "ja": {
@@ -108126,16 +108503,22 @@
             "value": "Claude와 Codex가 같은 작업을 각자 프로젝트의 자기 worktree에서 수행합니다. 둘 다 끝나면 결과가 옵니다"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "يحصل Claude و Codex على المهمة نفسها، كلٌّ في worktree خاص به من المشروع؛ تصل النتيجة عندما ينتهي الاثنان"
+            "value": "Claude i Codex dostaną to samo zadanie, każdy we własnym worktree projektu; wynik przyjdzie, gdy skończą oba"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Claude dan Codex mendapat tugas yang sama, masing-masing di worktree proyek sendiri; hasil datang setelah keduanya selesai"
+            "value": "Claude e Codex recebem a mesma tarefa, cada um em seu worktree do projeto; o resultado chega quando os dois terminarem"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Те саме завдання отримають Claude і Codex, кожен у своєму worktree проєкту; підсумок надійде, коли закінчать обидва"
           }
         }
       }

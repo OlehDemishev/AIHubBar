@@ -5,7 +5,7 @@
 **Updated:** 2026-11-17
 
 **Now:**
-- 2026-11-17: nine AI features for the next releases, one branch each, in this order: 1 Codex approvals (done, not seen live), 2 background tasks for Codex (done, the window not seen live), 3 run guard on Codex's limits (done, not seen live), 4 hand a task over at the limit (done, not seen live), 5 review by the second service (done, not seen live), 6 one task to two services (done, not seen live), 7 skills, plugins and hooks page, 8 day summary, 9 spend at API prices
+- 2026-11-17: nine AI features for the next releases, one branch each, in this order: 1 Codex approvals (done, not seen live), 2 background tasks for Codex (done, the window not seen live), 3 run guard on Codex's limits (done, not seen live), 4 hand a task over at the limit (done, not seen live), 5 review by the second service (done, not seen live), 6 one task to two services (done, not seen live), 7 skills, plugins and hooks page (done, not seen live), 8 day summary, 9 spend at API prices
 - 2026-11-17: a hidden demo copy for recording release news (branch `feat/demo-mode`): `scripts/demo.sh` starts the app filled with sample data under its own bundle id and home folder; `DemoData` is brought up to date with every release that has news (docs/RELEASE.md → Demo). Merged as #375; goes out with the next release
 - 0.11.0 (build 848) published 2026-11-17 on Oleh's word: beta 3 without changes to the code. GitHub «latest», both appcasts and the Homebrew cask point at it
 - 2026-11-16: the pass before the release — checks green on main (649 tests), Oleh's copy is on 0.11.0-beta.3 through Sparkle, the widget's files seen live with Codex as main. 0.11.0 waits for Oleh's word on Tuesday 2026-11-17
@@ -71,6 +71,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-17 — Skills, plugins and hooks page (branch `feat/skills-page`)
+
+Done: seventh of the nine. The «Claude Code» window has a third tab, «Skills и плагины»: skills of Claude Code and Codex (name and description from `SKILL.md`) and Claude Code's plugins, each with a switch, and the hooks of both agents to look at, AI Hub Bar's own marked. A skill is switched off by moving its folder to `skills.disabled` beside the skills folder; a plugin by `enabledPlugins` in `~/.claude/settings.json`, with a backup first.
+Checked: `scripts/check.sh` (new `AgentExtrasTests` on a temporary home folder: both agents, off and back, plugins, hooks; catalog 1833 keys, 0 problems). The file layout was read on this Mac (14 Claude skills, no plugins, no Codex skills).
+Left: the tab was not looked at live and no switch was pressed on Oleh's real skills. Whether Claude Code treats a plugin missing from `enabledPlugins` as on is an assumption (no plugin is installed here). Project-level skills (`<project>/.claude/skills`) are not listed.
 
 ## 2026-11-17 — One task to Claude and Codex (branch `feat/two-services`)
 
