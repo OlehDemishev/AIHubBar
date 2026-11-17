@@ -1,6 +1,6 @@
 # Specs
 
-Every spec of the Mac app (and the postponed Windows/Linux versions), with where it stands. Details and what is left
+Every spec of the Mac app (and the Windows/Linux versions), with where it stands. Details and what is left
 are in each spec and in the journal: `docs/STATUS.md`, older months in `docs/status/`.
 
 | Spec | What | State |
@@ -19,7 +19,7 @@ are in each spec and in the journal: `docs/STATUS.md`, older months in `docs/sta
 | [SPEC-quick-prompt.md](SPEC-quick-prompt.md) | «Быстрый запрос»: a task to an agent from any app by a hot key | done (2026-11-03) |
 | [SPEC-telegram.md](SPEC-telegram.md) | «Telegram»: one bot with its own menu — reports, sessions, tasks, limits, settings; a shared bot through a Cloudflare Worker | agreed 2026-11-03; stage 1 done (#242, #244); stages 1–4 done (#242–#255), shared bot and Mini App (§10) built; the Worker not deployed yet |
 | [SPEC-refactor.md](SPEC-refactor.md) | refactoring audit and plan | done (stages 0–8) |
-| [SPEC-windows.md](SPEC-windows.md) | Windows version (`desktop/`, Tauri 2) | postponed after stages 1–3 main parts |
-| [SPEC-linux.md](SPEC-linux.md) | Linux version (same code as Windows) | postponed with Windows |
+| [SPEC-windows.md](SPEC-windows.md) | Windows version (`desktop/`, Tauri 2) | resumed 2026-11-17 after stages 1–3 main parts; §11 maps every Mac feature; developed on a Windows PC (`desktop/WINDOWS-DEV.md`) |
+| [SPEC-linux.md](SPEC-linux.md) | Linux version (same code as Windows) | resumed with Windows |
 
 A new spec goes here as `SPEC-<topic>.md` with a row in this table; update the row when its state changes.
