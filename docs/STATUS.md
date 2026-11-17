@@ -5,7 +5,7 @@
 **Updated:** 2026-11-17
 
 **Now:**
-- 2026-11-17: nine AI features for the next releases, one branch each, in this order: 1 Codex approvals (done, not seen live), 2 background tasks for Codex (done, the window not seen live), 3 run guard on Codex's limits (done, not seen live), 4 hand a task over at the limit (done, not seen live), 5 review by the second service (done, not seen live), 6 one task to two services (done, not seen live), 7 skills, plugins and hooks page (done, not seen live), 8 day summary (done, not seen live), 9 spend at API prices
+- 2026-11-17: nine AI features for the next releases, one branch each, in this order: 1 Codex approvals (done, not seen live), 2 background tasks for Codex (done, the window not seen live), 3 run guard on Codex's limits (done, not seen live), 4 hand a task over at the limit (done, not seen live), 5 review by the second service (done, not seen live), 6 one task to two services (done, not seen live), 7 skills, plugins and hooks page (done, not seen live), 8 day summary (done, not seen live), 9 spend at API prices (done as «does the plan pay off», not seen live)
 - 2026-11-17: a hidden demo copy for recording release news (branch `feat/demo-mode`): `scripts/demo.sh` starts the app filled with sample data under its own bundle id and home folder; `DemoData` is brought up to date with every release that has news (docs/RELEASE.md → Demo). Merged as #375; goes out with the next release
 - 0.11.0 (build 848) published 2026-11-17 on Oleh's word: beta 3 without changes to the code. GitHub «latest», both appcasts and the Homebrew cask point at it
 - 2026-11-16: the pass before the release — checks green on main (649 tests), Oleh's copy is on 0.11.0-beta.3 through Sparkle, the widget's files seen live with Codex as main. 0.11.0 waits for Oleh's word on Tuesday 2026-11-17
@@ -71,6 +71,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-17 — Does the plan pay off (branch `feat/api-cost`)
+
+Done: ninth of the nine, smaller than promised: the cost at the person's API price was already in «История расхода» (the agent's list on 2026-11-17 was wrong about that). Added: the plan's monthly price is asked beside it and a verdict compares it with the period's spend brought to 30 days; «Сегодня» and the day summary show the day's cost. Prices are still not shipped (DECISIONS, «API»): without the person's price nothing is counted.
+Checked: `scripts/check.sh` (tests for `SubscriptionValue` and the day's cost; catalog 1845 keys, 0 problems).
+Left: not seen live. Claude only: Codex's tokens are not priced. No cost per project.
 
 ## 2026-11-17 — Day summary (branch `feat/day-summary`)
 

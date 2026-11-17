@@ -143,10 +143,13 @@ final class WeeklySummarySender {
     /// What today's summary is made of; the «История расхода» window shows the same.
     func dayInput(now: Date = .now) -> DaySummary.Input {
         let start = Calendar.current.startOfDay(for: now)
+        let price = settings.aiServices.prices[APIProvider.anthropic.rawValue]
+        let today = usage.days.first { $0.day == UsageDays.formatter.string(from: now) }
         return DaySummary.Input(
             sessionPercent: usage.snapshot?.session?.utilization, weekPercent: usage.snapshot?.week?.utilization,
             breakdown: usage.breakdowns[.today], hits: LimitHits.all().filter { $0.date >= start }.count,
-            runs: DaySummary.today(runs.runs, now: now), others: hub.usages
+            runs: DaySummary.today(runs.runs, now: now), others: hub.usages,
+            cost: price.flatMap { price in today.map { $0.cost(price) } }
         )
     }
 

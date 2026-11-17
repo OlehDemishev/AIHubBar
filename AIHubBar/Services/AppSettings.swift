@@ -301,6 +301,11 @@ final class AppSettings {
     }
 
     /// «Стоп-кран»: at this session or week usage background runs pause until the reset; 0 is off.
+    /// What the person pays for the Claude plan a month, in dollars; 0 — not said. For «окупается ли подписка».
+    var claudePlanPrice: Double {
+        didSet { defaults.set(claudePlanPrice, forKey: Keys.claudePlanPrice) }
+    }
+
     var runGuardPercent: Int {
         didSet { defaults.set(runGuardPercent, forKey: Keys.runGuardPercent) }
     }
@@ -416,6 +421,7 @@ final class AppSettings {
         hubGeminiDailyLimit = defaults.positiveInt(Keys.hubGeminiDailyLimit, default: 1000)
         hubCursor = defaults.bool(forKey: Keys.hubCursor)
         mainService = defaults.string(forKey: Keys.mainService) ?? MainService.auto
+        claudePlanPrice = defaults.double(forKey: Keys.claudePlanPrice)
         runGuardPercent = defaults.int(Keys.runGuardPercent, default: 95)
         weeklySummary = defaults.bool(Keys.weeklySummary, default: true)
         telegramChatID = defaults.string(forKey: Keys.telegramChatID) ?? ""
@@ -484,6 +490,7 @@ final class AppSettings {
         static let hubGeminiDailyLimit = "hubGeminiDailyLimit"
         static let hubCursor = "hubCursor"
         static let mainService = "mainService"
+        static let claudePlanPrice = "claudePlanPrice"
         static let runGuardPercent = "runGuardPercent"
         static let weeklySummary = "weeklySummary"
         static let savedPrompts = "savedPrompts"

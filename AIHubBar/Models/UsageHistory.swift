@@ -25,6 +25,29 @@ struct UsageDay: Codable, Equatable, Identifiable, Sendable {
     }
 }
 
+/// «Окупается ли подписка»: what the period's tokens would cost through the API, brought to a month, against what
+/// the person pays for the plan. Both numbers are the person's own: prices are not shipped (DECISIONS, «API»).
+enum SubscriptionValue {
+    /// The period's API cost as a month of 30 days.
+    static func monthly(cost: Double, periodDays: Int) -> Double {
+        periodDays > 0 ? cost * 30 / Double(periodDays) : 0
+    }
+
+    /// How many times the API would cost against the plan: 3.2 — the plan pays off, 0.4 — the API would be cheaper.
+    /// Nil without a plan price or without spend.
+    static func ratio(monthlyCost: Double, plan: Double) -> Double? {
+        plan > 0 && monthlyCost > 0 ? monthlyCost / plan : nil
+    }
+
+    static func verdict(_ ratio: Double) -> String {
+        let times = ratio >= 1 ? ratio : 1 / ratio
+        let number = times.formatted(.number.precision(.fractionLength(times < 10 ? 1 : 0)))
+        return ratio >= 1
+            ? String(localized: "Подписка выгоднее API (×\(number))")
+            : String(localized: "API был бы дешевле подписки (×\(number))")
+    }
+}
+
 enum UsageDays {
     static let keptDays = 400
 
