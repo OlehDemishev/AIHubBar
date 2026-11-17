@@ -33,7 +33,7 @@
 
 **Next:**
 - releases go out once a week, on Tuesday, on Oleh's word (agreed 2026-11-11); merged work waits in `main`
-- before 0.12.0: the windows are seen (2026-11-17); left to see in the app — a Codex approval, a background Codex run, handover, review, the pair (they start real runs: with Oleh or on his word); then a beta
+- before 0.12.0: the windows are seen (2026-11-17); a background Codex run seen end to end in an isolated copy; left to see in the app — a Codex approval, handover, review, the pair (they start real runs: with Oleh or on his word); then a beta
 - 0.12.0 not before Tuesday 2026-11-24, on Oleh's word; `WhatsNew.version` and the card's lines for 0.12
 - then: the «ждёт» state for Antigravity sessions (needs `agy` opened once)
 - towards 1.0 (discussed 2026-11-10): the live pass is done (journal 2026-11-10); left — freeze what is in 1.0 and what stays beta, release notes, translations read by people, feedback from strangers before 1.0
@@ -75,6 +75,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-17 — A background Codex run seen end to end (branch `chore/status-codex-live-run`)
+
+Done: on Oleh's «Да, запусти» an isolated copy (own bundle id and home, a scratch git project) got a task for Codex through «Быстрый запрос» → «Фон», with no mouse. No code changed.
+Checked: the run started as `codex exec --sandbox workspace-write --add-dir <project>/.git`, finished in 35 s as succeeded, the file was written and committed by Codex, the run's record has the thread id and the summary, the app logged the ✅ notification.
+Left: the notification itself was not shown (a copy under a new id has no permission) and the row in the panel was not looked at. Codex's summary carries a Markdown link with the file's full path, so the notification text would show it raw. The first isolated copy updated itself through Sparkle to 0.11.0 within seconds; it was stopped and removed, Oleh's installed app was not touched. The copy, its settings and the scratch project are deleted.
 
 ## 2026-11-17 — Live pass over the nine features' windows (branch `fix/live-pass-nine`)
 
