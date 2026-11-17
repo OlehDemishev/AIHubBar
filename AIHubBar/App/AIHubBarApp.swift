@@ -16,6 +16,11 @@ struct AIHubBarApp: App {
             AppLog.flush()
             exit(code)
         }
+        // The demo copy outside its own home folder would show and change the person's real data.
+        if DemoMode.isMisconfigured {
+            FileHandle.standardError.write(Data("The demo copy starts only through scripts/demo.sh.\n".utf8))
+            exit(1)
+        }
         _app = State(initialValue: AppContainer())
     }
 

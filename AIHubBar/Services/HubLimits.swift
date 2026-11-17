@@ -134,6 +134,12 @@ final class HubLimitsStore {
         self.settings = settings
     }
 
+    /// The demo copy (`DemoMode`): sample limits of the other services, as if their tools were on this Mac.
+    func showDemo(_ limits: [HubLimit]) {
+        self.limits = limits
+        available = Set(limits.map(\.source))
+    }
+
     func start() {
         guard loop == nil else { return }
         loop = Task { [weak self] in

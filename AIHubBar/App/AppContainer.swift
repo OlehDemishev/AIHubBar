@@ -78,6 +78,9 @@ final class AppContainer {
         // Applies the current mode to the settings before anything reads them.
         let modes = TestHost.isActive ? ProfileStore(settings: settings, directory: TestHost.modesDirectory) : ProfileStore(settings: settings)
         self.modes = modes
+        // The demo copy (`DemoMode`): a profile of its own, sample data, and nothing that reaches outside it.
+        let live = !DemoMode.isActive
+        if !live { DemoMode.addProfile(to: modes) }
         let services = AIServiceStore(settings: settings)
         self.services = services
         let folders = FolderProjectStore(settings: settings)
@@ -137,6 +140,12 @@ final class AppContainer {
         ]
         for (kind, service) in moduleServices {
             service.isActive = { [modes] in modes.isOn(kind) }
+        }
+        if !live {
+            // Shown, but never refreshed: a refresh would ask the services for this Mac's real limits.
+            usage.isActive = { false }
+            hub.isActive = { false }
+            claudeAccounts.isActive = { false }
         }
         Notifier.frequency = { [settings, modes] kind in
             if let module = kind.module, modes.isSilenced(module) { return .off }
@@ -229,43 +238,52 @@ final class AppContainer {
         }
         AppLog.info("AI Hub Bar \(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "?") started")
         // Unit tests use the app as their host; keep it from running report.py in the background.
+        if !TestHost.isActive, !live {
+            DemoMode.show(in: self)
+        }
         if !TestHost.isActive {
-            store.start()
-            followBetaUpdates()
-            Updates.start()
-            sessions.start()
-            telegramApprovals.start()
-            widgetStatus.start { [keepAwake, widgetStatus] on in
-                AppLog.info("Keep awake \(on ? "on" : "off") from the widget or Control Center")
-                if on { keepAwake.holdManually(for: nil) } else { keepAwake.stopManual() }
-                widgetStatus.update()
-            } onRefreshLimits: { [usage, hub] in
-                AppLog.info("Limits refresh from the widget")
-                Task { await usage.refresh() }
-                Task { await hub.refresh() }
+            if live {
+                store.start()
+                followBetaUpdates()
+                Updates.start()
+                sessions.start()
+                telegramApprovals.start()
+                widgetStatus.start { [keepAwake, widgetStatus] on in
+                    AppLog.info("Keep awake \(on ? "on" : "off") from the widget or Control Center")
+                    if on { keepAwake.holdManually(for: nil) } else { keepAwake.stopManual() }
+                    widgetStatus.update()
+                } onRefreshLimits: { [usage, hub] in
+                    AppLog.info("Limits refresh from the widget")
+                    Task { await usage.refresh() }
+                    Task { await hub.refresh() }
+                }
+                runs.start()
+                requests.listen(commands: commands)
+                usage.start()
+                hub.start()
+                claudeAccounts.start()
+                telegramBot.start()
+                weeklySummary.start()
+                keepAwake.start()
+                // The demo copy leaves the keys to the installed app.
+                GlobalHotKey.register(settings.panelHotKey)
+                GlobalHotKey.registerOpenPanel(settings.openPanelHotKey)
+                GlobalHotKey.registerIsland(settings.notch.hotKeys)
             }
-            runs.start()
-            requests.listen(commands: commands)
-            usage.start()
-            hub.start()
-            claudeAccounts.start()
-            telegramBot.start()
-            weeklySummary.start()
             monitor.start()
-            keepAwake.start()
-            GlobalHotKey.register(settings.panelHotKey)
-            GlobalHotKey.registerOpenPanel(settings.openPanelHotKey)
             PanelOpener.otherItemWindow = { [layoutSwitcher] in layoutSwitcher.statusWindow }
             Task {
                 try? await Task.sleep(for: .seconds(5))
                 PanelOpener.logItem()
             }
-            GlobalHotKey.registerIsland(settings.notch.hotKeys)
             GlobalHotKey.islandAction = { [notchIsland] allow in notchIsland.answerByKey(allow: allow) }
-            quickPrompt.start()
-            commandHotKeys.start { [quickTools] command in quickTools.runFromHotKey(command) }
-            clipboard.start()
-            layoutSwitcher.start()
+            if live {
+                quickPrompt.start()
+                commandHotKeys.start { [quickTools] command in quickTools.runFromHotKey(command) }
+                // Not in the demo copy: the clipboard and the keyboard are the person's own.
+                clipboard.start()
+                layoutSwitcher.start()
+            }
             // Windows can only be made once the app has finished launching.
             DispatchQueue.main.async { [unowned self] in
                 notchIsland.start { [unowned self] index in
@@ -287,11 +305,13 @@ final class AppContainer {
                 }
             }
             calendar.start()
-            launcher.start()
-            // After the menu bar item is up, so the alert is not the first thing of a login.
-            Task {
-                try? await Task.sleep(for: .seconds(3))
-                CrashReports.checkAtLaunch()
+            if live {
+                launcher.start()
+                // After the menu bar item is up, so the alert is not the first thing of a login.
+                Task {
+                    try? await Task.sleep(for: .seconds(3))
+                    CrashReports.checkAtLaunch()
+                }
             }
             // A click on a notification and on the island's banner do the same.
             let handle: (NotificationAction.Resolution) -> Void = { resolution in

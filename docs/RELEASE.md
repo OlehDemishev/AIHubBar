@@ -61,6 +61,44 @@ the script says so and the window shows the release page as before.
 What moved or looks different also goes into the panel's «Что нового» card (`WhatsNew` in
 `AIHubBar/Views/Panel/WhatsNewView.swift`): set `WhatsNew.version` to the new version and rewrite its lines. The card
 is shown once to whoever had a profile before; a release with nothing to say leaves `WhatsNew.version` alone.
+The demo copy follows the card: the same change brings `DemoData` up to date (see «Demo» below).
+
+## Demo
+
+For the news about a release (docs/SOCIAL.md) the app is recorded as a demo copy: filled with sample data, with
+nothing of Oleh's own on screen.
+
+```bash
+scripts/demo.sh                      # build the current checkout, start the copy with the scene «default»
+scripts/demo.sh codex-main --lang en # another scene, the interface in English
+scripts/demo.sh --open limits        # also open one window: limits, usage-history, settings, help…
+scripts/demo.sh --solo               # quit the installed app first, so one item is in the menu bar
+scripts/demo.sh stop                 # quit the copy, delete its home folder, bring the installed app back
+```
+
+- **Only this script switches it on.** The app has no setting, key or argument for it. The script copies the build
+  to `build/demo/`, gives the copy the bundle id `com.demishev.claudepult.demo` and a home folder of its own
+  (`build/demo/home`), and takes the widget, the `aihubbar://` links and `*.claudepult` files out of it. `DemoMode`
+  (AIHubBar/App/DemoMode.swift) is on only with that id and that home; the copy started any other way quits.
+- **Nothing real in it, nothing leaves it:** no limits requests and no Keychain, no Telegram, no updates, no global
+  keys, no clipboard or keyboard watching, no project scan. «Mac Resources», when added to the profile, shows this
+  Mac's real figures.
+- **The data** is `DemoData` (AIHubBar/App/DemoData.swift): limits of Claude, Codex, Copilot and Antigravity, four
+  sessions (one waits for «Allow»; the answer works), two background tasks, four projects, a month of usage. It is
+  counted from the moment of the start; the session's pace line needs a restart after half an hour.
+- **Scenes** (`DemoMode.Scene`) are the same data set up for one piece of news: `default`, `codex-main` (no Claude,
+  Codex leads — 0.11).
+
+**With every release that has news** — the same moment `WhatsNew.version` changes — bring the demo up to date, in
+the pull request that prepares the release:
+
+1. Make `DemoData` show what is new: add the data the new feature needs, and a scene when the feature only shows in
+   a setup of its own.
+2. Set `DemoData.version` to the new `WhatsNew.version`. `DemoTests` fails while the two differ, so a release cannot
+   go out with last week's demo.
+3. Start `scripts/demo.sh` and look at the new feature in the copy before the recording.
+
+A release without news leaves both versions alone.
 
 ## What goes to beta first
 
