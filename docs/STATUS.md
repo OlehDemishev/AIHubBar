@@ -5,8 +5,8 @@
 **Updated:** 2026-11-17
 
 **Now:**
-- 2026-11-17: the Windows hook brought to the Mac's format 7 (branch `feat/desktop-hook-format7`): Codex and Copilot sessions, clean prompts, answers to permission requests through `approvals/`
-- 2026-11-17: Windows resumed (branch `chore/windows-resume`): SPEC-windows §11 maps every Mac feature to works / worse / won't work, `desktop/WINDOWS-DEV.md` sets up the laptop, `desktop/CLAUDE.md` holds the agent's rules, `.gitattributes` keeps LF, desktop CI runs on catalog changes again
+- 2026-11-17: the Windows hook brought to the Mac's format 7 (#394, merged): Codex and Copilot sessions, clean prompts, answers to permission requests through `approvals/`
+- 2026-11-17: Windows resumed (#393, merged): SPEC-windows §11 maps every Mac feature to works / worse / won't work, `desktop/WINDOWS-DEV.md` sets up the laptop, `desktop/CLAUDE.md` holds the agent's rules, `.gitattributes` keeps LF, desktop CI runs on catalog changes again
 - 2026-11-17: Codex's summary shows file names instead of Markdown links with full paths (#391, merged); goes out with 0.12.0
 - 2026-11-17: live pass over the windows of the nine features on the Debug copy, merged as #388: two fixes — «История расхода» scrolls instead of cutting its top and bottom, Codex skills are also read from `~/.agents/skills`. Not seen: approvals, a background Codex run, handover, review and the pair inside the app
 - 2026-11-17: nine Claude and Codex features merged (#377–#386), waiting in `main` for 0.12.0: Codex approvals, Codex in the background, the limit guard for Codex, handover to Codex, review by the other service, one task to both, the «Skills и плагины» tab, the day summary, the plan against the API price; the help and `docs/release-notes/0.12.0.md` cover them. Checks green (tests, catalog 1851 keys); live only `codex exec` itself was run
