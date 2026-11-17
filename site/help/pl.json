@@ -219,6 +219,10 @@
               "name" : "Historia zużycia"
             },
             {
+              "detail" : "Okno „Historia zużycia” otwiera sekcja „Dziś”: zużycie według projektów, zadania w tle i limity. To samo przychodzi raz dziennie na Telegram, jeśli włączysz „Podsumowanie dnia w Telegramie” na stronie „Limity AI”. Tam też cena subskrypcji jest porównywana ze zużyciem po Twojej cenie API.",
+              "name" : "Podsumowanie dnia"
+            },
+            {
               "detail" : "Raz na okno przy 50/80/95 procentach (progi w Ustawieniach) i gdy limit wraca; na życzenie także na Telegram.",
               "name" : "Powiadomienia"
             },
@@ -270,6 +274,14 @@
               "name" : "Szybkie zapytanie"
             },
             {
+              "detail" : "W „Szybkim zapytaniu” Codex też działa w tle: zapisuje tylko w folderze projektu, bez sieci, a wynik przychodzi w powiadomieniu. Przy progu wstrzymują go limity samego Codex.",
+              "name" : "Codex w tle"
+            },
+            {
+              "detail" : "Zadanie Claude przy limicie można przekazać do Codex („Do Codex”, „Przekaż do Codex”), a gotowe dać do sprawdzenia drugiej usłudze („Sprawdź w…” w menu zadania). Pole „Także w Codex — do porównania” w „Szybkim zapytaniu” daje zadanie obu naraz, każdemu we własnym worktree.",
+              "name" : "Claude i Codex razem"
+            },
+            {
               "detail" : "Zadanie w tle: co robi Claude, krok po kroku.",
               "name" : "Dziennik"
             },
@@ -315,6 +327,10 @@
             {
               "detail" : "Anthropic, OpenAI, Google, xAI, DeepSeek, Mistral i dowolny serwer zgodny z OpenAI (Ollama, LM Studio, OpenRouter). Klucz jest tylko w pęku kluczy macOS; „Sprawdź” nie zużywa tokenów.",
               "name" : "Modele przez API"
+            },
+            {
+              "detail" : "W oknie „Claude Code”, na karcie „Skille i wtyczki”: skille Claude Code i Codex oraz wtyczki Claude Code — każdy z przełącznikiem; hooki obu — do podglądu.",
+              "name" : "Skille i wtyczki"
             },
             {
               "detail" : "Ustawienia → „Profile” → „Usługa domyślna”: to ona wykonuje polecenia profilu.",

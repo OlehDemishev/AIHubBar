@@ -219,6 +219,10 @@
               "name" : "Historique de consommation"
             },
             {
+              "detail" : "La fenêtre « Historique de consommation » s’ouvre sur « Aujourd’hui » : consommation par projet, tâches en arrière-plan et limites. La même chose arrive une fois par jour dans Telegram si vous activez « Bilan du jour dans Telegram » sur la page « Limites d’IA ». La fenêtre compare aussi le prix de l’abonnement à la consommation à votre prix API.",
+              "name" : "Bilan du jour"
+            },
+            {
               "detail" : "Une fois par fenêtre à 50/80/95 % (seuils dans Réglages) et quand la limite revient ; si vous le souhaitez, aussi sur Telegram.",
               "name" : "Notifications"
             },
@@ -270,6 +274,14 @@
               "name" : "Requête rapide"
             },
             {
+              "detail" : "Dans « Requête rapide », Codex travaille aussi en arrière-plan : il n’écrit que dans le dossier du projet, sans réseau, et le résultat arrive en notification. Près du seuil, ce sont les limites de Codex qui le retiennent.",
+              "name" : "Codex en arrière-plan"
+            },
+            {
+              "detail" : "Une tâche de Claude arrivée à la limite peut être confiée à Codex (« Vers Codex », « Confier à Codex »), et une tâche terminée donnée à relire à l’autre service (« Relire dans… » dans le menu de la tâche). La case « Aussi dans Codex — pour comparer » de « Requête rapide » donne la tâche aux deux à la fois, chacun dans son worktree.",
+              "name" : "Claude et Codex ensemble"
+            },
+            {
               "detail" : "Tâche en arrière-plan : ce que fait Claude, étape par étape.",
               "name" : "Journal"
             },
@@ -315,6 +327,10 @@
             {
               "detail" : "Anthropic, OpenAI, Google, xAI, DeepSeek, Mistral et tout serveur compatible OpenAI (Ollama, LM Studio, OpenRouter). La clé est gardée uniquement dans le trousseau macOS ; «Vérifier» ne consomme aucun jeton.",
               "name" : "Modèles par API"
+            },
+            {
+              "detail" : "Dans la fenêtre « Claude Code », onglet « Skills et plugins » : les skills de Claude Code et de Codex et les plugins de Claude Code, chacun avec un interrupteur ; les hooks des deux, en lecture seule.",
+              "name" : "Skills et plugins"
             },
             {
               "detail" : "Réglages → «Profils» → «Service par défaut» : il exécute les commandes du profil.",

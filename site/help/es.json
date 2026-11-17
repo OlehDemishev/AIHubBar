@@ -219,6 +219,10 @@
               "name" : "Historial de consumo"
             },
             {
+              "detail" : "La ventana «Historial de consumo» se abre con «Hoy»: gasto por proyecto, tareas en segundo plano y límites. Lo mismo llega una vez al día a Telegram si activas «Resumen del día en Telegram» en la página «Límites de IA». Allí también se compara el precio de la suscripción con el gasto a tu precio de API.",
+              "name" : "Resumen del día"
+            },
+            {
               "detail" : "Una vez por ventana al 50/80/95 % (umbrales en Ajustes) y cuando el límite vuelve; si quieres, también por Telegram.",
               "name" : "Notificaciones"
             },
@@ -270,6 +274,14 @@
               "name" : "Petición rápida"
             },
             {
+              "detail" : "En «Petición rápida» Codex también trabaja en segundo plano: solo escribe en la carpeta del proyecto, sin red, y el resultado llega en una notificación. Cerca del umbral lo frenan los límites del propio Codex.",
+              "name" : "Codex en segundo plano"
+            },
+            {
+              "detail" : "Una tarea de Claude en el límite se puede pasar a Codex («A Codex», «Pasar a Codex»), y una terminada darse a revisar al otro servicio («Revisar en…» en el menú de la tarea). La casilla «También en Codex — para comparar» de «Petición rápida» da la tarea a los dos a la vez, cada uno en su worktree.",
+              "name" : "Claude y Codex juntos"
+            },
+            {
               "detail" : "Tarea en segundo plano: qué hace Claude, paso a paso.",
               "name" : "Registro"
             },
@@ -315,6 +327,10 @@
             {
               "detail" : "Anthropic, OpenAI, Google, xAI, DeepSeek, Mistral y cualquier servidor compatible con OpenAI (Ollama, LM Studio, OpenRouter). La clave se guarda solo en el llavero de macOS; «Comprobar» no gasta tokens.",
               "name" : "Modelos por API"
+            },
+            {
+              "detail" : "En la ventana «Claude Code», pestaña «Skills y plugins»: los skills de Claude Code y Codex y los plugins de Claude Code, cada uno con su interruptor; los hooks de ambos, solo para consultar.",
+              "name" : "Skills y plugins"
             },
             {
               "detail" : "Ajustes → «Perfiles» → «Servicio predeterminado»: ejecutará los comandos del perfil.",
