@@ -169,16 +169,8 @@ fn hook_program() -> Option<PathBuf> {
     Some(std::env::current_exe().ok()?.with_file_name(name))
 }
 
-fn projects_dir() -> PathBuf {
-    dirs_home().join("Projects")
-}
-
 fn command() -> Option<HookCommand> {
-    Some(HookCommand::new(&hook_program()?, &projects_dir()))
-}
-
-fn dirs_home() -> PathBuf {
-    std::env::var_os(if cfg!(windows) { "USERPROFILE" } else { "HOME" }).map(PathBuf::from).unwrap_or_default()
+    Some(HookCommand::new(&hook_program()?, &paths::projects_dir()))
 }
 
 fn settings_path() -> PathBuf {
@@ -302,8 +294,8 @@ impl Agent {
     fn status(self) -> HookStatus {
         let Some(program) = hook_program() else { return HookStatus::NotInstalled };
         match self {
-            Agent::Codex => agent_hooks::codex_status(&self.path(), &program, &projects_dir()),
-            Agent::Copilot => agent_hooks::copilot_status(&self.path(), &program, &projects_dir()),
+            Agent::Codex => agent_hooks::codex_status(&self.path(), &program, &paths::projects_dir()),
+            Agent::Copilot => agent_hooks::copilot_status(&self.path(), &program, &paths::projects_dir()),
         }
     }
 }
@@ -335,8 +327,8 @@ pub fn install_agent_hooks(app: AppHandle, agent: String) -> Result<HooksView, S
     let stamp = Local::now().format("%Y%m%d-%H%M%S").to_string();
     let result = match (agent.may_install(), hook_program()) {
         (true, Some(program)) => match agent {
-            Agent::Codex => agent_hooks::codex_install(&agent.path(), &program, &projects_dir(), &stamp).map(|_| ()),
-            Agent::Copilot => agent_hooks::copilot_install(&agent.path(), &program, &projects_dir()),
+            Agent::Codex => agent_hooks::codex_install(&agent.path(), &program, &paths::projects_dir(), &stamp).map(|_| ()),
+            Agent::Copilot => agent_hooks::copilot_install(&agent.path(), &program, &paths::projects_dir()),
         },
         _ => Err(std::io::Error::other("not here")),
     };

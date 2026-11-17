@@ -1,11 +1,13 @@
 //! AI Hub Bar for Windows and Linux (docs/specs/SPEC-windows.md §9): stage 1 «Каркас» — the tray icon, the panel at it,
 //! the settings window, 13 languages, one running copy, start at sign-in and `claudepult --app-command`;
-//! stage 2 «Лимиты» in `limits.rs`; stage 3 «Сессии» in `sessions.rs` and the `claudepult-hook` program.
+//! stage 2 «Лимиты» in `limits.rs`; stage 3 «Сессии» in `sessions.rs` and the `claudepult-hook` program; stage 4
+//! «Проекты» in `projects.rs`.
 
 // No console window behind the app in a release build on Windows.
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 mod limits;
+mod projects;
 mod sessions;
 
 use claudepult_core::i18n::{self, Strings};
@@ -19,6 +21,7 @@ use tauri::tray::{MouseButton, MouseButtonState, TrayIconBuilder, TrayIconEvent}
 use tauri::{AppHandle, Manager, RunEvent, WebviewUrl, WebviewWindowBuilder, WindowEvent};
 use tauri_plugin_autostart::{MacosLauncher, ManagerExt};
 use limits::Limits;
+use projects::Projects;
 use sessions::Sessions;
 use tauri_plugin_positioner::{Position, WindowExt};
 
@@ -116,7 +119,7 @@ fn open_settings_window(app: &AppHandle) {
 fn build_panel(app: &AppHandle) -> tauri::Result<()> {
     let panel = WebviewWindowBuilder::new(app, "panel", WebviewUrl::App("panel.html".into()))
         .title(APP_NAME)
-        .inner_size(360.0, 420.0)
+        .inner_size(380.0, 600.0)
         .resizable(false)
         .decorations(false)
         .always_on_top(true)
@@ -224,6 +227,7 @@ fn set_language(app: AppHandle, code: Option<String>) {
         let _ = window.eval("location.reload()");
     }
     app.state::<Limits>().update_tray(&app);
+    app.state::<Projects>().ask(false);
 }
 
 #[tauri::command]
@@ -273,12 +277,15 @@ fn main() {
         .plugin(tauri_plugin_notification::init())
         .manage(Limits::new())
         .manage(Sessions::default())
+        .manage(Projects::default())
         .manage(AppState { settings: Mutex::new(Settings::load(&paths::settings_file())) })
         .invoke_handler(tauri::generate_handler![
             ui_texts, set_language, dismiss_tray_hint, autostart_enabled, set_autostart, open_settings, hide_panel, quit,
             limits::limits_view, limits::refresh_limits,
             sessions::sessions_view, sessions::decide_request, sessions::hooks_state, sessions::install_hooks,
-            sessions::uninstall_hooks, sessions::agent_hooks_state, sessions::install_agent_hooks, sessions::uninstall_agent_hooks
+            sessions::uninstall_hooks, sessions::agent_hooks_state, sessions::install_agent_hooks, sessions::uninstall_agent_hooks,
+            projects::projects_view, projects::refresh_projects, projects::projects_panel_opened, projects::open_project,
+            projects::open_link
         ])
         .setup(|app| {
             // Only the tray icon, no Dock icon, when trying it out on a Mac.
@@ -289,6 +296,7 @@ fn main() {
             build_tray(&handle)?;
             handle.state::<Limits>().start(handle.clone());
             handle.state::<Sessions>().start(handle.clone());
+            handle.state::<Projects>().start(handle.clone());
             let for_ipc = handle.clone();
             if let Err(error) = ipc::serve(move |request| match request {
                 Request::AppCommand(name) => {
