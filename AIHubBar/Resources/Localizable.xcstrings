@@ -8429,16 +8429,10 @@
     },
     "Claude близок к лимиту: ту же задачу выполнит Codex в фоне": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Claude is near its limit: Codex will do the same task in the background"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Claude близький до ліміту: те саме завдання виконає Codex у фоні"
+            "value": "Claude قريب من الحد: سينفّذ Codex المهمة نفسها في الخلفية"
           }
         },
         "de": {
@@ -8447,10 +8441,10 @@
             "value": "Claude ist nahe am Limit: Codex erledigt dieselbe Aufgabe im Hintergrund"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Claude approche de sa limite : Codex fera la même tâche en arrière-plan"
+            "value": "Claude is near its limit: Codex will do the same task in the background"
           }
         },
         "es": {
@@ -8459,22 +8453,22 @@
             "value": "Claude está cerca del límite: Codex hará la misma tarea en segundo plano"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude approche de sa limite : Codex fera la même tâche en arrière-plan"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude hampir mencapai batas: Codex akan mengerjakan tugas yang sama di latar belakang"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Claude è vicino al limite: Codex farà la stessa attività in background"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "O Claude está perto do limite: o Codex fará a mesma tarefa em segundo plano"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Claude jest blisko limitu: to samo zadanie wykona Codex w tle"
           }
         },
         "ja": {
@@ -8489,16 +8483,22 @@
             "value": "Claude가 한도에 가까워졌습니다. 같은 작업을 Codex가 백그라운드에서 수행합니다"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Claude قريب من الحد: سينفّذ Codex المهمة نفسها في الخلفية"
+            "value": "Claude jest blisko limitu: to samo zadanie wykona Codex w tle"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Claude hampir mencapai batas: Codex akan mengerjakan tugas yang sama di latar belakang"
+            "value": "O Claude está perto do limite: o Codex fará a mesma tarefa em segundo plano"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude близький до ліміту: те саме завдання виконає Codex у фоні"
           }
         }
       }
@@ -13039,22 +13039,10 @@
     },
     "«%@» передана %@: продолжит в той же папке.": {
       "localizations": {
-        "ru": {
-          "stringUnit": {
-            "state": "new",
-            "value": "«%1$@» передана %2$@: продолжит в той же папке."
-          }
-        },
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "“%@” was handed to %@: it will continue in the same folder."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "«%@» передано %@: продовжить у тій самій теці."
+            "value": "تم تسليم «%@» إلى %@: سيكمل في المجلد نفسه."
           }
         },
         "de": {
@@ -13063,10 +13051,10 @@
             "value": "„%@“ wurde an %@ übergeben: Es geht im selben Ordner weiter."
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "« %@ » a été confiée à %@ : la suite se fait dans le même dossier."
+            "value": "“%@” was handed to %@: it will continue in the same folder."
           }
         },
         "es": {
@@ -13075,22 +13063,22 @@
             "value": "«%@» pasó a %@: seguirá en la misma carpeta."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "« %@ » a été confiée à %@ : la suite se fait dans le même dossier."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“%@” diserahkan ke %@: dilanjutkan di folder yang sama."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "«%@» è passata a %@: continuerà nella stessa cartella."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "“%@” foi passada para %@: vai continuar na mesma pasta."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "„%@” przekazano do %@: będzie kontynuowane w tym samym folderze."
           }
         },
         "ja": {
@@ -13105,16 +13093,28 @@
             "value": "«%@» 작업을 %@에 넘겼습니다. 같은 폴더에서 이어집니다."
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "تم تسليم «%@» إلى %@: سيكمل في المجلد نفسه."
+            "value": "„%@” przekazano do %@: będzie kontynuowane w tym samym folderze."
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "“%@” diserahkan ke %@: dilanjutkan di folder yang sama."
+            "value": "“%@” foi passada para %@: vai continuar na mesma pasta."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "new",
+            "value": "«%1$@» передана %2$@: продолжит в той же папке."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«%@» передано %@: продовжить у тій самій теці."
           }
         }
       }
@@ -18289,16 +18289,10 @@
     },
     "В %@": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "To %@"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "У %@"
+            "value": "إلى %@"
           }
         },
         "de": {
@@ -18307,10 +18301,10 @@
             "value": "An %@"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Vers %@"
+            "value": "To %@"
           }
         },
         "es": {
@@ -18319,22 +18313,22 @@
             "value": "A %@"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vers %@"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ke %@"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "A %@"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Para %@"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Do %@"
           }
         },
         "ja": {
@@ -18349,16 +18343,22 @@
             "value": "%@(으)로"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "إلى %@"
+            "value": "Do %@"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ke %@"
+            "value": "Para %@"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "У %@"
           }
         }
       }
@@ -76716,16 +76716,10 @@
     },
     "Передать %@": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Hand Over to %@"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Передати %@"
+            "value": "تسليم إلى %@"
           }
         },
         "de": {
@@ -76734,10 +76728,10 @@
             "value": "An %@ übergeben"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Confier à %@"
+            "value": "Hand Over to %@"
           }
         },
         "es": {
@@ -76746,22 +76740,22 @@
             "value": "Pasar a %@"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Confier à %@"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Serahkan ke %@"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Passa a %@"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Passar para %@"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Przekaż do %@"
           }
         },
         "ja": {
@@ -76776,16 +76770,22 @@
             "value": "%@에 넘기기"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "تسليم إلى %@"
+            "value": "Przekaż do %@"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Serahkan ke %@"
+            "value": "Passar para %@"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Передати %@"
           }
         }
       }
@@ -85612,6 +85612,82 @@
         }
       }
     },
+    "Проверить в %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Review in %@"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Перевірити в %@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In %@ prüfen"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Relire dans %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Revisar en %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rivedi in %@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Revisar no %@"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sprawdź w %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ でレビュー"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@에서 검토"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مراجعة في %@"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tinjau di %@"
+          }
+        }
+      }
+    },
     "Проверить сейчас": {
       "localizations": {
         "ar": {
@@ -85760,6 +85836,158 @@
           "stringUnit": {
             "state": "translated",
             "value": "Перевірити знову"
+          }
+        }
+      }
+    },
+    "Проверка": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Review"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Перевірка"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prüfung"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Relecture"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Revisión"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Revisione"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Revisão"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sprawdzenie"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "レビュー"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "검토"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مراجعة"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tinjauan"
+          }
+        }
+      }
+    },
+    "Проверка: %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Review: %@"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Перевірка: %@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prüfung: %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Relecture : %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Revisión: %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Revisione: %@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Revisão: %@"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sprawdzenie: %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "レビュー：%@"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "검토: %@"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مراجعة: %@"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tinjauan: %@"
           }
         }
       }

@@ -10,8 +10,10 @@ import Foundation
 enum CodexExec {
     static let agent = "codex"
 
-    static func arguments(prompt: String, gitDirectory: String? = nil) -> [String] {
-        ["exec", "--sandbox", "workspace-write"] + (gitDirectory.map { ["--add-dir", $0] } ?? [])
+    /// `readOnly` — a review: the `read-only` sandbox, nothing in the folder can change.
+    static func arguments(prompt: String, gitDirectory: String? = nil, readOnly: Bool = false) -> [String] {
+        ["exec", "--sandbox", readOnly ? "read-only" : "workspace-write"]
+            + (readOnly ? [] : gitDirectory.map { ["--add-dir", $0] } ?? [])
             + ["--json", "--skip-git-repo-check", prompt]
     }
 

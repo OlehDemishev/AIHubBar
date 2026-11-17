@@ -97,6 +97,13 @@ service mark. Sessions: Codex threads next to Claude sessions once a source exis
   last commits first. Only towards Codex: it is the one other agent that runs unattended. Runs started before
   2026-11-17 have no kept task and cannot be handed over.
 
+- **Review by the other service** (`CrossReview`, `LaunchController.review`): a succeeded background run with a kept
+  task has «Проверить в Codex» (Claude's work) or «Проверить в Claude» (Codex's) in its row's menu. The review is a
+  background run in the same folder that can only read: Codex in the `read-only` sandbox, Claude with
+  `BackgroundPermissions.reviewRules` (Read, Glob, Grep and git status / diff / log / show; Edit and Write denied). Its
+  answer starts with «OK» or «Fix: N» and comes as the run's result. By hand only; one review per run, a failed one
+  can be asked again.
+
 ## 5. Stages (one PR each)
 
 1. **Settings structure** (done): «Claude Code» tab moves into «Сервисы AI» with nested tabs per service; all
