@@ -143,8 +143,11 @@ service mark. Sessions: Codex threads next to Claude sessions once a source exis
      Claude's settings.json (backup `hooks.json.claudepult-backup-<time>` first, other hooks untouched, a file left
      empty is removed); Settings → Codex → «Установить hook», `AIHubBar --codex-hooks status|install|uninstall`. The
      same hook script writes `sessions/<id>.json` with `agent: codex`; a Codex hook session hides its thread row.
-     Approving from AI Hub Bar is Claude-only: Codex's `PermissionRequest` answers have Claude's shape, but that needs a
-     live check before it is offered. `notify` (ChatGPT's computer use owns it here, stage 5) is not needed any more.
+     Approving from AI Hub Bar works for Codex too since 2026-11-17: its `PermissionRequest` answer has Claude's shape
+     (`hookSpecificOutput.decision.behavior` allow / deny with a message; any deny wins, no output leaves Codex's own
+     prompt — docs read 2026-11-17), the hook's timeout for that event is `ApprovalFiles.waitSeconds + 10` and a patch
+     is named by its files. Not seen live: on Oleh's Mac the hook is not in `~/.codex/hooks.json` now, and a changed
+     timeout means trusting the hook in `/hooks` again. `notify` (ChatGPT's computer use owns it here, stage 5) is not needed any more.
      Not covered: Codex's `request_user_input` question tool has no hook event — such a question shows as «работает».
      Without hooks the rollout `rollout-*.jsonl` has `task_started` / `task_complete` but no approval events: a guess.
    - **Antigravity — no reliable signal, not built.** `agy` has `hooks.json` too (`~/.gemini/config/hooks.json`,

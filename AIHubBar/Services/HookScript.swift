@@ -233,14 +233,18 @@ enum HookScript {
             return None
         tool_input = data.get("tool_input") or {}
         summary = ""
-        for key in ("command", "file_path", "url", "pattern", "description", "prompt"):
+        if data.get("tool_name") == "apply_patch" and isinstance(tool_input, dict):
+            # Codex edits by a patch in `command`: the files it touches say more than its first lines.
+            files = re.findall(r"^\*\*\* (?:Add|Update|Delete) File: (.+)$", str(tool_input.get("command") or ""), re.M)
+            summary = clip(", ".join(os.path.basename(f.strip()) for f in files))
+        for key in () if summary else ("command", "file_path", "url", "pattern", "description", "prompt"):
             if isinstance(tool_input, dict) and tool_input.get(key):
                 summary = clip(str(tool_input[key]))
                 break
         request_id = uuid.uuid4().hex
         project, _ = project_of(data.get("cwd"), arg("--projects-dir"))
         request = {"id": request_id, "session_id": session_id, "project": project or os.path.basename(data.get("cwd") or ""),
-                   "tool": str(data.get("tool_name") or ""), "summary": summary, "created": time.time(), "pid": os.getpid()}
+                   "tool": str(data.get("tool_name") or ""), "summary": summary, "created": time.time(), "pid": os.getpid(), "agent": agent()}
         tmp = os.path.join(directory, request_id + ".tmp")
         with open(tmp, "w") as f:
             json.dump(request, f, ensure_ascii=False)
@@ -291,7 +295,7 @@ enum HookScript {
         # The request goes first, so AI Hub Bar sees it together with the «waiting» state.
         request_id = None
         approvals = os.path.join(os.path.dirname(directory), "approvals")
-        if data.get("hook_event_name") == "PermissionRequest" and agent() == "claude":
+        if data.get("hook_event_name") == "PermissionRequest" and agent() in ("claude", "codex"):
             try:
                 request_id = open_request(data, approvals, session_id)
             except Exception:

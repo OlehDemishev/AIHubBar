@@ -1639,6 +1639,82 @@
         }
       }
     },
+    "%@ просит разрешение": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ asks for permission"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ просить дозвіл"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ bittet um Erlaubnis"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ demande une autorisation"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ pide permiso"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ chiede un permesso"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ pede permissão"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ prosi o zgodę"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ が許可を求めています"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ 권한 요청"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يطلب %@ إذنًا"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ meminta izin"
+          }
+        }
+      }
+    },
     "%@ снова доступна": {
       "localizations": {
         "ar": {
@@ -4772,16 +4848,10 @@
     },
     "--export-settings <файл.claudepult>": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "--export-settings <file.claudepult>"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "--export-settings <файл.claudepult>"
+            "value": "--export-settings <ملف.claudepult>"
           }
         },
         "de": {
@@ -4790,10 +4860,10 @@
             "value": "--export-settings <Datei.claudepult>"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "--export-settings <fichier.claudepult>"
+            "value": "--export-settings <file.claudepult>"
           }
         },
         "es": {
@@ -4802,22 +4872,22 @@
             "value": "--export-settings <archivo.claudepult>"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "--export-settings <fichier.claudepult>"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "--export-settings <berkas.claudepult>"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "--export-settings <file.claudepult>"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "--export-settings <arquivo.claudepult>"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "--export-settings <plik.claudepult>"
           }
         },
         "ja": {
@@ -4832,16 +4902,22 @@
             "value": "--export-settings <파일.claudepult>"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "--export-settings <ملف.claudepult>"
+            "value": "--export-settings <plik.claudepult>"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "--export-settings <berkas.claudepult>"
+            "value": "--export-settings <arquivo.claudepult>"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "--export-settings <файл.claudepult>"
           }
         }
       }
@@ -6750,16 +6826,10 @@
     },
     "AI Hub Bar сам проверяет новые версии и в окне обновления показывает, что изменилось (Настройки → «Основные» → «Обновления»). «Бета-версии» — получать сборки раньше остальных.": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "AI Hub Bar checks for new versions by itself and the update window shows what changed (Settings → “General” → “Updates”). “Beta Builds” — get builds before everyone else."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "AI Hub Bar сам перевіряє нові версії й у вікні оновлення показує, що змінилося (Налаштування → «Загальні» → «Оновлення»). «Бета-версії» — отримувати збірки раніше за інших."
+            "value": "يتحقق AI Hub Bar بنفسه من الإصدارات الجديدة، وتعرض نافذة التحديث ما تغيّر (الإعدادات ← «عام» ← «التحديثات»). «الإصدارات التجريبية»: الحصول على الإصدارات قبل الآخرين."
           }
         },
         "de": {
@@ -6768,10 +6838,10 @@
             "value": "AI Hub Bar sucht selbst nach neuen Versionen, und das Update-Fenster zeigt, was sich geändert hat (Einstellungen → „Allgemein“ → „Updates“). „Beta-Versionen“ — Builds früher als alle anderen erhalten."
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "AI Hub Bar recherche lui-même les nouvelles versions et la fenêtre de mise à jour montre ce qui a changé (Réglages → « Général » → « Mises à jour »). « Versions bêta » : recevoir les versions avant tout le monde."
+            "value": "AI Hub Bar checks for new versions by itself and the update window shows what changed (Settings → “General” → “Updates”). “Beta Builds” — get builds before everyone else."
           }
         },
         "es": {
@@ -6780,22 +6850,22 @@
             "value": "AI Hub Bar busca por sí mismo las versiones nuevas y la ventana de actualización muestra qué ha cambiado (Ajustes → «General» → «Actualizaciones»). «Versiones beta»: recibir las compilaciones antes que los demás."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar recherche lui-même les nouvelles versions et la fenêtre de mise à jour montre ce qui a changé (Réglages → « Général » → « Mises à jour »). « Versions bêta » : recevoir les versions avant tout le monde."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar memeriksa versi baru sendiri dan jendela pembaruan menampilkan apa yang berubah (Pengaturan → “Umum” → “Pembaruan”). “Versi beta” — menerima build lebih awal daripada yang lain."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "AI Hub Bar cerca da solo le nuove versioni e la finestra di aggiornamento mostra che cosa è cambiato (Impostazioni → «Generali» → «Aggiornamenti»). «Versioni beta»: ricevi le build prima degli altri."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "O AI Hub Bar procura novas versões sozinho e a janela de atualização mostra o que mudou (Ajustes → “Geral” → “Atualizações”). “Versões beta”: receber as compilações antes de todo mundo."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "AI Hub Bar sam sprawdza nowe wersje, a okno aktualizacji pokazuje, co się zmieniło (Ustawienia → „Ogólne” → „Aktualizacje”). „Wersje beta” — otrzymuj kompilacje wcześniej niż inni."
           }
         },
         "ja": {
@@ -6810,16 +6880,22 @@
             "value": "AI Hub Bar가 새 버전을 직접 확인하고 업데이트 창에 바뀐 내용을 보여 줍니다(설정 → «일반» → «업데이트»). «베타 버전»을 켜면 다른 사람보다 먼저 빌드를 받습니다."
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "يتحقق AI Hub Bar بنفسه من الإصدارات الجديدة، وتعرض نافذة التحديث ما تغيّر (الإعدادات ← «عام» ← «التحديثات»). «الإصدارات التجريبية»: الحصول على الإصدارات قبل الآخرين."
+            "value": "AI Hub Bar sam sprawdza nowe wersje, a okno aktualizacji pokazuje, co się zmieniło (Ustawienia → „Ogólne” → „Aktualizacje”). „Wersje beta” — otrzymuj kompilacje wcześniej niż inni."
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "AI Hub Bar memeriksa versi baru sendiri dan jendela pembaruan menampilkan apa yang berubah (Pengaturan → “Umum” → “Pembaruan”). “Versi beta” — menerima build lebih awal daripada yang lain."
+            "value": "O AI Hub Bar procura novas versões sozinho e a janela de atualização mostra o que mudou (Ajustes → “Geral” → “Atualizações”). “Versões beta”: receber as compilações antes de todo mundo."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar сам перевіряє нові версії й у вікні оновлення показує, що змінилося (Налаштування → «Загальні» → «Оновлення»). «Бета-версії» — отримувати збірки раніше за інших."
           }
         }
       }
@@ -9107,16 +9183,10 @@
     },
     "Codex, Copilot, Gemini, Antigravity, Cursor и расход по API — такими же карточками, как Claude.": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Codex, Copilot, Gemini, Antigravity, Cursor and API spend — in the same cards as Claude."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex, Copilot, Gemini, Antigravity, Cursor і витрати за API — такими самими картками, як Claude."
+            "value": "Codex وCopilot وGemini وAntigravity وCursor واستهلاك API — ببطاقات مثل بطاقات Claude."
           }
         },
         "de": {
@@ -9125,10 +9195,10 @@
             "value": "Codex, Copilot, Gemini, Antigravity, Cursor und API-Verbrauch — als dieselben Karten wie Claude."
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Codex, Copilot, Gemini, Antigravity, Cursor et la consommation d’API — sous forme des mêmes cartes que Claude."
+            "value": "Codex, Copilot, Gemini, Antigravity, Cursor and API spend — in the same cards as Claude."
           }
         },
         "es": {
@@ -9137,22 +9207,22 @@
             "value": "Codex, Copilot, Gemini, Antigravity, Cursor y el gasto de API — con las mismas tarjetas que Claude."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex, Copilot, Gemini, Antigravity, Cursor et la consommation d’API — sous forme des mêmes cartes que Claude."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex, Copilot, Gemini, Antigravity, Cursor, dan pengeluaran API — dalam kartu yang sama seperti Claude."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Codex, Copilot, Gemini, Antigravity, Cursor e la spesa API — con le stesse schede di Claude."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex, Copilot, Gemini, Antigravity, Cursor e o gasto de API — nos mesmos cartões que o Claude."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex, Copilot, Gemini, Antigravity, Cursor i wydatki na API — w takich samych kartach jak Claude."
           }
         },
         "ja": {
@@ -9167,16 +9237,22 @@
             "value": "Codex, Copilot, Gemini, Antigravity, Cursor와 API 지출도 Claude와 같은 카드로 표시됩니다."
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Codex وCopilot وGemini وAntigravity وCursor واستهلاك API — ببطاقات مثل بطاقات Claude."
+            "value": "Codex, Copilot, Gemini, Antigravity, Cursor i wydatki na API — w takich samych kartach jak Claude."
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Codex, Copilot, Gemini, Antigravity, Cursor, dan pengeluaran API — dalam kartu yang sama seperti Claude."
+            "value": "Codex, Copilot, Gemini, Antigravity, Cursor e o gasto de API — nos mesmos cartões que o Claude."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex, Copilot, Gemini, Antigravity, Cursor і витрати за API — такими самими картками, як Claude."
           }
         }
       }
@@ -12957,16 +13033,10 @@
     },
     "«История расхода…» под расходом по проектам открывает окно: токены Claude Code по дням за последние недели.": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "“Usage History…” under the usage by project opens a window: Claude Code tokens by day for the last weeks."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "«Історія витрат…» під витратами за проєктами відкриває вікно: токени Claude Code за днями за останні тижні."
+            "value": "«سجل الاستهلاك…» أسفل الاستهلاك حسب المشروع يفتح نافذة: رموز Claude Code حسب اليوم خلال الأسابيع الأخيرة."
           }
         },
         "de": {
@@ -12975,10 +13045,10 @@
             "value": "„Verbrauchsverlauf…“ unter dem Verbrauch nach Projekt öffnet ein Fenster: Claude-Code-Tokens pro Tag für die letzten Wochen."
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "« Historique de consommation… » sous la consommation par projet ouvre une fenêtre : les tokens de Claude Code par jour sur les dernières semaines."
+            "value": "“Usage History…” under the usage by project opens a window: Claude Code tokens by day for the last weeks."
           }
         },
         "es": {
@@ -12987,22 +13057,22 @@
             "value": "«Historial de consumo…», debajo del uso por proyecto, abre una ventana: los tokens de Claude Code por día de las últimas semanas."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "« Historique de consommation… » sous la consommation par projet ouvre une fenêtre : les tokens de Claude Code par jour sur les dernières semaines."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“Riwayat pemakaian…” di bawah pemakaian per proyek membuka jendela: token Claude Code per hari selama beberapa minggu terakhir."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "«Cronologia dei consumi…», sotto il consumo per progetto, apre una finestra: i token di Claude Code per giorno nelle ultime settimane."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "“Histórico de consumo…”, abaixo do uso por projeto, abre uma janela: os tokens do Claude Code por dia nas últimas semanas."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "„Historia zużycia…” pod zużyciem według projektów otwiera okno: tokeny Claude Code według dni z ostatnich tygodni."
           }
         },
         "ja": {
@@ -13017,16 +13087,22 @@
             "value": "프로젝트별 사용량 아래의 «사용 기록…»은 최근 몇 주 동안의 Claude Code 토큰을 날짜별로 보여 주는 창을 엽니다."
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "«سجل الاستهلاك…» أسفل الاستهلاك حسب المشروع يفتح نافذة: رموز Claude Code حسب اليوم خلال الأسابيع الأخيرة."
+            "value": "„Historia zużycia…” pod zużyciem według projektów otwiera okno: tokeny Claude Code według dni z ostatnich tygodni."
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "“Riwayat pemakaian…” di bawah pemakaian per proyek membuka jendela: token Claude Code per hari selama beberapa minggu terakhir."
+            "value": "“Histórico de consumo…”, abaixo do uso por projeto, abre uma janela: os tokens do Claude Code por dia nas últimas semanas."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«Історія витрат…» під витратами за проєктами відкриває вікно: токени Claude Code за днями за останні тижні."
           }
         }
       }
@@ -13793,16 +13869,10 @@
     },
     "«Ход работы Claude в ушке сессий» на странице модуля: ушко показывает, что Claude делает сейчас, а не только число сессий.": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "“Claude’s progress in the sessions ear” on the module’s page: the ear shows what Claude is doing now, not only the number of sessions."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "«Хід роботи Claude у вушку сесій» на сторінці модуля: вушко показує, що Claude робить зараз, а не лише кількість сесій."
+            "value": "«تقدّم Claude في أذن الجلسات» في صفحة الوحدة: تعرض الأذن ما يفعله Claude الآن، وليس عدد الجلسات فقط."
           }
         },
         "de": {
@@ -13811,10 +13881,10 @@
             "value": "„Claudes Fortschritt im Sitzungs-Ohr“ auf der Seite des Moduls: Das Ohr zeigt, was Claude gerade tut, nicht nur die Zahl der Sitzungen."
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "« Progression de Claude dans l’oreille des sessions » sur la page du module : l’oreille montre ce que Claude fait en ce moment, pas seulement le nombre de sessions."
+            "value": "“Claude’s progress in the sessions ear” on the module’s page: the ear shows what Claude is doing now, not only the number of sessions."
           }
         },
         "es": {
@@ -13823,22 +13893,22 @@
             "value": "«Progreso de Claude en la oreja de sesiones», en la página del módulo: la oreja muestra qué está haciendo Claude ahora, no solo el número de sesiones."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "« Progression de Claude dans l’oreille des sessions » sur la page du module : l’oreille montre ce que Claude fait en ce moment, pas seulement le nombre de sessions."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“Progres Claude di telinga sesi” di halaman modul: telinga menampilkan apa yang sedang dikerjakan Claude, bukan hanya jumlah sesi."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "«Avanzamento di Claude nell’orecchio delle sessioni», nella pagina del modulo: l’orecchio mostra che cosa sta facendo Claude adesso, non solo il numero di sessioni."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "“Progresso do Claude na lateral de sessões”, na página do módulo: a lateral mostra o que o Claude está fazendo agora, não só o número de sessões."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "„Postęp Claude w uchu sesji” na stronie modułu: ucho pokazuje, co Claude robi teraz, a nie tylko liczbę sesji."
           }
         },
         "ja": {
@@ -13853,16 +13923,22 @@
             "value": "모듈 페이지의 «노치 옆 세션 표시에 Claude 진행 상황»: 노치 옆에 세션 수뿐 아니라 Claude가 지금 하는 일을 표시합니다."
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "«تقدّم Claude في أذن الجلسات» في صفحة الوحدة: تعرض الأذن ما يفعله Claude الآن، وليس عدد الجلسات فقط."
+            "value": "„Postęp Claude w uchu sesji” na stronie modułu: ucho pokazuje, co Claude robi teraz, a nie tylko liczbę sesji."
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "“Progres Claude di telinga sesi” di halaman modul: telinga menampilkan apa yang sedang dikerjakan Claude, bukan hanya jumlah sesi."
+            "value": "“Progresso do Claude na lateral de sessões”, na página do módulo: a lateral mostra o que o Claude está fazendo agora, não só o número de sessões."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«Хід роботи Claude у вушку сесій» на сторінці модуля: вушко показує, що Claude робить зараз, а не лише кількість сесій."
           }
         }
       }
@@ -14015,6 +14091,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Автоматизація"
+          }
+        }
+      }
+    },
+    "Автоматически": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تلقائي"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Automatisch"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Automatic"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Automático"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Automatique"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otomatis"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Automatico"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "自動"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "자동"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Automatycznie"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Automático"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Автоматично"
           }
         }
       }
@@ -19043,16 +19195,10 @@
     },
     "В ушко можно поставить самый заполненный лимит другого AI.": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "An ear can show the fullest limit of another AI."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "У вушко можна поставити найбільш заповнений ліміт іншого AI."
+            "value": "يمكن أن تعرض الأذن أكثر حدود ذكاء اصطناعي آخر امتلاءً."
           }
         },
         "de": {
@@ -19061,10 +19207,10 @@
             "value": "Ein Ohr kann das vollste Limit einer anderen KI zeigen."
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Une oreille peut afficher la limite la plus remplie d’une autre IA."
+            "value": "An ear can show the fullest limit of another AI."
           }
         },
         "es": {
@@ -19073,22 +19219,22 @@
             "value": "Una oreja puede mostrar el límite más lleno de otra IA."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une oreille peut afficher la limite la plus remplie d’une autre IA."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Telinga dapat menampilkan batas AI lain yang paling penuh."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Un orecchio può mostrare il limite più pieno di un’altra IA."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Uma lateral pode mostrar o limite mais cheio de outra IA."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "W uchu można pokazać najbardziej wypełniony limit innego AI."
           }
         },
         "ja": {
@@ -19103,16 +19249,22 @@
             "value": "노치 옆에는 다른 AI의 가장 많이 찬 한도를 표시할 수 있습니다."
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "يمكن أن تعرض الأذن أكثر حدود ذكاء اصطناعي آخر امتلاءً."
+            "value": "W uchu można pokazać najbardziej wypełniony limit innego AI."
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Telinga dapat menampilkan batas AI lain yang paling penuh."
+            "value": "Uma lateral pode mostrar o limite mais cheio de outra IA."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "У вушко можна поставити найбільш заповнений ліміт іншого AI."
           }
         }
       }
@@ -27101,16 +27253,10 @@
     },
     "Главный лимит — крупное число над полосой, рядом темп за час и время до сброса; неделя, недели по моделям и extra usage — под ним. Прогноз появляется, только если лимит кончится раньше сброса.": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "The main limit is a big number over a bar, with the pace per hour and the time to the reset beside it; the week, the weeks by model and extra usage are under it. A forecast appears only when the limit will run out before the reset."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Головний ліміт — велике число над смугою, поруч темп за годину й час до скидання; тиждень, тижні за моделями та extra usage — під ним. Прогноз з’являється, лише якщо ліміт закінчиться раніше скидання."
+            "value": "الحد الرئيسي رقم كبير فوق شريط، وبجانبه الوتيرة في الساعة والوقت حتى إعادة الضبط؛ الأسبوع والأسابيع حسب النموذج وextra usage تحته. يظهر التوقع فقط إذا كان الحد سينتهي قبل إعادة الضبط."
           }
         },
         "de": {
@@ -27119,10 +27265,10 @@
             "value": "Das Hauptlimit ist eine große Zahl über einem Balken, daneben das Tempo pro Stunde und die Zeit bis zur Zurücksetzung; Woche, Wochen nach Modell und Extra Usage stehen darunter. Eine Prognose erscheint nur, wenn das Limit vor der Zurücksetzung aufgebraucht wäre."
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "La limite principale est un grand nombre au-dessus d’une barre, avec à côté le rythme par heure et le temps avant la réinitialisation ; la semaine, les semaines par modèle et l’extra usage sont en dessous. Une prévision n’apparaît que si la limite doit s’épuiser avant la réinitialisation."
+            "value": "The main limit is a big number over a bar, with the pace per hour and the time to the reset beside it; the week, the weeks by model and extra usage are under it. A forecast appears only when the limit will run out before the reset."
           }
         },
         "es": {
@@ -27131,22 +27277,22 @@
             "value": "El límite principal es un número grande sobre una barra, con el ritmo por hora y el tiempo hasta el reinicio al lado; la semana, las semanas por modelo y el extra usage van debajo. La previsión aparece solo si el límite se va a agotar antes del reinicio."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La limite principale est un grand nombre au-dessus d’une barre, avec à côté le rythme par heure et le temps avant la réinitialisation ; la semaine, les semaines par modèle et l’extra usage sont en dessous. Une prévision n’apparaît que si la limite doit s’épuiser avant la réinitialisation."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Batas utama berupa angka besar di atas bilah, dengan laju per jam dan waktu hingga reset di sampingnya; minggu, minggu per model, dan extra usage ada di bawahnya. Prakiraan muncul hanya jika batas akan habis sebelum reset."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Il limite principale è un numero grande sopra una barra, con accanto il ritmo orario e il tempo all’azzeramento; la settimana, le settimane per modello e l’extra usage sono sotto. La previsione compare solo se il limite finirà prima dell’azzeramento."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "O limite principal é um número grande sobre uma barra, com o ritmo por hora e o tempo até o reinício ao lado; a semana, as semanas por modelo e o extra usage ficam abaixo. A previsão aparece só quando o limite vai acabar antes do reinício."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Główny limit to duża liczba nad paskiem, obok tempo na godzinę i czas do resetu; tydzień, tygodnie według modeli i extra usage są pod nim. Prognoza pojawia się tylko wtedy, gdy limit skończy się przed resetem."
           }
         },
         "ja": {
@@ -27161,16 +27307,98 @@
             "value": "주 한도는 막대 위의 큰 숫자로 표시되고 옆에 시간당 속도와 초기화까지 남은 시간이 나옵니다. 주간, 모델별 주간, extra usage는 그 아래에 있습니다. 예측은 초기화 전에 한도가 바닥날 때만 나타납니다."
           }
         },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Główny limit to duża liczba nad paskiem, obok tempo na godzinę i czas do resetu; tydzień, tygodnie według modeli i extra usage są pod nim. Prognoza pojawia się tylko wtedy, gdy limit skończy się przed resetem."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O limite principal é um número grande sobre uma barra, com o ritmo por hora e o tempo até o reinício ao lado; a semana, as semanas por modelo e o extra usage ficam abaixo. A previsão aparece só quando o limite vai acabar antes do reinício."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Головний ліміт — велике число над смугою, поруч темп за годину й час до скидання; тиждень, тижні за моделями та extra usage — під ним. Прогноз з’являється, лише якщо ліміт закінчиться раніше скидання."
+          }
+        }
+      }
+    },
+    "Главный сервис": {
+      "localizations": {
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "الحد الرئيسي رقم كبير فوق شريط، وبجانبه الوتيرة في الساعة والوقت حتى إعادة الضبط؛ الأسبوع والأسابيع حسب النموذج وextra usage تحته. يظهر التوقع فقط إذا كان الحد سينتهي قبل إعادة الضبط."
+            "value": "الخدمة الرئيسية"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hauptdienst"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Main service"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Servicio principal"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Service principal"
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "Batas utama berupa angka besar di atas bilah, dengan laju per jam dan waktu hingga reset di sampingnya; minggu, minggu per model, dan extra usage ada di bawahnya. Prakiraan muncul hanya jika batas akan habis sebelum reset."
+            "value": "Layanan utama"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Servizio principale"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "メインのサービス"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "기본 서비스"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Główna usługa"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Serviço principal"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Головний сервіс"
           }
         }
       }
@@ -27323,6 +27551,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Головний файл — за ним рахуються слова та хронометраж"
+          }
+        }
+      }
+    },
+    "Главным может быть не только Claude: без него первыми идут лимиты другого сервиса. Выбор — на странице «Лимиты AI».": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لم يعد من الضروري أن تكون Claude هي الخدمة الرئيسية: بدونها تأتي حدود خدمة أخرى أولًا. الاختيار في صفحة «حدود الذكاء الاصطناعي»."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der Hauptdienst muss nicht mehr Claude sein: Ohne Claude stehen die Limits eines anderen Dienstes an erster Stelle. Die Auswahl steht auf der Seite „KI-Limits“."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude no longer has to be the main service: without it, another service’s limits come first. The choice is on the “AI limits” page."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El servicio principal ya no tiene que ser Claude: sin él, van primero los límites de otro servicio. Se elige en la página «Límites de IA»."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le service principal n’est plus forcément Claude : sans lui, les limites d’un autre service viennent en premier. Le choix se fait sur la page « Limites d’IA »."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Layanan utama tidak harus Claude lagi: tanpa Claude, batas layanan lain tampil pertama. Pilihannya ada di halaman “Batas AI”."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il servizio principale non deve più essere Claude: senza Claude vengono per primi i limiti di un altro servizio. La scelta è nella pagina «Limiti IA»."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "メインのサービスは Claude でなくても構いません。Claude がなければ、ほかのサービスの上限が先頭に表示されます。選択は「AI の上限」ページで行います。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "기본 서비스가 꼭 Claude일 필요는 없습니다. Claude가 없으면 다른 서비스의 한도가 맨 위에 옵니다. «AI 한도» 페이지에서 고릅니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Główną usługą nie musi już być Claude: bez niego pierwsze są limity innej usługi. Wybór jest na stronie „Limity AI”."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O serviço principal não precisa mais ser o Claude: sem ele, os limites de outro serviço vêm primeiro. A escolha fica na página “Limites de IA”."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Головним може бути не лише Claude: без нього першими йдуть ліміти іншого сервісу. Вибір — на сторінці «Ліміти AI»."
           }
         }
       }
@@ -32573,16 +32877,10 @@
     },
     "Если сессия использована больше чем на 90 %, фоновая задача спрашивает: запустить сейчас или после сброса. «Ставить фоновые задачи на паузу» на странице «Лимиты AI» останавливает идущие задачи у порога и продолжает их после сброса.": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "If the session is more than 90 percent used, a background task asks: start now or after the reset. “Pause background tasks” on the “AI limits” page stops running tasks at the threshold and continues them after the reset."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Якщо сесію використано більше ніж на 90 відсотків, фонове завдання питає: запустити зараз чи після скидання. «Ставити фонові завдання на паузу» на сторінці «Ліміти AI» зупиняє запущені завдання біля порога й продовжує їх після скидання."
+            "value": "إذا استُخدمت الجلسة بأكثر من 90 بالمئة، تسأل المهمة الخلفية: البدء الآن أم بعد إعادة الضبط. «إيقاف المهام الخلفية مؤقتًا» في صفحة «حدود الذكاء الاصطناعي» يوقف المهام الجارية عند العتبة ويستأنفها بعد إعادة الضبط."
           }
         },
         "de": {
@@ -32591,10 +32889,10 @@
             "value": "Ist die Sitzung zu mehr als 90 Prozent verbraucht, fragt eine Hintergrundaufgabe: jetzt starten oder nach der Zurücksetzung. „Hintergrundaufgaben pausieren“ auf der Seite „KI-Limits“ hält laufende Aufgaben an der Schwelle an und setzt sie nach der Zurücksetzung fort."
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Si la session est utilisée à plus de 90 %, la tâche en arrière-plan demande : lancer maintenant ou après la réinitialisation. « Mettre en pause les tâches en arrière-plan », sur la page « Limites d’IA », arrête au seuil les tâches en cours et les reprend après la réinitialisation."
+            "value": "If the session is more than 90 percent used, a background task asks: start now or after the reset. “Pause background tasks” on the “AI limits” page stops running tasks at the threshold and continues them after the reset."
           }
         },
         "es": {
@@ -32603,22 +32901,22 @@
             "value": "Si la sesión está usada en más del 90 %, la tarea en segundo plano pregunta: iniciar ahora o después del reinicio. «Pausar tareas en segundo plano», en la página «Límites de IA», detiene en el umbral las tareas en curso y las continúa después del reinicio."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Si la session est utilisée à plus de 90 %, la tâche en arrière-plan demande : lancer maintenant ou après la réinitialisation. « Mettre en pause les tâches en arrière-plan », sur la page « Limites d’IA », arrête au seuil les tâches en cours et les reprend après la réinitialisation."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jika sesi terpakai lebih dari 90 persen, tugas latar belakang bertanya: mulai sekarang atau setelah reset. “Jeda tugas latar belakang” di halaman “Batas AI” menghentikan tugas yang berjalan pada ambang dan melanjutkannya setelah reset."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Se la sessione è usata per più del 90 per cento, un’attività in background chiede: avviare ora o dopo l’azzeramento. «Metti in pausa le attività in background», nella pagina «Limiti IA», ferma alla soglia le attività in corso e le riprende dopo l’azzeramento."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Se mais de 90 por cento da sessão estiver usada, a tarefa em segundo plano pergunta: iniciar agora ou depois do reinício. “Pausar tarefas em segundo plano”, na página “Limites de IA”, para no limiar as tarefas em andamento e as continua depois do reinício."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Jeśli sesja jest zużyta w ponad 90 procentach, zadanie w tle pyta: uruchomić teraz czy po resecie. „Wstrzymuj zadania w tle” na stronie „Limity AI” zatrzymuje trwające zadania przy progu i wznawia je po resecie."
           }
         },
         "ja": {
@@ -32633,16 +32931,22 @@
             "value": "세션을 90퍼센트 넘게 썼다면 백그라운드 작업이 지금 시작할지 초기화 뒤에 시작할지 묻습니다. «AI 한도» 페이지의 «백그라운드 작업 일시 정지»는 임계값에서 실행 중인 작업을 멈추고 초기화 뒤에 이어서 진행합니다."
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "إذا استُخدمت الجلسة بأكثر من 90 بالمئة، تسأل المهمة الخلفية: البدء الآن أم بعد إعادة الضبط. «إيقاف المهام الخلفية مؤقتًا» في صفحة «حدود الذكاء الاصطناعي» يوقف المهام الجارية عند العتبة ويستأنفها بعد إعادة الضبط."
+            "value": "Jeśli sesja jest zużyta w ponad 90 procentach, zadanie w tle pyta: uruchomić teraz czy po resecie. „Wstrzymuj zadania w tle” na stronie „Limity AI” zatrzymuje trwające zadania przy progu i wznawia je po resecie."
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Jika sesi terpakai lebih dari 90 persen, tugas latar belakang bertanya: mulai sekarang atau setelah reset. “Jeda tugas latar belakang” di halaman “Batas AI” menghentikan tugas yang berjalan pada ambang dan melanjutkannya setelah reset."
+            "value": "Se mais de 90 por cento da sessão estiver usada, a tarefa em segundo plano pergunta: iniciar agora ou depois do reinício. “Pausar tarefas em segundo plano”, na página “Limites de IA”, para no limiar as tarefas em andamento e as continua depois do reinício."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Якщо сесію використано більше ніж на 90 відсотків, фонове завдання питає: запустити зараз чи після скидання. «Ставити фонові завдання на паузу» на сторінці «Ліміти AI» зупиняє запущені завдання біля порога й продовжує їх після скидання."
           }
         }
       }
@@ -42687,16 +42991,10 @@
     },
     "Квоту и тариф передаёт сам Antigravity: Настройки → «Сервисы AI» → Gemini → «Включить квоту Antigravity», затем один раз откройте agy.": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Antigravity passes its quota and plan itself: Settings → “AI Services” → Gemini → “Turn on Antigravity quota”, then open agy once."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Квоту й тариф передає сам Antigravity: Налаштування → «Сервіси AI» → Gemini → «Увімкнути квоту Antigravity», потім один раз відкрийте agy."
+            "value": "يمرّر Antigravity الحصة والخطة بنفسه: الإعدادات ← «خدمات الذكاء الاصطناعي» ← Gemini ← «تشغيل حصة Antigravity»، ثم افتح agy مرة واحدة."
           }
         },
         "de": {
@@ -42705,10 +43003,10 @@
             "value": "Kontingent und Tarif liefert Antigravity selbst: Einstellungen → „KI-Dienste“ → Gemini → „Antigravity-Kontingent einschalten“, dann agy einmal öffnen."
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Antigravity transmet lui-même le quota et le forfait : Réglages → « Services d’IA » → Gemini → « Activer le quota Antigravity », puis ouvrez agy une fois."
+            "value": "Antigravity passes its quota and plan itself: Settings → “AI Services” → Gemini → “Turn on Antigravity quota”, then open agy once."
           }
         },
         "es": {
@@ -42717,22 +43015,22 @@
             "value": "Antigravity pasa por sí mismo la cuota y el plan: Ajustes → «Servicios de IA» → Gemini → «Activar la cuota de Antigravity» y luego abre agy una vez."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Antigravity transmet lui-même le quota et le forfait : Réglages → « Services d’IA » → Gemini → « Activer le quota Antigravity », puis ouvrez agy une fois."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Antigravity sendiri meneruskan kuota dan paketnya: Pengaturan → “Layanan AI” → Gemini → “Nyalakan kuota Antigravity”, lalu buka agy satu kali."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Quota e piano li passa Antigravity stesso: Impostazioni → «Servizi IA» → Gemini → «Attiva la quota di Antigravity», poi apri agy una volta."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "O próprio Antigravity passa a cota e o plano: Ajustes → “Serviços de IA” → Gemini → “Ativar a cota do Antigravity”; depois abra o agy uma vez."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Limit i plan przekazuje sam Antigravity: Ustawienia → „Usługi AI” → Gemini → „Włącz limit Antigravity”, a potem raz otwórz agy."
           }
         },
         "ja": {
@@ -42747,16 +43045,22 @@
             "value": "할당량과 요금제는 Antigravity가 직접 전달합니다. 설정 → «AI 서비스» → Gemini → «Antigravity 할당량 켜기»를 누른 다음 agy를 한 번 여세요."
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "يمرّر Antigravity الحصة والخطة بنفسه: الإعدادات ← «خدمات الذكاء الاصطناعي» ← Gemini ← «تشغيل حصة Antigravity»، ثم افتح agy مرة واحدة."
+            "value": "Limit i plan przekazuje sam Antigravity: Ustawienia → „Usługi AI” → Gemini → „Włącz limit Antigravity”, a potem raz otwórz agy."
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Antigravity sendiri meneruskan kuota dan paketnya: Pengaturan → “Layanan AI” → Gemini → “Nyalakan kuota Antigravity”, lalu buka agy satu kali."
+            "value": "O próprio Antigravity passa a cota e o plano: Ajustes → “Serviços de IA” → Gemini → “Ativar a cota do Antigravity”; depois abra o agy uma vez."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Квоту й тариф передає сам Antigravity: Налаштування → «Сервіси AI» → Gemini → «Увімкнути квоту Antigravity», потім один раз відкрийте agy."
           }
         }
       }
@@ -48083,6 +48387,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ліміти Claude і прогноз за вашим темпом"
+          }
+        }
+      }
+    },
+    "Лимиты главного сервиса идут первыми в панели и показаны в строке меню и на острове. «Автоматически» — Claude, а без него первый сервис, у которого есть лимиты.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تأتي حدود الخدمة الرئيسية أولًا في اللوحة وتظهر في شريط القائمة وعلى الجزيرة. «تلقائي» يعني Claude، وبدونه أول خدمة لها حدود."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Limits des Hauptdienstes stehen im Panel an erster Stelle und werden in der Menüleiste und auf der Insel angezeigt. „Automatisch“ bedeutet Claude, ohne Claude der erste Dienst mit Limits."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The main service’s limits come first in the panel and are shown in the menu bar and on the island. “Automatic” is Claude, or without it the first service that has limits."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los límites del servicio principal van primero en el panel y se muestran en la barra de menús y en la isla. «Automático» es Claude o, sin él, el primer servicio que tenga límites."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les limites du service principal viennent en premier dans le panneau et s’affichent dans la barre des menus et sur l’île. « Automatique » : Claude, ou sans lui le premier service qui a des limites."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Batas layanan utama tampil pertama di panel dan ditampilkan di bar menu serta di pulau. “Otomatis” berarti Claude, atau tanpa Claude layanan pertama yang punya batas."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I limiti del servizio principale vengono per primi nel pannello e sono mostrati nella barra dei menu e sull’isola. «Automatico» è Claude o, senza di lui, il primo servizio che ha limiti."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "メインのサービスの制限はパネルの先頭に表示され、メニューバーとアイランドにも表示されます。「自動」は Claude、Claude がなければ制限のある最初のサービスです。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "기본 서비스의 한도는 패널 맨 위에 오고 메뉴 막대와 아일랜드에도 표시됩니다. ‘자동’은 Claude이며, Claude가 없으면 한도가 있는 첫 번째 서비스입니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limity głównej usługi są pierwsze w panelu i widać je na pasku menu oraz na wyspie. „Automatycznie” to Claude, a bez niego pierwsza usługa, która ma limity."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Os limites do serviço principal vêm primeiro no painel e aparecem na barra de menus e na ilha. “Automático” é o Claude ou, sem ele, o primeiro serviço que tiver limites."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ліміти головного сервісу йдуть першими в панелі та показані в рядку меню й на острові. «Автоматично» — Claude, а без нього перший сервіс, у якого є ліміти."
           }
         }
       }
@@ -53486,16 +53866,10 @@
     },
     "Найденные агенты и ключи; лимиты других AI.": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "The agents and keys found; the limits of other AIs."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Знайдені агенти та ключі; ліміти інших AI."
+            "value": "الوكلاء والمفاتيح التي عُثر عليها؛ حدود خدمات الذكاء الاصطناعي الأخرى."
           }
         },
         "de": {
@@ -53504,10 +53878,10 @@
             "value": "Gefundene Agenten und Schlüssel; Limits anderer KIs."
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Les agents et les clés trouvés ; les limites des autres IA."
+            "value": "The agents and keys found; the limits of other AIs."
           }
         },
         "es": {
@@ -53516,22 +53890,22 @@
             "value": "Los agentes y las claves encontrados; los límites de otras IA."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les agents et les clés trouvés ; les limites des autres IA."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Agen dan kunci yang ditemukan; batas AI lain."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Gli agenti e le chiavi trovati; i limiti delle altre IA."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Os agentes e as chaves encontrados; os limites de outras IAs."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Znalezione agenty i klucze; limity innych AI."
           }
         },
         "ja": {
@@ -53546,16 +53920,22 @@
             "value": "찾은 에이전트와 키, 다른 AI의 한도."
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "الوكلاء والمفاتيح التي عُثر عليها؛ حدود خدمات الذكاء الاصطناعي الأخرى."
+            "value": "Znalezione agenty i klucze; limity innych AI."
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Agen dan kunci yang ditemukan; batas AI lain."
+            "value": "Os agentes e as chaves encontrados; os limites de outras IAs."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Знайдені агенти та ключі; ліміти інших AI."
           }
         }
       }
@@ -55310,16 +55690,10 @@
     },
     "Настройки → «Сервисы AI» → Claude Code → «Другие аккаунты Claude»: лимиты каждого аккаунта — отдельной карточкой в панели.": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Settings → “AI Services” → Claude Code → “Other Claude accounts”: each account’s limits are a separate card in the panel."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Налаштування → «Сервіси AI» → Claude Code → «Інші акаунти Claude»: ліміти кожного акаунта — окремою карткою в панелі."
+            "value": "الإعدادات ← «خدمات الذكاء الاصطناعي» ← Claude Code ← «حسابات Claude الأخرى»: حدود كل حساب في بطاقة مستقلة في اللوحة."
           }
         },
         "de": {
@@ -55328,10 +55702,10 @@
             "value": "Einstellungen → „KI-Dienste“ → Claude Code → „Weitere Claude-Konten“: Die Limits jedes Kontos stehen als eigene Karte im Panel."
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Réglages → « Services d’IA » → Claude Code → « Autres comptes Claude » : les limites de chaque compte forment une carte à part dans le panneau."
+            "value": "Settings → “AI Services” → Claude Code → “Other Claude accounts”: each account’s limits are a separate card in the panel."
           }
         },
         "es": {
@@ -55340,22 +55714,22 @@
             "value": "Ajustes → «Servicios de IA» → Claude Code → «Otras cuentas de Claude»: los límites de cada cuenta van en una tarjeta aparte en el panel."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Réglages → « Services d’IA » → Claude Code → « Autres comptes Claude » : les limites de chaque compte forment une carte à part dans le panneau."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pengaturan → “Layanan AI” → Claude Code → “Akun Claude lainnya”: batas tiap akun tampil sebagai kartu tersendiri di panel."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Impostazioni → «Servizi IA» → Claude Code → «Altri account Claude»: i limiti di ogni account sono una scheda a parte nel pannello."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ajustes → “Serviços de IA” → Claude Code → “Outras contas do Claude”: os limites de cada conta ficam em um cartão separado no painel."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ustawienia → „Usługi AI” → Claude Code → „Inne konta Claude”: limity każdego konta to osobna karta w panelu."
           }
         },
         "ja": {
@@ -55370,16 +55744,22 @@
             "value": "설정 → «AI 서비스» → Claude Code → «다른 Claude 계정»: 계정마다 한도가 패널에 별도 카드로 표시됩니다."
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "الإعدادات ← «خدمات الذكاء الاصطناعي» ← Claude Code ← «حسابات Claude الأخرى»: حدود كل حساب في بطاقة مستقلة في اللوحة."
+            "value": "Ustawienia → „Usługi AI” → Claude Code → „Inne konta Claude”: limity każdego konta to osobna karta w panelu."
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Pengaturan → “Layanan AI” → Claude Code → “Akun Claude lainnya”: batas tiap akun tampil sebagai kartu tersendiri di panel."
+            "value": "Ajustes → “Serviços de IA” → Claude Code → “Outras contas do Claude”: os limites de cada conta ficam em um cartão separado no painel."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Налаштування → «Сервіси AI» → Claude Code → «Інші акаунти Claude»: ліміти кожного акаунта — окремою карткою в панелі."
           }
         }
       }
@@ -70623,16 +71003,10 @@
     },
     "Открыть окно в запущенном приложении.": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Open a window in the running app."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Відкрити вікно в запущеному застосунку."
+            "value": "فتح نافذة في التطبيق الذي يعمل."
           }
         },
         "de": {
@@ -70641,10 +71015,10 @@
             "value": "Ein Fenster in der laufenden App öffnen."
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ouvrir une fenêtre dans l’app en cours d’exécution."
+            "value": "Open a window in the running app."
           }
         },
         "es": {
@@ -70653,22 +71027,22 @@
             "value": "Abrir una ventana en la app en ejecución."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ouvrir une fenêtre dans l’app en cours d’exécution."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Membuka jendela di app yang sedang berjalan."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Apri una finestra nell’app in esecuzione."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Abrir uma janela no app em execução."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Otwórz okno w uruchomionej aplikacji."
           }
         },
         "ja": {
@@ -70683,16 +71057,22 @@
             "value": "실행 중인 앱에서 창을 엽니다."
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "فتح نافذة في التطبيق الذي يعمل."
+            "value": "Otwórz okno w uruchomionej aplikacji."
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Membuka jendela di app yang sedang berjalan."
+            "value": "Abrir uma janela no app em execução."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Відкрити вікно в запущеному застосунку."
           }
         }
       }
@@ -70776,16 +71156,10 @@
     },
     "Открыть панель из любого приложения. Сочетание — в Настройках → «Клавиши» → «Открывать панель».": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Open the panel from any app. The shortcut is in Settings → “Shortcuts” → “Open the panel”."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Відкрити панель із будь-якого застосунку. Сполучення — у Налаштуваннях → «Клавіші» → «Відкривати панель»."
+            "value": "فتح اللوحة من أي تطبيق. الاختصار في الإعدادات ← «الاختصارات» ← «فتح اللوحة»."
           }
         },
         "de": {
@@ -70794,10 +71168,10 @@
             "value": "Das Panel aus jeder App öffnen. Der Kurzbefehl steht in Einstellungen → „Kurzbefehle“ → „Panel öffnen“."
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ouvrir le panneau depuis n’importe quelle app. Le raccourci se trouve dans Réglages → « Raccourcis » → « Ouvrir le panneau »."
+            "value": "Open the panel from any app. The shortcut is in Settings → “Shortcuts” → “Open the panel”."
           }
         },
         "es": {
@@ -70806,22 +71180,22 @@
             "value": "Abrir el panel desde cualquier app. El atajo está en Ajustes → «Atajos» → «Abrir el panel»."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ouvrir le panneau depuis n’importe quelle app. Le raccourci se trouve dans Réglages → « Raccourcis » → « Ouvrir le panneau »."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Membuka panel dari app mana pun. Pintasannya ada di Pengaturan → “Pintasan” → “Buka panel”."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Apri il pannello da qualsiasi app. La scorciatoia è in Impostazioni → «Scorciatoie» → «Apri il pannello»."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Abrir o painel a partir de qualquer app. O atalho fica em Ajustes → “Atalhos” → “Abrir o painel”."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Otwórz panel z dowolnej aplikacji. Skrót jest w Ustawieniach → „Skróty” → „Otwieraj panel”."
           }
         },
         "ja": {
@@ -70836,16 +71210,22 @@
             "value": "어느 앱에서든 패널을 엽니다. 단축키는 설정 → «단축키» → «패널 열기»에서 고릅니다."
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "فتح اللوحة من أي تطبيق. الاختصار في الإعدادات ← «الاختصارات» ← «فتح اللوحة»."
+            "value": "Otwórz panel z dowolnej aplikacji. Skrót jest w Ustawieniach → „Skróty” → „Otwieraj panel”."
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Membuka panel dari app mana pun. Pintasannya ada di Pengaturan → “Pintasan” → “Buka panel”."
+            "value": "Abrir o painel a partir de qualquer app. O atalho fica em Ajustes → “Atalhos” → “Abrir o painel”."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Відкрити панель із будь-якого застосунку. Сполучення — у Налаштуваннях → «Клавіші» → «Відкривати панель»."
           }
         }
       }
@@ -81188,16 +81568,10 @@
     },
     "Полосы или кольца — выбирается на странице «Лимиты AI».": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Bars or rings — chosen on the “AI limits” page."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Смуги або кільця — вибирається на сторінці «Ліміти AI»."
+            "value": "أشرطة أو حلقات — يُختار في صفحة «حدود الذكاء الاصطناعي»."
           }
         },
         "de": {
@@ -81206,10 +81580,10 @@
             "value": "Balken oder Ringe — wählbar auf der Seite „KI-Limits“."
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Barres ou anneaux — à choisir sur la page « Limites d’IA »."
+            "value": "Bars or rings — chosen on the “AI limits” page."
           }
         },
         "es": {
@@ -81218,22 +81592,22 @@
             "value": "Barras o anillos: se elige en la página «Límites de IA»."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Barres ou anneaux — à choisir sur la page « Limites d’IA »."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bilah atau cincin — dipilih di halaman “Batas AI”."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Barre o anelli: si sceglie nella pagina «Limiti IA»."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Barras ou anéis: escolha na página “Limites de IA”."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Paski lub pierścienie — do wyboru na stronie „Limity AI”."
           }
         },
         "ja": {
@@ -81248,16 +81622,22 @@
             "value": "막대 또는 링 — «AI 한도» 페이지에서 선택합니다."
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "أشرطة أو حلقات — يُختار في صفحة «حدود الذكاء الاصطناعي»."
+            "value": "Paski lub pierścienie — do wyboru na stronie „Limity AI”."
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Bilah atau cincin — dipilih di halaman “Batas AI”."
+            "value": "Barras ou anéis: escolha na página “Limites de IA”."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Смуги або кільця — вибирається на сторінці «Ліміти AI»."
           }
         }
       }
@@ -82176,16 +82556,10 @@
     },
     "После обновления вверху панели один раз появляется карточка с тем, что изменилось; «Понятно» её убирает.": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "After an update a card with what changed appears once at the top of the panel; “Got It” removes it."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Після оновлення вгорі панелі один раз з’являється картка з тим, що змінилося; «Зрозуміло» її прибирає."
+            "value": "بعد التحديث تظهر مرة واحدة أعلى اللوحة بطاقة بما تغيّر؛ «فهمت» يزيلها."
           }
         },
         "de": {
@@ -82194,10 +82568,10 @@
             "value": "Nach einem Update erscheint oben im Panel einmal eine Karte mit den Änderungen; „Verstanden“ blendet sie aus."
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Après une mise à jour, une carte indiquant ce qui a changé apparaît une fois en haut du panneau ; « Compris » la retire."
+            "value": "After an update a card with what changed appears once at the top of the panel; “Got It” removes it."
           }
         },
         "es": {
@@ -82206,22 +82580,22 @@
             "value": "Tras una actualización aparece una vez, en la parte superior del panel, una tarjeta con lo que ha cambiado; «Entendido» la quita."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Après une mise à jour, une carte indiquant ce qui a changé apparaît une fois en haut du panneau ; « Compris » la retire."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Setelah pembaruan, kartu berisi apa yang berubah muncul satu kali di bagian atas panel; “Mengerti” menghilangkannya."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Dopo un aggiornamento compare una volta, in cima al pannello, una scheda con ciò che è cambiato; «Ho capito» la toglie."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Depois de uma atualização, aparece uma vez no topo do painel um cartão com o que mudou; “Entendi” o remove."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Po aktualizacji u góry panelu raz pojawia się karta z tym, co się zmieniło; „Rozumiem” ją usuwa."
           }
         },
         "ja": {
@@ -82236,16 +82610,22 @@
             "value": "업데이트 후 패널 맨 위에 바뀐 내용을 담은 카드가 한 번 나타납니다. «확인»을 누르면 사라집니다."
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "بعد التحديث تظهر مرة واحدة أعلى اللوحة بطاقة بما تغيّر؛ «فهمت» يزيلها."
+            "value": "Po aktualizacji u góry panelu raz pojawia się karta z tym, co się zmieniło; „Rozumiem” ją usuwa."
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Setelah pembaruan, kartu berisi apa yang berubah muncul satu kali di bagian atas panel; “Mengerti” menghilangkannya."
+            "value": "Depois de uma atualização, aparece uma vez no topo do painel um cartão com o que mudou; “Entendi” o remove."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Після оновлення вгорі панелі один раз з’являється картка з тим, що змінилося; «Зрозуміло» її прибирає."
           }
         }
       }
@@ -95881,16 +96261,10 @@
     },
     "Сессии, которые недавно закончились, сложены под этой строкой — их можно продолжить.": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sessions that ended recently are folded under this line — you can continue them."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Сесії, які нещодавно закінчилися, складено під цим рядком — їх можна продовжити."
+            "value": "الجلسات التي انتهت مؤخرًا مطوية تحت هذا السطر — يمكنك متابعتها."
           }
         },
         "de": {
@@ -95899,10 +96273,10 @@
             "value": "Kürzlich beendete Sitzungen liegen unter dieser Zeile — sie lassen sich fortsetzen."
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Les sessions terminées récemment sont rangées sous cette ligne — vous pouvez les reprendre."
+            "value": "Sessions that ended recently are folded under this line — you can continue them."
           }
         },
         "es": {
@@ -95911,22 +96285,22 @@
             "value": "Las sesiones que terminaron hace poco están plegadas bajo esta línea: puedes continuarlas."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les sessions terminées récemment sont rangées sous cette ligne — vous pouvez les reprendre."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sesi yang baru saja selesai dilipat di bawah baris ini — Anda dapat melanjutkannya."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Le sessioni finite da poco sono raccolte sotto questa riga: puoi riprenderle."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "As sessões que terminaram há pouco ficam recolhidas sob esta linha: você pode continuá-las."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sesje, które niedawno się zakończyły, są zwinięte pod tym wierszem — można je kontynuować."
           }
         },
         "ja": {
@@ -95941,16 +96315,22 @@
             "value": "최근에 끝난 세션은 이 줄 아래에 접혀 있으며 이어서 진행할 수 있습니다."
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "الجلسات التي انتهت مؤخرًا مطوية تحت هذا السطر — يمكنك متابعتها."
+            "value": "Sesje, które niedawno się zakończyły, są zwinięte pod tym wierszem — można je kontynuować."
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sesi yang baru saja selesai dilipat di bawah baris ini — Anda dapat melanjutkannya."
+            "value": "As sessões que terminaram há pouco ficam recolhidas sob esta linha: você pode continuá-las."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Сесії, які нещодавно закінчилися, складено під цим рядком — їх можна продовжити."
           }
         }
       }
@@ -100676,16 +101056,10 @@
     },
     "Сохранить все настройки в файл.": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Save all settings to a file."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Зберегти всі налаштування у файл."
+            "value": "حفظ كل الإعدادات في ملف."
           }
         },
         "de": {
@@ -100694,10 +101068,10 @@
             "value": "Alle Einstellungen in eine Datei sichern."
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Enregistrer tous les réglages dans un fichier."
+            "value": "Save all settings to a file."
           }
         },
         "es": {
@@ -100706,22 +101080,22 @@
             "value": "Guardar todos los ajustes en un archivo."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enregistrer tous les réglages dans un fichier."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Simpan semua pengaturan ke berkas."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Salva tutte le impostazioni in un file."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Salvar todos os ajustes em um arquivo."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Zapisz wszystkie ustawienia w pliku."
           }
         },
         "ja": {
@@ -100736,16 +101110,22 @@
             "value": "모든 설정을 파일로 저장합니다."
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "حفظ كل الإعدادات في ملف."
+            "value": "Zapisz wszystkie ustawienia w pliku."
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Simpan semua pengaturan ke berkas."
+            "value": "Salvar todos os ajustes em um arquivo."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Зберегти всі налаштування у файл."
           }
         }
       }
@@ -112463,16 +112843,10 @@
     },
     "Фоновая задача: первый клик спрашивает «Остановить?», второй останавливает.": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "A background task: the first click asks “Stop?”, the second one stops it."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Фонове завдання: перший клік питає «Зупинити?», другий зупиняє."
+            "value": "مهمة خلفية: النقرة الأولى تسأل «إيقاف؟»، والثانية توقفها."
           }
         },
         "de": {
@@ -112481,10 +112855,10 @@
             "value": "Hintergrundaufgabe: Der erste Klick fragt „Stoppen?“, der zweite stoppt."
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tâche en arrière-plan : le premier clic demande « Arrêter ? », le second l’arrête."
+            "value": "A background task: the first click asks “Stop?”, the second one stops it."
           }
         },
         "es": {
@@ -112493,22 +112867,22 @@
             "value": "Tarea en segundo plano: el primer clic pregunta «¿Detener?» y el segundo la detiene."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tâche en arrière-plan : le premier clic demande « Arrêter ? », le second l’arrête."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tugas latar belakang: klik pertama bertanya “Hentikan?”, klik kedua menghentikannya."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Attività in background: il primo clic chiede «Fermare?», il secondo la ferma."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tarefa em segundo plano: o primeiro clique pergunta “Parar?” e o segundo a para."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Zadanie w tle: pierwsze kliknięcie pyta „Zatrzymać?”, drugie zatrzymuje."
           }
         },
         "ja": {
@@ -112523,16 +112897,22 @@
             "value": "백그라운드 작업: 첫 번째 클릭은 «중지?»라고 묻고 두 번째 클릭에 중지합니다."
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "مهمة خلفية: النقرة الأولى تسأل «إيقاف؟»، والثانية توقفها."
+            "value": "Zadanie w tle: pierwsze kliknięcie pyta „Zatrzymać?”, drugie zatrzymuje."
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tugas latar belakang: klik pertama bertanya “Hentikan?”, klik kedua menghentikannya."
+            "value": "Tarefa em segundo plano: o primeiro clique pergunta “Parar?” e o segundo a para."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Фонове завдання: перший клік питає «Зупинити?», другий зупиняє."
           }
         }
       }
@@ -113159,16 +113539,10 @@
     },
     "Ход работы": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Progress"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Хід роботи"
+            "value": "سير العمل"
           }
         },
         "de": {
@@ -113177,10 +113551,10 @@
             "value": "Fortschritt"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Progression"
+            "value": "Progress"
           }
         },
         "es": {
@@ -113189,22 +113563,22 @@
             "value": "Progreso"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Progression"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Progres"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Avanzamento"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Progresso"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Postęp"
           }
         },
         "ja": {
@@ -113219,16 +113593,22 @@
             "value": "진행 상황"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "سير العمل"
+            "value": "Postęp"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Progres"
+            "value": "Progresso"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Хід роботи"
           }
         }
       }
@@ -135936,310 +136316,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "❌ CI впав: %@ #%lld"
-          }
-        }
-      }
-    },
-    "Автоматически": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Automatic"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Автоматично"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Automatisch"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Automatique"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Automático"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Automatico"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Automático"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Automatycznie"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "自動"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "자동"
-          }
-        },
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "تلقائي"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Otomatis"
-          }
-        }
-      }
-    },
-    "Главный сервис": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Main service"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Головний сервіс"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hauptdienst"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Service principal"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Servicio principal"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Servizio principale"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Serviço principal"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Główna usługa"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "メインのサービス"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "기본 서비스"
-          }
-        },
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "الخدمة الرئيسية"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Layanan utama"
-          }
-        }
-      }
-    },
-    "Лимиты главного сервиса идут первыми в панели и показаны в строке меню и на острове. «Автоматически» — Claude, а без него первый сервис, у которого есть лимиты.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "The main service’s limits come first in the panel and are shown in the menu bar and on the island. “Automatic” is Claude, or without it the first service that has limits."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ліміти головного сервісу йдуть першими в панелі та показані в рядку меню й на острові. «Автоматично» — Claude, а без нього перший сервіс, у якого є ліміти."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Die Limits des Hauptdienstes stehen im Panel an erster Stelle und werden in der Menüleiste und auf der Insel angezeigt. „Automatisch“ bedeutet Claude, ohne Claude der erste Dienst mit Limits."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Les limites du service principal viennent en premier dans le panneau et s’affichent dans la barre des menus et sur l’île. « Automatique » : Claude, ou sans lui le premier service qui a des limites."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Los límites del servicio principal van primero en el panel y se muestran en la barra de menús y en la isla. «Automático» es Claude o, sin él, el primer servicio que tenga límites."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "I limiti del servizio principale vengono per primi nel pannello e sono mostrati nella barra dei menu e sull’isola. «Automatico» è Claude o, senza di lui, il primo servizio che ha limiti."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Os limites do serviço principal vêm primeiro no painel e aparecem na barra de menus e na ilha. “Automático” é o Claude ou, sem ele, o primeiro serviço que tiver limites."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Limity głównej usługi są pierwsze w panelu i widać je na pasku menu oraz na wyspie. „Automatycznie” to Claude, a bez niego pierwsza usługa, która ma limity."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "メインのサービスの制限はパネルの先頭に表示され、メニューバーとアイランドにも表示されます。「自動」は Claude、Claude がなければ制限のある最初のサービスです。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "기본 서비스의 한도는 패널 맨 위에 오고 메뉴 막대와 아일랜드에도 표시됩니다. ‘자동’은 Claude이며, Claude가 없으면 한도가 있는 첫 번째 서비스입니다."
-          }
-        },
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "تأتي حدود الخدمة الرئيسية أولًا في اللوحة وتظهر في شريط القائمة وعلى الجزيرة. «تلقائي» يعني Claude، وبدونه أول خدمة لها حدود."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Batas layanan utama tampil pertama di panel dan ditampilkan di bar menu serta di pulau. “Otomatis” berarti Claude, atau tanpa Claude layanan pertama yang punya batas."
-          }
-        }
-      }
-    },
-    "Главным может быть не только Claude: без него первыми идут лимиты другого сервиса. Выбор — на странице «Лимиты AI».": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Claude no longer has to be the main service: without it, another service’s limits come first. The choice is on the “AI limits” page."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Головним може бути не лише Claude: без нього першими йдуть ліміти іншого сервісу. Вибір — на сторінці «Ліміти AI»."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Der Hauptdienst muss nicht mehr Claude sein: Ohne Claude stehen die Limits eines anderen Dienstes an erster Stelle. Die Auswahl steht auf der Seite „KI-Limits“."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Le service principal n’est plus forcément Claude : sans lui, les limites d’un autre service viennent en premier. Le choix se fait sur la page « Limites d’IA »."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "El servicio principal ya no tiene que ser Claude: sin él, van primero los límites de otro servicio. Se elige en la página «Límites de IA»."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Il servizio principale non deve più essere Claude: senza Claude vengono per primi i limiti di un altro servizio. La scelta è nella pagina «Limiti IA»."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "O serviço principal não precisa mais ser o Claude: sem ele, os limites de outro serviço vêm primeiro. A escolha fica na página “Limites de IA”."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Główną usługą nie musi już być Claude: bez niego pierwsze są limity innej usługi. Wybór jest na stronie „Limity AI”."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "メインのサービスは Claude でなくても構いません。Claude がなければ、ほかのサービスの上限が先頭に表示されます。選択は「AI の上限」ページで行います。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "기본 서비스가 꼭 Claude일 필요는 없습니다. Claude가 없으면 다른 서비스의 한도가 맨 위에 옵니다. «AI 한도» 페이지에서 고릅니다."
-          }
-        },
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "لم يعد من الضروري أن تكون Claude هي الخدمة الرئيسية: بدونها تأتي حدود خدمة أخرى أولًا. الاختيار في صفحة «حدود الذكاء الاصطناعي»."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Layanan utama tidak harus Claude lagi: tanpa Claude, batas layanan lain tampil pertama. Pilihannya ada di halaman “Batas AI”."
           }
         }
       }

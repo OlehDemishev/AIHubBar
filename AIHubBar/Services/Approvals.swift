@@ -15,8 +15,15 @@ struct ApprovalRequest: Codable, Equatable, Identifiable, Sendable {
     var created: Double
     /// The waiting hook: once it is gone (Claude cancelled it), nobody would read an answer.
     var pid: Int32?
+    /// The hook's `--agent`: `claude` (also when missing, from an older hook) or `codex`.
+    var agent: String?
 
-    enum CodingKeys: String, CodingKey { case id, sessionID = "session_id", project, tool, summary, created, pid }
+    enum CodingKeys: String, CodingKey { case id, sessionID = "session_id", project, tool, summary, created, pid, agent }
+
+    /// «Codex просит разрешение»; Claude keeps its own, older wording.
+    var asksTitle: String {
+        agent == "codex" ? String(localized: "\(HubLimit.Source.codex.shortTitle) просит разрешение") : String(localized: "Claude просит разрешение")
+    }
 
     var text: String { summary.isEmpty ? tool : "\(tool): \(summary)" }
 }
