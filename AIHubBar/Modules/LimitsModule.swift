@@ -62,6 +62,7 @@ struct LimitSection: View {
     @Environment(WeeklySummarySender.self) private var weeklySummary
     @State private var thresholdsText = ""
     @State private var summarySent: Bool?
+    @State private var daySent: Bool?
 
     var body: some View {
         @Bindable var settings = settings
@@ -126,6 +127,30 @@ struct LimitSection: View {
                     }
                 }
                 Text("Отдельным сообщением в Telegram: расход недели по проектам, самые тяжёлые сессии, сколько раз упирался в лимит, итоги фоновых задач.")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            VStack(alignment: .leading, spacing: 4) {
+                Toggle("Итог дня в Telegram", systemImage: "calendar.day.timeline.left", isOn: $settings.daySummary)
+                HStack {
+                    if settings.daySummary {
+                        Picker("Час", selection: $settings.daySummaryHour) {
+                            ForEach(6...23, id: \.self) { Text(String(format: "%02d:00", $0)).tag($0) }
+                        }
+                        .frame(width: 140)
+                    }
+                    Button("Отправить сейчас") {
+                        Task { daySent = await weeklySummary.sendDay() }
+                    }
+                    .controlSize(.small)
+                    if let daySent {
+                        Text(daySent ? String(localized: "Отправлено") : String(localized: "Не отправилось"))
+                            .font(.caption)
+                            .foregroundStyle(daySent ? Color.secondary : Color.orange)
+                    }
+                }
+                Text("Раз в день: расход по проектам за сегодня, фоновые задачи с их итогом и лимиты всех сервисов. В день без работы не приходит. То же видно в окне «История расхода».")
                     .font(.caption)
                     .foregroundStyle(.secondary)
                     .fixedSize(horizontal: false, vertical: true)

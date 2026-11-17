@@ -8,6 +8,7 @@ import UniformTypeIdentifiers
 struct UsageHistoryWindow: View {
     @Environment(UsageStore.self) private var usage
     @Environment(AppSettings.self) private var settings
+    @Environment(WeeklySummarySender.self) private var summaries
     @Environment(\.openSettingsPage) private var openSettings
     @State private var period = 30
     @State private var exportError: String?
@@ -30,6 +31,7 @@ struct UsageHistoryWindow: View {
                 Button("Экспорт CSV…", action: export)
                     .disabled(usage.days.isEmpty)
             }
+            today
             if days.allSatisfy({ $0.tokens == 0 }) {
                 ContentUnavailableView(
                     usage.isBackfilling ? "Считаю по журналам Claude Code…" : "За этот период расхода нет",
@@ -50,6 +52,27 @@ struct UsageHistoryWindow: View {
         }
         .padding(20)
         .frame(minWidth: 620, minHeight: 420)
+    }
+
+    /// «Итог дня»: the same lines the daily Telegram message has.
+    @ViewBuilder private var today: some View {
+        let lines = DaySummary.lines(summaries.dayInput())
+        if !lines.isEmpty {
+            GroupBox("Сегодня") {
+                VStack(alignment: .leading, spacing: 3) {
+                    ForEach(Array(lines.enumerated()), id: \.offset) { _, line in
+                        Text(line.text)
+                            .font(line.isHeading ? .caption.weight(.semibold) : .callout)
+                            .foregroundStyle(line.isHeading ? .secondary : .primary)
+                            .padding(.top, line.isHeading ? 4 : 0)
+                            .lineLimit(1)
+                            .truncationMode(.tail)
+                    }
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(4)
+            }
+        }
     }
 
     private var summary: some View {

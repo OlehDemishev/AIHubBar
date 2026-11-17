@@ -11494,16 +11494,10 @@
     },
     "Skills и плагины": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Skills and Plugins"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Skills і плагіни"
+            "value": "المهارات والإضافات"
           }
         },
         "de": {
@@ -11512,10 +11506,10 @@
             "value": "Skills und Plug-ins"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Skills et plugins"
+            "value": "Skills and Plugins"
           }
         },
         "es": {
@@ -11524,22 +11518,22 @@
             "value": "Skills y plugins"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skills et plugins"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skill dan plugin"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Skill e plugin"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Skills e plugins"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Skille i wtyczki"
           }
         },
         "ja": {
@@ -11554,32 +11548,32 @@
             "value": "스킬과 플러그인"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "المهارات والإضافات"
+            "value": "Skille i wtyczki"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Skill dan plugin"
+            "value": "Skills e plugins"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skills і плагіни"
           }
         }
       }
     },
     "Skills лежат в ~/.claude/skills и ~/.codex/skills, плагины ставятся командой /plugin в Claude Code.": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Skills live in ~/.claude/skills and ~/.codex/skills; plugins are installed with /plugin in Claude Code."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Skills лежать у ~/.claude/skills і ~/.codex/skills, плагіни встановлюються командою /plugin у Claude Code."
+            "value": "توجد المهارات في ‎~/.claude/skills و ‎~/.codex/skills، وتُثبَّت الإضافات بالأمر ‎/plugin في Claude Code."
           }
         },
         "de": {
@@ -11588,10 +11582,10 @@
             "value": "Skills liegen in ~/.claude/skills und ~/.codex/skills; Plug-ins werden mit /plugin in Claude Code installiert."
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Les skills se trouvent dans ~/.claude/skills et ~/.codex/skills ; les plugins s’installent avec /plugin dans Claude Code."
+            "value": "Skills live in ~/.claude/skills and ~/.codex/skills; plugins are installed with /plugin in Claude Code."
           }
         },
         "es": {
@@ -11600,22 +11594,22 @@
             "value": "Los skills están en ~/.claude/skills y ~/.codex/skills; los plugins se instalan con /plugin en Claude Code."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les skills se trouvent dans ~/.claude/skills et ~/.codex/skills ; les plugins s’installent avec /plugin dans Claude Code."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skill ada di ~/.claude/skills dan ~/.codex/skills; plugin dipasang dengan /plugin di Claude Code."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Le skill stanno in ~/.claude/skills e ~/.codex/skills; i plugin si installano con /plugin in Claude Code."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Os skills ficam em ~/.claude/skills e ~/.codex/skills; os plugins são instalados com /plugin no Claude Code."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Skille leżą w ~/.claude/skills i ~/.codex/skills; wtyczki instaluje się poleceniem /plugin w Claude Code."
           }
         },
         "ja": {
@@ -11630,16 +11624,22 @@
             "value": "스킬은 ~/.claude/skills와 ~/.codex/skills에 있고, 플러그인은 Claude Code의 /plugin 명령으로 설치합니다."
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "توجد المهارات في ‎~/.claude/skills و ‎~/.codex/skills، وتُثبَّت الإضافات بالأمر ‎/plugin في Claude Code."
+            "value": "Skille leżą w ~/.claude/skills i ~/.codex/skills; wtyczki instaluje się poleceniem /plugin w Claude Code."
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Skill ada di ~/.claude/skills dan ~/.codex/skills; plugin dipasang dengan /plugin di Claude Code."
+            "value": "Os skills ficam em ~/.claude/skills e ~/.codex/skills; os plugins são instalados com /plugin no Claude Code."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skills лежать у ~/.claude/skills і ~/.codex/skills, плагіни встановлюються командою /plugin у Claude Code."
           }
         }
       }
@@ -25678,16 +25678,10 @@
     },
     "Выключенный skill переносится в папку рядом (skills.disabled) и возвращается как был. Hooks здесь только для просмотра. Изменения подхватит следующая сессия.": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "A skill that is switched off moves to a folder beside it (skills.disabled) and comes back as it was. Hooks are shown here only to look at. The next session picks up the changes."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Вимкнений skill переноситься в теку поруч (skills.disabled) і повертається таким, як був. Hooks тут лише для перегляду. Зміни підхопить наступна сесія."
+            "value": "تُنقل المهارة الموقوفة إلى مجلد مجاور (skills.disabled) وتعود كما كانت. الـ hooks هنا للعرض فقط. ستأخذ الجلسة التالية بالتغييرات."
           }
         },
         "de": {
@@ -25696,10 +25690,10 @@
             "value": "Ein ausgeschalteter Skill wandert in einen Ordner daneben (skills.disabled) und kommt unverändert zurück. Hooks sind hier nur zur Ansicht. Die nächste Sitzung übernimmt die Änderungen."
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Un skill désactivé est déplacé dans un dossier voisin (skills.disabled) et revient tel quel. Les hooks sont ici en lecture seule. La prochaine session prendra en compte les changements."
+            "value": "A skill that is switched off moves to a folder beside it (skills.disabled) and comes back as it was. Hooks are shown here only to look at. The next session picks up the changes."
           }
         },
         "es": {
@@ -25708,22 +25702,22 @@
             "value": "Un skill desactivado se mueve a una carpeta contigua (skills.disabled) y vuelve tal como estaba. Los hooks aquí son solo para consultar. La próxima sesión tomará los cambios."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un skill désactivé est déplacé dans un dossier voisin (skills.disabled) et revient tel quel. Les hooks sont ici en lecture seule. La prochaine session prendra en compte les changements."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skill yang dimatikan dipindahkan ke folder di sebelahnya (skills.disabled) dan kembali seperti semula. Hook di sini hanya untuk dilihat. Sesi berikutnya akan memakai perubahannya."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Una skill disattivata viene spostata in una cartella accanto (skills.disabled) e torna com’era. Gli hook qui sono in sola lettura. La prossima sessione recepirà le modifiche."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Um skill desativado vai para uma pasta ao lado (skills.disabled) e volta como estava. Os hooks aqui são só para consulta. A próxima sessão pega as mudanças."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Wyłączony skill trafia do folderu obok (skills.disabled) i wraca taki, jaki był. Hooki są tu tylko do podglądu. Zmiany uwzględni następna sesja."
           }
         },
         "ja": {
@@ -25738,16 +25732,22 @@
             "value": "끈 스킬은 옆 폴더(skills.disabled)로 옮겨지고, 다시 켜면 그대로 돌아옵니다. 훅은 여기서 보기만 할 수 있습니다. 변경 사항은 다음 세션부터 적용됩니다."
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "تُنقل المهارة الموقوفة إلى مجلد مجاور (skills.disabled) وتعود كما كانت. الـ hooks هنا للعرض فقط. ستأخذ الجلسة التالية بالتغييرات."
+            "value": "Wyłączony skill trafia do folderu obok (skills.disabled) i wraca taki, jaki był. Hooki są tu tylko do podglądu. Zmiany uwzględni następna sesja."
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Skill yang dimatikan dipindahkan ke folder di sebelahnya (skills.disabled) dan kembali seperti semula. Hook di sini hanya untuk dilihat. Sesi berikutnya akan memakai perubahannya."
+            "value": "Um skill desativado vai para uma pasta ao lado (skills.disabled) e volta como estava. Os hooks aqui são só para consulta. A próxima sessão pega as mudanças."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Вимкнений skill переноситься в теку поруч (skills.disabled) і повертається таким, як був. Hooks тут лише для перегляду. Зміни підхопить наступна сесія."
           }
         }
       }
@@ -41866,6 +41866,158 @@
           "stringUnit": {
             "state": "translated",
             "value": "Джерела"
+          }
+        }
+      }
+    },
+    "Итог дня": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Day Summary"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Підсумок дня"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tagesbilanz"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bilan du jour"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Resumen del día"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Riepilogo del giorno"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Resumo do dia"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Podsumowanie dnia"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今日のまとめ"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "오늘의 요약"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ملخص اليوم"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ringkasan hari ini"
+          }
+        }
+      }
+    },
+    "Итог дня в Telegram": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Day summary in Telegram"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Підсумок дня в Telegram"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tagesbilanz in Telegram"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bilan du jour dans Telegram"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Resumen del día en Telegram"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Riepilogo del giorno in Telegram"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Resumo do dia no Telegram"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Podsumowanie dnia w Telegramie"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今日のまとめを Telegram に送る"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "오늘의 요약을 Telegram으로"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ملخص اليوم في Telegram"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ringkasan hari ini di Telegram"
           }
         }
       }
@@ -58375,6 +58527,82 @@
         }
       }
     },
+    "Не отправилось": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Not sent"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Не надіслано"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nicht gesendet"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Non envoyé"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se envió"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Non inviato"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Não enviado"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nie wysłano"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "送信できませんでした"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "보내지 못했습니다"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لم يُرسل"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tidak terkirim"
+          }
+        }
+      }
+    },
     "Не отправилось: Telegram не настроен (модуль «Telegram») или нет связи": {
       "localizations": {
         "ar": {
@@ -62955,16 +63183,10 @@
     },
     "Ничего не установлено": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Nothing Installed"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Нічого не встановлено"
+            "value": "لا شيء مثبَّت"
           }
         },
         "de": {
@@ -62973,10 +63195,10 @@
             "value": "Nichts installiert"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Rien d’installé"
+            "value": "Nothing Installed"
           }
         },
         "es": {
@@ -62985,22 +63207,22 @@
             "value": "Nada instalado"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rien d’installé"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Belum ada yang terpasang"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Niente installato"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nada instalado"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nic nie zainstalowano"
           }
         },
         "ja": {
@@ -63015,16 +63237,22 @@
             "value": "설치된 항목 없음"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "لا شيء مثبَّت"
+            "value": "Nic nie zainstalowano"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Belum ada yang terpasang"
+            "value": "Nada instalado"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Нічого не встановлено"
           }
         }
       }
@@ -78625,16 +78853,10 @@
     },
     "Плагины — %@": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Plugins — %@"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Плагіни — %@"
+            "value": "الإضافات — %@"
           }
         },
         "de": {
@@ -78643,7 +78865,7 @@
             "value": "Plug-ins — %@"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
             "value": "Plugins — %@"
@@ -78655,22 +78877,22 @@
             "value": "Plugins — %@"
           }
         },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Plugin — %@"
-          }
-        },
-        "pt-BR": {
+        "fr": {
           "stringUnit": {
             "state": "translated",
             "value": "Plugins — %@"
           }
         },
-        "pl": {
+        "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "Wtyczki — %@"
+            "value": "Plugin — %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plugin — %@"
           }
         },
         "ja": {
@@ -78685,16 +78907,22 @@
             "value": "플러그인 — %@"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "الإضافات — %@"
+            "value": "Wtyczki — %@"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Plugin — %@"
+            "value": "Plugins — %@"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Плагіни — %@"
           }
         }
       }
@@ -90345,6 +90573,82 @@
         }
       }
     },
+    "Раз в день: расход по проектам за сегодня, фоновые задачи с их итогом и лимиты всех сервисов. В день без работы не приходит. То же видно в окне «История расхода».": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Once a day: today’s spend by project, background tasks with their outcome and every service’s limits. It does not come on a day with no work. The Usage History window shows the same."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Раз на день: витрата за проєктами за сьогодні, фонові завдання з їхнім підсумком і ліміти всіх сервісів. У день без роботи не надходить. Те саме видно у вікні «Історія витрат»."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Einmal täglich: der heutige Verbrauch nach Projekten, Hintergrundaufgaben mit ihrem Ergebnis und die Limits aller Dienste. An einem Tag ohne Arbeit kommt nichts. Dasselbe zeigt das Fenster „Verbrauchsverlauf“."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une fois par jour : la consommation du jour par projet, les tâches en arrière-plan avec leur résultat et les limites de tous les services. Rien n’arrive un jour sans travail. La fenêtre « Historique de consommation » montre la même chose."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Una vez al día: el gasto de hoy por proyecto, las tareas en segundo plano con su resultado y los límites de todos los servicios. No llega en un día sin trabajo. Lo mismo se ve en la ventana «Historial de consumo»."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Una volta al giorno: il consumo di oggi per progetto, le attività in background con il loro esito e i limiti di tutti i servizi. Non arriva in un giorno senza lavoro. Lo stesso si vede nella finestra «Cronologia dei consumi»."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uma vez por dia: o gasto de hoje por projeto, as tarefas em segundo plano com seu resultado e os limites de todos os serviços. Não chega em um dia sem trabalho. A janela “Histórico de consumo” mostra o mesmo."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Raz dziennie: dzisiejsze zużycie według projektów, zadania w tle z ich wynikiem i limity wszystkich usług. W dniu bez pracy nie przychodzi. To samo widać w oknie „Historia zużycia”."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 日 1 回：今日のプロジェクト別の使用量、バックグラウンドタスクとその結果、すべてのサービスの上限。作業のなかった日は届きません。同じ内容は「使用履歴」ウインドウでも見られます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "하루 한 번: 오늘의 프로젝트별 사용량, 백그라운드 작업과 그 결과, 모든 서비스의 한도. 작업이 없던 날에는 오지 않습니다. 같은 내용은 «사용 기록» 창에서도 볼 수 있습니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مرة في اليوم: استهلاك اليوم حسب المشاريع، والمهام الخلفية مع نتائجها، وحدود كل الخدمات. لا يصل في يوم بلا عمل. تعرض نافذة «سجل الاستهلاك» الشيء نفسه."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sekali sehari: pemakaian hari ini per proyek, tugas latar belakang beserta hasilnya, dan batas semua layanan. Tidak dikirim pada hari tanpa pekerjaan. Hal yang sama terlihat di jendela “Riwayat pemakaian”."
+          }
+        }
+      }
+    },
     "Развернуть": {
       "localizations": {
         "ar": {
@@ -98487,6 +98791,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Сесія, тиждень, прогноз, інші AI"
+          }
+        }
+      }
+    },
+    "Сессия: %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Session: %@"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Сесія: %@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sitzung: %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Session : %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sesión: %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sessione: %@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sessão: %@"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sesja: %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "セッション：%@"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "세션: %@"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الجلسة: %@"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sesi: %@"
           }
         }
       }
@@ -112471,6 +112851,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Вказати ціну…"
+          }
+        }
+      }
+    },
+    "Упирался в лимит: %lld": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limit hits: %lld"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Впирався в ліміт: %lld"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limit erreicht: %lld"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limite atteinte : %lld"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Veces en el límite: %lld"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limite raggiunto: %lld"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vezes no limite: %lld"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dojścia do limitu: %lld"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "上限到達：%lld 回"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "한도 도달: %lld회"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مرات بلوغ الحد: %lld"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mencapai batas: %lld kali"
           }
         }
       }
