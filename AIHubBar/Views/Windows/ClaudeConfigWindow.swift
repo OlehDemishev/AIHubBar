@@ -14,10 +14,16 @@ struct ClaudeConfigWindow: View {
             MCPServersView()
                 .tabItem { Label("MCP-серверы", systemImage: "puzzlepiece") }
                 .tag("mcp")
+            AgentExtrasView()
+                .tabItem { Label("Skills и плагины", systemImage: "wand.and.stars") }
+                .tag("extras")
         }
         .padding(8)
         .frame(minWidth: 760, minHeight: 480)
-        .onAppear { config.reload() }
+        .onAppear {
+            config.reload()
+            config.reloadExtras()
+        }
         .alert("Не получилось", isPresented: Binding(get: { config.lastError != nil }, set: { if !$0 { config.lastError = nil } })) {
             Button("OK") { config.lastError = nil }
         } message: {
@@ -202,6 +208,94 @@ private struct MCPServerRow: View {
             .toggleStyle(.switch)
             .disabled(config.busy.contains(server.id))
             .help(server.status == .off ? String(localized: "Включить «\(server.name)»") : String(localized: "Выключить «\(server.name)»"))
+        }
+        .padding(.vertical, 2)
+    }
+}
+
+// MARK: - Skills, plugins, hooks
+
+/// What else is added to Claude Code and Codex: skills and plugins with a switch, hooks to look at.
+private struct AgentExtrasView: View {
+    @Environment(ClaudeConfigStore.self) private var config
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            if config.skills.isEmpty, config.plugins.isEmpty, config.hooks.isEmpty {
+                ContentUnavailableView("Ничего не установлено", systemImage: "wand.and.stars",
+                                       description: Text("Skills лежат в ~/.claude/skills и ~/.codex/skills, плагины ставятся командой /plugin в Claude Code."))
+            } else {
+                List {
+                    ForEach([AgentKind.claudeCode, .codex], id: \.self) { agent in
+                        let skills = config.skills.filter { $0.agent == agent }
+                        if !skills.isEmpty {
+                            Section("Skills — \(agent.title)") {
+                                ForEach(skills) { skill in
+                                    ExtraRow(title: skill.name, detail: skill.description, note: nil, isOn: skill.isOn) { config.setEnabled(skill, $0) }
+                                }
+                            }
+                        }
+                    }
+                    if !config.plugins.isEmpty {
+                        Section("Плагины — \(AgentKind.claudeCode.title)") {
+                            ForEach(config.plugins) { plugin in
+                                ExtraRow(title: plugin.name, detail: plugin.marketplace, note: plugin.version.isEmpty ? nil : plugin.version,
+                                         isOn: plugin.isOn) { config.setEnabled(plugin, $0) }
+                            }
+                        }
+                    }
+                    if !config.hooks.isEmpty {
+                        Section("Hooks") {
+                            ForEach(config.hooks) { hook in
+                                VStack(alignment: .leading, spacing: 2) {
+                                    HStack(spacing: 6) {
+                                        Text(hook.event).fontWeight(.medium)
+                                        Text(hook.agent.title).font(.caption).foregroundStyle(.secondary)
+                                        if hook.isOurs { Text("AI Hub Bar").font(.caption).foregroundStyle(.tint) }
+                                    }
+                                    Text(hook.command).font(.caption.monospaced()).foregroundStyle(.secondary).lineLimit(1).truncationMode(.middle)
+                                }
+                                .padding(.vertical, 2)
+                            }
+                        }
+                    }
+                }
+            }
+            HStack {
+                Button("Обновить") { config.reloadExtras() }
+                Spacer()
+                Text("Выключенный skill переносится в папку рядом (skills.disabled) и возвращается как был. Hooks здесь только для просмотра. Изменения подхватит следующая сессия.")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+            .controlSize(.small)
+        }
+    }
+}
+
+private struct ExtraRow: View {
+    let title: String
+    let detail: String
+    let note: String?
+    let isOn: Bool
+    let set: (Bool) -> Void
+
+    var body: some View {
+        HStack(spacing: 10) {
+            VStack(alignment: .leading, spacing: 2) {
+                HStack(spacing: 6) {
+                    Text(title).fontWeight(.medium)
+                    if let note { Text(note).font(.caption).foregroundStyle(.secondary) }
+                }
+                if !detail.isEmpty {
+                    Text(detail).font(.caption).foregroundStyle(.secondary).lineLimit(2)
+                }
+            }
+            Spacer()
+            Toggle("", isOn: Binding(get: { isOn }, set: set))
+                .labelsHidden()
+                .toggleStyle(.switch)
+                .help(isOn ? String(localized: "Выключить «\(title)»") : String(localized: "Включить «\(title)»"))
         }
         .padding(.vertical, 2)
     }
