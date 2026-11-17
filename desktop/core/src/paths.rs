@@ -30,6 +30,11 @@ pub fn sessions_dir() -> PathBuf {
     data_dir().join("sessions")
 }
 
+/// Permission requests from the hook and the app's answers (`approvals.rs`); next to `sessions/`, as the hook expects.
+pub fn approvals_dir() -> PathBuf {
+    data_dir().join("approvals")
+}
+
 pub fn runs_dir() -> PathBuf {
     data_dir().join("runs")
 }

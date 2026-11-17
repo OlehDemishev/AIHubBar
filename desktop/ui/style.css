@@ -86,6 +86,11 @@ h2 { font-size: 12px; font-weight: 600; color: var(--secondary); margin: 0 0 8px
 .session .project { font-weight: 600; flex: none; }
 .session .detail { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; min-width: 0; }
 .session .progress { flex: none; font-variant-numeric: tabular-nums; }
+.request { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 0 0 6px 14px; }
+.request .text { flex: 1 1 100%; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.request button { padding: 3px 10px; font-size: 12px; }
+.request .allow { background: var(--accent); border-color: var(--accent); color: #fff; }
+.request .error { flex-basis: 100%; }
 [hidden] { display: none !important; }
 button:disabled { opacity: 0.45; cursor: default; }
 button:disabled:hover { border-color: var(--line); }

@@ -277,7 +277,8 @@ fn main() {
         .invoke_handler(tauri::generate_handler![
             ui_texts, set_language, dismiss_tray_hint, autostart_enabled, set_autostart, open_settings, hide_panel, quit,
             limits::limits_view, limits::refresh_limits,
-            sessions::sessions_view, sessions::hooks_state, sessions::install_hooks, sessions::uninstall_hooks
+            sessions::sessions_view, sessions::decide_request, sessions::hooks_state, sessions::install_hooks,
+            sessions::uninstall_hooks
         ])
         .setup(|app| {
             // Only the tray icon, no Dock icon, when trying it out on a Mac.
@@ -312,8 +313,10 @@ fn main() {
 
     app.run(|_app, event| {
         // Closing the settings window must not quit: the app lives in the tray until «Выйти».
-        if let RunEvent::ExitRequested { api, code: None, .. } = event {
-            api.prevent_exit();
+        match event {
+            RunEvent::ExitRequested { api, code: None, .. } => api.prevent_exit(),
+            RunEvent::Exit => sessions::stop(),
+            _ => {}
         }
     });
 }

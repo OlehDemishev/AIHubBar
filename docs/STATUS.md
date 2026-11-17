@@ -5,6 +5,7 @@
 **Updated:** 2026-11-17
 
 **Now:**
+- 2026-11-17: Windows — answers to permission requests from the panel and a process alive check (branch `feat/desktop-approvals`)
 - 2026-11-17: the Windows hook brought to the Mac's format 7 (#394, merged): Codex and Copilot sessions, clean prompts, answers to permission requests through `approvals/`
 - 2026-11-17: Windows resumed (#393, merged): SPEC-windows §11 maps every Mac feature to works / worse / won't work, `desktop/WINDOWS-DEV.md` sets up the laptop, `desktop/CLAUDE.md` holds the agent's rules, `.gitattributes` keeps LF, desktop CI runs on catalog changes again
 - 2026-11-17: Codex's summary shows file names instead of Markdown links with full paths (#391, merged); goes out with 0.12.0
@@ -43,7 +44,7 @@
 - check on the Air: the island at the real notch
 - promotion (docs/LAUNCH.md): r/ClaudeAI, the lists, r/macapps, Show HN, Product Hunt, Homebrew
 - content (docs/specs/SPEC-content.md, agreed): stage 2 «Версии», then batch tasks; better after the first feedback from people
-- Windows: on the laptop the live check of SPEC-windows §11.4, then stage 3 leftovers (the app's side of answering requests, «Показать», alive check, the hook for Codex and Copilot), then stage 4
+- Windows: on the laptop the live check of SPEC-windows §11.4 (with a real permission request answered from the panel), then stage 3 leftovers («Показать», buttons in the notification, the hook for Codex and Copilot), then stage 4
 
 **Needs Oleh:**
 - Windows laptop: install the tools and copy the two CLAUDE.md files as in `desktop/WINDOWS-DEV.md`, sign in to Claude Code there; choose the Windows signing (SPEC-windows §7)
@@ -79,6 +80,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-17 — Windows: answering permission requests from the panel (branch `feat/desktop-approvals`)
+
+Done: the app's side of the hook's `approvals/` protocol, as on the Mac. While it runs it touches `approvals/alive` every 3 s and removes it on quit, so a waiting hook gives up at once. A session that waits shows its newest open request (younger than 290 s, hook still running) under its row: «Bash: npm test …» with «Разрешить» / «Отклонить»; the answer goes to `<id>.decision`, an error leaves the request open. Each new request also gets a notification (no buttons in it yet). `core/process.rs` tells whether a process runs (`OpenProcess` + `GetExitCodeProcess` on Windows, `kill(pid, 0)` on Unix): requests of gone hooks are dropped, and a session whose Claude is gone shows as ended (a stage 3 leftover). `strings.py` writes LF through `open()`: `Path.write_text(newline=…)` from the previous PR needs Python 3.10 and failed with the Mac's 3.9.
+Checked: `cargo test --workspace` — 42 green (2 new in core: open requests, answers, `alive`; this process and a finished one). Live on the Mac with the dev build (its own folder `ClaudePult Desktop Dev`, the real app untouched): the real hook got a PermissionRequest and waited, the panel showed the request with both buttons, a posted click on «Разрешить» made the hook print `{"hookSpecificOutput":{"decision":{"behavior":"allow"},…}}`, exit 0, files removed; quitting the app made another waiting hook give up at once with nothing printed. The first layout put «Отклонить» on its own line in the narrow panel: the request text now has its own line, the buttons below it (seen). The notification itself was not seen: macOS asked whether «Терминал» may notify (the unbundled dev binary), the prompt was left for Oleh.
+Left: nothing seen on Windows yet; notification buttons; no switch to turn the answers off (on, as the Mac's default).
 
 ## 2026-11-17 — The Windows hook at the Mac's format 7 (branch `feat/desktop-hook-format7`)
 

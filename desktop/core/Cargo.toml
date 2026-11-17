@@ -14,3 +14,9 @@ sys-locale.workspace = true
 chrono.workspace = true
 httpdate = "1"
 ureq = "3"
+
+[target.'cfg(unix)'.dependencies]
+libc = "0.2"
+
+[target.'cfg(windows)'.dependencies]
+windows-sys = { version = "0.61", features = ["Win32_Foundation", "Win32_System_Threading"] }
