@@ -12,6 +12,8 @@ enum DaySummary {
         /// Background runs that started today, any state.
         var runs: [BackgroundRun]
         var others: [ServiceUsage] = []
+        /// Today's tokens at the person's own API price, dollars; nil without a price.
+        var cost: Double? = nil
     }
 
     struct Line: Equatable, Sendable {
@@ -32,6 +34,9 @@ enum DaySummary {
             input.weekPercent.map { String(localized: "Неделя: \(UsageText.percent($0))") },
         ].compactMap { $0 }
         if !limits.isEmpty { lines.append(Line(text: "Claude — " + limits.joined(separator: ", "))) }
+        if let cost = input.cost, cost >= 0.01 {
+            lines.append(Line(text: String(localized: "По цене API, примерно: \(cost.formatted(.currency(code: "USD")))")))
+        }
         if input.hits > 0 { lines.append(Line(text: String(localized: "Упирался в лимит: \(input.hits)"))) }
 
         if let breakdown = input.breakdown, !breakdown.projects.isEmpty {

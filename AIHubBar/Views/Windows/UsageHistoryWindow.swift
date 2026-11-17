@@ -86,7 +86,11 @@ struct UsageHistoryWindow: View {
                 figure("Самый активный день", busiest.date.formatted(.dateTime.day().month(.abbreviated)))
             }
             if let price {
-                figure("По цене API, примерно", used.map { $0.cost(price) }.reduce(0, +).formatted(.currency(code: "USD")))
+                let cost = used.map { $0.cost(price) }.reduce(0, +)
+                VStack(alignment: .leading, spacing: 2) {
+                    figure("По цене API, примерно", cost.formatted(.currency(code: "USD")))
+                    planValue(cost: cost)
+                }
             } else {
                 VStack(alignment: .leading, spacing: 2) {
                     Text("Стоимость").font(.caption).foregroundStyle(.secondary)
@@ -96,6 +100,25 @@ struct UsageHistoryWindow: View {
                 }
             }
             Spacer(minLength: 0)
+        }
+    }
+
+    /// «Окупается ли подписка»: the plan's price is asked here, the verdict is for a month of this pace.
+    @ViewBuilder private func planValue(cost: Double) -> some View {
+        @Bindable var settings = settings
+        HStack(spacing: 4) {
+            Text("Подписка, $ в месяц").font(.caption).foregroundStyle(.secondary)
+            TextField("0", value: $settings.claudePlanPrice, format: .number.precision(.fractionLength(0...2)))
+                .textFieldStyle(.roundedBorder)
+                .controlSize(.small)
+                .frame(width: 64)
+                .accessibilityLabel("Подписка, $ в месяц")
+        }
+        if let ratio = SubscriptionValue.ratio(monthlyCost: SubscriptionValue.monthly(cost: cost, periodDays: period), plan: settings.claudePlanPrice) {
+            Text(SubscriptionValue.verdict(ratio))
+                .font(.caption)
+                .foregroundStyle(ratio >= 1 ? Color.secondary : Color.orange)
+                .help("Расход за период по вашей цене API, приведённый к 30 дням, против цены подписки")
         }
     }
 

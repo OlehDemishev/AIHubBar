@@ -47,6 +47,29 @@ struct DaySummaryTests {
         #expect(DaySummary.isEmpty(.init(sessionPercent: 42, weekPercent: 18, breakdown: nil, hits: 0, runs: [])), "limits alone are not a day's work")
     }
 
+    @Test func theDayHasItsCostWhenThePriceIsKnown() {
+        var input = DaySummary.Input(sessionPercent: nil, weekPercent: nil, breakdown: nil, hits: 0, runs: [], cost: 4.2)
+        #expect(DaySummary.lines(input).count == 1)
+        input.cost = 0.001
+        #expect(DaySummary.lines(input).isEmpty, "a cent or less is not worth a line")
+        input.cost = nil
+        #expect(DaySummary.lines(input).isEmpty)
+    }
+
+    /// «Окупается ли подписка» (`SubscriptionValue`).
+    @Test func thePlanAgainstTheAPI() throws {
+        #expect(SubscriptionValue.monthly(cost: 70, periodDays: 7) == 300)
+        #expect(SubscriptionValue.monthly(cost: 70, periodDays: 0) == 0)
+        let pays = try #require(SubscriptionValue.ratio(monthlyCost: 300, plan: 100))
+        #expect(pays == 3)
+        #expect(SubscriptionValue.ratio(monthlyCost: 300, plan: 0) == nil, "the plan's price is not said")
+        #expect(SubscriptionValue.ratio(monthlyCost: 0, plan: 100) == nil)
+        #expect(SubscriptionValue.verdict(3) != SubscriptionValue.verdict(1.0 / 3), "which side is cheaper is said")
+        // A week of 12 M input and 1 M output tokens at 3 / 15 dollars per million.
+        let day = UsageDay(day: "2026-11-17", input: 12_000_000, output: 1_000_000)
+        #expect(day.cost(APIPrice(input: 3, output: 15)) == 51)
+    }
+
     @Test func sentOnceADayAtItsHour() {
         #expect(DaySummary.due(hour: 21, now: date(17, 22), calendar: calendar) == date(17, 21))
         #expect(DaySummary.due(hour: 21, now: date(17, 20), calendar: calendar) == date(16, 21), "before the hour: yesterday's")

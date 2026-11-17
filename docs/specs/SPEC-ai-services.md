@@ -18,6 +18,7 @@ forecast, week strip, credits, per-project tokens and context.
 | Weekly summary | Telegram: week spend by project, heavy sessions, limit hits | `WeeklySummary` |
 | Day summary | «Сегодня» at the top of «История расхода» and, once a day at a chosen hour, a Telegram message (off by default, not sent on a day with no spend and no runs): limits now, today's tokens by project, the day's background runs with their state and agent, limit hits, the other services' limits | `DaySummary`, `WeeklySummarySender.sendDay` |
 | Tokens per project | from `~/.claude/projects/**/*.jsonl` | `TokenUsage` |
+| Spend in money | «История расхода»: the period's tokens at the person's own Anthropic price (prices are not shipped), and since 2026-11-17 the plan's monthly price asked beside it with a verdict — the spend brought to 30 days against the plan («Подписка выгоднее API (×3,2)» or the reverse); «Сегодня» and the day summary carry the day's cost | `UsageDay.cost`, `SubscriptionValue`, `UsageHistoryWindow` |
 | Context | how full each session's context is | `ContextUsage` |
 | Sessions | live list of sessions (Terminal, Claude app, background) via hooks; current action; approve / deny | `HookController`, `SessionStore`, `Approvals` |
 | Launch | Terminal / background (`claude -p`), worktrees, night queue, saved prompts | `ClaudeLauncher`, `LaunchController`, `NightQueue` |

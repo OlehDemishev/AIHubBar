@@ -5157,6 +5157,7 @@
       }
     },
     "/": {},
+    "0": {},
     "1 000 — аккаунт Google": {
       "localizations": {
         "ar": {
@@ -7587,6 +7588,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "AI-кредити за тиждень: %@"
+          }
+        }
+      }
+    },
+    "API был бы дешевле подписки (×%@)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The API would be cheaper than the plan (×%@)"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "API був би дешевший за підписку (×%@)"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die API wäre günstiger als das Abo (×%@)"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L’API coûterait moins que l’abonnement (×%@)"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La API saldría más barata que la suscripción (×%@)"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L’API costerebbe meno dell’abbonamento (×%@)"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A API sairia mais barata que a assinatura (×%@)"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "API byłoby tańsze niż subskrypcja (×%@)"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "API のほうがサブスクリプションより安くなります（×%@）"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "API가 구독보다 저렴합니다(×%@)"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "كانت الـ API ستكون أرخص من الاشتراك (×%@)"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "API akan lebih murah daripada langganan (×%@)"
           }
         }
       }
@@ -41872,16 +41949,10 @@
     },
     "Итог дня": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Day Summary"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Підсумок дня"
+            "value": "ملخص اليوم"
           }
         },
         "de": {
@@ -41890,10 +41961,10 @@
             "value": "Tagesbilanz"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Bilan du jour"
+            "value": "Day Summary"
           }
         },
         "es": {
@@ -41902,22 +41973,22 @@
             "value": "Resumen del día"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bilan du jour"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ringkasan hari ini"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Riepilogo del giorno"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Resumo do dia"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Podsumowanie dnia"
           }
         },
         "ja": {
@@ -41932,32 +42003,32 @@
             "value": "오늘의 요약"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "ملخص اليوم"
+            "value": "Podsumowanie dnia"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ringkasan hari ini"
+            "value": "Resumo do dia"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Підсумок дня"
           }
         }
       }
     },
     "Итог дня в Telegram": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Day summary in Telegram"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Підсумок дня в Telegram"
+            "value": "ملخص اليوم في Telegram"
           }
         },
         "de": {
@@ -41966,10 +42037,10 @@
             "value": "Tagesbilanz in Telegram"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Bilan du jour dans Telegram"
+            "value": "Day summary in Telegram"
           }
         },
         "es": {
@@ -41978,22 +42049,22 @@
             "value": "Resumen del día en Telegram"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bilan du jour dans Telegram"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ringkasan hari ini di Telegram"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Riepilogo del giorno in Telegram"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Resumo do dia no Telegram"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Podsumowanie dnia w Telegramie"
           }
         },
         "ja": {
@@ -42008,16 +42079,22 @@
             "value": "오늘의 요약을 Telegram으로"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "ملخص اليوم في Telegram"
+            "value": "Podsumowanie dnia w Telegramie"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ringkasan hari ini di Telegram"
+            "value": "Resumo do dia no Telegram"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Підсумок дня в Telegram"
           }
         }
       }
@@ -58529,16 +58606,10 @@
     },
     "Не отправилось": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Not sent"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Не надіслано"
+            "value": "لم يُرسل"
           }
         },
         "de": {
@@ -58547,10 +58618,10 @@
             "value": "Nicht gesendet"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Non envoyé"
+            "value": "Not sent"
           }
         },
         "es": {
@@ -58559,22 +58630,22 @@
             "value": "No se envió"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Non envoyé"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tidak terkirim"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Non inviato"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Não enviado"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nie wysłano"
           }
         },
         "ja": {
@@ -58589,16 +58660,22 @@
             "value": "보내지 못했습니다"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "لم يُرسل"
+            "value": "Nie wysłano"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tidak terkirim"
+            "value": "Não enviado"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Не надіслано"
           }
         }
       }
@@ -79839,6 +79916,82 @@
         }
       }
     },
+    "По цене API, примерно: %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "At the API price, roughly: %@"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "За ціною API, приблизно: %@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zum API-Preis, ungefähr: %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Au prix de l’API, environ : %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Al precio de la API, aproximadamente: %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Al prezzo dell’API, circa: %@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pelo preço da API, aproximadamente: %@"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Po cenie API, w przybliżeniu: %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "API 価格で概算：%@"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "API 가격으로 대략: %@"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بسعر الـ API تقريبًا: %@"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dengan harga API, kira-kira: %@"
+          }
+        }
+      }
+    },
     "Повторить": {
       "localizations": {
         "ar": {
@@ -80215,6 +80368,158 @@
           "stringUnit": {
             "state": "translated",
             "value": "Під’єднати інший сервіс…"
+          }
+        }
+      }
+    },
+    "Подписка выгоднее API (×%@)": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The plan beats the API (×%@)"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Підписка вигідніша за API (×%@)"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Das Abo ist günstiger als die API (×%@)"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L’abonnement est plus avantageux que l’API (×%@)"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La suscripción sale mejor que la API (×%@)"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L’abbonamento conviene più dell’API (×%@)"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A assinatura compensa mais que a API (×%@)"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Subskrypcja opłaca się bardziej niż API (×%@)"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "サブスクリプションのほうが API よりお得です（×%@）"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "구독이 API보다 유리합니다(×%@)"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الاشتراك أوفر من الـ API (×%@)"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Langganan lebih hemat daripada API (×%@)"
+          }
+        }
+      }
+    },
+    "Подписка, $ в месяц": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plan, $ a month"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Підписка, $ на місяць"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abo, $ pro Monat"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abonnement, $ par mois"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suscripción, $ al mes"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abbonamento, $ al mese"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Assinatura, $ por mês"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Subskrypcja, $ miesięcznie"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "サブスクリプション（$／月）"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "구독, 월 $"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الاشتراك، $ شهريًا"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Langganan, $ per bulan"
           }
         }
       }
@@ -90575,16 +90880,10 @@
     },
     "Раз в день: расход по проектам за сегодня, фоновые задачи с их итогом и лимиты всех сервисов. В день без работы не приходит. То же видно в окне «История расхода».": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Once a day: today’s spend by project, background tasks with their outcome and every service’s limits. It does not come on a day with no work. The Usage History window shows the same."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Раз на день: витрата за проєктами за сьогодні, фонові завдання з їхнім підсумком і ліміти всіх сервісів. У день без роботи не надходить. Те саме видно у вікні «Історія витрат»."
+            "value": "مرة في اليوم: استهلاك اليوم حسب المشاريع، والمهام الخلفية مع نتائجها، وحدود كل الخدمات. لا يصل في يوم بلا عمل. تعرض نافذة «سجل الاستهلاك» الشيء نفسه."
           }
         },
         "de": {
@@ -90593,10 +90892,10 @@
             "value": "Einmal täglich: der heutige Verbrauch nach Projekten, Hintergrundaufgaben mit ihrem Ergebnis und die Limits aller Dienste. An einem Tag ohne Arbeit kommt nichts. Dasselbe zeigt das Fenster „Verbrauchsverlauf“."
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Une fois par jour : la consommation du jour par projet, les tâches en arrière-plan avec leur résultat et les limites de tous les services. Rien n’arrive un jour sans travail. La fenêtre « Historique de consommation » montre la même chose."
+            "value": "Once a day: today’s spend by project, background tasks with their outcome and every service’s limits. It does not come on a day with no work. The Usage History window shows the same."
           }
         },
         "es": {
@@ -90605,22 +90904,22 @@
             "value": "Una vez al día: el gasto de hoy por proyecto, las tareas en segundo plano con su resultado y los límites de todos los servicios. No llega en un día sin trabajo. Lo mismo se ve en la ventana «Historial de consumo»."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une fois par jour : la consommation du jour par projet, les tâches en arrière-plan avec leur résultat et les limites de tous les services. Rien n’arrive un jour sans travail. La fenêtre « Historique de consommation » montre la même chose."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sekali sehari: pemakaian hari ini per proyek, tugas latar belakang beserta hasilnya, dan batas semua layanan. Tidak dikirim pada hari tanpa pekerjaan. Hal yang sama terlihat di jendela “Riwayat pemakaian”."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Una volta al giorno: il consumo di oggi per progetto, le attività in background con il loro esito e i limiti di tutti i servizi. Non arriva in un giorno senza lavoro. Lo stesso si vede nella finestra «Cronologia dei consumi»."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Uma vez por dia: o gasto de hoje por projeto, as tarefas em segundo plano com seu resultado e os limites de todos os serviços. Não chega em um dia sem trabalho. A janela “Histórico de consumo” mostra o mesmo."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Raz dziennie: dzisiejsze zużycie według projektów, zadania w tle z ich wynikiem i limity wszystkich usług. W dniu bez pracy nie przychodzi. To samo widać w oknie „Historia zużycia”."
           }
         },
         "ja": {
@@ -90635,16 +90934,22 @@
             "value": "하루 한 번: 오늘의 프로젝트별 사용량, 백그라운드 작업과 그 결과, 모든 서비스의 한도. 작업이 없던 날에는 오지 않습니다. 같은 내용은 «사용 기록» 창에서도 볼 수 있습니다."
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "مرة في اليوم: استهلاك اليوم حسب المشاريع، والمهام الخلفية مع نتائجها، وحدود كل الخدمات. لا يصل في يوم بلا عمل. تعرض نافذة «سجل الاستهلاك» الشيء نفسه."
+            "value": "Raz dziennie: dzisiejsze zużycie według projektów, zadania w tle z ich wynikiem i limity wszystkich usług. W dniu bez pracy nie przychodzi. To samo widać w oknie „Historia zużycia”."
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sekali sehari: pemakaian hari ini per proyek, tugas latar belakang beserta hasilnya, dan batas semua layanan. Tidak dikirim pada hari tanpa pekerjaan. Hal yang sama terlihat di jendela “Riwayat pemakaian”."
+            "value": "Uma vez por dia: o gasto de hoje por projeto, as tarefas em segundo plano com seu resultado e os limites de todos os serviços. Não chega em um dia sem trabalho. A janela “Histórico de consumo” mostra o mesmo."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Раз на день: витрата за проєктами за сьогодні, фонові завдання з їхнім підсумком і ліміти всіх сервісів. У день без роботи не надходить. Те саме видно у вікні «Історія витрат»."
           }
         }
       }
@@ -92013,6 +92318,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Розсилка №12"
+          }
+        }
+      }
+    },
+    "Расход за период по вашей цене API, приведённый к 30 дням, против цены подписки": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The period’s spend at your API price, brought to 30 days, against the plan’s price"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Витрата за період за вашою ціною API, приведена до 30 днів, проти ціни підписки"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der Verbrauch im Zeitraum zu Ihrem API-Preis, auf 30 Tage umgerechnet, gegen den Abopreis"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La consommation de la période à votre prix API, ramenée à 30 jours, face au prix de l’abonnement"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El gasto del periodo a tu precio de API, llevado a 30 días, frente al precio de la suscripción"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il consumo del periodo al tuo prezzo API, riportato a 30 giorni, rispetto al prezzo dell’abbonamento"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O gasto do período pelo seu preço de API, ajustado para 30 dias, contra o preço da assinatura"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zużycie z okresu po Twojej cenie API, przeliczone na 30 dni, wobec ceny subskrypcji"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "期間の使用量をあなたの API 価格で計算し 30 日分に換算して、サブスクリプション料金と比べます"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "기간 사용량을 내 API 가격으로 계산해 30일로 환산한 뒤 구독 가격과 비교합니다"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "استهلاك الفترة بسعر الـ API لديك، محسوبًا على 30 يومًا، مقابل سعر الاشتراك"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pemakaian periode ini dengan harga API Anda, disetarakan ke 30 hari, dibandingkan harga langganan"
           }
         }
       }
@@ -98797,16 +99178,10 @@
     },
     "Сессия: %@": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Session: %@"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Сесія: %@"
+            "value": "الجلسة: %@"
           }
         },
         "de": {
@@ -98815,10 +99190,10 @@
             "value": "Sitzung: %@"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Session : %@"
+            "value": "Session: %@"
           }
         },
         "es": {
@@ -98827,22 +99202,22 @@
             "value": "Sesión: %@"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Session : %@"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sesi: %@"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Sessione: %@"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sessão: %@"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sesja: %@"
           }
         },
         "ja": {
@@ -98857,16 +99232,22 @@
             "value": "세션: %@"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "الجلسة: %@"
+            "value": "Sesja: %@"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sesi: %@"
+            "value": "Sessão: %@"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Сесія: %@"
           }
         }
       }
@@ -112857,16 +113238,10 @@
     },
     "Упирался в лимит: %lld": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Limit hits: %lld"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Впирався в ліміт: %lld"
+            "value": "مرات بلوغ الحد: %lld"
           }
         },
         "de": {
@@ -112875,10 +113250,10 @@
             "value": "Limit erreicht: %lld"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Limite atteinte : %lld"
+            "value": "Limit hits: %lld"
           }
         },
         "es": {
@@ -112887,22 +113262,22 @@
             "value": "Veces en el límite: %lld"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limite atteinte : %lld"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mencapai batas: %lld kali"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Limite raggiunto: %lld"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Vezes no limite: %lld"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dojścia do limitu: %lld"
           }
         },
         "ja": {
@@ -112917,16 +113292,22 @@
             "value": "한도 도달: %lld회"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "مرات بلوغ الحد: %lld"
+            "value": "Dojścia do limitu: %lld"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Mencapai batas: %lld kali"
+            "value": "Vezes no limite: %lld"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Впирався в ліміт: %lld"
           }
         }
       }
