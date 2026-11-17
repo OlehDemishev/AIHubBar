@@ -95,6 +95,11 @@ pub fn removed(settings: &Value) -> Value {
 
 /// Previous entries of ours dropped, then one group per event appended.
 pub fn merged(settings: &Value, command: &HookCommand) -> Value {
+    merged_entries(settings, &EVENTS, |event| command.entry(event))
+}
+
+/// The same for any file of Claude Code's shape (Codex's `hooks.json` too): `entry` gives our entry for an event.
+pub fn merged_entries(settings: &Value, events: &[&str], entry: impl Fn(&str) -> Value) -> Value {
     let mut settings = removed(settings);
     if !settings.is_object() {
         settings = Value::Object(Map::new());
@@ -104,8 +109,8 @@ pub fn merged(settings: &Value, command: &HookCommand) -> Value {
         *hooks = json!({});
     }
     let hooks = hooks.as_object_mut().unwrap();
-    for event in EVENTS {
-        let mut group = json!({"hooks": [command.entry(event)]});
+    for &event in events {
+        let mut group = json!({"hooks": [entry(event)]});
         if event == "PostToolUse" {
             group["matcher"] = json!("*");
         }
@@ -119,10 +124,15 @@ pub fn merged(settings: &Value, command: &HookCommand) -> Value {
 }
 
 pub fn status(settings: &Value, command: &HookCommand) -> HookStatus {
+    status_entries(settings, &EVENTS, |event| command.entry(event))
+}
+
+/// Installed when every event has exactly our expected entry; outdated when some are missing or differ.
+pub fn status_entries(settings: &Value, events: &[&str], entry: impl Fn(&str) -> Value) -> HookStatus {
     let hooks = settings.get("hooks");
     let mut found = 0;
     let mut current = 0;
-    for event in EVENTS {
+    for &event in events {
         let ours: Vec<&Value> = hooks
             .and_then(|h| h.get(event))
             .and_then(Value::as_array)
@@ -134,13 +144,13 @@ pub fn status(settings: &Value, command: &HookCommand) -> HookStatus {
         if !ours.is_empty() {
             found += 1;
         }
-        if ours.len() == 1 && *ours[0] == command.entry(event) {
+        if ours.len() == 1 && *ours[0] == entry(event) {
             current += 1;
         }
     }
     match (found, current) {
         (0, _) => HookStatus::NotInstalled,
-        (_, c) if c == EVENTS.len() => HookStatus::Installed,
+        (_, c) if c == events.len() => HookStatus::Installed,
         _ => HookStatus::Outdated,
     }
 }
@@ -165,22 +175,23 @@ pub fn read_settings(path: &Path) -> io::Result<Option<Value>> {
 }
 
 /// `settings.json.claudepult-backup-<stamp>`, never over an earlier one.
-fn backup(path: &Path, stamp: &str) -> io::Result<Option<PathBuf>> {
+pub(crate) fn backup(path: &Path, stamp: &str) -> io::Result<Option<PathBuf>> {
     if !path.exists() {
         return Ok(None);
     }
     let folder = path.parent().unwrap_or(Path::new("."));
-    let mut target = folder.join(format!("settings.json.claudepult-backup-{stamp}"));
+    let name = path.file_name().map(|n| n.to_string_lossy().into_owned()).unwrap_or_else(|| "settings.json".into());
+    let mut target = folder.join(format!("{name}.claudepult-backup-{stamp}"));
     let mut counter = 2;
     while target.exists() {
-        target = folder.join(format!("settings.json.claudepult-backup-{stamp}-{counter}"));
+        target = folder.join(format!("{name}.claudepult-backup-{stamp}-{counter}"));
         counter += 1;
     }
     std::fs::copy(path, &target)?;
     Ok(Some(target))
 }
 
-fn write(path: &Path, settings: &Value) -> io::Result<()> {
+pub(crate) fn write(path: &Path, settings: &Value) -> io::Result<()> {
     if let Some(dir) = path.parent() {
         std::fs::create_dir_all(dir)?;
     }

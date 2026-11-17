@@ -5,6 +5,7 @@
 use crate::limits::Limits;
 use crate::strings;
 use chrono::{Local, Utc};
+use claudepult_core::agent_hooks;
 use claudepult_core::approvals::{self, Request};
 use claudepult_core::hooks::{self, HookCommand, HookStatus};
 use claudepult_core::sessions::{self, Session, State};
@@ -168,9 +169,12 @@ fn hook_program() -> Option<PathBuf> {
     Some(std::env::current_exe().ok()?.with_file_name(name))
 }
 
+fn projects_dir() -> PathBuf {
+    dirs_home().join("Projects")
+}
+
 fn command() -> Option<HookCommand> {
-    let projects = dirs_home().join("Projects");
-    Some(HookCommand::new(&hook_program()?, &projects))
+    Some(HookCommand::new(&hook_program()?, &projects_dir()))
 }
 
 fn dirs_home() -> PathBuf {
@@ -211,22 +215,29 @@ pub struct HooksView {
     may_install: bool,
     settings_path: String,
     error: Option<String>,
+    /// What to do next, e.g. trusting the hooks in Codex.
+    note: Option<String>,
 }
 
-fn hooks_view(app: &AppHandle, error: Option<String>) -> HooksView {
+fn status_title(app: &AppHandle, status: HookStatus) -> String {
     let texts = strings(app);
-    let status = hook_status();
-    let title = match status {
+    match status {
         HookStatus::Installed => texts.t("установлены"),
         HookStatus::NotInstalled => texts.t("не установлены"),
         HookStatus::Outdated => texts.t("нужно обновить"),
-    };
+    }
+    .to_owned()
+}
+
+fn hooks_view(app: &AppHandle, error: Option<String>) -> HooksView {
+    let status = hook_status();
     HooksView {
         status: status_key(status),
-        title: title.to_owned(),
+        title: status_title(app, status),
         may_install: may_install(),
         settings_path: settings_path().to_string_lossy().into_owned(),
         error,
+        note: None,
     }
 }
 
@@ -252,4 +263,100 @@ pub fn uninstall_hooks(app: AppHandle) -> HooksView {
     let result = if may_install() { hooks::uninstall(&settings_path(), &stamp).map(|_| ()) } else { Err(std::io::Error::other("not here")) };
     let _ = app.emit("sessions-changed", ());
     hooks_view(&app, result.err().map(|e| e.to_string()))
+}
+
+// MARK: - Codex and Copilot
+
+#[derive(Clone, Copy, PartialEq)]
+enum Agent {
+    Codex,
+    Copilot,
+}
+
+impl Agent {
+    fn parse(name: &str) -> Result<Agent, String> {
+        match name {
+            "codex" => Ok(Agent::Codex),
+            "copilot" => Ok(Agent::Copilot),
+            _ => Err(format!("unknown agent {name}")),
+        }
+    }
+
+    fn path(self) -> PathBuf {
+        match self {
+            Agent::Codex => paths::codex_dir().join("hooks.json"),
+            Agent::Copilot => paths::copilot_dir().join("hooks").join("aihubbar.json"),
+        }
+    }
+
+    /// On a Mac the real Mac app owns these files: only another `CODEX_HOME` / `COPILOT_HOME` (as for Claude).
+    fn may_install(self) -> bool {
+        !cfg!(target_os = "macos")
+            || std::env::var_os(match self {
+                Agent::Codex => "CODEX_HOME",
+                Agent::Copilot => "COPILOT_HOME",
+            })
+            .is_some()
+    }
+
+    fn status(self) -> HookStatus {
+        let Some(program) = hook_program() else { return HookStatus::NotInstalled };
+        match self {
+            Agent::Codex => agent_hooks::codex_status(&self.path(), &program, &projects_dir()),
+            Agent::Copilot => agent_hooks::copilot_status(&self.path(), &program, &projects_dir()),
+        }
+    }
+}
+
+fn agent_view(app: &AppHandle, agent: Agent, error: Option<String>, note: Option<String>) -> HooksView {
+    let status = agent.status();
+    HooksView {
+        status: status_key(status),
+        title: status_title(app, status),
+        may_install: agent.may_install(),
+        settings_path: agent.path().to_string_lossy().into_owned(),
+        error,
+        note,
+    }
+}
+
+#[tauri::command]
+pub fn agent_hooks_state(app: AppHandle, agent: String) -> Result<HooksView, String> {
+    let agent = Agent::parse(&agent)?;
+    // Until trusted in `/hooks`, Codex skips them: say so while they are there.
+    let note = (agent == Agent::Codex && agent.status() == HookStatus::Installed)
+        .then(|| strings(&app).t("Готово. Теперь в codex введите /hooks и доверьте hooks AI Hub Bar — до этого Codex их пропускает.").to_owned());
+    Ok(agent_view(&app, agent, None, note))
+}
+
+#[tauri::command]
+pub fn install_agent_hooks(app: AppHandle, agent: String) -> Result<HooksView, String> {
+    let agent = Agent::parse(&agent)?;
+    let stamp = Local::now().format("%Y%m%d-%H%M%S").to_string();
+    let result = match (agent.may_install(), hook_program()) {
+        (true, Some(program)) => match agent {
+            Agent::Codex => agent_hooks::codex_install(&agent.path(), &program, &projects_dir(), &stamp).map(|_| ()),
+            Agent::Copilot => agent_hooks::copilot_install(&agent.path(), &program, &projects_dir()),
+        },
+        _ => Err(std::io::Error::other("not here")),
+    };
+    let error = result.err().map(|e| e.to_string());
+    let note = (agent == Agent::Codex && error.is_none())
+        .then(|| strings(&app).t("Готово. Теперь в codex введите /hooks и доверьте hooks AI Hub Bar — до этого Codex их пропускает.").to_owned());
+    Ok(agent_view(&app, agent, error, note))
+}
+
+#[tauri::command]
+pub fn uninstall_agent_hooks(app: AppHandle, agent: String) -> Result<HooksView, String> {
+    let agent = Agent::parse(&agent)?;
+    let stamp = Local::now().format("%Y%m%d-%H%M%S").to_string();
+    let result = if !agent.may_install() {
+        Err(std::io::Error::other("not here"))
+    } else {
+        match agent {
+            Agent::Codex => agent_hooks::codex_uninstall(&agent.path(), &stamp).map(|_| ()),
+            Agent::Copilot => agent_hooks::copilot_uninstall(&agent.path()),
+        }
+    };
+    Ok(agent_view(&app, agent, result.err().map(|e| e.to_string()), None))
 }

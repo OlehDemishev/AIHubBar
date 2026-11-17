@@ -269,3 +269,53 @@ fn no_wait_without_the_app() {
     let output = hook.send(json!({"hook_event_name": "PermissionRequest", "tool_name": "Bash"}));
     assert!(output.stdout.is_empty() && hook.requests().is_empty());
 }
+
+/// The lines AI Hub Bar writes for Codex and Copilot, run the way they run them on Windows: Codex as
+/// `%COMSPEC% /C "<commandWindows>"`, Copilot through PowerShell. The hook sits in a folder with spaces, Cyrillic and
+/// an apostrophe, as `C:\Users\Олег O'Neil\…` can be.
+#[cfg(windows)]
+#[test]
+fn agent_lines_on_windows() {
+    use claudepult_core::agent_hooks;
+    use std::os::windows::process::CommandExt;
+    use std::path::Path;
+
+    let hook = Hook::new("windows-lines");
+    let folder = hook.dir.join("AI Hub Bar Олег O'Neil");
+    std::fs::create_dir_all(&folder).unwrap();
+    let program = folder.join("claudepult-hook.exe");
+    std::fs::copy(env!("CARGO_BIN_EXE_claudepult-hook"), &program).unwrap();
+    let projects = Path::new(r"C:\Users\Олег O'Neil\Projects");
+    let sessions = hook.dir.join("sessions");
+
+    let feed = |mut command: Command, session: &str| {
+        let mut child = command.stdin(Stdio::piped()).stdout(Stdio::piped()).stderr(Stdio::piped()).spawn().unwrap();
+        let event = json!({"session_id": session, "hook_event_name": "UserPromptSubmit", "cwd": r"C:\Users\Олег O'Neil\Projects\Ambo", "prompt": "Проверка"});
+        child.stdin.take().unwrap().write_all(event.to_string().as_bytes()).unwrap();
+        let output = child.wait_with_output().unwrap();
+        assert!(output.status.success(), "{}", String::from_utf8_lossy(&output.stderr));
+        let record: Value = serde_json::from_str(&std::fs::read_to_string(sessions.join(format!("{session}.json"))).unwrap()).unwrap();
+        record
+    };
+
+    let codex = agent_hooks::codex_entry(&program, projects, "UserPromptSubmit");
+    let line = format!("{} --sessions-dir {}", codex["commandWindows"].as_str().unwrap(), agent_hooks::cmd_quote(&sessions.to_string_lossy()));
+    let mut command = Command::new(std::env::var("COMSPEC").unwrap_or_else(|_| "cmd.exe".into()));
+    command.arg("/C").raw_arg(format!("\"{line}\""));
+    let record = feed(command, "w-codex");
+    assert_eq!(record["agent"], "codex");
+    assert_eq!(record["project"], "Ambo");
+    assert_eq!(record["first_prompt"], "Проверка");
+
+    let copilot = agent_hooks::copilot_configuration(&program, projects);
+    let line = format!(
+        "{} --sessions-dir {}",
+        copilot["hooks"]["UserPromptSubmit"][0]["powershell"].as_str().unwrap(),
+        agent_hooks::ps_quote(&sessions.to_string_lossy())
+    );
+    let mut command = Command::new("powershell");
+    command.args(["-NoProfile", "-NonInteractive", "-Command", &line]);
+    let record = feed(command, "w-copilot");
+    assert_eq!(record["agent"], "copilot");
+    assert_eq!(record["project"], "Ambo");
+}

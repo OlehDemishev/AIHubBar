@@ -51,6 +51,18 @@ pub fn claude_dir_from(config_dir: Option<&str>, home: &Path) -> PathBuf {
     }
 }
 
+/// Codex's folder: `CODEX_HOME` when set, else `~/.codex`.
+pub fn codex_dir() -> PathBuf {
+    let home = dirs::home_dir().unwrap_or_else(std::env::temp_dir);
+    std::env::var("CODEX_HOME").ok().filter(|v| !v.trim().is_empty()).map(PathBuf::from).unwrap_or_else(|| home.join(".codex"))
+}
+
+/// Copilot CLI's folder: `COPILOT_HOME` when set, else `~/.copilot`.
+pub fn copilot_dir() -> PathBuf {
+    let home = dirs::home_dir().unwrap_or_else(std::env::temp_dir);
+    std::env::var("COPILOT_HOME").ok().filter(|v| !v.trim().is_empty()).map(PathBuf::from).unwrap_or_else(|| home.join(".copilot"))
+}
+
 pub fn claude_dir() -> PathBuf {
     let home = dirs::home_dir().unwrap_or_else(std::env::temp_dir);
     claude_dir_from(std::env::var("CLAUDE_CONFIG_DIR").ok().as_deref(), &home)
