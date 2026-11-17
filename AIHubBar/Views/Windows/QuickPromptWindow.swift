@@ -71,6 +71,8 @@ struct QuickPromptWindow: View {
                 .fixedSize()
                 .help(agent == .claudeCode
                     ? String(localized: "Фон — claude -p без окна, итог уведомлением; Терминал — новое окно, можно отвечать Claude")
+                    : agent == .codex
+                    ? String(localized: "Фон — codex exec без окна, пишет только в папке проекта, итог уведомлением; Терминал — задача в буфере обмена, вставьте ⌘V")
                     : String(localized: "Другие агенты — только в Терминале: задача в буфере обмена, вставьте ⌘V"))
                 if isLaunching { ProgressView().controlSize(.small) }
                 Spacer()
@@ -153,7 +155,7 @@ struct QuickPromptWindow: View {
         guard canSend, let project else { return }
         let task = text
         quickPrompt.send(task, project: project, agent: agent, mode: mode)
-        guard agent == .claudeCode else { return }
+        guard agent == .claudeCode || (agent == .codex && mode == .background) else { return }
         sentPath = project.path
         if !isLaunching { closeIfLaunched() }
     }

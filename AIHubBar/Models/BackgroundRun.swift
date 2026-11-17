@@ -29,6 +29,12 @@ struct BackgroundRun: Codable, Identifiable, Equatable, Sendable {
     /// Paused by the limit guard (the process is stopped with SIGSTOP); paused time doesn't count toward the time limit.
     var pausedAt: Date? = nil
     var pausedSeconds: Double? = nil
+    /// Who runs it: nil — Claude Code (`claude -p`), `codex` — `codex exec` (`CodexExec`).
+    var agent: String? = nil
+    /// Codex's thread id from its first event: its hook's session file and `codex resume` use it, not `id`.
+    var threadID: String? = nil
+
+    var agentTitle: String { agent == CodexExec.agent ? AgentKind.codex.title : AgentKind.claudeCode.title }
 
     var isPaused: Bool { state == .running && pausedAt != nil }
 
@@ -59,8 +65,10 @@ enum StreamJSON {
         var text: String
     }
 
-    /// The last `{"type":"result"}` event, or nil if the run ended without one (killed, crashed).
+    /// The last `{"type":"result"}` event, or nil if the run ended without one (killed, crashed). A `codex exec`
+    /// log ends with `turn.completed` instead (`CodexExec`).
     static func outcome(fromLog text: String) -> Outcome? {
+        if let codex = CodexExec.outcome(fromLog: text) { return codex }
         for line in text.split(separator: "\n").reversed() {
             guard line.contains("\"result\""), let event = object(line), event["type"] as? String == "result" else { continue }
             let denials = (event["permission_denials"] as? [[String: Any]] ?? []).compactMap { $0["tool_name"] as? String }
@@ -98,7 +106,7 @@ enum StreamJSON {
                 let text = (event["result"] as? String) ?? (event["subtype"] as? String ?? "")
                 entries.append(Entry(id: entries.count, kind: isError ? .error : .result, text: text))
             default:
-                break
+                if let (kind, text) = CodexExec.entry(event) { entries.append(Entry(id: entries.count, kind: kind, text: text)) }
             }
         }
         return entries
@@ -111,7 +119,7 @@ enum StreamJSON {
         return detail.map { "\(name): \($0)" } ?? name
     }
 
-    private static func object(_ line: Substring) -> [String: Any]? {
+    static func object(_ line: Substring) -> [String: Any]? {
         guard line.first == "{" else { return nil }
         return (try? JSONSerialization.jsonObject(with: Data(line.utf8))) as? [String: Any]
     }

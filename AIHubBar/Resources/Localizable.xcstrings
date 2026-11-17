@@ -1323,6 +1323,82 @@
         }
       }
     },
+    "%@ завершился без результата — см. журнал": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ ended without a result — see the log"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ завершився без результату — див. журнал"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ endete ohne Ergebnis — siehe Protokoll"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ s’est arrêté sans résultat — voir le journal"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ terminó sin resultado — mira el registro"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ è terminato senza risultato — vedi il registro"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ terminou sem resultado — veja o registro"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ zakończył bez wyniku — zobacz dziennik"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ は結果なしで終了しました — ログを確認してください"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ 실행이 결과 없이 끝났습니다 — 로그를 확인하세요"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "انتهى %@ دون نتيجة — راجع السجل"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ berhenti tanpa hasil — lihat log"
+          }
+        }
+      }
+    },
     "%@ из %@": {
       "localizations": {
         "ar": {
@@ -1641,16 +1717,10 @@
     },
     "%@ просит разрешение": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "%@ asks for permission"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ просить дозвіл"
+            "value": "يطلب %@ إذنًا"
           }
         },
         "de": {
@@ -1659,10 +1729,10 @@
             "value": "%@ bittet um Erlaubnis"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "%@ demande une autorisation"
+            "value": "%@ asks for permission"
           }
         },
         "es": {
@@ -1671,22 +1741,22 @@
             "value": "%@ pide permiso"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ demande une autorisation"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ meminta izin"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "%@ chiede un permesso"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ pede permissão"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ prosi o zgodę"
           }
         },
         "ja": {
@@ -1701,16 +1771,22 @@
             "value": "%@ 권한 요청"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "يطلب %@ إذنًا"
+            "value": "%@ prosi o zgodę"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "%@ meminta izin"
+            "value": "%@ pede permissão"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ просить дозвіл"
           }
         }
       }
@@ -112761,6 +112837,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Фон — claude -p без вікна, підсумок сповіщенням; Термінал — нове вікно, можна відповідати Claude"
+          }
+        }
+      }
+    },
+    "Фон — codex exec без окна, пишет только в папке проекта, итог уведомлением; Терминал — задача в буфере обмена, вставьте ⌘V": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Background — codex exec without a window, writes only in the project folder, the result as a notification; Terminal — the task is on the clipboard, paste it with ⌘V"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Фон — codex exec без вікна, пише лише в теці проєкту, підсумок сповіщенням; Термінал — завдання в буфері обміну, вставте ⌘V"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hintergrund — codex exec ohne Fenster, schreibt nur im Projektordner, Ergebnis als Mitteilung; Terminal — die Aufgabe liegt in der Zwischenablage, mit ⌘V einfügen"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arrière-plan — codex exec sans fenêtre, écrit seulement dans le dossier du projet, résultat en notification ; Terminal — la tâche est dans le presse-papiers, collez-la avec ⌘V"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Segundo plano — codex exec sin ventana, escribe solo en la carpeta del proyecto, resultado en una notificación; Terminal — la tarea está en el portapapeles, pégala con ⌘V"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Background — codex exec senza finestra, scrive solo nella cartella del progetto, esito in una notifica; Terminale — l’attività è negli appunti, incollala con ⌘V"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Segundo plano — codex exec sem janela, escreve só na pasta do projeto, resultado em notificação; Terminal — a tarefa está na área de transferência, cole com ⌘V"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "W tle — codex exec bez okna, zapisuje tylko w folderze projektu, wynik w powiadomieniu; Terminal — zadanie jest w schowku, wklej je ⌘V"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "バックグラウンド — ウインドウなしの codex exec、書き込みはプロジェクトフォルダ内のみ、結果は通知で。ターミナル — タスクはクリップボードにあるので ⌘V で貼り付けてください"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "백그라운드 — 창 없는 codex exec, 프로젝트 폴더 안에서만 쓰기, 결과는 알림으로; 터미널 — 작업이 클립보드에 있으니 ⌘V로 붙여 넣으세요"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الخلفية — codex exec بلا نافذة، يكتب في مجلد المشروع فقط، والنتيجة في إشعار؛ الطرفية — المهمة في الحافظة، الصقها بـ ⌘V"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Latar belakang — codex exec tanpa jendela, hanya menulis di folder proyek, hasil lewat pemberitahuan; Terminal — tugas ada di papan klip, tempel dengan ⌘V"
           }
         }
       }

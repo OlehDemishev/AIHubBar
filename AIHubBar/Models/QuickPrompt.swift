@@ -93,9 +93,10 @@ enum QuickPrompt {
         AgentKind.allCases.filter { $0 == .claudeCode || installed.contains($0) }
     }
 
-    /// Only Claude Code runs in the background (SPEC-modes §11); the others open in Terminal.
+    /// Claude Code and Codex run in the background (`claude -p`, `codex exec`); the others open in Terminal
+    /// until their unattended flags are checked live (SPEC-modes §11).
     static func modes(for agent: AgentKind) -> [LaunchMode] {
-        agent == .claudeCode ? [.background, .terminal] : [.terminal]
+        agent == .claudeCode || agent == .codex ? [.background, .terminal] : [.terminal]
     }
 
     /// The mode the window starts with for an agent: the last one if the agent can, else Settings', else the background.

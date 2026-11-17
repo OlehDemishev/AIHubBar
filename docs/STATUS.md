@@ -5,7 +5,7 @@
 **Updated:** 2026-11-17
 
 **Now:**
-- 2026-11-17: nine AI features for the next releases, one branch each, in this order: 1 Codex approvals (done, not seen live), 2 background tasks for Codex, 3 run guard on Codex's limits, 4 hand a task over at the limit, 5 review by the second service, 6 one task to two services, 7 skills, plugins and hooks page, 8 day summary, 9 spend at API prices
+- 2026-11-17: nine AI features for the next releases, one branch each, in this order: 1 Codex approvals (done, not seen live), 2 background tasks for Codex (done, the window not seen live), 3 run guard on Codex's limits, 4 hand a task over at the limit, 5 review by the second service, 6 one task to two services, 7 skills, plugins and hooks page, 8 day summary, 9 spend at API prices
 - 2026-11-17: a hidden demo copy for recording release news (branch `feat/demo-mode`): `scripts/demo.sh` starts the app filled with sample data under its own bundle id and home folder; `DemoData` is brought up to date with every release that has news (docs/RELEASE.md → Demo). Merged as #375; goes out with the next release
 - 0.11.0 (build 848) published 2026-11-17 on Oleh's word: beta 3 without changes to the code. GitHub «latest», both appcasts and the Homebrew cask point at it
 - 2026-11-16: the pass before the release — checks green on main (649 tests), Oleh's copy is on 0.11.0-beta.3 through Sparkle, the widget's files seen live with Codex as main. 0.11.0 waits for Oleh's word on Tuesday 2026-11-17
@@ -40,6 +40,7 @@
 - Windows/Linux postponed: no work until Oleh brings it back (where it stopped: docs/specs/SPEC-windows.md §9, stage 2–3 leftovers)
 
 **Needs Oleh:**
+- Codex in the background: ⌃⌥P → agent Codex → «В фоне», a small task in a test project; look at the row in «Сессии», the log and the notification
 - Codex approvals: Settings → «Сервисы AI» → Codex → «Включить отслеживание», then in `codex` type `/hooks` and trust AI Hub Bar's hooks; ask Codex for something that needs approval and answer from the panel
 - demo copy (#375 merged): run `scripts/demo.sh --solo --lang en`, look at the panel below the limits (sessions, «Allow», background tasks, projects) and say what a recording still lacks; `scripts/demo.sh stop` brings the installed app back
 - update to 0.11.0 (Settings → «Основные» → «Обновления») and say whether the window showed the list of changes
@@ -70,6 +71,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-17 — Background tasks for Codex (branch `feat/codex-background`)
+
+Done: second of the nine. «Быстрый запрос» offers «В фоне» for Codex: `codex exec --sandbox workspace-write --json` runs in the project folder through the same run store as Claude (log, time limit, worktree, stop, notification, Telegram). The run's log and result are read from Codex's JSON events; a Codex run shares the row of its hook session by the thread id; Claude's limit guard leaves Codex runs alone. The repository's git folder is passed as `--add-dir`, else Codex's sandbox refuses `git commit`.
+Checked: `scripts/check.sh` (new `CodexExecTests`, catalog 1813 keys, 0 problems). Live with Oleh's Codex 0.166.0-alpha.5.1 in scratch folders, three small `codex exec` runs: the event format the parser reads, a commit failing without the git folder and working with it.
+Left: not run through the app itself (the window and the notification were not seen). No network in the sandbox: a Codex run cannot push or open a PR. Only «Быстрый запрос» offers it; a project's «Своя задача» and the commands still go to Claude. The writable git folder means a run could also write git hooks there.
 
 ## 2026-11-17 — Codex approvals from AI Hub Bar (branch `feat/codex-approvals`)
 
