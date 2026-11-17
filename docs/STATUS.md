@@ -5,6 +5,7 @@
 **Updated:** 2026-11-17
 
 **Now:**
+- 2026-11-17: the Windows hook brought to the Mac's format 7 (branch `feat/desktop-hook-format7`): Codex and Copilot sessions, clean prompts, answers to permission requests through `approvals/`
 - 2026-11-17: Windows resumed (branch `chore/windows-resume`): SPEC-windows §11 maps every Mac feature to works / worse / won't work, `desktop/WINDOWS-DEV.md` sets up the laptop, `desktop/CLAUDE.md` holds the agent's rules, `.gitattributes` keeps LF, desktop CI runs on catalog changes again
 - 2026-11-17: Codex's summary shows file names instead of Markdown links with full paths (#391, merged); goes out with 0.12.0
 - 2026-11-17: live pass over the windows of the nine features on the Debug copy, merged as #388: two fixes — «История расхода» scrolls instead of cutting its top and bottom, Codex skills are also read from `~/.agents/skills`. Not seen: approvals, a background Codex run, handover, review and the pair inside the app
@@ -42,7 +43,7 @@
 - check on the Air: the island at the real notch
 - promotion (docs/LAUNCH.md): r/ClaudeAI, the lists, r/macapps, Show HN, Product Hunt, Homebrew
 - content (docs/specs/SPEC-content.md, agreed): stage 2 «Версии», then batch tasks; better after the first feedback from people
-- Windows: bring the hook to the Mac's format 7 (approvals, Codex and Copilot), then on the laptop the live check of SPEC-windows §11.4, then stage 3 leftovers («Показать», alive check) and stage 4
+- Windows: on the laptop the live check of SPEC-windows §11.4, then stage 3 leftovers (the app's side of answering requests, «Показать», alive check, the hook for Codex and Copilot), then stage 4
 
 **Needs Oleh:**
 - Windows laptop: install the tools and copy the two CLAUDE.md files as in `desktop/WINDOWS-DEV.md`, sign in to Claude Code there; choose the Windows signing (SPEC-windows §7)
@@ -78,6 +79,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-17 — The Windows hook at the Mac's format 7 (branch `feat/desktop-hook-format7`)
+
+Done: `claudepult-hook` was a port of the Mac's format 3; now it follows format 7. `--agent codex|copilot` records Codex and Copilot CLI sessions (`agent`, `entrypoint`, the agent's own process, including Codex's platform-named binary); the Claude app's wrappers (`<system-reminder>`, `<ide_selection>` and the like) are cut from the prompt, and a title saved as a wrapper alone is replaced; Codex's `Interrupt` ends a turn like Stop; `apply_patch` shows its first file. A PermissionRequest of Claude or Codex writes `approvals/<id>.request.json` while the app touches `approvals/alive`, waits up to 290 s for `<id>.decision` and prints Claude Code's decision; it gives up when Claude moves on or the app is gone, and removes both files. The session lock is released before the wait. The installer gives PermissionRequest a 300 s timeout (older installs show as outdated).
+Checked: `cargo test --workspace` on the Mac — 40 green, 11 new: the real hook binary fed Codex events, wrapped prompts, «allow» and «deny» written as the app would, no wait without the app or with a stale `alive`, none for Copilot. Not run on Windows yet (CI runs the tests there).
+Left: the app's side — writing `alive`, listing requests, «Allow» / «Deny» in the panel and the notification; installing the hook for Codex and Copilot. When Claude Code kills the hook at its timeout on Windows the request files stay: the app must drop requests whose pid is gone, as the Mac does.
 
 ## 2026-11-17 — Windows resumed (branch `chore/windows-resume`)
 

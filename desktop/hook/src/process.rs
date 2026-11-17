@@ -1,8 +1,20 @@
-//! The Claude Code process above the hook: walking up the parents until `claude` (`claude.exe`), at most five
-//! steps. Windows reads one process snapshot (Toolhelp); Linux and macOS ask `ps`, like the Mac hook.
+//! The agent's process above the hook: walking up the parents until `claude` (or `copilot`, `codex` with `--agent`),
+//! at most five steps. Windows reads one process snapshot (Toolhelp); Linux and macOS ask `ps`, like the Mac hook.
+
+/// The agent's program, whatever the case and the `.exe`; Codex's npm launcher starts a binary named after the
+/// platform (`codex-x86_64-pc-windows-msvc.exe`).
+pub fn is_agent(agent: &str, name: &str) -> bool {
+    let name = name.rsplit(['/', '\\']).next().unwrap_or(name).to_ascii_lowercase();
+    let name = name.strip_suffix(".exe").unwrap_or(&name);
+    match agent {
+        "codex" => name == "codex" || name.starts_with("codex-"),
+        "copilot" => name == "copilot",
+        _ => name == "claude",
+    }
+}
 
 #[cfg(windows)]
-pub fn claude_pid() -> Option<u32> {
+pub fn agent_pid(agent: &str) -> Option<u32> {
     use std::collections::HashMap;
     use windows_sys::Win32::Foundation::{CloseHandle, INVALID_HANDLE_VALUE};
     use windows_sys::Win32::System::Diagnostics::ToolHelp::{
@@ -33,7 +45,7 @@ pub fn claude_pid() -> Option<u32> {
     let mut pid = table.get(&std::process::id())?.0;
     for _ in 0..5 {
         let (parent, name) = table.get(&pid)?;
-        if name.eq_ignore_ascii_case("claude.exe") {
+        if is_agent(agent, name) {
             return Some(pid);
         }
         if *parent == 0 || *parent == pid {
@@ -45,7 +57,7 @@ pub fn claude_pid() -> Option<u32> {
 }
 
 #[cfg(unix)]
-pub fn claude_pid() -> Option<u32> {
+pub fn agent_pid(agent: &str) -> Option<u32> {
     let mut pid = std::os::unix::process::parent_id();
     for _ in 0..5 {
         let output = std::process::Command::new("ps").args(["-o", "ppid=,comm=", "-p", &pid.to_string()]).output().ok()?;
@@ -53,8 +65,7 @@ pub fn claude_pid() -> Option<u32> {
         let mut parts = text.trim().splitn(2, char::is_whitespace);
         let parent: u32 = parts.next()?.trim().parse().ok()?;
         let command = parts.next()?.trim();
-        let name = command.rsplit('/').next().unwrap_or(command);
-        if name == "claude" || name == "claude.exe" {
+        if is_agent(agent, command) {
             return Some(pid);
         }
         if parent <= 1 {
@@ -63,4 +74,16 @@ pub fn claude_pid() -> Option<u32> {
         pid = parent;
     }
     None
+}
+
+#[cfg(test)]
+mod tests {
+    use super::is_agent;
+
+    #[test]
+    fn agent_names() {
+        assert!(is_agent("claude", "Claude.EXE") && is_agent("claude", "/Users/me/.local/bin/claude"));
+        assert!(is_agent("codex", r"C:\npm\codex-x86_64-pc-windows-msvc.exe") && !is_agent("codex", "codexy"));
+        assert!(is_agent("copilot", "copilot.exe") && !is_agent("copilot", "claude"));
+    }
 }

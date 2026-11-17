@@ -14,6 +14,17 @@ pub const EVENTS: [&str; 8] =
 /// Recognises our entries whatever the folder.
 pub const MARKER: &str = "claudepult-hook";
 pub const TIMEOUT_SECONDS: u64 = 5;
+/// How long the hook waits on a PermissionRequest for an answer given in the app (the Mac's `ApprovalFiles.waitSeconds`).
+pub const APPROVAL_WAIT_SECONDS: u64 = 290;
+
+/// Claude Code's timeout for our entry: PermissionRequest waits for the app's answer, the rest are instant.
+pub fn timeout_for(event: &str) -> u64 {
+    if event == "PermissionRequest" {
+        APPROVAL_WAIT_SECONDS + 10
+    } else {
+        TIMEOUT_SECONDS
+    }
+}
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum HookStatus {
@@ -38,8 +49,8 @@ impl HookCommand {
         }
     }
 
-    fn entry(&self) -> Value {
-        json!({"type": "command", "command": self.program, "args": self.args, "timeout": TIMEOUT_SECONDS})
+    fn entry(&self, event: &str) -> Value {
+        json!({"type": "command", "command": self.program, "args": self.args, "timeout": timeout_for(event)})
     }
 }
 
@@ -94,7 +105,7 @@ pub fn merged(settings: &Value, command: &HookCommand) -> Value {
     }
     let hooks = hooks.as_object_mut().unwrap();
     for event in EVENTS {
-        let mut group = json!({"hooks": [command.entry()]});
+        let mut group = json!({"hooks": [command.entry(event)]});
         if event == "PostToolUse" {
             group["matcher"] = json!("*");
         }
@@ -108,7 +119,6 @@ pub fn merged(settings: &Value, command: &HookCommand) -> Value {
 }
 
 pub fn status(settings: &Value, command: &HookCommand) -> HookStatus {
-    let expected = command.entry();
     let hooks = settings.get("hooks");
     let mut found = 0;
     let mut current = 0;
@@ -124,7 +134,7 @@ pub fn status(settings: &Value, command: &HookCommand) -> HookStatus {
         if !ours.is_empty() {
             found += 1;
         }
-        if ours.len() == 1 && *ours[0] == expected {
+        if ours.len() == 1 && *ours[0] == command.entry(event) {
             current += 1;
         }
     }
@@ -228,6 +238,16 @@ mod tests {
         assert_eq!(merged(&result, &command()), result, "installing twice changes nothing");
         assert_eq!(removed(&result), mine, "removal gives back exactly what was there");
         assert_eq!(status(&mine, &command()), HookStatus::NotInstalled);
+    }
+
+    #[test]
+    fn permission_request_waits_for_the_app() {
+        let result = merged(&json!({}), &command());
+        assert_eq!(result["hooks"]["PermissionRequest"][0]["hooks"][0]["timeout"], APPROVAL_WAIT_SECONDS + 10);
+        assert_eq!(result["hooks"]["Stop"][0]["hooks"][0]["timeout"], TIMEOUT_SECONDS);
+        let mut old = result.clone();
+        old["hooks"]["PermissionRequest"][0]["hooks"][0]["timeout"] = json!(TIMEOUT_SECONDS);
+        assert_eq!(status(&old, &command()), HookStatus::Outdated, "hooks installed with 5 s need updating");
     }
 
     #[test]

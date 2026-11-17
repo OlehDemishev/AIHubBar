@@ -20,12 +20,12 @@ Tauri 2: a Rust core plus a small HTML interface. The plan and the stages are in
 Still to come in stage 2: Telegram, spend per project, custom thresholds.
 
 **Stage 3 «Сессии»** is mostly done:
-- `claudepult-hook`, a port of the Mac hook that writes the same session files;
+- `claudepult-hook`, a port of the Mac hook (format 7 since 2026-11-17) that writes the same session files, for Claude Code and, with `--agent codex|copilot`, Codex and Copilot CLI; it answers a permission request with the decision given in the app (`approvals/`, the Mac's protocol);
 - installing it into Claude Code's `settings.json` in exec form (Settings → Hooks);
 - the sessions list in the panel;
 - an orange dot on the tray icon while a session waits.
 
-Still to come in stage 3: «Show» (bringing the terminal forward), checking whether the process is alive, answering permission requests from the app.
+Still to come in stage 3: «Show» (bringing the terminal forward), checking whether the process is alive, the app's side of answering permission requests (the `alive` file, the requests list, «Allow» / «Deny»), installing the hook for Codex and Copilot.
 
 On a Mac this build never installs hooks into the real `~/.claude/settings.json`: the Mac app owns it. It does so only with another `CLAUDE_CONFIG_DIR`.
 
