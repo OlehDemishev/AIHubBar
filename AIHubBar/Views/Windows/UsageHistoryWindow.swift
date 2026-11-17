@@ -17,6 +17,9 @@ struct UsageHistoryWindow: View {
     private var price: APIPrice? { settings.aiServices.prices[APIProvider.anthropic.rawValue] }
 
     var body: some View {
+        // Scrolls: with «Сегодня» on top the content is taller than the window (seen live 2026-11-17: the top
+        // row and the caption were cut off).
+        ScrollView {
         VStack(alignment: .leading, spacing: 14) {
             HStack {
                 Picker("Период", selection: $period) {
@@ -51,6 +54,7 @@ struct UsageHistoryWindow: View {
             }
         }
         .padding(20)
+        }
         .frame(minWidth: 620, minHeight: 420)
     }
 
@@ -141,7 +145,7 @@ struct UsageHistoryWindow: View {
                 AxisValueLabel { Text(verbatim: value.as(Int.self).map(TokenBreakdown.tokensText) ?? "") }
             }
         }
-        .frame(minHeight: 220)
+        .frame(height: 240)
         .accessibilityLabel("График расхода токенов по дням")
     }
 
