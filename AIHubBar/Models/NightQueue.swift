@@ -53,5 +53,14 @@ enum RunGuard {
             .map { Hold(title: $0.title, utilization: $0.utilization, resetsAt: $0.resetsAt) }
     }
 
+    /// The same for another service's limits (Codex's 5 hours and week): the fullest-lasting window over the threshold.
+    static func hold(_ windows: [LimitWindow], threshold: Int, now: Date = .now) -> Hold? {
+        guard threshold > 0 else { return nil }
+        return windows
+            .filter { ($0.percent ?? 0) >= Double(threshold) && ($0.resetsAt.map { $0 > now } ?? true) }
+            .max { ($0.resetsAt ?? .distantFuture) < ($1.resetsAt ?? .distantFuture) }
+            .map { Hold(title: $0.title, utilization: $0.percent ?? 0, resetsAt: $0.resetsAt) }
+    }
+
     static let thresholds = [0, 80, 90, 95, 98]
 }

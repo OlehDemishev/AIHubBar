@@ -63,6 +63,31 @@ struct NightQueueTests {
         #expect(RunGuard.hold(both, threshold: 95, now: now)?.resetsAt == date(33, 9))
     }
 
+    /// Codex's limits hold Codex's runs the same way (`LimitWindow`s of its card).
+    @Test func anotherServicesLimitsHoldToo() throws {
+        let now = date(30, 12)
+        let five = LimitWindow(id: "primary", title: "5 ч", percent: 96, resetsAt: date(30, 14))
+        let week = LimitWindow(id: "secondary", title: "Неделя", percent: 40, resetsAt: date(33, 9))
+        #expect(RunGuard.hold([five, week], threshold: 95, now: now) == RunGuard.Hold(title: "5 ч", utilization: 96, resetsAt: date(30, 14)))
+        #expect(RunGuard.hold([five, week], threshold: 0, now: now) == nil)
+        #expect(RunGuard.hold([five, week], threshold: 95, now: date(30, 15)) == nil, "a passed reset is stale, not full")
+        #expect(RunGuard.hold([LimitWindow(id: "spend", title: "Расход", percent: nil)], threshold: 80, now: now) == nil)
+        #expect(RunGuard.hold([], threshold: 95, now: now) == nil)
+
+        // A queue saved before Codex runs still loads, as Claude's.
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601
+        let item = LaunchController.QueuedLaunch(id: "q", command: .customTask("t"), target: LaunchController.LaunchTarget(path: "/P/A", name: "A", nextItems: [], baseRef: "origin/main"),
+                                                 launchAt: now, afterReset: true, codexPath: "/bin/codex")
+        let encoder = JSONEncoder()
+        encoder.dateEncodingStrategy = .iso8601
+        #expect(try decoder.decode(LaunchController.QueuedLaunch.self, from: encoder.encode(item)).codexPath == "/bin/codex")
+        // A queue saved before Codex runs has no such field: the run is Claude's.
+        var object = try #require(JSONSerialization.jsonObject(with: encoder.encode(item)) as? [String: Any])
+        object["codexPath"] = nil
+        #expect(try decoder.decode(LaunchController.QueuedLaunch.self, from: JSONSerialization.data(withJSONObject: object)).codexPath == nil)
+    }
+
     @Test func pausedTimeDoesNotCountTowardTheLimit() {
         var run = BackgroundRun(
             id: "r", project: "Ambo", projectPath: "/p", folder: "/p", worktreeBranch: nil, commandTitle: "Шаг", task: "t",
