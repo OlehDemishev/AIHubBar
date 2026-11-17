@@ -88,6 +88,15 @@ Panel → Лимиты: one card per service, all drawn by the same view (rings,
 first, the rest in the order of the tabs. Projects: tokens per project from every service that has them, with a
 service mark. Sessions: Codex threads next to Claude sessions once a source exists.
 
+## 4a. Claude and Codex together (2026-11-17)
+
+- **Handover** (`Handover`, `LaunchController.handOverPending` / `handOver`): Claude's limit warning before a background
+  launch has «В Codex» (the same command goes to `codex exec`); a Claude run that is paused by the guard, failed or was
+  stopped has «Передать Codex» in its row's menu — the run stops and Codex starts in the same folder (the worktree
+  included) with the task kept in the run's file (`prompt`) and an instruction to read `git status`, `git diff` and the
+  last commits first. Only towards Codex: it is the one other agent that runs unattended. Runs started before
+  2026-11-17 have no kept task and cannot be handed over.
+
 ## 5. Stages (one PR each)
 
 1. **Settings structure** (done): «Claude Code» tab moves into «Сервисы AI» with nested tabs per service; all

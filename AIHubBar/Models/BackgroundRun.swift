@@ -33,6 +33,8 @@ struct BackgroundRun: Codable, Identifiable, Equatable, Sendable {
     var agent: String? = nil
     /// Codex's thread id from its first event: its hook's session file and `codex resume` use it, not `id`.
     var threadID: String? = nil
+    /// The whole task as it was sent, kept so the run can be handed to another service (`Handover`).
+    var prompt: String? = nil
 
     var agentTitle: String { agent == CodexExec.agent ? AgentKind.codex.title : AgentKind.claudeCode.title }
 
