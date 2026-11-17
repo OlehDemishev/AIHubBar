@@ -219,6 +219,10 @@
               "name" : "Usage History"
             },
             {
+              "detail" : "The Usage History window opens with “Today”: spend by project, background tasks and limits. The same comes to Telegram once a day if you turn on “Day summary in Telegram” on the “AI limits” page. The window also compares the plan’s price with the spend at your API price.",
+              "name" : "Day Summary"
+            },
+            {
               "detail" : "Once per window at 50/80/95% (thresholds in Settings) and when the limit is back; optionally to Telegram too.",
               "name" : "Notifications"
             },
@@ -270,6 +274,14 @@
               "name" : "Quick Prompt"
             },
             {
+              "detail" : "In Quick Prompt Codex runs in the background too: it writes only in the project folder, has no network, and the result comes as a notification. Near the threshold it is held by Codex’s own limits.",
+              "name" : "Codex in the background"
+            },
+            {
+              "detail" : "A Claude task at the limit can be handed to Codex (“To Codex”, “Hand Over to Codex”), and a finished one given to the other service to review (“Review in…” in the task’s menu). The “Also in Codex — to compare” checkbox in Quick Prompt gives the task to both at once, each in its own worktree.",
+              "name" : "Claude and Codex together"
+            },
+            {
               "detail" : "Background task: what Claude does, step by step.",
               "name" : "Log"
             },
@@ -315,6 +327,10 @@
             {
               "detail" : "Anthropic, OpenAI, Google, xAI, DeepSeek, Mistral and any OpenAI-compatible server (Ollama, LM Studio, OpenRouter). The key lives only in the macOS Keychain; “Check” spends no tokens.",
               "name" : "Models by API"
+            },
+            {
+              "detail" : "In the Claude Code window, on the “Skills and Plugins” tab: the skills of Claude Code and Codex and Claude Code’s plugins, each with a switch; the hooks of both, to look at.",
+              "name" : "Skills and Plugins"
             },
             {
               "detail" : "Settings → “Profiles” → “Default service”: it runs the profile’s command templates.",

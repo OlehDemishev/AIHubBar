@@ -72,6 +72,12 @@
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
 
+## 2026-11-17 — The help covers the nine AI features (branch `docs/help-ai-together`)
+
+Done: four help facts in all 13 languages — «Codex в фоне», «Claude и Codex вместе» (handover, review, one task to both), «Skills и плагины», «Итог дня» (with the plan against the API price); `site/help/*.json` exported. The release notes say “Quick Prompt”, the feature's English name.
+Checked: `scripts/check.sh` (catalog 1851 keys, 0 problems); the translations use the names the buttons and windows have in each language.
+Left: the help window was not looked at live.
+
 ## 2026-11-17 — Does the plan pay off (branch `feat/api-cost`)
 
 Done: ninth of the nine, smaller than promised: the cost at the person's API price was already in «История расхода» (the agent's list on 2026-11-17 was wrong about that). Added: the plan's monthly price is asked beside it and a verdict compares it with the period's spend brought to 30 days; «Сегодня» and the day summary show the day's cost. Prices are still not shipped (DECISIONS, «API»): without the person's price nothing is counted.

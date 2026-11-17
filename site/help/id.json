@@ -219,6 +219,10 @@
               "name" : "Riwayat pemakaian"
             },
             {
+              "detail" : "Jendela “Riwayat pemakaian” dibuka dengan “Hari ini”: pemakaian per proyek, tugas latar belakang, dan batas. Hal yang sama dikirim sekali sehari ke Telegram jika Anda menyalakan “Ringkasan hari ini di Telegram” di halaman “Batas AI”. Di sana harga langganan juga dibandingkan dengan pemakaian menurut harga API Anda.",
+              "name" : "Ringkasan hari ini"
+            },
+            {
               "detail" : "Sekali per jendela pada 50/80/95 persen (ambang di Pengaturan) dan saat batas kembali; bila mau, juga ke Telegram.",
               "name" : "Pemberitahuan"
             },
@@ -270,6 +274,14 @@
               "name" : "Permintaan cepat"
             },
             {
+              "detail" : "Di “Permintaan cepat” Codex juga bekerja di latar belakang: hanya menulis di folder proyek, tanpa jaringan, dan hasilnya datang lewat pemberitahuan. Di dekat ambang ia ditahan oleh batas Codex sendiri.",
+              "name" : "Codex di latar belakang"
+            },
+            {
+              "detail" : "Tugas Claude yang mencapai batas bisa diserahkan ke Codex (“Ke Codex”, “Serahkan ke Codex”), dan tugas yang selesai bisa ditinjau layanan lain (“Tinjau di…” di menu tugas). Kotak centang “Juga di Codex — untuk membandingkan” di “Permintaan cepat” memberikan tugas ke keduanya sekaligus, masing-masing di worktree sendiri.",
+              "name" : "Claude dan Codex bersama"
+            },
+            {
               "detail" : "Tugas latar belakang: apa yang dilakukan Claude, langkah demi langkah.",
               "name" : "Log"
             },
@@ -315,6 +327,10 @@
             {
               "detail" : "Anthropic, OpenAI, Google, xAI, DeepSeek, Mistral, dan server apa pun yang kompatibel dengan OpenAI (Ollama, LM Studio, OpenRouter). Kunci hanya disimpan di Rantai Kunci macOS; “Periksa” tidak memakai token.",
               "name" : "Model lewat API"
+            },
+            {
+              "detail" : "Di jendela “Claude Code”, tab “Skill dan plugin”: skill Claude Code dan Codex serta plugin Claude Code, masing-masing dengan sakelar; hook keduanya hanya untuk dilihat.",
+              "name" : "Skill dan plugin"
             },
             {
               "detail" : "Pengaturan → “Profil” → “Layanan bawaan”: layanan ini menjalankan perintah profil.",

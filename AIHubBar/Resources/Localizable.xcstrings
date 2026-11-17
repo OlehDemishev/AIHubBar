@@ -7594,16 +7594,10 @@
     },
     "API был бы дешевле подписки (×%@)": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "The API would be cheaper than the plan (×%@)"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "API був би дешевший за підписку (×%@)"
+            "value": "كانت الـ API ستكون أرخص من الاشتراك (×%@)"
           }
         },
         "de": {
@@ -7612,10 +7606,10 @@
             "value": "Die API wäre günstiger als das Abo (×%@)"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "L’API coûterait moins que l’abonnement (×%@)"
+            "value": "The API would be cheaper than the plan (×%@)"
           }
         },
         "es": {
@@ -7624,22 +7618,22 @@
             "value": "La API saldría más barata que la suscripción (×%@)"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L’API coûterait moins que l’abonnement (×%@)"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "API akan lebih murah daripada langganan (×%@)"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "L’API costerebbe meno dell’abbonamento (×%@)"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "A API sairia mais barata que a assinatura (×%@)"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "API byłoby tańsze niż subskrypcja (×%@)"
           }
         },
         "ja": {
@@ -7654,16 +7648,22 @@
             "value": "API가 구독보다 저렴합니다(×%@)"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "كانت الـ API ستكون أرخص من الاشتراك (×%@)"
+            "value": "API byłoby tańsze niż subskrypcja (×%@)"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "API akan lebih murah daripada langganan (×%@)"
+            "value": "A API sairia mais barata que a assinatura (×%@)"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "API був би дешевший за підписку (×%@)"
           }
         }
       }
@@ -9113,6 +9113,82 @@
         }
       }
     },
+    "Claude и Codex вместе": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude and Codex together"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude і Codex разом"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude und Codex zusammen"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude et Codex ensemble"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude y Codex juntos"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude e Codex insieme"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude e Codex juntos"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude i Codex razem"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude と Codex を一緒に"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude와 Codex 함께"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude و Codex معًا"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude dan Codex bersama"
+          }
+        }
+      }
+    },
     "Claude и Codex закончили — %@": {
       "localizations": {
         "ar": {
@@ -9489,6 +9565,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Codex CLI, Gemini CLI, Antigravity, Copilot CLI, Cursor CLI — AI Hub Bar знаходить встановлені (Налаштування → «Сервіси AI») і відкриває їх у Терміналі в папці проєкту: «Відкрити в…» у блоці Claude проєкту. Вхід у кожного свій."
+          }
+        }
+      }
+    },
+    "Codex в фоне": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex in the background"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex у фоні"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex im Hintergrund"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex en arrière-plan"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex en segundo plano"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex in background"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex em segundo plano"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex w tle"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex をバックグラウンドで"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "백그라운드의 Codex"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex في الخلفية"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex di latar belakang"
           }
         }
       }
@@ -18981,6 +19133,82 @@
         }
       }
     },
+    "В «Быстром запросе» Codex тоже работает в фоне: пишет только в папке проекта, без сети, итог — уведомлением. У порога его держат лимиты самого Codex.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In Quick Prompt Codex runs in the background too: it writes only in the project folder, has no network, and the result comes as a notification. Near the threshold it is held by Codex’s own limits."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "У «Швидкому запиті» Codex теж працює у фоні: пише лише в теці проєкту, без мережі, підсумок — сповіщенням. Біля порога його тримають ліміти самого Codex."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Im „Schnellauftrag“ läuft auch Codex im Hintergrund: Es schreibt nur im Projektordner, hat kein Netz, und das Ergebnis kommt als Mitteilung. An der Schwelle halten es die eigenen Limits von Codex an."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dans « Requête rapide », Codex travaille aussi en arrière-plan : il n’écrit que dans le dossier du projet, sans réseau, et le résultat arrive en notification. Près du seuil, ce sont les limites de Codex qui le retiennent."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En «Petición rápida» Codex también trabaja en segundo plano: solo escribe en la carpeta del proyecto, sin red, y el resultado llega en una notificación. Cerca del umbral lo frenan los límites del propio Codex."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In «Richiesta rapida» anche Codex lavora in background: scrive solo nella cartella del progetto, senza rete, e l’esito arriva in una notifica. Vicino alla soglia lo fermano i limiti di Codex stesso."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Em “Pedido rápido” o Codex também trabalha em segundo plano: escreve só na pasta do projeto, sem rede, e o resultado chega em notificação. Perto do limiar, quem o segura são os limites do próprio Codex."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "W „Szybkim zapytaniu” Codex też działa w tle: zapisuje tylko w folderze projektu, bez sieci, a wynik przychodzi w powiadomieniu. Przy progu wstrzymują go limity samego Codex."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「クイックプロンプト」では Codex もバックグラウンドで動きます。書き込みはプロジェクトフォルダ内のみ、ネットワークなしで、結果は通知で届きます。しきい値付近では Codex 自身の上限で一時停止します。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«빠른 요청»에서는 Codex도 백그라운드로 실행됩니다. 프로젝트 폴더 안에서만 쓰고 네트워크 없이 동작하며 결과는 알림으로 옵니다. 임계값 근처에서는 Codex 자체 한도에 따라 멈춥니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "في «طلب سريع» يعمل Codex في الخلفية أيضًا: يكتب في مجلد المشروع فقط، بلا شبكة، والنتيجة تصل في إشعار. عند العتبة توقفه حدود Codex نفسه."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Di “Permintaan cepat” Codex juga bekerja di latar belakang: hanya menulis di folder proyek, tanpa jaringan, dan hasilnya datang lewat pemberitahuan. Di dekat ambang ia ditahan oleh batas Codex sendiri."
+          }
+        }
+      }
+    },
     "В Терминале — видно, что он делает": {
       "localizations": {
         "ar": {
@@ -19433,6 +19661,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "У меню мови в рядку меню можна вибрати, з якої розкладки на яку виправляти самостійно, наприклад лише EN → RU."
+          }
+        }
+      }
+    },
+    "В окне «Claude Code» на вкладке «Skills и плагины»: skills Claude Code и Codex и плагины Claude Code — у каждого выключатель; hooks обоих — для просмотра.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In the Claude Code window, on the “Skills and Plugins” tab: the skills of Claude Code and Codex and Claude Code’s plugins, each with a switch; the hooks of both, to look at."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "У вікні «Claude Code» на вкладці «Skills і плагіни»: skills Claude Code і Codex та плагіни Claude Code — у кожного вимикач; hooks обох — для перегляду."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Im Fenster „Claude Code“ im Tab „Skills und Plug-ins“: die Skills von Claude Code und Codex und die Plug-ins von Claude Code, jeweils mit Schalter; die Hooks beider zur Ansicht."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dans la fenêtre « Claude Code », onglet « Skills et plugins » : les skills de Claude Code et de Codex et les plugins de Claude Code, chacun avec un interrupteur ; les hooks des deux, en lecture seule."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En la ventana «Claude Code», pestaña «Skills y plugins»: los skills de Claude Code y Codex y los plugins de Claude Code, cada uno con su interruptor; los hooks de ambos, solo para consultar."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nella finestra «Claude Code», scheda «Skill e plugin»: le skill di Claude Code e Codex e i plugin di Claude Code, ciascuno con un interruttore; gli hook di entrambi in sola lettura."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Na janela “Claude Code”, aba “Skills e plugins”: os skills do Claude Code e do Codex e os plugins do Claude Code, cada um com um interruptor; os hooks dos dois, só para consulta."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "W oknie „Claude Code”, na karcie „Skille i wtyczki”: skille Claude Code i Codex oraz wtyczki Claude Code — każdy z przełącznikiem; hooki obu — do podglądu."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「Claude Code」ウインドウの「スキルとプラグイン」タブ：Claude Code と Codex のスキル、Claude Code のプラグインにそれぞれスイッチがあります。両方のフックは表示のみです。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«Claude Code» 창의 «스킬과 플러그인» 탭: Claude Code와 Codex의 스킬, Claude Code의 플러그인마다 스위치가 있습니다. 두 에이전트의 훅은 보기 전용입니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "في نافذة «Claude Code» ضمن تبويب «المهارات والإضافات»: مهارات Claude Code و Codex وإضافات Claude Code، ولكلٍّ منها مفتاح؛ أما الـ hooks لكليهما فللعرض فقط."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Di jendela “Claude Code”, tab “Skill dan plugin”: skill Claude Code dan Codex serta plugin Claude Code, masing-masing dengan sakelar; hook keduanya hanya untuk dilihat."
           }
         }
       }
@@ -35939,6 +36243,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Завдання через спільний бот вимкнено. На Mac: Налаштування → Модулі → Telegram → «Завдання через спільний бот»."
+          }
+        }
+      }
+    },
+    "Задачу Claude у лимита можно передать Codex («В Codex», «Передать Codex»), готовую — отдать на проверку второму сервису («Проверить в…» в меню задачи). Галочка «И в Codex — сравнить» в «Быстром запросе» даёт задачу обоим сразу, каждому в своём worktree.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A Claude task at the limit can be handed to Codex (“To Codex”, “Hand Over to Codex”), and a finished one given to the other service to review (“Review in…” in the task’s menu). The “Also in Codex — to compare” checkbox in Quick Prompt gives the task to both at once, each in its own worktree."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Завдання Claude біля ліміту можна передати Codex («У Codex», «Передати Codex»), готове — віддати на перевірку другому сервісу («Перевірити в…» у меню завдання). Позначка «І в Codex — порівняти» у «Швидкому запиті» дає завдання обом одразу, кожному у своєму worktree."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eine Claude-Aufgabe am Limit lässt sich an Codex übergeben („An Codex“, „An Codex übergeben“), eine fertige dem anderen Dienst zur Prüfung geben („In … prüfen“ im Menü der Aufgabe). Das Häkchen „Auch in Codex — zum Vergleich“ im „Schnellauftrag“ gibt die Aufgabe beiden zugleich, jedem in seinem eigenen Worktree."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une tâche de Claude arrivée à la limite peut être confiée à Codex (« Vers Codex », « Confier à Codex »), et une tâche terminée donnée à relire à l’autre service (« Relire dans… » dans le menu de la tâche). La case « Aussi dans Codex — pour comparer » de « Requête rapide » donne la tâche aux deux à la fois, chacun dans son worktree."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Una tarea de Claude en el límite se puede pasar a Codex («A Codex», «Pasar a Codex»), y una terminada darse a revisar al otro servicio («Revisar en…» en el menú de la tarea). La casilla «También en Codex — para comparar» de «Petición rápida» da la tarea a los dos a la vez, cada uno en su worktree."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un’attività di Claude al limite si può passare a Codex («A Codex», «Passa a Codex»), e una finita farla rivedere all’altro servizio («Rivedi in…» nel menu dell’attività). La casella «Anche in Codex — per confrontare» in «Richiesta rapida» dà l’attività a entrambi insieme, ciascuno nel proprio worktree."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uma tarefa do Claude no limite pode ser passada para o Codex (“Para Codex”, “Passar para Codex”), e uma concluída pode ir para revisão do outro serviço (“Revisar no…” no menu da tarefa). A caixa “Também no Codex — para comparar” em “Pedido rápido” dá a tarefa aos dois de uma vez, cada um em seu worktree."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zadanie Claude przy limicie można przekazać do Codex („Do Codex”, „Przekaż do Codex”), a gotowe dać do sprawdzenia drugiej usłudze („Sprawdź w…” w menu zadania). Pole „Także w Codex — do porównania” w „Szybkim zapytaniu” daje zadanie obu naraz, każdemu we własnym worktree."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "上限に達した Claude のタスクは Codex に引き継げます（「Codex へ」「Codex に引き継ぐ」）。完了したタスクはもう一方のサービスにレビューさせられます（タスクのメニューの「…でレビュー」）。「クイックプロンプト」の「Codex でも実行して比較」にチェックすると、両方が同時に、それぞれ専用の worktree でタスクを実行します。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "한도에 걸린 Claude 작업은 Codex에 넘길 수 있고(«Codex(으)로», «Codex에 넘기기»), 끝난 작업은 다른 서비스에 검토를 맡길 수 있습니다(작업 메뉴의 «…에서 검토»). «빠른 요청»의 «Codex에서도 실행해 비교»를 선택하면 두 서비스가 동시에, 각자 자기 worktree에서 작업합니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يمكن تسليم مهمة Claude التي بلغت الحد إلى Codex («إلى Codex»، «تسليم إلى Codex»)، وإعطاء المهمة المنجزة للخدمة الأخرى لمراجعتها («مراجعة في…» في قائمة المهمة). خانة «وفي Codex أيضًا — للمقارنة» في «طلب سريع» تعطي المهمة للاثنين معًا، كلٌّ في worktree خاص به."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tugas Claude yang mencapai batas bisa diserahkan ke Codex (“Ke Codex”, “Serahkan ke Codex”), dan tugas yang selesai bisa ditinjau layanan lain (“Tinjau di…” di menu tugas). Kotak centang “Juga di Codex — untuk membandingkan” di “Permintaan cepat” memberikan tugas ke keduanya sekaligus, masing-masing di worktree sendiri."
           }
         }
       }
@@ -66989,6 +67369,82 @@
         }
       }
     },
+    "Окно «История расхода» открывается разделом «Сегодня»: расход по проектам, фоновые задачи и лимиты. То же раз в день приходит в Telegram, если включить «Итог дня в Telegram» на странице «Лимиты AI». Там же цена подписки сравнивается с расходом по вашей цене API.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The Usage History window opens with “Today”: spend by project, background tasks and limits. The same comes to Telegram once a day if you turn on “Day summary in Telegram” on the “AI limits” page. The window also compares the plan’s price with the spend at your API price."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Вікно «Історія витрат» відкривається розділом «Сьогодні»: витрата за проєктами, фонові завдання й ліміти. Те саме раз на день надходить у Telegram, якщо ввімкнути «Підсумок дня в Telegram» на сторінці «Ліміти AI». Там само ціна підписки порівнюється з витратою за вашою ціною API."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Das Fenster „Verbrauchsverlauf“ beginnt mit „Heute“: Verbrauch nach Projekten, Hintergrundaufgaben und Limits. Dasselbe kommt einmal täglich in Telegram, wenn Sie „Tagesbilanz in Telegram“ auf der Seite „KI-Limits“ einschalten. Dort wird auch der Abopreis mit dem Verbrauch zu Ihrem API-Preis verglichen."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La fenêtre « Historique de consommation » s’ouvre sur « Aujourd’hui » : consommation par projet, tâches en arrière-plan et limites. La même chose arrive une fois par jour dans Telegram si vous activez « Bilan du jour dans Telegram » sur la page « Limites d’IA ». La fenêtre compare aussi le prix de l’abonnement à la consommation à votre prix API."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La ventana «Historial de consumo» se abre con «Hoy»: gasto por proyecto, tareas en segundo plano y límites. Lo mismo llega una vez al día a Telegram si activas «Resumen del día en Telegram» en la página «Límites de IA». Allí también se compara el precio de la suscripción con el gasto a tu precio de API."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La finestra «Cronologia dei consumi» si apre con «Oggi»: consumo per progetto, attività in background e limiti. Lo stesso arriva una volta al giorno in Telegram se attivi «Riepilogo del giorno in Telegram» nella pagina «Limiti IA». Lì il prezzo dell’abbonamento viene anche confrontato con il consumo al tuo prezzo API."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A janela “Histórico de consumo” abre com “Hoje”: gasto por projeto, tarefas em segundo plano e limites. O mesmo chega uma vez por dia no Telegram se você ativar “Resumo do dia no Telegram” na página “Limites de IA”. Ali também o preço da assinatura é comparado com o gasto pelo seu preço de API."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Okno „Historia zużycia” otwiera sekcja „Dziś”: zużycie według projektów, zadania w tle i limity. To samo przychodzi raz dziennie na Telegram, jeśli włączysz „Podsumowanie dnia w Telegramie” na stronie „Limity AI”. Tam też cena subskrypcji jest porównywana ze zużyciem po Twojej cenie API."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「使用履歴」ウインドウは「今日」から始まります。プロジェクト別の使用量、バックグラウンドタスク、上限が表示されます。「AI の上限」ページで「今日のまとめを Telegram に送る」をオンにすると、同じ内容が 1 日 1 回 Telegram に届きます。このウインドウでは、サブスクリプション料金とあなたの API 価格での使用量も比較できます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«사용 기록» 창은 «오늘»로 시작합니다: 프로젝트별 사용량, 백그라운드 작업, 한도. «AI 한도» 페이지에서 «오늘의 요약을 Telegram으로»를 켜면 같은 내용이 하루 한 번 Telegram으로 옵니다. 이 창에서는 구독 가격과 내 API 가격 기준 사용량도 비교합니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تبدأ نافذة «سجل الاستهلاك» بقسم «اليوم»: الاستهلاك حسب المشاريع، والمهام الخلفية، والحدود. يصل الشيء نفسه مرة في اليوم إلى Telegram إذا فعّلت «ملخص اليوم في Telegram» في صفحة «حدود الذكاء الاصطناعي». وهناك أيضًا يُقارن سعر الاشتراك بالاستهلاك بسعر الـ API لديك."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jendela “Riwayat pemakaian” dibuka dengan “Hari ini”: pemakaian per proyek, tugas latar belakang, dan batas. Hal yang sama dikirim sekali sehari ke Telegram jika Anda menyalakan “Ringkasan hari ini di Telegram” di halaman “Batas AI”. Di sana harga langganan juga dibandingkan dengan pemakaian menurut harga API Anda."
+          }
+        }
+      }
+    },
     "Окно «Календарь»": {
       "localizations": {
         "ar": {
@@ -79918,16 +80374,10 @@
     },
     "По цене API, примерно: %@": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "At the API price, roughly: %@"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "За ціною API, приблизно: %@"
+            "value": "بسعر الـ API تقريبًا: %@"
           }
         },
         "de": {
@@ -79936,10 +80386,10 @@
             "value": "Zum API-Preis, ungefähr: %@"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Au prix de l’API, environ : %@"
+            "value": "At the API price, roughly: %@"
           }
         },
         "es": {
@@ -79948,22 +80398,22 @@
             "value": "Al precio de la API, aproximadamente: %@"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Au prix de l’API, environ : %@"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dengan harga API, kira-kira: %@"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Al prezzo dell’API, circa: %@"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Pelo preço da API, aproximadamente: %@"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Po cenie API, w przybliżeniu: %@"
           }
         },
         "ja": {
@@ -79978,16 +80428,22 @@
             "value": "API 가격으로 대략: %@"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "بسعر الـ API تقريبًا: %@"
+            "value": "Po cenie API, w przybliżeniu: %@"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Dengan harga API, kira-kira: %@"
+            "value": "Pelo preço da API, aproximadamente: %@"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "За ціною API, приблизно: %@"
           }
         }
       }
@@ -80374,16 +80830,10 @@
     },
     "Подписка выгоднее API (×%@)": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "The plan beats the API (×%@)"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Підписка вигідніша за API (×%@)"
+            "value": "الاشتراك أوفر من الـ API (×%@)"
           }
         },
         "de": {
@@ -80392,10 +80842,10 @@
             "value": "Das Abo ist günstiger als die API (×%@)"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "L’abonnement est plus avantageux que l’API (×%@)"
+            "value": "The plan beats the API (×%@)"
           }
         },
         "es": {
@@ -80404,22 +80854,22 @@
             "value": "La suscripción sale mejor que la API (×%@)"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L’abonnement est plus avantageux que l’API (×%@)"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Langganan lebih hemat daripada API (×%@)"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "L’abbonamento conviene più dell’API (×%@)"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "A assinatura compensa mais que a API (×%@)"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Subskrypcja opłaca się bardziej niż API (×%@)"
           }
         },
         "ja": {
@@ -80434,32 +80884,32 @@
             "value": "구독이 API보다 유리합니다(×%@)"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "الاشتراك أوفر من الـ API (×%@)"
+            "value": "Subskrypcja opłaca się bardziej niż API (×%@)"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Langganan lebih hemat daripada API (×%@)"
+            "value": "A assinatura compensa mais que a API (×%@)"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Підписка вигідніша за API (×%@)"
           }
         }
       }
     },
     "Подписка, $ в месяц": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Plan, $ a month"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Підписка, $ на місяць"
+            "value": "الاشتراك، $ شهريًا"
           }
         },
         "de": {
@@ -80468,10 +80918,10 @@
             "value": "Abo, $ pro Monat"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Abonnement, $ par mois"
+            "value": "Plan, $ a month"
           }
         },
         "es": {
@@ -80480,22 +80930,22 @@
             "value": "Suscripción, $ al mes"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abonnement, $ par mois"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Langganan, $ per bulan"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Abbonamento, $ al mese"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Assinatura, $ por mês"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Subskrypcja, $ miesięcznie"
           }
         },
         "ja": {
@@ -80510,16 +80960,22 @@
             "value": "구독, 월 $"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "الاشتراك، $ شهريًا"
+            "value": "Subskrypcja, $ miesięcznie"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Langganan, $ per bulan"
+            "value": "Assinatura, $ por mês"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Підписка, $ на місяць"
           }
         }
       }
@@ -92324,16 +92780,10 @@
     },
     "Расход за период по вашей цене API, приведённый к 30 дням, против цены подписки": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "The period’s spend at your API price, brought to 30 days, against the plan’s price"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Витрата за період за вашою ціною API, приведена до 30 днів, проти ціни підписки"
+            "value": "استهلاك الفترة بسعر الـ API لديك، محسوبًا على 30 يومًا، مقابل سعر الاشتراك"
           }
         },
         "de": {
@@ -92342,10 +92792,10 @@
             "value": "Der Verbrauch im Zeitraum zu Ihrem API-Preis, auf 30 Tage umgerechnet, gegen den Abopreis"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "La consommation de la période à votre prix API, ramenée à 30 jours, face au prix de l’abonnement"
+            "value": "The period’s spend at your API price, brought to 30 days, against the plan’s price"
           }
         },
         "es": {
@@ -92354,22 +92804,22 @@
             "value": "El gasto del periodo a tu precio de API, llevado a 30 días, frente al precio de la suscripción"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La consommation de la période à votre prix API, ramenée à 30 jours, face au prix de l’abonnement"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pemakaian periode ini dengan harga API Anda, disetarakan ke 30 hari, dibandingkan harga langganan"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Il consumo del periodo al tuo prezzo API, riportato a 30 giorni, rispetto al prezzo dell’abbonamento"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "O gasto do período pelo seu preço de API, ajustado para 30 dias, contra o preço da assinatura"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Zużycie z okresu po Twojej cenie API, przeliczone na 30 dni, wobec ceny subskrypcji"
           }
         },
         "ja": {
@@ -92384,16 +92834,22 @@
             "value": "기간 사용량을 내 API 가격으로 계산해 30일로 환산한 뒤 구독 가격과 비교합니다"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "استهلاك الفترة بسعر الـ API لديك، محسوبًا على 30 يومًا، مقابل سعر الاشتراك"
+            "value": "Zużycie z okresu po Twojej cenie API, przeliczone na 30 dni, wobec ceny subskrypcji"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Pemakaian periode ini dengan harga API Anda, disetarakan ke 30 hari, dibandingkan harga langganan"
+            "value": "O gasto do período pelo seu preço de API, ajustado para 30 dias, contra o preço da assinatura"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Витрата за період за вашою ціною API, приведена до 30 днів, проти ціни підписки"
           }
         }
       }

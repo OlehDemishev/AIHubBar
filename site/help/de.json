@@ -219,6 +219,10 @@
               "name" : "Verbrauchsverlauf"
             },
             {
+              "detail" : "Das Fenster „Verbrauchsverlauf“ beginnt mit „Heute“: Verbrauch nach Projekten, Hintergrundaufgaben und Limits. Dasselbe kommt einmal täglich in Telegram, wenn Sie „Tagesbilanz in Telegram“ auf der Seite „KI-Limits“ einschalten. Dort wird auch der Abopreis mit dem Verbrauch zu Ihrem API-Preis verglichen.",
+              "name" : "Tagesbilanz"
+            },
+            {
               "detail" : "Einmal pro Fenster bei 50/80/95 Prozent (Schwellen in den Einstellungen) und wenn das Limit zurück ist; auf Wunsch auch an Telegram.",
               "name" : "Mitteilungen"
             },
@@ -270,6 +274,14 @@
               "name" : "Schnellauftrag"
             },
             {
+              "detail" : "Im „Schnellauftrag“ läuft auch Codex im Hintergrund: Es schreibt nur im Projektordner, hat kein Netz, und das Ergebnis kommt als Mitteilung. An der Schwelle halten es die eigenen Limits von Codex an.",
+              "name" : "Codex im Hintergrund"
+            },
+            {
+              "detail" : "Eine Claude-Aufgabe am Limit lässt sich an Codex übergeben („An Codex“, „An Codex übergeben“), eine fertige dem anderen Dienst zur Prüfung geben („In … prüfen“ im Menü der Aufgabe). Das Häkchen „Auch in Codex — zum Vergleich“ im „Schnellauftrag“ gibt die Aufgabe beiden zugleich, jedem in seinem eigenen Worktree.",
+              "name" : "Claude und Codex zusammen"
+            },
+            {
               "detail" : "Hintergrundaufgabe: was Claude tut, Schritt für Schritt.",
               "name" : "Protokoll"
             },
@@ -315,6 +327,10 @@
             {
               "detail" : "Anthropic, OpenAI, Google, xAI, DeepSeek, Mistral und jeder OpenAI-kompatible Server (Ollama, LM Studio, OpenRouter). Der Schlüssel liegt nur im macOS-Schlüsselbund; „Prüfen“ verbraucht keine Tokens.",
               "name" : "Modelle per API"
+            },
+            {
+              "detail" : "Im Fenster „Claude Code“ im Tab „Skills und Plug-ins“: die Skills von Claude Code und Codex und die Plug-ins von Claude Code, jeweils mit Schalter; die Hooks beider zur Ansicht.",
+              "name" : "Skills und Plug-ins"
             },
             {
               "detail" : "Einstellungen → „Profile“ → „Standarddienst“: er führt die Befehle des Profils aus.",

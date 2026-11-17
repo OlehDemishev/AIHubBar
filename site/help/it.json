@@ -219,6 +219,10 @@
               "name" : "Cronologia dei consumi"
             },
             {
+              "detail" : "La finestra «Cronologia dei consumi» si apre con «Oggi»: consumo per progetto, attività in background e limiti. Lo stesso arriva una volta al giorno in Telegram se attivi «Riepilogo del giorno in Telegram» nella pagina «Limiti IA». Lì il prezzo dell’abbonamento viene anche confrontato con il consumo al tuo prezzo API.",
+              "name" : "Riepilogo del giorno"
+            },
+            {
               "detail" : "Una volta per finestra al 50/80/95 per cento (soglie nelle Impostazioni) e quando il limite si ripristina; se vuoi, anche su Telegram.",
               "name" : "Notifiche"
             },
@@ -270,6 +274,14 @@
               "name" : "Richiesta rapida"
             },
             {
+              "detail" : "In «Richiesta rapida» anche Codex lavora in background: scrive solo nella cartella del progetto, senza rete, e l’esito arriva in una notifica. Vicino alla soglia lo fermano i limiti di Codex stesso.",
+              "name" : "Codex in background"
+            },
+            {
+              "detail" : "Un’attività di Claude al limite si può passare a Codex («A Codex», «Passa a Codex»), e una finita farla rivedere all’altro servizio («Rivedi in…» nel menu dell’attività). La casella «Anche in Codex — per confrontare» in «Richiesta rapida» dà l’attività a entrambi insieme, ciascuno nel proprio worktree.",
+              "name" : "Claude e Codex insieme"
+            },
+            {
               "detail" : "Attività in background: cosa fa Claude, passo dopo passo.",
               "name" : "Registro"
             },
@@ -315,6 +327,10 @@
             {
               "detail" : "Anthropic, OpenAI, Google, xAI, DeepSeek, Mistral e qualsiasi server compatibile con OpenAI (Ollama, LM Studio, OpenRouter). La chiave resta solo nel portachiavi di macOS; «Verifica» non consuma token.",
               "name" : "Modelli via API"
+            },
+            {
+              "detail" : "Nella finestra «Claude Code», scheda «Skill e plugin»: le skill di Claude Code e Codex e i plugin di Claude Code, ciascuno con un interruttore; gli hook di entrambi in sola lettura.",
+              "name" : "Skill e plugin"
             },
             {
               "detail" : "Impostazioni → «Profili» → «Servizio predefinito»: esegue i comandi del profilo.",
