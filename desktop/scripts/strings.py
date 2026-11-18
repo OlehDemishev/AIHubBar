@@ -6,6 +6,9 @@ Finds the keys the desktop code uses — `data-t="…"` / `data-t-title="…"` i
 each language but Russian (the keys are the Russian texts). A new text goes into AIHubBar/Resources/Localizable.xcstrings first, with all
 translations, so the Mac and desktop versions never drift.
 
+Also writes ui/i18n/prompts.json: the Mac's prompts for Claude in a project without shared rules (`nextStep`,
+`customTask`, `finishSession` of every language in AIHubBar/Models/ContentLanguage.swift).
+
     python3 scripts/strings.py          # write the files
     python3 scripts/strings.py --check  # only check: every key and translation is there, the files are current
 """
@@ -17,6 +20,12 @@ from pathlib import Path
 
 DESKTOP = Path(__file__).resolve().parent.parent
 CATALOG = DESKTOP.parent / "AIHubBar" / "Resources" / "Localizable.xcstrings"
+CONTENT = DESKTOP.parent / "AIHubBar" / "Models" / "ContentLanguage.swift"
+PROMPT_KEYS = ["nextStep", "customTask", "finishSession"]
+CONTENT_LANGUAGES = {
+    "russian": "ru", "english": "en", "spanish": "es", "portuguese": "pt-BR", "french": "fr", "german": "de",
+    "japanese": "ja", "indonesian": "id", "korean": "ko", "italian": "it", "arabic": "ar", "polish": "pl", "ukrainian": "uk",
+}
 OUT = DESKTOP / "ui" / "i18n"
 LANGUAGES = ["en", "es", "pt-BR", "fr", "de", "ja", "id", "ko", "it", "ar", "pl", "uk"]
 
@@ -36,6 +45,35 @@ def used_keys():
                 for match in re.finditer(pattern, path.read_text(encoding="utf-8")):
                     keys.add(match.group(1).replace('\\"', '"'))
     return sorted(keys)
+
+
+def prompts():
+    """{code: {nextStep, customTask, finishSession}} from the Swift `ContentStrings` tables."""
+    text = CONTENT.read_text(encoding="utf-8")
+    blocks = re.split(r"static let (\w+) = ContentStrings\(", text)
+    result = {}
+    for name, body in zip(blocks[1::2], blocks[2::2]):
+        code = CONTENT_LANGUAGES.get(name)
+        if code is None:
+            continue
+        entry = {}
+        for key in PROMPT_KEYS:
+            match = re.search(key + r': "((?:[^"\\]|\\.)*)"', body)
+            if match:
+                entry[key] = re.sub(r"\\(.)", r"\1", match.group(1))
+        result[code] = entry
+    return result
+
+
+def write(path, text, check, stale):
+    if check:
+        if not path.exists() or path.read_text(encoding="utf-8") != text:
+            stale.append(path.name)
+    else:
+        OUT.mkdir(parents=True, exist_ok=True)
+        # LF on Windows too (Path.write_text has no `newline` before Python 3.10).
+        with open(path, "w", encoding="utf-8", newline="\n") as file:
+            file.write(text)
 
 
 def main():
@@ -60,15 +98,14 @@ def main():
     for code in LANGUAGES:
         table = {key: catalog[key]["localizations"][code]["stringUnit"]["value"] for key in keys}
         text = json.dumps(table, ensure_ascii=False, indent=1, sort_keys=True) + "\n"
-        path = OUT / f"{code}.json"
-        if check:
-            if not path.exists() or path.read_text(encoding="utf-8") != text:
-                stale.append(path.name)
-        else:
-            OUT.mkdir(parents=True, exist_ok=True)
-            # LF on Windows too (Path.write_text has no `newline` before Python 3.10).
-            with open(path, "w", encoding="utf-8", newline="\n") as file:
-                file.write(text)
+        write(OUT / f"{code}.json", text, check, stale)
+    table = prompts()
+    for code in CONTENT_LANGUAGES.values():
+        missing = [key for key in PROMPT_KEYS if not table.get(code, {}).get(key)]
+        if missing:
+            print(f"no {', '.join(missing)} for {code} in {CONTENT.name}", file=sys.stderr)
+            sys.exit(1)
+    write(OUT / "prompts.json", json.dumps(table, ensure_ascii=False, indent=1, sort_keys=True) + "\n", check, stale)
     if stale:
         print("out of date (run python3 scripts/strings.py): " + ", ".join(stale), file=sys.stderr)
         sys.exit(1)

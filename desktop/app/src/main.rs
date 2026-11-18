@@ -285,7 +285,7 @@ fn main() {
             sessions::sessions_view, sessions::decide_request, sessions::hooks_state, sessions::install_hooks,
             sessions::uninstall_hooks, sessions::agent_hooks_state, sessions::install_agent_hooks, sessions::uninstall_agent_hooks,
             projects::projects_view, projects::refresh_projects, projects::projects_panel_opened, projects::open_project,
-            projects::open_link
+            projects::open_link, projects::launch_claude
         ])
         .setup(|app| {
             // Only the tray icon, no Dock icon, when trying it out on a Mac.
