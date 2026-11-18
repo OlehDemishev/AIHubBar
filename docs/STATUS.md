@@ -5,6 +5,7 @@
 **Updated:** 2026-11-19
 
 **Now:**
+- 2026-11-19: Windows — «Быстрый запрос»: Ctrl+Alt+P from any program, the task to Claude, Codex or another agent, the project from the front window (#446)
 - 2026-11-19: Windows — Codex in the background from «Своя задача…» of a git project, the Mac's run files and log (#444, merged; CI green)
 - 2026-11-19: Windows — «Главный сервис»: Codex or another service can lead the panel and the tray icon instead of Claude (#442, merged; CI green)
 - 2026-11-18: Windows — other AI services' limits: Codex, Copilot, Gemini CLI, OpenRouter, OpenAI and Anthropic costs under Claude's in the panel, with alerts (#440, merged; CI green on Windows and Linux)
@@ -104,6 +105,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-19 — Windows: «Быстрый запрос» (branch `feat/desktop-quick-prompt`)
+
+Done: `desktop/core/quick_prompt.rs` ports the Mac's `QuickPrompt` rules: the project named as a whole word in the front window's title (the longest name wins), else the last one, else the most recently active; the agents and their modes; the hot key choices. `app/src/quick_prompt.rs` registers the hot key with `tauri-plugin-global-shortcut` 2.4.1 only while the module is on, reads the front window's title before its own window comes up, and sends the task: Claude Code through `launch_now` (background or terminal, a worktree when busy, «Запустить всё равно»), Codex to the background or a terminal, other agents to a terminal with the task on the clipboard. `ui/quick-prompt.html` is the always-on-top window; Settings → «Модули» → «Быстрый запрос» has the switch, the key and «Открыть»; `claudepult --app-command quick-prompt` opens it too. Three new catalog texts with 12 translations (Ctrl+V for ⌘V, no Accessibility).
+Checked: `python3 scripts/strings.py --check` (516 texts), `scripts/strings-check.py` (1875 keys), `cargo test --workspace` on the Mac (core 118: the project in front, the last and the most recent, whole words, agents and modes, the keys). The window in a browser with sample replies at 560 px: the project from the title, Claude's last mode, Gemini terminal only, Codex background, Ctrl+Enter, the busy folder's «Запустить всё равно», closing. The hot key itself wasn't pressed (the module is off on this Mac).
+Left: try Ctrl+Alt+P on the laptop (and whether a layout's AltGr takes it); «И в Codex — сравнить» with the pair; keyboard shortcuts for quick commands can now use the same plugin.
 
 ## 2026-11-19 — Windows: Codex in the background (branch `feat/desktop-codex-background`)
 

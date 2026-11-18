@@ -33581,6 +33581,82 @@
         }
       }
     },
+    "Другие агенты — только в Терминале: задача в буфере обмена, вставьте Ctrl+V": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الوكلاء الآخرون في الطرفية فقط: المهمة في الحافظة، الصقها بـ Ctrl+V"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Andere Agenten nur im Terminal: Die Aufgabe liegt in der Zwischenablage, mit Strg+V einfügen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Other agents run only in Terminal: the task is on the clipboard, paste it with Ctrl+V"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los demás agentes solo en Terminal: la tarea está en el portapapeles, pégala con Ctrl+V"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les autres agents seulement dans Terminal : la tâche est dans le presse-papiers, collez-la avec Ctrl+V"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Agen lain hanya di Terminal: tugas ada di papan klip, tempel dengan Ctrl+V"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gli altri agenti solo in Terminale: l’attività è negli appunti, incollala con Ctrl+V"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ほかのエージェントはターミナルのみ。タスクはクリップボードにあるので Ctrl+V で貼り付けてください"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "다른 에이전트는 터미널에서만: 작업이 클립보드에 있으니 Ctrl+V로 붙여 넣으세요"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Inni agenci tylko w Terminalu: zadanie jest w schowku, wklej je Ctrl+V"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Os outros agentes só no Terminal: a tarefa está na área de transferência, cole com Ctrl+V"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Інші агенти — лише в Терміналі: завдання в буфері обміну, вставте Ctrl+V"
+          }
+        }
+      }
+    },
     "Другие агенты — только в Терминале: задача в буфере обмена, вставьте ⌘V": {
       "localizations": {
         "ar": {
@@ -89574,6 +89650,82 @@
         }
       }
     },
+    "Проект — тот, что в заголовке окна впереди, иначе прошлый. Claude Code и Codex — в фоне или в Терминале; другие агенты открываются в Терминале, задача — в буфере обмена. Из скрипта: claudepult --app-command quick-prompt.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "المشروع هو الذي يظهر في عنوان النافذة الأمامية، وإلا فالأخير. يعمل Claude Code وCodex في الخلفية أو في الطرفية؛ ويُفتح الوكلاء الآخرون في الطرفية والمهمة في الحافظة. من سكربت: claudepult --app-command quick-prompt."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Projekt ist das im Titel des vorderen Fensters, sonst das letzte. Claude Code und Codex laufen im Hintergrund oder im Terminal; andere Agenten öffnen sich im Terminal, die Aufgabe liegt in der Zwischenablage. Aus einem Skript: claudepult --app-command quick-prompt."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The project is the one in the front window’s title, otherwise the last one. Claude Code and Codex run in the background or in Terminal; other agents open in Terminal with the task on the clipboard. From a script: claudepult --app-command quick-prompt."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El proyecto es el que aparece en el título de la ventana de delante; si no, el último. Claude Code y Codex van en segundo plano o en Terminal; los demás agentes se abren en Terminal, con la tarea en el portapapeles. Desde un script: claudepult --app-command quick-prompt."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le projet est celui du titre de la fenêtre au premier plan, sinon le dernier. Claude Code et Codex tournent en arrière-plan ou dans Terminal ; les autres agents s’ouvrent dans Terminal, la tâche dans le presse-papiers. Depuis un script : claudepult --app-command quick-prompt."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Proyeknya adalah yang ada di judul jendela depan, jika tidak yang terakhir. Claude Code dan Codex berjalan di latar belakang atau di Terminal; agen lain terbuka di Terminal dengan tugas di papan klip. Dari skrip: claudepult --app-command quick-prompt."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il progetto è quello nel titolo della finestra in primo piano, altrimenti l’ultimo. Claude Code e Codex vanno in background o in Terminale; gli altri agenti si aprono in Terminale, con l’attività negli appunti. Da uno script: claudepult --app-command quick-prompt."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "プロジェクトは前面のウインドウのタイトルにあるもの、なければ前回のものです。Claude Code と Codex はバックグラウンドかターミナルで実行され、ほかのエージェントはターミナルで開き、タスクはクリップボードに入ります。スクリプトから: claudepult --app-command quick-prompt。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "프로젝트는 앞 창의 제목에 있는 것, 아니면 지난번 것입니다. Claude Code와 Codex는 백그라운드나 터미널에서 실행되고, 다른 에이전트는 터미널에서 열리며 작업은 클립보드에 들어갑니다. 스크립트에서: claudepult --app-command quick-prompt."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Projekt to ten z tytułu okna na wierzchu, w przeciwnym razie ostatni. Claude Code i Codex działają w tle lub w Terminalu; inni agenci otwierają się w Terminalu, a zadanie trafia do schowka. Ze skryptu: claudepult --app-command quick-prompt."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O projeto é o que está no título da janela à frente, senão o último. Claude Code e Codex rodam em segundo plano ou no Terminal; os outros agentes abrem no Terminal, com a tarefa na área de transferência. De um script: claudepult --app-command quick-prompt."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Проєкт — той, що в заголовку вікна попереду, інакше попередній. Claude Code і Codex — у фоні або в Терміналі; інші агенти відкриваються в Терміналі, завдання — в буфері обміну. Зі скрипта: claudepult --app-command quick-prompt."
+          }
+        }
+      }
+    },
     "Проект — тот, что впереди (если «Универсальный доступ» уже выдан, например для «Раскладки»), иначе прошлый. Claude Code — в фоне или в Терминале, как «Своя задача…» у проекта; другие агенты открываются в Терминале, задача — в буфере обмена. Из скрипта: AIHubBar --app-command quick-prompt.": {
       "localizations": {
         "ar": {
@@ -116735,6 +116887,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Фон — claude -p без вікна, підсумок сповіщенням; Термінал — нове вікно, можна відповідати Claude"
+          }
+        }
+      }
+    },
+    "Фон — codex exec без окна, итог уведомлением; Терминал — задача в буфере обмена, вставьте Ctrl+V": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الخلفية — codex exec بلا نافذة، والنتيجة في إشعار؛ الطرفية — المهمة في الحافظة، الصقها بـ Ctrl+V"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hintergrund — codex exec ohne Fenster, Ergebnis als Mitteilung; Terminal — die Aufgabe liegt in der Zwischenablage, mit Strg+V einfügen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Background — codex exec without a window, the result as a notification; Terminal — the task is on the clipboard, paste it with Ctrl+V"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Segundo plano — codex exec sin ventana, resultado en una notificación; Terminal — la tarea está en el portapapeles, pégala con Ctrl+V"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arrière-plan — codex exec sans fenêtre, résultat en notification ; Terminal — la tâche est dans le presse-papiers, collez-la avec Ctrl+V"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Latar belakang — codex exec tanpa jendela, hasil lewat pemberitahuan; Terminal — tugas ada di papan klip, tempel dengan Ctrl+V"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Background — codex exec senza finestra, esito in una notifica; Terminale — l’attività è negli appunti, incollala con Ctrl+V"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "バックグラウンド — ウインドウなしの codex exec、結果は通知で。ターミナル — タスクはクリップボードにあるので Ctrl+V で貼り付けてください"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "백그라운드 — 창 없는 codex exec, 결과는 알림으로; 터미널 — 작업이 클립보드에 있으니 Ctrl+V로 붙여 넣으세요"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "W tle — codex exec bez okna, wynik w powiadomieniu; Terminal — zadanie jest w schowku, wklej je Ctrl+V"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Segundo plano — codex exec sem janela, resultado em notificação; Terminal — a tarefa está na área de transferência, cole com Ctrl+V"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Фон — codex exec без вікна, підсумок сповіщенням; Термінал — завдання в буфері обміну, вставте Ctrl+V"
           }
         }
       }

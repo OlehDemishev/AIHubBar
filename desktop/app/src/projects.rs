@@ -178,6 +178,16 @@ impl Projects {
     }
 
     /// The base branch and the Next items of a scanned project.
+    /// The git projects for «Быстрый запрос»: name, folder, last change.
+    pub(crate) fn candidates(&self) -> Vec<claudepult_core::quick_prompt::Candidate> {
+        let state = self.state.lock().unwrap();
+        state
+            .projects
+            .iter()
+            .map(|p| claudepult_core::quick_prompt::Candidate { name: p.name.clone(), path: p.path.to_string_lossy().into_owned(), last_activity: p.last_activity.map(|d| d.with_timezone(&Utc)) })
+            .collect()
+    }
+
     fn launch_target(&self, path: &Path) -> Option<(String, Vec<String>)> {
         let state = self.state.lock().unwrap();
         let project = state.projects.iter().find(|p| p.path == path)?;
@@ -582,11 +592,11 @@ pub fn open_link(app: AppHandle, url: String) -> Result<(), String> {
 
 #[derive(Serialize, Default)]
 pub struct LaunchReply {
-    message: String,
+    pub(crate) message: String,
     /// The folder is busy and the command can't move to a worktree: «Запустить всё равно» asks again.
-    confirm: bool,
+    pub(crate) confirm: bool,
     /// No mode chosen yet: «Где запустить «…»?» with «Терминал» / «Фон».
-    choose: Option<String>,
+    pub(crate) choose: Option<String>,
 }
 
 /// «Следующий шаг», «Своя задача», «Завершить», as the Mac's `LaunchController`: in a terminal window or in the
@@ -610,7 +620,7 @@ pub async fn launch_claude(
         .map_err(|e| e.to_string())?
 }
 
-fn launch_now(
+pub(crate) fn launch_now(
     app: &AppHandle,
     path: &Path,
     command: &str,

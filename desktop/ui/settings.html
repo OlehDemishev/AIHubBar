@@ -199,6 +199,24 @@
         <p class="secondary" data-t="Корзина очищается только после подтверждения."></p>
       </div>
     </section>
+    <section class="card">
+      <div class="row">
+        <label for="module-quick-prompt"><strong data-t="Быстрый запрос"></strong></label>
+        <input type="checkbox" class="switch" id="module-quick-prompt">
+      </div>
+      <p class="secondary" data-t="Горячая клавиша в любом приложении открывает окно: задача, проект и агент — и она уходит в фон или в новое окно Терминала."></p>
+      <div id="quick-prompt-options" hidden>
+        <div class="row">
+          <label for="quick-prompt-key" data-t="Горячая клавиша"></label>
+          <select id="quick-prompt-key"></select>
+        </div>
+        <div class="row">
+          <span data-t="Окно быстрого запроса"></span>
+          <button id="quick-prompt-open" data-t="Открыть"></button>
+        </div>
+        <p class="secondary" data-t="Проект — тот, что в заголовке окна впереди, иначе прошлый. Claude Code и Codex — в фоне или в Терминале; другие агенты открываются в Терминале, задача — в буфере обмена. Из скрипта: claudepult --app-command quick-prompt."></p>
+      </div>
+    </section>
     <h1 data-t="Фоновые задачи"></h1>
     <section class="card">
       <div class="row">
@@ -909,6 +927,23 @@
       showHubSettings(await invoke("hub_settings"));
       showMainService(await invoke("main_service"));
     });
+
+    // «Быстрый запрос»: on or off, its hot key, and a way to try the window.
+    const quickPromptModule = document.getElementById("module-quick-prompt");
+    const quickPromptKey = document.getElementById("quick-prompt-key");
+    function showQuickPrompt(view) {
+      quickPromptModule.checked = view.on;
+      document.getElementById("quick-prompt-options").hidden = !view.on;
+      quickPromptKey.replaceChildren(...view.hotKeys.map(([id, title]) => new Option(title, id)));
+      quickPromptKey.value = view.hotKey;
+    }
+    quickPromptModule.onchange = async () => {
+      await invoke("set_module", { kind: "quickPrompt", on: quickPromptModule.checked });
+      showQuickPrompt(await invoke("quick_prompt_settings"));
+    };
+    quickPromptKey.onchange = async () => showQuickPrompt(await invoke("set_quick_prompt_hot_key", { hotKey: quickPromptKey.value }));
+    document.getElementById("quick-prompt-open").onclick = () => invoke("open_quick_prompt");
+    showQuickPrompt(await invoke("quick_prompt_settings"));
 
     // «Ресурсы компьютера»: on or off, the alerts and the disk threshold.
     const resourcesModule = document.getElementById("module-resources");

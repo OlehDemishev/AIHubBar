@@ -48,6 +48,10 @@ pub struct Settings {
     pub hub_gemini_daily_limit: u64,
     /// Whose limits lead the panel and the tray icon (the Mac's `mainService`): `""` automatic, `claude` or a source.
     pub main_service: String,
+    /// «Быстрый запрос» (the Mac's `QuickPromptSettings`): the hot key, and the project and mode used last.
+    pub quick_prompt_hot_key: String,
+    pub quick_prompt_last_project: Option<String>,
+    pub quick_prompt_last_mode: Option<String>,
     /// `projects_dir` and `launch_mode` of a file from before profiles, for the first profile.
     #[serde(skip)]
     pub before_profiles: (Option<String>, Option<String>),
@@ -74,6 +78,9 @@ impl Default for Settings {
             hub_gemini_quota: false,
             hub_gemini_daily_limit: 1000,
             main_service: String::new(),
+            quick_prompt_hot_key: crate::quick_prompt::DEFAULT_HOT_KEY.id().to_owned(),
+            quick_prompt_last_project: None,
+            quick_prompt_last_mode: None,
             before_profiles: (None, None),
         }
     }
@@ -123,6 +130,9 @@ impl Settings {
             hub_disabled: value.get("hub_disabled").and_then(Value::as_array).map(|l| l.iter().filter_map(Value::as_str).map(str::to_owned).collect()).unwrap_or_default(),
             hub_gemini_quota: value.get("hub_gemini_quota").and_then(Value::as_bool).unwrap_or(false),
             main_service: value.get("main_service").and_then(Value::as_str).unwrap_or_default().to_owned(),
+            quick_prompt_hot_key: text("quick_prompt_hot_key").filter(|k| crate::quick_prompt::HotKey::parse(k).is_some()).unwrap_or(defaults.quick_prompt_hot_key),
+            quick_prompt_last_project: text("quick_prompt_last_project"),
+            quick_prompt_last_mode: text("quick_prompt_last_mode").filter(|m| LAUNCH_MODES.contains(&m.as_str())),
             hub_gemini_daily_limit: value.get("hub_gemini_daily_limit").and_then(Value::as_u64).filter(|n| *n > 0).unwrap_or(1000),
             quick_toggles: value
                 .get("quick_toggles")
@@ -275,7 +285,7 @@ impl Settings {
 // MARK: - Modules: the Mac's `installed` and `off` lists, so `.claudepult` files carry them both ways
 
 /// The stage 6 modules this version has, as the Mac's `ModuleKind` names them.
-pub const MODULES: [&str; 4] = ["resources", "keepAwake", "quickCommands", "toggles"];
+pub const MODULES: [&str; 5] = ["resources", "keepAwake", "quickCommands", "toggles", "quickPrompt"];
 
 impl Settings {
     fn kinds(&self, key: &str) -> Vec<String> {
