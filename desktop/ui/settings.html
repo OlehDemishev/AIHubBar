@@ -95,6 +95,10 @@
       <div id="provider-rows"></div>
     </section>
     <section class="card services">
+      <h2 data-t="Другие AI"></h2>
+      <div id="hub-sources"></div>
+    </section>
+    <section class="card services">
       <h2 data-t="Расход по API"></h2>
       <div class="row"><span data-t="Сегодня"></span><span id="spend-today"></span></div>
       <div class="row"><span data-t="В этом месяце"></span><span id="spend-month"></span></div>
@@ -824,6 +828,70 @@
       showToggleSettings(await invoke("quick_toggle_settings"));
     };
     showToggleSettings(await invoke("quick_toggle_settings"));
+
+    // «Другие AI»: each service's limits — its switch, what it needs, its key, Gemini's plan and quota.
+    function showHubSettings(view) {
+      document.getElementById("hub-sources").replaceChildren(...view.sources.map((source) => {
+        const box = document.createElement("div");
+        box.className = "hub-source";
+        const head = document.createElement("div");
+        head.className = "row";
+        const label = document.createElement("label");
+        label.className = "check-line";
+        const box1 = Object.assign(document.createElement("input"), { type: "checkbox", checked: source.enabled });
+        box1.onchange = async () => showHubSettings(await invoke("set_hub_enabled", { id: source.id, on: box1.checked }));
+        label.append(box1, " ", Object.assign(document.createElement("strong"), { textContent: source.title }));
+        const status = Object.assign(document.createElement("span"), { className: source.found ? "secondary status" : "warning status", textContent: source.status });
+        head.append(label, status);
+        box.append(head, Object.assign(document.createElement("p"), { className: "secondary", textContent: source.requirement }));
+        if (source.needsKey && view.keysAvailable) {
+          const line = document.createElement("div");
+          line.className = "row";
+          if (source.hasKey) {
+            const remove = Object.assign(document.createElement("button"), { textContent: t("Удалить ключ") });
+            remove.onclick = async () => {
+              if (!remove.dataset.asked) { remove.dataset.asked = "1"; remove.textContent = t("Удалить?"); return; }
+              showHubSettings(await invoke("delete_hub_key", { id: source.id }));
+            };
+            line.append(Object.assign(document.createElement("span"), { textContent: t("Ключ сохранён") }), remove);
+          } else {
+            const key = Object.assign(document.createElement("input"), { type: "password", placeholder: t("Ключ"), autocomplete: "off" });
+            key.className = "wide";
+            const store = Object.assign(document.createElement("button"), { textContent: t("Сохранить") });
+            const saveKey = async () => { if (key.value.trim()) showHubSettings(await invoke("save_hub_key", { id: source.id, key: key.value })); };
+            store.onclick = saveKey;
+            key.onkeydown = (event) => { if (event.key === "Enter") saveKey(); };
+            line.append(key, store);
+          }
+          if (source.keyPage) {
+            const page = Object.assign(document.createElement("button"), { textContent: "↗", title: t("Где взять ключ: %@", source.keyPage) });
+            page.onclick = () => invoke("open_hub_key_page", { id: source.id });
+            line.append(page);
+          }
+          box.append(line);
+        }
+        if (source.id === "gemini") {
+          const quota = document.createElement("label");
+          quota.className = "check-line";
+          const quotaBox = Object.assign(document.createElement("input"), { type: "checkbox", checked: view.geminiQuota });
+          quota.title = t("Иначе запросы считаются по журналам ~/.gemini за сегодня и делятся на дневной лимит тарифа");
+          quota.append(quotaBox, " ", t("Точная квота через вход Gemini CLI"));
+          const plan = document.createElement("select");
+          for (const [value, title] of [[250, t("250 — бесплатный ключ API")], [1000, t("1 000 — аккаунт Google")], [1500, t("1 500 — AI Pro")], [2000, t("2 000 — AI Ultra")]]) plan.add(new Option(title, String(value)));
+          plan.value = String(view.geminiDailyLimit);
+          const storeGemini = async () => showHubSettings(await invoke("set_gemini_options", { quota: quotaBox.checked, dailyLimit: Number(plan.value) }));
+          quotaBox.onchange = storeGemini;
+          plan.onchange = storeGemini;
+          const planRow = document.createElement("label");
+          planRow.className = "row";
+          planRow.append(Object.assign(document.createElement("span"), { textContent: t("Запросов в день по тарифу") }), plan);
+          box.append(quota, planRow);
+        }
+        return box;
+      }));
+    }
+    showHubSettings(await invoke("hub_settings"));
+    window.__TAURI__.event.listen("hub-changed", async () => showHubSettings(await invoke("hub_settings")));
 
     // «Ресурсы компьютера»: on or off, the alerts and the disk threshold.
     const resourcesModule = document.getElementById("module-resources");

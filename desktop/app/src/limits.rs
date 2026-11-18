@@ -149,6 +149,10 @@ impl Limits {
                 tooltip += "\n";
                 tooltip += &texts.format("Проектов: %lld · с проблемами: %lld", &[&count.to_string(), &red.to_string()]);
             }
+            if let Some(line) = app.state::<crate::hub::Hub>().tray_line() {
+                tooltip += "\n";
+                tooltip += &line;
+            }
             if let Some(line) = app.state::<crate::resources::Resources>().tray_line(&texts) {
                 tooltip += "\n";
                 tooltip += &line;

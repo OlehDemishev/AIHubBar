@@ -336,3 +336,18 @@ button.tile { flex: 1; min-width: 0; display: flex; flex-direction: column; alig
 button.tile .glyph { font-size: 15px; height: 18px; line-height: 18px; }
 button.tile .name { font-size: 11px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 100%; }
 button.tile.on { background: color-mix(in srgb, var(--accent) 22%, transparent); color: var(--accent); }
+
+/* «Другие AI»: under Claude's limits, a service's name, then a bar per window. */
+.hub h3 { font-size: 12px; font-weight: 600; color: var(--secondary); margin: 10px 0 2px; }
+.hub-service { margin-top: 6px; font-size: 12px; }
+.hub-service p { margin: 2px 0 0; font-size: 11px; }
+.hub-service .warning, .hub-source .warning { color: #ff9500; }
+.hub-window { display: grid; grid-template-columns: minmax(70px, max-content) minmax(60px, 1fr) max-content; gap: 8px; align-items: center; margin-top: 3px; }
+.hub-window.spend { grid-template-columns: minmax(70px, max-content) 1fr; }
+.hub-window .bar { height: 6px; border-radius: 3px; background: var(--line); overflow: hidden; }
+.hub-window .fill { display: block; height: 100%; border-radius: 3px; }
+.hub-window .value { white-space: nowrap; font-variant-numeric: tabular-nums; }
+.hub-source { padding: 6px 0; border-top: 1px solid var(--line); }
+.hub-source:first-child { border-top: none; }
+.hub-source p { margin: 0; font-size: 11px; }
+.hub-source .status { font-size: 11px; text-align: end; max-width: 60%; }
