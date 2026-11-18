@@ -35,6 +35,12 @@
         <p style="margin-top: 6px"><button id="hooks-settings" data-t="Настройки…"></button></p>
       </div>
     </section>
+    <section class="card upcoming" id="upcoming" hidden>
+      <h2 data-t="Ближайшее"></h2>
+      <div id="upcoming-rows"></div>
+      <p class="secondary" id="upcoming-empty" data-t="На неделю дат нет." hidden></p>
+      <p class="secondary" id="upcoming-more" hidden></p>
+    </section>
     <section class="card projects">
       <h2 data-t="Проекты"></h2>
       <div id="project-rows"></div>
@@ -634,6 +640,28 @@
     }
     document.getElementById("new-project-create").onclick = createProject;
     newProjectName.addEventListener("keydown", (event) => { if (event.key === "Enter") createProject(); });
+
+    // «Ближайшее»: the next 7 days of every profile with a calendar, overdue in red; a click opens it.
+    async function showUpcoming() {
+      const view = await invoke("upcoming_view");
+      document.getElementById("upcoming").hidden = !view.active;
+      document.getElementById("upcoming-empty").hidden = view.rows.length > 0;
+      const more = document.getElementById("upcoming-more");
+      more.hidden = !view.more;
+      more.textContent = view.more ?? "";
+      document.getElementById("upcoming-rows").replaceChildren(...view.rows.map((row) => {
+        const line = element("button", row.overdue ? "upcoming-row overdue" : "upcoming-row");
+        line.title = row.hint;
+        line.append(element("span", "mark", { deadline: "⚑", publish: "➤", plan: "▦" }[row.kind]), element("span", "title", row.title));
+        if (row.detail) line.append(element("span", "secondary detail", row.detail));
+        line.append(element("span", "spacer"), element("span", "when", row.when));
+        line.onclick = () => invoke("open_upcoming", { id: row.id });
+        return line;
+      }));
+    }
+    showUpcoming();
+    window.__TAURI__.event.listen("calendar-changed", showUpcoming);
+    window.addEventListener("focus", showUpcoming);
 
     let otherAgents = [];
     async function showProjects() {

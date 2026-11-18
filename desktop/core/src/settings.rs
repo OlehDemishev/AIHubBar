@@ -24,6 +24,8 @@ pub struct Settings {
     /// In the order shown.
     pub profiles: Vec<Profile>,
     pub current_profile: Option<String>,
+    /// Calendar reminders, hours before a date (the Mac's `calendarReminderHours`); empty — «не напоминать».
+    pub calendar_reminder_hours: Vec<i64>,
     /// The Mac's settings from the last imported `.claudepult` file (`profiles::MAC_KEYS`: appearance, AI services,
     /// Telegram, modules…): nothing here uses them, an export writes them back.
     pub mac_settings: Map<String, Value>,
@@ -41,6 +43,7 @@ impl Default for Settings {
             pull_request_alerts: true,
             profiles: Vec::new(),
             current_profile: None,
+            calendar_reminder_hours: vec![24],
             mac_settings: Map::new(),
             before_profiles: (None, None),
         }
@@ -74,6 +77,11 @@ impl Settings {
             pull_request_alerts: value.get("pull_request_alerts").and_then(Value::as_bool).unwrap_or(defaults.pull_request_alerts),
             profiles,
             current_profile: text("current_profile"),
+            calendar_reminder_hours: value
+                .get("calendar_reminder_hours")
+                .and_then(Value::as_array)
+                .map(|list| list.iter().filter_map(Value::as_i64).filter(|h| *h > 0).collect())
+                .unwrap_or(defaults.calendar_reminder_hours),
             mac_settings: value
                 .get("mac_settings")
                 .and_then(Value::as_object)
@@ -288,6 +296,9 @@ mod tests {
         assert!(!read.tray_hint_seen, "a bad value takes the default, the rest stays");
         assert_eq!((read.background_time_limit_minutes, read.pull_request_alerts), (90, true));
         assert_eq!(read.profiles.len(), 1, "not an object and a repeated id are dropped");
+        assert_eq!(read.calendar_reminder_hours, [24], "the Mac's default");
+        assert_eq!(Settings::from_json(r#"{"calendar_reminder_hours": []}"#).calendar_reminder_hours, Vec::<i64>::new(), "«не напоминать» stays");
+        assert_eq!(Settings::from_json(r#"{"calendar_reminder_hours": [72, "x", -1, 24]}"#).calendar_reminder_hours, [72, 24]);
     }
 
     #[test]

@@ -49,6 +49,10 @@
         <label for="launch-mode" data-t="Где запускать Claude"></label>
         <select id="launch-mode"></select>
       </div>
+      <div class="row" id="calendar-row" hidden>
+        <label for="profile-calendar" data-t="Календарь"></label>
+        <select id="profile-calendar"></select>
+      </div>
     </section>
     <h1 data-t="Сервисы AI"></h1>
     <section class="card services">
@@ -93,6 +97,10 @@
     </section>
     <h1 data-t="Проекты"></h1>
     <section class="card">
+      <div class="row">
+        <label for="reminders" data-t="Напоминать"></label>
+        <select id="reminders"></select>
+      </div>
       <div class="row">
         <label for="pr-alerts" data-t="Уведомлять, когда CI упал или починился и когда PR закрыт"></label>
         <input type="checkbox" id="pr-alerts">
@@ -213,12 +221,26 @@
     mode.onchange = saveLaunch;
     limit.onchange = saveLaunch;
 
+    // A profile with folder projects: whose dates go to «Ближайшее» and the reminders.
+    const profileCalendar = document.getElementById("profile-calendar");
+    for (const [value, title] of [["off", t("Выключен")], ["dates", t("Дедлайны и публикации")], ["contentPlan", t("+ контент-план")]]) profileCalendar.add(new Option(title, value));
+    profileCalendar.onchange = () => invoke("set_profile_calendar", { mode: profileCalendar.value });
+    const reminders = document.getElementById("reminders");
+    const reminderChoices = [[[], t("не напоминать")], [[2], t("за 2 часа")], [[24], t("за сутки")], [[24, 2], t("за сутки и за 2 часа")], [[72, 24], t("за 3 дня и за сутки")]];
+    for (const [hours, title] of reminderChoices) reminders.add(new Option(title, JSON.stringify(hours)));
+    const savedHours = JSON.stringify([...await invoke("reminder_hours")].sort((a, b) => b - a));
+    if (![...reminders.options].some((o) => o.value === savedHours)) reminders.add(new Option(savedHours, savedHours));
+    reminders.value = savedHours;
+    reminders.onchange = () => invoke("set_reminder_hours", { hours: JSON.parse(reminders.value) });
+
     // The current profile's git projects folder; a new one makes installed hooks outdated, so they are shown anew.
     function showFolder(folder) {
       document.getElementById("current-profile").textContent = t("Текущий профиль") + ": " + folder.profile;
       document.getElementById("projects-folder-path").textContent = folder.path ?? "";
       document.getElementById("projects-folder-choose").hidden = folder.path === null;
       document.getElementById("projects-folder-reset").hidden = !folder.custom;
+      document.getElementById("calendar-row").hidden = folder.calendar === null;
+      if (folder.calendar !== null) document.getElementById("profile-calendar").value = folder.calendar;
       const note = document.getElementById("projects-folder-note");
       note.hidden = !folder.note;
       note.textContent = folder.note ?? "";

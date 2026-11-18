@@ -5,6 +5,7 @@
 **Updated:** 2026-11-18
 
 **Now:**
+- 2026-11-18: Windows — «Ближайшее»: deadlines, publications and content plan rows of the next 7 days, reminders (branch `feat/desktop-calendar`)
 - 2026-11-18: Windows — other agents (Codex, Gemini CLI, Antigravity, Copilot, Cursor): found with their version, «Открыть в…», a folder command opens one in a terminal with the task on the clipboard (#422, merged)
 - 2026-11-18: Windows — «Сервисы AI»: models by API with keys in Credential Manager, a service per command, «Сравнить» (#420, merged; the Credential Manager test passes on Windows CI)
 - 2026-11-18: Windows — AI commands on folder projects through Claude Code, in the background with «Только файлы» or in a terminal (#418, merged)
@@ -57,7 +58,7 @@
 - check on the Air: the island at the real notch
 - promotion (docs/LAUNCH.md): r/ClaudeAI, the lists, r/macapps, Show HN, Product Hunt, Homebrew
 - content (docs/specs/SPEC-content.md, agreed): stage 2 «Версии», then batch tasks; better after the first feedback from people
-- Windows: on the laptop the live check of SPEC-windows §11.4 (with a real permission request answered from the panel) the «Проекты» card's buttons, a Claude launch in Windows Terminal and one in the background (do the `PowerShell(…)` rules let it build and check a project without Git Bash?); then stage 5 on: the calendar, the assistant; stage 3 leftovers («Показать», buttons in the notification) need the laptop
+- Windows: on the laptop the live check of SPEC-windows §11.4 (with a real permission request answered from the panel) the «Проекты» card's buttons, a Claude launch in Windows Terminal and one in the background (do the `PowerShell(…)` rules let it build and check a project without Git Bash?); then stage 5 on: the calendar window (moving dates, new plan rows), the assistant; stage 3 leftovers («Показать», buttons in the notification) need the laptop
 
 **Needs Oleh:**
 - Windows laptop: install the tools and copy the two CLAUDE.md files as in `desktop/WINDOWS-DEV.md`, sign in to Claude Code there; choose the Windows signing (SPEC-windows §7)
@@ -93,6 +94,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-18 — Windows: «Ближайшее» (branch `feat/desktop-calendar`)
+
+Done: `desktop/core/calendar.rs` ports the Mac's `CalendarEntry`, `ContentPlan` (reading), `CalendarScanner` and the store's rules: a profile's card dates and content plan rows, the next 7 days (overdue deadlines stay, finished work only ahead), «сегодня / завтра / через N дн / просрочено N дн», reminders once per offset. The app reads them at start, every 5 minutes, on a stale panel and after a stage changes; the panel shows «Ближайшее» while any profile has a calendar; Settings has «Календарь» on the current folder profile and «Напоминать» under «Проекты». `scripts/strings.py` adds the plan's file, title and columns to `content.json`.
+Checked: `python3 scripts/strings.py --check` (271 texts), `scripts/strings-check.py`, `cargo test --workspace` on the Mac (core 90: plan tables with escaped pipes, a missing time, English headers, no date column; a profile's dates with «dates» and «contentPlan», a finished project, off; the week ahead; relative words; reminders once per offset and none for the past or «не напоминать»). The dev app with a «Видео» profile on a test folder: «calendar: 3 dates» (deadline, publication, plan row), no reminder (all more than a day ahead). The panel and Settings in a browser with sample replies.
+Left: the calendar window — a month, moving a date, adding a plan row; reminders to Telegram come with Telegram.
 
 ## 2026-11-18 — Windows: other agents (branch `feat/desktop-agents`)
 

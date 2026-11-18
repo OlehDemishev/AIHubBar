@@ -100,6 +100,7 @@ impl Projects {
                 _ => (Vec::new(), Some(Problem::NoFolder)),
             };
             eprintln!("folder projects: {} in {:.1} s", found.0.len(), started.elapsed().as_secs_f64());
+            app.state::<crate::calendar::Calendar>().ask();
             *self.state.lock().unwrap() = State { folders: found.0, root, updated: Some(Instant::now()), problem: found.1, ..State::default() };
             let _ = app.emit("projects-changed", ());
             app.state::<crate::limits::Limits>().update_tray(app);
@@ -171,6 +172,8 @@ impl Projects {
         if let Some(slot) = self.state.lock().unwrap().folders.iter_mut().find(|p| p.path == path) {
             *slot = fresh;
         }
+        // A stage decides whether a date is still to do.
+        app.state::<crate::calendar::Calendar>().ask();
         let _ = app.emit("projects-changed", ());
     }
 

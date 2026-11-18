@@ -16,9 +16,20 @@
    "publish": "النشر",
    "stage": "المرحلة"
   },
+  "ideaStatus": "فكرة",
   "notCounted": "غير محسوب",
   "notSet": "غير محدد",
   "notesHeading": "## ملاحظات",
+  "planColumns": {
+   "date": "التاريخ",
+   "file": "الملف",
+   "platform": "المنصة",
+   "status": "الحالة",
+   "time": "الوقت",
+   "topic": "الموضوع"
+  },
+  "planFile": "خطة-المحتوى.md",
+  "planTitle": "# خطة المحتوى",
   "projectWord": "مشروع",
   "resultWord": "نتيجة"
  },
@@ -39,9 +50,20 @@
    "publish": "Veröffentlichung",
    "stage": "Phase"
   },
+  "ideaStatus": "Idee",
   "notCounted": "nicht berechnet",
   "notSet": "nicht angegeben",
   "notesHeading": "## Notizen",
+  "planColumns": {
+   "date": "Datum",
+   "file": "Datei",
+   "platform": "Plattform",
+   "status": "Status",
+   "time": "Uhrzeit",
+   "topic": "Thema"
+  },
+  "planFile": "inhaltsplan.md",
+  "planTitle": "# Inhaltsplan",
   "projectWord": "projekt",
   "resultWord": "ergebnis"
  },
@@ -62,9 +84,20 @@
    "publish": "Publish",
    "stage": "Stage"
   },
+  "ideaStatus": "idea",
   "notCounted": "not counted",
   "notSet": "not set",
   "notesHeading": "## Notes",
+  "planColumns": {
+   "date": "Date",
+   "file": "File",
+   "platform": "Platform",
+   "status": "Status",
+   "time": "Time",
+   "topic": "Topic"
+  },
+  "planFile": "content-plan.md",
+  "planTitle": "# Content plan",
   "projectWord": "project",
   "resultWord": "result"
  },
@@ -85,9 +118,20 @@
    "publish": "Publicación",
    "stage": "Etapa"
   },
+  "ideaStatus": "idea",
   "notCounted": "sin calcular",
   "notSet": "sin indicar",
   "notesHeading": "## Notas",
+  "planColumns": {
+   "date": "Fecha",
+   "file": "Archivo",
+   "platform": "Plataforma",
+   "status": "Estado",
+   "time": "Hora",
+   "topic": "Tema"
+  },
+  "planFile": "plan-de-contenido.md",
+  "planTitle": "# Plan de contenido",
   "projectWord": "proyecto",
   "resultWord": "resultado"
  },
@@ -108,9 +152,20 @@
    "publish": "Publication",
    "stage": "Étape"
   },
+  "ideaStatus": "idée",
   "notCounted": "non calculé",
   "notSet": "non précisé",
   "notesHeading": "## Notes",
+  "planColumns": {
+   "date": "Date",
+   "file": "Fichier",
+   "platform": "Plateforme",
+   "status": "Statut",
+   "time": "Heure",
+   "topic": "Sujet"
+  },
+  "planFile": "plan-de-contenu.md",
+  "planTitle": "# Plan de contenu",
   "projectWord": "projet",
   "resultWord": "résultat"
  },
@@ -131,9 +186,20 @@
    "publish": "Publikasi",
    "stage": "Tahap"
   },
+  "ideaStatus": "ide",
   "notCounted": "belum dihitung",
   "notSet": "tidak disebutkan",
   "notesHeading": "## Catatan",
+  "planColumns": {
+   "date": "Tanggal",
+   "file": "Berkas",
+   "platform": "Platform",
+   "status": "Status",
+   "time": "Jam",
+   "topic": "Topik"
+  },
+  "planFile": "rencana-konten.md",
+  "planTitle": "# Rencana konten",
   "projectWord": "proyek",
   "resultWord": "hasil"
  },
@@ -154,9 +220,20 @@
    "publish": "Pubblicazione",
    "stage": "Fase"
   },
+  "ideaStatus": "idea",
   "notCounted": "non calcolato",
   "notSet": "non indicato",
   "notesHeading": "## Note",
+  "planColumns": {
+   "date": "Data",
+   "file": "File",
+   "platform": "Piattaforma",
+   "status": "Stato",
+   "time": "Ora",
+   "topic": "Tema"
+  },
+  "planFile": "piano-contenuti.md",
+  "planTitle": "# Piano dei contenuti",
   "projectWord": "progetto",
   "resultWord": "risultato"
  },
@@ -177,9 +254,20 @@
    "publish": "公開",
    "stage": "段階"
   },
+  "ideaStatus": "アイデア",
   "notCounted": "未計算",
   "notSet": "未指定",
   "notesHeading": "## メモ",
+  "planColumns": {
+   "date": "日付",
+   "file": "ファイル",
+   "platform": "プラットフォーム",
+   "status": "状態",
+   "time": "時刻",
+   "topic": "テーマ"
+  },
+  "planFile": "コンテンツ計画.md",
+  "planTitle": "# コンテンツ計画",
   "projectWord": "プロジェクト",
   "resultWord": "結果"
  },
@@ -200,9 +288,20 @@
    "publish": "게시",
    "stage": "단계"
   },
+  "ideaStatus": "아이디어",
   "notCounted": "계산 안 됨",
   "notSet": "지정 안 됨",
   "notesHeading": "## 메모",
+  "planColumns": {
+   "date": "날짜",
+   "file": "파일",
+   "platform": "플랫폼",
+   "status": "상태",
+   "time": "시간",
+   "topic": "주제"
+  },
+  "planFile": "콘텐츠-계획.md",
+  "planTitle": "# 콘텐츠 계획",
   "projectWord": "프로젝트",
   "resultWord": "결과"
  },
@@ -223,9 +322,20 @@
    "publish": "Publikacja",
    "stage": "Etap"
   },
+  "ideaStatus": "pomysł",
   "notCounted": "nie obliczono",
   "notSet": "nie podano",
   "notesHeading": "## Notatki",
+  "planColumns": {
+   "date": "Data",
+   "file": "Plik",
+   "platform": "Platforma",
+   "status": "Status",
+   "time": "Godzina",
+   "topic": "Temat"
+  },
+  "planFile": "plan-tresci.md",
+  "planTitle": "# Plan treści",
   "projectWord": "projekt",
   "resultWord": "wynik"
  },
@@ -246,9 +356,20 @@
    "publish": "Publicação",
    "stage": "Etapa"
   },
+  "ideaStatus": "ideia",
   "notCounted": "não calculado",
   "notSet": "não informado",
   "notesHeading": "## Notas",
+  "planColumns": {
+   "date": "Data",
+   "file": "Arquivo",
+   "platform": "Plataforma",
+   "status": "Status",
+   "time": "Hora",
+   "topic": "Tema"
+  },
+  "planFile": "plano-de-conteudo.md",
+  "planTitle": "# Plano de conteúdo",
   "projectWord": "projeto",
   "resultWord": "resultado"
  },
@@ -269,9 +390,20 @@
    "publish": "Публикация",
    "stage": "Этап"
   },
+  "ideaStatus": "идея",
   "notCounted": "не посчитан",
   "notSet": "не указан",
   "notesHeading": "## Заметки",
+  "planColumns": {
+   "date": "Дата",
+   "file": "Файл",
+   "platform": "Площадка",
+   "status": "Статус",
+   "time": "Время",
+   "topic": "Тема"
+  },
+  "planFile": "контент-план.md",
+  "planTitle": "# Контент-план",
   "projectWord": "проект",
   "resultWord": "результат"
  },
@@ -292,9 +424,20 @@
    "publish": "Публікація",
    "stage": "Етап"
   },
+  "ideaStatus": "ідея",
   "notCounted": "не пораховано",
   "notSet": "не вказано",
   "notesHeading": "## Нотатки",
+  "planColumns": {
+   "date": "Дата",
+   "file": "Файл",
+   "platform": "Майданчик",
+   "status": "Статус",
+   "time": "Час",
+   "topic": "Тема"
+  },
+  "planFile": "контент-план.md",
+  "planTitle": "# Контент-план",
   "projectWord": "проєкт",
   "resultWord": "результат"
  }

@@ -127,6 +127,17 @@ impl Profile {
         self.other.get("wordsPerMinute").and_then(Value::as_u64).filter(|&n| n > 0).unwrap_or(150)
     }
 
+    /// `off`, `dates` (the cards' deadlines and publications) or `contentPlan` (also `контент-план.md`).
+    pub fn calendar(&self) -> &str {
+        self.other.get("calendar").and_then(Value::as_str).filter(|c| ["off", "dates", "contentPlan"].contains(c)).unwrap_or("off")
+    }
+
+    pub fn set_calendar(&mut self, mode: &str) {
+        if ["off", "dates", "contentPlan"].contains(&mode) {
+            self.other.insert("calendar".into(), json!(mode));
+        }
+    }
+
     /// The stage that means the work is finished: the last one, when there are two or more.
     pub fn done_stage(&self) -> Option<String> {
         let stages = self.stages();
