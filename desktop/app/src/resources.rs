@@ -7,6 +7,7 @@ use claudepult_core::i18n::Strings;
 use claudepult_core::resources::{self, Alert, Alerts, ProcessUsage, Sampler, Snapshot};
 use serde::Serialize;
 use serde_json::Value;
+use std::sync::mpsc::{Receiver, Sender};
 use std::sync::{Arc, Mutex};
 use std::time::{Duration, Instant};
 use tauri::{AppHandle, Manager};
@@ -16,83 +17,142 @@ const KIND: &str = "resources";
 /// The Mac's `ResourceMetric`, in its order.
 const METRICS: [&str; 7] = ["cpu", "memory", "gpu", "disk", "network", "battery", "processes"];
 
+/// What the sampling thread asks for. `sysinfo`'s graphics counters (a PDH query on Windows, NVIDIA's library on
+/// Linux) may not move between threads, so one thread owns the sampler and the others ask it.
+enum Ask {
+    /// A reading at most this old.
+    Read(Duration, Sender<Snapshot>),
+    Processes(Sender<Vec<ProcessUsage>>),
+    /// The module was switched off: drop everything.
+    Reset,
+}
+
+/// The sampler's own thread.
 #[derive(Default)]
-struct State {
+struct Owner {
     sampler: Option<Sampler>,
-    alerts: Alerts,
     snapshot: Option<Snapshot>,
     sampled: Option<Instant>,
     processes: Vec<ProcessUsage>,
     processes_at: Option<Instant>,
 }
 
+impl Owner {
+    fn run(asks: Receiver<Ask>, last: Arc<Mutex<Option<Snapshot>>>) {
+        let mut owner = Owner::default();
+        for ask in asks {
+            match ask {
+                Ask::Read(fresh, reply) => {
+                    let snapshot = owner.read(fresh);
+                    *last.lock().unwrap() = Some(snapshot.clone());
+                    let _ = reply.send(snapshot);
+                }
+                Ask::Processes(reply) => {
+                    let _ = reply.send(owner.processes());
+                }
+                Ask::Reset => {
+                    owner = Owner::default();
+                    *last.lock().unwrap() = None;
+                }
+            }
+        }
+    }
+
+    /// The very first reading is primed a second before, as on the Mac.
+    fn read(&mut self, fresh: Duration) -> Snapshot {
+        if let (Some(snapshot), Some(at)) = (&self.snapshot, self.sampled) {
+            if at.elapsed() < fresh {
+                return snapshot.clone();
+            }
+        }
+        let sampler = self.sampler.get_or_insert_with(Sampler::new);
+        if !sampler.primed() {
+            sampler.sample();
+            std::thread::sleep(Duration::from_secs(1));
+        }
+        let snapshot = sampler.sample();
+        self.snapshot = Some(snapshot.clone());
+        self.sampled = Some(Instant::now());
+        snapshot
+    }
+
+    fn processes(&mut self) -> Vec<ProcessUsage> {
+        if self.processes_at.is_none_or(|at| at.elapsed() >= Duration::from_secs(5)) {
+            let sampler = self.sampler.get_or_insert_with(Sampler::new);
+            let mut found = sampler.top_processes(5);
+            if found.is_empty() {
+                // The first call primes the processes' counters.
+                std::thread::sleep(Duration::from_millis(500));
+                found = sampler.top_processes(5);
+            }
+            self.processes = found;
+            self.processes_at = Some(Instant::now());
+        }
+        self.processes.clone()
+    }
+}
+
 #[derive(Clone, Default)]
-pub struct Resources(Arc<Mutex<State>>);
+pub struct Resources {
+    asks: Arc<Mutex<Option<Sender<Ask>>>>,
+    /// The last reading, for the tray's hint.
+    last: Arc<Mutex<Option<Snapshot>>>,
+    alerts: Arc<Mutex<Alerts>>,
+}
 
 impl Resources {
     pub fn start(&self, app: AppHandle) {
+        let (sender, receiver) = std::sync::mpsc::channel();
+        *self.asks.lock().unwrap() = Some(sender);
+        let last = self.last.clone();
+        std::thread::spawn(move || Owner::run(receiver, last));
         let this = self.clone();
         std::thread::spawn(move || loop {
             if on(&app) {
-                let snapshot = this.read(Duration::ZERO);
-                let (alerts, disk_below) = {
-                    let settings = app.state::<AppState>().settings.lock().unwrap().clone();
-                    (settings.resource_alerts, settings.resource_disk_below_gb)
-                };
-                if alerts {
-                    let fired = this.0.lock().unwrap().alerts.evaluate(&snapshot, disk_below, Instant::now());
-                    for alert in fired {
-                        notify(&app, &alert);
+                if let Some(snapshot) = this.read(Duration::ZERO) {
+                    let (alerts, disk_below) = {
+                        let settings = app.state::<AppState>().settings.lock().unwrap().clone();
+                        (settings.resource_alerts, settings.resource_disk_below_gb)
+                    };
+                    if alerts {
+                        let fired = this.alerts.lock().unwrap().evaluate(&snapshot, disk_below, Instant::now());
+                        for alert in fired {
+                            notify(&app, &alert);
+                        }
                     }
                 }
-            } else {
+            } else if this.last.lock().unwrap().is_some() {
                 // Off: nothing is read and nothing kept.
-                *this.0.lock().unwrap() = State::default();
+                this.ask(Ask::Reset);
+                *this.alerts.lock().unwrap() = Alerts::default();
             }
             app.state::<crate::limits::Limits>().update_tray(&app);
             std::thread::sleep(Duration::from_secs(30));
         });
     }
 
-    /// A reading at most `fresh` old; the very first one is primed a second before, as on the Mac.
-    fn read(&self, fresh: Duration) -> Snapshot {
-        let mut state = self.0.lock().unwrap();
-        if let (Some(snapshot), Some(at)) = (&state.snapshot, state.sampled) {
-            if at.elapsed() < fresh {
-                return snapshot.clone();
-            }
+    fn ask(&self, ask: Ask) {
+        if let Some(asks) = self.asks.lock().unwrap().as_ref() {
+            let _ = asks.send(ask);
         }
-        let sampler = state.sampler.get_or_insert_with(Sampler::new);
-        if !sampler.primed() {
-            sampler.sample();
-            std::thread::sleep(Duration::from_secs(1));
-        }
-        let snapshot = sampler.sample();
-        state.snapshot = Some(snapshot.clone());
-        state.sampled = Some(Instant::now());
-        snapshot
+    }
+
+    fn read(&self, fresh: Duration) -> Option<Snapshot> {
+        let (reply, answer) = std::sync::mpsc::channel();
+        self.ask(Ask::Read(fresh, reply));
+        answer.recv().ok()
     }
 
     fn processes(&self) -> Vec<ProcessUsage> {
-        let mut state = self.0.lock().unwrap();
-        if state.processes_at.is_none_or(|at| at.elapsed() >= Duration::from_secs(5)) {
-            let sampler = state.sampler.get_or_insert_with(Sampler::new);
-            let mut found = sampler.top_processes(5);
-            if found.is_empty() {
-                // The first call primes the processes' counters.
-                std::thread::sleep(Duration::from_millis(500));
-                found = state.sampler.as_mut().map(|s| s.top_processes(5)).unwrap_or_default();
-            }
-            state.processes = found;
-            state.processes_at = Some(Instant::now());
-        }
-        state.processes.clone()
+        let (reply, answer) = std::sync::mpsc::channel();
+        self.ask(Ask::Processes(reply));
+        answer.recv().unwrap_or_default()
     }
 
     /// «Процессор 23 % · память 61 %» for the tray's hint, while the module is on.
     pub fn tray_line(&self, s: &Strings) -> Option<String> {
-        let state = self.0.lock().unwrap();
-        let snapshot = state.snapshot.as_ref()?;
+        let last = self.last.lock().unwrap();
+        let snapshot = last.as_ref()?;
         Some(s.format("Процессор %lld %% · память %lld %%", &[&(snapshot.cpu.round() as i64).to_string(), &(snapshot.memory_percent().round() as i64).to_string()]))
     }
 }
@@ -138,7 +198,7 @@ pub async fn resources_view(app: AppHandle) -> ResourcesView {
     let metrics = METRICS.into_iter().filter(|m| chosen.as_ref().is_none_or(|list| list.iter().any(|c| c == m))).collect();
     let resources = app.state::<Resources>().inner().clone();
     let (snapshot, processes) = if shown {
-        tauri::async_runtime::spawn_blocking(move || (Some(resources.read(Duration::from_millis(1500))), resources.processes())).await.unwrap_or_default()
+        tauri::async_runtime::spawn_blocking(move || (resources.read(Duration::from_millis(1500)), resources.processes())).await.unwrap_or_default()
     } else {
         (None, Vec::new())
     };
