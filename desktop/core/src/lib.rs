@@ -15,6 +15,7 @@ pub mod folders;
 pub mod hooks;
 pub mod i18n;
 pub mod ipc;
+pub mod keep_awake;
 pub mod keys;
 pub mod launch;
 pub mod paths;

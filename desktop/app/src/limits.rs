@@ -149,6 +149,10 @@ impl Limits {
                 tooltip += "\n";
                 tooltip += &texts.format("Проектов: %lld · с проблемами: %lld", &[&count.to_string(), &red.to_string()]);
             }
+            if let Some(line) = app.state::<crate::keep_awake::KeepAwake>().tray_line(app) {
+                tooltip += "\n";
+                tooltip += &line;
+            }
             (session, tooltip)
         };
         let app_for_tray = app.clone();

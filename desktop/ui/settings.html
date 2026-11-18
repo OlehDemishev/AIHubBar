@@ -125,6 +125,30 @@
       </div>
       <p class="secondary" id="import-message" hidden></p>
     </section>
+    <h1 data-t="Модули"></h1>
+    <section class="card">
+      <div class="row">
+        <label for="module-keep-awake"><strong data-t="Не спать"></strong></label>
+        <input type="checkbox" class="switch" id="module-keep-awake">
+      </div>
+      <p class="secondary" data-t="Компьютер не засыпает, пока работает Claude, на время, при подключённом питании или мониторе, пока открыты выбранные приложения."></p>
+      <div id="keep-awake-rules" hidden>
+        <h3 data-t="Правила «Не спать»"></h3>
+        <label class="check-line"><input type="checkbox" data-rule="whileClaudeWorks"> <span data-t="Пока работает Claude (сессия или фоновая задача)"></span></label>
+        <label class="check-line"><input type="checkbox" data-rule="whileOnPower"> <span data-t="Пока подключено питание"></span></label>
+        <label class="check-line"><input type="checkbox" data-rule="whileExternalDisplay"> <span data-t="Пока подключён внешний монитор"></span></label>
+        <div class="row">
+          <span data-t="Пока открыты приложения"></span>
+          <span class="apps-line">
+            <span class="secondary" id="keep-awake-apps"></span>
+            <button id="keep-awake-choose" data-t="Выбрать…"></button>
+            <button id="keep-awake-clear" data-t="Очистить" hidden></button>
+          </span>
+        </div>
+        <label class="check-line"><input type="checkbox" data-rule="keepDisplayOn"> <span data-t="Не гасить и экран"></span></label>
+        <p class="secondary" data-t="Любое сработавшее правило не даёт компьютеру уснуть; вручную — переключателем и таймерами в панели. Системные настройки не меняются: как только правил нет, компьютер засыпает как обычно. Внешний монитор — второй экран ноутбука или любой экран компьютера без батареи."></p>
+      </div>
+    </section>
     <h1 data-t="Фоновые задачи"></h1>
     <section class="card">
       <div class="row">
@@ -639,6 +663,26 @@
     document.getElementById("import-replace").onclick = async () => showImport(await invoke("apply_import", { replace: true }));
     document.getElementById("import-add").onclick = async () => showImport(await invoke("apply_import", { replace: false }));
     document.getElementById("import-cancel").onclick = async () => showImport(await invoke("cancel_import"));
+    // Settings → «Модули»: «Не спать» on or off, and its rules (written at once).
+    let modulesState = null;
+    const keepAwakeModule = document.getElementById("module-keep-awake");
+    function showModules(view) {
+      modulesState = view;
+      keepAwakeModule.checked = view.keepAwake;
+      document.getElementById("keep-awake-rules").hidden = !view.keepAwake;
+      for (const box of document.querySelectorAll("[data-rule]")) box.checked = view.rules[box.dataset.rule];
+      const apps = view.rules.whileApps;
+      document.getElementById("keep-awake-apps").textContent = apps.length ? apps.map((a) => a.name).join(", ") : t("нет");
+      document.getElementById("keep-awake-apps").title = apps.map((a) => a.exe).join(", ");
+      document.getElementById("keep-awake-clear").hidden = !apps.length;
+    }
+    const saveRules = async (change) => showModules(await invoke("set_keep_awake_rules", { rules: { ...modulesState.rules, ...change } }));
+    keepAwakeModule.onchange = async () => showModules(await invoke("set_module", { kind: "keepAwake", on: keepAwakeModule.checked }));
+    for (const box of document.querySelectorAll("[data-rule]")) box.onchange = () => saveRules({ [box.dataset.rule]: box.checked });
+    document.getElementById("keep-awake-choose").onclick = async () => showModules(await invoke("choose_keep_awake_apps"));
+    document.getElementById("keep-awake-clear").onclick = () => saveRules({ whileApps: [] });
+    showModules(await invoke("modules_view"));
+
     // A file chosen from the panel's «Импортировать файл…» waits here for «Заменить» / «Добавить».
     showImport(await invoke("import_view"));
     window.__TAURI__.event.listen("import-pending", async () => showImport(await invoke("import_view")));

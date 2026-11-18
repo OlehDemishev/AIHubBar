@@ -9,6 +9,7 @@
 mod assistant;
 mod calendar;
 mod commands;
+mod keep_awake;
 mod limits;
 mod profiles;
 mod projects;
@@ -317,6 +318,7 @@ fn hide_panel(app: AppHandle) {
 
 #[tauri::command]
 fn quit(app: AppHandle) {
+    app.state::<keep_awake::KeepAwake>().release();
     app.exit(0);
 }
 
@@ -339,6 +341,7 @@ fn main() {
         .manage(services::Checks::default())
         .manage(services::Agents::default())
         .manage(calendar::Calendar::default())
+        .manage(keep_awake::KeepAwake::default())
         .manage(AppState { settings: Mutex::new(load_settings()) })
         .invoke_handler(tauri::generate_handler![
             ui_texts, set_language, dismiss_tray_hint, autostart_enabled, set_autostart, open_settings, hide_panel, quit,
@@ -360,6 +363,8 @@ fn main() {
             profiles::reset_projects_folder, profiles::profiles_view, profiles::select_profile, profiles::add_profile, profiles::profile_templates,
             profiles::rename_profile, profiles::delete_profile, profiles::profile_details, profiles::set_profile_field,
             profiles::export_settings, profiles::export_profile,
+            keep_awake::keep_awake_view, keep_awake::keep_awake_hold, keep_awake::keep_awake_release, keep_awake::modules_view,
+            keep_awake::set_module, keep_awake::set_keep_awake_rules, keep_awake::choose_keep_awake_apps,
             profiles::choose_import, profiles::import_view, profiles::apply_import, profiles::cancel_import
         ])
         .setup(move |app| {
@@ -375,6 +380,7 @@ fn main() {
             handle.state::<Runs>().start(handle.clone());
             services::Agents::start(&handle);
             handle.state::<calendar::Calendar>().start(handle.clone());
+            handle.state::<keep_awake::KeepAwake>().start(handle.clone());
             if first_start && handle.state::<AppState>().settings.lock().unwrap().profiles.is_empty() {
                 eprintln!("first start: the assistant opens");
                 assistant::open_assistant(handle.clone());
@@ -401,11 +407,14 @@ fn main() {
         .build(tauri::generate_context!())
         .expect("AI Hub Bar could not start");
 
-    app.run(|_app, event| {
+    app.run(|app, event| {
         // Closing the settings window must not quit: the app lives in the tray until «Выйти».
         match event {
             RunEvent::ExitRequested { api, code: None, .. } => api.prevent_exit(),
-            RunEvent::Exit => sessions::stop(),
+            RunEvent::Exit => {
+                sessions::stop();
+                app.state::<keep_awake::KeepAwake>().release();
+            }
             _ => {}
         }
     });

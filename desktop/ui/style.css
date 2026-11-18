@@ -287,3 +287,18 @@ body.assistant-window { display: flex; flex-direction: column; height: 100vh; ma
 input.price { width: 64px; }
 #api-budget { width: 90px; text-align: end; }
 .create-profile .buttons { display: flex; gap: 8px; margin-top: 10px; }
+
+/* «Не спать»: the cup lights up while the computer is held awake. */
+.keep-awake-head { display: flex; align-items: center; gap: 6px; }
+.keep-awake-head h2 { margin: 0; }
+.keep-awake-head .spacer { flex: 1; }
+.keep-awake .cup { font-size: 12px; opacity: 0.35; filter: grayscale(1); }
+.keep-awake .cup.holding { opacity: 1; filter: none; }
+.keep-awake p { margin: 6px 0 0; }
+.keep-awake .timers { display: flex; gap: 6px; flex-wrap: wrap; }
+input.switch { appearance: none; width: 30px; height: 18px; border-radius: 9px; background: var(--line); position: relative; cursor: pointer; flex: none; margin: 0; }
+input.switch::after { content: ""; position: absolute; top: 2px; inset-inline-start: 2px; width: 14px; height: 14px; border-radius: 50%; background: #fff; transition: inset-inline-start 0.15s; }
+input.switch:checked { background: var(--accent); }
+input.switch:checked::after { inset-inline-start: 14px; }
+.apps-line { display: flex; align-items: center; gap: 6px; min-width: 0; }
+.apps-line .secondary { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 220px; }

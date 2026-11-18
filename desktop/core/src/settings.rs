@@ -29,6 +29,10 @@ pub struct Settings {
     /// The Mac's settings from the last imported `.claudepult` file (`profiles::MAC_KEYS`: appearance, AI services,
     /// Telegram, modules…): nothing here uses them, an export writes them back.
     pub mac_settings: Map<String, Value>,
+    /// «Не спать»: the rules (this computer's own, as on the Mac) and a manual hold (−1 — until switched off, else
+    /// its end in seconds since 1970), kept across restarts.
+    pub keep_awake: crate::keep_awake::Rules,
+    pub keep_awake_manual: Option<f64>,
     /// `projects_dir` and `launch_mode` of a file from before profiles, for the first profile.
     #[serde(skip)]
     pub before_profiles: (Option<String>, Option<String>),
@@ -45,6 +49,8 @@ impl Default for Settings {
             current_profile: None,
             calendar_reminder_hours: vec![24],
             mac_settings: Map::new(),
+            keep_awake: crate::keep_awake::Rules::default(),
+            keep_awake_manual: None,
             before_profiles: (None, None),
         }
     }
@@ -87,6 +93,8 @@ impl Settings {
                 .and_then(Value::as_object)
                 .map(|map| map.iter().filter(|(key, _)| profiles::MAC_KEYS.contains(&key.as_str())).map(|(k, v)| (k.clone(), v.clone())).collect())
                 .unwrap_or_default(),
+            keep_awake: crate::keep_awake::Rules::from_value(value.get("keep_awake")),
+            keep_awake_manual: value.get("keep_awake_manual").and_then(Value::as_f64),
             before_profiles: (text("projects_dir"), text("launch_mode").filter(|m| LAUNCH_MODES.contains(&m.as_str()))),
         }
     }
@@ -230,6 +238,55 @@ impl Settings {
     }
 }
 
+// MARK: - Modules: the Mac's `installed` and `off` lists, so `.claudepult` files carry them both ways
+
+/// The stage 6 modules this version has, as the Mac's `ModuleKind` names them.
+pub const MODULES: [&str; 1] = ["keepAwake"];
+
+impl Settings {
+    fn kinds(&self, key: &str) -> Vec<String> {
+        self.mac_settings.get(key).and_then(Value::as_array).into_iter().flatten().filter_map(Value::as_str).map(str::to_owned).collect()
+    }
+
+    /// Installed and not switched off (the Mac's `ProfileStore.isOn`).
+    pub fn module_on(&self, kind: &str) -> bool {
+        self.kinds("installed").iter().any(|k| k == kind) && !self.kinds("off").iter().any(|k| k == kind)
+    }
+
+    /// On: installed, not off, and added (shown) to every profile that lists its modules — a profile from a Mac
+    /// lists them, one made here doesn't and shows every module that is on. Off: in `off`, as the Mac switches one off.
+    pub fn set_module(&mut self, kind: &str, on: bool) {
+        let mut installed = self.kinds("installed");
+        let mut off = self.kinds("off");
+        off.retain(|k| k != kind);
+        if on {
+            if !installed.iter().any(|k| k == kind) {
+                installed.push(kind.to_owned());
+            }
+            for profile in &mut self.profiles {
+                if let Some(modules) = profile.other.get_mut("modules").and_then(Value::as_array_mut) {
+                    if !modules.iter().any(|m| m["kind"] == kind) {
+                        modules.push(serde_json::json!({"kind": kind, "shown": true}));
+                    }
+                }
+            }
+        } else if installed.iter().any(|k| k == kind) {
+            off.push(kind.to_owned());
+        }
+        self.mac_settings.insert("installed".into(), serde_json::json!(installed));
+        self.mac_settings.insert("off".into(), serde_json::json!(off));
+    }
+
+    /// The current profile shows the module: it lists it as shown, or lists no modules at all.
+    pub fn shows_module(&self, kind: &str) -> bool {
+        self.module_on(kind)
+            && self.current().is_none_or(|p| match p.other.get("modules").and_then(Value::as_array) {
+                Some(modules) => modules.iter().any(|m| m["kind"] == kind && m["shown"].as_bool() != Some(false)),
+                None => true,
+            })
+    }
+}
+
 // MARK: - «Сервисы AI»: the Mac's `AIServicesConfig`, kept with its other settings
 
 impl Settings {
@@ -335,6 +392,30 @@ mod tests {
         assert_eq!(fresh.projects_dir(), Some(crate::paths::default_projects_dir()));
         assert!(!fresh.has_custom_projects_dir());
         assert_eq!(fresh.launch_mode(), None);
+    }
+
+    #[test]
+    fn modules_and_keep_awake() {
+        let mut settings = Settings::from_json(r#"{"mac_settings": {"installed": ["limits", "keepAwake"], "off": ["keepAwake"]}, "keep_awake": {"whileOnPower": true}, "keep_awake_manual": -1}"#);
+        assert!(!settings.module_on("keepAwake"), "installed but switched off on the Mac");
+        assert_eq!((settings.keep_awake.while_on_power, settings.keep_awake.while_claude_works, settings.keep_awake_manual), (true, true, Some(-1.0)));
+        settings.ensure_profile("ru");
+        let mut mac = settings.profiles[0].clone();
+        mac.id = "mac".into();
+        mac.other.insert("modules".into(), serde_json::json!([{"kind": "limits", "shown": true}]));
+        settings.profiles.push(mac);
+        assert!(!settings.shows_module("keepAwake"));
+        settings.set_module("keepAwake", true);
+        assert!(settings.module_on("keepAwake") && settings.shows_module("keepAwake"));
+        assert_eq!(settings.mac_settings["off"], serde_json::json!([]));
+        assert_eq!(settings.profiles[1].other["modules"][1], serde_json::json!({"kind": "keepAwake", "shown": true}), "a Mac profile lists it now");
+        assert!(settings.profiles[0].other.get("modules").is_none(), "a profile made here shows every module that is on");
+        settings.set_module("keepAwake", false);
+        assert!(!settings.module_on("keepAwake"));
+        assert_eq!(settings.mac_settings["installed"], serde_json::json!(["limits", "keepAwake"]));
+        let saved = Settings::from_json(&serde_json::to_string(&settings).unwrap());
+        assert_eq!((saved.keep_awake.clone(), saved.keep_awake_manual, saved.module_on("keepAwake")), (settings.keep_awake.clone(), Some(-1.0), false));
+        assert!(!Settings::default().module_on("keepAwake"), "off until switched on");
     }
 
     #[test]

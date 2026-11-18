@@ -48179,6 +48179,158 @@
         }
       }
     },
+    "Компьютер засыпает как обычно": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يدخل الكمبيوتر في السكون كالمعتاد"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der Computer schläft wie gewohnt"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The computer sleeps as usual"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El ordenador duerme como siempre"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L’ordinateur se met en veille normalement"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Komputer tidur seperti biasa"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il computer va in sospensione come al solito"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "コンピュータは通常どおりスリープします"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "컴퓨터는 평소처럼 잠자기합니다"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Komputer usypia jak zwykle"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O computador dorme como sempre"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Комп’ютер засинає як зазвичай"
+          }
+        }
+      }
+    },
+    "Компьютер не засыпает, пока работает Claude, на время, при подключённом питании или мониторе, пока открыты выбранные приложения.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يبقى الكمبيوتر مستيقظًا أثناء عمل Claude، أو لمدة محددة، أو عند توصيل الطاقة أو شاشة، أو أثناء فتح تطبيقات مختارة."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der Computer bleibt wach, solange Claude arbeitet, für eine Zeit, am Netz oder mit Monitor, oder solange gewählte Apps offen sind."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The computer stays awake while Claude works, for a while, on power or with a display connected, or while chosen apps are open."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El ordenador no duerme mientras Claude trabaja, durante un tiempo, conectado a la corriente o a un monitor, o con ciertas apps abiertas."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L’ordinateur reste éveillé pendant que Claude travaille, un certain temps, sur secteur ou avec un écran, ou tant que des apps choisies sont ouvertes."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Komputer tetap terjaga selama Claude bekerja, selama waktu tertentu, saat tersambung daya atau monitor, atau saat aplikasi pilihan terbuka."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il computer resta sveglio mentre Claude lavora, per un certo tempo, con alimentazione o monitor collegati, o con app scelte aperte."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude の作業中、一定時間、電源や外部ディスプレイの接続中、選んだアプリが開いている間、コンピュータをスリープさせません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude가 작업하는 동안, 일정 시간, 전원이나 모니터 연결 중, 선택한 앱이 열려 있는 동안 컴퓨터가 잠들지 않습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Komputer nie usypia, gdy Claude pracuje, przez wybrany czas, przy zasilaniu lub monitorze albo gdy otwarte są wybrane aplikacje."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O computador não dorme enquanto o Claude trabalha, por um tempo, na tomada ou com monitor, ou com apps escolhidos abertos."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Комп’ютер не засинає, поки працює Claude, на певний час, при підключеному живленні чи моніторі, поки відкриті вибрані застосунки."
+          }
+        }
+      }
+    },
     "Контекст последней беседы в «%@»: %lld %%": {
       "localizations": {
         "ar": {
@@ -51070,6 +51222,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Будь-яке правило, що спрацювало, не дає Mac заснути; вручну — перемикачем і таймерами в панелі. Системні параметри не змінюються: щойно правил немає, Mac засинає як зазвичай. На Mac без власного екрана будь-який монітор вважається зовнішнім."
+          }
+        }
+      }
+    },
+    "Любое сработавшее правило не даёт компьютеру уснуть; вручную — переключателем и таймерами в панели. Системные настройки не меняются: как только правил нет, компьютер засыпает как обычно. Внешний монитор — второй экран ноутбука или любой экран компьютера без батареи.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "أي قاعدة تنطبق تُبقي الكمبيوتر مستيقظًا؛ يدويًا — بمفتاح التبديل والمؤقتات في اللوحة. لا تتغير إعدادات النظام: عند عدم انطباق أي قاعدة يدخل الكمبيوتر في السكون كالمعتاد. الشاشة الخارجية هي الشاشة الثانية للحاسوب المحمول أو أي شاشة لكمبيوتر بلا بطارية."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jede zutreffende Regel hält den Computer wach; von Hand — Schalter und Timer im Panel. Die Systemeinstellungen ändern sich nicht: Ohne Regel schläft der Computer wie gewohnt. Externer Monitor: der zweite Bildschirm eines Laptops oder jeder Bildschirm eines Computers ohne Akku."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Any rule that applies keeps the computer awake; by hand — the switch and timers in the panel. System settings don’t change: once no rule applies, the computer sleeps as usual. An external display is a laptop’s second screen, or any screen of a computer without a battery."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cualquier regla que se cumpla evita que el ordenador duerma; a mano, con el interruptor y los temporizadores del panel. Los ajustes del sistema no cambian: sin reglas, el ordenador duerme como siempre. Monitor externo: la segunda pantalla de un portátil o cualquier pantalla de un ordenador sin batería."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toute règle remplie empêche l’ordinateur de dormir ; à la main — l’interrupteur et les minuteurs du panneau. Les réglages système ne changent pas : sans règle, l’ordinateur se met en veille normalement. Écran externe : le deuxième écran d’un portable, ou tout écran d’un ordinateur sans batterie."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aturan apa pun yang berlaku membuat komputer tetap terjaga; manual — sakelar dan pengatur waktu di panel. Pengaturan sistem tidak berubah: tanpa aturan, komputer tidur seperti biasa. Monitor eksternal adalah layar kedua laptop, atau layar mana pun pada komputer tanpa baterai."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Qualsiasi regola attiva tiene sveglio il computer; a mano — l’interruttore e i timer nel pannello. Le impostazioni di sistema non cambiano: senza regole il computer va in sospensione come al solito. Monitor esterno: il secondo schermo di un portatile o qualsiasi schermo di un computer senza batteria."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "当てはまるルールが 1 つでもあればコンピュータはスリープしません。手動ではパネルのスイッチとタイマーで。システム設定は変わりません。ルールがなくなれば通常どおりスリープします。外部ディスプレイとは、ノート PC の 2 台目の画面、またはバッテリーのないコンピュータのすべての画面です。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "해당하는 규칙이 하나라도 있으면 컴퓨터가 잠들지 않습니다. 직접 하려면 패널의 스위치와 타이머로. 시스템 설정은 바뀌지 않습니다: 규칙이 없으면 평소처럼 잠듭니다. 외부 모니터는 노트북의 두 번째 화면, 또는 배터리가 없는 컴퓨터의 모든 화면입니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Każda spełniona reguła nie pozwala komputerowi zasnąć; ręcznie — przełącznik i minutniki w panelu. Ustawienia systemu się nie zmieniają: bez reguł komputer usypia jak zwykle. Monitor zewnętrzny to drugi ekran laptopa albo każdy ekran komputera bez baterii."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Qualquer regra que valha impede o computador de dormir; à mão, com o interruptor e os temporizadores do painel. Os ajustes do sistema não mudam: sem regras, o computador dorme como sempre. Monitor externo é a segunda tela de um notebook ou qualquer tela de um computador sem bateria."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Будь-яке правило, що спрацювало, не дає комп’ютеру заснути; вручну — перемикачем і таймерами в панелі. Системні параметри не змінюються: щойно правил немає, комп’ютер засинає як зазвичай. Зовнішній монітор — другий екран ноутбука або будь-який екран комп’ютера без батареї."
           }
         }
       }
@@ -57986,6 +58214,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Не давати Mac засинати: %@"
+          }
+        }
+      }
+    },
+    "Не давать компьютеру засыпать, пока не выключите": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إبقاء الكمبيوتر مستيقظًا حتى تُطفئ ذلك"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Den Computer wach halten, bis Sie ausschalten"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keep the computer awake until you switch this off"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mantener el ordenador despierto hasta que lo desactives"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Garder l’ordinateur éveillé jusqu’à désactivation"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jaga komputer tetap terjaga sampai dimatikan"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tieni sveglio il computer finché non lo disattivi"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "オフにするまでコンピュータをスリープさせない"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "끌 때까지 컴퓨터를 깨어 있게 유지"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nie usypiaj komputera, dopóki nie wyłączysz"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Manter o computador acordado até você desligar"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Не давати комп’ютеру засинати, доки не вимкнете"
           }
         }
       }

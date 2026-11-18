@@ -5,6 +5,7 @@
 **Updated:** 2026-11-18
 
 **Now:**
+- 2026-11-18: Windows stage 6 begun — «Не спать»: a power request while Claude works, on power, with a monitor, while chosen programs run, or by hand; Settings → «Модули» (#432)
 - 2026-11-18: Windows stage 5 finished — a profile's commands, stages, metrics, service and rights in Settings; API prices and a monthly budget; `.docx` word counts; the first start opens the assistant (#430, merged)
 - 2026-11-18: Windows — the profile assistant: template, folder, stages, metrics, calendar, service, launch and name (#428, merged)
 - 2026-11-18: Windows — the «Календарь» window: a month or week, dates dragged to another day, new plan rows and project dates (#426, merged)
@@ -61,7 +62,7 @@
 - check on the Air: the island at the real notch
 - promotion (docs/LAUNCH.md): r/ClaudeAI, the lists, r/macapps, Show HN, Product Hunt, Homebrew
 - content (docs/specs/SPEC-content.md, agreed): stage 2 «Версии», then batch tasks; better after the first feedback from people
-- Windows: on the laptop the live check of SPEC-windows §11.4 (with a real permission request answered from the panel) the «Проекты» card's buttons, a Claude launch in Windows Terminal and one in the background (do the `PowerShell(…)` rules let it build and check a project without Git Bash?); then stage 6 (Ресурсы, Не спать, быстрые команды и переключатели); stage 3 leftovers («Показать», buttons in the notification) need the laptop
+- Windows: on the laptop the live check of SPEC-windows §11.4 (with a real permission request answered from the panel) the «Проекты» card's buttons, a Claude launch in Windows Terminal and one in the background (do the `PowerShell(…)` rules let it build and check a project without Git Bash?); then the rest of stage 6 (Ресурсы, быстрые команды и переключатели); stage 3 leftovers («Показать», buttons in the notification) need the laptop
 
 **Needs Oleh:**
 - Windows laptop: install the tools and copy the two CLAUDE.md files as in `desktop/WINDOWS-DEV.md`, sign in to Claude Code there; choose the Windows signing (SPEC-windows §7)
@@ -97,6 +98,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-18 — Windows: «Не спать» (branch `feat/desktop-keep-awake`)
+
+Done: stage 6 begun. `desktop/core/keep_awake.rs` ports the Mac's `KeepAwakeRules`: a manual hold first, then Claude working, mains power, an external display, chosen programs; the hold is a Windows power request (`PowerCreateRequest`, system and optionally display), `systemd-inhibit` on Linux, `caffeinate` on a Mac, the last two ending with the app. `app/src/keep_awake.rs` looks every 15 s, keeps a manual hold across restarts and releases on quit. Modules are switched in Settings → «Модули», kept as the Mac's `installed` / `off`, so `.claudepult` carries them. The panel's «Не спать» block (switch, 15 min / 1 h / 2 h, «Отпустить», ☕), a «☕ держу: …» line in the tray's hint. Four new catalog texts with 12 translations each, saying «компьютер» where the Mac says «Mac».
+Checked: `python3 scripts/strings.py --check` (403 texts), `scripts/strings-check.py` (1858 keys), `cargo test --workspace` on the Mac (core 102: rules and their order, a timer that ran out, names without letter case, the stored hold, texts, modules on and off with a Mac profile's list, a real hold taken and released through `caffeinate`). The panel block and the «Модули» section in a browser with sample replies: a 1 h timer, «Отпустить», the switch; rules ticked, a program added and cleared, the module off and on. The Windows calls are built only by CI here.
+Left: a hold not seen in `powercfg /requests` on the laptop; «С закрытой крышкой»; the profile's own «showTimers»; «Ресурсы», «Быстрые команды», «Быстрые переключатели».
 
 ## 2026-11-18 — Windows: the end of stage 5 (branch `feat/desktop-finish-stage5`)
 
