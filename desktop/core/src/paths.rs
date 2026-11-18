@@ -63,9 +63,9 @@ pub fn copilot_dir() -> PathBuf {
     std::env::var("COPILOT_HOME").ok().filter(|v| !v.trim().is_empty()).map(PathBuf::from).unwrap_or_else(|| home.join(".copilot"))
 }
 
-/// The projects folder: `~/Projects` (`%USERPROFILE%\\Projects` on Windows), as on the Mac; a setting comes with
-/// profiles (stage 5).
-pub fn projects_dir() -> PathBuf {
+/// The projects folder unless the person chose another (`Settings::projects_dir`): `~/Projects`
+/// (`%USERPROFILE%\\Projects` on Windows), as on the Mac.
+pub fn default_projects_dir() -> PathBuf {
     dirs::home_dir().unwrap_or_else(std::env::temp_dir).join("Projects")
 }
 

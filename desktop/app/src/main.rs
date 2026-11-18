@@ -16,11 +16,13 @@ use claudepult_core::ipc::{self, Reply, Request};
 use claudepult_core::settings::Settings;
 use claudepult_core::{paths, APP_NAME};
 use serde::Serialize;
+use std::path::{Path, PathBuf};
 use std::sync::Mutex;
 use tauri::menu::{Menu, MenuItem, PredefinedMenuItem};
 use tauri::tray::{MouseButton, MouseButtonState, TrayIconBuilder, TrayIconEvent};
-use tauri::{AppHandle, Manager, RunEvent, WebviewUrl, WebviewWindowBuilder, WindowEvent};
+use tauri::{AppHandle, Emitter, Manager, RunEvent, WebviewUrl, WebviewWindowBuilder, WindowEvent};
 use tauri_plugin_autostart::{MacosLauncher, ManagerExt};
+use tauri_plugin_dialog::DialogExt;
 use limits::Limits;
 use projects::Projects;
 use runs::Runs;
@@ -61,6 +63,11 @@ fn language(app: &AppHandle) -> &'static str {
 
 fn strings(app: &AppHandle) -> Strings {
     Strings::from_json(strings_json(language(app)))
+}
+
+/// The folder whose repositories are the projects (Settings → «Проекты» → «Папка проектов»).
+fn projects_dir(app: &AppHandle) -> PathBuf {
+    app.state::<AppState>().settings.lock().unwrap().projects_dir()
 }
 
 fn save(app: &AppHandle, change: impl FnOnce(&mut Settings)) {
@@ -264,6 +271,66 @@ fn set_pull_request_alerts(app: AppHandle, enabled: bool) {
     save(&app, |settings| settings.pull_request_alerts = enabled);
 }
 
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+struct ProjectsFolder {
+    path: String,
+    /// Another folder than `~/Projects` was chosen: «По умолчанию» brings that back.
+    custom: bool,
+    /// «Папки нет: …» when the folder is gone.
+    missing: Option<String>,
+}
+
+fn projects_folder_view(app: &AppHandle) -> ProjectsFolder {
+    let custom = app.state::<AppState>().settings.lock().unwrap().projects_dir.is_some();
+    let path = projects_dir(app);
+    let shown = path.to_string_lossy().into_owned();
+    let missing = (!path.is_dir()).then(|| strings(app).format("Папки нет: %@", &[&shown]));
+    ProjectsFolder { path: shown, custom, missing }
+}
+
+/// A new projects folder (None — `~/Projects`): saved, the projects read again, and the hooks' status shown anew —
+/// they name a session's project by this folder, so installed ones now need updating.
+fn set_projects_folder(app: &AppHandle, folder: Option<PathBuf>) {
+    let folder = folder.filter(|f| f.as_path() != paths::default_projects_dir().as_path());
+    let before = projects_dir(app);
+    save(app, |settings| settings.projects_dir = folder.map(|f| f.to_string_lossy().into_owned()));
+    if projects_dir(app) != before {
+        eprintln!("projects folder: {}", projects_dir(app).display());
+        app.state::<Projects>().folder_changed(app);
+        let _ = app.emit("sessions-changed", ());
+    }
+}
+
+#[tauri::command]
+fn projects_folder(app: AppHandle) -> ProjectsFolder {
+    projects_folder_view(&app)
+}
+
+/// «Выбрать…»: the system's folder picker, opened at the current folder (or the nearest one that exists).
+#[tauri::command]
+async fn choose_projects_folder(app: AppHandle) -> ProjectsFolder {
+    let current = projects_dir(&app);
+    let start = current.ancestors().find(|dir| dir.is_dir()).map(Path::to_path_buf);
+    let mut dialog = app.dialog().file().set_title(strings(&app).t("Папка проектов"));
+    if let Some(start) = start {
+        dialog = dialog.set_directory(start);
+    }
+    if let Some(window) = app.get_webview_window("settings") {
+        dialog = dialog.set_parent(&window);
+    }
+    if let Some(folder) = dialog.blocking_pick_folder().and_then(|f| f.into_path().ok()) {
+        set_projects_folder(&app, Some(folder));
+    }
+    projects_folder_view(&app)
+}
+
+#[tauri::command]
+fn reset_projects_folder(app: AppHandle) -> ProjectsFolder {
+    set_projects_folder(&app, None);
+    projects_folder_view(&app)
+}
+
 #[tauri::command]
 fn dismiss_tray_hint(app: AppHandle) {
     save(&app, |settings| settings.tray_hint_seen = true);
@@ -309,6 +376,7 @@ fn main() {
         .plugin(tauri_plugin_autostart::init(MacosLauncher::LaunchAgent, None))
         .plugin(tauri_plugin_positioner::init())
         .plugin(tauri_plugin_notification::init())
+        .plugin(tauri_plugin_dialog::init())
         .manage(Limits::new())
         .manage(Sessions::default())
         .manage(Projects::default())
@@ -322,7 +390,7 @@ fn main() {
             projects::projects_view, projects::refresh_projects, projects::projects_panel_opened, projects::open_project,
             projects::open_link, projects::launch_claude,
             runs::stop_run, runs::run_log, projects::worktree_removal, launch_settings, set_launch_settings,
-            pull_request_alerts, set_pull_request_alerts
+            pull_request_alerts, set_pull_request_alerts, projects_folder, choose_projects_folder, reset_projects_folder
         ])
         .setup(|app| {
             // Only the tray icon, no Dock icon, when trying it out on a Mac.
