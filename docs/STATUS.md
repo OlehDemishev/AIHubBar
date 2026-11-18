@@ -5,7 +5,7 @@
 **Updated:** 2026-11-18
 
 **Now:**
-- 2026-11-18: Windows stage 5 begun — Settings → «Проекты» → «Папка проектов» instead of the fixed `~/Projects` (branch `feat/desktop-projects-folder`)
+- 2026-11-18: Windows stage 5 begun — Settings → «Проекты» → «Папка проектов» instead of the fixed `~/Projects` (#410, merged)
 - 2026-11-18: Windows — «Удалить» on a worktree in the panel, only when nothing is uncommitted and the branch is merged or pushed (#408, merged)
 - 2026-11-18: Windows — notifications when a PR's CI fails or is fixed and when a PR closes, a red dot on the tray icon for a project that needs attention (#406, merged)
 - 2026-11-18: Windows — Claude in the background: `claude -p` with no window, the Mac's rules plus `PowerShell(…)` twins, time limit, «Остановить», a notification, the log in the panel (#404, merged; a run with a fake `claude.cmd` passes on Windows in CI)
