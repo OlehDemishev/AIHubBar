@@ -351,3 +351,4 @@ button.tile.on { background: color-mix(in srgb, var(--accent) 22%, transparent);
 .hub-source:first-child { border-top: none; }
 .hub-source p { margin: 0; font-size: 11px; }
 .hub-source .status { font-size: 11px; text-align: end; max-width: 60%; }
+.task-editor .agent-note { margin: 4px 0 0; font-size: 11px; }

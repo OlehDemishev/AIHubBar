@@ -174,7 +174,12 @@ pub fn outcome_text(texts: &Strings, run: &Run) -> String {
 
 fn notification_title(run: &Run) -> String {
     let icon = if run.state == RunState::Succeeded { "✅" } else { "❌" };
-    format!("{icon} {}: {}", run.project, task_start(&run.task))
+    format!("{icon} {}: {}", project_label(run), task_start(&run.task))
+}
+
+/// «Shop», or «Shop · Codex» for a run Codex does.
+pub fn project_label(run: &Run) -> String {
+    if run.is_codex() { format!("{} · Codex", run.project) } else { run.project.clone() }
 }
 
 fn notification_body(texts: &Strings, run: &Run) -> String {
