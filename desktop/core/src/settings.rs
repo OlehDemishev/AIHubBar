@@ -118,7 +118,7 @@ impl Settings {
         let Some(mut profile) = profiles::from_template("developer", language) else { return false };
         let (folder, launch_mode) = std::mem::take(&mut self.before_profiles);
         if let Some(folder) = folder {
-            profile.set_git_folder(&profiles::tilde(Path::new(&folder), &home()));
+            profile.set_folder(&profiles::tilde(Path::new(&folder), &home()));
         }
         profile.launch_mode = launch_mode;
         self.current_profile = Some(profile.id.clone());
@@ -126,20 +126,34 @@ impl Settings {
         true
     }
 
-    /// The current profile's git projects folder; None when it has none (no profile, or folder projects).
+    /// The current profile's projects folder (git repositories or folder projects); None when it has none.
     pub fn projects_dir(&self) -> Option<PathBuf> {
         self.current()?.projects_dir(&home())
     }
 
-    /// The current profile has git projects but its folder isn't `~/Projects`: «По умолчанию» brings that back.
+    /// The current profile's folder isn't the one its template starts with (`~/Projects` for git repositories):
+    /// «По умолчанию» brings that back.
     pub fn has_custom_projects_dir(&self) -> bool {
-        self.projects_dir().is_some_and(|dir| dir != crate::paths::default_projects_dir())
+        match (self.projects_dir(), self.default_projects_dir()) {
+            (Some(dir), Some(default)) => dir != default,
+            _ => false,
+        }
     }
 
-    /// A new git projects folder for the current profile. True when it changed.
+    /// Where «По умолчанию» goes: `~/Projects` for git repositories, the template's folder for folder projects.
+    pub fn default_projects_dir(&self) -> Option<PathBuf> {
+        let profile = self.current()?;
+        if !profile.source().is_folders() {
+            return profile.source().folder().map(|_| crate::paths::default_projects_dir());
+        }
+        let template = profiles::from_template(&profile.template, crate::i18n::resolve(self.language.as_deref()))?;
+        template.projects_dir(&home()).filter(|_| template.source().is_folders())
+    }
+
+    /// A new projects folder for the current profile. True when it changed.
     pub fn set_projects_dir(&mut self, folder: &Path) -> bool {
         let text = profiles::tilde(folder, &home());
-        self.current_mut().is_some_and(|p| p.set_git_folder(&text))
+        self.current_mut().is_some_and(|p| p.set_folder(&text))
     }
 
     /// Where the current profile runs Claude; None — ask.
@@ -343,7 +357,7 @@ mod tests {
         assert_eq!(replaced.import_replace(profiles::read_bundle(mac).unwrap()), 2);
         assert_eq!(replaced.profiles.len(), 2);
         assert_eq!(replaced.current().unwrap().name, "Видео");
-        assert_eq!(replaced.projects_dir(), None, "folder projects: no git folder");
+        assert_eq!(replaced.projects_dir(), Some(home().join("Documents").join("Видео")), "folder projects have a folder too");
         assert_eq!(replaced.background_time_limit_minutes, 120);
         assert_eq!(replaced.mac_settings["appearance"]["theme"], "dark");
 

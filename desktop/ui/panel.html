@@ -39,6 +39,15 @@
       <h2 data-t="Проекты"></h2>
       <div id="project-rows"></div>
       <p class="secondary" id="projects-message" hidden></p>
+      <div class="new-project" id="new-project" hidden>
+        <button class="small" id="new-project-open" data-t="Новый проект"></button>
+        <div class="new-project-form" id="new-project-form" hidden>
+          <input type="text" id="new-project-name" data-t-placeholder="Название проекта">
+          <button id="new-project-create" data-t="Создать"></button>
+          <button id="new-project-cancel" data-t="Отмена"></button>
+        </div>
+        <p class="error" id="new-project-error" hidden></p>
+      </div>
     </section>
     <p class="secondary" id="version"></p>
   </main>
@@ -403,9 +412,123 @@
 
     // Projects, as the Mac panel lists them: health dot, name, branch, badges, last activity; a click opens the rest.
     const expanded = new Set();
+    // A stage on a colour that moves from blue (the first stage) to green (the last), as the Mac's StageChip.
+    function stageChip(stage, index, count, selected = true) {
+      const chip = element("span", selected ? "stage-chip selected" : "stage-chip", stage);
+      const hue = index === null || index === undefined || count < 2 ? null : (0.6 - 0.27 * index / (count - 1)) * 360;
+      chip.style.setProperty("--chip", hue === null ? "var(--secondary)" : `hsl(${Math.round(hue)} 45% 42%)`);
+      return chip;
+    }
+
+    function folderDetails(row, stages) {
+      const box = element("div", "details");
+      if (stages.length) {
+        box.append(element("div", "bullets-title", t("Этап")));
+        const chips = element("div", "stage-chips");
+        stages.forEach((stage, index) => {
+          const button = element("button", "chip-button");
+          button.append(stageChip(stage, index, stages.length, row.stage === stage));
+          button.title = row.stage === stage ? t("Текущий этап") : t("Перевести на этап «%@» (пишется в проект.md)", stage);
+          button.onclick = () => invoke("set_project_stage", { path: row.path, stage }).catch(showFolderError);
+          chips.append(button);
+        });
+        box.append(chips);
+      }
+      if (row.format) box.append(element("div", "secondary", row.format));
+      const actions = element("div", "actions");
+      actions.append(action(t("Папка"), () => invoke("open_project", { path: row.path, target: "folder" })));
+      if (row.mainFile) {
+        const main = action(row.mainFile, () => invoke("open_project_file", { path: row.path, file: row.mainFile }));
+        main.title = t("Главный файл — по нему считаются слова и хронометраж");
+        actions.append(main);
+      }
+      if (row.cardFile) {
+        actions.append(action(row.cardFile, () => invoke("open_project_file", { path: row.path, file: row.cardFile })));
+      } else {
+        const create = action(row.createCard, () => invoke("create_project_card", { path: row.path }).catch(showFolderError));
+        create.title = t("Карточка проекта: этап, дедлайн, дата публикации, формат, главный файл");
+        actions.append(create);
+      }
+      box.append(actions);
+      return box;
+    }
+
+    function showFolderError(error) {
+      const message = document.getElementById("projects-message");
+      message.hidden = false;
+      message.textContent = String(error);
+    }
+
+    // Folder projects (a profile with «папки»): stage chip and metrics; opened — stages, files, the card.
+    function folderRows(view) {
+      return view.rows.map((row) => {
+        const item = element("div", "project folder");
+        const open = expanded.has(row.path);
+        const summary = element("button", "project-summary");
+        summary.setAttribute("aria-expanded", String(open));
+        summary.title = open ? t("Свернуть") : t("Подробнее и действия");
+        const text = element("span", "folder-text");
+        const top = element("span", "folder-top");
+        top.append(element("span", "name", row.name), element("span", "spacer"));
+        if (row.stage) top.append(stageChip(row.stage, row.stageIndex, view.stages.length));
+        text.append(top);
+        if (row.metrics || row.overdue) {
+          const line = element("span", "folder-metrics secondary", row.metrics);
+          if (row.overdue) line.append(element("span", "overdue", (row.metrics ? " · " : "") + row.overdue));
+          text.append(line);
+        }
+        summary.append(text);
+        summary.onclick = () => {
+          if (expanded.has(row.path)) expanded.delete(row.path); else expanded.add(row.path);
+          showProjects();
+        };
+        item.append(summary);
+        if (open) item.append(folderDetails(row, view.stages));
+        return item;
+      });
+    }
+
+    const newProject = document.getElementById("new-project");
+    const newProjectForm = document.getElementById("new-project-form");
+    const newProjectName = document.getElementById("new-project-name");
+    const newProjectError = document.getElementById("new-project-error");
+    function closeNewProject() {
+      newProjectForm.hidden = true;
+      document.getElementById("new-project-open").hidden = false;
+      newProjectName.value = "";
+      newProjectError.hidden = true;
+    }
+    document.getElementById("new-project-open").onclick = () => {
+      newProjectForm.hidden = false;
+      document.getElementById("new-project-open").hidden = true;
+      newProjectName.focus();
+    };
+    document.getElementById("new-project-cancel").onclick = closeNewProject;
+    async function createProject() {
+      if (!newProjectName.value.trim()) return;
+      try {
+        const path = await invoke("create_folder_project", { name: newProjectName.value });
+        expanded.add(path);
+        closeNewProject();
+      } catch (error) {
+        newProjectError.hidden = false;
+        newProjectError.textContent = String(error);
+      }
+    }
+    document.getElementById("new-project-create").onclick = createProject;
+    newProjectName.addEventListener("keydown", (event) => { if (event.key === "Enter") createProject(); });
+
     async function showProjects() {
       const view = await invoke("projects_view");
       const rows = document.getElementById("project-rows");
+      newProject.hidden = !view.folders?.canCreate;
+      if (view.folders) {
+        rows.replaceChildren(...folderRows(view.folders));
+        const message = document.getElementById("projects-message");
+        message.hidden = !view.message;
+        message.textContent = view.message ?? "";
+        return;
+      }
       rows.replaceChildren(...view.rows.map((row) => {
         const item = element("div", "project");
         const open = expanded.has(row.path);

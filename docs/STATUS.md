@@ -5,6 +5,7 @@
 **Updated:** 2026-11-18
 
 **Now:**
+- 2026-11-18: Windows — folder projects: «Видео», «Тексты», «Ресёрч», «Соцсети», «Свой» with stages, metrics and «Новый проект» (branch `feat/desktop-folder-projects`)
 - 2026-11-18: Windows — `.claudepult` export and import, the same files as the Mac's (#414, merged)
 - 2026-11-18: Windows — profiles: kept in the Mac's own JSON, the projects folder and launch mode per profile, a switcher in the panel (#412, merged)
 - 2026-11-18: Windows stage 5 begun — Settings → «Проекты» → «Папка проектов» instead of the fixed `~/Projects` (#410, merged)
@@ -53,7 +54,7 @@
 - check on the Air: the island at the real notch
 - promotion (docs/LAUNCH.md): r/ClaudeAI, the lists, r/macapps, Show HN, Product Hunt, Homebrew
 - content (docs/specs/SPEC-content.md, agreed): stage 2 «Версии», then batch tasks; better after the first feedback from people
-- Windows: on the laptop the live check of SPEC-windows §11.4 (with a real permission request answered from the panel) the «Проекты» card's buttons, a Claude launch in Windows Terminal and one in the background (do the `PowerShell(…)` rules let it build and check a project without Git Bash?); then stage 5 on: folder projects and the other templates, the assistant; stage 3 leftovers («Показать», buttons in the notification) need the laptop
+- Windows: on the laptop the live check of SPEC-windows §11.4 (with a real permission request answered from the panel) the «Проекты» card's buttons, a Claude launch in Windows Terminal and one in the background (do the `PowerShell(…)` rules let it build and check a project without Git Bash?); then stage 5 on: the AI commands of folder projects, the calendar, the assistant; stage 3 leftovers («Показать», buttons in the notification) need the laptop
 
 **Needs Oleh:**
 - Windows laptop: install the tools and copy the two CLAUDE.md files as in `desktop/WINDOWS-DEV.md`, sign in to Claude Code there; choose the Windows signing (SPEC-windows §7)
@@ -89,6 +90,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-18 — Windows: folder projects (branch `feat/desktop-folder-projects`)
+
+Done: `desktop/core/folders.rs` ports the Mac's `FolderScanner` and `ProjectCardFile`: subfolders as projects (or one inbox folder), the card `проект.md` read in any content language and written back in its own, with its other lines and line endings; the main file (the card's, else the newest text that isn't a command's result), words, sources, last change; metrics and «просрочено N дн» as the Mac words them. The panel shows them for a profile with «папки» / «входящие»: stage chip, metrics; opened — stages to switch (written to the card), format, «Папка», the main file, the card or «Создать проект.md»; «Новый проект». «Добавить профиль» offers all the Mac's templates but «Утилиты Mac»; «По умолчанию» goes back to the template's folder. `scripts/strings.py` writes `ui/i18n/content.json` and every template; `data-t-placeholder` for inputs.
+Checked: `python3 scripts/strings.py --check` (198 texts), `scripts/strings-check.py`, `cargo test --workspace` on the Mac (core 72: cards in Russian, German and English with list markers and bold, writing back with CRLF, results recognised with `-2` and `(Claude)`, words without link addresses, RTF text, a scan with `_` and hidden folders, `node_modules`, a sources folder and a newer result, creating with names Windows refuses, metrics, dates, overdue). The dev app with a «Видео» profile on a test folder: «folder projects: 2» (`_архив` skipped). The panel and Settings in a browser with sample replies: rows, chips, a stage switched, «Создать проект.md», «Новый проект» with a bad name and a good one, the template list; nothing wider than the 380 px panel.
+Left: the profile's AI commands on folder projects, the calendar; `.docx` words aren't counted; not seen in the real panel or on Windows.
 
 ## 2026-11-18 — Windows: `.claudepult` files (branch `feat/desktop-claudepult-files`)
 

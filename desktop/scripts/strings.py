@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Texts for the Windows and Linux versions from the Mac app's String Catalog (docs/specs/SPEC-windows.md §2).
 
-Finds the keys the desktop code uses — `data-t="…"` / `data-t-title="…"` in ui/*.html, `t("…")` in ui/*,
+Finds the keys the desktop code uses — `data-t="…"` / `data-t-title="…"` / `data-t-placeholder="…"` in ui/*.html, `t("…")` in ui/*,
 `s.t("…")` / `texts.format("…"` in app/src and core/src — and writes ui/i18n/<code>.json with just those keys for
 each language but Russian (the keys are the Russian texts). A new text goes into AIHubBar/Resources/Localizable.xcstrings first, with all
 translations, so the Mac and desktop versions never drift.
@@ -9,7 +9,8 @@ translations, so the Mac and desktop versions never drift.
 Also writes ui/i18n/prompts.json: the Mac's prompts for Claude in a project without shared rules (`nextStep`,
 `customTask`, `finishSession` of every language in AIHubBar/Models/ContentLanguage.swift), and ui/i18n/templates.json:
 the profile templates the desktop versions can already use (AIHubBar/Resources/Templates/template-<id>[.<code>].json),
-`{id: {code: mode}}` — the Mac's profile as it is, in each content language.
+`{id: {code: {title, mode}}}` — the Mac's profile as it is, in each content language — and ui/i18n/content.json: the
+project card's file name, field names and notes heading of each content language (`ContentStrings`), for folder projects.
 
     python3 scripts/strings.py          # write the files
     python3 scripts/strings.py --check  # only check: every key and translation is there, the files are current
@@ -24,8 +25,9 @@ DESKTOP = Path(__file__).resolve().parent.parent
 CATALOG = DESKTOP.parent / "AIHubBar" / "Resources" / "Localizable.xcstrings"
 CONTENT = DESKTOP.parent / "AIHubBar" / "Models" / "ContentLanguage.swift"
 TEMPLATES = DESKTOP.parent / "AIHubBar" / "Resources" / "Templates"
-# Git projects only until folder projects come (docs/specs/SPEC-windows.md §9, stage 5).
-TEMPLATE_IDS = ["developer"]
+# In the order the Mac's assistant shows them; «Утилиты Mac» has no projects and Mac-only modules.
+TEMPLATE_IDS = ["developer", "video", "texts", "research", "social", "custom"]
+CARD_KEYS = ["stage", "deadline", "publish", "format", "mainFile", "platform"]
 PROMPT_KEYS = ["nextStep", "customTask", "finishSession"]
 CONTENT_LANGUAGES = {
     "russian": "ru", "english": "en", "spanish": "es", "portuguese": "pt-BR", "french": "fr", "german": "de",
@@ -35,7 +37,7 @@ OUT = DESKTOP / "ui" / "i18n"
 LANGUAGES = ["en", "es", "pt-BR", "fr", "de", "ja", "id", "ko", "it", "ar", "pl", "uk"]
 
 PATTERNS = [
-    (["ui/*.html"], r'data-t(?:-title)?="([^"]+)"'),
+    (["ui/*.html"], r'data-t(?:-title|-placeholder)?="([^"]+)"'),
     (["ui/*.html", "ui/*.js"], r'\bt\("((?:[^"\\]|\\.)+)"'),
     # In Rust only calls on a `Strings` value: `s.t("…")`, `texts.format("…"`, `strings(app).t("…")`.
     (["app/src/**/*.rs", "core/src/**/*.rs"], r'(?:\bs|\btexts|\bstrings\([^)]*\))\.(?:t|format)\("((?:[^"\\]|\\.)+)"'),
@@ -77,8 +79,31 @@ def templates():
         modes = {}
         for code in CONTENT_LANGUAGES.values():
             path = TEMPLATES / (f"template-{template}.json" if code == "ru" else f"template-{template}.{code}.json")
-            modes[code] = json.loads(path.read_text(encoding="utf-8"))["mode"]
+            template_file = json.loads(path.read_text(encoding="utf-8"))
+            modes[code] = {"title": template_file["title"], "mode": template_file["mode"]}
         result[template] = modes
+    return result
+
+
+def content():
+    """{code: {cardFile, cardLabels: {key: label}, notesHeading}} from the Swift `ContentStrings` tables."""
+    text = CONTENT.read_text(encoding="utf-8")
+    blocks = re.split(r"static let (\w+) = ContentStrings\(", text)
+    result = {}
+    for name, body in zip(blocks[1::2], blocks[2::2]):
+        code = CONTENT_LANGUAGES.get(name)
+        if code is None:
+            continue
+        labels = re.search(r"cardLabels: \[(.*?)\]", body).group(1)
+        result[code] = {
+            "cardFile": re.search(r'cardFile: "([^"]*)"', body).group(1),
+            "cardLabels": {key: value for key, value in re.findall(r'\.(\w+): "([^"]*)"', labels)},
+            "notesHeading": re.search(r'notesHeading: "([^"]*)"', body).group(1),
+        }
+        missing = [key for key in CARD_KEYS if key not in result[code]["cardLabels"]]
+        if missing:
+            print(f"no card labels {', '.join(missing)} for {code} in {CONTENT.name}", file=sys.stderr)
+            sys.exit(1)
     return result
 
 
@@ -123,6 +148,7 @@ def main():
             print(f"no {', '.join(missing)} for {code} in {CONTENT.name}", file=sys.stderr)
             sys.exit(1)
     write(OUT / "prompts.json", json.dumps(table, ensure_ascii=False, indent=1, sort_keys=True) + "\n", check, stale)
+    write(OUT / "content.json", json.dumps(content(), ensure_ascii=False, indent=1, sort_keys=True) + "\n", check, stale)
     write(OUT / "templates.json", json.dumps(templates(), ensure_ascii=False, indent=1, sort_keys=True) + "\n", check, stale)
     if stale:
         print("out of date (run python3 scripts/strings.py): " + ", ".join(stale), file=sys.stderr)

@@ -5,6 +5,7 @@
 pub mod agent_hooks;
 pub mod approvals;
 pub mod command;
+pub mod folders;
 pub mod hooks;
 pub mod i18n;
 pub mod ipc;

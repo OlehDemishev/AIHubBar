@@ -519,9 +519,11 @@ dependencies = [
  "httpdate",
  "interprocess",
  "libc",
+ "regex",
  "serde",
  "serde_json",
  "sys-locale",
+ "unicode-segmentation",
  "ureq",
  "windows-sys 0.61.2",
 ]
@@ -532,6 +534,7 @@ version = "0.1.0"
 dependencies = [
  "chrono",
  "claudepult-core",
+ "dirs 6.0.0",
  "serde",
  "serde_json",
  "tauri",

@@ -1,6 +1,6 @@
 // Shared by the panel and the settings window: texts in the interface language, calls into the Rust side.
 // Texts are keyed by the Mac app's Russian source text (docs/specs/SPEC-windows.md §2); `data-t` marks an element whose
-// text is one such key, `data-t-title` its hover hint.
+// text is one such key, `data-t-title` its hover hint, `data-t-placeholder` an input's placeholder.
 
 const invoke = window.__TAURI__.core.invoke;
 
@@ -22,6 +22,7 @@ export async function loadTexts() {
   document.documentElement.dir = ui.rtl ? "rtl" : "ltr";
   for (const element of document.querySelectorAll("[data-t]")) element.textContent = t(element.dataset.t);
   for (const element of document.querySelectorAll("[data-t-title]")) element.title = t(element.dataset.tTitle);
+  for (const element of document.querySelectorAll("[data-t-placeholder]")) element.placeholder = t(element.dataset.tPlaceholder);
   return ui;
 }
 

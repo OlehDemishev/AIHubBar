@@ -335,10 +335,11 @@ fn main() {
             sessions::sessions_view, sessions::decide_request, sessions::hooks_state, sessions::install_hooks,
             sessions::uninstall_hooks, sessions::agent_hooks_state, sessions::install_agent_hooks, sessions::uninstall_agent_hooks,
             projects::projects_view, projects::refresh_projects, projects::projects_panel_opened, projects::open_project,
-            projects::open_link, projects::launch_claude,
+            projects::open_link, projects::launch_claude, projects::set_project_stage, projects::create_project_card,
+            projects::create_folder_project, projects::open_project_file,
             runs::stop_run, runs::run_log, projects::worktree_removal, launch_settings, set_launch_settings,
             pull_request_alerts, set_pull_request_alerts, profiles::projects_folder, profiles::choose_projects_folder,
-            profiles::reset_projects_folder, profiles::profiles_view, profiles::select_profile, profiles::add_profile,
+            profiles::reset_projects_folder, profiles::profiles_view, profiles::select_profile, profiles::add_profile, profiles::profile_templates,
             profiles::rename_profile, profiles::delete_profile, profiles::export_settings, profiles::export_profile,
             profiles::choose_import, profiles::apply_import, profiles::cancel_import
         ])

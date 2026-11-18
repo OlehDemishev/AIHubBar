@@ -1,316 +1,4772 @@
 {
- "developer": {
+ "custom": {
   "ar": {
-   "calendar": "off",
-   "card": "statusMD",
-   "commands": [],
-   "commonCommands": "none",
-   "icon": "chevron.left.forwardslash.chevron.right",
-   "metrics": [
-    "branch",
-    "dirty",
-    "pullRequests",
-    "lastActivity"
-   ],
-   "name": "مطوّر (GitHub)",
-   "permissions": "code",
-   "showCommonCommands": false,
-   "showProjects": true,
-   "source": {
-    "gitBuiltin": {
-     "projects": "~/Projects"
-    }
+   "mode": {
+    "calendar": "dates",
+    "card": "projectMD",
+    "commands": [],
+    "commonCommands": "none",
+    "icon": "sparkle",
+    "launchMode": "background",
+    "metrics": [
+     "words",
+     "deadline",
+     "lastActivity"
+    ],
+    "name": "ملفي",
+    "permissions": "filesOnly",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "folders": {
+      "_0": "~/Documents/Projects"
+     }
+    },
+    "stages": [
+     "قيد العمل",
+     "تم"
+    ],
+    "template": "custom"
    },
-   "stages": [],
-   "template": "developer"
+   "title": "مخصّص"
   },
   "de": {
-   "calendar": "off",
-   "card": "statusMD",
-   "commands": [],
-   "commonCommands": "none",
-   "icon": "chevron.left.forwardslash.chevron.right",
-   "metrics": [
-    "branch",
-    "dirty",
-    "pullRequests",
-    "lastActivity"
-   ],
-   "name": "Entwickler (GitHub)",
-   "permissions": "code",
-   "showCommonCommands": false,
-   "showProjects": true,
-   "source": {
-    "gitBuiltin": {
-     "projects": "~/Projects"
-    }
+   "mode": {
+    "calendar": "dates",
+    "card": "projectMD",
+    "commands": [],
+    "commonCommands": "none",
+    "icon": "sparkle",
+    "launchMode": "background",
+    "metrics": [
+     "words",
+     "deadline",
+     "lastActivity"
+    ],
+    "name": "Mein Profil",
+    "permissions": "filesOnly",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "folders": {
+      "_0": "~/Documents/Projekte"
+     }
+    },
+    "stages": [
+     "in Arbeit",
+     "fertig"
+    ],
+    "template": "custom"
    },
-   "stages": [],
-   "template": "developer"
+   "title": "Eigener"
   },
   "en": {
-   "calendar": "off",
-   "card": "statusMD",
-   "commands": [],
-   "commonCommands": "none",
-   "icon": "chevron.left.forwardslash.chevron.right",
-   "metrics": [
-    "branch",
-    "dirty",
-    "pullRequests",
-    "lastActivity"
-   ],
-   "name": "Developer (GitHub)",
-   "permissions": "code",
-   "showCommonCommands": false,
-   "showProjects": true,
-   "source": {
-    "gitBuiltin": {
-     "projects": "~/Projects"
-    }
+   "mode": {
+    "calendar": "dates",
+    "card": "projectMD",
+    "commands": [],
+    "commonCommands": "none",
+    "icon": "sparkle",
+    "launchMode": "background",
+    "metrics": [
+     "words",
+     "deadline",
+     "lastActivity"
+    ],
+    "name": "My profile",
+    "permissions": "filesOnly",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "folders": {
+      "_0": "~/Documents/Projects"
+     }
+    },
+    "stages": [
+     "in progress",
+     "done"
+    ],
+    "template": "custom"
    },
-   "stages": [],
-   "template": "developer"
+   "title": "Custom"
   },
   "es": {
-   "calendar": "off",
-   "card": "statusMD",
-   "commands": [],
-   "commonCommands": "none",
-   "icon": "chevron.left.forwardslash.chevron.right",
-   "metrics": [
-    "branch",
-    "dirty",
-    "pullRequests",
-    "lastActivity"
-   ],
-   "name": "Desarrollador (GitHub)",
-   "permissions": "code",
-   "showCommonCommands": false,
-   "showProjects": true,
-   "source": {
-    "gitBuiltin": {
-     "projects": "~/Projects"
-    }
+   "mode": {
+    "calendar": "dates",
+    "card": "projectMD",
+    "commands": [],
+    "commonCommands": "none",
+    "icon": "sparkle",
+    "launchMode": "background",
+    "metrics": [
+     "words",
+     "deadline",
+     "lastActivity"
+    ],
+    "name": "Mi perfil",
+    "permissions": "filesOnly",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "folders": {
+      "_0": "~/Documents/Proyectos"
+     }
+    },
+    "stages": [
+     "en curso",
+     "hecho"
+    ],
+    "template": "custom"
    },
-   "stages": [],
-   "template": "developer"
+   "title": "Propio"
   },
   "fr": {
-   "calendar": "off",
-   "card": "statusMD",
-   "commands": [],
-   "commonCommands": "none",
-   "icon": "chevron.left.forwardslash.chevron.right",
-   "metrics": [
-    "branch",
-    "dirty",
-    "pullRequests",
-    "lastActivity"
-   ],
-   "name": "Développeur (GitHub)",
-   "permissions": "code",
-   "showCommonCommands": false,
-   "showProjects": true,
-   "source": {
-    "gitBuiltin": {
-     "projects": "~/Projects"
-    }
+   "mode": {
+    "calendar": "dates",
+    "card": "projectMD",
+    "commands": [],
+    "commonCommands": "none",
+    "icon": "sparkle",
+    "launchMode": "background",
+    "metrics": [
+     "words",
+     "deadline",
+     "lastActivity"
+    ],
+    "name": "Mon profil",
+    "permissions": "filesOnly",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "folders": {
+      "_0": "~/Documents/Projets"
+     }
+    },
+    "stages": [
+     "en cours",
+     "terminé"
+    ],
+    "template": "custom"
    },
-   "stages": [],
-   "template": "developer"
+   "title": "Personnalisé"
   },
   "id": {
-   "calendar": "off",
-   "card": "statusMD",
-   "commands": [],
-   "commonCommands": "none",
-   "icon": "chevron.left.forwardslash.chevron.right",
-   "metrics": [
-    "branch",
-    "dirty",
-    "pullRequests",
-    "lastActivity"
-   ],
-   "name": "Developer (GitHub)",
-   "permissions": "code",
-   "showCommonCommands": false,
-   "showProjects": true,
-   "source": {
-    "gitBuiltin": {
-     "projects": "~/Projects"
-    }
+   "mode": {
+    "calendar": "dates",
+    "card": "projectMD",
+    "commands": [],
+    "commonCommands": "none",
+    "icon": "sparkle",
+    "launchMode": "background",
+    "metrics": [
+     "words",
+     "deadline",
+     "lastActivity"
+    ],
+    "name": "Profil saya",
+    "permissions": "filesOnly",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "folders": {
+      "_0": "~/Documents/Proyek"
+     }
+    },
+    "stages": [
+     "berjalan",
+     "selesai"
+    ],
+    "template": "custom"
    },
-   "stages": [],
-   "template": "developer"
+   "title": "Kustom"
   },
   "it": {
-   "calendar": "off",
-   "card": "statusMD",
-   "commands": [],
-   "commonCommands": "none",
-   "icon": "chevron.left.forwardslash.chevron.right",
-   "metrics": [
-    "branch",
-    "dirty",
-    "pullRequests",
-    "lastActivity"
-   ],
-   "name": "Sviluppatore (GitHub)",
-   "permissions": "code",
-   "showCommonCommands": false,
-   "showProjects": true,
-   "source": {
-    "gitBuiltin": {
-     "projects": "~/Projects"
-    }
+   "mode": {
+    "calendar": "dates",
+    "card": "projectMD",
+    "commands": [],
+    "commonCommands": "none",
+    "icon": "sparkle",
+    "launchMode": "background",
+    "metrics": [
+     "words",
+     "deadline",
+     "lastActivity"
+    ],
+    "name": "Il mio profilo",
+    "permissions": "filesOnly",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "folders": {
+      "_0": "~/Documents/Progetti"
+     }
+    },
+    "stages": [
+     "in corso",
+     "fatto"
+    ],
+    "template": "custom"
    },
-   "stages": [],
-   "template": "developer"
+   "title": "Personale"
   },
   "ja": {
-   "calendar": "off",
-   "card": "statusMD",
-   "commands": [],
-   "commonCommands": "none",
-   "icon": "chevron.left.forwardslash.chevron.right",
-   "metrics": [
-    "branch",
-    "dirty",
-    "pullRequests",
-    "lastActivity"
-   ],
-   "name": "開発者 (GitHub)",
-   "permissions": "code",
-   "showCommonCommands": false,
-   "showProjects": true,
-   "source": {
-    "gitBuiltin": {
-     "projects": "~/Projects"
-    }
+   "mode": {
+    "calendar": "dates",
+    "card": "projectMD",
+    "commands": [],
+    "commonCommands": "none",
+    "icon": "sparkle",
+    "launchMode": "background",
+    "metrics": [
+     "words",
+     "deadline",
+     "lastActivity"
+    ],
+    "name": "マイプロファイル",
+    "permissions": "filesOnly",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "folders": {
+      "_0": "~/Documents/Projects"
+     }
+    },
+    "stages": [
+     "進行中",
+     "完了"
+    ],
+    "template": "custom"
    },
-   "stages": [],
-   "template": "developer"
+   "title": "カスタム"
   },
   "ko": {
-   "calendar": "off",
-   "card": "statusMD",
-   "commands": [],
-   "commonCommands": "none",
-   "icon": "chevron.left.forwardslash.chevron.right",
-   "metrics": [
-    "branch",
-    "dirty",
-    "pullRequests",
-    "lastActivity"
-   ],
-   "name": "개발자 (GitHub)",
-   "permissions": "code",
-   "showCommonCommands": false,
-   "showProjects": true,
-   "source": {
-    "gitBuiltin": {
-     "projects": "~/Projects"
-    }
+   "mode": {
+    "calendar": "dates",
+    "card": "projectMD",
+    "commands": [],
+    "commonCommands": "none",
+    "icon": "sparkle",
+    "launchMode": "background",
+    "metrics": [
+     "words",
+     "deadline",
+     "lastActivity"
+    ],
+    "name": "내 프로필",
+    "permissions": "filesOnly",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "folders": {
+      "_0": "~/Documents/Projects"
+     }
+    },
+    "stages": [
+     "진행 중",
+     "완료"
+    ],
+    "template": "custom"
    },
-   "stages": [],
-   "template": "developer"
+   "title": "사용자 지정"
   },
   "pl": {
-   "calendar": "off",
-   "card": "statusMD",
-   "commands": [],
-   "commonCommands": "none",
-   "icon": "chevron.left.forwardslash.chevron.right",
-   "metrics": [
-    "branch",
-    "dirty",
-    "pullRequests",
-    "lastActivity"
-   ],
-   "name": "Programista (GitHub)",
-   "permissions": "code",
-   "showCommonCommands": false,
-   "showProjects": true,
-   "source": {
-    "gitBuiltin": {
-     "projects": "~/Projects"
-    }
+   "mode": {
+    "calendar": "dates",
+    "card": "projectMD",
+    "commands": [],
+    "commonCommands": "none",
+    "icon": "sparkle",
+    "launchMode": "background",
+    "metrics": [
+     "words",
+     "deadline",
+     "lastActivity"
+    ],
+    "name": "Mój profil",
+    "permissions": "filesOnly",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "folders": {
+      "_0": "~/Documents/Projekty"
+     }
+    },
+    "stages": [
+     "w toku",
+     "gotowe"
+    ],
+    "template": "custom"
    },
-   "stages": [],
-   "template": "developer"
+   "title": "Własny"
   },
   "pt-BR": {
-   "calendar": "off",
-   "card": "statusMD",
-   "commands": [],
-   "commonCommands": "none",
-   "icon": "chevron.left.forwardslash.chevron.right",
-   "metrics": [
-    "branch",
-    "dirty",
-    "pullRequests",
-    "lastActivity"
-   ],
-   "name": "Desenvolvedor (GitHub)",
-   "permissions": "code",
-   "showCommonCommands": false,
-   "showProjects": true,
-   "source": {
-    "gitBuiltin": {
-     "projects": "~/Projects"
-    }
+   "mode": {
+    "calendar": "dates",
+    "card": "projectMD",
+    "commands": [],
+    "commonCommands": "none",
+    "icon": "sparkle",
+    "launchMode": "background",
+    "metrics": [
+     "words",
+     "deadline",
+     "lastActivity"
+    ],
+    "name": "Meu perfil",
+    "permissions": "filesOnly",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "folders": {
+      "_0": "~/Documents/Projetos"
+     }
+    },
+    "stages": [
+     "em andamento",
+     "pronto"
+    ],
+    "template": "custom"
    },
-   "stages": [],
-   "template": "developer"
+   "title": "Personalizado"
   },
   "ru": {
-   "calendar": "off",
-   "card": "statusMD",
-   "commands": [],
-   "commonCommands": "none",
-   "icon": "chevron.left.forwardslash.chevron.right",
-   "metrics": [
-    "branch",
-    "dirty",
-    "pullRequests",
-    "lastActivity"
-   ],
-   "name": "Разработчик (GitHub)",
-   "permissions": "code",
-   "showCommonCommands": false,
-   "showProjects": true,
-   "source": {
-    "gitBuiltin": {
-     "projects": "~/Projects"
-    }
+   "mode": {
+    "calendar": "dates",
+    "card": "projectMD",
+    "commands": [],
+    "commonCommands": "none",
+    "icon": "sparkle",
+    "launchMode": "background",
+    "metrics": [
+     "words",
+     "deadline",
+     "lastActivity"
+    ],
+    "name": "Свой профиль",
+    "permissions": "filesOnly",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "folders": {
+      "_0": "~/Documents/Проекты"
+     }
+    },
+    "stages": [
+     "в работе",
+     "готово"
+    ],
+    "template": "custom"
    },
-   "stages": [],
-   "template": "developer"
+   "title": "Свой"
   },
   "uk": {
-   "calendar": "off",
-   "card": "statusMD",
-   "commands": [],
-   "commonCommands": "none",
-   "icon": "chevron.left.forwardslash.chevron.right",
-   "metrics": [
-    "branch",
-    "dirty",
-    "pullRequests",
-    "lastActivity"
-   ],
-   "name": "Розробник (GitHub)",
-   "permissions": "code",
-   "showCommonCommands": false,
-   "showProjects": true,
-   "source": {
-    "gitBuiltin": {
-     "projects": "~/Projects"
-    }
+   "mode": {
+    "calendar": "dates",
+    "card": "projectMD",
+    "commands": [],
+    "commonCommands": "none",
+    "icon": "sparkle",
+    "launchMode": "background",
+    "metrics": [
+     "words",
+     "deadline",
+     "lastActivity"
+    ],
+    "name": "Мій профіль",
+    "permissions": "filesOnly",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "folders": {
+      "_0": "~/Documents/Проєкти"
+     }
+    },
+    "stages": [
+     "у роботі",
+     "готово"
+    ],
+    "template": "custom"
    },
-   "stages": [],
-   "template": "developer"
+   "title": "Свій"
+  }
+ },
+ "developer": {
+  "ar": {
+   "mode": {
+    "calendar": "off",
+    "card": "statusMD",
+    "commands": [],
+    "commonCommands": "none",
+    "icon": "chevron.left.forwardslash.chevron.right",
+    "metrics": [
+     "branch",
+     "dirty",
+     "pullRequests",
+     "lastActivity"
+    ],
+    "name": "مطوّر (GitHub)",
+    "permissions": "code",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "gitBuiltin": {
+      "projects": "~/Projects"
+     }
+    },
+    "stages": [],
+    "template": "developer"
+   },
+   "title": "مطوّر (GitHub)"
+  },
+  "de": {
+   "mode": {
+    "calendar": "off",
+    "card": "statusMD",
+    "commands": [],
+    "commonCommands": "none",
+    "icon": "chevron.left.forwardslash.chevron.right",
+    "metrics": [
+     "branch",
+     "dirty",
+     "pullRequests",
+     "lastActivity"
+    ],
+    "name": "Entwickler (GitHub)",
+    "permissions": "code",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "gitBuiltin": {
+      "projects": "~/Projects"
+     }
+    },
+    "stages": [],
+    "template": "developer"
+   },
+   "title": "Entwickler (GitHub)"
+  },
+  "en": {
+   "mode": {
+    "calendar": "off",
+    "card": "statusMD",
+    "commands": [],
+    "commonCommands": "none",
+    "icon": "chevron.left.forwardslash.chevron.right",
+    "metrics": [
+     "branch",
+     "dirty",
+     "pullRequests",
+     "lastActivity"
+    ],
+    "name": "Developer (GitHub)",
+    "permissions": "code",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "gitBuiltin": {
+      "projects": "~/Projects"
+     }
+    },
+    "stages": [],
+    "template": "developer"
+   },
+   "title": "Developer (GitHub)"
+  },
+  "es": {
+   "mode": {
+    "calendar": "off",
+    "card": "statusMD",
+    "commands": [],
+    "commonCommands": "none",
+    "icon": "chevron.left.forwardslash.chevron.right",
+    "metrics": [
+     "branch",
+     "dirty",
+     "pullRequests",
+     "lastActivity"
+    ],
+    "name": "Desarrollador (GitHub)",
+    "permissions": "code",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "gitBuiltin": {
+      "projects": "~/Projects"
+     }
+    },
+    "stages": [],
+    "template": "developer"
+   },
+   "title": "Desarrollador (GitHub)"
+  },
+  "fr": {
+   "mode": {
+    "calendar": "off",
+    "card": "statusMD",
+    "commands": [],
+    "commonCommands": "none",
+    "icon": "chevron.left.forwardslash.chevron.right",
+    "metrics": [
+     "branch",
+     "dirty",
+     "pullRequests",
+     "lastActivity"
+    ],
+    "name": "Développeur (GitHub)",
+    "permissions": "code",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "gitBuiltin": {
+      "projects": "~/Projects"
+     }
+    },
+    "stages": [],
+    "template": "developer"
+   },
+   "title": "Développeur (GitHub)"
+  },
+  "id": {
+   "mode": {
+    "calendar": "off",
+    "card": "statusMD",
+    "commands": [],
+    "commonCommands": "none",
+    "icon": "chevron.left.forwardslash.chevron.right",
+    "metrics": [
+     "branch",
+     "dirty",
+     "pullRequests",
+     "lastActivity"
+    ],
+    "name": "Developer (GitHub)",
+    "permissions": "code",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "gitBuiltin": {
+      "projects": "~/Projects"
+     }
+    },
+    "stages": [],
+    "template": "developer"
+   },
+   "title": "Developer (GitHub)"
+  },
+  "it": {
+   "mode": {
+    "calendar": "off",
+    "card": "statusMD",
+    "commands": [],
+    "commonCommands": "none",
+    "icon": "chevron.left.forwardslash.chevron.right",
+    "metrics": [
+     "branch",
+     "dirty",
+     "pullRequests",
+     "lastActivity"
+    ],
+    "name": "Sviluppatore (GitHub)",
+    "permissions": "code",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "gitBuiltin": {
+      "projects": "~/Projects"
+     }
+    },
+    "stages": [],
+    "template": "developer"
+   },
+   "title": "Sviluppatore (GitHub)"
+  },
+  "ja": {
+   "mode": {
+    "calendar": "off",
+    "card": "statusMD",
+    "commands": [],
+    "commonCommands": "none",
+    "icon": "chevron.left.forwardslash.chevron.right",
+    "metrics": [
+     "branch",
+     "dirty",
+     "pullRequests",
+     "lastActivity"
+    ],
+    "name": "開発者 (GitHub)",
+    "permissions": "code",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "gitBuiltin": {
+      "projects": "~/Projects"
+     }
+    },
+    "stages": [],
+    "template": "developer"
+   },
+   "title": "開発者 (GitHub)"
+  },
+  "ko": {
+   "mode": {
+    "calendar": "off",
+    "card": "statusMD",
+    "commands": [],
+    "commonCommands": "none",
+    "icon": "chevron.left.forwardslash.chevron.right",
+    "metrics": [
+     "branch",
+     "dirty",
+     "pullRequests",
+     "lastActivity"
+    ],
+    "name": "개발자 (GitHub)",
+    "permissions": "code",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "gitBuiltin": {
+      "projects": "~/Projects"
+     }
+    },
+    "stages": [],
+    "template": "developer"
+   },
+   "title": "개발자 (GitHub)"
+  },
+  "pl": {
+   "mode": {
+    "calendar": "off",
+    "card": "statusMD",
+    "commands": [],
+    "commonCommands": "none",
+    "icon": "chevron.left.forwardslash.chevron.right",
+    "metrics": [
+     "branch",
+     "dirty",
+     "pullRequests",
+     "lastActivity"
+    ],
+    "name": "Programista (GitHub)",
+    "permissions": "code",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "gitBuiltin": {
+      "projects": "~/Projects"
+     }
+    },
+    "stages": [],
+    "template": "developer"
+   },
+   "title": "Programista (GitHub)"
+  },
+  "pt-BR": {
+   "mode": {
+    "calendar": "off",
+    "card": "statusMD",
+    "commands": [],
+    "commonCommands": "none",
+    "icon": "chevron.left.forwardslash.chevron.right",
+    "metrics": [
+     "branch",
+     "dirty",
+     "pullRequests",
+     "lastActivity"
+    ],
+    "name": "Desenvolvedor (GitHub)",
+    "permissions": "code",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "gitBuiltin": {
+      "projects": "~/Projects"
+     }
+    },
+    "stages": [],
+    "template": "developer"
+   },
+   "title": "Desenvolvedor (GitHub)"
+  },
+  "ru": {
+   "mode": {
+    "calendar": "off",
+    "card": "statusMD",
+    "commands": [],
+    "commonCommands": "none",
+    "icon": "chevron.left.forwardslash.chevron.right",
+    "metrics": [
+     "branch",
+     "dirty",
+     "pullRequests",
+     "lastActivity"
+    ],
+    "name": "Разработчик (GitHub)",
+    "permissions": "code",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "gitBuiltin": {
+      "projects": "~/Projects"
+     }
+    },
+    "stages": [],
+    "template": "developer"
+   },
+   "title": "Разработчик (GitHub)"
+  },
+  "uk": {
+   "mode": {
+    "calendar": "off",
+    "card": "statusMD",
+    "commands": [],
+    "commonCommands": "none",
+    "icon": "chevron.left.forwardslash.chevron.right",
+    "metrics": [
+     "branch",
+     "dirty",
+     "pullRequests",
+     "lastActivity"
+    ],
+    "name": "Розробник (GitHub)",
+    "permissions": "code",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "gitBuiltin": {
+      "projects": "~/Projects"
+     }
+    },
+    "stages": [],
+    "template": "developer"
+   },
+   "title": "Розробник (GitHub)"
+  }
+ },
+ "research": {
+  "ar": {
+   "mode": {
+    "calendar": "dates",
+    "card": "projectMD",
+    "commands": [
+     {
+      "id": "research-summary",
+      "input": "mainFile",
+      "output": "تلخيص-<file>.md",
+      "task": "لخّص المصدر المختار: موضوعه في جملتين أو ثلاث؛ الأطروحات الرئيسية في قائمة؛ الأرقام والتعريفات الأساسية؛ ما فيه من جدل أو ما لم يثبت؛ صلته بموضوع المشروع. فقط ما ورد في المصدر — دون إضافات من المعرفة العامة (ضع على أي سياق مضاف علامة «خارج المصدر»).",
+      "title": "تلخيص المصدر"
+     },
+     {
+      "id": "research-quotes",
+      "input": "project",
+      "output": "اقتباسات.md",
+      "service": "claude-code",
+      "task": "استخرج من مصادر المشروع أنفع الاقتباسات للموضوع — حرفيًا، مع الملف والصفحة/القسم إن وُجدا. صنّفها حسب الموضوعات الفرعية. لا تُعِد صياغة أي شيء بكلماتك في هذا الملف.",
+      "title": "اقتباسات مع المراجع"
+     },
+     {
+      "id": "research-table",
+      "input": "project",
+      "output": "نظرة-عامة.md",
+      "service": "claude-code",
+      "task": "اجمع مصادر المشروع في جدول: المصدر، السنة/المؤلف (إن عُرف)، الأطروحة الرئيسية، المنهج أو البيانات، فائدته للموضوع، حدوده. وتحت الجدول: أين تتفق المصادر وأين تتعارض.",
+      "title": "جدول جامع"
+     },
+     {
+      "id": "research-gaps",
+      "input": "project",
+      "output": "ثغرات.md",
+      "service": "claude-code",
+      "task": "حدّد من مواد المشروع أسئلة الموضوع التي لا تغطيها أو تغطيها بضعف. لكل ثغرة: لماذا هي مهمة وأي مصدر أو بيانات قد تسدّها. لا تختلق مصادر بعينها — صِف ما ينبغي البحث عنه.",
+      "title": "ما لم يُدرس بعد"
+     },
+     {
+      "id": "research-plan",
+      "input": "project",
+      "output": "خطة.md",
+      "service": "claude-code",
+      "task": "ضع خطة لنص (مقال أو عرض أو بحث) من مواد المشروع: الأقسام، ومحتوى كل قسم، والمصادر التي يُعتمد عليها، والحجم التقريبي. ضع علامة حيث لا تزال المادة ناقصة.",
+      "title": "خطة العمل"
+     }
+    ],
+    "commonCommands": "none",
+    "icon": "books.vertical",
+    "launchMode": "background",
+    "metrics": [
+     "sources",
+     "words",
+     "deadline"
+    ],
+    "name": "بحث",
+    "permissions": "filesAndWeb",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "folders": {
+      "_0": "~/Documents/Research"
+     }
+    },
+    "stages": [
+     "موضوع",
+     "جمع المصادر",
+     "ملاحظات",
+     "استنتاجات",
+     "تم"
+    ],
+    "template": "research"
+   },
+   "title": "بحث ودراسة"
+  },
+  "de": {
+   "mode": {
+    "calendar": "dates",
+    "card": "projectMD",
+    "commands": [
+     {
+      "id": "research-summary",
+      "input": "mainFile",
+      "output": "zusammenfassung-<file>.md",
+      "task": "Fasse die gewählte Quelle zusammen: worum es geht in 2–3 Sätzen; die Hauptthesen als Liste; wichtige Zahlen und Definitionen; was darin strittig oder unbewiesen ist; wie sie zum Thema des Projekts passt. Nur, was in der Quelle steht — ohne Ergänzungen aus Allgemeinwissen (markiere hinzugefügten Kontext mit «außerhalb der Quelle»).",
+      "title": "Quelle zusammenfassen"
+     },
+     {
+      "id": "research-quotes",
+      "input": "project",
+      "output": "zitate.md",
+      "service": "claude-code",
+      "task": "Suche aus den Quellen des Projekts die für das Thema nützlichsten Zitate heraus — wörtlich, mit Datei und Seite/Abschnitt, wenn vorhanden. Gruppiere sie nach Unterthemen. Gib in dieser Datei nichts mit eigenen Worten wieder.",
+      "title": "Zitate mit Belegen"
+     },
+     {
+      "id": "research-table",
+      "input": "project",
+      "output": "uebersicht.md",
+      "service": "claude-code",
+      "task": "Fasse die Quellen des Projekts in einer Tabelle zusammen: Quelle, Jahr/Autor (falls bekannt), Hauptthese, Methoden oder Daten, Nutzen für das Thema, Grenzen. Unter der Tabelle: wo die Quellen übereinstimmen und wo sie sich widersprechen.",
+      "title": "Übersichtstabelle"
+     },
+     {
+      "id": "research-gaps",
+      "input": "project",
+      "output": "luecken.md",
+      "service": "claude-code",
+      "task": "Stelle anhand der Projektmaterialien fest, welche Fragen des Themas sie nicht oder kaum abdecken. Für jede Lücke: warum sie wichtig ist und welche Quelle oder Daten sie schließen würden. Erfinde keine konkreten Quellen — beschreibe, wonach zu suchen ist.",
+      "title": "Was noch fehlt"
+     },
+     {
+      "id": "research-plan",
+      "input": "project",
+      "output": "plan.md",
+      "service": "claude-code",
+      "task": "Erstelle den Plan eines Textes (Artikel, Vortrag, Hausarbeit) aus den Projektmaterialien: Abschnitte, was in jeden gehört, auf welche Quellen man sich stützt, ungefährer Umfang. Markiere, wo noch Material fehlt.",
+      "title": "Arbeitsplan"
+     }
+    ],
+    "commonCommands": "none",
+    "icon": "books.vertical",
+    "launchMode": "background",
+    "metrics": [
+     "sources",
+     "words",
+     "deadline"
+    ],
+    "name": "Recherche",
+    "permissions": "filesAndWeb",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "folders": {
+      "_0": "~/Documents/Recherche"
+     }
+    },
+    "stages": [
+     "Thema",
+     "Quellen sammeln",
+     "Notizen",
+     "Schlüsse",
+     "fertig"
+    ],
+    "template": "research"
+   },
+   "title": "Recherche und Studium"
+  },
+  "en": {
+   "mode": {
+    "calendar": "dates",
+    "card": "projectMD",
+    "commands": [
+     {
+      "id": "research-summary",
+      "input": "mainFile",
+      "output": "summary-<file>.md",
+      "task": "Summarise the chosen source: what it is about in 2–3 sentences; the main points as a list; key numbers and definitions; what in it is disputable or unproven; how it relates to the project's topic. Only what is in the source — no additions from general knowledge (mark any context you add as «outside the source»).",
+      "title": "Source summary"
+     },
+     {
+      "id": "research-quotes",
+      "input": "project",
+      "output": "quotes.md",
+      "service": "claude-code",
+      "task": "Pick from the project's sources the quotes most useful for the topic — verbatim, with the file and page/section if available. Group them by subtopic. Do not paraphrase anything in this file.",
+      "title": "Quotes with references"
+     },
+     {
+      "id": "research-table",
+      "input": "project",
+      "output": "overview.md",
+      "service": "claude-code",
+      "task": "Put the project's sources into a table: source, year/author (if known), main point, methods or data, why it is useful for the topic, limitations. Under the table — where the sources agree and where they contradict each other.",
+      "title": "Summary table"
+     },
+     {
+      "id": "research-gaps",
+      "input": "project",
+      "output": "gaps.md",
+      "service": "claude-code",
+      "task": "From the project's materials, find the questions of the topic they do not cover or cover poorly. For each gap — why it matters and what source or data would close it. Do not invent specific sources — describe what to look for.",
+      "title": "Not yet covered"
+     },
+     {
+      "id": "research-plan",
+      "input": "project",
+      "output": "plan.md",
+      "service": "claude-code",
+      "task": "Draft a plan of a text (article, talk, term paper) from the project's materials: sections, what goes into each, which sources to rely on, an approximate length. Mark where material is still missing.",
+      "title": "Work plan"
+     }
+    ],
+    "commonCommands": "none",
+    "icon": "books.vertical",
+    "launchMode": "background",
+    "metrics": [
+     "sources",
+     "words",
+     "deadline"
+    ],
+    "name": "Research",
+    "permissions": "filesAndWeb",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "folders": {
+      "_0": "~/Documents/Research"
+     }
+    },
+    "stages": [
+     "topic",
+     "collecting sources",
+     "notes",
+     "conclusions",
+     "done"
+    ],
+    "template": "research"
+   },
+   "title": "Research and study"
+  },
+  "es": {
+   "mode": {
+    "calendar": "dates",
+    "card": "projectMD",
+    "commands": [
+     {
+      "id": "research-summary",
+      "input": "mainFile",
+      "output": "resumen-<file>.md",
+      "task": "Resume la fuente elegida: de qué trata en 2–3 frases; las tesis principales en una lista; cifras y definiciones clave; qué es discutible o no está demostrado; cómo se relaciona con el tema del proyecto. Solo lo que está en la fuente, sin añadidos de conocimiento general (marca cualquier contexto añadido como «fuera de la fuente»).",
+      "title": "Resumen de la fuente"
+     },
+     {
+      "id": "research-quotes",
+      "input": "project",
+      "output": "citas.md",
+      "service": "claude-code",
+      "task": "Extrae de las fuentes del proyecto las citas más útiles para el tema, textuales, con el archivo y la página/sección si los hay. Agrúpalas por subtema. No parafrasees nada en este archivo.",
+      "title": "Citas con referencias"
+     },
+     {
+      "id": "research-table",
+      "input": "project",
+      "output": "panorama.md",
+      "service": "claude-code",
+      "task": "Reúne las fuentes del proyecto en una tabla: fuente, año/autor (si se conoce), tesis principal, métodos o datos, por qué es útil para el tema, limitaciones. Bajo la tabla: dónde coinciden las fuentes y dónde se contradicen.",
+      "title": "Tabla resumen"
+     },
+     {
+      "id": "research-gaps",
+      "input": "project",
+      "output": "lagunas.md",
+      "service": "claude-code",
+      "task": "A partir de los materiales del proyecto, determina qué preguntas del tema no cubren o cubren mal. Para cada laguna: por qué importa y qué fuente o datos la cerrarían. No inventes fuentes concretas: describe qué buscar.",
+      "title": "Lo que falta estudiar"
+     },
+     {
+      "id": "research-plan",
+      "input": "project",
+      "output": "plan.md",
+      "service": "claude-code",
+      "task": "Elabora el plan de un texto (artículo, ponencia, trabajo) a partir de los materiales del proyecto: secciones, qué va en cada una, en qué fuentes apoyarse, extensión aproximada. Marca dónde aún falta material.",
+      "title": "Plan de trabajo"
+     }
+    ],
+    "commonCommands": "none",
+    "icon": "books.vertical",
+    "launchMode": "background",
+    "metrics": [
+     "sources",
+     "words",
+     "deadline"
+    ],
+    "name": "Investigación",
+    "permissions": "filesAndWeb",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "folders": {
+      "_0": "~/Documents/Investigacion"
+     }
+    },
+    "stages": [
+     "tema",
+     "reunir fuentes",
+     "apuntes",
+     "conclusiones",
+     "hecho"
+    ],
+    "template": "research"
+   },
+   "title": "Investigación y estudio"
+  },
+  "fr": {
+   "mode": {
+    "calendar": "dates",
+    "card": "projectMD",
+    "commands": [
+     {
+      "id": "research-summary",
+      "input": "mainFile",
+      "output": "synthese-<file>.md",
+      "task": "Fais la synthèse de la source choisie : de quoi elle parle en 2–3 phrases ; les thèses principales sous forme de liste ; les chiffres et définitions clés ; ce qui y est discutable ou non prouvé ; son lien avec le sujet du projet. Seulement ce qui est dans la source — sans ajout de culture générale (marque tout contexte ajouté «hors source»).",
+      "title": "Synthèse d'une source"
+     },
+     {
+      "id": "research-quotes",
+      "input": "project",
+      "output": "citations.md",
+      "service": "claude-code",
+      "task": "Relève dans les sources du projet les citations les plus utiles pour le sujet — mot pour mot, avec le fichier et la page/section si possible. Regroupe-les par sous-thème. Ne reformule rien dans ce fichier.",
+      "title": "Citations avec références"
+     },
+     {
+      "id": "research-table",
+      "input": "project",
+      "output": "apercu.md",
+      "service": "claude-code",
+      "task": "Rassemble les sources du projet dans un tableau : source, année/auteur (si connu), thèse principale, méthodes ou données, utilité pour le sujet, limites. Sous le tableau : où les sources concordent et où elles se contredisent.",
+      "title": "Tableau récapitulatif"
+     },
+     {
+      "id": "research-gaps",
+      "input": "project",
+      "output": "lacunes.md",
+      "service": "claude-code",
+      "task": "À partir des documents du projet, repère les questions du sujet qu'ils ne couvrent pas ou mal. Pour chaque lacune : pourquoi elle compte et quelle source ou quelles données la combleraient. N'invente pas de sources précises — décris quoi chercher.",
+      "title": "Ce qui reste à étudier"
+     },
+     {
+      "id": "research-plan",
+      "input": "project",
+      "output": "plan.md",
+      "service": "claude-code",
+      "task": "Établis le plan d'un texte (article, exposé, mémoire) à partir des documents du projet : parties, contenu de chacune, sources sur lesquelles s'appuyer, longueur approximative. Signale où il manque encore de la matière.",
+      "title": "Plan de travail"
+     }
+    ],
+    "commonCommands": "none",
+    "icon": "books.vertical",
+    "launchMode": "background",
+    "metrics": [
+     "sources",
+     "words",
+     "deadline"
+    ],
+    "name": "Recherche",
+    "permissions": "filesAndWeb",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "folders": {
+      "_0": "~/Documents/Recherche"
+     }
+    },
+    "stages": [
+     "sujet",
+     "collecte des sources",
+     "notes",
+     "conclusions",
+     "terminé"
+    ],
+    "template": "research"
+   },
+   "title": "Recherche et études"
+  },
+  "id": {
+   "mode": {
+    "calendar": "dates",
+    "card": "projectMD",
+    "commands": [
+     {
+      "id": "research-summary",
+      "input": "mainFile",
+      "output": "ringkasan-<file>.md",
+      "task": "Ringkas sumber yang dipilih: isinya dalam 2–3 kalimat; tesis utama berupa daftar; angka dan definisi kunci; apa yang diperdebatkan atau belum terbukti; kaitannya dengan topik proyek. Hanya yang ada di sumber — tanpa tambahan dari pengetahuan umum (tandai konteks tambahan dengan «di luar sumber»).",
+      "title": "Ringkasan sumber"
+     },
+     {
+      "id": "research-quotes",
+      "input": "project",
+      "output": "kutipan.md",
+      "service": "claude-code",
+      "task": "Ambil dari sumber proyek kutipan yang paling berguna untuk topik — kata per kata, dengan berkas dan halaman/bagian jika ada. Kelompokkan per subtopik. Jangan menulis ulang apa pun dengan kata-kata sendiri di berkas ini.",
+      "title": "Kutipan dengan rujukan"
+     },
+     {
+      "id": "research-table",
+      "input": "project",
+      "output": "ikhtisar.md",
+      "service": "claude-code",
+      "task": "Susun sumber proyek dalam tabel: sumber, tahun/penulis (jika ada), tesis utama, metode atau data, manfaat untuk topik, keterbatasan. Di bawah tabel: di mana sumber sepakat dan di mana bertentangan.",
+      "title": "Tabel ringkasan"
+     },
+     {
+      "id": "research-gaps",
+      "input": "project",
+      "output": "celah.md",
+      "service": "claude-code",
+      "task": "Dari materi proyek, tentukan pertanyaan topik yang belum atau kurang tercakup. Untuk tiap celah: mengapa penting dan sumber atau data apa yang bisa menutupnya. Jangan mengarang sumber tertentu — jelaskan apa yang perlu dicari.",
+      "title": "Yang belum dipelajari"
+     },
+     {
+      "id": "research-plan",
+      "input": "project",
+      "output": "rencana.md",
+      "service": "claude-code",
+      "task": "Susun rencana tulisan (artikel, presentasi, makalah) dari materi proyek: bagian-bagian, isi tiap bagian, sumber yang dipakai, perkiraan panjang. Tandai bagian yang materinya masih kurang.",
+      "title": "Rencana kerja"
+     }
+    ],
+    "commonCommands": "none",
+    "icon": "books.vertical",
+    "launchMode": "background",
+    "metrics": [
+     "sources",
+     "words",
+     "deadline"
+    ],
+    "name": "Riset",
+    "permissions": "filesAndWeb",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "folders": {
+      "_0": "~/Documents/Riset"
+     }
+    },
+    "stages": [
+     "topik",
+     "kumpulkan sumber",
+     "catatan",
+     "kesimpulan",
+     "selesai"
+    ],
+    "template": "research"
+   },
+   "title": "Riset dan belajar"
+  },
+  "it": {
+   "mode": {
+    "calendar": "dates",
+    "card": "projectMD",
+    "commands": [
+     {
+      "id": "research-summary",
+      "input": "mainFile",
+      "output": "sintesi-<file>.md",
+      "task": "Fai la sintesi della fonte scelta: di cosa parla in 2–3 frasi; le tesi principali in elenco; numeri e definizioni chiave; cosa è discutibile o non dimostrato; come si collega al tema del progetto. Solo ciò che è nella fonte — niente aggiunte di cultura generale (segna il contesto aggiunto come «fuori fonte»).",
+      "title": "Sintesi della fonte"
+     },
+     {
+      "id": "research-quotes",
+      "input": "project",
+      "output": "citazioni.md",
+      "service": "claude-code",
+      "task": "Estrai dalle fonti del progetto le citazioni più utili per il tema — testuali, con il file e la pagina/sezione se ci sono. Raggruppale per sottotema. In questo file non riformulare nulla con parole tue.",
+      "title": "Citazioni con riferimenti"
+     },
+     {
+      "id": "research-table",
+      "input": "project",
+      "output": "panoramica.md",
+      "service": "claude-code",
+      "task": "Raccogli le fonti del progetto in una tabella: fonte, anno/autore (se noto), tesi principale, metodi o dati, utilità per il tema, limiti. Sotto la tabella: dove le fonti concordano e dove si contraddicono.",
+      "title": "Tabella riassuntiva"
+     },
+     {
+      "id": "research-gaps",
+      "input": "project",
+      "output": "lacune.md",
+      "service": "claude-code",
+      "task": "Dai materiali del progetto individua le domande del tema che non coprono o coprono male. Per ogni lacuna: perché conta e quale fonte o dato la colmerebbe. Non inventare fonti precise — descrivi cosa cercare.",
+      "title": "Cosa manca ancora"
+     },
+     {
+      "id": "research-plan",
+      "input": "project",
+      "output": "piano.md",
+      "service": "claude-code",
+      "task": "Prepara il piano di un testo (articolo, relazione, tesina) dai materiali del progetto: sezioni, cosa va in ognuna, su quali fonti appoggiarsi, lunghezza indicativa. Segna dove manca ancora materiale.",
+      "title": "Piano di lavoro"
+     }
+    ],
+    "commonCommands": "none",
+    "icon": "books.vertical",
+    "launchMode": "background",
+    "metrics": [
+     "sources",
+     "words",
+     "deadline"
+    ],
+    "name": "Ricerca",
+    "permissions": "filesAndWeb",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "folders": {
+      "_0": "~/Documents/Ricerca"
+     }
+    },
+    "stages": [
+     "tema",
+     "raccolta fonti",
+     "appunti",
+     "conclusioni",
+     "fatto"
+    ],
+    "template": "research"
+   },
+   "title": "Ricerca e studio"
+  },
+  "ja": {
+   "mode": {
+    "calendar": "dates",
+    "card": "projectMD",
+    "commands": [
+     {
+      "id": "research-summary",
+      "input": "mainFile",
+      "output": "要約-<file>.md",
+      "task": "選んだ資料を要約してください: 何についての資料か 2〜3 文で、主な主張を箇条書きで、重要な数字と定義、議論の余地や未証明の点、プロジェクトのテーマとの関係。資料にあることだけを書き、一般知識は加えないこと (補った文脈には「資料外」と付ける)。",
+      "title": "資料の要約"
+     },
+     {
+      "id": "research-quotes",
+      "input": "project",
+      "output": "引用.md",
+      "service": "claude-code",
+      "task": "プロジェクトの資料から、テーマに役立つ引用を原文のまま抜き出してください。ファイル名とページ/節があれば添えて。サブテーマごとにまとめ、このファイルでは自分の言葉で言い換えないこと。",
+      "title": "出典付きの引用"
+     },
+     {
+      "id": "research-table",
+      "input": "project",
+      "output": "概要.md",
+      "service": "claude-code",
+      "task": "プロジェクトの資料を表にまとめてください: 資料、年/著者 (わかれば)、主な主張、方法やデータ、テーマへの有用性、限界。表の下に、資料どうしが一致する点と矛盾する点を。",
+      "title": "一覧表"
+     },
+     {
+      "id": "research-gaps",
+      "input": "project",
+      "output": "不足.md",
+      "service": "claude-code",
+      "task": "プロジェクトの資料が扱っていない、または手薄なテーマ上の問いを挙げてください。それぞれについて、なぜ重要か、どんな資料やデータで埋まるか。具体的な資料名は作らず、何を探すべきかを書いてください。",
+      "title": "まだ調べていないこと"
+     },
+     {
+      "id": "research-plan",
+      "input": "project",
+      "output": "計画.md",
+      "service": "claude-code",
+      "task": "プロジェクトの資料から文章 (記事、発表、レポート) の構成案を作ってください: 章立て、各章の内容、頼る資料、おおよその分量。材料が足りない箇所に印を。",
+      "title": "作業計画"
+     }
+    ],
+    "commonCommands": "none",
+    "icon": "books.vertical",
+    "launchMode": "background",
+    "metrics": [
+     "sources",
+     "words",
+     "deadline"
+    ],
+    "name": "リサーチ",
+    "permissions": "filesAndWeb",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "folders": {
+      "_0": "~/Documents/Research"
+     }
+    },
+    "stages": [
+     "テーマ",
+     "資料集め",
+     "メモ",
+     "結論",
+     "完了"
+    ],
+    "template": "research"
+   },
+   "title": "リサーチと学習"
+  },
+  "ko": {
+   "mode": {
+    "calendar": "dates",
+    "card": "projectMD",
+    "commands": [
+     {
+      "id": "research-summary",
+      "input": "mainFile",
+      "output": "요약-<file>.md",
+      "task": "고른 자료를 요약하세요: 무엇에 관한 것인지 2~3문장, 주요 주장 목록, 핵심 숫자와 정의, 논란이 있거나 입증되지 않은 점, 프로젝트 주제와의 관계. 자료에 있는 것만 쓰고 일반 상식은 더하지 마세요 (더한 맥락에는 «자료 밖» 표시).",
+      "title": "자료 요약"
+     },
+     {
+      "id": "research-quotes",
+      "input": "project",
+      "output": "인용.md",
+      "service": "claude-code",
+      "task": "프로젝트 자료에서 주제에 가장 쓸모 있는 인용을 그대로 뽑으세요. 파일과 쪽/절이 있으면 함께. 하위 주제별로 묶고, 이 파일에서는 자기 말로 바꿔 쓰지 마세요.",
+      "title": "출처가 있는 인용"
+     },
+     {
+      "id": "research-table",
+      "input": "project",
+      "output": "개요.md",
+      "service": "claude-code",
+      "task": "프로젝트 자료를 표로 정리하세요: 자료, 연도/저자 (알면), 주요 주장, 방법이나 데이터, 주제에 대한 쓸모, 한계. 표 아래에 자료들이 일치하는 점과 서로 어긋나는 점을.",
+      "title": "요약표"
+     },
+     {
+      "id": "research-gaps",
+      "input": "project",
+      "output": "빈곳.md",
+      "service": "claude-code",
+      "task": "프로젝트 자료가 다루지 않거나 약하게 다루는 주제의 질문을 찾으세요. 각각에 대해 왜 중요한지, 어떤 자료나 데이터가 채울지. 구체적인 출처를 지어내지 말고 무엇을 찾을지 설명하세요.",
+      "title": "아직 살피지 않은 것"
+     },
+     {
+      "id": "research-plan",
+      "input": "project",
+      "output": "계획.md",
+      "service": "claude-code",
+      "task": "프로젝트 자료로 글 (기사, 발표, 보고서)의 계획을 세우세요: 구성, 각 부분의 내용, 기댈 자료, 대략의 분량. 아직 자료가 부족한 곳을 표시하세요.",
+      "title": "작업 계획"
+     }
+    ],
+    "commonCommands": "none",
+    "icon": "books.vertical",
+    "launchMode": "background",
+    "metrics": [
+     "sources",
+     "words",
+     "deadline"
+    ],
+    "name": "리서치",
+    "permissions": "filesAndWeb",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "folders": {
+      "_0": "~/Documents/Research"
+     }
+    },
+    "stages": [
+     "주제",
+     "자료 수집",
+     "메모",
+     "결론",
+     "완료"
+    ],
+    "template": "research"
+   },
+   "title": "리서치와 학습"
+  },
+  "pl": {
+   "mode": {
+    "calendar": "dates",
+    "card": "projectMD",
+    "commands": [
+     {
+      "id": "research-summary",
+      "input": "mainFile",
+      "output": "streszczenie-<file>.md",
+      "task": "Streść wybrane źródło: o czym jest w 2–3 zdaniach; główne tezy w punktach; kluczowe liczby i definicje; co w nim jest dyskusyjne lub niedowiedzione; jak łączy się z tematem projektu. Tylko to, co jest w źródle — bez dodatków z wiedzy ogólnej (dodany kontekst oznacz «spoza źródła»).",
+      "title": "Streszczenie źródła"
+     },
+     {
+      "id": "research-quotes",
+      "input": "project",
+      "output": "cytaty.md",
+      "service": "claude-code",
+      "task": "Wypisz ze źródeł projektu najbardziej przydatne dla tematu cytaty — dosłownie, z plikiem i stroną/rozdziałem, jeśli są. Pogrupuj je według podtematów. W tym pliku niczego nie streszczaj własnymi słowami.",
+      "title": "Cytaty z odnośnikami"
+     },
+     {
+      "id": "research-table",
+      "input": "project",
+      "output": "zestawienie.md",
+      "service": "claude-code",
+      "task": "Zbierz źródła projektu w tabeli: źródło, rok/autor (jeśli znane), główna teza, metody lub dane, przydatność dla tematu, ograniczenia. Pod tabelą: w czym źródła się zgadzają, a w czym sobie przeczą.",
+      "title": "Tabela zbiorcza"
+     },
+     {
+      "id": "research-gaps",
+      "input": "project",
+      "output": "luki.md",
+      "service": "claude-code",
+      "task": "Na podstawie materiałów projektu ustal, których pytań tematu nie obejmują albo obejmują słabo. Dla każdej luki: dlaczego jest ważna i jakie źródło lub dane by ją zamknęły. Nie wymyślaj konkretnych źródeł — opisz, czego szukać.",
+      "title": "Czego jeszcze brakuje"
+     },
+     {
+      "id": "research-plan",
+      "input": "project",
+      "output": "plan.md",
+      "service": "claude-code",
+      "task": "Ułóż plan tekstu (artykułu, referatu, pracy) z materiałów projektu: rozdziały, co w każdym, na jakich źródłach się oprzeć, przybliżona objętość. Zaznacz miejsca, gdzie wciąż brakuje materiału.",
+      "title": "Plan pracy"
+     }
+    ],
+    "commonCommands": "none",
+    "icon": "books.vertical",
+    "launchMode": "background",
+    "metrics": [
+     "sources",
+     "words",
+     "deadline"
+    ],
+    "name": "Research",
+    "permissions": "filesAndWeb",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "folders": {
+      "_0": "~/Documents/Research"
+     }
+    },
+    "stages": [
+     "temat",
+     "zbieranie źródeł",
+     "notatki",
+     "wnioski",
+     "gotowe"
+    ],
+    "template": "research"
+   },
+   "title": "Research i nauka"
+  },
+  "pt-BR": {
+   "mode": {
+    "calendar": "dates",
+    "card": "projectMD",
+    "commands": [
+     {
+      "id": "research-summary",
+      "input": "mainFile",
+      "output": "resumo-<file>.md",
+      "task": "Resuma a fonte escolhida: do que ela trata em 2–3 frases; as teses principais em lista; números e definições-chave; o que nela é discutível ou não comprovado; como ela se relaciona com o tema do projeto. Só o que está na fonte — sem acréscimos de conhecimento geral (marque qualquer contexto acrescentado como «fora da fonte»).",
+      "title": "Resumo da fonte"
+     },
+     {
+      "id": "research-quotes",
+      "input": "project",
+      "output": "citacoes.md",
+      "service": "claude-code",
+      "task": "Extraia das fontes do projeto as citações mais úteis para o tema — literais, com o arquivo e a página/seção se houver. Agrupe por subtema. Não parafraseie nada neste arquivo.",
+      "title": "Citações com referências"
+     },
+     {
+      "id": "research-table",
+      "input": "project",
+      "output": "panorama.md",
+      "service": "claude-code",
+      "task": "Reúna as fontes do projeto em uma tabela: fonte, ano/autor (se houver), tese principal, métodos ou dados, por que é útil para o tema, limitações. Abaixo da tabela: onde as fontes concordam e onde se contradizem.",
+      "title": "Tabela-resumo"
+     },
+     {
+      "id": "research-gaps",
+      "input": "project",
+      "output": "lacunas.md",
+      "service": "claude-code",
+      "task": "A partir dos materiais do projeto, identifique as questões do tema que eles não cobrem ou cobrem mal. Para cada lacuna: por que importa e que fonte ou dados a fechariam. Não invente fontes concretas — descreva o que procurar.",
+      "title": "O que falta estudar"
+     },
+     {
+      "id": "research-plan",
+      "input": "project",
+      "output": "plano.md",
+      "service": "claude-code",
+      "task": "Monte o plano de um texto (artigo, palestra, trabalho) a partir dos materiais do projeto: seções, o que vai em cada uma, em quais fontes se apoiar, tamanho aproximado. Marque onde ainda falta material.",
+      "title": "Plano de trabalho"
+     }
+    ],
+    "commonCommands": "none",
+    "icon": "books.vertical",
+    "launchMode": "background",
+    "metrics": [
+     "sources",
+     "words",
+     "deadline"
+    ],
+    "name": "Pesquisa",
+    "permissions": "filesAndWeb",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "folders": {
+      "_0": "~/Documents/Pesquisa"
+     }
+    },
+    "stages": [
+     "tema",
+     "coleta de fontes",
+     "anotações",
+     "conclusões",
+     "pronto"
+    ],
+    "template": "research"
+   },
+   "title": "Pesquisa e estudo"
+  },
+  "ru": {
+   "mode": {
+    "calendar": "dates",
+    "card": "projectMD",
+    "commands": [
+     {
+      "id": "research-summary",
+      "input": "mainFile",
+      "output": "конспект-<файл>.md",
+      "task": "Сделай конспект выбранного источника: о чём он в 2–3 предложениях; главные тезисы списком; ключевые цифры и определения; что в нём спорно или не доказано; как он связан с темой проекта. Только то, что есть в источнике, — без дополнений из общих знаний (если добавляешь контекст, помечай «вне источника»).",
+      "title": "Конспект источника"
+     },
+     {
+      "id": "research-quotes",
+      "input": "project",
+      "output": "цитаты.md",
+      "service": "claude-code",
+      "task": "Выпиши из источников проекта самые полезные для темы цитаты — дословно, с указанием файла и страницы/раздела, если они есть. Сгруппируй по подтемам. Ничего не пересказывай своими словами в этом файле.",
+      "title": "Цитаты со ссылками"
+     },
+     {
+      "id": "research-table",
+      "input": "project",
+      "output": "сводка.md",
+      "service": "claude-code",
+      "task": "Сведи источники проекта в таблицу: источник, год/автор (если есть), главный тезис, методы или данные, чем полезен для темы, ограничения. Под таблицей — где источники согласны, где противоречат друг другу.",
+      "title": "Сводная таблица"
+     },
+     {
+      "id": "research-gaps",
+      "input": "project",
+      "output": "пробелы.md",
+      "service": "claude-code",
+      "task": "По материалам проекта определи, каких вопросов темы они не покрывают или покрывают слабо. Для каждого пробела — почему он важен и какой источник или данные закрыли бы его. Не выдумывай конкретные источники — описывай, что искать.",
+      "title": "Что ещё не изучено"
+     },
+     {
+      "id": "research-plan",
+      "input": "project",
+      "output": "план.md",
+      "service": "claude-code",
+      "task": "Составь план текста (статьи, доклада, курсовой) по материалам проекта: разделы, что в каждом, на какие источники опираться, примерный объём. Отметь места, где материала пока не хватает.",
+      "title": "План работы"
+     }
+    ],
+    "commonCommands": "none",
+    "icon": "books.vertical",
+    "launchMode": "background",
+    "metrics": [
+     "sources",
+     "words",
+     "deadline"
+    ],
+    "name": "Ресёрч",
+    "permissions": "filesAndWeb",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "folders": {
+      "_0": "~/Documents/Ресёрч"
+     }
+    },
+    "stages": [
+     "тема",
+     "сбор источников",
+     "конспект",
+     "выводы",
+     "готово"
+    ],
+    "template": "research"
+   },
+   "title": "Ресёрч и учёба"
+  },
+  "uk": {
+   "mode": {
+    "calendar": "dates",
+    "card": "projectMD",
+    "commands": [
+     {
+      "id": "research-summary",
+      "input": "mainFile",
+      "output": "конспект-<file>.md",
+      "task": "Зроби конспект вибраного джерела: про що воно у 2–3 реченнях; головні тези списком; ключові цифри й визначення; що в ньому спірне або не доведене; як воно пов'язане з темою проєкту. Лише те, що є в джерелі, — без доповнень із загальних знань (доданий контекст позначай «поза джерелом»).",
+      "title": "Конспект джерела"
+     },
+     {
+      "id": "research-quotes",
+      "input": "project",
+      "output": "цитати.md",
+      "service": "claude-code",
+      "task": "Випиши з джерел проєкту найкорисніші для теми цитати — дослівно, із зазначенням файлу й сторінки/розділу, якщо вони є. Згрупуй за підтемами. Нічого не переказуй своїми словами в цьому файлі.",
+      "title": "Цитати з посиланнями"
+     },
+     {
+      "id": "research-table",
+      "input": "project",
+      "output": "зведення.md",
+      "service": "claude-code",
+      "task": "Зведи джерела проєкту в таблицю: джерело, рік/автор (якщо є), головна теза, методи чи дані, чим корисне для теми, обмеження. Під таблицею — де джерела погоджуються, а де суперечать одне одному.",
+      "title": "Зведена таблиця"
+     },
+     {
+      "id": "research-gaps",
+      "input": "project",
+      "output": "прогалини.md",
+      "service": "claude-code",
+      "task": "За матеріалами проєкту визнач, яких питань теми вони не покривають або покривають слабко. Для кожної прогалини — чому вона важлива і яке джерело чи дані її закрили б. Не вигадуй конкретних джерел — описуй, що шукати.",
+      "title": "Що ще не вивчено"
+     },
+     {
+      "id": "research-plan",
+      "input": "project",
+      "output": "план.md",
+      "service": "claude-code",
+      "task": "Склади план тексту (статті, доповіді, курсової) за матеріалами проєкту: розділи, що в кожному, на які джерела спиратися, орієнтовний обсяг. Познач місця, де матеріалу поки бракує.",
+      "title": "План роботи"
+     }
+    ],
+    "commonCommands": "none",
+    "icon": "books.vertical",
+    "launchMode": "background",
+    "metrics": [
+     "sources",
+     "words",
+     "deadline"
+    ],
+    "name": "Ресерч",
+    "permissions": "filesAndWeb",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "folders": {
+      "_0": "~/Documents/Ресерч"
+     }
+    },
+    "stages": [
+     "тема",
+     "збір джерел",
+     "конспект",
+     "висновки",
+     "готово"
+    ],
+    "template": "research"
+   },
+   "title": "Ресерч і навчання"
+  }
+ },
+ "social": {
+  "ar": {
+   "mode": {
+    "calendar": "contentPlan",
+    "card": "projectMD",
+    "commands": [
+     {
+      "id": "social-posts",
+      "input": "mainFile",
+      "output": "منشورات-{platform}.md",
+      "task": "اكتب من المادة الأصلية منشورًا لكل منصة: {platform}. راعِ صيغتها: الطول، الأسلوب، الوسوم، الرموز التعبيرية، الروابط، الدعوة إلى الفعل. كل منشور مستقل وليس نسخة من غيره. وللمنصات المرئية فكرة قصيرة لصورة أو فيديو.",
+      "title": "منشورات لكل منصة"
+     },
+     {
+      "id": "social-ads",
+      "input": "mainFile",
+      "output": "إعلانات.md",
+      "task": "اقترح 5 نصوص إعلانية لـ {platform}: العنوان، النص الرئيسي، الدعوة إلى الفعل. مقاربات مختلفة: مشكلة العميل، الفائدة، رأي/دليل، إلحاح دون ضغط، مقارنة. دون مبالغات لا يمكن إثباتها. ضع علامة على الأزواج التي تستحق المقارنة في اختبار A/B.",
+      "title": "صيغ إعلانية"
+     },
+     {
+      "id": "social-ab",
+      "input": "mainFile",
+      "output": "عناوين-ab.md",
+      "task": "اقترح 8 أزواج من العناوين لاختبار A/B: في كل زوج يتغيّر شيء واحد فقط (الطول، رقم، سؤال/عبارة، عاطفة، تحديد). ولكل زوج: ما الذي نختبره بالضبط.",
+      "title": "عناوين A/B"
+     },
+     {
+      "asks": "النبرة",
+      "id": "social-replies",
+      "input": "mainFile",
+      "output": "ردود.md",
+      "task": "من المادة وأسئلة الجمهور المعتادة جهّز قوالب ردود على 10 تعليقات متكررة: سؤال عن السعر، شك، شكوى، شكر، سؤال «كيف»، تصيّد، طلب خصم وما شابه. النبرة: {text}. ردود قصيرة وإنسانية، دون «شكرًا على ملاحظتك!» المكررة.",
+      "title": "الرد على التعليقات"
+     },
+     {
+      "asks": "تاريخ البدء",
+      "id": "social-week",
+      "input": "project",
+      "output": "خطة-المحتوى-أسبوع.md",
+      "service": "claude-code",
+      "task": "ضع خطة محتوى للأسبوع الذي يبدأ في {text}: منشور أو اثنان يوميًا لـ {platform}. نوّع الصيغ (مفيد، تفاعلي، بيعي، كواليس). قدّم جدول Markdown بصيغة خطة المحتوى — | التاريخ | الوقت | المنصة | الموضوع | الحالة | الملف | — بالحالة «فكرة»، لتُنقل الصفوف إلى خطة-المحتوى.md.",
+      "title": "خطة محتوى للأسبوع"
+     },
+     {
+      "id": "social-prepare",
+      "input": "project",
+      "output": "منشورات-الخطة.md",
+      "service": "claude-code",
+      "task": "لبنود خطة المحتوى (خطة-المحتوى.md) في الأيام السبعة القادمة ذات الحالة «فكرة»، اكتب نصوص المنشورات — كلٌّ تحت عنوانه مع التاريخ والموضوع. لا تغيّر خطة المحتوى نفسها.",
+      "title": "تجهيز المنشورات من الخطة"
+     }
+    ],
+    "commonCommands": "none",
+    "icon": "megaphone",
+    "launchMode": "background",
+    "metrics": [
+     "words",
+     "publishDate"
+    ],
+    "name": "وسائل التواصل",
+    "permissions": "filesOnly",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "folders": {
+      "_0": "~/Documents/Social"
+     }
+    },
+    "stages": [
+     "فكرة",
+     "نص",
+     "تصميم",
+     "مجدول",
+     "منشور"
+    ],
+    "template": "social"
+   },
+   "title": "وسائل التواصل والتسويق"
+  },
+  "de": {
+   "mode": {
+    "calendar": "contentPlan",
+    "card": "projectMD",
+    "commands": [
+     {
+      "id": "social-posts",
+      "input": "mainFile",
+      "output": "posts-{platform}.md",
+      "task": "Schreib aus dem Ausgangsmaterial einen Post für jede Plattform: {platform}. Beachte ihr Format: Länge, Stil, Hashtags, Emojis, Links, Aufruf zum Handeln. Jeder Post steht für sich, keiner ist eine Kopie. Für visuelle Plattformen eine kurze Bild- oder Videoidee.",
+      "title": "Posts pro Plattform"
+     },
+     {
+      "id": "social-ads",
+      "input": "mainFile",
+      "output": "anzeigen.md",
+      "task": "Schlage 5 Anzeigentexte für {platform} vor: Titel, Haupttext, Aufruf zum Handeln. Verschiedene Ansätze: Problem des Kunden, Nutzen, Bewertung/Beleg, Dringlichkeit ohne Druck, Vergleich. Keine Versprechen, die sich nicht belegen lassen. Markiere, welche Paare sich für einen A/B-Test eignen.",
+      "title": "Anzeigenvarianten"
+     },
+     {
+      "id": "social-ab",
+      "input": "mainFile",
+      "output": "titel-ab.md",
+      "task": "Schlage 8 Titelpaare für einen A/B-Test vor: in jedem Paar ändert sich genau eine Sache (Länge, Zahl, Frage/Aussage, Emotion, Konkretheit). Für jedes Paar: was genau getestet wird.",
+      "title": "A/B-Titel"
+     },
+     {
+      "asks": "Ton",
+      "id": "social-replies",
+      "input": "mainFile",
+      "output": "antworten.md",
+      "task": "Bereite aus dem Material und den typischen Fragen des Publikums Antwortvorlagen für 10 häufige Kommentare vor: Frage nach dem Preis, Zweifel, Beschwerde, Dank, «Wie geht das?», Trolling, Bitte um Rabatt usw. Ton: {text}. Kurze, menschliche Antworten, ohne das übliche «Danke für Ihr Feedback!».",
+      "title": "Antworten auf Kommentare"
+     },
+     {
+      "asks": "Startdatum",
+      "id": "social-week",
+      "input": "project",
+      "output": "inhaltsplan-woche.md",
+      "service": "claude-code",
+      "task": "Erstelle einen Inhaltsplan für die Woche ab {text}: 1–2 Posts pro Tag für {platform}. Wechsle die Formate (nützlich, aktivierend, verkaufend, hinter den Kulissen). Gib eine Markdown-Tabelle im Format des Inhaltsplans aus — | Datum | Uhrzeit | Plattform | Thema | Status | Datei | — mit dem Status «Idee», damit die Zeilen in inhaltsplan.md übernommen werden können.",
+      "title": "Inhaltsplan für die Woche"
+     },
+     {
+      "id": "social-prepare",
+      "input": "project",
+      "output": "posts-nach-plan.md",
+      "service": "claude-code",
+      "task": "Schreib für die Einträge des Inhaltsplans (inhaltsplan.md) der nächsten 7 Tage mit dem Status «Idee» die Posttexte — jeden unter eigener Überschrift mit Datum und Thema. Ändere den Inhaltsplan selbst nicht.",
+      "title": "Posts nach Plan vorbereiten"
+     }
+    ],
+    "commonCommands": "none",
+    "icon": "megaphone",
+    "launchMode": "background",
+    "metrics": [
+     "words",
+     "publishDate"
+    ],
+    "name": "Social Media",
+    "permissions": "filesOnly",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "folders": {
+      "_0": "~/Documents/Social"
+     }
+    },
+    "stages": [
+     "Idee",
+     "Text",
+     "Design",
+     "geplant",
+     "veröffentlicht"
+    ],
+    "template": "social"
+   },
+   "title": "Social Media und Marketing"
+  },
+  "en": {
+   "mode": {
+    "calendar": "contentPlan",
+    "card": "projectMD",
+    "commands": [
+     {
+      "id": "social-posts",
+      "input": "mainFile",
+      "output": "posts-{platform}.md",
+      "task": "From the source material, write a post for each platform: {platform}. Respect their format: length, style, hashtags, emoji, links, call to action. Each post stands on its own, not a copy of the others. For visual platforms — a short idea for the picture or video.",
+      "title": "Posts per platform"
+     },
+     {
+      "id": "social-ads",
+      "input": "mainFile",
+      "output": "ads.md",
+      "task": "Suggest 5 ad texts for {platform}: headline, main text, call to action. Different approaches: the customer's pain, the benefit, a review/proof, urgency without pressure, a comparison. No claims that cannot be backed up. Mark which pairs are worth comparing in an A/B test.",
+      "title": "Ad variants"
+     },
+     {
+      "id": "social-ab",
+      "input": "mainFile",
+      "output": "headlines-ab.md",
+      "task": "Suggest 8 pairs of headlines for an A/B test: each pair changes exactly one thing (length, a number, question/statement, emotion, specificity). For each pair — what exactly is being tested.",
+      "title": "A/B headlines"
+     },
+     {
+      "asks": "Tone",
+      "id": "social-replies",
+      "input": "mainFile",
+      "output": "replies.md",
+      "task": "From the material and the audience's typical questions, prepare reply templates for 10 frequent comments: a price question, doubt, a complaint, thanks, a «how» question, trolling, a discount request and so on. Tone: {text}. Short, human replies, no template «Thank you for your feedback!».",
+      "title": "Replies to comments"
+     },
+     {
+      "asks": "Start date",
+      "id": "social-week",
+      "input": "project",
+      "output": "content-plan-week.md",
+      "service": "claude-code",
+      "task": "Draft a content plan for the week starting {text}: 1–2 posts a day for {platform}. Alternate formats (useful, engaging, selling, behind the scenes). Give a Markdown table in the content plan format — | Date | Time | Platform | Topic | Status | File | — with the status «idea», so the rows can be moved to content-plan.md.",
+      "title": "Content plan for the week"
+     },
+     {
+      "id": "social-prepare",
+      "input": "project",
+      "output": "posts-from-plan.md",
+      "service": "claude-code",
+      "task": "For the content plan entries (content-plan.md) of the next 7 days with the status «idea», write the post texts — each under its own heading with the date and topic. Do not change the content plan itself.",
+      "title": "Prepare posts from the plan"
+     }
+    ],
+    "commonCommands": "none",
+    "icon": "megaphone",
+    "launchMode": "background",
+    "metrics": [
+     "words",
+     "publishDate"
+    ],
+    "name": "Social media",
+    "permissions": "filesOnly",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "folders": {
+      "_0": "~/Documents/Social"
+     }
+    },
+    "stages": [
+     "idea",
+     "copy",
+     "design",
+     "scheduled",
+     "published"
+    ],
+    "template": "social"
+   },
+   "title": "Social media and marketing"
+  },
+  "es": {
+   "mode": {
+    "calendar": "contentPlan",
+    "card": "projectMD",
+    "commands": [
+     {
+      "id": "social-posts",
+      "input": "mainFile",
+      "output": "publicaciones-{platform}.md",
+      "task": "A partir del material de origen, escribe una publicación para cada plataforma: {platform}. Respeta su formato: extensión, estilo, hashtags, emojis, enlaces, llamada a la acción. Cada publicación es independiente, no una copia de las otras. Para plataformas visuales, una idea breve de imagen o vídeo.",
+      "title": "Publicaciones por plataforma"
+     },
+     {
+      "id": "social-ads",
+      "input": "mainFile",
+      "output": "anuncios.md",
+      "task": "Propón 5 textos de anuncio para {platform}: titular, texto principal, llamada a la acción. Enfoques distintos: el problema del cliente, el beneficio, una reseña o prueba, urgencia sin presión, una comparación. Sin afirmaciones que no se puedan respaldar. Marca qué pares conviene comparar en un test A/B.",
+      "title": "Variantes de anuncio"
+     },
+     {
+      "id": "social-ab",
+      "input": "mainFile",
+      "output": "titulares-ab.md",
+      "task": "Propón 8 pares de titulares para un test A/B: en cada par cambia exactamente una cosa (extensión, una cifra, pregunta/afirmación, emoción, concreción). Para cada par, qué se está probando exactamente.",
+      "title": "Titulares A/B"
+     },
+     {
+      "asks": "Tono",
+      "id": "social-replies",
+      "input": "mainFile",
+      "output": "respuestas.md",
+      "task": "A partir del material y de las preguntas típicas del público, prepara plantillas de respuesta a 10 comentarios frecuentes: una pregunta sobre el precio, una duda, una queja, un agradecimiento, una pregunta de «cómo», troleo, una petición de descuento, etc. Tono: {text}. Respuestas breves y humanas, sin el típico «¡Gracias por tu comentario!».",
+      "title": "Respuestas a comentarios"
+     },
+     {
+      "asks": "Fecha de inicio",
+      "id": "social-week",
+      "input": "project",
+      "output": "plan-de-contenido-semana.md",
+      "service": "claude-code",
+      "task": "Elabora un plan de contenido para la semana que empieza el {text}: 1–2 publicaciones al día para {platform}. Alterna formatos (útil, participativo, de venta, entre bastidores). Da una tabla Markdown con el formato del plan de contenido — | Fecha | Hora | Plataforma | Tema | Estado | Archivo | — con el estado «idea», para que las filas puedan pasarse a plan-de-contenido.md.",
+      "title": "Plan de contenido semanal"
+     },
+     {
+      "id": "social-prepare",
+      "input": "project",
+      "output": "publicaciones-del-plan.md",
+      "service": "claude-code",
+      "task": "Para las entradas del plan de contenido (plan-de-contenido.md) de los próximos 7 días con el estado «idea», escribe los textos de las publicaciones, cada una bajo su propio encabezado con la fecha y el tema. No cambies el plan de contenido.",
+      "title": "Preparar publicaciones del plan"
+     }
+    ],
+    "commonCommands": "none",
+    "icon": "megaphone",
+    "launchMode": "background",
+    "metrics": [
+     "words",
+     "publishDate"
+    ],
+    "name": "Redes sociales",
+    "permissions": "filesOnly",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "folders": {
+      "_0": "~/Documents/Redes"
+     }
+    },
+    "stages": [
+     "idea",
+     "texto",
+     "diseño",
+     "programado",
+     "publicado"
+    ],
+    "template": "social"
+   },
+   "title": "Redes sociales y marketing"
+  },
+  "fr": {
+   "mode": {
+    "calendar": "contentPlan",
+    "card": "projectMD",
+    "commands": [
+     {
+      "id": "social-posts",
+      "input": "mainFile",
+      "output": "posts-{platform}.md",
+      "task": "À partir du matériau source, écris un post pour chaque plateforme : {platform}. Respecte leur format : longueur, style, hashtags, emojis, liens, appel à l'action. Chaque post est autonome, pas une copie des autres. Pour les plateformes visuelles, une courte idée d'image ou de vidéo.",
+      "title": "Posts par plateforme"
+     },
+     {
+      "id": "social-ads",
+      "input": "mainFile",
+      "output": "publicites.md",
+      "task": "Propose 5 textes publicitaires pour {platform} : titre, texte principal, appel à l'action. Des approches différentes : le problème du client, le bénéfice, un avis/une preuve, l'urgence sans pression, une comparaison. Sans promesse invérifiable. Indique quelles paires comparer dans un test A/B.",
+      "title": "Variantes publicitaires"
+     },
+     {
+      "id": "social-ab",
+      "input": "mainFile",
+      "output": "titres-ab.md",
+      "task": "Propose 8 paires de titres pour un test A/B : dans chaque paire, une seule chose change (longueur, chiffre, question/affirmation, émotion, précision). Pour chaque paire, ce qui est testé exactement.",
+      "title": "Titres A/B"
+     },
+     {
+      "asks": "Ton",
+      "id": "social-replies",
+      "input": "mainFile",
+      "output": "reponses.md",
+      "task": "À partir du matériau et des questions habituelles du public, prépare des modèles de réponse à 10 commentaires fréquents : question sur le prix, doute, plainte, remerciement, question «comment», troll, demande de réduction, etc. Ton : {text}. Des réponses courtes et humaines, sans le classique «Merci pour votre retour !».",
+      "title": "Réponses aux commentaires"
+     },
+     {
+      "asks": "Date de début",
+      "id": "social-week",
+      "input": "project",
+      "output": "plan-de-contenu-semaine.md",
+      "service": "claude-code",
+      "task": "Établis un plan de contenu pour la semaine qui commence le {text} : 1–2 posts par jour pour {platform}. Alterne les formats (utile, engageant, commercial, coulisses). Donne un tableau Markdown au format du plan de contenu — | Date | Heure | Plateforme | Sujet | Statut | Fichier | — avec le statut «idée», pour que les lignes puissent être reportées dans plan-de-contenu.md.",
+      "title": "Plan de contenu de la semaine"
+     },
+     {
+      "id": "social-prepare",
+      "input": "project",
+      "output": "posts-du-plan.md",
+      "service": "claude-code",
+      "task": "Pour les entrées du plan de contenu (plan-de-contenu.md) des 7 prochains jours au statut «idée», rédige les textes des posts — chacun sous son propre titre avec la date et le sujet. Ne modifie pas le plan de contenu.",
+      "title": "Préparer les posts du plan"
+     }
+    ],
+    "commonCommands": "none",
+    "icon": "megaphone",
+    "launchMode": "background",
+    "metrics": [
+     "words",
+     "publishDate"
+    ],
+    "name": "Réseaux sociaux",
+    "permissions": "filesOnly",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "folders": {
+      "_0": "~/Documents/Reseaux"
+     }
+    },
+    "stages": [
+     "idée",
+     "texte",
+     "design",
+     "programmé",
+     "publié"
+    ],
+    "template": "social"
+   },
+   "title": "Réseaux sociaux et marketing"
+  },
+  "id": {
+   "mode": {
+    "calendar": "contentPlan",
+    "card": "projectMD",
+    "commands": [
+     {
+      "id": "social-posts",
+      "input": "mainFile",
+      "output": "postingan-{platform}.md",
+      "task": "Dari materi sumber, tulis satu postingan untuk tiap platform: {platform}. Perhatikan formatnya: panjang, gaya, tagar, emoji, tautan, ajakan bertindak. Tiap postingan berdiri sendiri, bukan salinan. Untuk platform visual, ide singkat gambar atau video.",
+      "title": "Postingan per platform"
+     },
+     {
+      "id": "social-ads",
+      "input": "mainFile",
+      "output": "iklan.md",
+      "task": "Usulkan 5 teks iklan untuk {platform}: judul, teks utama, ajakan bertindak. Pendekatan berbeda: masalah pelanggan, manfaat, ulasan/bukti, desakan tanpa tekanan, perbandingan. Tanpa klaim yang tak bisa dibuktikan. Tandai pasangan mana yang layak dibandingkan dalam uji A/B.",
+      "title": "Varian iklan"
+     },
+     {
+      "id": "social-ab",
+      "input": "mainFile",
+      "output": "judul-ab.md",
+      "task": "Usulkan 8 pasang judul untuk uji A/B: di tiap pasangan hanya satu hal yang berubah (panjang, angka, pertanyaan/pernyataan, emosi, kekonkretan). Untuk tiap pasangan: apa tepatnya yang diuji.",
+      "title": "Judul A/B"
+     },
+     {
+      "asks": "Nada",
+      "id": "social-replies",
+      "input": "mainFile",
+      "output": "balasan.md",
+      "task": "Dari materi dan pertanyaan khas audiens, siapkan templat balasan untuk 10 komentar yang sering muncul: pertanyaan harga, keraguan, keluhan, terima kasih, «bagaimana caranya», troll, minta diskon, dan sebagainya. Nada: {text}. Balasan singkat dan manusiawi, tanpa «Terima kasih atas masukannya!» yang klise.",
+      "title": "Balasan komentar"
+     },
+     {
+      "asks": "Tanggal mulai",
+      "id": "social-week",
+      "input": "project",
+      "output": "rencana-konten-minggu.md",
+      "service": "claude-code",
+      "task": "Susun rencana konten untuk minggu yang mulai {text}: 1–2 postingan per hari untuk {platform}. Selang-seling format (bermanfaat, mengajak interaksi, berjualan, di balik layar). Berikan tabel Markdown dalam format rencana konten — | Tanggal | Jam | Platform | Topik | Status | Berkas | — dengan status «ide», agar barisnya bisa dipindah ke rencana-konten.md.",
+      "title": "Rencana konten mingguan"
+     },
+     {
+      "id": "social-prepare",
+      "input": "project",
+      "output": "postingan-dari-rencana.md",
+      "service": "claude-code",
+      "task": "Untuk entri rencana konten (rencana-konten.md) 7 hari ke depan dengan status «ide», tulis teks postingannya — masing-masing di bawah judulnya sendiri dengan tanggal dan topik. Jangan ubah rencana kontennya.",
+      "title": "Siapkan postingan dari rencana"
+     }
+    ],
+    "commonCommands": "none",
+    "icon": "megaphone",
+    "launchMode": "background",
+    "metrics": [
+     "words",
+     "publishDate"
+    ],
+    "name": "Media sosial",
+    "permissions": "filesOnly",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "folders": {
+      "_0": "~/Documents/Sosmed"
+     }
+    },
+    "stages": [
+     "ide",
+     "teks",
+     "desain",
+     "terjadwal",
+     "terbit"
+    ],
+    "template": "social"
+   },
+   "title": "Media sosial dan pemasaran"
+  },
+  "it": {
+   "mode": {
+    "calendar": "contentPlan",
+    "card": "projectMD",
+    "commands": [
+     {
+      "id": "social-posts",
+      "input": "mainFile",
+      "output": "post-{platform}.md",
+      "task": "Dal materiale di partenza scrivi un post per ogni piattaforma: {platform}. Rispetta il loro formato: lunghezza, stile, hashtag, emoji, link, invito all'azione. Ogni post è autonomo, non una copia degli altri. Per le piattaforme visive, una breve idea di immagine o video.",
+      "title": "Post per piattaforma"
+     },
+     {
+      "id": "social-ads",
+      "input": "mainFile",
+      "output": "annunci.md",
+      "task": "Proponi 5 testi di annuncio per {platform}: titolo, testo principale, invito all'azione. Approcci diversi: il problema del cliente, il beneficio, una recensione/prova, urgenza senza pressione, un confronto. Niente promesse che non si possono dimostrare. Segna quali coppie confrontare in un test A/B.",
+      "title": "Varianti di annuncio"
+     },
+     {
+      "id": "social-ab",
+      "input": "mainFile",
+      "output": "titoli-ab.md",
+      "task": "Proponi 8 coppie di titoli per un test A/B: in ogni coppia cambia esattamente una cosa (lunghezza, numero, domanda/affermazione, emozione, concretezza). Per ogni coppia, cosa si sta verificando.",
+      "title": "Titoli A/B"
+     },
+     {
+      "asks": "Tono",
+      "id": "social-replies",
+      "input": "mainFile",
+      "output": "risposte.md",
+      "task": "Dal materiale e dalle domande tipiche del pubblico prepara modelli di risposta a 10 commenti frequenti: domanda sul prezzo, dubbio, lamentela, ringraziamento, «come si fa», troll, richiesta di sconto ecc. Tono: {text}. Risposte brevi e umane, senza il solito «Grazie per il tuo commento!».",
+      "title": "Risposte ai commenti"
+     },
+     {
+      "asks": "Data di inizio",
+      "id": "social-week",
+      "input": "project",
+      "output": "piano-contenuti-settimana.md",
+      "service": "claude-code",
+      "task": "Prepara un piano dei contenuti per la settimana dal {text}: 1–2 post al giorno per {platform}. Alterna i formati (utile, coinvolgente, di vendita, dietro le quinte). Dai una tabella Markdown nel formato del piano — | Data | Ora | Piattaforma | Tema | Stato | File | — con lo stato «idea», così le righe si possono riportare in piano-contenuti.md.",
+      "title": "Piano dei contenuti della settimana"
+     },
+     {
+      "id": "social-prepare",
+      "input": "project",
+      "output": "post-del-piano.md",
+      "service": "claude-code",
+      "task": "Per le voci del piano dei contenuti (piano-contenuti.md) dei prossimi 7 giorni con stato «idea», scrivi i testi dei post — ognuno sotto il proprio titolo con data e tema. Non modificare il piano.",
+      "title": "Prepara i post del piano"
+     }
+    ],
+    "commonCommands": "none",
+    "icon": "megaphone",
+    "launchMode": "background",
+    "metrics": [
+     "words",
+     "publishDate"
+    ],
+    "name": "Social",
+    "permissions": "filesOnly",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "folders": {
+      "_0": "~/Documents/Social"
+     }
+    },
+    "stages": [
+     "idea",
+     "testo",
+     "grafica",
+     "programmato",
+     "pubblicato"
+    ],
+    "template": "social"
+   },
+   "title": "Social e marketing"
+  },
+  "ja": {
+   "mode": {
+    "calendar": "contentPlan",
+    "card": "projectMD",
+    "commands": [
+     {
+      "id": "social-posts",
+      "input": "mainFile",
+      "output": "投稿-{platform}.md",
+      "task": "元の素材から、各プラットフォーム向けに投稿を 1 本ずつ書いてください: {platform}。長さ、文体、ハッシュタグ、絵文字、リンク、行動の呼びかけなど各形式を守り、互いのコピーにしないこと。ビジュアル系のプラットフォームには画像や動画の短い案も。",
+      "title": "プラットフォーム別の投稿"
+     },
+     {
+      "id": "social-ads",
+      "input": "mainFile",
+      "output": "広告.md",
+      "task": "{platform} 向けの広告文を 5 案: 見出し、本文、行動の呼びかけ。切り口を変えて: 顧客の悩み、メリット、レビュー/根拠、押しつけない緊急性、比較。裏付けのない誇張はしないこと。A/B テストで比べるべき組に印を。",
+      "title": "広告案"
+     },
+     {
+      "id": "social-ab",
+      "input": "mainFile",
+      "output": "見出し-ab.md",
+      "task": "A/B テスト用の見出しを 8 組: 各組で変えるのは 1 点だけ (長さ、数字、疑問/断定、感情、具体性)。各組で何を試すかを書いてください。",
+      "title": "A/B 見出し"
+     },
+     {
+      "asks": "トーン",
+      "id": "social-replies",
+      "input": "mainFile",
+      "output": "返信.md",
+      "task": "素材と読者のよくある質問から、よくあるコメント 10 種への返信テンプレートを用意してください: 価格の質問、疑い、苦情、お礼、やり方の質問、荒らし、値引きの依頼など。トーン: {text}。短く人間らしく、型どおりの「ご意見ありがとうございます!」は避けること。",
+      "title": "コメントへの返信"
+     },
+     {
+      "asks": "開始日",
+      "id": "social-week",
+      "input": "project",
+      "output": "コンテンツ計画-週.md",
+      "service": "claude-code",
+      "task": "{text} から始まる週のコンテンツ計画を作ってください: {platform} 向けに 1 日 1〜2 本。形式を交互に (役立つ、参加型、販売、舞台裏)。コンテンツ計画の形式の Markdown 表 — | 日付 | 時刻 | プラットフォーム | テーマ | 状態 | ファイル | — で、状態は「アイデア」。行をコンテンツ計画.md に移せるようにしてください。",
+      "title": "週のコンテンツ計画"
+     },
+     {
+      "id": "social-prepare",
+      "input": "project",
+      "output": "計画の投稿.md",
+      "service": "claude-code",
+      "task": "コンテンツ計画 (コンテンツ計画.md) のうち、今後 7 日間で状態が「アイデア」の項目について投稿文を書いてください — それぞれ日付とテーマの見出しの下に。コンテンツ計画自体は変えないこと。",
+      "title": "計画どおりに投稿を準備"
+     }
+    ],
+    "commonCommands": "none",
+    "icon": "megaphone",
+    "launchMode": "background",
+    "metrics": [
+     "words",
+     "publishDate"
+    ],
+    "name": "SNS",
+    "permissions": "filesOnly",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "folders": {
+      "_0": "~/Documents/Social"
+     }
+    },
+    "stages": [
+     "アイデア",
+     "文章",
+     "デザイン",
+     "予約済み",
+     "公開済み"
+    ],
+    "template": "social"
+   },
+   "title": "SNS とマーケティング"
+  },
+  "ko": {
+   "mode": {
+    "calendar": "contentPlan",
+    "card": "projectMD",
+    "commands": [
+     {
+      "id": "social-posts",
+      "input": "mainFile",
+      "output": "게시물-{platform}.md",
+      "task": "원본 자료로 각 플랫폼에 맞는 게시물을 하나씩 쓰세요: {platform}. 길이, 문체, 해시태그, 이모지, 링크, 행동 유도 등 형식을 지키고, 서로 복사본이 되지 않게 하세요. 시각적 플랫폼에는 이미지나 영상 아이디어도 짧게.",
+      "title": "플랫폼별 게시물"
+     },
+     {
+      "id": "social-ads",
+      "input": "mainFile",
+      "output": "광고.md",
+      "task": "{platform}용 광고 문구 5개를 제안하세요: 제목, 본문, 행동 유도. 접근을 다르게: 고객의 고민, 이점, 후기/근거, 압박 없는 긴급성, 비교. 뒷받침할 수 없는 과장은 금지. A/B 테스트로 비교할 만한 쌍을 표시하세요.",
+      "title": "광고 문구 변형"
+     },
+     {
+      "id": "social-ab",
+      "input": "mainFile",
+      "output": "제목-ab.md",
+      "task": "A/B 테스트용 제목 8쌍을 제안하세요: 각 쌍에서 딱 하나만 바뀝니다 (길이, 숫자, 질문/서술, 감정, 구체성). 각 쌍마다 무엇을 시험하는지 적으세요.",
+      "title": "A/B 제목"
+     },
+     {
+      "asks": "어조",
+      "id": "social-replies",
+      "input": "mainFile",
+      "output": "답변.md",
+      "task": "자료와 독자의 흔한 질문을 바탕으로 자주 달리는 댓글 10가지에 대한 답변 틀을 준비하세요: 가격 질문, 의심, 불만, 감사, «어떻게 하나요», 악플, 할인 요청 등. 어조: {text}. 짧고 사람다운 답변으로, 뻔한 «소중한 의견 감사합니다!»는 피하세요.",
+      "title": "댓글 답변"
+     },
+     {
+      "asks": "시작일",
+      "id": "social-week",
+      "input": "project",
+      "output": "콘텐츠-계획-주간.md",
+      "service": "claude-code",
+      "task": "{text}부터 시작하는 주의 콘텐츠 계획을 세우세요: {platform}용으로 하루 1~2개. 형식을 번갈아 (유용한, 참여형, 판매형, 비하인드). 콘텐츠 계획 형식의 Markdown 표 — | 날짜 | 시간 | 플랫폼 | 주제 | 상태 | 파일 | — 로, 상태는 «아이디어». 행을 콘텐츠-계획.md로 옮길 수 있게 하세요.",
+      "title": "주간 콘텐츠 계획"
+     },
+     {
+      "id": "social-prepare",
+      "input": "project",
+      "output": "계획-게시물.md",
+      "service": "claude-code",
+      "task": "콘텐츠 계획 (콘텐츠-계획.md)에서 앞으로 7일 동안 상태가 «아이디어»인 항목의 게시물 글을 쓰세요 — 각각 날짜와 주제가 담긴 제목 아래에. 콘텐츠 계획 자체는 바꾸지 마세요.",
+      "title": "계획대로 게시물 준비"
+     }
+    ],
+    "commonCommands": "none",
+    "icon": "megaphone",
+    "launchMode": "background",
+    "metrics": [
+     "words",
+     "publishDate"
+    ],
+    "name": "소셜 미디어",
+    "permissions": "filesOnly",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "folders": {
+      "_0": "~/Documents/Social"
+     }
+    },
+    "stages": [
+     "아이디어",
+     "글",
+     "디자인",
+     "예약됨",
+     "게시됨"
+    ],
+    "template": "social"
+   },
+   "title": "소셜 미디어와 마케팅"
+  },
+  "pl": {
+   "mode": {
+    "calendar": "contentPlan",
+    "card": "projectMD",
+    "commands": [
+     {
+      "id": "social-posts",
+      "input": "mainFile",
+      "output": "posty-{platform}.md",
+      "task": "Z materiału źródłowego napisz post na każdą platformę: {platform}. Uwzględnij ich format: długość, styl, hashtagi, emoji, linki, wezwanie do działania. Każdy post jest samodzielny, nie kopią pozostałych. Dla platform wizualnych krótki pomysł na obraz lub wideo.",
+      "title": "Posty na platformy"
+     },
+     {
+      "id": "social-ads",
+      "input": "mainFile",
+      "output": "reklamy.md",
+      "task": "Zaproponuj 5 tekstów reklamowych na {platform}: nagłówek, tekst główny, wezwanie do działania. Różne podejścia: problem klienta, korzyść, opinia/dowód, pilność bez nacisku, porównanie. Bez obietnic, których nie da się potwierdzić. Zaznacz, które pary warto porównać w teście A/B.",
+      "title": "Warianty reklam"
+     },
+     {
+      "id": "social-ab",
+      "input": "mainFile",
+      "output": "tytuly-ab.md",
+      "task": "Zaproponuj 8 par tytułów do testu A/B: w każdej parze zmienia się dokładnie jedna rzecz (długość, liczba, pytanie/stwierdzenie, emocja, konkret). Dla każdej pary: co dokładnie sprawdzamy.",
+      "title": "Tytuły A/B"
+     },
+     {
+      "asks": "Ton",
+      "id": "social-replies",
+      "input": "mainFile",
+      "output": "odpowiedzi.md",
+      "task": "Na podstawie materiału i typowych pytań odbiorców przygotuj szablony odpowiedzi na 10 częstych komentarzy: pytanie o cenę, wątpliwość, skarga, podziękowanie, pytanie «jak», trolling, prośba o rabat itp. Ton: {text}. Krótkie, ludzkie odpowiedzi, bez szablonowego «Dziękujemy za opinię!».",
+      "title": "Odpowiedzi na komentarze"
+     },
+     {
+      "asks": "Data początku",
+      "id": "social-week",
+      "input": "project",
+      "output": "plan-tresci-tydzien.md",
+      "service": "claude-code",
+      "task": "Ułóż plan treści na tydzień od {text}: 1–2 posty dziennie na {platform}. Przeplataj formaty (przydatne, angażujące, sprzedażowe, kulisy). Podaj tabelę Markdown w formacie planu treści — | Data | Godzina | Platforma | Temat | Status | Plik | — ze statusem «pomysł», żeby wiersze dało się przenieść do plan-tresci.md.",
+      "title": "Plan treści na tydzień"
+     },
+     {
+      "id": "social-prepare",
+      "input": "project",
+      "output": "posty-z-planu.md",
+      "service": "claude-code",
+      "task": "Dla wpisów planu treści (plan-tresci.md) z najbliższych 7 dni ze statusem «pomysł» napisz teksty postów — każdy pod własnym nagłówkiem z datą i tematem. Samego planu treści nie zmieniaj.",
+      "title": "Przygotuj posty z planu"
+     }
+    ],
+    "commonCommands": "none",
+    "icon": "megaphone",
+    "launchMode": "background",
+    "metrics": [
+     "words",
+     "publishDate"
+    ],
+    "name": "Media społecznościowe",
+    "permissions": "filesOnly",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "folders": {
+      "_0": "~/Documents/Social"
+     }
+    },
+    "stages": [
+     "pomysł",
+     "tekst",
+     "grafika",
+     "zaplanowane",
+     "opublikowane"
+    ],
+    "template": "social"
+   },
+   "title": "Media społecznościowe i marketing"
+  },
+  "pt-BR": {
+   "mode": {
+    "calendar": "contentPlan",
+    "card": "projectMD",
+    "commands": [
+     {
+      "id": "social-posts",
+      "input": "mainFile",
+      "output": "posts-{platform}.md",
+      "task": "A partir do material de origem, escreva um post para cada plataforma: {platform}. Respeite o formato de cada uma: tamanho, estilo, hashtags, emojis, links, chamada para ação. Cada post é independente, não uma cópia dos outros. Para plataformas visuais, uma ideia curta de imagem ou vídeo.",
+      "title": "Posts por plataforma"
+     },
+     {
+      "id": "social-ads",
+      "input": "mainFile",
+      "output": "anuncios.md",
+      "task": "Sugira 5 textos de anúncio para {platform}: título, texto principal, chamada para ação. Abordagens diferentes: a dor do cliente, o benefício, um depoimento/prova, urgência sem pressão, uma comparação. Sem afirmações que não possam ser comprovadas. Marque quais pares vale comparar em um teste A/B.",
+      "title": "Variações de anúncio"
+     },
+     {
+      "id": "social-ab",
+      "input": "mainFile",
+      "output": "titulos-ab.md",
+      "task": "Sugira 8 pares de títulos para um teste A/B: em cada par muda exatamente uma coisa (tamanho, um número, pergunta/afirmação, emoção, especificidade). Para cada par, o que exatamente está sendo testado.",
+      "title": "Títulos A/B"
+     },
+     {
+      "asks": "Tom",
+      "id": "social-replies",
+      "input": "mainFile",
+      "output": "respostas.md",
+      "task": "A partir do material e das perguntas típicas do público, prepare modelos de resposta para 10 comentários frequentes: pergunta sobre preço, dúvida, reclamação, agradecimento, pergunta de «como», trollagem, pedido de desconto etc. Tom: {text}. Respostas curtas e humanas, sem o padrão «Obrigado pelo seu comentário!».",
+      "title": "Respostas a comentários"
+     },
+     {
+      "asks": "Data de início",
+      "id": "social-week",
+      "input": "project",
+      "output": "plano-de-conteudo-semana.md",
+      "service": "claude-code",
+      "task": "Monte um plano de conteúdo para a semana que começa em {text}: 1–2 posts por dia para {platform}. Alterne formatos (útil, engajador, de venda, bastidores). Entregue uma tabela Markdown no formato do plano de conteúdo — | Data | Hora | Plataforma | Tema | Status | Arquivo | — com o status «ideia», para que as linhas possam ir para plano-de-conteudo.md.",
+      "title": "Plano de conteúdo da semana"
+     },
+     {
+      "id": "social-prepare",
+      "input": "project",
+      "output": "posts-do-plano.md",
+      "service": "claude-code",
+      "task": "Para os itens do plano de conteúdo (plano-de-conteudo.md) dos próximos 7 dias com o status «ideia», escreva os textos dos posts — cada um sob seu próprio título com a data e o tema. Não altere o plano de conteúdo.",
+      "title": "Preparar posts do plano"
+     }
+    ],
+    "commonCommands": "none",
+    "icon": "megaphone",
+    "launchMode": "background",
+    "metrics": [
+     "words",
+     "publishDate"
+    ],
+    "name": "Redes sociais",
+    "permissions": "filesOnly",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "folders": {
+      "_0": "~/Documents/Redes"
+     }
+    },
+    "stages": [
+     "ideia",
+     "texto",
+     "design",
+     "agendado",
+     "publicado"
+    ],
+    "template": "social"
+   },
+   "title": "Redes sociais e marketing"
+  },
+  "ru": {
+   "mode": {
+    "calendar": "contentPlan",
+    "card": "projectMD",
+    "commands": [
+     {
+      "id": "social-posts",
+      "input": "mainFile",
+      "output": "посты-{площадка}.md",
+      "task": "Сделай из исходного материала пост для каждой площадки: {площадка}. Учитывай их формат: длину, стиль, хештеги, эмодзи, ссылки, призыв к действию. Каждый пост — самостоятельный, не копия друг друга. Для визуальных площадок — короткая идея картинки или видео.",
+      "title": "Посты под площадки"
+     },
+     {
+      "id": "social-ads",
+      "input": "mainFile",
+      "output": "реклама.md",
+      "task": "Предложи 5 вариантов рекламного текста для {площадка}: заголовок, основной текст, призыв к действию. Разные подходы: боль клиента, выгода, отзыв/доказательство, срочность без давления, сравнение. Без преувеличений, которые нельзя подтвердить. Отметь, какие пары стоит сравнить в A/B-тесте.",
+      "title": "Варианты рекламы"
+     },
+     {
+      "id": "social-ab",
+      "input": "mainFile",
+      "output": "заголовки-ab.md",
+      "task": "Предложи 8 пар заголовков для A/B-теста: в каждой паре меняется ровно одна вещь (длина, цифра, вопрос/утверждение, эмоция, конкретика). Для каждой пары — что именно проверяем.",
+      "title": "A/B-заголовки"
+     },
+     {
+      "asks": "Тон",
+      "id": "social-replies",
+      "input": "mainFile",
+      "output": "ответы.md",
+      "task": "По материалу и типичным вопросам аудитории подготовь шаблоны ответов на 10 частых комментариев: вопрос о цене, сомнение, жалоба, благодарность, вопрос «как», троллинг, просьба о скидке и т. п. Тон — {текст}. Ответы короткие, человеческие, без шаблонных «Спасибо за ваш отзыв!».",
+      "title": "Ответы на комментарии"
+     },
+     {
+      "asks": "Дата начала",
+      "id": "social-week",
+      "input": "project",
+      "output": "контент-план-неделя.md",
+      "service": "claude-code",
+      "task": "Составь контент-план на неделю с {текст} (дата начала): по 1–2 публикации в день для {площадка}. Чередуй форматы (полезное, вовлекающее, продающее, закулисье). Выдай таблицу Markdown в формате контент-плана — | Дата | Время | Площадка | Тема | Статус | Файл | — со статусом «идея», чтобы строки можно было перенести в контент-план.md.",
+      "title": "Контент-план на неделю"
+     },
+     {
+      "id": "social-prepare",
+      "input": "project",
+      "output": "посты-по-плану.md",
+      "service": "claude-code",
+      "task": "Для записей контент-плана (контент-план.md) на ближайшие 7 дней со статусом «идея» подготовь тексты постов — каждый под своим заголовком с датой и темой. Сам контент-план не меняй.",
+      "title": "Подготовить посты по плану"
+     }
+    ],
+    "commonCommands": "none",
+    "icon": "megaphone",
+    "launchMode": "background",
+    "metrics": [
+     "words",
+     "publishDate"
+    ],
+    "name": "Соцсети",
+    "permissions": "filesOnly",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "folders": {
+      "_0": "~/Documents/Соцсети"
+     }
+    },
+    "stages": [
+     "идея",
+     "текст",
+     "дизайн",
+     "запланировано",
+     "опубликовано"
+    ],
+    "template": "social"
+   },
+   "title": "Соцсети и маркетинг"
+  },
+  "uk": {
+   "mode": {
+    "calendar": "contentPlan",
+    "card": "projectMD",
+    "commands": [
+     {
+      "id": "social-posts",
+      "input": "mainFile",
+      "output": "пости-{platform}.md",
+      "task": "З вихідного матеріалу зроби пост для кожного майданчика: {platform}. Враховуй їхній формат: довжину, стиль, хештеги, емодзі, посилання, заклик до дії. Кожен пост самостійний, не копія інших. Для візуальних майданчиків — коротка ідея картинки або відео.",
+      "title": "Пости під майданчики"
+     },
+     {
+      "id": "social-ads",
+      "input": "mainFile",
+      "output": "реклама.md",
+      "task": "Запропонуй 5 варіантів рекламного тексту для {platform}: заголовок, основний текст, заклик до дії. Різні підходи: біль клієнта, вигода, відгук/доказ, терміновість без тиску, порівняння. Без перебільшень, які не можна підтвердити. Познач, які пари варто порівняти в A/B-тесті.",
+      "title": "Варіанти реклами"
+     },
+     {
+      "id": "social-ab",
+      "input": "mainFile",
+      "output": "заголовки-ab.md",
+      "task": "Запропонуй 8 пар заголовків для A/B-тесту: у кожній парі змінюється рівно одна річ (довжина, цифра, запитання/твердження, емоція, конкретика). Для кожної пари — що саме перевіряємо.",
+      "title": "A/B-заголовки"
+     },
+     {
+      "asks": "Тон",
+      "id": "social-replies",
+      "input": "mainFile",
+      "output": "відповіді.md",
+      "task": "На основі матеріалу й типових запитань аудиторії підготуй шаблони відповідей на 10 частих коментарів: запитання про ціну, сумнів, скарга, подяка, запитання «як», тролінг, прохання про знижку тощо. Тон — {text}. Відповіді короткі, людяні, без шаблонного «Дякуємо за ваш відгук!».",
+      "title": "Відповіді на коментарі"
+     },
+     {
+      "asks": "Дата початку",
+      "id": "social-week",
+      "input": "project",
+      "output": "контент-план-тиждень.md",
+      "service": "claude-code",
+      "task": "Склади контент-план на тиждень з {text} (дата початку): по 1–2 публікації на день для {platform}. Чергуй формати (корисне, залучальне, продажне, закулісся). Видай таблицю Markdown у форматі контент-плану — | Дата | Час | Майданчик | Тема | Статус | Файл | — зі статусом «ідея», щоб рядки можна було перенести в контент-план.md.",
+      "title": "Контент-план на тиждень"
+     },
+     {
+      "id": "social-prepare",
+      "input": "project",
+      "output": "пости-за-планом.md",
+      "service": "claude-code",
+      "task": "Для записів контент-плану (контент-план.md) на найближчі 7 днів зі статусом «ідея» підготуй тексти постів — кожен під своїм заголовком із датою й темою. Сам контент-план не змінюй.",
+      "title": "Підготувати пости за планом"
+     }
+    ],
+    "commonCommands": "none",
+    "icon": "megaphone",
+    "launchMode": "background",
+    "metrics": [
+     "words",
+     "publishDate"
+    ],
+    "name": "Соцмережі",
+    "permissions": "filesOnly",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "folders": {
+      "_0": "~/Documents/Соцмережі"
+     }
+    },
+    "stages": [
+     "ідея",
+     "текст",
+     "дизайн",
+     "заплановано",
+     "опубліковано"
+    ],
+    "template": "social"
+   },
+   "title": "Соцмережі й маркетинг"
+  }
+ },
+ "texts": {
+  "ar": {
+   "mode": {
+    "calendar": "dates",
+    "card": "projectMD",
+    "commands": [
+     {
+      "id": "texts-edit",
+      "input": "mainFile",
+      "output": "تحرير.md",
+      "task": "حرّر النص: احذف الحشو واللغة الرسمية الجافة والتكرار والعبارات المستهلكة، وبسّط الجمل الطويلة، وحافظ على المعنى والحقائق وصوت الكاتب. أولًا النص المحرَّر كاملًا. ثم قائمة بأهم 5 إلى 10 تعديلات بصيغة «قبل ← بعد ← السبب».",
+      "title": "تحرير"
+     },
+     {
+      "id": "texts-proof",
+      "input": "mainFile",
+      "output": "تدقيق.md",
+      "task": "اعثر على أخطاء الإملاء والترقيم والنحو والأخطاء المطبعية وأخطاء المطابقة. لا تغيّر الأسلوب ولا الصياغة. قدّم النص المصحَّح ثم قائمة التصحيحات.",
+      "title": "تدقيق لغوي"
+     },
+     {
+      "asks": "النبرة",
+      "id": "texts-tone",
+      "input": "mainFile",
+      "output": "نبرة-{text}.md",
+      "task": "أعد كتابة النص بهذه النبرة: {text} (مثلًا: أكثر ودًّا، أكثر صرامة، بروح الدعابة، للخبراء، للمبتدئين). المعنى والحقائق والبنية كما هي.",
+      "title": "نبرة أخرى"
+     },
+     {
+      "asks": "كم كلمة",
+      "id": "texts-length",
+      "input": "mainFile",
+      "output": "نسخة-{text}.md",
+      "task": "اكتب نسخة من النص بنحو {text} كلمة. عند الاختصار أبقِ الجوهر وأقوى الأمثلة. وعند التوسيع أضف شروحًا وأمثلة في صلب الموضوع — لا حشوًا، ولا حقائق جديدة دون علامة «يحتاج تحققًا».",
+      "title": "اختصار / توسيع"
+     },
+     {
+      "id": "texts-seo",
+      "input": "mainFile",
+      "output": "seo.md",
+      "task": "اقترح: عنوانًا لمحركات البحث (حتى 60 حرفًا)، ووصفًا تعريفيًا (حتى 155 حرفًا)، ومن 5 إلى 8 عبارات مفتاحية يجيب عنها النص فعلًا، و3 أفكار لعناوين فرعية H2 ناقصة. لا تغيّر النص نفسه.",
+      "title": "SEO"
+     },
+     {
+      "id": "texts-posts",
+      "input": "mainFile",
+      "output": "منشورات.md",
+      "task": "حوّل النص إلى سلسلة منشورات لـ {platform}: من 3 إلى 5 منشورات، كلٌّ منها مستقل بفكرته من النص، وبسطر أول جذاب ودعوة في النهاية. راعِ صيغة المنصة (الطول، الوسوم، الرموز التعبيرية باعتدال). رقّمها واذكر ترتيب النشر.",
+      "title": "تقسيم إلى منشورات"
+     }
+    ],
+    "commonCommands": "none",
+    "icon": "doc.text",
+    "launchMode": "background",
+    "metrics": [
+     "words",
+     "readingTime",
+     "publishDate"
+    ],
+    "name": "نصوص",
+    "permissions": "filesOnly",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "folders": {
+      "_0": "~/Documents/Writing"
+     }
+    },
+    "stages": [
+     "فكرة",
+     "مسودة",
+     "تحرير",
+     "منشور"
+    ],
+    "template": "texts"
+   },
+   "title": "نصوص (مقالات، مدوّنة، نشرة)"
+  },
+  "de": {
+   "mode": {
+    "calendar": "dates",
+    "card": "projectMD",
+    "commands": [
+     {
+      "id": "texts-edit",
+      "input": "mainFile",
+      "output": "lektorat.md",
+      "task": "Lektoriere den Text: streiche Füllwörter, Amtsdeutsch, Wiederholungen und Floskeln, vereinfache lange Sätze, erhalte Sinn, Fakten und die Stimme des Autors. Zuerst der ganze überarbeitete Text. Dann eine Liste der 5–10 wichtigsten Änderungen als «vorher → nachher → warum».",
+      "title": "Lektorat"
+     },
+     {
+      "id": "texts-proof",
+      "input": "mainFile",
+      "output": "korrektorat.md",
+      "task": "Finde Rechtschreib-, Zeichensetzungs- und Grammatikfehler, Tippfehler und falsche Bezüge. Ändere weder Stil noch Formulierungen. Gib den korrigierten Text und danach die Liste der Korrekturen.",
+      "title": "Korrektorat"
+     },
+     {
+      "asks": "Ton",
+      "id": "texts-tone",
+      "input": "mainFile",
+      "output": "ton-{text}.md",
+      "task": "Schreib den Text in diesem Ton neu: {text} (zum Beispiel: freundlicher, strenger, mit Humor, für Fachleute, für Einsteiger). Gleicher Sinn, gleiche Fakten, gleicher Aufbau.",
+      "title": "Anderer Ton"
+     },
+     {
+      "asks": "Wie viele Wörter",
+      "id": "texts-length",
+      "input": "mainFile",
+      "output": "version-{text}.md",
+      "task": "Mach eine Fassung des Textes mit etwa {text} Wörtern. Beim Kürzen bleiben das Wesentliche und die stärksten Beispiele. Beim Erweitern kommen Erklärungen und Beispiele zum Thema dazu — kein Füllstoff und keine neuen Fakten ohne den Vermerk «prüfen».",
+      "title": "Kürzen / erweitern"
+     },
+     {
+      "id": "texts-seo",
+      "input": "mainFile",
+      "output": "seo.md",
+      "task": "Schlage vor: einen Suchtitel (höchstens 60 Zeichen), eine Meta-Description (höchstens 155 Zeichen), 5–8 Suchbegriffe, auf die der Text wirklich antwortet, und 3 Ideen für fehlende H2-Zwischenüberschriften. Ändere den Text selbst nicht.",
+      "title": "SEO"
+     },
+     {
+      "id": "texts-posts",
+      "input": "mainFile",
+      "output": "posts.md",
+      "task": "Mach aus dem Text eine Serie von Posts für {platform}: 3–5 Posts, jeder für sich verständlich, mit einem eigenen Gedanken aus dem Text, einer packenden ersten Zeile und einem Aufruf am Ende. Beachte das Format der Plattform (Länge, Hashtags, Emojis — sparsam). Nummeriere sie und gib die Reihenfolge der Veröffentlichung an.",
+      "title": "In Posts aufteilen"
+     }
+    ],
+    "commonCommands": "none",
+    "icon": "doc.text",
+    "launchMode": "background",
+    "metrics": [
+     "words",
+     "readingTime",
+     "publishDate"
+    ],
+    "name": "Texte",
+    "permissions": "filesOnly",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "folders": {
+      "_0": "~/Documents/Texte"
+     }
+    },
+    "stages": [
+     "Idee",
+     "Entwurf",
+     "Lektorat",
+     "veröffentlicht"
+    ],
+    "template": "texts"
+   },
+   "title": "Texte (Artikel, Blog, Newsletter)"
+  },
+  "en": {
+   "mode": {
+    "calendar": "dates",
+    "card": "projectMD",
+    "commands": [
+     {
+      "id": "texts-edit",
+      "input": "mainFile",
+      "output": "edit.md",
+      "task": "Edit the text: remove filler, officialese, repetition and clichés, simplify long sentences, keep the meaning, the facts and the author's voice. First the whole edited text. Then a list of the 5–10 most important edits as «before → after → why».",
+      "title": "Edit"
+     },
+     {
+      "id": "texts-proof",
+      "input": "mainFile",
+      "output": "proofread.md",
+      "task": "Find spelling, punctuation and grammar mistakes, typos and agreement errors. Do not change the style or wording. Give the corrected text and after it a list of the corrections.",
+      "title": "Proofread"
+     },
+     {
+      "asks": "Tone",
+      "id": "texts-tone",
+      "input": "mainFile",
+      "output": "tone-{text}.md",
+      "task": "Rewrite the text in this tone: {text} (for example: friendlier, stricter, with humour, for experts, for beginners). Same meaning, facts and structure.",
+      "title": "Another tone"
+     },
+     {
+      "asks": "How many words",
+      "id": "texts-length",
+      "input": "mainFile",
+      "output": "version-{text}.md",
+      "task": "Make a version of the text of about {text} words. When shortening, keep the essentials and the strongest examples. When expanding, add explanations and examples on the topic, not filler, and no new facts without a «check» mark.",
+      "title": "Shorten / expand"
+     },
+     {
+      "id": "texts-seo",
+      "input": "mainFile",
+      "output": "seo.md",
+      "task": "Suggest: a search title (up to 60 characters), a meta description (up to 155 characters), 5–8 key phrases the text really answers, and 3 ideas for missing H2 subheadings. Do not change the text itself.",
+      "title": "SEO"
+     },
+     {
+      "id": "texts-posts",
+      "input": "mainFile",
+      "output": "posts.md",
+      "task": "Turn the text into a series of posts for {platform}: 3–5 posts, each standing on its own with its own idea from the text, a hooking first line and a call to action at the end. Respect the platform's format (length, hashtags, emoji — in moderation). Number them and say in which order to publish.",
+      "title": "Split into posts"
+     }
+    ],
+    "commonCommands": "none",
+    "icon": "doc.text",
+    "launchMode": "background",
+    "metrics": [
+     "words",
+     "readingTime",
+     "publishDate"
+    ],
+    "name": "Writing",
+    "permissions": "filesOnly",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "folders": {
+      "_0": "~/Documents/Writing"
+     }
+    },
+    "stages": [
+     "idea",
+     "draft",
+     "editing",
+     "published"
+    ],
+    "template": "texts"
+   },
+   "title": "Writing (articles, blog, newsletter)"
+  },
+  "es": {
+   "mode": {
+    "calendar": "dates",
+    "card": "projectMD",
+    "commands": [
+     {
+      "id": "texts-edit",
+      "input": "mainFile",
+      "output": "edicion.md",
+      "task": "Edita el texto: quita relleno, lenguaje burocrático, repeticiones y clichés, simplifica las frases largas, conserva el sentido, los datos y la voz del autor. Primero el texto editado completo. Después, una lista de las 5–10 ediciones más importantes como «antes → después → por qué».",
+      "title": "Edición"
+     },
+     {
+      "id": "texts-proof",
+      "input": "mainFile",
+      "output": "correccion.md",
+      "task": "Encuentra errores de ortografía, puntuación y gramática, erratas y faltas de concordancia. No cambies el estilo ni la redacción. Da el texto corregido y, después, la lista de correcciones.",
+      "title": "Corrección"
+     },
+     {
+      "asks": "Tono",
+      "id": "texts-tone",
+      "input": "mainFile",
+      "output": "tono-{text}.md",
+      "task": "Reescribe el texto en este tono: {text} (por ejemplo: más cercano, más formal, con humor, para expertos, para principiantes). Mismo sentido, datos y estructura.",
+      "title": "Otro tono"
+     },
+     {
+      "asks": "Cuántas palabras",
+      "id": "texts-length",
+      "input": "mainFile",
+      "output": "version-{text}.md",
+      "task": "Haz una versión del texto de unas {text} palabras. Si acortas, conserva lo esencial y los ejemplos más fuertes. Si amplías, añade explicaciones y ejemplos sobre el tema, no relleno, y ningún dato nuevo sin la marca «comprobar».",
+      "title": "Acortar / ampliar"
+     },
+     {
+      "id": "texts-seo",
+      "input": "mainFile",
+      "output": "seo.md",
+      "task": "Propón: un título para buscadores (hasta 60 caracteres), una meta descripción (hasta 155 caracteres), 5–8 frases clave a las que el texto responde de verdad y 3 ideas de subtítulos H2 que faltan. No cambies el texto.",
+      "title": "SEO"
+     },
+     {
+      "id": "texts-posts",
+      "input": "mainFile",
+      "output": "publicaciones.md",
+      "task": "Convierte el texto en una serie de publicaciones para {platform}: 3–5 publicaciones, cada una independiente, con su propia idea del texto, una primera línea que enganche y una llamada a la acción al final. Respeta el formato de la plataforma (extensión, hashtags, emojis con moderación). Numéralas e indica en qué orden publicarlas.",
+      "title": "Dividir en publicaciones"
+     }
+    ],
+    "commonCommands": "none",
+    "icon": "doc.text",
+    "launchMode": "background",
+    "metrics": [
+     "words",
+     "readingTime",
+     "publishDate"
+    ],
+    "name": "Textos",
+    "permissions": "filesOnly",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "folders": {
+      "_0": "~/Documents/Textos"
+     }
+    },
+    "stages": [
+     "idea",
+     "borrador",
+     "edición",
+     "publicado"
+    ],
+    "template": "texts"
+   },
+   "title": "Textos (artículos, blog, boletín)"
+  },
+  "fr": {
+   "mode": {
+    "calendar": "dates",
+    "card": "projectMD",
+    "commands": [
+     {
+      "id": "texts-edit",
+      "input": "mainFile",
+      "output": "revision.md",
+      "task": "Révise le texte : supprime le remplissage, le jargon, les répétitions et les clichés, simplifie les phrases longues, garde le sens, les faits et la voix de l'auteur. D'abord le texte révisé en entier. Puis une liste des 5–10 modifications les plus importantes sous la forme «avant → après → pourquoi».",
+      "title": "Révision"
+     },
+     {
+      "id": "texts-proof",
+      "input": "mainFile",
+      "output": "correction.md",
+      "task": "Trouve les fautes d'orthographe, de ponctuation et de grammaire, les coquilles et les erreurs d'accord. Ne change ni le style ni les formulations. Donne le texte corrigé puis la liste des corrections.",
+      "title": "Correction"
+     },
+     {
+      "asks": "Ton",
+      "id": "texts-tone",
+      "input": "mainFile",
+      "output": "ton-{text}.md",
+      "task": "Réécris le texte sur ce ton : {text} (par exemple : plus amical, plus strict, avec humour, pour des experts, pour des débutants). Même sens, mêmes faits, même structure.",
+      "title": "Autre ton"
+     },
+     {
+      "asks": "Combien de mots",
+      "id": "texts-length",
+      "input": "mainFile",
+      "output": "version-{text}.md",
+      "task": "Fais une version du texte d'environ {text} mots. Pour raccourcir, garde l'essentiel et les exemples les plus forts. Pour développer, ajoute des explications et des exemples sur le sujet — pas de remplissage, et aucun fait nouveau sans la mention «à vérifier».",
+      "title": "Raccourcir / développer"
+     },
+     {
+      "id": "texts-seo",
+      "input": "mainFile",
+      "output": "seo.md",
+      "task": "Propose : un titre pour les moteurs de recherche (60 caractères maximum), une meta description (155 caractères maximum), 5–8 expressions clés auxquelles le texte répond vraiment et 3 idées de sous-titres H2 manquants. Ne modifie pas le texte.",
+      "title": "SEO"
+     },
+     {
+      "id": "texts-posts",
+      "input": "mainFile",
+      "output": "posts.md",
+      "task": "Transforme le texte en une série de posts pour {platform} : 3–5 posts, chacun autonome avec sa propre idée tirée du texte, une première ligne accrocheuse et un appel à l'action à la fin. Respecte le format de la plateforme (longueur, hashtags, emojis avec modération). Numérote-les et indique dans quel ordre les publier.",
+      "title": "Découpage en posts"
+     }
+    ],
+    "commonCommands": "none",
+    "icon": "doc.text",
+    "launchMode": "background",
+    "metrics": [
+     "words",
+     "readingTime",
+     "publishDate"
+    ],
+    "name": "Textes",
+    "permissions": "filesOnly",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "folders": {
+      "_0": "~/Documents/Textes"
+     }
+    },
+    "stages": [
+     "idée",
+     "brouillon",
+     "révision",
+     "publié"
+    ],
+    "template": "texts"
+   },
+   "title": "Textes (articles, blog, newsletter)"
+  },
+  "id": {
+   "mode": {
+    "calendar": "dates",
+    "card": "projectMD",
+    "commands": [
+     {
+      "id": "texts-edit",
+      "input": "mainFile",
+      "output": "suntingan.md",
+      "task": "Sunting teks: buang kata-kata tak perlu, bahasa birokratis, pengulangan, dan klise, sederhanakan kalimat panjang, pertahankan makna, fakta, dan suara penulis. Pertama teks hasil suntingan secara utuh. Lalu daftar 5–10 perubahan terpenting sebagai «sebelum → sesudah → alasan».",
+      "title": "Penyuntingan"
+     },
+     {
+      "id": "texts-proof",
+      "input": "mainFile",
+      "output": "koreksi.md",
+      "task": "Temukan kesalahan ejaan, tanda baca, tata bahasa, salah ketik, dan ketidaksesuaian. Jangan ubah gaya atau rumusan. Berikan teks yang sudah dikoreksi lalu daftar koreksinya.",
+      "title": "Koreksi"
+     },
+     {
+      "asks": "Nada",
+      "id": "texts-tone",
+      "input": "mainFile",
+      "output": "nada-{text}.md",
+      "task": "Tulis ulang teks dengan nada ini: {text} (misalnya: lebih ramah, lebih tegas, jenaka, untuk ahli, untuk pemula). Makna, fakta, dan struktur tetap sama.",
+      "title": "Nada lain"
+     },
+     {
+      "asks": "Berapa kata",
+      "id": "texts-length",
+      "input": "mainFile",
+      "output": "versi-{text}.md",
+      "task": "Buat versi teks sekitar {text} kata. Saat meringkas, simpan inti dan contoh terkuat. Saat memperpanjang, tambahkan penjelasan dan contoh sesuai topik — bukan isian, dan tanpa fakta baru tanpa tanda «perlu dicek».",
+      "title": "Ringkas / perpanjang"
+     },
+     {
+      "id": "texts-seo",
+      "input": "mainFile",
+      "output": "seo.md",
+      "task": "Usulkan: judul untuk mesin pencari (maksimal 60 karakter), meta description (maksimal 155 karakter), 5–8 frasa kunci yang benar-benar dijawab teks, dan 3 ide subjudul H2 yang belum ada. Jangan ubah teksnya.",
+      "title": "SEO"
+     },
+     {
+      "id": "texts-posts",
+      "input": "mainFile",
+      "output": "postingan.md",
+      "task": "Ubah teks menjadi serangkaian postingan untuk {platform}: 3–5 postingan, masing-masing berdiri sendiri dengan gagasannya dari teks, baris pertama yang menarik, dan ajakan di akhir. Perhatikan format platform (panjang, tagar, emoji secukupnya). Beri nomor dan urutan terbit.",
+      "title": "Pecah jadi postingan"
+     }
+    ],
+    "commonCommands": "none",
+    "icon": "doc.text",
+    "launchMode": "background",
+    "metrics": [
+     "words",
+     "readingTime",
+     "publishDate"
+    ],
+    "name": "Tulisan",
+    "permissions": "filesOnly",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "folders": {
+      "_0": "~/Documents/Tulisan"
+     }
+    },
+    "stages": [
+     "ide",
+     "draf",
+     "penyuntingan",
+     "terbit"
+    ],
+    "template": "texts"
+   },
+   "title": "Tulisan (artikel, blog, buletin)"
+  },
+  "it": {
+   "mode": {
+    "calendar": "dates",
+    "card": "projectMD",
+    "commands": [
+     {
+      "id": "texts-edit",
+      "input": "mainFile",
+      "output": "editing.md",
+      "task": "Fai l'editing del testo: togli riempitivi, burocratese, ripetizioni e luoghi comuni, semplifica le frasi lunghe, conserva il senso, i fatti e la voce dell'autore. Prima il testo rivisto per intero. Poi un elenco delle 5–10 modifiche più importanti come «prima → dopo → perché».",
+      "title": "Editing"
+     },
+     {
+      "id": "texts-proof",
+      "input": "mainFile",
+      "output": "correzione.md",
+      "task": "Trova errori di ortografia, punteggiatura e grammatica, refusi e concordanze sbagliate. Non cambiare lo stile né le formulazioni. Dai il testo corretto e poi l'elenco delle correzioni.",
+      "title": "Correzione di bozze"
+     },
+     {
+      "asks": "Tono",
+      "id": "texts-tone",
+      "input": "mainFile",
+      "output": "tono-{text}.md",
+      "task": "Riscrivi il testo con questo tono: {text} (per esempio: più amichevole, più severo, con umorismo, per esperti, per principianti). Stesso senso, stessi fatti, stessa struttura.",
+      "title": "Altro tono"
+     },
+     {
+      "asks": "Quante parole",
+      "id": "texts-length",
+      "input": "mainFile",
+      "output": "versione-{text}.md",
+      "task": "Fai una versione del testo di circa {text} parole. Se accorci, tieni l'essenziale e gli esempi più forti. Se allunghi, aggiungi spiegazioni ed esempi sul tema — niente riempitivi e nessun fatto nuovo senza la nota «da verificare».",
+      "title": "Accorcia / allunga"
+     },
+     {
+      "id": "texts-seo",
+      "input": "mainFile",
+      "output": "seo.md",
+      "task": "Proponi: un titolo per i motori di ricerca (massimo 60 caratteri), una meta description (massimo 155 caratteri), 5–8 frasi chiave a cui il testo risponde davvero e 3 idee di sottotitoli H2 mancanti. Non cambiare il testo.",
+      "title": "SEO"
+     },
+     {
+      "id": "texts-posts",
+      "input": "mainFile",
+      "output": "post.md",
+      "task": "Trasforma il testo in una serie di post per {platform}: 3–5 post, ognuno autonomo con una propria idea tratta dal testo, una prima riga che aggancia e un invito all'azione alla fine. Rispetta il formato della piattaforma (lunghezza, hashtag, emoji con moderazione). Numerali e indica l'ordine di pubblicazione.",
+      "title": "Suddividi in post"
+     }
+    ],
+    "commonCommands": "none",
+    "icon": "doc.text",
+    "launchMode": "background",
+    "metrics": [
+     "words",
+     "readingTime",
+     "publishDate"
+    ],
+    "name": "Testi",
+    "permissions": "filesOnly",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "folders": {
+      "_0": "~/Documents/Testi"
+     }
+    },
+    "stages": [
+     "idea",
+     "bozza",
+     "editing",
+     "pubblicato"
+    ],
+    "template": "texts"
+   },
+   "title": "Testi (articoli, blog, newsletter)"
+  },
+  "ja": {
+   "mode": {
+    "calendar": "dates",
+    "card": "projectMD",
+    "commands": [
+     {
+      "id": "texts-edit",
+      "input": "mainFile",
+      "output": "編集.md",
+      "task": "文章を編集してください: 冗長な表現、堅い言い回し、繰り返し、決まり文句を削り、長い文を簡潔にし、意味、事実、著者の声は保つこと。まず編集後の全文。次に、重要な修正 5〜10 件を「修正前 → 修正後 → 理由」の形で。",
+      "title": "編集"
+     },
+     {
+      "id": "texts-proof",
+      "input": "mainFile",
+      "output": "校正.md",
+      "task": "誤字脱字、句読点と文法の誤り、表記ゆれを見つけてください。文体と言い回しは変えないこと。修正後の文章と、その後に修正一覧を。",
+      "title": "校正"
+     },
+     {
+      "asks": "トーン",
+      "id": "texts-tone",
+      "input": "mainFile",
+      "output": "トーン-{text}.md",
+      "task": "文章を次のトーンで書き直してください: {text} (例: より親しみやすく、より厳格に、ユーモアを交えて、専門家向け、初心者向け)。意味、事実、構成は同じに。",
+      "title": "別のトーン"
+     },
+     {
+      "asks": "語数",
+      "id": "texts-length",
+      "input": "mainFile",
+      "output": "版-{text}.md",
+      "task": "文章をおよそ {text} 語の版にしてください。短くするなら要点と一番強い例を残すこと。長くするならテーマに沿った説明や例を加え、水増しはせず、新しい事実には「要確認」と付けること。",
+      "title": "短縮 / 拡張"
+     },
+     {
+      "id": "texts-seo",
+      "input": "mainFile",
+      "output": "seo.md",
+      "task": "次を提案してください: 検索向けタイトル (60 文字以内)、メタディスクリプション (155 文字以内)、文章が実際に答えているキーフレーズ 5〜8 個、足りない H2 見出しの案 3 つ。本文は変えないこと。",
+      "title": "SEO"
+     },
+     {
+      "id": "texts-posts",
+      "input": "mainFile",
+      "output": "投稿.md",
+      "task": "文章を {platform} 向けの連続投稿にしてください: 3〜5 本、それぞれ単独で読め、文章から 1 つの考えを持ち、引きのある 1 行目と最後の呼びかけ付き。プラットフォームの形式 (長さ、ハッシュタグ、絵文字は控えめ) を守り、番号と公開順を付けてください。",
+      "title": "投稿に分割"
+     }
+    ],
+    "commonCommands": "none",
+    "icon": "doc.text",
+    "launchMode": "background",
+    "metrics": [
+     "words",
+     "readingTime",
+     "publishDate"
+    ],
+    "name": "文章",
+    "permissions": "filesOnly",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "folders": {
+      "_0": "~/Documents/Writing"
+     }
+    },
+    "stages": [
+     "アイデア",
+     "下書き",
+     "編集",
+     "公開済み"
+    ],
+    "template": "texts"
+   },
+   "title": "文章 (記事、ブログ、ニュースレター)"
+  },
+  "ko": {
+   "mode": {
+    "calendar": "dates",
+    "card": "projectMD",
+    "commands": [
+     {
+      "id": "texts-edit",
+      "input": "mainFile",
+      "output": "편집.md",
+      "task": "글을 편집하세요: 군더더기, 딱딱한 표현, 반복과 상투어를 빼고 긴 문장을 단순하게 하되, 의미와 사실과 글쓴이의 목소리는 지키세요. 먼저 편집한 전문. 그다음 가장 중요한 수정 5~10개를 «전 → 후 → 이유» 형식으로.",
+      "title": "편집"
+     },
+     {
+      "id": "texts-proof",
+      "input": "mainFile",
+      "output": "교정.md",
+      "task": "맞춤법, 문장 부호, 문법 오류와 오타, 호응 오류를 찾으세요. 문체와 표현은 바꾸지 마세요. 교정한 글과 그 뒤에 수정 목록을.",
+      "title": "교정"
+     },
+     {
+      "asks": "어조",
+      "id": "texts-tone",
+      "input": "mainFile",
+      "output": "어조-{text}.md",
+      "task": "글을 이 어조로 다시 쓰세요: {text} (예: 더 친근하게, 더 엄격하게, 유머 있게, 전문가용, 초보자용). 의미, 사실, 구조는 그대로.",
+      "title": "다른 어조"
+     },
+     {
+      "asks": "몇 단어",
+      "id": "texts-length",
+      "input": "mainFile",
+      "output": "버전-{text}.md",
+      "task": "글을 약 {text}단어 분량으로 만드세요. 줄일 때는 핵심과 가장 강한 예를 남기세요. 늘릴 때는 주제에 맞는 설명과 예를 더하되 군더더기는 넣지 말고, 새 사실에는 «확인 필요» 표시를 붙이세요.",
+      "title": "줄이기 / 늘리기"
+     },
+     {
+      "id": "texts-seo",
+      "input": "mainFile",
+      "output": "seo.md",
+      "task": "제안하세요: 검색용 제목 (60자 이내), 메타 설명 (155자 이내), 글이 실제로 답하는 핵심 문구 5~8개, 빠진 H2 소제목 아이디어 3개. 본문은 바꾸지 마세요.",
+      "title": "SEO"
+     },
+     {
+      "id": "texts-posts",
+      "input": "mainFile",
+      "output": "게시물.md",
+      "task": "글을 {platform}용 연속 게시물로 만드세요: 3~5개, 각각 혼자서도 읽히고, 글에서 나온 자기 생각과 눈길을 끄는 첫 줄, 끝의 행동 유도가 있어야 합니다. 플랫폼 형식 (길이, 해시태그, 이모지는 적당히)을 지키고 번호와 게시 순서를 적으세요.",
+      "title": "게시물로 나누기"
+     }
+    ],
+    "commonCommands": "none",
+    "icon": "doc.text",
+    "launchMode": "background",
+    "metrics": [
+     "words",
+     "readingTime",
+     "publishDate"
+    ],
+    "name": "글쓰기",
+    "permissions": "filesOnly",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "folders": {
+      "_0": "~/Documents/Writing"
+     }
+    },
+    "stages": [
+     "아이디어",
+     "초안",
+     "편집",
+     "게시됨"
+    ],
+    "template": "texts"
+   },
+   "title": "글쓰기 (기사, 블로그, 뉴스레터)"
+  },
+  "pl": {
+   "mode": {
+    "calendar": "dates",
+    "card": "projectMD",
+    "commands": [
+     {
+      "id": "texts-edit",
+      "input": "mainFile",
+      "output": "redakcja.md",
+      "task": "Zredaguj tekst: usuń watę, urzędowy styl, powtórzenia i frazesy, uprość długie zdania, zachowaj sens, fakty i głos autora. Najpierw cały poprawiony tekst. Potem lista 5–10 najważniejszych zmian w formacie «było → jest → dlaczego».",
+      "title": "Redakcja"
+     },
+     {
+      "id": "texts-proof",
+      "input": "mainFile",
+      "output": "korekta.md",
+      "task": "Znajdź błędy ortograficzne, interpunkcyjne i gramatyczne, literówki i błędne związki. Nie zmieniaj stylu ani sformułowań. Podaj poprawiony tekst, a po nim listę poprawek.",
+      "title": "Korekta"
+     },
+     {
+      "asks": "Ton",
+      "id": "texts-tone",
+      "input": "mainFile",
+      "output": "ton-{text}.md",
+      "task": "Przepisz tekst w tonie: {text} (na przykład: przyjaźniej, surowiej, z humorem, dla ekspertów, dla początkujących). Sens, fakty i struktura — te same.",
+      "title": "Inny ton"
+     },
+     {
+      "asks": "Ile słów",
+      "id": "texts-length",
+      "input": "mainFile",
+      "output": "wersja-{text}.md",
+      "task": "Zrób wersję tekstu liczącą około {text} słów. Przy skracaniu zostaw sedno i najmocniejsze przykłady. Przy rozbudowie dodaj wyjaśnienia i przykłady na temat — bez waty i bez nowych faktów bez dopisku «sprawdzić».",
+      "title": "Skróć / rozbuduj"
+     },
+     {
+      "id": "texts-seo",
+      "input": "mainFile",
+      "output": "seo.md",
+      "task": "Zaproponuj: tytuł do wyszukiwarki (do 60 znaków), meta description (do 155 znaków), 5–8 fraz kluczowych, na które tekst naprawdę odpowiada, i 3 pomysły na brakujące śródtytuły H2. Nie zmieniaj samego tekstu.",
+      "title": "SEO"
+     },
+     {
+      "id": "texts-posts",
+      "input": "mainFile",
+      "output": "posty.md",
+      "task": "Zrób z tekstu serię postów na {platform}: 3–5 postów, każdy samodzielny, z własną myślą z tekstu, przyciągającą pierwszą linijką i wezwaniem na końcu. Uwzględnij format platformy (długość, hashtagi, emoji — z umiarem). Ponumeruj je i podaj kolejność publikacji.",
+      "title": "Podział na posty"
+     }
+    ],
+    "commonCommands": "none",
+    "icon": "doc.text",
+    "launchMode": "background",
+    "metrics": [
+     "words",
+     "readingTime",
+     "publishDate"
+    ],
+    "name": "Teksty",
+    "permissions": "filesOnly",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "folders": {
+      "_0": "~/Documents/Teksty"
+     }
+    },
+    "stages": [
+     "pomysł",
+     "szkic",
+     "redakcja",
+     "opublikowane"
+    ],
+    "template": "texts"
+   },
+   "title": "Teksty (artykuły, blog, newsletter)"
+  },
+  "pt-BR": {
+   "mode": {
+    "calendar": "dates",
+    "card": "projectMD",
+    "commands": [
+     {
+      "id": "texts-edit",
+      "input": "mainFile",
+      "output": "edicao.md",
+      "task": "Edite o texto: tire enrolação, linguagem burocrática, repetições e clichês, simplifique frases longas, mantenha o sentido, os fatos e a voz do autor. Primeiro o texto editado completo. Depois, uma lista das 5–10 edições mais importantes no formato «antes → depois → por quê».",
+      "title": "Edição"
+     },
+     {
+      "id": "texts-proof",
+      "input": "mainFile",
+      "output": "revisao.md",
+      "task": "Encontre erros de ortografia, pontuação e gramática, erros de digitação e de concordância. Não mude o estilo nem a redação. Entregue o texto corrigido e, depois dele, a lista de correções.",
+      "title": "Revisão"
+     },
+     {
+      "asks": "Tom",
+      "id": "texts-tone",
+      "input": "mainFile",
+      "output": "tom-{text}.md",
+      "task": "Reescreva o texto neste tom: {text} (por exemplo: mais amigável, mais sério, com humor, para especialistas, para iniciantes). Mesmo sentido, fatos e estrutura.",
+      "title": "Outro tom"
+     },
+     {
+      "asks": "Quantas palavras",
+      "id": "texts-length",
+      "input": "mainFile",
+      "output": "versao-{text}.md",
+      "task": "Faça uma versão do texto com cerca de {text} palavras. Ao encurtar, mantenha o essencial e os exemplos mais fortes. Ao expandir, acrescente explicações e exemplos sobre o tema — não enrolação, e nenhum fato novo sem a marca «verificar».",
+      "title": "Encurtar / expandir"
+     },
+     {
+      "id": "texts-seo",
+      "input": "mainFile",
+      "output": "seo.md",
+      "task": "Sugira: um título para busca (até 60 caracteres), uma meta description (até 155 caracteres), 5–8 frases-chave que o texto realmente responde e 3 ideias de subtítulos H2 que faltam. Não mude o texto.",
+      "title": "SEO"
+     },
+     {
+      "id": "texts-posts",
+      "input": "mainFile",
+      "output": "posts.md",
+      "task": "Transforme o texto em uma série de posts para {platform}: 3–5 posts, cada um independente, com sua própria ideia do texto, uma primeira linha que prenda e uma chamada para ação no final. Respeite o formato da plataforma (tamanho, hashtags, emojis com moderação). Numere-os e diga em que ordem publicar.",
+      "title": "Dividir em posts"
+     }
+    ],
+    "commonCommands": "none",
+    "icon": "doc.text",
+    "launchMode": "background",
+    "metrics": [
+     "words",
+     "readingTime",
+     "publishDate"
+    ],
+    "name": "Textos",
+    "permissions": "filesOnly",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "folders": {
+      "_0": "~/Documents/Textos"
+     }
+    },
+    "stages": [
+     "ideia",
+     "rascunho",
+     "edição",
+     "publicado"
+    ],
+    "template": "texts"
+   },
+   "title": "Textos (artigos, blog, newsletter)"
+  },
+  "ru": {
+   "mode": {
+    "calendar": "dates",
+    "card": "projectMD",
+    "commands": [
+     {
+      "id": "texts-edit",
+      "input": "mainFile",
+      "output": "редактура.md",
+      "task": "Отредактируй текст: убери воду, канцелярит, повторы и штампы, упрости длинные предложения, сохрани смысл, факты и голос автора. Сначала — исправленный текст целиком. Затем — список из 5–10 самых важных правок в формате «было → стало → почему».",
+      "title": "Редактура"
+     },
+     {
+      "id": "texts-proof",
+      "input": "mainFile",
+      "output": "корректура.md",
+      "task": "Найди орфографические, пунктуационные и грамматические ошибки, опечатки и неверные согласования. Не меняй стиль и формулировки. Выдай исправленный текст и после него — список исправлений.",
+      "title": "Корректура"
+     },
+     {
+      "asks": "Тон",
+      "id": "texts-tone",
+      "input": "mainFile",
+      "output": "тон-{текст}.md",
+      "task": "Перепиши текст в тоне: {текст} (например: дружелюбнее, строже, с юмором, для экспертов, для новичков). Смысл, факты и структура — те же.",
+      "title": "Другой тон"
+     },
+     {
+      "asks": "Сколько слов",
+      "id": "texts-length",
+      "input": "mainFile",
+      "output": "версия-{текст}.md",
+      "task": "Сделай версию текста объёмом примерно {текст} слов. Если сокращаешь — оставь главное и самые сильные примеры. Если расширяешь — добавляй пояснения и примеры по теме, не воду и не новые факты без пометки «проверить».",
+      "title": "Сократить / расширить"
+     },
+     {
+      "id": "texts-seo",
+      "input": "mainFile",
+      "output": "seo.md",
+      "task": "Предложи: заголовок для поиска (до 60 символов), meta description (до 155 символов), 5–8 ключевых фраз, по которым текст реально отвечает на вопрос, и 3 идеи подзаголовков H2, которых не хватает. Не меняй сам текст.",
+      "title": "SEO"
+     },
+     {
+      "id": "texts-posts",
+      "input": "mainFile",
+      "output": "посты.md",
+      "task": "Сделай из текста серию постов для {площадка}: 3–5 постов, каждый самостоятельный, со своей мыслью из текста, с цепляющей первой строкой и призывом в конце. Учитывай формат площадки (длина, хештеги, эмодзи — умеренно). Пронумеруй и укажи, в каком порядке публиковать.",
+      "title": "Нарезка в посты"
+     }
+    ],
+    "commonCommands": "none",
+    "icon": "doc.text",
+    "launchMode": "background",
+    "metrics": [
+     "words",
+     "readingTime",
+     "publishDate"
+    ],
+    "name": "Тексты",
+    "permissions": "filesOnly",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "folders": {
+      "_0": "~/Documents/Тексты"
+     }
+    },
+    "stages": [
+     "идея",
+     "черновик",
+     "редактура",
+     "опубликовано"
+    ],
+    "template": "texts"
+   },
+   "title": "Тексты (статьи, блог, рассылка)"
+  },
+  "uk": {
+   "mode": {
+    "calendar": "dates",
+    "card": "projectMD",
+    "commands": [
+     {
+      "id": "texts-edit",
+      "input": "mainFile",
+      "output": "редагування.md",
+      "task": "Відредагуй текст: прибери воду, канцелярит, повтори й штампи, спрости довгі речення, збережи зміст, факти й голос автора. Спершу — виправлений текст повністю. Потім — список із 5–10 найважливіших правок у форматі «було → стало → чому».",
+      "title": "Редагування"
+     },
+     {
+      "id": "texts-proof",
+      "input": "mainFile",
+      "output": "коректура.md",
+      "task": "Знайди орфографічні, пунктуаційні й граматичні помилки, одруківки та неправильні узгодження. Не змінюй стиль і формулювання. Видай виправлений текст, а після нього — список виправлень.",
+      "title": "Коректура"
+     },
+     {
+      "asks": "Тон",
+      "id": "texts-tone",
+      "input": "mainFile",
+      "output": "тон-{text}.md",
+      "task": "Перепиши текст у тоні: {text} (наприклад: дружніше, суворіше, з гумором, для експертів, для новачків). Зміст, факти й структура — ті самі.",
+      "title": "Інший тон"
+     },
+     {
+      "asks": "Скільки слів",
+      "id": "texts-length",
+      "input": "mainFile",
+      "output": "версія-{text}.md",
+      "task": "Зроби версію тексту обсягом приблизно {text} слів. Якщо скорочуєш — залиш головне й найсильніші приклади. Якщо розширюєш — додавай пояснення й приклади на тему, а не воду, і жодних нових фактів без позначки «перевірити».",
+      "title": "Скоротити / розширити"
+     },
+     {
+      "id": "texts-seo",
+      "input": "mainFile",
+      "output": "seo.md",
+      "task": "Запропонуй: заголовок для пошуку (до 60 символів), meta description (до 155 символів), 5–8 ключових фраз, на які текст справді відповідає, і 3 ідеї підзаголовків H2, яких бракує. Сам текст не змінюй.",
+      "title": "SEO"
+     },
+     {
+      "id": "texts-posts",
+      "input": "mainFile",
+      "output": "пости.md",
+      "task": "Зроби з тексту серію постів для {platform}: 3–5 постів, кожен самостійний, зі своєю думкою з тексту, чіпким першим рядком і закликом наприкінці. Враховуй формат майданчика (довжина, хештеги, емодзі — помірно). Пронумеруй і вкажи, у якому порядку публікувати.",
+      "title": "Нарізка в пости"
+     }
+    ],
+    "commonCommands": "none",
+    "icon": "doc.text",
+    "launchMode": "background",
+    "metrics": [
+     "words",
+     "readingTime",
+     "publishDate"
+    ],
+    "name": "Тексти",
+    "permissions": "filesOnly",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "folders": {
+      "_0": "~/Documents/Тексти"
+     }
+    },
+    "stages": [
+     "ідея",
+     "чернетка",
+     "редагування",
+     "опубліковано"
+    ],
+    "template": "texts"
+   },
+   "title": "Тексти (статті, блог, розсилка)"
+  }
+ },
+ "video": {
+  "ar": {
+   "mode": {
+    "calendar": "dates",
+    "card": "projectMD",
+    "commands": [
+     {
+      "id": "video-hooks",
+      "input": "mainFile",
+      "output": "افتتاحيات.md",
+      "task": "اقترح 5 افتتاحيات للفيديو — أول 5 إلى 10 ثوانٍ تُبقي المشاهد. الفيديو: {format}، بناءً على هذا السيناريو. استخدم أساليب مختلفة: حقيقة مفاجئة، سؤال للمشاهد، وعد بنتيجة، قصة قصيرة، مجادلة رأي شائع. لكل افتتاحية: النص نفسه (كما يُقال بصوت عالٍ) وسطر واحد عمّا تراهن عليه. وفي النهاية بجملة واحدة: أيها تختار ولماذا.",
+      "title": "افتتاحيات"
+     },
+     {
+      "id": "video-shorts",
+      "input": "mainFile",
+      "output": "سيناريو-shorts.md",
+      "task": "حوّل السيناريو إلى فيديو عمودي لا يتجاوز 60 ثانية — نحو 140 إلى 150 كلمة. احتفظ بالفكرة الرئيسية وأقوى لحظة، واحذف المقدمات والتكرار. يجب أن تجذب الجملة الأولى فورًا، وأن تترك الأخيرة رغبة في مشاهدة الفيديو كاملًا أو الاشتراك. اكتب كما يُتحدث: جمل قصيرة دون لغة رسمية. اذكر عدد الكلمات في النهاية.",
+      "title": "نسخة Shorts"
+     },
+     {
+      "id": "video-description",
+      "input": "mainFile",
+      "output": "وصف.md",
+      "task": "جهّز كل شيء للنشر على YouTube: 1) وصف من فقرتين أو ثلاث، أول سطرين هما الأهم (يظهران قبل «المزيد»)، دون عناوين مضلِّلة؛ 2) طوابع زمنية لأجزاء السيناريو بصيغة 00:00 — العنوان (قدّر الوقت بـ 150 كلمة في الدقيقة، والأول 00:00)؛ 3) من 10 إلى 15 وسمًا مفصولة بفواصل؛ 4) 3 وسوم هاشتاغ. بلغة السيناريو.",
+      "title": "الوصف والطوابع الزمنية"
+     },
+     {
+      "id": "video-titles",
+      "input": "mainFile",
+      "output": "عناوين.md",
+      "task": "اقترح 10 عناوين للفيديو — حتى 60 حرفًا، صادقة (تعد بما في الفيديو فعلًا)، بمقاربات مختلفة: الفائدة، الفضول، نتيجة محددة، رقم، سؤال. ضع علامة على أفضل 3. ثم 3 أفكار للصورة المصغّرة: ما في الإطار، النص الكبير (حتى 4 كلمات)، العاطفة.",
+      "title": "العناوين والصور المصغّرة"
+     },
+     {
+      "id": "video-facts",
+      "input": "mainFile",
+      "output": "حقائق.md",
+      "service": "claude-code",
+      "task": "اعثر في السيناريو على كل العبارات القابلة للتحقق: الأرقام، التواريخ، الأسماء، الاقتباسات، ادعاءات السبب والنتيجة. لكل منها: العبارة نفسها، ومدى إثارتها للجدل (موثوقة / تحتاج تحققًا / مشكوك فيها) ولماذا، وما الذي يُتحقق منه وأين. لا تصحّح شيئًا في السيناريو ولا تختلق مصادر — إن لم تكن متأكدًا فاذكر ذلك.",
+      "title": "التحقق من الحقائق"
+     },
+     {
+      "asks": "اللغة",
+      "id": "video-translate",
+      "input": "mainFile",
+      "output": "سيناريو-{language}.md",
+      "task": "ترجم السيناريو إلى {language} للتعليق الصوتي: حافظ على النبرة والنكات وإيقاع الكلام، وكيّف التعابير والأمثلة لجمهور هذه اللغة، ولا تترجم حرفيًا. أبقِ أسماء الأعلام والمصطلحات واضحة. وفي النهاية قائمة بالمواضع التي اضطررت فيها إلى الابتعاد عن الأصل بوضوح.",
+      "title": "الترجمة"
+     }
+    ],
+    "commonCommands": "none",
+    "icon": "video",
+    "launchMode": "background",
+    "metrics": [
+     "words",
+     "duration",
+     "deadline",
+     "publishDate"
+    ],
+    "name": "فيديو",
+    "permissions": "filesOnly",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "folders": {
+      "_0": "~/Documents/Video"
+     }
+    },
+    "stages": [
+     "فكرة",
+     "بحث",
+     "سيناريو",
+     "تصوير",
+     "مونتاج",
+     "منشور"
+    ],
+    "template": "video"
+   },
+   "title": "فيديو (YouTube وShorts وReels)"
+  },
+  "de": {
+   "mode": {
+    "calendar": "dates",
+    "card": "projectMD",
+    "commands": [
+     {
+      "id": "video-hooks",
+      "input": "mainFile",
+      "output": "hooks.md",
+      "task": "Schlage 5 Einstiege für das Video vor — die ersten 5–10 Sekunden, die Zuschauer halten. Video: {format}, auf Basis dieses Skripts. Nutze verschiedene Mittel: eine überraschende Tatsache, eine Frage an die Zuschauer, das Versprechen eines Ergebnisses, eine Mini-Geschichte, Widerspruch gegen eine verbreitete Meinung. Für jeden: den Text selbst (wie er laut gesprochen wird) und eine Zeile, worauf er setzt. Am Ende in einem Satz, welchen du nehmen würdest und warum.",
+      "title": "Hooks"
+     },
+     {
+      "id": "video-shorts",
+      "input": "mainFile",
+      "output": "skript-shorts.md",
+      "task": "Mach aus dem Skript ein Hochformat-Video von höchstens 60 Sekunden — etwa 140–150 Wörter. Behalte die Hauptidee und den stärksten Moment, streiche Einleitungen und Wiederholungen. Der erste Satz muss sofort packen, der letzte Lust auf das ganze Video oder ein Abo machen. Schreib, wie man spricht: kurze Sätze, kein Amtsdeutsch. Nenne am Ende die Wortzahl.",
+      "title": "Shorts-Version"
+     },
+     {
+      "id": "video-description",
+      "input": "mainFile",
+      "output": "beschreibung.md",
+      "task": "Bereite alles für YouTube vor: 1) eine Beschreibung mit 2–3 Absätzen, die ersten zwei Zeilen sind die wichtigsten (sie stehen vor «mehr»), ohne Clickbait; 2) Zeitmarken für die Abschnitte des Skripts im Format 00:00 — Titel (schätze die Zeit mit 150 Wörtern pro Minute, die erste Marke ist 00:00); 3) 10–15 Tags, durch Kommas getrennt; 4) 3 Hashtags. In der Sprache des Skripts.",
+      "title": "Beschreibung und Zeitmarken"
+     },
+     {
+      "id": "video-titles",
+      "input": "mainFile",
+      "output": "titel.md",
+      "task": "Schlage 10 Titel für das Video vor — höchstens 60 Zeichen, ehrlich (sie versprechen, was das Video hat), mit verschiedenen Ansätzen: Nutzen, Neugier, konkretes Ergebnis, Zahl, Frage. Markiere die besten 3. Dann 3 Thumbnail-Ideen: was im Bild ist, großer Text (höchstens 4 Wörter), die Emotion.",
+      "title": "Titel und Thumbnails"
+     },
+     {
+      "id": "video-facts",
+      "input": "mainFile",
+      "output": "fakten.md",
+      "service": "claude-code",
+      "task": "Finde im Skript alle überprüfbaren Aussagen: Zahlen, Daten, Namen, Zitate, Ursache-Wirkung-Behauptungen. Für jede: die Aussage, wie strittig sie ist (sicher / prüfen / zweifelhaft) und warum, was genau wo zu prüfen ist. Korrigiere nichts im Skript und erfinde keine Quellen — wenn du unsicher bist, sag es.",
+      "title": "Faktencheck"
+     },
+     {
+      "asks": "Sprache",
+      "id": "video-translate",
+      "input": "mainFile",
+      "output": "skript-{language}.md",
+      "task": "Übersetze das Skript für einen Sprecher ins {language}: behalte Ton, Witze und Sprechrhythmus, passe Redewendungen und Beispiele an dieses Publikum an, übersetze nicht Wort für Wort. Eigennamen und Begriffe bleiben erkennbar. Am Ende eine Liste der Stellen, an denen du deutlich vom Original abweichen musstest.",
+      "title": "Übersetzung"
+     }
+    ],
+    "commonCommands": "none",
+    "icon": "video",
+    "launchMode": "background",
+    "metrics": [
+     "words",
+     "duration",
+     "deadline",
+     "publishDate"
+    ],
+    "name": "Video",
+    "permissions": "filesOnly",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "folders": {
+      "_0": "~/Documents/Video"
+     }
+    },
+    "stages": [
+     "Idee",
+     "Recherche",
+     "Skript",
+     "Aufnahme",
+     "Schnitt",
+     "veröffentlicht"
+    ],
+    "template": "video"
+   },
+   "title": "Video (YouTube, Shorts, Reels)"
+  },
+  "en": {
+   "mode": {
+    "calendar": "dates",
+    "card": "projectMD",
+    "commands": [
+     {
+      "id": "video-hooks",
+      "input": "mainFile",
+      "output": "hooks.md",
+      "task": "Suggest 5 openings for the video — the first 5–10 seconds that keep a viewer watching. Video: {format}, based on this script. Use different devices: a surprising fact, a question to the viewer, a promised result, a mini-story, arguing with a common belief. For each one — the text itself (as it is said aloud) and one line on what it plays on. At the end — which one you would pick and why, in one sentence.",
+      "title": "Hooks"
+     },
+     {
+      "id": "video-shorts",
+      "input": "mainFile",
+      "output": "shorts-script.md",
+      "task": "Turn the script into a vertical video of up to 60 seconds — about 140–150 words. Keep the main idea and the strongest moment, cut intros and repetition. The first line must hook at once, the last should make people want to watch the full video or subscribe. Write the way people speak: short sentences, no officialese. State the word count at the end.",
+      "title": "Shorts version"
+     },
+     {
+      "id": "video-description",
+      "input": "mainFile",
+      "output": "description.md",
+      "task": "Prepare everything for publishing on YouTube: 1) a description — 2–3 paragraphs, the first two lines matter most (they show before «more»), no clickbait; 2) timestamps for the meaningful parts of the script as 00:00 — Title (estimate time at 150 words per minute, the first mark is 00:00); 3) 10–15 comma-separated tags; 4) 3 hashtags. Same language as the script.",
+      "title": "Description and timestamps"
+     },
+     {
+      "id": "video-titles",
+      "input": "mainFile",
+      "output": "titles.md",
+      "task": "Suggest 10 titles for the video — up to 60 characters, honest (they promise what the video has), different in approach: benefit, curiosity, a concrete result, a number, a question. Mark the best 3. Then 3 thumbnail ideas: what is in the frame, large text on the thumbnail (up to 4 words), the emotion.",
+      "title": "Titles and thumbnails"
+     },
+     {
+      "id": "video-facts",
+      "input": "mainFile",
+      "output": "facts.md",
+      "service": "claude-code",
+      "task": "Find every checkable claim in the script: numbers, dates, names, quotes, cause-and-effect statements. For each: the claim itself, how disputable it is (solid / check / doubtful) and why, what exactly to check and where. Do not fix anything in the script and do not invent sources — if unsure, say so.",
+      "title": "Fact check"
+     },
+     {
+      "asks": "Language",
+      "id": "video-translate",
+      "input": "mainFile",
+      "output": "script-{language}.md",
+      "task": "Translate the script into {language} for voice-over: keep the tone, jokes and rhythm of speech, adapt idioms and examples to that audience, do not translate word for word. Keep proper names and terms recognisable. At the end — a list of places where you had to depart noticeably from the original.",
+      "title": "Translation"
+     }
+    ],
+    "commonCommands": "none",
+    "icon": "video",
+    "launchMode": "background",
+    "metrics": [
+     "words",
+     "duration",
+     "deadline",
+     "publishDate"
+    ],
+    "name": "Video",
+    "permissions": "filesOnly",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "folders": {
+      "_0": "~/Documents/Video"
+     }
+    },
+    "stages": [
+     "idea",
+     "research",
+     "script",
+     "recording",
+     "editing",
+     "published"
+    ],
+    "template": "video"
+   },
+   "title": "Video (YouTube, Shorts, Reels)"
+  },
+  "es": {
+   "mode": {
+    "calendar": "dates",
+    "card": "projectMD",
+    "commands": [
+     {
+      "id": "video-hooks",
+      "input": "mainFile",
+      "output": "ganchos.md",
+      "task": "Propón 5 comienzos para el vídeo: los primeros 5–10 segundos que mantengan al espectador. Vídeo: {format}, a partir de este guion. Usa recursos distintos: un dato sorprendente, una pregunta al espectador, la promesa de un resultado, una mini historia, discutir una creencia común. Para cada uno: el texto en sí (tal como se dice en voz alta) y una línea sobre en qué se apoya. Al final, cuál elegirías y por qué, en una frase.",
+      "title": "Ganchos"
+     },
+     {
+      "id": "video-shorts",
+      "input": "mainFile",
+      "output": "guion-shorts.md",
+      "task": "Convierte el guion en un vídeo vertical de hasta 60 segundos, unas 140–150 palabras. Conserva la idea principal y el momento más fuerte, quita introducciones y repeticiones. La primera frase debe enganchar al instante; la última, dejar ganas de ver el vídeo completo o suscribirse. Escribe como se habla: frases cortas, sin lenguaje burocrático. Indica el número de palabras al final.",
+      "title": "Versión para Shorts"
+     },
+     {
+      "id": "video-description",
+      "input": "mainFile",
+      "output": "descripcion.md",
+      "task": "Prepara todo para publicar en YouTube: 1) una descripción de 2–3 párrafos, las dos primeras líneas son las más importantes (se ven antes de «más»), sin clickbait; 2) marcas de tiempo por las partes del guion en el formato 00:00 — Título (calcula el tiempo a 150 palabras por minuto, la primera marca es 00:00); 3) 10–15 etiquetas separadas por comas; 4) 3 hashtags. En el idioma del guion.",
+      "title": "Descripción y marcas de tiempo"
+     },
+     {
+      "id": "video-titles",
+      "input": "mainFile",
+      "output": "titulos.md",
+      "task": "Propón 10 títulos para el vídeo, de hasta 60 caracteres, honestos (prometen lo que hay en el vídeo), con enfoques distintos: beneficio, curiosidad, un resultado concreto, una cifra, una pregunta. Marca los 3 mejores. Después, 3 ideas de miniatura: qué hay en el encuadre, el texto grande (hasta 4 palabras), la emoción.",
+      "title": "Títulos y miniaturas"
+     },
+     {
+      "id": "video-facts",
+      "input": "mainFile",
+      "output": "datos.md",
+      "service": "claude-code",
+      "task": "Encuentra en el guion todas las afirmaciones verificables: cifras, fechas, nombres, citas, afirmaciones de causa y efecto. Para cada una: la afirmación, cuán discutible es (sólida / comprobar / dudosa) y por qué, qué comprobar exactamente y dónde. No corrijas nada del guion ni inventes fuentes; si no estás seguro, dilo.",
+      "title": "Verificación de datos"
+     },
+     {
+      "asks": "Idioma",
+      "id": "video-translate",
+      "input": "mainFile",
+      "output": "guion-{language}.md",
+      "task": "Traduce el guion al {language} para locución: conserva el tono, los chistes y el ritmo del habla, adapta modismos y ejemplos a ese público, no traduzcas palabra por palabra. Mantén reconocibles los nombres propios y los términos. Al final, una lista de los lugares donde tuviste que alejarte notablemente del original.",
+      "title": "Traducción"
+     }
+    ],
+    "commonCommands": "none",
+    "icon": "video",
+    "launchMode": "background",
+    "metrics": [
+     "words",
+     "duration",
+     "deadline",
+     "publishDate"
+    ],
+    "name": "Vídeo",
+    "permissions": "filesOnly",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "folders": {
+      "_0": "~/Documents/Video"
+     }
+    },
+    "stages": [
+     "idea",
+     "investigación",
+     "guion",
+     "grabación",
+     "edición",
+     "publicado"
+    ],
+    "template": "video"
+   },
+   "title": "Vídeo (YouTube, Shorts, Reels)"
+  },
+  "fr": {
+   "mode": {
+    "calendar": "dates",
+    "card": "projectMD",
+    "commands": [
+     {
+      "id": "video-hooks",
+      "input": "mainFile",
+      "output": "accroches.md",
+      "task": "Propose 5 débuts de vidéo — les 5–10 premières secondes qui retiennent le spectateur. Vidéo : {format}, à partir de ce script. Utilise des procédés différents : un fait surprenant, une question au spectateur, la promesse d'un résultat, une mini-histoire, la contestation d'une idée reçue. Pour chacun : le texte lui-même (tel qu'il se dit à voix haute) et une ligne sur ce sur quoi il joue. À la fin, lequel tu choisirais et pourquoi, en une phrase.",
+      "title": "Accroches"
+     },
+     {
+      "id": "video-shorts",
+      "input": "mainFile",
+      "output": "script-shorts.md",
+      "task": "Transforme le script en vidéo verticale de 60 secondes maximum — environ 140–150 mots. Garde l'idée principale et le moment le plus fort, supprime les introductions et les répétitions. La première phrase doit accrocher tout de suite, la dernière donner envie de voir la vidéo complète ou de s'abonner. Écris comme on parle : phrases courtes, sans jargon administratif. Indique le nombre de mots à la fin.",
+      "title": "Version Shorts"
+     },
+     {
+      "id": "video-description",
+      "input": "mainFile",
+      "output": "description.md",
+      "task": "Prépare tout pour la publication sur YouTube : 1) une description de 2–3 paragraphes, les deux premières lignes comptent le plus (elles s'affichent avant «plus»), sans putaclic ; 2) des horodatages des parties du script au format 00:00 — Titre (estime la durée à 150 mots par minute, la première marque est 00:00) ; 3) 10–15 tags séparés par des virgules ; 4) 3 hashtags. Dans la langue du script.",
+      "title": "Description et horodatages"
+     },
+     {
+      "id": "video-titles",
+      "input": "mainFile",
+      "output": "titres.md",
+      "task": "Propose 10 titres pour la vidéo — 60 caractères maximum, honnêtes (ils promettent ce que contient la vidéo), avec des approches différentes : bénéfice, curiosité, résultat concret, chiffre, question. Marque les 3 meilleurs. Puis 3 idées de miniature : ce qu'il y a dans le cadre, le gros texte (4 mots maximum), l'émotion.",
+      "title": "Titres et miniatures"
+     },
+     {
+      "id": "video-facts",
+      "input": "mainFile",
+      "output": "faits.md",
+      "service": "claude-code",
+      "task": "Trouve dans le script toutes les affirmations vérifiables : chiffres, dates, noms, citations, affirmations de cause à effet. Pour chacune : l'affirmation, son degré de fiabilité (solide / à vérifier / douteuse) et pourquoi, quoi vérifier exactement et où. Ne corrige rien dans le script et n'invente pas de sources — si tu n'es pas sûr, dis-le.",
+      "title": "Vérification des faits"
+     },
+     {
+      "asks": "Langue",
+      "id": "video-translate",
+      "input": "mainFile",
+      "output": "script-{language}.md",
+      "task": "Traduis le script en {language} pour une voix off : garde le ton, les blagues et le rythme du discours, adapte les expressions et les exemples à ce public, ne traduis pas mot à mot. Garde les noms propres et les termes reconnaissables. À la fin, une liste des passages où il a fallu s'écarter nettement de l'original.",
+      "title": "Traduction"
+     }
+    ],
+    "commonCommands": "none",
+    "icon": "video",
+    "launchMode": "background",
+    "metrics": [
+     "words",
+     "duration",
+     "deadline",
+     "publishDate"
+    ],
+    "name": "Vidéo",
+    "permissions": "filesOnly",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "folders": {
+      "_0": "~/Documents/Video"
+     }
+    },
+    "stages": [
+     "idée",
+     "recherche",
+     "script",
+     "tournage",
+     "montage",
+     "publié"
+    ],
+    "template": "video"
+   },
+   "title": "Vidéo (YouTube, Shorts, Reels)"
+  },
+  "id": {
+   "mode": {
+    "calendar": "dates",
+    "card": "projectMD",
+    "commands": [
+     {
+      "id": "video-hooks",
+      "input": "mainFile",
+      "output": "hook.md",
+      "task": "Usulkan 5 pembuka video — 5–10 detik pertama yang membuat penonton bertahan. Video: {format}, berdasarkan naskah ini. Pakai teknik berbeda: fakta mengejutkan, pertanyaan ke penonton, janji hasil, cerita mini, membantah anggapan umum. Untuk masing-masing: teksnya (seperti diucapkan) dan satu baris tentang apa yang dimainkannya. Di akhir, satu kalimat: mana yang Anda pilih dan kenapa.",
+      "title": "Hook"
+     },
+     {
+      "id": "video-shorts",
+      "input": "mainFile",
+      "output": "naskah-shorts.md",
+      "task": "Ubah naskah menjadi video vertikal maksimal 60 detik — sekitar 140–150 kata. Pertahankan ide utama dan momen terkuat, buang pembukaan dan pengulangan. Kalimat pertama harus langsung menarik, kalimat terakhir membuat orang ingin menonton video lengkap atau berlangganan. Tulis seperti orang bicara: kalimat pendek, tanpa bahasa birokratis. Sebutkan jumlah kata di akhir.",
+      "title": "Versi Shorts"
+     },
+     {
+      "id": "video-description",
+      "input": "mainFile",
+      "output": "deskripsi.md",
+      "task": "Siapkan semua untuk YouTube: 1) deskripsi 2–3 paragraf, dua baris pertama paling penting (terlihat sebelum «selengkapnya»), tanpa clickbait; 2) stempel waktu per bagian naskah dalam format 00:00 — Judul (perkirakan waktu dengan 150 kata per menit, yang pertama 00:00); 3) 10–15 tag dipisah koma; 4) 3 tagar. Dalam bahasa naskah.",
+      "title": "Deskripsi dan stempel waktu"
+     },
+     {
+      "id": "video-titles",
+      "input": "mainFile",
+      "output": "judul.md",
+      "task": "Usulkan 10 judul video — maksimal 60 karakter, jujur (menjanjikan isi video), dengan pendekatan berbeda: manfaat, rasa penasaran, hasil konkret, angka, pertanyaan. Tandai 3 terbaik. Lalu 3 ide thumbnail: apa yang ada di bingkai, teks besar (maksimal 4 kata), emosinya.",
+      "title": "Judul dan thumbnail"
+     },
+     {
+      "id": "video-facts",
+      "input": "mainFile",
+      "output": "fakta.md",
+      "service": "claude-code",
+      "task": "Temukan semua klaim yang bisa dicek di naskah: angka, tanggal, nama, kutipan, klaim sebab-akibat. Untuk masing-masing: klaimnya, seberapa diragukan (kuat / perlu dicek / meragukan) dan kenapa, apa yang dicek dan di mana. Jangan ubah naskah dan jangan mengarang sumber — jika tidak yakin, katakan.",
+      "title": "Cek fakta"
+     },
+     {
+      "asks": "Bahasa",
+      "id": "video-translate",
+      "input": "mainFile",
+      "output": "naskah-{language}.md",
+      "task": "Terjemahkan naskah ke {language} untuk sulih suara: pertahankan nada, lelucon, dan ritme bicara, sesuaikan ungkapan dan contoh dengan penonton itu, jangan kata per kata. Nama diri dan istilah tetap dikenali. Di akhir, daftar bagian yang terpaksa banyak menyimpang dari aslinya.",
+      "title": "Terjemahan"
+     }
+    ],
+    "commonCommands": "none",
+    "icon": "video",
+    "launchMode": "background",
+    "metrics": [
+     "words",
+     "duration",
+     "deadline",
+     "publishDate"
+    ],
+    "name": "Video",
+    "permissions": "filesOnly",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "folders": {
+      "_0": "~/Documents/Video"
+     }
+    },
+    "stages": [
+     "ide",
+     "riset",
+     "naskah",
+     "rekaman",
+     "penyuntingan",
+     "terbit"
+    ],
+    "template": "video"
+   },
+   "title": "Video (YouTube, Shorts, Reels)"
+  },
+  "it": {
+   "mode": {
+    "calendar": "dates",
+    "card": "projectMD",
+    "commands": [
+     {
+      "id": "video-hooks",
+      "input": "mainFile",
+      "output": "hook.md",
+      "task": "Proponi 5 aperture per il video — i primi 5–10 secondi che trattengono lo spettatore. Video: {format}, basato su questo copione. Usa espedienti diversi: un fatto sorprendente, una domanda allo spettatore, la promessa di un risultato, una mini-storia, la smentita di un luogo comune. Per ognuna: il testo (come si dice ad alta voce) e una riga su cosa fa leva. Alla fine, in una frase, quale sceglieresti e perché.",
+      "title": "Hook"
+     },
+     {
+      "id": "video-shorts",
+      "input": "mainFile",
+      "output": "copione-shorts.md",
+      "task": "Ricava dal copione un video verticale di massimo 60 secondi — circa 140–150 parole. Tieni l'idea principale e il momento più forte, taglia introduzioni e ripetizioni. La prima frase deve agganciare subito, l'ultima far venire voglia di vedere il video completo o di iscriversi. Scrivi come si parla: frasi brevi, niente burocratese. Indica alla fine il numero di parole.",
+      "title": "Versione Shorts"
+     },
+     {
+      "id": "video-description",
+      "input": "mainFile",
+      "output": "descrizione.md",
+      "task": "Prepara tutto per la pubblicazione su YouTube: 1) una descrizione di 2–3 paragrafi, le prime due righe sono le più importanti (si vedono prima di «altro»), senza clickbait; 2) timestamp per le parti del copione nel formato 00:00 — Titolo (stima il tempo a 150 parole al minuto, il primo è 00:00); 3) 10–15 tag separati da virgole; 4) 3 hashtag. Nella lingua del copione.",
+      "title": "Descrizione e timestamp"
+     },
+     {
+      "id": "video-titles",
+      "input": "mainFile",
+      "output": "titoli.md",
+      "task": "Proponi 10 titoli per il video — massimo 60 caratteri, onesti (promettono ciò che c'è nel video), con approcci diversi: beneficio, curiosità, risultato concreto, un numero, una domanda. Segna i 3 migliori. Poi 3 idee di miniatura: cosa c'è nell'inquadratura, il testo grande (massimo 4 parole), l'emozione.",
+      "title": "Titoli e miniature"
+     },
+     {
+      "id": "video-facts",
+      "input": "mainFile",
+      "output": "fatti.md",
+      "service": "claude-code",
+      "task": "Trova nel copione tutte le affermazioni verificabili: numeri, date, nomi, citazioni, affermazioni di causa ed effetto. Per ognuna: l'affermazione, quanto è discutibile (solida / da verificare / dubbia) e perché, cosa verificare esattamente e dove. Non correggere nulla nel copione e non inventare fonti — se non sei sicuro, dillo.",
+      "title": "Verifica dei fatti"
+     },
+     {
+      "asks": "Lingua",
+      "id": "video-translate",
+      "input": "mainFile",
+      "output": "copione-{language}.md",
+      "task": "Traduci il copione in {language} per lo speaker: mantieni il tono, le battute e il ritmo del parlato, adatta modi di dire ed esempi a quel pubblico, non tradurre parola per parola. Nomi propri e termini restano riconoscibili. Alla fine, un elenco dei punti in cui hai dovuto discostarti molto dall'originale.",
+      "title": "Traduzione"
+     }
+    ],
+    "commonCommands": "none",
+    "icon": "video",
+    "launchMode": "background",
+    "metrics": [
+     "words",
+     "duration",
+     "deadline",
+     "publishDate"
+    ],
+    "name": "Video",
+    "permissions": "filesOnly",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "folders": {
+      "_0": "~/Documents/Video"
+     }
+    },
+    "stages": [
+     "idea",
+     "ricerca",
+     "copione",
+     "registrazione",
+     "montaggio",
+     "pubblicato"
+    ],
+    "template": "video"
+   },
+   "title": "Video (YouTube, Shorts, Reels)"
+  },
+  "ja": {
+   "mode": {
+    "calendar": "dates",
+    "card": "projectMD",
+    "commands": [
+     {
+      "id": "video-hooks",
+      "input": "mainFile",
+      "output": "フック.md",
+      "task": "動画の冒頭を 5 案出してください — 視聴者を引き留める最初の 5〜10 秒です。動画: {format}、この台本がベース。手法を変えてください: 意外な事実、視聴者への問いかけ、結果の約束、小さな物語、よくある思い込みへの反論。各案に、声に出す台本そのものと、何に訴えるかを 1 行で。最後に、どれを選ぶかとその理由を 1 文で。",
+      "title": "フック"
+     },
+     {
+      "id": "video-shorts",
+      "input": "mainFile",
+      "output": "台本-shorts.md",
+      "task": "台本を 60 秒以内の縦型動画にしてください — 約 140〜150 語。主旨と一番強い場面を残し、前置きと繰り返しを削ります。最初の一言ですぐ引きつけ、最後は本編を見たくなるかチャンネル登録したくなるように。話し言葉で: 短い文、堅い言い回しなし。最後に語数を書いてください。",
+      "title": "Shorts 版"
+     },
+     {
+      "id": "video-description",
+      "input": "mainFile",
+      "output": "説明文.md",
+      "task": "YouTube 公開用に一式を用意してください: 1) 2〜3 段落の説明文。最初の 2 行が最も重要 (「もっと見る」の前に見える)、釣りタイトル風は禁止; 2) 台本の区切りごとのタイムスタンプを 00:00 — 見出し の形式で (1 分 150 語で見積もり、最初は 00:00); 3) カンマ区切りのタグ 10〜15 個; 4) ハッシュタグ 3 個。台本と同じ言語で。",
+      "title": "説明文とタイムスタンプ"
+     },
+     {
+      "id": "video-titles",
+      "input": "mainFile",
+      "output": "タイトル.md",
+      "task": "動画のタイトルを 10 案 — 60 文字以内で正直に (動画の中身どおりの約束)、切り口を変えて: 得られること、好奇心、具体的な結果、数字、問いかけ。ベスト 3 に印を。次にサムネイル案を 3 つ: 画面に映るもの、大きな文字 (4 語以内)、感情。",
+      "title": "タイトルとサムネイル"
+     },
+     {
+      "id": "video-facts",
+      "input": "mainFile",
+      "output": "事実確認.md",
+      "service": "claude-code",
+      "task": "台本中の検証できる主張をすべて挙げてください: 数字、日付、名前、引用、因果関係の主張。それぞれについて: 主張、どのくらい怪しいか (確実 / 要確認 / 疑わしい) とその理由、何をどこで確かめるか。台本は直さず、出典を作らないでください — 自信がなければそう書いてください。",
+      "title": "ファクトチェック"
+     },
+     {
+      "asks": "言語",
+      "id": "video-translate",
+      "input": "mainFile",
+      "output": "台本-{language}.md",
+      "task": "ナレーション用に台本を {language} に翻訳してください: トーン、ジョーク、話のリズムを保ち、慣用句や例はその視聴者に合わせ、逐語訳はしないこと。固有名詞と用語はわかる形で残してください。最後に、原文から大きく離れた箇所の一覧を。",
+      "title": "翻訳"
+     }
+    ],
+    "commonCommands": "none",
+    "icon": "video",
+    "launchMode": "background",
+    "metrics": [
+     "words",
+     "duration",
+     "deadline",
+     "publishDate"
+    ],
+    "name": "動画",
+    "permissions": "filesOnly",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "folders": {
+      "_0": "~/Documents/Video"
+     }
+    },
+    "stages": [
+     "アイデア",
+     "リサーチ",
+     "台本",
+     "収録",
+     "編集",
+     "公開済み"
+    ],
+    "template": "video"
+   },
+   "title": "動画 (YouTube、Shorts、Reels)"
+  },
+  "ko": {
+   "mode": {
+    "calendar": "dates",
+    "card": "projectMD",
+    "commands": [
+     {
+      "id": "video-hooks",
+      "input": "mainFile",
+      "output": "훅.md",
+      "task": "동영상 도입부를 5가지 제안하세요 — 시청자를 붙잡는 처음 5~10초입니다. 동영상: {format}, 이 대본을 바탕으로. 서로 다른 방법을 쓰세요: 놀라운 사실, 시청자에게 던지는 질문, 결과의 약속, 짧은 이야기, 흔한 통념 반박. 각각 소리 내어 말할 문장과 무엇을 노리는지 한 줄. 끝에 어느 것을 고를지와 이유를 한 문장으로.",
+      "title": "훅"
+     },
+     {
+      "id": "video-shorts",
+      "input": "mainFile",
+      "output": "대본-shorts.md",
+      "task": "대본을 60초 이하 세로 동영상으로 만드세요 — 약 140~150단어. 핵심 생각과 가장 강한 순간은 남기고 도입과 반복은 빼세요. 첫 문장은 바로 사로잡고, 마지막 문장은 전체 영상을 보거나 구독하고 싶게 만들어야 합니다. 말하듯이 쓰세요: 짧은 문장, 딱딱한 표현 없이. 끝에 단어 수를 적으세요.",
+      "title": "Shorts 버전"
+     },
+     {
+      "id": "video-description",
+      "input": "mainFile",
+      "output": "설명.md",
+      "task": "YouTube 게시용으로 모두 준비하세요: 1) 2~3문단 설명, 첫 두 줄이 가장 중요합니다 («더보기» 전에 보임), 낚시성 표현 금지; 2) 대본 구간별 타임스탬프를 00:00 — 제목 형식으로 (분당 150단어로 추정, 첫 표시는 00:00); 3) 쉼표로 구분한 태그 10~15개; 4) 해시태그 3개. 대본과 같은 언어로.",
+      "title": "설명과 타임스탬프"
+     },
+     {
+      "id": "video-titles",
+      "input": "mainFile",
+      "output": "제목.md",
+      "task": "동영상 제목을 10개 제안하세요 — 60자 이내, 정직하게 (영상 내용대로 약속), 접근을 다르게: 이점, 호기심, 구체적 결과, 숫자, 질문. 가장 좋은 3개를 표시하세요. 그다음 썸네일 아이디어 3개: 화면에 담길 것, 큰 글씨 (4단어 이내), 감정.",
+      "title": "제목과 썸네일"
+     },
+     {
+      "id": "video-facts",
+      "input": "mainFile",
+      "output": "사실확인.md",
+      "service": "claude-code",
+      "task": "대본에서 확인 가능한 주장을 모두 찾으세요: 숫자, 날짜, 이름, 인용, 인과 관계 주장. 각각에 대해: 주장, 얼마나 논란이 있는지 (확실 / 확인 필요 / 의심스러움)와 이유, 무엇을 어디서 확인할지. 대본은 고치지 말고 출처를 지어내지 마세요 — 확실하지 않으면 그렇다고 쓰세요.",
+      "title": "사실 확인"
+     },
+     {
+      "asks": "언어",
+      "id": "video-translate",
+      "input": "mainFile",
+      "output": "대본-{language}.md",
+      "task": "내레이션용으로 대본을 {language}(으)로 번역하세요: 어조, 농담, 말의 리듬을 살리고, 관용구와 예시는 그 시청자에게 맞추며, 직역하지 마세요. 고유명사와 용어는 알아볼 수 있게 두세요. 끝에 원문에서 크게 벗어난 부분의 목록을.",
+      "title": "번역"
+     }
+    ],
+    "commonCommands": "none",
+    "icon": "video",
+    "launchMode": "background",
+    "metrics": [
+     "words",
+     "duration",
+     "deadline",
+     "publishDate"
+    ],
+    "name": "동영상",
+    "permissions": "filesOnly",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "folders": {
+      "_0": "~/Documents/Video"
+     }
+    },
+    "stages": [
+     "아이디어",
+     "조사",
+     "대본",
+     "촬영",
+     "편집",
+     "게시됨"
+    ],
+    "template": "video"
+   },
+   "title": "동영상 (YouTube, Shorts, Reels)"
+  },
+  "pl": {
+   "mode": {
+    "calendar": "dates",
+    "card": "projectMD",
+    "commands": [
+     {
+      "id": "video-hooks",
+      "input": "mainFile",
+      "output": "hooki.md",
+      "task": "Zaproponuj 5 początków filmu — pierwsze 5–10 sekund, które zatrzymają widza. Film: {format}, na podstawie tego scenariusza. Użyj różnych chwytów: zaskakujący fakt, pytanie do widza, obietnica wyniku, mini-historia, polemika z popularnym przekonaniem. Dla każdego: sam tekst (tak, jak się go mówi) i jedna linijka, na co gra. Na koniec jednym zdaniem: który byś wybrał i dlaczego.",
+      "title": "Hooki"
+     },
+     {
+      "id": "video-shorts",
+      "input": "mainFile",
+      "output": "scenariusz-shorts.md",
+      "task": "Zrób ze scenariusza pionowy film do 60 sekund — około 140–150 słów. Zachowaj główną myśl i najmocniejszy moment, wytnij wstępy i powtórzenia. Pierwsze zdanie ma od razu przyciągać, ostatnie — zachęcać do obejrzenia całego filmu albo subskrypcji. Pisz, jak się mówi: krótkie zdania, bez urzędowego stylu. Na końcu podaj liczbę słów.",
+      "title": "Wersja Shorts"
+     },
+     {
+      "id": "video-description",
+      "input": "mainFile",
+      "output": "opis.md",
+      "task": "Przygotuj wszystko do publikacji na YouTube: 1) opis z 2–3 akapitów, pierwsze dwie linijki są najważniejsze (widać je przed «więcej»), bez clickbaitu; 2) znaczniki czasu dla części scenariusza w formacie 00:00 — Tytuł (szacuj czas przy 150 słowach na minutę, pierwszy to 00:00); 3) 10–15 tagów oddzielonych przecinkami; 4) 3 hashtagi. W języku scenariusza.",
+      "title": "Opis i znaczniki czasu"
+     },
+     {
+      "id": "video-titles",
+      "input": "mainFile",
+      "output": "tytuly.md",
+      "task": "Zaproponuj 10 tytułów filmu — do 60 znaków, uczciwych (obiecują to, co jest w filmie), z różnym podejściem: korzyść, ciekawość, konkretny wynik, liczba, pytanie. Zaznacz 3 najlepsze. Potem 3 pomysły na miniaturę: co jest w kadrze, duży napis (do 4 słów), emocja.",
+      "title": "Tytuły i miniatury"
+     },
+     {
+      "id": "video-facts",
+      "input": "mainFile",
+      "output": "fakty.md",
+      "service": "claude-code",
+      "task": "Znajdź w scenariuszu wszystkie sprawdzalne twierdzenia: liczby, daty, nazwiska, cytaty, twierdzenia przyczynowo-skutkowe. Dla każdego: twierdzenie, na ile jest wątpliwe (pewne / sprawdzić / wątpliwe) i dlaczego, co dokładnie i gdzie sprawdzić. Niczego nie poprawiaj w scenariuszu i nie wymyślaj źródeł — jeśli nie masz pewności, napisz to.",
+      "title": "Sprawdzenie faktów"
+     },
+     {
+      "asks": "Język",
+      "id": "video-translate",
+      "input": "mainFile",
+      "output": "scenariusz-{language}.md",
+      "task": "Przetłumacz scenariusz na {language} do nagrania lektorskiego: zachowaj ton, żarty i rytm mowy, dopasuj idiomy i przykłady do tej widowni, nie tłumacz słowo w słowo. Nazwy własne i terminy mają zostać rozpoznawalne. Na końcu lista miejsc, w których trzeba było wyraźnie odejść od oryginału.",
+      "title": "Tłumaczenie"
+     }
+    ],
+    "commonCommands": "none",
+    "icon": "video",
+    "launchMode": "background",
+    "metrics": [
+     "words",
+     "duration",
+     "deadline",
+     "publishDate"
+    ],
+    "name": "Wideo",
+    "permissions": "filesOnly",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "folders": {
+      "_0": "~/Documents/Wideo"
+     }
+    },
+    "stages": [
+     "pomysł",
+     "research",
+     "scenariusz",
+     "nagranie",
+     "montaż",
+     "opublikowane"
+    ],
+    "template": "video"
+   },
+   "title": "Wideo (YouTube, Shorts, Reels)"
+  },
+  "pt-BR": {
+   "mode": {
+    "calendar": "dates",
+    "card": "projectMD",
+    "commands": [
+     {
+      "id": "video-hooks",
+      "input": "mainFile",
+      "output": "ganchos.md",
+      "task": "Sugira 5 aberturas para o vídeo — os primeiros 5–10 segundos que prendem o espectador. Vídeo: {format}, com base neste roteiro. Use recursos diferentes: um fato surpreendente, uma pergunta ao espectador, a promessa de um resultado, uma mini-história, contestar uma crença comum. Para cada uma: o texto em si (como é dito em voz alta) e uma linha sobre no que ela se apoia. No final, qual você escolheria e por quê, em uma frase.",
+      "title": "Ganchos"
+     },
+     {
+      "id": "video-shorts",
+      "input": "mainFile",
+      "output": "roteiro-shorts.md",
+      "task": "Transforme o roteiro em um vídeo vertical de até 60 segundos — cerca de 140–150 palavras. Mantenha a ideia principal e o momento mais forte, corte introduções e repetições. A primeira frase deve prender na hora; a última, dar vontade de ver o vídeo completo ou se inscrever. Escreva como se fala: frases curtas, sem linguagem burocrática. Informe o número de palavras no final.",
+      "title": "Versão para Shorts"
+     },
+     {
+      "id": "video-description",
+      "input": "mainFile",
+      "output": "descricao.md",
+      "task": "Prepare tudo para publicar no YouTube: 1) uma descrição de 2–3 parágrafos, as duas primeiras linhas são as mais importantes (aparecem antes de «mais»), sem clickbait; 2) marcações de tempo das partes do roteiro no formato 00:00 — Título (estime o tempo a 150 palavras por minuto, a primeira marca é 00:00); 3) 10–15 tags separadas por vírgula; 4) 3 hashtags. No idioma do roteiro.",
+      "title": "Descrição e marcações de tempo"
+     },
+     {
+      "id": "video-titles",
+      "input": "mainFile",
+      "output": "titulos.md",
+      "task": "Sugira 10 títulos para o vídeo — até 60 caracteres, honestos (prometem o que o vídeo tem), com abordagens diferentes: benefício, curiosidade, um resultado concreto, um número, uma pergunta. Marque os 3 melhores. Depois, 3 ideias de miniatura: o que aparece no quadro, o texto grande (até 4 palavras), a emoção.",
+      "title": "Títulos e miniaturas"
+     },
+     {
+      "id": "video-facts",
+      "input": "mainFile",
+      "output": "fatos.md",
+      "service": "claude-code",
+      "task": "Encontre no roteiro todas as afirmações verificáveis: números, datas, nomes, citações, afirmações de causa e efeito. Para cada uma: a afirmação, quão discutível ela é (sólida / verificar / duvidosa) e por quê, o que exatamente verificar e onde. Não corrija nada no roteiro nem invente fontes — se não tiver certeza, diga.",
+      "title": "Checagem de fatos"
+     },
+     {
+      "asks": "Idioma",
+      "id": "video-translate",
+      "input": "mainFile",
+      "output": "roteiro-{language}.md",
+      "task": "Traduza o roteiro para {language} para narração: mantenha o tom, as piadas e o ritmo da fala, adapte expressões e exemplos a esse público, não traduza palavra por palavra. Mantenha reconhecíveis nomes próprios e termos. No final, uma lista dos trechos em que foi preciso se afastar bastante do original.",
+      "title": "Tradução"
+     }
+    ],
+    "commonCommands": "none",
+    "icon": "video",
+    "launchMode": "background",
+    "metrics": [
+     "words",
+     "duration",
+     "deadline",
+     "publishDate"
+    ],
+    "name": "Vídeo",
+    "permissions": "filesOnly",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "folders": {
+      "_0": "~/Documents/Video"
+     }
+    },
+    "stages": [
+     "ideia",
+     "pesquisa",
+     "roteiro",
+     "gravação",
+     "edição",
+     "publicado"
+    ],
+    "template": "video"
+   },
+   "title": "Vídeo (YouTube, Shorts, Reels)"
+  },
+  "ru": {
+   "mode": {
+    "calendar": "dates",
+    "card": "projectMD",
+    "commands": [
+     {
+      "id": "video-hooks",
+      "input": "mainFile",
+      "output": "хуки.md",
+      "task": "Предложи 5 вариантов начала ролика — первые 5–10 секунд, которые удержат зрителя. Ролик: {формат}, основа — этот сценарий. Используй разные приёмы: неожиданный факт, вопрос к зрителю, обещание результата, мини-история, спор с распространённым мнением. Для каждого варианта — сам текст (как его произнести вслух) и одна строка, на что он давит. В конце — какой вариант ты выбрал бы и почему, одним предложением.",
+      "title": "Хуки"
+     },
+     {
+      "id": "video-shorts",
+      "input": "mainFile",
+      "output": "сценарий-shorts.md",
+      "task": "Сделай из сценария версию для вертикального ролика до 60 секунд — примерно 140–150 слов. Сохрани главную мысль и самый сильный момент, убери вступления и повторы. Первая фраза должна цеплять сразу, последняя — оставлять желание посмотреть полный ролик или подписаться. Пиши так, как говорят вслух: короткие фразы, без канцелярита. В конце укажи число слов.",
+      "title": "Версия для Shorts"
+     },
+     {
+      "id": "video-description",
+      "input": "mainFile",
+      "output": "описание.md",
+      "task": "Подготовь всё для публикации на YouTube: 1) описание — 2–3 абзаца, первые две строки самые важные (их видно до «ещё»), без кликбейта; 2) таймкоды по смысловым частям сценария в формате 00:00 — Название (оцени время по 150 словам в минуту, первая метка 00:00); 3) 10–15 тегов через запятую; 4) 3 хештега. Язык — как у сценария.",
+      "title": "Описание и таймкоды"
+     },
+     {
+      "id": "video-titles",
+      "input": "mainFile",
+      "output": "заголовки.md",
+      "task": "Предложи 10 вариантов названия ролика — до 60 символов, честных (обещают то, что есть в ролике), разных по подходу: польза, любопытство, конкретный результат, цифра, вопрос. Отметь 3 лучших. Затем — 3 идеи обложки: что в кадре, крупный текст на обложке (до 4 слов), эмоция.",
+      "title": "Заголовки и обложки"
+     },
+     {
+      "id": "video-facts",
+      "input": "mainFile",
+      "output": "факты.md",
+      "service": "claude-code",
+      "task": "Найди в сценарии все проверяемые утверждения: цифры, даты, имена, цитаты, причинно-следственные заявления. Для каждого: само утверждение, насколько оно спорно (надёжно / проверить / сомнительно) и почему, что именно и где проверить. Ничего не исправляй в сценарии и не придумывай источники — если не уверен, так и пиши.",
+      "title": "Проверка фактов"
+     },
+     {
+      "asks": "Язык",
+      "id": "video-translate",
+      "input": "mainFile",
+      "output": "сценарий-{язык}.md",
+      "task": "Переведи сценарий на {язык} для озвучки: сохрани тон, шутки и ритм речи, адаптируй идиомы и примеры под зрителя этого языка, не переводи дословно. Имена собственные и термины оставь узнаваемыми. В конце — список мест, где пришлось заметно отойти от оригинала.",
+      "title": "Перевод"
+     }
+    ],
+    "commonCommands": "none",
+    "icon": "video",
+    "launchMode": "background",
+    "metrics": [
+     "words",
+     "duration",
+     "deadline",
+     "publishDate"
+    ],
+    "name": "Видео",
+    "permissions": "filesOnly",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "folders": {
+      "_0": "~/Documents/Видео"
+     }
+    },
+    "stages": [
+     "идея",
+     "ресёрч",
+     "сценарий",
+     "запись",
+     "монтаж",
+     "опубликовано"
+    ],
+    "template": "video"
+   },
+   "title": "Видео (YouTube, Shorts, Reels)"
+  },
+  "uk": {
+   "mode": {
+    "calendar": "dates",
+    "card": "projectMD",
+    "commands": [
+     {
+      "id": "video-hooks",
+      "input": "mainFile",
+      "output": "хуки.md",
+      "task": "Запропонуй 5 варіантів початку ролика — перші 5–10 секунд, які втримають глядача. Ролик: {format}, основа — цей сценарій. Використай різні прийоми: несподіваний факт, запитання до глядача, обіцянку результату, міні-історію, суперечку з поширеною думкою. Для кожного варіанта — сам текст (як його вимовити вголос) і один рядок, на що він тисне. Наприкінці одним реченням — який варіант обрав би ти і чому.",
+      "title": "Хуки"
+     },
+     {
+      "id": "video-shorts",
+      "input": "mainFile",
+      "output": "сценарій-shorts.md",
+      "task": "Зроби зі сценарію версію для вертикального ролика до 60 секунд — приблизно 140–150 слів. Збережи головну думку й найсильніший момент, прибери вступи й повтори. Перша фраза має чіпляти одразу, остання — лишати бажання подивитися повний ролик або підписатися. Пиши так, як говорять уголос: короткі фрази, без канцеляриту. Наприкінці вкажи кількість слів.",
+      "title": "Версія для Shorts"
+     },
+     {
+      "id": "video-description",
+      "input": "mainFile",
+      "output": "опис.md",
+      "task": "Підготуй усе для публікації на YouTube: 1) опис — 2–3 абзаци, перші два рядки найважливіші (їх видно до «ще»), без клікбейту; 2) таймкоди за змістовими частинами сценарію у форматі 00:00 — Назва (оціни час за 150 словами на хвилину, перша мітка 00:00); 3) 10–15 тегів через кому; 4) 3 хештеги. Мовою сценарію.",
+      "title": "Опис і таймкоди"
+     },
+     {
+      "id": "video-titles",
+      "input": "mainFile",
+      "output": "заголовки.md",
+      "task": "Запропонуй 10 варіантів назви ролика — до 60 символів, чесних (обіцяють те, що є в ролику), різних за підходом: користь, цікавість, конкретний результат, цифра, запитання. Познач 3 найкращі. Потім — 3 ідеї обкладинки: що в кадрі, великий текст (до 4 слів), емоція.",
+      "title": "Заголовки й обкладинки"
+     },
+     {
+      "id": "video-facts",
+      "input": "mainFile",
+      "output": "факти.md",
+      "service": "claude-code",
+      "task": "Знайди в сценарії всі твердження, які можна перевірити: цифри, дати, імена, цитати, причинно-наслідкові заяви. Для кожного: саме твердження, наскільки воно спірне (надійно / перевірити / сумнівно) і чому, що саме й де перевірити. Нічого не виправляй у сценарії й не вигадуй джерела — якщо не впевнений, так і пиши.",
+      "title": "Перевірка фактів"
+     },
+     {
+      "asks": "Мова",
+      "id": "video-translate",
+      "input": "mainFile",
+      "output": "сценарій-{language}.md",
+      "task": "Переклади сценарій мовою {language} для озвучення: збережи тон, жарти й ритм мовлення, адаптуй ідіоми й приклади під глядача цієї мови, не перекладай дослівно. Власні назви й терміни залиш упізнаваними. Наприкінці — список місць, де довелося помітно відійти від оригіналу.",
+      "title": "Переклад"
+     }
+    ],
+    "commonCommands": "none",
+    "icon": "video",
+    "launchMode": "background",
+    "metrics": [
+     "words",
+     "duration",
+     "deadline",
+     "publishDate"
+    ],
+    "name": "Відео",
+    "permissions": "filesOnly",
+    "showCommonCommands": false,
+    "showProjects": true,
+    "source": {
+     "folders": {
+      "_0": "~/Documents/Відео"
+     }
+    },
+    "stages": [
+     "ідея",
+     "ресерч",
+     "сценарій",
+     "запис",
+     "монтаж",
+     "опубліковано"
+    ],
+    "template": "video"
+   },
+   "title": "Відео (YouTube, Shorts, Reels)"
   }
  }
 }
