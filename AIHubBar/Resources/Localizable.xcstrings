@@ -47191,6 +47191,82 @@
         }
       }
     },
+    "Команд нет — добавьте в Настройках → «Модули».": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لا توجد أوامر — أضفها من الإعدادات ← «الوحدات»."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keine Befehle — unter Einstellungen → „Module“ hinzufügen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No commands — add some in Settings → “Modules”."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No hay comandos: añádelos en Ajustes → «Módulos»."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucune commande — ajoutez-en dans Réglages → « Modules »."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Belum ada perintah — tambahkan di Pengaturan → “Modul”."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nessun comando — aggiungili in Impostazioni → «Moduli»."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "コマンドがありません — 設定 →「モジュール」で追加してください。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "명령이 없습니다 — 설정 → «모듈»에서 추가하세요."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Brak poleceń — dodaj je w Ustawieniach → „Moduły”."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sem comandos — adicione em Ajustes → “Módulos”."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Команд немає — додайте в Налаштуваннях → «Модулі»."
+          }
+        }
+      }
+    },
     "Команд нет — добавьте в Настройках → «Что показывать».": {
       "localizations": {
         "ar": {
@@ -47491,6 +47567,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Команду не знайдено"
+          }
+        }
+      }
+    },
+    "Команда пустая — заполните её в Настройках → «Модули».": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الأمر فارغ — املأه من الإعدادات ← «الوحدات»."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der Befehl ist leer — unter Einstellungen → „Module“ ausfüllen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The command is empty — fill it in under Settings → “Modules”."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El comando está vacío: complétalo en Ajustes → «Módulos»."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La commande est vide — complétez-la dans Réglages → « Modules »."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Perintah kosong — isi di Pengaturan → “Modul”."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il comando è vuoto — compilalo in Impostazioni → «Moduli»."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "コマンドが空です — 設定 →「モジュール」で入力してください。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "명령이 비어 있습니다 — 설정 → «모듈»에서 채우세요."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Polecenie jest puste — uzupełnij je w Ustawieniach → „Moduły”."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O comando está vazio — preencha em Ajustes → “Módulos”."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Команда порожня — заповніть її в Налаштуваннях → «Модулі»."
           }
         }
       }
@@ -96584,6 +96736,82 @@
         }
       }
     },
+    "Свои кнопки: скрипт в фоне или в Терминале, ссылка, файл, папка или программа.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "أزرارك الخاصة: سكربت في الخلفية أو في الطرفية، رابط أو ملف أو مجلد أو برنامج."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eigene Tasten: ein Skript im Hintergrund oder im Terminal, ein Link, eine Datei, ein Ordner oder ein Programm."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your own buttons: a script in the background or in Terminal, a link, file, folder or program."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tus botones: un script en segundo plano o en Terminal, un enlace, archivo, carpeta o programa."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vos boutons : un script en arrière-plan ou dans Terminal, un lien, un fichier, un dossier ou un programme."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tombol sendiri: skrip di latar belakang atau Terminal, tautan, file, folder, atau program."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pulsanti tuoi: uno script in background o nel Terminale, un link, un file, una cartella o un programma."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "自分のボタン: バックグラウンドまたはターミナルのスクリプト、リンク、ファイル、フォルダー、プログラム。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "나만의 버튼: 백그라운드 또는 터미널 스크립트, 링크, 파일, 폴더, 프로그램."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Własne przyciski: skrypt w tle lub w Terminalu, link, plik, folder albo program."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seus botões: script em segundo plano ou no Terminal, link, arquivo, pasta ou programa."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Свої кнопки: скрипт у фоні чи в Терміналі, посилання, файл, папка або програма."
+          }
+        }
+      }
+    },
     "Свои кнопки: скрипт в фоне или в Терминале, ярлык из «Команд» macOS, ссылка, файл, папка или приложение.": {
       "localizations": {
         "ar": {
@@ -101224,6 +101452,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Скрипт у фоні"
+          }
+        }
+      }
+    },
+    "Скрипт в фоне запускается в домашней папке (PowerShell на Windows, sh на Linux), итог приходит уведомлением; «в Терминале» — открывает новое окно. Открыть — ссылка (https://…) или путь (~/…).": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يعمل السكربت في الخلفية في المجلد الرئيسي (PowerShell على Windows وsh على Linux) وتصل النتيجة كإشعار؛ «في الطرفية» يفتح نافذة جديدة. الفتح يقبل رابطًا (https://…) أو مسارًا (~/…)."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ein Hintergrundskript läuft in Ihrem Benutzerordner (PowerShell unter Windows, sh unter Linux), das Ergebnis kommt als Mitteilung; „im Terminal“ öffnet ein neues Fenster. Öffnen nimmt einen Link (https://…) oder Pfad (~/…)."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A background script runs in your home folder (PowerShell on Windows, sh on Linux) and its result arrives as a notification; “in Terminal” opens a new window. Open takes a link (https://…) or a path (~/…)."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un script en segundo plano se ejecuta en tu carpeta de inicio (PowerShell en Windows, sh en Linux) y el resultado llega como notificación; «en Terminal» abre una ventana nueva. Abrir admite un enlace (https://…) o una ruta (~/…)."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un script en arrière-plan s’exécute dans votre dossier personnel (PowerShell sous Windows, sh sous Linux) et le résultat arrive en notification ; « dans Terminal » ouvre une nouvelle fenêtre. Ouvrir accepte un lien (https://…) ou un chemin (~/…)."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skrip latar belakang dijalankan di folder rumah (PowerShell di Windows, sh di Linux) dan hasilnya datang sebagai pemberitahuan; “di Terminal” membuka jendela baru. Buka menerima tautan (https://…) atau jalur (~/…)."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uno script in background gira nella cartella home (PowerShell su Windows, sh su Linux) e il risultato arriva come notifica; «nel Terminale» apre una nuova finestra. Apri accetta un link (https://…) o un percorso (~/…)."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "バックグラウンドのスクリプトはホームフォルダーで実行され（Windows では PowerShell、Linux では sh）、結果は通知で届きます。「ターミナルで」は新しいウインドウを開きます。開くにはリンク（https://…）またはパス（~/…）を指定します。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "백그라운드 스크립트는 홈 폴더에서 실행되고(Windows는 PowerShell, Linux는 sh) 결과는 알림으로 옵니다. «터미널에서»는 새 창을 엽니다. 열기는 링크(https://…) 또는 경로(~/…)를 받습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skrypt w tle działa w folderze domowym (PowerShell w Windows, sh w Linuksie), a wynik przychodzi jako powiadomienie; „w Terminalu” otwiera nowe okno. Otwórz przyjmuje link (https://…) lub ścieżkę (~/…)."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Um script em segundo plano roda na pasta de início (PowerShell no Windows, sh no Linux) e o resultado chega como notificação; “no Terminal” abre uma janela nova. Abrir aceita link (https://…) ou caminho (~/…)."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Скрипт у фоні запускається в домашній папці (PowerShell у Windows, sh у Linux), підсумок приходить сповіщенням; «у Терміналі» — відкриває нове вікно. Відкрити — посилання (https://…) або шлях (~/…)."
           }
         }
       }
@@ -128241,6 +128545,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "команда, наприклад: brew upgrade"
+          }
+        }
+      }
+    },
+    "команда, например: winget upgrade --all": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "أمر، مثل: winget upgrade --all"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ein Befehl, z. B. winget upgrade --all"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "a command, e.g. winget upgrade --all"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "un comando, p. ej.: winget upgrade --all"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "une commande, par ex. winget upgrade --all"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "perintah, mis. winget upgrade --all"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "un comando, ad es. winget upgrade --all"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "コマンド（例: winget upgrade --all）"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "명령(예: winget upgrade --all)"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "polecenie, np. winget upgrade --all"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "um comando, ex.: winget upgrade --all"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "команда, наприклад: winget upgrade --all"
           }
         }
       }

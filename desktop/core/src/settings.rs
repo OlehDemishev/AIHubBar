@@ -37,6 +37,8 @@ pub struct Settings {
     /// how many GB free the disk counts as nearly full.
     pub resource_alerts: bool,
     pub resource_disk_below_gb: u64,
+    /// «Быстрые команды»: the library (the Mac's `[QuickCommand]`); None — the starting examples, until edited.
+    pub quick_commands: Option<Vec<crate::quick_commands::QuickCommand>>,
     /// `projects_dir` and `launch_mode` of a file from before profiles, for the first profile.
     #[serde(skip)]
     pub before_profiles: (Option<String>, Option<String>),
@@ -57,6 +59,7 @@ impl Default for Settings {
             keep_awake_manual: None,
             resource_alerts: true,
             resource_disk_below_gb: 20,
+            quick_commands: None,
             before_profiles: (None, None),
         }
     }
@@ -102,6 +105,7 @@ impl Settings {
             keep_awake: crate::keep_awake::Rules::from_value(value.get("keep_awake")),
             keep_awake_manual: value.get("keep_awake_manual").and_then(Value::as_f64),
             resource_alerts: value.get("resource_alerts").and_then(Value::as_bool).unwrap_or(defaults.resource_alerts),
+            quick_commands: crate::quick_commands::library(value.get("quick_commands")),
             resource_disk_below_gb: value.get("resource_disk_below_gb").and_then(Value::as_u64).filter(|gb| *gb > 0).unwrap_or(defaults.resource_disk_below_gb),
             before_profiles: (text("projects_dir"), text("launch_mode").filter(|m| LAUNCH_MODES.contains(&m.as_str()))),
         }
@@ -249,7 +253,7 @@ impl Settings {
 // MARK: - Modules: the Mac's `installed` and `off` lists, so `.claudepult` files carry them both ways
 
 /// The stage 6 modules this version has, as the Mac's `ModuleKind` names them.
-pub const MODULES: [&str; 2] = ["resources", "keepAwake"];
+pub const MODULES: [&str; 3] = ["resources", "keepAwake", "quickCommands"];
 
 impl Settings {
     fn kinds(&self, key: &str) -> Vec<String> {

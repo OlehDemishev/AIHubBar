@@ -21,6 +21,7 @@ pub mod launch;
 pub mod paths;
 pub mod process;
 pub mod profiles;
+pub mod quick_commands;
 pub mod resources;
 pub mod projects;
 pub mod runs;

@@ -14,6 +14,7 @@ mod limits;
 mod profiles;
 mod resources;
 mod projects;
+mod quick_commands;
 mod runs;
 mod services;
 mod sessions;
@@ -344,6 +345,7 @@ fn main() {
         .manage(calendar::Calendar::default())
         .manage(keep_awake::KeepAwake::default())
         .manage(resources::Resources::default())
+        .manage(quick_commands::QuickCommands::default())
         .manage(AppState { settings: Mutex::new(load_settings()) })
         .invoke_handler(tauri::generate_handler![
             ui_texts, set_language, dismiss_tray_hint, autostart_enabled, set_autostart, open_settings, hide_panel, quit,
@@ -368,6 +370,8 @@ fn main() {
             keep_awake::keep_awake_view, keep_awake::keep_awake_hold, keep_awake::keep_awake_release, keep_awake::modules_view,
             keep_awake::set_module, keep_awake::set_keep_awake_rules, keep_awake::choose_keep_awake_apps,
             resources::resources_view, resources::open_task_manager, resources::resource_settings, resources::set_resource_alerts,
+            quick_commands::quick_commands_view, quick_commands::run_quick_command, quick_commands::quick_commands_library,
+            quick_commands::set_quick_commands, quick_commands::new_quick_command,
             profiles::choose_import, profiles::import_view, profiles::apply_import, profiles::cancel_import
         ])
         .setup(move |app| {

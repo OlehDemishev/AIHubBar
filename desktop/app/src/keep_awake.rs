@@ -145,6 +145,7 @@ pub fn set_module(app: AppHandle, kind: String, on: bool) -> Result<ModulesView,
     app.state::<KeepAwake>().evaluate(&app);
     let _ = app.emit("keep-awake-changed", ());
     let _ = app.emit("resources-changed", ());
+    let _ = app.emit("quick-commands-changed", ());
     app.state::<crate::limits::Limits>().update_tray(&app);
     Ok(modules(&app))
 }
