@@ -5,6 +5,7 @@
 **Updated:** 2026-11-18
 
 **Now:**
+- 2026-11-18: Windows — the «Календарь» window: a month or week, dates dragged to another day, new plan rows and project dates (branch `feat/desktop-calendar-window`)
 - 2026-11-18: Windows — «Ближайшее»: deadlines, publications and content plan rows of the next 7 days, reminders (#424, merged)
 - 2026-11-18: Windows — other agents (Codex, Gemini CLI, Antigravity, Copilot, Cursor): found with their version, «Открыть в…», a folder command opens one in a terminal with the task on the clipboard (#422, merged)
 - 2026-11-18: Windows — «Сервисы AI»: models by API with keys in Credential Manager, a service per command, «Сравнить» (#420, merged; the Credential Manager test passes on Windows CI)
@@ -58,7 +59,7 @@
 - check on the Air: the island at the real notch
 - promotion (docs/LAUNCH.md): r/ClaudeAI, the lists, r/macapps, Show HN, Product Hunt, Homebrew
 - content (docs/specs/SPEC-content.md, agreed): stage 2 «Версии», then batch tasks; better after the first feedback from people
-- Windows: on the laptop the live check of SPEC-windows §11.4 (with a real permission request answered from the panel) the «Проекты» card's buttons, a Claude launch in Windows Terminal and one in the background (do the `PowerShell(…)` rules let it build and check a project without Git Bash?); then stage 5 on: the calendar window (moving dates, new plan rows), the assistant; stage 3 leftovers («Показать», buttons in the notification) need the laptop
+- Windows: on the laptop the live check of SPEC-windows §11.4 (with a real permission request answered from the panel) the «Проекты» card's buttons, a Claude launch in Windows Terminal and one in the background (do the `PowerShell(…)` rules let it build and check a project without Git Bash?); then stage 5 on: the assistant; stage 3 leftovers («Показать», buttons in the notification) need the laptop
 
 **Needs Oleh:**
 - Windows laptop: install the tools and copy the two CLAUDE.md files as in `desktop/WINDOWS-DEV.md`, sign in to Claude Code there; choose the Windows signing (SPEC-windows §7)
@@ -94,6 +95,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-18 — Windows: the calendar window (branch `feat/desktop-calendar-window`)
+
+Done: `desktop/core/calendar.rs` writes dates back as the Mac does — a plan cell (`ContentPlan.setting`), a new plan row or table (`appending`), a moved date keeping its time, a project's deadline or publication in its card — keeping the file's line endings. `ui/calendar.html` is the Mac's `CalendarWindow`: month or week, every profile or the current one, a colour per profile, drag a date to another day, double-click a day for a new date, double-click a date to open it. «Календарь» in the panel's «Ближайшее» opens it.
+Checked: `python3 scripts/strings.py --check` (293 texts), `scripts/strings-check.py`, `cargo test --workspace` on the Mac (core 92: a plan cell rewritten with CRLF kept, a row that moved, a missing column; rows appended to a table, a new file's plan, a table after notes; a publication moved with its time, a plan row moved, a deadline set in a card, a plan row added and read back). The window in a browser with sample replies: the month in Russian with Monday first, a date dragged to another day, a moved plan row's message, the new-date form for a plan row and a publication, the week, «Только текущий профиль». The real window wasn't opened (it takes the focus).
+Left: drag and drop not tried in WebView2 on Windows.
 
 ## 2026-11-18 — Windows: «Ближайшее» (branch `feat/desktop-calendar`)
 
