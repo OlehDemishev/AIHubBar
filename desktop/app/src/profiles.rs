@@ -24,7 +24,7 @@ pub fn projects_root(app: &AppHandle) -> PathBuf {
 
 /// Saves a change to the profiles and follows it: another folder is read at once and the hooks shown anew; both
 /// windows hear `profiles-changed`.
-fn change(app: &AppHandle, edit: impl FnOnce(&mut claudepult_core::settings::Settings)) {
+pub(crate) fn change(app: &AppHandle, edit: impl FnOnce(&mut claudepult_core::settings::Settings)) {
     let before = projects_dir(app);
     save(app, edit);
     let after = projects_dir(app);

@@ -9,7 +9,7 @@ translations, so the Mac and desktop versions never drift.
 Also writes ui/i18n/prompts.json: the Mac's prompts for Claude in a project without shared rules (`nextStep`,
 `customTask`, `finishSession` of every language in AIHubBar/Models/ContentLanguage.swift), and ui/i18n/templates.json:
 the profile templates the desktop versions can already use (AIHubBar/Resources/Templates/template-<id>[.<code>].json),
-`{id: {code: {title, mode}}}` — the Mac's profile as it is, in each content language — and ui/i18n/content.json: the
+`{id: {code: {title, description, folderHint, mode}}}` — the Mac's profile as it is, in each content language — and ui/i18n/content.json: the
 project card's file name, field names and notes heading of each content language (`ContentStrings`), for folder projects.
 
     python3 scripts/strings.py          # write the files
@@ -80,7 +80,7 @@ def templates():
         for code in CONTENT_LANGUAGES.values():
             path = TEMPLATES / (f"template-{template}.json" if code == "ru" else f"template-{template}.{code}.json")
             template_file = json.loads(path.read_text(encoding="utf-8"))
-            modes[code] = {"title": template_file["title"], "mode": template_file["mode"]}
+            modes[code] = {key: template_file[key] for key in ["title", "description", "folderHint", "mode"]}
         result[template] = modes
     return result
 

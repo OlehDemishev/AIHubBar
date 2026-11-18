@@ -6,6 +6,7 @@
 // No console window behind the app in a release build on Windows.
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
+mod assistant;
 mod calendar;
 mod commands;
 mod limits;
@@ -350,7 +351,8 @@ fn main() {
             services::agents_view, services::copy_install_command, projects::open_agent, calendar::upcoming_view,
             calendar::open_upcoming, calendar::reminder_hours, calendar::set_reminder_hours, calendar::set_profile_calendar,
             calendar::open_calendar, calendar::calendar_view, calendar::reread_calendar, calendar::move_calendar_entry,
-            calendar::add_calendar_date,
+            calendar::add_calendar_date, assistant::open_assistant, assistant::assistant_start, assistant::assistant_look,
+            assistant::assistant_choose_folder, assistant::assistant_apply_folder, assistant::assistant_finish,
             runs::stop_run, runs::run_log, projects::worktree_removal, launch_settings, set_launch_settings,
             pull_request_alerts, set_pull_request_alerts, profiles::projects_folder, profiles::choose_projects_folder,
             profiles::reset_projects_folder, profiles::profiles_view, profiles::select_profile, profiles::add_profile, profiles::profile_templates,

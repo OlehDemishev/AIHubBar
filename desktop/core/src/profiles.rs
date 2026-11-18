@@ -183,6 +183,11 @@ pub fn from_template(template: &str, language: &str) -> Option<Profile> {
     Some(profile)
 }
 
+/// Every template's whole entry in the content language: `title`, `description`, `folderHint`, `mode`.
+pub fn template_entries(language: &str) -> Vec<(&'static str, &'static Value)> {
+    TEMPLATE_IDS.iter().filter_map(|id| Some((*id, template_entry(id, language)?))).collect()
+}
+
 /// (id, title) of every template, in the content language: «Разработчик (GitHub)», «Видео (YouTube, Shorts, Reels)»…
 pub fn template_titles(language: &str) -> Vec<(&'static str, String)> {
     TEMPLATE_IDS

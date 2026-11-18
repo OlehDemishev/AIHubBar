@@ -1,7 +1,7 @@
 {
   "$schema": "../gen/schemas/desktop-schema.json",
   "identifier": "default",
-  "description": "The panel, the settings window and the calendar: AI Hub Bar's own commands only",
-  "windows": ["panel", "settings", "calendar"],
+  "description": "The panel and AI Hub Bar's windows (settings, calendar, assistant): AI Hub Bar's own commands only",
+  "windows": ["panel", "settings", "calendar", "assistant"],
   "permissions": ["core:default"]
 }

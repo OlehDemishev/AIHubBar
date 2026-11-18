@@ -249,3 +249,26 @@ body.calendar-window { display: flex; flex-direction: column; height: 100vh; mar
 .new-entry .buttons { margin-inline-start: auto; display: flex; gap: 6px; }
 .upcoming-head { display: flex; align-items: center; justify-content: space-between; }
 .upcoming-head h2 { margin: 0 0 8px; }
+
+/* The profile assistant: the step on top, one choice per screen, «Назад» / «Далее» at the bottom. */
+body.assistant-window { display: flex; flex-direction: column; height: 100vh; margin: 0; overflow: hidden; }
+.assistant-head { padding: 16px 20px 10px; display: flex; flex-direction: column; gap: 6px; border-bottom: 1px solid var(--line); }
+.assistant-head h1 { margin: 0; font-size: 18px; }
+.assistant-head progress { width: 100%; height: 4px; accent-color: var(--accent); }
+.assistant-body { flex: 1; overflow-y: auto; padding: 16px 20px; display: flex; flex-direction: column; gap: 10px; }
+.assistant-body p { margin: 0; }
+.assistant-body .label { font-weight: 600; margin-top: 4px; }
+.assistant-body input[type="text"], .assistant-body input[type="number"] { font: inherit; padding: 5px 8px; border-radius: 6px; border: 1px solid var(--line); background: var(--card); color: inherit; user-select: text; }
+.choices { display: flex; flex-direction: column; gap: 6px; }
+.choice { display: flex; gap: 10px; align-items: flex-start; padding: 9px 10px; border-radius: 8px; background: var(--card); border: 1px solid var(--line); cursor: pointer; }
+.choice.selected { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 10%, var(--card)); }
+.choice span { display: flex; flex-direction: column; gap: 2px; }
+.choice input { margin-top: 3px; }
+.check-line { display: flex; align-items: center; gap: 8px; }
+.folder-line { display: flex; align-items: center; gap: 10px; padding: 9px 10px; border-radius: 8px; background: var(--card); border: 1px solid var(--line); }
+.folder-line .path { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+.stage-line { display: flex; gap: 6px; }
+.stage-line input { flex: 1; min-width: 0; }
+.assistant-error { margin: 0 20px 8px; }
+.assistant-nav { display: flex; align-items: center; gap: 8px; padding: 12px 20px; border-top: 1px solid var(--line); }
+.assistant-nav .spacer { flex: 1; }
