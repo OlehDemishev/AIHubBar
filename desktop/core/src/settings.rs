@@ -211,6 +211,19 @@ impl Settings {
     }
 }
 
+// MARK: - «Сервисы AI»: the Mac's `AIServicesConfig`, kept with its other settings
+
+impl Settings {
+    /// The models chosen, the compatible server, prices and budget (`ai.rs`); Null when nothing is set.
+    pub fn services(&self) -> Value {
+        self.mac_settings.get("services").cloned().unwrap_or(Value::Null)
+    }
+
+    pub fn services_mut(&mut self) -> &mut Value {
+        self.mac_settings.entry("services").or_insert_with(|| Value::Object(Map::new()))
+    }
+}
+
 // MARK: - `.claudepult` files (the Mac's `ProfileStore` export and import)
 
 impl Settings {

@@ -264,6 +264,10 @@ pub struct FolderView {
     stages: Vec<String>,
     /// «Новый проект»: only for a folder of projects, not an inbox.
     can_create: bool,
+    /// Who can run the commands: Claude Code and the API models with a key.
+    services: Vec<crate::commands::ServiceChoice>,
+    /// The profile's service, preselected.
+    default_service: String,
 }
 
 #[derive(Serialize)]
@@ -326,7 +330,8 @@ fn folder_view(app: &AppHandle, state: &State, texts: &Strings) -> Option<Folder
             }
         })
         .collect();
-    Some(FolderView { rows, stages, can_create: matches!(profile.source(), claudepult_core::profiles::Source::Folders(_)) })
+    let default_service = crate::commands::default_service(profile);
+    Some(FolderView { rows, stages, can_create: matches!(profile.source(), claudepult_core::profiles::Source::Folders(_)), services: crate::commands::choices(app), default_service })
 }
 
 fn health_key(health: Health) -> &'static str {
@@ -725,7 +730,7 @@ fn spawn(mut command: std::process::Command) -> Result<(), String> {
 }
 
 /// A folder in the file manager, a link in the browser.
-fn open_with_system(target: &std::ffi::OsStr) -> Result<(), String> {
+pub(crate) fn open_with_system(target: &std::ffi::OsStr) -> Result<(), String> {
     let mut command = if cfg!(windows) {
         if Path::new(target).is_dir() {
             let mut command = std::process::Command::new("explorer.exe");

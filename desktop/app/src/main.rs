@@ -11,6 +11,7 @@ mod limits;
 mod profiles;
 mod projects;
 mod runs;
+mod services;
 mod sessions;
 
 use claudepult_core::i18n::{self, Strings};
@@ -330,6 +331,7 @@ fn main() {
         .manage(Projects::default())
         .manage(Runs::default())
         .manage(commands::Jobs::default())
+        .manage(services::Checks::default())
         .manage(AppState { settings: Mutex::new(load_settings()) })
         .invoke_handler(tauri::generate_handler![
             ui_texts, set_language, dismiss_tray_hint, autostart_enabled, set_autostart, open_settings, hide_panel, quit,
@@ -339,7 +341,8 @@ fn main() {
             projects::projects_view, projects::refresh_projects, projects::projects_panel_opened, projects::open_project,
             projects::open_link, projects::launch_claude, projects::set_project_stage, projects::create_project_card,
             projects::create_folder_project, projects::open_project_file, commands::run_folder_command,
-            commands::clear_finished_jobs,
+            commands::clear_finished_jobs, commands::compare_folder_command, services::services_view, services::check_api,
+            services::save_api_key, services::delete_api_key, services::set_api_model, services::set_compatible_server, services::open_key_page,
             runs::stop_run, runs::run_log, projects::worktree_removal, launch_settings, set_launch_settings,
             pull_request_alerts, set_pull_request_alerts, profiles::projects_folder, profiles::choose_projects_folder,
             profiles::reset_projects_folder, profiles::profiles_view, profiles::select_profile, profiles::add_profile, profiles::profile_templates,

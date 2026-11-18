@@ -3,6 +3,7 @@
 //! The Mac version (Swift) shares no code with this; only file formats and texts (docs/specs/SPEC-windows.md §2, §6).
 
 pub mod agent_hooks;
+pub mod ai;
 pub mod approvals;
 pub mod command;
 pub mod commands;
@@ -10,6 +11,7 @@ pub mod folders;
 pub mod hooks;
 pub mod i18n;
 pub mod ipc;
+pub mod keys;
 pub mod launch;
 pub mod paths;
 pub mod process;

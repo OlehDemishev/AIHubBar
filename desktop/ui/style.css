@@ -72,6 +72,16 @@ select { font: inherit; padding: 4px 6px; border-radius: 6px; border: 1px solid 
 .profile input[type="text"] { flex: 1; min-width: 0; font: inherit; padding: 4px 6px; border-radius: 6px; border: 1px solid var(--line); background: var(--card); color: inherit; user-select: text; }
 .profile-add { margin-inline-start: auto; display: flex; gap: 6px; min-width: 0; }
 #profile-template { min-width: 0; max-width: 220px; }
+.provider + .provider { border-top: 1px solid var(--line); }
+.provider { padding: 4px 0 6px; }
+.provider .status { font-size: 12px; }
+.provider .status.ok { color: #248a3d; }
+.provider .status.warn { color: #c93400; }
+@media (prefers-color-scheme: dark) { .provider .status.ok { color: #30d158; } .provider .status.warn { color: #ff9f0a; } }
+.key-form, .provider-actions { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; margin-top: 4px; }
+.key-form input { flex: 1; min-width: 120px; font: inherit; padding: 4px 6px; border-radius: 6px; border: 1px solid var(--line); background: var(--card); color: inherit; user-select: text; }
+.provider-actions select { max-width: 220px; min-width: 0; }
+.provider .error { margin: 4px 0 0; }
 .card-title { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 4px; }
 .card-title h2 { margin: 0; }
 .import-pending { margin-top: 8px; padding: 10px 12px; border-radius: 8px; background: color-mix(in srgb, var(--accent) 10%, transparent); }
@@ -145,6 +155,10 @@ h2 { font-size: 12px; font-weight: 600; color: var(--secondary); margin: 0 0 8px
 .new-project { margin-top: 6px; }
 .job { display: flex; align-items: baseline; gap: 6px; min-width: 0; }
 .clear-jobs { align-self: flex-start; }
+.commands-head { display: flex; align-items: center; gap: 6px; }
+.commands-head .spacer { flex: 1; }
+.service-choice { font-size: 12px; max-width: 140px; min-width: 0; }
+button.pressed { background: var(--accent); border-color: var(--accent); color: #fff; }
 .job .mark { flex: none; width: 14px; color: var(--secondary); }
 .job.done .mark { color: #248a3d; }
 .job.failed .mark { color: #c93400; }

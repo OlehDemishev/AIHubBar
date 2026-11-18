@@ -85,7 +85,7 @@ def templates():
     return result
 
 
-AGENT_KEYS = ["agentPrompt", "agentNoFile", "agentFileIntro", "notSet", "notCounted", "projectWord", "resultWord"]
+AGENT_KEYS = ["agentPrompt", "agentNoFile", "agentFileIntro", "notSet", "notCounted", "projectWord", "resultWord", "apiHeader", "apiFileIntro", "apiTask", "apiRule"]
 
 
 def swift_string(body, key):

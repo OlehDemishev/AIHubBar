@@ -50,6 +50,13 @@
         <select id="launch-mode"></select>
       </div>
     </section>
+    <h1 data-t="Сервисы AI"></h1>
+    <section class="card services">
+      <h2 data-t="Модели по API"></h2>
+      <p class="secondary" id="no-key-store" data-t="На этой системе ключи API пока негде хранить: работают только серверы без ключа (Ollama, LM Studio)." hidden></p>
+      <div id="provider-rows"></div>
+      <p class="secondary" id="api-spend" hidden></p>
+    </section>
     <h1 data-t="Экспорт и импорт"></h1>
     <section class="card">
       <div class="row">
@@ -254,6 +261,112 @@
     const template = document.getElementById("profile-template");
     for (const row of await invoke("profile_templates")) template.add(new Option(row.title, row.id));
     document.getElementById("profile-add").onclick = () => invoke("add_profile", { template: template.value });
+
+    // «Сервисы AI»: a key per provider in Credential Manager, «Проверить» lists the models and picks one.
+    const providerRows = document.getElementById("provider-rows");
+    const keyForms = new Set();
+    const deleting = new Set();
+    const providerErrors = new Map();
+    function showServices(view) {
+      document.getElementById("no-key-store").hidden = view.keysAvailable;
+      const spend = document.getElementById("api-spend");
+      spend.hidden = !view.spend;
+      spend.textContent = view.spend ?? "";
+      providerRows.replaceChildren(...view.providers.map((provider) => {
+        const box = document.createElement("div");
+        box.className = "provider";
+        const head = document.createElement("div");
+        head.className = "row";
+        const title = document.createElement("span");
+        title.textContent = provider.id === "compatible" && view.compatibleName ? view.compatibleName : provider.title;
+        const status = document.createElement("span");
+        status.className = provider.ok ? "status ok" : provider.status ? "status warn" : "status secondary";
+        status.textContent = provider.status ?? (provider.hasKey ? t("Ключ сохранён") : provider.keyRequired ? t("Нет ключа") : "");
+        head.append(title, status);
+        box.append(head);
+        if (provider.id === "compatible") {
+          const form = document.createElement("div");
+          form.className = "key-form";
+          const name = Object.assign(document.createElement("input"), { type: "text", value: view.compatibleName, placeholder: "Ollama, LM Studio, OpenRouter…" });
+          name.setAttribute("aria-label", t("Название"));
+          const url = Object.assign(document.createElement("input"), { type: "text", value: view.compatibleUrl });
+          url.setAttribute("aria-label", t("Адрес"));
+          const store = async () => showServices(await invoke("set_compatible_server", { name: name.value, url: url.value }));
+          name.onchange = store;
+          url.onchange = store;
+          form.append(name, url);
+          box.append(form);
+        }
+        const askKey = view.keysAvailable && (keyForms.has(provider.id) || (provider.keyRequired && !provider.hasKey));
+        if (askKey) {
+          const form = document.createElement("div");
+          form.className = "key-form";
+          const key = Object.assign(document.createElement("input"), { type: "password", placeholder: t("Ключ API"), autocomplete: "off" });
+          const saveKey = async () => {
+            if (!key.value.trim()) return;
+            try {
+              const next = await invoke("save_api_key", { provider: provider.id, key: key.value });
+              keyForms.delete(provider.id);
+              providerErrors.delete(provider.id);
+              showServices(next);
+            } catch (error) {
+              providerErrors.set(provider.id, String(error));
+              showServices(await invoke("services_view"));
+            }
+          };
+          key.addEventListener("keydown", (event) => { if (event.key === "Enter") saveKey(); });
+          const saveButton = Object.assign(document.createElement("button"), { textContent: t("Сохранить"), onclick: saveKey });
+          form.append(key, saveButton);
+          if (provider.keyPage) {
+            const page = Object.assign(document.createElement("button"), { textContent: "↗", title: t("Где взять ключ: %@", provider.keyPage), onclick: () => invoke("open_key_page", { provider: provider.id }) });
+            page.setAttribute("aria-label", page.title);
+            form.append(page);
+          }
+          box.append(form);
+        }
+        const actions = document.createElement("div");
+        actions.className = "provider-actions";
+        if (provider.hasKey || !provider.keyRequired) {
+          const check = Object.assign(document.createElement("button"), { textContent: t("Проверить") });
+          check.onclick = async () => {
+            check.disabled = true;
+            showServices(await invoke("check_api", { provider: provider.id }));
+          };
+          actions.append(check);
+        }
+        if (provider.hasKey) {
+          actions.append(Object.assign(document.createElement("button"), {
+            textContent: keyForms.has(provider.id) ? t("Отмена") : t("Заменить ключ"),
+            onclick: async () => { if (keyForms.has(provider.id)) keyForms.delete(provider.id); else keyForms.add(provider.id); showServices(await invoke("services_view")); },
+          }));
+          const remove = Object.assign(document.createElement("button"), { textContent: deleting.has(provider.id) ? t("Удалить?") : t("Удалить ключ") });
+          remove.onclick = async () => {
+            if (!deleting.has(provider.id)) { deleting.add(provider.id); return showServices(await invoke("services_view")); }
+            deleting.delete(provider.id);
+            showServices(await invoke("delete_api_key", { provider: provider.id }));
+          };
+          actions.append(remove);
+        } else if (!provider.keyRequired && view.keysAvailable && !keyForms.has(provider.id)) {
+          actions.append(Object.assign(document.createElement("button"), {
+            textContent: t("Ключ (если нужен)"),
+            onclick: async () => { keyForms.add(provider.id); showServices(await invoke("services_view")); },
+          }));
+        }
+        if (provider.models.length) {
+          const model = document.createElement("select");
+          model.setAttribute("aria-label", t("Модель"));
+          for (const id of provider.models) model.add(new Option(id, id, false, id === provider.model));
+          model.onchange = async () => showServices(await invoke("set_api_model", { provider: provider.id, model: model.value }));
+          actions.append(model);
+        } else if (provider.model) {
+          actions.append(Object.assign(document.createElement("span"), { className: "secondary", textContent: provider.model }));
+        }
+        if (actions.childElementCount) box.append(actions);
+        if (providerErrors.has(provider.id)) box.append(Object.assign(document.createElement("p"), { className: "error", textContent: providerErrors.get(provider.id) }));
+        return box;
+      }));
+    }
+    showServices(await invoke("services_view"));
 
     // `.claudepult` files, the same as the Mac's: a file read by «Импорт…» waits for «Заменить» / «Добавить» / «Отмена».
     function showImport(view) {

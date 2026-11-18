@@ -5,6 +5,7 @@
 **Updated:** 2026-11-18
 
 **Now:**
+- 2026-11-18: Windows — «Сервисы AI»: models by API with keys in Credential Manager, a service per command, «Сравнить» (branch `feat/desktop-ai-services`)
 - 2026-11-18: Windows — AI commands on folder projects through Claude Code, in the background with «Только файлы» or in a terminal (#418, merged)
 - 2026-11-18: Windows — folder projects: «Видео», «Тексты», «Ресёрч», «Соцсети», «Свой» with stages, metrics and «Новый проект» (#416, merged)
 - 2026-11-18: Windows — `.claudepult` export and import, the same files as the Mac's (#414, merged)
@@ -55,7 +56,7 @@
 - check on the Air: the island at the real notch
 - promotion (docs/LAUNCH.md): r/ClaudeAI, the lists, r/macapps, Show HN, Product Hunt, Homebrew
 - content (docs/specs/SPEC-content.md, agreed): stage 2 «Версии», then batch tasks; better after the first feedback from people
-- Windows: on the laptop the live check of SPEC-windows §11.4 (with a real permission request answered from the panel) the «Проекты» card's buttons, a Claude launch in Windows Terminal and one in the background (do the `PowerShell(…)` rules let it build and check a project without Git Bash?); then stage 5 on: the calendar, AI services (models by API, «Сравнить»), the assistant; stage 3 leftovers («Показать», buttons in the notification) need the laptop
+- Windows: on the laptop the live check of SPEC-windows §11.4 (with a real permission request answered from the panel) the «Проекты» card's buttons, a Claude launch in Windows Terminal and one in the background (do the `PowerShell(…)` rules let it build and check a project without Git Bash?); then stage 5 on: the calendar, other agents in «Сервисы AI», the assistant; stage 3 leftovers («Показать», buttons in the notification) need the laptop
 
 **Needs Oleh:**
 - Windows laptop: install the tools and copy the two CLAUDE.md files as in `desktop/WINDOWS-DEV.md`, sign in to Claude Code there; choose the Windows signing (SPEC-windows §7)
@@ -91,6 +92,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-18 — Windows: AI services (branch `feat/desktop-ai-services`)
+
+Done: `desktop/core/ai.rs` ports the Mac's `APIProvider`, `APICheck`, `APIClient` and the API spend: eleven providers with the Mac's endpoints, «Проверить» by listing models, Anthropic Messages and OpenAI-style requests, `api-spend.json` in the Mac's shape. `core/keys.rs` keeps keys in Windows' Credential Manager. The choices are the Mac's `AIServicesConfig` in `mac_settings.services`, so `.claudepult` carries them. Settings → «Сервисы AI» (key, check, model, replace, delete, the compatible server, the month's spend); a folder project's commands get «Каким сервисом выполнять» and «Сравнить» (2–3 services, `name (Service).md`). A new catalog text with 12 translations for systems without a key store.
+Checked: `python3 scripts/strings.py --check` (243 texts), `scripts/strings-check.py` (1853 keys), `cargo test --workspace` on the Mac (core 83: ids, the Mac's config kept around changes, checks for 200/401/400/403/404/429 and Z.ai, the preferred model, request bodies and replies of both kinds, spend kept 400 days with prices; a local OpenAI-style server answering «Проверить» and a request over real HTTP; the key store's test runs for real only on Windows in CI). Settings and the panel in a browser with sample replies: a bad and a good key, check, model, delete with «Удалить?», the compatible server, the service menu, «Сравнить» with two services. No real provider was called and no real key used.
+Left: a real key on the laptop; Linux key store; other agents, prices and budget; a side-by-side window for «Сравнить».
 
 ## 2026-11-18 — Windows: AI commands on folder projects (branch `feat/desktop-folder-commands`)
 
