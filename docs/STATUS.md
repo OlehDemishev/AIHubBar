@@ -5,7 +5,7 @@
 **Updated:** 2026-11-18
 
 **Now:**
-- 2026-11-18: Windows — «Ресурсы компьютера»: processor, memory, disk, network, battery, graphics, the busiest programs, the Mac's alerts (#434)
+- 2026-11-18: Windows — «Ресурсы компьютера»: processor, memory, disk, network, battery, graphics, the busiest programs, the Mac's alerts (#434, merged; a real reading on Windows and Linux CI)
 - 2026-11-18: Windows stage 6 begun — «Не спать»: a power request while Claude works, on power, with a monitor, while chosen programs run, or by hand; Settings → «Модули» (#432, merged; a real power request taken and released on Windows CI)
 - 2026-11-18: Windows stage 5 finished — a profile's commands, stages, metrics, service and rights in Settings; API prices and a monthly budget; `.docx` word counts; the first start opens the assistant (#430, merged)
 - 2026-11-18: Windows — the profile assistant: template, folder, stages, metrics, calendar, service, launch and name (#428, merged)
