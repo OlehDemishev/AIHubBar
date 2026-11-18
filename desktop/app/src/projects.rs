@@ -1,5 +1,5 @@
 //! Stage 4 «Проекты» (docs/specs/SPEC-windows.md §4.7): the git repositories of the projects folder in the panel, kept
-//! fresh like the Mac's `ProjectStore` — at start, every 5 minutes, with `git fetch` every 30, and when the panel opens
+//! fresh like the Mac's `ProjectStore` — with notifications when a PR's CI fails or is fixed and when a PR closes — at start, every 5 minutes, with `git fetch` every 30, and when the panel opens
 //! on a list older than a minute. A row opens into STATUS.md, the attention items, PRs, worktrees and «Терминал» /
 //! «Папка» / GitHub, and the Mac's three Claude commands, started in a terminal window (`core/launch.rs`).
 
@@ -18,6 +18,7 @@ use std::path::{Path, PathBuf};
 use std::sync::{Arc, Condvar, Mutex};
 use std::time::{Duration, Instant};
 use tauri::{AppHandle, Emitter, Manager};
+use tauri_plugin_notification::NotificationExt;
 
 const STALE_AFTER: Duration = Duration::from_secs(60);
 const BACKGROUND_INTERVAL: Duration = Duration::from_secs(5 * 60);
@@ -87,8 +88,20 @@ impl Projects {
             Some(tools) => (projects::scan(&root, &tools, fetch, &words, Utc::now()), None),
         };
         eprintln!("projects: {} in {:.1} s{}", projects.len(), started.elapsed().as_secs_f64(), if fetch { " (fetch)" } else { "" });
+        let old = std::mem::take(&mut self.state.lock().unwrap().projects);
+        // A failed scan (no folder, no git) keeps quiet: an empty list isn't «every PR closed».
+        let changes = if problem.is_none() { projects::pull_request_changes(&old, &projects) } else { Vec::new() };
         *self.state.lock().unwrap() = State { projects, updated: Some(Instant::now()), refreshing: false, problem };
         let _ = app.emit("projects-changed", ());
+        app.state::<crate::limits::Limits>().update_tray(app);
+        let alerts = app.state::<crate::AppState>().settings.lock().unwrap().pull_request_alerts;
+        if alerts && !changes.is_empty() {
+            eprintln!("pull request changes: {}", changes.len());
+            for change in &changes {
+                let (title, body) = projects::pr_change_text(&texts, change);
+                let _ = app.notification().builder().title(title).body(body).show();
+            }
+        }
     }
 
     /// The panel opened: a list older than a minute is read again.
@@ -98,6 +111,12 @@ impl Projects {
             drop(state);
             self.ask(false);
         }
+    }
+
+    /// How many projects there are and how many need attention (red): the tray icon's dot and hint.
+    pub fn counts(&self) -> (usize, usize) {
+        let state = self.state.lock().unwrap();
+        (state.projects.len(), state.projects.iter().filter(|p| p.health == Health::Red).count())
     }
 
     fn knows_path(&self, path: &Path) -> bool {

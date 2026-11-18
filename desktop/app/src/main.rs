@@ -255,6 +255,16 @@ fn set_launch_settings(app: AppHandle, mode: Option<String>, time_limit_minutes:
 }
 
 #[tauri::command]
+fn pull_request_alerts(app: AppHandle) -> bool {
+    app.state::<AppState>().settings.lock().unwrap().pull_request_alerts
+}
+
+#[tauri::command]
+fn set_pull_request_alerts(app: AppHandle, enabled: bool) {
+    save(&app, |settings| settings.pull_request_alerts = enabled);
+}
+
+#[tauri::command]
 fn dismiss_tray_hint(app: AppHandle) {
     save(&app, |settings| settings.tray_hint_seen = true);
 }
@@ -311,7 +321,8 @@ fn main() {
             sessions::uninstall_hooks, sessions::agent_hooks_state, sessions::install_agent_hooks, sessions::uninstall_agent_hooks,
             projects::projects_view, projects::refresh_projects, projects::projects_panel_opened, projects::open_project,
             projects::open_link, projects::launch_claude,
-            runs::stop_run, runs::run_log, launch_settings, set_launch_settings
+            runs::stop_run, runs::run_log, launch_settings, set_launch_settings,
+            pull_request_alerts, set_pull_request_alerts
         ])
         .setup(|app| {
             // Only the tray icon, no Dock icon, when trying it out on a Mac.

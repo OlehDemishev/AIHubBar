@@ -16,6 +16,8 @@ pub struct Settings {
     pub launch_mode: Option<String>,
     /// A background run is stopped after this many minutes.
     pub background_time_limit_minutes: u32,
+    /// Notify when a PR's CI fails or is fixed and when a PR closes (on by default, as on the Mac).
+    pub pull_request_alerts: bool,
 }
 
 impl Default for Settings {
@@ -25,6 +27,7 @@ impl Default for Settings {
             tray_hint_seen: false,
             launch_mode: None,
             background_time_limit_minutes: crate::runs::DEFAULT_TIME_LIMIT_MINUTES,
+            pull_request_alerts: true,
         }
     }
 }
@@ -46,6 +49,7 @@ impl Settings {
                 .and_then(|v| u32::try_from(v).ok())
                 .filter(|v| (5..=24 * 60).contains(v))
                 .unwrap_or(defaults.background_time_limit_minutes),
+            pull_request_alerts: value.get("pull_request_alerts").and_then(|v| v.as_bool()).unwrap_or(defaults.pull_request_alerts),
         }
     }
 
@@ -75,7 +79,7 @@ mod tests {
         let read = Settings::from_json(r#"{"language": "de", "tray_hint_seen": "yes", "from_the_future": 1, "launch_mode": "window", "background_time_limit_minutes": 2}"#);
         assert_eq!(read.language.as_deref(), Some("de"));
         assert!(!read.tray_hint_seen, "a bad value takes the default, the rest stays");
-        assert_eq!((read.launch_mode, read.background_time_limit_minutes), (None, 90));
+        assert_eq!((read.launch_mode, read.background_time_limit_minutes, read.pull_request_alerts), (None, 90, true));
         let read = Settings::from_json(r#"{"launch_mode": "background", "background_time_limit_minutes": 120}"#);
         assert_eq!((read.launch_mode.as_deref(), read.background_time_limit_minutes), (Some("background"), 120));
     }
@@ -84,7 +88,7 @@ mod tests {
     fn round_trip() {
         let dir = std::env::temp_dir().join(format!("claudepult-settings-{}", std::process::id()));
         let path = dir.join("settings.json");
-        let settings = Settings { language: Some("uk".into()), tray_hint_seen: true, launch_mode: Some("terminal".into()), background_time_limit_minutes: 60 };
+        let settings = Settings { language: Some("uk".into()), tray_hint_seen: true, launch_mode: Some("terminal".into()), background_time_limit_minutes: 60, pull_request_alerts: false };
         settings.save(&path).unwrap();
         assert_eq!(Settings::load(&path), settings);
         assert!(!path.with_extension("json.tmp").exists());
