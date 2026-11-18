@@ -5,7 +5,7 @@
 **Updated:** 2026-11-18
 
 **Now:**
-- 2026-11-18: Windows — «Удалить» on a worktree in the panel, only when nothing is uncommitted and the branch is merged or pushed (branch `feat/desktop-worktree-removal`)
+- 2026-11-18: Windows — «Удалить» on a worktree in the panel, only when nothing is uncommitted and the branch is merged or pushed (#408, merged)
 - 2026-11-18: Windows — notifications when a PR's CI fails or is fixed and when a PR closes, a red dot on the tray icon for a project that needs attention (#406, merged)
 - 2026-11-18: Windows — Claude in the background: `claude -p` with no window, the Mac's rules plus `PowerShell(…)` twins, time limit, «Остановить», a notification, the log in the panel (#404, merged; a run with a fake `claude.cmd` passes on Windows in CI)
 - 2026-11-18: Windows — Claude from a project in a terminal window: «Следующий шаг», «Своя задача…», «Завершить», a worktree when the folder is busy (#402, merged; the PowerShell script runs on Windows in CI)
