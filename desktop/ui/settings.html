@@ -29,6 +29,13 @@
         <select id="time-limit"></select>
       </div>
     </section>
+    <h1 data-t="Проекты"></h1>
+    <section class="card">
+      <div class="row">
+        <label for="pr-alerts" data-t="Уведомлять, когда CI упал или починился и когда PR закрыт"></label>
+        <input type="checkbox" id="pr-alerts">
+      </div>
+    </section>
     <h1>Hooks</h1>
     <section class="card">
       <div class="row">
@@ -142,6 +149,10 @@
     const saveLaunch = () => invoke("set_launch_settings", { mode: mode.value || null, timeLimitMinutes: Number(limit.value) });
     mode.onchange = saveLaunch;
     limit.onchange = saveLaunch;
+
+    const prAlerts = document.getElementById("pr-alerts");
+    prAlerts.checked = await invoke("pull_request_alerts");
+    prAlerts.onchange = () => invoke("set_pull_request_alerts", { enabled: prAlerts.checked });
 
     const autostart = document.getElementById("autostart");
     autostart.checked = await invoke("autostart_enabled");

@@ -39,6 +39,8 @@ Still to come in stage 3: «Show» (bringing the terminal forward), buttons in t
 
 - Claude in the background (`core/runs.rs`, `app/src/runs.rs`, 2026-11-18): the same commands as `claude -p` with no window, as the Mac's `RunStore`. `runs/<id>.json` and `.log` keep the Mac's shape; the Mac's permission rules go in as a file, and on Windows every `Bash(…)` rule is also a `PowerShell(…)` rule, with PowerShell's deletions, downloads and environment reads denied. A time limit, «Остановить» (`taskkill /T /F` on Windows), a notification with the result, the log in the panel. The first launch asks «Терминал» or «Фон» («Запомнить выбор»); Settings → «Фоновые задачи» holds the mode and the limit.
 
+- notifications when a PR's CI fails or is fixed and when a PR closes (between two scans, as the Mac's `PullRequestAlerts`; Settings → «Проекты» turns them off), a red dot on the tray icon while a project needs attention (orange still wins while a session waits) and «Проектов: N · с проблемами: M» in its hint (2026-11-18).
+
 Still to come in stage 4: removing worktrees from the panel, the log, permission rules, PR notifications, a red dot on the tray icon.
 
 On a Mac this build never installs hooks into the real `~/.claude/settings.json`: the Mac app owns it. It does so only with another `CLAUDE_CONFIG_DIR`.

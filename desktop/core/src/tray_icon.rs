@@ -1,6 +1,6 @@
 //! The tray icon drawn on the fly (docs/specs/SPEC-windows.md §4.1): Windows shows only a small square icon, so instead of
-//! the Mac's menu bar text there is a ring of the session limit, coloured by level, and a dot in the corner when
-//! something waits for the person. Pure pixels (RGBA), so it is tested anywhere and handed to Tauri as is.
+//! the Mac's menu bar text there is a ring of the session limit, coloured by level, and a dot in the corner: orange
+//! while a session waits for the person, red while a project needs attention (the Mac's menu bar alert). Pure pixels (RGBA), so it is tested anywhere and handed to Tauri as is.
 
 use crate::usage::UsageLevel;
 
@@ -17,9 +17,9 @@ pub fn level_color(level: UsageLevel) -> [u8; 3] {
     }
 }
 
-/// `size`×`size` RGBA: a grey track, the used part from twelve o'clock clockwise in the level's colour, and an
-/// orange dot top right when `attention`. Edges are smoothed by covering each pixel with 4×4 samples.
-pub fn ring(size: u32, percent: f64, attention: bool) -> Vec<u8> {
+/// `size`×`size` RGBA: a grey track, the used part from twelve o'clock clockwise in the level's colour, and a dot of
+/// `dot`'s colour top right. Edges are smoothed by covering each pixel with 4×4 samples.
+pub fn ring(size: u32, percent: f64, dot: Option<[u8; 3]>) -> Vec<u8> {
     let color = level_color(UsageLevel::of(percent));
     let fraction = (percent / 100.0).clamp(0.0, 1.0);
     let n = size as f64;
@@ -28,6 +28,7 @@ pub fn ring(size: u32, percent: f64, attention: bool) -> Vec<u8> {
     let inner = outer - n * 0.2;
     let dot_center = (n * 0.8, n * 0.2);
     let dot_radius = n * 0.17;
+    let (attention, dot_color) = (dot.is_some(), dot.unwrap_or(ORANGE));
     let mut pixels = vec![0u8; (size * size * 4) as usize];
     for y in 0..size {
         for x in 0..size {
@@ -56,7 +57,7 @@ pub fn ring(size: u32, percent: f64, attention: bool) -> Vec<u8> {
                 for channel in 0..3 {
                     let value = track * (TRACK[3] as f64 / 255.0) * TRACK[channel] as f64
                         + used * color[channel] as f64
-                        + dot * ORANGE[channel] as f64;
+                        + dot * dot_color[channel] as f64;
                     pixels[index + channel] = (value / alpha).round().min(255.0) as u8;
                 }
                 pixels[index + 3] = (alpha * 255.0).round() as u8;
@@ -78,7 +79,7 @@ mod tests {
     #[test]
     fn ring_fills_clockwise_from_the_top() {
         let size = 32;
-        let quarter = ring(size, 25.0, false);
+        let quarter = ring(size, 25.0, None);
         assert_eq!(quarter.len(), (size * size * 4) as usize);
         // On the ring, right of twelve o'clock (used) and left of it (not yet).
         let right = pixel(&quarter, size, 22, 6);
@@ -93,10 +94,12 @@ mod tests {
     #[test]
     fn colour_and_dot() {
         let size = 32;
-        let high = ring(size, 90.0, true);
+        let high = ring(size, 90.0, Some(ORANGE));
         assert_eq!(&pixel(&high, size, 9, 20)[..3], &RED, "90 % fills most of the ring in red");
         assert_eq!(pixel(&high, size, 26, 6), [ORANGE[0], ORANGE[1], ORANGE[2], 255], "the dot top right");
-        let calm = ring(size, 90.0, false);
+        let calm = ring(size, 90.0, None);
         assert_ne!(pixel(&calm, size, 26, 6)[..3], ORANGE);
+        let red = ring(size, 10.0, Some(RED));
+        assert_eq!(pixel(&red, size, 26, 6), [RED[0], RED[1], RED[2], 255], "a project's alert is red");
     }
 }

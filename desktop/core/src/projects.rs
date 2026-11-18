@@ -435,6 +435,62 @@ pub fn ci_state(rollup: &[Value]) -> Ci {
     }
 }
 
+// MARK: - Pull request changes
+
+/// What changed in a PR between two scans (the Mac's `PullRequestAlerts`).
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub enum PrChangeKind {
+    CiFailed,
+    CiFixed,
+    Closed,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct PrChange {
+    pub kind: PrChangeKind,
+    pub project: String,
+    pub number: u64,
+    pub title: String,
+    pub url: Option<String>,
+}
+
+/// CI went red, or from red to green, or a PR left the open list. A project without PR data in either scan (no
+/// `gh`, offline) says nothing: that isn't «all closed».
+pub fn pull_request_changes(old: &[Project], new: &[Project]) -> Vec<PrChange> {
+    let mut changes = Vec::new();
+    for project in new {
+        let Some(previous) = old.iter().find(|p| p.name == project.name) else { continue };
+        let (Some(was), Some(now)) = (&previous.open_prs, &project.open_prs) else { continue };
+        for pr in was {
+            let change = |kind, current: &PullRequest| PrChange {
+                kind,
+                project: project.name.clone(),
+                number: pr.number,
+                title: current.title.clone(),
+                url: current.url.clone(),
+            };
+            match now.iter().find(|n| n.number == pr.number) {
+                None => changes.push(change(PrChangeKind::Closed, pr)),
+                Some(updated) if updated.ci == Ci::Fail && pr.ci != Ci::Fail => changes.push(change(PrChangeKind::CiFailed, updated)),
+                Some(updated) if pr.ci == Ci::Fail && updated.ci == Ci::Ok => changes.push(change(PrChangeKind::CiFixed, updated)),
+                _ => {}
+            }
+        }
+    }
+    changes
+}
+
+/// A notification's title and text for a change.
+pub fn pr_change_text(s: &Strings, change: &PrChange) -> (String, String) {
+    let number = change.number.to_string();
+    let key = match change.kind {
+        PrChangeKind::CiFailed => "❌ CI упал: %@ #%lld",
+        PrChangeKind::CiFixed => "✅ CI снова зелёный: %@ #%lld",
+        PrChangeKind::Closed => "PR закрыт или смерджен: %@ #%lld",
+    };
+    (s.format(key, &[&change.project, &number]), change.title.clone())
+}
+
 // MARK: - STATUS.md
 
 pub fn read_status(repo: &Path) -> Option<Status> {
@@ -678,6 +734,31 @@ mod tests {
         assert_eq!(ago(&s, now - chrono::Duration::days(2), now), "2 дн назад");
         assert_eq!(track_ahead("[ahead 2, behind 1]"), Some(2));
         assert_eq!(track_ahead("[behind 1]"), None);
+    }
+
+    #[test]
+    fn pull_request_alerts() {
+        let pr = |number, ci| PullRequest { number, title: format!("PR {number}"), url: None, is_draft: false, ci };
+        let project = |name: &str, prs: Option<Vec<PullRequest>>| Project {
+            name: name.into(), path: PathBuf::from(name), branch: "main".into(), default_branch: "origin/main".into(),
+            remote: None, last_activity: None, dirty: 0, stashes: 0, open_prs: prs, worktrees: vec![], status: None,
+            attention: vec![], health: Health::Green,
+        };
+        let old = [
+            project("Shop", Some(vec![pr(1, Ci::Pending), pr(2, Ci::Fail), pr(3, Ci::Ok), pr(4, Ci::Fail)])),
+            project("Notes", Some(vec![pr(9, Ci::Ok)])),
+        ];
+        let new = [
+            project("Shop", Some(vec![pr(1, Ci::Fail), pr(2, Ci::Ok), pr(4, Ci::Pending)])),
+            project("Notes", None),
+            project("Site", Some(vec![pr(5, Ci::Fail)])),
+        ];
+        let changes = pull_request_changes(&old, &new);
+        let kinds: Vec<(u64, PrChangeKind)> = changes.iter().map(|c| (c.number, c.kind.clone())).collect();
+        assert_eq!(kinds, [(1, PrChangeKind::CiFailed), (2, PrChangeKind::CiFixed), (3, PrChangeKind::Closed)],
+            "red to pending is quiet; no PR data or a new project says nothing");
+        assert_eq!(pr_change_text(&ru(), &changes[0]), ("❌ CI упал: Shop #1".to_owned(), "PR 1".to_owned()));
+        assert!(pull_request_changes(&[], &new).is_empty(), "the first scan announces nothing");
     }
 
     #[test]
