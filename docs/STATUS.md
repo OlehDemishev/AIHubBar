@@ -5,6 +5,7 @@
 **Updated:** 2026-11-18
 
 **Now:**
+- 2026-11-18: Windows — «Ресурсы компьютера»: processor, memory, disk, network, battery, graphics, the busiest programs, the Mac's alerts (#434)
 - 2026-11-18: Windows stage 6 begun — «Не спать»: a power request while Claude works, on power, with a monitor, while chosen programs run, or by hand; Settings → «Модули» (#432, merged; a real power request taken and released on Windows CI)
 - 2026-11-18: Windows stage 5 finished — a profile's commands, stages, metrics, service and rights in Settings; API prices and a monthly budget; `.docx` word counts; the first start opens the assistant (#430, merged)
 - 2026-11-18: Windows — the profile assistant: template, folder, stages, metrics, calendar, service, launch and name (#428, merged)
@@ -62,7 +63,7 @@
 - check on the Air: the island at the real notch
 - promotion (docs/LAUNCH.md): r/ClaudeAI, the lists, r/macapps, Show HN, Product Hunt, Homebrew
 - content (docs/specs/SPEC-content.md, agreed): stage 2 «Версии», then batch tasks; better after the first feedback from people
-- Windows: on the laptop the live check of SPEC-windows §11.4 (with a real permission request answered from the panel) the «Проекты» card's buttons, a Claude launch in Windows Terminal and one in the background (do the `PowerShell(…)` rules let it build and check a project without Git Bash?); then the rest of stage 6 (Ресурсы, быстрые команды и переключатели); stage 3 leftovers («Показать», buttons in the notification) need the laptop
+- Windows: on the laptop the live check of SPEC-windows §11.4 (with a real permission request answered from the panel) the «Проекты» card's buttons, a Claude launch in Windows Terminal and one in the background (do the `PowerShell(…)` rules let it build and check a project without Git Bash?); then the rest of stage 6 (быстрые команды и переключатели); stage 3 leftovers («Показать», buttons in the notification) need the laptop
 
 **Needs Oleh:**
 - Windows laptop: install the tools and copy the two CLAUDE.md files as in `desktop/WINDOWS-DEV.md`, sign in to Claude Code there; choose the Windows signing (SPEC-windows §7)
@@ -98,6 +99,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-18 — Windows: «Ресурсы компьютера» (branch `feat/desktop-resources`)
+
+Done: `desktop/core/resources.rs` ports the Mac's `SystemSampler` and `ResourceAlerts`: processor, memory, the system disk, network, graphics and the busiest programs through `sysinfo` 0.40.1 (pinned: 0.40.4 was two days old), the battery through `GetSystemPowerStatus`, a memory shortage from Windows' own low memory signal; the same alerts as the Mac, each once until it clears. `app/src/resources.rs` reads every 30 s in the background and every 2 s while the panel is visible, puts «Процессор … · память …» into the tray's hint and offers «Открыть Диспетчер задач». Settings → «Модули» → «Ресурсы компьютера» with the alerts and the disk threshold. Percent signs now work in the interface's texts (`%%`, as in the Mac catalog); percents in the block come from the webview's `Intl`. Four new catalog texts with 12 translations each.
+Checked: `python3 scripts/strings.py --check` (434 texts), `scripts/strings-check.py` (1862 keys), `cargo test --workspace` on the Mac (core 105: alerts once per event and again after clearing, the 80 % middle that neither fires nor clears, memory and battery readings, the busiest programs, a real reading of this Mac with its disk found). The panel block and the settings in a browser with sample replies: six rows with coloured bars, the 2 s refresh, a memory warning, the busiest programs; alerts off and on, the threshold, the module off and on. The Windows calls are built only by CI here.
+Left: not seen on the laptop (graphics through `sysinfo`, the low memory signal, `taskmgr`); the profile's own choice of rows can't be edited here yet.
 
 ## 2026-11-18 — Windows: «Не спать» (branch `feat/desktop-keep-awake`)
 

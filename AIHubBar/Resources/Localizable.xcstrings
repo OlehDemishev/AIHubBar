@@ -17461,6 +17461,82 @@
         }
       }
     },
+    "Больше 90 % уже 5 минут. Кто нагружает — в панели, блок «Ресурсы компьютера».": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "أكثر من 90 % — منذ 5 دقائق. السبب في اللوحة، كتلة «موارد الكمبيوتر»."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Über 90 % — seit 5 Minuten. Wer es verursacht: im Panel, Block „Computer-Ressourcen“."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Above 90 % — for 5 minutes now. What causes it: the panel, “Computer Resources” block."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Más del 90 % — ya 5 minutos. Qué lo causa: en el panel, bloque «Recursos del ordenador»."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plus de 90 % — depuis 5 minutes. La cause : dans le panneau, bloc « Ressources de l’ordinateur »."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Di atas 90 % — sudah 5 menit. Penyebabnya: di panel, blok “Sumber daya komputer”."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Oltre il 90 % — da 5 minuti. Chi lo causa: nel pannello, blocco «Risorse del computer»."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "90 % 超えが 5 分続いています。原因はパネルの「コンピュータのリソース」で確認できます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "90 % 이상이 5분째입니다. 원인은 패널의 «컴퓨터 리소스» 블록에서 확인하세요."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Powyżej 90 % — od 5 minut. Co obciąża: w panelu, blok „Zasoby komputera”."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Acima de 90 % — já há 5 minutos. O que causa: no painel, bloco “Recursos do computador”."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Понад 90 % — уже 5 хвилин. Хто навантажує — у панелі, блок «Ресурси комп’ютера»."
+          }
+        }
+      }
+    },
     "Больше не предлагать": {
       "localizations": {
         "ar": {
@@ -72239,6 +72315,82 @@
         }
       }
     },
+    "Открыть Диспетчер задач": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "فتح إدارة المهام"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Task-Manager öffnen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open Task Manager"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abrir el Administrador de tareas"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ouvrir le Gestionnaire des tâches"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buka Pengelola Tugas"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apri Gestione attività"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "タスク マネージャーを開く"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "작업 관리자 열기"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otwórz Menedżer zadań"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abrir o Gerenciador de Tarefas"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Відкрити Диспетчер завдань"
+          }
+        }
+      }
+    },
     "Открыть Мониторинг системы": {
       "localizations": {
         "ar": {
@@ -93918,6 +94070,82 @@
         }
       }
     },
+    "Ресурсы компьютера": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "موارد الكمبيوتر"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Computer-Ressourcen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Computer Resources"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recursos del ordenador"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ressources de l’ordinateur"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sumber daya komputer"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Risorse del computer"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "コンピュータのリソース"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "컴퓨터 리소스"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zasoby komputera"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recursos do computador"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ресурси комп’ютера"
+          }
+        }
+      }
+    },
     "Ровный расход к этому моменту: %lld %%": {
       "localizations": {
         "ar": {
@@ -100160,6 +100388,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Символ"
+          }
+        }
+      }
+    },
+    "Система сообщает о критической нехватке памяти. Закройте лишние приложения.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يُبلغ النظام عن نقص حاد في الذاكرة. أغلق التطبيقات غير الضرورية."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Das System meldet kritischen Speichermangel. Beenden Sie nicht benötigte Apps."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The system reports a critical memory shortage. Quit the apps you don’t need."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El sistema informa de una falta crítica de memoria. Cierra las apps que no necesites."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le système signale un manque critique de mémoire. Fermez les apps inutiles."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sistem melaporkan kekurangan memori kritis. Tutup aplikasi yang tidak perlu."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il sistema segnala una carenza critica di memoria. Chiudi le app che non servono."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "システムがメモリの深刻な不足を報告しています。不要なアプリを終了してください。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "시스템이 심각한 메모리 부족을 알립니다. 필요 없는 앱을 종료하세요."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "System zgłasza krytyczny brak pamięci. Zamknij niepotrzebne aplikacje."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O sistema informa falta crítica de memória. Feche os apps desnecessários."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Система повідомляє про критичну нестачу пам’яті. Закрийте зайві застосунки."
           }
         }
       }

@@ -12,6 +12,7 @@ mod commands;
 mod keep_awake;
 mod limits;
 mod profiles;
+mod resources;
 mod projects;
 mod runs;
 mod services;
@@ -342,6 +343,7 @@ fn main() {
         .manage(services::Agents::default())
         .manage(calendar::Calendar::default())
         .manage(keep_awake::KeepAwake::default())
+        .manage(resources::Resources::default())
         .manage(AppState { settings: Mutex::new(load_settings()) })
         .invoke_handler(tauri::generate_handler![
             ui_texts, set_language, dismiss_tray_hint, autostart_enabled, set_autostart, open_settings, hide_panel, quit,
@@ -365,6 +367,7 @@ fn main() {
             profiles::export_settings, profiles::export_profile,
             keep_awake::keep_awake_view, keep_awake::keep_awake_hold, keep_awake::keep_awake_release, keep_awake::modules_view,
             keep_awake::set_module, keep_awake::set_keep_awake_rules, keep_awake::choose_keep_awake_apps,
+            resources::resources_view, resources::open_task_manager, resources::resource_settings, resources::set_resource_alerts,
             profiles::choose_import, profiles::import_view, profiles::apply_import, profiles::cancel_import
         ])
         .setup(move |app| {
@@ -381,6 +384,7 @@ fn main() {
             services::Agents::start(&handle);
             handle.state::<calendar::Calendar>().start(handle.clone());
             handle.state::<keep_awake::KeepAwake>().start(handle.clone());
+            handle.state::<resources::Resources>().start(handle.clone());
             if first_start && handle.state::<AppState>().settings.lock().unwrap().profiles.is_empty() {
                 eprintln!("first start: the assistant opens");
                 assistant::open_assistant(handle.clone());

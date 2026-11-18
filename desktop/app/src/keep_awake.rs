@@ -1,6 +1,6 @@
 //! Stage 6 «Не спать» (SPEC-windows §4.10, the Mac's `KeepAwakeController` and `KeepAwakeView`): the rules are looked
 //! at every 15 seconds and on every change; the panel shows what holds the computer, a switch and quick timers;
-//! Settings → «Модули» switches the module and its rules. Only while the module is on.
+//! Settings → «Модули» switches the modules (`set_module`, also «Ресурсы компьютера») and these rules. Only while the module is on.
 
 use crate::{save, strings, AppState};
 use claudepult_core::keep_awake::{self, App, Hold, Manual, Reason, Rules};
@@ -121,12 +121,13 @@ pub fn keep_awake_release(app: AppHandle) -> KeepAwakeView {
 #[serde(rename_all = "camelCase")]
 pub struct ModulesView {
     keep_awake: bool,
+    resources: bool,
     rules: Rules,
 }
 
 fn modules(app: &AppHandle) -> ModulesView {
     let settings = app.state::<AppState>().settings.lock().unwrap().clone();
-    ModulesView { keep_awake: settings.module_on(KIND), rules: settings.keep_awake.clone() }
+    ModulesView { keep_awake: settings.module_on(KIND), resources: settings.module_on("resources"), rules: settings.keep_awake.clone() }
 }
 
 #[tauri::command]
@@ -143,6 +144,8 @@ pub fn set_module(app: AppHandle, kind: String, on: bool) -> Result<ModulesView,
     eprintln!("module {kind}: {}", if on { "on" } else { "off" });
     app.state::<KeepAwake>().evaluate(&app);
     let _ = app.emit("keep-awake-changed", ());
+    let _ = app.emit("resources-changed", ());
+    app.state::<crate::limits::Limits>().update_tray(&app);
     Ok(modules(&app))
 }
 
