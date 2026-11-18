@@ -315,3 +315,17 @@ input.switch:checked::after { inset-inline-start: 14px; }
 .gauge .value .warning { color: #ff9500; }
 .gauge .text { grid-column: 2 / 4; font-variant-numeric: tabular-nums; }
 .resources .processes { margin: 6px 0 0; font-size: 11px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* «Быстрые команды»: buttons two per row, «Запустить?» under them, the last results. */
+.quick-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 6px; }
+button.quick { display: flex; align-items: center; gap: 6px; font-size: 12px; padding: 5px 8px; text-align: start; min-width: 0; }
+button.quick .glyph { width: 16px; flex: none; text-align: center; }
+button.quick .name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.quick-confirm { display: flex; align-items: center; gap: 6px; margin-top: 6px; font-size: 12px; }
+.quick-confirm .spacer { flex: 1; }
+.quick-results p { margin: 4px 0 0; font-size: 12px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+.quick-results .warning { color: #ff9500; }
+.quick-editor { border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; margin: 6px 0; display: flex; flex-direction: column; gap: 4px; }
+.quick-editor-head { display: flex; gap: 6px; align-items: center; }
+.quick-editor-head input { flex: 1; min-width: 0; }
+.quick-editor input.mono { font-family: ui-monospace, Consolas, monospace; font-size: 12px; }

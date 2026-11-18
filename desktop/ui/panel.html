@@ -69,6 +69,18 @@
         <button class="small" id="keep-awake-release" data-t="Отпустить" data-t-title="Снять ручной запрет сна: дальше решают правила" hidden></button>
       </p>
     </section>
+    <section class="card quick-commands" id="quick-commands" hidden>
+      <h2 data-t="Быстрые команды"></h2>
+      <p class="secondary" id="quick-empty" data-t="Команд нет — добавьте в Настройках → «Модули»." hidden></p>
+      <div class="quick-grid" id="quick-buttons"></div>
+      <div class="quick-confirm" id="quick-confirm" hidden>
+        <span id="quick-confirm-text"></span>
+        <span class="spacer"></span>
+        <button class="small" id="quick-cancel" data-t="Отмена"></button>
+        <button class="small prominent" id="quick-run" data-t="Запустить"></button>
+      </div>
+      <div class="quick-results" id="quick-results"></div>
+    </section>
     <section class="card upcoming" id="upcoming" hidden>
       <div class="upcoming-head">
         <h2 data-t="Ближайшее"></h2>
@@ -347,6 +359,52 @@
     window.__TAURI__.event.listen("profiles-changed", showResources);
     setInterval(() => { if (!document.hidden && !document.getElementById("resources").hidden) showResources(); }, 2000);
     window.addEventListener("focus", showResources);
+
+    // «Быстрые команды»: the library as buttons, two per row; «Запустить?» first for a command that asks; the last
+    // result of each under them.
+    let confirming = null;
+    async function showQuickCommands() {
+      const view = await invoke("quick_commands_view");
+      document.getElementById("quick-commands").hidden = !view.shown;
+      if (!view.shown) return;
+      document.getElementById("quick-empty").hidden = view.buttons.length > 0;
+      document.getElementById("quick-buttons").replaceChildren(...view.buttons.map((command) => {
+        const button = document.createElement("button");
+        button.className = "quick";
+        button.title = command.value;
+        button.disabled = command.running;
+        button.innerHTML = `<span class="glyph" aria-hidden="true"></span><span class="name"></span>`;
+        button.querySelector(".glyph").textContent = command.running ? "…" : command.glyph;
+        button.querySelector(".name").textContent = command.title;
+        button.onclick = () => {
+          if (command.confirm) { confirming = command; return showConfirm(); }
+          invoke("run_quick_command", { id: command.id });
+        };
+        return button;
+      }));
+      if (confirming && !view.buttons.some((b) => b.id === confirming.id)) confirming = null;
+      showConfirm();
+      document.getElementById("quick-results").replaceChildren(...view.buttons.filter((b) => b.result).map((command) => {
+        const line = document.createElement("p");
+        line.className = command.result.isError ? "warning" : "secondary";
+        line.textContent = `${command.result.isError ? "⚠" : "✓"} ${command.title}: ${command.result.text}`;
+        return line;
+      }));
+    }
+    function showConfirm() {
+      document.getElementById("quick-confirm").hidden = !confirming;
+      if (confirming) document.getElementById("quick-confirm-text").textContent = t("Запустить «%@»?", confirming.title);
+    }
+    document.getElementById("quick-cancel").onclick = () => { confirming = null; showConfirm(); };
+    document.getElementById("quick-run").onclick = () => {
+      const command = confirming;
+      confirming = null;
+      showConfirm();
+      if (command) invoke("run_quick_command", { id: command.id });
+    };
+    showQuickCommands();
+    window.__TAURI__.event.listen("quick-commands-changed", showQuickCommands);
+    window.__TAURI__.event.listen("profiles-changed", showQuickCommands);
 
     // «Не спать»: what holds the computer, the switch (until switched off) and quick timers; the rules decide the rest.
     const keepAwakeSwitch = document.getElementById("keep-awake-switch");

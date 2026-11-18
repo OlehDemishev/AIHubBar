@@ -5,6 +5,7 @@
 **Updated:** 2026-11-18
 
 **Now:**
+- 2026-11-18: Windows — «Быстрые команды»: own buttons for a PowerShell script, a terminal window, a link, file or folder; the library in Settings → «Модули» (#436)
 - 2026-11-18: Windows — «Ресурсы компьютера»: processor, memory, disk, network, battery, graphics, the busiest programs, the Mac's alerts (#434, merged; a real reading on Windows and Linux CI)
 - 2026-11-18: Windows stage 6 begun — «Не спать»: a power request while Claude works, on power, with a monitor, while chosen programs run, or by hand; Settings → «Модули» (#432, merged; a real power request taken and released on Windows CI)
 - 2026-11-18: Windows stage 5 finished — a profile's commands, stages, metrics, service and rights in Settings; API prices and a monthly budget; `.docx` word counts; the first start opens the assistant (#430, merged)
@@ -63,7 +64,7 @@
 - check on the Air: the island at the real notch
 - promotion (docs/LAUNCH.md): r/ClaudeAI, the lists, r/macapps, Show HN, Product Hunt, Homebrew
 - content (docs/specs/SPEC-content.md, agreed): stage 2 «Версии», then batch tasks; better after the first feedback from people
-- Windows: on the laptop the live check of SPEC-windows §11.4 (with a real permission request answered from the panel) the «Проекты» card's buttons, a Claude launch in Windows Terminal and one in the background (do the `PowerShell(…)` rules let it build and check a project without Git Bash?); then the rest of stage 6 (быстрые команды и переключатели); stage 3 leftovers («Показать», buttons in the notification) need the laptop
+- Windows: on the laptop the live check of SPEC-windows §11.4 (with a real permission request answered from the panel) the «Проекты» card's buttons, a Claude launch in Windows Terminal and one in the background (do the `PowerShell(…)` rules let it build and check a project without Git Bash?); then the rest of stage 6 (быстрые переключатели, сочетания клавиш для команд); stage 3 leftovers («Показать», buttons in the notification) need the laptop
 
 **Needs Oleh:**
 - Windows laptop: install the tools and copy the two CLAUDE.md files as in `desktop/WINDOWS-DEV.md`, sign in to Claude Code there; choose the Windows signing (SPEC-windows §7)
@@ -99,6 +100,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-18 — Windows: «Быстрые команды» (branch `feat/desktop-quick-commands`)
+
+Done: `desktop/core/quick_commands.rs` ports the Mac's `QuickCommand`: the same JSON, what a command does without running it, a background script (PowerShell without its profile and with UTF-8 output on Windows, `sh -lc` on Linux) with both streams read, 10 minutes at most, its last line or «Ошибка (код N): …». `launch::open_line_in_terminal` opens a typed command line in a terminal window. `app/src/quick_commands.rs` gives the panel's buttons (two per row, «Запустить «…»?», the last result of each, a notification for a script) and Settings → «Модули» → «Быстрые команды» with the library editor. Five new catalog texts with 12 translations each (no «Команды» macOS, «Модули» instead of «Что показывать», `winget` for `brew`).
+Checked: `python3 scripts/strings.py --check` (454 texts), `scripts/strings-check.py` (1867 keys), `cargo test --workspace` on the Mac (core 108: invocations of each kind, a Mac library with a repeated id and a shortcut, the examples, real scripts that print, fail with stderr and say nothing). The panel and the editor in a browser with sample replies: a script running then done, «Запустить?» then a terminal error, a command renamed, moved, turned into «Открыть», deleted with «Удалить?», a new one focused. The PowerShell runs are checked by Windows CI only.
+Left: keyboard shortcuts for commands; nothing seen live on the laptop; «Быстрые переключатели».
 
 ## 2026-11-18 — Windows: «Ресурсы компьютера» (branch `feat/desktop-resources`)
 

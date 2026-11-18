@@ -290,17 +290,29 @@ pub fn shell_line(program: &Path, args: &[&str]) -> String {
 
 /// Opens a terminal window in `folder` running `program` with `args`.
 pub fn open_in_terminal(folder: &Path, program: &Path, args: &[&str]) -> Result<(), String> {
-    let mut child = terminal_command(folder, program, args)?.spawn().map_err(|e| e.to_string())?;
+    spawn(terminal_command(folder, &powershell_script(folder, program, args), &shell_line(program, args))?)
+}
+
+/// Opens a terminal window in `folder` running a command line as typed (a quick command «в Терминале»): PowerShell's
+/// on Windows, the shell's elsewhere. The window stays when it ends.
+pub fn open_line_in_terminal(folder: &Path, line: &str) -> Result<(), String> {
+    let script = format!("Set-Location -LiteralPath {}; {line}", ps_quote(&folder.to_string_lossy()));
+    spawn(terminal_command(folder, &script, &format!("{line}; exec \"${{SHELL:-sh}}\""))?)
+}
+
+fn spawn(mut command: std::process::Command) -> Result<(), String> {
+    let mut child = command.spawn().map_err(|e| e.to_string())?;
     std::thread::spawn(move || {
         let _ = child.wait();
     });
     Ok(())
 }
 
+/// A terminal in `folder` running `script` (PowerShell, Windows) or `line` (`sh -c`, elsewhere).
 #[cfg(windows)]
-fn terminal_command(folder: &Path, program: &Path, args: &[&str]) -> Result<std::process::Command, String> {
+fn terminal_command(folder: &Path, script: &str, _line: &str) -> Result<std::process::Command, String> {
     use std::os::windows::process::CommandExt;
-    let encoded = encode_powershell(&powershell_script(folder, program, args));
+    let encoded = encode_powershell(script);
     let shell = ["-NoLogo", "-NoExit", "-EncodedCommand", &encoded];
     if let Some(wt) = command::find("wt") {
         let mut command = command::command(&wt);
@@ -314,17 +326,16 @@ fn terminal_command(folder: &Path, program: &Path, args: &[&str]) -> Result<std:
 }
 
 #[cfg(target_os = "macos")]
-fn terminal_command(folder: &Path, program: &Path, args: &[&str]) -> Result<std::process::Command, String> {
+fn terminal_command(folder: &Path, _script: &str, line: &str) -> Result<std::process::Command, String> {
     // Development only: Terminal.app types `cd <folder> && <line>`, as the Mac app does.
-    let line = format!("cd {} && {}", sh_quote(&folder.to_string_lossy()), shell_line(program, args).trim_end_matches("; exec \"${SHELL:-sh}\""));
+    let line = format!("cd {} && {}", sh_quote(&folder.to_string_lossy()), line.trim_end_matches("; exec \"${SHELL:-sh}\""));
     let mut command = std::process::Command::new("osascript");
     command.args(["-e", "on run argv", "-e", "tell application \"Terminal\" to do script (item 1 of argv)", "-e", "tell application \"Terminal\" to activate", "-e", "end run", &line]);
     Ok(command)
 }
 
 #[cfg(all(unix, not(target_os = "macos")))]
-fn terminal_command(folder: &Path, program: &Path, args: &[&str]) -> Result<std::process::Command, String> {
-    let line = shell_line(program, args);
+fn terminal_command(folder: &Path, _script: &str, line: &str) -> Result<std::process::Command, String> {
     let (name, terminal) = ["gnome-terminal", "konsole", "xfce4-terminal", "x-terminal-emulator", "kitty", "alacritty", "xterm"]
         .iter()
         .find_map(|name| command::find(name).map(|path| (*name, path)))

@@ -165,6 +165,19 @@
         <p class="secondary" data-t="Любое сработавшее правило не даёт компьютеру уснуть; вручную — переключателем и таймерами в панели. Системные настройки не меняются: как только правил нет, компьютер засыпает как обычно. Внешний монитор — второй экран ноутбука или любой экран компьютера без батареи."></p>
       </div>
     </section>
+    <section class="card">
+      <div class="row">
+        <label for="module-quick-commands"><strong data-t="Быстрые команды"></strong></label>
+        <input type="checkbox" class="switch" id="module-quick-commands">
+      </div>
+      <p class="secondary" data-t="Свои кнопки: скрипт в фоне или в Терминале, ссылка, файл, папка или программа."></p>
+      <div id="quick-library" hidden>
+        <h3 data-t="Команды"></h3>
+        <div id="quick-editors"></div>
+        <button id="quick-add" data-t="Добавить команду"></button>
+        <p class="secondary" data-t="Скрипт в фоне запускается в домашней папке (PowerShell на Windows, sh на Linux), итог приходит уведомлением; «в Терминале» — открывает новое окно. Открыть — ссылка (https://…) или путь (~/…)."></p>
+      </div>
+    </section>
     <h1 data-t="Фоновые задачи"></h1>
     <section class="card">
       <div class="row">
@@ -698,6 +711,84 @@
     document.getElementById("keep-awake-choose").onclick = async () => showModules(await invoke("choose_keep_awake_apps"));
     document.getElementById("keep-awake-clear").onclick = () => saveRules({ whileApps: [] });
     showModules(await invoke("modules_view"));
+
+    // «Быстрые команды»: on or off, and the library — each command a small form, written when a field is left.
+    let quick = null;
+    const quickModule = document.getElementById("module-quick-commands");
+    const saveQuick = async () => { quick = await invoke("set_quick_commands", { commands: quick.commands }); };
+    const kinds = [["script", t("Скрипт в фоне")], ["terminal", t("Скрипт в Терминале")], ["open", t("Открыть ссылку, файл или папку")]];
+    const placeholder = (kind) => (kind === "open" ? t("https://… или ~/папка") : t("команда, например: winget upgrade --all"));
+    function quickEditor(command, index) {
+      const box = document.createElement("div");
+      box.className = "quick-editor";
+      const head = document.createElement("div");
+      head.className = "quick-editor-head";
+      const symbol = document.createElement("select");
+      symbol.title = t("Значок кнопки");
+      symbol.setAttribute("aria-label", t("Значок кнопки"));
+      for (const [name, glyph] of quick.symbols) symbol.add(new Option(glyph, name));
+      symbol.value = command.symbol;
+      symbol.onchange = () => { command.symbol = symbol.value; saveQuick(); };
+      const title = Object.assign(document.createElement("input"), { type: "text", value: command.title });
+      title.setAttribute("aria-label", t("Название"));
+      title.onchange = () => { command.title = title.value; saveQuick(); };
+      const move = (offset, label, glyph) => {
+        const button = Object.assign(document.createElement("button"), { textContent: glyph, title: label, disabled: !quick.commands[index + offset] });
+        button.setAttribute("aria-label", label);
+        button.onclick = async () => {
+          [quick.commands[index], quick.commands[index + offset]] = [quick.commands[index + offset], quick.commands[index]];
+          await saveQuick();
+          showQuickLibrary();
+        };
+        return button;
+      };
+      const remove = Object.assign(document.createElement("button"), { textContent: t("Удалить команду") });
+      remove.onclick = async () => {
+        if (!remove.dataset.asked) { remove.dataset.asked = "1"; remove.textContent = t("Удалить?"); return; }
+        quick.commands.splice(index, 1);
+        await saveQuick();
+        showQuickLibrary();
+      };
+      head.append(symbol, title, move(-1, t("Выше"), "↑"), move(1, t("Ниже"), "↓"), remove);
+      const kind = document.createElement("select");
+      for (const [value, label] of kinds) kind.add(new Option(label, value));
+      kind.value = command.kind;
+      const value = Object.assign(document.createElement("input"), { type: "text", value: command.value, placeholder: placeholder(command.kind) });
+      value.className = "mono";
+      value.setAttribute("aria-label", t("Что делает"));
+      kind.onchange = () => { command.kind = kind.value; value.placeholder = placeholder(kind.value); saveQuick(); };
+      value.onchange = () => { command.value = value.value; saveQuick(); };
+      const kindRow = document.createElement("label");
+      kindRow.className = "row";
+      kindRow.append(Object.assign(document.createElement("span"), { textContent: t("Что делает") }), kind);
+      const confirm = Object.assign(document.createElement("input"), { type: "checkbox", checked: command.confirm });
+      confirm.onchange = () => { command.confirm = confirm.checked; saveQuick(); };
+      const confirmRow = document.createElement("label");
+      confirmRow.className = "check-line";
+      confirmRow.append(confirm, " ", t("Спрашивать перед запуском"));
+      box.append(head, kindRow, value, confirmRow);
+      return box;
+    }
+    function showQuickLibrary() {
+      quickModule.checked = quick.on;
+      document.getElementById("quick-library").hidden = !quick.on;
+      // A Mac shortcut from «Команды» can't run here: it isn't shown to edit either.
+      document.getElementById("quick-editors").replaceChildren(...quick.commands.map((c, i) => [c, i]).filter(([c]) => c.kind !== "shortcut").map(([c, i]) => quickEditor(c, i)));
+    }
+    quickModule.onchange = async () => {
+      await invoke("set_module", { kind: "quickCommands", on: quickModule.checked });
+      quick = await invoke("quick_commands_library");
+      showQuickLibrary();
+    };
+    document.getElementById("quick-add").onclick = async () => {
+      quick.commands.push(await invoke("new_quick_command"));
+      await saveQuick();
+      showQuickLibrary();
+      const editors = document.querySelectorAll(".quick-editor");
+      editors[editors.length - 1]?.querySelector("input[type=text]")?.focus();
+    };
+    quick = await invoke("quick_commands_library");
+    showQuickLibrary();
 
     // «Ресурсы компьютера»: on or off, the alerts and the disk threshold.
     const resourcesModule = document.getElementById("module-resources");
