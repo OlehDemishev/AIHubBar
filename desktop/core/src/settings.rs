@@ -46,6 +46,8 @@ pub struct Settings {
     pub hub_disabled: Vec<String>,
     pub hub_gemini_quota: bool,
     pub hub_gemini_daily_limit: u64,
+    /// Whose limits lead the panel and the tray icon (the Mac's `mainService`): `""` automatic, `claude` or a source.
+    pub main_service: String,
     /// `projects_dir` and `launch_mode` of a file from before profiles, for the first profile.
     #[serde(skip)]
     pub before_profiles: (Option<String>, Option<String>),
@@ -71,6 +73,7 @@ impl Default for Settings {
             hub_disabled: Vec::new(),
             hub_gemini_quota: false,
             hub_gemini_daily_limit: 1000,
+            main_service: String::new(),
             before_profiles: (None, None),
         }
     }
@@ -119,6 +122,7 @@ impl Settings {
             quick_commands: crate::quick_commands::library(value.get("quick_commands")),
             hub_disabled: value.get("hub_disabled").and_then(Value::as_array).map(|l| l.iter().filter_map(Value::as_str).map(str::to_owned).collect()).unwrap_or_default(),
             hub_gemini_quota: value.get("hub_gemini_quota").and_then(Value::as_bool).unwrap_or(false),
+            main_service: value.get("main_service").and_then(Value::as_str).unwrap_or_default().to_owned(),
             hub_gemini_daily_limit: value.get("hub_gemini_daily_limit").and_then(Value::as_u64).filter(|n| *n > 0).unwrap_or(1000),
             quick_toggles: value
                 .get("quick_toggles")

@@ -134,8 +134,16 @@ impl Limits {
         let _ = app.emit("limits-changed", ());
     }
 
-    /// The ring of the session limit and the summary in the hint; the app's own icon until the first answer.
+    /// Claude has limits to show (signed in and answered): «Главный сервис» goes to it by default.
+    pub fn has_limits(&self) -> bool {
+        self.state.lock().unwrap().snapshot.as_ref().is_some_and(|s| s.session().is_some() || s.week().is_some())
+    }
+
+    /// The ring of the main service's first limit (Claude's session by default) and the summary in the hint; the
+    /// app's own icon until the first answer.
     pub fn update_tray(&self, app: &AppHandle) {
+        // Read before this store's lock: the main service asks it whether Claude has limits.
+        let lead = app.state::<crate::hub::Hub>().lead_percent(app);
         // An orange dot while a session waits for an answer (stage 3); else a red one while a project needs attention.
         let waiting = app.state::<crate::sessions::Sessions>().attention.load(std::sync::atomic::Ordering::Relaxed);
         let (count, red) = app.state::<crate::projects::Projects>().counts();
@@ -143,7 +151,10 @@ impl Limits {
         let (session, tooltip) = {
             let state = self.state.lock().unwrap();
             let texts = strings(app);
-            let session = state.snapshot.as_ref().and_then(|s| s.session()).map(|w| w.utilization);
+            let session = match lead {
+                Some(percent) => Some(percent),
+                None => state.snapshot.as_ref().and_then(|s| s.session()).map(|w| w.utilization),
+            };
             let mut tooltip = texts::tray_tooltip(&texts, state.snapshot.as_ref(), state.error.as_ref(), Utc::now());
             if count > 0 {
                 tooltip += "\n";

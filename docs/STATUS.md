@@ -5,6 +5,7 @@
 **Updated:** 2026-11-19
 
 **Now:**
+- 2026-11-19: Windows — «Главный сервис»: Codex or another service can lead the panel and the tray icon instead of Claude (#442)
 - 2026-11-18: Windows — other AI services' limits: Codex, Copilot, Gemini CLI, OpenRouter, OpenAI and Anthropic costs under Claude's in the panel, with alerts (#440, merged; CI green on Windows and Linux)
 - 2026-11-18: Windows — «Быстрые переключатели»: dark mode, desktop icons, lock, display off, the Recycle Bin; stage 6 done but «Извлечь диски» and command shortcuts (#438, merged; CI green on Windows and Linux)
 - 2026-11-18: Windows — «Быстрые команды»: own buttons for a PowerShell script, a terminal window, a link, file or folder; the library in Settings → «Модули» (#436, merged; real PowerShell runs pass on Windows CI)
@@ -102,6 +103,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-19 — Windows: «Главный сервис» (branch `feat/desktop-main-service`)
+
+Done: `hub::pick` and `hub::choices` port the Mac's `MainService`: automatic (Claude while it has limits, else the first service with limits), Claude, or a chosen service, falling back to automatic while the chosen one has no limits. The panel draws the main service's first two windows as the rings on top of «Лимиты» with its forecast and error, and Claude (session, week, models) joins «Другие AI»; the tray icon's ring is the main service's first window. Settings → «Сервисы AI» → «Другие AI» → «Главный сервис». One new catalog text with 12 translations: the Mac's note names the menu bar and the island, Windows' names the tray icon.
+Checked: `python3 scripts/strings.py --check` (500 texts), `scripts/strings-check.py` (1871 keys), `cargo test --workspace` on the Mac (core 115: automatic with and without Claude, spend alone never leads, a chosen service, a choice without limits falling back, Claude chosen but not signed in, the saved choice kept in the list). The panel in a browser with sample replies: Claude main, Codex main (its rings on top, Claude's three windows among «Другие AI»), back to automatic; the setting's list. The tray icon itself wasn't seen.
+Left: not seen on the laptop; Antigravity and Cursor; the forecast's history is lost on restart.
 
 ## 2026-11-18 — Windows: other AI services' limits (branch `feat/desktop-other-ai-limits`)
 

@@ -4,7 +4,7 @@
 
 use crate::{save, strings, AppState};
 use chrono::{Local, Utc};
-use claudepult_core::hub::{self, History, Limit, Options, Source, SOURCES};
+use claudepult_core::hub::{self, History, Limit, Main, Options, Source, SOURCES};
 use claudepult_core::{keys, texts};
 use serde::Serialize;
 use std::collections::HashSet;
@@ -85,6 +85,21 @@ impl Hub {
         app.state::<crate::limits::Limits>().update_tray(app);
     }
 
+    /// Whose limits lead: the setting, Claude's limits and the others' (the Mac's `MainService.current`).
+    pub fn main(&self, app: &AppHandle) -> Option<Main> {
+        let choice = app.state::<AppState>().settings.lock().unwrap().main_service.clone();
+        let claude = app.state::<crate::limits::Limits>().has_limits();
+        let limits = self.state.lock().unwrap().limits.clone();
+        hub::pick(&choice, claude, &limits)
+    }
+
+    /// The tray ring's percent while another service than Claude leads: its first limit.
+    pub fn lead_percent(&self, app: &AppHandle) -> Option<f64> {
+        let Some(Main::Hub(source)) = self.main(app) else { return None };
+        let state = self.state.lock().unwrap();
+        state.limits.iter().find(|l| l.source == source)?.windows.iter().find_map(|w| w.percent)
+    }
+
     /// «Codex 42 % · Copilot 75 %» for the tray's hint.
     pub fn tray_line(&self) -> Option<String> {
         let state = self.state.lock().unwrap();
@@ -121,13 +136,26 @@ fn color(percent: f64) -> String {
     format!("#{r:02x}{g:02x}{b:02x}")
 }
 
-/// The panel's «Другие AI» rows.
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct HubView {
+    /// `claude` or the leading source's id: the panel draws its limits first and Claude among «Другие AI».
+    main: &'static str,
+    services: Vec<ServiceView>,
+}
+
+/// The panel's «Другие AI» rows and who leads.
 #[tauri::command]
-pub fn hub_view(app: AppHandle) -> Vec<ServiceView> {
+pub fn hub_view(app: AppHandle) -> HubView {
     let texts = strings(&app);
     let now = Utc::now();
-    let state = app.state::<Hub>().state.lock().unwrap().limits.clone();
-    state
+    let hub = app.state::<Hub>().inner().clone();
+    let main = match hub.main(&app) {
+        Some(Main::Hub(source)) => source.id(),
+        _ => hub::CLAUDE,
+    };
+    let state = hub.state.lock().unwrap().limits.clone();
+    let services = state
         .into_iter()
         .map(|limit| ServiceView {
             id: limit.source.id(),
@@ -147,7 +175,8 @@ pub fn hub_view(app: AppHandle) -> Vec<ServiceView> {
                 })
                 .collect(),
         })
-        .collect()
+        .collect();
+    HubView { main, services }
 }
 
 /// «Обновить» in the panel.
@@ -289,6 +318,41 @@ pub async fn set_gemini_options(app: AppHandle, quota: bool, daily_limit: u64) -
         }
     });
     after_change(app).await
+}
+
+#[derive(Serialize)]
+pub struct Choice {
+    id: String,
+    title: String,
+}
+
+#[derive(Serialize)]
+pub struct MainChoice {
+    /// `""` automatic, `claude` or a source's id.
+    choice: String,
+    /// The services with limits now, and the saved one.
+    choices: Vec<Choice>,
+}
+
+#[tauri::command]
+pub fn main_service(app: AppHandle) -> MainChoice {
+    let texts = strings(&app);
+    let choice = app.state::<AppState>().settings.lock().unwrap().main_service.clone();
+    let limits = app.state::<Hub>().inner().state.lock().unwrap().limits.clone();
+    let choices = hub::choices(&choice, &limits).into_iter().map(|s| Choice { id: s.id().to_owned(), title: s.title(&texts) }).collect();
+    MainChoice { choice, choices }
+}
+
+/// «Главный сервис»: the panel and the tray icon follow at once.
+#[tauri::command]
+pub fn set_main_service(app: AppHandle, choice: String) -> MainChoice {
+    let valid = choice == hub::AUTO || choice == hub::CLAUDE || Source::parse(&choice).is_some();
+    if valid {
+        save(&app, |settings| settings.main_service = choice);
+    }
+    let _ = app.emit("hub-changed", ());
+    app.state::<crate::limits::Limits>().update_tray(&app);
+    main_service(app)
 }
 
 #[tauri::command]
