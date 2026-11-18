@@ -5,7 +5,7 @@
 **Updated:** 2026-11-18
 
 **Now:**
-- 2026-11-18: Windows — Claude from a project in a terminal window: «Следующий шаг», «Своя задача…», «Завершить», a worktree when the folder is busy (branch `feat/desktop-claude-launch`)
+- 2026-11-18: Windows — Claude from a project in a terminal window: «Следующий шаг», «Своя задача…», «Завершить», a worktree when the folder is busy (#402, merged; the PowerShell script runs on Windows in CI)
 - 2026-11-18: Windows stage 4 begun — the git scanner and STATUS.md in the panel's «Проекты» card (#400, merged; tests green on Windows and Linux)
 - 2026-11-17: Windows — the hook installed for Codex and Copilot from Settings (#398, merged; both lines run on Windows in CI)
 - 2026-11-17: Windows — answers to permission requests from the panel and a process alive check (#396, merged)
