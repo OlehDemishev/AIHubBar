@@ -5,7 +5,7 @@
 **Updated:** 2026-11-19
 
 **Now:**
-- 2026-11-19: Windows — «Главный сервис»: Codex or another service can lead the panel and the tray icon instead of Claude (#442)
+- 2026-11-19: Windows — «Главный сервис»: Codex or another service can lead the panel and the tray icon instead of Claude (#442, merged; CI green)
 - 2026-11-18: Windows — other AI services' limits: Codex, Copilot, Gemini CLI, OpenRouter, OpenAI and Anthropic costs under Claude's in the panel, with alerts (#440, merged; CI green on Windows and Linux)
 - 2026-11-18: Windows — «Быстрые переключатели»: dark mode, desktop icons, lock, display off, the Recycle Bin; stage 6 done but «Извлечь диски» and command shortcuts (#438, merged; CI green on Windows and Linux)
 - 2026-11-18: Windows — «Быстрые команды»: own buttons for a PowerShell script, a terminal window, a link, file or folder; the library in Settings → «Модули» (#436, merged; real PowerShell runs pass on Windows CI)
