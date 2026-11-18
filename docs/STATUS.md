@@ -5,7 +5,7 @@
 **Updated:** 2026-11-18
 
 **Now:**
-- 2026-11-18: Windows — the «Календарь» window: a month or week, dates dragged to another day, new plan rows and project dates (branch `feat/desktop-calendar-window`)
+- 2026-11-18: Windows — the «Календарь» window: a month or week, dates dragged to another day, new plan rows and project dates (#426, merged)
 - 2026-11-18: Windows — «Ближайшее»: deadlines, publications and content plan rows of the next 7 days, reminders (#424, merged)
 - 2026-11-18: Windows — other agents (Codex, Gemini CLI, Antigravity, Copilot, Cursor): found with their version, «Открыть в…», a folder command opens one in a terminal with the task on the clipboard (#422, merged)
 - 2026-11-18: Windows — «Сервисы AI»: models by API with keys in Credential Manager, a service per command, «Сравнить» (#420, merged; the Credential Manager test passes on Windows CI)
