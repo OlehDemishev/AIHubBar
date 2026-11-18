@@ -178,6 +178,18 @@
         <p class="secondary" data-t="Скрипт в фоне запускается в домашней папке (PowerShell на Windows, sh на Linux), итог приходит уведомлением; «в Терминале» — открывает новое окно. Открыть — ссылка (https://…) или путь (~/…)."></p>
       </div>
     </section>
+    <section class="card">
+      <div class="row">
+        <label for="module-toggles"><strong data-t="Быстрые переключатели"></strong></label>
+        <input type="checkbox" class="switch" id="module-toggles">
+      </div>
+      <p class="secondary" data-t="Тёмная тема, значки на рабочем столе, блокировка и выключение экрана, корзина — в один клик."></p>
+      <div id="toggle-options" hidden>
+        <h3 data-t="Какие переключатели показывать"></h3>
+        <div id="toggle-choices"></div>
+        <p class="secondary" data-t="Корзина очищается только после подтверждения."></p>
+      </div>
+    </section>
     <h1 data-t="Фоновые задачи"></h1>
     <section class="card">
       <div class="row">
@@ -789,6 +801,29 @@
     };
     quick = await invoke("quick_commands_library");
     showQuickLibrary();
+
+    // «Быстрые переключатели»: on or off, and which tiles show.
+    const togglesModule = document.getElementById("module-toggles");
+    function showToggleSettings(view) {
+      togglesModule.checked = view.on;
+      document.getElementById("toggle-options").hidden = !view.on;
+      document.getElementById("toggle-choices").replaceChildren(...view.available.map((choice) => {
+        const label = document.createElement("label");
+        label.className = "check-line";
+        const box = Object.assign(document.createElement("input"), { type: "checkbox", checked: view.chosen.includes(choice.id) });
+        box.onchange = async () => {
+          const chosen = view.available.map((c) => c.id).filter((id) => (id === choice.id ? box.checked : view.chosen.includes(id)));
+          showToggleSettings(await invoke("set_quick_toggles", { chosen }));
+        };
+        label.append(box, ` ${choice.glyph} ${choice.title}`);
+        return label;
+      }));
+    }
+    togglesModule.onchange = async () => {
+      await invoke("set_module", { kind: "toggles", on: togglesModule.checked });
+      showToggleSettings(await invoke("quick_toggle_settings"));
+    };
+    showToggleSettings(await invoke("quick_toggle_settings"));
 
     // «Ресурсы компьютера»: on or off, the alerts and the disk threshold.
     const resourcesModule = document.getElementById("module-resources");

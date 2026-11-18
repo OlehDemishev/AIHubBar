@@ -5,6 +5,7 @@
 **Updated:** 2026-11-18
 
 **Now:**
+- 2026-11-18: Windows — «Быстрые переключатели»: dark mode, desktop icons, lock, display off, the Recycle Bin; stage 6 done but «Извлечь диски» and command shortcuts (#438)
 - 2026-11-18: Windows — «Быстрые команды»: own buttons for a PowerShell script, a terminal window, a link, file or folder; the library in Settings → «Модули» (#436, merged; real PowerShell runs pass on Windows CI)
 - 2026-11-18: Windows — «Ресурсы компьютера»: processor, memory, disk, network, battery, graphics, the busiest programs, the Mac's alerts (#434, merged; a real reading on Windows and Linux CI)
 - 2026-11-18: Windows stage 6 begun — «Не спать»: a power request while Claude works, on power, with a monitor, while chosen programs run, or by hand; Settings → «Модули» (#432, merged; a real power request taken and released on Windows CI)
@@ -64,7 +65,7 @@
 - check on the Air: the island at the real notch
 - promotion (docs/LAUNCH.md): r/ClaudeAI, the lists, r/macapps, Show HN, Product Hunt, Homebrew
 - content (docs/specs/SPEC-content.md, agreed): stage 2 «Версии», then batch tasks; better after the first feedback from people
-- Windows: on the laptop the live check of SPEC-windows §11.4 (with a real permission request answered from the panel) the «Проекты» card's buttons, a Claude launch in Windows Terminal and one in the background (do the `PowerShell(…)` rules let it build and check a project without Git Bash?); then the rest of stage 6 (быстрые переключатели, сочетания клавиш для команд); stage 3 leftovers («Показать», buttons in the notification) need the laptop
+- Windows: on the laptop the live check of SPEC-windows §11.4 (with a real permission request answered from the panel) the «Проекты» card's buttons, a Claude launch in Windows Terminal and one in the background (do the `PowerShell(…)` rules let it build and check a project without Git Bash?); then stage 7 (installer, signing, updates) or the stage 6 leftovers (сочетания клавиш для команд, «Извлечь диски»); stage 3 leftovers («Показать», buttons in the notification) need the laptop
 
 **Needs Oleh:**
 - Windows laptop: install the tools and copy the two CLAUDE.md files as in `desktop/WINDOWS-DEV.md`, sign in to Claude Code there; choose the Windows signing (SPEC-windows §7)
@@ -100,6 +101,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-18 — Windows: «Быстрые переключатели» (branch `feat/desktop-quick-toggles`)
+
+Done: `desktop/core/toggles.rs` ports the Mac's `QuickToggle` for Windows: dark mode through the `Personalize` values and `WM_SETTINGCHANGE`, desktop icons through Explorer's own command to `SHELLDLL_DefView`, `LockWorkStation`, `SC_MONITORPOWER` after 0.6 s, `SHEmptyRecycleBinW` with «Корзина уже пуста» for an empty bin; on Linux `gsettings`, `loginctl`, `xset`, `gio`. `app/src/toggles.rs` gives the panel's tiles (on ones in the accent colour, «Очистить корзину? Это нельзя отменить.» with «Да» first) and Settings → «Модули» → which tiles show. Three new catalog texts with 12 translations each. Stage 6 is done except «Извлечь диски» and keyboard shortcuts for quick commands.
+Checked: `python3 scripts/strings.py --check` (467 texts), `scripts/strings-check.py` (1870 keys), `cargo test --workspace` on the Mac (core 109; on Windows CI the test also reads dark mode and the icons' state). The tiles and the settings in a browser with sample replies: dark mode switched on, the Recycle Bin asked first and run only after «Да», a tile hidden, the module off. The toggles themselves weren't pressed on a real Windows: they change the person's desktop.
+Left: press each tile once on the laptop; «Извлечь диски»; keyboard shortcuts for quick commands.
 
 ## 2026-11-18 — Windows: «Быстрые команды» (branch `feat/desktop-quick-commands`)
 

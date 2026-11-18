@@ -329,3 +329,10 @@ button.quick .name { overflow: hidden; text-overflow: ellipsis; white-space: now
 .quick-editor-head { display: flex; gap: 6px; align-items: center; }
 .quick-editor-head input { flex: 1; min-width: 0; }
 .quick-editor input.mono { font-family: ui-monospace, Consolas, monospace; font-size: 12px; }
+
+/* «Быстрые переключатели»: tiles in a row, the ones that are on in the accent colour. */
+.tiles { display: flex; gap: 6px; margin-top: 6px; }
+button.tile { flex: 1; min-width: 0; display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 6px 2px; border-radius: 9px; border: none; background: color-mix(in srgb, currentColor 7%, transparent); }
+button.tile .glyph { font-size: 15px; height: 18px; line-height: 18px; }
+button.tile .name { font-size: 11px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 100%; }
+button.tile.on { background: color-mix(in srgb, var(--accent) 22%, transparent); color: var(--accent); }

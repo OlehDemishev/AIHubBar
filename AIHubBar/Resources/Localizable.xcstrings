@@ -48939,6 +48939,158 @@
         }
       }
     },
+    "Корзина очищается только после подтверждения.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لا تُفرغ سلة المحذوفات إلا بعد التأكيد."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der Papierkorb wird erst nach Bestätigung geleert."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The Recycle Bin is emptied only after you confirm."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La papelera solo se vacía tras confirmar."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La corbeille n’est vidée qu’après confirmation."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recycle Bin dikosongkan hanya setelah konfirmasi."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il cestino si svuota solo dopo conferma."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ごみ箱は確認後にだけ空にします。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "휴지통은 확인한 뒤에만 비웁니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kosz jest opróżniany dopiero po potwierdzeniu."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A lixeira só é esvaziada após confirmar."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Кошик очищується лише після підтвердження."
+          }
+        }
+      }
+    },
+    "Корзина уже пуста": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "سلة المحذوفات فارغة بالفعل"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der Papierkorb ist schon leer"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The Recycle Bin is already empty"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La papelera ya está vacía"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La corbeille est déjà vide"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recycle Bin sudah kosong"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il cestino è già vuoto"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ごみ箱はすでに空です"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "휴지통이 이미 비어 있습니다"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kosz jest już pusty"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A lixeira já está vazia"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Кошик уже порожній"
+          }
+        }
+      }
+    },
     "Косая «/»": {
       "localizations": {
         "ar": {
@@ -110952,6 +111104,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Темна тема, значки на робочому столі, блокування й вимкнення екрана, вилучення дисків, кошик — одним кліком."
+          }
+        }
+      }
+    },
+    "Тёмная тема, значки на рабочем столе, блокировка и выключение экрана, корзина — в один клик.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الوضع الداكن، أيقونات سطح المكتب، قفل الشاشة وإطفاؤها، سلة المحذوفات — بنقرة واحدة."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dunkelmodus, Desktopsymbole, Bildschirm sperren und ausschalten, Papierkorb — mit einem Klick."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dark mode, desktop icons, locking and turning off the display, the Recycle Bin — in one click."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modo oscuro, iconos del escritorio, bloquear y apagar la pantalla, la papelera — en un clic."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mode sombre, icônes du bureau, verrouiller et éteindre l’écran, la corbeille — en un clic."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mode gelap, ikon desktop, mengunci dan mematikan layar, Recycle Bin — sekali klik."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modalità scura, icone del desktop, blocco e spegnimento dello schermo, cestino — con un clic."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ダークモード、デスクトップのアイコン、画面のロックとオフ、ごみ箱 — ワンクリックで。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "다크 모드, 바탕 화면 아이콘, 화면 잠금과 끄기, 휴지통 — 한 번의 클릭으로."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tryb ciemny, ikony na pulpicie, blokada i wygaszanie ekranu, kosz — jednym kliknięciem."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modo escuro, ícones da área de trabalho, bloquear e desligar a tela, a lixeira — em um clique."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Темна тема, значки на робочому столі, блокування й вимкнення екрана, кошик — одним кліком."
           }
         }
       }
