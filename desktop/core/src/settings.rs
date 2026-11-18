@@ -117,8 +117,19 @@ impl Settings {
         self.profiles.iter_mut().find(|p| p.id == id)
     }
 
+    /// A field of the current profile edited in Settings (`Profile::set_field`). True when it was taken.
+    pub fn set_profile_field(&mut self, field: &str, value: &serde_json::Value) -> bool {
+        self.current_mut().is_some_and(|profile| profile.set_field(field, value))
+    }
+
     /// No profile yet (a first start, or a file from before profiles): the Mac's «Разработчик (GitHub)» template in
     /// `language`, with the old file's folder and launch mode. True when one was made.
+    /// At start: a file from before profiles with its own folder or launch mode keeps them in «Разработчик (GitHub)»;
+    /// otherwise there is no profile and the assistant makes the first one (the Mac's empty start, SPEC-profiles §2).
+    pub fn migrate_profile(&mut self, language: &str) -> bool {
+        self.profiles.is_empty() && (self.before_profiles.0.is_some() || self.before_profiles.1.is_some()) && self.ensure_profile(language)
+    }
+
     pub fn ensure_profile(&mut self, language: &str) -> bool {
         if !self.profiles.is_empty() {
             return false;
@@ -303,9 +314,12 @@ mod tests {
 
     #[test]
     fn first_profile_from_a_file_before_profiles() {
+        let mut empty = Settings::from_json(r#"{"language": "ru"}"#);
+        assert!(!empty.migrate_profile("ru"), "an empty start: the assistant makes the first profile");
+        assert!(empty.profiles.is_empty() && empty.current().is_none() && empty.projects_dir().is_none());
         let mut settings = Settings::from_json(r#"{"projects_dir": "/srv/Проекты", "launch_mode": "background"}"#);
         assert_eq!(settings.projects_dir(), None);
-        assert!(settings.ensure_profile("ru"));
+        assert!(settings.migrate_profile("ru"));
         assert!(!settings.ensure_profile("ru"), "only once");
         let profile = settings.current().unwrap();
         assert_eq!(profile.name, "Разработчик (GitHub)");

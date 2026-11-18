@@ -84,7 +84,7 @@ impl Strings {
     }
 }
 
-/// Fills `%@`, `%lld`, `%d` in order and `%N$@` / `%N$lld` by position.
+/// Fills `%@`, `%lld`, `%d` (and `%.2f`, given already formatted) in order and `%N$@` / `%N$lld` by position.
 pub fn fill(template: &str, args: &[&str]) -> String {
     let mut out = String::new();
     let mut next = 0;
@@ -98,7 +98,7 @@ pub fn fill(template: &str, args: &[&str]) -> String {
             }
             _ => (None, tail),
         };
-        let spec = ["@", "lld", "ld", "d"].into_iter().find(|spec| after_position.starts_with(spec));
+        let spec = ["@", "lld", "ld", "d", ".2f"].into_iter().find(|spec| after_position.starts_with(spec));
         match spec {
             Some(spec) => {
                 let position = index.unwrap_or_else(|| {

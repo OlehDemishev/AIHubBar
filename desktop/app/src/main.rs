@@ -68,11 +68,11 @@ fn strings(app: &AppHandle) -> Strings {
     Strings::from_json(strings_json(language(app)))
 }
 
-/// The settings file, with a first profile made from it when it has none (a first start, or a file from before
-/// profiles).
+/// The settings file; one from before profiles becomes the first profile. A first start has none: the assistant
+/// opens (`setup`).
 fn load_settings() -> Settings {
     let mut settings = Settings::load(&paths::settings_file());
-    if settings.ensure_profile(i18n::resolve(settings.language.as_deref())) {
+    if settings.migrate_profile(i18n::resolve(settings.language.as_deref())) {
         eprintln!("profiles: «{}» made", settings.current().map(|p| p.name.as_str()).unwrap_or_default());
         if let Err(error) = settings.save(&paths::settings_file()) {
             eprintln!("settings not saved: {error}");
@@ -321,6 +321,8 @@ fn quit(app: AppHandle) {
 }
 
 fn main() {
+    // A first start: nothing saved yet, so the assistant makes the first profile (the Mac's empty start).
+    let first_start = !paths::settings_file().exists();
     let app = tauri::Builder::default()
         // First: a second launch only brings the panel forward in the copy that runs.
         .plugin(tauri_plugin_single_instance::init(|app, _args, _cwd| show_panel(app)))
@@ -346,7 +348,7 @@ fn main() {
             projects::projects_view, projects::refresh_projects, projects::projects_panel_opened, projects::open_project,
             projects::open_link, projects::launch_claude, projects::set_project_stage, projects::create_project_card,
             projects::create_folder_project, projects::open_project_file, commands::run_folder_command,
-            commands::clear_finished_jobs, commands::compare_folder_command, services::services_view, services::check_api,
+            commands::clear_finished_jobs, commands::compare_folder_command, services::services_view, services::set_api_budget, services::set_api_price, services::check_api,
             services::save_api_key, services::delete_api_key, services::set_api_model, services::set_compatible_server, services::open_key_page,
             services::agents_view, services::copy_install_command, projects::open_agent, calendar::upcoming_view,
             calendar::open_upcoming, calendar::reminder_hours, calendar::set_reminder_hours, calendar::set_profile_calendar,
@@ -356,10 +358,11 @@ fn main() {
             runs::stop_run, runs::run_log, projects::worktree_removal, launch_settings, set_launch_settings,
             pull_request_alerts, set_pull_request_alerts, profiles::projects_folder, profiles::choose_projects_folder,
             profiles::reset_projects_folder, profiles::profiles_view, profiles::select_profile, profiles::add_profile, profiles::profile_templates,
-            profiles::rename_profile, profiles::delete_profile, profiles::export_settings, profiles::export_profile,
-            profiles::choose_import, profiles::apply_import, profiles::cancel_import
+            profiles::rename_profile, profiles::delete_profile, profiles::profile_details, profiles::set_profile_field,
+            profiles::export_settings, profiles::export_profile,
+            profiles::choose_import, profiles::import_view, profiles::apply_import, profiles::cancel_import
         ])
-        .setup(|app| {
+        .setup(move |app| {
             // Only the tray icon, no Dock icon, when trying it out on a Mac.
             #[cfg(target_os = "macos")]
             app.set_activation_policy(tauri::ActivationPolicy::Accessory);
@@ -372,6 +375,10 @@ fn main() {
             handle.state::<Runs>().start(handle.clone());
             services::Agents::start(&handle);
             handle.state::<calendar::Calendar>().start(handle.clone());
+            if first_start && handle.state::<AppState>().settings.lock().unwrap().profiles.is_empty() {
+                eprintln!("first start: the assistant opens");
+                assistant::open_assistant(handle.clone());
+            }
             let for_ipc = handle.clone();
             if let Err(error) = ipc::serve(move |request| match request {
                 Request::AppCommand(name) => {

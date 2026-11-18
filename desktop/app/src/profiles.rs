@@ -116,6 +116,54 @@ pub fn delete_profile(app: AppHandle, id: String) -> ProfilesView {
     profiles_view(app)
 }
 
+// MARK: - The current profile's fields (the Mac's `ProfileDetail`)
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct ProfileDetails {
+    /// Stages, metrics and commands are folder projects' only.
+    folders: bool,
+    /// As typed, blank ones too.
+    stages: Vec<String>,
+    metrics: Vec<String>,
+    words_per_minute: u64,
+    /// None — Claude Code.
+    service: Option<String>,
+    permissions: String,
+    /// The Mac's `CommandTemplate` JSON.
+    commands: serde_json::Value,
+    /// What may run the commands here: Claude Code, the installed agents, the API models with a key.
+    services: Vec<crate::commands::ServiceChoice>,
+}
+
+#[tauri::command]
+pub fn profile_details(app: AppHandle) -> Option<ProfileDetails> {
+    let profile = app.state::<AppState>().settings.lock().unwrap().current().cloned()?;
+    let raw = |key: &str| profile.other.get(key).cloned().unwrap_or(serde_json::json!([]));
+    Some(ProfileDetails {
+        folders: profile.source().is_folders(),
+        stages: raw("stages").as_array().into_iter().flatten().filter_map(|s| s.as_str().map(str::to_owned)).collect(),
+        metrics: profile.metrics(),
+        words_per_minute: profile.words_per_minute(),
+        service: profile.other.get("service").and_then(|s| s.as_str()).filter(|s| *s != "claude-code").map(str::to_owned),
+        permissions: profile.permissions().to_owned(),
+        commands: raw("commands"),
+        services: crate::commands::choices(&app),
+    })
+}
+
+/// One field of the current profile; the panel's rows are read again (commands decide which files are results).
+#[tauri::command]
+pub fn set_profile_field(app: AppHandle, field: String, value: serde_json::Value) -> Result<(), String> {
+    let mut taken = false;
+    save(&app, |settings| taken = settings.set_profile_field(&field, &value));
+    if !taken {
+        return Err(format!("{field}: not taken"));
+    }
+    app.state::<Projects>().ask(false);
+    Ok(())
+}
+
 // MARK: - The projects folder
 
 #[derive(Serialize)]
@@ -201,6 +249,12 @@ pub struct ImportView {
     may_replace: bool,
     message: Option<String>,
     error: bool,
+}
+
+/// The file waiting for «Заменить» / «Добавить», if any.
+#[tauri::command]
+pub fn import_view(app: AppHandle) -> ImportView {
+    pending_view(&app)
 }
 
 fn pending_view(app: &AppHandle) -> ImportView {

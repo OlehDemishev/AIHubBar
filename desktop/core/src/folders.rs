@@ -397,10 +397,10 @@ fn read_text(path: &Path) -> Option<String> {
     Some(text.strip_prefix('\u{feff}').map(str::to_owned).unwrap_or(text))
 }
 
-/// The text a file's words are counted on. `.docx` isn't read in this version (no unzipping): no count.
+/// The text a file's words are counted on: plain text, the visible text of `.rtf` and `.docx`.
 pub fn text_of(path: &Path) -> Option<String> {
     match path.extension().map(|e| e.to_string_lossy().to_lowercase()).as_deref() {
-        Some("docx") => None,
+        Some("docx") => crate::docx::text(path),
         Some("rtf") => read_text(path).map(|rtf| rtf_text(&rtf)),
         _ => read_text(path),
     }
@@ -641,6 +641,20 @@ mod tests {
         assert_eq!(words("# Заголовок\n\nДва слова, и [ссылка](https://example.com/a-b-c) — 2026 год."), 7);
         let rtf = r"{\rtf1\ansi{\fonttbl{\f0 Helvetica;}}{\colortbl;\red0\green0\blue0;}{\*\generator Word;}\f0 Hello \b world\b0\par Second line \'e9t\'e9}";
         assert_eq!(words(&rtf_text(rtf)), 5);
+    }
+
+    #[test]
+    fn words_of_a_word_file() {
+        use crate::docx::tests::{zip_of, DOCUMENT};
+        let root = temp("docx");
+        std::fs::create_dir_all(&root).unwrap();
+        let file = root.join("Сценарий.docx");
+        std::fs::write(&file, zip_of(&[("word/document.xml", DOCUMENT.as_bytes(), true)])).unwrap();
+        assert_eq!(text_of(&file).map(|t| words(&t)), Some(6), "Сценарий, Привет, мир, Tom, Jerry, 1");
+        assert_eq!(crate::commands::inline_text(&file).as_deref(), Some("Сценарий\nПривет, мир\tTom & Jerry — №1\n"), "goes into the prompt, as on the Mac");
+        std::fs::write(&file, "not a zip").unwrap();
+        assert_eq!(text_of(&file), None);
+        std::fs::remove_dir_all(root).unwrap();
     }
 
     #[test]

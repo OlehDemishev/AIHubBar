@@ -1,6 +1,6 @@
 //! Stage 5 «Сервисы AI» in Settings (the Mac's `AIServiceStore` and its settings page, models by API only): a key per
 //! provider in Credential Manager, «Проверить» that lists the models and picks one, the compatible server's name and
-//! address, and the month's API spend. Agents other than Claude Code come later.
+//! address, the API spend with prices and a monthly budget, and the agents other than Claude Code.
 
 use crate::{save, strings, AppState};
 use claudepult_core::agents::{self, Found};
@@ -39,8 +39,71 @@ pub struct ServicesView {
     providers: Vec<ProviderRow>,
     compatible_name: String,
     compatible_url: String,
-    /// «API за месяц: 1 240 токенов · $0.12», when anything was spent.
-    spend: Option<String>,
+    /// «1240 токенов · $0.12», «—» when nothing was spent.
+    today: String,
+    month: String,
+    budget: Option<f64>,
+    /// Anthropic always («История расхода» on the Mac counts Claude Code at this price), the compatible server, and
+    /// every provider with a key.
+    prices: Vec<PriceRow>,
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct PriceRow {
+    id: &'static str,
+    /// «OpenAI: $ за 1 млн токенов (вход / выход)».
+    label: String,
+    input: Option<f64>,
+    output: Option<f64>,
+}
+
+/// Midnight today and the first of the month, local time.
+fn day_and_month() -> (chrono::DateTime<chrono::Utc>, chrono::DateTime<chrono::Utc>) {
+    let today = chrono::Local::now().date_naive();
+    let start = |date: chrono::NaiveDate| date.and_hms_opt(0, 0, 0).and_then(|d| d.and_local_timezone(chrono::Local).earliest()).map(|d| d.with_timezone(&chrono::Utc)).unwrap_or_else(chrono::Utc::now);
+    (start(today), start(today.with_day(1).unwrap_or(today)))
+}
+
+/// The Mac's `SpendText.line`.
+fn spend_line(texts: &claudepult_core::i18n::Strings, (tokens, cost): (u64, Option<f64>)) -> String {
+    if tokens == 0 {
+        return "—".into();
+    }
+    let line = format!("{tokens}{}", texts.t(" токенов"));
+    cost.map(|c| format!("{line} · ${c:.2}")).unwrap_or(line)
+}
+
+/// After a request: a notification at 80 % and at 100 % of the month's budget, each once a month (the Mac's
+/// `warnAboutBudget`; the months warned about are kept in `api-budget-warned.json`).
+pub fn warn_about_budget(app: &AppHandle) {
+    use tauri_plugin_notification::NotificationExt;
+    let services = app.state::<AppState>().settings.lock().unwrap().services();
+    let Some(budget) = ai::budget(&services) else { return };
+    let (_, month) = day_and_month();
+    let Some(cost) = ai::spend_since(&ai::load_spend(&spend_path()), month, &services).1 else { return };
+    let Some(level) = ai::budget_level(cost, budget) else { return };
+    let path = paths::data_dir().join("api-budget-warned.json");
+    let mut warned: Vec<String> = std::fs::read_to_string(&path).ok().and_then(|t| serde_json::from_str(&t).ok()).unwrap_or_default();
+    let key = format!("{}-{level}", chrono::Local::now().format("%Y-%m"));
+    if warned.contains(&key) {
+        return;
+    }
+    warned.push(key);
+    if warned.len() > 24 {
+        warned.drain(..warned.len() - 24);
+    }
+    if let Err(error) = std::fs::write(&path, serde_json::to_string(&warned).unwrap_or_default()) {
+        eprintln!("budget warning not saved: {error}");
+    }
+    let texts = strings(app);
+    eprintln!("API budget: {level} %");
+    let _ = app
+        .notification()
+        .builder()
+        .title(texts.format("Расход по API: %lld %% бюджета", &[&level.to_string()]))
+        .body(texts.format("$%.2f из $%.2f в этом месяце", &[&format!("{cost:.2}"), &format!("{budget:.2}")]))
+        .show();
 }
 
 pub fn spend_path() -> std::path::PathBuf {
@@ -71,20 +134,26 @@ fn view(app: &AppHandle) -> ServicesView {
             }
         })
         .collect();
-    let month = chrono::Local::now().date_naive().with_day(1).and_then(|d| d.and_hms_opt(0, 0, 0)).and_then(|d| d.and_local_timezone(chrono::Local).single());
-    let spend = month.and_then(|start| {
-        let (tokens, cost) = ai::spend_since(&ai::load_spend(&spend_path()), start.with_timezone(&chrono::Utc), &services);
-        (tokens > 0).then(|| {
-            let line = format!("{tokens}{}", texts.t(" токенов"));
-            texts.format("API за месяц: %@", &[&cost.map(|c| format!("{line} · ${c:.2}")).unwrap_or(line)])
+    let (day, month) = day_and_month();
+    let records = ai::load_spend(&spend_path());
+    let prices = PROVIDERS
+        .iter()
+        .filter(|p| p.id == "anthropic" || p.id == "compatible" || keys::read(p.id).is_some())
+        .map(|p| {
+            let title = if p.id == "compatible" { Some(ai::compatible_name(&services)).filter(|n| !n.is_empty()).unwrap_or_else(|| texts.t("Совместимый с OpenAI").to_owned()) } else { p.title.to_owned() };
+            let price = ai::price(&services, p.id);
+            PriceRow { id: p.id, label: texts.format("%@: $ за 1 млн токенов (вход / выход)", &[&title]), input: price.map(|p| p.0), output: price.map(|p| p.1) }
         })
-    });
+        .collect();
     ServicesView {
         keys_available: keys::available(),
         providers,
         compatible_name: ai::compatible_name(&services),
         compatible_url: ai::base_url(&services, ai::provider("compatible").expect("listed")),
-        spend,
+        today: spend_line(&texts, ai::spend_since(&records, day, &services)),
+        month: spend_line(&texts, ai::spend_since(&records, month, &services)),
+        budget: ai::budget(&services),
+        prices,
     }
 }
 
@@ -93,6 +162,21 @@ use chrono::Datelike;
 #[tauri::command]
 pub fn services_view(app: AppHandle) -> ServicesView {
     view(&app)
+}
+
+/// «Бюджет в месяц, $»: empty or 0 — none.
+#[tauri::command]
+pub fn set_api_budget(app: AppHandle, budget: Option<f64>) -> ServicesView {
+    save(&app, |settings| ai::set_budget(settings.services_mut(), budget));
+    view(&app)
+}
+
+/// A provider's price per million tokens; empty halves count as 0, and 0 / 0 removes it.
+#[tauri::command]
+pub fn set_api_price(app: AppHandle, provider: String, input: Option<f64>, output: Option<f64>) -> Result<ServicesView, String> {
+    let id = ai::provider(&provider).ok_or("unknown provider")?.id;
+    save(&app, |settings| ai::set_price(settings.services_mut(), id, input, output));
+    Ok(view(&app))
 }
 
 /// Lists the models — costs no tokens — and picks one when none (or a vanished one) is chosen.

@@ -19,6 +19,15 @@
       <p data-t="Windows прячет новые значки под «^». Чтобы AI Hub Bar был всегда виден: Параметры → Персонализация → Панель задач → Другие значки на панели задач."></p>
       <p style="margin-top: 8px"><button id="tray-hint-done" data-t="Готово"></button></p>
     </section>
+    <section class="card create-profile" id="create-profile" hidden>
+      <h2 data-t="Создайте первый профиль"></h2>
+      <p class="secondary" data-t="Профиль — это то, что будет в панели: лимиты AI, сессии, проекты с командами, календарь. Помощник соберёт его за пару минут."></p>
+      <p class="buttons">
+        <button class="prominent" id="create-assistant" data-t="Помощник…"></button>
+        <button id="create-import" data-t="Импортировать файл…"></button>
+      </p>
+      <p class="error" id="create-error" hidden></p>
+    </section>
     <section class="card limits" aria-live="polite">
       <h2 data-t="Лимиты"></h2>
       <div class="rings" id="rings"></div>
@@ -76,7 +85,21 @@
       const view = await invoke("profiles_view");
       profileSwitch.replaceChildren(...view.rows.map((row) => new Option(row.name, row.id, row.current, row.current)));
       profileSwitch.hidden = view.rows.length < 2;
+      // No profile yet (the Mac's empty start): the assistant or a .claudepult file makes the first one.
+      document.getElementById("create-profile").hidden = view.rows.length > 0;
+      document.querySelector(".card.projects").hidden = view.rows.length === 0;
     }
+    document.getElementById("create-assistant").onclick = () => invoke("open_assistant");
+    // «Заменить» / «Добавить» are asked in Settings, as on the Mac.
+    document.getElementById("create-import").onclick = async () => {
+      const view = await invoke("choose_import");
+      const error = document.getElementById("create-error");
+      error.hidden = !view.message;
+      error.textContent = view.message ?? "";
+      if (!view.title) return;
+      await invoke("open_settings");
+      window.__TAURI__.event.emit("import-pending");
+    };
     profileSwitch.onchange = () => invoke("select_profile", { id: profileSwitch.value });
     showProfiles();
     window.__TAURI__.event.listen("profiles-changed", showProfiles);
