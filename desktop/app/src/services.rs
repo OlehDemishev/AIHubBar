@@ -3,8 +3,10 @@
 //! address, and the month's API spend. Agents other than Claude Code come later.
 
 use crate::{save, strings, AppState};
+use claudepult_core::agents::{self, Found};
 use claudepult_core::ai::{self, Check, Service, PROVIDERS};
 use claudepult_core::{keys, paths};
+use tauri_plugin_clipboard_manager::ClipboardExt;
 use serde::Serialize;
 use std::collections::HashMap;
 use std::sync::Mutex;
@@ -152,10 +154,80 @@ pub fn set_compatible_server(app: AppHandle, name: String, url: String) -> Servi
     view(&app)
 }
 
-/// Who can run a command now: Claude Code, a provider with a key, and the compatible server once a model is chosen.
+// MARK: - Agents
+
+/// The installed agents, found at start and again from Settings (finding them runs each one's `--version`).
+#[derive(Default)]
+pub struct Agents(Mutex<Option<Vec<Found>>>);
+
+impl Agents {
+    pub fn start(app: &AppHandle) {
+        let app = app.clone();
+        std::thread::spawn(move || {
+            let found = agents::scan();
+            eprintln!("agents: {}", found.iter().map(|f| f.id).collect::<Vec<_>>().join(", "));
+            *app.state::<Agents>().0.lock().unwrap() = Some(found);
+        });
+    }
+
+    /// What was found so far; empty until the first scan ends.
+    pub fn found(&self) -> Vec<Found> {
+        self.0.lock().unwrap().clone().unwrap_or_default()
+    }
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct AgentRow {
+    id: &'static str,
+    title: &'static str,
+    installed: bool,
+    version: Option<String>,
+    path: Option<String>,
+    /// How to install it here, or how it signs in once it is.
+    install: &'static str,
+    login: String,
+}
+
+/// Settings → «Агенты»: what is installed, its version, how to install or sign in. `refresh` looks again.
+#[tauri::command]
+pub async fn agents_view(app: AppHandle, refresh: bool) -> Vec<AgentRow> {
+    if refresh || app.state::<Agents>().0.lock().unwrap().is_none() {
+        let found = tauri::async_runtime::spawn_blocking(agents::scan).await.unwrap_or_default();
+        *app.state::<Agents>().0.lock().unwrap() = Some(found);
+    }
+    let found = app.state::<Agents>().found();
+    let texts = strings(&app);
+    agents::KINDS
+        .iter()
+        .map(|kind| {
+            let here = found.iter().find(|f| f.id == kind.id);
+            AgentRow {
+                id: kind.id,
+                title: kind.title,
+                installed: here.is_some(),
+                version: here.and_then(|f| f.version.clone()),
+                path: here.map(|f| f.path.to_string_lossy().into_owned()),
+                install: kind.install(),
+                login: texts.format("Вход: %@", &[kind.login]),
+            }
+        })
+        .collect()
+}
+
+/// «Скопировать: …» next to an agent that isn't installed: its install command.
+#[tauri::command]
+pub fn copy_install_command(app: AppHandle, agent: String) -> Result<(), String> {
+    let kind = agents::kind(&agent).ok_or("unknown agent")?;
+    app.clipboard().write_text(kind.install()).map_err(|e| e.to_string())
+}
+
+/// Who can run a command now: Claude Code, the installed agents (in a terminal), a provider with a key, and the
+/// compatible server once a model is chosen.
 pub fn available(app: &AppHandle) -> Vec<Service> {
     let services = app.state::<AppState>().settings.lock().unwrap().services();
     let mut list = vec![Service::ClaudeCode];
+    list.extend(app.state::<Agents>().found().into_iter().map(|f| Service::Agent(f.id.to_owned())));
     for provider in PROVIDERS.iter() {
         let ready = if ai::key_required(provider.id) { keys::read(provider.id).is_some() } else { ai::model(&services, provider.id).is_some() };
         if ready {

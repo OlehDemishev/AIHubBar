@@ -5,6 +5,7 @@
 **Updated:** 2026-11-18
 
 **Now:**
+- 2026-11-18: Windows — other agents (Codex, Gemini CLI, Antigravity, Copilot, Cursor): found with their version, «Открыть в…», a folder command opens one in a terminal with the task on the clipboard (branch `feat/desktop-agents`)
 - 2026-11-18: Windows — «Сервисы AI»: models by API with keys in Credential Manager, a service per command, «Сравнить» (#420, merged; the Credential Manager test passes on Windows CI)
 - 2026-11-18: Windows — AI commands on folder projects through Claude Code, in the background with «Только файлы» or in a terminal (#418, merged)
 - 2026-11-18: Windows — folder projects: «Видео», «Тексты», «Ресёрч», «Соцсети», «Свой» with stages, metrics and «Новый проект» (#416, merged)
@@ -56,7 +57,7 @@
 - check on the Air: the island at the real notch
 - promotion (docs/LAUNCH.md): r/ClaudeAI, the lists, r/macapps, Show HN, Product Hunt, Homebrew
 - content (docs/specs/SPEC-content.md, agreed): stage 2 «Версии», then batch tasks; better after the first feedback from people
-- Windows: on the laptop the live check of SPEC-windows §11.4 (with a real permission request answered from the panel) the «Проекты» card's buttons, a Claude launch in Windows Terminal and one in the background (do the `PowerShell(…)` rules let it build and check a project without Git Bash?); then stage 5 on: the calendar, other agents in «Сервисы AI», the assistant; stage 3 leftovers («Показать», buttons in the notification) need the laptop
+- Windows: on the laptop the live check of SPEC-windows §11.4 (with a real permission request answered from the panel) the «Проекты» card's buttons, a Claude launch in Windows Terminal and one in the background (do the `PowerShell(…)` rules let it build and check a project without Git Bash?); then stage 5 on: the calendar, the assistant; stage 3 leftovers («Показать», buttons in the notification) need the laptop
 
 **Needs Oleh:**
 - Windows laptop: install the tools and copy the two CLAUDE.md files as in `desktop/WINDOWS-DEV.md`, sign in to Claude Code there; choose the Windows signing (SPEC-windows §7)
@@ -92,6 +93,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-18 — Windows: other agents (branch `feat/desktop-agents`)
+
+Done: `desktop/core/agents.rs` ports the Mac's `AgentKind` / `AgentLocator` for Windows and Linux: Codex, Gemini CLI, Antigravity, Copilot and Cursor found in PATH and their installers' folders, with `--version`; found once at start and again with «Обновить». Settings → «Сервисы AI» → «Агенты» shows each one's version and sign-in, or the Windows install command from the vendor's docs (checked 2026-11-18) with «Скопировать». A git project gets «Открыть в…»; a folder project's command can go to an agent, which opens in a terminal in the folder with the task on the clipboard, as on the Mac. One new catalog text: the Mac's «…вставьте ⌘V» with Ctrl+V (Strg+V in German), translations taken from the Mac's.
+Checked: `python3 scripts/strings.py --check` (253 texts), `scripts/strings-check.py` (1854 keys), `cargo test --workspace` on the Mac (core 86: the agents' places on Windows and Linux, a stand-in `codex` found in npm's folder and its version read — CI runs it as a `.cmd` on Windows). The dev app by pid found `agy` and `copilot` on this Mac, the same as the shell. Settings and the panel in a browser with sample replies: the agents' rows, «Скопировать», «Открыть в…» sending the agent. No agent was opened.
+Left: not tried on Windows; the install commands are from the vendors' docs, not run.
 
 ## 2026-11-18 — Windows: AI services (branch `feat/desktop-ai-services`)
 

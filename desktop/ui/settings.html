@@ -52,6 +52,13 @@
     </section>
     <h1 data-t="Сервисы AI"></h1>
     <section class="card services">
+      <div class="card-title">
+        <h2 data-t="Агенты"></h2>
+        <button id="agents-refresh" data-t="Обновить"></button>
+      </div>
+      <div id="agent-rows"></div>
+    </section>
+    <section class="card services">
       <h2 data-t="Модели по API"></h2>
       <p class="secondary" id="no-key-store" data-t="На этой системе ключи API пока негде хранить: работают только серверы без ключа (Ollama, LM Studio)." hidden></p>
       <div id="provider-rows"></div>
@@ -367,6 +374,44 @@
       }));
     }
     showServices(await invoke("services_view"));
+
+    // Other agents: installed with their version and how they sign in, or the command that installs them.
+    function showAgents(rows) {
+      document.getElementById("agent-rows").replaceChildren(...rows.map((agent) => {
+        const box = document.createElement("div");
+        box.className = "provider";
+        const head = document.createElement("div");
+        head.className = "row";
+        const title = document.createElement("span");
+        title.textContent = agent.title;
+        const status = document.createElement("span");
+        status.className = agent.installed ? "status ok" : "status secondary";
+        status.textContent = agent.installed ? agent.version ?? t("установлен") : t("не установлен");
+        if (agent.path) status.title = agent.path;
+        head.append(title, status);
+        const line = document.createElement("div");
+        line.className = "provider-actions";
+        const text = document.createElement("code");
+        text.className = "secondary";
+        text.textContent = agent.installed ? agent.login : agent.install;
+        line.append(text);
+        if (!agent.installed) {
+          const copy = Object.assign(document.createElement("button"), { textContent: t("Скопировать") });
+          copy.title = t("Скопировать: %@", agent.install);
+          copy.onclick = () => invoke("copy_install_command", { agent: agent.id });
+          line.append(copy);
+        }
+        box.append(head, line);
+        return box;
+      }));
+    }
+    showAgents(await invoke("agents_view", { refresh: false }));
+    document.getElementById("agents-refresh").onclick = async (event) => {
+      event.target.disabled = true;
+      showAgents(await invoke("agents_view", { refresh: true }));
+      event.target.disabled = false;
+      showServices(await invoke("services_view"));
+    };
 
     // `.claudepult` files, the same as the Mac's: a file read by «Импорт…» waits for «Заменить» / «Добавить» / «Отмена».
     function showImport(view) {

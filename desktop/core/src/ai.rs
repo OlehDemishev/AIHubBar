@@ -95,7 +95,7 @@ impl Service {
     pub fn short_name(&self, services: &Value) -> String {
         match self {
             Service::ClaudeCode => "Claude".into(),
-            Service::Agent(kind) => kind.clone(),
+            Service::Agent(kind) => crate::agents::kind(kind).map(|k| k.short.to_owned()).unwrap_or_else(|| kind.clone()),
             Service::Api(provider) if provider.id == "compatible" => Some(compatible_name(services)).filter(|n| !n.is_empty()).unwrap_or_else(|| "Local".into()),
             Service::Api(provider) => provider.short.into(),
         }
@@ -386,6 +386,7 @@ mod tests {
         assert_eq!(Service::parse("claude-code"), Some(Service::ClaudeCode));
         assert_eq!(Service::parse("api:openai").map(|s| s.id()), Some("api:openai".into()));
         assert_eq!(Service::parse("agent:codex"), Some(Service::Agent("codex".into())));
+        assert_eq!(Service::parse("agent:gemini").unwrap().short_name(&json!({})), "Gemini CLI");
         assert_eq!(Service::parse("api:nope"), None);
         assert_eq!(Service::parse("junk"), None);
         let config = json!({"compatibleName": "Ollama"});
