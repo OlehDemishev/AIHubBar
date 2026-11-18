@@ -139229,6 +139229,82 @@
           }
         }
       }
+    },
+    "%@ открыт в Терминале — задача скопирована, вставьте Ctrl+V": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "فُتح %@ في الطرفية — نُسخت المهمة، الصقها بـ Ctrl+V"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ im Terminal geöffnet — die Aufgabe ist kopiert, mit Strg+V einfügen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ opened in Terminal — the task is on the clipboard, paste with Ctrl+V"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ abierto en Terminal — la tarea está copiada, pégala con Ctrl+V"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ ouvert dans Terminal — la tâche est copiée, collez-la avec Ctrl+V"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ dibuka di Terminal — tugas sudah disalin, tempel dengan Ctrl+V"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ aperto nel Terminale — l’attività è copiata, incollala con Ctrl+V"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ をターミナルで開きました — タスクはコピー済みです。Ctrl+V で貼り付けてください"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@을(를) 터미널에서 열었습니다 — 작업이 복사되어 있으니 Ctrl+V로 붙여 넣으세요"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ otwarty w Terminalu — zadanie jest skopiowane, wklej je przez Ctrl+V"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ aberto no Terminal — a tarefa foi copiada, cole com Ctrl+V"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ відкрито в Терміналі — завдання скопійовано, вставте Ctrl+V"
+          }
+        }
+      }
     }
   },
   "version": "1.0"

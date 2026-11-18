@@ -249,6 +249,8 @@ pub struct ProjectRow {
 #[serde(rename_all = "camelCase")]
 pub struct ProjectsView {
     rows: Vec<ProjectRow>,
+    /// The other agents for «Открыть в…» in a git project.
+    agents: Vec<crate::commands::ServiceChoice>,
     /// A profile with folder projects: these rows instead of `rows`.
     folders: Option<FolderView>,
     /// Why the list is empty, when it is.
@@ -460,7 +462,8 @@ pub fn projects_view(app: AppHandle) -> ProjectsView {
         None if state.updated.is_some() && state.projects.is_empty() => Some(texts.t("В папке проектов не найдено git-репозиториев.").to_owned()),
         None => None,
     };
-    ProjectsView { rows: state.projects.iter().map(|p| row(p, &words, now)).collect(), folders: folder_rows, message, refreshing: state.refreshing }
+    let agents = crate::commands::agent_choices(&app);
+    ProjectsView { rows: state.projects.iter().map(|p| row(p, &words, now)).collect(), agents, folders: folder_rows, message, refreshing: state.refreshing }
 }
 
 #[tauri::command]
@@ -547,6 +550,19 @@ pub fn open_project_file(app: AppHandle, path: String, file: String) -> Result<(
         return Err("not a file of this project".into());
     }
     open_with_system(target.as_os_str())
+}
+
+/// «Открыть в…»: another installed agent in a terminal window, in a scanned project's folder (the Mac's
+/// `ClaudeActionsView.otherAgents`).
+#[tauri::command]
+pub fn open_agent(app: AppHandle, path: String, agent: String) -> Result<(), String> {
+    let path = PathBuf::from(path);
+    if !app.state::<Projects>().knows_path(&path) {
+        return Err("unknown project".into());
+    }
+    let found = app.state::<crate::services::Agents>().found().into_iter().find(|f| f.id == agent).ok_or("not installed")?;
+    eprintln!("opening {} in {}", found.id, path.display());
+    launch::open_in_terminal(&path, &found.path, &[]).map_err(|e| strings(&app).format("Не удалось открыть Терминал: %@", &[&e]))
 }
 
 /// A project's page or a PR — only links the scan found.

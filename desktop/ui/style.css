@@ -81,6 +81,7 @@ select { font: inherit; padding: 4px 6px; border-radius: 6px; border: 1px solid 
 .key-form, .provider-actions { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; margin-top: 4px; }
 .key-form input { flex: 1; min-width: 120px; font: inherit; padding: 4px 6px; border-radius: 6px; border: 1px solid var(--line); background: var(--card); color: inherit; user-select: text; }
 .provider-actions select { max-width: 220px; min-width: 0; }
+.provider-actions code { font-size: 12px; user-select: text; overflow-wrap: anywhere; flex: 1; min-width: 0; }
 .provider .error { margin: 4px 0 0; }
 .card-title { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 4px; }
 .card-title h2 { margin: 0; }

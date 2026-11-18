@@ -1,6 +1,7 @@
 //! Stage 5: the commands of a folder project (the Mac's `CommandEngine` and `ProjectCommandsView`). Claude Code works
 //! in the background with the profile's permissions («Только файлы», «Файлы + поиск в интернете»), or in a terminal
-//! window when the profile says so; a model by API gets the main file's text and AI Hub Bar writes its answer. The
+//! window when the profile says so; another agent opens in a terminal with the task on the clipboard; a model by API
+//! gets the main file's text and AI Hub Bar writes its answer. The
 //! result is always a new file in the project folder. «Сравнить» runs one command with 2–3 services and puts their
 //! results side by side: `хуки (Claude).md`, `хуки (OpenAI).md`.
 
@@ -25,7 +26,8 @@ enum JobState {
     /// A request to a model by API is under way.
     Working,
     Background(String),
-    Terminal,
+    /// Opened in a terminal window: what to do there.
+    Terminal(String),
     Done,
     Failed(String),
 }
@@ -103,9 +105,18 @@ pub fn choices(app: &AppHandle) -> Vec<ServiceChoice> {
     crate::services::available(app).into_iter().map(|s| ServiceChoice { id: s.id(), name: s.short_name(&services) }).collect()
 }
 
-/// The service a project's commands go to unless the person picks another: the profile's, if it works here.
+/// The installed agents other than Claude Code, by name: «Открыть в…».
+pub fn agent_choices(app: &AppHandle) -> Vec<ServiceChoice> {
+    app.state::<crate::services::Agents>()
+        .found()
+        .into_iter()
+        .filter_map(|f| claudepult_core::agents::kind(f.id).map(|k| ServiceChoice { id: f.id.to_owned(), name: k.title.to_owned() }))
+        .collect()
+}
+
+/// The service a project's commands go to unless the person picks another: the profile's (`claude-code` by default).
 pub fn default_service(profile: &Profile) -> String {
-    profile.other.get("service").and_then(|v| v.as_str()).and_then(Service::parse).filter(|s| !matches!(s, Service::Agent(_))).map(|s| s.id()).unwrap_or_else(|| "claude-code".into())
+    profile.other.get("service").and_then(|v| v.as_str()).and_then(Service::parse).map(|s| s.id()).unwrap_or_else(|| "claude-code".into())
 }
 
 fn all(profile: &Profile, texts: &Strings) -> Vec<Command> {
@@ -131,7 +142,7 @@ fn row(job: &Job, runs: &[Run], texts: &Strings) -> JobRow {
     let (state, message, result) = match &job.state {
         JobState::Working => ("running", None, None),
         JobState::Done => ("done", None, file_name),
-        JobState::Terminal => ("terminal", Some(texts.t("Открыто в Терминале").to_owned()), None),
+        JobState::Terminal(message) => ("terminal", Some(message.clone()), None),
         JobState::Failed(message) => ("failed", Some(message.clone()), None),
         JobState::Background(id) => match runs.iter().find(|r| &r.id == id) {
             Some(run) if run.is_running() => ("running", None, None),
@@ -207,16 +218,32 @@ fn start(app: &AppHandle, request: &Request, service: &Service, suffix: Option<&
             });
             return;
         }
-        // Other agents open in their own terminal on the Mac with the task on the clipboard; not here yet, so a
-        // profile that names one runs with Claude Code.
-        Service::ClaudeCode | Service::Agent(_) => {
+        // Other agents only in a terminal, as on the Mac (their «no actions» modes aren't checked live): the agent opens
+        // in the folder and the task goes to the clipboard to paste.
+        Service::Agent(id) => {
+            let kind = claudepult_core::agents::kind(id);
+            let found = app.state::<crate::services::Agents>().found().into_iter().find(|f| &f.id == id).map(|f| f.path);
+            let title = kind.map(|k| k.title).unwrap_or(id);
+            job.state = match (kind, found) {
+                (Some(kind), Some(path)) => {
+                    use tauri_plugin_clipboard_manager::ClipboardExt;
+                    let prompt = commands::agent_prompt(&task, context, &name, None, language);
+                    match app.clipboard().write_text(prompt).map_err(|e| e.to_string()).and_then(|()| launch::open_in_terminal(folder, &path, &[])) {
+                        Ok(()) => JobState::Terminal(texts.format("%@ открыт в Терминале — задача скопирована, вставьте Ctrl+V", &[kind.title])),
+                        Err(error) => JobState::Failed(texts.format("Не удалось открыть Терминал: %@", &[&error])),
+                    }
+                }
+                _ => JobState::Failed(texts.format("%@ не установлен", &[title])),
+            };
+        }
+        Service::ClaudeCode => {
             job.service = "Claude".into();
             job.state = match launch::find_claude() {
                 None => JobState::Failed(texts.t("Claude Code не установлен").to_owned()),
                 Some(claude) if request.profile.launch_mode.as_deref() == Some("terminal") => {
                     let prompt = launch::one_line(&commands::agent_prompt(&task, context, &name, None, language));
                     match launch::open_in_terminal(folder, &claude, &[&prompt]) {
-                        Ok(()) => JobState::Terminal,
+                        Ok(()) => JobState::Terminal(texts.t("Открыто в Терминале").to_owned()),
                         Err(error) => JobState::Failed(texts.format("Не удалось открыть Терминал: %@", &[&error])),
                     }
                 }

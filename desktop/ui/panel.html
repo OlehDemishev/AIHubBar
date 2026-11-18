@@ -289,6 +289,19 @@
       finish.title = t("Завершить сессию: проверки, коммит, push, PR и STATUS по разделу «Конец сессии»");
       for (const button of [nextStep, custom, finish]) button.disabled = !!state.working;
       buttons.append(element("span", "bullets-title", "Claude"), nextStep, custom, finish);
+      // «Открыть в…»: another installed agent in a terminal, in the project folder.
+      if (otherAgents.length) {
+        const open = element("select", "service-choice");
+        open.title = t("Открыть другой агент в Терминале, в папке проекта");
+        open.add(new Option(t("Открыть в…"), ""));
+        for (const agent of otherAgents) open.add(new Option(agent.name, agent.id));
+        open.onchange = () => {
+          const agent = open.value;
+          open.value = "";
+          if (agent) invoke("open_agent", { path: row.path, agent }).catch((error) => { launches.set(row.path, { message: String(error), error: true }); showProjects(); });
+        };
+        buttons.append(open);
+      }
       box.append(buttons);
       if (state.editing) {
         const editor = element("div", "task-editor");
@@ -622,8 +635,10 @@
     document.getElementById("new-project-create").onclick = createProject;
     newProjectName.addEventListener("keydown", (event) => { if (event.key === "Enter") createProject(); });
 
+    let otherAgents = [];
     async function showProjects() {
       const view = await invoke("projects_view");
+      otherAgents = view.agents ?? [];
       const rows = document.getElementById("project-rows");
       newProject.hidden = !view.folders?.canCreate;
       if (view.folders) {

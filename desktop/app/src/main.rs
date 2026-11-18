@@ -326,12 +326,14 @@ fn main() {
         .plugin(tauri_plugin_positioner::init())
         .plugin(tauri_plugin_notification::init())
         .plugin(tauri_plugin_dialog::init())
+        .plugin(tauri_plugin_clipboard_manager::init())
         .manage(Limits::new())
         .manage(Sessions::default())
         .manage(Projects::default())
         .manage(Runs::default())
         .manage(commands::Jobs::default())
         .manage(services::Checks::default())
+        .manage(services::Agents::default())
         .manage(AppState { settings: Mutex::new(load_settings()) })
         .invoke_handler(tauri::generate_handler![
             ui_texts, set_language, dismiss_tray_hint, autostart_enabled, set_autostart, open_settings, hide_panel, quit,
@@ -343,6 +345,7 @@ fn main() {
             projects::create_folder_project, projects::open_project_file, commands::run_folder_command,
             commands::clear_finished_jobs, commands::compare_folder_command, services::services_view, services::check_api,
             services::save_api_key, services::delete_api_key, services::set_api_model, services::set_compatible_server, services::open_key_page,
+            services::agents_view, services::copy_install_command, projects::open_agent,
             runs::stop_run, runs::run_log, projects::worktree_removal, launch_settings, set_launch_settings,
             pull_request_alerts, set_pull_request_alerts, profiles::projects_folder, profiles::choose_projects_folder,
             profiles::reset_projects_folder, profiles::profiles_view, profiles::select_profile, profiles::add_profile, profiles::profile_templates,
@@ -360,6 +363,7 @@ fn main() {
             handle.state::<Sessions>().start(handle.clone());
             handle.state::<Projects>().start(handle.clone());
             handle.state::<Runs>().start(handle.clone());
+            services::Agents::start(&handle);
             let for_ipc = handle.clone();
             if let Err(error) = ipc::serve(move |request| match request {
                 Request::AppCommand(name) => {
