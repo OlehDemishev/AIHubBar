@@ -16,6 +16,8 @@ httpdate = "1"
 ureq = "3"
 regex = "1"
 unicode-segmentation = "1"
+# Unzips a .docx for its word count; already built for Tauri, so nothing new is downloaded.
+miniz_oxide = { version = "0.8", features = ["with-alloc"] }
 
 [target.'cfg(unix)'.dependencies]
 libc = "0.2"

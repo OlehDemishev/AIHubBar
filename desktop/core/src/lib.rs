@@ -10,6 +10,7 @@ pub mod approvals;
 pub mod calendar;
 pub mod command;
 pub mod commands;
+pub mod docx;
 pub mod folders;
 pub mod hooks;
 pub mod i18n;

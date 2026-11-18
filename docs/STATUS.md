@@ -5,6 +5,7 @@
 **Updated:** 2026-11-18
 
 **Now:**
+- 2026-11-18: Windows stage 5 finished — a profile's commands, stages, metrics, service and rights in Settings; API prices and a monthly budget; `.docx` word counts; the first start opens the assistant (branch `feat/desktop-finish-stage5`)
 - 2026-11-18: Windows — the profile assistant: template, folder, stages, metrics, calendar, service, launch and name (#428, merged)
 - 2026-11-18: Windows — the «Календарь» window: a month or week, dates dragged to another day, new plan rows and project dates (#426, merged)
 - 2026-11-18: Windows — «Ближайшее»: deadlines, publications and content plan rows of the next 7 days, reminders (#424, merged)
@@ -60,7 +61,7 @@
 - check on the Air: the island at the real notch
 - promotion (docs/LAUNCH.md): r/ClaudeAI, the lists, r/macapps, Show HN, Product Hunt, Homebrew
 - content (docs/specs/SPEC-content.md, agreed): stage 2 «Версии», then batch tasks; better after the first feedback from people
-- Windows: on the laptop the live check of SPEC-windows §11.4 (with a real permission request answered from the panel) the «Проекты» card's buttons, a Claude launch in Windows Terminal and one in the background (do the `PowerShell(…)` rules let it build and check a project without Git Bash?); then the rest of stage 5 (editing a profile's commands, prices and budget) or stage 6; stage 3 leftovers («Показать», buttons in the notification) need the laptop
+- Windows: on the laptop the live check of SPEC-windows §11.4 (with a real permission request answered from the panel) the «Проекты» card's buttons, a Claude launch in Windows Terminal and one in the background (do the `PowerShell(…)` rules let it build and check a project without Git Bash?); then stage 6 (Ресурсы, Не спать, быстрые команды и переключатели); stage 3 leftovers («Показать», buttons in the notification) need the laptop
 
 **Needs Oleh:**
 - Windows laptop: install the tools and copy the two CLAUDE.md files as in `desktop/WINDOWS-DEV.md`, sign in to Claude Code there; choose the Windows signing (SPEC-windows §7)
@@ -96,6 +97,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-18 — Windows: the end of stage 5 (branch `feat/desktop-finish-stage5`)
+
+Done: the current profile in Settings like the Mac's profile page — «Сервис по умолчанию», and for folder projects «Права Claude в фоне», stages, the row's metrics, the speech pace and «Команды проектов» (each command folded until opened: name, result file, «На чём», «Спросить перед запуском», service, task, «Удалить команду» asking once; «Добавить команду»); `Profile::set_field` checks each field like the Mac's decoder. «Расход по API»: today, this month, «Бюджет в месяц, $», prices per million tokens; a notification at 80 % and 100 % of the budget, once a month each. `.docx`: `core/docx.rs` reads `word/document.xml` (`miniz_oxide`, already in the build) for word counts and the background prompt. The empty start: a first start has no profile and opens the assistant; the panel shows «Создайте первый профиль» with «Помощник…» and «Импортировать файл…»; «Разработчик (GitHub)» is made only from a file before profiles with its own folder or launch mode. All texts came from the Mac catalog, none new.
+Checked: `python3 scripts/strings.py --check` (379 texts), `scripts/strings-check.py`, `cargo test --workspace` on the Mac (core 98: fields set and refused, commands kept to the Mac's keys with new ids, prices and the budget levels, `%.2f` in texts, a Word file stored and deflated, its words and prompt text, the empty start). In a browser with sample replies: the profile card with 2 commands, a command renamed, its service, «Весь проект» and an empty question saved, «Добавить команду» opened, «Удалить команду» → «Удалить?» → gone, «Хронометраж» off hides the pace, pace 400 → 250, a blank stage kept, the budget cleared, a price half saved; the panel and Settings without a profile. The real windows weren't opened.
+Left: nothing of stage 5 seen live on Windows; choosing a profile's source kind in Settings (only in the assistant); the last profile still can't be deleted.
 
 ## 2026-11-18 — Windows: the profile assistant (branch `feat/desktop-assistant`)
 

@@ -540,6 +540,7 @@ dependencies = [
  "httpdate",
  "interprocess",
  "libc",
+ "miniz_oxide 0.8.9",
  "regex",
  "serde",
  "serde_json",

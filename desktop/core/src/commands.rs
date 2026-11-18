@@ -202,10 +202,10 @@ pub fn api_prompt(task: &str, context: &Context, file_text: Option<&str>, langua
 }
 
 /// The source's text to put into the prompt: only for formats Claude can't read with its file tools and no shell
-/// (`.rtf`; `.docx` isn't unzipped in this version), and not when too long for a command line.
+/// (`.rtf`, `.docx`; the Mac's `inlineText`), and not when too long for a command line.
 pub fn inline_text(path: &Path) -> Option<String> {
-    let rtf = path.extension().is_some_and(|e| e.eq_ignore_ascii_case("rtf"));
-    let text = if rtf { folders::text_of(path)? } else { return None };
+    let formatted = path.extension().is_some_and(|e| e.eq_ignore_ascii_case("rtf") || e.eq_ignore_ascii_case("docx"));
+    let text = if formatted { folders::text_of(path)? } else { return None };
     (text.len() <= 24_000).then_some(text)
 }
 

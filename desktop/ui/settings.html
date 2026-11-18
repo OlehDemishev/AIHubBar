@@ -54,6 +54,32 @@
         <label for="profile-calendar" data-t="Календарь"></label>
         <select id="profile-calendar"></select>
       </div>
+      <div class="row">
+        <label for="profile-service" data-t="Сервис по умолчанию"></label>
+        <select id="profile-service"></select>
+      </div>
+      <p class="secondary" data-t="Сервис команд-шаблонов профиля. Агенты и ключи — Настройки → «Сервисы AI»."></p>
+      <div id="profile-folder-fields" hidden>
+        <div class="row">
+          <label for="profile-permissions" data-t="Права Claude в фоне"></label>
+          <select id="profile-permissions"></select>
+        </div>
+        <h3 data-t="Карточка, этапы и метрики"></h3>
+        <div class="row">
+          <label for="profile-stages" data-t="Этапы"></label>
+          <input type="text" id="profile-stages" class="wide" data-t-placeholder="идея, черновик, готово">
+        </div>
+        <div class="metric-boxes" id="profile-metrics"></div>
+        <div class="row" id="profile-pace-row" hidden>
+          <label for="profile-pace" id="profile-pace-label"></label>
+          <input type="number" id="profile-pace" min="80" max="250" step="10">
+        </div>
+        <p class="secondary" data-t="Карточка проекта — файл проект.md в папке проекта (этап, дедлайн, публикация, формат, главный файл, площадка); этап меняется прямо из панели. Слова считаются по главному файлу."></p>
+        <h3 data-t="Команды проектов"></h3>
+        <div id="profile-commands"></div>
+        <button id="command-add" data-t="Добавить команду"></button>
+        <p class="secondary" data-t="Подстановки: {проект} {файл} {формат} {площадка} {хронометраж} {текст} {язык}; в имени файла ещё <время> и <файл>. Результат — всегда новый файл в папке проекта. «Своя задача» есть всегда."></p>
+      </div>
     </section>
     <h1 data-t="Сервисы AI"></h1>
     <section class="card services">
@@ -67,7 +93,17 @@
       <h2 data-t="Модели по API"></h2>
       <p class="secondary" id="no-key-store" data-t="На этой системе ключи API пока негде хранить: работают только серверы без ключа (Ollama, LM Studio)." hidden></p>
       <div id="provider-rows"></div>
-      <p class="secondary" id="api-spend" hidden></p>
+    </section>
+    <section class="card services">
+      <h2 data-t="Расход по API"></h2>
+      <div class="row"><span data-t="Сегодня"></span><span id="spend-today"></span></div>
+      <div class="row"><span data-t="В этом месяце"></span><span id="spend-month"></span></div>
+      <div class="row">
+        <label for="api-budget" data-t="Бюджет в месяц, $"></label>
+        <input type="number" id="api-budget" min="0" step="1" data-t-placeholder="нет">
+      </div>
+      <div id="price-rows"></div>
+      <p class="secondary" data-t="AI Hub Bar считает токены своих запросов по ответам сервисов; стоимость — по ценам, которые вы введёте (цены меняются, поэтому они не зашиты). Уведомление при 80 % и 100 % бюджета."></p>
     </section>
     <h1 data-t="Экспорт и импорт"></h1>
     <section class="card">
@@ -248,6 +284,124 @@
       // A profile without git projects isn't a mistake; a folder that is gone is.
       note.className = folder.path === null ? "secondary" : "error";
     }
+    // The current profile's service, rights, stages, metrics and commands (the Mac's profile page). Each field is
+    // written when it is left, so typing isn't interrupted; the panel reads the profile again.
+    let details = null;
+    const openCommands = new Set();
+    const setField = (field, value) => invoke("set_profile_field", { field, value });
+    const metricTitles = [["words", t("Слова")], ["duration", t("Хронометраж")], ["readingTime", t("Время чтения")], ["pages", t("Страницы")], ["sources", t("Источники")], ["deadline", t("Дедлайн")], ["publishDate", t("Дата публикации")], ["lastActivity", t("Последняя правка")]];
+    const profileService = document.getElementById("profile-service");
+    const profilePermissions = document.getElementById("profile-permissions");
+    for (const [value, title] of [["code", t("Код: git, сборки, PR")], ["filesOnly", t("Только файлы проекта")], ["filesAndWeb", t("Файлы + поиск в интернете")]]) profilePermissions.add(new Option(title, value));
+    const serviceOptions = (select, first, chosen) => {
+      select.replaceChildren(new Option(first, ""), ...details.services.filter((s) => s.id !== "claude-code").map((s) => new Option(s.name, s.id)));
+      if (chosen && ![...select.options].some((o) => o.value === chosen)) select.add(new Option(chosen, chosen));
+      select.value = chosen ?? "";
+    };
+    function showPace() {
+      const on = details.metrics.includes("duration");
+      document.getElementById("profile-pace-row").hidden = !on;
+      document.getElementById("profile-pace").value = details.wordsPerMinute;
+      document.getElementById("profile-pace-label").textContent = t("Темп речи: %lld слов/мин", details.wordsPerMinute);
+    }
+    function commandEditor(command) {
+      const item = document.createElement("details");
+      item.className = "command-editor";
+      item.open = openCommands.has(command.id);
+      item.ontoggle = () => { if (item.open) openCommands.add(command.id); else openCommands.delete(command.id); };
+      const summary = document.createElement("summary");
+      summary.textContent = command.title || t("Новая команда");
+      const store = () => setField("commands", details.commands);
+      const field = (label, input) => {
+        const row = document.createElement("label");
+        row.className = "row";
+        row.append(Object.assign(document.createElement("span"), { textContent: label }), input);
+        return row;
+      };
+      const text = (key, placeholder) => {
+        const input = Object.assign(document.createElement("input"), { type: "text", value: command[key] ?? "", placeholder: placeholder ?? "" });
+        input.className = "wide";
+        input.onchange = () => {
+          command[key] = input.value;
+          if (key === "title") summary.textContent = input.value || t("Новая команда");
+          store();
+        };
+        return input;
+      };
+      const input = document.createElement("select");
+      input.add(new Option(t("Главный файл"), "mainFile"));
+      input.add(new Option(t("Весь проект"), "project"));
+      input.value = command.input === "project" ? "project" : "mainFile";
+      input.onchange = () => { command.input = input.value; store(); };
+      const service = document.createElement("select");
+      serviceOptions(service, t("Сервис профиля"), command.service);
+      service.onchange = () => { command.service = service.value || null; store(); };
+      const task = Object.assign(document.createElement("textarea"), { value: command.task ?? "", rows: 4 });
+      task.setAttribute("aria-label", t("Задача"));
+      task.onchange = () => { command.task = task.value; store(); };
+      const remove = Object.assign(document.createElement("button"), { textContent: t("Удалить команду") });
+      remove.onclick = async () => {
+        if (!remove.dataset.asked) { remove.dataset.asked = "1"; remove.textContent = t("Удалить?"); return; }
+        details.commands = details.commands.filter((c) => c !== command);
+        await store();
+        showCommands();
+      };
+      item.append(summary,
+        field(t("Название"), text("title")),
+        field(t("Файл результата"), text("output", t("хуки.md"))),
+        field(t("На чём"), input),
+        field(t("Спросить перед запуском"), text("asks", t("пусто — запускать сразу; «Язык», «Тон»…"))),
+        field(t("Сервис"), service),
+        Object.assign(document.createElement("span"), { className: "secondary", textContent: t("Задача") }),
+        task, remove);
+      return item;
+    }
+    function showCommands() {
+      document.getElementById("profile-commands").replaceChildren(...details.commands.map(commandEditor));
+    }
+    async function showDetails() {
+      details = await invoke("profile_details");
+      // No profile yet: the panel offers the assistant and an import instead.
+      document.getElementById("current-profile").closest(".card").hidden = !details;
+      if (!details) return;
+      serviceOptions(profileService, "Claude Code", details.service);
+      document.getElementById("profile-folder-fields").hidden = !details.folders;
+      profilePermissions.value = details.permissions;
+      document.getElementById("profile-stages").value = details.stages.join(", ");
+      document.getElementById("profile-metrics").replaceChildren(...metricTitles.map(([key, title]) => {
+        const label = document.createElement("label");
+        label.className = "check";
+        const box = Object.assign(document.createElement("input"), { type: "checkbox", checked: details.metrics.includes(key) });
+        box.onchange = () => {
+          details.metrics = metricTitles.map(([k]) => k).filter((k) => (k === key ? box.checked : details.metrics.includes(k)));
+          setField("metrics", details.metrics);
+          showPace();
+        };
+        label.append(box, " ", title);
+        return label;
+      }));
+      showPace();
+      showCommands();
+    }
+    profileService.onchange = () => setField("service", profileService.value || null);
+    profilePermissions.onchange = () => setField("permissions", profilePermissions.value);
+    document.getElementById("profile-stages").onchange = (event) => {
+      details.stages = event.target.value.split(",").map((s) => s.trim());
+      setField("stages", details.stages);
+    };
+    document.getElementById("profile-pace").onchange = (event) => {
+      details.wordsPerMinute = Math.min(250, Math.max(80, Number(event.target.value) || 150));
+      setField("wordsPerMinute", details.wordsPerMinute);
+      showPace();
+    };
+    document.getElementById("command-add").onclick = async () => {
+      const command = { id: crypto.randomUUID(), title: t("Новая команда"), task: "", output: t("результат-<время>.md"), input: "mainFile" };
+      details.commands.push(command);
+      openCommands.add(command.id);
+      await setField("commands", details.commands);
+      showCommands();
+    };
+
     document.getElementById("projects-folder-choose").onclick = () => invoke("choose_projects_folder");
     document.getElementById("projects-folder-reset").onclick = () => invoke("reset_projects_folder");
 
@@ -298,11 +452,42 @@
     const keyForms = new Set();
     const deleting = new Set();
     const providerErrors = new Map();
+    // «Расход по API»: today and this month, the budget, a price per provider (written when a field is left).
+    const budget = document.getElementById("api-budget");
+    const number = (input) => (input.value.trim() === "" ? null : Number(input.value));
+    budget.onchange = async () => showSpendLines(await invoke("set_api_budget", { budget: number(budget) }));
+    function showSpendLines(view) {
+      document.getElementById("spend-today").textContent = view.today;
+      document.getElementById("spend-month").textContent = view.month;
+    }
+    function showSpend(view) {
+      showSpendLines(view);
+      if (document.activeElement !== budget) budget.value = view.budget ?? "";
+      // Leaving one price field for the next must not rebuild the rows under the cursor.
+      if (document.activeElement?.classList.contains("price")) return;
+      document.getElementById("price-rows").replaceChildren(...view.prices.map((price) => {
+        const row = document.createElement("div");
+        row.className = "row";
+        const field = (value, label) => {
+          const input = Object.assign(document.createElement("input"), { type: "number", min: 0, step: "any", value: value ?? "", placeholder: "—" });
+          input.className = "price";
+          input.setAttribute("aria-label", label);
+          return input;
+        };
+        const input = field(price.input, price.label);
+        const output = field(price.output, price.label);
+        const store = async () => showSpendLines(await invoke("set_api_price", { provider: price.id, input: number(input), output: number(output) }));
+        input.onchange = store;
+        output.onchange = store;
+        const pair = document.createElement("span");
+        pair.append(input, " / ", output);
+        row.append(Object.assign(document.createElement("span"), { textContent: price.label }), pair);
+        return row;
+      }));
+    }
     function showServices(view) {
       document.getElementById("no-key-store").hidden = view.keysAvailable;
-      const spend = document.getElementById("api-spend");
-      spend.hidden = !view.spend;
-      spend.textContent = view.spend ?? "";
+      showSpend(view);
       providerRows.replaceChildren(...view.providers.map((provider) => {
         const box = document.createElement("div");
         box.className = "provider";
@@ -454,11 +639,15 @@
     document.getElementById("import-replace").onclick = async () => showImport(await invoke("apply_import", { replace: true }));
     document.getElementById("import-add").onclick = async () => showImport(await invoke("apply_import", { replace: false }));
     document.getElementById("import-cancel").onclick = async () => showImport(await invoke("cancel_import"));
+    // A file chosen from the panel's «Импортировать файл…» waits here for «Заменить» / «Добавить».
+    showImport(await invoke("import_view"));
+    window.__TAURI__.event.listen("import-pending", async () => showImport(await invoke("import_view")));
 
     // Everything that belongs to the current profile, read again after any change (here or from the panel).
     async function showCurrent() {
       showProfiles(await invoke("profiles_view"));
       showFolder(await invoke("projects_folder"));
+      await showDetails();
       mode.value = (await invoke("launch_settings")).mode ?? "";
       showHooks(await invoke("hooks_state"));
       for (const card of document.querySelectorAll(".agent-hooks")) card.dispatchEvent(new Event("refresh"));

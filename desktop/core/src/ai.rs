@@ -140,6 +140,38 @@ pub fn price(services: &Value, provider: &str) -> Option<(f64, f64)> {
     Some((price["input"].as_f64()?, price["output"].as_f64()?))
 }
 
+/// A price entered in Settings: a missing half counts as 0, as on the Mac, and 0 / 0 removes the price.
+pub fn set_price(services: &mut Value, provider: &str, input: Option<f64>, output: Option<f64>) {
+    let (input, output) = (input.filter(|n| n.is_finite() && *n > 0.0).unwrap_or(0.0), output.filter(|n| n.is_finite() && *n > 0.0).unwrap_or(0.0));
+    let prices = object(services, "prices");
+    if input == 0.0 && output == 0.0 {
+        prices.remove(provider);
+    } else {
+        prices.insert(provider.to_owned(), json!({"input": input, "output": output}));
+    }
+}
+
+/// Dollars a month; None — no budget.
+pub fn budget(services: &Value) -> Option<f64> {
+    services["monthlyBudget"].as_f64().filter(|b| *b > 0.0)
+}
+
+pub fn set_budget(services: &mut Value, budget: Option<f64>) {
+    if !services.is_object() {
+        *services = json!({});
+    }
+    let map = services.as_object_mut().expect("just made an object");
+    match budget.filter(|b| b.is_finite() && *b > 0.0) {
+        Some(budget) => map.insert("monthlyBudget".into(), json!(budget)),
+        None => map.remove("monthlyBudget"),
+    };
+}
+
+/// The month's spend against the budget: 100 or 80 once it is reached (the Mac warns at both, each once a month).
+pub fn budget_level(cost: f64, budget: f64) -> Option<u8> {
+    [100u8, 80].into_iter().find(|&level| budget > 0.0 && cost >= budget * f64::from(level) / 100.0)
+}
+
 fn object<'a>(services: &'a mut Value, key: &str) -> &'a mut Map<String, Value> {
     if !services.is_object() {
         *services = json!({});
@@ -527,5 +559,25 @@ mod tests {
         assert_eq!(spend_since(&records, now - chrono::Duration::days(1), &prices), (1_500_010, Some(6.0)));
         assert_eq!(spend_since(&records, now, &json!({})).1, None, "no price, no dollars");
         std::fs::remove_dir_all(dir).unwrap();
+    }
+
+    #[test]
+    fn prices_and_budget() {
+        let mut services = Value::Null;
+        set_price(&mut services, "openai", Some(2.5), None);
+        assert_eq!(price(&services, "openai"), Some((2.5, 0.0)), "a missing half is 0, as on the Mac");
+        set_price(&mut services, "openai", Some(0.0), None);
+        assert_eq!(price(&services, "openai"), None);
+        assert!(services["prices"].as_object().unwrap().is_empty());
+        set_budget(&mut services, Some(20.0));
+        assert_eq!(budget(&services), Some(20.0));
+        set_budget(&mut services, Some(-1.0));
+        assert_eq!((budget(&services), services.get("monthlyBudget")), (None, None));
+        assert_eq!(budget_level(15.9, 20.0), None);
+        assert_eq!(budget_level(16.0, 20.0), Some(80));
+        assert_eq!(budget_level(25.0, 20.0), Some(100));
+        let s = s();
+        assert_eq!(s.format("$%.2f из $%.2f в этом месяце", &[&format!("{:.2}", 16.0), "20.00"]), "$16.00 из $20.00 в этом месяце");
+        assert_eq!(s.format("Расход по API: %lld %% бюджета", &["80"]), "Расход по API: 80 % бюджета");
     }
 }

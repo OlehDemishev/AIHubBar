@@ -156,9 +156,68 @@ impl Profile {
             .collect()
     }
 
+    /// `code`, `filesOnly` or `filesAndWeb`: what Claude may do in the background.
+    pub fn permissions(&self) -> &str {
+        self.other.get("permissions").and_then(Value::as_str).filter(|p| PERMISSIONS.contains(p)).unwrap_or("filesOnly")
+    }
+
+    /// One field edited in Settings → «Профили» (the Mac's `ProfileDetail`), checked like the Mac's decoder would read
+    /// it. Stages stay as typed, blank ones too (`stages()` skips them); metrics keep the Mac's order; a command keeps
+    /// only the Mac's `CommandTemplate` keys. False for a field this page doesn't edit or a value that doesn't fit.
+    pub fn set_field(&mut self, field: &str, value: &Value) -> bool {
+        let checked = match field {
+            "stages" => value.as_array().map(|list| json!(list.iter().map(|s| s.as_str().unwrap_or_default()).collect::<Vec<_>>())),
+            "metrics" => value.as_array().map(|list| json!(METRICS.iter().filter(|m| list.iter().any(|v| v == **m)).collect::<Vec<_>>())),
+            "wordsPerMinute" => value.as_u64().map(|n| json!(n.clamp(80, 250))),
+            "permissions" => value.as_str().filter(|p| PERMISSIONS.contains(p)).map(|p| json!(p)),
+            "service" => match value {
+                Value::Null => {
+                    self.other.remove("service");
+                    return true;
+                }
+                Value::String(id) if crate::ai::Service::parse(id).is_some() => Some(json!(id)),
+                _ => None,
+            },
+            "commands" => value.as_array().map(|list| Value::Array(list.iter().filter_map(command_value).collect())),
+            _ => None,
+        };
+        let Some(checked) = checked else { return false };
+        self.other.insert(field.to_owned(), checked);
+        true
+    }
+
     fn strings(&self, key: &str) -> Vec<String> {
         self.other.get(key).and_then(Value::as_array).map(|list| list.iter().filter_map(Value::as_str).map(str::to_owned).collect()).unwrap_or_default()
     }
+}
+
+/// The Mac's `FolderMetric` in its order.
+pub const METRICS: [&str; 8] = ["words", "duration", "readingTime", "pages", "sources", "deadline", "publishDate", "lastActivity"];
+
+/// The Mac's `PermissionProfile`.
+pub const PERMISSIONS: [&str; 3] = ["code", "filesOnly", "filesAndWeb"];
+
+/// A command as the Mac's `CommandTemplate` writes it: a blank «Спросить» and «Сервис профиля» are left out.
+fn command_value(value: &Value) -> Option<Value> {
+    let object = value.as_object()?;
+    let text = |key: &str| object.get(key).and_then(Value::as_str).unwrap_or_default();
+    let id = Some(text("id")).filter(|id| !id.is_empty()).map(str::to_owned).unwrap_or_else(crate::runs::new_id);
+    let mut command = json!({
+        "id": id,
+        "title": text("title"),
+        "task": text("task"),
+        "output": text("output"),
+        "input": if text("input") == "project" { "project" } else { "mainFile" },
+    });
+    let asks = text("asks").trim();
+    if !asks.is_empty() {
+        command["asks"] = json!(asks);
+    }
+    let service = text("service");
+    if crate::ai::Service::parse(service).is_some() {
+        command["service"] = json!(service);
+    }
+    Some(command)
 }
 
 // MARK: - Templates
@@ -335,6 +394,37 @@ pub fn expand(text: &str, home: &Path) -> PathBuf {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn fields_edited_in_settings() {
+        let mut profile = Profile::from_value(&json!({"name": "Видео", "source": {"folders": {"_0": "~/Видео"}}, "permissions": "code"})).unwrap();
+        assert!(profile.set_field("stages", &json!(["идея", "", "готово"])));
+        assert_eq!(profile.stages(), ["идея", "готово"]);
+        assert_eq!(profile.other["stages"], json!(["идея", "", "готово"]), "a blank stage stays while typing");
+        assert!(profile.set_field("metrics", &json!(["deadline", "words", "nonsense"])));
+        assert_eq!(profile.metrics(), ["words", "deadline"]);
+        assert!(profile.set_field("wordsPerMinute", &json!(400)));
+        assert_eq!(profile.words_per_minute(), 250);
+        assert!(!profile.set_field("permissions", &json!("everything")));
+        assert!(profile.set_field("permissions", &json!("filesAndWeb")));
+        assert_eq!(profile.permissions(), "filesAndWeb");
+        assert!(profile.set_field("service", &json!("api:openai")));
+        assert!(!profile.set_field("service", &json!("api:nowhere")));
+        assert!(profile.set_field("service", &Value::Null));
+        assert!(!profile.other.contains_key("service"));
+        assert!(!profile.set_field("name", &json!("x")), "only this page's fields");
+
+        let commands = json!([
+            {"id": "a1", "title": "Хуки", "task": "Найди хуки в {файл}", "output": "хуки.md", "input": "mainFile", "asks": "  ", "service": null, "extra": 1},
+            {"title": "Новая команда", "task": "", "output": "результат-<время>.md", "input": "project", "asks": "Тон", "service": "agent:codex"},
+        ]);
+        assert!(profile.set_field("commands", &commands));
+        let saved = profile.other["commands"].as_array().unwrap();
+        assert_eq!(saved[0], json!({"id": "a1", "title": "Хуки", "task": "Найди хуки в {файл}", "output": "хуки.md", "input": "mainFile"}));
+        assert_eq!((saved[1]["input"].as_str(), saved[1]["asks"].as_str(), saved[1]["service"].as_str()), (Some("project"), Some("Тон"), Some("agent:codex")));
+        assert!(!saved[1]["id"].as_str().unwrap().is_empty(), "a new command gets an id");
+        assert_eq!(crate::commands::of_profile(&profile).len(), 2);
+    }
 
     #[test]
     fn mac_profile_round_trip() {

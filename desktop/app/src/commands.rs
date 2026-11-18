@@ -202,6 +202,7 @@ fn start(app: &AppHandle, request: &Request, service: &Service, suffix: Option<&
                             if let Err(error) = ai::record_spend(&crate::services::spend_path(), record) {
                                 eprintln!("API spend not saved: {error}");
                             }
+                            crate::services::warn_about_budget(&app);
                             let _ = app.notification().builder().title(texts.format("Готово: %@", &[&title])).body(format!("{project} · {name}")).show();
                             JobState::Done
                         }
