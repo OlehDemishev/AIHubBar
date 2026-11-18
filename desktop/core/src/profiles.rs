@@ -59,6 +59,18 @@ impl Source {
             _ => None,
         }
     }
+
+    /// The projects folder of any kind, `~`-form: git repositories, folders, or the inbox folder itself.
+    pub fn folder(&self) -> Option<&str> {
+        match self {
+            Source::GitReport(path) | Source::GitBuiltin(path) | Source::Folders(path) | Source::Inbox(path) => Some(path),
+            Source::None => None,
+        }
+    }
+
+    pub fn is_folders(&self) -> bool {
+        matches!(self, Source::Folders(_) | Source::Inbox(_))
+    }
 }
 
 impl Profile {
@@ -79,22 +91,62 @@ impl Profile {
         Source::parse(&self.source)
     }
 
-    /// The git projects folder, expanded; None for a profile without git projects.
+    /// The projects folder of any kind, expanded; None for a profile without projects.
     pub fn projects_dir(&self, home: &Path) -> Option<PathBuf> {
-        self.source().git_folder().map(|folder| expand(folder, home))
+        self.source().folder().map(|folder| expand(folder, home))
     }
 
-    /// A new projects folder (`~`-form) for a git profile; others are left alone. True when it changed.
-    pub fn set_git_folder(&mut self, folder: &str) -> bool {
-        let kind = match self.source() {
-            Source::GitReport(_) => "gitReport",
-            Source::GitBuiltin(_) => "gitBuiltin",
-            _ => return false,
+    /// A new projects folder (`~`-form), kept in the source's own shape; a profile without projects is left alone.
+    /// True when it changed.
+    pub fn set_folder(&mut self, folder: &str) -> bool {
+        let (kind, key) = match self.source() {
+            Source::GitReport(_) => ("gitReport", "projects"),
+            Source::GitBuiltin(_) => ("gitBuiltin", "projects"),
+            Source::Folders(_) => ("folders", "_0"),
+            Source::Inbox(_) => ("inbox", "_0"),
+            Source::None => return false,
         };
         let Some(body) = self.source.get_mut(kind).and_then(Value::as_object_mut) else { return false };
-        let changed = body.get("projects").and_then(Value::as_str) != Some(folder);
-        body.insert("projects".to_owned(), json!(folder));
+        let changed = body.get(key).and_then(Value::as_str) != Some(folder);
+        body.insert(key.to_owned(), json!(folder));
         changed
+    }
+
+    /// The folder projects' stages, in order, without blank ones.
+    pub fn stages(&self) -> Vec<String> {
+        self.strings("stages").into_iter().filter(|s| !s.trim().is_empty()).collect()
+    }
+
+    /// The metrics a folder project's row shows (`words`, `duration`, `deadline`…).
+    pub fn metrics(&self) -> Vec<String> {
+        self.strings("metrics")
+    }
+
+    /// Speech pace for «Хронометраж».
+    pub fn words_per_minute(&self) -> u64 {
+        self.other.get("wordsPerMinute").and_then(Value::as_u64).filter(|&n| n > 0).unwrap_or(150)
+    }
+
+    /// The stage that means the work is finished: the last one, when there are two or more.
+    pub fn done_stage(&self) -> Option<String> {
+        let stages = self.stages();
+        if stages.len() > 1 { stages.last().cloned() } else { None }
+    }
+
+    /// What the profile's commands write from the main file: such files never become the main file themselves (the
+    /// Mac's `Profile.resultPatterns`), plus «Своя задача»'s result.
+    pub fn result_patterns(&self) -> Vec<String> {
+        let commands = self.other.get("commands").and_then(Value::as_array).cloned().unwrap_or_default();
+        commands
+            .iter()
+            .filter(|c| c.get("input").and_then(Value::as_str).is_none_or(|input| input == "mainFile"))
+            .map(|c| c.get("output").and_then(Value::as_str).unwrap_or("результат-<время>.md").to_owned())
+            .chain(std::iter::once("результат-<время>.md".to_owned()))
+            .collect()
+    }
+
+    fn strings(&self, key: &str) -> Vec<String> {
+        self.other.get(key).and_then(Value::as_array).map(|list| list.iter().filter_map(Value::as_str).map(str::to_owned).collect()).unwrap_or_default()
     }
 }
 
@@ -105,13 +157,27 @@ fn templates() -> &'static Value {
     TABLE.get_or_init(|| serde_json::from_str(include_str!("../../ui/i18n/templates.json")).unwrap_or_default())
 }
 
+/// The Mac's template ids in the assistant's order.
+pub const TEMPLATE_IDS: [&str; 6] = ["developer", "video", "texts", "research", "social", "custom"];
+
+fn template_entry(template: &str, language: &str) -> Option<&'static Value> {
+    let modes = templates().get(template)?;
+    modes.get(language).or_else(|| modes.get("en"))
+}
+
 /// A new profile from a Mac template (`ui/i18n/templates.json`) in the content language, English when it has none.
 pub fn from_template(template: &str, language: &str) -> Option<Profile> {
-    let modes = templates().get(template)?;
-    let mode = modes.get(language).or_else(|| modes.get("en"))?;
-    let mut profile = Profile::from_value(mode)?;
+    let mut profile = Profile::from_value(template_entry(template, language)?.get("mode")?)?;
     profile.id = crate::runs::new_id();
     Some(profile)
+}
+
+/// (id, title) of every template, in the content language: «Разработчик (GitHub)», «Видео (YouTube, Shorts, Reels)»…
+pub fn template_titles(language: &str) -> Vec<(&'static str, String)> {
+    TEMPLATE_IDS
+        .iter()
+        .filter_map(|id| Some((*id, template_entry(id, language)?.get("title")?.as_str()?.to_owned())))
+        .collect()
 }
 
 /// `name`, or `name 2`, `name 3`… when another profile already has it (the Mac's `uniqueName`).
@@ -285,11 +351,14 @@ mod tests {
     #[test]
     fn git_folder_changes_in_place() {
         let mut profile = Profile::from_value(&json!({"source": {"gitReport": {"dailyReport": "~/r", "projects": "~/Projects"}}})).unwrap();
-        assert!(profile.set_git_folder("D:/Работа"));
-        assert!(!profile.set_git_folder("D:/Работа"));
+        assert!(profile.set_folder("D:/Работа"));
+        assert!(!profile.set_folder("D:/Работа"));
         assert_eq!(profile.source, json!({"gitReport": {"dailyReport": "~/r", "projects": "D:/Работа"}}));
+        let mut folders = Profile::from_value(&json!({"source": {"folders": {"_0": "~/Documents/Видео"}}})).unwrap();
+        assert!(folders.set_folder("~/Видео"));
+        assert_eq!(folders.source, json!({"folders": {"_0": "~/Видео"}}));
         let mut none = Profile::from_value(&json!({})).unwrap();
-        assert!(!none.set_git_folder("~/x"));
+        assert!(!none.set_folder("~/x"));
     }
 
     #[test]
@@ -301,7 +370,18 @@ mod tests {
         assert_eq!(from_template("developer", "en").unwrap().name, "Developer (GitHub)");
         assert_eq!(from_template("developer", "xx").unwrap().name, "Developer (GitHub)", "English when there is none");
         assert_ne!(from_template("developer", "ru").unwrap().id, from_template("developer", "ru").unwrap().id);
-        assert!(from_template("video", "ru").is_none(), "folder projects come later");
+        let video = from_template("video", "ru").unwrap();
+        assert_eq!(video.source(), Source::Folders("~/Documents/Видео".into()));
+        assert!(video.source().is_folders());
+        assert_eq!(video.stages().first().map(String::as_str), Some("идея"));
+        assert_eq!(video.done_stage().as_deref(), Some("опубликовано"));
+        assert_eq!(video.metrics(), ["words", "duration", "deadline", "publishDate"]);
+        assert_eq!(video.words_per_minute(), 150);
+        assert!(video.result_patterns().len() > 1 && video.result_patterns().contains(&"результат-<время>.md".to_owned()));
+        let titles = template_titles("ru");
+        assert_eq!(titles.len(), 6);
+        assert_eq!(titles[1], ("video", "Видео (YouTube, Shorts, Reels)".to_owned()));
+        assert!(from_template("utilities", "ru").is_none(), "Mac-only modules, no projects");
     }
 
     #[test]

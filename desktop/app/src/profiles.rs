@@ -11,7 +11,7 @@ use std::path::{Path, PathBuf};
 use tauri::{AppHandle, Emitter, Manager};
 use tauri_plugin_dialog::DialogExt;
 
-/// The current profile's git projects folder; None when it has none (folder projects come later).
+/// The current profile's projects folder (git repositories or folder projects); None when it has none.
 pub fn projects_dir(app: &AppHandle) -> Option<PathBuf> {
     app.state::<AppState>().settings.lock().unwrap().projects_dir()
 }
@@ -78,11 +78,22 @@ pub fn select_profile(app: AppHandle, id: String) -> ProfilesView {
     profiles_view(app)
 }
 
-/// «Добавить профиль»: the Mac's «Разработчик (GitHub)» template in the interface language, made current. Other
-/// templates come with folder projects.
+#[derive(Serialize)]
+pub struct TemplateRow {
+    id: &'static str,
+    title: String,
+}
+
+/// The Mac's templates for «Добавить профиль из шаблона», titled in the interface language.
 #[tauri::command]
-pub fn add_profile(app: AppHandle) -> Result<ProfilesView, String> {
-    let profile = profiles::from_template("developer", language(&app)).ok_or("no template")?;
+pub fn profile_templates(app: AppHandle) -> Vec<TemplateRow> {
+    profiles::template_titles(language(&app)).into_iter().map(|(id, title)| TemplateRow { id, title }).collect()
+}
+
+/// «Добавить профиль»: a Mac template in the interface language, made current.
+#[tauri::command]
+pub fn add_profile(app: AppHandle, template: String) -> Result<ProfilesView, String> {
+    let profile = profiles::from_template(&template, language(&app)).ok_or("no template")?;
     change(&app, |settings| settings.add_profile(profile));
     Ok(profiles_view(app))
 }
@@ -111,9 +122,9 @@ pub fn delete_profile(app: AppHandle, id: String) -> ProfilesView {
 pub struct ProjectsFolder {
     /// The current profile's name: the folder is its own.
     profile: String,
-    /// None — the profile has no git projects folder.
+    /// None — the profile has no projects folder.
     path: Option<String>,
-    /// Another folder than `~/Projects`: «По умолчанию» brings that back.
+    /// Another folder than the template's own (`~/Projects` for git): «По умолчанию» brings that back.
     custom: bool,
     /// «Папки нет: …» when the folder is gone, or why there is no folder.
     note: Option<String>,
@@ -164,7 +175,9 @@ pub async fn choose_projects_folder(app: AppHandle) -> ProjectsFolder {
 #[tauri::command]
 pub fn reset_projects_folder(app: AppHandle) -> ProjectsFolder {
     change(&app, |settings| {
-        settings.set_projects_dir(&paths::default_projects_dir());
+        if let Some(default) = settings.default_projects_dir() {
+            settings.set_projects_dir(&default);
+        }
     });
     folder_view(&app)
 }

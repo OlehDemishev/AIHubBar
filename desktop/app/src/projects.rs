@@ -7,6 +7,7 @@ use crate::profiles::{projects_dir, projects_root};
 use crate::{language, strings};
 use chrono::{DateTime, Utc};
 use claudepult_core::i18n::Strings;
+use claudepult_core::folders::{self, FolderProject};
 use claudepult_core::projects::{self, Ci, Health, Project, Tools, Words};
 use crate::runs::Runs;
 use claudepult_core::launch::{self, ClaudeCommand, Style};
@@ -36,6 +37,8 @@ enum Problem {
 #[derive(Default)]
 struct State {
     projects: Vec<Project>,
+    /// A profile with folder projects (the Mac's `FolderProjectStore`): these instead of git repositories.
+    folders: Vec<FolderProject>,
     /// The folder `projects` came from: PR alerts compare two scans of the same folder only.
     root: Option<PathBuf>,
     updated: Option<Instant>,
@@ -87,6 +90,21 @@ impl Projects {
         let texts = strings(app);
         let words = Words { strings: &texts, language: language(app) };
         let started = Instant::now();
+        let profile = app.state::<crate::AppState>().settings.lock().unwrap().current().cloned();
+        if let Some(profile) = profile.filter(|p| p.source().is_folders()) {
+            let found = match &root {
+                Some(root) if root.is_dir() => {
+                    let home = dirs::home_dir().unwrap_or_default();
+                    (folders::scan(&profile.source(), &home, &profile.result_patterns(), language(app)), None)
+                }
+                _ => (Vec::new(), Some(Problem::NoFolder)),
+            };
+            eprintln!("folder projects: {} in {:.1} s", found.0.len(), started.elapsed().as_secs_f64());
+            *self.state.lock().unwrap() = State { folders: found.0, root, updated: Some(Instant::now()), problem: found.1, ..State::default() };
+            let _ = app.emit("projects-changed", ());
+            app.state::<crate::limits::Limits>().update_tray(app);
+            return;
+        }
         let (projects, problem) = match (Tools::find(), &root) {
             (_, None) => (Vec::new(), Some(Problem::NoSource)),
             (_, Some(root)) if !root.is_dir() => (Vec::new(), Some(Problem::NoFolder)),
@@ -101,7 +119,7 @@ impl Projects {
         // A failed scan (no folder, no git) keeps quiet: an empty list isn't «every PR closed»; nor is another folder.
         let same_folder = old_root.is_some() && old_root == root;
         let changes = if problem.is_none() && same_folder { projects::pull_request_changes(&old, &projects) } else { Vec::new() };
-        *self.state.lock().unwrap() = State { projects, root, updated: Some(Instant::now()), refreshing: false, problem };
+        *self.state.lock().unwrap() = State { projects, root, updated: Some(Instant::now()), problem, ..State::default() };
         let _ = app.emit("projects-changed", ());
         app.state::<crate::limits::Limits>().update_tray(app);
         let alerts = app.state::<crate::AppState>().settings.lock().unwrap().pull_request_alerts;
@@ -134,11 +152,26 @@ impl Projects {
     /// How many projects there are and how many need attention (red): the tray icon's dot and hint.
     pub fn counts(&self) -> (usize, usize) {
         let state = self.state.lock().unwrap();
-        (state.projects.len(), state.projects.iter().filter(|p| p.health == Health::Red).count())
+        (state.projects.len() + state.folders.len(), state.projects.iter().filter(|p| p.health == Health::Red).count())
     }
 
     fn knows_path(&self, path: &Path) -> bool {
-        self.state.lock().unwrap().projects.iter().any(|p| p.path == path || p.worktrees.iter().any(|w| Path::new(&w.path) == path))
+        let state = self.state.lock().unwrap();
+        state.projects.iter().any(|p| p.path == path || p.worktrees.iter().any(|w| Path::new(&w.path) == path)) || state.folders.iter().any(|p| p.path == path)
+    }
+
+    fn folder_project(&self, path: &Path) -> Option<FolderProject> {
+        self.state.lock().unwrap().folders.iter().find(|p| p.path == path).cloned()
+    }
+
+    /// One folder project read again after a change to its card.
+    fn reread(&self, app: &AppHandle, path: &Path) {
+        let Some(profile) = app.state::<crate::AppState>().settings.lock().unwrap().current().cloned() else { return };
+        let fresh = folders::project(path, &profile.result_patterns(), language(app));
+        if let Some(slot) = self.state.lock().unwrap().folders.iter_mut().find(|p| p.path == path) {
+            *slot = fresh;
+        }
+        let _ = app.emit("projects-changed", ());
     }
 
     /// The base branch and the Next items of a scanned project.
@@ -216,9 +249,75 @@ pub struct ProjectRow {
 #[serde(rename_all = "camelCase")]
 pub struct ProjectsView {
     rows: Vec<ProjectRow>,
+    /// A profile with folder projects: these rows instead of `rows`.
+    folders: Option<FolderView>,
     /// Why the list is empty, when it is.
     message: Option<String>,
     refreshing: bool,
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct FolderView {
+    rows: Vec<FolderRow>,
+    /// The profile's stages, in order: the chips to switch between.
+    stages: Vec<String>,
+    /// «Новый проект»: only for a folder of projects, not an inbox.
+    can_create: bool,
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct FolderRow {
+    path: String,
+    name: String,
+    stage: Option<String>,
+    /// Its place among the profile's stages: the chip's colour from start (blue) to done (green).
+    stage_index: Option<usize>,
+    /// The profile's metrics joined: «1 240 сл. · 8:16 · до 05.12».
+    metrics: String,
+    /// «просрочено 2 дн».
+    overdue: Option<String>,
+    /// «Формат» or «Площадка» from the card.
+    format: Option<String>,
+    main_file: Option<String>,
+    /// The card's file name when there is one; otherwise «Создать проект.md» is offered.
+    card_file: Option<String>,
+    create_card: String,
+}
+
+fn folder_view(app: &AppHandle, state: &State, texts: &Strings) -> Option<FolderView> {
+    let settings = app.state::<crate::AppState>().settings.lock().unwrap().clone();
+    let profile = settings.current().filter(|p| p.source().is_folders())?;
+    let language = language(app);
+    let stages = profile.stages();
+    let metrics = profile.metrics();
+    let done = profile.done_stage();
+    let now = chrono::Local::now();
+    let rows = state
+        .folders
+        .iter()
+        .map(|project| {
+            let card = folders::card_path(&project.path, language);
+            FolderRow {
+                path: project.path.to_string_lossy().into_owned(),
+                name: project.name.clone(),
+                stage: project.card.stage().map(str::to_owned),
+                stage_index: project.card.stage().and_then(|stage| stages.iter().position(|s| s == stage)),
+                metrics: metrics
+                    .iter()
+                    .filter_map(|metric| folders::metric_text(metric, project, profile.words_per_minute(), texts, language, now))
+                    .collect::<Vec<_>>()
+                    .join(" · "),
+                overdue: folders::overdue(project, done.as_deref(), texts, now.date_naive()),
+                format: project.card.get(folders::Key::Format).or(project.card.get(folders::Key::Platform)).map(str::to_owned),
+                main_file: project.main_file.clone(),
+                card_file: project.has_card_file.then(|| card.file_name().map(|n| n.to_string_lossy().into_owned()).unwrap_or_default()),
+                create_card: texts.format("Создать %@", &[&folders::card_file_name(language)]),
+            }
+        })
+        .collect();
+    Some(FolderView { rows, stages, can_create: matches!(profile.source(), claudepult_core::profiles::Source::Folders(_)) })
 }
 
 fn health_key(health: Health) -> &'static str {
@@ -333,14 +432,21 @@ pub fn projects_view(app: AppHandle) -> ProjectsView {
     let projects = app.state::<Projects>();
     let state = projects.state.lock().unwrap();
     let now = Utc::now();
+    let folder_rows = folder_view(&app, &state, &texts);
     let message = match state.problem {
         Some(Problem::NoFolder) => Some(texts.format("Папки нет: %@", &[&projects_root(&app).to_string_lossy()])),
+        None if folder_rows.as_ref().is_some_and(|f| f.rows.is_empty()) && state.updated.is_some() => Some(if folder_rows.as_ref().is_some_and(|f| f.can_create) {
+            let root = claudepult_core::profiles::tilde(&projects_root(&app), &dirs::home_dir().unwrap_or_default());
+            texts.format("Проектов пока нет: каждая папка внутри «%@» — проект.", &[&root])
+        } else {
+            texts.t("Папка пуста.").to_owned()
+        }),
         Some(Problem::NoSource) => Some(texts.t("Проектов нет: у профиля нет папки с git-проектами.").to_owned()),
         Some(Problem::NoGit) => Some(texts.t("Не удалось прочитать репозитории").to_owned()),
         None if state.updated.is_some() && state.projects.is_empty() => Some(texts.t("В папке проектов не найдено git-репозиториев.").to_owned()),
         None => None,
     };
-    ProjectsView { rows: state.projects.iter().map(|p| row(p, &words, now)).collect(), message, refreshing: state.refreshing }
+    ProjectsView { rows: state.projects.iter().map(|p| row(p, &words, now)).collect(), folders: folder_rows, message, refreshing: state.refreshing }
 }
 
 #[tauri::command]
@@ -365,6 +471,68 @@ pub fn open_project(app: AppHandle, path: String, target: String) -> Result<(), 
         "folder" => open_with_system(path.as_os_str()),
         _ => Err("unknown target".into()),
     }
+}
+
+// MARK: - Folder projects
+
+/// A stage chip in an opened folder project: «Этап:» in its card (the card is made when there is none).
+#[tauri::command]
+pub fn set_project_stage(app: AppHandle, path: String, stage: String) -> Result<(), String> {
+    let path = PathBuf::from(path);
+    let projects = app.state::<Projects>();
+    projects.folder_project(&path).ok_or("unknown project")?;
+    let texts = strings(&app);
+    folders::set_stage(&path, &stage, language(&app)).map_err(|error| {
+        let card = folders::card_file_name(language(&app));
+        texts.format("Не удалось записать %@: %@", &[&card, &error.to_string()])
+    })?;
+    projects.reread(&app, &path);
+    Ok(())
+}
+
+/// «Создать проект.md» for a project without a card, at the profile's first stage.
+#[tauri::command]
+pub fn create_project_card(app: AppHandle, path: String) -> Result<(), String> {
+    let path = PathBuf::from(path);
+    let projects = app.state::<Projects>();
+    projects.folder_project(&path).ok_or("unknown project")?;
+    let first = app.state::<crate::AppState>().settings.lock().unwrap().current().and_then(|p| p.stages().into_iter().next());
+    folders::create_card(&path, first.as_deref(), language(&app)).map_err(|e| e.to_string())?;
+    projects.reread(&app, &path);
+    Ok(())
+}
+
+/// «Новый проект»: a folder with a card in the profile's projects folder. Returns its path, to open it.
+#[tauri::command]
+pub fn create_folder_project(app: AppHandle, name: String) -> Result<String, String> {
+    let texts = strings(&app);
+    let settings = app.state::<crate::AppState>().settings.lock().unwrap().clone();
+    let profile = settings.current().filter(|p| matches!(p.source(), claudepult_core::profiles::Source::Folders(_)));
+    let (Some(profile), Some(root)) = (profile, settings.projects_dir()) else {
+        return Err(texts.t("У этого профиля нет папки проектов").to_owned());
+    };
+    let first = profile.stages().into_iter().next();
+    let folder = folders::create_project(&root, &name, first.as_deref(), language(&app)).map_err(|error| match error {
+        folders::CreateError::BadName => texts.t("Название не подходит для папки").to_owned(),
+        folders::CreateError::Exists => texts.t("Такая папка уже есть").to_owned(),
+        folders::CreateError::Io(error) => error,
+    })?;
+    eprintln!("folder project created: {}", folder.display());
+    app.state::<Projects>().ask(false);
+    Ok(folder.to_string_lossy().into_owned())
+}
+
+/// A file of a folder project — its main file or its card — opened in its app. Only inside a scanned project.
+#[tauri::command]
+pub fn open_project_file(app: AppHandle, path: String, file: String) -> Result<(), String> {
+    let folder = PathBuf::from(path);
+    app.state::<Projects>().folder_project(&folder).ok_or("unknown project")?;
+    let target = folder.join(&file);
+    let inside = target.canonicalize().ok().zip(folder.canonicalize().ok()).is_some_and(|(t, f)| t.starts_with(&f) && t != f);
+    if !inside || !target.is_file() {
+        return Err("not a file of this project".into());
+    }
+    open_with_system(target.as_os_str())
 }
 
 /// A project's page or a PR — only links the scan found.

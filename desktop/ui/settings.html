@@ -23,7 +23,10 @@
       <div id="profile-rows"></div>
       <div class="row">
         <span class="secondary" id="profile-delete-note" data-t="Настройки профиля пропадут. Папки проектов останутся на месте." hidden></span>
-        <button id="profile-add" data-t="Добавить профиль"></button>
+        <span class="profile-add">
+          <select id="profile-template" data-t-title="Добавить профиль из шаблона"></select>
+          <button id="profile-add" data-t="Добавить профиль"></button>
+        </span>
       </div>
     </section>
     <section class="card">
@@ -247,7 +250,10 @@
         return row;
       }));
     }
-    document.getElementById("profile-add").onclick = () => invoke("add_profile");
+    // «Добавить профиль» from one of the Mac's templates: «Разработчик (GitHub)», «Видео», «Тексты»…
+    const template = document.getElementById("profile-template");
+    for (const row of await invoke("profile_templates")) template.add(new Option(row.title, row.id));
+    document.getElementById("profile-add").onclick = () => invoke("add_profile", { template: template.value });
 
     // `.claudepult` files, the same as the Mac's: a file read by «Импорт…» waits for «Заменить» / «Добавить» / «Отмена».
     function showImport(view) {

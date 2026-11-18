@@ -1,0 +1,158 @@
+{
+ "ar": {
+  "cardFile": "مشروع.md",
+  "cardLabels": {
+   "deadline": "الموعد النهائي",
+   "format": "الصيغة",
+   "mainFile": "الملف الرئيسي",
+   "platform": "المنصة",
+   "publish": "النشر",
+   "stage": "المرحلة"
+  },
+  "notesHeading": "## ملاحظات"
+ },
+ "de": {
+  "cardFile": "projekt.md",
+  "cardLabels": {
+   "deadline": "Frist",
+   "format": "Format",
+   "mainFile": "Hauptdatei",
+   "platform": "Plattform",
+   "publish": "Veröffentlichung",
+   "stage": "Phase"
+  },
+  "notesHeading": "## Notizen"
+ },
+ "en": {
+  "cardFile": "project.md",
+  "cardLabels": {
+   "deadline": "Deadline",
+   "format": "Format",
+   "mainFile": "Main file",
+   "platform": "Platform",
+   "publish": "Publish",
+   "stage": "Stage"
+  },
+  "notesHeading": "## Notes"
+ },
+ "es": {
+  "cardFile": "proyecto.md",
+  "cardLabels": {
+   "deadline": "Fecha límite",
+   "format": "Formato",
+   "mainFile": "Archivo principal",
+   "platform": "Plataforma",
+   "publish": "Publicación",
+   "stage": "Etapa"
+  },
+  "notesHeading": "## Notas"
+ },
+ "fr": {
+  "cardFile": "projet.md",
+  "cardLabels": {
+   "deadline": "Échéance",
+   "format": "Format",
+   "mainFile": "Fichier principal",
+   "platform": "Plateforme",
+   "publish": "Publication",
+   "stage": "Étape"
+  },
+  "notesHeading": "## Notes"
+ },
+ "id": {
+  "cardFile": "proyek.md",
+  "cardLabels": {
+   "deadline": "Tenggat",
+   "format": "Format",
+   "mainFile": "Berkas utama",
+   "platform": "Platform",
+   "publish": "Publikasi",
+   "stage": "Tahap"
+  },
+  "notesHeading": "## Catatan"
+ },
+ "it": {
+  "cardFile": "progetto.md",
+  "cardLabels": {
+   "deadline": "Scadenza",
+   "format": "Formato",
+   "mainFile": "File principale",
+   "platform": "Piattaforma",
+   "publish": "Pubblicazione",
+   "stage": "Fase"
+  },
+  "notesHeading": "## Note"
+ },
+ "ja": {
+  "cardFile": "プロジェクト.md",
+  "cardLabels": {
+   "deadline": "締め切り",
+   "format": "形式",
+   "mainFile": "メインファイル",
+   "platform": "プラットフォーム",
+   "publish": "公開",
+   "stage": "段階"
+  },
+  "notesHeading": "## メモ"
+ },
+ "ko": {
+  "cardFile": "프로젝트.md",
+  "cardLabels": {
+   "deadline": "마감",
+   "format": "형식",
+   "mainFile": "주요 파일",
+   "platform": "플랫폼",
+   "publish": "게시",
+   "stage": "단계"
+  },
+  "notesHeading": "## 메모"
+ },
+ "pl": {
+  "cardFile": "projekt.md",
+  "cardLabels": {
+   "deadline": "Termin",
+   "format": "Format",
+   "mainFile": "Plik główny",
+   "platform": "Platforma",
+   "publish": "Publikacja",
+   "stage": "Etap"
+  },
+  "notesHeading": "## Notatki"
+ },
+ "pt-BR": {
+  "cardFile": "projeto.md",
+  "cardLabels": {
+   "deadline": "Prazo",
+   "format": "Formato",
+   "mainFile": "Arquivo principal",
+   "platform": "Plataforma",
+   "publish": "Publicação",
+   "stage": "Etapa"
+  },
+  "notesHeading": "## Notas"
+ },
+ "ru": {
+  "cardFile": "проект.md",
+  "cardLabels": {
+   "deadline": "Дедлайн",
+   "format": "Формат",
+   "mainFile": "Главный файл",
+   "platform": "Площадка",
+   "publish": "Публикация",
+   "stage": "Этап"
+  },
+  "notesHeading": "## Заметки"
+ },
+ "uk": {
+  "cardFile": "проєкт.md",
+  "cardLabels": {
+   "deadline": "Дедлайн",
+   "format": "Формат",
+   "mainFile": "Головний файл",
+   "platform": "Майданчик",
+   "publish": "Публікація",
+   "stage": "Етап"
+  },
+  "notesHeading": "## Нотатки"
+ }
+}
