@@ -5,7 +5,7 @@
 **Updated:** 2026-11-18
 
 **Now:**
-- 2026-11-18: Windows — «Сервисы AI»: models by API with keys in Credential Manager, a service per command, «Сравнить» (branch `feat/desktop-ai-services`)
+- 2026-11-18: Windows — «Сервисы AI»: models by API with keys in Credential Manager, a service per command, «Сравнить» (#420, merged; the Credential Manager test passes on Windows CI)
 - 2026-11-18: Windows — AI commands on folder projects through Claude Code, in the background with «Только файлы» or in a terminal (#418, merged)
 - 2026-11-18: Windows — folder projects: «Видео», «Тексты», «Ресёрч», «Соцсети», «Свой» with stages, metrics and «Новый проект» (#416, merged)
 - 2026-11-18: Windows — `.claudepult` export and import, the same files as the Mac's (#414, merged)
