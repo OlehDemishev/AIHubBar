@@ -18,6 +18,17 @@
         <input type="checkbox" id="autostart">
       </div>
     </section>
+    <h1 data-t="Фоновые задачи"></h1>
+    <section class="card">
+      <div class="row">
+        <label for="launch-mode" data-t="Где запускать Claude"></label>
+        <select id="launch-mode"></select>
+      </div>
+      <div class="row">
+        <label for="time-limit" data-t="Лимит времени"></label>
+        <select id="time-limit"></select>
+      </div>
+    </section>
     <h1>Hooks</h1>
     <section class="card">
       <div class="row">
@@ -116,6 +127,21 @@
       card.querySelector(".install").onclick = async () => show(await invoke("install_agent_hooks", { agent }));
       card.querySelector(".remove").onclick = async () => show(await invoke("uninstall_agent_hooks", { agent }));
     }
+
+    // Where Claude's commands run and how long a background run may take (the Mac's profile settings).
+    const launch = await invoke("launch_settings");
+    const mode = document.getElementById("launch-mode");
+    for (const [value, title] of [["", t("Спрашивать")], ["terminal", t("Терминал")], ["background", t("Фон")]]) mode.add(new Option(title, value));
+    mode.value = launch.mode ?? "";
+    const limit = document.getElementById("time-limit");
+    for (const minutes of [30, 60, 90, 120, 180, 240]) limit.add(new Option(t("%lld мин", minutes), String(minutes)));
+    if (![...limit.options].some((o) => o.value === String(launch.timeLimitMinutes))) {
+      limit.add(new Option(t("%lld мин", launch.timeLimitMinutes), String(launch.timeLimitMinutes)));
+    }
+    limit.value = String(launch.timeLimitMinutes);
+    const saveLaunch = () => invoke("set_launch_settings", { mode: mode.value || null, timeLimitMinutes: Number(limit.value) });
+    mode.onchange = saveLaunch;
+    limit.onchange = saveLaunch;
 
     const autostart = document.getElementById("autostart");
     autostart.checked = await invoke("autostart_enabled");

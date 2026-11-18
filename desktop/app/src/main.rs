@@ -8,6 +8,7 @@
 
 mod limits;
 mod projects;
+mod runs;
 mod sessions;
 
 use claudepult_core::i18n::{self, Strings};
@@ -22,6 +23,7 @@ use tauri::{AppHandle, Manager, RunEvent, WebviewUrl, WebviewWindowBuilder, Wind
 use tauri_plugin_autostart::{MacosLauncher, ManagerExt};
 use limits::Limits;
 use projects::Projects;
+use runs::Runs;
 use sessions::Sessions;
 use tauri_plugin_positioner::{Position, WindowExt};
 
@@ -230,6 +232,28 @@ fn set_language(app: AppHandle, code: Option<String>) {
     app.state::<Projects>().ask(false);
 }
 
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+struct LaunchSettings {
+    /// `terminal`, `background`, or None — ask.
+    mode: Option<String>,
+    time_limit_minutes: u32,
+}
+
+#[tauri::command]
+fn launch_settings(app: AppHandle) -> LaunchSettings {
+    let settings = app.state::<AppState>().settings.lock().unwrap().clone();
+    LaunchSettings { mode: settings.launch_mode, time_limit_minutes: settings.background_time_limit_minutes }
+}
+
+#[tauri::command]
+fn set_launch_settings(app: AppHandle, mode: Option<String>, time_limit_minutes: u32) {
+    save(&app, |settings| {
+        settings.launch_mode = mode.filter(|m| claudepult_core::settings::LAUNCH_MODES.contains(&m.as_str()));
+        settings.background_time_limit_minutes = time_limit_minutes.clamp(5, 24 * 60);
+    });
+}
+
 #[tauri::command]
 fn dismiss_tray_hint(app: AppHandle) {
     save(&app, |settings| settings.tray_hint_seen = true);
@@ -278,6 +302,7 @@ fn main() {
         .manage(Limits::new())
         .manage(Sessions::default())
         .manage(Projects::default())
+        .manage(Runs::default())
         .manage(AppState { settings: Mutex::new(Settings::load(&paths::settings_file())) })
         .invoke_handler(tauri::generate_handler![
             ui_texts, set_language, dismiss_tray_hint, autostart_enabled, set_autostart, open_settings, hide_panel, quit,
@@ -285,7 +310,8 @@ fn main() {
             sessions::sessions_view, sessions::decide_request, sessions::hooks_state, sessions::install_hooks,
             sessions::uninstall_hooks, sessions::agent_hooks_state, sessions::install_agent_hooks, sessions::uninstall_agent_hooks,
             projects::projects_view, projects::refresh_projects, projects::projects_panel_opened, projects::open_project,
-            projects::open_link, projects::launch_claude
+            projects::open_link, projects::launch_claude,
+            runs::stop_run, runs::run_log, launch_settings, set_launch_settings
         ])
         .setup(|app| {
             // Only the tray icon, no Dock icon, when trying it out on a Mac.
@@ -297,6 +323,7 @@ fn main() {
             handle.state::<Limits>().start(handle.clone());
             handle.state::<Sessions>().start(handle.clone());
             handle.state::<Projects>().start(handle.clone());
+            handle.state::<Runs>().start(handle.clone());
             let for_ipc = handle.clone();
             if let Err(error) = ipc::serve(move |request| match request {
                 Request::AppCommand(name) => {

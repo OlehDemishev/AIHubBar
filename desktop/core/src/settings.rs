@@ -12,13 +12,24 @@ pub struct Settings {
     pub language: Option<String>,
     /// The person has seen the hint about pinning the tray icon (Windows 11 hides new icons under «^»).
     pub tray_hint_seen: bool,
+    /// Where Claude's commands run: `terminal` or `background`; None — ask each time (the Mac's «Спрашивать»).
+    pub launch_mode: Option<String>,
+    /// A background run is stopped after this many minutes.
+    pub background_time_limit_minutes: u32,
 }
 
 impl Default for Settings {
     fn default() -> Self {
-        Settings { language: None, tray_hint_seen: false }
+        Settings {
+            language: None,
+            tray_hint_seen: false,
+            launch_mode: None,
+            background_time_limit_minutes: crate::runs::DEFAULT_TIME_LIMIT_MINUTES,
+        }
     }
 }
+
+pub const LAUNCH_MODES: [&str; 2] = ["terminal", "background"];
 
 impl Settings {
     pub fn from_json(json: &str) -> Self {
@@ -28,6 +39,13 @@ impl Settings {
         Settings {
             language: value.get("language").and_then(|v| v.as_str()).map(str::to_owned).or(defaults.language),
             tray_hint_seen: value.get("tray_hint_seen").and_then(|v| v.as_bool()).unwrap_or(defaults.tray_hint_seen),
+            launch_mode: value.get("launch_mode").and_then(|v| v.as_str()).filter(|m| LAUNCH_MODES.contains(m)).map(str::to_owned),
+            background_time_limit_minutes: value
+                .get("background_time_limit_minutes")
+                .and_then(|v| v.as_u64())
+                .and_then(|v| u32::try_from(v).ok())
+                .filter(|v| (5..=24 * 60).contains(v))
+                .unwrap_or(defaults.background_time_limit_minutes),
         }
     }
 
@@ -54,16 +72,19 @@ mod tests {
     fn tolerant_reading() {
         assert_eq!(Settings::from_json("{}"), Settings::default());
         assert_eq!(Settings::from_json("garbage"), Settings::default());
-        let read = Settings::from_json(r#"{"language": "de", "tray_hint_seen": "yes", "from_the_future": 1}"#);
+        let read = Settings::from_json(r#"{"language": "de", "tray_hint_seen": "yes", "from_the_future": 1, "launch_mode": "window", "background_time_limit_minutes": 2}"#);
         assert_eq!(read.language.as_deref(), Some("de"));
         assert!(!read.tray_hint_seen, "a bad value takes the default, the rest stays");
+        assert_eq!((read.launch_mode, read.background_time_limit_minutes), (None, 90));
+        let read = Settings::from_json(r#"{"launch_mode": "background", "background_time_limit_minutes": 120}"#);
+        assert_eq!((read.launch_mode.as_deref(), read.background_time_limit_minutes), (Some("background"), 120));
     }
 
     #[test]
     fn round_trip() {
         let dir = std::env::temp_dir().join(format!("claudepult-settings-{}", std::process::id()));
         let path = dir.join("settings.json");
-        let settings = Settings { language: Some("uk".into()), tray_hint_seen: true };
+        let settings = Settings { language: Some("uk".into()), tray_hint_seen: true, launch_mode: Some("terminal".into()), background_time_limit_minutes: 60 };
         settings.save(&path).unwrap();
         assert_eq!(Settings::load(&path), settings);
         assert!(!path.with_extension("json.tmp").exists());

@@ -37,7 +37,9 @@ Still to come in stage 3: «Show» (bringing the terminal forward), buttons in t
 - refreshed at start, every 5 minutes, with `git fetch` every 30, and when the panel opens on a list older than a minute;
 - Claude in a terminal (`core/launch.rs`, 2026-11-18): «Следующий шаг», «Своя задача…», «Завершить» in an opened project, with the Mac's prompts (the shared `~/Projects/CLAUDE.md` when it exists, else the generic ones of the interface language from `ui/i18n/prompts.json`); a project folder where a session works gives a new worktree `.claude/worktrees/cb-<slug>`, «Завершить» asks instead. Windows: PowerShell with `-EncodedCommand` in a Windows Terminal tab, or in a console of its own without `wt`.
 
-Still to come in stage 4: Claude in the background, worktrees from the panel (removing), the log, permission rules, PR notifications, a red dot on the tray icon.
+- Claude in the background (`core/runs.rs`, `app/src/runs.rs`, 2026-11-18): the same commands as `claude -p` with no window, as the Mac's `RunStore`. `runs/<id>.json` and `.log` keep the Mac's shape; the Mac's permission rules go in as a file, and on Windows every `Bash(…)` rule is also a `PowerShell(…)` rule, with PowerShell's deletions, downloads and environment reads denied. A time limit, «Остановить» (`taskkill /T /F` on Windows), a notification with the result, the log in the panel. The first launch asks «Терминал» or «Фон» («Запомнить выбор»); Settings → «Фоновые задачи» holds the mode and the limit.
+
+Still to come in stage 4: removing worktrees from the panel, the log, permission rules, PR notifications, a red dot on the tray icon.
 
 On a Mac this build never installs hooks into the real `~/.claude/settings.json`: the Mac app owns it. It does so only with another `CLAUDE_CONFIG_DIR`.
 
@@ -45,7 +47,7 @@ On a Mac this build never installs hooks into the real `~/.claude/settings.json`
 
 | Folder | What |
 |---|---|
-| `core/` | Shared logic with no interface: paths, `settings.json`, languages, the link to the running app, limits (`usage.rs`, `texts.rs`, `tray_icon.rs`), sessions and hooks, projects (`projects.rs`, `command.rs`, `launch.rs`). `cargo test -p claudepult-core` runs on any system |
+| `core/` | Shared logic with no interface: paths, `settings.json`, languages, the link to the running app, limits (`usage.rs`, `texts.rs`, `tray_icon.rs`), sessions and hooks, projects (`projects.rs`, `command.rs`, `launch.rs`), background runs (`runs.rs`). `cargo test -p claudepult-core` runs on any system |
 | `app/` | The tray app, `AIHubBar.exe` / `AIHubBar` (`tauri.conf.json`, icons, capabilities) |
 | `cli/` | `claudepult`, the console program: `AIHubBar.exe` is a window program and cannot print to a console |
 | `hook/` | `claudepult-hook`, the Claude Code hook (port of the Mac's Python hook); `cargo test -p claudepult-hook` runs it with real events |

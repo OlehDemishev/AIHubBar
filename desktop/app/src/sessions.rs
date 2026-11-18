@@ -3,6 +3,8 @@
 //! «Разрешить» / «Отклонить» for the permission requests the hook leaves in `approvals/` (the Mac's protocol).
 
 use crate::limits::Limits;
+use crate::runs::{self, Runs};
+use claudepult_core::runs::{Run, RunState};
 use crate::strings;
 use chrono::{Local, Utc};
 use claudepult_core::agent_hooks;
@@ -112,6 +114,37 @@ pub struct SessionRow {
     progress: Option<String>,
     /// A permission request to answer from the panel.
     request: Option<RequestRow>,
+    /// A background run (`runs.rs`): it can be stopped while it runs, its log read.
+    run: Option<RunRow>,
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct RunRow {
+    id: String,
+    running: bool,
+    pull_request: Option<String>,
+}
+
+fn state_key(state: State) -> &'static str {
+    match state {
+        State::Waiting => "waiting",
+        State::Running => "running",
+        State::Error => "error",
+        State::Done => "done",
+        State::Ended => "ended",
+        State::Unknown => "unknown",
+    }
+}
+
+/// A finished run's state in the sessions' words: its own result is more precise than the hook's «готово».
+fn run_state(run: &Run) -> State {
+    match run.state {
+        RunState::Running => State::Running,
+        RunState::Succeeded => State::Done,
+        RunState::Failed => State::Error,
+        RunState::Stopped | RunState::TimedOut => State::Ended,
+    }
 }
 
 #[derive(Serialize)]
@@ -126,20 +159,14 @@ pub fn sessions_view(app: AppHandle) -> SessionsView {
     let texts = strings(&app);
     let shown = shown();
     let mut open = open_requests(&shown);
-    let rows = shown
+    let runs = app.state::<Runs>().list();
+    let mut rows: Vec<SessionRow> = shown
         .into_iter()
         .map(|(session, state)| SessionRow {
             request: open.remove(&session.id).map(|r| RequestRow { title: r.asks_title(&texts), text: r.text(), id: r.id }),
             id: session.id.clone(),
             project: session.display_project(),
-            state: match state {
-                State::Waiting => "waiting",
-                State::Running => "running",
-                State::Error => "error",
-                State::Done => "done",
-                State::Ended => "ended",
-                State::Unknown => "unknown",
-            },
+            state: state_key(state),
             state_title: state.title(&texts),
             // While it waits, what it waits for; while it works, what it does now.
             detail: match state {
@@ -148,8 +175,38 @@ pub fn sessions_view(app: AppHandle) -> SessionsView {
                 _ => None,
             },
             progress: session.progress.map(|(done, total)| format!("{done}/{total}")),
+            run: None,
         })
         .collect();
+    // Background runs: on their hook session's row (same id), or a row of their own while they run and for a while after.
+    let now = Utc::now();
+    for run in &runs {
+        let row = RunRow { id: run.id.clone(), running: run.is_running(), pull_request: run.pull_request_url.clone() };
+        if let Some(existing) = rows.iter_mut().find(|r| r.id == run.id) {
+            if !run.is_running() {
+                let state = run_state(run);
+                existing.state = state_key(state);
+                existing.state_title = state.title(&texts);
+                existing.detail = Some(runs::outcome_text(&texts, run));
+            }
+            existing.run = Some(row);
+            continue;
+        }
+        let recent = run.finished_at.is_none_or(|at| (now - at).num_minutes() < sessions::KEEP_ENDED_MINUTES);
+        if run.is_running() || recent {
+            let state = run_state(run);
+            rows.push(SessionRow {
+                id: run.id.clone(),
+                project: run.project.clone(),
+                state: state_key(state),
+                state_title: state.title(&texts),
+                detail: Some(if run.is_running() { run.task.clone() } else { runs::outcome_text(&texts, run) }),
+                progress: None,
+                request: None,
+                run: Some(row),
+            });
+        }
+    }
     SessionsView { rows, hooks: status_key(hook_status()) }
 }
 

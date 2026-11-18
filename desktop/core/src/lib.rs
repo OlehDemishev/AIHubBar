@@ -12,6 +12,7 @@ pub mod launch;
 pub mod paths;
 pub mod process;
 pub mod projects;
+pub mod runs;
 pub mod sessions;
 pub mod settings;
 pub mod texts;

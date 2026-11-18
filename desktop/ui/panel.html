@@ -126,6 +126,55 @@
       return box;
     }
 
+    // A background run under its row: «Остановить» (a second click within a few seconds stops it), «Журнал», its PR.
+    const openLogs = new Set();
+    const confirmStop = new Set();
+    function runControls(run) {
+      const line = document.createElement("div");
+      line.className = "run-controls";
+      const button = (title, onclick) => {
+        const b = document.createElement("button");
+        b.className = "small";
+        b.textContent = title;
+        b.onclick = onclick;
+        return b;
+      };
+      if (run.running) {
+        const asking = confirmStop.has(run.id);
+        line.append(button(asking ? t("Остановить?") : t("Остановить"), () => {
+          if (confirmStop.has(run.id)) {
+            confirmStop.delete(run.id);
+            invoke("stop_run", { id: run.id });
+          } else {
+            confirmStop.add(run.id);
+            setTimeout(() => { confirmStop.delete(run.id); showSessions(); }, 4000);
+          }
+          showSessions();
+        }));
+      }
+      line.append(button(t("Журнал"), () => {
+        if (openLogs.has(run.id)) openLogs.delete(run.id); else openLogs.add(run.id);
+        showSessions();
+      }));
+      if (run.pullRequest) line.append(button("PR", () => invoke("open_link", { url: run.pullRequest })));
+      const parts = [line];
+      if (openLogs.has(run.id)) {
+        const log = document.createElement("div");
+        log.className = "run-log";
+        invoke("run_log", { id: run.id }).then((entries) => {
+          log.replaceChildren(...entries.map((entry) => {
+            const line = document.createElement("div");
+            line.className = `entry ${entry.kind}`;
+            line.textContent = entry.text;
+            return line;
+          }));
+          log.scrollTop = log.scrollHeight;
+        }, (error) => { log.textContent = String(error); });
+        parts.push(log);
+      }
+      return parts;
+    }
+
     // Sessions, as the Mac panel lists them: state, project, what it waits for or does, the task list's progress.
     async function showSessions() {
       const view = await invoke("sessions_view");
@@ -138,7 +187,8 @@
         item.querySelector(".detail").textContent = row.detail ?? row.stateTitle;
         item.querySelector(".progress").textContent = row.progress ?? "";
         item.title = `${row.project} · ${row.stateTitle}${row.detail ? " · " + row.detail : ""}`;
-        return row.request ? [item, request(row.request)] : [item];
+        const extra = row.run ? runControls(row.run) : [];
+        return [item, ...extra, ...(row.request ? [request(row.request)] : [])];
       }));
       document.getElementById("no-hooks").hidden = view.hooks === "installed";
       document.getElementById("no-sessions").hidden = view.rows.length > 0 || view.hooks !== "installed";
@@ -193,13 +243,15 @@
       const box = element("div", "claude");
       const state = launches.get(row.path) ?? {};
       const buttons = element("div", "actions");
-      const start = async (command, task, allowBusy = false) => {
+      const start = async (command, task, allowBusy = false, mode = null, remember = false) => {
         launches.set(row.path, { working: true });
         showProjects();
         let next;
         try {
-          const reply = await invoke("launch_claude", { path: row.path, command, task: task ?? null, allowBusy });
-          next = { message: reply.message, confirm: reply.confirm ? { command, task } : null };
+          const reply = await invoke("launch_claude", { path: row.path, command, task: task ?? null, allowBusy, mode, remember });
+          next = reply.choose
+            ? { choose: { question: reply.choose, command, task, allowBusy } }
+            : { message: reply.message, confirm: reply.confirm ? { command, task, mode } : null };
         } catch (error) {
           next = { message: String(error), error: true };
         }
@@ -239,11 +291,30 @@
         box.append(editor);
         setTimeout(() => field.focus(), 0);
       }
+      // Where to run it, as the Mac asks: a terminal window (Claude can be answered) or the background.
+      if (state.choose) {
+        const chooser = element("div", "launch-message");
+        chooser.append(element("strong", "", state.choose.question));
+        const line = element("div", "actions");
+        const remember = element("input");
+        remember.type = "checkbox";
+        const run = (mode) => start(state.choose.command, state.choose.task, state.choose.allowBusy, mode, remember.checked);
+        const terminal = action(t("Терминал"), () => run("terminal"));
+        terminal.title = t("Новое окно Терминала: видно, что делает Claude, можно отвечать на вопросы");
+        const background = action(t("Фон"), () => run("background"));
+        terminal.classList.add("prominent");
+        background.classList.add("prominent");
+        line.append(terminal, background, action(t("Отмена"), () => { launches.delete(row.path); showProjects(); }));
+        const label = element("label", "remember");
+        label.append(remember, element("span", "", t("Запомнить выбор")));
+        chooser.append(line, label);
+        box.append(chooser);
+      }
       if (state.message) {
         const message = element("div", `launch-message${state.error ? " error" : ""}`);
         message.append(element("span", "", state.message));
         const line = element("div", "actions");
-        if (state.confirm) line.append(action(t("Запустить всё равно"), () => start(state.confirm.command, state.confirm.task, true)));
+        if (state.confirm) line.append(action(t("Запустить всё равно"), () => start(state.confirm.command, state.confirm.task, true, state.confirm.mode)));
         line.append(action(t("Скрыть"), () => { launches.delete(row.path); showProjects(); }));
         message.append(line);
         box.append(message);
