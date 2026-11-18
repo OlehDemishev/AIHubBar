@@ -597,15 +597,15 @@
       const box = element("div", "claude");
       const state = launches.get(row.path) ?? {};
       const buttons = element("div", "actions");
-      const start = async (command, task, allowBusy = false, mode = null, remember = false) => {
+      const start = async (command, task, allowBusy = false, mode = null, remember = false, agent = null) => {
         launches.set(row.path, { working: true });
         showProjects();
         let next;
         try {
-          const reply = await invoke("launch_claude", { path: row.path, command, task: task ?? null, allowBusy, mode, remember });
+          const reply = await invoke("launch_claude", { path: row.path, command, task: task ?? null, allowBusy, mode, remember, agent });
           next = reply.choose
             ? { choose: { question: reply.choose, command, task, allowBusy } }
-            : { message: reply.message, confirm: reply.confirm ? { command, task, mode } : null };
+            : { message: reply.message, confirm: reply.confirm ? { command, task, mode, agent } : null };
         } catch (error) {
           next = { message: String(error), error: true };
         }
@@ -645,16 +645,28 @@
         field.value = state.draft ?? "";
         field.oninput = () => { state.draft = field.value; launches.set(row.path, state); go.disabled = !field.value.trim(); };
         const cancel = action(t("Отмена"), () => { launches.set(row.path, {}); showProjects(); });
-        const go = action(t("Запустить"), () => start("custom", field.value));
+        // Who does it: Claude Code (where the profile says), or Codex in the background when it is installed.
+        const codex = otherAgents.some((agent) => agent.id === "codex");
+        const agent = element("select", "service-choice");
+        agent.setAttribute("aria-label", t("Агент"));
+        agent.add(new Option("Claude Code", ""));
+        if (codex) agent.add(new Option(t("Codex в фоне"), "codex"));
+        agent.value = codex && state.agent === "codex" ? "codex" : "";
+        const note = element("p", "secondary agent-note", t("Codex работает в фоне в своей песочнице: пишет в папке проекта, итог — уведомлением. Закрыта ли при этом сеть, на Windows зависит от того, как настроена песочница Codex."));
+        note.hidden = agent.value !== "codex";
+        agent.onchange = () => { state.agent = agent.value; launches.set(row.path, state); note.hidden = agent.value !== "codex"; };
+        const send = () => start("custom", field.value, false, null, false, agent.value || null);
+        const go = action(t("Запустить"), send);
         go.classList.add("prominent");
         go.disabled = !field.value.trim();
         field.onkeydown = (event) => {
-          if (event.key === "Enter" && (event.ctrlKey || event.metaKey) && field.value.trim()) start("custom", field.value);
+          if (event.key === "Enter" && (event.ctrlKey || event.metaKey) && field.value.trim()) send();
           if (event.key === "Escape") { event.stopPropagation(); cancel.onclick(); }
         };
         const line = element("div", "actions end");
+        if (codex) line.append(agent);
         line.append(cancel, go);
-        editor.append(field, line);
+        editor.append(field, line, note);
         box.append(editor);
         setTimeout(() => field.focus(), 0);
       }
@@ -681,7 +693,7 @@
         const message = element("div", `launch-message${state.error ? " error" : ""}`);
         message.append(element("span", "", state.message));
         const line = element("div", "actions");
-        if (state.confirm) line.append(action(t("Запустить всё равно"), () => start(state.confirm.command, state.confirm.task, true, state.confirm.mode)));
+        if (state.confirm) line.append(action(t("Запустить всё равно"), () => start(state.confirm.command, state.confirm.task, true, state.confirm.mode, false, state.confirm.agent)));
         line.append(action(t("Скрыть"), () => { launches.delete(row.path); showProjects(); }));
         message.append(line);
         box.append(message);

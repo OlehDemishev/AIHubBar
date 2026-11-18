@@ -5,6 +5,7 @@
 **Updated:** 2026-11-19
 
 **Now:**
+- 2026-11-19: Windows — Codex in the background from «Своя задача…» of a git project, the Mac's run files and log (#444)
 - 2026-11-19: Windows — «Главный сервис»: Codex or another service can lead the panel and the tray icon instead of Claude (#442, merged; CI green)
 - 2026-11-18: Windows — other AI services' limits: Codex, Copilot, Gemini CLI, OpenRouter, OpenAI and Anthropic costs under Claude's in the panel, with alerts (#440, merged; CI green on Windows and Linux)
 - 2026-11-18: Windows — «Быстрые переключатели»: dark mode, desktop icons, lock, display off, the Recycle Bin; stage 6 done but «Извлечь диски» and command shortcuts (#438, merged; CI green on Windows and Linux)
@@ -103,6 +104,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-19 — Windows: Codex in the background (branch `feat/desktop-codex-background`)
+
+Done: `runs::codex` ports the Mac's `CodexExec`: the `codex exec` arguments with the repository's git folder (a worktree's too), the turn's end as the outcome, readable log lines, file links made plain (Windows paths too), the thread id. Runs keep the Mac's format (`agent`, `threadID`); a Codex run's row matches the Codex hook's session by its thread. «Своя задача…» in a git project offers «Codex в фоне» next to Claude Code when Codex is installed (Oleh chose this first, «Быстрый запрос» next). One new catalog text with 12 translations: on Windows the app doesn't promise «без сети», because Codex's own Windows sandbox decides that (elevated vs unelevated; checked in Codex's docs and issues, 2026-11-19).
+Checked: `python3 scripts/strings.py --check` (503 texts), `scripts/strings-check.py` (1872 keys), `cargo test --workspace` on the Mac (core 116: arguments, a worktree's git folder, a Codex log with a retry, plain links, the thread id saved on finish, the Mac's field names). The form in a browser with sample replies: «Codex в фоне» chosen, the note shown, the task sent with `agent: codex`, the reply. No real `codex exec` was run (it would use Oleh's Codex).
+Left: «Быстрый запрос» (⌃⌥P) next; the limit guard before a Codex run; handover, review by the other service, the pair; a live run on the laptop to see what Codex's Windows sandbox allows.
 
 ## 2026-11-19 — Windows: «Главный сервис» (branch `feat/desktop-main-service`)
 

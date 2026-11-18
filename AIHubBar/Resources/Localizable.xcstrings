@@ -9721,6 +9721,82 @@
         }
       }
     },
+    "Codex работает в фоне в своей песочнице: пишет в папке проекта, итог — уведомлением. Закрыта ли при этом сеть, на Windows зависит от того, как настроена песочница Codex.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يعمل Codex في الخلفية داخل بيئته المعزولة: يكتب في مجلد المشروع، والنتيجة تصل في إشعار. أما حجب الشبكة على Windows فيتوقف على إعداد بيئة Codex المعزولة."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex läuft im Hintergrund in seiner Sandbox: Es schreibt im Projektordner, das Ergebnis kommt als Mitteilung. Ob dabei das Netz gesperrt ist, hängt unter Windows davon ab, wie die Sandbox von Codex eingerichtet ist."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex runs in the background in its sandbox: it writes in the project folder, and the result comes as a notification. Whether the network is closed meanwhile depends on Windows on how Codex’s sandbox is set up."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex trabaja en segundo plano en su sandbox: escribe en la carpeta del proyecto y el resultado llega en una notificación. Si la red queda cerrada en Windows depende de cómo esté configurado el sandbox de Codex."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex travaille en arrière-plan dans son bac à sable : il écrit dans le dossier du projet, et le résultat arrive en notification. Sous Windows, la coupure du réseau dépend de la configuration du bac à sable de Codex."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex bekerja di latar belakang dalam sandbox-nya: menulis di folder proyek, dan hasilnya datang lewat pemberitahuan. Apakah jaringan ditutup di Windows bergantung pada pengaturan sandbox Codex."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex lavora in background nella sua sandbox: scrive nella cartella del progetto e l’esito arriva in una notifica. Se la rete resta chiusa su Windows dipende da come è configurata la sandbox di Codex."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex は自身のサンドボックスでバックグラウンド実行します。書き込みはプロジェクトフォルダ内で、結果は通知で届きます。Windows でネットワークが遮断されるかどうかは、Codex のサンドボックスの設定によります。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex는 자체 샌드박스에서 백그라운드로 실행됩니다. 프로젝트 폴더에 쓰고 결과는 알림으로 옵니다. Windows에서 네트워크가 막히는지는 Codex 샌드박스 설정에 따라 다릅니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex działa w tle w swojej piaskownicy: zapisuje w folderze projektu, a wynik przychodzi w powiadomieniu. Czy sieć jest przy tym zamknięta, w Windows zależy od ustawień piaskownicy Codex."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O Codex trabalha em segundo plano na sua sandbox: escreve na pasta do projeto e o resultado chega em notificação. Se a rede fica fechada no Windows depende de como a sandbox do Codex está configurada."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex працює у фоні у своїй пісочниці: пише в теці проєкту, підсумок — сповіщенням. Чи закрита при цьому мережа, у Windows залежить від того, як налаштована пісочниця Codex."
+          }
+        }
+      }
+    },
     "Codex, Copilot, Gemini, Antigravity, Cursor и расход по API — такими же карточками, как Claude.": {
       "localizations": {
         "ar": {

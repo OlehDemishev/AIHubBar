@@ -132,6 +132,15 @@ pub struct RunRow {
     pull_request: Option<String>,
 }
 
+/// A Codex run's thread: saved when it ended, else from its log's first lines while it works.
+fn codex_thread(run: &Run) -> Option<String> {
+    if let Some(thread) = run.other.get("threadID").and_then(|v| v.as_str()) {
+        return Some(thread.to_owned());
+    }
+    let log = std::fs::read_to_string(run.log_path(&paths::runs_dir())).ok()?;
+    claudepult_core::runs::codex::thread_id(&log)
+}
+
 fn state_key(state: State) -> &'static str {
     match state {
         State::Waiting => "waiting",
@@ -188,7 +197,9 @@ pub fn sessions_view(app: AppHandle) -> SessionsView {
     let now = Utc::now();
     for run in &runs {
         let row = RunRow { id: run.id.clone(), running: run.is_running(), pull_request: run.pull_request_url.clone() };
-        if let Some(existing) = rows.iter_mut().find(|r| r.id == run.id) {
+        // Codex's hook names its session by Codex's thread, not by the run.
+        let thread = run.is_codex().then(|| codex_thread(run)).flatten();
+        if let Some(existing) = rows.iter_mut().find(|r| r.id == run.id || thread.as_deref() == Some(r.id.as_str())) {
             if !run.is_running() {
                 let state = run_state(run);
                 existing.state = state_key(state);
@@ -203,7 +214,7 @@ pub fn sessions_view(app: AppHandle) -> SessionsView {
             let state = run_state(run);
             rows.push(SessionRow {
                 id: run.id.clone(),
-                project: run.project.clone(),
+                project: crate::runs::project_label(run),
                 state: state_key(state),
                 state_title: state.title(&texts),
                 detail: Some(if run.is_running() { run.task.clone() } else { runs::outcome_text(&texts, run) }),

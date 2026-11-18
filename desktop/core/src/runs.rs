@@ -109,6 +109,11 @@ impl Run {
         self.started_at + chrono::Duration::minutes(i64::from(self.time_limit_minutes))
     }
 
+    /// Run by Codex (`codex exec`), as the Mac's `BackgroundRun.agent == "codex"`.
+    pub fn is_codex(&self) -> bool {
+        self.other.get("agent").and_then(Value::as_str) == Some(codex::AGENT)
+    }
+
     pub fn is_running(&self) -> bool {
         self.state == RunState::Running
     }
@@ -292,14 +297,19 @@ pub struct NewRun<'a> {
     pub permissions: &'a str,
     /// A folder project's command: the file Claude is to write; the run fails without it.
     pub result_file: Option<&'a Path>,
+    /// Run by Codex (`codex exec` in its `workspace-write` sandbox) instead of Claude; `program` is then codex.
+    pub codex: bool,
 }
 
-/// Starts `claude -p` in the folder with no window, its output into the log; the run is saved before it returns.
-pub fn start(dir: &Path, claude: &Path, new: &NewRun) -> io::Result<(Run, Child)> {
+/// Starts `claude -p` (or `codex exec`) in the folder with no window, its output into the log; the run is saved before
+/// it returns.
+pub fn start(dir: &Path, program: &Path, new: &NewRun) -> io::Result<(Run, Child)> {
     std::fs::create_dir_all(dir)?;
     let id = new_id();
     let settings = settings_path(dir, &id);
-    std::fs::write(&settings, serde_json::to_string_pretty(&settings_json(new.permissions, cfg!(windows))).map_err(io::Error::other)?)?;
+    if !new.codex {
+        std::fs::write(&settings, serde_json::to_string_pretty(&settings_json(new.permissions, cfg!(windows))).map_err(io::Error::other)?)?;
+    }
     let mut run = Run {
         id: id.clone(),
         project: new.project.to_owned(),
@@ -320,9 +330,13 @@ pub fn start(dir: &Path, claude: &Path, new: &NewRun) -> io::Result<(Run, Child)
         result_file: new.result_file.map(|f| f.to_string_lossy().into_owned()),
         other: serde_json::Map::new(),
     };
+    if new.codex {
+        run.other.insert("agent".into(), json!(codex::AGENT));
+    }
     let log = File::create(run.log_path(dir))?;
-    let mut process = command::command(claude);
-    process.args(arguments(new.prompt, &id, &settings)).current_dir(new.folder);
+    let mut process = command::command(program);
+    let args = if new.codex { codex::arguments(new.prompt, codex::git_directory(new.folder).as_deref(), false) } else { arguments(new.prompt, &id, &settings) };
+    process.args(args).current_dir(new.folder);
     process.stdin(Stdio::null()).stdout(log.try_clone()?).stderr(log);
     let child = process.spawn()?;
     run.pid = Some(child.id());
@@ -348,6 +362,150 @@ pub fn kill(pid: u32, force: bool) {
     }
 }
 
+// MARK: - Codex (the Mac's `CodexExec`)
+
+/// A background Codex run: `codex exec --json`. Events are JSON lines: `thread.started {thread_id}`,
+/// `item.completed {item: {type: agent_message | command_execution | file_change}}`, then `turn.completed`, or
+/// `turn.failed {error: {message}}` / `error {message}`. `exec` never asks. `workspace-write` lets it write in the
+/// working folder only; on a Mac and Linux it also keeps the network off, while Codex's own Windows sandbox depends on
+/// how Codex is set up there (elevated or not), so this app promises nothing about the network on Windows. The
+/// repository's git folder goes in `--add-dir`, or `git commit` fails on its read-only `.git`.
+pub mod codex {
+    use super::{EntryKind, Outcome};
+    use serde_json::Value;
+    use std::path::{Path, PathBuf};
+
+    pub const AGENT: &str = "codex";
+
+    /// `read_only` — a review: the `read-only` sandbox, nothing in the folder changes.
+    pub fn arguments(prompt: &str, git_directory: Option<&Path>, read_only: bool) -> Vec<String> {
+        let mut args = vec!["exec".to_owned(), "--sandbox".to_owned(), if read_only { "read-only" } else { "workspace-write" }.to_owned()];
+        if let Some(git) = git_directory.filter(|_| !read_only) {
+            args.extend(["--add-dir".to_owned(), git.to_string_lossy().into_owned()]);
+        }
+        args.extend(["--json".to_owned(), "--skip-git-repo-check".to_owned(), prompt.to_owned()]);
+        args
+    }
+
+    /// The git folder a commit in `folder` writes to: its `.git`, or for a worktree (`gitdir: <repo>/.git/worktrees/<n>`)
+    /// the repository's. None outside a repository.
+    pub fn git_directory(folder: &Path) -> Option<PathBuf> {
+        let dot_git = folder.join(".git");
+        if dot_git.is_dir() {
+            return Some(dot_git);
+        }
+        let text = std::fs::read_to_string(&dot_git).ok()?;
+        let line = text.lines().find_map(|l| l.strip_prefix("gitdir:"))?.trim();
+        let path = if Path::new(line).is_absolute() { PathBuf::from(line) } else { folder.join(line) };
+        let normal = path.to_string_lossy().replace('\\', "/");
+        match normal.rfind("/worktrees/") {
+            Some(at) => Some(PathBuf::from(&normal[..at])),
+            None => Some(path),
+        }
+    }
+
+    pub fn thread_id(log: &str) -> Option<String> {
+        log.lines().take(20).find_map(|line| {
+            let event: Value = serde_json::from_str(line.trim()).ok()?;
+            (event["type"] == "thread.started").then(|| event["thread_id"].as_str().map(str::to_owned)).flatten()
+        })
+    }
+
+    fn error_text(event: &Value) -> String {
+        event["error"]["message"].as_str().or_else(|| event["message"].as_str()).unwrap_or("error").to_owned()
+    }
+
+    /// The turn's end: its last message as the result, or the error; None for a log that isn't Codex's or has no end.
+    pub fn outcome(log: &str) -> Option<Outcome> {
+        let mut message = None;
+        let mut outcome = None;
+        for line in log.lines().filter(|l| l.contains("\"type\"")) {
+            let Ok(event) = serde_json::from_str::<Value>(line.trim()) else { continue };
+            match event["type"].as_str() {
+                Some("item.completed") if event["item"]["type"] == "agent_message" => {
+                    message = event["item"]["text"].as_str().map(plain_file_links);
+                }
+                Some("turn.completed") => outcome = Some(Outcome { is_error: false, subtype: Some("turn.completed".into()), result: message.clone(), denied_tools: Vec::new() }),
+                // `error` also comes before a retry: a later `turn.completed` replaces it.
+                Some(kind @ ("turn.failed" | "error")) => outcome = Some(Outcome { is_error: true, subtype: Some(kind.into()), result: Some(error_text(&event)), denied_tools: Vec::new() }),
+                _ => {}
+            }
+        }
+        outcome
+    }
+
+    /// A readable line of the run's log, or None for events that say nothing to a person.
+    pub fn entry(event: &Value) -> Option<(EntryKind, String)> {
+        match event["type"].as_str()? {
+            "item.completed" => {
+                let item = &event["item"];
+                match item["type"].as_str()? {
+                    "agent_message" => item["text"].as_str().filter(|t| !t.is_empty()).map(|t| (EntryKind::Text, plain_file_links(t))),
+                    "command_execution" => Some((EntryKind::Tool, format!("Bash: {}", shell_command(item["command"].as_str().unwrap_or_default())))),
+                    "file_change" => {
+                        let names: Vec<String> = item["changes"]
+                            .as_array()
+                            .into_iter()
+                            .flatten()
+                            .filter_map(|c| c["path"].as_str())
+                            .map(|p| p.rsplit(['/', '\\']).next().unwrap_or(p).to_owned())
+                            .collect();
+                        Some((EntryKind::Tool, format!("Edit: {}", names.join(", "))))
+                    }
+                    _ => None,
+                }
+            }
+            "turn.failed" | "error" => Some((EntryKind::Error, error_text(event))),
+            _ => None,
+        }
+    }
+
+    /// `[NOTES.md](/Users/me/p/NOTES.md)` or `[NOTES.md](C:\\p\\NOTES.md)` → `NOTES.md`: Codex links the files it names
+    /// by their full path, which a notification would show raw. Links to the web stay.
+    pub fn plain_file_links(text: &str) -> String {
+        if !text.contains("](") {
+            return text.to_owned();
+        }
+        let mut out = String::new();
+        let mut rest = text;
+        while let Some(open) = rest.find('[') {
+            out.push_str(&rest[..open]);
+            let tail = &rest[open..];
+            let replaced = tail.find("](").and_then(|mid| {
+                let label = &tail[1..mid];
+                if label.contains('\n') || label.contains(']') {
+                    return None;
+                }
+                let target = &tail[mid + 2..];
+                let end = target.find(')')?;
+                let link = &target[..end];
+                let local = link.starts_with('/') || link.starts_with("~/") || link.starts_with("file:") || link.get(1..3).is_some_and(|d| d == ":\\" || d == ":/");
+                (local && !link.contains('\n')).then(|| (label.to_owned(), mid + 2 + end + 1))
+            });
+            match replaced {
+                Some((label, used)) => {
+                    out.push_str(&label);
+                    rest = &tail[used..];
+                }
+                None => {
+                    out.push('[');
+                    rest = &tail[1..];
+                }
+            }
+        }
+        out.push_str(rest);
+        out
+    }
+
+    /// `/bin/zsh -lc "npm test"` → `npm test`; also PowerShell's `-Command "…"` on Windows.
+    pub fn shell_command(command: &str) -> String {
+        let Some((_, inner)) = command.split_once(" -lc ").or_else(|| command.split_once(" -Command ")) else { return command.to_owned() };
+        let inner = inner.trim();
+        let quoted = inner.len() >= 2 && (inner.starts_with('"') || inner.starts_with('\'')) && inner.ends_with(&inner[..1]);
+        if quoted { inner[1..inner.len() - 1].to_owned() } else { inner.to_owned() }
+    }
+}
+
 // MARK: - The result
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -358,8 +516,13 @@ pub struct Outcome {
     pub denied_tools: Vec<String>,
 }
 
-/// The last `{"type":"result"}` event of a stream-json log; None when the run ended without one (killed, crashed).
+/// The last `{"type":"result"}` event of a stream-json log, or a `codex exec` turn's end; None when the run ended
+/// without one (killed, crashed).
 pub fn outcome(log: &str) -> Option<Outcome> {
+    codex::outcome(log).or_else(|| claude_outcome(log))
+}
+
+fn claude_outcome(log: &str) -> Option<Outcome> {
     log.lines().rev().filter(|l| l.contains("\"result\"")).find_map(|line| {
         let event: Value = serde_json::from_str(line.trim()).ok()?;
         (event.get("type")?.as_str()? == "result").then(|| Outcome {
@@ -411,6 +574,7 @@ pub fn entries(log: &str) -> Vec<(EntryKind, String)> {
                     }
                 }
             }
+            Some("item.completed" | "turn.failed" | "error") => entries.extend(codex::entry(&event)),
             Some("result") => {
                 let is_error = event.get("is_error").and_then(Value::as_bool).unwrap_or(false);
                 let text = event.get("result").or_else(|| event.get("subtype")).and_then(Value::as_str).unwrap_or("");
@@ -467,6 +631,11 @@ pub struct FinishTexts {
 
 /// The run as it ended: its state (a stop reason wins), summary, denied tools and PR link.
 pub fn finish(run: &mut Run, log: &str, stopped: Option<RunState>, texts: &FinishTexts, now: DateTime<Utc>) {
+    if run.is_codex() && !run.other.contains_key("threadID") {
+        if let Some(thread) = codex::thread_id(log) {
+            run.other.insert("threadID".into(), json!(thread));
+        }
+    }
     let outcome = outcome(log);
     run.state = stopped.unwrap_or(match &outcome {
         Some(o) if !o.is_error => RunState::Succeeded,
@@ -620,6 +789,59 @@ not json at all
         assert_eq!(&args[..4], ["-p", "do it", "--session-id", "id"]);
     }
 
+    #[test]
+    fn codex_runs() {
+        assert_eq!(
+            codex::arguments("Задача", Some(Path::new("/p/.git")), false),
+            ["exec", "--sandbox", "workspace-write", "--add-dir", "/p/.git", "--json", "--skip-git-repo-check", "Задача"]
+        );
+        assert_eq!(codex::arguments("x", Some(Path::new("/p/.git")), true)[2], "read-only");
+        assert!(!codex::arguments("x", Some(Path::new("/p/.git")), true).contains(&"--add-dir".to_owned()), "a review writes nowhere");
+
+        let root = std::env::temp_dir().join(format!("claudepult-codex-git-{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&root);
+        std::fs::create_dir_all(root.join("repo/.git/worktrees/cb-x")).unwrap();
+        std::fs::create_dir_all(root.join("repo/.claude/worktrees/cb-x")).unwrap();
+        let worktree = root.join("repo/.claude/worktrees/cb-x");
+        std::fs::write(worktree.join(".git"), format!("gitdir: {}\n", root.join("repo/.git/worktrees/cb-x").display())).unwrap();
+        let found = codex::git_directory(&worktree).unwrap();
+        assert_eq!(found.to_string_lossy().replace('\\', "/"), root.join("repo/.git").to_string_lossy().replace('\\', "/"));
+        assert_eq!(codex::git_directory(&root.join("repo")), Some(root.join("repo/.git")));
+        assert_eq!(codex::git_directory(&root), None);
+        std::fs::remove_dir_all(root).unwrap();
+
+        let log = [
+            r#"{"type":"thread.started","thread_id":"t-42"}"#,
+            r#"{"type":"item.completed","item":{"type":"command_execution","command":"/bin/zsh -lc \"npm test\""}}"#,
+            r#"{"type":"item.completed","item":{"type":"file_change","changes":[{"path":"C:\\p\\src\\app.rs"},{"path":"/p/README.md"}]}}"#,
+            r#"{"type":"error","message":"retrying"}"#,
+            r#"{"type":"item.completed","item":{"type":"agent_message","text":"Готово: [NOTES.md](/Users/me/p/NOTES.md), [план](C:\\p\\план.md), https://github.com/o/r/pull/7"}}"#,
+            r#"{"type":"turn.completed","usage":{}}"#,
+        ]
+        .join("\n");
+        let ended = outcome(&log).unwrap();
+        assert!(!ended.is_error, "a later turn.completed replaces the retry's error");
+        assert_eq!(ended.result.as_deref(), Some("Готово: NOTES.md, план, https://github.com/o/r/pull/7"));
+        assert_eq!(codex::thread_id(&log).as_deref(), Some("t-42"));
+        let lines = entries(&log);
+        assert_eq!(lines[0], (EntryKind::Tool, "Bash: npm test".into()));
+        assert_eq!(lines[1], (EntryKind::Tool, "Edit: app.rs, README.md".into()));
+        assert_eq!(lines[2].0, EntryKind::Error);
+        let failed = outcome(r#"{"type":"turn.failed","error":{"message":"sandbox denied"}}"#).unwrap();
+        assert_eq!((failed.is_error, failed.result.as_deref()), (true, Some("sandbox denied")));
+        assert_eq!(codex::plain_file_links("[site](https://example.com) and [a]"), "[site](https://example.com) and [a]");
+        assert_eq!(codex::shell_command(r#"powershell.exe -Command "cargo test""#), "cargo test");
+
+        let mut run = run();
+        run.other.insert("agent".into(), json!("codex"));
+        assert!(run.is_codex());
+        finish(&mut run, &log, None, &texts(), Utc::now());
+        assert_eq!((run.state, run.other["threadID"].as_str()), (RunState::Succeeded, Some("t-42")));
+        assert_eq!(run.pull_request_url.as_deref(), Some("https://github.com/o/r/pull/7"));
+        let saved: Run = serde_json::from_value(serde_json::to_value(&run).unwrap()).unwrap();
+        assert_eq!(saved.other["agent"], "codex", "the Mac's `agent` field");
+    }
+
     /// A stand-in for Claude that writes a stream-json result: the run starts with no window, its log fills, it ends.
     #[test]
     fn starts_a_run() {
@@ -642,6 +864,7 @@ not json at all
         let new = NewRun {
             project: "Shop", project_path: &dir, folder: &dir, worktree_branch: None, command_title: "Своя задача",
             task: "Do it", prompt: "Задача: «it's done» & more", time_limit_minutes: 5, permissions: "code", result_file: None,
+            codex: false,
         };
         let (mut run, mut child) = start(&runs, &fake, &new).unwrap();
         assert!(child.wait().unwrap().success());

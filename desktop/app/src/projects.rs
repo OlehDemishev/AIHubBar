@@ -602,8 +602,10 @@ pub async fn launch_claude(
     allow_busy: bool,
     mode: Option<String>,
     remember: bool,
+    agent: Option<String>,
 ) -> Result<LaunchReply, String> {
-    tauri::async_runtime::spawn_blocking(move || launch_now(&app, Path::new(&path), &command, task, allow_busy, mode, remember))
+    let codex = agent.as_deref() == Some("codex");
+    tauri::async_runtime::spawn_blocking(move || launch_now(&app, Path::new(&path), &command, task, allow_busy, mode, remember, codex))
         .await
         .map_err(|e| e.to_string())?
 }
@@ -616,6 +618,7 @@ fn launch_now(
     allow_busy: bool,
     mode: Option<String>,
     remember: bool,
+    codex: bool,
 ) -> Result<LaunchReply, String> {
     let texts = strings(app);
     let projects = app.state::<Projects>();
@@ -633,8 +636,9 @@ fn launch_now(
     }
     .to_owned();
     let settings = app.state::<crate::AppState>().settings.lock().unwrap().clone();
-    let mode = mode.filter(|m| LAUNCH_MODES.contains(&m.as_str()));
-    if remember && mode.is_some() {
+    // Codex goes to the background only (`codex exec`), as from the Mac's «Быстрый запрос»; a terminal is «Открыть в…».
+    let mode = if codex { Some("background".to_owned()) } else { mode.filter(|m| LAUNCH_MODES.contains(&m.as_str())) };
+    if remember && mode.is_some() && !codex {
         crate::save(app, |s| s.set_launch_mode(mode.clone()));
         let _ = app.emit("profiles-changed", ());
     }
@@ -642,7 +646,13 @@ fn launch_now(
         return Ok(LaunchReply { choose: Some(texts.format("Где запустить «%@»?", &[&title])), ..LaunchReply::default() });
     };
     let background = mode == "background";
-    let claude = launch::find_claude().ok_or_else(|| texts.t("Claude Code не установлен").to_owned())?;
+    let program = if codex {
+        let kind = claudepult_core::agents::kind("codex").expect("listed");
+        claudepult_core::agents::detect(kind).ok_or_else(|| texts.format("%@ не установлен", &[kind.title]))?
+    } else {
+        launch::find_claude().ok_or_else(|| texts.t("Claude Code не установлен").to_owned())?
+    };
+    let claude = program.clone();
 
     // Busy: a session of the hook that still works or waits in the project folder.
     let working: Vec<PathBuf> = sessions::load(&paths::sessions_dir(), Utc::now(), process::is_alive)
@@ -682,9 +692,10 @@ fn launch_now(
             time_limit_minutes: settings.background_time_limit_minutes,
             permissions: "code",
             result_file: None,
+            codex,
         };
-        let (run, child) = claudepult_core::runs::start(&paths::runs_dir(), &claude, &new).map_err(|e| e.to_string())?;
-        eprintln!("run {} started: «{title}» in {}", run.id, folder.display());
+        let (run, child) = claudepult_core::runs::start(&paths::runs_dir(), &program, &new).map_err(|e| e.to_string())?;
+        eprintln!("run {} started: «{title}» in {}{}", run.id, folder.display(), if codex { " (Codex)" } else { "" });
         app.state::<Runs>().add(app, run, child);
         texts.format("«%@» запущен в фоне (лимит %lld мин). Итог придёт уведомлением.", &[&title, &settings.background_time_limit_minutes.to_string()])
     } else {

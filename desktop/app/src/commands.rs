@@ -264,6 +264,7 @@ fn start(app: &AppHandle, request: &Request, service: &Service, suffix: Option<&
                         time_limit_minutes: request.time_limit,
                         permissions: &permissions,
                         result_file: Some(&result_file),
+                        codex: false,
                     };
                     match claudepult_core::runs::start(&paths::runs_dir(), &claude, &new) {
                         Ok((run, child)) => {
