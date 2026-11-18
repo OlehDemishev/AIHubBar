@@ -9,6 +9,7 @@
 mod assistant;
 mod calendar;
 mod commands;
+mod hub;
 mod keep_awake;
 mod limits;
 mod profiles;
@@ -348,6 +349,7 @@ fn main() {
         .manage(resources::Resources::default())
         .manage(quick_commands::QuickCommands::default())
         .manage(toggles::Toggles::default())
+        .manage(hub::Hub::default())
         .manage(AppState { settings: Mutex::new(load_settings()) })
         .invoke_handler(tauri::generate_handler![
             ui_texts, set_language, dismiss_tray_hint, autostart_enabled, set_autostart, open_settings, hide_panel, quit,
@@ -374,7 +376,8 @@ fn main() {
             resources::resources_view, resources::open_task_manager, resources::resource_settings, resources::set_resource_alerts,
             quick_commands::quick_commands_view, quick_commands::run_quick_command, quick_commands::quick_commands_library,
             quick_commands::set_quick_commands, quick_commands::new_quick_command, toggles::toggles_view, toggles::perform_toggle,
-            toggles::quick_toggle_settings, toggles::set_quick_toggles,
+            toggles::quick_toggle_settings, toggles::set_quick_toggles, hub::hub_view, hub::refresh_hub, hub::hub_settings,
+            hub::set_hub_enabled, hub::save_hub_key, hub::delete_hub_key, hub::set_gemini_options, hub::open_hub_key_page,
             profiles::choose_import, profiles::import_view, profiles::apply_import, profiles::cancel_import
         ])
         .setup(move |app| {
@@ -392,6 +395,7 @@ fn main() {
             handle.state::<calendar::Calendar>().start(handle.clone());
             handle.state::<keep_awake::KeepAwake>().start(handle.clone());
             handle.state::<resources::Resources>().start(handle.clone());
+            handle.state::<hub::Hub>().start(handle.clone());
             if first_start && handle.state::<AppState>().settings.lock().unwrap().profiles.is_empty() {
                 eprintln!("first start: the assistant opens");
                 assistant::open_assistant(handle.clone());

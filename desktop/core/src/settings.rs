@@ -41,6 +41,11 @@ pub struct Settings {
     pub quick_commands: Option<Vec<crate::quick_commands::QuickCommand>>,
     /// «Быстрые переключатели» shown (the Mac's `quickToggles`); None — every one this system has.
     pub quick_toggles: Option<Vec<String>>,
+    /// Other AI services' limits (the Mac's `hubDisabled`, `hubGeminiQuota`, `hubGeminiDailyLimit`): each source is on
+    /// once found unless switched off; Gemini's exact quota only with consent; its plan's requests a day.
+    pub hub_disabled: Vec<String>,
+    pub hub_gemini_quota: bool,
+    pub hub_gemini_daily_limit: u64,
     /// `projects_dir` and `launch_mode` of a file from before profiles, for the first profile.
     #[serde(skip)]
     pub before_profiles: (Option<String>, Option<String>),
@@ -63,6 +68,9 @@ impl Default for Settings {
             resource_disk_below_gb: 20,
             quick_commands: None,
             quick_toggles: None,
+            hub_disabled: Vec::new(),
+            hub_gemini_quota: false,
+            hub_gemini_daily_limit: 1000,
             before_profiles: (None, None),
         }
     }
@@ -109,6 +117,9 @@ impl Settings {
             keep_awake_manual: value.get("keep_awake_manual").and_then(Value::as_f64),
             resource_alerts: value.get("resource_alerts").and_then(Value::as_bool).unwrap_or(defaults.resource_alerts),
             quick_commands: crate::quick_commands::library(value.get("quick_commands")),
+            hub_disabled: value.get("hub_disabled").and_then(Value::as_array).map(|l| l.iter().filter_map(Value::as_str).map(str::to_owned).collect()).unwrap_or_default(),
+            hub_gemini_quota: value.get("hub_gemini_quota").and_then(Value::as_bool).unwrap_or(false),
+            hub_gemini_daily_limit: value.get("hub_gemini_daily_limit").and_then(Value::as_u64).filter(|n| *n > 0).unwrap_or(1000),
             quick_toggles: value
                 .get("quick_toggles")
                 .and_then(Value::as_array)

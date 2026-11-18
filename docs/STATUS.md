@@ -5,6 +5,7 @@
 **Updated:** 2026-11-18
 
 **Now:**
+- 2026-11-18: Windows — other AI services' limits: Codex, Copilot, Gemini CLI, OpenRouter, OpenAI and Anthropic costs under Claude's in the panel, with alerts (#440)
 - 2026-11-18: Windows — «Быстрые переключатели»: dark mode, desktop icons, lock, display off, the Recycle Bin; stage 6 done but «Извлечь диски» and command shortcuts (#438, merged; CI green on Windows and Linux)
 - 2026-11-18: Windows — «Быстрые команды»: own buttons for a PowerShell script, a terminal window, a link, file or folder; the library in Settings → «Модули» (#436, merged; real PowerShell runs pass on Windows CI)
 - 2026-11-18: Windows — «Ресурсы компьютера»: processor, memory, disk, network, battery, graphics, the busiest programs, the Mac's alerts (#434, merged; a real reading on Windows and Linux CI)
@@ -101,6 +102,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-18 — Windows: other AI services' limits (branch `feat/desktop-other-ai-limits`)
+
+Done: `desktop/core/hub.rs` ports the Mac's `HubParse`, `HubFetch` and `HubForecast` for six sources: Codex (`codex app-server` over stdio, else the newest session log), GitHub Copilot (`gh api`), Gemini CLI (today's requests by the Pacific day, or the exact quota with consent and only an unexpired token), OpenRouter, OpenAI and Anthropic costs. `app/src/hub.rs` reads them 8 s after start, every 5 minutes and on «Обновить», adds «хватит до ~…», notifies at 50 / 80 / 95 % once per window and reset, and puts their fullest limits into the tray's hint. The panel shows «Другие AI» under Claude's limits; Settings → «Сервисы AI» → «Другие AI» switches each source and keeps its key in Credential Manager. No new texts: all from the Mac catalog.
+Checked: `python3 scripts/strings.py --check` (497 texts), `scripts/strings-check.py`, `cargo test --workspace` on the Mac (core 114: Codex's RPC answer and session lines, OpenRouter, Copilot, Gemini quota, OpenAI and Anthropic costs, Pacific days around both clock changes, user turns, the forecast, alerts once per threshold, files on disk). The panel rows and the settings in a browser with sample replies: two Codex windows, Copilot, OpenRouter's spend, a Gemini error; a key saved and deleted with «Удалить?», Codex off, Gemini's plan and quota. No real service was asked from here.
+Left: Antigravity and Cursor; «Главный сервис» (the panel and tray still lead with Claude); the forecast's history is lost on restart; not seen on the laptop.
 
 ## 2026-11-18 — Windows: «Быстрые переключатели» (branch `feat/desktop-quick-toggles`)
 
