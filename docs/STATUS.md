@@ -5,7 +5,7 @@
 **Updated:** 2026-11-18
 
 **Now:**
-- 2026-11-18: Windows — folder projects: «Видео», «Тексты», «Ресёрч», «Соцсети», «Свой» with stages, metrics and «Новый проект» (branch `feat/desktop-folder-projects`)
+- 2026-11-18: Windows — folder projects: «Видео», «Тексты», «Ресёрч», «Соцсети», «Свой» with stages, metrics and «Новый проект» (#416, merged)
 - 2026-11-18: Windows — `.claudepult` export and import, the same files as the Mac's (#414, merged)
 - 2026-11-18: Windows — profiles: kept in the Mac's own JSON, the projects folder and launch mode per profile, a switcher in the panel (#412, merged)
 - 2026-11-18: Windows stage 5 begun — Settings → «Проекты» → «Папка проектов» instead of the fixed `~/Projects` (#410, merged)
