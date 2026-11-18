@@ -67,6 +67,11 @@ select { font: inherit; padding: 4px 6px; border-radius: 6px; border: 1px solid 
 .row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 6px 0; }
 .row + .row { border-top: 1px solid var(--line); }
 .folder + .row { border-top: 1px solid var(--line); }
+#profile-rows + .row { border-top: 1px solid var(--line); }
+.profile { justify-content: flex-start; }
+.profile input[type="text"] { flex: 1; min-width: 0; font: inherit; padding: 4px 6px; border-radius: 6px; border: 1px solid var(--line); background: var(--card); color: inherit; user-select: text; }
+#profile-add { margin-inline-start: auto; }
+#profile-switch { max-width: 160px; min-width: 0; font-size: 12px; }
 .folder .path, .folder .error { margin: 0 0 6px; overflow-wrap: anywhere; }
 .hint { border-left: 3px solid var(--accent); }
 

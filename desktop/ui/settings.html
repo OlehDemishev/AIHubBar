@@ -18,19 +18,16 @@
         <input type="checkbox" id="autostart">
       </div>
     </section>
-    <h1 data-t="Фоновые задачи"></h1>
+    <h1 data-t="Профили"></h1>
     <section class="card">
+      <div id="profile-rows"></div>
       <div class="row">
-        <label for="launch-mode" data-t="Где запускать Claude"></label>
-        <select id="launch-mode"></select>
-      </div>
-      <div class="row">
-        <label for="time-limit" data-t="Лимит времени"></label>
-        <select id="time-limit"></select>
+        <span class="secondary" id="profile-delete-note" data-t="Настройки профиля пропадут. Папки проектов останутся на месте." hidden></span>
+        <button id="profile-add" data-t="Добавить профиль"></button>
       </div>
     </section>
-    <h1 data-t="Проекты"></h1>
     <section class="card">
+      <h2 id="current-profile"></h2>
       <div class="folder">
         <div class="row">
           <span data-t="Папка проектов"></span>
@@ -40,8 +37,22 @@
           </span>
         </div>
         <p class="secondary path" id="projects-folder-path"></p>
-        <p class="error" id="projects-folder-missing" hidden></p>
+        <p class="error" id="projects-folder-note" hidden></p>
       </div>
+      <div class="row">
+        <label for="launch-mode" data-t="Где запускать Claude"></label>
+        <select id="launch-mode"></select>
+      </div>
+    </section>
+    <h1 data-t="Фоновые задачи"></h1>
+    <section class="card">
+      <div class="row">
+        <label for="time-limit" data-t="Лимит времени"></label>
+        <select id="time-limit"></select>
+      </div>
+    </section>
+    <h1 data-t="Проекты"></h1>
+    <section class="card">
       <div class="row">
         <label for="pr-alerts" data-t="Уведомлять, когда CI упал или починился и когда PR закрыт"></label>
         <input type="checkbox" id="pr-alerts">
@@ -147,7 +158,7 @@
       card.querySelector(".remove").onclick = async () => show(await invoke("uninstall_agent_hooks", { agent }));
     }
 
-    // Where Claude's commands run and how long a background run may take (the Mac's profile settings).
+    // Where the current profile runs Claude's commands, and how long a background run may take (for all profiles).
     const launch = await invoke("launch_settings");
     const mode = document.getElementById("launch-mode");
     for (const [value, title] of [["", t("Спрашивать")], ["terminal", t("Терминал")], ["background", t("Фон")]]) mode.add(new Option(title, value));
@@ -162,22 +173,69 @@
     mode.onchange = saveLaunch;
     limit.onchange = saveLaunch;
 
-    // The folder whose git repositories are the projects; a new one makes installed hooks outdated, so they are shown anew.
+    // The current profile's git projects folder; a new one makes installed hooks outdated, so they are shown anew.
     function showFolder(folder) {
-      document.getElementById("projects-folder-path").textContent = folder.path;
+      document.getElementById("current-profile").textContent = t("Текущий профиль") + ": " + folder.profile;
+      document.getElementById("projects-folder-path").textContent = folder.path ?? "";
+      document.getElementById("projects-folder-choose").hidden = folder.path === null;
       document.getElementById("projects-folder-reset").hidden = !folder.custom;
-      const missing = document.getElementById("projects-folder-missing");
-      missing.hidden = !folder.missing;
-      missing.textContent = folder.missing ?? "";
+      const note = document.getElementById("projects-folder-note");
+      note.hidden = !folder.note;
+      note.textContent = folder.note ?? "";
+      // A profile without git projects isn't a mistake; a folder that is gone is.
+      note.className = folder.path === null ? "secondary" : "error";
     }
-    showFolder(await invoke("projects_folder"));
-    const changeFolder = async (command) => {
-      await showFolder(await invoke(command));
+    document.getElementById("projects-folder-choose").onclick = () => invoke("choose_projects_folder");
+    document.getElementById("projects-folder-reset").onclick = () => invoke("reset_projects_folder");
+
+    // Profiles: the current one is chosen with its circle, a name changes where it is written, «Удалить» asks once.
+    const rows = document.getElementById("profile-rows");
+    const deleteNote = document.getElementById("profile-delete-note");
+    function showProfiles(view) {
+      deleteNote.hidden = true;
+      rows.replaceChildren(...view.rows.map((profile) => {
+        const row = document.createElement("div");
+        row.className = "row profile";
+        const pick = document.createElement("input");
+        pick.type = "radio";
+        pick.name = "profile";
+        pick.checked = profile.current;
+        pick.setAttribute("aria-label", profile.name);
+        pick.onchange = () => invoke("select_profile", { id: profile.id });
+        const name = document.createElement("input");
+        name.type = "text";
+        name.value = profile.name;
+        name.setAttribute("aria-label", t("Профиль"));
+        name.onchange = () => {
+          if (name.value.trim()) invoke("rename_profile", { id: profile.id, name: name.value });
+          else name.value = profile.name;
+        };
+        const remove = document.createElement("button");
+        remove.textContent = t("Удалить");
+        remove.hidden = !view.mayDelete;
+        remove.onclick = () => {
+          if (remove.dataset.asked) return invoke("delete_profile", { id: profile.id });
+          for (const other of rows.querySelectorAll("button[data-asked]")) { other.textContent = t("Удалить"); delete other.dataset.asked; }
+          remove.dataset.asked = "1";
+          remove.textContent = t("Удалить профиль?");
+          deleteNote.hidden = false;
+        };
+        row.append(pick, name, remove);
+        return row;
+      }));
+    }
+    document.getElementById("profile-add").onclick = () => invoke("add_profile");
+
+    // Everything that belongs to the current profile, read again after any change (here or from the panel).
+    async function showCurrent() {
+      showProfiles(await invoke("profiles_view"));
+      showFolder(await invoke("projects_folder"));
+      mode.value = (await invoke("launch_settings")).mode ?? "";
       showHooks(await invoke("hooks_state"));
       for (const card of document.querySelectorAll(".agent-hooks")) card.dispatchEvent(new Event("refresh"));
-    };
-    document.getElementById("projects-folder-choose").onclick = () => changeFolder("choose_projects_folder");
-    document.getElementById("projects-folder-reset").onclick = () => changeFolder("reset_projects_folder");
+    }
+    showCurrent();
+    window.__TAURI__.event.listen("profiles-changed", showCurrent);
 
     const prAlerts = document.getElementById("pr-alerts");
     prAlerts.checked = await invoke("pull_request_alerts");

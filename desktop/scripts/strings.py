@@ -7,7 +7,9 @@ each language but Russian (the keys are the Russian texts). A new text goes into
 translations, so the Mac and desktop versions never drift.
 
 Also writes ui/i18n/prompts.json: the Mac's prompts for Claude in a project without shared rules (`nextStep`,
-`customTask`, `finishSession` of every language in AIHubBar/Models/ContentLanguage.swift).
+`customTask`, `finishSession` of every language in AIHubBar/Models/ContentLanguage.swift), and ui/i18n/templates.json:
+the profile templates the desktop versions can already use (AIHubBar/Resources/Templates/template-<id>[.<code>].json),
+`{id: {code: mode}}` — the Mac's profile as it is, in each content language.
 
     python3 scripts/strings.py          # write the files
     python3 scripts/strings.py --check  # only check: every key and translation is there, the files are current
@@ -21,6 +23,9 @@ from pathlib import Path
 DESKTOP = Path(__file__).resolve().parent.parent
 CATALOG = DESKTOP.parent / "AIHubBar" / "Resources" / "Localizable.xcstrings"
 CONTENT = DESKTOP.parent / "AIHubBar" / "Models" / "ContentLanguage.swift"
+TEMPLATES = DESKTOP.parent / "AIHubBar" / "Resources" / "Templates"
+# Git projects only until folder projects come (docs/specs/SPEC-windows.md §9, stage 5).
+TEMPLATE_IDS = ["developer"]
 PROMPT_KEYS = ["nextStep", "customTask", "finishSession"]
 CONTENT_LANGUAGES = {
     "russian": "ru", "english": "en", "spanish": "es", "portuguese": "pt-BR", "french": "fr", "german": "de",
@@ -65,6 +70,18 @@ def prompts():
     return result
 
 
+def templates():
+    """{id: {code: mode}}: the Russian file is the source, `.<code>.json` its translations."""
+    result = {}
+    for template in TEMPLATE_IDS:
+        modes = {}
+        for code in CONTENT_LANGUAGES.values():
+            path = TEMPLATES / (f"template-{template}.json" if code == "ru" else f"template-{template}.{code}.json")
+            modes[code] = json.loads(path.read_text(encoding="utf-8"))["mode"]
+        result[template] = modes
+    return result
+
+
 def write(path, text, check, stale):
     if check:
         if not path.exists() or path.read_text(encoding="utf-8") != text:
@@ -106,6 +123,7 @@ def main():
             print(f"no {', '.join(missing)} for {code} in {CONTENT.name}", file=sys.stderr)
             sys.exit(1)
     write(OUT / "prompts.json", json.dumps(table, ensure_ascii=False, indent=1, sort_keys=True) + "\n", check, stale)
+    write(OUT / "templates.json", json.dumps(templates(), ensure_ascii=False, indent=1, sort_keys=True) + "\n", check, stale)
     if stale:
         print("out of date (run python3 scripts/strings.py): " + ", ".join(stale), file=sys.stderr)
         sys.exit(1)
