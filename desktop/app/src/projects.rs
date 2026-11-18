@@ -476,6 +476,44 @@ fn launch_now(
     Ok(LaunchReply { message, ..LaunchReply::default() })
 }
 
+// MARK: - Worktrees
+
+#[derive(Serialize)]
+pub struct RemovalReply {
+    /// `confirm` (safe: ask «Удалить?»), `blocked` (with the reason) or `removed`.
+    state: &'static str,
+    reason: Option<String>,
+}
+
+/// The trash button of a worktree, as on the Mac: first a check (nothing uncommitted, the branch merged or pushed),
+/// then, on «Удалить?», `git worktree remove` without force. Only worktrees the scan found.
+#[tauri::command]
+pub async fn worktree_removal(app: AppHandle, path: String, worktree: String, remove: bool) -> Result<RemovalReply, String> {
+    tauri::async_runtime::spawn_blocking(move || {
+        let texts = strings(&app);
+        let projects = app.state::<Projects>();
+        let (project, worktree) = (PathBuf::from(path), PathBuf::from(worktree));
+        let known = projects.state.lock().unwrap().projects.iter().any(|p| p.path == project && p.worktrees.iter().any(|w| Path::new(&w.path) == worktree));
+        if !known {
+            return Err("unknown worktree".to_owned());
+        }
+        let (base, _) = projects.launch_target(&project).ok_or("unknown project")?;
+        let tools = Tools::find().ok_or("git not found")?;
+        if remove {
+            launch::remove_worktree(&tools, &worktree, &project, &texts)?;
+            eprintln!("removed worktree {}", worktree.display());
+            projects.ask(false);
+            return Ok(RemovalReply { state: "removed", reason: None });
+        }
+        Ok(match launch::removal_check(&tools, &worktree, &base, &texts) {
+            launch::Removal::Allowed => RemovalReply { state: "confirm", reason: None },
+            launch::Removal::Blocked(reason) => RemovalReply { state: "blocked", reason: Some(reason) },
+        })
+    })
+    .await
+    .map_err(|e| e.to_string())?
+}
+
 // MARK: - Opening
 
 fn spawn(mut command: std::process::Command) -> Result<(), String> {

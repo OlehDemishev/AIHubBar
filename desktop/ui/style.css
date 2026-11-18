@@ -152,6 +152,9 @@ button.prominent { background: var(--accent); border-color: var(--accent); color
 .run-log .tool { font-family: ui-monospace, "Cascadia Mono", Consolas, monospace; color: var(--secondary); }
 .run-log .result { font-weight: 600; }
 .run-log .error { color: #d70015; }
+button.danger { background: #d70015; border-color: #d70015; color: #fff; }
+.worktree-blocked { color: #c93400; font-size: 12px; }
+@media (prefers-color-scheme: dark) { .worktree-blocked { color: #ff9f0a; } }
 [hidden] { display: none !important; }
 button:disabled { opacity: 0.45; cursor: default; }
 button:disabled:hover { border-color: var(--line); }

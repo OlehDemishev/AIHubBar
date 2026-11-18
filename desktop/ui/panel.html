@@ -322,6 +322,32 @@
       return box;
     }
 
+    // Removing a worktree, as on the Mac: «Удалить» checks first; when it is safe, «Удалить?» / «Отмена».
+    const removals = new Map();
+    function removal(row, worktree) {
+      const state = removals.get(worktree.path) ?? {};
+      const ask = async (remove) => {
+        removals.set(worktree.path, { busy: true });
+        showProjects();
+        try {
+          const reply = await invoke("worktree_removal", { path: row.path, worktree: worktree.path, remove });
+          removals.set(worktree.path, reply.state === "confirm" ? { confirm: true } : reply.state === "blocked" ? { reason: reply.reason } : {});
+        } catch (error) {
+          removals.set(worktree.path, { reason: String(error) });
+        }
+        showProjects();
+      };
+      if (state.confirm) {
+        const yes = action(t("Удалить?"), () => ask(true));
+        yes.classList.add("danger");
+        return [yes, action(t("Отмена"), () => { removals.delete(worktree.path); showProjects(); })];
+      }
+      const remove = action(t("Удалить"), () => ask(false));
+      remove.title = t("Удалить worktree (только если нет незакоммиченного и ветка запушена)");
+      remove.disabled = !!state.busy;
+      return [remove];
+    }
+
     // A project's details, as the Mac row opens: actions first, then STATUS, attention, PRs, worktrees.
     function details(row) {
       const box = element("div", "details");
@@ -355,7 +381,10 @@
           const text = element("div", "worktree-text");
           text.append(element("div", "name", worktree.name), element("div", "secondary", worktree.detail));
           line.append(text, action(t("Терминал"), () => invoke("open_project", { path: worktree.path, target: "terminal" })));
+          line.append(...removal(row, worktree));
           box.append(line);
+          const state = removals.get(worktree.path);
+          if (state?.reason) box.append(element("div", "worktree-blocked", state.reason));
         }
       }
       return box;

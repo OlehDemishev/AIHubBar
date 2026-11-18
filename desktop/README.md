@@ -41,7 +41,9 @@ Still to come in stage 3: «Show» (bringing the terminal forward), buttons in t
 
 - notifications when a PR's CI fails or is fixed and when a PR closes (between two scans, as the Mac's `PullRequestAlerts`; Settings → «Проекты» turns them off), a red dot on the tray icon while a project needs attention (orange still wins while a session waits) and «Проектов: N · с проблемами: M» in its hint (2026-11-18).
 
-Still to come in stage 4: removing worktrees from the panel, the log, permission rules, PR notifications, a red dot on the tray icon.
+- «Удалить» on a worktree in an opened project (2026-11-18): a check first, as the Mac's `GitService.removalCheck` — nothing uncommitted, the branch merged into the base or pushed — then «Удалить?» / «Отмена», and `git worktree remove` without force; otherwise the reason under the row.
+
+Still to come in stage 4: pausing background runs at the limit, Telegram.
 
 On a Mac this build never installs hooks into the real `~/.claude/settings.json`: the Mac app owns it. It does so only with another `CLAUDE_CONFIG_DIR`.
 

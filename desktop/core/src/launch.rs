@@ -9,6 +9,7 @@
 
 use crate::agent_hooks::{ps_quote, sh_quote};
 use crate::command;
+use crate::i18n::Strings;
 use crate::projects::Tools;
 use std::collections::BTreeMap;
 use std::path::{Path, PathBuf};
@@ -197,6 +198,41 @@ pub fn create_worktree(tools: &Tools, project: &Path, name_source: &str, base_re
     Ok(plan)
 }
 
+/// Whether a worktree may go: nothing uncommitted, and its branch merged into the base or pushed (the Mac's
+/// `GitService.removalCheck`). The reason is in the interface language.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub enum Removal {
+    Allowed,
+    Blocked(String),
+}
+
+pub fn removal_check(tools: &Tools, worktree: &Path, base_ref: &str, s: &Strings) -> Removal {
+    if !worktree.is_dir() {
+        return Removal::Blocked(s.t("Папки worktree нет — выполните `git worktree prune` в проекте.").to_owned());
+    }
+    let seconds = Duration::from_secs(30);
+    match git(tools, worktree, &["status", "--porcelain"], seconds) {
+        Err(_) => return Removal::Blocked(s.format("git %@ завершился с ошибкой", &["status"])),
+        Ok(status) if !status.trim().is_empty() => return Removal::Blocked(s.t("В worktree есть незакоммиченные изменения.").to_owned()),
+        Ok(_) => {}
+    }
+    // Merged into the base branch: nothing would be lost.
+    if git(tools, worktree, &["merge-base", "--is-ancestor", "HEAD", base_ref], seconds).is_ok() {
+        return Removal::Allowed;
+    }
+    match git(tools, worktree, &["rev-list", "--count", "@{upstream}..HEAD"], seconds) {
+        Err(_) => Removal::Blocked(s.t("Ветка worktree не запушена.").to_owned()),
+        Ok(ahead) if ahead.trim() == "0" => Removal::Allowed,
+        Ok(_) => Removal::Blocked(s.t("В ветке worktree есть незапушенные коммиты.").to_owned()),
+    }
+}
+
+/// `git worktree remove` without `--force`: git itself refuses when anything is uncommitted.
+pub fn remove_worktree(tools: &Tools, worktree: &Path, project: &Path, s: &Strings) -> Result<(), String> {
+    let path = worktree.to_string_lossy().into_owned();
+    git(tools, project, &["worktree", "remove", &path], Duration::from_secs(60)).map(|_| ()).map_err(|_| s.format("git %@ завершился с ошибкой", &["worktree remove"]))
+}
+
 // MARK: - Claude and the terminal
 
 /// `claude` on PATH, else where the native installer puts it (`~/.local/bin`), else the old local install.
@@ -380,6 +416,39 @@ mod tests {
         assert_eq!(plan.branch, "claude/add-tests-2", "the branch name is taken");
         assert!(plan.path.join("a.txt").is_file());
         assert!(create_worktree(&tools, &repo, "x", "no-such-ref").is_err());
+        std::fs::remove_dir_all(repo.parent().unwrap()).unwrap();
+    }
+
+    /// A real repository: a merged worktree may go, an uncommitted or unpushed one may not; removing takes the folder.
+    #[test]
+    fn removes_only_what_is_safe() {
+        let tools = Tools { gh: None, ..Tools::find().expect("git on PATH") };
+        let s = Strings::default();
+        let repo = std::env::temp_dir().join(format!("claudepult-removal-{}", std::process::id())).join("Проект");
+        let _ = std::fs::remove_dir_all(repo.parent().unwrap());
+        std::fs::create_dir_all(&repo).unwrap();
+        let git_in = |dir: &Path, args: &[&str]| {
+            let mut command = command::command(&tools.git);
+            command.arg("-C").arg(dir).args(["-c", "user.name=T", "-c", "user.email=t@example.com", "-c", "commit.gpgsign=false"]).args(args);
+            assert!(command::run(command, Duration::from_secs(30)).unwrap().ok(), "git {args:?}");
+        };
+        git_in(&repo, &["init", "-q", "-b", "main"]);
+        std::fs::write(repo.join("a.txt"), "a").unwrap();
+        git_in(&repo, &["add", "."]);
+        git_in(&repo, &["commit", "-q", "-m", "first"]);
+        let merged = create_worktree(&tools, &repo, "merged", "main").unwrap();
+        assert_eq!(removal_check(&tools, &merged.path, "main", &s), Removal::Allowed, "nothing on it beyond main");
+
+        std::fs::write(merged.path.join("b.txt"), "b").unwrap();
+        assert_eq!(removal_check(&tools, &merged.path, "main", &s), Removal::Blocked("В worktree есть незакоммиченные изменения.".into()));
+        git_in(&merged.path, &["add", "."]);
+        git_in(&merged.path, &["commit", "-q", "-m", "work"]);
+        assert_eq!(removal_check(&tools, &merged.path, "main", &s), Removal::Blocked("Ветка worktree не запушена.".into()));
+
+        let clean = create_worktree(&tools, &repo, "clean", "main").unwrap();
+        remove_worktree(&tools, &clean.path, &repo, &s).unwrap();
+        assert!(!clean.path.exists());
+        assert!(matches!(removal_check(&tools, &clean.path, "main", &s), Removal::Blocked(reason) if reason.contains("git worktree prune")));
         std::fs::remove_dir_all(repo.parent().unwrap()).unwrap();
     }
 
