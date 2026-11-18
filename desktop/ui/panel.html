@@ -186,9 +186,75 @@
       return button;
     }
 
+    // The Claude block of an opened project, as on the Mac: three commands, the custom task's field, the result.
+    // What it said stays per project while the panel lives.
+    const launches = new Map();
+    function claude(row) {
+      const box = element("div", "claude");
+      const state = launches.get(row.path) ?? {};
+      const buttons = element("div", "actions");
+      const start = async (command, task, allowBusy = false) => {
+        launches.set(row.path, { working: true });
+        showProjects();
+        let next;
+        try {
+          const reply = await invoke("launch_claude", { path: row.path, command, task: task ?? null, allowBusy });
+          next = { message: reply.message, confirm: reply.confirm ? { command, task } : null };
+        } catch (error) {
+          next = { message: String(error), error: true };
+        }
+        launches.set(row.path, next);
+        showProjects();
+      };
+      const nextStep = action(t("Следующий шаг"), () => start("next"));
+      nextStep.classList.add("prominent");
+      nextStep.title = row.nextHint;
+      const custom = action(t("Своя задача…"), () => {
+        launches.set(row.path, { ...state, editing: !state.editing });
+        showProjects();
+      });
+      const finish = action(t("Завершить"), () => start("finish"));
+      finish.title = t("Завершить сессию: проверки, коммит, push, PR и STATUS по разделу «Конец сессии»");
+      for (const button of [nextStep, custom, finish]) button.disabled = !!state.working;
+      buttons.append(element("span", "bullets-title", "Claude"), nextStep, custom, finish);
+      box.append(buttons);
+      if (state.editing) {
+        const editor = element("div", "task-editor");
+        const field = element("textarea");
+        field.rows = 3;
+        field.placeholder = t("Что сделать в %@?", row.name);
+        field.value = state.draft ?? "";
+        field.oninput = () => { state.draft = field.value; launches.set(row.path, state); go.disabled = !field.value.trim(); };
+        const cancel = action(t("Отмена"), () => { launches.set(row.path, {}); showProjects(); });
+        const go = action(t("Запустить"), () => start("custom", field.value));
+        go.classList.add("prominent");
+        go.disabled = !field.value.trim();
+        field.onkeydown = (event) => {
+          if (event.key === "Enter" && (event.ctrlKey || event.metaKey) && field.value.trim()) start("custom", field.value);
+          if (event.key === "Escape") { event.stopPropagation(); cancel.onclick(); }
+        };
+        const line = element("div", "actions end");
+        line.append(cancel, go);
+        editor.append(field, line);
+        box.append(editor);
+        setTimeout(() => field.focus(), 0);
+      }
+      if (state.message) {
+        const message = element("div", `launch-message${state.error ? " error" : ""}`);
+        message.append(element("span", "", state.message));
+        const line = element("div", "actions");
+        if (state.confirm) line.append(action(t("Запустить всё равно"), () => start(state.confirm.command, state.confirm.task, true)));
+        line.append(action(t("Скрыть"), () => { launches.delete(row.path); showProjects(); }));
+        message.append(line);
+        box.append(message);
+      }
+      return box;
+    }
+
     // A project's details, as the Mac row opens: actions first, then STATUS, attention, PRs, worktrees.
     function details(row) {
       const box = element("div", "details");
+      box.append(claude(row));
       const actions = element("div", "actions");
       actions.append(action(t("Терминал"), () => invoke("open_project", { path: row.path, target: "terminal" })));
       actions.append(action(t("Папка"), () => invoke("open_project", { path: row.path, target: "folder" })));

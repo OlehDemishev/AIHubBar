@@ -8,6 +8,7 @@ pub mod command;
 pub mod hooks;
 pub mod i18n;
 pub mod ipc;
+pub mod launch;
 pub mod paths;
 pub mod process;
 pub mod projects;

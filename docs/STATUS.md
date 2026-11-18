@@ -5,6 +5,7 @@
 **Updated:** 2026-11-18
 
 **Now:**
+- 2026-11-18: Windows — Claude from a project in a terminal window: «Следующий шаг», «Своя задача…», «Завершить», a worktree when the folder is busy (branch `feat/desktop-claude-launch`)
 - 2026-11-18: Windows stage 4 begun — the git scanner and STATUS.md in the panel's «Проекты» card (#400, merged; tests green on Windows and Linux)
 - 2026-11-17: Windows — the hook installed for Codex and Copilot from Settings (#398, merged; both lines run on Windows in CI)
 - 2026-11-17: Windows — answers to permission requests from the panel and a process alive check (#396, merged)
@@ -46,7 +47,7 @@
 - check on the Air: the island at the real notch
 - promotion (docs/LAUNCH.md): r/ClaudeAI, the lists, r/macapps, Show HN, Product Hunt, Homebrew
 - content (docs/specs/SPEC-content.md, agreed): stage 2 «Версии», then batch tasks; better after the first feedback from people
-- Windows: on the laptop the live check of SPEC-windows §11.4 (with a real permission request answered from the panel) and the «Проекты» card's buttons; then stage 4 on: launching Claude in the terminal and in the background, worktrees, the log; stage 3 leftovers («Показать», buttons in the notification) need the laptop
+- Windows: on the laptop the live check of SPEC-windows §11.4 (with a real permission request answered from the panel) the «Проекты» card's buttons and a Claude launch in Windows Terminal; then stage 4 on: Claude in the background, removing worktrees, the log; stage 3 leftovers («Показать», buttons in the notification) need the laptop
 
 **Needs Oleh:**
 - Windows laptop: install the tools and copy the two CLAUDE.md files as in `desktop/WINDOWS-DEV.md`, sign in to Claude Code there; choose the Windows signing (SPEC-windows §7)
@@ -82,6 +83,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-18 — Windows: Claude from a project in a terminal (branch `feat/desktop-claude-launch`)
+
+Done: an opened project in the panel has the Mac's Claude block — «Следующий шаг» (its hint names the first Next item), «Своя задача…» with a field (Ctrl+Enter starts it), «Завершить» — and the result under it. `desktop/core/launch.rs` ports `ClaudeCommand` and `ClaudeLauncher`: the same prompts (the shared `~/Projects/CLAUDE.md` when it exists, else the generic prompts of the interface language, which `scripts/strings.py` now extracts from `ContentLanguage.swift` into `ui/i18n/prompts.json` and checks in CI); a folder busy with a live working or waiting session gives a new worktree `.claude/worktrees/cb-<slug>` on `claude/<slug>` (Russian and Ukrainian transliterated), «Завершить» asks «Запустить всё равно». On Windows the window is PowerShell with `-NoExit -EncodedCommand`, in a Windows Terminal tab or a console of its own; on Linux the first terminal found. Desktop CI also runs on changes to `ContentLanguage.swift`.
+Checked: `python3 scripts/strings.py --check` (122 texts and the prompts), `scripts/strings-check.py`, `cargo test --workspace` on the Mac (core 46: prompts, slugs, busy folders, base64 and the PowerShell script, a real worktree created in a repository named in Cyrillic). The panel's HTML in a browser with sample replies: the buttons, the task field, a worktree message, «Запустить всё равно». CI runs the encoded script through PowerShell on Windows.
+Left: no live launch of Claude anywhere — on this Mac it would open Terminal and start a real session; on Windows it needs the laptop. Claude in the background, removing worktrees, the log, permission rules, PR notifications.
 
 ## 2026-11-18 — Windows: projects in the panel (branch `feat/desktop-projects`)
 

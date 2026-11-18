@@ -1,13 +1,15 @@
 //! Stage 4 «Проекты» (docs/specs/SPEC-windows.md §4.7): the git repositories of the projects folder in the panel, kept
 //! fresh like the Mac's `ProjectStore` — at start, every 5 minutes, with `git fetch` every 30, and when the panel opens
 //! on a list older than a minute. A row opens into STATUS.md, the attention items, PRs, worktrees and «Терминал» /
-//! «Папка» / GitHub.
+//! «Папка» / GitHub, and the Mac's three Claude commands, started in a terminal window (`core/launch.rs`).
 
 use crate::{language, strings};
 use chrono::{DateTime, Utc};
 use claudepult_core::i18n::Strings;
 use claudepult_core::projects::{self, Ci, Health, Project, Tools, Words};
-use claudepult_core::{command, paths};
+use claudepult_core::launch::{self, ClaudeCommand, Style};
+use claudepult_core::sessions::{self, State as SessionState};
+use claudepult_core::{command, paths, process};
 use serde::Serialize;
 use std::path::{Path, PathBuf};
 use std::sync::{Arc, Condvar, Mutex};
@@ -99,6 +101,14 @@ impl Projects {
         self.state.lock().unwrap().projects.iter().any(|p| p.path == path || p.worktrees.iter().any(|w| Path::new(&w.path) == path))
     }
 
+    /// The base branch and the Next items of a scanned project.
+    fn launch_target(&self, path: &Path) -> Option<(String, Vec<String>)> {
+        let state = self.state.lock().unwrap();
+        let project = state.projects.iter().find(|p| p.path == path)?;
+        let next = project.status.as_ref().and_then(|s| s.summary.as_ref()).map(|s| s.next.clone()).unwrap_or_default();
+        Some((project.default_branch.clone(), next))
+    }
+
     fn knows_link(&self, url: &str) -> bool {
         self.state.lock().unwrap().projects.iter().any(|p| {
             p.remote.as_deref().and_then(projects::web_url).as_deref() == Some(url)
@@ -150,6 +160,8 @@ pub struct ProjectRow {
     ago: Option<String>,
     github: Option<String>,
     stage: Option<String>,
+    /// «Следующий шаг»'s hint: the first Next item.
+    next_hint: String,
     now: Vec<String>,
     next: Vec<String>,
     needs: Vec<String>,
@@ -223,6 +235,10 @@ fn row(project: &Project, words: &Words, now: DateTime<Utc>) -> ProjectRow {
         ago: project.last_activity.map(|at| projects::ago(texts, at.with_timezone(&Utc), now)),
         github: project.remote.as_deref().and_then(projects::web_url),
         stage: Some(summary.stage.clone()).filter(|s| !s.is_empty()),
+        next_hint: match summary.next.first() {
+            Some(first) => texts.format("Первый пункт Next: %@", &[first]),
+            None => texts.t("Первый пункт Next из STATUS.md").to_owned(),
+        },
         status_note: match &project.status {
             None => Some(texts.t("Нет docs/STATUS.md").to_owned()),
             Some(status) if status.summary.is_none() => Some(texts.t("В STATUS.md нет шапки").to_owned()),
@@ -317,6 +333,72 @@ pub fn open_link(app: AppHandle, url: String) -> Result<(), String> {
         return Err("unknown link".into());
     }
     open_with_system(url.as_ref())
+}
+
+// MARK: - Claude
+
+#[derive(Serialize)]
+pub struct LaunchReply {
+    message: String,
+    /// The folder is busy and the command can't move to a worktree: «Запустить всё равно» asks again.
+    confirm: bool,
+}
+
+/// «Следующий шаг», «Своя задача», «Завершить» in a terminal window, as the Mac's `LaunchController` with the
+/// terminal mode: a busy project folder gives a new worktree, or a question for «Завершить».
+#[tauri::command]
+pub async fn launch_claude(app: AppHandle, path: String, command: String, task: Option<String>, allow_busy: bool) -> Result<LaunchReply, String> {
+    tauri::async_runtime::spawn_blocking(move || launch_now(&app, Path::new(&path), &command, task, allow_busy))
+        .await
+        .map_err(|e| e.to_string())?
+}
+
+fn launch_now(app: &AppHandle, path: &Path, command: &str, task: Option<String>, allow_busy: bool) -> Result<LaunchReply, String> {
+    let texts = strings(app);
+    let projects = app.state::<Projects>();
+    let (base, next) = projects.launch_target(path).ok_or("unknown project")?;
+    let command = match (command, task.as_deref().map(str::trim)) {
+        ("next", _) => ClaudeCommand::NextStep,
+        ("finish", _) => ClaudeCommand::FinishSession,
+        ("custom", Some(task)) if !task.is_empty() => ClaudeCommand::CustomTask(task.to_owned()),
+        _ => return Err("unknown command".into()),
+    };
+    let title = match command {
+        ClaudeCommand::NextStep => texts.t("Следующий шаг"),
+        ClaudeCommand::CustomTask(_) => texts.t("Своя задача"),
+        ClaudeCommand::FinishSession => texts.t("Завершить сессию"),
+    }
+    .to_owned();
+    let claude = launch::find_claude().ok_or_else(|| texts.t("Claude Code не установлен").to_owned())?;
+
+    // Busy: a session of the hook that still works or waits in the project folder.
+    let working: Vec<PathBuf> = sessions::load(&paths::sessions_dir(), Utc::now(), process::is_alive)
+        .into_iter()
+        .filter(|(_, state)| matches!(state, SessionState::Running | SessionState::Waiting))
+        .map(|(session, _)| PathBuf::from(session.cwd))
+        .collect();
+    let mut folder = path.to_path_buf();
+    let mut worktree = None;
+    if launch::is_busy(path, &working) {
+        if command.can_use_worktree() {
+            let tools = Tools::find().ok_or("git not found")?;
+            let plan = launch::create_worktree(&tools, path, &command.name_source(&next), &base)?;
+            folder = plan.path.clone();
+            worktree = Some(plan);
+        } else if !allow_busy {
+            return Ok(LaunchReply { message: texts.t("В этой папке уже работает сессия Claude. Запустить ещё одну там же?").to_owned(), confirm: true });
+        }
+    }
+
+    let prompt = launch::one_line(&command.prompt(&Style::for_projects(&paths::projects_dir()), language(app)));
+    launch::open_in_terminal(&folder, &claude, &[&prompt]).map_err(|e| texts.format("Не удалось открыть Терминал: %@", &[&e]))?;
+    eprintln!("launched «{title}» in a terminal: {}", folder.display());
+    let mut message = texts.format("«%@» запущен в новом окне Терминала.", &[&title]);
+    if let Some(plan) = worktree {
+        message = texts.format("В папке проекта уже работает Claude, поэтому запуск идёт в worktree cb-%@ (ветка %@). ", &[&plan.slug, &plan.branch]) + &message;
+        projects.ask(false);
+    }
+    Ok(LaunchReply { message, confirm: false })
 }
 
 // MARK: - Opening

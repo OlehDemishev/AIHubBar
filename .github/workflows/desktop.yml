@@ -4,17 +4,20 @@
 name: Desktop
 
 on:
-  # The desktop texts come from the Mac string catalog, so a catalog change runs this too (work resumed 2026-11-17).
+  # The desktop texts come from the Mac string catalog and Claude's prompts from ContentLanguage.swift, so a change
+  # to either runs this too.
   pull_request:
     paths:
       - "desktop/**"
       - "AIHubBar/Resources/Localizable.xcstrings"
+      - "AIHubBar/Models/ContentLanguage.swift"
       - ".github/workflows/desktop.yml"
   push:
     branches: [main]
     paths:
       - "desktop/**"
       - "AIHubBar/Resources/Localizable.xcstrings"
+      - "AIHubBar/Models/ContentLanguage.swift"
       - ".github/workflows/desktop.yml"
   workflow_dispatch:
 

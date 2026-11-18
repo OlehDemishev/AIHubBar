@@ -34,9 +34,10 @@ Still to come in stage 3: «Show» (bringing the terminal forward), buttons in t
 - `core/projects.rs`, a port of the Mac's built-in git scanner (`GitScanner`) and STATUS.md reader (`StatusText`): every folder with a `.git` in `~/Projects` (`%USERPROFILE%\Projects`); branch, uncommitted files, stashes, unpushed branches, worktrees, open PRs with CI through `gh`, the STATUS.md summary and the attention items with the Mac's texts and the same health dot;
 - `core/command.rs` runs `git` and `gh`: found through `PATH` and `PATHEXT`, no console window, a time limit; git speaks English (`LC_ALL=C`) and never asks for a password in the background;
 - in the panel a «Проекты» card: dot, name, branch, badges, last activity; a click opens STATUS (Сейчас / Дальше / Нужно от вас), attention, PRs, worktrees and «Терминал» / «Папка» / GitHub (Windows Terminal or PowerShell, Explorer, the browser);
-- refreshed at start, every 5 minutes, with `git fetch` every 30, and when the panel opens on a list older than a minute.
+- refreshed at start, every 5 minutes, with `git fetch` every 30, and when the panel opens on a list older than a minute;
+- Claude in a terminal (`core/launch.rs`, 2026-11-18): «Следующий шаг», «Своя задача…», «Завершить» in an opened project, with the Mac's prompts (the shared `~/Projects/CLAUDE.md` when it exists, else the generic ones of the interface language from `ui/i18n/prompts.json`); a project folder where a session works gives a new worktree `.claude/worktrees/cb-<slug>`, «Завершить» asks instead. Windows: PowerShell with `-EncodedCommand` in a Windows Terminal tab, or in a console of its own without `wt`.
 
-Still to come in stage 4: launching Claude in the terminal and in the background, worktrees from the panel, the log, permission rules, PR notifications, a red dot on the tray icon.
+Still to come in stage 4: Claude in the background, worktrees from the panel (removing), the log, permission rules, PR notifications, a red dot on the tray icon.
 
 On a Mac this build never installs hooks into the real `~/.claude/settings.json`: the Mac app owns it. It does so only with another `CLAUDE_CONFIG_DIR`.
 
@@ -44,7 +45,7 @@ On a Mac this build never installs hooks into the real `~/.claude/settings.json`
 
 | Folder | What |
 |---|---|
-| `core/` | Shared logic with no interface: paths, `settings.json`, languages, the link to the running app, limits (`usage.rs`, `texts.rs`, `tray_icon.rs`), sessions and hooks, projects (`projects.rs`, `command.rs`). `cargo test -p claudepult-core` runs on any system |
+| `core/` | Shared logic with no interface: paths, `settings.json`, languages, the link to the running app, limits (`usage.rs`, `texts.rs`, `tray_icon.rs`), sessions and hooks, projects (`projects.rs`, `command.rs`, `launch.rs`). `cargo test -p claudepult-core` runs on any system |
 | `app/` | The tray app, `AIHubBar.exe` / `AIHubBar` (`tauri.conf.json`, icons, capabilities) |
 | `cli/` | `claudepult`, the console program: `AIHubBar.exe` is a window program and cannot print to a console |
 | `hook/` | `claudepult-hook`, the Claude Code hook (port of the Mac's Python hook); `cargo test -p claudepult-hook` runs it with real events |
