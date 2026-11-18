@@ -122,6 +122,10 @@ def content():
             "cardFile": re.search(r'cardFile: "([^"]*)"', body).group(1),
             "cardLabels": {key: value for key, value in re.findall(r'\.(\w+): "([^"]*)"', labels)},
             "notesHeading": re.search(r'notesHeading: "([^"]*)"', body).group(1),
+            "planFile": swift_string(body, "planFile"),
+            "planTitle": swift_string(body, "planTitle"),
+            "ideaStatus": swift_string(body, "ideaStatus"),
+            "planColumns": {key: value for key, value in re.findall(r'\.(\w+): "([^"]*)"', re.search(r"planColumns: \[(.*?)\]", body).group(1))},
         }
         missing = [key for key in CARD_KEYS if key not in result[code]["cardLabels"]]
         if missing:

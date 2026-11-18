@@ -23,6 +23,11 @@ fn languages() -> impl Iterator<Item = (&'static str, &'static Value)> {
     content().as_object().into_iter().flatten().map(|(code, entry)| (code.as_str(), entry))
 }
 
+/// Every content language's table (`ui/i18n/content.json`): `(code, entry)`.
+pub fn content_languages() -> impl Iterator<Item = (&'static str, &'static Value)> {
+    languages()
+}
+
 fn entry(language: &str) -> &'static Value {
     let table = content();
     table.get(language).or_else(|| table.get("en")).unwrap_or(&Value::Null)

@@ -6,6 +6,7 @@ pub mod agent_hooks;
 pub mod agents;
 pub mod ai;
 pub mod approvals;
+pub mod calendar;
 pub mod command;
 pub mod commands;
 pub mod folders;

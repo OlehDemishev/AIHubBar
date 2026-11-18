@@ -34,6 +34,7 @@ fn change(app: &AppHandle, edit: impl FnOnce(&mut claudepult_core::settings::Set
         let _ = app.emit("sessions-changed", ());
     }
     let _ = app.emit("profiles-changed", ());
+    app.state::<crate::calendar::Calendar>().ask();
 }
 
 // MARK: - Profiles
@@ -128,6 +129,8 @@ pub struct ProjectsFolder {
     custom: bool,
     /// «Папки нет: …» when the folder is gone, or why there is no folder.
     note: Option<String>,
+    /// A profile with folder projects: its calendar (`off`, `dates`, `contentPlan`).
+    calendar: Option<String>,
 }
 
 fn folder_view(app: &AppHandle) -> ProjectsFolder {
@@ -144,6 +147,7 @@ fn folder_view(app: &AppHandle) -> ProjectsFolder {
         path: path.map(|p| p.to_string_lossy().into_owned()),
         custom: settings.has_custom_projects_dir(),
         note,
+        calendar: settings.current().filter(|p| p.source().is_folders()).map(|p| p.calendar().to_owned()),
     }
 }
 
