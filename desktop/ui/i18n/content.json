@@ -1,5 +1,8 @@
 {
  "ar": {
+  "agentFileIntro": "لا حاجة إلى فتح الملف «{file}»: نصه موجود هنا.",
+  "agentNoFile": "لا يوجد — اعمل على ملفات المجلد",
+  "agentPrompt": "أنت تعمل في مجلد المشروع «{project}». الملف المصدر: {file}. اقرأ أي ملف في هذا المجلد، لكن لا تعدّل أيًّا منها. اكتب النتيجة في ملف جديد {output} في المجلد نفسه. إذا كانت المهمة غير واضحة أو كانت البيانات ناقصة، فاذكر ذلك في بداية ملف النتيجة — ولا تختلق شيئًا.\n\nالمهمة: {task}",
   "cardFile": "مشروع.md",
   "cardLabels": {
    "deadline": "الموعد النهائي",
@@ -9,9 +12,16 @@
    "publish": "النشر",
    "stage": "المرحلة"
   },
-  "notesHeading": "## ملاحظات"
+  "notCounted": "غير محسوب",
+  "notSet": "غير محدد",
+  "notesHeading": "## ملاحظات",
+  "projectWord": "مشروع",
+  "resultWord": "نتيجة"
  },
  "de": {
+  "agentFileIntro": "«{file}» musst du nicht öffnen: Der Text steht hier.",
+  "agentNoFile": "keine — arbeite mit den Dateien des Ordners",
+  "agentPrompt": "Du arbeitest im Ordner des Projekts «{project}». Quelldatei: {file}. Lies beliebige Dateien dieses Ordners, ändere aber keine davon. Schreibe das Ergebnis in eine neue Datei {output} im selben Ordner. Wenn die Aufgabe unklar ist oder Daten fehlen, schreibe das an den Anfang der Ergebnisdatei — erfinde nichts.\n\nAufgabe: {task}",
   "cardFile": "projekt.md",
   "cardLabels": {
    "deadline": "Frist",
@@ -21,9 +31,16 @@
    "publish": "Veröffentlichung",
    "stage": "Phase"
   },
-  "notesHeading": "## Notizen"
+  "notCounted": "nicht berechnet",
+  "notSet": "nicht angegeben",
+  "notesHeading": "## Notizen",
+  "projectWord": "projekt",
+  "resultWord": "ergebnis"
  },
  "en": {
+  "agentFileIntro": "You don't need to open «{file}»: its text is right here.",
+  "agentNoFile": "none — work with the files of the folder",
+  "agentPrompt": "You are working in the folder of the project «{project}». Source file: {file}. Read any files of this folder but change none of them. Write the result to a new file {output} in the same folder. If the task is unclear or data is missing, say so at the top of the result file — do not make things up.\n\nTask: {task}",
   "cardFile": "project.md",
   "cardLabels": {
    "deadline": "Deadline",
@@ -33,9 +50,16 @@
    "publish": "Publish",
    "stage": "Stage"
   },
-  "notesHeading": "## Notes"
+  "notCounted": "not counted",
+  "notSet": "not set",
+  "notesHeading": "## Notes",
+  "projectWord": "project",
+  "resultWord": "result"
  },
  "es": {
+  "agentFileIntro": "No hace falta abrir «{file}»: su texto está aquí.",
+  "agentNoFile": "ninguno — trabaja con los archivos de la carpeta",
+  "agentPrompt": "Trabajas en la carpeta del proyecto «{project}». Archivo de origen: {file}. Lee cualquier archivo de esta carpeta, pero no modifiques ninguno. Escribe el resultado en un archivo nuevo {output} en la misma carpeta. Si la tarea no está clara o faltan datos, dilo al principio del archivo de resultado; no inventes nada.\n\nTarea: {task}",
   "cardFile": "proyecto.md",
   "cardLabels": {
    "deadline": "Fecha límite",
@@ -45,9 +69,16 @@
    "publish": "Publicación",
    "stage": "Etapa"
   },
-  "notesHeading": "## Notas"
+  "notCounted": "sin calcular",
+  "notSet": "sin indicar",
+  "notesHeading": "## Notas",
+  "projectWord": "proyecto",
+  "resultWord": "resultado"
  },
  "fr": {
+  "agentFileIntro": "Inutile d’ouvrir «{file}» : son texte est ici.",
+  "agentNoFile": "aucun — travaille avec les fichiers du dossier",
+  "agentPrompt": "Tu travailles dans le dossier du projet «{project}». Fichier source : {file}. Lis tous les fichiers de ce dossier, mais n'en modifie aucun. Écris le résultat dans un nouveau fichier {output} dans le même dossier. Si la tâche n'est pas claire ou s'il manque des données, dis-le au début du fichier de résultat — n'invente rien.\n\nTâche : {task}",
   "cardFile": "projet.md",
   "cardLabels": {
    "deadline": "Échéance",
@@ -57,9 +88,16 @@
    "publish": "Publication",
    "stage": "Étape"
   },
-  "notesHeading": "## Notes"
+  "notCounted": "non calculé",
+  "notSet": "non précisé",
+  "notesHeading": "## Notes",
+  "projectWord": "projet",
+  "resultWord": "résultat"
  },
  "id": {
+  "agentFileIntro": "Berkas «{file}» tidak perlu dibuka: teksnya ada di sini.",
+  "agentNoFile": "tidak ada — kerjakan dengan berkas di folder",
+  "agentPrompt": "Kamu bekerja di folder proyek «{project}». Berkas sumber: {file}. Baca berkas apa pun di folder ini, tetapi jangan ubah satu pun. Tulis hasilnya ke berkas baru {output} di folder yang sama. Jika tugas tidak jelas atau data kurang, tulis hal itu di awal berkas hasil — jangan mengarang.\n\nTugas: {task}",
   "cardFile": "proyek.md",
   "cardLabels": {
    "deadline": "Tenggat",
@@ -69,9 +107,16 @@
    "publish": "Publikasi",
    "stage": "Tahap"
   },
-  "notesHeading": "## Catatan"
+  "notCounted": "belum dihitung",
+  "notSet": "tidak disebutkan",
+  "notesHeading": "## Catatan",
+  "projectWord": "proyek",
+  "resultWord": "hasil"
  },
  "it": {
+  "agentFileIntro": "Non serve aprire «{file}»: il testo è qui.",
+  "agentNoFile": "nessuno — lavora con i file della cartella",
+  "agentPrompt": "Stai lavorando nella cartella del progetto «{project}». File di partenza: {file}. Leggi qualsiasi file di questa cartella, ma non modificarne nessuno. Scrivi il risultato in un nuovo file {output} nella stessa cartella. Se il compito non è chiaro o mancano dati, scrivilo all'inizio del file di risultato — non inventare.\n\nCompito: {task}",
   "cardFile": "progetto.md",
   "cardLabels": {
    "deadline": "Scadenza",
@@ -81,9 +126,16 @@
    "publish": "Pubblicazione",
    "stage": "Fase"
   },
-  "notesHeading": "## Note"
+  "notCounted": "non calcolato",
+  "notSet": "non indicato",
+  "notesHeading": "## Note",
+  "projectWord": "progetto",
+  "resultWord": "risultato"
  },
  "ja": {
+  "agentFileIntro": "ファイル「{file}」を開く必要はありません。テキストはここにあります。",
+  "agentNoFile": "なし — フォルダー内のファイルで作業してください",
+  "agentPrompt": "あなたはプロジェクト「{project}」のフォルダーで作業しています。元のファイル: {file}。このフォルダーのファイルはどれを読んでもかまいませんが、どれも変更しないでください。結果は同じフォルダーの新しいファイル {output} に書いてください。課題が不明確な場合やデータが足りない場合は、結果ファイルの冒頭にそう書いてください。推測で作らないでください。\n\n課題: {task}",
   "cardFile": "プロジェクト.md",
   "cardLabels": {
    "deadline": "締め切り",
@@ -93,9 +145,16 @@
    "publish": "公開",
    "stage": "段階"
   },
-  "notesHeading": "## メモ"
+  "notCounted": "未計算",
+  "notSet": "未指定",
+  "notesHeading": "## メモ",
+  "projectWord": "プロジェクト",
+  "resultWord": "結果"
  },
  "ko": {
+  "agentFileIntro": "파일 «{file}»을(를) 열 필요 없습니다. 텍스트가 여기 있습니다.",
+  "agentNoFile": "없음 — 폴더의 파일로 작업하세요",
+  "agentPrompt": "당신은 프로젝트 «{project}» 폴더에서 작업하고 있습니다. 원본 파일: {file}. 이 폴더의 파일은 무엇이든 읽어도 되지만 아무것도 수정하지 마세요. 결과는 같은 폴더의 새 파일 {output}에 쓰세요. 과제가 불분명하거나 데이터가 부족하면 결과 파일 맨 앞에 그렇게 적고, 지어내지 마세요.\n\n과제: {task}",
   "cardFile": "프로젝트.md",
   "cardLabels": {
    "deadline": "마감",
@@ -105,9 +164,16 @@
    "publish": "게시",
    "stage": "단계"
   },
-  "notesHeading": "## 메모"
+  "notCounted": "계산 안 됨",
+  "notSet": "지정 안 됨",
+  "notesHeading": "## 메모",
+  "projectWord": "프로젝트",
+  "resultWord": "결과"
  },
  "pl": {
+  "agentFileIntro": "Nie trzeba otwierać pliku «{file}»: jego tekst jest tutaj.",
+  "agentNoFile": "brak — pracuj na plikach folderu",
+  "agentPrompt": "Pracujesz w folderze projektu «{project}». Plik źródłowy: {file}. Czytaj dowolne pliki tego folderu, ale żadnego nie zmieniaj. Zapisz wynik w nowym pliku {output} w tym samym folderze. Jeśli zadanie jest niejasne lub brakuje danych, napisz o tym na początku pliku wynikowego — niczego nie wymyślaj.\n\nZadanie: {task}",
   "cardFile": "projekt.md",
   "cardLabels": {
    "deadline": "Termin",
@@ -117,9 +183,16 @@
    "publish": "Publikacja",
    "stage": "Etap"
   },
-  "notesHeading": "## Notatki"
+  "notCounted": "nie obliczono",
+  "notSet": "nie podano",
+  "notesHeading": "## Notatki",
+  "projectWord": "projekt",
+  "resultWord": "wynik"
  },
  "pt-BR": {
+  "agentFileIntro": "Não é preciso abrir «{file}»: o texto está aqui.",
+  "agentNoFile": "nenhum — trabalhe com os arquivos da pasta",
+  "agentPrompt": "Você está trabalhando na pasta do projeto «{project}». Arquivo de origem: {file}. Leia qualquer arquivo desta pasta, mas não altere nenhum. Escreva o resultado em um novo arquivo {output} na mesma pasta. Se a tarefa não estiver clara ou faltarem dados, diga isso no início do arquivo de resultado — não invente nada.\n\nTarefa: {task}",
   "cardFile": "projeto.md",
   "cardLabels": {
    "deadline": "Prazo",
@@ -129,9 +202,16 @@
    "publish": "Publicação",
    "stage": "Etapa"
   },
-  "notesHeading": "## Notas"
+  "notCounted": "não calculado",
+  "notSet": "não informado",
+  "notesHeading": "## Notas",
+  "projectWord": "projeto",
+  "resultWord": "resultado"
  },
  "ru": {
+  "agentFileIntro": "Файл «{file}» открывать не нужно: его текст уже здесь.",
+  "agentNoFile": "нет — работай с файлами папки",
+  "agentPrompt": "Ты работаешь в папке проекта «{project}». Исходный файл: {file}. Читай любые файлы этой папки, но ничего в них не меняй. Результат запиши в новый файл {output} в этой же папке. Если задача неясна или данных не хватает — напиши об этом в начале файла результата, не выдумывай.\n\nЗадача: {task}",
   "cardFile": "проект.md",
   "cardLabels": {
    "deadline": "Дедлайн",
@@ -141,9 +221,16 @@
    "publish": "Публикация",
    "stage": "Этап"
   },
-  "notesHeading": "## Заметки"
+  "notCounted": "не посчитан",
+  "notSet": "не указан",
+  "notesHeading": "## Заметки",
+  "projectWord": "проект",
+  "resultWord": "результат"
  },
  "uk": {
+  "agentFileIntro": "Файл «{file}» відкривати не потрібно: його текст уже тут.",
+  "agentNoFile": "немає — працюй з файлами папки",
+  "agentPrompt": "Ти працюєш у папці проєкту «{project}». Вихідний файл: {file}. Читай будь-які файли цієї папки, але нічого в них не змінюй. Результат запиши в новий файл {output} у цій самій папці. Якщо завдання незрозуміле або бракує даних — напиши про це на початку файлу результату, не вигадуй.\n\nЗавдання: {task}",
   "cardFile": "проєкт.md",
   "cardLabels": {
    "deadline": "Дедлайн",
@@ -153,6 +240,10 @@
    "publish": "Публікація",
    "stage": "Етап"
   },
-  "notesHeading": "## Нотатки"
+  "notCounted": "не пораховано",
+  "notSet": "не вказано",
+  "notesHeading": "## Нотатки",
+  "projectWord": "проєкт",
+  "resultWord": "результат"
  }
 }

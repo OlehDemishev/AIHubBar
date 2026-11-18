@@ -60,6 +60,9 @@ pub struct Run {
     pub notified: bool,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub prompt: Option<String>,
+    /// The file a folder project's command writes.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub result_file: Option<String>,
     /// Fields of the Mac's runs this version doesn't use (Codex, pauses, pairs), written back unchanged.
     #[serde(flatten)]
     pub other: serde_json::Map<String, Value>,
@@ -233,8 +236,32 @@ pub fn rules(windows: bool) -> (Vec<String>, Vec<String>) {
     (allow, deny)
 }
 
-pub fn settings_json(windows: bool) -> Value {
-    let (allow, deny) = rules(windows);
+/// The Mac's `PermissionProfile`s: `code` — git, builds, PRs (`rules`); `filesOnly` — read, search and write inside
+/// the project folder, no shell and no network; `filesAndWeb` — that plus web search and page fetching. The shells are
+/// denied by name (`Bash`, and `PowerShell` on Windows); secrets stay unreadable in every profile.
+pub fn profile_rules(permissions: &str, windows: bool) -> (Vec<String>, Vec<String>) {
+    let web = match permissions {
+        "filesOnly" => false,
+        "filesAndWeb" => true,
+        _ => return rules(windows),
+    };
+    let mut allow: Vec<String> = ["Read", "Glob", "Grep", "Edit(./**)", "TodoWrite"].map(String::from).to_vec();
+    let mut deny: Vec<String> = vec!["Bash".into()];
+    if windows {
+        deny.push("PowerShell".into());
+    }
+    if web {
+        allow.extend(["WebSearch".into(), "WebFetch".into()]);
+    } else {
+        deny.extend(["WebFetch".into(), "WebSearch".into()]);
+    }
+    deny.push("NotebookEdit".into());
+    deny.extend(READ_DENY.iter().map(|r| (*r).to_owned()));
+    (allow, deny)
+}
+
+pub fn settings_json(permissions: &str, windows: bool) -> Value {
+    let (allow, deny) = profile_rules(permissions, windows);
     json!({"permissions": {"allow": allow, "deny": deny, "blockReadsOutsideWorkingDirectories": true}})
 }
 
@@ -261,6 +288,10 @@ pub struct NewRun<'a> {
     pub task: &'a str,
     pub prompt: &'a str,
     pub time_limit_minutes: u32,
+    /// `code`, `filesOnly` or `filesAndWeb` (`profile_rules`).
+    pub permissions: &'a str,
+    /// A folder project's command: the file Claude is to write; the run fails without it.
+    pub result_file: Option<&'a Path>,
 }
 
 /// Starts `claude -p` in the folder with no window, its output into the log; the run is saved before it returns.
@@ -268,7 +299,7 @@ pub fn start(dir: &Path, claude: &Path, new: &NewRun) -> io::Result<(Run, Child)
     std::fs::create_dir_all(dir)?;
     let id = new_id();
     let settings = settings_path(dir, &id);
-    std::fs::write(&settings, serde_json::to_string_pretty(&settings_json(cfg!(windows))).map_err(io::Error::other)?)?;
+    std::fs::write(&settings, serde_json::to_string_pretty(&settings_json(new.permissions, cfg!(windows))).map_err(io::Error::other)?)?;
     let mut run = Run {
         id: id.clone(),
         project: new.project.to_owned(),
@@ -286,6 +317,7 @@ pub fn start(dir: &Path, claude: &Path, new: &NewRun) -> io::Result<(Run, Child)
         pull_request_url: None,
         notified: false,
         prompt: Some(new.prompt.to_owned()),
+        result_file: new.result_file.map(|f| f.to_string_lossy().into_owned()),
         other: serde_json::Map::new(),
     };
     let log = File::create(run.log_path(dir))?;
@@ -429,6 +461,8 @@ pub struct FinishTexts {
     pub no_result: String,
     /// «Отклонено правилами фона: %@» with the list filled in.
     pub denied: Box<dyn Fn(&str) -> String>,
+    /// «Файл результата не появился: %@» with the file's name.
+    pub no_result_file: Box<dyn Fn(&str) -> String>,
 }
 
 /// The run as it ended: its state (a stop reason wins), summary, denied tools and PR link.
@@ -454,6 +488,14 @@ pub fn finish(run: &mut Run, log: &str, stopped: Option<RunState>, texts: &Finis
         }
     }
     run.pull_request_url = pull_request_url(result);
+    if let Some(file) = run.result_file.as_deref().filter(|f| run.state == RunState::Succeeded && !Path::new(f).exists()) {
+        let name = Path::new(file).file_name().map(|n| n.to_string_lossy().into_owned()).unwrap_or_default();
+        let line = (texts.no_result_file)(&name);
+        run.summary = Some(match run.summary.take() {
+            Some(summary) => format!("{summary}\n{line}"),
+            None => line,
+        });
+    }
 }
 
 #[cfg(test)]
@@ -471,7 +513,11 @@ not json at all
 "#;
 
     fn texts() -> FinishTexts {
-        FinishTexts { no_result: "Claude завершился без результата — см. журнал".into(), denied: Box::new(|list| format!("Отклонено правилами фона: {list}")) }
+        FinishTexts {
+            no_result: "Claude завершился без результата — см. журнал".into(),
+            denied: Box::new(|list| format!("Отклонено правилами фона: {list}")),
+            no_result_file: Box::new(|name| format!("Файл результата не появился: {name}")),
+        }
     }
 
     fn run() -> Run {
@@ -541,6 +587,11 @@ not json at all
         let mut stopped = run();
         finish(&mut stopped, "", Some(RunState::TimedOut), &texts(), now);
         assert_eq!((stopped.state, stopped.summary), (RunState::TimedOut, None));
+        // A command that was to write a file and didn't: said so, on top of Claude's summary.
+        let mut missing = run();
+        missing.result_file = Some(std::env::temp_dir().join("claudepult-no-such-result.md").to_string_lossy().into_owned());
+        finish(&mut missing, LOG, None, &texts(), now);
+        assert!(missing.summary.as_deref().unwrap().ends_with("\nФайл результата не появился: claudepult-no-such-result.md"));
     }
 
     #[test]
@@ -554,6 +605,16 @@ not json at all
         for rule in ["PowerShell(git push * main)", "PowerShell(rm *)", "PowerShell(Remove-Item*)", "PowerShell(*env:*)", "PowerShell(iex *)"] {
             assert!(deny.contains(&rule.to_owned()), "{rule}");
         }
+        // Folder projects' profiles: files only, no shell of either kind, the web only when asked for.
+        let (allow, deny) = profile_rules("filesOnly", true);
+        assert!(allow.contains(&"Edit(./**)".to_owned()) && !allow.iter().any(|r| r.starts_with("Bash") || r.starts_with("PowerShell")));
+        for rule in ["Bash", "PowerShell", "WebFetch", "WebSearch", "NotebookEdit", "Read(**/.env)"] {
+            assert!(deny.contains(&rule.to_owned()), "{rule}");
+        }
+        let (allow, deny) = profile_rules("filesAndWeb", false);
+        assert!(allow.contains(&"WebSearch".to_owned()) && !deny.contains(&"WebFetch".to_owned()) && !deny.contains(&"PowerShell".to_owned()));
+        assert_eq!(profile_rules("code", true), rules(true));
+        assert_eq!(settings_json("filesOnly", false)["permissions"]["blockReadsOutsideWorkingDirectories"], true);
         let args = arguments("do it", "id", Path::new("/r/id.settings.json"));
         assert_eq!(args.last().unwrap(), "/r/id.settings.json");
         assert_eq!(&args[..4], ["-p", "do it", "--session-id", "id"]);
@@ -580,7 +641,7 @@ not json at all
         let runs = dir.join("runs");
         let new = NewRun {
             project: "Shop", project_path: &dir, folder: &dir, worktree_branch: None, command_title: "Своя задача",
-            task: "Do it", prompt: "Задача: «it's done» & more", time_limit_minutes: 5,
+            task: "Do it", prompt: "Задача: «it's done» & more", time_limit_minutes: 5, permissions: "code", result_file: None,
         };
         let (mut run, mut child) = start(&runs, &fake, &new).unwrap();
         assert!(child.wait().unwrap().success());
@@ -589,6 +650,25 @@ not json at all
         assert_eq!(run.state, RunState::Succeeded, "{log}");
         assert_eq!(run.pull_request_url.as_deref(), Some("https://github.com/o/r/pull/5"));
         assert_eq!(load(&runs, Utc::now()).len(), 1);
+
+        // A folder project's command: «Только файлы» in the run's settings, and the result file it was to write.
+        let result = dir.join("хуки.md");
+        let command = NewRun { permissions: "filesOnly", result_file: Some(&result), command_title: "Хуки", ..new };
+        let (mut run, mut child) = start(&runs, &fake, &command).unwrap();
+        assert!(child.wait().unwrap().success());
+        let rules: Value = serde_json::from_str(&std::fs::read_to_string(settings_path(&runs, &run.id)).unwrap()).unwrap();
+        let deny: Vec<&str> = rules["permissions"]["deny"].as_array().unwrap().iter().filter_map(Value::as_str).collect();
+        assert!(deny.contains(&"Bash") && deny.contains(&"WebFetch"));
+        assert_eq!(deny.contains(&"PowerShell"), cfg!(windows));
+        let saved: Value = serde_json::from_str(&std::fs::read_to_string(dir.join("runs").join(format!("{}.json", run.id))).unwrap()).unwrap();
+        assert_eq!(saved["resultFile"], result.to_string_lossy().as_ref(), "the Mac's field name");
+        let log = std::fs::read_to_string(run.log_path(&runs)).unwrap();
+        let mut missing = run.clone();
+        finish(&mut missing, &log, None, &texts(), Utc::now());
+        assert!(missing.summary.as_deref().unwrap().ends_with("Файл результата не появился: хуки.md"));
+        std::fs::write(&result, "хуки").unwrap();
+        finish(&mut run, &log, None, &texts(), Utc::now());
+        assert_eq!((run.state, run.summary.as_deref()), (RunState::Succeeded, Some("ok https://github.com/o/r/pull/5")));
         std::fs::remove_dir_all(dir).unwrap();
     }
 }

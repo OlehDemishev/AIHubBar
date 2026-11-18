@@ -450,7 +450,65 @@
         actions.append(create);
       }
       box.append(actions);
+      box.append(...folderCommands(row));
       return box;
+    }
+
+    // The profile's commands on this project (Claude Code; the result is a new file here): a field first when the
+    // command asks for something, then what is running or done.
+    const asking = new Map();
+    function folderCommands(row) {
+      const parts = [element("div", "bullets-title", t("Команды"))];
+      const buttons = element("div", "actions");
+      for (const command of row.commands) {
+        const button = action(command.title, () => {
+          if (command.asks) {
+            asking.set(row.path, command);
+            showProjects();
+          } else {
+            invoke("run_folder_command", { path: row.path, command: command.id, text: null }).catch(showFolderError);
+          }
+        });
+        button.title = command.hint;
+        buttons.append(button);
+      }
+      parts.push(buttons);
+      const waiting = asking.get(row.path);
+      if (waiting) {
+        const form = element("div", "new-project-form");
+        const input = element("input");
+        input.type = "text";
+        input.placeholder = waiting.asks;
+        const run = async () => {
+          if (!input.value.trim()) return;
+          asking.delete(row.path);
+          await invoke("run_folder_command", { path: row.path, command: waiting.id, text: input.value }).catch(showFolderError);
+          showProjects();
+        };
+        input.addEventListener("keydown", (event) => { if (event.key === "Enter") run(); });
+        form.append(input, action(t("Запустить"), run), action(t("Отмена"), () => { asking.delete(row.path); showProjects(); }));
+        parts.push(form);
+        setTimeout(() => input.focus(), 0);
+      }
+      if (row.noText) parts.push(element("div", "secondary", t("В папке нет текстового файла — команды получат только папку.")));
+      for (const job of row.jobs) {
+        const line = element("div", `job ${job.state}`);
+        line.append(element("span", "mark", { running: "◌", done: "✓", failed: "⚠", terminal: "›_" }[job.state]), element("span", "title", job.title));
+        if (job.result) {
+          const open = action(job.result, () => invoke("open_project_file", { path: row.path, file: job.result }));
+          line.append(open);
+        } else {
+          const text = job.state === "running" ? t("выполняется…") : job.message ?? "";
+          line.append(Object.assign(element("span", "secondary note", text), { title: text }));
+        }
+        parts.push(line);
+      }
+      if (row.jobs.some((job) => job.state !== "running")) {
+        const clear = action(t("Убрать готовые"), () => invoke("clear_finished_jobs", { path: row.path }));
+        clear.classList.add("clear-jobs");
+        parts.push(clear);
+      }
+      return parts;
     }
 
     function showFolderError(error) {

@@ -85,8 +85,30 @@ def templates():
     return result
 
 
+AGENT_KEYS = ["agentPrompt", "agentNoFile", "agentFileIntro", "notSet", "notCounted", "projectWord", "resultWord"]
+
+
+def swift_string(body, key):
+    """A Swift string literal `key: "…"`, or a multi-line one between triple quotes: the closing quotes' indent is
+    removed and a trailing backslash joins the next line."""
+    multi = re.search(key + r': """\n(.*?)\n([ \t]*)"""', body, re.S)
+    if multi:
+        indent = multi.group(2)
+        text = ""
+        for line in multi.group(1).split("\n"):
+            line = line[len(indent):] if line.startswith(indent) else line.lstrip()
+            text += line[:-1] if line.endswith("\\") else line + "\n"
+        return re.sub(r"\\(.)", r"\1", text.rstrip("\n"))
+    single = re.search(key + r': "((?:[^"\\]|\\.)*)"', body)
+    if not single:
+        print(f"no {key} in {CONTENT.name}", file=sys.stderr)
+        sys.exit(1)
+    return re.sub(r"\\(.)", r"\1", single.group(1))
+
+
 def content():
-    """{code: {cardFile, cardLabels: {key: label}, notesHeading}} from the Swift `ContentStrings` tables."""
+    """{code: {cardFile, cardLabels: {key: label}, notesHeading, agentPrompt…}} from the Swift `ContentStrings` tables:
+    the project card's words and what an agent is told when it runs a command on a folder project."""
     text = CONTENT.read_text(encoding="utf-8")
     blocks = re.split(r"static let (\w+) = ContentStrings\(", text)
     result = {}
@@ -96,6 +118,7 @@ def content():
             continue
         labels = re.search(r"cardLabels: \[(.*?)\]", body).group(1)
         result[code] = {
+            **{key: swift_string(body, key) for key in AGENT_KEYS},
             "cardFile": re.search(r'cardFile: "([^"]*)"', body).group(1),
             "cardLabels": {key: value for key, value in re.findall(r'\.(\w+): "([^"]*)"', labels)},
             "notesHeading": re.search(r'notesHeading: "([^"]*)"', body).group(1),
