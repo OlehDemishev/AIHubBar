@@ -219,3 +219,33 @@ button.danger { background: #d70015; border-color: #d70015; color: #fff; }
 [hidden] { display: none !important; }
 button:disabled { opacity: 0.45; cursor: default; }
 button:disabled:hover { border-color: var(--line); }
+
+/* The «Календарь» window: a toolbar, the weekdays, a month (or week) of days; dates are dragged between days. */
+body.calendar-window { display: flex; flex-direction: column; height: 100vh; margin: 0; overflow: hidden; }
+.calendar-toolbar { display: flex; align-items: center; gap: 8px; padding: 10px 14px; border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+.calendar-toolbar h1 { margin: 0 6px; }
+.calendar-toolbar .spacer { flex: 1; }
+.calendar-toolbar .check { display: flex; align-items: center; gap: 4px; font-size: 12px; }
+.segmented { display: inline-flex; }
+.segmented button:first-child { border-radius: 6px 0 0 6px; }
+.segmented button:last-child { border-radius: 0 6px 6px 0; margin-inline-start: -1px; }
+.calendar-off { padding: 40px; text-align: center; }
+.weekdays { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); font-size: 12px; color: var(--secondary); text-align: center; padding: 4px 0; text-transform: capitalize; }
+.month { flex: 1; display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); min-height: 0; border-top: 1px solid var(--line); }
+.day { border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 4px; display: flex; flex-direction: column; gap: 2px; min-width: 0; min-height: 0; overflow: hidden; }
+.day.outside { background: color-mix(in srgb, var(--line) 35%, transparent); }
+.day.outside .number { color: var(--secondary); }
+.day.drop { outline: 2px dashed var(--accent); outline-offset: -3px; }
+.day .number { align-self: flex-start; font-size: 12px; padding: 0 6px; border-radius: 999px; }
+.day .number.today { background: var(--accent); color: #fff; font-weight: 600; }
+.day .more { font-size: 11px; }
+.entry { font-size: 11px; padding: 1px 5px; border-radius: 3px; border-inline-start: 2px solid var(--profile); background: color-mix(in srgb, var(--profile) 18%, transparent); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: grab; }
+.entry.overdue { background: color-mix(in srgb, var(--profile) 45%, transparent); }
+.calendar-error { margin: 6px 14px; }
+.new-entry { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; padding: 10px 14px; border-top: 1px solid var(--line); background: var(--card); }
+.new-entry strong { flex-basis: 100%; }
+.new-entry label { display: flex; align-items: center; gap: 6px; font-size: 12px; }
+.new-entry input { font: inherit; padding: 4px 6px; border-radius: 6px; border: 1px solid var(--line); background: var(--card); color: inherit; user-select: text; }
+.new-entry .buttons { margin-inline-start: auto; display: flex; gap: 6px; }
+.upcoming-head { display: flex; align-items: center; justify-content: space-between; }
+.upcoming-head h2 { margin: 0 0 8px; }

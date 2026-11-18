@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>AI Hub Bar</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="calendar-window">
+  <header class="calendar-toolbar">
+    <button id="previous" aria-label="‹">‹</button>
+    <button id="today" data-t="Сегодня"></button>
+    <button id="next" aria-label="›">›</button>
+    <h1 id="title"></h1>
+    <span class="spacer"></span>
+    <label class="check"><input type="checkbox" id="current-only"> <span data-t="Только текущий профиль"></span></label>
+    <span class="segmented">
+      <button id="scope-month" data-t="Месяц"></button>
+      <button id="scope-week" data-t="Неделя"></button>
+    </span>
+    <button id="reread" data-t-title="Перечитать файлы" aria-label="↻">↻</button>
+  </header>
+  <p class="secondary calendar-off" id="inactive" data-t="Календарь включается у профиля с проектами-папками: Настройки → «Профили» → «Календарь»." hidden></p>
+  <div class="weekdays" id="weekdays"></div>
+  <div class="month" id="grid"></div>
+  <p class="error calendar-error" id="error" hidden></p>
+  <form class="new-entry" id="new-entry" hidden>
+    <strong id="new-day"></strong>
+    <label><span data-t="Профиль"></span> <select id="new-profile"></select></label>
+    <label><span data-t="Что"></span> <select id="new-kind"></select></label>
+    <label><span data-t="Время"></span> <input type="text" id="new-time" data-t-placeholder="18:00 — можно пусто"></label>
+    <label class="for-plan"><span data-t="Площадка"></span> <input type="text" id="new-platform" placeholder="Instagram"></label>
+    <label class="for-plan"><span data-t="Тема публикации"></span> <input type="text" id="new-topic"></label>
+    <label class="for-project"><span data-t="Проект"></span> <select id="new-project"></select></label>
+    <span class="buttons">
+      <button type="button" id="new-cancel" data-t="Отмена"></button>
+      <button type="submit" class="prominent" id="new-add" data-t="Добавить"></button>
+    </span>
+  </form>
+  <script type="module">
+    import { loadTexts, invoke, t } from "./app.js";
+    const ui = await loadTexts();
+    const lang = ui.lang || "ru";
+
+    // The week starts as the language's calendars usually do: Sunday in English, Portuguese (Brazil), Japanese and
+    // Korean, Saturday in Arabic, Monday elsewhere.
+    const weekStart = { en: 0, "pt-BR": 0, ja: 0, ko: 0, ar: 6 }[lang] ?? 1;
+    const remembered = (key, fallback) => { try { return localStorage.getItem(key) ?? fallback; } catch { return fallback; } };
+    const remember = (key, value) => { try { localStorage.setItem(key, value); } catch {} };
+    let scope = remembered("calendar-scope", "month");
+    let currentOnly = remembered("calendar-current-only", "false") === "true";
+    let anchor = new Date();
+    let view = { active: false, entries: [], profiles: [] };
+    const iso = (date) => `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
+    const addDays = (date, n) => new Date(date.getFullYear(), date.getMonth(), date.getDate() + n);
+    const startOfWeek = (date) => addDays(date, -((date.getDay() - weekStart + 7) % 7));
+
+    function days() {
+      if (scope === "week") return [...Array(7)].map((_, i) => addDays(startOfWeek(anchor), i));
+      const first = new Date(anchor.getFullYear(), anchor.getMonth(), 1);
+      const last = new Date(anchor.getFullYear(), anchor.getMonth() + 1, 0);
+      const start = startOfWeek(first);
+      const end = addDays(startOfWeek(last), 7);
+      const list = [];
+      for (let day = start; day < end; day = addDays(day, 1)) list.push(day);
+      return list;
+    }
+
+    function title(list) {
+      if (scope === "month") return new Intl.DateTimeFormat(lang, { month: "long", year: "numeric" }).format(anchor);
+      const short = new Intl.DateTimeFormat(lang, { day: "numeric", month: "short" });
+      const full = new Intl.DateTimeFormat(lang, { day: "numeric", month: "short", year: "numeric" });
+      return `${short.format(list[0])} – ${full.format(list[6])}`;
+    }
+
+    const palette = ["#2f6fdf", "#8a4fd8", "#e07b1f", "#1f9e98", "#d6458a", "#2f9e4f", "#5856d6", "#9a6a3a"];
+    const marks = { deadline: "⚑", publish: "➤", plan: "▦" };
+
+    function chip(entry) {
+      const item = document.createElement("div");
+      item.className = entry.overdue ? "entry overdue" : "entry";
+      item.style.setProperty("--profile", palette[entry.color % palette.length]);
+      item.draggable = true;
+      item.title = entry.hint;
+      item.textContent = `${marks[entry.kind]} ${entry.time ? entry.time + " " : ""}${entry.title}`;
+      item.addEventListener("dragstart", (event) => event.dataTransfer.setData("text/plain", entry.id));
+      item.addEventListener("dblclick", (event) => { event.stopPropagation(); invoke("open_upcoming", { id: entry.id }); });
+      return item;
+    }
+
+    function render() {
+      const list = days();
+      const text = title(list);
+      document.getElementById("title").textContent = text.charAt(0).toLocaleUpperCase(lang) + text.slice(1);
+      document.getElementById("previous").title = scope === "month" ? t("Предыдущий месяц") : t("Предыдущая неделя");
+      document.getElementById("next").title = scope === "month" ? t("Следующий месяц") : t("Следующая неделя");
+      document.getElementById("scope-month").classList.toggle("pressed", scope === "month");
+      document.getElementById("scope-week").classList.toggle("pressed", scope === "week");
+      document.getElementById("current-only").checked = currentOnly;
+      document.getElementById("inactive").hidden = view.active;
+      const weekday = new Intl.DateTimeFormat(lang, { weekday: "short" });
+      document.getElementById("weekdays").replaceChildren(...list.slice(0, 7).map((day) => Object.assign(document.createElement("span"), { textContent: weekday.format(day) })));
+      const byDay = new Map();
+      for (const entry of view.entries) byDay.set(entry.day, [...(byDay.get(entry.day) ?? []), entry]);
+      const grid = document.getElementById("grid");
+      grid.classList.toggle("week", scope === "week");
+      grid.style.gridTemplateRows = `repeat(${list.length / 7}, minmax(0, 1fr))`;
+      const today = iso(new Date());
+      const limit = scope === "week" ? 20 : 4;
+      grid.replaceChildren(...list.map((day) => {
+        const key = iso(day);
+        const cell = document.createElement("div");
+        cell.className = "day" + (scope === "month" && day.getMonth() !== anchor.getMonth() ? " outside" : "");
+        cell.title = t("Двойной клик — новая дата");
+        const number = document.createElement("span");
+        number.className = key === today ? "number today" : "number";
+        number.textContent = String(day.getDate());
+        cell.append(number);
+        const entries = byDay.get(key) ?? [];
+        cell.append(...entries.slice(0, limit).map(chip));
+        if (entries.length > limit) cell.append(Object.assign(document.createElement("span"), { className: "secondary more", textContent: t("ещё %lld", entries.length - limit) }));
+        cell.addEventListener("dragover", (event) => { event.preventDefault(); cell.classList.add("drop"); });
+        cell.addEventListener("dragleave", () => cell.classList.remove("drop"));
+        cell.addEventListener("drop", async (event) => {
+          event.preventDefault();
+          cell.classList.remove("drop");
+          const id = event.dataTransfer.getData("text/plain");
+          if (!id) return;
+          showError(null);
+          await invoke("move_calendar_entry", { id, to: key }).catch(showError);
+          await load();
+        });
+        cell.addEventListener("dblclick", () => openNew(day));
+        return cell;
+      }));
+    }
+
+    function showError(error) {
+      const box = document.getElementById("error");
+      box.hidden = !error;
+      box.textContent = error ? String(error) : "";
+    }
+
+    async function load() {
+      view = await invoke("calendar_view", { currentOnly });
+      render();
+    }
+
+    // A new date on a day: a plan row, or a project's deadline or publication.
+    const form = document.getElementById("new-entry");
+    const profile = document.getElementById("new-profile");
+    const kind = document.getElementById("new-kind");
+    const project = document.getElementById("new-project");
+    let newDay = null;
+    function fillKinds() {
+      const chosen = view.profiles.find((p) => p.id === profile.value);
+      const kinds = [...(chosen?.plan ? [["plan", t("Запись контент-плана")]] : []), ["deadline", t("Дедлайн проекта")], ["publish", t("Публикация проекта")]];
+      const was = kind.value;
+      kind.replaceChildren(...kinds.map(([value, title]) => new Option(title, value)));
+      if (kinds.some(([value]) => value === was)) kind.value = was;
+      project.replaceChildren(...(chosen?.projects ?? []).map((p) => new Option(p.name, p.path)));
+      fillFields();
+    }
+    function fillFields() {
+      for (const field of form.querySelectorAll(".for-plan")) field.hidden = kind.value !== "plan";
+      for (const field of form.querySelectorAll(".for-project")) field.hidden = kind.value === "plan";
+    }
+    function openNew(day) {
+      if (!view.profiles.length) return;
+      newDay = day;
+      document.getElementById("new-day").textContent = new Intl.DateTimeFormat(lang, { weekday: "long", day: "numeric", month: "long", year: "numeric" }).format(day);
+      profile.replaceChildren(...view.profiles.map((p) => new Option(p.name, p.id)));
+      profile.value = view.profiles.some((p) => p.id === view.currentProfile) ? view.currentProfile : view.profiles[0].id;
+      for (const id of ["new-time", "new-platform", "new-topic"]) document.getElementById(id).value = "";
+      fillKinds();
+      form.hidden = false;
+      document.getElementById("new-time").focus();
+    }
+    profile.onchange = fillKinds;
+    kind.onchange = fillFields;
+    document.getElementById("new-cancel").onclick = () => { form.hidden = true; };
+    form.addEventListener("keydown", (event) => { if (event.key === "Escape") form.hidden = true; });
+    form.onsubmit = async (event) => {
+      event.preventDefault();
+      if (kind.value === "plan" ? !document.getElementById("new-topic").value.trim() : !project.value) return;
+      showError(null);
+      try {
+        await invoke("add_calendar_date", {
+          profile: profile.value, kind: kind.value, dayText: iso(newDay), time: document.getElementById("new-time").value,
+          platform: document.getElementById("new-platform").value, topic: document.getElementById("new-topic").value, project: project.value ?? "",
+        });
+        form.hidden = true;
+      } catch (error) {
+        showError(error);
+      }
+      await load();
+    };
+
+    const shift = (step) => {
+      anchor = scope === "month" ? new Date(anchor.getFullYear(), anchor.getMonth() + step, 1) : addDays(anchor, 7 * step);
+      render();
+    };
+    document.getElementById("previous").onclick = () => shift(-1);
+    document.getElementById("next").onclick = () => shift(1);
+    document.getElementById("today").onclick = () => { anchor = new Date(); render(); };
+    document.getElementById("scope-month").onclick = () => { scope = "month"; remember("calendar-scope", scope); render(); };
+    document.getElementById("scope-week").onclick = () => { scope = "week"; remember("calendar-scope", scope); render(); };
+    document.getElementById("current-only").onchange = (event) => { currentOnly = event.target.checked; remember("calendar-current-only", String(currentOnly)); load(); };
+    document.getElementById("reread").onclick = async () => { await invoke("reread_calendar"); await load(); };
+    window.__TAURI__.event.listen("calendar-changed", load);
+    await load();
+  </script>
+</body>
+</html>

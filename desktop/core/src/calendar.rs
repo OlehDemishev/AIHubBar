@@ -6,7 +6,7 @@
 use crate::folders::{self, Key};
 use crate::i18n::Strings;
 use crate::profiles::Profile;
-use chrono::{Duration, NaiveDateTime, Timelike};
+use chrono::{Duration, NaiveDate, NaiveDateTime, Timelike};
 use std::collections::HashSet;
 use std::path::{Path, PathBuf};
 
@@ -53,6 +53,7 @@ pub struct Entry {
     /// Platform, stage or status: whatever helps to recognise it.
     pub detail: Option<String>,
     pub profile: String,
+    pub profile_id: String,
     /// What a click opens: the project folder, the plan row's file, or the plan.
     pub open_path: PathBuf,
     pub source: Source,
@@ -188,6 +189,136 @@ pub fn plan_path(folder: &Path, language: &str) -> PathBuf {
     names.iter().map(|n| folder.join(n)).find(|p| p.is_file()).unwrap_or_else(|| folder.join(folders::content_text(language, "planFile")))
 }
 
+/// A new value for one cell of a row: None when the row or its column is no longer where it was read. The file
+/// keeps its line endings.
+pub fn plan_setting(column: Column, line: usize, value: &str, text: &str) -> Option<String> {
+    let crlf = text.contains("\r\n");
+    let mut lines: Vec<String> = text.split('\n').map(|l| l.strip_suffix('\r').unwrap_or(l).to_owned()).collect();
+    let rows = plan_rows(text);
+    let row = rows.iter().find(|r| r.line == line)?;
+    let position = row.columns.iter().find(|(c, _)| *c == column)?.1;
+    let mut cells = cells(lines.get(line)?)?;
+    while cells.len() <= position {
+        cells.push(String::new());
+    }
+    cells[position] = value.to_owned();
+    lines[line] = format!("| {} |", cells.join(" | "));
+    Some(lines.join(if crlf { "\r\n" } else { "\n" }))
+}
+
+/// Appends a row after the table's last one, or starts the file's table (with the plan's title in a new file).
+pub fn plan_appending(values: &[(Column, String)], text: &str, language: &str) -> String {
+    let crlf = text.contains("\r\n");
+    let mut lines: Vec<String> = if text.is_empty() { Vec::new() } else { text.split('\n').map(|l| l.strip_suffix('\r').unwrap_or(l).to_owned()).collect() };
+    let value = |column: Column| values.iter().find(|(c, _)| *c == column).map(|(_, v)| v.clone()).unwrap_or_default();
+    let rows = plan_rows(text);
+    // The table: its header, separator and rows; the last row's line, or the separator's in an empty table.
+    let table = (0..lines.len()).find_map(|index| {
+        let header = cells(&lines[index])?;
+        let has_date = header.iter().any(|h| Column::Date.headers().contains(&h.to_lowercase()));
+        let separator = lines.get(index + 1).and_then(|l| cells(l)).is_some_and(|c| c.iter().all(|cell| cell.chars().all(|ch| "-: ".contains(ch))));
+        (has_date && separator).then_some((index, header))
+    });
+    let Some((header_line, header)) = table else {
+        let names: Vec<String> = Column::ALL.iter().map(|c| column_label(*c, language)).collect();
+        let mut block = vec![
+            format!("| {} |", names.join(" | ")),
+            "|---|---|---|---|---|---|".to_owned(),
+            format!("| {} |", Column::ALL.iter().map(|c| value(*c)).collect::<Vec<_>>().join(" | ")),
+        ];
+        // The file's trailing newline goes; a blank line keeps the table off the text above it.
+        if lines.last().is_some_and(|l| l.is_empty()) {
+            lines.pop();
+        }
+        if lines.is_empty() {
+            block.splice(0..0, [folders::content_text(language, "planTitle"), String::new()]);
+        } else if lines.last().is_some_and(|l| !l.is_empty()) {
+            block.insert(0, String::new());
+        }
+        lines.extend(block);
+        lines.push(String::new());
+        return lines.join(if crlf { "\r\n" } else { "\n" });
+    };
+    let last = rows.last().map(|r| r.line).unwrap_or(header_line + 1);
+    let mut row = vec![String::new(); header.len().max(1)];
+    for (position, name) in header.iter().enumerate() {
+        if let Some(column) = Column::ALL.into_iter().find(|c| c.headers().contains(&name.to_lowercase())) {
+            row[position] = value(column);
+        }
+    }
+    lines.insert(last + 1, format!("| {} |", row.join(" | ")));
+    lines.join(if crlf { "\r\n" } else { "\n" })
+}
+
+fn column_label(column: Column, language: &str) -> String {
+    folders::content_languages()
+        .find(|(code, _)| *code == language)
+        .and_then(|(_, entry)| entry["planColumns"][column.name()].as_str().map(str::to_owned))
+        .unwrap_or_else(|| column.name().to_owned())
+}
+
+/// The date as it is written: `2026-11-05` or `2026-11-05 18:00`.
+pub fn date_text(date: NaiveDateTime, with_time: bool) -> String {
+    date.format(if with_time { "%Y-%m-%d %H:%M" } else { "%Y-%m-%d" }).to_string()
+}
+
+fn read(path: &Path) -> String {
+    std::fs::read_to_string(path).map(|t| t.strip_prefix('\u{feff}').map(str::to_owned).unwrap_or(t)).unwrap_or_default()
+}
+
+fn write(path: &Path, text: &str, s: &Strings) -> Result<(), String> {
+    std::fs::write(path, text).map_err(|e| {
+        let name = path.file_name().map(|n| n.to_string_lossy().into_owned()).unwrap_or_default();
+        s.format("Не удалось записать %@: %@", &[&name, &e.to_string()])
+    })
+}
+
+/// Drags a date to another day, keeping its time; written into the card or the plan row.
+pub fn move_entry(entry: &Entry, day: NaiveDate, language: &str, s: &Strings) -> Result<NaiveDateTime, String> {
+    let date = day.and_time(entry.date.time());
+    match &entry.source {
+        Source::Card { path, key } => {
+            let text = read(path);
+            write(path, &folders::setting(*key, &date_text(date, entry.has_time), &text, language), s)?;
+        }
+        Source::Plan { path, line } => {
+            let moved = s.t("Строка контент-плана сдвинулась — обновите календарь").to_owned();
+            let text = read(path);
+            let mut changed = plan_setting(Column::Date, *line, &date_text(date, false), &text).ok_or(moved)?;
+            if entry.has_time {
+                if let Some(with_time) = plan_setting(Column::Time, *line, &format!("{:02}:{:02}", date.hour(), date.minute()), &changed) {
+                    changed = with_time;
+                }
+            }
+            write(path, &changed, s)?;
+        }
+    }
+    Ok(date)
+}
+
+/// A new row in a profile's own plan (made when missing), with the content language's «идея» as its status.
+pub fn add_plan_row(profile: &Profile, home: &Path, day: NaiveDate, time: &str, platform: &str, topic: &str, language: &str, s: &Strings) -> Result<(), String> {
+    let root = profile.projects_dir(home).ok_or("no projects folder")?;
+    let path = plan_path(&root, language);
+    let text = read(&path);
+    let values = [
+        (Column::Date, date_text(day.and_hms_opt(0, 0, 0).expect("midnight"), false)),
+        (Column::Time, time.trim().to_owned()),
+        (Column::Platform, platform.trim().to_owned()),
+        (Column::Topic, topic.trim().to_owned()),
+        (Column::Status, folders::content_text(language, "ideaStatus")),
+    ];
+    write(&path, &plan_appending(&values, &text, language), s)
+}
+
+/// A project's deadline or publication in its card (made when missing).
+pub fn set_project_date(project: &Path, key: Key, date: NaiveDateTime, with_time: bool, language: &str, s: &Strings) -> Result<(), String> {
+    let path = folders::card_path(project, language);
+    let name = project.file_name().map(|n| n.to_string_lossy().into_owned()).unwrap_or_default();
+    let text = if path.is_file() { read(&path) } else { folders::template(&name, None, language) };
+    write(&path, &folders::setting(key, &date_text(date, with_time), &text, language), s)
+}
+
 // MARK: - Collecting
 
 /// A profile's dates: `dates` — the cards' deadlines and publications; `contentPlan` — also the profile's own plan and
@@ -212,6 +343,7 @@ pub fn entries(profile: &Profile, home: &Path, language: &str, s: &Strings) -> V
                 title: project.name.clone(),
                 detail: project.card.get(Key::Platform).or(project.card.stage()).map(str::to_owned),
                 profile: profile.name.clone(),
+                profile_id: profile.id.clone(),
                 open_path: project.path.clone(),
                 source: Source::Card { path: folders::card_path(&project.path, language), key },
                 is_done: done.is_some() && project.card.stage() == done.as_deref(),
@@ -239,6 +371,7 @@ pub fn entries(profile: &Profile, home: &Path, language: &str, s: &Strings) -> V
                 title: row.value(Column::Topic).map(str::to_owned).unwrap_or_else(|| s.t("Без темы").to_owned()),
                 detail: (!detail.is_empty()).then_some(detail),
                 profile: profile.name.clone(),
+                profile_id: profile.id.clone(),
                 open_path: file.unwrap_or_else(|| path.clone()),
                 source: Source::Plan { path: path.clone(), line: row.line },
                 is_done: done.is_some() && row.value(Column::Status) == done.as_deref(),
@@ -366,7 +499,7 @@ mod tests {
     }
 
     fn entry(date: &str, kind: Kind, done: bool) -> Entry {
-        Entry { date: at(date), has_time: date.contains(':'), kind, title: date.into(), detail: None, profile: "p".into(), open_path: PathBuf::from("/x"), source: Source::Plan { path: PathBuf::from("/x"), line: 0 }, is_done: done }
+        Entry { date: at(date), has_time: date.contains(':'), kind, title: date.into(), detail: None, profile: "p".into(), profile_id: "p".into(), open_path: PathBuf::from("/x"), source: Source::Plan { path: PathBuf::from("/x"), line: 0 }, is_done: done }
     }
 
     #[test]
@@ -390,6 +523,54 @@ mod tests {
         assert_eq!(relative(at("2026-11-18 18:05"), true, now, &s), "сегодня 18:05");
         assert_eq!(relative(at("2026-11-19"), false, now, &s), "завтра");
         assert_eq!(relative(at("2026-11-21"), false, now, &s), "через 3 дн");
+    }
+
+    #[test]
+    fn writing_plans() {
+        let text = "# План\r\n\r\n| Дата | Время | Тема | Своя |\r\n|---|---|---|---|\r\n| 2026-11-20 | 18:00 | Анонс | x |\r\n\r\nПосле\r\n";
+        let rows = plan_rows(text);
+        let moved = plan_setting(Column::Date, rows[0].line, "2026-11-22", text).unwrap();
+        assert_eq!(moved, "# План\r\n\r\n| Дата | Время | Тема | Своя |\r\n|---|---|---|---|\r\n| 2026-11-22 | 18:00 | Анонс | x |\r\n\r\nПосле\r\n", "the rest and CRLF stay");
+        assert_eq!(plan_setting(Column::Date, 0, "x", text), None, "not a row");
+        assert_eq!(plan_setting(Column::Platform, rows[0].line, "x", text), None, "no such column");
+        let added = plan_appending(&[(Column::Date, "2026-11-25".into()), (Column::Topic, "Пост".into()), (Column::Platform, "X".into())], text, "ru");
+        assert!(added.contains("| 2026-11-20 | 18:00 | Анонс | x |\r\n| 2026-11-25 |  | Пост |  |\r\n\r\nПосле"), "{added}");
+        let fresh = plan_appending(&[(Column::Date, "2026-11-25".into()), (Column::Topic, "Пост".into())], "", "ru");
+        assert!(fresh.starts_with("# Контент-план\n\n| Дата | Время | Площадка | Тема | Статус | Файл |\n|---|"), "{fresh}");
+        assert_eq!(plan_rows(&fresh)[0].value(Column::Topic), Some("Пост"));
+        let after_notes = plan_appending(&[(Column::Date, "2026-11-25".into())], "# Notes\nsome text\n", "en");
+        assert!(after_notes.starts_with("# Notes\nsome text\n\n| Date | Time | Platform | Topic | Status | File |"), "{after_notes}");
+        assert_eq!(date_text(at("2026-11-05 18:00"), true), "2026-11-05 18:00");
+    }
+
+    #[test]
+    fn moving_and_adding() {
+        let root = std::env::temp_dir().join(format!("claudepult-calendar-move-{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&root);
+        std::fs::create_dir_all(root.join("Ролик")).unwrap();
+        std::fs::write(root.join("Ролик").join("проект.md"), "# Ролик\n\nЭтап: монтаж\nПубликация: 2026-11-22 18:00\n").unwrap();
+        let profile = Profile::from_value(&json!({"name": "Видео", "source": {"folders": {"_0": root.to_string_lossy()}}, "calendar": "contentPlan"})).unwrap();
+        let s = s();
+        let day = NaiveDate::from_ymd_opt(2026, 11, 20).unwrap();
+        add_plan_row(&profile, Path::new("/"), day, "10:00", "Telegram", "Анонс", "ru", &s).unwrap();
+        set_project_date(&root.join("Ролик"), Key::Deadline, at("2026-11-21"), false, "ru", &s).unwrap();
+        set_project_date(&root.join("Без карточки"), Key::Deadline, at("2026-11-21"), false, "ru", &s).unwrap_err();
+        let found = entries(&profile, Path::new("/"), "ru", &s);
+        assert_eq!(found.len(), 3);
+        let plan = found.iter().find(|e| e.kind == Kind::Plan).unwrap();
+        assert_eq!((plan.date, plan.detail.as_deref()), (at("2026-11-20 10:00"), Some("Telegram · идея")));
+        let publish = found.iter().find(|e| e.kind == Kind::Publish).unwrap();
+        let moved = move_entry(publish, NaiveDate::from_ymd_opt(2026, 11, 24).unwrap(), "ru", &s).unwrap();
+        assert_eq!(moved, at("2026-11-24 18:00"), "the time stays");
+        let moved_plan = move_entry(plan, NaiveDate::from_ymd_opt(2026, 11, 19).unwrap(), "ru", &s).unwrap();
+        assert_eq!(moved_plan, at("2026-11-19 10:00"));
+        let again = entries(&profile, Path::new("/"), "ru", &s);
+        assert!(again.iter().any(|e| e.kind == Kind::Publish && e.date == at("2026-11-24 18:00")));
+        assert!(again.iter().any(|e| e.kind == Kind::Plan && e.date == at("2026-11-19 10:00")));
+        assert!(again.iter().any(|e| e.kind == Kind::Deadline && e.date == at("2026-11-21")));
+        std::fs::write(root.join("контент-план.md"), "nothing here\n").unwrap();
+        assert_eq!(move_entry(plan, day, "ru", &s).unwrap_err(), "Строка контент-плана сдвинулась — обновите календарь");
+        std::fs::remove_dir_all(root).unwrap();
     }
 
     #[test]

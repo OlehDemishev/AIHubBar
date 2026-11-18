@@ -181,3 +181,168 @@ pub fn set_profile_calendar(app: AppHandle, mode: String) {
     app.state::<Calendar>().ask();
     let _ = app.emit("profiles-changed", ());
 }
+
+// MARK: - The «Календарь» window
+
+/// Opens (or brings forward) the month view.
+#[tauri::command]
+pub fn open_calendar(app: AppHandle) {
+    if let Some(panel) = app.get_webview_window("panel") {
+        let _ = panel.hide();
+    }
+    if let Some(window) = app.get_webview_window("calendar") {
+        let _ = window.unminimize();
+        let _ = window.show();
+        let _ = window.set_focus();
+        return;
+    }
+    let title = format!("{} — {}", claudepult_core::APP_NAME, strings(&app).t("Календарь"));
+    // Windows' file drop handler would take the page's own drag and drop away: dates are dragged between days here.
+    let _ = tauri::WebviewWindowBuilder::new(&app, "calendar", tauri::WebviewUrl::App("calendar.html".into()))
+        .title(title)
+        .inner_size(900.0, 640.0)
+        .min_inner_size(700.0, 480.0)
+        .disable_drag_drop_handler()
+        .center()
+        .build();
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct CalendarEntryRow {
+    id: String,
+    /// `2026-11-20`.
+    day: String,
+    /// `18:00` when the date has a time.
+    time: Option<String>,
+    kind: &'static str,
+    title: String,
+    /// «Дедлайн · Ролик · YouTube · Видео».
+    hint: String,
+    overdue: bool,
+    /// The profile's place among the profiles: its colour.
+    color: usize,
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct ProjectChoice {
+    path: String,
+    name: String,
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct CalendarProfile {
+    id: String,
+    name: String,
+    /// Its calendar has a content plan: «Запись контент-плана» can be added.
+    plan: bool,
+    projects: Vec<ProjectChoice>,
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct CalendarWindowView {
+    active: bool,
+    entries: Vec<CalendarEntryRow>,
+    profiles: Vec<CalendarProfile>,
+    current_profile: Option<String>,
+}
+
+/// Every date (or the current profile's), for the page to lay out by month or week.
+#[tauri::command]
+pub fn calendar_view(app: AppHandle, current_only: bool) -> CalendarWindowView {
+    let settings = app.state::<AppState>().settings.lock().unwrap().clone();
+    let texts = strings(&app);
+    let now = chrono::Local::now().naive_local();
+    let current = settings.current().map(|p| p.id.clone());
+    let calendar = app.state::<Calendar>();
+    let entries = calendar.state.lock().unwrap().entries.clone();
+    let color = |id: &str| settings.profiles.iter().position(|p| p.id == id).unwrap_or(0);
+    let rows = entries
+        .iter()
+        .filter(|e| !current_only || Some(&e.profile_id) == current.as_ref())
+        .map(|e| CalendarEntryRow {
+            id: e.id(),
+            day: e.date.format("%Y-%m-%d").to_string(),
+            time: e.has_time.then(|| e.date.format("%H:%M").to_string()),
+            kind: e.kind.key(),
+            title: e.title.clone(),
+            hint: [Some(e.kind.title(&texts)), Some(e.title.clone()), e.detail.clone(), Some(e.profile.clone())].into_iter().flatten().filter(|t| !t.is_empty()).collect::<Vec<_>>().join(" · "),
+            overdue: e.is_overdue(now) && e.kind == calendar::Kind::Deadline,
+            color: color(&e.profile_id),
+        })
+        .collect();
+    let home = dirs::home_dir().unwrap_or_default();
+    let profiles = settings
+        .profiles
+        .iter()
+        .filter(|p| p.calendar() != "off" && p.source().is_folders())
+        .map(|p| CalendarProfile {
+            id: p.id.clone(),
+            name: p.name.clone(),
+            plan: p.calendar() == "contentPlan",
+            projects: claudepult_core::folders::scan(&p.source(), &home, &[], language(&app))
+                .into_iter()
+                .map(|f| ProjectChoice { path: f.path.to_string_lossy().into_owned(), name: f.name })
+                .collect(),
+        })
+        .collect();
+    CalendarWindowView { active: Calendar::is_active(&app), entries: rows, profiles, current_profile: current }
+}
+
+/// «Перечитать файлы».
+#[tauri::command]
+pub async fn reread_calendar(app: AppHandle) {
+    let handle = app.clone();
+    let _ = tauri::async_runtime::spawn_blocking(move || handle.state::<Calendar>().refresh(&handle)).await;
+}
+
+fn day(text: &str) -> Result<chrono::NaiveDate, String> {
+    chrono::NaiveDate::parse_from_str(text, "%Y-%m-%d").map_err(|e| e.to_string())
+}
+
+/// A date dragged to another day: written into its card or plan row, then everything is read again.
+#[tauri::command]
+pub async fn move_calendar_entry(app: AppHandle, id: String, to: String) -> Result<(), String> {
+    let to = day(&to)?;
+    let entry = app.state::<Calendar>().state.lock().unwrap().entries.iter().find(|e| e.id() == id).cloned().ok_or("unknown date")?;
+    let moved = calendar::move_entry(&entry, to, language(&app), &strings(&app));
+    let handle = app.clone();
+    let _ = tauri::async_runtime::spawn_blocking(move || handle.state::<Calendar>().refresh(&handle)).await;
+    let date = moved?;
+    eprintln!("calendar: «{}» moved to {}", entry.title, calendar::date_text(date, entry.has_time));
+    app.state::<crate::projects::Projects>().ask(false);
+    Ok(())
+}
+
+/// A double click on a day: a plan row in the profile's own plan, or a project's deadline or publication.
+#[tauri::command]
+pub async fn add_calendar_date(app: AppHandle, profile: String, kind: String, day_text: String, time: String, platform: String, topic: String, project: String) -> Result<(), String> {
+    let on = day(&day_text)?;
+    let settings = app.state::<AppState>().settings.lock().unwrap().clone();
+    let profile = settings.profiles.iter().find(|p| p.id == profile && p.calendar() != "off" && p.source().is_folders()).ok_or("unknown profile")?;
+    let (texts, language) = (strings(&app), language(&app));
+    let home = dirs::home_dir().unwrap_or_default();
+    let clock = time.trim();
+    match kind.as_str() {
+        "plan" if profile.calendar() == "contentPlan" && !topic.trim().is_empty() => calendar::add_plan_row(profile, &home, on, clock, &platform, &topic, language, &texts)?,
+        "deadline" | "publish" => {
+            let folder = PathBuf::from(&project);
+            let known = claudepult_core::folders::scan(&profile.source(), &home, &[], language).iter().any(|p| p.path == folder);
+            if !known {
+                return Err("unknown project".into());
+            }
+            let date = claudepult_core::folders::date(&format!("{day_text} {clock}")).filter(|_| !clock.is_empty()).unwrap_or_else(|| on.and_hms_opt(0, 0, 0).expect("midnight"));
+            let key = if kind == "deadline" { claudepult_core::folders::Key::Deadline } else { claudepult_core::folders::Key::Publish };
+            calendar::set_project_date(&folder, key, date, !clock.is_empty(), language, &texts)?;
+        }
+        _ => return Err("nothing to add".into()),
+    }
+    eprintln!("calendar: {kind} added on {day_text}");
+    let handle = app.clone();
+    let _ = tauri::async_runtime::spawn_blocking(move || handle.state::<Calendar>().refresh(&handle)).await;
+    app.state::<crate::projects::Projects>().ask(false);
+    Ok(())
+}

@@ -36,7 +36,10 @@
       </div>
     </section>
     <section class="card upcoming" id="upcoming" hidden>
-      <h2 data-t="Ближайшее"></h2>
+      <div class="upcoming-head">
+        <h2 data-t="Ближайшее"></h2>
+        <button class="small" id="open-calendar" data-t="Календарь"></button>
+      </div>
       <div id="upcoming-rows"></div>
       <p class="secondary" id="upcoming-empty" data-t="На неделю дат нет." hidden></p>
       <p class="secondary" id="upcoming-more" hidden></p>
@@ -659,6 +662,7 @@
         return line;
       }));
     }
+    document.getElementById("open-calendar").onclick = () => invoke("open_calendar");
     showUpcoming();
     window.__TAURI__.event.listen("calendar-changed", showUpcoming);
     window.addEventListener("focus", showUpcoming);
