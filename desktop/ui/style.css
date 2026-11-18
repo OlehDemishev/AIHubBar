@@ -71,6 +71,10 @@ select { font: inherit; padding: 4px 6px; border-radius: 6px; border: 1px solid 
 .profile { justify-content: flex-start; }
 .profile input[type="text"] { flex: 1; min-width: 0; font: inherit; padding: 4px 6px; border-radius: 6px; border: 1px solid var(--line); background: var(--card); color: inherit; user-select: text; }
 #profile-add { margin-inline-start: auto; }
+.card-title { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 4px; }
+.card-title h2 { margin: 0; }
+.import-pending { margin-top: 8px; padding: 10px 12px; border-radius: 8px; background: color-mix(in srgb, var(--accent) 10%, transparent); }
+.import-pending p { margin: 4px 0 0; }
 #profile-switch { max-width: 160px; min-width: 0; font-size: 12px; }
 .folder .path, .folder .error { margin: 0 0 6px; overflow-wrap: anywhere; }
 .hint { border-left: 3px solid var(--accent); }

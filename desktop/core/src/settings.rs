@@ -7,7 +7,7 @@
 
 use crate::profiles::{self, Profile};
 use serde::Serialize;
-use serde_json::Value;
+use serde_json::{Map, Value};
 use std::io;
 use std::path::{Path, PathBuf};
 
@@ -24,6 +24,9 @@ pub struct Settings {
     /// In the order shown.
     pub profiles: Vec<Profile>,
     pub current_profile: Option<String>,
+    /// The Mac's settings from the last imported `.claudepult` file (`profiles::MAC_KEYS`: appearance, AI services,
+    /// Telegram, modules…): nothing here uses them, an export writes them back.
+    pub mac_settings: Map<String, Value>,
     /// `projects_dir` and `launch_mode` of a file from before profiles, for the first profile.
     #[serde(skip)]
     pub before_profiles: (Option<String>, Option<String>),
@@ -38,6 +41,7 @@ impl Default for Settings {
             pull_request_alerts: true,
             profiles: Vec::new(),
             current_profile: None,
+            mac_settings: Map::new(),
             before_profiles: (None, None),
         }
     }
@@ -70,6 +74,11 @@ impl Settings {
             pull_request_alerts: value.get("pull_request_alerts").and_then(Value::as_bool).unwrap_or(defaults.pull_request_alerts),
             profiles,
             current_profile: text("current_profile"),
+            mac_settings: value
+                .get("mac_settings")
+                .and_then(Value::as_object)
+                .map(|map| map.iter().filter(|(key, _)| profiles::MAC_KEYS.contains(&key.as_str())).map(|(k, v)| (k.clone(), v.clone())).collect())
+                .unwrap_or_default(),
             before_profiles: (text("projects_dir"), text("launch_mode").filter(|m| LAUNCH_MODES.contains(&m.as_str()))),
         }
     }
@@ -188,6 +197,57 @@ impl Settings {
     }
 }
 
+// MARK: - `.claudepult` files (the Mac's `ProfileStore` export and import)
+
+impl Settings {
+    /// «Экспорт настроек…»: every profile, the current one, and the Mac's settings kept from an import, with this
+    /// computer's background time limit.
+    pub fn export_settings(&self, now: chrono::DateTime<chrono::Utc>) -> String {
+        let mut mac = self.mac_settings.clone();
+        if let Some(general) = mac.get_mut("general").and_then(Value::as_object_mut) {
+            general.insert("backgroundTimeLimitMinutes".into(), Value::from(self.background_time_limit_minutes));
+        }
+        let current = self.current().map(|p| p.id.as_str());
+        profiles::write_bundle(profiles::SETTINGS_FORMAT, &self.profiles, current, &mac, now)
+    }
+
+    /// «Экспорт профиля…»: the current profile alone.
+    pub fn export_profile(&self, now: chrono::DateTime<chrono::Utc>) -> Option<String> {
+        let profile = self.current()?;
+        Some(profiles::write_bundle(profiles::PROFILE_FORMAT, std::slice::from_ref(profile), None, &Map::new(), now))
+    }
+
+    /// «Заменить все настройки»: the file's profiles instead of these, its current one (if the Mac shows it), its
+    /// time limit, and its Mac settings kept for the way back. A one-profile file only adds.
+    pub fn import_replace(&mut self, bundle: profiles::Bundle) -> usize {
+        if !bundle.is_settings() {
+            return self.import_add(bundle);
+        }
+        let count = bundle.profiles.len();
+        let shown = |id: &String| bundle.enabled.as_ref().is_none_or(|list| list.contains(id));
+        let current = bundle.current.clone().filter(|id| bundle.profiles.iter().any(|p| &p.id == id) && shown(id));
+        self.current_profile = current.or_else(|| bundle.profiles.iter().map(|p| p.id.clone()).find(shown)).or_else(|| bundle.profiles.first().map(|p| p.id.clone()));
+        if let Some(minutes) = bundle.time_limit_minutes() {
+            self.background_time_limit_minutes = minutes;
+        }
+        self.profiles = bundle.profiles;
+        self.mac_settings = bundle.mac;
+        count
+    }
+
+    /// «Добавить профили»: the file's profiles as new ones (fresh ids, names no other has); the current one stays.
+    pub fn import_add(&mut self, bundle: profiles::Bundle) -> usize {
+        let count = bundle.profiles.len();
+        for mut profile in bundle.profiles {
+            profile.id = crate::runs::new_id();
+            let taken: Vec<&str> = self.profiles.iter().map(|p| p.name.as_str()).collect();
+            profile.name = profiles::unique_name(&profile.name, &taken);
+            self.profiles.push(profile);
+        }
+        count
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -257,12 +317,63 @@ mod tests {
     }
 
     #[test]
+    fn claudepult_files() {
+        let now = chrono::Utc::now();
+        let mut here = Settings::default();
+        here.ensure_profile("ru");
+        here.set_launch_mode(Some("terminal".into()));
+        let own = here.current().unwrap().clone();
+
+        // A Mac file: two profiles, the second current, appearance and Telegram settings.
+        let mac = r#"{"format": "claudepult-settings", "version": 2, "exportedAt": "2026-11-17T10:00:00Z", "current": "v",
+            "enabled": ["d", "v"], "general": {"backgroundTimeLimitMinutes": 120, "telegramForBackground": false, "limitThresholds": [90], "limitAlertsToTelegram": true},
+            "appearance": {"theme": "dark"},
+            "modes": [{"id": "d", "name": "Разработчик (GitHub)", "source": {"gitBuiltin": {"projects": "~/Projects"}}},
+                      {"id": "v", "name": "Видео", "source": {"folders": {"_0": "~/Documents/Видео"}}}]}"#;
+
+        let mut added = here.clone();
+        assert_eq!(added.import_add(profiles::read_bundle(mac).unwrap()), 2);
+        let names: Vec<&str> = added.profiles.iter().map(|p| p.name.as_str()).collect();
+        assert_eq!(names, ["Разработчик (GitHub)", "Разработчик (GitHub) 2", "Видео"]);
+        assert_eq!(added.current().unwrap().id, own.id, "adding keeps the current profile");
+        assert!(added.profiles[1..].iter().all(|p| p.id != "d" && p.id != "v"), "fresh ids");
+        assert!(added.mac_settings.is_empty());
+
+        let mut replaced = here.clone();
+        assert_eq!(replaced.import_replace(profiles::read_bundle(mac).unwrap()), 2);
+        assert_eq!(replaced.profiles.len(), 2);
+        assert_eq!(replaced.current().unwrap().name, "Видео");
+        assert_eq!(replaced.projects_dir(), None, "folder projects: no git folder");
+        assert_eq!(replaced.background_time_limit_minutes, 120);
+        assert_eq!(replaced.mac_settings["appearance"]["theme"], "dark");
+
+        // Back to the Mac: its settings return, with this computer's time limit.
+        replaced.background_time_limit_minutes = 45;
+        let file: Value = serde_json::from_str(&replaced.export_settings(now)).unwrap();
+        assert_eq!(file["general"]["telegramForBackground"], false);
+        assert_eq!(file["general"]["backgroundTimeLimitMinutes"], 45);
+        assert_eq!(file["current"], "v");
+        assert_eq!(file["modes"].as_array().unwrap().len(), 2);
+
+        // A file made here has no Mac settings to send; a profile file has the current profile alone.
+        let file: Value = serde_json::from_str(&here.export_settings(now)).unwrap();
+        assert!(file.get("general").is_none() && file.get("appearance").is_none());
+        let one = profiles::read_bundle(&here.export_profile(now).unwrap()).unwrap();
+        assert_eq!(one.profiles, vec![own.clone()]);
+        let mut again = here.clone();
+        assert_eq!(again.import_replace(one), 1, "a profile file only adds");
+        assert_eq!(again.profiles.len(), 2);
+        assert_eq!(again.current().unwrap().id, own.id);
+    }
+
+    #[test]
     fn round_trip() {
         let dir = std::env::temp_dir().join(format!("claudepult-settings-{}", std::process::id()));
         let path = dir.join("settings.json");
         let mut settings = Settings { language: Some("uk".into()), tray_hint_seen: true, background_time_limit_minutes: 60, pull_request_alerts: false, ..Settings::default() };
         settings.ensure_profile("uk");
         settings.set_launch_mode(Some("terminal".into()));
+        settings.mac_settings.insert("appearance".into(), serde_json::json!({"theme": "dark"}));
         settings.save(&path).unwrap();
         assert_eq!(Settings::load(&path), settings);
         assert!(!path.with_extension("json.tmp").exists());
