@@ -50465,6 +50465,82 @@
         }
       }
     },
+    "Лимиты главного сервиса идут первыми в панели и показаны на значке в трее. «Автоматически» — Claude, а без него первый сервис, у которого есть лимиты.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تأتي حدود الخدمة الرئيسية أولًا في اللوحة وتظهر على الأيقونة في علبة النظام. «تلقائي» يعني Claude، وبدونه أول خدمة لها حدود."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Limits des Hauptdienstes stehen im Panel an erster Stelle und werden auf dem Symbol im Infobereich angezeigt. „Automatisch“ bedeutet Claude, ohne Claude der erste Dienst mit Limits."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The main service’s limits come first in the panel and are shown on the tray icon. “Automatic” is Claude, or without it the first service that has limits."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los límites del servicio principal van primero en el panel y se muestran en el icono de la bandeja. «Automático» es Claude o, sin él, el primer servicio que tenga límites."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les limites du service principal viennent en premier dans le panneau et s’affichent sur l’icône de la zone de notification. « Automatique » : Claude, ou sans lui le premier service qui a des limites."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Batas layanan utama tampil pertama di panel dan ditampilkan pada ikon di baki sistem. “Otomatis” berarti Claude, atau tanpa Claude layanan pertama yang punya batas."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I limiti del servizio principale vengono per primi nel pannello e sono mostrati sull’icona nell’area di notifica. «Automatico» è Claude o, senza di lui, il primo servizio che ha limiti."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "メインのサービスの制限はパネルの先頭に表示され、トレイのアイコンにも表示されます。「自動」は Claude、Claude がなければ制限のある最初のサービスです。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "기본 서비스의 한도는 패널 맨 위에 오고 트레이 아이콘에도 표시됩니다. ‘자동’은 Claude이며, Claude가 없으면 한도가 있는 첫 번째 서비스입니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limity głównej usługi są pierwsze w panelu i widać je na ikonie w zasobniku. „Automatycznie” to Claude, a bez niego pierwsza usługa, która ma limity."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Os limites do serviço principal vêm primeiro no painel e aparecem no ícone da bandeja. “Automático” é o Claude ou, sem ele, o primeiro serviço que tiver limites."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ліміти головного сервісу йдуть першими в панелі та показані на значку в треї. «Автоматично» — Claude, а без нього перший сервіс, у якого є ліміти."
+          }
+        }
+      }
+    },
     "Лимиты ещё не загружены — откройте панель AI Hub Bar": {
       "localizations": {
         "ar": {

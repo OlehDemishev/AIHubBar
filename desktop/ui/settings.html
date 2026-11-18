@@ -96,6 +96,11 @@
     </section>
     <section class="card services">
       <h2 data-t="Другие AI"></h2>
+      <div class="row">
+        <label for="main-service" data-t="Главный сервис"></label>
+        <select id="main-service"></select>
+      </div>
+      <p class="secondary" data-t="Лимиты главного сервиса идут первыми в панели и показаны на значке в трее. «Автоматически» — Claude, а без него первый сервис, у которого есть лимиты."></p>
       <div id="hub-sources"></div>
     </section>
     <section class="card services">
@@ -890,8 +895,20 @@
         return box;
       }));
     }
+    // «Главный сервис»: automatic, Claude, or a service that has limits now (and the saved one).
+    const mainService = document.getElementById("main-service");
+    function showMainService(view) {
+      if (document.activeElement === mainService) return;
+      mainService.replaceChildren(new Option(t("Автоматически"), ""), new Option("Claude", "claude"), ...view.choices.map((c) => new Option(c.title, c.id)));
+      mainService.value = view.choice;
+    }
+    mainService.onchange = async () => showMainService(await invoke("set_main_service", { choice: mainService.value }));
     showHubSettings(await invoke("hub_settings"));
-    window.__TAURI__.event.listen("hub-changed", async () => showHubSettings(await invoke("hub_settings")));
+    showMainService(await invoke("main_service"));
+    window.__TAURI__.event.listen("hub-changed", async () => {
+      showHubSettings(await invoke("hub_settings"));
+      showMainService(await invoke("main_service"));
+    });
 
     // «Ресурсы компьютера»: on or off, the alerts and the disk threshold.
     const resourcesModule = document.getElementById("module-resources");

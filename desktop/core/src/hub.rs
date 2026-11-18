@@ -332,6 +332,48 @@ pub fn anthropic_costs(body: &Value, s: &Strings) -> Option<Vec<Window>> {
     Some(vec![Window::new(s.t("за месяц").into(), None, Some(money(cents / 100.0)), None)])
 }
 
+// MARK: - «Главный сервис» (the Mac's `MainService`)
+
+/// Whose limits lead the panel and the tray icon.
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum Main {
+    Claude,
+    Hub(Source),
+}
+
+/// The setting's values: `""` — automatic, `claude`, or a source's id.
+pub const AUTO: &str = "";
+pub const CLAUDE: &str = "claude";
+
+fn has_limits(limit: &Limit) -> bool {
+    limit.windows.iter().any(|w| w.percent.is_some())
+}
+
+/// Claude while it has limits to show, else the first other service that has them. A chosen service is main while
+/// it has limits; without them the choice falls back to the automatic one, so the numbers never go blank because of
+/// a setting.
+pub fn pick(choice: &str, claude: bool, others: &[Limit]) -> Option<Main> {
+    if choice == CLAUDE && claude {
+        return Some(Main::Claude);
+    }
+    if let Some(chosen) = others.iter().find(|l| l.source.id() == choice && has_limits(l)) {
+        return Some(Main::Hub(chosen.source));
+    }
+    if claude {
+        return Some(Main::Claude);
+    }
+    others.iter().find(|l| has_limits(l)).map(|l| Main::Hub(l.source))
+}
+
+/// What the setting offers: the services that have limits now, and the saved one even when it has none.
+pub fn choices(saved: &str, others: &[Limit]) -> Vec<Source> {
+    let mut sources: Vec<Source> = others.iter().filter(|l| has_limits(l)).map(|l| l.source).collect();
+    if let Some(kept) = Source::parse(saved).filter(|s| !sources.contains(s)) {
+        sources.push(kept);
+    }
+    sources
+}
+
 // MARK: - «Хватит до сброса» (the Mac's `HubForecast`)
 
 /// When the limit runs out at the pace from the first reading to the latest, if before the reset; None when it lasts
@@ -680,6 +722,20 @@ mod tests {
         assert!(alerts(&limit, &[50, 80, 95], &mut notified, &s, start).is_empty(), "once per threshold");
         limit.windows[0].percent = Some(96.0);
         assert_eq!(alerts(&limit, &[50, 80, 95], &mut notified, &s, start).len(), 1, "the next threshold");
+    }
+
+    #[test]
+    fn the_main_service() {
+        let codex = Limit { source: Source::Codex, windows: vec![Window::new("5 ч".into(), Some(40.0), None, None)], error: None };
+        let router = Limit { source: Source::OpenRouter, windows: vec![Window::new("за месяц".into(), None, Some("$1".into()), None)], error: None };
+        let others = [router.clone(), codex.clone()];
+        assert_eq!(pick(AUTO, true, &others), Some(Main::Claude));
+        assert_eq!(pick(AUTO, false, &others), Some(Main::Hub(Source::Codex)), "spend alone has no limits to lead with");
+        assert_eq!(pick("codex", true, &others), Some(Main::Hub(Source::Codex)));
+        assert_eq!(pick("openRouter", true, &others), Some(Main::Claude), "a choice without limits falls back");
+        assert_eq!(pick(CLAUDE, false, &others), Some(Main::Hub(Source::Codex)), "Claude chosen but not signed in");
+        assert_eq!(pick(AUTO, false, &[router]), None);
+        assert_eq!(choices("gemini", &others), [Source::Codex, Source::Gemini], "the saved one stays offered");
     }
 
     #[test]

@@ -132,36 +132,72 @@
       invoke("refresh_projects");
       invoke("refresh_hub");
     };
-    // Other AI services' limits under Claude's: a bar per window that has a percent, else the spend as text.
-    async function showHub() {
-      const services = await invoke("hub_view");
-      document.getElementById("hub").hidden = services.length === 0;
-      document.getElementById("hub-rows").replaceChildren(...services.map((service) => {
-        const box = document.createElement("div");
-        box.className = "hub-service";
-        const name = Object.assign(document.createElement("strong"), { textContent: service.title });
-        box.append(name);
-        if (service.error) box.append(Object.assign(document.createElement("p"), { className: "warning", textContent: service.error }));
-        for (const window of service.windows) {
-          const row = document.createElement("div");
-          row.className = "hub-window";
-          row.innerHTML = `<span class="secondary label"></span><span class="bar"><span class="fill"></span></span><span class="value"></span>`;
-          row.querySelector(".label").textContent = window.title;
-          if (window.percent == null) {
-            row.querySelector(".bar").remove();
-            row.classList.add("spend");
-          } else {
-            const fill = row.querySelector(".fill");
-            fill.style.width = `${Math.min(100, Math.max(0, window.percent))}%`;
-            fill.style.background = window.color;
-          }
-          row.querySelector(".value").textContent = [window.value, window.detail].filter(Boolean).join(" · ");
-          box.append(row);
-          const notes = [window.reset, window.forecast].filter(Boolean).join(" · ");
-          if (notes) box.append(Object.assign(document.createElement("p"), { className: "secondary note", textContent: notes }));
+    // Other AI services' limits under the main ones: a bar per window that has a percent, else the spend as text.
+    function serviceRow(service) {
+      const box = document.createElement("div");
+      box.className = "hub-service";
+      box.append(Object.assign(document.createElement("strong"), { textContent: service.title }));
+      if (service.error) box.append(Object.assign(document.createElement("p"), { className: "warning", textContent: service.error }));
+      for (const window of service.windows) {
+        const row = document.createElement("div");
+        row.className = "hub-window";
+        row.innerHTML = `<span class="secondary label"></span><span class="bar"><span class="fill"></span></span><span class="value"></span>`;
+        row.querySelector(".label").textContent = window.title;
+        if (window.percent == null) {
+          row.querySelector(".bar").remove();
+          row.classList.add("spend");
+        } else {
+          const fill = row.querySelector(".fill");
+          fill.style.width = `${Math.min(100, Math.max(0, window.percent))}%`;
+          fill.style.background = window.color;
         }
-        return box;
+        row.querySelector(".value").textContent = [window.value, window.detail].filter(Boolean).join(" · ");
+        box.append(row);
+        const notes = [window.reset, window.forecast].filter(Boolean).join(" · ");
+        if (notes) box.append(Object.assign(document.createElement("p"), { className: "secondary note", textContent: notes }));
+      }
+      return box;
+    }
+    // «Главный сервис»: its limits as the rings on top; when it isn't Claude, Claude joins «Другие AI».
+    let claudeView = null;
+    let hubView = { main: "claude", services: [] };
+    function drawLimits() {
+      if (!claudeView) return;
+      const main = hubView.services.find((service) => service.id === hubView.main);
+      const claudeRings = [claudeView.session, claudeView.week].filter(Boolean);
+      let rings = claudeRings;
+      let services = hubView.services;
+      let forecast = claudeView.forecast;
+      let error = claudeView.error;
+      if (main) {
+        const windows = main.windows.filter((w) => w.percent != null).slice(0, 2);
+        rings = windows.map((w) => ({ title: `${main.title} · ${w.title}`, percent: w.value, fraction: w.percent / 100, color: w.color, reset: w.reset }));
+        forecast = windows.map((w) => w.forecast).find(Boolean) ?? null;
+        error = main.error;
+        const claude = { id: "claude", title: "Claude", error: claudeView.error, windows: [...claudeRings, ...claudeView.others].map((r) => ({ title: r.title, percent: r.fraction * 100, value: r.percent, color: r.color, detail: null, reset: r.reset, forecast: null })) };
+        services = [...(claudeRings.length || claudeView.error ? [claude] : []), ...hubView.services.filter((service) => service !== main)];
+        if (claudeView.forecast && claude.windows[0]) claude.windows[0].forecast = claudeView.forecast;
+      }
+      document.getElementById("rings").replaceChildren(...rings.map(ring));
+      const others = document.getElementById("others");
+      others.replaceChildren(...(main ? [] : claudeView.others).map((other) => {
+        const row = document.createElement("p");
+        row.className = "secondary";
+        row.textContent = `${other.title}: ${other.percent}`;
+        return row;
       }));
+      const forecastLine = document.getElementById("forecast");
+      forecastLine.hidden = !forecast;
+      forecastLine.textContent = forecast ?? "";
+      const errorLine = document.getElementById("limits-error");
+      errorLine.hidden = !error;
+      errorLine.textContent = error ?? "";
+      document.getElementById("hub").hidden = services.length === 0;
+      document.getElementById("hub-rows").replaceChildren(...services.map(serviceRow));
+    }
+    async function showHub() {
+      hubView = await invoke("hub_view");
+      drawLimits();
     }
     showHub();
     window.__TAURI__.event.listen("hub-changed", showHub);
@@ -217,23 +253,10 @@
     }
 
     async function showLimits() {
-      const view = await invoke("limits_view");
-      const rings = document.getElementById("rings");
-      rings.replaceChildren(...[view.session, view.week].filter(Boolean).map(ring));
-      const others = document.getElementById("others");
-      others.replaceChildren(...view.others.map((other) => {
-        const row = document.createElement("p");
-        row.className = "secondary";
-        row.textContent = `${other.title}: ${other.percent}`;
-        return row;
-      }));
-      const forecast = document.getElementById("forecast");
-      forecast.hidden = !view.forecast;
-      forecast.textContent = view.forecast ?? "";
-      const error = document.getElementById("limits-error");
-      error.hidden = !view.error;
-      error.textContent = view.error ?? "";
+      claudeView = await invoke("limits_view");
+      drawLimits();
     }
+
     await showLimits();
     window.__TAURI__.event.listen("limits-changed", showLimits);
 
