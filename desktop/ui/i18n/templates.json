@@ -1,6 +1,8 @@
 {
  "custom": {
   "ar": {
+   "description": "مجموعة فارغة: «مهمة خاصة» والمرحلتان «قيد العمل ← تم». وما تبقى في الإعدادات ← «ملفات التعريف».",
+   "folderHint": "مجلد كل مجلد فرعي فيه مشروع",
    "mode": {
     "calendar": "dates",
     "card": "projectMD",
@@ -31,6 +33,8 @@
    "title": "مخصّص"
   },
   "de": {
+   "description": "Eine leere Auswahl: «Eigene Aufgabe» und die Phasen «in Arbeit → fertig». Alles andere in Einstellungen → «Profile».",
+   "folderHint": "Ein Ordner, in dem jeder Unterordner ein Projekt ist",
    "mode": {
     "calendar": "dates",
     "card": "projectMD",
@@ -61,6 +65,8 @@
    "title": "Eigener"
   },
   "en": {
+   "description": "An empty set: «Custom task» and the stages «in progress → done». Everything else — in Settings → «Profiles».",
+   "folderHint": "A folder where every subfolder is a project",
    "mode": {
     "calendar": "dates",
     "card": "projectMD",
@@ -91,6 +97,8 @@
    "title": "Custom"
   },
   "es": {
+   "description": "Un conjunto vacío: «Tarea propia» y las etapas «en curso → hecho». Todo lo demás, en Ajustes → «Perfiles».",
+   "folderHint": "Una carpeta donde cada subcarpeta es un proyecto",
    "mode": {
     "calendar": "dates",
     "card": "projectMD",
@@ -121,6 +129,8 @@
    "title": "Propio"
   },
   "fr": {
+   "description": "Un ensemble vide : «Tâche libre» et les étapes «en cours → terminé». Le reste, dans Réglages → «Profils».",
+   "folderHint": "Un dossier où chaque sous-dossier est un projet",
    "mode": {
     "calendar": "dates",
     "card": "projectMD",
@@ -151,6 +161,8 @@
    "title": "Personnalisé"
   },
   "id": {
+   "description": "Set kosong: «Tugas sendiri» dan tahap «berjalan → selesai». Sisanya di Pengaturan → «Profil».",
+   "folderHint": "Folder yang setiap subfoldernya adalah proyek",
    "mode": {
     "calendar": "dates",
     "card": "projectMD",
@@ -181,6 +193,8 @@
    "title": "Kustom"
   },
   "it": {
+   "description": "Una selezione vuota: «Attività personale» e le fasi «in corso → fatto». Tutto il resto in Impostazioni → «Profili».",
+   "folderHint": "Una cartella in cui ogni sottocartella è un progetto",
    "mode": {
     "calendar": "dates",
     "card": "projectMD",
@@ -211,6 +225,8 @@
    "title": "Personale"
   },
   "ja": {
+   "description": "空の組み合わせ: 「自分のタスク」と段階「進行中 → 完了」。ほかは設定 → 「プロファイル」で。",
+   "folderHint": "各サブフォルダーが 1 つのプロジェクトになるフォルダー",
    "mode": {
     "calendar": "dates",
     "card": "projectMD",
@@ -241,6 +257,8 @@
    "title": "カスタム"
   },
   "ko": {
+   "description": "빈 구성: «내 작업»과 단계 «진행 중 → 완료». 나머지는 설정 → «프로필»에서.",
+   "folderHint": "하위 폴더마다 프로젝트 하나가 되는 폴더",
    "mode": {
     "calendar": "dates",
     "card": "projectMD",
@@ -271,6 +289,8 @@
    "title": "사용자 지정"
   },
   "pl": {
+   "description": "Pusty zestaw: «Własne zadanie» i etapy «w toku → gotowe». Resztę ustawisz w Ustawieniach → «Profile».",
+   "folderHint": "Folder, w którym każdy podfolder to projekt",
    "mode": {
     "calendar": "dates",
     "card": "projectMD",
@@ -301,6 +321,8 @@
    "title": "Własny"
   },
   "pt-BR": {
+   "description": "Um conjunto vazio: «Tarefa própria» e as etapas «em andamento → pronto». O resto, em Ajustes → «Perfis».",
+   "folderHint": "Uma pasta em que cada subpasta é um projeto",
    "mode": {
     "calendar": "dates",
     "card": "projectMD",
@@ -331,6 +353,8 @@
    "title": "Personalizado"
   },
   "ru": {
+   "description": "Пустой набор: «Своя задача» и этапы «в работе → готово». Остальное — в Настройках → «Профили».",
+   "folderHint": "Папка, где каждая подпапка — проект",
    "mode": {
     "calendar": "dates",
     "card": "projectMD",
@@ -361,6 +385,8 @@
    "title": "Свой"
   },
   "uk": {
+   "description": "Порожній набір: «Своє завдання» й етапи «у роботі → готово». Решта — в Налаштуваннях → «Профілі».",
+   "folderHint": "Папка, де кожна підпапка — проєкт",
    "mode": {
     "calendar": "dates",
     "card": "projectMD",
@@ -393,6 +419,8 @@
  },
  "developer": {
   "ar": {
+   "description": "مستودعات git: الفروع، التغييرات دون commit، PR وCI، STATUS.md؛ «الخطوة التالية» و«مهمة خاصة» و«إكمال» وفق قواعد المشروع (CLAUDE.md / AGENTS.md).",
+   "folderHint": "المجلد الذي توجد فيه مستودعاتك",
    "mode": {
     "calendar": "off",
     "card": "statusMD",
@@ -420,6 +448,8 @@
    "title": "مطوّر (GitHub)"
   },
   "de": {
+   "description": "Git-Repositorys: Branches, nicht committete Änderungen, PRs und CI, STATUS.md; «Nächster Schritt», «Eigene Aufgabe», «Abschließen» nach den Regeln des Projekts (CLAUDE.md / AGENTS.md).",
+   "folderHint": "Der Ordner, in dem Ihre Repositorys liegen",
    "mode": {
     "calendar": "off",
     "card": "statusMD",
@@ -447,6 +477,8 @@
    "title": "Entwickler (GitHub)"
   },
   "en": {
+   "description": "Git repositories: branches, uncommitted changes, PRs and CI, STATUS.md; «Next step», «Custom task», «Finish» following the project's rules (CLAUDE.md / AGENTS.md).",
+   "folderHint": "The folder your repositories are in",
    "mode": {
     "calendar": "off",
     "card": "statusMD",
@@ -474,6 +506,8 @@
    "title": "Developer (GitHub)"
   },
   "es": {
+   "description": "Repositorios git: ramas, cambios sin commit, PR y CI, STATUS.md; «Siguiente paso», «Tarea propia», «Terminar» según las reglas del proyecto (CLAUDE.md / AGENTS.md).",
+   "folderHint": "La carpeta donde están tus repositorios",
    "mode": {
     "calendar": "off",
     "card": "statusMD",
@@ -501,6 +535,8 @@
    "title": "Desarrollador (GitHub)"
   },
   "fr": {
+   "description": "Dépôts git : branches, modifications non commitées, PR et CI, STATUS.md ; «Étape suivante», «Tâche libre», «Terminer» selon les règles du projet (CLAUDE.md / AGENTS.md).",
+   "folderHint": "Le dossier où se trouvent vos dépôts",
    "mode": {
     "calendar": "off",
     "card": "statusMD",
@@ -528,6 +564,8 @@
    "title": "Développeur (GitHub)"
   },
   "id": {
+   "description": "Repositori git: branch, perubahan belum di-commit, PR dan CI, STATUS.md; «Langkah berikutnya», «Tugas sendiri», «Selesaikan» sesuai aturan proyek (CLAUDE.md / AGENTS.md).",
+   "folderHint": "Folder tempat repositori Anda berada",
    "mode": {
     "calendar": "off",
     "card": "statusMD",
@@ -555,6 +593,8 @@
    "title": "Developer (GitHub)"
   },
   "it": {
+   "description": "Repository git: branch, modifiche senza commit, PR e CI, STATUS.md; «Prossimo passo», «Attività personale», «Concludi» secondo le regole del progetto (CLAUDE.md / AGENTS.md).",
+   "folderHint": "La cartella dove si trovano i tuoi repository",
    "mode": {
     "calendar": "off",
     "card": "statusMD",
@@ -582,6 +622,8 @@
    "title": "Sviluppatore (GitHub)"
   },
   "ja": {
+   "description": "git リポジトリ: ブランチ、未コミットの変更、PR と CI、STATUS.md。プロジェクトのルール (CLAUDE.md / AGENTS.md) に沿った「次の一歩」「自分のタスク」「仕上げる」。",
+   "folderHint": "リポジトリがあるフォルダー",
    "mode": {
     "calendar": "off",
     "card": "statusMD",
@@ -609,6 +651,8 @@
    "title": "開発者 (GitHub)"
   },
   "ko": {
+   "description": "git 저장소: 브랜치, 커밋 안 된 변경, PR과 CI, STATUS.md. 프로젝트 규칙 (CLAUDE.md / AGENTS.md)에 따른 «다음 단계», «내 작업», «마무리».",
+   "folderHint": "저장소가 있는 폴더",
    "mode": {
     "calendar": "off",
     "card": "statusMD",
@@ -636,6 +680,8 @@
    "title": "개발자 (GitHub)"
   },
   "pl": {
+   "description": "Repozytoria git: gałęzie, zmiany bez commita, PR i CI, STATUS.md; «Następny krok», «Własne zadanie», «Zakończ» według zasad projektu (CLAUDE.md / AGENTS.md).",
+   "folderHint": "Folder, w którym są Twoje repozytoria",
    "mode": {
     "calendar": "off",
     "card": "statusMD",
@@ -663,6 +709,8 @@
    "title": "Programista (GitHub)"
   },
   "pt-BR": {
+   "description": "Repositórios git: branches, mudanças sem commit, PRs e CI, STATUS.md; «Próximo passo», «Tarefa própria», «Concluir» seguindo as regras do projeto (CLAUDE.md / AGENTS.md).",
+   "folderHint": "A pasta onde ficam seus repositórios",
    "mode": {
     "calendar": "off",
     "card": "statusMD",
@@ -690,6 +738,8 @@
    "title": "Desenvolvedor (GitHub)"
   },
   "ru": {
+   "description": "Git-репозитории: ветки, незакоммиченное, PR и CI, STATUS.md; «Следующий шаг», «Своя задача», «Завершить» по правилам проекта (CLAUDE.md / AGENTS.md).",
+   "folderHint": "Папка, в которой лежат ваши репозитории",
    "mode": {
     "calendar": "off",
     "card": "statusMD",
@@ -717,6 +767,8 @@
    "title": "Разработчик (GitHub)"
   },
   "uk": {
+   "description": "Git-репозиторії: гілки, незакомічене, PR і CI, STATUS.md; «Наступний крок», «Своє завдання», «Завершити» за правилами проєкту (CLAUDE.md / AGENTS.md).",
+   "folderHint": "Папка, у якій лежать ваші репозиторії",
    "mode": {
     "calendar": "off",
     "card": "statusMD",
@@ -746,6 +798,8 @@
  },
  "research": {
   "ar": {
+   "description": "مجلد لكل موضوع مع المصادر (PDF وروابط وملاحظات)؛ تلخيصات، اقتباسات، جدول جامع، ثغرات، خطة؛ يمكن لـ Claude البحث في الويب.",
+   "folderHint": "مجلد كل مجلد فرعي فيه موضوع",
    "mode": {
     "calendar": "dates",
     "card": "projectMD",
@@ -819,6 +873,8 @@
    "title": "بحث ودراسة"
   },
   "de": {
+   "description": "Ein Ordner pro Thema mit Quellen (PDFs, Links, Notizen); Zusammenfassungen, Zitate, Übersichtstabelle, Lücken, Plan; Claude darf im Web suchen.",
+   "folderHint": "Ein Ordner, in dem jeder Unterordner ein Thema ist",
    "mode": {
     "calendar": "dates",
     "card": "projectMD",
@@ -892,6 +948,8 @@
    "title": "Recherche und Studium"
   },
   "en": {
+   "description": "A folder per topic with sources (PDFs, links, notes); summaries, quotes, a summary table, gaps, a plan; Claude may search the web.",
+   "folderHint": "A folder where every subfolder is a topic",
    "mode": {
     "calendar": "dates",
     "card": "projectMD",
@@ -965,6 +1023,8 @@
    "title": "Research and study"
   },
   "es": {
+   "description": "Una carpeta por tema con fuentes (PDF, enlaces, notas); resúmenes, citas, tabla resumen, lagunas, plan; Claude puede buscar en internet.",
+   "folderHint": "Una carpeta donde cada subcarpeta es un tema",
    "mode": {
     "calendar": "dates",
     "card": "projectMD",
@@ -1038,6 +1098,8 @@
    "title": "Investigación y estudio"
   },
   "fr": {
+   "description": "Un dossier par sujet avec des sources (PDF, liens, notes) ; synthèses, citations, tableau récapitulatif, lacunes, plan ; Claude peut chercher sur internet.",
+   "folderHint": "Un dossier où chaque sous-dossier est un sujet",
    "mode": {
     "calendar": "dates",
     "card": "projectMD",
@@ -1111,6 +1173,8 @@
    "title": "Recherche et études"
   },
   "id": {
+   "description": "Satu folder per topik dengan sumber (PDF, tautan, catatan); ringkasan, kutipan, tabel ringkasan, celah, rencana; Claude boleh mencari di web.",
+   "folderHint": "Folder yang setiap subfoldernya adalah topik",
    "mode": {
     "calendar": "dates",
     "card": "projectMD",
@@ -1184,6 +1248,8 @@
    "title": "Riset dan belajar"
   },
   "it": {
+   "description": "Una cartella per tema con fonti (PDF, link, note); sintesi, citazioni, tabella riassuntiva, lacune, piano; Claude può cercare sul web.",
+   "folderHint": "Una cartella in cui ogni sottocartella è un tema",
    "mode": {
     "calendar": "dates",
     "card": "projectMD",
@@ -1257,6 +1323,8 @@
    "title": "Ricerca e studio"
   },
   "ja": {
+   "description": "テーマごとに 1 フォルダー (PDF、リンク、メモ)。要約、引用、一覧表、足りない点、計画。Claude はウェブ検索もできます。",
+   "folderHint": "各サブフォルダーが 1 つのテーマになるフォルダー",
    "mode": {
     "calendar": "dates",
     "card": "projectMD",
@@ -1330,6 +1398,8 @@
    "title": "リサーチと学習"
   },
   "ko": {
+   "description": "주제마다 자료 폴더 하나 (PDF, 링크, 메모). 요약, 인용, 요약표, 빈 곳, 계획. Claude가 웹 검색도 할 수 있습니다.",
+   "folderHint": "하위 폴더마다 주제 하나가 되는 폴더",
    "mode": {
     "calendar": "dates",
     "card": "projectMD",
@@ -1403,6 +1473,8 @@
    "title": "리서치와 학습"
   },
   "pl": {
+   "description": "Jeden folder na temat ze źródłami (PDF, linki, notatki); streszczenia, cytaty, tabela zbiorcza, luki, plan; Claude może szukać w sieci.",
+   "folderHint": "Folder, w którym każdy podfolder to temat",
    "mode": {
     "calendar": "dates",
     "card": "projectMD",
@@ -1476,6 +1548,8 @@
    "title": "Research i nauka"
   },
   "pt-BR": {
+   "description": "Uma pasta por tema com fontes (PDFs, links, notas); resumos, citações, tabela-resumo, lacunas, plano; o Claude pode pesquisar na internet.",
+   "folderHint": "Uma pasta em que cada subpasta é um tema",
    "mode": {
     "calendar": "dates",
     "card": "projectMD",
@@ -1549,6 +1623,8 @@
    "title": "Pesquisa e estudo"
   },
   "ru": {
+   "description": "Папка на тему с источниками (PDF, ссылки, заметки); конспекты, цитаты, сводная таблица, пробелы, план; Claude может искать в интернете.",
+   "folderHint": "Папка, где каждая подпапка — тема",
    "mode": {
     "calendar": "dates",
     "card": "projectMD",
@@ -1622,6 +1698,8 @@
    "title": "Ресёрч и учёба"
   },
   "uk": {
+   "description": "Папка на тему з джерелами (PDF, посилання, нотатки); конспекти, цитати, зведена таблиця, прогалини, план; Claude може шукати в інтернеті.",
+   "folderHint": "Папка, де кожна підпапка — тема",
    "mode": {
     "calendar": "dates",
     "card": "projectMD",
@@ -1697,6 +1775,8 @@
  },
  "social": {
   "ar": {
+   "description": "المشروع = حملة أو منصة؛ خطة المحتوى في التقويم؛ منشورات لكل منصة، إعلانات، عناوين A/B، ردود على التعليقات، خطة الأسبوع.",
+   "folderHint": "مجلد كل مجلد فرعي فيه حملة؛ ويمكن وضع خطة-المحتوى.md هنا أيضًا",
    "mode": {
     "calendar": "contentPlan",
     "card": "projectMD",
@@ -1776,6 +1856,8 @@
    "title": "وسائل التواصل والتسويق"
   },
   "de": {
+   "description": "Ein Projekt = eine Kampagne oder Plattform; Inhaltsplan im Kalender; Posts pro Plattform, Anzeigen, A/B-Titel, Antworten auf Kommentare, Wochenplan.",
+   "folderHint": "Ein Ordner, in dem jeder Unterordner eine Kampagne ist; inhaltsplan.md kann auch hier liegen",
    "mode": {
     "calendar": "contentPlan",
     "card": "projectMD",
@@ -1855,6 +1937,8 @@
    "title": "Social Media und Marketing"
   },
   "en": {
+   "description": "A project = a campaign or a platform; a content plan in the calendar; posts per platform, ads, A/B headlines, replies to comments, a plan for the week.",
+   "folderHint": "A folder where every subfolder is a campaign; content-plan.md can live here too",
    "mode": {
     "calendar": "contentPlan",
     "card": "projectMD",
@@ -1934,6 +2018,8 @@
    "title": "Social media and marketing"
   },
   "es": {
+   "description": "Un proyecto = una campaña o una plataforma; plan de contenido en el calendario; publicaciones por plataforma, anuncios, titulares A/B, respuestas a comentarios, plan semanal.",
+   "folderHint": "Una carpeta donde cada subcarpeta es una campaña; plan-de-contenido.md también puede ir aquí",
    "mode": {
     "calendar": "contentPlan",
     "card": "projectMD",
@@ -2013,6 +2099,8 @@
    "title": "Redes sociales y marketing"
   },
   "fr": {
+   "description": "Un projet = une campagne ou une plateforme ; plan de contenu dans le calendrier ; posts par plateforme, publicités, titres A/B, réponses aux commentaires, plan de la semaine.",
+   "folderHint": "Un dossier où chaque sous-dossier est une campagne ; plan-de-contenu.md peut aussi être ici",
    "mode": {
     "calendar": "contentPlan",
     "card": "projectMD",
@@ -2092,6 +2180,8 @@
    "title": "Réseaux sociaux et marketing"
   },
   "id": {
+   "description": "Satu proyek = satu kampanye atau platform; rencana konten di kalender; postingan per platform, iklan, judul A/B, balasan komentar, rencana mingguan.",
+   "folderHint": "Folder yang setiap subfoldernya adalah kampanye; rencana-konten.md juga bisa di sini",
    "mode": {
     "calendar": "contentPlan",
     "card": "projectMD",
@@ -2171,6 +2261,8 @@
    "title": "Media sosial dan pemasaran"
   },
   "it": {
+   "description": "Un progetto = una campagna o una piattaforma; piano dei contenuti nel calendario; post per piattaforma, annunci, titoli A/B, risposte ai commenti, piano della settimana.",
+   "folderHint": "Una cartella in cui ogni sottocartella è una campagna; piano-contenuti.md può stare anche qui",
    "mode": {
     "calendar": "contentPlan",
     "card": "projectMD",
@@ -2250,6 +2342,8 @@
    "title": "Social e marketing"
   },
   "ja": {
+   "description": "1 プロジェクト = 1 キャンペーンまたはプラットフォーム。カレンダーにコンテンツ計画。プラットフォーム別の投稿、広告、A/B 見出し、コメントへの返信、週の計画。",
+   "folderHint": "各サブフォルダーが 1 つのキャンペーンになるフォルダー。コンテンツ計画.md もここに置けます",
    "mode": {
     "calendar": "contentPlan",
     "card": "projectMD",
@@ -2329,6 +2423,8 @@
    "title": "SNS とマーケティング"
   },
   "ko": {
+   "description": "프로젝트 하나 = 캠페인이나 플랫폼 하나. 캘린더의 콘텐츠 계획. 플랫폼별 게시물, 광고, A/B 제목, 댓글 답변, 주간 계획.",
+   "folderHint": "하위 폴더마다 캠페인 하나가 되는 폴더. 콘텐츠-계획.md도 여기 둘 수 있습니다",
    "mode": {
     "calendar": "contentPlan",
     "card": "projectMD",
@@ -2408,6 +2504,8 @@
    "title": "소셜 미디어와 마케팅"
   },
   "pl": {
+   "description": "Projekt = kampania lub platforma; plan treści w kalendarzu; posty na platformy, reklamy, tytuły A/B, odpowiedzi na komentarze, plan na tydzień.",
+   "folderHint": "Folder, w którym każdy podfolder to kampania; plan-tresci.md może też być tutaj",
    "mode": {
     "calendar": "contentPlan",
     "card": "projectMD",
@@ -2487,6 +2585,8 @@
    "title": "Media społecznościowe i marketing"
   },
   "pt-BR": {
+   "description": "Um projeto = uma campanha ou plataforma; plano de conteúdo no calendário; posts por plataforma, anúncios, títulos A/B, respostas a comentários, plano da semana.",
+   "folderHint": "Uma pasta em que cada subpasta é uma campanha; plano-de-conteudo.md também pode ficar aqui",
    "mode": {
     "calendar": "contentPlan",
     "card": "projectMD",
@@ -2566,6 +2666,8 @@
    "title": "Redes sociais e marketing"
   },
   "ru": {
+   "description": "Проект = кампания или площадка; контент-план в календаре; посты под площадки, реклама, A/B-заголовки, ответы на комментарии, план на неделю.",
+   "folderHint": "Папка, где каждая подпапка — кампания; контент-план.md можно положить и сюда",
    "mode": {
     "calendar": "contentPlan",
     "card": "projectMD",
@@ -2645,6 +2747,8 @@
    "title": "Соцсети и маркетинг"
   },
   "uk": {
+   "description": "Проєкт = кампанія або майданчик; контент-план у календарі; пости під майданчики, реклама, A/B-заголовки, відповіді на коментарі, план на тиждень.",
+   "folderHint": "Папка, де кожна підпапка — кампанія; контент-план.md може лежати й тут",
    "mode": {
     "calendar": "contentPlan",
     "card": "projectMD",
@@ -2726,6 +2830,8 @@
  },
  "texts": {
   "ar": {
+   "description": "مجلد لكل نص؛ مراحل من الفكرة إلى النشر؛ الكلمات ومدة القراءة؛ تحرير، تدقيق، نبرة أخرى، اختصار، SEO، تقسيم إلى منشورات.",
+   "folderHint": "مجلد كل مجلد فرعي فيه مقال أو عدد",
    "mode": {
     "calendar": "dates",
     "card": "projectMD",
@@ -2803,6 +2909,8 @@
    "title": "نصوص (مقالات، مدوّنة، نشرة)"
   },
   "de": {
+   "description": "Ein Ordner pro Text; Phasen von der Idee bis zur Veröffentlichung; Wörter und Lesezeit; Lektorat, Korrektorat, anderer Ton, Kürzen, SEO, Aufteilen in Posts.",
+   "folderHint": "Ein Ordner, in dem jeder Unterordner ein Artikel oder eine Ausgabe ist",
    "mode": {
     "calendar": "dates",
     "card": "projectMD",
@@ -2880,6 +2988,8 @@
    "title": "Texte (Artikel, Blog, Newsletter)"
   },
   "en": {
+   "description": "A folder per piece; stages from idea to publication; words and reading time; editing, proofreading, another tone, shortening, SEO, splitting into posts.",
+   "folderHint": "A folder where every subfolder is an article or an issue",
    "mode": {
     "calendar": "dates",
     "card": "projectMD",
@@ -2957,6 +3067,8 @@
    "title": "Writing (articles, blog, newsletter)"
   },
   "es": {
+   "description": "Una carpeta por texto; etapas desde la idea hasta la publicación; palabras y tiempo de lectura; edición, corrección, otro tono, acortar, SEO, dividir en publicaciones.",
+   "folderHint": "Una carpeta donde cada subcarpeta es un artículo o un número",
    "mode": {
     "calendar": "dates",
     "card": "projectMD",
@@ -3034,6 +3146,8 @@
    "title": "Textos (artículos, blog, boletín)"
   },
   "fr": {
+   "description": "Un dossier par texte ; étapes de l'idée à la publication ; mots et temps de lecture ; révision, correction, autre ton, raccourcir, SEO, découpage en posts.",
+   "folderHint": "Un dossier où chaque sous-dossier est un article ou un numéro",
    "mode": {
     "calendar": "dates",
     "card": "projectMD",
@@ -3111,6 +3225,8 @@
    "title": "Textes (articles, blog, newsletter)"
   },
   "id": {
+   "description": "Satu folder per tulisan; tahap dari ide sampai terbit; jumlah kata dan waktu baca; penyuntingan, koreksi, nada lain, meringkas, SEO, memecah jadi postingan.",
+   "folderHint": "Folder yang setiap subfoldernya adalah artikel atau edisi",
    "mode": {
     "calendar": "dates",
     "card": "projectMD",
@@ -3188,6 +3304,8 @@
    "title": "Tulisan (artikel, blog, buletin)"
   },
   "it": {
+   "description": "Una cartella per testo; fasi dall'idea alla pubblicazione; parole e tempo di lettura; editing, correzione di bozze, altro tono, accorciare, SEO, suddivisione in post.",
+   "folderHint": "Una cartella in cui ogni sottocartella è un articolo o un numero",
    "mode": {
     "calendar": "dates",
     "card": "projectMD",
@@ -3265,6 +3383,8 @@
    "title": "Testi (articoli, blog, newsletter)"
   },
   "ja": {
+   "description": "文章ごとに 1 フォルダー。アイデアから公開までの段階、語数と読む時間、編集、校正、別のトーン、短縮、SEO、投稿への分割。",
+   "folderHint": "各サブフォルダーが 1 本の記事や号になるフォルダー",
    "mode": {
     "calendar": "dates",
     "card": "projectMD",
@@ -3342,6 +3462,8 @@
    "title": "文章 (記事、ブログ、ニュースレター)"
   },
   "ko": {
+   "description": "글마다 폴더 하나. 아이디어부터 게시까지의 단계, 단어 수와 읽는 시간, 편집, 교정, 다른 어조, 줄이기, SEO, 게시물로 나누기.",
+   "folderHint": "하위 폴더마다 기사나 호 하나가 되는 폴더",
    "mode": {
     "calendar": "dates",
     "card": "projectMD",
@@ -3419,6 +3541,8 @@
    "title": "글쓰기 (기사, 블로그, 뉴스레터)"
   },
   "pl": {
+   "description": "Jeden folder na tekst; etapy od pomysłu do publikacji; słowa i czas czytania; redakcja, korekta, inny ton, skracanie, SEO, podział na posty.",
+   "folderHint": "Folder, w którym każdy podfolder to artykuł lub wydanie",
    "mode": {
     "calendar": "dates",
     "card": "projectMD",
@@ -3496,6 +3620,8 @@
    "title": "Teksty (artykuły, blog, newsletter)"
   },
   "pt-BR": {
+   "description": "Uma pasta por texto; etapas da ideia à publicação; palavras e tempo de leitura; edição, revisão, outro tom, encurtar, SEO, dividir em posts.",
+   "folderHint": "Uma pasta em que cada subpasta é um artigo ou uma edição",
    "mode": {
     "calendar": "dates",
     "card": "projectMD",
@@ -3573,6 +3699,8 @@
    "title": "Textos (artigos, blog, newsletter)"
   },
   "ru": {
+   "description": "Папка на текст; этапы от идеи до публикации; слова и время чтения; редактура, корректура, другой тон, сокращение, SEO, нарезка в посты.",
+   "folderHint": "Папка, где каждая подпапка — статья или выпуск",
    "mode": {
     "calendar": "dates",
     "card": "projectMD",
@@ -3650,6 +3778,8 @@
    "title": "Тексты (статьи, блог, рассылка)"
   },
   "uk": {
+   "description": "Папка на текст; етапи від ідеї до публікації; слова й час читання; редагування, коректура, інший тон, скорочення, SEO, нарізка в пости.",
+   "folderHint": "Папка, де кожна підпапка — стаття або випуск",
    "mode": {
     "calendar": "dates",
     "card": "projectMD",
@@ -3729,6 +3859,8 @@
  },
  "video": {
   "ar": {
+   "description": "مجلد لكل فيديو؛ مراحل من الفكرة إلى النشر؛ الكلمات والمدة؛ افتتاحيات، Shorts، الوصف والطوابع الزمنية، العناوين، التحقق من الحقائق، الترجمة؛ المواعيد النهائية في التقويم.",
+   "folderHint": "مجلد كل مجلد فرعي فيه فيديو",
    "mode": {
     "calendar": "dates",
     "card": "projectMD",
@@ -3809,6 +3941,8 @@
    "title": "فيديو (YouTube وShorts وReels)"
   },
   "de": {
+   "description": "Ein Ordner pro Video; Phasen von der Idee bis zur Veröffentlichung; Wörter und Dauer; Hooks, Shorts, Beschreibung und Zeitmarken, Titel, Faktencheck, Übersetzung; Fristen im Kalender.",
+   "folderHint": "Ein Ordner, in dem jeder Unterordner ein Video ist",
    "mode": {
     "calendar": "dates",
     "card": "projectMD",
@@ -3889,6 +4023,8 @@
    "title": "Video (YouTube, Shorts, Reels)"
   },
   "en": {
+   "description": "A folder per video; stages from idea to publication; words and duration; hooks, Shorts, description and timestamps, titles, fact check, translation; deadlines in the calendar.",
+   "folderHint": "A folder where every subfolder is a video",
    "mode": {
     "calendar": "dates",
     "card": "projectMD",
@@ -3969,6 +4105,8 @@
    "title": "Video (YouTube, Shorts, Reels)"
   },
   "es": {
+   "description": "Una carpeta por vídeo; etapas desde la idea hasta la publicación; palabras y duración; ganchos, Shorts, descripción y marcas de tiempo, títulos, verificación de datos, traducción; fechas límite en el calendario.",
+   "folderHint": "Una carpeta donde cada subcarpeta es un vídeo",
    "mode": {
     "calendar": "dates",
     "card": "projectMD",
@@ -4049,6 +4187,8 @@
    "title": "Vídeo (YouTube, Shorts, Reels)"
   },
   "fr": {
+   "description": "Un dossier par vidéo ; étapes de l'idée à la publication ; mots et durée ; accroches, Shorts, description et horodatages, titres, vérification des faits, traduction ; échéances dans le calendrier.",
+   "folderHint": "Un dossier où chaque sous-dossier est une vidéo",
    "mode": {
     "calendar": "dates",
     "card": "projectMD",
@@ -4129,6 +4269,8 @@
    "title": "Vidéo (YouTube, Shorts, Reels)"
   },
   "id": {
+   "description": "Satu folder per video; tahap dari ide sampai terbit; jumlah kata dan durasi; hook, Shorts, deskripsi dan stempel waktu, judul, cek fakta, terjemahan; tenggat di kalender.",
+   "folderHint": "Folder yang setiap subfoldernya adalah video",
    "mode": {
     "calendar": "dates",
     "card": "projectMD",
@@ -4209,6 +4351,8 @@
    "title": "Video (YouTube, Shorts, Reels)"
   },
   "it": {
+   "description": "Una cartella per video; fasi dall'idea alla pubblicazione; parole e durata; hook, Shorts, descrizione e timestamp, titoli, verifica dei fatti, traduzione; scadenze nel calendario.",
+   "folderHint": "Una cartella in cui ogni sottocartella è un video",
    "mode": {
     "calendar": "dates",
     "card": "projectMD",
@@ -4289,6 +4433,8 @@
    "title": "Video (YouTube, Shorts, Reels)"
   },
   "ja": {
+   "description": "動画ごとに 1 フォルダー。アイデアから公開までの段階、語数と尺、フック、Shorts、説明文とタイムスタンプ、タイトル、ファクトチェック、翻訳。締め切りはカレンダーに。",
+   "folderHint": "各サブフォルダーが 1 本の動画になるフォルダー",
    "mode": {
     "calendar": "dates",
     "card": "projectMD",
@@ -4369,6 +4515,8 @@
    "title": "動画 (YouTube、Shorts、Reels)"
   },
   "ko": {
+   "description": "동영상마다 폴더 하나. 아이디어부터 게시까지의 단계, 단어 수와 길이, 훅, Shorts, 설명과 타임스탬프, 제목, 사실 확인, 번역. 마감은 캘린더에.",
+   "folderHint": "하위 폴더마다 동영상 하나가 되는 폴더",
    "mode": {
     "calendar": "dates",
     "card": "projectMD",
@@ -4449,6 +4597,8 @@
    "title": "동영상 (YouTube, Shorts, Reels)"
   },
   "pl": {
+   "description": "Jeden folder na film; etapy od pomysłu do publikacji; słowa i czas trwania; hooki, Shorts, opis i znaczniki czasu, tytuły, sprawdzanie faktów, tłumaczenie; terminy w kalendarzu.",
+   "folderHint": "Folder, w którym każdy podfolder to film",
    "mode": {
     "calendar": "dates",
     "card": "projectMD",
@@ -4529,6 +4679,8 @@
    "title": "Wideo (YouTube, Shorts, Reels)"
   },
   "pt-BR": {
+   "description": "Uma pasta por vídeo; etapas da ideia à publicação; palavras e duração; ganchos, Shorts, descrição e marcações de tempo, títulos, checagem de fatos, tradução; prazos no calendário.",
+   "folderHint": "Uma pasta em que cada subpasta é um vídeo",
    "mode": {
     "calendar": "dates",
     "card": "projectMD",
@@ -4609,6 +4761,8 @@
    "title": "Vídeo (YouTube, Shorts, Reels)"
   },
   "ru": {
+   "description": "Папка на ролик; этапы от идеи до публикации; слова и хронометраж; хуки, Shorts, описание и таймкоды, заголовки, проверка фактов, перевод; дедлайны в календаре.",
+   "folderHint": "Папка, где каждая подпапка — ролик",
    "mode": {
     "calendar": "dates",
     "card": "projectMD",
@@ -4689,6 +4843,8 @@
    "title": "Видео (YouTube, Shorts, Reels)"
   },
   "uk": {
+   "description": "Папка на ролик; етапи від ідеї до публікації; слова й хронометраж; хуки, Shorts, опис і таймкоди, заголовки, перевірка фактів, переклад; дедлайни в календарі.",
+   "folderHint": "Папка, де кожна підпапка — ролик",
    "mode": {
     "calendar": "dates",
     "card": "projectMD",

@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>AI Hub Bar</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="assistant-window">
+  <header class="assistant-head">
+    <span class="secondary" id="step-count"></span>
+    <h1 id="step-title"></h1>
+    <progress id="step-progress" max="1" value="0"></progress>
+  </header>
+  <main class="assistant-body" id="body"></main>
+  <p class="error assistant-error" id="error" hidden></p>
+  <footer class="assistant-nav">
+    <button id="back" data-t="Назад"></button>
+    <span class="spacer"></span>
+    <button class="prominent" id="next"></button>
+  </footer>
+  <script type="module">
+    import { loadTexts, invoke, t } from "./app.js";
+    await loadTexts();
+    const start = await invoke("assistant_start");
+
+    // The draft is the Mac's profile JSON; nothing is saved until «Готово».
+    let templateId = null;
+    let draft = structuredClone(start.blank);
+    let reminderHours = start.reminderHours;
+    let chosenFolder = null;
+    let look = null;
+    let step = "template";
+
+    const folderOf = (source) => source?.gitBuiltin?.projects ?? source?.gitReport?.projects ?? source?.folders?._0 ?? source?.inbox?._0 ?? null;
+    const isFolders = () => !!(draft.source?.folders || draft.source?.inbox);
+    const steps = () => ["template", "folder", ...(isFolders() ? ["stages", "metrics", "calendar"] : []), "service", "launch", "name"];
+    const titles = {
+      template: t("Чем вы занимаетесь?"), folder: t("Где лежат проекты?"), stages: t("Этапы"), metrics: t("Что показывать в строке проекта"),
+      calendar: t("Календарь"), service: t("Сервис AI"), launch: t("Где запускать и что разрешить"), name: t("Название"),
+    };
+
+    const el = (tag, props = {}, ...children) => {
+      const node = Object.assign(document.createElement(tag), props);
+      node.append(...children);
+      return node;
+    };
+    const secondary = (text) => el("p", { className: "secondary", textContent: text });
+    function radios(name, options, value, onchange) {
+      return el("div", { className: "choices" }, ...options.map(([key, title, detail]) => {
+        const input = el("input", { type: "radio", name, checked: key === value });
+        input.onchange = () => onchange(key);
+        const label = el("label", { className: key === value ? "choice selected" : "choice" }, input, el("span", {}, el("strong", { textContent: title }), detail ? el("span", { className: "secondary", textContent: detail }) : ""));
+        return label;
+      }));
+    }
+
+    async function chooseTemplate(id) {
+      templateId = id;
+      const template = start.templates.find((tmpl) => tmpl.id === id);
+      draft = structuredClone(template ? template.mode : start.blank);
+      if (chosenFolder) {
+        const applied = await invoke("assistant_apply_folder", { draft, folder: chosenFolder });
+        draft = applied.draft;
+        look = applied.look;
+      } else {
+        look = null;
+      }
+      render();
+    }
+
+    const views = {
+      template() {
+        const cards = [...start.templates.map((tmpl) => [tmpl.id, tmpl.title, tmpl.description]), [null, t("С нуля"), t("Пустой профиль: всё выберете на следующих шагах.")]];
+        return [radios("template", cards, templateId, chooseTemplate)];
+      },
+      folder() {
+        const hint = start.templates.find((tmpl) => tmpl.id === templateId)?.folderHint || t("Папка, где каждая подпапка — проект.");
+        const folder = folderOf(draft.source) ?? "";
+        const choose = el("button", { textContent: t("Выбрать…") });
+        choose.onclick = async () => {
+          const chosen = await invoke("assistant_choose_folder", { draft });
+          if (!chosen) return;
+          draft = chosen.draft;
+          look = chosen.look;
+          chosenFolder = folderOf(draft.source);
+          render();
+        };
+        const kind = draft.source?.gitBuiltin || draft.source?.gitReport ? "git" : draft.source?.inbox ? "inbox" : "folders";
+        const setKind = (next) => {
+          draft.source = next === "git" ? { gitBuiltin: { projects: folder } } : next === "inbox" ? { inbox: { _0: folder } } : { folders: { _0: folder } };
+          if (next === "git") { draft.card = "statusMD"; draft.permissions = "code"; }
+          else { draft.card = "projectMD"; if (draft.permissions === "code") draft.permissions = "filesOnly"; }
+          render();
+        };
+        const parts = [secondary(hint), el("div", { className: "folder-line" }, el("span", { className: "path", textContent: folder }), choose)];
+        if (look?.text) parts.push(el("p", { textContent: look.text }));
+        else if (look && !look.exists) parts.push(secondary(t("Такой папки пока нет — она будет создана при «Готово».")));
+        parts.push(el("p", { className: "label", textContent: t("Проекты — это") }));
+        parts.push(radios("kind", [["git", t("git-репозитории")], ["folders", t("папки (каждая подпапка — проект)")], ["inbox", t("одна папка")]], kind, setKind));
+        if (look?.suggestsGit) parts.push(secondary(t("Внутри git-репозитории — предлагаю источник «git-репозитории».")));
+        if (!look) invoke("assistant_look", { folder }).then((found) => { look = found; if (step === "folder") render(); });
+        return parts;
+      },
+      stages() {
+        draft.stages ??= [];
+        const list = draft.stages.map((stage, index) => {
+          const input = el("input", { type: "text", value: stage });
+          input.setAttribute("aria-label", t("Этап"));
+          input.oninput = () => { draft.stages[index] = input.value; };
+          const remove = el("button", { textContent: "✕", title: t("Убрать этап") });
+          remove.setAttribute("aria-label", t("Убрать этап"));
+          remove.onclick = () => { draft.stages.splice(index, 1); render(); };
+          return el("div", { className: "stage-line" }, input, remove);
+        });
+        const add = el("button", { textContent: t("Добавить этап") });
+        add.onclick = () => { draft.stages.push(""); render(); };
+        return [secondary(t("Этапы, через которые проходит каждый проект. Этап меняется прямо из панели и записывается в проект.md.")), ...list, add];
+      },
+      metrics() {
+        const all = [["words", t("Слова")], ["duration", t("Хронометраж")], ["readingTime", t("Время чтения")], ["pages", t("Страницы")], ["sources", t("Источники")], ["deadline", t("Дедлайн")], ["publishDate", t("Дата публикации")], ["lastActivity", t("Последняя правка")]];
+        draft.metrics ??= [];
+        const boxes = all.map(([key, title]) => {
+          const box = el("input", { type: "checkbox", checked: draft.metrics.includes(key) });
+          box.onchange = () => {
+            const set = new Set(draft.metrics.filter((m) => m !== key));
+            if (box.checked) set.add(key);
+            draft.metrics = all.map(([k]) => k).filter((k) => set.has(k));
+            render();
+          };
+          return el("label", { className: "check-line" }, box, el("span", { textContent: title }));
+        });
+        const parts = [el("div", { className: "choices" }, ...boxes)];
+        if (draft.metrics.includes("duration")) {
+          const pace = el("input", { type: "number", min: 80, max: 250, step: 10, value: draft.wordsPerMinute ?? 150 });
+          const label = el("span", { textContent: t("Темп речи: %lld слов/мин", draft.wordsPerMinute ?? 150) });
+          pace.oninput = () => { draft.wordsPerMinute = Math.min(250, Math.max(80, Number(pace.value) || 150)); label.textContent = t("Темп речи: %lld слов/мин", draft.wordsPerMinute); };
+          parts.push(el("label", { className: "check-line" }, label, pace));
+        }
+        return parts;
+      },
+      calendar() {
+        const parts = [radios("calendar", [["off", t("Выключен")], ["dates", t("Дедлайны и публикации из проект.md")], ["contentPlan", t("+ контент-план (контент-план.md)")]], draft.calendar ?? "off", (value) => { draft.calendar = value; render(); })];
+        if ((draft.calendar ?? "off") !== "off") {
+          const select = el("select");
+          for (const [hours, title] of [[[], t("не напоминать")], [[2], t("за 2 часа")], [[24], t("за сутки")], [[24, 2], t("за сутки и за 2 часа")], [[72, 24], t("за 3 дня и за сутки")]]) select.add(new Option(title, JSON.stringify(hours)));
+          select.value = JSON.stringify(reminderHours);
+          select.onchange = () => { reminderHours = JSON.parse(select.value); };
+          parts.push(el("label", { className: "check-line" }, el("span", { textContent: t("Напоминать") }), select));
+        }
+        return parts;
+      },
+      service() {
+        const services = start.services.map((s) => [s.id === "claude-code" ? null : s.id, s.id === "claude-code" ? "Claude Code" : s.name]);
+        const more = el("button", { textContent: t("Подключить другой сервис…") });
+        more.onclick = () => invoke("open_settings");
+        return [
+          secondary(t("Кто выполняет команды профиля. Модель по API получает только текст файла; агент (Claude Code и др.) работает с файлами в папке проекта.")),
+          radios("service", services, draft.service ?? null, (value) => { if (value) draft.service = value; else delete draft.service; render(); }),
+          more,
+          secondary(t("Агенты ставятся отдельно; ключи API вставляются в Настройках → «Сервисы AI». Вернитесь сюда — список обновится.")),
+        ];
+      },
+      launch() {
+        const permissionText = { code: t("Чтение и правка файлов, git (без push в main и удаления истории), проверки и сборки, pull request."), filesOnly: t("Читать и писать только внутри папки проекта. Без терминала и интернета."), filesAndWeb: t("Файлы проекта плюс поиск и чтение страниц в интернете. Без терминала.") };
+        return [
+          el("p", { className: "label", textContent: t("Где запускать Claude") }),
+          radios("launch", [[null, t("Спрашивать каждый раз")], ["background", t("В фоне — результат придёт уведомлением")], ["terminal", t("В Терминале — видно, что он делает")]], draft.launchMode ?? null, (value) => { if (value) draft.launchMode = value; else delete draft.launchMode; render(); }),
+          el("p", { className: "label", textContent: t("Что разрешить в фоне") }),
+          radios("permissions", [["code", t("Код: git, сборки, PR")], ["filesOnly", t("Только файлы проекта")], ["filesAndWeb", t("Файлы + поиск в интернете")]], draft.permissions ?? "filesOnly", (value) => { draft.permissions = value; render(); }),
+          secondary(permissionText[draft.permissions ?? "filesOnly"]),
+        ];
+      },
+      name() {
+        const name = el("input", { type: "text", value: draft.name ?? "" });
+        name.setAttribute("aria-label", t("Название"));
+        name.oninput = () => { draft.name = name.value; };
+        setTimeout(() => name.focus(), 0);
+        return [name, secondary(t("«Готово» добавит профиль и сделает его текущим. Дальше всё правится в Настройках → «Профили»."))];
+      },
+    };
+
+    function render() {
+      const list = steps();
+      if (!list.includes(step)) step = list[list.length - 1];
+      const index = list.indexOf(step);
+      document.getElementById("step-count").textContent = t("Шаг %lld из %lld", index + 1, list.length);
+      document.getElementById("step-title").textContent = titles[step];
+      const progress = document.getElementById("step-progress");
+      progress.max = list.length;
+      progress.value = index + 1;
+      document.getElementById("body").replaceChildren(...views[step]());
+      document.getElementById("back").disabled = index === 0;
+      document.getElementById("next").textContent = index === list.length - 1 ? t("Готово") : t("Далее");
+    }
+
+    document.getElementById("back").onclick = () => { const list = steps(); step = list[Math.max(0, list.indexOf(step) - 1)]; render(); };
+    document.getElementById("next").onclick = async () => {
+      const list = steps();
+      const index = list.indexOf(step);
+      if (index < list.length - 1) { step = list[index + 1]; return render(); }
+      const error = document.getElementById("error");
+      try {
+        await invoke("assistant_finish", { draft, reminderHours });
+      } catch (problem) {
+        error.hidden = false;
+        error.textContent = String(problem);
+      }
+    };
+    render();
+  </script>
+</body>
+</html>

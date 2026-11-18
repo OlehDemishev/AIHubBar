@@ -5,6 +5,7 @@
 **Updated:** 2026-11-18
 
 **Now:**
+- 2026-11-18: Windows — the profile assistant: template, folder, stages, metrics, calendar, service, launch and name (branch `feat/desktop-assistant`)
 - 2026-11-18: Windows — the «Календарь» window: a month or week, dates dragged to another day, new plan rows and project dates (#426, merged)
 - 2026-11-18: Windows — «Ближайшее»: deadlines, publications and content plan rows of the next 7 days, reminders (#424, merged)
 - 2026-11-18: Windows — other agents (Codex, Gemini CLI, Antigravity, Copilot, Cursor): found with their version, «Открыть в…», a folder command opens one in a terminal with the task on the clipboard (#422, merged)
@@ -59,7 +60,7 @@
 - check on the Air: the island at the real notch
 - promotion (docs/LAUNCH.md): r/ClaudeAI, the lists, r/macapps, Show HN, Product Hunt, Homebrew
 - content (docs/specs/SPEC-content.md, agreed): stage 2 «Версии», then batch tasks; better after the first feedback from people
-- Windows: on the laptop the live check of SPEC-windows §11.4 (with a real permission request answered from the panel) the «Проекты» card's buttons, a Claude launch in Windows Terminal and one in the background (do the `PowerShell(…)` rules let it build and check a project without Git Bash?); then stage 5 on: the assistant; stage 3 leftovers («Показать», buttons in the notification) need the laptop
+- Windows: on the laptop the live check of SPEC-windows §11.4 (with a real permission request answered from the panel) the «Проекты» card's buttons, a Claude launch in Windows Terminal and one in the background (do the `PowerShell(…)` rules let it build and check a project without Git Bash?); then the rest of stage 5 (editing a profile's commands, prices and budget) or stage 6; stage 3 leftovers («Показать», buttons in the notification) need the laptop
 
 **Needs Oleh:**
 - Windows laptop: install the tools and copy the two CLAUDE.md files as in `desktop/WINDOWS-DEV.md`, sign in to Claude Code there; choose the Windows signing (SPEC-windows §7)
@@ -95,6 +96,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-18 — Windows: the profile assistant (branch `feat/desktop-assistant`)
+
+Done: `desktop/core/assistant.rs` ports the Mac's `AssistantDraft` rules: what a folder holds, the source it suggests (git repositories → the git scanner, STATUS.md cards, «код» rules; else folders or one folder), the blank profile of «С нуля». `ui/assistant.html` is the Mac's `AssistantView` without the steps Windows has nothing for (modules, the menu bar, SF Symbol icons): template, folder, stages, metrics, calendar and reminders, service, launch and permissions, name; the draft is the Mac's profile JSON and nothing is saved before «Готово». Settings → «Профили» → «Помощник…» opens it. `scripts/strings.py` adds the templates' descriptions and folder hints.
+Checked: `python3 scripts/strings.py --check` (348 texts), `scripts/strings-check.py`, `cargo test --workspace` on the Mac (core 94: a folder's repositories, folders and files, the suggested source, card and rules, one folder kept; the blank profile). The assistant in a browser on the real templates with sample replies: «Видео», a folder of repositories (5 steps), switched to folders (8 steps), a stage removed and one added, the pace, «+ контент-план» with «за 3 дня и за сутки», OpenAI, «Терминал» and «Файлы + поиск», a name — the profile sent on «Готово» carried all of it with the template's 6 commands. The real window wasn't opened.
+Left: editing a profile's commands; the first start still makes «Разработчик (GitHub)» without asking.
 
 ## 2026-11-18 — Windows: the calendar window (branch `feat/desktop-calendar-window`)
 

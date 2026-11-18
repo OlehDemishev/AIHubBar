@@ -26,6 +26,7 @@
         <span class="profile-add">
           <select id="profile-template" data-t-title="Добавить профиль из шаблона"></select>
           <button id="profile-add" data-t="Добавить профиль"></button>
+          <button id="profile-assistant" data-t="Помощник…"></button>
         </span>
       </div>
     </section>
@@ -290,6 +291,7 @@
     const template = document.getElementById("profile-template");
     for (const row of await invoke("profile_templates")) template.add(new Option(row.title, row.id));
     document.getElementById("profile-add").onclick = () => invoke("add_profile", { template: template.value });
+    document.getElementById("profile-assistant").onclick = () => invoke("open_assistant");
 
     // «Сервисы AI»: a key per provider in Credential Manager, «Проверить» lists the models and picks one.
     const providerRows = document.getElementById("provider-rows");
