@@ -72,6 +72,11 @@ impl Key {
     }
 }
 
+/// One of the content language's texts (`ui/i18n/content.json`): `agentPrompt`, `notSet`, `projectWord`…
+pub fn content_text(language: &str, key: &str) -> String {
+    entry(language)[key].as_str().unwrap_or_default().to_owned()
+}
+
 /// The card's file name in the content language: `проект.md`, `project.md`…
 pub fn card_file_name(language: &str) -> String {
     entry(language)["cardFile"].as_str().unwrap_or("project.md").to_owned()

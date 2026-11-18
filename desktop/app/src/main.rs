@@ -6,6 +6,7 @@
 // No console window behind the app in a release build on Windows.
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
+mod commands;
 mod limits;
 mod profiles;
 mod projects;
@@ -328,6 +329,7 @@ fn main() {
         .manage(Sessions::default())
         .manage(Projects::default())
         .manage(Runs::default())
+        .manage(commands::Jobs::default())
         .manage(AppState { settings: Mutex::new(load_settings()) })
         .invoke_handler(tauri::generate_handler![
             ui_texts, set_language, dismiss_tray_hint, autostart_enabled, set_autostart, open_settings, hide_panel, quit,
@@ -336,7 +338,8 @@ fn main() {
             sessions::uninstall_hooks, sessions::agent_hooks_state, sessions::install_agent_hooks, sessions::uninstall_agent_hooks,
             projects::projects_view, projects::refresh_projects, projects::projects_panel_opened, projects::open_project,
             projects::open_link, projects::launch_claude, projects::set_project_stage, projects::create_project_card,
-            projects::create_folder_project, projects::open_project_file,
+            projects::create_folder_project, projects::open_project_file, commands::run_folder_command,
+            commands::clear_finished_jobs,
             runs::stop_run, runs::run_log, projects::worktree_removal, launch_settings, set_launch_settings,
             pull_request_alerts, set_pull_request_alerts, profiles::projects_folder, profiles::choose_projects_folder,
             profiles::reset_projects_folder, profiles::profiles_view, profiles::select_profile, profiles::add_profile, profiles::profile_templates,

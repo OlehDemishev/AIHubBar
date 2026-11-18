@@ -43,6 +43,8 @@ impl Runs {
         std::thread::spawn(move || loop {
             if this.check(&app) {
                 let _ = app.emit("sessions-changed", ());
+                // A folder project's command shows its state in the project's row.
+                let _ = app.emit("projects-changed", ());
             }
             std::thread::sleep(CHECK_EVERY);
         });
@@ -127,6 +129,10 @@ impl Runs {
         let finish_texts = FinishTexts {
             no_result: texts.t("Claude завершился без результата — см. журнал").to_owned(),
             denied: Box::new(move |list| claudepult_core::i18n::fill(&denied, &[list])),
+            no_result_file: {
+                let text = texts.t("Файл результата не появился: %@").to_owned();
+                Box::new(move |name| claudepult_core::i18n::fill(&text, &[name]))
+            },
         };
         runs::finish(run, &log, reason, &finish_texts, now);
         eprintln!("run {id} finished: {:?}", run.state);
@@ -140,6 +146,10 @@ impl Runs {
         }
         if announce {
             let _ = app.notification().builder().title(notification_title(&run)).body(notification_body(&texts, &run)).show();
+        }
+        if run.result_file.is_some() {
+            // A command wrote into a folder project: its files, words and main file are read again.
+            app.state::<crate::projects::Projects>().ask(false);
         }
     }
 }

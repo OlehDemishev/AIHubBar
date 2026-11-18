@@ -5,6 +5,7 @@
 **Updated:** 2026-11-18
 
 **Now:**
+- 2026-11-18: Windows — AI commands on folder projects through Claude Code, in the background with «Только файлы» or in a terminal (branch `feat/desktop-folder-commands`)
 - 2026-11-18: Windows — folder projects: «Видео», «Тексты», «Ресёрч», «Соцсети», «Свой» with stages, metrics and «Новый проект» (#416, merged)
 - 2026-11-18: Windows — `.claudepult` export and import, the same files as the Mac's (#414, merged)
 - 2026-11-18: Windows — profiles: kept in the Mac's own JSON, the projects folder and launch mode per profile, a switcher in the panel (#412, merged)
@@ -54,7 +55,7 @@
 - check on the Air: the island at the real notch
 - promotion (docs/LAUNCH.md): r/ClaudeAI, the lists, r/macapps, Show HN, Product Hunt, Homebrew
 - content (docs/specs/SPEC-content.md, agreed): stage 2 «Версии», then batch tasks; better after the first feedback from people
-- Windows: on the laptop the live check of SPEC-windows §11.4 (with a real permission request answered from the panel) the «Проекты» card's buttons, a Claude launch in Windows Terminal and one in the background (do the `PowerShell(…)` rules let it build and check a project without Git Bash?); then stage 5 on: the AI commands of folder projects, the calendar, the assistant; stage 3 leftovers («Показать», buttons in the notification) need the laptop
+- Windows: on the laptop the live check of SPEC-windows §11.4 (with a real permission request answered from the panel) the «Проекты» card's buttons, a Claude launch in Windows Terminal and one in the background (do the `PowerShell(…)` rules let it build and check a project without Git Bash?); then stage 5 on: the calendar, AI services (models by API, «Сравнить»), the assistant; stage 3 leftovers («Показать», buttons in the notification) need the laptop
 
 **Needs Oleh:**
 - Windows laptop: install the tools and copy the two CLAUDE.md files as in `desktop/WINDOWS-DEV.md`, sign in to Claude Code there; choose the Windows signing (SPEC-windows §7)
@@ -90,6 +91,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-18 — Windows: AI commands on folder projects (branch `feat/desktop-folder-commands`)
+
+Done: `desktop/core/commands.rs` ports the Mac's `CommandTemplate` and `CommandText` (placeholders in Russian and English, result names, `-2`, run titles, the agent's prompt in the content language from `ContentLanguage.swift`); `core/runs.rs` gets the «Только файлы» / «Файлы + поиск в интернете» rules (no `Bash`, no `PowerShell`) and `resultFile`. An opened folder project shows the profile's commands and «Своя задача», a field when a command asks, and its jobs: running, done with the result's file, failed with why; «Убрать готовые». Background by default, a terminal window when the profile says «Терминал». Models by API and «Сравнить» wait for «Сервисы AI».
+Checked: `python3 scripts/strings.py --check` (206 texts), `scripts/strings-check.py`, `cargo test --workspace` on the Mac (core 75: the Mac's templates read, placeholders and file names, unique names, the prompt with an inlined file; the rules per profile; a run with a stand-in `claude` under «Только файлы» — its settings deny `Bash` (and `PowerShell` on Windows), `resultFile` saved, «Файл результата не появился» until the file is there). The panel in a browser with sample replies: the commands, «Перевод» asking «Язык», Enter to run, done and failed rows, «Убрать готовые». No real Claude run was started.
+Left: a real command run (needs a word from Oleh on the Mac, or the laptop); `.docx` sources aren't inlined; models by API and «Сравнить».
 
 ## 2026-11-18 — Windows: folder projects (branch `feat/desktop-folder-projects`)
 

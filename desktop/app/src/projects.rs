@@ -160,7 +160,7 @@ impl Projects {
         state.projects.iter().any(|p| p.path == path || p.worktrees.iter().any(|w| Path::new(&w.path) == path)) || state.folders.iter().any(|p| p.path == path)
     }
 
-    fn folder_project(&self, path: &Path) -> Option<FolderProject> {
+    pub(crate) fn folder_project(&self, path: &Path) -> Option<FolderProject> {
         self.state.lock().unwrap().folders.iter().find(|p| p.path == path).cloned()
     }
 
@@ -284,6 +284,12 @@ pub struct FolderRow {
     /// The card's file name when there is one; otherwise «Создать проект.md» is offered.
     card_file: Option<String>,
     create_card: String,
+    /// The profile's commands and «Своя задача».
+    commands: Vec<crate::commands::CommandButton>,
+    /// What was started here: running, done (its file), failed.
+    jobs: Vec<crate::commands::JobRow>,
+    /// «В папке нет текстового файла — команды получат только папку.»
+    no_text: bool,
 }
 
 fn folder_view(app: &AppHandle, state: &State, texts: &Strings) -> Option<FolderView> {
@@ -314,6 +320,9 @@ fn folder_view(app: &AppHandle, state: &State, texts: &Strings) -> Option<Folder
                 main_file: project.main_file.clone(),
                 card_file: project.has_card_file.then(|| card.file_name().map(|n| n.to_string_lossy().into_owned()).unwrap_or_default()),
                 create_card: texts.format("Создать %@", &[&folders::card_file_name(language)]),
+                commands: crate::commands::buttons(profile, texts),
+                jobs: crate::commands::rows(app, &project.path, texts),
+                no_text: project.main_file.is_none() && crate::commands::needs_main_file(profile),
             }
         })
         .collect();
@@ -647,6 +656,8 @@ fn launch_now(
             task: &task,
             prompt: &prompt,
             time_limit_minutes: settings.background_time_limit_minutes,
+            permissions: "code",
+            result_file: None,
         };
         let (run, child) = claudepult_core::runs::start(&paths::runs_dir(), &claude, &new).map_err(|e| e.to_string())?;
         eprintln!("run {} started: «{title}» in {}", run.id, folder.display());
