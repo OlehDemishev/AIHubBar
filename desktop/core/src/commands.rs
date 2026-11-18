@@ -24,6 +24,8 @@ pub struct Command {
     pub on_main_file: bool,
     /// The field shown before running: «Язык», «Тон», «Задача»; None runs at once.
     pub asks: Option<String>,
+    /// Who runs it (`claude-code`, `api:openai`); None — the one chosen for the project, else the profile's.
+    pub service: Option<String>,
 }
 
 impl Command {
@@ -38,6 +40,7 @@ impl Command {
             output: text("output").unwrap_or_else(|| "результат-<время>.md".into()),
             on_main_file: text("input").is_none_or(|input| input != "project"),
             asks: text("asks").filter(|a| !a.trim().is_empty()),
+            service: text("service").filter(|s| !s.is_empty()),
         })
     }
 
@@ -50,6 +53,7 @@ impl Command {
             output: "результат-<время>.md".into(),
             on_main_file: true,
             asks: Some(asks.into()),
+            service: None,
         }
     }
 
@@ -120,8 +124,9 @@ pub fn fill(template: &str, context: &Context, language: &str) -> String {
 }
 
 /// The result's file name: placeholders filled, `<время>` / `<time>` and `<файл>` / `<file>` expanded, characters a
-/// file name can't have replaced, `.md` added when there is no extension.
-pub fn output_name(pattern: &str, context: &Context, language: &str) -> String {
+/// file name can't have replaced, `.md` added when there is no extension, and ` (OpenAI)` before the extension in a
+/// comparison.
+pub fn output_name(pattern: &str, context: &Context, language: &str, suffix: Option<&str>) -> String {
     let file_base = context
         .file
         .as_deref()
@@ -142,6 +147,12 @@ pub fn output_name(pattern: &str, context: &Context, language: &str) -> String {
     }
     if Path::new(&name).extension().is_none() {
         name.push_str(".md");
+    }
+    if let Some(suffix) = suffix {
+        let path = Path::new(&name);
+        let ext = path.extension().map(|e| e.to_string_lossy().into_owned()).unwrap_or_default();
+        let stem = path.file_stem().map(|s| s.to_string_lossy().into_owned()).unwrap_or_default();
+        name = format!("{stem} ({suffix}).{ext}");
     }
     name
 }
@@ -177,6 +188,17 @@ pub fn agent_prompt(task: &str, context: &Context, output: &str, file_text: Opti
         (Some(text), Some(file)) => [prompt, String::new(), words(language, "agentFileIntro").replace("{file}", file), "---".into(), text.to_owned(), "---".into()].join("\n"),
         _ => prompt,
     }
+}
+
+/// For a model by API (docs/TEMPLATES.md): AI Hub Bar sends the file's text and writes the answer itself.
+pub fn api_prompt(task: &str, context: &Context, file_text: Option<&str>, language: &str) -> String {
+    let format = context.format.clone().unwrap_or_else(|| words(language, "notSet"));
+    let mut lines = vec![words(language, "apiHeader").replace("{project}", &context.project).replace("{format}", &format)];
+    if let (Some(text), Some(file)) = (file_text, &context.file) {
+        lines.extend([words(language, "apiFileIntro").replace("{file}", file), "---".into(), text.to_owned(), "---".into()]);
+    }
+    lines.extend([words(language, "apiTask").replace("{task}", task), words(language, "apiRule")]);
+    lines.join("\n")
 }
 
 /// The source's text to put into the prompt: only for formats Claude can't read with its file tools and no shell
@@ -224,12 +246,13 @@ mod tests {
     fn placeholders_and_names() {
         let c = context(Some("тексты/сценарий.md"), Some("английский"));
         assert_eq!(fill("Переведи {файл} на {язык} для {platform}, {формат}, {хронометраж}", &c, "ru"), "Переведи тексты/сценарий.md на английский для YouTube, не указан, 3:00");
-        assert_eq!(output_name("сценарий-{язык}.md", &c, "ru"), "сценарий-английский.md");
-        assert_eq!(output_name("результат-<время>", &c, "ru"), "результат-2026-11-18-0905.md");
-        assert_eq!(output_name("конспект-<файл>.md", &c, "ru"), "конспект-сценарий.md");
-        assert_eq!(output_name("конспект-<file>.md", &context(None, None), "en"), "конспект-project.md");
-        assert_eq!(output_name("{текст}.md", &context(None, Some("a/b: c?")), "ru"), "a-b- c-.md");
-        assert_eq!(output_name("{текст}.md", &context(None, None), "ru"), "результат.md");
+        assert_eq!(output_name("сценарий-{язык}.md", &c, "ru", None), "сценарий-английский.md");
+        assert_eq!(output_name("результат-<время>", &c, "ru", None), "результат-2026-11-18-0905.md");
+        assert_eq!(output_name("конспект-<файл>.md", &c, "ru", None), "конспект-сценарий.md");
+        assert_eq!(output_name("конспект-<file>.md", &context(None, None), "en", None), "конспект-project.md");
+        assert_eq!(output_name("{текст}.md", &context(None, Some("a/b: c?")), "ru", None), "a-b- c-.md");
+        assert_eq!(output_name("{текст}.md", &context(None, None), "ru", None), "результат.md");
+        assert_eq!(output_name("хуки.md", &c, "ru", Some("OpenAI")), "хуки (OpenAI).md");
         let taken = ["хуки.md", "хуки-2.md"];
         assert_eq!(unique_name("хуки.md", |n| taken.contains(&n)), "хуки-3.md");
         assert_eq!(unique_name("новое.md", |n| taken.contains(&n)), "новое.md");
@@ -246,5 +269,9 @@ mod tests {
         let inlined = agent_prompt("Найди хуки", &c, "хуки.md", Some("текст сценария"), "en");
         assert!(inlined.ends_with("You don't need to open «сценарий.rtf»: its text is right here.\n---\nтекст сценария\n---"));
         assert!(agent_prompt("x", &context(None, None), "y.md", Some("ignored"), "en").contains("none — work with the files of the folder"));
+        let api = api_prompt("Найди хуки", &c, Some("текст"), "ru");
+        assert_eq!(api.lines().next(), Some("Проект: «Ролик». Формат: не указан."));
+        assert!(api.contains("---\nтекст\n---\nЗадача: Найди хуки\n") && api.ends_with("не выдумывай."));
+        assert!(!api_prompt("x", &context(None, None), Some("ignored"), "en").contains("---"), "no file, no text");
     }
 }

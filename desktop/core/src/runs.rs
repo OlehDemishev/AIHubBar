@@ -69,7 +69,7 @@ pub struct Run {
 }
 
 /// Swift's `.iso8601`: whole seconds and `Z`.
-mod iso {
+pub(crate) mod iso {
     use chrono::{DateTime, SecondsFormat, Utc};
     use serde::{Deserialize, Deserializer, Serializer};
 

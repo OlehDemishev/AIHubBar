@@ -420,7 +420,8 @@
       return chip;
     }
 
-    function folderDetails(row, stages) {
+    function folderDetails(row, view) {
+      const stages = view.stages;
       const box = element("div", "details");
       if (stages.length) {
         box.append(element("div", "bullets-title", t("Этап")));
@@ -450,15 +451,59 @@
         actions.append(create);
       }
       box.append(actions);
-      box.append(...folderCommands(row));
+      box.append(...folderCommands(row, view));
       return box;
     }
 
     // The profile's commands on this project (Claude Code; the result is a new file here): a field first when the
     // command asks for something, then what is running or done.
     const asking = new Map();
-    function folderCommands(row) {
-      const parts = [element("div", "bullets-title", t("Команды"))];
+    const chosenService = new Map();
+    const comparing = new Map();
+    function perform(row, command, text) {
+      const compare = comparing.get(row.path);
+      if (compare) {
+        comparing.delete(row.path);
+        return invoke("compare_folder_command", { path: row.path, command: command.id, text, services: [...compare] }).catch(showFolderError);
+      }
+      return invoke("run_folder_command", { path: row.path, command: command.id, text, service: chosenService.get(row.path) ?? null }).catch(showFolderError);
+    }
+    function folderCommands(row, view) {
+      const head = element("div", "commands-head");
+      head.append(element("span", "bullets-title", t("Команды")), element("span", "spacer"));
+      const compare = comparing.get(row.path);
+      if (view.services.length > 1 && !compare) {
+        const service = element("select", "service-choice");
+        service.title = t("Каким сервисом выполнять");
+        for (const item of view.services) service.add(new Option(item.name, item.id));
+        service.value = chosenService.get(row.path) ?? view.defaultService;
+        service.onchange = () => chosenService.set(row.path, service.value);
+        head.append(service);
+      }
+      if (view.services.length > 1) {
+        const toggle = action(t("Сравнить"), () => {
+          if (comparing.has(row.path)) comparing.delete(row.path); else comparing.set(row.path, new Set());
+          showProjects();
+        });
+        toggle.title = t("Выполнить одну команду 2–3 сервисами и положить результаты рядом");
+        toggle.setAttribute("aria-pressed", String(!!compare));
+        if (compare) toggle.classList.add("pressed");
+        head.append(toggle);
+      }
+      const parts = [head];
+      if (compare) {
+        const chips = element("div", "actions");
+        for (const item of view.services) {
+          const chip = action(item.name, () => {
+            if (compare.has(item.id)) compare.delete(item.id); else if (compare.size < 3) compare.add(item.id);
+            showProjects();
+          });
+          chip.setAttribute("aria-pressed", String(compare.has(item.id)));
+          if (compare.has(item.id)) chip.classList.add("pressed");
+          chips.append(chip);
+        }
+        parts.push(chips, element("div", "secondary", compare.size < 2 ? t("Выберите 2–3 сервиса, затем команду.") : t("Теперь выберите команду.")));
+      }
       const buttons = element("div", "actions");
       for (const command of row.commands) {
         const button = action(command.title, () => {
@@ -466,10 +511,11 @@
             asking.set(row.path, command);
             showProjects();
           } else {
-            invoke("run_folder_command", { path: row.path, command: command.id, text: null }).catch(showFolderError);
+            perform(row, command, null);
           }
         });
         button.title = command.hint;
+        button.disabled = !!compare && compare.size < 2;
         buttons.append(button);
       }
       parts.push(buttons);
@@ -482,7 +528,7 @@
         const run = async () => {
           if (!input.value.trim()) return;
           asking.delete(row.path);
-          await invoke("run_folder_command", { path: row.path, command: waiting.id, text: input.value }).catch(showFolderError);
+          await perform(row, waiting, input.value);
           showProjects();
         };
         input.addEventListener("keydown", (event) => { if (event.key === "Enter") run(); });
@@ -541,7 +587,7 @@
           showProjects();
         };
         item.append(summary);
-        if (open) item.append(folderDetails(row, view.stages));
+        if (open) item.append(folderDetails(row, view));
         return item;
       });
     }

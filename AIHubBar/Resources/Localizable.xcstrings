@@ -139153,6 +139153,82 @@
           }
         }
       }
+    },
+    "На этой системе ключи API пока негде хранить: работают только серверы без ключа (Ollama, LM Studio).": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لا يوجد في هذا النظام مكان لحفظ مفاتيح API بعد: تعمل فقط الخوادم التي لا تحتاج إلى مفتاح (Ollama وLM Studio)."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dieses System hat noch keinen Ort für API-Schlüssel: Es funktionieren nur Server ohne Schlüssel (Ollama, LM Studio)."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This system has no place to keep API keys yet: only servers that need no key work (Ollama, LM Studio)."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Este sistema aún no tiene dónde guardar las claves de API: solo funcionan los servidores sin clave (Ollama, LM Studio)."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ce système n’a pas encore où conserver les clés d’API : seuls les serveurs sans clé fonctionnent (Ollama, LM Studio)."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sistem ini belum punya tempat untuk menyimpan kunci API: hanya server tanpa kunci yang berfungsi (Ollama, LM Studio)."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Questo sistema non ha ancora dove conservare le chiavi API: funzionano solo i server senza chiave (Ollama, LM Studio)."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "このシステムにはまだ API キーの保存先がありません。キー不要のサーバー（Ollama、LM Studio）のみ使えます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이 시스템에는 아직 API 키를 보관할 곳이 없습니다. 키가 필요 없는 서버(Ollama, LM Studio)만 작동합니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ten system nie ma jeszcze gdzie przechowywać kluczy API: działają tylko serwery bez klucza (Ollama, LM Studio)."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Este sistema ainda não tem onde guardar chaves de API: só funcionam servidores sem chave (Ollama, LM Studio)."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "У цій системі ще ніде зберігати ключі API: працюють лише сервери без ключа (Ollama, LM Studio)."
+          }
+        }
+      }
     }
   },
   "version": "1.0"
