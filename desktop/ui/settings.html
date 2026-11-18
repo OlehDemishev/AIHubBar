@@ -31,6 +31,17 @@
     </section>
     <h1 data-t="Проекты"></h1>
     <section class="card">
+      <div class="folder">
+        <div class="row">
+          <span data-t="Папка проектов"></span>
+          <span>
+            <button id="projects-folder-reset" data-t="По умолчанию" hidden></button>
+            <button id="projects-folder-choose" data-t="Выбрать…"></button>
+          </span>
+        </div>
+        <p class="secondary path" id="projects-folder-path"></p>
+        <p class="error" id="projects-folder-missing" hidden></p>
+      </div>
       <div class="row">
         <label for="pr-alerts" data-t="Уведомлять, когда CI упал или починился и когда PR закрыт"></label>
         <input type="checkbox" id="pr-alerts">
@@ -131,6 +142,7 @@
         error.textContent = state.error ?? "";
       };
       show(await invoke("agent_hooks_state", { agent }));
+      card.addEventListener("refresh", async () => show(await invoke("agent_hooks_state", { agent })));
       card.querySelector(".install").onclick = async () => show(await invoke("install_agent_hooks", { agent }));
       card.querySelector(".remove").onclick = async () => show(await invoke("uninstall_agent_hooks", { agent }));
     }
@@ -149,6 +161,23 @@
     const saveLaunch = () => invoke("set_launch_settings", { mode: mode.value || null, timeLimitMinutes: Number(limit.value) });
     mode.onchange = saveLaunch;
     limit.onchange = saveLaunch;
+
+    // The folder whose git repositories are the projects; a new one makes installed hooks outdated, so they are shown anew.
+    function showFolder(folder) {
+      document.getElementById("projects-folder-path").textContent = folder.path;
+      document.getElementById("projects-folder-reset").hidden = !folder.custom;
+      const missing = document.getElementById("projects-folder-missing");
+      missing.hidden = !folder.missing;
+      missing.textContent = folder.missing ?? "";
+    }
+    showFolder(await invoke("projects_folder"));
+    const changeFolder = async (command) => {
+      await showFolder(await invoke(command));
+      showHooks(await invoke("hooks_state"));
+      for (const card of document.querySelectorAll(".agent-hooks")) card.dispatchEvent(new Event("refresh"));
+    };
+    document.getElementById("projects-folder-choose").onclick = () => changeFolder("choose_projects_folder");
+    document.getElementById("projects-folder-reset").onclick = () => changeFolder("reset_projects_folder");
 
     const prAlerts = document.getElementById("pr-alerts");
     prAlerts.checked = await invoke("pull_request_alerts");

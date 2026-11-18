@@ -3,7 +3,7 @@
 
 use serde::{Deserialize, Serialize};
 use std::io;
-use std::path::Path;
+use std::path::{Path, PathBuf};
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(default)]
@@ -18,6 +18,8 @@ pub struct Settings {
     pub background_time_limit_minutes: u32,
     /// Notify when a PR's CI fails or is fixed and when a PR closes (on by default, as on the Mac).
     pub pull_request_alerts: bool,
+    /// The projects folder the person chose; None — `paths::default_projects_dir()` (the Mac's `projectsDirectory`).
+    pub projects_dir: Option<String>,
 }
 
 impl Default for Settings {
@@ -28,6 +30,7 @@ impl Default for Settings {
             launch_mode: None,
             background_time_limit_minutes: crate::runs::DEFAULT_TIME_LIMIT_MINUTES,
             pull_request_alerts: true,
+            projects_dir: None,
         }
     }
 }
@@ -50,7 +53,13 @@ impl Settings {
                 .filter(|v| (5..=24 * 60).contains(v))
                 .unwrap_or(defaults.background_time_limit_minutes),
             pull_request_alerts: value.get("pull_request_alerts").and_then(|v| v.as_bool()).unwrap_or(defaults.pull_request_alerts),
+            projects_dir: value.get("projects_dir").and_then(|v| v.as_str()).map(str::trim).filter(|v| !v.is_empty()).map(str::to_owned),
         }
+    }
+
+    /// The folder whose repositories are the projects: the chosen one, else `~/Projects`.
+    pub fn projects_dir(&self) -> PathBuf {
+        self.projects_dir.as_deref().map(PathBuf::from).unwrap_or_else(crate::paths::default_projects_dir)
     }
 
     pub fn load(path: &Path) -> Self {
@@ -85,10 +94,20 @@ mod tests {
     }
 
     #[test]
+    fn projects_folder() {
+        let default = Settings::default();
+        assert_eq!(default.projects_dir(), crate::paths::default_projects_dir());
+        assert_eq!(Settings::from_json(r#"{"projects_dir": "  "}"#).projects_dir, None, "blank is the default");
+        assert_eq!(Settings::from_json(r#"{"projects_dir": 5}"#).projects_dir, None);
+        let chosen = Settings::from_json(r#"{"projects_dir": "D:\\Работа\\Проекты"}"#);
+        assert_eq!(chosen.projects_dir(), PathBuf::from("D:\\Работа\\Проекты"));
+    }
+
+    #[test]
     fn round_trip() {
         let dir = std::env::temp_dir().join(format!("claudepult-settings-{}", std::process::id()));
         let path = dir.join("settings.json");
-        let settings = Settings { language: Some("uk".into()), tray_hint_seen: true, launch_mode: Some("terminal".into()), background_time_limit_minutes: 60, pull_request_alerts: false };
+        let settings = Settings { language: Some("uk".into()), tray_hint_seen: true, launch_mode: Some("terminal".into()), background_time_limit_minutes: 60, pull_request_alerts: false, projects_dir: Some("/tmp/Проекты".into()) };
         settings.save(&path).unwrap();
         assert_eq!(Settings::load(&path), settings);
         assert!(!path.with_extension("json.tmp").exists());

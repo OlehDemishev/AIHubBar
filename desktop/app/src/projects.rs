@@ -3,7 +3,7 @@
 //! on a list older than a minute. A row opens into STATUS.md, the attention items, PRs, worktrees and «Терминал» /
 //! «Папка» / GitHub, and the Mac's three Claude commands, started in a terminal window (`core/launch.rs`).
 
-use crate::{language, strings};
+use crate::{language, projects_dir, strings};
 use chrono::{DateTime, Utc};
 use claudepult_core::i18n::Strings;
 use claudepult_core::projects::{self, Ci, Health, Project, Tools, Words};
@@ -33,6 +33,8 @@ enum Problem {
 #[derive(Default)]
 struct State {
     projects: Vec<Project>,
+    /// The folder `projects` came from: PR alerts compare two scans of the same folder only.
+    root: Option<PathBuf>,
     updated: Option<Instant>,
     refreshing: bool,
     problem: Option<Problem>,
@@ -78,7 +80,7 @@ impl Projects {
     fn refresh(&self, app: &AppHandle, fetch: bool) {
         self.state.lock().unwrap().refreshing = true;
         let _ = app.emit("projects-changed", ());
-        let root = paths::projects_dir();
+        let root = projects_dir(app);
         let texts = strings(app);
         let words = Words { strings: &texts, language: language(app) };
         let started = Instant::now();
@@ -88,10 +90,14 @@ impl Projects {
             Some(tools) => (projects::scan(&root, &tools, fetch, &words, Utc::now()), None),
         };
         eprintln!("projects: {} in {:.1} s{}", projects.len(), started.elapsed().as_secs_f64(), if fetch { " (fetch)" } else { "" });
-        let old = std::mem::take(&mut self.state.lock().unwrap().projects);
-        // A failed scan (no folder, no git) keeps quiet: an empty list isn't «every PR closed».
-        let changes = if problem.is_none() { projects::pull_request_changes(&old, &projects) } else { Vec::new() };
-        *self.state.lock().unwrap() = State { projects, updated: Some(Instant::now()), refreshing: false, problem };
+        let (old, old_root) = {
+            let mut state = self.state.lock().unwrap();
+            (std::mem::take(&mut state.projects), state.root.take())
+        };
+        // A failed scan (no folder, no git) keeps quiet: an empty list isn't «every PR closed»; nor is another folder.
+        let same_folder = old_root.as_deref() == Some(root.as_path());
+        let changes = if problem.is_none() && same_folder { projects::pull_request_changes(&old, &projects) } else { Vec::new() };
+        *self.state.lock().unwrap() = State { projects, root: Some(root), updated: Some(Instant::now()), refreshing: false, problem };
         let _ = app.emit("projects-changed", ());
         app.state::<crate::limits::Limits>().update_tray(app);
         let alerts = app.state::<crate::AppState>().settings.lock().unwrap().pull_request_alerts;
@@ -102,6 +108,14 @@ impl Projects {
                 let _ = app.notification().builder().title(title).body(body).show();
             }
         }
+    }
+
+    /// Another projects folder was chosen: the old list goes at once and the new folder is read.
+    pub fn folder_changed(&self, app: &AppHandle) {
+        *self.state.lock().unwrap() = State::default();
+        let _ = app.emit("projects-changed", ());
+        app.state::<crate::limits::Limits>().update_tray(app);
+        self.ask(false);
     }
 
     /// The panel opened: a list older than a minute is read again.
@@ -316,7 +330,7 @@ pub fn projects_view(app: AppHandle) -> ProjectsView {
     let state = projects.state.lock().unwrap();
     let now = Utc::now();
     let message = match state.problem {
-        Some(Problem::NoFolder) => Some(texts.format("Папки нет: %@", &[&paths::projects_dir().to_string_lossy()])),
+        Some(Problem::NoFolder) => Some(texts.format("Папки нет: %@", &[&projects_dir(&app).to_string_lossy()])),
         Some(Problem::NoGit) => Some(texts.t("Не удалось прочитать репозитории").to_owned()),
         None if state.updated.is_some() && state.projects.is_empty() => Some(texts.t("В папке проектов не найдено git-репозиториев.").to_owned()),
         None => None,
@@ -443,7 +457,7 @@ fn launch_now(
         }
     }
 
-    let prompt = launch::one_line(&command.prompt(&Style::for_projects(&paths::projects_dir()), language(app)));
+    let prompt = launch::one_line(&command.prompt(&Style::for_projects(&projects_dir(app)), language(app)));
     let mut message = if background {
         let name = path.file_name().map(|n| n.to_string_lossy().into_owned()).unwrap_or_default();
         let task = match &command {

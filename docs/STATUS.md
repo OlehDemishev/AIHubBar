@@ -5,6 +5,7 @@
 **Updated:** 2026-11-18
 
 **Now:**
+- 2026-11-18: Windows stage 5 begun — Settings → «Проекты» → «Папка проектов» instead of the fixed `~/Projects` (branch `feat/desktop-projects-folder`)
 - 2026-11-18: Windows — «Удалить» on a worktree in the panel, only when nothing is uncommitted and the branch is merged or pushed (#408, merged)
 - 2026-11-18: Windows — notifications when a PR's CI fails or is fixed and when a PR closes, a red dot on the tray icon for a project that needs attention (#406, merged)
 - 2026-11-18: Windows — Claude in the background: `claude -p` with no window, the Mac's rules plus `PowerShell(…)` twins, time limit, «Остановить», a notification, the log in the panel (#404, merged; a run with a fake `claude.cmd` passes on Windows in CI)
@@ -50,7 +51,7 @@
 - check on the Air: the island at the real notch
 - promotion (docs/LAUNCH.md): r/ClaudeAI, the lists, r/macapps, Show HN, Product Hunt, Homebrew
 - content (docs/specs/SPEC-content.md, agreed): stage 2 «Версии», then batch tasks; better after the first feedback from people
-- Windows: on the laptop the live check of SPEC-windows §11.4 (with a real permission request answered from the panel) the «Проекты» card's buttons, a Claude launch in Windows Terminal and one in the background (do the `PowerShell(…)` rules let it build and check a project without Git Bash?); then stage 5 (profiles, the projects folder setting); stage 3 leftovers («Показать», buttons in the notification) need the laptop
+- Windows: on the laptop the live check of SPEC-windows §11.4 (with a real permission request answered from the panel) the «Проекты» card's buttons, a Claude launch in Windows Terminal and one in the background (do the `PowerShell(…)` rules let it build and check a project without Git Bash?); then stage 5 on: profiles and `.claudepult` (the projects folder becomes a profile's), folder projects, templates; stage 3 leftovers («Показать», buttons in the notification) need the laptop
 
 **Needs Oleh:**
 - Windows laptop: install the tools and copy the two CLAUDE.md files as in `desktop/WINDOWS-DEV.md`, sign in to Claude Code there; choose the Windows signing (SPEC-windows §7)
@@ -86,6 +87,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-18 — Windows: the projects folder setting (branch `feat/desktop-projects-folder`)
+
+Done: stage 5 begun. Settings → «Проекты» has «Папка проектов»: the path, «Выбрать…» (the system's folder picker through `tauri-plugin-dialog`, opened at the current folder) and «По умолчанию» while another folder is chosen; «Папки нет: …» when it is gone. `projects_dir` in `settings.json` (None — `~/Projects`), as the Mac's `projectsDirectory`; the scan, the prompts' rules file and the hooks' `--projects-dir` read it. A new folder empties the list and is read at once; PR alerts compare two scans of the same folder only, so switching doesn't announce every old PR as closed. Installed hooks then show «нужно обновить», as on the Mac. All texts were already in the catalog.
+Checked: `python3 scripts/strings.py --check` (154 texts), `scripts/strings-check.py`, `cargo test --workspace` on the Mac (core 55: the setting's reading and default). The dev app by pid with `projects_dir` set to a test folder with one repository: «projects: 1» (the real `~/Projects` has 10); with a folder that doesn't exist: an empty scan. The settings page in a browser with sample replies: «Выбрать…» shows the new path, «По умолчанию» and the hooks as «нужно обновить»; «По умолчанию» hides itself and shows «Папки нет: …» for a missing folder; no sideways scroll with a long path.
+Left: the folder picker itself isn't opened (it needs the real settings window); not tried on Windows. Profiles will make the folder a profile's setting.
 
 ## 2026-11-18 — Windows: removing worktrees from the panel (branch `feat/desktop-worktree-removal`)
 

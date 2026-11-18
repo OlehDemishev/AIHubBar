@@ -45,6 +45,10 @@ Still to come in stage 3: «Show» (bringing the terminal forward), buttons in t
 
 Still to come in stage 4: pausing background runs at the limit, Telegram.
 
+Stage 5 «Профили и модули» (docs/specs/SPEC-windows.md §9):
+
+- Settings → «Проекты» → «Папка проектов» (2026-11-18): «Выбрать…» opens the system's folder picker, «По умолчанию» goes back to `~/Projects` (`%USERPROFILE%\Projects`); `projects_dir` in `settings.json`, as the Mac's `projectsDirectory`. A new folder is read at once, its PR changes are not compared with the old folder's, and installed hooks show «нужно обновить» (they name a session's project by this folder). «Папки нет: …» under the path when it is gone.
+
 On a Mac this build never installs hooks into the real `~/.claude/settings.json`: the Mac app owns it. It does so only with another `CLAUDE_CONFIG_DIR`.
 
 ## Layout
