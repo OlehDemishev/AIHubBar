@@ -44,6 +44,21 @@
         <p style="margin-top: 6px"><button id="hooks-settings" data-t="Настройки…"></button></p>
       </div>
     </section>
+    <section class="card keep-awake" id="keep-awake" hidden>
+      <div class="keep-awake-head">
+        <h2 data-t="Не спать"></h2>
+        <span class="cup" id="keep-awake-cup" aria-hidden="true">☕</span>
+        <span class="spacer"></span>
+        <input type="checkbox" class="switch" id="keep-awake-switch" data-t-title="Не давать компьютеру засыпать, пока не выключите">
+      </div>
+      <p class="secondary" id="keep-awake-status"></p>
+      <p class="timers">
+        <button class="small" data-minutes="15" data-t="15 мин"></button>
+        <button class="small" data-minutes="60" data-t="1 ч"></button>
+        <button class="small" data-minutes="120" data-t="2 ч"></button>
+        <button class="small" id="keep-awake-release" data-t="Отпустить" data-t-title="Снять ручной запрет сна: дальше решают правила" hidden></button>
+      </p>
+    </section>
     <section class="card upcoming" id="upcoming" hidden>
       <div class="upcoming-head">
         <h2 data-t="Ближайшее"></h2>
@@ -248,6 +263,30 @@
     document.getElementById("hooks-settings").onclick = () => invoke("open_settings");
     await showSessions();
     window.__TAURI__.event.listen("sessions-changed", showSessions);
+
+    // «Не спать»: what holds the computer, the switch (until switched off) and quick timers; the rules decide the rest.
+    const keepAwakeSwitch = document.getElementById("keep-awake-switch");
+    keepAwakeSwitch.setAttribute("aria-label", t("Не спать"));
+    function showKeepAwake(view) {
+      document.getElementById("keep-awake").hidden = !view.shown;
+      document.getElementById("keep-awake-cup").classList.toggle("holding", view.holding);
+      const status = document.getElementById("keep-awake-status");
+      status.textContent = view.status;
+      status.className = view.holding ? "" : "secondary";
+      keepAwakeSwitch.checked = view.manual;
+      document.getElementById("keep-awake-release").hidden = !view.manual;
+    }
+    keepAwakeSwitch.onchange = async () => showKeepAwake(await invoke(keepAwakeSwitch.checked ? "keep_awake_hold" : "keep_awake_release", { minutes: null }));
+    for (const button of document.querySelectorAll("#keep-awake [data-minutes]")) {
+      button.onclick = async () => showKeepAwake(await invoke("keep_awake_hold", { minutes: Number(button.dataset.minutes) }));
+    }
+    document.getElementById("keep-awake-release").onclick = async () => showKeepAwake(await invoke("keep_awake_release"));
+    const refreshKeepAwake = async () => showKeepAwake(await invoke("keep_awake_view"));
+    refreshKeepAwake();
+    window.__TAURI__.event.listen("keep-awake-changed", refreshKeepAwake);
+    window.__TAURI__.event.listen("profiles-changed", refreshKeepAwake);
+    // «держу ещё 47 мин» counts down.
+    setInterval(() => { if (!document.getElementById("keep-awake").hidden) refreshKeepAwake(); }, 30_000);
 
     // STATUS.md items and attention texts carry inline Markdown: `code` and **bold**, as the Mac panel shows them.
     function inline(text) {

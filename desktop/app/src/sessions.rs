@@ -47,6 +47,11 @@ fn open_requests(shown: &[(Session, State)]) -> HashMap<String, Request> {
 }
 
 impl Sessions {
+    /// The states of the sessions shown now.
+    pub fn states(&self) -> Vec<State> {
+        self.seen.lock().unwrap().iter().map(|s| s.1).collect()
+    }
+
     pub fn start(&self, app: AppHandle) {
         let this = self.clone();
         std::thread::spawn(move || loop {
