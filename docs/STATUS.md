@@ -5,7 +5,7 @@
 **Updated:** 2026-11-18
 
 **Now:**
-- 2026-11-18: Windows — profiles: kept in the Mac's own JSON, the projects folder and launch mode per profile, a switcher in the panel (branch `feat/desktop-profiles`)
+- 2026-11-18: Windows — profiles: kept in the Mac's own JSON, the projects folder and launch mode per profile, a switcher in the panel (#412, merged)
 - 2026-11-18: Windows stage 5 begun — Settings → «Проекты» → «Папка проектов» instead of the fixed `~/Projects` (#410, merged)
 - 2026-11-18: Windows — «Удалить» on a worktree in the panel, only when nothing is uncommitted and the branch is merged or pushed (#408, merged)
 - 2026-11-18: Windows — notifications when a PR's CI fails or is fixed and when a PR closes, a red dot on the tray icon for a project that needs attention (#406, merged)
