@@ -1,0 +1,316 @@
+{
+ "developer": {
+  "ar": {
+   "calendar": "off",
+   "card": "statusMD",
+   "commands": [],
+   "commonCommands": "none",
+   "icon": "chevron.left.forwardslash.chevron.right",
+   "metrics": [
+    "branch",
+    "dirty",
+    "pullRequests",
+    "lastActivity"
+   ],
+   "name": "مطوّر (GitHub)",
+   "permissions": "code",
+   "showCommonCommands": false,
+   "showProjects": true,
+   "source": {
+    "gitBuiltin": {
+     "projects": "~/Projects"
+    }
+   },
+   "stages": [],
+   "template": "developer"
+  },
+  "de": {
+   "calendar": "off",
+   "card": "statusMD",
+   "commands": [],
+   "commonCommands": "none",
+   "icon": "chevron.left.forwardslash.chevron.right",
+   "metrics": [
+    "branch",
+    "dirty",
+    "pullRequests",
+    "lastActivity"
+   ],
+   "name": "Entwickler (GitHub)",
+   "permissions": "code",
+   "showCommonCommands": false,
+   "showProjects": true,
+   "source": {
+    "gitBuiltin": {
+     "projects": "~/Projects"
+    }
+   },
+   "stages": [],
+   "template": "developer"
+  },
+  "en": {
+   "calendar": "off",
+   "card": "statusMD",
+   "commands": [],
+   "commonCommands": "none",
+   "icon": "chevron.left.forwardslash.chevron.right",
+   "metrics": [
+    "branch",
+    "dirty",
+    "pullRequests",
+    "lastActivity"
+   ],
+   "name": "Developer (GitHub)",
+   "permissions": "code",
+   "showCommonCommands": false,
+   "showProjects": true,
+   "source": {
+    "gitBuiltin": {
+     "projects": "~/Projects"
+    }
+   },
+   "stages": [],
+   "template": "developer"
+  },
+  "es": {
+   "calendar": "off",
+   "card": "statusMD",
+   "commands": [],
+   "commonCommands": "none",
+   "icon": "chevron.left.forwardslash.chevron.right",
+   "metrics": [
+    "branch",
+    "dirty",
+    "pullRequests",
+    "lastActivity"
+   ],
+   "name": "Desarrollador (GitHub)",
+   "permissions": "code",
+   "showCommonCommands": false,
+   "showProjects": true,
+   "source": {
+    "gitBuiltin": {
+     "projects": "~/Projects"
+    }
+   },
+   "stages": [],
+   "template": "developer"
+  },
+  "fr": {
+   "calendar": "off",
+   "card": "statusMD",
+   "commands": [],
+   "commonCommands": "none",
+   "icon": "chevron.left.forwardslash.chevron.right",
+   "metrics": [
+    "branch",
+    "dirty",
+    "pullRequests",
+    "lastActivity"
+   ],
+   "name": "Développeur (GitHub)",
+   "permissions": "code",
+   "showCommonCommands": false,
+   "showProjects": true,
+   "source": {
+    "gitBuiltin": {
+     "projects": "~/Projects"
+    }
+   },
+   "stages": [],
+   "template": "developer"
+  },
+  "id": {
+   "calendar": "off",
+   "card": "statusMD",
+   "commands": [],
+   "commonCommands": "none",
+   "icon": "chevron.left.forwardslash.chevron.right",
+   "metrics": [
+    "branch",
+    "dirty",
+    "pullRequests",
+    "lastActivity"
+   ],
+   "name": "Developer (GitHub)",
+   "permissions": "code",
+   "showCommonCommands": false,
+   "showProjects": true,
+   "source": {
+    "gitBuiltin": {
+     "projects": "~/Projects"
+    }
+   },
+   "stages": [],
+   "template": "developer"
+  },
+  "it": {
+   "calendar": "off",
+   "card": "statusMD",
+   "commands": [],
+   "commonCommands": "none",
+   "icon": "chevron.left.forwardslash.chevron.right",
+   "metrics": [
+    "branch",
+    "dirty",
+    "pullRequests",
+    "lastActivity"
+   ],
+   "name": "Sviluppatore (GitHub)",
+   "permissions": "code",
+   "showCommonCommands": false,
+   "showProjects": true,
+   "source": {
+    "gitBuiltin": {
+     "projects": "~/Projects"
+    }
+   },
+   "stages": [],
+   "template": "developer"
+  },
+  "ja": {
+   "calendar": "off",
+   "card": "statusMD",
+   "commands": [],
+   "commonCommands": "none",
+   "icon": "chevron.left.forwardslash.chevron.right",
+   "metrics": [
+    "branch",
+    "dirty",
+    "pullRequests",
+    "lastActivity"
+   ],
+   "name": "開発者 (GitHub)",
+   "permissions": "code",
+   "showCommonCommands": false,
+   "showProjects": true,
+   "source": {
+    "gitBuiltin": {
+     "projects": "~/Projects"
+    }
+   },
+   "stages": [],
+   "template": "developer"
+  },
+  "ko": {
+   "calendar": "off",
+   "card": "statusMD",
+   "commands": [],
+   "commonCommands": "none",
+   "icon": "chevron.left.forwardslash.chevron.right",
+   "metrics": [
+    "branch",
+    "dirty",
+    "pullRequests",
+    "lastActivity"
+   ],
+   "name": "개발자 (GitHub)",
+   "permissions": "code",
+   "showCommonCommands": false,
+   "showProjects": true,
+   "source": {
+    "gitBuiltin": {
+     "projects": "~/Projects"
+    }
+   },
+   "stages": [],
+   "template": "developer"
+  },
+  "pl": {
+   "calendar": "off",
+   "card": "statusMD",
+   "commands": [],
+   "commonCommands": "none",
+   "icon": "chevron.left.forwardslash.chevron.right",
+   "metrics": [
+    "branch",
+    "dirty",
+    "pullRequests",
+    "lastActivity"
+   ],
+   "name": "Programista (GitHub)",
+   "permissions": "code",
+   "showCommonCommands": false,
+   "showProjects": true,
+   "source": {
+    "gitBuiltin": {
+     "projects": "~/Projects"
+    }
+   },
+   "stages": [],
+   "template": "developer"
+  },
+  "pt-BR": {
+   "calendar": "off",
+   "card": "statusMD",
+   "commands": [],
+   "commonCommands": "none",
+   "icon": "chevron.left.forwardslash.chevron.right",
+   "metrics": [
+    "branch",
+    "dirty",
+    "pullRequests",
+    "lastActivity"
+   ],
+   "name": "Desenvolvedor (GitHub)",
+   "permissions": "code",
+   "showCommonCommands": false,
+   "showProjects": true,
+   "source": {
+    "gitBuiltin": {
+     "projects": "~/Projects"
+    }
+   },
+   "stages": [],
+   "template": "developer"
+  },
+  "ru": {
+   "calendar": "off",
+   "card": "statusMD",
+   "commands": [],
+   "commonCommands": "none",
+   "icon": "chevron.left.forwardslash.chevron.right",
+   "metrics": [
+    "branch",
+    "dirty",
+    "pullRequests",
+    "lastActivity"
+   ],
+   "name": "Разработчик (GitHub)",
+   "permissions": "code",
+   "showCommonCommands": false,
+   "showProjects": true,
+   "source": {
+    "gitBuiltin": {
+     "projects": "~/Projects"
+    }
+   },
+   "stages": [],
+   "template": "developer"
+  },
+  "uk": {
+   "calendar": "off",
+   "card": "statusMD",
+   "commands": [],
+   "commonCommands": "none",
+   "icon": "chevron.left.forwardslash.chevron.right",
+   "metrics": [
+    "branch",
+    "dirty",
+    "pullRequests",
+    "lastActivity"
+   ],
+   "name": "Розробник (GitHub)",
+   "permissions": "code",
+   "showCommonCommands": false,
+   "showProjects": true,
+   "source": {
+    "gitBuiltin": {
+     "projects": "~/Projects"
+    }
+   },
+   "stages": [],
+   "template": "developer"
+  }
+ }
+}

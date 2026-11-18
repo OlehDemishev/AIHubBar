@@ -5,6 +5,7 @@
 **Updated:** 2026-11-18
 
 **Now:**
+- 2026-11-18: Windows — profiles: kept in the Mac's own JSON, the projects folder and launch mode per profile, a switcher in the panel (branch `feat/desktop-profiles`)
 - 2026-11-18: Windows stage 5 begun — Settings → «Проекты» → «Папка проектов» instead of the fixed `~/Projects` (#410, merged)
 - 2026-11-18: Windows — «Удалить» on a worktree in the panel, only when nothing is uncommitted and the branch is merged or pushed (#408, merged)
 - 2026-11-18: Windows — notifications when a PR's CI fails or is fixed and when a PR closes, a red dot on the tray icon for a project that needs attention (#406, merged)
@@ -51,7 +52,7 @@
 - check on the Air: the island at the real notch
 - promotion (docs/LAUNCH.md): r/ClaudeAI, the lists, r/macapps, Show HN, Product Hunt, Homebrew
 - content (docs/specs/SPEC-content.md, agreed): stage 2 «Версии», then batch tasks; better after the first feedback from people
-- Windows: on the laptop the live check of SPEC-windows §11.4 (with a real permission request answered from the panel) the «Проекты» card's buttons, a Claude launch in Windows Terminal and one in the background (do the `PowerShell(…)` rules let it build and check a project without Git Bash?); then stage 5 on: profiles and `.claudepult` (the projects folder becomes a profile's), folder projects, templates; stage 3 leftovers («Показать», buttons in the notification) need the laptop
+- Windows: on the laptop the live check of SPEC-windows §11.4 (with a real permission request answered from the panel) the «Проекты» card's buttons, a Claude launch in Windows Terminal and one in the background (do the `PowerShell(…)` rules let it build and check a project without Git Bash?); then stage 5 on: `.claudepult` export and import, folder projects and the other templates, the assistant; stage 3 leftovers («Показать», buttons in the notification) need the laptop
 
 **Needs Oleh:**
 - Windows laptop: install the tools and copy the two CLAUDE.md files as in `desktop/WINDOWS-DEV.md`, sign in to Claude Code there; choose the Windows signing (SPEC-windows §7)
@@ -87,6 +88,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-18 — Windows: profiles (branch `feat/desktop-profiles`)
+
+Done: `desktop/core/profiles.rs` reads and writes the Mac's `Profile` JSON as it is — the name, the projects source and `launchMode` are used, every other field comes back unchanged; paths with `~` and `/`. `settings.json` holds `profiles` and `current_profile`; the projects folder and «Где запускать Claude» are the current profile's (`ProfileStore.apply`). A first start or a file from before profiles gets «Разработчик (GitHub)» from the Mac's template with the old folder and launch mode; `scripts/strings.py` now also writes `ui/i18n/templates.json`, and CI runs on template changes. Settings → «Профили»: choose, rename, add, delete with «Удалить профиль?» (the last one stays — no assistant yet); the panel's header switches once there are two. Switching reads the new folder at once, PR alerts never compare two folders, hooks are shown anew. A profile with folder projects says «У этого профиля нет папки проектов».
+Checked: `python3 scripts/strings.py --check` (163 texts), `scripts/strings-check.py`, `cargo test --workspace` on the Mac (core 62: a Mac profile file round-trips unchanged, tolerant reading, the template in three languages, `~` paths, the first profile from an old file, switching keeps each profile's folder and mode, the last profile stays). The dev app by pid: an old `settings.json` with `projects_dir` and `launch_mode` became one profile with both and scanned 1 project; with a folder-projects profile current — an empty scan, no second profile made, its stages kept. Settings and the panel's header in a browser with sample replies: choose, «Выбрать…», rename, «Удалить» → «Удалить профиль?» → gone, add; the switcher fits the 380 px panel with a long name.
+Left: not seen in the real windows or on Windows; `.claudepult` export and import, the other templates and the assistant come next.
 
 ## 2026-11-18 — Windows: the projects folder setting (branch `feat/desktop-projects-folder`)
 

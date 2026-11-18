@@ -9,6 +9,7 @@
   <main class="panel">
     <header>
       <h1>AI Hub Bar</h1>
+      <select id="profile-switch" data-t-title="Сменить профиль" hidden></select>
       <span class="spacer"></span>
       <button class="icon-button" id="refresh" data-t-title="Обновить" aria-label="Refresh">↻</button>
       <button class="icon-button" id="settings" data-t-title="Настройки…" aria-label="Settings">⚙</button>
@@ -51,6 +52,16 @@
       invoke("refresh_limits");
       invoke("refresh_projects");
     };
+    // The profile switcher, once there are two: the projects folder and where Claude runs are the profile's.
+    const profileSwitch = document.getElementById("profile-switch");
+    async function showProfiles() {
+      const view = await invoke("profiles_view");
+      profileSwitch.replaceChildren(...view.rows.map((row) => new Option(row.name, row.id, row.current, row.current)));
+      profileSwitch.hidden = view.rows.length < 2;
+    }
+    profileSwitch.onchange = () => invoke("select_profile", { id: profileSwitch.value });
+    showProfiles();
+    window.__TAURI__.event.listen("profiles-changed", showProfiles);
     const hint = document.getElementById("tray-hint");
     hint.hidden = !ui.showTrayHint;
     document.getElementById("tray-hint-done").onclick = async () => {

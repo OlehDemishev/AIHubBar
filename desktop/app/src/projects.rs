@@ -3,7 +3,8 @@
 //! on a list older than a minute. A row opens into STATUS.md, the attention items, PRs, worktrees and «Терминал» /
 //! «Папка» / GitHub, and the Mac's three Claude commands, started in a terminal window (`core/launch.rs`).
 
-use crate::{language, projects_dir, strings};
+use crate::profiles::{projects_dir, projects_root};
+use crate::{language, strings};
 use chrono::{DateTime, Utc};
 use claudepult_core::i18n::Strings;
 use claudepult_core::projects::{self, Ci, Health, Project, Tools, Words};
@@ -28,6 +29,8 @@ const FETCH_INTERVAL: Duration = Duration::from_secs(30 * 60);
 enum Problem {
     NoFolder,
     NoGit,
+    /// The profile has no git projects folder.
+    NoSource,
 }
 
 #[derive(Default)]
@@ -84,10 +87,11 @@ impl Projects {
         let texts = strings(app);
         let words = Words { strings: &texts, language: language(app) };
         let started = Instant::now();
-        let (projects, problem) = match Tools::find() {
-            _ if !root.is_dir() => (Vec::new(), Some(Problem::NoFolder)),
-            None => (Vec::new(), Some(Problem::NoGit)),
-            Some(tools) => (projects::scan(&root, &tools, fetch, &words, Utc::now()), None),
+        let (projects, problem) = match (Tools::find(), &root) {
+            (_, None) => (Vec::new(), Some(Problem::NoSource)),
+            (_, Some(root)) if !root.is_dir() => (Vec::new(), Some(Problem::NoFolder)),
+            (None, _) => (Vec::new(), Some(Problem::NoGit)),
+            (Some(tools), Some(root)) => (projects::scan(root, &tools, fetch, &words, Utc::now()), None),
         };
         eprintln!("projects: {} in {:.1} s{}", projects.len(), started.elapsed().as_secs_f64(), if fetch { " (fetch)" } else { "" });
         let (old, old_root) = {
@@ -95,9 +99,9 @@ impl Projects {
             (std::mem::take(&mut state.projects), state.root.take())
         };
         // A failed scan (no folder, no git) keeps quiet: an empty list isn't «every PR closed»; nor is another folder.
-        let same_folder = old_root.as_deref() == Some(root.as_path());
+        let same_folder = old_root.is_some() && old_root == root;
         let changes = if problem.is_none() && same_folder { projects::pull_request_changes(&old, &projects) } else { Vec::new() };
-        *self.state.lock().unwrap() = State { projects, root: Some(root), updated: Some(Instant::now()), refreshing: false, problem };
+        *self.state.lock().unwrap() = State { projects, root, updated: Some(Instant::now()), refreshing: false, problem };
         let _ = app.emit("projects-changed", ());
         app.state::<crate::limits::Limits>().update_tray(app);
         let alerts = app.state::<crate::AppState>().settings.lock().unwrap().pull_request_alerts;
@@ -330,7 +334,8 @@ pub fn projects_view(app: AppHandle) -> ProjectsView {
     let state = projects.state.lock().unwrap();
     let now = Utc::now();
     let message = match state.problem {
-        Some(Problem::NoFolder) => Some(texts.format("Папки нет: %@", &[&projects_dir(&app).to_string_lossy()])),
+        Some(Problem::NoFolder) => Some(texts.format("Папки нет: %@", &[&projects_root(&app).to_string_lossy()])),
+        Some(Problem::NoSource) => Some(texts.t("Проектов нет: у профиля нет папки с git-проектами.").to_owned()),
         Some(Problem::NoGit) => Some(texts.t("Не удалось прочитать репозитории").to_owned()),
         None if state.updated.is_some() && state.projects.is_empty() => Some(texts.t("В папке проектов не найдено git-репозиториев.").to_owned()),
         None => None,
@@ -429,9 +434,10 @@ fn launch_now(
     let settings = app.state::<crate::AppState>().settings.lock().unwrap().clone();
     let mode = mode.filter(|m| LAUNCH_MODES.contains(&m.as_str()));
     if remember && mode.is_some() {
-        crate::save(app, |s| s.launch_mode = mode.clone());
+        crate::save(app, |s| s.set_launch_mode(mode.clone()));
+        let _ = app.emit("profiles-changed", ());
     }
-    let Some(mode) = mode.or(settings.launch_mode) else {
+    let Some(mode) = mode.or(settings.launch_mode()) else {
         return Ok(LaunchReply { choose: Some(texts.format("Где запустить «%@»?", &[&title])), ..LaunchReply::default() });
     };
     let background = mode == "background";
@@ -457,7 +463,7 @@ fn launch_now(
         }
     }
 
-    let prompt = launch::one_line(&command.prompt(&Style::for_projects(&projects_dir(app)), language(app)));
+    let prompt = launch::one_line(&command.prompt(&Style::for_projects(&projects_root(app)), language(app)));
     let mut message = if background {
         let name = path.file_name().map(|n| n.to_string_lossy().into_owned()).unwrap_or_default();
         let task = match &command {
