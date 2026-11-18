@@ -28,6 +28,7 @@ pub mod runs;
 pub mod sessions;
 pub mod settings;
 pub mod texts;
+pub mod toggles;
 pub mod tray_icon;
 pub mod usage;
 

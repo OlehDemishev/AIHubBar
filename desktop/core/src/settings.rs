@@ -39,6 +39,8 @@ pub struct Settings {
     pub resource_disk_below_gb: u64,
     /// «Быстрые команды»: the library (the Mac's `[QuickCommand]`); None — the starting examples, until edited.
     pub quick_commands: Option<Vec<crate::quick_commands::QuickCommand>>,
+    /// «Быстрые переключатели» shown (the Mac's `quickToggles`); None — every one this system has.
+    pub quick_toggles: Option<Vec<String>>,
     /// `projects_dir` and `launch_mode` of a file from before profiles, for the first profile.
     #[serde(skip)]
     pub before_profiles: (Option<String>, Option<String>),
@@ -60,6 +62,7 @@ impl Default for Settings {
             resource_alerts: true,
             resource_disk_below_gb: 20,
             quick_commands: None,
+            quick_toggles: None,
             before_profiles: (None, None),
         }
     }
@@ -106,6 +109,10 @@ impl Settings {
             keep_awake_manual: value.get("keep_awake_manual").and_then(Value::as_f64),
             resource_alerts: value.get("resource_alerts").and_then(Value::as_bool).unwrap_or(defaults.resource_alerts),
             quick_commands: crate::quick_commands::library(value.get("quick_commands")),
+            quick_toggles: value
+                .get("quick_toggles")
+                .and_then(Value::as_array)
+                .map(|list| list.iter().filter_map(Value::as_str).filter(|t| crate::toggles::TOGGLES.contains(t)).map(str::to_owned).collect()),
             resource_disk_below_gb: value.get("resource_disk_below_gb").and_then(Value::as_u64).filter(|gb| *gb > 0).unwrap_or(defaults.resource_disk_below_gb),
             before_profiles: (text("projects_dir"), text("launch_mode").filter(|m| LAUNCH_MODES.contains(&m.as_str()))),
         }
@@ -253,7 +260,7 @@ impl Settings {
 // MARK: - Modules: the Mac's `installed` and `off` lists, so `.claudepult` files carry them both ways
 
 /// The stage 6 modules this version has, as the Mac's `ModuleKind` names them.
-pub const MODULES: [&str; 3] = ["resources", "keepAwake", "quickCommands"];
+pub const MODULES: [&str; 4] = ["resources", "keepAwake", "quickCommands", "toggles"];
 
 impl Settings {
     fn kinds(&self, key: &str) -> Vec<String> {

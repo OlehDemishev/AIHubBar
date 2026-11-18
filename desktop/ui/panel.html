@@ -81,6 +81,17 @@
       </div>
       <div class="quick-results" id="quick-results"></div>
     </section>
+    <section class="card toggles" id="toggles" hidden>
+      <h2 data-t="Быстрые переключатели"></h2>
+      <div class="tiles" id="toggle-tiles"></div>
+      <div class="quick-confirm" id="toggle-confirm" hidden>
+        <span id="toggle-confirm-text"></span>
+        <span class="spacer"></span>
+        <button class="small" id="toggle-cancel" data-t="Отмена"></button>
+        <button class="small danger" id="toggle-yes" data-t="Да"></button>
+      </div>
+      <div class="quick-results" id="toggle-results"></div>
+    </section>
     <section class="card upcoming" id="upcoming" hidden>
       <div class="upcoming-head">
         <h2 data-t="Ближайшее"></h2>
@@ -405,6 +416,55 @@
     showQuickCommands();
     window.__TAURI__.event.listen("quick-commands-changed", showQuickCommands);
     window.__TAURI__.event.listen("profiles-changed", showQuickCommands);
+
+    // «Быстрые переключатели»: tiles, each run on a click; the Recycle Bin asks «…? Это нельзя отменить.» first.
+    let askingToggle = null;
+    let toggleQuestions = {};
+    async function showToggles() {
+      const view = await invoke("toggles_view");
+      document.getElementById("toggles").hidden = !view.shown;
+      if (!view.shown) return;
+      toggleQuestions = view.questions;
+      document.getElementById("toggle-tiles").replaceChildren(...view.tiles.map((tile) => {
+        const button = document.createElement("button");
+        button.className = tile.on ? "tile on" : "tile";
+        button.title = tile.hint;
+        button.disabled = tile.running;
+        if (tile.on !== null) button.setAttribute("aria-pressed", String(tile.on));
+        button.innerHTML = `<span class="glyph" aria-hidden="true"></span><span class="name"></span>`;
+        button.querySelector(".glyph").textContent = tile.running ? "…" : tile.glyph;
+        button.querySelector(".name").textContent = tile.shortTitle;
+        button.setAttribute("aria-label", tile.hint);
+        button.onclick = () => {
+          if (tile.confirm) { askingToggle = tile.id; return showToggleQuestion(); }
+          invoke("perform_toggle", { id: tile.id });
+        };
+        return button;
+      }));
+      showToggleQuestion();
+      document.getElementById("toggle-results").replaceChildren(...view.results.map((result) => {
+        const line = document.createElement("p");
+        line.className = result.isError ? "warning" : "secondary";
+        line.textContent = `${result.isError ? "⚠" : "✓"} ${result.text}`;
+        return line;
+      }));
+    }
+    function showToggleQuestion() {
+      document.getElementById("toggle-confirm").hidden = !askingToggle;
+      if (askingToggle) document.getElementById("toggle-confirm-text").textContent = toggleQuestions[askingToggle] ?? "";
+    }
+    document.getElementById("toggle-cancel").onclick = () => { askingToggle = null; showToggleQuestion(); };
+    document.getElementById("toggle-yes").onclick = () => {
+      const id = askingToggle;
+      askingToggle = null;
+      showToggleQuestion();
+      if (id) invoke("perform_toggle", { id });
+    };
+    showToggles();
+    window.__TAURI__.event.listen("toggles-changed", showToggles);
+    window.__TAURI__.event.listen("profiles-changed", showToggles);
+    // Dark mode or the icons may be switched elsewhere: read again when the panel comes forward.
+    window.addEventListener("focus", showToggles);
 
     // «Не спать»: what holds the computer, the switch (until switched off) and quick timers; the rules decide the rest.
     const keepAwakeSwitch = document.getElementById("keep-awake-switch");
