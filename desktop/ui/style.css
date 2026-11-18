@@ -144,6 +144,14 @@ button.prominent { background: var(--accent); border-color: var(--accent); color
 .launch-message { display: flex; flex-direction: column; gap: 4px; padding: 6px 8px; border-radius: 6px; background: var(--line); }
 .launch-message.error { color: #d70015; }
 @media (prefers-color-scheme: dark) { .launch-message.error { color: #ff6961; } }
+.remember { display: flex; align-items: center; gap: 5px; font-size: 12px; }
+.run-controls { display: flex; gap: 6px; margin: 0 0 4px 14px; }
+.run-controls button { padding: 1px 8px; font-size: 11px; }
+.run-log { margin: 0 0 6px 14px; max-height: 180px; overflow-y: auto; font-size: 11px; display: flex; flex-direction: column; gap: 3px; padding: 6px 8px; border-radius: 6px; background: var(--line); user-select: text; }
+.run-log .entry { white-space: pre-wrap; overflow-wrap: anywhere; }
+.run-log .tool { font-family: ui-monospace, "Cascadia Mono", Consolas, monospace; color: var(--secondary); }
+.run-log .result { font-weight: 600; }
+.run-log .error { color: #d70015; }
 [hidden] { display: none !important; }
 button:disabled { opacity: 0.45; cursor: default; }
 button:disabled:hover { border-color: var(--line); }

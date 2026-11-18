@@ -5,6 +5,7 @@
 **Updated:** 2026-11-18
 
 **Now:**
+- 2026-11-18: Windows — Claude in the background: `claude -p` with no window, the Mac's rules plus `PowerShell(…)` twins, time limit, «Остановить», a notification, the log in the panel (branch `feat/desktop-background-runs`)
 - 2026-11-18: Windows — Claude from a project in a terminal window: «Следующий шаг», «Своя задача…», «Завершить», a worktree when the folder is busy (#402, merged; the PowerShell script runs on Windows in CI)
 - 2026-11-18: Windows stage 4 begun — the git scanner and STATUS.md in the panel's «Проекты» card (#400, merged; tests green on Windows and Linux)
 - 2026-11-17: Windows — the hook installed for Codex and Copilot from Settings (#398, merged; both lines run on Windows in CI)
@@ -47,7 +48,7 @@
 - check on the Air: the island at the real notch
 - promotion (docs/LAUNCH.md): r/ClaudeAI, the lists, r/macapps, Show HN, Product Hunt, Homebrew
 - content (docs/specs/SPEC-content.md, agreed): stage 2 «Версии», then batch tasks; better after the first feedback from people
-- Windows: on the laptop the live check of SPEC-windows §11.4 (with a real permission request answered from the panel) the «Проекты» card's buttons and a Claude launch in Windows Terminal; then stage 4 on: Claude in the background, removing worktrees, the log; stage 3 leftovers («Показать», buttons in the notification) need the laptop
+- Windows: on the laptop the live check of SPEC-windows §11.4 (with a real permission request answered from the panel) the «Проекты» card's buttons, a Claude launch in Windows Terminal and one in the background (do the `PowerShell(…)` rules let it build and check a project without Git Bash?); then stage 4 on: removing worktrees, PR notifications, the red dot; stage 3 leftovers («Показать», buttons in the notification) need the laptop
 
 **Needs Oleh:**
 - Windows laptop: install the tools and copy the two CLAUDE.md files as in `desktop/WINDOWS-DEV.md`, sign in to Claude Code there; choose the Windows signing (SPEC-windows §7)
@@ -83,6 +84,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-18 — Windows: Claude in the background (branch `feat/desktop-background-runs`)
+
+Done: `desktop/core/runs.rs` ports `BackgroundRun`, `StreamJSON` and `BackgroundPermissions`. Runs are `runs/<id>.json` and `.log` in the Mac's shape (its other fields are kept), the id is Claude's `--session-id`. The rules are the Mac's «код» profile; on Windows every `Bash(…)` rule also exists as `PowerShell(…)`, and PowerShell's deletions, downloads, `Invoke-Expression`, `Start-Process` and `env:` reads are denied. They go to Claude as `runs/<id>.settings.json`. `process.rs` tells a run's process from a reused pid by its start time (`GetProcessTimes` on Windows, `/proc` on Linux). `desktop/app/src/runs.rs` watches the runs every 5 s: the end of the process, the time limit (stop), «Остановить» (`taskkill /T /F` on Windows, SIGTERM then SIGKILL elsewhere), the result with denied tools and the PR link, a notification «✅/❌ проект: задача». Runs show in «Сессии» (on their hook row or their own) with «Остановить» / «Остановить?», «Журнал» (Claude's text, tools, result) and «PR». A launch with no mode asks «Терминал» / «Фон» with «Запомнить выбор»; Settings has «Фоновые задачи» → «Где запускать Claude» and «Лимит времени».
+Checked: `python3 scripts/strings.py --check` (142 texts), `scripts/strings-check.py`, `cargo test --workspace` on the Mac (core 52: the Mac's run files read and written back, the stream-json result, finishing, the rules per system, a start with a fake `claude` that writes a result, process start times). Live on the Mac without the panel: two runs planted in the dev app's `runs/` with `sleep` processes — the one whose process ended became «failed» with «Claude завершился без результата — см. журнал», the overdue one was stopped by the time limit, its process killed, state «timedOut»; logs dated old, so no notification; the planted files removed. No real Claude run was started.
+Left: the buttons and the log in the real panel not seen (it takes the keyboard); a real background run on Windows, with and without Git Bash; pausing at the limit, Telegram, removing worktrees, PR notifications.
 
 ## 2026-11-18 — Windows: Claude from a project in a terminal (branch `feat/desktop-claude-launch`)
 

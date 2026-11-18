@@ -7,7 +7,10 @@ use crate::{language, strings};
 use chrono::{DateTime, Utc};
 use claudepult_core::i18n::Strings;
 use claudepult_core::projects::{self, Ci, Health, Project, Tools, Words};
+use crate::runs::Runs;
 use claudepult_core::launch::{self, ClaudeCommand, Style};
+use claudepult_core::runs::NewRun;
+use claudepult_core::settings::LAUNCH_MODES;
 use claudepult_core::sessions::{self, State as SessionState};
 use claudepult_core::{command, paths, process};
 use serde::Serialize;
@@ -329,7 +332,8 @@ pub fn open_project(app: AppHandle, path: String, target: String) -> Result<(), 
 /// A project's page or a PR — only links the scan found.
 #[tauri::command]
 pub fn open_link(app: AppHandle, url: String) -> Result<(), String> {
-    if !url.starts_with("https://") || !app.state::<Projects>().knows_link(&url) {
+    let from_a_run = app.state::<Runs>().list().iter().any(|r| r.pull_request_url.as_deref() == Some(url.as_str()));
+    if !url.starts_with("https://") || !(from_a_run || app.state::<Projects>().knows_link(&url)) {
         return Err("unknown link".into());
     }
     open_with_system(url.as_ref())
@@ -337,23 +341,43 @@ pub fn open_link(app: AppHandle, url: String) -> Result<(), String> {
 
 // MARK: - Claude
 
-#[derive(Serialize)]
+#[derive(Serialize, Default)]
 pub struct LaunchReply {
     message: String,
     /// The folder is busy and the command can't move to a worktree: «Запустить всё равно» asks again.
     confirm: bool,
+    /// No mode chosen yet: «Где запустить «…»?» with «Терминал» / «Фон».
+    choose: Option<String>,
 }
 
-/// «Следующий шаг», «Своя задача», «Завершить» in a terminal window, as the Mac's `LaunchController` with the
-/// terminal mode: a busy project folder gives a new worktree, or a question for «Завершить».
+/// «Следующий шаг», «Своя задача», «Завершить», as the Mac's `LaunchController`: in a terminal window or in the
+/// background (`mode`, else the remembered one, else the question); a busy project folder gives a new worktree, or a
+/// question for «Завершить».
 #[tauri::command]
-pub async fn launch_claude(app: AppHandle, path: String, command: String, task: Option<String>, allow_busy: bool) -> Result<LaunchReply, String> {
-    tauri::async_runtime::spawn_blocking(move || launch_now(&app, Path::new(&path), &command, task, allow_busy))
+#[allow(clippy::too_many_arguments)]
+pub async fn launch_claude(
+    app: AppHandle,
+    path: String,
+    command: String,
+    task: Option<String>,
+    allow_busy: bool,
+    mode: Option<String>,
+    remember: bool,
+) -> Result<LaunchReply, String> {
+    tauri::async_runtime::spawn_blocking(move || launch_now(&app, Path::new(&path), &command, task, allow_busy, mode, remember))
         .await
         .map_err(|e| e.to_string())?
 }
 
-fn launch_now(app: &AppHandle, path: &Path, command: &str, task: Option<String>, allow_busy: bool) -> Result<LaunchReply, String> {
+fn launch_now(
+    app: &AppHandle,
+    path: &Path,
+    command: &str,
+    task: Option<String>,
+    allow_busy: bool,
+    mode: Option<String>,
+    remember: bool,
+) -> Result<LaunchReply, String> {
     let texts = strings(app);
     let projects = app.state::<Projects>();
     let (base, next) = projects.launch_target(path).ok_or("unknown project")?;
@@ -369,6 +393,15 @@ fn launch_now(app: &AppHandle, path: &Path, command: &str, task: Option<String>,
         ClaudeCommand::FinishSession => texts.t("Завершить сессию"),
     }
     .to_owned();
+    let settings = app.state::<crate::AppState>().settings.lock().unwrap().clone();
+    let mode = mode.filter(|m| LAUNCH_MODES.contains(&m.as_str()));
+    if remember && mode.is_some() {
+        crate::save(app, |s| s.launch_mode = mode.clone());
+    }
+    let Some(mode) = mode.or(settings.launch_mode) else {
+        return Ok(LaunchReply { choose: Some(texts.format("Где запустить «%@»?", &[&title])), ..LaunchReply::default() });
+    };
+    let background = mode == "background";
     let claude = launch::find_claude().ok_or_else(|| texts.t("Claude Code не установлен").to_owned())?;
 
     // Busy: a session of the hook that still works or waits in the project folder.
@@ -386,19 +419,42 @@ fn launch_now(app: &AppHandle, path: &Path, command: &str, task: Option<String>,
             folder = plan.path.clone();
             worktree = Some(plan);
         } else if !allow_busy {
-            return Ok(LaunchReply { message: texts.t("В этой папке уже работает сессия Claude. Запустить ещё одну там же?").to_owned(), confirm: true });
+            let message = texts.t("В этой папке уже работает сессия Claude. Запустить ещё одну там же?").to_owned();
+            return Ok(LaunchReply { message, confirm: true, choose: None });
         }
     }
 
     let prompt = launch::one_line(&command.prompt(&Style::for_projects(&paths::projects_dir()), language(app)));
-    launch::open_in_terminal(&folder, &claude, &[&prompt]).map_err(|e| texts.format("Не удалось открыть Терминал: %@", &[&e]))?;
-    eprintln!("launched «{title}» in a terminal: {}", folder.display());
-    let mut message = texts.format("«%@» запущен в новом окне Терминала.", &[&title]);
+    let mut message = if background {
+        let name = path.file_name().map(|n| n.to_string_lossy().into_owned()).unwrap_or_default();
+        let task = match &command {
+            ClaudeCommand::CustomTask(task) => task.trim().to_owned(),
+            _ => title.clone(),
+        };
+        let new = NewRun {
+            project: &name,
+            project_path: path,
+            folder: &folder,
+            worktree_branch: worktree.as_ref().map(|w| w.branch.as_str()),
+            command_title: &title,
+            task: &task,
+            prompt: &prompt,
+            time_limit_minutes: settings.background_time_limit_minutes,
+        };
+        let (run, child) = claudepult_core::runs::start(&paths::runs_dir(), &claude, &new).map_err(|e| e.to_string())?;
+        eprintln!("run {} started: «{title}» in {}", run.id, folder.display());
+        app.state::<Runs>().add(app, run, child);
+        texts.format("«%@» запущен в фоне (лимит %lld мин). Итог придёт уведомлением.", &[&title, &settings.background_time_limit_minutes.to_string()])
+    } else {
+        launch::open_in_terminal(&folder, &claude, &[&prompt]).map_err(|e| texts.format("Не удалось открыть Терминал: %@", &[&e]))?;
+        eprintln!("launched «{title}» in a terminal: {}", folder.display());
+        texts.format("«%@» запущен в новом окне Терминала.", &[&title])
+    };
     if let Some(plan) = worktree {
         message = texts.format("В папке проекта уже работает Claude, поэтому запуск идёт в worktree cb-%@ (ветка %@). ", &[&plan.slug, &plan.branch]) + &message;
         projects.ask(false);
     }
-    Ok(LaunchReply { message, confirm: false })
+    Ok(LaunchReply { message, ..LaunchReply::default() })
 }
 
 // MARK: - Opening
