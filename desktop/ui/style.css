@@ -302,3 +302,16 @@ input.switch:checked { background: var(--accent); }
 input.switch:checked::after { inset-inline-start: 14px; }
 .apps-line { display: flex; align-items: center; gap: 6px; min-width: 0; }
 .apps-line .secondary { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 220px; }
+
+/* «Ресурсы компьютера»: a label, a bar coloured by level, the value and a note. */
+.resources-head { display: flex; align-items: center; gap: 6px; }
+.resources-head h2 { margin: 0; }
+.resources-head .spacer { flex: 1; }
+.gauges { display: grid; grid-template-columns: max-content minmax(70px, 1fr) max-content; gap: 5px 8px; align-items: center; margin-top: 6px; font-size: 12px; }
+.gauge { display: contents; }
+.gauge .bar { height: 6px; border-radius: 3px; background: var(--line); overflow: hidden; }
+.gauge .fill { display: block; height: 100%; border-radius: 3px; }
+.gauge .value { white-space: nowrap; font-variant-numeric: tabular-nums; }
+.gauge .value .warning { color: #ff9500; }
+.gauge .text { grid-column: 2 / 4; font-variant-numeric: tabular-nums; }
+.resources .processes { margin: 6px 0 0; font-size: 11px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }

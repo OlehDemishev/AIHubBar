@@ -18,9 +18,12 @@ regex = "1"
 unicode-segmentation = "1"
 # Unzips a .docx for its word count; already built for Tauri, so nothing new is downloaded.
 miniz_oxide = { version = "0.8", features = ["with-alloc"] }
+# «Ресурсы компьютера»: processor, memory, disks, network and processes on every system. Pinned: 0.40.1 was three
+# weeks old when added (2026-11-18).
+sysinfo = { version = "=0.40.1", default-features = false, features = ["system", "disk", "network", "gpu"] }
 
 [target.'cfg(unix)'.dependencies]
 libc = "0.2"
 
 [target.'cfg(windows)'.dependencies]
-windows-sys = { version = "0.61", features = ["Win32_Foundation", "Win32_System_Threading", "Win32_Security", "Win32_Security_Credentials", "Win32_System_Power", "Win32_System_Diagnostics_ToolHelp", "Win32_UI_WindowsAndMessaging"] }
+windows-sys = { version = "0.61", features = ["Win32_Foundation", "Win32_System_Threading", "Win32_Security", "Win32_Security_Credentials", "Win32_System_Power", "Win32_System_Diagnostics_ToolHelp", "Win32_UI_WindowsAndMessaging", "Win32_System_Memory"] }

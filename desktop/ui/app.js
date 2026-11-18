@@ -9,7 +9,9 @@ let strings = {};
 export function t(key, ...args) {
   let text = strings[key] || key;
   let next = 0;
-  return text.replace(/%(?:(\d+)\$)?(@|lld|ld|d)/g, (_, position) => {
+  // `%%` is a percent sign, as in the Mac's catalog.
+  return text.replace(/%%|%(?:(\d+)\$)?(@|lld|ld|d)/g, (match, position) => {
+    if (match === "%%") return "%";
     const index = position ? Number(position) - 1 : next++;
     return args[index] ?? "";
   });

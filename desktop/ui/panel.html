@@ -44,6 +44,16 @@
         <p style="margin-top: 6px"><button id="hooks-settings" data-t="Настройки…"></button></p>
       </div>
     </section>
+    <section class="card resources" id="resources" hidden>
+      <div class="resources-head">
+        <h2 data-t="Ресурсы компьютера"></h2>
+        <span class="spacer"></span>
+        <button class="icon-button" id="task-manager" data-t-title="Открыть Диспетчер задач" hidden>▤</button>
+      </div>
+      <p class="secondary" id="resources-wait" data-t="Считаю…"></p>
+      <div class="gauges" id="resources-rows"></div>
+      <p class="secondary processes" id="resources-processes" hidden></p>
+    </section>
     <section class="card keep-awake" id="keep-awake" hidden>
       <div class="keep-awake-head">
         <h2 data-t="Не спать"></h2>
@@ -263,6 +273,80 @@
     document.getElementById("hooks-settings").onclick = () => invoke("open_settings");
     await showSessions();
     window.__TAURI__.event.listen("sessions-changed", showSessions);
+
+    // «Ресурсы компьютера»: processor, memory, graphics, disk as bars; network and battery as text; the programs
+    // using the most processor. Read every 2 s while the panel is visible.
+    const resourceColor = (value) => (value > 80 ? "#ff3b30" : value >= 50 ? "#ff9500" : "#34c759");
+    const percent = (value) => new Intl.NumberFormat(document.documentElement.lang || undefined, { style: "percent", maximumFractionDigits: 0 }).format(value / 100);
+    // Sizes as the Mac's ByteCountFormatter: 1000 for disks and speed, 1024 for memory; units from the webview's Intl.
+    function bytes(value, base = 1000) {
+      const units = ["byte", "kilobyte", "megabyte", "gigabyte", "terabyte"];
+      let unit = 0;
+      while (value >= base && unit < units.length - 1) { value /= base; unit++; }
+      return new Intl.NumberFormat(document.documentElement.lang || undefined, { style: "unit", unit: units[unit], unitDisplay: "short", maximumFractionDigits: value < 10 && unit > 0 ? 1 : 0 }).format(value);
+    }
+    function gauge(title, value, detail, warning) {
+      const row = document.createElement("div");
+      row.className = "gauge";
+      row.innerHTML = `<span class="secondary label"></span><span class="bar"><span class="fill"></span></span><span class="value"><strong></strong> <span></span></span>`;
+      row.querySelector(".label").textContent = title;
+      const fill = row.querySelector(".fill");
+      fill.style.width = `${Math.min(Math.max(value, 0), 100)}%`;
+      fill.style.background = resourceColor(value);
+      row.querySelector("strong").textContent = percent(value);
+      const note = row.querySelector(".value span");
+      note.textContent = warning ?? detail ?? "";
+      note.className = warning ? "warning" : "secondary";
+      return row;
+    }
+    function textRow(title, text, alarm) {
+      const row = document.createElement("div");
+      row.className = "gauge";
+      row.innerHTML = `<span class="secondary label"></span><span class="text"></span>`;
+      row.querySelector(".label").textContent = title;
+      row.querySelector(".text").textContent = text;
+      if (alarm) row.querySelector(".text").classList.add("error");
+      return row;
+    }
+    function batteryText(battery) {
+      if (battery.charging) return t("%lld %% · заряжается", battery.percent);
+      if (battery.onAc) return t("%lld %% · от сети", battery.percent);
+      if (battery.minutesLeft == null) return percent(battery.percent);
+      return t("%lld %% · осталось %lld ч %lld мин", battery.percent, Math.floor(battery.minutesLeft / 60), battery.minutesLeft % 60);
+    }
+    async function showResources() {
+      const view = await invoke("resources_view");
+      const card = document.getElementById("resources");
+      card.hidden = !view.shown;
+      if (!view.shown) return;
+      document.getElementById("task-manager").hidden = !view.taskManager;
+      const snapshot = view.snapshot;
+      document.getElementById("resources-wait").hidden = !!snapshot;
+      if (!snapshot) return;
+      const shows = (metric) => view.metrics.includes(metric);
+      const rows = [];
+      if (shows("cpu")) rows.push(gauge(t("Процессор"), snapshot.cpu));
+      if (shows("memory")) {
+        const used = snapshot.memoryTotal ? (snapshot.memoryUsed / snapshot.memoryTotal) * 100 : 0;
+        const warning = { warning: t("давление повышено"), critical: t("памяти не хватает") }[snapshot.pressure];
+        rows.push(gauge(t("Память"), used, `${bytes(snapshot.memoryUsed, 1024)} / ${bytes(snapshot.memoryTotal, 1024)}`, warning));
+      }
+      if (shows("gpu") && snapshot.gpu != null) rows.push(gauge(t("Графика"), snapshot.gpu));
+      if (shows("disk") && snapshot.diskTotal) rows.push(gauge(t("Диск"), ((snapshot.diskTotal - snapshot.diskFree) / snapshot.diskTotal) * 100, t("свободно %@", bytes(snapshot.diskFree))));
+      if (shows("network")) rows.push(textRow(t("Сеть"), `↓ ${t("%@/с", bytes(snapshot.networkIn))}   ↑ ${t("%@/с", bytes(snapshot.networkOut))}`));
+      if (shows("battery") && snapshot.battery) rows.push(textRow(t("Батарея"), batteryText(snapshot.battery), !snapshot.battery.onAc && snapshot.battery.percent < 15));
+      document.getElementById("resources-rows").replaceChildren(...rows);
+      const processes = document.getElementById("resources-processes");
+      processes.hidden = !shows("processes") || !view.processes.length;
+      processes.textContent = view.processes.slice(0, 3).map((p) => `${p.name} ${percent(p.cpu)}`).join(" · ");
+      processes.title = view.processes.map((p) => `${p.name} — ${percent(p.cpu)}`).join("\n");
+    }
+    document.getElementById("task-manager").onclick = () => invoke("open_task_manager");
+    showResources();
+    window.__TAURI__.event.listen("resources-changed", showResources);
+    window.__TAURI__.event.listen("profiles-changed", showResources);
+    setInterval(() => { if (!document.hidden && !document.getElementById("resources").hidden) showResources(); }, 2000);
+    window.addEventListener("focus", showResources);
 
     // «Не спать»: what holds the computer, the switch (until switched off) and quick timers; the rules decide the rest.
     const keepAwakeSwitch = document.getElementById("keep-awake-switch");

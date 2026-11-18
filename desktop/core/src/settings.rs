@@ -33,6 +33,10 @@ pub struct Settings {
     /// its end in seconds since 1970), kept across restarts.
     pub keep_awake: crate::keep_awake::Rules,
     pub keep_awake_manual: Option<f64>,
+    /// «Ресурсы компьютера»: notify about load, memory, space and charge (on by default, as on the Mac), and below
+    /// how many GB free the disk counts as nearly full.
+    pub resource_alerts: bool,
+    pub resource_disk_below_gb: u64,
     /// `projects_dir` and `launch_mode` of a file from before profiles, for the first profile.
     #[serde(skip)]
     pub before_profiles: (Option<String>, Option<String>),
@@ -51,6 +55,8 @@ impl Default for Settings {
             mac_settings: Map::new(),
             keep_awake: crate::keep_awake::Rules::default(),
             keep_awake_manual: None,
+            resource_alerts: true,
+            resource_disk_below_gb: 20,
             before_profiles: (None, None),
         }
     }
@@ -95,6 +101,8 @@ impl Settings {
                 .unwrap_or_default(),
             keep_awake: crate::keep_awake::Rules::from_value(value.get("keep_awake")),
             keep_awake_manual: value.get("keep_awake_manual").and_then(Value::as_f64),
+            resource_alerts: value.get("resource_alerts").and_then(Value::as_bool).unwrap_or(defaults.resource_alerts),
+            resource_disk_below_gb: value.get("resource_disk_below_gb").and_then(Value::as_u64).filter(|gb| *gb > 0).unwrap_or(defaults.resource_disk_below_gb),
             before_profiles: (text("projects_dir"), text("launch_mode").filter(|m| LAUNCH_MODES.contains(&m.as_str()))),
         }
     }
@@ -241,7 +249,7 @@ impl Settings {
 // MARK: - Modules: the Mac's `installed` and `off` lists, so `.claudepult` files carry them both ways
 
 /// The stage 6 modules this version has, as the Mac's `ModuleKind` names them.
-pub const MODULES: [&str; 1] = ["keepAwake"];
+pub const MODULES: [&str; 2] = ["resources", "keepAwake"];
 
 impl Settings {
     fn kinds(&self, key: &str) -> Vec<String> {
@@ -416,6 +424,8 @@ mod tests {
         let saved = Settings::from_json(&serde_json::to_string(&settings).unwrap());
         assert_eq!((saved.keep_awake.clone(), saved.keep_awake_manual, saved.module_on("keepAwake")), (settings.keep_awake.clone(), Some(-1.0), false));
         assert!(!Settings::default().module_on("keepAwake"), "off until switched on");
+        let resources = Settings::from_json(r#"{"resource_alerts": false, "resource_disk_below_gb": 0}"#);
+        assert_eq!((resources.resource_alerts, resources.resource_disk_below_gb), (false, 20));
     }
 
     #[test]

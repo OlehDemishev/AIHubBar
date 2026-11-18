@@ -128,6 +128,22 @@
     <h1 data-t="Модули"></h1>
     <section class="card">
       <div class="row">
+        <label for="module-resources"><strong data-t="Ресурсы компьютера"></strong></label>
+        <input type="checkbox" class="switch" id="module-resources">
+      </div>
+      <p class="secondary" data-t="Процессор, память, диск, сеть, батарея и самые прожорливые приложения; уведомления о нагрузке, памяти, месте и заряде."></p>
+      <div id="resource-options" hidden>
+        <h3 data-t="Уведомления о ресурсах"></h3>
+        <label class="check-line"><input type="checkbox" id="resource-alerts"> <span data-t="Уведомлять о нагрузке, памяти, месте и заряде"></span></label>
+        <div class="row">
+          <label for="resource-disk" data-t="Мало места — свободно меньше"></label>
+          <select id="resource-disk"></select>
+        </div>
+        <p class="secondary" data-t="Процессор выше 90 % дольше 5 минут, критическая нехватка памяти, мало места, заряд ниже 15 % без зарядки — по одному уведомлению, пока не наладится."></p>
+      </div>
+    </section>
+    <section class="card">
+      <div class="row">
         <label for="module-keep-awake"><strong data-t="Не спать"></strong></label>
         <input type="checkbox" class="switch" id="module-keep-awake">
       </div>
@@ -682,6 +698,27 @@
     document.getElementById("keep-awake-choose").onclick = async () => showModules(await invoke("choose_keep_awake_apps"));
     document.getElementById("keep-awake-clear").onclick = () => saveRules({ whileApps: [] });
     showModules(await invoke("modules_view"));
+
+    // «Ресурсы компьютера»: on or off, the alerts and the disk threshold.
+    const resourcesModule = document.getElementById("module-resources");
+    const resourceAlerts = document.getElementById("resource-alerts");
+    const resourceDisk = document.getElementById("resource-disk");
+    function showResourceSettings(view) {
+      resourcesModule.checked = view.on;
+      document.getElementById("resource-options").hidden = !view.on;
+      resourceAlerts.checked = view.alerts;
+      if (!resourceDisk.options.length) for (const gb of view.thresholds) resourceDisk.add(new Option(t("%lld ГБ", gb), String(gb)));
+      resourceDisk.value = String(view.diskBelowGb);
+      resourceDisk.disabled = !view.alerts;
+    }
+    resourcesModule.onchange = async () => {
+      await invoke("set_module", { kind: "resources", on: resourcesModule.checked });
+      showResourceSettings(await invoke("resource_settings"));
+    };
+    const saveResourceAlerts = async () => showResourceSettings(await invoke("set_resource_alerts", { alerts: resourceAlerts.checked, diskBelowGb: Number(resourceDisk.value) }));
+    resourceAlerts.onchange = saveResourceAlerts;
+    resourceDisk.onchange = saveResourceAlerts;
+    showResourceSettings(await invoke("resource_settings"));
 
     // A file chosen from the panel's «Импортировать файл…» waits here for «Заменить» / «Добавить».
     showImport(await invoke("import_view"));
