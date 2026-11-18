@@ -339,7 +339,8 @@ fn main() {
             runs::stop_run, runs::run_log, projects::worktree_removal, launch_settings, set_launch_settings,
             pull_request_alerts, set_pull_request_alerts, profiles::projects_folder, profiles::choose_projects_folder,
             profiles::reset_projects_folder, profiles::profiles_view, profiles::select_profile, profiles::add_profile,
-            profiles::rename_profile, profiles::delete_profile
+            profiles::rename_profile, profiles::delete_profile, profiles::export_settings, profiles::export_profile,
+            profiles::choose_import, profiles::apply_import, profiles::cancel_import
         ])
         .setup(|app| {
             // Only the tray icon, no Dock icon, when trying it out on a Mac.

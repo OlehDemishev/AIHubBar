@@ -125,6 +125,108 @@ pub fn unique_name(base: &str, taken: &[&str]) -> String {
     name
 }
 
+// MARK: - `.claudepult` files
+
+/// The Mac's `SettingsBundle` formats: all settings and profiles, or one profile.
+pub const SETTINGS_FORMAT: &str = "claudepult-settings";
+pub const PROFILE_FORMAT: &str = "claudepult-mode";
+pub const BUNDLE_VERSION: u64 = 2;
+/// The Mac's settings this version has no place for (appearance, AI services, Telegram, modules…): kept from an
+/// imported file and written back on export.
+pub const MAC_KEYS: [&str; 5] = ["general", "appearance", "services", "installed", "off"];
+
+/// A `.claudepult` file read and made safe.
+#[derive(Debug, Clone, PartialEq)]
+pub struct Bundle {
+    pub format: String,
+    pub profiles: Vec<Profile>,
+    /// Which profiles the Mac shows in its switcher; ids of `profiles`.
+    pub enabled: Option<Vec<String>>,
+    pub current: Option<String>,
+    /// `MAC_KEYS` as they were in the file.
+    pub mac: Map<String, Value>,
+}
+
+impl Bundle {
+    pub fn is_settings(&self) -> bool {
+        self.format == SETTINGS_FORMAT
+    }
+
+    /// The file's background time limit, within what Settings allows here.
+    pub fn time_limit_minutes(&self) -> Option<u32> {
+        let minutes = self.mac.get("general")?.get("backgroundTimeLimitMinutes")?.as_u64()?;
+        Some(u32::try_from(minutes.clamp(5, 24 * 60)).unwrap_or(90))
+    }
+}
+
+/// None for anything but a `.claudepult` file with at least one profile. A file from someone else is not trusted, as
+/// on the Mac (`ProfileStore.sanitized`): an id that isn't letters, digits and hyphens, or repeats, gets a fresh one.
+pub fn read_bundle(text: &str) -> Option<Bundle> {
+    let value: Value = serde_json::from_str(text.trim_start_matches('\u{feff}')).ok()?;
+    let format = value.get("format")?.as_str()?.to_owned();
+    if format != SETTINGS_FORMAT && format != PROFILE_FORMAT {
+        return None;
+    }
+    let mut profiles: Vec<Profile> = value.get("modes")?.as_array()?.iter().filter_map(Profile::from_value).collect();
+    if profiles.is_empty() {
+        return None;
+    }
+    let safe = |id: &str| (1..=64).contains(&id.len()) && id.chars().all(|c| c.is_ascii_alphanumeric() || c == '-');
+    let mut renamed = std::collections::HashMap::new();
+    let mut seen = std::collections::HashSet::new();
+    for profile in &mut profiles {
+        let id = profile.id.clone();
+        if !safe(&id) || !seen.insert(id.clone()) {
+            let fresh = crate::runs::new_id();
+            // A repeated id stays with the first profile that has it; «enabled» and «current» mean that one.
+            if !safe(&id) {
+                renamed.entry(id).or_insert_with(|| fresh.clone());
+            }
+            profile.id = fresh.clone();
+            seen.insert(fresh);
+        }
+    }
+    let rename = |id: &str| renamed.get(id).cloned().unwrap_or_else(|| id.to_owned());
+    let ids = |key: &str| value.get(key).and_then(Value::as_array).map(|list| list.iter().filter_map(Value::as_str).map(rename).collect::<Vec<_>>());
+    let enabled = ids("enabled");
+    let current = value.get("current").and_then(Value::as_str).map(rename);
+    let mac = MAC_KEYS.iter().filter_map(|key| value.get(*key).filter(|v| !v.is_null()).map(|v| ((*key).to_owned(), v.clone()))).collect();
+    Some(Bundle { format, profiles, enabled, current, mac })
+}
+
+/// A file the Mac reads (`SettingsBundle`, version 2): `exportedAt` in whole seconds — the Mac's ISO 8601 decoder
+/// refuses fractions — and keys sorted, as the Mac writes them.
+pub fn write_bundle(format: &str, profiles: &[Profile], current: Option<&str>, mac: &Map<String, Value>, now: chrono::DateTime<chrono::Utc>) -> String {
+    let mut file = Map::new();
+    file.insert("format".into(), json!(format));
+    file.insert("version".into(), json!(BUNDLE_VERSION));
+    file.insert("exportedAt".into(), json!(now.format("%Y-%m-%dT%H:%M:%SZ").to_string()));
+    file.insert("modes".into(), serde_json::to_value(profiles).unwrap_or_default());
+    if format == SETTINGS_FORMAT {
+        file.insert("enabled".into(), json!(profiles.iter().map(|p| &p.id).collect::<Vec<_>>()));
+        if let Some(current) = current {
+            file.insert("current".into(), json!(current));
+        }
+        for (key, value) in mac {
+            file.insert(key.clone(), value.clone());
+        }
+    }
+    serde_json::to_string_pretty(&sorted(Value::Object(file))).unwrap_or_default() + "\n"
+}
+
+/// Keys in order at every level, whether or not serde_json keeps insertion order in this build.
+fn sorted(value: Value) -> Value {
+    match value {
+        Value::Object(map) => {
+            let mut entries: Vec<(String, Value)> = map.into_iter().collect();
+            entries.sort_by(|a, b| a.0.cmp(&b.0));
+            Value::Object(entries.into_iter().map(|(k, v)| (k, sorted(v))).collect())
+        }
+        Value::Array(list) => Value::Array(list.into_iter().map(sorted).collect()),
+        other => other,
+    }
+}
+
 // MARK: - Paths in files
 
 /// `~/…` for a path inside the home folder, `/` between parts, so the file reads on the Mac and Windows alike.
@@ -200,6 +302,68 @@ mod tests {
         assert_eq!(from_template("developer", "xx").unwrap().name, "Developer (GitHub)", "English when there is none");
         assert_ne!(from_template("developer", "ru").unwrap().id, from_template("developer", "ru").unwrap().id);
         assert!(from_template("video", "ru").is_none(), "folder projects come later");
+    }
+
+    #[test]
+    fn mac_bundle_read_and_written_back() {
+        // A settings file as the Mac exports it (keys sorted, appearance and Telegram settings this version can't use).
+        let mac = r#"{
+  "appearance" : { "animations" : true, "density" : "normal", "menuBar" : "session", "showLimits" : true, "showSessions" : true, "textSize" : "normal", "theme" : "system", "width" : "normal" },
+  "current" : "b-2",
+  "enabled" : [ "../evil", "b-2" ],
+  "exportedAt" : "2026-11-17T10:00:00Z",
+  "format" : "claudepult-settings",
+  "general" : { "backgroundTimeLimitMinutes" : 2000, "limitAlertsToTelegram" : false, "limitThresholds" : [ 80, 95 ], "telegramForBackground" : true },
+  "installed" : [ "limits", "projects" ],
+  "modes" : [
+    { "id" : "../evil", "name" : "Dev", "source" : { "gitBuiltin" : { "projects" : "~/Projects" } }, "modules" : [ { "kind" : "projects" } ] },
+    { "id" : "b-2", "name" : "Видео", "source" : { "folders" : { "_0" : "~/Documents/Видео" } }, "launchMode" : "terminal" },
+    { "id" : "b-2", "name" : "Копия" }
+  ],
+  "version" : 2
+}"#;
+        let bundle = read_bundle(mac).unwrap();
+        assert!(bundle.is_settings());
+        assert_eq!(bundle.profiles.len(), 3);
+        let ids: Vec<&str> = bundle.profiles.iter().map(|p| p.id.as_str()).collect();
+        assert_ne!(ids[0], "../evil", "an unsafe id is replaced");
+        assert_eq!(ids[1], "b-2");
+        assert_ne!(ids[2], "b-2", "a repeated id is replaced, the first keeps it");
+        assert_eq!(bundle.enabled.as_deref().unwrap()[0], ids[0], "«enabled» follows the new id");
+        assert_eq!(bundle.current.as_deref(), Some("b-2"));
+        assert_eq!(bundle.time_limit_minutes(), Some(1440));
+        assert_eq!(bundle.mac.keys().collect::<Vec<_>>(), ["appearance", "general", "installed"]);
+
+        let now = chrono::DateTime::parse_from_rfc3339("2026-11-18T12:34:56.789Z").unwrap().with_timezone(&chrono::Utc);
+        let written = write_bundle(SETTINGS_FORMAT, &bundle.profiles, Some("b-2"), &bundle.mac, now);
+        let value: Value = serde_json::from_str(&written).unwrap();
+        assert_eq!(value["exportedAt"], "2026-11-18T12:34:56Z", "whole seconds for the Mac");
+        assert_eq!(value["version"], 2);
+        assert_eq!(value["general"]["limitThresholds"], json!([80, 95]), "the Mac's settings go back");
+        assert_eq!(value["modes"][0]["modules"], json!([{"kind": "projects"}]));
+        assert_eq!(value["enabled"].as_array().unwrap().len(), 3);
+        let keys: Vec<&str> = value.as_object().unwrap().keys().map(String::as_str).collect();
+        let mut sorted_keys = keys.clone();
+        sorted_keys.sort_unstable();
+        assert_eq!(keys, sorted_keys);
+        assert_eq!(read_bundle(&written).unwrap().profiles, bundle.profiles, "its own file reads back the same");
+    }
+
+    #[test]
+    fn profile_file_and_refusals() {
+        let profile = from_template("developer", "en").unwrap();
+        let written = write_bundle(PROFILE_FORMAT, std::slice::from_ref(&profile), Some(&profile.id), &Map::new(), chrono::Utc::now());
+        let value: Value = serde_json::from_str(&written).unwrap();
+        assert_eq!(value["format"], PROFILE_FORMAT);
+        assert!(value.get("current").is_none() && value.get("enabled").is_none(), "one profile, no settings");
+        let back = read_bundle(&format!("\u{feff}{written}")).unwrap();
+        assert!(!back.is_settings());
+        assert_eq!(back.profiles, vec![profile]);
+
+        assert!(read_bundle("garbage").is_none());
+        assert!(read_bundle(r#"{"format": "something-else", "modes": [{}]}"#).is_none());
+        assert!(read_bundle(r#"{"format": "claudepult-settings", "modes": []}"#).is_none());
+        assert!(read_bundle(r#"{"format": "claudepult-settings", "modes": [3]}"#).is_none());
     }
 
     #[test]

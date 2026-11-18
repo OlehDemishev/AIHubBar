@@ -27,7 +27,10 @@
       </div>
     </section>
     <section class="card">
-      <h2 id="current-profile"></h2>
+      <div class="card-title">
+        <h2 id="current-profile"></h2>
+        <button id="export-profile" data-t="Экспорт профиля…"></button>
+      </div>
       <div class="folder">
         <div class="row">
           <span data-t="Папка проектов"></span>
@@ -43,6 +46,26 @@
         <label for="launch-mode" data-t="Где запускать Claude"></label>
         <select id="launch-mode"></select>
       </div>
+    </section>
+    <h1 data-t="Экспорт и импорт"></h1>
+    <section class="card">
+      <div class="row">
+        <span data-t="Все настройки и профили"></span>
+        <span>
+          <button id="export-settings" data-t="Экспорт настроек…"></button>
+          <button id="import" data-t="Импорт…"></button>
+        </span>
+      </div>
+      <div class="import-pending" id="import-pending" hidden>
+        <strong id="import-title"></strong>
+        <p class="secondary" id="import-summary"></p>
+        <p>
+          <button id="import-replace" data-t="Заменить все настройки"></button>
+          <button id="import-add" data-t="Добавить профили"></button>
+          <button id="import-cancel" data-t="Отмена"></button>
+        </p>
+      </div>
+      <p class="secondary" id="import-message" hidden></p>
     </section>
     <h1 data-t="Фоновые задачи"></h1>
     <section class="card">
@@ -225,6 +248,24 @@
       }));
     }
     document.getElementById("profile-add").onclick = () => invoke("add_profile");
+
+    // `.claudepult` files, the same as the Mac's: a file read by «Импорт…» waits for «Заменить» / «Добавить» / «Отмена».
+    function showImport(view) {
+      document.getElementById("import-pending").hidden = !view.title;
+      document.getElementById("import-title").textContent = view.title ?? "";
+      document.getElementById("import-summary").textContent = view.summary ?? "";
+      document.getElementById("import-replace").hidden = !view.mayReplace;
+      const message = document.getElementById("import-message");
+      message.hidden = !view.message;
+      message.textContent = view.message ?? "";
+      message.className = view.error ? "error" : "secondary";
+    }
+    document.getElementById("export-settings").onclick = async () => showImport(await invoke("export_settings"));
+    document.getElementById("export-profile").onclick = async () => showImport(await invoke("export_profile"));
+    document.getElementById("import").onclick = async () => showImport(await invoke("choose_import"));
+    document.getElementById("import-replace").onclick = async () => showImport(await invoke("apply_import", { replace: true }));
+    document.getElementById("import-add").onclick = async () => showImport(await invoke("apply_import", { replace: false }));
+    document.getElementById("import-cancel").onclick = async () => showImport(await invoke("cancel_import"));
 
     // Everything that belongs to the current profile, read again after any change (here or from the panel).
     async function showCurrent() {

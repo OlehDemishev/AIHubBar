@@ -168,3 +168,132 @@ pub fn reset_projects_folder(app: AppHandle) -> ProjectsFolder {
     });
     folder_view(&app)
 }
+
+// MARK: - `.claudepult` files
+
+/// A file read by «Импорт…», waiting for «Заменить все настройки» / «Добавить профили» / «Отмена».
+static PENDING: std::sync::Mutex<Option<(String, profiles::Bundle)>> = std::sync::Mutex::new(None);
+
+#[derive(Serialize, Default)]
+#[serde(rename_all = "camelCase")]
+pub struct ImportView {
+    /// «Импорт «file»» while a file waits.
+    title: Option<String>,
+    summary: Option<String>,
+    /// A settings file may replace everything; a profile file only adds.
+    may_replace: bool,
+    message: Option<String>,
+    error: bool,
+}
+
+fn pending_view(app: &AppHandle) -> ImportView {
+    let texts = strings(app);
+    let pending = PENDING.lock().unwrap();
+    let Some((file, bundle)) = pending.as_ref() else { return ImportView::default() };
+    let names = bundle.profiles.iter().map(|p| p.name.as_str()).collect::<Vec<_>>().join(", ");
+    let what = if bundle.is_settings() { texts.t("Все настройки и профили") } else { texts.t("Профиль") };
+    ImportView {
+        title: Some(texts.format("Импорт «%@»", &[file])),
+        summary: Some(format!("{what}: {names}.")),
+        may_replace: bundle.is_settings(),
+        ..ImportView::default()
+    }
+}
+
+/// A file name from a profile's name: no characters Windows refuses.
+fn file_name(name: &str) -> String {
+    let clean: String = name.chars().map(|c| if "<>:\"/\\|?*".contains(c) || c.is_control() { '-' } else { c }).collect();
+    let clean = clean.trim().trim_end_matches('.').to_owned();
+    format!("{}.claudepult", if clean.is_empty() { "AI Hub Bar" } else { &clean })
+}
+
+/// The system's save dialog, then the file in UTF-8 without BOM. Some(error text) when writing failed.
+fn save_file(app: &AppHandle, suggested: &str, text: String) -> Option<String> {
+    let mut dialog = app.dialog().file().add_filter("AI Hub Bar", &["claudepult"]).set_file_name(suggested);
+    if let Some(window) = app.get_webview_window("settings") {
+        dialog = dialog.set_parent(&window);
+    }
+    let mut path = dialog.blocking_save_file()?.into_path().ok()?;
+    if path.extension().is_none() {
+        path.set_extension("claudepult");
+    }
+    match std::fs::write(&path, text) {
+        Ok(()) => {
+            eprintln!("exported {}", path.display());
+            None
+        }
+        Err(error) => Some(error.to_string()),
+    }
+}
+
+/// «Экспорт настроек…»: all profiles in a file the Mac opens too.
+#[tauri::command]
+pub async fn export_settings(app: AppHandle) -> ImportView {
+    let text = app.state::<AppState>().settings.lock().unwrap().export_settings(chrono::Utc::now());
+    let error = save_file(&app, "AI Hub Bar.claudepult", text);
+    ImportView { error: error.is_some(), message: error, ..pending_view(&app) }
+}
+
+/// «Экспорт профиля…»: the current profile alone.
+#[tauri::command]
+pub async fn export_profile(app: AppHandle) -> ImportView {
+    let settings = app.state::<AppState>().settings.lock().unwrap().clone();
+    let (Some(profile), Some(text)) = (settings.current(), settings.export_profile(chrono::Utc::now())) else { return pending_view(&app) };
+    let error = save_file(&app, &file_name(&profile.name), text);
+    ImportView { error: error.is_some(), message: error, ..pending_view(&app) }
+}
+
+/// «Импорт…»: a `.claudepult` file is read and waits for the person's choice.
+#[tauri::command]
+pub async fn choose_import(app: AppHandle) -> ImportView {
+    let mut dialog = app.dialog().file().add_filter("AI Hub Bar", &["claudepult", "json"]);
+    if let Some(window) = app.get_webview_window("settings") {
+        dialog = dialog.set_parent(&window);
+    }
+    let Some(path) = dialog.blocking_pick_file().and_then(|f| f.into_path().ok()) else { return pending_view(&app) };
+    let name = path.file_name().map(|n| n.to_string_lossy().into_owned()).unwrap_or_default();
+    match std::fs::read_to_string(&path).ok().as_deref().and_then(profiles::read_bundle) {
+        Some(bundle) => {
+            *PENDING.lock().unwrap() = Some((name, bundle));
+            pending_view(&app)
+        }
+        None => {
+            *PENDING.lock().unwrap() = None;
+            let message = strings(&app).format("Не удалось прочитать «%@»: это не файл настроек AI Hub Bar.", &[&name]);
+            ImportView { message: Some(message), error: true, ..ImportView::default() }
+        }
+    }
+}
+
+/// «Заменить все настройки» (`replace`) or «Добавить профили».
+#[tauri::command]
+pub fn apply_import(app: AppHandle, replace: bool) -> ImportView {
+    let Some((file, bundle)) = PENDING.lock().unwrap().take() else { return ImportView::default() };
+    let replaces = replace && bundle.is_settings();
+    let mut count = 0;
+    change(&app, |settings| count = if replaces { settings.import_replace(bundle) } else { settings.import_add(bundle) });
+    eprintln!("imported {file}: {count} profile(s), {}", if replaces { "replace" } else { "add" });
+    let texts = strings(&app);
+    let message = if replaces {
+        texts.format("Настройки импортированы: %lld профиль(ов).", &[&count.to_string()])
+    } else {
+        texts.format("Добавлено профилей: %lld.", &[&count.to_string()])
+    };
+    ImportView { message: Some(message), ..ImportView::default() }
+}
+
+#[tauri::command]
+pub fn cancel_import() -> ImportView {
+    *PENDING.lock().unwrap() = None;
+    ImportView::default()
+}
+
+#[cfg(test)]
+mod tests {
+    #[test]
+    fn file_names() {
+        assert_eq!(super::file_name("Разработчик (GitHub)"), "Разработчик (GitHub).claudepult");
+        assert_eq!(super::file_name("a/b: c?"), "a-b- c-.claudepult");
+        assert_eq!(super::file_name(" ... "), "AI Hub Bar.claudepult");
+    }
+}
