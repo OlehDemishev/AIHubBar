@@ -237,6 +237,7 @@ pub fn draw(style: Style, size: u32, first: f64, second: Option<f64>, dot: Optio
     };
     // Over the number the dot is smaller and further into the corner, so it takes a corner of the last digit, not half of it.
     let (dot_center, dot_radius) = if style == Style::Number { ((n * 0.86, n * 0.14), n * 0.13) } else { ((n * 0.8, n * 0.2), n * 0.17) };
+    let dot_rim = n * 0.05;
     let track_alpha = TRACK[3] as f64 / 255.0;
     let mut pixels = vec![0u8; (size * size * 4) as usize];
     for y in 0..size {
@@ -247,8 +248,11 @@ pub fn draw(style: Style, size: u32, first: f64, second: Option<f64>, dot: Optio
                 for sx in 0..4 {
                     let px = x as f64 + (sx as f64 + 0.5) / 4.0;
                     let py = y as f64 + (sy as f64 + 0.5) / 4.0;
+                    let from_dot = (px - dot_center.0).hypot(py - dot_center.1);
                     let (rgb, weight) = match dot {
-                        Some(dot) if (px - dot_center.0).hypot(py - dot_center.1) <= dot_radius => (dot, 1.0),
+                        Some(dot) if from_dot <= dot_radius => (dot, 1.0),
+                        // A clear rim: seen on Windows, an orange dot on orange digits or an orange ring was lost.
+                        Some(_) if from_dot <= dot_radius + dot_rim => continue,
                         _ => match paint(px, py) {
                             Paint::Empty => continue,
                             Paint::Track => ([TRACK[0], TRACK[1], TRACK[2]], track_alpha),
@@ -415,6 +419,11 @@ mod tests {
         }
         let number = draw(Style::Number, size, 62.0, Some(31.0), Some(RED));
         assert_eq!(&pixel(&number, size, 21, 4)[..3], &ORANGE, "the dot leaves the last digit's top bar readable");
+        // The same colour as the digits: a clear rim keeps the dot apart from them.
+        let waiting = draw(Style::Number, size, 62.0, Some(31.0), Some(ORANGE));
+        assert_eq!(pixel(&waiting, size, 27, 4), [ORANGE[0], ORANGE[1], ORANGE[2], 255], "the dot itself");
+        assert_eq!(pixel(&waiting, size, 27, 9)[3], 0, "nothing right under the dot");
+        assert_eq!(pixel(&waiting, size, 22, 4)[3], 0, "nothing right beside the dot");
         assert_eq!(draw(Style::Rings, size, 62.0, None, None), ring(size, 62.0, None), "without a second limit the rings are the old ring");
     }
 }

@@ -104,11 +104,34 @@ fn corner() -> Position {
     if cfg!(target_os = "windows") { Position::BottomRight } else { Position::TopRight }
 }
 
+/// The corner is the screen's, and on Windows the taskbar lies there: the panel's lowest buttons were under it and
+/// took no clicks. Moves the panel back inside the monitor's work area.
+fn keep_off_the_taskbar(panel: &tauri::WebviewWindow) {
+    let (Ok(Some(monitor)), Ok(at), Ok(size)) = (panel.current_monitor(), panel.outer_position(), panel.outer_size()) else { return };
+    let area = monitor.work_area();
+    let (x, y) = fit_into(
+        (at.x, at.y),
+        (size.width as i32, size.height as i32),
+        (area.position.x, area.position.y),
+        (area.size.width as i32, area.size.height as i32),
+    );
+    if (x, y) != (at.x, at.y) {
+        let _ = panel.set_position(tauri::PhysicalPosition::new(x, y));
+    }
+}
+
+/// A window's top left corner moved so that the window lies inside the area (its top left kept when it can't fit).
+fn fit_into(at: (i32, i32), size: (i32, i32), area_at: (i32, i32), area_size: (i32, i32)) -> (i32, i32) {
+    let fit = |at: i32, size: i32, from: i32, length: i32| at.min(from + length - size).max(from);
+    (fit(at.0, size.0, area_at.0, area_size.0), fit(at.1, size.1, area_at.1, area_size.1))
+}
+
 fn show_panel(app: &AppHandle) {
     let Some(panel) = app.get_webview_window("panel") else { return };
     // At the icon — TrayCenter flips to whichever side has room — once a click has told where it is.
     if panel.move_window(Position::TrayCenter).is_err() {
         let _ = panel.move_window(corner());
+        keep_off_the_taskbar(&panel);
     }
     let _ = panel.show();
     let _ = panel.set_focus();
@@ -461,4 +484,22 @@ fn main() {
             _ => {}
         }
     });
+}
+
+#[cfg(test)]
+mod tests {
+    use super::fit_into;
+
+    #[test]
+    fn the_panel_stays_above_the_taskbar() {
+        // 1920×1080 with a 60 px taskbar at the bottom: the screen's corner puts 60 px of the panel under it.
+        assert_eq!(fit_into((1445, 330), (475, 750), (0, 0), (1920, 1020)), (1445, 270));
+        // Inside already: left where it is.
+        assert_eq!(fit_into((1200, 200), (475, 750), (0, 0), (1920, 1020)), (1200, 200));
+        // A taskbar on the left or the top, and a second monitor to the left of the first.
+        assert_eq!(fit_into((0, 0), (475, 750), (60, 40), (1860, 1040)), (60, 40));
+        assert_eq!(fit_into((-500, 400), (475, 750), (-1920, 0), (1920, 1020)), (-500, 270));
+        // Taller than the area: the top stays in sight.
+        assert_eq!(fit_into((100, 300), (475, 1200), (0, 0), (1920, 1020)), (100, 0));
+    }
 }
