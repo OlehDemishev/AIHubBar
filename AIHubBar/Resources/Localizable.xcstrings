@@ -27124,6 +27124,82 @@
         }
       }
     },
+    "Выключить Telegram на время": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إيقاف Telegram مؤقتًا"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Telegram vorübergehend ausschalten"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pause Telegram"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pausar Telegram"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mettre Telegram en pause"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jeda Telegram"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mettere in pausa Telegram"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Telegramを一時停止"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Telegram 일시 중지"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wstrzymaj Telegram"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pausar o Telegram"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Тимчасово вимкнути Telegram"
+          }
+        }
+      }
+    },
     "Выключить «%@»": {
       "localizations": {
         "ar": {
@@ -37086,6 +37162,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Закріплено"
+          }
+        }
+      }
+    },
+    "Закрыть": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Close"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Закрити"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schließen"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fermer"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cerrar"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chiudi"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fechar"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zamknij"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "閉じる"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "닫기"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إغلاق"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tutup"
           }
         }
       }
@@ -47429,16 +47581,10 @@
     },
     "Когда задачу получили оба, в меню любой из двух задач есть «Сравнить с…»: ответы рядом, изменённые файлы каждого, и отмечены те, что изменили оба. Клик по уведомлению о паре открывает то же окно.": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "When both got the task, either task's menu has “Compare with…”: the answers side by side, the files each one changed, and those both changed are marked. A click on the pair's notification opens the same window."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Коли завдання отримали обидва, у меню будь-якого з двох завдань є «Порівняти з…»: відповіді поруч, змінені файли кожного, і позначено ті, що змінили обидва. Клік по сповіщенню про пару відкриває те саме вікно."
+            "value": "عندما يحصل كلاهما على المهمة، تجد في قائمة أي من المهمتين «مقارنة مع…»: الإجابتان جنبًا إلى جنب، والملفات التي غيّرها كل منهما، مع تمييز الملفات التي غيّرها كلاهما. النقر على إشعار الزوج يفتح النافذة نفسها."
           }
         },
         "de": {
@@ -47447,10 +47593,10 @@
             "value": "Wenn beide die Aufgabe bekommen haben, steht im Menü jeder der beiden Aufgaben „Mit … vergleichen“: die Antworten nebeneinander, die geänderten Dateien jedes Dienstes, und markiert sind die, die beide geändert haben. Ein Klick auf die Mitteilung über das Paar öffnet dasselbe Fenster."
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Quand les deux ont reçu la tâche, le menu de chacune des deux tâches propose « Comparer avec… » : les réponses côte à côte, les fichiers modifiés par chacun, et ceux que les deux ont modifiés sont signalés. Un clic sur la notification de la paire ouvre la même fenêtre."
+            "value": "When both got the task, either task's menu has “Compare with…”: the answers side by side, the files each one changed, and those both changed are marked. A click on the pair's notification opens the same window."
           }
         },
         "es": {
@@ -47459,22 +47605,22 @@
             "value": "Cuando ambos recibieron la tarea, el menú de cualquiera de las dos tiene «Comparar con…»: las respuestas lado a lado, los archivos que cambió cada uno, y se marcan los que cambiaron ambos. Un clic en la notificación del par abre la misma ventana."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quand les deux ont reçu la tâche, le menu de chacune des deux tâches propose « Comparer avec… » : les réponses côte à côte, les fichiers modifiés par chacun, et ceux que les deux ont modifiés sont signalés. Un clic sur la notification de la paire ouvre la même fenêtre."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Saat keduanya mendapat tugas, menu salah satu dari dua tugas itu punya “Bandingkan dengan…”: jawaban berdampingan, file yang diubah masing-masing, dan file yang diubah keduanya ditandai. Klik pada notifikasi pasangan membuka jendela yang sama."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Quando entrambi hanno ricevuto l’attività, il menu di una delle due ha «Confronta con…»: le risposte affiancate, i file modificati da ciascuno, e sono segnati quelli modificati da entrambi. Un clic sulla notifica della coppia apre la stessa finestra."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Quando os dois receberam a tarefa, o menu de qualquer uma das duas tem “Comparar com…”: as respostas lado a lado, os arquivos que cada um alterou, e os que ambos alteraram ficam marcados. Um clique na notificação do par abre a mesma janela."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Gdy zadanie dostały oba, w menu każdego z dwóch zadań jest „Porównaj z…”: odpowiedzi obok siebie, pliki zmienione przez każdy z nich, a te zmienione przez oba są oznaczone. Kliknięcie powiadomienia o parze otwiera to samo okno."
           }
         },
         "ja": {
@@ -47489,16 +47635,22 @@
             "value": "둘 다 작업을 받으면 두 작업 중 어느 쪽 메뉴에든 “…와 비교”가 있습니다. 답변을 나란히 보여 주고, 각자 변경한 파일을 보여 주며, 둘 다 변경한 파일은 표시됩니다. 쌍 알림을 클릭해도 같은 윈도우가 열립니다."
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "عندما يحصل كلاهما على المهمة، تجد في قائمة أي من المهمتين «مقارنة مع…»: الإجابتان جنبًا إلى جنب، والملفات التي غيّرها كل منهما، مع تمييز الملفات التي غيّرها كلاهما. النقر على إشعار الزوج يفتح النافذة نفسها."
+            "value": "Gdy zadanie dostały oba, w menu każdego z dwóch zadań jest „Porównaj z…”: odpowiedzi obok siebie, pliki zmienione przez każdy z nich, a te zmienione przez oba są oznaczone. Kliknięcie powiadomienia o parze otwiera to samo okno."
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Saat keduanya mendapat tugas, menu salah satu dari dua tugas itu punya “Bandingkan dengan…”: jawaban berdampingan, file yang diubah masing-masing, dan file yang diubah keduanya ditandai. Klik pada notifikasi pasangan membuka jendela yang sama."
+            "value": "Quando os dois receberam a tarefa, o menu de qualquer uma das duas tem “Comparar com…”: as respostas lado a lado, os arquivos que cada um alterou, e os que ambos alteraram ficam marcados. Um clique na notificação do par abre a mesma janela."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Коли завдання отримали обидва, у меню будь-якого з двох завдань є «Порівняти з…»: відповіді поруч, змінені файли кожного, і позначено ті, що змінили обидва. Клік по сповіщенню про пару відкриває те саме вікно."
           }
         }
       }
@@ -49327,6 +49479,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Команди: звіти, перевірки, швидкі команди"
+          }
+        }
+      }
+    },
+    "Коммит сделал AI Hub Bar: в worktree Codex этого не может.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "قام AI Hub Bar بعمل الـ commit: لا يستطيع Codex ذلك داخل worktree."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Den Commit hat AI Hub Bar gemacht: In einem Worktree kann Codex das nicht."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar made the commit: Codex cannot do it in a worktree."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El commit lo hizo AI Hub Bar: en un worktree Codex no puede."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le commit a été fait par AI Hub Bar : dans un worktree, Codex ne le peut pas."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Commit dibuat oleh AI Hub Bar: di worktree Codex tidak bisa melakukannya."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il commit è stato fatto da AI Hub Bar: in un worktree Codex non può."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "コミットはAI Hub Barが行いました：worktreeではCodexはコミットできません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "커밋은 AI Hub Bar가 했습니다. worktree에서는 Codex가 할 수 없습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Commit wykonał AI Hub Bar: w worktree Codex tego nie potrafi."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O commit foi feito pelo AI Hub Bar: em um worktree o Codex não consegue."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Коміт зробив AI Hub Bar: у worktree Codex цього не може."
           }
         }
       }
@@ -81763,6 +81991,82 @@
         }
       }
     },
+    "Плитка «Telegram» в «Быстрых переключателях» выключает уведомления в Telegram одним кликом и держит их выключенными, пока не нажмёте снова. Запросы разрешений и ответы бота приходят.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مربع «Telegram» في مفاتيح التبديل السريعة يوقف إشعارات Telegram بنقرة واحدة ويبقيها متوقفة حتى تضغط عليه مرة أخرى. طلبات الأذونات وردود البوت تصل كالمعتاد."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Kachel „Telegram“ in den Schnellschaltern schaltet Mitteilungen in Telegram mit einem Klick aus und lässt sie aus, bis Sie erneut klicken. Berechtigungsanfragen und die Antworten des Bots kommen weiterhin."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The “Telegram” tile in Quick Toggles turns Telegram notifications off with one click and keeps them off until you press it again. Permission requests and the bot’s replies still come."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El mosaico «Telegram» de los conmutadores rápidos desactiva las notificaciones en Telegram con un clic y las mantiene así hasta que lo pulses de nuevo. Las solicitudes de permiso y las respuestas del bot siguen llegando."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La tuile « Telegram » des bascules rapides désactive les notifications Telegram d’un clic et les garde désactivées jusqu’au clic suivant. Les demandes d’autorisation et les réponses du bot arrivent toujours."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ubin “Telegram” di Sakelar Cepat mematikan notifikasi Telegram dengan satu klik dan membiarkannya mati sampai Anda menekannya lagi. Permintaan izin dan balasan bot tetap masuk."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il riquadro «Telegram» negli interruttori rapidi disattiva le notifiche in Telegram con un clic e le tiene disattivate finché non lo premi di nuovo. Le richieste di autorizzazione e le risposte del bot continuano ad arrivare."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "クイックスイッチの「Telegram」タイルは、1回のクリックでTelegramへの通知をオフにし、もう一度押すまでオフのままにします。許可のリクエストとボットの返信は届きます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "빠른 스위치의 “Telegram” 타일은 클릭 한 번으로 Telegram 알림을 끄고, 다시 누를 때까지 꺼 둡니다. 권한 요청과 봇의 답변은 계속 옵니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kafelek „Telegram” w szybkich przełącznikach wyłącza powiadomienia w Telegramie jednym kliknięciem i trzyma je wyłączone do ponownego kliknięcia. Prośby o uprawnienia i odpowiedzi bota nadal przychodzą."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O bloco “Telegram” nos alternadores rápidos desativa as notificações no Telegram com um clique e as mantém assim até você clicar de novo. Pedidos de permissão e respostas do bot continuam chegando."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Плитка «Telegram» у «Швидких перемикачах» вимикає сповіщення в Telegram одним кліком і тримає їх вимкненими, доки не натиснете знову. Запити дозволів і відповіді бота надходять."
+          }
+        }
+      }
+    },
     "Плоско": {
       "localizations": {
         "ar": {
@@ -84423,6 +84727,82 @@
         }
       }
     },
+    "Показано начало: строк %lld. Целиком — командой сравнения в терминале.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The first %lld lines are shown. For all of it, use the diff command in a terminal."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Показано початок: рядків %lld. Повністю — командою порівняння в терміналі."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gezeigt wird der Anfang: %lld Zeilen. Alles zeigt der Diff-Befehl im Terminal."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seul le début est affiché : %lld lignes. Pour tout voir, utilisez la commande de comparaison dans un terminal."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se muestra el principio: %lld líneas. Para verlo entero, usa el comando de comparación en un terminal."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "È mostrato l’inizio: %lld righe. Per vedere tutto, usa il comando di confronto nel terminale."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "É mostrado o começo: %lld linhas. Para ver tudo, use o comando de comparação no terminal."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pokazano początek: %lld wierszy. Całość pokaże polecenie porównania w terminalu."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "先頭の%lld行を表示しています。すべてを見るには、ターミナルで比較コマンドを使ってください。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "앞부분 %lld줄만 표시됩니다. 전체는 터미널에서 비교 명령으로 볼 수 있습니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يُعرض الجزء الأول: %lld سطرًا. لرؤيته كاملًا استخدم أمر المقارنة في الطرفية."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yang ditampilkan bagian awal: %lld baris. Untuk semuanya, gunakan perintah perbandingan di terminal."
+          }
+        }
+      }
+    },
     "Показатели": {
       "localizations": {
         "ar": {
@@ -84723,6 +85103,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Показати ще раз"
+          }
+        }
+      }
+    },
+    "Показать изменения в файле": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Show the changes in this file"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Показати зміни у файлі"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Änderungen in der Datei zeigen"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Afficher les modifications du fichier"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mostrar los cambios del archivo"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mostra le modifiche al file"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mostrar as alterações no arquivo"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pokaż zmiany w pliku"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "このファイルの変更を表示"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이 파일의 변경 사항 보기"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "عرض التغييرات في الملف"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tampilkan perubahan pada file"
           }
         }
       }
@@ -93938,6 +94394,158 @@
           "stringUnit": {
             "state": "translated",
             "value": "Розділювачі — скільки завгодно"
+          }
+        }
+      }
+    },
+    "Различий нет": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No differences"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Відмінностей немає"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keine Unterschiede"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucune différence"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sin diferencias"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nessuna differenza"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sem diferenças"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Brak różnic"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "違いはありません"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "차이 없음"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لا توجد فروق"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tidak ada perbedaan"
+          }
+        }
+      }
+    },
+    "Различия между вариантами": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Differences Between the Two"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Відмінності між варіантами"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unterschiede zwischen den Varianten"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Différences entre les deux versions"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diferencias entre las variantes"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Differenze tra le varianti"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diferenças entre as variantes"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Różnice między wariantami"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "2つの案の違い"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "두 결과의 차이"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الفروق بين النسختين"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Perbedaan antara kedua varian"
           }
         }
       }
@@ -111136,6 +111744,82 @@
         }
       }
     },
+    "Тишина, пока не включите": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "صامت حتى تعيد تشغيله"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stumm, bis Sie es wieder einschalten"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Silent until you turn it on"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En silencio hasta que lo actives"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Silence jusqu’à la réactivation"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Senyap sampai Anda menyalakannya"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Silenzio finché non lo riattivi"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "オンにするまで消音"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "다시 켤 때까지 무음"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cisza do ponownego włączenia"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Em silêncio até você ativar"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Тиша, доки не ввімкнете"
+          }
+        }
+      }
+    },
     "То же меняется в боте: ⚙️ Настройки. Запросы разрешений — выше, у бота.": {
       "localizations": {
         "ar": {
@@ -114401,6 +115085,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Сповіщення в Telegram"
+          }
+        }
+      }
+    },
+    "Уведомления в Telegram выключены, пока не включите снова. Запросы разрешений и ответы бота приходят.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إشعارات Telegram متوقفة حتى تعيد تشغيلها. طلبات الأذونات وردود البوت تصل كالمعتاد."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mitteilungen in Telegram sind aus, bis Sie sie wieder einschalten. Berechtigungsanfragen und die Antworten des Bots kommen weiterhin."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Telegram notifications are off until you turn them on again. Permission requests and the bot’s replies still come."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Las notificaciones en Telegram están desactivadas hasta que las actives de nuevo. Las solicitudes de permiso y las respuestas del bot siguen llegando."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les notifications Telegram sont désactivées jusqu’à ce que vous les réactiviez. Les demandes d’autorisation et les réponses du bot arrivent toujours."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notifikasi Telegram mati sampai Anda menyalakannya lagi. Permintaan izin dan balasan bot tetap masuk."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le notifiche in Telegram sono disattivate finché non le riattivi. Le richieste di autorizzazione e le risposte del bot continuano ad arrivare."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Telegramへの通知は、もう一度オンにするまでオフです。許可のリクエストとボットの返信は届きます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Telegram 알림은 다시 켤 때까지 꺼져 있습니다. 권한 요청과 봇의 답변은 계속 옵니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Powiadomienia w Telegramie są wyłączone, dopóki nie włączysz ich ponownie. Prośby o uprawnienia i odpowiedzi bota nadal przychodzą."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "As notificações no Telegram ficam desativadas até você ativá-las de novo. Pedidos de permissão e respostas do bot continuam chegando."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Сповіщення в Telegram вимкнено, доки не ввімкнете знову. Запити дозволів і відповіді бота надходять."
           }
         }
       }
@@ -120045,6 +120805,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Чат прив’язано до AI Hub Bar."
+          }
+        }
+      }
+    },
+    "Чем вариант второго сервиса отличается от варианта первого: то, что закоммичено в обеих ветках": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "How the second service’s version differs from the first’s: what is committed on both branches"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Чим варіант другого сервісу відрізняється від варіанта першого: те, що закомічено в обох гілках"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Worin sich die Variante des zweiten Dienstes von der des ersten unterscheidet: was auf beiden Branches committet ist"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En quoi la version du second service diffère de celle du premier : ce qui est commité sur les deux branches"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En qué se diferencia la variante del segundo servicio de la del primero: lo que está confirmado en ambas ramas"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In cosa la variante del secondo servizio differisce da quella del primo: ciò che è stato committato in entrambi i rami"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Em que a variante do segundo serviço difere da do primeiro: o que está commitado nos dois branches"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Czym wariant drugiej usługi różni się od wariantu pierwszej: to, co zacommitowano w obu gałęziach"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "2つ目のサービスの案が1つ目の案とどう違うか：両方のブランチにコミットされた内容"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "두 번째 서비스의 결과가 첫 번째와 어떻게 다른지: 두 브랜치에 커밋된 내용"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "بماذا تختلف نسخة الخدمة الثانية عن نسخة الأولى: ما تم عمل commit له في الفرعين"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apa bedanya varian layanan kedua dengan yang pertama: yang sudah di-commit di kedua branch"
           }
         }
       }
@@ -142375,386 +143211,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "❌ CI впав: %@ #%lld"
-          }
-        }
-      }
-    },
-    "Коммит сделал AI Hub Bar: в worktree Codex этого не может.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "AI Hub Bar made the commit: Codex cannot do it in a worktree."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Коміт зробив AI Hub Bar: у worktree Codex цього не може."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Den Commit hat AI Hub Bar gemacht: In einem Worktree kann Codex das nicht."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Le commit a été fait par AI Hub Bar : dans un worktree, Codex ne le peut pas."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "El commit lo hizo AI Hub Bar: en un worktree Codex no puede."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Il commit è stato fatto da AI Hub Bar: in un worktree Codex non può."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "O commit foi feito pelo AI Hub Bar: em um worktree o Codex não consegue."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Commit wykonał AI Hub Bar: w worktree Codex tego nie potrafi."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "コミットはAI Hub Barが行いました：worktreeではCodexはコミットできません。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "커밋은 AI Hub Bar가 했습니다. worktree에서는 Codex가 할 수 없습니다."
-          }
-        },
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "قام AI Hub Bar بعمل الـ commit: لا يستطيع Codex ذلك داخل worktree."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Commit dibuat oleh AI Hub Bar: di worktree Codex tidak bisa melakukannya."
-          }
-        }
-      }
-    },
-    "Тишина, пока не включите": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Silent until you turn it on"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Тиша, доки не ввімкнете"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Stumm, bis Sie es wieder einschalten"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Silence jusqu’à la réactivation"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "En silencio hasta que lo actives"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Silenzio finché non lo riattivi"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Em silêncio até você ativar"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cisza do ponownego włączenia"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "オンにするまで消音"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "다시 켤 때까지 무음"
-          }
-        },
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "صامت حتى تعيد تشغيله"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Senyap sampai Anda menyalakannya"
-          }
-        }
-      }
-    },
-    "Уведомления в Telegram выключены, пока не включите снова. Запросы разрешений и ответы бота приходят.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Telegram notifications are off until you turn them on again. Permission requests and the bot’s replies still come."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Сповіщення в Telegram вимкнено, доки не ввімкнете знову. Запити дозволів і відповіді бота надходять."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mitteilungen in Telegram sind aus, bis Sie sie wieder einschalten. Berechtigungsanfragen und die Antworten des Bots kommen weiterhin."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Les notifications Telegram sont désactivées jusqu’à ce que vous les réactiviez. Les demandes d’autorisation et les réponses du bot arrivent toujours."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Las notificaciones en Telegram están desactivadas hasta que las actives de nuevo. Las solicitudes de permiso y las respuestas del bot siguen llegando."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Le notifiche in Telegram sono disattivate finché non le riattivi. Le richieste di autorizzazione e le risposte del bot continuano ad arrivare."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "As notificações no Telegram ficam desativadas até você ativá-las de novo. Pedidos de permissão e respostas do bot continuam chegando."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Powiadomienia w Telegramie są wyłączone, dopóki nie włączysz ich ponownie. Prośby o uprawnienia i odpowiedzi bota nadal przychodzą."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Telegramへの通知は、もう一度オンにするまでオフです。許可のリクエストとボットの返信は届きます。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Telegram 알림은 다시 켤 때까지 꺼져 있습니다. 권한 요청과 봇의 답변은 계속 옵니다."
-          }
-        },
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "إشعارات Telegram متوقفة حتى تعيد تشغيلها. طلبات الأذونات وردود البوت تصل كالمعتاد."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Notifikasi Telegram mati sampai Anda menyalakannya lagi. Permintaan izin dan balasan bot tetap masuk."
-          }
-        }
-      }
-    },
-    "Выключить Telegram на время": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Pause Telegram"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Тимчасово вимкнути Telegram"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Telegram vorübergehend ausschalten"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mettre Telegram en pause"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Pausar Telegram"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mettere in pausa Telegram"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Pausar o Telegram"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Wstrzymaj Telegram"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Telegramを一時停止"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Telegram 일시 중지"
-          }
-        },
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "إيقاف Telegram مؤقتًا"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Jeda Telegram"
-          }
-        }
-      }
-    },
-    "Плитка «Telegram» в «Быстрых переключателях» выключает уведомления в Telegram одним кликом и держит их выключенными, пока не нажмёте снова. Запросы разрешений и ответы бота приходят.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "The “Telegram” tile in Quick Toggles turns Telegram notifications off with one click and keeps them off until you press it again. Permission requests and the bot’s replies still come."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Плитка «Telegram» у «Швидких перемикачах» вимикає сповіщення в Telegram одним кліком і тримає їх вимкненими, доки не натиснете знову. Запити дозволів і відповіді бота надходять."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Die Kachel „Telegram“ in den Schnellschaltern schaltet Mitteilungen in Telegram mit einem Klick aus und lässt sie aus, bis Sie erneut klicken. Berechtigungsanfragen und die Antworten des Bots kommen weiterhin."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "La tuile « Telegram » des bascules rapides désactive les notifications Telegram d’un clic et les garde désactivées jusqu’au clic suivant. Les demandes d’autorisation et les réponses du bot arrivent toujours."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "El mosaico «Telegram» de los conmutadores rápidos desactiva las notificaciones en Telegram con un clic y las mantiene así hasta que lo pulses de nuevo. Las solicitudes de permiso y las respuestas del bot siguen llegando."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Il riquadro «Telegram» negli interruttori rapidi disattiva le notifiche in Telegram con un clic e le tiene disattivate finché non lo premi di nuovo. Le richieste di autorizzazione e le risposte del bot continuano ad arrivare."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "O bloco “Telegram” nos alternadores rápidos desativa as notificações no Telegram com um clique e as mantém assim até você clicar de novo. Pedidos de permissão e respostas do bot continuam chegando."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Kafelek „Telegram” w szybkich przełącznikach wyłącza powiadomienia w Telegramie jednym kliknięciem i trzyma je wyłączone do ponownego kliknięcia. Prośby o uprawnienia i odpowiedzi bota nadal przychodzą."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "クイックスイッチの「Telegram」タイルは、1回のクリックでTelegramへの通知をオフにし、もう一度押すまでオフのままにします。許可のリクエストとボットの返信は届きます。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "빠른 스위치의 “Telegram” 타일은 클릭 한 번으로 Telegram 알림을 끄고, 다시 누를 때까지 꺼 둡니다. 권한 요청과 봇의 답변은 계속 옵니다."
-          }
-        },
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "مربع «Telegram» في مفاتيح التبديل السريعة يوقف إشعارات Telegram بنقرة واحدة ويبقيها متوقفة حتى تضغط عليه مرة أخرى. طلبات الأذونات وردود البوت تصل كالمعتاد."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ubin “Telegram” di Sakelar Cepat mematikan notifikasi Telegram dengan satu klik dan membiarkannya mati sampai Anda menekannya lagi. Permintaan izin dan balasan bot tetap masuk."
           }
         }
       }

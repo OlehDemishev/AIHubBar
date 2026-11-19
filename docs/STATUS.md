@@ -5,6 +5,7 @@
 **Updated:** 2026-11-19
 
 **Now:**
+- 2026-11-19: Mac — the pair's comparison shows line-by-line differences: a click on a file, and one variant against the other (`feat/pair-diff`, merged 2026-11-19); goes out with 0.12.0, not seen live
 - 2026-11-19: Windows — a background run started from the panel in a project with spaces in its path ran `npm test` in a subfolder with a space in its name at the first try (journal; no code changed)
 - 2026-11-19: Windows — «сброс Пн 10:00»: the day of the week is in the interface's language in all 13 (branch `fix/desktop-weekday-language`; seen live in Russian)
 - 2026-11-19: Mac — a «Telegram» tile in «Быстрые переключатели» turns Telegram notifications off until pressed again (`feat/telegram-panel-switch`, merged 2026-11-19); goes out with 0.12.0, not seen live
@@ -124,6 +125,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-19 — Line-by-line differences in the pair's comparison (branch `feat/pair-diff`)
+
+Done: the «Claude и Codex: сравнение» window only listed the changed files and copied a `git diff` command. Now a click on a file opens what that service changed in it (added lines green, removed red; a new file is shown whole), and «Различия между вариантами» shows the second service's branch against the first's. A long diff is cut at 1500 lines with a note. `PairCompare.diffLines` / `fileDiff` / `betweenDiff`, `SessionChangesStore.base`. A line in `docs/release-notes/0.12.0.md`.
+Checked: `scripts/check.sh` green in the worktree (a new test for the parsing and the cut); catalog 1905 keys, 0 problems.
+Left: not seen live. «Различия между вариантами» compares commits only: a side that left its changes uncommitted (Claude stopped early, a failed Codex run) shows less than its file list. The help fact «Сравнение» does not mention the diffs yet.
 
 ## 2026-11-19 — Windows: a background run with npm and spaces in the path (branch `chore/desktop-npm-run-live`)
 

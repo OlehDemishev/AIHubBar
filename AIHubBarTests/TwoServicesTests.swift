@@ -52,4 +52,24 @@ struct TwoServicesTests {
         #expect(PairCompare.line(claude, changes: SessionChanges(files: [])) == TwoServices.lines([claude])[0])
         #expect(PairCompare.diffCommand([claude, codex]) == "git diff cb/export-claude cb/export-codex")
     }
+
+    @Test func aDiffBecomesLinesToShow() {
+        let text = """
+        diff --git a/greet.py b/greet.py
+        index d282150..9e43d32 100644
+        --- a/greet.py
+        +++ b/greet.py
+        @@ -1,2 +1,6 @@
+         def greet(name):
+        -    return "Hi"
+        +    return "Hello"
+
+        """
+        let parsed = PairCompare.diffLines(text)
+        #expect(parsed.lines.map(\.kind) == [.file, .hunk, .context, .removed, .added] && !parsed.cut)
+        #expect(parsed.lines[0].text == "greet.py" && parsed.lines[4].text == "+    return \"Hello\"")
+        let long = PairCompare.diffLines("diff --git a/x b/x\n" + Array(repeating: "+line", count: 20).joined(separator: "\n"), limit: 5)
+        #expect(long.cut && long.lines.count == 5)
+        #expect(PairCompare.diffLines("").lines.isEmpty)
+    }
 }

@@ -36,4 +36,64 @@ enum PairCompare {
         let words = branches.map { $0.unicodeScalars.allSatisfy(plain.contains) ? $0 : ShellQuote.quote($0) }
         return "git diff " + words.joined(separator: " ")
     }
+
+    /// One line of a `git diff`, for colouring.
+    struct DiffLine: Equatable, Identifiable, Sendable {
+        enum Kind: Equatable, Sendable { case file, hunk, added, removed, context }
+        var id: Int
+        var kind: Kind
+        var text: String
+    }
+
+    /// A long diff is cut here: the window is for a look, the whole thing is in a terminal.
+    static let diffLimit = 1500
+
+    /// `git diff` output as lines to show: the «diff --git», «index», «---», «+++» lines become one file line.
+    static func diffLines(_ text: String, limit: Int = diffLimit) -> (lines: [DiffLine], cut: Bool) {
+        var lines: [DiffLine] = []
+        var cut = false
+        for raw in text.split(separator: "\n", omittingEmptySubsequences: false) {
+            let line = String(raw)
+            let kind: DiffLine.Kind
+            if line.hasPrefix("diff --git ") {
+                // «diff --git a/x b/x» → «x»
+                let path = line.range(of: " b/").map { String(line[$0.upperBound...]) } ?? line
+                lines.append(DiffLine(id: lines.count, kind: .file, text: path))
+                continue
+            } else if line.hasPrefix("index ") || line.hasPrefix("--- ") || line.hasPrefix("+++ ")
+                        || line.hasPrefix("new file mode") || line.hasPrefix("deleted file mode") || line.hasPrefix("similarity index")
+                        || line.hasPrefix("rename ") || line.hasPrefix("old mode") || line.hasPrefix("new mode") {
+                continue
+            } else if line.hasPrefix("@@") {
+                kind = .hunk
+            } else if line.hasPrefix("+") {
+                kind = .added
+            } else if line.hasPrefix("-") {
+                kind = .removed
+            } else {
+                kind = .context
+            }
+            if lines.count >= limit { cut = true; break }
+            lines.append(DiffLine(id: lines.count, kind: kind, text: line))
+        }
+        while lines.last?.kind == .context, lines.last?.text.isEmpty == true { lines.removeLast() }
+        return (lines, cut)
+    }
+
+    /// What one side changed in `path` since its run started; a new, untracked file is shown whole as added lines.
+    static func fileDiff(_ run: BackgroundRun, path: String) async -> String {
+        let base = await SessionChangesStore.base(folder: run.folder, since: run.startedAt)
+        let tracked = (try? await GitService.run(["diff", base, "--", path], in: run.folder, timeout: .seconds(20))) ?? ""
+        if !tracked.isEmpty { return tracked }
+        let url = URL(fileURLWithPath: run.folder).appending(path: path)
+        guard let data = try? Data(contentsOf: url), data.count < 400_000, let text = String(data: data, encoding: .utf8) else { return "" }
+        return "diff --git a/\(path) b/\(path)\n" + text.split(separator: "\n", omittingEmptySubsequences: false).map { "+" + $0 }.joined(separator: "\n")
+    }
+
+    /// The second side against the first, branch against branch: what is committed on both.
+    static func betweenDiff(_ sides: [BackgroundRun]) async -> String {
+        let branches = sides.compactMap(\.worktreeBranch)
+        guard branches.count == 2 else { return "" }
+        return (try? await GitService.run(["diff", branches[0], branches[1]], in: sides[0].projectPath, timeout: .seconds(30))) ?? ""
+    }
 }
