@@ -282,6 +282,10 @@
               "name" : "Claude und Codex zusammen"
             },
             {
+              "detail" : "Wenn beide die Aufgabe bekommen haben, steht im Menü jeder der beiden Aufgaben „Mit … vergleichen“: die Antworten nebeneinander, die geänderten Dateien jedes Dienstes, und markiert sind die, die beide geändert haben. Ein Klick auf die Mitteilung über das Paar öffnet dasselbe Fenster.",
+              "name" : "Vergleich"
+            },
+            {
               "detail" : "Hintergrundaufgabe: was Claude tut, Schritt für Schritt.",
               "name" : "Protokoll"
             },

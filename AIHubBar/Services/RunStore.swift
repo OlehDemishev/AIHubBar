@@ -12,6 +12,8 @@ final class RunStore {
     var runs: [BackgroundRun] = []
     /// The run shown in the «Журнал» window.
     var selectedLogRunID: String?
+    /// The pair shown in the «Сравнение» window (`PairCompareWindow`).
+    var selectedPair: String?
 
     private let settings: AppSettings
     private var processes: [String: Process] = [:]
