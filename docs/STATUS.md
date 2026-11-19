@@ -5,8 +5,8 @@
 **Updated:** 2026-11-19
 
 **Now:**
-- 2026-11-19: Mac — «Проверить в …» and «Передать Codex» as buttons under a task's log in Telegram (branch `feat/telegram-review-handover`); goes out with 0.12.0, not pressed live
-- 2026-11-19: Mac — the pair's results can be compared: «Сравнить с …» in a pair task's menu opens both answers and changed files side by side (branch `feat/pair-compare`); goes out with 0.12.0, not seen live
+- 2026-11-19: Mac — «Проверить в …» and «Передать Codex» as buttons under a task's log in Telegram (#455, merged); goes out with 0.12.0, not pressed live
+- 2026-11-19: Mac — the pair's results can be compared: «Сравнить с …» in a pair task's menu opens both answers and changed files side by side (#453, merged); goes out with 0.12.0, not seen live
 - 2026-11-19: Windows 0.1.0 published as an unsigned pre-release (tag `desktop-v0.1.0`); «latest» stays the Mac's v0.11.0
 - 2026-11-19: Windows — ready for SignPath Foundation signing: CODE_SIGNING.md, the release workflow, artifact configurations (#450, merged; the release workflow run by hand on main built, installed and checked an unsigned installer)
 - 2026-11-19: Windows stage 7 begun — the installer registers `.claudepult` and puts `claudepult` on the Path; CI installs, checks and uninstalls it (#448, merged; the check passed on windows-latest)
