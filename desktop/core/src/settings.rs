@@ -48,6 +48,8 @@ pub struct Settings {
     pub hub_gemini_daily_limit: u64,
     /// Whose limits lead the panel and the tray icon (the Mac's `mainService`): `""` automatic, `claude` or a source.
     pub main_service: String,
+    /// How the tray icon draws the limits (`tray_icon::Style`'s id); `""` is the default style.
+    pub tray_style: String,
     /// «Быстрый запрос» (the Mac's `QuickPromptSettings`): the hot key, and the project and mode used last.
     pub quick_prompt_hot_key: String,
     pub quick_prompt_last_project: Option<String>,
@@ -78,6 +80,7 @@ impl Default for Settings {
             hub_gemini_quota: false,
             hub_gemini_daily_limit: 1000,
             main_service: String::new(),
+            tray_style: String::new(),
             quick_prompt_hot_key: crate::quick_prompt::DEFAULT_HOT_KEY.id().to_owned(),
             quick_prompt_last_project: None,
             quick_prompt_last_mode: None,
@@ -130,6 +133,7 @@ impl Settings {
             hub_disabled: value.get("hub_disabled").and_then(Value::as_array).map(|l| l.iter().filter_map(Value::as_str).map(str::to_owned).collect()).unwrap_or_default(),
             hub_gemini_quota: value.get("hub_gemini_quota").and_then(Value::as_bool).unwrap_or(false),
             main_service: value.get("main_service").and_then(Value::as_str).unwrap_or_default().to_owned(),
+            tray_style: value.get("tray_style").and_then(Value::as_str).unwrap_or_default().to_owned(),
             quick_prompt_hot_key: text("quick_prompt_hot_key").filter(|k| crate::quick_prompt::HotKey::parse(k).is_some()).unwrap_or(defaults.quick_prompt_hot_key),
             quick_prompt_last_project: text("quick_prompt_last_project"),
             quick_prompt_last_mode: text("quick_prompt_last_mode").filter(|m| LAUNCH_MODES.contains(&m.as_str())),

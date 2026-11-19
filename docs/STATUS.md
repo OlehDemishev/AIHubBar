@@ -5,6 +5,7 @@
 **Updated:** 2026-11-19
 
 **Now:**
+- 2026-11-19: Windows — the tray icon shows two limits (session and week) in one of seven styles chosen in Settings → «Сервисы AI» → «Значок в трее»; «Два столбика» is the default (branch `feat/desktop-tray-styles`); not seen on Windows
 - 2026-11-19: Mac — «Проверить в …» and «Передать Codex» as buttons under a task's log in Telegram (#455, merged); goes out with 0.12.0, not pressed live
 - 2026-11-19: Mac — the pair's results can be compared: «Сравнить с …» in a pair task's menu opens both answers and changed files side by side (#453, merged); goes out with 0.12.0, not seen live
 - 2026-11-19: Windows 0.1.0 published as an unsigned pre-release (tag `desktop-v0.1.0`); «latest» stays the Mac's v0.11.0
@@ -77,6 +78,7 @@
 - Windows: on the laptop the live check of SPEC-windows §11.4 (with a real permission request answered from the panel) the «Проекты» card's buttons, a Claude launch in Windows Terminal and one in the background (do the `PowerShell(…)` rules let it build and check a project without Git Bash?); then stage 7 (installer, signing, updates) or the stage 6 leftovers (сочетания клавиш для команд, «Извлечь диски»); stage 3 leftovers («Показать», buttons in the notification) need the laptop
 
 **Needs Oleh:**
+- Windows laptop: Settings → «Сервисы AI» → «Значок в трее» — press each of the seven styles, look at the icon in the tray at your display scale and say which one should be the default (now «Два столбика»)
 - Windows signing with SignPath Foundation (chosen 2026-11-19): 1) MFA on GitHub; 2) apply at signpath.org with the repository, https://github.com/OlehDemishev/AIHubBar/releases/tag/desktop-v0.1.0 as the download page (the unsigned pre-release they want to see) and a short description (CODE_SIGNING.md is the policy); 3) once granted, in SignPath: a project, the GitHub.com trusted build system, artifact configurations `windows-binaries` and `windows-installer` from desktop/signpath/, signing policy `release-signing` with you as approver, an API token for CI; 4) in the repository: variables SIGNPATH_ORGANIZATION_ID and SIGNPATH_PROJECT_SLUG, secret SIGNPATH_API_TOKEN
 - Windows laptop: install the tools and copy the two CLAUDE.md files as in `desktop/WINDOWS-DEV.md`, sign in to Claude Code there; choose the Windows signing (SPEC-windows §7)
 - say when the agent may open the app's windows for a live look at the nine features (it takes the keyboard for a minute), or look yourself: ⌃⌥P with Codex «В фоне» and with «И в Codex — сравнить»; a finished task's menu → «Проверить в Codex»; the «Claude Code» window → «Skills и плагины» (no switch pressed yet); «История расхода» → «Сегодня» and the plan's price
@@ -111,6 +113,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-19 — Tray icon styles on Windows (branch `feat/desktop-tray-styles`)
+
+Done: the Windows tray icon drew one ring of the session limit, so the week was only in the hint. `core/tray_icon.rs` now draws the main service's first two limits (Claude's session and week), each in its level's colour, in one of seven styles: two columns (the default, it still reads at 16 px), number and bar, two bars, ring in a ring, ring and pie, two arcs, one ring (the old icon). Without a second limit every style draws the first one alone; over the number the attention dot is smaller. Settings → «Сервисы AI» → «Значок в трее»: tiles with samples made of the icon's own pixels, the icon changes at once (`tray_style` in `settings.json`). Nine new texts in the catalog with 12 translations; SPEC-windows §9 stage 2 has the note.
+Checked: in `desktop/` `cargo test --workspace` (seven new tests of the styles), `python3 scripts/strings.py --check`, `scripts/strings-check.py`; the icons rendered by the real code into a picture and looked at for 62 / 31 %, 100 / 85 % with the dot, 7 / 55 % and one limit alone.
+Left: not run as an app: the Settings tiles and the icon in a real Windows tray are not seen. The default changed from one ring to two columns — Oleh may want another.
 
 ## 2026-11-19 — Review and handover from Telegram (branch `feat/telegram-review-handover`)
 

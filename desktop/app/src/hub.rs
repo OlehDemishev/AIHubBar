@@ -93,11 +93,12 @@ impl Hub {
         hub::pick(&choice, claude, &limits)
     }
 
-    /// The tray ring's percent while another service than Claude leads: its first limit.
-    pub fn lead_percent(&self, app: &AppHandle) -> Option<f64> {
+    /// The tray icon's percents while another service than Claude leads: its first limit, and the second if it has one.
+    pub fn lead_percents(&self, app: &AppHandle) -> Option<(f64, Option<f64>)> {
         let Some(Main::Hub(source)) = self.main(app) else { return None };
         let state = self.state.lock().unwrap();
-        state.limits.iter().find(|l| l.source == source)?.windows.iter().find_map(|w| w.percent)
+        let mut percents = state.limits.iter().find(|l| l.source == source)?.windows.iter().filter_map(|w| w.percent);
+        Some((percents.next()?, percents.next()))
     }
 
     /// «Codex 42 % · Copilot 75 %» for the tray's hint.

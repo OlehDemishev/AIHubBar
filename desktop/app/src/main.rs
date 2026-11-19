@@ -389,7 +389,7 @@ fn main() {
             quick_commands::set_quick_commands, quick_commands::new_quick_command, toggles::toggles_view, toggles::perform_toggle,
             toggles::quick_toggle_settings, toggles::set_quick_toggles, hub::hub_view, hub::refresh_hub, hub::hub_settings,
             hub::set_hub_enabled, hub::save_hub_key, hub::delete_hub_key, hub::set_gemini_options, hub::open_hub_key_page,
-            hub::main_service, hub::set_main_service, quick_prompt::quick_prompt_start, quick_prompt::quick_prompt_send,
+            hub::main_service, hub::set_main_service, limits::tray_styles, limits::set_tray_style, quick_prompt::quick_prompt_start, quick_prompt::quick_prompt_send,
             quick_prompt::quick_prompt_settings, quick_prompt::set_quick_prompt_hot_key, quick_prompt::open_quick_prompt,
             quick_prompt::close_quick_prompt,
             profiles::choose_import, profiles::import_view, profiles::apply_import, profiles::cancel_import

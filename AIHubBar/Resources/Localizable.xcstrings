@@ -30848,6 +30848,237 @@
         }
       }
     },
+    "Два столбика": {
+      "extractionState": "stale",
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "عمودان"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zwei Säulen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Two columns"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dos columnas"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deux colonnes"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dua kolom"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Due colonne"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "2 本の縦棒"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "세로 막대 두 개"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dwa słupki"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Duas colunas"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Два стовпчики"
+          }
+        }
+      }
+    },
+    "Две дуги": {
+      "extractionState": "stale",
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "قوسان"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zwei Bögen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Two arcs"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dos arcos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deux arcs"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dua busur"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Due archi"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "2 本の円弧"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "호 두 개"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dwa łuki"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dois arcos"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Дві дуги"
+          }
+        }
+      }
+    },
+    "Две полоски": {
+      "extractionState": "stale",
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "شريطان"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zwei Balken"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Two bars"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dos barras"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deux barres"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dua bilah"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Due barre"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "2 本のバー"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "가로 막대 두 개"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dwa paski"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Duas barras"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Дві смужки"
+          }
+        }
+      }
+    },
     "Двойной Shift": {
       "localizations": {
         "ar": {
@@ -40583,6 +40814,83 @@
         }
       }
     },
+    "Значок в трее": {
+      "extractionState": "stale",
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الأيقونة في علبة النظام"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Symbol im Infobereich"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tray icon"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Icono de la bandeja"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Icône de la zone de notification"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ikon di baki sistem"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Icona nell’area di notifica"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "トレイのアイコン"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "트레이 아이콘"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ikona w zasobniku"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ícone da bandeja"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Значок у треї"
+          }
+        }
+      }
+    },
     "Значок и числа рядом с часами: лимиты, ждущие ответа сессии, проблемы проектов — всё, что вы туда поставите.": {
       "localizations": {
         "ar": {
@@ -47575,6 +47883,83 @@
         }
       }
     },
+    "Кольцо в кольце": {
+      "extractionState": "stale",
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "حلقة داخل حلقة"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ring im Ring"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ring in a ring"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anillo dentro de anillo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anneau dans l’anneau"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cincin di dalam cincin"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anello nell’anello"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "二重リング"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이중 링"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pierścień w pierścieniu"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anel dentro de anel"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Кільце в кільці"
+          }
+        }
+      }
+    },
     "Кольцо и «3/7» по списку задач Claude, шаги в карточке, итог в «Готово». Без списка — минуты с начала ответа.": {
       "localizations": {
         "ar": {
@@ -47647,6 +48032,83 @@
           "stringUnit": {
             "state": "translated",
             "value": "Кільце й «3/7» за списком завдань Claude, кроки в картці, підсумок у «Готово». Без списку — хвилини від початку відповіді."
+          }
+        }
+      }
+    },
+    "Кольцо и сектор": {
+      "extractionState": "stale",
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "حلقة وقطاع"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ring und Sektor"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ring and pie"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anillo y sector"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anneau et secteur"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cincin dan sektor"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anello e settore"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "リングと扇形"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "링과 부채꼴"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pierścień i wycinek"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anel e setor"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Кільце і сектор"
           }
         }
       }
@@ -54350,6 +54812,83 @@
           "stringUnit": {
             "state": "translated",
             "value": "Блискавка"
+          }
+        }
+      }
+    },
+    "На значке — первые два лимита главного сервиса: у Claude это сессия и неделя. Цвет каждого — по его уровню. Образцы показаны для 62 % и 31 %.": {
+      "extractionState": "stale",
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تعرض الأيقونة أول حدّين للخدمة الرئيسية: في Claude هما الجلسة والأسبوع. لون كل حدّ بحسب مستواه. النماذج مرسومة لـ 62% و31%."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Das Symbol zeigt die ersten beiden Limits des Hauptdienstes: bei Claude Sitzung und Woche. Die Farbe richtet sich jeweils nach der Stufe. Die Muster sind für 62 % und 31 % gezeichnet."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The icon shows the main service’s first two limits: for Claude, the session and the week. Each one’s colour follows its level. The samples are drawn for 62% and 31%."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El icono muestra los dos primeros límites del servicio principal: en Claude, la sesión y la semana. El color de cada uno depende de su nivel. Las muestras corresponden al 62 % y al 31 %."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L’icône montre les deux premières limites du service principal : pour Claude, la session et la semaine. La couleur de chacune suit son niveau. Les exemples sont dessinés pour 62 % et 31 %."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ikon menampilkan dua batas pertama layanan utama: untuk Claude, sesi dan minggu. Warna masing-masing mengikuti levelnya. Contoh digambar untuk 62% dan 31%."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L’icona mostra i primi due limiti del servizio principale: per Claude, la sessione e la settimana. Il colore di ciascuno dipende dal suo livello. Gli esempi sono disegnati per il 62% e il 31%."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アイコンにはメインのサービスの最初の 2 つの制限が表示されます。Claude ではセッションと週です。色はそれぞれのレベルに応じて変わります。サンプルは 62% と 31% の場合です。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "아이콘에는 기본 서비스의 처음 두 한도가 표시됩니다. Claude의 경우 세션과 주간입니다. 각 한도의 색은 수준에 따라 달라집니다. 예시는 62%와 31%일 때의 모습입니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ikona pokazuje dwa pierwsze limity głównej usługi: w Claude to sesja i tydzień. Kolor każdego zależy od jego poziomu. Wzory narysowano dla 62% i 31%."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O ícone mostra os dois primeiros limites do serviço principal: no Claude, a sessão e a semana. A cor de cada um segue o seu nível. As amostras são para 62% e 31%."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "На значку — перші два ліміти головного сервісу: у Claude це сесія й тиждень. Колір кожного — за його рівнем. Зразки показано для 62 % і 31 %."
           }
         }
       }
@@ -68823,6 +69362,83 @@
           "stringUnit": {
             "state": "translated",
             "value": "Один файл .claudepult: усі профілі, вигляд, рядок меню, пороги. Без ключів, токенів і журналів. Подвійний клік по такому файлу відкриває імпорт. Папки проєктів — на вкладці «Профілі»."
+          }
+        }
+      }
+    },
+    "Одно кольцо": {
+      "extractionState": "stale",
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "حلقة واحدة"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ein Ring"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "One ring"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un anillo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un anneau"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Satu cincin"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un anello"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "リング 1 つ"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "링 하나"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jeden pierścień"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Um anel"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Одне кільце"
           }
         }
       }
@@ -119733,6 +120349,83 @@
           "stringUnit": {
             "state": "translated",
             "value": "Число у відсотках"
+          }
+        }
+      }
+    },
+    "Число и полоска": {
+      "extractionState": "stale",
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "رقم وشريط"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zahl und Balken"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Number and bar"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Número y barra"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nombre et barre"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Angka dan bilah"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Numero e barra"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "数字とバー"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "숫자와 막대"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Liczba i pasek"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Número e barra"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Число і смужка"
           }
         }
       }
