@@ -1,0 +1,137 @@
+# A Windows release of AI Hub Bar (docs/specs/SPEC-windows.md §7, CODE_SIGNING.md): built on GitHub-hosted runners
+# from a tag, signed through SignPath when it is set up, checked by installing it, and attached to a draft
+# pre-release. A draft, so nothing is public until Oleh publishes it; a pre-release, so it never becomes «latest»,
+# which the Mac's appcasts and the Homebrew cask follow. Releases happen only on Oleh's word (docs/STATUS.md).
+#
+# Signing (SignPath Foundation's free open source program): the repository variables SIGNPATH_ORGANIZATION_ID and
+# SIGNPATH_PROJECT_SLUG and the secret SIGNPATH_API_TOKEN switch it on; without them the build is unsigned and says
+# so. The programs are signed first (artifact configuration «windows-binaries»), the installer is built from them and
+# signed too («windows-installer»); both configurations are in desktop/signpath/. Every request waits for manual
+# approval in SignPath.
+name: Desktop release
+
+on:
+  push:
+    tags: ["desktop-v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: read
+
+defaults:
+  run:
+    working-directory: desktop
+
+jobs:
+  windows:
+    name: Windows installer
+    runs-on: windows-latest
+    env:
+      SIGN: ${{ vars.SIGNPATH_ORGANIZATION_ID != '' && vars.SIGNPATH_PROJECT_SLUG != '' }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Version
+        id: version
+        shell: pwsh
+        run: |
+          $version = (Get-Content app/tauri.conf.json -Raw | ConvertFrom-Json).version
+          if ($env:GITHUB_REF_TYPE -eq 'tag' -and $env:GITHUB_REF_NAME -ne "desktop-v$version") {
+            Write-Error "the tag $env:GITHUB_REF_NAME doesn't match the app's version $version (app/tauri.conf.json)"; exit 1
+          }
+          "version=$version" >> $env:GITHUB_OUTPUT
+          Write-Host "AI Hub Bar $version, signing: $env:SIGN"
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: desktop/package-lock.json
+      - run: npm ci
+      - run: cargo build --release --locked -p claudepult-hook -p claudepult-cli
+      - run: ./scripts/stage-binaries.sh
+        shell: bash
+      - run: npx tauri build --no-bundle --config app/tauri.bundle.conf.json
+
+      # The three programs, signed before they go into the installer.
+      - name: Gather the programs
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force signing/app | Out-Null
+          Copy-Item target/release/AIHubBar.exe, target/release/claudepult.exe, target/release/claudepult-hook.exe signing/app/
+      - uses: actions/upload-artifact@v4
+        id: programs
+        with:
+          name: programs-unsigned
+          path: desktop/signing/app/*.exe
+          if-no-files-found: error
+      - uses: signpath/github-action-submit-signing-request@f6d04783b4569d051e0c80105fe66e82819d0092 # v3.0, pinned (a signing step)
+        if: env.SIGN == 'true'
+        with:
+          api-token: ${{ secrets.SIGNPATH_API_TOKEN }}
+          organization-id: ${{ vars.SIGNPATH_ORGANIZATION_ID }}
+          project-slug: ${{ vars.SIGNPATH_PROJECT_SLUG }}
+          signing-policy-slug: release-signing
+          artifact-configuration-slug: windows-binaries
+          github-artifact-id: ${{ steps.programs.outputs.artifact-id }}
+          wait-for-completion: true
+          output-artifact-directory: desktop/signing/app-signed
+      - name: Put the signed programs back
+        if: env.SIGN == 'true'
+        shell: pwsh
+        run: |
+          $triple = (rustc -vV | Select-String '^host: ').ToString().Substring(6).Trim()
+          Copy-Item signing/app-signed/AIHubBar.exe target/release/AIHubBar.exe -Force
+          Copy-Item signing/app-signed/claudepult.exe "app/binaries/claudepult-$triple.exe" -Force
+          Copy-Item signing/app-signed/claudepult-hook.exe "app/binaries/claudepult-hook-$triple.exe" -Force
+
+      # The installer from those programs, then signed itself.
+      - run: npx tauri bundle --bundles nsis --config app/tauri.bundle.conf.json
+      - name: Gather the installer
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force signing/installer | Out-Null
+          Copy-Item target/release/bundle/nsis/*-setup.exe signing/installer/
+      - uses: actions/upload-artifact@v4
+        id: installer
+        with:
+          name: installer-unsigned
+          path: desktop/signing/installer/*-setup.exe
+          if-no-files-found: error
+      - uses: signpath/github-action-submit-signing-request@f6d04783b4569d051e0c80105fe66e82819d0092 # v3.0, pinned (a signing step)
+        if: env.SIGN == 'true'
+        with:
+          api-token: ${{ secrets.SIGNPATH_API_TOKEN }}
+          organization-id: ${{ vars.SIGNPATH_ORGANIZATION_ID }}
+          project-slug: ${{ vars.SIGNPATH_PROJECT_SLUG }}
+          signing-policy-slug: release-signing
+          artifact-configuration-slug: windows-installer
+          github-artifact-id: ${{ steps.installer.outputs.artifact-id }}
+          wait-for-completion: true
+          output-artifact-directory: desktop/signing/installer-signed
+      - name: Put the signed installer back and check its signature
+        if: env.SIGN == 'true'
+        shell: pwsh
+        run: |
+          Copy-Item signing/installer-signed/*-setup.exe target/release/bundle/nsis/ -Force
+          $signature = Get-AuthenticodeSignature (Get-ChildItem target/release/bundle/nsis/*-setup.exe | Select-Object -First 1)
+          if ($signature.Status -ne 'Valid') { Write-Error "the installer's signature is $($signature.Status)"; exit 1 }
+          Write-Host "signed by $($signature.SignerCertificate.Subject)"
+
+      - name: Install, check and uninstall the installer
+        shell: pwsh
+        run: ./scripts/check-installer.ps1
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ai-hub-bar-windows-${{ steps.version.outputs.version }}
+          path: desktop/target/release/bundle/nsis/*-setup.exe
+          if-no-files-found: error
+      - name: Draft pre-release
+        if: github.ref_type == 'tag'
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $installer = Get-ChildItem target/release/bundle/nsis/*-setup.exe | Select-Object -First 1
+          $signed = if ($env:SIGN -eq 'true') { 'Signed through SignPath (CODE_SIGNING.md).' } else { 'Not signed yet: Windows SmartScreen warns before installing («More info» → «Run anyway»).' }
+          gh release create $env:GITHUB_REF_NAME $installer.FullName --draft --prerelease --title "AI Hub Bar for Windows ${{ steps.version.outputs.version }}" --notes "AI Hub Bar for Windows and its command line. $signed"

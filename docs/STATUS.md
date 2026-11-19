@@ -5,6 +5,7 @@
 **Updated:** 2026-11-19
 
 **Now:**
+- 2026-11-19: Windows — ready for SignPath Foundation signing: CODE_SIGNING.md, the release workflow, artifact configurations (#450)
 - 2026-11-19: Windows stage 7 begun — the installer registers `.claudepult` and puts `claudepult` on the Path; CI installs, checks and uninstalls it (#448, merged; the check passed on windows-latest)
 - 2026-11-19: Windows — «Быстрый запрос»: Ctrl+Alt+P from any program, the task to Claude, Codex or another agent, the project from the front window (#446, merged; CI green)
 - 2026-11-19: Windows — Codex in the background from «Своя задача…» of a git project, the Mac's run files and log (#444, merged; CI green)
@@ -73,7 +74,7 @@
 - Windows: on the laptop the live check of SPEC-windows §11.4 (with a real permission request answered from the panel) the «Проекты» card's buttons, a Claude launch in Windows Terminal and one in the background (do the `PowerShell(…)` rules let it build and check a project without Git Bash?); then stage 7 (installer, signing, updates) or the stage 6 leftovers (сочетания клавиш для команд, «Извлечь диски»); stage 3 leftovers («Показать», buttons in the notification) need the laptop
 
 **Needs Oleh:**
-- Windows code signing (SPEC-windows §7): Azure Artifact Signing, SignPath Foundation (free for open source, publisher «SignPath Foundation»), or an OV/EV certificate; until then SmartScreen warns on the installer
+- Windows signing with SignPath Foundation (chosen 2026-11-19): 1) MFA on GitHub; 2) apply at signpath.org with the repository, the releases page as the download page and a short description (CODE_SIGNING.md is the policy) — they want software already released, so maybe say the word for a first unsigned Windows pre-release first; 3) once granted, in SignPath: a project, the GitHub.com trusted build system, artifact configurations `windows-binaries` and `windows-installer` from desktop/signpath/, signing policy `release-signing` with you as approver, an API token for CI; 4) in the repository: variables SIGNPATH_ORGANIZATION_ID and SIGNPATH_PROJECT_SLUG, secret SIGNPATH_API_TOKEN
 - Windows laptop: install the tools and copy the two CLAUDE.md files as in `desktop/WINDOWS-DEV.md`, sign in to Claude Code there; choose the Windows signing (SPEC-windows §7)
 - say when the agent may open the app's windows for a live look at the nine features (it takes the keyboard for a minute), or look yourself: ⌃⌥P with Codex «В фоне» and with «И в Codex — сравнить»; a finished task's menu → «Проверить в Codex»; the «Claude Code» window → «Skills и плагины» (no switch pressed yet); «История расхода» → «Сегодня» and the plan's price
 - Codex in the background: ⌃⌥P → agent Codex → «В фоне», a small task in a test project; look at the row in «Сессии», the log and the notification
@@ -107,6 +108,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-19 — Windows: ready for SignPath signing (branch `feat/desktop-signpath`)
+
+Done: Oleh chose SignPath Foundation. `CODE_SIGNING.md` is the policy their terms ask for (the attribution line, what is signed and how it is built, roles, MFA, privacy for the Windows app, what the installer changes and how it is undone) with a «Code signing policy» section in the README. `.github/workflows/desktop-release.yml` builds on GitHub-hosted runners from a `desktop-v*` tag (or by hand), signs the three programs before bundling and the installer after, checks the installer by installing it, and attaches it to a draft pre-release (never «latest», which the Mac's appcasts and the Homebrew cask follow); without the SignPath settings it builds unsigned. Artifact configurations in `desktop/signpath/`. The installer check now also makes sure the uninstaller removes `.claudepult`.
+Checked: the workflow's YAML; the action pinned to v3.0 by commit (v3 moved yesterday). The release workflow itself runs only on a tag or by hand — run by hand on `main` after the merge.
+Left: Oleh applies at signpath.org; SignPath wants software already released in the form to be signed, so a first unsigned Windows pre-release may have to come first (on Oleh's word).
 
 ## 2026-11-19 — Windows: the installer, stage 7 begun (branch `feat/desktop-installer`)
 
