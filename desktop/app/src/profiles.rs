@@ -322,18 +322,42 @@ pub async fn choose_import(app: AppHandle) -> ImportView {
         dialog = dialog.set_parent(&window);
     }
     let Some(path) = dialog.blocking_pick_file().and_then(|f| f.into_path().ok()) else { return pending_view(&app) };
+    read_import(&app, &path)
+}
+
+/// The file waits for «Заменить» / «Добавить», or says why it can't.
+fn read_import(app: &AppHandle, path: &Path) -> ImportView {
     let name = path.file_name().map(|n| n.to_string_lossy().into_owned()).unwrap_or_default();
-    match std::fs::read_to_string(&path).ok().as_deref().and_then(profiles::read_bundle) {
+    match std::fs::read_to_string(path).ok().as_deref().and_then(profiles::read_bundle) {
         Some(bundle) => {
             *PENDING.lock().unwrap() = Some((name, bundle));
-            pending_view(&app)
+            pending_view(app)
         }
         None => {
             *PENDING.lock().unwrap() = None;
-            let message = strings(&app).format("Не удалось прочитать «%@»: это не файл настроек AI Hub Bar.", &[&name]);
+            let message = strings(app).format("Не удалось прочитать «%@»: это не файл настроек AI Hub Bar.", &[&name]);
             ImportView { message: Some(message), error: true, ..ImportView::default() }
         }
     }
+}
+
+/// A `.claudepult` file opened with a double click (the installer registers the extension): the import waits in
+/// Settings, as when chosen there; a file that isn't one says so in a notification.
+pub(crate) fn open_import_file(app: &AppHandle, path: &Path) {
+    use tauri_plugin_notification::NotificationExt;
+    eprintln!("import file opened: {}", path.display());
+    let view = read_import(app, path);
+    if view.error {
+        let _ = app.notification().builder().title(claudepult_core::APP_NAME).body(view.message.unwrap_or_default()).show();
+        return;
+    }
+    crate::open_settings_window(app);
+    let _ = app.emit("import-pending", ());
+}
+
+/// The first `.claudepult` among a launch's arguments.
+pub(crate) fn import_argument<I: IntoIterator<Item = String>>(args: I) -> Option<PathBuf> {
+    args.into_iter().map(PathBuf::from).find(|p| p.extension().is_some_and(|e| e.eq_ignore_ascii_case("claudepult")) && p.is_file())
 }
 
 /// «Заменить все настройки» (`replace`) or «Добавить профили».
@@ -366,5 +390,22 @@ mod tests {
         assert_eq!(super::file_name("Разработчик (GitHub)"), "Разработчик (GitHub).claudepult");
         assert_eq!(super::file_name("a/b: c?"), "a-b- c-.claudepult");
         assert_eq!(super::file_name(" ... "), "AI Hub Bar.claudepult");
+    }
+}
+
+#[cfg(test)]
+mod open_file_tests {
+    use super::*;
+
+    #[test]
+    fn the_file_a_double_click_opens() {
+        let dir = std::env::temp_dir().join(format!("claudepult-open-{}", std::process::id()));
+        std::fs::create_dir_all(&dir).unwrap();
+        let file = dir.join("Мои настройки.CLAUDEPULT");
+        std::fs::write(&file, "{}").unwrap();
+        let args = ["--minimized".to_owned(), dir.join("missing.claudepult").to_string_lossy().into_owned(), file.to_string_lossy().into_owned()];
+        assert_eq!(import_argument(args), Some(file.clone()), "letter case ignored, a missing file skipped");
+        assert_eq!(import_argument(["notes.txt".to_owned()]), None);
+        std::fs::remove_dir_all(dir).unwrap();
     }
 }

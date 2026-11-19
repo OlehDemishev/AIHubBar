@@ -19,13 +19,45 @@
     "targets": "all",
     "category": "DeveloperTool",
     "shortDescription": "Claude Code limits, sessions and projects in the tray",
-    "icon": ["icons/32x32.png", "icons/128x128.png", "icons/128x128@2x.png", "icons/icon.icns", "icons/icon.ico"],
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ],
     "windows": {
       "nsis": {
         "installMode": "currentUser",
-        "languages": ["English", "Russian", "Ukrainian", "German", "French", "Spanish", "PortugueseBR", "Italian", "Polish", "Japanese", "Korean", "Indonesian", "Arabic"],
-        "displayLanguageSelector": false
+        "languages": [
+          "English",
+          "Russian",
+          "Ukrainian",
+          "German",
+          "French",
+          "Spanish",
+          "PortugueseBR",
+          "Italian",
+          "Polish",
+          "Japanese",
+          "Korean",
+          "Indonesian",
+          "Arabic"
+        ],
+        "displayLanguageSelector": false,
+        "installerHooks": "windows/installer-hooks.nsh"
       }
-    }
+    },
+    "fileAssociations": [
+      {
+        "ext": [
+          "claudepult"
+        ],
+        "name": "AI Hub Bar settings",
+        "description": "AI Hub Bar settings and profiles",
+        "mimeType": "application/x-claudepult",
+        "role": "Editor"
+      }
+    ]
   }
 }
