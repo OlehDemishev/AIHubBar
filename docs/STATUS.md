@@ -5,6 +5,7 @@
 **Updated:** 2026-11-19
 
 **Now:**
+- 2026-11-19: Windows — a background run started from the panel in a project with spaces in its path ran `npm test` in a subfolder with a space in its name at the first try (journal; no code changed)
 - 2026-11-19: Windows — «сброс Пн 10:00»: the day of the week is in the interface's language in all 13 (branch `fix/desktop-weekday-language`; seen live in Russian)
 - 2026-11-19: Mac — a «Telegram» tile in «Быстрые переключатели» turns Telegram notifications off until pressed again (`feat/telegram-panel-switch`, merged 2026-11-19); goes out with 0.12.0, not seen live
 - 2026-11-19: Windows — the panel answers a permission request: the installed hook, given a request as Claude Code sends it, showed «Нужно разрешение: Write» with «Разрешить» / «Отклонить», and the click came back as Claude Code's `allow` decision; with a real session it is not seen (Auto mode on the laptop asks nothing)
@@ -84,7 +85,7 @@
 - check on the Air: the island at the real notch
 - promotion (docs/LAUNCH.md): r/ClaudeAI, the lists, r/macapps, Show HN, Product Hunt, Homebrew
 - content (docs/specs/SPEC-content.md, agreed): stage 2 «Версии», then batch tasks; better after the first feedback from people
-- Windows: left on the laptop — a terminal launch into a worktree stops at Claude Code's own first-run questions for the new folder (theme, the Chrome extension) before the task starts — see whether the Mac does the same and whether the app can spare the person that; «Следующий шаг» and «Завершить», notifications and their buttons, a background run with `npm` and in a project with spaces in its path; the hooks on the laptop point at `desktop\target\debug\claudepult-hook.exe` — remove them in Settings before deleting `target\`, or install a build with the fixes and press «Установить hooks» there; the Mac's background runs have the same rules — try one build in a subfolder there; then stage 7 (installer, signing, updates) or the stage 6 leftovers (сочетания клавиш для команд, «Извлечь диски»)
+- Windows: left on the laptop — a terminal launch into a worktree stops at Claude Code's own first-run questions for the new folder (theme, the Chrome extension) before the task starts — see whether the Mac does the same and whether the app can spare the person that; «Следующий шаг» and «Завершить», notifications and their buttons (the agent can't see a toast: its tool hides other programs' windows); the hooks on the laptop point at `desktop\target\debug\claudepult-hook.exe` — remove them in Settings before deleting `target\`, or install a build with the fixes and press «Установить hooks» there; the Mac's background runs have the same rules — try one build in a subfolder there; then stage 7 (installer, signing, updates) or the stage 6 leftovers (сочетания клавиш для команд, «Извлечь диски»)
 
 **Needs Oleh:**
 - Windows: say whether to publish 0.1.1 with the Settings fix (0.1.0 on the pre-release page can't open Settings, the assistant, the calendar or «Быстрый запрос» after the first start) — SignPath will look at that page
@@ -123,6 +124,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-19 — Windows: a background run with npm and spaces in the path (branch `chore/desktop-npm-run-live`)
+
+Done: no code changed. A scratch git project `%USERPROFILE%\Projects\_live test` with `web app\package.json` (a `test` script that prints one line) was made for the check and deleted after it.
+Checked: live on the laptop, a build from `main` with the folder note of #463. The panel listed the project after ↻; «Своя задача…» with «Фон»: «in the folder named web app run npm test». The run's first and only call was PowerShell `npm --prefix "web app" test`, allowed; the summary has the printed line; 17 s from start to end; the run's record has `state: succeeded` and `notified: true`, the session's file went from start to `ended` under the project's name, nothing changed in the project. The panel also showed Claude's limits back at 9 % right after the session's reset and Codex's 30-day limit.
+Left: the notification itself was not seen (the agent's screenshots hide other programs' windows, a toast included). «Следующий шаг» and «Завершить» are still not pressed.
 
 ## 2026-11-19 — Windows: the day of the week in the interface's language (branch `fix/desktop-weekday-language`)
 
