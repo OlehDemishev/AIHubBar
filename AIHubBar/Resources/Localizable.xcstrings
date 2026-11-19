@@ -143214,6 +143214,462 @@
           }
         }
       }
+    },
+    "Нужна Ctrl, Alt или Win — или одна клавиша F1–F20.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يلزم Ctrl أو Alt أو Win — أو مفتاح واحد من F1–F20."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nötig ist Strg, Alt oder Win – oder eine einzelne Taste F1–F20."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Needs Ctrl, Alt or Win — or a single F1–F20 key."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hace falta Ctrl, Alt o Win, o una sola tecla F1–F20."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il faut Ctrl, Alt ou Win — ou une seule touche F1–F20."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Perlu Ctrl, Alt, atau Win — atau satu tombol F1–F20."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Serve Ctrl, Alt o Win — oppure un solo tasto F1–F20."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ctrl、Alt、Win のいずれか、または F1〜F20 キー単体が必要です。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ctrl, Alt 또는 Win이 필요합니다. 또는 F1–F20 키 하나만."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Potrzebny Ctrl, Alt lub Win — albo pojedynczy klawisz F1–F20."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "É preciso Ctrl, Alt ou Win — ou uma única tecla F1–F20."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Потрібна Ctrl, Alt або Win — або одна клавіша F1–F20."
+          }
+        }
+      }
+    },
+    "Нажмите клавиши с Ctrl, Alt или Win; Esc — отменить": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اضغط مفاتيح مع Ctrl أو Alt أو Win؛ Esc للإلغاء"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tasten mit Strg, Alt oder Win drücken; Esc bricht ab"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Press keys with Ctrl, Alt or Win; Esc cancels"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pulsa teclas con Ctrl, Alt o Win; Esc cancela"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Appuyez sur des touches avec Ctrl, Alt ou Win ; Échap annule"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tekan tombol dengan Ctrl, Alt, atau Win; Esc membatalkan"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Premi tasti con Ctrl, Alt o Win; Esc annulla"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ctrl、Alt、Win と一緒にキーを押す。Esc でキャンセル"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ctrl, Alt 또는 Win과 함께 키를 누르세요. Esc로 취소"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Naciśnij klawisze z Ctrl, Alt lub Win; Esc anuluje"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pressione teclas com Ctrl, Alt ou Win; Esc cancela"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Натисніть клавіші з Ctrl, Alt або Win; Esc — скасувати"
+          }
+        }
+      }
+    },
+    "Система не дала занять это сочетание: похоже, оно у другой программы.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لم يسمح النظام بحجز هذا الاختصار: يبدو أن برنامجًا آخر يستخدمه."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Das System hat diese Tastenkombination nicht freigegeben: Wahrscheinlich nutzt sie ein anderes Programm."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The system didn’t let AI Hub Bar take this shortcut: another program probably uses it."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El sistema no permitió usar este atajo: probablemente lo usa otro programa."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le système n’a pas accordé ce raccourci : un autre programme l’utilise probablement."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sistem tidak mengizinkan pintasan ini: mungkin dipakai program lain."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il sistema non ha concesso questa scorciatoia: probabilmente la usa un altro programma."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "システムがこのショートカットを許可しませんでした。別のプログラムが使っている可能性があります。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "시스템이 이 단축키를 허용하지 않았습니다. 다른 프로그램이 사용 중인 것 같습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "System nie pozwolił zająć tego skrótu: pewnie używa go inny program."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O sistema não liberou este atalho: provavelmente outro programa o usa."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Система не дала зайняти це сполучення: схоже, воно в іншої програми."
+          }
+        }
+      }
+    },
+    "Сочетание только с Ctrl или Alt заменит его во всех программах.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الاختصار مع Ctrl أو Alt فقط يحل محله في كل البرامج."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eine Tastenkombination nur mit Strg oder Alt ersetzt sie in allen Programmen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A shortcut with only Ctrl or Alt replaces it in every program."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un atajo solo con Ctrl o Alt lo sustituye en todos los programas."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un raccourci avec seulement Ctrl ou Alt le remplace dans tous les programmes."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pintasan hanya dengan Ctrl atau Alt menggantikannya di semua program."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Una scorciatoia con solo Ctrl o Alt la sostituisce in tutti i programmi."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ctrl または Alt だけのショートカットは、すべてのプログラムのそのショートカットを置き換えます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ctrl 또는 Alt만 쓰는 단축키는 모든 프로그램에서 그 단축키를 대체합니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skrót tylko z Ctrl lub Alt zastąpi go we wszystkich programach."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Um atalho só com Ctrl ou Alt o substitui em todos os programas."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Сполучення лише з Ctrl або Alt замінить його в усіх програмах."
+          }
+        }
+      }
+    },
+    "Ctrl+Alt — это AltGr: на вашей раскладке это сочетание заберёт символ «%@».": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ctrl+Alt هو AltGr: في تخطيط لوحة مفاتيحك سيأخذ هذا الاختصار الرمز «%@»."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Strg+Alt ist AltGr: Auf Ihrer Tastaturbelegung nimmt diese Tastenkombination das Zeichen „%@“ weg."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ctrl+Alt is AltGr: on your keyboard layout this shortcut takes away the character “%@”."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ctrl+Alt es AltGr: en tu distribución de teclado este atajo se queda con el carácter «%@»."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ctrl+Alt, c’est AltGr : avec votre disposition de clavier, ce raccourci prend le caractère « %@ »."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ctrl+Alt adalah AltGr: pada tata letak keyboard Anda, pintasan ini mengambil karakter “%@”."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ctrl+Alt è AltGr: con il tuo layout di tastiera questa scorciatoia si prende il carattere «%@»."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ctrl+Alt は AltGr です。お使いのキーボード配列では、このショートカットが文字「%@」を奪います。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ctrl+Alt는 AltGr입니다. 사용 중인 키보드 배열에서는 이 단축키가 ‘%@’ 문자를 가져갑니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ctrl+Alt to AltGr: w Twoim układzie klawiatury ten skrót zabierze znak „%@”."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ctrl+Alt é AltGr: no seu layout de teclado este atalho fica com o caractere “%@”."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ctrl+Alt — це AltGr: на вашій розкладці це сполучення забере символ «%@»."
+          }
+        }
+      }
+    },
+    "Такой клавиши здесь нет: сочетание записано на Mac и работает только там.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لا يوجد هذا المفتاح هنا: سُجّل الاختصار على Mac ويعمل هناك فقط."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diese Taste gibt es hier nicht: Die Tastenkombination wurde auf einem Mac aufgenommen und funktioniert nur dort."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "There is no such key here: the shortcut was recorded on a Mac and works only there."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aquí no existe esa tecla: el atajo se grabó en un Mac y solo funciona allí."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cette touche n’existe pas ici : le raccourci a été enregistré sur un Mac et ne fonctionne que là-bas."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tombol itu tidak ada di sini: pintasan direkam di Mac dan hanya berfungsi di sana."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Qui questo tasto non c’è: la scorciatoia è stata registrata su un Mac e funziona solo lì."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "このキーはここにはありません。ショートカットは Mac で記録されたもので、Mac でのみ動作します。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "여기에는 그런 키가 없습니다. 단축키는 Mac에서 기록되었고 거기서만 작동합니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Takiego klawisza tu nie ma: skrót nagrano na Macu i działa tylko tam."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Essa tecla não existe aqui: o atalho foi gravado em um Mac e só funciona lá."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Такої клавіші тут немає: сполучення записано на Mac і працює лише там."
+          }
+        }
+      }
     }
   },
   "version": "1.0"

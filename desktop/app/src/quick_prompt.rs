@@ -24,13 +24,18 @@ pub struct QuickPrompt {
     registered: Mutex<Option<Shortcut>>,
 }
 
-/// The plugin with its one handler: a press of the registered key opens the window.
+/// The plugin with its one handler: a press of the registered key opens the window; a command's key runs it.
 pub fn plugin() -> tauri::plugin::TauriPlugin<tauri::Wry> {
     tauri_plugin_global_shortcut::Builder::new()
         .with_handler(|app, shortcut, event| {
+            if event.state() != ShortcutState::Pressed {
+                return;
+            }
             let ours = *app.state::<QuickPrompt>().registered.lock().unwrap() == Some(*shortcut);
-            if ours && event.state() == ShortcutState::Pressed {
+            if ours {
                 show(app);
+            } else {
+                crate::command_hot_keys::pressed(app, shortcut);
             }
         })
         .build()
@@ -38,13 +43,15 @@ pub fn plugin() -> tauri::plugin::TauriPlugin<tauri::Wry> {
 
 fn hot_key(app: &AppHandle) -> Option<HotKey> {
     let settings = app.state::<AppState>().settings.lock().unwrap().clone();
-    if !settings.module_on(KIND) {
+    // Settings is recording a command's combination: this key must reach its window too.
+    if !settings.module_on(KIND) || app.state::<crate::command_hot_keys::CommandHotKeys>().recording() {
         return None;
     }
     HotKey::parse(&settings.quick_prompt_hot_key).filter(|k| *k != HotKey::Off)
 }
 
 /// Registers the hot key for the module and the setting as they are now; another program holding it is logged.
+/// Called through `command_hot_keys::sync`, which lets a command's key go first.
 pub fn sync(app: &AppHandle) {
     let state = app.state::<QuickPrompt>();
     let wanted = hot_key(app).and_then(HotKey::accelerator).and_then(|a| a.parse::<Shortcut>().ok());
@@ -223,7 +230,7 @@ pub fn quick_prompt_settings(app: AppHandle) -> QuickPromptSettings {
 pub fn set_quick_prompt_hot_key(app: AppHandle, hot_key: String) -> QuickPromptSettings {
     if HotKey::parse(&hot_key).is_some() {
         save(&app, |settings| settings.quick_prompt_hot_key = hot_key);
-        sync(&app);
+        crate::command_hot_keys::sync(&app);
     }
     settings_view(&app)
 }

@@ -1,7 +1,7 @@
 //! «Быстрые команды» (SPEC-profiles §4.3, SPEC-windows §4.10), the Mac's `QuickCommand` and its runner: the person's
 //! own buttons — a script in the background (PowerShell on Windows, `sh` on Linux) whose last line arrives as a
 //! notification, a script in a terminal window, or a link, file, folder or program to open. The Mac's shortcuts from
-//! «Команды» have no counterpart here. The library is this computer's own, as on the Mac (not in `.claudepult`).
+//! «Команды» have no counterpart here; keyboard shortcuts are in `hot_keys`. The library is this computer's own, as on the Mac (not in `.claudepult`).
 
 use crate::i18n::Strings;
 use serde::{Deserialize, Serialize};
@@ -24,7 +24,7 @@ pub enum Kind {
     Open,
 }
 
-/// The Mac's `QuickCommand`, field for field (`hotKey` kept as it came: shortcuts come later here).
+/// The Mac's `QuickCommand`, field for field (`hotKey` kept as it came, read through [`QuickCommand::combo`]).
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct QuickCommand {
@@ -79,6 +79,11 @@ pub enum Invocation {
 impl QuickCommand {
     pub fn new(title: &str, symbol: &str, kind: Kind, value: &str) -> QuickCommand {
         QuickCommand { id: crate::runs::new_id(), title: title.into(), symbol: symbol.into(), kind, value: value.into(), confirm: false, hot_key: None }
+    }
+
+    /// The keyboard shortcut, when the file has one that reads.
+    pub fn combo(&self) -> Option<crate::hot_keys::KeyCombo> {
+        self.hot_key.as_ref().and_then(crate::hot_keys::KeyCombo::from_value)
     }
 
     pub fn invocation(&self, home: &Path) -> Invocation {

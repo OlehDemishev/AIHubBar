@@ -17,6 +17,7 @@ mod resources;
 mod projects;
 mod quick_prompt;
 mod quick_commands;
+mod command_hot_keys;
 mod runs;
 mod services;
 mod sessions;
@@ -393,6 +394,7 @@ fn main() {
         .manage(toggles::Toggles::default())
         .manage(hub::Hub::default())
         .manage(quick_prompt::QuickPrompt::default())
+        .manage(command_hot_keys::CommandHotKeys::default())
         .manage(AppState { settings: Mutex::new(load_settings()) })
         .invoke_handler(tauri::generate_handler![
             ui_texts, set_language, dismiss_tray_hint, autostart_enabled, set_autostart, open_settings, hide_panel, quit,
@@ -423,7 +425,7 @@ fn main() {
             hub::set_hub_enabled, hub::save_hub_key, hub::delete_hub_key, hub::set_gemini_options, hub::open_hub_key_page,
             hub::main_service, hub::set_main_service, limits::tray_styles, limits::set_tray_style, quick_prompt::quick_prompt_start, quick_prompt::quick_prompt_send,
             quick_prompt::quick_prompt_settings, quick_prompt::set_quick_prompt_hot_key, quick_prompt::open_quick_prompt,
-            quick_prompt::close_quick_prompt,
+            quick_prompt::close_quick_prompt, command_hot_keys::hot_key_from_press, command_hot_keys::set_hot_key_recording,
             profiles::choose_import, profiles::import_view, profiles::apply_import, profiles::cancel_import
         ])
         .setup(move |app| {
@@ -442,7 +444,7 @@ fn main() {
             handle.state::<keep_awake::KeepAwake>().start(handle.clone());
             handle.state::<resources::Resources>().start(handle.clone());
             handle.state::<hub::Hub>().start(handle.clone());
-            quick_prompt::sync(&handle);
+            command_hot_keys::sync(&handle);
             // Started by a double click on a `.claudepult` file.
             if let Some(file) = profiles::import_argument(std::env::args().skip(1)) {
                 profiles::open_import_file(&handle, &file);

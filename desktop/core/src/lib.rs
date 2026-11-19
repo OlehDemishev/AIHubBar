@@ -12,6 +12,7 @@ pub mod command;
 pub mod commands;
 pub mod docx;
 pub mod folders;
+pub mod hot_keys;
 pub mod hub;
 pub mod hooks;
 pub mod i18n;

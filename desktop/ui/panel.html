@@ -443,7 +443,8 @@
       document.getElementById("quick-buttons").replaceChildren(...view.buttons.map((command) => {
         const button = document.createElement("button");
         button.className = "quick";
-        button.title = command.value;
+        button.title = command.hotKey ? `${command.value}
+${command.hotKey}` : command.value;
         button.disabled = command.running;
         button.innerHTML = `<span class="glyph" aria-hidden="true"></span><span class="name"></span>`;
         button.querySelector(".glyph").textContent = command.running ? "…" : command.glyph;

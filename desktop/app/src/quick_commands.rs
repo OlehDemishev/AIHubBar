@@ -1,6 +1,6 @@
 //! Stage 6 «Быстрые команды» (SPEC-windows §4.10, the Mac's `QuickToolsController` and `QuickCommandsView`): the
 //! library as buttons in the panel, run one at a time each, the last result under them and a notification for a
-//! background script. Settings → «Модули» edits the library. Keyboard shortcuts come later.
+//! background script. Settings → «Модули» edits the library; keyboard shortcuts are in `command_hot_keys`.
 
 use crate::{save, strings, AppState};
 use claudepult_core::launch;
@@ -21,7 +21,7 @@ pub struct QuickCommands {
 }
 
 /// The library, or the starting examples in the interface language.
-fn library(app: &AppHandle) -> Vec<QuickCommand> {
+pub(crate) fn library(app: &AppHandle) -> Vec<QuickCommand> {
     let saved = app.state::<AppState>().settings.lock().unwrap().quick_commands.clone();
     saved.unwrap_or_else(|| quick_commands::examples(&strings(app)))
 }
@@ -35,6 +35,8 @@ pub struct Button {
     /// The hover hint: what it runs or opens.
     value: String,
     confirm: bool,
+    /// «Ctrl+Alt+K», when the combination is registered.
+    hot_key: Option<String>,
     running: bool,
     result: Option<Outcome>,
 }
@@ -58,10 +60,11 @@ pub fn quick_commands_view(app: AppHandle) -> QuickCommandsView {
     let state = app.state::<QuickCommands>();
     let running = state.running.lock().unwrap().clone();
     let results = state.results.lock().unwrap().clone();
+    let mut hot_keys = crate::command_hot_keys::views(&app);
     let buttons = library(&app)
         .into_iter()
         .filter(|c| c.kind != Kind::Shortcut && chosen.as_ref().is_none_or(|ids| ids.contains(&c.id)))
-        .map(|c| Button { glyph: quick_commands::glyph(&c.symbol), running: running.contains(&c.id), result: results.get(&c.id).cloned(), id: c.id, title: c.title, value: c.value, confirm: c.confirm })
+        .map(|c| Button { hot_key: hot_keys.remove(&c.id).filter(|k| !k.blocked).map(|k| k.title), glyph: quick_commands::glyph(&c.symbol), running: running.contains(&c.id), result: results.get(&c.id).cloned(), id: c.id, title: c.title, value: c.value, confirm: c.confirm })
         .collect();
     QuickCommandsView { shown, buttons }
 }
@@ -120,11 +123,13 @@ pub struct LibraryView {
     commands: Vec<QuickCommand>,
     /// The Mac's symbol names with the characters drawn for them.
     symbols: Vec<(&'static str, &'static str)>,
+    /// By command id: the combination in this system's words and what is wrong with it.
+    hot_keys: HashMap<String, crate::command_hot_keys::HotKeyView>,
 }
 
 fn library_view(app: &AppHandle) -> LibraryView {
     let on = app.state::<AppState>().settings.lock().unwrap().module_on(KIND);
-    LibraryView { on, commands: library(app), symbols: quick_commands::SYMBOLS.to_vec() }
+    LibraryView { on, commands: library(app), symbols: quick_commands::SYMBOLS.to_vec(), hot_keys: crate::command_hot_keys::views(app) }
 }
 
 #[tauri::command]
@@ -139,6 +144,9 @@ pub fn set_quick_commands(app: AppHandle, commands: Vec<QuickCommand>) -> Librar
     save(&app, |settings| settings.quick_commands = Some(commands));
     // A deleted command's last result goes with it.
     app.state::<QuickCommands>().results.lock().unwrap().retain(|id, _| ids.contains(id));
+    // A combination just recorded ends the recording; the keys are taken again as the library is now.
+    crate::command_hot_keys::stop_or_start_recording(&app, false);
+    crate::command_hot_keys::sync(&app);
     let _ = app.emit("quick-commands-changed", ());
     library_view(&app)
 }
