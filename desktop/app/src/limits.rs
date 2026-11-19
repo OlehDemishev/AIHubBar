@@ -172,7 +172,7 @@ impl Limits {
                 tooltip += "\n";
                 tooltip += &line;
             }
-            (session, tooltip)
+            (session, if cfg!(windows) { texts::fit_tooltip(&tooltip, 127) } else { tooltip })
         };
         let app_for_tray = app.clone();
         let _ = app.run_on_main_thread(move || {

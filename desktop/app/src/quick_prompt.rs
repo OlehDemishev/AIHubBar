@@ -80,14 +80,17 @@ pub fn show(app: &AppHandle) {
         return;
     }
     let title = format!("{} — {}", claudepult_core::APP_NAME, strings(app).t("Быстрый запрос"));
-    let _ = WebviewWindowBuilder::new(app, "quick-prompt", WebviewUrl::App("quick-prompt.html".into()))
-        .title(title)
-        .inner_size(560.0, 330.0)
-        .resizable(false)
-        .always_on_top(true)
-        .center()
-        .focused(true)
-        .build();
+    let app = app.clone();
+    crate::off_main_thread(move || {
+        let _ = WebviewWindowBuilder::new(&app, "quick-prompt", WebviewUrl::App("quick-prompt.html".into()))
+            .title(title)
+            .inner_size(560.0, 330.0)
+            .resizable(false)
+            .always_on_top(true)
+            .center()
+            .focused(true)
+            .build();
+    });
 }
 
 #[derive(Serialize)]

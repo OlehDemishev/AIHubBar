@@ -22,12 +22,14 @@ pub fn open_assistant(app: AppHandle) {
         return;
     }
     let title = format!("{} — {}", claudepult_core::APP_NAME, strings(&app).t("Помощник…").trim_end_matches('…'));
-    let _ = tauri::WebviewWindowBuilder::new(&app, "assistant", tauri::WebviewUrl::App("assistant.html".into()))
-        .title(title)
-        .inner_size(640.0, 620.0)
-        .min_inner_size(520.0, 480.0)
-        .center()
-        .build();
+    crate::off_main_thread(move || {
+        let _ = tauri::WebviewWindowBuilder::new(&app, "assistant", tauri::WebviewUrl::App("assistant.html".into()))
+            .title(title)
+            .inner_size(640.0, 620.0)
+            .min_inner_size(520.0, 480.0)
+            .center()
+            .build();
+    });
 }
 
 #[derive(Serialize)]
