@@ -1,5 +1,5 @@
 # Installs the NSIS installer silently, checks what it promises, uninstalls and checks it cleaned up
-# (docs/specs/SPEC-windows.md §7). Run by CI on windows-latest after `npx tauri build --bundles nsis`; it touches only
+# (docs/specs/SPEC-windows.md §7, CODE_SIGNING.md «What the Windows installer changes»). Run by CI on windows-latest after `npx tauri build --bundles nsis`; it touches only
 # the runner's own user (HKCU, %LOCALAPPDATA%, the Start menu).
 $ErrorActionPreference = 'Stop'
 Set-Location (Join-Path $PSScriptRoot '..')
@@ -39,4 +39,5 @@ $parts = (UserPath) -split ';'
 if ($parts -contains $dir) { Fail "the uninstaller left the folder in the user's Path: $(UserPath)" }
 if ($parts -notcontains '%USERPROFILE%\aihubbar-check') { Fail 'the uninstall expanded or lost an existing Path entry' }
 if (Test-Path (Join-Path $dir 'AIHubBar.exe')) { Fail 'AIHubBar.exe is still there' }
+if (Test-Path 'Registry::HKEY_CURRENT_USER\Software\Classes\.claudepult') { Fail '.claudepult is still registered' }
 Write-Host 'uninstalled: app gone, Path back as it was'

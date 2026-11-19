@@ -91,6 +91,10 @@ After that the app updates itself (Settings → General → Updates). The first 
 - API keys are kept in the macOS Keychain, never in logs or exported settings. Claude Code's sign-in is read from the Keychain on each refresh and never stored.
 - The session hook only writes small status files on your Mac and never changes what the agent does; Settings → Agent sessions → Turn Off Tracking takes it out.
 
+## Code signing policy
+
+Windows builds are signed through SignPath: free code signing provided by [SignPath.io](https://about.signpath.io), certificate by [SignPath Foundation](https://signpath.org). What is signed, who approves it and what the installer changes: [CODE_SIGNING.md](CODE_SIGNING.md). (The application is being prepared; until then Windows builds are unsigned.)
+
 ## Build from source
 
 ```bash

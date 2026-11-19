@@ -15,5 +15,10 @@
 !macroend
 
 !macro NSIS_HOOK_POSTUNINSTALL
+  ; Tauri's uninstaller puts back the extension's previous file class (none) and deletes its own, but leaves the empty
+  ; `.claudepult` key with its backup value; it goes too, unless another program has taken the extension since.
+  ReadRegStr $R0 HKCU "Software\Classes\.claudepult" ""
+  StrCmp $R0 "" 0 +2
+    DeleteRegKey HKCU "Software\Classes\.claudepult"
   !insertmacro AIHUBBAR_PATH "$$d = $$env:AIHUBBAR_DIR; $$p = (Get-Item 'HKCU:\Environment').GetValue('Path', '', 'DoNotExpandEnvironmentNames'); $$parts = @($$p -split ';' | Where-Object { $$_ -and $$_ -ne $$d }); New-ItemProperty -Path 'HKCU:\Environment' -Name Path -Value ($$parts -join ';') -PropertyType ExpandString -Force | Out-Null; [Environment]::SetEnvironmentVariable('AIHUBBAR_REFRESH', '1', 'User'); [Environment]::SetEnvironmentVariable('AIHUBBAR_REFRESH', $$null, 'User')"
 !macroend

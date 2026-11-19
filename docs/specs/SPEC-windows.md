@@ -173,6 +173,8 @@
   - сертификат OV или EV у центра сертификации — дороже, на год.
 
   Решает Олег. Developer ID на Mac уже есть (0.7.8), к Windows он не подходит.
+
+  **Выбрано 2026-11-19: SignPath Foundation.** Их условия (signpath.org/terms, черновик): лицензия OSI без двойного лицензирования и без проприетарного кода; подписывать только свои бинарники, собранные из исходников проверяемо (все задания до запроса подписи — на GitHub-hosted раннерах); MFA у всех участников; на главной — раздел «Code signing policy» со строкой «Free code signing provided by SignPath.io, certificate by SignPath Foundation», ролями и политикой приватности; каждый релиз подтверждается вручную; проект уже выпущен в том виде, что подписывается. Подготовлено: `CODE_SIGNING.md` и раздел в README, `.github/workflows/desktop-release.yml` (по тегу `desktop-v*` или вручную: программы подписываются до установщика, потом сам установщик; без настроек SignPath сборка просто не подписана), конфигурации артефактов `desktop/signpath/windows-binaries.xml` и `windows-installer.xml`, экшен `signpath/github-action-submit-signing-request` закреплён на v3.0 по хэшу. Релиз — черновик и pre-release, чтобы не стать «latest», за которым следят appcast Mac и Homebrew.
 - **Обновления**: встроенный в Tauri механизм, подписанный манифест на GitHub Releases. Позже — пакет в `winget`.
 - MSIX и Microsoft Store — не сейчас. Понадобятся только ради виджета (§4.9).
 
