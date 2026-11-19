@@ -166,6 +166,9 @@ struct PairCompareWindow: View {
                                 .font(line.kind == .file ? .caption.monospaced().weight(.semibold) : .caption.monospaced())
                                 .foregroundStyle(color(line.kind))
                                 .padding(.top, line.kind == .file ? 6 : 0)
+                                // Its own width: in a two-way scroll view a line is otherwise wrapped into a
+                                // narrow column (seen live 2026-11-19).
+                                .fixedSize(horizontal: true, vertical: false)
                                 .textSelection(.enabled)
                         }
                     }
