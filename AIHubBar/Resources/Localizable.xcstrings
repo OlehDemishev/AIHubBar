@@ -142378,6 +142378,82 @@
           }
         }
       }
+    },
+    "Коммит сделал AI Hub Bar: в worktree Codex этого не может.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar made the commit: Codex cannot do it in a worktree."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Коміт зробив AI Hub Bar: у worktree Codex цього не може."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Den Commit hat AI Hub Bar gemacht: In einem Worktree kann Codex das nicht."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le commit a été fait par AI Hub Bar : dans un worktree, Codex ne le peut pas."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El commit lo hizo AI Hub Bar: en un worktree Codex no puede."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il commit è stato fatto da AI Hub Bar: in un worktree Codex non può."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O commit foi feito pelo AI Hub Bar: em um worktree o Codex não consegue."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Commit wykonał AI Hub Bar: w worktree Codex tego nie potrafi."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "コミットはAI Hub Barが行いました：worktreeではCodexはコミットできません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "커밋은 AI Hub Bar가 했습니다. worktree에서는 Codex가 할 수 없습니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "قام AI Hub Bar بعمل الـ commit: لا يستطيع Codex ذلك داخل worktree."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Commit dibuat oleh AI Hub Bar: di worktree Codex tidak bisa melakukannya."
+          }
+        }
+      }
     }
   },
   "version": "1.0"

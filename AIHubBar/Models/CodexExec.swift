@@ -32,6 +32,24 @@ enum CodexExec {
         return String(path[..<range.lowerBound])
     }
 
+    /// A worktree: its `.git` is a file that points into the repository's git folder.
+    static func isWorktree(folder: String) -> Bool {
+        var isDirectory: ObjCBool = false
+        let dotGit = (folder as NSString).appendingPathComponent(".git")
+        return FileManager.default.fileExists(atPath: dotGit, isDirectory: &isDirectory) && !isDirectory.boolValue
+    }
+
+    /// Added to a task that runs in a worktree. Codex's sandbox denies writes to the git folder its working folder
+    /// points at, even when the repository's `.git` is passed as `--add-dir`: `git commit` fails with «Unable to
+    /// create …/.git/worktrees/<name>/index.lock: Operation not permitted» (seen live 2026-11-19, 0.166). So there
+    /// AI Hub Bar commits what Codex leaves (`RunStore`), and Codex is told not to try.
+    static let worktreeNote = """
+
+
+        Do not run `git add` or `git commit` here: this folder is a git worktree and your sandbox cannot write its git \
+        folder. Leave your changes uncommitted; they are committed for you when you finish.
+        """
+
     static func threadID(fromLog text: String) -> String? {
         for line in text.split(separator: "\n").prefix(20) {
             guard let event = StreamJSON.object(line), event["type"] as? String == "thread.started" else { continue }

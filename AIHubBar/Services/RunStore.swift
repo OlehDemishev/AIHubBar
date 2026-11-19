@@ -78,7 +78,10 @@ final class RunStore {
         process.executableURL = URL(fileURLWithPath: codexPath ?? claudePath)
         process.arguments = codexPath == nil
             ? BackgroundPermissions.arguments(prompt: prompt, sessionID: id, profile: profile, readOnly: reviewOf != nil)
-            : CodexExec.arguments(prompt: prompt, gitDirectory: CodexExec.gitDirectory(folder: folder), readOnly: reviewOf != nil)
+            : CodexExec.arguments(
+                prompt: prompt + (reviewOf == nil && CodexExec.isWorktree(folder: folder) ? CodexExec.worktreeNote : ""),
+                gitDirectory: CodexExec.gitDirectory(folder: folder), readOnly: reviewOf != nil
+            )
         process.currentDirectoryURL = URL(fileURLWithPath: folder, isDirectory: true)
         process.environment = ProcessRunner.environment()
         process.standardInput = FileHandle.nullDevice
@@ -203,6 +206,28 @@ final class RunStore {
         announce(&run)
         save(run)
         if let index = runs.firstIndex(where: { $0.id == id }) { runs[index] = run }
+        if run.agent == CodexExec.agent, run.reviewOf == nil, run.state == .succeeded, CodexExec.isWorktree(folder: run.folder) {
+            Task { await commitLeftovers(id: id) }
+        }
+    }
+
+    /// Codex cannot commit in a worktree (`CodexExec.worktreeNote`): what it left there is committed here, on the
+    /// worktree's branch, so the branch holds the work and can be compared or merged.
+    private func commitLeftovers(id: String) async {
+        guard let run = run(id: id) else { return }
+        do {
+            let status = try await GitService.run(["status", "--porcelain"], in: run.folder, timeout: .seconds(20))
+            guard !status.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return }
+            try await GitService.run(["add", "-A"], in: run.folder, timeout: .seconds(30))
+            try await GitService.run(["commit", "-m", RunMessage.taskStart(run.task)], in: run.folder, timeout: .seconds(30))
+            AppLog.info("Background run \(id): Codex's changes committed on \(run.worktreeBranch ?? "the worktree's branch")")
+            guard var saved = self.run(id: id) else { return }
+            saved.summary = [saved.summary, String(localized: "Коммит сделал AI Hub Bar: в worktree Codex этого не может.")].compactMap { $0 }.joined(separator: "\n")
+            save(saved)
+            if let index = runs.firstIndex(where: { $0.id == id }) { runs[index] = saved }
+        } catch {
+            AppLog.error("Background run \(id): committing Codex's changes failed: \(error.localizedDescription)")
+        }
     }
 
     private func announce(_ run: inout BackgroundRun) {
