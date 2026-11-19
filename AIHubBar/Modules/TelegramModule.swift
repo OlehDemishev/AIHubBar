@@ -320,11 +320,11 @@ struct TelegramNotificationsSection: View {
                 }
             }
             .help("В эти часы уведомления в Telegram не приходят; запросы разрешений и ответы бота — приходят")
-            if let until = settings.telegramBot.mutedUntil, until > .now {
+            if let title = settings.telegramBot.mutedTitle(now: .now) {
                 LabeledContent {
                     Button("Снять тишину") { settings.telegramBot.mutedUntil = nil }
                 } label: {
-                    Label("Тишина до \(until.formatted(date: .omitted, time: .shortened))", systemImage: "bell.slash")
+                    Label { Text(verbatim: title) } icon: { Image(systemName: "bell.slash") }
                 }
             } else {
                 LabeledContent {

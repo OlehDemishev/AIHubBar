@@ -67,6 +67,9 @@ enum QuickToggle: String, Codable, CaseIterable, Sendable {
     case darkMode, desktopIcons, lockScreen, displaySleep, ejectDisks, emptyTrash
     /// «Скрыть остров» (SPEC-notch §5), for a screen recording or a demo; shown only while the island is installed.
     case notchIsland
+    /// Notifications to Telegram, held back until switched on again (asked by Oleh 2026-11-19: a quick way to stop
+    /// them from the panel); shown only while the Telegram module is installed. Requests and the bot's replies go on.
+    case telegram
 
     /// Under the tile in the panel; the full title is its hover hint.
     var shortTitle: String {
@@ -78,6 +81,7 @@ enum QuickToggle: String, Codable, CaseIterable, Sendable {
         case .ejectDisks: String(localized: "Диски")
         case .emptyTrash: String(localized: "Корзина")
         case .notchIsland: String(localized: "Остров")
+        case .telegram: "Telegram"
         }
     }
 
@@ -90,6 +94,7 @@ enum QuickToggle: String, Codable, CaseIterable, Sendable {
         case .ejectDisks: String(localized: "Извлечь диски")
         case .emptyTrash: String(localized: "Очистить корзину")
         case .notchIsland: String(localized: "Остров у чёлки")
+        case .telegram: String(localized: "Уведомления в Telegram")
         }
     }
 
@@ -102,12 +107,13 @@ enum QuickToggle: String, Codable, CaseIterable, Sendable {
         case .ejectDisks: "eject"
         case .emptyTrash: "trash"
         case .notchIsland: "laptopcomputer"
+        case .telegram: "paperplane"
         }
     }
 
     /// The toggles that make sense with these modules: the island's only while it is installed.
     static func available(installed: [ModuleKind]) -> [QuickToggle] {
-        allCases.filter { $0 != .notchIsland || installed.contains(.notch) }
+        allCases.filter { ($0 != .notchIsland || installed.contains(.notch)) && ($0 != .telegram || installed.contains(.telegram)) }
     }
 
     /// What switching it off takes away, when the title doesn't say. `CreateDesktop = false` stops Finder drawing the
@@ -115,6 +121,7 @@ enum QuickToggle: String, Codable, CaseIterable, Sendable {
     var offNote: String? {
         switch self {
         case .desktopIcons: String(localized: "Пока значки выключены, на рабочем столе не видно файлов, не работают меню правой кнопки и выделение мышкой. Файлы остаются в папке «Рабочий стол».")
+        case .telegram: String(localized: "Уведомления в Telegram выключены, пока не включите снова. Запросы разрешений и ответы бота приходят.")
         default: nil
         }
     }
@@ -154,6 +161,7 @@ final class QuickToolsController {
         case .darkMode: darkMode
         case .desktopIcons: desktopIconsShown
         case .notchIsland: settings.map { !$0.notch.hidden }
+        case .telegram: settings.map { !$0.telegramBot.isMuted(now: .now) }
         default: nil
         }
     }
@@ -268,6 +276,13 @@ final class QuickToolsController {
             settings?.notch.hidden.toggle()
             return
         }
+        if toggle == .telegram {
+            guard let settings else { return }
+            // On again also ends «Тишина на 1 ч»; off lasts until the tile (or «Снять тишину») is pressed.
+            settings.telegramBot.mutedUntil = settings.telegramBot.isMuted(now: .now) ? nil : TelegramBotSettings.untilSwitchedOn
+            AppLog.info("Telegram notifications \(settings.telegramBot.mutedUntil == nil ? "on" : "off") from the panel")
+            return
+        }
         guard !running.contains(toggle.rawValue) else { return }
         running.insert(toggle.rawValue)
         Task {
@@ -295,7 +310,7 @@ final class QuickToolsController {
                 results[toggle.rawValue] = Result(text: ejected == 0 ? String(localized: "Нечего извлекать") : String(localized: "Извлечено дисков: \(ejected)"), isError: false)
             case .emptyTrash:
                 error = await Self.osascript("tell application \"Finder\" to empty trash")
-            case .notchIsland:
+            case .notchIsland, .telegram:
                 error = nil
             }
             if let error {

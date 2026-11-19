@@ -637,6 +637,10 @@
               "name" : "Telegram"
             },
             {
+              "detail" : "Kafelek „Telegram” w szybkich przełącznikach wyłącza powiadomienia w Telegramie jednym kliknięciem i trzyma je wyłączone do ponownego kliknięcia. Prośby o uprawnienia i odpowiedzi bota nadal przychodzą.",
+              "name" : "Wstrzymaj Telegram"
+            },
+            {
               "detail" : "Prośby Claude o zgodę można przyjmować i odrzucać przyciskami w Telegramie — osobny bot, strona „Sesje agentów”.",
               "name" : "Odpowiedzi z Telegramu"
             },

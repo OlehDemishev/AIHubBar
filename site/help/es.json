@@ -637,6 +637,10 @@
               "name" : "Telegram"
             },
             {
+              "detail" : "El mosaico «Telegram» de los conmutadores rápidos desactiva las notificaciones en Telegram con un clic y las mantiene así hasta que lo pulses de nuevo. Las solicitudes de permiso y las respuestas del bot siguen llegando.",
+              "name" : "Pausar Telegram"
+            },
+            {
               "detail" : "Las solicitudes de permiso de Claude se pueden aceptar o rechazar con botones en Telegram — un bot aparte, página «Sesiones de agentes».",
               "name" : "Respuestas desde Telegram"
             },

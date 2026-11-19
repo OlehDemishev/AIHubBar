@@ -114334,7 +114334,7 @@
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "الإشعارات في Telegram"
+            "value": "إشعارات Telegram"
           }
         },
         "de": {
@@ -114346,37 +114346,37 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Telegram alerts"
+            "value": "Telegram Notifications"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Avisos en Telegram"
+            "value": "Notificaciones en Telegram"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Alertes dans Telegram"
+            "value": "Notifications Telegram"
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "Pemberitahuan Telegram"
+            "value": "Notifikasi Telegram"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Notifiche su Telegram"
+            "value": "Notifiche in Telegram"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "Telegram の通知"
+            "value": "Telegramへの通知"
           }
         },
         "ko": {
@@ -114394,7 +114394,7 @@
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Avisos no Telegram"
+            "value": "Notificações no Telegram"
           }
         },
         "uk": {
@@ -142451,6 +142451,310 @@
           "stringUnit": {
             "state": "translated",
             "value": "Commit dibuat oleh AI Hub Bar: di worktree Codex tidak bisa melakukannya."
+          }
+        }
+      }
+    },
+    "Тишина, пока не включите": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Silent until you turn it on"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Тиша, доки не ввімкнете"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stumm, bis Sie es wieder einschalten"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Silence jusqu’à la réactivation"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En silencio hasta que lo actives"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Silenzio finché non lo riattivi"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Em silêncio até você ativar"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cisza do ponownego włączenia"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "オンにするまで消音"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "다시 켤 때까지 무음"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "صامت حتى تعيد تشغيله"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Senyap sampai Anda menyalakannya"
+          }
+        }
+      }
+    },
+    "Уведомления в Telegram выключены, пока не включите снова. Запросы разрешений и ответы бота приходят.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Telegram notifications are off until you turn them on again. Permission requests and the bot’s replies still come."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Сповіщення в Telegram вимкнено, доки не ввімкнете знову. Запити дозволів і відповіді бота надходять."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mitteilungen in Telegram sind aus, bis Sie sie wieder einschalten. Berechtigungsanfragen und die Antworten des Bots kommen weiterhin."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les notifications Telegram sont désactivées jusqu’à ce que vous les réactiviez. Les demandes d’autorisation et les réponses du bot arrivent toujours."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Las notificaciones en Telegram están desactivadas hasta que las actives de nuevo. Las solicitudes de permiso y las respuestas del bot siguen llegando."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le notifiche in Telegram sono disattivate finché non le riattivi. Le richieste di autorizzazione e le risposte del bot continuano ad arrivare."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "As notificações no Telegram ficam desativadas até você ativá-las de novo. Pedidos de permissão e respostas do bot continuam chegando."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Powiadomienia w Telegramie są wyłączone, dopóki nie włączysz ich ponownie. Prośby o uprawnienia i odpowiedzi bota nadal przychodzą."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Telegramへの通知は、もう一度オンにするまでオフです。許可のリクエストとボットの返信は届きます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Telegram 알림은 다시 켤 때까지 꺼져 있습니다. 권한 요청과 봇의 답변은 계속 옵니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إشعارات Telegram متوقفة حتى تعيد تشغيلها. طلبات الأذونات وردود البوت تصل كالمعتاد."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notifikasi Telegram mati sampai Anda menyalakannya lagi. Permintaan izin dan balasan bot tetap masuk."
+          }
+        }
+      }
+    },
+    "Выключить Telegram на время": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pause Telegram"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Тимчасово вимкнути Telegram"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Telegram vorübergehend ausschalten"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mettre Telegram en pause"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pausar Telegram"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mettere in pausa Telegram"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pausar o Telegram"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wstrzymaj Telegram"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Telegramを一時停止"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Telegram 일시 중지"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إيقاف Telegram مؤقتًا"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jeda Telegram"
+          }
+        }
+      }
+    },
+    "Плитка «Telegram» в «Быстрых переключателях» выключает уведомления в Telegram одним кликом и держит их выключенными, пока не нажмёте снова. Запросы разрешений и ответы бота приходят.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The “Telegram” tile in Quick Toggles turns Telegram notifications off with one click and keeps them off until you press it again. Permission requests and the bot’s replies still come."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Плитка «Telegram» у «Швидких перемикачах» вимикає сповіщення в Telegram одним кліком і тримає їх вимкненими, доки не натиснете знову. Запити дозволів і відповіді бота надходять."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Kachel „Telegram“ in den Schnellschaltern schaltet Mitteilungen in Telegram mit einem Klick aus und lässt sie aus, bis Sie erneut klicken. Berechtigungsanfragen und die Antworten des Bots kommen weiterhin."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La tuile « Telegram » des bascules rapides désactive les notifications Telegram d’un clic et les garde désactivées jusqu’au clic suivant. Les demandes d’autorisation et les réponses du bot arrivent toujours."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El mosaico «Telegram» de los conmutadores rápidos desactiva las notificaciones en Telegram con un clic y las mantiene así hasta que lo pulses de nuevo. Las solicitudes de permiso y las respuestas del bot siguen llegando."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il riquadro «Telegram» negli interruttori rapidi disattiva le notifiche in Telegram con un clic e le tiene disattivate finché non lo premi di nuovo. Le richieste di autorizzazione e le risposte del bot continuano ad arrivare."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O bloco “Telegram” nos alternadores rápidos desativa as notificações no Telegram com um clique e as mantém assim até você clicar de novo. Pedidos de permissão e respostas do bot continuam chegando."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kafelek „Telegram” w szybkich przełącznikach wyłącza powiadomienia w Telegramie jednym kliknięciem i trzyma je wyłączone do ponownego kliknięcia. Prośby o uprawnienia i odpowiedzi bota nadal przychodzą."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "クイックスイッチの「Telegram」タイルは、1回のクリックでTelegramへの通知をオフにし、もう一度押すまでオフのままにします。許可のリクエストとボットの返信は届きます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "빠른 스위치의 “Telegram” 타일은 클릭 한 번으로 Telegram 알림을 끄고, 다시 누를 때까지 꺼 둡니다. 권한 요청과 봇의 답변은 계속 옵니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مربع «Telegram» في مفاتيح التبديل السريعة يوقف إشعارات Telegram بنقرة واحدة ويبقيها متوقفة حتى تضغط عليه مرة أخرى. طلبات الأذونات وردود البوت تصل كالمعتاد."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ubin “Telegram” di Sakelar Cepat mematikan notifikasi Telegram dengan satu klik dan membiarkannya mati sampai Anda menekannya lagi. Permintaan izin dan balasan bot tetap masuk."
           }
         }
       }

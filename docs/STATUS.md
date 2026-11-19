@@ -5,6 +5,7 @@
 **Updated:** 2026-11-19
 
 **Now:**
+- 2026-11-19: Mac — a «Telegram» tile in «Быстрые переключатели» turns Telegram notifications off until pressed again (`feat/telegram-panel-switch`, merged 2026-11-19); goes out with 0.12.0, not seen live
 - 2026-11-19: Windows — the panel answers a permission request: the installed hook, given a request as Claude Code sends it, showed «Нужно разрешение: Write» with «Разрешить» / «Отклонить», and the click came back as Claude Code's `allow` decision; with a real session it is not seen (Auto mode on the laptop asks nothing)
 - 2026-11-19: Windows — hooks installed into the laptop's real `settings.json` on Oleh's «Сделай сам»: a real Claude Code session shows in «Сессии» with its current tool; «Своя задача…» with «Терминал» opens Claude in Windows Terminal (it stopped at Claude Code's first-run welcome screen, so the permission request is not seen yet)
 - 2026-11-19: Windows — a background run can build in a subfolder: Claude is told how to reach one (the tool's own folder option, or a change of folder in a call of its own); seen live with the run's own arguments and rules (branch `fix/desktop-run-subfolders`)
@@ -76,7 +77,6 @@
 **Next:**
 - releases go out once a week, on Tuesday, on Oleh's word (agreed 2026-11-11); merged work waits in `main`
 - before 0.12.0: the windows are seen (2026-11-17); a background Codex run seen end to end in an isolated copy; left to see in the app — a Codex approval, handover, review, the pair (they start real runs: with Oleh or on his word); then a beta
-- Mac, asked by Oleh 2026-11-19: a small button in the panel that quickly turns Telegram messages off (and on)
 - 0.12.0 not before Tuesday 2026-11-24, on Oleh's word; `WhatsNew.version` and the card's lines for 0.12
 - then: the «ждёт» state for Antigravity sessions (needs `agy` opened once)
 - towards 1.0 (discussed 2026-11-10): the live pass is done (journal 2026-11-10); left — freeze what is in 1.0 and what stays beta, release notes, translations read by people, feedback from strangers before 1.0
@@ -123,6 +123,11 @@
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
 
+## 2026-11-19 — Telegram off from the panel (branch `feat/telegram-panel-switch`)
+
+Done: asked by Oleh — a small button in the panel that quickly turns Telegram notifications off. A «Telegram» tile in «Быстрые переключатели» (`QuickToggle.telegram`, shown while the Telegram module is installed): one click holds the notifications back until it is pressed again (`mutedUntil` = no end), the next click brings them back and also ends «Тишина на 1 ч». While off, the block says so and that permission requests and the bot's replies still come. The bot's ⚙️ screen and Settings → Telegram show «Тишина, пока не включите». A saved choice of tiles gets the new one once. A help fact in 13 languages, a line in `docs/release-notes/0.12.0.md`.
+Checked: `scripts/check.sh` green in the worktree (a new test: the tile, the one-time add, the titles); help exported.
+Left: not seen live in the panel. The Mini App (relay, deployed separately) would show «Тишина до» with a far-off time for the endless mute. The first run of the checks was cut off: the Mac restarted during a full build started with swap at 15 of 16 GB — the build should not have been started then; the work survived uncommitted in the worktree.
 ## 2026-11-19 — Windows: a permission request answered from the panel (branch `chore/desktop-permission-live`)
 
 Done: no code changed. After Oleh passed Claude Code's welcome screen, the terminal session of the earlier launch created its file with no request at all: Claude Code on the laptop runs in Auto mode. A second launch from the panel («Своя задача…», «Терминал») went into a second worktree and stopped at another first-run question (the Chrome extension), so the agent, who may not type into a terminal, checked the chain with the hook itself.

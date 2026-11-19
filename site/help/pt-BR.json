@@ -637,6 +637,10 @@
               "name" : "Telegram"
             },
             {
+              "detail" : "O bloco “Telegram” nos alternadores rápidos desativa as notificações no Telegram com um clique e as mantém assim até você clicar de novo. Pedidos de permissão e respostas do bot continuam chegando.",
+              "name" : "Pausar o Telegram"
+            },
+            {
               "detail" : "Os pedidos de permissão do Claude podem ser aceitos ou recusados com botões no Telegram — um bot separado, página “Sessões de agentes”.",
               "name" : "Respostas pelo Telegram"
             },

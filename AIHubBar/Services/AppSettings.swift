@@ -400,7 +400,16 @@ final class AppSettings {
         notesFolder = defaults.string(forKey: Keys.notesFolder) ?? "~/Documents/ClaudePult Notes"
         quickCommands = defaults.decoded([QuickCommand].self, forKey: Keys.quickCommands) ?? QuickCommand.examples
         claudeAccounts = defaults.decoded([ClaudeAccount].self, forKey: Keys.claudeAccounts) ?? []
-        quickToggles = defaults.stringArray(forKey: Keys.quickToggles)?.compactMap(QuickToggle.init(rawValue:)) ?? QuickToggle.allCases
+        var toggles = defaults.stringArray(forKey: Keys.quickToggles)?.compactMap(QuickToggle.init(rawValue:)) ?? QuickToggle.allCases
+        // The Telegram tile came later: a saved choice gets it once, and can drop it again.
+        if !defaults.bool(forKey: Keys.telegramToggleAdded) {
+            defaults.set(true, forKey: Keys.telegramToggleAdded)
+            if !toggles.contains(.telegram) {
+                toggles.append(.telegram)
+                defaults.set(toggles.map(\.rawValue), forKey: Keys.quickToggles)
+            }
+        }
+        quickToggles = toggles
         keepAwakeRules = defaults.decoded(KeepAwakeRules.self, forKey: Keys.keepAwakeRules) ?? KeepAwakeRules()
         notch = defaults.decoded(NotchSettings.self, forKey: Keys.notch) ?? NotchSettings()
         betaUpdates = defaults.bool(forKey: Keys.betaUpdates)
@@ -470,6 +479,7 @@ final class AppSettings {
         static let quickCommands = "quickCommands"
         static let claudeAccounts = "claudeAccounts"
         static let quickToggles = "quickToggles"
+        static let telegramToggleAdded = "quickTogglesTelegramAdded"
         static let keepAwakeRules = "keepAwakeRules"
         static let notch = "notch"
         static let layout = "layout"

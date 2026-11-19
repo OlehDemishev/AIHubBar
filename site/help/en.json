@@ -637,6 +637,10 @@
               "name" : "Telegram"
             },
             {
+              "detail" : "The “Telegram” tile in Quick Toggles turns Telegram notifications off with one click and keeps them off until you press it again. Permission requests and the bot’s replies still come.",
+              "name" : "Pause Telegram"
+            },
+            {
               "detail" : "Claude’s permission requests can be allowed or denied with buttons in Telegram — a separate bot, on the “Agent sessions” page.",
               "name" : "Answers from Telegram"
             },
