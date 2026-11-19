@@ -71,7 +71,7 @@ fn language(app: &AppHandle) -> &'static str {
 }
 
 fn strings(app: &AppHandle) -> Strings {
-    Strings::from_json(strings_json(language(app)))
+    Strings::of(language(app), strings_json(language(app)))
 }
 
 /// The settings file; one from before profiles becomes the first profile. A first start has none: the assistant

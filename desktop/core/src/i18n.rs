@@ -67,11 +67,43 @@ pub fn is_rtl(code: &str) -> bool {
 #[derive(Debug, Default, Clone)]
 pub struct Strings {
     map: HashMap<String, String>,
+    /// The language's code; empty for the Russian source texts.
+    language: String,
 }
 
 impl Strings {
     pub fn from_json(json: &str) -> Self {
-        Strings { map: serde_json::from_str(json).unwrap_or_default() }
+        Strings { map: serde_json::from_str(json).unwrap_or_default(), language: String::new() }
+    }
+
+    /// The texts of one of `LANGUAGES`, which also names the days of the week (`weekday_time`).
+    pub fn of(language: &str, json: &str) -> Self {
+        Strings { language: language.to_owned(), ..Strings::from_json(json) }
+    }
+
+    /// «Чт 09:00», «Thu 09:00», «木 09:00»: the day's short name in this language. The names are chrono's, as the
+    /// Mac's come from the system, so the catalog has none.
+    pub fn weekday_time<Tz: chrono::TimeZone>(&self, date: &chrono::DateTime<Tz>) -> String
+    where
+        Tz::Offset: std::fmt::Display,
+    {
+        use chrono::Locale;
+        let locale = match self.language.as_str() {
+            "en" => Locale::en_US,
+            "es" => Locale::es_ES,
+            "pt-BR" => Locale::pt_BR,
+            "fr" => Locale::fr_FR,
+            "de" => Locale::de_DE,
+            "ja" => Locale::ja_JP,
+            "id" => Locale::id_ID,
+            "ko" => Locale::ko_KR,
+            "it" => Locale::it_IT,
+            "ar" => Locale::ar_SA,
+            "pl" => Locale::pl_PL,
+            "uk" => Locale::uk_UA,
+            _ => Locale::ru_RU,
+        };
+        date.format_localized("%a %H:%M", locale).to_string()
     }
 
     pub fn t<'a>(&'a self, key: &'a str) -> &'a str {

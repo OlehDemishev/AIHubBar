@@ -5,6 +5,7 @@
 **Updated:** 2026-11-19
 
 **Now:**
+- 2026-11-19: Windows — «сброс Пн 10:00»: the day of the week is in the interface's language in all 13 (branch `fix/desktop-weekday-language`; seen live in Russian)
 - 2026-11-19: Mac — a «Telegram» tile in «Быстрые переключатели» turns Telegram notifications off until pressed again (`feat/telegram-panel-switch`, merged 2026-11-19); goes out with 0.12.0, not seen live
 - 2026-11-19: Windows — the panel answers a permission request: the installed hook, given a request as Claude Code sends it, showed «Нужно разрешение: Write» with «Разрешить» / «Отклонить», and the click came back as Claude Code's `allow` decision; with a real session it is not seen (Auto mode on the laptop asks nothing)
 - 2026-11-19: Windows — hooks installed into the laptop's real `settings.json` on Oleh's «Сделай сам»: a real Claude Code session shows in «Сессии» with its current tool; «Своя задача…» with «Терминал» opens Claude in Windows Terminal (it stopped at Claude Code's first-run welcome screen, so the permission request is not seen yet)
@@ -83,7 +84,7 @@
 - check on the Air: the island at the real notch
 - promotion (docs/LAUNCH.md): r/ClaudeAI, the lists, r/macapps, Show HN, Product Hunt, Homebrew
 - content (docs/specs/SPEC-content.md, agreed): stage 2 «Версии», then batch tasks; better after the first feedback from people
-- Windows: left on the laptop — a terminal launch into a worktree stops at Claude Code's own first-run questions for the new folder (theme, the Chrome extension) before the task starts — see whether the Mac does the same and whether the app can spare the person that; «Следующий шаг» and «Завершить», notifications and their buttons, a background run with `npm` and in a project with spaces in its path; the hooks on the laptop point at `desktop\target\debug\claudepult-hook.exe` — remove them in Settings before deleting `target\`, or install a build with the fixes and press «Установить hooks» there; the panel sometimes hides at a click on one of its buttons (seen under the agent's clicks: find what takes the focus); the Mac's background runs have the same rules — try one build in a subfolder there; then stage 7 (installer, signing, updates) or the stage 6 leftovers (сочетания клавиш для команд, «Извлечь диски»)
+- Windows: left on the laptop — a terminal launch into a worktree stops at Claude Code's own first-run questions for the new folder (theme, the Chrome extension) before the task starts — see whether the Mac does the same and whether the app can spare the person that; «Следующий шаг» and «Завершить», notifications and their buttons, a background run with `npm` and in a project with spaces in its path; the hooks on the laptop point at `desktop\target\debug\claudepult-hook.exe` — remove them in Settings before deleting `target\`, or install a build with the fixes and press «Установить hooks» there; the Mac's background runs have the same rules — try one build in a subfolder there; then stage 7 (installer, signing, updates) or the stage 6 leftovers (сочетания клавиш для команд, «Извлечь диски»)
 
 **Needs Oleh:**
 - Windows: say whether to publish 0.1.1 with the Settings fix (0.1.0 on the pre-release page can't open Settings, the assistant, the calendar or «Быстрый запрос» after the first start) — SignPath will look at that page
@@ -122,6 +123,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-19 — Windows: the day of the week in the interface's language (branch `fix/desktop-weekday-language`)
+
+Done: «сброс Tue 01:00» and the forecast «хватит до ~Tue 14:00» had the English day in every language: chrono's `%a` knows only English. `Strings` now knows its language (`Strings::of`) and `weekday_time` formats the day with chrono's own locale data (the `unstable-locales` feature, pure Rust, no system calls), as the Mac takes the names from the system — so the catalog needs no new texts. `Cargo.lock` gains `pure-rust-locales`.
+Checked: `python scripts/strings.py --check`, `cargo test --workspace` on Windows; a test names Thursday in all 13 languages (Чт, Thu, jue, qui, jeu., Do, 木, Kam, 목, gio, خ, czw, чт). Live on the laptop in Russian: «сброс Пн 10:00» for Claude's week and «сброс Вт 01:00» for Copilot.
+Left: the other twelve languages are seen only in the test; Arabic's short name is one letter (خ), as chrono has it. The panel hiding at a click during earlier checks was most likely the agent's own tool: it hides other programs' windows before a screenshot, the panel loses the focus and closes, as it should — dropped from Next.
 
 ## 2026-11-19 — Telegram off from the panel (branch `feat/telegram-panel-switch`)
 
