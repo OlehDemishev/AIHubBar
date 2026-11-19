@@ -134,12 +134,21 @@ fn open_settings_window(app: &AppHandle) {
         return;
     }
     let title = format!("{APP_NAME} — {}", strings(app).t("Настройки…").trim_end_matches('…'));
-    let _ = WebviewWindowBuilder::new(app, "settings", WebviewUrl::App("settings.html".into()))
-        .title(title)
-        .inner_size(560.0, 420.0)
-        .min_inner_size(480.0, 360.0)
-        .center()
-        .build();
+    let app = app.clone();
+    off_main_thread(move || {
+        let _ = WebviewWindowBuilder::new(&app, "settings", WebviewUrl::App("settings.html".into()))
+            .title(title)
+            .inner_size(560.0, 420.0)
+            .min_inner_size(480.0, 360.0)
+            .center()
+            .build();
+    });
+}
+
+/// Where every window but the panel is built. Commands, the tray menu and the hot key run on the main thread, and
+/// on Windows a window built there comes up white: WebView2 waits for the very thread that waits for it.
+pub(crate) fn off_main_thread(build: impl FnOnce() + Send + 'static) {
+    std::thread::spawn(build);
 }
 
 fn build_panel(app: &AppHandle) -> tauri::Result<()> {
