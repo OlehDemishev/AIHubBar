@@ -279,7 +279,7 @@ final class QuickToolsController {
         if toggle == .telegram {
             guard let settings else { return }
             // On again also ends «Тишина на 1 ч»; off lasts until the tile (or «Снять тишину») is pressed.
-            settings.telegramBot.mutedUntil = settings.telegramBot.isMuted(now: .now) ? nil : TelegramBotSettings.untilSwitchedOn
+            settings.telegramBot.toggleMute(now: .now)
             AppLog.info("Telegram notifications \(settings.telegramBot.mutedUntil == nil ? "on" : "off") from the panel")
             return
         }

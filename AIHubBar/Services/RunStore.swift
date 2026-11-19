@@ -149,6 +149,16 @@ final class RunStore {
         processes[run.id] != nil || Self.isRunProcessAlive(pid, startedAt: run.startedAt)
     }
 
+    /// «Оставить этот вариант»: the pair's other run loses its worktree and branch and is marked as removed.
+    func keepVariant(_ keep: BackgroundRun) async throws {
+        guard let pair = keep.pair, let sides = PairCompare.sides(pair, runs: runs), PairCompare.canKeep(keep, sides: sides),
+              var other = sides.first(where: { $0.id != keep.id }), let branch = other.worktreeBranch else { return }
+        try await GitService.discardWorktree(other.folder, branch: branch, projectPath: other.projectPath)
+        other.discarded = true
+        update(other)
+        AppLog.info("Pair \(pair): kept \(keep.agent ?? "claude"), removed \(other.agent ?? "claude")")
+    }
+
     private func update(_ run: BackgroundRun) {
         save(run)
         if let index = runs.firstIndex(where: { $0.id == run.id }) { runs[index] = run }
@@ -206,7 +216,10 @@ final class RunStore {
         announce(&run)
         save(run)
         if let index = runs.firstIndex(where: { $0.id == id }) { runs[index] = run }
-        if run.agent == CodexExec.agent, run.reviewOf == nil, run.state == .succeeded, CodexExec.isWorktree(folder: run.folder) {
+        // Codex cannot commit in a worktree; in a pair Claude's side is committed too when it left its work
+        // uncommitted (seen live 2026-11-19: its background rules denied the commit), so branch meets branch.
+        if run.agent == CodexExec.agent || run.pair != nil, run.reviewOf == nil, run.state == .succeeded,
+           CodexExec.isWorktree(folder: run.folder) {
             Task { await commitLeftovers(id: id) }
         }
     }
@@ -222,7 +235,10 @@ final class RunStore {
             try await GitService.run(["commit", "-m", RunMessage.taskStart(run.task)], in: run.folder, timeout: .seconds(30))
             AppLog.info("Background run \(id): Codex's changes committed on \(run.worktreeBranch ?? "the worktree's branch")")
             guard var saved = self.run(id: id) else { return }
-            saved.summary = [saved.summary, String(localized: "Коммит сделал AI Hub Bar: в worktree Codex этого не может.")].compactMap { $0 }.joined(separator: "\n")
+            let note = saved.agent == CodexExec.agent
+                ? String(localized: "Коммит сделал AI Hub Bar: в worktree Codex этого не может.")
+                : String(localized: "Коммит сделал AI Hub Bar: изменения оставались без коммита.")
+            saved.summary = [saved.summary, note].compactMap { $0 }.joined(separator: "\n")
             save(saved)
             if let index = runs.firstIndex(where: { $0.id == id }) { runs[index] = saved }
         } catch {

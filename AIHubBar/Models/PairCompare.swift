@@ -6,7 +6,29 @@ enum PairCompare {
     /// The other run of the pair; nil for a run outside a pair or while the partner's record is gone.
     static func partner(of run: BackgroundRun, runs: [BackgroundRun]) -> BackgroundRun? {
         guard let pair = run.pair, run.reviewOf == nil else { return nil }
-        return runs.first { $0.pair == pair && $0.id != run.id && $0.reviewOf == nil }
+        guard run.discarded != true else { return nil }
+        return runs.first { $0.pair == pair && $0.id != run.id && $0.reviewOf == nil && $0.discarded != true }
+    }
+
+    /// «Оставить этот вариант» can be offered for `keep`: both have finished, the other one is still there and its
+    /// folder is a worktree the app made inside the project — nothing else is ever removed by this.
+    static func canKeep(_ keep: BackgroundRun, sides: [BackgroundRun]) -> Bool {
+        guard sides.count == 2, sides.allSatisfy(\.state.isFinished), sides.allSatisfy({ $0.discarded != true }),
+              let other = sides.first(where: { $0.id != keep.id }), sides.contains(where: { $0.id == keep.id }) else { return false }
+        return removable(other)
+    }
+
+    /// Only a worktree under `<project>/.claude/worktrees/` on a branch of its own.
+    static func removable(_ run: BackgroundRun) -> Bool {
+        let root = (run.projectPath as NSString).appendingPathComponent(".claude/worktrees") + "/"
+        let folder = (run.folder as NSString).standardizingPath
+        return folder.hasPrefix(root) && folder.count > root.count && !folder.dropFirst(root.count).contains("/")
+            && run.worktreeBranch?.isEmpty == false
+    }
+
+    /// What the confirmation says before a variant is removed.
+    static func removalWarning(_ run: BackgroundRun) -> String {
+        String(localized: "Вариант «\(run.agentTitle)» будет удалён: папка \((run.folder as NSString).lastPathComponent) и ветка \(run.worktreeBranch ?? ""). Его изменения пропадут, отменить нельзя.")
     }
 
     /// Both runs of a pair, Claude first; nil without two of them.

@@ -8,6 +8,7 @@ struct PairCompareWindow: View {
     @State private var changes: [String: SessionChanges] = [:]
     @State private var copied = false
     @State private var shown: ShownDiff?
+    @State private var keepError: String?
 
     /// The diff in the sheet: one side's file, or one variant against the other.
     private struct ShownDiff: Identifiable {
@@ -59,7 +60,11 @@ struct PairCompareWindow: View {
         GroupBox {
             VStack(alignment: .leading, spacing: 6) {
                 HStack(spacing: 8) {
-                    Text(run.state.title).foregroundStyle(run.state.color)
+                    if run.discarded == true {
+                        Text("удалён").foregroundStyle(.orange)
+                    } else {
+                        Text(run.state.title).foregroundStyle(run.state.color)
+                    }
                     if let branch = run.worktreeBranch { Text(branch).monospaced().lineLimit(1).truncationMode(.middle) }
                     Spacer(minLength: 0)
                     if let changes = changes[run.id], !changes.isEmpty { Text(changes.summary).monospacedDigit() }
@@ -108,6 +113,20 @@ struct PairCompareWindow: View {
                         openWindow(.runLog)
                     }
                     Button("Открыть папку") { NSWorkspace.shared.open(URL(fileURLWithPath: run.folder)) }
+                        .disabled(run.discarded == true)
+                    Spacer(minLength: 0)
+                    if let sides, PairCompare.canKeep(run, sides: sides), let other = sides.first(where: { $0.id != run.id }) {
+                        ConfirmedButton(title: "Оставить этот вариант?", message: PairCompare.removalWarning(other), confirm: "Удалить другой вариант", role: nil) {
+                            Task {
+                                do {
+                                    try await runs.keepVariant(run)
+                                    keepError = nil
+                                } catch {
+                                    keepError = error.localizedDescription
+                                }
+                            }
+                        } label: { Text("Оставить этот вариант") }
+                    }
                 }
                 .controlSize(.small)
             }
@@ -126,8 +145,14 @@ struct PairCompareWindow: View {
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }
+            if let keepError {
+                Label { Text(verbatim: keepError) } icon: { Image(systemName: "exclamationmark.triangle.fill") }
+                    .font(.caption)
+                    .foregroundStyle(.orange)
+                    .lineLimit(2)
+            }
             Spacer()
-            if PairCompare.diffCommand(sides) != nil, sides.allSatisfy(\.state.isFinished) {
+            if PairCompare.diffCommand(sides) != nil, sides.allSatisfy(\.state.isFinished), sides.allSatisfy({ $0.discarded != true }) {
                 Button("Различия между вариантами") {
                     Task {
                         let parsed = PairCompare.diffLines(await PairCompare.betweenDiff(sides))
@@ -136,7 +161,7 @@ struct PairCompareWindow: View {
                 }
                 .help("Чем вариант второго сервиса отличается от варианта первого: то, что закоммичено в обеих ветках")
             }
-            if let command = PairCompare.diffCommand(sides) {
+            if let command = PairCompare.diffCommand(sides), sides.allSatisfy({ $0.discarded != true }) {
                 Button(copied ? "Скопировано" : "Скопировать команду сравнения") {
                     NSPasteboard.general.clearContents()
                     NSPasteboard.general.setString(command, forType: .string)
@@ -166,6 +191,9 @@ struct PairCompareWindow: View {
                                 .font(line.kind == .file ? .caption.monospaced().weight(.semibold) : .caption.monospaced())
                                 .foregroundStyle(color(line.kind))
                                 .padding(.top, line.kind == .file ? 6 : 0)
+                                // Its own width: in a two-way scroll view a line is otherwise wrapped into a
+                                // narrow column (seen live 2026-11-19).
+                                .fixedSize(horizontal: true, vertical: false)
                                 .textSelection(.enabled)
                         }
                     }

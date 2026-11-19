@@ -39,6 +39,8 @@ struct BackgroundRun: Codable, Identifiable, Equatable, Sendable {
     var reviewOf: String? = nil
     /// One task given to two services at once (`TwoServices`): both runs carry the same id.
     var pair: String? = nil
+    /// The pair's other variant was kept and this one removed: its worktree and branch are gone (`PairCompare`).
+    var discarded: Bool? = nil
 
     var agentTitle: String { agent == CodexExec.agent ? AgentKind.codex.title : AgentKind.claudeCode.title }
 

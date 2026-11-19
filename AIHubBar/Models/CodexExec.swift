@@ -104,10 +104,10 @@ enum CodexExec {
     }
 
     /// `[NOTES.md](/Users/me/project/NOTES.md)` → `NOTES.md`: Codex links the files it names by their full path (seen
-    /// live 2026-11-17), which a notification or a Telegram message would show raw. Links to the web stay as they are.
+    /// live 2026-11-17), which a notification or a Telegram message would show raw; a path with spaces comes as `(</path>)`. Links to the web stay as they are.
     static func plainFileLinks(_ text: String) -> String {
         guard text.contains("](") else { return text }
-        return text.replacing(/\[([^\]\n]+)\]\((?:\/|~\/|file:)[^)\n]*\)/) { String($0.1) }
+        return text.replacing(/\[([^\]\n]+)\]\(<?(?:\/|~\/|file:)[^)\n]*\)/) { String($0.1) }
     }
 
     /// `/bin/zsh -lc "npm test"` → `npm test`: Codex wraps every command in a login shell.
