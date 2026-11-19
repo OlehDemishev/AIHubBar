@@ -65,7 +65,8 @@ struct TelegramBotTests {
             .runCommand("0f3a9c2e-1111-4222-8333-444455556666"), .requestDetails("0f3a9c"), .limitAlerts(true), .limitAlerts(false),
             .taskProject("0a1b2c3d"), .taskGo, .taskCancel, .taskForce, .taskAfterReset, .taskWorktree,
             .runLog("0f3a9c2e-1111-4222-8333-444455556666"), .runStopAsk("0f3a9c2e-1111-4222-8333-444455556666"),
-            .runStop("0f3a9c2e-1111-4222-8333-444455556666"), .event(.limitAlerts), .event(.weeklySummary),
+            .runStop("0f3a9c2e-1111-4222-8333-444455556666"), .runReview("0f3a9c2e-1111-4222-8333-444455556666"),
+            .runHandOver("0f3a9c2e-1111-4222-8333-444455556666"), .event(.limitAlerts), .event(.weeklySummary),
             .quiet(nil), .quiet(QuietHours(from: 23, to: 8)), .mute(true), .mute(false), .keepAwake(true), .keepAwake(false),
         ]
         for route in routes {
@@ -384,6 +385,20 @@ struct TelegramTasksTests {
         #expect(log.buttons[0].map(\.route) == [.runLog("r-1"), .runStopAsk("r-1")])
         #expect(BotScreens.runLog(run("r-3", .failed), entries: []).buttons[0].map(\.route) == [.runLog("r-3")])
         #expect(BotScreens.runStopConfirm(run("r-1", .running)).buttons[0].map(\.route) == [.runStop("r-1"), .show(.task)])
+    }
+
+    /// «Проверить в …» and «Передать Codex» under the log, only when the run allows them.
+    @Test func reviewAndHandOverFromTheLog() {
+        var done = run("r-2", .succeeded)
+        #expect(BotScreens.runLog(done, entries: []).buttons.count == 2, "no extra row without them")
+        done.reviewer = "Codex"
+        var failed = run("r-3", .failed)
+        failed.handOverTo = "Codex"
+        #expect(BotScreens.runLog(done, entries: []).buttons[1].map(\.route) == [.runReview("r-2")])
+        #expect(BotScreens.runLog(failed, entries: []).buttons[1].map(\.route) == [.runHandOver("r-3")])
+        #expect(BotScreens.runLog(done, entries: []).buttons.last?.map(\.route) == [.show(.task)])
+        #expect(BotRoute.runReview("a").isAction && BotRoute.runHandOver("a").isAction)
+        #expect(BotRoute(data: "rv:../x") == nil)
     }
 }
 

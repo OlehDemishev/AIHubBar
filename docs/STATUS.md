@@ -6,7 +6,8 @@
 
 **Now:**
 - 2026-11-19: Windows — first live pass on the laptop (branch `fix/desktop-live-pass`): the installed 0.1.0 opens Settings as a white window that can't be closed; fixed with the tray hint cut by Windows and the panel's scrollbars. 0.1.0 as published still has the white Settings
-- 2026-11-19: Mac — the pair's results can be compared: «Сравнить с …» in a pair task's menu opens both answers and changed files side by side (branch `feat/pair-compare`); goes out with 0.12.0, not seen live
+- 2026-11-19: Mac — «Проверить в …» and «Передать Codex» as buttons under a task's log in Telegram (#455, merged); goes out with 0.12.0, not pressed live
+- 2026-11-19: Mac — the pair's results can be compared: «Сравнить с …» in a pair task's menu opens both answers and changed files side by side (#453, merged); goes out with 0.12.0, not seen live
 - 2026-11-19: Windows 0.1.0 published as an unsigned pre-release (tag `desktop-v0.1.0`); «latest» stays the Mac's v0.11.0
 - 2026-11-19: Windows — ready for SignPath Foundation signing: CODE_SIGNING.md, the release workflow, artifact configurations (#450, merged; the release workflow run by hand on main built, installed and checked an unsigned installer)
 - 2026-11-19: Windows stage 7 begun — the installer registers `.claudepult` and puts `claudepult` on the Path; CI installs, checks and uninstalls it (#448, merged; the check passed on windows-latest)
@@ -119,6 +120,12 @@
 Done: the installed 0.1.0 and a build from source were run on Oleh's Windows 11 laptop. Fixed: 1) Settings, the assistant, the calendar and «Быстрый запрос» came up as a white window that couldn't be closed, and «quit» then hung — they were built on the main thread (a command, the tray menu, the hot key), where WebView2 on Windows never loads; they are built on a thread of their own now (`off_main_thread`); 2) the tray hint lost its end (Windows shows 127 characters): «Проектов:» came without numbers — the longest line now gives way with «…»; 3) the panel got a horizontal scrollbar next to a wide vertical one as soon as a project was opened; 4) a long «Stage» line of STATUS.md filled the whole panel — four lines, the rest in the hint.
 Checked: `python scripts/strings.py --check`, `cargo test --workspace` on Windows (core 119, all green; `ipc_roundtrip` fails while an installed copy runs — it holds the same pipe). Live, on the build from source: Settings from the panel's gear and from `claudepult --app-command settings`, all its sections, the assistant, closing both, `quit` at once; the tray hint whole; the panel at the tray icon with one thin scrollbar. Live, on 0.1.0: the tray icon under «^», the panel, the «Проекты» card with STATUS.md, `claudepult` on the Path, `.claudepult` registered, Copilot's limits through `gh`. The installed `claudepult-hook.exe` fed by hand with SessionStart, UserPromptSubmit, PreToolUse and SessionEnd: the session file has the Cyrillic prompt, the project and Claude's process id, the row «работает» appeared in the panel and left. `.credentials.json` has the shape the code expects (`claudeAiOauth.accessToken`, `expiresAt` in ms).
 Left: not fixed — «сброс Tue 01:00» (chrono's `%a` is English in every language; needs weekday texts in the catalog); `--app-command panel` before the first tray click puts the panel over the taskbar; the panel reopens scrolled where it was left; Claude's limits not seen (the sign-in file is expired: with only the Claude desktop app in use nothing renews it, and the Windows app doesn't renew it itself). Not tried: hooks installed into the real `settings.json`, a permission request answered from the panel, notifications and their buttons, a Claude launch in Windows Terminal and in the background, Ctrl+Alt+P, the calendar window, autostart. The published 0.1.0 has the white Settings: a 0.1.1 is Oleh's call.
+
+## 2026-11-19 — Review and handover from Telegram (branch `feat/telegram-review-handover`)
+
+Done: «Проверить в …» and «Передать Codex» were only in the panel's menu. In Telegram the log of a background task (🚀 → 📜) now has the same two buttons when the task allows them: 🔍 for a finished run, ➡️ for Claude's run paused by the limit or ended badly. Routes `rv:` / `rh:`, offered and obeyed only while tasks may be started from Telegram (as «Остановить»). A line in `docs/release-notes/0.12.0.md`.
+Checked: `scripts/check.sh` green; new tests for the routes and the screen.
+Left: not pressed in a live chat. The Mini App has no such buttons.
 
 ## 2026-11-19 — Comparing the pair's results (branch `feat/pair-compare`)
 
