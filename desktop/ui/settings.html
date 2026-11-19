@@ -104,6 +104,11 @@
       <div id="hub-sources"></div>
     </section>
     <section class="card services">
+      <h2 data-t="Значок в трее"></h2>
+      <div id="tray-styles" class="tray-styles" role="radiogroup"></div>
+      <p class="secondary" data-t="На значке — первые два лимита главного сервиса: у Claude это сессия и неделя. Цвет каждого — по его уровню. Образцы показаны для 62 % и 31 %."></p>
+    </section>
+    <section class="card services">
       <h2 data-t="Расход по API"></h2>
       <div class="row"><span data-t="Сегодня"></span><span id="spend-today"></span></div>
       <div class="row"><span data-t="В этом месяце"></span><span id="spend-month"></span></div>
@@ -927,6 +932,24 @@
       showHubSettings(await invoke("hub_settings"));
       showMainService(await invoke("main_service"));
     });
+
+    // «Значок в трее»: a tile per style with a sample of the icon's own pixels; a click redraws the icon at once.
+    const trayStyles = document.getElementById("tray-styles");
+    function showTrayStyles(view) {
+      trayStyles.replaceChildren(...view.styles.map((style) => {
+        const tile = document.createElement("button");
+        tile.className = "tray-style" + (style.id === view.current ? " on" : "");
+        tile.setAttribute("role", "radio");
+        tile.setAttribute("aria-checked", String(style.id === view.current));
+        const sample = document.createElement("canvas");
+        sample.width = sample.height = view.size;
+        sample.getContext("2d").putImageData(new ImageData(new Uint8ClampedArray(style.pixels), view.size, view.size), 0, 0);
+        tile.append(sample, Object.assign(document.createElement("span"), { className: "name", textContent: style.title }));
+        tile.onclick = async () => showTrayStyles(await invoke("set_tray_style", { style: style.id }));
+        return tile;
+      }));
+    }
+    showTrayStyles(await invoke("tray_styles"));
 
     // «Быстрый запрос»: on or off, its hot key, and a way to try the window.
     const quickPromptModule = document.getElementById("module-quick-prompt");

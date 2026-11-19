@@ -1,6 +1,6 @@
 //! Stage 2 «Лимиты» (docs/specs/SPEC-windows.md §4.2): the session and week limits on a background thread — every 2 minutes
 //! while the session grows, else every 5, a pause after 429 — with the forecast, notifications at 50 / 80 / 95 %,
-//! `usage.json` for `report.py`, and the tray icon drawn as a ring with the summary in its hint.
+//! `usage.json` for `report.py`, and the tray icon drawn from the first two limits in the chosen style, with the summary in its hint.
 
 use crate::strings;
 use chrono::{DateTime, Duration, Utc};
@@ -139,11 +139,12 @@ impl Limits {
         self.state.lock().unwrap().snapshot.as_ref().is_some_and(|s| s.session().is_some() || s.week().is_some())
     }
 
-    /// The ring of the main service's first limit (Claude's session by default) and the summary in the hint; the
-    /// app's own icon until the first answer.
+    /// The main service's first two limits (Claude's session and week by default) drawn in the chosen style, and the
+    /// summary in the hint; the app's own icon until the first answer.
     pub fn update_tray(&self, app: &AppHandle) {
         // Read before this store's lock: the main service asks it whether Claude has limits.
-        let lead = app.state::<crate::hub::Hub>().lead_percent(app);
+        let lead = app.state::<crate::hub::Hub>().lead_percents(app);
+        let style = tray_icon::Style::saved(&app.state::<crate::AppState>().settings.lock().unwrap().tray_style);
         // An orange dot while a session waits for an answer (stage 3); else a red one while a project needs attention.
         let waiting = app.state::<crate::sessions::Sessions>().attention.load(std::sync::atomic::Ordering::Relaxed);
         let (count, red) = app.state::<crate::projects::Projects>().counts();
@@ -151,10 +152,10 @@ impl Limits {
         let (session, tooltip) = {
             let state = self.state.lock().unwrap();
             let texts = strings(app);
-            let session = match lead {
-                Some(percent) => Some(percent),
-                None => state.snapshot.as_ref().and_then(|s| s.session()).map(|w| w.utilization),
-            };
+            let session = lead.or_else(|| {
+                let snapshot = state.snapshot.as_ref()?;
+                Some((snapshot.session()?.utilization, snapshot.week().map(|w| w.utilization)))
+            });
             let mut tooltip = texts::tray_tooltip(&texts, state.snapshot.as_ref(), state.error.as_ref(), Utc::now());
             if count > 0 {
                 tooltip += "\n";
@@ -178,8 +179,8 @@ impl Limits {
         let _ = app.run_on_main_thread(move || {
             let Some(tray) = app_for_tray.tray_by_id(crate::TRAY_ID) else { return };
             let _ = tray.set_tooltip(Some(tooltip));
-            if let Some(percent) = session {
-                let pixels = tray_icon::ring(ICON_SIZE, percent, dot);
+            if let Some((first, second)) = session {
+                let pixels = tray_icon::draw(style, ICON_SIZE, first, second, dot);
                 let _ = tray.set_icon(Some(Image::new_owned(pixels, ICON_SIZE, ICON_SIZE)));
             }
         });
@@ -248,4 +249,55 @@ pub fn limits_view(app: AppHandle) -> LimitsView {
 #[tauri::command]
 pub fn refresh_limits(app: AppHandle) {
     app.state::<Limits>().refresh_now();
+}
+
+/// A style of the tray icon for Settings: its name and a sample drawn with the same pixels as the icon.
+#[derive(Serialize)]
+pub struct TrayStyleView {
+    id: &'static str,
+    title: String,
+    /// `size`×`size` RGBA of 62 % and 31 %.
+    pixels: Vec<u8>,
+}
+
+#[derive(Serialize)]
+pub struct TrayStyles {
+    current: &'static str,
+    size: u32,
+    styles: Vec<TrayStyleView>,
+}
+
+fn style_title(texts: &Strings, style: tray_icon::Style) -> String {
+    let title = match style {
+        tray_icon::Style::Ring => texts.t("Одно кольцо"),
+        tray_icon::Style::Rings => texts.t("Кольцо в кольце"),
+        tray_icon::Style::Columns => texts.t("Два столбика"),
+        tray_icon::Style::Rows => texts.t("Две полоски"),
+        tray_icon::Style::Number => texts.t("Число и полоска"),
+        tray_icon::Style::Pie => texts.t("Кольцо и сектор"),
+        tray_icon::Style::Arcs => texts.t("Две дуги"),
+    };
+    title.to_owned()
+}
+
+/// Settings → «Сервисы AI» → «Значок в трее»: the styles with their samples, and the chosen one.
+#[tauri::command]
+pub fn tray_styles(app: AppHandle) -> TrayStyles {
+    let texts = strings(&app);
+    let current = tray_icon::Style::saved(&app.state::<crate::AppState>().settings.lock().unwrap().tray_style);
+    let styles = tray_icon::Style::ALL
+        .into_iter()
+        .map(|style| TrayStyleView { id: style.id(), title: style_title(&texts, style), pixels: tray_icon::draw(style, ICON_SIZE, 62.0, Some(31.0), None) })
+        .collect();
+    TrayStyles { current: current.id(), size: ICON_SIZE, styles }
+}
+
+/// The icon is redrawn at once.
+#[tauri::command]
+pub fn set_tray_style(app: AppHandle, style: String) -> TrayStyles {
+    if let Some(style) = tray_icon::Style::parse(&style) {
+        crate::save(&app, |settings| settings.tray_style = style.id().to_owned());
+        app.state::<Limits>().update_tray(&app);
+    }
+    tray_styles(app)
 }
