@@ -18,6 +18,17 @@ enum PairCompare {
         return removable(other)
     }
 
+    /// «Влить в …» can be offered for a side: finished well, still there, on a branch other than the target.
+    static func canMerge(_ run: BackgroundRun, sides: [BackgroundRun], target: String?) -> Bool {
+        guard let target, let branch = run.worktreeBranch, !branch.isEmpty, branch != target else { return false }
+        return sides.allSatisfy(\.state.isFinished) && run.state == .succeeded && run.discarded != true && run.mergedInto == nil
+    }
+
+    /// What the confirmation says before a variant is merged.
+    static func mergeWarning(_ run: BackgroundRun, target: String) -> String {
+        String(localized: "Ветка \(run.worktreeBranch ?? "") будет влита в \(target) в папке проекта «\(run.project)» (git merge, без push). Отменить можно только вручную.")
+    }
+
     /// Only a worktree under `<project>/.claude/worktrees/` on a branch of its own.
     static func removable(_ run: BackgroundRun) -> Bool {
         let root = (run.projectPath as NSString).appendingPathComponent(".claude/worktrees") + "/"

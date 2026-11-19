@@ -5,6 +5,7 @@
 **Updated:** 2026-11-19
 
 **Now:**
+- 2026-11-19: Mac — «Влить в …» in the pair's comparison merges a variant's branch into the branch the project's folder is on, locally and after a confirmation (`feat/pair-merge`, merged 2026-11-19); goes out with 0.12.0, not seen live
 - 2026-11-19: Windows — keyboard shortcuts for «Быстрые команды»: a recorder next to each command in Settings → «Модули», the Mac's `hotKey` kept as it is (⌃ ↔ Ctrl, ⌥ ↔ Alt, ⇧ ↔ Shift, ⌘ ↔ Win), conflicts and a combination Windows refuses said under the command, a warning when Ctrl+Alt is AltGr and would take a character (branch `feat/desktop-command-shortcuts`; seen live on the laptop, the key itself not pressed by hand)
 - 2026-11-19: Mac — «Оставить этот вариант» in the pair's comparison removes the other variant's worktree and branch after a confirmation (`feat/pair-choose`, merged 2026-11-19); goes out with 0.12.0, not seen live
 - 2026-11-19: Mac — second live pass over the pair; four fixes (`fix/live-pass-pair-diff`, merged 2026-11-19): diff lines keep their width, more of Codex's file links cleaned, both sides of a pair get committed, a bell in the panel's header turns Telegram notifications off
@@ -131,6 +132,11 @@
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
 
+## 2026-11-19 — Merging a variant of a pair (branch `feat/pair-merge`)
+
+Done: on Oleh's word, the comparison window can finish the job. Each side that ended well has «Влить в <ветка>», where the branch is the one the project's own folder is on: after a confirmation naming both branches and the project, `git merge --no-ff --no-edit` runs in the project's folder — locally, no push. Refused while that folder has uncommitted changes to tracked files or has moved to another branch since the window opened; a merge that stops on conflicts is taken back (`git merge --abort`) and the person is told to merge by hand. The merged side is marked «влит в …». `GitService.currentBranch / mergeBranch`, `GitError.refused`, `BackgroundRun.mergedInto`, `PairCompare.canMerge / mergeWarning`, `RunStore.mergeVariant`. A line in `docs/release-notes/0.12.0.md`.
+Checked: `scripts/check.sh` green in the worktree (a new test for when it is offered); the git commands tried by hand on a scratch repository — a clean merge, and a conflicting one that `merge --abort` left as before.
+Left: not seen live. The worktree of the merged variant is not removed. Nothing is pushed, and no PR is made — by design.
 ## 2026-11-19 — Windows: a quick command's shortcut pressed (no code, branch `chore/desktop-hotkey-press`)
 
 Done: no code changed. The step #475 left unseen: a combination pressed as keyboard input, not posted to the app as a message.

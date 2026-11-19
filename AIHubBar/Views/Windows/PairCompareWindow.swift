@@ -9,6 +9,8 @@ struct PairCompareWindow: View {
     @State private var copied = false
     @State private var shown: ShownDiff?
     @State private var keepError: String?
+    /// The branch the project's folder is on: where «Влить в …» merges.
+    @State private var target: String?
 
     /// The diff in the sheet: one side's file, or one variant against the other.
     private struct ShownDiff: Identifiable {
@@ -45,8 +47,10 @@ struct PairCompareWindow: View {
         .sheet(item: $shown) { diff in diffSheet(diff) }
         .task(id: runs.selectedPair) {
             changes = [:]
+            target = nil
             while !Task.isCancelled {
                 guard let sides else { return }
+                target = await GitService.currentBranch(in: sides[0].projectPath)
                 for run in sides {
                     if let read = await SessionChangesStore.read(folder: run.folder, since: run.startedAt) { changes[run.id] = read }
                 }
@@ -62,6 +66,8 @@ struct PairCompareWindow: View {
                 HStack(spacing: 8) {
                     if run.discarded == true {
                         Text("удалён").foregroundStyle(.orange)
+                    } else if let merged = run.mergedInto {
+                        Text("влит в \(merged)").foregroundStyle(.green)
                     } else {
                         Text(run.state.title).foregroundStyle(run.state.color)
                     }
@@ -115,6 +121,18 @@ struct PairCompareWindow: View {
                     Button("Открыть папку") { NSWorkspace.shared.open(URL(fileURLWithPath: run.folder)) }
                         .disabled(run.discarded == true)
                     Spacer(minLength: 0)
+                    if let sides, let target, PairCompare.canMerge(run, sides: sides, target: target) {
+                        ConfirmedButton(title: "Влить этот вариант?", message: PairCompare.mergeWarning(run, target: target), confirm: "Влить", role: nil) {
+                            Task {
+                                do {
+                                    try await runs.mergeVariant(run, into: target)
+                                    keepError = nil
+                                } catch {
+                                    keepError = error.localizedDescription
+                                }
+                            }
+                        } label: { Text("Влить в \(target)") }
+                    }
                     if let sides, PairCompare.canKeep(run, sides: sides), let other = sides.first(where: { $0.id != run.id }) {
                         ConfirmedButton(title: "Оставить этот вариант?", message: PairCompare.removalWarning(other), confirm: "Удалить другой вариант", role: nil) {
                             Task {

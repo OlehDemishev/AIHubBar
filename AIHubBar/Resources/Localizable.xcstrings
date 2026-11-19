@@ -10027,6 +10027,83 @@
         }
       }
     },
+    "Ctrl+Alt — это AltGr: на вашей раскладке это сочетание заберёт символ «%@».": {
+      "extractionState": "stale",
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ctrl+Alt هو AltGr: في تخطيط لوحة مفاتيحك سيأخذ هذا الاختصار الرمز «%@»."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Strg+Alt ist AltGr: Auf Ihrer Tastaturbelegung nimmt diese Tastenkombination das Zeichen „%@“ weg."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ctrl+Alt is AltGr: on your keyboard layout this shortcut takes away the character “%@”."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ctrl+Alt es AltGr: en tu distribución de teclado este atajo se queda con el carácter «%@»."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ctrl+Alt, c’est AltGr : avec votre disposition de clavier, ce raccourci prend le caractère « %@ »."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ctrl+Alt adalah AltGr: pada tata letak keyboard Anda, pintasan ini mengambil karakter “%@”."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ctrl+Alt è AltGr: con il tuo layout di tastiera questa scorciatoia si prende il carattere «%@»."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ctrl+Alt は AltGr です。お使いのキーボード配列では、このショートカットが文字「%@」を奪います。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ctrl+Alt는 AltGr입니다. 사용 중인 키보드 배열에서는 이 단축키가 ‘%@’ 문자를 가져갑니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ctrl+Alt to AltGr: w Twoim układzie klawiatury ten skrót zabierze znak „%@”."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ctrl+Alt é AltGr: no seu layout de teclado este atalho fica com o caractere “%@”."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ctrl+Alt — це AltGr: на вашій розкладці це сполучення забере символ «%@»."
+          }
+        }
+      }
+    },
     "Cursor с входом и ваше согласие": {
       "localizations": {
         "ar": {
@@ -20124,6 +20201,82 @@
         }
       }
     },
+    "В папке проекта есть незакоммиченные изменения — сначала закоммитьте или уберите их.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The project folder has uncommitted changes — commit or remove them first."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "У папці проєкту є незакомічені зміни — спершу закомітьте або приберіть їх."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Im Projektordner gibt es nicht committete Änderungen – committen oder entfernen Sie sie zuerst."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le dossier du projet contient des modifications non commitées — commitez-les ou retirez-les d’abord."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La carpeta del proyecto tiene cambios sin commit: confírmalos o quítalos primero."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La cartella del progetto ha modifiche senza commit: prima esegui il commit o rimuovile."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A pasta do projeto tem alterações sem commit — faça o commit ou remova-as primeiro."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "W folderze projektu są niezacommitowane zmiany — najpierw je zacommituj lub usuń."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "プロジェクトのフォルダにコミットされていない変更があります。先にコミットするか取り除いてください。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "프로젝트 폴더에 커밋되지 않은 변경 사항이 있습니다. 먼저 커밋하거나 치워 주세요."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "في مجلد المشروع تغييرات دون commit — اعمل لها commit أو أزلها أولًا."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Folder proyek punya perubahan yang belum di-commit — commit atau singkirkan dulu."
+          }
+        }
+      }
+    },
     "В папке проекта уже работает Claude, поэтому запуск идёт в worktree cb-%@ (ветка %@). ": {
       "localizations": {
         "ar": {
@@ -20968,22 +21121,10 @@
     },
     "Вариант «%@» будет удалён: папка %@ и ветка %@. Его изменения пропадут, отменить нельзя.": {
       "localizations": {
-        "ru": {
-          "stringUnit": {
-            "state": "new",
-            "value": "Вариант «%1$@» будет удалён: папка %2$@ и ветка %3$@. Его изменения пропадут, отменить нельзя."
-          }
-        },
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "The “%@” version will be removed: the folder %@ and the branch %@. Its changes will be lost; this cannot be undone."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Варіант «%@» буде видалено: папку %@ і гілку %@. Його зміни зникнуть, скасувати не можна."
+            "value": "ستُحذف نسخة «%@»: المجلد %@ والفرع %@. ستضيع تغييراتها ولا يمكن التراجع."
           }
         },
         "de": {
@@ -20992,10 +21133,10 @@
             "value": "Die Variante „%@“ wird gelöscht: der Ordner %@ und der Branch %@. Ihre Änderungen gehen verloren; das lässt sich nicht widerrufen."
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "La version « %@ » sera supprimée : le dossier %@ et la branche %@. Ses modifications seront perdues, sans retour possible."
+            "value": "The “%@” version will be removed: the folder %@ and the branch %@. Its changes will be lost; this cannot be undone."
           }
         },
         "es": {
@@ -21004,22 +21145,22 @@
             "value": "La variante «%@» se eliminará: la carpeta %@ y la rama %@. Sus cambios se perderán y no se puede deshacer."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La version « %@ » sera supprimée : le dossier %@ et la branche %@. Ses modifications seront perdues, sans retour possible."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Varian “%@” akan dihapus: folder %@ dan branch %@. Perubahannya akan hilang dan tidak bisa dibatalkan."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "La variante «%@» verrà eliminata: la cartella %@ e il ramo %@. Le sue modifiche andranno perse e non si può annullare."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "A variante “%@” será removida: a pasta %@ e o branch %@. As alterações dela serão perdidas e isso não pode ser desfeito."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Wariant „%@” zostanie usunięty: folder %@ i gałąź %@. Jego zmiany przepadną, nie da się tego cofnąć."
           }
         },
         "ja": {
@@ -21034,16 +21175,28 @@
             "value": "“%@” 결과가 삭제됩니다: 폴더 %@ 및 브랜치 %@. 해당 변경 사항은 사라지며 되돌릴 수 없습니다."
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "ستُحذف نسخة «%@»: المجلد %@ والفرع %@. ستضيع تغييراتها ولا يمكن التراجع."
+            "value": "Wariant „%@” zostanie usunięty: folder %@ i gałąź %@. Jego zmiany przepadną, nie da się tego cofnąć."
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Varian “%@” akan dihapus: folder %@ dan branch %@. Perubahannya akan hilang dan tidak bisa dibatalkan."
+            "value": "A variante “%@” será removida: a pasta %@ e o branch %@. As alterações dela serão perdidas e isso não pode ser desfeito."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Вариант «%1$@» будет удалён: папка %2$@ и ветка %3$@. Его изменения пропадут, отменить нельзя."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Варіант «%@» буде видалено: папку %@ і гілку %@. Його зміни зникнуть, скасувати не можна."
           }
         }
       }
@@ -21349,6 +21502,88 @@
           "stringUnit": {
             "state": "translated",
             "value": "Увесь проєкт"
+          }
+        }
+      }
+    },
+    "Ветка %@ будет влита в %@ в папке проекта «%@» (git merge, без push). Отменить можно только вручную.": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Ветка %1$@ будет влита в %2$@ в папке проекта «%3$@» (git merge, без push). Отменить можно только вручную."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The branch %@ will be merged into %@ in the folder of the project “%@” (git merge, no push). It can only be undone by hand."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Гілку %@ буде влито в %@ у папці проєкту «%@» (git merge, без push). Скасувати можна лише вручну."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der Branch %@ wird in %@ gemergt, im Ordner des Projekts „%@“ (git merge, kein Push). Rückgängig machen lässt es sich nur von Hand."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La branche %@ sera fusionnée dans %@ dans le dossier du projet « %@ » (git merge, sans push). L’annulation ne se fait qu’à la main."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La rama %@ se fusionará en %@ en la carpeta del proyecto «%@» (git merge, sin push). Solo se puede deshacer a mano."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il ramo %@ verrà unito a %@ nella cartella del progetto «%@» (git merge, senza push). Si può annullare solo a mano."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O branch %@ será mesclado em %@ na pasta do projeto “%@” (git merge, sem push). Só dá para desfazer manualmente."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gałąź %@ zostanie scalona z %@ w folderze projektu „%@” (git merge, bez push). Cofnąć można tylko ręcznie."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ブランチ%@を%@にマージします（プロジェクト「%@」のフォルダ内、git merge、プッシュなし）。取り消しは手作業でのみ可能です。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "브랜치 %@를 %@에 병합합니다(프로젝트 “%@” 폴더, git merge, 푸시 없음). 되돌리려면 직접 해야 합니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "سيُدمج الفرع %@ في %@ داخل مجلد المشروع «%@» (git merge، دون push). لا يمكن التراجع إلا يدويًا."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Branch %@ akan digabung ke %@ di folder proyek “%@” (git merge, tanpa push). Hanya bisa dibatalkan secara manual."
           }
         }
       }
@@ -23553,6 +23788,234 @@
           "stringUnit": {
             "state": "translated",
             "value": "Увімкнено"
+          }
+        }
+      }
+    },
+    "Влить": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Merge"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Влити"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mergen"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fusionner"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fusionar"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unisci"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mesclar"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scal"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "マージ"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "병합"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "دمج"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gabung"
+          }
+        }
+      }
+    },
+    "Влить в %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Merge into %@"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Влити в %@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In %@ mergen"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fusionner dans %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fusionar en %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unisci a %@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mesclar em %@"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scal z %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@にマージ"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@에 병합"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "دمج في %@"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gabung ke %@"
+          }
+        }
+      }
+    },
+    "Влить этот вариант?": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Merge this version?"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Влити цей варіант?"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diese Variante mergen?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fusionner cette version ?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Fusionar esta variante?"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unire questa variante?"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mesclar esta variante?"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scalić ten wariant?"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "この案をマージしますか？"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이 결과를 병합할까요?"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "دمج هذه النسخة؟"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gabung varian ini?"
           }
         }
       }
@@ -56876,6 +57339,83 @@
         }
       }
     },
+    "Нажмите клавиши с Ctrl, Alt или Win; Esc — отменить": {
+      "extractionState": "stale",
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اضغط مفاتيح مع Ctrl أو Alt أو Win؛ Esc للإلغاء"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tasten mit Strg, Alt oder Win drücken; Esc bricht ab"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Press keys with Ctrl, Alt or Win; Esc cancels"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pulsa teclas con Ctrl, Alt o Win; Esc cancela"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Appuyez sur des touches avec Ctrl, Alt ou Win ; Échap annule"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tekan tombol dengan Ctrl, Alt, atau Win; Esc membatalkan"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Premi tasti con Ctrl, Alt o Win; Esc annulla"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ctrl、Alt、Win と一緒にキーを押す。Esc でキャンセル"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ctrl, Alt 또는 Win과 함께 키를 누르세요. Esc로 취소"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Naciśnij klawisze z Ctrl, Alt lub Win; Esc anuluje"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pressione teclas com Ctrl, Alt ou Win; Esc cancela"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Натисніть клавіші з Ctrl, Alt або Win; Esc — скасувати"
+          }
+        }
+      }
+    },
     "Нажмите клавиши с ⌘, ⌃ или ⌥; Esc — отменить": {
       "localizations": {
         "ar": {
@@ -67319,6 +67859,83 @@
         }
       }
     },
+    "Нужна Ctrl, Alt или Win — или одна клавиша F1–F20.": {
+      "extractionState": "stale",
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يلزم Ctrl أو Alt أو Win — أو مفتاح واحد من F1–F20."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nötig ist Strg, Alt oder Win – oder eine einzelne Taste F1–F20."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Needs Ctrl, Alt or Win — or a single F1–F20 key."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hace falta Ctrl, Alt o Win, o una sola tecla F1–F20."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il faut Ctrl, Alt ou Win — ou une seule touche F1–F20."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Perlu Ctrl, Alt, atau Win — atau satu tombol F1–F20."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Serve Ctrl, Alt o Win — oppure un solo tasto F1–F20."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ctrl、Alt、Win のいずれか、または F1〜F20 キー単体が必要です。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ctrl, Alt 또는 Win이 필요합니다. 또는 F1–F20 키 하나만."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Potrzebny Ctrl, Alt lub Win — albo pojedynczy klawisz F1–F20."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "É preciso Ctrl, Alt ou Win — ou uma única tecla F1–F20."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Потрібна Ctrl, Alt або Win — або одна клавіша F1–F20."
+          }
+        }
+      }
+    },
     "Нужна ⌘, ⌃ или ⌥ — или одна клавиша F1–F20.": {
       "localizations": {
         "ar": {
@@ -70667,16 +71284,10 @@
     },
     "Оставить этот вариант": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Keep This Version"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Залишити цей варіант"
+            "value": "الإبقاء على هذه النسخة"
           }
         },
         "de": {
@@ -70685,10 +71296,10 @@
             "value": "Diese Variante behalten"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Garder cette version"
+            "value": "Keep This Version"
           }
         },
         "es": {
@@ -70697,22 +71308,22 @@
             "value": "Conservar esta variante"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Garder cette version"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Simpan Varian Ini"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Tieni questa variante"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Manter esta variante"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Zostaw ten wariant"
           }
         },
         "ja": {
@@ -70727,32 +71338,32 @@
             "value": "이 결과 유지"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "الإبقاء على هذه النسخة"
+            "value": "Zostaw ten wariant"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Simpan Varian Ini"
+            "value": "Manter esta variante"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Залишити цей варіант"
           }
         }
       }
     },
     "Оставить этот вариант?": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Keep this version?"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Залишити цей варіант?"
+            "value": "الإبقاء على هذه النسخة؟"
           }
         },
         "de": {
@@ -70761,10 +71372,10 @@
             "value": "Diese Variante behalten?"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Garder cette version ?"
+            "value": "Keep this version?"
           }
         },
         "es": {
@@ -70773,22 +71384,22 @@
             "value": "¿Conservar esta variante?"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Garder cette version ?"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Simpan varian ini?"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Tenere questa variante?"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Manter esta variante?"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Zostawić ten wariant?"
           }
         },
         "ja": {
@@ -70803,16 +71414,22 @@
             "value": "이 결과를 유지할까요?"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "الإبقاء على هذه النسخة؟"
+            "value": "Zostawić ten wariant?"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Simpan varian ini?"
+            "value": "Manter esta variante?"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Залишити цей варіант?"
           }
         }
       }
@@ -80017,6 +80634,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Папка _daily-report"
+          }
+        }
+      }
+    },
+    "Папка проекта уже на другой ветке — откройте сравнение заново.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The project folder is on another branch now — open the comparison again."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Папка проєкту вже на іншій гілці — відкрийте порівняння знову."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der Projektordner ist inzwischen auf einem anderen Branch – öffnen Sie den Vergleich erneut."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le dossier du projet est maintenant sur une autre branche — rouvrez la comparaison."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La carpeta del proyecto ya está en otra rama: abre de nuevo la comparación."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La cartella del progetto è ora su un altro ramo: riapri il confronto."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A pasta do projeto já está em outro branch — abra a comparação de novo."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Folder projektu jest już na innej gałęzi — otwórz porównanie ponownie."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "プロジェクトのフォルダは別のブランチに切り替わっています。比較を開き直してください。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "프로젝트 폴더가 이미 다른 브랜치에 있습니다. 비교를 다시 열어 주세요."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مجلد المشروع صار على فرع آخر — افتح المقارنة من جديد."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Folder proyek sudah berada di branch lain — buka perbandingan lagi."
           }
         }
       }
@@ -103464,6 +104157,83 @@
         }
       }
     },
+    "Система не дала занять это сочетание: похоже, оно у другой программы.": {
+      "extractionState": "stale",
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لم يسمح النظام بحجز هذا الاختصار: يبدو أن برنامجًا آخر يستخدمه."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Das System hat diese Tastenkombination nicht freigegeben: Wahrscheinlich nutzt sie ein anderes Programm."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The system didn’t let AI Hub Bar take this shortcut: another program probably uses it."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El sistema no permitió usar este atajo: probablemente lo usa otro programa."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le système n’a pas accordé ce raccourci : un autre programme l’utilise probablement."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sistem tidak mengizinkan pintasan ini: mungkin dipakai program lain."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il sistema non ha concesso questa scorciatoia: probabilmente la usa un altro programma."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "システムがこのショートカットを許可しませんでした。別のプログラムが使っている可能性があります。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "시스템이 이 단축키를 허용하지 않았습니다. 다른 프로그램이 사용 중인 것 같습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "System nie pozwolił zająć tego skrótu: pewnie używa go inny program."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O sistema não liberou este atalho: provavelmente outro programa o usa."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Система не дала зайняти це сполучення: схоже, воно в іншої програми."
+          }
+        }
+      }
+    },
     "Система сообщает о критической нехватке памяти. Закройте лишние приложения.": {
       "extractionState": "stale",
       "localizations": {
@@ -105438,6 +106208,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Забагато запитів (HTTP 429)"
+          }
+        }
+      }
+    },
+    "Слияние остановилось на конфликтах и отменено: влейте ветку %@ вручную.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The merge stopped on conflicts and was undone: merge the branch %@ by hand."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Злиття зупинилося на конфліктах і скасоване: влийте гілку %@ вручну."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der Merge blieb an Konflikten hängen und wurde abgebrochen: Mergen Sie den Branch %@ von Hand."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La fusion s’est arrêtée sur des conflits et a été annulée : fusionnez la branche %@ à la main."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La fusión se detuvo por conflictos y se deshizo: fusiona la rama %@ a mano."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L’unione si è fermata sui conflitti ed è stata annullata: unisci il ramo %@ a mano."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A mesclagem parou em conflitos e foi desfeita: mescle o branch %@ manualmente."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scalanie zatrzymało się na konfliktach i zostało cofnięte: scal gałąź %@ ręcznie."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "マージはコンフリクトで止まり、取り消されました。ブランチ%@は手作業でマージしてください。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "병합이 충돌로 멈춰 취소되었습니다. 브랜치 %@는 직접 병합해 주세요."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "توقف الدمج عند تعارضات وأُلغي: ادمج الفرع %@ يدويًا."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Penggabungan berhenti karena konflik dan dibatalkan: gabungkan branch %@ secara manual."
           }
         }
       }
@@ -107870,6 +108716,83 @@
           "stringUnit": {
             "state": "translated",
             "value": "Сполучення клавіш: %@"
+          }
+        }
+      }
+    },
+    "Сочетание только с Ctrl или Alt заменит его во всех программах.": {
+      "extractionState": "stale",
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الاختصار مع Ctrl أو Alt فقط يحل محله في كل البرامج."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eine Tastenkombination nur mit Strg oder Alt ersetzt sie in allen Programmen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A shortcut with only Ctrl or Alt replaces it in every program."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un atajo solo con Ctrl o Alt lo sustituye en todos los programas."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un raccourci avec seulement Ctrl ou Alt le remplace dans tous les programmes."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pintasan hanya dengan Ctrl atau Alt menggantikannya di semua program."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Una scorciatoia con solo Ctrl o Alt la sostituisce in tutti i programmi."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ctrl または Alt だけのショートカットは、すべてのプログラムのそのショートカットを置き換えます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ctrl 또는 Alt만 쓰는 단축키는 모든 프로그램에서 그 단축키를 대체합니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skrót tylko z Ctrl lub Alt zastąpi go we wszystkich programach."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Um atalho só com Ctrl ou Alt o substitui em todos os programas."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Сполучення лише з Ctrl або Alt замінить його в усіх програмах."
           }
         }
       }
@@ -110758,6 +111681,83 @@
           "stringUnit": {
             "state": "translated",
             "value": "Така папка вже є"
+          }
+        }
+      }
+    },
+    "Такой клавиши здесь нет: сочетание записано на Mac и работает только там.": {
+      "extractionState": "stale",
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لا يوجد هذا المفتاح هنا: سُجّل الاختصار على Mac ويعمل هناك فقط."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diese Taste gibt es hier nicht: Die Tastenkombination wurde auf einem Mac aufgenommen und funktioniert nur dort."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "There is no such key here: the shortcut was recorded on a Mac and works only there."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aquí no existe esa tecla: el atajo se grabó en un Mac y solo funciona allí."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cette touche n’existe pas ici : le raccourci a été enregistré sur un Mac et ne fonctionne que là-bas."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tombol itu tidak ada di sini: pintasan direkam di Mac dan hanya berfungsi di sana."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Qui questo tasto non c’è: la scorciatoia è stata registrata su un Mac e funziona solo lì."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "このキーはここにはありません。ショートカットは Mac で記録されたもので、Mac でのみ動作します。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "여기에는 그런 키가 없습니다. 단축키는 Mac에서 기록되었고 거기서만 작동합니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Takiego klawisza tu nie ma: skrót nagrano na Macu i działa tylko tam."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Essa tecla não existe aqui: o atalho foi gravado em um Mac e só funciona lá."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Такої клавіші тут немає: сполучення записано на Mac і працює лише там."
           }
         }
       }
@@ -116693,16 +117693,10 @@
     },
     "Удалить другой вариант": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Remove the Other Version"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Видалити інший варіант"
+            "value": "حذف النسخة الأخرى"
           }
         },
         "de": {
@@ -116711,10 +117705,10 @@
             "value": "Andere Variante löschen"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Supprimer l’autre version"
+            "value": "Remove the Other Version"
           }
         },
         "es": {
@@ -116723,22 +117717,22 @@
             "value": "Eliminar la otra variante"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Supprimer l’autre version"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hapus Varian Lain"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Elimina l’altra variante"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Remover a outra variante"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Usuń drugi wariant"
           }
         },
         "ja": {
@@ -116753,16 +117747,22 @@
             "value": "다른 결과 삭제"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "حذف النسخة الأخرى"
+            "value": "Usuń drugi wariant"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Hapus Varian Lain"
+            "value": "Remover a outra variante"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Видалити інший варіант"
           }
         }
       }
@@ -127291,6 +128291,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "увімкнена квота Antigravity (вище) і відкритий agy"
+          }
+        }
+      }
+    },
+    "влит в %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "merged into %@"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "влито в %@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "in %@ gemergt"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "fusionnée dans %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "fusionada en %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "unita a %@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "mesclada em %@"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "scalony z %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@にマージ済み"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@에 병합됨"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "دُمجت في %@"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "digabung ke %@"
           }
         }
       }
@@ -141219,16 +142295,10 @@
     },
     "удалён": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "removed"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "видалено"
+            "value": "محذوفة"
           }
         },
         "de": {
@@ -141237,10 +142307,10 @@
             "value": "gelöscht"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "supprimée"
+            "value": "removed"
           }
         },
         "es": {
@@ -141249,22 +142319,22 @@
             "value": "eliminada"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "supprimée"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dihapus"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "eliminata"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "removida"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "usunięty"
           }
         },
         "ja": {
@@ -141279,16 +142349,22 @@
             "value": "삭제됨"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "محذوفة"
+            "value": "usunięty"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "dihapus"
+            "value": "removida"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "видалено"
           }
         }
       }
@@ -143901,462 +144977,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "❌ CI впав: %@ #%lld"
-          }
-        }
-      }
-    },
-    "Нужна Ctrl, Alt или Win — или одна клавиша F1–F20.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "يلزم Ctrl أو Alt أو Win — أو مفتاح واحد من F1–F20."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nötig ist Strg, Alt oder Win – oder eine einzelne Taste F1–F20."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Needs Ctrl, Alt or Win — or a single F1–F20 key."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hace falta Ctrl, Alt o Win, o una sola tecla F1–F20."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Il faut Ctrl, Alt ou Win — ou une seule touche F1–F20."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Perlu Ctrl, Alt, atau Win — atau satu tombol F1–F20."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Serve Ctrl, Alt o Win — oppure un solo tasto F1–F20."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ctrl、Alt、Win のいずれか、または F1〜F20 キー単体が必要です。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ctrl, Alt 또는 Win이 필요합니다. 또는 F1–F20 키 하나만."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Potrzebny Ctrl, Alt lub Win — albo pojedynczy klawisz F1–F20."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "É preciso Ctrl, Alt ou Win — ou uma única tecla F1–F20."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Потрібна Ctrl, Alt або Win — або одна клавіша F1–F20."
-          }
-        }
-      }
-    },
-    "Нажмите клавиши с Ctrl, Alt или Win; Esc — отменить": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "اضغط مفاتيح مع Ctrl أو Alt أو Win؛ Esc للإلغاء"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tasten mit Strg, Alt oder Win drücken; Esc bricht ab"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Press keys with Ctrl, Alt or Win; Esc cancels"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Pulsa teclas con Ctrl, Alt o Win; Esc cancela"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Appuyez sur des touches avec Ctrl, Alt ou Win ; Échap annule"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tekan tombol dengan Ctrl, Alt, atau Win; Esc membatalkan"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Premi tasti con Ctrl, Alt o Win; Esc annulla"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ctrl、Alt、Win と一緒にキーを押す。Esc でキャンセル"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ctrl, Alt 또는 Win과 함께 키를 누르세요. Esc로 취소"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Naciśnij klawisze z Ctrl, Alt lub Win; Esc anuluje"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Pressione teclas com Ctrl, Alt ou Win; Esc cancela"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Натисніть клавіші з Ctrl, Alt або Win; Esc — скасувати"
-          }
-        }
-      }
-    },
-    "Система не дала занять это сочетание: похоже, оно у другой программы.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "لم يسمح النظام بحجز هذا الاختصار: يبدو أن برنامجًا آخر يستخدمه."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Das System hat diese Tastenkombination nicht freigegeben: Wahrscheinlich nutzt sie ein anderes Programm."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "The system didn’t let AI Hub Bar take this shortcut: another program probably uses it."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "El sistema no permitió usar este atajo: probablemente lo usa otro programa."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Le système n’a pas accordé ce raccourci : un autre programme l’utilise probablement."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sistem tidak mengizinkan pintasan ini: mungkin dipakai program lain."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Il sistema non ha concesso questa scorciatoia: probabilmente la usa un altro programma."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "システムがこのショートカットを許可しませんでした。別のプログラムが使っている可能性があります。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "시스템이 이 단축키를 허용하지 않았습니다. 다른 프로그램이 사용 중인 것 같습니다."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "System nie pozwolił zająć tego skrótu: pewnie używa go inny program."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "O sistema não liberou este atalho: provavelmente outro programa o usa."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Система не дала зайняти це сполучення: схоже, воно в іншої програми."
-          }
-        }
-      }
-    },
-    "Сочетание только с Ctrl или Alt заменит его во всех программах.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "الاختصار مع Ctrl أو Alt فقط يحل محله في كل البرامج."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Eine Tastenkombination nur mit Strg oder Alt ersetzt sie in allen Programmen."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "A shortcut with only Ctrl or Alt replaces it in every program."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Un atajo solo con Ctrl o Alt lo sustituye en todos los programas."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Un raccourci avec seulement Ctrl ou Alt le remplace dans tous les programmes."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Pintasan hanya dengan Ctrl atau Alt menggantikannya di semua program."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Una scorciatoia con solo Ctrl o Alt la sostituisce in tutti i programmi."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ctrl または Alt だけのショートカットは、すべてのプログラムのそのショートカットを置き換えます。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ctrl 또는 Alt만 쓰는 단축키는 모든 프로그램에서 그 단축키를 대체합니다."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Skrót tylko z Ctrl lub Alt zastąpi go we wszystkich programach."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Um atalho só com Ctrl ou Alt o substitui em todos os programas."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Сполучення лише з Ctrl або Alt замінить його в усіх програмах."
-          }
-        }
-      }
-    },
-    "Ctrl+Alt — это AltGr: на вашей раскладке это сочетание заберёт символ «%@».": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ctrl+Alt هو AltGr: في تخطيط لوحة مفاتيحك سيأخذ هذا الاختصار الرمز «%@»."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Strg+Alt ist AltGr: Auf Ihrer Tastaturbelegung nimmt diese Tastenkombination das Zeichen „%@“ weg."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ctrl+Alt is AltGr: on your keyboard layout this shortcut takes away the character “%@”."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ctrl+Alt es AltGr: en tu distribución de teclado este atajo se queda con el carácter «%@»."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ctrl+Alt, c’est AltGr : avec votre disposition de clavier, ce raccourci prend le caractère « %@ »."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ctrl+Alt adalah AltGr: pada tata letak keyboard Anda, pintasan ini mengambil karakter “%@”."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ctrl+Alt è AltGr: con il tuo layout di tastiera questa scorciatoia si prende il carattere «%@»."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ctrl+Alt は AltGr です。お使いのキーボード配列では、このショートカットが文字「%@」を奪います。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ctrl+Alt는 AltGr입니다. 사용 중인 키보드 배열에서는 이 단축키가 ‘%@’ 문자를 가져갑니다."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ctrl+Alt to AltGr: w Twoim układzie klawiatury ten skrót zabierze znak „%@”."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ctrl+Alt é AltGr: no seu layout de teclado este atalho fica com o caractere “%@”."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ctrl+Alt — це AltGr: на вашій розкладці це сполучення забере символ «%@»."
-          }
-        }
-      }
-    },
-    "Такой клавиши здесь нет: сочетание записано на Mac и работает только там.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "لا يوجد هذا المفتاح هنا: سُجّل الاختصار على Mac ويعمل هناك فقط."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Diese Taste gibt es hier nicht: Die Tastenkombination wurde auf einem Mac aufgenommen und funktioniert nur dort."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "There is no such key here: the shortcut was recorded on a Mac and works only there."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Aquí no existe esa tecla: el atajo se grabó en un Mac y solo funciona allí."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cette touche n’existe pas ici : le raccourci a été enregistré sur un Mac et ne fonctionne que là-bas."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tombol itu tidak ada di sini: pintasan direkam di Mac dan hanya berfungsi di sana."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Qui questo tasto non c’è: la scorciatoia è stata registrata su un Mac e funziona solo lì."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "このキーはここにはありません。ショートカットは Mac で記録されたもので、Mac でのみ動作します。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "여기에는 그런 키가 없습니다. 단축키는 Mac에서 기록되었고 거기서만 작동합니다."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Takiego klawisza tu nie ma: skrót nagrano na Macu i działa tylko tam."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Essa tecla não existe aqui: o atalho foi gravado em um Mac e só funciona lá."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Такої клавіші тут немає: сполучення записано на Mac і працює лише там."
           }
         }
       }

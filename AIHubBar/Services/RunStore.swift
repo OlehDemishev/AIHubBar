@@ -159,6 +159,14 @@ final class RunStore {
         AppLog.info("Pair \(pair): kept \(keep.agent ?? "claude"), removed \(other.agent ?? "claude")")
     }
 
+    /// «Влить в …»: the variant's branch goes into the branch the project's folder is on.
+    func mergeVariant(_ run: BackgroundRun, into target: String) async throws {
+        guard var saved = self.run(id: run.id), let branch = saved.worktreeBranch, saved.mergedInto == nil, saved.discarded != true else { return }
+        try await GitService.mergeBranch(branch, into: target, projectPath: saved.projectPath)
+        saved.mergedInto = target
+        update(saved)
+    }
+
     private func update(_ run: BackgroundRun) {
         save(run)
         if let index = runs.firstIndex(where: { $0.id == run.id }) { runs[index] = run }
