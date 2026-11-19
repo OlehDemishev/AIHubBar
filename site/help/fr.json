@@ -637,6 +637,10 @@
               "name" : "Telegram"
             },
             {
+              "detail" : "La tuile « Telegram » des bascules rapides désactive les notifications Telegram d’un clic et les garde désactivées jusqu’au clic suivant. Les demandes d’autorisation et les réponses du bot arrivent toujours.",
+              "name" : "Mettre Telegram en pause"
+            },
+            {
               "detail" : "Les demandes d’autorisation de Claude s’acceptent ou se refusent avec des boutons dans Telegram — un bot distinct, page « Sessions des agents ».",
               "name" : "Réponses depuis Telegram"
             },

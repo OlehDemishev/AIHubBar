@@ -637,6 +637,10 @@
               "name" : "Telegram"
             },
             {
+              "detail" : "Die Kachel „Telegram“ in den Schnellschaltern schaltet Mitteilungen in Telegram mit einem Klick aus und lässt sie aus, bis Sie erneut klicken. Berechtigungsanfragen und die Antworten des Bots kommen weiterhin.",
+              "name" : "Telegram vorübergehend ausschalten"
+            },
+            {
               "detail" : "Berechtigungsanfragen von Claude können Sie mit Tasten in Telegram annehmen oder ablehnen — ein eigener Bot, Seite „Agentensitzungen“.",
               "name" : "Antworten aus Telegram"
             },

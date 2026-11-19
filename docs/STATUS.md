@@ -5,6 +5,7 @@
 **Updated:** 2026-11-19
 
 **Now:**
+- 2026-11-19: Mac — a «Telegram» tile in «Быстрые переключатели» turns Telegram notifications off until pressed again (`feat/telegram-panel-switch`, merged 2026-11-19); goes out with 0.12.0, not seen live
 - 2026-11-19: Mac — the pair run live in an isolated copy and the comparison window seen; three fixes (`fix/pair-live-findings`, merged 2026-11-19): AI Hub Bar commits Codex's changes in a worktree, the pair's branches carry the service's name first, `--app-command pair-compare`
 - 2026-11-19: Windows — the tray icon shows two limits (session and week) in one of seven styles chosen in Settings → «Сервисы AI» → «Значок в трее»; «Два столбика» is the default (#457, merged; CI green on Windows and Linux); not seen on Windows, the live look is first in Next
 - 2026-11-19: Windows — first live pass on the laptop (branch `fix/desktop-live-pass`): the installed 0.1.0 opens Settings as a white window that can't be closed; fixed with the tray hint cut by Windows and the panel's scrollbars. 0.1.0 as published still has the white Settings
@@ -71,7 +72,6 @@
 **Next:**
 - releases go out once a week, on Tuesday, on Oleh's word (agreed 2026-11-11); merged work waits in `main`
 - before 0.12.0: the windows are seen (2026-11-17); a background Codex run seen end to end in an isolated copy; left to see in the app — a Codex approval, handover, review, the pair (they start real runs: with Oleh or on his word); then a beta
-- Mac, asked by Oleh 2026-11-19: a small button in the panel that quickly turns Telegram messages off (and on)
 - 0.12.0 not before Tuesday 2026-11-24, on Oleh's word; `WhatsNew.version` and the card's lines for 0.12
 - then: the «ждёт» state for Antigravity sessions (needs `agy` opened once)
 - towards 1.0 (discussed 2026-11-10): the live pass is done (journal 2026-11-10); left — freeze what is in 1.0 and what stays beta, release notes, translations read by people, feedback from strangers before 1.0
@@ -119,6 +119,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-19 — Telegram off from the panel (branch `feat/telegram-panel-switch`)
+
+Done: asked by Oleh — a small button in the panel that quickly turns Telegram notifications off. A «Telegram» tile in «Быстрые переключатели» (`QuickToggle.telegram`, shown while the Telegram module is installed): one click holds the notifications back until it is pressed again (`mutedUntil` = no end), the next click brings them back and also ends «Тишина на 1 ч». While off, the block says so and that permission requests and the bot's replies still come. The bot's ⚙️ screen and Settings → Telegram show «Тишина, пока не включите». A saved choice of tiles gets the new one once. A help fact in 13 languages, a line in `docs/release-notes/0.12.0.md`.
+Checked: `scripts/check.sh` green in the worktree (a new test: the tile, the one-time add, the titles); help exported.
+Left: not seen live in the panel. The Mini App (relay, deployed separately) would show «Тишина до» with a far-off time for the endless mute. The first run of the checks was cut off: the Mac restarted during a full build started with swap at 15 of 16 GB — the build should not have been started then; the work survived uncommitted in the worktree.
 
 ## 2026-11-19 — Live pass over the pair and three fixes (branch `fix/pair-live-findings`)
 

@@ -637,6 +637,10 @@
               "name" : "Telegram"
             },
             {
+              "detail" : "Il riquadro «Telegram» negli interruttori rapidi disattiva le notifiche in Telegram con un clic e le tiene disattivate finché non lo premi di nuovo. Le richieste di autorizzazione e le risposte del bot continuano ad arrivare.",
+              "name" : "Mettere in pausa Telegram"
+            },
+            {
               "detail" : "Le richieste di permesso di Claude si possono accettare o rifiutare con i pulsanti in Telegram — un bot a parte, pagina «Sessioni degli agenti».",
               "name" : "Risposte da Telegram"
             },

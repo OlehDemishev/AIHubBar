@@ -637,6 +637,10 @@
               "name" : "Telegram"
             },
             {
+              "detail" : "Ubin “Telegram” di Sakelar Cepat mematikan notifikasi Telegram dengan satu klik dan membiarkannya mati sampai Anda menekannya lagi. Permintaan izin dan balasan bot tetap masuk.",
+              "name" : "Jeda Telegram"
+            },
+            {
               "detail" : "Permintaan izin Claude bisa diterima atau ditolak dengan tombol di Telegram — bot terpisah, halaman “Sesi agen”.",
               "name" : "Jawaban dari Telegram"
             },

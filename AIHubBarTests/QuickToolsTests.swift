@@ -25,13 +25,15 @@ struct QuickToolsTests {
     }
 
     @Test func onlyDesktopIconsWarnWhileOff() {
-        #expect(QuickToggle.allCases.filter { $0.offNote != nil } == [.desktopIcons])
+        #expect(QuickToggle.allCases.filter { $0.offNote != nil } == [.desktopIcons, .telegram])
     }
 
     @Test func islandToggleOnlyWithTheIsland() {
         #expect(!QuickToggle.available(installed: [.toggles]).contains(.notchIsland))
         #expect(QuickToggle.available(installed: [.toggles, .notch]).contains(.notchIsland))
-        #expect(QuickToggle.available(installed: []).count == QuickToggle.allCases.count - 1)
+        #expect(QuickToggle.available(installed: []).count == QuickToggle.allCases.count - 2)
+        #expect(!QuickToggle.available(installed: [.toggles]).contains(.telegram))
+        #expect(QuickToggle.available(installed: [.toggles, .telegram]).contains(.telegram))
     }
 
     @MainActor @Test func islandToggleHidesTheIsland() {
@@ -42,6 +44,28 @@ struct QuickToolsTests {
         #expect(settings.notch.hidden && tools.isOn(.notchIsland) == false)
         tools.perform(.notchIsland)
         #expect(!settings.notch.hidden)
+    }
+
+    /// The Telegram tile: off holds notifications back until it is pressed again, on also ends «Тишина на 1 ч».
+    @MainActor @Test func telegramToggleMutesUntilSwitchedOn() {
+        let defaults = UserDefaults(suiteName: "quick-telegram-\(UUID().uuidString)")!
+        defaults.set(["darkMode"], forKey: "quickToggles")
+        let settings = AppSettings(defaults: defaults)
+        #expect(settings.quickToggles == [.darkMode, .telegram], "a saved choice gets the new tile once")
+        settings.quickToggles = [.darkMode]
+        #expect(AppSettings(defaults: defaults).quickToggles == [.darkMode], "and it can be dropped again")
+
+        let tools = QuickToolsController(settings: settings)
+        #expect(tools.isOn(.telegram) == true && settings.telegramBot.mutedTitle(now: .now) == nil)
+        tools.perform(.telegram)
+        #expect(tools.isOn(.telegram) == false && settings.telegramBot.isQuiet(now: .now.addingTimeInterval(30 * 86_400)))
+        #expect(settings.telegramBot.mutedTitle(now: .now) == String(localized: "Тишина, пока не включите"))
+        tools.perform(.telegram)
+        #expect(tools.isOn(.telegram) == true && settings.telegramBot.mutedUntil == nil)
+        settings.telegramBot.mutedUntil = .now.addingTimeInterval(3600)
+        #expect(tools.isOn(.telegram) == false && settings.telegramBot.mutedTitle(now: .now)?.contains(":") == true)
+        tools.perform(.telegram)
+        #expect(settings.telegramBot.mutedUntil == nil)
     }
 
     @Test func storedLibraryDecodes() throws {

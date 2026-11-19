@@ -637,6 +637,10 @@
               "name" : "Telegram"
             },
             {
+              "detail" : "빠른 스위치의 “Telegram” 타일은 클릭 한 번으로 Telegram 알림을 끄고, 다시 누를 때까지 꺼 둡니다. 권한 요청과 봇의 답변은 계속 옵니다.",
+              "name" : "Telegram 일시 중지"
+            },
+            {
               "detail" : "Claude의 권한 요청은 Telegram 버튼으로 허용하거나 거부할 수 있습니다 — 별도의 봇, «에이전트 세션» 페이지.",
               "name" : "Telegram에서 응답"
             },

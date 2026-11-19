@@ -278,8 +278,8 @@ enum BotScreens {
         var lines = ["⚙️ <b>" + RunMessage.escape(String(localized: "Настройки")) + "</b>",
                      RunMessage.escape(String(localized: "Что приходит в Telegram — нажмите, чтобы включить или выключить."))]
         lines.append("🌙 " + RunMessage.escape(String(localized: "Тихие часы: \(quiet?.title ?? String(localized: "нет"))")))
-        if let mutedUntil, mutedUntil > now {
-            lines.append("🔕 " + RunMessage.escape(String(localized: "Тишина до \(mutedUntil.formatted(date: .omitted, time: .shortened))")))
+        if let title = TelegramBotSettings(mutedUntil: mutedUntil).mutedTitle(now: now) {
+            lines.append("🔕 " + RunMessage.escape(title))
         }
         if let morningHour { lines.append("🌅 " + RunMessage.escape(String(localized: "Утренний отчёт: \(String(format: "%02d:00", morningHour)) (меняется в _daily-report)"))) }
         var rows = events.map { event, on in

@@ -26,6 +26,20 @@ struct TelegramBotSettings: Codable, Equatable, Sendable {
     /// «Где меню» (§10): false — only the Menu button (the Mini App with the shared bot), no keyboard at the bottom.
     var bottomMenu: Bool?
 
+    /// «Тишина» with no end: the panel's Telegram tile switches notifications off until it is pressed again.
+    static let untilSwitchedOn = Date.distantFuture
+
+    /// «Тишина» is on: for an hour, or until switched on.
+    func isMuted(now: Date) -> Bool { (mutedUntil ?? .distantPast) > now }
+
+    /// «Тишина до 14:30», or «Тишина, пока не включите» for the one with no end; nil when not muted.
+    func mutedTitle(now: Date) -> String? {
+        guard let mutedUntil, mutedUntil > now else { return nil }
+        return mutedUntil.timeIntervalSince(now) > 366 * 86_400
+            ? String(localized: "Тишина, пока не включите")
+            : String(localized: "Тишина до \(mutedUntil.formatted(date: .omitted, time: .shortened))")
+    }
+
     /// Alerts to Telegram are held back now: muted, or inside the quiet hours. Requests and replies still come.
     func isQuiet(now: Date, calendar: Calendar = .current) -> Bool {
         if let mutedUntil, mutedUntil > now { return true }
