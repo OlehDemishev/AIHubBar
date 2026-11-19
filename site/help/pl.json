@@ -282,6 +282,10 @@
               "name" : "Claude i Codex razem"
             },
             {
+              "detail" : "Gdy zadanie dostały oba, w menu każdego z dwóch zadań jest „Porównaj z…”: odpowiedzi obok siebie, pliki zmienione przez każdy z nich, a te zmienione przez oba są oznaczone. Kliknięcie powiadomienia o parze otwiera to samo okno.",
+              "name" : "Porównanie"
+            },
+            {
               "detail" : "Zadanie w tle: co robi Claude, krok po kroku.",
               "name" : "Dziennik"
             },

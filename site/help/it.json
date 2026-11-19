@@ -282,6 +282,10 @@
               "name" : "Claude e Codex insieme"
             },
             {
+              "detail" : "Quando entrambi hanno ricevuto l’attività, il menu di una delle due ha «Confronta con…»: le risposte affiancate, i file modificati da ciascuno, e sono segnati quelli modificati da entrambi. Un clic sulla notifica della coppia apre la stessa finestra.",
+              "name" : "Confronto"
+            },
+            {
               "detail" : "Attività in background: cosa fa Claude, passo dopo passo.",
               "name" : "Registro"
             },

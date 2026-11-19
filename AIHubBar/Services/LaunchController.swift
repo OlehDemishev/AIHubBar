@@ -308,9 +308,18 @@ final class LaunchController {
             // Finished long ago (the app was closed): not news any more.
             guard both.contains(where: { $0.finishedAt.map { Date.now.timeIntervalSince($0) < 3600 } ?? false }) else { continue }
             let title = String(localized: "Claude и Codex закончили — \(both[0].project)")
-            let body = TwoServices.lines(both).joined(separator: "\n")
-            Notifier.post(id: "pair-\(pair)", title: title, body: body)
-            sendToTelegram("⚖️ <b>\(RunMessage.escape(title))</b>\n\(RunMessage.escape(body))")
+            Task {
+                // With what each one changed, so the two can be told apart before opening «Сравнение».
+                var lines: [String] = []
+                for run in both {
+                    lines.append(PairCompare.line(run, changes: await SessionChangesStore.read(folder: run.folder, since: run.startedAt)))
+                }
+                let body = lines.joined(separator: "\n")
+                // A click on the banner opens «Сравнение» with this pair.
+                runs.selectedPair = pair
+                Notifier.post(id: "pair-\(pair)", title: title, body: body, target: .window(id: WindowID.pairCompare.rawValue))
+                sendToTelegram("⚖️ <b>\(RunMessage.escape(title))</b>\n\(RunMessage.escape(body))")
+            }
         }
     }
 

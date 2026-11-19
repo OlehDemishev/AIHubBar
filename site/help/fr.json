@@ -282,6 +282,10 @@
               "name" : "Claude et Codex ensemble"
             },
             {
+              "detail" : "Quand les deux ont reçu la tâche, le menu de chacune des deux tâches propose « Comparer avec… » : les réponses côte à côte, les fichiers modifiés par chacun, et ceux que les deux ont modifiés sont signalés. Un clic sur la notification de la paire ouvre la même fenêtre.",
+              "name" : "Comparaison"
+            },
+            {
               "detail" : "Tâche en arrière-plan : ce que fait Claude, étape par étape.",
               "name" : "Journal"
             },

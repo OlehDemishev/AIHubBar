@@ -32,4 +32,22 @@ struct TwoServicesTests {
         #expect(lines[0] == "\(AgentKind.claudeCode.title) (cb/export-claude): Done.", "the first line of the result")
         #expect(lines[1].hasPrefix("\(AgentKind.codex.title) (cb/export-codex): "))
     }
+
+    @Test func theComparisonFindsThePartnerAndTheFilesBothChanged() throws {
+        let claude = run("a", .succeeded), codex = run("b", .succeeded, agent: CodexExec.agent)
+        let review = run("r", .succeeded, agent: CodexExec.agent, reviewOf: "a")
+        let all = [review, codex, claude, run("c", .succeeded, pair: nil)]
+        #expect(PairCompare.partner(of: claude, runs: all)?.id == "b" && PairCompare.partner(of: codex, runs: all)?.id == "a")
+        #expect(PairCompare.partner(of: all[3], runs: all) == nil && PairCompare.partner(of: review, runs: all) == nil)
+        #expect(PairCompare.sides("p", runs: all)?.map(\.id) == ["a", "b"], "Claude first, the review left out")
+        #expect(PairCompare.sides("p", runs: [claude]) == nil)
+
+        let first = SessionChanges.parse(numstat: "12\t3\tA.swift\n1\t0\tB.swift", untracked: "new.txt")
+        let second = SessionChanges.parse(numstat: "4\t4\tA.swift", untracked: "new.txt\nother.txt")
+        #expect(PairCompare.common(first, second) == ["A.swift", "new.txt"])
+        #expect(PairCompare.common(first, nil).isEmpty)
+        #expect(PairCompare.line(claude, changes: first).hasSuffix(" · " + first.summary))
+        #expect(PairCompare.line(claude, changes: SessionChanges(files: [])) == TwoServices.lines([claude])[0])
+        #expect(PairCompare.diffCommand([claude, codex]) == "git diff cb/export-claude cb/export-codex")
+    }
 }

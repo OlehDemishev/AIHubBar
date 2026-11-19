@@ -282,6 +282,10 @@
               "name" : "Claude and Codex together"
             },
             {
+              "detail" : "When both got the task, either task's menu has “Compare with…”: the answers side by side, the files each one changed, and those both changed are marked. A click on the pair's notification opens the same window.",
+              "name" : "Comparison"
+            },
+            {
               "detail" : "Background task: what Claude does, step by step.",
               "name" : "Log"
             },
