@@ -66,13 +66,16 @@ final class SessionChangesStore {
 
     private static func key(_ folder: String, _ start: Date?) -> String { "\(folder)|\(start?.timeIntervalSince1970 ?? 0)" }
 
+    /// The commit the changes are counted from: the last one before the session started, `HEAD` without a start.
+    nonisolated static func base(folder: String, since start: Date?) async -> String {
+        guard let start else { return "HEAD" }
+        let before = try? await GitService.run(["rev-list", "-1", "--before=\(start.ISO8601Format())", "HEAD"], in: folder, timeout: .seconds(10))
+        return before?.trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty ?? SessionChanges.emptyTree
+    }
+
     nonisolated static func read(folder: String, since start: Date?) async -> SessionChanges? {
         guard (try? await GitService.run(["rev-parse", "--is-inside-work-tree"], in: folder, timeout: .seconds(10))) != nil else { return nil }
-        var base = "HEAD"
-        if let start {
-            let before = try? await GitService.run(["rev-list", "-1", "--before=\(start.ISO8601Format())", "HEAD"], in: folder, timeout: .seconds(10))
-            base = before?.trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty ?? SessionChanges.emptyTree
-        }
+        let base = await base(folder: folder, since: start)
         guard let numstat = try? await GitService.run(["diff", "--numstat", base], in: folder, timeout: .seconds(20)) else { return nil }
         let untracked = (try? await GitService.run(["ls-files", "--others", "--exclude-standard"], in: folder, timeout: .seconds(20))) ?? ""
         return SessionChanges.parse(numstat: numstat, untracked: untracked)
