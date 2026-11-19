@@ -2,9 +2,13 @@ import Foundation
 
 enum GitError: LocalizedError {
     case failed(String, stderr: String)
+    /// A step the app refused to take, in the person's words.
+    case refused(String)
 
     var errorDescription: String? {
         switch self {
+        case let .refused(reason):
+            return reason
         case let .failed(command, stderr):
             let detail = stderr.trimmingCharacters(in: .whitespacesAndNewlines)
             return detail.isEmpty ? String(localized: "git \(command) завершился с ошибкой") : "git \(command): \(detail)"
@@ -95,6 +99,33 @@ enum GitService {
         }
         try await run(["branch", "-D", branch], in: projectPath)
         AppLog.info("Discarded worktree \(worktreePath) and branch \(branch)")
+    }
+
+    /// The branch the project's own folder is on; nil for a detached HEAD or outside a repository.
+    static func currentBranch(in projectPath: String) async -> String? {
+        let name = (try? await run(["rev-parse", "--abbrev-ref", "HEAD"], in: projectPath, timeout: .seconds(10)))?
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+        return name?.isEmpty == false && name != "HEAD" ? name : nil
+    }
+
+    /// The kept variant of a pair goes into the branch the project's folder is on: a local `git merge --no-ff`, no
+    /// push. Refused while that folder has uncommitted changes to tracked files; a merge that stops on conflicts is
+    /// taken back (`merge --abort`), so the folder is left as it was.
+    static func mergeBranch(_ branch: String, into target: String, projectPath: String) async throws {
+        guard await currentBranch(in: projectPath) == target else {
+            throw GitError.refused(String(localized: "Папка проекта уже на другой ветке — откройте сравнение заново."))
+        }
+        let status = try await run(["status", "--porcelain", "--untracked-files=no"], in: projectPath)
+        guard status.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
+            throw GitError.refused(String(localized: "В папке проекта есть незакоммиченные изменения — сначала закоммитьте или уберите их."))
+        }
+        do {
+            try await run(["merge", "--no-ff", "--no-edit", branch], in: projectPath, timeout: .seconds(120))
+        } catch {
+            _ = try? await run(["merge", "--abort"], in: projectPath)
+            throw GitError.refused(String(localized: "Слияние остановилось на конфликтах и отменено: влейте ветку \(branch) вручную."))
+        }
+        AppLog.info("Merged \(branch) into \(target) in \(projectPath)")
     }
 
     /// `git worktree remove` without `--force`: git itself refuses if anything is uncommitted.
