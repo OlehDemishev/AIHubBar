@@ -759,7 +759,9 @@
     // «Быстрые команды»: on or off, and the library — each command a small form, written when a field is left.
     let quick = null;
     const quickModule = document.getElementById("module-quick-commands");
-    const saveQuick = async () => { quick = await invoke("set_quick_commands", { commands: quick.commands }); };
+    // The editors keep the command objects they were built with, so the list itself stays: only what the app adds
+    // (the shortcuts' titles and problems) is taken from the reply. Replacing it lost the next edit in the same form.
+    const saveQuick = async () => { quick.hotKeys = (await invoke("set_quick_commands", { commands: quick.commands })).hotKeys; };
     const kinds = [["script", t("Скрипт в фоне")], ["terminal", t("Скрипт в Терминале")], ["open", t("Открыть ссылку, файл или папку")]];
     const placeholder = (kind) => (kind === "open" ? t("https://… или ~/папка") : t("команда, например: winget upgrade --all"));
     function quickEditor(command, index) {
@@ -810,8 +812,84 @@
       const confirmRow = document.createElement("label");
       confirmRow.className = "check-line";
       confirmRow.append(confirm, " ", t("Спрашивать перед запуском"));
-      box.append(head, kindRow, value, confirmRow);
+      box.append(head, kindRow, value, confirmRow, ...hotKeyRow(command));
       return box;
+    }
+    // The command's keyboard shortcut: «Записать», then the keys; Esc cancels, ✕ removes it. One recorder at a time.
+    // While it records, the app lets go of its own global keys, so a combination already in use reaches this window.
+    let stopRecording = null;
+    function hotKeyRow(command) {
+      const info = quick.hotKeys[command.id];
+      const row = document.createElement("div");
+      row.className = "row";
+      const buttons = document.createElement("span");
+      buttons.className = "hot-key";
+      const record = document.createElement("button");
+      const note = document.createElement("p");
+      note.className = "warning";
+      const idle = () => {
+        record.textContent = info?.title ?? t("Записать");
+        record.title = t("Сочетание клавиш запускает команду из любого приложения");
+        record.classList.remove("recording");
+        note.textContent = info?.problem ?? "";
+        note.hidden = !info?.problem;
+      };
+      record.setAttribute("aria-label", info ? t("Сочетание клавиш: %@", info.title) : t("Сочетание клавиш не задано"));
+      const onKey = async (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        if (event.repeat || ["Control", "Alt", "AltGraph", "Shift", "Meta", "OS"].includes(event.key)) return;
+        const held = { ctrl: event.ctrlKey, alt: event.altKey, shift: event.shiftKey, meta: event.metaKey };
+        if (event.code === "Escape" && !Object.values(held).some(Boolean)) return stop();
+        const pressed = await invoke("hot_key_from_press", { keyCode: event.keyCode, code: event.code, ...held });
+        if (pressed.combo) {
+          command.hotKey = pressed.combo;
+          stop(false);
+          await saveQuick();
+          showQuickLibrary();
+        } else if (pressed.error) {
+          note.textContent = pressed.error;
+          note.hidden = false;
+        }
+      };
+      const cancel = () => stop();
+      function stop(resume = true) {
+        if (stopRecording !== cancel) return;
+        stopRecording = null;
+        window.removeEventListener("keydown", onKey, true);
+        window.removeEventListener("blur", cancel);
+        window.removeEventListener("pagehide", cancel);
+        idle();
+        if (resume) invoke("set_hot_key_recording", { on: false });
+      }
+      record.onclick = async () => {
+        if (stopRecording === cancel) return stop();
+        stopRecording?.();
+        stopRecording = cancel;
+        await invoke("set_hot_key_recording", { on: true });
+        record.textContent = t("Нажмите сочетание…");
+        record.title = t("Нажмите клавиши с Ctrl, Alt или Win; Esc — отменить");
+        record.classList.add("recording");
+        note.hidden = true;
+        window.addEventListener("keydown", onKey, true);
+        window.addEventListener("blur", cancel);
+        window.addEventListener("pagehide", cancel);
+      };
+      buttons.append(record);
+      if (info) {
+        const clear = Object.assign(document.createElement("button"), { textContent: "✕", title: t("Убрать сочетание") });
+        clear.setAttribute("aria-label", t("Убрать сочетание"));
+        clear.onclick = async () => {
+          stopRecording?.();
+          delete command.hotKey;
+          await saveQuick();
+          showQuickLibrary();
+        };
+        buttons.append(clear);
+      }
+      row.append(Object.assign(document.createElement("span"), { textContent: t("Сочетание клавиш") }), buttons);
+      idle();
+      return [row, note];
     }
     function showQuickLibrary() {
       quickModule.checked = quick.on;

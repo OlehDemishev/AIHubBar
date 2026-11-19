@@ -328,6 +328,10 @@ button.quick .name { overflow: hidden; text-overflow: ellipsis; white-space: now
 .quick-editor { border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; margin: 6px 0; display: flex; flex-direction: column; gap: 4px; }
 .quick-editor-head { display: flex; gap: 6px; align-items: center; }
 .quick-editor-head input { flex: 1; min-width: 0; }
+.quick-editor .hot-key { display: flex; gap: 6px; align-items: center; }
+.quick-editor .hot-key button:first-child { min-width: 130px; font-variant-numeric: tabular-nums; }
+.quick-editor .hot-key button.recording { border-color: var(--accent, #0a84ff); }
+.quick-editor p.warning { color: #ff9500; margin: 0; }
 .quick-editor input.mono { font-family: ui-monospace, Consolas, monospace; font-size: 12px; }
 
 /* «Значок в трее»: a tile per style, the sample at the icon's own 32 px and the chosen one in the accent colour. */

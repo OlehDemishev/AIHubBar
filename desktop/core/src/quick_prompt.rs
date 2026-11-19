@@ -41,6 +41,17 @@ impl HotKey {
             HotKey::ControlShiftSpace => Some("Ctrl+Shift+Space"),
         }
     }
+
+    /// The same key as a command's shortcut would name it, so a command can't take it.
+    pub fn combo(self) -> Option<crate::hot_keys::KeyCombo> {
+        use crate::hot_keys::{KeyCombo, CONTROL, OPTION, SHIFT};
+        match self {
+            HotKey::Off => None,
+            HotKey::ControlOptionP => Some(KeyCombo::new(35, CONTROL | OPTION)),
+            HotKey::ControlOptionA => Some(KeyCombo::new(0, CONTROL | OPTION)),
+            HotKey::ControlShiftSpace => Some(KeyCombo::new(49, CONTROL | SHIFT)),
+        }
+    }
 }
 
 /// Ctrl+Alt+P, as on the Mac (⌃⌥P).
@@ -146,6 +157,9 @@ mod tests {
         assert!(can_send(" x ", Some("p")) && !can_send("  ", Some("p")) && !can_send("x", None));
         assert_eq!(HotKey::parse("controlShiftSpace").and_then(HotKey::accelerator), Some("Ctrl+Shift+Space"));
         assert_eq!(HotKey::Off.accelerator(), None);
+        for key in HOT_KEYS {
+            assert_eq!(key.combo().map(|c| c.title()).as_deref(), key.accelerator(), "one key under both names");
+        }
         assert_eq!(DEFAULT_HOT_KEY.id(), "controlOptionP");
     }
 }
