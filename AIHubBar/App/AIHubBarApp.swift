@@ -88,6 +88,15 @@ struct AIHubBarApp: App {
         .handlesExternalEvents(matching: [])
         .defaultSize(width: 640, height: 520)
 
+        Window("Claude и Codex: сравнение", id: WindowID.pairCompare.rawValue) {
+            PairCompareWindow()
+                .appEnvironment(app)
+                .preferredColorScheme(app.settings.panelTheme.colorScheme)
+                .debugSnapshot("pair-compare")
+        }
+        .handlesExternalEvents(matching: [])
+        .defaultSize(width: 820, height: 520)
+
         Window("Помощник", id: WindowID.assistant.rawValue) {
             AssistantView()
                 .appEnvironment(app)

@@ -282,6 +282,10 @@
               "name" : "Claude y Codex juntos"
             },
             {
+              "detail" : "Cuando ambos recibieron la tarea, el menú de cualquiera de las dos tiene «Comparar con…»: las respuestas lado a lado, los archivos que cambió cada uno, y se marcan los que cambiaron ambos. Un clic en la notificación del par abre la misma ventana.",
+              "name" : "Comparación"
+            },
+            {
               "detail" : "Tarea en segundo plano: qué hace Claude, paso a paso.",
               "name" : "Registro"
             },

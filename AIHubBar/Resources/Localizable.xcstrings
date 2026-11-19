@@ -1639,6 +1639,83 @@
         }
       }
     },
+    "%@ открыт в Терминале — задача скопирована, вставьте Ctrl+V": {
+      "extractionState": "stale",
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "فُتح %@ في الطرفية — نُسخت المهمة، الصقها بـ Ctrl+V"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ im Terminal geöffnet — die Aufgabe ist kopiert, mit Strg+V einfügen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ opened in Terminal — the task is on the clipboard, paste with Ctrl+V"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ abierto en Terminal — la tarea está copiada, pégala con Ctrl+V"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ ouvert dans Terminal — la tâche est copiée, collez-la avec Ctrl+V"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ dibuka di Terminal — tugas sudah disalin, tempel dengan Ctrl+V"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ aperto nel Terminale — l’attività è copiata, incollala con Ctrl+V"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ をターミナルで開きました — タスクはコピー済みです。Ctrl+V で貼り付けてください"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@을(를) 터미널에서 열었습니다 — 작업이 복사되어 있으니 Ctrl+V로 붙여 넣으세요"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ otwarty w Terminalu — zadanie jest skopiowane, wklej je przez Ctrl+V"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ aberto no Terminal — a tarefa foi copiada, cole com Ctrl+V"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ відкрито в Терміналі — завдання скопійовано, вставте Ctrl+V"
+          }
+        }
+      }
+    },
     "%@ открыт в Терминале — задача скопирована, вставьте ⌘V": {
       "localizations": {
         "ar": {
@@ -9115,16 +9192,10 @@
     },
     "Claude и Codex вместе": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Claude and Codex together"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Claude і Codex разом"
+            "value": "Claude و Codex معًا"
           }
         },
         "de": {
@@ -9133,10 +9204,10 @@
             "value": "Claude und Codex zusammen"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Claude et Codex ensemble"
+            "value": "Claude and Codex together"
           }
         },
         "es": {
@@ -9145,22 +9216,22 @@
             "value": "Claude y Codex juntos"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude et Codex ensemble"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude dan Codex bersama"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Claude e Codex insieme"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Claude e Codex juntos"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Claude i Codex razem"
           }
         },
         "ja": {
@@ -9175,16 +9246,22 @@
             "value": "Claude와 Codex 함께"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Claude و Codex معًا"
+            "value": "Claude i Codex razem"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Claude dan Codex bersama"
+            "value": "Claude e Codex juntos"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude і Codex разом"
           }
         }
       }
@@ -9261,6 +9338,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Claude і Codex закінчили — %@"
+          }
+        }
+      }
+    },
+    "Claude и Codex: сравнение": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude و Codex: مقارنة"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude und Codex: Vergleich"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude and Codex: comparison"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude y Codex: comparación"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude et Codex : comparaison"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude dan Codex: perbandingan"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude e Codex: confronto"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ClaudeとCodex：比較"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude와 Codex: 비교"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude i Codex: porównanie"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude e Codex: comparação"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Claude і Codex: порівняння"
           }
         }
       }
@@ -9571,16 +9724,10 @@
     },
     "Codex в фоне": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Codex in the background"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex у фоні"
+            "value": "Codex في الخلفية"
           }
         },
         "de": {
@@ -9589,10 +9736,10 @@
             "value": "Codex im Hintergrund"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Codex en arrière-plan"
+            "value": "Codex in the background"
           }
         },
         "es": {
@@ -9601,22 +9748,22 @@
             "value": "Codex en segundo plano"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex en arrière-plan"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex di latar belakang"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Codex in background"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex em segundo plano"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Codex w tle"
           }
         },
         "ja": {
@@ -9631,16 +9778,22 @@
             "value": "백그라운드의 Codex"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Codex في الخلفية"
+            "value": "Codex w tle"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Codex di latar belakang"
+            "value": "Codex em segundo plano"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex у фоні"
           }
         }
       }
@@ -9722,6 +9875,7 @@
       }
     },
     "Codex работает в фоне в своей песочнице: пишет в папке проекта, итог — уведомлением. Закрыта ли при этом сеть, на Windows зависит от того, как настроена песочница Codex.": {
+      "extractionState": "stale",
       "localizations": {
         "ar": {
           "stringUnit": {
@@ -17538,6 +17692,7 @@
       }
     },
     "Больше 90 % уже 5 минут. Кто нагружает — в панели, блок «Ресурсы компьютера».": {
+      "extractionState": "stale",
       "localizations": {
         "ar": {
           "stringUnit": {
@@ -19287,16 +19442,10 @@
     },
     "В «Быстром запросе» Codex тоже работает в фоне: пишет только в папке проекта, без сети, итог — уведомлением. У порога его держат лимиты самого Codex.": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "In Quick Prompt Codex runs in the background too: it writes only in the project folder, has no network, and the result comes as a notification. Near the threshold it is held by Codex’s own limits."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "У «Швидкому запиті» Codex теж працює у фоні: пише лише в теці проєкту, без мережі, підсумок — сповіщенням. Біля порога його тримають ліміти самого Codex."
+            "value": "في «طلب سريع» يعمل Codex في الخلفية أيضًا: يكتب في مجلد المشروع فقط، بلا شبكة، والنتيجة تصل في إشعار. عند العتبة توقفه حدود Codex نفسه."
           }
         },
         "de": {
@@ -19305,10 +19454,10 @@
             "value": "Im „Schnellauftrag“ läuft auch Codex im Hintergrund: Es schreibt nur im Projektordner, hat kein Netz, und das Ergebnis kommt als Mitteilung. An der Schwelle halten es die eigenen Limits von Codex an."
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Dans « Requête rapide », Codex travaille aussi en arrière-plan : il n’écrit que dans le dossier du projet, sans réseau, et le résultat arrive en notification. Près du seuil, ce sont les limites de Codex qui le retiennent."
+            "value": "In Quick Prompt Codex runs in the background too: it writes only in the project folder, has no network, and the result comes as a notification. Near the threshold it is held by Codex’s own limits."
           }
         },
         "es": {
@@ -19317,22 +19466,22 @@
             "value": "En «Petición rápida» Codex también trabaja en segundo plano: solo escribe en la carpeta del proyecto, sin red, y el resultado llega en una notificación. Cerca del umbral lo frenan los límites del propio Codex."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dans « Requête rapide », Codex travaille aussi en arrière-plan : il n’écrit que dans le dossier du projet, sans réseau, et le résultat arrive en notification. Près du seuil, ce sont les limites de Codex qui le retiennent."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Di “Permintaan cepat” Codex juga bekerja di latar belakang: hanya menulis di folder proyek, tanpa jaringan, dan hasilnya datang lewat pemberitahuan. Di dekat ambang ia ditahan oleh batas Codex sendiri."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "In «Richiesta rapida» anche Codex lavora in background: scrive solo nella cartella del progetto, senza rete, e l’esito arriva in una notifica. Vicino alla soglia lo fermano i limiti di Codex stesso."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Em “Pedido rápido” o Codex também trabalha em segundo plano: escreve só na pasta do projeto, sem rede, e o resultado chega em notificação. Perto do limiar, quem o segura são os limites do próprio Codex."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "W „Szybkim zapytaniu” Codex też działa w tle: zapisuje tylko w folderze projektu, bez sieci, a wynik przychodzi w powiadomieniu. Przy progu wstrzymują go limity samego Codex."
           }
         },
         "ja": {
@@ -19347,16 +19496,22 @@
             "value": "«빠른 요청»에서는 Codex도 백그라운드로 실행됩니다. 프로젝트 폴더 안에서만 쓰고 네트워크 없이 동작하며 결과는 알림으로 옵니다. 임계값 근처에서는 Codex 자체 한도에 따라 멈춥니다."
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "في «طلب سريع» يعمل Codex في الخلفية أيضًا: يكتب في مجلد المشروع فقط، بلا شبكة، والنتيجة تصل في إشعار. عند العتبة توقفه حدود Codex نفسه."
+            "value": "W „Szybkim zapytaniu” Codex też działa w tle: zapisuje tylko w folderze projektu, bez sieci, a wynik przychodzi w powiadomieniu. Przy progu wstrzymują go limity samego Codex."
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Di “Permintaan cepat” Codex juga bekerja di latar belakang: hanya menulis di folder proyek, tanpa jaringan, dan hasilnya datang lewat pemberitahuan. Di dekat ambang ia ditahan oleh batas Codex sendiri."
+            "value": "Em “Pedido rápido” o Codex também trabalha em segundo plano: escreve só na pasta do projeto, sem rede, e o resultado chega em notificação. Perto do limiar, quem o segura são os limites do próprio Codex."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "У «Швидкому запиті» Codex теж працює у фоні: пише лише в теці проєкту, без мережі, підсумок — сповіщенням. Біля порога його тримають ліміти самого Codex."
           }
         }
       }
@@ -19819,16 +19974,10 @@
     },
     "В окне «Claude Code» на вкладке «Skills и плагины»: skills Claude Code и Codex и плагины Claude Code — у каждого выключатель; hooks обоих — для просмотра.": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "In the Claude Code window, on the “Skills and Plugins” tab: the skills of Claude Code and Codex and Claude Code’s plugins, each with a switch; the hooks of both, to look at."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "У вікні «Claude Code» на вкладці «Skills і плагіни»: skills Claude Code і Codex та плагіни Claude Code — у кожного вимикач; hooks обох — для перегляду."
+            "value": "في نافذة «Claude Code» ضمن تبويب «المهارات والإضافات»: مهارات Claude Code و Codex وإضافات Claude Code، ولكلٍّ منها مفتاح؛ أما الـ hooks لكليهما فللعرض فقط."
           }
         },
         "de": {
@@ -19837,10 +19986,10 @@
             "value": "Im Fenster „Claude Code“ im Tab „Skills und Plug-ins“: die Skills von Claude Code und Codex und die Plug-ins von Claude Code, jeweils mit Schalter; die Hooks beider zur Ansicht."
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Dans la fenêtre « Claude Code », onglet « Skills et plugins » : les skills de Claude Code et de Codex et les plugins de Claude Code, chacun avec un interrupteur ; les hooks des deux, en lecture seule."
+            "value": "In the Claude Code window, on the “Skills and Plugins” tab: the skills of Claude Code and Codex and Claude Code’s plugins, each with a switch; the hooks of both, to look at."
           }
         },
         "es": {
@@ -19849,22 +19998,22 @@
             "value": "En la ventana «Claude Code», pestaña «Skills y plugins»: los skills de Claude Code y Codex y los plugins de Claude Code, cada uno con su interruptor; los hooks de ambos, solo para consultar."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dans la fenêtre « Claude Code », onglet « Skills et plugins » : les skills de Claude Code et de Codex et les plugins de Claude Code, chacun avec un interrupteur ; les hooks des deux, en lecture seule."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Di jendela “Claude Code”, tab “Skill dan plugin”: skill Claude Code dan Codex serta plugin Claude Code, masing-masing dengan sakelar; hook keduanya hanya untuk dilihat."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Nella finestra «Claude Code», scheda «Skill e plugin»: le skill di Claude Code e Codex e i plugin di Claude Code, ciascuno con un interruttore; gli hook di entrambi in sola lettura."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Na janela “Claude Code”, aba “Skills e plugins”: os skills do Claude Code e do Codex e os plugins do Claude Code, cada um com um interruptor; os hooks dos dois, só para consulta."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "W oknie „Claude Code”, na karcie „Skille i wtyczki”: skille Claude Code i Codex oraz wtyczki Claude Code — każdy z przełącznikiem; hooki obu — do podglądu."
           }
         },
         "ja": {
@@ -19879,16 +20028,22 @@
             "value": "«Claude Code» 창의 «스킬과 플러그인» 탭: Claude Code와 Codex의 스킬, Claude Code의 플러그인마다 스위치가 있습니다. 두 에이전트의 훅은 보기 전용입니다."
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "في نافذة «Claude Code» ضمن تبويب «المهارات والإضافات»: مهارات Claude Code و Codex وإضافات Claude Code، ولكلٍّ منها مفتاح؛ أما الـ hooks لكليهما فللعرض فقط."
+            "value": "W oknie „Claude Code”, na karcie „Skille i wtyczki”: skille Claude Code i Codex oraz wtyczki Claude Code — każdy z przełącznikiem; hooki obu — do podglądu."
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Di jendela “Claude Code”, tab “Skill dan plugin”: skill Claude Code dan Codex serta plugin Claude Code, masing-masing dengan sakelar; hook keduanya hanya untuk dilihat."
+            "value": "Na janela “Claude Code”, aba “Skills e plugins”: os skills do Claude Code e do Codex e os plugins do Claude Code, cada um com um interruptor; os hooks dos dois, só para consulta."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "У вікні «Claude Code» на вкладці «Skills і плагіни»: skills Claude Code і Codex та плагіни Claude Code — у кожного вимикач; hooks обох — для перегляду."
           }
         }
       }
@@ -33582,6 +33737,7 @@
       }
     },
     "Другие агенты — только в Терминале: задача в буфере обмена, вставьте Ctrl+V": {
+      "extractionState": "stale",
       "localizations": {
         "ar": {
           "stringUnit": {
@@ -36477,16 +36633,10 @@
     },
     "Задачу Claude у лимита можно передать Codex («В Codex», «Передать Codex»), готовую — отдать на проверку второму сервису («Проверить в…» в меню задачи). Галочка «И в Codex — сравнить» в «Быстром запросе» даёт задачу обоим сразу, каждому в своём worktree.": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "A Claude task at the limit can be handed to Codex (“To Codex”, “Hand Over to Codex”), and a finished one given to the other service to review (“Review in…” in the task’s menu). The “Also in Codex — to compare” checkbox in Quick Prompt gives the task to both at once, each in its own worktree."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Завдання Claude біля ліміту можна передати Codex («У Codex», «Передати Codex»), готове — віддати на перевірку другому сервісу («Перевірити в…» у меню завдання). Позначка «І в Codex — порівняти» у «Швидкому запиті» дає завдання обом одразу, кожному у своєму worktree."
+            "value": "يمكن تسليم مهمة Claude التي بلغت الحد إلى Codex («إلى Codex»، «تسليم إلى Codex»)، وإعطاء المهمة المنجزة للخدمة الأخرى لمراجعتها («مراجعة في…» في قائمة المهمة). خانة «وفي Codex أيضًا — للمقارنة» في «طلب سريع» تعطي المهمة للاثنين معًا، كلٌّ في worktree خاص به."
           }
         },
         "de": {
@@ -36495,10 +36645,10 @@
             "value": "Eine Claude-Aufgabe am Limit lässt sich an Codex übergeben („An Codex“, „An Codex übergeben“), eine fertige dem anderen Dienst zur Prüfung geben („In … prüfen“ im Menü der Aufgabe). Das Häkchen „Auch in Codex — zum Vergleich“ im „Schnellauftrag“ gibt die Aufgabe beiden zugleich, jedem in seinem eigenen Worktree."
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Une tâche de Claude arrivée à la limite peut être confiée à Codex (« Vers Codex », « Confier à Codex »), et une tâche terminée donnée à relire à l’autre service (« Relire dans… » dans le menu de la tâche). La case « Aussi dans Codex — pour comparer » de « Requête rapide » donne la tâche aux deux à la fois, chacun dans son worktree."
+            "value": "A Claude task at the limit can be handed to Codex (“To Codex”, “Hand Over to Codex”), and a finished one given to the other service to review (“Review in…” in the task’s menu). The “Also in Codex — to compare” checkbox in Quick Prompt gives the task to both at once, each in its own worktree."
           }
         },
         "es": {
@@ -36507,22 +36657,22 @@
             "value": "Una tarea de Claude en el límite se puede pasar a Codex («A Codex», «Pasar a Codex»), y una terminada darse a revisar al otro servicio («Revisar en…» en el menú de la tarea). La casilla «También en Codex — para comparar» de «Petición rápida» da la tarea a los dos a la vez, cada uno en su worktree."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une tâche de Claude arrivée à la limite peut être confiée à Codex (« Vers Codex », « Confier à Codex »), et une tâche terminée donnée à relire à l’autre service (« Relire dans… » dans le menu de la tâche). La case « Aussi dans Codex — pour comparer » de « Requête rapide » donne la tâche aux deux à la fois, chacun dans son worktree."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tugas Claude yang mencapai batas bisa diserahkan ke Codex (“Ke Codex”, “Serahkan ke Codex”), dan tugas yang selesai bisa ditinjau layanan lain (“Tinjau di…” di menu tugas). Kotak centang “Juga di Codex — untuk membandingkan” di “Permintaan cepat” memberikan tugas ke keduanya sekaligus, masing-masing di worktree sendiri."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Un’attività di Claude al limite si può passare a Codex («A Codex», «Passa a Codex»), e una finita farla rivedere all’altro servizio («Rivedi in…» nel menu dell’attività). La casella «Anche in Codex — per confrontare» in «Richiesta rapida» dà l’attività a entrambi insieme, ciascuno nel proprio worktree."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Uma tarefa do Claude no limite pode ser passada para o Codex (“Para Codex”, “Passar para Codex”), e uma concluída pode ir para revisão do outro serviço (“Revisar no…” no menu da tarefa). A caixa “Também no Codex — para comparar” em “Pedido rápido” dá a tarefa aos dois de uma vez, cada um em seu worktree."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Zadanie Claude przy limicie można przekazać do Codex („Do Codex”, „Przekaż do Codex”), a gotowe dać do sprawdzenia drugiej usłudze („Sprawdź w…” w menu zadania). Pole „Także w Codex — do porównania” w „Szybkim zapytaniu” daje zadanie obu naraz, każdemu we własnym worktree."
           }
         },
         "ja": {
@@ -36537,16 +36687,22 @@
             "value": "한도에 걸린 Claude 작업은 Codex에 넘길 수 있고(«Codex(으)로», «Codex에 넘기기»), 끝난 작업은 다른 서비스에 검토를 맡길 수 있습니다(작업 메뉴의 «…에서 검토»). «빠른 요청»의 «Codex에서도 실행해 비교»를 선택하면 두 서비스가 동시에, 각자 자기 worktree에서 작업합니다."
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "يمكن تسليم مهمة Claude التي بلغت الحد إلى Codex («إلى Codex»، «تسليم إلى Codex»)، وإعطاء المهمة المنجزة للخدمة الأخرى لمراجعتها («مراجعة في…» في قائمة المهمة). خانة «وفي Codex أيضًا — للمقارنة» في «طلب سريع» تعطي المهمة للاثنين معًا، كلٌّ في worktree خاص به."
+            "value": "Zadanie Claude przy limicie można przekazać do Codex („Do Codex”, „Przekaż do Codex”), a gotowe dać do sprawdzenia drugiej usłudze („Sprawdź w…” w menu zadania). Pole „Także w Codex — do porównania” w „Szybkim zapytaniu” daje zadanie obu naraz, każdemu we własnym worktree."
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tugas Claude yang mencapai batas bisa diserahkan ke Codex (“Ke Codex”, “Serahkan ke Codex”), dan tugas yang selesai bisa ditinjau layanan lain (“Tinjau di…” di menu tugas). Kotak centang “Juga di Codex — untuk membandingkan” di “Permintaan cepat” memberikan tugas ke keduanya sekaligus, masing-masing di worktree sendiri."
+            "value": "Uma tarefa do Claude no limite pode ser passada para o Codex (“Para Codex”, “Passar para Codex”), e uma concluída pode ir para revisão do outro serviço (“Revisar no…” no menu da tarefa). A caixa “Também no Codex — para comparar” em “Pedido rápido” dá a tarefa aos dois de uma vez, cada um em seu worktree."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Завдання Claude біля ліміту можна передати Codex («У Codex», «Передати Codex»), готове — віддати на перевірку другому сервісу («Перевірити в…» у меню завдання). Позначка «І в Codex — порівняти» у «Швидкому запиті» дає завдання обом одразу, кожному у своєму worktree."
           }
         }
       }
@@ -41031,6 +41187,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Вилучити диски"
+          }
+        }
+      }
+    },
+    "Изменений в файлах нет": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لا تغييرات في الملفات"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keine Änderungen an Dateien"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No changes in files"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sin cambios en los archivos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucun fichier modifié"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tidak ada perubahan pada file"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nessuna modifica ai file"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ファイルの変更はありません"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "파일 변경 없음"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Brak zmian w plikach"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nenhuma alteração nos arquivos"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Змін у файлах немає"
           }
         }
       }
@@ -46887,6 +47119,82 @@
         }
       }
     },
+    "Когда задачу получили оба, в меню любой из двух задач есть «Сравнить с…»: ответы рядом, изменённые файлы каждого, и отмечены те, что изменили оба. Клик по уведомлению о паре открывает то же окно.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "When both got the task, either task's menu has “Compare with…”: the answers side by side, the files each one changed, and those both changed are marked. A click on the pair's notification opens the same window."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Коли завдання отримали обидва, у меню будь-якого з двох завдань є «Порівняти з…»: відповіді поруч, змінені файли кожного, і позначено ті, що змінили обидва. Клік по сповіщенню про пару відкриває те саме вікно."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wenn beide die Aufgabe bekommen haben, steht im Menü jeder der beiden Aufgaben „Mit … vergleichen“: die Antworten nebeneinander, die geänderten Dateien jedes Dienstes, und markiert sind die, die beide geändert haben. Ein Klick auf die Mitteilung über das Paar öffnet dasselbe Fenster."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quand les deux ont reçu la tâche, le menu de chacune des deux tâches propose « Comparer avec… » : les réponses côte à côte, les fichiers modifiés par chacun, et ceux que les deux ont modifiés sont signalés. Un clic sur la notification de la paire ouvre la même fenêtre."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cuando ambos recibieron la tarea, el menú de cualquiera de las dos tiene «Comparar con…»: las respuestas lado a lado, los archivos que cambió cada uno, y se marcan los que cambiaron ambos. Un clic en la notificación del par abre la misma ventana."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quando entrambi hanno ricevuto l’attività, il menu di una delle due ha «Confronta con…»: le risposte affiancate, i file modificati da ciascuno, e sono segnati quelli modificati da entrambi. Un clic sulla notifica della coppia apre la stessa finestra."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quando os dois receberam a tarefa, o menu de qualquer uma das duas tem “Comparar com…”: as respostas lado a lado, os arquivos que cada um alterou, e os que ambos alteraram ficam marcados. Um clique na notificação do par abre a mesma janela."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gdy zadanie dostały oba, w menu każdego z dwóch zadań jest „Porównaj z…”: odpowiedzi obok siebie, pliki zmienione przez każdy z nich, a te zmienione przez oba są oznaczone. Kliknięcie powiadomienia o parze otwiera to samo okno."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "両方がタスクを受け取ると、どちらのタスクのメニューにも「…と比較」が出ます。回答を並べて表示し、それぞれが変更したファイルを示し、両方が変更したファイルには印が付きます。ペアの通知をクリックしても同じウインドウが開きます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "둘 다 작업을 받으면 두 작업 중 어느 쪽 메뉴에든 “…와 비교”가 있습니다. 답변을 나란히 보여 주고, 각자 변경한 파일을 보여 주며, 둘 다 변경한 파일은 표시됩니다. 쌍 알림을 클릭해도 같은 윈도우가 열립니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "عندما يحصل كلاهما على المهمة، تجد في قائمة أي من المهمتين «مقارنة مع…»: الإجابتان جنبًا إلى جنب، والملفات التي غيّرها كل منهما، مع تمييز الملفات التي غيّرها كلاهما. النقر على إشعار الزوج يفتح النافذة نفسها."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Saat keduanya mendapat tugas, menu salah satu dari dua tugas itu punya “Bandingkan dengan…”: jawaban berdampingan, file yang diubah masing-masing, dan file yang diubah keduanya ditandai. Klik pada notifikasi pasangan membuka jendela yang sama."
+          }
+        }
+      }
+    },
     "Когда сессия или неделя дошла до порога, фоновые задачи замирают там, где были, а запланированные ждут. После сброса лимита работа продолжается сама. Так задача не обрывается на полпути из-за лимита.": {
       "localizations": {
         "ar": {
@@ -47344,6 +47652,7 @@
       }
     },
     "Команд нет — добавьте в Настройках → «Модули».": {
+      "extractionState": "stale",
       "localizations": {
         "ar": {
           "stringUnit": {
@@ -47724,6 +48033,7 @@
       }
     },
     "Команда пустая — заполните её в Настройках → «Модули».": {
+      "extractionState": "stale",
       "localizations": {
         "ar": {
           "stringUnit": {
@@ -48560,6 +48870,7 @@
       }
     },
     "Компьютер засыпает как обычно": {
+      "extractionState": "stale",
       "localizations": {
         "ar": {
           "stringUnit": {
@@ -48636,6 +48947,7 @@
       }
     },
     "Компьютер не засыпает, пока работает Claude, на время, при подключённом питании или мониторе, пока открыты выбранные приложения.": {
+      "extractionState": "stale",
       "localizations": {
         "ar": {
           "stringUnit": {
@@ -49092,6 +49404,7 @@
       }
     },
     "Корзина очищается только после подтверждения.": {
+      "extractionState": "stale",
       "localizations": {
         "ar": {
           "stringUnit": {
@@ -49168,6 +49481,7 @@
       }
     },
     "Корзина уже пуста": {
+      "extractionState": "stale",
       "localizations": {
         "ar": {
           "stringUnit": {
@@ -50618,6 +50932,7 @@
       }
     },
     "Лимиты главного сервиса идут первыми в панели и показаны на значке в трее. «Автоматически» — Claude, а без него первый сервис, у которого есть лимиты.": {
+      "extractionState": "stale",
       "localizations": {
         "ar": {
           "stringUnit": {
@@ -51835,6 +52150,7 @@
       }
     },
     "Любое сработавшее правило не даёт компьютеру уснуть; вручную — переключателем и таймерами в панели. Системные настройки не меняются: как только правил нет, компьютер засыпает как обычно. Внешний монитор — второй экран ноутбука или любой экран компьютера без батареи.": {
+      "extractionState": "stale",
       "localizations": {
         "ar": {
           "stringUnit": {
@@ -54794,6 +55110,83 @@
           "stringUnit": {
             "state": "translated",
             "value": "На екранах без виїмки — пігулка вгорі по центру."
+          }
+        }
+      }
+    },
+    "На этой системе ключи API пока негде хранить: работают только серверы без ключа (Ollama, LM Studio).": {
+      "extractionState": "stale",
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لا يوجد في هذا النظام مكان لحفظ مفاتيح API بعد: تعمل فقط الخوادم التي لا تحتاج إلى مفتاح (Ollama وLM Studio)."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dieses System hat noch keinen Ort für API-Schlüssel: Es funktionieren nur Server ohne Schlüssel (Ollama, LM Studio)."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This system has no place to keep API keys yet: only servers that need no key work (Ollama, LM Studio)."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Este sistema aún no tiene dónde guardar las claves de API: solo funcionan los servidores sin clave (Ollama, LM Studio)."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ce système n’a pas encore où conserver les clés d’API : seuls les serveurs sans clé fonctionnent (Ollama, LM Studio)."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sistem ini belum punya tempat untuk menyimpan kunci API: hanya server tanpa kunci yang berfungsi (Ollama, LM Studio)."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Questo sistema non ha ancora dove conservare le chiavi API: funzionano solo i server senza chiave (Ollama, LM Studio)."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "このシステムにはまだ API キーの保存先がありません。キー不要のサーバー（Ollama、LM Studio）のみ使えます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이 시스템에는 아직 API 키를 보관할 곳이 없습니다. 키가 필요 없는 서버(Ollama, LM Studio)만 작동합니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ten system nie ma jeszcze gdzie przechowywać kluczy API: działają tylko serwery bez klucza (Ollama, LM Studio)."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Este sistema ainda não tem onde guardar chaves de API: só funcionam servidores sem chave (Ollama, LM Studio)."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "У цій системі ще ніде зберігати ключі API: працюють лише сервери без ключа (Ollama, LM Studio)."
           }
         }
       }
@@ -58827,6 +59220,7 @@
       }
     },
     "Не давать компьютеру засыпать, пока не выключите": {
+      "extractionState": "stale",
       "localizations": {
         "ar": {
           "stringUnit": {
@@ -63334,6 +63728,82 @@
         }
       }
     },
+    "Нет пары задач для сравнения": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "لا يوجد زوج مهام للمقارنة"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kein Aufgabenpaar zum Vergleichen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No pair of tasks to compare"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No hay un par de tareas para comparar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucune paire de tâches à comparer"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tidak ada pasangan tugas untuk dibandingkan"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nessuna coppia di attività da confrontare"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "比較するタスクのペアがありません"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "비교할 작업 쌍이 없습니다"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Brak pary zadań do porównania"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nenhum par de tarefas para comparar"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Немає пари завдань для порівняння"
+          }
+        }
+      }
+    },
     "Нет профиля: панель показывает модули профиля": {
       "localizations": {
         "ar": {
@@ -66456,6 +66926,82 @@
         }
       }
     },
+    "Оба изменили файлов: %lld": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ملفات غيّرها كلاهما: %lld"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Von beiden geänderte Dateien: %lld"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Files changed by both: %lld"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Archivos cambiados por ambos: %lld"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fichiers modifiés par les deux : %lld"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "File yang diubah keduanya: %lld"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "File modificati da entrambi: %lld"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "両方が変更したファイル：%lld"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "둘 다 변경한 파일: %lld"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pliki zmienione przez oba: %lld"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arquivos alterados por ambos: %lld"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Обидва змінили файлів: %lld"
+          }
+        }
+      }
+    },
     "Обзор чайников": {
       "localizations": {
         "ar": {
@@ -68283,16 +68829,10 @@
     },
     "Окно «История расхода» открывается разделом «Сегодня»: расход по проектам, фоновые задачи и лимиты. То же раз в день приходит в Telegram, если включить «Итог дня в Telegram» на странице «Лимиты AI». Там же цена подписки сравнивается с расходом по вашей цене API.": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "The Usage History window opens with “Today”: spend by project, background tasks and limits. The same comes to Telegram once a day if you turn on “Day summary in Telegram” on the “AI limits” page. The window also compares the plan’s price with the spend at your API price."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Вікно «Історія витрат» відкривається розділом «Сьогодні»: витрата за проєктами, фонові завдання й ліміти. Те саме раз на день надходить у Telegram, якщо ввімкнути «Підсумок дня в Telegram» на сторінці «Ліміти AI». Там само ціна підписки порівнюється з витратою за вашою ціною API."
+            "value": "تبدأ نافذة «سجل الاستهلاك» بقسم «اليوم»: الاستهلاك حسب المشاريع، والمهام الخلفية، والحدود. يصل الشيء نفسه مرة في اليوم إلى Telegram إذا فعّلت «ملخص اليوم في Telegram» في صفحة «حدود الذكاء الاصطناعي». وهناك أيضًا يُقارن سعر الاشتراك بالاستهلاك بسعر الـ API لديك."
           }
         },
         "de": {
@@ -68301,10 +68841,10 @@
             "value": "Das Fenster „Verbrauchsverlauf“ beginnt mit „Heute“: Verbrauch nach Projekten, Hintergrundaufgaben und Limits. Dasselbe kommt einmal täglich in Telegram, wenn Sie „Tagesbilanz in Telegram“ auf der Seite „KI-Limits“ einschalten. Dort wird auch der Abopreis mit dem Verbrauch zu Ihrem API-Preis verglichen."
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "La fenêtre « Historique de consommation » s’ouvre sur « Aujourd’hui » : consommation par projet, tâches en arrière-plan et limites. La même chose arrive une fois par jour dans Telegram si vous activez « Bilan du jour dans Telegram » sur la page « Limites d’IA ». La fenêtre compare aussi le prix de l’abonnement à la consommation à votre prix API."
+            "value": "The Usage History window opens with “Today”: spend by project, background tasks and limits. The same comes to Telegram once a day if you turn on “Day summary in Telegram” on the “AI limits” page. The window also compares the plan’s price with the spend at your API price."
           }
         },
         "es": {
@@ -68313,22 +68853,22 @@
             "value": "La ventana «Historial de consumo» se abre con «Hoy»: gasto por proyecto, tareas en segundo plano y límites. Lo mismo llega una vez al día a Telegram si activas «Resumen del día en Telegram» en la página «Límites de IA». Allí también se compara el precio de la suscripción con el gasto a tu precio de API."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La fenêtre « Historique de consommation » s’ouvre sur « Aujourd’hui » : consommation par projet, tâches en arrière-plan et limites. La même chose arrive une fois par jour dans Telegram si vous activez « Bilan du jour dans Telegram » sur la page « Limites d’IA ». La fenêtre compare aussi le prix de l’abonnement à la consommation à votre prix API."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jendela “Riwayat pemakaian” dibuka dengan “Hari ini”: pemakaian per proyek, tugas latar belakang, dan batas. Hal yang sama dikirim sekali sehari ke Telegram jika Anda menyalakan “Ringkasan hari ini di Telegram” di halaman “Batas AI”. Di sana harga langganan juga dibandingkan dengan pemakaian menurut harga API Anda."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "La finestra «Cronologia dei consumi» si apre con «Oggi»: consumo per progetto, attività in background e limiti. Lo stesso arriva una volta al giorno in Telegram se attivi «Riepilogo del giorno in Telegram» nella pagina «Limiti IA». Lì il prezzo dell’abbonamento viene anche confrontato con il consumo al tuo prezzo API."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "A janela “Histórico de consumo” abre com “Hoje”: gasto por projeto, tarefas em segundo plano e limites. O mesmo chega uma vez por dia no Telegram se você ativar “Resumo do dia no Telegram” na página “Limites de IA”. Ali também o preço da assinatura é comparado com o gasto pelo seu preço de API."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Okno „Historia zużycia” otwiera sekcja „Dziś”: zużycie według projektów, zadania w tle i limity. To samo przychodzi raz dziennie na Telegram, jeśli włączysz „Podsumowanie dnia w Telegramie” na stronie „Limity AI”. Tam też cena subskrypcji jest porównywana ze zużyciem po Twojej cenie API."
           }
         },
         "ja": {
@@ -68343,16 +68883,22 @@
             "value": "«사용 기록» 창은 «오늘»로 시작합니다: 프로젝트별 사용량, 백그라운드 작업, 한도. «AI 한도» 페이지에서 «오늘의 요약을 Telegram으로»를 켜면 같은 내용이 하루 한 번 Telegram으로 옵니다. 이 창에서는 구독 가격과 내 API 가격 기준 사용량도 비교합니다."
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "تبدأ نافذة «سجل الاستهلاك» بقسم «اليوم»: الاستهلاك حسب المشاريع، والمهام الخلفية، والحدود. يصل الشيء نفسه مرة في اليوم إلى Telegram إذا فعّلت «ملخص اليوم في Telegram» في صفحة «حدود الذكاء الاصطناعي». وهناك أيضًا يُقارن سعر الاشتراك بالاستهلاك بسعر الـ API لديك."
+            "value": "Okno „Historia zużycia” otwiera sekcja „Dziś”: zużycie według projektów, zadania w tle i limity. To samo przychodzi raz dziennie na Telegram, jeśli włączysz „Podsumowanie dnia w Telegramie” na stronie „Limity AI”. Tam też cena subskrypcji jest porównywana ze zużyciem po Twojej cenie API."
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Jendela “Riwayat pemakaian” dibuka dengan “Hari ini”: pemakaian per proyek, tugas latar belakang, dan batas. Hal yang sama dikirim sekali sehari ke Telegram jika Anda menyalakan “Ringkasan hari ini di Telegram” di halaman “Batas AI”. Di sana harga langganan juga dibandingkan dengan pemakaian menurut harga API Anda."
+            "value": "A janela “Histórico de consumo” abre com “Hoje”: gasto por projeto, tarefas em segundo plano e limites. O mesmo chega uma vez por dia no Telegram se você ativar “Resumo do dia no Telegram” na página “Limites de IA”. Ali também o preço da assinatura é comparado com o gasto pelo seu preço de API."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Вікно «Історія витрат» відкривається розділом «Сьогодні»: витрата за проєктами, фонові завдання й ліміти. Те саме раз на день надходить у Telegram, якщо ввімкнути «Підсумок дня в Telegram» на сторінці «Ліміти AI». Там само ціна підписки порівнюється з витратою за вашою ціною API."
           }
         }
       }
@@ -72848,6 +73394,7 @@
       }
     },
     "Открыть Диспетчер задач": {
+      "extractionState": "stale",
       "localizations": {
         "ar": {
           "stringUnit": {
@@ -73908,6 +74455,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Відкрити панель із будь-якого застосунку. Сполучення — у Налаштуваннях → «Клавіші» → «Відкривати панель»."
+          }
+        }
+      }
+    },
+    "Открыть папку": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "فتح المجلد"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ordner öffnen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open Folder"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abrir carpeta"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ouvrir le dossier"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buka Folder"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apri cartella"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "フォルダを開く"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "폴더 열기"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otwórz folder"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abrir pasta"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Відкрити папку"
           }
         }
       }
@@ -89651,6 +90274,7 @@
       }
     },
     "Проект — тот, что в заголовке окна впереди, иначе прошлый. Claude Code и Codex — в фоне или в Терминале; другие агенты открываются в Терминале, задача — в буфере обмена. Из скрипта: claudepult --app-command quick-prompt.": {
+      "extractionState": "stale",
       "localizations": {
         "ar": {
           "stringUnit": {
@@ -94679,6 +95303,7 @@
       }
     },
     "Ресурсы компьютера": {
+      "extractionState": "stale",
       "localizations": {
         "ar": {
           "stringUnit": {
@@ -97193,6 +97818,7 @@
       }
     },
     "Свои кнопки: скрипт в фоне или в Терминале, ссылка, файл, папка или программа.": {
+      "extractionState": "stale",
       "localizations": {
         "ar": {
           "stringUnit": {
@@ -101077,6 +101703,7 @@
       }
     },
     "Система сообщает о критической нехватке памяти. Закройте лишние приложения.": {
+      "extractionState": "stale",
       "localizations": {
         "ar": {
           "stringUnit": {
@@ -101532,6 +102159,82 @@
         }
       }
     },
+    "Скопировано": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تم النسخ"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kopiert"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copied"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copiado"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copié"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Disalin"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copiato"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "コピーしました"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "복사됨"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skopiowano"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copiado"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Скопійовано"
+          }
+        }
+      }
+    },
     "Скопировать": {
       "localizations": {
         "ar": {
@@ -101604,6 +102307,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Скопіювати"
+          }
+        }
+      }
+    },
+    "Скопировать команду сравнения": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "نسخ أمر المقارنة"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diff-Befehl kopieren"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copy Diff Command"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copiar el comando de comparación"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copier la commande de comparaison"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Salin Perintah Perbandingan"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copia il comando di confronto"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "比較コマンドをコピー"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "비교 명령 복사"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skopiuj polecenie porównania"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copiar comando de comparação"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Скопіювати команду порівняння"
           }
         }
       }
@@ -101913,6 +102692,7 @@
       }
     },
     "Скрипт в фоне запускается в домашней папке (PowerShell на Windows, sh на Linux), итог приходит уведомлением; «в Терминале» — открывает новое окно. Открыть — ссылка (https://…) или путь (~/…).": {
+      "extractionState": "stale",
       "localizations": {
         "ar": {
           "stringUnit": {
@@ -106468,6 +107248,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Порівняти"
+          }
+        }
+      }
+    },
+    "Сравнить с %@": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "مقارنة مع %@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mit %@ vergleichen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Compare with %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comparar con %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comparer avec %@"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bandingkan dengan %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Confronta con %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@と比較"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@와 비교"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Porównaj z %@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comparar com %@"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Порівняти з %@"
           }
         }
       }
@@ -111413,6 +112269,7 @@
       }
     },
     "Тёмная тема, значки на рабочем столе, блокировка и выключение экрана, корзина — в один клик.": {
+      "extractionState": "stale",
       "localizations": {
         "ar": {
           "stringUnit": {
@@ -116892,6 +117749,7 @@
       }
     },
     "Фон — codex exec без окна, итог уведомлением; Терминал — задача в буфере обмена, вставьте Ctrl+V": {
+      "extractionState": "stale",
       "localizations": {
         "ar": {
           "stringUnit": {
@@ -122305,6 +123163,82 @@
         }
       }
     },
+    "Этот файл изменили оба": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "غيّر كلاهما هذا الملف"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diese Datei haben beide geändert"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Both changed this file"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ambos cambiaron este archivo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les deux ont modifié ce fichier"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keduanya mengubah file ini"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Entrambi hanno modificato questo file"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "このファイルは両方が変更しました"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "둘 다 이 파일을 변경했습니다"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ten plik zmieniły oba"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ambos alteraram este arquivo"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Цей файл змінили обидва"
+          }
+        }
+      }
+    },
     "Язык в строке меню": {
       "localizations": {
         "ar": {
@@ -123832,6 +124766,7 @@
       }
     },
     "ветка %@: %lld коммит(ов) только на этом компьютере": {
+      "extractionState": "stale",
       "localizations": {
         "ar": {
           "stringUnit": {
@@ -129158,6 +130093,7 @@
       }
     },
     "команда, например: winget upgrade --all": {
+      "extractionState": "stale",
       "localizations": {
         "ar": {
           "stringUnit": {
@@ -140746,158 +141682,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "❌ CI впав: %@ #%lld"
-          }
-        }
-      }
-    },
-    "На этой системе ключи API пока негде хранить: работают только серверы без ключа (Ollama, LM Studio).": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "لا يوجد في هذا النظام مكان لحفظ مفاتيح API بعد: تعمل فقط الخوادم التي لا تحتاج إلى مفتاح (Ollama وLM Studio)."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dieses System hat noch keinen Ort für API-Schlüssel: Es funktionieren nur Server ohne Schlüssel (Ollama, LM Studio)."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "This system has no place to keep API keys yet: only servers that need no key work (Ollama, LM Studio)."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Este sistema aún no tiene dónde guardar las claves de API: solo funcionan los servidores sin clave (Ollama, LM Studio)."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ce système n’a pas encore où conserver les clés d’API : seuls les serveurs sans clé fonctionnent (Ollama, LM Studio)."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sistem ini belum punya tempat untuk menyimpan kunci API: hanya server tanpa kunci yang berfungsi (Ollama, LM Studio)."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Questo sistema non ha ancora dove conservare le chiavi API: funzionano solo i server senza chiave (Ollama, LM Studio)."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "このシステムにはまだ API キーの保存先がありません。キー不要のサーバー（Ollama、LM Studio）のみ使えます。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "이 시스템에는 아직 API 키를 보관할 곳이 없습니다. 키가 필요 없는 서버(Ollama, LM Studio)만 작동합니다."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ten system nie ma jeszcze gdzie przechowywać kluczy API: działają tylko serwery bez klucza (Ollama, LM Studio)."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Este sistema ainda não tem onde guardar chaves de API: só funcionam servidores sem chave (Ollama, LM Studio)."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "У цій системі ще ніде зберігати ключі API: працюють лише сервери без ключа (Ollama, LM Studio)."
-          }
-        }
-      }
-    },
-    "%@ открыт в Терминале — задача скопирована, вставьте Ctrl+V": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "فُتح %@ في الطرفية — نُسخت المهمة، الصقها بـ Ctrl+V"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ im Terminal geöffnet — die Aufgabe ist kopiert, mit Strg+V einfügen"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ opened in Terminal — the task is on the clipboard, paste with Ctrl+V"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ abierto en Terminal — la tarea está copiada, pégala con Ctrl+V"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ ouvert dans Terminal — la tâche est copiée, collez-la avec Ctrl+V"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ dibuka di Terminal — tugas sudah disalin, tempel dengan Ctrl+V"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ aperto nel Terminale — l’attività è copiata, incollala con Ctrl+V"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ をターミナルで開きました — タスクはコピー済みです。Ctrl+V で貼り付けてください"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@을(를) 터미널에서 열었습니다 — 작업이 복사되어 있으니 Ctrl+V로 붙여 넣으세요"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ otwarty w Terminalu — zadanie jest skopiowane, wklej je przez Ctrl+V"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ aberto no Terminal — a tarefa foi copiada, cole com Ctrl+V"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ відкрито в Терміналі — завдання скопійовано, вставте Ctrl+V"
           }
         }
       }

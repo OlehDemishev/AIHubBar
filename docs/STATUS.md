@@ -5,6 +5,7 @@
 **Updated:** 2026-11-19
 
 **Now:**
+- 2026-11-19: Mac — the pair's results can be compared: «Сравнить с …» in a pair task's menu opens both answers and changed files side by side (branch `feat/pair-compare`); goes out with 0.12.0, not seen live
 - 2026-11-19: Windows 0.1.0 published as an unsigned pre-release (tag `desktop-v0.1.0`); «latest» stays the Mac's v0.11.0
 - 2026-11-19: Windows — ready for SignPath Foundation signing: CODE_SIGNING.md, the release workflow, artifact configurations (#450, merged; the release workflow run by hand on main built, installed and checked an unsigned installer)
 - 2026-11-19: Windows stage 7 begun — the installer registers `.claudepult` and puts `claudepult` on the Path; CI installs, checks and uninstalls it (#448, merged; the check passed on windows-latest)
@@ -109,6 +110,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-19 — Comparing the pair's results (branch `feat/pair-compare`)
+
+Done: after «одна задача двум» the two results could only be compared by hand. Now a pair's run has «Сравнить с Codex / Claude Code» in its menu: the window «Claude и Codex: сравнение» shows both sides — state, branch, the answer, the files each one changed with their lines, files both changed are marked — with «Журнал» and «Открыть папку» per side and «Скопировать команду сравнения» (`git diff <branch> <branch>`). The pair's notification and Telegram message now say how much each changed, and a click on the notification opens the window. `PairCompare` (model), `PairCompareWindow`, `RunStore.selectedPair`. A help fact «Сравнение» in 13 languages, a line in `docs/release-notes/0.12.0.md`.
+Checked: `scripts/check.sh` green (a new test: partner, sides, common files, the line, the command), catalog 1885 keys with 0 problems, help exported.
+Left: the window was not seen live — it needs a real pair of runs or fake records in an isolated copy, and opening a window takes the keyboard. No diff view inside the app: the command is copied for a terminal.
 
 ## 2026-11-19 — Windows 0.1.0 pre-release published (tag `desktop-v0.1.0`)
 

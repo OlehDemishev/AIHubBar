@@ -458,6 +458,13 @@ private struct SessionRowView: View {
         if let run = row.run {
             Button("Журнал") { showLog(run) }
             if run.isPaused { Button("Продолжить сейчас") { launcher.resumeNow(run.id) } }
+            if let partner = PairCompare.partner(of: run, runs: runs.runs) {
+                Button("Сравнить с \(partner.agentTitle)") {
+                    runs.selectedPair = run.pair
+                    NSApp.activate()
+                    openWindow(.pairCompare)
+                }
+            }
             if launcher.canReview(run) {
                 Button("Проверить в \(CrossReview.reviewerIsCodex(run) ? AgentKind.codex.title : AgentKind.claudeCode.title)") { launcher.review(run) }
             }

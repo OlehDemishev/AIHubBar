@@ -282,6 +282,10 @@
               "name" : "Claude dan Codex bersama"
             },
             {
+              "detail" : "Saat keduanya mendapat tugas, menu salah satu dari dua tugas itu punya “Bandingkan dengan…”: jawaban berdampingan, file yang diubah masing-masing, dan file yang diubah keduanya ditandai. Klik pada notifikasi pasangan membuka jendela yang sama.",
+              "name" : "Perbandingan"
+            },
+            {
               "detail" : "Tugas latar belakang: apa yang dilakukan Claude, langkah demi langkah.",
               "name" : "Log"
             },
