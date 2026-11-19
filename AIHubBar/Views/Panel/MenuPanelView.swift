@@ -400,6 +400,20 @@ struct MenuPanelView: View {
             .help(settings.notch.hidden ? String(localized: "Показать остров у чёлки") : String(localized: "Скрыть остров у чёлки"))
             .accessibilityLabel(settings.notch.hidden ? String(localized: "Показать остров у чёлки") : String(localized: "Скрыть остров у чёлки"))
         }
+        // Telegram notifications off and on in one click (asked by Oleh 2026-11-19). Here and not only as a tile:
+        // «Быстрые переключатели» is switched off in his profile, so the tile alone was out of sight.
+        if modes.isOn(.telegram) {
+            let muted = settings.telegramBot.isMuted(now: .now)
+            Button {
+                settings.telegramBot.toggleMute(now: .now)
+                AppLog.info("Telegram notifications \(settings.telegramBot.mutedUntil == nil ? "on" : "off") from the panel's header")
+            } label: {
+                Image(systemName: muted ? "bell.slash.fill" : "bell")
+                    .foregroundStyle(muted ? Color.orange : Color.primary)
+            }
+            .help(muted ? String(localized: "Включить уведомления в Telegram") : String(localized: "Выключить уведомления в Telegram — пока не включите снова"))
+            .accessibilityLabel(muted ? String(localized: "Включить уведомления в Telegram") : String(localized: "Выключить уведомления в Telegram"))
+        }
         // Settings, help and quit were three menu-like rows at the bottom; as icons they no longer outweigh the content.
         Button { openSettings() } label: { Label("Настройки… (⌘,)", systemImage: "gearshape").labelStyle(.iconOnly) }
         .help("Настройки… (⌘,)")

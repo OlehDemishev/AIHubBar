@@ -5,6 +5,7 @@
 **Updated:** 2026-11-19
 
 **Now:**
+- 2026-11-19: Mac — second live pass over the pair; four fixes (`fix/live-pass-pair-diff`, merged 2026-11-19): diff lines keep their width, more of Codex's file links cleaned, both sides of a pair get committed, a bell in the panel's header turns Telegram notifications off
 - 2026-11-19: Windows 0.1.1 published as an unsigned pre-release (tag `desktop-v0.1.1`) on Oleh's «Да, выпускай»: the fixes of the first live day and the tray icon styles; installed on the laptop over 0.1.0, the hooks there now point at the installed program; «latest» stays the Mac's v0.11.0
 - 2026-11-19: Mac — the pair's comparison shows line-by-line differences: a click on a file, and one variant against the other (`feat/pair-diff`, merged 2026-11-19); goes out with 0.12.0, not seen live
 - 2026-11-19: Windows — a background run started from the panel in a project with spaces in its path ran `npm test` in a subfolder with a space in its name at the first try (journal; no code changed)
@@ -127,6 +128,11 @@
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
 
+## 2026-11-19 — Second live pass over the pair, four fixes (branch `fix/live-pass-pair-diff`)
+
+Done: on Oleh's «Живая проверка» an isolated copy built from `main` ran one task for Claude and Codex again, with no mouse. Confirmed live from #458: the branches are named `claude/claude-…` and `claude/codex-…`, AI Hub Bar committed Codex's worktree changes and said so in the summary, `--app-command pair-compare` opens the window. Seen live from #470: a click on a file opens its diff, «Различия между вариантами» opens the branch diff. Four fixes. 1) The diff's lines were wrapped into a column a few words wide (a two-way scroll view): each line keeps its own width now. 2) Codex writes file links as `[name](</path with spaces>)` too; those are now also turned into the file's name. 3) Claude left its work uncommitted in the pair (its background rules denied `Bash`), so «Различия между вариантами» showed Codex against the empty base: in a pair AI Hub Bar now commits what either side left, with a line in the summary. 4) The «Telegram» tile was out of Oleh's sight — «Быстрые переключатели» is switched off in his profile; a bell in the panel's header now does the same (shown while the Telegram module is on, orange and crossed while off).
+Checked: `scripts/check.sh` green in the worktree (a new case for the link form). The pair itself: Claude 25 s, Codex 45 s, both succeeded.
+Left: the four fixes are not seen live — the bell needs the panel, and one posted click on the isolated copy's menu bar item did not open it (not repeated). The help fact still names only the tile. The Telegram buttons, review and handover are still not seen.
 ## 2026-11-19 — Windows: what stopped a terminal launch in a new worktree (no branch of code, `chore/desktop-first-run-note`)
 
 Done: no code changed. The two stops seen today when «Своя задача…» opened Claude in a terminal in a new worktree were Claude Code's once-per-computer questions, not the worktree's: the welcome screen with the theme (interactive `claude` had never been opened on the laptop) and «Claude in Chrome extension detected». The second one is still unanswered, because the agent closed that window.

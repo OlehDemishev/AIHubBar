@@ -32,6 +32,11 @@ struct TelegramBotSettings: Codable, Equatable, Sendable {
     /// «Тишина» is on: for an hour, or until switched on.
     func isMuted(now: Date) -> Bool { (mutedUntil ?? .distantPast) > now }
 
+    /// The panel's switch: off until switched on again; on also ends «Тишина на 1 ч».
+    mutating func toggleMute(now: Date) {
+        mutedUntil = isMuted(now: now) ? nil : Self.untilSwitchedOn
+    }
+
     /// «Тишина до 14:30», or «Тишина, пока не включите» for the one with no end; nil when not muted.
     func mutedTitle(now: Date) -> String? {
         guard let mutedUntil, mutedUntil > now else { return nil }
