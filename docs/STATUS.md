@@ -76,6 +76,7 @@
 - check on the Air: the island at the real notch
 - promotion (docs/LAUNCH.md): r/ClaudeAI, the lists, r/macapps, Show HN, Product Hunt, Homebrew
 - content (docs/specs/SPEC-content.md, agreed): stage 2 «Версии», then batch tasks; better after the first feedback from people
+- Windows, on the laptop, first (after `git pull`): the tray icon styles live — run the app (`npx tauri dev` in `desktop/`), open Settings → «Сервисы AI» → «Значок в трее», press each of the seven tiles and screenshot the tray after each (pin the icon out of «^» first); note the display scale, whether each style reads at that size, whether the tiles' samples match the icon, and how the orange dot sits on «Число и полоска»; write what was seen into STATUS → Checked and leave the choice of the default to Oleh
 - Windows: on the laptop the live check of SPEC-windows §11.4 (with a real permission request answered from the panel) the «Проекты» card's buttons, a Claude launch in Windows Terminal and one in the background (do the `PowerShell(…)` rules let it build and check a project without Git Bash?); then stage 7 (installer, signing, updates) or the stage 6 leftovers (сочетания клавиш для команд, «Извлечь диски»); stage 3 leftovers («Показать», buttons in the notification) need the laptop
 
 **Needs Oleh:**
