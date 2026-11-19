@@ -93,7 +93,7 @@
 - Windows: left on the laptop — «Следующий шаг» and «Завершить», notifications and their buttons (the agent can't see a toast: its tool hides other programs' windows); the Mac's background runs have the same rules — try one build in a subfolder there; then stage 7 (installer, signing, updates) or the stage 6 leftover («Извлечь диски»)
 
 **Needs Oleh:**
-- Windows laptop, after the next install: Settings → «Модули» → «Быстрые команды» → a command → «Записать», press a combination (say Ctrl+Alt+K), then press it from another program — the command must run. The agent recorded one and saw Windows hold it, but the press itself it delivered as a message, not from the keyboard
+- Windows laptop, after the next install: press a quick command's combination on the real keyboard from another program (Settings → «Модули» → «Быстрые команды» → a command → «Записать») — the agent pressed one as keyboard input with the app's own window in front, and the command ran
 - Windows laptop: a permission request from a real Claude Code session is still not seen — Claude Code there runs in Auto mode and decides routine actions itself. To see one: start `claude --permission-mode default` in a terminal in a project, ask it to create a file, and answer «Разрешить» in AI Hub Bar's panel instead of the terminal; say whether the terminal went on. Also close the terminal tab left in `.claude\worktrees\cb-live-check-of-a-permission` (it keeps that empty folder)
 - Windows laptop: open `claude` in a terminal once and answer its question about the Chrome extension — until then every launch in a terminal stops at it before the task
 - Windows signing with SignPath Foundation (chosen 2026-11-19): 1) MFA on GitHub; 2) apply at signpath.org with the repository, https://github.com/OlehDemishev/AIHubBar/releases/tag/desktop-v0.1.1 as the download page (the unsigned pre-release they want to see) and a short description (CODE_SIGNING.md is the policy); 3) once granted, in SignPath: a project, the GitHub.com trusted build system, artifact configurations `windows-binaries` and `windows-installer` from desktop/signpath/, signing policy `release-signing` with you as approver, an API token for CI; 4) in the repository: variables SIGNPATH_ORGANIZATION_ID and SIGNPATH_PROJECT_SLUG, secret SIGNPATH_API_TOKEN
@@ -130,6 +130,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-19 — Windows: a quick command's shortcut pressed (no code, branch `chore/desktop-hotkey-press`)
+
+Done: no code changed. The step #475 left unseen: a combination pressed as keyboard input, not posted to the app as a message.
+Checked: live on the laptop, a build from `main` after #475, the installed 0.1.1 quit for the check and started again after it. The settings got, for the check only, the «Быстрые команды» module and one command — a PowerShell script that writes a file in the temp folder — with `hotKey` `{"keyCode": 40, "modifiers": 6144}` (Ctrl+Alt+K), written into `settings.json` while the app was down. With the app's Settings window in front the agent's desktop tool pressed Ctrl+Alt+K (injected keyboard input, the same path as a key): the file appeared within the second. The settings were put back from a copy and the file removed.
+Left: the press came from the agent's tool, not a hand on the keyboard, and with AI Hub Bar's own window in front (the tool may not send keys while another program is in front). The recorder in Settings was not used here — #475 saw it. The installed 0.1.1 has no shortcuts until the next release.
 
 ## 2026-11-19 — Windows: keyboard shortcuts for quick commands (branch `feat/desktop-command-shortcuts`)
 
