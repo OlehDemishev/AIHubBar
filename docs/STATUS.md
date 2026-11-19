@@ -5,6 +5,7 @@
 **Updated:** 2026-11-19
 
 **Now:**
+- 2026-11-19: Windows — «Два столбика» stays the tray icon's default (Oleh's choice); the dot in the icon's corner has a clear rim, so an orange dot is seen next to orange digits or bars (branch `fix/desktop-tray-dot`; seen live at 125 %)
 - 2026-11-19: Mac — the pair run live in an isolated copy and the comparison window seen; three fixes (`fix/pair-live-findings`, merged 2026-11-19): AI Hub Bar commits Codex's changes in a worktree, the pair's branches carry the service's name first, `--app-command pair-compare`
 - 2026-11-19: Windows — the tray icon shows two limits (session and week) in one of seven styles chosen in Settings → «Сервисы AI» → «Значок в трее»; «Два столбика» is the default (#457, merged; CI green on Windows and Linux); seen live on the laptop at 125 %: all seven draw as their tiles, the orange dot is lost on «Число и полоска» (journal, docs/images/tray-styles-windows.png)
 - 2026-11-19: Windows — first live pass on the laptop (branch `fix/desktop-live-pass`): the installed 0.1.0 opens Settings as a white window that can't be closed; fixed with the tray hint cut by Windows and the panel's scrollbars. 0.1.0 as published still has the white Settings
@@ -78,11 +79,9 @@
 - check on the Air: the island at the real notch
 - promotion (docs/LAUNCH.md): r/ClaudeAI, the lists, r/macapps, Show HN, Product Hunt, Homebrew
 - content (docs/specs/SPEC-content.md, agreed): stage 2 «Версии», then batch tasks; better after the first feedback from people
-- Windows: the «ждёт» dot on «Число и полоска» merges with orange digits — give the dot an outline or another place (after Oleh picks the default style)
 - Windows: on the laptop the live check of SPEC-windows §11.4 (with a real permission request answered from the panel) the «Проекты» card's buttons, a Claude launch in Windows Terminal and one in the background (do the `PowerShell(…)` rules let it build and check a project without Git Bash?); then stage 7 (installer, signing, updates) or the stage 6 leftovers (сочетания клавиш для команд, «Извлечь диски»); stage 3 leftovers («Показать», buttons in the notification) need the laptop
 
 **Needs Oleh:**
-- Windows: pick the tray icon's default style from docs/images/tray-styles-windows.png (all seven at real size and ×6, 125 % scale; now «Два столбика») — the agent finds «Два столбика», «Две полоски» and «Число и полоска» the clearest at that size, «Кольцо в кольце» the weakest
 - Windows: say whether to publish 0.1.1 with the Settings fix (0.1.0 on the pre-release page can't open Settings, the assistant, the calendar or «Быстрый запрос» after the first start) — SignPath will look at that page
 - Windows laptop: Settings → Hooks → «Установить hooks» (it changes `%USERPROFILE%\.claude\settings.json`, so the agent left the click to you), then run `claude` once in a terminal: the sign-in file there is expired, and the Claude desktop app doesn't renew it
 - Windows signing with SignPath Foundation (chosen 2026-11-19): 1) MFA on GitHub; 2) apply at signpath.org with the repository, https://github.com/OlehDemishev/AIHubBar/releases/tag/desktop-v0.1.0 as the download page (the unsigned pre-release they want to see) and a short description (CODE_SIGNING.md is the policy); 3) once granted, in SignPath: a project, the GitHub.com trusted build system, artifact configurations `windows-binaries` and `windows-installer` from desktop/signpath/, signing policy `release-signing` with you as approver, an API token for CI; 4) in the repository: variables SIGNPATH_ORGANIZATION_ID and SIGNPATH_PROJECT_SLUG, secret SIGNPATH_API_TOKEN
@@ -119,6 +118,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-19 — Windows: a clear rim around the tray icon's dot (branch `fix/desktop-tray-dot`)
+
+Done: Oleh chose «Два столбика» as the default style — it already was, nothing to change. The dot in the icon's corner (orange while a session waits, red for a project) gets a clear rim of 5 % of the icon in every style: on «Число и полоска» an orange dot merged with orange digits.
+Checked: `python scripts/strings.py --check`, `cargo test --workspace` on Windows (core 126; a new check: the dot of the digits' colour has nothing right beside or under it). Live on the laptop at 125 %, with sample values from a local patch that was not committed: on «Число и полоска» the dot stands apart from «62», on «Два столбика» apart from the bar.
+Left: on «Число и полоска» the dot with its rim takes the top right corner of the last digit — «62» still reads, the «2» less cleanly. The other five styles with the dot were not looked at live.
 
 ## 2026-11-19 — Windows: the tray icon styles seen live (branch `chore/desktop-tray-styles-live`)
 
