@@ -5,6 +5,7 @@
 **Updated:** 2026-11-19
 
 **Now:**
+- 2026-11-19: Windows — «Извлечь диски» among the quick toggles (branch `feat/desktop-eject-disks`), and 21 texts that stayed Russian in every language are translated now (the toggles' names, the services' «найден» / «нет ключа» and what each service needs); a real eject is not seen — no removable drive on the laptop
 - 2026-11-19: Mac — «Влить в …» in the pair's comparison merges a variant's branch into the branch the project's folder is on, locally and after a confirmation (`feat/pair-merge`, merged 2026-11-19); goes out with 0.12.0, not seen live
 - 2026-11-19: Windows — keyboard shortcuts for «Быстрые команды»: a recorder next to each command in Settings → «Модули», the Mac's `hotKey` kept as it is (⌃ ↔ Ctrl, ⌥ ↔ Alt, ⇧ ↔ Shift, ⌘ ↔ Win), conflicts and a combination Windows refuses said under the command, a warning when Ctrl+Alt is AltGr and would take a character (branch `feat/desktop-command-shortcuts`; seen live on the laptop, the key itself not pressed by hand)
 - 2026-11-19: Mac — «Оставить этот вариант» in the pair's comparison removes the other variant's worktree and branch after a confirmation (`feat/pair-choose`, merged 2026-11-19); goes out with 0.12.0, not seen live
@@ -91,10 +92,11 @@
 - check on the Air: the island at the real notch
 - promotion (docs/LAUNCH.md): r/ClaudeAI, the lists, r/macapps, Show HN, Product Hunt, Homebrew
 - content (docs/specs/SPEC-content.md, agreed): stage 2 «Версии», then batch tasks; better after the first feedback from people
-- Windows: left on the laptop — «Следующий шаг» and «Завершить», notifications and their buttons (the agent can't see a toast: its tool hides other programs' windows); the Mac's background runs have the same rules — try one build in a subfolder there; then stage 7 (installer, signing, updates) or the stage 6 leftover («Извлечь диски»)
+- Windows: left on the laptop — «Следующий шаг» and «Завершить», notifications and their buttons (the agent can't see a toast: its tool hides other programs' windows); the Mac's background runs have the same rules — try one build in a subfolder there; then stage 7 (installer, signing, updates) (stage 6 is done on Windows; «Извлечь диски» on Linux is not built)
 
 **Needs Oleh:**
 - Windows laptop, after the next install: press a quick command's combination on the real keyboard from another program (Settings → «Модули» → «Быстрые команды» → a command → «Записать») — the agent pressed one as keyboard input with the app's own window in front, and the command ran
+- Windows laptop, after the next install: put a USB stick in, Settings → «Модули» → «Быстрые переключатели» on, press «Диски» in the panel — Explorer must show the stick gone and the panel «Извлечено дисков: 1»; then once more with a file from the stick open in a program — the panel must name the drive under «Не получилось». The laptop had no removable drive, so the agent saw only «Нечего извлекать»
 - Windows laptop: a permission request from a real Claude Code session is still not seen — Claude Code there runs in Auto mode and decides routine actions itself. To see one: start `claude --permission-mode default` in a terminal in a project, ask it to create a file, and answer «Разрешить» in AI Hub Bar's panel instead of the terminal; say whether the terminal went on. Also close the terminal tab left in `.claude\worktrees\cb-live-check-of-a-permission` (it keeps that empty folder)
 - Windows laptop: open `claude` in a terminal once and answer its question about the Chrome extension — until then every launch in a terminal stops at it before the task
 - Windows signing with SignPath Foundation (chosen 2026-11-19): 1) MFA on GitHub; 2) apply at signpath.org with the repository, https://github.com/OlehDemishev/AIHubBar/releases/tag/desktop-v0.1.1 as the download page (the unsigned pre-release they want to see) and a short description (CODE_SIGNING.md is the policy); 3) once granted, in SignPath: a project, the GitHub.com trusted build system, artifact configurations `windows-binaries` and `windows-installer` from desktop/signpath/, signing policy `release-signing` with you as approver, an API token for CI; 4) in the repository: variables SIGNPATH_ORGANIZATION_ID and SIGNPATH_PROJECT_SLUG, secret SIGNPATH_API_TOKEN
@@ -132,11 +134,18 @@
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
 
+## 2026-11-19 — Windows: «Извлечь диски» and texts the catalog could not see (branch `feat/desktop-eject-disks`)
+
+Done: on Oleh's «Да, делай», the last stage 6 leftover. `core/src/toggles.rs`: the Mac's `ejectDisks` in its place between «Экран» and «Корзина». On Windows every removable drive with a disk in it (`GetDriveTypeW` says removable — USB sticks, memory cards; an empty card reader is skipped) is locked, dismounted and ejected through `DeviceIoControl` in Microsoft's own order, with no administrator rights; the lock is tried for three seconds, a drive with a file open stays. The panel says the Mac's «Извлечено дисков: N» or «Нечего извлекать», and «Не получилось: E:, G:» for the ones that stayed. An external hard disk is «fixed» to Windows and is left alone. Not on Linux. Found on the way: `s.t(match … { … })` hid its texts from `scripts/strings.py`, so the toggles' names («Тема», «Корзина»…), the services' «найден» / «нет ключа» / «не найден» and what each service needs stayed Russian in every language — the call is inside each arm now (21 more texts in `ui/i18n`, all already in the catalog), and `strings.py` refuses the hidden form.
+Checked: `python scripts/strings.py --check` (563 texts; a probe file with the hidden form made it fail, as it should), `cargo test --workspace` on Windows (the names, the order, the four answers of the report). Live on the laptop, a build from the branch with the «Быстрые переключатели» module on for the check: the tile «Диски» between «Экран» and «Корзина», a click — «✓ Нечего извлекать»; the fixed drives C: and D: untouched. The settings put back, the installed 0.1.1 started again.
+Left: no removable drive on the laptop, so a real eject and the refusal with a file open are not seen (Needs Oleh). The newly translated texts were not looked at in another language. External USB hard disks are not ejected. The installed 0.1.1 has none of this until the next release.
+
 ## 2026-11-19 — Merging a variant of a pair (branch `feat/pair-merge`)
 
 Done: on Oleh's word, the comparison window can finish the job. Each side that ended well has «Влить в <ветка>», where the branch is the one the project's own folder is on: after a confirmation naming both branches and the project, `git merge --no-ff --no-edit` runs in the project's folder — locally, no push. Refused while that folder has uncommitted changes to tracked files or has moved to another branch since the window opened; a merge that stops on conflicts is taken back (`git merge --abort`) and the person is told to merge by hand. The merged side is marked «влит в …». `GitService.currentBranch / mergeBranch`, `GitError.refused`, `BackgroundRun.mergedInto`, `PairCompare.canMerge / mergeWarning`, `RunStore.mergeVariant`. A line in `docs/release-notes/0.12.0.md`.
 Checked: `scripts/check.sh` green in the worktree (a new test for when it is offered); the git commands tried by hand on a scratch repository — a clean merge, and a conflicting one that `merge --abort` left as before.
 Left: not seen live. The worktree of the merged variant is not removed. Nothing is pushed, and no PR is made — by design.
+
 ## 2026-11-19 — Windows: a quick command's shortcut pressed (no code, branch `chore/desktop-hotkey-press`)
 
 Done: no code changed. The step #475 left unseen: a combination pressed as keyboard input, not posted to the app as a message.
