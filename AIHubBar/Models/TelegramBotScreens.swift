@@ -218,7 +218,12 @@ enum BotScreens {
         lines.append(tail.isEmpty ? RunMessage.escape(String(localized: "В журнале пока пусто.")) : "<pre>" + RunMessage.escape(tail.joined(separator: "\n")) + "</pre>")
         var row = [button("🔄", String(localized: "Обновить"), .runLog(run.id))]
         if run.state == .running { row.append(button("⏹", String(localized: "Остановить"), .runStopAsk(run.id))) }
-        return BotMessage(html: lines.joined(separator: "\n"), buttons: [row, [button("🚀", String(localized: "Задача"), .show(.task))]])
+        // The same two actions the run's menu has in the panel.
+        var other: [BotMessage.Button] = []
+        if let reviewer = run.reviewer { other.append(button("🔍", String(localized: "Проверить в \(reviewer)"), .runReview(run.id))) }
+        if let agent = run.handOverTo { other.append(button("➡️", String(localized: "Передать \(agent)"), .runHandOver(run.id))) }
+        return BotMessage(html: lines.joined(separator: "\n"),
+                          buttons: [row] + (other.isEmpty ? [] : [other]) + [[button("🚀", String(localized: "Задача"), .show(.task))]])
     }
 
     static func runStopConfirm(_ run: BotRunLine) -> BotMessage {

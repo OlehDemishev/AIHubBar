@@ -115,6 +115,9 @@ enum BotRoute: Equatable, Sendable {
     case runLog(String)
     case runStopAsk(String)
     case runStop(String)
+    /// A finished run goes to the other service for a review; a paused or failed one goes on in Codex.
+    case runReview(String)
+    case runHandOver(String)
     /// ⚙️: a notification on or off, the quiet hours (nil = none), «Тишина на 1 ч» on or off.
     case event(BotEvent)
     case quiet(QuietHours?)
@@ -158,6 +161,8 @@ enum BotRoute: Equatable, Sendable {
         case let .runLog(id): "rl:\(id)"
         case let .runStopAsk(id): "rs:\(id)"
         case let .runStop(id): "rx:\(id)"
+        case let .runReview(id): "rv:\(id)"
+        case let .runHandOver(id): "rh:\(id)"
         case let .event(event): "ev:\(event.rawValue)"
         case let .quiet(hours): hours.map { "qh:\($0.from):\($0.to)" } ?? "qh:off"
         case let .mute(on): on ? "mute:1" : "mute:0"
@@ -224,6 +229,9 @@ enum BotRoute: Equatable, Sendable {
         case ("rl", 2), ("rs", 2), ("rx", 2):
             guard BotMenuItem.isCommandID(parts[1]) else { return nil }
             self = parts[0] == "rl" ? .runLog(parts[1]) : parts[0] == "rs" ? .runStopAsk(parts[1]) : .runStop(parts[1])
+        case ("rv", 2), ("rh", 2):
+            guard BotMenuItem.isCommandID(parts[1]) else { return nil }
+            self = parts[0] == "rv" ? .runReview(parts[1]) : .runHandOver(parts[1])
         default: return nil
         }
     }
@@ -234,7 +242,7 @@ enum BotRoute: Equatable, Sendable {
         case .show, .cleanupAsk, .allCommands, .menuToggle, .menuColumns, .menuDone, .requestDetails, .limitAlerts,
              .taskProject, .taskCancel, .runLog, .runStopAsk, .event, .quiet, .mute: false
         case .report, .cleanupCheck, .cleanupRun, .answer, .runCommand, .taskGo, .taskForce, .taskAfterReset, .taskWorktree, .runStop,
-             .keepAwake: true
+             .runReview, .runHandOver, .keepAwake: true
         }
     }
 }

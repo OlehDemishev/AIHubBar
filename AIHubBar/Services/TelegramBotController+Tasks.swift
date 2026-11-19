@@ -20,8 +20,14 @@ extension TelegramBotController {
     }
 
     func runLine(_ run: BackgroundRun) -> BotRunLine {
-        BotRunLine(id: run.id, project: run.project, task: run.task, state: run.state, paused: run.isPaused,
-                   startedAt: run.startedAt, pullRequestURL: run.pullRequestURL)
+        var line = BotRunLine(id: run.id, project: run.project, task: run.task, state: run.state, paused: run.isPaused,
+                              startedAt: run.startedAt, pullRequestURL: run.pullRequestURL)
+        // Offered only while tasks may be started from Telegram at all, as «Остановить» is.
+        if tasksAllowed, let launcher {
+            if launcher.canReview(run) { line.reviewer = (CrossReview.reviewerIsCodex(run) ? AgentKind.codex : .claudeCode).title }
+            if Handover.canHandOver(run), launcher.canHandOverPending { line.handOverTo = AgentKind.codex.title }
+        }
+        return line
     }
 
     /// A message while 🚀 waits for the task: it becomes the task (shown back with «Запустить»). Commands and menu

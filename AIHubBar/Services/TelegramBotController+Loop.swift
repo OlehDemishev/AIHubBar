@@ -256,6 +256,18 @@ extension TelegramBotController {
                 AppLog.info("Telegram: background run stopped")
             }
             screen = taskScreen
+        case let .runReview(id):
+            if tasksAllowed, let launcher, let run = runs.run(id: id), launcher.canReview(run) {
+                launcher.review(run)
+                AppLog.info("Telegram: review of a background run started")
+            }
+            screen = taskScreen
+        case let .runHandOver(id):
+            if tasksAllowed, let launcher, let run = runs.run(id: id), Handover.canHandOver(run), launcher.canHandOverPending {
+                launcher.handOver(run)
+                AppLog.info("Telegram: background run handed to Codex")
+            }
+            screen = taskScreen
         case let .limitAlerts(on):
             settings.limitAlertsToTelegram = on
             screen = limitsScreen
