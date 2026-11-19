@@ -54,6 +54,18 @@ def used_keys():
     return sorted(keys)
 
 
+def hidden_keys():
+    """`s.t(match … { … => "…" })` hides its texts from the patterns above: the tiles of «Быстрые переключатели» stayed
+    Russian in every language that way. The call goes inside each arm instead."""
+    hidden = []
+    for glob in ["app/src/**/*.rs", "core/src/**/*.rs"]:
+        for path in DESKTOP.glob(glob):
+            for number, line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
+                if re.search(r"(?:\bs|\btexts|\bstrings\([^)]*\))\.(?:t|format)\((?:match|if)\b", line):
+                    hidden.append(f"a text the catalog can't see, put the call inside each arm: {path.relative_to(DESKTOP)}:{number}")
+    return hidden
+
+
 def prompts():
     """{code: {nextStep, customTask, finishSession}} from the Swift `ContentStrings` tables."""
     text = CONTENT.read_text(encoding="utf-8")
@@ -149,7 +161,7 @@ def main():
     check = "--check" in sys.argv
     catalog = json.loads(CATALOG.read_text(encoding="utf-8"))["strings"]
     keys = used_keys()
-    problems = []
+    problems = hidden_keys()
     for key in keys:
         entry = catalog.get(key)
         if entry is None:

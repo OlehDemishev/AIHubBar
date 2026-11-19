@@ -229,13 +229,13 @@ fn status(limit: Option<&Limit>, found: bool, needs_key: bool, s: &claudepult_co
             .collect::<Vec<_>>()
             .join(" · ");
     }
-    s.t(if found {
-        "найден"
+    if found {
+        s.t("найден")
     } else if needs_key {
-        "нет ключа"
+        s.t("нет ключа")
     } else {
-        "не найден"
-    })
+        s.t("не найден")
+    }
     .to_owned()
 }
 

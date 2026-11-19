@@ -94,14 +94,14 @@ impl Source {
 
     /// What it needs, for Settings.
     pub fn requirement(self, s: &Strings) -> String {
-        s.t(match self {
-            Source::Codex => "установленный codex с входом через ChatGPT",
-            Source::OpenRouter => "ключ OpenRouter",
-            Source::Copilot => "установленный gh с входом в GitHub и Copilot",
-            Source::Gemini => "установленный Gemini CLI",
-            Source::OpenAiCosts => "админский ключ организации OpenAI (sk-admin-…)",
-            Source::AnthropicCosts => "админский ключ Anthropic (sk-ant-admin…)",
-        })
+        match self {
+            Source::Codex => s.t("установленный codex с входом через ChatGPT"),
+            Source::OpenRouter => s.t("ключ OpenRouter"),
+            Source::Copilot => s.t("установленный gh с входом в GitHub и Copilot"),
+            Source::Gemini => s.t("установленный Gemini CLI"),
+            Source::OpenAiCosts => s.t("админский ключ организации OpenAI (sk-admin-…)"),
+            Source::AnthropicCosts => s.t("админский ключ Anthropic (sk-ant-admin…)"),
+        }
         .to_owned()
     }
 }

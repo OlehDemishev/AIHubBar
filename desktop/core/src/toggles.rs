@@ -2,33 +2,37 @@
 //! the person clicks it. On Windows: dark mode (the two `Personalize` values and `WM_SETTINGCHANGE`, as Settings
 //! does), desktop icons (the same command as Explorer's «Show desktop icons»), lock (`LockWorkStation`), the display
 //! off (`SC_MONITORPOWER`), the Recycle Bin emptied (`SHEmptyRecycleBinW`, after a confirmation). On Linux what GNOME
-//! and its tools offer. «Извлечь диски» needs its own check and comes later; the island is the Mac's own.
+//! and its tools offer. «Извлечь диски» on Windows: every removable drive with a disk in it (USB sticks, memory
+//! cards) is locked, dismounted and ejected, as «Eject» in Explorer does — no administrator rights; a drive with a
+//! file still open says so and stays. The island is the Mac's own.
 
 use crate::i18n::Strings;
 
 /// The Mac's `QuickToggle` names, in its order.
-pub const TOGGLES: [&str; 5] = ["darkMode", "desktopIcons", "lockScreen", "displaySleep", "emptyTrash"];
+pub const TOGGLES: [&str; 6] = ["darkMode", "desktopIcons", "lockScreen", "displaySleep", "ejectDisks", "emptyTrash"];
 
 pub fn title(toggle: &str, s: &Strings) -> String {
-    s.t(match toggle {
-        "darkMode" => "Тёмная тема",
-        "desktopIcons" => "Значки на рабочем столе",
-        "lockScreen" => "Заблокировать экран",
-        "displaySleep" => "Погасить экран",
-        _ => "Очистить корзину",
-    })
+    match toggle {
+        "darkMode" => s.t("Тёмная тема"),
+        "desktopIcons" => s.t("Значки на рабочем столе"),
+        "lockScreen" => s.t("Заблокировать экран"),
+        "displaySleep" => s.t("Погасить экран"),
+        "ejectDisks" => s.t("Извлечь диски"),
+        _ => s.t("Очистить корзину"),
+    }
     .to_owned()
 }
 
 /// Under the tile.
 pub fn short_title(toggle: &str, s: &Strings) -> String {
-    s.t(match toggle {
-        "darkMode" => "Тема",
-        "desktopIcons" => "Значки",
-        "lockScreen" => "Замок",
-        "displaySleep" => "Экран",
-        _ => "Корзина",
-    })
+    match toggle {
+        "darkMode" => s.t("Тема"),
+        "desktopIcons" => s.t("Значки"),
+        "lockScreen" => s.t("Замок"),
+        "displaySleep" => s.t("Экран"),
+        "ejectDisks" => s.t("Диски"),
+        _ => s.t("Корзина"),
+    }
     .to_owned()
 }
 
@@ -38,6 +42,7 @@ pub fn glyph(toggle: &str) -> &'static str {
         "desktopIcons" => "▦",
         "lockScreen" => "🔒",
         "displaySleep" => "🖥",
+        "ejectDisks" => "⏏",
         _ => "🗑",
     }
 }
@@ -57,6 +62,18 @@ pub fn state(toggle: &str) -> Option<bool> {
     system::state(toggle)
 }
 
+/// What «Извлечь диски» says: how many went, and which stayed (a file open on them). `failed` — their names («E:»).
+pub fn eject_report(ejected: usize, failed: &[String], s: &Strings) -> Result<Option<String>, String> {
+    let stayed = (!failed.is_empty()).then(|| s.format("Не получилось: %@", &[&failed.join(", ")]));
+    let gone = || s.format("Извлечено дисков: %lld", &[&ejected.to_string()]);
+    match (ejected, stayed) {
+        (0, None) => Ok(Some(s.t("Нечего извлекать").to_owned())),
+        (0, Some(stayed)) => Err(stayed),
+        (_, None) => Ok(Some(gone())),
+        (_, Some(stayed)) => Err(format!("{} · {stayed}", gone())),
+    }
+}
+
 /// Does it. Ok(Some(note)) when there is something to say without it being an error («Корзина уже пуста»).
 pub fn perform(toggle: &str, s: &Strings) -> Result<Option<String>, String> {
     if !TOGGLES.contains(&toggle) {
@@ -68,7 +85,10 @@ pub fn perform(toggle: &str, s: &Strings) -> Result<Option<String>, String> {
 #[cfg(windows)]
 mod system {
     use crate::i18n::Strings;
-    use windows_sys::Win32::Foundation::{HWND, LPARAM};
+    use windows_sys::Win32::Foundation::{CloseHandle, GENERIC_READ, GENERIC_WRITE, HANDLE, HWND, INVALID_HANDLE_VALUE, LPARAM};
+    use windows_sys::Win32::Storage::FileSystem::{CreateFileW, GetDriveTypeW, GetLogicalDrives, GetVolumeInformationW, FILE_SHARE_READ, FILE_SHARE_WRITE, OPEN_EXISTING};
+    use windows_sys::Win32::System::Ioctl::{FSCTL_DISMOUNT_VOLUME, FSCTL_LOCK_VOLUME, IOCTL_STORAGE_EJECT_MEDIA, IOCTL_STORAGE_MEDIA_REMOVAL, PREVENT_MEDIA_REMOVAL};
+    use windows_sys::Win32::System::IO::DeviceIoControl;
     use windows_sys::Win32::System::Registry::{RegGetValueW, RegSetKeyValueW, HKEY_CURRENT_USER, REG_DWORD, RRF_RT_REG_DWORD};
     use windows_sys::Win32::System::Shutdown::LockWorkStation;
     use windows_sys::Win32::UI::Shell::{SHEmptyRecycleBinW, SHQueryRecycleBinW, SHERB_NOCONFIRMATION, SHERB_NOPROGRESSUI, SHERB_NOSOUND, SHQUERYRBINFO};
@@ -131,9 +151,64 @@ mod system {
         }
     }
 
+    /// `GetDriveTypeW`'s answer for a USB stick or a memory card; an external hard disk is «fixed» and is left alone.
+    const DRIVE_REMOVABLE: u32 = 2;
+
+    /// «E:» of every removable drive with a disk in it (an empty card reader has a letter and no volume).
+    fn removable_drives() -> Vec<String> {
+        let mask = unsafe { GetLogicalDrives() };
+        (0..26u8)
+            .filter(|bit| mask & (1 << bit) != 0)
+            .map(|bit| format!("{}:", (b'A' + bit) as char))
+            .filter(|drive| {
+                let root = wide(&format!("{drive}{}", '\\'));
+                unsafe {
+                    GetDriveTypeW(root.as_ptr()) == DRIVE_REMOVABLE
+                        && GetVolumeInformationW(root.as_ptr(), std::ptr::null_mut(), 0, std::ptr::null_mut(), std::ptr::null_mut(), std::ptr::null_mut(), std::ptr::null_mut(), 0) != 0
+                }
+            })
+            .collect()
+    }
+
+    fn control(volume: HANDLE, code: u32, input: Option<&PREVENT_MEDIA_REMOVAL>) -> bool {
+        let mut returned = 0u32;
+        let (data, size) = match input {
+            Some(input) => ((input as *const PREVENT_MEDIA_REMOVAL).cast(), std::mem::size_of::<PREVENT_MEDIA_REMOVAL>() as u32),
+            None => (std::ptr::null(), 0),
+        };
+        unsafe { DeviceIoControl(volume, code, data, size, std::ptr::null_mut(), 0, &mut returned, std::ptr::null_mut()) != 0 }
+    }
+
+    /// Microsoft's own order for a removable volume: lock it (refused while a file on it is open), dismount, let the
+    /// medium go, eject. After it Explorer shows the drive empty and the stick can be pulled out.
+    fn eject(drive: &str) -> bool {
+        let path = wide(&format!("{0}{0}.{0}{drive}", '\\'));
+        let volume = unsafe { CreateFileW(path.as_ptr(), GENERIC_READ | GENERIC_WRITE, FILE_SHARE_READ | FILE_SHARE_WRITE, std::ptr::null(), OPEN_EXISTING, 0, std::ptr::null_mut()) };
+        if volume == INVALID_HANDLE_VALUE {
+            return false;
+        }
+        // Explorer or an antivirus may hold the volume for a moment: a few tries, as Microsoft's sample does.
+        let locked = (0..10).any(|attempt| {
+            if attempt > 0 {
+                std::thread::sleep(std::time::Duration::from_millis(300));
+            }
+            control(volume, FSCTL_LOCK_VOLUME, None)
+        });
+        let done = locked
+            && control(volume, FSCTL_DISMOUNT_VOLUME, None)
+            && control(volume, IOCTL_STORAGE_MEDIA_REMOVAL, Some(&PREVENT_MEDIA_REMOVAL { PreventMediaRemoval: false }))
+            && control(volume, IOCTL_STORAGE_EJECT_MEDIA, None);
+        unsafe { CloseHandle(volume) };
+        done
+    }
+
     pub fn perform(toggle: &str, s: &Strings) -> Result<Option<String>, String> {
         let failed = || s.t("Не получилось").to_owned();
         match toggle {
+            "ejectDisks" => {
+                let (gone, stayed): (Vec<String>, Vec<String>) = removable_drives().into_iter().partition(|drive| eject(drive));
+                super::eject_report(gone.len(), &stayed, s)
+            }
             "darkMode" => {
                 let light = u32::from(state("darkMode") == Some(true));
                 if !(write_dword(PERSONALIZE, "AppsUseLightTheme", light) && write_dword(PERSONALIZE, "SystemUsesLightTheme", light)) {
@@ -257,10 +332,17 @@ mod tests {
     #[test]
     fn names_and_rules() {
         let s = Strings::from_json("{}");
-        assert_eq!(TOGGLES.map(|t| short_title(t, &s)), ["Тема", "Значки", "Замок", "Экран", "Корзина"]);
+        assert_eq!(TOGGLES.map(|t| short_title(t, &s)), ["Тема", "Значки", "Замок", "Экран", "Диски", "Корзина"]);
+        assert_eq!((title("ejectDisks", &s), glyph("ejectDisks")), ("Извлечь диски".to_owned(), "⏏"));
         assert_eq!(title("emptyTrash", &s), "Очистить корзину");
         assert!(needs_confirmation("emptyTrash") && !needs_confirmation("lockScreen"));
-        assert!(perform("ejectDisks", &s).is_err(), "not here yet");
+        assert!(!needs_confirmation("ejectDisks"), "an ejected disk comes back when it is put in again");
+        assert!(perform("notchIsland", &s).is_err(), "the Mac's own");
+        // What «Извлечь диски» says.
+        assert_eq!(eject_report(0, &[], &s), Ok(Some("Нечего извлекать".to_owned())));
+        assert_eq!(eject_report(2, &[], &s), Ok(Some("Извлечено дисков: 2".to_owned())));
+        assert_eq!(eject_report(0, &["E:".to_owned()], &s), Err("Не получилось: E:".to_owned()));
+        assert_eq!(eject_report(1, &["E:".to_owned(), "G:".to_owned()], &s), Err("Извлечено дисков: 1 · Не получилось: E:, G:".to_owned()));
         if cfg!(windows) {
             assert_eq!(available(), TOGGLES, "every toggle on Windows");
             assert!(state("darkMode").is_some() && state("desktopIcons").is_some() && state("lockScreen").is_none());
