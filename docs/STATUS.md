@@ -5,7 +5,7 @@
 **Updated:** 2026-11-19
 
 **Now:**
-- 2026-11-19: Windows — ready for SignPath Foundation signing: CODE_SIGNING.md, the release workflow, artifact configurations (#450)
+- 2026-11-19: Windows — ready for SignPath Foundation signing: CODE_SIGNING.md, the release workflow, artifact configurations (#450, merged; the release workflow run by hand on main built, installed and checked an unsigned installer)
 - 2026-11-19: Windows stage 7 begun — the installer registers `.claudepult` and puts `claudepult` on the Path; CI installs, checks and uninstalls it (#448, merged; the check passed on windows-latest)
 - 2026-11-19: Windows — «Быстрый запрос»: Ctrl+Alt+P from any program, the task to Claude, Codex or another agent, the project from the front window (#446, merged; CI green)
 - 2026-11-19: Windows — Codex in the background from «Своя задача…» of a git project, the Mac's run files and log (#444, merged; CI green)
