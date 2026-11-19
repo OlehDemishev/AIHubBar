@@ -3,9 +3,10 @@ import Foundation
 /// «Одна задача двум сервисам»: Claude and Codex get the same task at the same time, each in its own worktree of the
 /// project, so their changes do not meet and can be compared branch against branch.
 enum TwoServices {
-    /// The worktree names differ by the service: «export-claude», «export-codex».
+    /// The worktree names differ by the service: «claude-export», «codex-export». The service goes first: at the end
+    /// a long task's name cut it off, and both branches looked alike (seen live 2026-11-19).
     static func nameSource(_ source: String, codex: Bool) -> String {
-        "\(source) \(codex ? "codex" : "claude")"
+        "\(codex ? "codex" : "claude") \(source)"
     }
 
     /// The pair's runs once both have finished and the pair was not announced yet; nil while one still works.

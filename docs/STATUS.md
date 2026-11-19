@@ -5,6 +5,7 @@
 **Updated:** 2026-11-19
 
 **Now:**
+- 2026-11-19: Mac — the pair run live in an isolated copy and the comparison window seen; three fixes (branch `fix/pair-live-findings`): AI Hub Bar commits Codex's changes in a worktree, the pair's branches carry the service's name first, `--app-command pair-compare`
 - 2026-11-19: Windows — first live pass on the laptop (branch `fix/desktop-live-pass`): the installed 0.1.0 opens Settings as a white window that can't be closed; fixed with the tray hint cut by Windows and the panel's scrollbars. 0.1.0 as published still has the white Settings
 - 2026-11-19: Mac — «Проверить в …» and «Передать Codex» as buttons under a task's log in Telegram (#455, merged); goes out with 0.12.0, not pressed live
 - 2026-11-19: Mac — the pair's results can be compared: «Сравнить с …» in a pair task's menu opens both answers and changed files side by side (#453, merged); goes out with 0.12.0, not seen live
@@ -69,6 +70,7 @@
 **Next:**
 - releases go out once a week, on Tuesday, on Oleh's word (agreed 2026-11-11); merged work waits in `main`
 - before 0.12.0: the windows are seen (2026-11-17); a background Codex run seen end to end in an isolated copy; left to see in the app — a Codex approval, handover, review, the pair (they start real runs: with Oleh or on his word); then a beta
+- Mac, asked by Oleh 2026-11-19: a small button in the panel that quickly turns Telegram messages off (and on)
 - 0.12.0 not before Tuesday 2026-11-24, on Oleh's word; `WhatsNew.version` and the card's lines for 0.12
 - then: the «ждёт» state for Antigravity sessions (needs `agy` opened once)
 - towards 1.0 (discussed 2026-11-10): the live pass is done (journal 2026-11-10); left — freeze what is in 1.0 and what stays beta, release notes, translations read by people, feedback from strangers before 1.0
@@ -114,6 +116,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-19 — Live pass over the pair and three fixes (branch `fix/pair-live-findings`)
+
+Done: on Oleh's «Живая проверка» an isolated copy (own bundle id and home, updates off, a scratch git project) got one task for Claude and Codex through «Быстрый запрос» with «И в Codex — сравнить», with no mouse; both ran for real, the pair was announced and the «Claude и Codex: сравнение» window was opened and looked at. Three fixes from it. 1) Codex could not commit in its worktree: its sandbox denies the git folder the working folder points at even with the repository's `.git` as `--add-dir` («index.lock: Operation not permitted», repeated by hand). Now a Codex task in a worktree is told not to commit, and AI Hub Bar commits what it left on the worktree's branch when it finishes well, with a line in the summary. 2) Both branches were named alike (`…-add-a-function` and `…-add-a-function-2`): the service's name sat at the end of the slug and a long task cut it off; it goes first now. 3) `--app-command pair-compare` opens the comparison window.
+Checked: live — both runs succeeded (Claude 30 s, Codex 60 s), the notification text was logged with each side's changes, the window showed both answers, the changed files, the mark on the file both changed, the copy button with `git diff a b`. After the fixes: tests only, on CI — no local build (swap 10 GB, 8 GB free disk, another session works in the main checkout).
+Left: the three fixes are not seen live. The pair's notification banner (no permission under a new id), the Telegram buttons, review and handover were not seen. Claude's own background rules denied it `Bash` and `Read` once in the scratch project (its summary says so). Mistake of this session: `git switch` in the main checkout while another session had `feat/desktop-tray-styles` with uncommitted changes there; put back within a minute, nothing lost; the work then went on in `.claude/worktrees/pair-live`.
 
 ## 2026-11-19 — Windows: first live pass on the laptop (branch `fix/desktop-live-pass`)
 
