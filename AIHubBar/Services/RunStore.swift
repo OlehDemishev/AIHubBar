@@ -149,6 +149,16 @@ final class RunStore {
         processes[run.id] != nil || Self.isRunProcessAlive(pid, startedAt: run.startedAt)
     }
 
+    /// «Оставить этот вариант»: the pair's other run loses its worktree and branch and is marked as removed.
+    func keepVariant(_ keep: BackgroundRun) async throws {
+        guard let pair = keep.pair, let sides = PairCompare.sides(pair, runs: runs), PairCompare.canKeep(keep, sides: sides),
+              var other = sides.first(where: { $0.id != keep.id }), let branch = other.worktreeBranch else { return }
+        try await GitService.discardWorktree(other.folder, branch: branch, projectPath: other.projectPath)
+        other.discarded = true
+        update(other)
+        AppLog.info("Pair \(pair): kept \(keep.agent ?? "claude"), removed \(other.agent ?? "claude")")
+    }
+
     private func update(_ run: BackgroundRun) {
         save(run)
         if let index = runs.firstIndex(where: { $0.id == run.id }) { runs[index] = run }

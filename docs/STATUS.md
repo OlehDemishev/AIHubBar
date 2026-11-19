@@ -5,6 +5,7 @@
 **Updated:** 2026-11-19
 
 **Now:**
+- 2026-11-19: Mac — «Оставить этот вариант» in the pair's comparison removes the other variant's worktree and branch after a confirmation (`feat/pair-choose`, merged 2026-11-19); goes out with 0.12.0, not seen live
 - 2026-11-19: Mac — second live pass over the pair; four fixes (`fix/live-pass-pair-diff`, merged 2026-11-19): diff lines keep their width, more of Codex's file links cleaned, both sides of a pair get committed, a bell in the panel's header turns Telegram notifications off
 - 2026-11-19: Windows 0.1.1 published as an unsigned pre-release (tag `desktop-v0.1.1`) on Oleh's «Да, выпускай»: the fixes of the first live day and the tray icon styles; installed on the laptop over 0.1.0, the hooks there now point at the installed program; «latest» stays the Mac's v0.11.0
 - 2026-11-19: Mac — the pair's comparison shows line-by-line differences: a click on a file, and one variant against the other (`feat/pair-diff`, merged 2026-11-19); goes out with 0.12.0, not seen live
@@ -127,6 +128,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-19 — Keeping one variant of a pair (branch `feat/pair-choose`)
+
+Done: the comparison window ended with two worktrees and no way to finish. Each side now has «Оставить этот вариант»: after a confirmation that names the folder and the branch, the other variant's worktree is removed with what is in it (`git worktree remove --force`) and its branch deleted (`git branch -D`); the kept one stays as it is. The removed side is marked «удалён», the diff buttons go, and «Сравнить с …» leaves the menu. Offered only when both have finished and the other folder is a worktree the app made under `<project>/.claude/worktrees/` on its own branch. `BackgroundRun.discarded`, `PairCompare.canKeep / removable / removalWarning`, `GitService.discardWorktree`, `RunStore.keepVariant`. A line in `docs/release-notes/0.12.0.md`.
+Checked: `scripts/check.sh` green in the worktree (a new test for when it is offered); the two git commands tried by hand on a scratch repository with uncommitted and untracked files in the worktree.
+Left: not seen live. The kept variant is not merged anywhere — that stays the person's step. This is the one place where the app removes a worktree with `--force`.
 
 ## 2026-11-19 — Second live pass over the pair, four fixes (branch `fix/live-pass-pair-diff`)
 

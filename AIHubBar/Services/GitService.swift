@@ -85,6 +85,18 @@ enum GitService {
         }
     }
 
+    /// The variant of a pair the person chose not to keep (`PairCompare`): the worktree goes with whatever is in it,
+    /// and its branch with it. Asked for and confirmed by the person; nothing else in the app removes with `--force`.
+    static func discardWorktree(_ worktreePath: String, branch: String, projectPath: String) async throws {
+        if FileManager.default.fileExists(atPath: worktreePath) {
+            try await run(["worktree", "remove", "--force", worktreePath], in: projectPath)
+        } else {
+            try await run(["worktree", "prune"], in: projectPath)
+        }
+        try await run(["branch", "-D", branch], in: projectPath)
+        AppLog.info("Discarded worktree \(worktreePath) and branch \(branch)")
+    }
+
     /// `git worktree remove` without `--force`: git itself refuses if anything is uncommitted.
     static func removeWorktree(_ worktreePath: String, projectPath: String) async throws {
         try await run(["worktree", "remove", worktreePath], in: projectPath)

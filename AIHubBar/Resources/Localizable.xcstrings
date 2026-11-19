@@ -20966,6 +20966,88 @@
         }
       }
     },
+    "Вариант «%@» будет удалён: папка %@ и ветка %@. Его изменения пропадут, отменить нельзя.": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Вариант «%1$@» будет удалён: папка %2$@ и ветка %3$@. Его изменения пропадут, отменить нельзя."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The “%@” version will be removed: the folder %@ and the branch %@. Its changes will be lost; this cannot be undone."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Варіант «%@» буде видалено: папку %@ і гілку %@. Його зміни зникнуть, скасувати не можна."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Variante „%@“ wird gelöscht: der Ordner %@ und der Branch %@. Ihre Änderungen gehen verloren; das lässt sich nicht widerrufen."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La version « %@ » sera supprimée : le dossier %@ et la branche %@. Ses modifications seront perdues, sans retour possible."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La variante «%@» se eliminará: la carpeta %@ y la rama %@. Sus cambios se perderán y no se puede deshacer."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La variante «%@» verrà eliminata: la cartella %@ e il ramo %@. Le sue modifiche andranno perse e non si può annullare."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A variante “%@” será removida: a pasta %@ e o branch %@. As alterações dela serão perdidas e isso não pode ser desfeito."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wariant „%@” zostanie usunięty: folder %@ i gałąź %@. Jego zmiany przepadną, nie da się tego cofnąć."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「%@」の案を削除します：フォルダ%@とブランチ%@。その変更は失われ、取り消せません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“%@” 결과가 삭제됩니다: 폴더 %@ 및 브랜치 %@. 해당 변경 사항은 사라지며 되돌릴 수 없습니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ستُحذف نسخة «%@»: المجلد %@ والفرع %@. ستضيع تغييراتها ولا يمكن التراجع."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Varian “%@” akan dihapus: folder %@ dan branch %@. Perubahannya akan hilang dan tidak bisa dibatalkan."
+          }
+        }
+      }
+    },
     "Ведёт к сессии, PR, журналу или отчёту.": {
       "localizations": {
         "ar": {
@@ -23167,6 +23249,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Увімкнути сповіщення"
+          }
+        }
+      }
+    },
+    "Включить уведомления в Telegram": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تشغيل إشعارات Telegram"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mitteilungen in Telegram einschalten"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Turn Telegram Notifications On"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activar las notificaciones en Telegram"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activer les notifications Telegram"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nyalakan Notifikasi Telegram"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Attiva le notifiche in Telegram"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Telegramへの通知をオンにする"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Telegram 알림 켜기"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Włącz powiadomienia w Telegramie"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ativar as notificações no Telegram"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Увімкнути сповіщення в Telegram"
           }
         }
       }
@@ -27652,6 +27810,158 @@
           "stringUnit": {
             "state": "translated",
             "value": "Вимкнути сповіщення"
+          }
+        }
+      }
+    },
+    "Выключить уведомления в Telegram": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إيقاف إشعارات Telegram"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mitteilungen in Telegram ausschalten"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Turn Telegram Notifications Off"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Desactivar las notificaciones en Telegram"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Désactiver les notifications Telegram"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Matikan Notifikasi Telegram"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Disattiva le notifiche in Telegram"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Telegramへの通知をオフにする"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Telegram 알림 끄기"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wyłącz powiadomienia w Telegramie"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Desativar as notificações no Telegram"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Вимкнути сповіщення в Telegram"
+          }
+        }
+      }
+    },
+    "Выключить уведомления в Telegram — пока не включите снова": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إيقاف إشعارات Telegram — حتى تعيد تشغيلها"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mitteilungen in Telegram ausschalten – bis Sie sie wieder einschalten"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Turn Telegram notifications off — until you turn them on again"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Desactivar las notificaciones en Telegram: hasta que las actives de nuevo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Désactiver les notifications Telegram — jusqu’à ce que vous les réactiviez"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Matikan notifikasi Telegram — sampai Anda menyalakannya lagi"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Disattiva le notifiche in Telegram: finché non le riattivi"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Telegramへの通知をオフにする — もう一度オンにするまで"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Telegram 알림 끄기 — 다시 켤 때까지"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wyłącz powiadomienia w Telegramie — do ponownego włączenia"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Desativar as notificações no Telegram — até você ativá-las de novo"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Вимкнути сповіщення в Telegram — доки не ввімкнете знову"
           }
         }
       }
@@ -37168,16 +37478,10 @@
     },
     "Закрыть": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Close"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Закрити"
+            "value": "إغلاق"
           }
         },
         "de": {
@@ -37186,10 +37490,10 @@
             "value": "Schließen"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Fermer"
+            "value": "Close"
           }
         },
         "es": {
@@ -37198,22 +37502,22 @@
             "value": "Cerrar"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fermer"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tutup"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Chiudi"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Fechar"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Zamknij"
           }
         },
         "ja": {
@@ -37228,16 +37532,22 @@
             "value": "닫기"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "إغلاق"
+            "value": "Zamknij"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tutup"
+            "value": "Fechar"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Закрити"
           }
         }
       }
@@ -49555,6 +49865,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Коміт зробив AI Hub Bar: у worktree Codex цього не може."
+          }
+        }
+      }
+    },
+    "Коммит сделал AI Hub Bar: изменения оставались без коммита.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "قام AI Hub Bar بعمل الـ commit: بقيت التغييرات دون commit."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Den Commit hat AI Hub Bar gemacht: Die Änderungen waren nicht committet."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI Hub Bar made the commit: the changes were left uncommitted."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El commit lo hizo AI Hub Bar: los cambios habían quedado sin commit."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le commit a été fait par AI Hub Bar : les modifications étaient restées sans commit."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Commit dibuat oleh AI Hub Bar: perubahan tertinggal tanpa commit."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il commit è stato fatto da AI Hub Bar: le modifiche erano rimaste senza commit."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "コミットはAI Hub Barが行いました：変更がコミットされないまま残っていました。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "커밋은 AI Hub Bar가 했습니다. 변경 사항이 커밋되지 않은 채 남아 있었습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Commit wykonał AI Hub Bar: zmiany pozostały bez commita."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O commit foi feito pelo AI Hub Bar: as alterações tinham ficado sem commit."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Коміт зробив AI Hub Bar: зміни залишалися без коміту."
           }
         }
       }
@@ -70279,6 +70665,158 @@
         }
       }
     },
+    "Оставить этот вариант": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keep This Version"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Залишити цей варіант"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diese Variante behalten"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Garder cette version"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Conservar esta variante"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tieni questa variante"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Manter esta variante"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zostaw ten wariant"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "この案を残す"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이 결과 유지"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الإبقاء على هذه النسخة"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Simpan Varian Ini"
+          }
+        }
+      }
+    },
+    "Оставить этот вариант?": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keep this version?"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Залишити цей варіант?"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diese Variante behalten?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Garder cette version ?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Conservar esta variante?"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tenere questa variante?"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Manter esta variante?"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zostawić ten wariant?"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "この案を残しますか？"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이 결과를 유지할까요?"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "الإبقاء على هذه النسخة؟"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Simpan varian ini?"
+          }
+        }
+      }
+    },
     "Осталось %lld %%. Подключите зарядку.": {
       "localizations": {
         "ar": {
@@ -84729,16 +85267,10 @@
     },
     "Показано начало: строк %lld. Целиком — командой сравнения в терминале.": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "The first %lld lines are shown. For all of it, use the diff command in a terminal."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Показано початок: рядків %lld. Повністю — командою порівняння в терміналі."
+            "value": "يُعرض الجزء الأول: %lld سطرًا. لرؤيته كاملًا استخدم أمر المقارنة في الطرفية."
           }
         },
         "de": {
@@ -84747,10 +85279,10 @@
             "value": "Gezeigt wird der Anfang: %lld Zeilen. Alles zeigt der Diff-Befehl im Terminal."
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Seul le début est affiché : %lld lignes. Pour tout voir, utilisez la commande de comparaison dans un terminal."
+            "value": "The first %lld lines are shown. For all of it, use the diff command in a terminal."
           }
         },
         "es": {
@@ -84759,22 +85291,22 @@
             "value": "Se muestra el principio: %lld líneas. Para verlo entero, usa el comando de comparación en un terminal."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seul le début est affiché : %lld lignes. Pour tout voir, utilisez la commande de comparaison dans un terminal."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yang ditampilkan bagian awal: %lld baris. Untuk semuanya, gunakan perintah perbandingan di terminal."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "È mostrato l’inizio: %lld righe. Per vedere tutto, usa il comando di confronto nel terminale."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "É mostrado o começo: %lld linhas. Para ver tudo, use o comando de comparação no terminal."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Pokazano początek: %lld wierszy. Całość pokaże polecenie porównania w terminalu."
           }
         },
         "ja": {
@@ -84789,16 +85321,22 @@
             "value": "앞부분 %lld줄만 표시됩니다. 전체는 터미널에서 비교 명령으로 볼 수 있습니다."
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "يُعرض الجزء الأول: %lld سطرًا. لرؤيته كاملًا استخدم أمر المقارنة في الطرفية."
+            "value": "Pokazano początek: %lld wierszy. Całość pokaże polecenie porównania w terminalu."
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Yang ditampilkan bagian awal: %lld baris. Untuk semuanya, gunakan perintah perbandingan di terminal."
+            "value": "É mostrado o começo: %lld linhas. Para ver tudo, use o comando de comparação no terminal."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Показано початок: рядків %lld. Повністю — командою порівняння в терміналі."
           }
         }
       }
@@ -85109,16 +85647,10 @@
     },
     "Показать изменения в файле": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Show the changes in this file"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Показати зміни у файлі"
+            "value": "عرض التغييرات في الملف"
           }
         },
         "de": {
@@ -85127,10 +85659,10 @@
             "value": "Änderungen in der Datei zeigen"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Afficher les modifications du fichier"
+            "value": "Show the changes in this file"
           }
         },
         "es": {
@@ -85139,22 +85671,22 @@
             "value": "Mostrar los cambios del archivo"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Afficher les modifications du fichier"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tampilkan perubahan pada file"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Mostra le modifiche al file"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mostrar as alterações no arquivo"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Pokaż zmiany w pliku"
           }
         },
         "ja": {
@@ -85169,16 +85701,22 @@
             "value": "이 파일의 변경 사항 보기"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "عرض التغييرات في الملف"
+            "value": "Pokaż zmiany w pliku"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tampilkan perubahan pada file"
+            "value": "Mostrar as alterações no arquivo"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Показати зміни у файлі"
           }
         }
       }
@@ -94400,16 +94938,10 @@
     },
     "Различий нет": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "No differences"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Відмінностей немає"
+            "value": "لا توجد فروق"
           }
         },
         "de": {
@@ -94418,10 +94950,10 @@
             "value": "Keine Unterschiede"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Aucune différence"
+            "value": "No differences"
           }
         },
         "es": {
@@ -94430,22 +94962,22 @@
             "value": "Sin diferencias"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucune différence"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tidak ada perbedaan"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Nessuna differenza"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sem diferenças"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Brak różnic"
           }
         },
         "ja": {
@@ -94460,32 +94992,32 @@
             "value": "차이 없음"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "لا توجد فروق"
+            "value": "Brak różnic"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tidak ada perbedaan"
+            "value": "Sem diferenças"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Відмінностей немає"
           }
         }
       }
     },
     "Различия между вариантами": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Differences Between the Two"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Відмінності між варіантами"
+            "value": "الفروق بين النسختين"
           }
         },
         "de": {
@@ -94494,10 +95026,10 @@
             "value": "Unterschiede zwischen den Varianten"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Différences entre les deux versions"
+            "value": "Differences Between the Two"
           }
         },
         "es": {
@@ -94506,22 +95038,22 @@
             "value": "Diferencias entre las variantes"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Différences entre les deux versions"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Perbedaan antara kedua varian"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Differenze tra le varianti"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Diferenças entre as variantes"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Różnice między wariantami"
           }
         },
         "ja": {
@@ -94536,16 +95068,22 @@
             "value": "두 결과의 차이"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "الفروق بين النسختين"
+            "value": "Różnice między wariantami"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Perbedaan antara kedua varian"
+            "value": "Diferenças entre as variantes"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Відмінності між варіантами"
           }
         }
       }
@@ -116153,6 +116691,82 @@
         }
       }
     },
+    "Удалить другой вариант": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remove the Other Version"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Видалити інший варіант"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Andere Variante löschen"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Supprimer l’autre version"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eliminar la otra variante"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elimina l’altra variante"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remover a outra variante"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Usuń drugi wariant"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "もう一方の案を削除"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "다른 결과 삭제"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "حذف النسخة الأخرى"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hapus Varian Lain"
+          }
+        }
+      }
+    },
     "Удалить ключ": {
       "localizations": {
         "ar": {
@@ -120811,16 +121425,10 @@
     },
     "Чем вариант второго сервиса отличается от варианта первого: то, что закоммичено в обеих ветках": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "How the second service’s version differs from the first’s: what is committed on both branches"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Чим варіант другого сервісу відрізняється від варіанта першого: те, що закомічено в обох гілках"
+            "value": "بماذا تختلف نسخة الخدمة الثانية عن نسخة الأولى: ما تم عمل commit له في الفرعين"
           }
         },
         "de": {
@@ -120829,10 +121437,10 @@
             "value": "Worin sich die Variante des zweiten Dienstes von der des ersten unterscheidet: was auf beiden Branches committet ist"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "En quoi la version du second service diffère de celle du premier : ce qui est commité sur les deux branches"
+            "value": "How the second service’s version differs from the first’s: what is committed on both branches"
           }
         },
         "es": {
@@ -120841,22 +121449,22 @@
             "value": "En qué se diferencia la variante del segundo servicio de la del primero: lo que está confirmado en ambas ramas"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En quoi la version du second service diffère de celle du premier : ce qui est commité sur les deux branches"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apa bedanya varian layanan kedua dengan yang pertama: yang sudah di-commit di kedua branch"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "In cosa la variante del secondo servizio differisce da quella del primo: ciò che è stato committato in entrambi i rami"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Em que a variante do segundo serviço difere da do primeiro: o que está commitado nos dois branches"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Czym wariant drugiej usługi różni się od wariantu pierwszej: to, co zacommitowano w obu gałęziach"
           }
         },
         "ja": {
@@ -120871,16 +121479,22 @@
             "value": "두 번째 서비스의 결과가 첫 번째와 어떻게 다른지: 두 브랜치에 커밋된 내용"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "بماذا تختلف نسخة الخدمة الثانية عن نسخة الأولى: ما تم عمل commit له في الفرعين"
+            "value": "Czym wariant drugiej usługi różni się od wariantu pierwszej: to, co zacommitowano w obu gałęziach"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Apa bedanya varian layanan kedua dengan yang pertama: yang sudah di-commit di kedua branch"
+            "value": "Em que a variante do segundo serviço difere da do primeiro: o que está commitado nos dois branches"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Чим варіант другого сервісу відрізняється від варіанта першого: те, що закомічено в обох гілках"
           }
         }
       }
@@ -140603,6 +141217,82 @@
         }
       }
     },
+    "удалён": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "removed"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "видалено"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "gelöscht"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "supprimée"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "eliminada"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "eliminata"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "removida"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "usunięty"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "削除済み"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "삭제됨"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "محذوفة"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dihapus"
+          }
+        }
+      }
+    },
     "упало": {
       "localizations": {
         "ar": {
@@ -143211,310 +143901,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "❌ CI впав: %@ #%lld"
-          }
-        }
-      }
-    },
-    "Коммит сделал AI Hub Bar: изменения оставались без коммита.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "AI Hub Bar made the commit: the changes were left uncommitted."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Коміт зробив AI Hub Bar: зміни залишалися без коміту."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Den Commit hat AI Hub Bar gemacht: Die Änderungen waren nicht committet."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Le commit a été fait par AI Hub Bar : les modifications étaient restées sans commit."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "El commit lo hizo AI Hub Bar: los cambios habían quedado sin commit."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Il commit è stato fatto da AI Hub Bar: le modifiche erano rimaste senza commit."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "O commit foi feito pelo AI Hub Bar: as alterações tinham ficado sem commit."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Commit wykonał AI Hub Bar: zmiany pozostały bez commita."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "コミットはAI Hub Barが行いました：変更がコミットされないまま残っていました。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "커밋은 AI Hub Bar가 했습니다. 변경 사항이 커밋되지 않은 채 남아 있었습니다."
-          }
-        },
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "قام AI Hub Bar بعمل الـ commit: بقيت التغييرات دون commit."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Commit dibuat oleh AI Hub Bar: perubahan tertinggal tanpa commit."
-          }
-        }
-      }
-    },
-    "Включить уведомления в Telegram": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Turn Telegram Notifications On"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Увімкнути сповіщення в Telegram"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mitteilungen in Telegram einschalten"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Activer les notifications Telegram"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Activar las notificaciones en Telegram"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Attiva le notifiche in Telegram"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ativar as notificações no Telegram"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Włącz powiadomienia w Telegramie"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Telegramへの通知をオンにする"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Telegram 알림 켜기"
-          }
-        },
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "تشغيل إشعارات Telegram"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nyalakan Notifikasi Telegram"
-          }
-        }
-      }
-    },
-    "Выключить уведомления в Telegram": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Turn Telegram Notifications Off"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Вимкнути сповіщення в Telegram"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mitteilungen in Telegram ausschalten"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Désactiver les notifications Telegram"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Desactivar las notificaciones en Telegram"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Disattiva le notifiche in Telegram"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Desativar as notificações no Telegram"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Wyłącz powiadomienia w Telegramie"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Telegramへの通知をオフにする"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Telegram 알림 끄기"
-          }
-        },
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "إيقاف إشعارات Telegram"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Matikan Notifikasi Telegram"
-          }
-        }
-      }
-    },
-    "Выключить уведомления в Telegram — пока не включите снова": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Turn Telegram notifications off — until you turn them on again"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Вимкнути сповіщення в Telegram — доки не ввімкнете знову"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mitteilungen in Telegram ausschalten – bis Sie sie wieder einschalten"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Désactiver les notifications Telegram — jusqu’à ce que vous les réactiviez"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Desactivar las notificaciones en Telegram: hasta que las actives de nuevo"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Disattiva le notifiche in Telegram: finché non le riattivi"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Desativar as notificações no Telegram — até você ativá-las de novo"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Wyłącz powiadomienia w Telegramie — do ponownego włączenia"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Telegramへの通知をオフにする — もう一度オンにするまで"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Telegram 알림 끄기 — 다시 켤 때까지"
-          }
-        },
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "إيقاف إشعارات Telegram — حتى تعيد تشغيلها"
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Matikan notifikasi Telegram — sampai Anda menyalakannya lagi"
           }
         }
       }
