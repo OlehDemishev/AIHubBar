@@ -7,6 +7,7 @@
 **Now:**
 - 2026-11-19: Mac — the pair run live in an isolated copy and the comparison window seen; three fixes (`fix/pair-live-findings`, merged 2026-11-19): AI Hub Bar commits Codex's changes in a worktree, the pair's branches carry the service's name first, `--app-command pair-compare`
 - 2026-11-19: Windows — the tray icon shows two limits (session and week) in one of seven styles chosen in Settings → «Сервисы AI» → «Значок в трее»; «Два столбика» is the default (branch `feat/desktop-tray-styles`); not seen on Windows
+- 2026-11-19: Windows — the tray icon shows two limits (session and week) in one of seven styles chosen in Settings → «Сервисы AI» → «Значок в трее»; «Два столбика» is the default (#457, merged; CI green on Windows and Linux); not seen on Windows, the live look is first in Next
 - 2026-11-19: Windows — first live pass on the laptop (branch `fix/desktop-live-pass`): the installed 0.1.0 opens Settings as a white window that can't be closed; fixed with the tray hint cut by Windows and the panel's scrollbars. 0.1.0 as published still has the white Settings
 - 2026-11-19: Mac — «Проверить в …» and «Передать Codex» as buttons under a task's log in Telegram (#455, merged); goes out with 0.12.0, not pressed live
 - 2026-11-19: Mac — the pair's results can be compared: «Сравнить с …» in a pair task's menu opens both answers and changed files side by side (#453, merged); goes out with 0.12.0, not seen live
