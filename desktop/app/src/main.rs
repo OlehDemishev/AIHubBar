@@ -15,6 +15,7 @@ mod limits;
 mod profiles;
 mod resources;
 mod projects;
+mod quick_prompt;
 mod quick_commands;
 mod runs;
 mod services;
@@ -200,6 +201,7 @@ fn run_command(app: &AppHandle, name: &str) -> bool {
         "panel" => show_panel(app),
         "settings" => open_settings_window(app),
         "quit" => app.exit(0),
+        "quick-prompt" => quick_prompt::show(app),
         _ => return false,
     }
     true
@@ -337,6 +339,7 @@ fn main() {
         .plugin(tauri_plugin_notification::init())
         .plugin(tauri_plugin_dialog::init())
         .plugin(tauri_plugin_clipboard_manager::init())
+        .plugin(quick_prompt::plugin())
         .manage(Limits::new())
         .manage(Sessions::default())
         .manage(Projects::default())
@@ -350,6 +353,7 @@ fn main() {
         .manage(quick_commands::QuickCommands::default())
         .manage(toggles::Toggles::default())
         .manage(hub::Hub::default())
+        .manage(quick_prompt::QuickPrompt::default())
         .manage(AppState { settings: Mutex::new(load_settings()) })
         .invoke_handler(tauri::generate_handler![
             ui_texts, set_language, dismiss_tray_hint, autostart_enabled, set_autostart, open_settings, hide_panel, quit,
@@ -378,7 +382,9 @@ fn main() {
             quick_commands::set_quick_commands, quick_commands::new_quick_command, toggles::toggles_view, toggles::perform_toggle,
             toggles::quick_toggle_settings, toggles::set_quick_toggles, hub::hub_view, hub::refresh_hub, hub::hub_settings,
             hub::set_hub_enabled, hub::save_hub_key, hub::delete_hub_key, hub::set_gemini_options, hub::open_hub_key_page,
-            hub::main_service, hub::set_main_service,
+            hub::main_service, hub::set_main_service, quick_prompt::quick_prompt_start, quick_prompt::quick_prompt_send,
+            quick_prompt::quick_prompt_settings, quick_prompt::set_quick_prompt_hot_key, quick_prompt::open_quick_prompt,
+            quick_prompt::close_quick_prompt,
             profiles::choose_import, profiles::import_view, profiles::apply_import, profiles::cancel_import
         ])
         .setup(move |app| {
@@ -397,6 +403,7 @@ fn main() {
             handle.state::<keep_awake::KeepAwake>().start(handle.clone());
             handle.state::<resources::Resources>().start(handle.clone());
             handle.state::<hub::Hub>().start(handle.clone());
+            quick_prompt::sync(&handle);
             if first_start && handle.state::<AppState>().settings.lock().unwrap().profiles.is_empty() {
                 eprintln!("first start: the assistant opens");
                 assistant::open_assistant(handle.clone());

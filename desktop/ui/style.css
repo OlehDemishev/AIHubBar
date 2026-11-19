@@ -352,3 +352,16 @@ button.tile.on { background: color-mix(in srgb, var(--accent) 22%, transparent);
 .hub-source p { margin: 0; font-size: 11px; }
 .hub-source .status { font-size: 11px; text-align: end; max-width: 60%; }
 .task-editor .agent-note { margin: 4px 0 0; font-size: 11px; }
+
+/* «Быстрый запрос»: a small window over the others — the task, the project and agent, where it runs. */
+body.quick-prompt-window { margin: 0; padding: 14px 16px; display: flex; flex-direction: column; gap: 8px; }
+.quick-prompt-head { display: flex; align-items: center; gap: 6px; }
+.quick-prompt-head h1 { margin: 0; font-size: 15px; }
+.quick-prompt-head .spacer, .quick-prompt-row .spacer { flex: 1; }
+.quick-prompt-window textarea { font: inherit; resize: none; padding: 6px 8px; border-radius: 6px; border: 1px solid var(--line); background: var(--card); color: inherit; user-select: text; }
+.quick-prompt-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.quick-prompt-row label { display: flex; align-items: center; gap: 6px; font-size: 12px; }
+.quick-prompt-row select { max-width: 220px; }
+.quick-prompt-window .qp-hint { margin: 0; font-size: 11px; }
+.quick-prompt-window .launch-message { display: flex; align-items: center; gap: 8px; font-size: 12px; }
+.quick-prompt-window .launch-message.error { color: #ff3b30; }
