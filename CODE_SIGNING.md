@@ -4,7 +4,7 @@ Windows builds of AI Hub Bar are signed through SignPath.
 
 Free code signing provided by [SignPath.io](https://about.signpath.io), certificate by [SignPath Foundation](https://signpath.org).
 
-> Status (2026-11-19): the application to SignPath Foundation is being prepared. Until it is granted, Windows builds are unsigned and Windows SmartScreen warns before installing them. macOS builds are signed and notarized with the author's own Apple Developer ID, separately from this policy.
+> Status (2026-11-19): the application to SignPath Foundation is being prepared. Until it is granted, Windows builds are unsigned and Windows SmartScreen warns before installing them; the first one is [0.1.0](https://github.com/OlehDemishev/AIHubBar/releases/tag/desktop-v0.1.0). macOS builds are signed and notarized with the author's own Apple Developer ID, separately from this policy.
 
 ## What is signed
 
