@@ -98,6 +98,10 @@ jobs:
       - run: ./scripts/stage-binaries.sh
         shell: bash
       - run: npx tauri build --bundles ${{ matrix.bundles }} --config app/tauri.bundle.conf.json
+      - name: Install, check and uninstall the installer
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: ./scripts/check-installer.ps1
       - uses: actions/upload-artifact@v4
         with:
           name: ai-hub-bar-${{ runner.os }}

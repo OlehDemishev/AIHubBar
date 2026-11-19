@@ -333,7 +333,14 @@ fn main() {
     let first_start = !paths::settings_file().exists();
     let app = tauri::Builder::default()
         // First: a second launch only brings the panel forward in the copy that runs.
-        .plugin(tauri_plugin_single_instance::init(|app, _args, _cwd| show_panel(app)))
+        .plugin(tauri_plugin_single_instance::init(|app, args, cwd| {
+            // A second launch: a `.claudepult` opened with a double click goes to the import, anything else shows the panel.
+            let args = args.into_iter().map(|a| if std::path::Path::new(&a).is_relative() { std::path::Path::new(&cwd).join(&a).to_string_lossy().into_owned() } else { a });
+            match profiles::import_argument(args.skip(1)) {
+                Some(file) => profiles::open_import_file(app, &file),
+                None => show_panel(app),
+            }
+        }))
         .plugin(tauri_plugin_autostart::init(MacosLauncher::LaunchAgent, None))
         .plugin(tauri_plugin_positioner::init())
         .plugin(tauri_plugin_notification::init())
@@ -404,6 +411,10 @@ fn main() {
             handle.state::<resources::Resources>().start(handle.clone());
             handle.state::<hub::Hub>().start(handle.clone());
             quick_prompt::sync(&handle);
+            // Started by a double click on a `.claudepult` file.
+            if let Some(file) = profiles::import_argument(std::env::args().skip(1)) {
+                profiles::open_import_file(&handle, &file);
+            }
             if first_start && handle.state::<AppState>().settings.lock().unwrap().profiles.is_empty() {
                 eprintln!("first start: the assistant opens");
                 assistant::open_assistant(handle.clone());

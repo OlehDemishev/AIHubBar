@@ -5,6 +5,7 @@
 **Updated:** 2026-11-19
 
 **Now:**
+- 2026-11-19: Windows stage 7 begun — the installer registers `.claudepult` and puts `claudepult` on the Path; CI installs, checks and uninstalls it (#448)
 - 2026-11-19: Windows — «Быстрый запрос»: Ctrl+Alt+P from any program, the task to Claude, Codex or another agent, the project from the front window (#446, merged; CI green)
 - 2026-11-19: Windows — Codex in the background from «Своя задача…» of a git project, the Mac's run files and log (#444, merged; CI green)
 - 2026-11-19: Windows — «Главный сервис»: Codex or another service can lead the panel and the tray icon instead of Claude (#442, merged; CI green)
@@ -72,6 +73,7 @@
 - Windows: on the laptop the live check of SPEC-windows §11.4 (with a real permission request answered from the panel) the «Проекты» card's buttons, a Claude launch in Windows Terminal and one in the background (do the `PowerShell(…)` rules let it build and check a project without Git Bash?); then stage 7 (installer, signing, updates) or the stage 6 leftovers (сочетания клавиш для команд, «Извлечь диски»); stage 3 leftovers («Показать», buttons in the notification) need the laptop
 
 **Needs Oleh:**
+- Windows code signing (SPEC-windows §7): Azure Artifact Signing, SignPath Foundation (free for open source, publisher «SignPath Foundation»), or an OV/EV certificate; until then SmartScreen warns on the installer
 - Windows laptop: install the tools and copy the two CLAUDE.md files as in `desktop/WINDOWS-DEV.md`, sign in to Claude Code there; choose the Windows signing (SPEC-windows §7)
 - say when the agent may open the app's windows for a live look at the nine features (it takes the keyboard for a minute), or look yourself: ⌃⌥P with Codex «В фоне» and with «И в Codex — сравнить»; a finished task's menu → «Проверить в Codex»; the «Claude Code» window → «Skills и плагины» (no switch pressed yet); «История расхода» → «Сегодня» and the plan's price
 - Codex in the background: ⌃⌥P → agent Codex → «В фоне», a small task in a test project; look at the row in «Сессии», the log and the notification
@@ -105,6 +107,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-19 — Windows: the installer, stage 7 begun (branch `feat/desktop-installer`)
+
+Done: the NSIS installer registers `.claudepult` and puts its folder into the user's Path (`claudepult` in any terminal); the uninstaller takes it out. The Path is edited as the raw registry value through PowerShell, so `%USERPROFILE%` entries stay unexpanded and a long Path isn't cut. A double click on a `.claudepult` opens the import in Settings, at the first launch or through the running app (single-instance passes the file on). CI installs the installer silently on windows-latest, checks the app, `claudepult.exe` and the hook next to it, the Start menu shortcut, the Path (a foreign `%USERPROFILE%` entry kept as it was), `.claudepult`, `claudepult --version`, then uninstalls and checks the Path is back.
+Checked: `cargo test --workspace` on the Mac (core 118, app 2: the file a double click opens). The installer itself only by Windows CI (this PR's run).
+Left: code signing — Oleh's choice (SPEC-windows §7: Azure Artifact Signing, SignPath Foundation for open source, or an OV/EV certificate); the updater needs a manifest signing key in the repository's secrets; a release to GitHub Releases; winget.
 
 ## 2026-11-19 — Windows: «Быстрый запрос» (branch `feat/desktop-quick-prompt`)
 
