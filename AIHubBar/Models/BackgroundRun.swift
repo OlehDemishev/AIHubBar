@@ -41,6 +41,8 @@ struct BackgroundRun: Codable, Identifiable, Equatable, Sendable {
     var pair: String? = nil
     /// The pair's other variant was kept and this one removed: its worktree and branch are gone (`PairCompare`).
     var discarded: Bool? = nil
+    /// The branch this variant's worktree was merged into from the comparison window; nil while it was not.
+    var mergedInto: String? = nil
 
     var agentTitle: String { agent == CodexExec.agent ? AgentKind.codex.title : AgentKind.claudeCode.title }
 

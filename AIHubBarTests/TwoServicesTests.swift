@@ -92,4 +92,20 @@ struct TwoServicesTests {
         #expect(PairCompare.partner(of: claude, runs: [claude, gone]) == nil, "nothing left to compare with")
         #expect(PairCompare.removalWarning(codex).contains("cb/export-codex"))
     }
+
+    @Test func aVariantIsMergedOnlyWhenItFinishedWellAndIsStillThere() {
+        let claude = run("a", .succeeded), codex = run("b", .succeeded, agent: CodexExec.agent)
+        #expect(PairCompare.canMerge(claude, sides: [claude, codex], target: "main"))
+        #expect(!PairCompare.canMerge(claude, sides: [claude, codex], target: nil), "the project's branch is not known")
+        #expect(!PairCompare.canMerge(claude, sides: [claude, codex], target: "cb/export-claude"), "not into itself")
+        #expect(!PairCompare.canMerge(claude, sides: [claude, run("b", .running, agent: CodexExec.agent)], target: "main"))
+        #expect(!PairCompare.canMerge(run("a", .failed), sides: [run("a", .failed), codex], target: "main"))
+        var gone = claude
+        gone.discarded = true
+        var merged = claude
+        merged.mergedInto = "main"
+        #expect(!PairCompare.canMerge(gone, sides: [gone, codex], target: "main") && !PairCompare.canMerge(merged, sides: [merged, codex], target: "main"))
+        #expect(PairCompare.canMerge(codex, sides: [gone, codex], target: "main"), "the kept one after the other was removed")
+        #expect(PairCompare.mergeWarning(codex, target: "main").contains("cb/export-codex"))
+    }
 }
