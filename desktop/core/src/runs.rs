@@ -270,11 +270,20 @@ pub fn settings_json(permissions: &str, windows: bool) -> Value {
     json!({"permissions": {"allow": allow, "deny": deny, "blockReadsOutsideWorkingDirectories": true}})
 }
 
+/// What a run is told about folders, in Claude's own language of instructions (it is not shown to the person). Seen
+/// live on Windows with Claude Code 2.1: in `dontAsk` a call that changes folder and runs a build in one line is
+/// refused whatever the rules allow, in both shells; Claude tried that form twice and gave up. A change of folder in a
+/// call of its own passes in PowerShell and stays for the next call; the tools' own folder options pass everywhere.
+pub const FOLDER_NOTE: &str = "Shell calls here are checked against a fixed list of allowed commands, and nobody can approve a refused one. \
+    A call that changes folder and runs a command in one line is refused: do not join cd or Set-Location with another command. \
+    To work in a subfolder, use the tool's own folder option (cargo test --manifest-path sub/Cargo.toml, npm --prefix sub test, git -C sub status), or change folder in a call of its own (in PowerShell: Set-Location sub) and run the command in the next call. \
+    If one form is refused, try the other before reporting that the command could not be run.";
+
 /// `claude`'s arguments; the rules are in `settings_file`.
 pub fn arguments(prompt: &str, session_id: &str, settings_file: &Path) -> Vec<String> {
     [
         "-p", prompt, "--session-id", session_id, "--output-format", "stream-json", "--verbose", "--permission-mode",
-        "dontAsk", "--permission-prompts", "none", "--settings",
+        "dontAsk", "--permission-prompts", "none", "--append-system-prompt", FOLDER_NOTE, "--settings",
     ]
     .iter()
     .map(|a| (*a).to_owned())
@@ -787,6 +796,10 @@ not json at all
         let args = arguments("do it", "id", Path::new("/r/id.settings.json"));
         assert_eq!(args.last().unwrap(), "/r/id.settings.json");
         assert_eq!(&args[..4], ["-p", "do it", "--session-id", "id"]);
+        let note = args.iter().position(|a| a == "--append-system-prompt").expect("the folder note is passed");
+        assert_eq!(args[note + 1], FOLDER_NOTE);
+        // The note goes through a command line, and `claude.cmd` through cmd.exe: nothing a shell would read.
+        assert!(!FOLDER_NOTE.contains(['&', '|', ';', '`', '"', '%', '^', '<', '>', '\n']), "plain text only");
     }
 
     #[test]

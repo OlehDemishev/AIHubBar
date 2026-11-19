@@ -5,6 +5,7 @@
 **Updated:** 2026-11-19
 
 **Now:**
+- 2026-11-19: Windows — a background run can build in a subfolder: Claude is told how to reach one (the tool's own folder option, or a change of folder in a call of its own); seen live with the run's own arguments and rules (branch `fix/desktop-run-subfolders`)
 - 2026-11-19: Windows — the «Проекты» card's buttons and a background Claude run seen live on the laptop (branch `fix/desktop-panel-work-area`): «Папка», «Терминал», «Своя задача…» in the background, its row, log and summary work; the run could not build in `desktop/` (Claude Code's own refusal, see Next); the panel opened by `claudepult` no longer lies over the taskbar; Claude's limits are in the panel
 - 2026-11-19: Windows — «Два столбика» stays the tray icon's default (Oleh's choice); the dot in the icon's corner has a clear rim, so an orange dot is seen next to orange digits or bars (branch `fix/desktop-tray-dot`; seen live at 125 %)
 - 2026-11-19: Mac — the pair run live in an isolated copy and the comparison window seen; three fixes (`fix/pair-live-findings`, merged 2026-11-19): AI Hub Bar commits Codex's changes in a worktree, the pair's branches carry the service's name first, `--app-command pair-compare`
@@ -80,7 +81,7 @@
 - check on the Air: the island at the real notch
 - promotion (docs/LAUNCH.md): r/ClaudeAI, the lists, r/macapps, Show HN, Product Hunt, Homebrew
 - content (docs/specs/SPEC-content.md, agreed): stage 2 «Версии», then batch tasks; better after the first feedback from people
-- Windows: background runs can't build in a subfolder — Claude Code in `dontAsk` refuses «change folder + build» in one command (journal 2026-11-19, the «Проекты» buttons): teach the run's prompt to change folder in a call of its own or to use the tool's own folder flag, then try `npm`, `cargo` and a project with spaces in its path; left on the laptop from SPEC-windows §11.4 — hooks in the real settings.json and a permission request answered from the panel (after Oleh's «Установить hooks»), «Следующий шаг» and «Завершить», a Claude launch in a terminal window, notifications and their buttons; then stage 7 (installer, signing, updates) or the stage 6 leftovers (сочетания клавиш для команд, «Извлечь диски»)
+- Windows: left on the laptop from SPEC-windows §11.4 — hooks in the real settings.json and a permission request answered from the panel (after Oleh's «Установить hooks»), «Следующий шаг» and «Завершить», a Claude launch in a terminal window, notifications and their buttons, a background run with `npm` and in a project with spaces in its path; the Mac's background runs have the same rules — try one build in a subfolder there; then stage 7 (installer, signing, updates) or the stage 6 leftovers (сочетания клавиш для команд, «Извлечь диски»)
 
 **Needs Oleh:**
 - Windows: say whether to publish 0.1.1 with the Settings fix (0.1.0 on the pre-release page can't open Settings, the assistant, the calendar or «Быстрый запрос» after the first start) — SignPath will look at that page
@@ -119,6 +120,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-19 — Windows: a background run reaches a subfolder (branch `fix/desktop-run-subfolders`)
+
+Done: on Oleh's «Да, сделай». A background Claude run gets a note through `--append-system-prompt` (`runs::FOLDER_NOTE`, English, not shown to the person, so no catalog text): a call that changes folder and runs a command in one line is refused here; use the tool's own folder option (`cargo --manifest-path`, `npm --prefix`, `git -C`) or change folder in a call of its own, and try the other form before giving up. The prompts shared with the Mac are not touched; the rules are the same as before.
+Checked: `python scripts/strings.py --check`, `cargo test --workspace` on Windows (the note is passed and holds nothing cmd.exe would read, for `claude.cmd`). Live on the laptop: `claude` started with a run's arguments, rules file and the very task that failed before («in the desktop folder run cargo test …») — the first call was `cargo test --manifest-path desktop/Cargo.toml …`, allowed, and the summary has the result line. Before the note the same task ended with both shells refused.
+Left: seen once, with `cargo`, started by a script and not from the panel's button (the panel kept hiding behind a full-screen terminal window during the check); `npm` and a change of folder in its own call were not what Claude chose, so they stay untried under the note. The Mac's runs have no such note.
 
 ## 2026-11-19 — Windows: the «Проекты» buttons and a background run live (branch `fix/desktop-panel-work-area`)
 
