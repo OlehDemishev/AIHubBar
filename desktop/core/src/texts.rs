@@ -85,6 +85,30 @@ pub fn tray_tooltip(s: &Strings, snapshot: Option<&UsageSnapshot>, error: Option
     parts.join("\n")
 }
 
+/// Windows shows 127 UTF-16 units of a tray hint and cuts the rest mid-word, with the lines after it. The longest
+/// line gives way, ending in «…», until every line is there.
+pub fn fit_tooltip(text: &str, limit: usize) -> String {
+    let mut lines: Vec<Vec<char>> = text.lines().map(|line| line.chars().collect()).collect();
+    let units = |lines: &[Vec<char>]| lines.iter().map(|l| l.iter().map(|c| c.len_utf16()).sum::<usize>()).sum::<usize>() + lines.len().saturating_sub(1);
+    while units(&lines) > limit {
+        let Some(longest) = (0..lines.len()).max_by_key(|&i| lines[i].len()) else { break };
+        if lines[longest].len() <= 2 {
+            lines.pop();
+            continue;
+        }
+        let line = &mut lines[longest];
+        if line.last() == Some(&'…') {
+            line.pop();
+        }
+        line.pop();
+        while line.last().is_some_and(|c| c.is_whitespace()) {
+            line.pop();
+        }
+        line.push('…');
+    }
+    lines.iter().map(|l| l.iter().collect::<String>()).collect::<Vec<_>>().join("\n")
+}
+
 pub fn forecast_text(s: &Strings, forecast: &UsageForecast) -> Option<String> {
     match forecast {
         UsageForecast::RunsOutAt(date) => {
@@ -165,6 +189,13 @@ mod tests {
             "AI Hub Bar\nСессия (5 ч) 42 % · сброс через 2 ч 14 мин\nНеделя 31 %"
         );
         assert_eq!(tray_tooltip(&s, None, Some(&UsageError::NoCredentials), now), "AI Hub Bar\nВойдите в Claude Code: claude → /login");
+        // Seen on Windows: the expired sign-in filled the hint and «Проектов:» lost its numbers.
+        let long = format!("{}\nПроектов: 1 · с проблемами: 0", tray_tooltip(&s, None, Some(&UsageError::Expired), now));
+        let fitted = fit_tooltip(&long, 127);
+        assert!(fitted.encode_utf16().count() <= 127);
+        assert!(fitted.starts_with("AI Hub Bar\nВход Claude Code устарел"));
+        assert!(fitted.ends_with("…\nПроектов: 1 · с проблемами: 0"));
+        assert_eq!(fit_tooltip("AI Hub Bar\nНеделя 31 %", 127), "AI Hub Bar\nНеделя 31 %");
         let (title, body) = alert_text(
             &s,
             &Alert::Crossed { window_key: "five_hour".into(), threshold: 80, utilization: 81.0, resets_at: Some(now + Duration::minutes(35)) },

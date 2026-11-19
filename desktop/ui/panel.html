@@ -736,7 +736,8 @@
       actions.append(action(t("Папка"), () => invoke("open_project", { path: row.path, target: "folder" })));
       if (row.github) actions.append(action("GitHub", () => invoke("open_link", { url: row.github })));
       box.append(actions);
-      if (row.stage) box.append(Object.assign(inline(row.stage), { className: "stage" }));
+      // A long «Stage» line would push the lists below out of sight: four lines, the whole text in the hint.
+      if (row.stage) box.append(Object.assign(inline(row.stage), { className: "stage", title: row.stage }));
       box.append(...bullets(t("Сейчас"), row.now), ...bullets(t("Дальше"), row.next), ...bullets(t("Нужно от вас"), row.needs, "needs"));
       if (row.statusNote) box.append(element("p", "secondary", row.statusNote));
       for (const item of row.attention) {

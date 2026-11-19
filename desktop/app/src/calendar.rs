@@ -198,13 +198,15 @@ pub fn open_calendar(app: AppHandle) {
     }
     let title = format!("{} — {}", claudepult_core::APP_NAME, strings(&app).t("Календарь"));
     // Windows' file drop handler would take the page's own drag and drop away: dates are dragged between days here.
-    let _ = tauri::WebviewWindowBuilder::new(&app, "calendar", tauri::WebviewUrl::App("calendar.html".into()))
-        .title(title)
-        .inner_size(900.0, 640.0)
-        .min_inner_size(700.0, 480.0)
-        .disable_drag_drop_handler()
-        .center()
-        .build();
+    crate::off_main_thread(move || {
+        let _ = tauri::WebviewWindowBuilder::new(&app, "calendar", tauri::WebviewUrl::App("calendar.html".into()))
+            .title(title)
+            .inner_size(900.0, 640.0)
+            .min_inner_size(700.0, 480.0)
+            .disable_drag_drop_handler()
+            .center()
+            .build();
+    });
 }
 
 #[derive(Serialize)]
