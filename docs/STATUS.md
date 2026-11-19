@@ -87,10 +87,11 @@
 - check on the Air: the island at the real notch
 - promotion (docs/LAUNCH.md): r/ClaudeAI, the lists, r/macapps, Show HN, Product Hunt, Homebrew
 - content (docs/specs/SPEC-content.md, agreed): stage 2 «Версии», then batch tasks; better after the first feedback from people
-- Windows: left on the laptop — a terminal launch into a worktree stops at Claude Code's own first-run questions for the new folder (theme, the Chrome extension) before the task starts — see whether the Mac does the same and whether the app can spare the person that; «Следующий шаг» and «Завершить», notifications and their buttons (the agent can't see a toast: its tool hides other programs' windows); the Mac's background runs have the same rules — try one build in a subfolder there; then stage 7 (installer, signing, updates) or the stage 6 leftovers (сочетания клавиш для команд, «Извлечь диски»)
+- Windows: left on the laptop — «Следующий шаг» and «Завершить», notifications and their buttons (the agent can't see a toast: its tool hides other programs' windows); the Mac's background runs have the same rules — try one build in a subfolder there; then stage 7 (installer, signing, updates) or the stage 6 leftovers (сочетания клавиш для команд, «Извлечь диски»)
 
 **Needs Oleh:**
 - Windows laptop: a permission request from a real Claude Code session is still not seen — Claude Code there runs in Auto mode and decides routine actions itself. To see one: start `claude --permission-mode default` in a terminal in a project, ask it to create a file, and answer «Разрешить» in AI Hub Bar's panel instead of the terminal; say whether the terminal went on. Also close the terminal tab left in `.claude\worktrees\cb-live-check-of-a-permission` (it keeps that empty folder)
+- Windows laptop: open `claude` in a terminal once and answer its question about the Chrome extension — until then every launch in a terminal stops at it before the task
 - Windows signing with SignPath Foundation (chosen 2026-11-19): 1) MFA on GitHub; 2) apply at signpath.org with the repository, https://github.com/OlehDemishev/AIHubBar/releases/tag/desktop-v0.1.1 as the download page (the unsigned pre-release they want to see) and a short description (CODE_SIGNING.md is the policy); 3) once granted, in SignPath: a project, the GitHub.com trusted build system, artifact configurations `windows-binaries` and `windows-installer` from desktop/signpath/, signing policy `release-signing` with you as approver, an API token for CI; 4) in the repository: variables SIGNPATH_ORGANIZATION_ID and SIGNPATH_PROJECT_SLUG, secret SIGNPATH_API_TOKEN
 - Windows laptop: install the tools and copy the two CLAUDE.md files as in `desktop/WINDOWS-DEV.md`, sign in to Claude Code there; choose the Windows signing (SPEC-windows §7)
 - say when the agent may open the app's windows for a live look at the nine features (it takes the keyboard for a minute), or look yourself: ⌃⌥P with Codex «В фоне» and with «И в Codex — сравнить»; a finished task's menu → «Проверить в Codex»; the «Claude Code» window → «Skills и плагины» (no switch pressed yet); «История расхода» → «Сегодня» and the plan's price
@@ -125,6 +126,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-19 — Windows: what stopped a terminal launch in a new worktree (no branch of code, `chore/desktop-first-run-note`)
+
+Done: no code changed. The two stops seen today when «Своя задача…» opened Claude in a terminal in a new worktree were Claude Code's once-per-computer questions, not the worktree's: the welcome screen with the theme (interactive `claude` had never been opened on the laptop) and «Claude in Chrome extension detected». The second one is still unanswered, because the agent closed that window.
+Checked: `%USERPROFILE%\.claude.json` after the day's runs (key names only): `hasCompletedOnboarding` is set for the whole computer; `projects` holds one entry, the repository's own folder, with the folder's trust accepted — neither worktree got an entry or a trust question, though the first session worked and wrote a file in its worktree. So a worktree under a trusted repository asks nothing of its own.
+Left: nothing for the app to do — these are Claude Code's own first questions and it is not for AI Hub Bar to answer them. The same on a Mac is not looked at. Oleh answers the Chrome question once (Needs Oleh).
 
 ## 2026-11-19 — Windows 0.1.1 pre-release published (tag `desktop-v0.1.1`)
 
