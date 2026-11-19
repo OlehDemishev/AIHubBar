@@ -5,6 +5,7 @@
 **Updated:** 2026-11-19
 
 **Now:**
+- 2026-11-19: Mac — «Проверить в …» and «Передать Codex» as buttons under a task's log in Telegram (branch `feat/telegram-review-handover`); goes out with 0.12.0, not pressed live
 - 2026-11-19: Mac — the pair's results can be compared: «Сравнить с …» in a pair task's menu opens both answers and changed files side by side (branch `feat/pair-compare`); goes out with 0.12.0, not seen live
 - 2026-11-19: Windows 0.1.0 published as an unsigned pre-release (tag `desktop-v0.1.0`); «latest» stays the Mac's v0.11.0
 - 2026-11-19: Windows — ready for SignPath Foundation signing: CODE_SIGNING.md, the release workflow, artifact configurations (#450, merged; the release workflow run by hand on main built, installed and checked an unsigned installer)
@@ -110,6 +111,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-19 — Review and handover from Telegram (branch `feat/telegram-review-handover`)
+
+Done: «Проверить в …» and «Передать Codex» were only in the panel's menu. In Telegram the log of a background task (🚀 → 📜) now has the same two buttons when the task allows them: 🔍 for a finished run, ➡️ for Claude's run paused by the limit or ended badly. Routes `rv:` / `rh:`, offered and obeyed only while tasks may be started from Telegram (as «Остановить»). A line in `docs/release-notes/0.12.0.md`.
+Checked: `scripts/check.sh` green; new tests for the routes and the screen.
+Left: not pressed in a live chat. The Mini App has no such buttons.
 
 ## 2026-11-19 — Comparing the pair's results (branch `feat/pair-compare`)
 

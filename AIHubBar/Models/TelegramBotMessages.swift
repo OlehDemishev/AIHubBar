@@ -131,6 +131,10 @@ struct BotRunLine: Equatable, Sendable {
     var paused: Bool
     var startedAt: Date
     var pullRequestURL: String?
+    /// The service that can review this finished run («Проверить в …»); nil when it cannot be reviewed.
+    var reviewer: String? = nil
+    /// The run can go on in Codex («Передать Codex»): Claude's, paused by the limit or ended badly.
+    var handOverTo: String? = nil
 }
 
 /// One AI service in ⏳.
