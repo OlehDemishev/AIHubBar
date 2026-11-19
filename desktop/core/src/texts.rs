@@ -36,7 +36,7 @@ pub fn reset_text(s: &Strings, resets_at: Option<DateTime<Utc>>, now: DateTime<U
     let when = if (resets - now).num_hours() < 24 {
         countdown(s, resets, now)
     } else {
-        resets.with_timezone(&Local).format("%a %H:%M").to_string()
+        s.weekday_time(&resets.with_timezone(&Local))
     };
     Some(s.format("сброс %@", &[&when]))
 }
@@ -189,6 +189,17 @@ mod tests {
             "AI Hub Bar\nСессия (5 ч) 42 % · сброс через 2 ч 14 мин\nНеделя 31 %"
         );
         assert_eq!(tray_tooltip(&s, None, Some(&UsageError::NoCredentials), now), "AI Hub Bar\nВойдите в Claude Code: claude → /login");
+        // Seen on Windows: «сброс Tue 01:00» in the Russian interface. 2026-11-05 is a Thursday.
+        let thursday = chrono::NaiveDate::from_ymd_opt(2026, 11, 5).unwrap().and_hms_opt(9, 0, 0).unwrap().and_utc();
+        assert_eq!(s.weekday_time(&thursday), "Чт 09:00");
+        assert_eq!(Strings::of("en", "{}").weekday_time(&thursday), "Thu 09:00");
+        assert_eq!(Strings::of("de", "{}").weekday_time(&thursday), "Do 09:00");
+        assert_eq!(Strings::of("ja", "{}").weekday_time(&thursday), "木 09:00");
+        for code in crate::i18n::LANGUAGES {
+            let text = Strings::of(code, "{}").weekday_time(&thursday);
+            assert!(text.ends_with(" 09:00") && text.chars().count() > 6, "{code}: {text}");
+            assert!(code == "en" || text != "Thu 09:00", "{code} has its own name of the day");
+        }
         // Seen on Windows: the expired sign-in filled the hint and «Проектов:» lost its numbers.
         let long = format!("{}\nПроектов: 1 · с проблемами: 0", tray_tooltip(&s, None, Some(&UsageError::Expired), now));
         let fitted = fit_tooltip(&long, 127);

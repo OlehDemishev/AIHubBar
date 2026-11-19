@@ -172,7 +172,7 @@ pub fn hub_view(app: AppHandle) -> HubView {
                     color: w.percent.map(color),
                     detail: w.detail.clone(),
                     reset: texts::reset_text(&texts, w.resets_at, now),
-                    forecast: w.runs_out_at.map(|at| texts.format("при текущем темпе хватит до ~%@", &[&at.with_timezone(&Local).format(if (at - now).num_hours() < 20 { "%H:%M" } else { "%a %H:%M" }).to_string()])),
+                    forecast: w.runs_out_at.map(|at| texts.format("при текущем темпе хватит до ~%@", &[&if (at - now).num_hours() < 20 { at.with_timezone(&Local).format("%H:%M").to_string() } else { texts.weekday_time(&at.with_timezone(&Local)) }])),
                 })
                 .collect(),
         })
