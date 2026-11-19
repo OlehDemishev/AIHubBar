@@ -5,7 +5,7 @@
 **Updated:** 2026-11-19
 
 **Now:**
-- 2026-11-19: Windows — the tray icon shows two limits (session and week) in one of seven styles chosen in Settings → «Сервисы AI» → «Значок в трее»; «Два столбика» is the default (#457, merged; CI green on Windows and Linux); not seen on Windows, the live look is first in Next
+- 2026-11-19: Windows — the tray icon shows two limits (session and week) in one of seven styles chosen in Settings → «Сервисы AI» → «Значок в трее»; «Два столбика» is the default (#457, merged; CI green on Windows and Linux); seen live on the laptop at 125 %: all seven draw as their tiles, the orange dot is lost on «Число и полоска» (journal, docs/images/tray-styles-windows.png)
 - 2026-11-19: Windows — first live pass on the laptop (branch `fix/desktop-live-pass`): the installed 0.1.0 opens Settings as a white window that can't be closed; fixed with the tray hint cut by Windows and the panel's scrollbars. 0.1.0 as published still has the white Settings
 - 2026-11-19: Mac — «Проверить в …» and «Передать Codex» as buttons under a task's log in Telegram (#455, merged); goes out with 0.12.0, not pressed live
 - 2026-11-19: Mac — the pair's results can be compared: «Сравнить с …» in a pair task's menu opens both answers and changed files side by side (#453, merged); goes out with 0.12.0, not seen live
@@ -76,11 +76,11 @@
 - check on the Air: the island at the real notch
 - promotion (docs/LAUNCH.md): r/ClaudeAI, the lists, r/macapps, Show HN, Product Hunt, Homebrew
 - content (docs/specs/SPEC-content.md, agreed): stage 2 «Версии», then batch tasks; better after the first feedback from people
-- Windows, on the laptop, first (after `git pull`): the tray icon styles live — run the app (`npx tauri dev` in `desktop/`), open Settings → «Сервисы AI» → «Значок в трее», press each of the seven tiles and screenshot the tray after each (pin the icon out of «^» first); note the display scale, whether each style reads at that size, whether the tiles' samples match the icon, and how the orange dot sits on «Число и полоска»; write what was seen into STATUS → Checked and leave the choice of the default to Oleh
+- Windows: the «ждёт» dot on «Число и полоска» merges with orange digits — give the dot an outline or another place (after Oleh picks the default style)
 - Windows: on the laptop the live check of SPEC-windows §11.4 (with a real permission request answered from the panel) the «Проекты» card's buttons, a Claude launch in Windows Terminal and one in the background (do the `PowerShell(…)` rules let it build and check a project without Git Bash?); then stage 7 (installer, signing, updates) or the stage 6 leftovers (сочетания клавиш для команд, «Извлечь диски»); stage 3 leftovers («Показать», buttons in the notification) need the laptop
 
 **Needs Oleh:**
-- Windows laptop: Settings → «Сервисы AI» → «Значок в трее» — press each of the seven styles, look at the icon in the tray at your display scale and say which one should be the default (now «Два столбика»)
+- Windows: pick the tray icon's default style from docs/images/tray-styles-windows.png (all seven at real size and ×6, 125 % scale; now «Два столбика») — the agent finds «Два столбика», «Две полоски» and «Число и полоска» the clearest at that size, «Кольцо в кольце» the weakest
 - Windows: say whether to publish 0.1.1 with the Settings fix (0.1.0 on the pre-release page can't open Settings, the assistant, the calendar or «Быстрый запрос» after the first start) — SignPath will look at that page
 - Windows laptop: Settings → Hooks → «Установить hooks» (it changes `%USERPROFILE%\.claude\settings.json`, so the agent left the click to you), then run `claude` once in a terminal: the sign-in file there is expired, and the Claude desktop app doesn't renew it
 - Windows signing with SignPath Foundation (chosen 2026-11-19): 1) MFA on GitHub; 2) apply at signpath.org with the repository, https://github.com/OlehDemishev/AIHubBar/releases/tag/desktop-v0.1.0 as the download page (the unsigned pre-release they want to see) and a short description (CODE_SIGNING.md is the policy); 3) once granted, in SignPath: a project, the GitHub.com trusted build system, artifact configurations `windows-binaries` and `windows-installer` from desktop/signpath/, signing policy `release-signing` with you as approver, an API token for CI; 4) in the repository: variables SIGNPATH_ORGANIZATION_ID and SIGNPATH_PROJECT_SLUG, secret SIGNPATH_API_TOKEN
@@ -117,6 +117,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-19 — Windows: the tray icon styles seen live (branch `chore/desktop-tray-styles-live`)
+
+Done: the seven styles of «Значок в трее» (#457) looked at on the laptop: Windows 11, 1920×1080 at 125 %, where the tray draws the 32 px icon at about 20 px. Each tile pressed in Settings → «Сервисы AI», the icon captured under «^» after each; docs/images/tray-styles-windows.png has all seven at real size and ×6. No code changed.
+Checked: live, a build from `main` (`npx tauri dev`), the limits replaced for the look by the tiles' own 62 % and 31 % with a local patch that was not committed (the laptop's real values are Copilot's 1 % and 0 %, nearly empty). The icon changes at once on a click and matches its tile in every style. Read at 20 px: «Два столбика», «Две полоски» and «Одно кольцо» — clear; «Число и полоска» — «62» reads, the bar under it is 2–3 px but visible; «Кольцо и сектор» — the ring reads, the sector is small; «Две дуги» — the 31 % arc is a short stub; «Кольцо в кольце» — the inner ring is a smudge, the second limit can't be read. The orange «ждёт» dot on «Число и полоска» with orange digits (62 %) merges with the «2»: it can't be seen.
+Left: the default style is Oleh's choice; the dot on «Число и полоска» needs an outline or another corner; the dot on the other six styles, the red and green levels and the icon pinned to the taskbar itself (it was looked at in the «^» flyout: Explorer lets the agent click but not drag) were not looked at. Seen in passing: the Settings page jumps by a few rows when «Другие AI» above refreshes.
 
 ## 2026-11-19 — Tray icon styles on Windows (branch `feat/desktop-tray-styles`)
 
