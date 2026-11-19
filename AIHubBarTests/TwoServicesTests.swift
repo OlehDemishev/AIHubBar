@@ -72,4 +72,24 @@ struct TwoServicesTests {
         #expect(long.cut && long.lines.count == 5)
         #expect(PairCompare.diffLines("").lines.isEmpty)
     }
+
+    @Test func oneVariantIsKeptOnlyWhenTheOtherIsAWorktreeOfTheProject() {
+        let claude = run("a", .succeeded), codex = run("b", .succeeded, agent: CodexExec.agent)
+        #expect(PairCompare.canKeep(claude, sides: [claude, codex]) && PairCompare.canKeep(codex, sides: [claude, codex]))
+        #expect(!PairCompare.canKeep(claude, sides: [claude, run("b", .running, agent: CodexExec.agent)]), "not while one still works")
+        var elsewhere = codex
+        elsewhere.folder = "/P/Other/.claude/worktrees/x"
+        var nested = codex
+        nested.folder = "/P/Ambo/.claude/worktrees/x/sub"
+        var project = codex
+        project.folder = "/P/Ambo"
+        for other in [elsewhere, nested, project] {
+            #expect(!PairCompare.removable(other) && !PairCompare.canKeep(claude, sides: [claude, other]))
+        }
+        var gone = codex
+        gone.discarded = true
+        #expect(!PairCompare.canKeep(claude, sides: [claude, gone]), "already removed")
+        #expect(PairCompare.partner(of: claude, runs: [claude, gone]) == nil, "nothing left to compare with")
+        #expect(PairCompare.removalWarning(codex).contains("cb/export-codex"))
+    }
 }
