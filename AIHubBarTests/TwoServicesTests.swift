@@ -16,7 +16,9 @@ struct TwoServicesTests {
     @Test func eachServiceGetsItsOwnWorktreeName() {
         let claude = WorktreePlan.slug(from: TwoServices.nameSource("Добавь экспорт", codex: false))
         let codex = WorktreePlan.slug(from: TwoServices.nameSource("Добавь экспорт", codex: true))
-        #expect(claude != codex && claude.hasSuffix("claude") && codex.hasSuffix("codex"))
+        #expect(claude != codex && claude.hasPrefix("claude-") && codex.hasPrefix("codex-"))
+        let long = "In greet.py add a function farewell(name) that returns a goodbye string"
+        #expect(WorktreePlan.slug(from: TwoServices.nameSource(long, codex: true)).hasPrefix("codex-in-greet"), "the service survives the cut")
     }
 
     @Test func thePairIsAnnouncedWhenBothHaveFinished() throws {

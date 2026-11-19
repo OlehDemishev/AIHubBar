@@ -63,6 +63,7 @@ struct CodexExecTests {
         #expect(CodexExec.gitDirectory(folder: repo.path) == repo.path + "/.git")
         #expect(CodexExec.gitDirectory(folder: tree.path) == repo.path + "/.git", "a worktree commits into the repository's folder")
         #expect(CodexExec.gitDirectory(folder: plain.path) == nil)
+        #expect(CodexExec.isWorktree(folder: tree.path) && !CodexExec.isWorktree(folder: repo.path) && !CodexExec.isWorktree(folder: plain.path))
         let arguments = CodexExec.arguments(prompt: "p", gitDirectory: "/r/.git")
         #expect(arguments.firstIndex(of: "--add-dir").map { arguments[$0 + 1] } == "/r/.git")
     }
