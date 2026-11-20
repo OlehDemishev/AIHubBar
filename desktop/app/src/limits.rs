@@ -127,6 +127,7 @@ impl Limits {
         if let Some(snapshot) = self.state.lock().unwrap().snapshot.clone() {
             for alert in &alerts {
                 let (title, body) = texts::alert_text(&texts, alert, &snapshot, now);
+                crate::telegram::notify(app, "lim", claudepult_core::telegram::alert_html(&title, &body));
                 let _ = app.notification().builder().title(title).body(body).show();
             }
         }

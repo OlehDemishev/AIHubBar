@@ -29,6 +29,7 @@ pub mod resources;
 pub mod projects;
 pub mod runs;
 pub mod sessions;
+pub mod telegram;
 pub mod settings;
 pub mod texts;
 pub mod toggles;

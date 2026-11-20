@@ -21,6 +21,7 @@ mod command_hot_keys;
 mod runs;
 mod services;
 mod sessions;
+mod telegram;
 mod toggles;
 mod updates;
 
@@ -396,6 +397,7 @@ fn main() {
         .manage(toggles::Toggles::default())
         .manage(hub::Hub::default())
         .manage(updates::Updates::default())
+        .manage(telegram::Telegram::default())
         .manage(quick_prompt::QuickPrompt::default())
         .manage(command_hot_keys::CommandHotKeys::default())
         .manage(AppState { settings: Mutex::new(load_settings()) })
@@ -415,6 +417,8 @@ fn main() {
             calendar::add_calendar_date, assistant::open_assistant, assistant::assistant_start, assistant::assistant_look,
             assistant::assistant_choose_folder, assistant::assistant_apply_folder, assistant::assistant_finish,
             runs::stop_run, runs::run_log, projects::worktree_removal, launch_settings, set_launch_settings,
+            telegram::telegram_view, telegram::telegram_save_token, telegram::telegram_remove_token, telegram::telegram_bind,
+            telegram::telegram_cancel_binding, telegram::telegram_set_chat, telegram::telegram_test, telegram::set_telegram_event,
             updates::updates_view, updates::set_updates_daily, updates::check_updates, updates::install_update,
             pull_request_alerts, set_pull_request_alerts, profiles::projects_folder, profiles::choose_projects_folder,
             profiles::reset_projects_folder, profiles::profiles_view, profiles::select_profile, profiles::add_profile, profiles::profile_templates,
@@ -450,6 +454,7 @@ fn main() {
             handle.state::<hub::Hub>().start(handle.clone());
             command_hot_keys::sync(&handle);
             updates::watch(handle.clone());
+            telegram::start(handle.clone());
             // Started by a double click on a `.claudepult` file.
             if let Some(file) = profiles::import_argument(std::env::args().skip(1)) {
                 profiles::open_import_file(&handle, &file);
