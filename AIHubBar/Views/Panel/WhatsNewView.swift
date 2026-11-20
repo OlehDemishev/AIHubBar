@@ -6,15 +6,15 @@ import SwiftUI
 /// `docs/release-notes/` and goes to the release page and Sparkle's window (scripts/release.sh).
 enum WhatsNew {
     /// Changes with a release that has something to say; a release without news keeps the old value and shows nothing.
-    static let version = "0.11"
+    static let version = "0.12"
 
     static var items: [String] {
-        [String(localized: "Настройки стали короче: «Модули», «Панель» и «Строка меню» теперь на одной странице «Что показывать»."),
-         String(localized: "Лимиты — крупное число и полоса с темпом; кольца возвращаются в настройках блока «Лимиты AI»."),
-         String(localized: "У недели видно, быстрее или медленнее ровного расхода вы тратите лимит: отметка на полосе и строка под ней."),
-         String(localized: "Строка «Свернуть» внизу панели оставляет лимиты, сессии и проекты; «Ещё» возвращает остальные блоки."),
-         String(localized: "Кнопка «стоп» у фоновой задачи останавливает со второго клика."),
-         String(localized: "Главным может быть не только Claude: без него первыми идут лимиты другого сервиса. Выбор — на странице «Лимиты AI».")]
+        [String(localized: "Codex работает как Claude: «Разрешить» и «Отклонить» на его запросы прямо из панели, и задачи в фоне из «Быстрого запроса»."),
+         String(localized: "Одну задачу можно дать Claude и Codex сразу: окно сравнения покажет оба ответа и изменённые файлы, а выбранный вариант вливается в вашу ветку."),
+         String(localized: "У готовой фоновой задачи в меню есть «Проверить в Codex», а у остановленной по лимиту — «Передать Codex»."),
+         String(localized: "В окне «Claude Code» новая вкладка «Skills и плагины»: выключатель у каждого."),
+         String(localized: "«История расхода» открывается сводкой «Сегодня» и сравнивает расход по цене API с ценой плана."),
+         String(localized: "Колокольчик в шапке панели выключает уведомления в Telegram, пока не нажмёте снова.")]
     }
 
     /// Shown to whoever already had a profile and has not seen this version's card. A new person has nothing to compare

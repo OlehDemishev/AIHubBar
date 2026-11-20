@@ -5,6 +5,7 @@
 **Updated:** 2026-11-20
 
 **Now:**
+- 2026-11-20: Mac — the «Что нового» card and the demo data brought to 0.12 (`chore/whats-new-0.12`, merged 2026-11-20) for 0.12.0-beta.1, which Oleh asked for the same day
 - 2026-11-20: Windows — Telegram stage 1: the own bot's token, the chat bound with «Start», a test message and the notifications' alerts sent to the chat with a switch each (branch `feat/desktop-telegram`; the page seen live, a real bot not tried — the laptop has no token)
 - 2026-11-20: Windows 0.1.2 published as an unsigned pre-release (tag `desktop-v0.1.2`) on Oleh's «Да, выпускай»: the first version that updates itself, with quick command shortcuts and «Извлечь диски»; installed on the laptop, its «Проверить сейчас» reads the published manifest; «latest» stays the Mac's v0.11.0
 - 2026-11-20: Windows — updates: a check once a day and by hand, «Установить и перезапустить» in Settings → «Основные» → «Обновления»; the release workflow signs the installer with the update key and writes the manifest (branch `feat/desktop-updates`; a whole update seen live on the laptop against a local manifest)
@@ -144,6 +145,11 @@
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
 
+## 2026-11-20 — The «Что нового» card for 0.12 (branch `chore/whats-new-0.12`)
+
+Done: `WhatsNew.version` is 0.12 with six lines (Codex approvals and background tasks, one task to both with the comparison, review and handover, «Skills и плагины», the day summary and the plan's price, the Telegram bell), in 13 languages; four of the 0.11 card's lines left the catalog, two stay as help facts. `DemoData` is at 0.12: a finished pair of Claude and Codex in `atlas-api`, so «Compare with…» is in the demo.
+Checked: `scripts/check.sh` (catalog 1944 keys, 0 problems).
+Left: the card and the header bell not seen in a panel — opening a panel takes the keyboard, not done without Oleh's word; the beta on his copy shows both.
 ## 2026-11-20 — Windows: Telegram, stage 1 (branch `feat/desktop-telegram`)
 
 Done: Oleh chose Telegram as the next thing for Windows. `core/src/telegram.rs` and `app/src/telegram.rs`: the person's own bot. The token is checked with `getMe` and kept with the API keys (Credential Manager, the Mac's account `telegram-bot`); «Привязать чат» opens `t.me/<bot>?start=<code>` and waits ten minutes for `/start <code>` from the person's own private chat — a group, another code or a message from someone else is not taken; «Проверить» sends a test message. What the notifications show also goes to the chat in the Mac's formats: results of background tasks, limit thresholds of Claude and the other services, calendar reminders, PR and CI changes — each with a switch under «Уведомления в Telegram». When another program reads the bot (HTTP 409), the page says so and takes the chat's id typed by hand. The token is only in a request's address and never in a log; errors carry the HTTP code. All 22 texts are the Mac's, none added. Hidden where there is no key store (Linux).

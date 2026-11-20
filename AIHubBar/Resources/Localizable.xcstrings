@@ -9951,6 +9951,82 @@
         }
       }
     },
+    "Codex работает как Claude: «Разрешить» и «Отклонить» на его запросы прямо из панели, и задачи в фоне из «Быстрого запроса».": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex works like Claude: “Allow” and “Deny” for its requests right from the panel, and background tasks from Quick Prompt."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex працює як Claude: «Дозволити» й «Відхилити» на його запити просто з панелі, і задачі у фоні зі «Швидкого запиту»."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex arbeitet wie Claude: „Erlauben“ und „Ablehnen“ für seine Anfragen direkt im Panel und Hintergrundaufgaben aus dem „Schnellauftrag“."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex fonctionne comme Claude : « Autoriser » et « Refuser » pour ses demandes directement dans le panneau, et des tâches en arrière-plan depuis « Requête rapide »."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex funciona como Claude: «Permitir» y «Rechazar» para sus solicitudes desde el propio panel, y tareas en segundo plano desde «Petición rápida»."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex funziona come Claude: «Consenti» e «Rifiuta» per le sue richieste direttamente dal pannello, e attività in background da «Richiesta rapida»."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O Codex funciona como o Claude: “Permitir” e “Recusar” para os pedidos dele direto no painel, e tarefas em segundo plano pelo “Pedido rápido”."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex działa jak Claude: „Zezwól” i „Odrzuć” na jego prośby prosto z panelu oraz zadania w tle z „Szybkiego zapytania”."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CodexもClaudeと同じように使えます。リクエストへの「許可」と「拒否」をパネルから直接行え、「クイックプロンプト」からバックグラウンドのタスクも実行できます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex도 Claude처럼 작동합니다. 요청에 대한 “허용”과 “거부”를 패널에서 바로 할 수 있고, “빠른 요청”에서 백그라운드 작업도 보낼 수 있습니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex يعمل مثل Claude: «سماح» و«رفض» لطلباته من اللوحة مباشرة، ومهام في الخلفية من «طلب سريع»."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codex bekerja seperti Claude: “Izinkan” dan “Tolak” untuk permintaannya langsung dari panel, dan tugas di latar belakang dari “Permintaan cepat”."
+          }
+        }
+      }
+    },
     "Codex, Copilot, Gemini, Antigravity, Cursor и расход по API — такими же карточками, как Claude.": {
       "localizations": {
         "ar": {
@@ -14192,6 +14268,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "«Готово» додасть профіль і зробить його поточним. Далі все змінюється в Налаштуваннях → «Профілі»."
+          }
+        }
+      }
+    },
+    "«История расхода» открывается сводкой «Сегодня» и сравнивает расход по цене API с ценой плана.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Usage History opens with the “Today” summary and compares your spend at the API price with the price of the plan."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«Історія витрат» відкривається зведенням «Сьогодні» й порівнює витрати за ціною API з ціною плану."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der „Verbrauchsverlauf“ öffnet sich mit der Übersicht „Heute“ und vergleicht den Verbrauch zum API-Preis mit dem Preis des Plans."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "« Historique de consommation » s’ouvre sur le résumé « Aujourd’hui » et compare la dépense au prix de l’API avec le prix du forfait."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«Historial de consumo» se abre con el resumen «Hoy» y compara el gasto a precio de API con el precio del plan."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«Cronologia dei consumi» si apre con il riepilogo «Oggi» e confronta la spesa al prezzo dell’API con il prezzo del piano."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O “Histórico de consumo” abre com o resumo “Hoje” e compara o gasto pelo preço da API com o preço do plano."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "„Historia zużycia” otwiera się podsumowaniem „Dziś” i porównuje zużycie w cenie API z ceną planu."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「使用履歴」は「今日」のまとめから始まり、API料金で見た消費額とプランの料金を比べます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“사용 기록”은 “오늘” 요약으로 열리며, API 가격 기준 사용액을 요금제 가격과 비교합니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«سجل الاستهلاك» يفتح على ملخص «اليوم» ويقارن الاستهلاك بسعر API مع سعر الخطة."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“Riwayat pemakaian” dibuka dengan ringkasan “Hari ini” dan membandingkan pemakaian dengan harga API terhadap harga paket."
           }
         }
       }
@@ -19671,16 +19823,10 @@
     },
     "В ветке %@ есть коммиты, которых нет в ветке проекта — папка и ветка оставлены.": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "The branch %@ has commits the project’s branch lacks — the folder and the branch are left in place."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "У гілці %@ є коміти, яких немає в гілці проєкту — папку й гілку залишено."
+            "value": "في الفرع %@ عمليات commit غير موجودة في فرع المشروع — تُرك المجلد والفرع كما هما."
           }
         },
         "de": {
@@ -19689,10 +19835,10 @@
             "value": "Der Branch %@ enthält Commits, die dem Branch des Projekts fehlen – Ordner und Branch bleiben erhalten."
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "La branche %@ contient des commits absents de la branche du projet — le dossier et la branche sont conservés."
+            "value": "The branch %@ has commits the project’s branch lacks — the folder and the branch are left in place."
           }
         },
         "es": {
@@ -19701,22 +19847,22 @@
             "value": "La rama %@ tiene commits que no están en la rama del proyecto: la carpeta y la rama se han dejado."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La branche %@ contient des commits absents de la branche du projet — le dossier et la branche sont conservés."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Branch %@ punya commit yang tidak ada di branch proyek — folder dan branch dibiarkan."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Il ramo %@ ha commit che mancano nel ramo del progetto: cartella e ramo sono stati lasciati."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "O branch %@ tem commits que não estão no branch do projeto — a pasta e o branch foram mantidos."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Gałąź %@ ma commity, których nie ma w gałęzi projektu — folder i gałąź zostały."
           }
         },
         "ja": {
@@ -19731,16 +19877,22 @@
             "value": "브랜치 %@에 프로젝트 브랜치에 없는 커밋이 있습니다. 폴더와 브랜치는 그대로 두었습니다."
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "في الفرع %@ عمليات commit غير موجودة في فرع المشروع — تُرك المجلد والفرع كما هما."
+            "value": "Gałąź %@ ma commity, których nie ma w gałęzi projektu — folder i gałąź zostały."
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Branch %@ punya commit yang tidak ada di branch proyek — folder dan branch dibiarkan."
+            "value": "O branch %@ tem commits que não estão no branch do projeto — a pasta e o branch foram mantidos."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "У гілці %@ є коміти, яких немає в гілці проєкту — папку й гілку залишено."
           }
         }
       }
@@ -20201,18 +20353,88 @@
         }
       }
     },
-    "В окне сравнения клик по файлу показывает изменения построчно. «Оставить этот вариант» удаляет другой, «Влить в …» вливает ветку варианта в ветку проекта (без push), а «Убрать папку и ветку» потом убирает за ним. Каждое действие спрашивает подтверждение.": {
+    "В окне «Claude Code» новая вкладка «Skills и плагины»: выключатель у каждого.": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "In the comparison window, a click on a file shows its changes line by line. “Keep this version” removes the other one, “Merge into …” merges the version’s branch into the project’s branch (no push), and “Remove folder and branch” then cleans up after it. Each action asks for confirmation."
+            "value": "The Claude Code window has a new tab, “Skills and Plugins”: a switch for each one."
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "У вікні порівняння клік по файлу показує зміни порядково. «Залишити цей варіант» видаляє інший, «Влити в …» вливає гілку варіанта в гілку проєкту (без push), а «Прибрати папку й гілку» потім прибирає за ним. Кожна дія просить підтвердження."
+            "value": "У вікні «Claude Code» нова вкладка «Skills і плагіни»: вимикач у кожного."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Das Fenster „Claude Code“ hat einen neuen Tab „Skills und Plug-ins“: ein Schalter für jeden Eintrag."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La fenêtre « Claude Code » a un nouvel onglet « Skills et plugins » : un interrupteur pour chacun."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La ventana «Claude Code» tiene una pestaña nueva, «Skills y plugins»: un interruptor para cada uno."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La finestra «Claude Code» ha una nuova scheda «Skill e plugin»: un interruttore per ciascuno."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A janela “Claude Code” tem uma aba nova, “Skills e plugins”: um interruptor para cada um."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "W oknie „Claude Code” jest nowa karta „Skille i wtyczki”: przy każdym przełącznik."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「Claude Code」ウインドウに新しいタブ「スキルとプラグイン」が加わりました。それぞれにスイッチがあります。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“Claude Code” 창에 새 탭 “스킬과 플러그인”이 생겼습니다. 항목마다 스위치가 있습니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "في نافذة «Claude Code» تبويب جديد «المهارات والإضافات»: مفتاح لكل واحدة."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jendela “Claude Code” punya tab baru “Skill dan plugin”: ada sakelar untuk masing-masing."
+          }
+        }
+      }
+    },
+    "В окне сравнения клик по файлу показывает изменения построчно. «Оставить этот вариант» удаляет другой, «Влить в …» вливает ветку варианта в ветку проекта (без push), а «Убрать папку и ветку» потом убирает за ним. Каждое действие спрашивает подтверждение.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "في نافذة المقارنة، النقر على ملف يعرض تغييراته سطرًا بسطر. «الإبقاء على هذه النسخة» يحذف الأخرى، و«دمج في …» يدمج فرع النسخة في فرع المشروع (دون push)، ثم «إزالة المجلد والفرع» ينظّف بعدها. كل إجراء يطلب التأكيد."
           }
         },
         "de": {
@@ -20221,10 +20443,10 @@
             "value": "Im Vergleichsfenster zeigt ein Klick auf eine Datei die Änderungen Zeile für Zeile. „Diese Variante behalten“ entfernt die andere, „In … mergen“ mergt den Branch der Variante in den Branch des Projekts (kein Push), und „Ordner und Branch entfernen“ räumt danach auf. Jede Aktion fragt nach einer Bestätigung."
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Dans la fenêtre de comparaison, un clic sur un fichier montre ses modifications ligne par ligne. « Garder cette version » supprime l’autre, « Fusionner dans … » fusionne la branche de la version dans celle du projet (sans push), puis « Retirer le dossier et la branche » fait le ménage. Chaque action demande une confirmation."
+            "value": "In the comparison window, a click on a file shows its changes line by line. “Keep this version” removes the other one, “Merge into …” merges the version’s branch into the project’s branch (no push), and “Remove folder and branch” then cleans up after it. Each action asks for confirmation."
           }
         },
         "es": {
@@ -20233,22 +20455,22 @@
             "value": "En la ventana de comparación, un clic en un archivo muestra sus cambios línea por línea. «Conservar esta variante» elimina la otra, «Fusionar en …» fusiona la rama de la variante en la rama del proyecto (sin push) y «Quitar carpeta y rama» limpia después. Cada acción pide confirmación."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dans la fenêtre de comparaison, un clic sur un fichier montre ses modifications ligne par ligne. « Garder cette version » supprime l’autre, « Fusionner dans … » fusionne la branche de la version dans celle du projet (sans push), puis « Retirer le dossier et la branche » fait le ménage. Chaque action demande une confirmation."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Di jendela perbandingan, klik pada file menampilkan perubahannya baris demi baris. “Pertahankan varian ini” menghapus yang lain, “Gabung ke …” menggabungkan branch varian ke branch proyek (tanpa push), lalu “Singkirkan folder dan branch” merapikan setelahnya. Setiap tindakan meminta konfirmasi."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Nella finestra di confronto, un clic su un file ne mostra le modifiche riga per riga. «Tieni questa variante» elimina l’altra, «Unisci a …» unisce il ramo della variante al ramo del progetto (senza push) e «Rimuovi cartella e ramo» poi fa pulizia. Ogni azione chiede conferma."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Na janela de comparação, um clique em um arquivo mostra as alterações linha por linha. “Manter esta variante” remove a outra, “Mesclar em …” mescla o branch da variante no branch do projeto (sem push) e “Remover pasta e branch” faz a limpeza depois. Cada ação pede confirmação."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "W oknie porównania kliknięcie pliku pokazuje zmiany wiersz po wierszu. „Zostaw ten wariant” usuwa drugi, „Scal z …” scala gałąź wariantu z gałęzią projektu (bez push), a „Usuń folder i gałąź” potem po nim sprząta. Każda czynność prosi o potwierdzenie."
           }
         },
         "ja": {
@@ -20263,32 +20485,32 @@
             "value": "비교 창에서 파일을 클릭하면 변경 사항이 줄 단위로 표시됩니다. “이 결과 유지”는 다른 쪽을 삭제하고, “…에 병합”은 결과의 브랜치를 프로젝트 브랜치에 병합하며(푸시 없음), “폴더와 브랜치 제거”는 그 뒤를 정리합니다. 모든 동작은 확인을 묻습니다."
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "في نافذة المقارنة، النقر على ملف يعرض تغييراته سطرًا بسطر. «الإبقاء على هذه النسخة» يحذف الأخرى، و«دمج في …» يدمج فرع النسخة في فرع المشروع (دون push)، ثم «إزالة المجلد والفرع» ينظّف بعدها. كل إجراء يطلب التأكيد."
+            "value": "W oknie porównania kliknięcie pliku pokazuje zmiany wiersz po wierszu. „Zostaw ten wariant” usuwa drugi, „Scal z …” scala gałąź wariantu z gałęzią projektu (bez push), a „Usuń folder i gałąź” potem po nim sprząta. Każda czynność prosi o potwierdzenie."
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Di jendela perbandingan, klik pada file menampilkan perubahannya baris demi baris. “Pertahankan varian ini” menghapus yang lain, “Gabung ke …” menggabungkan branch varian ke branch proyek (tanpa push), lalu “Singkirkan folder dan branch” merapikan setelahnya. Setiap tindakan meminta konfirmasi."
+            "value": "Na janela de comparação, um clique em um arquivo mostra as alterações linha por linha. “Manter esta variante” remove a outra, “Mesclar em …” mescla o branch da variante no branch do projeto (sem push) e “Remover pasta e branch” faz a limpeza depois. Cada ação pede confirmação."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "У вікні порівняння клік по файлу показує зміни порядково. «Залишити цей варіант» видаляє інший, «Влити в …» вливає гілку варіанта в гілку проєкту (без push), а «Прибрати папку й гілку» потім прибирає за ним. Кожна дія просить підтвердження."
           }
         }
       }
     },
     "В папке варианта есть незакоммиченные изменения — папка и ветка оставлены.": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "The version’s folder has uncommitted changes — the folder and the branch are left in place."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "У папці варіанта є незакомічені зміни — папку й гілку залишено."
+            "value": "في مجلد النسخة تغييرات دون commit — تُرك المجلد والفرع كما هما."
           }
         },
         "de": {
@@ -20297,10 +20519,10 @@
             "value": "Im Ordner der Variante gibt es nicht committete Änderungen – Ordner und Branch bleiben erhalten."
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Le dossier de la version contient des modifications non commitées — le dossier et la branche sont conservés."
+            "value": "The version’s folder has uncommitted changes — the folder and the branch are left in place."
           }
         },
         "es": {
@@ -20309,22 +20531,22 @@
             "value": "La carpeta de la variante tiene cambios sin commit: la carpeta y la rama se han dejado."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le dossier de la version contient des modifications non commitées — le dossier et la branche sont conservés."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Folder varian punya perubahan yang belum di-commit — folder dan branch dibiarkan."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "La cartella della variante ha modifiche senza commit: cartella e ramo sono stati lasciati."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "A pasta da variante tem alterações sem commit — a pasta e o branch foram mantidos."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "W folderze wariantu są niezacommitowane zmiany — folder i gałąź zostały."
           }
         },
         "ja": {
@@ -20339,16 +20561,22 @@
             "value": "결과의 폴더에 커밋되지 않은 변경 사항이 있습니다. 폴더와 브랜치는 그대로 두었습니다."
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "في مجلد النسخة تغييرات دون commit — تُرك المجلد والفرع كما هما."
+            "value": "W folderze wariantu są niezacommitowane zmiany — folder i gałąź zostały."
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Folder varian punya perubahan yang belum di-commit — folder dan branch dibiarkan."
+            "value": "A pasta da variante tem alterações sem commit — a pasta e o branch foram mantidos."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "У папці варіанта є незакомічені зміни — папку й гілку залишено."
           }
         }
       }
@@ -26530,16 +26758,10 @@
     },
     "Выбрать вариант": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Choosing a version"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Вибрати варіант"
+            "value": "اختيار نسخة"
           }
         },
         "de": {
@@ -26548,10 +26770,10 @@
             "value": "Variante wählen"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Choisir une version"
+            "value": "Choosing a version"
           }
         },
         "es": {
@@ -26560,22 +26782,22 @@
             "value": "Elegir una variante"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choisir une version"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Memilih varian"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Scegliere una variante"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Escolher uma variante"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Wybór wariantu"
           }
         },
         "ja": {
@@ -26590,16 +26812,22 @@
             "value": "결과 고르기"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "اختيار نسخة"
+            "value": "Wybór wariantu"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Memilih varian"
+            "value": "Escolher uma variante"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Вибрати варіант"
           }
         }
       }
@@ -30173,82 +30401,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Головний файл — за ним рахуються слова та хронометраж"
-          }
-        }
-      }
-    },
-    "Главным может быть не только Claude: без него первыми идут лимиты другого сервиса. Выбор — на странице «Лимиты AI».": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "لم يعد من الضروري أن تكون Claude هي الخدمة الرئيسية: بدونها تأتي حدود خدمة أخرى أولًا. الاختيار في صفحة «حدود الذكاء الاصطناعي»."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Der Hauptdienst muss nicht mehr Claude sein: Ohne Claude stehen die Limits eines anderen Dienstes an erster Stelle. Die Auswahl steht auf der Seite „KI-Limits“."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Claude no longer has to be the main service: without it, another service’s limits come first. The choice is on the “AI limits” page."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "El servicio principal ya no tiene que ser Claude: sin él, van primero los límites de otro servicio. Se elige en la página «Límites de IA»."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Le service principal n’est plus forcément Claude : sans lui, les limites d’un autre service viennent en premier. Le choix se fait sur la page « Limites d’IA »."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Layanan utama tidak harus Claude lagi: tanpa Claude, batas layanan lain tampil pertama. Pilihannya ada di halaman “Batas AI”."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Il servizio principale non deve più essere Claude: senza Claude vengono per primi i limiti di un altro servizio. La scelta è nella pagina «Limiti IA»."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "メインのサービスは Claude でなくても構いません。Claude がなければ、ほかのサービスの上限が先頭に表示されます。選択は「AI の上限」ページで行います。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "기본 서비스가 꼭 Claude일 필요는 없습니다. Claude가 없으면 다른 서비스의 한도가 맨 위에 옵니다. «AI 한도» 페이지에서 고릅니다."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Główną usługą nie musi już być Claude: bez niego pierwsze są limity innej usługi. Wybór jest na stronie „Limity AI”."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "O serviço principal não precisa mais ser o Claude: sem ele, os limites de outro serviço vêm primeiro. A escolha fica na página “Limites de IA”."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Головним може бути не лише Claude: без нього першими йдуть ліміти іншого сервісу. Вибір — на сторінці «Ліміти AI»."
           }
         }
       }
@@ -34817,6 +34969,7 @@
       }
     },
     "Доступна версия %@": {
+      "extractionState": "stale",
       "localizations": {
         "ar": {
           "stringUnit": {
@@ -37484,6 +37637,7 @@
       }
     },
     "Загрузка обновления…": {
+      "extractionState": "stale",
       "localizations": {
         "ar": {
           "stringUnit": {
@@ -48124,82 +48278,6 @@
         }
       }
     },
-    "Кнопка «стоп» у фоновой задачи останавливает со второго клика.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "زر الإيقاف لمهمة في الخلفية يوقفها عند النقرة الثانية."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Die Stopp-Taste einer Hintergrundaufgabe stoppt erst beim zweiten Klick."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "The stop button of a background task stops on the second click."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "El botón de detener de una tarea en segundo plano detiene al segundo clic."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Le bouton d’arrêt d’une tâche en arrière-plan arrête au deuxième clic."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tombol berhenti pada tugas latar belakang menghentikan pada klik kedua."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Il pulsante di arresto di un’attività in background la ferma al secondo clic."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "バックグラウンドタスクの停止ボタンは、2回目のクリックで停止します。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "백그라운드 작업의 중지 버튼은 두 번째 클릭에서 중지합니다."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Przycisk zatrzymania zadania w tle zatrzymuje przy drugim kliknięciu."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "O botão de parar de uma tarefa em segundo plano para no segundo clique."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Кнопка «стоп» у фонового завдання зупиняє з другого клацання."
-          }
-        }
-      }
-    },
     "Кнопка устарела": {
       "localizations": {
         "ar": {
@@ -49108,6 +49186,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Код: git, збирання, PR"
+          }
+        }
+      }
+    },
+    "Колокольчик в шапке панели выключает уведомления в Telegram, пока не нажмёте снова.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A bell in the panel’s header turns Telegram notifications off until you press it again."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Дзвіночок у шапці панелі вимикає сповіщення в Telegram, доки не натиснете знову."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eine Glocke in der Kopfzeile des Panels schaltet Telegram-Mitteilungen aus, bis Sie sie erneut drücken."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une cloche dans l’en-tête du panneau coupe les notifications Telegram jusqu’à ce que vous appuyiez de nouveau."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Una campana en la cabecera del panel desactiva las notificaciones de Telegram hasta que la pulses de nuevo."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Una campanella nell’intestazione del pannello disattiva le notifiche di Telegram finché non la premi di nuovo."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Um sino no cabeçalho do painel desativa as notificações do Telegram até você pressioná-lo de novo."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dzwonek w nagłówku panelu wyłącza powiadomienia w Telegramie, dopóki nie naciśniesz go ponownie."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "パネルのヘッダーにあるベルで、もう一度押すまでTelegramの通知をオフにできます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "패널 헤더의 종 아이콘으로 다시 누를 때까지 Telegram 알림을 끌 수 있습니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "جرس في رأس اللوحة يوقف إشعارات Telegram إلى أن تضغطه من جديد."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lonceng di header panel mematikan notifikasi Telegram sampai Anda menekannya lagi."
           }
         }
       }
@@ -53836,82 +53990,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ліміти підписки; витрати за проєктами."
-          }
-        }
-      }
-    },
-    "Лимиты — крупное число и полоса с темпом; кольца возвращаются в настройках блока «Лимиты AI».": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "الحدود رقم كبير فوق شريط مع الوتيرة؛ والحلقات تعود من إعدادات كتلة «حدود الذكاء الاصطناعي»."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Limits sind eine große Zahl über einem Balken mit dem Tempo; Ringe gibt es wieder in den Einstellungen des Blocks „KI-Limits“."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Limits are a big number over a bar with the pace; rings come back in the settings of the “AI limits” block."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Los límites son un número grande sobre una barra con el ritmo; los anillos vuelven en los ajustes del bloque «Límites de IA»."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Les limites : un grand nombre au-dessus d’une barre avec le rythme ; les anneaux reviennent dans les réglages du bloc « Limites d’IA »."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Batas kini berupa angka besar di atas bilah dengan laju; cincin bisa dikembalikan di pengaturan blok “Batas AI”."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "I limiti sono un numero grande sopra una barra con il ritmo; gli anelli tornano nelle impostazioni del blocco «Limiti IA»."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "上限は大きな数字とペース付きのバーになりました。リングは「AI の上限」ブロックの設定で戻せます。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "한도는 큰 숫자와 속도가 표시된 막대로 바뀌었습니다. 링은 «AI 한도» 블록 설정에서 되돌릴 수 있습니다."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Limity to duża liczba nad paskiem z tempem; pierścienie wracają w ustawieniach bloku „Limity AI”."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Os limites são um número grande sobre uma barra com o ritmo; os anéis voltam nos ajustes do bloco “Limites de IA”."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ліміти — велике число і смуга з темпом; кільця повертаються в налаштуваннях блоку «Ліміти AI»."
           }
         }
       }
@@ -60076,82 +60154,6 @@
         }
       }
     },
-    "Настройки стали короче: «Модули», «Панель» и «Строка меню» теперь на одной странице «Что показывать».": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "الإعدادات أقصر: «الوحدات» و«اللوحة» و«شريط القائمة» صارت في صفحة واحدة، «ما يُعرض»."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Die Einstellungen sind kürzer: „Module“, „Panel“ und „Menüleiste“ sind jetzt eine Seite, „Was anzeigen“."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Settings are shorter: “Modules”, “Panel” and “Menu Bar” are now one page, “What to Show”."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Los ajustes son más cortos: «Módulos», «Panel» y «Barra de menús» ahora están en una sola página, «Qué mostrar»."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Les réglages sont plus courts : « Modules », « Panneau » et « Barre des menus » forment désormais une seule page, « Quoi afficher »."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Pengaturan lebih ringkas: “Modul”, “Panel”, dan “Bar Menu” kini di satu halaman, “Yang Ditampilkan”."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Le impostazioni sono più brevi: «Moduli», «Pannello» e «Barra dei menu» ora sono in un’unica pagina, «Cosa mostrare»."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "設定が短くなりました。「モジュール」、「パネル」、「メニューバー」は1つのページ「表示する内容」にまとまりました。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "설정이 짧아졌습니다. «모듈», «패널», «메뉴 막대»가 이제 «표시할 항목» 한 페이지에 있습니다."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ustawienia są krótsze: „Moduły”, „Panel” i „Pasek menu” są teraz na jednej stronie, „Co pokazywać”."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Os ajustes ficaram mais curtos: “Módulos”, “Painel” e “Barra de menus” agora estão em uma página só, “O que mostrar”."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Налаштування стали коротшими: «Модулі», «Панель» і «Рядок меню» тепер на одній сторінці «Що показувати»."
-          }
-        }
-      }
-    },
     "Настройки → «Профили» → «+» → «Помощник…»: профиль по шагам — шаблон, папка, этапы, метрики, календарь, сервис AI, команды, права, блоки панели, строка меню, название. Справа — как это будет выглядеть.": {
       "localizations": {
         "ar": {
@@ -63820,6 +63822,7 @@
       }
     },
     "Не удалось проверить обновления: %@": {
+      "extractionState": "stale",
       "localizations": {
         "ar": {
           "stringUnit": {
@@ -64282,6 +64285,7 @@
       }
     },
     "Не удалось установить обновление: %@": {
+      "extractionState": "stale",
       "localizations": {
         "ar": {
           "stringUnit": {
@@ -71278,6 +71282,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Одне кільце"
+          }
+        }
+      }
+    },
+    "Одну задачу можно дать Claude и Codex сразу: окно сравнения покажет оба ответа и изменённые файлы, а выбранный вариант вливается в вашу ветку.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "One task can go to Claude and Codex at once: the comparison window shows both answers and the changed files, and the version you choose is merged into your branch."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Одну задачу можна дати Claude і Codex одразу: вікно порівняння покаже обидві відповіді та змінені файли, а вибраний варіант вливається у вашу гілку."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eine Aufgabe kann gleichzeitig an Claude und Codex gehen: Das Vergleichsfenster zeigt beide Antworten und die geänderten Dateien, und die gewählte Variante wird in Ihren Branch gemergt."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une même tâche peut être confiée à Claude et à Codex en même temps : la fenêtre de comparaison montre les deux réponses et les fichiers modifiés, et la version choisie est fusionnée dans votre branche."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Una misma tarea puede darse a Claude y a Codex a la vez: la ventana de comparación muestra ambas respuestas y los archivos cambiados, y la variante elegida se fusiona en tu rama."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La stessa attività può andare a Claude e a Codex insieme: la finestra di confronto mostra entrambe le risposte e i file modificati, e la variante scelta viene unita al tuo ramo."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uma mesma tarefa pode ir para o Claude e o Codex de uma vez: a janela de comparação mostra as duas respostas e os arquivos alterados, e a variante escolhida é mesclada no seu branch."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jedno zadanie można dać Claude i Codex jednocześnie: okno porównania pokaże obie odpowiedzi i zmienione pliki, a wybrany wariant zostaje scalony z twoją gałęzią."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1つのタスクをClaudeとCodexに同時に渡せます。比較ウインドウに両方の回答と変更されたファイルが並び、選んだ案をあなたのブランチにマージできます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "하나의 작업을 Claude와 Codex에 동시에 맡길 수 있습니다. 비교 창에 두 답변과 변경된 파일이 표시되고, 고른 결과는 내 브랜치에 병합됩니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يمكن إعطاء المهمة نفسها لـ Claude و Codex معًا: نافذة المقارنة تعرض الإجابتين والملفات المتغيّرة، والنسخة التي تختارها تُدمج في فرعك."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Satu tugas bisa diberikan ke Claude dan Codex sekaligus: jendela perbandingan menampilkan kedua jawaban dan file yang berubah, dan varian yang dipilih digabung ke branch Anda."
           }
         }
       }
@@ -81172,22 +81252,10 @@
     },
     "Папка %@ и ветка %@ будут удалены. Изменения уже влиты в %@, они останутся.": {
       "localizations": {
-        "ru": {
-          "stringUnit": {
-            "state": "new",
-            "value": "Папка %1$@ и ветка %2$@ будут удалены. Изменения уже влиты в %3$@, они останутся."
-          }
-        },
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "The folder %@ and the branch %@ will be removed. The changes are already merged into %@ and stay there."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Папку %@ і гілку %@ буде видалено. Зміни вже влито в %@, вони залишаться."
+            "value": "سيُحذف المجلد %@ والفرع %@. التغييرات مدموجة في %@ وستبقى."
           }
         },
         "de": {
@@ -81196,10 +81264,10 @@
             "value": "Der Ordner %@ und der Branch %@ werden entfernt. Die Änderungen sind bereits in %@ gemergt und bleiben erhalten."
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Le dossier %@ et la branche %@ seront supprimés. Les modifications sont déjà fusionnées dans %@ et y restent."
+            "value": "The folder %@ and the branch %@ will be removed. The changes are already merged into %@ and stay there."
           }
         },
         "es": {
@@ -81208,22 +81276,22 @@
             "value": "La carpeta %@ y la rama %@ se eliminarán. Los cambios ya están fusionados en %@ y se conservan."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le dossier %@ et la branche %@ seront supprimés. Les modifications sont déjà fusionnées dans %@ et y restent."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Folder %@ dan branch %@ akan dihapus. Perubahannya sudah digabung ke %@ dan tetap ada."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "La cartella %@ e il ramo %@ verranno eliminati. Le modifiche sono già unite a %@ e restano lì."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "A pasta %@ e o branch %@ serão removidos. As alterações já foram mescladas em %@ e continuam lá."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Folder %@ i gałąź %@ zostaną usunięte. Zmiany są już scalone z %@ i zostaną."
           }
         },
         "ja": {
@@ -81238,16 +81306,28 @@
             "value": "폴더 %@와 브랜치 %@를 삭제합니다. 변경 사항은 이미 %@에 병합되어 있어 그대로 남습니다."
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "سيُحذف المجلد %@ والفرع %@. التغييرات مدموجة في %@ وستبقى."
+            "value": "Folder %@ i gałąź %@ zostaną usunięte. Zmiany są już scalone z %@ i zostaną."
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Folder %@ dan branch %@ akan dihapus. Perubahannya sudah digabung ke %@ dan tetap ada."
+            "value": "A pasta %@ e o branch %@ serão removidos. As alterações já foram mescladas em %@ e continuam lá."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Папка %1$@ и ветка %2$@ будут удалены. Изменения уже влиты в %3$@, они останутся."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Папку %@ і гілку %@ буде видалено. Зміни вже влито в %@, вони залишаться."
           }
         }
       }
@@ -111387,82 +111467,6 @@
         }
       }
     },
-    "Строка «Свернуть» внизу панели оставляет лимиты, сессии и проекты; «Ещё» возвращает остальные блоки.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "صف «طيّ» أسفل اللوحة يُبقي الحدود والجلسات والمشاريع؛ و«المزيد» يعيد باقي الكتل."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Die Zeile „Zuklappen“ unten im Panel lässt Limits, Sitzungen und Projekte stehen; „Mehr“ holt die übrigen Blöcke zurück."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "The “Collapse” row at the bottom of the panel keeps limits, sessions and projects; “More” brings the other blocks back."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "La fila «Contraer» al final del panel deja los límites, las sesiones y los proyectos; «Más» recupera los demás bloques."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "La ligne « Réduire » en bas du panneau garde les limites, les sessions et les projets ; « Plus » ramène les autres blocs."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Baris “Ciutkan” di bawah panel menyisakan batas, sesi, dan proyek; “Lainnya” mengembalikan blok lainnya."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "La riga «Comprimi» in fondo al pannello lascia limiti, sessioni e progetti; «Altro» riporta gli altri blocchi."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "パネル下部の「折りたたむ」の行は、上限、セッション、プロジェクトだけを残します。「その他」でほかのブロックが戻ります。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "패널 아래의 «접기» 행은 한도, 세션, 프로젝트만 남깁니다. «더 보기»를 누르면 나머지 블록이 돌아옵니다."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Wiersz „Zwiń” na dole panelu zostawia limity, sesje i projekty; „Więcej” przywraca pozostałe bloki."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "A linha “Recolher” no fim do painel deixa os limites, as sessões e os projetos; “Mais” traz os outros blocos de volta."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Рядок «Згорнути» унизу панелі залишає ліміти, сесії та проєкти; «Ще» повертає решту блоків."
-          }
-        }
-      }
-    },
     "Строка контент-плана сдвинулась — обновите календарь": {
       "localizations": {
         "ar": {
@@ -115873,6 +115877,82 @@
         }
       }
     },
+    "У готовой фоновой задачи в меню есть «Проверить в Codex», а у остановленной по лимиту — «Передать Codex».": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A finished background task has “Review in Codex” in its menu, and one stopped by the limit has “Hand Over to Codex”."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "У готової фонової задачі в меню є «Перевірити в Codex», а в зупиненої через ліміт — «Передати Codex»."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eine fertige Hintergrundaufgabe hat im Menü „In Codex prüfen“, eine am Limit angehaltene „An Codex übergeben“."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une tâche d’arrière-plan terminée propose « Relire dans Codex » dans son menu, et une tâche arrêtée par la limite « Confier à Codex »."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Una tarea en segundo plano terminada tiene «Revisar en Codex» en su menú, y una detenida por el límite, «Pasar a Codex»."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un’attività in background conclusa ha «Rivedi in Codex» nel menu, e una fermata dal limite ha «Passa a Codex»."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uma tarefa em segundo plano concluída tem “Revisar no Codex” no menu, e uma parada pelo limite tem “Passar para Codex”."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gotowe zadanie w tle ma w menu „Sprawdź w Codex”, a zatrzymane przez limit — „Przekaż do Codex”."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "完了したバックグラウンドタスクのメニューに「Codex でレビュー」が、上限で止まったタスクには「Codex に引き継ぐ」があります。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "끝난 백그라운드 작업의 메뉴에는 “Codex에서 검토”가, 한도로 멈춘 작업에는 “Codex에 넘기기”가 있습니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "في قائمة المهمة المنتهية في الخلفية «مراجعة في Codex»، وفي المهمة المتوقفة بسبب الحد «تسليم إلى Codex»."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tugas latar belakang yang selesai punya “Tinjau di Codex” di menunya, dan yang terhenti karena batas punya “Serahkan ke Codex”."
+          }
+        }
+      }
+    },
     "У значка": {
       "localizations": {
         "ar": {
@@ -116097,82 +116177,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "У кожного профілю свій"
-          }
-        }
-      }
-    },
-    "У недели видно, быстрее или медленнее ровного расхода вы тратите лимит: отметка на полосе и строка под ней.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "يُظهر الأسبوع هل تستهلك الحد أسرع أم أبطأ من الاستهلاك المنتظم: علامة على الشريط وسطر تحته."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Die Woche zeigt, ob Sie das Limit schneller oder langsamer als gleichmäßig verbrauchen: eine Marke auf dem Balken und eine Zeile darunter."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "The week shows whether you spend the limit faster or slower than an even spend: a mark on the bar and a line under it."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "La semana muestra si gastas el límite más rápido o más lento que un gasto uniforme: una marca en la barra y una línea debajo."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "La semaine montre si vous dépensez la limite plus vite ou moins vite qu’une dépense régulière : un repère sur la barre et une ligne dessous."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Minggu menunjukkan apakah Anda memakai batas lebih cepat atau lebih lambat dari pemakaian merata: tanda pada bilah dan satu baris di bawahnya."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "La settimana mostra se consumi il limite più o meno velocemente di un consumo uniforme: un segno sulla barra e una riga sotto."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "週の上限で、均等な消費より速いか遅いかがわかります。バーの目印とその下の行で示します。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "주간 한도에서 고른 사용보다 빠른지 느린지 볼 수 있습니다. 막대의 표시와 그 아래 줄로 알려 줍니다."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tydzień pokazuje, czy zużywasz limit szybciej, czy wolniej niż przy równym zużyciu: znacznik na pasku i wiersz pod nim."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "A semana mostra se você gasta o limite mais rápido ou mais devagar que um gasto uniforme: uma marca na barra e uma linha abaixo."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "У тижня видно, швидше чи повільніше за рівну витрату ви витрачаєте ліміт: позначка на смузі та рядок під нею."
           }
         }
       }
@@ -116787,16 +116791,10 @@
     },
     "Убрать папку и ветку": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Remove folder and branch"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Прибрати папку й гілку"
+            "value": "إزالة المجلد والفرع"
           }
         },
         "de": {
@@ -116805,10 +116803,10 @@
             "value": "Ordner und Branch entfernen"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Retirer le dossier et la branche"
+            "value": "Remove folder and branch"
           }
         },
         "es": {
@@ -116817,22 +116815,22 @@
             "value": "Quitar carpeta y rama"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Retirer le dossier et la branche"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Singkirkan folder dan branch"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Rimuovi cartella e ramo"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Remover pasta e branch"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Usuń folder i gałąź"
           }
         },
         "ja": {
@@ -116847,32 +116845,32 @@
             "value": "폴더와 브랜치 제거"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "إزالة المجلد والفرع"
+            "value": "Usuń folder i gałąź"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Singkirkan folder dan branch"
+            "value": "Remover pasta e branch"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Прибрати папку й гілку"
           }
         }
       }
     },
     "Убрать папку и ветку?": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Remove the folder and the branch?"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Прибрати папку й гілку?"
+            "value": "إزالة المجلد والفرع؟"
           }
         },
         "de": {
@@ -116881,10 +116879,10 @@
             "value": "Ordner und Branch entfernen?"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Retirer le dossier et la branche ?"
+            "value": "Remove the folder and the branch?"
           }
         },
         "es": {
@@ -116893,22 +116891,22 @@
             "value": "¿Quitar la carpeta y la rama?"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Retirer le dossier et la branche ?"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Singkirkan folder dan branch?"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Rimuovere cartella e ramo?"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Remover a pasta e o branch?"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Usunąć folder i gałąź?"
           }
         },
         "ja": {
@@ -116923,16 +116921,22 @@
             "value": "폴더와 브랜치를 제거할까요?"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "إزالة المجلد والفرع؟"
+            "value": "Usunąć folder i gałąź?"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Singkirkan folder dan branch?"
+            "value": "Remover a pasta e o branch?"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Прибрати папку й гілку?"
           }
         }
       }
@@ -120137,6 +120141,7 @@
       }
     },
     "Установить и перезапустить": {
+      "extractionState": "stale",
       "localizations": {
         "ar": {
           "stringUnit": {
@@ -120213,6 +120218,7 @@
       }
     },
     "Установлена последняя версия": {
+      "extractionState": "stale",
       "localizations": {
         "ar": {
           "stringUnit": {
@@ -129367,16 +129373,10 @@
     },
     "влит в %@, папка убрана": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "merged into %@, folder removed"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "влито в %@, папку прибрано"
+            "value": "دُمجت في %@، وأُزيل المجلد"
           }
         },
         "de": {
@@ -129385,10 +129385,10 @@
             "value": "in %@ gemergt, Ordner entfernt"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "fusionnée dans %@, dossier retiré"
+            "value": "merged into %@, folder removed"
           }
         },
         "es": {
@@ -129397,22 +129397,22 @@
             "value": "fusionada en %@, carpeta quitada"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "fusionnée dans %@, dossier retiré"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "digabung ke %@, folder disingkirkan"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "unita a %@, cartella rimossa"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "mesclada em %@, pasta removida"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "scalony z %@, folder usunięty"
           }
         },
         "ja": {
@@ -129427,16 +129427,22 @@
             "value": "%@에 병합됨, 폴더 제거됨"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "دُمجت في %@، وأُزيل المجلد"
+            "value": "scalony z %@, folder usunięty"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "digabung ke %@, folder disingkirkan"
+            "value": "mesclada em %@, pasta removida"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "влито в %@, папку прибрано"
           }
         }
       }
@@ -146047,6 +146053,158 @@
           "stringUnit": {
             "state": "translated",
             "value": "❌ CI впав: %@ #%lld"
+          }
+        }
+      }
+    },
+    "Строка «Свернуть» внизу панели оставляет лимиты, сессии и проекты; «Ещё» возвращает остальные блоки.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "صف «طيّ» أسفل اللوحة يُبقي الحدود والجلسات والمشاريع؛ و«المزيد» يعيد باقي الكتل."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Zeile „Zuklappen“ unten im Panel lässt Limits, Sitzungen und Projekte stehen; „Mehr“ holt die übrigen Blöcke zurück."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The “Collapse” row at the bottom of the panel keeps limits, sessions and projects; “More” brings the other blocks back."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La fila «Contraer» al final del panel deja los límites, las sesiones y los proyectos; «Más» recupera los demás bloques."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La ligne « Réduire » en bas du panneau garde les limites, les sessions et les projets ; « Plus » ramène les autres blocs."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Baris “Ciutkan” di bawah panel menyisakan batas, sesi, dan proyek; “Lainnya” mengembalikan blok lainnya."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La riga «Comprimi» in fondo al pannello lascia limiti, sessioni e progetti; «Altro» riporta gli altri blocchi."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "パネル下部の「折りたたむ」の行は、上限、セッション、プロジェクトだけを残します。「その他」でほかのブロックが戻ります。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "패널 아래의 «접기» 행은 한도, 세션, 프로젝트만 남깁니다. «더 보기»를 누르면 나머지 블록이 돌아옵니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wiersz „Zwiń” na dole panelu zostawia limity, sesje i projekty; „Więcej” przywraca pozostałe bloki."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A linha “Recolher” no fim do painel deixa os limites, as sessões e os projetos; “Mais” traz os outros blocos de volta."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Рядок «Згорнути» унизу панелі залишає ліміти, сесії та проєкти; «Ще» повертає решту блоків."
+          }
+        }
+      }
+    },
+    "У недели видно, быстрее или медленнее ровного расхода вы тратите лимит: отметка на полосе и строка под ней.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يُظهر الأسبوع هل تستهلك الحد أسرع أم أبطأ من الاستهلاك المنتظم: علامة على الشريط وسطر تحته."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Woche zeigt, ob Sie das Limit schneller oder langsamer als gleichmäßig verbrauchen: eine Marke auf dem Balken und eine Zeile darunter."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The week shows whether you spend the limit faster or slower than an even spend: a mark on the bar and a line under it."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La semana muestra si gastas el límite más rápido o más lento que un gasto uniforme: una marca en la barra y una línea debajo."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La semaine montre si vous dépensez la limite plus vite ou moins vite qu’une dépense régulière : un repère sur la barre et une ligne dessous."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Minggu menunjukkan apakah Anda memakai batas lebih cepat atau lebih lambat dari pemakaian merata: tanda pada bilah dan satu baris di bawahnya."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La settimana mostra se consumi il limite più o meno velocemente di un consumo uniforme: un segno sulla barra e una riga sotto."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "週の上限で、均等な消費より速いか遅いかがわかります。バーの目印とその下の行で示します。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "주간 한도에서 고른 사용보다 빠른지 느린지 볼 수 있습니다. 막대의 표시와 그 아래 줄로 알려 줍니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tydzień pokazuje, czy zużywasz limit szybciej, czy wolniej niż przy równym zużyciu: znacznik na pasku i wiersz pod nim."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A semana mostra se você gasta o limite mais rápido ou mais devagar que um gasto uniforme: uma marca na barra e uma linha abaixo."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "У тижня видно, швидше чи повільніше за рівну витрату ви витрачаєте ліміт: позначка на смузі та рядок під нею."
           }
         }
       }
