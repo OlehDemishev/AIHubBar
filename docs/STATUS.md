@@ -5,6 +5,7 @@
 **Updated:** 2026-11-20
 
 **Now:**
+- 2026-11-20: Mac — an Antigravity conversation's row in «Сессии» says «ждёт ответа» while agy asks «Run this command?» (`feat/antigravity-waiting`, merged 2026-11-20); works with AI Hub Bar's status line installed («Включить квоту Antigravity»); not in 0.12.0-beta.1
 - 0.12.0-beta.1 (build 1112) published 2026-11-20 for beta testers on Oleh's «Выпускай для беты»: everything merged since 0.11.0 on the Mac — the nine Claude and Codex features, the pair's comparison with diffs, keep, merge and tidy, the Telegram bell and tile, the 0.12 «Что нового» card. Notarized; the beta feed offers it, «latest» stays v0.11.0. Lives on Oleh's copy until the release, not before Tuesday 2026-11-24
 - 2026-11-20: Windows 0.1.3 published as an unsigned pre-release (tag `desktop-v0.1.3`) on Oleh's «Да, выпускай»: Telegram stage 1; the laptop's 0.1.2 found it, downloaded it from GitHub, installed it and started it by itself — the first real update; «latest» stays the Mac's v0.11.0
 - 2026-11-20: Mac — the «Что нового» card and the demo data brought to 0.12 (`chore/whats-new-0.12`, merged 2026-11-20) for 0.12.0-beta.1, which Oleh asked for the same day
@@ -98,7 +99,7 @@
 - releases go out once a week, on Tuesday, on Oleh's word (agreed 2026-11-11); merged work waits in `main`
 - 0.12.0-beta.1 is out (2026-11-20); before 0.12.0: Oleh uses the beta; left to see in the app — a Codex approval, handover, review, the pair's notification banner, the header bell, the Telegram tile, the «Что нового» card
 - 0.12.0 not before Tuesday 2026-11-24, on Oleh's word; then `scripts/release-tools/update-cask.sh 0.12.0`
-- then: the «ждёт» state for Antigravity sessions (needs `agy` opened once)
+- Antigravity «ждёт»: a notification needs a watcher of the status file (today the rows are read when the panel opens)
 - towards 1.0 (discussed 2026-11-10): the live pass is done (journal 2026-11-10); left — freeze what is in 1.0 and what stays beta, release notes, translations read by people, feedback from strangers before 1.0
 - check on the Air: the island at the real notch
 - promotion (docs/LAUNCH.md): r/ClaudeAI, the lists, r/macapps, Show HN, Product Hunt, Homebrew
@@ -148,6 +149,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-20 — Antigravity's «ждёт» (branch `feat/antigravity-waiting`)
+
+Done: Oleh opened `agy` and passed its first screen, so its states could be seen. While agy asks «Run this command?» its status line JSON carries `tool_confirmation_pending: true` (and `agent_state: "tool_use"`) with the conversation's id; `HubParse.antigravityWaiting` reads it from the kept status, and that conversation's row in «Сессии» says «ждёт ответа» instead of «работает», as long as some `agy` is running. `--threads` on the command line says «waiting» too. SPEC-ai-services §5 stage 8 has what was seen.
+Checked: three runs of an own `agy` (1.5.13) in a scratch folder with a session-only status line and trusted folder passed by `--settings` — Oleh's `settings.json` and his running `agy` untouched; the states and the pending field recorded from them. `scripts/check.sh`; tests for the parser with the fields as sent, for a status left behind by a closed agy, for the row's flag.
+Left: not seen in the panel — on Oleh's Mac the status line is not installed (the agent does not press «Включить квоту Antigravity» there). One status file for all agy sessions: only the last writer's state is known. No notification and no count in the menu bar. In «auto» mode agy asks nothing, so the state shows in the stricter modes.
 
 ## 2026-11-20 — 0.12.0-beta.1 published (branch `chore/status-0.12.0-beta.1`)
 

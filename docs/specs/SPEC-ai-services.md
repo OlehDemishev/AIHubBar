@@ -216,6 +216,14 @@ Rules for every stage: hover hint on each icon-only control, accessibility walk 
    `waiting_for_input`, `awaiting_runs`; which of them reach the status line has to be seen on a session that asks
    for permission before anything is built on them.
 
+   - **«Ждёт» (2026-11-20, agy 1.5.13).** Three runs of an own `agy` in a scratch folder with a session-only status
+     line (`--settings`, nothing saved): `agent_state` goes `authenticating` → `idle` → `working` → `idle`; in «auto»
+     mode commands, a network one too, run without a question. In `--mode accept-edits`, while «Run this command?»
+     is on screen, the JSON carries `agent_state: "tool_use"` and `tool_confirmation_pending: true` with the
+     `conversation_id`; the field is absent otherwise. The command runs on a change, not on a timer.
+     `HubParse.antigravityWaiting` reads it, and the conversation's row in «Сессии» says «ждёт ответа» while some
+     `agy` is open. One file for all sessions, so only the last writer's state is known. No notification: the rows
+     are read when the panel opens.
 9. **The main service** (2026-11-11, `MainService`): Claude was the main service everywhere — a person with only
    Codex or Antigravity saw «Установить Claude Code» on top of the limits and nothing in the menu bar. Now the main
    service is Claude while it has limits, else the first other service with a limit in percent, or the one chosen in

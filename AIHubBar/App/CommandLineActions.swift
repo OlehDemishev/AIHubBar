@@ -188,7 +188,7 @@ extension CommandLineTool {
             // The other agents' recent conversations, as «Сессии» lists them.
             for thread in AgentThread.recent() {
                 let context = thread.context.map { ", context \(Int(($0 * 100).rounded())) %" } ?? ""
-                print("thread \(thread.agent.binary) \(thread.project): \(thread.title)\(thread.isWorking ? ", running" : "")\(context)")
+                print("thread \(thread.agent.binary) \(thread.project): \(thread.title)\(thread.isWaiting ? ", waiting" : thread.isWorking ? ", running" : "")\(context)")
             }
             return 0
         }

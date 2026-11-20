@@ -105,6 +105,26 @@ struct AntigravityStatusLine {
     /// How long the kept status counts as current: Antigravity runs the command while it is open.
     static let fresh: TimeInterval = 10 * 60
 
+    /// The conversation waiting for an answer, as the kept status says. Antigravity runs the command when something
+    /// changes, not on a timer, so the file's age says nothing; it counts while some `agy` is still open — closed in
+    /// the middle of a question, it leaves «pending» behind.
+    func waitingConversation(isOpen: () -> Bool = AntigravityStatusLine.isAgyOpen) -> String? {
+        guard let data = try? Data(contentsOf: statusURL), let id = HubParse.antigravityWaiting(data), isOpen() else { return nil }
+        return id
+    }
+
+    /// Whether an `agy` process is running (`pgrep -x agy`).
+    static func isAgyOpen() -> Bool {
+        let process = Process()
+        process.executableURL = URL(fileURLWithPath: "/usr/bin/pgrep")
+        process.arguments = ["-x", "agy"]
+        process.standardOutput = FileHandle.nullDevice
+        process.standardError = FileHandle.nullDevice
+        guard (try? process.run()) != nil else { return false }
+        process.waitUntilExit()
+        return process.terminationStatus == 0
+    }
+
     /// The limit for the panel: the windows whose reset is still ahead, the plan as a note, and the time of the data
     /// once Antigravity has been closed for a while.
     func limit(now: Date = .now) -> HubLimit {
@@ -124,6 +144,15 @@ struct AntigravityStatusLine {
 }
 
 extension HubParse {
+    /// The conversation that waits for the person's answer to «Run this command?»: the status line then carries
+    /// `tool_confirmation_pending: true` (with `agent_state: "tool_use"`) and the `conversation_id`. Seen live on agy
+    /// 1.5.13, 2026-11-20; the field is absent the rest of the time (`idle`, `working`).
+    static func antigravityWaiting(_ data: Data) -> String? {
+        guard let object = object(data), object["tool_confirmation_pending"] as? Bool == true,
+              let id = (object["conversation_id"] ?? object["session_id"]) as? String, !id.isEmpty else { return nil }
+        return id
+    }
+
     // Antigravity's status line JSON: quota{} — a bucket per model family and period («gemini-weekly», «3p-weekly»)
     // with remaining_fraction (left out when nothing is left), reset_time; plan_tier.
     static func antigravityStatus(_ data: Data, now: Date = .now) -> (windows: [HubLimit.Window], plan: String?)? {

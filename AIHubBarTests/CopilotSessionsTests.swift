@@ -116,5 +116,8 @@ struct AntigravityConversationsTests {
         #expect(threads.map(\.id) == ["c1"], "subagents and older conversations left out")
         #expect(threads.first?.folder == "/Users/me/My App" && threads.first?.project == "My App")
         #expect(threads.first?.isWorking == true && threads.first?.agent == .antigravity)
+        #expect(threads.first?.isWaiting == false)
+        #expect(AntigravityConversations.recent(home: home, now: now, waiting: "c1").first?.isWaiting == true)
+        #expect(AntigravityConversations.recent(home: home, now: now, waiting: "other").first?.isWaiting == false)
     }
 }
