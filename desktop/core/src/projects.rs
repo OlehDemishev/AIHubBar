@@ -193,6 +193,17 @@ fn lines(text: &str) -> Vec<&str> {
     text.split('\n').map(|l| l.trim_end_matches('\r')).filter(|l| !l.trim().is_empty()).collect()
 }
 
+/// AI Hub Bar's own worktrees live in `<project>/.claude/worktrees`. Where `.claude` is not ignored, git lists them as
+/// one untracked folder, and a project with a run in a worktree looked as if it had a file to commit. Anything else in
+/// `.claude` still counts.
+fn is_own_worktrees(repo: &Path, path: &str) -> bool {
+    match path.trim_matches('/') {
+        ".claude/worktrees" => true,
+        ".claude" => std::fs::read_dir(repo.join(".claude")).is_ok_and(|entries| entries.flatten().all(|entry| entry.file_name() == "worktrees")),
+        _ => false,
+    }
+}
+
 /// One repository, as the Mac's `GitScanner.project`.
 pub fn project(repo: &Path, tools: &Tools, fetch: bool, words: &Words, now: DateTime<Utc>) -> Project {
     let s = words.strings;
@@ -217,7 +228,7 @@ pub fn project(repo: &Path, tools: &Tools, fetch: bool, words: &Words, now: Date
     }
 
     let status_text = git30(tools, repo, &["status", "--porcelain=v1"]);
-    let changes = lines(&status_text);
+    let changes: Vec<&str> = lines(&status_text).into_iter().filter(|line| !(line.starts_with("??") && is_own_worktrees(repo, line.get(3..).unwrap_or("").trim_matches('"')))).collect();
     let work = changes
         .iter()
         .filter(|line| {
@@ -801,6 +812,13 @@ mod tests {
         run(&["stash", "-q"]);
         std::fs::write(repo.join("c.txt"), "c").unwrap();
         std::fs::write(repo.join("d.txt"), "d").unwrap();
+        // The app's own worktrees are not work to commit; a settings file next to them is.
+        std::fs::create_dir_all(repo.join(".claude/worktrees/cb-x")).unwrap();
+        std::fs::write(repo.join(".claude/worktrees/cb-x/e.txt"), "e").unwrap();
+        assert!(is_own_worktrees(&repo, ".claude/") && is_own_worktrees(&repo, ".claude/worktrees/") && !is_own_worktrees(&repo, "c.txt"));
+        std::fs::write(repo.join(".claude/settings.local.json"), "{}").unwrap();
+        assert!(!is_own_worktrees(&repo, ".claude/"));
+        std::fs::remove_file(repo.join(".claude/settings.local.json")).unwrap();
 
         assert_eq!(repositories(&root), [repo.clone()]);
         let s = ru();
