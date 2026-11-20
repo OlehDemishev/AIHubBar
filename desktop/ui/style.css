@@ -67,6 +67,16 @@ select { font: inherit; padding: 4px 6px; border-radius: 6px; border: 1px solid 
 .row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 6px 0; }
 .row + .row { border-top: 1px solid var(--line); }
 #updates-state { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+#spend { margin-top: 6px; }
+#spend summary { cursor: pointer; font-size: 12px; }
+#spend p, .spend-title { font-size: 12px; margin: 6px 0 4px; }
+.spend-note { font-size: 11px !important; }
+.segments { display: flex; gap: 4px; margin-bottom: 4px; }
+.segments button { flex: 1; }
+.segments button.chosen { background: var(--line); font-weight: 600; }
+.spend-row { display: flex; gap: 6px; font-size: 12px; padding: 1px 0; }
+.spend-row .name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.spend-row .percent { width: 38px; text-align: end; font-variant-numeric: tabular-nums; }
 .telegram-controls { display: flex; align-items: center; justify-content: flex-end; gap: 6px; flex-wrap: wrap; min-width: 0; }
 .telegram-controls input:not([type="checkbox"]) { width: 14em; }
 #telegram-status { flex: 1; min-width: 0; overflow-wrap: anywhere; }

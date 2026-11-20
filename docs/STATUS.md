@@ -5,6 +5,7 @@
 **Updated:** 2026-11-20
 
 **Now:**
+- 2026-11-20: Windows — «Расход по проектам» in the panel under «Подробнее»: tokens per project from Claude Code's journals for the session, today and the week, and the heaviest session (branch `feat/desktop-spend-by-project`; seen live on the laptop's own journals)
 - 2026-11-20: Windows 0.1.4 published as an unsigned pre-release (tag `desktop-v0.1.4`) on Oleh's «Выпускай 0.1.4»: the Telegram bot answers (🏠, 🤖, ⏳) and takes permission requests; the laptop updated itself from 0.1.3; «latest» stays the Mac's v0.11.0
 - 2026-11-20: Windows — the Telegram bot's ⏳: Claude's and the other services' limits with a bar, the reset and the forecast, and the switch of limit alerts (branch `feat/desktop-telegram-limits`; tests only — no real bot on the laptop)
 - 2026-11-20: Windows — Telegram stage 2: the app reads the bot when «Этот компьютер отвечает боту» is on (🏠, 🤖), and permission requests come to the chat with ✅ / ❌ (branch `feat/desktop-telegram-reader`; the page seen live, a real bot not tried — the laptop has no token)
@@ -107,7 +108,7 @@
 - check on the Air: the island at the real notch
 - promotion (docs/LAUNCH.md): r/ClaudeAI, the lists, r/macapps, Show HN, Product Hunt, Homebrew
 - content (docs/specs/SPEC-content.md, agreed): stage 2 «Версии», then batch tasks; better after the first feedback from people
-- Windows: left on the laptop — notifications and their buttons (the agent can't see a toast: its tool hides other programs' windows); the Mac's background runs have the same rules — try one build in a subfolder there; stage 7: the installer and updates are done (0.1.2), signing waits for SignPath (the update 0.1.2 → 0.1.3 from GitHub was seen on the laptop); Telegram on Windows (Oleh's choice 2026-11-20): stages 1 and 2 are done (the reader, 🏠, 🤖, permission requests), neither tried with a real bot; ⏳ too; next tasks from the chat (SPEC-telegram stage 3) — only after a real bot has been tried on the laptop: a chat that can start an agent must first be seen refusing a stranger
+- Windows: left on the laptop — notifications and their buttons (the agent can't see a toast: its tool hides other programs' windows); the Mac's background runs have the same rules — try one build in a subfolder there; stage 7: the installer and updates are done (0.1.2), signing waits for SignPath (the update 0.1.2 → 0.1.3 from GitHub was seen on the laptop); Telegram on Windows (Oleh's choice 2026-11-20): stages 1 and 2 are done (the reader, 🏠, 🤖, permission requests), neither tried with a real bot; ⏳ too; next tasks from the chat (SPEC-telegram stage 3) — only after a real bot has been tried on the laptop: a chat that can start an agent must first be seen refusing a stranger; of the limits stage (SPEC-windows §9.2) left: own thresholds in Settings, the forecast's history kept across restarts, the «История расхода» window
 
 **Needs Oleh:**
 - Windows laptop, Telegram (0.1.4 is installed; nothing of it was tried with a real bot): 1) in @BotFather make a new bot — the Mac mini reads your present one; 2) Settings → «Telegram»: paste the token, «Привязать чат», «Start» in Telegram, «Проверить»; 3) start a small background task and see its result come to the chat; 4) «Этот компьютер отвечает боту» on, `/menu` in the chat — 🏠, then 🤖 and ⏳; 5) «Запросы разрешений в этот бот» on, start `claude --permission-mode default` in a project, ask it to create a file and answer ✅ from the phone. Say what did not work
@@ -153,6 +154,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-20 — Windows: «Расход по проектам» (branch `feat/desktop-spend-by-project`)
+
+Done: on Oleh's «продолжай», the next unported piece of the limits stage. `core/src/token_usage.rs` ports the Mac's `TokenUsage.swift`: assistant messages' `usage` from `<claude dir>/projects/**/*.jsonl`, read tolerantly, one record per message id (streaming repeats it), each file from where the last read stopped and only whole lines; a project is the first folder under the projects folder — worktrees included, either slash, any letter case on Windows — and the rest is «Другое»; shares by the Mac's weights (output ×5, cache writes ×1.25, cache reads ×0.1), tokens without cache reads. The panel's limits card has «Подробнее» → «Расход по проектам»: «Сессия» / «Сегодня» / «Неделя», the six heaviest projects with «3,3 млн» and a percent, «Самая затратная сессия: …» and the Mac's note that it is an estimate. Counted off the panel's thread when «Подробнее» is opened, at most once a minute. All ten texts are the Mac's.
+Checked: `python scripts/strings.py --check` (635 texts), `cargo test --workspace` on Windows (a line read and refused, the project of a folder, a file read in two goes with a half-written line, shares by weight, «12,3 млн»). Live on the laptop, a build from the branch, the laptop's own journals: «Сессия» — AIHubBar 1,0 млн, 100 %; «Неделя» — AIHubBar 3,3 млн, 99 %, `_live test` 140 тыс., 1 %, «Самая затратная сессия: AIHubBar — 92 % (2,7 млн токенов)»; the list came within a few seconds of the first click.
+Left: the week by day and its forecast (the Mac's strip above the list), the «История расхода» window with CSV, how full a session's context is — not ported. Seen in Russian only. The numbers were not compared with the Mac's for the same journals.
 
 ## 2026-11-20 — Windows 0.1.4 released (branch `chore/desktop-0.1.4-note`)
 

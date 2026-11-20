@@ -403,7 +403,7 @@ fn main() {
         .manage(AppState { settings: Mutex::new(load_settings()) })
         .invoke_handler(tauri::generate_handler![
             ui_texts, set_language, dismiss_tray_hint, autostart_enabled, set_autostart, open_settings, hide_panel, quit,
-            limits::limits_view, limits::refresh_limits,
+            limits::limits_view, limits::spend_view, limits::refresh_limits,
             sessions::sessions_view, sessions::decide_request, sessions::hooks_state, sessions::install_hooks,
             sessions::uninstall_hooks, sessions::agent_hooks_state, sessions::install_agent_hooks, sessions::uninstall_agent_hooks,
             projects::projects_view, projects::refresh_projects, projects::projects_panel_opened, projects::open_project,

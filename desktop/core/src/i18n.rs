@@ -72,6 +72,12 @@ pub struct Strings {
 }
 
 impl Strings {
+    /// «12,3» or «12.3»: one digit after the language's own decimal sign.
+    pub fn decimal(&self, value: f64) -> String {
+        let text = format!("{value:.1}");
+        if matches!(self.language.as_str(), "en" | "ja" | "ko" | "ar") { text } else { text.replace('.', ",") }
+    }
+
     pub fn from_json(json: &str) -> Self {
         Strings { map: serde_json::from_str(json).unwrap_or_default(), language: String::new() }
     }
