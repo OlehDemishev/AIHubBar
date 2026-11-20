@@ -78,6 +78,7 @@ impl Hub {
         }
         eprintln!("other AI limits: {} read", self.state.lock().unwrap().limits.len());
         for (title, body) in alerts {
+            crate::telegram::notify(app, "lim", claudepult_core::telegram::alert_html(&title, &body));
             let _ = app.notification().builder().title(title).body(body).show();
         }
         self.refreshing.store(false, Ordering::SeqCst);

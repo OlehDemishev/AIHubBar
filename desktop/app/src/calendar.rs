@@ -84,7 +84,9 @@ impl Calendar {
             let when = calendar::relative(entry.date, entry.has_time, now, &texts);
             let body = [Some(when), entry.detail.clone(), Some(entry.profile.clone())].into_iter().flatten().filter(|t| !t.is_empty()).collect::<Vec<_>>().join(" · ");
             eprintln!("calendar reminder: {} {}", entry.kind.key(), entry.title);
-            let _ = app.notification().builder().title(format!("{}: {}", entry.kind.title(&texts), entry.title)).body(body).show();
+            let title = format!("{}: {}", entry.kind.title(&texts), entry.title);
+            crate::telegram::notify(app, "cal", claudepult_core::telegram::calendar_html(&title, &calendar::relative(entry.date, entry.has_time, now, &texts)));
+            let _ = app.notification().builder().title(title).body(body).show();
         }
         let mut keys: Vec<String> = reminded.into_iter().collect();
         keys.sort();
