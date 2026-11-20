@@ -409,6 +409,10 @@
               "name" : "Bandingkan"
             },
             {
+              "detail" : "Modul “Versi” menyimpan teks dan kartu proyek folder sebelum setiap AI dijalankan dan selama Anda menulis — di folder app, bukan di proyek. Seberapa sering dan berapa lama disimpan: Pengaturan → “Modul” → “Versi”.",
+              "name" : "Versi"
+            },
+            {
               "detail" : "Tahap profil, dipisah koma; tahap diganti dengan tombol di proyek yang dibuka. Kata, durasi, waktu baca, dan halaman dihitung dari berkas utama (.md, .txt, .rtf, .docx).",
               "name" : "Tahap dan metrik"
             }

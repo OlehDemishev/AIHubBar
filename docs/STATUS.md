@@ -5,6 +5,7 @@
 **Updated:** 2026-11-20
 
 **Now:**
+- 2026-11-20: Mac — content stage 2 done in a branch: the «Версии» module — in the catalog, a version before every command on a folder project and on a timer for the current profile's folder projects, Settings → «Модули» → «Версии» (branch `feat/versions-module`, PR open, **held until 0.12.0 is out**: it adds a module and a settings page); its Settings page seen live in an isolated copy
 - 2026-11-20: Mac — content stage 2 «Версии» begun: the store of draft versions (`VersionStore`: contents kept once, a version when something differs, all of the last day then one a day, 20 MB limit, a deleted project's store gone after a month) with tests (`feat/versions-store`, merged 2026-11-20); nothing calls it yet, so 0.12.0 is not changed by it
 - 2026-11-20: Mac — 0.12.0-beta.2 is on Oleh's copy; its panel seen live once on his word: the bell is in the header left of the gear (orange and crossed: Telegram notifications are off there now), the «Что нового» card already dismissed
 - 0.12.0-beta.2 (build 1144) published 2026-11-20 for beta testers on Oleh's «Выпускай beta.2»: beta.1 plus Antigravity's «ждёт ответа» (#493) and its line in the release notes (#503). Notarized; the beta feed offers it, «latest» stays v0.11.0
@@ -114,7 +115,7 @@
 - towards 1.0 (discussed 2026-11-10): the live pass is done (journal 2026-11-10); left — freeze what is in 1.0 and what stays beta, release notes, translations read by people, feedback from strangers before 1.0
 - check on the Air: the island at the real notch
 - promotion (docs/LAUNCH.md): r/ClaudeAI, the lists, r/macapps, Show HN, Product Hunt, Homebrew
-- content stage 2 «Версии», the rest (docs/specs/SPEC-content.md §4, §6): the module in the catalog (does the Windows app read a profile with a module it does not know? check first), versions before every AI run and every 10 minutes on changes, «Модули → Версии» with the disk use and «Очистить»; then stage 3 (the list, compare, restore in the card), then batch tasks. Not into 0.12.0: kept in a branch until that release
+- merge `feat/versions-module` right after 0.12.0 is published; then content stage 3 (docs/specs/SPEC-content.md §4): the list of versions in a folder project's card, compare with the current file, restore a file or a whole version, «Что изменилось» after a run; then batch tasks
 - Windows: left on the laptop — notifications and their buttons (the agent can't see a toast: its tool hides other programs' windows); the Mac's background runs have the same rules — try one build in a subfolder there; stage 7: the installer and updates are done (0.1.2), signing waits for SignPath (the update 0.1.2 → 0.1.3 from GitHub was seen on the laptop); Telegram on Windows (Oleh's choice 2026-11-20): stages 1 and 2 are done (the reader, 🏠, 🤖, permission requests), neither tried with a real bot; ⏳ too; next tasks from the chat (SPEC-telegram stage 3) — only after a real bot has been tried on the laptop: a chat that can start an agent must first be seen refusing a stranger; of the limits stage (SPEC-windows §9.2) left: the «История расхода» window
 
 **Needs Oleh:**
@@ -161,6 +162,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-20 — «Версии»: the module, automatic versions, Settings (branch `feat/versions-module`)
+
+Done: the second half of content stage 2. `ModuleKind.versions` — an optional module of the «Работа» group with no block in the panel and no menu bar place (`Modules/VersionsModule.swift`). `VersionKeeper` takes a version before every command on a folder project (`CommandEngine.beforeRun`, so background, Terminal, API, «Сравнить» and the island's drop are all covered) and, by a timer, of the current profile's folder projects when something changed; after each pass it prunes old versions, and once a day removes the stores of deleted projects. `VersionsSettings`: how often (10 min, 30 min, only before AI runs), how long (30 or 90 days), the size limit (5, 20, 100 MB). Settings → «Модули» → «Версии»: the three choices, the space on disk, «Показать в Finder», «Очистить» with a confirmation. The assistant offers the module and ticks it for templates with folder projects. A help fact and `docs/release-notes/0.13.0.md`. 17 new texts in 13 languages. The Windows app keeps its own list of modules by name, so a profile with the new kind does not break it; the Mac already drops kinds it does not know.
+Checked: `scripts/check.sh` (catalog 1963 keys, 0 problems); five new tests — the timer's pace, settings read from an older or broken record, versions before a run and by the timer only while the module works, the engine asking before a command, the assistant's offer. Live in an isolated copy: Settings → «Версии» draws as meant (header with the switch, three pickers, the note, «На диске 0 КБ» with «Очистить» greyed out).
+Left: not merged — waits for 0.12.0 (Tuesday 2026-11-24 at the earliest), since it adds a module and a settings page after the beta. Not seen live: a version really taken in the app (the isolated copy had no profile), the pickers changed by hand, «Очистить». The timer covers only the current profile's folder projects. Nothing shows the versions yet: that is stage 3.
 
 ## 2026-11-20 — «Версии»: the store (branch `feat/versions-store`); beta.2 seen on Oleh's copy
 

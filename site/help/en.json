@@ -409,6 +409,10 @@
               "name" : "Compare"
             },
             {
+              "detail" : "The Versions module saves the texts and the card of a folder project before every AI run and while you write — in the app’s folder, not in the project. How often and how long to keep: Settings → Modules → Versions.",
+              "name" : "Versions"
+            },
+            {
               "detail" : "The profile’s stages, comma-separated; a stage changes with a button in an expanded project. Words, duration, reading time and pages are counted from the main file (.md, .txt, .rtf, .docx).",
               "name" : "Stages and metrics"
             }
