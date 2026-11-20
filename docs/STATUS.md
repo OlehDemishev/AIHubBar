@@ -5,7 +5,7 @@
 **Updated:** 2026-11-20
 
 **Now:**
-- 2026-11-20: Mac — an Antigravity conversation's row in «Сессии» says «ждёт ответа» while agy asks «Run this command?» (branch `feat/antigravity-waiting`); works with AI Hub Bar's status line installed («Включить квоту Antigravity»); not in 0.12.0-beta.1
+- 2026-11-20: Mac — an Antigravity conversation's row in «Сессии» says «ждёт ответа» while agy asks «Run this command?» (`feat/antigravity-waiting`, merged 2026-11-20); works with AI Hub Bar's status line installed («Включить квоту Antigravity»); not in 0.12.0-beta.1
 - 0.12.0-beta.1 (build 1112) published 2026-11-20 for beta testers on Oleh's «Выпускай для беты»: everything merged since 0.11.0 on the Mac — the nine Claude and Codex features, the pair's comparison with diffs, keep, merge and tidy, the Telegram bell and tile, the 0.12 «Что нового» card. Notarized; the beta feed offers it, «latest» stays v0.11.0. Lives on Oleh's copy until the release, not before Tuesday 2026-11-24
 - 2026-11-20: Windows 0.1.3 published as an unsigned pre-release (tag `desktop-v0.1.3`) on Oleh's «Да, выпускай»: Telegram stage 1; the laptop's 0.1.2 found it, downloaded it from GitHub, installed it and started it by itself — the first real update; «latest» stays the Mac's v0.11.0
 - 2026-11-20: Mac — the «Что нового» card and the demo data brought to 0.12 (`chore/whats-new-0.12`, merged 2026-11-20) for 0.12.0-beta.1, which Oleh asked for the same day
