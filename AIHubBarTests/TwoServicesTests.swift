@@ -86,6 +86,10 @@ struct TwoServicesTests {
         for other in [elsewhere, nested, project] {
             #expect(!PairCompare.removable(other) && !PairCompare.canKeep(claude, sides: [claude, other]))
         }
+        var symlinked = codex
+        symlinked.projectPath = "/private/tmp/Ambo"
+        symlinked.folder = "/private/tmp/Ambo/.claude/worktrees/x"
+        #expect(PairCompare.removable(symlinked), "a project under a symlinked folder")
         var gone = codex
         gone.discarded = true
         #expect(!PairCompare.canKeep(claude, sides: [claude, gone]), "already removed")

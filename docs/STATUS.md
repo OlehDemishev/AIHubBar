@@ -5,6 +5,7 @@
 **Updated:** 2026-11-20
 
 **Now:**
+- 2026-11-20: Mac — «Оставить этот вариант», «Влить в …» and «Убрать папку и ветку» pressed live in an isolated copy on a made-up finished pair (no real Claude or Codex run); four fixes (`fix/live-pass-pair-actions`, merged 2026-11-20): the removing buttons are offered for a project under a symlinked folder, a refusal has its own row instead of being cut, it is cleared when another pair is shown, the side's actions on their own row
 - 2026-11-20: Mac — «Убрать папку и ветку» in the pair's comparison removes a merged variant's worktree and branch after a confirmation; refused while the branch has commits the project's branch lacks or the worktree has uncommitted changes (`feat/pair-tidy`, merged 2026-11-20); goes out with 0.12.0, not seen live
 - 2026-11-20: Windows — the key that signs update manifests is made on Oleh's «Да, создай»: the private part in the repository secret `TAURI_SIGNING_PRIVATE_KEY` and on the laptop, the public part in the journal; the updater itself is not built yet
 - 2026-11-20: Windows — a session or background run in a worktree has the worktree's name in its row, as on the Mac (branch `feat/desktop-worktree-in-session-row`; seen live)
@@ -138,6 +139,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-20 — Live pass over the pair's keep, merge and tidy buttons (branch `fix/live-pass-pair-actions`)
+
+Done: four fixes after pressing the buttons in an isolated copy. `PairCompare.removable` compares cleaned-up paths on both sides, so «Оставить этот вариант» and «Убрать папку и ветку» are offered for a project under a symlinked folder (`/tmp`, `/var`); before, they never showed there. A refusal (conflicts, uncommitted changes) is shown on its own row in full instead of two cut lines beside the footer's buttons, and is cleared when another pair is shown. The footer's buttons keep their whole titles. The actions of a side («Влить в …», «Убрать папку и ветку», «Оставить этот вариант») sit on a row of their own: beside «Журнал» and «Открыть папку» their titles were cut.
+Checked: live in an isolated copy (own bundle id and home) with two made-up finished pairs in scratch git projects, records written by hand, no real Claude or Codex run: «Влить в main» with its confirmation merged the branch (`Merge branch 'cb/claude-export'`); a second, conflicting merge was taken back and said so, the project's folder clean; «Оставить этот вариант» removed the other worktree and branch and marked it «удалён»; «Убрать папку и ветку» removed the merged worktree and branch, label «влит в main, папка убрана», the merge commit stayed. `scripts/check.sh`; a test for the symlinked path.
+Left: seen on made-up records, not after a real pair run; the pair's notification banner, the header bell and the Telegram tile still not seen live.
 
 ## 2026-11-20 — Remove a merged variant's folder and branch (branch `feat/pair-tidy`)
 

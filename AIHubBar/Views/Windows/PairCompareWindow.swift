@@ -34,6 +34,14 @@ struct PairCompareWindow: View {
                             side(run, common: PairCompare.common(changes[sides[0].id], changes[sides[1].id]))
                         }
                     }
+                    if let keepError {
+                        // On its own row: next to the footer's buttons it was cut after two lines (seen live 2026-11-20).
+                        Label { Text(verbatim: keepError) } icon: { Image(systemName: "exclamationmark.triangle.fill") }
+                            .font(.caption)
+                            .foregroundStyle(.orange)
+                            .fixedSize(horizontal: false, vertical: true)
+                            .textSelection(.enabled)
+                    }
                     footer(sides)
                 }
                 .padding(16)
@@ -48,6 +56,7 @@ struct PairCompareWindow: View {
         .task(id: runs.selectedPair) {
             changes = [:]
             target = nil
+            keepError = nil
             while !Task.isCancelled {
                 guard let sides else { return }
                 target = await GitService.currentBranch(in: sides[0].projectPath)
@@ -123,6 +132,12 @@ struct PairCompareWindow: View {
                     Button("Открыть папку") { NSWorkspace.shared.open(URL(fileURLWithPath: run.folder)) }
                         .disabled(run.discarded == true)
                     Spacer(minLength: 0)
+                }
+                .controlSize(.small)
+                // A row of their own: beside «Журнал» and «Открыть папку» three of them were cut to «Убрать папку…»
+                // (seen live 2026-11-20).
+                HStack {
+                    Spacer(minLength: 0)
                     if let sides, let target, PairCompare.canMerge(run, sides: sides, target: target) {
                         ConfirmedButton(title: "Влить этот вариант?", message: PairCompare.mergeWarning(run, target: target), confirm: "Влить", role: nil) {
                             Task {
@@ -161,6 +176,7 @@ struct PairCompareWindow: View {
                     }
                 }
                 .controlSize(.small)
+                .fixedSize(horizontal: false, vertical: true)
             }
             .padding(4)
         } label: {
@@ -177,12 +193,6 @@ struct PairCompareWindow: View {
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }
-            if let keepError {
-                Label { Text(verbatim: keepError) } icon: { Image(systemName: "exclamationmark.triangle.fill") }
-                    .font(.caption)
-                    .foregroundStyle(.orange)
-                    .lineLimit(2)
-            }
             Spacer()
             if PairCompare.diffCommand(sides) != nil, sides.allSatisfy(\.state.isFinished), sides.allSatisfy({ $0.discarded != true }) {
                 Button("Различия между вариантами") {
@@ -191,6 +201,7 @@ struct PairCompareWindow: View {
                         shown = ShownDiff(title: "\(sides[0].agentTitle) → \(sides[1].agentTitle)", lines: parsed.lines, cut: parsed.cut)
                     }
                 }
+                .fixedSize()
                 .help("Чем вариант второго сервиса отличается от варианта первого: то, что закоммичено в обеих ветках")
             }
             if let command = PairCompare.diffCommand(sides), sides.allSatisfy({ $0.discarded != true }) {
@@ -199,6 +210,7 @@ struct PairCompareWindow: View {
                     NSPasteboard.general.setString(command, forType: .string)
                     copied = true
                 }
+                .fixedSize()
                 .help(Text(verbatim: command))
             }
         }
