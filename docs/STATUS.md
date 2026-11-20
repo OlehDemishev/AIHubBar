@@ -5,6 +5,7 @@
 **Updated:** 2026-11-20
 
 **Now:**
+- 0.12.0-beta.2 (build 1144) published 2026-11-20 for beta testers on Oleh's «Выпускай beta.2»: beta.1 plus Antigravity's «ждёт ответа» (#493) and its line in the release notes (#503). Notarized; the beta feed offers it, «latest» stays v0.11.0
 - 2026-11-20: Windows 0.1.5 published as an unsigned pre-release (tag `desktop-v0.1.5`) on Oleh's «Да, выпускай»: spend by project, own alert thresholds, the forecast's history, sign-in renewal; the laptop updated itself from 0.1.4 and reads Claude's limits; «latest» stays the Mac's v0.11.0
 - 2026-11-20: Windows — «Продлевать вход Claude Code сам»: an out-of-date sign-in is renewed through `claude` once an hour at most, and the limits come back (branch `feat/desktop-renew-sign-in`; seen live — the laptop's sign-in was a day old, the limits returned)
 - 2026-11-20: Windows — the forecast's readings are kept across restarts in `usage-history.json`, the Mac's file (branch `feat/desktop-forecast-history`; tests only — Claude's sign-in on the laptop was out of date, so no reading came)
@@ -105,7 +106,7 @@
 
 **Next:**
 - releases go out once a week, on Tuesday, on Oleh's word (agreed 2026-11-11); merged work waits in `main`
-- 0.12.0-beta.1 is out (2026-11-20); before 0.12.0: Oleh uses the beta; left to see in the app — a Codex approval, handover, review, the pair's notification banner, the header bell, the Telegram tile, the «Что нового» card
+- 0.12.0-beta.2 is out (2026-11-20); before 0.12.0: Oleh uses the beta; left to see in the app — a Codex approval, handover, review, the pair's notification banner, the header bell, the Telegram tile, the «Что нового» card
 - 0.12.0 not before Tuesday 2026-11-24, on Oleh's word; then `scripts/release-tools/update-cask.sh 0.12.0`
 - Antigravity «ждёт»: a notification needs a watcher of the status file (today the rows are read when the panel opens)
 - towards 1.0 (discussed 2026-11-10): the live pass is done (journal 2026-11-10); left — freeze what is in 1.0 and what stays beta, release notes, translations read by people, feedback from strangers before 1.0
@@ -116,7 +117,7 @@
 
 **Needs Oleh:**
 - Windows laptop, Telegram (0.1.5 is installed; nothing of it was tried with a real bot): 1) in @BotFather make a new bot — the Mac mini reads your present one; 2) Settings → «Telegram»: paste the token, «Привязать чат», «Start» in Telegram, «Проверить»; 3) start a small background task and see its result come to the chat; 4) «Этот компьютер отвечает боту» on, `/menu` in the chat — 🏠, then 🤖 and ⏳; 5) «Запросы разрешений в этот бот» on, start `claude --permission-mode default` in a project, ask it to create a file and answer ✅ from the phone. Say what did not work
-- update to 0.12.0-beta.1 (Settings → «Основные» → «Обновления», «Бета-версии» on): does the «Что нового» card show once with six lines; is the bell in the panel's header left of the gear, and does a press turn it orange; the «Telegram» tile in «Быстрые переключатели» if they are on
+- update to 0.12.0-beta.2 (Settings → «Основные» → «Обновления», «Бета-версии» on): does the «Что нового» card show once with six lines; is the bell in the panel's header left of the gear, and does a press turn it orange; the «Telegram» tile in «Быстрые переключатели» if they are on
 - Windows laptop, Telegram (in the next Windows version, or a build from `main`): Settings → «Telegram» — paste a bot's token from @BotFather (a new bot is the safest: the Mac mini reads your present one, and then «Start» reaches the Mac instead — the page says so and asks for the chat's id), «Привязать чат», «Start» in Telegram, «Проверить»; then start a small background task and see its result come to the chat
 - Windows laptop, Telegram (0.1.3 is installed): Settings → «Telegram» — paste a bot's token from @BotFather (a new bot is the safest: the Mac mini reads your present one, and then «Start» reaches the Mac instead — the page says so and asks for the chat's id), «Привязать чат», «Start» in Telegram, «Проверить»; then start a small background task and see its result come to the chat
 - Windows updates: keep a copy of `%USERPROFILE%\.tauri\aihubbar-updater.key` from the laptop in your password manager (it has no password). GitHub never shows a secret again; if both copies are lost, installed copies will refuse every later update and people would have to install by hand
@@ -158,6 +159,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-20 — 0.12.0-beta.2 published (branch `chore/status-0.12.0-beta.2`)
+
+Done: `scripts/release.sh 0.12.0-beta.2 --publish` from a worktree on `main` (1662626), on Oleh's «Выпускай beta.2». Against beta.1 the Mac app gains Antigravity's «ждёт ответа» in a conversation's row (#493); the release notes name it (#503).
+Checked: the script's own `scripts/check.sh`; both notarizations accepted, the disk image passes `spctl` as «Notarized Developer ID»; the pre-release `v0.12.0-beta.2` has the disk image and the appcast; `releases/latest` is still v0.11.0; the downloaded beta feed lists build 1144 and carries the new line of the notes.
+Left: the update not seen on Oleh's copy. Antigravity's «ждёт ответа» is still unseen in a panel: it needs «Включить квоту Antigravity», which the agent does not press on his Mac.
 
 ## 2026-11-20 — Windows 0.1.5 released (branch `chore/desktop-0.1.5-note`)
 
