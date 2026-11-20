@@ -5,6 +5,7 @@
 **Updated:** 2026-11-20
 
 **Now:**
+- 2026-11-20: Windows — the key that signs update manifests is made on Oleh's «Да, создай»: the private part in the repository secret `TAURI_SIGNING_PRIVATE_KEY` and on the laptop, the public part in the journal; the updater itself is not built yet
 - 2026-11-20: Windows — a session or background run in a worktree has the worktree's name in its row, as on the Mac (branch `feat/desktop-worktree-in-session-row`; seen live)
 - 2026-11-20: Windows — «Следующий шаг», «Завершить», a run in a worktree, «Остановить» and a worktree's «Удалить» seen live on the laptop in a scratch project; a project no longer counts AI Hub Bar's own worktrees as a file to commit (branch `fix/desktop-own-worktrees-not-dirty`)
 - 2026-11-19: Windows — «Извлечь диски» among the quick toggles (branch `feat/desktop-eject-disks`), and 21 texts that stayed Russian in every language are translated now (the toggles' names, the services' «найден» / «нет ключа» and what each service needs); a real eject is not seen — no removable drive on the laptop
@@ -97,6 +98,7 @@
 - Windows: left on the laptop — notifications and their buttons (the agent can't see a toast: its tool hides other programs' windows); the Mac's background runs have the same rules — try one build in a subfolder there; then stage 7 (installer, signing, updates) (stage 6 is done on Windows; «Извлечь диски» on Linux is not built)
 
 **Needs Oleh:**
+- Windows updates: keep a copy of `%USERPROFILE%\.tauri\aihubbar-updater.key` from the laptop in your password manager (it has no password). GitHub never shows a secret again; if both copies are lost, installed copies will refuse every later update and people would have to install by hand
 - Windows laptop, after the next install: press a quick command's combination on the real keyboard from another program (Settings → «Модули» → «Быстрые команды» → a command → «Записать») — the agent pressed one as keyboard input with the app's own window in front, and the command ran
 - Windows laptop, after the next install: put a USB stick in, Settings → «Модули» → «Быстрые переключатели» on, press «Диски» in the panel — Explorer must show the stick gone and the panel «Извлечено дисков: 1»; then once more with a file from the stick open in a program — the panel must name the drive under «Не получилось». The laptop had no removable drive, so the agent saw only «Нечего извлекать»
 - Windows laptop: a permission request from a real Claude Code session is still not seen — Claude Code there runs in Auto mode and decides routine actions itself. To see one: start `claude --permission-mode default` in a terminal in a project, ask it to create a file, and answer «Разрешить» in AI Hub Bar's panel instead of the terminal; say whether the terminal went on. Also close the terminal tab left in `.claude\worktrees\cb-live-check-of-a-permission` (it keeps that empty folder)
@@ -135,6 +137,15 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-20 — Windows: the update signing key (branch `chore/desktop-updater-key`)
+
+Done: on Oleh's «Да, создай». `npx tauri signer generate` on the laptop made a minisign key pair with no password: `%USERPROFILE%\.tauri\aihubbar-updater.key` (private) and `.key.pub`. The private part went from the file into the repository secret `TAURI_SIGNING_PRIVATE_KEY` (`gh secret set`, never printed). No code changed. The public part, for `plugins.updater.pubkey` in `desktop/app/tauri.conf.json` when the updater is built:
+
+`dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDUwMTI1NDA1NkMwNjQxNEYKUldSUFFRWnNCVlFTVUZFOFAwaEtFWDkvK0JBMW5ZVTl3cXZaL21jdmRIWmw4eEM4VGVMVmh4YzIK`
+
+Checked: `gh secret list` shows the secret; the key file is 348 bytes, the public part reads as base64.
+Left: the updater itself (stage 7): `tauri-plugin-updater`, the release workflow signing the installer and writing the manifest, «Проверить обновления» in Settings. Open: where the manifest lives — the desktop releases are pre-releases, so GitHub's `releases/latest` points at the Mac's. No signing with the key was tried yet. Oleh keeps a copy of the private key (Needs Oleh).
 
 ## 2026-11-20 — Windows: the worktree's name in a session row (branch `feat/desktop-worktree-in-session-row`)
 
