@@ -128,6 +128,25 @@ enum GitService {
         AppLog.info("Merged \(branch) into \(target) in \(projectPath)")
     }
 
+    /// A merged variant's worktree and branch go away, and nothing is lost by it: refused while the branch has
+    /// commits the project's branch lacks or the worktree has anything uncommitted. No `--force`, `branch -d`.
+    static func removeMergedWorktree(_ worktreePath: String, branch: String, projectPath: String) async throws {
+        guard (try? await run(["merge-base", "--is-ancestor", branch, "HEAD"], in: projectPath, timeout: .seconds(10))) != nil else {
+            throw GitError.refused(String(localized: "В ветке \(branch) есть коммиты, которых нет в ветке проекта — папка и ветка оставлены."))
+        }
+        if FileManager.default.fileExists(atPath: worktreePath) {
+            let status = try await run(["status", "--porcelain"], in: worktreePath)
+            guard status.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
+                throw GitError.refused(String(localized: "В папке варианта есть незакоммиченные изменения — папка и ветка оставлены."))
+            }
+            try await run(["worktree", "remove", worktreePath], in: projectPath)
+        } else {
+            try await run(["worktree", "prune"], in: projectPath)
+        }
+        try await run(["branch", "-d", branch], in: projectPath)
+        AppLog.info("Removed merged worktree \(worktreePath) and branch \(branch)")
+    }
+
     /// `git worktree remove` without `--force`: git itself refuses if anything is uncommitted.
     static func removeWorktree(_ worktreePath: String, projectPath: String) async throws {
         try await run(["worktree", "remove", worktreePath], in: projectPath)

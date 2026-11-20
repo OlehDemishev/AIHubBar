@@ -5,6 +5,7 @@
 **Updated:** 2026-11-20
 
 **Now:**
+- 2026-11-20: Mac — «Убрать папку и ветку» in the pair's comparison removes a merged variant's worktree and branch after a confirmation; refused while the branch has commits the project's branch lacks or the worktree has uncommitted changes (`feat/pair-tidy`, merged 2026-11-20); goes out with 0.12.0, not seen live
 - 2026-11-20: Windows — the key that signs update manifests is made on Oleh's «Да, создай»: the private part in the repository secret `TAURI_SIGNING_PRIVATE_KEY` and on the laptop, the public part in the journal; the updater itself is not built yet
 - 2026-11-20: Windows — a session or background run in a worktree has the worktree's name in its row, as on the Mac (branch `feat/desktop-worktree-in-session-row`; seen live)
 - 2026-11-20: Windows — «Следующий шаг», «Завершить», a run in a worktree, «Остановить» and a worktree's «Удалить» seen live on the laptop in a scratch project; a project no longer counts AI Hub Bar's own worktrees as a file to commit (branch `fix/desktop-own-worktrees-not-dirty`)
@@ -137,6 +138,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-20 — Remove a merged variant's folder and branch (branch `feat/pair-tidy`)
+
+Done: after «Влить в …» the merged side of a pair shows «Убрать папку и ветку». After a confirmation the app removes that worktree (`git worktree remove`, no `--force`) and its branch (`git branch -d`); the side is then labelled «влит в …, папка убрана». Refused, with the reason under the window, while the branch has commits the project's branch lacks or the worktree has anything uncommitted. A help fact «Выбрать вариант» names line diffs, keep, merge and this button; release notes for 0.12.0 updated.
+Checked: `scripts/check.sh`; a test for when the button is offered; the git steps by hand on a scratch repository (not an ancestor before the merge, a dirty worktree refused by git, clean removal after). Catalog 1936 keys, 0 problems.
+Left: the button not pressed in the app; nothing of the pair window after the second live pass (keep, merge, tidy) seen live.
 
 ## 2026-11-20 — Windows: the update signing key (branch `chore/desktop-updater-key`)
 

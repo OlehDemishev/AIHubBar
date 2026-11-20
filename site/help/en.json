@@ -286,6 +286,10 @@
               "name" : "Comparison"
             },
             {
+              "detail" : "In the comparison window, a click on a file shows its changes line by line. “Keep this version” removes the other one, “Merge into …” merges the version’s branch into the project’s branch (no push), and “Remove folder and branch” then cleans up after it. Each action asks for confirmation.",
+              "name" : "Choosing a version"
+            },
+            {
               "detail" : "Background task: what Claude does, step by step.",
               "name" : "Log"
             },

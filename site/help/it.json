@@ -286,6 +286,10 @@
               "name" : "Confronto"
             },
             {
+              "detail" : "Nella finestra di confronto, un clic su un file ne mostra le modifiche riga per riga. «Tieni questa variante» elimina l’altra, «Unisci a …» unisce il ramo della variante al ramo del progetto (senza push) e «Rimuovi cartella e ramo» poi fa pulizia. Ogni azione chiede conferma.",
+              "name" : "Scegliere una variante"
+            },
+            {
               "detail" : "Attività in background: cosa fa Claude, passo dopo passo.",
               "name" : "Registro"
             },

@@ -64,7 +64,9 @@ struct PairCompareWindow: View {
         GroupBox {
             VStack(alignment: .leading, spacing: 6) {
                 HStack(spacing: 8) {
-                    if run.discarded == true {
+                    if run.discarded == true, let merged = run.mergedInto {
+                        Text("влит в \(merged), папка убрана").foregroundStyle(.green)
+                    } else if run.discarded == true {
                         Text("удалён").foregroundStyle(.orange)
                     } else if let merged = run.mergedInto {
                         Text("влит в \(merged)").foregroundStyle(.green)
@@ -132,6 +134,18 @@ struct PairCompareWindow: View {
                                 }
                             }
                         } label: { Text("Влить в \(target)") }
+                    }
+                    if PairCompare.canTidy(run) {
+                        ConfirmedButton(title: "Убрать папку и ветку?", message: PairCompare.tidyWarning(run), confirm: "Убрать", role: nil) {
+                            Task {
+                                do {
+                                    try await runs.tidyVariant(run)
+                                    keepError = nil
+                                } catch {
+                                    keepError = error.localizedDescription
+                                }
+                            }
+                        } label: { Text("Убрать папку и ветку") }
                     }
                     if let sides, PairCompare.canKeep(run, sides: sides), let other = sides.first(where: { $0.id != run.id }) {
                         ConfirmedButton(title: "Оставить этот вариант?", message: PairCompare.removalWarning(other), confirm: "Удалить другой вариант", role: nil) {

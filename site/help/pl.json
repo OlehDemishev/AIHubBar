@@ -286,6 +286,10 @@
               "name" : "Porównanie"
             },
             {
+              "detail" : "W oknie porównania kliknięcie pliku pokazuje zmiany wiersz po wierszu. „Zostaw ten wariant” usuwa drugi, „Scal z …” scala gałąź wariantu z gałęzią projektu (bez push), a „Usuń folder i gałąź” potem po nim sprząta. Każda czynność prosi o potwierdzenie.",
+              "name" : "Wybór wariantu"
+            },
+            {
               "detail" : "Zadanie w tle: co robi Claude, krok po kroku.",
               "name" : "Dziennik"
             },
