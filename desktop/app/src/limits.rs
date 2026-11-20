@@ -46,13 +46,19 @@ fn notified_file() -> std::path::PathBuf {
     paths::data_dir().join("usage-notified.json")
 }
 
+/// The session's readings for the forecast, kept across restarts (the Mac's file and format).
+fn history_file() -> std::path::PathBuf {
+    paths::data_dir().join("usage-history.json")
+}
+
 impl Limits {
     pub fn new() -> Self {
         let notified = std::fs::read_to_string(notified_file())
             .ok()
             .and_then(|text| serde_json::from_str(&text).ok())
             .unwrap_or_default();
-        Limits { state: Arc::new(Mutex::new(State { notified, ..State::default() })), scanner: Arc::default(), wake: Arc::default() }
+        let history = std::fs::read_to_string(history_file()).map(|text| usage::parse_history(&text, Utc::now())).unwrap_or_default();
+        Limits { state: Arc::new(Mutex::new(State { notified, history, ..State::default() })), scanner: Arc::default(), wake: Arc::default() }
     }
 
     /// Starts the background thread; the first request goes out at once.
@@ -102,7 +108,10 @@ impl Limits {
                     }
                     if let Some(session) = snapshot.session() {
                         state.history.push(UsagePoint { date: now, session: session.utilization, session_resets_at: session.resets_at });
-                        state.history.retain(|p| now - p.date < Duration::hours(2));
+                        state.history.retain(|p| now - p.date < Duration::hours(usage::HISTORY_HOURS));
+                        if let Err(error) = std::fs::write(history_file(), usage::history_json(&state.history)) {
+                            eprintln!("usage history not saved: {error}");
+                        }
                     }
                     let previous = state.snapshot.take();
                     let mut notified = std::mem::take(&mut state.notified);
