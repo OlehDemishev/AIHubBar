@@ -42,7 +42,9 @@ enum PairCompare {
 
     /// Only a worktree under `<project>/.claude/worktrees/` on a branch of its own.
     static func removable(_ run: BackgroundRun) -> Bool {
-        let root = (run.projectPath as NSString).appendingPathComponent(".claude/worktrees") + "/"
+        // Both through the same clean-up: a project under a symlinked folder (`/tmp`, `/var`) is otherwise never
+        // matched, and the buttons that remove a worktree are not offered (seen live 2026-11-20).
+        let root = ((run.projectPath as NSString).appendingPathComponent(".claude/worktrees") as NSString).standardizingPath + "/"
         let folder = (run.folder as NSString).standardizingPath
         return folder.hasPrefix(root) && folder.count > root.count && !folder.dropFirst(root.count).contains("/")
             && run.worktreeBranch?.isEmpty == false
