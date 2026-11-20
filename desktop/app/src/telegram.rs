@@ -254,6 +254,19 @@ fn handle(app: &AppHandle, token: &str, chat: &str, update: telegram::Update, af
                     }
                     sync_requests(app);
                 }
+                telegram::Route::LimitAlerts(on) => {
+                    telegram::answer_press(token, callback, None);
+                    crate::save(app, |settings| {
+                        settings.telegram_off.retain(|e| e != "lim");
+                        if !on {
+                            settings.telegram_off.push("lim".to_owned());
+                        }
+                    });
+                    let _ = app.emit("telegram-changed", ());
+                    if let Some(message) = message {
+                        let _ = telegram::edit_message(token, chat, *message, &screen_message(app, telegram::Screen::Limits, &texts));
+                    }
+                }
                 telegram::Route::Details(request) => {
                     telegram::answer_press(token, callback, None);
                     let shown = crate::sessions::shown();
@@ -301,6 +314,13 @@ fn screen_message(app: &AppHandle, screen: telegram::Screen, texts: &Strings) ->
                 runs: app.state::<crate::runs::Runs>().list().iter().filter(|run| run.is_running()).count(),
             };
             telegram::home_screen(&home, texts)
+        }
+        telegram::Screen::Limits => {
+            let mut services = vec![app.state::<crate::limits::Limits>().telegram_service(texts)];
+            services.retain(|service| !service.windows.is_empty());
+            services.extend(app.state::<crate::hub::Hub>().telegram_services(texts));
+            let alerts_on = !app.state::<crate::AppState>().settings.lock().unwrap().telegram_off.iter().any(|e| e == "lim");
+            telegram::limits_screen(&services, alerts_on, &crate::limits::THRESHOLDS, texts)
         }
         telegram::Screen::Sessions => {
             let now = Utc::now();

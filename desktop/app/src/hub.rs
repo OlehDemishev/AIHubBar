@@ -103,6 +103,33 @@ impl Hub {
     }
 
     /// «Codex 42 % · Copilot 75 %» for the tray's hint.
+    /// The other services' limits for the Telegram bot's ⏳.
+    pub fn telegram_services(&self, texts: &claudepult_core::i18n::Strings) -> Vec<claudepult_core::telegram::LimitService> {
+        use claudepult_core::telegram::{LimitService, LimitWindow};
+        let now = Utc::now();
+        self.state
+            .lock()
+            .unwrap()
+            .limits
+            .iter()
+            .map(|limit| LimitService {
+                title: limit.source.title(texts),
+                windows: limit
+                    .windows
+                    .iter()
+                    .map(|w| LimitWindow {
+                        title: w.title.clone(),
+                        percent: w.percent,
+                        detail: w.detail.clone(),
+                        reset: claudepult_core::texts::reset_text(texts, w.resets_at, now),
+                        runs_out: w.runs_out_at.filter(|at| *at > now).map(|at| at.with_timezone(&Local).format("%H:%M").to_string()),
+                    })
+                    .collect(),
+                error: limit.error.clone(),
+            })
+            .collect()
+    }
+
     pub fn tray_line(&self) -> Option<String> {
         let state = self.state.lock().unwrap();
         let parts: Vec<String> = state.limits.iter().filter_map(|l| l.fullest().map(|p| format!("{} {}", l.source.short_title(), texts::percent(p)))).collect();

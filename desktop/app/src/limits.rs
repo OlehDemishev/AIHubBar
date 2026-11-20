@@ -16,7 +16,7 @@ use tauri::{AppHandle, Emitter, Manager};
 use tauri_plugin_notification::NotificationExt;
 
 /// The thresholds the Mac app starts with (Settings → «Лимиты» there; a setting here comes later).
-const THRESHOLDS: [u32; 3] = [50, 80, 95];
+pub(crate) const THRESHOLDS: [u32; 3] = [50, 80, 95];
 const ICON_SIZE: u32 = 32;
 
 #[derive(Default)]
@@ -193,6 +193,19 @@ impl Limits {
         let snapshot = state.snapshot.as_ref();
         let session = snapshot.and_then(|s| s.session()).map(|w| (w.utilization, texts::reset_text(texts, w.resets_at, Utc::now())));
         (session, snapshot.and_then(|s| s.week()).map(|w| w.utilization))
+    }
+
+    /// Claude's limits for the Telegram bot's ⏳: the session, the week, the models' weeks.
+    pub fn telegram_service(&self, texts: &Strings) -> claudepult_core::telegram::LimitService {
+        use claudepult_core::telegram::{LimitService, LimitWindow};
+        let state = self.state.lock().unwrap();
+        let now = Utc::now();
+        let window = |w: &usage::UsageWindow| LimitWindow { title: texts::window_title(texts, w), percent: Some(w.utilization), reset: texts::reset_text(texts, w.resets_at, now), ..LimitWindow::default() };
+        let windows = match state.snapshot.as_ref() {
+            Some(snapshot) => snapshot.session().into_iter().chain(snapshot.week()).chain(snapshot.shown_other_windows()).map(window).collect(),
+            None => Vec::new(),
+        };
+        LimitService { title: "Claude".to_owned(), windows, error: None }
     }
 
     pub fn view(&self, texts: &Strings) -> LimitsView {

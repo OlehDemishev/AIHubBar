@@ -239,6 +239,7 @@ pub fn parse_updates(updates: &Value) -> Vec<Update> {
 pub enum Screen {
     Home,
     Sessions,
+    Limits,
 }
 
 /// What a button means, by its callback data (SPEC-telegram §3; the Mac's format).
@@ -247,6 +248,8 @@ pub enum Route {
     Show(Screen),
     Answer { request: String, allow: bool },
     Details(String),
+    /// ⏳: limit alerts to Telegram on or off.
+    LimitAlerts(bool),
 }
 
 impl Route {
@@ -255,6 +258,9 @@ impl Route {
         match (verb, argument) {
             ("nav", "home") => Some(Route::Show(Screen::Home)),
             ("nav", "sessions") => Some(Route::Show(Screen::Sessions)),
+            ("nav", "limits") => Some(Route::Show(Screen::Limits)),
+            ("lim", "on") => Some(Route::LimitAlerts(true)),
+            ("lim", "off") => Some(Route::LimitAlerts(false)),
             ("allow", id) if crate::approvals::is_valid_id(id) => Some(Route::Answer { request: id.to_owned(), allow: true }),
             ("deny", id) if crate::approvals::is_valid_id(id) => Some(Route::Answer { request: id.to_owned(), allow: false }),
             ("req", id) if crate::approvals::is_valid_id(id) => Some(Route::Details(id.to_owned())),
@@ -266,6 +272,9 @@ impl Route {
         match self {
             Route::Show(Screen::Home) => "nav:home".to_owned(),
             Route::Show(Screen::Sessions) => "nav:sessions".to_owned(),
+            Route::Show(Screen::Limits) => "nav:limits".to_owned(),
+            Route::LimitAlerts(true) => "lim:on".to_owned(),
+            Route::LimitAlerts(false) => "lim:off".to_owned(),
             Route::Answer { request, allow: true } => format!("allow:{request}"),
             Route::Answer { request, allow: false } => format!("deny:{request}"),
             Route::Details(request) => format!("req:{request}"),
@@ -340,7 +349,73 @@ pub fn home_screen(home: &Home, s: &crate::i18n::Strings) -> Message {
     ];
     Message {
         html: lines.join("\n"),
-        buttons: vec![vec![button("🤖", s.t("Сессии"), Route::Show(Screen::Sessions)), button("🔄", s.t("Обновить"), Route::Show(Screen::Home))]],
+        buttons: vec![
+            vec![button("🤖", s.t("Сессии"), Route::Show(Screen::Sessions)), button("⏳", s.t("Лимиты"), Route::Show(Screen::Limits))],
+            vec![button("🔄", s.t("Обновить"), Route::Show(Screen::Home))],
+        ],
+    }
+}
+
+/// One limit of a service on ⏳.
+#[derive(Debug, Clone, PartialEq, Default)]
+pub struct LimitWindow {
+    pub title: String,
+    pub percent: Option<f64>,
+    /// What a window without a percent says instead (plain spend).
+    pub detail: Option<String>,
+    /// «сброс через 2 ч 14 мин».
+    pub reset: Option<String>,
+    /// «14:30» when, at this pace, the limit runs out before its reset.
+    pub runs_out: Option<String>,
+}
+
+#[derive(Debug, Clone, PartialEq, Default)]
+pub struct LimitService {
+    pub title: String,
+    pub windows: Vec<LimitWindow>,
+    pub error: Option<String>,
+}
+
+fn bar(percent: f64) -> String {
+    let filled = ((percent / 10.0).round() as i64).clamp(0, 10) as usize;
+    "▓".repeat(filled) + &"░".repeat(10 - filled)
+}
+
+/// ⏳: every AI service's limits with a bar, the reset and the forecast; the switch of limit alerts to Telegram.
+pub fn limits_screen(services: &[LimitService], alerts_on: bool, thresholds: &[u32], s: &crate::i18n::Strings) -> Message {
+    let mut lines = vec![format!("⏳ <b>{}</b>", escape(s.t("Лимиты")))];
+    if services.is_empty() {
+        lines.push(escape(s.t("лимиты ещё не загружены")));
+    }
+    for service in services {
+        lines.push(String::new());
+        lines.push(format!("<b>{}</b>", escape(&service.title)));
+        if let Some(error) = service.error.as_deref().filter(|_| service.windows.is_empty()) {
+            lines.push(format!("⚠️ {}", escape(error)));
+        }
+        for window in service.windows.iter().take(5) {
+            let mut line = escape(&window.title) + " ";
+            if let Some(percent) = window.percent {
+                line += &format!("<code>{}</code> {} %", bar(percent), percent.round() as i64);
+            } else if let Some(detail) = &window.detail {
+                line += &escape(detail);
+            }
+            if let Some(reset) = &window.reset {
+                line += &format!(" · {}", escape(reset));
+            }
+            if let Some(time) = &window.runs_out {
+                line += &format!("\n    ⚠️ {}", escape(&s.format("при этом темпе кончится к %@", &[time])));
+            }
+            lines.push(line);
+        }
+    }
+    lines.push(String::new());
+    let levels = thresholds.iter().map(u32::to_string).collect::<Vec<_>>().join("/");
+    lines.push(format!("🔔 {}", escape(&if alerts_on { s.format("Уведомления в Telegram: при %@ %%", &[&levels]) } else { s.t("Уведомления о лимитах в Telegram выключены").to_owned() })));
+    let switch = if alerts_on { button("🔕", s.t("Выключить уведомления"), Route::LimitAlerts(false)) } else { button("🔔", s.t("Включить уведомления"), Route::LimitAlerts(true)) };
+    Message {
+        html: lines.join("\n"),
+        buttons: vec![vec![switch], vec![button("🔄", s.t("Обновить"), Route::Show(Screen::Limits)), button("⬅️", s.t("Главная"), Route::Show(Screen::Home))]],
     }
 }
 
@@ -579,12 +654,12 @@ mod tests {
     #[test]
     fn routes_and_commands() {
         let id = "0123456789abcdef0123456789abcdef";
-        for route in [Route::Show(Screen::Home), Route::Show(Screen::Sessions), Route::Answer { request: id.into(), allow: true }, Route::Answer { request: id.into(), allow: false }, Route::Details(id.into())] {
+        for route in [Route::Show(Screen::Home), Route::Show(Screen::Sessions), Route::Show(Screen::Limits), Route::LimitAlerts(true), Route::LimitAlerts(false), Route::Answer { request: id.into(), allow: true }, Route::Answer { request: id.into(), allow: false }, Route::Details(id.into())] {
             assert!(route.data().len() <= 64);
             assert_eq!(Route::parse(&route.data()), Some(route.clone()));
             assert_eq!(route.is_action(), matches!(route, Route::Answer { .. }));
         }
-        for wrong in ["", "nav", "nav:mac", "allow:", "allow:../x", "run:1", "allow:0123456789abcdef0123456789abcdef:x"] {
+        for wrong in ["", "nav", "nav:mac", "lim:maybe", "allow:", "allow:../x", "run:1", "allow:0123456789abcdef0123456789abcdef:x"] {
             assert_eq!(Route::parse(wrong), None, "{wrong}");
         }
         assert_eq!(command("/start"), Some(Screen::Home));
@@ -601,6 +676,7 @@ mod tests {
         let message = home_screen(&home, &s);
         assert_eq!(message.html, "🏠 <b>AI Hub Bar</b> · PC &lt;1&gt;\n⏳ Claude: сессия 42 % (сброс через 2 ч 14 мин), неделя 31 %\n🤖 Сессии: 2 работают, 1 ждут\n🚀 Фоновые задачи: 3");
         assert_eq!(message.buttons[0][0], ("🤖 Сессии".to_owned(), Route::Show(Screen::Sessions)));
+        assert_eq!(message.buttons[0][1], ("⏳ Лимиты".to_owned(), Route::Show(Screen::Limits)));
         assert!(home_screen(&Home::default(), &s).html.contains("⏳ Claude: лимиты ещё не загружены"));
 
         let lines = [
@@ -616,6 +692,32 @@ mod tests {
         assert_eq!(screen.buttons[0].iter().map(|b| b.0.as_str()).collect::<Vec<_>>(), ["✅ 1", "❌ 1", "ℹ️ 1"]);
         assert_eq!(sessions_screen(&lines, &requests, false, &s).buttons[0].len(), 1, "no answers where a press can't come");
         assert!(sessions_screen(&[], &[], true, &s).html.ends_with("Сессий сейчас нет."));
+    }
+
+    #[test]
+    fn limits() {
+        let s = crate::i18n::Strings::default();
+        let services = [
+            LimitService {
+                title: "Claude".into(),
+                windows: vec![
+                    LimitWindow { title: "Сессия (5 ч)".into(), percent: Some(42.4), reset: Some("сброс через 2 ч 14 мин".into()), runs_out: Some("14:30".into()), ..LimitWindow::default() },
+                    LimitWindow { title: "Неделя".into(), percent: Some(100.0), ..LimitWindow::default() },
+                ],
+                error: None,
+            },
+            LimitService { title: "OpenAI API".into(), windows: vec![LimitWindow { title: "Месяц".into(), detail: Some("$3.20".into()), ..LimitWindow::default() }], error: None },
+            LimitService { title: "Codex".into(), windows: Vec::new(), error: Some("нет <входа>".into()) },
+        ];
+        let screen = limits_screen(&services, true, &[50, 80, 95], &s);
+        assert_eq!(
+            screen.html,
+            "⏳ <b>Лимиты</b>\n\n<b>Claude</b>\nСессия (5 ч) <code>▓▓▓▓░░░░░░</code> 42 % · сброс через 2 ч 14 мин\n    ⚠️ при этом темпе кончится к 14:30\nНеделя <code>▓▓▓▓▓▓▓▓▓▓</code> 100 %\n\n<b>OpenAI API</b>\nМесяц $3.20\n\n<b>Codex</b>\n⚠️ нет &lt;входа&gt;\n\n🔔 Уведомления в Telegram: при 50/80/95 %"
+        );
+        assert_eq!(screen.buttons[0][0], ("🔕 Выключить уведомления".to_owned(), Route::LimitAlerts(false)));
+        let off = limits_screen(&[], false, &[50, 80, 95], &s);
+        assert!(off.html.contains("лимиты ещё не загружены") && off.html.ends_with("🔔 Уведомления о лимитах в Telegram выключены"));
+        assert_eq!(off.buttons[0][0].1, Route::LimitAlerts(true));
     }
 
     #[test]
