@@ -63,6 +63,10 @@ pub struct Session {
     pub wt_session: Option<String>,
     /// (done, total) of the task list.
     pub progress: Option<(usize, usize)>,
+    /// The hook's `agent`: `claude` (also when missing), `codex`, `copilot`.
+    pub agent: Option<String>,
+    /// What the session was asked: its first prompt, else the latest one.
+    pub task: Option<String>,
 }
 
 fn text(value: &Value, key: &str) -> Option<String> {
@@ -92,12 +96,23 @@ impl Session {
             claude_pid: value.get("claude_pid").and_then(Value::as_u64).map(|p| p as u32),
             wt_session: text(&value, "wt_session"),
             progress,
+            agent: text(&value, "agent"),
+            task: text(&value, "first_prompt").or_else(|| text(&value, "last_prompt")),
         })
     }
 
     /// The worktree's name when the session works in `<project>/.claude/worktrees/<name>`, as on the Mac.
     pub fn worktree_name(&self) -> Option<String> {
         worktree_name(&self.cwd)
+    }
+
+    /// «Claude», «Codex», «Copilot» — who works in the session.
+    pub fn agent_name(&self) -> &'static str {
+        match self.agent.as_deref() {
+            Some("codex") => "Codex",
+            Some("copilot") => "Copilot",
+            _ => "Claude",
+        }
     }
 
     /// The project's name, or the last folder of `cwd` for a session outside the projects folder.

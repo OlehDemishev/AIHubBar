@@ -187,6 +187,14 @@ impl Limits {
         });
     }
 
+    /// Claude's session (percent, «сброс через …») and week, for the Telegram bot's 🏠.
+    pub fn brief(&self, texts: &Strings) -> (Option<(f64, Option<String>)>, Option<f64>) {
+        let state = self.state.lock().unwrap();
+        let snapshot = state.snapshot.as_ref();
+        let session = snapshot.and_then(|s| s.session()).map(|w| (w.utilization, texts::reset_text(texts, w.resets_at, Utc::now())));
+        (session, snapshot.and_then(|s| s.week()).map(|w| w.utilization))
+    }
+
     pub fn view(&self, texts: &Strings) -> LimitsView {
         let state = self.state.lock().unwrap();
         let now = Utc::now();

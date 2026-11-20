@@ -42,6 +42,17 @@
           </span>
         </div>
         <div class="row">
+          <label for="telegram-answers" data-t="Этот компьютер отвечает боту" data-t-title="Только один компьютер читает сообщения бота; уведомления присылают все"></label>
+          <span class="telegram-controls">
+            <span class="secondary" id="telegram-reading"></span>
+            <input type="checkbox" id="telegram-answers">
+          </span>
+        </div>
+        <div class="row">
+          <label for="telegram-requests" data-t="Запросы разрешений в этот бот" data-t-title="Когда Claude просит разрешение, бот присылает запрос с кнопками «Разрешить», «Отклонить», «Подробнее»"></label>
+          <input type="checkbox" id="telegram-requests">
+        </div>
+        <div class="row">
           <span class="secondary" id="telegram-status"></span>
           <button id="telegram-test" data-t="Проверить"></button>
         </div>
@@ -1155,6 +1166,9 @@
         id("chat-id").placeholder = t("ID чата");
         id("status").textContent = error ?? view.status ?? "";
         id("test").disabled = !view.hasToken || !view.chat;
+        id("answers").checked = view.answers;
+        id("requests").checked = view.requests;
+        id("reading").textContent = !view.answers || !view.hasToken || !view.chat ? "" : view.conflict ? t("Бота читает другой Mac") : view.reading ? t("Отвечает") : t("Не отвечает");
         id("events").replaceChildren(...view.events.map((event) => {
           const row = document.createElement("div");
           row.className = "row";
@@ -1188,6 +1202,8 @@
       id("unbind").onclick = act(id("unbind"), "telegram_set_chat", () => ({ chat: null }));
       id("chat-save").onclick = act(id("chat-save"), "telegram_set_chat", () => ({ chat: id("chat-id").value }));
       id("test").onclick = act(id("test"), "telegram_test");
+      id("answers").onchange = async () => show(await invoke("set_telegram_answers", { on: id("answers").checked }));
+      id("requests").onchange = async () => show(await invoke("set_telegram_requests", { on: id("requests").checked }));
       show(await invoke("telegram_view"));
       window.__TAURI__.event.listen("telegram-changed", async () => show(await invoke("telegram_view")));
     }
