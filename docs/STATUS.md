@@ -5,6 +5,7 @@
 **Updated:** 2026-11-20
 
 **Now:**
+- 2026-11-20: Windows — the Telegram bot's ⏳: Claude's and the other services' limits with a bar, the reset and the forecast, and the switch of limit alerts (branch `feat/desktop-telegram-limits`; tests only — no real bot on the laptop)
 - 2026-11-20: Windows — Telegram stage 2: the app reads the bot when «Этот компьютер отвечает боту» is on (🏠, 🤖), and permission requests come to the chat with ✅ / ❌ (branch `feat/desktop-telegram-reader`; the page seen live, a real bot not tried — the laptop has no token)
 - 2026-11-20: Mac — an Antigravity conversation's row in «Сессии» says «ждёт ответа» while agy asks «Run this command?» (`feat/antigravity-waiting`, merged 2026-11-20); works with AI Hub Bar's status line installed («Включить квоту Antigravity»); not in 0.12.0-beta.1
 - 0.12.0-beta.1 (build 1112) published 2026-11-20 for beta testers on Oleh's «Выпускай для беты»: everything merged since 0.11.0 on the Mac — the nine Claude and Codex features, the pair's comparison with diffs, keep, merge and tidy, the Telegram bell and tile, the 0.12 «Что нового» card. Notarized; the beta feed offers it, «latest» stays v0.11.0. Lives on Oleh's copy until the release, not before Tuesday 2026-11-24
@@ -105,7 +106,7 @@
 - check on the Air: the island at the real notch
 - promotion (docs/LAUNCH.md): r/ClaudeAI, the lists, r/macapps, Show HN, Product Hunt, Homebrew
 - content (docs/specs/SPEC-content.md, agreed): stage 2 «Версии», then batch tasks; better after the first feedback from people
-- Windows: left on the laptop — notifications and their buttons (the agent can't see a toast: its tool hides other programs' windows); the Mac's background runs have the same rules — try one build in a subfolder there; stage 7: the installer and updates are done (0.1.2), signing waits for SignPath (the update 0.1.2 → 0.1.3 from GitHub was seen on the laptop); Telegram on Windows (Oleh's choice 2026-11-20): stages 1 and 2 are done (the reader, 🏠, 🤖, permission requests), neither tried with a real bot; next the ⏳ limits screen and tasks from the chat (SPEC-telegram stage 3) — better after Oleh has tried a real bot
+- Windows: left on the laptop — notifications and their buttons (the agent can't see a toast: its tool hides other programs' windows); the Mac's background runs have the same rules — try one build in a subfolder there; stage 7: the installer and updates are done (0.1.2), signing waits for SignPath (the update 0.1.2 → 0.1.3 from GitHub was seen on the laptop); Telegram on Windows (Oleh's choice 2026-11-20): stages 1 and 2 are done (the reader, 🏠, 🤖, permission requests), neither tried with a real bot; ⏳ too; next tasks from the chat (SPEC-telegram stage 3) — only after a real bot has been tried on the laptop: a chat that can start an agent must first be seen refusing a stranger
 
 **Needs Oleh:**
 - Windows laptop, Telegram (0.1.3 is installed): Settings → «Telegram» — paste a bot's token from @BotFather (a new bot is the safest: the Mac mini reads your present one, and then «Start» reaches the Mac instead — the page says so and asks for the chat's id), «Привязать чат», «Start» in Telegram, «Проверить»; then start a small background task and see its result come to the chat; in the next Windows version also: «Этот компьютер отвечает боту» on (only with a bot no other computer reads), `/menu` in the chat, «Запросы разрешений в этот бот» on, and answer a real request with ✅ from the phone
@@ -151,6 +152,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-20 — Windows: the Telegram bot's ⏳ limits screen (branch `feat/desktop-telegram-limits`)
+
+Done: the last screen that only shows. 🏠 has «⏳ Лимиты»; the screen lists Claude (the session, the week, the models' weeks) and every other service the panel shows, each limit as the Mac's ten-step bar with its percent, «сброс через …» and, where the pace runs out before the reset, «при этом темпе кончится к 14:30»; plain spend shows its amount; a service that could not be read shows why. Under it the thresholds the alerts come at and a button that switches limit alerts to Telegram off or on — the same switch as «Пороги лимитов» in Settings (`lim:on` / `lim:off`, the Mac's data). `core/src/telegram.rs` `limits_screen`, `Limits::telegram_service`, `Hub::telegram_services`. All five texts are the Mac's.
+Checked: `python scripts/strings.py --check` (625 texts), `scripts/strings-check.py` (0 problems), `cargo test --workspace` on Windows (the screen's exact text with a bar, a spend, an error and both states of the switch; the new routes there and back). Nothing in the app's own windows changed.
+Left: like the rest of the reader, not seen in a real chat (Needs Oleh). Tasks from the chat are not started on purpose: a chat that can launch an agent should first be seen, with a real bot, to refuse a stranger and an old press.
 
 ## 2026-11-20 — Windows: Telegram, stage 2 — the reader, 🏠, 🤖, permission requests (branch `feat/desktop-telegram-reader`)
 
