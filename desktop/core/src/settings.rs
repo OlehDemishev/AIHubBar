@@ -38,6 +38,8 @@ pub struct Settings {
     pub resource_alerts: bool,
     /// Look for a new version once a day (Windows; on by default, as the Mac's «Проверять раз в день»).
     pub updates_daily: bool,
+    /// «Продлевать вход Claude Code сам» (the Mac's `renewClaudeLogin`, on by default there too).
+    pub renew_claude_login: bool,
     /// The chat the Telegram bot writes to (the Mac's `telegramChatID`); the token is among the API keys.
     pub telegram_chat: Option<String>,
     /// Events that don't go to Telegram (`telegram::EVENTS`); all go by default.
@@ -84,6 +86,7 @@ impl Default for Settings {
             keep_awake_manual: None,
             resource_alerts: true,
             updates_daily: true,
+            renew_claude_login: true,
             telegram_chat: None,
             telegram_off: Vec::new(),
             telegram_answers: false,
@@ -145,6 +148,7 @@ impl Settings {
             keep_awake_manual: value.get("keep_awake_manual").and_then(Value::as_f64),
             resource_alerts: value.get("resource_alerts").and_then(Value::as_bool).unwrap_or(defaults.resource_alerts),
             updates_daily: value.get("updates_daily").and_then(Value::as_bool).unwrap_or(defaults.updates_daily),
+            renew_claude_login: value.get("renew_claude_login").and_then(Value::as_bool).unwrap_or(defaults.renew_claude_login),
             telegram_answers: value.get("telegram_answers").and_then(Value::as_bool).unwrap_or(false),
             telegram_requests: value.get("telegram_requests").and_then(Value::as_bool).unwrap_or(false),
             telegram_chat: value.get("telegram_chat").and_then(Value::as_str).map(str::to_owned).filter(|c| !c.is_empty()),
@@ -535,6 +539,7 @@ mod tests {
         assert_eq!(thresholds.limit_thresholds(), [70, 90], "nothing valid keeps the old ones");
         let from_mac = Settings::from_json(r#"{"mac_settings": {"general": {"limitThresholds": [95, 80]}}}"#);
         assert_eq!(from_mac.limit_thresholds(), [80, 95]);
+        assert!(resources.renew_claude_login && !Settings::from_json(r#"{"renew_claude_login": false}"#).renew_claude_login);
         assert!(resources.updates_daily && !Settings::from_json(r#"{"updates_daily": false}"#).updates_daily);
         let telegram = Settings::from_json(r#"{"telegram_chat": "42", "telegram_off": ["pr", "nonsense"]}"#);
         assert_eq!((telegram.telegram_chat.as_deref(), telegram.telegram_off), (Some("42"), vec!["pr".to_owned()]));
