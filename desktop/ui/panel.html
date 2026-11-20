@@ -38,6 +38,14 @@
         <div id="hub-rows"></div>
       </div>
       <p class="error" id="limits-error" hidden></p>
+      <details id="spend">
+        <summary class="secondary" data-t="Подробнее"></summary>
+        <div class="secondary spend-title" data-t="Расход по проектам"></div>
+        <div class="segments" id="spend-periods" role="group" data-t-title="Период"></div>
+        <div id="spend-rows"></div>
+        <p class="secondary" id="spend-top" hidden></p>
+        <p class="secondary spend-note" data-t="Оценка по журналам Claude Code, а не точный расход лимита. Доли учитывают цену токенов (вывод ×5, чтение кэша ×0,1); токены — без чтения кэша."></p>
+      </details>
     </section>
     <section class="card sessions">
       <h2 data-t="Сессии Claude Code"></h2>
@@ -268,6 +276,60 @@
 
     await showLimits();
     window.__TAURI__.event.listen("limits-changed", showLimits);
+
+    // «Расход по проектам» under «Подробнее»: counted from Claude Code's journals when it is opened, for the session,
+    // today or the week.
+    {
+      const box = document.getElementById("spend");
+      const rows = document.getElementById("spend-rows");
+      const top = document.getElementById("spend-top");
+      const periods = document.getElementById("spend-periods");
+      let chosen = "session";
+      let view = null;
+      const show = () => {
+        const line = (text) => { const p = document.createElement("p"); p.className = "secondary"; p.textContent = text; return p; };
+        if (!view) {
+          periods.replaceChildren();
+          rows.replaceChildren(line(t("Считаю по журналам Claude Code…")));
+          top.hidden = true;
+          return;
+        }
+        periods.replaceChildren(...view.periods.map((period) => {
+          const button = document.createElement("button");
+          button.className = "small" + (period.id === chosen ? " chosen" : "");
+          button.textContent = period.title;
+          button.setAttribute("aria-pressed", period.id === chosen);
+          button.onclick = () => { chosen = period.id; show(); };
+          return button;
+        }));
+        const period = view.periods.find((p) => p.id === chosen) ?? view.periods[0];
+        rows.replaceChildren(...(period.rows.length ? period.rows.map((row) => {
+          const item = document.createElement("div");
+          item.className = "spend-row";
+          const name = document.createElement("span");
+          name.className = "name";
+          name.textContent = name.title = row.name;
+          const tokens = document.createElement("span");
+          tokens.className = "secondary";
+          tokens.textContent = row.tokens;
+          const percent = document.createElement("span");
+          percent.className = "percent";
+          percent.textContent = row.percent;
+          item.append(name, tokens, percent);
+          return item;
+        }) : [line(t("За этот период расхода нет"))]));
+        top.hidden = !period.top;
+        top.textContent = period.top ?? "";
+      };
+      const load = async () => {
+        if (!box.open) return;
+        show();
+        try { view = await invoke("spend_view"); } catch { view = { periods: [] }; }
+        show();
+      };
+      box.addEventListener("toggle", load);
+      window.__TAURI__.event.listen("limits-changed", load);
+    }
 
     // A permission request under its session: what is asked and «Разрешить» / «Отклонить», as in the Mac panel.
     // Claude's own dialog is on screen too; the first answer applies.

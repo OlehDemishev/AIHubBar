@@ -32,6 +32,7 @@ pub mod sessions;
 pub mod telegram;
 pub mod settings;
 pub mod texts;
+pub mod token_usage;
 pub mod toggles;
 pub mod tray_icon;
 pub mod usage;

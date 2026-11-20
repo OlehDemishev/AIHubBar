@@ -5,6 +5,7 @@
 use crate::strings;
 use chrono::{DateTime, Duration, Utc};
 use claudepult_core::texts;
+use claudepult_core::token_usage;
 use claudepult_core::tray_icon;
 use claudepult_core::usage::{self, UsageError, UsageForecast, UsagePoint, UsageSnapshot};
 use claudepult_core::{i18n::Strings, paths};
@@ -28,11 +29,14 @@ struct State {
     paused_until: Option<DateTime<Utc>>,
     notified: BTreeSet<String>,
     last_growth: Option<DateTime<Utc>>,
+    /// «Расход по проектам»: the journals' records and when they were last read.
+    spend: Option<(Vec<token_usage::TokenRecord>, DateTime<Utc>)>,
 }
 
 #[derive(Clone)]
 pub struct Limits {
     state: Arc<Mutex<State>>,
+    scanner: Arc<Mutex<token_usage::Scanner>>,
     wake: Arc<(Mutex<bool>, Condvar)>,
 }
 
@@ -46,7 +50,7 @@ impl Limits {
             .ok()
             .and_then(|text| serde_json::from_str(&text).ok())
             .unwrap_or_default();
-        Limits { state: Arc::new(Mutex::new(State { notified, ..State::default() })), wake: Arc::default() }
+        Limits { state: Arc::new(Mutex::new(State { notified, ..State::default() })), scanner: Arc::default(), wake: Arc::default() }
     }
 
     /// Starts the background thread; the first request goes out at once.
@@ -187,6 +191,42 @@ impl Limits {
         });
     }
 
+    /// «Расход по проектам» for the panel: reads what is new in Claude Code's journals when the last read is older
+    /// than a minute, and counts the session, today and the week.
+    pub fn spend(&self, projects_dir: &std::path::Path, texts: &Strings) -> SpendView {
+        let now = Utc::now();
+        let fresh = self.state.lock().unwrap().spend.as_ref().is_some_and(|(_, at)| now - *at < Duration::minutes(1));
+        if !fresh {
+            let records = self.scanner.lock().unwrap().scan(&paths::claude_dir().join("projects"), 8, now - Duration::days(8), now);
+            self.state.lock().unwrap().spend = Some((records, now));
+        }
+        let state = self.state.lock().unwrap();
+        let records = state.spend.as_ref().map(|(records, _)| records.as_slice()).unwrap_or(&[]);
+        let snapshot = state.snapshot.as_ref();
+        let midnight = chrono::Local::now().date_naive().and_hms_opt(0, 0, 0).and_then(|t| t.and_local_timezone(chrono::Local).earliest()).map(|t| t.with_timezone(&Utc)).unwrap_or(now - Duration::hours(24));
+        let starts = [
+            ("session", texts.t("Сессия"), snapshot.and_then(|s| s.session()).and_then(|w| w.resets_at).map(|at| at - Duration::hours(5)).unwrap_or(now - Duration::hours(5))),
+            ("today", texts.t("Сегодня"), midnight),
+            ("week", texts.t("Неделя"), snapshot.and_then(|s| s.week()).and_then(|w| w.resets_at).map(|at| at - Duration::days(7)).unwrap_or(now - Duration::days(7))),
+        ];
+        let other = texts.t("Другое");
+        SpendView {
+            periods: starts
+                .into_iter()
+                .map(|(id, title, since)| {
+                    let breakdown = token_usage::Breakdown::make(records, since, projects_dir, other);
+                    let percent = |share: f64| (share * 100.0).round() as i64;
+                    SpendPeriod {
+                        id,
+                        title: title.to_owned(),
+                        rows: breakdown.projects.iter().take(6).map(|row| SpendRow { name: row.name.clone(), tokens: token_usage::tokens_text(row.tokens, texts), percent: format!("{} %", percent(row.share)) }).collect(),
+                        top: breakdown.top_session.as_ref().map(|top| texts.format("Самая затратная сессия: %@ — %lld %% (%@ токенов)", &[&top.name, &percent(top.share).to_string(), &token_usage::tokens_text(top.tokens, texts)])),
+                    }
+                })
+                .collect(),
+        }
+    }
+
     /// Claude's session (percent, «сброс через …») and week, for the Telegram bot's 🏠.
     pub fn brief(&self, texts: &Strings) -> (Option<(f64, Option<String>)>, Option<f64>) {
         let state = self.state.lock().unwrap();
@@ -261,6 +301,39 @@ pub struct LimitsView {
     others: Vec<RingView>,
     forecast: Option<String>,
     error: Option<String>,
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct SpendRow {
+    name: String,
+    /// «12,3 млн».
+    tokens: String,
+    percent: String,
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct SpendPeriod {
+    id: &'static str,
+    title: String,
+    rows: Vec<SpendRow>,
+    top: Option<String>,
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct SpendView {
+    periods: Vec<SpendPeriod>,
+}
+
+/// «Расход по проектам»: counted off the panel's thread — the first read goes through a week of journals.
+#[tauri::command]
+pub async fn spend_view(app: AppHandle) -> Result<SpendView, String> {
+    let limits = app.state::<Limits>().inner().clone();
+    let texts = strings(&app);
+    let root = crate::profiles::projects_root(&app);
+    tauri::async_runtime::spawn_blocking(move || limits.spend(&root, &texts)).await.map_err(|e| e.to_string())
 }
 
 #[tauri::command]
