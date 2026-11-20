@@ -42,6 +42,10 @@ pub struct Settings {
     pub telegram_chat: Option<String>,
     /// Events that don't go to Telegram (`telegram::EVENTS`); all go by default.
     pub telegram_off: Vec<String>,
+    /// «Этот компьютер отвечает боту»: it reads the bot's messages (one reader per bot — off until switched on).
+    pub telegram_answers: bool,
+    /// «Запросы разрешений в этот бот» (the Mac's `telegramApprovals`).
+    pub telegram_requests: bool,
     pub resource_disk_below_gb: u64,
     /// «Быстрые команды»: the library (the Mac's `[QuickCommand]`); None — the starting examples, until edited.
     pub quick_commands: Option<Vec<crate::quick_commands::QuickCommand>>,
@@ -82,6 +86,8 @@ impl Default for Settings {
             updates_daily: true,
             telegram_chat: None,
             telegram_off: Vec::new(),
+            telegram_answers: false,
+            telegram_requests: false,
             resource_disk_below_gb: 20,
             quick_commands: None,
             quick_toggles: None,
@@ -139,6 +145,8 @@ impl Settings {
             keep_awake_manual: value.get("keep_awake_manual").and_then(Value::as_f64),
             resource_alerts: value.get("resource_alerts").and_then(Value::as_bool).unwrap_or(defaults.resource_alerts),
             updates_daily: value.get("updates_daily").and_then(Value::as_bool).unwrap_or(defaults.updates_daily),
+            telegram_answers: value.get("telegram_answers").and_then(Value::as_bool).unwrap_or(false),
+            telegram_requests: value.get("telegram_requests").and_then(Value::as_bool).unwrap_or(false),
             telegram_chat: value.get("telegram_chat").and_then(Value::as_str).map(str::to_owned).filter(|c| !c.is_empty()),
             telegram_off: value.get("telegram_off").and_then(Value::as_array).map(|list| list.iter().filter_map(Value::as_str).filter(|e| crate::telegram::EVENTS.contains(e)).map(str::to_owned).collect()).unwrap_or_default(),
             quick_commands: crate::quick_commands::library(value.get("quick_commands")),
@@ -482,6 +490,9 @@ mod tests {
         let telegram = Settings::from_json(r#"{"telegram_chat": "42", "telegram_off": ["pr", "nonsense"]}"#);
         assert_eq!((telegram.telegram_chat.as_deref(), telegram.telegram_off), (Some("42"), vec!["pr".to_owned()]));
         assert!(resources.telegram_chat.is_none() && resources.telegram_off.is_empty());
+        assert!(!resources.telegram_answers && !resources.telegram_requests, "nothing reads a bot or sends requests until asked");
+        let reader = Settings::from_json(r#"{"telegram_answers": true, "telegram_requests": true}"#);
+        assert!(reader.telegram_answers && reader.telegram_requests);
     }
 
     #[test]

@@ -111467,6 +111467,82 @@
         }
       }
     },
+    "Строка «Свернуть» внизу панели оставляет лимиты, сессии и проекты; «Ещё» возвращает остальные блоки.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "صف «طيّ» أسفل اللوحة يُبقي الحدود والجلسات والمشاريع؛ و«المزيد» يعيد باقي الكتل."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Zeile „Zuklappen“ unten im Panel lässt Limits, Sitzungen und Projekte stehen; „Mehr“ holt die übrigen Blöcke zurück."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The “Collapse” row at the bottom of the panel keeps limits, sessions and projects; “More” brings the other blocks back."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La fila «Contraer» al final del panel deja los límites, las sesiones y los proyectos; «Más» recupera los demás bloques."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La ligne « Réduire » en bas du panneau garde les limites, les sessions et les projets ; « Plus » ramène les autres blocs."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Baris “Ciutkan” di bawah panel menyisakan batas, sesi, dan proyek; “Lainnya” mengembalikan blok lainnya."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La riga «Comprimi» in fondo al pannello lascia limiti, sessioni e progetti; «Altro» riporta gli altri blocchi."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "パネル下部の「折りたたむ」の行は、上限、セッション、プロジェクトだけを残します。「その他」でほかのブロックが戻ります。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "패널 아래의 «접기» 행은 한도, 세션, 프로젝트만 남깁니다. «더 보기»를 누르면 나머지 블록이 돌아옵니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wiersz „Zwiń” na dole panelu zostawia limity, sesje i projekty; „Więcej” przywraca pozostałe bloki."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A linha “Recolher” no fim do painel deixa os limites, as sessões e os projetos; “Mais” traz os outros blocos de volta."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Рядок «Згорнути» унизу панелі залишає ліміти, сесії та проєкти; «Ще» повертає решту блоків."
+          }
+        }
+      }
+    },
     "Строка контент-плана сдвинулась — обновите календарь": {
       "localizations": {
         "ar": {
@@ -114736,6 +114812,82 @@
         }
       }
     },
+    "Только один компьютер читает сообщения бота; уведомления присылают все": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "حاسوب واحد فقط يقرأ رسائل البوت؛ الإشعارات يرسلها الجميع"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nur ein Computer liest die Nachrichten des Bots; Mitteilungen senden alle"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Only one computer reads the bot’s messages; all of them send notifications"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Solo un ordenador lee los mensajes del bot; todos envían notificaciones"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un seul ordinateur lit les messages du bot ; tous envoient des notifications"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hanya satu komputer yang membaca pesan bot; semuanya mengirim notifikasi"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un solo computer legge i messaggi del bot; tutti inviano le notifiche"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ボットのメッセージを読むのは1台だけです。通知はすべてのコンピュータが送ります"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "봇의 메시지는 컴퓨터 한 대만 읽습니다. 알림은 모든 컴퓨터가 보냅니다"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tylko jeden komputer czyta wiadomości bota; powiadomienia wysyłają wszystkie"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Só um computador lê as mensagens do bot; todos enviam notificações"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Лише один комп’ютер читає повідомлення бота; сповіщення надсилають усі"
+          }
+        }
+      }
+    },
     "Только остров": {
       "localizations": {
         "ar": {
@@ -116177,6 +116329,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "У кожного профілю свій"
+          }
+        }
+      }
+    },
+    "У недели видно, быстрее или медленнее ровного расхода вы тратите лимит: отметка на полосе и строка под ней.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يُظهر الأسبوع هل تستهلك الحد أسرع أم أبطأ من الاستهلاك المنتظم: علامة على الشريط وسطر تحته."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Woche zeigt, ob Sie das Limit schneller oder langsamer als gleichmäßig verbrauchen: eine Marke auf dem Balken und eine Zeile darunter."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The week shows whether you spend the limit faster or slower than an even spend: a mark on the bar and a line under it."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La semana muestra si gastas el límite más rápido o más lento que un gasto uniforme: una marca en la barra y una línea debajo."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La semaine montre si vous dépensez la limite plus vite ou moins vite qu’une dépense régulière : un repère sur la barre et une ligne dessous."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Minggu menunjukkan apakah Anda memakai batas lebih cepat atau lebih lambat dari pemakaian merata: tanda pada bilah dan satu baris di bawahnya."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La settimana mostra se consumi il limite più o meno velocemente di un consumo uniforme: un segno sulla barra e una riga sotto."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "週の上限で、均等な消費より速いか遅いかがわかります。バーの目印とその下の行で示します。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "주간 한도에서 고른 사용보다 빠른지 느린지 볼 수 있습니다. 막대의 표시와 그 아래 줄로 알려 줍니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tydzień pokazuje, czy zużywasz limit szybciej, czy wolniej niż przy równym zużyciu: znacznik na pasku i wiersz pod nim."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A semana mostra se você gasta o limite mais rápido ou mais devagar que um gasto uniforme: uma marca na barra e uma linha abaixo."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "У тижня видно, швидше чи повільніше за рівну витрату ви витрачаєте ліміт: позначка на смузі та рядок під нею."
           }
         }
       }
@@ -127302,6 +127530,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Цей Mac відповідає боту"
+          }
+        }
+      }
+    },
+    "Этот компьютер отвечает боту": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "هذا الحاسوب يردّ على البوت"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dieser Computer antwortet dem Bot"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This computer answers the bot"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Este ordenador responde al bot"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cet ordinateur répond au bot"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Komputer ini menjawab bot"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Questo computer risponde al bot"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "このコンピュータがボットに応答"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이 컴퓨터가 봇에 응답"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ten komputer odpowiada botowi"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Este computador responde ao bot"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Цей комп’ютер відповідає боту"
           }
         }
       }
@@ -146053,158 +146357,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "❌ CI впав: %@ #%lld"
-          }
-        }
-      }
-    },
-    "Строка «Свернуть» внизу панели оставляет лимиты, сессии и проекты; «Ещё» возвращает остальные блоки.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "صف «طيّ» أسفل اللوحة يُبقي الحدود والجلسات والمشاريع؛ و«المزيد» يعيد باقي الكتل."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Die Zeile „Zuklappen“ unten im Panel lässt Limits, Sitzungen und Projekte stehen; „Mehr“ holt die übrigen Blöcke zurück."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "The “Collapse” row at the bottom of the panel keeps limits, sessions and projects; “More” brings the other blocks back."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "La fila «Contraer» al final del panel deja los límites, las sesiones y los proyectos; «Más» recupera los demás bloques."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "La ligne « Réduire » en bas du panneau garde les limites, les sessions et les projets ; « Plus » ramène les autres blocs."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Baris “Ciutkan” di bawah panel menyisakan batas, sesi, dan proyek; “Lainnya” mengembalikan blok lainnya."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "La riga «Comprimi» in fondo al pannello lascia limiti, sessioni e progetti; «Altro» riporta gli altri blocchi."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "パネル下部の「折りたたむ」の行は、上限、セッション、プロジェクトだけを残します。「その他」でほかのブロックが戻ります。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "패널 아래의 «접기» 행은 한도, 세션, 프로젝트만 남깁니다. «더 보기»를 누르면 나머지 블록이 돌아옵니다."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Wiersz „Zwiń” na dole panelu zostawia limity, sesje i projekty; „Więcej” przywraca pozostałe bloki."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "A linha “Recolher” no fim do painel deixa os limites, as sessões e os projetos; “Mais” traz os outros blocos de volta."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Рядок «Згорнути» унизу панелі залишає ліміти, сесії та проєкти; «Ще» повертає решту блоків."
-          }
-        }
-      }
-    },
-    "У недели видно, быстрее или медленнее ровного расхода вы тратите лимит: отметка на полосе и строка под ней.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "يُظهر الأسبوع هل تستهلك الحد أسرع أم أبطأ من الاستهلاك المنتظم: علامة على الشريط وسطر تحته."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Die Woche zeigt, ob Sie das Limit schneller oder langsamer als gleichmäßig verbrauchen: eine Marke auf dem Balken und eine Zeile darunter."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "The week shows whether you spend the limit faster or slower than an even spend: a mark on the bar and a line under it."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "La semana muestra si gastas el límite más rápido o más lento que un gasto uniforme: una marca en la barra y una línea debajo."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "La semaine montre si vous dépensez la limite plus vite ou moins vite qu’une dépense régulière : un repère sur la barre et une ligne dessous."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Minggu menunjukkan apakah Anda memakai batas lebih cepat atau lebih lambat dari pemakaian merata: tanda pada bilah dan satu baris di bawahnya."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "La settimana mostra se consumi il limite più o meno velocemente di un consumo uniforme: un segno sulla barra e una riga sotto."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "週の上限で、均等な消費より速いか遅いかがわかります。バーの目印とその下の行で示します。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "주간 한도에서 고른 사용보다 빠른지 느린지 볼 수 있습니다. 막대의 표시와 그 아래 줄로 알려 줍니다."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tydzień pokazuje, czy zużywasz limit szybciej, czy wolniej niż przy równym zużyciu: znacznik na pasku i wiersz pod nim."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "A semana mostra se você gasta o limite mais rápido ou mais devagar que um gasto uniforme: uma marca na barra e uma linha abaixo."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "У тижня видно, швидше чи повільніше за рівну витрату ви витрачаєте ліміт: позначка на смузі та рядок під нею."
           }
         }
       }

@@ -34,12 +34,12 @@ pub struct Sessions {
 }
 
 /// The sessions to show; a process that is gone ends its session.
-fn shown() -> Vec<(Session, State)> {
+pub(crate) fn shown() -> Vec<(Session, State)> {
     sessions::load(&paths::sessions_dir(), Utc::now(), process::is_alive)
 }
 
 /// The newest open request of each session that still waits: answered in Claude, it is over.
-fn open_requests(shown: &[(Session, State)]) -> HashMap<String, Request> {
+pub(crate) fn open_requests(shown: &[(Session, State)]) -> HashMap<String, Request> {
     let now = Utc::now().timestamp_millis() as f64 / 1000.0;
     let mut open = approvals::by_session(approvals::requests(&paths::approvals_dir(), now, process::is_alive));
     open.retain(|session_id, _| shown.iter().any(|(s, state)| &s.id == session_id && *state == State::Waiting));
