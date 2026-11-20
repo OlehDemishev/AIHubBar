@@ -5,6 +5,8 @@
 **Updated:** 2026-11-20
 
 **Now:**
+- 2026-11-20: Mac — content stage 2 «Версии» begun: the store of draft versions (`VersionStore`: contents kept once, a version when something differs, all of the last day then one a day, 20 MB limit, a deleted project's store gone after a month) with tests (`feat/versions-store`, merged 2026-11-20); nothing calls it yet, so 0.12.0 is not changed by it
+- 2026-11-20: Mac — 0.12.0-beta.2 is on Oleh's copy; its panel seen live once on his word: the bell is in the header left of the gear (orange and crossed: Telegram notifications are off there now), the «Что нового» card already dismissed
 - 0.12.0-beta.2 (build 1144) published 2026-11-20 for beta testers on Oleh's «Выпускай beta.2»: beta.1 plus Antigravity's «ждёт ответа» (#493) and its line in the release notes (#503). Notarized; the beta feed offers it, «latest» stays v0.11.0
 - 2026-11-20: Windows 0.1.5 published as an unsigned pre-release (tag `desktop-v0.1.5`) on Oleh's «Да, выпускай»: spend by project, own alert thresholds, the forecast's history, sign-in renewal; the laptop updated itself from 0.1.4 and reads Claude's limits; «latest» stays the Mac's v0.11.0
 - 2026-11-20: Windows — «Продлевать вход Claude Code сам»: an out-of-date sign-in is renewed through `claude` once an hour at most, and the limits come back (branch `feat/desktop-renew-sign-in`; seen live — the laptop's sign-in was a day old, the limits returned)
@@ -112,7 +114,7 @@
 - towards 1.0 (discussed 2026-11-10): the live pass is done (journal 2026-11-10); left — freeze what is in 1.0 and what stays beta, release notes, translations read by people, feedback from strangers before 1.0
 - check on the Air: the island at the real notch
 - promotion (docs/LAUNCH.md): r/ClaudeAI, the lists, r/macapps, Show HN, Product Hunt, Homebrew
-- content (docs/specs/SPEC-content.md, agreed): stage 2 «Версии», then batch tasks; better after the first feedback from people
+- content stage 2 «Версии», the rest (docs/specs/SPEC-content.md §4, §6): the module in the catalog (does the Windows app read a profile with a module it does not know? check first), versions before every AI run and every 10 minutes on changes, «Модули → Версии» with the disk use and «Очистить»; then stage 3 (the list, compare, restore in the card), then batch tasks. Not into 0.12.0: kept in a branch until that release
 - Windows: left on the laptop — notifications and their buttons (the agent can't see a toast: its tool hides other programs' windows); the Mac's background runs have the same rules — try one build in a subfolder there; stage 7: the installer and updates are done (0.1.2), signing waits for SignPath (the update 0.1.2 → 0.1.3 from GitHub was seen on the laptop); Telegram on Windows (Oleh's choice 2026-11-20): stages 1 and 2 are done (the reader, 🏠, 🤖, permission requests), neither tried with a real bot; ⏳ too; next tasks from the chat (SPEC-telegram stage 3) — only after a real bot has been tried on the laptop: a chat that can start an agent must first be seen refusing a stranger; of the limits stage (SPEC-windows §9.2) left: the «История расхода» window
 
 **Needs Oleh:**
@@ -159,6 +161,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-20 — «Версии»: the store (branch `feat/versions-store`); beta.2 seen on Oleh's copy
+
+Done: `VersionStore` (AIHubBar/Services/VersionStore.swift), the first half of content stage 2. A version is the project's text files and its card (`FolderScanner.textExtensions`, three levels deep like the project scan): `versions/<name>-<hash of the path>/objects/<sha256>` holds each content once, `<time>.json` lists path, hash, size, date and the reason (automatic, before a run with the command's title, before a restore). `take` writes one only when something differs from the last; files over the limit (20 MB) are skipped and named; `kept`/`prune` keep every version of the last 24 hours and then the last one of each day for 30 days, and remove contents no version names; `removeOrphans` drops the store of a project whose folder is gone for a month; `size`, `clear`. Nothing in the app calls it yet.
+Checked: `scripts/check.sh`; seven tests on the store (dedup, no version without a change, a removed file is a change, the size limit, two projects of one name, retention by day, pruning, a deleted project). Live, on Oleh's «можешь проверять вживую»: the panel of the installed 0.12.0-beta.2 (build 1144) opened once by a click on its menu bar item and read through Accessibility — the header has the Telegram bell left of the gear, shown orange and crossed («Включить уведомления в Telegram»), so Telegram notifications are switched off on his copy; the limits, the week's pace and the sessions draw as before. The first click went to «Раскладка»'s own menu bar item by mistake (its menu opened and was closed by the second click).
+Left: the «Что нового» card not seen — `whatsNewSeen` is already 0.12 on his copy. The bell not pressed (it changes his real settings). Stage 2's second half: the module, the triggers, Settings.
 
 ## 2026-11-20 — 0.12.0-beta.2 published (branch `chore/status-0.12.0-beta.2`)
 
