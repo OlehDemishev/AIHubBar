@@ -1,0 +1,51 @@
+# Offers a published Windows release to installed copies (desktop/app/src/updates.rs, docs/specs/SPEC-windows.md §7).
+#
+# Installed copies read https://github.com/<repository>/releases/download/desktop-updates/latest.json. The Windows
+# releases are pre-releases, so GitHub's «latest» is the Mac's and can't be used. The release workflow attaches a
+# signed latest.json to its draft release; when Oleh publishes that release, this copies the file to the release
+# `desktop-updates`. Nothing is offered before that. By hand (workflow_dispatch) for a release published earlier, or
+# to go back to an older one.
+name: Desktop update manifest
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: The published release to offer, e.g. desktop-v0.1.2
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  offer:
+    name: Offer the release as an update
+    if: github.event_name == 'workflow_dispatch' || startsWith(github.event.release.tag_name, 'desktop-v')
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+      TAG: ${{ github.event.release.tag_name || inputs.tag }}
+    steps:
+      - name: Take the manifest from the release
+        run: |
+          case "$TAG" in desktop-v*) ;; *) echo "not a Windows release: $TAG" >&2; exit 1;; esac
+          if [ "$(gh release view "$TAG" --json isDraft -q .isDraft)" != "false" ]; then
+            echo "$TAG is still a draft: publish it first" >&2; exit 1
+          fi
+          gh release download "$TAG" --pattern latest.json --dir .
+          version=$(jq -r .version latest.json)
+          url=$(jq -r '.platforms["windows-x86_64"].url' latest.json)
+          if [ "desktop-v$version" != "$TAG" ]; then echo "the manifest is for $version, not for $TAG" >&2; exit 1; fi
+          # The installer the manifest names must be there for everyone.
+          curl --fail --silent --show-error --location --head "$url" > /dev/null
+          echo "offering $version: $url"
+      - name: Put it where installed copies look
+        run: |
+          if ! gh release view desktop-updates > /dev/null 2>&1; then
+            gh release create desktop-updates --prerelease --latest=false --title "AI Hub Bar for Windows: update manifest" \
+              --notes "Not a release to download. \`latest.json\` here tells installed copies of AI Hub Bar for Windows which version is the newest (desktop/app/src/updates.rs). The installers are in the releases named «AI Hub Bar for Windows …»."
+          fi
+          gh release upload desktop-updates latest.json --clobber

@@ -59,5 +59,16 @@
         "role": "Editor"
       }
     ]
+  },
+  "plugins": {
+    "updater": {
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDUwMTI1NDA1NkMwNjQxNEYKUldSUFFRWnNCVlFTVUZFOFAwaEtFWDkvK0JBMW5ZVTl3cXZaL21jdmRIWmw4eEM4VGVMVmh4YzIK",
+      "endpoints": [
+        "https://github.com/OlehDemishev/AIHubBar/releases/download/desktop-updates/latest.json"
+      ],
+      "windows": {
+        "installMode": "passive"
+      }
+    }
   }
 }

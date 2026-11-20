@@ -22,6 +22,7 @@ mod runs;
 mod services;
 mod sessions;
 mod toggles;
+mod updates;
 
 use claudepult_core::i18n::{self, Strings};
 use claudepult_core::ipc::{self, Reply, Request};
@@ -379,6 +380,7 @@ fn main() {
         .plugin(tauri_plugin_notification::init())
         .plugin(tauri_plugin_dialog::init())
         .plugin(tauri_plugin_clipboard_manager::init())
+        .plugin(tauri_plugin_updater::Builder::new().build())
         .plugin(quick_prompt::plugin())
         .manage(Limits::new())
         .manage(Sessions::default())
@@ -393,6 +395,7 @@ fn main() {
         .manage(quick_commands::QuickCommands::default())
         .manage(toggles::Toggles::default())
         .manage(hub::Hub::default())
+        .manage(updates::Updates::default())
         .manage(quick_prompt::QuickPrompt::default())
         .manage(command_hot_keys::CommandHotKeys::default())
         .manage(AppState { settings: Mutex::new(load_settings()) })
@@ -412,6 +415,7 @@ fn main() {
             calendar::add_calendar_date, assistant::open_assistant, assistant::assistant_start, assistant::assistant_look,
             assistant::assistant_choose_folder, assistant::assistant_apply_folder, assistant::assistant_finish,
             runs::stop_run, runs::run_log, projects::worktree_removal, launch_settings, set_launch_settings,
+            updates::updates_view, updates::set_updates_daily, updates::check_updates, updates::install_update,
             pull_request_alerts, set_pull_request_alerts, profiles::projects_folder, profiles::choose_projects_folder,
             profiles::reset_projects_folder, profiles::profiles_view, profiles::select_profile, profiles::add_profile, profiles::profile_templates,
             profiles::rename_profile, profiles::delete_profile, profiles::profile_details, profiles::set_profile_field,
@@ -445,6 +449,7 @@ fn main() {
             handle.state::<resources::Resources>().start(handle.clone());
             handle.state::<hub::Hub>().start(handle.clone());
             command_hot_keys::sync(&handle);
+            updates::watch(handle.clone());
             // Started by a double click on a `.claudepult` file.
             if let Some(file) = profiles::import_argument(std::env::args().skip(1)) {
                 profiles::open_import_file(&handle, &file);

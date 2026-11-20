@@ -66,6 +66,8 @@ select { font: inherit; padding: 4px 6px; border-radius: 6px; border: 1px solid 
 .settings { padding: 20px 24px; display: flex; flex-direction: column; gap: 14px; }
 .row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 6px 0; }
 .row + .row { border-top: 1px solid var(--line); }
+#updates-state { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+#updates-state + span { flex: none; display: flex; gap: 6px; white-space: nowrap; }
 .folder + .row { border-top: 1px solid var(--line); }
 #profile-rows + .row { border-top: 1px solid var(--line); }
 .profile { justify-content: flex-start; }
