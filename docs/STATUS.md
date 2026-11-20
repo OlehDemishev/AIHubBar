@@ -6,6 +6,7 @@
 
 **Now:**
 - 2026-11-20: Windows — Telegram stage 2: the app reads the bot when «Этот компьютер отвечает боту» is on (🏠, 🤖), and permission requests come to the chat with ✅ / ❌ (branch `feat/desktop-telegram-reader`; the page seen live, a real bot not tried — the laptop has no token)
+- 0.12.0-beta.1 (build 1112) published 2026-11-20 for beta testers on Oleh's «Выпускай для беты»: everything merged since 0.11.0 on the Mac — the nine Claude and Codex features, the pair's comparison with diffs, keep, merge and tidy, the Telegram bell and tile, the 0.12 «Что нового» card. Notarized; the beta feed offers it, «latest» stays v0.11.0. Lives on Oleh's copy until the release, not before Tuesday 2026-11-24
 - 2026-11-20: Windows 0.1.3 published as an unsigned pre-release (tag `desktop-v0.1.3`) on Oleh's «Да, выпускай»: Telegram stage 1; the laptop's 0.1.2 found it, downloaded it from GitHub, installed it and started it by itself — the first real update; «latest» stays the Mac's v0.11.0
 - 2026-11-20: Mac — the «Что нового» card and the demo data brought to 0.12 (`chore/whats-new-0.12`, merged 2026-11-20) for 0.12.0-beta.1, which Oleh asked for the same day
 - 2026-11-20: Windows — Telegram stage 1: the own bot's token, the chat bound with «Start», a test message and the notifications' alerts sent to the chat with a switch each (branch `feat/desktop-telegram`; the page seen live, a real bot not tried — the laptop has no token)
@@ -96,8 +97,8 @@
 
 **Next:**
 - releases go out once a week, on Tuesday, on Oleh's word (agreed 2026-11-11); merged work waits in `main`
-- before 0.12.0: the windows are seen (2026-11-17); a background Codex run seen end to end in an isolated copy; left to see in the app — a Codex approval, handover, review, the pair (they start real runs: with Oleh or on his word); then a beta
-- 0.12.0 not before Tuesday 2026-11-24, on Oleh's word; `WhatsNew.version` and the card's lines for 0.12
+- 0.12.0-beta.1 is out (2026-11-20); before 0.12.0: Oleh uses the beta; left to see in the app — a Codex approval, handover, review, the pair's notification banner, the header bell, the Telegram tile, the «Что нового» card
+- 0.12.0 not before Tuesday 2026-11-24, on Oleh's word; then `scripts/release-tools/update-cask.sh 0.12.0`
 - then: the «ждёт» state for Antigravity sessions (needs `agy` opened once)
 - towards 1.0 (discussed 2026-11-10): the live pass is done (journal 2026-11-10); left — freeze what is in 1.0 and what stays beta, release notes, translations read by people, feedback from strangers before 1.0
 - check on the Air: the island at the real notch
@@ -107,6 +108,9 @@
 
 **Needs Oleh:**
 - Windows laptop, Telegram (0.1.3 is installed): Settings → «Telegram» — paste a bot's token from @BotFather (a new bot is the safest: the Mac mini reads your present one, and then «Start» reaches the Mac instead — the page says so and asks for the chat's id), «Привязать чат», «Start» in Telegram, «Проверить»; then start a small background task and see its result come to the chat; in the next Windows version also: «Этот компьютер отвечает боту» on (only with a bot no other computer reads), `/menu` in the chat, «Запросы разрешений в этот бот» on, and answer a real request with ✅ from the phone
+- update to 0.12.0-beta.1 (Settings → «Основные» → «Обновления», «Бета-версии» on): does the «Что нового» card show once with six lines; is the bell in the panel's header left of the gear, and does a press turn it orange; the «Telegram» tile in «Быстрые переключатели» if they are on
+- Windows laptop, Telegram (in the next Windows version, or a build from `main`): Settings → «Telegram» — paste a bot's token from @BotFather (a new bot is the safest: the Mac mini reads your present one, and then «Start» reaches the Mac instead — the page says so and asks for the chat's id), «Привязать чат», «Start» in Telegram, «Проверить»; then start a small background task and see its result come to the chat
+- Windows laptop, Telegram (0.1.3 is installed): Settings → «Telegram» — paste a bot's token from @BotFather (a new bot is the safest: the Mac mini reads your present one, and then «Start» reaches the Mac instead — the page says so and asks for the chat's id), «Привязать чат», «Start» in Telegram, «Проверить»; then start a small background task and see its result come to the chat
 - Windows updates: keep a copy of `%USERPROFILE%\.tauri\aihubbar-updater.key` from the laptop in your password manager (it has no password). GitHub never shows a secret again; if both copies are lost, installed copies will refuse every later update and people would have to install by hand
 - Windows laptop (0.1.3 is installed): press a quick command's combination on the real keyboard from another program (Settings → «Модули» → «Быстрые команды» → a command → «Записать») — the agent pressed one as keyboard input with the app's own window in front, and the command ran
 - Windows laptop (0.1.3 is installed): put a USB stick in, Settings → «Модули» → «Быстрые переключатели» on, press «Диски» in the panel — Explorer must show the stick gone and the panel «Извлечено дисков: 1»; then once more with a file from the stick open in a program — the panel must name the drive under «Не получилось». The laptop had no removable drive, so the agent saw only «Нечего извлекать»
@@ -153,6 +157,11 @@ Done: on Oleh's «продолжай, пока не сделаешь всё, ч�
 Checked: `python scripts/strings.py --check` (620 texts), `scripts/strings-check.py` (0 problems), `cargo test --workspace` on Windows — the parsing (someone else's message in the chat, edits and stickers left out), the routes there and back within 64 bytes and the refused ones, the screens' exact text, a request's three states. Live on the laptop, a build from the branch: the two new rows in Settings → «Telegram», both switches saved to `settings.json` and put back off; with no token the reader stays idle.
 Left: not one request went to Telegram — the laptop has no bot's token, so the reader, the screens in a real chat, a press on ✅ and the 409 path are untried (Needs Oleh). «Бота читает другой Mac» and the 409 line say «Mac». Not built: the ⏳ limits screen, tasks from the chat, the menu at the bottom, quiet hours, the shared bot, the Mini App. The installed 0.1.3 has stage 1 only.
 
+## 2026-11-20 — 0.12.0-beta.1 published (branch `chore/status-0.12.0-beta.1`)
+
+Done: `scripts/release.sh 0.12.0-beta.1 --publish` from a worktree on `main` (34174e5), on Oleh's «Выпускай для беты» — he wanted to see the header bell, which 0.11.0 does not have. GitHub pre-release `v0.12.0-beta.1`, build 1112, with the disk image and its appcast; the beta channel's appcast now lists 0.12.0-beta.1 and 0.11.0.
+Checked: the script's own `scripts/check.sh`; both notarizations «Accepted», the disk image passes `spctl` as «Notarized Developer ID»; the pre-release has both files; `releases/latest` is still v0.11.0; the downloaded beta feed carries build 1112 on the `beta` channel.
+Left: the update itself not seen on Oleh's copy (Sparkle takes it by its own schedule or from Settings → «Основные» → «Обновления»). The card and the bell were not seen in a panel before publishing — a panel takes the keyboard, and the beta is how Oleh sees them.
 ## 2026-11-20 — Windows 0.1.3 released, the first real update (branch `chore/desktop-0.1.3-note`)
 
 Done: on Oleh's «Да, выпускай». The version set to 0.1.3 (#489), the tag `desktop-v0.1.3`, the draft given its notes and published as a pre-release, not «latest»: https://github.com/OlehDemishev/AIHubBar/releases/tag/desktop-v0.1.3. Since 0.1.2: Telegram stage 1.
