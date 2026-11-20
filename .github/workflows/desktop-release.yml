@@ -8,6 +8,10 @@
 # so. The programs are signed first (artifact configuration «windows-binaries»), the installer is built from them and
 # signed too («windows-installer»); both configurations are in desktop/signpath/. Every request waits for manual
 # approval in SignPath.
+#
+# Updates (desktop/app/src/updates.rs): the finished installer is signed once more with AI Hub Bar's own update key
+# (the secret TAURI_SIGNING_PRIVATE_KEY) and a manifest latest.json is attached to the draft. Installed copies are
+# offered the release only after it is published (desktop-update-manifest.yml).
 name: Desktop release
 
 on:
@@ -121,10 +125,17 @@ jobs:
       - name: Install, check and uninstall the installer
         shell: pwsh
         run: ./scripts/check-installer.ps1
+      - name: Sign for the updater and write the update manifest
+        shell: pwsh
+        env:
+          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+        run: ./scripts/update-manifest.ps1 -Version ${{ steps.version.outputs.version }} -Repository ${{ github.repository }}
       - uses: actions/upload-artifact@v4
         with:
           name: ai-hub-bar-windows-${{ steps.version.outputs.version }}
-          path: desktop/target/release/bundle/nsis/*-setup.exe
+          path: |
+            desktop/target/release/bundle/nsis/*-setup.exe
+            desktop/target/release/bundle/nsis/latest.json
           if-no-files-found: error
       - name: Draft pre-release
         if: github.ref_type == 'tag'
@@ -134,4 +145,4 @@ jobs:
         run: |
           $installer = Get-ChildItem target/release/bundle/nsis/*-setup.exe | Select-Object -First 1
           $signed = if ($env:SIGN -eq 'true') { 'Signed through SignPath (CODE_SIGNING.md).' } else { 'Not signed yet: Windows SmartScreen warns before installing («More info» → «Run anyway»).' }
-          gh release create $env:GITHUB_REF_NAME $installer.FullName --draft --prerelease --title "AI Hub Bar for Windows ${{ steps.version.outputs.version }}" --notes "AI Hub Bar for Windows and its command line. $signed"
+          gh release create $env:GITHUB_REF_NAME $installer.FullName (Join-Path $installer.DirectoryName 'latest.json') --draft --prerelease --title "AI Hub Bar for Windows ${{ steps.version.outputs.version }}" --notes "AI Hub Bar for Windows and its command line. $signed"

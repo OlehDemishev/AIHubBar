@@ -18,6 +18,22 @@
         <input type="checkbox" id="autostart">
       </div>
     </section>
+    <div id="updates" hidden>
+      <h1 data-t="Обновления"></h1>
+      <section class="card">
+        <div class="row">
+          <label for="updates-daily" data-t="Проверять раз в день"></label>
+          <input type="checkbox" id="updates-daily">
+        </div>
+        <div class="row">
+          <span id="updates-state" class="secondary"></span>
+          <span>
+            <button id="updates-install" data-t="Установить и перезапустить" hidden></button>
+            <button id="updates-check" data-t="Проверить сейчас"></button>
+          </span>
+        </div>
+      </section>
+    </div>
     <h1 data-t="Профили"></h1>
     <section class="card">
       <div id="profile-rows"></div>
@@ -1086,6 +1102,45 @@
     const prAlerts = document.getElementById("pr-alerts");
     prAlerts.checked = await invoke("pull_request_alerts");
     prAlerts.onchange = () => invoke("set_pull_request_alerts", { enabled: prAlerts.checked });
+
+    // «Обновления» (Windows): a check once a day and by hand; the new version is installed only on a click.
+    {
+      const state = document.getElementById("updates-state");
+      const install = document.getElementById("updates-install");
+      const check = document.getElementById("updates-check");
+      const daily = document.getElementById("updates-daily");
+      const show = (available, text) => {
+        state.textContent = text ?? (available ? t("Доступна версия %@", available) : t("Версия %@", ui.version));
+        install.hidden = !available;
+      };
+      const view = await invoke("updates_view");
+      document.getElementById("updates").hidden = !view.supported;
+      daily.checked = view.daily;
+      daily.onchange = () => invoke("set_updates_daily", { enabled: daily.checked });
+      show(view.available);
+      check.onclick = async () => {
+        check.disabled = true;
+        try {
+          const available = await invoke("check_updates");
+          show(available, available ? undefined : t("Установлена последняя версия"));
+        } catch (error) {
+          show(null, t("Не удалось проверить обновления: %@", String(error)));
+        }
+        check.disabled = false;
+      };
+      install.onclick = async () => {
+        install.disabled = check.disabled = true;
+        state.textContent = t("Загрузка обновления…");
+        try {
+          await invoke("install_update");
+          show((await invoke("updates_view")).available);
+        } catch (error) {
+          show((await invoke("updates_view")).available, t("Не удалось установить обновление: %@", String(error)));
+        }
+        install.disabled = check.disabled = false;
+      };
+      window.__TAURI__.event.listen("updates-changed", async () => show((await invoke("updates_view")).available));
+    }
 
     const autostart = document.getElementById("autostart");
     autostart.checked = await invoke("autostart_enabled");

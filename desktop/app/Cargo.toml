@@ -27,3 +27,4 @@ tauri-plugin-clipboard-manager = "2"
 tauri-plugin-global-shortcut = "2"
 chrono.workspace = true
 dirs.workspace = true
+tauri-plugin-updater = "2"

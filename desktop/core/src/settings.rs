@@ -36,6 +36,8 @@ pub struct Settings {
     /// «Ресурсы компьютера»: notify about load, memory, space and charge (on by default, as on the Mac), and below
     /// how many GB free the disk counts as nearly full.
     pub resource_alerts: bool,
+    /// Look for a new version once a day (Windows; on by default, as the Mac's «Проверять раз в день»).
+    pub updates_daily: bool,
     pub resource_disk_below_gb: u64,
     /// «Быстрые команды»: the library (the Mac's `[QuickCommand]`); None — the starting examples, until edited.
     pub quick_commands: Option<Vec<crate::quick_commands::QuickCommand>>,
@@ -73,6 +75,7 @@ impl Default for Settings {
             keep_awake: crate::keep_awake::Rules::default(),
             keep_awake_manual: None,
             resource_alerts: true,
+            updates_daily: true,
             resource_disk_below_gb: 20,
             quick_commands: None,
             quick_toggles: None,
@@ -129,6 +132,7 @@ impl Settings {
             keep_awake: crate::keep_awake::Rules::from_value(value.get("keep_awake")),
             keep_awake_manual: value.get("keep_awake_manual").and_then(Value::as_f64),
             resource_alerts: value.get("resource_alerts").and_then(Value::as_bool).unwrap_or(defaults.resource_alerts),
+            updates_daily: value.get("updates_daily").and_then(Value::as_bool).unwrap_or(defaults.updates_daily),
             quick_commands: crate::quick_commands::library(value.get("quick_commands")),
             hub_disabled: value.get("hub_disabled").and_then(Value::as_array).map(|l| l.iter().filter_map(Value::as_str).map(str::to_owned).collect()).unwrap_or_default(),
             hub_gemini_quota: value.get("hub_gemini_quota").and_then(Value::as_bool).unwrap_or(false),
@@ -466,6 +470,7 @@ mod tests {
         assert!(!Settings::default().module_on("keepAwake"), "off until switched on");
         let resources = Settings::from_json(r#"{"resource_alerts": false, "resource_disk_below_gb": 0}"#);
         assert_eq!((resources.resource_alerts, resources.resource_disk_below_gb), (false, 20));
+        assert!(resources.updates_daily && !Settings::from_json(r#"{"updates_daily": false}"#).updates_daily);
     }
 
     #[test]

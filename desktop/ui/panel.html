@@ -124,7 +124,16 @@
   <script type="module">
     import { loadTexts, invoke, t } from "./app.js";
     const ui = await loadTexts();
-    document.getElementById("version").textContent = t("Версия %@", ui.version);
+    // The version line turns into «Доступна версия …» when a check finds one; a click opens Settings.
+    const versionLine = document.getElementById("version");
+    async function showVersion() {
+      const { available } = await invoke("updates_view");
+      versionLine.textContent = available ? t("Версия %@", ui.version) + " · " + t("Доступна версия %@", available) : t("Версия %@", ui.version);
+      versionLine.style.cursor = available ? "pointer" : "";
+      versionLine.onclick = available ? () => invoke("open_settings") : null;
+    }
+    await showVersion();
+    window.__TAURI__.event.listen("updates-changed", showVersion);
     document.getElementById("settings").onclick = () => invoke("open_settings");
     document.getElementById("quit").onclick = () => invoke("quit");
     document.getElementById("refresh").onclick = () => {
