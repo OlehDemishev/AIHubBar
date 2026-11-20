@@ -320,7 +320,7 @@ fn screen_message(app: &AppHandle, screen: telegram::Screen, texts: &Strings) ->
             services.retain(|service| !service.windows.is_empty());
             services.extend(app.state::<crate::hub::Hub>().telegram_services(texts));
             let alerts_on = !app.state::<crate::AppState>().settings.lock().unwrap().telegram_off.iter().any(|e| e == "lim");
-            telegram::limits_screen(&services, alerts_on, &crate::limits::THRESHOLDS, texts)
+            telegram::limits_screen(&services, alerts_on, &crate::limits::thresholds(app), texts)
         }
         telegram::Screen::Sessions => {
             let now = Utc::now();

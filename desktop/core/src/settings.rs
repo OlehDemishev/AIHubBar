@@ -370,7 +370,46 @@ impl Settings {
 
 // MARK: - `.claudepult` files (the Mac's `ProfileStore` export and import)
 
+/// The limit alerts' thresholds until the person sets their own (the Mac's `defaultLimitThresholds`).
+pub const DEFAULT_LIMIT_THRESHOLDS: [u32; 3] = [50, 80, 95];
+
+/// «50, 80, 95» → [50, 80, 95]: whole percents from 1 to 100, each once, in order; anything else is dropped.
+pub fn parse_thresholds(text: &str) -> Vec<u32> {
+    let mut values: Vec<u32> = text.split(|c: char| !c.is_ascii_digit()).filter_map(|part| part.parse().ok()).filter(|value| (1..=100).contains(value)).collect();
+    values.sort_unstable();
+    values.dedup();
+    values
+}
+
 impl Settings {
+    /// «Уведомлять на, %»: kept where the Mac keeps it (`general.limitThresholds`), so a settings file carries it
+    /// both ways.
+    pub fn limit_thresholds(&self) -> Vec<u32> {
+        let saved: Vec<u32> = self
+            .mac_settings
+            .get("general")
+            .and_then(|general| general.get("limitThresholds"))
+            .and_then(Value::as_array)
+            .map(|list| list.iter().filter_map(Value::as_u64).filter(|value| (1..=100).contains(value)).map(|value| value as u32).collect())
+            .unwrap_or_default();
+        let mut values = saved;
+        values.sort_unstable();
+        values.dedup();
+        if values.is_empty() { DEFAULT_LIMIT_THRESHOLDS.to_vec() } else { values }
+    }
+
+    /// Nothing valid in `values` keeps what was there.
+    pub fn set_limit_thresholds(&mut self, values: &[u32]) {
+        let values = parse_thresholds(&values.iter().map(u32::to_string).collect::<Vec<_>>().join(","));
+        if values.is_empty() {
+            return;
+        }
+        let general = self.mac_settings.entry("general").or_insert_with(|| Value::Object(Map::new()));
+        if let Some(general) = general.as_object_mut() {
+            general.insert("limitThresholds".into(), serde_json::json!(values));
+        }
+    }
+
     /// «Экспорт настроек…»: every profile, the current one, and the Mac's settings kept from an import, with this
     /// computer's background time limit.
     pub fn export_settings(&self, now: chrono::DateTime<chrono::Utc>) -> String {
@@ -486,6 +525,16 @@ mod tests {
         assert!(!Settings::default().module_on("keepAwake"), "off until switched on");
         let resources = Settings::from_json(r#"{"resource_alerts": false, "resource_disk_below_gb": 0}"#);
         assert_eq!((resources.resource_alerts, resources.resource_disk_below_gb), (false, 20));
+        assert_eq!(parse_thresholds("95, 50;80 % 80, 0, 101, x"), [50, 80, 95]);
+        assert!(parse_thresholds("ноль").is_empty());
+        let mut thresholds = Settings::default();
+        assert_eq!(thresholds.limit_thresholds(), DEFAULT_LIMIT_THRESHOLDS);
+        thresholds.set_limit_thresholds(&[90, 70, 70, 300]);
+        assert_eq!(thresholds.limit_thresholds(), [70, 90]);
+        thresholds.set_limit_thresholds(&[]);
+        assert_eq!(thresholds.limit_thresholds(), [70, 90], "nothing valid keeps the old ones");
+        let from_mac = Settings::from_json(r#"{"mac_settings": {"general": {"limitThresholds": [95, 80]}}}"#);
+        assert_eq!(from_mac.limit_thresholds(), [80, 95]);
         assert!(resources.updates_daily && !Settings::from_json(r#"{"updates_daily": false}"#).updates_daily);
         let telegram = Settings::from_json(r#"{"telegram_chat": "42", "telegram_off": ["pr", "nonsense"]}"#);
         assert_eq!((telegram.telegram_chat.as_deref(), telegram.telegram_off), (Some("42"), vec!["pr".to_owned()]));

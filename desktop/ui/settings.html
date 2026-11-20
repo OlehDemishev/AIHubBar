@@ -159,6 +159,10 @@
         <select id="main-service"></select>
       </div>
       <p class="secondary" data-t="Лимиты главного сервиса идут первыми в панели и показаны на значке в трее. «Автоматически» — Claude, а без него первый сервис, у которого есть лимиты."></p>
+      <div class="row">
+        <label for="limit-thresholds" data-t="Уведомлять на, %"></label>
+        <input type="text" id="limit-thresholds" placeholder="50, 80, 95" inputmode="numeric" autocomplete="off" style="width: 9em">
+      </div>
       <div id="hub-sources"></div>
     </section>
     <section class="card services">
@@ -1054,6 +1058,16 @@
         return box;
       }));
     }
+    // «Уведомлять на, %»: the limit alerts' thresholds; what isn't a percent from 1 to 100 is dropped, and text with
+    // nothing valid puts the old ones back.
+    {
+      const field = document.getElementById("limit-thresholds");
+      field.value = await invoke("limit_thresholds");
+      const apply = async () => { field.value = await invoke("set_limit_thresholds", { text: field.value }); };
+      field.onchange = apply;
+      field.onkeydown = (event) => { if (event.key === "Enter") field.blur(); };
+    }
+
     // «Главный сервис»: automatic, Claude, or a service that has limits now (and the saved one).
     const mainService = document.getElementById("main-service");
     function showMainService(view) {

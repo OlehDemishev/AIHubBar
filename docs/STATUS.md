@@ -5,6 +5,7 @@
 **Updated:** 2026-11-20
 
 **Now:**
+- 2026-11-20: Windows — «Уведомлять на, %»: the limit alerts' thresholds are a setting (Settings → «Другие AI»), kept where the Mac keeps them (branch `feat/desktop-limit-thresholds`; seen live)
 - 2026-11-20: Windows — «Расход по проектам» in the panel under «Подробнее»: tokens per project from Claude Code's journals for the session, today and the week, and the heaviest session (branch `feat/desktop-spend-by-project`; seen live on the laptop's own journals)
 - 2026-11-20: Windows 0.1.4 published as an unsigned pre-release (tag `desktop-v0.1.4`) on Oleh's «Выпускай 0.1.4»: the Telegram bot answers (🏠, 🤖, ⏳) and takes permission requests; the laptop updated itself from 0.1.3; «latest» stays the Mac's v0.11.0
 - 2026-11-20: Windows — the Telegram bot's ⏳: Claude's and the other services' limits with a bar, the reset and the forecast, and the switch of limit alerts (branch `feat/desktop-telegram-limits`; tests only — no real bot on the laptop)
@@ -108,7 +109,7 @@
 - check on the Air: the island at the real notch
 - promotion (docs/LAUNCH.md): r/ClaudeAI, the lists, r/macapps, Show HN, Product Hunt, Homebrew
 - content (docs/specs/SPEC-content.md, agreed): stage 2 «Версии», then batch tasks; better after the first feedback from people
-- Windows: left on the laptop — notifications and their buttons (the agent can't see a toast: its tool hides other programs' windows); the Mac's background runs have the same rules — try one build in a subfolder there; stage 7: the installer and updates are done (0.1.2), signing waits for SignPath (the update 0.1.2 → 0.1.3 from GitHub was seen on the laptop); Telegram on Windows (Oleh's choice 2026-11-20): stages 1 and 2 are done (the reader, 🏠, 🤖, permission requests), neither tried with a real bot; ⏳ too; next tasks from the chat (SPEC-telegram stage 3) — only after a real bot has been tried on the laptop: a chat that can start an agent must first be seen refusing a stranger; of the limits stage (SPEC-windows §9.2) left: own thresholds in Settings, the forecast's history kept across restarts, the «История расхода» window
+- Windows: left on the laptop — notifications and their buttons (the agent can't see a toast: its tool hides other programs' windows); the Mac's background runs have the same rules — try one build in a subfolder there; stage 7: the installer and updates are done (0.1.2), signing waits for SignPath (the update 0.1.2 → 0.1.3 from GitHub was seen on the laptop); Telegram on Windows (Oleh's choice 2026-11-20): stages 1 and 2 are done (the reader, 🏠, 🤖, permission requests), neither tried with a real bot; ⏳ too; next tasks from the chat (SPEC-telegram stage 3) — only after a real bot has been tried on the laptop: a chat that can start an agent must first be seen refusing a stranger; of the limits stage (SPEC-windows §9.2) left: the forecast's history kept across restarts, the «История расхода» window
 
 **Needs Oleh:**
 - Windows laptop, Telegram (0.1.4 is installed; nothing of it was tried with a real bot): 1) in @BotFather make a new bot — the Mac mini reads your present one; 2) Settings → «Telegram»: paste the token, «Привязать чат», «Start» in Telegram, «Проверить»; 3) start a small background task and see its result come to the chat; 4) «Этот компьютер отвечает боту» on, `/menu` in the chat — 🏠, then 🤖 and ⏳; 5) «Запросы разрешений в этот бот» on, start `claude --permission-mode default` in a project, ask it to create a file and answer ✅ from the phone. Say what did not work
@@ -154,6 +155,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-20 — Windows: own thresholds for limit alerts (branch `feat/desktop-limit-thresholds`)
+
+Done: on Oleh's «Да, делай». The alerts came at a fixed 50 / 80 / 95 %. Settings → «Другие AI» has the Mac's row «Уведомлять на, %»: a field that takes whole percents from 1 to 100 in any order and with any separators, keeps each once, sorted, and puts the old ones back when nothing in it is valid (the Mac's `SettingsParsing.thresholds`). They are kept in the Mac's place, `general.limitThresholds` of the Mac settings a profile file carries, so an export and an import take them both ways. Claude's alerts, the other services' alerts and the bot's ⏳ line use them. One text, the Mac's.
+Checked: `python scripts/strings.py --check` (636 texts), `cargo test --workspace` on Windows (the parsing, the default, saving, a file from the Mac). Live on the laptop, a build from the branch: the field showed «50, 80, 95»; «90, 70, abc, 300» became «70, 90» and `settings.json` got `general.limitThresholds: [70, 90]`; a word in the field left «70, 90». The laptop's settings put back as they were.
+Left: no alert was waited for at a new threshold. A service's own thresholds (the Mac's «как у всех» / own per service) are not ported. Seen in Russian only.
 
 ## 2026-11-20 — Windows: «Расход по проектам» (branch `feat/desktop-spend-by-project`)
 

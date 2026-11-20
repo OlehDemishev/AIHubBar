@@ -14,7 +14,6 @@ use std::time::Duration;
 use tauri::{AppHandle, Emitter, Manager};
 use tauri_plugin_notification::NotificationExt;
 
-const THRESHOLDS: [u32; 3] = [50, 80, 95];
 
 #[derive(Default)]
 struct State {
@@ -66,12 +65,13 @@ impl Hub {
             limits.push(hub::read(source, &options, &home, now, &texts));
         }
         let mut alerts = Vec::new();
+        let thresholds = crate::limits::thresholds(app);
         {
             let mut state = self.state.lock().unwrap();
             let State { history, notified, .. } = &mut *state;
             for limit in &mut limits {
                 history.apply(limit, now);
-                alerts.extend(hub::alerts(limit, &THRESHOLDS, notified, &texts, now));
+                alerts.extend(hub::alerts(limit, &thresholds, notified, &texts, now));
             }
             state.limits = limits;
             state.available = available;

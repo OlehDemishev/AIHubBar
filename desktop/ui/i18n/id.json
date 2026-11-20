@@ -482,6 +482,7 @@
  "Уведомления в Telegram: при %@ %%": "Pemberitahuan Telegram: pada %@ %%",
  "Уведомления о лимитах в Telegram выключены": "Pemberitahuan batas ke Telegram mati",
  "Уведомления о ресурсах": "Peringatan sumber daya",
+ "Уведомлять на, %": "Beri tahu pada, %",
  "Уведомлять о нагрузке, памяти, месте и заряде": "Beri tahu soal beban, memori, ruang, dan baterai",
  "Уведомлять, когда CI упал или починился и когда PR закрыт": "Beri tahu saat CI gagal atau pulih dan saat PR ditutup",
  "Удалить": "Hapus",

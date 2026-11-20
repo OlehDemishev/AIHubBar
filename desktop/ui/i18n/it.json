@@ -482,6 +482,7 @@
  "Уведомления в Telegram: при %@ %%": "Notifiche Telegram: al %@ %%",
  "Уведомления о лимитах в Telegram выключены": "Le notifiche dei limiti su Telegram sono disattivate",
  "Уведомления о ресурсах": "Avvisi sulle risorse",
+ "Уведомлять на, %": "Avvisa a, %",
  "Уведомлять о нагрузке, памяти, месте и заряде": "Avvisa su carico, memoria, spazio e batteria",
  "Уведомлять, когда CI упал или починился и когда PR закрыт": "Avvisa quando la CI fallisce o torna verde e quando una PR si chiude",
  "Удалить": "Elimina",
