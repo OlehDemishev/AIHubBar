@@ -5,6 +5,7 @@
 **Updated:** 2026-11-20
 
 **Now:**
+- 2026-11-20: Windows — the forecast's readings are kept across restarts in `usage-history.json`, the Mac's file (branch `feat/desktop-forecast-history`; tests only — Claude's sign-in on the laptop was out of date, so no reading came)
 - 2026-11-20: Windows — «Уведомлять на, %»: the limit alerts' thresholds are a setting (Settings → «Другие AI»), kept where the Mac keeps them (branch `feat/desktop-limit-thresholds`; seen live)
 - 2026-11-20: Windows — «Расход по проектам» in the panel under «Подробнее»: tokens per project from Claude Code's journals for the session, today and the week, and the heaviest session (branch `feat/desktop-spend-by-project`; seen live on the laptop's own journals)
 - 2026-11-20: Windows 0.1.4 published as an unsigned pre-release (tag `desktop-v0.1.4`) on Oleh's «Выпускай 0.1.4»: the Telegram bot answers (🏠, 🤖, ⏳) and takes permission requests; the laptop updated itself from 0.1.3; «latest» stays the Mac's v0.11.0
@@ -109,9 +110,10 @@
 - check on the Air: the island at the real notch
 - promotion (docs/LAUNCH.md): r/ClaudeAI, the lists, r/macapps, Show HN, Product Hunt, Homebrew
 - content (docs/specs/SPEC-content.md, agreed): stage 2 «Версии», then batch tasks; better after the first feedback from people
-- Windows: left on the laptop — notifications and their buttons (the agent can't see a toast: its tool hides other programs' windows); the Mac's background runs have the same rules — try one build in a subfolder there; stage 7: the installer and updates are done (0.1.2), signing waits for SignPath (the update 0.1.2 → 0.1.3 from GitHub was seen on the laptop); Telegram on Windows (Oleh's choice 2026-11-20): stages 1 and 2 are done (the reader, 🏠, 🤖, permission requests), neither tried with a real bot; ⏳ too; next tasks from the chat (SPEC-telegram stage 3) — only after a real bot has been tried on the laptop: a chat that can start an agent must first be seen refusing a stranger; of the limits stage (SPEC-windows §9.2) left: the forecast's history kept across restarts, the «История расхода» window
+- Windows: left on the laptop — notifications and their buttons (the agent can't see a toast: its tool hides other programs' windows); the Mac's background runs have the same rules — try one build in a subfolder there; stage 7: the installer and updates are done (0.1.2), signing waits for SignPath (the update 0.1.2 → 0.1.3 from GitHub was seen on the laptop); Telegram on Windows (Oleh's choice 2026-11-20): stages 1 and 2 are done (the reader, 🏠, 🤖, permission requests), neither tried with a real bot; ⏳ too; next tasks from the chat (SPEC-telegram stage 3) — only after a real bot has been tried on the laptop: a chat that can start an agent must first be seen refusing a stranger; of the limits stage (SPEC-windows §9.2) left: the «История расхода» window
 
 **Needs Oleh:**
+- Windows laptop: Claude's limits are not read since 2026-11-20 01:46 — «Вход Claude Code устарел». Run `claude` once in a terminal (the work goes through the Claude desktop app, which does not renew that file); the Mac has «Продлевать вход Claude Code сам» for this, the Windows version does not yet
 - Windows laptop, Telegram (0.1.4 is installed; nothing of it was tried with a real bot): 1) in @BotFather make a new bot — the Mac mini reads your present one; 2) Settings → «Telegram»: paste the token, «Привязать чат», «Start» in Telegram, «Проверить»; 3) start a small background task and see its result come to the chat; 4) «Этот компьютер отвечает боту» on, `/menu` in the chat — 🏠, then 🤖 and ⏳; 5) «Запросы разрешений в этот бот» on, start `claude --permission-mode default` in a project, ask it to create a file and answer ✅ from the phone. Say what did not work
 - update to 0.12.0-beta.1 (Settings → «Основные» → «Обновления», «Бета-версии» on): does the «Что нового» card show once with six lines; is the bell in the panel's header left of the gear, and does a press turn it orange; the «Telegram» tile in «Быстрые переключатели» if they are on
 - Windows laptop, Telegram (in the next Windows version, or a build from `main`): Settings → «Telegram» — paste a bot's token from @BotFather (a new bot is the safest: the Mac mini reads your present one, and then «Start» reaches the Mac instead — the page says so and asks for the chat's id), «Привязать чат», «Start» in Telegram, «Проверить»; then start a small background task and see its result come to the chat
@@ -155,6 +157,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-20 — Windows: the forecast's history across restarts (branch `feat/desktop-forecast-history`)
+
+Done: on Oleh's «продолжай». The forecast («при текущем темпе хватит до …») needs the session's readings of the last hours, and they lived only in memory: after every start the line was gone for half an hour. Each reading now goes to `usage-history.json` in the data folder — the Mac's file and format (`date`, `session`, `sessionResetsAt`, ISO dates) — and the start reads back those younger than two hours; a reading from the future or a broken file is no history. `core/src/usage.rs` `history_json` / `parse_history`, `app/src/limits.rs`.
+Checked: `python scripts/strings.py --check`, `cargo test --workspace` on Windows (there and back, the two-hour cut, the Mac's dates with fractions of a second, a broken file, a future date). A build from the branch starts and runs.
+Left: not seen live — Claude's sign-in file on the laptop is out of date since 01:46 (the session runs in the Claude desktop app, which does not renew it), so no reading came and no file was written; the forecast line after a restart is unseen (Needs Oleh: run `claude` once). The Mac's «Продлевать вход Claude Code сам» is not ported — worth doing next, it is why the laptop's limits go stale.
 
 ## 2026-11-20 — Windows: own thresholds for limit alerts (branch `feat/desktop-limit-thresholds`)
 

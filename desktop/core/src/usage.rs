@@ -243,6 +243,39 @@ pub struct UsagePoint {
     pub session_resets_at: Option<DateTime<Utc>>,
 }
 
+/// How long a reading helps the forecast.
+pub const HISTORY_HOURS: i64 = 2;
+
+/// `usage-history.json`, the Mac's file: the session's readings, so the forecast is there right after a restart
+/// instead of half an hour later.
+pub fn history_json(points: &[UsagePoint]) -> String {
+    let stamp = |date: &DateTime<Utc>| date.format("%Y-%m-%dT%H:%M:%SZ").to_string();
+    let list: Vec<Value> = points
+        .iter()
+        .map(|point| {
+            let mut entry = serde_json::json!({ "date": stamp(&point.date), "session": point.session });
+            if let Some(resets) = &point.session_resets_at {
+                entry["sessionResetsAt"] = Value::from(stamp(resets));
+            }
+            entry
+        })
+        .collect();
+    serde_json::to_string(&list).unwrap_or_else(|_| "[]".to_owned())
+}
+
+/// The readings young enough to count, oldest first; a file that can't be read is no history.
+pub fn parse_history(text: &str, now: DateTime<Utc>) -> Vec<UsagePoint> {
+    let date = |value: Option<&Value>| value.and_then(Value::as_str).and_then(|text| DateTime::parse_from_rfc3339(text).ok()).map(|date| date.with_timezone(&Utc));
+    let mut points: Vec<UsagePoint> = serde_json::from_str::<Vec<Value>>(text)
+        .unwrap_or_default()
+        .iter()
+        .filter_map(|entry| Some(UsagePoint { date: date(entry.get("date"))?, session: entry.get("session")?.as_f64()?, session_resets_at: date(entry.get("sessionResetsAt")) }))
+        .filter(|point| point.date <= now && now - point.date < chrono::Duration::hours(HISTORY_HOURS))
+        .collect();
+    points.sort_by_key(|point| point.date);
+    points
+}
+
 #[derive(Debug, Clone, PartialEq)]
 pub enum UsageForecast {
     /// At the current pace the session limit is reached at this time, before the reset.
@@ -471,5 +504,24 @@ mod tests {
         assert_eq!(file["five_hour"]["resets_at"], "2026-11-02T20:00:00Z");
         assert_eq!(file["updated"], "2026-11-02T18:00:00Z");
         assert!(file.get("seven_day_opus").is_none(), "only what report.py reads");
+    }
+
+    #[test]
+    fn history_survives_a_restart() {
+        let now = DateTime::parse_from_rfc3339("2026-11-20T12:00:00Z").unwrap().with_timezone(&Utc);
+        let at = |minutes: i64| now - chrono::Duration::minutes(minutes);
+        let points = vec![
+            UsagePoint { date: at(200), session: 10.0, session_resets_at: None },
+            UsagePoint { date: at(30), session: 40.5, session_resets_at: Some(at(-120)) },
+            UsagePoint { date: at(5), session: 47.0, session_resets_at: Some(at(-120)) },
+        ];
+        let text = history_json(&points);
+        assert!(text.contains(r#""date":"2026-11-20T11:30:00Z""#) && text.contains(r#""sessionResetsAt":"2026-11-20T14:00:00Z""#), "{text}");
+        assert_eq!(parse_history(&text, now), points[1..], "older than two hours is dropped");
+        // The Mac writes fractions of a second in some versions; both read.
+        let mac = r#"[{"date":"2026-11-20T11:55:00.123Z","session":47,"sessionResetsAt":"2026-11-20T14:00:00Z"},{"date":"bad","session":1},{"session":2}]"#;
+        assert_eq!(parse_history(mac, now).len(), 1);
+        assert!(parse_history("not json", now).is_empty());
+        assert!(parse_history(&history_json(&[UsagePoint { date: at(-10), session: 1.0, session_resets_at: None }]), now).is_empty(), "a reading from the future is not trusted");
     }
 }
