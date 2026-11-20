@@ -86,6 +86,10 @@ struct TwoServicesTests {
         for other in [elsewhere, nested, project] {
             #expect(!PairCompare.removable(other) && !PairCompare.canKeep(claude, sides: [claude, other]))
         }
+        var symlinked = codex
+        symlinked.projectPath = "/private/tmp/Ambo"
+        symlinked.folder = "/private/tmp/Ambo/.claude/worktrees/x"
+        #expect(PairCompare.removable(symlinked), "a project under a symlinked folder")
         var gone = codex
         gone.discarded = true
         #expect(!PairCompare.canKeep(claude, sides: [claude, gone]), "already removed")
@@ -107,5 +111,18 @@ struct TwoServicesTests {
         #expect(!PairCompare.canMerge(gone, sides: [gone, codex], target: "main") && !PairCompare.canMerge(merged, sides: [merged, codex], target: "main"))
         #expect(PairCompare.canMerge(codex, sides: [gone, codex], target: "main"), "the kept one after the other was removed")
         #expect(PairCompare.mergeWarning(codex, target: "main").contains("cb/export-codex"))
+    }
+
+    @Test func aMergedVariantCanBeTidiedOnce() {
+        var merged = run("a", .succeeded)
+        #expect(!PairCompare.canTidy(merged), "not before it is merged")
+        merged.mergedInto = "main"
+        #expect(PairCompare.canTidy(merged))
+        #expect(PairCompare.tidyWarning(merged).contains("cb/export-claude") && PairCompare.tidyWarning(merged).contains("main"))
+        var project = merged
+        project.folder = "/P/Ambo"
+        #expect(!PairCompare.canTidy(project), "only the app's own worktree")
+        merged.discarded = true
+        #expect(!PairCompare.canTidy(merged), "already removed")
     }
 }

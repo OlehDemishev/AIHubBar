@@ -19669,6 +19669,82 @@
         }
       }
     },
+    "В ветке %@ есть коммиты, которых нет в ветке проекта — папка и ветка оставлены.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The branch %@ has commits the project’s branch lacks — the folder and the branch are left in place."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "У гілці %@ є коміти, яких немає в гілці проєкту — папку й гілку залишено."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der Branch %@ enthält Commits, die dem Branch des Projekts fehlen – Ordner und Branch bleiben erhalten."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La branche %@ contient des commits absents de la branche du projet — le dossier et la branche sont conservés."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La rama %@ tiene commits que no están en la rama del proyecto: la carpeta y la rama se han dejado."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il ramo %@ ha commit che mancano nel ramo del progetto: cartella e ramo sono stati lasciati."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O branch %@ tem commits que não estão no branch do projeto — a pasta e o branch foram mantidos."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gałąź %@ ma commity, których nie ma w gałęzi projektu — folder i gałąź zostały."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ブランチ%@には、プロジェクトのブランチにないコミットがあります。フォルダとブランチは残しました。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "브랜치 %@에 프로젝트 브랜치에 없는 커밋이 있습니다. 폴더와 브랜치는 그대로 두었습니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "في الفرع %@ عمليات commit غير موجودة في فرع المشروع — تُرك المجلد والفرع كما هما."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Branch %@ punya commit yang tidak ada di branch proyek — folder dan branch dibiarkan."
+          }
+        }
+      }
+    },
     "В ветке worktree есть незапушенные коммиты.": {
       "localizations": {
         "ar": {
@@ -20125,6 +20201,158 @@
         }
       }
     },
+    "В окне сравнения клик по файлу показывает изменения построчно. «Оставить этот вариант» удаляет другой, «Влить в …» вливает ветку варианта в ветку проекта (без push), а «Убрать папку и ветку» потом убирает за ним. Каждое действие спрашивает подтверждение.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In the comparison window, a click on a file shows its changes line by line. “Keep this version” removes the other one, “Merge into …” merges the version’s branch into the project’s branch (no push), and “Remove folder and branch” then cleans up after it. Each action asks for confirmation."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "У вікні порівняння клік по файлу показує зміни порядково. «Залишити цей варіант» видаляє інший, «Влити в …» вливає гілку варіанта в гілку проєкту (без push), а «Прибрати папку й гілку» потім прибирає за ним. Кожна дія просить підтвердження."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Im Vergleichsfenster zeigt ein Klick auf eine Datei die Änderungen Zeile für Zeile. „Diese Variante behalten“ entfernt die andere, „In … mergen“ mergt den Branch der Variante in den Branch des Projekts (kein Push), und „Ordner und Branch entfernen“ räumt danach auf. Jede Aktion fragt nach einer Bestätigung."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dans la fenêtre de comparaison, un clic sur un fichier montre ses modifications ligne par ligne. « Garder cette version » supprime l’autre, « Fusionner dans … » fusionne la branche de la version dans celle du projet (sans push), puis « Retirer le dossier et la branche » fait le ménage. Chaque action demande une confirmation."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En la ventana de comparación, un clic en un archivo muestra sus cambios línea por línea. «Conservar esta variante» elimina la otra, «Fusionar en …» fusiona la rama de la variante en la rama del proyecto (sin push) y «Quitar carpeta y rama» limpia después. Cada acción pide confirmación."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nella finestra di confronto, un clic su un file ne mostra le modifiche riga per riga. «Tieni questa variante» elimina l’altra, «Unisci a …» unisce il ramo della variante al ramo del progetto (senza push) e «Rimuovi cartella e ramo» poi fa pulizia. Ogni azione chiede conferma."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Na janela de comparação, um clique em um arquivo mostra as alterações linha por linha. “Manter esta variante” remove a outra, “Mesclar em …” mescla o branch da variante no branch do projeto (sem push) e “Remover pasta e branch” faz a limpeza depois. Cada ação pede confirmação."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "W oknie porównania kliknięcie pliku pokazuje zmiany wiersz po wierszu. „Zostaw ten wariant” usuwa drugi, „Scal z …” scala gałąź wariantu z gałęzią projektu (bez push), a „Usuń folder i gałąź” potem po nim sprząta. Każda czynność prosi o potwierdzenie."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "比較ウインドウでファイルをクリックすると、変更が行ごとに表示されます。「この案を残す」はもう一方を削除し、「…にマージ」は案のブランチをプロジェクトのブランチにマージし（プッシュなし）、「フォルダとブランチを削除」はその後片付けをします。どの操作も確認を求めます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "비교 창에서 파일을 클릭하면 변경 사항이 줄 단위로 표시됩니다. “이 결과 유지”는 다른 쪽을 삭제하고, “…에 병합”은 결과의 브랜치를 프로젝트 브랜치에 병합하며(푸시 없음), “폴더와 브랜치 제거”는 그 뒤를 정리합니다. 모든 동작은 확인을 묻습니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "في نافذة المقارنة، النقر على ملف يعرض تغييراته سطرًا بسطر. «الإبقاء على هذه النسخة» يحذف الأخرى، و«دمج في …» يدمج فرع النسخة في فرع المشروع (دون push)، ثم «إزالة المجلد والفرع» ينظّف بعدها. كل إجراء يطلب التأكيد."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Di jendela perbandingan, klik pada file menampilkan perubahannya baris demi baris. “Pertahankan varian ini” menghapus yang lain, “Gabung ke …” menggabungkan branch varian ke branch proyek (tanpa push), lalu “Singkirkan folder dan branch” merapikan setelahnya. Setiap tindakan meminta konfirmasi."
+          }
+        }
+      }
+    },
+    "В папке варианта есть незакоммиченные изменения — папка и ветка оставлены.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The version’s folder has uncommitted changes — the folder and the branch are left in place."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "У папці варіанта є незакомічені зміни — папку й гілку залишено."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Im Ordner der Variante gibt es nicht committete Änderungen – Ordner und Branch bleiben erhalten."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le dossier de la version contient des modifications non commitées — le dossier et la branche sont conservés."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La carpeta de la variante tiene cambios sin commit: la carpeta y la rama se han dejado."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La cartella della variante ha modifiche senza commit: cartella e ramo sono stati lasciati."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A pasta da variante tem alterações sem commit — a pasta e o branch foram mantidos."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "W folderze wariantu są niezacommitowane zmiany — folder i gałąź zostały."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "案のフォルダにコミットされていない変更があります。フォルダとブランチは残しました。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "결과의 폴더에 커밋되지 않은 변경 사항이 있습니다. 폴더와 브랜치는 그대로 두었습니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "في مجلد النسخة تغييرات دون commit — تُرك المجلد والفرع كما هما."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Folder varian punya perubahan yang belum di-commit — folder dan branch dibiarkan."
+          }
+        }
+      }
+    },
     "В папке нет текстового файла — команды получат только папку.": {
       "localizations": {
         "ar": {
@@ -20203,16 +20431,10 @@
     },
     "В папке проекта есть незакоммиченные изменения — сначала закоммитьте или уберите их.": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "The project folder has uncommitted changes — commit or remove them first."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "У папці проєкту є незакомічені зміни — спершу закомітьте або приберіть їх."
+            "value": "في مجلد المشروع تغييرات دون commit — اعمل لها commit أو أزلها أولًا."
           }
         },
         "de": {
@@ -20221,10 +20443,10 @@
             "value": "Im Projektordner gibt es nicht committete Änderungen – committen oder entfernen Sie sie zuerst."
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Le dossier du projet contient des modifications non commitées — commitez-les ou retirez-les d’abord."
+            "value": "The project folder has uncommitted changes — commit or remove them first."
           }
         },
         "es": {
@@ -20233,22 +20455,22 @@
             "value": "La carpeta del proyecto tiene cambios sin commit: confírmalos o quítalos primero."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le dossier du projet contient des modifications non commitées — commitez-les ou retirez-les d’abord."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Folder proyek punya perubahan yang belum di-commit — commit atau singkirkan dulu."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "La cartella del progetto ha modifiche senza commit: prima esegui il commit o rimuovile."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "A pasta do projeto tem alterações sem commit — faça o commit ou remova-as primeiro."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "W folderze projektu są niezacommitowane zmiany — najpierw je zacommituj lub usuń."
           }
         },
         "ja": {
@@ -20263,16 +20485,22 @@
             "value": "프로젝트 폴더에 커밋되지 않은 변경 사항이 있습니다. 먼저 커밋하거나 치워 주세요."
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "في مجلد المشروع تغييرات دون commit — اعمل لها commit أو أزلها أولًا."
+            "value": "W folderze projektu są niezacommitowane zmiany — najpierw je zacommituj lub usuń."
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Folder proyek punya perubahan yang belum di-commit — commit atau singkirkan dulu."
+            "value": "A pasta do projeto tem alterações sem commit — faça o commit ou remova-as primeiro."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "У папці проєкту є незакомічені зміни — спершу закомітьте або приберіть їх."
           }
         }
       }
@@ -21508,22 +21736,10 @@
     },
     "Ветка %@ будет влита в %@ в папке проекта «%@» (git merge, без push). Отменить можно только вручную.": {
       "localizations": {
-        "ru": {
-          "stringUnit": {
-            "state": "new",
-            "value": "Ветка %1$@ будет влита в %2$@ в папке проекта «%3$@» (git merge, без push). Отменить можно только вручную."
-          }
-        },
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "The branch %@ will be merged into %@ in the folder of the project “%@” (git merge, no push). It can only be undone by hand."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Гілку %@ буде влито в %@ у папці проєкту «%@» (git merge, без push). Скасувати можна лише вручну."
+            "value": "سيُدمج الفرع %@ في %@ داخل مجلد المشروع «%@» (git merge، دون push). لا يمكن التراجع إلا يدويًا."
           }
         },
         "de": {
@@ -21532,10 +21748,10 @@
             "value": "Der Branch %@ wird in %@ gemergt, im Ordner des Projekts „%@“ (git merge, kein Push). Rückgängig machen lässt es sich nur von Hand."
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "La branche %@ sera fusionnée dans %@ dans le dossier du projet « %@ » (git merge, sans push). L’annulation ne se fait qu’à la main."
+            "value": "The branch %@ will be merged into %@ in the folder of the project “%@” (git merge, no push). It can only be undone by hand."
           }
         },
         "es": {
@@ -21544,22 +21760,22 @@
             "value": "La rama %@ se fusionará en %@ en la carpeta del proyecto «%@» (git merge, sin push). Solo se puede deshacer a mano."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La branche %@ sera fusionnée dans %@ dans le dossier du projet « %@ » (git merge, sans push). L’annulation ne se fait qu’à la main."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Branch %@ akan digabung ke %@ di folder proyek “%@” (git merge, tanpa push). Hanya bisa dibatalkan secara manual."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Il ramo %@ verrà unito a %@ nella cartella del progetto «%@» (git merge, senza push). Si può annullare solo a mano."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "O branch %@ será mesclado em %@ na pasta do projeto “%@” (git merge, sem push). Só dá para desfazer manualmente."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Gałąź %@ zostanie scalona z %@ w folderze projektu „%@” (git merge, bez push). Cofnąć można tylko ręcznie."
           }
         },
         "ja": {
@@ -21574,16 +21790,28 @@
             "value": "브랜치 %@를 %@에 병합합니다(프로젝트 “%@” 폴더, git merge, 푸시 없음). 되돌리려면 직접 해야 합니다."
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "سيُدمج الفرع %@ في %@ داخل مجلد المشروع «%@» (git merge، دون push). لا يمكن التراجع إلا يدويًا."
+            "value": "Gałąź %@ zostanie scalona z %@ w folderze projektu „%@” (git merge, bez push). Cofnąć można tylko ręcznie."
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Branch %@ akan digabung ke %@ di folder proyek “%@” (git merge, tanpa push). Hanya bisa dibatalkan secara manual."
+            "value": "O branch %@ será mesclado em %@ na pasta do projeto “%@” (git merge, sem push). Só dá para desfazer manualmente."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Ветка %1$@ будет влита в %2$@ в папке проекта «%3$@» (git merge, без push). Отменить можно только вручную."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Гілку %@ буде влито в %@ у папці проєкту «%@» (git merge, без push). Скасувати можна лише вручну."
           }
         }
       }
@@ -23794,16 +24022,10 @@
     },
     "Влить": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Merge"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Влити"
+            "value": "دمج"
           }
         },
         "de": {
@@ -23812,10 +24034,10 @@
             "value": "Mergen"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Fusionner"
+            "value": "Merge"
           }
         },
         "es": {
@@ -23824,22 +24046,22 @@
             "value": "Fusionar"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fusionner"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gabung"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Unisci"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mesclar"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Scal"
           }
         },
         "ja": {
@@ -23854,32 +24076,32 @@
             "value": "병합"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "دمج"
+            "value": "Scal"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Gabung"
+            "value": "Mesclar"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Влити"
           }
         }
       }
     },
     "Влить в %@": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Merge into %@"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Влити в %@"
+            "value": "دمج في %@"
           }
         },
         "de": {
@@ -23888,10 +24110,10 @@
             "value": "In %@ mergen"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Fusionner dans %@"
+            "value": "Merge into %@"
           }
         },
         "es": {
@@ -23900,22 +24122,22 @@
             "value": "Fusionar en %@"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fusionner dans %@"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gabung ke %@"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Unisci a %@"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mesclar em %@"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Scal z %@"
           }
         },
         "ja": {
@@ -23930,32 +24152,32 @@
             "value": "%@에 병합"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "دمج في %@"
+            "value": "Scal z %@"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Gabung ke %@"
+            "value": "Mesclar em %@"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Влити в %@"
           }
         }
       }
     },
     "Влить этот вариант?": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "Merge this version?"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Влити цей варіант?"
+            "value": "دمج هذه النسخة؟"
           }
         },
         "de": {
@@ -23964,10 +24186,10 @@
             "value": "Diese Variante mergen?"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Fusionner cette version ?"
+            "value": "Merge this version?"
           }
         },
         "es": {
@@ -23976,22 +24198,22 @@
             "value": "¿Fusionar esta variante?"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fusionner cette version ?"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gabung varian ini?"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "Unire questa variante?"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mesclar esta variante?"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Scalić ten wariant?"
           }
         },
         "ja": {
@@ -24006,16 +24228,22 @@
             "value": "이 결과를 병합할까요?"
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "دمج هذه النسخة؟"
+            "value": "Scalić ten wariant?"
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Gabung varian ini?"
+            "value": "Mesclar esta variante?"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Влити цей варіант?"
           }
         }
       }
@@ -26296,6 +26524,82 @@
           "stringUnit": {
             "state": "translated",
             "value": "Вибрати"
+          }
+        }
+      }
+    },
+    "Выбрать вариант": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choosing a version"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Вибрати варіант"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Variante wählen"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choisir une version"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elegir una variante"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scegliere una variante"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escolher uma variante"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wybór wariantu"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "案を選ぶ"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "결과 고르기"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "اختيار نسخة"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Memilih varian"
           }
         }
       }
@@ -80866,6 +81170,88 @@
         }
       }
     },
+    "Папка %@ и ветка %@ будут удалены. Изменения уже влиты в %@, они останутся.": {
+      "localizations": {
+        "ru": {
+          "stringUnit": {
+            "state": "new",
+            "value": "Папка %1$@ и ветка %2$@ будут удалены. Изменения уже влиты в %3$@, они останутся."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The folder %@ and the branch %@ will be removed. The changes are already merged into %@ and stay there."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Папку %@ і гілку %@ буде видалено. Зміни вже влито в %@, вони залишаться."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der Ordner %@ und der Branch %@ werden entfernt. Die Änderungen sind bereits in %@ gemergt und bleiben erhalten."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le dossier %@ et la branche %@ seront supprimés. Les modifications sont déjà fusionnées dans %@ et y restent."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La carpeta %@ y la rama %@ se eliminarán. Los cambios ya están fusionados en %@ y se conservan."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La cartella %@ e il ramo %@ verranno eliminati. Le modifiche sono già unite a %@ e restano lì."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A pasta %@ e o branch %@ serão removidos. As alterações já foram mescladas em %@ e continuam lá."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Folder %@ i gałąź %@ zostaną usunięte. Zmiany są już scalone z %@ i zostaną."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "フォルダ%@とブランチ%@を削除します。変更はすでに%@にマージされており、そのまま残ります。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "폴더 %@와 브랜치 %@를 삭제합니다. 변경 사항은 이미 %@에 병합되어 있어 그대로 남습니다."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "سيُحذف المجلد %@ والفرع %@. التغييرات مدموجة في %@ وستبقى."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Folder %@ dan branch %@ akan dihapus. Perubahannya sudah digabung ke %@ dan tetap ada."
+          }
+        }
+      }
+    },
     "Папка _daily-report": {
       "localizations": {
         "ar": {
@@ -80944,16 +81330,10 @@
     },
     "Папка проекта уже на другой ветке — откройте сравнение заново.": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "The project folder is on another branch now — open the comparison again."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Папка проєкту вже на іншій гілці — відкрийте порівняння знову."
+            "value": "مجلد المشروع صار على فرع آخر — افتح المقارنة من جديد."
           }
         },
         "de": {
@@ -80962,10 +81342,10 @@
             "value": "Der Projektordner ist inzwischen auf einem anderen Branch – öffnen Sie den Vergleich erneut."
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Le dossier du projet est maintenant sur une autre branche — rouvrez la comparaison."
+            "value": "The project folder is on another branch now — open the comparison again."
           }
         },
         "es": {
@@ -80974,22 +81354,22 @@
             "value": "La carpeta del proyecto ya está en otra rama: abre de nuevo la comparación."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le dossier du projet est maintenant sur une autre branche — rouvrez la comparaison."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Folder proyek sudah berada di branch lain — buka perbandingan lagi."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "La cartella del progetto è ora su un altro ramo: riapri il confronto."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "A pasta do projeto já está em outro branch — abra a comparação de novo."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Folder projektu jest już na innej gałęzi — otwórz porównanie ponownie."
           }
         },
         "ja": {
@@ -81004,16 +81384,22 @@
             "value": "프로젝트 폴더가 이미 다른 브랜치에 있습니다. 비교를 다시 열어 주세요."
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "مجلد المشروع صار على فرع آخر — افتح المقارنة من جديد."
+            "value": "Folder projektu jest już na innej gałęzi — otwórz porównanie ponownie."
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Folder proyek sudah berada di branch lain — buka perbandingan lagi."
+            "value": "A pasta do projeto já está em outro branch — abra a comparação de novo."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Папка проєкту вже на іншій гілці — відкрийте порівняння знову."
           }
         }
       }
@@ -106518,16 +106904,10 @@
     },
     "Слияние остановилось на конфликтах и отменено: влейте ветку %@ вручную.": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "The merge stopped on conflicts and was undone: merge the branch %@ by hand."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Злиття зупинилося на конфліктах і скасоване: влийте гілку %@ вручну."
+            "value": "توقف الدمج عند تعارضات وأُلغي: ادمج الفرع %@ يدويًا."
           }
         },
         "de": {
@@ -106536,10 +106916,10 @@
             "value": "Der Merge blieb an Konflikten hängen und wurde abgebrochen: Mergen Sie den Branch %@ von Hand."
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "La fusion s’est arrêtée sur des conflits et a été annulée : fusionnez la branche %@ à la main."
+            "value": "The merge stopped on conflicts and was undone: merge the branch %@ by hand."
           }
         },
         "es": {
@@ -106548,22 +106928,22 @@
             "value": "La fusión se detuvo por conflictos y se deshizo: fusiona la rama %@ a mano."
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La fusion s’est arrêtée sur des conflits et a été annulée : fusionnez la branche %@ à la main."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Penggabungan berhenti karena konflik dan dibatalkan: gabungkan branch %@ secara manual."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "L’unione si è fermata sui conflitti ed è stata annullata: unisci il ramo %@ a mano."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "A mesclagem parou em conflitos e foi desfeita: mescle o branch %@ manualmente."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Scalanie zatrzymało się na konfliktach i zostało cofnięte: scal gałąź %@ ręcznie."
           }
         },
         "ja": {
@@ -106578,16 +106958,22 @@
             "value": "병합이 충돌로 멈춰 취소되었습니다. 브랜치 %@는 직접 병합해 주세요."
           }
         },
-        "ar": {
+        "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "توقف الدمج عند تعارضات وأُلغي: ادمج الفرع %@ يدويًا."
+            "value": "Scalanie zatrzymało się na konfliktach i zostało cofnięte: scal gałąź %@ ręcznie."
           }
         },
-        "id": {
+        "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Penggabungan berhenti karena konflik dan dibatalkan: gabungkan branch %@ secara manual."
+            "value": "A mesclagem parou em conflitos e foi desfeita: mescle o branch %@ manualmente."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Злиття зупинилося на конфліктах і скасоване: влийте гілку %@ вручну."
           }
         }
       }
@@ -116395,6 +116781,158 @@
           "stringUnit": {
             "state": "translated",
             "value": "Прибрати з профілю"
+          }
+        }
+      }
+    },
+    "Убрать папку и ветку": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remove folder and branch"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Прибрати папку й гілку"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ordner und Branch entfernen"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Retirer le dossier et la branche"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quitar carpeta y rama"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rimuovi cartella e ramo"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remover pasta e branch"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Usuń folder i gałąź"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "フォルダとブランチを削除"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "폴더와 브랜치 제거"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إزالة المجلد والفرع"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Singkirkan folder dan branch"
+          }
+        }
+      }
+    },
+    "Убрать папку и ветку?": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remove the folder and the branch?"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Прибрати папку й гілку?"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ordner und Branch entfernen?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Retirer le dossier et la branche ?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Quitar la carpeta y la rama?"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rimuovere cartella e ramo?"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remover a pasta e o branch?"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Usunąć folder i gałąź?"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "フォルダとブランチを削除しますか？"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "폴더와 브랜치를 제거할까요?"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إزالة المجلد والفرع؟"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Singkirkan folder dan branch?"
           }
         }
       }
@@ -128753,16 +129291,10 @@
     },
     "влит в %@": {
       "localizations": {
-        "en": {
+        "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "merged into %@"
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "влито в %@"
+            "value": "دُمجت في %@"
           }
         },
         "de": {
@@ -128771,10 +129303,10 @@
             "value": "in %@ gemergt"
           }
         },
-        "fr": {
+        "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "fusionnée dans %@"
+            "value": "merged into %@"
           }
         },
         "es": {
@@ -128783,22 +129315,22 @@
             "value": "fusionada en %@"
           }
         },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "fusionnée dans %@"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "digabung ke %@"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
             "value": "unita a %@"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "mesclada em %@"
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "scalony z %@"
           }
         },
         "ja": {
@@ -128813,16 +129345,98 @@
             "value": "%@에 병합됨"
           }
         },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "scalony z %@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "mesclada em %@"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "влито в %@"
+          }
+        }
+      }
+    },
+    "влит в %@, папка убрана": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "merged into %@, folder removed"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "влито в %@, папку прибрано"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "in %@ gemergt, Ordner entfernt"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "fusionnée dans %@, dossier retiré"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "fusionada en %@, carpeta quitada"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "unita a %@, cartella rimossa"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "mesclada em %@, pasta removida"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "scalony z %@, folder usunięty"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@にマージ済み、フォルダ削除済み"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@에 병합됨, 폴더 제거됨"
+          }
+        },
         "ar": {
           "stringUnit": {
             "state": "translated",
-            "value": "دُمجت في %@"
+            "value": "دُمجت في %@، وأُزيل المجلد"
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "digabung ke %@"
+            "value": "digabung ke %@, folder disingkirkan"
           }
         }
       }

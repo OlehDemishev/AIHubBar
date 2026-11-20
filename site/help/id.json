@@ -286,6 +286,10 @@
               "name" : "Perbandingan"
             },
             {
+              "detail" : "Di jendela perbandingan, klik pada file menampilkan perubahannya baris demi baris. “Pertahankan varian ini” menghapus yang lain, “Gabung ke …” menggabungkan branch varian ke branch proyek (tanpa push), lalu “Singkirkan folder dan branch” merapikan setelahnya. Setiap tindakan meminta konfirmasi.",
+              "name" : "Memilih varian"
+            },
+            {
               "detail" : "Tugas latar belakang: apa yang dilakukan Claude, langkah demi langkah.",
               "name" : "Log"
             },

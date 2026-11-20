@@ -167,6 +167,14 @@ final class RunStore {
         update(saved)
     }
 
+    /// «Убрать папку и ветку»: a merged variant's worktree and branch are removed; its work stays in the target.
+    func tidyVariant(_ run: BackgroundRun) async throws {
+        guard var saved = self.run(id: run.id), PairCompare.canTidy(saved), let branch = saved.worktreeBranch else { return }
+        try await GitService.removeMergedWorktree(saved.folder, branch: branch, projectPath: saved.projectPath)
+        saved.discarded = true
+        update(saved)
+    }
+
     private func update(_ run: BackgroundRun) {
         save(run)
         if let index = runs.firstIndex(where: { $0.id == run.id }) { runs[index] = run }
