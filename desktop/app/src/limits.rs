@@ -16,8 +16,10 @@ use tauri::image::Image;
 use tauri::{AppHandle, Emitter, Manager};
 use tauri_plugin_notification::NotificationExt;
 
-/// The thresholds the Mac app starts with (Settings → «Лимиты» there; a setting here comes later).
-pub(crate) const THRESHOLDS: [u32; 3] = [50, 80, 95];
+/// «Уведомлять на, %» from Settings; 50 / 80 / 95 until the person sets their own.
+pub(crate) fn thresholds(app: &AppHandle) -> Vec<u32> {
+    app.state::<crate::AppState>().settings.lock().unwrap().limit_thresholds()
+}
 const ICON_SIZE: u32 = 32;
 
 #[derive(Default)]
@@ -104,7 +106,7 @@ impl Limits {
                     }
                     let previous = state.snapshot.take();
                     let mut notified = std::mem::take(&mut state.notified);
-                    let alerts = usage::evaluate_alerts(previous.as_ref(), &snapshot, &THRESHOLDS, &mut notified);
+                    let alerts = usage::evaluate_alerts(previous.as_ref(), &snapshot, &thresholds(app), &mut notified);
                     state.notified = notified;
                     if !alerts.is_empty() {
                         let _ = std::fs::write(notified_file(), serde_json::to_string(&state.notified).unwrap_or_default());
@@ -334,6 +336,24 @@ pub async fn spend_view(app: AppHandle) -> Result<SpendView, String> {
     let texts = strings(&app);
     let root = crate::profiles::projects_root(&app);
     tauri::async_runtime::spawn_blocking(move || limits.spend(&root, &texts)).await.map_err(|e| e.to_string())
+}
+
+/// «Уведомлять на, %» as text: «50, 80, 95».
+#[tauri::command]
+pub fn limit_thresholds(app: AppHandle) -> String {
+    thresholds(&app).iter().map(u32::to_string).collect::<Vec<_>>().join(", ")
+}
+
+/// Saves what is valid in `text` (whole percents 1–100) and answers with the thresholds now in force; text with
+/// nothing valid keeps the old ones.
+#[tauri::command]
+pub fn set_limit_thresholds(app: AppHandle, text: String) -> String {
+    let values = claudepult_core::settings::parse_thresholds(&text);
+    if !values.is_empty() {
+        crate::save(&app, |settings| settings.set_limit_thresholds(&values));
+        eprintln!("limit thresholds: {values:?}");
+    }
+    limit_thresholds(app)
 }
 
 #[tauri::command]
