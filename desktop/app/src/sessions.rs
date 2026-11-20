@@ -114,6 +114,8 @@ pub struct RequestRow {
 pub struct SessionRow {
     id: String,
     project: String,
+    /// The worktree's name when the session or run works in one of the project's worktrees.
+    worktree: Option<String>,
     state: &'static str,
     state_title: String,
     detail: Option<String>,
@@ -181,6 +183,7 @@ pub fn sessions_view(app: AppHandle) -> SessionsView {
             request: open.remove(&session.id).map(|r| RequestRow { title: r.asks_title(&texts), text: r.text(), id: r.id }),
             id: session.id.clone(),
             project: session.display_project(),
+            worktree: session.worktree_name(),
             state: state_key(state),
             state_title: state.title(&texts),
             // While it waits, what it waits for; while it works, what it does now.
@@ -215,6 +218,7 @@ pub fn sessions_view(app: AppHandle) -> SessionsView {
             rows.push(SessionRow {
                 id: run.id.clone(),
                 project: crate::runs::project_label(run),
+                worktree: run.worktree_branch.as_ref().and_then(|_| sessions::worktree_name(&run.folder)),
                 state: state_key(state),
                 state_title: state.title(&texts),
                 detail: Some(if run.is_running() { run.task.clone() } else { runs::outcome_text(&texts, run) }),

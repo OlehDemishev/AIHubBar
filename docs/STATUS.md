@@ -5,6 +5,7 @@
 **Updated:** 2026-11-20
 
 **Now:**
+- 2026-11-20: Windows — a session or background run in a worktree has the worktree's name in its row, as on the Mac (branch `feat/desktop-worktree-in-session-row`; seen live)
 - 2026-11-20: Windows — «Следующий шаг», «Завершить», a run in a worktree, «Остановить» and a worktree's «Удалить» seen live on the laptop in a scratch project; a project no longer counts AI Hub Bar's own worktrees as a file to commit (branch `fix/desktop-own-worktrees-not-dirty`)
 - 2026-11-19: Windows — «Извлечь диски» among the quick toggles (branch `feat/desktop-eject-disks`), and 21 texts that stayed Russian in every language are translated now (the toggles' names, the services' «найден» / «нет ключа» and what each service needs); a real eject is not seen — no removable drive on the laptop
 - 2026-11-19: Mac — «Влить в …» in the pair's comparison merges a variant's branch into the branch the project's folder is on, locally and after a confirmation (`feat/pair-merge`, merged 2026-11-19); goes out with 0.12.0, not seen live
@@ -134,6 +135,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-20 — Windows: the worktree's name in a session row (branch `feat/desktop-worktree-in-session-row`)
+
+Done: the live pass of the same day left two rows of one project that could not be told apart. A session whose folder is inside `<project>/.claude/worktrees/<name>` and a background run started in a worktree now show «⎇ name» after the project, as the Mac's row does, with the Mac's hint «Отдельная рабочая копия git (worktree)»; a long name is cut. `core/src/sessions.rs` `worktree_name` (either slash), `app/src/sessions.rs`, `ui/panel.html`.
+Checked: `python scripts/strings.py --check` (564 texts), `cargo test --workspace` on Windows (a test for the name). Live on the laptop, a build from the branch: a sample session file with its folder in a worktree showed «AIHubBar ⎇ cb-a-rather-long-wor…» with the action after it, and the stopped run of the earlier check «_live test ⎇ cb-add-a-file-hello-t…». The sample file removed, the installed 0.1.1 started again.
+Left: seen in Russian only; the hint was not hovered.
 
 ## 2026-11-20 — Windows: «Следующий шаг» and «Завершить» live, own worktrees are not work to commit (branch `fix/desktop-own-worktrees-not-dirty`)
 

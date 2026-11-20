@@ -275,6 +275,7 @@
  "Остановить": "Stop",
  "Остановить?": "Stop?",
  "Ответ в неизвестном формате": "The reply has an unknown format",
+ "Отдельная рабочая копия git (worktree)": "Separate git working copy (worktree)",
  "Отклонено правилами фона: %@": "Refused by the background rules: %@",
  "Отклонить": "Deny",
  "Открыто в Терминале": "Opened in Terminal",
