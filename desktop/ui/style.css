@@ -108,6 +108,7 @@ h2 { font-size: 12px; font-weight: 600; color: var(--secondary); margin: 0 0 8px
 .session.running .dot { background: #0a84ff; }
 .session.done .dot { background: #34c759; }
 .session .project { font-weight: 600; flex: none; }
+.session .worktree { flex: 0 1 auto; min-width: 3em; max-width: 40%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .session .detail { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; min-width: 0; }
 .session .progress { flex: none; font-variant-numeric: tabular-nums; }
 .request { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 0 0 6px 14px; }

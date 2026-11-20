@@ -95,6 +95,11 @@ impl Session {
         })
     }
 
+    /// The worktree's name when the session works in `<project>/.claude/worktrees/<name>`, as on the Mac.
+    pub fn worktree_name(&self) -> Option<String> {
+        worktree_name(&self.cwd)
+    }
+
     /// The project's name, or the last folder of `cwd` for a session outside the projects folder.
     pub fn display_project(&self) -> String {
         self.project.clone().unwrap_or_else(|| {
@@ -167,6 +172,13 @@ pub fn load(dir: &Path, now: DateTime<Utc>, alive: impl Fn(u32) -> Option<bool>)
     shown
 }
 
+/// `cb-fix` of `…/.claude/worktrees/cb-fix/src`, with either slash.
+pub fn worktree_name(folder: &str) -> Option<String> {
+    let folder = folder.replace('\\', "/");
+    let rest = folder.split_once("/.claude/worktrees/")?.1;
+    rest.split('/').next().filter(|name| !name.is_empty()).map(str::to_owned)
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -222,5 +234,13 @@ mod tests {
         assert_eq!(parsed.action_text(&s).as_deref(), Some("инструмент request"));
         assert_eq!(State::Waiting.title(&s), "ждёт ответа");
         assert!(Session::parse(r#"{"state": "running"}"#).is_none(), "no id, no session");
+    }
+
+    #[test]
+    fn worktree_names() {
+        assert_eq!(worktree_name(r"C:\Users\Олег\Projects\shop\.claude\worktrees\cb-fix").as_deref(), Some("cb-fix"));
+        assert_eq!(worktree_name("/home/o/Projects/shop/.claude/worktrees/cb-fix/src").as_deref(), Some("cb-fix"));
+        assert_eq!(worktree_name(r"C:\Users\Олег\Projects\shop"), None);
+        assert_eq!(worktree_name("/p/shop/.claude/worktrees/"), None);
     }
 }

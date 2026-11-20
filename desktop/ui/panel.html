@@ -343,11 +343,17 @@
       rows.replaceChildren(...view.rows.flatMap((row) => {
         const item = document.createElement("div");
         item.className = `session ${row.state}`;
-        item.innerHTML = `<span class="dot" aria-hidden="true"></span><span class="project"></span><span class="secondary detail"></span><span class="secondary progress"></span>`;
+        item.innerHTML = `<span class="dot" aria-hidden="true"></span><span class="project"></span><span class="secondary worktree" hidden></span><span class="secondary detail"></span><span class="secondary progress"></span>`;
         item.querySelector(".project").textContent = row.project;
+        if (row.worktree) {
+          const worktree = item.querySelector(".worktree");
+          worktree.textContent = "⎇ " + row.worktree;
+          worktree.title = t("Отдельная рабочая копия git (worktree)");
+          worktree.hidden = false;
+        }
         item.querySelector(".detail").textContent = row.detail ?? row.stateTitle;
         item.querySelector(".progress").textContent = row.progress ?? "";
-        item.title = `${row.project} · ${row.stateTitle}${row.detail ? " · " + row.detail : ""}`;
+        item.title = `${row.project}${row.worktree ? " ⎇ " + row.worktree : ""} · ${row.stateTitle}${row.detail ? " · " + row.detail : ""}`;
         const extra = row.run ? runControls(row.run) : [];
         return [item, ...extra, ...(row.request ? [request(row.request)] : [])];
       }));
