@@ -31,6 +31,8 @@ struct State {
     paused_until: Option<DateTime<Utc>>,
     notified: BTreeSet<String>,
     last_growth: Option<DateTime<Utc>>,
+    /// The last try to renew Claude Code's sign-in.
+    last_renewal: Option<DateTime<Utc>>,
     /// «Расход по проектам»: the journals' records and when they were last read.
     spend: Option<(Vec<token_usage::TokenRecord>, DateTime<Utc>)>,
 }
@@ -90,9 +92,24 @@ impl Limits {
         if self.state.lock().unwrap().paused_until.is_some_and(|until| until > now) {
             return;
         }
-        let result = usage::read_credentials(&paths::claude_dir(), now)
-            .and_then(|credentials| usage::fetch(&credentials, now))
-            .and_then(|body| UsageSnapshot::decode(&body, now).ok_or(UsageError::BadResponse));
+        let read = || {
+            usage::read_credentials(&paths::claude_dir(), now)
+                .and_then(|credentials| usage::fetch(&credentials, now))
+                .and_then(|body| UsageSnapshot::decode(&body, now).ok_or(UsageError::BadResponse))
+        };
+        let mut result = read();
+        // The sign-in is out of date (`claude` has not run lately): renew it through `claude` and ask once more.
+        if result == Err(UsageError::Expired) && app.state::<crate::AppState>().settings.lock().unwrap().renew_claude_login {
+            let last = self.state.lock().unwrap().last_renewal;
+            if usage::should_renew(last, now) {
+                self.state.lock().unwrap().last_renewal = Some(now);
+                let renewed = claudepult_core::launch::find_claude().is_some_and(|claude| usage::renew_sign_in(&claude));
+                eprintln!("Claude Code sign-in renewal: {}", if renewed { "done" } else { "failed" });
+                if renewed {
+                    result = read();
+                }
+            }
+        }
         let alerts = {
             let mut state = self.state.lock().unwrap();
             match result {
@@ -345,6 +362,20 @@ pub async fn spend_view(app: AppHandle) -> Result<SpendView, String> {
     let texts = strings(&app);
     let root = crate::profiles::projects_root(&app);
     tauri::async_runtime::spawn_blocking(move || limits.spend(&root, &texts)).await.map_err(|e| e.to_string())
+}
+
+/// «Продлевать вход Claude Code сам».
+#[tauri::command]
+pub fn renew_claude_login(app: AppHandle) -> bool {
+    app.state::<crate::AppState>().settings.lock().unwrap().renew_claude_login
+}
+
+#[tauri::command]
+pub fn set_renew_claude_login(app: AppHandle, enabled: bool) {
+    crate::save(&app, |settings| settings.renew_claude_login = enabled);
+    if enabled {
+        app.state::<Limits>().refresh_now();
+    }
 }
 
 /// «Уведомлять на, %» as text: «50, 80, 95».

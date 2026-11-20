@@ -163,6 +163,11 @@
         <label for="limit-thresholds" data-t="Уведомлять на, %"></label>
         <input type="text" id="limit-thresholds" placeholder="50, 80, 95" inputmode="numeric" autocomplete="off" style="width: 9em">
       </div>
+      <div class="row">
+        <label for="renew-login" data-t="Продлевать вход Claude Code сам"></label>
+        <input type="checkbox" id="renew-login">
+      </div>
+      <p class="secondary" data-t="Когда вход истёк (claude давно не запускался, а работа идёт в приложении Claude), AI Hub Bar отправляет через claude запрос из одного слова — самая маленькая модель, без инструментов, не чаще раза в час. Вход продлевается примерно на 8 часов."></p>
       <div id="hub-sources"></div>
     </section>
     <section class="card services">
@@ -1066,6 +1071,12 @@
       const apply = async () => { field.value = await invoke("set_limit_thresholds", { text: field.value }); };
       field.onchange = apply;
       field.onkeydown = (event) => { if (event.key === "Enter") field.blur(); };
+    }
+
+    {
+      const renew = document.getElementById("renew-login");
+      renew.checked = await invoke("renew_claude_login");
+      renew.onchange = () => invoke("set_renew_claude_login", { enabled: renew.checked });
     }
 
     // «Главный сервис»: automatic, Claude, or a service that has limits now (and the saved one).

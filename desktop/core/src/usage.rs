@@ -243,6 +243,27 @@ pub struct UsagePoint {
     pub session_resets_at: Option<DateTime<Utc>>,
 }
 
+/// «Продлевать вход Claude Code сам» (the Mac's `LoginRenewal`). Claude Code renews its sign-in only while `claude`
+/// runs; working in the Claude app leaves the sign-in file out of date and the limits stop. A one-word request
+/// through `claude` renews it for about 8 hours: the smallest model, one turn, no tools, no MCP servers, no settings
+/// (so no hooks), nothing kept in the session history. AI Hub Bar never touches the token itself.
+pub const RENEWAL_ARGUMENTS: [&str; 12] = ["-p", "OK", "--model", "haiku", "--max-turns", "1", "--tools", "", "--no-session-persistence", "--strict-mcp-config", "--setting-sources", ""];
+
+/// At most one try an hour, whether it worked or not.
+pub fn should_renew(last_try: Option<DateTime<Utc>>, now: DateTime<Utc>) -> bool {
+    last_try.is_none_or(|at| now - at >= Duration::hours(1))
+}
+
+/// Runs the request in a folder of its own (Claude Code keeps a folder of records per working folder); true when
+/// `claude` ended well within a minute.
+pub fn renew_sign_in(claude: &Path) -> bool {
+    let folder = std::env::temp_dir().join("claudepult-renew");
+    let _ = std::fs::create_dir_all(&folder);
+    let mut command = crate::command::command(claude);
+    command.args(RENEWAL_ARGUMENTS).current_dir(&folder).stdin(std::process::Stdio::null());
+    crate::command::run(command, std::time::Duration::from_secs(60)).is_some_and(|output| output.ok())
+}
+
 /// How long a reading helps the forecast.
 pub const HISTORY_HOURS: i64 = 2;
 
@@ -504,6 +525,17 @@ mod tests {
         assert_eq!(file["five_hour"]["resets_at"], "2026-11-02T20:00:00Z");
         assert_eq!(file["updated"], "2026-11-02T18:00:00Z");
         assert!(file.get("seven_day_opus").is_none(), "only what report.py reads");
+    }
+
+    #[test]
+    fn renewal_is_one_small_request_an_hour() {
+        let now = Utc::now();
+        assert!(should_renew(None, now));
+        assert!(!should_renew(Some(now - Duration::minutes(59)), now));
+        assert!(should_renew(Some(now - Duration::minutes(60)), now));
+        let arguments = RENEWAL_ARGUMENTS.join(" ");
+        assert!(arguments.starts_with("-p OK --model haiku --max-turns 1 --tools  --no-session-persistence"), "{arguments}");
+        assert_eq!(RENEWAL_ARGUMENTS[RENEWAL_ARGUMENTS.len() - 2..], ["--setting-sources", ""], "no settings, so no hooks");
     }
 
     #[test]

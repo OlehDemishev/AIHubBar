@@ -5,6 +5,7 @@
 **Updated:** 2026-11-20
 
 **Now:**
+- 2026-11-20: Windows — «Продлевать вход Claude Code сам»: an out-of-date sign-in is renewed through `claude` once an hour at most, and the limits come back (branch `feat/desktop-renew-sign-in`; seen live — the laptop's sign-in was a day old, the limits returned)
 - 2026-11-20: Windows — the forecast's readings are kept across restarts in `usage-history.json`, the Mac's file (branch `feat/desktop-forecast-history`; tests only — Claude's sign-in on the laptop was out of date, so no reading came)
 - 2026-11-20: Windows — «Уведомлять на, %»: the limit alerts' thresholds are a setting (Settings → «Другие AI»), kept where the Mac keeps them (branch `feat/desktop-limit-thresholds`; seen live)
 - 2026-11-20: Windows — «Расход по проектам» in the panel under «Подробнее»: tokens per project from Claude Code's journals for the session, today and the week, and the heaviest session (branch `feat/desktop-spend-by-project`; seen live on the laptop's own journals)
@@ -113,7 +114,6 @@
 - Windows: left on the laptop — notifications and their buttons (the agent can't see a toast: its tool hides other programs' windows); the Mac's background runs have the same rules — try one build in a subfolder there; stage 7: the installer and updates are done (0.1.2), signing waits for SignPath (the update 0.1.2 → 0.1.3 from GitHub was seen on the laptop); Telegram on Windows (Oleh's choice 2026-11-20): stages 1 and 2 are done (the reader, 🏠, 🤖, permission requests), neither tried with a real bot; ⏳ too; next tasks from the chat (SPEC-telegram stage 3) — only after a real bot has been tried on the laptop: a chat that can start an agent must first be seen refusing a stranger; of the limits stage (SPEC-windows §9.2) left: the «История расхода» window
 
 **Needs Oleh:**
-- Windows laptop: Claude's limits are not read since 2026-11-20 01:46 — «Вход Claude Code устарел». Run `claude` once in a terminal (the work goes through the Claude desktop app, which does not renew that file); the Mac has «Продлевать вход Claude Code сам» for this, the Windows version does not yet
 - Windows laptop, Telegram (0.1.4 is installed; nothing of it was tried with a real bot): 1) in @BotFather make a new bot — the Mac mini reads your present one; 2) Settings → «Telegram»: paste the token, «Привязать чат», «Start» in Telegram, «Проверить»; 3) start a small background task and see its result come to the chat; 4) «Этот компьютер отвечает боту» on, `/menu` in the chat — 🏠, then 🤖 and ⏳; 5) «Запросы разрешений в этот бот» on, start `claude --permission-mode default` in a project, ask it to create a file and answer ✅ from the phone. Say what did not work
 - update to 0.12.0-beta.1 (Settings → «Основные» → «Обновления», «Бета-версии» on): does the «Что нового» card show once with six lines; is the bell in the panel's header left of the gear, and does a press turn it orange; the «Telegram» tile in «Быстрые переключатели» if they are on
 - Windows laptop, Telegram (in the next Windows version, or a build from `main`): Settings → «Telegram» — paste a bot's token from @BotFather (a new bot is the safest: the Mac mini reads your present one, and then «Start» reaches the Mac instead — the page says so and asks for the chat's id), «Привязать чат», «Start» in Telegram, «Проверить»; then start a small background task and see its result come to the chat
@@ -157,6 +157,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-20 — Windows: «Продлевать вход Claude Code сам» (branch `feat/desktop-renew-sign-in`)
+
+Done: on Oleh's «Да, делай». Claude Code renews its sign-in only while `claude` runs; with the work going through the Claude desktop app the file goes out of date and the panel says «Вход Claude Code устарел» — on the laptop since the night. The Mac's `LoginRenewal`, ported: when the sign-in is out of date and the switch is on (it is by default, as on the Mac), the app runs `claude -p OK --model haiku --max-turns 1 --tools "" --no-session-persistence --strict-mcp-config --setting-sources ""` in a temp folder of its own, with no window and a minute's limit, then reads the limits again; one try an hour at most, whether it worked or not. The token itself is never touched. Settings → «Другие AI» has the switch with the Mac's explanation. Two texts, both the Mac's.
+Checked: `python scripts/strings.py --check` (638 texts), `cargo test --workspace` on Windows (the hour between tries, the request's arguments). Live on the laptop, a build from the branch: the sign-in file was from 2026-11-19 17:48; within half a minute of the start the log said «Claude Code sign-in renewal: done», the file's time became 19:09, `usage.json` was written again, and the panel showed Claude's limits (session 69 %, week 73 %, the model's week 97 %) instead of the warning. The same start wrote `usage-history.json` with its first reading — the file of the previous entry, now seen.
+Left: the switch itself was not turned off and on. A failed renewal (no `claude`, no network) is only in the log. The forecast line right after a restart still unseen (it needs two readings). Each renewal costs a sliver of the subscription — said in the switch's text.
 
 ## 2026-11-20 — Windows: the forecast's history across restarts (branch `feat/desktop-forecast-history`)
 
