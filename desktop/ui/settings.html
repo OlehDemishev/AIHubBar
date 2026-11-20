@@ -18,6 +18,37 @@
         <input type="checkbox" id="autostart">
       </div>
     </section>
+    <div id="telegram" hidden>
+      <h1>Telegram</h1>
+      <section class="card">
+        <div class="row">
+          <span data-t="Токен бота"></span>
+          <span class="telegram-controls">
+            <span class="secondary" id="telegram-bot"></span>
+            <input type="password" id="telegram-token" placeholder="123456:ABC…" autocomplete="off" spellcheck="false" data-t-title="Токен бота">
+            <button id="telegram-save" data-t="Сохранить"></button>
+            <button id="telegram-remove" data-t="Удалить" hidden></button>
+          </span>
+        </div>
+        <div class="row">
+          <span data-t="Чат"></span>
+          <span class="telegram-controls">
+            <span class="secondary" id="telegram-chat"></span>
+            <input type="text" id="telegram-chat-id" inputmode="numeric" autocomplete="off" hidden>
+            <button id="telegram-chat-save" data-t="Сохранить" hidden></button>
+            <button id="telegram-cancel" data-t="Отмена" hidden></button>
+            <button id="telegram-unbind" data-t="Отвязать" hidden></button>
+            <button id="telegram-bind" data-t="Привязать чат" data-t-title="Откроется бот в Telegram — нажмите «Start», и бот будет отвечать только этому чату"></button>
+          </span>
+        </div>
+        <div class="row">
+          <span class="secondary" id="telegram-status"></span>
+          <button id="telegram-test" data-t="Проверить"></button>
+        </div>
+      </section>
+      <h2 data-t="Уведомления в Telegram"></h2>
+      <section class="card" id="telegram-events"></section>
+    </div>
     <div id="updates" hidden>
       <h1 data-t="Обновления"></h1>
       <section class="card">
@@ -1102,6 +1133,64 @@
     const prAlerts = document.getElementById("pr-alerts");
     prAlerts.checked = await invoke("pull_request_alerts");
     prAlerts.onchange = () => invoke("set_pull_request_alerts", { enabled: prAlerts.checked });
+
+    // «Telegram»: the person's own bot — the token (kept with the API keys), the chat bound with «Start», a test
+    // message, and which of the notifications also go to the chat.
+    {
+      const id = (name) => document.getElementById("telegram-" + name);
+      let error = null;
+      const show = (view) => {
+        document.getElementById("telegram").hidden = !view.available;
+        id("bot").textContent = view.hasToken ? (view.bot ? "@" + view.bot : t("подключаюсь…")) : "";
+        id("token").hidden = id("save").hidden = view.hasToken;
+        id("remove").hidden = !view.hasToken;
+        const waiting = view.bindingCode != null;
+        id("chat").textContent = waiting ? t("Жду «Start» в Telegram (код %@)…", view.bindingCode) : (view.chat ?? "");
+        id("cancel").hidden = !waiting;
+        id("unbind").hidden = waiting || !view.chat;
+        id("bind").hidden = waiting || !view.hasToken;
+        // Another program reads the bot: «Start» can't reach this one, so the chat's id is typed.
+        const byHand = view.conflict && !waiting && !view.chat;
+        id("chat-id").hidden = id("chat-save").hidden = !byHand;
+        id("chat-id").placeholder = t("ID чата");
+        id("status").textContent = error ?? view.status ?? "";
+        id("test").disabled = !view.hasToken || !view.chat;
+        id("events").replaceChildren(...view.events.map((event) => {
+          const row = document.createElement("div");
+          row.className = "row";
+          const label = document.createElement("label");
+          label.textContent = event.title;
+          label.htmlFor = "telegram-event-" + event.id;
+          const box = document.createElement("input");
+          box.type = "checkbox";
+          box.id = label.htmlFor;
+          box.checked = event.on;
+          box.onchange = async () => show(await invoke("set_telegram_event", { event: event.id, on: box.checked }));
+          row.append(label, box);
+          return row;
+        }));
+      };
+      const act = (button, command, args) => async () => {
+        button.disabled = true;
+        error = null;
+        try {
+          show(await invoke(command, args?.()));
+        } catch (problem) {
+          error = String(problem);
+          show(await invoke("telegram_view"));
+        }
+        button.disabled = false;
+      };
+      id("save").onclick = act(id("save"), "telegram_save_token", () => { const token = id("token").value; id("token").value = ""; return { token }; });
+      id("remove").onclick = act(id("remove"), "telegram_remove_token");
+      id("bind").onclick = act(id("bind"), "telegram_bind");
+      id("cancel").onclick = act(id("cancel"), "telegram_cancel_binding");
+      id("unbind").onclick = act(id("unbind"), "telegram_set_chat", () => ({ chat: null }));
+      id("chat-save").onclick = act(id("chat-save"), "telegram_set_chat", () => ({ chat: id("chat-id").value }));
+      id("test").onclick = act(id("test"), "telegram_test");
+      show(await invoke("telegram_view"));
+      window.__TAURI__.event.listen("telegram-changed", async () => show(await invoke("telegram_view")));
+    }
 
     // «Обновления» (Windows): a check once a day and by hand; the new version is installed only on a click.
     {

@@ -146,6 +146,8 @@ impl Runs {
         }
         if announce {
             let _ = app.notification().builder().title(notification_title(&run)).body(notification_body(&texts, &run)).show();
+            let html = claudepult_core::telegram::run_html(run.state == RunState::Succeeded, &project_label(&run), &task_start(&run.task), &outcome_text(&texts, &run), run.pull_request_url.as_deref());
+            crate::telegram::notify(app, "bg", html);
         }
         if run.result_file.is_some() {
             // A command wrote into a folder project: its files, words and main file are read again.

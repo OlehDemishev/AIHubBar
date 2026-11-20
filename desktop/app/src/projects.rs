@@ -126,10 +126,13 @@ impl Projects {
         let alerts = app.state::<crate::AppState>().settings.lock().unwrap().pull_request_alerts;
         if alerts && !changes.is_empty() {
             eprintln!("pull request changes: {}", changes.len());
+            let mut html = Vec::new();
             for change in &changes {
                 let (title, body) = projects::pr_change_text(&texts, change);
+                html.push(claudepult_core::telegram::pull_request_html(&title, &body, change.url.as_deref()));
                 let _ = app.notification().builder().title(title).body(body).show();
             }
+            crate::telegram::notify(app, "pr", html.join("\n\n"));
         }
     }
 
