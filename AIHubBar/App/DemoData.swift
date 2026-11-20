@@ -9,7 +9,7 @@ struct DemoData {
     /// The release this data was last brought up to date for; the same value as `WhatsNew.version`, and a test keeps
     /// the two equal. A release with news changes `WhatsNew.version`, the test fails, and whoever makes the release
     /// adds what the new version should show here (docs/RELEASE.md → «Demo») before raising this.
-    static let version = "0.11"
+    static let version = "0.12"
 
     var snapshot: UsageSnapshot?
     var history: [UsagePoint] = []
@@ -202,6 +202,25 @@ struct DemoData {
                 timeLimitMinutes: 60, pid: nil, state: .succeeded, finishedAt: now.addingTimeInterval(-41 * 60),
                 summary: "Added 9 tests for the contact form; all pass.",
                 pullRequestURL: "https://github.com/example/landing/pull/42", notified: true, resultFile: nil
+            ),
+            // 0.12: one task given to Claude and Codex at once; «Compare with…» in either row opens both answers.
+            BackgroundRun(
+                id: "demo-run-3", project: "atlas-api", projectPath: path("atlas-api"),
+                folder: path("atlas-api") + "/.claude/worktrees/cb-claude-csv-export",
+                worktreeBranch: "cb/claude-csv-export", commandTitle: "Task",
+                task: "Add CSV export to the reports endpoint", startedAt: now.addingTimeInterval(-38 * 60),
+                timeLimitMinutes: 60, pid: nil, state: .succeeded, finishedAt: now.addingTimeInterval(-27 * 60),
+                summary: "Added GET /reports/export.csv with streaming and 6 tests; all pass.",
+                pullRequestURL: nil, notified: true, resultFile: nil, pair: "demo-pair-1"
+            ),
+            BackgroundRun(
+                id: "demo-run-4", project: "atlas-api", projectPath: path("atlas-api"),
+                folder: path("atlas-api") + "/.claude/worktrees/cb-codex-csv-export",
+                worktreeBranch: "cb/codex-csv-export", commandTitle: "Task",
+                task: "Add CSV export to the reports endpoint", startedAt: now.addingTimeInterval(-38 * 60),
+                timeLimitMinutes: 60, pid: nil, state: .succeeded, finishedAt: now.addingTimeInterval(-24 * 60),
+                summary: "Added a CSV serializer and the export route; 4 tests pass.",
+                pullRequestURL: nil, notified: true, resultFile: nil, agent: CodexExec.agent, pair: "demo-pair-1"
             ),
         ]
     }

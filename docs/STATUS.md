@@ -5,6 +5,7 @@
 **Updated:** 2026-11-20
 
 **Now:**
+- 2026-11-20: Mac — the «Что нового» card and the demo data brought to 0.12 (`chore/whats-new-0.12`, merged 2026-11-20) for 0.12.0-beta.1, which Oleh asked for the same day
 - 2026-11-20: Windows 0.1.2 published as an unsigned pre-release (tag `desktop-v0.1.2`) on Oleh's «Да, выпускай»: the first version that updates itself, with quick command shortcuts and «Извлечь диски»; installed on the laptop, its «Проверить сейчас» reads the published manifest; «latest» stays the Mac's v0.11.0
 - 2026-11-20: Windows — updates: a check once a day and by hand, «Установить и перезапустить» in Settings → «Основные» → «Обновления»; the release workflow signs the installer with the update key and writes the manifest (branch `feat/desktop-updates`; a whole update seen live on the laptop against a local manifest)
 - 2026-11-20: Mac — «Оставить этот вариант», «Влить в …» and «Убрать папку и ветку» pressed live in an isolated copy on a made-up finished pair (no real Claude or Codex run); four fixes (`fix/live-pass-pair-actions`, merged 2026-11-20): the removing buttons are offered for a project under a symlinked folder, a refusal has its own row instead of being cut, it is cleared when another pair is shown, the side's actions on their own row
@@ -141,6 +142,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-20 — The «Что нового» card for 0.12 (branch `chore/whats-new-0.12`)
+
+Done: `WhatsNew.version` is 0.12 with six lines (Codex approvals and background tasks, one task to both with the comparison, review and handover, «Skills и плагины», the day summary and the plan's price, the Telegram bell), in 13 languages; four of the 0.11 card's lines left the catalog, two stay as help facts. `DemoData` is at 0.12: a finished pair of Claude and Codex in `atlas-api`, so «Compare with…» is in the demo.
+Checked: `scripts/check.sh` (catalog 1944 keys, 0 problems).
+Left: the card and the header bell not seen in a panel — opening a panel takes the keyboard, not done without Oleh's word; the beta on his copy shows both.
 
 ## 2026-11-20 — Windows 0.1.2 released (branch `chore/desktop-0.1.2-note`)
 
