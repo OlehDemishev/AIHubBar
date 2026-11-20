@@ -286,6 +286,10 @@
               "name" : "Comparación"
             },
             {
+              "detail" : "En la ventana de comparación, un clic en un archivo muestra sus cambios línea por línea. «Conservar esta variante» elimina la otra, «Fusionar en …» fusiona la rama de la variante en la rama del proyecto (sin push) y «Quitar carpeta y rama» limpia después. Cada acción pide confirmación.",
+              "name" : "Elegir una variante"
+            },
+            {
               "detail" : "Tarea en segundo plano: qué hace Claude, paso a paso.",
               "name" : "Registro"
             },

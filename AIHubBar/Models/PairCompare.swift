@@ -29,6 +29,17 @@ enum PairCompare {
         String(localized: "Ветка \(run.worktreeBranch ?? "") будет влита в \(target) в папке проекта «\(run.project)» (git merge, без push). Отменить можно только вручную.")
     }
 
+    /// «Убрать папку и ветку» can be offered for a merged side: its work is in the target branch, the worktree is the
+    /// app's own and still there.
+    static func canTidy(_ run: BackgroundRun) -> Bool {
+        run.mergedInto != nil && run.discarded != true && removable(run)
+    }
+
+    /// What the confirmation says before a merged variant's folder and branch are removed.
+    static func tidyWarning(_ run: BackgroundRun) -> String {
+        String(localized: "Папка \((run.folder as NSString).lastPathComponent) и ветка \(run.worktreeBranch ?? "") будут удалены. Изменения уже влиты в \(run.mergedInto ?? ""), они останутся.")
+    }
+
     /// Only a worktree under `<project>/.claude/worktrees/` on a branch of its own.
     static func removable(_ run: BackgroundRun) -> Bool {
         let root = (run.projectPath as NSString).appendingPathComponent(".claude/worktrees") + "/"

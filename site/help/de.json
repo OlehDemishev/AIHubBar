@@ -286,6 +286,10 @@
               "name" : "Vergleich"
             },
             {
+              "detail" : "Im Vergleichsfenster zeigt ein Klick auf eine Datei die Änderungen Zeile für Zeile. „Diese Variante behalten“ entfernt die andere, „In … mergen“ mergt den Branch der Variante in den Branch des Projekts (kein Push), und „Ordner und Branch entfernen“ räumt danach auf. Jede Aktion fragt nach einer Bestätigung.",
+              "name" : "Variante wählen"
+            },
+            {
               "detail" : "Hintergrundaufgabe: was Claude tut, Schritt für Schritt.",
               "name" : "Protokoll"
             },

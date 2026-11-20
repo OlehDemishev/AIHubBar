@@ -286,6 +286,10 @@
               "name" : "Comparaison"
             },
             {
+              "detail" : "Dans la fenêtre de comparaison, un clic sur un fichier montre ses modifications ligne par ligne. « Garder cette version » supprime l’autre, « Fusionner dans … » fusionne la branche de la version dans celle du projet (sans push), puis « Retirer le dossier et la branche » fait le ménage. Chaque action demande une confirmation.",
+              "name" : "Choisir une version"
+            },
+            {
               "detail" : "Tâche en arrière-plan : ce que fait Claude, étape par étape.",
               "name" : "Journal"
             },

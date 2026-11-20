@@ -286,6 +286,10 @@
               "name" : "Comparação"
             },
             {
+              "detail" : "Na janela de comparação, um clique em um arquivo mostra as alterações linha por linha. “Manter esta variante” remove a outra, “Mesclar em …” mescla o branch da variante no branch do projeto (sem push) e “Remover pasta e branch” faz a limpeza depois. Cada ação pede confirmação.",
+              "name" : "Escolher uma variante"
+            },
+            {
               "detail" : "Tarefa em segundo plano: o que o Claude faz, passo a passo.",
               "name" : "Registro"
             },
