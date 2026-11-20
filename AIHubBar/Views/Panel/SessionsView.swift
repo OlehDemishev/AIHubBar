@@ -171,7 +171,7 @@ private struct ResumableSessionRow: View {
 
 /// A recent conversation of another agent: project, title, when it was last updated, its context. A click continues
 /// it in Terminal (`codex resume`, `copilot --resume`, `agy --conversation`). No state dot: without hooks the agents
-/// don't say whether they wait; Antigravity at least says it is running.
+/// don't say whether they wait; Antigravity says it is running and, with AI Hub Bar's status line, that it waits.
 private struct AgentThreadRow: View {
     let thread: AgentThread
     @State private var isHovered = false
@@ -191,7 +191,11 @@ private struct AgentThreadRow: View {
                 .truncationMode(.tail)
                 .foregroundStyle(.secondary)
             Spacer(minLength: 4)
-            if thread.isWorking {
+            if thread.isWaiting {
+                Text("ждёт ответа")
+                    .scaledFont(.caption, weight: .semibold)
+                    .foregroundStyle(Session.State.waiting.color)
+            } else if thread.isWorking {
                 Text("работает")
                     .scaledFont(.caption)
                     .foregroundStyle(Session.State.running.color)

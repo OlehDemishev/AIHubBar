@@ -14,6 +14,8 @@ struct AgentThread: Equatable, Identifiable, Sendable {
     var context: Double?
     /// The agent says it is running right now (Antigravity keeps a run status; Codex and Copilot don't).
     var isWorking = false
+    /// It asked «Run this command?» and waits for the answer (Antigravity with AI Hub Bar's status line).
+    var isWaiting = false
 
     /// Terminal command that continues the conversation in its folder.
     func resumeCommandLine(path: String) -> String {
@@ -32,9 +34,10 @@ struct AgentThread: Equatable, Identifiable, Sendable {
     }
 
     /// Codex, Copilot and Antigravity conversations, newest first.
-    static func recent(home: URL = FileManager.default.homeDirectoryForCurrentUser, now: Date = .now) -> [AgentThread] {
+    static func recent(home: URL = FileManager.default.homeDirectoryForCurrentUser, now: Date = .now,
+                       waiting: String? = AntigravityStatusLine.live.waitingConversation()) -> [AgentThread] {
         (CodexThreads.recent(home: home, now: now) + CopilotSessions.recent(home: home, now: now)
-            + AntigravityConversations.recent(home: home, now: now))
+            + AntigravityConversations.recent(home: home, now: now, waiting: waiting))
             .sorted { $0.updatedAt > $1.updatedAt }
     }
 }
@@ -203,7 +206,7 @@ enum AntigravityConversations {
     }
 
     static func recent(home: URL = FileManager.default.homeDirectoryForCurrentUser, now: Date = .now,
-                       within: TimeInterval = 3 * 3600, limit: Int = 5) -> [AgentThread] {
+                       within: TimeInterval = 3 * 3600, limit: Int = 5, waiting: String? = nil) -> [AgentThread] {
         let rows = SQLiteReader.rows(database(home: home), """
             SELECT conversation_id, title, workspace_uris, last_modified_time, status FROM conversation_summaries
             WHERE last_modified_time >= ? AND parent_conversation_id = '' ORDER BY last_modified_time DESC LIMIT ?
@@ -214,7 +217,8 @@ enum AntigravityConversations {
             guard !id.isEmpty, let updated = date(row[3].text),
                   let folder = workspaces.first.flatMap(URL.init(string:))?.path, !folder.isEmpty else { return nil }
             return AgentThread(agent: .antigravity, id: id, project: URL(fileURLWithPath: folder).lastPathComponent, folder: folder,
-                               title: row[1].text, updatedAt: updated, context: nil, isWorking: row[4].text.contains("RUNNING"))
+                               title: row[1].text, updatedAt: updated, context: nil, isWorking: row[4].text.contains("RUNNING"),
+                               isWaiting: id == waiting)
         }
     }
 }

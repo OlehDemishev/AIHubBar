@@ -138,6 +138,24 @@ struct HubLimitsTests {
         #expect(HubParse.antigravityStatus(data("not json"), now: now) == nil)
     }
 
+    /// The fields as agy 1.5.13 sent them while it asked «Run this command?» (2026-11-20).
+    @Test func antigravityWaitsWhileAConfirmationIsPending() throws {
+        let pending = #"{"product":"antigravity","agent_state":"tool_use","tool_confirmation_pending":true,"conversation_id":"1e48","session_id":"1e48"}"#
+        #expect(HubParse.antigravityWaiting(data(pending)) == "1e48")
+        #expect(HubParse.antigravityWaiting(data(#"{"agent_state":"working","conversation_id":"1e48"}"#)) == nil)
+        #expect(HubParse.antigravityWaiting(data(#"{"agent_state":"idle","tool_confirmation_pending":false,"conversation_id":"1e48"}"#)) == nil)
+        #expect(HubParse.antigravityWaiting(data(#"{"tool_confirmation_pending":true}"#)) == nil, "no conversation to mark")
+
+        let folder = FileManager.default.temporaryDirectory.appending(path: "agy-wait-\(UUID())")
+        defer { try? FileManager.default.removeItem(at: folder) }
+        let line = AntigravityStatusLine(settingsURL: folder.appending(path: "settings.json"), scriptURL: folder.appending(path: "statusline.sh"))
+        #expect(line.waitingConversation(isOpen: { true }) == nil, "nothing kept yet")
+        try FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
+        try data(pending).write(to: line.statusURL)
+        #expect(line.waitingConversation(isOpen: { true }) == "1e48")
+        #expect(line.waitingConversation(isOpen: { false }) == nil, "agy was closed in the middle of the question")
+    }
+
     @Test func antigravityStatusLineIsAddedAndTakenOut() throws {
         let folder = FileManager.default.temporaryDirectory.appending(path: "agy-\(UUID())")
         defer { try? FileManager.default.removeItem(at: folder) }

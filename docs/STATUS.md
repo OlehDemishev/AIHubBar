@@ -6,6 +6,7 @@
 
 **Now:**
 - 2026-11-20: Windows — Telegram stage 2: the app reads the bot when «Этот компьютер отвечает боту» is on (🏠, 🤖), and permission requests come to the chat with ✅ / ❌ (branch `feat/desktop-telegram-reader`; the page seen live, a real bot not tried — the laptop has no token)
+- 2026-11-20: Mac — an Antigravity conversation's row in «Сессии» says «ждёт ответа» while agy asks «Run this command?» (`feat/antigravity-waiting`, merged 2026-11-20); works with AI Hub Bar's status line installed («Включить квоту Antigravity»); not in 0.12.0-beta.1
 - 0.12.0-beta.1 (build 1112) published 2026-11-20 for beta testers on Oleh's «Выпускай для беты»: everything merged since 0.11.0 on the Mac — the nine Claude and Codex features, the pair's comparison with diffs, keep, merge and tidy, the Telegram bell and tile, the 0.12 «Что нового» card. Notarized; the beta feed offers it, «latest» stays v0.11.0. Lives on Oleh's copy until the release, not before Tuesday 2026-11-24
 - 2026-11-20: Windows 0.1.3 published as an unsigned pre-release (tag `desktop-v0.1.3`) on Oleh's «Да, выпускай»: Telegram stage 1; the laptop's 0.1.2 found it, downloaded it from GitHub, installed it and started it by itself — the first real update; «latest» stays the Mac's v0.11.0
 - 2026-11-20: Mac — the «Что нового» card and the demo data brought to 0.12 (`chore/whats-new-0.12`, merged 2026-11-20) for 0.12.0-beta.1, which Oleh asked for the same day
@@ -99,7 +100,7 @@
 - releases go out once a week, on Tuesday, on Oleh's word (agreed 2026-11-11); merged work waits in `main`
 - 0.12.0-beta.1 is out (2026-11-20); before 0.12.0: Oleh uses the beta; left to see in the app — a Codex approval, handover, review, the pair's notification banner, the header bell, the Telegram tile, the «Что нового» card
 - 0.12.0 not before Tuesday 2026-11-24, on Oleh's word; then `scripts/release-tools/update-cask.sh 0.12.0`
-- then: the «ждёт» state for Antigravity sessions (needs `agy` opened once)
+- Antigravity «ждёт»: a notification needs a watcher of the status file (today the rows are read when the panel opens)
 - towards 1.0 (discussed 2026-11-10): the live pass is done (journal 2026-11-10); left — freeze what is in 1.0 and what stays beta, release notes, translations read by people, feedback from strangers before 1.0
 - check on the Air: the island at the real notch
 - promotion (docs/LAUNCH.md): r/ClaudeAI, the lists, r/macapps, Show HN, Product Hunt, Homebrew
@@ -156,6 +157,12 @@
 Done: on Oleh's «продолжай, пока не сделаешь всё, что запланировано». `core/src/telegram.rs`: the Mac's updates (`parse_updates`, whose chat it is, what is stale), routes in the Mac's callback data (`nav:home`, `nav:sessions`, `allow:` / `deny:` / `req:<id>`), the screens 🏠 and 🤖, a request's message, its closed form and «Подробнее». `app/src/telegram.rs`: a reader — one `getUpdates` after another while «Этот компьютер отвечает боту» is on (off by default: a bot has one reader, and Oleh's is read by the Mac mini), the bot and the chat are set and no chat is being bound; 409 says another program reads the bot and waits a minute. `/start` and `/menu` send 🏠, the buttons edit the message in place. With «Запросы разрешений в этот бот» a new request gets a message every three seconds' look — with ✅ / ❌ / ℹ️ only when this computer reads the bot — and loses its buttons with «Разрешено» / «Отклонено» / «Ответ уже дан» once it is answered anywhere. An answer from the chat writes the same file the panel's buttons write. Sessions now carry the agent and the task from the hook's file. Two new texts in the catalog with 12 translations («Этот компьютер отвечает боту» and its hint); the other 23 are the Mac's.
 Checked: `python scripts/strings.py --check` (620 texts), `scripts/strings-check.py` (0 problems), `cargo test --workspace` on Windows — the parsing (someone else's message in the chat, edits and stickers left out), the routes there and back within 64 bytes and the refused ones, the screens' exact text, a request's three states. Live on the laptop, a build from the branch: the two new rows in Settings → «Telegram», both switches saved to `settings.json` and put back off; with no token the reader stays idle.
 Left: not one request went to Telegram — the laptop has no bot's token, so the reader, the screens in a real chat, a press on ✅ and the 409 path are untried (Needs Oleh). «Бота читает другой Mac» and the 409 line say «Mac». Not built: the ⏳ limits screen, tasks from the chat, the menu at the bottom, quiet hours, the shared bot, the Mini App. The installed 0.1.3 has stage 1 only.
+
+## 2026-11-20 — Antigravity's «ждёт» (branch `feat/antigravity-waiting`)
+
+Done: Oleh opened `agy` and passed its first screen, so its states could be seen. While agy asks «Run this command?» its status line JSON carries `tool_confirmation_pending: true` (and `agent_state: "tool_use"`) with the conversation's id; `HubParse.antigravityWaiting` reads it from the kept status, and that conversation's row in «Сессии» says «ждёт ответа» instead of «работает», as long as some `agy` is running. `--threads` on the command line says «waiting» too. SPEC-ai-services §5 stage 8 has what was seen.
+Checked: three runs of an own `agy` (1.5.13) in a scratch folder with a session-only status line and trusted folder passed by `--settings` — Oleh's `settings.json` and his running `agy` untouched; the states and the pending field recorded from them. `scripts/check.sh`; tests for the parser with the fields as sent, for a status left behind by a closed agy, for the row's flag.
+Left: not seen in the panel — on Oleh's Mac the status line is not installed (the agent does not press «Включить квоту Antigravity» there). One status file for all agy sessions: only the last writer's state is known. No notification and no count in the menu bar. In «auto» mode agy asks nothing, so the state shows in the stricter modes.
 
 ## 2026-11-20 — 0.12.0-beta.1 published (branch `chore/status-0.12.0-beta.1`)
 
