@@ -5,6 +5,7 @@
 **Updated:** 2026-11-21
 
 **Now:**
+- 2026-11-21: Mac — content stage 4 is ready in PR 510 (`feat/batch-tasks`, on top of PR 508): batch tasks — «Выбрать» in the projects block of a folder profile, one command over the checked projects now, at night or after the limit resets, one project at a time, one summary; **held until 0.12.0 is out**; tests only, **not seen live**
 - 2026-11-21: Mac — content stage 3 is ready in PR 508 (`feat/versions-card`, on top of PR 506): «Версии» in a folder project's card — the list of versions, a file of a version next to the file now, restore of a file or the whole version, «Что изменилось» on a command's notification and in «Журнал»; Mac checks run on the PR; **held with PR 506 until 0.12.0 is out**; the window and the comparison seen live in an isolated copy, a restore pressed there — not
 - 2026-11-20: Mac — the «Версии» module is ready in PR 506 (`feat/versions-module`: a version before every command on a folder project and by a timer, Settings → «Модули» → «Версии»), checks green; **held until 0.12.0 is out**, then merged
 - 2026-11-20: Mac — content stage 2 «Версии» begun: the store of draft versions (`VersionStore`: contents kept once, a version when something differs, all of the last day then one a day, 20 MB limit, a deleted project's store gone after a month) with tests (`feat/versions-store`, merged 2026-11-20); nothing calls it yet, so 0.12.0 is not changed by it
@@ -116,7 +117,8 @@
 - towards 1.0 (discussed 2026-11-10): the live pass is done (journal 2026-11-10); left — freeze what is in 1.0 and what stays beta, release notes, translations read by people, feedback from strangers before 1.0
 - check on the Air: the island at the real notch
 - promotion (docs/LAUNCH.md): r/ClaudeAI, the lists, r/macapps, Show HN, Product Hunt, Homebrew
-- right after 0.12.0 is published: merge PR 506 (`feat/versions-module`), then PR 508 (`feat/versions-card`) retargeted to `main`; then content stage 4 (docs/specs/SPEC-content.md §5): batch tasks
+- right after 0.12.0 is published: merge PR 506 (`feat/versions-module`), then PR 508 (`feat/versions-card`) and PR 510 (`feat/batch-tasks`), each retargeted to `main`
+- batch tasks live on a real profile, before they are released: «Выбрать», the checkboxes, a batch of two or three projects with a model by API and with Claude Code, «На ночь», the summary
 - «Версии» live on a real profile: the «Версии» link in the card, a restore pressed in the window, «Что изменилось» on a notification and in «Журнал»
 - Windows: left on the laptop — notifications and their buttons (the agent can't see a toast: its tool hides other programs' windows); the Mac's background runs have the same rules — try one build in a subfolder there; stage 7: the installer and updates are done (0.1.2), signing waits for SignPath (the update 0.1.2 → 0.1.3 from GitHub was seen on the laptop); Telegram on Windows (Oleh's choice 2026-11-20): stages 1 and 2 are done (the reader, 🏠, 🤖, permission requests), neither tried with a real bot; ⏳ too; next tasks from the chat (SPEC-telegram stage 3) — only after a real bot has been tried on the laptop: a chat that can start an agent must first be seen refusing a stranger; of the limits stage (SPEC-windows §9.2) left: the «История расхода» window
 
