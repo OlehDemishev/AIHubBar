@@ -152,7 +152,8 @@ private struct BatchRow: View {
             Spacer(minLength: 4)
             if batch.isFinished {
                 Button("Убрать") { batches.dismiss(batch.id) }.buttonStyle(.link)
-            } else {
+            } else if batch.items.contains(where: { $0.state == .waiting }) {
+                // Nothing waits (the last project runs, or the rest was cancelled): there is nothing left to cancel.
                 ConfirmedButton(title: "Отменить пакет?", message: String(localized: "Проекты, до которых очередь не дошла, не будут обработаны. Тот, что выполняется сейчас, закончит работу."), confirm: "Отменить пакет", role: nil) {
                     batches.cancel(batch.id)
                 } label: { Text("Отменить") }
