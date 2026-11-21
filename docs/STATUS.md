@@ -168,6 +168,12 @@
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
 
+## 2026-11-21 — Debug builds: the panel's content in a plain window (branch `chore/debug-panel-window`)
+
+Done: `--app-command debug-panel` in Debug builds opens the window «Panel debug» with `MenuPanelView` inside. It needs no click on the menu bar item and does not take the keyboard, so the panel can be checked while Oleh works at the Mac (the menu bar panel of an isolated copy did not open by a click or through Accessibility on 2026-11-21, and when it does open it takes the keystrokes). The window, its `WindowID` case and the command are under `#if DEBUG`; `docs/REFERENCE.md` says how to use it.
+Checked: `scripts/check.sh`; Debug and Release built — the command is in the Debug binary's list and not in the Release one; the window opened in an isolated copy, moved to a corner, read through Accessibility, with another app staying in front.
+Left: the glass background and the panel's own size are not the real ones there; for those the menu bar panel is still the only way.
+
 ## 2026-11-21 — Windows: the «История расхода» window (branch `feat/desktop-usage-history`)
 
 Done: on Oleh's «далее», the last piece of the limits stage. `core/src/token_usage.rs` ports the Mac's `UsageHistory.swift`: a day's tokens (`usage-days.json`, the Mac's file and keys), merged from the journals so a day's counters never go down, the day's highest session and week limits noted at every reading, 400 days kept, the Mac's CSV, the cost at the person's own Anthropic price (cache writes ×1.25, cache reads ×0.1) and the plan against it. `app/src/history.rs` and `ui/history.html`: a window opened by «История расхода…» under the panel's «Расход по проектам» — «7 дней» / «30 дней» / «90 дней», «Всего токенов», «В среднем за рабочий день», «Самый активный день», a bar a day, «Экспорт CSV…», and either «По цене API, примерно» with «Подписка, $ в месяц» and the verdict, or «Указать цену…» that opens Settings. The first open reads three months of journals, later ones the last week. One new text in the catalog with 12 translations — the note says «на этом компьютере» where the Mac's says «на этом Mac»; the other 20 are the Mac's.
