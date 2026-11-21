@@ -243,6 +243,38 @@ pub struct UsagePoint {
     pub session_resets_at: Option<DateTime<Utc>>,
 }
 
+/// Anthropic's public status page (the Mac's `ServiceStatus`): asked only after the limits failed in a way an outage
+/// could explain, to tell an outage from a problem on this computer. No account or token is involved.
+pub const STATUS_PAGE: &str = "https://status.claude.com";
+
+impl UsageError {
+    /// A failure Anthropic's own trouble could explain, so its status page is worth asking.
+    pub fn may_be_outage(&self) -> bool {
+        match self {
+            UsageError::Http(code) => *code >= 500,
+            UsageError::Network(_) | UsageError::BadResponse => true,
+            _ => false,
+        }
+    }
+}
+
+/// The page's own words when something is wrong; None when all is well or the answer can't be read.
+pub fn status_problem(body: &str) -> Option<String> {
+    let value: Value = serde_json::from_str(body).ok()?;
+    let status = value.get("status")?;
+    if status.get("indicator")?.as_str()? == "none" {
+        return None;
+    }
+    status.get("description")?.as_str().map(str::trim).filter(|text| !text.is_empty()).map(str::to_owned)
+}
+
+/// None also when the page can't be reached: without internet nothing is known about Anthropic.
+pub fn check_status() -> Option<String> {
+    let agent: ureq::Agent = ureq::Agent::config_builder().http_status_as_error(false).timeout_global(Some(std::time::Duration::from_secs(10))).build().into();
+    let mut response = agent.get(&format!("{STATUS_PAGE}/api/v2/status.json")).header("User-Agent", "AIHubBar").call().ok()?;
+    status_problem(&response.body_mut().read_to_string().ok()?)
+}
+
 /// «Продлевать вход Claude Code сам» (the Mac's `LoginRenewal`). Claude Code renews its sign-in only while `claude`
 /// runs; working in the Claude app leaves the sign-in file out of date and the limits stop. A one-word request
 /// through `claude` renews it for about 8 hours: the smallest model, one turn, no tools, no MCP servers, no settings
@@ -525,6 +557,23 @@ mod tests {
         assert_eq!(file["five_hour"]["resets_at"], "2026-11-02T20:00:00Z");
         assert_eq!(file["updated"], "2026-11-02T18:00:00Z");
         assert!(file.get("seven_day_opus").is_none(), "only what report.py reads");
+    }
+
+    #[test]
+    fn outages() {
+        assert_eq!(status_problem(r#"{"page": {}, "status": {"indicator": "none", "description": "All Systems Operational"}}"#), None);
+        assert_eq!(status_problem(r#"{"status": {"indicator": "major", "description": " Partial System Outage "}}"#).as_deref(), Some("Partial System Outage"));
+        assert_eq!(status_problem(r#"{"status": {"indicator": "minor"}}"#), None);
+        assert_eq!(status_problem("<html>"), None);
+        assert!(UsageError::Http(503).may_be_outage() && UsageError::Network("x".into()).may_be_outage() && UsageError::BadResponse.may_be_outage());
+        assert!(!UsageError::Http(401).may_be_outage() && !UsageError::Expired.may_be_outage() && !UsageError::NoCredentials.may_be_outage() && !UsageError::RateLimited(None).may_be_outage());
+    }
+
+    /// Asks the real page: `cargo test -p claudepult-core status_page_live -- --ignored --nocapture`.
+    #[test]
+    #[ignore]
+    fn status_page_live() {
+        println!("Anthropic status: {:?}", check_status());
     }
 
     #[test]

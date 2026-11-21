@@ -68,6 +68,7 @@ select { font: inherit; padding: 4px 6px; border-radius: 6px; border: 1px solid 
 .row + .row { border-top: 1px solid var(--line); }
 #updates-state { flex: 1; min-width: 0; overflow-wrap: anywhere; }
 #spend { margin-top: 6px; }
+.outage { color: #c77700; font-size: 12px; margin: 4px 0; }
 .week-days { display: flex; align-items: flex-end; gap: 4px; height: 56px; }
 .week-day { flex: 1; min-width: 0; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 2px; font-size: 10px; white-space: nowrap; }
 .week-day .bar { width: 16px; border-radius: 3px; background: color-mix(in srgb, currentColor 35%, transparent); }
@@ -130,8 +131,11 @@ body.history-window { margin: 0; padding: 16px 20px; }
 
 /* Limits */
 h2 { font-size: 12px; font-weight: 600; color: var(--secondary); margin: 0 0 8px; text-transform: none; }
-.rings { display: flex; gap: 18px; flex-wrap: wrap; }
-.ring { display: flex; align-items: center; gap: 8px; }
+/* Two rings stay side by side: a long reset text wraps inside its ring instead of pushing the second ring down. */
+.rings { display: flex; gap: 12px; }
+.ring { display: flex; align-items: center; gap: 8px; flex: 1 1 0; min-width: 0; }
+.ring svg { flex: none; }
+.ring > div { min-width: 0; overflow-wrap: anywhere; }
 .ring .value { font-weight: 600; font-variant-numeric: tabular-nums; }
 .limits #others p { margin-top: 6px; }
 .limits #forecast, .limits .error { margin-top: 8px; }

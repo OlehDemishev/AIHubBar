@@ -412,6 +412,7 @@
  "С нуля": "Od zera",
  "Самая затратная сессия: %@ — %lld %% (%@ токенов)": "Najdroższa sesja: %@ — %lld %% (%@ tokenów)",
  "Самый активный день": "Najbardziej aktywny dzień",
+ "Сбой у Anthropic: %@": "Awaria w Anthropic: %@",
  "Свернуть": "Zwiń",
  "Свободно %@.": "Wolne: %@.",
  "Свои кнопки: скрипт в фоне или в Терминале, ссылка, файл, папка или программа.": "Własne przyciski: skrypt w tle lub w Terminalu, link, plik, folder albo program.",
