@@ -227,6 +227,7 @@
  "Команды проектов": "Polecenia projektów",
  "Компьютер засыпает как обычно": "Komputer usypia jak zwykle",
  "Компьютер не засыпает, пока работает Claude, на время, при подключённом питании или мониторе, пока открыты выбранные приложения.": "Komputer nie usypia, gdy Claude pracuje, przez wybrany czas, przy zasilaniu lub monitorze albo gdy otwarte są wybrane aplikacje.",
+ "Контекст почти заполнен — %@": "Kontekst prawie pełny — %@",
  "Контент-план": "Plan treści",
  "Корзина": "Kosz",
  "Корзина очищается только после подтверждения.": "Kosz jest opróżniany dopiero po potwierdzeniu.",
@@ -262,6 +263,7 @@
  "Напишите задачу своими словами — AI выполнит её над файлом": "Opisz zadanie własnymi słowami — AI wykona je na pliku",
  "Напоминания календаря": "Przypomnienia kalendarza",
  "Напоминать": "Przypominaj",
+ "Насколько заполнен контекст сессии (по журналу Claude Code). Ближе к 100 %, Claude сжимает историю и часть деталей теряется.": "Jak bardzo zapełniony jest kontekst sesji (wg dziennika Claude Code). Blisko 100%, Claude kompresuje historię i część szczegółów ginie.",
  "Настройки быстрого запроса": "Ustawienia szybkiego zapytania",
  "Настройки импортированы: %lld профиль(ов).": "Zaimportowano ustawienia, profile: %lld.",
  "Настройки профиля пропадут. Папки проектов останутся на месте.": "Ustawienia profilu zostaną utracone. Foldery projektów pozostaną na miejscu.",
@@ -596,6 +598,7 @@
  "ключ OpenRouter": "klucz OpenRouter",
  "ключ или вход не подходят (HTTP %lld)": "klucz lub logowanie nie pasują (HTTP %lld)",
  "команда, например: winget upgrade --all": "polecenie, np. winget upgrade --all",
+ "контекст %lld %%": "kontekst %lld%%",
  "кредиты": "kredyty",
  "лимит": "limit",
  "лимиты ещё не загружены": "limity jeszcze nie wczytane",
@@ -661,5 +664,6 @@
  "через %lld ч %lld мин": "za %lld godz. %lld min",
  "черновик": "szkic",
  "читает": "czyta",
- "… и ещё %lld": "… i jeszcze %lld"
+ "… и ещё %lld": "… i jeszcze %lld",
+ "≈ %lld %%: скоро Claude сожмёт историю. Если задача большая — лучше начать новую сессию с кратким итогом.": "≈ %lld%%: Claude wkrótce skompresuje historię. Przy dużym zadaniu lepiej zacząć nową sesję z krótkim podsumowaniem."
 }

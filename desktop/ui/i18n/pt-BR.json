@@ -227,6 +227,7 @@
  "Команды проектов": "Comandos dos projetos",
  "Компьютер засыпает как обычно": "O computador dorme como sempre",
  "Компьютер не засыпает, пока работает Claude, на время, при подключённом питании или мониторе, пока открыты выбранные приложения.": "O computador não dorme enquanto o Claude trabalha, por um tempo, na tomada ou com monitor, ou com apps escolhidos abertos.",
+ "Контекст почти заполнен — %@": "Contexto quase cheio — %@",
  "Контент-план": "Plano de conteúdo",
  "Корзина": "Lixo",
  "Корзина очищается только после подтверждения.": "A lixeira só é esvaziada após confirmar.",
@@ -262,6 +263,7 @@
  "Напишите задачу своими словами — AI выполнит её над файлом": "Descreva a tarefa com suas palavras — a IA a executa no arquivo",
  "Напоминания календаря": "Lembretes do calendário",
  "Напоминать": "Lembrar",
+ "Насколько заполнен контекст сессии (по журналу Claude Code). Ближе к 100 %, Claude сжимает историю и часть деталей теряется.": "Quão cheio está o contexto da sessão (pelo registro do Claude Code). Perto de 100%, o Claude compacta o histórico e perde detalhes.",
  "Настройки быстрого запроса": "Ajustes do pedido rápido",
  "Настройки импортированы: %lld профиль(ов).": "Ajustes importados: %lld perfil(is).",
  "Настройки профиля пропадут. Папки проектов останутся на месте.": "Os ajustes do perfil serão perdidos. As pastas de projetos continuam onde estão.",
@@ -596,6 +598,7 @@
  "ключ OpenRouter": "uma chave do OpenRouter",
  "ключ или вход не подходят (HTTP %lld)": "a chave ou o login não funcionam (HTTP %lld)",
  "команда, например: winget upgrade --all": "um comando, ex.: winget upgrade --all",
+ "контекст %lld %%": "contexto %lld%%",
  "кредиты": "créditos",
  "лимит": "limite",
  "лимиты ещё не загружены": "limites ainda não carregados",
@@ -661,5 +664,6 @@
  "через %lld ч %lld мин": "em %lld h %lld min",
  "черновик": "rascunho",
  "читает": "lê",
- "… и ещё %lld": "… e mais %lld"
+ "… и ещё %lld": "… e mais %lld",
+ "≈ %lld %%: скоро Claude сожмёт историю. Если задача большая — лучше начать новую сессию с кратким итогом.": "≈ %lld%%: o Claude logo vai compactar o histórico. Se a tarefa for grande, é melhor começar uma nova sessão com um resumo."
 }

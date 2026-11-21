@@ -5,6 +5,7 @@
 **Updated:** 2026-11-21
 
 **Now:**
+- 2026-11-21: Windows — «контекст N %» on a session's row once its context is 70 % full, and a notification at 90 % (branch `feat/desktop-context-fullness`; seen live on a real session at 76 %)
 - 2026-11-21: Mac — a second live pass over the held batch tasks and «Версии» (isolated copy, the «Panel debug» window); its one fix for 0.12.0 is merged: «Журнал» no longer says a task's answer twice (PR 518)
 - 2026-11-21: Windows — «Недавно завершённые» in the panel: a finished Claude Code session is continued in a terminal with `claude --resume` by a click (branch `feat/desktop-resume-sessions`; seen live with a sample record — the terminal opened with the command)
 - 2026-11-21: Windows — «Сбой у Anthropic: …» in the panel when the limits fail and Anthropic's status page reports trouble, with «Подробнее» to the page (branch `feat/desktop-outage`; the real page asked once — all well; the line itself not seen)
@@ -171,6 +172,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-21 — Windows: how full a session's context is (branch `feat/desktop-context-fullness`)
+
+Done: on Oleh's «дальше». The Mac's `ContextUsage`: hooks don't say how full the context is, so it is read from the end of the session's journal (`transcript_path` of the hook's file, the last 512 KB) — the last main-thread assistant message's input, cache writes and cache reads against the window: 200 000 tokens, or 1 000 000 when the model's name has «[1m]» or the context is already past 200 000. Subagents' lines are skipped. From 70 % the session's row in the panel says «контекст N %» in orange, from 90 % in red, with the Mac's hint; at 90 % one notification per session: «Контекст почти заполнен — <project>». `core/src/token_usage.rs`, `app/src/sessions.rs`, `ui/panel.html`. All four texts are the Mac's.
+Checked: `python scripts/strings.py --check` (667 texts), `cargo test --workspace` on Windows (the three windows, a subagent's line, the last line of a journal). Live on the laptop, a build from the branch: this very session's row showed «контекст 76 %» in orange next to what it was doing.
+Left: the red state and the notification at 90 % were not seen. Codex's and Copilot's sessions have no such figure (the Mac reads theirs from their own records). The hint was not hovered. Seen in Russian only.
 
 ## 2026-11-21 — Windows: «Недавно завершённые» (branch `feat/desktop-resume-sessions`)
 
