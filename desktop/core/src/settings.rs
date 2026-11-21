@@ -40,6 +40,8 @@ pub struct Settings {
     pub updates_daily: bool,
     /// «Продлевать вход Claude Code сам» (the Mac's `renewClaudeLogin`, on by default there too).
     pub renew_claude_login: bool,
+    /// «Подписка, $ в месяц» of «История расхода» (the Mac's `claudePlanPrice`); 0 — not said.
+    pub claude_plan_price: f64,
     /// The chat the Telegram bot writes to (the Mac's `telegramChatID`); the token is among the API keys.
     pub telegram_chat: Option<String>,
     /// Events that don't go to Telegram (`telegram::EVENTS`); all go by default.
@@ -87,6 +89,7 @@ impl Default for Settings {
             resource_alerts: true,
             updates_daily: true,
             renew_claude_login: true,
+            claude_plan_price: 0.0,
             telegram_chat: None,
             telegram_off: Vec::new(),
             telegram_answers: false,
@@ -148,6 +151,7 @@ impl Settings {
             keep_awake_manual: value.get("keep_awake_manual").and_then(Value::as_f64),
             resource_alerts: value.get("resource_alerts").and_then(Value::as_bool).unwrap_or(defaults.resource_alerts),
             updates_daily: value.get("updates_daily").and_then(Value::as_bool).unwrap_or(defaults.updates_daily),
+            claude_plan_price: value.get("claude_plan_price").and_then(Value::as_f64).filter(|price| price.is_finite() && *price > 0.0).unwrap_or(0.0),
             renew_claude_login: value.get("renew_claude_login").and_then(Value::as_bool).unwrap_or(defaults.renew_claude_login),
             telegram_answers: value.get("telegram_answers").and_then(Value::as_bool).unwrap_or(false),
             telegram_requests: value.get("telegram_requests").and_then(Value::as_bool).unwrap_or(false),
