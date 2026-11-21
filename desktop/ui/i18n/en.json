@@ -523,6 +523,7 @@
  "Уже занято в AI Hub Bar: %@. У команды оно не сработает.": "Already used in AI Hub Bar: %@. It won’t work for the command.",
  "Уже у команды «%@» — сработает только у неё.": "Already set for “%@” — only that command gets it.",
  "Указать цену…": "Set a Price…",
+ "Упирался в лимит: %lld": "Limit hits: %lld",
  "Установить hooks": "Install hooks",
  "Установить и перезапустить": "Install and Restart",
  "Установлена последняя версия": "You have the latest version",

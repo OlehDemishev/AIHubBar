@@ -523,6 +523,7 @@
  "Уже занято в AI Hub Bar: %@. У команды оно не сработает.": "Già usata in AI Hub Bar: %@. Per il comando non funzionerà.",
  "Уже у команды «%@» — сработает только у неё.": "Già assegnata a «%@» — funziona solo per quel comando.",
  "Указать цену…": "Imposta un prezzo…",
+ "Упирался в лимит: %lld": "Limite raggiunto: %lld",
  "Установить hooks": "Installa hook",
  "Установить и перезапустить": "Installa e riavvia",
  "Установлена последняя версия": "Hai la versione più recente",

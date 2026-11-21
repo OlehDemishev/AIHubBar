@@ -56,6 +56,18 @@ fn history_file() -> std::path::PathBuf {
     paths::data_dir().join("usage-history.json")
 }
 
+/// When a limit reached 100 %, kept 30 days (the Mac keeps the same in its settings).
+fn hits_file() -> std::path::PathBuf {
+    paths::data_dir().join("limit-hits.json")
+}
+
+/// How many times a Claude limit reached 100 % today.
+pub fn hits_today() -> usize {
+    let Some(midnight) = chrono::Local::now().date_naive().and_hms_opt(0, 0, 0).and_then(|t| t.and_local_timezone(chrono::Local).earliest()) else { return 0 };
+    let hits = std::fs::read_to_string(hits_file()).map(|text| usage::parse_hits(&text)).unwrap_or_default();
+    hits.iter().filter(|(_, date)| *date >= midnight.with_timezone(&Utc)).count()
+}
+
 impl Limits {
     pub fn new() -> Self {
         let notified = std::fs::read_to_string(notified_file())
@@ -122,6 +134,17 @@ impl Limits {
                     state.error = None;
                     state.outage = None;
                     let before = state.snapshot.as_ref().and_then(|s| s.session()).map(|w| w.utilization);
+                    let week_before = state.snapshot.as_ref().and_then(|s| s.week()).map(|w| w.utilization);
+                    let fresh = (snapshot.session().map(|w| w.utilization), snapshot.week().map(|w| w.utilization));
+                    if fresh.0.is_some_and(|v| v >= 100.0) || fresh.1.is_some_and(|v| v >= 100.0) {
+                        let old = std::fs::read_to_string(hits_file()).map(|text| usage::parse_hits(&text)).unwrap_or_default();
+                        let hits = usage::noting_hit(&usage::noting_hit(&old, "five_hour", before, fresh.0, now), "seven_day", week_before, fresh.1, now);
+                        if hits != old {
+                            if let Err(error) = std::fs::write(hits_file(), usage::hits_json(&hits)) {
+                                eprintln!("limit hits not saved: {error}");
+                            }
+                        }
+                    }
                     if let (Some(before), Some(now_value)) = (before, snapshot.session().map(|w| w.utilization)) {
                         if now_value > before {
                             state.last_growth = Some(now);
