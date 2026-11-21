@@ -158,6 +158,17 @@ struct AIHubBarApp: App {
         .defaultSize(width: 960, height: 720)
         .handlesExternalEvents(matching: [])
 
+        #if DEBUG
+        // The panel's content in a plain window (`--app-command debug-panel`): unlike the menu bar panel it opens
+        // without a click, does not take the keyboard, can be moved aside and is seen by `screencapture -l`.
+        Window(Text(verbatim: "Panel debug"), id: WindowID.debugPanel.rawValue) {
+            ScrollView { MenuPanelView().appEnvironment(app) }
+                .preferredColorScheme(app.settings.panelTheme.colorScheme)
+        }
+        .defaultSize(width: 460, height: 900)
+        .handlesExternalEvents(matching: [])
+        #endif
+
         Settings {
             SettingsView()
                 .appEnvironment(app)

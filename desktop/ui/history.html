@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>AI Hub Bar</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="history-window">
+  <header class="history-toolbar">
+    <span class="segmented" id="periods" role="group" data-t-title="Период">
+      <button data-period="7" data-t="7 дней"></button>
+      <button data-period="30" data-t="30 дней"></button>
+      <button data-period="90" data-t="90 дней"></button>
+    </span>
+    <span class="spacer"></span>
+    <button id="export" data-t="Экспорт CSV…"></button>
+  </header>
+  <p class="secondary" id="empty" hidden></p>
+  <div id="content" hidden>
+    <div class="figures">
+      <div class="figure"><span class="secondary" data-t="Всего токенов"></span><strong id="total"></strong></div>
+      <div class="figure"><span class="secondary" data-t="В среднем за рабочий день"></span><strong id="average"></strong></div>
+      <div class="figure" id="busiest-box"><span class="secondary" data-t="Самый активный день"></span><strong id="busiest"></strong></div>
+      <div class="figure" id="cost-box">
+        <span class="secondary" data-t="По цене API, примерно"></span><strong id="cost"></strong>
+        <label class="plan"><span class="secondary" data-t="Подписка, $ в месяц"></span> <input type="number" id="plan" min="0" step="1" placeholder="0"></label>
+        <span id="verdict" data-t-title="Расход за период по вашей цене API, приведённый к 30 дням, против цены подписки"></span>
+      </div>
+      <div class="figure" id="price-box" hidden>
+        <span class="secondary" data-t="Стоимость"></span>
+        <button class="link" id="set-price" data-t="Указать цену…" data-t-title="Цена токенов Anthropic: без неё стоимость не считается"></button>
+      </div>
+    </div>
+    <div class="chart" id="chart" role="img"></div>
+  </div>
+  <p class="secondary history-note" data-t="Оценка по журналам Claude Code на этом компьютере: токены без чтения кэша. Лимиты считает сама Anthropic, и чаты на claude.ai сюда не попадают."></p>
+  <p class="error" id="error" hidden></p>
+
+  <script type="module">
+    import { loadTexts, invoke, t } from "./app.js";
+    const ui = await loadTexts();
+    const lang = ui.lang || "ru";
+    document.getElementById("chart").setAttribute("aria-label", t("График расхода токенов по дням"));
+
+    const id = (name) => document.getElementById(name);
+    const dayLabel = (day) => new Intl.DateTimeFormat(lang, { day: "numeric", month: "short" }).format(new Date(day + "T12:00:00"));
+    let period = 30;
+
+    function show(view) {
+      for (const button of id("periods").children) button.classList.toggle("chosen", Number(button.dataset.period) === period);
+      const any = view.days.some((day) => day.tokens > 0);
+      id("content").hidden = !any;
+      id("empty").hidden = any;
+      id("empty").textContent = t("За этот период расхода нет");
+      id("export").disabled = !any;
+      if (!any) return;
+      id("total").textContent = view.total;
+      id("average").textContent = view.average;
+      id("busiest-box").hidden = !view.busiest;
+      id("busiest").textContent = view.busiest ? dayLabel(view.busiest) : "";
+      id("cost-box").hidden = view.cost == null;
+      id("price-box").hidden = view.cost != null;
+      if (view.cost != null) {
+        id("cost").textContent = new Intl.NumberFormat(lang, { style: "currency", currency: "USD" }).format(view.cost);
+        if (document.activeElement !== id("plan")) id("plan").value = view.planPrice > 0 ? view.planPrice : "";
+        id("verdict").textContent = view.verdict ?? "";
+        id("verdict").className = view.verdictGood ? "secondary" : "warning";
+      }
+      const top = Math.max(...view.days.map((day) => day.tokens), 1);
+      id("chart").replaceChildren(...view.days.map((day, index) => {
+        const column = document.createElement("div");
+        column.className = "column";
+        column.title = `${dayLabel(day.day)} · ${day.text}`;
+        const bar = document.createElement("div");
+        bar.className = "bar";
+        bar.style.height = `${Math.max(day.tokens / top * 100, day.tokens > 0 ? 1 : 0)}%`;
+        const label = document.createElement("span");
+        label.className = "secondary";
+        // A date under every bar of a week, under every fifth of a month, under every fifteenth of three.
+        const every = period === 7 ? 1 : period === 30 ? 5 : 15;
+        label.textContent = (view.days.length - 1 - index) % every === 0 ? dayLabel(day.day) : "";
+        column.append(bar, label);
+        return column;
+      }));
+    }
+
+    async function load() {
+      id("error").hidden = true;
+      if (id("content").hidden) {
+        id("empty").hidden = false;
+        id("empty").textContent = t("Считаю по журналам Claude Code…");
+      }
+      try {
+        show(await invoke("history_view", { period }));
+      } catch (error) {
+        id("error").hidden = false;
+        id("error").textContent = String(error);
+      }
+    }
+
+    for (const button of id("periods").children) button.onclick = () => { period = Number(button.dataset.period); load(); };
+    id("plan").onchange = async () => show(await invoke("set_plan_price", { price: Number(id("plan").value) || 0, period }));
+    id("set-price").onclick = () => invoke("open_settings");
+    id("export").onclick = async () => {
+      const problem = await invoke("export_history", { period });
+      id("error").hidden = !problem;
+      id("error").textContent = problem ?? "";
+    };
+    window.addEventListener("focus", load);
+    await load();
+  </script>
+</body>
+</html>
