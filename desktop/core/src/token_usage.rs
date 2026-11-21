@@ -204,6 +204,64 @@ pub fn tokens_text(tokens: u64, s: &Strings) -> String {
     }
 }
 
+// MARK: - «Сегодня» (the Mac's `DaySummary`)
+
+/// What the agents did today, for the «История расхода» window.
+#[derive(Debug, Clone, PartialEq, Default)]
+pub struct DayInput {
+    pub session_percent: Option<f64>,
+    pub week_percent: Option<f64>,
+    /// Today's tokens by project.
+    pub breakdown: Breakdown,
+    /// Background runs that started today: how it ended (None while it runs), «Shop · Codex», the task.
+    pub runs: Vec<(Option<bool>, String, String)>,
+    /// «Codex — 30 дн 3 %», a line per other service with limits to show.
+    pub others: Vec<String>,
+    /// Today's tokens at the person's own API price, dollars; None without a price.
+    pub cost: Option<f64>,
+}
+
+/// The lines and whether each is a heading.
+pub fn day_lines(input: &DayInput, s: &Strings) -> Vec<(String, bool)> {
+    let percent = |value: f64| format!("{} %", value.round() as i64);
+    let mut lines = Vec::new();
+    let limits: Vec<String> = [input.session_percent.map(|v| s.format("Сессия: %@", &[&percent(v)])), input.week_percent.map(|v| s.format("Неделя: %@", &[&percent(v)]))].into_iter().flatten().collect();
+    if !limits.is_empty() {
+        lines.push((format!("Claude — {}", limits.join(", ")), false));
+    }
+    if let Some(cost) = input.cost.filter(|cost| *cost >= 0.01) {
+        lines.push((s.format("По цене API, примерно: %@", &[&format!("${cost:.2}")]), false));
+    }
+    if !input.breakdown.projects.is_empty() {
+        lines.push((s.t("По проектам").to_owned(), true));
+        for row in input.breakdown.projects.iter().take(5) {
+            lines.push((format!("• {} — {} % ({})", row.name, (row.share * 100.0).round() as i64, tokens_text(row.tokens, s)), false));
+        }
+        if input.breakdown.projects.len() > 5 {
+            lines.push((s.format("и ещё %lld", &[&(input.breakdown.projects.len() - 5).to_string()]), false));
+        }
+    }
+    if !input.runs.is_empty() {
+        lines.push((s.t("Фоновые задачи").to_owned(), true));
+        for (outcome, project, task) in input.runs.iter().take(8) {
+            let mark = match outcome {
+                Some(true) => "✅",
+                Some(false) => "❌",
+                None => "⏳",
+            };
+            lines.push((format!("{mark} {project}: {task}"), false));
+        }
+        if input.runs.len() > 8 {
+            lines.push((s.format("и ещё %lld", &[&(input.runs.len() - 8).to_string()]), false));
+        }
+    }
+    if !input.others.is_empty() {
+        lines.push((s.t("Другие AI").to_owned(), true));
+        lines.extend(input.others.iter().map(|line| (format!("• {line}"), false)));
+    }
+    lines
+}
+
 // MARK: - How full a session's context is (the Mac's `ContextUsage`)
 
 /// From this part of the window the row says «контекст N %».
@@ -511,6 +569,38 @@ mod tests {
         let top = breakdown.top_session.unwrap();
         assert_eq!((top.name.as_str(), top.tokens), ("shop", 200));
         assert_eq!(Breakdown::make(&records, now, root, "Другое"), Breakdown::default());
+    }
+
+    #[test]
+    fn today_in_lines() {
+        let s = Strings::default();
+        let input = DayInput {
+            session_percent: Some(41.6),
+            week_percent: Some(30.0),
+            breakdown: Breakdown { projects: vec![Row { name: "shop".into(), tokens: 1_200_000, share: 0.8 }, Row { name: "blog".into(), tokens: 300_000, share: 0.2 }], top_session: None, total_tokens: 1_500_000 },
+            runs: vec![(Some(true), "shop".into(), "почини корзину".into()), (None, "blog · Codex".into(), "напиши пост".into()), (Some(false), "shop".into(), "обнови зависимости".into())],
+            others: vec!["Codex — 30 дн 3 %".into()],
+            cost: Some(12.345),
+        };
+        let lines = day_lines(&input, &s);
+        assert_eq!(
+            lines.iter().map(|(text, heading)| format!("{}{text}", if *heading { "# " } else { "" })).collect::<Vec<_>>(),
+            [
+                "Claude — Сессия: 42 %, Неделя: 30 %",
+                "По цене API, примерно: $12.35",
+                "# По проектам",
+                "• shop — 80 % (1,2 млн)",
+                "• blog — 20 % (300 тыс.)",
+                "# Фоновые задачи",
+                "✅ shop: почини корзину",
+                "⏳ blog · Codex: напиши пост",
+                "❌ shop: обнови зависимости",
+                "# Другие AI",
+                "• Codex — 30 дн 3 %",
+            ]
+        );
+        assert!(day_lines(&DayInput::default(), &s).is_empty());
+        assert_eq!(day_lines(&DayInput { cost: Some(0.004), week_percent: Some(5.0), ..DayInput::default() }, &s), [("Claude — Неделя: 5 %".to_owned(), false)]);
     }
 
     #[test]

@@ -5,6 +5,7 @@
 **Updated:** 2026-11-21
 
 **Now:**
+- 2026-11-21: Windows — «Сегодня» on top of the «История расхода» window: Claude's limits, today's spend by project, today's background runs, the other services (branch `feat/desktop-today`; seen live)
 - 2026-11-21: Windows — «контекст N %» on a session's row once its context is 70 % full, and a notification at 90 % (branch `feat/desktop-context-fullness`; seen live on a real session at 76 %)
 - 2026-11-21: Mac — a second live pass over the held batch tasks and «Версии» (isolated copy, the «Panel debug» window); its one fix for 0.12.0 is merged: «Журнал» no longer says a task's answer twice (PR 518)
 - 2026-11-21: Windows — «Недавно завершённые» in the panel: a finished Claude Code session is continued in a terminal with `claude --resume` by a click (branch `feat/desktop-resume-sessions`; seen live with a sample record — the terminal opened with the command)
@@ -126,7 +127,7 @@
 - promotion (docs/LAUNCH.md): r/ClaudeAI, the lists, r/macapps, Show HN, Product Hunt, Homebrew
 - right after 0.12.0 is published: merge PR 506 (`feat/versions-module`), then PR 508 (`feat/versions-card`) and PR 510 (`feat/batch-tasks`), each retargeted to `main`, and PR 520; all four contain `main` as of 2026-11-21 and are green
 - batch tasks and «Версии», left to see live (the rest was seen 2026-11-21 in an isolated copy): a batch with a typed text, a model by API, the wait near the limit, the summary and «Что изменилось» as a banner and in Telegram
-- Windows: left on the laptop — notifications and their buttons (the agent can't see a toast: its tool hides other programs' windows); the Mac's background runs have the same rules — try one build in a subfolder there; stage 7: the installer and updates are done (0.1.2), signing waits for SignPath (the update 0.1.2 → 0.1.3 from GitHub was seen on the laptop); Telegram on Windows (Oleh's choice 2026-11-20): stages 1 and 2 are done (the reader, 🏠, 🤖, permission requests), neither tried with a real bot; ⏳ too; next tasks from the chat (SPEC-telegram stage 3) — only after a real bot has been tried on the laptop: a chat that can start an agent must first be seen refusing a stranger; the limits stage (SPEC-windows §9.2) is done but the «Сегодня» summary
+- Windows: left on the laptop — notifications and their buttons (the agent can't see a toast: its tool hides other programs' windows); the Mac's background runs have the same rules — try one build in a subfolder there; stage 7: the installer and updates are done (0.1.2), signing waits for SignPath (the update 0.1.2 → 0.1.3 from GitHub was seen on the laptop); Telegram on Windows (Oleh's choice 2026-11-20): stages 1 and 2 are done (the reader, 🏠, 🤖, permission requests), neither tried with a real bot; ⏳ too; next tasks from the chat (SPEC-telegram stage 3) — only after a real bot has been tried on the laptop: a chat that can start an agent must first be seen refusing a stranger; the limits stage (SPEC-windows §9.2) is done (the day summary is shown, not sent to Telegram)
 
 **Needs Oleh:**
 - Windows laptop, Telegram (0.1.6 is installed; nothing of it was tried with a real bot): 1) in @BotFather make a new bot — the Mac mini reads your present one; 2) Settings → «Telegram»: paste the token, «Привязать чат», «Start» in Telegram, «Проверить»; 3) start a small background task and see its result come to the chat; 4) «Этот компьютер отвечает боту» on, `/menu` in the chat — 🏠, then 🤖 and ⏳; 5) «Запросы разрешений в этот бот» on, start `claude --permission-mode default` in a project, ask it to create a file and answer ✅ from the phone. Say what did not work
@@ -172,6 +173,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-21 — Windows: «Сегодня» in the usage history window (branch `feat/desktop-today`)
+
+Done: on Oleh's «дальше». The Mac's `DaySummary` lines on top of «История расхода»: «Claude — Сессия: N %, Неделя: N %», the day's cost at the person's API price when one is set, «По проектам» with the five heaviest projects of the day, «Фоновые задачи» with the runs that started today (✅ / ⏳ / ❌, «· Codex» for Codex's), «Другие AI» with a line per service that has limits to show. `core/src/token_usage.rs` `day_lines`, `app/src/history.rs`, `ui/history.html`. All eight texts are the Mac's.
+Checked: `python scripts/strings.py --check` (672 texts), `cargo test --workspace` on Windows (the lines in order, an empty day, a cost under a cent left out). Live on the laptop, a build from the branch: the window's «Сегодня» said «Claude — Сессия: 43 %, Неделя: 41 %», «• AIHubBar — 100 % (823 тыс.)», «• Codex — 30 дн 3 %», «• GitHub Copilot — чат 1 %, дополнения 0 %»; the panel's row of this session said «контекст 78 %».
+Left: no background run started today, so that part was not seen; no price is set here, so no cost line. «Упирался в лимит» is not shown — the Windows version does not count limit hits. The day summary is not sent to Telegram (the Mac's «Итог дня»). Seen in Russian only.
 
 ## 2026-11-21 — Windows: how full a session's context is (branch `feat/desktop-context-fullness`)
 
