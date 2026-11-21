@@ -131,6 +131,7 @@ fn view(app: &AppHandle, days: &[UsageDay], period: i64) -> HistoryView {
         runs,
         others,
         cost: price.and_then(|price| days.iter().find(|day| day.day == today_key).map(|day| day.cost(price))),
+        hits: crate::limits::hits_today(),
     };
     HistoryView {
         today: token_usage::day_lines(&input, &texts).into_iter().map(|(text, heading)| TodayLine { text, heading }).collect(),

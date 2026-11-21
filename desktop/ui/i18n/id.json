@@ -523,6 +523,7 @@
  "Уже занято в AI Hub Bar: %@. У команды оно не сработает.": "Sudah dipakai di AI Hub Bar: %@. Tidak akan berfungsi untuk perintah ini.",
  "Уже у команды «%@» — сработает только у неё.": "Sudah dipakai “%@” — hanya perintah itu yang mendapatkannya.",
  "Указать цену…": "Tetapkan harga…",
+ "Упирался в лимит: %lld": "Mencapai batas: %lld kali",
  "Установить hooks": "Pasang hook",
  "Установить и перезапустить": "Pasang dan Mulai Ulang",
  "Установлена последняя версия": "Versi terbaru sudah terpasang",

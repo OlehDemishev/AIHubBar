@@ -5,6 +5,7 @@
 **Updated:** 2026-11-21
 
 **Now:**
+- 2026-11-21: Windows — limit hits are counted, «Упирался в лимит: N» in «Сегодня» (branch `feat/desktop-limit-hits`; the line seen live from a made-up record)
 - 2026-11-21: Windows 0.1.7 published as an unsigned pre-release (tag `desktop-v0.1.7`) on Oleh's «Да, выпускай»: outages, «Недавно завершённые», context fullness, «Сегодня»; the laptop updated itself from 0.1.6; «latest» stays the Mac's v0.11.0
 - 2026-11-21: Windows — «Сегодня» on top of the «История расхода» window: Claude's limits, today's spend by project, today's background runs, the other services (branch `feat/desktop-today`; seen live)
 - 2026-11-21: Mac — the «Telegram» tile's hint no longer says «включено» and «выключены» at once (branch `fix/telegram-tile-hint`, a fix for 0.12.0), found in a live look at the card, the bell, the tile and a Codex approval
@@ -175,6 +176,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-21 — Windows: limit hits are counted (branch `feat/desktop-limit-hits`)
+
+Done: on Oleh's «дальше». The Mac's `LimitHits`: when Claude's session or week reaches 100 %, the moment is written to `limit-hits.json` in the app's folder in the Mac's form («five_hour|<seconds>»), kept 30 days. «Сегодня» in the «История расхода» window says «Упирался в лимит: N» for today's hits, where the Mac says it. One difference from the Mac: a window is counted once while it lasts (five hours, seven days), so a restart with the limit still at 100 % is not a second hit. `core/src/usage.rs` (`noting_hit`, `hits_json`, `parse_hits`), `core/src/token_usage.rs`, `app/src/limits.rs`, `app/src/history.rs`. The text is the Mac's.
+Checked: `python scripts/strings.py --check` (673 texts), `cargo test --workspace` on Windows (a hit, still at the limit, a restart at the limit, the next session, the week apart, 30 days, the Mac's form with fractions). Live on the laptop, a build from the branch, with a made-up file of one hit ten minutes old and one forty days old: «Сегодня» said «Claude — Сессия: 8 %, Неделя: 43 %», «Упирался в лимит: 1». The file was removed after.
+Left: a real hit was not seen — no limit reached 100 % here, so the writing of the file is covered by tests only. The week's summary for Telegram («Упирался в лимит: сессия — N, неделя — N») is not ported. Seen in Russian only.
 
 ## 2026-11-21 — Mac: what goes into 1.0 (branch `chore/status-1.0-scope`)
 

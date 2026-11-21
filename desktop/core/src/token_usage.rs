@@ -219,6 +219,8 @@ pub struct DayInput {
     pub others: Vec<String>,
     /// Today's tokens at the person's own API price, dollars; None without a price.
     pub cost: Option<f64>,
+    /// How many times a Claude limit reached 100 % today.
+    pub hits: usize,
 }
 
 /// The lines and whether each is a heading.
@@ -231,6 +233,9 @@ pub fn day_lines(input: &DayInput, s: &Strings) -> Vec<(String, bool)> {
     }
     if let Some(cost) = input.cost.filter(|cost| *cost >= 0.01) {
         lines.push((s.format("По цене API, примерно: %@", &[&format!("${cost:.2}")]), false));
+    }
+    if input.hits > 0 {
+        lines.push((s.format("Упирался в лимит: %lld", &[&input.hits.to_string()]), false));
     }
     if !input.breakdown.projects.is_empty() {
         lines.push((s.t("По проектам").to_owned(), true));
@@ -581,6 +586,7 @@ mod tests {
             runs: vec![(Some(true), "shop".into(), "почини корзину".into()), (None, "blog · Codex".into(), "напиши пост".into()), (Some(false), "shop".into(), "обнови зависимости".into())],
             others: vec!["Codex — 30 дн 3 %".into()],
             cost: Some(12.345),
+            hits: 2,
         };
         let lines = day_lines(&input, &s);
         assert_eq!(
@@ -588,6 +594,7 @@ mod tests {
             [
                 "Claude — Сессия: 42 %, Неделя: 30 %",
                 "По цене API, примерно: $12.35",
+                "Упирался в лимит: 2",
                 "# По проектам",
                 "• shop — 80 % (1,2 млн)",
                 "• blog — 20 % (300 тыс.)",

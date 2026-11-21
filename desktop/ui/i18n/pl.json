@@ -523,6 +523,7 @@
  "Уже занято в AI Hub Bar: %@. У команды оно не сработает.": "Już zajęty w AI Hub Bar: %@. Dla polecenia nie zadziała.",
  "Уже у команды «%@» — сработает только у неё.": "Już ma go „%@” — zadziała tylko tam.",
  "Указать цену…": "Podaj cenę…",
+ "Упирался в лимит: %lld": "Dojścia do limitu: %lld",
  "Установить hooks": "Zainstaluj hooki",
  "Установить и перезапустить": "Zainstaluj i uruchom ponownie",
  "Установлена последняя версия": "Masz najnowszą wersję",
