@@ -114,6 +114,8 @@ enum StreamJSON {
             case "result":
                 let isError = event["is_error"] as? Bool ?? false
                 let text = (event["result"] as? String) ?? (event["subtype"] as? String ?? "")
+                // Claude Code's result repeats its closing messages word for word: the log shows them once, as the result.
+                while !isError, let last = entries.last, last.kind == .text, text.contains(last.text) { entries.removeLast() }
                 entries.append(Entry(id: entries.count, kind: isError ? .error : .result, text: text))
             default:
                 if let (kind, text) = CodexExec.entry(event) { entries.append(Entry(id: entries.count, kind: kind, text: text)) }
