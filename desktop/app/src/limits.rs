@@ -238,8 +238,23 @@ impl Limits {
             ("today", texts.t("Сегодня"), midnight),
             ("week", texts.t("Неделя"), snapshot.and_then(|s| s.week()).and_then(|w| w.resets_at).map(|at| at - Duration::days(7)).unwrap_or(now - Duration::days(7))),
         ];
+        let week = snapshot.and_then(|s| s.week()).and_then(|w| Some((w.utilization, w.resets_at?))).map(|(used, resets_at)| {
+            let week = token_usage::WeekUsage::make(records, used, resets_at, now);
+            WeekView {
+                days: week.days.iter().map(|day| WeekDayView { day: day.day.clone(), percent: day.percent, today: day.is_today }).collect(),
+                forecast: match week.forecast {
+                    token_usage::WeekForecast::RunsOutAt(at) => {
+                        let local = at.with_timezone(&chrono::Local);
+                        let when = if (at - now).num_hours() < 20 { local.format("%H:%M").to_string() } else { texts.weekday_time(&local) };
+                        Some(texts.format("неделя кончится %@ при таком темпе", &[&when]))
+                    }
+                    _ => None,
+                },
+            }
+        });
         let other = texts.t("Другое");
         SpendView {
+            week,
             periods: starts
                 .into_iter()
                 .map(|(id, title, since)| {
@@ -354,6 +369,25 @@ pub struct SpendPeriod {
 #[serde(rename_all = "camelCase")]
 pub struct SpendView {
     periods: Vec<SpendPeriod>,
+    /// The week's use by day; None until the week's limit and its reset are known.
+    week: Option<WeekView>,
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct WeekDayView {
+    /// `yyyy-MM-dd`.
+    day: String,
+    percent: f64,
+    today: bool,
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct WeekView {
+    days: Vec<WeekDayView>,
+    /// «неделя кончится Чт 14:30 при таком темпе», when it would end before its reset.
+    forecast: Option<String>,
 }
 
 /// «Расход по проектам»: counted off the panel's thread — the first read goes through a week of journals.
