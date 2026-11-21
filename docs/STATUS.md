@@ -171,6 +171,12 @@
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
 
+## 2026-11-21 — The run's log said the answer twice (branch `fix/run-log-repeat`)
+
+Done: «Журнал» of a finished Claude Code task showed its closing messages and then the same text again as the result; now once, as the result (`StreamJSON.entries`; the bot's log screen and the mini app read the same entries). An error keeps what was said before it.
+Checked: `scripts/check.sh`; a new test on the entries. Found in a live pass over the held batch tasks (PR 510) in an isolated copy through the «Panel debug» window, on Oleh's «посмотри если надо»: «На ночь» and «После сброса лимита» put a row «начнётся в 1:00» / «начнётся в 20:01» (two minutes after the session's reset); the night batch survived a restart and started when its hour had come; «Отменить» on a running batch of three — the running project finished, the other two were dropped, the summary said 1 of 1; a command that asks for text shows its field with «Спрашивается один раз на весь пакет» and the start buttons stay off while it is empty; «Журнал» → «Что изменилось» opens «Версии» on the version taken before the run, the result file as «появился позже».
+Left: not seen — a batch with a typed text (the field needs the keyboard), a model by API (no key in the copy), the wait near the limit, the summary as a banner and in Telegram (the copy has neither permission nor a bot), «Что изменилось» on a banner.
+
 ## 2026-11-21 — Windows: an outage at Anthropic is told from a problem here (branch `feat/desktop-outage`)
 
 Done: on Oleh's «дальше». The Mac's `ServiceStatus`: when the limits fail in a way an outage could explain — no answer, an answer that can't be read, HTTP 500 and above; not a sign-in problem and not «ask less often» — the app asks Anthropic's public status page (`status.claude.com/api/v2/status.json`, no account or token), at most every ten minutes, and shows the page's own words under the limits: «Сбой у Anthropic: …» with «Подробнее», which opens the page. The line goes when the limits are read again. `core/src/usage.rs` `status_problem` / `check_status` / `may_be_outage`, `app/src/limits.rs`, `ui/panel.html`. One text, the Mac's.
