@@ -5,6 +5,7 @@
 **Updated:** 2026-11-21
 
 **Now:**
+- 2026-11-21: Windows — «Сбой у Anthropic: …» in the panel when the limits fail and Anthropic's status page reports trouble, with «Подробнее» to the page (branch `feat/desktop-outage`; the real page asked once — all well; the line itself not seen)
 - 2026-11-21: Windows 0.1.6 published as an unsigned pre-release (tag `desktop-v0.1.6`) on Oleh's «Выпускай 0.1.6»: the «История расхода» window and the week by day; the laptop updated itself from 0.1.5; «latest» stays the Mac's v0.11.0
 - 2026-11-21: Windows — «Расход недели по дням» under «Подробнее»: a column a day in percent of the week's limit, and «неделя кончится … при таком темпе» when it would end before its reset (branch `feat/desktop-week-by-day`; seen live)
 - 2026-11-21: Windows — the «История расхода» window: tokens by day for 7 / 30 / 90 days, a CSV export, the cost at the person's API price against the plan's (branch `feat/desktop-usage-history`; seen live on the laptop's journals)
@@ -169,6 +170,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-21 — Windows: an outage at Anthropic is told from a problem here (branch `feat/desktop-outage`)
+
+Done: on Oleh's «дальше». The Mac's `ServiceStatus`: when the limits fail in a way an outage could explain — no answer, an answer that can't be read, HTTP 500 and above; not a sign-in problem and not «ask less often» — the app asks Anthropic's public status page (`status.claude.com/api/v2/status.json`, no account or token), at most every ten minutes, and shows the page's own words under the limits: «Сбой у Anthropic: …» with «Подробнее», which opens the page. The line goes when the limits are read again. `core/src/usage.rs` `status_problem` / `check_status` / `may_be_outage`, `app/src/limits.rs`, `ui/panel.html`. One text, the Mac's.
+Checked: `python scripts/strings.py --check` (661 texts), `cargo test --workspace` on Windows (the page's answer with and without trouble, which failures ask). The real page asked once from the laptop: all well, nothing to show. A build from the branch starts and shows the limits as before.
+Left: the line itself was not seen — there was no outage and none was faked. «Подробнее» not pressed.
 
 ## 2026-11-21 — Windows 0.1.6 released (branch `chore/desktop-0.1.6-note`)
 

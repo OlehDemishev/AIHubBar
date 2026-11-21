@@ -38,6 +38,7 @@
         <div id="hub-rows"></div>
       </div>
       <p class="error" id="limits-error" hidden></p>
+      <p class="outage" id="limits-outage" hidden><span id="limits-outage-text"></span> <button class="link" id="limits-outage-more" data-t="Подробнее"></button></p>
       <details id="spend">
         <summary class="secondary" data-t="Подробнее"></summary>
         <div id="week-strip" hidden>
@@ -215,6 +216,10 @@
       const errorLine = document.getElementById("limits-error");
       errorLine.hidden = !error;
       errorLine.textContent = error ?? "";
+      // Anthropic's status page reports trouble: the failure is theirs, not this computer's.
+      document.getElementById("limits-outage").hidden = !claudeView.outage;
+      document.getElementById("limits-outage-text").textContent = claudeView.outage ?? "";
+      document.getElementById("limits-outage-more").onclick = () => invoke("open_status_page");
       document.getElementById("hub").hidden = services.length === 0;
       document.getElementById("hub-rows").replaceChildren(...services.map(serviceRow));
     }

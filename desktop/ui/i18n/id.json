@@ -412,6 +412,7 @@
  "С нуля": "Dari awal",
  "Самая затратная сессия: %@ — %lld %% (%@ токенов)": "Sesi termahal: %@ — %lld %% (%@ token)",
  "Самый активный день": "Hari tersibuk",
+ "Сбой у Anthropic: %@": "Gangguan di Anthropic: %@",
  "Свернуть": "Ciutkan",
  "Свободно %@.": "%@ kosong.",
  "Свои кнопки: скрипт в фоне или в Терминале, ссылка, файл, папка или программа.": "Tombol sendiri: skrip di latar belakang atau Terminal, tautan, file, folder, atau program.",

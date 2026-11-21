@@ -31,6 +31,9 @@ struct State {
     paused_until: Option<DateTime<Utc>>,
     notified: BTreeSet<String>,
     last_growth: Option<DateTime<Utc>>,
+    /// What Anthropic's status page said after the limits failed; None when all is well or nothing is known.
+    outage: Option<String>,
+    status_checked: Option<DateTime<Utc>>,
     /// The last try to renew Claude Code's sign-in.
     last_renewal: Option<DateTime<Utc>>,
     /// «Расход по проектам»: the journals' records and when they were last read.
@@ -117,6 +120,7 @@ impl Limits {
                     state.strikes = 0;
                     state.paused_until = None;
                     state.error = None;
+                    state.outage = None;
                     let before = state.snapshot.as_ref().and_then(|s| s.session()).map(|w| w.utilization);
                     if let (Some(before), Some(now_value)) = (before, snapshot.session().map(|w| w.utilization)) {
                         if now_value > before {
@@ -156,6 +160,20 @@ impl Limits {
                 }
             }
         };
+        // A failure an outage could explain: ask Anthropic's status page, at most every ten minutes.
+        let ask = {
+            let state = self.state.lock().unwrap();
+            state.error.as_ref().is_some_and(UsageError::may_be_outage) && state.status_checked.is_none_or(|at| now - at > Duration::minutes(10))
+        };
+        if ask {
+            let outage = usage::check_status();
+            if let Some(outage) = &outage {
+                eprintln!("Anthropic status: {outage}");
+            }
+            let mut state = self.state.lock().unwrap();
+            state.status_checked = Some(now);
+            state.outage = outage;
+        }
         let texts = strings(app);
         if let Some(snapshot) = self.state.lock().unwrap().snapshot.clone() {
             for alert in &alerts {
@@ -315,6 +333,7 @@ impl Limits {
                 &UsageForecast::make(&state.history, snapshot.and_then(|s| s.session()), now),
             ),
             error: state.error.as_ref().map(|e| texts::error_text(texts, e)),
+            outage: state.outage.as_ref().filter(|_| state.error.is_some()).map(|outage| texts.format("Сбой у Anthropic: %@", &[outage])),
         }
     }
 }
@@ -345,6 +364,8 @@ pub struct LimitsView {
     others: Vec<RingView>,
     forecast: Option<String>,
     error: Option<String>,
+    /// «Сбой у Anthropic: …» when the limits fail and Anthropic's status page reports trouble.
+    outage: Option<String>,
 }
 
 #[derive(Serialize)]
@@ -397,6 +418,12 @@ pub async fn spend_view(app: AppHandle) -> Result<SpendView, String> {
     let texts = strings(&app);
     let root = crate::profiles::projects_root(&app);
     tauri::async_runtime::spawn_blocking(move || limits.spend(&root, &texts)).await.map_err(|e| e.to_string())
+}
+
+/// «Подробнее» next to an outage: Anthropic's status page.
+#[tauri::command]
+pub fn open_status_page() -> Result<(), String> {
+    crate::projects::open_with_system(usage::STATUS_PAGE.as_ref())
 }
 
 /// «Продлевать вход Claude Code сам».
