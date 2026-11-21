@@ -6,6 +6,7 @@
 
 **Now:**
 - 2026-11-21: Windows — «Сегодня» on top of the «История расхода» window: Claude's limits, today's spend by project, today's background runs, the other services (branch `feat/desktop-today`; seen live)
+- 2026-11-21: Mac — the «Telegram» tile's hint no longer says «включено» and «выключены» at once (branch `fix/telegram-tile-hint`, a fix for 0.12.0), found in a live look at the card, the bell, the tile and a Codex approval
 - 2026-11-21: Windows — «контекст N %» on a session's row once its context is 70 % full, and a notification at 90 % (branch `feat/desktop-context-fullness`; seen live on a real session at 76 %)
 - 2026-11-21: Mac — a second live pass over the held batch tasks and «Версии» (isolated copy, the «Panel debug» window); its one fix for 0.12.0 is merged: «Журнал» no longer says a task's answer twice (PR 518)
 - 2026-11-21: Windows — «Недавно завершённые» in the panel: a finished Claude Code session is continued in a terminal with `claude --resume` by a click (branch `feat/desktop-resume-sessions`; seen live with a sample record — the terminal opened with the command)
@@ -119,7 +120,7 @@
 
 **Next:**
 - releases go out once a week, on Tuesday, on Oleh's word (agreed 2026-11-11); merged work waits in `main`
-- 0.12.0-beta.2 is out (2026-11-20); before 0.12.0: Oleh uses the beta; left to see in the app — a Codex approval, handover, review, the pair's notification banner, the header bell, the Telegram tile, the «Что нового» card
+- 0.12.0-beta.2 is out (2026-11-20); before 0.12.0: Oleh uses the beta; seen 2026-11-21 in an isolated copy — the «Что нового» card, the header bell, the Telegram tile, a Codex approval from a made-up request; left to see — a real `codex` asking, handover, review, the pair's notification banner
 - 0.12.0 not before Tuesday 2026-11-24, on Oleh's word; then `scripts/release-tools/update-cask.sh 0.12.0`
 - Antigravity «ждёт»: the notification is ready in PR 520 (`feat/antigravity-wait-notification`), **held until 0.12.0 is out**; then see it with a real `agy` question
 - towards 1.0 (discussed 2026-11-10): the live pass is done (journal 2026-11-10); left — freeze what is in 1.0 and what stays beta, release notes, translations read by people, feedback from strangers before 1.0
@@ -179,6 +180,12 @@
 Done: on Oleh's «дальше». The Mac's `DaySummary` lines on top of «История расхода»: «Claude — Сессия: N %, Неделя: N %», the day's cost at the person's API price when one is set, «По проектам» with the five heaviest projects of the day, «Фоновые задачи» with the runs that started today (✅ / ⏳ / ❌, «· Codex» for Codex's), «Другие AI» with a line per service that has limits to show. `core/src/token_usage.rs` `day_lines`, `app/src/history.rs`, `ui/history.html`. All eight texts are the Mac's.
 Checked: `python scripts/strings.py --check` (672 texts), `cargo test --workspace` on Windows (the lines in order, an empty day, a cost under a cent left out). Live on the laptop, a build from the branch: the window's «Сегодня» said «Claude — Сессия: 43 %, Неделя: 41 %», «• AIHubBar — 100 % (823 тыс.)», «• Codex — 30 дн 3 %», «• GitHub Copilot — чат 1 %, дополнения 0 %»; the panel's row of this session said «контекст 78 %».
 Left: no background run started today, so that part was not seen; no price is set here, so no cost line. «Упирался в лимит» is not shown — the Windows version does not count limit hits. The day summary is not sent to Telegram (the Mac's «Итог дня»). Seen in Russian only.
+
+## 2026-11-21 — Mac: a live look at four of 0.12.0's features, the Telegram tile's hint (branch `fix/telegram-tile-hint`)
+
+Done: on Oleh's «Дальше». The plan's own stages are finished or wait for 0.12.0, so the next item was «left to see in the app» before the release. A Debug build of `main` as an isolated copy (own bundle id and home), its «Panel debug» window moved to the corner, AX reads and presses, no keyboard taken. One thing was wrong: with notifications on, the «Telegram» tile's hover hint said «Уведомления в Telegram — включено» and under it «Уведомления в Telegram выключены, пока не включите снова…». The hint is now built in `QuickToggle.hint(isOn:)`: Telegram's note is added only while it is off; the desktop icons' warning stays in both states.
+Checked: `scripts/check.sh`, the new test `theHintSaysWhatOffTakesAwayOnlyWhenItFits`. Seen live before the fix: the «Что нового» card with its six lines, gone after «Понятно»; the bell in the header left of the gear, orange and crossed after a press, the «Telegram» tile and the note under the tiles following it; a Codex approval — the app's own hook script fed with a made-up `PermissionRequest` (`shell` and `apply_patch`): the row «ждёт ответа» with «shell: swift test …» and «apply_patch: Limits.swift, New.swift», «Разрешить» and «Отклонить» came back to the waiting hook as `allow` and `deny`.
+Left: the fixed hint was not hovered (a test only). Not seen: a real `codex` asking (its hooks need Oleh's trust in `/hooks`), handover, review, the pair's notification banner — they need real runs and windows in front.
 
 ## 2026-11-21 — Windows: how full a session's context is (branch `feat/desktop-context-fullness`)
 
