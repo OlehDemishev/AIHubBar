@@ -138,6 +138,7 @@ impl Limits {
                         let _ = std::fs::write(notified_file(), serde_json::to_string(&state.notified).unwrap_or_default());
                     }
                     write_usage_file(&snapshot);
+                    crate::history::note(snapshot.session().map(|w| w.utilization), snapshot.week().map(|w| w.utilization));
                     state.snapshot = Some(snapshot);
                     alerts
                 }

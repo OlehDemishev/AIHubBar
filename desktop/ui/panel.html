@@ -44,6 +44,7 @@
         <div class="segments" id="spend-periods" role="group" data-t-title="Период"></div>
         <div id="spend-rows"></div>
         <p class="secondary" id="spend-top" hidden></p>
+        <button class="link" id="open-history" data-t="История расхода…"></button>
         <p class="secondary spend-note" data-t="Оценка по журналам Claude Code, а не точный расход лимита. Доли учитывают цену токенов (вывод ×5, чтение кэша ×0,1); токены — без чтения кэша."></p>
       </details>
     </section>
@@ -328,6 +329,7 @@
         show();
       };
       box.addEventListener("toggle", load);
+      document.getElementById("open-history").onclick = () => invoke("open_history");
       window.__TAURI__.event.listen("limits-changed", load);
     }
 

@@ -9,6 +9,7 @@
 mod assistant;
 mod calendar;
 mod commands;
+mod history;
 mod hub;
 mod keep_awake;
 mod limits;
@@ -397,6 +398,7 @@ fn main() {
         .manage(toggles::Toggles::default())
         .manage(hub::Hub::default())
         .manage(updates::Updates::default())
+        .manage(history::History::default())
         .manage(telegram::Telegram::default())
         .manage(quick_prompt::QuickPrompt::default())
         .manage(command_hot_keys::CommandHotKeys::default())
@@ -420,6 +422,7 @@ fn main() {
             telegram::telegram_view, telegram::telegram_save_token, telegram::telegram_remove_token, telegram::telegram_bind,
             telegram::telegram_cancel_binding, telegram::telegram_set_chat, telegram::telegram_test, telegram::set_telegram_event,
             telegram::set_telegram_answers, telegram::set_telegram_requests,
+            history::open_history, history::history_view, history::set_plan_price, history::export_history,
             updates::updates_view, updates::set_updates_daily, updates::check_updates, updates::install_update,
             pull_request_alerts, set_pull_request_alerts, profiles::projects_folder, profiles::choose_projects_folder,
             profiles::reset_projects_folder, profiles::profiles_view, profiles::select_profile, profiles::add_profile, profiles::profile_templates,

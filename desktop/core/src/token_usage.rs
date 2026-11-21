@@ -204,6 +204,140 @@ pub fn tokens_text(tokens: u64, s: &Strings) -> String {
     }
 }
 
+// MARK: - «История расхода»: tokens by day (the Mac's `UsageHistory.swift`, `usage-days.json`)
+
+/// How many days the history keeps.
+pub const KEPT_DAYS: i64 = 400;
+
+#[derive(Debug, Clone, PartialEq, Default, serde::Serialize, serde::Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct UsageDay {
+    /// `yyyy-MM-dd` in the computer's time zone.
+    pub day: String,
+    #[serde(default)]
+    pub input: u64,
+    #[serde(default)]
+    pub output: u64,
+    #[serde(default)]
+    pub cache_write: u64,
+    #[serde(default)]
+    pub cache_read: u64,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub session_peak: Option<f64>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub week_peak: Option<f64>,
+}
+
+impl UsageDay {
+    /// As shown elsewhere: without cache reads.
+    pub fn tokens(&self) -> u64 {
+        self.input + self.output + self.cache_write
+    }
+
+    /// What these tokens would cost through the API at the person's own price, dollars per million tokens of input
+    /// and of output; cache writes cost a quarter more than input and cache reads a tenth of it.
+    pub fn cost(&self, price: (f64, f64)) -> f64 {
+        let input_like = self.input as f64 + self.cache_write as f64 * 1.25 + self.cache_read as f64 * 0.1;
+        (input_like * price.0 + self.output as f64 * price.1) / 1_000_000.0
+    }
+}
+
+pub fn day_key(date: DateTime<Utc>) -> String {
+    date.with_timezone(&chrono::Local).format("%Y-%m-%d").to_string()
+}
+
+fn trimmed(days: HashMap<String, UsageDay>, now: DateTime<Utc>) -> Vec<UsageDay> {
+    let oldest = day_key(now - Duration::days(KEPT_DAYS));
+    let mut days: Vec<UsageDay> = days.into_values().filter(|day| day.day >= oldest).collect();
+    days.sort_by(|a, b| a.day.cmp(&b.day));
+    days
+}
+
+fn by_day(days: &[UsageDay]) -> HashMap<String, UsageDay> {
+    let mut map = HashMap::new();
+    for day in days {
+        map.entry(day.day.clone()).or_insert_with(|| day.clone());
+    }
+    map
+}
+
+/// Adds what the journals say. The scanner holds only part of the oldest day it returns, so a day's counters never
+/// go down.
+pub fn merging(days: &[UsageDay], records: &[TokenRecord], now: DateTime<Utc>) -> Vec<UsageDay> {
+    let mut fresh: HashMap<String, UsageDay> = HashMap::new();
+    for record in records {
+        let key = day_key(record.date);
+        let day = fresh.entry(key.clone()).or_insert_with(|| UsageDay { day: key, ..UsageDay::default() });
+        day.input += record.input;
+        day.output += record.output;
+        day.cache_write += record.cache_creation;
+        day.cache_read += record.cache_read;
+    }
+    let mut all = by_day(days);
+    for (key, new) in fresh {
+        let day = all.entry(key.clone()).or_insert_with(|| UsageDay { day: key, ..UsageDay::default() });
+        day.input = day.input.max(new.input);
+        day.output = day.output.max(new.output);
+        day.cache_write = day.cache_write.max(new.cache_write);
+        day.cache_read = day.cache_read.max(new.cache_read);
+    }
+    trimmed(all, now)
+}
+
+/// The limits as they stand now; a day keeps its highest figures.
+pub fn noting(days: &[UsageDay], session: Option<f64>, week: Option<f64>, now: DateTime<Utc>) -> Vec<UsageDay> {
+    let mut all = by_day(days);
+    let key = day_key(now);
+    let day = all.entry(key.clone()).or_insert_with(|| UsageDay { day: key, ..UsageDay::default() });
+    if let Some(session) = session {
+        day.session_peak = Some(day.session_peak.unwrap_or(0.0).max(session));
+    }
+    if let Some(week) = week {
+        day.week_peak = Some(day.week_peak.unwrap_or(0.0).max(week));
+    }
+    trimmed(all, now)
+}
+
+/// The last `count` days, today included, every day present — a day without records is an empty one.
+pub fn recent(days: &[UsageDay], count: i64, now: DateTime<Utc>) -> Vec<UsageDay> {
+    let known = by_day(days);
+    (0..count)
+        .rev()
+        .map(|back| {
+            let key = day_key(now - Duration::days(back));
+            known.get(&key).cloned().unwrap_or(UsageDay { day: key, ..UsageDay::default() })
+        })
+        .collect()
+}
+
+/// The Mac's CSV: one row a day.
+pub fn csv(days: &[UsageDay]) -> String {
+    let percent = |value: Option<f64>| value.map(|v| format!("{v:.1}")).unwrap_or_default();
+    let mut text = String::from("date,input,output,cache_write,cache_read,session_peak_percent,week_peak_percent\n");
+    for day in days {
+        text += &format!("{},{},{},{},{},{},{}\n", day.day, day.input, day.output, day.cache_write, day.cache_read, percent(day.session_peak), percent(day.week_peak));
+    }
+    text
+}
+
+/// «Окупается ли подписка»: the period's API cost brought to a month of 30 days, against the plan's price — how many
+/// times the API would cost. None without a plan price or without spend.
+pub fn plan_ratio(cost: f64, period_days: i64, plan: f64) -> Option<f64> {
+    let monthly = if period_days > 0 { cost * 30.0 / period_days as f64 } else { 0.0 };
+    (plan > 0.0 && monthly > 0.0).then(|| monthly / plan)
+}
+
+/// «Подписка выгоднее API (×3,2)» or «API был бы дешевле подписки (×2,5)».
+pub fn plan_verdict(ratio: f64, s: &Strings) -> String {
+    let times = if ratio >= 1.0 { ratio } else { 1.0 / ratio };
+    let number = if times < 10.0 { s.decimal(times) } else { format!("{}", times.round() as i64) };
+    if ratio >= 1.0 {
+        s.format("Подписка выгоднее API (×%@)", &[&number])
+    } else {
+        s.format("API был бы дешевле подписки (×%@)", &[&number])
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -271,6 +405,47 @@ mod tests {
         let top = breakdown.top_session.unwrap();
         assert_eq!((top.name.as_str(), top.tokens), ("shop", 200));
         assert_eq!(Breakdown::make(&records, now, root, "Другое"), Breakdown::default());
+    }
+
+    #[test]
+    fn days_of_history() {
+        let now = Utc::now();
+        let record = |ago_days: i64, input: u64, output: u64| TokenRecord { date: now - Duration::days(ago_days), session_id: "s".into(), cwd: String::new(), input, output, cache_creation: 10, cache_read: 1000 };
+        let days = merging(&[], &[record(0, 100, 20), record(0, 50, 5), record(2, 7, 1), record(KEPT_DAYS + 5, 9, 9)], now);
+        assert_eq!(days.len(), 2, "what is older than the history keeps is dropped");
+        let today = days.last().unwrap();
+        assert_eq!((today.day.as_str(), today.input, today.output, today.cache_write, today.cache_read), (day_key(now).as_str(), 150, 25, 20, 2000));
+        assert_eq!(today.tokens(), 195);
+        // A later scan that holds only a part of the day does not lower it.
+        let again = merging(&days, &[record(0, 10, 1)], now);
+        assert_eq!(again.last().unwrap().input, 150);
+        let noted = noting(&noting(&again, Some(40.0), Some(12.5), now), Some(30.0), None, now);
+        assert_eq!((noted.last().unwrap().session_peak, noted.last().unwrap().week_peak), (Some(40.0), Some(12.5)));
+        let week = recent(&noted, 7, now);
+        assert_eq!(week.len(), 7);
+        assert_eq!((week[6].day.as_str(), week[4].tokens(), week[5].tokens()), (day_key(now).as_str(), 18, 0));
+        let text = csv(&week[4..]);
+        assert!(text.starts_with("date,input,output,cache_write,cache_read,session_peak_percent,week_peak_percent\n"));
+        assert!(text.ends_with(&format!("{},150,25,20,2000,40.0,12.5\n", day_key(now))), "{text}");
+        assert!(text.contains(&format!("{},0,0,0,0,,\n", day_key(now - Duration::days(1)))));
+        // The Mac's file reads, and ours is written with its keys.
+        let mac: Vec<UsageDay> = serde_json::from_str(r#"[{"day":"2026-11-20","input":5,"output":6,"cacheWrite":7,"cacheRead":8,"sessionPeak":55.5}]"#).unwrap();
+        assert_eq!((mac[0].cache_write, mac[0].session_peak, mac[0].week_peak), (7, Some(55.5), None));
+        assert_eq!(serde_json::to_string(&mac).unwrap(), r#"[{"day":"2026-11-20","input":5,"output":6,"cacheWrite":7,"cacheRead":8,"sessionPeak":55.5}]"#);
+    }
+
+    #[test]
+    fn cost_and_plan() {
+        let s = Strings::default();
+        let day = UsageDay { day: "2026-11-20".into(), input: 1_000_000, output: 1_000_000, cache_write: 1_000_000, cache_read: 10_000_000, ..UsageDay::default() };
+        assert!((day.cost((3.0, 15.0)) - (3.0 * (1.0 + 1.25 + 1.0) + 15.0)).abs() < 1e-9);
+        assert_eq!(plan_ratio(64.0, 30, 20.0), Some(3.2));
+        assert_eq!(plan_ratio(7.0, 7, 100.0), Some(0.3));
+        assert_eq!(plan_ratio(64.0, 30, 0.0), None);
+        assert_eq!(plan_ratio(0.0, 30, 20.0), None);
+        assert_eq!(plan_verdict(3.2, &s), "Подписка выгоднее API (×3,2)");
+        assert_eq!(plan_verdict(0.4, &s), "API был бы дешевле подписки (×2,5)");
+        assert_eq!(plan_verdict(12.4, &s), "Подписка выгоднее API (×12)");
     }
 
     #[test]
