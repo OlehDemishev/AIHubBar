@@ -148,4 +148,13 @@ struct ScreenLockTests {
     @Test func thePrivateCallIsStillThere() {
         #expect(ScreenLock.privateLock() != nil)
     }
+
+    /// Seen live 2026-11-21: with notifications on, the Telegram tile's hint said «включено» and «выключены» at once.
+    @Test func theHintSaysWhatOffTakesAwayOnlyWhenItFits() {
+        let note = QuickToggle.telegram.offNote ?? ""
+        #expect(!QuickToggle.telegram.hint(isOn: true).contains(note))
+        #expect(QuickToggle.telegram.hint(isOn: false).contains(note))
+        #expect(QuickToggle.desktopIcons.hint(isOn: true).contains(QuickToggle.desktopIcons.offNote ?? "?"))
+        #expect(QuickToggle.lockScreen.hint(isOn: nil) == QuickToggle.lockScreen.title)
+    }
 }
