@@ -413,6 +413,10 @@
               "name" : "Versions"
             },
             {
+              "detail" : "“Versions” in an expanded project opens the list of versions: a file from a version next to the current one, “Restore This File” and “Restore the Whole Version”. The current state is saved before a restore, and files that appeared later stay. “What Changed” in the notification about a finished command and in the Log shows the texts before the task and now.",
+              "name" : "Restoring a version"
+            },
+            {
               "detail" : "The profile’s stages, comma-separated; a stage changes with a button in an expanded project. Words, duration, reading time and pages are counted from the main file (.md, .txt, .rtf, .docx).",
               "name" : "Stages and metrics"
             }

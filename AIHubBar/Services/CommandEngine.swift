@@ -59,6 +59,8 @@ final class CommandEngine {
 
     /// «Версии»: called before a command starts on a project, whatever runs it (background, Terminal, API).
     @ObservationIgnored var beforeRun: @MainActor (_ projectPath: String, _ title: String) -> Void = { _, _ in }
+    /// «Версии» is on: a finished command's notification gets «Что изменилось».
+    @ObservationIgnored var tracksVersions: @MainActor () -> Bool = { false }
 
     init(settings: AppSettings, runs: RunStore,
          spendURL: URL = SessionFiles.supportDirectory.appending(path: "api-spend.json"), defaults: UserDefaults = .standard) {
@@ -123,7 +125,7 @@ final class CommandEngine {
             let fileText = context.file.flatMap { FolderScanner.text(of: folder.appending(path: $0)) }
             let prompt = CommandText.apiPrompt(task: task, context: context, fileText: fileText)
             let config = settings.aiServices
-            let id = job.id
+            let id = job.id, started = job.startedAt
             Task {
                 do {
                     let reply = try await complete(provider, config, prompt)
@@ -131,7 +133,8 @@ final class CommandEngine {
                     record(SpendRecord(date: .now, provider: provider, model: config.model(provider) ?? "?",
                                        inputTokens: reply.inputTokens, outputTokens: reply.outputTokens))
                     update(id) { $0.state = .done }
-                    post("command-\(id)", String(localized: "Готово: \(template.title)"), "\(project.name) · \(name)", .file(path: resultPath))
+                    post("command-\(id)", String(localized: "Готово: \(template.title)"), "\(project.name) · \(name)",
+                         .commandResult(path: resultPath, project: project.path, started: started, versions: tracksVersions()))
                 } catch {
                     update(id) { $0.state = .failed(error.localizedDescription) }
                     AppLog.error("Command «\(template.title)» via \(provider.rawValue) failed: \(error.localizedDescription)")

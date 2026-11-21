@@ -413,6 +413,10 @@
               "name" : "Versiones"
             },
             {
+              "detail" : "«Versiones» en un proyecto desplegado abre la lista de versiones: un archivo de una versión junto al actual, «Restaurar este archivo» y «Restaurar toda la versión». Antes de restaurar se guarda el estado actual, y los archivos que aparecieron después se conservan. «Qué ha cambiado» en la notificación de un comando terminado y en el «Registro» muestra los textos antes de la tarea y ahora.",
+              "name" : "Restaurar una versión"
+            },
+            {
               "detail" : "Las etapas del perfil, separadas por comas; la etapa se cambia con un botón en el proyecto expandido. Palabras, duración, tiempo de lectura y páginas se cuentan sobre el archivo principal (.md, .txt, .rtf, .docx).",
               "name" : "Etapas y métricas"
             }

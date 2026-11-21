@@ -14,6 +14,7 @@ enum WindowID: String, CaseIterable, Sendable {
     case quickPrompt = "quick-prompt"
     case usageHistory = "usage-history"
     case pairCompare = "pair-compare"
+    case versions
     /// Not a scene: the Settings window, opened with `openSettings`.
     case settings
 }
