@@ -409,6 +409,10 @@
               "name" : "Confronta"
             },
             {
+              "detail" : "Il modulo «Versioni» salva i testi e la scheda di un progetto-cartella prima di ogni avvio dell’IA e mentre scrivi, nella cartella dell’app, non nel progetto. Ogni quanto e per quanto tempo: Impostazioni → «Moduli» → «Versioni».",
+              "name" : "Versioni"
+            },
+            {
               "detail" : "Le fasi del profilo, separate da virgole; la fase cambia con un pulsante nel progetto espanso. Parole, durata, tempo di lettura e pagine si contano sul file principale (.md, .txt, .rtf, .docx).",
               "name" : "Fasi e metriche"
             }

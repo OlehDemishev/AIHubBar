@@ -409,6 +409,10 @@
               "name" : "Comparer"
             },
             {
+              "detail" : "Le module « Versions » enregistre les textes et la fiche d’un projet-dossier avant chaque lancement de l’IA et pendant que vous écrivez — dans le dossier de l’app, pas dans le projet. Fréquence et durée de conservation : Réglages → « Modules » → « Versions ».",
+              "name" : "Versions"
+            },
+            {
               "detail" : "Les étapes du profil, séparées par des virgules ; l’étape change avec un bouton dans le projet déplié. Mots, durée, temps de lecture et pages sont comptés dans le fichier principal (.md, .txt, .rtf, .docx).",
               "name" : "Étapes et métriques"
             }

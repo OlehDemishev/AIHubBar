@@ -409,6 +409,10 @@
               "name" : "Comparar"
             },
             {
+              "detail" : "O módulo “Versões” salva os textos e o cartão de um projeto de pasta antes de cada execução da IA e enquanto você escreve — na pasta do app, não no projeto. Com que frequência e por quanto tempo: Ajustes → “Módulos” → “Versões”.",
+              "name" : "Versões"
+            },
+            {
               "detail" : "As etapas do perfil, separadas por vírgula; a etapa muda com um botão no projeto expandido. Palavras, duração, tempo de leitura e páginas são contados no arquivo principal (.md, .txt, .rtf, .docx).",
               "name" : "Etapas e métricas"
             }
