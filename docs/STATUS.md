@@ -5,6 +5,8 @@
 **Updated:** 2026-11-21
 
 **Now:**
+- 2026-11-21: Mac — a second live pass over the held batch tasks and «Версии» (isolated copy, the «Panel debug» window); its one fix for 0.12.0 is merged: «Журнал» no longer says a task's answer twice (PR 518)
+- 2026-11-21: Windows — «Недавно завершённые» in the panel: a finished Claude Code session is continued in a terminal with `claude --resume` by a click (branch `feat/desktop-resume-sessions`; seen live with a sample record — the terminal opened with the command)
 - 2026-11-21: Windows — «Сбой у Anthropic: …» in the panel when the limits fail and Anthropic's status page reports trouble, with «Подробнее» to the page (branch `feat/desktop-outage`; the real page asked once — all well; the line itself not seen)
 - 2026-11-21: Windows 0.1.6 published as an unsigned pre-release (tag `desktop-v0.1.6`) on Oleh's «Выпускай 0.1.6»: the «История расхода» window and the week by day; the laptop updated itself from 0.1.5; «latest» stays the Mac's v0.11.0
 - 2026-11-21: Windows — «Расход недели по дням» under «Подробнее»: a column a day in percent of the week's limit, and «неделя кончится … при таком темпе» when it would end before its reset (branch `feat/desktop-week-by-day`; seen live)
@@ -121,9 +123,8 @@
 - towards 1.0 (discussed 2026-11-10): the live pass is done (journal 2026-11-10); left — freeze what is in 1.0 and what stays beta, release notes, translations read by people, feedback from strangers before 1.0
 - check on the Air: the island at the real notch
 - promotion (docs/LAUNCH.md): r/ClaudeAI, the lists, r/macapps, Show HN, Product Hunt, Homebrew
-- right after 0.12.0 is published: merge PR 506 (`feat/versions-module`), then PR 508 (`feat/versions-card`) and PR 510 (`feat/batch-tasks`), each retargeted to `main`
-- batch tasks live on a real profile, before they are released: «Выбрать», the checkboxes, a batch of two or three projects with a model by API and with Claude Code, «На ночь», the summary
-- «Версии» live on a real profile: the «Версии» link in the card, a restore pressed in the window, «Что изменилось» on a notification and in «Журнал»
+- right after 0.12.0 is published: merge PR 506 (`feat/versions-module`), then PR 508 (`feat/versions-card`) and PR 510 (`feat/batch-tasks`), each retargeted to `main`, and PR 520; all four contain `main` as of 2026-11-21 and are green
+- batch tasks and «Версии», left to see live (the rest was seen 2026-11-21 in an isolated copy): a batch with a typed text, a model by API, the wait near the limit, the summary and «Что изменилось» as a banner and in Telegram
 - Windows: left on the laptop — notifications and their buttons (the agent can't see a toast: its tool hides other programs' windows); the Mac's background runs have the same rules — try one build in a subfolder there; stage 7: the installer and updates are done (0.1.2), signing waits for SignPath (the update 0.1.2 → 0.1.3 from GitHub was seen on the laptop); Telegram on Windows (Oleh's choice 2026-11-20): stages 1 and 2 are done (the reader, 🏠, 🤖, permission requests), neither tried with a real bot; ⏳ too; next tasks from the chat (SPEC-telegram stage 3) — only after a real bot has been tried on the laptop: a chat that can start an agent must first be seen refusing a stranger; the limits stage (SPEC-windows §9.2) is done but the «Сегодня» summary
 
 **Needs Oleh:**
@@ -171,6 +172,11 @@
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
 
+## 2026-11-21 — Windows: «Недавно завершённые» (branch `feat/desktop-resume-sessions`)
+
+Done: on Oleh's «Дальше». The Mac's list of finished sessions: under the sessions in the panel, a folded «Недавно завершённые» with up to five Claude Code sessions that have left the list (ended more than 15 minutes ago), whose folder is still there and which nothing runs — «↩ project · the task · 2 ч назад». A click opens a terminal window in the session's folder with `claude --resume <id>`; only a session the list offers can be continued. Codex's and Copilot's finished sessions are not in it (the Mac lists them apart). The panel reads the sessions again when it is opened, since a session leaving the list makes no event. `core/src/sessions.rs` `load_resumable` / `is_resumable`, `app/src/sessions.rs` `resume_session`, `ui/panel.html`. Both texts are the Mac's.
+Checked: `python scripts/strings.py --check` (663 texts), `cargo test --workspace` on Windows (which sessions count: left the list, folder there, nothing runs it, Claude's own). Live on the laptop, a build from the branch: with a sample record of a session ended two hours ago, «Недавно завершённые» appeared, opened into «↩ AIHubBar Почини корзину и добавь те… 2 ч назад», and a click started Windows Terminal in the project's folder running `claude.exe --resume <the record's id>`. The sample record removed, the test window closed.
+Left: a real finished session was not continued — the laptop's own ones were in folders deleted since, and the sample id has no conversation behind it; in the terminal Claude Code first stopped at its Chrome extension question, as every launch there does (Needs Oleh). The hint on the row was not hovered.
 ## 2026-11-21 — Antigravity waits: a notification (branch `feat/antigravity-wait-notification`)
 
 Done: when `agy` asks «Run this command?», a notification «Antigravity ждёт ответа — project» comes once per question with the panel closed. `AntigravityWaitWatcher` watches the folder of the status file the status line keeps; it follows the «ждёт ответа» notification setting and the «Сессии» module. A wait from before the app started and a «pending» left by a closed `agy` are not announced. No new texts: the title is the one Codex and Copilot sessions use.
