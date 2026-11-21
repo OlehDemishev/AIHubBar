@@ -204,6 +204,68 @@ pub fn tokens_text(tokens: u64, s: &Strings) -> String {
     }
 }
 
+// MARK: - The week by day (the Mac's `WeekUsage`)
+
+#[derive(Debug, Clone, PartialEq)]
+pub struct WeekDay {
+    /// `yyyy-MM-dd` in the computer's time zone.
+    pub day: String,
+    /// This day's part of the week's limit, in percent.
+    pub percent: f64,
+    pub is_today: bool,
+}
+
+#[derive(Debug, Clone, PartialEq)]
+pub enum WeekForecast {
+    RunsOutAt(DateTime<Utc>),
+    LastsUntilReset,
+    Unknown,
+}
+
+/// The plan only says the week's total percent; the journals say how the week's use spread over the days (by
+/// `weight`), so the total is split in the same proportions. The pace is the last 24 hours' share, so a quiet
+/// morning after a busy night still counts the night.
+#[derive(Debug, Clone, PartialEq)]
+pub struct WeekUsage {
+    pub days: Vec<WeekDay>,
+    pub forecast: WeekForecast,
+}
+
+impl WeekUsage {
+    pub fn make(records: &[TokenRecord], utilization: f64, resets_at: DateTime<Utc>, now: DateTime<Utc>) -> WeekUsage {
+        let start = resets_at - Duration::days(7);
+        let week: Vec<&TokenRecord> = records.iter().filter(|record| record.date >= start && record.date <= now).collect();
+        let total: f64 = week.iter().map(|record| record.weight()).sum();
+        let mut by_day: HashMap<String, f64> = HashMap::new();
+        for record in &week {
+            *by_day.entry(day_key(record.date)).or_default() += record.weight();
+        }
+        let today = day_key(now);
+        let last = resets_at - Duration::seconds(1);
+        let mut days = Vec::new();
+        let mut date = start.with_timezone(&chrono::Local).date_naive();
+        let end = last.with_timezone(&chrono::Local).date_naive();
+        while date <= end && days.len() < 9 {
+            let key = date.format("%Y-%m-%d").to_string();
+            let weight = by_day.get(&key).copied().unwrap_or(0.0);
+            days.push(WeekDay { percent: if total > 0.0 { utilization * weight / total } else { 0.0 }, is_today: key == today, day: key });
+            let Some(next) = date.succ_opt() else { break };
+            date = next;
+        }
+        let window = (now - start).num_seconds().min(24 * 3600) as f64;
+        if total <= 0.0 || window < 3600.0 || utilization >= 100.0 {
+            return WeekUsage { days, forecast: WeekForecast::Unknown };
+        }
+        let recent: f64 = week.iter().filter(|record| ((now - record.date).num_seconds() as f64) <= window).map(|record| record.weight()).sum();
+        let per_second = utilization * recent / total / window;
+        if per_second <= 0.0 {
+            return WeekUsage { days, forecast: WeekForecast::LastsUntilReset };
+        }
+        let runs_out = now + Duration::seconds(((100.0 - utilization).max(0.0) / per_second) as i64);
+        WeekUsage { days, forecast: if runs_out < resets_at { WeekForecast::RunsOutAt(runs_out) } else { WeekForecast::LastsUntilReset } }
+    }
+}
+
 // MARK: - «История расхода»: tokens by day (the Mac's `UsageHistory.swift`, `usage-days.json`)
 
 /// How many days the history keeps.
@@ -405,6 +467,29 @@ mod tests {
         let top = breakdown.top_session.unwrap();
         assert_eq!((top.name.as_str(), top.tokens), ("shop", 200));
         assert_eq!(Breakdown::make(&records, now, root, "Другое"), Breakdown::default());
+    }
+
+    #[test]
+    fn the_week_by_day() {
+        let now = Utc::now();
+        let resets = now + Duration::days(3);
+        let record = |ago_hours: i64, input: u64| TokenRecord { date: now - Duration::hours(ago_hours), session_id: "s".into(), cwd: String::new(), input, output: 0, cache_creation: 0, cache_read: 0 };
+        // A quarter of the week's weight in the last day, the rest three days ago; 40 % of the week is used.
+        let week = WeekUsage::make(&[record(2, 100), record(72, 300), record(24 * 9, 999)], 40.0, resets, now);
+        assert!((7..=8).contains(&week.days.len()), "{}", week.days.len());
+        assert_eq!(week.days.iter().filter(|day| day.is_today).count(), 1);
+        let sum: f64 = week.days.iter().map(|day| day.percent).sum();
+        assert!((sum - 40.0).abs() < 1e-6, "the days add up to the week's percent, {sum}");
+        // 10 % a day leaves six days for the other 60 %: more than the three days to the reset.
+        assert_eq!(week.forecast, WeekForecast::LastsUntilReset);
+        // 90 % used, a quarter of it in the last day: 22.5 % a day against 10 % left — out in about half a day.
+        let fast = WeekUsage::make(&[record(2, 100), record(72, 300)], 90.0, resets, now);
+        match fast.forecast {
+            WeekForecast::RunsOutAt(at) => assert!(at > now && at < now + Duration::hours(13), "{at}"),
+            other => panic!("{other:?}"),
+        }
+        assert_eq!(WeekUsage::make(&[], 40.0, resets, now).forecast, WeekForecast::Unknown);
+        assert_eq!(WeekUsage::make(&[record(72, 300)], 40.0, resets, now).forecast, WeekForecast::LastsUntilReset, "nothing in the last day");
     }
 
     #[test]

@@ -5,6 +5,7 @@
 **Updated:** 2026-11-21
 
 **Now:**
+- 2026-11-21: Windows — «Расход недели по дням» under «Подробнее»: a column a day in percent of the week's limit, and «неделя кончится … при таком темпе» when it would end before its reset (branch `feat/desktop-week-by-day`; seen live)
 - 2026-11-21: Windows — the «История расхода» window: tokens by day for 7 / 30 / 90 days, a CSV export, the cost at the person's API price against the plan's (branch `feat/desktop-usage-history`; seen live on the laptop's journals)
 - 2026-11-21: Mac — content stage 4 is ready in PR 510 (`feat/batch-tasks`, on top of PR 508): batch tasks — «Выбрать» in the projects block of a folder profile, one command over the checked projects now, at night or after the limit resets, one project at a time, one summary; **held until 0.12.0 is out**; tests only, **not seen live**
 - 2026-11-21: Mac — content stage 3 is ready in PR 508 (`feat/versions-card`, on top of PR 506): «Версии» in a folder project's card — the list of versions, a file of a version next to the file now, restore of a file or the whole version, «Что изменилось» on a command's notification and in «Журнал»; Mac checks run on the PR; **held with PR 506 until 0.12.0 is out**; the window and the comparison seen live in an isolated copy, a restore pressed there — not
@@ -121,7 +122,7 @@
 - right after 0.12.0 is published: merge PR 506 (`feat/versions-module`), then PR 508 (`feat/versions-card`) and PR 510 (`feat/batch-tasks`), each retargeted to `main`
 - batch tasks live on a real profile, before they are released: «Выбрать», the checkboxes, a batch of two or three projects with a model by API and with Claude Code, «На ночь», the summary
 - «Версии» live on a real profile: the «Версии» link in the card, a restore pressed in the window, «Что изменилось» on a notification and in «Журнал»
-- Windows: left on the laptop — notifications and their buttons (the agent can't see a toast: its tool hides other programs' windows); the Mac's background runs have the same rules — try one build in a subfolder there; stage 7: the installer and updates are done (0.1.2), signing waits for SignPath (the update 0.1.2 → 0.1.3 from GitHub was seen on the laptop); Telegram on Windows (Oleh's choice 2026-11-20): stages 1 and 2 are done (the reader, 🏠, 🤖, permission requests), neither tried with a real bot; ⏳ too; next tasks from the chat (SPEC-telegram stage 3) — only after a real bot has been tried on the laptop: a chat that can start an agent must first be seen refusing a stranger; the limits stage (SPEC-windows §9.2) is done but the «Сегодня» summary and the week's strip by day
+- Windows: left on the laptop — notifications and their buttons (the agent can't see a toast: its tool hides other programs' windows); the Mac's background runs have the same rules — try one build in a subfolder there; stage 7: the installer and updates are done (0.1.2), signing waits for SignPath (the update 0.1.2 → 0.1.3 from GitHub was seen on the laptop); Telegram on Windows (Oleh's choice 2026-11-20): stages 1 and 2 are done (the reader, 🏠, 🤖, permission requests), neither tried with a real bot; ⏳ too; next tasks from the chat (SPEC-telegram stage 3) — only after a real bot has been tried on the laptop: a chat that can start an agent must first be seen refusing a stranger; the limits stage (SPEC-windows §9.2) is done but the «Сегодня» summary
 
 **Needs Oleh:**
 - Windows laptop, Telegram (0.1.5 is installed; nothing of it was tried with a real bot): 1) in @BotFather make a new bot — the Mac mini reads your present one; 2) Settings → «Telegram»: paste the token, «Привязать чат», «Start» in Telegram, «Проверить»; 3) start a small background task and see its result come to the chat; 4) «Этот компьютер отвечает боту» on, `/menu` in the chat — 🏠, then 🤖 and ⏳; 5) «Запросы разрешений в этот бот» on, start `claude --permission-mode default` in a project, ask it to create a file and answer ✅ from the phone. Say what did not work
@@ -167,6 +168,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-21 — Windows: the week by day (branch `feat/desktop-week-by-day`)
+
+Done: on Oleh's «далее». The Mac's `WeekUsage` and `WeekStrip`: the plan says only the week's total percent, the journals say how the use spread over the days, so the total is split in the same proportions (by weight). Under «Подробнее» in the panel, above «Расход по проектам»: «Расход недели по дням, в процентах» — a column a day with its percent over it, today's in the accent colour, two-letter weekdays in the interface's language; a week that resets in the middle of a day touches eight days, and then the first and the last column say the date too. When the last 24 hours' pace would end the week before its reset, a line says «неделя кончится … при таком темпе». `core/src/token_usage.rs` `WeekUsage`, `app/src/limits.rs`, `ui/panel.html`. All three texts are the Mac's.
+Checked: `python scripts/strings.py --check` (660 texts), `cargo test --workspace` on Windows (the days add up to the week's percent, one of them is today, the three forecasts). Live on the laptop, a build from the branch: «Пн 16», Вт, Ср empty, Чт 18, Пт 12, Сб 2 in the accent colour, Вс, «Пн 23» — 32 in all, the week's 32 %; no forecast line, as the week lasts.
+Left: the forecast line was not seen (the week does not run out here). In this width the two rings of the limits stand one over the other when the reset's text is long («сброс через 1 ч 3 мин») — as before this branch, worth a look. Seen in Russian only.
 
 ## 2026-11-21 — Debug builds: the panel's content in a plain window (branch `chore/debug-panel-window`)
 
