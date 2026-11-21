@@ -413,6 +413,10 @@
               "name" : "Wersje"
             },
             {
+              "detail" : "„Wersje” w rozwiniętym projekcie otwiera listę wersji: plik z wersji obok obecnego, „Przywróć ten plik” i „Przywróć całą wersję”. Przed przywróceniem obecny stan jest zapisywany, a pliki, które pojawiły się później, zostają. „Co się zmieniło” w powiadomieniu o gotowym poleceniu i w „Dzienniku” pokazuje teksty przed zadaniem i teraz.",
+              "name" : "Przywracanie wersji"
+            },
+            {
               "detail" : "Etapy profilu, oddzielone przecinkami; etap zmienia się przyciskiem w rozwiniętym projekcie. Słowa, czas trwania, czas czytania i strony są liczone w pliku głównym (.md, .txt, .rtf, .docx).",
               "name" : "Etapy i wskaźniki"
             }

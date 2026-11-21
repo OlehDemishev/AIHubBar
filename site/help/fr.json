@@ -413,6 +413,10 @@
               "name" : "Versions"
             },
             {
+              "detail" : "« Versions » dans un projet déplié ouvre la liste des versions : un fichier d’une version à côté du fichier actuel, « Rétablir ce fichier » et « Rétablir toute la version ». L’état actuel est enregistré avant un rétablissement, et les fichiers apparus plus tard restent. « Ce qui a changé » dans la notification d’une commande terminée et dans le « Journal » montre les textes avant la tâche et maintenant.",
+              "name" : "Rétablir une version"
+            },
+            {
               "detail" : "Les étapes du profil, séparées par des virgules ; l’étape change avec un bouton dans le projet déplié. Mots, durée, temps de lecture et pages sont comptés dans le fichier principal (.md, .txt, .rtf, .docx).",
               "name" : "Étapes et métriques"
             }

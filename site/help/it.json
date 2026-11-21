@@ -413,6 +413,10 @@
               "name" : "Versioni"
             },
             {
+              "detail" : "«Versioni» in un progetto espanso apre l’elenco delle versioni: un file di una versione accanto a quello attuale, «Ripristina questo file» e «Ripristina tutta la versione». Prima del ripristino lo stato attuale viene salvato, e i file comparsi dopo restano. «Cosa è cambiato» nella notifica di un comando concluso e nel «Registro» mostra i testi prima dell’attività e adesso.",
+              "name" : "Ripristinare una versione"
+            },
+            {
               "detail" : "Le fasi del profilo, separate da virgole; la fase cambia con un pulsante nel progetto espanso. Parole, durata, tempo di lettura e pagine si contano sul file principale (.md, .txt, .rtf, .docx).",
               "name" : "Fasi e metriche"
             }
