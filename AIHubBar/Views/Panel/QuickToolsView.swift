@@ -152,16 +152,7 @@ struct QuickTogglesView: View {
     }
 
     /// The tile's hover hint: its name, its state when known, and what turning it off takes away.
-    private func hint(for toggle: QuickToggle) -> String {
-        var hint = toggle.title
-        if let isOn = tools.isOn(toggle) {
-            hint += isOn ? String(localized: " — включено") : String(localized: " — выключено")
-        }
-        if let note = toggle.offNote {
-            hint += "\n" + note
-        }
-        return hint
-    }
+    private func hint(for toggle: QuickToggle) -> String { toggle.hint(isOn: tools.isOn(toggle)) }
 }
 
 /// One tile in «Быстрые переключатели»: the symbol (or a spinner while it runs) over the short name.
