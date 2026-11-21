@@ -117,7 +117,7 @@
 - releases go out once a week, on Tuesday, on Oleh's word (agreed 2026-11-11); merged work waits in `main`
 - 0.12.0-beta.2 is out (2026-11-20); before 0.12.0: Oleh uses the beta; left to see in the app — a Codex approval, handover, review, the pair's notification banner, the header bell, the Telegram tile, the «Что нового» card
 - 0.12.0 not before Tuesday 2026-11-24, on Oleh's word; then `scripts/release-tools/update-cask.sh 0.12.0`
-- Antigravity «ждёт»: a notification needs a watcher of the status file (today the rows are read when the panel opens)
+- Antigravity «ждёт»: the notification is ready in PR 520 (`feat/antigravity-wait-notification`), **held until 0.12.0 is out**; then see it with a real `agy` question
 - towards 1.0 (discussed 2026-11-10): the live pass is done (journal 2026-11-10); left — freeze what is in 1.0 and what stays beta, release notes, translations read by people, feedback from strangers before 1.0
 - check on the Air: the island at the real notch
 - promotion (docs/LAUNCH.md): r/ClaudeAI, the lists, r/macapps, Show HN, Product Hunt, Homebrew
@@ -170,6 +170,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-21 — Antigravity waits: a notification (branch `feat/antigravity-wait-notification`)
+
+Done: when `agy` asks «Run this command?», a notification «Antigravity ждёт ответа — project» comes once per question with the panel closed. `AntigravityWaitWatcher` watches the folder of the status file the status line keeps; it follows the «ждёт ответа» notification setting and the «Сессии» module. A wait from before the app started and a «pending» left by a closed `agy` are not announced. No new texts: the title is the one Codex and Copilot sessions use.
+Checked: `scripts/check.sh`, a new test. Live in an isolated copy (own bundle id and home, the panel never opened): the status file rewritten the way the script does it, a stand-in process named `agy` running — two waits of three «pending» writes gave two notifications in the copy's log; with no `agy` open, none. The banner itself was not seen (the copy has no notification permission), nor a real `agy` question — the status line is not installed on Oleh's Mac by the agent.
+Left: a new feature, so the PR is held until 0.12.0 is out. A click on the notification opens nothing special.
 
 ## 2026-11-21 — The run's log said the answer twice (branch `fix/run-log-repeat`)
 
