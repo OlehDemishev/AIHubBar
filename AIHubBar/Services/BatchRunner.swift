@@ -133,7 +133,8 @@ final class BatchRunner {
         }
         // Read now, not when the batch was made: at night the main file may be another one.
         let project = FolderScanner.project(URL(fileURLWithPath: item.projectPath), resultPatterns: mode.resultPatterns)
-        batch.items[index].resultFile = engine.run(batch.template, project: project, mode: mode, service: service, text: batch.text)
+        // Quiet: a batch of ten is one summary at the end, not ten banners and one more.
+        batch.items[index].resultFile = engine.run(batch.template, project: project, mode: mode, service: service, text: batch.text, quiet: true)
         batch.items[index].state = .running
         AppLog.info("Batch «\(batch.template.title)»: \(index + 1) of \(batch.items.count) started — \(item.name)")
     }

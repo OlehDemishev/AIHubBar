@@ -167,6 +167,12 @@
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
 
+## 2026-11-21 — Batch tasks seen live: one summary, not a banner per project (branch `feat/batch-tasks`)
+
+Done: a batch's projects run quietly — the «Готово» banner and the Telegram message of each single command are not sent, only the batch's one summary (live, a batch of two sent three notifications). `CommandEngine.run` and `RunStore.launch` take `quiet`. The branch also takes the «Версии» window fix from `feat/versions-card`.
+Checked: `scripts/check.sh`; the batch test now also expects no banner per project. Live before the fix, in an isolated copy with a made-up «Тексты» profile (the panel's content shown in a plain window by a local patch that is not in the branch, because the copy's menu bar panel would not open by a click): «Выбрать», the checkboxes, the command buttons, «Сейчас» — a real batch of two projects with Claude Code in the background went one after another, both `корректура.md` written, the row «Корректура · 0 из 2» then «готово: 2 из 2» with «Убрать», one summary at the end.
+Left: the fix was not looked at live again. Not seen: «На ночь», «После сброса лимита», the wait near the limit, a command that asks for text, a model by API, «Отменить» on a running batch, the summary as a banner and in Telegram (the copy has neither permission nor a bot).
+
 ## 2026-11-21 — Versions window: stale state found live (branch `feat/versions-card`)
 
 Done: the «Версии» window reads the files again when it becomes the key window and when another version is picked, so «как сейчас», the file statuses and the restore buttons are about now and not about the moment the window opened (a file edited meanwhile left «Вернуть этот файл» off while the comparison below showed the difference). The comparison is keyed by project too: versions of two projects taken in one pass share an id, and after switching the project the rows of the previous one stayed.

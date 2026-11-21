@@ -17,6 +17,8 @@ struct BatchRunnerTests {
         var failing: Set<String> = []
         var held = false
         var announced: [Batch] = []
+        /// Banners of single commands: a batch sends none.
+        var posted: [String] = []
         /// Replies wait here until the test lets them go, so «one at a time» can be seen.
         var gate: [CheckedContinuation<Void, Never>] = []
         var gated = false
@@ -29,7 +31,7 @@ struct BatchRunnerTests {
             try FileManager.default.createDirectory(at: base, withIntermediateDirectories: true)
             engine = CommandEngine(settings: settings, runs: RunStore(settings: settings), spendURL: base.appending(path: "spend.json"), defaults: defaults)
             runner = BatchRunner(engine: engine, url: base.appending(path: "batches.json"))
-            engine.post = { _, _, _, _ in }
+            engine.post = { [self] id, _, _, _ in posted.append(id) }
             engine.complete = { [self] _, _, prompt in
                 prompts.append(prompt)
                 if gated { await withCheckedContinuation { gate.append($0) } }
@@ -89,6 +91,7 @@ struct BatchRunnerTests {
             #expect(FileManager.default.fileExists(atPath: project.path + "/редактура.md"))
         }
         #expect(bench.announced.count == 1, "one summary for the whole batch")
+        #expect(bench.posted.isEmpty, "and no banner per project")
         #expect(bench.announced[0].summary.title == "Пакет «Редактура»: ✅ 3, ❌ 0")
         bench.runner.tick()
         #expect(bench.announced.count == 1)

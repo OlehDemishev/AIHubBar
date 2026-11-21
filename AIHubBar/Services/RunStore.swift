@@ -62,13 +62,13 @@ final class RunStore {
     func launch(
         title: String, prompt: String, project: String, projectPath: String, folder: String, worktreeBranch: String?,
         profile: PermissionProfile, resultFile: String?, claudePath: String, taskTitle: String? = nil,
-        codexPath: String? = nil, reviewOf: String? = nil, pair: String? = nil
+        codexPath: String? = nil, reviewOf: String? = nil, pair: String? = nil, quiet: Bool = false
     ) throws -> BackgroundRun {
         let id = UUID().uuidString.lowercased()
         var run = BackgroundRun(
             id: id, project: project, projectPath: projectPath, folder: folder, worktreeBranch: worktreeBranch,
             commandTitle: title, task: taskTitle ?? Session.taskTitle(prompt), startedAt: .now,
-            timeLimitMinutes: settings.backgroundTimeLimitMinutes, pid: nil, state: .running, notified: false,
+            timeLimitMinutes: settings.backgroundTimeLimitMinutes, pid: nil, state: .running, notified: quiet,
             resultFile: resultFile, agent: codexPath == nil ? nil : CodexExec.agent, prompt: prompt, reviewOf: reviewOf, pair: pair
         )
 
