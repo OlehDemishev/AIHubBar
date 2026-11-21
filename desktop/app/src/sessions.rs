@@ -166,7 +166,21 @@ fn run_state(run: &Run) -> State {
 
 #[derive(Serialize)]
 #[serde(rename_all = "camelCase")]
+pub struct ResumableRow {
+    id: String,
+    project: String,
+    task: Option<String>,
+    /// «2 ч назад».
+    ago: String,
+    /// The task and «Продолжить в Терминале · folder».
+    hint: String,
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
 pub struct SessionsView {
+    /// «Недавно завершённые»: finished Claude Code sessions a click continues in a terminal.
+    resumable: Vec<ResumableRow>,
     rows: Vec<SessionRow>,
     hooks: &'static str,
 }
@@ -228,7 +242,34 @@ pub fn sessions_view(app: AppHandle) -> SessionsView {
             });
         }
     }
-    SessionsView { rows, hooks: status_key(hook_status(&projects_root(&app))) }
+    let resumable = sessions::load_resumable(&paths::sessions_dir(), now, process::is_alive)
+        .into_iter()
+        .map(|session| {
+            let folder = texts.format("Продолжить в Терминале · %@", &[&session.cwd]);
+            ResumableRow {
+                hint: match &session.task {
+                    Some(task) => format!("{task}\n{folder}"),
+                    None => folder,
+                },
+                id: session.id.clone(),
+                project: session.display_project(),
+                ago: claudepult_core::projects::ago(&texts, session.updated_at, now),
+                task: session.task,
+            }
+        })
+        .collect();
+    SessionsView { resumable, rows, hooks: status_key(hook_status(&projects_root(&app))) }
+}
+
+/// A click on a finished session: `claude --resume <id>` in a terminal window in its folder. Only sessions the list
+/// offers.
+#[tauri::command]
+pub fn resume_session(app: AppHandle, id: String) -> Result<(), String> {
+    let texts = strings(&app);
+    let session = sessions::load_resumable(&paths::sessions_dir(), Utc::now(), process::is_alive).into_iter().find(|s| s.id == id).ok_or("unknown session")?;
+    let claude = claudepult_core::launch::find_claude().ok_or_else(|| texts.t("Claude Code не установлен").to_owned())?;
+    eprintln!("resume session {id}");
+    claudepult_core::launch::open_in_terminal(Path::new(&session.cwd), &claude, &["--resume", &session.id]).map_err(|e| texts.format("Не удалось открыть Терминал: %@", &[&e]))
 }
 
 /// «Разрешить» / «Отклонить» from the panel. An error leaves the request open: answer again or in Claude.
