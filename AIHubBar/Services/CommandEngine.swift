@@ -81,6 +81,16 @@ final class CommandEngine {
         }
     }
 
+    /// Where a started command is, by the file it writes. A background run is found after a restart too; nil when
+    /// nothing knows about the command any more.
+    func state(ofResult path: String, projectPath: String) -> Job.State? {
+        if let job = jobs(for: projectPath).first(where: { $0.resultFile == path }) { return job.state }
+        guard let run = runs.runs.first(where: { $0.resultFile == path }) else { return nil }
+        guard run.state.isFinished else { return .background(runID: run.id) }
+        return run.state == .succeeded && FileManager.default.fileExists(atPath: path)
+            ? .done : .failed(run.summary ?? String(localized: "Фоновая задача: \(run.state.rawValue)"))
+    }
+
     func clearFinished(in projectPath: String) {
         let finished = Set(jobs(for: projectPath).filter { $0.state != .running && !isBackgroundRunning($0) }.map(\.id))
         jobs.removeAll { finished.contains($0.id) }

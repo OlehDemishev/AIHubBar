@@ -409,6 +409,10 @@
               "name" : "Comparer"
             },
             {
+              "detail" : "« Choisir » sous la liste des projets : cochez les projets, choisissez une commande du profil et le moment — « Maintenant », « Cette nuit » ou « Après réinitialisation de la limite ». Les projets passent l’un après l’autre en arrière-plan (Claude Code ou un modèle par API), près d’une limite le lot attend la réinitialisation, et un seul résumé arrive à la fin.",
+              "name" : "Plusieurs projets à la fois"
+            },
+            {
               "detail" : "Le module « Versions » enregistre les textes et la fiche d’un projet-dossier avant chaque lancement de l’IA et pendant que vous écrivez — dans le dossier de l’app, pas dans le projet. Fréquence et durée de conservation : Réglages → « Modules » → « Versions ».",
               "name" : "Versions"
             },

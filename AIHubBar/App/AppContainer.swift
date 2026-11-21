@@ -69,6 +69,7 @@ final class AppContainer {
     let folders: FolderProjectStore
     let engine: CommandEngine
     let versionKeeper: VersionKeeper
+    let batches: BatchRunner
     let calendar: CalendarStore
 
     init() {
@@ -135,6 +136,17 @@ final class AppContainer {
         telegramApprovals.botReads = { [telegramBot] token in telegramBot.reads(token) }
         self.weeklySummary = WeeklySummarySender(settings: settings, usage: usage, runs: runs, hub: hub)
         self.launcher = launcher
+        let batches = BatchRunner(engine: engine)
+        self.batches = batches
+        batches.profile = { [modes] id in modes.modes.first { $0.id == id } }
+        batches.isHeld = { [launcher] in launcher.guardHold != nil }
+        batches.nightStart = { [settings] now in NightQueue.nextStart(hour: settings.nightStartHour, now: now) }
+        batches.resetsAt = { [usage] in usage.snapshot?.session?.resetsAt }
+        batches.announce = { [settings] batch in
+            let summary = batch.summary
+            Notifier.post(id: "batch-\(batch.id)", title: summary.title, body: summary.body)
+            Telegram.notify(.backgroundResults, html: "📦 <b>\(RunMessage.escape(summary.title))</b>\n\(RunMessage.escape(summary.body))", settings: settings)
+        }
         let quickPrompt = QuickPromptController(settings: settings, launcher: launcher, services: services)
         self.quickPrompt = quickPrompt
         let hooks = HookController(settings: settings)
@@ -318,6 +330,7 @@ final class AppContainer {
             calendar.start()
             if live {
                 launcher.start()
+                batches.start()
                 // After the menu bar item is up, so the alert is not the first thing of a login.
                 Task {
                     try? await Task.sleep(for: .seconds(3))
@@ -456,6 +469,7 @@ private struct AppEnvironment: ViewModifier {
             .environment(app.services)
             .environment(app.folders)
             .environment(app.engine)
+            .environment(app.batches)
             .environment(app.calendar)
     }
 }

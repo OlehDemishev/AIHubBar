@@ -409,6 +409,10 @@
               "name" : "Vergleichen"
             },
             {
+              "detail" : "„Wählen“ unter der Projektliste: Projekte ankreuzen, einen Befehl des Profils wählen und wann er läuft – „Jetzt“, „Heute Nacht“ oder „Nach dem Zurücksetzen des Limits“. Die Projekte laufen nacheinander im Hintergrund (Claude Code oder ein Modell per API), am Limit wartet der Stapel auf das Zurücksetzen, am Ende kommt eine Zusammenfassung.",
+              "name" : "Mehrere Projekte auf einmal"
+            },
+            {
               "detail" : "Das Modul „Versionen“ sichert die Texte und die Karte eines Ordnerprojekts vor jedem KI-Lauf und während des Schreibens – im Ordner der App, nicht im Projekt. Wie oft und wie lange: Einstellungen → „Module“ → „Versionen“.",
               "name" : "Versionen"
             },

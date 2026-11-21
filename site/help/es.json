@@ -409,6 +409,10 @@
               "name" : "Comparar"
             },
             {
+              "detail" : "«Elegir» bajo la lista de proyectos: marca los proyectos, elige un comando del perfil y cuándo ejecutarlo: «Ahora», «Esta noche» o «Tras el reinicio del límite». Los proyectos van uno tras otro en segundo plano (Claude Code o un modelo por API), cerca de un límite el lote espera el reinicio y al final llega un solo resumen.",
+              "name" : "Varios proyectos a la vez"
+            },
+            {
               "detail" : "El módulo «Versiones» guarda los textos y la ficha de un proyecto de carpeta antes de cada ejecución de la IA y mientras escribes, en la carpeta de la app, no en el proyecto. Cada cuánto y cuánto tiempo: Ajustes → «Módulos» → «Versiones».",
               "name" : "Versiones"
             },

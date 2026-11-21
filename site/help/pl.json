@@ -409,6 +409,10 @@
               "name" : "Porównaj"
             },
             {
+              "detail" : "„Wybierz” pod listą projektów: zaznacz projekty, polecenie profilu i kiedy je uruchomić — „Teraz”, „Na noc” albo „Po resecie limitu”. Projekty idą po kolei w tle (Claude Code lub model przez API), przy limicie pakiet czeka na reset, a na końcu przychodzi jedno podsumowanie.",
+              "name" : "Kilka projektów naraz"
+            },
+            {
               "detail" : "Moduł „Wersje” zapisuje teksty i kartę projektu-folderu przed każdym uruchomieniem AI i gdy piszesz — w folderze aplikacji, nie w projekcie. Jak często i jak długo przechowywać: Ustawienia → „Moduły” → „Wersje”.",
               "name" : "Wersje"
             },

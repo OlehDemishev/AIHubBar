@@ -5,6 +5,7 @@
 **Updated:** 2026-11-21
 
 **Now:**
+- 2026-11-21: Mac — content stage 4 done in a branch: batch tasks — «Выбрать» in the projects block of a folder profile, one command over the checked projects now, at night or after the limit resets, one project at a time, one summary (branch `feat/batch-tasks`, PR open on top of `feat/versions-card`, **held until 0.12.0 is out**); tests only, **not seen live** — the panel was not opened while Oleh was at the Mac
 - 2026-11-21: Mac — content stage 3 done in a branch: «Версии» in a folder project's card — the window with the list of versions, a file of a version next to the file now, «Вернуть этот файл» / «Вернуть всю версию», «Что изменилось» in a command's notification and in «Журнал» (branch `feat/versions-card`, PR open on top of PR 506, **held until 0.12.0 is out**); the window, the list and the comparison seen live in an isolated copy, a restore pressed there — not
 - 2026-11-20: Mac — the «Версии» module is ready in PR 506 (`feat/versions-module`: a version before every command on a folder project and by a timer, Settings → «Модули» → «Версии»), checks green; **held until 0.12.0 is out**, then merged
 - 2026-11-20: Mac — content stage 2 «Версии» begun: the store of draft versions (`VersionStore`: contents kept once, a version when something differs, all of the last day then one a day, 20 MB limit, a deleted project's store gone after a month) with tests (`feat/versions-store`, merged 2026-11-20); nothing calls it yet, so 0.12.0 is not changed by it
@@ -116,7 +117,8 @@
 - towards 1.0 (discussed 2026-11-10): the live pass is done (journal 2026-11-10); left — freeze what is in 1.0 and what stays beta, release notes, translations read by people, feedback from strangers before 1.0
 - check on the Air: the island at the real notch
 - promotion (docs/LAUNCH.md): r/ClaudeAI, the lists, r/macapps, Show HN, Product Hunt, Homebrew
-- right after 0.12.0 is published: merge PR 506 (`feat/versions-module`), then the PR of `feat/versions-card` retargeted to `main`; then content stage 4 (docs/specs/SPEC-content.md §5): batch tasks
+- right after 0.12.0 is published: merge PR 506 (`feat/versions-module`), then the PRs of `feat/versions-card` and `feat/batch-tasks`, each retargeted to `main`
+- batch tasks live on a real profile, before they are released: «Выбрать», the checkboxes, a batch of two or three projects with a model by API and with Claude Code, «На ночь», the summary
 - «Версии» live on a real profile: the «Версии» link in the card, a restore pressed in the window, «Что изменилось» on a notification and in «Журнал»
 - Windows: left on the laptop — notifications and their buttons (the agent can't see a toast: its tool hides other programs' windows); the Mac's background runs have the same rules — try one build in a subfolder there; stage 7: the installer and updates are done (0.1.2), signing waits for SignPath (the update 0.1.2 → 0.1.3 from GitHub was seen on the laptop); Telegram on Windows (Oleh's choice 2026-11-20): stages 1 and 2 are done (the reader, 🏠, 🤖, permission requests), neither tried with a real bot; ⏳ too; next tasks from the chat (SPEC-telegram stage 3) — only after a real bot has been tried on the laptop: a chat that can start an agent must first be seen refusing a stranger; of the limits stage (SPEC-windows §9.2) left: the «История расхода» window
 
@@ -164,6 +166,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-21 — Batch tasks: one command over several folder projects (branch `feat/batch-tasks`)
+
+Done: content stage 4 (docs/specs/SPEC-content.md §5), on top of `feat/versions-card`. «Выбрать» under the projects of a folder profile turns the rows into checkboxes («Все» / «Снять все»); then a command of the profile, the service (only where a run needs nobody: Claude Code in the background and models by API — `Batch.canRun`), a text field when the command asks for one (asked once for the whole batch) and «Сейчас» / «На ночь» / «После сброса лимита» (the last for Claude Code only). `BatchRunner` keeps the queue in `batches.json`, starts one project at a time over all batches, waits near Claude's limit (the same hold that pauses single runs), reads each project again when its turn comes, goes on after a failure (no reply, folder gone, profile removed), takes a version before each run through the engine's hook, and sends one summary at the end (notification and Telegram, «Пакет «Редактура»: ✅ 8, ❌ 2» with a line per project). A batch in the list: «Редактура · 3 из 10», «Отменить» (what has not started is dropped, the running one finishes), «Убрать» when done. After a restart a background run is found again by its result file; a model by API that was working is marked «прервано». Help fact «Несколько проектов сразу», release notes 0.13.0, 23 strings in 13 languages.
+Checked: `scripts/check.sh` green (strings, relay tests, Mac tests, strings against the code); 6 new tests (`BatchRunnerTests`: one after another with one summary, a failure does not stop the rest, the start time and the limit, cancel, the queue after a restart, which services take a batch) — with a model by API answered in the test.
+Left: **nothing of it seen live** — not the «Выбрать» row, the checkboxes, the buttons, nor a real batch with Claude Code in the background; the panel was not opened because Oleh was at the Mac. The wait near the limit is one line (`isHeld`) and is not covered by a test with a running batch. The PR is held with PR 506 and 508 until 0.12.0 is out.
 
 ## 2026-11-21 — «Версии» in the card: list, compare, restore, «Что изменилось» (branch `feat/versions-card`)
 
