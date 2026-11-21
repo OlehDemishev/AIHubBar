@@ -124,7 +124,7 @@
 - 0.12.0-beta.2 is out (2026-11-20); before 0.12.0: Oleh uses the beta; seen 2026-11-21 in an isolated copy — the «Что нового» card, the header bell, the Telegram tile, a Codex approval from a made-up request; left to see — a real `codex` asking, handover, review, the pair's notification banner
 - 0.12.0 not before Tuesday 2026-11-24, on Oleh's word; then `scripts/release-tools/update-cask.sh 0.12.0`
 - Antigravity «ждёт»: the notification is ready in PR 520 (`feat/antigravity-wait-notification`), **held until 0.12.0 is out**; then see it with a real `agy` question
-- towards 1.0 (discussed 2026-11-10): the live pass is done (journal 2026-11-10); left — freeze what is in 1.0 and what stays beta, release notes, translations read by people, feedback from strangers before 1.0
+- towards 1.0: what is in, what is «бета» and what is out is agreed (journal 2026-11-21); next — a «бета» badge beside a feature (Codex, Antigravity, Copilot and Gemini, «Сравнить», «Версии», batch tasks, the 11 other languages) that hides nothing; left — release notes, translations read by people, feedback from strangers, the island at the real notch
 - check on the Air: the island at the real notch
 - promotion (docs/LAUNCH.md): r/ClaudeAI, the lists, r/macapps, Show HN, Product Hunt, Homebrew
 - right after 0.12.0 is published: merge PR 506 (`feat/versions-module`), then PR 508 (`feat/versions-card`) and PR 510 (`feat/batch-tasks`), each retargeted to `main`, and PR 520; all four contain `main` as of 2026-11-21 and are green
@@ -175,6 +175,15 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-21 — Mac: what goes into 1.0 (branch `chore/status-1.0-scope`)
+
+Done: the list proposed by the agent and agreed by Oleh («Да, запиши», 2026-11-21). Nothing in the code changed.
+- **In 1.0 as ready:** Claude's limits, forecast, week pace, «История расхода»; Claude Code sessions with «Разрешить» / «Отклонить» and «Показать»; projects, commands, background tasks with «Журнал»; profiles and modules, the first-launch assistant, Settings, the menu bar builder; the Mac utilities («Ресурсы», «Не спать», quick commands and toggles, clipboard, notes); «Быстрый запрос» for Claude, «Раскладка», the island at the notch; Telegram with the person's own bot (reports, task results, permission requests, the bell); Sparkle updates, the help, Russian and English.
+- **In 1.0 marked «бета»:** Codex (approvals, background, handover, review, the pair's comparison) — real runs not seen live, its hooks need trust in `/hooks`; Antigravity's quota and «ждёт ответа» — read from `agy`'s undocumented status line; Copilot and Gemini sessions and limits — Copilot's hook never installed live; «Тексты»: «Сравнить», «Версии», batch tasks — «Сравнить» never ran with a real key, the other two are still in branches; the other 11 languages — not read by native speakers; the Homebrew install — never tried on a clean Mac.
+- **Not in 1.0:** Windows and Linux (their own 0.1.x line); the shared Telegram bot through a Cloudflare Worker and the Mini App (the Worker is not deployed); Cursor CLI, `.ics` export, writing goals; automatic crash reports (until Oleh decides).
+Checked: against the module catalog (no module has `isBeta` today), `docs/release-notes/0.12.0.md`, `docs/CHECKLIST.md` «Oleh» rows and this header's «Needs Oleh».
+Left: today «бета» can only hide a whole module until beta versions are on (`ModuleDefinition.isBeta`); Codex, Antigravity and the languages need a badge beside the feature that hides nothing — a separate small task. Before 1.0 besides the list: the island at the real notch on the Air (otherwise it goes to «бета» too), feedback from strangers on at least one version, Oleh's checks of the «ready» group — start at login, a Sparkle update, «Не спать» after a relaunch.
 
 ## 2026-11-21 — Windows 0.1.7 released (branch `chore/desktop-0.1.7-note`)
 
