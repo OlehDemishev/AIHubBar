@@ -31,6 +31,9 @@ struct State {
     paused_until: Option<DateTime<Utc>>,
     notified: BTreeSet<String>,
     last_growth: Option<DateTime<Utc>>,
+    /// What Anthropic's status page said after the limits failed; None when all is well or nothing is known.
+    outage: Option<String>,
+    status_checked: Option<DateTime<Utc>>,
     /// The last try to renew Claude Code's sign-in.
     last_renewal: Option<DateTime<Utc>>,
     /// «Расход по проектам»: the journals' records and when they were last read.
@@ -117,6 +120,7 @@ impl Limits {
                     state.strikes = 0;
                     state.paused_until = None;
                     state.error = None;
+                    state.outage = None;
                     let before = state.snapshot.as_ref().and_then(|s| s.session()).map(|w| w.utilization);
                     if let (Some(before), Some(now_value)) = (before, snapshot.session().map(|w| w.utilization)) {
                         if now_value > before {
@@ -138,6 +142,7 @@ impl Limits {
                         let _ = std::fs::write(notified_file(), serde_json::to_string(&state.notified).unwrap_or_default());
                     }
                     write_usage_file(&snapshot);
+                    crate::history::note(snapshot.session().map(|w| w.utilization), snapshot.week().map(|w| w.utilization));
                     state.snapshot = Some(snapshot);
                     alerts
                 }
@@ -155,6 +160,20 @@ impl Limits {
                 }
             }
         };
+        // A failure an outage could explain: ask Anthropic's status page, at most every ten minutes.
+        let ask = {
+            let state = self.state.lock().unwrap();
+            state.error.as_ref().is_some_and(UsageError::may_be_outage) && state.status_checked.is_none_or(|at| now - at > Duration::minutes(10))
+        };
+        if ask {
+            let outage = usage::check_status();
+            if let Some(outage) = &outage {
+                eprintln!("Anthropic status: {outage}");
+            }
+            let mut state = self.state.lock().unwrap();
+            state.status_checked = Some(now);
+            state.outage = outage;
+        }
         let texts = strings(app);
         if let Some(snapshot) = self.state.lock().unwrap().snapshot.clone() {
             for alert in &alerts {
@@ -237,8 +256,23 @@ impl Limits {
             ("today", texts.t("Сегодня"), midnight),
             ("week", texts.t("Неделя"), snapshot.and_then(|s| s.week()).and_then(|w| w.resets_at).map(|at| at - Duration::days(7)).unwrap_or(now - Duration::days(7))),
         ];
+        let week = snapshot.and_then(|s| s.week()).and_then(|w| Some((w.utilization, w.resets_at?))).map(|(used, resets_at)| {
+            let week = token_usage::WeekUsage::make(records, used, resets_at, now);
+            WeekView {
+                days: week.days.iter().map(|day| WeekDayView { day: day.day.clone(), percent: day.percent, today: day.is_today }).collect(),
+                forecast: match week.forecast {
+                    token_usage::WeekForecast::RunsOutAt(at) => {
+                        let local = at.with_timezone(&chrono::Local);
+                        let when = if (at - now).num_hours() < 20 { local.format("%H:%M").to_string() } else { texts.weekday_time(&local) };
+                        Some(texts.format("неделя кончится %@ при таком темпе", &[&when]))
+                    }
+                    _ => None,
+                },
+            }
+        });
         let other = texts.t("Другое");
         SpendView {
+            week,
             periods: starts
                 .into_iter()
                 .map(|(id, title, since)| {
@@ -299,6 +333,7 @@ impl Limits {
                 &UsageForecast::make(&state.history, snapshot.and_then(|s| s.session()), now),
             ),
             error: state.error.as_ref().map(|e| texts::error_text(texts, e)),
+            outage: state.outage.as_ref().filter(|_| state.error.is_some()).map(|outage| texts.format("Сбой у Anthropic: %@", &[outage])),
         }
     }
 }
@@ -329,6 +364,8 @@ pub struct LimitsView {
     others: Vec<RingView>,
     forecast: Option<String>,
     error: Option<String>,
+    /// «Сбой у Anthropic: …» when the limits fail and Anthropic's status page reports trouble.
+    outage: Option<String>,
 }
 
 #[derive(Serialize)]
@@ -353,6 +390,25 @@ pub struct SpendPeriod {
 #[serde(rename_all = "camelCase")]
 pub struct SpendView {
     periods: Vec<SpendPeriod>,
+    /// The week's use by day; None until the week's limit and its reset are known.
+    week: Option<WeekView>,
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct WeekDayView {
+    /// `yyyy-MM-dd`.
+    day: String,
+    percent: f64,
+    today: bool,
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct WeekView {
+    days: Vec<WeekDayView>,
+    /// «неделя кончится Чт 14:30 при таком темпе», when it would end before its reset.
+    forecast: Option<String>,
 }
 
 /// «Расход по проектам»: counted off the panel's thread — the first read goes through a week of journals.
@@ -362,6 +418,12 @@ pub async fn spend_view(app: AppHandle) -> Result<SpendView, String> {
     let texts = strings(&app);
     let root = crate::profiles::projects_root(&app);
     tauri::async_runtime::spawn_blocking(move || limits.spend(&root, &texts)).await.map_err(|e| e.to_string())
+}
+
+/// «Подробнее» next to an outage: Anthropic's status page.
+#[tauri::command]
+pub fn open_status_page() -> Result<(), String> {
+    crate::projects::open_with_system(usage::STATUS_PAGE.as_ref())
 }
 
 /// «Продлевать вход Claude Code сам».

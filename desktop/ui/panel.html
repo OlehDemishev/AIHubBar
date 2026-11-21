@@ -38,12 +38,19 @@
         <div id="hub-rows"></div>
       </div>
       <p class="error" id="limits-error" hidden></p>
+      <p class="outage" id="limits-outage" hidden><span id="limits-outage-text"></span> <button class="link" id="limits-outage-more" data-t="Подробнее"></button></p>
       <details id="spend">
         <summary class="secondary" data-t="Подробнее"></summary>
+        <div id="week-strip" hidden>
+          <div class="secondary spend-title" data-t="Расход недели по дням, в процентах"></div>
+          <div class="week-days" id="week-days"></div>
+          <p class="warning" id="week-forecast" hidden></p>
+        </div>
         <div class="secondary spend-title" data-t="Расход по проектам"></div>
         <div class="segments" id="spend-periods" role="group" data-t-title="Период"></div>
         <div id="spend-rows"></div>
         <p class="secondary" id="spend-top" hidden></p>
+        <button class="link" id="open-history" data-t="История расхода…"></button>
         <p class="secondary spend-note" data-t="Оценка по журналам Claude Code, а не точный расход лимита. Доли учитывают цену токенов (вывод ×5, чтение кэша ×0,1); токены — без чтения кэша."></p>
       </details>
     </section>
@@ -209,6 +216,10 @@
       const errorLine = document.getElementById("limits-error");
       errorLine.hidden = !error;
       errorLine.textContent = error ?? "";
+      // Anthropic's status page reports trouble: the failure is theirs, not this computer's.
+      document.getElementById("limits-outage").hidden = !claudeView.outage;
+      document.getElementById("limits-outage-text").textContent = claudeView.outage ?? "";
+      document.getElementById("limits-outage-more").onclick = () => invoke("open_status_page");
       document.getElementById("hub").hidden = services.length === 0;
       document.getElementById("hub-rows").replaceChildren(...services.map(serviceRow));
     }
@@ -294,6 +305,37 @@
           top.hidden = true;
           return;
         }
+        // The week by day: a column a day, today's in the accent colour; a week that resets in the middle of a day
+        // touches eight days, and then its first and last columns say the date too.
+        const week = view.week;
+        document.getElementById("week-strip").hidden = !week || week.days.length === 0;
+        if (week) {
+            const lang = document.documentElement.lang || undefined;
+            const highest = Math.max(...week.days.map((day) => day.percent), 1);
+            document.getElementById("week-days").replaceChildren(...week.days.map((day, index) => {
+              const date = new Date(day.day + "T12:00:00");
+              const column = document.createElement("div");
+              column.className = "week-day" + (day.today ? " today" : "");
+              const rounded = Math.round(day.percent);
+              column.title = t("%@: %lld %% недельного лимита", new Intl.DateTimeFormat(lang, { weekday: "long", day: "numeric", month: "long" }).format(date), rounded);
+              const value = document.createElement("span");
+              value.className = "secondary";
+              value.textContent = day.percent >= 0.5 ? rounded : "";
+              const bar = document.createElement("div");
+              bar.className = "bar";
+              bar.style.height = `${Math.max(2, 22 * day.percent / highest)}px`;
+              const label = document.createElement("span");
+              let weekday = new Intl.DateTimeFormat(lang, { weekday: "short" }).format(date);
+              weekday = weekday.charAt(0).toUpperCase() + weekday.slice(1);
+              const edge = week.days.length > 7 && (index === 0 || index === week.days.length - 1);
+              label.textContent = edge ? `${weekday} ${date.getDate()}` : weekday;
+              column.append(value, bar, label);
+              return column;
+            }));
+            const forecast = document.getElementById("week-forecast");
+            forecast.hidden = !week.forecast;
+            forecast.textContent = week.forecast ?? "";
+        }
         periods.replaceChildren(...view.periods.map((period) => {
           const button = document.createElement("button");
           button.className = "small" + (period.id === chosen ? " chosen" : "");
@@ -324,10 +366,11 @@
       const load = async () => {
         if (!box.open) return;
         show();
-        try { view = await invoke("spend_view"); } catch { view = { periods: [] }; }
+        try { view = await invoke("spend_view"); } catch { view = { periods: [], week: null }; }
         show();
       };
       box.addEventListener("toggle", load);
+      document.getElementById("open-history").onclick = () => invoke("open_history");
       window.__TAURI__.event.listen("limits-changed", load);
     }
 

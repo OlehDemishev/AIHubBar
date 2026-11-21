@@ -81490,6 +81490,82 @@
         }
       }
     },
+    "Оценка по журналам Claude Code на этом компьютере: токены без чтения кэша. Лимиты считает сама Anthropic, и чаты на claude.ai сюда не попадают.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تقدير من سجلات Claude Code على هذا الحاسوب: الرموز من دون قراءات الذاكرة المؤقتة. تحسب Anthropic الحدود بنفسها، ولا تُحتسب محادثات claude.ai."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eine Schätzung aus den Claude-Code-Protokollen auf diesem Computer: Tokens ohne Cache-Lesevorgänge. Die Limits berechnet Anthropic selbst, Chats auf claude.ai sind nicht enthalten."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "An estimate from Claude Code’s logs on this computer: tokens without cache reads. Anthropic counts the limits itself, and claude.ai chats aren’t included."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Una estimación a partir de los registros de Claude Code en este ordenador: tokens sin lecturas de caché. Anthropic calcula los límites por su cuenta y los chats de claude.ai no se incluyen."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une estimation d’après les journaux de Claude Code sur cet ordinateur : jetons sans lectures de cache. Anthropic calcule elle-même les limites, et les discussions sur claude.ai n’y figurent pas."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Perkiraan dari log Claude Code di komputer ini: token tanpa pembacaan cache. Batas dihitung sendiri oleh Anthropic, dan obrolan claude.ai tidak termasuk."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Una stima dai registri di Claude Code su questo computer: token senza letture della cache. I limiti li calcola Anthropic e le chat su claude.ai non sono incluse."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "このコンピュータの Claude Code のログによる推定です(キャッシュ読み取りを除くトークン)。上限は Anthropic が計算しており、claude.ai のチャットは含まれません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이 컴퓨터의 Claude Code 로그로 추정한 값입니다(캐시 읽기를 제외한 토큰). 한도는 Anthropic이 직접 계산하며 claude.ai 채팅은 포함되지 않습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Szacunek na podstawie dzienników Claude Code na tym komputerze: tokeny bez odczytów pamięci podręcznej. Limity liczy sama Anthropic, a czaty z claude.ai nie są uwzględniane."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uma estimativa pelos registros do Claude Code neste computador: tokens sem leituras de cache. A Anthropic calcula os limites por conta própria, e os chats do claude.ai não entram."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Оцінка за журналами Claude Code на цьому комп’ютері: токени без читання кешу. Ліміти рахує сама Anthropic, а чати на claude.ai сюди не потрапляють."
+          }
+        }
+      }
+    },
     "Оценка по журналам Claude Code, а не точный расход лимита. Доли учитывают цену токенов (вывод ×5, чтение кэша ×0,1); токены — без чтения кэша.": {
       "localizations": {
         "ar": {

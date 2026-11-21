@@ -15,6 +15,10 @@ enum WindowID: String, CaseIterable, Sendable {
     case usageHistory = "usage-history"
     case pairCompare = "pair-compare"
     case versions
+    #if DEBUG
+    /// Debug builds only: the panel's content in a plain window, for checks that must not open the menu bar panel.
+    case debugPanel = "debug-panel"
+    #endif
     /// Not a scene: the Settings window, opened with `openSettings`.
     case settings
 }

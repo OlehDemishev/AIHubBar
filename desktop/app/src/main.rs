@@ -9,6 +9,7 @@
 mod assistant;
 mod calendar;
 mod commands;
+mod history;
 mod hub;
 mod keep_awake;
 mod limits;
@@ -397,13 +398,14 @@ fn main() {
         .manage(toggles::Toggles::default())
         .manage(hub::Hub::default())
         .manage(updates::Updates::default())
+        .manage(history::History::default())
         .manage(telegram::Telegram::default())
         .manage(quick_prompt::QuickPrompt::default())
         .manage(command_hot_keys::CommandHotKeys::default())
         .manage(AppState { settings: Mutex::new(load_settings()) })
         .invoke_handler(tauri::generate_handler![
             ui_texts, set_language, dismiss_tray_hint, autostart_enabled, set_autostart, open_settings, hide_panel, quit,
-            limits::limits_view, limits::spend_view, limits::limit_thresholds, limits::set_limit_thresholds, limits::renew_claude_login, limits::set_renew_claude_login, limits::refresh_limits,
+            limits::limits_view, limits::spend_view, limits::limit_thresholds, limits::set_limit_thresholds, limits::renew_claude_login, limits::set_renew_claude_login, limits::open_status_page, limits::refresh_limits,
             sessions::sessions_view, sessions::decide_request, sessions::hooks_state, sessions::install_hooks,
             sessions::uninstall_hooks, sessions::agent_hooks_state, sessions::install_agent_hooks, sessions::uninstall_agent_hooks,
             projects::projects_view, projects::refresh_projects, projects::projects_panel_opened, projects::open_project,
@@ -420,6 +422,7 @@ fn main() {
             telegram::telegram_view, telegram::telegram_save_token, telegram::telegram_remove_token, telegram::telegram_bind,
             telegram::telegram_cancel_binding, telegram::telegram_set_chat, telegram::telegram_test, telegram::set_telegram_event,
             telegram::set_telegram_answers, telegram::set_telegram_requests,
+            history::open_history, history::history_view, history::set_plan_price, history::export_history,
             updates::updates_view, updates::set_updates_daily, updates::check_updates, updates::install_update,
             pull_request_alerts, set_pull_request_alerts, profiles::projects_folder, profiles::choose_projects_folder,
             profiles::reset_projects_folder, profiles::profiles_view, profiles::select_profile, profiles::add_profile, profiles::profile_templates,
