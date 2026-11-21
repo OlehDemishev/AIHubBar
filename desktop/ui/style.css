@@ -68,6 +68,13 @@ select { font: inherit; padding: 4px 6px; border-radius: 6px; border: 1px solid 
 .row + .row { border-top: 1px solid var(--line); }
 #updates-state { flex: 1; min-width: 0; overflow-wrap: anywhere; }
 #spend { margin-top: 6px; }
+#resumable { margin-top: 4px; }
+#resumable summary { cursor: pointer; font-size: 12px; }
+button.resumable { display: flex; align-items: center; gap: 6px; width: 100%; border: none; background: none; padding: 4px 2px; border-radius: 6px; text-align: start; min-width: 0; }
+button.resumable:hover { background: var(--line); border: none; }
+button.resumable .project { font-weight: 600; flex: none; max-width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+button.resumable .detail { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+button.resumable .ago { flex: none; font-size: 12px; }
 .outage { color: #c77700; font-size: 12px; margin: 4px 0; }
 .week-days { display: flex; align-items: flex-end; gap: 4px; height: 56px; }
 .week-day { flex: 1; min-width: 0; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 2px; font-size: 10px; white-space: nowrap; }

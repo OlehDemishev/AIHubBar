@@ -57,6 +57,11 @@
     <section class="card sessions">
       <h2 data-t="Сессии Claude Code"></h2>
       <div id="session-rows"></div>
+      <details id="resumable" hidden>
+        <summary class="secondary" data-t="Недавно завершённые"></summary>
+        <div id="resumable-rows"></div>
+        <p class="error" id="resumable-error" hidden></p>
+      </details>
       <p class="secondary" id="no-sessions" data-t="Сессий Claude Code сейчас нет" hidden></p>
       <div id="no-hooks" hidden>
         <p class="secondary" data-t="Сессии Claude не отслеживаются: hooks не установлены."></p>
@@ -471,12 +476,32 @@
         const extra = row.run ? runControls(row.run) : [];
         return [item, ...extra, ...(row.request ? [request(row.request)] : [])];
       }));
+      // «Недавно завершённые»: a click continues the session in a terminal (`claude --resume`).
+      const finished = document.getElementById("resumable");
+      finished.hidden = view.resumable.length === 0;
+      document.getElementById("resumable-rows").replaceChildren(...view.resumable.map((row) => {
+        const item = document.createElement("button");
+        item.className = "resumable";
+        item.title = row.hint;
+        item.innerHTML = `<span aria-hidden="true">↩</span><span class="project"></span><span class="secondary detail"></span><span class="secondary ago"></span>`;
+        item.querySelector(".project").textContent = row.project;
+        item.querySelector(".detail").textContent = row.task ?? "";
+        item.querySelector(".ago").textContent = row.ago;
+        item.onclick = async () => {
+          const error = document.getElementById("resumable-error");
+          error.hidden = true;
+          try { await invoke("resume_session", { id: row.id }); } catch (problem) { error.hidden = false; error.textContent = String(problem); }
+        };
+        return item;
+      }));
       document.getElementById("no-hooks").hidden = view.hooks === "installed";
       document.getElementById("no-sessions").hidden = view.rows.length > 0 || view.hooks !== "installed";
     }
     document.getElementById("hooks-settings").onclick = () => invoke("open_settings");
     await showSessions();
     window.__TAURI__.event.listen("sessions-changed", showSessions);
+    // Finished sessions change without an event of their own: read them when the panel is opened.
+    window.addEventListener("focus", showSessions);
 
     // «Ресурсы компьютера»: processor, memory, graphics, disk as bars; network and battery as text; the programs
     // using the most processor. Read every 2 s while the panel is visible.

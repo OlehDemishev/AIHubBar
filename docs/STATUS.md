@@ -5,6 +5,7 @@
 **Updated:** 2026-11-21
 
 **Now:**
+- 2026-11-21: Windows — «Недавно завершённые» in the panel: a finished Claude Code session is continued in a terminal with `claude --resume` by a click (branch `feat/desktop-resume-sessions`; seen live with a sample record — the terminal opened with the command)
 - 2026-11-21: Windows — «Сбой у Anthropic: …» in the panel when the limits fail and Anthropic's status page reports trouble, with «Подробнее» to the page (branch `feat/desktop-outage`; the real page asked once — all well; the line itself not seen)
 - 2026-11-21: Windows 0.1.6 published as an unsigned pre-release (tag `desktop-v0.1.6`) on Oleh's «Выпускай 0.1.6»: the «История расхода» window and the week by day; the laptop updated itself from 0.1.5; «latest» stays the Mac's v0.11.0
 - 2026-11-21: Windows — «Расход недели по дням» under «Подробнее»: a column a day in percent of the week's limit, and «неделя кончится … при таком темпе» when it would end before its reset (branch `feat/desktop-week-by-day`; seen live)
@@ -170,6 +171,12 @@
 - MacBook Air: update to 0.8.0 through Sparkle and check the island at the real notch; in 0.8.1 check the limit rings sit inside the black ears, «100» included
 - older, still open: Mac mini Claude CLI sign-in, crash report alert from 16:46, Chinese model keys, ja/ko/ar translations, docs/CHECKLIST.md «Oleh» rows, social preview image, old repo `OlehDemishev/ClaudeBar`
 <!-- summary:end -->
+
+## 2026-11-21 — Windows: «Недавно завершённые» (branch `feat/desktop-resume-sessions`)
+
+Done: on Oleh's «Дальше». The Mac's list of finished sessions: under the sessions in the panel, a folded «Недавно завершённые» with up to five Claude Code sessions that have left the list (ended more than 15 minutes ago), whose folder is still there and which nothing runs — «↩ project · the task · 2 ч назад». A click opens a terminal window in the session's folder with `claude --resume <id>`; only a session the list offers can be continued. Codex's and Copilot's finished sessions are not in it (the Mac lists them apart). The panel reads the sessions again when it is opened, since a session leaving the list makes no event. `core/src/sessions.rs` `load_resumable` / `is_resumable`, `app/src/sessions.rs` `resume_session`, `ui/panel.html`. Both texts are the Mac's.
+Checked: `python scripts/strings.py --check` (663 texts), `cargo test --workspace` on Windows (which sessions count: left the list, folder there, nothing runs it, Claude's own). Live on the laptop, a build from the branch: with a sample record of a session ended two hours ago, «Недавно завершённые» appeared, opened into «↩ AIHubBar Почини корзину и добавь те… 2 ч назад», and a click started Windows Terminal in the project's folder running `claude.exe --resume <the record's id>`. The sample record removed, the test window closed.
+Left: a real finished session was not continued — the laptop's own ones were in folders deleted since, and the sample id has no conversation behind it; in the terminal Claude Code first stopped at its Chrome extension question, as every launch there does (Needs Oleh). The hint on the row was not hovered.
 
 ## 2026-11-21 — Windows: an outage at Anthropic is told from a problem here (branch `feat/desktop-outage`)
 
