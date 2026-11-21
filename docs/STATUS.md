@@ -175,7 +175,7 @@
 
 Done: on Oleh's «дальше». The Mac's `ServiceStatus`: when the limits fail in a way an outage could explain — no answer, an answer that can't be read, HTTP 500 and above; not a sign-in problem and not «ask less often» — the app asks Anthropic's public status page (`status.claude.com/api/v2/status.json`, no account or token), at most every ten minutes, and shows the page's own words under the limits: «Сбой у Anthropic: …» with «Подробнее», which opens the page. The line goes when the limits are read again. `core/src/usage.rs` `status_problem` / `check_status` / `may_be_outage`, `app/src/limits.rs`, `ui/panel.html`. One text, the Mac's.
 Checked: `python scripts/strings.py --check` (661 texts), `cargo test --workspace` on Windows (the page's answer with and without trouble, which failures ask). The real page asked once from the laptop: all well, nothing to show. A build from the branch starts and shows the limits as before.
-Left: the line itself was not seen — there was no outage and none was faked. «Подробнее» not pressed.
+Also fixed: the two rings of the limits stood one over the other when the reset's text was long («сброс через 4 ч 12 мин»); they stay side by side now and the text wraps inside its ring (seen live). Left: the line itself was not seen — there was no outage and none was faked. «Подробнее» not pressed.
 
 ## 2026-11-21 — Windows 0.1.6 released (branch `chore/desktop-0.1.6-note`)
 
