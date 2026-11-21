@@ -238,6 +238,25 @@ impl Limits {
         });
     }
 
+    /// Today's part of «Сегодня» that the limits know: Claude's session and week, and today's tokens by project.
+    pub fn today(&self, projects_dir: &std::path::Path, texts: &Strings) -> (Option<f64>, Option<f64>, token_usage::Breakdown) {
+        let now = Utc::now();
+        let fresh = self.state.lock().unwrap().spend.as_ref().is_some_and(|(_, at)| now - *at < Duration::minutes(1));
+        if !fresh {
+            let records = self.scanner.lock().unwrap().scan(&paths::claude_dir().join("projects"), 8, now - Duration::days(8), now);
+            self.state.lock().unwrap().spend = Some((records, now));
+        }
+        let state = self.state.lock().unwrap();
+        let records = state.spend.as_ref().map(|(records, _)| records.as_slice()).unwrap_or(&[]);
+        let midnight = chrono::Local::now().date_naive().and_hms_opt(0, 0, 0).and_then(|t| t.and_local_timezone(chrono::Local).earliest()).map(|t| t.with_timezone(&Utc)).unwrap_or(now - Duration::hours(24));
+        let snapshot = state.snapshot.as_ref();
+        (
+            snapshot.and_then(|s| s.session()).map(|w| w.utilization),
+            snapshot.and_then(|s| s.week()).map(|w| w.utilization),
+            token_usage::Breakdown::make(records, midnight, projects_dir, texts.t("Другое")),
+        )
+    }
+
     /// «Расход по проектам» for the panel: reads what is new in Claude Code's journals when the last read is older
     /// than a minute, and counts the session, today and the week.
     pub fn spend(&self, projects_dir: &std::path::Path, texts: &Strings) -> SpendView {
