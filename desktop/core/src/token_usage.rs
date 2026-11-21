@@ -204,6 +204,50 @@ pub fn tokens_text(tokens: u64, s: &Strings) -> String {
     }
 }
 
+// MARK: - How full a session's context is (the Mac's `ContextUsage`)
+
+/// From this part of the window the row says «контекст N %».
+pub const CONTEXT_WARN_AT: f64 = 0.7;
+/// From this part a notification says Claude will soon compact the conversation.
+pub const CONTEXT_NOTIFY_AT: f64 = 0.9;
+
+/// The window: 200 000 tokens, or 1 000 000 for 1M models — known by «[1m]» in the model's name or by a context
+/// already past 200 000.
+pub fn context_window(tokens: u64, model: Option<&str>) -> u64 {
+    if model.is_some_and(|model| model.contains("[1m]")) || tokens > 200_000 { 1_000_000 } else { 200_000 }
+}
+
+/// The last request's input — fresh, cache writes and cache reads — as a part of the window, from one journal line;
+/// None for a line that is not a main-thread assistant message with usage (subagents have their own context).
+pub fn context_of_line(line: &str) -> Option<f64> {
+    if line.contains("\"isSidechain\":true") || !line.contains("\"usage\"") || !line.contains("\"assistant\"") {
+        return None;
+    }
+    let object: Value = serde_json::from_str(line).ok()?;
+    if object.get("type").and_then(Value::as_str) != Some("assistant") || object.get("isSidechain").and_then(Value::as_bool) == Some(true) {
+        return None;
+    }
+    let message = object.get("message")?;
+    let usage = message.get("usage")?;
+    let count = |key: &str| usage.get(key).and_then(Value::as_u64).unwrap_or(0);
+    let tokens = count("input_tokens") + count("cache_creation_input_tokens") + count("cache_read_input_tokens");
+    if tokens == 0 {
+        return None;
+    }
+    Some(tokens as f64 / context_window(tokens, message.get("model").and_then(Value::as_str)) as f64)
+}
+
+/// How full the session's context is now: the last such line in the end of its journal (hooks don't say it).
+pub fn context_fraction(transcript: &Path) -> Option<f64> {
+    const TAIL: u64 = 512 * 1024;
+    let mut file = std::fs::File::open(transcript).ok()?;
+    let size = file.metadata().ok()?.len();
+    file.seek(SeekFrom::Start(size.saturating_sub(TAIL))).ok()?;
+    let mut data = Vec::new();
+    file.read_to_end(&mut data).ok()?;
+    String::from_utf8_lossy(&data).lines().rev().find_map(context_of_line)
+}
+
 // MARK: - The week by day (the Mac's `WeekUsage`)
 
 #[derive(Debug, Clone, PartialEq)]
@@ -467,6 +511,28 @@ mod tests {
         let top = breakdown.top_session.unwrap();
         assert_eq!((top.name.as_str(), top.tokens), ("shop", 200));
         assert_eq!(Breakdown::make(&records, now, root, "Другое"), Breakdown::default());
+    }
+
+    #[test]
+    fn how_full_the_context_is() {
+        let line = |model: &str, input: u64, read: u64, side: bool| {
+            format!(r#"{{"type":"assistant","isSidechain":{side},"timestamp":"2026-11-21T10:00:00Z","message":{{"id":"m","model":"{model}","usage":{{"input_tokens":{input},"output_tokens":9,"cache_creation_input_tokens":1000,"cache_read_input_tokens":{read}}}}}}}"#)
+        };
+        assert_eq!(context_of_line(&line("claude-sonnet", 4_000, 135_000, false)), Some(0.7));
+        assert_eq!(context_of_line(&line("claude-opus[1m]", 4_000, 135_000, false)), Some(0.14), "a 1M model");
+        assert_eq!(context_of_line(&line("claude-sonnet", 4_000, 395_000, false)), Some(0.4), "past 200 000 it can only be a 1M window");
+        assert_eq!(context_of_line(&line("claude-sonnet", 4_000, 135_000, true)), None, "a subagent's context is its own");
+        assert_eq!(context_of_line(r#"{"type":"user","message":{"usage":{}},"x":"assistant"}"#), None);
+        assert_eq!((context_window(1, None), context_window(200_001, None)), (200_000, 1_000_000));
+
+        let dir = std::env::temp_dir().join(format!("claudepult-context-{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&dir);
+        std::fs::create_dir_all(&dir).unwrap();
+        let file = dir.join("s.jsonl");
+        std::fs::write(&file, format!("{}\n{}\n{}\n{{\"type\":\"user\"}}\n", line("claude-sonnet", 1_000, 18_000, false), line("claude-sonnet", 4_000, 175_000, false), line("claude-sonnet", 1, 1, true))).unwrap();
+        assert_eq!(context_fraction(&file), Some(0.9), "the last main-thread message");
+        assert_eq!(context_fraction(&dir.join("none.jsonl")), None);
+        std::fs::remove_dir_all(dir).unwrap();
     }
 
     #[test]

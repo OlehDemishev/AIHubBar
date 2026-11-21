@@ -227,6 +227,7 @@
  "Команды проектов": "Comandos de proyectos",
  "Компьютер засыпает как обычно": "El ordenador duerme como siempre",
  "Компьютер не засыпает, пока работает Claude, на время, при подключённом питании или мониторе, пока открыты выбранные приложения.": "El ordenador no duerme mientras Claude trabaja, durante un tiempo, conectado a la corriente o a un monitor, o con ciertas apps abiertas.",
+ "Контекст почти заполнен — %@": "Contexto casi lleno — %@",
  "Контент-план": "Plan de contenido",
  "Корзина": "Papelera",
  "Корзина очищается только после подтверждения.": "La papelera solo se vacía tras confirmar.",
@@ -262,6 +263,7 @@
  "Напишите задачу своими словами — AI выполнит её над файлом": "Describe la tarea con tus palabras: la IA la hará con el archivo",
  "Напоминания календаря": "Recordatorios del calendario",
  "Напоминать": "Recordar",
+ "Насколько заполнен контекст сессии (по журналу Claude Code). Ближе к 100 %, Claude сжимает историю и часть деталей теряется.": "Qué tan lleno está el contexto de la sesión (según el registro de Claude Code). Cerca del 100%, Claude comprime el historial y se pierden detalles.",
  "Настройки быстрого запроса": "Ajustes de la petición rápida",
  "Настройки импортированы: %lld профиль(ов).": "Ajustes importados: %lld perfil(es).",
  "Настройки профиля пропадут. Папки проектов останутся на месте.": "Se perderán los ajustes del perfil. Las carpetas de proyectos se quedan donde están.",
@@ -596,6 +598,7 @@
  "ключ OpenRouter": "una clave de OpenRouter",
  "ключ или вход не подходят (HTTP %lld)": "la clave o la sesión no sirven (HTTP %lld)",
  "команда, например: winget upgrade --all": "un comando, p. ej.: winget upgrade --all",
+ "контекст %lld %%": "contexto %lld%%",
  "кредиты": "créditos",
  "лимит": "límite",
  "лимиты ещё не загружены": "límites aún no cargados",
@@ -661,5 +664,6 @@
  "через %lld ч %lld мин": "en %lld h %lld min",
  "черновик": "borrador",
  "читает": "lee",
- "… и ещё %lld": "… y %lld más"
+ "… и ещё %lld": "… y %lld más",
+ "≈ %lld %%: скоро Claude сожмёт историю. Если задача большая — лучше начать новую сессию с кратким итогом.": "≈ %lld%%: Claude pronto comprimirá el historial. Si la tarea es grande, mejor empieza una sesión nueva con un resumen breve."
 }

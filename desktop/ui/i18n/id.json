@@ -227,6 +227,7 @@
  "Команды проектов": "Perintah proyek",
  "Компьютер засыпает как обычно": "Komputer tidur seperti biasa",
  "Компьютер не засыпает, пока работает Claude, на время, при подключённом питании или мониторе, пока открыты выбранные приложения.": "Komputer tetap terjaga selama Claude bekerja, selama waktu tertentu, saat tersambung daya atau monitor, atau saat aplikasi pilihan terbuka.",
+ "Контекст почти заполнен — %@": "Konteks hampir penuh — %@",
  "Контент-план": "Rencana konten",
  "Корзина": "Tong Sampah",
  "Корзина очищается только после подтверждения.": "Recycle Bin dikosongkan hanya setelah konfirmasi.",
@@ -262,6 +263,7 @@
  "Напишите задачу своими словами — AI выполнит её над файлом": "Tulis tugas dengan kata-kata Anda — AI mengerjakannya pada file",
  "Напоминания календаря": "Pengingat kalender",
  "Напоминать": "Ingatkan",
+ "Насколько заполнен контекст сессии (по журналу Claude Code). Ближе к 100 %, Claude сжимает историю и часть деталей теряется.": "Seberapa penuh konteks sesi (dari log Claude Code). Mendekati 100%, Claude memadatkan riwayat dan sebagian detail hilang.",
  "Настройки быстрого запроса": "Pengaturan permintaan cepat",
  "Настройки импортированы: %lld профиль(ов).": "Pengaturan diimpor: %lld profil.",
  "Настройки профиля пропадут. Папки проектов останутся на месте.": "Pengaturan profil akan hilang. Folder proyek tetap di tempatnya.",
@@ -596,6 +598,7 @@
  "ключ OpenRouter": "kunci OpenRouter",
  "ключ или вход не подходят (HTTP %lld)": "kunci atau info masuk tidak cocok (HTTP %lld)",
  "команда, например: winget upgrade --all": "perintah, mis. winget upgrade --all",
+ "контекст %lld %%": "konteks %lld%%",
  "кредиты": "kredit",
  "лимит": "batas",
  "лимиты ещё не загружены": "batas belum dimuat",
@@ -661,5 +664,6 @@
  "через %lld ч %lld мин": "dalam %lld j %lld mnt",
  "черновик": "draf",
  "читает": "membaca",
- "… и ещё %lld": "… dan %lld lagi"
+ "… и ещё %lld": "… dan %lld lagi",
+ "≈ %lld %%: скоро Claude сожмёт историю. Если задача большая — лучше начать новую сессию с кратким итогом.": "≈ %lld%%: Claude akan segera memadatkan riwayat. Untuk tugas besar, lebih baik mulai sesi baru dengan ringkasan singkat."
 }

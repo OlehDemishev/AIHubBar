@@ -227,6 +227,7 @@
  "Команды проектов": "Project commands",
  "Компьютер засыпает как обычно": "The computer sleeps as usual",
  "Компьютер не засыпает, пока работает Claude, на время, при подключённом питании или мониторе, пока открыты выбранные приложения.": "The computer stays awake while Claude works, for a while, on power or with a display connected, or while chosen apps are open.",
+ "Контекст почти заполнен — %@": "Context almost full — %@",
  "Контент-план": "Content plan",
  "Корзина": "Trash",
  "Корзина очищается только после подтверждения.": "The Recycle Bin is emptied only after you confirm.",
@@ -262,6 +263,7 @@
  "Напишите задачу своими словами — AI выполнит её над файлом": "Describe the task in your own words — AI does it on the file",
  "Напоминания календаря": "Calendar reminders",
  "Напоминать": "Remind",
+ "Насколько заполнен контекст сессии (по журналу Claude Code). Ближе к 100 %, Claude сжимает историю и часть деталей теряется.": "How full the session’s context is (from the Claude Code log). Near 100%, Claude compacts the history and some details are lost.",
  "Настройки быстрого запроса": "Quick Prompt settings",
  "Настройки импортированы: %lld профиль(ов).": "Settings imported: %lld profile(s).",
  "Настройки профиля пропадут. Папки проектов останутся на месте.": "The profile’s settings will be lost. Project folders stay where they are.",
@@ -596,6 +598,7 @@
  "ключ OpenRouter": "an OpenRouter key",
  "ключ или вход не подходят (HTTP %lld)": "the key or sign-in doesn’t work (HTTP %lld)",
  "команда, например: winget upgrade --all": "a command, e.g. winget upgrade --all",
+ "контекст %lld %%": "context %lld%%",
  "кредиты": "credits",
  "лимит": "limit",
  "лимиты ещё не загружены": "limits not loaded yet",
@@ -661,5 +664,6 @@
  "через %lld ч %lld мин": "in %lld h %lld min",
  "черновик": "draft",
  "читает": "reads",
- "… и ещё %lld": "… and %lld more"
+ "… и ещё %lld": "… and %lld more",
+ "≈ %lld %%: скоро Claude сожмёт историю. Если задача большая — лучше начать новую сессию с кратким итогом.": "≈ %lld%%: Claude will soon compact the history. For a big task, better start a new session with a short summary."
 }

@@ -67,6 +67,8 @@ pub struct Session {
     pub agent: Option<String>,
     /// What the session was asked: its first prompt, else the latest one.
     pub task: Option<String>,
+    /// Claude Code's journal of the session.
+    pub transcript_path: Option<String>,
 }
 
 fn text(value: &Value, key: &str) -> Option<String> {
@@ -98,6 +100,7 @@ impl Session {
             progress,
             agent: text(&value, "agent"),
             task: text(&value, "first_prompt").or_else(|| text(&value, "last_prompt")),
+            transcript_path: text(&value, "transcript_path"),
         })
     }
 
