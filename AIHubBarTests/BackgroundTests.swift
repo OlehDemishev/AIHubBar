@@ -43,6 +43,19 @@ struct StreamJSONTests {
         #expect(entries[2].text == "Edit: /tmp/p/a.swift")
     }
 
+    @Test func theResultDoesNotRepeatTheClosingMessages() {
+        func text(_ text: String) -> String { #"{"type":"assistant","message":{"content":[{"type":"text","text":"\#(text)"}]}}"# }
+        let tool = #"{"type":"assistant","message":{"content":[{"type":"tool_use","name":"Bash","input":{"command":"ls"}}]}}"#
+        let result = #"{"type":"result","subtype":"success","is_error":false,"result":"Готово.\n\nФайлы не менял."}"#
+        let entries = StreamJSON.entries(fromLog: [text("Смотрю файлы."), tool, text("Готово."), text("Файлы не менял."), result].joined(separator: "\n"))
+        #expect(entries.map(\.kind) == [.text, .tool, .result], "seen live 2026-11-21: the answer stood in the log twice")
+        #expect(entries.first?.text == "Смотрю файлы.")
+        #expect(Set(entries.map(\.id)).count == entries.count)
+        // An error keeps what was said before it.
+        let failed = #"{"type":"result","subtype":"error_max_turns","is_error":true,"result":"Готово."}"#
+        #expect(StreamJSON.entries(fromLog: [text("Готово."), failed].joined(separator: "\n")).map(\.kind) == [.text, .error])
+    }
+
     @Test func summaryLimits() {
         #expect(StreamJSON.summary(nil) == nil)
         #expect(StreamJSON.summary("\n\n---\n") == nil)
