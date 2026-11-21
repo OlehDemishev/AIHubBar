@@ -171,13 +171,13 @@
 
 Done: a batch's projects run quietly — the «Готово» banner and the Telegram message of each single command are not sent, only the batch's one summary (live, a batch of two sent three notifications). `CommandEngine.run` and `RunStore.launch` take `quiet`. The branch also takes the «Версии» window fix from `feat/versions-card`.
 Checked: `scripts/check.sh`; the batch test now also expects no banner per project. Live before the fix, in an isolated copy with a made-up «Тексты» profile (the panel's content shown in a plain window by a local patch that is not in the branch, because the copy's menu bar panel would not open by a click): «Выбрать», the checkboxes, the command buttons, «Сейчас» — a real batch of two projects with Claude Code in the background went one after another, both `корректура.md` written, the row «Корректура · 0 из 2» then «готово: 2 из 2» with «Убрать», one summary at the end.
-Left: the fix was not looked at live again. Not seen: «На ночь», «После сброса лимита», the wait near the limit, a command that asks for text, a model by API, «Отменить» on a running batch, the summary as a banner and in Telegram (the copy has neither permission nor a bot).
+Left: after the fix a batch of one sent only the summary (the log of the isolated copy). Not seen: «На ночь», «После сброса лимита», the wait near the limit, a command that asks for text, a model by API, «Отменить» on a running batch, the summary as a banner and in Telegram (the copy has neither permission nor a bot).
 
 ## 2026-11-21 — Versions window: stale state found live (branch `feat/versions-card`)
 
 Done: the «Версии» window reads the files again when it becomes the key window and when another version is picked, so «как сейчас», the file statuses and the restore buttons are about now and not about the moment the window opened (a file edited meanwhile left «Вернуть этот файл» off while the comparison below showed the difference). The comparison is keyed by project too: versions of two projects taken in one pass share an id, and after switching the project the rows of the previous one stayed.
 Checked: live in an isolated copy (own bundle id and home, a made-up «Тексты» profile with three projects), before the fix: the «Версии» link in the card, the list, the comparison, «Вернуть этот файл» with its confirmation — the file came back and a «перед возвратом версии» version appeared. The fix itself: the full `scripts/check.sh` on `feat/batch-tasks`, which contains this branch.
-Left: the fix was not looked at live again; «Что изменилось» on a banner (the isolated copy has no notification permission) and in «Журнал» still not seen.
+Left: after the fix seen live the same way: a file edited while the window is open turns «как сейчас» into «файлов с отличиями», and another project shows its own comparison. «Что изменилось» on a banner (the isolated copy has no notification permission) and in «Журнал» still not seen.
 
 ## 2026-11-21 — Batch tasks: one command over several folder projects (branch `feat/batch-tasks`)
 
