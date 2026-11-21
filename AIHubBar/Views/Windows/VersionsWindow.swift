@@ -18,7 +18,7 @@ struct VersionsWindow: View {
     @State private var unreadable = false
     @State private var changedOnly = false
     @State private var note: Note?
-    /// Bumped after a restore, so the comparison is read again.
+    /// Bumped when the files on disk changed (a restore, an edit elsewhere), so the comparison is read again.
     @State private var serial = 0
 
     private struct Note: Equatable {
@@ -58,6 +58,8 @@ struct VersionsWindow: View {
     }
 
     private struct CompareKey: Equatable {
+        /// Versions of two projects taken in one pass share an id, so the project is part of the key.
+        var project: String?
         var version: String?
         var file: String?
         var serial: Int
@@ -95,7 +97,7 @@ struct VersionsWindow: View {
             note = nil
             await reload(pick: true)
         }
-        .task(id: CompareKey(version: selected, file: file, serial: serial)) { await compare() }
+        .task(id: CompareKey(project: keeper.shown?.projectPath, version: selected, file: file, serial: serial)) { await compare() }
         .onChange(of: keeper.taken) {
             // A version taken while the window is open joins the list; the selection stays.
             Task { await reload(pick: false) }
@@ -103,6 +105,12 @@ struct VersionsWindow: View {
         .onChange(of: selected) {
             // Another version: keep the file if it has it, else the first one that differs.
             if entry == nil { file = Entry.first(entries) }
+            // The files may have changed since the list was read: «как сейчас» must be about now.
+            Task { await reload(pick: false) }
+        }
+        .onReceive(NotificationCenter.default.publisher(for: NSWindow.didBecomeKeyNotification)) { _ in
+            // Back from the editor: what the files are now is read again.
+            Task { await reload(pick: false) }
         }
     }
 
@@ -289,6 +297,8 @@ struct VersionsWindow: View {
         let loaded = await keeper.load(projectPath: shown.projectPath)
         guard keeper.shown == shown else { return }
         versions = loaded.versions
+        // The files changed on disk: the comparison on screen is read again too.
+        if isLoaded, loaded.current != current { serial += 1 }
         current = loaded.current
         isLoaded = true
         if pick || version == nil {
@@ -323,7 +333,6 @@ struct VersionsWindow: View {
                 note = Note(text: error.localizedDescription, isError: true)
             }
             await reload(pick: false)
-            serial += 1
         }
     }
 }
