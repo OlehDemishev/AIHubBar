@@ -5,6 +5,7 @@
 **Updated:** 2026-11-21
 
 **Now:**
+- 2026-11-21: Mac — a second live pass over the held batch tasks and «Версии» (isolated copy, the «Panel debug» window); its one fix for 0.12.0 is merged: «Журнал» no longer says a task's answer twice (PR 518)
 - 2026-11-21: Windows — «Недавно завершённые» in the panel: a finished Claude Code session is continued in a terminal with `claude --resume` by a click (branch `feat/desktop-resume-sessions`; seen live with a sample record — the terminal opened with the command)
 - 2026-11-21: Windows — «Сбой у Anthropic: …» in the panel when the limits fail and Anthropic's status page reports trouble, with «Подробнее» to the page (branch `feat/desktop-outage`; the real page asked once — all well; the line itself not seen)
 - 2026-11-21: Windows 0.1.6 published as an unsigned pre-release (tag `desktop-v0.1.6`) on Oleh's «Выпускай 0.1.6»: the «История расхода» window and the week by day; the laptop updated itself from 0.1.5; «latest» stays the Mac's v0.11.0
@@ -118,13 +119,12 @@
 - releases go out once a week, on Tuesday, on Oleh's word (agreed 2026-11-11); merged work waits in `main`
 - 0.12.0-beta.2 is out (2026-11-20); before 0.12.0: Oleh uses the beta; left to see in the app — a Codex approval, handover, review, the pair's notification banner, the header bell, the Telegram tile, the «Что нового» card
 - 0.12.0 not before Tuesday 2026-11-24, on Oleh's word; then `scripts/release-tools/update-cask.sh 0.12.0`
-- Antigravity «ждёт»: a notification needs a watcher of the status file (today the rows are read when the panel opens)
+- Antigravity «ждёт»: the notification is ready in PR 520 (`feat/antigravity-wait-notification`), **held until 0.12.0 is out**; then see it with a real `agy` question
 - towards 1.0 (discussed 2026-11-10): the live pass is done (journal 2026-11-10); left — freeze what is in 1.0 and what stays beta, release notes, translations read by people, feedback from strangers before 1.0
 - check on the Air: the island at the real notch
 - promotion (docs/LAUNCH.md): r/ClaudeAI, the lists, r/macapps, Show HN, Product Hunt, Homebrew
-- right after 0.12.0 is published: merge PR 506 (`feat/versions-module`), then PR 508 (`feat/versions-card`) and PR 510 (`feat/batch-tasks`), each retargeted to `main`
-- batch tasks live on a real profile, before they are released: «Выбрать», the checkboxes, a batch of two or three projects with a model by API and with Claude Code, «На ночь», the summary
-- «Версии» live on a real profile: the «Версии» link in the card, a restore pressed in the window, «Что изменилось» on a notification and in «Журнал»
+- right after 0.12.0 is published: merge PR 506 (`feat/versions-module`), then PR 508 (`feat/versions-card`) and PR 510 (`feat/batch-tasks`), each retargeted to `main`, and PR 520; all four contain `main` as of 2026-11-21 and are green
+- batch tasks and «Версии», left to see live (the rest was seen 2026-11-21 in an isolated copy): a batch with a typed text, a model by API, the wait near the limit, the summary and «Что изменилось» as a banner and in Telegram
 - Windows: left on the laptop — notifications and their buttons (the agent can't see a toast: its tool hides other programs' windows); the Mac's background runs have the same rules — try one build in a subfolder there; stage 7: the installer and updates are done (0.1.2), signing waits for SignPath (the update 0.1.2 → 0.1.3 from GitHub was seen on the laptop); Telegram on Windows (Oleh's choice 2026-11-20): stages 1 and 2 are done (the reader, 🏠, 🤖, permission requests), neither tried with a real bot; ⏳ too; next tasks from the chat (SPEC-telegram stage 3) — only after a real bot has been tried on the laptop: a chat that can start an agent must first be seen refusing a stranger; the limits stage (SPEC-windows §9.2) is done but the «Сегодня» summary
 
 **Needs Oleh:**
