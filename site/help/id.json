@@ -409,6 +409,10 @@
               "name" : "Bandingkan"
             },
             {
+              "detail" : "“Pilih” di bawah daftar proyek: centang proyek, pilih salah satu perintah profil dan kapan menjalankannya — “Sekarang”, “Malam ini”, atau “Setelah batas direset”. Proyek dikerjakan satu per satu di latar belakang (Claude Code atau model lewat API), di dekat batas kumpulan itu menunggu reset, dan di akhir datang satu ringkasan.",
+              "name" : "Beberapa proyek sekaligus"
+            },
+            {
               "detail" : "Modul “Versi” menyimpan teks dan kartu proyek folder sebelum setiap AI dijalankan dan selama Anda menulis — di folder app, bukan di proyek. Seberapa sering dan berapa lama disimpan: Pengaturan → “Modul” → “Versi”.",
               "name" : "Versi"
             },

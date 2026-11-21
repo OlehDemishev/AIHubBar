@@ -409,6 +409,10 @@
               "name" : "Confronta"
             },
             {
+              "detail" : "«Scegli» sotto l’elenco dei progetti: spunta i progetti, scegli un comando del profilo e quando eseguirlo: «Ora», «Stanotte» o «Dopo l’azzeramento del limite». I progetti vanno uno dopo l’altro in background (Claude Code o un modello via API), vicino a un limite il gruppo attende l’azzeramento e alla fine arriva un solo riepilogo.",
+              "name" : "Più progetti insieme"
+            },
+            {
               "detail" : "Il modulo «Versioni» salva i testi e la scheda di un progetto-cartella prima di ogni avvio dell’IA e mentre scrivi, nella cartella dell’app, non nel progetto. Ogni quanto e per quanto tempo: Impostazioni → «Moduli» → «Versioni».",
               "name" : "Versioni"
             },
