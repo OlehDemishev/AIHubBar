@@ -267,6 +267,7 @@ private struct FolderProjectRow: View {
                         openWindow(.versions)
                     }
                     .help("Прежние версии текстов: сравнить с текущими и вернуть")
+                    BetaBadge()
                 }
             }
             .buttonStyle(.link)

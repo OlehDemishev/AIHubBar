@@ -212,7 +212,7 @@ private struct ShowRow: View {
                         Text(kind.title)
                             .font(.system(size: 14))
                             .lineLimit(1)
-                        if kind.isBeta { BetaBadge() }
+                        if kind.isBeta || kind.hasBetaMark { BetaBadge() }
                     }
                     .contentShape(Rectangle())
                 }

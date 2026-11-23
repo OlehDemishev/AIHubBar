@@ -13,6 +13,7 @@ extension ModuleDefinition {
         title: String(localized: "Версии"),
         summary: String(localized: "Версии черновиков для проектов-папок: тексты и карточка проекта сохраняются перед каждым запуском AI и пока вы пишете. Хранятся в папке приложения, не в проекте, и никуда не отправляются."),
         tagline: String(localized: "Черновики не пропадают"),
+        hasBetaMark: true,
         // Works behind the scenes: no block in the panel, nothing in the menu bar.
         isPanelBlock: false,
         places: [],
