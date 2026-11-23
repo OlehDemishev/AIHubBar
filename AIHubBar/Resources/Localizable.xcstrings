@@ -156978,386 +156978,6 @@
         }
       }
     },
-    "Настройки устроены как на Mac: разделы слева, страница справа, сверху поиск.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "الإعدادات مرتبة كما في Mac: الأقسام على الجانب، والصفحة بجوارها، والبحث في الأعلى."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Die Einstellungen sind wie auf dem Mac aufgebaut: links die Bereiche, rechts die Seite, oben die Suche."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Settings are laid out as on the Mac: sections on the left, the page on the right, a search on top."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Los ajustes están organizados como en el Mac: secciones a la izquierda, la página a la derecha y la búsqueda arriba."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Les réglages sont organisés comme sur Mac : les sections à gauche, la page à droite, la recherche en haut."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Pengaturan disusun seperti di Mac: bagian di kiri, halaman di kanan, pencarian di atas."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Le impostazioni sono organizzate come sul Mac: sezioni a sinistra, pagina a destra, ricerca in alto."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "設定が Mac と同じ構成になりました。左にセクション、右にページ、上に検索があります。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "설정이 Mac과 같은 구성으로 바뀌었습니다. 왼쪽에 섹션, 오른쪽에 페이지, 위에 검색이 있습니다."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ustawienia są ułożone jak na Macu: sekcje po lewej, strona po prawej, wyszukiwanie u góry."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Os ajustes estão organizados como no Mac: seções à esquerda, a página à direita e a busca em cima."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Налаштування влаштовані як на Mac: розділи зліва, сторінка справа, зверху пошук."
-          }
-        }
-      }
-    },
-    "Фоновую задачу можно отложить на ночь или до сброса лимита.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "يمكن تأجيل مهمة الخلفية إلى الليل أو إلى أن يُعاد ضبط الحد."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Eine Hintergrundaufgabe lässt sich auf die Nacht oder bis zum Zurücksetzen des Limits verschieben."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "A background task can be put off until the night or until the limit resets."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Una tarea en segundo plano se puede aplazar hasta la noche o hasta que se restablezca el límite."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Une tâche en arrière-plan peut être reportée à la nuit ou jusqu’à la réinitialisation de la limite."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tugas latar belakang bisa ditunda sampai malam atau sampai batas direset."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Un’attività in background si può rimandare alla notte o fino al ripristino del limite."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "バックグラウンドタスクを夜まで、または制限のリセットまで延期できます。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "백그라운드 작업을 밤까지 또는 한도가 재설정될 때까지 미룰 수 있습니다."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Zadanie w tle można odłożyć na noc albo do zresetowania limitu."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Uma tarefa em segundo plano pode ser adiada para a noite ou até o limite ser redefinido."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Фонове завдання можна відкласти на ніч або до скидання ліміту."
-          }
-        }
-      }
-    },
-    "У лимита фоновые задачи Claude встают на паузу и продолжают после сброса.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "عند الاقتراب من الحد تتوقف مهام Claude في الخلفية مؤقتًا وتستأنف بعد إعادة الضبط."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Kurz vor dem Limit pausieren Claudes Hintergrundaufgaben und laufen nach dem Zurücksetzen weiter."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Near the limit Claude’s background tasks pause and go on after the reset."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cerca del límite, las tareas en segundo plano de Claude se pausan y continúan tras el restablecimiento."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Près de la limite, les tâches en arrière-plan de Claude se mettent en pause et reprennent après la réinitialisation."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Menjelang batas, tugas latar belakang Claude dijeda dan lanjut setelah reset."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Vicino al limite le attività in background di Claude vanno in pausa e riprendono dopo il ripristino."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "制限が近づくと Claude のバックグラウンドタスクは一時停止し、リセット後に再開します。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "한도에 가까워지면 Claude의 백그라운드 작업이 일시 중지되고 재설정 후 계속됩니다."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Blisko limitu zadania Claude’a w tle wstrzymują się i ruszają dalej po resecie."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Perto do limite, as tarefas em segundo plano do Claude pausam e continuam depois da redefinição."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Біля ліміту фонові завдання Claude стають на паузу й продовжують після скидання."
-          }
-        }
-      }
-    },
-    "Фоновую задачу можно передать Codex, а готовую — проверить другим сервисом.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "يمكن تسليم مهمة الخلفية إلى Codex، ومراجعة المهمة المنتهية بخدمة أخرى."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Eine Hintergrundaufgabe lässt sich an Codex übergeben, eine fertige vom anderen Dienst prüfen."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "A background task can be handed over to Codex, and a finished one reviewed by the other service."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Una tarea en segundo plano se puede pasar a Codex, y una terminada, revisarla con el otro servicio."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Une tâche en arrière-plan peut être transmise à Codex, et une tâche terminée vérifiée par l’autre service."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tugas latar belakang bisa diserahkan ke Codex, dan yang sudah selesai diperiksa oleh layanan lain."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Un’attività in background si può passare a Codex, e una terminata farla verificare dall’altro servizio."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "バックグラウンドタスクを Codex に引き継いだり、完了したタスクをもう一方のサービスで確認したりできます。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "백그라운드 작업을 Codex에 넘기고, 끝난 작업은 다른 서비스로 검토할 수 있습니다."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Zadanie w tle można przekazać Codexowi, a gotowe sprawdzić drugą usługą."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Uma tarefa em segundo plano pode ser passada ao Codex, e uma concluída, revisada pelo outro serviço."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Фонове завдання можна передати Codex, а готове — перевірити іншим сервісом."
-          }
-        }
-      }
-    },
-    "Инструкции CLAUDE.md, MCP-серверы, skills и плагины собраны в одном окне.": {
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "تعليمات CLAUDE.md وخوادم MCP والمهارات والإضافات مجموعة في نافذة واحدة."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "CLAUDE.md-Anweisungen, MCP-Server, Skills und Plugins stehen in einem Fenster."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "CLAUDE.md instructions, MCP servers, skills and plugins are in one window."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Las instrucciones CLAUDE.md, los servidores MCP, las skills y los plugins están en una sola ventana."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Les instructions CLAUDE.md, les serveurs MCP, les skills et les plugins sont réunis dans une seule fenêtre."
-          }
-        },
-        "id": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Instruksi CLAUDE.md, server MCP, skill, dan plugin ada dalam satu jendela."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Le istruzioni CLAUDE.md, i server MCP, le skill e i plugin sono in un’unica finestra."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "CLAUDE.md の指示、MCP サーバー、スキル、プラグインを 1 つのウインドウにまとめました。"
-          }
-        },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "CLAUDE.md 지침, MCP 서버, 스킬, 플러그인을 한 창에 모았습니다."
-          }
-        },
-        "pl": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Instrukcje CLAUDE.md, serwery MCP, skille i wtyczki są w jednym oknie."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "As instruções CLAUDE.md, os servidores MCP, as skills e os plugins estão em uma única janela."
-          }
-        },
-        "uk": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Інструкції CLAUDE.md, MCP-сервери, skills і плагіни зібрано в одному вікні."
-          }
-        }
-      }
-    },
     "Утилиты": {
       "localizations": {
         "ar": {
@@ -158570,6 +158190,386 @@
           "stringUnit": {
             "state": "translated",
             "value": "Відкриється форма на GitHub, версія і система у ній уже заповнені. Сама програма нічого не надсилає: перед надсиланням видно все, що буде надіслано. Потрібен акаунт GitHub."
+          }
+        }
+      }
+    },
+    "Появилась справка: кнопка «?» вверху панели.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "أُضيفت المساعدة: الزر «?» أعلى اللوحة."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Neu ist die Hilfe: die Taste „?“ oben im Panel."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "There is a Help window now: the “?” button at the top of the panel."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ya hay ayuda: el botón «?» en la parte superior del panel."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L’aide est arrivée : le bouton « ? » en haut du panneau."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kini ada Bantuan: tombol “?” di bagian atas panel."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "È arrivato l’aiuto: il pulsante «?» in cima al pannello."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ヘルプが加わりました。パネル上部の「?」ボタンから開けます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "도움말이 생겼습니다. 패널 위쪽의 ‘?’ 버튼으로 엽니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jest już pomoc: przycisk „?” u góry panelu."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Agora há ajuda: o botão “?” no topo do painel."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "З’явилася довідка: кнопка «?» угорі панелі."
+          }
+        }
+      }
+    },
+    "В панели можно показать лимиты других аккаунтов Claude.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يمكن عرض حدود حسابات Claude الأخرى في اللوحة."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Das Panel kann die Limits weiterer Claude-Konten zeigen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The panel can show the limits of your other Claude accounts."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El panel puede mostrar los límites de tus otras cuentas de Claude."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le panneau peut afficher les limites de vos autres comptes Claude."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Panel dapat menampilkan batas akun Claude Anda yang lain."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il pannello può mostrare i limiti degli altri tuoi account Claude."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "パネルにほかの Claude アカウントの制限を表示できます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "패널에 다른 Claude 계정의 한도를 표시할 수 있습니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Panel może pokazywać limity innych kont Claude."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O painel pode mostrar os limites das suas outras contas do Claude."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "У панелі можна показати ліміти інших акаунтів Claude."
+          }
+        }
+      }
+    },
+    "Настройки сервисов AI разложены по сервисам: Claude Code, Codex, Gemini, Copilot, Cursor.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "إعدادات خدمات الذكاء الاصطناعي مرتبة حسب الخدمة: Claude Code وCodex وGemini وCopilot وCursor."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Einstellungen der KI-Dienste sind nach Dienst geordnet: Claude Code, Codex, Gemini, Copilot, Cursor."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The AI services’ settings are sorted by service: Claude Code, Codex, Gemini, Copilot, Cursor."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los ajustes de los servicios de IA están ordenados por servicio: Claude Code, Codex, Gemini, Copilot, Cursor."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les réglages des services d’IA sont rangés par service : Claude Code, Codex, Gemini, Copilot, Cursor."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pengaturan layanan AI dikelompokkan per layanan: Claude Code, Codex, Gemini, Copilot, Cursor."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le impostazioni dei servizi IA sono divise per servizio: Claude Code, Codex, Gemini, Copilot, Cursor."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI サービスの設定をサービスごとに分けました：Claude Code、Codex、Gemini、Copilot、Cursor。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AI 서비스 설정을 서비스별로 나눴습니다: Claude Code, Codex, Gemini, Copilot, Cursor."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ustawienia usług AI są ułożone według usług: Claude Code, Codex, Gemini, Copilot, Cursor."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Os ajustes dos serviços de IA estão organizados por serviço: Claude Code, Codex, Gemini, Copilot, Cursor."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Налаштування сервісів AI розкладено за сервісами: Claude Code, Codex, Gemini, Copilot, Cursor."
+          }
+        }
+      }
+    },
+    "Одну задачу можно дать сразу Claude и Codex — каждому в своём worktree.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يمكن إعطاء المهمة نفسها لـ Claude وCodex معًا — لكلٍّ منهما worktree خاص به."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eine Aufgabe kann an Claude und Codex zugleich gehen – jeder in seinem eigenen Worktree."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "One task can go to Claude and Codex at once — each in its own worktree."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Una misma tarea puede ir a Claude y a Codex a la vez, cada uno en su propio worktree."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une même tâche peut partir chez Claude et Codex à la fois — chacun dans son propre worktree."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Satu tugas bisa diberikan ke Claude dan Codex sekaligus — masing-masing di worktree sendiri."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Una stessa attività può andare a Claude e a Codex insieme — ognuno nel proprio worktree."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 つのタスクを Claude と Codex に同時に渡せます。それぞれ専用の worktree で動きます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "한 작업을 Claude와 Codex에 동시에 맡길 수 있습니다. 각자 자기 worktree에서 실행됩니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jedno zadanie można dać naraz Claude’owi i Codexowi — każdemu w jego własnym worktree."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uma mesma tarefa pode ir para o Claude e o Codex ao mesmo tempo — cada um no seu próprio worktree."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Одне завдання можна дати одразу Claude і Codex — кожному у своєму worktree."
+          }
+        }
+      }
+    },
+    "Идею или проблему можно отправить из Настроек: откроется форма на GitHub.": {
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "يمكن إرسال فكرة أو مشكلة من الإعدادات: يُفتح نموذج على GitHub."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eine Idee oder ein Problem lässt sich aus den Einstellungen melden: Auf GitHub öffnet sich ein Formular."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "An idea or a problem can be sent from Settings: a form opens on GitHub."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Puedes enviar una idea o un problema desde Ajustes: se abre un formulario en GitHub."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une idée ou un problème peut être envoyé depuis les Réglages : un formulaire s’ouvre sur GitHub."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ide atau masalah bisa dikirim dari Pengaturan: formulir terbuka di GitHub."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un’idea o un problema si possono inviare dalle Impostazioni: si apre un modulo su GitHub."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アイデアや問題は設定から送れます。GitHub でフォームが開きます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "아이디어나 문제를 설정에서 보낼 수 있습니다. GitHub에서 양식이 열립니다."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pomysł albo problem można zgłosić z Ustawień: na GitHubie otworzy się formularz."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uma ideia ou um problema pode ser enviado pelos Ajustes: um formulário abre no GitHub."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ідею або проблему можна надіслати з Налаштувань: відкриється форма на GitHub."
           }
         }
       }

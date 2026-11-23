@@ -527,14 +527,14 @@ dependencies = [
 
 [[package]]
 name = "claudepult-cli"
-version = "0.1.9"
+version = "0.1.10"
 dependencies = [
  "claudepult-core",
 ]
 
 [[package]]
 name = "claudepult-core"
-version = "0.1.9"
+version = "0.1.10"
 dependencies = [
  "chrono",
  "dirs 6.0.0",
@@ -554,7 +554,7 @@ dependencies = [
 
 [[package]]
 name = "claudepult-desktop"
-version = "0.1.9"
+version = "0.1.10"
 dependencies = [
  "chrono",
  "claudepult-core",
@@ -575,7 +575,7 @@ dependencies = [
 
 [[package]]
 name = "claudepult-hook"
-version = "0.1.9"
+version = "0.1.10"
 dependencies = [
  "chrono",
  "claudepult-core",
