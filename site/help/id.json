@@ -110,6 +110,10 @@
               "name" : "Cari"
             },
             {
+              "detail" : "Aplikasi Pintasan memiliki tindakan AI Hub Bar: batas Claude, perintah cepat, pencarian, “Tetap terjaga”, “Siapa yang menunggu jawaban”, dan “Tugas Claude di latar belakang”.",
+              "name" : "Pintasan dan Siri"
+            },
+            {
               "detail" : "Klik judul blok untuk menciutkannya; panel mengingatnya.",
               "name" : "Ciutkan blok"
             },
@@ -223,6 +227,10 @@
               "name" : "Ringkasan hari ini"
             },
             {
+              "detail" : "Ringkasan hari ini dimulai dari yang masih menunggu Anda: sesi yang menunggu jawaban dan pull request yang pemeriksaannya gagal.",
+              "name" : "Menunggu Anda"
+            },
+            {
               "detail" : "Sekali per jendela pada 50/80/95 persen (ambang di Pengaturan) dan saat batas kembali; bila mau, juga ke Telegram.",
               "name" : "Pemberitahuan"
             },
@@ -258,6 +266,10 @@
               "name" : "Daftar"
             },
             {
+              "detail" : "Jika sesi berjalan tetapi 20 menit tidak melakukan apa-apa, atau terus menjalankan perintah yang sama, pemberitahuan akan datang. Seberapa sering — diatur di halaman modul “Sesi agen”.",
+              "name" : "Mungkin macet"
+            },
+            {
               "detail" : "“Izinkan” dan “Tolak” — di pemberitahuan, baris sesi, pulau, dan, jika aktif, di Telegram. Jawaban yang tiba lebih dulu yang berlaku.",
               "name" : "Izin"
             },
@@ -276,6 +288,10 @@
             {
               "detail" : "Di “Permintaan cepat” Codex juga bekerja di latar belakang: hanya menulis di folder proyek, tanpa jaringan, dan hasilnya datang lewat pemberitahuan. Di dekat ambang ia ditahan oleh batas Codex sendiri.",
               "name" : "Codex di latar belakang"
+            },
+            {
+              "detail" : "Seret file dan tangkapan layar ke jendela Permintaan cepat — agen menerima path-nya bersama tugas. Tombol mikrofon memulai Dikte macOS di kolom tugas.",
+              "name" : "File dan dikte"
             },
             {
               "detail" : "Tugas Claude yang mencapai batas bisa diserahkan ke Codex (“Ke Codex”, “Serahkan ke Codex”), dan tugas yang selesai bisa ditinjau layanan lain (“Tinjau di…” di menu tugas). Kotak centang “Juga di Codex — untuk membandingkan” di “Permintaan cepat” memberikan tugas ke keduanya sekaligus, masing-masing di worktree sendiri.",
@@ -385,6 +401,10 @@
             {
               "detail" : "Buka folder proyek atau repositorinya.",
               "name" : "Terminal · Finder · GitHub"
+            },
+            {
+              "detail" : "Proyek yang dibentangkan menampilkan apa yang mendengarkan port dari foldernya: port dan programnya. Dari sana Anda bisa membuka alamatnya di browser atau menghentikan prosesnya — tombolnya bertanya sekali lagi.",
+              "name" : "Server lokal"
             }
           ],
           "monospaced" : false,
@@ -423,6 +443,10 @@
             {
               "detail" : "Tahap profil, dipisah koma; tahap diganti dengan tombol di proyek yang dibuka. Kata, durasi, waktu baca, dan halaman dihitung dari berkas utama (.md, .txt, .rtf, .docx).",
               "name" : "Tahap dan metrik"
+            },
+            {
+              "detail" : "Di pengaturan profil folder, tetapkan target kata per hari: panel menampilkan berapa kata yang ditambahkan hari ini ke berkas utama proyek. Teks yang dihapus tidak dihitung minus.",
+              "name" : "Target kata"
             }
           ],
           "monospaced" : false,
@@ -457,6 +481,10 @@
             {
               "detail" : "Di halaman modul “Mendatang”: berapa lama sebelumnya mengingatkan dan apakah juga dikirim ke Telegram.",
               "name" : "Pengingat"
+            },
+            {
+              "detail" : "Tombol di jendela “Kalender” menyimpan tanggal sebagai berkas .ics: buka di Kalender macOS atau unggah ke Google Calendar. Mengekspor lagi memperbarui acara yang sama, bukan membuat yang kedua.",
+              "name" : "Ekspor ke .ics"
             }
           ],
           "monospaced" : false,
@@ -649,15 +677,19 @@
               "name" : "Seberapa sering"
             },
             {
-              "detail" : "Bot adalah modul “Telegram”: token, chat, dan menu di dalam bot (/menu — batas, sesi, laporan, pembersihan). Apa yang diteruskan — chip “Telegram” di halaman modul.",
+              "detail" : "Modul “Telegram”. Bot bersama terhubung dengan satu tombol: “Hubungkan Telegram”, lalu “Start” di obrolan — tidak perlu membuat apa pun. Bot sendiri memakai token dari @BotFather, tanpa server AI Hub Bar di antaranya. Menunya ada di bot itu sendiri: /menu — batas, sesi, laporan, pembersihan. Apa yang diduplikasi diatur dengan chip “Telegram” di halaman modul.",
               "name" : "Telegram"
+            },
+            {
+              "detail" : "Tombol menu bot bersama membuka aplikasi langsung di Telegram: batas, sesi dengan “Izinkan” dan “Tolak”, tugas, laporan, dan pengaturan notifikasi.",
+              "name" : "Aplikasi di dalam bot"
             },
             {
               "detail" : "Ubin “Telegram” di Sakelar Cepat mematikan notifikasi Telegram dengan satu klik dan membiarkannya mati sampai Anda menekannya lagi. Permintaan izin dan balasan bot tetap masuk.",
               "name" : "Jeda Telegram"
             },
             {
-              "detail" : "Permintaan izin Claude bisa diterima atau ditolak dengan tombol di Telegram — bot terpisah, halaman “Sesi agen”.",
+              "detail" : "Permintaan izin masuk ke bot yang sama dengan tombol ✅ dan ❌: nyalakan “Permintaan izin ke bot ini” di halaman modul “Telegram”. Lewat bot bersama, Anda bisa menjawab setelah “Jawab permintaan lewat bot bersama” juga dinyalakan di sana.",
               "name" : "Jawaban dari Telegram"
             },
             {

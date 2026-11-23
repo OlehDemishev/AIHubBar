@@ -110,6 +110,10 @@
               "name" : "Buscar"
             },
             {
+              "detail" : "O app Atalhos tem ações do AI Hub Bar: limites do Claude, comando rápido, busca, “Não dormir”, “Quem espera resposta” e “Tarefa do Claude em segundo plano”.",
+              "name" : "Atalhos e Siri"
+            },
+            {
               "detail" : "Um clique no título de um bloco o recolhe; o painel lembra disso.",
               "name" : "Recolher um bloco"
             },
@@ -223,6 +227,10 @@
               "name" : "Resumo do dia"
             },
             {
+              "detail" : "O resumo do dia começa pelo que ficou com você: sessões que esperam resposta e pull requests com verificações que falharam.",
+              "name" : "Esperando você"
+            },
+            {
               "detail" : "Uma vez por janela em 50/80/95 % (limiares em Ajustes) e quando o limite volta; se quiser, também no Telegram.",
               "name" : "Notificações"
             },
@@ -258,6 +266,10 @@
               "name" : "Lista"
             },
             {
+              "detail" : "Se uma sessão está rodando mas não faz nada há 20 minutos, ou roda o mesmo comando repetidamente, chega uma notificação. A frequência fica na página do módulo “Sessões de agentes”.",
+              "name" : "Pode ter travado"
+            },
+            {
               "detail" : "“Permitir” e “Recusar” — na notificação, na linha da sessão, na ilha e, se ativado, no Telegram. Vale a primeira resposta que chegar.",
               "name" : "Permissões"
             },
@@ -276,6 +288,10 @@
             {
               "detail" : "Em “Pedido rápido” o Codex também trabalha em segundo plano: escreve só na pasta do projeto, sem rede, e o resultado chega em notificação. Perto do limiar, quem o segura são os limites do próprio Codex.",
               "name" : "Codex em segundo plano"
+            },
+            {
+              "detail" : "Arraste arquivos e capturas de tela para a janela do Pedido rápido — o agente recebe os caminhos junto com a tarefa. O botão do microfone inicia o ditado do macOS no campo da tarefa.",
+              "name" : "Arquivos e ditado"
             },
             {
               "detail" : "Uma tarefa do Claude no limite pode ser passada para o Codex (“Para Codex”, “Passar para Codex”), e uma concluída pode ir para revisão do outro serviço (“Revisar no…” no menu da tarefa). A caixa “Também no Codex — para comparar” em “Pedido rápido” dá a tarefa aos dois de uma vez, cada um em seu worktree.",
@@ -385,6 +401,10 @@
             {
               "detail" : "Abrir a pasta do projeto ou o repositório.",
               "name" : "Terminal · Finder · GitHub"
+            },
+            {
+              "detail" : "Um projeto expandido mostra o que escuta em uma porta a partir da pasta dele: a porta e o programa. Dali você pode abrir o endereço no navegador ou parar o processo — o botão pergunta mais uma vez.",
+              "name" : "Servidores locais"
             }
           ],
           "monospaced" : false,
@@ -423,6 +443,10 @@
             {
               "detail" : "As etapas do perfil, separadas por vírgula; a etapa muda com um botão no projeto expandido. Palavras, duração, tempo de leitura e páginas são contados no arquivo principal (.md, .txt, .rtf, .docx).",
               "name" : "Etapas e métricas"
+            },
+            {
+              "detail" : "Nos ajustes de um perfil de pastas, defina uma meta em palavras por dia: o painel mostra quantas palavras foram adicionadas hoje aos arquivos principais dos projetos. Texto apagado não conta como negativo.",
+              "name" : "Meta de palavras"
             }
           ],
           "monospaced" : false,
@@ -457,6 +481,10 @@
             {
               "detail" : "Na página do módulo “Próximos”: com quanta antecedência lembrar e se duplicar no Telegram.",
               "name" : "Lembretes"
+            },
+            {
+              "detail" : "O botão na janela “Calendário” salva as datas em um arquivo .ics: abra-o no Calendário do macOS ou envie-o para o Google Agenda. Exportar de novo atualiza os mesmos eventos em vez de criar outros.",
+              "name" : "Exportar para .ics"
             }
           ],
           "monospaced" : false,
@@ -649,15 +677,19 @@
               "name" : "Com que frequência"
             },
             {
-              "detail" : "O bot é o módulo “Telegram”: token, chat e um menu no próprio bot (/menu — limites, sessões, relatórios, limpeza). O que duplicar — o chip “Telegram” na página do módulo.",
+              "detail" : "O módulo “Telegram”. O bot compartilhado se conecta com um botão: “Conectar Telegram” e depois “Start” no chat — não é preciso criar nada. O bot próprio usa um token do @BotFather, sem servidor do AI Hub Bar no meio. O menu fica no próprio bot: /menu — limites, sessões, relatórios, limpeza. O que duplicar é definido pelo chip “Telegram” na página do módulo.",
               "name" : "Telegram"
+            },
+            {
+              "detail" : "O botão de menu do bot compartilhado abre um app dentro do Telegram: limites, sessões com “Permitir” e “Recusar”, tarefas, relatórios e ajustes de notificações.",
+              "name" : "O app dentro do bot"
             },
             {
               "detail" : "O bloco “Telegram” nos alternadores rápidos desativa as notificações no Telegram com um clique e as mantém assim até você clicar de novo. Pedidos de permissão e respostas do bot continuam chegando.",
               "name" : "Pausar o Telegram"
             },
             {
-              "detail" : "Os pedidos de permissão do Claude podem ser aceitos ou recusados com botões no Telegram — um bot separado, página “Sessões de agentes”.",
+              "detail" : "Os pedidos de permissão chegam ao mesmo bot com os botões ✅ e ❌: ative “Pedidos de permissão para este bot” na página do módulo “Telegram”. Pelo bot compartilhado, dá para responder depois de ativar ali também “Respostas a pedidos pelo bot compartilhado”.",
               "name" : "Respostas pelo Telegram"
             },
             {

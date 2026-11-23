@@ -110,6 +110,10 @@
               "name" : "Buscar"
             },
             {
+              "detail" : "La app Atajos tiene acciones de AI Hub Bar: límites de Claude, comando rápido, búsqueda, «No dormir», «Quién espera respuesta» y «Tarea de Claude en segundo plano».",
+              "name" : "Atajos y Siri"
+            },
+            {
               "detail" : "Un clic en el encabezado de un bloque lo contrae; el panel lo recuerda.",
               "name" : "Contraer un bloque"
             },
@@ -223,6 +227,10 @@
               "name" : "Resumen del día"
             },
             {
+              "detail" : "El resumen del día empieza por lo que te queda pendiente: sesiones que esperan respuesta y pull requests con comprobaciones fallidas.",
+              "name" : "Te espera"
+            },
+            {
               "detail" : "Una vez por ventana al 50/80/95 % (umbrales en Ajustes) y cuando el límite vuelve; si quieres, también por Telegram.",
               "name" : "Notificaciones"
             },
@@ -258,6 +266,10 @@
               "name" : "Lista"
             },
             {
+              "detail" : "Si una sesión sigue en marcha pero lleva 20 minutos sin hacer nada, o ejecuta el mismo comando una y otra vez, llega una notificación. La frecuencia se ajusta en la página del módulo «Sesiones de agentes».",
+              "name" : "Puede haberse atascado"
+            },
+            {
               "detail" : "«Permitir» y «Rechazar» — en la notificación, en la fila de la sesión, en la isla y, si está activado, en Telegram. Cuenta la primera respuesta que llegue.",
               "name" : "Permisos"
             },
@@ -276,6 +288,10 @@
             {
               "detail" : "En «Petición rápida» Codex también trabaja en segundo plano: solo escribe en la carpeta del proyecto, sin red, y el resultado llega en una notificación. Cerca del umbral lo frenan los límites del propio Codex.",
               "name" : "Codex en segundo plano"
+            },
+            {
+              "detail" : "Arrastra archivos y capturas de pantalla a la ventana de la Petición rápida: el agente recibe sus rutas junto con la tarea. El botón del micrófono inicia el dictado de macOS en el campo de la tarea.",
+              "name" : "Archivos y dictado"
             },
             {
               "detail" : "Una tarea de Claude en el límite se puede pasar a Codex («A Codex», «Pasar a Codex»), y una terminada darse a revisar al otro servicio («Revisar en…» en el menú de la tarea). La casilla «También en Codex — para comparar» de «Petición rápida» da la tarea a los dos a la vez, cada uno en su worktree.",
@@ -385,6 +401,10 @@
             {
               "detail" : "Abrir la carpeta del proyecto o el repositorio.",
               "name" : "Terminal · Finder · GitHub"
+            },
+            {
+              "detail" : "Un proyecto desplegado muestra qué escucha en un puerto desde su carpeta: el puerto y el programa. Desde ahí puedes abrir la dirección en el navegador o detener el proceso; el botón pregunta una vez más.",
+              "name" : "Servidores locales"
             }
           ],
           "monospaced" : false,
@@ -423,6 +443,10 @@
             {
               "detail" : "Las etapas del perfil, separadas por comas; la etapa se cambia con un botón en el proyecto expandido. Palabras, duración, tiempo de lectura y páginas se cuentan sobre el archivo principal (.md, .txt, .rtf, .docx).",
               "name" : "Etapas y métricas"
+            },
+            {
+              "detail" : "En los ajustes de un perfil de carpetas fije un objetivo en palabras al día: el panel muestra cuántas palabras se han añadido hoy a los archivos principales de los proyectos. El texto eliminado no cuenta en negativo.",
+              "name" : "Objetivo de palabras"
             }
           ],
           "monospaced" : false,
@@ -457,6 +481,10 @@
             {
               "detail" : "En la página del módulo «Próximo»: con cuánta antelación avisar y si duplicarlo en Telegram.",
               "name" : "Recordatorios"
+            },
+            {
+              "detail" : "El botón de la ventana «Calendario» guarda las fechas en un archivo .ics: ábralo en Calendario de macOS o súbalo a Google Calendar. Al exportar de nuevo se actualizan los mismos eventos en lugar de duplicarse.",
+              "name" : "Exportar a .ics"
             }
           ],
           "monospaced" : false,
@@ -649,15 +677,19 @@
               "name" : "Con qué frecuencia"
             },
             {
-              "detail" : "El bot es el módulo «Telegram»: token, chat y un menú en el propio bot (/menu: límites, sesiones, informes, limpieza). Qué duplicar allí: el chip «Telegram» en la página del módulo.",
+              "detail" : "El módulo «Telegram». El bot compartido se conecta con un botón: «Conectar Telegram» y luego «Start» en el chat; no hay que crear nada. El bot propio usa un token de @BotFather, sin servidor de AI Hub Bar por medio. El menú está en el propio bot: /menu — límites, sesiones, informes, limpieza. Qué duplicar se elige con la etiqueta «Telegram» en la página del módulo.",
               "name" : "Telegram"
+            },
+            {
+              "detail" : "El botón de menú del bot compartido abre una app dentro de Telegram: límites, sesiones con «Permitir» y «Rechazar», tareas, informes y ajustes de notificaciones.",
+              "name" : "La app dentro del bot"
             },
             {
               "detail" : "El mosaico «Telegram» de los conmutadores rápidos desactiva las notificaciones en Telegram con un clic y las mantiene así hasta que lo pulses de nuevo. Las solicitudes de permiso y las respuestas del bot siguen llegando.",
               "name" : "Pausar Telegram"
             },
             {
-              "detail" : "Las solicitudes de permiso de Claude se pueden aceptar o rechazar con botones en Telegram — un bot aparte, página «Sesiones de agentes».",
+              "detail" : "Las solicitudes de permiso llegan al mismo bot con los botones ✅ y ❌: active «Solicitudes de permiso a este bot» en la página del módulo «Telegram». Por el bot compartido se puede responder tras activar allí mismo «Respuestas a solicitudes por el bot compartido».",
               "name" : "Respuestas desde Telegram"
             },
             {

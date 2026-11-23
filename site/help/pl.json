@@ -110,6 +110,10 @@
               "name" : "Szukaj"
             },
             {
+              "detail" : "W aplikacji Skróty są czynności AI Hub Bar: limity Claude, szybkie polecenie, wyszukiwanie, „Bez usypiania”, „Kto czeka na odpowiedź” i „Zadanie Claude w tle”.",
+              "name" : "Skróty i Siri"
+            },
+            {
               "detail" : "Kliknięcie nagłówka bloku zwija go; panel to zapamiętuje.",
               "name" : "Zwijanie bloku"
             },
@@ -223,6 +227,10 @@
               "name" : "Podsumowanie dnia"
             },
             {
+              "detail" : "Podsumowanie dnia zaczyna się od tego, co zostało po Twojej stronie: sesje czekające na odpowiedź i pull requesty z nieudanymi sprawdzeniami.",
+              "name" : "Czeka na Ciebie"
+            },
+            {
               "detail" : "Raz na okno przy 50/80/95 procentach (progi w Ustawieniach) i gdy limit wraca; na życzenie także na Telegram.",
               "name" : "Powiadomienia"
             },
@@ -258,6 +266,10 @@
               "name" : "Lista"
             },
             {
+              "detail" : "Jeśli sesja trwa, ale od 20 minut nic nie robi albo wciąż uruchamia to samo polecenie, przyjdzie powiadomienie. Jak często — ustawia się na stronie modułu „Sesje agentów”.",
+              "name" : "Mógł utknąć"
+            },
+            {
               "detail" : "„Zezwól” i „Odrzuć” — w powiadomieniu, w wierszu sesji, na wyspie i, jeśli włączone, w Telegramie. Liczy się odpowiedź, która przyjdzie pierwsza.",
               "name" : "Uprawnienia"
             },
@@ -276,6 +288,10 @@
             {
               "detail" : "W „Szybkim zapytaniu” Codex też działa w tle: zapisuje tylko w folderze projektu, bez sieci, a wynik przychodzi w powiadomieniu. Przy progu wstrzymują go limity samego Codex.",
               "name" : "Codex w tle"
+            },
+            {
+              "detail" : "Do okna Szybkiego zapytania można przeciągnąć pliki i zrzuty ekranu — agent dostanie ich ścieżki razem z zadaniem. Przycisk z mikrofonem włącza dyktowanie macOS w polu zadania.",
+              "name" : "Pliki i dyktowanie"
             },
             {
               "detail" : "Zadanie Claude przy limicie można przekazać do Codex („Do Codex”, „Przekaż do Codex”), a gotowe dać do sprawdzenia drugiej usłudze („Sprawdź w…” w menu zadania). Pole „Także w Codex — do porównania” w „Szybkim zapytaniu” daje zadanie obu naraz, każdemu we własnym worktree.",
@@ -385,6 +401,10 @@
             {
               "detail" : "Otwórz folder projektu albo repozytorium.",
               "name" : "Terminal · Finder · GitHub"
+            },
+            {
+              "detail" : "Rozwinięty projekt pokazuje, co nasłuchuje na porcie z jego folderu: port i program. Stamtąd można otworzyć adres w przeglądarce albo zatrzymać proces — przycisk zapyta jeszcze raz.",
+              "name" : "Serwery lokalne"
             }
           ],
           "monospaced" : false,
@@ -423,6 +443,10 @@
             {
               "detail" : "Etapy profilu, oddzielone przecinkami; etap zmienia się przyciskiem w rozwiniętym projekcie. Słowa, czas trwania, czas czytania i strony są liczone w pliku głównym (.md, .txt, .rtf, .docx).",
               "name" : "Etapy i wskaźniki"
+            },
+            {
+              "detail" : "W ustawieniach profilu z folderami ustaw cel w słowach na dzień: panel pokaże, ile słów przybyło dziś w głównych plikach projektów. Usunięty tekst nie liczy się na minus.",
+              "name" : "Cel słów"
             }
           ],
           "monospaced" : false,
@@ -457,6 +481,10 @@
             {
               "detail" : "Na stronie modułu „Najbliższe”: z jakim wyprzedzeniem przypominać i czy przekazywać do Telegramu.",
               "name" : "Przypomnienia"
+            },
+            {
+              "detail" : "Przycisk w oknie „Kalendarz” zapisuje daty w pliku .ics: otwórz go w Kalendarzu macOS lub wgraj do Kalendarza Google. Ponowny eksport aktualizuje te same wydarzenia, zamiast tworzyć kolejne.",
+              "name" : "Eksport do .ics"
             }
           ],
           "monospaced" : false,
@@ -649,15 +677,19 @@
               "name" : "Jak często"
             },
             {
-              "detail" : "Bot to moduł „Telegram”: token, czat i menu w samym bocie (/menu — limity, sesje, raporty, czyszczenie). Co powielać — chip „Telegram” na stronie modułu.",
+              "detail" : "Moduł „Telegram”. Wspólny bot łączy się jednym przyciskiem: „Połącz Telegram”, potem „Start” w czacie — niczego nie trzeba tworzyć. Własny bot to token z @BotFather, bez serwera AI Hub Bar pomiędzy. Menu jest w samym bocie: /menu — limity, sesje, raporty, czyszczenie. Co dublować, ustawia chip „Telegram” na stronie modułu.",
               "name" : "Telegram"
+            },
+            {
+              "detail" : "Przycisk menu wspólnego bota otwiera aplikację bezpośrednio w Telegramie: limity, sesje z „Zezwól” i „Odrzuć”, zadania, raporty i ustawienia powiadomień.",
+              "name" : "Aplikacja w bocie"
             },
             {
               "detail" : "Kafelek „Telegram” w szybkich przełącznikach wyłącza powiadomienia w Telegramie jednym kliknięciem i trzyma je wyłączone do ponownego kliknięcia. Prośby o uprawnienia i odpowiedzi bota nadal przychodzą.",
               "name" : "Wstrzymaj Telegram"
             },
             {
-              "detail" : "Prośby Claude o zgodę można przyjmować i odrzucać przyciskami w Telegramie — osobny bot, strona „Sesje agentów”.",
+              "detail" : "Prośby o zgodę przychodzą do tego samego bota z przyciskami ✅ i ❌: włącz „Prośby o zgodę do tego bota” na stronie modułu „Telegram”. Przez wspólnego bota można odpowiadać po włączeniu tam także „Odpowiedzi na prośby przez wspólnego bota”.",
               "name" : "Odpowiedzi z Telegramu"
             },
             {
