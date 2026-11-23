@@ -8,6 +8,7 @@
 
 mod assistant;
 mod calendar;
+mod claude_config;
 mod clipboard;
 mod commands;
 mod history;
@@ -471,6 +472,7 @@ fn main() {
         .manage(toggles::Toggles::default())
         .manage(clipboard::Clipboard::default())
         .manage(search::SearchKey::default())
+        .manage(claude_config::ClaudeConfig::default())
         .manage(hub::Hub::default())
         .manage(updates::Updates::default())
         .manage(history::History::default())
@@ -497,6 +499,8 @@ fn main() {
             telegram::telegram_view, telegram::telegram_save_token, telegram::telegram_remove_token, telegram::telegram_bind,
             telegram::telegram_cancel_binding, telegram::telegram_set_chat, telegram::telegram_test, telegram::set_telegram_event,
             telegram::set_telegram_answers, telegram::set_telegram_requests,
+            claude_config::open_claude_config, claude_config::claude_config_view, claude_config::claude_config_edit, claude_config::claude_config_save,
+            claude_config::claude_config_open, claude_config::set_mcp_server, claude_config::set_agent_skill, claude_config::set_claude_plugin,
             history::open_history, history::history_view, history::set_plan_price, history::export_history,
             updates::updates_view, updates::set_updates_daily, updates::check_updates, updates::install_update,
             pull_request_alerts, set_pull_request_alerts, profiles::projects_folder, profiles::choose_projects_folder,
